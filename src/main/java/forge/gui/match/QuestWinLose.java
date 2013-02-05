@@ -177,9 +177,13 @@ public class QuestWinLose extends ControlWinLose {
             if (qEvent instanceof QuestEventChallenge) {
                 this.awardChallengeWin();
             }
-            // Random rare for winning against a very hard deck
-            else if (qEvent.getDifficulty().toLowerCase().equals("very hard")) {
-                this.awardRandomRare("You've won a random rare for winning against a very hard deck.");
+
+            else {
+                awardSpecialReward("Special bonus reward:"); // If any
+                // Random rare for winning against a very hard deck
+                if (qEvent.getDifficulty().toLowerCase().equals("very hard")) {
+                    this.awardRandomRare("You've won a random rare for winning against a very hard deck.");
+                }
             }
 
             // Random rare given at 50% chance (65% with luck upgrade)
@@ -643,7 +647,7 @@ public class QuestWinLose extends ControlWinLose {
      * 
      */
     private void awardChallengeWin() {
-        final List<InventoryItem> itemsWon = ((QuestEventChallenge) qEvent).getCardRewardList();
+
         final long questRewardCredits = ((QuestEventChallenge) qEvent).getCreditsReward();
 
         final StringBuilder sb = new StringBuilder();
@@ -651,19 +655,6 @@ public class QuestWinLose extends ControlWinLose {
         sb.append("Challenge bounty: <b>" + questRewardCredits + " credits.</b></html>");
 
         qData.getAssets().addCredits(questRewardCredits);
-
-        final List<CardPrinted> cardsWon = new ArrayList<CardPrinted>();
-        for (InventoryItem ii : itemsWon) {
-            if (ii instanceof CardPrinted) {
-                cardsWon.add((CardPrinted) ii);
-            } else if (ii instanceof IQuestRewardCard) {
-                final List<CardPrinted> cardChoices = ((IQuestRewardCard) ii).getChoices();
-                final CardPrinted chosenCard = (null == cardChoices ? null : GuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName() + ":", cardChoices));
-                if (null != chosenCard) {
-                    cardsWon.add(chosenCard);
-                }
-            }
-        }
 
         // Generate Swing components and attach.
         this.icoTemp = QuestWinLose.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
@@ -679,8 +670,42 @@ public class QuestWinLose extends ControlWinLose {
         this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
         this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLose.CONSTRAINTS_TEXT);
 
-        if (cardsWon != null) {
+        awardSpecialReward(null);
+    }
+
+    /**
+     * <p>
+     * awardSpecialReward.
+     * </p>
+     * This builds the card reward based on the string data.
+     * @param message String, reward text to be displayed, if any
+     */
+    private void awardSpecialReward(final String message) {
+        final List<InventoryItem> itemsWon = ((QuestEvent) qEvent).getCardRewardList();
+
+        if (itemsWon == null || itemsWon.isEmpty()) {
+            return;
+        }
+
+        final List<CardPrinted> cardsWon = new ArrayList<CardPrinted>();
+
+        for (InventoryItem ii : itemsWon) {
+            if (ii instanceof CardPrinted) {
+                cardsWon.add((CardPrinted) ii);
+            } else if (ii instanceof IQuestRewardCard) {
+                final List<CardPrinted> cardChoices = ((IQuestRewardCard) ii).getChoices();
+                final CardPrinted chosenCard = (null == cardChoices ? null : GuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName() + ":", cardChoices));
+                if (null != chosenCard) {
+                    cardsWon.add(chosenCard);
+                }
+            }
+        }
+        if (cardsWon != null && !cardsWon.isEmpty()) {
             final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
+            if (message != null) {
+                this.lblTemp1 = new TitleLabel(message);
+                this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+            }
             this.getView().getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
             qData.getCards().addAllCards(cardsWon);
         }

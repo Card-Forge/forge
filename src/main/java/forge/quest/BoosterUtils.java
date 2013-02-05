@@ -326,6 +326,10 @@ public final class BoosterUtils {
      */
     public static List<InventoryItem> generateCardRewardList(final String s) {
 
+        if (s == null || s.length() < 2) {
+            return null;
+        }
+
         final String[] items = s.split(";");
         final List<InventoryItem> rewards = new ArrayList<InventoryItem>();
 

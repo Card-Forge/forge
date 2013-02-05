@@ -358,6 +358,8 @@ public class QuestEventManager {
                 qe.setDescription(value);
             } else if (key.equalsIgnoreCase("Icon")) {
                 qe.setIconFilename(value);
+            } else if (key.equalsIgnoreCase("Card Reward")) {
+                qe.setCardReward(value);
             }
         }
     }

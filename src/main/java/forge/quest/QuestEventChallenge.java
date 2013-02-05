@@ -46,9 +46,6 @@ public class QuestEventChallenge extends QuestEvent {
     /** The credits reward. */
     private int creditsReward = 100;
 
-    /** The card reward. */
-    private String cardReward = "1 colorless rare";
-
     /** The repeatable. */
     private boolean repeatable = false;
 
@@ -62,14 +59,12 @@ public class QuestEventChallenge extends QuestEvent {
     /** The ai extra cards. */
     private List<String> aiExtraCards = new ArrayList<String>();
 
-    /** The card reward list. */
-    private List<InventoryItem> cardRewardList = null;
-
     /**
      * Instantiates a new quest challenge.
      */
     public QuestEventChallenge() {
         super();
+        setCardReward("1 colorless rare"); // Guaranteed extra reward for challenges if not specified
     }
 
     /**
@@ -239,31 +234,6 @@ public class QuestEventChallenge extends QuestEvent {
     public void setCreditsReward(final int creditsReward0) {
         this.creditsReward = creditsReward0;
     }
-
-    /**
-     * <p>
-     * getCardRewardList.
-     * </p>
-     * 
-     * @return the card reward list
-     */
-    public final List<InventoryItem> getCardRewardList() {
-        if (cardRewardList == null) {
-            this.cardRewardList = new ArrayList<InventoryItem>(BoosterUtils.generateCardRewardList(cardReward));
-        }
-        return this.cardRewardList;
-    }
-
-    /**
-     * Sets the card reward.
-     * 
-     * @param cardReward0
-     *            the cardReward to set
-     */
-    public void setCardReward(final String cardReward0) {
-        this.cardReward = cardReward0;
-    }
-
 
     /**
      * Sets the human extra cards.

@@ -17,10 +17,12 @@
  */
 package forge.quest;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import forge.deck.Deck;
+import forge.item.InventoryItem;
 
 /**
  * <p>
@@ -49,6 +51,12 @@ public abstract class QuestEvent {
 
     /** The name. */
     private String name = "Noname";
+
+    /** The card reward. */
+    private String cardReward = null;
+
+    /** The card reward list. */
+    private List<InventoryItem> cardRewardList = null;
 
     /**
      * <p>
@@ -188,6 +196,32 @@ public abstract class QuestEvent {
         this.iconFilename = s0;
     }
 
+    /**
+     * <p>
+     * getCardRewardList.
+     * </p>
+     * 
+     * @return the card reward list
+     */
+    public final List<InventoryItem> getCardRewardList() {
+        if (cardReward == null) {
+            return null;
+        }
+        if (cardRewardList == null) {
+            this.cardRewardList = new ArrayList<InventoryItem>(BoosterUtils.generateCardRewardList(cardReward));
+        }
+        return this.cardRewardList;
+    }
+
+    /**
+     * Sets the card reward.
+     * 
+     * @param cardReward0
+     *            the cardReward to set
+     */
+    public void setCardReward(final String cardReward0) {
+        this.cardReward = cardReward0;
+    }
 
     public List<String> getHumanExtraCards() {
         return Collections.emptyList();
