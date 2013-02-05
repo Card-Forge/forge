@@ -1,5 +1,7 @@
 package forge.gui.deckeditor.views;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import forge.gui.WrapLayout;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.controllers.CCurrentDeck;
 import forge.gui.framework.DragCell;
@@ -109,7 +112,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     private final JLabel lblTitle = new FLabel.Builder().text("Title")
             .fontSize(14).build();
 
-    private final JPanel pnlStats = new JPanel(new MigLayout("insets 0, gap 5px, ax center, wrap 8"));
+    // Total and color count labels/filter toggles
+    private final JPanel pnlStats = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
+    private final JPanel pnlStatsWrap = new JPanel(new WrapLayout(FlowLayout.LEFT));
     private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
             new HashMap<SEditorUtil.StatTypes, FLabel>();
 
@@ -134,9 +139,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
         pnlRemove.setOpaque(false);
         pnlRemove.setLayout(new MigLayout("insets 0, gap 0, ax center"));
-        pnlRemove.add(btnRemove, "w 30%!, h 100%!, gap 5% 5% 0 0");
-        pnlRemove.add(btnRemove4, "w 30%!, h 100%!, gap 5% 5% 0 0");
-        pnlRemove.add(btnDoSideboard, "w 30%!, h 100%!");
+        pnlRemove.add(btnRemove, "w 30%!, h 30px!, gap 10 10 5 5");
+        pnlRemove.add(btnRemove4, "w 30%!, h 30px!, gap 10 10 5 5");
+        pnlRemove.add(btnDoSideboard, "w 30%!, h 30px!, gap 10 10 5 5");
 
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
@@ -144,11 +149,18 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         scroller.getViewport().setBorder(null);
 
         pnlStats.setOpaque(false);
+        pnlStatsWrap.setOpaque(false);
+        
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             FLabel label = buildLabel(s);
             statLabels.put(s, label);
-            pnlStats.add(label, "w 57px!, h 20px!" + (9 == statLabels.size() ? ", skip" : ""));
+            if (SEditorUtil.StatTypes.TOTAL == s) {
+                pnlStats.add(label, "align right");
+            } else {
+                pnlStatsWrap.add(label);
+            }
         }
+        pnlStats.add(pnlStatsWrap, "w 30:480:480, align left");
 
         pnlRemoveButtons.setOpaque(false);
         pnlRemoveButtons.add(btnRemove, "w 30%!, h 30px!, gap 0 0 5px 5px");
@@ -203,13 +215,12 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
      */
     @Override
     public void populate() {
-        final JPanel pnl = parentCell.getBody();
-        pnl.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
-
-        parentCell.getBody().add(pnlHeader, "w 98%!, h 30px!, gap 1% 0 1% 10px");
-        parentCell.getBody().add(pnlStats, "w 96%, h 50px!, gap 2% 0 1% 1%");
-        parentCell.getBody().add(pnlRemoveButtons, "w 96%!, gap 2% 0 0 0");
-        parentCell.getBody().add(scroller, "w 98%!, h 100% - 35px, gap 1% 0 1% 1%");
+        final JPanel parentBody = parentCell.getBody();
+        parentBody.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
+        parentBody.add(pnlHeader, "w 98%!, gap 1% 1% 5 0");
+        parentBody.add(pnlStats, "w 96%, gap 1% 1% 5 0, center");
+        parentBody.add(pnlRemoveButtons, "w 96%!, gap 2% 0 0 0");
+        parentBody.add(scroller, "w 98%!, h 10:100%:100%, gap 1% 0 0 1%");
     }
 
     //========== Retrieval methods
@@ -298,10 +309,16 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     //========== Other methods
 
     private FLabel buildLabel(SEditorUtil.StatTypes s) {
-        return new FLabel.Builder()
-                .icon(s.img).iconScaleAuto(false)
-                .text("0").fontSize(11)
-                .tooltip(s.toLabelString())
-                .build();
+        FLabel label = new FLabel.Builder()
+            .icon(s.img).iconScaleAuto(false)
+            .text("0").fontSize(11)
+            .tooltip(s.toLabelString())
+            .build();
+
+        Dimension labelSize = new Dimension(60, 20);
+        label.setPreferredSize(labelSize);
+        label.setMinimumSize(labelSize);
+        
+        return label;
     }
 }

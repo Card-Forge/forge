@@ -50,7 +50,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     private final DragTab tab = new DragTab("Card Catalog");
 
     // panel where special instructions appear
-    private final JPanel pnlHeader = new JPanel(new MigLayout("insets 0, gap 0"));
+    private final JPanel pnlHeader = new JPanel(new MigLayout("insets 0, gap 0, center"));
     private final FLabel lblTitle = new FLabel.Builder().fontSize(14).build();
 
     // Total and color count labels/filter toggles
@@ -134,7 +134,6 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
                 pnlStatsWrap.add(label);
             }
         }
-        
         pnlStats.add(pnlStatsWrap, "w 30:500:500, align left");
 
         pnlAddButtons.setOpaque(false);
@@ -154,7 +153,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         pnlRestrictions.setOpaque(false);
 
         pnlHeader.setOpaque(false);
-        pnlHeader.add(lblTitle, "w 100%!, h 100%!");
+        pnlHeader.add(lblTitle, "center, gap 0 0 10 5");
         
         // fill spinner map
         for (RangeTypes t : RangeTypes.values()) {
@@ -200,7 +199,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         parentBody.add(pnlAddButtons, "w 96%!, gap 1% 1% 5 5");
         parentBody.add(pnlSearch, "w 96%, gap 1% 1%");
         parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
-        parentBody.add(scroller, "w 98%!, h 100%, gap 1% 0 0 1%");
+        parentBody.add(scroller, "w 98%!, h 10:100%:100%, gap 1% 0 0 1%");
     }
 
     //========== Overridden from ITableContainer

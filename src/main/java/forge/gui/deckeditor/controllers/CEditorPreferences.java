@@ -108,6 +108,9 @@ public enum CEditorPreferences implements ICDoc {
             @Override public void itemStateChanged(final ItemEvent e) {
                 VCurrentDeck.SINGLETON_INSTANCE.getPnlStats().setVisible(
                         ((JCheckBox) e.getSource()).isSelected());
+                // TODO: when the stats appear for the first time, the panel is way too tall, but I cannot
+                // TODO:   for the life of me get it to snap back to its proper size until a mouse-driven
+                // TODO:   resize or table model change event occurs
                 SEditorIO.setPref(EditorPreference.stats_deck, ((JCheckBox) e.getSource()).isSelected());
                 SEditorIO.savePreferences(); } });
 

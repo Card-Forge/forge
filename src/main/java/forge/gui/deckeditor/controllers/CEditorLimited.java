@@ -166,6 +166,7 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
 
+        VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
         VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("Deck Editor: Limited Mode");
     }
 

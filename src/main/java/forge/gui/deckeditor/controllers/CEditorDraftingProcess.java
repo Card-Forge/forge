@@ -153,6 +153,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      *            a {@link forge.CardList} object.
      */
     private void showChoices(final ItemPoolView<CardPrinted> list) {
+        VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
         VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("Select a card from pack number "
                 + (((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1) + ".");
         this.getTableCatalog().setDeck(list);

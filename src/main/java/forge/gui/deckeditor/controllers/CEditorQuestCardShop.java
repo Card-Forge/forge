@@ -446,7 +446,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             }
         });
         
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(creditsLabel);
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(creditsLabel, "gap 5px");
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
 
         final double multiPercent = this.multiplier * 100;

@@ -109,10 +109,11 @@ public final class SEditorUtil  {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(true);
+        
+        VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
         VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("");
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
-        VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Current Deck");
