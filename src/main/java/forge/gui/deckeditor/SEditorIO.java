@@ -2,6 +2,7 @@ package forge.gui.deckeditor;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -276,10 +277,14 @@ public class SEditorIO {
         // read in defaults
         loadPrefs(inputFactory.createXMLEventReader(new FileInputStream(NewConstants.PREFS_DEFAULT_EDITOR_FILE)));
         
-        // overwrite defaults with user preferences
-        loadPrefs(inputFactory.createXMLEventReader(new FileInputStream(NewConstants.PREFS_EDITOR_FILE)));
-
-        SColumnUtil.attachSortAndDisplayFunctions();
+        try {
+            // overwrite defaults with user preferences, if they exist
+            loadPrefs(inputFactory.createXMLEventReader(new FileInputStream(NewConstants.PREFS_EDITOR_FILE)));
+        } catch (FileNotFoundException e) {
+            /* ignore; it's ok if this file doesn't exist */
+        } finally {
+            SColumnUtil.attachSortAndDisplayFunctions();
+        }
     }
     
     private static void loadPrefs(final XMLEventReader reader) throws XMLStreamException {
