@@ -2161,6 +2161,7 @@ res/cardsfolder/c/cumber_stone.txt svneol=native#text/plain
 res/cardsfolder/c/cunning.txt svneol=native#text/plain
 res/cardsfolder/c/cunning_advisor.txt svneol=native#text/plain
 res/cardsfolder/c/cunning_bandit_azamuki_treachery_incarnate.txt -text
+res/cardsfolder/c/cunning_giant.txt -text
 res/cardsfolder/c/cunning_lethemancer.txt svneol=native#text/plain
 res/cardsfolder/c/cunning_sparkmage.txt svneol=native#text/plain
 res/cardsfolder/c/cunning_wish.txt -text

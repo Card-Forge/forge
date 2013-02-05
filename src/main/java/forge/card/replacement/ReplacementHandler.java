@@ -215,7 +215,7 @@ public class ReplacementHandler {
                 final StringBuilder buildQuestion = new StringBuilder("Apply replacement effect of ");
                 buildQuestion.append(replacementEffect.getHostCard());
                 buildQuestion.append("?\r\n(");
-                buildQuestion.append(replacementEffect.toString());
+                buildQuestion.append(replacementEffect.toString().replace("CARDNAME", replacementEffect.getHostCard().getName()));
                 buildQuestion.append(")");
                 if (!GuiDialog.confirm(replacementEffect.getHostCard(), buildQuestion.toString())) {
                     return ReplacementResult.NotReplaced;

@@ -62,6 +62,7 @@ import forge.game.event.LifeLossEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;
+import forge.game.phase.Combat;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -2538,6 +2539,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (property.equals("wasDealtDamageBySourceThisTurn")) {
             if (!source.getDamageHistory().getThisTurnDamaged().contains(this)) {
+                return false;
+            }
+        } else if (property.equals("attackedBySourceThisCombat")) {
+            if (!this.equals(Singletons.getModel().getGame().getCombat().getDefenderPlayerByAttacker(source))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
