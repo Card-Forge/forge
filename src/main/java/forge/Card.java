@@ -9092,4 +9092,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         return false;
     }
 
+    public boolean canBeShownTo(final Player viewer) {
+        return !isFaceDown() || getController() == viewer;
+    }
+
 } // end Card class

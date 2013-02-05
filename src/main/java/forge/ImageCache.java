@@ -172,7 +172,7 @@ public class ImageCache {
      * @return a {@link java.awt.image.BufferedImage} object.
      */
     public static BufferedImage getImage(final Card card, final int width, final int height) {
-        final String key = (card.isFaceDown() && card.getController().isComputer()) ? "Morph" : ImageCache.getKey(card);
+        final String key = card.canBeShownTo(Singletons.getControl().getPlayer()) ? ImageCache.getKey(card) : "Morph";
         final BufferedImage original = ImageCache.getImage(key);
         if (original == null) {
             return null;
@@ -225,7 +225,7 @@ public class ImageCache {
      * @return a {@link java.awt.image.BufferedImage} object.
      */
     public static BufferedImage getOriginalImage(final Card card) {
-        final String key = (card.isFaceDown() && card.getController().isComputer()) ? "Morph" : ImageCache.getKey(card);
+        final String key = card.canBeShownTo(Singletons.getControl().getPlayer()) ? ImageCache.getKey(card) : "Morph" ;
         return ImageCache.getImage(key);
     }
 

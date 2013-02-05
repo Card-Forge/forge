@@ -174,7 +174,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
             return;
         }
 
-        final boolean canShowThis = canShowCard(card);
+        final boolean canShowThis = card.canBeShownTo(Singletons.getControl().getPlayer());
         if (canShowThis) {
             if (card.getManaCost().toString().equals("") || card.isLand()) {
                 this.nameCostLabel.setText(card.getName());
@@ -234,11 +234,6 @@ public class CardDetailPanel extends FPanel implements CardContainer {
         });
     }
     
-    // here be checks for card owner and possibility to show to human Player watching this panel
-    private boolean canShowCard(final Card card) {
-        return !card.isFaceDown() || card.getController() == Singletons.getControl().getPlayer();
-    }
-
     private String composeCardText(final Card card, final boolean canShow) {
         final StringBuilder area = new StringBuilder();
 
@@ -419,7 +414,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
 
             if (entity instanceof Card) {
                 final Card c = (Card) entity;
-                if (!canShowCard(c)) {
+                if (!c.canBeShownTo(Singletons.getControl().getPlayer())) {
                     area.append("Morph (");
                     area.append(card.getUniqueNumber());
                     area.append(")");
