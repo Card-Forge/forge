@@ -6628,7 +6628,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("MostProminentColor")) {
-            // MostProminentColor <color> 
+            // MostProminentColor <color>
             // e.g. MostProminentColor black
             String[] props = property.split(" ");
             if (props.length == 1) {
@@ -6636,7 +6636,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
             String color = props[1];
-            
+
             return CardFactoryUtil.isMostProminentColor(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), color);
         } else if (property.startsWith("sharesCreatureTypeWith")) {
             if (property.equals("sharesCreatureTypeWith")) {
@@ -6745,10 +6745,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("sharesTypeWith")) {
             if (!this.sharesTypeWith(source)) {
-                return false;
-            }
-        } else if (property.startsWith("sharesCreatureTypeWith")) {
-            if (!this.sharesCreatureTypeWith(source)) {
                 return false;
             }
         } else if (property.startsWith("withFlashback")) {
