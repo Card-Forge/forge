@@ -68,9 +68,13 @@ public class StaticAbilityContinuous {
         se.setSource(hostCard);
         Singletons.getModel().getGame().getStaticEffects().addStaticEffect(se);
 
+        String addP = "";
         int powerBonus = 0;
+        String addT = "";
         int toughnessBonus = 0;
+        String setP = "";
         int setPower = -1;
+        String setT = "";
         int setToughness = -1;
         int keywordMultiplier = 1;
 
@@ -97,19 +101,19 @@ public class StaticAbilityContinuous {
         }
 
         if (params.containsKey("SetPower")) {
-            String setP = params.get("SetPower");
+            setP = params.get("SetPower");
             setPower = setP.matches("[0-9][0-9]?") ? Integer.parseInt(setP)
                     : AbilityFactory.calculateAmount(hostCard, setP, null);
         }
 
         if (params.containsKey("SetToughness")) {
-            String setT = params.get("SetToughness");
+            setT = params.get("SetToughness");
             setToughness = setT.matches("[0-9][0-9]?") ? Integer.parseInt(setT)
                     : AbilityFactory.calculateAmount(hostCard, setT, null);
         }
 
         if (params.containsKey("AddPower")) {
-            String addP = params.get("AddPower");
+            addP = params.get("AddPower");
             powerBonus = addP.matches("[0-9][0-9]?") ? Integer.parseInt(addP)
                     : AbilityFactory.calculateAmount(hostCard, addP, null);
             if (!addP.matches("[0-9][0-9]?") && !addP.equals("AffectedX")) {
@@ -118,7 +122,7 @@ public class StaticAbilityContinuous {
         }
 
         if (params.containsKey("AddToughness")) {
-            String addT = params.get("AddToughness");
+            addT = params.get("AddToughness");
             toughnessBonus = addT.matches("[0-9][0-9]?") ? Integer.parseInt(addT)
                     : AbilityFactory.calculateAmount(hostCard, addT, null);
             if (!addT.matches("[0-9][0-9]?") && !addT.equals("AffectedX")) {
