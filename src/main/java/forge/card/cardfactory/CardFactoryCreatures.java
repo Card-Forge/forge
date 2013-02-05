@@ -78,10 +78,7 @@ public class CardFactoryCreatures {
             @Override
             public void execute() {
                 if (card.getController().isHuman()) {
-                    final String[] colors = Constant.Color.ONLY_COLORS;
-
-                    final Object o = GuiChoose.one("Choose color", colors);
-                    color[0] = (String) o;
+                    color[0] = GuiChoose.one("Choose color", Constant.Color.ONLY_COLORS);
                 } else {
                     // AI chooses the color that appears in the keywords of
                     // the most cards in its deck, hand and on battlefield

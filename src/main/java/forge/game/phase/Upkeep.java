@@ -900,22 +900,17 @@ public class Upkeep extends Phase {
                 final Ability ability = new Ability(oathList.get(0), SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
-                        final List<Card> graveyardCreatures =
-                                CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                        final List<Card> graveyardCreatures = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
 
                         if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
+                            Card card = null;
                             if (player.isHuman()) {
-                                final Card o = GuiChoose.oneOrNone("Pick a creature to return to hand", graveyardCreatures);
-                                if (o != null) {
-                                    final Card card = o;
-
-                                    game.getAction().moveToHand(card);
-                                }
+                                card = GuiChoose.oneOrNone("Pick a creature to return to hand", graveyardCreatures);
                             } else if (player.isComputer()) {
-                                final Card card = graveyardCreatures.get(0);
-
-                                game.getAction().moveToHand(card);
+                                card = graveyardCreatures.get(0);
                             }
+                            if (card != null)
+                                game.getAction().moveToHand(card);
                         }
                     }
                 }; // Ability
