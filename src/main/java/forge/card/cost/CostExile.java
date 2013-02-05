@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import forge.Card;
 
 import forge.CardLists;
@@ -51,6 +49,402 @@ public class CostExile extends CostPartWithList {
     // ExileFromGrave<Num/Type{/TypeDescription}>
     // ExileFromTop<Num/Type{/TypeDescription}> (of library)
     // ExileSameGrave<Num/Type{/TypeDescription}>
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private static final class InputExileFrom extends Input {
+        private final SpellAbility sa;
+        private final String type;
+        private final int nNeeded;
+        private final CostPayment payment;
+        private final CostExile part;
+        private static final long serialVersionUID = 734256837615635021L;
+        private List<Card> typeList;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param sa
+         * @param type
+         * @param nNeeded
+         * @param payment
+         * @param part
+         */
+        private InputExileFrom(SpellAbility sa, String type, int nNeeded, CostPayment payment, CostExile part) {
+            this.sa = sa;
+            this.type = type;
+            this.nNeeded = nNeeded;
+            this.payment = payment;
+            this.part = part;
+        }
+
+        @Override
+        public void showMessage() {
+            if (nNeeded == 0) {
+                this.done();
+            }
+
+            this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(part.getFrom()));
+            this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+
+            for (int i = 0; i < nNeeded; i++) {
+                if (this.typeList.size() == 0) {
+                    this.cancel();
+                }
+
+                final Card c = GuiChoose.oneOrNone("Exile from " + part.getFrom(), this.typeList);
+
+                if (c != null) {
+                    this.typeList.remove(c);
+                    part.addToList(c);
+                    Singletons.getModel().getGame().getAction().exile(c);
+                    if (i == (nNeeded - 1)) {
+                        this.done();
+                    }
+                } else {
+                    this.cancel();
+                    break;
+                }
+            }
+        }
+
+        @Override
+        public void selectButtonCancel() {
+            this.cancel();
+        }
+
+        public void done() {
+            this.stop();
+            part.addListToHash(sa, "Exiled");
+            payment.paidCost(part);
+        }
+
+        public void cancel() {
+            this.stop();
+            payment.cancelCost();
+        }
+    }
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private static final class InputExileFromSame extends Input {
+        private final List<Card> list;
+        private final CostExile part;
+        private final CostPayment payment;
+        private final SpellAbility sa;
+        private final int nNeeded;
+        private final List<Player> payableZone;
+        private static final long serialVersionUID = 734256837615635021L;
+        private List<Card> typeList;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param list
+         * @param part
+         * @param payment
+         * @param sa
+         * @param nNeeded
+         * @param payableZone
+         */
+        private InputExileFromSame(List<Card> list, CostExile part, CostPayment payment, SpellAbility sa, int nNeeded,
+                List<Player> payableZone) {
+            this.list = list;
+            this.part = part;
+            this.payment = payment;
+            this.sa = sa;
+            this.nNeeded = nNeeded;
+            this.payableZone = payableZone;
+        }
+
+        @Override
+        public void showMessage() {
+            if (nNeeded == 0) {
+                this.done();
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Exile from whose ");
+            sb.append(part.getFrom().toString());
+            sb.append("?");
+
+            final Player p = GuiChoose.oneOrNone(sb.toString(), payableZone);
+            if (p == null) {
+                this.cancel();
+            }
+
+            typeList = CardLists.filter(list, CardPredicates.isOwner(p));
+
+            for (int i = 0; i < nNeeded; i++) {
+                if (this.typeList.size() == 0) {
+                    this.cancel();
+                }
+
+                final Card c = GuiChoose.oneOrNone("Exile from " + part.getFrom(), this.typeList);
+
+                if (c != null) {
+                    this.typeList.remove(c);
+                    part.addToList(c);
+                    Singletons.getModel().getGame().getAction().exile(c);
+                    if (i == (nNeeded - 1)) {
+                        this.done();
+                    }
+                } else {
+                    this.cancel();
+                    break;
+                }
+            }
+        }
+
+        @Override
+        public void selectButtonCancel() {
+            this.cancel();
+        }
+
+        public void done() {
+            this.stop();
+            part.addListToHash(sa, "Exiled");
+            payment.paidCost(part);
+        }
+
+        public void cancel() {
+            this.stop();
+            payment.cancelCost();
+        }
+    }
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private static final class InputExileFromStack extends Input {
+        private final CostPayment payment;
+        private final SpellAbility sa;
+        private final String type;
+        private final int nNeeded;
+        private final CostExile part;
+        private static final long serialVersionUID = 734256837615635021L;
+        private ArrayList<SpellAbility> saList;
+        private ArrayList<String> descList;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param payment
+         * @param sa
+         * @param type
+         * @param nNeeded
+         * @param part
+         */
+        private InputExileFromStack(CostPayment payment, SpellAbility sa, String type, int nNeeded, CostExile part) {
+            this.payment = payment;
+            this.sa = sa;
+            this.type = type;
+            this.nNeeded = nNeeded;
+            this.part = part;
+        }
+
+        @Override
+        public void showMessage() {
+            if (nNeeded == 0) {
+                this.done();
+            }
+
+            saList = new ArrayList<SpellAbility>();
+            descList = new ArrayList<String>();
+
+            for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
+                final Card stC = Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard();
+                final SpellAbility stSA = Singletons.getModel().getGame().getStack().peekAbility(i).getRootAbility();
+                if (stC.isValid(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard()) && stSA.isSpell()) {
+                    this.saList.add(stSA);
+                    if (stC.isCopiedSpell()) {
+                        this.descList.add(stSA.getStackDescription() + " (Copied Spell)");
+                    } else {
+                        this.descList.add(stSA.getStackDescription());
+                    }
+                }
+            }
+
+            for (int i = 0; i < nNeeded; i++) {
+                if (this.saList.isEmpty()) {
+                    this.cancel();
+                }
+
+                //Have to use the stack descriptions here because some copied spells have no description otherwise
+                final String o = GuiChoose.oneOrNone("Exile from " + part.getFrom(), this.descList);
+
+                if (o != null) {
+                    final SpellAbility toExile = this.saList.get(descList.indexOf(o));
+                    final Card c = toExile.getSourceCard();
+                    this.saList.remove(toExile);
+                    part.addToList(c);
+                    if (!c.isCopiedSpell()) {
+                        Singletons.getModel().getGame().getAction().exile(c);
+                    }
+                    if (i == (nNeeded - 1)) {
+                        this.done();
+                    }
+                    final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(toExile);
+                    Singletons.getModel().getGame().getStack().remove(si);
+                } else {
+                    this.cancel();
+                    break;
+                }
+            }
+        }
+
+        @Override
+        public void selectButtonCancel() {
+            this.cancel();
+        }
+
+        public void done() {
+            this.stop();
+            part.addListToHash(sa, "Exiled");
+            payment.paidCost(part);
+        }
+
+        public void cancel() {
+            this.stop();
+            payment.cancelCost();
+        }
+    }
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private static final class InputExileType extends Input {
+        private final CostExile part;
+        private final CostPayment payment;
+        private final String type;
+        private final int nNeeded;
+        private final SpellAbility sa;
+        private static final long serialVersionUID = 1403915758082824694L;
+        private List<Card> typeList;
+        private int nExiles = 0;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param part
+         * @param payment
+         * @param type
+         * @param nNeeded
+         * @param sa
+         */
+        private InputExileType(CostExile part, CostPayment payment, String type, int nNeeded, SpellAbility sa) {
+            this.part = part;
+            this.payment = payment;
+            this.type = type;
+            this.nNeeded = nNeeded;
+            this.sa = sa;
+        }
+
+        @Override
+        public void showMessage() {
+            if (nNeeded == 0) {
+                this.done();
+            }
+
+            final StringBuilder msg = new StringBuilder("Exile ");
+            final int nLeft = nNeeded - this.nExiles;
+            msg.append(nLeft).append(" ");
+            msg.append(type);
+            if (nLeft > 1) {
+                msg.append("s");
+            }
+
+            if (part.getFrom().equals(ZoneType.Hand)) {
+                msg.append(" from your Hand");
+            } else if (part.getFrom().equals(ZoneType.Stack)) {
+                msg.append(" from the Stack");
+            }
+            this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(part.getFrom()));
+            this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+            CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+            ButtonUtil.enableOnlyCancel();
+        }
+
+        @Override
+        public void selectButtonCancel() {
+            this.cancel();
+        }
+
+        @Override
+        public void selectCard(final Card card) {
+            if (this.typeList.contains(card)) {
+                this.nExiles++;
+                part.addToList(card);
+                Singletons.getModel().getGame().getAction().exile(card);
+                this.typeList.remove(card);
+                // in case nothing else to exile
+                if (this.nExiles == nNeeded) {
+                    this.done();
+                } else if (this.typeList.size() == 0) {
+                    // happen
+                    this.cancel();
+                } else {
+                    this.showMessage();
+                }
+            }
+        }
+
+        public void done() {
+            this.stop();
+            part.addListToHash(sa, "Exiled");
+            payment.paidCost(part);
+        }
+
+        public void cancel() {
+            this.stop();
+            payment.cancelCost();
+        }
+    }
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private static final class InputExileThis extends Input {
+        private final CostPayment payment;
+        private final CostExile part;
+        private final SpellAbility sa;
+        private static final long serialVersionUID = 678668673002725001L;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param payment
+         * @param part
+         * @param sa
+         */
+        private InputExileThis(CostPayment payment, CostExile part, SpellAbility sa) {
+            this.payment = payment;
+            this.part = part;
+            this.sa = sa;
+        }
+
+        @Override
+        public void showMessage() {
+            final Card card = sa.getSourceCard();
+            if ( sa.getActivatingPlayer().getZone(part.getFrom()).contains(card)) {
+
+                boolean choice = GuiDialog.confirm(card, card.getName() + " - Exile?");
+                if (choice) {
+                    payment.getAbility().addCostToHashList(card, "Exiled");
+                    Singletons.getModel().getGame().getAction().exile(card);
+                    part.addToList(card);
+                    this.stop();
+                    part.addListToHash(sa, "Exiled");
+                    payment.paidCost(part);
+                } else {
+                    this.stop();
+                    payment.cancelCost();
+                }
+            }
+        }
+    }
 
     private ZoneType from = ZoneType.Battlefield;
     private boolean sameZone = false;
@@ -257,16 +651,16 @@ public class CostExile extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
+        
+        Input target = null;
         if (this.isTargetingThis()) {
-            final Input inp = CostExile.exileThis(ability, payment, this);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            target = new InputExileThis(payment, this, ability);
         } else if (this.from.equals(ZoneType.Battlefield) || this.from.equals(ZoneType.Hand)) {
-            final Input inp = CostExile.exileType(ability, this, this.getType(), payment, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            target = new InputExileType(this, payment, this.getType(), c, ability);
         } else if (this.from.equals(ZoneType.Stack)) {
-            final Input inp = CostExile.exileFromStack(ability, this, this.getType(), payment, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            target = new InputExileFromStack(payment, ability, this.getType(), c, this);
         } else if (this.from.equals(ZoneType.Library)) {
+            // this does not create input
             CostExile.exileFromTop(ability, this, payment, c);
         } else if (this.sameZone) {
             List<Player> players = game.getPlayers();
@@ -279,13 +673,12 @@ public class CostExile extends CostPartWithList {
                     payableZone.add(p);
                 }
             }
-
-            final Input inp = CostExile.exileFromSame(ability, this, this.getType(), payment, list, payableZone, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            target = new InputExileFromSame(list, this, payment, ability, c, payableZone);
         } else {
-            final Input inp = CostExile.exileFrom(ability, this, this.getType(), payment, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            target = new InputExileFrom(ability, this.getType(), c, payment, this);
         }
+        if ( null != target )
+            Singletons.getModel().getMatch().getInput().setInputInterrupt(target);
         return false;
     }
 
@@ -375,382 +768,4 @@ public class CostExile extends CostPartWithList {
             payment.cancelCost();
         }
     }
-
-    /**
-     * Exile from.
-     * 
-     * @param sa
-     *            the sa
-     * @param part
-     *            the part
-     * @param type
-     *            the type
-     * @param payment
-     *            the payment
-     * @param nNeeded
-     *            the n needed
-     * @return the input
-     */
-    public static Input exileFrom(final SpellAbility sa, final CostExile part, final String type,
-            final CostPayment payment, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 734256837615635021L;
-            private List<Card> typeList;
-
-            @Override
-            public void showMessage() {
-                if (nNeeded == 0) {
-                    this.done();
-                }
-
-                this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(part.getFrom()));
-                this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
-
-                for (int i = 0; i < nNeeded; i++) {
-                    if (this.typeList.size() == 0) {
-                        this.cancel();
-                    }
-
-                    final Card c = GuiChoose.oneOrNone("Exile from " + part.getFrom(), this.typeList);
-
-                    if (c != null) {
-                        this.typeList.remove(c);
-                        part.addToList(c);
-                        Singletons.getModel().getGame().getAction().exile(c);
-                        if (i == (nNeeded - 1)) {
-                            this.done();
-                        }
-                    } else {
-                        this.cancel();
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            public void done() {
-                this.stop();
-                part.addListToHash(sa, "Exiled");
-                payment.paidCost(part);
-            }
-
-            public void cancel() {
-                this.stop();
-                payment.cancelCost();
-            }
-        };
-        return target;
-    } // exileFrom()
-
-    /**
-     * Exile from.
-     * 
-     * @param sa
-     *            the sa
-     * @param part
-     *            the part
-     * @param type
-     *            the type
-     * @param payment
-     *            the payment
-     * @param payableZone TODO
-     * @param nNeeded
-     *            the n needed
-     * @return the input
-     */
-    public static Input exileFromSame(final SpellAbility sa, final CostExile part, final String type,
-            final CostPayment payment, final List<Card> list, final List<Player> payableZone, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 734256837615635021L;
-            private List<Card> typeList;
-
-            @Override
-            public void showMessage() {
-                if (nNeeded == 0) {
-                    this.done();
-                }
-
-                StringBuilder sb = new StringBuilder();
-                sb.append("Exile from whose ");
-                sb.append(part.getFrom().toString());
-                sb.append("?");
-
-                final Player p = GuiChoose.oneOrNone(sb.toString(), payableZone);
-                if (p == null) {
-                    this.cancel();
-                }
-
-                typeList = CardLists.filter(list, CardPredicates.isOwner(p));
-
-                for (int i = 0; i < nNeeded; i++) {
-                    if (this.typeList.size() == 0) {
-                        this.cancel();
-                    }
-
-                    final Card c = GuiChoose.oneOrNone("Exile from " + part.getFrom(), this.typeList);
-
-                    if (c != null) {
-                        this.typeList.remove(c);
-                        part.addToList(c);
-                        Singletons.getModel().getGame().getAction().exile(c);
-                        if (i == (nNeeded - 1)) {
-                            this.done();
-                        }
-                    } else {
-                        this.cancel();
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            public void done() {
-                this.stop();
-                part.addListToHash(sa, "Exiled");
-                payment.paidCost(part);
-            }
-
-            public void cancel() {
-                this.stop();
-                payment.cancelCost();
-            }
-        };
-        return target;
-    } // exileFrom()
-
-
-    /**
-     * Exile from Stack.
-     * 
-     * @param sa
-     *            the sa
-     * @param part
-     *            the part
-     * @param type
-     *            the type
-     * @param payment
-     *            the payment
-     * @param nNeeded
-     *            the n needed
-     * @return the input
-     */
-    public static Input exileFromStack(final SpellAbility sa, final CostExile part, final String type,
-            final CostPayment payment, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 734256837615635021L;
-            private ArrayList<SpellAbility> saList;
-            private ArrayList<String> descList;
-
-            @Override
-            public void showMessage() {
-                if (nNeeded == 0) {
-                    this.done();
-                }
-
-                saList = new ArrayList<SpellAbility>();
-                descList = new ArrayList<String>();
-
-                for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
-                    final Card stC = Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard();
-                    final SpellAbility stSA = Singletons.getModel().getGame().getStack().peekAbility(i).getRootAbility();
-                    if (stC.isValid(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard()) && stSA.isSpell()) {
-                        this.saList.add(stSA);
-                        if (stC.isCopiedSpell()) {
-                            this.descList.add(stSA.getStackDescription() + " (Copied Spell)");
-                        } else {
-                            this.descList.add(stSA.getStackDescription());
-                        }
-                    }
-                }
-
-                for (int i = 0; i < nNeeded; i++) {
-                    if (this.saList.isEmpty()) {
-                        this.cancel();
-                    }
-
-                    //Have to use the stack descriptions here because some copied spells have no description otherwise
-                    final String o = GuiChoose.oneOrNone("Exile from " + part.getFrom(), this.descList);
-
-                    if (o != null) {
-                        final SpellAbility toExile = this.saList.get(descList.indexOf(o));
-                        final Card c = toExile.getSourceCard();
-                        this.saList.remove(toExile);
-                        part.addToList(c);
-                        if (!c.isCopiedSpell()) {
-                            Singletons.getModel().getGame().getAction().exile(c);
-                        }
-                        if (i == (nNeeded - 1)) {
-                            this.done();
-                        }
-                        final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(toExile);
-                        Singletons.getModel().getGame().getStack().remove(si);
-                    } else {
-                        this.cancel();
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            public void done() {
-                this.stop();
-                part.addListToHash(sa, "Exiled");
-                payment.paidCost(part);
-            }
-
-            public void cancel() {
-                this.stop();
-                payment.cancelCost();
-            }
-        };
-        return target;
-    } // exileFrom()
-
-    /**
-     * <p>
-     * exileType.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param part
-     *            the part
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param nNeeded
-     *            the n needed
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input exileType(final SpellAbility sa, final CostExile part, final String type,
-            final CostPayment payment, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 1403915758082824694L;
-
-            private List<Card> typeList;
-            private int nExiles = 0;
-
-            @Override
-            public void showMessage() {
-                if (nNeeded == 0) {
-                    this.done();
-                }
-
-                final StringBuilder msg = new StringBuilder("Exile ");
-                final int nLeft = nNeeded - this.nExiles;
-                msg.append(nLeft).append(" ");
-                msg.append(type);
-                if (nLeft > 1) {
-                    msg.append("s");
-                }
-
-                if (part.getFrom().equals(ZoneType.Hand)) {
-                    msg.append(" from your Hand");
-                } else if (part.getFrom().equals(ZoneType.Stack)) {
-                    msg.append(" from the Stack");
-                }
-                this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(part.getFrom()));
-                this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
-                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (this.typeList.contains(card)) {
-                    this.nExiles++;
-                    part.addToList(card);
-                    Singletons.getModel().getGame().getAction().exile(card);
-                    this.typeList.remove(card);
-                    // in case nothing else to exile
-                    if (this.nExiles == nNeeded) {
-                        this.done();
-                    } else if (this.typeList.size() == 0) {
-                        // happen
-                        this.cancel();
-                    } else {
-                        this.showMessage();
-                    }
-                }
-            }
-
-            public void done() {
-                this.stop();
-                part.addListToHash(sa, "Exiled");
-                payment.paidCost(part);
-            }
-
-            public void cancel() {
-                this.stop();
-                payment.cancelCost();
-            }
-        };
-
-        return target;
-    } // exileType()
-
-    /**
-     * <p>
-     * exileThis.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param part
-     *            the part
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input exileThis(final SpellAbility sa, final CostPayment payment, final CostExile part) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 678668673002725001L;
-
-            @Override
-            public void showMessage() {
-                final Card card = sa.getSourceCard();
-                if (sa.getActivatingPlayer().isHuman()
-                        && sa.getActivatingPlayer().getZone(part.getFrom()).contains(card)) {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName());
-                    sb.append(" - Exile?");
-                    final Object[] possibleValues = { "Yes", "No" };
-                    final Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, possibleValues,
-                            possibleValues[0]);
-                    if (choice.equals(0)) {
-                        payment.getAbility().addCostToHashList(card, "Exiled");
-                        Singletons.getModel().getGame().getAction().exile(card);
-                        part.addToList(card);
-                        this.stop();
-                        part.addListToHash(sa, "Exiled");
-                        payment.paidCost(part);
-                    } else {
-                        this.stop();
-                        payment.cancelCost();
-                    }
-                }
-            }
-        };
-
-        return target;
-    } // input_exile()
 }
