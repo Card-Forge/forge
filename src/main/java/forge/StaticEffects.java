@@ -25,8 +25,6 @@ import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.card.abilityfactory.AbilityFactory;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
