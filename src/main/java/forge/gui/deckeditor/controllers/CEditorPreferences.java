@@ -72,7 +72,6 @@ public enum CEditorPreferences implements ICDoc {
             final ColumnName name = prefsDict.get(key);
             key.setSelected(SColumnUtil.getColumn(name).isShowing());
             key.addItemListener(new ItemListener() {
-
                 @Override
                 public void itemStateChanged(ItemEvent arg0) {
                     SColumnUtil.toggleColumn(SColumnUtil.getColumn(name));

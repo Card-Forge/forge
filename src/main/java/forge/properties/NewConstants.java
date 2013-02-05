@@ -47,6 +47,7 @@ public final class NewConstants {
     public static final String PREFS_GLOBAL_FILE = "res/preferences/forge.preferences";
     /** Constant <code>PREFS_GLOBAL_FILE = "editor.preferences"</code>. */
     public static final String PREFS_EDITOR_FILE = "res/preferences/editor.preferences";
+    public static final String PREFS_DEFAULT_EDITOR_FILE = "res/preferences/editor.default.preferences";
     /** */
     public static final String PREFS_MAIN_PROPERTIES_FILE = "res/preferences/main.properties";
 

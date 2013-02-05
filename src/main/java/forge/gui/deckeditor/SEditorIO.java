@@ -16,6 +16,7 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
@@ -268,12 +269,20 @@ public class SEditorIO {
         }  // END TEMPORARY CONSOLIDATION FACILITATION
 
         final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-        final String fileAddress = NewConstants.PREFS_EDITOR_FILE;
-        final XMLEventReader reader = inputFactory.createXMLEventReader(new FileInputStream(fileAddress));
 
         PREFS.clear();
         COLS.clear();
 
+        // read in defaults
+        loadPrefs(inputFactory.createXMLEventReader(new FileInputStream(NewConstants.PREFS_DEFAULT_EDITOR_FILE)));
+        
+        // overwrite defaults with user preferences
+        loadPrefs(inputFactory.createXMLEventReader(new FileInputStream(NewConstants.PREFS_EDITOR_FILE)));
+
+        SColumnUtil.attachSortAndDisplayFunctions();
+    }
+    
+    private static void loadPrefs(final XMLEventReader reader) throws XMLStreamException {
         XMLEvent event;
         StartElement element;
         Iterator<?> attributes;
@@ -309,7 +318,7 @@ public class SEditorIO {
                         attribute = (Attribute) attributes.next();
                         if (attribute.getName().toString().equals(ColumnProperty.enumval.toString())) {
                             try { COLS.put(ColumnName.valueOf(attribute.getValue()), tempcol); }
-                            catch (final Exception e) { }
+                            catch (final Exception e) { /* ignore invalid entries */ }
 
                             tempcol.setEnumValue(attribute.getValue());
                         }
@@ -333,7 +342,5 @@ public class SEditorIO {
                 }
             }
         }
-
-        SColumnUtil.attachSortAndDisplayFunctions();
     }
 }

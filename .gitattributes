@@ -12512,6 +12512,7 @@ res/pics_product/tournamentpacks/TMP.jpg -text
 res/pics_product/tournamentpacks/TSP.jpg -text
 res/pics_product/tournamentpacks/USG.jpg -text
 res/preferences/.project -text
+res/preferences/editor.default.preferences -text svneol=native#application/xml
 res/preferences/editor.preferences -text
 res/preferences/main.properties -text
 res/product-images.txt -text
