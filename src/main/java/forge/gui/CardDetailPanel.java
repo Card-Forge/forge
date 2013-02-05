@@ -37,6 +37,7 @@ import forge.Card;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.CardEdition;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.toolbox.FLabel;
@@ -182,8 +183,14 @@ public class CardDetailPanel extends FPanel implements CardContainer {
                 this.nameCostLabel.setText(card.getName() + " - " + card.getManaCost());
             }
             this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
-            this.setInfoLabel.setText(card.getCurSetCode());
-            this.setInfoLabel.setToolTipText(Singletons.getModel().getEditions().get(card.getCurSetCode()).getName());
+            String set = card.getCurSetCode();
+            this.setInfoLabel.setText(set);
+            if (null != set && !set.isEmpty()) {
+                CardEdition edition = Singletons.getModel().getEditions().get(set);
+                if (null != edition) {
+                    this.setInfoLabel.setToolTipText(edition.getName());
+                }
+            }
         } else {
             this.nameCostLabel.setText("Morph");
             this.typeLabel.setText("Creature");
