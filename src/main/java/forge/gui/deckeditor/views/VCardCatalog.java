@@ -1,6 +1,7 @@
 package forge.gui.deckeditor.views;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +54,8 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     private final FLabel lblTitle = new FLabel.Builder().fontSize(14).build();
 
     // Total and color count labels/filter toggles
-    private final JPanel pnlStats = new JPanel();
+    private final JPanel pnlStats = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
+    private final JPanel pnlStatsWrap = new JPanel(new WrapLayout(FlowLayout.LEFT));
     private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
             new HashMap<SEditorUtil.StatTypes, FLabel>();
 
@@ -103,6 +105,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
             return TextUtil.enumToLabel(this);
         }
     }
+    
     private final Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners = new HashMap<RangeTypes, Pair<FSpinner, FSpinner>>();
     
     // card table
@@ -119,15 +122,20 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         scroller.getViewport().setBorder(null);
 
         pnlStats.setOpaque(false);
-        pnlStats.setLayout(new MigLayout("insets 0, gap 5px, ax center, wrap 8"));
+        pnlStatsWrap.setOpaque(false);
         
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             FLabel label = buildToggleLabel(s, SEditorUtil.StatTypes.TOTAL != s);
             statLabels.put(s, label);
-            pnlStats.add(label, "w 60px!, h 24px!" + (9 == statLabels.size() ? ", skip" : ""));
+            if (SEditorUtil.StatTypes.TOTAL == s) {
+                label.setToolTipText("Total cards (click to toggle all filters)");
+                pnlStats.add(label, "align right");
+            } else {
+                pnlStatsWrap.add(label);
+            }
         }
         
-        statLabels.get(SEditorUtil.StatTypes.TOTAL).setToolTipText("Total cards (click to toggle all filters)");
+        pnlStats.add(pnlStatsWrap, "w 30:500:500, align left");
 
         pnlAddButtons.setOpaque(false);
         pnlAddButtons.add(btnAdd, "w 30%!, h 30px!, gap 10 10 5 5");
@@ -188,7 +196,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
         parentBody.add(pnlHeader, "w 98%!, gap 1% 1% 5 0");
-        parentBody.add(pnlStats, "w 96%, gap 1% 1% 5 0");
+        parentBody.add(pnlStats, "w 96%, gap 1% 1% 5 0, center");
         parentBody.add(pnlAddButtons, "w 96%!, gap 1% 1% 5 5");
         parentBody.add(pnlSearch, "w 96%, gap 1% 1%");
         parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
@@ -230,12 +238,18 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     
     //========== Other methods
     private FLabel buildToggleLabel(SEditorUtil.StatTypes s, boolean selectable) {
-        return new FLabel.Builder()
+        FLabel label = new FLabel.Builder()
                 .icon(s.img).iconScaleAuto(false)
                 .text("0").fontSize(11)
                 .tooltip(s.toLabelString() + "(click to toggle the filter for this card type)")
                 .hoverable().selectable(selectable).selected(selectable)
                 .build();
+        
+        Dimension labelSize = new Dimension(60, 24);
+        label.setPreferredSize(labelSize);
+        label.setMinimumSize(labelSize);
+        
+        return label;
     }
 
     public void focusTable() {
