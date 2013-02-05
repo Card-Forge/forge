@@ -115,10 +115,10 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableDeck().removeCard(card, qty);
         if (sideboardMode) {
             this.getTableCatalog().addCard(card, qty);
         }
+        this.getTableDeck().removeCard(card, qty);
         this.controller.notifyModelChanged();
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("*Current Deck");
     }

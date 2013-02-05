@@ -314,10 +314,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
         
         if (item instanceof CardPrinted) {
-            this.getTableCatalog().removeCard(item, qty);
-
             final CardPrinted card = (CardPrinted) item;
             this.getTableDeck().addCard(card, qty);
+            this.getTableCatalog().removeCard(item, qty);
             this.questData.getCards().buyCard(card, value);
 
         } else if (item instanceof OpenablePack) {
@@ -363,8 +362,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableDeck().removeCard(card, qty);
         this.getTableCatalog().addCard(card, qty);
+        this.getTableDeck().removeCard(card, qty);
 
         final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards()
                 .getSellPriceLimit());
@@ -378,8 +377,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             return;
         }
         
-        this.getTableDeck().removeCards(cardsToRemove);
         this.getTableCatalog().addCards(cardsToRemove);
+        this.getTableDeck().removeCards(cardsToRemove);
 
         for (Map.Entry<InventoryItem, Integer> item : cardsToRemove) {
             if (!(item.getKey() instanceof CardPrinted)) {

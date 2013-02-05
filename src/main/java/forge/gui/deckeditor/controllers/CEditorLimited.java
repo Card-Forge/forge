@@ -115,8 +115,8 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
 
         // update view
         final CardPrinted card = (CardPrinted) item;
-        this.getTableDeck().removeCard(card, qty);
         this.getTableCatalog().addCard(card, qty);
+        this.getTableDeck().removeCard(card, qty);
 
         this.getDeckController().notifyModelChanged();
     }
