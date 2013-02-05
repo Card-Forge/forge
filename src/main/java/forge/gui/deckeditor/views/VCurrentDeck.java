@@ -86,7 +86,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     private final FLabel btnRemove = new FLabel.Builder()
             .fontSize(14)
             .text("Remove card")
-            .tooltip("Remove selected card to current deck (or double click the row)")
+            .tooltip("Remove selected card from current deck (or double click the row or hit the spacebar)")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
             .iconScaleAuto(false).hoverable(true).build();
 

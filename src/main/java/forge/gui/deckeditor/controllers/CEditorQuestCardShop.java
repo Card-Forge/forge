@@ -431,15 +431,16 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getTableCatalog().setDeck(cardsForSale);
         this.getTableDeck().setDeck(ownedItems);
 
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setText("Sell excess cards");
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setToolTipText("Sell extra non-basic land cards of which you have more than four copies");
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setText("Sell all extras");
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setToolTipText("Sell unneeded extra copies of all cards");
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setCommand(new Command() {
             @Override
             public void execute() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
                 for (Map.Entry<InventoryItem, Integer> item : getTableDeck().getCards()) {
-                    if (4 < item.getValue() && CardRarity.BasicLand != ((CardPrinted)item.getKey()).getRarity()) {
-                        cardsToRemove.add(Pair.of(item.getKey(), item.getValue() - 4));
+                    int numToKeep = CardRarity.BasicLand == ((CardPrinted)item.getKey()).getRarity() ? 50 : 4;
+                    if (numToKeep < item.getValue()) {
+                        cardsToRemove.add(Pair.of(item.getKey(), item.getValue() - numToKeep));
                     }
                 }
                 removeCards(cardsToRemove);
