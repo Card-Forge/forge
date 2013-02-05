@@ -126,7 +126,7 @@ public class StaticAbilityContinuous {
             toughnessBonus = addT.matches("[0-9][0-9]?") ? Integer.parseInt(addT)
                     : AbilityFactory.calculateAmount(hostCard, addT, null);
             if (!addT.matches("[0-9][0-9]?") && !addT.equals("AffectedX")) {
-                se.setXValue(toughnessBonus);
+                se.setYValue(toughnessBonus);
             }
         }
 

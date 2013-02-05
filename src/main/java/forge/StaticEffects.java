@@ -134,7 +134,7 @@ public class StaticEffects {
             } else if (addT.equals("AffectedX")) {
                 // gets calculated at runtime
             } else {
-                toughnessBonus = se.getXValue();
+                toughnessBonus = se.getYValue();
             }
         }
 
