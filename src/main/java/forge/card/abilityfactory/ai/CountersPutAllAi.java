@@ -18,13 +18,14 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class CountersPutAllAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
@@ -131,7 +132,7 @@ public class CountersPutAllAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
         return canPlayAI(ai, sa);
     }
 }

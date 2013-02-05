@@ -11,6 +11,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.Spell;
 import forge.card.spellability.Target;
+import forge.game.player.AIPlayer;
 
 public class CommonSpell extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;
@@ -44,7 +45,7 @@ public class CommonSpell extends Spell {
 
     @Override
     public boolean canPlayAI() {
-        return ai.canPlayAIWithSubs(getActivatingPlayer(), this) && super.canPlayAI();
+        return ai.canPlayAIWithSubs((AIPlayer) getActivatingPlayer(), this) && super.canPlayAI();
     }
 
     @Override
@@ -56,9 +57,9 @@ public class CommonSpell extends Spell {
     public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
         boolean chance = false;
         if (withOutManaCost) {
-            chance = ai.doTriggerNoCostWithSubs(this.getActivatingPlayer(), this, mandatory);
+            chance = ai.doTriggerNoCostWithSubs((AIPlayer)this.getActivatingPlayer(), this, mandatory);
         }
-        chance = ai.doTriggerAI(this.getActivatingPlayer(), this, mandatory);
+        chance = ai.doTriggerAI((AIPlayer)this.getActivatingPlayer(), this, mandatory);
         return chance;
     }
 }

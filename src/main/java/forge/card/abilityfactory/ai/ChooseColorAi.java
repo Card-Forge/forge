@@ -2,13 +2,13 @@ package forge.card.abilityfactory.ai;
 
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.util.MyRandom;
 
 public class ChooseColorAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         if (!sa.hasParam("AILogic")) {
             return false;
         }
@@ -17,7 +17,7 @@ public class ChooseColorAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
         return mandatory || canPlayAI(ai, sa);
     }
 

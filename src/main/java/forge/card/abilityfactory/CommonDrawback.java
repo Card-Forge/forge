@@ -28,6 +28,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Target;
+import forge.game.player.AIPlayer;
 
 public class CommonDrawback extends AbilitySub {
         private final SpellEffect effect;
@@ -64,7 +65,7 @@ public class CommonDrawback extends AbilitySub {
 
         @Override
         public boolean canPlayAI() {
-            return ai.canPlayAIWithSubs(getActivatingPlayer(), this);
+            return ai.canPlayAIWithSubs((AIPlayer)getActivatingPlayer(), this);
         }
 
         @Override
@@ -74,7 +75,7 @@ public class CommonDrawback extends AbilitySub {
 
         @Override
         public boolean chkAIDrawback() {
-            if (!ai.chkAIDrawback(this, getActivatingPlayer())) {
+            if (!ai.chkAIDrawback(this, (AIPlayer)getActivatingPlayer())) {
                 return false;
             }
             final AbilitySub subAb = getSubAbility();
@@ -86,7 +87,7 @@ public class CommonDrawback extends AbilitySub {
 
         @Override
         public boolean doTrigger(final boolean mandatory) {
-            return ai.doTriggerAI(getActivatingPlayer(), this, mandatory);
+            return ai.doTriggerAI((AIPlayer)getActivatingPlayer(), this, mandatory);
         }
     }
 

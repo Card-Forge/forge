@@ -12,7 +12,7 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -22,7 +22,7 @@ public class ControlExchangeAi extends SpellAiLogic {
  * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
  */
     @Override
-    protected boolean canPlayAI(Player ai, final SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, final SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
@@ -62,7 +62,7 @@ public class ControlExchangeAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         return false;
     }
 }

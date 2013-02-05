@@ -14,6 +14,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -24,7 +25,7 @@ public class ChangeZoneAllAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         // Change Zone All, can be any type moving from one zone to another
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -167,7 +168,7 @@ public class ChangeZoneAllAi extends SpellAiLogic {
      * @return a boolean.
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
 
@@ -176,7 +177,7 @@ public class ChangeZoneAllAi extends SpellAiLogic {
 
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
         // Change Zone All, can be any type moving from one zone to another
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));

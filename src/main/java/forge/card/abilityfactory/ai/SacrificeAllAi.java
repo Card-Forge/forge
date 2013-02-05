@@ -11,14 +11,14 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class SacrificeAllAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
@@ -76,7 +76,7 @@ public class SacrificeAllAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
         //TODO: Add checks for bad outcome
         return true;
     }

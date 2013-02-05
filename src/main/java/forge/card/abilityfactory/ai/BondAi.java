@@ -19,7 +19,7 @@ package forge.card.abilityfactory.ai;
 
 import forge.card.spellability.SpellAbility;
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 
 /**
  * <p>
@@ -42,7 +42,7 @@ public final class BondAi extends SpellAiLogic {
      * @return a boolean.
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         return true;
     } // end bondCanPlayAI()
 }

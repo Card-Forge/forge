@@ -16,7 +16,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -26,7 +26,7 @@ public class CopyPermanentAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         // Card source = sa.getSourceCard();
         // TODO - I'm sure someone can do this AI better
 
@@ -48,7 +48,7 @@ public class CopyPermanentAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
 
         // ////

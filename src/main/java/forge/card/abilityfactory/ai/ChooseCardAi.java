@@ -8,7 +8,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 
 public class ChooseCardAi extends SpellAiLogic {
@@ -17,7 +17,7 @@ public class ChooseCardAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();
@@ -61,7 +61,7 @@ public class ChooseCardAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
         return canPlayAI(ai, sa);
     }
 }

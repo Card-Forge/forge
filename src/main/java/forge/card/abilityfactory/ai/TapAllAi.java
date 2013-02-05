@@ -13,6 +13,7 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -23,7 +24,7 @@ public class TapAllAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(final Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(final AIPlayer ai, SpellAbility sa) {
         // If tapping all creatures do it either during declare attackers of AIs
         // turn
         // or during upkeep/begin combat?
@@ -98,7 +99,7 @@ public class TapAllAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
 
         String valid = "";

@@ -46,7 +46,7 @@ import forge.util.MyRandom;
 public class DrawAi extends SpellAiLogic {
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
         return targetAI(ai, sa, false);
     }
 
@@ -54,7 +54,7 @@ public class DrawAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
@@ -262,7 +262,7 @@ public class DrawAi extends SpellAiLogic {
 
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
         return targetAI(ai, sa, mandatory);
     }
 

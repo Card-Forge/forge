@@ -12,6 +12,7 @@ import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -25,7 +26,7 @@ public class RepeatEachAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
 
         if ("CloneMyTokens".equals(logic)) {

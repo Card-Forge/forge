@@ -17,7 +17,7 @@ import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 
 public class ChooseSourceAi extends SpellAiLogic {
@@ -26,7 +26,7 @@ public class ChooseSourceAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(final Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(final AIPlayer ai, SpellAbility sa) {
         // TODO: AI Support! Currently this is copied from AF ChooseCard.
         //       When implementing AI, I believe AI also needs to be made aware of the damage sources chosen
         //       to be prevented (e.g. so the AI doesn't attack with a creature that will not deal any damage

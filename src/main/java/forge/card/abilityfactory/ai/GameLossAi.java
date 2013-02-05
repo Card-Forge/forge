@@ -3,11 +3,12 @@ package forge.card.abilityfactory.ai;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
 public class GameLossAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Player opp = ai.getOpponent();
         if (opp.cantLose()) {
             return false;
@@ -28,7 +29,7 @@ public class GameLossAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
 
         // Phage the Untouchable
         // (Final Fortune would need to attach it's delayed trigger to a

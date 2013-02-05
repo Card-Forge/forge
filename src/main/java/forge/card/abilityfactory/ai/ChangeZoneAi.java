@@ -37,6 +37,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.Combat;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -56,7 +57,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      * @return a boolean.
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         String origin = "";
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
@@ -89,7 +90,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      * @return a boolean.
      */
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
         String origin = "";
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
@@ -120,7 +121,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         String origin = "";
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");

@@ -20,13 +20,14 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class CountersPutAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player ai, final SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on
         // what the expected targets could be
@@ -165,7 +166,7 @@ public class CountersPutAi extends SpellAiLogic {
     } // putCanPlayAI
 
     @Override
-    public boolean chkAIDrawback(final SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(final SpellAbility sa, AIPlayer ai) {
         boolean chance = true;
         final Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -228,7 +229,7 @@ public class CountersPutAi extends SpellAiLogic {
     } // putPlayDrawbackAI
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
         final Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         // boolean chance = true;

@@ -7,7 +7,7 @@ import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.util.MyRandom;
 
 public class TapOrUntapAi extends TapAiBase {
@@ -16,7 +16,7 @@ public class TapOrUntapAi extends TapAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -48,7 +48,7 @@ public class TapOrUntapAi extends TapAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -73,7 +73,7 @@ public class TapOrUntapAi extends TapAiBase {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 

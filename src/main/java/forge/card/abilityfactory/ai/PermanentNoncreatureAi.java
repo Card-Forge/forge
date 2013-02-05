@@ -6,7 +6,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 
 /** 
  * AbilityFactory for Creature Spells.
@@ -18,7 +18,7 @@ public class PermanentNoncreatureAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
         GameState game = Singletons.getModel().getGame();
 

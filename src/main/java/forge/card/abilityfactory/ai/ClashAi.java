@@ -4,6 +4,7 @@ package forge.card.abilityfactory.ai;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
 public class ClashAi extends SpellAiLogic {
@@ -12,7 +13,7 @@ public class ClashAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
 
@@ -20,7 +21,7 @@ public class ClashAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Player opp = ai.getOpponent();
         if (tgt != null) {

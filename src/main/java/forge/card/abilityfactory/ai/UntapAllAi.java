@@ -3,12 +3,12 @@ package forge.card.abilityfactory.ai;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 
 public class UntapAllAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         // check SubAbilities DoTrigger?
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
@@ -18,7 +18,7 @@ public class UntapAllAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         return mandatory;
     }
 

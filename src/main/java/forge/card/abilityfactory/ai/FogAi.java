@@ -6,7 +6,7 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 
 public class FogAi extends SpellAiLogic {
 
@@ -14,7 +14,7 @@ public class FogAi extends SpellAiLogic {
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
          */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         // AI should only activate this during Human's Declare Blockers phase
         if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
             return false;
@@ -38,7 +38,7 @@ public class FogAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
         // AI should only activate this during Human's turn
         boolean chance;
 
@@ -53,7 +53,7 @@ public class FogAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance;
         if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
             chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);

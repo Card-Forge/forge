@@ -19,6 +19,7 @@ import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -28,7 +29,7 @@ public class DebuffAi extends SpellAiLogic {
     // *************************************************************************
 
     @Override
-    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
+    protected boolean canPlayAI(final AIPlayer ai, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getSourceCard();
         if ((sa.getTarget() == null) && !source.isInPlay()) {
@@ -97,7 +98,7 @@ public class DebuffAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be
             // here?
@@ -279,7 +280,7 @@ public class DebuffAi extends SpellAiLogic {
     } // pumpMandatoryTarget()
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
 
         if (sa.getTarget() == null) {

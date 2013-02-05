@@ -10,12 +10,13 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class TapAi extends TapAiBase {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -58,7 +59,7 @@ public class TapAi extends TapAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -84,7 +85,7 @@ public class TapAi extends TapAiBase {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 

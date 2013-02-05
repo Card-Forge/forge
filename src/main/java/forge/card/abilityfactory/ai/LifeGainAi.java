@@ -15,7 +15,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.util.MyRandom;
 
 /**
@@ -29,7 +29,7 @@ public class LifeGainAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
 
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
@@ -145,7 +145,7 @@ public class LifeGainAi extends SpellAiLogic {
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
+    protected boolean doTriggerAINoCost(final AIPlayer ai, final SpellAbility sa,
     final boolean mandatory) {
 
         // If the Target is gaining life, target self.

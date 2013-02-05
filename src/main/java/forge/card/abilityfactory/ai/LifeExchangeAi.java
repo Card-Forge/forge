@@ -5,6 +5,7 @@ import java.util.Random;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -19,7 +20,7 @@ public class LifeExchangeAi extends SpellAiLogic {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final int myLife = aiPlayer.getLife();
         Player opponent = aiPlayer.getOpponent();

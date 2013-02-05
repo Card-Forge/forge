@@ -7,12 +7,12 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.util.MyRandom;
 
 public class RevealAi extends RevealAiBase {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -54,7 +54,7 @@ public class RevealAi extends RevealAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
 
         if (!revealHandTargetAI(ai, sa/*, false, mandatory*/)) {
             return false;

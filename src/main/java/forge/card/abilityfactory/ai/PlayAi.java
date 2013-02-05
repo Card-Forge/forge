@@ -14,14 +14,14 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class PlayAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
 

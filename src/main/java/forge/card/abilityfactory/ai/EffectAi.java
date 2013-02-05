@@ -17,13 +17,14 @@ import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class EffectAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final GameState game = Singletons.getModel().getGame();
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= .6667;
@@ -121,7 +122,7 @@ public class EffectAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         // TODO: Add targeting effects
 
         return true;

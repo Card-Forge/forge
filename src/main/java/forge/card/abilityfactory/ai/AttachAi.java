@@ -28,6 +28,7 @@ import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -38,7 +39,7 @@ public class AttachAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -580,7 +581,7 @@ public class AttachAi extends SpellAiLogic {
      * @return true, if successful
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
+    protected boolean doTriggerAINoCost(final AIPlayer ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getSourceCard();
         // Check if there are any valid targets
         ArrayList<Object> targets = new ArrayList<Object>();

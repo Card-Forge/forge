@@ -14,13 +14,13 @@ import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 
 public class RegenerateAllAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         boolean chance = false;
         final Cost abCost = sa.getPayCosts();
@@ -83,7 +83,7 @@ public class RegenerateAllAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance = true;
 
         return chance;

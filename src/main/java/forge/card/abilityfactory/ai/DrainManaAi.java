@@ -8,13 +8,14 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class DrainManaAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
 
         final Target tgt = sa.getTarget();
@@ -41,7 +42,7 @@ public class DrainManaAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getOpponent();
 
         final Target tgt = sa.getTarget();
@@ -68,7 +69,7 @@ public class DrainManaAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();

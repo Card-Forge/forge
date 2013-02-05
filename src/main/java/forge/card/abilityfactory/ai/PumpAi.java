@@ -21,6 +21,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -30,7 +31,7 @@ public class PumpAi extends PumpAiBase {
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
          */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
         final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
@@ -337,7 +338,7 @@ public class PumpAi extends PumpAiBase {
     } // pumpMandatoryTarget()
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
@@ -380,7 +381,7 @@ public class PumpAi extends PumpAiBase {
     } // pumpTriggerAI
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
 
         final Card source = sa.getSourceCard();
 

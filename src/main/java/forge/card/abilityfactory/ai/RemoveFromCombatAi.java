@@ -3,18 +3,18 @@ package forge.card.abilityfactory.ai;
 
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.Player;
+import forge.game.player.AIPlayer;
 
 public class RemoveFromCombatAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         // disabled for the AI for now. Only for Gideon Jura at this time.
         return false;
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
         // AI should only activate this during Human's turn
 
         // TODO - implement AI
@@ -25,7 +25,7 @@ public class RemoveFromCombatAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance;
 
         // TODO - implement AI

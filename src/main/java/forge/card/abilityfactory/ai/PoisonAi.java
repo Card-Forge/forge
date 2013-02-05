@@ -12,6 +12,7 @@ import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
 public class PoisonAi extends SpellAiLogic {
@@ -25,7 +26,7 @@ public class PoisonAi extends SpellAiLogic {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         // int humanPoison = AllZone.getHumanPlayer().getPoisonCounters();
@@ -71,7 +72,7 @@ public class PoisonAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
