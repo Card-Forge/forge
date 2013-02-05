@@ -197,7 +197,7 @@ public class Upkeep extends Phase {
                         Player controller = c.getController();
                         if (controller.isHuman()) {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
-                            GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, paidCommand, unpaidCommand, null, game);
+                            GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, cost, paidCommand, unpaidCommand, null, game);
                         } else { // computer
                             if (ComputerUtilCost.canPayCost(blankAbility, controller)) {
                                 ComputerUtil.playNoStack(controller, blankAbility, game);
@@ -357,7 +357,7 @@ public class Upkeep extends Phase {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                GameActionUtil.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(),
+                                GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, blankAbility.getPayCosts(),
                                         paidCommand, unpaidCommand, null, game);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {

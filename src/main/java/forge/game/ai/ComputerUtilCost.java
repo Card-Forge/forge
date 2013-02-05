@@ -342,7 +342,7 @@ public class ComputerUtilCost {
         final GameState game = Singletons.getModel().getGame();
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
-        if (sa instanceof Spell && player.isComputer()) {
+        if (sa instanceof Spell) {
             for (Player opp : player.getOpponents()) {
                 for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
                     final String snem = c.getSVar("SpellsNeedExtraMana");

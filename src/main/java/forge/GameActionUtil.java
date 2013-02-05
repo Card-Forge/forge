@@ -423,11 +423,10 @@ public final class GameActionUtil {
      *            a {@link forge.Command} object.
      * @param sourceAbility TODO
      */
-    public static void payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, final Command paid,
+    public static void payCostDuringAbilityResolve(final Player p, final SpellAbility ability, final Cost cost, final Command paid,
             final Command unpaid, SpellAbility sourceAbility, final GameState game) {
         final Card source = ability.getSourceCard();
         final List<CostPart> parts =  cost.getCostParts();
-        Player p = Singletons.getControl().getPlayer();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
         CostPart costPart = null;
         if (!parts.isEmpty()) {

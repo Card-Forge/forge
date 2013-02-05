@@ -7,10 +7,10 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -56,7 +56,7 @@ public class RegenerateAllAi extends SpellAiLogic {
 
         int numSaved = 0;
         if (Singletons.getModel().getGame().getStack().size() > 0) {
-            final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+            final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
             for (final Card c : list) {
                 if (objects.contains(c) && c.getShield() == 0) {

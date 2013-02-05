@@ -17,6 +17,7 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
@@ -336,7 +337,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
-            if (!AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(card)) {
+            if (!ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(card)) {
                 return false;
             }
         } else if (keyword.equals("Islandwalk")) {

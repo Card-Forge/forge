@@ -31,6 +31,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -83,7 +84,7 @@ public class RegenerateAi extends SpellAiLogic {
             final List<Card> list = AbilityFactory.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
             if (Singletons.getModel().getGame().getStack().size() > 0) {
-                final List<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final List<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 for (final Card c : list) {
                     if (objects.contains(c)) {
@@ -119,7 +120,7 @@ public class RegenerateAi extends SpellAiLogic {
             if (Singletons.getModel().getGame().getStack().size() > 0) {
                 // check stack for something on the stack will kill anything i
                 // control
-                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 final List<Card> threatenedTargets = new ArrayList<Card>();
 

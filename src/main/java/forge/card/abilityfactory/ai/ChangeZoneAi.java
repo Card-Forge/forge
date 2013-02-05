@@ -600,7 +600,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     return false;
                 }
 
-                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(ai, sa);
+                final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
                 boolean contains = false;
                 for (final Card c : retrieval) {
                     if (objects.contains(c)) {
@@ -720,7 +720,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 // check stack for something on the stack that will kill
                 // anything i control
                 if (Singletons.getModel().getGame().getStack().size() > 0) {
-                    final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(ai, sa);
+                    final ArrayList<Object> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
 
                     final List<Card> threatenedTargets = new ArrayList<Card>();
 

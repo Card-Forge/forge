@@ -13,6 +13,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
@@ -56,7 +57,7 @@ public class DamagePreventAi extends SpellAiLogic {
 
             // react to threats on the stack
             if (Singletons.getModel().getGame().getStack().size() > 0) {
-                final ArrayList<Object> threatenedObjects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
+                final ArrayList<Object> threatenedObjects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
                 for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
                         chance = true;

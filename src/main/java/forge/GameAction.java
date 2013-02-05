@@ -555,7 +555,7 @@ public class GameAction {
                         public void resolve() {
                             Player p = recoverable.getController();
                             if (p.isHuman()) {
-                                GameActionUtil.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(),
+                                GameActionUtil.payCostDuringAbilityResolve(p, abRecover, abRecover.getPayCosts(),
                                         paidCommand, unpaidCommand, null, game);
                             } else { // computer
                                 if (ComputerUtilCost.canPayCost(abRecover, p)) {
