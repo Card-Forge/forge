@@ -43,6 +43,57 @@ import forge.gui.GuiDialog;
  */
 class CardFactoryLands {
 
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private static final class InputRevealCardType extends InputSelectManyCards {
+        private final String type;
+        private final Card card;
+        private static final long serialVersionUID = -2774066137824255680L;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param min
+         * @param max
+         * @param type
+         * @param card
+         */
+        private InputRevealCardType(int min, int max, String type, Card card) {
+            super(min, max);
+            this.type = type;
+            this.card = card;
+        }
+
+        @Override
+        public String getMessage() {
+            return card.getName() + " - Reveal a card.";
+        }
+
+        @Override
+        protected boolean isValidChoice(Card c) {
+            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+            return zone.is(ZoneType.Hand) && c.isType(type) && c.getController() == card.getController();
+        }
+
+        @Override
+        protected Input onDone() {
+            if (selected.isEmpty()) {
+                return onCancel();
+            }
+            
+            String cardName = selected.get(0).getName();
+            JOptionPane.showMessageDialog(null, "Revealed card: " + cardName, cardName, JOptionPane.PLAIN_MESSAGE);
+            return null;
+        }
+
+        @Override
+        public Input onCancel() {
+            card.setTapped(true);
+            return null;
+        }
+    }
+
     /**
      * <p>
      * getCard.
@@ -207,37 +258,7 @@ class CardFactoryLands {
                 }
 
                 public void humanExecute() {
-                    Singletons.getModel().getMatch().getInput().setInput(new InputSelectManyCards(0, 1) {
-                        private static final long serialVersionUID = -2774066137824255680L;
-
-                        @Override
-                        public String getMessage() {
-                            return card.getName() + " - Reveal a card.";
-                        }
-
-                        @Override
-                        protected boolean isValidChoice(Card c) {
-                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                            return zone.is(ZoneType.Hand) && c.isType(type) && c.getController() == card.getController();
-                        }
-
-                        @Override
-                        protected Input onDone() {
-                            if (selected.isEmpty()) {
-                                return onCancel();
-                            }
-                            
-                            String cardName = selected.get(0).getName();
-                            JOptionPane.showMessageDialog(null, "Revealed card: " + cardName, cardName, JOptionPane.PLAIN_MESSAGE);
-                            return null;
-                        }
-
-                        @Override
-                        public Input onCancel() {
-                            card.setTapped(true);
-                            return null;
-                        }
-                    });
+                    Singletons.getModel().getMatch().getInput().setInput(new InputRevealCardType(0, 1, type, card));
                 } // execute()
 
                 private void revealCard(final Card c) {

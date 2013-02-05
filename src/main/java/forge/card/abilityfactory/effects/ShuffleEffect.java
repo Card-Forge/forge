@@ -23,11 +23,9 @@ public class ShuffleEffect extends SpellEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (optional && sa.getActivatingPlayer().isHuman()
-                        && !GuiDialog.confirm(host, "Have " + p + " shuffle?")) {
-                } else {
+                boolean mustShuffle = !optional || sa.getActivatingPlayer().isComputer() || GuiDialog.confirm(host, "Have " + p + " shuffle?");
+                if (mustShuffle) 
                     p.shuffle();
-                }
             }
         }
     }

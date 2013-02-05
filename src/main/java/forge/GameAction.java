@@ -499,80 +499,82 @@ public class GameAction {
 
         // Recover keyword
         if (c.isCreature() && origZone.is(ZoneType.Battlefield)) {
-            List<Card> cards = new ArrayList<Card>(c.getOwner().getCardsIn(ZoneType.Graveyard));
-            for (final Card recoverable : cards) {
+            for (final Card recoverable : grave) {
                 if (recoverable.hasStartOfKeyword("Recover") && !recoverable.equals(c)) {
-
-                    final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
-                            .split(":")[1];
-                    final Cost cost = new Cost(recoverable, recoverCost, true);
-
-                    final Command paidCommand = new Command() {
-                        private static final long serialVersionUID = -6357156873861051845L;
-
-                        @Override
-                        public void execute() {
-                            Singletons.getModel().getGame().getAction().moveToHand(recoverable);
-                        }
-                    };
-
-                    final Command unpaidCommand = new Command() {
-                        private static final long serialVersionUID = -7354791599039157375L;
-
-                        @Override
-                        public void execute() {
-                            Singletons.getModel().getGame().getAction().exile(recoverable);
-                        }
-                    };
-
-                    final SpellAbility abRecover = new AbilityActivated(recoverable, cost, null) {
-                        private static final long serialVersionUID = 8858061639236920054L;
-
-                        @Override
-                        public void resolve() {
-                            Singletons.getModel().getGame().getAction().moveToHand(recoverable);
-                        }
-
-                        @Override
-                        public String getStackDescription() {
-                            final StringBuilder sd = new StringBuilder(recoverable.getName());
-                            sd.append(" - Recover.");
-
-                            return sd.toString();
-                        }
-
-                        @Override
-                        public AbilityActivated getCopy() {
-                            return null;
-                        }
-                    };
-
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Recover ").append(recoverable).append("\n");
-
-                    final Ability recoverAbility = new Ability(recoverable, SpellManaCost.ZERO) {
-                        @Override
-                        public void resolve() {
-                            Player p = recoverable.getController();
-                            if (p.isHuman()) {
-                                GameActionUtil.payCostDuringAbilityResolve(p, abRecover, abRecover.getPayCosts(),
-                                        paidCommand, unpaidCommand, null, game);
-                            } else { // computer
-                                if (ComputerUtilCost.canPayCost(abRecover, p)) {
-                                    ComputerUtil.playNoStack(p, abRecover, game);
-                                } else {
-                                    Singletons.getModel().getGame().getAction().exile(recoverable);
-                                }
-                            }
-                        }
-                    };
-                    recoverAbility.setStackDescription(sb.toString());
-
-                    game.getStack().addSimultaneousStackEntry(recoverAbility);
+                    handleRecoverAbility(recoverable);
                 }
             }
         }
         return c;
+    }
+
+    private void handleRecoverAbility(final Card recoverable) {
+        final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
+                .split(":")[1];
+        final Cost cost = new Cost(recoverable, recoverCost, true);
+
+        final Command paidCommand = new Command() {
+            private static final long serialVersionUID = -6357156873861051845L;
+
+            @Override
+            public void execute() {
+                Singletons.getModel().getGame().getAction().moveToHand(recoverable);
+            }
+        };
+
+        final Command unpaidCommand = new Command() {
+            private static final long serialVersionUID = -7354791599039157375L;
+
+            @Override
+            public void execute() {
+                Singletons.getModel().getGame().getAction().exile(recoverable);
+            }
+        };
+
+        final SpellAbility abRecover = new AbilityActivated(recoverable, cost, null) {
+            private static final long serialVersionUID = 8858061639236920054L;
+
+            @Override
+            public void resolve() {
+                Singletons.getModel().getGame().getAction().moveToHand(recoverable);
+            }
+
+            @Override
+            public String getStackDescription() {
+                final StringBuilder sd = new StringBuilder(recoverable.getName());
+                sd.append(" - Recover.");
+
+                return sd.toString();
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                return null;
+            }
+        };
+
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Recover ").append(recoverable).append("\n");
+
+        final Ability recoverAbility = new Ability(recoverable, SpellManaCost.ZERO) {
+            @Override
+            public void resolve() {
+                Player p = recoverable.getController();
+                if (p.isHuman()) {
+                    GameActionUtil.payCostDuringAbilityResolve(p, abRecover, abRecover.getPayCosts(),
+                            paidCommand, unpaidCommand, null, game);
+                } else { // computer
+                    if (ComputerUtilCost.canPayCost(abRecover, p)) {
+                        ComputerUtil.playNoStack(p, abRecover, game);
+                    } else {
+                        Singletons.getModel().getGame().getAction().exile(recoverable);
+                    }
+                }
+            }
+        };
+        recoverAbility.setStackDescription(sb.toString());
+
+        game.getStack().addSimultaneousStackEntry(recoverAbility);
     }
 
     /**
@@ -815,7 +817,7 @@ public class GameAction {
                 // pay miracle cost here.
                 if (card.getOwner().isHuman()) {
                     if (GuiDialog.confirm(card, card + " - Drawn. Pay Miracle Cost?")) {
-                        Singletons.getModel().getGame().getAction().playSpellAbility(miracle, player);
+                        GameAction.this.playSpellAbility(miracle, player);
                     }
                 } else {
                     Spell spell = (Spell) miracle;
@@ -866,7 +868,7 @@ public class GameAction {
                 // pay madness cost here.
                 if (card.getOwner().isHuman()) {
                     if (GuiDialog.confirm(card, card + " - Discarded. Pay Madness Cost?")) {
-                        Singletons.getModel().getGame().getAction().playSpellAbility(madness, player);
+                        GameAction.this.playSpellAbility(madness, player);
                     }
                 } else {
                     Spell spell = (Spell) madness;
@@ -1444,13 +1446,7 @@ public class GameAction {
             return false;
         }
 
-        final Player owner = c.getOwner();
-        if (!(owner.isComputer() || owner.isHuman())) {
-            throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " " + owner);
-        }
-
         final boolean persist = (c.hasKeyword("Persist") && (c.getCounters(CounterType.M1M1) == 0)) && !c.isToken();
-
         final boolean undying = (c.hasKeyword("Undying") && (c.getCounters(CounterType.P1P1) == 0)) && !c.isToken();
         
         game.getCombat().removeFromCombat(c);
@@ -1598,160 +1594,11 @@ public class GameAction {
 
         if (spell.isSpell()) {
             if (spell.isDelve()) {
-                final int cardsInGrave = originalCard.getController().getCardsIn(ZoneType.Graveyard).size();
-
-                final Player pc = originalCard.getController();
-                if (pc.isHuman()) {
-                    final Integer[] cntChoice = new Integer[cardsInGrave + 1];
-                    for (int i = 0; i <= cardsInGrave; i++) {
-                        cntChoice[i] = Integer.valueOf(i);
-                    }
-
-                    final Integer chosenAmount = GuiChoose.one("Exile how many cards?", cntChoice);
-                    System.out.println("Delve for " + chosenAmount);
-                    final List<Card> choices = new ArrayList<Card>(pc.getCardsIn(ZoneType.Graveyard));
-                    final List<Card> chosen = new ArrayList<Card>();
-                    for (int i = 0; i < chosenAmount; i++) {
-                        final Card nowChosen = GuiChoose.oneOrNone("Exile which card?", choices);
-
-                        if (nowChosen == null) {
-                            // User canceled,abort delving.
-                            chosen.clear();
-                            break;
-                        }
-
-                        choices.remove(nowChosen);
-                        chosen.add(nowChosen);
-                    }
-
-                    for (final Card c : chosen) {
-                        this.exile(c);
-                    }
-
-                    manaCost = new ManaCostBeingPaid(originalCost.toString());
-                    manaCost.decreaseColorlessMana(chosenAmount);
-                } else {
-                    // AI
-                    int numToExile = 0;
-                    final int colorlessCost = originalCost.getColorlessManaAmount();
-
-                    if (cardsInGrave <= colorlessCost) {
-                        numToExile = cardsInGrave;
-                    } else {
-                        numToExile = colorlessCost;
-                    }
-
-                    for (int i = 0; i < numToExile; i++) {
-                        final List<Card> grave = pc.getZone(ZoneType.Graveyard).getCards();
-                        Card chosen = null;
-                        for (final Card c : grave) { // Exile noncreatures first
-                                                     // in
-                            // case we can revive. Might
-                            // wanna do some additional
-                            // checking here for Flashback
-                            // and the like.
-                            if (!c.isCreature()) {
-                                chosen = c;
-                                break;
-                            }
-                        }
-                        if (chosen == null) {
-                            chosen = CardFactoryUtil.getWorstCreatureAI(grave);
-                        }
-
-                        if (chosen == null) {
-                            // Should never get here but... You know how it is.
-                            chosen = grave.get(0);
-                        }
-
-                        this.exile(chosen);
-                    }
-                    manaCost = new ManaCostBeingPaid(originalCost.toString());
-                    manaCost.decreaseColorlessMana(numToExile);
-                }
+                manaCost = getCostAfterDelve(originalCost, originalCard);
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
-                List<Card> untappedCreats = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-                untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
-
-                if (untappedCreats.size() != 0) {
-                    final ArrayList<Object> choices = new ArrayList<Object>();
-                    for (final Card c : untappedCreats) {
-                        choices.add(c);
-                    }
-                    choices.add("DONE");
-                    ArrayList<String> usableColors = new ArrayList<String>();
-                    ManaCostBeingPaid newCost = new ManaCostBeingPaid(originalCost.toString());
-                    Object tapForConvoke = null;
-                    if (sa.getActivatingPlayer().isHuman()) {
-                        tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(),
-                                choices);
-                    } else {
-                        // TODO: AI to choose a creature to tap would go here
-                        // Probably along with deciding how many creatures to
-                        // tap
-                    }
-                    while ((tapForConvoke != null) && (tapForConvoke instanceof Card) && (untappedCreats.size() != 0)) {
-                        final Card workingCard = (Card) tapForConvoke;
-                        usableColors = CardUtil.getConvokableColors(workingCard, newCost);
-
-                        if (usableColors.size() != 0) {
-                            String chosenColor = usableColors.get(0);
-                            if (usableColors.size() > 1) {
-                                if (sa.getActivatingPlayer().isHuman()) {
-                                    chosenColor = GuiChoose.one("Convoke for which color?",
-                                            usableColors);
-                                } else {
-                                    // TODO: AI for choosing which color to
-                                    // convoke goes here.
-                                }
-                            }
-
-                            if (chosenColor.equals("colorless")) {
-                                newCost.decreaseColorlessMana(1);
-                            } else {
-                                String newCostStr = newCost.toString();
-                                newCostStr = newCostStr.replaceFirst(
-                                        InputPayManaCostUtil.getShortColorString(chosenColor), "").replaceFirst("  ", " ");
-                                newCost = new ManaCostBeingPaid(newCostStr.trim());
-                            }
-
-                            sa.addTappedForConvoke(workingCard);
-                            choices.remove(workingCard);
-                            untappedCreats.remove(workingCard);
-                            if ((choices.size() < 2) || (newCost.getConvertedManaCost() == 0)) {
-                                break;
-                            }
-                        } else {
-                            untappedCreats.remove(workingCard);
-                        }
-
-                        if (sa.getActivatingPlayer().isHuman()) {
-                            tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(), choices);
-                        } else {
-                            // TODO: AI to choose a creature to tap would go
-                            // here
-                        }
-                    }
-
-                    // will only be null if user cancelled.
-                    if (tapForConvoke != null) {
-                        // Convoked creats are tapped here with triggers
-                        // suppressed,
-                        // Then again when payment is done(In
-                        // InputPayManaCost.done()) with suppression cleared.
-                        // This is to make sure that triggers go off at the
-                        // right time
-                        // AND that you can't use mana tapabilities of convoked
-                        // creatures
-                        // to pay the convoked cost.
-                        for (final Card c : sa.getTappedForConvoke()) {
-                            c.setTapped(true);
-                        }
-
-                        manaCost = newCost;
-                    }
-                }
-
+                ManaCostBeingPaid convokeCost = getCostAfterConvoke(sa, originalCost, spell);
+                if ( null != convokeCost ) 
+                    manaCost = convokeCost; 
             }
         } // isSpell
 
@@ -1795,6 +1642,167 @@ public class GameAction {
 
         return manaCost;
     } // GetSpellCostChange
+
+    private ManaCostBeingPaid getCostAfterConvoke(final SpellAbility sa, final ManaCostBeingPaid originalCost, final SpellAbility spell) {
+        
+        List<Card> untappedCreats = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
+
+        if (untappedCreats.size() != 0) {
+            final ArrayList<Object> choices = new ArrayList<Object>();
+            for (final Card c : untappedCreats) {
+                choices.add(c);
+            }
+            choices.add("DONE");
+            ArrayList<String> usableColors = new ArrayList<String>();
+            ManaCostBeingPaid newCost = new ManaCostBeingPaid(originalCost.toString());
+            Object tapForConvoke = null;
+            if (sa.getActivatingPlayer().isHuman()) {
+                tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(),
+                        choices);
+            } else {
+                // TODO: AI to choose a creature to tap would go here
+                // Probably along with deciding how many creatures to
+                // tap
+            }
+            while ((tapForConvoke != null) && (tapForConvoke instanceof Card) && (untappedCreats.size() != 0)) {
+                final Card workingCard = (Card) tapForConvoke;
+                usableColors = CardUtil.getConvokableColors(workingCard, newCost);
+
+                if (usableColors.size() != 0) {
+                    String chosenColor = usableColors.get(0);
+                    if (usableColors.size() > 1) {
+                        if (sa.getActivatingPlayer().isHuman()) {
+                            chosenColor = GuiChoose.one("Convoke for which color?", usableColors);
+                        } else {
+                            // TODO: AI for choosing which color to
+                            // convoke goes here.
+                        }
+                    }
+
+                    if (chosenColor.equals("colorless")) {
+                        newCost.decreaseColorlessMana(1);
+                    } else {
+                        String newCostStr = newCost.toString();
+                        newCostStr = newCostStr.replaceFirst(
+                                InputPayManaCostUtil.getShortColorString(chosenColor), "").replaceFirst("  ", " ");
+                        newCost = new ManaCostBeingPaid(newCostStr.trim());
+                    }
+
+                    sa.addTappedForConvoke(workingCard);
+                    choices.remove(workingCard);
+                    untappedCreats.remove(workingCard);
+                    if ((choices.size() < 2) || (newCost.getConvertedManaCost() == 0)) {
+                        break;
+                    }
+                } else {
+                    untappedCreats.remove(workingCard);
+                }
+
+                if (sa.getActivatingPlayer().isHuman()) {
+                    tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(), choices);
+                } else {
+                    // TODO: AI to choose a creature to tap would go
+                    // here
+                }
+            }
+
+            // will only be null if user cancelled.
+            if (tapForConvoke != null) {
+                // Convoked creats are tapped here with triggers
+                // suppressed,
+                // Then again when payment is done(In
+                // InputPayManaCost.done()) with suppression cleared.
+                // This is to make sure that triggers go off at the
+                // right time
+                // AND that you can't use mana tapabilities of convoked
+                // creatures
+                // to pay the convoked cost.
+                for (final Card c : sa.getTappedForConvoke()) {
+                    c.setTapped(true);
+                }
+
+                return newCost;
+            }
+        }
+        return null;
+    }
+
+    private ManaCostBeingPaid getCostAfterDelve(final ManaCostBeingPaid originalCost, final Card originalCard) {
+        ManaCostBeingPaid manaCost;
+        final int cardsInGrave = originalCard.getController().getCardsIn(ZoneType.Graveyard).size();
+
+        final Player pc = originalCard.getController();
+        if (pc.isHuman()) {
+            final Integer[] cntChoice = new Integer[cardsInGrave + 1];
+            for (int i = 0; i <= cardsInGrave; i++) {
+                cntChoice[i] = Integer.valueOf(i);
+            }
+
+            final Integer chosenAmount = GuiChoose.one("Exile how many cards?", cntChoice);
+            System.out.println("Delve for " + chosenAmount);
+            final List<Card> choices = new ArrayList<Card>(pc.getCardsIn(ZoneType.Graveyard));
+            final List<Card> chosen = new ArrayList<Card>();
+            for (int i = 0; i < chosenAmount; i++) {
+                final Card nowChosen = GuiChoose.oneOrNone("Exile which card?", choices);
+
+                if (nowChosen == null) {
+                    // User canceled,abort delving.
+                    chosen.clear();
+                    break;
+                }
+
+                choices.remove(nowChosen);
+                chosen.add(nowChosen);
+            }
+
+            for (final Card c : chosen) {
+                this.exile(c);
+            }
+
+            manaCost = new ManaCostBeingPaid(originalCost.toString());
+            manaCost.decreaseColorlessMana(chosenAmount);
+        } else {
+            // AI
+            int numToExile = 0;
+            final int colorlessCost = originalCost.getColorlessManaAmount();
+
+            if (cardsInGrave <= colorlessCost) {
+                numToExile = cardsInGrave;
+            } else {
+                numToExile = colorlessCost;
+            }
+
+            for (int i = 0; i < numToExile; i++) {
+                final List<Card> grave = pc.getZone(ZoneType.Graveyard).getCards();
+                Card chosen = null;
+                for (final Card c : grave) { // Exile noncreatures first
+                                             // in
+                    // case we can revive. Might
+                    // wanna do some additional
+                    // checking here for Flashback
+                    // and the like.
+                    if (!c.isCreature()) {
+                        chosen = c;
+                        break;
+                    }
+                }
+                if (chosen == null) {
+                    chosen = CardFactoryUtil.getWorstCreatureAI(grave);
+                }
+
+                if (chosen == null) {
+                    // Should never get here but... You know how it is.
+                    chosen = grave.get(0);
+                }
+
+                this.exile(chosen);
+            }
+            manaCost = new ManaCostBeingPaid(originalCost.toString());
+            manaCost.decreaseColorlessMana(numToExile);
+        }
+        return manaCost;
+    }
 
     /**
      * choose optional additional costs. For HUMAN only

@@ -360,10 +360,8 @@ public class ChangeZoneEffect extends SpellEffect {
                 if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
                     continue;
                 }
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Do you want to move " + tgtC + " from " + origin + " to " + destination + "?");
-                if (player.isHuman() && optional
-                        && !GuiDialog.confirm(hostCard, sb.toString())) {
+                final String prompt = "Do you want to move " + tgtC + " from " + origin + " to " + destination + "?";
+                if (player.isHuman() && optional && !GuiDialog.confirm(hostCard, prompt)) {
                     continue;
                 }
                 final Zone originZone = Singletons.getModel().getGame().getZoneOf(tgtC);
@@ -611,7 +609,7 @@ public class ChangeZoneEffect extends SpellEffect {
             }
 
             // Look at opponents hand before moving onto choosing a card
-            if (origin.contains(ZoneType.Hand) && player.isComputer()) {
+            if (origin.contains(ZoneType.Hand) && player.isHostileTo(player)) {
                 GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
                         .getCardsIn(ZoneType.Hand));
             }

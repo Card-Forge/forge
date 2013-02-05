@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -266,12 +264,7 @@ public final class GameActionUtil {
                     Player p = rippledCards[i].getController();
     
                     if (p.isHuman()) {
-                        final Object[] possibleValues = { "Yes", "No" };
-                        final Object q = JOptionPane.showOptionDialog(null,
-                                "Cast " + rippledCards[i].getName() + "?", "Ripple",
-                                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                                possibleValues, possibleValues[0]);
-                        if (q.equals(0)) {
+                        if (GuiDialog.confirm(rippledCards[i], "Cast " + rippledCards[i].getName() + "?")) {
                             game.getAction().playCardWithoutManaCost(rippledCards[i], p);
                             revealed.remove(rippledCards[i]);
                         }
@@ -344,11 +337,9 @@ public final class GameActionUtil {
 
         void doRipple(final Card c, final int rippleCount, final Player controller) {
             final Card rippleCard = c;
-            boolean activateRipple = false;
+
             if (controller.isComputer() || GuiDialog.confirm(c, "Activate Ripple for " + c + "?")) {
-                    activateRipple = true;
-            }
-            if (activateRipple) {
+
                 final Ability ability = new RippleAbility(c, SpellManaCost.ZERO, controller, rippleCount, rippleCard);
                 final StringBuilder sb = new StringBuilder();
                 sb.append(c).append(" - Ripple.");
