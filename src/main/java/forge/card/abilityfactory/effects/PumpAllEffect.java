@@ -88,6 +88,9 @@ public class PumpAllEffect extends SpellEffect {
 
             for (int i = 0; i < keywords.size(); i++) {
                 tgtC.addExtrinsicKeyword(keywords.get(i));
+                if (keywords.get(i).equals("Suspend")) {
+                    tgtC.setSuspend(true);
+                }
             }
 
             if (!sa.hasParam("Permanent")) {

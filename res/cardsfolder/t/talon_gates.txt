@@ -1,0 +1,19 @@
+Name:Talon Gates
+ManaCost:no cost
+Types:Plane Dominaria
+Text:no text
+A:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand+YouCtrl | DefinedPlayer$ You | RememberChanged$ True | SorcerySpeed$ True | ActivationZone$ Command | SubAbility$ TimeInGates | StackDescription$ Any time you could cast a sorcery, you may exile a nonland card from your hand with X time counters on it, where X is its converted mana cost. | SpellDescription$ Any time you could cast a sorcery, you may exile a nonland card from your hand with X time counters on it, where X is its converted mana cost. If the exiled card doesn't have suspend, it gains suspend. (At the beginning of its owner's upkeep, he or she removes a time counter. When the last is removed, the player casts it without paying its mana cost. If it's a creature, it has haste.)
+SVar:TimeInGates:DB$ PutCounter | Defined$ Remembered | CounterType$ TIME | CounterNum$ GateX | References$ GateX | SubAbility$ GiveSuspend | TgtZone$ Exile | StackDescription$ None
+SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.IsRemembered+withoutSuspend | KW$ Suspend | PumpZone$ Exile | Permanent$ True | SubAbility$ DBCleanup | StackDescription$ If it doesn't have suspend, it gains suspend.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:GateX:Remembered$CardManaCost
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, remove two time counters from each suspended card you own.
+SVar:RolledChaos:AB$ RemoveCounterAll | Cost$ 0 | ValidCards$ Card.suspended+YouOwn | CounterType$ TIME | CounterNum$ 2 | ValidZone$ Exile
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/talon_gates.jpg
+SetInfo:PC2|Common|http://magiccards.info/extras/plane/planechase-2012-edition/talon-gates.jpg
+Oracle:Any time you could cast a sorcery, you may exile a nonland card from your hand with X time counters on it, where X is its converted mana cost. If the exiled card doesn't have suspend, it gains suspend. (At the beginning of its owner's upkeep, he or she removes a time counter. When the last is removed, the player casts it without paying its mana cost. If it's a creature, it has haste.)\nWhenever you roll {C}, remove two time counters from each suspended card you own.
+End

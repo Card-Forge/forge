@@ -2,10 +2,10 @@ Name:Jhoira of the Ghitu
 ManaCost:1 U R
 Types:Legendary Creature Human Wizard
 Text:no text
-A:AB$ PutCounter | Cost$ 2 ExileFromHand<1/Card.nonLand/nonland card> | CostDesc$ 2, Exile a nonland card from your hand: | RememberCostCards$ True | Defined$ Remembered | CounterType$ TIME | CounterNum$ 4 | SubAbility$ GiveSuspend | TgtZone$ Exile | StackDescription$ Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend. | SpellDescription$ Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend. (At the beginning of your upkeep, remove a time counter from that card. When the last is removed, cast it without paying its mana cost. If it's a creature, it has haste.)
-SVar:GiveSuspend:DB$ Pump | Defined$ Remembered | KW$ Suspend | PumpZone$ Exile | Permanent$ True | SubAbility$ DBCleanup | StackDescription$ If it doesn't have suspend, it gains suspend.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 PT:2/2
+A:AB$ PutCounter | Cost$ 2 ExileFromHand<1/Card.nonLand/nonland card> | CostDesc$ 2, Exile a nonland card from your hand: | RememberCostCards$ True | Defined$ Remembered | CounterType$ TIME | CounterNum$ 4 | SubAbility$ GiveSuspend | TgtZone$ Exile | StackDescription$ Put four time counters on the exiled card. | SpellDescription$ Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend. (At the beginning of your upkeep, remove a time counter from that card. When the last is removed, cast it without paying its mana cost. If it's a creature, it has haste.)
+SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.IsRemembered+withoutSuspend | KW$ Suspend | PumpZone$ Exile | Permanent$ True | SubAbility$ DBCleanup | StackDescription$ If it doesn't have suspend, it gains suspend.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jhoira_of_the_ghitu.jpg
