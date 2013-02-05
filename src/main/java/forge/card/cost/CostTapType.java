@@ -234,18 +234,14 @@ public class CostTapType extends CostPartWithList {
 
             @Override
             public void showMessage() {
-                if (nCards == 0) {
-                    this.done();
-                }
-
-                /*if (cardList.size() == 0) {
-                    this.cancel();
-                }*/
 
                 final int left = nCards - this.nTapped;
                 CMatchUI.SINGLETON_INSTANCE
                         .showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
                 ButtonUtil.enableOnlyCancel();
+                if (nCards == 0) {
+                    this.done();
+                }
             }
 
             @Override
