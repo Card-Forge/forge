@@ -946,48 +946,6 @@ public final class GameActionUtil {
         }
     }
 
-    private static Command alphaStatus = new Command() {
-        private static final long serialVersionUID = -3213793711304934358L;
-
-        private final List<Card> previouslyPumped = new ArrayList<Card>();
-        private final ArrayList<Integer> previouslyPumpedValue = new ArrayList<Integer>();
-
-        @Override
-        public void execute() {
-            final List<Card> alphaStatuses = CardLists.filter(Singletons.getModel().getGame()
-                    .getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Alpha Status"));
-            final List<Card> allCreatures = CardLists.filter(Singletons.getModel().getGame()
-                    .getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-
-            for (int i = 0; i < this.previouslyPumped.size(); i++) {
-                this.previouslyPumped.get(i).addSemiPermanentAttackBoost(0 - this.previouslyPumpedValue.get(i));
-                this.previouslyPumped.get(i).addSemiPermanentDefenseBoost(0 - this.previouslyPumpedValue.get(i));
-            }
-            this.previouslyPumped.clear();
-            this.previouslyPumpedValue.clear();
-
-            for (final Card alpha : alphaStatuses) {
-                final Card enchanted = alpha.getEnchantingCard();
-                if (enchanted == null) {
-                    continue;
-                }
-                int totalbuff = 0;
-
-                for (final Card othercreat : allCreatures) {
-                    if (!enchanted.equals(othercreat) && othercreat.sharesCreatureTypeWith(enchanted)) {
-                        totalbuff += 2;
-                    }
-                }
-
-                enchanted.addSemiPermanentAttackBoost(totalbuff);
-                enchanted.addSemiPermanentDefenseBoost(totalbuff);
-                this.previouslyPumped.add(enchanted);
-                this.previouslyPumpedValue.add(totalbuff);
-            }
-        }
-
-    };
-
     /** stores the Command. */
     private static Command umbraStalker = new Command() {
         private static final long serialVersionUID = -3500747003228938898L;
@@ -1146,7 +1104,6 @@ public final class GameActionUtil {
     static {
         // Please add cards in alphabetical order so they are easier to find
 
-        GameActionUtil.getCommands().put("Alpha_Status", GameActionUtil.alphaStatus);
         GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
         GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);
         GameActionUtil.getCommands().put("Tarmogoyf", GameActionUtil.tarmogoyf);
