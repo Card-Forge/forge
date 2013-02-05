@@ -373,6 +373,7 @@ res/pics/icons
 res/pics/tokens
 res/pics_product/*.jpg
 res/preferences
+res/preferences/editor.preferences
 res/preferences/forge.preferences
 res/quest/data
 res/quest/quest.preferences
