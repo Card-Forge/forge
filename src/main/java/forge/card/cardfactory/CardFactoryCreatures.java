@@ -654,7 +654,7 @@ public class CardFactoryCreatures {
 
                 final List<Card> revealed = new ArrayList<Card>();
                 for (int i = 0; i < numCards; i++) {
-                    final Card random = CardUtil.getRandom(hand);
+                    final Card random = Aggregates.random(hand);
                     revealed.add(random);
                     hand.remove(random);
                 }

@@ -19,6 +19,7 @@ package forge.control.input;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -159,7 +160,7 @@ public class InputPayManaCostUtil {
             for (final SpellAbility am : abilities) {
                 AbilityManaPart m = am.getManaPart();
                 if (m.isReflectedMana()) {
-                    final List<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new ArrayList<String>(), new ArrayList<Card>());
+                    final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new HashSet<String>(), new ArrayList<Card>());
                     for (final String color : reflectableColors) {
                         if (manaCost.isColor(color)) {
                             // checking if color
@@ -268,7 +269,7 @@ public class InputPayManaCostUtil {
             return true;
         }
         if (m.isReflectedMana()) {
-            final List<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new ArrayList<String>(), new ArrayList<Card>());
+            final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new HashSet<String>(), new ArrayList<Card>());
             for (final String color : reflectableColors) {
                 if (mana.contains(InputPayManaCostUtil.getShortColorString(color))) {
                     return true;

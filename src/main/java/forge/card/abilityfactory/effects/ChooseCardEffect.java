@@ -5,9 +5,9 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardUtil;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.card.CardType;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -15,6 +15,7 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.Aggregates;
 
 public class ChooseCardEffect extends SpellEffect {
     @Override
@@ -55,7 +56,7 @@ public class ChooseCardEffect extends SpellEffect {
 
         if (sa.hasParam("SunderingTitan")) {
             final List<Card> land = Singletons.getModel().getGame().getLandsInPlay();
-            final ArrayList<String> basic = CardUtil.getBasicTypes();
+            final ArrayList<String> basic = CardType.getBasicTypes();
 
             for (final String type : basic) {
                 final List<Card> cl = CardLists.getType(land, type);
@@ -79,7 +80,7 @@ public class ChooseCardEffect extends SpellEffect {
                         final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
                         Card o;
                         if (sa.hasParam("AtRandom")) {
-                            o = CardUtil.getRandom(choices);
+                            o = Aggregates.random(choices);
                         } else if (sa.hasParam("Mandatory")) {
                             o = GuiChoose.one(choiceTitle, choices);
                         } else {

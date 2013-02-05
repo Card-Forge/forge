@@ -62,7 +62,6 @@ import forge.game.event.LifeLossEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;
-import forge.game.phase.Combat;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -71,6 +70,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 /**
@@ -1768,7 +1768,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             final List<Card> list =
                     CardLists.getValidCards(this.getCardsIn(ZoneType.Hand), valid, sa.getSourceCard().getController(), sa.getSourceCard());
             if (list.size() != 0) {
-                final Card disc = CardUtil.getRandom(list);
+                final Card disc = Aggregates.random(list);
                 discarded.add(disc);
                 this.doDiscard(disc, sa);
             }
@@ -2774,8 +2774,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             player.clashMoveToTopOrBottom(pCard);
             return true;
         } else {
-            final int pCMC = CardUtil.getConvertedManaCost(pCard);
-            final int oCMC = CardUtil.getConvertedManaCost(oCard);
+            final int pCMC = pCard.getCMC();
+            final int oCMC = oCard.getCMC();
             reveal.append(player).append(" reveals: ").append(pCard.getName()).append(".  CMC = ").append(pCMC);
             reveal.append("\r\n");
             reveal.append(opponent).append(" reveals: ").append(oCard.getName()).append(".  CMC = ").append(oCMC);

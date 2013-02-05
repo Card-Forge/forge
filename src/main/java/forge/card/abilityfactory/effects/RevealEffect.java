@@ -5,13 +5,13 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.Aggregates;
 
 public class RevealEffect extends RevealEffectBase {
 
@@ -28,7 +28,7 @@ public class RevealEffect extends RevealEffectBase {
                 if (handChoices.size() > 0) {
                     final List<Card> revealed = new ArrayList<Card>();
                     if (sa.hasParam("Random")) {
-                        revealed.add(CardUtil.getRandom(handChoices));
+                        revealed.add(Aggregates.random(handChoices));
                         GuiChoose.oneOrNone("Revealed card(s)", revealed);
                     } else {
                         List<Card> valid = new ArrayList<Card>(handChoices);

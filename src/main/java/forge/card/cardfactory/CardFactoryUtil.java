@@ -45,6 +45,7 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardCharacteristics;
+import forge.card.CardType;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.CommonDrawback;
@@ -2461,9 +2462,9 @@ public class CardFactoryUtil {
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
             if (sq[0].contains("Equipped") && c.isEquipping()) {
-                return CardFactoryUtil.doXMath(CardUtil.getConvertedManaCost(c.getEquipping().get(0)), m, c);
+                return CardFactoryUtil.doXMath(c.getEquipping().get(0).getCMC(), m, c);
             } else {
-                return CardFactoryUtil.doXMath(CardUtil.getConvertedManaCost(c), m, c);
+                return CardFactoryUtil.doXMath(c.getCMC(), m, c);
             }
         }
         // Count$SumCMC_valid
@@ -3092,7 +3093,7 @@ public class CardFactoryUtil {
             final ArrayList<String> typeList = c.getType();
 
             for (final String var : typeList) {
-                if (CardUtil.isACreatureType(var)) {
+                if (CardType.isACreatureType(var)) {
                     if (!map.containsKey(var)) {
                         map.put(var, 1);
                     } else {

@@ -22,11 +22,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import org.apache.commons.lang3.StringUtils;
+import java.util.Set;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardCharacteristics;
 import forge.card.EditionInfo;
@@ -41,7 +39,6 @@ import forge.gui.GuiDisplayUtil;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.util.MyRandom;
 
 
 /**
@@ -53,35 +50,11 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public final class CardUtil {
-    /** Constant <code>RANDOM</code>. */
-    public static final Random RANDOM = MyRandom.getRandom();
-
     /**
      * Do not instantiate.
      */
     private CardUtil() {
         // This space intentionally left blank.
-    }
-
-    /**
-     * <p>
-     * getRandom.
-     * </p>
-     * 
-     * @param o
-     *            an array of {@link forge.Card} objects.
-     * @return a {@link forge.Card} object.
-     */
-    public static <T> T getRandom(final List<T> o) {
-        if (o == null) {
-            throw new IllegalArgumentException("CardUtil : getRandom(T) recieved null instead of array.");
-        }
-        int len = o.size();
-        switch(len) {
-            case 0: throw new IllegalArgumentException("CardUtil : getRandom(T) recieved an empty array.");
-            case 1: return o.get(0);
-            default: return o.get(CardUtil.RANDOM.nextInt(len));
-        }
     }
 
     // returns "G", longColor is Constant.Color.Green and the like
@@ -123,188 +96,6 @@ public final class CardUtil {
         return c.determineColor().toStringList();
     }
 
-
-    // probably should put this somewhere else, but not sure where
-    /**
-     * <p>
-     * getConvertedManaCost.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a int.
-     */
-    public static int getConvertedManaCost(final Card c) {
-        if (c.isToken() && !c.isCopiedToken()) {
-            return 0;
-        }
-
-        int xPaid = 0;
-
-        // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
-        if (Singletons.getModel().getGame().getCardsIn(ZoneType.Stack).contains(c) && c.getManaCost() != null) {
-            xPaid = c.getXManaCostPaid() * c.getManaCost().countX();
-        }
-        return c.getManaCost().getCMC() + xPaid;
-    }
-
-    /**
-     * <p>
-     * isACardType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public static boolean isACardType(final String cardType) {
-        return CardUtil.getAllCardTypes().contains(cardType);
-    }
-
-    /**
-     * <p>
-     * getAllCardTypes.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<String> getAllCardTypes() {
-        final ArrayList<String> types = new ArrayList<String>();
-
-        // types.addAll(getCardTypes());
-        types.addAll(Constant.CardTypes.CARD_TYPES);
-
-        // not currently used by Forge
-        types.add("Plane");
-        types.add("Scheme");
-        types.add("Vanguard");
-
-        return types;
-    }
-
-
-    /**
-     * <p>
-     * getBasicTypes.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     * @since 1.1.3
-     */
-    public static ArrayList<String> getBasicTypes() {
-        final ArrayList<String> types = new ArrayList<String>();
-
-        types.addAll(Constant.CardTypes.BASIC_TYPES);
-
-        return types;
-    }
-
-    /**
-     * Gets the land types.
-     * 
-     * @return the land types
-     */
-    public static ArrayList<String> getLandTypes() {
-        final ArrayList<String> types = new ArrayList<String>();
-
-        types.addAll(Constant.CardTypes.BASIC_TYPES);
-        types.addAll(Constant.CardTypes.LAND_TYPES);
-
-        return types;
-    }
-
-    /**
-     * <p>
-     * getCreatureTypes.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     * @since 1.1.6
-     */
-    public static ArrayList<String> getCreatureTypes() {
-        final ArrayList<String> types = new ArrayList<String>();
-
-        types.addAll(Constant.CardTypes.CREATURE_TYPES);
-
-        return types;
-    }
-
-    /**
-     * <p>
-     * isASuperType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-
-    public static boolean isASuperType(final String cardType) {
-        return (Constant.CardTypes.SUPER_TYPES.contains(cardType));
-    }
-
-    /**
-     * <p>
-     * isASubType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public static boolean isASubType(final String cardType) {
-        return (!CardUtil.isASuperType(cardType) && !CardUtil.isACardType(cardType));
-    }
-
-    /**
-     * <p>
-     * isACreatureType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public static boolean isACreatureType(final String cardType) {
-        return (Constant.CardTypes.CREATURE_TYPES.contains(cardType));
-    }
-
-    /**
-     * <p>
-     * isALandType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public static boolean isALandType(final String cardType) {
-        return (Constant.CardTypes.LAND_TYPES.contains(cardType));
-    }
-
-    /**
-     * Checks if is a planeswalker type.
-     * 
-     * @param cardType
-     *            the card type
-     * @return true, if is a planeswalker type
-     */
-    public static boolean isAPlaneswalkerType(final String cardType) {
-        return (Constant.CardTypes.WALKER_TYPES.contains(cardType));
-    }
-
-    /**
-     * <p>
-     * isABasicLandType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public static boolean isABasicLandType(final String cardType) {
-        return (Constant.CardTypes.BASIC_TYPES.contains(cardType));
-    }
 
     // this function checks, if duplicates of a keyword are not necessary (like
     // flying, trample, etc.)
@@ -372,19 +163,15 @@ public final class CardUtil {
         final boolean token = card.isToken() && !card.isCopiedToken();
 
         final String set = card.getCurSetCode();
-        final Predicate<EditionInfo> findSetInfo = new Predicate<EditionInfo>() {
-            @Override
-            public boolean apply(final EditionInfo subject) {
-                return subject.getCode().equals(set);
-            }
-        };
         EditionInfo neededSet = null;
-        if (!card.getSets().isEmpty()) {
-            neededSet = Iterables.find(card.getSets(), findSetInfo);
+        for(EditionInfo e : card.getSets()) {
+            if ( e.getCode().equals(set) ) {
+                neededSet = e;
+                break;
+            }
         }
         final int cntPictures = neededSet == null ? 1 : neededSet.getPicCount();
-        return CardUtil
-                .buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
+        return CardUtil.buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
     }
 
     /**
@@ -490,37 +277,6 @@ public final class CardUtil {
             }
         }
         return colorDesc;
-    }
-
-    /**
-     * Compute the canonicalized ASCII form of a card name.
-     * 
-     * @param cardName
-     *            the name to transform (but not side effect)
-     * 
-     * @return the name in ASCII characters
-     */
-    public static String canonicalizeCardName(final String cardName) {
-        String result = cardName;
-        result = result.replace("\u00ae", "(R)"); // Ultimate Nightmare ...
-        result = result.replace("\u00c6", "AE");
-        result = result.replace("\u00e0", "a");
-        result = result.replace("\u00e1", "a");
-        result = result.replace("\u00e2", "a");
-        result = result.replace("\u00e9", "e");
-        result = result.replace("\u00ed", "i");
-        result = result.replace("\u00f6", "o");
-        result = result.replace("\u00fa", "u");
-        result = result.replace("\u00fb", "u");
-        result = result.replace("\u2012", "-");
-        result = result.replace("\u2013", "-");
-        result = result.replace("\u2014", "-");
-        result = result.replace("\u2015", "-");
-        result = result.replace("\u2018", "'");
-        result = result.replace("\u2019", "'");
-        result = result.replace("\u221e", "Infinity"); // Mox Lo...
-
-        return result;
     }
 
     /**
@@ -722,22 +478,6 @@ public final class CardUtil {
         return ret;
     }
 
-    private static List<String> getColorsOfCards(final int maxChoices, final List<Card> cards, final List<String> colors) {
-        for (final Card card : cards) {
-            // For each card, go through all the colors and if the card is that
-            // color, add
-            for (final String col : Constant.Color.ONLY_COLORS) {
-                if (card.isColor(col) && !colors.contains(col)) {
-                    colors.add(col);
-                    if (colors.size() == maxChoices) {
-                        break;
-                    }
-                }
-            }
-        }
-        return colors;
-    }
-
     // add Colors and
     /**
      * <p>
@@ -754,8 +494,8 @@ public final class CardUtil {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static List<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
-            List<String> colors, final List<Card> parents) {
+    public static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
+            Set<String> colors, final List<Card> parents) {
         // Here's the problem with reflectable Mana. If more than one is out,
         // they need to Reflect each other,
         // so we basically need to have a recursive list that send the parents
@@ -800,16 +540,26 @@ public final class CardUtil {
         }
 
         if (reflectProperty.equals("Is")) { // Meteor Crater
-            colors = getColorsOfCards(maxChoices, cards, colors);
+            for (final Card card1 : cards) {
+                // For each card, go through all the colors and if the card is that color, add
+                for (final String col : Constant.Color.ONLY_COLORS) {
+                    if (card1.isColor(col)) {
+                        colors.add(col);
+                        if (colors.size() == maxChoices) {
+                            break;
+                        }
+                    }
+                }
+            }
         } else if (reflectProperty.equals("Produced")) {
             final String producedColors = (String) abMana.getTriggeringObject("Produced");
             for (final String col : Constant.Color.ONLY_COLORS) {
                 final String s = InputPayManaCostUtil.getShortColorString(col);
-                if (producedColors.contains(s) && !colors.contains(col)) {
+                if (producedColors.contains(s)) {
                     colors.add(col);
                 }
             }
-            if ((maxChoices == 6) && producedColors.contains("1") && !colors.contains(Constant.Color.COLORLESS)) {
+            if (maxChoices == 6 && producedColors.contains("1")) {
                 colors.add(Constant.Color.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
@@ -852,16 +602,16 @@ public final class CardUtil {
         return colors;
     }
 
-    public static List<String> canProduce(final int maxChoices, final AbilityManaPart ab,
-            final List<String> colors) {
+    public static Set<String> canProduce(final int maxChoices, final AbilityManaPart ab,
+            final Set<String> colors) {
         for (final String col : Constant.Color.ONLY_COLORS) {
             final String s = InputPayManaCostUtil.getShortColorString(col);
-            if (ab.canProduce(s) && !colors.contains(col)) {
+            if (ab.canProduce(s)) {
                 colors.add(col);
             }
         }
 
-        if ((maxChoices == 6) && ab.canProduce("1") && !colors.contains(Constant.Color.COLORLESS)) {
+        if (maxChoices == 6 && ab.canProduce("1")) {
             colors.add(Constant.Color.COLORLESS);
         }
 

@@ -1751,17 +1751,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * getCMC.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getCMC() {
-        return this.getCharacteristics().getManaCost().getCMC();
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>chosenPlayer</code>.
      * </p>
      * 
@@ -4074,16 +4063,16 @@ public class Card extends GameEntity implements Comparable<Card> {
                 // remove old types
                 for (int i = 0; i < newType.size(); i++) {
                     final String t = newType.get(i);
-                    if (ct.isRemoveSuperTypes() && CardUtil.isASuperType(t)) {
+                    if (ct.isRemoveSuperTypes() && forge.card.CardType.isASuperType(t)) {
                         removeTypes.add(t);
                     }
-                    if (ct.isRemoveCardTypes() && CardUtil.isACardType(t)) {
+                    if (ct.isRemoveCardTypes() && forge.card.CardType.isACardType(t)) {
                         removeTypes.add(t);
                     }
-                    if (ct.isRemoveSubTypes() && CardUtil.isASubType(t)) {
+                    if (ct.isRemoveSubTypes() && forge.card.CardType.isASubType(t)) {
                         removeTypes.add(t);
                     }
-                    if (ct.isRemoveCreatureTypes() && (CardUtil.isACreatureType(t) || t.equals("AllCreatureTypes"))) {
+                    if (ct.isRemoveCreatureTypes() && (forge.card.CardType.isACreatureType(t) || t.equals("AllCreatureTypes"))) {
                         removeTypes.add(t);
                     }
                 }
@@ -6143,7 +6132,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         type = this.toMixedCase(type);
 
         if (this.typeContains(type)
-                || ((this.isCreature() || this.isTribal()) && CardUtil.isACreatureType(type) && this
+                || ((this.isCreature() || this.isTribal()) && forge.card.CardType.isACreatureType(type) && this
                         .typeContains("AllCreatureTypes"))) {
             return true;
         }
@@ -6952,7 +6941,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 y = this.getNetDefense();
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
-                y = CardUtil.getConvertedManaCost(this);
+                y = getCMC();
             } else if (property.startsWith("totalPT")) {
                 rhs = property.substring(10);
                 y = this.getNetAttack() + this.getNetDefense();
@@ -7323,7 +7312,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (type.equals("AllCreatureTypes") && c1.hasACreatureType()) {
                 return true;
             }
-            if (CardUtil.isACreatureType(type) && c1.isType(type)) {
+            if (forge.card.CardType.isACreatureType(type) && c1.isType(type)) {
                 return true;
             }
         }
@@ -7342,7 +7331,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean sharesCardTypeWith(final Card c1) {
 
         for (final String type : this.getType()) {
-            if (CardUtil.isACardType(type) && c1.isType(type)) {
+            if (forge.card.CardType.isACardType(type) && c1.isType(type)) {
                 return true;
             }
         }
@@ -7377,7 +7366,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean hasACreatureType() {
         for (final String type : this.getType()) {
-            if (CardUtil.isACreatureType(type)) {
+            if (forge.card.CardType.isACreatureType(type)) {
                 return true;
             }
         }
@@ -9090,6 +9079,27 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     public boolean canBeShownTo(final Player viewer) {
         return !isFaceDown() || getController() == viewer;
+    }
+
+    /**
+     * <p>
+     * getConvertedManaCost.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public int getCMC() {
+        if (isToken() && !isCopiedToken()) {
+            return 0;
+        }
+    
+        int xPaid = 0;
+    
+        // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
+        if (Singletons.getModel().getGame().getCardsIn(ZoneType.Stack).contains(this) && getManaCost() != null) {
+            xPaid = getXManaCostPaid() * getManaCost().countX();
+        }
+        return getManaCost().getCMC() + xPaid;
     }
 
 } // end Card class

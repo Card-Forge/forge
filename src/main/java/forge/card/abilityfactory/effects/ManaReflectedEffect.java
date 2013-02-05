@@ -1,6 +1,8 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import forge.Card;
 import forge.CardUtil;
@@ -24,8 +26,7 @@ public class ManaReflectedEffect extends SpellEffect {
         AbilityManaPart ma = sa.getManaPart();
         sa.setUndoable(sa.isAbility() && sa.isUndoable());
 
-        final List<String> colors = CardUtil.getReflectableManaColors(sa, sa, new ArrayList<String>(),
-                new ArrayList<Card>());
+        final Collection<String> colors = CardUtil.getReflectableManaColors(sa, sa, new HashSet<String>(), new ArrayList<Card>());
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         for (final Player player : tgtPlayers) {
@@ -60,7 +61,7 @@ public class ManaReflectedEffect extends SpellEffect {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String generatedReflectedMana(final SpellAbility sa, final List<String> colors, final Player player) {
+    private static String generatedReflectedMana(final SpellAbility sa, final Collection<String> colors, final Player player) {
         // Calculate generated mana here for stack description and resolving
         final int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
 
@@ -69,7 +70,7 @@ public class ManaReflectedEffect extends SpellEffect {
         if (colors.size() == 0) {
             return "0";
         } else if (colors.size() == 1) {
-            baseMana = InputPayManaCostUtil.getShortColorString(colors.get(0));
+            baseMana = InputPayManaCostUtil.getShortColorString(colors.iterator().next());
         } else {
             if (player.isHuman()) {
                 final Object o = GuiChoose.oneOrNone("Select Mana to Produce", colors);
@@ -82,7 +83,7 @@ public class ManaReflectedEffect extends SpellEffect {
                 }
             } else {
                 // AI doesn't really have anything here yet
-                baseMana = InputPayManaCostUtil.getShortColorString(colors.get(0));
+                baseMana = InputPayManaCostUtil.getShortColorString(colors.iterator().next());
             }
         }
 

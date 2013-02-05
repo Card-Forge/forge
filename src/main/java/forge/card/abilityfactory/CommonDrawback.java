@@ -75,14 +75,8 @@ public class CommonDrawback extends AbilitySub {
 
         @Override
         public boolean chkAIDrawback(AIPlayer aiPlayer) {
-            if (!ai.chkAIDrawback(this, aiPlayer)) {
-                return false;
-            }
             final AbilitySub subAb = getSubAbility();
-            if (subAb != null && !subAb.chkAIDrawback(aiPlayer)) {
-                return false;
-            }
-            return true;
+            return ai.chkAIDrawback(this, aiPlayer) && (subAb == null || subAb.chkAIDrawback(aiPlayer));  
         }
 
         @Override

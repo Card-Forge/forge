@@ -8,7 +8,6 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.CardUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -24,6 +23,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.util.Aggregates;
 
 public class ChangeZoneEffect extends SpellEffect {
     @Override
@@ -637,7 +637,7 @@ public class ChangeZoneEffect extends SpellEffect {
 
             Object o;
             if (sa.hasParam("AtRandom")) {
-                o = CardUtil.getRandom(fetchList);
+                o = Aggregates.random(fetchList);
             } else if (sa.hasParam("Mandatory")) {
                 o = GuiChoose.one(selectPrompt, fetchList);
             } else if (sa.hasParam("Defined")) {

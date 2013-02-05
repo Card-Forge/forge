@@ -9,7 +9,6 @@ import forge.card.abilityfactory.effects.CharmEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.AIPlayer;
-import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class CharmAi extends SpellAiLogic {

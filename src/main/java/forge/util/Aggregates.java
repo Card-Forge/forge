@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import com.google.common.base.Function;
 
@@ -75,10 +76,23 @@ public class Aggregates {
      * @return the t
      */
     public static final <T> T random(final Iterable<T> source) {
+        Random rnd = MyRandom.getRandom(); 
+        if ( source instanceof List<?> )
+        {
+            List<T> src = (List<T>)source;
+            int len = src.size();
+            switch(len) {
+                case 0: return null;
+                case 1: return src.get(0);
+                default: return src.get(rnd.nextInt(len));
+            }
+
+        }
+        
         int n = 0;
         T candidate = null;
         for (final T item : source) {
-            if ((Math.random() * ++n) < 1) {
+            if ((rnd.nextDouble() * ++n) < 1) {
                 candidate = item;
             }
         }

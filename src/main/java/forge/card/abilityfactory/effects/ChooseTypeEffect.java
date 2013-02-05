@@ -6,9 +6,9 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
+import forge.card.CardType;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -63,7 +63,7 @@ public class ChooseTypeEffect extends SpellEffect {
                                 return;
                             }
                             final String choice = (String) o;
-                            if (CardUtil.isACardType(choice) && !invalidTypes.contains(choice)) {
+                            if (CardType.isACardType(choice) && !invalidTypes.contains(choice)) {
                                 valid = true;
                                 card.setChosenType(choice);
                             }
@@ -80,7 +80,7 @@ public class ChooseTypeEffect extends SpellEffect {
                     boolean valid = false;
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
-                            final ArrayList<String> validChoices = CardUtil.getCreatureTypes();
+                            final ArrayList<String> validChoices = CardType.getCreatureTypes();
                             for (final String s : invalidTypes) {
                                 validChoices.remove(s);
                             }
@@ -89,7 +89,7 @@ public class ChooseTypeEffect extends SpellEffect {
                                 return;
                             }
                             final String choice = (String) o;
-                            if (CardUtil.isACreatureType(choice) && !invalidTypes.contains(choice)) {
+                            if (CardType.isACreatureType(choice) && !invalidTypes.contains(choice)) {
                                 valid = true;
                                 card.setChosenType(choice);
                             }
@@ -107,7 +107,7 @@ public class ChooseTypeEffect extends SpellEffect {
                                 }
                                 if (logic.equals("MostProminentHumanControls")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(opp.getCardsIn(ZoneType.Battlefield));
-                                    if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
+                                    if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
                                         chosen = CardFactoryUtil.getMostProminentCreatureType(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), opp));
                                     }
                                 }
@@ -118,14 +118,14 @@ public class ChooseTypeEffect extends SpellEffect {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Graveyard));
                                 }
                             }
-                            if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
+                            if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
                                 chosen = "Sliver";
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
                             chosenType = chosen;
                         }
                         
-                        if (CardUtil.isACreatureType(chosenType) && !invalidTypes.contains(chosenType)) {
+                        if (CardType.isACreatureType(chosenType) && !invalidTypes.contains(chosenType)) {
                             valid = true;
                             card.setChosenType(chosenType);
                         }
@@ -134,11 +134,11 @@ public class ChooseTypeEffect extends SpellEffect {
                     boolean valid = false;
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
-                            final String choice = GuiChoose.one("Choose a basic land type", CardUtil.getBasicTypes());
+                            final String choice = GuiChoose.one("Choose a basic land type", CardType.getBasicTypes());
                             if (null == choice) {
                                 return;
                             }
-                            if (CardUtil.isABasicLandType(choice) && !invalidTypes.contains(choice)) {
+                            if (CardType.isABasicLandType(choice) && !invalidTypes.contains(choice)) {
                                 valid = true;
                                 card.setChosenType(choice);
                             }
@@ -153,7 +153,7 @@ public class ChooseTypeEffect extends SpellEffect {
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
                             final String choice = GuiChoose
-                                    .one("Choose a land type", CardUtil.getLandTypes());
+                                    .one("Choose a land type", CardType.getLandTypes());
                             if (null == choice) {
                                 return;
                             }

@@ -20,8 +20,6 @@ package forge.quest;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.item.InventoryItem;
-
 /**
  * <p>
  * QuestQuest class.

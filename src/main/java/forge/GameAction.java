@@ -29,6 +29,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.card.CardType;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
@@ -536,7 +537,7 @@ public class GameAction {
 
             @Override
             public void resolve() {
-                Singletons.getModel().getGame().getAction().moveToHand(recoverable);
+                GameAction.this.moveToHand(recoverable);
             }
 
             @Override
@@ -560,6 +561,7 @@ public class GameAction {
             @Override
             public void resolve() {
                 Player p = recoverable.getController();
+
                 if (p.isHuman()) {
                     GameActionUtil.payCostDuringAbilityResolve(p, abRecover, abRecover.getPayCosts(),
                             paidCommand, unpaidCommand, null, game);
@@ -567,7 +569,7 @@ public class GameAction {
                     if (ComputerUtilCost.canPayCost(abRecover, p)) {
                         ComputerUtil.playNoStack(p, abRecover, game);
                     } else {
-                        Singletons.getModel().getGame().getAction().exile(recoverable);
+                        GameAction.this.exile(recoverable);
                     }
                 }
             }
@@ -1213,7 +1215,7 @@ public class GameAction {
 
             final ArrayList<String> types = c.getType();
             for (final String type : types) {
-                if (!CardUtil.isAPlaneswalkerType(type)) {
+                if (!CardType.isAPlaneswalkerType(type)) {
                     continue;
                 }
 

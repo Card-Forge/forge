@@ -22,8 +22,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import forge.Card;
-import forge.CardUtil;
 import forge.Singletons;
+import forge.card.CardType;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -663,7 +663,7 @@ public class Target {
      */
     public final boolean canTgtCreature() {
         for (final String s : this.validTgts) {
-            if ((s.contains("Creature") || CardUtil.isACreatureType(s) || s.startsWith("Permanent"))
+            if ((s.contains("Creature") || CardType.isACreatureType(s) || s.startsWith("Permanent"))
                     && !s.contains("nonCreature")) {
                 return true;
             }

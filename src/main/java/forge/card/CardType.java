@@ -24,6 +24,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.Constant;
+
 /**
  * <p>
  * Immutable Card type. Can be build only from parsing a string.
@@ -353,5 +355,163 @@ public final class CardType implements Comparable<CardType> {
      */
     public boolean isPhenomenon() {
         return this.coreType.contains(CardCoreType.Phenomenon);
+    }
+
+    ///////// THIS ARRIVED FROM CardUtil
+    /**
+     * <p>
+     * isACardType.
+     * </p>
+     * 
+     * @param cardType
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public static boolean isACardType(final String cardType) {
+        return CardType.getAllCardTypes().contains(cardType);
+    }
+
+    /**
+     * <p>
+     * getAllCardTypes.
+     * </p>
+     * 
+     * @return a {@link java.util.ArrayList} object.
+     */
+    public static ArrayList<String> getAllCardTypes() {
+        final ArrayList<String> types = new ArrayList<String>();
+    
+        // types.addAll(getCardTypes());
+        types.addAll(Constant.CardTypes.CARD_TYPES);
+    
+        // not currently used by Forge
+        types.add("Plane");
+        types.add("Scheme");
+        types.add("Vanguard");
+    
+        return types;
+    }
+
+    /**
+     * <p>
+     * getBasicTypes.
+     * </p>
+     * 
+     * @return a {@link java.util.ArrayList} object.
+     * @since 1.1.3
+     */
+    public static ArrayList<String> getBasicTypes() {
+        final ArrayList<String> types = new ArrayList<String>();
+    
+        types.addAll(Constant.CardTypes.BASIC_TYPES);
+    
+        return types;
+    }
+
+    /**
+     * Gets the land types.
+     * 
+     * @return the land types
+     */
+    public static ArrayList<String> getLandTypes() {
+        final ArrayList<String> types = new ArrayList<String>();
+    
+        types.addAll(Constant.CardTypes.BASIC_TYPES);
+        types.addAll(Constant.CardTypes.LAND_TYPES);
+    
+        return types;
+    }
+
+    /**
+     * <p>
+     * getCreatureTypes.
+     * </p>
+     * 
+     * @return a {@link java.util.ArrayList} object.
+     * @since 1.1.6
+     */
+    public static ArrayList<String> getCreatureTypes() {
+        final ArrayList<String> types = new ArrayList<String>();
+    
+        types.addAll(Constant.CardTypes.CREATURE_TYPES);
+    
+        return types;
+    }
+
+    /**
+     * <p>
+     * isASuperType.
+     * </p>
+     * 
+     * @param cardType
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    
+    public static boolean isASuperType(final String cardType) {
+        return (Constant.CardTypes.SUPER_TYPES.contains(cardType));
+    }
+
+    /**
+     * <p>
+     * isASubType.
+     * </p>
+     * 
+     * @param cardType
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public static boolean isASubType(final String cardType) {
+        return (!CardType.isASuperType(cardType) && !CardType.isACardType(cardType));
+    }
+
+    /**
+     * <p>
+     * isACreatureType.
+     * </p>
+     * 
+     * @param cardType
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public static boolean isACreatureType(final String cardType) {
+        return (Constant.CardTypes.CREATURE_TYPES.contains(cardType));
+    }
+
+    /**
+     * <p>
+     * isALandType.
+     * </p>
+     * 
+     * @param cardType
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public static boolean isALandType(final String cardType) {
+        return (Constant.CardTypes.LAND_TYPES.contains(cardType));
+    }
+
+    /**
+     * Checks if is a planeswalker type.
+     * 
+     * @param cardType
+     *            the card type
+     * @return true, if is a planeswalker type
+     */
+    public static boolean isAPlaneswalkerType(final String cardType) {
+        return (Constant.CardTypes.WALKER_TYPES.contains(cardType));
+    }
+
+    /**
+     * <p>
+     * isABasicLandType.
+     * </p>
+     * 
+     * @param cardType
+     *            a {@link java.lang.String} object.
+     * @return a boolean.
+     */
+    public static boolean isABasicLandType(final String cardType) {
+        return (Constant.CardTypes.BASIC_TYPES.contains(cardType));
     }
 }

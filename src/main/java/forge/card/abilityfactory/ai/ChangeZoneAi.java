@@ -12,7 +12,6 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.CardUtil;
 import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
@@ -41,6 +40,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 public class ChangeZoneAi extends SpellAiLogic {
@@ -1129,7 +1129,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             // Improve the AI for fetching.
             Card c = null;
             if (sa.hasParam("AtRandom")) {
-                c = CardUtil.getRandom(fetchList);
+                c = Aggregates.random(fetchList);
             } else if (defined) {
                 c = fetchList.get(0);
             } else {

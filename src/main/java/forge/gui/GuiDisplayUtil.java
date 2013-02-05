@@ -44,6 +44,7 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.CounterType;
 import forge.Singletons;
+import forge.card.CardType;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
@@ -170,13 +171,13 @@ public final class GuiDisplayUtil {
             if (allCreatureTypes && t.equals("AllCreatureTypes")) {
                 continue;
             }
-            if (CardUtil.isASuperType(t) && !superTypes.contains(t)) {
+            if (CardType.isASuperType(t) && !superTypes.contains(t)) {
                 superTypes.add(t);
             }
-            if (CardUtil.isACardType(t) && !cardTypes.contains(t)) {
+            if (CardType.isACardType(t) && !cardTypes.contains(t)) {
                 cardTypes.add(t);
             }
-            if (CardUtil.isASubType(t) && !subTypes.contains(t) && (!allCreatureTypes || !CardUtil.isACreatureType(t))) {
+            if (CardType.isASubType(t) && !subTypes.contains(t) && (!allCreatureTypes || !CardType.isACreatureType(t))) {
                 subTypes.add(t);
             }
         }

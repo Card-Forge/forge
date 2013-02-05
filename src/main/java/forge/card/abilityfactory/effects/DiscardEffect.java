@@ -8,7 +8,6 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -18,6 +17,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.util.Aggregates;
 
 public class DiscardEffect extends RevealEffectBase {
     @Override
@@ -138,7 +138,7 @@ public class DiscardEffect extends RevealEffectBase {
                 CardLists.sortCMC(goodChoices);
                 dChoices.add(goodChoices.get(0));
 
-                final Card dC = CardUtil.getRandom(goodChoices);
+                final Card dC = Aggregates.random(goodChoices);
                 dPChHand.remove(dC);
 
                 if (isReveal) {

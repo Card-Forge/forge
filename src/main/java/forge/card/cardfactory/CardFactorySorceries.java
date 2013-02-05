@@ -35,10 +35,10 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
-import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
+import forge.card.CardType;
 import forge.card.SpellManaCost;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostParser;
@@ -56,6 +56,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 
+import forge.util.Aggregates;
 import forge.view.ButtonUtil;
 
 /**
@@ -115,7 +116,7 @@ public class CardFactorySorceries {
                             if (choice != null) {
                                 pile1.add(choice);
                                 cards.remove(choice);
-                                pile1CMC = pile1CMC + CardUtil.getConvertedManaCost(choice);
+                                pile1CMC = pile1CMC + choice.getCMC();
                             } else {
                                 stop = true;
                             }
@@ -124,7 +125,7 @@ public class CardFactorySorceries {
                     for (int i = 0; i < count; i++) {
                         if (!pile1.contains(exiled.get(i))) {
                             pile2.add(exiled.get(i));
-                            pile2CMC = pile2CMC + CardUtil.getConvertedManaCost(exiled.get(i));
+                            pile2CMC = pile2CMC + exiled.get(i).getCMC();
                         }
                     }
                     final StringBuilder sb = new StringBuilder();
@@ -186,7 +187,7 @@ public class CardFactorySorceries {
                     pile1.add(biggest);
                     cards.remove(biggest);
                     if (cards.size() > 2) {
-                        final Card random = CardUtil.getRandom(cards);
+                        final Card random = Aggregates.random(cards);
                         pile1.add(random);
                     }
                     for (int i = 0; i < count; i++) {
@@ -574,7 +575,7 @@ public class CardFactorySorceries {
                         final List<Card> aiGrave = p.getCardsIn(ZoneType.Graveyard);
                         for (final Card c : Iterables.filter(aiGrave, CardPredicates.Presets.CREATURES)) {
                             for (final String type : c.getType()) {
-                                if (CardUtil.isACreatureType(type)) {
+                                if (CardType.isACreatureType(type)) {
                                     Integer oldVal = countInGraveyard.get(type);
                                     countInGraveyard.put(type, 1 + (oldVal != null ? oldVal : 0));
                                  }
@@ -1116,7 +1117,7 @@ public class CardFactorySorceries {
                 final Object toSac = GuiChoose.oneOrNone("Sacrifice an artifact", arts);
                 if (toSac != null) {
                     final Card c = (Card) toSac;
-                    baseCMC = CardUtil.getConvertedManaCost(c);
+                    baseCMC = c.getCMC();
                     Singletons.getModel().getGame().getAction().sacrifice(c, this);
                 } else {
                     return;
@@ -1133,7 +1134,7 @@ public class CardFactorySorceries {
                     return;
                 }
 
-                final int newCMC = CardUtil.getConvertedManaCost(newArtifact[0]);
+                final int newCMC = newArtifact[0].getCMC();
 
                 // if <= baseCMC, put it onto the battlefield
                 if (newCMC <= baseCMC) {

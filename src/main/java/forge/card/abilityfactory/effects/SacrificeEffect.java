@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.CardUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -13,6 +12,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.Aggregates;
 
 public class SacrificeEffect extends SpellEffect {
 
@@ -207,7 +207,7 @@ public class SacrificeEffect extends SpellEffect {
             List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
             List<Card> list = AbilityFactory.filterListByType(battlefield, valid, sa);
             if (list.size() != 0) {
-                final Card sac = CardUtil.getRandom(list);
+                final Card sac = Aggregates.random(list);
                 if (destroy) {
                     if (Singletons.getModel().getGame().getAction().destroy(sac)) {
                         sacList.add(sac);

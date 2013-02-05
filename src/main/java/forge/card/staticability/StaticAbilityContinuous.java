@@ -29,6 +29,7 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.StaticEffect;
 import forge.StaticEffects;
+import forge.card.CardType;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
@@ -188,7 +189,7 @@ public class StaticAbilityContinuous {
                 final ArrayList<String> imprint = hostCard.getImprinted().get(0).getType();
                 ArrayList<String> imprinted = new ArrayList<String>();
                 for (String t : imprint) {
-                    if (CardUtil.isACreatureType(t) || t.equals("AllCreatureTypes")) {
+                    if (CardType.isACreatureType(t) || t.equals("AllCreatureTypes")) {
                         imprinted.add(t);
                     }
                 }
