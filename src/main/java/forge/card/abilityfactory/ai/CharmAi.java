@@ -33,7 +33,7 @@ public class CharmAi extends SpellAiLogic {
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    public static List<AbilitySub> chooseOptionsAi(final Player ai, boolean playNow, List<AbilitySub> choices, int num, int min) {
+    public static List<AbilitySub> chooseOptionsAi(final AIPlayer ai, boolean playNow, List<AbilitySub> choices, int num, int min) {
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
 
         for (int i = 0; i < num; i++) {
@@ -46,7 +46,7 @@ public class CharmAi extends SpellAiLogic {
                     playNow = true;
                     break;
                 }
-                if ((playNow || i < num - 1) && sub.doTrigger(false)) {
+                if ((playNow || i < num - 1) && sub.doTrigger(false, ai)) {
                     thisPick = (AbilitySub) sub;
                     choices.remove(sub);
                     break;

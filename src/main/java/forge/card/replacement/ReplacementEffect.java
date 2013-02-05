@@ -31,6 +31,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -67,9 +68,10 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * Ai should run.
      *
      * @param sa the sa
+     * @param ai 
      * @return true, if successful
      */
-    public final boolean aiShouldRun(final SpellAbility sa) {
+    public final boolean aiShouldRun(final SpellAbility sa, AIPlayer ai) {
         if (this.mapParams.containsKey("AICheckSVar")) {
             System.out.println("aiShouldRun?" + sa);
             final String svarToCheck = this.mapParams.get("AICheckSVar");
@@ -102,7 +104,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             if (Expressions.compare(left, comparator, compareTo)) {
                 return true;
             }
-        } else if (sa != null && sa.doTrigger(false)) {
+        } else if (sa != null && sa.doTrigger(false, ai)) {
             return true;
         }
 

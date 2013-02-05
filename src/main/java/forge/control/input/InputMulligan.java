@@ -33,6 +33,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -158,7 +159,7 @@ public class InputMulligan extends Input {
                                 final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
 
                                 // Is there a better way for the AI to decide this?
-                                if (effect.doTrigger(false)) {
+                                if (effect.doTrigger(false, (AIPlayer)p)) {
                                     GuiDialog.message("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
                                     ComputerUtil.playNoStack(p, effect, game);
                                 }

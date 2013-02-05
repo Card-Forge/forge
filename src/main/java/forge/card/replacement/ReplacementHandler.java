@@ -28,6 +28,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -222,7 +223,7 @@ public class ReplacementHandler {
                 }
             } else {
                 // AI-logic
-                if (!replacementEffect.aiShouldRun(effectSA)) {
+                if (!replacementEffect.aiShouldRun(effectSA, (AIPlayer)optDecider)) {
                     return ReplacementResult.NotReplaced;
                 }
             }

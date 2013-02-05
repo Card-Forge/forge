@@ -9,6 +9,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -64,7 +65,7 @@ public class PeekAndRevealEffect extends SpellEffect {
             if (doReveal && revealOptional) {
                 // If 
                 AbilitySub subAb = sa.getSubAbility();
-                doReveal = subAb != null && subAb.chkAIDrawback();
+                doReveal = subAb != null && subAb.chkAIDrawback((AIPlayer)peekingPlayer);
             }
         }
         

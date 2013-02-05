@@ -76,6 +76,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.event.TokenCreatedEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
@@ -3733,7 +3734,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (!SpellPermanent.checkETBEffects(card, this.getActivatingPlayer())) {
+                    if (!SpellPermanent.checkETBEffects(card, (AIPlayer) this.getActivatingPlayer())) {
                         return false;
                     }
                     return super.canPlayAI();

@@ -20,6 +20,7 @@ import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
 
@@ -150,8 +151,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public boolean doTrigger(final boolean mandatory) {
-        return sa.doTrigger(mandatory);
+    public boolean doTrigger(final boolean mandatory, AIPlayer ai) {
+        return sa.doTrigger(mandatory, ai);
     }
 
     @Override
@@ -497,7 +498,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                     tgts = new ArrayList<Object>(sa.getTarget().getTargetChoices().getTargets());
                 }
                 // This isn't quite right, but better than canPlayAI
-                if (!sa.doTrigger(this.isMandatory())) {
+                if (!sa.doTrigger(this.isMandatory(), (AIPlayer)decider)) {
                     return;
                 }
                 if (sa.getTarget() != null && sa.getTarget().getTargetChoices() != null) {

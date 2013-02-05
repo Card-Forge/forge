@@ -18,6 +18,7 @@
 package forge.card.spellability;
 
 import forge.Card;
+import forge.game.player.AIPlayer;
 
 /**
  * <p>
@@ -59,16 +60,17 @@ public abstract class AbilitySub extends SpellAbility implements java.io.Seriali
      * <p>
      * chkAI_Drawback.
      * </p>
+     * @param ai TODO
      * 
      * @return a boolean.
      */
-    public abstract boolean chkAIDrawback();
+    public abstract boolean chkAIDrawback(AIPlayer ai);
 
     public abstract AbilitySub getCopy();
 
     /** {@inheritDoc} */
     @Override
-    public abstract boolean doTrigger(boolean mandatory);
+    public abstract boolean doTrigger(boolean mandatory, AIPlayer ai);
 
     /**
      * <p>

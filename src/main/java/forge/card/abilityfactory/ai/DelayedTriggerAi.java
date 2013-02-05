@@ -16,7 +16,7 @@ public class DelayedTriggerAi extends SpellAiLogic {
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
-            return ((AbilitySub) trigsa).chkAIDrawback();
+            return ((AbilitySub) trigsa).chkAIDrawback(ai);
         } else {
             return trigsa.canPlayAI();
         }
@@ -29,9 +29,9 @@ public class DelayedTriggerAi extends SpellAiLogic {
         trigsa.setActivatingPlayer(ai);
 
         if (!sa.hasParam("OptionalDecider")) {
-            return trigsa.doTrigger(true);
+            return trigsa.doTrigger(true, ai);
         } else {
-            return trigsa.doTrigger(!sa.getParam("OptionalDecider").equals("You"));
+            return trigsa.doTrigger(!sa.getParam("OptionalDecider").equals("You"), ai);
         }
     }
 

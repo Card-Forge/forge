@@ -160,7 +160,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean hiddenOriginCanPlayAI(final Player ai, final SpellAbility sa) {
+    private static boolean hiddenOriginCanPlayAI(final AIPlayer ai, final SpellAbility sa) {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
         final Cost abCost = sa.getPayCosts();
@@ -296,7 +296,7 @@ public class ChangeZoneAi extends SpellAiLogic {
 
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
+            chance &= subAb.chkAIDrawback(ai);
         }
 
         return chance;
@@ -530,7 +530,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
+    private static boolean knownOriginCanPlayAI(final AIPlayer ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -630,7 +630,7 @@ public class ChangeZoneAi extends SpellAiLogic {
 
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
+            chance &= subAb.chkAIDrawback(ai);
         }
 
         return (chance);
@@ -647,7 +647,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean knownOriginPlayDrawbackAI(final Player aiPlayer, final SpellAbility sa) {
+    private static boolean knownOriginPlayDrawbackAI(final AIPlayer aiPlayer, final SpellAbility sa) {
         if (sa.getTarget() == null) {
             return true;
         }
@@ -668,7 +668,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean isPreferredTarget(final Player ai, final SpellAbility sa,
+    private static boolean isPreferredTarget(final AIPlayer ai, final SpellAbility sa,
             final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
@@ -1027,7 +1027,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa,
+    private static boolean knownOriginTriggerAI(final AIPlayer ai, final SpellAbility sa,
             final boolean mandatory) {
 
         if (sa.getTarget() == null) {

@@ -34,6 +34,7 @@ import forge.card.abilityfactory.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.control.input.Input;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
 //only SpellAbility can go on the stack
@@ -220,9 +221,10 @@ public abstract class SpellAbility implements ISpellAbility {
      * 
      * @param mandatory
      *            a boolean.
+     * @param ai TODO
      * @return a boolean.
      */
-    public boolean doTrigger(final boolean mandatory) {
+    public boolean doTrigger(final boolean mandatory, AIPlayer ai) {
         return false;
     }
 

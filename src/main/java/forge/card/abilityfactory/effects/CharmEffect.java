@@ -8,6 +8,7 @@ import forge.card.abilityfactory.SpellEffect;
 import forge.card.abilityfactory.ai.CharmAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -70,7 +71,7 @@ public class CharmEffect extends SpellEffect {
                 chosen.add(a);
             }
         } else {
-            chosen = CharmAi.chooseOptionsAi(activator, sa.isTrigger(), choices, num, min);
+            chosen = CharmAi.chooseOptionsAi((AIPlayer)activator, sa.isTrigger(), choices, num, min);
         }
 
         chainAbilities(sa, chosen);

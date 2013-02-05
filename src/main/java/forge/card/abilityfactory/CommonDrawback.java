@@ -74,20 +74,20 @@ public class CommonDrawback extends AbilitySub {
         }
 
         @Override
-        public boolean chkAIDrawback() {
-            if (!ai.chkAIDrawback(this, (AIPlayer)getActivatingPlayer())) {
+        public boolean chkAIDrawback(AIPlayer aiPlayer) {
+            if (!ai.chkAIDrawback(this, aiPlayer)) {
                 return false;
             }
             final AbilitySub subAb = getSubAbility();
-            if (subAb != null && !subAb.chkAIDrawback()) {
+            if (subAb != null && !subAb.chkAIDrawback(aiPlayer)) {
                 return false;
             }
             return true;
         }
 
         @Override
-        public boolean doTrigger(final boolean mandatory) {
-            return ai.doTriggerAI((AIPlayer)getActivatingPlayer(), this, mandatory);
+        public boolean doTrigger(final boolean mandatory, AIPlayer aiPlayer) {
+            return ai.doTriggerAI(aiPlayer, this, mandatory);
         }
     }
 

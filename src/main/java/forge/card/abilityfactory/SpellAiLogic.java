@@ -10,7 +10,7 @@ public abstract class SpellAiLogic {
 
     public final boolean canPlayAIWithSubs(final AIPlayer aiPlayer, final SpellAbility sa) {
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback()) {
+        if (subAb != null && !subAb.chkAIDrawback(aiPlayer)) {
             return false;
         }
         return canPlayAI(aiPlayer, sa);
@@ -32,7 +32,7 @@ public abstract class SpellAiLogic {
             return false;
         }
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback() && !mandatory) {
+        if (subAb != null && !subAb.chkAIDrawback(aiPlayer) && !mandatory) {
             return false;
         }
         return true;

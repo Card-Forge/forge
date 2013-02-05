@@ -2542,7 +2542,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (property.equals("attackedBySourceThisCombat")) {
-            if (!this.equals(Singletons.getModel().getGame().getCombat().getDefenderPlayerByAttacker(source))) {
+            if (!this.equals(game.getCombat().getDefenderPlayerByAttacker(source))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {

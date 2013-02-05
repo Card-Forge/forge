@@ -38,6 +38,7 @@ import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 //import forge.util.TextUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -545,7 +546,7 @@ public class TriggerHandler {
             if (wrapperAbility.getActivatingPlayer().isHuman()) {
                 game.getAction().playSpellAbilityNoStack(wrapperAbility, false);
             } else {
-                wrapperAbility.doTrigger(isMandatory);
+                wrapperAbility.doTrigger(isMandatory, (AIPlayer)wrapperAbility.getActivatingPlayer());
                 ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
             }
         } else {

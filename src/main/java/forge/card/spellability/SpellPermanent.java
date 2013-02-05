@@ -45,6 +45,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
@@ -326,7 +327,7 @@ public class SpellPermanent extends Spell {
         if (mandatory) {
             return true;
         }
-        final Player ai = getActivatingPlayer();
+        final AIPlayer ai = (AIPlayer) getActivatingPlayer();
         final Card card = this.getSourceCard();
         SpellManaCost mana = this.getPayCosts().getTotalMana();
         final Cost cost = this.getPayCosts();
@@ -407,11 +408,11 @@ public class SpellPermanent extends Spell {
         return checkETBEffects(card, sa, api, null);
     }
 
-    public static boolean checkETBEffects(final Card card, final Player ai) {
+    public static boolean checkETBEffects(final Card card, final AIPlayer ai) {
         return checkETBEffects(card, null, null, ai);
     }
 
-    private static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final Player ai) {
+    private static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final AIPlayer ai) {
         boolean rightapi = false;
 
         if (card.isCreature()
@@ -501,7 +502,7 @@ public class SpellPermanent extends Spell {
             // Run non-mandatory trigger.
             // These checks only work if the Executing SpellAbility is an
             // Ability_Sub.
-            if ((exSA instanceof AbilitySub) && !exSA.doTrigger(false)) {
+            if ((exSA instanceof AbilitySub) && !exSA.doTrigger(false, ai)) {
                 // AI would not run this trigger if given the chance
 
                 // if trigger is mandatory, return false
@@ -583,7 +584,7 @@ public class SpellPermanent extends Spell {
             // ETBReplacement uses overriding abilities.
             // These checks only work if the Executing SpellAbility is an
             // Ability_Sub.
-            if (exSA != null && (exSA instanceof AbilitySub) && !exSA.doTrigger(false)) {
+            if (exSA != null && (exSA instanceof AbilitySub) && !exSA.doTrigger(false, ai)) {
                 return false;
             }
         }
