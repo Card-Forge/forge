@@ -62,7 +62,7 @@ public class CountersMoveAi extends SpellAiLogic {
                                                    // from
                                                    // permanents that cannot use
                                                    // them
-                    && (destCards.size() > 0) && destCards.get(0).getController().isComputer()
+                    && (destCards.size() > 0) && destCards.get(0).getController() == ai
                     && (!srcCards.get(0).isCreature() || srcCards.get(0).hasStartOfKeyword("CARDNAME can't attack"))) {
 
                 chance = true;

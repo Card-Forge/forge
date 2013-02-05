@@ -39,7 +39,8 @@ public class CounterAi extends SpellAiLogic {
         if (tgt != null) {
 
             final SpellAbility topSA = Singletons.getModel().getGame().getStack().peekAbility();
-            if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
+            if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer() == ai) { 
+                // might as well check for player's friendliness
                 return false;
             }
             if (sa.hasParam("AITgts") && (topSA.getSourceCard() == null
@@ -113,7 +114,7 @@ public class CounterAi extends SpellAiLogic {
                 return false;
             }
             final SpellAbility topSA = Singletons.getModel().getGame().getStack().peekAbility();
-            if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
+            if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer() == ai) {
                 return false;
             }
 

@@ -26,7 +26,7 @@ public class ChooseTypeAi extends SpellAiLogic {
             sa.getTarget().addTarget(ai);
         } else {
             for (final Player p : AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa)) {
-                if (p.isHuman() && !mandatory) {
+                if (p.isHostileTo(ai) && !mandatory) {
                     return false;
                 }
             }

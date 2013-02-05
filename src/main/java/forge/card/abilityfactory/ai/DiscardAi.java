@@ -59,7 +59,7 @@ public class DiscardAi extends SpellAiLogic {
                     sa.getParam("Defined"), sa);
 
             if (players.size() == 1) {
-                if (players.get(0).isComputer()) {
+                if (players.get(0) == ai) {
                     // the ai should only be using something like this if he has
                     // few cards in hand,
                     // cards like this better have a good drawback to be in the

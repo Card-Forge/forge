@@ -26,9 +26,9 @@ public class TapAi extends TapAiBase {
         final PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
 
-        if (turn.isHuman() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (turn.isHostileTo(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Tap things down if it's Human's turn
-        } else if (turn.isComputer() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+        } else if (turn == ai && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // Tap creatures down if in combat -- handled in tapPrefTargeting().
         } else if (AbilityFactory.isSorcerySpeed(sa)) {
             // Cast it if it's a sorcery.

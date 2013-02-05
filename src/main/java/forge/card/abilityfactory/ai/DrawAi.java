@@ -98,7 +98,7 @@ public class DrawAi extends SpellAiLogic {
 
         if (tgt != null) {
             final ArrayList<Player> players = tgt.getTargetPlayers();
-            if ((players.size() > 0) && players.get(0).isHuman()) {
+            if ((players.size() > 0) && players.get(0).isHostileTo(ai)) {
                 return true;
             }
         }
@@ -210,7 +210,7 @@ public class DrawAi extends SpellAiLogic {
             }
 
             if (((computerHandSize + numCards) > computerMaxHandSize)
-                    && Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isComputer()) {
+                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)) {
                 if (xPaid) {
                     numCards = computerMaxHandSize - computerHandSize;
                     source.setSVar("PayX", Integer.toString(numCards));
@@ -248,7 +248,7 @@ public class DrawAi extends SpellAiLogic {
             }
 
             if ((computerHandSize + numCards > computerMaxHandSize)
-                    && Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isComputer()
+                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
                     && !sa.isTrigger()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT

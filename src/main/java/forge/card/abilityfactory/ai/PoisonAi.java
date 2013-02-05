@@ -80,7 +80,7 @@ public class PoisonAi extends SpellAiLogic {
         } else {
             final List<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : players) {
-                if (!mandatory && p.isComputer() && (p.getPoisonCounters() > p.getOpponent().getPoisonCounters())) {
+                if (!mandatory && p == ai && (p.getPoisonCounters() > p.getOpponent().getPoisonCounters())) {
                     return false;
                 }
             }

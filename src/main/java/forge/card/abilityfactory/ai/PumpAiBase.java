@@ -508,8 +508,8 @@ public abstract class PumpAiBase extends SpellAiLogic {
         else if ((attack < 0) && !list.isEmpty()
                 && !Singletons.getModel().getGame().getPhaseHandler().isPreventCombatDamageThisTurn()) {
             // spells that give -X/0
-            Player activePlayer = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-            if (activePlayer.isComputer()) {
+            boolean isMyTurn = Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai);
+            if (isMyTurn) {
                 if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
                     // TODO: Curse creatures that will block AI's creatures, if AI is going to attack.
                     list = new ArrayList<Card>();

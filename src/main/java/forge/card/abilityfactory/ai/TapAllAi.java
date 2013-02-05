@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
@@ -99,7 +100,7 @@ public class TapAllAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(final AIPlayer ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
 
         String valid = "";
@@ -128,19 +129,19 @@ public class TapAllAi extends SpellAiLogic {
         }
 
         if (validTappables.size() > 0) {
-            final List<Card> human = CardLists.filter(validTappables, new Predicate<Card>() {
+            final int human = Iterables.size(Iterables.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getController().isHuman();
+                    return c.getController().isHostileTo(ai);
                 }
-            });
-            final List<Card> compy = CardLists.filter(validTappables, new Predicate<Card>() {
+            }));
+            final int compy = Iterables.size(Iterables.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getController().isComputer();
+                    return !c.getController().isHostileTo(ai);
                 }
-            });
-            if (human.size() > compy.size()) {
+            }));
+            if (human > compy) {
                 return rr;
             }
         }

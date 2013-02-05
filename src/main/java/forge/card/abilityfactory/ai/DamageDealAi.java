@@ -162,7 +162,7 @@ public class DamageDealAi extends DamageAiBase {
         });
 
         Card targetCard;
-        if (pl.isHuman() && (killables.size() > 0)) {
+        if (pl.isHostileTo(ai) && (killables.size() > 0)) {
             targetCard = CardFactoryUtil.getBestCreatureAI(killables);
 
             return targetCard;
@@ -173,7 +173,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (hPlay.size() > 0) {
-            if (pl.isHuman()) {
+            if (pl.isHostileTo(ai)) {
                 targetCard = CardFactoryUtil.getBestCreatureAI(hPlay);
             } else {
                 targetCard = CardFactoryUtil.getWorstCreatureAI(hPlay);
@@ -196,11 +196,11 @@ public class DamageDealAi extends DamageAiBase {
      *            a int.
      * @return a boolean.
      */
-    private boolean damageTargetAI(final Player ai, final SpellAbility saMe, final int dmg) {
+    private boolean damageTargetAI(final AIPlayer ai, final SpellAbility saMe, final int dmg) {
         final Target tgt = saMe.getTarget();
 
         if (tgt == null) {
-            return this.damageChooseNontargeted(saMe, dmg);
+            return this.damageChooseNontargeted(ai, saMe, dmg);
         }
 
         return this.damageChoosingTargets(ai, saMe, tgt, dmg, false, false);
@@ -305,6 +305,7 @@ public class DamageDealAi extends DamageAiBase {
      * <p>
      * damageChooseNontargeted.
      * </p>
+     * @param ai 
      * 
      * @param saMe
      *            a {@link forge.card.spellability.SpellAbility} object.
@@ -312,7 +313,7 @@ public class DamageDealAi extends DamageAiBase {
      *            a int.
      * @return a boolean.
      */
-    private boolean damageChooseNontargeted(final SpellAbility saMe, final int dmg) {
+    private boolean damageChooseNontargeted(AIPlayer ai, final SpellAbility saMe, final int dmg) {
         // TODO: Improve circumstances where the Defined Damage is unwanted
         final ArrayList<Object> objects = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), saMe.getParam("Defined"), saMe);
 
@@ -322,11 +323,11 @@ public class DamageDealAi extends DamageAiBase {
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
                 final int restDamage = p.predictDamage(dmg, saMe.getSourceCard(), false);
-                if (p.isComputer() && p.canLoseLife() && ((restDamage + 3) >= p.getLife()) && (restDamage > 0)) {
+                if (p == ai && p.canLoseLife() && ((restDamage + 3) >= p.getLife()) && (restDamage > 0)) {
                     // from this spell will kill me
                     return false;
                 }
-                if (p.isHuman() && !p.canLoseLife()) {
+                if (p.isHostileTo(ai) && !p.canLoseLife()) {
                     return false;
                 }
             }
@@ -394,7 +395,7 @@ public class DamageDealAi extends DamageAiBase {
         final Target tgt = sa.getTarget();
         if (tgt == null) {
             // If it's not mandatory check a few things
-            if (!mandatory && !this.damageChooseNontargeted(sa, dmg)) {
+            if (!mandatory && !this.damageChooseNontargeted(ai, sa, dmg)) {
                 return false;
             }
         } else {

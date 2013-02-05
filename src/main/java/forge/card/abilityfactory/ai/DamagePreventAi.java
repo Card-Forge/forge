@@ -74,7 +74,7 @@ public class DamagePreventAi extends SpellAiLogic {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
                             if (!handler.isPlayerTurn(p)) {
-                                flag |= (p.isComputer() && ((ComputerUtilCombat.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat()) && sa
+                                flag |= (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat()) && sa
                                         .isAbility()) || ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())));
                             }
                         }

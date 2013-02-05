@@ -39,7 +39,7 @@ public class UntapAi extends SpellAiLogic {
 
         if (tgt == null) {
             final List<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
-            if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController().isComputer()) {
+            if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
                 return false;
             }
         } else {
@@ -62,7 +62,7 @@ public class UntapAi extends SpellAiLogic {
 
             // TODO: use Defined to determine, if this is an unfavorable result
             final List<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
-            if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController().isComputer()) {
+            if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
                 return false;
             }
 
