@@ -53,12 +53,57 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- sideboarding affects the next match correctly
+- use bulk operations for card moving where ever possible to avoid stale GUI updates
+- reverting unwanted changes from r19381 to core classes
+- fix background coloring not being displayed in deck editor card detail rarity label
+- add tooltip for rarity label
+- Fixed broken Shandalar decks.
+- add default editor preferences file so missing preferences will always have a default value
+- remove editor.preferences from repo -- it will get created as necessary
+- set better width and sorting defaults
+- wrap card catalog toggle filters when the tab is resized small
+- make current deck stats widgets wrappable
+- Converted inlined classes to nested
+- remove unused imports
+- cosmetic changes in chooses (i'm thinking of a good way to make that choices player-independent)
+- Moved check for card controller (used in CardDetailPanel and ImageCache) to card class - that's not perfect, but at least eliminates code duplication.
+- calls to AI-related methods require the player parameter to have AIPlayer type to enable calls to ai-specific methods (like acquiring aicontroller by aiplayer.getcontroller().getai() and performing something from it) without need to cast types)
+- replaced deprecated methods isHuman/isComputer with reference comparisons (to compare with acting player) and checks of player's hostility.
+- predictThreatenedObjects moved from AbilityFactory to ComputerUtil (for now, will find a more specific place later)
+- GameActionUtil.payCostDuringAbilityResolve method now demands player parameter (though it is always human player)
+- fix NPE in card detail when the card does not belong to any set (e.g. a token)
+- GameAction - extract method * 3
+- GameActionUtil - uses common GuiDialog.confirm
+- CardFactoryLands - converted inlined class to nested
+- ChangeZoneEffect - removed stringbuilder wrapper (as it was not used anyway)
+- replaced isComputer/isHuman where it was clear and possible
+- Fixed a bug with AddToughness.
+- Removed reminder text for suspend from Talon Gates. Description was too long for SA choice window so the second choice was hidden (on a 1280 wide display at least). We need to find a way to wrap text in the choice window when it would extend past the edge of the screen.
+- Fix last commit commiting WIP.
+- Another fix for AddToughness.
+- Fixed Verdant Haven.
+- Fixed Ogre Slumlord.
+- Sell lands down to 50 when selling all extras in the card shop
+- Converted Alpha Status to script
+- remove cards from one table after adding them to the other table so the displayed card stays consistent with the focused card
+- Made it possible to include special rewards like predefined cards or duplicate cards in Quest duels.
+* Some notes:
+*  Special rewards for normal duels should be extremely rare, mostly for very hard opponents, 1 special reward per opponent, and always a percentage chance of getting the special reward (preferably less than 50%) rather getting a guaranteed reward.
+*  In the interests of downward compatibility, it is possible to define the Card Reward either in the [quest] portion (like before) or the [metadata] portion of the dck file. (Duels do not have the [quest] portion but if the definition were simply moved from [quest] to [metadata], all current challenge files would have stopped working properly.)
+- Removed duplicate sharesCreatureTypeWith property from isValid
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
 
+
+
+Added the following Planes:
+
+Takenuma
+Talon Gates
 
 
 Added the following cards:
