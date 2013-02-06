@@ -1,0 +1,13 @@
+Name:Sedris, the Traitor King
+ManaCost:3 U B R
+Types:Legendary Creature Zombie Warrior
+Text:no text
+PT:5/5
+S:Mode$ Continuous | EffectZone$ Battlefield | AffectedZone$ Graveyard | Affected$ Creature.YouCtrl | AddAbility$ Unearth | AddSVar$ Unearthed | Description$ Each creature card in your graveyard has unearth 2 B. (2 B: Return the card to the battlefield. The creature gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+SVar:Unearth:AB$ ChangeZone | Cost$ 2 B | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True | ActivationZone$ Graveyard | SubAbility$ Unearthed | PrecostDesc$ Unearth | CostDesc$ 2 B | StackDescription$ Unearth: Return CARDNAME to the battlefield. | SpellDescription$ (2 B: Return CARDNAME to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+SVar:Unearthed:DB$ Pump | Defined$ Self | KW$ Haste & HIDDEN At the beginning of the end step, exile CARDNAME. & HIDDEN If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else. | Permanent$ True | StackDescription$ It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield.
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sedris_the_traitor_king.jpg
+SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/193.jpg
+Oracle:Each creature card in your graveyard has unearth {2}{B}. ({2}{B}: Return the card to the battlefield. The creature gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+End
