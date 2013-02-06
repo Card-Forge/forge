@@ -91,7 +91,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @param c
      */
     public void playFromSuspend(Card c) {
-        c.setSuspend(true);
+        c.setSuspendCast(true);
         game.getActionPlay().playCardWithoutManaCost(c, c.getOwner());
     }
 

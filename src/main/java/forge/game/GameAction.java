@@ -1306,6 +1306,9 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     private static Card addSuspendTriggers(final Card c) {
+        if (c.getSVar("HasteFromSuspend").equals("True")) {
+            return c;
+        }
         c.setSVar("HasteFromSuspend", "True");
 
         final Command intoPlay = new Command() {
