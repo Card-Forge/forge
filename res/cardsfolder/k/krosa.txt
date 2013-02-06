@@ -4,7 +4,7 @@ Types:Plane Dominaria
 Text:no text
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddPower$ 2 | AddPower$ 2 | Description$ All Creatures get +2/+2.
 T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, you may add W U B R G to your mana pool.
-A:AB$ Mana | Cost$ 0 | Produced$ W U B R G
+SVar:RolledChaos:AB$ Mana | Cost$ 0 | Produced$ W U B R G
 T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up.
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
