@@ -58,44 +58,6 @@ public class HumanPlayer extends Player {
         controller = new PlayerControllerHuman(game, this);
     }
 
-    // //////////////
-    // /
-    // / Methods to ease transition to Abstract Player class
-    // /
-    // /////////////
-
-    /**
-     * <p>
-     * isHuman.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    @Override
-    public final boolean isHuman() {
-        return true;
-    }
-
-    
-
-    /**
-     * <p>
-     * isComputer.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    @Override
-    public final boolean isComputer() {
-        return false;
-    }
-
-    // /////////////
-    // /
-    // / End transition methods
-    // /
-    // /////////////
-
     /**
      * <p>
      * dredge.
