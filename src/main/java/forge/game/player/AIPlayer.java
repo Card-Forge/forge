@@ -63,41 +63,6 @@ public class AIPlayer extends Player {
     }
     
 
-    // //////////////
-    // /
-    // / Methods to ease transition to Abstract Player class
-    // /
-    // /////////////
-    /**
-     * <p>
-     * isHuman.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    @Override
-    public final boolean isHuman() {
-        return false;
-    }
-
-
-    /**
-     * <p>
-     * isComputer.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    @Override
-    public final boolean isComputer() {
-        return true;
-    }
-
-    // /////////////
-    // /
-    // / End transition methods
-    // /
-    // /////////////
 
     // //////////////////////////////
     // /

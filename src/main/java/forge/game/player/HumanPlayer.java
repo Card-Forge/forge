@@ -28,6 +28,7 @@ import forge.game.GameType;
 import forge.game.GameState;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
 import forge.quest.QuestController;
 import forge.quest.bazaar.QuestItemType;
@@ -105,9 +106,8 @@ public class HumanPlayer extends Player {
     @Override
     public final boolean dredge() {
         boolean dredged = false;
-        final String[] choices = { "Yes", "No" };
-        final Object o = GuiChoose.one("Do you want to dredge?", choices);
-        if (o.equals("Yes")) {
+        final boolean wantDredge = GuiDialog.confirm(null, "Do you want to dredge?");
+        if (wantDredge) {
             final Card c = GuiChoose.one("Select card to dredge", this.getDredge());
             // rule 702.49a
             if (this.getDredgeNumber(c) <= getZone(ZoneType.Library).size()) {

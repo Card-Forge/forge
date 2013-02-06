@@ -54,11 +54,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * @param code2
      *            the code2
      */
-    public CardEdition(final int index, final String name, final String code, final String code2) {
-        this(index, name, code, code2, null);
-    }
-
-    public CardEdition(final int index, final String name, final String code, final String code2, final String alias0) {
+    private CardEdition(final int index, final String name, final String code, final String code2, final String alias0) {
         this.code = code;
         this.code2 = code2;
         this.index = index;
@@ -67,7 +63,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
 
     /** The Constant unknown. */
-    public static final CardEdition UNKNOWN = new CardEdition(-1, "Undefined", "???", "??");
+    public static final CardEdition UNKNOWN = new CardEdition(-1, "Undefined", "???", "??", null);
 
     /**
      * Gets the name.

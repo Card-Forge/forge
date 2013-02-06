@@ -195,9 +195,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Deprecated
-    public abstract boolean isHuman();
+    public boolean isHuman() { return getType() == PlayerType.HUMAN; }
     @Deprecated
-    public abstract boolean isComputer();
+    public boolean isComputer() { return getType() == PlayerType.COMPUTER; }
     public abstract PlayerType getType();
 
     public List<Card> getSchemeDeck() {
