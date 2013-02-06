@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -326,7 +328,7 @@ public final class BoosterUtils {
      */
     public static List<InventoryItem> generateCardRewardList(final String s) {
 
-        if (s == null || s.length() < 2) {
+        if (StringUtils.isBlank(s)) {
             return null;
         }
 
