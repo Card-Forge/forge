@@ -1,97 +1,97 @@
-Index:0|Code2:MBP|Code3:MBP|Name:Media Insert Promo|Alias:PRO
-Index:1|Code2:A|Code3:LEA|Name:Limited Edition Alpha
-Index:2|Code2:B|Code3:LEB|Name:Limited Edition Beta
-Index:3|Code2:U|Code3:2ED|Name:Unlimited Edition
-Index:4|Code2:AN|Code3:ARN|Name:Arabian Nights
-Index:5|Code2:AQ|Code3:ATQ|Name:Antiquities
-Index:6|Code2:R|Code3:3ED|Name:Revised Edition
-Index:7|Code2:LG|Code3:LEG|Name:Legends
-Index:8|Code2:DK|Code3:DRK|Name:The Dark
-Index:9|Code2:FE|Code3:FEM|Name:Fallen Empires
+Index:0|Code2:MBP|Code3:MBP|Type:Other|Name:Media Insert Promo|Alias:PRO
+Index:1|Code2:A|Code3:LEA|Type:Core|Name:Limited Edition Alpha
+Index:2|Code2:B|Code3:LEB|Type:Core|Name:Limited Edition Beta
+Index:3|Code2:U|Code3:2ED|Type:Core|Name:Unlimited Edition
+Index:4|Code2:AN|Code3:ARN|Type:Expansion|Name:Arabian Nights
+Index:5|Code2:AQ|Code3:ATQ|Type:Expansion|Name:Antiquities
+Index:6|Code2:R|Code3:3ED|Type:Core|Name:Revised Edition
+Index:7|Code2:LG|Code3:LEG|Type:Expansion|Name:Legends
+Index:8|Code2:DK|Code3:DRK|Type:Expansion|Name:The Dark
+Index:9|Code2:FE|Code3:FEM|Type:Expansion|Name:Fallen Empires
 
-Index:10|Code2:4E|Code3:4ED|Name:Fourth Edition
-Index:11|Code2:IA|Code3:ICE|Name:Ice Age
-Index:12|Code2:CH|Code3:CHR|Name:Chronicles
-Index:13|Code2:HL|Code3:HML|Name:Homelands
-Index:14|Code2:AL|Code3:ALL|Name:Alliances
-Index:15|Code2:MI|Code3:MIR|Name:Mirage
-Index:16|Code2:VI|Code3:VIS|Name:Visions
-Index:17|Code2:5E|Code3:5ED|Name:Fifth Edition
-Index:18|Code2:PT|Code3:POR|Name:Portal
-Index:19|Code2:WL|Code3:WTH|Name:Weatherlight
+Index:10|Code2:4E|Code3:4ED|Type:Core|Name:Fourth Edition
+Index:11|Code2:IA|Code3:ICE|Type:Expansion|Name:Ice Age
+Index:12|Code2:CH|Code3:CHR|Type:Reprint|Name:Chronicles
+Index:13|Code2:HL|Code3:HML|Type:Expansion|Name:Homelands
+Index:14|Code2:AL|Code3:ALL|Type:Expansion|Name:Alliances
+Index:15|Code2:MI|Code3:MIR|Type:Expansion|Name:Mirage
+Index:16|Code2:VI|Code3:VIS|Type:Expansion|Name:Visions
+Index:17|Code2:5E|Code3:5ED|Type:Core|Name:Fifth Edition
+Index:18|Code2:PT|Code3:POR|Type:Starter|Name:Portal
+Index:19|Code2:WL|Code3:WTH|Type:Expansion|Name:Weatherlight
 
-Index:20|Code2:TE|Code3:TMP|Name:Tempest
-Index:21|Code2:SH|Code3:STH|Name:Stronghold
-Index:22|Code2:EX|Code3:EXO|Name:Exodus
-Index:23|Code2:P2|Code3:PO2|Name:Portal Second Age|Alias:P02
-Index:24|Code2:US|Code3:USG|Name:Urza's Saga
-Index:25|Code2:UL|Code3:ULG|Name:Urza's Legacy
-Index:26|Code2:6E|Code3:6ED|Name:Classic (Sixth Edition)
-Index:27|Code2:UD|Code3:UDS|Name:Urza's Destiny
-Index:28|Code2:P3|Code3:PTK|Name:Portal Three Kingdoms
-Index:29|Code2:ST|Code3:S99|Name:Starter 1999
+Index:20|Code2:TE|Code3:TMP|Type:Expansion|Name:Tempest
+Index:21|Code2:SH|Code3:STH|Type:Expansion|Name:Stronghold
+Index:22|Code2:EX|Code3:EXO|Type:Expansion|Name:Exodus
+Index:23|Code2:P2|Code3:PO2|Type:Starter|Name:Portal Second Age|Alias:P02
+Index:24|Code2:US|Code3:USG|Type:Expansion|Name:Urza's Saga
+Index:25|Code2:UL|Code3:ULG|Type:Expansion|Name:Urza's Legacy
+Index:26|Code2:6E|Code3:6ED|Type:Core|Name:Classic (Sixth Edition)
+Index:27|Code2:UD|Code3:UDS|Type:Expansion|Name:Urza's Destiny
+Index:28|Code2:P3|Code3:PTK|Type:Starter|Name:Portal Three Kingdoms
+Index:29|Code2:ST|Code3:S99|Type:Starter|Name:Starter 1999
 
-Index:30|Code2:MM|Code3:MMQ|Name:Mercadian Masques
-Index:31|Code2:NE|Code3:NMS|Name:Nemesis|Alias:NEM
-Index:32|Code2:S2K|Code3:S00|Name:Starter 2000
-Index:33|Code2:PY|Code3:PCY|Name:Prophecy
-Index:34|Code2:IN|Code3:INV|Name:Invasion
-Index:35|Code2:PS|Code3:PLS|Name:Planeshift
-Index:36|Code2:7E|Code3:7ED|Name:Seventh Edition
-Index:37|Code2:AP|Code3:APC|Name:Apocalypse
-Index:38|Code2:OD|Code3:ODY|Name:Odyssey
-Index:39|Code2:TO|Code3:TOR|Name:Torment
+Index:30|Code2:MM|Code3:MMQ|Type:Expansion|Name:Mercadian Masques
+Index:31|Code2:NE|Code3:NMS|Type:Expansion|Name:Nemesis|Alias:NEM
+Index:32|Code2:S2K|Code3:S00|Type:Starter|Name:Starter 2000
+Index:33|Code2:PY|Code3:PCY|Type:Expansion|Name:Prophecy
+Index:34|Code2:IN|Code3:INV|Type:Expansion|Name:Invasion
+Index:35|Code2:PS|Code3:PLS|Type:Expansion|Name:Planeshift
+Index:36|Code2:7E|Code3:7ED|Type:Core|Name:Seventh Edition
+Index:37|Code2:AP|Code3:APC|Type:Expansion|Name:Apocalypse
+Index:38|Code2:OD|Code3:ODY|Type:Expansion|Name:Odyssey
+Index:39|Code2:TO|Code3:TOR|Type:Expansion|Name:Torment
 
-Index:40|Code2:JU|Code3:JUD|Name:Judgment
-Index:41|Code2:ON|Code3:ONS|Name:Onslaught
-Index:42|Code2:LE|Code3:LGN|Name:Legions
-Index:43|Code2:SC|Code3:SCG|Name:Scourge
-Index:44|Code2:8E|Code3:8ED|Name:Core Set - Eighth Edition
-Index:45|Code2:MR|Code3:MRD|Name:Mirrodin
-Index:46|Code2:DS|Code3:DST|Name:Darksteel
-Index:47|Code2:FD|Code3:5DN|Name:Fifth Dawn
-Index:48|Code2:CHK|Code3:CHK|Name:Champions of Kamigawa
-Index:49|Code2:BOK|Code3:BOK|Name:Betrayers of Kamigawa
+Index:40|Code2:JU|Code3:JUD|Type:Expansion|Name:Judgment
+Index:41|Code2:ON|Code3:ONS|Type:Expansion|Name:Onslaught
+Index:42|Code2:LE|Code3:LGN|Type:Expansion|Name:Legions
+Index:43|Code2:SC|Code3:SCG|Type:Expansion|Name:Scourge
+Index:44|Code2:8E|Code3:8ED|Type:Core|Name:Core Set - Eighth Edition
+Index:45|Code2:MR|Code3:MRD|Type:Expansion|Name:Mirrodin
+Index:46|Code2:DS|Code3:DST|Type:Expansion|Name:Darksteel
+Index:47|Code2:FD|Code3:5DN|Type:Expansion|Name:Fifth Dawn
+Index:48|Code2:CHK|Code3:CHK|Type:Expansion|Name:Champions of Kamigawa
+Index:49|Code2:BOK|Code3:BOK|Type:Expansion|Name:Betrayers of Kamigawa
 
-Index:50|Code2:SOK|Code3:SOK|Name:Saviors of Kamigawa
-Index:51|Code2:9E|Code3:9ED|Name:Core Set - Ninth Edition
-Index:52|Code2:RAV|Code3:RAV|Name:Ravnica: City of Guilds
-Index:53|Code2:GP|Code3:GPT|Name:Guildpact
-Index:54|Code2:DIS|Code3:DIS|Name:Dissension
-Index:55|Code2:CS|Code3:CSP|Name:Coldsnap
-Index:56|Code2:TSP|Code3:TSP|Name:Time Spiral
-Index:57|Code2:TSB|Code3:TSB|Name:Time Spiral Timeshifted
-Index:58|Code2:PLC|Code3:PLC|Name:Planar Chaos
-Index:59|Code2:FUT|Code3:FUT|Name:Future Sight
+Index:50|Code2:SOK|Code3:SOK|Type:Expansion|Name:Saviors of Kamigawa
+Index:51|Code2:9E|Code3:9ED|Type:Core|Name:Core Set - Ninth Edition
+Index:52|Code2:RAV|Code3:RAV|Type:Expansion|Name:Ravnica: City of Guilds
+Index:53|Code2:GP|Code3:GPT|Type:Expansion|Name:Guildpact
+Index:54|Code2:DIS|Code3:DIS|Type:Expansion|Name:Dissension
+Index:55|Code2:CS|Code3:CSP|Type:Expansion|Name:Coldsnap
+Index:56|Code2:TSP|Code3:TSP|Type:Expansion|Name:Time Spiral
+Index:57|Code2:TSB|Code3:TSB|Type:Expansion|Name:Time Spiral Timeshifted
+Index:58|Code2:PLC|Code3:PLC|Type:Expansion|Name:Planar Chaos
+Index:59|Code2:FUT|Code3:FUT|Type:Expansion|Name:Future Sight
 
-Index:60|Code2:10E|Code3:10E|Name:Core Set - Tenth Edition
-Index:61|Code2:LRW|Code3:LRW|Name:Lorwyn
-Index:62|Code2:MOR|Code3:MOR|Name:Morningtide
-Index:63|Code2:SHM|Code3:SHM|Name:Shadowmoor
-Index:64|Code2:EVE|Code3:EVE|Name:Eventide|Alias:EVT
-Index:65|Code2:ALA|Code3:ALA|Name:Shards of Alara
-Index:66|Code2:CFX|Code3:CFX|Name:Conflux|Alias:CON
-Index:67|Code2:ARB|Code3:ARB|Name:Alara Reborn
-Index:68|Code2:M10|Code3:M10|Name:Magic 2010
-Index:69|Code2:ZEN|Code3:ZEN|Name:Zendikar
+Index:60|Code2:10E|Code3:10E|Type:Core|Name:Core Set - Tenth Edition
+Index:61|Code2:LRW|Code3:LRW|Type:Expansion|Name:Lorwyn
+Index:62|Code2:MOR|Code3:MOR|Type:Expansion|Name:Morningtide
+Index:63|Code2:SHM|Code3:SHM|Type:Expansion|Name:Shadowmoor
+Index:64|Code2:EVE|Code3:EVE|Type:Expansion|Name:Eventide|Alias:EVT
+Index:65|Code2:ALA|Code3:ALA|Type:Expansion|Name:Shards of Alara
+Index:66|Code2:CFX|Code3:CFX|Type:Expansion|Name:Conflux|Alias:CON
+Index:67|Code2:ARB|Code3:ARB|Type:Expansion|Name:Alara Reborn
+Index:68|Code2:M10|Code3:M10|Type:Core|Name:Magic 2010
+Index:69|Code2:ZEN|Code3:ZEN|Type:Expansion|Name:Zendikar
 
-Index:70|Code2:WWK|Code3:WWK|Name:Worldwake
-Index:71|Code2:ROE|Code3:ROE|Name:Rise of the Eldrazi
-Index:72|Code2:M11|Code3:M11|Name:Magic 2011
-Index:73|Code2:SOM|Code3:SOM|Name:Scars of Mirrodin
-Index:74|Code2:MBS|Code3:MBS|Name:Mirrodin Besieged
-Index:75|Code2:NPH|Code3:NPH|Name:New Phyrexia
-Index:76|Code2:COM|Code3:COM|Name:Commander
-Index:77|Code2:M12|Code3:M12|Name:Magic 2012
-Index:78|Code2:ISD|Code3:ISD|Name:Innistrad
-Index:79|Code2:DKA|Code3:DKA|Name:Dark Ascension
+Index:70|Code2:WWK|Code3:WWK|Type:Expansion|Name:Worldwake
+Index:71|Code2:ROE|Code3:ROE|Type:Expansion|Name:Rise of the Eldrazi
+Index:72|Code2:M11|Code3:M11|Type:Core|Name:Magic 2011
+Index:73|Code2:SOM|Code3:SOM|Type:Expansion|Name:Scars of Mirrodin
+Index:74|Code2:MBS|Code3:MBS|Type:Expansion|Name:Mirrodin Besieged
+Index:75|Code2:NPH|Code3:NPH|Type:Expansion|Name:New Phyrexia
+Index:76|Code2:COM|Code3:COM|Type:Other|Name:Commander
+Index:77|Code2:M12|Code3:M12|Type:Core|Name:Magic 2012
+Index:78|Code2:ISD|Code3:ISD|Type:Expansion|Name:Innistrad
+Index:79|Code2:DKA|Code3:DKA|Type:Expansion|Name:Dark Ascension
 
-Index:80|Code2:AVR|Code3:AVR|Name:Avacyn Restored
-Index:81|Code2:PC2|Code3:PC2|Name:Planechase 2012 Edition
-Index:82|Code2:M13|Code3:M13|Name:Magic 2013
-Index:83|Code2:RTR|Code3:RTR|Name:Return to Ravnica
-Index:84|Code2:GTC|Code3:GTC|Name:Gatecrash
+Index:80|Code2:AVR|Code3:AVR|Type:Expansion|Name:Avacyn Restored
+Index:81|Code2:PC2|Code3:PC2|Type:Other|Name:Planechase 2012 Edition
+Index:82|Code2:M13|Code3:M13|Type:Core|Name:Magic 2013
+Index:83|Code2:RTR|Code3:RTR|Type:Expansion|Name:Return to Ravnica
+Index:84|Code2:GTC|Code3:GTC|Type:Expansion|Name:Gatecrash
 
-Index:86|Code2:VAN|Code3:VAN|Name:Vanguard
-Index:87|Code2:ARC|Code3:ARC|Name:Archenemy
-Index:88|Code2:HOP|Code3:HOP|Name:Planechase
+Index:86|Code2:VAN|Code3:VAN|Type:Other|Name:Vanguard
+Index:87|Code2:ARC|Code3:ARC|Type:Other|Name:Archenemy
+Index:88|Code2:HOP|Code3:HOP|Type:Other|Name:Planechase

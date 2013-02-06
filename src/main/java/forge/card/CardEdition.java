@@ -17,6 +17,8 @@
  */
 package forge.card;
 
+import java.util.Locale;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
@@ -36,70 +38,62 @@ import forge.util.StorageReaderFile;
  * @version $Id: CardSet.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardEdition implements Comparable<CardEdition> { // immutable
-    private final int index;
-    private final String code;
+    public enum Type {
+        UNKNOWN,
+        CORE,
+        EXPANSION,
+        REPRINT,
+        STARTER,
+        OTHER
+    }
+    
+    /** The Constant unknown. */
+    public static final CardEdition UNKNOWN = new CardEdition(-1, "??", "???", "Unknown", "Undefined", null);
+
+    private final int    index;
     private final String code2;
+    private final String code;
+    private final Type   type;
     private final String name;
     private final String alias;
 
     /**
      * Instantiates a new card set.
      * 
-     * @param index
-     *            the index
-     * @param name
-     *            the name
-     * @param code
-     *            the code
-     * @param code2
-     *            the code2
+     * @param index indicates order of set release date
+     * @param code2 the 2 (usually) letter code used for image filenames/URLs that use Magic Workstation-type edition codes
+     * @param code the MTG 3-letter set code
+     * @param type the stringified (case insensitive) Type value
+     * @param name the name of the set
      */
-    private CardEdition(final int index, final String name, final String code, final String code2, final String alias0) {
-        this.code = code;
-        this.code2 = code2;
+    private CardEdition(int index, String code2, String code, String type, String name) {
+        this(index, code2, code, type, name, null);
+    }
+
+    private CardEdition(int index, String code2, String code, String type, String name, String alias) {
         this.index = index;
+        this.code2 = code2;
+        this.code = code;
+        Type inType = Type.UNKNOWN;
+        if (null != type && !type.isEmpty()) {
+            try {
+                inType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
+            } catch (IllegalArgumentException e) {
+                // ignore; type will get UNKNOWN
+                System.err.println(String.format("Ignoring unknown type in set definitions: name: %s; type: %s", name, type));
+            }
+        }
+        this.type = inType;
         this.name = name;
-        this.alias = alias0;
+        this.alias = alias;
     }
 
-    /** The Constant unknown. */
-    public static final CardEdition UNKNOWN = new CardEdition(-1, "Undefined", "???", "??", null);
-
-    /**
-     * Gets the name.
-     * 
-     * @return the name
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * Gets the code.
-     * 
-     * @return the code
-     */
-    public String getCode() {
-        return this.code;
-    }
-
-    /**
-     * Gets the code2.
-     * 
-     * @return the code2
-     */
-    public String getCode2() {
-        return this.code2;
-    }
-
-    /**
-     * Gets the index.
-     * 
-     * @return the index
-     */
-    public int getIndex() {
-        return this.index;
-    }
+    public int    getIndex() { return index; }
+    public String getCode2() { return code2; }
+    public String getCode()  { return code;  }
+    public Type   getType()  { return type;  }
+    public String getName()  { return name;  }
+    public String getAlias() { return alias; }
 
     /** The Constant fnGetName. */
     public static final Function<CardEdition, String> FN_GET_CODE = new Function<CardEdition, String>() {
@@ -109,11 +103,6 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
     };
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
     @Override
     public int compareTo(final CardEdition o) {
         if (o == null) {
@@ -122,21 +111,11 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return o.index - this.index;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode() {
         return (this.code.hashCode() * 17) + this.name.hashCode();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -153,19 +132,11 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         return other.name.equals(this.name) && this.code.equals(other.code);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         return this.name + " (set)";
     }
 
-    public String getAlias() {
-        return alias;
-    }
 
     /**
      * The Class Predicates.
@@ -231,24 +202,21 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
 
     public static class Reader extends StorageReaderFile<CardEdition> {
-
         public Reader(String pathname) {
             super(pathname, CardEdition.FN_GET_CODE);
         }
 
-        /* (non-Javadoc)
-         * @see forge.util.StorageReaderFile#read(java.lang.String)
-         */
         @Override
         protected CardEdition read(String line) {
             final FileSection section = FileSection.parse(line, ":", "|");
-            final String code = section.get("code3");
-            final int index = section.getInt("index", -1);
+            final int    index = section.getInt("index", -1);
             final String code2 = section.get("code2");
-            final String name = section.get("name");
+            final String code  = section.get("code3");
+            final String type  = section.get("type");
+            final String name  = section.get("name");
             final String alias = section.get("alias");
 
-            return new CardEdition(index, name, code, code2, alias);
+            return new CardEdition(index, code2, code, type, name, alias);
         }
 
     }
