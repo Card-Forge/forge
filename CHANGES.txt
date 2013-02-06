@@ -93,6 +93,32 @@ Fixes/Features:
 *  In the interests of downward compatibility, it is possible to define the Card Reward either in the [quest] portion (like before) or the [metadata] portion of the dck file. (Duels do not have the [quest] portion but if the definition were simply moved from [quest] to [metadata], all current challenge files would have stopped working properly.)
 - Removed duplicate sharesCreatureTypeWith property from isValid
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Made sure Cunning Giant's replacement effect (for now) only triggers if it wasn't blocked, not also if it tramples over something.
+- Fixed Assemble the Legion.
+- Added AIPlayer parameter to doTrigger and chkAIDrawback
+- Fixed CostTapType hanging when X=0.
+- Methods to test a string against a valid card type moved to forge.CardType
+- CommonDrawback: wrote in a single line the complicated chkAIDrawback method
+- removed unused imports
+- CardUtil.getRandom replaced with Aggregates.random
+- getReflectableMana uses Set as collection, so it does not have to check for duplicates before adding new items.
+- united two CMC calculation methods (one was getCMC from card that read characteristics while other took more factors into account)
+- Cunning Giant will now interact correctly with planeswalkers
+- CardEdition: removed ctor overload and made it private (editions must not be created by other code but nested Reader class anyway)
+- Player: isComputer and isHuman methods redefined as getType() == PlayerType(computer/human), no overloads needed in derived classes
+- player.isHostileTo() renamed to more correct 'isOpponentOf()'
+- missing HumanPlayer.java for commit 19420
+- moved GameAction & its util class to forge.game
+- ensure stats labels in deck editor are shown at the correct height on large displays
+- this works around a quirky interaction between WrapLayout and MigLayout that was causing interior cells to be properly resized but the cells surrounding them would not be, resulting in widgets that would be too large or too small for their unupdated containing cells
+- Fixed Krosa Chaos trigger
+- GameAction divided into 2 parts: original keeps cards' zone transitions, GameActionPlay.java holds methods for playing spells (mostly used by human player I guess)
+- in ComputerUtil demanded player to be AiPlayer for playing spells
+- add set type information to setdata.txt and store it via CardEdition
+- The Very Hard Jamuraa decks can now occasionally (rarely) give you special extra rewards.
+- simplify and theme choose sets dialog
+- Minor technical improvement to a check in BoosterUtils.java.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -108,7 +134,8 @@ Talon Gates
 
 Added the following cards:
 
-
+Cunning Giant
+Sedris, the Traitor King
 
 
 end
