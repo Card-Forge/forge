@@ -70,7 +70,7 @@ public class FList extends JList {
                     lst0, val0, i0, isSelected, cellHasFocus);
 
             lblItem.setBorder(new EmptyBorder(4, 3, 4, 3));
-            lblItem.setBackground(FSkin.getColor(cellHasFocus ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE));
+            lblItem.setBackground(FSkin.getColor(hasFocus() ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE));
             lblItem.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             lblItem.setFont(FSkin.getFont(13));
             lblItem.setOpaque(isSelected);

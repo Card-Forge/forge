@@ -350,7 +350,7 @@ public class SSubmenuQuestUtil {
 
     /** */
     public static void startGame() {
-        if (!checkActiveQuest("Start a duel.")) {
+        if (!checkActiveQuest("Start a duel.") || null == event) {
             return;
         }
         final QuestController qData = Singletons.getModel().getQuest();
@@ -362,6 +362,7 @@ public class SSubmenuQuestUtil {
             System.out.println(msg);
             return;
         }
+        
         String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
         if (null != errorMessage) {
             JOptionPane.showMessageDialog(null, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);

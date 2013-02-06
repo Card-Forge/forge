@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.List;
 
@@ -265,14 +267,69 @@ public class DualListBox<T> extends FPanel {
         setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         sourceListModel = new UnsortedListModel<T>();
         sourceList = new FList(sourceListModel);
+        destListModel = new UnsortedListModel<T>();
+        destList = new FList(destListModel);
 
+        final Runnable onAdd = new Runnable() {
+            @Override
+            public void run() {
+                @SuppressWarnings("unchecked")
+                List<T> selected = (List<T>) Arrays.asList(sourceList.getSelectedValues());
+                addDestinationElements(selected);
+                clearSourceSelected();
+                sourceList.validate();
+                setButtonState();
+            }
+        };
+
+        final Runnable onRemove = new Runnable() {
+            @Override
+            public void run() {
+                @SuppressWarnings("unchecked")
+                List<T> selected = (List<T>) Arrays.asList(destList.getSelectedValues());
+                clearDestinationSelected();
+                addSourceElements(selected);
+                setButtonState();
+            }
+        };
+
+        ActionListener addListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onAdd.run();
+            }
+        };
+
+        ActionListener removeListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onRemove.run();
+            }
+        };
+
+        sourceList.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(final KeyEvent e) {
+                if (e.getKeyChar() == ' ') { onAdd.run(); }
+                else if (e.getKeyCode() == 10) { okButton.doClick(); }
+            }
+        });
+        
+        destList.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(final KeyEvent e) {
+                if (e.getKeyChar() == ' ') { onRemove.run(); }
+                else if (e.getKeyCode() == 10) { okButton.doClick(); }
+            }
+        });
+        
         // Dual List control buttons
         addButton = new FButton(">");
-        addButton.addActionListener(new AddListener());
+        addButton.addActionListener(addListener);
         addAllButton = new FButton(">>");
         addAllButton.addActionListener(new AddAllListener());
         removeButton = new FButton("<");
-        removeButton.addActionListener(new RemoveListener());
+        removeButton.addActionListener(removeListener);
         removeAllButton = new FButton("<<");
         removeAllButton.addActionListener(new RemoveAllListener());
 
@@ -282,9 +339,6 @@ public class DualListBox<T> extends FPanel {
 
         autoButton = new FButton("Auto");
         autoButton.addActionListener(new AutoListener());
-
-        destListModel = new UnsortedListModel<T>();
-        destList = new FList(destListModel);
 
         FPanel leftPanel = new FPanel(new BorderLayout());
         selectOrder = new FLabel.Builder().build();
@@ -318,18 +372,6 @@ public class DualListBox<T> extends FPanel {
         addCardViewListener(destList);
     }
 
-    private class AddListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            @SuppressWarnings("unchecked")
-            List<T> selected = (List<T>) Arrays.asList(sourceList.getSelectedValues());
-            addDestinationElements(selected);
-            clearSourceSelected();
-            sourceList.validate();
-            setButtonState();
-        }
-    }
-
     private void addAll() {
         addDestinationElements(sourceListModel);
         clearSourceListModel();
@@ -340,17 +382,6 @@ public class DualListBox<T> extends FPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             addAll();
-            setButtonState();
-        }
-    }
-
-    private class RemoveListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            @SuppressWarnings("unchecked")
-            List<T> selected = (List<T>) Arrays.asList(destList.getSelectedValues());
-            clearDestinationSelected();
-            addSourceElements(selected);
             setButtonState();
         }
     }
