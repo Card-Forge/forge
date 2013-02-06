@@ -48,7 +48,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
     
     /** The Constant unknown. */
-    public static final CardEdition UNKNOWN = new CardEdition(-1, "??", "???", "Unknown", "Undefined", null);
+    public static final CardEdition UNKNOWN = new CardEdition(-1, "??", "???", Type.UNKNOWN, "Undefined", null);
 
     private final int    index;
     private final String code2;
@@ -57,34 +57,29 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private final String name;
     private final String alias;
 
+    private CardEdition(int index, String code2, String code, Type type, String name) {
+        this(index, code2, code, type, name, null);
+    }
+
     /**
      * Instantiates a new card set.
      * 
      * @param index indicates order of set release date
-     * @param code2 the 2 (usually) letter code used for image filenames/URLs that use Magic Workstation-type edition codes
+     * @param code2 the 2 (usually) letter code used for image filenames/URLs distributed by the HQ pics team that
+     *   use Magic Workstation-type edition codes. Older sets only had 2-letter codes, and some of the 3-letter
+     *   codes they use now aren't the same as the official list of 3-letter codes.  When Forge downloads set-pics,
+     *   it uses the 3-letter codes for the folder no matter the age of the set.
      * @param code the MTG 3-letter set code
-     * @param type the stringified (case insensitive) Type value
+     * @param type the set type
      * @param name the name of the set
+     * @param an optional secondary code alias for the set
      */
-    private CardEdition(int index, String code2, String code, String type, String name) {
-        this(index, code2, code, type, name, null);
-    }
-
-    private CardEdition(int index, String code2, String code, String type, String name, String alias) {
+    private CardEdition(int index, String code2, String code, Type type, String name, String alias) {
         this.index = index;
         this.code2 = code2;
-        this.code = code;
-        Type inType = Type.UNKNOWN;
-        if (null != type && !type.isEmpty()) {
-            try {
-                inType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
-            } catch (IllegalArgumentException e) {
-                // ignore; type will get UNKNOWN
-                System.err.println(String.format("Ignoring unknown type in set definitions: name: %s; type: %s", name, type));
-            }
-        }
-        this.type = inType;
-        this.name = name;
+        this.code  = code;
+        this.type  = type;
+        this.name  = name;
         this.alias = alias;
     }
 
@@ -208,15 +203,25 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
         @Override
         protected CardEdition read(String line) {
-            final FileSection section = FileSection.parse(line, ":", "|");
-            final int    index = section.getInt("index", -1);
-            final String code2 = section.get("code2");
-            final String code  = section.get("code3");
-            final String type  = section.get("type");
-            final String name  = section.get("name");
-            final String alias = section.get("alias");
+            FileSection section = FileSection.parse(line, ":", "|");
+            int    index = section.getInt("index", -1);
+            String code2 = section.get("code2");
+            String code  = section.get("code3");
+            String type  = section.get("type");
+            String name  = section.get("name");
+            String alias = section.get("alias");
+            
+            Type enumType = Type.UNKNOWN;
+            if (null != type && !type.isEmpty()) {
+                try {
+                    enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
+                } catch (IllegalArgumentException e) {
+                    // ignore; type will get UNKNOWN
+                    System.err.println(String.format("Ignoring unknown type in set definitions: name: %s; type: %s", name, type));
+                }
+            }
 
-            return new CardEdition(index, code2, code, type, name, alias);
+            return new CardEdition(index, code2, code, enumType, name, alias);
         }
 
     }
