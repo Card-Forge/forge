@@ -74,12 +74,8 @@ public class InputPayManaCost extends InputPayMana {
 
         if (Singletons.getModel().getGame() != null) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                if (this.spell.getAfterPayMana() != null) {
-                    this.stopSetNext(this.spell.getAfterPayMana());
-                } else {
-                    this.manaCost = new ManaCostBeingPaid("0");
-                    Singletons.getModel().getGame().getStack().add(this.spell);
-                }
+                this.manaCost = new ManaCostBeingPaid("0");
+                Singletons.getModel().getGame().getStack().add(this.spell);
             } else {
                 this.manaCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(this.originalManaCost));
             }
@@ -119,12 +115,8 @@ public class InputPayManaCost extends InputPayMana {
 
         if (Singletons.getModel().getGame() != null) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                if (this.spell.getAfterPayMana() != null) {
-                    this.stopSetNext(this.spell.getAfterPayMana());
-                } else {
-                    this.manaCost = new ManaCostBeingPaid("0");
-                    Singletons.getModel().getGame().getStack().add(this.spell);
-                }
+                this.manaCost = new ManaCostBeingPaid("0");
+                Singletons.getModel().getGame().getStack().add(this.spell);
             } else {
                 this.manaCost = manaCostToPay;
             }
@@ -188,11 +180,7 @@ public class InputPayManaCost extends InputPayMana {
             Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, this.originalCard);
         }
         if (this.spell.getSourceCard().isCopiedSpell()) {
-            if (this.spell.getAfterPayMana() != null) {
-                this.stopSetNext(this.spell.getAfterPayMana());
-            } else {
-                Singletons.getModel().getMatch().getInput().resetInput();
-            }
+            Singletons.getModel().getMatch().getInput().resetInput();
         } else {
             Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.spell, false);
             this.resetManaCost();
@@ -201,16 +189,12 @@ public class InputPayManaCost extends InputPayMana {
                 this.spell.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(this.originalCard));
             }
 
-            if (this.spell.getAfterPayMana() != null) {
-                this.stopSetNext(this.spell.getAfterPayMana());
+            if (this.skipStack) {
+                this.spell.resolve();
             } else {
-                if (this.skipStack) {
-                    this.spell.resolve();
-                } else {
-                    Singletons.getModel().getGame().getStack().add(this.spell);
-                }
-                Singletons.getModel().getMatch().getInput().resetInput();
+                Singletons.getModel().getGame().getStack().add(this.spell);
             }
+            Singletons.getModel().getMatch().getInput().resetInput();
 
             // If this is a spell with convoke, re-tap all creatures used for
             // it.

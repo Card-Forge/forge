@@ -358,50 +358,47 @@ public class CardFactorySorceries {
 
             @Override
             public void selectCard(final Card c) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                if (c.isLand() && zone.is(ZoneType.Battlefield) && c.getController().isHuman()
-                /* && c.getName().equals(humanBasic.get(count)) */
-                && c.isType(humanBasic.get(this.count))
-                /* && !saveList.contains(c) */) {
-                    // get all other basic[count] lands human player
-                    // controls and add them to target
-                    List<Card> land = c.getController().getLandsInPlay();
-                    List<Card> cl = CardLists.getType(land, humanBasic.get(this.count));
-                    cl = CardLists.filter(cl, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card crd) {
-                            return !saveList.contains(crd);
-                        }
-                    });
-
-                    if (!c.getName().contains("Dryad Arbor")) {
-                        cl.remove(c);
-                        saveList.add(c);
+                if (!c.isLand() || !Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield).contains(c) )
+                    return;
+                
+                if ( !c.isType(humanBasic.get(this.count) ) ) return;
+                        
+                List<Card> land = c.getController().getLandsInPlay();
+                List<Card> cl = CardLists.getType(land, humanBasic.get(this.count));
+                cl = CardLists.filter(cl, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card crd) {
+                        return !saveList.contains(crd);
                     }
-                    target.addAll(cl);
+                });
 
-                    index[0]++;
-                    this.showMessage();
-
-                    if (index[0] >= humanBasic.size()) {
-                        this.stopSetNext(new InputPayManaCost(spell));
-                    }
-
-                    // need to sacrifice the other non-basic land types
-                    land = CardLists.filter(land, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            if (c.getName().contains("Dryad Arbor")) {
-                                return true;
-                            } else {
-                                return (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
-                                    || c.isType("Island") || c.isType("Swamp")));
-                            }
-                        }
-                    });
-                    target.addAll(land);
-
+                if (!c.getName().contains("Dryad Arbor")) {
+                    cl.remove(c);
+                    saveList.add(c);
                 }
+                target.addAll(cl);
+
+                index[0]++;
+                this.showMessage();
+
+                if (index[0] >= humanBasic.size()) {
+                    this.stopSetNext(new InputPayManaCost(spell));
+                }
+
+                // need to sacrifice the other non-basic land types
+                land = CardLists.filter(land, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        if (c.getName().contains("Dryad Arbor")) {
+                            return true;
+                        } else {
+                            return (!(c.isType("Forest") || c.isType("Plains") || c.isType("Mountain")
+                                || c.isType("Island") || c.isType("Swamp")));
+                        }
+                    }
+                });
+                target.addAll(land);
+
             } // selectCard()
         }; // Input
 

@@ -161,16 +161,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public Input getAfterPayMana() {
-        return sa.getAfterPayMana();
-    }
-
-    @Override
-    public Input getAfterResolve() {
-        return sa.getAfterResolve();
-    }
-
-    @Override
     public Input getBeforePayMana() {
         return sa.getBeforePayMana();
     }
@@ -309,16 +299,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public void setActivatingPlayer(final Player player) {
         sa.setActivatingPlayer(player);
-    }
-
-    @Override
-    public void setAfterPayMana(final Input in) {
-        sa.setAfterPayMana(in);
-    }
-
-    @Override
-    public void setAfterResolve(final Input in) {
-        sa.setAfterResolve(in);
     }
 
     @Override

@@ -57,10 +57,6 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private final String name;
     private final String alias;
 
-    private CardEdition(int index, String code2, String code, Type type, String name) {
-        this(index, code2, code, type, name, null);
-    }
-
     /**
      * Instantiates a new card set.
      * 
@@ -210,7 +206,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             String type  = section.get("type");
             String name  = section.get("name");
             String alias = section.get("alias");
-            
+
             Type enumType = Type.UNKNOWN;
             if (null != type && !type.isEmpty()) {
                 try {

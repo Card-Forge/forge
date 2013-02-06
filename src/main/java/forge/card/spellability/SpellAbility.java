@@ -83,8 +83,6 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean delve = false;
 
     private Input beforePayMana;
-    private Input afterResolve;
-    private Input afterPayMana;
 
     /** The pay costs. */
     private Cost payCosts = null;
@@ -608,29 +606,6 @@ public abstract class SpellAbility implements ISpellAbility {
 
     /**
      * <p>
-     * Getter for the field <code>afterPayMana</code>.
-     * </p>
-     * 
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public Input getAfterPayMana() {
-        return this.afterPayMana;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>afterPayMana</code>.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.Input} object.
-     */
-    public void setAfterPayMana(final Input in) {
-        this.afterPayMana = in;
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>payCosts</code>.
      * </p>
      * 
@@ -1012,29 +987,6 @@ public abstract class SpellAbility implements ISpellAbility {
                 this.sourceCard.setSVar(store, "");
             }
         }
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>afterResolve</code>.
-     * </p>
-     * 
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public Input getAfterResolve() {
-        return this.afterResolve;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>afterResolve</code>.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.Input} object.
-     */
-    public void setAfterResolve(final Input in) {
-        this.afterResolve = in;
     }
 
     /**

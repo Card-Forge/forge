@@ -397,17 +397,13 @@ public class GameActionPlay {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
             if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
-                if (sa.getAfterPayMana() == null) {
-                    final Card source = sa.getSourceCard();
-                    if (sa.isSpell() && !source.isCopiedSpell()) {
-                        sa.setSourceCard(game.getAction().moveToStack(source));
-                    }
-
-                    game.getStack().add(sa);
-                    return;
-                } else {
-                    matchInput.setInput(sa.getAfterPayMana());
+                final Card source = sa.getSourceCard();
+                if (sa.isSpell() && !source.isCopiedSpell()) {
+                    sa.setSourceCard(game.getAction().moveToStack(source));
                 }
+
+                game.getStack().add(sa);
+                return;
             } else if (sa.getBeforePayMana() == null) {
                 matchInput.setInput(new InputPayManaCost(sa, manaCost));
             } else {
@@ -448,12 +444,8 @@ public class GameActionPlay {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
             if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
-                if (sa.getAfterPayMana() == null) {
-                    AbilityFactory.resolve(sa, false);
-                    return;
-                } else {
-                    matchInput.setInput(sa.getAfterPayMana());
-                }
+                AbilityFactory.resolve(sa, false);
+                return;
             } else if (sa.getBeforePayMana() == null) {
                 matchInput.setInput(new InputPayManaCost(sa, true));
             } else {
