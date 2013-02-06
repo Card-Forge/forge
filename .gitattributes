@@ -9402,6 +9402,7 @@ res/cardsfolder/s/skeletal_wurm.txt svneol=native#text/plain
 res/cardsfolder/s/skeleton_shard.txt svneol=native#text/plain
 res/cardsfolder/s/skeleton_ship.txt svneol=native#text/plain
 res/cardsfolder/s/skeletonize.txt -text
+res/cardsfolder/s/skill_borrower.txt -text
 res/cardsfolder/s/skillful_lunge.txt -text
 res/cardsfolder/s/skinbrand_goblin.txt -text
 res/cardsfolder/s/skinrender.txt svneol=native#text/plain
