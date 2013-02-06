@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
@@ -99,14 +100,7 @@ public class ViewWinLose {
         btnQuit.setText(ForgeProps.getLocalized(WinLoseText.QUIT));
         btnQuit.setFont(FSkin.getFont(22));
 
-
-        if (match.isMatchOver()) {
-            this.getBtnContinue().setEnabled(false);
-            this.getBtnQuit().grabFocus();
-        }
-
         // Show Wins and Loses
-
         final int humanWins = match.getGamesWonBy(human);
         final int humanLosses = match.getPlayedGames().size() - humanWins;
 
@@ -126,7 +120,6 @@ public class ViewWinLose {
         txtLog.setFont(FSkin.getFont(14));
 
         // Add all components accordingly.
-        overlay.removeAll();
         overlay.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));
         pnlLeft.setLayout(new MigLayout("insets 0, wrap, align center"));
         pnlRight.setLayout(new MigLayout("insets 0, wrap"));
@@ -168,6 +161,16 @@ public class ViewWinLose {
         pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10px 0");
         pnlLeft.add(pnlLog, "w 100%!");
 
+        boolean matchIsOver = match.isMatchOver();
+        final FButton focusButton = matchIsOver ? btnQuit : btnContinue;
+        btnContinue.setEnabled(!matchIsOver);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                focusButton.requestFocusInWindow();
+            }
+        });
+        
         SOverlayUtils.showOverlay();
     }
 

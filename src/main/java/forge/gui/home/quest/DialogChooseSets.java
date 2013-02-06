@@ -112,7 +112,6 @@ public class DialogChooseSets {
         p.add(southPanel, "dock south, gapBottom 10");
       
         overlay.add(p);
-        p.setFocusCycleRoot(true);
         p.getRootPane().setDefaultButton(btnOk);
         SOverlayUtils.showOverlay();
     }

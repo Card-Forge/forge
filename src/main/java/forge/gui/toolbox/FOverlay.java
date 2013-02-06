@@ -51,6 +51,7 @@ public enum FOverlay {
     private FOverlay() {
         pnl.setOpaque(false);
         pnl.setVisible(false);
+        pnl.setFocusCycleRoot(true);
 
         btnClose.setForeground(Color.white);
         btnClose.setBorder(BorderFactory.createLineBorder(Color.white));
