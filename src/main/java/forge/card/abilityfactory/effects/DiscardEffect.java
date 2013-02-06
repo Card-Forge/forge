@@ -85,12 +85,13 @@ public class DiscardEffect extends RevealEffectBase {
     } // discardStackDescription()
 
     private List<Card> discardComputerChooses(SpellAbility sa, Player victim, Player chooser, int numCards, String[] dValid, boolean isReveal){
-        // AI
-        final List<Card> dPChHand = new ArrayList<Card>(victim.getCardsIn(ZoneType.Hand));
+        final Card source = sa.getSourceCard();
+        List<Card> dPChHand = new ArrayList<Card>(victim.getCardsIn(ZoneType.Hand));
+        dPChHand = CardLists.getValidCards(dPChHand, dValid, source.getController(), source);
         final List<Card> discarded = new ArrayList<Card>();
         
         if (victim.isComputer()) { // discard AI cards
-            int max = chooser.getCardsIn(ZoneType.Hand).size();
+            int max = dPChHand.size();
             max = Math.min(max, numCards);
             List<Card> list = ((AIPlayer)victim).getAi().getCardsToDiscard(max, dValid, sa);
             if (isReveal) {
