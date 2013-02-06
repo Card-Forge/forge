@@ -119,6 +119,8 @@ public final class SOverlayUtils {
 
     public static void showOverlay() {
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
+        // ensure no background element has focus
+        FOverlay.SINGLETON_INSTANCE.getPanel().requestFocusInWindow();
     }
 
     /**

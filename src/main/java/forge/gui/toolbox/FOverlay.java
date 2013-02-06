@@ -19,8 +19,6 @@ package forge.gui.toolbox;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -53,7 +51,6 @@ public enum FOverlay {
     private FOverlay() {
         pnl.setOpaque(false);
         pnl.setVisible(false);
-        pnl.setFocusTraversalKeysEnabled(false);
 
         btnClose.setForeground(Color.white);
         btnClose.setBorder(BorderFactory.createLineBorder(Color.white));
@@ -72,12 +69,6 @@ public enum FOverlay {
         pnl.addMouseListener(new MouseAdapter() { });
         pnl.addMouseMotionListener(new MouseMotionAdapter() { });
         pnl.addKeyListener(new KeyAdapter() { });
-        pnl.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(final ComponentEvent evt) {
-                pnl.requestFocusInWindow();
-            }
-        });
     }
 
     /**

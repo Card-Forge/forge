@@ -68,7 +68,9 @@ public class FCheckBoxList extends JList {
                 
                 @Override
                 public void focusGained(FocusEvent arg0) {
-                    setSelectedIndex(lastSelectedIdx);
+                    if (-1 == getSelectedIndex()) {
+                        setSelectedIndex(lastSelectedIdx);
+                    }
                 }
             });
         }
