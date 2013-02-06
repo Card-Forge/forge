@@ -139,7 +139,7 @@ public class PumpAi extends PumpAiBase {
             // everything?
             for (final Card card : cards) {
                 if (sa.isCurse()) {
-                    if (!card.getController().isHostileTo(ai)) {
+                    if (!card.getController().isOpponentOf(ai)) {
                         return false;
                     }
 
@@ -149,7 +149,7 @@ public class PumpAi extends PumpAiBase {
 
                     return true;
                 }
-                if (!card.getController().isHostileTo(ai) && shouldPumpCard(ai, sa, card, defense, attack, keywords)) {
+                if (!card.getController().isOpponentOf(ai) && shouldPumpCard(ai, sa, card, defense, attack, keywords)) {
                     return true;
                 }
             }

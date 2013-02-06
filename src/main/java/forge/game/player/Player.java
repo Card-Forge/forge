@@ -1678,7 +1678,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         boolean hasPutIntoPlayWith2xP1P1InsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.");
 
         if ((hasPutIntoPlayInsteadOfDiscard || hasPutIntoPlayWith2xP1P1InsteadOfDiscard)
-                && null != sa && sa.getSourceCard().getController().isHostileTo(c.getController())) {
+                && null != sa && sa.getSourceCard().getController().isOpponentOf(c.getController())) {
             game.getAction().moveToPlay(c);
 
             if (hasPutIntoPlayWith2xP1P1InsteadOfDiscard) {
@@ -2477,7 +2477,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final String[] incR = restriction.split("\\.");
 
         if (incR[0].equals("Opponent")) {
-            if (this.equals(sourceController) || !this.isHostileTo(sourceController)) {
+            if (this.equals(sourceController) || !this.isOpponentOf(sourceController)) {
                 return false;
             }
         } else if (incR[0].equals("You")) {
@@ -2526,7 +2526,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (property.equals("Opponent")) {
-            if (this.equals(sourceController) || !this.isHostileTo(sourceController)) {
+            if (this.equals(sourceController) || !this.isOpponentOf(sourceController)) {
                 return false;
             }
         } else if (property.equals("Other")) {
@@ -3114,7 +3114,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @param playerTurn
      * @return
      */
-    public boolean isHostileTo(Player other) {
+    public boolean isOpponentOf(Player other) {
         if (other.equals(getOpponent())) {
             return true;
         }

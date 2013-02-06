@@ -275,7 +275,7 @@ public class AttachAi extends SpellAiLogic {
                 } else {
                     // then try any other opponent
                     for (final Player curseChoice : targetable) {
-                        if (curseChoice.isHostileTo(aiPlayer)) {
+                        if (curseChoice.isOpponentOf(aiPlayer)) {
                             return curseChoice;
                         }
                     }
@@ -294,7 +294,7 @@ public class AttachAi extends SpellAiLogic {
                 } else {
                     // then try allies
                     for (final Player boonChoice : targetable) {
-                        if (!boonChoice.isHostileTo(aiPlayer)) {
+                        if (!boonChoice.isOpponentOf(aiPlayer)) {
                             return boonChoice;
                         }
                     }
@@ -595,7 +595,7 @@ public class AttachAi extends SpellAiLogic {
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
             Card newTarget = (Card) targets.get(0);
             //don't equip human creatures
-            if (newTarget.getController().isHostileTo(ai)) {
+            if (newTarget.getController().isOpponentOf(ai)) {
                 return false;
             }
 

@@ -53,7 +53,7 @@ public class SacrificeEffect extends SpellEffect {
                 if (sa.hasParam("Random")) {
                     sacList = sacrificeRandom(p, amount, valid, sa, destroy);
                 } else if (p.isComputer()) {
-                    if (sa.hasParam("Optional") && sa.getActivatingPlayer().isHostileTo(p)) {
+                    if (sa.hasParam("Optional") && sa.getActivatingPlayer().isOpponentOf(p)) {
                         continue;
                     }
                     sacList = sacrificeAI(p, amount, valid, sa, destroy);

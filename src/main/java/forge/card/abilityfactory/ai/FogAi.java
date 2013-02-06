@@ -43,7 +43,7 @@ public class FogAi extends SpellAiLogic {
         boolean chance;
 
         // should really check if other player is attacking this player
-        if (ai.isHostileTo(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn())) {
+        if (ai.isOpponentOf(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn())) {
             chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
             chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);

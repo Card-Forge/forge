@@ -17,6 +17,7 @@ import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
 import forge.item.CardPrinted;
 
@@ -106,10 +107,8 @@ public class PlayerControllerHuman extends PlayerController {
         question.append("Cast ").append(cascadedCard.getName());
         question.append(" without paying its mana cost?");
 
-        final int answer = JOptionPane.showConfirmDialog(null, question.toString(),
-                title.toString(), JOptionPane.YES_NO_OPTION);
 
-        boolean result = answer == JOptionPane.YES_OPTION;
+        boolean result = GuiDialog.confirm(cascadedCard, question.toString());
         if ( result )
             game.getAction().playCardWithoutManaCost(cascadedCard, getPlayer());
         return result;

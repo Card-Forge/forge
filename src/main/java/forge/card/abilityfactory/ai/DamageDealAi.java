@@ -162,7 +162,7 @@ public class DamageDealAi extends DamageAiBase {
         });
 
         Card targetCard;
-        if (pl.isHostileTo(ai) && (killables.size() > 0)) {
+        if (pl.isOpponentOf(ai) && (killables.size() > 0)) {
             targetCard = CardFactoryUtil.getBestCreatureAI(killables);
 
             return targetCard;
@@ -173,7 +173,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (hPlay.size() > 0) {
-            if (pl.isHostileTo(ai)) {
+            if (pl.isOpponentOf(ai)) {
                 targetCard = CardFactoryUtil.getBestCreatureAI(hPlay);
             } else {
                 targetCard = CardFactoryUtil.getWorstCreatureAI(hPlay);
@@ -327,7 +327,7 @@ public class DamageDealAi extends DamageAiBase {
                     // from this spell will kill me
                     return false;
                 }
-                if (p.isHostileTo(ai) && !p.canLoseLife()) {
+                if (p.isOpponentOf(ai) && !p.canLoseLife()) {
                     return false;
                 }
             }

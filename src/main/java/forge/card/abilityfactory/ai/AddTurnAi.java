@@ -62,7 +62,7 @@ public class AddTurnAi extends SpellAiLogic {
         } else {
             final List<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : tgtPlayers) {
-                if (p.isHostileTo(ai) && !mandatory) {
+                if (p.isOpponentOf(ai) && !mandatory) {
                     return false;
                 }
             }

@@ -609,7 +609,7 @@ public class ChangeZoneEffect extends SpellEffect {
             }
 
             // Look at opponents hand before moving onto choosing a card
-            if (origin.contains(ZoneType.Hand) && player.isHostileTo(player)) {
+            if (origin.contains(ZoneType.Hand) && player.isOpponentOf(player)) {
                 GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
                         .getCardsIn(ZoneType.Hand));
             }

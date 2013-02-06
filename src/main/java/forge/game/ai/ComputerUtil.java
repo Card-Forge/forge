@@ -1196,7 +1196,7 @@ public class ComputerUtil {
     
                         // don't bounce or blink a permanent that the human
                         // player owns or is a token
-                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isHuman() || c.isToken())) {
+                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
                             continue;
                         }
     

@@ -132,13 +132,13 @@ public class TapAllAi extends SpellAiLogic {
             final int human = Iterables.size(Iterables.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getController().isHostileTo(ai);
+                    return c.getController().isOpponentOf(ai);
                 }
             }));
             final int compy = Iterables.size(Iterables.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return !c.getController().isHostileTo(ai);
+                    return !c.getController().isOpponentOf(ai);
                 }
             }));
             if (human > compy) {

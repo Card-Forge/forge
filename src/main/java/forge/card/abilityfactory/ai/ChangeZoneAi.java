@@ -813,7 +813,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 @Override
                 public boolean apply(final Card c) {
                     for (Card aura : c.getEnchantedBy()) {
-                        if (c.getOwner().isHostileTo(ai) && aura.getController().equals(ai)) {
+                        if (c.getOwner().isOpponentOf(ai) && aura.getController().equals(ai)) {
                             return false;
                         }
                     }
@@ -1037,7 +1037,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 if (!list.isEmpty()) {
                     final Card attachedTo = list.get(0);
                     // This code is for the Dragon auras
-                    if (attachedTo.getController().isHostileTo(ai)) {
+                    if (attachedTo.getController().isOpponentOf(ai)) {
                         return false;
                     }
                 }
@@ -1148,7 +1148,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                             return true;
                         }
                     });
-                    if (player.isHostileTo(ai) && sa.hasParam("GainControl") && activator.equals(ai)) {
+                    if (player.isOpponentOf(ai) && sa.hasParam("GainControl") && activator.equals(ai)) {
                         fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
@@ -1162,7 +1162,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 }
                 if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)) {
                     // Exiling or bouncing stuff
-                    if (player.isHostileTo(ai)) {
+                    if (player.isOpponentOf(ai)) {
                         c = CardFactoryUtil.getBestAI(fetchList);
                     } else {
                         c = CardFactoryUtil.getWorstAI(fetchList);

@@ -98,7 +98,7 @@ public class DrawAi extends SpellAiLogic {
 
         if (tgt != null) {
             final ArrayList<Player> players = tgt.getTargetPlayers();
-            if ((players.size() > 0) && players.get(0).isHostileTo(ai)) {
+            if ((players.size() > 0) && players.get(0).isOpponentOf(ai)) {
                 return true;
             }
         }
