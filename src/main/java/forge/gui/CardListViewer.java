@@ -141,6 +141,7 @@ public class CardListViewer {
         this.dialog = this.optionPane.createDialog(this.optionPane.getParent(), this.title);
         this.dialog.setSize(720, 360);
         this.dialog.addWindowFocusListener(new CardListFocuser());
+        this.dialog.setLocationRelativeTo(null);
         this.dialog.setVisible(true);
         this.dialog.toFront();
 
