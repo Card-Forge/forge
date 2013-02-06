@@ -31,7 +31,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Constant;
-import forge.GameActionUtil;
 import forge.Singletons;
 
 import forge.card.abilityfactory.ApiType;
@@ -40,6 +39,7 @@ import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
+import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;

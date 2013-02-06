@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +25,14 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.Card;
+import forge.CardLists;
+import forge.CardPredicates;
+import forge.CardUtil;
+import forge.Command;
+import forge.Constant;
+import forge.CounterType;
+import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
@@ -51,7 +59,6 @@ import forge.control.input.Input;
 import forge.control.input.InputPayDiscardCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayReturnCost;
-import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;

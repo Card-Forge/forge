@@ -26,10 +26,10 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.GameAction;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameAction;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.ai.ComputerUtil;

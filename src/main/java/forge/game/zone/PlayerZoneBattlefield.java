@@ -30,12 +30,12 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
+import forge.game.GameActionUtil;
 import forge.game.player.Player;
 
 /**

@@ -10,7 +10,6 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
@@ -23,6 +22,7 @@ import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;

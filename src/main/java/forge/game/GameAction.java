@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge;
+package forge.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +29,15 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.Card;
+import forge.CardCharacteristicName;
+import forge.CardLists;
+import forge.CardPredicates;
+import forge.CardUtil;
+import forge.Command;
+import forge.CounterType;
+import forge.GameEntity;
+import forge.Singletons;
 import forge.card.CardType;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
@@ -55,11 +64,6 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostUtil;
-import forge.game.GameEndReason;
-import forge.game.GameLossReason;
-import forge.game.GameState;
-import forge.game.GlobalRuleChange;
-import forge.game.MatchController;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.event.CardDestroyedEvent;
@@ -195,7 +199,7 @@ public class GameAction {
             ReplacementResult repres = game.getReplacementHandler().run(repParams);
             if (repres != ReplacementResult.NotReplaced) {
                 if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
-                    return Singletons.getModel().getGame().getAction().moveToGraveyard(c);
+                    return GameAction.this.moveToGraveyard(c);
                 }
                 return c;
             }

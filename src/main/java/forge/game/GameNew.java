@@ -22,7 +22,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.GameAction;
 import forge.Singletons;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;

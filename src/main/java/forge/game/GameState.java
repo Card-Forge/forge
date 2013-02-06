@@ -29,8 +29,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.ColorChanger;
-import forge.GameAction;
-import forge.GameActionUtil;
 import forge.GameLog;
 import forge.Singletons;
 import forge.StaticEffects;
