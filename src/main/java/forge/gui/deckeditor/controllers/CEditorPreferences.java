@@ -89,7 +89,7 @@ public enum CEditorPreferences implements ICDoc {
                 SEditorIO.getPref(EditorPreference.elastic_columns));
 
         if (!SEditorIO.getPref(EditorPreference.stats_deck)) {
-            VCurrentDeck.SINGLETON_INSTANCE.getPnlStats().setVisible(false);
+            VCurrentDeck.SINGLETON_INSTANCE.setStatsVisible(false);
         }
 
         boolean wantElastic = SEditorIO.getPref(EditorPreference.elastic_columns);
@@ -106,11 +106,8 @@ public enum CEditorPreferences implements ICDoc {
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {
-                VCurrentDeck.SINGLETON_INSTANCE.getPnlStats().setVisible(
+                VCurrentDeck.SINGLETON_INSTANCE.setStatsVisible(
                         ((JCheckBox) e.getSource()).isSelected());
-                // TODO: when the stats appear for the first time, the panel is way too tall, but I cannot
-                // TODO:   for the life of me get it to snap back to its proper size until a mouse-driven
-                // TODO:   resize or table model change event occurs
                 SEditorIO.setPref(EditorPreference.stats_deck, ((JCheckBox) e.getSource()).isSelected());
                 SEditorIO.savePreferences(); } });
 

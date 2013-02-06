@@ -54,8 +54,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     private final FLabel lblTitle = new FLabel.Builder().fontSize(14).build();
 
     // Total and color count labels/filter toggles
-    private final JPanel pnlStats = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
-    private final JPanel pnlStatsWrap = new JPanel(new WrapLayout(FlowLayout.LEFT));
+    private final JPanel pnlStats = new JPanel(new WrapLayout(FlowLayout.LEFT));
     private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
             new HashMap<SEditorUtil.StatTypes, FLabel>();
 
@@ -122,19 +121,17 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         scroller.getViewport().setBorder(null);
 
         pnlStats.setOpaque(false);
-        pnlStatsWrap.setOpaque(false);
         
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             FLabel label = buildToggleLabel(s, SEditorUtil.StatTypes.TOTAL != s);
             statLabels.put(s, label);
             if (SEditorUtil.StatTypes.TOTAL == s) {
                 label.setToolTipText("Total cards (click to toggle all filters)");
-                pnlStats.add(label, "align right");
-            } else {
-                pnlStatsWrap.add(label);
+            } else if (9 == statLabels.size()) {
+                pnlStats.add(buildToggleLabel(null, false));
             }
+            pnlStats.add(label);
         }
-        pnlStats.add(pnlStatsWrap, "w 30:500:500, align left");
 
         pnlAddButtons.setOpaque(false);
         pnlAddButtons.add(btnAdd, "w 30%!, h 30px!, gap 10 10 5 5");
@@ -195,11 +192,11 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
         parentBody.add(pnlHeader, "w 98%!, gap 1% 1% 5 0");
-        parentBody.add(pnlStats, "w 96%, gap 1% 1% 5 0, center");
+        parentBody.add(pnlStats, "w 100:520:520, center");
         parentBody.add(pnlAddButtons, "w 96%!, gap 1% 1% 5 5");
         parentBody.add(pnlSearch, "w 96%, gap 1% 1%");
         parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
-        parentBody.add(scroller, "w 98%!, h 10:100%:100%, gap 1% 0 0 1%");
+        parentBody.add(scroller, "w 98%!, h 100%!, gap 1% 0 0 1%");
     }
 
     //========== Overridden from ITableContainer
@@ -238,10 +235,10 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     //========== Other methods
     private FLabel buildToggleLabel(SEditorUtil.StatTypes s, boolean selectable) {
         FLabel label = new FLabel.Builder()
-                .icon(s.img).iconScaleAuto(false)
-                .text("0").fontSize(11)
-                .tooltip(s.toLabelString() + "(click to toggle the filter for this card type)")
-                .hoverable().selectable(selectable).selected(selectable)
+                .icon(null == s ? null : s.img).iconScaleAuto(false)
+                .fontSize(11)
+                .tooltip(null == s ? null : s.toLabelString() + "(click to toggle the filter for this card type)")
+                .hoverable(null != s).selectable(selectable).selected(selectable)
                 .build();
         
         Dimension labelSize = new Dimension(60, 24);

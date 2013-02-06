@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import forge.gui.WrapLayout;
@@ -113,8 +114,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .fontSize(14).build();
 
     // Total and color count labels/filter toggles
-    private final JPanel pnlStats = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
-    private final JPanel pnlStatsWrap = new JPanel(new WrapLayout(FlowLayout.LEFT));
+    private final JPanel pnlStats = new JPanel(new WrapLayout(FlowLayout.LEFT));
     private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
             new HashMap<SEditorUtil.StatTypes, FLabel>();
 
@@ -149,18 +149,15 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         scroller.getViewport().setBorder(null);
 
         pnlStats.setOpaque(false);
-        pnlStatsWrap.setOpaque(false);
         
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             FLabel label = buildLabel(s);
             statLabels.put(s, label);
-            if (SEditorUtil.StatTypes.TOTAL == s) {
-                pnlStats.add(label, "align right");
-            } else {
-                pnlStatsWrap.add(label);
+            if (9 == statLabels.size()) {
+                pnlStats.add(buildLabel(null));
             }
+            pnlStats.add(label);
         }
-        pnlStats.add(pnlStatsWrap, "w 30:480:480, align left");
 
         pnlRemoveButtons.setOpaque(false);
         pnlRemoveButtons.add(btnRemove, "w 30%!, h 30px!, gap 0 0 5px 5px");
@@ -216,11 +213,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     @Override
     public void populate() {
         final JPanel parentBody = parentCell.getBody();
-        parentBody.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
+        parentBody.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3, center"));
         parentBody.add(pnlHeader, "w 98%!, gap 1% 1% 5 0");
-        parentBody.add(pnlStats, "w 96%, gap 1% 1% 5 0, center");
+        parentBody.add(pnlStats, "w 100:500:500, center");
         parentBody.add(pnlRemoveButtons, "w 96%!, gap 2% 0 0 0");
-        parentBody.add(scroller, "w 98%!, h 10:100%:100%, gap 1% 0 0 1%");
+        parentBody.add(scroller, "w 98%!, h 100%!, gap 1% 0 0 1%");
     }
 
     //========== Retrieval methods
@@ -292,8 +289,27 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     }
 
     /** @return {@link javax.swing.JPanel} */
-    public JPanel getPnlStats() {
-        return pnlStats;
+    public void setStatsVisible(boolean val) {
+        pnlStats.setVisible(val);
+        
+        // TODO: invisibly ensure the cell is not too large on first show
+        // if the program is started with pnlStats invisible, the first time it
+        // is made visible, the scroller cell that surrounds the panel will
+        // be too large.  it will jump back to the correct size after any resize
+        // event, or if it is hidden and made visible again.  For the life of
+        // me, I cannot figure out how to "kick" it into the correct size from
+        // here without the following hack, which will cause a visible jitter
+        // when the panel is shown for the first time (subsequent hides and shows
+        // will not cause any jitter), but at least it will be the correct size:
+        if (val) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    pnlStats.setVisible(false);
+                    pnlStats.setVisible(true);
+                }
+            });
+        }
     }
 
     /** @return {@link javax.swing.JPanel} */
@@ -310,12 +326,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     private FLabel buildLabel(SEditorUtil.StatTypes s) {
         FLabel label = new FLabel.Builder()
-            .icon(s.img).iconScaleAuto(false)
-            .text("0").fontSize(11)
-            .tooltip(s.toLabelString())
+            .icon(s == null ? null : s.img).iconScaleAuto(false)
+            .fontSize(11).tooltip(s == null ? null : s.toLabelString())
             .build();
 
-        Dimension labelSize = new Dimension(60, 20);
+        Dimension labelSize = new Dimension(57, 20);
         label.setPreferredSize(labelSize);
         label.setMinimumSize(labelSize);
         
