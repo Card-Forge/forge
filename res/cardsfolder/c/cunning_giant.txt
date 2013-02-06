@@ -4,7 +4,9 @@ Types:Creature Giant
 Text:no text
 PT:4/4
 R:Event$ DamageDone | ValidTarget$ Player.attackedBySourceThisCombat | ValidSource$ Card.Self+unblocked | IsCombat$ True | ReplaceWith$ ChooseVictim | Optional$ True | OptionalDecider$ You | Description$ If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.
+R:Event$ DamageDone | ValidTarget$ Planeswalker.attackedBySourceThisCombat | ValidSource$ Card.Self+unblocked | IsCombat$ True | ReplaceWith$ ChooseVictimPW | Optional$ True | OptionalDecider$ You | Secondary$ True | Description$ If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.
 SVar:ChooseVictim:DB$ ChooseCard | ChoiceZone$ Battlefield | Choices$ Creature.DefenderCtrl | Amount$ 1 | ChoiceTitle$ Choose a card to deal the damage to | SubAbility$ CunningDmg
+SVar:ChooseVictimPW:DB$ ChooseCard | ChoiceZone$ Battlefield | Choices$ Creature.DefenderCtrl | Amount$ 1 | ChoiceTitle$ Choose a card to deal the damage to | SubAbility$ CunningDmg
 SVar:CunningDmg:DB$ DealDamage | Defined$ ChosenCard | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ CunningX
 SVar:CunningX:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True

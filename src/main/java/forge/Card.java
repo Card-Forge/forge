@@ -7007,6 +7007,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (this.isAttacking()) {
                 return false;
             }
+        } else if (property.equals("attackedBySourceThisCombat")) {
+            final GameEntity defender = Singletons.getModel().getGame().getCombat().getDefenderByAttacker(source);
+            if (defender instanceof Card) {
+                if (!this.equals((Card) defender)) {
+                    return false;
+                }
+            }
         } else if (property.equals("blocking")) {
             if (!this.isBlocking()) {
                 return false;
