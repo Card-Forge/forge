@@ -89,10 +89,6 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
 
         final Card c = this.getSourceCard();
-        if (c.isFaceDown() && this.isIntrinsic()) {
-            // Intrinsic abilities can't be activated by face down cards
-            return false;
-        }
 
         // CantBeActivated static abilities
         for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {

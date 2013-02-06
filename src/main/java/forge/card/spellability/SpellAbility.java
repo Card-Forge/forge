@@ -25,7 +25,6 @@ import java.util.Set;
 
 import forge.Card;
 
-import forge.Command;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.SpellManaCost;
@@ -107,8 +106,6 @@ public abstract class SpellAbility implements ISpellAbility {
 
     private HashMap<String, Object> replacingObjects = new HashMap<String, Object>();
 
-    private Command beforePayManaAI = Command.BLANK;
-
     private List<Card> tappedForConvoke = new ArrayList<Card>();
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
@@ -152,7 +149,7 @@ public abstract class SpellAbility implements ISpellAbility {
         return manaProducing;
     }
 
-    public final void setManaPart(AbilityManaPart manaPart) {
+    protected final void setManaPart(AbilityManaPart manaPart) {
         this.manaPart = manaPart;
     }
 
@@ -291,7 +288,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param spellManaCost
      *            a {@link java.lang.String} object.
      */
-    public void setReplicateManaCost(final SpellManaCost spellManaCost) {
+    public final void setReplicateManaCost(final SpellManaCost spellManaCost) {
         this.replicateManaCost = spellManaCost;
     }
 
@@ -314,7 +311,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param cost
      *            a {@link java.lang.String} object.
      */
-    public void setXManaCost(final int cost) {
+    public final void setXManaCost(final int cost) {
         this.xManaCost = cost;
     }
 
@@ -401,7 +398,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param b
      *            a boolean.
      */
-    public void setIsMultiKicker(final boolean b) {
+    public final void setIsMultiKicker(final boolean b) {
         this.multiKicker = b;
     }
 
@@ -424,7 +421,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param b
      *            a boolean.
      */
-    public void setIsReplicate(final boolean b) {
+    public final void setIsReplicate(final boolean b) {
         this.replicate = b;
     }
 
@@ -470,7 +467,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param b
      *            a boolean.
      */
-    public void setIsCycling(final boolean b) {
+    public final void setIsCycling(final boolean b) {
         this.cycling = b;
     }
 
@@ -555,29 +552,6 @@ public abstract class SpellAbility implements ISpellAbility {
 
     public final boolean isCurse() {
         return this.hasParam("IsCurse");
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>beforePayManaAI</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Command} object.
-     */
-    public Command getBeforePayManaAI() {
-        return this.beforePayManaAI;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>beforePayManaAI</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Command} object.
-     */
-    public void setBeforePayManaAI(final Command c) {
-        this.beforePayManaAI = c;
     }
 
     // begin - Input methods
@@ -695,7 +669,7 @@ public abstract class SpellAbility implements ISpellAbility {
      *            object.
      * @since 1.0.15
      */
-    public void setConditions(final SpellAbilityCondition condition) {
+    public final void setConditions(final SpellAbilityCondition condition) {
         this.conditions = condition;
     }
 
@@ -757,21 +731,6 @@ public abstract class SpellAbility implements ISpellAbility {
         return this.paidLists;
     }
 
-    // Paid List are for things ca
-    /**
-     * <p>
-     * setPaidList.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @param str
-     *            a {@link java.lang.String} object.
-     */
-    public void setPaidList(final List<Card> list, final String str) {
-        this.paidLists.put(str, list);
-    }
-
     /**
      * <p>
      * getPaidList.
@@ -822,14 +781,14 @@ public abstract class SpellAbility implements ISpellAbility {
     /**
      * @param costs the optionalAdditionalCosts to set
      */
-    public void setOptionalAdditionalCosts(ArrayList<String> costs) {
+    public final void setOptionalAdditionalCosts(ArrayList<String> costs) {
         this.optionalAdditionalCosts = costs;
     }
 
     /**
      * @param cost the optionalAdditionalCost to add
      */
-    public void addOptionalAdditionalCosts(String cost) {
+    public final void addOptionalAdditionalCosts(String cost) {
         this.optionalAdditionalCosts.add(cost);
     }
 
@@ -922,16 +881,6 @@ public abstract class SpellAbility implements ISpellAbility {
     }
 
     /**
-     * Sets the all replacing objects.
-     * 
-     * @param replacedObjects
-     *            the replaced objects
-     */
-    public void setAllReplacingObjects(final HashMap<String, Object> replacedObjects) {
-        this.replacingObjects = replacedObjects;
-    }
-
-    /**
      * Sets the replacing object.
      * 
      * @param type
@@ -955,16 +904,6 @@ public abstract class SpellAbility implements ISpellAbility {
         return res;
     }
 
-    /**
-     * Checks for replacing object.
-     * 
-     * @param type
-     *            the type
-     * @return true, if successful
-     */
-    public boolean hasReplacingObject(final String type) {
-        return this.replacingObjects.containsKey(type);
-    }
 
     /**
      * <p>
@@ -1017,28 +956,6 @@ public abstract class SpellAbility implements ISpellAbility {
         }
 
         return this.stackDescription.replaceAll("CARDNAME", this.getSourceCard().getName());
-    }
-
-    /**
-     * <p>
-     * isIntrinsic.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isIntrinsic() {
-        return this.type.equals("Intrinsic");
-    }
-
-    /**
-     * <p>
-     * isExtrinsic.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isExtrinsic() {
-        return this.type.equals("Extrinsic");
     }
 
     /**
@@ -1259,7 +1176,7 @@ public abstract class SpellAbility implements ISpellAbility {
      *            a {@link forge.game.player.Player} object.
      */
     public void setTargetPlayer(final Player p) {
-        if ((p == null) || (!(p.isHuman() || p.isComputer()))) {
+        if (p == null) {
             throw new RuntimeException("SpellAbility : setTargetPlayer() error, argument is " + p + " source card is "
                     + this.getSourceCard());
         }
@@ -1304,10 +1221,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @return a boolean.
      */
     public boolean isBasicSpell() {
-        if (this.isFlashBackAbility() || this.isBuyBackAbility()) {
-            return false;
-        }
-        return this.basicSpell;
+        return this.basicSpell && !this.isFlashBackAbility() && !this.isBuyBackAbility();
     }
 
     /**
@@ -1343,21 +1257,6 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public boolean isFlashBackAbility() {
         return this.flashBackAbility;
-    }
-
-    // Only used by Ability_Reflected_Mana, because the user has an option to
-    // cancel the input.
-    // Most spell abilities and even most mana abilities do not need to use
-    // this.
-    /**
-     * <p>
-     * wasCancelled.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean wasCancelled() {
-        return false;
     }
 
     /**

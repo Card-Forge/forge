@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.Command;
 import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.ApiType;
@@ -86,11 +85,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setPaidList(final List<Card> list, final String str) {
-        sa.setPaidList(list, str);
-    }
-
-    @Override
     public List<Card> getPaidList(final String str) {
         return sa.getPaidList(str);
     }
@@ -163,11 +157,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public Input getBeforePayMana() {
         return sa.getBeforePayMana();
-    }
-
-    @Override
-    public Command getBeforePayManaAI() {
-        return sa.getBeforePayManaAI();
     }
 
     @Override
@@ -256,18 +245,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public boolean isExtrinsic() {
-        return sa.isExtrinsic();
-    }
-
-    @Override
     public boolean isFlashBackAbility() {
         return sa.isFlashBackAbility();
-    }
-
-    @Override
-    public boolean isIntrinsic() {
-        return sa.isIntrinsic();
     }
 
     @Override
@@ -307,11 +286,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setBeforePayManaAI(final Command c) {
-        sa.setBeforePayManaAI(c);
-    }
-
-    @Override
     public void setDescription(final String s) {
         sa.setDescription(s);
     }
@@ -322,21 +296,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setIsCycling(final boolean b) {
-        sa.setIsCycling(b);
-    }
-
-    @Override
-    public void setIsMultiKicker(final boolean b) {
-        sa.setIsMultiKicker(b);
-    }
-
-    @Override
-    public void setIsReplicate(final boolean b) {
-        sa.setIsReplicate(b);
-    }
-
-    @Override
     public void setIsXCost(final boolean b) {
         sa.setIsXCost(b);
     }
@@ -344,11 +303,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public void setMultiKickerManaCost(final SpellManaCost cost) {
         sa.setMultiKickerManaCost(cost);
-    }
-
-    @Override
-    public void setReplicateManaCost(final SpellManaCost cost) {
-        sa.setReplicateManaCost(cost);
     }
 
     @Override
@@ -399,16 +353,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public void setType(final String s) {
         sa.setType(s);
-    }
-
-    @Override
-    public void setXManaCost(final int cost) {
-        sa.setXManaCost(cost);
-    }
-
-    @Override
-    public boolean wasCancelled() {
-        return sa.wasCancelled();
     }
 
     @Override
