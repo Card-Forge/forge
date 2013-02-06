@@ -805,7 +805,7 @@ public final class GuiDisplayUtil {
 
             sa.setActivatingPlayer(p);
             game.getAction().moveToHand(forgeCard); // this is really needed
-            game.getAction().playSpellAbilityForFree(sa);
+            game.getActionPlay().playSpellAbilityForFree(sa);
         }
 
 

@@ -511,12 +511,12 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         }
 
         if (getActivatingPlayer().isHuman()) {
-            game.getAction().playSpellAbilityNoStack(sa, true);
+            game.getActionPlay().playSpellAbilityNoStack(getActivatingPlayer(), sa, true);
         } else {
             // commented out because i don't think this should be called
             // again here
             // sa.doTrigger(isMandatory);
-            ComputerUtil.playNoStack(getActivatingPlayer(), sa, game);
+            ComputerUtil.playNoStack((AIPlayer)getActivatingPlayer(), sa, game);
         }
 
         // Add eventual delayed trigger.

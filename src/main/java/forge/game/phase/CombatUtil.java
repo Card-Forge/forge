@@ -51,6 +51,7 @@ import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -1204,7 +1205,7 @@ public class CombatUtil {
                 GameActionUtil.payCostDuringAbilityResolve(c.getController(), ability, attackCost, paidCommand, unpaidCommand, null, game);
             } else { // computer
                 if (ComputerUtilCost.canPayCost(ability, c.getController())) {
-                    ComputerUtil.playNoStack(c.getController(), ability, game);
+                    ComputerUtil.playNoStack((AIPlayer)c.getController(), ability, game);
                     if (!crd.hasKeyword("Vigilance")) {
                         crd.tap();
                     }

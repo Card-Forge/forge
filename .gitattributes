@@ -13858,6 +13858,7 @@ src/main/java/forge/error/ErrorViewer.java svneol=native#text/plain
 src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 src/main/java/forge/error/package-info.java svneol=native#text/plain
 src/main/java/forge/game/GameAction.java svneol=native#text/plain
+src/main/java/forge/game/GameActionPlay.java -text
 src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/game/GameEndReason.java -text
 src/main/java/forge/game/GameFormat.java -text

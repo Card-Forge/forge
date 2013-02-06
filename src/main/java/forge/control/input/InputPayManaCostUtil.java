@@ -214,7 +214,7 @@ public class InputPayManaCostUtil {
         subchosen.getManaPart().setExpressChoice(colorsNeeded);
         
         Player p = chosen.getActivatingPlayer();
-        Singletons.getModel().getGame().getAction().playSpellAbility(chosen, p);
+        Singletons.getModel().getGame().getActionPlay().playSpellAbility(chosen, p);
 
         manaCost = p.getManaPool().payManaFromAbility(sa, manaCost, chosen);
 

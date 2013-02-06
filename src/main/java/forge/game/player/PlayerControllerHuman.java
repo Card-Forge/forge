@@ -92,7 +92,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     public void playFromSuspend(Card c) {
         c.setSuspend(true);
-        game.getAction().playCardWithoutManaCost(c, c.getOwner());
+        game.getActionPlay().playCardWithoutManaCost(c, c.getOwner());
     }
 
     /* (non-Javadoc)
@@ -110,7 +110,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         boolean result = GuiDialog.confirm(cascadedCard, question.toString());
         if ( result )
-            game.getAction().playCardWithoutManaCost(cascadedCard, getPlayer());
+            game.getActionPlay().playCardWithoutManaCost(cascadedCard, getPlayer());
         return result;
     }
 
@@ -119,7 +119,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public void mayPlaySpellAbilityForFree(SpellAbility copySA) {
-        game.getAction().playSpellAbilityForFree(copySA);
+        game.getActionPlay().playSpellAbilityForFree(copySA);
     }
 
     /**

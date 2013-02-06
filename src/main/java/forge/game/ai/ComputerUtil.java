@@ -205,7 +205,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playStack(final SpellAbility sa, final Player ai, final GameState game) {
+    public static final void playStack(final SpellAbility sa, final AIPlayer ai, final GameState game) {
         sa.setActivatingPlayer(ai);
         if (ComputerUtilCost.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();
@@ -218,7 +218,7 @@ public class ComputerUtil {
                 game.getStack().add(sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa, game);
-                if (pay.payComputerCosts((AIPlayer)ai, game)) {
+                if (pay.payComputerCosts(ai, game)) {
                     game.getStack().add(sa);
                 }
             }
@@ -292,7 +292,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playNoStack(final Player ai, final SpellAbility sa, final GameState game) {
+    public static final void playNoStack(final AIPlayer ai, final SpellAbility sa, final GameState game) {
         // TODO: We should really restrict what doesn't use the Stack
         if (ComputerUtilCost.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();

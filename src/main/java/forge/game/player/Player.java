@@ -43,11 +43,14 @@ import forge.Constant.Preferences;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cost.Cost;
 import forge.card.mana.ManaPool;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
@@ -55,6 +58,7 @@ import forge.game.GameActionUtil;
 import forge.game.GameLossReason;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
+import forge.game.ai.ComputerUtil;
 import forge.game.event.CardDiscardedEvent;
 import forge.game.event.DrawCardEvent;
 import forge.game.event.LandPlayedEvent;
@@ -1425,7 +1429,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
             // Miracle draws
             if (this.numDrawnThisTurn == 1 && game.getPhaseHandler().getTurn() != 0) {
-                game.getAction().drawMiracle(c, this);
+                drawMiracle(c);
             }
 
             // Run triggers
@@ -3142,7 +3146,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (ab == Ability.PLAY_LAND_SURROGATE) {
             this.playLand(c);
         } else
-            game.getAction().playSpellAbility(ab, this);
+            game.getActionPlay().playSpellAbility(ab, this);
     }
 
     /**
@@ -3239,6 +3243,72 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     
             if (c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
                 c.getDamageHistory().setCreatureGotBlockedThisCombat(false);
+            }
+        }
+    }
+
+    /**
+     * <p>
+     * drawMiracle.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     */
+    public final void drawMiracle(final Card card) {
+        // Whenever a card with miracle is the first card drawn in a turn,
+        // you may cast it for it's miracle cost
+        if (card.getMiracleCost() == null) {
+            return;
+        }
+
+        final SpellAbility playForMiracleCost = card.getFirstSpellAbility().copy();
+        playForMiracleCost.setPayCosts(new Cost(card, card.getMiracleCost(), false));
+        playForMiracleCost.setStackDescription(card.getName() + " - Cast via Miracle");
+
+        // TODO Convert this to a Trigger
+        final Ability miracleTrigger = new MiracleTrigger(card, SpellManaCost.ZERO, card, playForMiracleCost);
+        miracleTrigger.setStackDescription(card.getName() + " - Miracle.");
+        miracleTrigger.setActivatingPlayer(card.getOwner());
+        miracleTrigger.setTrigger(true);
+    
+        game.getStack().add(miracleTrigger);
+    }
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private final class MiracleTrigger extends Ability {
+        private final Card card;
+        private final SpellAbility miracle;
+    
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param sourceCard
+         * @param manaCost
+         * @param card
+         * @param miracle
+         */
+        private MiracleTrigger(Card sourceCard, SpellManaCost manaCost, Card card, SpellAbility miracle) {
+            super(sourceCard, manaCost);
+            this.card = card;
+            this.miracle = miracle;
+        }
+    
+        @Override
+        public void resolve() {
+            // pay miracle cost here.
+            if (card.getOwner().isHuman()) {
+                if (GuiDialog.confirm(card, card + " - Drawn. Pay Miracle Cost?")) {
+                    game.getActionPlay().playSpellAbility(miracle, miracle.getActivatingPlayer());
+                }
+            } else {
+                Spell spell = (Spell) miracle;
+                spell.setActivatingPlayer(card.getOwner());
+                if (spell.canPlayFromEffectAI(false, false)) {
+                    ComputerUtil.playStack(miracle, (AIPlayer) card.getOwner(), game);
+                }
             }
         }
     }

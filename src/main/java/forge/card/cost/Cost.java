@@ -352,7 +352,7 @@ public class Cost {
         for (final CostPart part : this.costParts) {
             if (part instanceof CostMana) {
                 final SpellManaCost mana = new SpellManaCost(new ManaCostParser(part.toString()));
-                final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getAction().getSpellCostChange(sa, new ManaCostBeingPaid(mana));
+                final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(mana));
 
                 ((CostMana)part).setAdjustedMana(changedCost.toString(false));
                 costChanged = true;
@@ -360,7 +360,7 @@ public class Cost {
         }
         if (!costChanged) {
             // Spells with a cost of 0 should be affected too
-            final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getAction().getSpellCostChange(sa, new ManaCostBeingPaid("0"));
+            final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid("0"));
             this.costParts.add(new CostMana(changedCost.toString(), 0, false));
         }
     }

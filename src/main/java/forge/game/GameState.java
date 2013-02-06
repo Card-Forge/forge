@@ -38,6 +38,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.event.DuelOutcomeEvent;
 import forge.game.phase.Cleanup;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfCombat;
@@ -54,6 +55,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gui.match.ViewWinLose;
 
 /**
  * Represents the state of a <i>single game</i> and is
@@ -89,12 +91,15 @@ public class GameState {
 
     private long timestamp = 0;
     public final GameAction action;
+    public final GameActionPlay actionPlay;
+    private final MatchController match;
 
     /**
      * Constructor.
      * @param players2
+     * @param match0 
      */
-    public GameState(Iterable<LobbyPlayer> players2, GameType t) { /* no more zones to map here */
+    public GameState(Iterable<LobbyPlayer> players2, GameType t, MatchController match0) { /* no more zones to map here */
         type = t;
         List<Player> players = new ArrayList<Player>();
         for (LobbyPlayer p : players2) {
@@ -102,9 +107,11 @@ public class GameState {
             players.add(pl);
             ingamePlayers.add(pl);
         }
+        match = match0;
         allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
         action = new GameAction(this);
+        actionPlay = new GameActionPlay(this, match.getInput());
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
         
@@ -299,13 +306,22 @@ public class GameState {
     }
 
     /**
+     * @param reason 
      * @param go the gameOver to set
      */
-    public void setGameOver() {
+    public void setGameOver(GameEndReason reason) {
         this.gameOver = true;
         for (Player p : roIngamePlayers) {
             p.onGameOver();
         }
+        match.addGamePlayed(reason, this);
+        
+        new ViewWinLose(match);
+        // Play the win/lose sound
+        boolean humanWon = match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer());
+        getEvents().post(new DuelOutcomeEvent(humanWon));
+        
+        
     }
 
 
@@ -655,5 +671,14 @@ public class GameState {
             }
 
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public GameActionPlay getActionPlay() {
+        // TODO Auto-generated method stub
+        return actionPlay;
     }
 }

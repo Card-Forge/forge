@@ -138,7 +138,7 @@ public class InputMulligan extends Input {
                             if (GuiDialog.confirm(c, "Use this card's ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
-                                ga.playSpellAbilityNoStack(effect, false);
+                                game.getActionPlay().playSpellAbilityNoStack(p, effect, false);
                             }
                         }
                     }
@@ -161,7 +161,7 @@ public class InputMulligan extends Input {
                                 // Is there a better way for the AI to decide this?
                                 if (effect.doTrigger(false, (AIPlayer)p)) {
                                     GuiDialog.message("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
-                                    ComputerUtil.playNoStack(p, effect, game);
+                                    ComputerUtil.playNoStack((AIPlayer)p, effect, game);
                                 }
                             }
                         }

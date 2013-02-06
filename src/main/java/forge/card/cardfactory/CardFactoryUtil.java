@@ -4232,9 +4232,9 @@ public class CardFactoryUtil {
                     }
 
                     if (card.getController().isHuman()) {
-                        game.getAction().playSpellAbilityNoStack(origSA, false);
+                        game.getActionPlay().playSpellAbilityNoStack(card.getController(), origSA, false);
                     } else {
-                        ComputerUtil.playNoStack(card.getController(), origSA, game);
+                        ComputerUtil.playNoStack((AIPlayer)card.getController(), origSA, game);
                     }
                 }
             };

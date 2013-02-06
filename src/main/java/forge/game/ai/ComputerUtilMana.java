@@ -392,7 +392,7 @@ public class ComputerUtilMana {
     
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana);
     
-        cost = Singletons.getModel().getGame().getAction().getSpellCostChange(sa, cost);
+        cost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, cost);
     
         final Card card = sa.getSourceCard();
         // Tack xMana Payments into mana here if X is a set value

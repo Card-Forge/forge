@@ -48,6 +48,7 @@ import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
@@ -200,7 +201,7 @@ public class Upkeep extends Phase {
                             GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, cost, paidCommand, unpaidCommand, null, game);
                         } else { // computer
                             if (ComputerUtilCost.canPayCost(blankAbility, controller)) {
-                                ComputerUtil.playNoStack(controller, blankAbility, game);
+                                ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game);
                             } else {
                                 game.getAction().sacrifice(c, null);
                             }
@@ -303,7 +304,7 @@ public class Upkeep extends Phase {
                                 GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
                             } else { // computer
                                 if (ComputerUtilCost.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible")) {
-                                    ComputerUtil.playNoStack(controller, aiPaid, game);
+                                    ComputerUtil.playNoStack((AIPlayer)controller, aiPaid, game);
                                 } else {
                                     if (c.getName().equals("Cosmic Horror")) {
                                         controller.addDamage(7, c);
@@ -361,7 +362,7 @@ public class Upkeep extends Phase {
                                         paidCommand, unpaidCommand, null, game);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {
-                                    ComputerUtil.playNoStack(controller, blankAbility, game);
+                                    ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game);
                                 } else {
                                     game.getAction().sacrifice(c, null);
                                 }
@@ -405,7 +406,7 @@ public class Upkeep extends Phase {
                             } else { // computers
                                 if (ComputerUtilCost.canPayCost(aiPaid, controller)
                                         && (controller.predictDamage(upkeepDamage, c, false) > 0)) {
-                                    ComputerUtil.playNoStack(controller, aiPaid, game);
+                                    ComputerUtil.playNoStack((AIPlayer)controller, aiPaid, game);
                                 } else {
                                     controller.addDamage(upkeepDamage, c);
                                 }
@@ -669,7 +670,7 @@ public class Upkeep extends Phase {
             } // end human
             else { // computer
                 noPay.setActivatingPlayer(cp);
-                if (ComputerUtilCost.canPayCost(cost, cp)) {
+                if (ComputerUtilCost.canPayCost(cost, (AIPlayer) cp)) {
                     final Ability computerPay = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {

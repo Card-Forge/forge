@@ -272,7 +272,7 @@ public final class GameActionUtil {
     
                     if (p.isHuman()) {
                         if (GuiDialog.confirm(rippledCards[i], "Cast " + rippledCards[i].getName() + "?")) {
-                            game.getAction().playCardWithoutManaCost(rippledCards[i], p);
+                            game.getActionPlay().playCardWithoutManaCost(rippledCards[i], p);
                             revealed.remove(rippledCards[i]);
                         }
                     } else {

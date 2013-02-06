@@ -220,7 +220,7 @@ public class PlayEffect extends SpellEffect {
                     newSA.setPayCosts(cost);
                     newSA.setManaCost(SpellManaCost.NO_COST);
                     newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
-                    game.getAction().playSpellAbility(newSA, activator);
+                    game.getActionPlay().playSpellAbility(newSA, activator);
                     if (remember) {
                         source.addRemembered(tgtSA.getSourceCard());
                     }
@@ -237,20 +237,17 @@ public class PlayEffect extends SpellEffect {
                 }
             } else {
                 if (controller.isHuman()) {
-                    game.getAction().playSpellAbility(tgtSA, activator);
-                    if (remember) {
-                        source.addRemembered(tgtSA.getSourceCard());
-                    }
+                    game.getActionPlay().playSpellAbility(tgtSA, activator);
                 } else {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
                         if (spell.canPlayFromEffectAI(!optional, false) || !optional) {
-                            ComputerUtil.playStack(tgtSA, controller, game);
-                            if (remember) {
-                                source.addRemembered(tgtSA.getSourceCard());
-                            }
+                            ComputerUtil.playStack(tgtSA, (AIPlayer)controller, game);
                         }
                     }
+                }
+                if (remember) {
+                    source.addRemembered(tgtSA.getSourceCard());
                 }
             }
         }

@@ -45,6 +45,7 @@ import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -1465,7 +1466,7 @@ public class AbilityFactory {
                     // Didn't have any of the data on the original SA to pay dependant costs
                     ability.setActivatingPlayer(payer);
                     ability.setTarget(sa.getTarget());
-                    ComputerUtil.playNoStack(payer, ability, game); // Unless cost was payed - no resolve
+                    ComputerUtil.playNoStack((AIPlayer)payer, ability, game); // Unless cost was payed - no resolve
                     paid = true;
                 }
             }

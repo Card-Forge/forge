@@ -94,8 +94,8 @@ public class MatchController {
      */
     public void startRound() {
 
-        // Will this lose all the ordering?
-        currentGame = Singletons.getModel().newGame(players.keySet(),gameType);
+        // Will this lose all the ordering?s
+        currentGame = Singletons.getModel().newGame(players.keySet(),gameType, this);
         
         // Instantiate AI
         input = new InputControl(currentGame);

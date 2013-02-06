@@ -428,8 +428,8 @@ public enum FModel {
      * TODO: Write javadoc for this method.
      * @param players
      */
-    public GameState newGame(Iterable<LobbyPlayer> players, GameType type) {
-        gameState = new GameState(players,type);
+    public GameState newGame(Iterable<LobbyPlayer> players, GameType type, final MatchController match0) {
+        gameState = new GameState(players,type, match0);
         return gameState;
     }
 

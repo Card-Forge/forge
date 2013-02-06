@@ -237,9 +237,9 @@ public class ReplacementHandler {
 
         Player player = replacementEffect.getHostCard().getController();
         if (player.isHuman()) {
-            game.getAction().playSpellAbilityNoStack(effectSA, false);
+            game.getActionPlay().playSpellAbilityNoStack(player, effectSA, false);
         } else {
-            ComputerUtil.playNoStack(player, effectSA, game);
+            ComputerUtil.playNoStack((AIPlayer)player, effectSA, game);
         }
 
         return ReplacementResult.Replaced;

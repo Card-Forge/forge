@@ -22,13 +22,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import javax.swing.JFrame;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
@@ -37,18 +33,10 @@ import forge.CardUtil;
 import forge.Command;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.CardType;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.AttachEffect;
-import forge.card.abilityfactory.effects.CharmEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostPayment;
-import forge.card.mana.ManaCostBeingPaid;
-import forge.card.mana.ManaCostShard;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
@@ -56,20 +44,16 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbilityRequirements;
 import forge.card.spellability.Target;
-import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.control.input.InputPayManaCost;
-import forge.control.input.InputPayManaCostUtil;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.event.CardDestroyedEvent;
 import forge.game.event.CardRegeneratedEvent;
 import forge.game.event.CardSacrificedEvent;
-import forge.game.event.DuelOutcomeEvent;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
@@ -78,7 +62,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.match.ViewWinLose;
 
 
 /**
@@ -175,7 +158,7 @@ public class GameAction {
             if (zoneFrom.is(ZoneType.Battlefield)) {
                 c.setFlipStaus(false);
             }
-            copied = Singletons.getModel().getCardFactory().copyCard(c);
+            copied = forge.Singletons.getModel().getCardFactory().copyCard(c);
             copied.setUnearthed(c.isUnearthed());
             copied.setTapped(false);
             for (final Trigger trigger : copied.getTriggers()) {
@@ -314,7 +297,7 @@ public class GameAction {
                 copied.turnFaceUp();
             }
         } else if (zoneTo.is(ZoneType.Battlefield)) {
-            copied.setTimestamp(Singletons.getModel().getGame().getNextTimestamp());
+            copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeyword()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
                         || s.startsWith("May be played by your opponent")
@@ -324,7 +307,7 @@ public class GameAction {
                 }
             }
         } else if (zoneTo.is(ZoneType.Graveyard)) {
-            copied.setTimestamp(Singletons.getModel().getGame().getNextTimestamp());
+            copied.setTimestamp(game.getNextTimestamp());
             for (String s : copied.getKeyword()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
                         || s.startsWith("May be played by your opponent")
@@ -389,26 +372,6 @@ public class GameAction {
             // into play attached to things
             AttachEffect.attachAuraOnIndirectEnterBattlefield(c);
         }
-
-        return c;
-    }
-
-    /**
-     * <p>
-     * moveToPlayFromHand.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
-     */
-    public final Card moveToPlayFromHand(Card c) {
-        // handles the case for Clone, etc where prev was null
-
-        final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
-        final PlayerZone play = c.getController().getZone(ZoneType.Battlefield);
-
-        c = Singletons.getModel().getGame().getAction().changeZone(hand, play, c, null);
 
         return c;
     }
@@ -523,7 +486,7 @@ public class GameAction {
 
             @Override
             public void execute() {
-                Singletons.getModel().getGame().getAction().moveToHand(recoverable);
+                moveToHand(recoverable);
             }
         };
 
@@ -532,7 +495,7 @@ public class GameAction {
 
             @Override
             public void execute() {
-                Singletons.getModel().getGame().getAction().exile(recoverable);
+                exile(recoverable);
             }
         };
 
@@ -571,7 +534,7 @@ public class GameAction {
                             paidCommand, unpaidCommand, null, game);
                 } else { // computer
                     if (ComputerUtilCost.canPayCost(abRecover, p)) {
-                        ComputerUtil.playNoStack(p, abRecover, game);
+                        ComputerUtil.playNoStack((AIPlayer)p, abRecover, game);
                     } else {
                         GameAction.this.exile(recoverable);
                     }
@@ -696,7 +659,7 @@ public class GameAction {
         if (p != null && p.is(ZoneType.Battlefield)) {
             lastKnownInfo = CardUtil.getLKICopy(c);
             c.clearCounters(); // remove all counters
-            library.add(Singletons.getModel().getCardFactory().copyCard(c), libPosition);
+            library.add(forge.Singletons.getModel().getCardFactory().copyCard(c), libPosition);
         } else {
             c.clearCounters(); // remove all counters
             library.add(c, libPosition);
@@ -738,10 +701,8 @@ public class GameAction {
         if (game.isCardExiled(c)) {
             return c;
         }
-
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
-
-        return Singletons.getModel().getGame().getAction().moveTo(removed, c);
+        return moveTo(removed, c);
     }
 
     /**
@@ -795,57 +756,6 @@ public class GameAction {
 
     /**
      * <p>
-     * drawMiracle.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @param player 
-     */
-    public final void drawMiracle(final Card card, final Player player) {
-        // Whenever a card with miracle is the first card drawn in a turn,
-        // you may cast it for it's miracle cost
-        if (card.getMiracleCost() == null) {
-            return;
-        }
-
-        final SpellAbility miracle = card.getFirstSpellAbility().copy();
-        miracle.setPayCosts(new Cost(card, card.getMiracleCost(), false));
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(card.getName()).append(" - Cast via Miracle");
-        miracle.setStackDescription(sb.toString());
-
-        // TODO Convert this to a Trigger
-        final Ability activate = new Ability(card, SpellManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                // pay miracle cost here.
-                if (card.getOwner().isHuman()) {
-                    if (GuiDialog.confirm(card, card + " - Drawn. Pay Miracle Cost?")) {
-                        GameAction.this.playSpellAbility(miracle, player);
-                    }
-                } else {
-                    Spell spell = (Spell) miracle;
-                    spell.setActivatingPlayer(card.getOwner());
-                    if (spell.canPlayFromEffectAI(false, false)) {
-                        ComputerUtil.playStack(miracle, card.getOwner(), game);
-                    }
-                }
-            }
-        };
-
-        final StringBuilder sbAct = new StringBuilder();
-        sbAct.append(card.getName()).append(" - Miracle.");
-        activate.setStackDescription(sbAct.toString());
-        activate.setActivatingPlayer(card.getOwner());
-        activate.setTrigger(true);
-
-        game.getStack().add(activate);
-    }
-
-    /**
-     * <p>
      * discardMadness.
      * </p>
      * 
@@ -874,12 +784,12 @@ public class GameAction {
                 // pay madness cost here.
                 if (card.getOwner().isHuman()) {
                     if (GuiDialog.confirm(card, card + " - Discarded. Pay Madness Cost?")) {
-                        GameAction.this.playSpellAbility(madness, player);
+                        game.getActionPlay().playSpellAbility(madness, player);
                     }
                 } else {
                     Spell spell = (Spell) madness;
                     if (spell.canPlayFromEffectAI(false, false)) {
-                        ComputerUtil.playStack(madness, card.getOwner(), game);
+                        ComputerUtil.playStack(madness, (AIPlayer) card.getOwner(), game);
                     }
                 }
             }
@@ -900,11 +810,7 @@ public class GameAction {
      * 
      * @return a boolean.
      */
-    public final boolean checkEndGameState(final MatchController match, final GameState game) {
-        // if game is already over return true
-        if (game.isGameOver()) {
-            return true;
-        }
+    private final GameEndReason checkEndGameState(final GameState game) {
 
         GameEndReason reason = null;
         // award loses as SBE
@@ -961,17 +867,11 @@ public class GameAction {
         if (reason == null && !Iterables.any(game.getPlayers(), Predicates.and(Player.Predicates.NOT_LOST, Player.Predicates.isType(PlayerType.HUMAN)))) {
             reason = GameEndReason.AllHumansLost;
         }
-
-        if (reason != null) {
-            game.setGameOver();
-            match.addGamePlayed(reason, game);
-        }
-
-        return reason != null;
+        return reason;
     }
 
     /** */
-    public final void checkStaticAbilities() {
+    private final void checkStaticAbilities() {
         // remove old effects
         game.getStaticEffects().clearStaticEffects();
 
@@ -1031,25 +931,25 @@ public class GameAction {
             return;
         }
 
-        final JFrame frame = Singletons.getView().getFrame();
-        if (!frame.isDisplayable()) {
+//        final JFrame frame = Singletons.getView().getFrame();
+//        if (!frame.isDisplayable()) {
+//            return;
+//        }
+        
+        if ( game.isGameOver() )
             return;
-        }
 
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
 
-        MatchController match = Singletons.getModel().getMatch();
-        if (this.checkEndGameState(match, match.getCurrentGame())) {
+        GameEndReason endGame = this.checkEndGameState(game); 
+        if ( endGame != null ) {
             // Clear Simultaneous triggers at the end of the game
-            new ViewWinLose(match);
-            match.getCurrentGame().getStack().clearSimultaneousStack();
+            game.setGameOver(endGame);
+            game.getStack().clearSimultaneousStack();
             if (!refreeze) {
                 game.getStack().unfreezeStack();
             }
-            // Play the win/lose sound
-            boolean humanWon = match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer());
-            Singletons.getModel().getGame().getEvents().post(new DuelOutcomeEvent(humanWon));
             return;
         }
 
@@ -1212,9 +1112,9 @@ public class GameAction {
             c = list.get(i);
 
             if (c.getCounters(CounterType.LOYALTY) <= 0) {
-                Singletons.getModel().getGame().getAction().moveToGraveyard(c);
+                moveToGraveyard(c);
                 // Play the Destroy sound
-                Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
+                game.getEvents().post(new CardDestroyedEvent());
             }
 
             final ArrayList<String> types = c.getType();
@@ -1227,7 +1127,7 @@ public class GameAction {
 
                 if (cl.size() > 1) {
                     for (final Card crd : cl) {
-                        Singletons.getModel().getGame().getAction().moveToGraveyard(crd);
+                        moveToGraveyard(crd);
                     }
                 }
             }
@@ -1257,11 +1157,11 @@ public class GameAction {
             a.remove(0);
             if (1 < b.size()) {
                 for (int i = 0; i < b.size(); i++) {
-                    Singletons.getModel().getGame().getAction().sacrificeDestroy(b.get(i));
+                    sacrificeDestroy(b.get(i));
                 }
 
                 // Play the Destroy sound
-                Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
+                game.getEvents().post(new CardDestroyedEvent());
             }
         }
     } // destroyLegendaryCreatures()
@@ -1290,7 +1190,7 @@ public class GameAction {
         this.sacrificeDestroy(c);
 
         // Play the Sacrifice sound
-        Singletons.getModel().getGame().getEvents().post(new CardSacrificedEvent());
+        game.getEvents().post(new CardSacrificedEvent());
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1324,7 +1224,7 @@ public class GameAction {
             game.getCombat().removeFromCombat(c);
 
             // Play the Regen sound
-            Singletons.getModel().getGame().getEvents().post(new CardRegeneratedEvent());
+            game.getEvents().post(new CardRegeneratedEvent());
 
             return false;
         }
@@ -1377,7 +1277,7 @@ public class GameAction {
                         card.setDamage(0);
 
                         // Play the Destroy sound
-                        Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
+                        game.getEvents().post(new CardDestroyedEvent());
                     }
                 };
 
@@ -1391,7 +1291,7 @@ public class GameAction {
         } // totem armor
 
         // Play the Destroy sound
-        Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
+        game.getEvents().post(new CardDestroyedEvent());
 
         return this.sacrificeDestroy(c);
     }
@@ -1405,7 +1305,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card addSuspendTriggers(final Card c) {
+    private static Card addSuspendTriggers(final Card c) {
         c.setSVar("HasteFromSuspend", "True");
 
         final Command intoPlay = new Command() {
@@ -1521,466 +1421,5 @@ public class GameAction {
      * @param c
      *            a {@link forge.Card} object.
      */
-    public final void playCardWithoutManaCost(final Card c, Player player) {
-        final List<SpellAbility> choices = c.getBasicSpells();
-        // TODO add Buyback, Kicker, ... , spells here
-
-        SpellAbility sa = player.getController().getAbilityToPlay(choices);
-
-        if (sa == null) {
-            return;
-        }
-
-        sa.setActivatingPlayer(player);
-        this.playSpellAbilityForFree(sa);
-    }
-
-    /**
-     * <p>
-     * playSpellAbilityForFree.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void playSpellAbilityForFree(final SpellAbility sa) {
-        if (sa.getPayCosts() != null) {
-            final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa, game);
-
-            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
-            req.setFree(true);
-            req.fillRequirements();
-        } else if (sa.getBeforePayMana() == null) {
-            if (sa.isSpell()) {
-                final Card c = sa.getSourceCard();
-                if (!c.isCopiedSpell()) {
-                    sa.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(c));
-                }
-            }
-            boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
-
-            game.getStack().add(sa, x);
-        } else {
-            sa.setManaCost(SpellManaCost.ZERO); // Beached As
-            Singletons.getModel().getMatch().getInput().setInput(sa.getBeforePayMana());
-        }
-    }
-
-    /** The Cost cutting_ get multi kicker mana cost paid. */
-    private int costCuttingGetMultiKickerManaCostPaid = 0;
-
-    /** The Cost cutting_ get multi kicker mana cost paid_ colored. */
-    private String costCuttingGetMultiKickerManaCostPaidColored = "";
-
-    /**
-     * <p>
-     * getSpellCostChange.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param originalCost
-     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
-     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
-     */
-    public final ManaCostBeingPaid getSpellCostChange(final SpellAbility sa, final ManaCostBeingPaid originalCost) {
-        // Beached
-        final Card originalCard = sa.getSourceCard();
-        final SpellAbility spell = sa;
-        String mana = originalCost.toString();
-        ManaCostBeingPaid manaCost = new ManaCostBeingPaid(mana);
-        if (sa.isXCost() && !originalCard.isCopiedSpell()) {
-            originalCard.setXManaCostPaid(0);
-        }
-
-        if (game == null || sa.isTrigger()) {
-            return manaCost;
-        }
-
-        if (spell.isSpell()) {
-            if (spell.isDelve()) {
-                manaCost = getCostAfterDelve(originalCost, originalCard);
-            } else if (spell.getSourceCard().hasKeyword("Convoke")) {
-                ManaCostBeingPaid convokeCost = getCostAfterConvoke(sa, originalCost, spell);
-                if ( null != convokeCost ) 
-                    manaCost = convokeCost; 
-            }
-        } // isSpell
-
-        List<Card> cardsOnBattlefield = Lists.newArrayList(game.getCardsIn(ZoneType.Battlefield));
-        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
-        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Command));
-        if (!cardsOnBattlefield.contains(originalCard)) {
-            cardsOnBattlefield.add(originalCard);
-        }
-        final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
-        final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
-        final ArrayList<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
-
-        // Sort abilities to apply them in proper order
-        for (Card c : cardsOnBattlefield) {
-            final ArrayList<StaticAbility> staticAbilities = c.getStaticAbilities();
-            for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.getMapParams().get("Mode").equals("RaiseCost")) {
-                    raiseAbilities.add(stAb);
-                } else if (stAb.getMapParams().get("Mode").equals("ReduceCost")) {
-                    reduceAbilities.add(stAb);
-                } else if (stAb.getMapParams().get("Mode").equals("SetCost")) {
-                    setAbilities.add(stAb);
-                }
-            }
-        }
-        // Raise cost
-        for (final StaticAbility stAb : raiseAbilities) {
-            manaCost = stAb.applyAbility("RaiseCost", spell, manaCost);
-        }
-
-        // Reduce cost
-        for (final StaticAbility stAb : reduceAbilities) {
-            manaCost = stAb.applyAbility("ReduceCost", spell, manaCost);
-        }
-
-        // Set cost (only used by Trinisphere) is applied last
-        for (final StaticAbility stAb : setAbilities) {
-            manaCost = stAb.applyAbility("SetCost", spell, manaCost);
-        }
-
-        return manaCost;
-    } // GetSpellCostChange
-
-    private ManaCostBeingPaid getCostAfterConvoke(final SpellAbility sa, final ManaCostBeingPaid originalCost, final SpellAbility spell) {
-        
-        List<Card> untappedCreats = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-        untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
-
-        if (untappedCreats.size() != 0) {
-            final ArrayList<Object> choices = new ArrayList<Object>();
-            for (final Card c : untappedCreats) {
-                choices.add(c);
-            }
-            choices.add("DONE");
-            ArrayList<String> usableColors = new ArrayList<String>();
-            ManaCostBeingPaid newCost = new ManaCostBeingPaid(originalCost.toString());
-            Object tapForConvoke = null;
-            if (sa.getActivatingPlayer().isHuman()) {
-                tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(),
-                        choices);
-            } else {
-                // TODO: AI to choose a creature to tap would go here
-                // Probably along with deciding how many creatures to
-                // tap
-            }
-            while ((tapForConvoke != null) && (tapForConvoke instanceof Card) && (untappedCreats.size() != 0)) {
-                final Card workingCard = (Card) tapForConvoke;
-                usableColors = CardUtil.getConvokableColors(workingCard, newCost);
-
-                if (usableColors.size() != 0) {
-                    String chosenColor = usableColors.get(0);
-                    if (usableColors.size() > 1) {
-                        if (sa.getActivatingPlayer().isHuman()) {
-                            chosenColor = GuiChoose.one("Convoke for which color?", usableColors);
-                        } else {
-                            // TODO: AI for choosing which color to
-                            // convoke goes here.
-                        }
-                    }
-
-                    if (chosenColor.equals("colorless")) {
-                        newCost.decreaseColorlessMana(1);
-                    } else {
-                        String newCostStr = newCost.toString();
-                        newCostStr = newCostStr.replaceFirst(
-                                InputPayManaCostUtil.getShortColorString(chosenColor), "").replaceFirst("  ", " ");
-                        newCost = new ManaCostBeingPaid(newCostStr.trim());
-                    }
-
-                    sa.addTappedForConvoke(workingCard);
-                    choices.remove(workingCard);
-                    untappedCreats.remove(workingCard);
-                    if ((choices.size() < 2) || (newCost.getConvertedManaCost() == 0)) {
-                        break;
-                    }
-                } else {
-                    untappedCreats.remove(workingCard);
-                }
-
-                if (sa.getActivatingPlayer().isHuman()) {
-                    tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(), choices);
-                } else {
-                    // TODO: AI to choose a creature to tap would go
-                    // here
-                }
-            }
-
-            // will only be null if user cancelled.
-            if (tapForConvoke != null) {
-                // Convoked creats are tapped here with triggers
-                // suppressed,
-                // Then again when payment is done(In
-                // InputPayManaCost.done()) with suppression cleared.
-                // This is to make sure that triggers go off at the
-                // right time
-                // AND that you can't use mana tapabilities of convoked
-                // creatures
-                // to pay the convoked cost.
-                for (final Card c : sa.getTappedForConvoke()) {
-                    c.setTapped(true);
-                }
-
-                return newCost;
-            }
-        }
-        return null;
-    }
-
-    private ManaCostBeingPaid getCostAfterDelve(final ManaCostBeingPaid originalCost, final Card originalCard) {
-        ManaCostBeingPaid manaCost;
-        final int cardsInGrave = originalCard.getController().getCardsIn(ZoneType.Graveyard).size();
-
-        final Player pc = originalCard.getController();
-        if (pc.isHuman()) {
-            final Integer[] cntChoice = new Integer[cardsInGrave + 1];
-            for (int i = 0; i <= cardsInGrave; i++) {
-                cntChoice[i] = Integer.valueOf(i);
-            }
-
-            final Integer chosenAmount = GuiChoose.one("Exile how many cards?", cntChoice);
-            System.out.println("Delve for " + chosenAmount);
-            final List<Card> choices = new ArrayList<Card>(pc.getCardsIn(ZoneType.Graveyard));
-            final List<Card> chosen = new ArrayList<Card>();
-            for (int i = 0; i < chosenAmount; i++) {
-                final Card nowChosen = GuiChoose.oneOrNone("Exile which card?", choices);
-
-                if (nowChosen == null) {
-                    // User canceled,abort delving.
-                    chosen.clear();
-                    break;
-                }
-
-                choices.remove(nowChosen);
-                chosen.add(nowChosen);
-            }
-
-            for (final Card c : chosen) {
-                this.exile(c);
-            }
-
-            manaCost = new ManaCostBeingPaid(originalCost.toString());
-            manaCost.decreaseColorlessMana(chosenAmount);
-        } else {
-            // AI
-            int numToExile = 0;
-            final int colorlessCost = originalCost.getColorlessManaAmount();
-
-            if (cardsInGrave <= colorlessCost) {
-                numToExile = cardsInGrave;
-            } else {
-                numToExile = colorlessCost;
-            }
-
-            for (int i = 0; i < numToExile; i++) {
-                final List<Card> grave = pc.getZone(ZoneType.Graveyard).getCards();
-                Card chosen = null;
-                for (final Card c : grave) { // Exile noncreatures first
-                                             // in
-                    // case we can revive. Might
-                    // wanna do some additional
-                    // checking here for Flashback
-                    // and the like.
-                    if (!c.isCreature()) {
-                        chosen = c;
-                        break;
-                    }
-                }
-                if (chosen == null) {
-                    chosen = CardFactoryUtil.getWorstCreatureAI(grave);
-                }
-
-                if (chosen == null) {
-                    // Should never get here but... You know how it is.
-                    chosen = grave.get(0);
-                }
-
-                this.exile(chosen);
-            }
-            manaCost = new ManaCostBeingPaid(originalCost.toString());
-            manaCost.decreaseColorlessMana(numToExile);
-        }
-        return manaCost;
-    }
-
-    /**
-     * choose optional additional costs. For HUMAN only
-     * 
-     * @param original
-     *            the original sa
-     * @return an ArrayList<SpellAbility>.
-     */
-    public static SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
-        //final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        final ArrayList<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
-        final Player human = Singletons.getControl().getPlayer();
-        if (!original.isSpell()) {
-            return original;
-        }
-
-        final SpellAbility ability = human.getController().getAbilityToPlay(abilities);
-        return ability;
-    }
-
-    /**
-     * <p>
-     * playSpellAbility.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void playSpellAbility(SpellAbility sa, Player activator) {
-        sa.setActivatingPlayer(activator);
-
-        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            CharmEffect.makeChoices(sa);
-        }
-
-        sa = GameAction.chooseOptionalAdditionalCosts(sa);
-
-        if (sa == null) {
-            return;
-        }
-
-        // Need to check PayCosts, and Ability + All SubAbilities for Target
-        boolean newAbility = sa.getPayCosts() != null;
-        SpellAbility ability = sa;
-        while ((ability != null) && !newAbility) {
-            final Target tgt = ability.getTarget();
-
-            newAbility |= tgt != null;
-            ability = ability.getSubAbility();
-        }
-
-        if (newAbility) {
-            final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
-            CostPayment payment = null;
-            if (sa.getPayCosts() == null) {
-                payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa, game);
-            } else {
-                payment = new CostPayment(sa.getPayCosts(), sa, game);
-            }
-
-            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
-            req.fillRequirements();
-        } else {
-            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
-            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                manaCost = new ManaCostBeingPaid("0");
-            } else {
-                manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
-            }
-            if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
-                if (sa.getAfterPayMana() == null) {
-                    final Card source = sa.getSourceCard();
-                    if (sa.isSpell() && !source.isCopiedSpell()) {
-                        sa.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(source));
-                    }
-
-                    game.getStack().add(sa);
-                    return;
-                } else {
-                    Singletons.getModel().getMatch().getInput().setInput(sa.getAfterPayMana());
-                }
-            } else if (sa.getBeforePayMana() == null) {
-                Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCost(sa, manaCost));
-            } else {
-                Singletons.getModel().getMatch().getInput().setInput(sa.getBeforePayMana());
-            }
-        }
-    }
-
-    /**
-     * <p>
-     * playSpellAbility_NoStack.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param skipTargeting
-     *            a boolean.
-     */
-    public final void playSpellAbilityNoStack(final SpellAbility sa, final boolean skipTargeting) {
-        sa.setActivatingPlayer(Singletons.getControl().getPlayer());
-
-        if (sa.getPayCosts() != null) {
-            final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa, game);
-
-            if (!sa.isTrigger()) {
-                payment.changeCost();
-            }
-
-            final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
-            req.setSkipStack(true);
-            req.fillRequirements(skipTargeting);
-        } else {
-            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
-            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                manaCost = new ManaCostBeingPaid("0");
-            } else {
-                manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
-            }
-            if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
-                if (sa.getAfterPayMana() == null) {
-                    AbilityFactory.resolve(sa, false);
-                    return;
-                } else {
-                    Singletons.getModel().getMatch().getInput().setInput(sa.getAfterPayMana());
-                }
-            } else if (sa.getBeforePayMana() == null) {
-                Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCost(sa, true));
-            } else {
-                Singletons.getModel().getMatch().getInput().setInput(sa.getBeforePayMana());
-            }
-        }
-    }
-
-
-    /**
-     * Gets the cost cutting get multi kicker mana cost paid.
-     * 
-     * @return the costCuttingGetMultiKickerManaCostPaid
-     */
-    public int getCostCuttingGetMultiKickerManaCostPaid() {
-        return this.costCuttingGetMultiKickerManaCostPaid;
-    }
-
-    /**
-     * Sets the cost cutting get multi kicker mana cost paid.
-     * 
-     * @param costCuttingGetMultiKickerManaCostPaid0
-     *            the costCuttingGetMultiKickerManaCostPaid to set
-     */
-    public void setCostCuttingGetMultiKickerManaCostPaid(final int costCuttingGetMultiKickerManaCostPaid0) {
-        this.costCuttingGetMultiKickerManaCostPaid = costCuttingGetMultiKickerManaCostPaid0;
-    }
-
-    /**
-     * Gets the cost cutting get multi kicker mana cost paid colored.
-     * 
-     * @return the costCuttingGetMultiKickerManaCostPaidColored
-     */
-    public String getCostCuttingGetMultiKickerManaCostPaidColored() {
-        return this.costCuttingGetMultiKickerManaCostPaidColored;
-    }
-
-    /**
-     * Sets the cost cutting get multi kicker mana cost paid colored.
-     * 
-     * @param costCuttingGetMultiKickerManaCostPaidColored0
-     *            the costCuttingGetMultiKickerManaCostPaidColored to set
-     */
-    public void setCostCuttingGetMultiKickerManaCostPaidColored(
-            final String costCuttingGetMultiKickerManaCostPaidColored0) {
-        this.costCuttingGetMultiKickerManaCostPaidColored = costCuttingGetMultiKickerManaCostPaidColored0;
-    }
+    
 }

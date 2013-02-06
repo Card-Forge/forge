@@ -544,10 +544,10 @@ public class TriggerHandler {
 
         if (regtrig.isStatic()) {
             if (wrapperAbility.getActivatingPlayer().isHuman()) {
-                game.getAction().playSpellAbilityNoStack(wrapperAbility, false);
+                game.getActionPlay().playSpellAbilityNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, false);
             } else {
                 wrapperAbility.doTrigger(isMandatory, (AIPlayer)wrapperAbility.getActivatingPlayer());
-                ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
+                ComputerUtil.playNoStack((AIPlayer)wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
             }
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
