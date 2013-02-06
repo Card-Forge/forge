@@ -105,10 +105,10 @@ public enum CDeckEditorUI implements CardContainer {
     }
 
     private void moveSelectedCards(
-            EditorTableView<InventoryItem> table, _MoveAction moveAction, boolean moveFour) {
+            EditorTableView<InventoryItem> table, _MoveAction moveAction, int maxQty) {
         List<InventoryItem> items = table.getSelectedCards();
         for (InventoryItem item : items) {
-            moveAction.move(item, Math.min(moveFour ? 4 : 1, table.getCardCount(item)));
+            moveAction.move(item, Math.min(maxQty, table.getCardCount(item)));
         }
 
         CStatistics.SINGLETON_INSTANCE.update();
@@ -123,7 +123,7 @@ public enum CDeckEditorUI implements CardContainer {
             public void move(InventoryItem item, int qty) {
                 childController.addCard(item, qty);
             }
-        }, addFour);
+        }, addFour ? 4 : 1);
     }
 
     @SuppressWarnings("unchecked")
@@ -134,9 +134,20 @@ public enum CDeckEditorUI implements CardContainer {
             public void move(InventoryItem item, int qty) {
                 childController.removeCard(item, qty);
             }
-        }, removeFour);
+        }, removeFour ? 4 : 1);
     }
 
+    @SuppressWarnings("unchecked")
+    public void removeAllCards() {
+        moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableDeck(),
+                new _MoveAction() {
+            @Override
+            public void move(InventoryItem item, int qty) {
+                childController.removeCard(item, qty);
+            }
+        }, Integer.MAX_VALUE);
+    }
+    
     //========== Other methods
     /**
      * Updates listeners for current controller.

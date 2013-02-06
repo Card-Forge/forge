@@ -78,7 +78,7 @@ public final class SLayoutIO {
         catch (final Exception e) { e.printStackTrace(); }
     }
 
-    private static void save(final File f0) throws Exception {
+    private synchronized static void save(final File f0) throws Exception {
         final String fWriteTo;
         SLayoutIO.setFilesForState();
 

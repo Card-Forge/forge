@@ -118,6 +118,7 @@ public class ViewWinLose {
         txtLog = new FTextArea();
         txtLog.setText(Singletons.getModel().getGame().getGameLog().getLogText());
         txtLog.setFont(FSkin.getFont(14));
+        txtLog.setFocusable(true); // allow highlighting and copying of log
 
         // Add all components accordingly.
         overlay.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));
