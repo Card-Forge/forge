@@ -6,6 +6,7 @@ Icon=BlackTalon.jpg
 Difficulty=very hard
 Description=Black Talon plays a monoblack mostly-weenie deck.
 Deck Type=constructed
+Card Reward=14% chosen card sets:5ED,MIR,VIS rules:black,creature rarity:C,U desc:a Black Creature
 [main]
 2 Bad Moon|LEB
 3 Black Knight|5ED

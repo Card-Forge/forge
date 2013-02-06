@@ -6,6 +6,7 @@ Icon=Ajok.jpg
 Difficulty=very hard
 Description=UW Counterpost deck.
 Deck Type=constructed
+Card Reward=20% Counterspell|5ED
 [main]
 4 Arcane Denial|ALL
 3 Binding Grasp|5ED

@@ -6,6 +6,7 @@ Icon=Osiris.jpg
 Difficulty=very hard
 Description=Team Clean's version of the 'Forgotten Orb' deck.
 Deck Type=constructed
+Card Reward=14% duplicate card;8% Winter Orb|2ED
 [main]
 2 Arcane Denial|ALL
 4 Black Knight|5ED

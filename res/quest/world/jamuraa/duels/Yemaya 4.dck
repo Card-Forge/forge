@@ -6,6 +6,7 @@ Icon=Yemaya.jpg
 Difficulty=very hard
 Description=Yemaya plays Sheppard's 'Comerish Turbo-Xerox' deck.
 Deck Type=constructed
+Card Reward=15% duplicate card
 [main]
 4 Brainstorm|ICE
 4 Counterspell|5ED

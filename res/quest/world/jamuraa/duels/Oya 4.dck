@@ -6,6 +6,7 @@ Icon=Oya.jpg
 Difficulty=very hard
 Description=Oya plays RB 'Blue Fire' deck.
 Deck Type=constructed
+Card Reward=20% Kaervek's Torch|MIR
 [main]
 3 Dissipate|MIR
 3 Fireblast|VIS

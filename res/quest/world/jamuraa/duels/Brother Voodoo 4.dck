@@ -5,6 +5,7 @@ Title=Brother Voodoo
 Icon=BrotherVoodoo.jpg
 Difficulty=very hard
 Description=Brother Voodoo plays a T1 'Basket of Ophies' deck.
+Card Reward=5% Ophidian|WTH;15% Snake Basket|VIS
 Deck Type=constructed
 [main]
 1 Amnesia|DRK

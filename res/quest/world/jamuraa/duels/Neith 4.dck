@@ -6,6 +6,7 @@ Icon=Neith.jpg
 Difficulty=very hard
 Description=Neith plays a T1 'French Keeper' deck.
 Deck Type=constructed
+Card Reward=15% chosen card sets:5ED,MIR,VIS,WTH rules:artifact rarity:C,U desc:an Artifact
 [main]
 1 Amnesia|DRK
 1 Ancestral Recall|LEB

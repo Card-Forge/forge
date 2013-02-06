@@ -6,6 +6,7 @@ Icon=SerendibGenie.jpg
 Difficulty=very hard
 Description=Serendib Genie plays a T1 'Djinns'n'juice' deck.
 Deck Type=constructed
+Card Reward=25% Serendib Efreet|ARN
 [main]
 1 Ancestral Recall|LEB
 1 Balance|LEB

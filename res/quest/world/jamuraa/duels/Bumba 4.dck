@@ -6,6 +6,7 @@ Icon=Bumba.jpg
 Difficulty=very hard
 Description=Bumba plays a variant of Svendspaar Geertsten's 'Senor Stompy' deck from the 1997 Worlds tournament.
 Deck Type=constructed
+Card Reward=14% chosen card sets:5ED,MIR,VIS rules:green,creature rarity:C,U desc:a Green Creature
 [main]
 2 Berserk|LEB
 16 Forest|MIR

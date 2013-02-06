@@ -6,6 +6,7 @@ Icon=RasAlGhul.jpg
 Difficulty=very hard
 Description=Ra's al Ghul plays a T1 'Chinnock Beater' deck.
 Deck Type=constructed
+Card Reward=15% chosen card sets:5ED,MIR,VIS,WTH rules:land rarity:C,U desc:a Land
 [main]
 1 Ancestral Recall|LEB
 1 Balance|LEB

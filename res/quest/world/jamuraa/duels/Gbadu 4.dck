@@ -6,6 +6,7 @@ Icon=Gbadu.jpg
 Difficulty=very hard
 Description=Gbadu plays a T1 'Budget Zoo' deck.
 Deck Type=constructed
+Card Reward=15% chosen card sets:5ED,MIR,VIS,WTH rules:creature rarity:C desc:a Common Creature
 [main]
 1 Balance|LEB
 1 Black Vise|LEB

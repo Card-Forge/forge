@@ -6,6 +6,7 @@ Icon=Horus.jpg
 Difficulty=very hard
 Description=Horus plays a big UWR deck with some big creatures and burn.
 Deck Type=constructed
+Card Reward=14% chosen card sets:5ED,MIR,VIS rules:white,creature rarity:C,U desc:a White Creature
 [main]
 1 Basalt Monolith|LEB
 3 Clone|LEB
