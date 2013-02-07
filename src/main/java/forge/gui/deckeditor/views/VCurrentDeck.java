@@ -218,7 +218,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         parentBody.add(pnlHeader, "w 98%!, gap 1% 1% 5 0");
         parentBody.add(pnlStats, "w 100:500:500, center");
         parentBody.add(pnlRemoveButtons, "w 96%!, gap 2% 0 0 0");
-        parentBody.add(scroller, "w 98%!, h 100%!, gap 1% 0 0 1%");
+        parentBody.add(scroller, "w 98%!, h 100%  - 35, gap 1% 0 0 1%");
     }
 
     //========== Retrieval methods

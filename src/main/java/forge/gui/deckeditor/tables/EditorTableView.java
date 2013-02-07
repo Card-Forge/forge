@@ -233,25 +233,28 @@ public final class EditorTableView<T extends InventoryItem> {
      *            an int
      */
     public void fixSelection(final int rowLastSelected) {
-        // 3 cases: 0 cards left, select the same row, select prev row
-        final int cntRowsAbove = this.model.getRowCount();
-        if (0 <= rowLastSelected && cntRowsAbove != 0) {
-            int newRow = rowLastSelected;
-            if (cntRowsAbove == newRow) {
-                // move selection away from the last, already missing, option
-                newRow--;
-            }
-            final int selectRow = newRow;
-            
-            if (selectRow > 0) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        table.setRowSelectionInterval(selectRow, selectRow);
-                    }
-                });
-            }
+        if (0 > rowLastSelected) {
+            return;
         }
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // 3 cases: 0 cards left, select the same row, select prev row
+                int numRows = model.getRowCount();
+                if (numRows == 0) {
+                    return;
+                }
+                
+                int newRow = rowLastSelected;
+                if (numRows <= newRow) {
+                    // move selection away from the last, already missing, option
+                    newRow = numRows - 1;
+                }
+                
+                table.setRowSelectionInterval(newRow, newRow);
+            }
+        });
     }
 
     /**
