@@ -1,0 +1,15 @@
+Name:Sewer Nemesis
+ManaCost:3 B
+Types:Creature Horror
+Text:no text
+PT:*/*
+K:ETBReplacement:Other:ChooseP
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in the chosen player's graveyard.
+SVar:X:Count$InChosenYard
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player.Chosen | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever the chosen player casts a spell, that player puts the top card of his or her library into his or her graveyard.
+SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sewer_nemesis.jpg
+SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/98.jpg
+Oracle:As Sewer Nemesis enters the battlefield, choose a player.\nSewer Nemesis's power and toughness are each equal to the number of cards in the chosen player's graveyard.\nWhenever the chosen player casts a spell, that player puts the top card of his or her library into his or her graveyard.
+End
