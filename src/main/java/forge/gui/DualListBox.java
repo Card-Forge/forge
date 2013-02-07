@@ -19,6 +19,8 @@ import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.google.common.base.Function;
+
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.gui.match.CMatchUI;
@@ -306,12 +308,27 @@ public class DualListBox<T> extends FPanel {
                 onRemove.run();
             }
         };
+        
+        final Function<KeyEvent, Void> onEnter = new Function<KeyEvent, Void>() {
+            @Override
+            public Void apply (KeyEvent e) {
+                if (e.getKeyCode() == 10) {
+                    if (e.isControlDown() || e.isMetaDown()) {
+                        autoButton.doClick();
+                    } else {
+                        okButton.doClick();
+                    }
+                }
+                
+                return null;
+            }
+        };
 
         sourceList.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
                 if (e.getKeyChar() == ' ') { onAdd.run(); }
-                else if (e.getKeyCode() == 10) { okButton.doClick(); }
+                else { onEnter.apply(e); }
             }
         });
         
@@ -319,7 +336,7 @@ public class DualListBox<T> extends FPanel {
             @Override
             public void keyPressed(final KeyEvent e) {
                 if (e.getKeyChar() == ' ') { onRemove.run(); }
-                else if (e.getKeyCode() == 10) { okButton.doClick(); }
+                else { onEnter.apply(e); }
             }
         });
         
