@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import com.google.common.base.Predicate;
 
 import forge.Card;
@@ -266,7 +268,7 @@ public class DiscardEffect extends RevealEffectBase {
                             dPHand = getRevealedList(p, dPHand, amount, false);
                         }
                         List<Card> dPChHand = new ArrayList<Card>(dPHand);
-                        String[] dValid = null;
+                        String[] dValid = ArrayUtils.EMPTY_STRING_ARRAY;
                         if (sa.hasParam("DiscardValid")) { // Restrict card choices
                             dValid = sa.getParam("DiscardValid").split(",");
                             dPChHand = CardLists.getValidCards(dPHand, dValid, source.getController(), source);
