@@ -130,7 +130,6 @@ public class MatchController {
             // TODO restore this functionality!!!
             //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
             for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-                field.getLblHand().setHoverable(Preferences.DEV_MODE);
                 field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
             }
 
