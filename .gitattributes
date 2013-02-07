@@ -12270,6 +12270,7 @@ res/pics_product/booster/9ED.png -text
 res/pics_product/booster/ALA.png -text
 res/pics_product/booster/AP.png -text
 res/pics_product/booster/ARB.png -text
+res/pics_product/booster/AVR.jpg -text
 res/pics_product/booster/BOK.png -text
 res/pics_product/booster/CFX.png -text
 res/pics_product/booster/CHK.png -text
@@ -12281,6 +12282,7 @@ res/pics_product/booster/EVE.png -text
 res/pics_product/booster/EX.png -text
 res/pics_product/booster/FUT.png -text
 res/pics_product/booster/GPT.png -text
+res/pics_product/booster/GTC.jpg -text
 res/pics_product/booster/IN.png -text
 res/pics_product/booster/JUD.png -text
 res/pics_product/booster/LGN.png -text
@@ -12288,6 +12290,7 @@ res/pics_product/booster/LRW.png -text
 res/pics_product/booster/M10.png -text
 res/pics_product/booster/M11.png -text
 res/pics_product/booster/M12.png -text
+res/pics_product/booster/M13.jpg -text
 res/pics_product/booster/MBS.png -text
 res/pics_product/booster/MI.png -text
 res/pics_product/booster/MOR.png -text
@@ -12299,6 +12302,7 @@ res/pics_product/booster/PLC.png -text
 res/pics_product/booster/PS.png -text
 res/pics_product/booster/RAV.png -text
 res/pics_product/booster/ROE.png -text
+res/pics_product/booster/RTR.jpg -text
 res/pics_product/booster/SCG.png -text
 res/pics_product/booster/SHM.png -text
 res/pics_product/booster/SOK.png -text
@@ -12320,6 +12324,7 @@ res/pics_product/fatpacks/9ED.jpg -text
 res/pics_product/fatpacks/ALA.jpg -text
 res/pics_product/fatpacks/APC.jpg -text
 res/pics_product/fatpacks/ARB.jpg -text
+res/pics_product/fatpacks/AVR.png -text
 res/pics_product/fatpacks/BOK.jpg -text
 res/pics_product/fatpacks/CFX.jpg -text
 res/pics_product/fatpacks/CHK.jpg -text
@@ -12330,6 +12335,7 @@ res/pics_product/fatpacks/DST.jpg -text
 res/pics_product/fatpacks/EVE.jpg -text
 res/pics_product/fatpacks/FUT.jpg -text
 res/pics_product/fatpacks/GPT.jpg -text
+res/pics_product/fatpacks/GTC.jpg -text
 res/pics_product/fatpacks/INV.jpg -text
 res/pics_product/fatpacks/ISD.jpg -text
 res/pics_product/fatpacks/JUD.jpg -text
@@ -12341,6 +12347,7 @@ res/pics_product/fatpacks/M11.jpg -text
 res/pics_product/fatpacks/M11.png -text
 res/pics_product/fatpacks/M12.jpg -text
 res/pics_product/fatpacks/M12.png -text
+res/pics_product/fatpacks/M13.jpg -text
 res/pics_product/fatpacks/MBS.jpg -text
 res/pics_product/fatpacks/MMQ.jpg -text
 res/pics_product/fatpacks/MOR.jpg -text
@@ -12354,6 +12361,7 @@ res/pics_product/fatpacks/PLC.jpg -text
 res/pics_product/fatpacks/PLS.JPG -text
 res/pics_product/fatpacks/RAV.jpg -text
 res/pics_product/fatpacks/ROE.jpg -text
+res/pics_product/fatpacks/RTR.jpg -text
 res/pics_product/fatpacks/SCG.jpg -text
 res/pics_product/fatpacks/SHM.jpg -text
 res/pics_product/fatpacks/SOK.jpg -text
