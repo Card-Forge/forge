@@ -119,11 +119,51 @@ Fixes/Features:
 - simplify and theme choose sets dialog
 - Minor technical improvement to a check in BoosterUtils.java.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improved Sedris, the Traitor King's script to better handle the exile at next EOT
+- Fixed Haste on suspended creatures.
+- Fixed AI ignoring "DiscardValid" parameter.
+- make set chooser dialog overlay-based instead of JDialog-based
+- move type parsing from private constructor to reader class; add comment on purpose of 2-letter codes
+- Fixed Deathpact Angel.
+- differentiate item hilight when a FList listbox has lost focus from when the listbox is selected
+- ensure the CardListViewer always appears in the center of the screen
+- allow spacebar to move cards in DualListBox and enter to select the OK button
+- make color of listbox selection depend on listbox focus, not cell focus
+- avoid NPE when attempting to start a challenge when there isn't one to start
+- set button focus after match; this also gets the game log scrolling properly
+- SpellAbility: afterResolve and afterPayMana were removed, since they were not used.
+- little refactoring for global ruin
+- CardEdition: remove unused ctor
+- SpellAbility: Intrinsic/Extrinsic types were never assigned (removed)
+- setPaidList, beforePayManaAI, setAllReplacingObjects, hasReplacingObject, wasCancelled were never used (removed)
+- reduced visibility of setManaPart, 
+- finalized setReplicateManaCost, setXManaCost, setIsMultiKicker, setIsReplicate, setIsCycling, setConditions, (set/add)OptionalAdditionalCosts since they were called by CardFactoryUtil only => all removed from WrappedAbility.java
+- allow highlighting and copying of match log in ViewWinLose
+- make saving layouts thread safe
+- add ctrl(cmd)+enter hotkey to auto button in ability chooser dialog
+- scroll game log to top on display
+- reshow selected card when the listbox regains focus
+- show current card /after/ the events stop firing so the card data doesn't get overwritten
+- Converting Sheltered Valley to script (no AI exists in hardcode, but we probably should an add an SVar to not play this if that player already controls one of these)
+- Added an ai check svar to Sheltered Valley so that it won't play it if it already has another one on the battlefield
+- AiController.getLandsToPlay will now check NeedsToPlayVar and filter out relevant cards
+- Added a deck editor icon for products. Hooked up the icon in FSkin and added a commented out basic hook for it in SEditorUtil
+- getAvailableMana and mapManaSources accept any player as parameter, since AI wants to evaluate player's mana he might use to pump creatures
+- add pack filter in spell shop
+- use FButtons instead of FLabels on the AssignDamage dialog so default actions and tabbing work properly
+- use predicates instead of a custom count function
+- don't select negative row after buying every last item in the spell shop
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
 
+
+
+Added the following Vanguard Avatar:
+
+Momir Vig, Simic Visionary Avatar
 
 
 Added the following Planes:
@@ -136,6 +176,25 @@ Added the following cards:
 
 Cunning Giant
 Sedris, the Traitor King
+Skill Borrower
+Aura Barbs
+Burning-Tree Shaman
+Capricious Efreet
+Coils of the Medusa
+Enchantment Alteration
+Farrel's Mantle
+Keldon Firebombers
+Mana Echoes
+Mirrorwood Treefolk
+Misstep
+Primordial Ooze
+Protean Hydra
+Pyrrhic Revival
+Rohgahh of Kher Keep
+Sewers of Estark
+Signal the Clans
+Wild Swing
+Yamabushi's Storm
 
 
 end
