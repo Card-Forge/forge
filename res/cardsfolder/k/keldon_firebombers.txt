@@ -1,0 +1,14 @@
+Name:Keldon Firebombers
+ManaCost:3 R R
+Types:Creature Human Soldier
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChooseThree | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices all lands he or she controls except for three.
+SVar:TrigChooseThree:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBSacrificeAll
+SVar:DBChoose:DB$ ChooseCard | Amount$ 3 | Defined$ Remembered | Choices$ Land.RememberedPlayerCtrl | ChoiceZone$ Battlefield | RememberChosen$ True | ChoiceTitle$ Choose three lands that would not be sacrificed
+SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Land.IsNotRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_firebombers.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/94.jpg
+Oracle:When Keldon Firebombers enters the battlefield, each player sacrifices all lands he or she controls except for three.
+End

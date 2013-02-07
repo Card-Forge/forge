@@ -1,0 +1,18 @@
+Name:Mirrorwood Treefolk
+ManaCost:3 G
+Types:Creature Treefolk
+Text:no text
+PT:2/4
+A:AB$ Effect | Cost$ 2 R W | Name$ Mirrorwood Treefolk Effect | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to redirect damamge | ReplacementEffects$ SelfCombat,SelfNonCombat | Triggers$ OutOfSight | SVars$ MirrorwoodDmgCombat,MirrorwoodDmgnonCombat,MirrorwoodX,ExileEffect | RememberObjects$ Targeted | ImprintCards$ Self | SpellDescription$ The next time damage would be dealt to CARDNAME this turn, that damage is dealt to target creature or player instead.
+SVar:SelfCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | IsCombat$ True | ReplaceWith$ MirrorwoodDmgCombat | Description$ The next time damage would be dealt to this creature this turn, that damage is dealt to target creature or player instead.
+SVar:SelfNonCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | IsCombat$ False | ReplaceWith$ MirrorwoodDmgnonCombat | Secondary$ True | Description$ The next time damage would be dealt to this creature this turn, that damage is dealt to target creature or player instead.
+SVar:MirrorwoodDmgCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ MirrorwoodX | References$ MirrorwoodX | SubAbility$ ExileEffect
+SVar:MirrorwoodDmgnonCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ False | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ MirrorwoodX | References$ MirrorwoodX | SubAbility$ ExileEffect
+SVar:MirrorwoodX:ReplaceCount$DamageAmount
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered,Card.IsRemembered | Execute$ ExileEffect | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrorwood_treefolk.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/83.jpg
+Oracle:{2}{R}{W}: The next time damage would be dealt to Mirrorwood Treefolk this turn, that damage is dealt to target creature or player instead.
+End

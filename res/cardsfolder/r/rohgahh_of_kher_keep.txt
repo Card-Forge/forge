@@ -1,0 +1,19 @@
+Name:Rohgahh of Kher Keep
+ManaCost:2 B B R R
+Types:Legendary Creature Kobold
+Text:no text
+PT:5/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of your upkeep, you may pay R R R. If you don't, tap CARDNAME and all creatures named Kobolds of Kher Keep, then an opponent gains control of them.
+SVar:TrigTap:AB$ StoreSVar | Cost$ 0 | SVar$ RohgahhPaid | Type$ CountSVar | Expression$ RohgahhPaid/Plus.1 | UnlessCost$ R R R | UnlessPayer$ You | SubAbility$ DBTapAll
+SVar:DBTapAll:DB$ TapAll | ValidCards$ Card.Self,Creature.YouCtrl+namedKobolds of Kher Keep | ConditionCheckSVar$ RohgahhPaid | ConditionSVarCompare$ EQ1 | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to gain control Rohgahh of Kher Keep and creatures named Kobolds of Kher Keep | AllValid$ Card.Self,Creature.YouCtrl+namedKobolds of Kher Keep | NewController$ Targeted | ConditionCheckSVar$ RohgahhPaid | ConditionSVarCompare$ EQ1 | SubAbility$ DBReset
+SVar:DBReset:DB$ StoreSVar | SVar$ RohgahhPaid | Type$ Number | Expression$ 0
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+namedKobolds of Kher Keep | AddPower$ 2 | AddToughness$ 2 | Description$ Creatures you control named Kobolds of Kher Keep get +2/+2.
+SVar:RohgahhPaid:Number$0
+DeckHints:Name$Kobolds of Kher Keep
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rohgahh_of_kher_keep.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/295.jpg
+Oracle:At the beginning of your upkeep, you may pay {R}{R}{R}. If you don't, tap Rohgahh of Kher Keep and all creatures named Kobolds of Kher Keep, then an opponent gains control of them.\nCreatures you control named Kobolds of Kher Keep get +2/+2.
+End

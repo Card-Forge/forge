@@ -6468,8 +6468,30 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {
-            if (!this.getEnchantedBy().contains(source) && !this.equals(source.getEnchanting())) {
-                return false;
+            if (property.equals("EnchantedBy")) {
+                if (!this.getEnchantedBy().contains(source) && !this.equals(source.getEnchanting())) {
+                    return false;
+                }
+            } else {
+                final String restriction = property.split("EnchantedBy ")[1];
+                if (restriction.equals("Imprinted")) {
+                    for (final Card card : source.getImprinted()) {
+                        if (!this.getEnchantedBy().contains(card) && !this.equals(card.getEnchanting())) {
+                            return false;
+                        }
+                    }
+                } else if (restriction.equals("Targeted")) {
+                    for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                        final SpellAbility saTargeting = sa.getSATargetingCard();
+                        if (saTargeting != null) {
+                            for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                                if (!this.getEnchantedBy().contains(c) && !this.equals(c.getEnchanting())) {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         } else if (property.startsWith("NotEnchantedBy")) {
             if (property.substring(14).equals("Targeted")) {
@@ -6653,6 +6675,16 @@ public class Card extends GameEntity implements Comparable<Card> {
                             }
                         }
                     }
+                } if (restriction.equals("Remembered")) {
+                    for (final Object rem : source.getRemembered()) {
+                        if (rem instanceof Card) {
+                            final Card card = (Card) rem;
+                            if (this.sharesCreatureTypeWith(card)) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
                 } else {
                     boolean shares = false;
                     for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {
@@ -6676,6 +6708,16 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (source.getImprinted().isEmpty() || !this.sharesCardTypeWith(source.getImprinted().get(0))) {
                         return false;
                     }
+                } else if (restriction.equals("Remembered")) {
+                    for (final Object rem : source.getRemembered()) {
+                        if (rem instanceof Card) {
+                            final Card card = (Card) rem;
+                            if (this.sharesCardTypeWith(card)) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
                 }
             }
         } else if (property.startsWith("sharesNameWith")) {
@@ -7023,6 +7065,26 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.isBlocking(source)) {
                 return false;
             }
+        } else if (property.startsWith("blockingRemembered")) {
+            for (final Object o : source.getRemembered()) {
+                if (o instanceof Card) {
+                    final Card card = (Card) o;
+                    if (this.isBlocking(card)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } else if (property.startsWith("isBlockedByRemembered")) {
+            for (final Object o : source.getRemembered()) {
+                if (o instanceof Card) {
+                    final Card crd = (Card) o;
+                    if (this.isBlockedBy(crd)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         } else if (property.startsWith("blockedRemembered")) {
             Card rememberedcard;
             for (final Object o : source.getRemembered()) {

@@ -4,6 +4,7 @@ Types:Creature Kobold
 Text:no text
 PT:0/1
 Colors:red
+DeckHints:Name$Rohgahh of Kher Keep
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobolds_of_kher_keep.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/226.jpg

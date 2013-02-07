@@ -1,0 +1,16 @@
+Name:Capricious Efreet
+ManaCost:4 R R
+Types:Creature Efreet
+Text:no text
+PT:6/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Permanent.nonLand+YouCtrl | TgtPrompt$ Select target nonland permanent you control | RememberObjects$ Targeted | IsCurse$ True | SubAbility$ DBPump | StackDescription$ None
+SVar:DBPump:DB$ Pump | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | TargetMin$ 0 | TargetMax$ 1 | RememberObjects$ Targeted | IsCurse$ True | SubAbility$ DBPump2 | StackDescription$ None
+SVar:DBPump2:DB$ Pump | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select another target nonland permanent you don't control | TargetMin$ 0 | TargetMax$ 1 | TargetUnique$ True | RememberObjects$ Targeted | IsCurse$ True | SubAbility$ DBChooseRandom | StackDescription$ None
+SVar:DBChooseRandom:DB$ ChooseCard | Defined$ You | Amount$ 1 | AtRandom$ True | Choices$ Card.IsRemembered | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/capricious_efreet.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/131.jpg
+Oracle:At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random.
+End

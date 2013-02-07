@@ -68,7 +68,8 @@ public class PumpAllEffect extends SpellEffect {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
         final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
-
+        final String remember = sa.getParam("RememberAllPumped");
+        
         for (final Card tgtC : list) {
 
             // only pump things in the affected zones.
@@ -93,6 +94,10 @@ public class PumpAllEffect extends SpellEffect {
                 }
             }
 
+            if (remember != null) {
+                sa.getSourceCard().addRemembered(tgtC);
+            }
+        
             if (!sa.hasParam("Permanent")) {
                 // If not Permanent, remove Pumped at EOT
                 final Command untilEOT = new Command() {
@@ -112,6 +117,8 @@ public class PumpAllEffect extends SpellEffect {
                 };
                 if (sa.hasParam("UntilUntaps")) {
                     sa.getSourceCard().addUntapCommand(untilEOT);
+                } else if (sa.hasParam("UntilEndOfCombat")) {
+                    Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
                 } else {
                     Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
                 }
