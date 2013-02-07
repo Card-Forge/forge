@@ -174,34 +174,6 @@ class CardFactoryLands {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Sheltered Valley")) {
-
-            /*
-             * If Sheltered Valley would enter the battlefield, instead
-             * sacrifice each other permanent named Sheltered Valley you
-             * control, then put Sheltered Valley onto the battlefield.
-             */
-            final Command comesIntoPlay = new Command() {
-                private static final long serialVersionUID = 685604326470832887L;
-
-                @Override
-                public void execute() {
-                    final Player player = card.getController();
-                    final List<Card> land = player.getCardsIn(ZoneType.Battlefield, "Sheltered Valley");
-                    land.remove(card);
-
-                    if (land.size() > 0) {
-                        for (final Card c : land) {
-                            Singletons.getModel().getGame().getAction().sacrifice(c, null);
-                        }
-                    }
-                }
-            };
-
-            card.addComesIntoPlayCommand(comesIntoPlay);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         // Lorwyn Dual Lands, and a couple Morningtide...
         else if (cardName.equals("Ancient Amphitheater") || cardName.equals("Auntie's Hovel")
                 || cardName.equals("Gilt-Leaf Palace") || cardName.equals("Secluded Glen")
