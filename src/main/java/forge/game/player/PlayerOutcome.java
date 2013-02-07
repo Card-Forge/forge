@@ -68,7 +68,7 @@ public class PlayerOutcome {
         switch(lossState){
             case Conceded: return "conceded";
             case Milled: return "lost trying to draw cards from empty library";
-            case LifeReachedZero: return "lost because ran out of lives";
+            case LifeReachedZero: return "lost because life total reached 0";
             case Poisoned: return "lost because of obtaining 10 poison counters";
             case OpponentWon: return "lost because an opponent has won by spell '" + loseConditionSpell + "'";
             case SpellEffect: return "lost due to effect of spell '" + loseConditionSpell + "'";

@@ -192,7 +192,12 @@ public class CField implements ICDoc {
         ((FLabel) this.view.getLblExile()).setHoverable(true);
         this.view.getLblExile().addMouseListener(madExiled);
 
+        if (Preferences.DEV_MODE) {
+            ((FLabel) this.view.getLblLibrary()).setHoverable(true);
+        }
         this.view.getLblLibrary().addMouseListener(madLibrary);
+
+        ((FLabel) this.view.getLblHand()).setHoverable(true);
         this.view.getLblHand().addMouseListener(madHand);
 
         ((FLabel) this.view.getLblFlashback()).setHoverable(true);
@@ -208,11 +213,9 @@ public class CField implements ICDoc {
         this.view.getLblGreen().addMouseListener(madGreen);
 
         ((FLabel) this.view.getLblRed()).setHoverable(true);
-        this.view.getLblRed().removeMouseListener(madRed);
         this.view.getLblRed().addMouseListener(madRed);
 
         ((FLabel) this.view.getLblWhite()).setHoverable(true);
-        this.view.getLblWhite().removeMouseListener(madWhite);
         this.view.getLblWhite().addMouseListener(madWhite);
 
         ((FLabel) this.view.getLblColorless()).setHoverable(true);

@@ -313,7 +313,7 @@ public class VField implements IVDoc<CField> {
     private FLabel getBuiltFLabel(SkinProp p0, String s0, String s1) {
         return new FLabel.Builder().icon(new ImageIcon(FSkin.getImage(p0)))
             .opaque(false).fontSize(14)
-            .fontStyle(Font.BOLD).iconAlpha(0.6f).iconInBackground(true)
+            .fontStyle(Font.BOLD).iconInBackground()
             .text(s0).tooltip(s1).fontAlign(SwingConstants.RIGHT).build();
     }
 

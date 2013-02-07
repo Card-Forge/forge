@@ -161,7 +161,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
             }
         }
 
-        final String strCheckboxConstraints = "w 200px!, h 30px!, gap 0 20px 0 0";
+        final String strCheckboxConstraints = "h 30px!, gap 0 20px 0 0";
         pnlStart.setOpaque(false);
         pnlStart.add(cbSingletons, strCheckboxConstraints);
         pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");

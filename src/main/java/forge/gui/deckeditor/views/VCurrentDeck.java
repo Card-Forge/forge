@@ -45,7 +45,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .fontSize(14)
             .tooltip("Save (in default directory)")
             .iconInBackground(true)
-            .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
+            .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_SAVE))
             .text(" ").hoverable(true).build();
 
@@ -53,7 +53,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .fontSize(14)
             .tooltip("Save As")
             .iconInBackground(true)
-            .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
+            .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_SAVEAS))
             .text(" ").hoverable(true).build();
 
@@ -61,7 +61,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .fontSize(14)
             .tooltip("Load")
             .iconInBackground(true)
-            .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
+            .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_OPEN))
             .text(" ").hoverable(true).build();
 
@@ -69,7 +69,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .fontSize(14)
             .tooltip("New Deck")
             .iconInBackground(true)
-            .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
+            .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_NEW))
             .text(" ").hoverable(true).build();
 
@@ -77,7 +77,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .fontSize(14)
             .tooltip("Print Proxies")
             .iconInBackground(true)
-            .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
+            .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PRINT))
             .text(" ").hoverable(true).build();
 
@@ -89,21 +89,21 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .text("Remove card")
             .tooltip("Remove selected card from current deck (or double click the row or hit the spacebar)")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
-            .iconScaleAuto(false).hoverable(true).build();
+            .iconScaleAuto(false).hoverable().build();
 
     private final FLabel btnRemove4 = new FLabel.Builder()
             .fontSize(14)
             .text("Remove 4 of card")
             .tooltip("Remove up to 4 of selected card to current deck")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
-            .iconScaleAuto(false).hoverable(true).build();
+            .iconScaleAuto(false).hoverable().build();
 
     private final JLabel btnDoSideboard = new FLabel.Builder()
             .fontSize(14)
             .text("Deck/Sideboard")
-            .tooltip("Edit the sideboard for this deck")
+            .tooltip("Toggle between editing the deck and the sideboard for this deck")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT))
-            .iconScaleAuto(false).hoverable(true).build();
+            .iconScaleAuto(false).hoverable().build();
 
     private final JTextField txfTitle = new FTextField.Builder().text("[New Deck]").build();
 

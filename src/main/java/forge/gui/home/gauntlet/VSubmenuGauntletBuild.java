@@ -108,7 +108,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         .fontSize(14)
         .tooltip("Save this gauntlet")
         .iconInBackground(true)
-        .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
+        .iconAlignX(SwingConstants.CENTER)
         .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_SAVE))
         .text(" ").hoverable(true).build();
 
@@ -116,7 +116,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         .fontSize(14)
         .tooltip("Build a new gauntlet")
         .iconInBackground(true)
-        .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
+        .iconAlignX(SwingConstants.CENTER)
         .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_NEW))
         .text(" ").hoverable(true).build();
 
@@ -124,7 +124,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         .fontSize(14)
         .tooltip("Load a gauntlet")
         .iconInBackground(true)
-        .iconAlignX(SwingConstants.CENTER).iconAlpha(1.0f)
+        .iconAlignX(SwingConstants.CENTER)
         .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_OPEN))
         .text(" ").hoverable(true).build();
 

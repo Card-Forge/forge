@@ -151,7 +151,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
     @SuppressWarnings("serial")
     private FLabel makeAvatarLabel(final Image img0, final int index0) {
         final FLabel lbl = new FLabel.Builder().icon(new ImageIcon(img0)).iconScaleFactor(1.0)
-                .iconAlpha(0.7f).iconInBackground(true).hoverable(true).build();
+                .iconInBackground(true).hoverable(true).build();
 
         final Dimension size = new Dimension(100, 100);
         lbl.setPreferredSize(size);

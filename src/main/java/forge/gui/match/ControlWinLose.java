@@ -120,7 +120,6 @@ public class ControlWinLose {
 
         for (Player p : Singletons.getModel().getGame().getRegisteredPlayers()) {
             if (!p.getName().equals(lastGame.getWinner().getName())) {
-
                 continue; // not a loser
             }
 

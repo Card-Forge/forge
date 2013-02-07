@@ -14,6 +14,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -57,7 +61,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         private double  bldIconScaleFactor  = 0.8;
         private int     bldFontStyle        = Font.PLAIN;
         private int     bldFontSize         = 14;
-        private float   bldIconAlpha        = 1.0f;
+        private float   bldUnhoveredAlpha   = 0.7f;
         private int     bldIconAlignX       = SwingConstants.LEFT;
         private Point   bldIconInsets       = new Point(0, 0);
 
@@ -143,10 +147,11 @@ public class FLabel extends JLabel implements ILocalRepaint {
         /**@param b0 &emsp; boolean, icon will be drawn independent of text
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder iconInBackground(final boolean b0) { this.bldIconInBackground = b0; return this; }
+        public Builder iconInBackground() { iconInBackground(true); return this; }
 
-        /**@param f0 &emsp; 0.0f - 1.0f. If icon is in background, this alpha is applied.
+        /**@param f0 &emsp; 0.0f - 1.0f. alpha factor applied when label is hoverable but not currently hovered.
          * @return {@link forge.gui.toolbox.Builder} */
-        public Builder iconAlpha(final float f0) { this.bldIconAlpha = f0; return this; }
+        public Builder unhoveredAlpha(final float f0) { this.bldUnhoveredAlpha = f0; return this; }
 
         /**@param i0 &emsp; Int. Only available for background icon.
          * SwingConstants.HORIZONTAL .VERTICAL or .CENTER
@@ -188,16 +193,33 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
         this.setFontStyle(b0.bldFontStyle);
         this.setFontSize(b0.bldFontSize);
-        this.setIconAlpha(b0.bldIconAlpha);
+        this.setUnhoveredAlpha(b0.bldUnhoveredAlpha);
         this.setCommand(b0.bldCmd);
         this.setReactOnMouseDown(b0.reactOnMouseDown);
         this.setFontAlign(b0.bldFontAlign);
         this.setToolTipText(b0.bldToolTip);
         this.setHoverable(b0.bldHoverable);
-
+        
         // Call this last; to allow the properties which affect icons to already be in place.
         this.setIcon(b0.bldIcon);
 
+        // If the label has button-like properties, interpret keypresses like a button
+        if (b0.bldSelectable || b0.bldHoverable) {
+            this.setFocusable(true);
+            
+            this.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(final KeyEvent e) {
+                    if (e.getKeyChar() == ' ' || e.getKeyCode() == 10) { _doMouseAction(); }
+                }
+            });
+            
+            this.addFocusListener(new FocusListener() {
+                @Override public void focusLost(FocusEvent arg0)   { repaintSelf(); }
+                @Override public void focusGained(FocusEvent arg0) { repaintSelf(); }
+            });
+        }
+        
         // Non-custom display properties
         this.setForeground(clrText);
         this.setBackground(clrMain);
@@ -269,25 +291,23 @@ public class FLabel extends JLabel implements ILocalRepaint {
         }
     };
 
+    private void _doMouseAction() {
+        if (selectable) { setSelected(!selected); }
+        if (cmdClick != null && FLabel.this.isEnabled()) { cmdClick.execute(); }
+    }
+    
     // Mouse event handler
     private final MouseAdapter madEvents = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent e) {
-            if (hoverable) {
-                hovered = true; repaintSelf();
-            }
+            hovered = true;
+            repaintSelf();
         }
 
         @Override
         public void mouseExited(final MouseEvent e) {
-            if (hoverable) {
-                hovered = false; repaintSelf();
-            }
-        }
-        
-        private void _doMouseAction() {
-            if (selectable) { setSelected(!selected); }
-            if (cmdClick != null && FLabel.this.isEnabled()) { cmdClick.execute(); }
+            hovered = false;
+            repaintSelf();
         }
         
         @Override
@@ -328,7 +348,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
     /** Sets alpha if icon is in background.
      * @param f0 &emsp; float */
     // NOT public; must be set when label is built.
-    private void setIconAlpha(final float f0) {
+    private void setUnhoveredAlpha(final float f0) {
         this.alphaDim = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, f0);
         this.alphaStrong = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
     }
@@ -426,6 +446,12 @@ public class FLabel extends JLabel implements ILocalRepaint {
         int w = getWidth();
         int h = getHeight();
 
+        boolean paintWithHover = hoverable && hovered && isEnabled();
+        Composite oldComp = g2d.getComposite();
+        if (hoverable) {
+            g2d.setComposite(paintWithHover ? alphaStrong : alphaDim);
+        }
+        
         if (opaque) {
             if (selected) {
                 paintDown(g2d, w, h);
@@ -440,10 +466,6 @@ public class FLabel extends JLabel implements ILocalRepaint {
             }
         }
 
-        if (hoverable && hovered && isEnabled()) {
-            paintHover(g2d, w, h);
-        }
-        
         // Icon in background
         if (iconInBackground) {
             int sh = (int) (h * iconScaleFactor);
@@ -455,16 +477,21 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
             int y = (int) (((h - sh) / 2) + iconInsets.getY());
 
-            Composite oldComp = g2d.getComposite();
-            g2d.setComposite(hoverable && hovered && !selected ? alphaStrong : alphaDim);
             g2d.drawImage(img, x, y, sw + x, sh + y, 0, 0, iw, ih, null);
-            g2d.setComposite(oldComp);
         }
 
         super.paintComponent(g);
+        
+        if (hoverable) {
+            g2d.setComposite(oldComp);
+        }
+        
+        if (hasFocus() && isEnabled()) {
+            paintFocus(g2d, w, h);
+        }
     }
 
-    private void paintHover(final Graphics2D g, int w, int h) {
+    private void paintFocus(final Graphics2D g, int w, int h) {
         g.setColor(clrHover);
         g.drawRect(0, 0, w - 2, h - 2);
         g.setColor(l30);

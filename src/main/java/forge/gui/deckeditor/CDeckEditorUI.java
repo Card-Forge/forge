@@ -107,6 +107,11 @@ public enum CDeckEditorUI implements CardContainer {
     private void moveSelectedCards(
             EditorTableView<InventoryItem> table, _MoveAction moveAction, int maxQty) {
         List<InventoryItem> items = table.getSelectedCards();
+        
+        if (items.isEmpty()) {
+            return;
+        }
+        
         for (InventoryItem item : items) {
             moveAction.move(item, Math.min(maxQty, table.getCardCount(item)));
         }
