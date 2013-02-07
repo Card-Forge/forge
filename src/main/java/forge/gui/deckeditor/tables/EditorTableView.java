@@ -243,12 +243,14 @@ public final class EditorTableView<T extends InventoryItem> {
             }
             final int selectRow = newRow;
             
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    table.setRowSelectionInterval(selectRow, selectRow);
-                }
-            });
+            if (selectRow > 0) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        table.setRowSelectionInterval(selectRow, selectRow);
+                    }
+                });
+            }
         }
     }
 
