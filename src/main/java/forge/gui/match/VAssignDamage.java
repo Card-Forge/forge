@@ -19,6 +19,8 @@ package forge.gui.match;
 
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -33,10 +35,10 @@ import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
-import forge.Command;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.gui.SOverlayUtils;
+import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -51,7 +53,6 @@ import forge.view.arcane.CardPanel;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-@SuppressWarnings("serial")
 public class VAssignDamage {
     // Width and height of blocker dialog
     private final int wDlg = 700;
@@ -71,9 +72,9 @@ public class VAssignDamage {
     private final JLabel lblTotalDamage = new FLabel.Builder().text("Available damage points: Unknown").build();
 
     //  Label Buttons
-    private final FLabel lblOK = new FLabel.Builder().text("OK").hoverable(true).opaque(true).fontSize(16).build();
-    private final FLabel lblReset = new FLabel.Builder().text("Reset").hoverable(true).opaque(true).fontSize(16).build();
-    private final FLabel lblAuto = new FLabel.Builder().text("Auto").hoverable(true).opaque(true).fontSize(16).build();
+    private final FButton btnOK    = new FButton("OK");
+    private final FButton btnReset = new FButton("Reset");
+    private final FButton btnAuto  = new FButton("Auto");
 
     // Indexes of defenders correspond to their indexes in the damage list and labels.
     private final List<Card> lstDefenders = new ArrayList<Card>();
@@ -244,15 +245,6 @@ public class VAssignDamage {
         }
     };
 
-    private final Command cmdOK = new Command() { @Override
-        public void execute() { finish(); } };
-
-    private final Command cmdReset = new Command() { @Override
-        public void execute() { resetAssignDamage(); } };
-
-    private final Command cmdAuto = new Command() { @Override
-        public void execute() { autoAssignDamage(); } };
-
     /** Constructor.
      * 
      * @param attacker0 {@link forge.Card}
@@ -334,9 +326,12 @@ public class VAssignDamage {
             pnlDefenders.add(lstDamageLabels.get(i), "w 145px!, h 30px!, gap 5px 5px 0 5px");
         }
 
-        lblOK.setCommand(cmdOK);
-        lblReset.setCommand(cmdReset);
-        lblAuto.setCommand(cmdAuto);
+        btnOK.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent arg0) { finish(); } });
+        btnReset.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent arg0) { resetAssignDamage(); } });
+        btnAuto.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent arg0) { autoAssignDamage(); } });
 
         // Final UI layout
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
@@ -346,12 +341,20 @@ public class VAssignDamage {
 
         JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
         pnlButtons.setOpaque(false);
-        pnlButtons.add(lblAuto, "w 110px!, h 30px!, gap 0 10px 0 0");
-        pnlButtons.add(lblOK, "w 110px!, h 30px!, gap 0 10px 0 0");
-        pnlButtons.add(lblReset, "w 110px!, h 30px!");
+        pnlButtons.add(btnAuto, "w 110px!, h 30px!, gap 0 10px 0 0");
+        pnlButtons.add(btnOK, "w 110px!, h 30px!, gap 0 10px 0 0");
+        pnlButtons.add(btnReset, "w 110px!, h 30px!");
 
         pnlMain.add(pnlButtons, "ax center, w 350px!, gap 10px 10px 10px 10px, span 2");
         overlay.add(pnlMain);
+        
+        pnlMain.getRootPane().setDefaultButton(btnOK);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                btnAuto.requestFocusInWindow();
+            }
+        });
 
         initialAssignDamage();
         SOverlayUtils.showOverlay();
