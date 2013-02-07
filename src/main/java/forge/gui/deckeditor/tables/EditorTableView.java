@@ -19,7 +19,10 @@ package forge.gui.deckeditor.tables;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.KeyboardFocusManager;
 import java.awt.Point;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,7 +32,6 @@ import java.util.Map.Entry;
 
 import javax.swing.JComponent;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableColumnModel;
@@ -173,12 +175,28 @@ public final class EditorTableView<T extends InventoryItem> {
                 return _getCellTooltip(getCellRenderer(row, col), row, col, val);
             }
         };
+
+        table.addFocusListener(new FocusListener() {
+            @Override
+            public void focusLost(FocusEvent arg0) {
+                table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+            }
+            
+            @Override
+            public void focusGained(FocusEvent arg0) {
+                table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+            }
+        });
         
         table.setFont(FSkin.getFont(12));
         table.setBorder(null);
         table.getTableHeader().setBorder(null);
         table.setRowHeight(18);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+        
+        // prevent tables from intercepting tab focus traversals
+        table.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
+        table.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
     }
 
     /**
@@ -237,24 +255,19 @@ public final class EditorTableView<T extends InventoryItem> {
             return;
         }
         
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                // 3 cases: 0 cards left, select the same row, select prev row
-                int numRows = model.getRowCount();
-                if (numRows == 0) {
-                    return;
-                }
-                
-                int newRow = rowLastSelected;
-                if (numRows <= newRow) {
-                    // move selection away from the last, already missing, option
-                    newRow = numRows - 1;
-                }
-                
-                table.setRowSelectionInterval(newRow, newRow);
-            }
-        });
+        // 3 cases: 0 cards left, select the same row, select prev row
+        int numRows = model.getRowCount();
+        if (numRows == 0) {
+            return;
+        }
+        
+        int newRow = rowLastSelected;
+        if (numRows <= newRow) {
+            // move selection away from the last, already missing, option
+            newRow = numRows - 1;
+        }
+        
+        table.setRowSelectionInterval(newRow, newRow);
     }
 
     /**
