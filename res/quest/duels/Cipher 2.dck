@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Cipher 2
+Title=Cipher
+Difficulty=medium
+Description=UB Cipher
+Icon=Cipher.jpg
+Deck Type=constructed
+[main]
+2 Bad River
+3 Basilica Screecher
+4 Call of the Nightwing
+4 Crypt Ghast
+3 Curiosity
+4 Dimir Guildgate
+2 Dimir Infiltrator
+4 Drowned Catacomb
+3 Hands of Binding
+3 Invisible Stalker
+6 Island
+2 Mental Vapors
+1 Midnight Recovery
+2 Stolen Identity
+10 Swamp
+3 Thrull Parasite
+2 Tormented Soul
+2 Undercity Plague
+[sideboard]
