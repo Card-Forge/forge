@@ -45,6 +45,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Expressions;
 
 /**
  * <p>
@@ -275,6 +276,27 @@ public class AiController {
     
                     list = CardLists.getValidCards(list, needsToPlay.split(","), c.getController(), c);
                     if (list.isEmpty()) {
+                        return false;
+                    }
+                }
+                if (c.getSVar("NeedsToPlayVar").length() > 0) {
+                    final String needsToPlay = c.getSVar("NeedsToPlayVar");
+                    int x = 0;
+                    int y = 0;
+                    String sVar = needsToPlay.split(" ")[0];
+                    String comparator = needsToPlay.split(" ")[1];
+                    String compareTo = comparator.substring(2);
+                    try {
+                        x = Integer.parseInt(sVar);
+                    } catch (final NumberFormatException e) {
+                        x = CardFactoryUtil.xCount(c, c.getSVar(sVar));
+                    }
+                    try {
+                        y = Integer.parseInt(compareTo);
+                    } catch (final NumberFormatException e) {
+                        y = CardFactoryUtil.xCount(c, c.getSVar(compareTo));
+                    }
+                    if (!Expressions.compare(x, comparator, y)) {
                         return false;
                     }
                 }
