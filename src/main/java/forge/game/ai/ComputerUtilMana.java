@@ -67,7 +67,7 @@ public class ComputerUtilMana {
         }
     
         // get map of mana abilities
-        final Map<String, List<SpellAbility>> manaAbilityMap = ComputerUtilMana.mapManaSources((AIPlayer) ai, checkPlayable);
+        final Map<String, List<SpellAbility>> manaAbilityMap = ComputerUtilMana.mapManaSources(ai, checkPlayable);
         // initialize ArrayList list for mana needed
         final List<List<SpellAbility>> partSources = new ArrayList<List<SpellAbility>>();
         final List<Integer> partPriority = new ArrayList<Integer>();
@@ -446,17 +446,8 @@ public class ComputerUtilMana {
         return cost;
     }
 
-    /**
-     * <p>
-     * getAvailableMana.
-     * </p>
-     * 
-     * @param ai
-     *            a {@link forge.game.player.Player} object.
-     * @param checkPlayable
-     * @return a {@link forge.CardList} object.
-     */
-    private static List<Card> getAvailableMana(final AIPlayer ai, final boolean checkPlayable) {
+    //This method is currently used by AI to estimate human's available mana
+    private static List<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
         final GameState game = Singletons.getModel().getGame();
         final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
         final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
@@ -528,7 +519,7 @@ public class ComputerUtilMana {
     
                 // don't use abilities with dangerous drawbacks
                 if (m.getSubAbility() != null && !card.getName().equals("Pristine Talisman")) {
-                    if (!m.getSubAbility().chkAIDrawback(ai)) {
+                    if (ai instanceof AIPlayer && !m.getSubAbility().chkAIDrawback((AIPlayer)ai)) {
                         continue;
                     }
                     needsLimitedResources = true; // TODO: check for good
@@ -572,17 +563,9 @@ public class ComputerUtilMana {
         return sortedManaSources;
     } // getAvailableMana()
 
-    /**
-     * <p>
-     * mapManaSources.
-     * </p>
-     * 
-     * @param ai
-     *            a {@link forge.game.player.Player} object.
-     * @param checkPlayable TODO
-     * @return HashMap<String, List<Card>>
-     */
-    private static Map<String, List<SpellAbility>> mapManaSources(final AIPlayer ai, boolean checkPlayable) {
+    
+    //This method is currently used by AI to estimate mana available to human
+    private static Map<String, List<SpellAbility>> mapManaSources(final Player ai, boolean checkPlayable) {
         final Map<String, List<SpellAbility>> manaMap = new HashMap<String, List<SpellAbility>>();
     
         final List<SpellAbility> whiteSources = new ArrayList<SpellAbility>();
@@ -610,7 +593,7 @@ public class ComputerUtilMana {
     
                 // don't use abilities with dangerous drawbacks
                 if (m.getSubAbility() != null) {
-                    if (!m.getSubAbility().chkAIDrawback(ai)) {
+                    if (ai instanceof AIPlayer && !m.getSubAbility().chkAIDrawback((AIPlayer)ai)) {
                         continue;
                     }
                 }
