@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
@@ -176,7 +178,7 @@ public class DualListBox<T> extends FPanel {
     }
 
     private void showSelectedCard(Object obj) {
-        if (!showCard) {
+        if (!showCard || null == obj) {
             return;
         }
         Card card = null;
@@ -199,7 +201,7 @@ public class DualListBox<T> extends FPanel {
         list.getModel().addListDataListener(new ListDataListener() {
             @Override
             public void intervalRemoved(ListDataEvent e) {
-                ListModel model = list.getModel();
+                final ListModel model = list.getModel();
                 if (0 == model.getSize()) {
                     // nothing left to show
                     return;
@@ -211,7 +213,6 @@ public class DualListBox<T> extends FPanel {
                     --cardIdxPre;
                 }
                 final int cardIdx = cardIdxPre;
-                showSelectedCard(model.getElementAt(cardIdx));
                 
                 // invoke this later since the list is out of sync with the model
                 // at this moment.
@@ -221,6 +222,7 @@ public class DualListBox<T> extends FPanel {
                         showCard = false;
                         list.setSelectedIndex(cardIdx);
                         showCard = true;
+                        showSelectedCard(model.getElementAt(cardIdx));
                         list.requestFocusInWindow();
                     }
                 });
@@ -256,7 +258,14 @@ public class DualListBox<T> extends FPanel {
         
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
-            public void valueChanged(final ListSelectionEvent ev) {
+            public void valueChanged(ListSelectionEvent ev) {
+                showSelectedCard(list.getSelectedValue());
+            }
+        });
+        
+        list.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
                 showSelectedCard(list.getSelectedValue());
             }
         });
