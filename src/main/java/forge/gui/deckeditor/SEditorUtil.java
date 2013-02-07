@@ -33,7 +33,8 @@ public final class SEditorUtil  {
     /** An enum to encapsulate metadata for the stats/filter objects. */
     public static enum StatTypes {
         TOTAL      (FSkin.ZoneImages.ICO_HAND, null),
-        
+        // PRODUCTS   (FSkin.EditorImages.IMG_PRODUCTS, null),
+
         WHITE      (FSkin.ManaImages.IMG_WHITE,     CardRulesPredicates.Presets.IS_WHITE),
         BLUE       (FSkin.ManaImages.IMG_BLUE,      CardRulesPredicates.Presets.IS_BLUE),
         BLACK      (FSkin.ManaImages.IMG_BLACK,     CardRulesPredicates.Presets.IS_BLACK),
@@ -49,7 +50,7 @@ public final class SEditorUtil  {
         PLANESWALKER (FSkin.EditorImages.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER),
         INSTANT      (FSkin.EditorImages.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT),
         SORCERY      (FSkin.EditorImages.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY);
-        
+
         public final ImageIcon img;
         public final Predicate<CardRules> predicate;
 
@@ -57,12 +58,12 @@ public final class SEditorUtil  {
             img = new ImageIcon(FSkin.getImage(prop, 18, 18));
             predicate = pred;
         }
-        
+
         public String toLabelString() {
             return TextUtil.enumToLabel(this) + " cards";
         }
     }
-    
+
     /**
      * Divides X by Y, multiplies by 100, rounds, returns.
      * 
