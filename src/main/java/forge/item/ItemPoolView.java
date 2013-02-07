@@ -171,6 +171,18 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         return result;
     }
 
+    public final int countNonCards() {
+        int result = 0;
+        if (this.getCards() != null) {
+            for (Map.Entry<T, Integer> e : cards.entrySet()) {
+                if (!(e.getKey() instanceof CardPrinted)) {
+                    result += e.getValue();
+                }
+            }
+        }
+        return result;
+    }
+
     /**
      * 
      * countDistinct.

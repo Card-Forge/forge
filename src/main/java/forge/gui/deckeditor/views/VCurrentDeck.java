@@ -153,10 +153,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             FLabel label = buildLabel(s);
             statLabels.put(s, label);
-            if (9 == statLabels.size()) {
+            if (SEditorUtil.StatTypes.PACK == s) {
                 pnlStats.add(buildLabel(null));
+            } else {
+                pnlStats.add(label);
             }
-            pnlStats.add(label);
         }
 
         pnlRemoveButtons.setOpaque(false);

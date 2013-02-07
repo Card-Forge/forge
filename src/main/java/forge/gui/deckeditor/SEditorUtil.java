@@ -32,9 +32,7 @@ import forge.util.TextUtil;
 public final class SEditorUtil  {
     /** An enum to encapsulate metadata for the stats/filter objects. */
     public static enum StatTypes {
-        TOTAL      (FSkin.ZoneImages.ICO_HAND, null),
-        // PRODUCTS   (FSkin.EditorImages.IMG_PRODUCTS, null),
-
+        TOTAL      (FSkin.ZoneImages.ICO_HAND,      null),
         WHITE      (FSkin.ManaImages.IMG_WHITE,     CardRulesPredicates.Presets.IS_WHITE),
         BLUE       (FSkin.ManaImages.IMG_BLUE,      CardRulesPredicates.Presets.IS_BLUE),
         BLACK      (FSkin.ManaImages.IMG_BLACK,     CardRulesPredicates.Presets.IS_BLACK),
@@ -43,6 +41,7 @@ public final class SEditorUtil  {
         COLORLESS  (FSkin.ManaImages.IMG_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS),
         MULTICOLOR (FSkin.EditorImages.IMG_MULTI,   CardRulesPredicates.Presets.IS_MULTICOLOR),
 
+        PACK         (FSkin.EditorImages.IMG_PACK,         null),
         LAND         (FSkin.EditorImages.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND),
         ARTIFACT     (FSkin.EditorImages.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT),
         CREATURE     (FSkin.EditorImages.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE),
@@ -60,6 +59,9 @@ public final class SEditorUtil  {
         }
 
         public String toLabelString() {
+            if (this == PACK) {
+                return "Card packs and prebuilt decks";
+            }
             return TextUtil.enumToLabel(this) + " cards";
         }
     }
@@ -79,21 +81,24 @@ public final class SEditorUtil  {
      * setStats.
      * 
      * @param <T> &emsp; the generic type
-     * @param deck &emsp; ItemPoolView<InventoryITem>
+     * @param items &emsp; ItemPoolView<InventoryITem>
      * @param view &emsp; {@link forge.gui.deckeditor.views.ITableContainer}
      */
-    public static <T extends InventoryItem> void setStats(final ItemPoolView<T> deck, final ITableContainer view) {
+    public static <T extends InventoryItem> void setStats(final ItemPoolView<T> items, final ITableContainer view) {
         for (StatTypes s : StatTypes.values()) {
             switch (s) {
             case TOTAL:
-                view.getStatLabel(StatTypes.TOTAL).setText(String.valueOf(deck.countAll()));
+                view.getStatLabel(s).setText(String.valueOf(items.countAll()));
+                break;
+            case PACK:
+                view.getStatLabel(s).setText(String.valueOf(items.countNonCards()));
                 break;
             default:
                 view.getStatLabel(s).setText(String.valueOf(
-                        Aggregates.sum(Iterables.filter(deck, Predicates.compose(s.predicate, deck.getFnToCard())), deck.getFnToCount())));
+                        Aggregates.sum(Iterables.filter(items, Predicates.compose(s.predicate, items.getFnToCard())), items.getFnToCount())));
             }
         }
-    } // getStats()
+    }
 
     /**
      * Resets components that may have been changed

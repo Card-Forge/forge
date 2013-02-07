@@ -54,6 +54,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     private final FLabel lblTitle = new FLabel.Builder().fontSize(14).build();
 
     // Total and color count labels/filter toggles
+    private final Dimension labelSize = new Dimension(60, 24);
     private final JPanel pnlStats = new JPanel(new WrapLayout(FlowLayout.LEFT));
     private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
             new HashMap<SEditorUtil.StatTypes, FLabel>();
@@ -125,12 +126,19 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             FLabel label = buildToggleLabel(s, SEditorUtil.StatTypes.TOTAL != s);
             statLabels.put(s, label);
+            JComponent component = label;
             if (SEditorUtil.StatTypes.TOTAL == s) {
                 label.setToolTipText("Total cards (click to toggle all filters)");
-            } else if (9 == statLabels.size()) {
-                pnlStats.add(buildToggleLabel(null, false));
+            } else if (SEditorUtil.StatTypes.PACK == s) {
+                // wrap in a constant-size panel so we can change its visibility without affecting layout
+                component = new JPanel(new MigLayout("insets 0, gap 0"));
+                component.setPreferredSize(labelSize);
+                component.setMinimumSize(labelSize);
+                component.setOpaque(false);
+                label.setVisible(false);
+                component.add(label);
             }
-            pnlStats.add(label);
+            pnlStats.add(component);
         }
 
         pnlAddButtons.setOpaque(false);
@@ -235,13 +243,12 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     //========== Other methods
     private FLabel buildToggleLabel(SEditorUtil.StatTypes s, boolean selectable) {
         FLabel label = new FLabel.Builder()
-                .icon(null == s ? null : s.img).iconScaleAuto(false)
+                .icon(s.img).iconScaleAuto(false)
                 .fontSize(11)
-                .tooltip(null == s ? null : s.toLabelString() + "(click to toggle the filter for this card type)")
-                .hoverable(null != s).selectable(selectable).selected(selectable)
+                .tooltip(s.toLabelString() + " (click to toggle the filter)")
+                .hoverable().selectable(selectable).selected(selectable)
                 .build();
         
-        Dimension labelSize = new Dimension(60, 24);
         label.setPreferredSize(labelSize);
         label.setMinimumSize(labelSize);
         

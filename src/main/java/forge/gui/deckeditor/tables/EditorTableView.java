@@ -44,7 +44,6 @@ import com.google.common.collect.Iterables;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.views.ITableContainer;
 import forge.gui.toolbox.FSkin;
-import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -188,7 +187,6 @@ public final class EditorTableView<T extends InventoryItem> {
      * @param view0 &emsp; the {@link javax.gui.deckeditor.views.ITableCOntainer}
      * @param cols0 &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
      */
-    @SuppressWarnings("unchecked")
     public void setup(final ITableContainer view0, final List<TableColumnInfo<InventoryItem>> cols0) {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 
@@ -211,17 +209,7 @@ public final class EditorTableView<T extends InventoryItem> {
         this.model.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(final TableModelEvent ev) {
-                final List<T> deck = EditorTableView.this.model.getCards().toFlatList();
-                final ItemPool<T> filteredDeck = new ItemPool<T>((Class<T>) CardPrinted.class);
-
-                // Filter out non-card items (booster packs, etc.)
-                for (T item : deck) {
-                    if (item instanceof CardPrinted) {
-                        filteredDeck.add(item, 1);
-                    }
-                }
-
-                SEditorUtil.setStats(filteredDeck, view0);
+                SEditorUtil.setStats(EditorTableView.this.model.getCards(), view0);
             }
         });
     }

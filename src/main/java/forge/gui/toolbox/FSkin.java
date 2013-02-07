@@ -324,7 +324,7 @@ public enum FSkin {
         IMG_LAND            (new int[] {120, 720, 40, 40}), /** */
         IMG_MULTI           (new int[] {80, 720, 40, 40}), /** */
         IMG_PLANESWALKER    (new int[] {200, 720, 40, 40}), /** */
-        IMG_PRODUCTS        (new int[] {80, 760, 40, 40}), /** */
+        IMG_PACK            (new int[] {80, 760, 40, 40}), /** */
         IMG_SORCERY         (new int[] {160, 720, 40, 40});
 
         private int[] coords;

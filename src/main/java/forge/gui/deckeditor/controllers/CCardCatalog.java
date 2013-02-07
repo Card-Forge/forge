@@ -319,20 +319,23 @@ public enum CCardCatalog implements ICDoc {
                 VCardCatalog.SINGLETON_INSTANCE.getLblType().getSelected(),
                 VCardCatalog.SINGLETON_INSTANCE.getLblText().getSelected()));
         
-        Predicate<? super CardPrinted> cardFilter = Predicates.and(cardPredicates);
+        Predicate<CardPrinted> cardFilter = Predicates.and(cardPredicates);
         
-        // Until this is filterable, always show packs and decks in the card shop.
-        List<Predicate<? super CardPrinted>> itemPredicates = new ArrayList<Predicate<? super CardPrinted>>();
-        itemPredicates.add(cardFilter);
-        itemPredicates.add(ItemPredicate.Presets.IS_PACK);
-        itemPredicates.add(ItemPredicate.Presets.IS_DECK);
-        Predicate<CardPrinted> filter = Predicates.or(itemPredicates);
+        // show packs and decks in the card shop according to the toggle setting
+        // this is special-cased apart from the buildColorAndTypeFilter() above
+        if (VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.PACK).getSelected()) {
+            List<Predicate<? super CardPrinted>> itemPredicates = new ArrayList<Predicate<? super CardPrinted>>();
+            itemPredicates.add(cardFilter);
+            itemPredicates.add(ItemPredicate.Presets.IS_PACK);
+            itemPredicates.add(ItemPredicate.Presets.IS_DECK);
+            cardFilter = Predicates.or(itemPredicates);
+        }
 
         // Apply to table
         // TODO: is there really no way to make this type safe?
         ACEditorBase<?, ?> editor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (null != editor) {
-            ((ACEditorBase<CardPrinted, DeckBase>)editor).getTableCatalog().setFilter(filter);
+            ((ACEditorBase<CardPrinted, DeckBase>)editor).getTableCatalog().setFilter(cardFilter);
         }
     }
     

@@ -50,7 +50,7 @@ public class SFilterUtil {
                 if (statLabels.get(s).getSelected()) { types.add(s.predicate); }
                 break;
                 
-            case TOTAL:
+            case TOTAL: case PACK:
                 // ignore
                 break;
                 
