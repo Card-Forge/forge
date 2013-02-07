@@ -53,5 +53,27 @@ public class PlayerOutcome {
     public boolean hasWon() {
         return lossState == null;
     }
+    
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        if ( lossState == null ) {
+            if ( altWinSourceName == null )
+                return "won because all opponents have lost";
+            else 
+                return "won due to effect of '" + altWinSourceName + "'";
+        }
+        switch(lossState){
+            case Conceded: return "conceded";
+            case Milled: return "lost trying to draw cards from empty library";
+            case LifeReachedZero: return "lost because ran out of lives";
+            case Poisoned: return "lost because of obtaining 10 poison counters";
+            case OpponentWon: return "lost because an opponent has won by spell '" + loseConditionSpell + "'";
+            case SpellEffect: return "lost due to effect of spell '" + loseConditionSpell + "'";
+        }
+        return "lost for unknown reason (this is a bug)";
+    }
 
 }

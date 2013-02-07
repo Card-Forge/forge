@@ -3,6 +3,9 @@ package forge.gui.match;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,6 +17,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.game.MatchController;
 import forge.game.player.LobbyPlayer;
+import forge.game.player.PlayerStatistics;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
@@ -40,7 +44,7 @@ public class ViewWinLose {
 
         final JPanel pnlLeft = new JPanel();
         final JPanel pnlRight = new JPanel();
-
+        final List<JLabel> lblPlayerOutcomes= new ArrayList<JLabel>();
         final JLabel lblTitle = new JLabel("WinLoseFrame > lblTitle needs updating.");
         final JLabel lblStats = new JLabel("WinLoseFrame > lblStats needs updating.");
         final JScrollPane scrCustom = new JScrollPane();
@@ -104,6 +108,14 @@ public class ViewWinLose {
         final int humanWins = match.getGamesWonBy(human);
         final int humanLosses = match.getPlayedGames().size() - humanWins;
 
+        for( Entry<LobbyPlayer, PlayerStatistics> p : match.getLastGameOutcome() ) {
+            String playerName = p.getKey().equals(human) ? "You have " : p.getKey().getName() + " has ";
+            JLabel lblOutcome = new JLabel(playerName + p.getValue().getOutcome().toString());
+            lblOutcome.setForeground(Color.white);
+            lblOutcome.setHorizontalAlignment(SwingConstants.CENTER);
+            lblOutcome.setFont(FSkin.getFont().deriveFont(Font.PLAIN, 14));
+            lblPlayerOutcomes.add(lblOutcome);
+        }
         lblStats.setText(ForgeProps.getLocalized(WinLoseText.WON) + humanWins
                 + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses);
 
@@ -137,6 +149,9 @@ public class ViewWinLose {
         }
 
         pnlLeft.add(lblTitle, "w 90%!, h 50px!, gap 5% 0 20px 0");
+        for(JLabel lbl : lblPlayerOutcomes) {
+            pnlLeft.add(lbl, "w 90%!, h 20px!, gap 5% 0 0 0");
+        }
         pnlLeft.add(lblStats, "w 90%!, h 50px!, gap 5% 0 20px 0");
 
         // A container must be made to ensure proper centering.
