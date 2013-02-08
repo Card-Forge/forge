@@ -10,5 +10,6 @@ SVar:X:Count$Valid Creature.IsRemembered+attacking
 SVar:Y:Count$Valid Creature.IsRemembered+blocking
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewers_of_estark.jpg
+SetInfo:MBP|Special|http://magiccards.info/scans/en/mbp/2.jpg
 Oracle:Choose target creature. If it's attacking, it's unblockable this turn. If it's blocking, prevent all combat damage that would be dealt this combat by it and each creature it's blocking.
 End
