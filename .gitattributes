@@ -1252,6 +1252,7 @@ res/cardsfolder/b/breaking_point.txt -text
 res/cardsfolder/b/breakthrough.txt -text svneol=unset#text/plain
 res/cardsfolder/b/breath_of_darigaaz.txt -text svneol=unset#text/plain
 res/cardsfolder/b/breath_of_dreams.txt svneol=native#text/plain
+res/cardsfolder/b/breath_of_fury.txt -text
 res/cardsfolder/b/breath_of_life.txt svneol=native#text/plain
 res/cardsfolder/b/breath_of_malfegor.txt svneol=native#text/plain
 res/cardsfolder/b/breathstealer.txt svneol=native#text/plain
