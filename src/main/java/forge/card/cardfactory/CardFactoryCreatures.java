@@ -68,60 +68,6 @@ import forge.util.Aggregates;
  * @version $Id$
  */
 public class CardFactoryCreatures {
-    private static void getCard_PainterServant(final Card card) {
-        final long[] timeStamp = new long[1];
-        final String[] color = new String[1];
-
-        final Command comesIntoPlay = new Command() {
-            private static final long serialVersionUID = 333134223161L;
-
-            @Override
-            public void execute() {
-                if (card.getController().isHuman()) {
-                    color[0] = GuiChoose.one("Choose color", Constant.Color.ONLY_COLORS);
-                } else {
-                    // AI chooses the color that appears in the keywords of
-                    // the most cards in its deck, hand and on battlefield
-                    final List<Card> list = new ArrayList<Card>();
-                    list.addAll(card.getController().getCardsIn(ZoneType.Library));
-                    list.addAll(card.getController().getCardsIn(ZoneType.Hand));
-                    list.addAll(card.getController().getCardsIn(ZoneType.Battlefield));
-
-                    color[0] = Constant.Color.WHITE;
-                    int max = 0;
-                    CardLists.filter(list, CardPredicates.containsKeyword(color[0])).size();
-
-                    for (final String c : Constant.Color.ONLY_COLORS) {
-                        final int cmp = CardLists.filter(list, CardPredicates.containsKeyword(c)).size();
-                        if (cmp > max) {
-                            max = cmp;
-                            color[0] = c;
-                        }
-                    }
-                }
-                final ArrayList<String> colors = new ArrayList<String>();
-                colors.add(color[0]);
-                card.setChosenColor(colors);
-                final String s = CardUtil.getShortColor(color[0]);
-
-                timeStamp[0] = Singletons.getModel().getGame().getColorChanger().addColorChanges(s, card, true, true);
-            }
-        }; // Command
-
-        final Command leavesBattlefield = new Command() {
-            private static final long serialVersionUID = 2559212590399132459L;
-
-            @Override
-            public void execute() {
-                final String s = CardUtil.getShortColor(color[0]);
-                Singletons.getModel().getGame().getColorChanger().removeColorChanges(s, card, true, timeStamp[0]);
-            }
-        };
-
-        card.addComesIntoPlayCommand(comesIntoPlay);
-        card.addLeavesPlayCommand(leavesBattlefield);
-    }
-
     private static void getCard_Stangg(final Card card) {
 
         final Ability ability = new Ability(card, SpellManaCost.ZERO) {
@@ -803,9 +749,7 @@ public class CardFactoryCreatures {
 
     public static void buildCard(final Card card, final String cardName) {
 
-        if (cardName.equals("Painter's Servant")) {
-            getCard_PainterServant(card);
-        } else if (cardName.equals("Stangg")) {
+        if (cardName.equals("Stangg")) {
             getCard_Stangg(card);
         } else if (cardName.equals("Sphinx of Jwar Isle")) {
             getCard_SphinxJwar(card);

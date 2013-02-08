@@ -101,6 +101,20 @@ public class ChooseColorEffect extends SpellEffect {
                             chosen.add(CardFactoryUtil.getMostProminentColor(Singletons.getModel().getGame().getCombat()
                                     .getAttackerList()));
                         }
+                        else if (logic.equals("MostProminentKeywordInComputerDeck")) {
+                            List<Card> list = ai.getAllCards();
+                            int max = 0;
+                            String chosenColor = Constant.Color.WHITE;
+
+                            for (final String c : Constant.Color.ONLY_COLORS) {
+                                final int cmp = CardLists.filter(list, CardPredicates.containsKeyword(c)).size();
+                                if (cmp > max) {
+                                    max = cmp;
+                                    chosenColor = c;
+                                }
+                            }
+                            chosen.add(chosenColor);
+                        }
                     }
                     if (chosen.size() == 0) {
                         chosen.add(Constant.Color.GREEN);
