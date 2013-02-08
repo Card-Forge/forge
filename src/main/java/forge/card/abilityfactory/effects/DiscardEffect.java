@@ -93,7 +93,6 @@ public class DiscardEffect extends RevealEffectBase {
         final List<Card> discarded = new ArrayList<Card>();
 
         if (victim.isComputer()) { // discard AI cards
-            System.out.println(dPChHand.size() + " valid: " + dPChHand);
             int max = dPChHand.size();
             max = Math.min(max, numCards);
             List<Card> list = ((AIPlayer) victim).getAi().getCardsToDiscard(max, dValid, sa);
