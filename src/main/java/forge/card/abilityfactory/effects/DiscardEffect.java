@@ -86,16 +86,17 @@ public class DiscardEffect extends RevealEffectBase {
         return sb.toString();
     } // discardStackDescription()
 
-    private List<Card> discardComputerChooses(SpellAbility sa, Player victim, Player chooser, int numCards, String[] dValid, boolean isReveal){
+    private List<Card> discardComputerChooses(SpellAbility sa, Player victim, Player chooser, int numCards, String[] dValid, boolean isReveal) {
         final Card source = sa.getSourceCard();
         List<Card> dPChHand = new ArrayList<Card>(victim.getCardsIn(ZoneType.Hand));
         dPChHand = CardLists.getValidCards(dPChHand, dValid, source.getController(), source);
         final List<Card> discarded = new ArrayList<Card>();
-        
+
         if (victim.isComputer()) { // discard AI cards
+            System.out.println(dPChHand.size() + " valid: " + dPChHand);
             int max = dPChHand.size();
             max = Math.min(max, numCards);
-            List<Card> list = ((AIPlayer)victim).getAi().getCardsToDiscard(max, dValid, sa);
+            List<Card> list = ((AIPlayer) victim).getAi().getCardsToDiscard(max, dValid, sa);
             if (isReveal) {
                 GuiChoose.oneOrNone("Computer has chosen", list);
             }
@@ -107,7 +108,7 @@ public class DiscardEffect extends RevealEffectBase {
             }
             return discarded;
         }
-        
+
         // discard human cards
         for (int i = 0; i < numCards; i++) {
             if (dPChHand.size() > 0) {
@@ -155,7 +156,7 @@ public class DiscardEffect extends RevealEffectBase {
         }
         return discarded;
     }
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
@@ -241,10 +242,7 @@ public class DiscardEffect extends RevealEffectBase {
                         GuiChoose.oneOrNone("Revealed computer hand", dPHand);
                     }
 
-                    String valid = sa.getParam("DiscardValid");
-                    if (valid == null) {
-                        valid = "Card";
-                    }
+                    String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
 
                     if (valid.contains("X")) {
                         valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
@@ -268,11 +266,11 @@ public class DiscardEffect extends RevealEffectBase {
                             dPHand = getRevealedList(p, dPHand, amount, false);
                         }
                         List<Card> dPChHand = new ArrayList<Card>(dPHand);
+                        final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
                         String[] dValid = ArrayUtils.EMPTY_STRING_ARRAY;
-                        if (sa.hasParam("DiscardValid")) { // Restrict card choices
-                            dValid = sa.getParam("DiscardValid").split(",");
-                            dPChHand = CardLists.getValidCards(dPHand, dValid, source.getController(), source);
-                        }
+                        dValid = valid.split(",");
+                        dPChHand = CardLists.getValidCards(dPHand, dValid, source.getController(), source);
+
                         Player chooser = p;
                         if (mode.equals("RevealYouChoose")) {
                             chooser = source.getController();
