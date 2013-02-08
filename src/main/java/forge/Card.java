@@ -6463,6 +6463,18 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (property.equals("NameNotEnchantingEnchantedPlayer")) {
+            Player enchantedPlayer = source.getEnchantingPlayer();
+            if (enchantedPlayer == null) {
+                return false;
+            }
+
+            List<Card> enchanting = enchantedPlayer.getEnchantedBy();
+            for (Card c : enchanting) {
+                if (this.getName().equals(c.getName())) {
+                    return false;
+                }
+            }
         } else if (property.equals("NotAttachedTo")) {
             if (this.equipping.contains(source) || source.equals(this.enchanting)) {
                 return false;

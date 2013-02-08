@@ -106,7 +106,6 @@ public class Upkeep extends Phase {
         Upkeep.upkeepVanishing(game);
         Upkeep.upkeepFading(game);
         Upkeep.upkeepBlazeCounters(game);
-        Upkeep.upkeepCurseOfMisfortunes(game);
         Upkeep.upkeepPowerSurge(game);
 
         game.getStack().unfreezeStack();
@@ -1124,66 +1123,4 @@ public class Upkeep extends Phase {
 
         }
     }
-
-    /**
-     * <p>
-     * upkeepCurseOfMisfortunes.
-     * </p>
-     */
-    private static void upkeepCurseOfMisfortunes(final GameState game) {
-        final Player player = game.getPhaseHandler().getPlayerTurn();
-
-        final List<Card> misfortunes = player.getCardsIn(ZoneType.Battlefield, "Curse of Misfortunes");
-
-        for (int i = 0; i < misfortunes.size(); i++) {
-            final Card source = misfortunes.get(i);
-
-            final Ability ability = new Ability(source, SpellManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    final List<Card> enchantmentsAttached = new ArrayList<Card>(source.getEnchantingPlayer().getEnchantedBy());
-                    List<Card> enchantmentsInLibrary =
-                            CardLists.filter(source.getController().getCardsIn(ZoneType.Library), new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return c.isEnchantment() && c.hasKeyword("Enchant player")
-                                    && !source.getEnchantingPlayer().hasProtectionFrom(c)
-                                    && !Iterables.any(enchantmentsAttached, CardPredicates.nameEquals(c.getName()));
-                        }
-                    });
-                    final Player player = source.getController();
-                    Card enchantment = null;
-                    if (player.isHuman()) {
-                        final Card[] target = new Card[enchantmentsInLibrary.size()];
-                        for (int j = 0; j < enchantmentsInLibrary.size(); j++) {
-                            final Card crd = enchantmentsInLibrary.get(j);
-                            target[j] = crd;
-                        }
-                        final Object check = GuiChoose.oneOrNone("Select Curse to attach", target);
-                        if (check != null) {
-                            enchantment = ((Card) check);
-                        }
-                    } else {
-                        enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantmentsInLibrary, this, false);
-                    }
-                    if (enchantment != null) {
-                        game.getAction().changeZone(
-                                game.getZoneOf(enchantment),
-                                enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
-                        enchantment.enchantEntity(source.getEnchantingPlayer());
-                    }
-                    source.getController().shuffle();
-                } // resolve
-            }; // ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(source).append(
-                    " At the beginning of your upkeep, you may search your library for a Curse card that doesn't have"
-                            + " the same name as a Curse attached to enchanted player, "
-                            + "put it onto the battlefield attached to that player, then shuffle you library.");
-            ability.setStackDescription(sb.toString());
-            game.getStack().addSimultaneousStackEntry(ability);
-        }
-    } // upkeepCurseOfMisfortunes
-
 } // end class Upkeep

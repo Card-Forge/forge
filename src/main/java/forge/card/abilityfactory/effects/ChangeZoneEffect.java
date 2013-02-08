@@ -393,7 +393,7 @@ public class ChangeZoneEffect extends SpellEffect {
                             tgtC.addController(sa.getSourceCard());
                         }
                         if (sa.hasParam("AttachedTo")) {
-                            List<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                            List<Card> list = AbilityFactory.getDefinedCards(hostCard,
                                     sa.getParam("AttachedTo"), sa);
                             if (list.isEmpty()) {
                                 list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -431,6 +431,7 @@ public class ChangeZoneEffect extends SpellEffect {
                                 continue;
                             }
                         }
+
                         // Auras without Candidates stay in their current
                         // location
                         if (tgtC.isAura()) {
@@ -697,6 +698,39 @@ public class ChangeZoneEffect extends SpellEffect {
                                 }
                                 c.equipCard(attachedTo);
                             }
+                        } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                            continue;
+                        }
+                    }
+
+                    if (sa.hasParam("AttachedToPlayer")) {
+                        List<Player> list = AbilityFactory.getDefinedPlayers(card,
+                                sa.getParam("AttachedToPlayer"), sa);
+                        if (!list.isEmpty()) {
+                            Player attachedTo = null;
+                            
+                            if (list.size() == 1) {
+                                attachedTo = list.get(0);
+                            } else {
+                                if (player.isHuman()) {
+                                    attachedTo = GuiChoose.one(c + " - Select a player to attach to.", list);
+                                } else { // AI player
+                                    // Currently only used by Curse of Misfortunes, so this branch should never get hit
+                                    // But just in case it does, just select the first option
+                                    attachedTo = list.get(0);
+                                }
+                            }
+                            if (c.isAura()) {
+                                if (c.isEnchanting()) {
+                                    // If this Card is already Enchanting something, need
+                                    // to unenchant it, then clear out the commands
+                                    final GameEntity oldEnchanted = c.getEnchanting();
+                                    c.removeEnchanting(oldEnchanted);
+                                    c.clearEnchantCommand();
+                                    c.clearUnEnchantCommand();
+                                }
+                                c.enchantEntity(attachedTo);
+                            } 
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
