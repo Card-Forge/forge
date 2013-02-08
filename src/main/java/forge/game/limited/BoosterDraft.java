@@ -252,7 +252,7 @@ public final class BoosterDraft implements IBoosterDraft {
         }
 
         this.computerChoose();
-        return ItemPool.createFrom(this.pack.get(this.getCurrentBoosterIndex()), CardPrinted.class, false);
+        return ItemPool.createFrom(this.pack.get(this.getCurrentBoosterIndex()), CardPrinted.class);
     }
 
     /**

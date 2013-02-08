@@ -94,7 +94,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     
     private ItemPoolView<InventoryItem> cardsForSale;
     private final ItemPool<InventoryItem> fullCatalogCards =
-            ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), InventoryItem.class, true);
+            ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), InventoryItem.class);
     private boolean showingFullCatalog = false;
 
     // get pricelist:
@@ -137,7 +137,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         showingFullCatalog = !showingFullCatalog;
         
         if (showingFullCatalog) {
-            this.getTableCatalog().setDeck(fullCatalogCards);
+            this.getTableCatalog().setDeck(fullCatalogCards, true);
             VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(false);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(false);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(false);
@@ -342,7 +342,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             final PreconDeck deck = (PreconDeck) item;
             this.questData.getCards().buyPreconDeck(deck, value);
             final ItemPool<InventoryItem> newInventory =
-                    ItemPool.createFrom(deck.getDeck().getMain(), InventoryItem.class, false);
+                    ItemPool.createFrom(deck.getDeck().getMain(), InventoryItem.class);
             getTableDeck().addCards(newInventory);
             JOptionPane.showMessageDialog(null, String.format(
                     "Deck '%s' was added to your decklist.%n%nCards from it were also added to your pool.",

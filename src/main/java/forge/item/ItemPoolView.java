@@ -77,27 +77,15 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
 
     // Constructors
     public ItemPoolView(final Class<T> cls) {
-        this(cls, false);
-    }
-
-    public ItemPoolView(final Class<T> cls, boolean infiniteStock) {
-        this(new Hashtable<T, Integer>(), cls, infiniteStock);
+        this(new Hashtable<T, Integer>(), cls);
     }
 
     public ItemPoolView(final Map<T, Integer> inMap, final Class<T> cls) {
-        this(inMap, cls, false);
-    }
-
-    public ItemPoolView(final Map<T, Integer> inMap, final Class<T> cls, boolean infiniteStock) {
         this.cards = inMap;
         this.myClass = cls;
-        this.infiniteStock = infiniteStock;
     }
 
     // Data members
-    // if this is true, queries for card count will return INT_MAX
-    private final boolean infiniteStock;
-    
     /** The cards. */
     private final Map<T, Integer> cards;
 
@@ -152,7 +140,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
             return 0;
         }
         final Integer boxed = this.getCards().get(card);
-        return boxed == null ? 0 : (infiniteStock ? Integer.MAX_VALUE : boxed.intValue());
+        return boxed == null ? 0 : boxed.intValue();
     }
 
     /**

@@ -130,7 +130,7 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
         Iterable<CardPrinted> allNT = CardDb.instance().getAllNonTraditionalCards();
         allNT = Iterables.filter(allNT, cardPoolCondition);
         
-        this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, CardPrinted.class, true));
+        this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, CardPrinted.class), true);
         this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
     }
 

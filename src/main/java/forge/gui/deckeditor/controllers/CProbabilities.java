@@ -63,8 +63,7 @@ public enum CProbabilities implements ICDoc {
         final ACEditorBase<T, TModel> ed = (ACEditorBase<T, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
 
-        final ItemPoolView<CardPrinted> deck = ItemPool.createFrom(
-                ed.getTableDeck().getCards(), CardPrinted.class, false);
+        final ItemPoolView<CardPrinted> deck = ItemPool.createFrom(ed.getTableDeck().getCards(), CardPrinted.class);
 
         final List<String> cardProbabilities = new ArrayList<String>();
 

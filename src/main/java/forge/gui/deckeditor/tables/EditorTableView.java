@@ -67,6 +67,7 @@ public final class EditorTableView<T extends InventoryItem> {
     private boolean alwaysNonUnique = false;
 
     private final Class<T> genericType;
+    private boolean infiniteSupply;
 
     /**
      * 
@@ -278,7 +279,8 @@ public final class EditorTableView<T extends InventoryItem> {
      *            an Iterable<InventoryITem>
      */
     public void setDeck(final Iterable<InventoryItem> cards) {
-        this.setDeckImpl(ItemPool.createFrom(cards, this.genericType, false));
+        this.setDeckImpl(ItemPool.createFrom(cards, this.genericType));
+        this.infiniteSupply = false;
     }
 
     /**
@@ -287,10 +289,13 @@ public final class EditorTableView<T extends InventoryItem> {
      * @param poolView
      *            an ItemPoolView
      */
-    public void setDeck(final ItemPoolView<T> poolView) {
-        this.setDeckImpl(ItemPool.createFrom(poolView, this.genericType, false));
+    public void setDeck(final ItemPoolView<T> poolView, boolean infinite) {
+        this.setDeckImpl(ItemPool.createFrom(poolView, this.genericType));
+        this.infiniteSupply = infinite;
     }
-
+    public void setDeck(final ItemPoolView<T> poolView) {
+        this.setDeck(poolView, false);
+    }
     /**
      * Sets the deck.
      * 
@@ -299,6 +304,7 @@ public final class EditorTableView<T extends InventoryItem> {
      */
     public void setDeck(final ItemPool<T> pool) {
         this.setDeckImpl(pool);
+        this.infiniteSupply = false;
     }
 
     /**
@@ -426,7 +432,7 @@ public final class EditorTableView<T extends InventoryItem> {
     }
     
     public int getCardCount(final T card) {
-        return this.pool.count(card);
+        return infiniteSupply ? Integer.MAX_VALUE : this.pool.count(card);
     }
     
     public Predicate<T> getFilter() {

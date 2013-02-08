@@ -43,27 +43,10 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         super(cls);
     }
 
-    public ItemPool(final Class<T> cls, boolean infiniteStock) {
-        super(cls, infiniteStock);
-    }
-    
-    /**
-     * createFrom method.
-     * 
-     * @param <Tin>
-     *            an InventoryItem
-     * @param <Tout>
-     *            an InventoryItem
-     * @param from
-     *            a Tin
-     * @param clsHint
-     *            a Tout
-     * @return InventoryItem
-     */
+   
     @SuppressWarnings("unchecked")
-    public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(
-            final ItemPoolView<Tin> from, final Class<Tout> clsHint, boolean infiniteStock) {
-        final ItemPool<Tout> result = new ItemPool<Tout>(clsHint, infiniteStock);
+    public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(final ItemPoolView<Tin> from, final Class<Tout> clsHint) {
+        final ItemPool<Tout> result = new ItemPool<Tout>(clsHint);
         if (from != null) {
             for (final Entry<Tin, Integer> e : from) {
                 final Tin srcKey = e.getKey();
@@ -75,23 +58,10 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         return result;
     }
 
-    /**
-     * createFrom method.
-     * 
-     * @param <Tin>
-     *            an InventoryItem
-     * @param <Tout>
-     *            an InventoryItem
-     * @param from
-     *            a Iterable<Tin>
-     * @param clsHint
-     *            a Class<Tout>
-     * @return <Tin> an InventoryItem
-     */
+
     @SuppressWarnings("unchecked")
-    public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(
-            final Iterable<Tin> from, final Class<Tout> clsHint, boolean infiniteStock) {
-        final ItemPool<Tout> result = new ItemPool<Tout>(clsHint, infiniteStock);
+    public static <Tin extends InventoryItem, Tout extends InventoryItem> ItemPool<Tout> createFrom(final Iterable<Tin> from, final Class<Tout> clsHint) {
+        final ItemPool<Tout> result = new ItemPool<Tout>(clsHint);
         if (from != null) {
             for (final Tin srcKey : from) {
                 if (clsHint.isInstance(srcKey)) {
@@ -138,7 +108,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         if (amount <= 0) {
             return;
         }
-        this.getCards().put(card, this.count(card) + amount);
+        this.getCards().put(card, Integer.valueOf(this.count(card) + amount));
         this.setListInSync(false);
     }
 

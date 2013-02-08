@@ -110,7 +110,7 @@ public class CustomLimited extends DeckBase {
         final String deckName = data.get("DeckFile");
         final Deck deckCube = cubes.get(deckName);
         cd.cardPool = deckCube == null ? ItemPool.createFrom(
-                        CardDb.instance().getAllUniqueCards(), CardPrinted.class, false)
+                        CardDb.instance().getAllUniqueCards(), CardPrinted.class)
                 : deckCube.getMain();
 
         return cd;
