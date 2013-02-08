@@ -154,6 +154,35 @@ Fixes/Features:
 - use predicates instead of a custom count function
 - don't select negative row after buying every last item in the spell shop
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- don't let tables extend past bottom of deck editor page
+- calculate the correct table row selection when multiple cards are bought at once
+- change selection highlight in deck editor tables based on component focus to more clearly indicate which table has focus
+- allow tab key to set focus to next component (e.g. prevent tables from swallowing tab and shift-tab)
+- flicker-free reinstatement of current selection when table model data changes
+- Added some text to winlose screen that would explain why player lost or won
+- fixing a crash when creature with B/G sword attacked AI (there was NPE on attempt to iterate over restrictions)
+- make button-like FLabels act more like buttons
+- can tab focus
+- space/enter to select
+- brighten on hover
+- use previous "hover" border for focus indicator
+- fix various layout and style bugs (e.g. too-short widths and missing hoverable properties)
+- Added a medium quest by Nordos: Cipher 2.
+- make start button change appearance on focus
+- avr, m13, rtr, gtc - pictures of boosters and fatpacks
+- moved that infiniteStock field from ItemPool to more approriate place
+- moved infiniteSupply flag into table model, since remove (that should not remove cards when supply is endless) method belongs to model layer.
+- Fixing Domri Rade placing non-Creatures on the bottom of the library
+- Convert Curse of Misfortunes to Script
+- Updating mtg-data.txt with GTC cards.
+- Convert Painter's Servant to Script
+- Small fix for Sewer Nemesis
+- Fixed ai not discarding cards in certain discard modes
+- Fixed the Chaos effect of Goldmeadow
+- Better fix for Goldmeadow
+- Removed a debug output I'd left in an earlier commit
+- delete jpg booster pictures, replace them with PNG (since code wants png), ISD, DKA added
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -195,6 +224,8 @@ Sewers of Estark
 Signal the Clans
 Wild Swing
 Yamabushi's Storm
+Sewer Nemesis
+Breath of Fury
 
 
 end
