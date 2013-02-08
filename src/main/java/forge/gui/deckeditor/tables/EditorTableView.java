@@ -67,7 +67,6 @@ public final class EditorTableView<T extends InventoryItem> {
     private boolean alwaysNonUnique = false;
 
     private final Class<T> genericType;
-    private boolean infiniteSupply;
 
     /**
      * 
@@ -279,8 +278,7 @@ public final class EditorTableView<T extends InventoryItem> {
      *            an Iterable<InventoryITem>
      */
     public void setDeck(final Iterable<InventoryItem> cards) {
-        this.setDeckImpl(ItemPool.createFrom(cards, this.genericType));
-        this.infiniteSupply = false;
+        this.setDeckImpl(ItemPool.createFrom(cards, this.genericType), false);
     }
 
     /**
@@ -290,8 +288,8 @@ public final class EditorTableView<T extends InventoryItem> {
      *            an ItemPoolView
      */
     public void setDeck(final ItemPoolView<T> poolView, boolean infinite) {
-        this.setDeckImpl(ItemPool.createFrom(poolView, this.genericType));
-        this.infiniteSupply = infinite;
+        this.setDeckImpl(ItemPool.createFrom(poolView, this.genericType), infinite);
+
     }
     public void setDeck(final ItemPoolView<T> poolView) {
         this.setDeck(poolView, false);
@@ -303,8 +301,7 @@ public final class EditorTableView<T extends InventoryItem> {
      *            the new deck
      */
     public void setDeck(final ItemPool<T> pool) {
-        this.setDeckImpl(pool);
-        this.infiniteSupply = false;
+        this.setDeckImpl(pool, false);
     }
 
     /**
@@ -314,10 +311,11 @@ public final class EditorTableView<T extends InventoryItem> {
      * @param thePool
      *            an ItemPool
      */
-    protected void setDeckImpl(final ItemPool<T> thePool) {
+    protected void setDeckImpl(final ItemPool<T> thePool, boolean infinite) {
         this.model.clear();
         this.pool = thePool;
         this.model.addCards(this.pool);
+        this.model.setInfinite(infinite);
         this.updateView(true);
     }
 
@@ -432,7 +430,7 @@ public final class EditorTableView<T extends InventoryItem> {
     }
     
     public int getCardCount(final T card) {
-        return infiniteSupply ? Integer.MAX_VALUE : this.pool.count(card);
+        return model.isInfinite() ? Integer.MAX_VALUE : this.pool.count(card);
     }
     
     public Predicate<T> getFilter() {

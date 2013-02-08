@@ -68,6 +68,17 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
     private final JTable table;
     private final CascadeManager cascadeManager = new CascadeManager();
     private final int maxSortDepth = 3;
+    private boolean infiniteSupply;
+
+    /**
+     * @return the infiniteSupply
+     */
+    public boolean isInfinite() {
+        return infiniteSupply;
+    }
+
+
+    
 
     /**
      * Instantiates a new table model, using a JTable,
@@ -140,6 +151,9 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      * @param card0 &emsp; {@link forge.Card} object
      */
     public void removeCard(final T card0, int qty) {
+        if ( isInfinite() ) 
+            return;
+
         final boolean wasThere = this.data.count(card0) > 0;
         if (wasThere) {
             this.data.remove(card0, qty);
@@ -391,5 +405,14 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
             return EditorTableModel.this.cascadeManager.getSorter().compare(
                     (Entry<InventoryItem, Integer>) o1, (Entry<InventoryItem, Integer>) o2);
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param infinite
+     */
+    public void setInfinite(boolean infinite) {
+        // TODO Auto-generated method stub
+        this.infiniteSupply = infinite;
     }
 } // CardTableModel
