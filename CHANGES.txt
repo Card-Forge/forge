@@ -1,15 +1,13 @@
-Forge Beta: 02-08-2013 ver 1.3.8
+Forge Beta: 0#-##-2013 ver 1.3.9
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-12045 cards in total.
+12### cards in total.
 
 
-This version is primarily a maintenance release. When we built the 1.3.6 beta we noticed a bug and we were able to fix it fairly quickly. This resulted in the 1.3.7 beta release and we did not announce the 1.3.6 beta release as it was buggy.
 
-After releasing the 1.3.7 beta we noticed several additional bugs and they have been fixed for the 1.3.8 beta. We also have several new cards and work on the deck editors continue.
 
 --
 
@@ -38,140 +36,11 @@ The archive format used for the Forge distribution is ".tar.bz2". There are util
 
 Some people use the Windows application 7zip. This utility can be found at http://www.7-zip.org/download.html. Mac users can double click on the archive and the application Archive Utility will launch and extract the archive. Mac users do not need to download a separate utility.
 
+--
 
 Fixes/Features:
 
-- sideboarding affects the next match correctly
-- use bulk operations for card moving where ever possible to avoid stale GUI updates
-- reverting unwanted changes from r19381 to core classes
-- fix background coloring not being displayed in deck editor card detail rarity label
-- add tooltip for rarity label
-- Fixed broken Shandalar decks.
-- add default editor preferences file so missing preferences will always have a default value
-- remove editor.preferences from repo -- it will get created as necessary
-- set better width and sorting defaults
-- wrap card catalog toggle filters when the tab is resized small
-- make current deck stats widgets wrappable
-- Converted inlined classes to nested
-- remove unused imports
-- cosmetic changes in chooses (i'm thinking of a good way to make that choices player-independent)
-- Moved check for card controller (used in CardDetailPanel and ImageCache) to card class - that's not perfect, but at least eliminates code duplication.
-- calls to AI-related methods require the player parameter to have AIPlayer type to enable calls to ai-specific methods (like acquiring aicontroller by aiplayer.getcontroller().getai() and performing something from it) without need to cast types)
-- replaced deprecated methods isHuman/isComputer with reference comparisons (to compare with acting player) and checks of player's hostility.
-- predictThreatenedObjects moved from AbilityFactory to ComputerUtil (for now, will find a more specific place later)
-- GameActionUtil.payCostDuringAbilityResolve method now demands player parameter (though it is always human player)
-- fix NPE in card detail when the card does not belong to any set (e.g. a token)
-- GameAction - extract method * 3
-- GameActionUtil - uses common GuiDialog.confirm
-- CardFactoryLands - converted inlined class to nested
-- ChangeZoneEffect - removed stringbuilder wrapper (as it was not used anyway)
-- replaced isComputer/isHuman where it was clear and possible
-- Fixed a bug with AddToughness.
-- Removed reminder text for suspend from Talon Gates. Description was too long for SA choice window so the second choice was hidden (on a 1280 wide display at least). We need to find a way to wrap text in the choice window when it would extend past the edge of the screen.
-- Fix last commit commiting WIP.
-- Another fix for AddToughness.
-- Fixed Verdant Haven.
-- Fixed Ogre Slumlord.
-- Sell lands down to 50 when selling all extras in the card shop
-- Converted Alpha Status to script
-- remove cards from one table after adding them to the other table so the displayed card stays consistent with the focused card
-- Made it possible to include special rewards like predefined cards or duplicate cards in Quest duels.
-* Some notes:
-*  Special rewards for normal duels should be extremely rare, mostly for very hard opponents, 1 special reward per opponent, and always a percentage chance of getting the special reward (preferably less than 50%) rather getting a guaranteed reward.
-*  In the interests of downward compatibility, it is possible to define the Card Reward either in the [quest] portion (like before) or the [metadata] portion of the dck file. (Duels do not have the [quest] portion but if the definition were simply moved from [quest] to [metadata], all current challenge files would have stopped working properly.)
-- Removed duplicate sharesCreatureTypeWith property from isValid
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Made sure Cunning Giant's replacement effect (for now) only triggers if it wasn't blocked, not also if it tramples over something.
-- Fixed Assemble the Legion.
-- Added AIPlayer parameter to doTrigger and chkAIDrawback
-- Fixed CostTapType hanging when X=0.
-- Methods to test a string against a valid card type moved to forge.CardType
-- CommonDrawback: wrote in a single line the complicated chkAIDrawback method
-- removed unused imports
-- CardUtil.getRandom replaced with Aggregates.random
-- getReflectableMana uses Set as collection, so it does not have to check for duplicates before adding new items.
-- united two CMC calculation methods (one was getCMC from card that read characteristics while other took more factors into account)
-- Cunning Giant will now interact correctly with planeswalkers
-- CardEdition: removed ctor overload and made it private (editions must not be created by other code but nested Reader class anyway)
-- Player: isComputer and isHuman methods redefined as getType() == PlayerType(computer/human), no overloads needed in derived classes
-- player.isHostileTo() renamed to more correct 'isOpponentOf()'
-- missing HumanPlayer.java for commit 19420
-- moved GameAction & its util class to forge.game
-- ensure stats labels in deck editor are shown at the correct height on large displays
-- this works around a quirky interaction between WrapLayout and MigLayout that was causing interior cells to be properly resized but the cells surrounding them would not be, resulting in widgets that would be too large or too small for their unupdated containing cells
-- Fixed Krosa Chaos trigger
-- GameAction divided into 2 parts: original keeps cards' zone transitions, GameActionPlay.java holds methods for playing spells (mostly used by human player I guess)
-- in ComputerUtil demanded player to be AiPlayer for playing spells
-- add set type information to setdata.txt and store it via CardEdition
-- The Very Hard Jamuraa decks can now occasionally (rarely) give you special extra rewards.
-- simplify and theme choose sets dialog
-- Minor technical improvement to a check in BoosterUtils.java.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Improved Sedris, the Traitor King's script to better handle the exile at next EOT
-- Fixed Haste on suspended creatures.
-- Fixed AI ignoring "DiscardValid" parameter.
-- make set chooser dialog overlay-based instead of JDialog-based
-- move type parsing from private constructor to reader class; add comment on purpose of 2-letter codes
-- Fixed Deathpact Angel.
-- differentiate item hilight when a FList listbox has lost focus from when the listbox is selected
-- ensure the CardListViewer always appears in the center of the screen
-- allow spacebar to move cards in DualListBox and enter to select the OK button
-- make color of listbox selection depend on listbox focus, not cell focus
-- avoid NPE when attempting to start a challenge when there isn't one to start
-- set button focus after match; this also gets the game log scrolling properly
-- SpellAbility: afterResolve and afterPayMana were removed, since they were not used.
-- little refactoring for global ruin
-- CardEdition: remove unused ctor
-- SpellAbility: Intrinsic/Extrinsic types were never assigned (removed)
-- setPaidList, beforePayManaAI, setAllReplacingObjects, hasReplacingObject, wasCancelled were never used (removed)
-- reduced visibility of setManaPart, 
-- finalized setReplicateManaCost, setXManaCost, setIsMultiKicker, setIsReplicate, setIsCycling, setConditions, (set/add)OptionalAdditionalCosts since they were called by CardFactoryUtil only => all removed from WrappedAbility.java
-- allow highlighting and copying of match log in ViewWinLose
-- make saving layouts thread safe
-- add ctrl(cmd)+enter hotkey to auto button in ability chooser dialog
-- scroll game log to top on display
-- reshow selected card when the listbox regains focus
-- show current card /after/ the events stop firing so the card data doesn't get overwritten
-- Converting Sheltered Valley to script (no AI exists in hardcode, but we probably should an add an SVar to not play this if that player already controls one of these)
-- Added an ai check svar to Sheltered Valley so that it won't play it if it already has another one on the battlefield
-- AiController.getLandsToPlay will now check NeedsToPlayVar and filter out relevant cards
-- Added a deck editor icon for products. Hooked up the icon in FSkin and added a commented out basic hook for it in SEditorUtil
-- getAvailableMana and mapManaSources accept any player as parameter, since AI wants to evaluate player's mana he might use to pump creatures
-- add pack filter in spell shop
-- use FButtons instead of FLabels on the AssignDamage dialog so default actions and tabbing work properly
-- use predicates instead of a custom count function
-- don't select negative row after buying every last item in the spell shop
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- don't let tables extend past bottom of deck editor page
-- calculate the correct table row selection when multiple cards are bought at once
-- change selection highlight in deck editor tables based on component focus to more clearly indicate which table has focus
-- allow tab key to set focus to next component (e.g. prevent tables from swallowing tab and shift-tab)
-- flicker-free reinstatement of current selection when table model data changes
-- Added some text to winlose screen that would explain why player lost or won
-- fixing a crash when creature with B/G sword attacked AI (there was NPE on attempt to iterate over restrictions)
-- make button-like FLabels act more like buttons
-- can tab focus
-- space/enter to select
-- brighten on hover
-- use previous "hover" border for focus indicator
-- fix various layout and style bugs (e.g. too-short widths and missing hoverable properties)
-- Added a medium quest by Nordos: Cipher 2.
-- make start button change appearance on focus
-- avr, m13, rtr, gtc - pictures of boosters and fatpacks
-- moved that infiniteStock field from ItemPool to more approriate place
-- moved infiniteSupply flag into table model, since remove (that should not remove cards when supply is endless) method belongs to model layer.
-- Fixing Domri Rade placing non-Creatures on the bottom of the library
-- Convert Curse of Misfortunes to Script
-- Updating mtg-data.txt with GTC cards.
-- Convert Painter's Servant to Script
-- Small fix for Sewer Nemesis
-- Fixed ai not discarding cards in certain discard modes
-- Fixed the Chaos effect of Goldmeadow
-- Better fix for Goldmeadow
-- Removed a debug output I'd left in an earlier commit
-- delete jpg booster pictures, replace them with PNG (since code wants png), ISD, DKA added
-- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
-- Preparing the changes.txt file for the next beta build and release.
+
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -188,42 +57,9 @@ Swordshine
 Chris H
 
 
-Added the following Vanguard Avatar:
-
-Momir Vig, Simic Visionary Avatar
-
-
-Added the following Planes:
-
-Takenuma
-Talon Gates
-
-
 Added the following cards:
 
-Aura Barbs
-Breath of Fury
-Burning-Tree Shaman
-Capricious Efreet
-Coils of the Medusa
-Cunning Giant
-Enchantment Alteration
-Farrel's Mantle
-Keldon Firebombers
-Mana Echoes
-Mirrorwood Treefolk
-Misstep
-Primordial Ooze
-Protean Hydra
-Pyrrhic Revival
-Rohgahh of Kher Keep
-Sedris, the Traitor King
-Sewer Nemesis
-Sewers of Estark
-Signal the Clans
-Skill Borrower
-Wild Swing
-Yamabushi's Storm
+
 
 
 end
