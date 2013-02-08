@@ -133,9 +133,9 @@ if __name__ == '__main__':
 
 	standardSets = getSetByFormat('Standard')
 
-	ignoredSet = [ 'ASTRAL', 'ATH', 'BD', 'BR', 'DD2', 'DDC', 'DDD', 'DDE', 'DDF',
+	ignoredSet = [ 'ASTRAL', 'ATH', 'BD', 'BR', 'CM1', 'DD2', 'DDC', 'DDD', 'DDE', 'DDF',
 		'DDG', 'DDH', 'DDI', 'DDJ', 'DKM', 'DRB', 'EVG', 'H09', 'ME2',
-		'ME3', 'ME4', 'MED', 'PD2', 'PD3', 'SDC', 'UGL', 'UNH', 
+		'ME3', 'ME4', 'MED', 'PD2', 'PD3', 'SDC', 'UG', 'UGL', 'UNH', 
 		'V09', 'V10', 'V11', 'V12',]
 
 	for currentSet in setCodes :
