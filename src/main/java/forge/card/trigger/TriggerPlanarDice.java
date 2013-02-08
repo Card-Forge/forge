@@ -27,7 +27,7 @@ public class TriggerPlanarDice extends Trigger {
     public TriggerPlanarDice(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.trigger.Trigger#performTest(java.util.Map)
      */
@@ -39,10 +39,10 @@ public class TriggerPlanarDice extends Trigger {
                 return false;
             }
         }
-        
+
         if (this.getMapParams().containsKey("Result")) {
             PlanarDice cond = PlanarDice.smartValueOf(this.getMapParams().get("Result"));
-            if(cond != ((PlanarDice)runParams2.get("Result"))) {
+            if (cond != ((PlanarDice) runParams2.get("Result"))) {
                 return false;
             }
         }
@@ -69,7 +69,7 @@ public class TriggerPlanarDice extends Trigger {
      */
     @Override
     public void setTriggeringObjects(SpellAbility sa) {
-        //THE BLACKEST TRIGGERINGOBJECT FOR THE MOST BRUTAL OF ALL TRIGGERS! NOOOOOTHIIIIIING!
+        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
     }
 
 }
