@@ -7707,6 +7707,7 @@ res/cardsfolder/p/planeswalkers_favor.txt -text
 res/cardsfolder/p/planeswalkers_fury.txt -text svneol=unset#text/plain
 res/cardsfolder/p/planeswalkers_mirth.txt -text
 res/cardsfolder/p/planeswalkers_scorn.txt -text
+res/cardsfolder/p/planewide_disaster.txt -text
 res/cardsfolder/p/plant_elemental.txt -text
 res/cardsfolder/p/plasma_elemental.txt svneol=native#text/plain
 res/cardsfolder/p/plateau.txt svneol=native#text/plain

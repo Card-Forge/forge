@@ -23,9 +23,17 @@ public enum PlanarDice {
         if (i == 1)
             res = Chaos;
         
+        PlanarDice trigRes = res;
+        
+        if(Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.blankIsChaos)
+                && res == Blank)
+        {
+            trigRes = Chaos;
+        }
+        
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Player", roller);
-        runParams.put("Result", res);
+        runParams.put("Result", trigRes);
         Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.PlanarDice, runParams,false);
     
         
