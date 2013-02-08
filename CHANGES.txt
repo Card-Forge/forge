@@ -1,27 +1,15 @@
-Forge Beta: 02-##-2013 ver 1.3.8
+Forge Beta: 02-08-2013 ver 1.3.8
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-12### cards in total.
+12045 cards in total.
 
 
+This version is primarily a maintenance release. When we built the 1.3.6 beta we noticed a bug and we were able to fix it fairly quickly. This resulted in the 1.3.7 beta release and we did not announce the 1.3.6 beta release as it was buggy.
 
-
---
-
-This version of forge includes a few sound files for the new sound effect system. While we have several sounds assigned to a few of the available events there are a number of events that do not yet have a assigned sound file. This should be considered a work in progress and we could use some help in finding interesting sounds that we can add to forge.
-
-The sound files need to be in wav or au format, wav appears to be more widespread but the code can handle either format. The sound files need to be copyright-free and they should be in the public domain.
-
-You can either record your own sounds if you have the necessary equipment or you may be able to find an appropriate sound on a website such as http://www.freesound.org/browse/
-
-You should note that sound files can be large and we would like to avoid this if possible. A good size to shoot for would be 50 K or less. There is a freeware sound editor that may have versions for all operating systems. This app is named Audacity.
-
-We have a forge forum topic at the Collectible Card Games Headquarters web site that is devoted to finding sounds for this new sound system. Please visit this topic and contribute a sound or two. We can use your help and assistance. :)
-
-http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8570
+After releasing the 1.3.7 beta we noticed several additional bugs and they have been fixed for the 1.3.8 beta. We also have several new cards and work on the deck editors continue.
 
 --
 
@@ -183,11 +171,21 @@ Fixes/Features:
 - Removed a debug output I'd left in an earlier commit
 - delete jpg booster pictures, replace them with PNG (since code wants png), ISD, DKA added
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+Marc
+Max
+Myk
+Nordos
+Rooger
+RumbleBBU
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 Added the following Vanguard Avatar:
@@ -203,13 +201,12 @@ Talon Gates
 
 Added the following cards:
 
-Cunning Giant
-Sedris, the Traitor King
-Skill Borrower
 Aura Barbs
+Breath of Fury
 Burning-Tree Shaman
 Capricious Efreet
 Coils of the Medusa
+Cunning Giant
 Enchantment Alteration
 Farrel's Mantle
 Keldon Firebombers
@@ -220,12 +217,13 @@ Primordial Ooze
 Protean Hydra
 Pyrrhic Revival
 Rohgahh of Kher Keep
+Sedris, the Traitor King
+Sewer Nemesis
 Sewers of Estark
 Signal the Clans
+Skill Borrower
 Wild Swing
 Yamabushi's Storm
-Sewer Nemesis
-Breath of Fury
 
 
 end
