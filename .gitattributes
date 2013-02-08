@@ -4028,6 +4028,7 @@ res/cardsfolder/g/ghostly_touch.txt -text
 res/cardsfolder/g/ghostly_visit.txt svneol=native#text/plain
 res/cardsfolder/g/ghostly_wings.txt svneol=native#text/plain
 res/cardsfolder/g/ghosts_of_the_damned.txt svneol=native#text/plain
+res/cardsfolder/g/ghosts_of_the_innocent.txt -text
 res/cardsfolder/g/ghostway.txt svneol=native#text/plain
 res/cardsfolder/g/ghoulcallers_bell.txt -text
 res/cardsfolder/g/ghoulcallers_chant.txt -text

@@ -1,0 +1,15 @@
+Name:Ghosts of the Innocent
+ManaCost:5 W W
+Types:Creature Spirit
+Text:no text
+PT:4/5
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player,Creature | ReplaceWith$ DmgHalfDown | IsCombat$ False | Description$ If a source would deal damage to a creature or player, it deals half that damage, rounded down, to that creature or player instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player,Creature | ReplaceWith$ DmgHalfDownCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to a creature or player, it deals half that damage, rounded down, to that creature or player instead.
+SVar:DmgHalfDown:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgHalfDownCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:X:ReplaceCount$DamageAmount/HalfDown
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghosts_of_the_innocent.jpg
+SVar:RemAIDeck:True
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/20.jpg
+Oracle:If a source would deal damage to a creature or player, it deals half that damage, rounded down, to that creature or player instead.
+End
