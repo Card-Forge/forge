@@ -4,7 +4,7 @@ Types:Planeswalker Domri
 Text:no text
 Loyalty:3
 A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | Planeswalker$ True | SubAbility$ TrigDig2 | SpellDescription$ Look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand.
-SVar:TrigDig2:DB$ Dig | DigNum$ 1 | ChangeNum$ All | RevealValid$ Creature | ChangeValid$ Creature | Optional$ True
+SVar:TrigDig2:DB$ Dig | DigNum$ 1 | ChangeNum$ All | RevealValid$ Creature | ChangeValid$ Creature | Optional$ True | LibraryPosition2$ 0 
 A:AB$ Pump | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | Planeswalker$ True | SubAbility$ DomriFight | StackDescription$ None | SpellDescription$ Target creature you control fights another target creature.
 SVar:DomriFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Choose another target creature to fight the first target creature
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Domri Rade emblem | Image$ domri_rade_emblem | StaticAbilities$ STDomri | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."
