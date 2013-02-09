@@ -3,16 +3,10 @@ package forge.card.cardfactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import forge.Card;
 
-import forge.Command;
-import forge.CounterType;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.cost.Cost;
-import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
