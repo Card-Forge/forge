@@ -13676,6 +13676,7 @@ src/main/java/forge/card/abilityfactory/effects/LifeExchangeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeGainEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeLoseEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeSetEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/ManaBurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ManaEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ManaReflectedEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MillEffect.java -text
