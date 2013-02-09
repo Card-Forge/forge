@@ -3,7 +3,7 @@
 Name=George of the Jungle 2
 Title=George of the Jungle
 Difficulty=medium
-Description=WR deck with Belligerent Hatchling, Battlegate Mimic and Ajani Vengeant
+Description=WR deck with Belligerent Hatchling and Battlegate Mimic
 Icon=George of the Jungle.jpg
 Deck Type=constructed
 [main]
@@ -14,7 +14,8 @@ Deck Type=constructed
 2 Squee's Embrace
 1 Hobgoblin Dragoon
 3 Belligerent Hatchling
-2 Lightning Helix
+1 Lightning Helix
+1 Arrows of Justice
 2 Stun Sniper
 8 Plains|ISD
 2 Flowstone Charger
@@ -29,10 +30,11 @@ Deck Type=constructed
 1 Balefire Liege
 1 Boros Swiftblade
 1 Cerodon Yearling
-2 Glory of Warfare
+1 Glory of Warfare
 1 Brion Stoutarm
 1 Duergar Hedge-Mage
 1 Firemane Angel
 1 Flame-Kin Zealot
 1 Spitemare
+1 Fortress Cyclops
 [sideboard]

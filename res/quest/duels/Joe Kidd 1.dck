@@ -8,10 +8,11 @@ Icon=Joe Kidd.jpg
 Deck Type=constructed
 [main]
 4 Arcane Sanctum
-8 Swamp|M11
-8 Plains|M11
-2 Godless Shrine
-2 Caves of Koilos
+4 Orzhov Guildgate
+7 Swamp|M11
+7 Plains|M11
+1 Godless Shrine
+1 Caves of Koilos
 1 Orzhova, the Church of Deals
 3 Beckon Apparition
 3 Mourning Thrull
@@ -29,9 +30,10 @@ Deck Type=constructed
 2 Bloodied Ghost
 1 Righteous War
 1 Edge of the Divinity
-3 Gwyllion Hedge-Mage
+2 Gwyllion Hedge-Mage
 1 Mortify
 1 Restless Apparition
 1 Tidehollow Sculler
 1 Soul Link
+1 Purge the Profane
 [sideboard]

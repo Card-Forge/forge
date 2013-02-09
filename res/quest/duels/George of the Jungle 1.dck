@@ -7,9 +7,10 @@ Description=WR deck with Belligerent Hatchling and Battlegate Mimic
 Icon=George of the Jungle.jpg
 Deck Type=constructed
 [main]
-2 Sacred Foundry
-2 Battlefield Forge
+1 Sacred Foundry
+1 Battlefield Forge
 1 Expedition Map
+4 Boros Guildgate
 4 Jungle Shrine
 1 Disenchant
 4 Boros Recruit
@@ -17,16 +18,16 @@ Deck Type=constructed
 2 Cerodon Yearling
 2 Angelfire Crusader
 2 Ordruun Commando
-1 Ghostfire
+1 Arrows of Justice
 3 Battlegate Mimic
 2 Skyknight Legionnaire
 2 Duergar Hedge-Mage
 3 Belligerent Hatchling
 3 Stun Sniper
-8 Plains|M11
+7 Plains|M11
 1 Flowstone Charger
 2 Scourge of the Nobilis
 2 Double Cleave
-8 Mountain|M11
+7 Mountain|M11
 1 Spitemare
 [sideboard]
