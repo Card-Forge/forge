@@ -51,7 +51,7 @@ public class TapAllEffect extends SpellEffect {
 
         for (final Card c : cards) {
             if (remTapped) {
-            card.addRemembered(c);
+                card.addRemembered(c);
             }
             c.tap();
         }

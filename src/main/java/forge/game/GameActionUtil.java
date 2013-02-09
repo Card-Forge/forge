@@ -1120,32 +1120,6 @@ public final class GameActionUtil {
     }
 
     /**
-     * <p>
-     * doPowerSink.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     */
-    public static void doPowerSink(final Player p) {
-        // get all lands with mana abilities
-        List<Card> lands = p.getLandsInPlay();
-        lands = CardLists.filter(lands, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getManaAbility().size() > 0;
-            }
-        });
-        // tap them
-        for (final Card c : lands) {
-            c.tap();
-        }
-
-        // empty mana pool
-        p.getManaPool().clearPool(false);
-    }
-
-    /**
      * Gets the commands.
      * 
      * @return the commands

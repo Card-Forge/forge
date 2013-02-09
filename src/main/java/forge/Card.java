@@ -6178,8 +6178,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         if (incR.length > 1) {
             final String excR = incR[1];
-            final String[] exR = excR.split("\\+"); // Exclusive Restrictions
-                                                    // are ...
+            final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
                 if (!this.hasProperty(exR[j], sourceController, source)) {
                     return false;
@@ -7195,6 +7194,13 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.equals("hasActivatedAbility")) {
             for (final SpellAbility sa : this.getSpellAbilities()) {
                 if (sa.isAbility()) {
+                    return true;
+                }
+            }
+            return false;
+        } else if (property.equals("hasManaAbility")) {
+            for (final SpellAbility sa : this.getSpellAbilities()) {
+                if (sa.isManaAbility()) {
                     return true;
                 }
             }
