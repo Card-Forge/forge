@@ -397,31 +397,6 @@ public class CardFactoryCreatures {
         card.addDestroyCommand(destroy);
     }
 
-    private static void getCard_MultikickerP1P1(final Card card, final String cardName) {
-        final AbilityStatic ability = new AbilityStatic(card, SpellManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                card.addCounter(CounterType.P1P1, card.getMultiKickerMagnitude(), true);
-                card.setMultiKickerMagnitude(0);
-            }
-        };
-        final StringBuilder sb = new StringBuilder();
-        sb.append(cardName);
-        sb.append(" enters the battlefield with a +1/+1 counter ");
-        sb.append("on it for each time it was kicked.");
-        ability.setStackDescription(sb.toString());
-
-        final Command comesIntoPlay = new Command() {
-            private static final long serialVersionUID = 4245563898487609274L;
-
-            @Override
-            public void execute() {
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-            }
-        };
-        card.addComesIntoPlayCommand(comesIntoPlay);
-    }
     private static void getCard_SurturedGhoul(final Card card) {
         final int[] numCreatures = new int[1];
         final int[] sumPower = new int[1];
@@ -759,9 +734,6 @@ public class CardFactoryCreatures {
             getCard_ApocalypseHydra(card);
         } else if (cardName.equals("Kinsbaile Borderguard")) {
             getCard_KinsbaileBorderguard(card);
-        } else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite")
-                || cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards") || cardName.equals("Joraga Warcaller")) {
-            getCard_MultikickerP1P1(card, cardName);
         } else if (cardName.equals("Sutured Ghoul")) {
             getCard_SurturedGhoul(card);
         } else if (cardName.equals("Phyrexian Dreadnought")) {
