@@ -3300,6 +3300,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     
         @Override
         public void resolve() {
+            miracle.setActivatingPlayer(card.getOwner());
             // pay miracle cost here.
             if (card.getOwner().isHuman()) {
                 if (GuiDialog.confirm(card, card + " - Drawn. Pay Miracle Cost?")) {
@@ -3307,7 +3308,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 }
             } else {
                 Spell spell = (Spell) miracle;
-                spell.setActivatingPlayer(card.getOwner());
                 if (spell.canPlayFromEffectAI(false, false)) {
                     ComputerUtil.playStack(miracle, (AIPlayer) card.getOwner(), game);
                 }
