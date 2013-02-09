@@ -26,7 +26,7 @@ public class RollPlanarDiceEffect extends SpellEffect {
             
             Singletons.getModel().getGame().getPhaseHandler().incPlanarDiceRolledthisTurn();
         }
-        PlanarDice result = PlanarDice.roll(roller);
+        PlanarDice result = PlanarDice.roll(roller,null);
         
         GuiDialog.message(roller.getName() + " rolled " + result.toString());
 

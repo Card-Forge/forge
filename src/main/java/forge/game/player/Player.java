@@ -3156,18 +3156,15 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public void planeswalk()
     {
-        //Run PlaneswalkedFrom triggers here.
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Card", currentPlane);
-        game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
         
         currentPlane = planarDeck.get(0);
-        
+
         planarDeck.remove(0);
         getZone(ZoneType.Command).add(currentPlane);
         
         game.setActivePlane(currentPlane);
         //Run PlaneswalkedTo triggers here.
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Card", currentPlane);
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams,false);
     }
@@ -3180,6 +3177,11 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     {        
         if(currentPlane != null)
         {
+          //Run PlaneswalkedFrom triggers here.
+            HashMap<String,Object> runParams = new HashMap<String,Object>();
+            runParams.put("Card", currentPlane);
+            game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
+            
             Zone com = game.getZoneOf(currentPlane);
             com.remove(currentPlane);
             currentPlane.clearControllers();

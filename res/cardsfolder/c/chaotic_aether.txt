@@ -1,0 +1,14 @@
+Name:Chaotic AEther
+ManaCost:no cost
+Types:Phenomenon
+Text:no text
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ AEther | TriggerDescription$ When you encounter CARDNAME, each blank roll of the planar dice is a {C} roll until a player planeswalks away from a plane. (Then planeswalk away from this phenomenon)
+SVar:AEther:AB$ Effect | Cost$ 0 | Name$ Chaotic AEther Effect | StaticAbilities$ STBlankIsChaos | Triggers$ TPWAway | SVars$ ExileSelf | SubAbility$ PWAway
+SVar:PWAway:DB$ Planeswalk | Cost$ 0
+SVar:STBlankIsChaos:Mode$ Continuous | EffectZone$ Command | GlobalRule$ Each blank roll of the planar dice is a {C} roll.
+SVar:TPWAway:Mode$ PlaneswalkedFrom | ValidCard$ Plane | Execute$ ExileSelf | Static$ True | TriggerDescription$ Until a player planeswalks away from a plane, each blank roll of the planar dice is a {C} roll.
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chaotic_aether.jpg
+SetInfo:PC2|Common|http://magiccards.info/extras/phenomenon/planechase-2012-edition/chaotic-aether.jpg
+End

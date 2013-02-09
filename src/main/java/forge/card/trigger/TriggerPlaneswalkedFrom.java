@@ -48,7 +48,7 @@ public class TriggerPlaneswalkedFrom extends Trigger {
      */
     @Override
     public Trigger getCopy() {
-        final Trigger copy = new TriggerPlaneswalkedTo(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
+        final Trigger copy = new TriggerPlaneswalkedFrom(this.getMapParams(), this.getHostCard(), this.isIntrinsic());
         if (this.getOverridingAbility() != null) {
             copy.setOverridingAbility(this.getOverridingAbility());
         }

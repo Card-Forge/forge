@@ -14,14 +14,17 @@ public enum PlanarDice {
     Chaos,
     Blank;
     
-    public static PlanarDice roll(Player roller)
+    public static PlanarDice roll(Player roller, PlanarDice riggedResult)
     {
         PlanarDice res = Blank;
         int i = forge.util.MyRandom.getRandom().nextInt(6);
-        if (i == 0)
+        if (riggedResult != null)
+            res = riggedResult;
+        else if (i == 0)
             res = Planeswalk;
-        if (i == 1)
+        else if (i == 1)
             res = Chaos;
+        
         
         PlanarDice trigRes = res;
         

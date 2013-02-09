@@ -1637,6 +1637,7 @@ res/cardsfolder/c/chaos_imps.txt -text
 res/cardsfolder/c/chaos_lord.txt -text
 res/cardsfolder/c/chaos_warp.txt svneol=native#text/plain
 res/cardsfolder/c/chaosphere.txt svneol=native#text/plain
+res/cardsfolder/c/chaotic_aether.txt -text
 res/cardsfolder/c/chaotic_backlash.txt -text
 res/cardsfolder/c/chaotic_goo.txt svneol=native#text/plain
 res/cardsfolder/c/chaotic_strike.txt -text

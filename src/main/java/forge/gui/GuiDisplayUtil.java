@@ -49,6 +49,7 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
+import forge.game.PlanarDice;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -836,6 +837,23 @@ public final class GuiDisplayUtil {
 
         //Set a breakpoint on the following statement
         System.out.println("Manual Breakpoint");
+    }
+    
+    public static void devModeRiggedPlanarRoll()
+    {
+        final List<Player> players = Singletons.getModel().getGame().getPlayers();
+        final Player p = GuiChoose.oneOrNone("Which player should roll?", players);
+        if (null == p) {
+            return;
+        }
+        
+        PlanarDice res = GuiChoose.oneOrNone("Choose result", PlanarDice.values());
+        if(res == null)
+            return;
+        
+        PlanarDice.roll(p, res);
+        
+        Singletons.getModel().getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
     }
 
 } // end class GuiDisplayUtil

@@ -75,10 +75,12 @@ public enum VDev implements IVDoc<CDev> {
     private final DevLabel lblCardToBattlefield = new DevLabel("Add card to play");
     private final DevLabel lblCardToHand = new DevLabel("Add card to hand");
     private final DevLabel lblBreakpoint = new DevLabel("Trigger breakpoint");
-
+    private final DevLabel lblRiggedRoll = new DevLabel("Rigged planar roll");
+    
     //========= Constructor
 
     private VDev() {
+        //devLBLs.add(lblRiggedRoll);
         devLBLs.add(lblMilling);
         devLBLs.add(lblUnlimitedLands);
         devLBLs.add(lblGenerateMana);
@@ -98,6 +100,7 @@ public enum VDev implements IVDoc<CDev> {
         viewport.setOpaque(false);
 
         final String constraints = "w 95%!, gap 0 0 5px 0";
+        viewport.add(this.lblRiggedRoll, constraints);
         viewport.add(this.lblMilling, constraints);
         viewport.add(this.lblUnlimitedLands, constraints);
         viewport.add(this.lblGenerateMana, constraints);
@@ -222,6 +225,10 @@ public enum VDev implements IVDoc<CDev> {
 
     public DevLabel getLblBreakpoint() {
         return this.lblBreakpoint;
+    }
+    
+    public DevLabel getLblRiggedRoll() {
+        return this.lblRiggedRoll;
     }
 
     /**
