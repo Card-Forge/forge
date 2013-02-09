@@ -11,4 +11,5 @@ SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ E
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaotic_aether.jpg
 SetInfo:PC2|Common|http://magiccards.info/extras/phenomenon/planechase-2012-edition/chaotic-aether.jpg
+Oracle:When you encounter Chaotic AEther, each blank roll of the planar die is a {C} roll until a player planeswalks away from a plane. (Then planeswalk away from this phenomenon.)
 End

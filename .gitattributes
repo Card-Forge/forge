@@ -2643,6 +2643,7 @@ res/cardsfolder/d/disperse.txt svneol=native#text/plain
 res/cardsfolder/d/dispersing_orb.txt svneol=native#text/plain
 res/cardsfolder/d/disrupt.txt svneol=native#text/plain
 res/cardsfolder/d/disrupting_scepter.txt svneol=native#text/plain
+res/cardsfolder/d/disruption_aura.txt -text
 res/cardsfolder/d/disruptive_pitmage.txt svneol=native#text/plain
 res/cardsfolder/d/disruptive_student.txt svneol=native#text/plain
 res/cardsfolder/d/dissipate.txt svneol=native#text/plain

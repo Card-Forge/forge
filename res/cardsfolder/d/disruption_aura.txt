@@ -1,0 +1,14 @@
+Name:Disruption Aura
+ManaCost:2 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant artifact
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Artifact | TgtPrompt$ Select target creature | AITgts$ Card.cmcGE1 | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddTrigger$ TrigPhase | AddSVar$ TrigPendrellFlux | Description$ Enchanted artifact has "At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost."
+SVar:TrigPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPendrellFlux | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost.
+SVar:TrigPendrellFlux:DB$ Sacrifice | Defined$ Self | UnlessCost$ CardManaCost | UnlessPayer$ You
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disruption_aura.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/28.jpg
+Oracle:Enchant artifact\nEnchanted artifact has "At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost."
+End

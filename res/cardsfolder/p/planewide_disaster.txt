@@ -8,4 +8,5 @@ SVar:PWAway:DB$ Planeswalk | Cost$ 0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planewide_disaster.jpg
 SetInfo:PC2|Common|http://magiccards.info/extras/phenomenon/planechase-2012-edition/planewide-disaster.jpg
+Oracle:When you encounter Planewide Disaster, destroy all creatures. (Then planeswalk away from this phenomenon.)
 End
