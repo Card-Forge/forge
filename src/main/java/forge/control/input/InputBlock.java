@@ -103,6 +103,8 @@ public class InputBlock extends Input {
             // Done blocking
             ButtonUtil.reset();
             CombatUtil.orderMultipleCombatants(game.getCombat());
+            currentAttacker = null;
+            allBlocking.clear();
 
             FControl.SINGLETON_INSTANCE.getPlayer().getController().passPriority();
         }
