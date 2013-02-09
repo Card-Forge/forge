@@ -47,7 +47,7 @@ public enum CDeckEditorUI implements CardContainer {
     /** */
     SINGLETON_INSTANCE;
 
-    private ACEditorBase<?, ?> childController;
+    private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
 
     private CDeckEditorUI() {
     }
@@ -87,7 +87,7 @@ public enum CDeckEditorUI implements CardContainer {
      * 
      * @param editor0 &emsp; {@link forge.gui.deckeditor.controllers.ACEditorBase}<?, ?>
      */
-    public void setCurrentEditorController(ACEditorBase<?, ?> editor0) {
+    public void setCurrentEditorController(ACEditorBase<? extends InventoryItem, ? extends DeckBase> editor0) {
         this.childController = editor0;
         updateController();
         if (childController != null) {
@@ -106,13 +106,13 @@ public enum CDeckEditorUI implements CardContainer {
 
     private void moveSelectedCards(EditorTableView<InventoryItem> table, _MoveAction moveAction, int maxQty) {
         List<InventoryItem> items = table.getSelectedCards();
-        
         if (items.isEmpty()) {
             return;
         }
         
         for (InventoryItem item : items) {
-            moveAction.move(item, Math.min(maxQty, table.getCardCount(item)));
+            int toMove = Math.min(maxQty, table.getCardCount(item));
+            moveAction.move(item, toMove);
         }
 
         CStatistics.SINGLETON_INSTANCE.update();
@@ -120,25 +120,26 @@ public enum CDeckEditorUI implements CardContainer {
     }
 
     @SuppressWarnings("unchecked")
-    public void addSelectedCards(boolean addFour) {
+    public void addSelectedCards(int number) {
         moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableCatalog(),
                 new _MoveAction() {
             @Override
             public void move(InventoryItem item, int qty) {
                 childController.addCard(item, qty);
             }
-        }, addFour ? 4 : 1);
+        }, number);
     }
 
     @SuppressWarnings("unchecked")
-    public void removeSelectedCards(boolean removeFour) {
+    public void removeSelectedCards(int number) {
+        
         moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableDeck(),
                 new _MoveAction() {
             @Override
             public void move(InventoryItem item, int qty) {
                 childController.removeCard(item, qty);
             }
-        }, removeFour ? 4 : 1);
+        }, number);
     }
 
     @SuppressWarnings("unchecked")
@@ -160,28 +161,28 @@ public enum CDeckEditorUI implements CardContainer {
         childController.getTableCatalog().getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { addSelectedCards(false); }
+                if (e.getKeyChar() == ' ') { addSelectedCards(1); }
             }
         });
 
         childController.getTableDeck().getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { removeSelectedCards(false); }
+                if (e.getKeyChar() == ' ') { removeSelectedCards(1); }
             }
         });
 
         childController.getTableCatalog().getTable().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                if (e.getClickCount() == 2) { addSelectedCards(false); }
+                if (e.getClickCount() == 2) { addSelectedCards(1); }
             }
         });
 
         childController.getTableDeck().getTable().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                if (e.getClickCount() == 2) { removeSelectedCards(false); }
+                if (e.getClickCount() == 2) { removeSelectedCards(1); }
             }
         });
 

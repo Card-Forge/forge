@@ -86,13 +86,13 @@ public enum CCardCatalog implements ICDoc {
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setCommand(new Command() {
             @Override
             public void execute() {
-                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false);
+                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(1);
             }
         });
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setCommand(new Command() {
             @Override
             public void execute() {
-                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(true);
+                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(4);
             }
         });
         

@@ -103,12 +103,12 @@ public enum CCurrentDeck implements ICDoc {
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove()).setCommand(new Command() {
             @Override  public void execute() {
-                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false);
+                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(1);
             } });
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4()).setCommand(new Command() {
             @Override  public void execute() {
-                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(true);
+                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(4);
             }
         });
     }

@@ -30,6 +30,7 @@ import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.framework.ICDoc;
 import forge.item.CardPrinted;
+import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.util.IStorage;
 import forge.util.TextUtil;
@@ -222,7 +223,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         Singletons.getModel().getDecks().getSealed().add(sealed);
 
-        final ACEditorBase<?, T> editor = (ACEditorBase<?, T>) new CEditorLimited(
+        final ACEditorBase<? extends InventoryItem, T> editor = (ACEditorBase<? extends InventoryItem, T>) new CEditorLimited(
                 Singletons.getModel().getDecks().getSealed());
 
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(editor);
