@@ -190,7 +190,7 @@ public class ViewWinLose {
                 "w 300px!, h 28px!, gap 0 0 20px 0");
 
         pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10 10");
-        pnlLog.add(btnCopyLog, "center, w pref+8, h pref+8");
+        pnlLog.add(btnCopyLog, "center, w pref+16, h pref+8");
         pnlLeft.add(pnlLog, "w 100%!");
 
         boolean matchIsOver = match.isMatchOver();

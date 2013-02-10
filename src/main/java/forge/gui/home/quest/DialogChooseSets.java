@@ -85,11 +85,8 @@ public class DialogChooseSets {
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                try {
-                    handleOk();
-                } finally {
-                    cleanup.run();
-                }
+                cleanup.run();
+                handleOk();
             }
         });
 
