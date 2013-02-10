@@ -174,8 +174,27 @@ public final class EditorTableView<T extends InventoryItem> {
                 if (null == val) {
                     return null;
                 }
-
+                
                 return _getCellTooltip(getCellRenderer(row, col), row, col, val);
+            }
+            
+            private int   lastTooltipRow = -1;
+            private int   lastTooltipCol = -1;
+            private Point lastTooltipPt;
+            
+            @Override
+            public Point getToolTipLocation(MouseEvent e) {
+                Point p = e.getPoint();
+                final int row = rowAtPoint(p);
+                final int col = columnAtPoint(p);
+                if (row == lastTooltipRow && col == lastTooltipCol) {
+                    p = lastTooltipPt;
+                } else {
+                    lastTooltipRow = row;
+                    lastTooltipCol = col;
+                    lastTooltipPt  = p;
+                }
+                return new Point(p.x + 10, p.y + 20);
             }
         };
 
