@@ -11,6 +11,8 @@ You can now cast cards for it's miracle cost without getting a crash. Blocking w
 
 Work continues on the quest worlds format and a new world based on Ravnica is coming along nicely.
 
+Added a 'copy to clipboard' button on WinLose screen so players can easily copy the game log.
+
 --
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
@@ -54,20 +56,25 @@ Fixes/Features:
 - Fixed Miracle not setting an ActivatingPlayer.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated all-prices.txt.
+- rem useless imports
+- Power Sink converted to script
+- missing effect file from r19500
+- minor - wrote more specific generics for CDeckEditorUI.childController 
+- changed boolean parameter (add 1 or 4 cards) into exact number - that's clearer.
+- add 'copy to clipboard' button on WinLose screen so players can easily copy the game log
+- restore focus after hiding choose sets dialog
+- Power sink: reviewed script, so that correct effect (DrainMana) is used
+- Unless syntax enriched: added UnlessResolveSubs parameter to indicate if subAbilities are resolved for paid and unpaid branches
+- SpellDesciptions from card scripts now may include variables
+- implement basic find-as-you-type for deck editor tables
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-Marc
-Max
-Myk
-Nordos
-Rooger
-RumbleBBU
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 Added the following Phenomenons:
