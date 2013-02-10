@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 public class FileSection {
 
     /** The lines. */
-    private final Map<String, String> lines = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, String> lines;
 
     /**
      * Gets the lines.
@@ -45,8 +45,13 @@ public class FileSection {
      * Instantiates a new file section.
      */
     protected FileSection() {
+        this(new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER));
     }
 
+    protected FileSection(Map<String, String> lines0) {
+        lines = lines0;
+    }
+    
     /**
      * Parses the.
      *
@@ -56,15 +61,19 @@ public class FileSection {
      * @return the file section
      */
     public static FileSection parse(final String line, final String kvSeparator, final String pairSeparator) {
+        Map<String, String> map = parseToMap(line, kvSeparator, pairSeparator);
+        return new FileSection(map);
+    }
+    
+    public static Map<String, String> parseToMap(final String line, final String kvSeparator, final String pairSeparator) {
         final String[] pairs = line.split(Pattern.quote(pairSeparator));
         final Pattern splitter = Pattern.compile(Pattern.quote(kvSeparator));
-        final FileSection result = new FileSection();
+        Map<String, String> result = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
         for (final String dd : pairs) {
             final String[] v = splitter.split(dd, 2);
-            result.lines.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
+            result.put(v[0].trim(), v.length > 1 ? v[1].trim() : "");
         }
-
         return result;
     }
 

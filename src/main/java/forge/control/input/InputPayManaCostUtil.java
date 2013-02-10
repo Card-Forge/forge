@@ -99,7 +99,7 @@ public class InputPayManaCostUtil {
                 continue;
             } else if (!InputPayManaCostUtil.canMake(ma, cneeded.toString())) {
                 continue;
-            } else if (AbilityFactory.isInstantSpeed(ma)) {
+            } else if (ma.isAbility() && ma.getRestrictions().isInstantSpeed()) {
                 continue;
             } else if (!m.meetsManaRestrictions(sa)) {
                 continue;

@@ -50,6 +50,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.FileSection;
 
 /**
  * <p>
@@ -72,25 +73,7 @@ public class AbilityFactory {
     // *******************************************************
 
     public static final Map<String, String> getMapParams(final String abString) {
-        if (null == abString || abString.isEmpty()) {
-            return null; // Caller will have to deal with NPEs
-        }
-
-        final Map<String, String> mapParameters = new HashMap<String, String>();
-        for (final String element : abString.split("\\|")) {
-            final String[] aa = element.trim().split("\\$");
-
-            for (int aaCnt = 0; aaCnt < aa.length; aaCnt++) {
-                aa[aaCnt] = aa[aaCnt].trim();
-            }
-
-            if (aa.length != 2) {
-                throw new RuntimeException(String.format("Split length of %s is not 2.", element));
-            }
-            mapParameters.put(aa[0], aa[1]);
-        }
-
-        return mapParameters;
+        return FileSection.parseToMap(abString, "$", "|");
     }
 
     /**
@@ -428,30 +411,8 @@ public class AbilityFactory {
      * @return a boolean.
      */
     public static boolean isSorcerySpeed(final SpellAbility sa) {
-        if (sa.isSpell()) {
-            return sa.getSourceCard().isSorcery();
-        } else if (sa.isAbility()) {
-            return sa.getRestrictions().isSorcerySpeed();
-        }
-
-        return false;
-    }
-
-    /**
-     * <p>
-     * isInstantSpeed. To be used for mana abilities like Lion's Eye Diamond
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    public static boolean isInstantSpeed(final SpellAbility sa) {
-        if (sa.isAbility()) {
-            return sa.getRestrictions().isInstantSpeed();
-        }
-
-        return false;
+        return ( sa.isSpell() &&  sa.getSourceCard().isSorcery() ) 
+            || ( sa.isAbility() && sa.getRestrictions().isSorcerySpeed() );
     }
 
     // Utility functions used by the AFs
@@ -1366,26 +1327,9 @@ public class AbilityFactory {
         return CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), source);
       }
 
-    /**
-     * <p>
-     * passUnlessCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param usedStack
-     *            a boolean.
-     */
-    public static void passUnlessCost(final SpellAbility sa, final boolean usedStack, final GameState game) {
+    public static void handleUnlessCost(final SpellAbility sa, final boolean usedStack, final GameState game) {
         final Card source = sa.getSourceCard();
-        final ApiType api = sa.getApi();
         String unlessCost = sa.getParam("UnlessCost");
-        
-        if (StringUtils.isBlank(unlessCost) || api == null) {
-            sa.resolve();
-            AbilityFactory.resolveSubAbilities(sa, usedStack, game);
-            return;
-        }
         unlessCost = unlessCost.trim();
 
         // The player who has the chance to cancel the ability
@@ -1524,19 +1468,21 @@ public class AbilityFactory {
         }
         
         final GameState game = Singletons.getModel().getGame();
-        // check conditions
-        if (sa.getConditions().areMet(sa)) {
-            if (sa.isWrapper()) {
-                sa.resolve();
-                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
-            } else {
-                AbilityFactory.passUnlessCost(sa, usedStack, game);
-            }
-        } else {
-            AbilityFactory.resolveSubAbilities(sa, usedStack, game);
-        }
+        resolveApiAbility(sa, usedStack, game);
     }
 
+    private static void resolveApiAbility(final SpellAbility sa, boolean usedStack, final GameState game) {
+        // check conditions
+        if (sa.getConditions().areMet(sa)) {
+            if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {
+                sa.resolve();
+            } else {
+                AbilityFactory.handleUnlessCost(sa, usedStack, game);
+                return;
+            }
+        }
+        AbilityFactory.resolveSubAbilities(sa, usedStack, game);
+    }
     /**
      * <p>
      * resolveSubAbilities.
@@ -1557,11 +1503,7 @@ public class AbilityFactory {
             return;
         }
         // check conditions
-        if (abSub.getConditions().areMet(abSub)) {
-            AbilityFactory.passUnlessCost(abSub, usedStack, game);
-        } else {
-            AbilityFactory.resolveSubAbilities(abSub, usedStack, game);
-        }
+        resolveApiAbility(abSub, usedStack, game);
     }
 
     public static void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {
