@@ -106,6 +106,7 @@ public class ViewWinLose {
         btnRestart.setFont(FSkin.getFont(22));
         btnQuit.setText(ForgeProps.getLocalized(WinLoseText.QUIT));
         btnQuit.setFont(FSkin.getFont(22));
+        btnContinue.setEnabled(!match.isMatchOver());
 
         // Show Wins and Loses
         final int humanWins = match.getGamesWonBy(human);
@@ -193,14 +194,16 @@ public class ViewWinLose {
         pnlLog.add(btnCopyLog, "center, w pref+16, h pref+8");
         pnlLeft.add(pnlLog, "w 100%!");
 
-        boolean matchIsOver = match.isMatchOver();
-        final FButton focusButton = matchIsOver ? btnQuit : btnContinue;
-        btnContinue.setEnabled(!matchIsOver);
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 scrLog.getViewport().setViewPosition(new Point(0, 0));
-                focusButton.requestFocusInWindow();
+                // populateCustomPanel may have changed which buttons are enabled; focus on the 'best' one
+                if (btnContinue.isEnabled()) {
+                    btnContinue.requestFocusInWindow();
+                } else {
+                    btnQuit.requestFocusInWindow();
+                }
             }
         });
         
