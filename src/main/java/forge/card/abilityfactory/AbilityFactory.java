@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 
 import forge.CardLists;
@@ -1377,19 +1379,23 @@ public class AbilityFactory {
     public static void passUnlessCost(final SpellAbility sa, final boolean usedStack, final GameState game) {
         final Card source = sa.getSourceCard();
         final ApiType api = sa.getApi();
-        if (api == null || sa.getParam("UnlessCost") == null) {
+        String unlessCost = sa.getParam("UnlessCost");
+        
+        if (StringUtils.isBlank(unlessCost) || api == null) {
             sa.resolve();
             AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             return;
         }
+        unlessCost = unlessCost.trim();
 
         // The player who has the chance to cancel the ability
         final String pays = sa.hasParam("UnlessPayer") ? sa.getParam("UnlessPayer") : "TargetedController";
         final List<Player> payers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), pays, sa);
+        final String  resolveSubs = sa.getParam("UnlessResolveSubs"); // no value means 'Always'
+        final boolean execSubsWhenPaid = "WhenPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
+        final boolean execSubsWhenNotPaid = "WhenNotPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
 
         // The cost
-        String unlessCost = sa.getParam("UnlessCost").trim();
-        
         if (unlessCost.equals("CardManaCost")) {
             unlessCost = source.getManaCost().toString();
         } else {
@@ -1401,12 +1407,15 @@ public class AbilityFactory {
               //instead of just X for cards like Draco.
         }
         
+        final boolean isSwitched = sa.hasParam("UnlessSwitched");
+        
         Command paidCommand = new Command() {
             private static final long serialVersionUID = 8094833091127334678L;
 
             @Override
             public void execute() {
-                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
+                if ( isSwitched && execSubsWhenNotPaid || execSubsWhenPaid)
+                    AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             }
         };
 
@@ -1416,11 +1425,12 @@ public class AbilityFactory {
             @Override
             public void execute() {
                 sa.resolve();
-                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
+                if ( isSwitched && execSubsWhenPaid || execSubsWhenNotPaid)
+                    AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             }
         };
 
-        if (sa.hasParam("UnlessSwitched")) {
+        if (isSwitched) {
             final Command dummy = paidCommand;
             paidCommand = unpaidCommand;
             unpaidCommand = dummy;
@@ -1458,12 +1468,8 @@ public class AbilityFactory {
             }
         }
         if (!waitForInput) {
-            if (paid) {
-                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
-            } else {
-                sa.resolve();
-                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
-            }
+            Command toExecute = paid ? paidCommand : unpaidCommand;
+            toExecute.execute();
         }
 
     }

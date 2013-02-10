@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
@@ -63,7 +65,7 @@ import forge.game.player.Player;
                 if ("SpellDescription".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                     sb.append(params.get("SpellDescription").replace("CARDNAME", sa.getSourceCard().getName()));
                 } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
-                    sb.append(stackDesc.replace("CARDNAME", sa.getSourceCard().getName()));
+                    makeSpellDescription(sa, sb, stackDesc);
                 }
             } else {
                 final String conditionDesc = sa.getParam("ConditionDescription");
@@ -83,6 +85,38 @@ import forge.game.player.Player;
                 sb.append(abSub.getStackDescription());
             }
             return sb.toString();
+        }
+
+        /**
+         * TODO: Write javadoc for this method.
+         * @param sa
+         * @param sb
+         * @param stackDesc
+         */
+        private void makeSpellDescription(final SpellAbility sa, StringBuilder sb, String stackDesc) {
+            StringTokenizer st = new StringTokenizer(stackDesc, "{}", true);
+            boolean isPlainText = true;
+            while( st.hasMoreTokens() )
+            {
+                String t = st.nextToken();
+                if ( "{".equals(t) ) { isPlainText = false; continue; }
+                if ( "}".equals(t) ) { isPlainText = true; continue; }
+                if ( isPlainText ) 
+                    sb.append(t.replace("CARDNAME", sa.getSourceCard().getName()));
+                else {
+                    List<?> objs = null;
+                    if ( t.startsWith("p:") )
+                        objs = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), t.substring(2), sa);
+                    else if ( t.startsWith("s:"))
+                        objs = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), t.substring(2), sa);
+                    else if ( t.startsWith("c:"))
+                        objs = AbilityFactory.getDefinedCards(sa.getSourceCard(), t.substring(2), sa);
+                    else 
+                        objs = AbilityFactory.getDefinedObjects(sa.getSourceCard(), t, sa);
+                            
+                    sb.append(StringUtils.join(objs, ", "));
+                }
+            }
         }
 
         protected List<Card> getTargetCards(SpellAbility sa) {

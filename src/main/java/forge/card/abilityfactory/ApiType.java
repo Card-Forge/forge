@@ -60,7 +60,6 @@ public enum ApiType {
     LoseLife (LifeLoseEffect.class, LifeLoseAi.class),
     LosesGame (GameLossEffect.class, GameLossAi.class),
     Mana (ManaEffect.class, CannotPlayAi.class),
-    ManaBurn (ManaBurnEffect.class, CannotPlayAi.class),
     ManaReflected (ManaReflectedEffect.class, CannotPlayAi.class),
     Mill (MillEffect.class, MillAi.class),
     MoveCounter (CountersMoveEffect.class, CountersMoveAi.class),
