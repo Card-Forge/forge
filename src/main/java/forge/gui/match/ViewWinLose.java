@@ -3,6 +3,8 @@ package forge.gui.match;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -14,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Command;
 import forge.Singletons;
 import forge.game.MatchController;
 import forge.game.player.LobbyPlayer;
@@ -35,10 +38,10 @@ import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
 public class ViewWinLose {
     private final FButton btnContinue, btnRestart, btnQuit;
     private final JPanel pnlCustom;
-    private final FTextArea txtLog;
 
     /**
      * @param match  */
+    @SuppressWarnings("serial")
     public ViewWinLose(MatchController match) {
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 
@@ -127,10 +130,23 @@ public class ViewWinLose {
         }
 
         // Assemble game log scroller.
-        txtLog = new FTextArea();
+        final FTextArea txtLog = new FTextArea();
         txtLog.setText(Singletons.getModel().getGame().getGameLog().getLogText());
         txtLog.setFont(FSkin.getFont(14));
         txtLog.setFocusable(true); // allow highlighting and copying of log
+        
+        FLabel btnCopyLog = new FLabel.ButtonBuilder().text("Copy to clipboard").build();
+        btnCopyLog.setCommand(new Command() {
+            @Override
+            public void execute() {
+                StringSelection ss = new StringSelection(txtLog.getText());
+                try {
+                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+                } catch (IllegalStateException ex) {
+                    // ignore; may be unavailable on some platforms
+                }
+            }
+        });
 
         // Add all components accordingly.
         overlay.setLayout(new MigLayout("insets 0, w 100%!, h 100%!"));
@@ -173,7 +189,8 @@ public class ViewWinLose {
                 .fontSize(18).fontStyle(Font.BOLD).build(),
                 "w 300px!, h 28px!, gap 0 0 20px 0");
 
-        pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10px 0");
+        pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10 10");
+        pnlLog.add(btnCopyLog, "center, w pref+8, h pref+8");
         pnlLeft.add(pnlLog, "w 100%!");
 
         boolean matchIsOver = match.isMatchOver();
