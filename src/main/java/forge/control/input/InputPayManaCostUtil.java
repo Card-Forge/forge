@@ -27,7 +27,6 @@ import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
