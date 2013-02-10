@@ -15,6 +15,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
@@ -69,7 +70,7 @@ public class  DamageAllAi extends SpellAiLogic {
 
         // TODO: if damage is dependant on mana paid, maybe have X be human's max life
         // Don't kill yourself
-        if (validP.contains("Each") && (ai.getLife() <= ai.predictDamage(dmg, source, false))) {
+        if (validP.contains("Each") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
             return false;
         }
 
@@ -80,7 +81,7 @@ public class  DamageAllAi extends SpellAiLogic {
 
         // if we can kill human, do it
         if ((validP.contains("Each") || validP.contains("EachOpponent"))
-                && (opp.getLife() <= opp.predictDamage(dmg, source, false))) {
+                && (opp.getLife() <= ComputerUtilCombat.predictDamageTo(opp, dmg, source, false))) {
             return true;
         }
 
@@ -133,13 +134,13 @@ public class  DamageAllAi extends SpellAiLogic {
             computerList.clear();
         }
         // Don't get yourself killed
-        if (validP.contains("Each") && (ai.getLife() <= ai.predictDamage(dmg, source, false))) {
+        if (validP.contains("Each") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
             return false;
         }
 
         // if we can kill human, do it
         if ((validP.contains("Each") || validP.contains("EachOpponent") || validP.contains("Targeted"))
-                && (enemy.getLife() <= enemy.predictDamage(dmg, source, false))) {
+                && (enemy.getLife() <= ComputerUtilCombat.predictDamageTo(enemy, dmg, source, false))) {
             return true;
         }
 
@@ -177,7 +178,7 @@ public class  DamageAllAi extends SpellAiLogic {
         final Predicate<Card> filterKillable = new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return (c.predictDamage(dmg, source, false) >= c.getKillDamage());
+                return (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c));
             }
         };
 
@@ -222,13 +223,13 @@ public class  DamageAllAi extends SpellAiLogic {
             return true;
         }
         // Don't get yourself killed
-        if (validP.contains("Each") && (ai.getLife() <= ai.predictDamage(dmg, source, false))) {
+        if (validP.contains("Each") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
             return false;
         }
 
         // if we can kill human, do it
         if ((validP.contains("Each") || validP.contains("EachOpponent") || validP.contains("Targeted"))
-                && (enemy.getLife() <= enemy.predictDamage(dmg, source, false))) {
+                && (enemy.getLife() <= ComputerUtilCombat.predictDamageTo(enemy, dmg, source, false))) {
             return true;
         }
 

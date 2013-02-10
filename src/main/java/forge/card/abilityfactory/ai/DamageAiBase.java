@@ -9,6 +9,7 @@ import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -26,7 +27,7 @@ public abstract class DamageAiBase extends SpellAiLogic {
         }
 
         if (!noPrevention) {
-            restDamage = enemy.predictDamage(restDamage, sa.getSourceCard(), false);
+            restDamage = ComputerUtilCombat.predictDamageTo(enemy, restDamage, sa.getSourceCard(), false);
         } else {
             restDamage = enemy.staticReplaceDamage(restDamage, sa.getSourceCard(), false);
         }

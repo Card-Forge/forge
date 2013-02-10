@@ -123,30 +123,6 @@ public abstract class GameEntity extends MyObservable {
      */
     public abstract boolean addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat);
 
-    /**
-     * <p>
-     * predictDamage.
-     * </p>
-     * 
-     * @param damage
-     *            a int.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param isCombat
-     *            a boolean.
-     * @return a int.
-     */
-    // This function helps the AI calculate the actual amount of damage an
-    // effect would deal
-    public int predictDamage(final int damage, final Card source, final boolean isCombat) {
-
-        int restDamage = damage;
-
-        restDamage = this.staticReplaceDamage(restDamage, source, isCombat);
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
-
-        return restDamage;
-    }
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)

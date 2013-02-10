@@ -50,6 +50,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
 import forge.control.input.InputSelectManyCards;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
@@ -232,7 +233,7 @@ public class CardFactoryCreatures {
                     final List<Card> damageableWolves = CardLists.filter(wolves, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
-                            return (c.predictDamage(target.getNetAttack(), target, false) > 0);
+                            return (ComputerUtilCombat.predictDamageTo(c, target.getNetAttack(), target, false) > 0);
                         }
                     });
 
@@ -253,8 +254,8 @@ public class CardFactoryCreatures {
                         wolvesLeft = CardLists.filter(wolvesLeft, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
-                                return (c.getKillDamage() > 0)
-                                        && ((c.getKillDamage() <= target.getNetAttack()) || target
+                                return (ComputerUtilCombat.getDamageToKill(c) > 0)
+                                        && ((ComputerUtilCombat.getDamageToKill(c) <= target.getNetAttack()) || target
                                                 .hasKeyword("Deathtouch"));
                             }
                         });
@@ -263,7 +264,7 @@ public class CardFactoryCreatures {
                         if (wolvesLeft.size() > 0) {
                             final Card best = CardFactoryUtil.getBestCreatureAI(wolvesLeft);
                             best.addDamage(1, target);
-                            if ((best.getKillDamage() <= 0) || target.hasKeyword("Deathtouch")) {
+                            if ((ComputerUtilCombat.getDamageToKill(best) <= 0) || target.hasKeyword("Deathtouch")) {
                                 wolvesLeft.remove(best);
                             }
                         } else {

@@ -7705,92 +7705,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.dealtDamageToPlayerThisTurn.clear();
     }
 
-    // how much damage is enough to kill the creature (for AI)
-    /**
-     * <p>
-     * getEnoughDamageToKill.
-     * </p>
-     * 
-     * @param maxDamage
-     *            a int.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param isCombat
-     *            a boolean.
-     * @return a int.
-     */
-    public final int getEnoughDamageToKill(final int maxDamage, final Card source, final boolean isCombat) {
-        return this.getEnoughDamageToKill(maxDamage, source, isCombat, false);
-    }
-
-    /**
-     * <p>
-     * getEnoughDamageToKill.
-     * </p>
-     * 
-     * @param maxDamage
-     *            a int.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param isCombat
-     *            a boolean.
-     * @param noPrevention
-     *            a boolean.
-     * @return a int.
-     */
-    public final int getEnoughDamageToKill(final int maxDamage, final Card source, final boolean isCombat,
-            final boolean noPrevention) {
-        final int killDamage = this.getKillDamage();
-
-        if (this.hasKeyword("Indestructible") || (this.getShield() > 0)) {
-            if (!(source.hasKeyword("Wither") || source.hasKeyword("Infect"))) {
-                return maxDamage + 1;
-            }
-        } else if (source.hasKeyword("Deathtouch")) {
-            for (int i = 1; i <= maxDamage; i++) {
-                if (noPrevention) {
-                    if (this.staticReplaceDamage(i, source, isCombat) > 0) {
-                        return i;
-                    }
-                } else if (this.predictDamage(i, source, isCombat) > 0) {
-                    return i;
-                }
-            }
-        }
-
-        for (int i = 1; i <= maxDamage; i++) {
-            if (noPrevention) {
-                if (this.staticReplaceDamage(i, source, isCombat) >= killDamage) {
-                    return i;
-                }
-            } else {
-                if (this.predictDamage(i, source, isCombat) >= killDamage) {
-                    return i;
-                }
-            }
-        }
-
-        return maxDamage + 1;
-    }
-
-    // the amount of damage needed to kill the creature (for AI)
-    /**
-     * <p>
-     * getKillDamage.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getKillDamage() {
-        int killDamage = this.getLethalDamage() + this.getPreventNextDamage();
-        if ((killDamage > this.getPreventNextDamage())
-                && this.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
-            killDamage = 1 + this.getPreventNextDamage();
-        }
-
-        return killDamage;
-    }
-
     // this is the minimal damage a trampling creature has to assign to a
     // blocker
     /**
@@ -7933,34 +7847,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.isInPlay()) {
             this.addDamage(map);
         }
-    }
-
-    // This function helps the AI calculate the actual amount of damage an
-    // effect would deal
-    /**
-     * <p>
-     * predictDamage.
-     * </p>
-     * 
-     * @param damage
-     *            a int.
-     * @param possiblePrevention
-     *            a int.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param isCombat
-     *            a boolean.
-     * @return a int.
-     */
-    public final int predictDamage(final int damage, final int possiblePrevention, final Card source,
-            final boolean isCombat) {
-
-        int restDamage = damage;
-
-        restDamage = this.staticReplaceDamage(restDamage, source, isCombat);
-        restDamage = this.staticDamagePrevention(restDamage, possiblePrevention, source, isCombat);
-
-        return restDamage;
     }
 
     // This should be also usable by the AI to forecast an effect (so it must

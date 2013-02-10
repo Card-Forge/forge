@@ -16,6 +16,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
@@ -102,7 +103,7 @@ public class DamageDealAi extends DamageAiBase {
                 final boolean noPrevention = sa.hasParam("NoPrevention");
                 final ArrayList<Card> cards = tgt.getTargetCards();
                 for (final Card c : cards) {
-                    final int adjDamage = c.getEnoughDamageToKill(dmg, source, false, noPrevention);
+                    final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                     if ((adjDamage > actualPay) && (adjDamage <= dmg)) {
                         actualPay = adjDamage;
                     }
@@ -156,7 +157,7 @@ public class DamageDealAi extends DamageAiBase {
         final List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(ai, c)
+                return (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(ai, c)
                         && !(c.getSVar("SacMe").length() > 0);
             }
         });
@@ -322,7 +323,7 @@ public class DamageDealAi extends DamageAiBase {
                 // Card c = (Card)o;
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
-                final int restDamage = p.predictDamage(dmg, saMe.getSourceCard(), false);
+                final int restDamage = ComputerUtilCombat.predictDamageTo(p, dmg, saMe.getSourceCard(), false);
                 if (p == ai && p.canLoseLife() && ((restDamage + 3) >= p.getLife()) && (restDamage > 0)) {
                     // from this spell will kill me
                     return false;
@@ -413,7 +414,7 @@ public class DamageDealAi extends DamageAiBase {
                     actualPay = dmg;
                 }
                 for (final Card c : cards) {
-                    final int adjDamage = c.getEnoughDamageToKill(dmg, source, false, noPrevention);
+                    final int adjDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                     if (adjDamage > actualPay) {
                         actualPay = adjDamage;
                     }

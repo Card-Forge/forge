@@ -44,6 +44,7 @@ import forge.control.input.InputSelectManyCards;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
@@ -401,7 +402,7 @@ public class Upkeep extends Phase {
                                 GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
                             } else { // computers
                                 if (ComputerUtilCost.canPayCost(aiPaid, controller)
-                                        && (controller.predictDamage(upkeepDamage, c, false) > 0)) {
+                                        && (ComputerUtilCombat.predictDamageTo(controller, upkeepDamage, c, false) > 0)) {
                                     ComputerUtil.playNoStack((AIPlayer)controller, aiPaid, game);
                                 } else {
                                     controller.addDamage(upkeepDamage, c);

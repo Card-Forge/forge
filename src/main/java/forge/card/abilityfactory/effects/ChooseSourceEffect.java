@@ -167,7 +167,7 @@ public class ChooseSourceEffect extends SpellEffect {
                                     break;
                                 }
                                 int dmg = AbilityFactory.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
-                                if (ai.predictDamage(dmg, source, false) <= 0) {
+                                if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false) <= 0) {
                                     break;
                                 }
                                 chosen.add(topStack.getSourceCard());

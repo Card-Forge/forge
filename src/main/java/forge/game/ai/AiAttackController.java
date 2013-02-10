@@ -786,7 +786,7 @@ public class AiAttackController {
             final Card attacker = attackersLeft.get(i);
             if (this.aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
                     && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, ai.getOpponent())
-                    >= attacker.getKillDamage()) {
+                    >= ComputerUtilCombat.getDamageToKill(attacker)) {
                 continue;
             }
 

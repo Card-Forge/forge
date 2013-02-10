@@ -93,7 +93,7 @@ public class ChooseSourceAi extends SpellAiLogic {
                         return false;
                     }
                     int dmg = AbilityFactory.calculateAmount(threatSource, topStack.getParam("NumDmg"), topStack);
-                    if (ai.predictDamage(dmg, threatSource, false) <= 0) {
+                    if (ComputerUtilCombat.predictDamageTo(ai, dmg, threatSource, false) <= 0) {
                         return false;
                     }
                     return true;

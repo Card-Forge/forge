@@ -160,7 +160,7 @@ public class ComputerUtilCost {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDamage) {
                 final CostDamage pay = (CostDamage) part;
-                int realDamage = ai.predictDamage(pay.convertAmount(), source, false);
+                int realDamage = ComputerUtilCombat.predictDamageTo(ai, pay.convertAmount(), source, false);
                 if (ai.getLife() - realDamage < remainingLife
                         && realDamage > 0 && !ai.cantLoseForZeroOrLessLife()
                         && ai.canLoseLife()) {

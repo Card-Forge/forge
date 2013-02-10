@@ -10,6 +10,7 @@ import forge.CardLists;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.AIPlayer;
 import forge.util.MyRandom;
 
@@ -44,8 +45,8 @@ public class FightAi extends SpellAiLogic {
             if (humCreatures.size() > 0 && aiCreatures.size() > 0) {
                 for (Card humanCreature : humCreatures) {
                     for (Card aiCreature : aiCreatures) {
-                        if (humanCreature.getKillDamage() <= aiCreature.getNetAttack()
-                                && humanCreature.getNetAttack() < aiCreature.getKillDamage()) {
+                        if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetAttack()
+                                && humanCreature.getNetAttack() < ComputerUtilCombat.getDamageToKill(aiCreature)) {
                             // todo: check min/max targets; see if we picked the best matchup
                             tgt.addTarget(humanCreature);
                             tgt.addTarget(aiCreature);
@@ -69,8 +70,8 @@ public class FightAi extends SpellAiLogic {
                         && creature1.sharesCreatureTypeWith(creature2)) {
                     continue;
                 }
-                if (creature1.getKillDamage() <= creature2.getNetAttack()
-                        && creature1.getNetAttack() >= creature2.getKillDamage()) {
+                if (ComputerUtilCombat.getDamageToKill(creature1) <= creature2.getNetAttack()
+                        && creature1.getNetAttack() >= ComputerUtilCombat.getDamageToKill(creature2)) {
                     // todo: check min/max targets; see if we picked the best matchup
                     tgt.addTarget(creature1);
                     tgt.addTarget(creature2);

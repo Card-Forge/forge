@@ -47,7 +47,6 @@ import forge.card.SpellManaCost;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaPool;
-import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Spell;
@@ -651,62 +650,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
         return true;
-    }
-
-    /**
-     * <p>
-     * predictDamage.
-     * </p>
-     * 
-     * @param damage
-     *            a int.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @param isCombat
-     *            a boolean.
-     * @return a int.
-     */
-    @Override
-    public final int predictDamage(final int damage, final Card source, final boolean isCombat) {
-
-        int restDamage = damage;
-
-        restDamage = this.staticReplaceDamage(restDamage, source, isCombat);
-
-        // Predict replacement effects
-        for (final Card ca : game.getCardsIn(ZoneType.Battlefield)) {
-            for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                HashMap<String, String> params = re.getMapParams();
-                if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
-                    continue;
-                }
-                if (params.containsKey("ValidSource")
-                        && !source.isValid(params.get("ValidSource"), ca.getController(), ca)) {
-                    continue;
-                }
-                if (params.containsKey("ValidTarget")
-                        && !this.isValid(params.get("ValidTarget"), ca.getController(), ca)) {
-                    continue;
-                }
-                if (params.containsKey("IsCombat")) {
-                    if (params.get("IsCombat").equals("True")) {
-                        if (!isCombat) {
-                            continue;
-                        }
-                    } else {
-                        if (isCombat) {
-                            continue;
-                        }
-                    }
-
-                }
-                return 0;
-            }
-        }
-
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
-
-        return restDamage;
     }
 
     // This should be also usable by the AI to forecast an effect (so it must

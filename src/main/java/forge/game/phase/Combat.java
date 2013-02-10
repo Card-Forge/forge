@@ -33,6 +33,7 @@ import forge.CardPredicates;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.event.BlockerAssignedEvent;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -290,8 +291,8 @@ public class Combat {
         final GameEntity ge = this.getDefenderByAttacker(source);
 
         if (ge instanceof Card) {
-            final Card pw = (Card) ge;
-            pw.addAssignedDamage(n, source);
+            final Card planeswalker = (Card) ge;
+            planeswalker.addAssignedDamage(n, source);
 
             return;
         }
@@ -692,18 +693,16 @@ public class Combat {
 
                 final int damage = blocker.getNetCombatDamage();
 
-                if (attackers.size() == 0) {
-                    // Just in case it was removed or something
-                } else {
+                if (!attackers.isEmpty()) {
                     assignedDamage = true;
-                    if (this.getAttackingPlayer().isComputer()) { // ai attacks
+                    if (blocker.getController().isHuman()) { // who is defending matters
                         if (attackers.size() > 1) {
                             CMatchUI.SINGLETON_INSTANCE.assignDamage(blocker, attackers, damage, null);
                         } else {
                             attackers.get(0).addAssignedDamage(damage, blocker);
                         }
                     } else { // computer attacks
-                        this.distributeAIDamage(blocker, attackers, damage);
+                        ComputerUtilCombat.distributeAIDamage(blocker, attackers, damage, this);
                     }
                 }
             }
@@ -742,8 +741,10 @@ public class Combat {
             if (blockers.size() == 0) {
                 if (trampler || this.isUnblocked(attacker)) {
                     this.addDefendingDamage(damageDealt, attacker);
+                } else {
+                    // Else no damage can be dealt anywhere
+                    continue;
                 }
-                // Else no damage can be dealt anywhere
             } else {
                 if (this.getAttackingPlayer().isHuman()) { // human attacks
                     if (assignDamageAsIfNotBlocked(attacker)) {
@@ -756,7 +757,7 @@ public class Combat {
                         }
                     }
                 } else { // computer attacks
-                    this.distributeAIDamage(attacker, blockers, damageDealt);
+                    ComputerUtilCombat.distributeAIDamage(attacker, blockers, damageDealt, this);
                 }
             } // if !hasFirstStrike ...
         } // for
@@ -768,93 +769,6 @@ public class Combat {
         assignedDamage |= assignBlockersDamage(firstStrikeDamage);
         return assignedDamage;
     }
-
-    /**
-     * <p>
-     * distributeAIDamage.
-     * </p>
-     * 
-     * @param attacker
-     *            a {@link forge.Card} object.
-     * @param block
-     *            a {@link forge.CardList} object.
-     * @param damage
-     *            a int.
-     */
-    private void distributeAIDamage(final Card attacker, final List<Card> block, int damage) {
-        final Card c = attacker;
-
-        if (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                || attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")) {
-            this.addDefendingDamage(damage, attacker);
-            return;
-        }
-
-        final boolean hasTrample = attacker.hasKeyword("Trample");
-
-        if (block.size() == 1) {
-
-            final Card blocker = block.get(0);
-
-            // trample
-            if (hasTrample) {
-
-                int damageNeeded = 0;
-
-                // TODO if the human can be killed distribute only the minimum
-                // of damage to the blocker
-
-                damageNeeded = blocker.getEnoughDamageToKill(damage, attacker, true);
-
-                if (damageNeeded > damage) {
-                    damageNeeded = Math.min(blocker.getLethalDamage(), damage);
-                } else {
-                    damageNeeded = Math.max(blocker.getLethalDamage(), damageNeeded);
-                }
-
-                final int trample = damage - damageNeeded;
-
-                // If Extra trample damage, assign to defending
-                // player/planeswalker
-                if (0 < trample) {
-                    this.addDefendingDamage(trample, attacker);
-                }
-
-                blocker.addAssignedDamage(damageNeeded, attacker);
-            } else {
-                blocker.addAssignedDamage(damage, attacker);
-            }
-        } // 1 blocker
-        else {
-            boolean killsAllBlockers = true;
-            // Does the attacker deal lethal damage to all blockers
-            //Blocking Order now determined after declare blockers
-            Card lastBlocker = null;
-            for (final Card b : block) {
-                final int enoughDamageToKill = b.getEnoughDamageToKill(damage, attacker, true);
-                if (enoughDamageToKill <= damage) {
-                    damage -= enoughDamageToKill;
-                    final List<Card> cl = new ArrayList<Card>();
-                    cl.add(attacker);
-
-                    b.addAssignedDamage(enoughDamageToKill, c);
-                } else {
-                    killsAllBlockers = false;
-                }
-                lastBlocker = b;
-            } // for
-
-            if (killsAllBlockers && damage > 0) {
-            // if attacker has no trample, and there's damage left, assign the rest to the last blocker
-                if (!hasTrample && lastBlocker != null) {
-                    lastBlocker.addAssignedDamage(damage, c);
-                    damage = 0;
-                } else if (hasTrample) {
-                    this.addDefendingDamage(damage, c);
-                }
-            }
-        }
-    } // setAssignedDamage()
 
     /**
      * <p>

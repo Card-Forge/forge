@@ -64,7 +64,7 @@ public class PumpAllAi extends PumpAiBase {
                         if (c.getNetDefense() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
-                        return ((c.getKillDamage() <= -defense) && !c.hasKeyword("Indestructible"));
+                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
                     }
                 }); // leaves all creatures that will be destroyed
                 human = CardLists.filter(human, new Predicate<Card>() {
@@ -73,7 +73,7 @@ public class PumpAllAi extends PumpAiBase {
                         if (c.getNetDefense() <= -defense) {
                             return true; // can kill indestructible creatures
                         }
-                        return ((c.getKillDamage() <= -defense) && !c.hasKeyword("Indestructible"));
+                        return ((ComputerUtilCombat.getDamageToKill(c) <= -defense) && !c.hasKeyword("Indestructible"));
                     }
                 }); // leaves all creatures that will be destroyed
             } // -X/-X end

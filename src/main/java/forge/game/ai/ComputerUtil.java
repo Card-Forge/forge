@@ -1150,21 +1150,21 @@ public class ComputerUtil {
     
                         // don't bounce or blink a permanent that the human
                         // player owns or is a token
-                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isHuman() || c.isToken())) {
+                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
                             continue;
                         }
     
-                        if (c.predictDamage(dmg, source, false) >= c.getKillDamage()) {
+                        if (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c)) {
                             threatened.add(c);
                         }
                     } else if (o instanceof Player) {
                         final Player p = (Player) o;
     
                         if (source.hasKeyword("Infect")) {
-                            if (p.predictDamage(dmg, source, false) >= p.getPoisonCounters()) {
+                            if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getPoisonCounters()) {
                                 threatened.add(p);
                             }
-                        } else if (p.predictDamage(dmg, source, false) >= p.getLife()) {
+                        } else if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getLife()) {
                             threatened.add(p);
                         }
                     }
@@ -1224,7 +1224,7 @@ public class ComputerUtil {
     
                         // don't bounce or blink a permanent that the human
                         // player owns or is a token
-                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isHuman() || c.isToken())) {
+                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isOpponentOf(aiPlayer) || c.isToken())) {
                             continue;
                         }
     
