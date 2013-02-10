@@ -71,16 +71,6 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
     private boolean infiniteSupply;
 
     /**
-     * @return the infiniteSupply
-     */
-    public boolean isInfinite() {
-        return infiniteSupply;
-    }
-
-
-    
-
-    /**
      * Instantiates a new table model, using a JTable,
      * a column set, and a data set of generic type <T>.
      * 
@@ -101,8 +91,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         // Assemble priority sort.
         while (e.hasMoreElements()) {
             final TableColumnInfo<InventoryItem> col = (TableColumnInfo<InventoryItem>) e.nextElement();
-
-                        if (col.getSortPriority() > 0) {
+            if (col.getSortPriority() > 0) {
                 sortcols[col.getSortPriority()] = col;
             }
         }
@@ -408,11 +397,14 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     * @param infinite
+     * Sets whether this table's pool of cards is in infinite supply.  If false, cards in the
+     * table have a limited number of copies.
      */
     public void setInfinite(boolean infinite) {
-        // TODO Auto-generated method stub
         this.infiniteSupply = infinite;
+    }
+
+    public boolean isInfinite() {
+        return infiniteSupply;
     }
 } // CardTableModel

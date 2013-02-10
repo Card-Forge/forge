@@ -21,17 +21,22 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JComponent;
 import javax.swing.JTable;
+import javax.swing.JViewport;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableColumnModel;
@@ -81,19 +86,17 @@ public final class EditorTableView<T extends InventoryItem> {
     /**
      * TableWithCards.
      * 
-     * @param cls
-     *            the cls
+     * @param type0 the class of item that this table will contain
      */
-    public EditorTableView(final Class<T> cls) {
-        this(false, cls);
+    public EditorTableView(final Class<T> type0) {
+        this(false, type0);
     }
 
     /**
      * TableWithCards Constructor.
      * 
-     * @param forceUnique
-     *            a boolean
-     * @param type0 the cls
+     * @param forceUnique whether this table should display only one item with the same name
+     * @param type0 the class of item that this table will contain
      */
     @SuppressWarnings("serial")
     public EditorTableView(final boolean forceUnique, final Class<T> type0) {
@@ -197,8 +200,67 @@ public final class EditorTableView<T extends InventoryItem> {
         // prevent tables from intercepting tab focus traversals
         table.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
         table.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
+        
+        // highlight items as the user types a portion of their names
+        table.addKeyListener(new _FindAsYouType());
     }
 
+    private class _FindAsYouType extends KeyAdapter {
+        private StringBuilder str = new StringBuilder();
+        private long lastUpdatedTimestamp;
+        
+        private void _findNextMatch(int startIdx) {
+            int numItems = model.getRowCount();
+            if (0 == numItems) {
+                return;
+            }
+            
+            // find the next item that matches the string
+            startIdx %= numItems;
+            int stopIdx = (startIdx - 1 + numItems) % numItems;
+            String searchStr = str.toString().toLowerCase(Locale.ENGLISH);
+            for (int idx = startIdx; idx != stopIdx; idx = (idx + 1) % numItems) {
+                if (model.rowToCard(idx).getKey().getName().toLowerCase(Locale.ENGLISH).contains(searchStr)) {
+                    selectAndScrollTo(idx);
+                    break;
+                }
+            }
+        }
+        
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (KeyEvent.VK_F3 == e.getKeyCode()) {
+                _findNextMatch(table.getSelectedRow() + 1);
+            }
+        }
+        
+        @Override
+        public void keyTyped(KeyEvent e) {
+            long curTime = System.currentTimeMillis();
+            if (5000 < curTime - lastUpdatedTimestamp) {
+                // too long since last update; clear the search string
+                str = new StringBuilder();
+            }
+            lastUpdatedTimestamp = curTime;
+
+            switch (e.getKeyChar()) {
+            case KeyEvent.CHAR_UNDEFINED:
+                return;
+                
+            case KeyEvent.VK_BACK_SPACE:
+                if (!str.toString().isEmpty()) {
+                    str.deleteCharAt(str.toString().length() - 1);
+                }
+                break;
+                
+            default:
+                str.append(e.getKeyChar());
+            }
+            
+            _findNextMatch(Math.max(0, table.getSelectedRow()));
+        }
+    }
+    
     /**
      * Applies a EditorTableModel and a model listener to this instance's JTable.
      * 
@@ -267,7 +329,7 @@ public final class EditorTableView<T extends InventoryItem> {
             newRow = numRows - 1;
         }
         
-        table.setRowSelectionInterval(newRow, newRow);
+        selectAndScrollTo(newRow);
     }
 
     /**
@@ -520,5 +582,29 @@ public final class EditorTableView<T extends InventoryItem> {
 
     public void setWantElasticColumns(boolean value) {
         table.setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_NEXT_COLUMN);
+    }
+    
+    public void selectAndScrollTo(int rowIdx) {
+        if (!(table.getParent() instanceof JViewport)) {
+            return;
+        }
+        JViewport viewport = (JViewport)table.getParent();
+
+        // compute where we're going and where we are
+        Rectangle targetRect  = table.getCellRect(rowIdx, 0, true);
+        Rectangle curViewRect = viewport.getViewRect();
+
+        // if the target cell is not visible, attempt to jump to a location where it is
+        // visible but not on the edge of the viewport
+        if (targetRect.y + targetRect.height > curViewRect.y + curViewRect.height) {
+            // target is below us, move to position 3 rows below target
+            targetRect.setLocation(targetRect.x, targetRect.y + (targetRect.height * 3));
+        } else if  (targetRect.y < curViewRect.y) {
+            // target is above is, move to position 3 rows above target
+            targetRect.setLocation(targetRect.x, targetRect.y - (targetRect.height * 3));
+        }
+        
+        table.scrollRectToVisible(targetRect);
+        table.setRowSelectionInterval(rowIdx, rowIdx);
     }
 }
