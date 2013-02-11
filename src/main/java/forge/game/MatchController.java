@@ -272,4 +272,12 @@ public class MatchController {
     public final InputControl getInput() {
         return input;
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public static int getPoisonCountersAmountToLose() {
+        return 10;
+    }
 }
