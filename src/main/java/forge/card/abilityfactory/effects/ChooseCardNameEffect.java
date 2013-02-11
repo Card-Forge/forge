@@ -1,7 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Predicates;
@@ -17,7 +15,6 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.ListChooser;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 
@@ -52,36 +49,14 @@ public class ChooseCardNameEffect extends SpellEffect {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 boolean ok = false;
-                String name = null;
                 while (!ok) {
                     if (p.isHuman()) {
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc
                                 + " card. (Case sensitive)";
-                        /*
-                         * name = JOptionPane.showInputDialog(null, message,
-                         * host.getName(), JOptionPane.QUESTION_MESSAGE); if
-                         * (!valid.equals("Card") && !(null == name)) { try {
-                         * final Card temp =
-                         * AllZone.getCardFactory().getCard(name, p); ok =
-                         * temp.isValid(valid, host.getController(), host); }
-                         * catch (final Exception ignored) { ok = false; } }
-                         * else { ok = true; } if (ok) { host.setNamedCard(null
-                         * == name ? "" : name); }
-                         */
-                        final List<String> cards = new ArrayList<String>();
-                        for (final CardPrinted c : CardDb.instance().getAllUniqueCards()) {
-                            cards.add(c.getName());
-                        }
-                        Collections.sort(cards);
 
-                        // use standard forge's list selection dialog
-                        final ListChooser<String> choice = new ListChooser<String>(message, 1, 1, cards);
-                        choice.show();
-                        // still missing a listener to display the card preview
-                        // in the right
-                        name = choice.getSelectedValue();
-                        if (Singletons.getModel().getCardFactory().getCard(CardDb.instance().getCard(name), p).isValid(valid, host.getController(), host)) {
-                            host.setNamedCard(choice.getSelectedValue());
+                        CardPrinted cp = GuiChoose.one(message, CardDb.instance().getAllUniqueCards());
+                        if (cp.getMatchingForgeCard().isValid(valid, host.getController(), host)) {
+                            host.setNamedCard(cp.getName());
                             ok = true;
                         }
                     } else {

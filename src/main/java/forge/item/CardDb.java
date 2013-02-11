@@ -18,6 +18,8 @@
 package forge.item;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -88,7 +90,7 @@ public final class CardDb {
     // CardRules>();
 
     // Here are refs, get them by name
-    private final Map<String, CardPrinted> uniqueCards = new Hashtable<String, CardPrinted>();
+    private final Map<String, CardPrinted> uniqueCards;
 
     // need this to obtain cardReference by name+set+artindex
     private final Map<String, Map<String, CardPrinted[]>> allCardsBySet = new Hashtable<String, Map<String, CardPrinted[]>>();
@@ -107,14 +109,16 @@ public final class CardDb {
     };
 
     private CardDb() {
-        this(new MtgDataParser()); // I wish cardname.txt parser was be here.
+        this(new MtgDataParser()); // I wish cardname.txt parser was here.
     }
 
     private CardDb(final Iterator<CardRules> parser) {
+        Map<String, CardPrinted> uniques = new Hashtable<String, CardPrinted>();
         while (parser.hasNext()) {
-            this.addNewCard(parser.next());
+            this.addNewCard(parser.next(), uniques);
         }
-        // TODO consider using Collections.unmodifiableList wherever possible
+        
+        this.uniqueCards = Collections.unmodifiableMap(uniques);
     }
 
     /**
@@ -123,7 +127,7 @@ public final class CardDb {
      * @param card
      *            the card
      */
-    public void addNewCard(final CardRules card) {
+    private void addNewCard(final CardRules card, Map<String, CardPrinted> uniques) {
         if (null == card) {
             return;
         } // consider that a success
@@ -139,9 +143,9 @@ public final class CardDb {
         for (final Entry<String, CardInSet> s : card.getSetsPrinted()) {
             lastAdded = this.addToLists(card, cardName, s);
         }
-        this.uniqueCards.put(cardName, lastAdded);
+        uniques.put(cardName, lastAdded);
     }
-
+    
     /**
      * Adds the to lists.
      * 
@@ -343,7 +347,7 @@ public final class CardDb {
      * 
      * @return the all unique cards
      */
-    public Iterable<CardPrinted> getAllUniqueCards() {
+    public Collection<CardPrinted> getAllUniqueCards() {
         return this.uniqueCards.values();
     }
 
