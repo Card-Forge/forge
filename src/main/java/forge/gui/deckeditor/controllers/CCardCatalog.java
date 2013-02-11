@@ -20,7 +20,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JSpinner;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -394,6 +396,12 @@ public enum CCardCatalog implements ICDoc {
         parent.add(createMenuItem(label, enabled, accelerator, onClick));
     }
     
+//    private interface _RestrictionBuilder<T> {
+//        Predicate<CardPrinted> getPredicate();
+//        JComponent buildRestrictionWidget();
+//        boolean buildMenu(JPopupMenu root, Set<T> activeSet, T key);
+//    }
+    
     @SuppressWarnings("serial")
     private <T> void addRestriction(Pair<? extends JComponent, Predicate<CardPrinted>> restriction, final Set<T> activeSet, final T key) {
         final Predicate<CardPrinted> predicate = restriction.getRight();
@@ -426,9 +434,17 @@ public enum CCardCatalog implements ICDoc {
     }
 
     private Pair<JPanel, Predicate<CardPrinted>> buildRangeRestriction(RangeTypes t) {
-        Pair<FSpinner, FSpinner> s = VCardCatalog.SINGLETON_INSTANCE.getSpinners().get(t);
+        final Pair<FSpinner, FSpinner> s = VCardCatalog.SINGLETON_INSTANCE.getSpinners().get(t);
         s.getLeft().setValue(0);
         s.getRight().setValue(10);
+        
+        // set focus to lower bound widget
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ((JSpinner.DefaultEditor)s.getLeft().getEditor()).getTextField().requestFocusInWindow();
+            }
+        });
         
         return Pair.of(VCardCatalog.SINGLETON_INSTANCE.buildRangeRestrictionWidget(t), null);
     }

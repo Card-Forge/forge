@@ -3,6 +3,8 @@ package forge.gui.deckeditor.views;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +13,12 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -140,13 +146,14 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
             }
             pnlStats.add(component);
         }
-
+        
         pnlAddButtons.setOpaque(false);
         pnlAddButtons.add(btnAdd, "w 30%!, h 30px!, gap 10 10 5 5");
         pnlAddButtons.add(btnAdd4, "w 30%!, h 30px!, gap 10 10 5 5");
         
         pnlSearch.setOpaque(false);
         pnlSearch.add(btnAddRestriction, "center, w pref+8, h pref+8");
+        txfSearch.addFocusListener(new _SelectAllOnEvent(txfSearch));
         pnlSearch.add(txfSearch, "pushx, growx");
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
@@ -162,12 +169,31 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         
         // fill spinner map
         for (RangeTypes t : RangeTypes.values()) {
-            spinners.put(t, Pair.of(
-                    new FSpinner.Builder().maxValue(10).build(),
-                    new FSpinner.Builder().maxValue(10).build()));
+            FSpinner lowerBound = new FSpinner.Builder().maxValue(10).build();
+            FSpinner upperBound = new FSpinner.Builder().maxValue(10).build();
+            _setupSpinner(lowerBound);
+            _setupSpinner(upperBound);
+            spinners.put(t, Pair.of(lowerBound, upperBound));
         }
     }
 
+    private void _setupSpinner (JSpinner spinner) {
+        spinner.setFocusable(false); // only the spinner text field should be focusable, not the up/down widget
+        JTextField t = ((JSpinner.DefaultEditor)spinner.getEditor()).getTextField();
+        t.addFocusListener(new _SelectAllOnEvent(t));
+        spinner.addChangeListener(new _SelectAllOnEvent(t));
+    }
+    
+    private class _SelectAllOnEvent extends FocusAdapter implements ChangeListener {
+        private final JTextField t;
+        public _SelectAllOnEvent (JTextField t) { this.t = t; }
+        private void _selectAll() {
+            SwingUtilities.invokeLater(new Runnable() { @Override public void run() { t.selectAll(); } });
+        }
+        @Override public void stateChanged(ChangeEvent e) { _selectAll(); }
+        @Override public void focusGained(FocusEvent a)   { _selectAll(); }
+    }
+    
     //========== Overridden from IVDoc
 
     @Override
