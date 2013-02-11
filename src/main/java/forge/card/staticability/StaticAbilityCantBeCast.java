@@ -123,8 +123,8 @@ public class StaticAbilityCantBeCast {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
 
-        if (params.containsKey("ValidCard") && (card != null)
-                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+        if (params.containsKey("ValidCard")
+                && (card == null || !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard))) {
             return false;
         }
 
