@@ -34,7 +34,6 @@ import com.google.common.base.Function;
 
 import forge.Command;
 import forge.Singletons;
-import forge.card.CardRarity;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.gui.CardListViewer;
@@ -437,7 +436,11 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             public void execute() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
                 for (Map.Entry<InventoryItem, Integer> item : getTableDeck().getCards()) {
-                    int numToKeep = CardRarity.BasicLand == ((CardPrinted)item.getKey()).getRarity() ? 50 : 4;
+                    CardPrinted card = (CardPrinted)item.getKey();
+                    int numToKeep = card.getCard().getType().isBasic() ? 50 : 4;
+                    if ("Relentless Rats".equals(card.getName())) {
+                        numToKeep = Integer.MAX_VALUE;
+                    }
                     if (numToKeep < item.getValue()) {
                         cardsToRemove.add(Pair.of(item.getKey(), item.getValue() - numToKeep));
                     }
