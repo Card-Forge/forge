@@ -24,13 +24,10 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -219,67 +216,8 @@ public final class EditorTableView<T extends InventoryItem> {
         // prevent tables from intercepting tab focus traversals
         table.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
         table.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
-        
-        // highlight items as the user types a portion of their names
-        table.addKeyListener(new _FindAsYouType());
     }
 
-    private class _FindAsYouType extends KeyAdapter {
-        private StringBuilder str = new StringBuilder();
-        private long lastUpdatedTimestamp;
-        
-        private void _findNextMatch(int startIdx) {
-            int numItems = model.getRowCount();
-            if (0 == numItems) {
-                return;
-            }
-            
-            // find the next item that matches the string
-            startIdx %= numItems;
-            int stopIdx = (startIdx - 1 + numItems) % numItems;
-            String searchStr = str.toString().toLowerCase(Locale.ENGLISH);
-            for (int idx = startIdx; idx != stopIdx; idx = (idx + 1) % numItems) {
-                if (model.rowToCard(idx).getKey().getName().toLowerCase(Locale.ENGLISH).contains(searchStr)) {
-                    selectAndScrollTo(idx);
-                    break;
-                }
-            }
-        }
-        
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (KeyEvent.VK_F3 == e.getKeyCode()) {
-                _findNextMatch(table.getSelectedRow() + 1);
-            }
-        }
-        
-        @Override
-        public void keyTyped(KeyEvent e) {
-            long curTime = System.currentTimeMillis();
-            if (5000 < curTime - lastUpdatedTimestamp) {
-                // too long since last update; clear the search string
-                str = new StringBuilder();
-            }
-            lastUpdatedTimestamp = curTime;
-
-            switch (e.getKeyChar()) {
-            case KeyEvent.CHAR_UNDEFINED:
-                return;
-                
-            case KeyEvent.VK_BACK_SPACE:
-                if (!str.toString().isEmpty()) {
-                    str.deleteCharAt(str.toString().length() - 1);
-                }
-                break;
-                
-            default:
-                str.append(e.getKeyChar());
-            }
-            
-            _findNextMatch(Math.max(0, table.getSelectedRow()));
-        }
-    }
-    
     /**
      * Applies a EditorTableModel and a model listener to this instance's JTable.
      * 

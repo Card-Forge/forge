@@ -17,11 +17,26 @@
  */
 package forge.gui.deckeditor;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.Locale;
+
+import javax.swing.JTable;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import forge.Card;
 import forge.deck.DeckBase;
@@ -30,9 +45,12 @@ import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
+import forge.gui.deckeditor.tables.EditorTableModel;
 import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 
 /**
@@ -48,6 +66,7 @@ public enum CDeckEditorUI implements CardContainer {
     SINGLETON_INSTANCE;
 
     private ACEditorBase<? extends InventoryItem, ? extends DeckBase> childController;
+    private boolean isFindingAsYouType = false;
 
     private CDeckEditorUI() {
     }
@@ -158,34 +177,193 @@ public enum CDeckEditorUI implements CardContainer {
      * Updates listeners for current controller.
      */
     private void updateController() {
-        childController.getTableCatalog().getTable().addKeyListener(new KeyAdapter() {
+        EditorTableView<? extends InventoryItem> catView  = childController.getTableCatalog();
+        EditorTableView<? extends InventoryItem> deckView = childController.getTableDeck();
+        JTable catTable  = catView.getTable();
+        JTable deckTable = deckView.getTable();
+        final _FindAsYouType catFind  = new _FindAsYouType(catView);
+        final _FindAsYouType deckFind = new _FindAsYouType(deckView);
+
+        catTable.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { addSelectedCards(1); }
+                if (!isFindingAsYouType && e.getKeyChar() == ' ') { addSelectedCards(1); }
             }
         });
 
-        childController.getTableDeck().getTable().addKeyListener(new KeyAdapter() {
+        deckTable.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { removeSelectedCards(1); }
+                if (!isFindingAsYouType && e.getKeyChar() == ' ') { removeSelectedCards(1); }
             }
         });
 
-        childController.getTableCatalog().getTable().addMouseListener(new MouseAdapter() {
+        catTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 if (e.getClickCount() == 2) { addSelectedCards(1); }
             }
         });
 
-        childController.getTableDeck().getTable().addMouseListener(new MouseAdapter() {
+        deckTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 if (e.getClickCount() == 2) { removeSelectedCards(1); }
             }
         });
 
+        catTable.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent arg0) {
+                catFind.cancel();
+            }
+        });
+        deckTable.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent arg0) {
+                deckFind.cancel();
+            }
+        });
+        
+        // highlight items as the user types a portion of their names
+        catTable.addKeyListener(catFind);
+        deckTable.addKeyListener(deckFind);
+
         childController.init();
+    }
+    
+    private class _FindAsYouType extends KeyAdapter {
+        private StringBuilder str = new StringBuilder();
+        private final FLabel popupLabel = new FLabel.Builder().fontAlign(SwingConstants.LEFT).opaque().build();
+        private boolean popupShowing = false;
+        private Popup popup;
+        private Timer popupTimer;
+        private final EditorTableView<? extends InventoryItem> tableView;
+        
+        public _FindAsYouType(EditorTableView<? extends InventoryItem> tableView) {
+            this.tableView = tableView;
+        }
+
+        private void _setPopupSize() {
+            // resize popup to size of label (ensure there's room for the next character so the label
+            // doesn't show '...' in the time between when we set the text and when we increase the size
+            Dimension labelDimension = popupLabel.getPreferredSize();
+            Dimension popupDimension = new Dimension(labelDimension.width + 12, labelDimension.height + 4);
+            SwingUtilities.getWindowAncestor(popupLabel).setSize(popupDimension);
+        }
+        
+        private void _findNextMatch(int startIdx) {
+            int numItems = tableView.getTable().getRowCount();
+            if (0 == numItems) {
+                cancel();
+                return;
+            }
+            
+            // find the next item that matches the string
+            startIdx %= numItems;
+            int stopIdx = (startIdx - 1 + numItems) % numItems;
+            String searchStr = str.toString().toLowerCase(Locale.ENGLISH);
+            boolean found = false;
+            for (int idx = startIdx; true; idx = (idx + 1) % numItems) {
+                @SuppressWarnings("unchecked")
+                EditorTableModel<? extends InventoryItem> tableModel =
+                        (EditorTableModel<? extends InventoryItem>)tableView.getTable().getModel();
+                if (tableModel.rowToCard(idx).getKey().getName().toLowerCase(Locale.ENGLISH).contains(searchStr)) {
+                    tableView.selectAndScrollTo(idx);
+                    found = true;
+                    break;
+                }
+                
+                if (idx == stopIdx) {
+                    break;
+                }
+            }
+            
+            if (searchStr.isEmpty()) {
+                cancel();
+                return;
+            }
+            
+            // show a popup with the current search string, highlighted in red if not found
+            popupLabel.setText(searchStr + " (hit Enter for next match, Esc to cancel)");
+            popupLabel.setForeground(found ? FSkin.getColor(FSkin.Colors.CLR_TEXT) : new Color(255, 0, 0));
+            
+            if (popupShowing) {
+                _setPopupSize();
+                popupTimer.restart();
+            } else {
+                PopupFactory factory = PopupFactory.getSharedInstance();
+                Point tableLoc = tableView.getTable().getTableHeader().getLocationOnScreen();
+                popup = factory.getPopup(tableView.getTable(), popupLabel, tableLoc.x + 10, tableLoc.y + 10);
+                SwingUtilities.getWindowAncestor(popupLabel).setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+                
+                popupTimer = new Timer(5000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cancel();
+                    }
+                });
+                popupTimer.setRepeats(false);
+                
+                popup.show();
+                _setPopupSize();
+                popupTimer.start();
+                isFindingAsYouType = true;
+                popupShowing = true;
+            }
+        }
+        
+        public void cancel() {
+            str = new StringBuilder();
+            popupShowing = false;
+            if (null != popup) {
+                popup.hide();
+                popup = null;
+            }
+            if (null != popupTimer) {
+                popupTimer.stop();
+                popupTimer = null;
+            }
+            isFindingAsYouType = false;
+        }
+        
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (KeyEvent.VK_ESCAPE == e.getKeyCode()) {
+                cancel();
+            }
+        }
+        
+        @Override
+        public void keyTyped(KeyEvent e) {
+            switch (e.getKeyChar()) {
+            case KeyEvent.CHAR_UNDEFINED:
+                return;
+                
+            case KeyEvent.VK_ENTER:
+                if (!str.toString().isEmpty()) {
+                    _findNextMatch(tableView.getTable().getSelectedRow() + 1);
+                }
+                return;
+                
+            case KeyEvent.VK_BACK_SPACE:
+                if (!str.toString().isEmpty()) {
+                    str.deleteCharAt(str.toString().length() - 1);
+                }
+                break;
+                
+            case KeyEvent.VK_SPACE:
+                // don't trigger if the first character is a space
+                if (str.toString().isEmpty()) {
+                    return;
+                }
+                // fall through
+                
+            default:
+                str.append(e.getKeyChar());
+            }
+            
+            _findNextMatch(Math.max(0, tableView.getTable().getSelectedRow()));
+        }
     }
 }

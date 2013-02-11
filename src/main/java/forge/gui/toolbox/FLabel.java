@@ -501,7 +501,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
     private void paintUp(final Graphics2D g, int w, int h) {
         GradientPaint gradient = new GradientPaint(0, h, d10, 0, 0, l20);
         g.setPaint(gradient);
-        g.fillRect(0, 0, w - 1, h - 1);
+        g.fillRect(0, 0, w, h);
 
         g.setColor(d50);
         g.drawRect(0, 0, w - 2, h - 2);
