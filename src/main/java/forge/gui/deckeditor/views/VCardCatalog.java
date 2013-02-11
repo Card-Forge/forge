@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +18,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -153,7 +152,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         
         pnlSearch.setOpaque(false);
         pnlSearch.add(btnAddRestriction, "center, w pref+8, h pref+8");
-        txfSearch.addFocusListener(new _SelectAllOnEvent(txfSearch));
+        txfSearch.addFocusListener(_selectAllOnFocus);
         pnlSearch.add(txfSearch, "pushx, growx");
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
@@ -180,19 +179,14 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     private void _setupSpinner (JSpinner spinner) {
         spinner.setFocusable(false); // only the spinner text field should be focusable, not the up/down widget
         JTextField t = ((JSpinner.DefaultEditor)spinner.getEditor()).getTextField();
-        t.addFocusListener(new _SelectAllOnEvent(t));
-        spinner.addChangeListener(new _SelectAllOnEvent(t));
+        t.addFocusListener(_selectAllOnFocus);
     }
     
-    private class _SelectAllOnEvent extends FocusAdapter implements ChangeListener {
-        private final JTextField t;
-        public _SelectAllOnEvent (JTextField t) { this.t = t; }
-        private void _selectAll() {
-            SwingUtilities.invokeLater(new Runnable() { @Override public void run() { t.selectAll(); } });
+    private final FocusListener _selectAllOnFocus = new FocusAdapter() {
+        @Override public void focusGained(final FocusEvent e) {
+            SwingUtilities.invokeLater(new Runnable() { @Override public void run() { ((JTextField)e.getComponent()).selectAll(); } });
         }
-        @Override public void stateChanged(ChangeEvent e) { _selectAll(); }
-        @Override public void focusGained(FocusEvent a)   { _selectAll(); }
-    }
+    };
     
     //========== Overridden from IVDoc
 
