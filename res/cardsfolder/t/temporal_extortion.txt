@@ -1,0 +1,13 @@
+Name:Temporal Extortion
+ManaCost:B B B B
+Types:Sorcery
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When you play CARDNAME, any player may pay half his or her life, rounded up. If a player does, counter CARDNAME.
+SVar:TrigCounter:DB$ Counter | Cost$ 0 | UnlessCost$ PayLife<X> | Defined$ TriggeredSpellAbility | UnlessPayer$ Player | UnlessSwitched$ True | UnlessAI$ Never
+SVar:X:Count$YourLifeTotal/HalfUp
+A:SP$ AddTurn | Cost$ B B B B | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_extortion.jpg
+SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/81.jpg
+Oracle:When you cast Temporal Extortion, any player may pay half his or her life, rounded up. If a player does, counter Temporal Extortion.\nTake an extra turn after this one.
+End

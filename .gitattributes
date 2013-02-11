@@ -10549,6 +10549,7 @@ res/cardsfolder/t/temporal_aperture.txt svneol=native#text/plain
 res/cardsfolder/t/temporal_cascade.txt -text
 res/cardsfolder/t/temporal_distortion.txt -text
 res/cardsfolder/t/temporal_eddy.txt svneol=native#text/plain
+res/cardsfolder/t/temporal_extortion.txt -text
 res/cardsfolder/t/temporal_fissure.txt svneol=native#text/plain
 res/cardsfolder/t/temporal_isolation.txt svneol=native#text/plain
 res/cardsfolder/t/temporal_manipulation.txt svneol=native#text/plain
