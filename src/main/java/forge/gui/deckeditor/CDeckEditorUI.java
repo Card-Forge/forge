@@ -47,6 +47,7 @@ import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.tables.EditorTableModel;
 import forge.gui.deckeditor.tables.EditorTableView;
+import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.toolbox.FLabel;
@@ -194,7 +195,13 @@ public enum CDeckEditorUI implements CardContainer {
             public void keyPressed(KeyEvent e) {
                 if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
                     deckTable.requestFocusInWindow();
+                } else if (e.getKeyChar() == 'f') {
+                    // let ctrl/cmd-F set focus to the text filter box
+                    if (e.isControlDown() || e.isMetaDown()) {
+                        VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().requestFocusInWindow();
+                    }
                 }
+
             }
         });
 
@@ -242,7 +249,7 @@ public enum CDeckEditorUI implements CardContainer {
         // highlight items as the user types a portion of their names
         catTable.addKeyListener(catFind);
         deckTable.addKeyListener(deckFind);
-
+        
         childController.init();
     }
     
@@ -253,6 +260,7 @@ public enum CDeckEditorUI implements CardContainer {
         private Popup popup;
         private Timer popupTimer;
         private final EditorTableView<? extends InventoryItem> tableView;
+        static final int okModifiers = KeyEvent.SHIFT_DOWN_MASK | KeyEvent.ALT_GRAPH_DOWN_MASK;
         
         public _FindAsYouType(EditorTableView<? extends InventoryItem> tableView) {
             this.tableView = tableView;
@@ -374,6 +382,10 @@ public enum CDeckEditorUI implements CardContainer {
                 // fall through
                 
             default:
+                if (okModifiers != (e.getModifiers() | okModifiers)) {
+                    // shift down is ok.  anything else is likely to be a hotkey and should not be added to the string
+                    return;
+                }
                 str.append(e.getKeyChar());
             }
             

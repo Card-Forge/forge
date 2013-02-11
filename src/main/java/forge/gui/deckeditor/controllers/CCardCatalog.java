@@ -236,9 +236,22 @@ public enum CCardCatalog implements ICDoc {
         // add search restriction on ctrl-enter from either the textbox or combobox
         VCardCatalog.SINGLETON_INSTANCE.getCbSearchMode().addKeyListener(new _OnCtrlEnter(addSearchRestriction));
         VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().addKeyListener(new _OnCtrlEnter(addSearchRestriction) {
+            private boolean keypressPending;
             @Override
             public void keyReleased(KeyEvent e) {
-                applyCurrentFilter();
+                if (KeyEvent.VK_ENTER == e.getKeyCode() && 0 == e.getModifiers()) {
+                    // set focus to table when a plain enter is typed into the text filter box
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getTableCatalog().getTable().requestFocusInWindow();
+                } else if (keypressPending) {
+                    // do this in keyReleased instead of keyTyped since the textbox text isn't updated until the key is released
+                    // but depend on keypressPending since otherwise we pick up hotkeys and other unwanted stuff
+                    applyCurrentFilter();
+                }
+            }
+            
+            @Override
+            public void keyPressed(KeyEvent e) {
+                keypressPending = true;
             }
         });
         
@@ -406,6 +419,7 @@ public enum CCardCatalog implements ICDoc {
         if (null != predicate) {
             activePredicates.add(predicate);
         }
+        
         applyCurrentFilter();
     }
 
