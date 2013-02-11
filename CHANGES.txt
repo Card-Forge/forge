@@ -72,6 +72,28 @@ Fixes/Features:
 - implement basic find-as-you-type for deck editor tables
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AbilityFactory - merged repeating code fragments
+- FileSection - exposing a useful method to parse string into map, AF already uses it
+- SpellEffect, InputPayManaCostUtil, GameActionUtil - remove unused imports
+- predictDamage methods moved to ComputerUtilCombat, since used by AI only and it's not a core game entity property
+- distubute combat damage for AI moved from Combat.java to ComputerUtilCombat
+- Fixed the title for the Dr. Doom 3 quest opponent deck.
+- let code in populateCustomPanel override enabled setting of continue button
+- relocate the tooltip when a new cell is hovered over, even if it contains the same text
+- Rewrite of VAssignDamage (I need a damage map from this class [View must not apply damage by itself] but the code shocked me, so rewrote it first)
+- made distribute damage method return Map<Card, int> as decisions taken by player, combat.java now does not depend on player type and has no GUI references
+- ensure extra snow-covered lands from CSP and relentless rats aren't sold
+- Default assign damage view does not offer full damage distribution
+- don't count decks and packs as having color or card type
+- finish implementation of find-as-you-type
+- Write CHANGES blurb about find-as-you-type mode
+- allow left/right arrow keys to switch focus between deck editor tables
+- autoselect first row if a table gains focus and no rows are currently selected
+- CardDb.uniqueCards is sealed into unmodifiableMap so it's now safe to return the collection provided by its values() method as Collection
+- ChooseCard: used common routine GuiChoose.one
+- implement ctrl-f/enter hotkeys for transferring focus between text filter box and card catalog table
+- Added Discard replacement event
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -90,6 +112,7 @@ Added the following cards:
 Ghosts of the Innocent
 Pendrell Flux
 Disruption Aura
+Library of Leng
 
 
 end
