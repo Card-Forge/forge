@@ -397,7 +397,12 @@ public final class CardDb {
                 // Find card with maximal set index
                 result = Aggregates.itemWithMax(namedCards, CardPrinted.FN_GET_EDITION_INDEX);
                 if (null == result) {
-                    throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
+                    // 2nd chance: look in planes, schemes and so on
+                    final Iterable<CardPrinted> namedNonTraditionals = Iterables.filter(this.allNonTraditionalCardsFlat, predicate);
+                    result = Aggregates.itemWithMax(namedNonTraditionals, CardPrinted.FN_GET_EDITION_INDEX);
+                    
+                    if ( null == result ) // sure thing, throw exception
+                        throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
                 }
 
             }
