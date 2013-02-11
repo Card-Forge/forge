@@ -1642,15 +1642,18 @@ public class ComputerUtilCombat {
      * @param damage
      *            a int.
      */
-    public static void distributeAIDamage(final Card attacker, final List<Card> block, int damage, Combat combat) {
+    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final List<Card> block, int damage) {
         final Card c = attacker;
-    
+        Map<Card, Integer> damageMap = new HashMap<Card, Integer>();
+        
         if (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                 || attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")) {
-            combat.addDefendingDamage(damage, attacker);
-            return;
+            damageMap.put(null, damage);
+            return damageMap;
         }
     
+
+        
         final boolean hasTrample = attacker.hasKeyword("Trample");
     
         if (block.size() == 1) {
@@ -1678,12 +1681,12 @@ public class ComputerUtilCombat {
                 // If Extra trample damage, assign to defending
                 // player/planeswalker
                 if (0 < trample) {
-                    combat.addDefendingDamage(trample, attacker);
+                    damageMap.put(null, trample);
                 }
     
-                blocker.addAssignedDamage(damageNeeded, attacker);
+                damageMap.put(blocker, damageNeeded);
             } else {
-                blocker.addAssignedDamage(damage, attacker);
+                damageMap.put(blocker, damage);
             }
         } // 1 blocker
         else {
@@ -1695,10 +1698,7 @@ public class ComputerUtilCombat {
                 final int enoughDamageToKill = ComputerUtilCombat.getEnoughDamageToKill(b, damage, attacker, true);
                 if (enoughDamageToKill <= damage) {
                     damage -= enoughDamageToKill;
-                    final List<Card> cl = new ArrayList<Card>();
-                    cl.add(attacker);
-    
-                    b.addAssignedDamage(enoughDamageToKill, c);
+                    damageMap.put(b, enoughDamageToKill);
                 } else {
                     killsAllBlockers = false;
                 }
@@ -1708,13 +1708,14 @@ public class ComputerUtilCombat {
             if (killsAllBlockers && damage > 0) {
             // if attacker has no trample, and there's damage left, assign the rest to the last blocker
                 if (!hasTrample && lastBlocker != null) {
-                    lastBlocker.addAssignedDamage(damage, c);
+                    damageMap.put(lastBlocker, damage);
                     damage = 0;
                 } else if (hasTrample) {
-                    combat.addDefendingDamage(damage, c);
+                    damageMap.put(null, damage);
                 }
             }
         }
+        return damageMap;
     } // setAssignedDamage()
     
     

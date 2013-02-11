@@ -20,7 +20,9 @@ package forge.gui.match;
 import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 
@@ -186,19 +188,22 @@ public enum CMatchUI implements CardContainer {
      * @param blockers &emsp; {@link forge.CardList}
      * @param damage &emsp; int
      */
-    public void assignDamage(final Card attacker, final List<Card> blockers, final int damage, GameEntity defender) {
+    public Map<Card, Integer> getDamageToAssign(final Card attacker, final List<Card> blockers, final int damage, GameEntity defender) {
         if (damage <= 0) {
-            return;
+            return new HashMap<Card, Integer>();
         }
 
         // If the first blocker can absorb all of the damage, don't show the Assign Damage Frame
         Card firstBlocker = blockers.get(0);
         if (!attacker.hasKeyword("Deathtouch") && firstBlocker.getLethalDamage() >= damage) {
             firstBlocker.addAssignedDamage(damage, attacker);
-            return;
+            Map<Card, Integer> res = new HashMap<Card, Integer>();
+            res.put(firstBlocker, damage);
+            return res;
         }
 
-        new VAssignDamage(attacker, blockers, damage, defender);
+        VAssignDamage v = new VAssignDamage(attacker, blockers, damage, defender);
+        return v.getDamageMap();
     }
 
     /**

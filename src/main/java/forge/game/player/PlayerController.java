@@ -1,8 +1,10 @@
 package forge.game.player;
 
 import java.util.List;
+import java.util.Map;
 
 import forge.Card;
+import forge.GameEntity;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -87,5 +89,7 @@ public abstract class PlayerController {
     
     public abstract Deck sideboard(final Deck deck, GameType gameType);
 
+
+    public abstract Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender);
 
 }

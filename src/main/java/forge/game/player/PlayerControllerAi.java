@@ -1,8 +1,10 @@
 package forge.game.player;
 
 import java.util.List;
+import java.util.Map;
 
 import forge.Card;
+import forge.GameEntity;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -13,6 +15,7 @@ import forge.game.ai.AiController;
 import forge.game.ai.AiInputBlock;
 import forge.game.ai.AiInputCommon;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCombat;
 import forge.gui.GuiChoose;
 
 
@@ -158,6 +161,14 @@ public class PlayerControllerAi extends PlayerController {
     public Deck sideboard(Deck deck, GameType gameType) {
         // AI does not know how to sideboard
         return deck;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#assignCombatDamage(forge.Card, java.util.List, int, forge.GameEntity)
+     */
+    @Override
+    public Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender) {
+        return ComputerUtilCombat.distributeAIDamage(attacker, blockers, damageDealt);
     }
 
 

@@ -38,7 +38,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.Card;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.game.MatchController;
 import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
@@ -66,7 +65,6 @@ public class VAssignDamage {
     // Damage storage
     private final int totalDamageToAssign;
 
-    private final Card attacker;
     private boolean attackerHasDeathtouch = false;
     private boolean attackerHasTrample = false;
     private boolean attackerHasInfect = false;
@@ -106,12 +104,11 @@ public class VAssignDamage {
     }
 
     // Mouse actions
-    private final MouseAdapter madDefender = new MouseAdapter() {
+    private final MouseAdapter mad = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent evt) {
             Card source = ((CardPanel) evt.getSource()).getCard();
-            if (!damage.containsKey(source))
-                source = null;
+            if (!damage.containsKey(source)) source = null; // to get player instead of fake card
             
             FSkin.Colors brdrColor = VAssignDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
             ((CardPanel) evt.getSource()).setBorder(new LineBorder(FSkin.getColor(brdrColor), 2));
@@ -149,7 +146,6 @@ public class VAssignDamage {
         this.attackerHasDeathtouch = attacker0.hasKeyword("Deathtouch");
         this.attackerHasInfect = attacker0.hasKeyword("Infect");
         this.attackerHasTrample = defender != null && attacker0.hasKeyword("Trample");
-        this.attacker = attacker0;
 
         // Top-level UI stuff
         final JPanel overlay = SOverlayUtils.genericOverlay();
@@ -257,7 +253,7 @@ public class VAssignDamage {
         cp.setCardBounds(0, 0, 105, 150);
         cp.setOpaque(true);
         pnlDefenders.add(cp, "w 145px!, h 170px!, gap 5px 5px 3px 3px, ax center");
-        cp.addMouseListener(madDefender);
+        cp.addMouseListener(mad);
     }
 
     /**
@@ -396,15 +392,6 @@ public class VAssignDamage {
         if ( getRemainingDamage() > 0 ) 
             return;
         
-        for (DamageTarget dt : defenders) {
-            if( dt.card == null && attackerHasTrample ) {
-                Singletons.getModel().getGame().getCombat().addDefendingDamage(dt.damage, this.attacker);
-                continue;
-            }
-            dt.card.addAssignedDamage(dt.damage, this.attacker);
-            dt.card.updateObservers();
-        }
-
         dlg.dispose();
         SOverlayUtils.hideOverlay();
     }

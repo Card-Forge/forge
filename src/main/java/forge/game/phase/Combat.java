@@ -33,12 +33,9 @@ import forge.CardPredicates;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
-import forge.game.ai.ComputerUtilCombat;
 import forge.game.event.BlockerAssignedEvent;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDialog;
-import forge.gui.match.CMatchUI;
 
 /**
  * <p>
@@ -695,26 +692,16 @@ public class Combat {
 
                 if (!attackers.isEmpty()) {
                     assignedDamage = true;
-                    if (blocker.getController().isHuman()) { // who is defending matters
-                        if (attackers.size() > 1) {
-                            CMatchUI.SINGLETON_INSTANCE.assignDamage(blocker, attackers, damage, null);
-                        } else {
-                            attackers.get(0).addAssignedDamage(damage, blocker);
-                        }
-                    } else { // computer attacks
-                        ComputerUtilCombat.distributeAIDamage(blocker, attackers, damage, this);
+                    Map<Card, Integer> map = blocker.getController().getController().assignCombatDamage(blocker, attackers, damage, null);
+                    for (Entry<Card, Integer> dt : map.entrySet()) {
+                        dt.getKey().addAssignedDamage(dt.getValue(), blocker);
+                        dt.getKey().updateObservers();
                     }
                 }
             }
         }
 
         return assignedDamage;
-    }
-
-    private final boolean assignDamageAsIfNotBlocked(Card attacker) {
-        return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
-                || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                && GuiDialog.confirm(attacker, "Do you want to assign its combat damage as though it weren't blocked?"));
     }
 
     private final boolean assignAttackersDamage(boolean firstStrikeDamage) {
@@ -746,19 +733,17 @@ public class Combat {
                     continue;
                 }
             } else {
-                if (this.getAttackingPlayer().isHuman()) { // human attacks
-                    if (assignDamageAsIfNotBlocked(attacker)) {
-                        this.addDefendingDamage(damageDealt, attacker);
+                Map<Card, Integer> map = this.getAttackingPlayer().getController().assignCombatDamage(attacker, blockers, damageDealt, this.getDefenderByAttacker(attacker));
+                for (Entry<Card, Integer> dt : map.entrySet()) {
+                    if( dt.getKey() == null && trampler) {
+                        if (dt.getValue() > 0) 
+                            addDefendingDamage(dt.getValue(), attacker);
                     } else {
-                        if (trampler || (blockers.size() > 1)) {
-                            CMatchUI.SINGLETON_INSTANCE.assignDamage(attacker, blockers, damageDealt, this.getDefenderByAttacker(attacker));
-                        } else {
-                            blockers.get(0).addAssignedDamage(damageDealt, attacker);
-                        }
+                        dt.getKey().addAssignedDamage(dt.getValue(), attacker);
+                        dt.getKey().updateObservers();
                     }
-                } else { // computer attacks
-                    ComputerUtilCombat.distributeAIDamage(attacker, blockers, damageDealt, this);
                 }
+
             } // if !hasFirstStrike ...
         } // for
         return assignedDamage;

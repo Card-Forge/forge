@@ -1,10 +1,13 @@
 package forge.game.player;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
 import forge.Card;
+import forge.GameEntity;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -169,6 +172,32 @@ public class PlayerControllerHuman extends PlayerController {
         res.getSideboard().addAll(newSb);
         return res;
     }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#assignCombatDamage()
+     */
+    @Override
+    public Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender) {
+        Map<Card, Integer> map;
+        if (defender != null && assignDamageAsIfNotBlocked(attacker)) {
+            map = new HashMap<Card, Integer>();
+            map.put(null, damageDealt);
+        } else {
+            if (attacker.hasKeyword("Trample") || (blockers.size() > 1)) {
+                map = CMatchUI.SINGLETON_INSTANCE.getDamageToAssign(attacker, blockers, damageDealt, defender);
+            } else {
+                map = new HashMap<Card, Integer>();
+                map.put(blockers.get(0), damageDealt);
+            }
+        }
+        return map;
+    }
+    
+    private final boolean assignDamageAsIfNotBlocked(Card attacker) {
+        return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
+                || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                && GuiDialog.confirm(attacker, "Do you want to assign its combat damage as though it weren't blocked?"));
+    }    
 
 
 
