@@ -272,30 +272,29 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         pnl.setOpaque(false);
         pnl.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT)));
         
-        final Container parent = pnlRestrictions.getParent();
-        
         pnl.add(component, "h 30!, center");
         pnl.add(new FLabel.Builder().text("X").fontSize(10).hoverable(true)
                 .tooltip("Remove filter").cmdClick(new Command() {
                     @Override
                     public void execute() {
                         pnlRestrictions.remove(pnl);
-                        pnlRestrictions.validate();
-                        parent.validate();
-                        parent.repaint();
-                        
+                        refreshRestrictionWidgets();
                         onRemove.execute();
                     }
                 }).build(), "top");
 
         pnlRestrictions.add(pnl, "h 30!");
-
+        refreshRestrictionWidgets();
+    }
+    
+    public void refreshRestrictionWidgets() {
+        Container parent = pnlRestrictions.getParent();
         pnlRestrictions.validate();
         parent.validate();
         parent.repaint();
     }
     
-    public JComponent buildRangeRestrictionWidget(RangeTypes t) {
+    public JPanel buildRangeRestrictionWidget(RangeTypes t) {
         JPanel pnl = new JPanel(new MigLayout("insets 0, gap 2"));
         pnl.setOpaque(false);
         
@@ -309,7 +308,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         return pnl;
     }
 
-    public JComponent buildPlainRestrictionWidget(String label, String tooltip) {
+    public FLabel buildPlainRestrictionWidget(String label, String tooltip) {
         return new FLabel.Builder().text(label).tooltip(tooltip).fontSize(11).build();
     }
 }

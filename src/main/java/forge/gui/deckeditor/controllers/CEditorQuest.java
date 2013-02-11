@@ -147,8 +147,8 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableCatalog().removeCard(card, qty);
         this.getTableDeck().addCard(card, qty);
+        this.getTableCatalog().removeCard(card, qty);
         this.controller.notifyModelChanged();
     }
 

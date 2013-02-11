@@ -18,6 +18,7 @@ import java.util.Set;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
@@ -251,7 +252,8 @@ public enum CCardCatalog implements ICDoc {
             
             @Override
             public void keyPressed(KeyEvent e) {
-                keypressPending = true;
+                super.keyPressed(e);
+                keypressPending = KeyEvent.VK_ENTER != e.getKeyCode();
             }
         });
         
@@ -393,7 +395,7 @@ public enum CCardCatalog implements ICDoc {
     }
     
     @SuppressWarnings("serial")
-    private <T> void addRestriction(Pair<JComponent, Predicate<CardPrinted>> restriction, final Set<T> activeSet, final T key) {
+    private <T> void addRestriction(Pair<? extends JComponent, Predicate<CardPrinted>> restriction, final Set<T> activeSet, final T key) {
         final Predicate<CardPrinted> predicate = restriction.getRight();
         
         if (null != predicate && activePredicates.contains(predicate)) {
@@ -423,7 +425,7 @@ public enum CCardCatalog implements ICDoc {
         applyCurrentFilter();
     }
 
-    private Pair<JComponent, Predicate<CardPrinted>> buildRangeRestriction(RangeTypes t) {
+    private Pair<JPanel, Predicate<CardPrinted>> buildRangeRestriction(RangeTypes t) {
         Pair<FSpinner, FSpinner> s = VCardCatalog.SINGLETON_INSTANCE.getSpinners().get(t);
         s.getLeft().setValue(0);
         s.getRight().setValue(10);
@@ -443,7 +445,7 @@ public enum CCardCatalog implements ICDoc {
         return sb.toString();
     }
 
-    private Pair<JComponent, Predicate<CardPrinted>> buildSearchRestriction() {
+    private Pair<FLabel, Predicate<CardPrinted>> buildSearchRestriction() {
         boolean isInverse =
                 VCardCatalog.SEARCH_MODE_INVERSE_INDEX == VCardCatalog.SINGLETON_INSTANCE.getCbSearchMode().getSelectedIndex();
         String text = VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().getText();
@@ -466,7 +468,7 @@ public enum CCardCatalog implements ICDoc {
                 SFilterUtil.buildTextFilter(text, isInverse, wantName, wantType, wantText));
     }
     
-    private Pair<JComponent, Predicate<CardPrinted>> buildFormatRestriction(String displayName, GameFormat format, boolean allowReprints) {
+    private Pair<FLabel, Predicate<CardPrinted>> buildFormatRestriction(String displayName, GameFormat format, boolean allowReprints) {
         EditionCollection editions = Singletons.getModel().getEditions();
         StringBuilder tooltip = new StringBuilder("<html>Sets:");
         
@@ -527,11 +529,11 @@ public enum CCardCatalog implements ICDoc {
                 allowReprints ? format.getFilterRules() : format.getFilterPrinted());
     }
     
-    private Pair<JComponent, Predicate<CardPrinted>> buildSetRestriction(String displayName, List<String> setCodes, boolean allowReprints) {
+    private Pair<FLabel, Predicate<CardPrinted>> buildSetRestriction(String displayName, List<String> setCodes, boolean allowReprints) {
         return buildFormatRestriction(displayName, new GameFormat(null, setCodes, null), allowReprints);
     }
 
-    private Pair<JComponent, Predicate<CardPrinted>> buildWorldRestriction(QuestWorld world) {
+    private Pair<FLabel, Predicate<CardPrinted>> buildWorldRestriction(QuestWorld world) {
         GameFormatQuest format = world.getFormat();
         if (null == format) {
             // assumes that no world other than the main world will have a null format

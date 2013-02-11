@@ -271,7 +271,7 @@ public enum CDeckEditorUI implements CardContainer {
             // doesn't show '...' in the time between when we set the text and when we increase the size
             Dimension labelDimension = popupLabel.getPreferredSize();
             Dimension popupDimension = new Dimension(labelDimension.width + 12, labelDimension.height + 4);
-            SwingUtilities.getWindowAncestor(popupLabel).setSize(popupDimension);
+            SwingUtilities.getRoot(popupLabel).setSize(popupDimension);
         }
         
         private void _findNextMatch(int startIdx) {
@@ -317,7 +317,7 @@ public enum CDeckEditorUI implements CardContainer {
                 PopupFactory factory = PopupFactory.getSharedInstance();
                 Point tableLoc = tableView.getTable().getTableHeader().getLocationOnScreen();
                 popup = factory.getPopup(tableView.getTable(), popupLabel, tableLoc.x + 10, tableLoc.y + 10);
-                SwingUtilities.getWindowAncestor(popupLabel).setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+                SwingUtilities.getRoot(popupLabel).setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
                 
                 popupTimer = new Timer(5000, new ActionListener() {
                     @Override
