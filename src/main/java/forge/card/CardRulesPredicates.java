@@ -339,7 +339,7 @@ public final class CardRulesPredicates {
         @Override
         public boolean apply(final CardRules subject) {
             if (null == subject) {
-                return true;
+                return false;
             }
             switch (this.op) {
             case CountColors:
@@ -417,7 +417,7 @@ public final class CardRulesPredicates {
         @Override
         public boolean apply(final CardRules card) {
             if (null == card) {
-                return true;
+                return false;
             }
             return this.shouldBeEqual == card.getType().typeContains(this.operand);
         }
