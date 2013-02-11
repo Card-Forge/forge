@@ -68,6 +68,9 @@ public class GameActionPlay {
      */
     public final void playSpellAbilityForFree(final SpellAbility sa) {
         if (sa.getPayCosts() != null) {
+            if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+                CharmEffect.makeChoices(sa);
+            }
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
             final CostPayment payment = new CostPayment(sa.getPayCosts(), sa, game);
 
