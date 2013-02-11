@@ -223,7 +223,7 @@ public class ReplacementHandler {
                 }
             } else {
                 // AI-logic
-                if (!replacementEffect.aiShouldRun(effectSA, (AIPlayer)optDecider)) {
+                if (!replacementEffect.aiShouldRun(effectSA, (AIPlayer) optDecider)) {
                     return ReplacementResult.NotReplaced;
                 }
             }
@@ -239,7 +239,7 @@ public class ReplacementHandler {
         if (player.isHuman()) {
             game.getActionPlay().playSpellAbilityNoStack(player, effectSA, false);
         } else {
-            ComputerUtil.playNoStack((AIPlayer)player, effectSA, game);
+            ComputerUtil.playNoStack((AIPlayer) player, effectSA, game);
         }
 
         return ReplacementResult.Replaced;
@@ -278,6 +278,8 @@ public class ReplacementHandler {
         final String eventToReplace = mapParams.get("Event");
         if (eventToReplace.equals("Draw")) {
             ret = new ReplaceDraw(mapParams, host);
+        } else if (eventToReplace.equals("Discard")) {
+            ret = new ReplaceDiscard(mapParams, host);
         } else if (eventToReplace.equals("GainLife")) {
             ret = new ReplaceGainLife(mapParams, host);
         } else if (eventToReplace.equals("DamageDone")) {

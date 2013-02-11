@@ -1618,11 +1618,24 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
         }*/
+        final Card source = sa != null ? sa.getSourceCard() : null;
+
+        // Replacement effects
+        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        repRunParams.put("Event", "Discard");
+        repRunParams.put("Card", c);
+        repRunParams.put("Source", source);
+        repRunParams.put("Affected", this);
+
+        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+            return;
+        }
 
         game.getAction().discardMadness(c, this);
 
         boolean hasPutIntoPlayInsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.");
         boolean hasPutIntoPlayWith2xP1P1InsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.");
+        boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
 
         if ((hasPutIntoPlayInsteadOfDiscard || hasPutIntoPlayWith2xP1P1InsteadOfDiscard)
                 && null != sa && sa.getSourceCard().getController().isOpponentOf(c.getController())) {
@@ -1633,6 +1646,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             }
             // Play the corresponding Put into Play sound
             game.getEvents().post(new SpellResolvedEvent(c, sa));
+        } else if (discardToTopOfLibrary) {
+            game.getAction().moveToLibrary(c, 0);
         } else {
             game.getAction().moveToGraveyard(c);
 

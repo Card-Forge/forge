@@ -5889,6 +5889,7 @@ res/cardsfolder/l/liability.txt svneol=native#text/plain
 res/cardsfolder/l/liberate.txt svneol=native#text/plain
 res/cardsfolder/l/liberated_dwarf.txt svneol=native#text/plain
 res/cardsfolder/l/library_of_alexandria.txt svneol=native#text/plain
+res/cardsfolder/l/library_of_leng.txt -text
 res/cardsfolder/l/lich.txt svneol=native#text/plain
 res/cardsfolder/l/lich_lord_of_unx.txt svneol=native#text/plain
 res/cardsfolder/l/lichenthrope.txt svneol=native#text/plain
@@ -13761,6 +13762,7 @@ src/main/java/forge/card/mana/ManaPool.java svneol=native#text/plain
 src/main/java/forge/card/mana/package-info.java svneol=native#text/plain
 src/main/java/forge/card/package-info.java svneol=native#text/plain
 src/main/java/forge/card/replacement/ReplaceDamage.java -text
+src/main/java/forge/card/replacement/ReplaceDiscard.java -text
 src/main/java/forge/card/replacement/ReplaceDraw.java -text
 src/main/java/forge/card/replacement/ReplaceGainLife.java -text
 src/main/java/forge/card/replacement/ReplaceGameLoss.java -text
