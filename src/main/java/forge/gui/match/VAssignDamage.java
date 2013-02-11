@@ -72,7 +72,7 @@ public class VAssignDamage {
     private final GameEntity defender;
 
     private final JLabel lblTotalDamage = new FLabel.Builder().text("Available damage points: Unknown").build();
-
+    private final JLabel lblAssignRemaining = new FLabel.Builder().text("Distribute the remaining damage points among lethally wounded entities").build();
     //  Label Buttons
     private final FButton btnOK    = new FButton("OK");
     private final FButton btnReset = new FButton("Reset");
@@ -166,7 +166,8 @@ public class VAssignDamage {
         // Defenders area
         final JPanel pnlDefenders = new JPanel();
         pnlDefenders.setOpaque(false);
-        final String wrap = "wrap " + (attackerHasTrample ? defenderCards.size() + 1 : defenderCards.size());
+        int cols = attackerHasTrample ? defenderCards.size() + 1 : defenderCards.size();
+        final String wrap = "wrap " +  Integer.toString(cols);
         pnlDefenders.setLayout(new MigLayout("insets 0, gap 0, ax center, " + wrap));
 
         final FScrollPane scrDefenders = new FScrollPane(pnlDefenders);
@@ -205,15 +206,16 @@ public class VAssignDamage {
         btnOK.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent arg0) { finish(); } });
         btnReset.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignDamage(); } });
+            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(true); } });
         btnAuto.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignDamage(); finish(); } });
+            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(false); finish(); } });
 
         // Final UI layout
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
         pnlMain.add(pnlAttacker, "w 125px!, h 160px!, gap 50px 0 0 15px");
         pnlMain.add(pnlInfo, "gap 20px 0 0 15px");
         pnlMain.add(scrDefenders, "w 96%!, gap 2% 0 0 0, pushy, growy, ax center, span 2");
+        pnlMain.add(lblAssignRemaining, "w 96%!, gap 2% 0 0 0, ax center, span 2");
 
         JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
         pnlButtons.setOpaque(false);
@@ -232,7 +234,7 @@ public class VAssignDamage {
             }
         });
 
-        initialAssignDamage();
+        initialAssignDamage(true);
         SOverlayUtils.showOverlay();
 
         this.dlg.setUndecorated(true);
@@ -316,18 +318,18 @@ public class VAssignDamage {
     }
 
     // will assign all damage to defenders and rest to player, if present
-    private void initialAssignDamage() {
+    private void initialAssignDamage(boolean onlyFirstBlocker) {
         int dmgLeft = totalDamageToAssign;
         for(DamageTarget dt : defenders) {
             int lethal = getDamageToKill(dt.card);
             int damage = Math.min(lethal, dmgLeft);
             addDamage(dt.card, damage);
             dmgLeft -= damage;
-            if ( dmgLeft <= 0 ) break;
+            if ( dmgLeft <= 0 || onlyFirstBlocker ) break;
         }
         if ( dmgLeft < 0 )
             throw new RuntimeException("initialAssignDamage managed to assign more damage than it could");
-        if ( dmgLeft > 0 ) { // flush the remaining damage into last defender
+        if ( dmgLeft > 0 && !onlyFirstBlocker) { // flush the remaining damage into last defender
             DamageTarget dt = defenders.get(defenders.size()-1);
             addDamage(dt.card, dmgLeft );
         }
@@ -335,13 +337,11 @@ public class VAssignDamage {
     }
 
     /** Reset Assign Damage back to how it was at the beginning. */
-    private void resetAssignDamage() {
+    private void resetAssignedDamage() {
         for(DamageTarget dt : defenders)
             dt.damage = 0;
-
-        initialAssignDamage();
     }
-
+    
     private void addDamage(final Card card, int addedDamage) {
         // If we don't have enough left or we're trying to unassign too much return
         int canAssign = getRemainingDamage();
@@ -371,18 +371,20 @@ public class VAssignDamage {
     private void updateLabels() {
 
         int damageLeft = totalDamageToAssign;
+        boolean allHaveLethal = true;
         for ( DamageTarget dt : defenders )
         {
             int dmg = dt.damage;
             damageLeft -= dmg;
             int lethal = getDamageToKill(dt.card);
             String text = dmg >= lethal ? Integer.toString(dmg) + " (Lethal)" : Integer.toString(dmg);
+            allHaveLethal &= dmg >= lethal;
             dt.label.setText(text);
         }
 
         this.lblTotalDamage.setText(String.format("Available damage points: %d (of %d)", damageLeft, this.totalDamageToAssign));
         btnOK.setEnabled(damageLeft == 0);
-
+        lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);
     }
 
     // Dumps damage onto cards. Damage must be stored first, because if it is
