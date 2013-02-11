@@ -5,9 +5,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,8 +17,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.Singletons;
 import forge.game.MatchController;
-import forge.game.player.LobbyPlayer;
-import forge.game.player.PlayerStatistics;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
@@ -39,6 +35,10 @@ public class ViewWinLose {
     private final FButton btnContinue, btnRestart, btnQuit;
     private final JPanel pnlCustom;
 
+    private final JLabel lblTitle = new JLabel("WinLoseFrame > lblTitle needs updating.");
+    private final JLabel lblStats = new JLabel("WinLoseFrame > lblStats needs updating.");
+    private final JPanel pnlOutcomes = new JPanel(new MigLayout("wrap, align center"));
+    
     /**
      * @param match  */
     @SuppressWarnings("serial")
@@ -47,17 +47,12 @@ public class ViewWinLose {
 
         final JPanel pnlLeft = new JPanel();
         final JPanel pnlRight = new JPanel();
-        final List<JLabel> lblPlayerOutcomes= new ArrayList<JLabel>();
-        final JLabel lblTitle = new JLabel("WinLoseFrame > lblTitle needs updating.");
-        final JLabel lblStats = new JLabel("WinLoseFrame > lblStats needs updating.");
         final JScrollPane scrCustom = new JScrollPane();
         pnlCustom = new JPanel();
 
         btnContinue = new FButton();
         btnRestart = new FButton();
         btnQuit = new FButton();
-
-        final LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
 
         // Control of the win/lose is handled differently for various game modes.
         ControlWinLose control = null;
@@ -108,28 +103,6 @@ public class ViewWinLose {
         btnQuit.setFont(FSkin.getFont(22));
         btnContinue.setEnabled(!match.isMatchOver());
 
-        // Show Wins and Loses
-        final int humanWins = match.getGamesWonBy(human);
-        final int humanLosses = match.getPlayedGames().size() - humanWins;
-
-        for( Entry<LobbyPlayer, PlayerStatistics> p : match.getLastGameOutcome() ) {
-            String playerName = p.getKey().equals(human) ? "You have " : p.getKey().getName() + " has ";
-            JLabel lblOutcome = new JLabel(playerName + p.getValue().getOutcome().toString());
-            lblOutcome.setForeground(Color.white);
-            lblOutcome.setHorizontalAlignment(SwingConstants.CENTER);
-            lblOutcome.setFont(FSkin.getFont().deriveFont(Font.PLAIN, 14));
-            lblPlayerOutcomes.add(lblOutcome);
-        }
-        lblStats.setText(ForgeProps.getLocalized(WinLoseText.WON) + humanWins
-                + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses);
-
-        // Show "You Won" or "You Lost"
-        if (match.getLastGameOutcome().isWinner(human)) {
-            lblTitle.setText(ForgeProps.getLocalized(WinLoseText.WIN));
-        } else {
-            lblTitle.setText(ForgeProps.getLocalized(WinLoseText.LOSE));
-        }
-
         // Assemble game log scroller.
         final FTextArea txtLog = new FTextArea();
         txtLog.setText(Singletons.getModel().getGame().getGameLog().getLogText());
@@ -165,11 +138,10 @@ public class ViewWinLose {
             overlay.add(pnlLeft, "w 100%!, h 100%!");
         }
 
-        pnlLeft.add(lblTitle, "w 90%!, h 50px!, gap 5% 0 20px 0");
-        for(JLabel lbl : lblPlayerOutcomes) {
-            pnlLeft.add(lbl, "w 90%!, h 20px!, gap 5% 0 0 0");
-        }
-        pnlLeft.add(lblStats, "w 90%!, h 50px!, gap 5% 0 20px 0");
+        pnlOutcomes.setOpaque(false);
+        pnlLeft.add(lblTitle, "h 60px!, center");
+        pnlLeft.add(pnlOutcomes, "center");
+        pnlLeft.add(lblStats, "h 60px!, center");
 
         // A container must be made to ensure proper centering.
         final JPanel pnlButtons = new JPanel(new MigLayout("insets 0, wrap, ax center"));
@@ -188,7 +160,7 @@ public class ViewWinLose {
 
         pnlLog.add(new FLabel.Builder().text("Game Log").fontAlign(SwingConstants.CENTER)
                 .fontSize(18).fontStyle(Font.BOLD).build(),
-                "w 300px!, h 28px!, gap 0 0 20px 0");
+                "w 300px!, h 28px!, gaptop 20px");
 
         pnlLog.add(scrLog, "w 300px!, h 100px!, gap 0 0 10 10");
         pnlLog.add(btnCopyLog, "center, w pref+16, h pref+8");
@@ -210,6 +182,20 @@ public class ViewWinLose {
         SOverlayUtils.showOverlay();
     }
 
+    public void setTitle(String title) {
+        lblTitle.setText(title);
+    }
+    
+    public void setOutcomes(List<String> outcomes) {
+        for (String o : outcomes) {
+            pnlOutcomes.add(new FLabel.Builder().text(o).fontSize(14).build(), "h 20!");
+        }
+    }
+    
+    public void setStatsSummary(String statsSummary) {
+        lblStats.setText(statsSummary);
+    }
+    
     /** @return {@link forge.gui.toolbox.FButton} */
     public FButton getBtnContinue() {
         return this.btnContinue;

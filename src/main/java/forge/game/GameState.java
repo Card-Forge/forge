@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import com.google.common.eventbus.EventBus;
@@ -50,12 +51,15 @@ import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerType;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.MagicStack;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.ViewWinLose;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
 
 /**
  * Represents the state of a <i>single game</i> and is
@@ -316,12 +320,33 @@ public class GameState {
         }
         match.addGamePlayed(reason, this);
         
-        new ViewWinLose(match);
+        // add result entries to the game log
+        LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
+        String title = ForgeProps.getLocalized(match.getLastGameOutcome().isWinner(human) ? WinLoseText.WIN : WinLoseText.LOSE);
+        gameLog.add("Final", title, 0);
+        
+        List<String> outcomes = new ArrayList<String>();
+        for (Entry<LobbyPlayer, PlayerStatistics> p : match.getLastGameOutcome()) {
+            String outcome = String.format("%s %s", p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has",
+                    p.getValue().getOutcome().toString());
+            outcomes.add(outcome);
+            gameLog.add("Final", outcome, 0);
+        }
+        
+        int humanWins = match.getGamesWonBy(human);
+        int humanLosses = match.getPlayedGames().size() - humanWins;
+        String statsSummary = ForgeProps.getLocalized(WinLoseText.WON) + humanWins
+                + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses;
+        gameLog.add("Final", statsSummary, 0);
+
+        ViewWinLose v = new ViewWinLose(match);
+        v.setTitle(title);
+        v.setOutcomes(outcomes);
+        v.setStatsSummary(statsSummary);
+        
         // Play the win/lose sound
         boolean humanWon = match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer());
         getEvents().post(new DuelOutcomeEvent(humanWon));
-        
-        
     }
 
 
