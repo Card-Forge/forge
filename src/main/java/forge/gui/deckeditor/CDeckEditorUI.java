@@ -179,36 +179,50 @@ public enum CDeckEditorUI implements CardContainer {
     private void updateController() {
         EditorTableView<? extends InventoryItem> catView  = childController.getTableCatalog();
         EditorTableView<? extends InventoryItem> deckView = childController.getTableDeck();
-        JTable catTable  = catView.getTable();
-        JTable deckTable = deckView.getTable();
+        final JTable catTable  = catView.getTable();
+        final JTable deckTable = deckView.getTable();
         final _FindAsYouType catFind  = new _FindAsYouType(catView);
         final _FindAsYouType deckFind = new _FindAsYouType(deckView);
 
         catTable.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(final KeyEvent e) {
-                if (!isFindingAsYouType && e.getKeyChar() == ' ') { addSelectedCards(1); }
+            public void keyTyped(KeyEvent e) {
+                if (!isFindingAsYouType && ' ' == e.getKeyChar()) { addSelectedCards(1); }
+            }
+            
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                    deckTable.requestFocusInWindow();
+                }
             }
         });
 
         deckTable.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(final KeyEvent e) {
-                if (!isFindingAsYouType && e.getKeyChar() == ' ') { removeSelectedCards(1); }
+            public void keyTyped(KeyEvent e) {
+                if (!isFindingAsYouType && ' ' == e.getKeyChar()) { removeSelectedCards(1); }
+            }
+            
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                    catTable.requestFocusInWindow();
+                }
             }
         });
 
         catTable.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(final MouseEvent e) {
-                if (e.getClickCount() == 2) { addSelectedCards(1); }
+            public void mouseClicked(MouseEvent e) {
+                if (2 == e.getClickCount()) { addSelectedCards(1); }
             }
         });
 
         deckTable.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(final MouseEvent e) {
-                if (e.getClickCount() == 2) { removeSelectedCards(1); }
+            public void mouseClicked(MouseEvent e) {
+                if (2 == e.getClickCount()) { removeSelectedCards(1); }
             }
         });
 

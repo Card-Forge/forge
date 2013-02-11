@@ -204,6 +204,9 @@ public final class EditorTableView<T extends InventoryItem> {
             @Override
             public void focusGained(FocusEvent arg0) {
                 table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+                if (-1 == table.getSelectedRow() && 0 < table.getRowCount()) {
+                    table.setRowSelectionInterval(0, 0);
+                }
             }
         });
         
