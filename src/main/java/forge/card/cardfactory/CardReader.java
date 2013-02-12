@@ -61,47 +61,22 @@ import forge.view.FView;
  */
 public class CardReader {
 
-    // PM
     private static final String CARD_FILE_DOT_EXTENSION = ".txt";
-    // Braids on
-    // 8/18/11
-    // 11:04 PM
 
     /** Default charset when loading from files. */
     public static final String DEFAULT_CHARSET_NAME = "US-ASCII";
-    // Braids on
-    // 8/18/11
-    // 10:54 PM
 
     /** Regex that matches a single hyphen (-) or space. */
     public static final Pattern HYPHEN_OR_SPACE = Pattern.compile("[ -]");
 
     /** Regex for punctuation that we omit from card file names. */
     public static final Pattern PUNCTUATION_TO_ZAP = Pattern.compile("[,'\"]");
-    // by
-    // Braids
-    // on
-    // 8/18/11
-    // 10:54
-    // PM
 
     /** Regex that matches two or more underscores (_). */
     public static final Pattern MULTIPLE_UNDERSCORES = Pattern.compile("__+");
-    // by
-    // Braids
-    // on
-    // 8/18/11
-    // 10:54
-    // PM
 
     /** Special value for estimatedFilesRemaining. */
     protected static final int UNKNOWN_NUMBER_OF_FILES_REMAINING = -1;
-    // by
-    // Braids
-    // on
-    // 8/18/11
-    // 10:54
-    // PM
 
     private transient File cardsfolder;
 
