@@ -29,6 +29,7 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
+import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -741,7 +742,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
                 continue;
             }
@@ -837,7 +838,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
 
             // DealDamage triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
@@ -993,7 +994,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1141,7 +1142,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1266,7 +1267,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
@@ -1321,7 +1322,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {

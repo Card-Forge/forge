@@ -28,7 +28,6 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.FileSection;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -948,10 +947,6 @@ public class AbilityUtils {
         }
     
         return sas;
-    }
-
-    public static final Map<String, String> getMapParams(final String abString) {
-        return FileSection.parseToMap(abString, "$", "|");
     }
 
     public static ArrayList<String> getProtectionList(final SpellAbility sa) {

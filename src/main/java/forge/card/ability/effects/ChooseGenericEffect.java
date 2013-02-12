@@ -36,7 +36,7 @@ public class ChooseGenericEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final BiMap<String, String> choices = HashBiMap.create();
         for (String s : Arrays.asList(sa.getParam("Choices").split(","))) {
-            final Map<String, String> theseParams = AbilityUtils.getMapParams(host.getSVar(s));
+            final Map<String, String> theseParams = AbilityFactory.getMapParams(host.getSVar(s));
             choices.put(s, theseParams.get("ChoiceDescription"));
         }
 

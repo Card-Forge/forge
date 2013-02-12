@@ -29,6 +29,7 @@ import forge.card.spellability.SpellAbilityCondition;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.game.zone.ZoneType;
+import forge.util.FileSection;
 
 /**
  * <p>
@@ -61,7 +62,7 @@ public final class AbilityFactory {
 
         Map<String, String> mapParams;
         try {
-            mapParams = AbilityUtils.getMapParams(abString);
+            mapParams = AbilityFactory.getMapParams(abString);
         }
         catch (RuntimeException ex) {
             throw new RuntimeException(hostCard.getName() + ": " + ex.getMessage());
@@ -302,6 +303,10 @@ public final class AbilityFactory {
         System.out.println("SubAbility not found for: " + hostCard);
 
         return null;
+    }
+
+    public static final Map<String, String> getMapParams(final String abString) {
+        return FileSection.parseToMap(abString, "$", "|");
     }
 
 } // end class AbilityFactory
