@@ -19,7 +19,6 @@ package forge.gui.deckeditor.controllers;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +35,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckSection;
 import forge.gui.CardListViewer;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
@@ -99,7 +99,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     // get pricelist:
     private final ReadPriceList r = new ReadPriceList();
     private final Map<String, Integer> mapPrices = this.r.getPriceList();
-    private Map<CardPrinted, Integer> decksUsingMyCards;
+    private ItemPool<InventoryItem> decksUsingMyCards;
 
     // remember changed gui elements
     private String CCTabLabel = new String();
@@ -205,19 +205,16 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     }
 
     // fills number of decks using each card
-    private Map<CardPrinted, Integer> countDecksForEachCard() {
-        final Map<CardPrinted, Integer> result = new HashMap<CardPrinted, Integer>();
+    private ItemPool<InventoryItem> countDecksForEachCard() {
+        final ItemPool<InventoryItem> result = new ItemPool<InventoryItem>(InventoryItem.class);
         for (final Deck deck : this.questData.getMyDecks()) {
             for (final Entry<CardPrinted, Integer> e : deck.getMain()) {
-                final CardPrinted card = e.getKey();
-                final Integer amount = result.get(card);
-                result.put(card, Integer.valueOf(amount == null ? 1 : 1 + amount.intValue()));
+                result.add(e.getKey());
             }
-            for (final Entry<CardPrinted, Integer> e : deck.getSideboard()) {
-                final CardPrinted card = e.getKey();
-                final Integer amount = result.get(card);
-                result.put(card, Integer.valueOf(amount == null ? 1 : 1 + amount.intValue()));
-            }
+            if ( deck.has(DeckSection.Sideboard))
+                for (final Entry<CardPrinted, Integer> e : deck.get(DeckSection.Sideboard)) {
+                    result.add(e.getKey());
+                }
         }
         return result;
     }
@@ -281,14 +278,14 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.get(from.getKey());
+            final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.count(from.getKey());
             return iValue == null ? Integer.valueOf(0) : iValue;
         }
     };
     private final Function<Entry<InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.get(from.getKey());
+            final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.count(from.getKey());
             return iValue == null ? "" : iValue.toString();
         }
     };

@@ -29,6 +29,7 @@ import forge.Command;
 
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
@@ -180,7 +181,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         // remove bottom cards that are in the deck from the card pool
         cardpool.removeAll(deck.getMain());
         // remove sideboard cards from the catalog
-        cardpool.removeAll(deck.getSideboard());
+        cardpool.removeAll(deck.getOrCreate(DeckSection.Sideboard));
         // show cards, makes this user friendly
         this.getTableCatalog().setDeck(cardpool);
         this.getTableDeck().setDeck(deck.getMain());
@@ -204,7 +205,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     public void switchEditorMode(boolean isSideboarding) {
         if (isSideboarding) {
             this.getTableCatalog().setDeck(this.controller.getModel().getMain());
-            this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
+            this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
         } else {
             resetTables();
         }

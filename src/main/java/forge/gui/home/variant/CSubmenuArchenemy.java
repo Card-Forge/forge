@@ -14,6 +14,7 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.control.Lobby;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
 import forge.game.MatchController;
@@ -162,34 +163,31 @@ public enum CSubmenuArchenemy implements ICDoc {
                 Object obj = view.getArchenemySchemes().getSelectedValue();
 
                 boolean useDefault = VSubmenuArchenemy.SINGLETON_INSTANCE.getCbUseDefaultSchemes().isSelected();
-                useDefault &= !playerDecks.get(0).getSideboard().isEmpty();
+                useDefault &= playerDecks.get(0).has(DeckSection.Schemes);
 
                 System.out.println(useDefault);
                 if (useDefault) {
-
-                    schemes = playerDecks.get(0).getSideboard().toFlatList();
+                    schemes = playerDecks.get(0).get(DeckSection.Schemes).toFlatList();
                     System.out.println(schemes.toString());
                     usedDefaults = true;
-
                 } else {
-
                     if (obj instanceof String) {
                         String sel = (String) obj;
                         if (sel.equals("Random")) {
                             if (view.getAllSchemeDecks().isEmpty()) {
                                 //Generate if no constructed scheme decks are available
                                 System.out.println("Generating scheme deck - no others available");
-                                schemes = DeckgenUtil.generateSchemeDeck().getSideboard().toFlatList();
+                                schemes = DeckgenUtil.generateSchemeDeck().toFlatList();
                             } else {
                                 System.out.println("Using scheme deck: " + Aggregates.random(view.getAllSchemeDecks()).getName());
-                                schemes = Aggregates.random(view.getAllSchemeDecks()).getSideboard().toFlatList();
+                                schemes = Aggregates.random(view.getAllSchemeDecks()).get(DeckSection.Schemes).toFlatList();
                             }
                         } else {
                             //Generate
-                            schemes = DeckgenUtil.generateSchemeDeck().getSideboard().toFlatList();
+                            schemes = DeckgenUtil.generateSchemeDeck().toFlatList();
                         }
                     } else {
-                        schemes = ((Deck) obj).getSideboard().toFlatList();
+                        schemes = ((Deck) obj).get(DeckSection.Schemes).toFlatList();
                     }
                 }
                 if (schemes == null) {

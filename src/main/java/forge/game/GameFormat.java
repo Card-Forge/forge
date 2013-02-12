@@ -57,7 +57,7 @@ public class GameFormat {
      * @param bannedCards
      *            the banned cards
      */
-    public GameFormat(final String fName, final List<String> sets, final List<String> bannedCards) {
+    public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
         this.name = fName;
         this.allowedSetCodes = Lists.newArrayList(sets);
         this.bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);

@@ -44,6 +44,7 @@ import net.miginfocom.swing.MigLayout;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckRecognizer;
+import forge.deck.DeckSection;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.controllers.ACEditorBase;
@@ -230,7 +231,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             if (isMain) {
                 result.getMain().add(crd, t.getNumber());
             } else {
-                result.getSideboard().add(crd, t.getNumber());
+                result.getOrCreate(DeckSection.Sideboard).add(crd, t.getNumber());
             }
         }
         return result;

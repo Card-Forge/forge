@@ -15,6 +15,7 @@ import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
 import forge.control.input.InputPassPriority;
 import forge.deck.Deck;
+import forge.deck.CardPool;
 import forge.deck.DeckSection;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -138,14 +139,15 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public Deck sideboard(Deck deck, GameType gameType) {
-        DeckSection sideboard = deck.getSideboard();
+        CardPool sideboard = deck.get(DeckSection.Sideboard);
+        CardPool main = deck.get(DeckSection.Main);
 
         //  + deck.getSideboard().countAll()
-        int deckMinSize = Math.min(deck.getMain().countAll(), gameType.getDecksFormat().getMainRange().getMinimumInteger());
+        int deckMinSize = Math.min(main.countAll(), gameType.getDecksFormat().getMainRange().getMinimumInteger());
         //IntRange sbRange = gameType.getDecksFormat().getSideRange();
         int sideboardSize = sideboard.countAll();
     
-        DeckSection newSb = new DeckSection();
+        CardPool newSb = new CardPool();
         List<CardPrinted> newMain = null;
         
     
@@ -156,20 +158,21 @@ public class PlayerControllerHuman extends PlayerController {
                 JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             }
             
-            newMain = GuiChoose.order("Sideboard", "Main Deck", sideboardSize, deck.getSideboard().toFlatList(), deck.getMain().toFlatList(), null, true);
+            newMain = GuiChoose.order("Sideboard", "Main Deck", sideboardSize, sideboard.toFlatList(), main.toFlatList(), null, true);
         }
     
         newSb.clear();
-        newSb.addAll(deck.getMain());
-        newSb.addAll(deck.getSideboard());
+        newSb.addAll(main);
+        newSb.addAll(sideboard);
         for(CardPrinted c : newMain)
             newSb.remove(c);
     
         Deck res = (Deck) deck.copyTo(deck.getName());
         res.getMain().clear();
         res.getMain().add(newMain);
-        res.getSideboard().clear();
-        res.getSideboard().addAll(newSb);
+        CardPool resSb = res.getOrCreate(DeckSection.Sideboard);
+        resSb.clear();
+        resSb.addAll(newSb);
         return res;
     }
 

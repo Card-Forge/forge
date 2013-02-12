@@ -132,28 +132,31 @@ public enum DeckFormat {
         switch(this) {
             case Commander: //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
 
-                //TODO:Enforce color identity
-                if (null == deck.getCommander()) {
+                final CardPool cmd = deck.get(DeckSection.Commander);
+                if (null == cmd || cmd.isEmpty()) {
                     return "is missing a commander";
                 }
-                if (!deck.getCommander().getCard().getType().isLegendary()) {
+                if (!cmd.get(0).getCard().getType().isLegendary()) {
                     return "has a commander that is not a legendary creature";
                 }
+                
+                //TODO:Enforce color identity
                 
                 break;
 
             case Planechase: //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
-                if (deck.getSideboard().countAll() < 10) {
+                final CardPool planes = deck.get(DeckSection.Planes);
+                if (planes == null || planes.countAll() < 10) {
                     return "should gave at least 10 planes";
                 }
                 int phenoms = 0;
-                for (Entry<CardPrinted, Integer> cp : deck.getSideboard()) {
+                for (Entry<CardPrinted, Integer> cp : planes) {
 
                     if (cp.getKey().getCard().getType().typeContains(CardCoreType.Phenomenon)) {
                         phenoms++;
                     }
                     if (cp.getValue() > 1) {
-                        return "must not contain multiple copies of any Phenomena";
+                        return "must not contain multiple copies of any Plane or Phenomena";
                     }
 
                 }
@@ -163,13 +166,14 @@ public enum DeckFormat {
                 break;
 
             case Archenemy:  //Must contain at least 20 schemes, max 2 of each.
-                if (deck.getSideboard().countAll() < 20) {
+                final CardPool schemes = deck.get(DeckSection.Schemes);
+                if (schemes == null || schemes.countAll() < 20) {
                     return "must contain at least 20 schemes";
                 }
 
-                for (Entry<CardPrinted, Integer> cp : deck.getSideboard()) {
+                for (Entry<CardPrinted, Integer> cp : schemes) {
                     if (cp.getValue() > 2) {
-                        return "must not contain more than 2 copies of any Scheme";
+                        return String.format("must not contain more than 2 copies of any Scheme, but has %d of '%s'", cp.getValue(), cp.getKey().getName());
                     }
                 }
                 break;
@@ -181,11 +185,11 @@ public enum DeckFormat {
             //shared among the main deck and sideboard, except
             //basic lands and Relentless Rats
 
-            DeckSection tmp = new DeckSection(deck.getMain());
-            tmp.addAll(deck.getSideboard());
-            if (null != deck.getCommander() && this == Commander) {
-                tmp.add(deck.getCommander());
-            }
+            CardPool tmp = new CardPool(deck.getMain());
+            if ( deck.has(DeckSection.Sideboard))
+                tmp.addAll(deck.get(DeckSection.Sideboard));
+            if ( deck.has(DeckSection.Commander) && this == Commander)
+                tmp.addAll(deck.get(DeckSection.Commander));
 
             List<String> limitExceptions = Arrays.asList("Relentless Rats");
 
@@ -202,7 +206,7 @@ public enum DeckFormat {
         }
 
         // The sideboard must contain either 0 or 15 cards
-        int sideboardSize = deck.getSideboard().countAll();
+        int sideboardSize = deck.has(DeckSection.Sideboard) ? deck.get(DeckSection.Sideboard).countAll() : 0;
         IntRange sbRange = getSideRange();
         if (sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize)) {
             return sbRange.getMinimumInteger() == sbRange.getMaximumInteger()

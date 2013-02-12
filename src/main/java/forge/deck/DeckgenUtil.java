@@ -235,32 +235,37 @@ public class DeckgenUtil {
         }
 
         // Dump into map and display.
-        final Map<String, Integer> deckMap = new TreeMap<String, Integer>();
-
-        for (final Entry<CardPrinted, Integer> s : deck.getMain()) {
-            deckMap.put(s.getKey().getName(), s.getValue());
-        }
-
         final String nl = System.getProperty("line.separator");
         final StringBuilder deckList = new StringBuilder();
         final String dName = deck.getName();
-
         deckList.append(dName == null ? "" : dName + nl + nl);
 
-        if (deck.getAvatar() != null) {
-            deckList.append("Avatar: " + deck.getAvatar().getName() + nl + nl);
-        }
-        if (deck.getCommander() != null) {
-            deckList.append("Commander: " + deck.getCommander().getName() + nl + nl);
+        int nLines = 0;
+        for(DeckSection s : DeckSection.values()){
+            CardPool cp = deck.get(s);
+            if ( cp == null || cp.isEmpty() )
+                continue;
+            
+            deckList.append(s.toString()).append(": ");
+            if ( s.isSingleCard() ) {
+                deckList.append(cp.get(0).getName()).append(nl);
+                nLines++;
+            } else {
+                deckList.append(nl);
+                nLines++;
+                for (final Entry<CardPrinted, Integer> ev : cp) {
+                    deckList.append(ev.getValue()).append(" x ").append(ev.getKey()).append(nl);
+                    nLines++;
+                }
+            }
+            deckList.append(nl);
+            nLines++;
         }
 
-        for (final Entry<String, Integer> ev : deckMap.entrySet()) {
-            deckList.append(ev.getValue() + " x " + ev.getKey() + nl);
-        }
 
         final StringBuilder msg = new StringBuilder();
-        if (deckMap.keySet().size() <= 32) {
-            msg.append(deckList.toString() + nl);
+        if (nLines <= 32) {
+            msg.append(deckList.toString());
         } else {
             msg.append("Decklist too long for dialog." + nl + nl);
         }
@@ -308,8 +313,8 @@ public class DeckgenUtil {
         return result;
     }
 
-    public static Deck generateSchemeDeck() {
-        Deck res = new Deck();
+    public static CardPool generateSchemeDeck() {
+        CardPool schemes = new CardPool();
         List<CardPrinted> allSchemes = new ArrayList<CardPrinted>();
         for (CardPrinted c : CardDb.instance().getAllNonTraditionalCards()) {
             if (c.getCard().getType().isScheme()) {
@@ -321,20 +326,20 @@ public class DeckgenUtil {
         int attemptsLeft = 100; // to avoid endless loop
         while (schemesToAdd > 0 && attemptsLeft > 0) {
             CardPrinted cp = Aggregates.random(allSchemes);
-            int appearances = res.getSideboard().count(cp) + 1;
+            int appearances = schemes.count(cp) + 1;
             if (appearances < 2) {
-                res.getSideboard().add(cp);
+                schemes.add(cp);
                 schemesToAdd--;
             } else {
                 attemptsLeft--;
             }
         }
 
-        return res;
+        return schemes;
     }
     
-    public static Deck generatePlanarDeck() {
-        Deck res = new Deck();
+    public static CardPool generatePlanarDeck() {
+        CardPool res = new CardPool();
         List<CardPrinted> allPlanars = new ArrayList<CardPrinted>();
         for (CardPrinted c : CardDb.instance().getAllNonTraditionalCards()) {
             if (c.getCard().getType().isPlane() || c.getCard().getType().isPhenomenon()) {
@@ -351,15 +356,15 @@ public class DeckgenUtil {
             
             if(rndPlane.getCard().getType().isPhenomenon() && phenoms < 2)
             {
-                res.getSideboard().add(rndPlane);
+                res.add(rndPlane);
                 phenoms++;
             }
             else if (rndPlane.getCard().getType().isPlane())
             {
-                res.getSideboard().add(rndPlane);
+                res.add(rndPlane);
             }
             
-            if(allPlanars.isEmpty() || res.getSideboard().countAll() == targetsize)
+            if(allPlanars.isEmpty() || res.countAll() == targetsize)
             {
                 break;
             }

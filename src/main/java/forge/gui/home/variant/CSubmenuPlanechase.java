@@ -14,6 +14,7 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.control.Lobby;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.game.GameType;
 import forge.game.MatchController;
@@ -163,12 +164,12 @@ public enum CSubmenuPlanechase implements ICDoc {
                     Object obj = view.getPlanarDeckLists().get(i).getSelectedValue();
 
                     boolean useDefault = VSubmenuPlanechase.SINGLETON_INSTANCE.getCbUseDefaultPlanes().isSelected();
-                    useDefault &= !playerDecks.get(i).getSideboard().isEmpty();
+                    useDefault &= playerDecks.get(i).has(DeckSection.Planes);
     
                     System.out.println(useDefault);
                     if (useDefault) {
     
-                        planes = playerDecks.get(i).getSideboard().toFlatList();
+                        planes = playerDecks.get(i).get(DeckSection.Planes).toFlatList();
                         System.out.println(planes.toString());
     
                     } else {
@@ -179,19 +180,19 @@ public enum CSubmenuPlanechase implements ICDoc {
                                 if (view.getAllPlanarDecks().isEmpty()) {
                                     //Generate if no constructed scheme decks are available
                                     System.out.println("Generating planar deck - no others available");
-                                    planes = DeckgenUtil.generatePlanarDeck().getSideboard().toFlatList();
+                                    planes = DeckgenUtil.generatePlanarDeck().toFlatList();
                                 } else {
                                     System.out.println("Using planar deck: " + Aggregates.random(view.getAllPlanarDecks()).getName());
-                                    planes = Aggregates.random(view.getAllPlanarDecks()).getSideboard().toFlatList();
+                                    planes = Aggregates.random(view.getAllPlanarDecks()).get(DeckSection.Planes).toFlatList();
                                 }
                                 
                             } else {
     
                                 //Generate
-                                planes = DeckgenUtil.generatePlanarDeck().getSideboard().toFlatList();
+                                planes = DeckgenUtil.generatePlanarDeck().toFlatList();
                             }
                         } else {
-                            planes = ((Deck) obj).getSideboard().toFlatList();
+                            planes = ((Deck) obj).get(DeckSection.Planes).toFlatList();
                         }
                     }
                     if (planes == null) {

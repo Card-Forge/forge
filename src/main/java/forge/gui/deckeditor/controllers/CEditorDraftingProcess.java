@@ -22,8 +22,10 @@ import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.control.FControl;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.IBoosterDraft;
 import forge.gui.deckeditor.tables.DeckController;
@@ -171,15 +173,16 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         final Deck deck = new Deck();
 
         // add sideboard to deck
-        deck.getSideboard().addAll(this.getTableDeck().getCards());
+        CardPool side = deck.getOrCreate(DeckSection.Sideboard);
+        side.addAll(this.getTableDeck().getCards());
 
         final String landSet = IBoosterDraft.LAND_SET_CODE[0];
         final int landsCount = 20;
-        deck.getSideboard().add(CardDb.instance().getCard("Forest", landSet), landsCount);
-        deck.getSideboard().add(CardDb.instance().getCard("Mountain", landSet), landsCount);
-        deck.getSideboard().add(CardDb.instance().getCard("Swamp", landSet), landsCount);
-        deck.getSideboard().add(CardDb.instance().getCard("Island", landSet), landsCount);
-        deck.getSideboard().add(CardDb.instance().getCard("Plains", landSet), landsCount);
+        side.add(CardDb.instance().getCard("Forest", landSet), landsCount);
+        side.add(CardDb.instance().getCard("Mountain", landSet), landsCount);
+        side.add(CardDb.instance().getCard("Swamp", landSet), landsCount);
+        side.add(CardDb.instance().getCard("Island", landSet), landsCount);
+        side.add(CardDb.instance().getCard("Plains", landSet), landsCount);
 
         return deck;
     } // getPlayersDeck()

@@ -22,6 +22,7 @@ import forge.Command;
 
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
@@ -129,7 +130,7 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
     @Override
     public void resetTables() {
         final Deck toEdit = this.getSelectedDeck(this.controller.getModel());
-        this.getTableCatalog().setDeck(toEdit.getSideboard());
+        this.getTableCatalog().setDeck(toEdit.getOrCreate(DeckSection.Sideboard));
         this.getTableDeck().setDeck(toEdit.getMain());
     }
 

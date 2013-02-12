@@ -25,7 +25,9 @@ import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.DeckHints;
 import forge.card.mana.ManaCostShard;
+import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.deck.generate.GenerateDeckUtil;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -170,8 +172,9 @@ public class LimitedDeck {
         if (deckList.size() == 40) {
             Deck result = new Deck(generateName());
             result.getMain().add(deckList);
-            result.getSideboard().add(aiPlayables);
-            result.getSideboard().add(availableList);
+            CardPool cp = result.getOrCreate(DeckSection.Sideboard);
+            cp.add(aiPlayables);
+            cp.add(availableList);
             if (Preferences.DEV_MODE) {
                 debugFinalDeck();
             }

@@ -55,7 +55,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import forge.Singletons;
 import forge.card.CardEdition;
-import forge.deck.DeckSection;
+import forge.deck.CardPool;
 import forge.error.ErrorViewer;
 import forge.quest.data.GameFormatQuest;
 import forge.item.BoosterPack;
@@ -102,7 +102,7 @@ public class QuestDataIO {
         xStream.registerConverter(new QuestModeToXml());
         xStream.autodetectAnnotations(true);
         xStream.alias("CardPool", ItemPool.class);
-        xStream.alias("DeckSection", DeckSection.class);
+        xStream.alias("DeckSection", CardPool.class);
         return xStream;
     }
 
@@ -610,12 +610,12 @@ public class QuestDataIO {
         @SuppressWarnings("rawtypes")
         @Override
         public boolean canConvert(final Class clasz) {
-            return clasz.equals(DeckSection.class);
+            return clasz.equals(CardPool.class);
         }
 
         @Override
         public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-            for (final Entry<CardPrinted, Integer> e : (DeckSection) source) {
+            for (final Entry<CardPrinted, Integer> e : (CardPool) source) {
                 this.write(e.getKey(), e.getValue(), writer);
             }
 
@@ -623,7 +623,7 @@ public class QuestDataIO {
 
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
-            final DeckSection result = new DeckSection();
+            final CardPool result = new CardPool();
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
                 final String sCnt = reader.getAttribute("n");

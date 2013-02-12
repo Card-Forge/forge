@@ -112,16 +112,17 @@ public class MatchController {
         String statsSummary = ForgeProps.getLocalized(WinLoseText.WON) + humanWins
                 + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses;
         game.getGameLog().add("Final", statsSummary, 0);
-    
+
+
         ViewWinLose v = new ViewWinLose(this);
         v.setTitle(title);
         v.setOutcomes(outcomes);
         v.setStatsSummary(statsSummary);
         
         // Play the win/lose sound
-        boolean humanWon = result.isWinner(human);
-        game.getEvents().post(new DuelOutcomeEvent(humanWon));
+        game.getEvents().post(new DuelOutcomeEvent(result.isWinner(human)));
     }
+    
 
     /**
      * TODO: Write javadoc for this method.

@@ -20,7 +20,7 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-import forge.deck.DeckSection;
+import forge.deck.CardPool;
 import forge.error.ErrorViewer;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -164,12 +164,12 @@ public class GauntletIO {
         @SuppressWarnings("rawtypes")
         @Override
         public boolean canConvert(final Class clasz) {
-            return clasz.equals(DeckSection.class);
+            return clasz.equals(CardPool.class);
         }
 
         @Override
         public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-            for (final Entry<CardPrinted, Integer> e : (DeckSection) source) {
+            for (final Entry<CardPrinted, Integer> e : (CardPool) source) {
                 this.writeCardPrinted(e.getKey(), e.getValue(), writer);
             }
 
@@ -177,7 +177,7 @@ public class GauntletIO {
 
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
-            final DeckSection result = new DeckSection();
+            final CardPool result = new CardPool();
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
                 final String sCnt = reader.getAttribute("n");

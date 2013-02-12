@@ -20,6 +20,7 @@ import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
+import forge.deck.DeckSection;
 import forge.game.limited.ReadDraftRankings;
 import forge.game.GameType;
 import forge.game.limited.SealedDeck;
@@ -202,10 +203,10 @@ public enum CSubmenuSealed implements ICDoc {
         ItemPool<CardPrinted> aiDecks = sd.getCardpool(false);
 
         final Deck deck = new Deck(sDeckName);
-        deck.getSideboard().addAll(sDeck);
+        deck.getOrCreate(DeckSection.Sideboard).addAll(sDeck);
 
         for (final String element : Constant.Color.BASIC_LANDS) {
-            deck.getSideboard().add(element, sd.getLandSetCode()[0], 18);
+            deck.get(DeckSection.Sideboard).add(element, sd.getLandSetCode()[0], 18);
         }
 
         final DeckGroup sealed = new DeckGroup(sDeckName);

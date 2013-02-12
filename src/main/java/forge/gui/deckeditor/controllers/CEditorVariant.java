@@ -25,6 +25,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
@@ -131,7 +132,7 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
         allNT = Iterables.filter(allNT, cardPoolCondition);
         
         this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, CardPrinted.class), true);
-        this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
+        this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
     }
 
     /*

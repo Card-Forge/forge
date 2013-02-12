@@ -32,6 +32,7 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.FormatCollection;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -283,14 +284,8 @@ public final class QuestUtilCards {
         if (this.qa.getCredits() >= value) {
             this.qa.setCredits(this.qa.getCredits() - value);
             this.qa.getShopList().remove(precon);
-            addPreconDeck(precon);
+            this.addDeck(precon.getDeck());
         }
-    }
-
-    void addPreconDeck(PreconDeck precon) {
-        this.qc.getMyDecks().add(precon.getDeck());
-        this.addAllCards(precon.getDeck().getMain().toFlatList());
-        this.addAllCards(precon.getDeck().getSideboard().toFlatList());
     }
 
     /**
@@ -305,7 +300,8 @@ public final class QuestUtilCards {
         }
         this.qc.getMyDecks().add(fromDeck);
         this.addAllCards(fromDeck.getMain().toFlatList());
-        this.addAllCards(fromDeck.getSideboard().toFlatList());
+        if (fromDeck.has(DeckSection.Sideboard))
+            this.addAllCards(fromDeck.get(DeckSection.Sideboard).toFlatList());
     }
 
     /**
@@ -348,13 +344,13 @@ public final class QuestUtilCards {
         // remove sold cards from all decks:
         for (final Deck deck : this.qc.getMyDecks()) {
             int cntInMain = deck.getMain().count(card);
-            int cntInSb = deck.getSideboard().count(card);
+            int cntInSb = deck.has(DeckSection.Sideboard) ? deck.get(DeckSection.Sideboard).count(card) : 0;
             int nToRemoveFromThisDeck = cntInMain + cntInSb - leftInPool;
             if ( nToRemoveFromThisDeck <= 0 ) continue; // this is not the deck you are looking for
 
             int nToRemoveFromSb = cntInSb - nToRemoveFromThisDeck;
             if( nToRemoveFromSb > 0 ) {
-                deck.getSideboard().remove(card, nToRemoveFromSb);
+                deck.get(DeckSection.Sideboard).remove(card, nToRemoveFromSb);
                 nToRemoveFromThisDeck -= cntInSb; // actual removed count should be, but I take upper bound here
                 if ( nToRemoveFromThisDeck <= 0 ) continue; // done here
             }

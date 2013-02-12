@@ -15,6 +15,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
@@ -137,11 +138,10 @@ public enum CSubmenuVanguard implements ICDoc {
                     Object obj = view.getAvatarLists().get(i).getSelectedValue();
 
                     boolean useDefault = VSubmenuVanguard.SINGLETON_INSTANCE.getCbDefaultAvatars().isSelected();
-                    useDefault &= playerDecks.get(i).getAvatar() != null;
+                    useDefault &= playerDecks.get(i).get(DeckSection.Avatar) != null;
 
                     if (useDefault) {
-
-                        avatar = playerDecks.get(i).getAvatar();
+                        avatar = playerDecks.get(i).get(DeckSection.Avatar).get(0);
                         defaultAvatarInfo.append("Player " + (i + 1) + ": ");
                         defaultAvatarInfo.append(avatar.getName() + nl);
                         usedDefaults = true;

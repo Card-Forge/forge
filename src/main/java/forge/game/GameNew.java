@@ -28,6 +28,7 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.InputControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
+import forge.deck.CardPool;
 import forge.deck.DeckSection;
 import forge.game.event.FlipCoinEvent;
 import forge.game.phase.PhaseHandler;
@@ -49,7 +50,7 @@ import forge.util.MyRandom;
  */
 public class GameNew {
 
-    private static void preparePlayerLibrary(Player player, final ZoneType zoneType, DeckSection secion, boolean canRandomFoil, Random generator) {
+    private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool secion, boolean canRandomFoil, Random generator) {
         PlayerZone library = player.getZone(zoneType);
         for (final Entry<CardPrinted, Integer> stackOfCards : secion) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
@@ -112,7 +113,7 @@ public class GameNew {
 
             GameType gameType = Singletons.getModel().getMatch().getGameType();
             boolean isFirstGame = Singletons.getModel().getMatch().getPlayedGames().isEmpty();
-            boolean hasSideboard = !psc.getOriginalDeck().getSideboard().isEmpty();
+            boolean hasSideboard = psc.getOriginalDeck().has(DeckSection.Sideboard);
             boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed() && hasSideboard;
          
             if (canSideBoard) {
@@ -126,7 +127,8 @@ public class GameNew {
             Random generator = MyRandom.getRandom();
 
             preparePlayerLibrary(player, ZoneType.Library, myDeck.getMain(), canRandomFoil, generator);
-            preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.getSideboard(), canRandomFoil, generator);
+            if(hasSideboard)
+                preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), canRandomFoil, generator);
             
             // Shuffling
             if (player instanceof AIPlayer && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND)) {
@@ -190,13 +192,12 @@ public class GameNew {
 
     private static List<CardPrinted> getCardsAiCantPlayWell(final Deck toUse) {
         List<CardPrinted> result = new ArrayList<CardPrinted>();
-        for (Entry<CardPrinted, Integer> cp : toUse.getMain()) {
-            if ( cp.getKey().getCard().getRemAIDecks() ) 
-                result.add(cp.getKey());
-        }
-        for (Entry<CardPrinted, Integer> cp : toUse.getSideboard()) {
-            if ( cp.getKey().getCard().getRemAIDecks() ) 
-                result.add(cp.getKey());
+        
+        for ( Entry<DeckSection, CardPool> ds : toUse ) {
+            for (Entry<CardPrinted, Integer> cp : ds.getValue()) {
+                if ( cp.getKey().getCard().getRemAIDecks() ) 
+                    result.add(cp.getKey());
+            }
         }
         return result;
     }
@@ -204,18 +205,17 @@ public class GameNew {
     private static Set<CardPrinted> getRemovedAnteCards(Deck toUse) {
         final String keywordToRemove = "Remove CARDNAME from your deck before playing if you're not playing for ante.";
         Set<CardPrinted> myRemovedAnteCards = new HashSet<CardPrinted>();
-        for (Entry<CardPrinted, Integer> cp : toUse.getMain()) {
-            if ( cp.getKey().getCard().rulesContain(keywordToRemove) ) 
-                myRemovedAnteCards.add(cp.getKey());
-        }
-        for (Entry<CardPrinted, Integer> cp : toUse.getSideboard()) {
-            if ( cp.getKey().getCard().rulesContain(keywordToRemove) ) 
-                myRemovedAnteCards.add(cp.getKey());
+        for ( Entry<DeckSection, CardPool> ds : toUse ) {
+            for (Entry<CardPrinted, Integer> cp : ds.getValue()) {
+                if ( cp.getKey().getCard().rulesContain(keywordToRemove) ) 
+                    myRemovedAnteCards.add(cp.getKey());
+            }
         }
 
         for(CardPrinted cp: myRemovedAnteCards) {
-            toUse.getMain().remove(cp, 4);
-            toUse.getSideboard().remove(cp, 4);
+            for ( Entry<DeckSection, CardPool> ds : toUse ) {
+                ds.getValue().remove(cp, Integer.MAX_VALUE);
+            }
         }
         return myRemovedAnteCards;
     }

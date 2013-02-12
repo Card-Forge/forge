@@ -20,6 +20,7 @@ package forge.deck;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,6 @@ import com.google.common.base.Function;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
-import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
@@ -53,16 +53,13 @@ import forge.util.FileUtil;
  * @author Forge
  * @version $Id$
  */
-public class Deck extends DeckBase {
+public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPool>> {
     /**
      *
      */
     private static final long serialVersionUID = -7478025567887481994L;
 
-    private final DeckSection main;
-    private final DeckSection sideboard; // commander, planes or schemes are also stored here
-    private CardPrinted avatar;
-    private CardPrinted commander;
+    private final Map<DeckSection, CardPool> parts = new EnumMap<DeckSection, CardPool>(DeckSection.class);
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -81,18 +78,10 @@ public class Deck extends DeckBase {
      */
     public Deck(final String name0) {
         super(name0);
-        this.main = new DeckSection();
-        this.sideboard = new DeckSection();
-        this.avatar = null;
+        getOrCreate(DeckSection.Main);
     }
 
-    /**
-     * <p>
-     * hashCode.
-     * </p>
-     * 
-     * @return a int.
-     */
+
     @Override
     public int hashCode() {
         return this.getName().hashCode();
@@ -104,13 +93,28 @@ public class Deck extends DeckBase {
         return this.getName();
     }
 
-    public DeckSection getMain() {
-        return this.main;
+    public CardPool getMain() {
+        return this.parts.get(DeckSection.Main);
     }
 
-    // variants' extra deck sections used instead of sideboard (planes, commander, schemes) are here as well as usual sideboards
-    public DeckSection getSideboard() {
-        return this.sideboard;
+    // may return nulls
+    public CardPool get(DeckSection deckSection) {
+        return this.parts.get(deckSection);
+    }
+    
+    public boolean has(DeckSection deckSection) {
+        final CardPool cp = get(deckSection);
+        return cp != null && !cp.isEmpty();
+    }
+    
+    // will return new if it was absent
+    public CardPool getOrCreate(DeckSection deckSection) {
+        CardPool p = get(deckSection);
+        if ( p != null )
+            return p;
+        p = new CardPool();
+        this.parts.put(deckSection, p);
+        return p;
     }
 
     /*
@@ -120,7 +124,7 @@ public class Deck extends DeckBase {
      */
     @Override
     public ItemPoolView<CardPrinted> getCardPool() {
-        return this.main;
+        return this.parts.get(DeckSection.Main);
     }
 
     /* (non-Javadoc)
@@ -130,10 +134,11 @@ public class Deck extends DeckBase {
     protected void cloneFieldsTo(final DeckBase clone) {
         super.cloneFieldsTo(clone);
         final Deck result = (Deck) clone;
-        result.main.addAll(this.main);
-        result.sideboard.addAll(this.sideboard);
-        result.avatar = this.avatar;
-        result.commander = this.commander;
+        for(Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+            CardPool cp = new CardPool();
+            result.parts.put(kv.getKey(), cp);
+            cp.addAll(kv.getValue());
+        }
     }
 
     /*
@@ -186,20 +191,23 @@ public class Deck extends DeckBase {
         final Deck d = new Deck(dh.getName());
         d.setComment(dh.getComment());
 
-        d.getMain().set(Deck.readCardList(sections.get("main")));
-        d.getSideboard().set(Deck.readCardList(sections.get("sideboard")));
-        // try also earlier deck formats
-        if ( d.getSideboard().isEmpty() ) { d.getSideboard().set(Deck.readCardList(sections.get("schemes"))); }
-        if ( d.getSideboard().isEmpty() ) { d.getSideboard().set(Deck.readCardList(sections.get("planes"))); }
-        
-        List<String> av = Deck.readCardList(sections.get("avatar"));
-        String avName = av.isEmpty() ? null : av.get(0);
-        d.avatar = CardDb.instance().isCardSupported(avName) ? CardDb.instance().getCard(avName) : null;
+        for(Entry<String, List<String>> s : sections.entrySet()) {
+            DeckSection sec = DeckSection.smartValueOf(s.getKey());
+            if ( null == sec )
+                continue;
+            
+            CardPool pool = new CardPool();
+            pool.set(Deck.readCardList(s.getValue()));
 
-        List<String> cmd = Deck.readCardList(sections.get("commander"));
-        String cmdName = cmd.isEmpty() ? null : cmd.get(0);
-        d.commander = CardDb.instance().isCardSupported(cmdName) ? CardDb.instance().getCard(cmdName) : null;
+            // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
+            CardPrinted sample = pool.get(0); 
+            if ( sample != null && ( sample.getCard().getType().isPlane() || sample.getCard().getType().isPhenomenon() ) )
+                sec = DeckSection.Planes;
+            if ( sample != null && sample.getCard().getType().isScheme() )
+                sec = DeckSection.Schemes;
 
+            d.parts.put(sec, pool);
+        }
         return d;
     }
 
@@ -270,38 +278,13 @@ public class Deck extends DeckBase {
             out.add(String.format("%s=%s", DeckFileHeader.COMMENT, this.getComment().replaceAll("\n", "")));
         }
 
-        out.add(String.format("%s", "[main]"));
-        out.addAll(Deck.writeCardPool(this.getMain()));
-
-        out.add("[sideboard]");
-        out.addAll(Deck.writeCardPool(this.getSideboard()));
-
-        if (getAvatar() != null) {
-            out.add("[avatar]");
-            out.add(Deck.serializeSingleCard(getAvatar(), 1));
-        }
-
-        if (getCommander() != null) {
-            out.add("[commander]");
-            out.add(Deck.serializeSingleCard(getCommander(), 1));
+        for(Entry<DeckSection, CardPool> s : parts.entrySet()) {
+            out.add(String.format("[%s]", s.getKey().toString()));
+            out.addAll(Deck.writeCardPool(s.getValue()));
         }
         return out;
     }
 
-    /**
-     * @return the commander
-     */
-    public CardPrinted getCommander() {
-        return commander;
-    }
-
-
-    /**
-     * @return the avatar
-     */
-    public CardPrinted getAvatar() {
-        return avatar;
-    }
 
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
         @Override
@@ -309,4 +292,12 @@ public class Deck extends DeckBase {
             return arg1.getName();
         }
     };
+
+    /* (non-Javadoc)
+     * @see java.lang.Iterable#iterator()
+     */
+    @Override
+    public Iterator<Entry<DeckSection, CardPool>> iterator() {
+        return parts.entrySet().iterator();
+    }
 }

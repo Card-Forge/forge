@@ -24,6 +24,7 @@ import forge.Command;
 
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.SEditorUtil;
@@ -155,7 +156,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
 
             this.getTableCatalog().setAvailableColumns(lstCatalogCols);
             this.getTableCatalog().setDeck(this.controller.getModel().getMain());
-            this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
+            this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
         } else {
             lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
             this.getTableCatalog().setAvailableColumns(lstCatalogCols);

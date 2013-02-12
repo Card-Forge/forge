@@ -4,14 +4,17 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
 import forge.Command;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.gui.framework.ICDoc;
@@ -225,19 +228,14 @@ public enum CSubmenuQuestData implements ICDoc {
         if (null == prizedPoolType) {
             fmtPrizes = fmtStartPool;
             if (null == fmtPrizes && dckStartPool != null) { // build it form deck
-                List<String> sets = new ArrayList<String>();
+                Set<String> sets = new HashSet<String>();
                 for (Entry<CardPrinted, Integer> c : dckStartPool.getMain()) {
-                    String edition = c.getKey().getEdition();
-                    if (!sets.contains(edition)) {
-                        sets.add(edition);
-                    }
+                    sets.add(c.getKey().getEdition());
                 }
-                for (Entry<CardPrinted, Integer> c : dckStartPool.getSideboard()) {
-                    String edition = c.getKey().getEdition();
-                    if (!sets.contains(edition)) {
-                        sets.add(edition);
+                if (dckStartPool.has(DeckSection.Sideboard))
+                    for (Entry<CardPrinted, Integer> c : dckStartPool.get(DeckSection.Sideboard)) {
+                        sets.add(c.getKey().getEdition());
                     }
-                }
                 fmtPrizes = new GameFormat("From deck", sets, null);
             }
          } else {

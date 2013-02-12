@@ -42,6 +42,7 @@ import forge.control.FControl;
 import forge.deck.CardCollections;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.ACEditorBase;
@@ -151,7 +152,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             row.add(new EditButton(row), "w 10%!, h 20px!, gaptop 5px");
             row.add(new GenericLabel(d.getName()), "w 58%!, h 20px!, gaptop 5px");
             row.add(new MainLabel(String.valueOf(d.getMain().countAll())), "w 10%, h 20px!, gaptop 5px");
-            row.add(new GenericLabel(String.valueOf(d.getSideboard().countAll())), "w 10%!, h 20px!, gaptop 5px");
+            row.add(new GenericLabel(d.has(DeckSection.Sideboard) ? String.valueOf(d.get(DeckSection.Sideboard).countAll()) : "none"), "w 10%!, h 20px!, gaptop 5px");
             this.add(row, "w 98%!, h 30px!, gapleft 1%");
             tempRows.add(row);
         }
