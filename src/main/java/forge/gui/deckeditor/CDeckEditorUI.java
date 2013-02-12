@@ -261,7 +261,7 @@ public enum CDeckEditorUI implements CardContainer {
         private Popup popup;
         private Timer popupTimer;
         private final EditorTableView<? extends InventoryItem> tableView;
-        static final int okModifiers = KeyEvent.SHIFT_DOWN_MASK | KeyEvent.ALT_GRAPH_DOWN_MASK;
+        static final int okModifiers = KeyEvent.SHIFT_MASK | KeyEvent.ALT_GRAPH_MASK;
         
         public _FindAsYouType(EditorTableView<? extends InventoryItem> tableView) {
             this.tableView = tableView;
