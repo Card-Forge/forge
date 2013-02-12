@@ -320,18 +320,19 @@ public class VAssignDamage {
     // will assign all damage to defenders and rest to player, if present
     private void initialAssignDamage(boolean onlyFirstBlocker) {
         int dmgLeft = totalDamageToAssign;
-        for(DamageTarget dt : defenders) {
+        DamageTarget dtLast = null;
+        for(DamageTarget dt : defenders) { // MUST NOT RUN WITH EMPTY collection
             int lethal = getDamageToKill(dt.card);
             int damage = Math.min(lethal, dmgLeft);
             addDamage(dt.card, damage);
             dmgLeft -= damage;
+            dtLast = dt;
             if ( dmgLeft <= 0 || onlyFirstBlocker ) break;
         }
         if ( dmgLeft < 0 )
             throw new RuntimeException("initialAssignDamage managed to assign more damage than it could");
-        if ( dmgLeft > 0 && !onlyFirstBlocker) { // flush the remaining damage into last defender
-            DamageTarget dt = defenders.get(defenders.size()-1);
-            addDamage(dt.card, dmgLeft );
+        if ( dmgLeft > 0) { // flush the remaining damage into last defender
+            addDamage(dtLast.card, dmgLeft );
         }
         updateLabels();
     }
