@@ -55,10 +55,8 @@ public class ChooseCardEffect extends SpellEffect {
                 ? CardFactoryUtil.xCount(host, host.getSVar(sa.getParam("Amount"))) : Integer.parseInt(numericAmount);
 
         if (sa.hasParam("SunderingTitan")) {
-            final List<Card> land = Singletons.getModel().getGame().getLandsInPlay();
-            final ArrayList<String> basic = CardType.getBasicTypes();
-
-            for (final String type : basic) {
+            final List<Card> land = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+            for (final String type : CardType.getBasicTypes()) {
                 final List<Card> cl = CardLists.getType(land, type);
                 if (cl.size() > 0) {
                     final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;

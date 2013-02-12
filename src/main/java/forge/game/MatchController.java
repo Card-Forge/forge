@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import forge.Singletons;
 import forge.Constant.Preferences;
@@ -12,8 +13,10 @@ import forge.control.FControl;
 import forge.control.input.InputControl;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
+import forge.game.event.DuelOutcomeEvent;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiInput;
@@ -21,6 +24,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
+import forge.gui.match.ViewWinLose;
 import forge.gui.match.controllers.CDock;
 import forge.gui.match.controllers.CLog;
 import forge.gui.match.controllers.CMessage;
@@ -28,6 +32,8 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.properties.ForgePreferences.FPref;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
 import forge.util.Aggregates;
 
 /**
@@ -87,6 +93,34 @@ public class MatchController {
         GameOutcome result = new GameOutcome(reason, game.getRegisteredPlayers());
         result.setTurnsPlayed(game.getPhaseHandler().getTurn());
         gamesPlayed.add(result);
+
+        // add result entries to the game log
+        LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
+        String title = ForgeProps.getLocalized(result.isWinner(human) ? WinLoseText.WIN : WinLoseText.LOSE);
+        game.getGameLog().add("Final", title, 0);
+        
+        List<String> outcomes = new ArrayList<String>();
+        for (Entry<LobbyPlayer, PlayerStatistics> p : result) {
+            String outcome = String.format("%s %s", p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has",
+                    p.getValue().getOutcome().toString());
+            outcomes.add(outcome);
+            game.getGameLog().add("Final", outcome, 0);
+        }
+        
+        int humanWins = getGamesWonBy(human);
+        int humanLosses = getPlayedGames().size() - humanWins;
+        String statsSummary = ForgeProps.getLocalized(WinLoseText.WON) + humanWins
+                + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses;
+        game.getGameLog().add("Final", statsSummary, 0);
+    
+        ViewWinLose v = new ViewWinLose(this);
+        v.setTitle(title);
+        v.setOutcomes(outcomes);
+        v.setStatsSummary(statsSummary);
+        
+        // Play the win/lose sound
+        boolean humanWon = result.isWinner(human);
+        game.getEvents().post(new DuelOutcomeEvent(humanWon));
     }
 
     /**

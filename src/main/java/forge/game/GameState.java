@@ -21,14 +21,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import com.google.common.eventbus.EventBus;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates.Presets;
 import forge.ColorChanger;
 import forge.GameLog;
 import forge.Singletons;
@@ -39,7 +37,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.game.event.DuelOutcomeEvent;
 import forge.game.phase.Cleanup;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfCombat;
@@ -51,15 +48,11 @@ import forge.game.player.AIPlayer;
 import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
-import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerType;
 import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.match.ViewWinLose;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
 
 /**
  * Represents the state of a <i>single game</i> and is
@@ -271,7 +264,7 @@ public class GameState {
      * @return the next timestamp
      */
     public final long getNextTimestamp() {
-        this.setTimestamp(this.getTimestamp() + 1);
+        this.timestamp = this.getTimestamp() + 1;
         return this.getTimestamp();
     }
 
@@ -283,17 +276,6 @@ public class GameState {
     public final long getTimestamp() {
         return this.timestamp;
     }
-
-    /**
-     * Sets the timestamp.
-     * 
-     * @param timestamp0
-     *            the timestamp to set
-     */
-    protected final void setTimestamp(final long timestamp0) {
-        this.timestamp = timestamp0;
-    }
-
 
     /**
      * @return the replacementHandler
@@ -319,39 +301,7 @@ public class GameState {
             p.onGameOver();
         }
         match.addGamePlayed(reason, this);
-        
-        // add result entries to the game log
-        LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
-        String title = ForgeProps.getLocalized(match.getLastGameOutcome().isWinner(human) ? WinLoseText.WIN : WinLoseText.LOSE);
-        gameLog.add("Final", title, 0);
-        
-        List<String> outcomes = new ArrayList<String>();
-        for (Entry<LobbyPlayer, PlayerStatistics> p : match.getLastGameOutcome()) {
-            String outcome = String.format("%s %s", p.getKey().equals(human) ? "You have" : p.getKey().getName() + " has",
-                    p.getValue().getOutcome().toString());
-            outcomes.add(outcome);
-            gameLog.add("Final", outcome, 0);
-        }
-        
-        int humanWins = match.getGamesWonBy(human);
-        int humanLosses = match.getPlayedGames().size() - humanWins;
-        String statsSummary = ForgeProps.getLocalized(WinLoseText.WON) + humanWins
-                + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses;
-        gameLog.add("Final", statsSummary, 0);
-
-        ViewWinLose v = new ViewWinLose(match);
-        v.setTitle(title);
-        v.setOutcomes(outcomes);
-        v.setStatsSummary(statsSummary);
-        
-        // Play the win/lose sound
-        boolean humanWon = match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer());
-        getEvents().post(new DuelOutcomeEvent(humanWon));
     }
-
-
-    // THESE WERE MOVED HERE FROM AllZoneUtil
-    // They must once become non-static members of this class
 
     public Zone getZoneOf(final Card c) {
         if (getStackZone().contains(c)) {
@@ -404,10 +354,6 @@ public class GameState {
             cards.addAll(getCardsIn(z));
         }
         return cards;
-    }
-
-    public List<Card> getLandsInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
 
     public boolean isCardExiled(final Card c) {
@@ -514,8 +460,7 @@ public class GameState {
     public Player getNextPlayerAfter(final Player playerTurn) {
         int iPlayer = roIngamePlayers.indexOf(playerTurn);
 
-        if (-1 == iPlayer && !roIngamePlayers.isEmpty()) { // should do something if playerTurn has just lost!
-
+        if (-1 == iPlayer && !roIngamePlayers.isEmpty()) { // if playerTurn has just lost
             int iAlive;
             iPlayer = allPlayers.indexOf(playerTurn);
             do {
@@ -535,7 +480,7 @@ public class GameState {
     }
 
     /**
-     * Only game knows how to make siutable players out of just connected clients.
+     * Only game knows how to get suitable players out of just connected clients.
      * @return
      */
     public Player getIngamePlayer(LobbyPlayer player) {
