@@ -17,6 +17,8 @@
  */
 package forge.card.ability;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -307,6 +309,20 @@ public final class AbilityFactory {
 
     public static final Map<String, String> getMapParams(final String abString) {
         return FileSection.parseToMap(abString, "$", "|");
+    }
+
+    public static final void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {
+        List<ZoneType> origin = new ArrayList<ZoneType>();
+        if (params.containsKey("Origin")) {
+            origin = ZoneType.listValueOf(params.get("Origin"));
+        }
+    
+        final Target tgt = sa.getTarget();
+    
+        // Don't set the zone if it targets a player
+        if ((tgt != null) && !tgt.canTgtPlayer()) {
+            sa.getTarget().setZone(origin);
+        }
     }
 
 } // end class AbilityFactory

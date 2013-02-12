@@ -3,7 +3,6 @@ package forge.card.ability;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,7 +19,6 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -518,20 +516,6 @@ public class AbilityUtils {
         return Integer.parseInt(amount) * multiplier;
     }
 
-    public static void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {
-        List<ZoneType> origin = new ArrayList<ZoneType>();
-        if (params.containsKey("Origin")) {
-            origin = ZoneType.listValueOf(params.get("Origin"));
-        }
-    
-        final Target tgt = sa.getTarget();
-    
-        // Don't set the zone if it targets a player
-        if ((tgt != null) && !tgt.canTgtPlayer()) {
-            sa.getTarget().setZone(origin);
-        }
-    }
-
     /**
      * <p>
      * getDefinedObjects.
@@ -971,39 +955,14 @@ public class AbilityUtils {
         return gains;
     }
 
-    /**
-     * <p>
-     * resolveSubAbilities.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @since 1.0.15
-     */
-    public static void resolveSubAbilities(final SpellAbility sa, boolean usedStack, final GameState game) {
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub == null || sa.isWrapper()) {
-            // every resolving spellAbility will end here
-            if (usedStack) {
-                SpellAbility root = sa.getRootAbility();
-                game.getStack().finishResolving(root, false);
-            }
-            return;
-        }
-        // check conditions
-        AbilityUtils.resolveApiAbility(abSub, usedStack, game);
-    }
+    
 
-    /**
-     * <p>
-     * resolve.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param usedStack
-     *            a boolean.
-     */
+    
+    /////////////////////////////////////////////////////////////////////////////////////
+    //
+    // BELOW ARE resove() METHOD AND ITS DEPENDANTS, CONSIDER MOVING TO DEDICATED CLASS
+    //
+    /////////////////////////////////////////////////////////////////////////////////////
     public static void resolve(final SpellAbility sa, final boolean usedStack) {
         if (sa == null) {
             return;
@@ -1021,21 +980,21 @@ public class AbilityUtils {
         AbilityUtils.resolveApiAbility(sa, usedStack, game);
     }
 
-    /**
-     * <p>
-     * isSorcerySpeed.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    public static boolean isSorcerySpeed(final SpellAbility sa) {
-        return ( sa.isSpell() &&  sa.getSourceCard().isSorcery() ) 
-            || ( sa.isAbility() && sa.getRestrictions().isSorcerySpeed() );
+    private static void resolveSubAbilities(final SpellAbility sa, boolean usedStack, final GameState game) {
+        final AbilitySub abSub = sa.getSubAbility();
+        if (abSub == null || sa.isWrapper()) {
+            // every resolving spellAbility will end here
+            if (usedStack) {
+                SpellAbility root = sa.getRootAbility();
+                game.getStack().finishResolving(root, false);
+            }
+            return;
+        }
+        // check conditions
+        AbilityUtils.resolveApiAbility(abSub, usedStack, game);
     }
 
-    public static void handleUnlessCost(final SpellAbility sa, final boolean usedStack, final GameState game) {
+    private static void handleUnlessCost(final SpellAbility sa, final boolean usedStack, final GameState game) {
         final Card source = sa.getSourceCard();
         String unlessCost = sa.getParam("UnlessCost");
         unlessCost = unlessCost.trim();

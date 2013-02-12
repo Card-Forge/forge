@@ -110,7 +110,7 @@ public class DrawAi extends SpellAiLogic {
         }
         if ((!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
                     || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !AbilityUtils.isSorcerySpeed(sa)
+                && !sa.hasParam("PlayerTurn") && !SpellAiLogic.isSorcerySpeed(sa)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1) {
             return false;
         }
@@ -124,7 +124,7 @@ public class DrawAi extends SpellAiLogic {
                             // stuff
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
-        if (AbilityUtils.isSorcerySpeed(sa)) {
+        if (SpellAiLogic.isSorcerySpeed(sa)) {
             randomReturn = true;
         }
         if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)

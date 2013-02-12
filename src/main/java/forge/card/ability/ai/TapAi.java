@@ -6,6 +6,7 @@ import java.util.Random;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
+import forge.card.ability.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseHandler;
@@ -30,7 +31,7 @@ public class TapAi extends TapAiBase {
             // Tap things down if it's Human's turn
         } else if (turn == ai && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // Tap creatures down if in combat -- handled in tapPrefTargeting().
-        } else if (AbilityUtils.isSorcerySpeed(sa)) {
+        } else if (SpellAiLogic.isSorcerySpeed(sa)) {
             // Cast it if it's a sorcery.
         } else {
             // Generally don't want to tap things with an Instant during AI turn outside of combat

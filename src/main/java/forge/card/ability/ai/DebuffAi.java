@@ -60,7 +60,7 @@ public class DebuffAi extends SpellAiLogic {
                 || !Singletons.getModel().getGame().getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            if (!AbilityUtils.isSorcerySpeed(sa)) {
+            if (!SpellAiLogic.isSorcerySpeed(sa)) {
                 return false;
             }
         }

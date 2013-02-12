@@ -30,7 +30,7 @@ public class CommonSpell extends Spell {
         }
 
         if (effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect) {
-            AbilityUtils.adjustChangeZoneTarget(params, this);
+            AbilityFactory.adjustChangeZoneTarget(params, this);
         }
     }
 

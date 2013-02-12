@@ -44,7 +44,7 @@ public class AnimateAi extends SpellAiLogic {
         // Combat_Begin step
         if (!Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
                 && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(aiPlayer)
-                && !AbilityUtils.isSorcerySpeed(sa)
+                && !SpellAiLogic.isSorcerySpeed(sa)
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
             return false;
         }

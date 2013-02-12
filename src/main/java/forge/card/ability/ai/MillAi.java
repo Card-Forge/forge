@@ -64,7 +64,7 @@ public class MillAi extends SpellAiLogic {
 
         double chance = .4; // 40 percent chance of milling with instant speed
                             // stuff
-        if (AbilityUtils.isSorcerySpeed(sa)) {
+        if (SpellAiLogic.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed
         }
 

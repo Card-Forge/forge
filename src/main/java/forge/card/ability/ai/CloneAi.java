@@ -37,7 +37,7 @@ public class CloneAi extends SpellAiLogic {
         // don't use instant speed clone abilities outside computers
         // Combat_Begin step
         if (!phase.is(PhaseType.COMBAT_BEGIN)
-                && phase.isPlayerTurn(ai) && !AbilityUtils.isSorcerySpeed(sa)
+                && phase.isPlayerTurn(ai) && !SpellAiLogic.isSorcerySpeed(sa)
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
             return false;
         }

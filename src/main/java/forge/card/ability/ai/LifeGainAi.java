@@ -100,7 +100,7 @@ public class LifeGainAi extends SpellAiLogic {
         // Don't use lifegain before main 2 if possible
         if (!lifeCritical && (!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
                 || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !AbilityUtils.isSorcerySpeed(sa)) {
+                && !sa.hasParam("PlayerTurn") && !SpellAiLogic.isSorcerySpeed(sa)) {
             return false;
         }
 

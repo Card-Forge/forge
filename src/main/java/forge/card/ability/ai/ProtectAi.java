@@ -141,7 +141,7 @@ public class ProtectAi extends SpellAiLogic {
         if ((Singletons.getModel().getGame().getStack().size() == 0) && Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
             // Instant-speed protections should not be cast outside of combat
             // when the stack is empty
-            if (!AbilityUtils.isSorcerySpeed(sa)) {
+            if (!SpellAiLogic.isSorcerySpeed(sa)) {
                 return false;
             }
         } else if (Singletons.getModel().getGame().getStack().size() > 0) {

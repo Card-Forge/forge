@@ -106,7 +106,7 @@ public class TokenAi extends SpellAiLogic {
                 || ph.getPhase().isBefore(
                         PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn")
-                && !AbilityUtils.isSorcerySpeed(sa) && !haste) {
+                && !SpellAiLogic.isSorcerySpeed(sa) && !haste) {
             return false;
         }
         if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(

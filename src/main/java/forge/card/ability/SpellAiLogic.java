@@ -51,6 +51,20 @@ public abstract class SpellAiLogic {
 
     /**
      * <p>
+     * isSorcerySpeed.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    protected static boolean isSorcerySpeed(final SpellAbility sa) {
+        return ( sa.isSpell() &&  sa.getSourceCard().isSorcery() ) 
+            || ( sa.isAbility() && sa.getRestrictions().isSorcerySpeed() );
+    }
+
+    /**
+     * <p>
      * playReusable.
      * </p>
      * 
