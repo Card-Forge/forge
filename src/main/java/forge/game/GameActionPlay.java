@@ -9,6 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
+import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -407,9 +408,9 @@ public class GameActionPlay {
                 game.getStack().add(sa);
                 return;
             } else if (sa.getBeforePayMana() == null) {
-                matchInput.setInput(new InputPayManaCost(sa, manaCost));
+                Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCost(sa, manaCost));
             } else {
-                matchInput.setInput(sa.getBeforePayMana());
+                Singletons.getModel().getMatch().getInput().setInput(sa.getBeforePayMana());
             }
         }
     }
