@@ -33,7 +33,7 @@ import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.Singletons;
 
-import forge.card.abilityfactory.ApiType;
+import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;

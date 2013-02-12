@@ -9,7 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;

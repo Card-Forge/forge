@@ -24,7 +24,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;

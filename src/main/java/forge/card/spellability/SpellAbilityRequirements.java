@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPayment;
 import forge.game.zone.Zone;
 

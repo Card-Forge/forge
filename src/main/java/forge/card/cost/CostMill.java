@@ -24,7 +24,7 @@ import java.util.List;
 import forge.Card;
 
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;

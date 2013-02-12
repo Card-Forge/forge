@@ -34,8 +34,8 @@ import forge.CounterType;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityFactory;
+import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
@@ -1509,7 +1509,7 @@ public final class GameActionUtil {
      * @param abMana
      *            a {@link forge.card.spellability.AbilityMana} object.
      * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     *            a {@link forge.card.ability.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.

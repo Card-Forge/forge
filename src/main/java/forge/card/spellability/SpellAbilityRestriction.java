@@ -25,7 +25,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;

@@ -24,7 +24,7 @@ import java.util.List;
 import forge.Card;
 import forge.Singletons;
 import forge.card.CardType;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

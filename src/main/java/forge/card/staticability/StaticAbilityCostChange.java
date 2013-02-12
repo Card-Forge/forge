@@ -20,7 +20,7 @@ package forge.card.staticability;
 import java.util.HashMap;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;

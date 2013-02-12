@@ -35,7 +35,7 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.card.CardType;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.effects.AttachEffect;
+import forge.card.ability.effects.AttachEffect;
 import forge.card.cost.Cost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;

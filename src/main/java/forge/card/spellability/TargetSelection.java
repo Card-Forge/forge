@@ -27,7 +27,7 @@ import forge.Card;
 import forge.Singletons;
 
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

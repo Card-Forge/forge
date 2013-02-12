@@ -26,7 +26,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.input.Input;

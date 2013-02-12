@@ -21,7 +21,7 @@ import com.google.common.base.Strings;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost2;

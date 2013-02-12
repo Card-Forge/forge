@@ -28,7 +28,7 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;

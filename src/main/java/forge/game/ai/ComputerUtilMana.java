@@ -12,7 +12,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;

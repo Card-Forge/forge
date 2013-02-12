@@ -33,7 +33,7 @@ import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;

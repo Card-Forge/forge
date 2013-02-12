@@ -35,7 +35,7 @@ import forge.Command;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.ability.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;

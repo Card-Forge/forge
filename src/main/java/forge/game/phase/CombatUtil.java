@@ -37,7 +37,7 @@ import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.effects.SacrificeEffect;
+import forge.card.ability.effects.SacrificeEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;

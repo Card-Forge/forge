@@ -8,7 +8,7 @@ import java.util.Map;
 import forge.Card;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.ApiType;
+import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilitySub;

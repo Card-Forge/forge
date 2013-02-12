@@ -28,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardCharacteristics;
 import forge.card.EditionInfo;
-import forge.card.abilityfactory.AbilityUtils;
+import forge.card.ability.AbilityUtils;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -487,7 +487,7 @@ public final class CardUtil {
      * @param abMana
      *            a {@link forge.card.spellability.AbilityMana} object.
      * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     *            a {@link forge.card.ability.AbilityFactory} object.
      * @param colors
      *            a {@link java.util.ArrayList} object.
      * @param parents
