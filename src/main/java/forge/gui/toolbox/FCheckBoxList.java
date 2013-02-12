@@ -34,9 +34,11 @@ public class FCheckBoxList extends JList {
                 int index = locationToIndex(e.getPoint());
 
                 if (index != -1) {
-                    FCheckBox checkbox = (FCheckBox) getModel().getElementAt(index);
-                    checkbox.setSelected(!checkbox.isSelected());
-                    repaint();
+                    FCheckBox checkbox = (FCheckBox)getModel().getElementAt(index);
+                    if (checkbox.isEnabled()) {
+                        checkbox.setSelected(!checkbox.isSelected());
+                        repaint();
+                    }
                 }
             }
         });
@@ -46,7 +48,7 @@ public class FCheckBoxList extends JList {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() == ' ') {
                     FCheckBox item = (FCheckBox)getSelectedValue();
-                    if (null == item) {
+                    if (null == item || !item.isEnabled()) {
                         return;
                     }
                     
@@ -80,10 +82,9 @@ public class FCheckBoxList extends JList {
     
     protected class CellRenderer implements ListCellRenderer {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            FCheckBox checkbox = (FCheckBox) value;
+            FCheckBox checkbox = (FCheckBox)value;
             checkbox.setBackground(isSelected ? getSelectionBackground() : getBackground());
             checkbox.setForeground(isSelected ? getSelectionForeground() : getForeground());
-            checkbox.setEnabled(isEnabled());
             checkbox.setFont(getFont());
             checkbox.setFocusPainted(false);
             checkbox.setBorderPainted(true);
