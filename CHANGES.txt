@@ -94,11 +94,57 @@ Fixes/Features:
 - implement ctrl-f/enter hotkeys for transferring focus between text filter box and card catalog table
 - Added Discard replacement event
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- getCard(str,bool) now returns planes or schemes properly
+- add match result info to game log
+- avoid NPE (hopefully -- testing will tell) for Windows users in find-as-you-type popup
+- unbreak ctrl/cmd+enter as text search filter shortcut
+- add card to deck before removing from catalog to ensure selected card details show up properly
+- prepare for editable restrictions
+- autoselect text in search filter and range restriction textboxes on focus
+- autofocus first field in range restriction when a range restriction is added
+- don't select value when spinner value changes -- just when it's focused
+- playSpellAbilityForFree will now setup charms.
+- City in a Bottle will no longer prevent lands to be played.
+- autofocus on first duel/challenge when opening the Duels/Challenges page
+- allow Enter to start the match when focused on an opponent
+- first blocker is assigned all damage initially
+- Text showing how much damage above lethal is assigned to each creature
+- remove unused variable
+- moved all static members from AbilityFactory to AbilityUtils.java
+- renamed package abilityfactory to ability (sorry about possible tree conflicts)
+- AbilityFactory.getAbility is now static - no need to create instance of AbilityFactory to parse an ability
+- getMapParams moved back to AbilityFactory (since method's responsibility is also parsing)
+- isSorcerrySpeed moved to SpellAiLogic (since used only by its descendants)
+- adjustChangeZoneTarget moved back to ability/AbilityFactory.java (since called by Common[Spell|Ability|Drawback] classes' ctors)
+- resolve method and its auxiliary methods groupped in bottom part of AbilityUtils file
+- Converted Dodecapod, Loxodon Smiter, Obstinate Baloth and Wilt-Leaf Liege from keywords to replacement effects.
+- Added DiscardMeByOpp param and applied to relevant cards (I've prioritised from 1 - 3, 3 being most dangerous to discard, but priority checking isn't actually applied yet. Plan to expand when I have more free time).
+- minor - remove multiline comments like 'by Braids on xx\xx\11'
+- gamelog entries are filled in MatchController class for now, at least displaying gamewinlose is not gamestate's responsibility
+- GameState.getLandsInPlay inlined
+- Fixed DamageDeal StackDescription string builder (to script Crush Underfoot)
+- Initial commit of "TargetsWithSameController" (check the parent targets, might be used in Bioshift and Simic Guildmage in future)
+- Re-disabled Alpha and Beta in the Custom quest format dialog.
+- Very minor checkstyle (removed extra whitespace).
+- Added Setinfos to recent cards
+- A small fix
+- forget to paste something
+- revert 19547 and fix underlying issue in FCheckBoxList that was overriding the isEnabled setting of the checkboxes
+- player cannot deassign damage from 1st blocker below its lethal damage
+- The "ValidCard" parameter in the cantPlayLand stAb is now functional.
+- City in a Bottle will now prevents playing of ARN lands.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
 
+
+
+Added the following Vanguard Avatar:
+
+Sisters of Stone Death Avatar
+Viridian Zealot Avatar
 
 
 Added the following Phenomenons:
@@ -113,6 +159,46 @@ Ghosts of the Innocent
 Pendrell Flux
 Disruption Aura
 Library of Leng
+Temporal Extortion
+Aven Shrine
+Bloom Tender
+Bomb Squad
+Cabal Shrine
+Chant of Vitu-Ghazi
+Covenant of Minds
+Crashing Boars
+Crush Underfoot
+Desecrator Hag
+Dwarven Shrine
+Eye for an Eye
+Hint of Insanity
+Holistic Wisdom
+Infectious Rage
+Knowledge Exploitation
+Lightning Dart
+Memory Crystal
+Mist of Stagnation
+Moonring Mirror
+Nantuko Shrine
+Phyrexian Purge
+Planeswalker's Mischief
+Protean Hulk
+Purgatory
+Quenchable Fire
+Retribution
+Reviving Vapors
+Reweave
+Sapphire Drake
+Searing Rays
+Sisters of Stone Death Avatar
+Sphinx Ambassador
+Talara's Bane
+Thelon of Havenwood
+Mist of Stagnation
+Unforge
+Viridian Zealot Avatar
+Warren Weirding
+Worldpurge
 
 
 end
