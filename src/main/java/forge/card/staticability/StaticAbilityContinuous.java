@@ -390,8 +390,7 @@ public class StaticAbilityContinuous {
             if (addAbilities != null) {
                 for (final String abilty : addAbilities) {
                     if (abilty.startsWith("AB")) { // grant the ability
-                        final AbilityFactory af = new AbilityFactory();
-                        final SpellAbility sa = af.getAbility(abilty, affectedCard);
+                        final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard);
                         sa.setType("Temporary");
                         sa.setOriginalHost(hostCard);
                         affectedCard.addSpellAbility(sa);

@@ -119,7 +119,6 @@ public class InputMulligan extends Input {
 
         // Human Leylines & Chancellors
         ButtonUtil.reset();
-        final AbilityFactory af = new AbilityFactory();
 
         final GameAction ga = game.getAction();
         for (Player p : game.getPlayers()) {
@@ -134,7 +133,7 @@ public class InputMulligan extends Input {
                         if (kw.startsWith("MayEffectFromOpeningHand")) {
                             final String effName = kw.split(":")[1];
 
-                            final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
+                            final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
                             if (GuiDialog.confirm(c, "Use this card's ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
@@ -156,7 +155,7 @@ public class InputMulligan extends Input {
                             if (kw.startsWith("MayEffectFromOpeningHand")) {
                                 final String effName = kw.split(":")[1];
 
-                                final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
+                                final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
 
                                 // Is there a better way for the AI to decide this?
                                 if (effect.doTrigger(false, (AIPlayer)p)) {

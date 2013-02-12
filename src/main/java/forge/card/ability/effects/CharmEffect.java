@@ -21,8 +21,7 @@ public class CharmEffect extends SpellEffect {
         List<AbilitySub> choices = new ArrayList<AbilitySub>();
         for (final String saChoice : saChoices) {
             final String ab = source.getSVar(saChoice);
-            final AbilityFactory charmAF = new AbilityFactory();
-            choices.add((AbilitySub) charmAF.getAbility(ab, source));
+            choices.add((AbilitySub) AbilityFactory.getAbility(ab, source));
         }
         return choices;
     }

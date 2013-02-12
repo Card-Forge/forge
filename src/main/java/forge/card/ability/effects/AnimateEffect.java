@@ -163,9 +163,8 @@ public class AnimateEffect extends AnimateEffectBase {
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
             if (abilities.size() > 0) {
                 for (final String s : abilities) {
-                    final AbilityFactory newAF = new AbilityFactory();
                     final String actualAbility = host.getSVar(s);
-                    final SpellAbility grantedAbility = newAF.getAbility(actualAbility, c);
+                    final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
                     addedAbilities.add(grantedAbility);
                     c.addSpellAbility(grantedAbility);
                 }

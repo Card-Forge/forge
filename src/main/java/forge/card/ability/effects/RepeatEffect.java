@@ -24,11 +24,10 @@ public class RepeatEffect extends SpellEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final AbilityFactory afRepeat = new AbilityFactory();
         Card source = sa.getSourceCard();
 
         // setup subability to repeat
-        final SpellAbility repeat = afRepeat.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), source);
+        final SpellAbility repeat = AbilityFactory.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), source);
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
 

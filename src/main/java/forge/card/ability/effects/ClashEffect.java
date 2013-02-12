@@ -25,7 +25,6 @@ public class ClashEffect extends SpellEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final AbilityFactory afOutcomes = new AbilityFactory();
         final boolean victory = sa.getSourceCard().getController().clashWithOpponent(sa.getSourceCard());
 
         // Run triggers
@@ -34,7 +33,7 @@ public class ClashEffect extends SpellEffect {
 
         if (victory) {
             if (sa.hasParam("WinSubAbility")) {
-                final SpellAbility win = afOutcomes.getAbility(
+                final SpellAbility win = AbilityFactory.getAbility(
                         sa.getSourceCard().getSVar(sa.getParam("WinSubAbility")), sa.getSourceCard());
                 win.setActivatingPlayer(sa.getSourceCard().getController());
                 ((AbilitySub) win).setParent(sa);
@@ -44,7 +43,7 @@ public class ClashEffect extends SpellEffect {
             runParams.put("Won", "True");
         } else {
             if (sa.hasParam("OtherwiseSubAbility")) {
-                final SpellAbility otherwise = afOutcomes.getAbility(
+                final SpellAbility otherwise = AbilityFactory.getAbility(
                         sa.getSourceCard().getSVar(sa.getParam("OtherwiseSubAbility")), sa.getSourceCard());
                 otherwise.setActivatingPlayer(sa.getSourceCard().getController());
                 ((AbilitySub) otherwise).setParent(sa);

@@ -17,7 +17,6 @@
  */
 package forge.card.ability;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -39,17 +38,7 @@ import forge.game.zone.ZoneType;
  * @author Forge
  * @version $Id$
  */
-public class AbilityFactory {
-
-    /**
-     * <p>
-     * Constructor for AbilityFactory.
-     * </p>
-     */
-    public AbilityFactory() {
-    }
-
-    // *******************************************************
+public final class AbilityFactory {
 
     /**
      * <p>
@@ -62,7 +51,7 @@ public class AbilityFactory {
      *            a {@link forge.Card} object.
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final SpellAbility getAbility(final String abString, final Card hostCard) {
+    public static final SpellAbility getAbility(final String abString, final Card hostCard) {
 
         SpellAbility spellAbility = null;
 
@@ -70,22 +59,17 @@ public class AbilityFactory {
         boolean isSp = false;
         boolean isDb = false;
 
-        ApiType api = null;
-
-        Card hostC = hostCard;
-        Map<String, String> mapParams = new HashMap<String, String>();
-
-
+        Map<String, String> mapParams;
         try {
             mapParams = AbilityUtils.getMapParams(abString);
         }
         catch (RuntimeException ex) {
-
             throw new RuntimeException(hostCard.getName() + ": " + ex.getMessage());
         }
 
         // parse universal parameters
 
+        ApiType api = null;
         if (mapParams.containsKey("AB")) {
             isAb = true;
             api = ApiType.smartValueOf(mapParams.get("AB"));
@@ -108,7 +92,7 @@ public class AbilityFactory {
 
         }
 
-        Target abTgt = mapParams.containsKey("ValidTgts") ? readTarget(hostC, mapParams) : null;
+        Target abTgt = mapParams.containsKey("ValidTgts") ? readTarget(hostCard, mapParams) : null;
 
         // ***********************************
         // Match API keywords. These are listed in alphabetical order.
@@ -151,11 +135,6 @@ public class AbilityFactory {
         }
 
 
-        // //////////////////////
-        //
-        // End API matching. The above APIs are listed in alphabetical order.
-        //
-        // //////////////////////
 
         if (spellAbility == null) {
             final StringBuilder msg = new StringBuilder();
@@ -172,7 +151,7 @@ public class AbilityFactory {
 
         if (mapParams.containsKey("References")) {
             for (String svar : mapParams.get("References").split(",")) {
-                spellAbility.setSVar(svar, hostC.getSVar(svar));
+                spellAbility.setSVar(svar, hostCard.getSVar(svar));
             }
         }
 
@@ -214,7 +193,7 @@ public class AbilityFactory {
         return spellAbility;
     }
 
-    private Target readTarget(Card hostC, Map<String, String> mapParams) {
+    private static final Target readTarget(Card hostC, Map<String, String> mapParams) {
         final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
         final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
@@ -279,7 +258,7 @@ public class AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param mapParams
      */
-    private void makeRestrictions(final SpellAbility sa, Map<String, String> mapParams) {
+    private static final void makeRestrictions(final SpellAbility sa, Map<String, String> mapParams) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityRestriction restrict = sa.getRestrictions();
         if (mapParams.containsKey("Flashback")) {
@@ -297,7 +276,7 @@ public class AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param mapParams
      */
-    private void makeConditions(final SpellAbility sa, Map<String, String> mapParams) {
+    private static final void makeConditions(final SpellAbility sa, Map<String, String> mapParams) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityCondition condition = sa.getConditions();
         if (mapParams.containsKey("Flashback")) {
@@ -315,11 +294,10 @@ public class AbilityFactory {
      * 
      * @return a {@link forge.card.spellability.AbilitySub} object.
      */
-    private final AbilitySub getSubAbility(Card hostCard, String sSub) {
+    private static final AbilitySub getSubAbility(Card hostCard, String sSub) {
 
         if (!sSub.equals("")) {
-            final AbilityFactory afDB = new AbilityFactory();
-            return (AbilitySub) afDB.getAbility(sSub, hostCard);
+            return (AbilitySub) AbilityFactory.getAbility(sSub, hostCard);
         }
         System.out.println("SubAbility not found for: " + hostCard);
 

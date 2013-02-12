@@ -12,7 +12,6 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
-import forge.Constant.Color;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;

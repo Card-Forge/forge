@@ -120,10 +120,9 @@ public class EffectEffect extends SpellEffect {
         // Grant abilities
         if (effectAbilities != null) {
             for (final String s : effectAbilities) {
-                final AbilityFactory abFactory = new AbilityFactory();
                 final String actualAbility = hostCard.getSVar(s);
 
-                final SpellAbility grantedAbility = abFactory.getAbility(actualAbility, eff);
+                final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, eff);
                 eff.addSpellAbility(grantedAbility);
             }
         }

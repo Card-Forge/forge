@@ -37,7 +37,6 @@ public class FlipCoinEffect extends SpellEffect {
             caller.add(player);
         }
 
-        final AbilityFactory afOutcomes = new AbilityFactory();
         final boolean victory = GuiDialog.flipCoin(caller.get(0), sa.getSourceCard());
 
         // Run triggers
@@ -52,7 +51,7 @@ public class FlipCoinEffect extends SpellEffect {
                 host.addRemembered(host);
             }
             if (sa.hasParam("WinSubAbility")) {
-                final SpellAbility win = afOutcomes.getAbility(host.getSVar(sa.getParam("WinSubAbility")), host);
+                final SpellAbility win = AbilityFactory.getAbility(host.getSVar(sa.getParam("WinSubAbility")), host);
                 win.setActivatingPlayer(player);
                 ((AbilitySub) win).setParent(sa);
 
@@ -64,7 +63,7 @@ public class FlipCoinEffect extends SpellEffect {
                 host.addRemembered(host);
             }
             if (sa.hasParam("LoseSubAbility")) {
-                final SpellAbility lose = afOutcomes.getAbility(host.getSVar(sa.getParam("LoseSubAbility")), host);
+                final SpellAbility lose = AbilityFactory.getAbility(host.getSVar(sa.getParam("LoseSubAbility")), host);
                 lose.setActivatingPlayer(player);
                 ((AbilitySub) lose).setParent(sa);
 

@@ -1172,8 +1172,7 @@ public final class GameActionUtil {
             for (String landType : Constant.Color.BASIC_LANDS) {
 
                 if (land.isType(landType)) {
-                    final AbilityFactory af = new AbilityFactory();
-                    final SpellAbility sa = af.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get(landType)
+                    final SpellAbility sa = AbilityFactory.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get(landType)
                             + " | SpellDescription$ Add " + produces.get(landType) + " to your mana pool.", land);
                     sa.setType("BasicLandTypeMana");
                     land.addSpellAbility(sa);
@@ -1336,8 +1335,7 @@ public final class GameActionUtil {
                 }
                 String newSubSAString = c.getCharacteristics().getIntrinsicAbility().get(0);
                 newSubSAString = newSubSAString.replace("SP", "DB");
-                final AbilityFactory af = new AbilityFactory();
-                final AbilitySub newSubSA = (AbilitySub) af.getAbility(newSubSAString, source);
+                final AbilitySub newSubSA = (AbilitySub) AbilityFactory.getAbility(newSubSAString, source);
                 ArrayList<SpellAbility> addSAs = new ArrayList<SpellAbility>();
                 // Add the subability to all existing variants
                 for (SpellAbility s : allSAs) {

@@ -137,8 +137,7 @@ public class TwoPilesEffect extends SpellEffect {
 
                 // take action on the chosen pile
                 if (sa.hasParam("ChosenPile")) {
-                    final AbilityFactory afPile = new AbilityFactory();
-                    final SpellAbility action = afPile.getAbility(card.getSVar(sa.getParam("ChosenPile")), card);
+                    final SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("ChosenPile")), card);
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
 
@@ -158,8 +157,7 @@ public class TwoPilesEffect extends SpellEffect {
                             card.addRemembered(c);
                         }
                     }
-                    final AbilityFactory afPile = new AbilityFactory();
-                    final SpellAbility action = afPile.getAbility(card.getSVar(sa.getParam("UnchosenPile")), card);
+                    final SpellAbility action = AbilityFactory.getAbility(card.getSVar(sa.getParam("UnchosenPile")), card);
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
 

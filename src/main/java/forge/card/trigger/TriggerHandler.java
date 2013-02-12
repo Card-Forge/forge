@@ -478,8 +478,6 @@ public class TriggerHandler {
             }
         }
 
-        final AbilityFactory abilityFactory = new AbilityFactory();
-
         SpellAbility sa = null;
         Card host = game.getCardState(regtrig.getHostCard());
 
@@ -496,7 +494,7 @@ public class TriggerHandler {
                     }
                 };
             } else {
-                sa = abilityFactory.getAbility(host.getSVar(triggerParams.get("Execute")), host);
+                sa = AbilityFactory.getAbility(host.getSVar(triggerParams.get("Execute")), host);
             }
         }
         sa.setTrigger(true);

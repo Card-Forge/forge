@@ -184,9 +184,7 @@ public class ReplacementHandler {
             final String effectSVar = mapParams.get("ReplaceWith");
             final String effectAbString = replacementEffect.getHostCard().getSVar(effectSVar);
 
-            final AbilityFactory abilityFactory = new AbilityFactory();
-
-            effectSA = abilityFactory.getAbility(effectAbString, replacementEffect.getHostCard());
+            effectSA = AbilityFactory.getAbility(effectAbString, replacementEffect.getHostCard());
             effectSA.setTrigger(true);
 
             SpellAbility tailend = effectSA;

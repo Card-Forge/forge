@@ -212,11 +212,10 @@ public class TokenEffect extends SpellEffect {
 
                 // Grant abilities
                 if (this.tokenAbilities != null) {
-                    final AbilityFactory af = new AbilityFactory();
                     for (final String s : this.tokenAbilities) {
                         final String actualAbility = host.getSVar(s);
                         for (final Card c : tokens) {
-                            final SpellAbility grantedAbility = af.getAbility(actualAbility, c);
+                            final SpellAbility grantedAbility = AbilityFactory.getAbility(actualAbility, c);
                             c.addSpellAbility(grantedAbility);
                             // added ability to intrinsic list so copies and clones work
                             c.getIntrinsicAbilities().add(actualAbility);
@@ -234,7 +233,7 @@ public class TokenEffect extends SpellEffect {
 
                             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
                             final String ability = host.getSVar(parsedTrigger.getMapParams().get("Execute"));
-                            parsedTrigger.setOverridingAbility(new AbilityFactory().getAbility(ability, c));
+                            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(ability, c));
                             c.addTrigger(parsedTrigger);
                         }
                     }

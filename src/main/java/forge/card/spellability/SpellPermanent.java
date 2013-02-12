@@ -474,12 +474,11 @@ public class SpellPermanent extends Spell {
             }
 
             // Maybe better considerations
-            final AbilityFactory af = new AbilityFactory();
             final String execute = params.get("Execute");
             if (execute == null) {
                 continue;
             }
-            final SpellAbility exSA = af.getAbility(card.getSVar(execute), card);
+            final SpellAbility exSA = AbilityFactory.getAbility(card.getSVar(execute), card);
 
             if (api != null) {
                 if (exSA.getApi() != api) {

@@ -957,8 +957,7 @@ public class CardFactoryUtil {
         sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Cycling ");
         sb.append("| SpellDescription$ Draw a card.");
 
-        AbilityFactory af = new AbilityFactory();
-        SpellAbility cycle = af.getAbility(sb.toString(), sourceCard);
+        SpellAbility cycle = AbilityFactory.getAbility(sb.toString(), sourceCard);
         cycle.setIsCycling(true);
 
         return cycle;
@@ -992,8 +991,7 @@ public class CardFactoryUtil {
         sb.append(" | SpellDescription$ Search your library for a ").append(desc).append(" card, reveal it,");
         sb.append(" and put it into your hand. Then shuffle your library.");
 
-        AbilityFactory af = new AbilityFactory();
-        SpellAbility cycle = af.getAbility(sb.toString(), sourceCard);
+        SpellAbility cycle = AbilityFactory.getAbility(sb.toString(), sourceCard);
         cycle.setIsCycling(true);
 
         return cycle;
@@ -3685,9 +3683,8 @@ public class CardFactoryUtil {
         final ArrayList<String> ia = card.getIntrinsicAbilities();
         if (ia.size() > 0) {
             for (int i = 0; i < ia.size(); i++) {
-                final AbilityFactory af = new AbilityFactory();
                 // System.out.println(cardName);
-                final SpellAbility sa = af.getAbility(ia.get(i), card);
+                final SpellAbility sa = AbilityFactory.getAbility(ia.get(i), card);
                 if (sa.hasParam("SetAsKicked")) {
                     sa.addOptionalAdditionalCosts("Kicker");
                 }
@@ -4154,12 +4151,11 @@ public class CardFactoryUtil {
                 card.addTrigger(haunterETB);
                 card.addTrigger(haunterDies);
             } else {
-                final AbilityFactory af = new AbilityFactory();
                 final String abString = card.getSVar(hauntSVarName).replace("AB$", "SP$")
                         .replace("Cost$ 0", "Cost$ " + card.getManaCost())
                         + " | SpellDescription$ " + abilityDescription;
 
-                final SpellAbility sa = af.getAbility(abString, card);
+                final SpellAbility sa = AbilityFactory.getAbility(abString, card);
                 card.addSpellAbility(sa);
             }
 
@@ -4381,8 +4377,7 @@ public class CardFactoryUtil {
                 abilityStr.append("| PrecostDesc$ Equip | SpellDescription$ (Attach to target creature you control. Equip only as a sorcery.)");
             }
             // instantiate attach ability
-            final AbilityFactory af = new AbilityFactory();
-            final SpellAbility sa = af.getAbility(abilityStr.toString(), card);
+            final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             card.addSpellAbility(sa);
             // add ability to instrinic strings so copies/clones create the ability also
             card.getIntrinsicAbilities().add(abilityStr.toString());
@@ -4393,8 +4388,7 @@ public class CardFactoryUtil {
             if (kw.startsWith("ETBReplacement")) {
                 String[] splitkw = kw.split(":");
                 ReplacementLayer layer = ReplacementLayer.smartValueOf(splitkw[1]);
-                AbilityFactory af = new AbilityFactory();
-                SpellAbility repAb = af.getAbility(card.getSVar(splitkw[2]), card);
+                SpellAbility repAb = AbilityFactory.getAbility(card.getSVar(splitkw[2]), card);
                 String desc = repAb.getDescription();
                 setupETBReplacementAbility(repAb);
 
