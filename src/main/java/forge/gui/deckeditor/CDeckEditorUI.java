@@ -267,26 +267,12 @@ public enum CDeckEditorUI implements CardContainer {
             this.tableView = tableView;
         }
 
-        private Component _getPopupRoot() {
-            Component root = SwingUtilities.getRoot(popupLabel);
-            if (null == root) {
-                // manually locate root ancestor (required on platforms that don't use a HeavyWeightWindow for the popup)
-                // note that this method does not work when SwingUtilities.getRoot() returns non-null since in that case
-                // this would return the application window root, not the popup root.
-                root = popupLabel;
-                while (null != root.getParent()) {
-                    root = root.getParent();
-                }
-            }
-            return root;
-        }
-        
         private void _setPopupSize() {
             // resize popup to size of label (ensure there's room for the next character so the label
             // doesn't show '...' in the time between when we set the text and when we increase the size
             Dimension labelDimension = popupLabel.getPreferredSize();
             Dimension popupDimension = new Dimension(labelDimension.width + 12, labelDimension.height + 4);
-            _getPopupRoot().setSize(popupDimension);
+            SwingUtilities.getRoot(popupLabel).setSize(popupDimension);
         }
         
         private void _findNextMatch(int startIdx) {
@@ -331,8 +317,8 @@ public enum CDeckEditorUI implements CardContainer {
             } else {
                 PopupFactory factory = PopupFactory.getSharedInstance();
                 Point tableLoc = tableView.getTable().getTableHeader().getLocationOnScreen();
-                popup = factory.getPopup(tableView.getTable(), popupLabel, tableLoc.x + 10, tableLoc.y + 10);
-                _getPopupRoot().setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+                popup = factory.getPopup(null, popupLabel, tableLoc.x + 10, tableLoc.y + 10);
+                SwingUtilities.getRoot(popupLabel).setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
                 
                 popupTimer = new Timer(5000, new ActionListener() {
                     @Override
