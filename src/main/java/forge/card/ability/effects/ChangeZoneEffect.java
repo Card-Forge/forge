@@ -621,7 +621,9 @@ public class ChangeZoneEffect extends SpellEffect {
         final String forget = sa.getParam("ForgetChanged");
         final String imprint = sa.getParam("Imprint");
         final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : "Select a card";
-
+        final String totalcmc = sa.getParam("WithTotalCMC");
+        int totcmc = AbilityUtils.calculateAmount(card, totalcmc, sa);
+        
         if (sa.hasParam("Unimprint")) {
             card.clearImprinted();
         }
@@ -630,6 +632,11 @@ public class ChangeZoneEffect extends SpellEffect {
             if (sa.hasParam("DifferentNames")) {
                 for (Card c : movedCards) {
                     fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
+                }
+            }
+            if (totalcmc != null) {
+                if (totcmc >= 0) {
+                    fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), card.getController(), card);
                 }
             }
             if ((fetchList.size() == 0) || (destination == null)) {
@@ -764,7 +771,9 @@ public class ChangeZoneEffect extends SpellEffect {
                 if (imprint != null) {
                     card.addImprinted(movedCard);
                 }
-
+                if (totalcmc != null) {
+                    totcmc -= movedCard.getCMC();
+                }
             } else {
                 final StringBuilder sb = new StringBuilder();
                 final int num = Math.min(fetchList.size(), changeNum - i);

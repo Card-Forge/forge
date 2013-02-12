@@ -3,6 +3,8 @@ package forge.card.ability.effects;
 import java.util.List;
 
 import forge.Card;
+import forge.CardCharacteristicName;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellEffect;
 import forge.card.spellability.SpellAbility;
@@ -32,6 +34,11 @@ public class MillEffect extends SpellEffect {
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final List<Card> milled = p.mill(numCards, destination, bottom);
+                if (destination.equals(ZoneType.Exile) && sa.hasParam("ExileFaceDown")) {
+                    for (final Card c : milled) {
+                        c.setState(CardCharacteristicName.FaceDown);
+                    }
+                }
                 if (sa.hasParam("RememberMilled")) {
                     for (final Card c : milled) {
                         source.addRemembered(c);

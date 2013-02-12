@@ -1,0 +1,12 @@
+Name:Viridian Zealot Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/+2
+A:AB$ Destroy | ActivationZone$ Command | Cost$ 2 Sac<1/Creature> | RememberCostCards$ True | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBChangeZone | SpellDescription$ Destroy target artifact or enchantment. Search your library for a card with the same name as the sacrificed creature, reveal that card, and put it into your hand. Then shuffle your library.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.sharesNameWith Remembered | ChangeNum$ 1 | StackDescription$ Search your library for a card with the same name as the sacrificed creature, reveal that card, and put it into your hand. Then shuffle your library. | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/viridian_zealot_avatar.jpg
+Oracle:Hand +0, life +2\n{2}, Sacrifice a creature: Destroy target artifact or enchantment. Search your library for a card with the same name as the sacrificed creature, reveal that card, and put it into your hand. Then shuffle your library.
+End

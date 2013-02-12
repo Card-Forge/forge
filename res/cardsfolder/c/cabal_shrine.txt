@@ -1,0 +1,13 @@
+Name:Cabal Shrine
+ManaCost:1 B B
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscardRem | TriggerDescription$ Whenever a player casts a spell, that player discards X cards, where X is the number of cards in all graveyards with the same name as that spell.
+SVar:TrigDiscardRem:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | PumpZone$ Stack | RememberObjects$ TriggeredCard | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ TriggeredActivator | NumCards$ X | References$ X | Mode$ TgtChoose | SubAbility$ DBCleanup
+SVar:X:Count$ValidGraveyard Card.sharesNameWith Remembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_shrine.jpg
+Oracle:Whenever a player casts a spell, that player discards X cards, where X is the number of cards in all graveyards with the same name as that spell.
+End

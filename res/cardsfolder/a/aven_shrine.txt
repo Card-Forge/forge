@@ -1,0 +1,13 @@
+Name:Aven Shrine
+ManaCost:1 W W
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigGainLifeRem | TriggerDescription$ Whenever a player casts a spell, that player gains X life, where X is the number of cards in all graveyards with the same name as that spell.
+SVar:TrigGainLifeRem:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | PumpZone$ Stack | RememberObjects$ TriggeredCard | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ TriggeredActivator | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
+SVar:X:Count$ValidGraveyard Card.sharesNameWith Remembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_shrine.jpg
+Oracle:Whenever a player casts a spell, that player gains X life, where X is the number of cards in all graveyards with the same name as that spell.
+End

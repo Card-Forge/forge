@@ -1,0 +1,15 @@
+Name:Worldpurge
+ManaCost:4 WU WU WU WU
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZoneAll | Cost$ 4 WU WU WU WU | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBRepeat | SpellDescription$ Return all permanents to their owners' hands. Each player chooses up to seven cards in his or her hand, then shuffles the rest into his or her library. Empty all mana pools.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | Amount$ 7 | Defined$ Remembered | Choices$ Card.RememberedPlayerCtrl | ChoiceZone$ Hand | SubAbility$ DBReturn | RememberChosen$ True
+SVar:DBReturn:DB$ ChangeZone | Defined$ ValidHand Card.IsNotRemembered+RememberedPlayerCtrl | Origin$ Hand | Destination$ Library | Shuffle$ True | SubAbility$ DBEmpty
+SVar:DBEmpty:DB$ DrainMana | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/worldpurge.jpg
+Oracle:Return all permanents to their owners' hands. Each player chooses up to seven cards in his or her hand, then shuffles the rest into his or her library. Empty all mana pools.
+End

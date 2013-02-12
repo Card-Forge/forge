@@ -1,0 +1,17 @@
+Name:Bomb Squad
+ManaCost:3 R
+Types:Creature Dwarf
+Text:no text
+PT:1/1
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ FUSE | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a fuse counter on target creature.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ At the beginning of your upkeep, put a fuse counter on each creature with a fuse counter on it.
+SVar:TrigCounters:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.counters_GE1_FUSE | CounterType$ FUSE | CounterNum$ 1
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature.counters_GE4_FUSE | PresentCompare$ GE1 | Execute$ TrigRepeatEach | TriggerDescription$ Whenever a creature has four or more fuse counters on it, remove all fuse counters from it and destroy it. That creature deals 4 damage to its controller.
+SVar:TrigRepeatEach:AB$ RepeatEach | Cost$ 0 | RepeatCards$ Creature.counters_GE4_FUSE | RepeatSubAbility$ DBRemove
+SVar:DBRemove:DB$ RemoveCounter | Defined$ Remembered | CounterType$ FUSE | CounterNum$ All | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBDmg
+SVar:DBDmg:DB$ DealDamage | Defined$ RememberedController | NumDmg$ 4 | DamageSource$ Remembered
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bomb_squad.jpg
+Oracle:{T}: Put a fuse counter on target creature.\nAt the beginning of your upkeep, put a fuse counter on each creature with a fuse counter on it.\nWhenever a creature has four or more fuse counters on it, remove all fuse counters from it and destroy it. That creature deals 4 damage to its controller.
+End

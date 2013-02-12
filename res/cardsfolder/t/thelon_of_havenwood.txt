@@ -1,0 +1,13 @@
+Name:Thelon of Havenwood
+ManaCost:G G
+Types:Legendary Creature Elf Druid
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Fungus | AffectedZone$ Battlefield | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each Fungus creature gets +1/+1 for each spore counter on it.
+A:AB$ PutCounterAll | Cost$ B G ExileFromGrave<1/Fungus> | ValidCards$ Fungus | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on each Fungus on the battlefield.
+SVar:AffectedX:Count$CardCounters.SPORE
+SVar:BuffedBy:Fungus
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thelon_of_havenwood
+Oracle:Each Fungus creature gets +1/+1 for each spore counter on it.\n{B}{G}, Exile a Fungus card from a graveyard: Put a spore counter on each Fungus on the battlefield.
+End

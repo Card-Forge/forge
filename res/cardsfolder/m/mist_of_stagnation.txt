@@ -1,0 +1,14 @@
+Name:Mist of Stagnation
+ManaCost:3 U U
+Types:Enchantment
+Text:Permanents don't untap during their controllers' untap steps.
+K:Permanents don't untap during their controllers' untap steps:Permanent
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player chooses a permanent for each card in his or her graveyard, then untaps those permanents.
+SVar:TrigChoose:AB$ ChooseCard | Cost$ 0 | Defined$ TriggeredPlayer | Amount$ X | References$ X | Choices$ Permanent.ActivePlayerCtrl | ChoiceTitle$ Choose a permanent to untap | RememberChosen$ True | SubAbility$ DBUntap
+SVar:DBUntap:DB$ UntapAll | ValidCards$ Permanent.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Card.ActivePlayerCtrl
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_of_stagnation.jpg
+Oracle:Permanents don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, that player chooses a permanent for each card in his or her graveyard, then untaps those permanents.
+End

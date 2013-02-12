@@ -1,0 +1,13 @@
+Name:Nantuko Shrine
+ManaCost:1 G G
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigTokenRem | TriggerDescription$ Whenever a player casts a spell, that player puts X 1/1 green Squirrel creature tokens onto the battlefield, where X is the number of cards in all graveyards with the same name as that spell.
+SVar:TrigTokenRem:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | PumpZone$ Stack | RememberObjects$ TriggeredCard | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ TriggeredActivator | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | References$ X | SubAbility$ DBCleanup
+SVar:X:Count$ValidGraveyard Card.sharesNameWith Remembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_shrine.jpg
+Oracle:Whenever a player casts a spell, that player puts X 1/1 green Squirrel creature tokens onto the battlefield, where X is the number of cards in all graveyards with the same name as that spell.
+End

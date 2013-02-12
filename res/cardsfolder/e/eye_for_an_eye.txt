@@ -1,0 +1,19 @@
+Name:Eye for an Eye
+ManaCost:W W
+Types:Instant
+Text:no text
+A:SP$ ChooseSource | Cost$ W W | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and CARDNAME deals that much damage to that source's controller.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessCombat,SelflessNonCombat | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X,EyeforEyeCombat,EyeforEyenonCombat | RememberObjects$ Remembered | ImprintCards$ Self | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and this card deals that much damage to that source's controller.
+SVar:SelflessNonCombat:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.IsRemembered | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | Description$ The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and this card deals that much damage to that source's controller.
+SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ You | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X | SubAbility$ EyeforEyeCombat
+SVar:EyeforEyeCombat:DB$ DealDamage | Defined$ RememberedController | DamageSource$ Imprinted | CombatDamage$ True | NumDmg$ X | SubAbility$ ExileEffect
+SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ You | DamageSource$ ReplacedSource | NumDmg$ X | SubAbility$ EyeforEyenonCombat
+SVar:EyeforEyenonCombat:DB$ DealDamage | Defined$ RememberedController | DamageSource$ Imprinted | CombatDamage$ False | NumDmg$ X | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:ReplaceCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_for_an_eye.jpg
+Oracle:The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and Eye for an Eye deals that much damage to that source's controller.
+End

@@ -56,6 +56,8 @@ public class ChangeZoneAllEffect extends SpellEffect {
         }
 
         final String remember = sa.getParam("RememberChanged");
+        final String forget = sa.getParam("ForgetChanged");
+        final String imprint = sa.getParam("Imprint");
 
         final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
 
@@ -93,6 +95,12 @@ public class ChangeZoneAllEffect extends SpellEffect {
 
             if (remember != null) {
                 Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addRemembered(c);
+            }
+            if (forget != null) {
+                Singletons.getModel().getGame().getCardState(sa.getSourceCard()).removeRemembered(c);
+            }
+            if (imprint != null) {
+                Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addImprinted(c);
             }
         }
 

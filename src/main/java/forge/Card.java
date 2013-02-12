@@ -6547,8 +6547,21 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("EquippedBy")) {
-            if (!this.equippedBy.contains(source)) {
-                return false;
+            if (property.substring(10).equals("Targeted")) {
+                for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                    final SpellAbility saTargeting = sa.getSATargetingCard();
+                    if (saTargeting != null) {
+                        for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                            if (!this.equippedBy.contains(c)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (!this.equippedBy.contains(source)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("Equipped")) {
             if (!this.equipping.contains(source)) {
@@ -6778,6 +6791,24 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (property.startsWith("shareControllerWith")) {
+            if (property.equals("sharesControllerWith")) {
+                if (!this.sharesControllerWith(source)) {
+                    return false;
+                }
+            } else {
+                final String restriction = property.split("sharesControllerWith ")[1];
+                if (restriction.equals("Remembered")) {
+                    for (final Object rem : source.getRemembered()) {
+                        if (rem instanceof Card) {
+                            final Card card = (Card) rem;
+                            if (!this.sharesControllerWith(card)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
             final List<Card> list = CardUtil.getThisTurnCast("Card", source);
             if (list.size() < 2)  {
@@ -6911,6 +6942,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("greatestPower")) {
             final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            for (final Card crd : list) {
+                if (crd.getNetAttack() > this.getNetAttack()) {
+                    return false;
+                }
+            }
+        } else if (property.startsWith("yardGreatestPower")) {
+            final List<Card> list = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
             for (final Card crd : list) {
                 if (crd.getNetAttack() > this.getNetAttack()) {
                     return false;
@@ -7075,6 +7113,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("blockingSource")) {
             if (!this.isBlocking(source)) {
                 return false;
+            }
+        } else if (property.startsWith("blockingCreatureYouCtrl")) {
+            final List<Card> list = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            for (final Card c : list) {
+                if (this.isBlocking(c)) {
+                    return true;
+                }
+            return false;
             }
         } else if (property.startsWith("blockingRemembered")) {
             for (final Object o : source.getRemembered()) {
@@ -7443,6 +7489,24 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return false;
+    }
+    
+    /**
+     * <p>
+     * sharesControllerWith.
+     * </p>
+     * 
+     * @param c1
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public final boolean sharesControllerWith(final Card c1) {
+
+        if (c1 == null) {
+            return false;
+        }
+        
+        return this.getController().equals(c1.getController());
     }
 
     /**

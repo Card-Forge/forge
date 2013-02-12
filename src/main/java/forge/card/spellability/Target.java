@@ -46,6 +46,7 @@ public class Target {
     private boolean singleZone = false;
     private boolean differentZone = false;
     private boolean differentControllers = false;
+    private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
     private String definedController = null;
     private TargetChoices choice = null;
@@ -812,6 +813,24 @@ public class Target {
      */
     public void setDifferentControllers(boolean different) {
         this.differentControllers = different;
+    }
+    /**
+     * Checks if is same controller.
+     * 
+     * @return true, if it targets same controller
+     */
+    public final boolean isSameController() {
+        return this.sameController;
+    }
+
+    /**
+     * Sets the same controller.
+     * 
+     * @param same
+     *            the new unique targets
+     */
+    public final void setSameController(final boolean same) {
+        this.sameController = same;
     }
 
     /**

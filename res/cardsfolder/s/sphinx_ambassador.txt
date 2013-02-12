@@ -1,0 +1,17 @@
+Name:Sphinx Ambassador
+ManaCost:5 U U
+Types:Creature Sphinx
+Text:no text
+PT:5/5
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, search that player's library for a card, then that player names a card. If you searched for a creature card that isn't the named card, you may put it onto the battlefield under your control. Then that player shuffles his or her library.
+SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | ChangeType$ Card | Origin$ Library | Destination$ Library | DefinedPlayer$ DefendingPlayer | Chooser$ You | Shuffle$ False | RememberChanged$ True | SubAbility$ DBName
+SVar:DBName:DB$ NameCard | Defined$ DefendingPlayer | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | GainControl$ True | ConditionDefined$ Remembered | Shuffle$ False | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ0 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ DefendingPlayer | SubAbility$ DBCleanup
+SVar:X:Count$ValidLibrary Creature.IsRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_ambassador.jpg
+Oracle:Flying\nWhenever Sphinx Ambassador deals combat damage to a player, search that player's library for a card, then that player names a card. If you searched for a creature card that isn't the named card, you may put it onto the battlefield under your control. Then that player shuffles his or her library.
+End

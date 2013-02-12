@@ -226,6 +226,20 @@ public class AbilityUtils {
                 list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard);
             }
     
+            else if (defined.startsWith("ValidHand ")) {
+                String validDefined = defined.substring("ValidHand ".length());
+                GameState game = Singletons.getModel().getGame();
+
+                list = CardLists.getValidCards(game.getCardsIn(ZoneType.Hand), validDefined.split(","), hostCard.getController(), hostCard);
+            }
+            
+            else if (defined.startsWith("ValidAll ")) {
+                String validDefined = defined.substring("ValidAll ".length());
+                GameState game = Singletons.getModel().getGame();
+
+                list = CardLists.getValidCards(game.getCardsInGame(), validDefined.split(","), hostCard.getController(), hostCard);
+            }
+            
             else {
                 return cards;
             }
@@ -1112,6 +1126,11 @@ public class AbilityUtils {
                 final List<Card> paidListExiled = sa.getPaidList("Exiled");
                 for (final Card exiledAsCost : paidListExiled) {
                     host.addRemembered(exiledAsCost);
+                }
+            } else if (sa.getParam("Cost").contains("Sac")) {
+                final List<Card> paidListSacrificed = sa.getPaidList("Sacrificed");
+                for (final Card SacrificedAsCost : paidListSacrificed) {
+                    host.addRemembered(SacrificedAsCost);
                 }
             }
         }

@@ -108,6 +108,11 @@ public class ChooseCardEffect extends SpellEffect {
                                 choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
                             }
                             choice = CardFactoryUtil.getBestAI(choices);
+                        } else if (logic.equals("Untap")) {
+                            if (!CardLists.getValidCards(choices, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host).isEmpty()) {
+                                choices = CardLists.getValidCards(choices, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host);
+                            }
+                            choice = CardFactoryUtil.getBestAI(choices);
                         }
                         if (choice != null) {
                             chosen.add(choice);

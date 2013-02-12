@@ -1111,6 +1111,8 @@ public class ChangeZoneAi extends SpellAiLogic {
         final String remember = sa.getParam("RememberChanged");
         final String forget = sa.getParam("ForgetChanged");
         final String imprint = sa.getParam("Imprint");
+        final String totalcmc = sa.getParam("WithTotalCMC");
+        int totcmc = AbilityUtils.calculateAmount(card, totalcmc, sa);
 
         if (sa.hasParam("Unimprint")) {
             card.clearImprinted();
@@ -1120,6 +1122,11 @@ public class ChangeZoneAi extends SpellAiLogic {
             if (sa.hasParam("DifferentNames")) {
                 for (Card c : fetched) {
                     fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
+                }
+            }
+            if (totalcmc != null) {
+                if (totcmc >= 0) {
+                    fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + Integer.toString(totcmc), ai, card);
                 }
             }
             if ((fetchList.size() == 0) || (destination == null)) {
@@ -1228,6 +1235,9 @@ public class ChangeZoneAi extends SpellAiLogic {
 
             fetched.add(c);
             fetchList.remove(c);
+            if (totalcmc != null) {
+                totcmc -= c.getCMC();
+            }
         }
 
         if (origin.contains(ZoneType.Library) && !defined && !"False".equals(sa.getParam("Shuffle"))) {

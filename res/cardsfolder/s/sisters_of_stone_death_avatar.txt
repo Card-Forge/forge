@@ -1,0 +1,11 @@
+Name:Sisters of Stone Death Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/-5
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME must be blocked if able. | Description$ Each creature you control must be blocked if able.
+A:AB$ ChangeZone | ActivationZone$ Command | Cost$ 4 | ValidTgts$ Creature.blockingCreatureYouCtrl | TgtPrompt$ Select target creature that's blocking a creature you control | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature that's blocking a creature you control.
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/sisters_of_stone_death_avatar.jpg
+Oracle:Hand +1, life -5\nEach creature you control must be blocked if able.\n{4}: Exile target creature that's blocking a creature you control.
+End

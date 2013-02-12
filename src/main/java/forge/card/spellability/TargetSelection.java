@@ -269,9 +269,9 @@ public class TargetSelection {
 
         List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(zone), this.target.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
 
-        ArrayList<Object> objects = new ArrayList<Object>();
+        ArrayList<Object> objects = getUniqueTargets(this.ability);
+
         if (tgt.isUniqueTargets()) {
-            objects = getUniqueTargets(this.ability);
             for (final Object o : objects) {
                 if ((o instanceof Card) && objects.contains(o)) {
                     choices.remove(o);
@@ -284,6 +284,24 @@ public class TargetSelection {
         for (final Card c : targeted) {
             if (choices.contains(c)) {
                 choices.remove(c);
+            }
+        }
+        
+        // If all cards (including subability targets) must have the same controller
+        if (tgt.isSameController() && !objects.isEmpty()) {
+            final List<Card> list = new ArrayList<Card>();
+            for (final Object o : objects)
+                if (o instanceof Card) {
+                    list.add((Card) o);
+                }
+            if (!list.isEmpty()){
+                final Card card = list.get(0);
+                choices = CardLists.filter(choices, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return c.sharesControllerWith(card);
+                    }
+                });
             }
         }
 

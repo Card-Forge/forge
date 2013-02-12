@@ -1,0 +1,18 @@
+Name:Planeswalker's Mischief
+ManaCost:2 U
+Types:Enchantment
+Text:no text
+A:AB$ Reveal | Cost$ 3 U | Random$ True | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to reveal a card | SorcerySpeed$ True | SubAbility$ DBChangeZone | SpellDescription$ Target opponent reveals a card at random from his or her hand. If it's an instant or sorcery card, exile it. You may cast it without paying its mana cost for as long as it remains exiled. At the beginning of the next end step, if you haven't cast it, return it to its owner's hand. Activate this ability only any time you could cast a sorcery. (If it has X in its mana cost, X is 0.)
+SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Instant.IsRemembered,Sorcery.IsRemembered | Origin$ Hand | Destination$ Exile | SubAbility$ DBForgetOther
+SVar:DBForgetOther:DB$ Cleanup | ClearRemembered$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MischiefPlay | Triggers$ TrigEOT,TrigChangesZone | SVars$ MischiefCleanup,MischiefReturn | RememberObjects$ Remembered | Permanent$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:MischiefPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+OppOwn | AffectedZone$ Exile | AddHiddenKeyword$ May be played by your opponent without paying its mana cost | Description$ You may play that exiled card.
+SVar:TrigEOT:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ MischiefReturn | TriggerDescription$ At the beginning of the next end step, if you haven't cast it, return it to its owner's hand.
+SVar:MischiefReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand |
+SVar:TrigChangesZone:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ MischiefCleanup
+SVar:MischiefCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:X:Count$ValidExile Instant.IsRemembered,Sorcery.IsRemembered
+SVar:Picture:http://www.wizards.com/global/images/magic/general/planeswalkers_mischief.jpg
+Oracle:{3}{U}: Target opponent reveals a card at random from his or her hand. If it's an instant or sorcery card, exile it. You may cast it without paying its mana cost for as long as it remains exiled. At the beginning of the next end step, if you haven't cast it, return it to its owner's hand. Activate this ability only any time you could cast a sorcery. (If it has X in its mana cost, X is 0.)
+End

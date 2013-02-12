@@ -1,0 +1,13 @@
+Name:Quenchable Fire
+ManaCost:3 R
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals 3 damage to target player. It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays U before that step.
+SVar:DBEffect:DB$ Effect | Name$ Quenchable Fire Effect | EffectOwner$ Targeted | Duration$ Permanent | Triggers$ UpkeepTrig | Abilities$ PayUp | SVars$ Bleed,ExileEffect | RememberObjects$ SourceController | ImprintCards$ Self
+SVar:UpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Execute$ Bleed | TriggerDescription$ It deals an additional 3 damage to you at the beginning of that player's next upkeep step unless you pay U before that step.
+SVar:Bleed:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 3 | DamageSource$ Imprinted | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:PayUp:AB$ ChangeZone | Cost$ U | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay U to remove this effect.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/quenchable_fire.jpg
+Oracle:Quenchable Fire deals 3 damage to target player. It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
+End

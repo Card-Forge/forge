@@ -1,0 +1,14 @@
+Name:Lightning Dart
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBDmg | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 1 damage to target creature. If that creature is white or blue, CARDNAME deals 4 damage to it instead.
+SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBDmgWU | StackDescription$ None
+SVar:DBDmgWU:DB$ DealDamage | Defined$ Remembered | NumDmg$ 4 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.IsRemembered+White,Creature.IsRemembered+Blue
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_dart.jpg
+Oracle:Lightning Dart deals 1 damage to target creature. If that creature is white or blue, Lightning Dart deals 4 damage to it instead.
+End

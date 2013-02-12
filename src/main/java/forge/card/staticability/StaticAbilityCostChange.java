@@ -199,6 +199,10 @@ public class StaticAbilityCostChange {
                 if (!(sa instanceof AbilityActivated)) {
                     return originalCost;
                 }
+            } else if (params.get("Type").equals("Buyback")) {
+                if (!sa.isBuyBackAbility()) {
+                    return originalCost;
+                }
             } else if (params.get("Type").equals("Cycling")) {
                 if (!sa.isCycling()) {
                     return originalCost;
