@@ -1643,7 +1643,6 @@ public class ComputerUtilCombat {
      *            a int.
      */
     public static Map<Card, Integer> distributeAIDamage(final Card attacker, final List<Card> block, int damage) {
-        final Card c = attacker;
         Map<Card, Integer> damageMap = new HashMap<Card, Integer>();
         
         if (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
