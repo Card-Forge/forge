@@ -243,7 +243,7 @@ public class PumpEffect extends SpellEffect {
         }
 
         if (pumpImprint != null) {
-            for (final Card c : AbilityFactory.getDefinedCards(sa.getSourceCard(), pumpImprint, sa)) {
+            for (final Card c : AbilityUtils.getDefinedCards(sa.getSourceCard(), pumpImprint, sa)) {
                 if (!sa.getSourceCard().getImprinted().contains(c)) {
                     sa.getSourceCard().addImprinted(c);
                 }

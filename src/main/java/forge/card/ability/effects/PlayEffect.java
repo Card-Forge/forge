@@ -164,7 +164,7 @@ public class PlayEffect extends SpellEffect {
             // lands will be played
             if (tgtCard.isLand()) {
                 controller.playLand(tgtCard);
-                if (remember && controller.canPlayLand()) {
+                if (remember && controller.canPlayLand(tgtCard)) {
                     source.addRemembered(tgtCard);
                 }
                 tgtCards.remove(tgtCard);

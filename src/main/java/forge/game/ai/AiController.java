@@ -224,13 +224,18 @@ public class AiController {
      * @return a boolean.
      */
     public List<Card> getLandsToPlay() {
-        if (!player.canPlayLand()) {
-            return null;
-        }
     
         final List<Card> hand = player.getCardsIn(ZoneType.Hand);
         List<Card> landList = CardLists.filter(hand, Presets.LANDS);
         List<Card> nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
+        
+        //filter out cards that can't be played
+        landList = CardLists.filter(landList, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return player.canPlayLand(c);
+            }
+        });
     
         final List<Card> landsNotInHand = new ArrayList<Card>(player.getCardsIn(ZoneType.Graveyard));
         if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
@@ -332,7 +337,7 @@ public class AiController {
 
     public Card chooseBestLandToPlay(List<Card> landList)
     {
-        if (landList.isEmpty() || !player.canPlayLand())
+        if (landList.isEmpty())
             return null;
     
         // play as many lands as you can

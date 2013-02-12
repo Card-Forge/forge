@@ -545,7 +545,7 @@ public class GameState {
                 iSa++;
         }
 
-        if (c.isLand() && player.canPlayLand()) {
+        if (c.isLand() && player.canPlayLand(c)) {
             if (zone.is(ZoneType.Hand) || (!zone.is(ZoneType.Battlefield) && c.hasStartOfKeyword("May be played"))) {
                 abilities.add(Ability.PLAY_LAND_SURROGATE);
             }

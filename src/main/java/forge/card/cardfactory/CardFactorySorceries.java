@@ -227,7 +227,7 @@ public class CardFactorySorceries {
 
                         final Card playing = check;
                         if (playing.isLand()) {
-                            if (card.getController().canPlayLand()) {
+                            if (card.getController().canPlayLand(playing)) {
                                 card.getController().playLand(playing);
                             } else {
                                 JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "",

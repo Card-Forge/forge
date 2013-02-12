@@ -146,7 +146,7 @@ public class AiInputCommon extends Input {
         final Player player = computer.getPlayer();
         List<Card> landsWannaPlay = computer.getLandsToPlay();
         
-        while(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand()) {
+        while(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
             Card land = computer.chooseBestLandToPlay(landsWannaPlay);
             landsWannaPlay.remove(land);
             player.playLand(land);

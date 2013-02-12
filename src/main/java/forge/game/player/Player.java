@@ -64,7 +64,6 @@ import forge.game.event.LandPlayedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.ShuffleEvent;
-import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -1876,7 +1875,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.Card} object.
      */
     public final void playLand(final Card land) {
-        if (this.canPlayLand()) {
+        if (this.canPlayLand(land)) {
             land.addController(this);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
             CardFactoryUtil.playLandEffects(land);
@@ -1908,21 +1907,27 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * 
      * @return a boolean.
      */
-    public final boolean canPlayLand() {
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)
-                && this.isHuman()
-                && Preferences.DEV_MODE) {
-            return this.canCastSorcery();
+    public final boolean canPlayLand(Card land) {
+
+        if (!this.canCastSorcery()) {
+            return false;
         }
 
         // CantBeCast static abilities
         for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                if (stAb.applyAbility("CantPlayLand", null, this)) {
+                if (stAb.applyAbility("CantPlayLand", land, this)) {
                     return false;
                 }
             }
+        }
+
+        // Dev Mode
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)
+                && this.isHuman()
+                && Preferences.DEV_MODE) {
+            return true;
         }
 
         // check for adjusted max lands play per turn
@@ -1936,9 +1941,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final int adjCheck = this.maxLandsToPlay + adjMax;
         // System.out.println("Max lands for player " + this.getName() + ": " + adjCheck);
 
-        return this.canCastSorcery()
-                && ((this.numLandsPlayed < adjCheck) || (this.getCardsIn(ZoneType.Battlefield, "Fastbond")
-                        .size() > 0));
+        return this.numLandsPlayed < adjCheck || this.isCardInPlay("Fastbond");
     }
 
     /**
