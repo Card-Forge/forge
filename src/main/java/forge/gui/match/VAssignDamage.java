@@ -373,14 +373,23 @@ public class VAssignDamage {
 
         int damageLeft = totalDamageToAssign;
         boolean allHaveLethal = true;
+        
         for ( DamageTarget dt : defenders )
         {
             int dmg = dt.damage;
             damageLeft -= dmg;
             int lethal = getDamageToKill(dt.card);
-            String text = dmg >= lethal ? Integer.toString(dmg) + " (Lethal)" : Integer.toString(dmg);
+            int overkill = dmg - lethal;
+            StringBuilder sb = new StringBuilder();
+            sb.append(dmg);
+            if( overkill >= 0 ) { 
+                sb.append(" (Lethal");
+                if( overkill > 0 ) 
+                    sb.append(" +").append(overkill);
+                sb.append(")");
+            }
             allHaveLethal &= dmg >= lethal;
-            dt.label.setText(text);
+            dt.label.setText(sb.toString());
         }
 
         this.lblTotalDamage.setText(String.format("Available damage points: %d (of %d)", damageLeft, this.totalDamageToAssign));
