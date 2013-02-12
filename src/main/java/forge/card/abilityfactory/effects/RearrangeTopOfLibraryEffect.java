@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -28,7 +28,7 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
         boolean shuffle = false;
         Card host = sa.getSourceCard();
 
-        numCards = AbilityFactory.calculateAmount(host, sa.getParam("NumCards"), sa);
+        numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
         shuffle = sa.hasParam("MayShuffle");
 
         final StringBuilder ret = new StringBuilder();
@@ -78,7 +78,7 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
             final Target tgt = sa.getTarget();
 
 
-            numCards = AbilityFactory.calculateAmount(host, sa.getParam("NumCards"), sa);
+            numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
             shuffle = sa.hasParam("MayShuffle");
 
             for (final Player p : getTargetPlayers(sa)) {

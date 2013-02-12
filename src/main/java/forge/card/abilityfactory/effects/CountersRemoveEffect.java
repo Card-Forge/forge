@@ -7,7 +7,7 @@ import java.util.Map;
 import forge.Card;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -22,7 +22,7 @@ public class CountersRemoveEffect extends SpellEffect {
 
         final String counterName = sa.getParam("CounterType");
 
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
 
         sb.append("Remove ");
         if (sa.hasParam("UpTo")) {
@@ -58,13 +58,13 @@ public class CountersRemoveEffect extends SpellEffect {
         final String type = sa.getParam("CounterType");
         int counterAmount = 0;
         if (!sa.getParam("CounterNum").equals("All")) {
-            counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+            counterAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         }
 
         CounterType counterType = null;
 
         try {
-            counterType = AbilityFactory.getCounterType(type, sa);
+            counterType = AbilityUtils.getCounterType(type, sa);
         } catch (Exception e) {
             if (!type.matches("Any")) {
                 System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");

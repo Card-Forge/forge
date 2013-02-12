@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
@@ -27,7 +27,7 @@ public class TapOrUntapAi extends TapAiBase {
             // assume we are looking to tap human's stuff
             // TODO - check for things with untap abilities, and don't tap
             // those.
-            final List<Card> defined = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
+            final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
             for (final Card c : defined) {

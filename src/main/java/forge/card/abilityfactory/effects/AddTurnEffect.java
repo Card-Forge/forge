@@ -3,7 +3,7 @@ package forge.card.abilityfactory.effects;
 import java.util.List;
 
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -16,7 +16,7 @@ public class AddTurnEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
-        final int numTurns = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
+        final int numTurns = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
@@ -38,7 +38,7 @@ public class AddTurnEffect extends SpellEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final int numTurns = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
+        final int numTurns = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
 
         List<Player> tgtPlayers;
 
@@ -46,7 +46,7 @@ public class AddTurnEffect extends SpellEffect {
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         for (final Player p : tgtPlayers) {

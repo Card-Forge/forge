@@ -6,7 +6,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -36,7 +36,7 @@ public class SetStateAllEffect extends SpellEffect {
         // to use the X variable
         // We really need a better solution to this
         if (valid.contains("X")) {
-            valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
+            valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(card, "X", sa)));
         }
 
         List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -45,7 +45,7 @@ public class SetStateAllEffect extends SpellEffect {
             list = CardLists.filterControlledBy(list, targetPlayer);
         }
 
-        list = AbilityFactory.filterListByType(list, valid, sa);
+        list = AbilityUtils.filterListByType(list, valid, sa);
 
         final boolean remChanged = sa.hasParam("RememberChanged");
         if (remChanged) {

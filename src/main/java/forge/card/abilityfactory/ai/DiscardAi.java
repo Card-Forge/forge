@@ -5,7 +5,7 @@ import java.util.Random;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -55,7 +55,7 @@ public class DiscardAi extends SpellAiLogic {
             }
         } else {
             // TODO: Add appropriate restrictions
-            final List<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
+            final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getSourceCard(),
                     sa.getParam("Defined"), sa);
 
             if (players.size() == 1) {
@@ -83,7 +83,7 @@ public class DiscardAi extends SpellAiLogic {
                         .getCardsIn(ZoneType.Hand).size());
                 source.setSVar("PayX", Integer.toString(cardsToDiscard));
             } else {
-                if (AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) < 1) {
+                if (AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) < 1) {
                     return false;
                 }
             }

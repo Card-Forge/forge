@@ -7,7 +7,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -44,7 +44,7 @@ public class AnimateAi extends SpellAiLogic {
         // Combat_Begin step
         if (!Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
                 && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(aiPlayer)
-                && !AbilityFactory.isSorcerySpeed(sa)
+                && !AbilityUtils.isSorcerySpeed(sa)
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
             return false;
         }
@@ -72,7 +72,7 @@ public class AnimateAi extends SpellAiLogic {
         }
 
         if (null == tgt) {
-            final List<Card> defined = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
+            final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
             for (final Card c : defined) {
@@ -84,11 +84,11 @@ public class AnimateAi extends SpellAiLogic {
                 if (c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
                     if (sa.hasParam("Power")) {
-                        power = AbilityFactory.calculateAmount(source, sa.getParam("Power"), sa);
+                        power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
                     }
                     int toughness = -5;
                     if (sa.hasParam("Toughness")) {
-                        toughness = AbilityFactory.calculateAmount(source, sa.getParam("Toughness"), sa);
+                        toughness = AbilityUtils.calculateAmount(source, sa.getParam("Toughness"), sa);
                     }
                     if ((power + toughness) > (c.getCurrentPower() + c.getCurrentToughness())) {
                         bFlag = true;

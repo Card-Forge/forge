@@ -20,7 +20,7 @@ package forge.card.staticability;
 import java.util.HashMap;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
@@ -133,7 +133,7 @@ public class StaticAbilityCostChange {
                 value = 3 - cmc;
             }
         } else {
-            value = AbilityFactory.calculateAmount(card, amount, sa);
+            value = AbilityUtils.calculateAmount(card, amount, sa);
             //value = Integer.valueOf(amount);
         }
 

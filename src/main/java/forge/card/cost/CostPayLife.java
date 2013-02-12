@@ -18,7 +18,7 @@
 package forge.card.cost;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
@@ -135,12 +135,12 @@ public class CostPayLife extends CostPart {
             if (sVar.startsWith("XChoice")) {
                 int limit = life;
                 if (sVar.contains("LimitMax")) {
-                    limit = AbilityFactory.calculateAmount(source, sVar.split("LimitMax.")[1], ability);
+                    limit = AbilityUtils.calculateAmount(source, sVar.split("LimitMax.")[1], ability);
                 }
                 int maxLifePayment = limit < life ? limit : life;
                 c = CostUtil.chooseXValue(source, ability, maxLifePayment);
             } else {
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
 
@@ -176,7 +176,7 @@ public class CostPayLife extends CostPart {
             if (sVar.equals("XChoice")) {
                 return false;
             } else {
-                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
             }
         }
         if (!ai.canPayLife(c)) {

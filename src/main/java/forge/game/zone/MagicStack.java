@@ -33,7 +33,7 @@ import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
@@ -281,7 +281,7 @@ public class MagicStack extends MyObservable {
 
             // TODO: make working triggered abilities!
             if (sp.isManaAbility() || (sp instanceof AbilityTriggered)) {
-                AbilityFactory.resolve(sp, false);
+                AbilityUtils.resolve(sp, false);
                 //sp.resolve();
             } else {
                 this.push(sp);
@@ -396,7 +396,7 @@ public class MagicStack extends MyObservable {
         final ArrayList<TargetChoices> chosenTargets = sp.getAllTargetChoices();
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
-            AbilityFactory.resolve(sp, false);
+            AbilityUtils.resolve(sp, false);
             //sp.resolve();
             sp.resetOnceResolved();
             game.getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);
@@ -890,8 +890,8 @@ public class MagicStack extends MyObservable {
             this.finishResolving(sa, true);
         } else if (sa.getApi() != null) {
             game.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
-            AbilityFactory.handleRemembering(sa);
-            AbilityFactory.resolve(sa, true);
+            AbilityUtils.handleRemembering(sa);
+            AbilityUtils.resolve(sa, true);
         } else {
             game.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             sa.resolve();

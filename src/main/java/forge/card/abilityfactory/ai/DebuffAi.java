@@ -9,7 +9,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -60,7 +60,7 @@ public class DebuffAi extends SpellAiLogic {
                 || !Singletons.getModel().getGame().getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            if (!AbilityFactory.isSorcerySpeed(sa)) {
+            if (!AbilityUtils.isSorcerySpeed(sa)) {
                 return false;
             }
         }
@@ -73,7 +73,7 @@ public class DebuffAi extends SpellAiLogic {
         }
 
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
-            List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
             if (!cards.isEmpty()) {
                 cards = CardLists.filter(cards, new Predicate<Card>() {

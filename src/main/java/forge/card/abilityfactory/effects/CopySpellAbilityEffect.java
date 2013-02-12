@@ -6,7 +6,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -34,7 +34,7 @@ public class CopySpellAbilityEffect extends SpellEffect {
         }
         int amount = 1;
         if (sa.hasParam("Amount")) {
-            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
         }
         if (amount > 1) {
             sb.append(amount).append(" times");
@@ -54,11 +54,11 @@ public class CopySpellAbilityEffect extends SpellEffect {
 
         int amount = 1;
         if (sa.hasParam("Amount")) {
-            amount = AbilityFactory.calculateAmount(card, sa.getParam("Amount"), sa);
+            amount = AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa);
         }
 
         if (sa.hasParam("Controller")) {
-            controller = AbilityFactory.getDefinedPlayers(card, sa.getParam("Controller"), sa).get(0);
+            controller = AbilityUtils.getDefinedPlayers(card, sa.getParam("Controller"), sa).get(0);
         }
 
         final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa);

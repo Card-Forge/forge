@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -21,12 +21,12 @@ public class MustBlockEffect extends SpellEffect {
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            tgtCards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         List<Card> cards;
         if (sa.hasParam("DefinedAttacker")) {
-            cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
+            cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
         } else {
             cards = new ArrayList<Card>();
             cards.add(host);
@@ -53,7 +53,7 @@ public class MustBlockEffect extends SpellEffect {
 
         String attacker = null;
         if (sa.hasParam("DefinedAttacker")) {
-            final List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
             attacker = cards.get(0).toString();
         } else {
             attacker = host.toString();

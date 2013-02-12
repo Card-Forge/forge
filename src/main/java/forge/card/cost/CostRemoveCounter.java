@@ -25,7 +25,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
@@ -197,7 +197,7 @@ public class CostRemoveCounter extends CostPartWithList {
             if (amount.equals("All")) {
                 c = source.getCounters(this.counter);
             } else {
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
 
@@ -246,7 +246,7 @@ public class CostRemoveCounter extends CostPartWithList {
                 if (sVar.equals("XChoice")) {
                     c = CostUtil.chooseXValue(source, ability, maxCounters);
                 } else {
-                    c = AbilityFactory.calculateAmount(source, amount, ability);
+                    c = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
         }
@@ -286,7 +286,7 @@ public class CostRemoveCounter extends CostPartWithList {
             if (amount.equals("All")) {
                 c = source.getCounters(this.counter);
             } else {
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
 

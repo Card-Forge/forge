@@ -21,7 +21,7 @@ import com.google.common.base.Strings;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost2;
@@ -212,7 +212,7 @@ public class CostMana extends CostPart {
             // if X cost is a defined value, other than xPaid
             if (!ability.getSVar("X").equals("Count$xPaid")) {
                 // this currently only works for things about Targeted object
-                manaToAdd = AbilityFactory.calculateAmount(source, "X", ability) * this.getXMana();
+                manaToAdd = AbilityUtils.calculateAmount(source, "X", ability) * this.getXMana();
             }
         }
         if (!this.getManaToPay().equals("0") || (manaToAdd > 0)) {

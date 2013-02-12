@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -43,13 +43,13 @@ public class TwoPilesAi extends SpellAiLogic  {
             }
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         final Player p = tgtPlayers.get(0);
         List<Card> pool = new ArrayList<Card>();
         if (sa.hasParam("DefinedCards")) {
-            pool = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
+            pool = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
         } else {
             pool = p.getCardsIn(zone);
         }

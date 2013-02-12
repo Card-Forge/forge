@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import forge.Card;
 import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
@@ -68,12 +69,12 @@ public class TwoPilesEffect extends SpellEffect {
 
         Player separator = card.getController();
         if (sa.hasParam("Separator")) {
-            separator = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Separator"), sa).get(0);
+            separator = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Separator"), sa).get(0);
         }
 
         Player chooser = tgtPlayers.get(0);
         if (sa.hasParam("Chooser")) {
-            chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Chooser"), sa).get(0);
+            chooser = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Chooser"), sa).get(0);
         }
 
         for (final Player p : tgtPlayers) {
@@ -82,7 +83,7 @@ public class TwoPilesEffect extends SpellEffect {
                 final ArrayList<Card> pile2 = new ArrayList<Card>();
                 List<Card> pool = new ArrayList<Card>();
                 if (sa.hasParam("DefinedCards")) {
-                    pool = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
+                    pool = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
                 } else {
                     pool = p.getCardsIn(zone);
                 }
@@ -141,7 +142,7 @@ public class TwoPilesEffect extends SpellEffect {
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
 
-                    AbilityFactory.resolve(action, false);
+                    AbilityUtils.resolve(action, false);
                 }
 
                 // take action on the chosen pile
@@ -162,7 +163,7 @@ public class TwoPilesEffect extends SpellEffect {
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
 
-                    AbilityFactory.resolve(action, false);
+                    AbilityUtils.resolve(action, false);
                 }
             }
         }

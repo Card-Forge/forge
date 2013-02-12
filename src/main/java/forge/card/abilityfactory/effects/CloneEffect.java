@@ -10,7 +10,7 @@ import forge.CardCharacteristicName;
 import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -31,7 +31,7 @@ public class CloneEffect extends SpellEffect {
         Card cardToCopy = host;
         final Target tgt = sa.getTarget();
         if (sa.hasParam("Defined")) {
-            List<Card> cloneSources = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
+            List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
@@ -39,7 +39,7 @@ public class CloneEffect extends SpellEffect {
             cardToCopy = tgt.getTargetCards().get(0);
         }
 
-        List<Card> cloneTargets = AbilityFactory.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
+        List<Card> cloneTargets = AbilityUtils.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
         if (!cloneTargets.isEmpty()) {
             tgtCard = cloneTargets.get(0);
         }
@@ -60,7 +60,7 @@ public class CloneEffect extends SpellEffect {
         Card cardToCopy = null;
         final Target tgt = sa.getTarget();
         if (sa.hasParam("Defined")) {
-            List<Card> cloneSources = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
+            List<Card> cloneSources = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
@@ -80,7 +80,7 @@ public class CloneEffect extends SpellEffect {
         }
 
         // find target of cloning i.e. card becoming a clone
-        List<Card> cloneTargets = AbilityFactory.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
+        List<Card> cloneTargets = AbilityUtils.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
         if (!cloneTargets.isEmpty()) {
             tgtCard = cloneTargets.get(0);
         }

@@ -2,7 +2,7 @@ package forge.card.abilityfactory.ai;
 
 import java.util.Random;
 
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -16,7 +16,7 @@ public class DigUntilAi extends SpellAiLogic {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         double chance = .4; // 40 percent chance with instant speed stuff
-        if (AbilityFactory.isSorcerySpeed(sa)) {
+        if (AbilityUtils.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }

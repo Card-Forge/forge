@@ -2,7 +2,7 @@ package forge.card.abilityfactory.ai;
 
 import java.util.Random;
 
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -40,14 +40,14 @@ public class ScryAi extends SpellAiLogic {
 
         double chance = .4; // 40 percent chance of milling with instant speed
                             // stuff
-        if (AbilityFactory.isSorcerySpeed(sa)) {
+        if (AbilityUtils.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
-        if (AbilityFactory.playReusable(ai, sa)) {
+        if (SpellAiLogic.playReusable(ai, sa)) {
             randomReturn = true;
         }
 

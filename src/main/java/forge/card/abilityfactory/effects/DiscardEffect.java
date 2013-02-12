@@ -10,7 +10,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -45,7 +45,7 @@ public class DiscardEffect extends RevealEffectBase {
 
             int numCards = 1;
             if (sa.hasParam("NumCards")) {
-                numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+                numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
             }
 
             if (mode.equals("Hand")) {
@@ -169,7 +169,7 @@ public class DiscardEffect extends RevealEffectBase {
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (mode.equals("Defined")) {
-                    final List<Card> toDiscard = AbilityFactory.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
+                    final List<Card> toDiscard = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
                     for (final Card c : toDiscard) {
                         discarded.addAll(p.discard(c, sa));
                     }
@@ -202,7 +202,7 @@ public class DiscardEffect extends RevealEffectBase {
 
                 int numCards = 1;
                 if (sa.hasParam("NumCards")) {
-                    numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+                    numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
                     if (p.getCardsIn(ZoneType.Hand).size() > 0
                             && p.getCardsIn(ZoneType.Hand).size() < numCards) {
                         // System.out.println("Scale down discard from " + numCards + " to " + p.getCardsIn(ZoneType.Hand).size());
@@ -244,7 +244,7 @@ public class DiscardEffect extends RevealEffectBase {
                     String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
 
                     if (valid.contains("X")) {
-                        valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
+                        valid = valid.replace("X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
                     }
 
                     final List<Card> dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source);

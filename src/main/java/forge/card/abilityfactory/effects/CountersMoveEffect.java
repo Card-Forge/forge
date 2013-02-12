@@ -4,7 +4,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CounterType;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -22,7 +22,7 @@ public class CountersMoveEffect extends SpellEffect {
         if (!sa.hasParam("Source") && tgt != null) {
             srcCards = tgt.getTargetCards();
         } else {
-            srcCards = AbilityFactory.getDefinedCards(host, sa.getParam("Source"), sa);
+            srcCards = AbilityUtils.getDefinedCards(host, sa.getParam("Source"), sa);
         }
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
@@ -30,7 +30,7 @@ public class CountersMoveEffect extends SpellEffect {
         final List<Card> tgtCards = getTargetCards(sa);
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
 
         sb.append("Move ").append(amount).append(" ").append(cType.getName()).append(" counter");
         if (amount != 1) {
@@ -48,7 +48,7 @@ public class CountersMoveEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
 
         Card source = null;
         List<Card> srcCards;
@@ -56,7 +56,7 @@ public class CountersMoveEffect extends SpellEffect {
         if (!sa.hasParam("Source") && tgt != null) {
             srcCards = tgt.getTargetCards();
         } else {
-            srcCards = AbilityFactory.getDefinedCards(host, sa.getParam("Source"), sa);
+            srcCards = AbilityUtils.getDefinedCards(host, sa.getParam("Source"), sa);
         }
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
@@ -65,7 +65,7 @@ public class CountersMoveEffect extends SpellEffect {
         if (!sa.hasParam("Defined") && tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
+            tgtCards = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
         }
 
         for (final Card dest : tgtCards) {

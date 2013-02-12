@@ -3,7 +3,7 @@ package forge.card.abilityfactory.effects;
 import java.util.List;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -15,7 +15,7 @@ public class MillEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
-        final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+        final int numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
         final boolean bottom = sa.hasParam("FromBottom");
 
         if (sa.hasParam("ForgetOtherRemembered")) {
@@ -49,7 +49,7 @@ public class MillEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+        final int numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         for (final Player p : tgtPlayers) {

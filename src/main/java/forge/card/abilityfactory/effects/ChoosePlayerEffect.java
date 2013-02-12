@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -34,7 +34,7 @@ public class ChoosePlayerEffect extends SpellEffect {
 
         final Target tgt = sa.getTarget();
 
-        final List<Player> choices = sa.hasParam("Choices") ? AbilityFactory.getDefinedPlayers(
+        final List<Player> choices = sa.hasParam("Choices") ? AbilityUtils.getDefinedPlayers(
                 sa.getSourceCard(), sa.getParam("Choices"), sa) : new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
 
         final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a player";

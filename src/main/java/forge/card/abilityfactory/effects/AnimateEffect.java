@@ -10,6 +10,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -44,11 +45,11 @@ public class AnimateEffect extends AnimateEffectBase {
         // AF specific sa
         int power = -1;
         if (sa.hasParam("Power")) {
-            power = AbilityFactory.calculateAmount(host, sa.getParam("Power"), sa);
+            power = AbilityUtils.calculateAmount(host, sa.getParam("Power"), sa);
         }
         int toughness = -1;
         if (sa.hasParam("Toughness")) {
-            toughness = AbilityFactory.calculateAmount(host, sa.getParam("Toughness"), sa);
+            toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
 
         // Every Animate event needs a unique time stamp
@@ -135,7 +136,7 @@ public class AnimateEffect extends AnimateEffectBase {
         }
 
         final Target tgt = sa.getTarget();
-        List<Card> tgts = tgt != null ? tgts = tgt.getTargetCards() : AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
+        List<Card> tgts = tgt != null ? tgts = tgt.getTargetCards() : AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
         for (final Card c : tgts) {
 
@@ -229,7 +230,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // give Remembered
             if (animateRemembered != null) {
-                for (final Object o : AbilityFactory.getDefinedObjects(host, animateRemembered, sa)) {
+                for (final Object o : AbilityUtils.getDefinedObjects(host, animateRemembered, sa)) {
                     c.addRemembered(o);
                 }
             }
@@ -289,11 +290,11 @@ public class AnimateEffect extends AnimateEffectBase {
 
         int power = -1;
         if (sa.hasParam("Power")) {
-            power = AbilityFactory.calculateAmount(host, sa.getParam("Power"), sa);
+            power = AbilityUtils.calculateAmount(host, sa.getParam("Power"), sa);
         }
         int toughness = -1;
         if (sa.hasParam("Toughness")) {
-            toughness = AbilityFactory.calculateAmount(host, sa.getParam("Toughness"), sa);
+            toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
 
         final boolean permanent = sa.hasParam("Permanent");
@@ -321,7 +322,7 @@ public class AnimateEffect extends AnimateEffectBase {
         final StringBuilder sb = new StringBuilder();
 
         final Target tgt = sa.getTarget();
-        final List<Card> tgts = tgt != null ? tgt.getTargetCards() :  AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        final List<Card> tgts = tgt != null ? tgt.getTargetCards() :  AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
         for (final Card c : tgts) {
             sb.append(c).append(" ");

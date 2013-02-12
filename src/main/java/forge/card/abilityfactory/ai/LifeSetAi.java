@@ -5,7 +5,7 @@ import java.util.Random;
 import forge.Card;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -47,7 +47,7 @@ public class LifeSetAi extends SpellAiLogic {
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
-            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
         }
 
         // prevent run-away activations - first time will always return true
@@ -118,7 +118,7 @@ public class LifeSetAi extends SpellAiLogic {
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
-            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
         }
 
         if (source.getName().equals("Eternity Vessel")

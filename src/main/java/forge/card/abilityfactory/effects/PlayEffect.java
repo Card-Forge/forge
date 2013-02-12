@@ -12,7 +12,7 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -61,11 +61,11 @@ public class PlayEffect extends SpellEffect {
         boolean useEncoded = false;
         int amount = 1;
         if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
-            amount = AbilityFactory.calculateAmount(source, sa.getParam("Amount"), sa);
+            amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
         }
 
         if (sa.hasParam("Controller")) {
-            activator = AbilityFactory.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
+            activator = AbilityUtils.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
         }
 
         final Player controller = activator;
@@ -77,7 +77,7 @@ public class PlayEffect extends SpellEffect {
                 zone = ZoneType.smartValueOf(sa.getParam("ValidZone"));
             }
             tgtCards = game.getCardsIn(zone);
-            tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("Valid"), sa);
+            tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("Valid"), sa);
         }
         else if (sa.hasParam("Encoded")) {
             final ArrayList<Card> encodedCards = source.getEncoded();

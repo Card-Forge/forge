@@ -4,7 +4,7 @@ import java.util.Random;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
@@ -43,7 +43,7 @@ public class LifeGainAi extends SpellAiLogic {
             source.setSVar("PayX", Integer.toString(xPay));
             lifeAmount = xPay;
         } else {
-            lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            lifeAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
         }
 
         // don't use it if no life to gain
@@ -100,7 +100,7 @@ public class LifeGainAi extends SpellAiLogic {
         // Don't use lifegain before main 2 if possible
         if (!lifeCritical && (!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
                 || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !AbilityFactory.isSorcerySpeed(sa)) {
+                && !sa.hasParam("PlayerTurn") && !AbilityUtils.isSorcerySpeed(sa)) {
             return false;
         }
 
@@ -123,7 +123,7 @@ public class LifeGainAi extends SpellAiLogic {
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
-        if (lifeCritical || AbilityFactory.playReusable(ai, sa)) {
+        if (lifeCritical || SpellAiLogic.playReusable(ai, sa)) {
             randomReturn = true;
         }
 

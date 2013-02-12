@@ -21,7 +21,7 @@ import java.util.List;
 
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -60,7 +60,7 @@ public class AddTurnAi extends SpellAiLogic {
                 }
             }
         } else {
-            final List<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Player> tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : tgtPlayers) {
                 if (p.isOpponentOf(ai) && !mandatory) {
                     return false;

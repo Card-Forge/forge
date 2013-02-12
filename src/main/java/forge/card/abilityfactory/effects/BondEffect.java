@@ -4,7 +4,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -15,7 +15,7 @@ public class BondEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         // find card that triggered pairing first
-        List<Card> trigCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        List<Card> trigCards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
         // Check that this card hasn't already become paired by an earlier trigger
         if (trigCards.get(0).isPaired() || !trigCards.get(0).isInZone(ZoneType.Battlefield)) {
@@ -24,7 +24,7 @@ public class BondEffect extends SpellEffect {
 
         // find list of valid cards to pair with
         List<Card> cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        cards = AbilityFactory.filterListByType(cards, sa.getParam("ValidCards"), sa);
+        cards = AbilityUtils.filterListByType(cards, sa.getParam("ValidCards"), sa);
         if (cards.isEmpty()) {
             return;
         }
@@ -50,7 +50,7 @@ public class BondEffect extends SpellEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        List<Card> tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        List<Card> tgts = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
         final StringBuilder sb = new StringBuilder();
 

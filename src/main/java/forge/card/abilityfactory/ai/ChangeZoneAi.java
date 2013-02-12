@@ -16,7 +16,7 @@ import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.abilityfactory.effects.AttachEffect;
@@ -251,9 +251,9 @@ public class ChangeZoneAi extends SpellAiLogic {
             pDefined = tgt.getTargetPlayers();
         } else {
             if (sa.hasParam("DefinedPlayer")) {
-                pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
+                pDefined = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
             } else {
-                pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+                pDefined = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             }
         }
 
@@ -396,7 +396,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             if (mandatory) {
                 return true;
             }
-            pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            pDefined = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         for (final Player p : pDefined) {
@@ -404,7 +404,7 @@ public class ChangeZoneAi extends SpellAiLogic {
 
             // Computer should "know" his deck
             if (p == ai) {
-                list = AbilityFactory.filterListByType(list, sa.getParam("ChangeType"), sa);
+                list = AbilityUtils.filterListByType(list, sa.getParam("ChangeType"), sa);
             }
 
             if (list.isEmpty()) {
@@ -749,7 +749,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     }
                 }
                 // Blink permanents with ETB triggers
-                else if (sa.isAbility() && (sa.getPayCosts() != null) && AbilityFactory.playReusable(ai, sa)) {
+                else if (sa.isAbility() && (sa.getPayCosts() != null) && SpellAiLogic.playReusable(ai, sa)) {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
@@ -1033,7 +1033,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         if (sa.getTarget() == null) {
             // Just in case of Defined cases
             if (!mandatory && sa.hasParam("AttachedTo")) {
-                final List<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("AttachedTo"), sa);
+                final List<Card> list = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("AttachedTo"), sa);
                 if (!list.isEmpty()) {
                     final Card attachedTo = list.get(0);
                     // This code is for the Dragon auras
@@ -1088,22 +1088,22 @@ public class ChangeZoneAi extends SpellAiLogic {
             type = "Card";
         }
 
-        int changeNum = sa.hasParam("ChangeNum") ? AbilityFactory.calculateAmount(card, sa.getParam("ChangeNum"),
+        int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(card, sa.getParam("ChangeNum"),
                 sa) : 1;
 
         List<Card> fetchList;
         if (defined) {
-            fetchList = new ArrayList<Card>(AbilityFactory.getDefinedCards(card, sa.getParam("Defined"), sa));
+            fetchList = new ArrayList<Card>(AbilityUtils.getDefinedCards(card, sa.getParam("Defined"), sa));
             if (!sa.hasParam("ChangeNum")) {
                 changeNum = fetchList.size();
             }
         } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
                 && !sa.hasParam("DefinedPlayer")) {
             fetchList = Singletons.getModel().getGame().getCardsIn(origin);
-            fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
+            fetchList = AbilityUtils.filterListByType(fetchList, type, sa);
         } else {
             fetchList = player.getCardsIn(origin);
-            fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
+            fetchList = AbilityUtils.filterListByType(fetchList, type, sa);
         }
 
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
@@ -1248,7 +1248,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 }
 
                 if (sa.hasParam("AttachedTo")) {
-                    List<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                    List<Card> list = AbilityUtils.getDefinedCards(sa.getSourceCard(),
                             sa.getParam("AttachedTo"), sa);
                     if (list.isEmpty()) {
                         list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);

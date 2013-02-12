@@ -5,7 +5,7 @@ import java.util.Random;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -64,7 +64,7 @@ public class MillAi extends SpellAiLogic {
 
         double chance = .4; // 40 percent chance of milling with instant speed
                             // stuff
-        if (AbilityFactory.isSorcerySpeed(sa)) {
+        if (AbilityUtils.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed
         }
 
@@ -85,7 +85,7 @@ public class MillAi extends SpellAiLogic {
             }
         }
 
-        if (AbilityFactory.playReusable(ai, sa)) {
+        if (SpellAiLogic.playReusable(ai, sa)) {
             randomReturn = true;
             // some other variables here, like deck size, and phase and other fun stuff
         }
@@ -107,7 +107,7 @@ public class MillAi extends SpellAiLogic {
                 return false;
             }
 
-            final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+            final int numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
 
             final List<Card> pLibrary = opp.getCardsIn(ZoneType.Library);
 

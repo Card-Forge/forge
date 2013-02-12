@@ -10,7 +10,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.CharmEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -346,8 +346,7 @@ public class GameActionPlay {
             return original;
         }
 
-        final SpellAbility ability = activator.getController().getAbilityToPlay(abilities);
-        return ability;
+        return activator.getController().getAbilityToPlay(abilities);
     }
 
     /**
@@ -447,7 +446,7 @@ public class GameActionPlay {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
             if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
-                AbilityFactory.resolve(sa, false);
+                AbilityUtils.resolve(sa, false);
                 return;
             } else if (sa.getBeforePayMana() == null) {
                 matchInput.setInput(new InputPayManaCost(sa, true));

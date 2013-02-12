@@ -24,7 +24,7 @@ import forge.Card;
 import forge.Singletons;
 
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
@@ -120,7 +120,7 @@ public class CostReveal extends CostPartWithList {
                 if (sVar.equals("XChoice")) {
                     c = hand.size();
                 } else {
-                    c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+                    c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
                 }
             }
 
@@ -170,7 +170,7 @@ public class CostReveal extends CostPartWithList {
                 if (sVar.equals("XChoice")) {
                     num = CostUtil.chooseXValue(source, ability, handList.size());
                 } else {
-                    num = AbilityFactory.calculateAmount(source, amount, ability);
+                    num = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
             if (num > 0) {

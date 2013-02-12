@@ -25,6 +25,7 @@ import java.util.List;
 import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -208,7 +209,7 @@ public class ReplacementHandler {
             Player optDecider = decider;
             if (mapParams.containsKey("OptionalDecider") && (effectSA != null)) {
                 effectSA.setActivatingPlayer(replacementEffect.getHostCard().getController());
-                optDecider = AbilityFactory.getDefinedPlayers(replacementEffect.getHostCard(),
+                optDecider = AbilityUtils.getDefinedPlayers(replacementEffect.getHostCard(),
                         mapParams.get("OptionalDecider"), effectSA).get(0);
             }
 
@@ -236,6 +237,7 @@ public class ReplacementHandler {
         }
 
         Player player = replacementEffect.getHostCard().getController();
+        //player.getController().playNoStack()
         if (player.isHuman()) {
             game.getActionPlay().playSpellAbilityNoStack(player, effectSA, false);
         } else {

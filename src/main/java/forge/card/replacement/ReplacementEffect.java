@@ -27,7 +27,7 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
@@ -88,7 +88,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
                     if (sa == null) {
                         compareTo = CardFactoryUtil.xCount(this.hostCard, this.hostCard.getSVar(strCmpTo));
                     } else {
-                        compareTo = AbilityFactory.calculateAmount(this.hostCard, this.hostCard.getSVar(strCmpTo), sa);
+                        compareTo = AbilityUtils.calculateAmount(this.hostCard, this.hostCard.getSVar(strCmpTo), sa);
                     }
                 }
             }
@@ -98,7 +98,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             if (sa == null) {
                 left = CardFactoryUtil.xCount(this.hostCard, this.hostCard.getSVar(svarToCheck));
             } else {
-                left = AbilityFactory.calculateAmount(this.hostCard, svarToCheck, sa);
+                left = AbilityUtils.calculateAmount(this.hostCard, svarToCheck, sa);
             }
             System.out.println("aiShouldRun?" + left + comparator + compareTo);
             if (Expressions.compare(left, comparator, compareTo)) {
@@ -350,7 +350,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
 
         if (this.getMapParams().containsKey("CheckSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()), this
+            final int sVar = AbilityUtils.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()), this
                     .getMapParams().get("CheckSVar"), null);
             String comparator = "GE1";
             if (this.getMapParams().containsKey("SVarCompare")) {
@@ -358,7 +358,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityFactory.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()),
+            final int operandValue = AbilityUtils.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()),
                     svarOperand, null);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;

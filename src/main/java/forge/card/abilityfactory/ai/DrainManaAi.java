@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -28,7 +28,7 @@ public class DrainManaAi extends SpellAiLogic {
             // assume we are looking to tap human's stuff
             // TODO - check for things with untap abilities, and don't tap
             // those.
-            final List<Player> defined = AbilityFactory.getDefinedPlayers(source, sa.getParam("Defined"), sa);
+            final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
             if (!defined.contains(opp)) {
                 return false;
@@ -52,7 +52,7 @@ public class DrainManaAi extends SpellAiLogic {
             if (mandatory) {
                 return true;
             } else {
-                final List<Player> defined = AbilityFactory.getDefinedPlayers(source, sa.getParam("Defined"), sa);
+                final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
                 if (!defined.contains(opp)) {
                     return false;
@@ -77,7 +77,7 @@ public class DrainManaAi extends SpellAiLogic {
         boolean randomReturn = true;
 
         if (tgt == null) {
-            final List<Player> defined = AbilityFactory.getDefinedPlayers(source, sa.getParam("Defined"), sa);
+            final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
             if (defined.contains(ai)) {
                 return false;

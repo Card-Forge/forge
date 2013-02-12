@@ -9,7 +9,7 @@ import forge.Command;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
@@ -28,7 +28,7 @@ public class ControlGainEffect extends SpellEffect {
 
         final Target tgt = sa.getTarget();
 
-        List<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
+        List<Player> newController = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
         if ((tgt != null) && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
             newController = tgt.getTargetPlayers();
         }
@@ -90,9 +90,9 @@ public class ControlGainEffect extends SpellEffect {
         final Target tgt = sa.getTarget();
         if (sa.hasParam("AllValid")) {
             tgtCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-            tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
+            tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
         } else if (sa.hasParam("Defined")) {
-            tgtCards = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
+            tgtCards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
         } else {
             tgtCards = getTargetCards(sa);
         }
@@ -100,7 +100,7 @@ public class ControlGainEffect extends SpellEffect {
         List<Player> controllers = new ArrayList<Player>();
 
         if (sa.hasParam("NewController")) {
-            controllers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
+            controllers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
         } else if (tgt != null && tgt.getTargetPlayers() != null && tgt.canTgtPlayer()) {
             controllers = tgt.getTargetPlayers();
         }

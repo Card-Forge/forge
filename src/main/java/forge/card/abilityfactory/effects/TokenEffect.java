@@ -23,6 +23,7 @@ import forge.Card;
 
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -116,9 +117,9 @@ public class TokenEffect extends SpellEffect {
 
         readParameters(sa);
 
-        final int finalPower = AbilityFactory.calculateAmount(host, this.tokenPower, sa);
-        final int finalToughness = AbilityFactory.calculateAmount(host, this.tokenToughness, sa);
-        final int finalAmount = AbilityFactory.calculateAmount(host, this.tokenAmount, sa);
+        final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
+        final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
+        final int finalAmount = AbilityUtils.calculateAmount(host, this.tokenAmount, sa);
 
         final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
@@ -182,9 +183,9 @@ public class TokenEffect extends SpellEffect {
 
         cost = colorDesc.replace('C', '1').trim();
 
-        final int finalPower = AbilityFactory.calculateAmount(host, this.tokenPower, sa);
-        final int finalToughness = AbilityFactory.calculateAmount(host, this.tokenToughness, sa);
-        final int finalAmount = AbilityFactory.calculateAmount(host, this.tokenAmount, sa);
+        final int finalPower = AbilityUtils.calculateAmount(host, this.tokenPower, sa);
+        final int finalToughness = AbilityUtils.calculateAmount(host, this.tokenToughness, sa);
+        final int finalAmount = AbilityUtils.calculateAmount(host, this.tokenAmount, sa);
 
         final String[] substitutedTypes = Arrays.copyOf(this.tokenTypes, this.tokenTypes.length);
         for (int i = 0; i < substitutedTypes.length; i++) {
@@ -195,7 +196,7 @@ public class TokenEffect extends SpellEffect {
         final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
         final String remember = sa.getParam("RememberTokens");
-        for (final Player controller : AbilityFactory.getDefinedPlayers(host, this.tokenOwner, sa)) {
+        for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
             for (int i = 0; i < finalAmount; i++) {
                 final List<Card> tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost,
                         substitutedTypes, finalPower, finalToughness, this.tokenKeywords);

@@ -28,7 +28,7 @@ import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
@@ -1540,7 +1540,7 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public List<Card> knownDetermineDefined(final String defined) {
         final List<Card> ret = new ArrayList<Card>();
-        final List<Card> list = AbilityFactory.getDefinedCards(getSourceCard(), defined, this);
+        final List<Card> list = AbilityUtils.getDefinedCards(getSourceCard(), defined, this);
 
         for (final Card c : list) {
             final Card actualCard = Singletons.getModel().getGame().getCardState(c);

@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -47,7 +47,7 @@ public class TapAllEffect extends SpellEffect {
             }
         }
 
-        cards = AbilityFactory.filterListByType(cards, sa.getParam("ValidCards"), sa);
+        cards = AbilityUtils.filterListByType(cards, sa.getParam("ValidCards"), sa);
 
         for (final Card c : cards) {
             if (remTapped) {

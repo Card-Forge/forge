@@ -9,7 +9,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -36,7 +36,7 @@ public class  DamageAllAi extends SpellAiLogic {
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
@@ -110,7 +110,7 @@ public class  DamageAllAi extends SpellAiLogic {
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -194,7 +194,7 @@ public class  DamageAllAi extends SpellAiLogic {
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.

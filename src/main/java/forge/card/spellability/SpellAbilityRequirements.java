@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cost.CostPayment;
 import forge.game.zone.Zone;
 
@@ -187,7 +187,7 @@ public class SpellAbilityRequirements {
     public final void finishPaying() {
         if (this.isFree || this.payment.isAllPaid()) {
             if (this.skipStack) {
-                AbilityFactory.resolve(this.ability, false);
+                AbilityUtils.resolve(this.ability, false);
             } else {
                 this.addAbilityToStack();
             }

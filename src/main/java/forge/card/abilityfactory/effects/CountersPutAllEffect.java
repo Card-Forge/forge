@@ -6,7 +6,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -20,7 +20,7 @@ public class CountersPutAllEffect extends SpellEffect  {
         final StringBuilder sb = new StringBuilder();
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
 
         sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
@@ -40,7 +40,7 @@ public class CountersPutAllEffect extends SpellEffect  {
     @Override
     public void resolve(SpellAbility sa) {
         final String type = sa.getParam("CounterType");
-        final int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int counterAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
 

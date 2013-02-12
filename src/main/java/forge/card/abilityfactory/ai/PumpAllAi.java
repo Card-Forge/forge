@@ -9,7 +9,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -31,8 +31,8 @@ public class PumpAllAi extends PumpAiBase {
         String valid = "";
         final Card source = sa.getSourceCard();
 
-        final int power = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
-        final int defense = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
+        final int power = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
+        final int defense = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
 
         final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();

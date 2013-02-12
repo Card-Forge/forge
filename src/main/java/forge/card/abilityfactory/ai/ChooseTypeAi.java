@@ -1,6 +1,6 @@
 package forge.card.abilityfactory.ai;
 
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -25,7 +25,7 @@ public class ChooseTypeAi extends SpellAiLogic {
             tgt.resetTargets();
             sa.getTarget().addTarget(ai);
         } else {
-            for (final Player p : AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa)) {
+            for (final Player p : AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa)) {
                 if (p.isOpponentOf(ai) && !mandatory) {
                     return false;
                 }

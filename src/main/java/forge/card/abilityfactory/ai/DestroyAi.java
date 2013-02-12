@@ -10,7 +10,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -74,7 +74,7 @@ public class DestroyAi extends SpellAiLogic {
                 list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
             }
             list = CardLists.getNotKeyword(list, "Indestructible");
-            if (!AbilityFactory.playReusable(ai, sa)) {
+            if (!SpellAiLogic.playReusable(ai, sa)) {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -152,7 +152,7 @@ public class DestroyAi extends SpellAiLogic {
             }
         } else {
             if (sa.hasParam("Defined")) {
-                list = new ArrayList<Card>(AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa));
+                list = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
                 if (list.isEmpty()
                         || !CardLists.filterControlledBy(list, ai).isEmpty()
                         || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -31,7 +32,7 @@ public class FlipCoinEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final Player player = host.getController();
 
-        final List<Player> caller = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Caller"), sa);
+        final List<Player> caller = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Caller"), sa);
         if (caller.isEmpty()) {
             caller.add(player);
         }
@@ -55,7 +56,7 @@ public class FlipCoinEffect extends SpellEffect {
                 win.setActivatingPlayer(player);
                 ((AbilitySub) win).setParent(sa);
 
-                AbilityFactory.resolve(win, false);
+                AbilityUtils.resolve(win, false);
             }
             // runParams.put("Won","True");
         } else {
@@ -67,7 +68,7 @@ public class FlipCoinEffect extends SpellEffect {
                 lose.setActivatingPlayer(player);
                 ((AbilitySub) lose).setParent(sa);
 
-                AbilityFactory.resolve(lose, false);
+                AbilityUtils.resolve(lose, false);
             }
             // runParams.put("Won","False");
         }

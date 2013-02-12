@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -22,7 +22,7 @@ import forge.game.player.Player;
          */
         @Override
         public void resolve(SpellAbility sa) {
-            final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
+            final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
 
             final Target tgt = sa.getTarget();
             for (final Player p : getTargetPlayers(sa)) {
@@ -38,7 +38,7 @@ import forge.game.player.Player;
         @Override
         protected String getStackDescription(SpellAbility sa) {
             final StringBuilder sb = new StringBuilder();
-            final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
+            final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
 
             final List<Player> tgtPlayers = getTargetPlayers(sa);
 

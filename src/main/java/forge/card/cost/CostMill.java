@@ -24,7 +24,7 @@ import java.util.List;
 import forge.Card;
 
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
@@ -69,7 +69,7 @@ public class CostMill extends CostPartWithList {
                 return true;
             }
 
-            i = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+            i = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
 
         return i < zone.size();
@@ -94,7 +94,7 @@ public class CostMill extends CostPartWithList {
                 return false;
             }
 
-            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
 
         this.setList(new ArrayList<Card>(ai.getCardsIn(ZoneType.Library, c)));
@@ -138,7 +138,7 @@ public class CostMill extends CostPartWithList {
             if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, ability, this.getList().size());
             } else {
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
         final List<Card> list = activator.getCardsIn(ZoneType.Library, c);

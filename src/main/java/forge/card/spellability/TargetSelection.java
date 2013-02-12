@@ -27,7 +27,7 @@ import forge.Card;
 import forge.Singletons;
 
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -315,7 +315,7 @@ public class TargetSelection {
         }
         // If the cards must have a specific controller
         if (tgt.getDefinedController() != null) {
-            List<Player> pl = AbilityFactory.getDefinedPlayers(card, tgt.getDefinedController(), this.ability);
+            List<Player> pl = AbilityUtils.getDefinedPlayers(card, tgt.getDefinedController(), this.ability);
             if (pl != null && !pl.isEmpty()) {
                 Player controller = pl.get(0);
                 choices = CardLists.filterControlledBy(choices, controller);

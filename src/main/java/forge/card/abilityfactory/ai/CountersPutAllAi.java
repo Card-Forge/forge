@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
@@ -74,7 +74,7 @@ public class CountersPutAllAi extends SpellAiLogic {
             amount = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(amount));
         } else {
-            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
         }
 
         // prevent run-away activations - first time will always return true
@@ -124,7 +124,7 @@ public class CountersPutAllAi extends SpellAiLogic {
             }
         }
 
-        if (sa.isTrigger() || sa instanceof AbilitySub || AbilityFactory.playReusable(ai, sa)) {
+        if (sa.isTrigger() || sa instanceof AbilitySub || SpellAiLogic.playReusable(ai, sa)) {
             return chance;
         }
 

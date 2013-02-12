@@ -10,7 +10,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -28,7 +28,7 @@ public class DigEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
-        final int numToDig = AbilityFactory.calculateAmount(host, sa.getParam("DigNum"), sa);
+        final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         sb.append(host.getController()).append(" looks at the top ").append(numToDig);
@@ -53,7 +53,7 @@ public class DigEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final Player player = sa.getActivatingPlayer();
         Player choser = player;
-        int numToDig = AbilityFactory.calculateAmount(host, sa.getParam("DigNum"), sa);
+        int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
         final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone"))
                 : ZoneType.Hand;
         final ZoneType destZone2 = sa.hasParam("DestinationZone2") ? ZoneType.smartValueOf(sa.getParam("DestinationZone2")) : ZoneType.Library;
@@ -83,7 +83,7 @@ public class DigEffect extends SpellEffect {
             } else if (sa.getParam("ChangeNum").equalsIgnoreCase("AllButOne")) {
                 allButOne = true;
             } else {
-                destZone1ChangeNum = AbilityFactory.calculateAmount(host, sa.getParam("ChangeNum"), sa);
+                destZone1ChangeNum = AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
             }
         }
 
@@ -91,7 +91,7 @@ public class DigEffect extends SpellEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (sa.hasParam("Choser")) {
-            final List<Player> chosers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Choser"), sa);
+            final List<Player> chosers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Choser"), sa);
             if (!chosers.isEmpty()) {
                 choser = chosers.get(0);
             }

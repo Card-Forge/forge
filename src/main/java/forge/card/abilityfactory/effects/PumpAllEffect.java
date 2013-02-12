@@ -7,7 +7,7 @@ import java.util.List;
 import forge.Card;
 import forge.Command;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -63,11 +63,11 @@ public class PumpAllEffect extends SpellEffect {
             valid = sa.getParam("ValidCards");
         }
 
-        list = AbilityFactory.filterListByType(list, valid, sa);
+        list = AbilityUtils.filterListByType(list, valid, sa);
 
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-        final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
-        final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
+        final int a = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
+        final int d = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
         final String remember = sa.getParam("RememberAllPumped");
         
         for (final Card tgtC : list) {

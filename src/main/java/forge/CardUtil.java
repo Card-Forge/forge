@@ -28,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardCharacteristics;
 import forge.card.EditionInfo;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -523,7 +523,7 @@ public final class CardUtil {
 
         // Reuse AF_Defined in a slightly different way
         if (validCard.startsWith("Defined.")) {
-            cards = AbilityFactory.getDefinedCards(card, validCard.replace("Defined.", ""), abMana);
+            cards = AbilityUtils.getDefinedCards(card, validCard.replace("Defined.", ""), abMana);
         } else {
             cards = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
         }

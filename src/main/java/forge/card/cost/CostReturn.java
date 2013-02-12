@@ -26,7 +26,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
@@ -145,7 +145,7 @@ public class CostReturn extends CostPartWithList {
             if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, ability, list.size());
             } else {
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
         if (this.isTargetingThis()) {
@@ -173,7 +173,7 @@ public class CostReturn extends CostPartWithList {
         } else {
             Integer c = this.convertAmount();
             if (c == null) {
-                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
             }
 
             this.setList(ComputerUtil.chooseReturnType(ai, this.getType(), source, ability.getTargetCard(), c));

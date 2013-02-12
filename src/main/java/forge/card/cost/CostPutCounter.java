@@ -24,7 +24,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -160,7 +160,7 @@ public class CostPutCounter extends CostPartWithList {
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         Integer c = this.convertAmount();
         if (c == null) {
-            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
 
         if (this.isTargetingThis()) {
@@ -184,7 +184,7 @@ public class CostPutCounter extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         Integer c = this.convertAmount();
         if (c == null) {
-            c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
 
         if (this.isTargetingThis()) {
@@ -215,7 +215,7 @@ public class CostPutCounter extends CostPartWithList {
         } else {
             Integer c = this.convertAmount();
             if (c == null) {
-                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
             }
 
             final List<Card> typeList =

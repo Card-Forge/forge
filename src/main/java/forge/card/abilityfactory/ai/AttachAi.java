@@ -16,7 +16,7 @@ import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -587,7 +587,7 @@ public class AttachAi extends SpellAiLogic {
         ArrayList<Object> targets = new ArrayList<Object>();
         final Target tgt = sa.getTarget();
         if (tgt == null) {
-            targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            targets = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         } else {
             AttachAi.attachPreference(sa, tgt, mandatory);
         }

@@ -12,7 +12,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -402,7 +402,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
-                && AbilityFactory.isSorcerySpeed(sa)
+                && AbilityUtils.isSorcerySpeed(sa)
                 && attack > 0
                 && CardFactoryUtil.doesCreatureAttackAI(ai, c)) {
             return true;

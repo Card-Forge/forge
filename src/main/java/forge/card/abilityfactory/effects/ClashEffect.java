@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -38,7 +39,7 @@ public class ClashEffect extends SpellEffect {
                 win.setActivatingPlayer(sa.getSourceCard().getController());
                 ((AbilitySub) win).setParent(sa);
 
-                AbilityFactory.resolve(win, false);
+                AbilityUtils.resolve(win, false);
             }
             runParams.put("Won", "True");
         } else {
@@ -48,7 +49,7 @@ public class ClashEffect extends SpellEffect {
                 otherwise.setActivatingPlayer(sa.getSourceCard().getController());
                 ((AbilitySub) otherwise).setParent(sa);
 
-                AbilityFactory.resolve(otherwise, false);
+                AbilityUtils.resolve(otherwise, false);
             }
             runParams.put("Won", "False");
         }

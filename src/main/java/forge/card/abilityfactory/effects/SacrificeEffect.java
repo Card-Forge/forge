@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtil;
@@ -22,7 +22,7 @@ public class SacrificeEffect extends SpellEffect {
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
-        final int amount = AbilityFactory.calculateAmount(card, num, sa);
+        final int amount = AbilityUtils.calculateAmount(card, num, sa);
         final List<Player> tgts = getTargetPlayers(sa);
 
         String valid = sa.getParam("SacValid");
@@ -84,7 +84,7 @@ public class SacrificeEffect extends SpellEffect {
 
         String num = sa.getParam("Amount");
         num = (num == null) ? "1" : num;
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), num, sa);
 
         if (valid.equals("Self")) {
             sb.append("Sacrifice ").append(sa.getSourceCard().toString());
@@ -129,7 +129,7 @@ public class SacrificeEffect extends SpellEffect {
     private List<Card> sacrificeAI(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy) {
         List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
-        List<Card> sacList = AbilityFactory.filterListByType(battlefield, valid, sa);
+        List<Card> sacList = AbilityUtils.filterListByType(battlefield, valid, sa);
         sacList = ComputerUtil.sacrificePermanents(p, amount, sacList, destroy, sa);
 
         return sacList;
@@ -153,7 +153,7 @@ public class SacrificeEffect extends SpellEffect {
      */
     public static List<Card> sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy, final boolean optional) {
-        List<Card> list = AbilityFactory.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, sa);
+        List<Card> list = AbilityUtils.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, sa);
         List<Card> sacList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
@@ -205,7 +205,7 @@ public class SacrificeEffect extends SpellEffect {
         List<Card> sacList = new ArrayList<Card>();
         for (int i = 0; i < amount; i++) {
             List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
-            List<Card> list = AbilityFactory.filterListByType(battlefield, valid, sa);
+            List<Card> list = AbilityUtils.filterListByType(battlefield, valid, sa);
             if (list.size() != 0) {
                 final Card sac = Aggregates.random(list);
                 if (destroy) {

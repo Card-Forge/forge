@@ -11,7 +11,7 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -28,7 +28,7 @@ public class ProtectEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
 
-        final ArrayList<String> gains = AbilityFactory.getProtectionList(sa);
+        final ArrayList<String> gains = AbilityUtils.getProtectionList(sa);
         final boolean choose = (sa.hasParam("Choices")) ? true : false;
         final String joiner = choose ? "or" : "and";
 
@@ -100,7 +100,7 @@ public class ProtectEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
-        final ArrayList<String> choices = AbilityFactory.getProtectionList(sa);
+        final ArrayList<String> choices = AbilityUtils.getProtectionList(sa);
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
 

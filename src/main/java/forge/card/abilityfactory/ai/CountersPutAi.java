@@ -10,7 +10,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -86,7 +86,7 @@ public class CountersPutAi extends SpellAiLogic {
         }
 
         // TODO handle proper calculation of X values based on Cost
-        int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -135,7 +135,7 @@ public class CountersPutAi extends SpellAiLogic {
                 abTgt.addTarget(choice);
             }
         } else {
-            final List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             // Don't activate Curse abilities on my cards and non-curse abilites
             // on my opponents
             if (cards.isEmpty() || !cards.get(0).getController().equals(player)) {
@@ -173,7 +173,7 @@ public class CountersPutAi extends SpellAiLogic {
         Card choice = null;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         final Player player = sa.isCurse() ? ai.getOpponent() : ai;
 
@@ -239,11 +239,11 @@ public class CountersPutAi extends SpellAiLogic {
         final Player player = isCurse ? ai.getOpponent() : ai;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         if (abTgt == null) {
             // No target. So must be defined
-            list = new ArrayList<Card>(AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa));
+            list = new ArrayList<Card>(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
 
             if (!mandatory) {
                 // TODO - If Trigger isn't mandatory, when wouldn't we want to

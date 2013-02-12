@@ -26,7 +26,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
@@ -169,7 +169,7 @@ public class CostSacrifice extends CostPartWithList {
                 if (sVar.equals("XChoice")) {
                     c = CostUtil.chooseXValue(source, ability, list.size());
                 } else {
-                    c = AbilityFactory.calculateAmount(source, amount, ability);
+                    c = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
             if (0 == c.intValue()) {
@@ -211,7 +211,7 @@ public class CostSacrifice extends CostPartWithList {
                     return false;
                 }
 
-                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
             }
             this.setList(ComputerUtil.chooseSacrificeType(activator, this.getType(), source, ability.getTargetCard(), c));
             if (this.getList() == null) {

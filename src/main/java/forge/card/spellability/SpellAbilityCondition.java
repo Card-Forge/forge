@@ -25,7 +25,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -263,7 +263,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.getIsPresent() != null) {
             List<Card> list = new ArrayList<Card>();
             if (this.getPresentDefined() != null) {
-                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa));
+                list.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa));
             } else {
                 list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             }
@@ -316,8 +316,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (this.getsVarToCheck() != null) {
-            final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), this.getsVarToCheck(), sa);
-            final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), this.getsVarOperand(), sa);
+            final int svarValue = AbilityUtils.calculateAmount(sa.getSourceCard(), this.getsVarToCheck(), sa);
+            final int operandValue = AbilityUtils.calculateAmount(sa.getSourceCard(), this.getsVarOperand(), sa);
 
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;

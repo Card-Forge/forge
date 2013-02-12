@@ -12,7 +12,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
@@ -184,7 +184,7 @@ public class ComputerUtilMana {
                     }
                     // resolve mana ability
                     //ma.resolve();
-                    AbilityFactory.resolve(ma, false);
+                    AbilityUtils.resolve(ma, false);
                     // subtract mana from mana pool
                     cost = manapool.payManaFromAbility(sa, cost, ma);
                 } else {
@@ -410,7 +410,7 @@ public class ComputerUtilMana {
                     if (xSvar.equals("PayX")) {
                         manaToAdd = Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X
                     } else {
-                        manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.getXcounter();
+                        manaToAdd = AbilityUtils.calculateAmount(card, xSvar, sa) * cost.getXcounter();
                     }
                 }
             }
@@ -697,7 +697,7 @@ public class ComputerUtilMana {
         final AbilityManaPart abMana = manaAb.getManaPart();
     
         if (abMana.isComboMana()) {
-            int amount = manaAb.hasParam("Amount") ? AbilityFactory.calculateAmount(source, manaAb.getParam("Amount"), saRoot) : 1;
+            int amount = manaAb.hasParam("Amount") ? AbilityUtils.calculateAmount(source, manaAb.getParam("Amount"), saRoot) : 1;
             final ManaCostBeingPaid testCost = new ManaCostBeingPaid(cost.toString().replace("X ", ""));
             final String[] comboColors = abMana.getComboColors().split(" ");
             for (int nMana = 1; nMana <= amount; nMana++) {

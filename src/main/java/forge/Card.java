@@ -38,7 +38,7 @@ import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
 import forge.card.SpellManaCost;
 import forge.card.EditionInfo;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -6355,8 +6355,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("TargetedControllerCtrl")) {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                final List<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
-                final List<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(source, "Targeted", sa);
+                final List<Card> list = AbilityUtils.getDefinedCards(source, "Targeted", sa);
+                final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(source, "Targeted", sa);
                 for (final Card c : list) {
                     final Player p = c.getController();
                     if (!this.getController().equals(p)) {
@@ -6438,7 +6438,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (!source.getCharacteristics().getTriggers().isEmpty()) {
                     for (final Trigger t : source.getCharacteristics().getTriggers()) {
                         final SpellAbility sa = t.getTriggeredSA();
-                        final List<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
+                        final List<Card> list = AbilityUtils.getDefinedCards(source, "Targeted", sa);
                         for (final Card c : list) {
                             if (!this.equipping.contains(c) && !c.equals(this.enchanting)) {
                                 return false;
@@ -6447,7 +6447,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 } else {
                     for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                        final List<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
+                        final List<Card> list = AbilityUtils.getDefinedCards(source, "Targeted", sa);
                         for (final Card c : list) {
                             if (!this.equipping.contains(c) && !c.equals(this.enchanting)) {
                                 return false;

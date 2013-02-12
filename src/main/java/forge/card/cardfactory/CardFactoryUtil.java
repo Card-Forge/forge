@@ -48,6 +48,7 @@ import forge.card.CardCharacteristics;
 import forge.card.CardType;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.CommonDrawback;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.abilityfactory.ai.CanPlayAsDrawbackAi;
@@ -1124,7 +1125,7 @@ public class CardFactoryUtil {
             public void resolve() {
                 final Card c = Singletons.getModel().getGame().getAction().exile(sourceCard);
 
-                int counters = AbilityFactory.calculateAmount(c, timeCounters, this);
+                int counters = AbilityUtils.calculateAmount(c, timeCounters, this);
                 c.addCounter(CounterType.TIME, counters, true);
 
                 StringBuilder sb = new StringBuilder();
@@ -4752,7 +4753,7 @@ public class CardFactoryUtil {
                             }
                             numCreatures[0] = count;
                         }
-                        final int multiplier = magnitude.equals("X") ? AbilityFactory.calculateAmount(card, magnitude, null)
+                        final int multiplier = magnitude.equals("X") ? AbilityUtils.calculateAmount(card, magnitude, null)
                                 : Integer.parseInt(magnitude);
                         final int totalCounters = numCreatures[0] * multiplier;
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -57,7 +57,7 @@ public class FightEffect extends SpellEffect {
             }
         }
         if (sa.hasParam("Defined")) {
-            List<Card> defined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            List<Card> defined = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             // Allow both fighters to come from defined list if first fighter not already found
             if (!defined.isEmpty()) {
                 if (defined.size() > 1 && fighter1 == null) {

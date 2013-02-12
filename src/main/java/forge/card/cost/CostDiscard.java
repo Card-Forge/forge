@@ -27,7 +27,7 @@ import forge.CardPredicates;
 import forge.Singletons;
 
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
@@ -204,7 +204,7 @@ public class CostDiscard extends CostPartWithList {
                     if (sVar.equals("XChoice")) {
                         c = CostUtil.chooseXValue(source, ability,  handList.size());
                     } else {
-                        c = AbilityFactory.calculateAmount(source, amount, ability);
+                        c = AbilityUtils.calculateAmount(source, amount, ability);
                     }
                 }
 
@@ -240,7 +240,7 @@ public class CostDiscard extends CostPartWithList {
                     if (sVar.equals("XChoice")) {
                         c = CostUtil.chooseXValue(source, ability, handList.size());
                     } else {
-                        c = AbilityFactory.calculateAmount(source, amount, ability);
+                        c = AbilityUtils.calculateAmount(source, amount, ability);
                     }
                 }
 
@@ -295,7 +295,7 @@ public class CostDiscard extends CostPartWithList {
                 if (sVar.equals("XChoice")) {
                     return false;
                 }
-                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
             }
 
             if (type.equals("Random")) {

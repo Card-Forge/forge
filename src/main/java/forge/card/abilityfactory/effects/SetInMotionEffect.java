@@ -2,7 +2,7 @@ package forge.card.abilityfactory.effects;
 
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -22,7 +22,7 @@ public class SetInMotionEffect extends SpellEffect {
 
         if (sa.hasParam("RepeatNum")) {
 
-            repeats = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("RepeatNum"), sa);
+            repeats = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("RepeatNum"), sa);
         }
 
         for (int i = 0; i < repeats; i++) {

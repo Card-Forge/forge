@@ -9,7 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Command;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -40,7 +40,7 @@ public class ProtectAllEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
-        final ArrayList<String> choices = AbilityFactory.getProtectionList(sa);
+        final ArrayList<String> choices = AbilityUtils.getProtectionList(sa);
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
@@ -110,7 +110,7 @@ public class ProtectAllEffect extends SpellEffect {
             players = sa.getParam("ValidPlayers");
         }
         if (!players.equals("")) {
-            final List<Player> playerList = AbilityFactory.getDefinedPlayers(host, players, sa);
+            final List<Player> playerList = AbilityUtils.getDefinedPlayers(host, players, sa);
             for (final Player player : playerList) {
                 for (final String gain : gains) {
                     player.addKeyword("Protection from " + gain);

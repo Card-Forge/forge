@@ -9,7 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;
@@ -128,7 +128,7 @@ public class ComputerUtilCost {
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
-                int num = AbilityFactory.calculateAmount(source, disc.getAmount(), null);
+                int num = AbilityUtils.calculateAmount(source, disc.getAmount(), null);
                 for (int i = 0; i < num; i++) {
                     Card pref = ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList);
                     if (pref == null) {
@@ -197,7 +197,7 @@ public class ComputerUtilCost {
     
                 Integer amount = payLife.convertAmount();
                 if (amount == null) {
-                    amount = AbilityFactory.calculateAmount(source, payLife.getAmount(), sourceAbility);
+                    amount = AbilityUtils.calculateAmount(source, payLife.getAmount(), sourceAbility);
                 }
     
                 if ((ai.getLife() - amount) < remainingLife) {

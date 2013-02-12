@@ -1,7 +1,7 @@
 package forge.card.abilityfactory.effects;
 
 
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -16,7 +16,7 @@ public class LifeLoseEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
         int affected = getTargetPlayers(sa).size();
         for (int i = 0; i < affected; i++) {
@@ -39,7 +39,7 @@ public class LifeLoseEffect extends SpellEffect {
 
         int lifeLost = 0;
 
-        final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
+        final int lifeAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
         final Target tgt = sa.getTarget();
         for (final Player p : getTargetPlayers(sa)) {

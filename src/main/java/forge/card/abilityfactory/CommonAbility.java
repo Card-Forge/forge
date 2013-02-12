@@ -34,7 +34,7 @@ public class CommonAbility extends AbilityActivated {
         }
 
         if (effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect) {
-            AbilityFactory.adjustChangeZoneTarget(params, this);
+            AbilityUtils.adjustChangeZoneTarget(params, this);
         }
     }
 

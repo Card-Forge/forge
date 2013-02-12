@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -49,7 +49,7 @@ public class TapOrUntapAllEffect extends SpellEffect {
 
         if (sa.hasParam("ValidCards")) {
             validCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-            validCards = AbilityFactory.filterListByType(validCards, sa.getParam("ValidCards"), sa);
+            validCards = AbilityUtils.filterListByType(validCards, sa.getParam("ValidCards"), sa);
         }
         
         if (!targetedPlayers.isEmpty()) {

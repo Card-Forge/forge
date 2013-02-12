@@ -5,7 +5,7 @@ import java.util.Random;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -71,7 +71,7 @@ public class UnattachAllAi extends SpellAiLogic {
         ArrayList<Object> targets = new ArrayList<Object>();
         final Target tgt = sa.getTarget();
         if (tgt == null) {
-            targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            targets = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {

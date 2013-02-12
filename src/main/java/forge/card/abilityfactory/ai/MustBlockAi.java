@@ -8,7 +8,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -45,7 +45,7 @@ public class MustBlockAi extends SpellAiLogic {
 
         Card attacker = null;
         if (sa.hasParam("DefinedAttacker")) {
-            final List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
             if (cards.isEmpty()) {
                 return false;
             }

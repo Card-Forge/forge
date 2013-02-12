@@ -6,7 +6,7 @@ import java.util.Random;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -30,7 +30,7 @@ public class PhasesAi extends SpellAiLogic {
 
         List<Card> tgtCards;
         if (tgt == null) {
-            tgtCards = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
+            tgtCards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (tgtCards.contains(source)) {
                 // Protect it from something
             } else {

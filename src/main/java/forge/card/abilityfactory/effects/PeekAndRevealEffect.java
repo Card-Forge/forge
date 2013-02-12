@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -36,7 +36,7 @@ public class PeekAndRevealEffect extends SpellEffect {
         boolean rememberRevealed = sa.hasParam("RememberRevealed");
         String revealValid = sa.hasParam("RevealValid") ? sa.getParam("RevealValid") : "Card";
         String peekAmount = sa.hasParam("PeekAmount") ? sa.getParam("PeekAmount") : "1";
-        int numPeek = AbilityFactory.calculateAmount(sa.getSourceCard(), peekAmount, sa);
+        int numPeek = AbilityUtils.calculateAmount(sa.getSourceCard(), peekAmount, sa);
         
         // Right now, this is only used on your own library.
         Player libraryToPeek = sa.getActivatingPlayer();

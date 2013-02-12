@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -44,7 +44,7 @@ public class SacrificeAllEffect extends SpellEffect {
 
         List<Card> list;
         if (sa.hasParam("Defined")) {
-            list = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
+            list = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
         } else {
             list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         }
@@ -54,7 +54,7 @@ public class SacrificeAllEffect extends SpellEffect {
             card.clearRemembered();
         }
 
-        list = AbilityFactory.filterListByType(list, valid, sa);
+        list = AbilityUtils.filterListByType(list, valid, sa);
 
         for (int i = 0; i < list.size(); i++) {
             if (Singletons.getModel().getGame().getAction().sacrifice(list.get(i), sa) && remSacrificed) {

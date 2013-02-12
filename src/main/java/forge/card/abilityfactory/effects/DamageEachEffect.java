@@ -6,7 +6,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -22,7 +22,7 @@ public class DamageEachEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final String damage = sa.getParam("NumDmg");
-        final int iDmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        final int iDmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
         String desc = sa.getParam("ValidCards");
         if (sa.hasParam("ValidDescription")) {
@@ -68,7 +68,7 @@ public class DamageEachEffect extends SpellEffect {
 
         ArrayList<Object> tgts = new ArrayList<Object>();
         if (sa.getTarget() == null) {
-            tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("DefinedPlayers"), sa);
+            tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("DefinedPlayers"), sa);
         } else {
             tgts = sa.getTarget().getTargets();
         }

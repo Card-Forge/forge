@@ -26,7 +26,7 @@ import java.util.Random;
 import forge.Card;
 
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
@@ -110,7 +110,7 @@ public class DrawAi extends SpellAiLogic {
         }
         if ((!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
                     || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !AbilityFactory.isSorcerySpeed(sa)
+                && !sa.hasParam("PlayerTurn") && !AbilityUtils.isSorcerySpeed(sa)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1) {
             return false;
         }
@@ -124,7 +124,7 @@ public class DrawAi extends SpellAiLogic {
                             // stuff
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
-        if (AbilityFactory.isSorcerySpeed(sa)) {
+        if (AbilityUtils.isSorcerySpeed(sa)) {
             randomReturn = true;
         }
         if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
@@ -132,7 +132,7 @@ public class DrawAi extends SpellAiLogic {
             randomReturn = true;
         }
 
-        if (AbilityFactory.playReusable(ai, sa)) {
+        if (SpellAiLogic.playReusable(ai, sa)) {
             randomReturn = true;
         }
 
@@ -157,7 +157,7 @@ public class DrawAi extends SpellAiLogic {
 
         int numCards = 1;
         if (sa.hasParam("NumCards")) {
-            numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+            numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
         }
 
         boolean xPaid = false;

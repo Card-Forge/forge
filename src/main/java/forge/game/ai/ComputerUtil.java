@@ -32,7 +32,7 @@ import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.CharmEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -170,7 +170,7 @@ public class ComputerUtil {
         // Unless Cost gets significant bonus + 10-Payment Amount
         final String unless = sa.getParam("UnlessCost");
         if (unless != null && !unless.endsWith(">")) {
-            final int amount = AbilityFactory.calculateAmount(source, unless, sa);
+            final int amount = AbilityUtils.calculateAmount(source, unless, sa);
 
             final int usableManaSources = CardFactoryUtil.getUsableManaSources(ai.getOpponent());
 
@@ -310,7 +310,7 @@ public class ComputerUtil {
                 pay.payComputerCosts((AIPlayer)ai, game);
             }
 
-            AbilityFactory.resolve(sa, false);
+            AbilityUtils.resolve(sa, false);
 
             // destroys creatures if they have lethal damage, etc..
             game.getAction().checkStateEffects();
@@ -760,7 +760,7 @@ public class ComputerUtil {
                         if (CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
                             return true;
                         }
-                    } else if (AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa)
+                    } else if (AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa)
                             .contains(card)) {
                         return true;
                     }
@@ -800,13 +800,13 @@ public class ComputerUtil {
 
                     if (sa.getApi() == ApiType.PreventDamage && sa.canPlay()
                             && ComputerUtilCost.canPayCost(sa, controller)) {
-                        if (AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).contains(card)) {
-                            prevented += AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+                        if (AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).contains(card)) {
+                            prevented += AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
                         }
                         final Target tgt = sa.getTarget();
                         if (tgt != null) {
                             if (CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
-                                prevented += AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+                                prevented += AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
                             }
 
                         }
@@ -1102,7 +1102,7 @@ public class ComputerUtil {
     
             if (tgt == null) {
                 if (topStack.hasParam("Defined")) {
-                    objects = AbilityFactory.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
+                    objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
                 } else if (topStack.hasParam("ValidCards")) {
                     List<Card> battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
                     List<Card> cards = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source);
@@ -1120,7 +1120,7 @@ public class ComputerUtil {
             // Lethal Damage => prevent damage/regeneration/bounce/shroud
             if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
                 // If PredictDamage is >= Lethal Damage
-                final int dmg = AbilityFactory.calculateAmount(topStack.getSourceCard(),
+                final int dmg = AbilityUtils.calculateAmount(topStack.getSourceCard(),
                         topStack.getParam("NumDmg"), topStack);
                 for (final Object o : objects) {
                     if (o instanceof Card) {

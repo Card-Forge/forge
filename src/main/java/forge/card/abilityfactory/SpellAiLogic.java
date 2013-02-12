@@ -1,10 +1,13 @@
 package forge.card.abilityfactory;
 
 
+import forge.Singletons;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
+import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 
 public abstract class SpellAiLogic {
 
@@ -44,5 +47,33 @@ public abstract class SpellAiLogic {
 
     public boolean chkAIDrawback(final SpellAbility sa, final AIPlayer aiPlayer) {
         return true;
+    }
+
+    /**
+     * <p>
+     * playReusable.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean.
+     */
+    protected static boolean playReusable(final Player ai, final SpellAbility sa) {
+        // TODO probably also consider if winter orb or similar are out
+    
+        if (sa.getPayCosts() == null) {
+            return true; // This is only true for Drawbacks and triggers
+        }
+    
+        if (!sa.getPayCosts().isReusuableResource()) {
+            return false;
+        }
+    
+        if (sa.getRestrictions().getPlaneswalker() && Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+            return true;
+        }
+    
+        return Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
+             && Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai);
     }
 }

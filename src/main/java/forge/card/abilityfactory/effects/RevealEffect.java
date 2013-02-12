@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -40,7 +40,7 @@ public class RevealEffect extends RevealEffectBase {
                             max = valid.size();
                         }
                         else if (sa.hasParam("NumCards")) {
-                            max = Math.min(valid.size(), AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa));
+                            max = Math.min(valid.size(), AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa));
                         }
                         //revealed.addAll(getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
                         revealed.addAll(getRevealedList(p, valid, max, anyNumber));

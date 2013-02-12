@@ -2,7 +2,7 @@ package forge.card.abilityfactory.ai;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -69,7 +69,7 @@ public class CounterAi extends SpellAiLogic {
                 setPayX = true;
                 toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             } else {
-                toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
+                toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
             }
 
             if (toPay == 0) {
@@ -137,7 +137,7 @@ public class CounterAi extends SpellAiLogic {
                     setPayX = true;
                     toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 } else {
-                    toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
+                    toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
                 }
 
                 if (toPay == 0) {

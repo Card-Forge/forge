@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -27,7 +27,7 @@ public class DrawEffect extends SpellEffect {
 
             int numCards = 1;
             if (sa.hasParam("NumCards")) {
-                numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+                numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
             }
 
             if (tgtPlayers.size() > 1) {
@@ -54,7 +54,7 @@ public class DrawEffect extends SpellEffect {
         final Card source = sa.getSourceCard();
         int numCards = 1;
         if (sa.hasParam("NumCards")) {
-            numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+            numCards = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
         }
 
         final Target tgt = sa.getTarget();

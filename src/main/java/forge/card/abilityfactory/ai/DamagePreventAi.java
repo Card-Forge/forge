@@ -7,7 +7,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -52,7 +52,7 @@ public class DamagePreventAi extends SpellAiLogic {
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
-            final ArrayList<Object> objects = AbilityFactory.getDefinedObjects(sa.getSourceCard(),
+            final ArrayList<Object> objects = AbilityUtils.getDefinedObjects(sa.getSourceCard(),
                     sa.getParam("Defined"), sa);
 
             // react to threats on the stack

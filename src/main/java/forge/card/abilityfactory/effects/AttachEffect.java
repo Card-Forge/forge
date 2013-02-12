@@ -7,7 +7,7 @@ import forge.CardLists;
 import forge.Command;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.abilityfactory.ai.AttachAi;
@@ -40,7 +40,7 @@ public class AttachEffect extends SpellEffect {
         final List<Object> targets = getTargetObjects(sa);
 
         if (sa.hasParam("Object")) {
-            card = AbilityFactory.getDefinedCards(source, sa.getParam("Object"), sa).get(0);
+            card = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa).get(0);
         }
 
         final StringBuilder sb = new StringBuilder();

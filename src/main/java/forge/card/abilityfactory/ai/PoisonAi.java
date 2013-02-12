@@ -4,7 +4,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -78,7 +78,7 @@ public class PoisonAi extends SpellAiLogic {
         if (tgt != null) {
             tgt.addTarget(ai.getOpponent());
         } else {
-            final List<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : players) {
                 if (!mandatory && p == ai && (p.getPoisonCounters() > p.getOpponent().getPoisonCounters())) {
                     return false;

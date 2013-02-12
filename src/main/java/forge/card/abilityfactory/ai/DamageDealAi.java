@@ -9,7 +9,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -30,7 +30,7 @@ public class DamageDealAi extends DamageAiBase {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
         final Card source = sa.getSourceCard();
 
@@ -52,7 +52,7 @@ public class DamageDealAi extends DamageAiBase {
         final Card source = sa.getSourceCard();
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -274,7 +274,7 @@ public class DamageDealAi extends DamageAiBase {
             else if (saMe.canTarget(enemy)) {
 
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
-                        || (AbilityFactory.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
+                        || (AbilityUtils.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
                         || saMe.getPayCosts() == null || isTrigger) {
                     tgt.addTarget(enemy);
                     continue;
@@ -316,7 +316,7 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageChooseNontargeted(AIPlayer ai, final SpellAbility saMe, final int dmg) {
         // TODO: Improve circumstances where the Defined Damage is unwanted
-        final ArrayList<Object> objects = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), saMe.getParam("Defined"), saMe);
+        final ArrayList<Object> objects = AbilityUtils.getDefinedObjects(saMe.getSourceCard(), saMe.getParam("Defined"), saMe);
 
         for (final Object o : objects) {
             if (o instanceof Card) {
@@ -385,7 +385,7 @@ public class DamageDealAi extends DamageAiBase {
 
         final Card source = sa.getSourceCard();
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.

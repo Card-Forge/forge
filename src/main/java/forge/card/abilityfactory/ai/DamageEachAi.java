@@ -1,7 +1,7 @@
 package forge.card.abilityfactory.ai;
 
 
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
@@ -21,7 +21,7 @@ public class DamageEachAi extends DamageAiBase {
         }
 
         final String damage = sa.getParam("NumDmg");
-        final int iDmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        final int iDmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
         return this.shouldTgtP(ai, sa, iDmg, false);
     }
 

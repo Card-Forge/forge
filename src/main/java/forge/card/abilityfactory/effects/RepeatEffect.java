@@ -6,6 +6,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
@@ -33,13 +34,13 @@ public class RepeatEffect extends SpellEffect {
 
         Integer maxRepeat = null;
         if (sa.hasParam("MaxRepeat")) {
-            maxRepeat = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("MaxRepeat"), sa);
+            maxRepeat = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("MaxRepeat"), sa);
         }
 
         //execute repeat ability at least once
         int count = 0;
         do {
-             AbilityFactory.resolve(repeat, false);
+             AbilityUtils.resolve(repeat, false);
              count++;
              if (maxRepeat != null && maxRepeat <= count) {
                  // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:
@@ -79,7 +80,7 @@ public class RepeatEffect extends SpellEffect {
             }
 
             if (sa.hasParam("RepeatDefined")) {
-                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("RepeatDefined"), sa));
+                list.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("RepeatDefined"), sa));
             } else {
                 list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             }
@@ -110,8 +111,8 @@ public class RepeatEffect extends SpellEffect {
                 sVarOperator = sa.getParam("RepeatSVarCompare").substring(0, 2);
                 sVarOperand = sa.getParam("RepeatSVarCompare").substring(2);
             }
-            final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("RepeatCheckSVar"), sa);
-            final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), sVarOperand, sa);
+            final int svarValue = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("RepeatCheckSVar"), sa);
+            final int operandValue = AbilityUtils.calculateAmount(sa.getSourceCard(), sVarOperand, sa);
 
             if (!Expressions.compare(svarValue, sVarOperator, operandValue)) {
                 return false;

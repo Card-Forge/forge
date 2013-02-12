@@ -10,7 +10,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.abilityfactory.ai.ChangeZoneAi;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -73,7 +73,7 @@ public class ChangeZoneEffect extends SpellEffect {
         final String destination = sa.getParam("Destination");
 
         final String type = sa.hasParam("ChangeType") ? sa.getParam("ChangeType") : "Card";
-        final int num = sa.hasParam("ChangeNum") ? AbilityFactory.calculateAmount(host,
+        final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host,
                 sa.getParam("ChangeNum"), sa) : 1;
 
         if (origin.equals("Library") && sa.hasParam("Defined")) {
@@ -326,7 +326,7 @@ public class ChangeZoneEffect extends SpellEffect {
         if (tgt != null) {
             sas = tgt.getTargetSAs();
         } else {
-            sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            sas = AbilityUtils.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         for (final SpellAbility tgtSA : sas) {
@@ -393,7 +393,7 @@ public class ChangeZoneEffect extends SpellEffect {
                             tgtC.addController(sa.getSourceCard());
                         }
                         if (sa.hasParam("AttachedTo")) {
-                            List<Card> list = AbilityFactory.getDefinedCards(hostCard,
+                            List<Card> list = AbilityUtils.getDefinedCards(hostCard,
                                     sa.getParam("AttachedTo"), sa);
                             if (list.isEmpty()) {
                                 list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -492,9 +492,9 @@ public class ChangeZoneEffect extends SpellEffect {
         List<Player> fetchers;
 
         if (sa.hasParam("DefinedPlayer")) {
-            fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
+            fetchers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
         } else {
-            fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            fetchers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         // handle case when Defined is for a Card
@@ -508,7 +508,7 @@ public class ChangeZoneEffect extends SpellEffect {
             if (choose.equals("Targeted") && (sa.getTarget().getTargetPlayers() != null)) {
                 chooser = sa.getTarget().getTargetPlayers().get(0);
             } else {
-                chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), choose, sa).get(0);
+                chooser = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), choose, sa).get(0);
             }
         }
 
@@ -564,7 +564,7 @@ public class ChangeZoneEffect extends SpellEffect {
             // Improve how this message reacts for other cards
             final List<ZoneType> alt = ZoneType.listValueOf(sa.getParam("OriginAlternative"));
             List<Card> altFetchList = player.getCardsIn(alt);
-            altFetchList = AbilityFactory.filterListByType(altFetchList, sa.getParam("ChangeType"), sa);
+            altFetchList = AbilityUtils.filterListByType(altFetchList, sa.getParam("ChangeType"), sa);
 
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getParam("AlternativeMessage")).append(" ");
@@ -586,12 +586,12 @@ public class ChangeZoneEffect extends SpellEffect {
             }
         }
 
-        int changeNum = sa.hasParam("ChangeNum") ? AbilityFactory.calculateAmount(card, sa.getParam("ChangeNum"),
+        int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(card, sa.getParam("ChangeNum"),
                 sa) : 1;
 
         List<Card> fetchList;
         if (defined) {
-            fetchList = new ArrayList<Card>(AbilityFactory.getDefinedCards(card, sa.getParam("Defined"), sa));
+            fetchList = new ArrayList<Card>(AbilityUtils.getDefinedCards(card, sa.getParam("Defined"), sa));
             if (!sa.hasParam("ChangeNum")) {
                 changeNum = fetchList.size();
             }
@@ -614,7 +614,7 @@ public class ChangeZoneEffect extends SpellEffect {
                 GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
                         .getCardsIn(ZoneType.Hand));
             }
-            fetchList = AbilityFactory.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
+            fetchList = AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
         }
 
         final String remember = sa.getParam("RememberChanged");
@@ -668,7 +668,7 @@ public class ChangeZoneEffect extends SpellEffect {
                     }
 
                     if (sa.hasParam("AttachedTo")) {
-                        List<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                        List<Card> list = AbilityUtils.getDefinedCards(sa.getSourceCard(),
                                 sa.getParam("AttachedTo"), sa);
                         if (list.isEmpty()) {
                             list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -704,7 +704,7 @@ public class ChangeZoneEffect extends SpellEffect {
                     }
 
                     if (sa.hasParam("AttachedToPlayer")) {
-                        List<Player> list = AbilityFactory.getDefinedPlayers(card,
+                        List<Player> list = AbilityUtils.getDefinedPlayers(card,
                                 sa.getParam("AttachedToPlayer"), sa);
                         if (!list.isEmpty()) {
                             Player attachedTo = null;

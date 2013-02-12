@@ -6,7 +6,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardUtil;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -21,13 +21,13 @@ public class DamageDealEffect extends SpellEffect {
         // when damageStackDescription is called, just build exactly what is happening
         final StringBuilder sb = new StringBuilder();
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
 
         List<Object> tgts = getTargetObjects(sa);
         if (tgts.size() > 0) {
 
-            final List<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+            final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
             final Card source = definedSources.get(0);
 
             if (source != sa.getSourceCard()) {
@@ -73,14 +73,14 @@ public class DamageDealEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean combatDmg = sa.hasParam("CombatDamage");
 
         ArrayList<Object> tgts;
         if (sa.getTarget() == null) {
-            tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         } else {
             tgts = sa.getTarget().getTargets();
         }
@@ -112,7 +112,7 @@ public class DamageDealEffect extends SpellEffect {
             }
         }
 
-        final List<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         if (definedSources == null) {
             return;
         }

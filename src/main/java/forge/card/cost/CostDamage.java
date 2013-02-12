@@ -18,7 +18,7 @@
 package forge.card.cost;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
@@ -115,7 +115,7 @@ public class CostDamage extends CostPart {
             if (sVar.equals("XChoice")) {
                 c = CostUtil.chooseXValue(source, ability, life);
             } else {
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
 
@@ -151,7 +151,7 @@ public class CostDamage extends CostPart {
             if (sVar.equals("XChoice")) {
                 return false;
             } else {
-                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
             }
         }
 

@@ -7,7 +7,7 @@ import java.util.Stack;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -156,9 +156,9 @@ public class ChooseSourceEffect extends SpellEffect {
 
                                 if (threatTgt == null) {
                                     if (topStack.hasParam("Defined")) {
-                                        objects = AbilityFactory.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
+                                        objects = AbilityUtils.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
                                     } else if (topStack.hasParam("ValidPlayers")) {
-                                        objects.addAll(AbilityFactory.getDefinedPlayers(source, topStack.getParam("ValidPlayers"), topStack));
+                                        objects.addAll(AbilityUtils.getDefinedPlayers(source, topStack.getParam("ValidPlayers"), topStack));
                                     }
                                 } else {
                                     objects.addAll(threatTgt.getTargetPlayers());
@@ -166,7 +166,7 @@ public class ChooseSourceEffect extends SpellEffect {
                                 if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
                                     break;
                                 }
-                                int dmg = AbilityFactory.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
+                                int dmg = AbilityUtils.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
                                 if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false) <= 0) {
                                     break;
                                 }

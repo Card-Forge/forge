@@ -9,7 +9,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -49,7 +49,7 @@ public class ChangeZoneAllEffect extends SpellEffect {
             }
         }
 
-        cards = AbilityFactory.filterListByType(cards, sa.getParam("ChangeType"), sa);
+        cards = AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
 
         if (sa.hasParam("ForgetOtherRemembered")) {
             sa.getSourceCard().clearRemembered();

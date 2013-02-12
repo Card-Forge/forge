@@ -31,6 +31,7 @@ import forge.StaticEffect;
 import forge.StaticEffects;
 import forge.card.CardType;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilityActivated;
@@ -104,19 +105,19 @@ public class StaticAbilityContinuous {
         if (params.containsKey("SetPower")) {
             setP = params.get("SetPower");
             setPower = setP.matches("[0-9][0-9]?") ? Integer.parseInt(setP)
-                    : AbilityFactory.calculateAmount(hostCard, setP, null);
+                    : AbilityUtils.calculateAmount(hostCard, setP, null);
         }
 
         if (params.containsKey("SetToughness")) {
             setT = params.get("SetToughness");
             setToughness = setT.matches("[0-9][0-9]?") ? Integer.parseInt(setT)
-                    : AbilityFactory.calculateAmount(hostCard, setT, null);
+                    : AbilityUtils.calculateAmount(hostCard, setT, null);
         }
 
         if (params.containsKey("AddPower")) {
             addP = params.get("AddPower");
             powerBonus = addP.matches("[0-9][0-9]?") ? Integer.parseInt(addP)
-                    : AbilityFactory.calculateAmount(hostCard, addP, null);
+                    : AbilityUtils.calculateAmount(hostCard, addP, null);
             if (!addP.matches("[0-9][0-9]?") && !addP.equals("AffectedX")) {
                 se.setXValue(powerBonus);
             }
@@ -125,7 +126,7 @@ public class StaticAbilityContinuous {
         if (params.containsKey("AddToughness")) {
             addT = params.get("AddToughness");
             toughnessBonus = addT.matches("[0-9][0-9]?") ? Integer.parseInt(addT)
-                    : AbilityFactory.calculateAmount(hostCard, addT, null);
+                    : AbilityUtils.calculateAmount(hostCard, addT, null);
             if (!addT.matches("[0-9][0-9]?") && !addT.equals("AffectedX")) {
                 se.setYValue(toughnessBonus);
             }
@@ -300,7 +301,7 @@ public class StaticAbilityContinuous {
                     p.setUnlimitedHandSize(true);
                 } else {
                     int max = mhs.matches("[0-9][0-9]?") ? Integer.parseInt(mhs)
-                            : AbilityFactory.calculateAmount(hostCard, mhs, null);
+                            : AbilityUtils.calculateAmount(hostCard, mhs, null);
                     p.setMaxHandSize(max);
                 }
             }
@@ -308,7 +309,7 @@ public class StaticAbilityContinuous {
             if (params.containsKey("RaiseMaxHandSize")) {
                 String rmhs = params.get("RaiseMaxHandSize");
                 int rmax = rmhs.matches("[0-9][0-9]?") ? Integer.parseInt(rmhs)
-                        : AbilityFactory.calculateAmount(hostCard, rmhs, null);
+                        : AbilityUtils.calculateAmount(hostCard, rmhs, null);
                 p.setMaxHandSize(p.getMaxHandSize() + rmax);
             }
         }
@@ -491,7 +492,7 @@ public class StaticAbilityContinuous {
             } else if (params.get("Affected").contains("EquippedBy")) {
                 affectedCards = CardLists.createCardList(hostCard.getEquippingCard());
             } else if (params.get("Affected").equals("EffectSource")) {
-                affectedCards = new ArrayList<Card>(AbilityFactory.getDefinedCards(hostCard, params.get("Affected"), null));
+                affectedCards = new ArrayList<Card>(AbilityUtils.getDefinedCards(hostCard, params.get("Affected"), null));
                 return affectedCards;
             }
         }

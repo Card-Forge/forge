@@ -7,7 +7,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -72,7 +72,7 @@ public class UntapEffect extends SpellEffect {
         final int num = Integer.parseInt(sa.getParam("Amount"));
         final String valid = sa.getParam("UntapType");
 
-        final List<Player> definedPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        final List<Player> definedPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
         for (final Player p : definedPlayers) {
             if (p.isHuman()) {

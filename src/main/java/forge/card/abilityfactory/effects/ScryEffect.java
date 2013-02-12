@@ -2,7 +2,7 @@ package forge.card.abilityfactory.effects;
 
 import java.util.List;
 
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -22,7 +22,7 @@ public class ScryEffect extends SpellEffect {
 
         int num = 1;
         if (sa.hasParam("ScryNum")) {
-            num = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
+            num = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
         }
 
         sb.append("scrys (").append(num).append(").");
@@ -34,7 +34,7 @@ public class ScryEffect extends SpellEffect {
 
         int num = 1;
         if (sa.hasParam("ScryNum")) {
-            num = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
+            num = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
         }
 
         final Target tgt = sa.getTarget();

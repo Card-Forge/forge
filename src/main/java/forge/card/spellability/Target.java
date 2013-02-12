@@ -24,7 +24,7 @@ import java.util.List;
 import forge.Card;
 import forge.Singletons;
 import forge.card.CardType;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -191,7 +191,7 @@ public class Target {
      * @return a int.
      */
     public final int getMinTargets(final Card c, final SpellAbility sa) {
-        return AbilityFactory.calculateAmount(c, this.minTargets, sa);
+        return AbilityUtils.calculateAmount(c, this.minTargets, sa);
     }
 
     /**
@@ -206,7 +206,7 @@ public class Target {
      * @return a int.
      */
     public final int getMaxTargets(final Card c, final SpellAbility sa) {
-        return AbilityFactory.calculateAmount(c, this.maxTargets, sa);
+        return AbilityUtils.calculateAmount(c, this.maxTargets, sa);
     }
 
     /**

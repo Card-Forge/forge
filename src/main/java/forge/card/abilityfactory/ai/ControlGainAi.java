@@ -27,7 +27,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -181,7 +181,7 @@ public class ControlGainAi extends SpellAiLogic {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (sa.hasParam("AllValid")) {
                 List<Card> tgtCards = CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), ai.getOpponent());
-                tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
+                tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;
                 }

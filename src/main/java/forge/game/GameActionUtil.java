@@ -35,6 +35,7 @@ import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
@@ -448,7 +449,7 @@ public final class GameActionUtil {
                 String amountString = part.getAmount();
 
                 final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
-                        : AbilityFactory.calculateAmount(source, amountString, sourceAbility);
+                        : AbilityUtils.calculateAmount(source, amountString, sourceAbility);
                 if (p.canPayLife(amount) && GuiDialog.confirm(source, "Do you want to pay " + amount + " life?" + orString)) {
                     p.payLife(amount, null);
                 } else {
@@ -527,7 +528,7 @@ public final class GameActionUtil {
                     CostExile costExile = (CostExile) part;
                     ZoneType from = costExile.getFrom();
                     List<Card> list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source);
-                    final int nNeeded = AbilityFactory.calculateAmount(source, part.getAmount(), ability);
+                    final int nNeeded = AbilityUtils.calculateAmount(source, part.getAmount(), ability);
                     if (list.size() >= nNeeded) {
                         for (int i = 0; i < nNeeded; i++) {
 
@@ -552,7 +553,7 @@ public final class GameActionUtil {
                 CostSacrifice sacCost = (CostSacrifice) part;
                 String valid = sacCost.getType();
                 int amount = Integer.parseInt(sacCost.getAmount());
-                List<Card> list = AbilityFactory.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, ability);
+                List<Card> list = AbilityUtils.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, ability);
 
                 if (list.size() < amount) {
                     // unable to pay (not enough cards)
@@ -1516,7 +1517,7 @@ public final class GameActionUtil {
     public static String generatedMana(final SpellAbility sa) {
         // Calculate generated mana here for stack description and resolving
 
-        int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
+        int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
 
         AbilityManaPart abMana = sa.getManaPart();
         String baseMana;

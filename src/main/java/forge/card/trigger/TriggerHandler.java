@@ -29,6 +29,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.CharmEffect;
 import forge.card.spellability.Ability;
@@ -507,7 +508,7 @@ public class TriggerHandler {
 
         sa.setActivatingPlayer(host.getController());
         if (triggerParams.containsKey("TriggerController")) {
-            Player p = AbilityFactory.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa).get(0);
+            Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);
         }
 
@@ -521,7 +522,7 @@ public class TriggerHandler {
         if (triggerParams.containsKey("OptionalDecider")) {
             sa.setOptionalTrigger(true);
             mand = false;
-            decider = AbilityFactory.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa).get(0);
+            decider = AbilityUtils.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa).get(0);
         } else {
             mand = true;
 

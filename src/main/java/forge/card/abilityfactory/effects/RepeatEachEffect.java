@@ -9,6 +9,7 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -46,7 +47,7 @@ public class RepeatEachEffect extends SpellEffect {
             loopOverCards = true;
         }
         else if (sa.hasParam("DefinedCards")) {
-            repeatCards = AbilityFactory.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
+            repeatCards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
             if (!repeatCards.isEmpty()) {
                 loopOverCards = true;
             }
@@ -66,7 +67,7 @@ public class RepeatEachEffect extends SpellEffect {
                     source.addRemembered(card);
                 }
 
-                AbilityFactory.resolve(repeat, false);
+                AbilityUtils.resolve(repeat, false);
                 if (useImprinted) {
                     source.removeImprinted(card);
                 } else {
@@ -76,11 +77,11 @@ public class RepeatEachEffect extends SpellEffect {
         }
 
         if (sa.hasParam("RepeatPlayers")) {
-            final List<Player> repeatPlayers = AbilityFactory.getDefinedPlayers(source, sa.getParam("RepeatPlayers"), sa);
+            final List<Player> repeatPlayers = AbilityUtils.getDefinedPlayers(source, sa.getParam("RepeatPlayers"), sa);
 
             for (Player player : repeatPlayers) {
                 source.addRemembered(player);
-                AbilityFactory.resolve(repeat, false);
+                AbilityUtils.resolve(repeat, false);
                 source.removeRemembered(player);
             }
         }
@@ -93,7 +94,7 @@ public class RepeatEachEffect extends SpellEffect {
                 sb.append("Number$").append(target.getCounters(type));
                 source.setSVar("RepeatSVarCounter", type.getName().toUpperCase());
                 source.setSVar("RepeatCounterAmount", sb.toString());
-                AbilityFactory.resolve(repeat, false);
+                AbilityUtils.resolve(repeat, false);
             }
         }
     }

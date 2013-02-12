@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import forge.Card;
 import forge.CardUtil;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -63,7 +63,7 @@ public class ManaReflectedEffect extends SpellEffect {
      */
     private static String generatedReflectedMana(final SpellAbility sa, final Collection<String> colors, final Player player) {
         // Calculate generated mana here for stack description and resolving
-        final int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
+        final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
 
         String baseMana = "";
 

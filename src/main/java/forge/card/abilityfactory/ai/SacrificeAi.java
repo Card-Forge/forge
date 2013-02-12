@@ -3,7 +3,7 @@ package forge.card.abilityfactory.ai;
 import java.util.List;
 import forge.Card;
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -29,7 +29,7 @@ public class SacrificeAi extends SpellAiLogic {
             final String valid = sa.getParam("SacValid");
             String num = sa.getParam("Amount");
             num = (num == null) ? "1" : num;
-            final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
+            final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), num, sa);
 
             List<Card> list =
                     CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -108,7 +108,7 @@ public class SacrificeAi extends SpellAiLogic {
             // TODO: Cast if the type is favorable: my "worst" valid is
             // worse than his "worst" valid
             final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
-            int amount = AbilityFactory.calculateAmount(card, num, sa);
+            int amount = AbilityUtils.calculateAmount(card, num, sa);
 
             final Card source = sa.getSourceCard();
             if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {

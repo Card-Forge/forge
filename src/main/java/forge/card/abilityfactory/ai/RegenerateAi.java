@@ -25,7 +25,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -81,7 +81,7 @@ public class RegenerateAi extends SpellAiLogic {
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
-            final List<Card> list = AbilityFactory.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
+            final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
             if (Singletons.getModel().getGame().getStack().size() > 0) {
                 final List<Object> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa);

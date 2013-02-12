@@ -6,7 +6,7 @@ import forge.Card;
 import forge.Constant;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityManaPart;
@@ -39,7 +39,7 @@ public class ManaEffect extends SpellEffect {
 
         if (abMana.isComboMana()) {
             for (Player p : tgtPlayers) {
-                int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(card, sa.getParam("Amount"), sa) : 1;
+                int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(card, sa.getParam("Amount"), sa) : 1;
                 if (tgt == null || p.canBeTargetedBy(sa)) {
                     Player activator = sa.getActivatingPlayer();
                     // AI color choice is set in ComputerUtils so only human players need to make a choice

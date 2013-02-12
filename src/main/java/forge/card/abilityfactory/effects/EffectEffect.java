@@ -6,6 +6,7 @@ import forge.Card;
 import forge.Command;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
@@ -91,7 +92,7 @@ public class EffectEffect extends SpellEffect {
         }
 
         if (sa.hasParam("EffectOwner")) {
-            List<Player> effectOwner = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("EffectOwner"), sa);
+            List<Player> effectOwner = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("EffectOwner"), sa);
             ownerEff = effectOwner.get(0);
         }
 
@@ -172,14 +173,14 @@ public class EffectEffect extends SpellEffect {
 
         // Set Remembered
         if (effectRemembered != null) {
-            for (final Object o : AbilityFactory.getDefinedObjects(hostCard, effectRemembered, sa)) {
+            for (final Object o : AbilityUtils.getDefinedObjects(hostCard, effectRemembered, sa)) {
                 eff.addRemembered(o);
             }
         }
 
         // Set Imprinted
         if (effectImprinted != null) {
-            for (final Card c : AbilityFactory.getDefinedCards(hostCard, effectImprinted, sa)) {
+            for (final Card c : AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa)) {
                 eff.addImprinted(c);
             }
         }

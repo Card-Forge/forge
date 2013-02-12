@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardUtil;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -58,12 +58,12 @@ public class DamagePreventEffect extends SpellEffect {
         @Override
     public void resolve(SpellAbility sa) {
         Card host = sa.getSourceCard();
-        final int numDam = AbilityFactory.calculateAmount(host, sa.getParam("Amount"), sa);
+        final int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
         ArrayList<Object> tgts;
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         if (sa.getTarget() == null) {
-            tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            tgts = AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         } else {
             tgts = sa.getTarget().getTargets();
         }

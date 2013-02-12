@@ -29,7 +29,7 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
@@ -741,7 +741,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
             if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
                 continue;
             }
@@ -751,7 +751,7 @@ public class ComputerUtilCombat {
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
-            final List<Card> list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
+            final List<Card> list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
                 list.add(defender);
             }
@@ -792,7 +792,7 @@ public class ComputerUtilCombat {
             }
 
             if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
-                int pBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
+                int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
                 if (pBonus > 0) {
                     power += pBonus;
                 }
@@ -837,7 +837,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
 
             // DealDamage triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
@@ -866,7 +866,7 @@ public class ComputerUtilCombat {
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
-            final List<Card> list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
+            final List<Card> list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
                 list.add(defender);
             }
@@ -904,7 +904,7 @@ public class ComputerUtilCombat {
             }
 
             if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
-                int tBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
+                int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
                 if (tBonus > 0) {
                     toughness += tBonus;
                 }
@@ -993,7 +993,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1007,7 +1007,7 @@ public class ComputerUtilCombat {
             }
             List<Card> list = new ArrayList<Card>();
             if (!abilityParams.containsKey("ValidCards")) {
-                list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
+                list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
             }
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredAttacker")) {
                 list.add(attacker);
@@ -1060,7 +1060,7 @@ public class ComputerUtilCombat {
             }
 
             if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                int pBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
+                int pBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
                 if (pBonus > 0) {
                     power += pBonus;
                 }
@@ -1141,7 +1141,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -1174,7 +1174,7 @@ public class ComputerUtilCombat {
             }
             List<Card> list = new ArrayList<Card>();
             if (!abilityParams.containsKey("ValidCards")) {
-                list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
+                list = AbilityUtils.getDefinedCards(source, abilityParams.get("Defined"), null);
             }
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredAttacker")) {
                 list.add(attacker);
@@ -1223,7 +1223,7 @@ public class ComputerUtilCombat {
             }
 
             if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
-                int tBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
+                int tBonus = AbilityUtils.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
                 if (tBonus > 0) {
                     toughness += tBonus;
                 }
@@ -1266,7 +1266,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
@@ -1321,7 +1321,7 @@ public class ComputerUtilCombat {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
+            final Map<String, String> abilityParams = AbilityUtils.getMapParams(ability);
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {

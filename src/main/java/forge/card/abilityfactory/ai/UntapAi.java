@@ -7,7 +7,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -38,7 +38,7 @@ public class UntapAi extends SpellAiLogic {
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
 
         if (tgt == null) {
-            final List<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
                 return false;
             }
@@ -61,7 +61,7 @@ public class UntapAi extends SpellAiLogic {
             }
 
             // TODO: use Defined to determine, if this is an unfavorable result
-            final List<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController() == ai) {
                 return false;
             }

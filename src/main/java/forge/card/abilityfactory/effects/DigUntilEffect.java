@@ -6,7 +6,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -31,7 +31,7 @@ public class DigUntilEffect extends SpellEffect {
 
         int untilAmount = 1;
         if (sa.hasParam("Amount")) {
-            untilAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+            untilAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
         }
 
         for (final Player pl : getTargetPlayers(sa)) {
@@ -81,12 +81,12 @@ public class DigUntilEffect extends SpellEffect {
 
         int untilAmount = 1;
         if (sa.hasParam("Amount")) {
-            untilAmount = AbilityFactory.calculateAmount(host, sa.getParam("Amount"), sa);
+            untilAmount = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
         }
 
         Integer maxRevealed = null;
         if (sa.hasParam("MaxRevealed")) {
-            maxRevealed = AbilityFactory.calculateAmount(host, sa.getParam("MaxRevealed"), sa);
+            maxRevealed = AbilityUtils.calculateAmount(host, sa.getParam("MaxRevealed"), sa);
         }
 
         final boolean remember = sa.hasParam("RememberFound");
@@ -94,9 +94,9 @@ public class DigUntilEffect extends SpellEffect {
         final Target tgt = sa.getTarget();
 
         final ZoneType foundDest = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
-        final int foundLibPos = AbilityFactory.calculateAmount(host, sa.getParam("FoundLibraryPosition"), sa);
+        final int foundLibPos = AbilityUtils.calculateAmount(host, sa.getParam("FoundLibraryPosition"), sa);
         final ZoneType revealedDest = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
-        final int revealedLibPos = AbilityFactory.calculateAmount(host, sa.getParam("RevealedLibraryPosition"), sa);
+        final int revealedLibPos = AbilityUtils.calculateAmount(host, sa.getParam("RevealedLibraryPosition"), sa);
 
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

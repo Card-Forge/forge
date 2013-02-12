@@ -7,7 +7,7 @@ import java.util.Random;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -64,7 +64,7 @@ public class PlayAi extends SpellAiLogic {
             }
             tgt.addTarget(CardFactoryUtil.getBestAI(cards));
         } else if (!sa.hasParam("Valid")) {
-            cards = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
+            cards = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
             if (cards.isEmpty()) {
                 return false;
             }

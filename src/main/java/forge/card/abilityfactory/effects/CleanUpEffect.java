@@ -3,7 +3,7 @@ package forge.card.abilityfactory.effects;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 
@@ -21,7 +21,7 @@ public class CleanUpEffect extends SpellEffect {
             Singletons.getModel().getGame().getCardState(source).clearRemembered();
         }
         if (sa.hasParam("ForgetDefined")) {
-            for (final Card card : AbilityFactory.getDefinedCards(source, sa.getParam("ForgetDefined"), sa)) {
+            for (final Card card : AbilityUtils.getDefinedCards(source, sa.getParam("ForgetDefined"), sa)) {
                 source.getRemembered().remove(card);
             }
         }

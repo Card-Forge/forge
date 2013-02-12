@@ -9,7 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -70,7 +70,7 @@ public class PumpAi extends PumpAiBase {
         if ((Singletons.getModel().getGame().getStack().size() == 0) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            if (!sa.isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
+            if (!sa.isCurse() && !AbilityUtils.isSorcerySpeed(sa)) {
                 return false;
             }
         } else if (Singletons.getModel().getGame().getStack().size() > 0) {
@@ -102,7 +102,7 @@ public class PumpAi extends PumpAiBase {
                 defense = -xPay;
             }
         } else {
-            defense = AbilityFactory.calculateAmount(sa.getSourceCard(), numDefense, sa);
+            defense = AbilityUtils.calculateAmount(sa.getSourceCard(), numDefense, sa);
         }
 
         int attack;
@@ -118,7 +118,7 @@ public class PumpAi extends PumpAiBase {
                 attack = Integer.parseInt(toPay);
             }
         } else {
-            attack = AbilityFactory.calculateAmount(sa.getSourceCard(), numAttack, sa);
+            attack = AbilityUtils.calculateAmount(sa.getSourceCard(), numAttack, sa);
         }
 
         if ((numDefense.contains("X") && defense == 0)
@@ -128,7 +128,7 @@ public class PumpAi extends PumpAiBase {
 
         //Untargeted
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
-            final List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getSourceCard(),
                     sa.getParam("Defined"), sa);
 
             if (cards.size() == 0) {
@@ -350,7 +350,7 @@ public class PumpAi extends PumpAiBase {
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
         } else {
-            defense = AbilityFactory.calculateAmount(sa.getSourceCard(), numDefense, sa);
+            defense = AbilityUtils.calculateAmount(sa.getSourceCard(), numDefense, sa);
         }
 
         int attack;
@@ -366,7 +366,7 @@ public class PumpAi extends PumpAiBase {
                 attack = Integer.parseInt(toPay);
             }
         } else {
-            attack = AbilityFactory.calculateAmount(sa.getSourceCard(), numAttack, sa);
+            attack = AbilityUtils.calculateAmount(sa.getSourceCard(), numAttack, sa);
         }
 
         if (sa.getTarget() == null) {
@@ -392,7 +392,7 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             defense = Integer.parseInt(source.getSVar("PayX"));
         } else {
-            defense = AbilityFactory.calculateAmount(sa.getSourceCard(), numDefense, sa);
+            defense = AbilityUtils.calculateAmount(sa.getSourceCard(), numDefense, sa);
         }
 
         int attack;
@@ -406,7 +406,7 @@ public class PumpAi extends PumpAiBase {
                 attack = Integer.parseInt(source.getSVar("PayX"));
             }
         } else {
-            attack = AbilityFactory.calculateAmount(sa.getSourceCard(), numAttack, sa);
+            attack = AbilityUtils.calculateAmount(sa.getSourceCard(), numAttack, sa);
         }
 
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {

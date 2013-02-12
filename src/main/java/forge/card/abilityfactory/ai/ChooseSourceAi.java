@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
@@ -82,9 +82,9 @@ public class ChooseSourceAi extends SpellAiLogic {
 
                     if (threatTgt == null) {
                         if (topStack.hasParam("Defined")) {
-                            objects = AbilityFactory.getDefinedObjects(threatSource, topStack.getParam("Defined"), topStack);
+                            objects = AbilityUtils.getDefinedObjects(threatSource, topStack.getParam("Defined"), topStack);
                         } else if (topStack.hasParam("ValidPlayers")) {
-                            objects.addAll(AbilityFactory.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack));
+                            objects.addAll(AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack));
                         }
                     } else {
                         objects.addAll(threatTgt.getTargetPlayers());
@@ -92,7 +92,7 @@ public class ChooseSourceAi extends SpellAiLogic {
                     if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
                         return false;
                     }
-                    int dmg = AbilityFactory.calculateAmount(threatSource, topStack.getParam("NumDmg"), topStack);
+                    int dmg = AbilityUtils.calculateAmount(threatSource, topStack.getParam("NumDmg"), topStack);
                     if (ComputerUtilCombat.predictDamageTo(ai, dmg, threatSource, false) <= 0) {
                         return false;
                     }

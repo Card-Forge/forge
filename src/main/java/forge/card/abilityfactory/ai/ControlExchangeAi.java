@@ -7,7 +7,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -41,7 +41,7 @@ public class ControlExchangeAi extends SpellAiLogic {
         });
         object1 = CardFactoryUtil.getBestAI(list);
         if (sa.hasParam("Defined")) {
-            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
+            object2 = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
         } else if (tgt.getMinTargets(sa.getSourceCard(), sa) > 1) {
             List<Card> list2 = ai.getCardsIn(ZoneType.Battlefield);
             list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getSourceCard());

@@ -25,7 +25,7 @@ import forge.Card;
 import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
@@ -554,14 +554,14 @@ public class StaticAbility {
         }
 
         if (this.params.containsKey("CheckSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.params.get("CheckSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.params.get("CheckSVar"), null);
             String comparator = "GE1";
             if (this.params.containsKey("SVarCompare")) {
                 comparator = this.params.get("SVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, null);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
@@ -570,14 +570,14 @@ public class StaticAbility {
         }
 
         if (this.params.containsKey("CheckSecondSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.params.get("CheckSecondSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.params.get("CheckSecondSVar"), null);
             String comparator = "GE1";
             if (this.params.containsKey("SecondSVarCompare")) {
                 comparator = this.params.get("SecondSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, null);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
@@ -586,14 +586,14 @@ public class StaticAbility {
         }
 
         if (this.params.containsKey("CheckThirdSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.params.get("CheckThirdSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.params.get("CheckThirdSVar"), null);
             String comparator = "GE1";
             if (this.params.containsKey("ThirdSVarCompare")) {
                 comparator = this.params.get("ThirdSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, null);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
@@ -602,14 +602,14 @@ public class StaticAbility {
         }
 
         if (this.params.containsKey("CheckFourthSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.params.get("CheckFourthSVar"), null);
+            final int sVar = AbilityUtils.calculateAmount(this.hostCard, this.params.get("CheckFourthSVar"), null);
             String comparator = "GE1";
             if (this.params.containsKey("FourthSVarCompare")) {
                 comparator = this.params.get("FourthSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
+            final int operandValue = AbilityUtils.calculateAmount(this.hostCard, svarOperand, null);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }

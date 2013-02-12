@@ -3,7 +3,7 @@ package forge.card.abilityfactory.effects;
 import java.util.ArrayList;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -25,7 +25,7 @@ public class ControlExchangeEffect extends SpellEffect {
             object1 = tgts.get(0);
         }
         if (sa.hasParam("Defined")) {
-            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
+            object2 = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
         } else if (tgts.size() > 1) {
             object2 = tgts.get(1);
         }
@@ -46,7 +46,7 @@ public class ControlExchangeEffect extends SpellEffect {
             object1 = tgts.get(0);
         }
         if (sa.hasParam("Defined")) {
-            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
+            object2 = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
         } else if (tgts.size() > 1) {
             object2 = tgts.get(1);
         }

@@ -11,7 +11,7 @@ import forge.CardCharacteristicName;
 import forge.Command;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
@@ -42,7 +42,7 @@ public class CopyPermanentEffect extends SpellEffect {
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
-        final int numCopies = sa.hasParam("NumCopies") ? AbilityFactory.calculateAmount(hostCard,
+        final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(hostCard,
                 sa.getParam("NumCopies"), sa) : 1;
 
         final List<Card> tgtCards = getTargetCards(sa);
@@ -50,7 +50,7 @@ public class CopyPermanentEffect extends SpellEffect {
 
         Player controller = null;
         if (sa.hasParam("Controller")) {
-            List<Player> defined = AbilityFactory.getDefinedPlayers(hostCard, sa.getParam("Controller"), sa);
+            List<Player> defined = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Controller"), sa);
             if (!defined.isEmpty()) {
                 controller = defined.get(0);
             }

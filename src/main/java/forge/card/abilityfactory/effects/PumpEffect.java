@@ -8,7 +8,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -114,10 +114,10 @@ public class PumpEffect extends SpellEffect {
             tgts.addAll(tgt.getTargetPlayers());
         } else {
             if (sa.hasParam("Defined")) {
-                tgts.addAll(AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa));
+                tgts.addAll(AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa));
             }
             if (tgts.isEmpty()) {
-                tgts.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
+                tgts.addAll(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
             }
         }
 
@@ -138,8 +138,8 @@ public class PumpEffect extends SpellEffect {
             }
 
             final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-            final int atk = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
-            final int def = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
+            final int atk = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
+            final int def = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
 
             sb.append("gains ");
             if ((atk != 0) || (def != 0)) {
@@ -178,18 +178,18 @@ public class PumpEffect extends SpellEffect {
         String pumpForget = null;
         
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-        final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
-        final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
+        final int a = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
+        final int d = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
 
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             if (sa.hasParam("Defined")) {
-                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+                tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             }
             if (tgtPlayers.isEmpty()) {
-                tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+                tgtCards = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             }
         }
 
@@ -219,7 +219,7 @@ public class PumpEffect extends SpellEffect {
         }
 
         if (pumpRemembered != null) {
-            for (final Object o : AbilityFactory.getDefinedObjects(sa.getSourceCard(), pumpRemembered, sa)) {
+            for (final Object o : AbilityUtils.getDefinedObjects(sa.getSourceCard(), pumpRemembered, sa)) {
                 if (!sa.getSourceCard().getRemembered().contains(o)) {
                     sa.getSourceCard().addRemembered(o);
                 }
@@ -231,7 +231,7 @@ public class PumpEffect extends SpellEffect {
         }
 
         if (pumpForget != null) {
-            for (final Object o : AbilityFactory.getDefinedObjects(sa.getSourceCard(), pumpForget, sa)) {
+            for (final Object o : AbilityUtils.getDefinedObjects(sa.getSourceCard(), pumpForget, sa)) {
                 if (sa.getSourceCard().getRemembered().contains(o)) {
                     sa.getSourceCard().removeRemembered(o);
                 }

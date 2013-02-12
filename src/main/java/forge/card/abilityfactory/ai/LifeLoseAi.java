@@ -5,7 +5,7 @@ import java.util.Random;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -28,7 +28,7 @@ public class LifeLoseAi extends SpellAiLogic {
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         final Card source = sa.getSourceCard();
@@ -40,7 +40,7 @@ public class LifeLoseAi extends SpellAiLogic {
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
-            amount = AbilityFactory.calculateAmount(source, amountStr, sa);
+            amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
         if (tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {
@@ -64,7 +64,7 @@ public class LifeLoseAi extends SpellAiLogic {
 
         // TODO handle proper calculation of X values based on Cost and what
         // would be paid
-        int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -132,7 +132,7 @@ public class LifeLoseAi extends SpellAiLogic {
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
-        if (AbilityFactory.playReusable(ai, sa) || priority) {
+        if (SpellAiLogic.playReusable(ai, sa) || priority) {
             randomReturn = true;
         }
 
@@ -162,14 +162,14 @@ public class LifeLoseAi extends SpellAiLogic {
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
-            amount = AbilityFactory.calculateAmount(source, amountStr, sa);
+            amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
         List<Player> tgtPlayers;
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            tgtPlayers = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         if (!mandatory && tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {

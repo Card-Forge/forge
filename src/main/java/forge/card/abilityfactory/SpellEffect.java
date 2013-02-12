@@ -39,7 +39,7 @@ import forge.game.player.Player;
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 sa.setUndoable(false);
-                AbilityFactory.resolve(abSub, false);
+                AbilityUtils.resolve(abSub, false);
             }
         }
 
@@ -105,13 +105,13 @@ import forge.game.player.Player;
                 else {
                     List<?> objs = null;
                     if ( t.startsWith("p:") )
-                        objs = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), t.substring(2), sa);
+                        objs = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), t.substring(2), sa);
                     else if ( t.startsWith("s:"))
-                        objs = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), t.substring(2), sa);
+                        objs = AbilityUtils.getDefinedSpellAbilities(sa.getSourceCard(), t.substring(2), sa);
                     else if ( t.startsWith("c:"))
-                        objs = AbilityFactory.getDefinedCards(sa.getSourceCard(), t.substring(2), sa);
+                        objs = AbilityUtils.getDefinedCards(sa.getSourceCard(), t.substring(2), sa);
                     else 
-                        objs = AbilityFactory.getDefinedObjects(sa.getSourceCard(), t, sa);
+                        objs = AbilityUtils.getDefinedObjects(sa.getSourceCard(), t, sa);
                             
                     sb.append(StringUtils.join(objs, ", "));
                 }
@@ -120,7 +120,7 @@ import forge.game.player.Player;
 
         protected List<Card> getTargetCards(SpellAbility sa) {
             final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargetCards() : AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            return tgt != null ? tgt.getTargetCards() : AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         protected List<Player> getTargetPlayers(SpellAbility sa) {
@@ -149,17 +149,17 @@ import forge.game.player.Player;
             if (StringUtils.isEmpty(defined) && wantEmptyAsDefault) {
                 return emptyPlayerList;
             }
-            return AbilityFactory.getDefinedPlayers(sa.getSourceCard(), defined, sa);
+            return AbilityUtils.getDefinedPlayers(sa.getSourceCard(), defined, sa);
         }
 
         protected List<SpellAbility> getTargetSpellAbilities(SpellAbility sa) {
             final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargetSAs() : AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            return tgt != null ? tgt.getTargetSAs() : AbilityUtils.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         protected List<Object> getTargetObjects(SpellAbility sa) {
             final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargets() : AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            return tgt != null ? tgt.getTargets() : AbilityUtils.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
     }

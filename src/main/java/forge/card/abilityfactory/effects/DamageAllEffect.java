@@ -6,7 +6,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -24,10 +24,10 @@ public class DamageAllEffect extends SpellEffect {
         }
 
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
 
-        final List<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         final Card source = definedSources.get(0);
 
         if (source != sa.getSourceCard()) {
@@ -43,12 +43,12 @@ public class DamageAllEffect extends SpellEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final List<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         final Card card = definedSources.get(0);
         final Card source = sa.getSourceCard();
 
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+        final int dmg = AbilityUtils.calculateAmount(sa.getSourceCard(), damage, sa);
 
         final Target tgt = sa.getTarget();
         Player targetPlayer = null;
@@ -71,7 +71,7 @@ public class DamageAllEffect extends SpellEffect {
             list = CardLists.filterControlledBy(list, targetPlayer);
         }
 
-        list = AbilityFactory.filterListByType(list, sa.getParam("ValidCards"), sa);
+        list = AbilityUtils.filterListByType(list, sa.getParam("ValidCards"), sa);
 
         for (final Card c : list) {
             if (c.addDamage(dmg, card) && sa.hasParam("RememberDamaged")) {
@@ -80,7 +80,7 @@ public class DamageAllEffect extends SpellEffect {
         }
 
         if (!players.equals("")) {
-            final List<Player> playerList = AbilityFactory.getDefinedPlayers(card, players, sa);
+            final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
                 if (p.addDamage(dmg, card) && sa.hasParam("RememberDamaged")) {
                     source.addRemembered(p);

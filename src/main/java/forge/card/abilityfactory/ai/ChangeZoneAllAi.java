@@ -6,7 +6,7 @@ import java.util.Random;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -56,9 +56,9 @@ public class ChangeZoneAllAi extends SpellAiLogic {
         // ex. "Return all blocking/blocked by target creature"
 
         final Player opp = ai.getOpponent();
-        final List<Card> humanType = AbilityFactory.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+        final List<Card> humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
         List<Card> computerType = ai.getCardsIn(origin);
-        computerType = AbilityFactory.filterListByType(computerType, sa.getParam("ChangeType"), sa);
+        computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         final Target tgt = sa.getTarget();
 
         // TODO improve restrictions on when the AI would want to use this
@@ -184,9 +184,9 @@ public class ChangeZoneAllAi extends SpellAiLogic {
         final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
 
         final Player opp = ai.getOpponent();
-        final List<Card> humanType = AbilityFactory.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
+        final List<Card> humanType = AbilityUtils.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
         List<Card> computerType = ai.getCardsIn(origin);
-        computerType = AbilityFactory.filterListByType(computerType, sa.getParam("ChangeType"), sa);
+        computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
 
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.

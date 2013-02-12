@@ -5,7 +5,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -19,7 +19,7 @@ public class DamagePreventAllEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
-        final int numDam = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+        final int numDam = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
 
         String players = "";
         List<Card> list = new ArrayList<Card>();
@@ -32,7 +32,7 @@ public class DamagePreventAllEffect extends SpellEffect {
             list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         }
 
-        list = AbilityFactory.filterListByType(list, sa.getParam("ValidCards"), sa);
+        list = AbilityUtils.filterListByType(list, sa.getParam("ValidCards"), sa);
 
         for (final Card c : list) {
             c.addPreventNextDamage(numDam);

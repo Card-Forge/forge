@@ -26,7 +26,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.input.Input;
@@ -648,7 +648,7 @@ public class CostExile extends CostPartWithList {
             } else if (sVar.equals("YChoice")) {
                 c = CostUtil.chooseYValue(source, ability, list.size());
             } else {
-                c = AbilityFactory.calculateAmount(source, amount, ability);
+                c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
         
@@ -709,7 +709,7 @@ public class CostExile extends CostPartWithList {
                         return false;
                 }
 
-                c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
+                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
             }
 
             if (this.from.equals(ZoneType.Library)) {
