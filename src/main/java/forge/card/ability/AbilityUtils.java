@@ -15,6 +15,7 @@ import forge.CounterType;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
@@ -1023,6 +1024,16 @@ public class AbilityUtils {
         // The cost
         if (unlessCost.equals("CardManaCost")) {
             unlessCost = source.getManaCost().toString();
+        } else if (unlessCost.equals("RememberedCostMinus2")) {
+            if (source.getRemembered().isEmpty() || !(source.getRemembered().get(0) instanceof Card)) {
+                sa.resolve();
+                resolveSubAbilities(sa, usedStack, game);
+            }
+            Card rememberedCard = (Card) source.getRemembered().get(0);
+            unlessCost = rememberedCard.getManaCost().toString();
+            ManaCostBeingPaid newCost = new ManaCostBeingPaid(unlessCost.toString());
+            newCost.decreaseColorlessMana(2);
+            unlessCost = newCost.toString();
         } else {
             try {
                 String unlessVar = Integer.toString(calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa));
