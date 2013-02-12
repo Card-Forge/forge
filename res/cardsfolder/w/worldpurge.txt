@@ -12,4 +12,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldpurge.jpg
 Oracle:Return all permanents to their owners' hands. Each player chooses up to seven cards in his or her hand, then shuffles the rest into his or her library. Empty all mana pools.
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/156.jpg
 End

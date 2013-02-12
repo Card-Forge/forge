@@ -10,4 +10,5 @@ SVar:BuffedBy:Giant
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crush_underfoot.jpg
 Oracle:Choose a Giant creature you control. It deals damage equal to its power to target creature.
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/162.jpg
 End

@@ -9,4 +9,5 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ M1M1 | Cou
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retribution.jpg
 Oracle:Choose two target creatures an opponent controls. That player chooses and sacrifices one of those creatures. Put a -1/-1 counter on the other.
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/99.jpg
 End

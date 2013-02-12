@@ -10,4 +10,5 @@ SVar:GainLifeYou:AB$ GainLife | Cost$ 0 | Defined$ Remembered | LifeAmount$ X | 
 SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chant_of_vitu_ghazi.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nPrevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/7.jpg
 End

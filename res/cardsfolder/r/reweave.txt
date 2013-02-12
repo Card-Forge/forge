@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reweave.jpg
 Oracle:Target permanent's controller sacrifices it. If he or she does, that player reveals cards from the top of his or her library until he or she reveals a permanent card that shares a card type with the sacrificed permanent, puts that card onto the battlefield, then shuffles his or her library.\nSplice onto Arcane {2}{U}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/82.jpg
 End

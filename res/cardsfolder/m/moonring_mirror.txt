@@ -14,4 +14,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonring_mirror.jpg
 Oracle:Whenever you draw a card, exile the top card of your library face down.\nAt the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Moonring Mirror into your hand.
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/262.jpg
 End

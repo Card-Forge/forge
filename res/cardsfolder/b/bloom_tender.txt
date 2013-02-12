@@ -15,4 +15,5 @@ SVar:CheckR:Count$Valid Permanent.YouCtrl+Red
 SVar:CheckG:Count$Valid Permanent.YouCtrl+Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloom_tender.jpg
 Oracle:{T}: For each color among permanents you control, add one mana of that color to your mana pool.
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/66.jpg
 End

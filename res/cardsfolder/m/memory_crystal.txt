@@ -5,4 +5,5 @@ Text:no text
 S:Mode$ ReduceCost | ValidCard$ Card | Type$ Buyback | Activator$ Player | Amount$ 2 | Description$ Buyback costs cost 2 less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_crystal.jpg
 Oracle:Buyback costs cost {2} less.
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/134.jpg
 End

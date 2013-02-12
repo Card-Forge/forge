@@ -9,4 +9,5 @@ SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ 2 | ConditionDefined$ 
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unforge.jpg
 Oracle:Destroy target Equipment. If that Equipment was attached to a creature, Unforge deals 2 damage to that creature.
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/71.jpg
 End

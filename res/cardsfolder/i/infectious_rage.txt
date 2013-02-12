@@ -10,4 +10,5 @@ SVar:TrigChangeZone:AB$ ChooseCard | Cost$ 0 | AtRandom$ True | Choices$ Creatur
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self | AttachedTo$ ChosenCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_rage.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/-1.\nWhen enchanted creature dies, choose a creature at random Infectious Rage can enchant. Return Infectious Rage to the battlefield attached to that creature.
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/92.jpg
 End

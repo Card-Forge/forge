@@ -8,5 +8,6 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeT
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/viridian_zealot_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/viridian-zealot.jpg
 Oracle:Hand +0, life +2\n{2}, Sacrifice a creature: Destroy target artifact or enchantment. Search your library for a card with the same name as the sacrificed creature, reveal that card, and put it into your hand. Then shuffle your library.
 End

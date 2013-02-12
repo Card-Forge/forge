@@ -10,4 +10,5 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:PayUp:AB$ ChangeZone | Cost$ U | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay U to remove this effect.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quenchable_fire.jpg
 Oracle:Quenchable Fire deals 3 damage to target player. It deals an additional 3 damage to that player at the beginning of your next upkeep step unless he or she pays {U} before that step.
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/70.jpg
 End

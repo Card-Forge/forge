@@ -15,4 +15,5 @@ SVar:MischiefCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destinat
 SVar:X:Count$ValidExile Instant.IsRemembered,Sorcery.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planeswalkers_mischief.jpg
 Oracle:{3}{U}: Target opponent reveals a card at random from his or her hand. If it's an instant or sorcery card, exile it. You may cast it without paying its mana cost for as long as it remains exiled. At the beginning of the next end step, if you haven't cast it, return it to its owner's hand. Activate this ability only any time you could cast a sorcery. (If it has X in its mana cost, X is 0.)
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/29.jpg
 End

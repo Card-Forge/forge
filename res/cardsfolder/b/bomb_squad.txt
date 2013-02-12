@@ -14,4 +14,5 @@ SVar:DBDmg:DB$ DealDamage | Defined$ RememberedController | NumDmg$ 4 | DamageSo
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bomb_squad.jpg
 Oracle:{T}: Put a fuse counter on target creature.\nAt the beginning of your upkeep, put a fuse counter on each creature with a fuse counter on it.\nWhenever a creature has four or more fuse counters on it, remove all fuse counters from it and destroy it. That creature deals 4 damage to its controller.
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/179.jpg
 End
