@@ -28,6 +28,7 @@ public class DamageDealEffect extends SpellEffect {
         if (tgts.size() > 0) {
 
             final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+            source = new Card();
             if (!definedSources.isEmpty()) {
                 source = definedSources.get(0);
             }
