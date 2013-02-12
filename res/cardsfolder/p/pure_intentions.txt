@@ -7,6 +7,7 @@ SVar:PureDiscarded:Mode$ Discarded | ValidCard$ Card.YouCtrl | ValidCause$ Card.
 SVar:TrigPureChange:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigPureReturn | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.
 SVar:TrigPureReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
+SVar:DiscardMeByOpp:1
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

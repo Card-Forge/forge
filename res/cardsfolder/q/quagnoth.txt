@@ -6,7 +6,8 @@ PT:4/5
 K:Split second
 K:Shroud
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigReturn | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.
-SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
+SVar:DiscardMeByOpp:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quagnoth.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/150.jpg

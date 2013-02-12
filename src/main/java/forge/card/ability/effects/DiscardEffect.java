@@ -114,9 +114,7 @@ public class DiscardEffect extends RevealEffectBase {
                 List<Card> goodChoices = CardLists.filter(dPChHand, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
-                                + " put it onto the battlefield instead of putting it into your graveyard.")
-                                || !c.getSVar("DiscardMe").equals("")) {
+                        if (!c.getSVar("DiscardMeByOpp").equals("") || !c.getSVar("DiscardMe").equals("")) {
                             return false;
                         }
                         return true;

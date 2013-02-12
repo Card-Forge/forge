@@ -150,7 +150,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
     private List<Card> planarDeck = new ArrayList<Card>();
     private Card currentPlane = null;
-    
+
     private PlayerStatistics stats = new PlayerStatistics();
 
     private final List<Card> schemeDeck = new ArrayList<Card>();
@@ -737,7 +737,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
 
         int restDamage = damage;
-        
+
         if (this.hasKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.")) {
             restDamage = Math.min(restDamage, this.life - 1);
         }
@@ -1633,21 +1633,12 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         game.getAction().discardMadness(c, this);
 
-        boolean hasPutIntoPlayInsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.");
-        boolean hasPutIntoPlayWith2xP1P1InsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.");
         boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
 
-        if ((hasPutIntoPlayInsteadOfDiscard || hasPutIntoPlayWith2xP1P1InsteadOfDiscard)
-                && null != sa && sa.getSourceCard().getController().isOpponentOf(c.getController())) {
-            game.getAction().moveToPlay(c);
-
-            if (hasPutIntoPlayWith2xP1P1InsteadOfDiscard) {
-                c.addCounter(CounterType.P1P1, 2, false);
-            }
-            // Play the corresponding Put into Play sound
-            game.getEvents().post(new SpellResolvedEvent(c, sa));
-        } else if (discardToTopOfLibrary) {
+        if (discardToTopOfLibrary) {
             game.getAction().moveToLibrary(c, 0);
+            // Play the Discard sound
+            game.getEvents().post(new CardDiscardedEvent());
         } else {
             game.getAction().moveToGraveyard(c);
 
