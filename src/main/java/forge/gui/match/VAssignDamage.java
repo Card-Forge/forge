@@ -206,9 +206,9 @@ public class VAssignDamage {
         btnOK.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent arg0) { finish(); } });
         btnReset.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(true); } });
+            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(false); } });
         btnAuto.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(false); finish(); } });
+            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(true); finish(); } });
 
         // Final UI layout
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
@@ -234,7 +234,7 @@ public class VAssignDamage {
             }
         });
 
-        initialAssignDamage(true);
+        initialAssignDamage(false);
         SOverlayUtils.showOverlay();
 
         this.dlg.setUndecorated(true);
@@ -294,6 +294,11 @@ public class VAssignDamage {
         if ( damageToAdd > leftToAssign )
             damageToAdd = leftToAssign;
         
+        // cannot assign first blocker less than lethal damage
+        boolean isFirstBlocker = defenders.get(0).card == source;
+        if ( isFirstBlocker && damageToAdd + damageItHad < lethalDamage )
+            return;
+
         if ( 0 == damageToAdd || damageToAdd + damageItHad < 0) 
             return;
         
@@ -318,7 +323,7 @@ public class VAssignDamage {
     }
 
     // will assign all damage to defenders and rest to player, if present
-    private void initialAssignDamage(boolean onlyFirstBlocker) {
+    private void initialAssignDamage(boolean toAllBlockers) {
         int dmgLeft = totalDamageToAssign;
         DamageTarget dtLast = null;
         for(DamageTarget dt : defenders) { // MUST NOT RUN WITH EMPTY collection
@@ -327,7 +332,7 @@ public class VAssignDamage {
             addDamage(dt.card, damage);
             dmgLeft -= damage;
             dtLast = dt;
-            if ( dmgLeft <= 0 || onlyFirstBlocker ) break;
+            if ( dmgLeft <= 0 || !toAllBlockers ) break;
         }
         if ( dmgLeft < 0 )
             throw new RuntimeException("initialAssignDamage managed to assign more damage than it could");
