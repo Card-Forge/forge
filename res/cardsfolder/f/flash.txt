@@ -10,5 +10,5 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/67.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/66.jpg
-Oracle:
+Oracle:You may put a creature card from your hand onto the battlefield. If you do, sacrifice it unless you pay its mana cost reduced by up to 2.
 End
