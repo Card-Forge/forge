@@ -1,8 +1,5 @@
 package forge.gui.toolbox;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.JRadioButton;
 
 /** 
@@ -20,21 +17,7 @@ public class FRadioButton  extends JRadioButton {
         super();
         this.setText(s0);
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        this.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         this.setFont(FSkin.getFont(14));
         this.setOpaque(false);
-
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                setOpaque(true);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setOpaque(false);
-            }
-        });
     }
-
 }

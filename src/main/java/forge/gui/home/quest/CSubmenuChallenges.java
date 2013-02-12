@@ -3,10 +3,13 @@ package forge.gui.home.quest;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import forge.Command;
@@ -93,6 +96,15 @@ public enum CSubmenuChallenges implements ICDoc {
         });
     }
 
+    private final KeyAdapter _startOnEnter = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (KeyEvent.VK_ENTER == e.getKeyChar()) {
+                VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().doClick();
+            }
+        }
+    };
+    
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
@@ -114,7 +126,13 @@ public enum CSubmenuChallenges implements ICDoc {
             for (int i = 0; i < challenges.size(); i++) {
                 final PnlEvent temp = new PnlEvent(challenges.get(i));
                 grp.add(temp.getRad());
-                if (i == 0) { temp.getRad().setSelected(true); }
+                if (i == 0) {
+                    temp.getRad().setSelected(true);
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override public void run() { temp.getRad().requestFocusInWindow(); }
+                    });
+                }
+                temp.getRad().addKeyListener(_startOnEnter);
                 view.getPnlChallenges().add(temp, "w 96%!, h 135px!, gap 2% 0 15px 15px");
             }
 
@@ -127,6 +145,9 @@ public enum CSubmenuChallenges implements ICDoc {
                 lbl.setBorder(new EmptyBorder(10, 10, 10, 10));
                 lbl.setOpaque(true);
                 view.getPnlChallenges().add(lbl, "w 50%!, h 30px!, gap 25% 0 50px 0");
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override public void run() { view.getBtnTravel().requestFocusInWindow(); }
+                });
             }
 
             Singletons.getView().getFrame().validate();

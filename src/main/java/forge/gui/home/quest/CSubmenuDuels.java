@@ -2,9 +2,12 @@ package forge.gui.home.quest;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
+import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.Singletons;
@@ -75,6 +78,15 @@ public enum CSubmenuDuels implements ICDoc {
         });
     }
 
+    private final KeyAdapter _startOnEnter = new KeyAdapter() {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (KeyEvent.VK_ENTER == e.getKeyChar()) {
+                VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().doClick();
+            }
+        }
+    };
+    
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
@@ -95,7 +107,13 @@ public enum CSubmenuDuels implements ICDoc {
             for (int i = 0; i < duels.size(); i++) {
                 final PnlEvent temp = new PnlEvent(duels.get(i));
                 grp.add(temp.getRad());
-                if (i == 0) { temp.getRad().setSelected(true); }
+                if (i == 0) {
+                    temp.getRad().setSelected(true);
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override public void run() { temp.getRad().requestFocusInWindow(); }
+                    });
+                }
+                temp.getRad().addKeyListener(_startOnEnter);
                 view.getPnlDuels().add(temp, "w 96%!, h 135px!, gap 2% 0 15px 15px");
             }
         }

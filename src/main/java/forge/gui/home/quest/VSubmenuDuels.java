@@ -47,8 +47,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     private final JButton btnStart  = new StartButton();
     private final JComboBox cbxPet  = new JComboBox();
     private final JCheckBox cbPlant = new FCheckBox("Summon Plant");
-    private final JLabel lblZep   = new FLabel.Builder().text("Launch Zeppelin")
-            .fontSize(14).build();
+    private final JLabel lblZep     = new FLabel.Builder().text("Launch Zeppelin").fontSize(14).build();
 
     private final FLabel lblWorld   = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_MAP))
@@ -147,11 +146,9 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "h 30px!, span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblCurrentDeck, "span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblNextChallengeInWins, "span 2, gap 0 0 0 20px");
-
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrDuels, "w 88% - 175px!, pushy, growy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 185px!, pushy, growy, gap 4% 4% 0 0, span 1 2");
-
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 0 50px 50px, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 0 30px 30px, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
