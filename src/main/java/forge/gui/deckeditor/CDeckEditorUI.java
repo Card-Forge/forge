@@ -29,7 +29,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.Locale;
 
 import javax.swing.JTable;
 import javax.swing.Popup;
@@ -367,7 +366,7 @@ public enum CDeckEditorUI implements CardContainer {
                 return;
                 
             case KeyEvent.VK_ENTER:
-            case 13: // there doesn't seem to be a KeyEvent constant for this
+            case 13: // no KeyEvent constant for this, but this comes up on OSX for shift-enter
                 if (!str.toString().isEmpty()) {
                     // no need to add (or subtract) 1 -- the table selection will already
                     // have been advanced by the (shift+) enter key
@@ -389,12 +388,11 @@ public enum CDeckEditorUI implements CardContainer {
                 // fall through
                 
             default:
-                if (okModifiers != (e.getModifiers() | okModifiers)) {
-                    // shift down is ok.  anything else is likely to be a hotkey and should not be added to the string
+                // shift and/or alt-graph down is ok.  anything else is a hotkey (e.g. ctrl-f)
+                if (okModifiers != (e.getModifiers() | okModifiers)
+                 || !CharUtils.isAsciiPrintable(e.getKeyChar())) { // escape sneaks in here on Windows
                     return;
                 }
-                // Suggested change:
-                // if (!CharUtils.isAsciiPrintable(e.getKeyChar())) return;
                 str.append(e.getKeyChar());
             }
             
