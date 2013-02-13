@@ -437,6 +437,8 @@ public class TargetSelection {
                                 apiBasedMessage = "Select how much damage to deal to ";
                             } else if (sa.getApi().toString().equals("PreventDamage")) {
                                 apiBasedMessage = "Select how much damage to prevent to ";
+                            } else if (sa.getApi().toString().equals("PutCounter")) {
+                                apiBasedMessage = "Select how many counters to distribute to ";
                             }
                             final StringBuilder sb = new StringBuilder();
                             sb.append(apiBasedMessage);

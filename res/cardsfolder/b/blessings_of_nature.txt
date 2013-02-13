@@ -3,10 +3,7 @@ ManaCost:4 G
 Types:Sorcery
 Text:no text
 K:Miracle:G
-A:SP$PutCounter | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter2 | SpellDescription$ Distribute four +1+1 counters among any number of target creatures.
-SVar:PutCounter2:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter3
-SVar:PutCounter3:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter4
-SVar:PutCounter4:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (4) | CounterType$ P1P1 | CounterNum$ 1
+A:SP$ PutCounter | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ Distribute four +1+1 counters among any number of target creatures.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessings_of_nature.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/168.jpg

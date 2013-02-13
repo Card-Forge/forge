@@ -19,10 +19,15 @@ public class CountersPutEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card card = sa.getSourceCard();
+        final boolean dividedAsYouChoose = sa.hasParam("DividedAsYouChoose");
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityUtils.calculateAmount(card, sa.getParam("CounterNum"), sa);
-        sb.append("Put ");
+        if (dividedAsYouChoose) {
+            sb.append("Distribute ");
+        } else {
+            sb.append("Put ");
+        }
         if (sa.hasParam("UpTo")) {
             sb.append("up to ");
         }
@@ -30,7 +35,11 @@ public class CountersPutEffect extends SpellEffect {
         if (amount != 1) {
             sb.append("s");
         }
-        sb.append(" on ");
+        if (dividedAsYouChoose) {
+            sb.append(" among ");
+        } else {
+            sb.append(" on ");
+        }
         final Target tgt = sa.getTarget();
         final List<Card> tgtCards = tgt != null ? tgt.getTargetCards() :  AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
@@ -91,6 +100,7 @@ public class CountersPutEffect extends SpellEffect {
         }
 
         for (final Card tgtCard : tgtCards) {
+            counterAmount = (sa.getTarget() != null && sa.hasParam("DividedAsYouChoose")) ? sa.getTarget().getDividedValue(tgtCard) : counterAmount;
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 if (max != -1) {
                     counterAmount = max - tgtCard.getCounters(counterType);
