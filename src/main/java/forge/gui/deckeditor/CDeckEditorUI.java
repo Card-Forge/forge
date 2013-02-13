@@ -38,6 +38,9 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
+import org.apache.commons.lang.CharUtils;
+import org.apache.commons.lang.StringUtils;
+
 import forge.Card;
 import forge.deck.DeckBase;
 import forge.gui.CardContainer;
@@ -285,13 +288,13 @@ public enum CDeckEditorUI implements CardContainer {
             startIdx %= numItems;
             final int increment = reverse ? numItems - 1 : 1;
             int stopIdx = (startIdx + numItems - increment) % numItems;
-            String searchStr = str.toString().toLowerCase(Locale.ENGLISH);
+            String searchStr = str.toString();
             boolean found = false;
-            for (int idx = startIdx; true; idx = (idx + increment) % numItems) {
+            for (int idx = startIdx;; idx = (idx + increment) % numItems) {
                 @SuppressWarnings("unchecked")
                 EditorTableModel<? extends InventoryItem> tableModel =
                         (EditorTableModel<? extends InventoryItem>)tableView.getTable().getModel();
-                if (tableModel.rowToCard(idx).getKey().getName().toLowerCase(Locale.ENGLISH).contains(searchStr)) {
+                if (StringUtils.containsIgnoreCase(tableModel.rowToCard(idx).getKey().getName(), searchStr)) {
                     tableView.selectAndScrollTo(idx);
                     found = true;
                     break;
@@ -390,6 +393,8 @@ public enum CDeckEditorUI implements CardContainer {
                     // shift down is ok.  anything else is likely to be a hotkey and should not be added to the string
                     return;
                 }
+                // Suggested change:
+                // if (!CharUtils.isAsciiPrintable(e.getKeyChar())) return;
                 str.append(e.getKeyChar());
             }
             
