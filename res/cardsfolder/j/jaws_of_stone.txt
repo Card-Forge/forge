@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ Conspire | Static$ True | Ex
 SVar:CountMountainsAtCast:DB$ StoreSVar | SVar$ OrigMountains | Type$ Count | Expression$ Valid Mountain.YouCtrl
 SVar:OrigMountains:Count$Valid Mountain.YouCtrl
 SVar:Min:SVar$OrigMountains/LimitMax.1
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaws_of_stone.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/97.jpg
 Oracle:Jaws of Stone deals X damage divided as you choose among any number of target creatures and/or players, where X is the number of Mountains you control as you cast Jaws of Stone.
