@@ -223,28 +223,43 @@ public class DamageDealAi extends DamageAiBase {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean damageChoosingTargets(final Player ai, final SpellAbility saMe, final Target tgt, final int dmg,
+    private boolean damageChoosingTargets(final Player ai, final SpellAbility saMe, final Target tgt, int dmg,
             final boolean isTrigger, final boolean mandatory) {
+        final Card source = saMe.getSourceCard();
         final boolean noPrevention = saMe.hasParam("NoPrevention");
         final PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+        final boolean divided = saMe.hasParam("DividedAsYouChoose");
 
         // target loop
         tgt.resetTargets();
         Player enemy = ai.getOpponent();
 
-        while (tgt.getNumTargeted() < tgt.getMaxTargets(saMe.getSourceCard(), saMe)) {
+        while (tgt.getNumTargeted() < tgt.getMaxTargets(source, saMe)) {
 
             if (tgt.canTgtCreatureAndPlayer()) {
 
                 if (this.shouldTgtP(ai, saMe, dmg, noPrevention)) {
-                    if (tgt.addTarget(enemy)) {
-                        continue;
+                    tgt.addTarget(enemy);
+                    if (divided) {
+                        tgt.addDividedAllocation(enemy, dmg);
+                        break;
                     }
+                    continue;
                 }
 
                 final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, enemy, false);
                 if (c != null) {
                     tgt.addTarget(c);
+                    if (divided) {
+                        final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                        if (assignedDamage <= dmg) {
+                            tgt.addDividedAllocation(c, assignedDamage);
+                        }
+                        dmg = dmg - assignedDamage;
+                        if (dmg <= 0) {
+                            break;
+                        }
+                    }
                     continue;
                 }
 
@@ -259,13 +274,27 @@ public class DamageDealAi extends DamageAiBase {
                         || (phase.is(PhaseType.END_OF_TURN) && saMe.isAbility() && phase.getNextTurn().equals(ai))
                             || (phase.is(PhaseType.MAIN2) && saMe.getRestrictions().getPlaneswalker());
 
-                if (freePing && saMe.canTarget(ai.getOpponent()) && tgt.addTarget(enemy)) {
-                    continue;
+                if (freePing && saMe.canTarget(enemy)) {
+                    tgt.addTarget(enemy);
+                    if (divided) {
+                        tgt.addDividedAllocation(enemy, dmg);
+                        break;
+                    }
                 }
             } else if (tgt.canTgtCreature()) {
                 final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
                     tgt.addTarget(c);
+                    if (divided) {
+                        final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                        if (assignedDamage <= dmg) {
+                            tgt.addDividedAllocation(c, assignedDamage);
+                        }
+                        dmg = dmg - assignedDamage;
+                        if (dmg <= 0) {
+                            break;
+                        }
+                    }
                     continue;
                 }
             }
@@ -273,26 +302,25 @@ public class DamageDealAi extends DamageAiBase {
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
             else if (saMe.canTarget(enemy)) {
-
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAiLogic.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
-                        || saMe.getPayCosts() == null || isTrigger) {
+                        || saMe.getPayCosts() == null || isTrigger
+                        || this.shouldTgtP(ai, saMe, dmg, noPrevention)) {
                     tgt.addTarget(enemy);
-                    continue;
-                }
-                if (this.shouldTgtP(ai, saMe, dmg, noPrevention)) {
-                    tgt.addTarget(enemy);
+                    if (divided) {
+                        tgt.addDividedAllocation(enemy, dmg);
+                        break;
+                    }
                     continue;
                 }
             }
             // fell through all the choices, no targets left?
-            if (((tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)) || (tgt.getNumTargeted() == 0))) {
+            if (((tgt.getNumTargeted() < tgt.getMinTargets(source, saMe)) || (tgt.getNumTargeted() == 0))) {
                 if (!mandatory) {
                     tgt.resetTargets();
                     return false;
                 } else {
-                    // If the trigger is mandatory, gotta choose my own stuff
-                    // now
+                    // If the trigger is mandatory, gotta choose my own stuff now
                     return this.damageChooseRequiredTargets(ai, saMe, tgt, dmg, mandatory);
                 }
             } else {
@@ -356,20 +384,28 @@ public class DamageDealAi extends DamageAiBase {
             final boolean mandatory) {
         // this is for Triggered targets that are mandatory
         final boolean noPrevention = saMe.hasParam("NoPrevention");
+        final boolean divided = saMe.hasParam("DividedAsYouChoose");
 
         while (tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)) {
             // TODO: Consider targeting the planeswalker
             if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, ai,
-                        mandatory);
+                final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, ai, mandatory);
                 if (c != null) {
                     tgt.addTarget(c);
+                    if (divided) {
+                        tgt.addDividedAllocation(c, dmg);
+                        break;
+                    }
                     continue;
                 }
             }
 
             if (saMe.canTarget(ai)) {
                 if (tgt.addTarget(ai)) {
+                    if (divided) {
+                        tgt.addDividedAllocation(ai, dmg);
+                        break;
+                    }
                     continue;
                 }
             }
