@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 Text:no text
 A:AB$ ChangeZone | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | SorcerySpeed$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | Chooser$ Targeted | Hidden$ True | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player exiles a card from his or her hand. Activate this ability only any time you could cast a sorcery.
-A:AB$ ChooseCard | Cost$ 1 | ChoiceZone$ Exile | Choices$ Card.IsRemembered | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Muse Vessel | SubAbility$ DBPlayYouOwn | SpellDescription$ Choose a card exiled with CARDNAME. You may play that card this turn.
+A:AB$ ChooseCard | Cost$ 1 | ChoiceZone$ Exile | Choices$ Card.IsRemembered | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Muse Vessel | SubAbility$ DBPlayYouOwn | AILogic$ Never | SpellDescription$ Choose a card exiled with CARDNAME. You may play that card this turn.
 SVar:DBPlayYouOwn:DB$ Pump | Defined$ ChosenCard | KW$ HIDDEN May be played | PumpZone$ Exile | ConditionDefined$ ChosenCard | ConditionPresent$ Card.YouOwn | ConditionCompare$ EQ1 | SubAbility$ DBPlayOppOwn
 SVar:DBPlayOppOwn:DB$ Pump | Defined$ ChosenCard | KW$ HIDDEN May be played by your opponent | PumpZone$ Exile | ConditionDefined$ ChosenCard | ConditionPresent$ Card.OppOwn | ConditionCompare$ EQ1
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget

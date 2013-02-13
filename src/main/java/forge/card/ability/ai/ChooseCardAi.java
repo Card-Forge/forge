@@ -54,6 +54,8 @@ public class ChooseCardAi extends SpellAiLogic {
                 if (choices.isEmpty()) {
                     return false;
                 }
+            } else if (sa.getParam("AILogic").equals("Never")) {
+                return false;
             }
         }
 
