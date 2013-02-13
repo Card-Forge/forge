@@ -18,7 +18,6 @@
 package forge.gui.deckeditor;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -275,7 +274,7 @@ public enum CDeckEditorUI implements CardContainer {
             SwingUtilities.getRoot(popupLabel).setSize(popupDimension);
         }
         
-        private void _findNextMatch(int startIdx) {
+        private void _findNextMatch(int startIdx, boolean reverse) {
             int numItems = tableView.getTable().getRowCount();
             if (0 == numItems) {
                 cancel();
@@ -284,10 +283,11 @@ public enum CDeckEditorUI implements CardContainer {
             
             // find the next item that matches the string
             startIdx %= numItems;
-            int stopIdx = (startIdx - 1 + numItems) % numItems;
+            final int increment = reverse ? numItems - 1 : 1;
+            int stopIdx = (startIdx + numItems - increment) % numItems;
             String searchStr = str.toString().toLowerCase(Locale.ENGLISH);
             boolean found = false;
-            for (int idx = startIdx; true; idx = (idx + 1) % numItems) {
+            for (int idx = startIdx; true; idx = (idx + increment) % numItems) {
                 @SuppressWarnings("unchecked")
                 EditorTableModel<? extends InventoryItem> tableModel =
                         (EditorTableModel<? extends InventoryItem>)tableView.getTable().getModel();
@@ -364,8 +364,11 @@ public enum CDeckEditorUI implements CardContainer {
                 return;
                 
             case KeyEvent.VK_ENTER:
+            case 13: // there doesn't seem to be a KeyEvent constant for this
                 if (!str.toString().isEmpty()) {
-                    _findNextMatch(tableView.getTable().getSelectedRow() + 1);
+                    // no need to add (or subtract) 1 -- the table selection will already
+                    // have been advanced by the (shift+) enter key
+                    _findNextMatch(tableView.getTable().getSelectedRow(), e.isShiftDown());
                 }
                 return;
                 
@@ -390,7 +393,7 @@ public enum CDeckEditorUI implements CardContainer {
                 str.append(e.getKeyChar());
             }
             
-            _findNextMatch(Math.max(0, tableView.getTable().getSelectedRow()));
+            _findNextMatch(Math.max(0, tableView.getTable().getSelectedRow()), false);
         }
     }
 }
