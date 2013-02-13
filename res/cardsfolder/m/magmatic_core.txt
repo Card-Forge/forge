@@ -1,0 +1,16 @@
+Name:Magmatic Core
+ManaCost:2 R R
+Types:Enchantment
+Text:no text
+K:Cumulative upkeep:1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ CountMagma | Static$ True | Secondary$ True | TriggerDescription$ At the beginning of your end step, CARDNAME deals X damage divided as you choose among any number of target creatures, where X is the number of age counters on it.
+SVar:CountMagma:DB$ StoreSVar | SVar$ CoreStrength | Type$ Count | Expression$ CardCounters.AGE
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ MagmaticDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals X damage divided as you choose among any number of target creatures, where X is the number of age counters on it.
+SVar:MagmaticDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ CoreStrength | TargetMin$ Min | TargetMax$ CoreStrength | References$ Min,CoreStrength | DividedAsYouChoose$ CoreStrength
+SVar:CoreStrength:Count$CardCounters.AGE
+SVar:Min:SVar$CoreStrength/LimitMax.1
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magmatic_core.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/91.jpg
+Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your end step, Magmatic Core deals X damage divided as you choose among any number of target creatures, where X is the number of age counters on it.
+End
