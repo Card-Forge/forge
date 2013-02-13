@@ -5999,6 +5999,7 @@ res/cardsfolder/l/living_death.txt svneol=native#text/plain
 res/cardsfolder/l/living_destiny.txt -text
 res/cardsfolder/l/living_end.txt -text
 res/cardsfolder/l/living_hive.txt svneol=native#text/plain
+res/cardsfolder/l/living_inferno.txt -text
 res/cardsfolder/l/living_lands.txt svneol=native#text/plain
 res/cardsfolder/l/living_plane.txt svneol=native#text/plain
 res/cardsfolder/l/living_terrain.txt -text

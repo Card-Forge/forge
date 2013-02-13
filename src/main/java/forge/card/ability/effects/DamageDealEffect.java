@@ -43,9 +43,10 @@ public class DamageDealEffect extends SpellEffect {
 
             if (sa.hasParam("DivideEvenly")) {
                 sb.append("divided evenly (rounded down) ");
+            } else if (sa.hasParam("DividedAsYouChoose")) {
+                sb.append("divided as you choose ");
             }
-
-            sb.append("to");
+            sb.append("to ");
 
             for (int i = 0; i < tgts.size(); i++) {
                 sb.append(" ");

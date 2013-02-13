@@ -20,7 +20,12 @@ public class DamagePreventEffect extends SpellEffect {
 
         sb.append("Prevent the next ");
         sb.append(sa.getParam("Amount"));
-        sb.append(" damage that would be dealt to ");
+        sb.append(" damage that would be dealt ");
+        if (sa.hasParam("DividedAsYouChoose")) {
+            sb.append("between ");
+        } else {
+            sb.append("to ");
+        }
         for (int i = 0; i < tgts.size(); i++) {
             if (i != 0) {
                 sb.append(" ");

@@ -2,7 +2,7 @@ Name:Jaws of Stone
 ManaCost:5 R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 5 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ OrigMountains | TargetMin$ Min | TargetMax$ OrigMountains | References$ OrigMountains | DividedAsYouChoose$ OrigMountains | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures and/or players, where X is the number of Mountains you control as you cast CARDNAME.
+A:SP$ DealDamage | Cost$ 5 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ OrigMountains | TargetMin$ Min | TargetMax$ OrigMountains | References$ Min,OrigMountains | DividedAsYouChoose$ OrigMountains | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures and/or players, where X is the number of Mountains you control as you cast CARDNAME.
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ Conspire | Static$ True | Execute$ CountMountainsAtCast
 SVar:CountMountainsAtCast:DB$ StoreSVar | SVar$ OrigMountains | Type$ Count | Expression$ Valid Mountain.YouCtrl
 SVar:OrigMountains:Count$Valid Mountain.YouCtrl
