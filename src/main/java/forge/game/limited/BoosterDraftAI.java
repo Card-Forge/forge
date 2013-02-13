@@ -78,26 +78,26 @@ public class BoosterDraftAI {
         List<Pair<CardPrinted, Double>> rankedCards = rankCards(chooseFrom);
         
         for(Pair<CardPrinted, Double> p : rankedCards) {
-            // If a card is not ai playable, somewhat decreare its rating
+            // If a card is not ai playable, somewhat decrease its rating
             if( p.getKey().getCard().getRemAIDecks() )
-                p.setValue(p.getValue() - TAKE_BEST_THRESHOLD);
+                p.setValue(p.getValue() + TAKE_BEST_THRESHOLD);
 
             // if I cannot choose more colors, and the card cannot be played with chosen colors, decrease its rating.
             if( !canAddMoreColors && !p.getKey().getCard().getManaCost().canBePaidWithAvaliable(currentChoice))
-                p.setValue(p.getValue() - 10);
+                p.setValue(p.getValue() + 10);
         }
 
         int cntBestCards = 0;
-        double bestRating = Double.NEGATIVE_INFINITY;
+        double bestRanking = Double.MAX_VALUE;
         CardPrinted bestPick = null;
         for(Pair<CardPrinted, Double> p : rankedCards) { 
             double rating = p.getValue();
-            if( rating > bestRating )
+            if( rating < bestRanking )
             {
-                bestRating = rating;
+                bestRanking = rating;
                 bestPick = p.getKey();
                 cntBestCards = 1;
-            } else if ( rating == bestRating ) {
+            } else if ( rating == bestRanking ) {
                 cntBestCards++;
             }
         }
@@ -105,7 +105,7 @@ public class BoosterDraftAI {
         if (cntBestCards > 1) {
             final List<CardPrinted> possiblePick = new ArrayList<CardPrinted>();
             for(Pair<CardPrinted, Double> p : rankedCards) {
-                if ( p.getValue() == bestRating )
+                if ( p.getValue() == bestRanking )
                     possiblePick.add(p.getKey());
             }
             bestPick = Aggregates.random(possiblePick);
@@ -114,6 +114,7 @@ public class BoosterDraftAI {
         if (canAddMoreColors)
             deckCols.addColorsOf(bestPick);
         
+        System.out.println("Player[" + player + "] picked: " + bestPick);
         this.deck.get(player).add(bestPick);
         
         return bestPick;

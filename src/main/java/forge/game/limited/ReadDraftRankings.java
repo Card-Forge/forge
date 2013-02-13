@@ -93,8 +93,8 @@ public class ReadDraftRankings {
         // Basic lands should be excluded from the evaluation --BBU
         if (cardName.equals("Island") || cardName.equals("Forest") || cardName.equals("Swamp")
                 || cardName.equals("Plains") || cardName.equals("Mountain")) {
-                return null;
-                }
+            return null;
+        }
 
         if (draftRankings.containsKey(edition)) {
             String safeName = cardName.replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
