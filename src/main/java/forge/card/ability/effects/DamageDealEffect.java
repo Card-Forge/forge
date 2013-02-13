@@ -122,6 +122,7 @@ public class DamageDealEffect extends SpellEffect {
         final Card source = definedSources.get(0);
 
         for (final Object o : tgts) {
+            dmg = (sa.getTarget() != null && sa.hasParam("DividedAsYouChoose")) ? sa.getTarget().getDividedValue(o) : dmg;
             if (o instanceof Card) {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {

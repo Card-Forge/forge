@@ -19,6 +19,7 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
@@ -50,6 +51,9 @@ public class Target {
     private boolean withoutSameCreatureType = false;
     private String definedController = null;
     private TargetChoices choice = null;
+    private boolean dividedAsYouChoose = false;
+    private HashMap<Object, Integer> dividedMap = new HashMap<Object, Integer>();
+    private int stillToDivide = 0;
 
     /**
      * <p>
@@ -719,6 +723,48 @@ public class Target {
     }
 
     /**
+     * <p>
+     * getNumCandidates.
+     * </p>
+     * 
+     * @param sa
+     *            the sa
+     * @param isTargeted
+     *            Check Valid Candidates and Targeting
+     * @return a int.
+     */
+    public final int getNumCandidates(final SpellAbility sa, final boolean isTargeted) {
+        int candidates = 0;
+        for (Player player : Singletons.getModel().getGame().getPlayers()) {
+            if (sa.canTarget(player)) {
+                candidates++;
+            }
+        }
+
+        if (this.tgtZone.contains(ZoneType.Stack)) {
+            for (final Card c : Singletons.getModel().getGame().getStackZone().getCards()) {
+                boolean isValidTarget = c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard);
+                boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
+                boolean isAlreadyTargeted = this.getTargetCards().contains(c);
+                if (isValidTarget && canTarget && !isAlreadyTargeted) {
+                    candidates++;
+                }
+            }
+        } else {
+            for (final Card c : Singletons.getModel().getGame().getCardsIn(this.tgtZone)) {
+                boolean isValidTarget = c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard);
+                boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
+                boolean isAlreadyTargeted = this.getTargetCards().contains(c);
+                if (isValidTarget && canTarget && !isAlreadyTargeted) {
+                    candidates++;
+                }
+            }
+        }
+
+        return candidates;
+    }
+
+    /**
      * Checks if is unique targets.
      * 
      * @return true, if is unique targets
@@ -845,5 +891,55 @@ public class Target {
      */
     public void setDefinedController(String defined) {
         this.definedController = defined;
+    }
+
+    /**
+     * @return a boolean dividedAsYouChoose
+     */
+    public boolean isDividedAsYouChoose() {
+        return this.dividedAsYouChoose;
+    }
+
+    /**
+     * @param divided the boolean to set
+     */
+    public void setDividedAsYouChoose(boolean divided) {
+        this.dividedAsYouChoose = divided;
+    }
+
+    /**
+     * Get the amount remaining to distribute.
+     * @return int stillToDivide
+     */
+    public int getStillToDivide() {
+        return this.stillToDivide;
+    }
+
+    /**
+     * @param remaining set the amount still to be divided
+     */
+    public void setStillToDivide(final int remaining) {
+        this.stillToDivide = remaining;
+    }
+
+    /**
+     * Store divided amount relative to a specific card/player.
+     * @param tgt the targeted object
+     * @param portionAllocated the divided portion allocated
+     */
+    public final void addDividedAllocation(final Object tgt, final Integer portionAllocated) {
+        if (this.dividedMap.containsKey(tgt)) {
+            this.dividedMap.remove(tgt);
+        }
+        this.dividedMap.put(tgt, portionAllocated);
+    }
+
+    /**
+     * Get the divided amount relative to a specific card/player.
+     * @param tgt the targeted object
+     * @return an int.
+     */
+    public int getDividedValue(Object tgt) {
+        return this.dividedMap.get(tgt);
     }
 }

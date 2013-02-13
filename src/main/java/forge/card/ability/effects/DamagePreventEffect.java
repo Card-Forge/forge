@@ -58,7 +58,7 @@ public class DamagePreventEffect extends SpellEffect {
         @Override
     public void resolve(SpellAbility sa) {
         Card host = sa.getSourceCard();
-        final int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
+        int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
         ArrayList<Object> tgts;
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
@@ -87,6 +87,7 @@ public class DamagePreventEffect extends SpellEffect {
         final boolean targeted = (sa.getTarget() != null);
 
         for (final Object o : tgts) {
+            numDam = (sa.getTarget() != null && sa.hasParam("DividedAsYouChoose")) ? sa.getTarget().getDividedValue(o) : numDam;
             if (o instanceof Card) {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {

@@ -200,7 +200,8 @@ public class TargetSelection {
             this.req.finishedTargeting();
             return false;
         } else if (!this.doesTarget() || (this.bDoneTarget && this.target.isMinTargetsChosen(this.card, this.ability))
-                || this.target.isMaxTargetsChosen(this.card, this.ability)) {
+                || this.target.isMaxTargetsChosen(this.card, this.ability)
+                || (this.target.isDividedAsYouChoose() && this.target.getStillToDivide() == 0)) {
             final AbilitySub abSub = this.ability.getSubAbility();
 
             if (abSub == null) {
@@ -390,7 +391,7 @@ public class TargetSelection {
                 CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
 
                 // If reached Minimum targets, enable OK button
-                if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa)) {
+                if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa) || tgt.isDividedAsYouChoose()) {
                     ButtonUtil.enableOnlyCancel();
                 } else {
                     ButtonUtil.enableAll();
@@ -421,6 +422,36 @@ public class TargetSelection {
                 if (targeted && !card.canBeTargetedBy(sa)) {
                     CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
                 } else if (choices.contains(card)) {
+                    if (tgt.isDividedAsYouChoose()) {
+                        final int stillToDivide = tgt.getStillToDivide();
+                        int allocatedPortion = 0;
+                        // allow allocation only if the max targets isn't reached and there are more candidates
+                        if ((tgt.getNumTargeted() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa))
+                                && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
+                            final Integer[] choices = new Integer[stillToDivide];
+                            for (int i = 1; i <= stillToDivide; i++) {
+                                choices[i - 1] = i;
+                            }
+                            String apiBasedMessage = "Distribute how much to ";
+                            if (sa.getApi().toString().equals("DealDamage")) {
+                                apiBasedMessage = "Select how much damage to deal to ";
+                            } else if (sa.getApi().toString().equals("PreventDamage")) {
+                                apiBasedMessage = "Select how much damage to prevent to ";
+                            }
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append(apiBasedMessage);
+                            sb.append(card.toString());
+                            Integer chosen = GuiChoose.oneOrNone(sb.toString(), choices);
+                            if (null == chosen) {
+                                return;
+                            }
+                            allocatedPortion = chosen;
+                        } else { // otherwise assign the rest of the damage/protection
+                            allocatedPortion = stillToDivide;
+                        }
+                        tgt.setStillToDivide(stillToDivide - allocatedPortion);
+                        tgt.addDividedAllocation(card, allocatedPortion);
+                    }
                     tgt.addTarget(card);
                     this.done();
                 }
@@ -433,6 +464,36 @@ public class TargetSelection {
                 }
 
                 if (sa.canTarget(player)) {
+                    if (tgt.isDividedAsYouChoose()) {
+                        final int stillToDivide = tgt.getStillToDivide();
+                        int allocatedPortion = 0;
+                        // allow allocation only if the max targets isn't reached and there are more candidates
+                        if ((alreadyTargeted.size() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa))
+                                && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
+                            final Integer[] choices = new Integer[stillToDivide];
+                            for (int i = 1; i <= stillToDivide; i++) {
+                                choices[i - 1] = i;
+                            }
+                            String apiBasedMessage = "Distribute how much to ";
+                            if (sa.getApi().toString().equals("DealDamage")) {
+                                apiBasedMessage = "Select how much damage to deal to ";
+                            } else if (sa.getApi().toString().equals("PreventDamage")) {
+                                apiBasedMessage = "Select how much damage to prevent to ";
+                            }
+                            final StringBuilder sb = new StringBuilder();
+                            sb.append(apiBasedMessage);
+                            sb.append(player.getName());
+                            Integer chosen = GuiChoose.oneOrNone(sb.toString(), choices);
+                            if (null == chosen) {
+                                return;
+                            }
+                            allocatedPortion = chosen;
+                        } else { // otherwise assign the rest of the damage/protection
+                            allocatedPortion = stillToDivide;
+                        }
+                        tgt.setStillToDivide(stillToDivide - allocatedPortion);
+                        tgt.addDividedAllocation(player, allocatedPortion);
+                    }
                     tgt.addTarget(player);
                     this.done();
                 }

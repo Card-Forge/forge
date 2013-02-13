@@ -208,9 +208,9 @@ public final class AbilityFactory {
         }
         final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
         sb.append(prompt);
-        
+
         Target abTgt = new Target(hostC, sb.toString(), mapParams.get("ValidTgts").split(","), min, max);
-        
+
         if (mapParams.containsKey("TgtZone")) { // if Targeting
                                                      // something
             // not in play, this Key
@@ -251,6 +251,17 @@ public final class AbilityFactory {
         }
         if (mapParams.containsKey("TargetsWithDifferentControllers")) {
             abTgt.setDifferentControllers(true);
+        }
+        if (mapParams.containsKey("DividedAsYouChoose")) {
+            final String toDistribute = mapParams.get("DividedAsYouChoose");
+            if (toDistribute.matches("[0-9][0-9]")) {
+                abTgt.setStillToDivide(Integer.parseInt(toDistribute));
+            } else if (hostC.getSVar(toDistribute).equals("xPaid")) {
+                abTgt.setStillToDivide(hostC.getXManaCostPaid());
+            } else {
+                abTgt.setStillToDivide(AbilityUtils.calculateAmount(hostC, toDistribute, null));
+            }
+            abTgt.setDividedAsYouChoose(true);
         }
         return abTgt;
     }
