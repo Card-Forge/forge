@@ -2,12 +2,8 @@ Name:Arrow Volley Trap
 ManaCost:3 W W
 Types:Instant Trap
 Text:no text
-A:SP$ DealDamage | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature (1) | NumDmg$ 1 | SubAbility$ DBDamage2 | SpellDescription$ CARDNAME deals 5 damage divided as you choose among any number of target attacking creatures.
-A:SP$ DealDamage | Cost$ 1 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature (1) | NumDmg$ 1 | SubAbility$ DBDamage2 | IsPresent$ Creature.attacking | PresentCompare$ GE4 | CostDesc$ If four or more creatures are attacking, you may pay 1 W rather than pay CARDNAME's mana cost. | SpellDescription$  
-SVar:DBDamage2:DB$DealDamage | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature (2) | NumDmg$ 1 | SubAbility$ DBDamage3
-SVar:DBDamage3:DB$DealDamage | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature (3) | NumDmg$ 1 | SubAbility$ DBDamage4
-SVar:DBDamage4:DB$DealDamage | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature (4) | NumDmg$ 1 | SubAbility$ DBDamage5
-SVar:DBDamage5:DB$DealDamage | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature (5) | NumDmg$ 1
+A:SP$ DealDamage | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature to distribute damage to | NumDmg$ 5 | TargetMin$ 1 | TargetMax$ 5 | DividedAsYouChoose$ 5 | SpellDescription$ CARDNAME deals 5 damage divided as you choose among any number of target attacking creatures.
+A:SP$ DealDamage | Cost$ 1 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature to distribute damage to | NumDmg$ 5 | TargetMin$ 1 | TargetMax$ 5 | DividedAsYouChoose$ 5 | IsPresent$ Creature.attacking | PresentCompare$ GE4 | CostDesc$ If four or more creatures are attacking, you may pay 1 W rather than pay CARDNAME's mana cost. | SpellDescription$  
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrow_volley_trap.jpg

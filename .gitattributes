@@ -3105,6 +3105,7 @@ res/cardsfolder/e/emberstrike_duo.txt svneol=native#text/plain
 res/cardsfolder/e/emberwilde_augur.txt svneol=native#text/plain
 res/cardsfolder/e/emberwilde_caliph.txt svneol=native#text/plain
 res/cardsfolder/e/emblem_of_the_warmind.txt svneol=native#text/plain
+res/cardsfolder/e/embolden.txt -text
 res/cardsfolder/e/embrace_my_diabolical_vision.txt -text
 res/cardsfolder/e/emerald_charm.txt svneol=native#text/plain
 res/cardsfolder/e/emerald_dragonfly.txt svneol=native#text/plain
@@ -5331,6 +5332,7 @@ res/cardsfolder/j/jareth_leonine_titan.txt svneol=native#text/plain
 res/cardsfolder/j/jasmine_boreal.txt svneol=native#text/plain
 res/cardsfolder/j/jasmine_seer.txt -text
 res/cardsfolder/j/jawbone_skulkin.txt svneol=native#text/plain
+res/cardsfolder/j/jaws_of_stone.txt -text
 res/cardsfolder/j/jaya_ballard_task_mage.txt svneol=native#text/plain
 res/cardsfolder/j/jayemdae_tome.txt svneol=native#text/plain
 res/cardsfolder/j/jedit_ojanen.txt svneol=native#text/plain

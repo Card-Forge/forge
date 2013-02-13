@@ -1,0 +1,11 @@
+Name:Embolden
+ManaCost:2 W
+Types:Instant
+Text:no text
+A:SP$ PreventDamage | Cost$ 2 W | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to prevent damage to | Amount$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ Prevent the next 4 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+K:Flashback 1 W
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/embolden.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/22.jpg
+Oracle:Prevent the next 4 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.\nFlashback {1}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+End

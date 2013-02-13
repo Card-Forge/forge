@@ -2,9 +2,7 @@ Name:Flameshot
 ManaCost:3 R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | NumDmg$ 1 | SubAbility$ DBDamage2 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among any number of target creatures.
-SVar:DBDamage2:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | NumDmg$ 1 | SubAbility$ DBDamage3
-SVar:DBDamage3:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | NumDmg$ 1
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among any number of target creatures.
 SVar:AltCost:Cost$ Discard<1/Mountain>
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
