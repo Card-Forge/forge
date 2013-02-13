@@ -3,8 +3,7 @@ ManaCost:2 R
 Types:Creature Human Spellshaper
 Text:no text
 PT:2/2
-A:AB$ DealDamage | Cost$ 2 R T Discard<1/Card> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (1) | NumDmg$ 1 | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 2 damage divided as you choose among any number of target creatures and/or players.
-SVar:DBDamage:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1
+A:AB$ DealDamage | Cost$ 2 R T Discard<1/Card> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ CARDNAME deals 2 damage divided as you choose among any number of target creatures and/or players.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_mage.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/77.jpg

@@ -2,9 +2,7 @@ Name:Flames of the Firebrand
 ManaCost:2 R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (1) | NumDmg$ 1 | SubAbility$ DBDamage2 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
-SVar:DBDamage2:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ DBDamage3
-SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (3) | NumDmg$ 1
+A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flames_of_the_firebrand.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/132.jpg
