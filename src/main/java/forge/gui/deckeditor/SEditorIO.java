@@ -137,7 +137,6 @@ public class SEditorIO {
                     JOptionPane.QUESTION_MESSAGE);
 
             if (m == JOptionPane.YES_OPTION) { controller.save(); }
-            VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Current Deck");
         }
         // Confirm if a new deck will be created
         else {
@@ -148,7 +147,6 @@ public class SEditorIO {
                     JOptionPane.QUESTION_MESSAGE);
 
             if (m == JOptionPane.YES_OPTION) { controller.saveAs(name); }
-            VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Current Deck");
         }
 
         return true;

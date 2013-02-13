@@ -1,7 +1,7 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,6 @@ import forge.game.MatchController;
 import forge.game.MatchStartHelper;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
-import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
@@ -45,7 +44,6 @@ public enum CSubmenuDraft implements ICDoc {
             VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
         }
     };
-    private LobbyPlayer[] opponents;
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -59,19 +57,9 @@ public enum CSubmenuDraft implements ICDoc {
         view.getBtnBuildDeck().setCommand(new Command() { @Override
                     public void execute() { setupDraft(); } });
 
-        view.getBtnStart().addMouseListener(
-                new MouseAdapter() {
-                    @Override
-                    public void mouseReleased(final MouseEvent e) {
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                startGame(GameType.Draft);
-                            }
-                        });
-                    }
-                });
-                            }
+        view.getBtnStart().addActionListener(new ActionListener() {
+            @Override public void actionPerformed(final ActionEvent e) { startGame(GameType.Draft); } });
+    }
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -91,7 +79,7 @@ public enum CSubmenuDraft implements ICDoc {
     }
 
     private void startGame(final GameType gameType) {
-        final boolean gauntlet = VSubmenuDraft.SINGLETON_INSTANCE.getRadSingle().isSelected() ? false : true;
+        final boolean gauntlet = !VSubmenuDraft.SINGLETON_INSTANCE.getRadSingle().isSelected();
         final Deck humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
         final int aiIndex = (int) Math.floor(Math.random() * 8);
 
@@ -133,8 +121,9 @@ public enum CSubmenuDraft implements ICDoc {
                 }
 
                 MatchStartHelper starter = new MatchStartHelper();
-                starter.addPlayer(Singletons.getControl().getLobby().findLocalPlayer(PlayerType.HUMAN), humanDeck);
-                starter.addPlayer(opponents[aiIndex], aiDeck);
+                Lobby lobby = Singletons.getControl().getLobby();
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDeck);
 
                 MatchController mc = Singletons.getModel().getMatch();
                 mc.initMatch(GameType.Draft, starter.getPlayerMap());
@@ -183,22 +172,6 @@ public enum CSubmenuDraft implements ICDoc {
 
         FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);
-        opponents = generatePlayers();
-    }
-
-    private LobbyPlayer[] generatePlayers() {
-        Lobby lobby = Singletons.getControl().getLobby();
-        LobbyPlayer[] ai = {
-                lobby.findLocalPlayer(PlayerType.COMPUTER),
-                lobby.findLocalPlayer(PlayerType.COMPUTER),
-                lobby.findLocalPlayer(PlayerType.COMPUTER),
-                lobby.findLocalPlayer(PlayerType.COMPUTER),
-                lobby.findLocalPlayer(PlayerType.COMPUTER),
-                lobby.findLocalPlayer(PlayerType.COMPUTER),
-                lobby.findLocalPlayer(PlayerType.COMPUTER)
-        };
-
-        return ai;
     }
 
     /* (non-Javadoc)

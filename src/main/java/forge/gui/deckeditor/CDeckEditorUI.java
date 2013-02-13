@@ -142,35 +142,35 @@ public enum CDeckEditorUI implements CardContainer {
     }
 
     @SuppressWarnings("unchecked")
-    public void addSelectedCards(int number) {
+    public void addSelectedCards(final boolean toAlternate, int number) {
         moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableCatalog(),
                 new _MoveAction() {
             @Override
             public void move(InventoryItem item, int qty) {
-                childController.addCard(item, qty);
+                childController.addCard(item, toAlternate, qty);
             }
         }, number);
     }
 
     @SuppressWarnings("unchecked")
-    public void removeSelectedCards(int number) {
-        
+    public void removeSelectedCards(final boolean toAlternate, int number) {
         moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableDeck(),
                 new _MoveAction() {
             @Override
             public void move(InventoryItem item, int qty) {
-                childController.removeCard(item, qty);
+                childController.removeCard(item, toAlternate, qty);
             }
         }, number);
     }
 
     @SuppressWarnings("unchecked")
-    public void removeAllCards() {
-        moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableDeck(),
-                new _MoveAction() {
+    public void removeAllCards(final boolean toAlternate) {
+        EditorTableView<InventoryItem> v = (EditorTableView<InventoryItem>)childController.getTableDeck();
+        v.getTable().selectAll();
+        moveSelectedCards(v, new _MoveAction() {
             @Override
             public void move(InventoryItem item, int qty) {
-                childController.removeCard(item, qty);
+                childController.removeCard(item, toAlternate, qty);
             }
         }, Integer.MAX_VALUE);
     }
@@ -189,13 +189,10 @@ public enum CDeckEditorUI implements CardContainer {
 
         catTable.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (!isFindingAsYouType && ' ' == e.getKeyChar()) { addSelectedCards(1); }
-            }
-            
-            @Override
             public void keyPressed(KeyEvent e) {
-                if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
+                    addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
+                } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
                     deckTable.requestFocusInWindow();
                 } else if (e.getKeyChar() == 'f') {
                     // let ctrl/cmd-F set focus to the text filter box
@@ -203,19 +200,15 @@ public enum CDeckEditorUI implements CardContainer {
                         VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().requestFocusInWindow();
                     }
                 }
-
             }
         });
 
         deckTable.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                if (!isFindingAsYouType && ' ' == e.getKeyChar()) { removeSelectedCards(1); }
-            }
-            
-            @Override
             public void keyPressed(KeyEvent e) {
-                if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                if (!isFindingAsYouType && KeyEvent.VK_SPACE == e.getKeyCode()) {
+                    removeSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
+                } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
                     catTable.requestFocusInWindow();
                 }
             }
@@ -224,14 +217,14 @@ public enum CDeckEditorUI implements CardContainer {
         catTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (2 == e.getClickCount()) { addSelectedCards(1); }
+                if (2 == e.getClickCount()) { addSelectedCards(false, 1); }
             }
         });
 
         deckTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (2 == e.getClickCount()) { removeSelectedCards(1); }
+                if (2 == e.getClickCount()) { removeSelectedCards(false, 1); }
             }
         });
 

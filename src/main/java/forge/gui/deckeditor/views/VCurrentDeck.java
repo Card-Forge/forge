@@ -24,6 +24,7 @@ import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
+import forge.gui.toolbox.ToolTipListener;
 
 
 /** 
@@ -147,6 +148,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         scroller.getViewport().setOpaque(false);
         scroller.setBorder(null);
         scroller.getViewport().setBorder(null);
+        scroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
 
         pnlStats.setOpaque(false);
         

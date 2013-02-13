@@ -94,13 +94,18 @@ public class DeckController<T extends DeckBase> {
         CStatistics.SINGLETON_INSTANCE.update();
         CProbabilities.SINGLETON_INSTANCE.update();
 
-        this.saved = true; // unless set to false in notify
-        if (!this.isModelInSyncWithFolder()) {
+        if (this.isModelInSyncWithFolder()) {
+            _setSaved(true);
+        } else {
             this.notifyModelChanged();
         }
     }
 
     private boolean isModelInSyncWithFolder() {
+        if (model.getName().isEmpty()) {
+            return true;
+        }
+        
         final T modelStored = this.folder.get(this.model.getName());
         // checks presence in dictionary only.
         if (modelStored == this.model) {
@@ -131,10 +136,14 @@ public class DeckController<T extends DeckBase> {
      * Notify model changed.
      */
     public void notifyModelChanged() {
-        this.saved = false;
-        // view.setTitle();
+        _setSaved(false);
     }
 
+    private void _setSaved(boolean val) {
+        saved = val;
+        VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText((saved ? "" : "*") + "Current Deck");
+    }
+    
     /*
      * (non-Javadoc)
      * 
@@ -165,7 +174,7 @@ public class DeckController<T extends DeckBase> {
         if (null != newModel) {
             this.setModel((T) newModel.copyTo(name), true);
         }
-        saved = true;
+        _setSaved(true);
     }
 
     /*
@@ -185,8 +194,8 @@ public class DeckController<T extends DeckBase> {
         this.folder.add(this.model);
         // copy to new instance which will be edited and left if unsaved
         this.setModel((T) this.model.copyTo(this.model.getName()), true);
-        this.saved = true;
         this.modelInStore = true;
+        _setSaved(true);
     }
 
     /*
@@ -294,7 +303,7 @@ public class DeckController<T extends DeckBase> {
      */
     public void newModel() {
         this.model = this.newModelCreator.get();
-        this.saved = true;
+        _setSaved(true);
         this.view.resetTables();
     }
 }

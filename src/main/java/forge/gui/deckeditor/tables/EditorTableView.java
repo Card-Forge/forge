@@ -195,6 +195,7 @@ public final class EditorTableView<T extends InventoryItem> {
             }
         };
 
+        table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
         table.addFocusListener(new FocusListener() {
             @Override
             public void focusLost(FocusEvent arg0) {

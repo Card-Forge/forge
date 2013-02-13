@@ -36,6 +36,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSpinner;
 import forge.gui.toolbox.FTextField;
+import forge.gui.toolbox.ToolTipListener;
 import forge.util.TextUtil;
 
 /** 
@@ -125,6 +126,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         scroller.getViewport().setOpaque(false);
         scroller.setBorder(null);
         scroller.getViewport().setBorder(null);
+        scroller.getVerticalScrollBar().addAdjustmentListener(new ToolTipListener());
 
         pnlStats.setOpaque(false);
         

@@ -18,7 +18,6 @@
 package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Supplier;
-import forge.Command;
 
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -32,7 +31,6 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
-import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.util.IStorage;
@@ -92,8 +90,8 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard(InventoryItem item, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted)) {
+    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
+        if ((item == null) || !(item instanceof CardPrinted) || toAlternate) {
             return;
         }
 
@@ -101,7 +99,6 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
         final CardPrinted card = (CardPrinted) item;
         this.getTableDeck().addCard(card, qty);
         this.getTableCatalog().removeCard(card, qty);
-
         this.getDeckController().notifyModelChanged();
     }
 
@@ -109,8 +106,8 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard(InventoryItem item, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted)) {
+    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
+        if ((item == null) || !(item instanceof CardPrinted) || toAlternate) {
             return;
         }
 
@@ -118,7 +115,6 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
         final CardPrinted card = (CardPrinted) item;
         this.getTableCatalog().addCard(card, qty);
         this.getTableDeck().removeCard(card, qty);
-
         this.getDeckController().notifyModelChanged();
     }
 
@@ -155,16 +151,9 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
         SEditorUtil.resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
-            .setCommand(new Command() { private static final long serialVersionUID = -51755892076058261L;
-
-            @Override
-                public void execute() { SEditorIO.saveDeck(true); } });
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(false);
-
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
 
         VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);

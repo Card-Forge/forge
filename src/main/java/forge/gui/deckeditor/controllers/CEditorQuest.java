@@ -25,18 +25,18 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
-import forge.Command;
 
+import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
+import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
-import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.home.quest.CSubmenuQuestDecks;
@@ -142,13 +142,20 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard(InventoryItem item, int qty) {
+    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableDeck().addCard(card, qty);
+        if (toAlternate) {
+            // if we're in sideboard mode, the library will get adjusted properly when we call resetTables()
+            if (!sideboardMode) {
+                controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
+            }
+        } else {
+            getTableDeck().addCard(card, qty);
+        }
         this.getTableCatalog().removeCard(card, qty);
         this.controller.notifyModelChanged();
     }
@@ -157,14 +164,22 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard(InventoryItem item, int qty) {
+    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableCatalog().addCard(card, qty);
+        if (toAlternate) {
+            // if we're in sideboard mode, the library will get adjusted properly when we call resetTables()
+            if (!sideboardMode) {
+                controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
+            }
+        } else {
+            this.getTableCatalog().addCard(card, qty);
+        }
         this.getTableDeck().removeCard(card, qty);
+        this.controller.notifyModelChanged();
     }
 
     /*
@@ -218,13 +233,12 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(!isSideboarding);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(!isSideboarding);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(isSideboarding ? "Sideboard" : "Title:");
-
-        this.controller.notifyModelChanged();
     }
 
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
+    @SuppressWarnings("serial")
     @Override
     public void init() {
         final List<TableColumnInfo<InventoryItem>> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
@@ -256,13 +270,11 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
-        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard())
-            .setCommand(new Command() { private static final long serialVersionUID = -1177583666770872667L;
-
+        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard()).setCommand(new Command() {
             @Override
-                public void execute() {
-                    sideboardMode = !sideboardMode;
-                    switchEditorMode(sideboardMode);
+            public void execute() {
+                sideboardMode = !sideboardMode;
+                switchEditorMode(sideboardMode);
         } });
 
         this.getDeckController().setModel(deck);

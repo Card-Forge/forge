@@ -293,21 +293,33 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     private void _doMouseAction() {
         if (selectable) { setSelected(!selected); }
-        if (cmdClick != null && FLabel.this.isEnabled()) { cmdClick.execute(); }
+        if (cmdClick != null && FLabel.this.isEnabled()) {
+            hovered = false;
+            repaintSelf();
+            cmdClick.execute();
+        }
     }
     
     // Mouse event handler
     private final MouseAdapter madEvents = new MouseAdapter() {
         @Override
-        public void mouseEntered(final MouseEvent e) {
+        public void mouseEntered(MouseEvent e) {
             hovered = true;
             repaintSelf();
         }
 
         @Override
-        public void mouseExited(final MouseEvent e) {
+        public void mouseExited(MouseEvent e) {
             hovered = false;
             repaintSelf();
+        }
+        
+        @Override
+        public void mouseMoved(MouseEvent e) {
+            if (!hovered) {
+                hovered = true;
+                repaintSelf();
+            }
         }
         
         @Override
@@ -318,7 +330,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         }
         
         @Override
-        public void mouseClicked(final MouseEvent e) {
+        public void mouseClicked(MouseEvent e) {
             if (!reactOnMouseDown) {
                 _doMouseAction();
             }

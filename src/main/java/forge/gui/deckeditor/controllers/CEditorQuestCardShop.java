@@ -296,9 +296,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard(InventoryItem item, int qty) {
+    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
         // disallow "buying" cards while showing the full catalog
-        if (item == null || showingFullCatalog) {
+        if (item == null || showingFullCatalog || toAlternate) {
             return;
         }
 
@@ -352,8 +352,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard(InventoryItem item, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted) || showingFullCatalog) {
+    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
+        if ((item == null) || !(item instanceof CardPrinted) || showingFullCatalog || toAlternate) {
             return;
         }
 

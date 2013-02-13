@@ -118,8 +118,8 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard(InventoryItem item, int qty) {
-        if ((item == null) || !(item instanceof CardPrinted)) {
+    public void addCard(InventoryItem item, boolean toAlternate, int qty) {
+        if ((item == null) || !(item instanceof CardPrinted) || toAlternate) {
             return;
         }
 
@@ -143,7 +143,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard(InventoryItem item, int qty) {
+    public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
     }
 
     /**

@@ -45,12 +45,12 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     /** 
      * Operation to add one of selected card to current deck.
      */
-    public abstract void addCard(InventoryItem item, int qty);
+    public abstract void addCard(InventoryItem item, boolean toAlternate, int qty);
 
     /**
      * Operation to remove one of selected card from current deck.
      */
-    public abstract void removeCard(InventoryItem item, int qty);
+    public abstract void removeCard(InventoryItem item, boolean toAlternate, int qty);
 
     /**
      * Resets the cards in the catalog table and current deck table.
