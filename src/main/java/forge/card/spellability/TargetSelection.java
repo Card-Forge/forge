@@ -286,15 +286,16 @@ public class TargetSelection {
                 choices.remove(c);
             }
         }
-        
+
         // If all cards (including subability targets) must have the same controller
         if (tgt.isSameController() && !objects.isEmpty()) {
             final List<Card> list = new ArrayList<Card>();
-            for (final Object o : objects)
+            for (final Object o : objects) {
                 if (o instanceof Card) {
                     list.add((Card) o);
                 }
-            if (!list.isEmpty()){
+            }
+            if (!list.isEmpty()) {
                 final Card card = list.get(0);
                 choices = CardLists.filter(choices, new Predicate<Card>() {
                     @Override

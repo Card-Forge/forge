@@ -6791,7 +6791,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
-        } else if (property.startsWith("shareControllerWith")) {
+        } else if (property.startsWith("sharesControllerWith")) {
             if (property.equals("sharesControllerWith")) {
                 if (!this.sharesControllerWith(source)) {
                     return false;
