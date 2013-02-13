@@ -56,6 +56,8 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.error.ErrorViewer;
 import forge.quest.data.GameFormatQuest;
 import forge.item.BoosterPack;
@@ -76,6 +78,7 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestItemCondition;
 import forge.util.IgnoringXStream;
+import forge.util.MyRandom;
 import forge.util.XmlUtil;
 
 /**
@@ -97,7 +100,7 @@ public class QuestDataIO {
     protected static XStream getSerializer(final boolean isIgnoring) {
         final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
         xStream.registerConverter(new ItemPoolToXml());
-        xStream.registerConverter(new DeckSectionToXml());
+        xStream.registerConverter(new DeckToXml());
         xStream.registerConverter(new GameFormatQuestToXml());
         xStream.registerConverter(new QuestModeToXml());
         xStream.autodetectAnnotations(true);
@@ -470,6 +473,75 @@ public class QuestDataIO {
         }
     }
 
+    private static class DeckToXml extends ItemPoolToXml {
+    
+        /* (non-Javadoc)
+         * @see com.thoughtworks.xstream.converters.ConverterMatcher#canConvert(java.lang.Class)
+         */
+        @SuppressWarnings("rawtypes")
+        @Override
+        public boolean canConvert(Class type) {
+            return type.equals(Deck.class);
+        }
+    
+        /* (non-Javadoc)
+         * @see com.thoughtworks.xstream.converters.Converter#marshal(java.lang.Object, com.thoughtworks.xstream.io.HierarchicalStreamWriter, com.thoughtworks.xstream.converters.MarshallingContext)
+         */
+        @Override
+        public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
+            Deck d = (Deck)source;
+            writer.startNode("name");
+            writer.setValue(d.getName());
+            writer.endNode();
+            
+            for( Entry<DeckSection, CardPool> ds : d ) {
+                writer.startNode(ds.getKey().toString());
+                for (final Entry<CardPrinted, Integer> e : ds.getValue()) {
+                    this.write(e.getKey(), e.getValue(), writer);
+                }
+                writer.endNode();
+            }
+        }
+    
+        /* (non-Javadoc)
+         * @see com.thoughtworks.xstream.converters.Converter#unmarshal(com.thoughtworks.xstream.io.HierarchicalStreamReader, com.thoughtworks.xstream.converters.UnmarshallingContext)
+         */
+        @Override
+        public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
+
+            reader.moveDown(); // <name> tag MUST be at first position at all times  
+            String deckName = reader.getValue();
+            reader.moveUp();
+            
+            final Deck result = new Deck(deckName);
+            
+            while (reader.hasMoreChildren()) {
+                reader.moveDown();
+                DeckSection section = DeckSection.smartValueOf(reader.getNodeName());
+                if ( null == section )
+                    throw new RuntimeException("Quest deck has unknown section: " + reader.getNodeName());
+                
+                CardPool pool = result.getOrCreate(section);
+                while (reader.hasMoreChildren()) {
+                    reader.moveDown();
+                    final String sCnt = reader.getAttribute("n");
+                    final int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
+                    final String nodename = reader.getNodeName();
+                    if ("string".equals(nodename)) {
+                        pool.add(CardDb.instance().getCard(reader.getValue()));
+                    } else if ("card".equals(nodename)) { // new format
+                        pool.add(this.readCardPrinted(reader), cnt);
+                    }
+                    reader.moveUp();
+                }
+                reader.moveUp();
+            }
+            return result;
+            
+        }
+        
+    }
+
     private static class ItemPoolToXml implements Converter {
         @SuppressWarnings("rawtypes")
         @Override
@@ -603,42 +675,5 @@ public class QuestDataIO {
             final CardPrinted card = CardDb.instance().getCard(name, set, index);
             return foil ? CardPrinted.makeFoiled(card) : card;
         }
-    }
-
-    private static class DeckSectionToXml extends ItemPoolToXml {
-
-        @SuppressWarnings("rawtypes")
-        @Override
-        public boolean canConvert(final Class clasz) {
-            return clasz.equals(CardPool.class);
-        }
-
-        @Override
-        public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-            for (final Entry<CardPrinted, Integer> e : (CardPool) source) {
-                this.write(e.getKey(), e.getValue(), writer);
-            }
-
-        }
-
-        @Override
-        public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
-            final CardPool result = new CardPool();
-            while (reader.hasMoreChildren()) {
-                reader.moveDown();
-                final String sCnt = reader.getAttribute("n");
-                final int cnt = StringUtils.isNumeric(sCnt) ? Integer.parseInt(sCnt) : 1;
-                final String nodename = reader.getNodeName();
-
-                if ("string".equals(nodename)) {
-                    result.add(CardDb.instance().getCard(reader.getValue()));
-                } else if ("card".equals(nodename)) { // new format
-                    result.add(this.readCardPrinted(reader), cnt);
-                }
-                reader.moveUp();
-            }
-            return result;
-        }
-
     }
 }
