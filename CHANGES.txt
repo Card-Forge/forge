@@ -134,6 +134,26 @@ Fixes/Features:
 - The "ValidCard" parameter in the cantPlayLand stAb is now functional.
 - City in a Bottle will now prevents playing of ARN lands.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- third attempt at a cross-platform algorithm for resizing popup panels
+- use correct mask constants for shift and alt-graph
+- Completed a LQ pic URL filename.
+- Fixed playSpellAbility crashing when playing abilities with "sa.getPayCosts() == null".
+- set popup parent to null to force a heavyweight popup base
+- Added Oracle text of Flash.
+- deck API changes. Deck is now a map of sections to cardpools. Schemes and planes have their own sections
+- implement reverse search on shift-enter for find-as-you-type
+- Fixed a typo in isValid
+- quest Deck IO for new format of decks
+- use StringUtils to compare ignoring case (that will actually save Ncards + 1 string allocations per search)
+- remove unused import
+- add in suggested filter for nonprintable characters
+- Added proper damage and damage prevention distribution
+- Converted Angel of Salvation
+- Converted some existing cards to proper distribution
+- Added AI support to DividedAsYouChoose.
+- Converted Bogardan Hellkite.
+- Removed SVar:RemAIDeck:True from some cards with DividedAsYouChoose.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -199,6 +219,10 @@ Unforge
 Viridian Zealot Avatar
 Warren Weirding
 Worldpurge
+Flash
+Forked Lightning
+Embolden
+Jaws of Stone
 
 
 end
