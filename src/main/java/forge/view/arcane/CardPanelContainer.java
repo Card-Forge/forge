@@ -89,7 +89,7 @@ public abstract class CardPanelContainer extends JPanel {
 
         this.setOpaque(true);
 
-        this.addMouseMotionListener(new MouseMotionListener() {
+        final MouseMotionListener mml = new MouseMotionListener() {
             @Override
             public void mouseDragged(final MouseEvent evt) {
                 if (!CardPanelContainer.this.dragEnabled) {
@@ -148,7 +148,8 @@ public abstract class CardPanelContainer extends JPanel {
 
                 // System.err.format("%d %d over %s%n", evt.getX(), evt.getY(), hitPanel == null ? null : hitPanel.getCard().getName());
             }
-        });
+        };
+        this.addMouseMotionListener(mml);
 
         this.addMouseListener(new MouseAdapter() {
             private final boolean[] buttonsDown = new boolean[4];
@@ -202,16 +203,15 @@ public abstract class CardPanelContainer extends JPanel {
                     } else if (SwingUtilities.isMiddleMouseButton(evt)) {
                         CardPanelContainer.this.mouseMiddleClicked(panel, evt);
                     }
+                } else {
+                    // reeval cursor hover
+                    mml.mouseMoved(evt);
                 }
             }
 
             @Override
             public void mouseExited(final MouseEvent evt) {
                 CardPanelContainer.this.mouseOutPanel(evt);
-            }
-
-            @Override
-            public void mouseEntered(final MouseEvent e) {
             }
         });
     }

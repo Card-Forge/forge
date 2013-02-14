@@ -69,13 +69,13 @@ public class ToolTipListener
      */
     private void phantomMouseMoved(Component component)
     {
-        if (component == null) return;
+        if (null == component) {
+            return;
+        }
 
-        //  Mouse is in the bounds of the component, generate phantom
-        //  mouseMoved event for the ToolTipManager
-
+        // mouse is in the bounds of the component, generate phantom
+        // mouseMoved event for the ToolTipManager
         Point mouseLocation = component.getMousePosition();
-
         if (mouseLocation != null)
         {
             MouseEvent phantom = new MouseEvent(
@@ -92,37 +92,32 @@ public class ToolTipListener
         }
     }
 
-    //  Implement ComponentListener
+    // implement ComponentListener
     public void componentMoved(ComponentEvent e)
     {
-        Component component = e.getComponent();
-        phantomMouseMoved( component );
+        phantomMouseMoved(e.getComponent());
     }
 
     public void componentResized(ComponentEvent e)
     {
-        Component component = e.getComponent();
-        phantomMouseMoved( component );
+        phantomMouseMoved(e.getComponent());
     }
 
-    public void componentHidden(ComponentEvent e) {}
-    public void componentShown(ComponentEvent e) {}
+    public void componentHidden(ComponentEvent e) { }
+    public void componentShown(ComponentEvent e)  { }
     
-    //  Implement MouseWheelListener
+    // implement MouseWheelListener
     public void mouseWheelMoved(MouseWheelEvent e)
     {
         JScrollPane scrollPane = (JScrollPane)e.getSource();
-        Component component = scrollPane.getViewport().getView();
-        phantomMouseMoved( component );
+        phantomMouseMoved(scrollPane.getViewport().getView());
     }
 
-    // Implement AdjustmentListener
+    // implement AdjustmentListener
     public void adjustmentValueChanged(AdjustmentEvent e)
     {
         JScrollBar scrollBar = (JScrollBar)e.getSource();
         JScrollPane scrollPane = (JScrollPane)scrollBar.getParent();
-        Component component = scrollPane.getViewport().getView();
-        phantomMouseMoved( component );
+        phantomMouseMoved(scrollPane.getViewport().getView());
     }
-
 }
