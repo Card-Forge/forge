@@ -2,7 +2,7 @@ Name:Conflagrate
 ManaCost:X X R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Announce$ X | Cost$ X X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature and/or player to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures and/or players.
+A:SP$ DealDamage | Announce$ X | Cost$ X X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature and/or player to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,MaxTgts | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures and/or players.
 SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
 SVar:NumCreatures:Count$Valid Creature
 SVar:X:Count$xPaid

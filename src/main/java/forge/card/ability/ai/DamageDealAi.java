@@ -99,7 +99,7 @@ public class DamageDealAi extends DamageAiBase {
         if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")) {
             // If I can kill my target by paying less mana, do it
             final Target tgt = sa.getTarget();
-            if (tgt != null && tgt.getTargetPlayers().isEmpty()) {
+            if (tgt != null && tgt.getTargetPlayers().isEmpty() && !sa.hasParam("DividedAsYouChoose")) {
                 int actualPay = 0;
                 final boolean noPrevention = sa.hasParam("NoPrevention");
                 final ArrayList<Card> cards = tgt.getTargetCards();
@@ -233,6 +233,10 @@ public class DamageDealAi extends DamageAiBase {
         // target loop
         tgt.resetTargets();
         Player enemy = ai.getOpponent();
+        
+        if (tgt.getMaxTargets(source, saMe) <= 0) {
+            return false;
+        }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, saMe)) {
 
@@ -441,7 +445,7 @@ public class DamageDealAi extends DamageAiBase {
                 return false;
             }
 
-            if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")) {
+            if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid") && !sa.hasParam("DividedAsYouChoose")) {
                 // If I can kill my target by paying less mana, do it
                 int actualPay = 0;
                 final boolean noPrevention = sa.hasParam("NoPrevention");

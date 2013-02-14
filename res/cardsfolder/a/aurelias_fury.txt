@@ -2,7 +2,7 @@ Name:Aurelia's Fury
 ManaCost:X R W
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Announce$ X | Cost$ X W R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature and/or player to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | RememberDamaged$ True | SubAbility$ CowedByAurelia | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures and/or players. Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
+A:SP$ DealDamage | Announce$ X | Cost$ X W R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature and/or player to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,MaxTgts | RememberDamaged$ True | SubAbility$ CowedByAurelia | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures and/or players. Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
 SVar:CowedByAurelia:DB$ TapAll | ValidCards$ Creature.IsRemembered | SubAbility$ SpellLimitations
 SVar:SpellLimitations:DB$ Effect | StaticAbilities$ STCantBeCast | RememberObjects$ Player.IsRemembered | SubAbility$ DBCleanup
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.nonCreature | Caster$ Player.IsRemembered | Description$ Players damaged by Aurelia's Fury can't cast creature spells this turn.
@@ -11,7 +11,6 @@ SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
 SVar:NumCreatures:Count$Valid Creature
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurelias_fury.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/144.jpg
 Oracle:Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players. Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
