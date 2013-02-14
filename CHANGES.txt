@@ -16,6 +16,9 @@ Added a 'copy to clipboard' button on WinLose screen so players can easily copy 
 Find-as-you-type is now implemented for Deck Editor tables.  Just start typing while the table has focus and the next card with a matching string in its name will be highlighted.  If more than one card matches, hit Enter to select the next matching card.  A popup panel will appear with the search string so you know what you are searching for.  If no cards match the string, the string will be highlighted in red.  Normally, if you hit the spacebar while a card is selected in one table, the card will be moved to the other table (catalog/deck).  When the popup is displayed, space characters are interpreted as part of the search string.  Find-as-you-type mode is automatically exited after 5 seconds of inactivity, or hit Escape to exit find-as-you-type mode immediately.
 
 The Deck Editor has also gained some hotkey and context menu abilities.  R-click on a card (or a group of selected cards) for a list of actions and keyboard shortcuts.  In particular, you can now transfer cards 4 at a time using the keyboard and interact with the sideboard from anywhere.  Also remember that you can jump to the other table with the arrow keys and jump to the text filter with ctrl/cmd+f.  From the text filter, you can jump down to the tables by pressing enter.
+
+In recent weeks people had noticed that the computer was picking the weakest cards in Draft mode rather than the strongest cards. This left the AI with a draft mode deck that was suboptimal. The computer should now pick the strongest cards rather than the weakest cards.
+
 --
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
@@ -160,6 +163,35 @@ Fixes/Features:
 - Converted Bogardan Hellkite.
 - Removed SVar:RemAIDeck:True from some cards with DividedAsYouChoose.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- improved stack description for divided damage/prevention
+- Converted some more cards to DividedAsYouChoose
+- Converted some more cards to DividedAsYouChoose
+- Converted some more cards to DividedAsYouChoose
+- Made DistributedAsYouChoose available in PutCounter
+- Converted Blessings of Nature to DistributeAsYouChoose
+- Added/Fixed SVar:RemAIDeck:True on some cards.
+- Added "AILogic$ Never" to Muse Vessel.
+- Fixed draft AI picking the worst cards instead of the best (- yes really).
+- implement hotkeys for adding/removing cards directly to/from the sideboard
+- correctly manage current deck tab title so the '*' appears only when truly dirty
+- ensure table selection color is correct even before the table has gained focus for the first time
+- autoupdate shown tooltip when tables scroll
+- fix NPE when starting draft mode game against a single opponent with a previously-drafted deck
+- fix labels getting stuck with hovered highlight after their associated commands prevent them from getting the mouseExited event
+- Distribute can now handle Variable amounts
+- Introduction of AnnounceRequirements
+- add r-click context menus for deck editor tables
+- Add info about deck editor hotkeys and r-click menu options
+- GameActionPlay has its input reference initialized correctly, no more singletons reference required
+- Fixed Meteor Shower's description
+- Converted last few damage division scripts
+- converted Contagion to DividedAsYouChoose
+- The AI can now use some of the DividedAsYouChoose spells with X costs.
+- Added Gatecrash Guild Sealed game mode. It works just like the earlier Return to Ravnica Guild Sealed game mode except that you (obviously) have to pick the "Gatecrash Guild Sealed" block. The following cards are not included in this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
+- Added a fluff piece on Gatecrash Guild Sealed mode to CHANGES.txt.
+- Added a notice about the missing cards in the Gatecrash Guild Sealed mode to CHANGES.txt.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -229,6 +261,21 @@ Flash
 Forked Lightning
 Embolden
 Jaws of Stone
+Living Inferno
+Magmatic Core
+Remedy
+Rolling Thunder
+Aurelia's Fury
+Pollen Remedy
+Conflagrate
+Hail of Arrows
+Fire Covenant
+Meteor Shower
+Infernal Harvest
+Rock Slide
+Serra's Hymn
+Volcanic Wind
+Spoils of War
 
 
 end
