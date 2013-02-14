@@ -13,4 +13,6 @@ SVar:X:Count$xPaid
 #X Will get overwritten by Announce
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurelias_fury.jpg
+SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/144.jpg
+Oracle:Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players. Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
 End

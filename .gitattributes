@@ -1904,6 +1904,7 @@ res/cardsfolder/c/condescend.txt svneol=native#text/plain
 res/cardsfolder/c/cone_of_flame.txt -text
 res/cardsfolder/c/confessor.txt -text
 res/cardsfolder/c/confiscate.txt svneol=native#text/plain
+res/cardsfolder/c/conflagrate.txt -text
 res/cardsfolder/c/conflux.txt svneol=native#text/plain
 res/cardsfolder/c/confound.txt svneol=native#text/plain
 res/cardsfolder/c/congregate.txt svneol=native#text/plain
@@ -7770,6 +7771,7 @@ res/cardsfolder/p/poisonbelly_ogre.txt svneol=native#text/plain
 res/cardsfolder/p/polar_kraken.txt -text
 res/cardsfolder/p/political_trickery.txt svneol=native#text/plain
 res/cardsfolder/p/pollen_lullaby.txt svneol=native#text/plain
+res/cardsfolder/p/pollen_remedy.txt -text
 res/cardsfolder/p/pollenbright_wings.txt svneol=native#text/plain
 res/cardsfolder/p/polluted_bonds.txt svneol=native#text/plain
 res/cardsfolder/p/polluted_dead.txt -text
