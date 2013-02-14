@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
+
 import forge.Card;
 
 import forge.GameEntity;
@@ -1763,5 +1765,20 @@ public abstract class SpellAbility implements ISpellAbility {
         this.isCopied = isCopied0; 
     }
 
-
+    public boolean announceRequirements() {
+        // Announcing Requirements like Choosing X or Multikicker
+        // SA Params as comma delimited list
+        String announce = this.getParam("Announce");
+        if (announce != null) {
+            String[] announceVars = announce.split(",");
+            for(String aVar : announceVars) {
+                String value = this.getActivatingPlayer().getController().announceRequirements(this, aVar);
+                 if (value == null || !StringUtils.isNumeric(value)) { 
+                     return false;
+                 }
+                 this.setSVar(aVar, "Number$" + value);
+            }
+        }
+        return true;
+    }
 }

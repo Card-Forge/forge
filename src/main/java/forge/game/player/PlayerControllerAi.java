@@ -171,6 +171,14 @@ public class PlayerControllerAi extends PlayerController {
         return ComputerUtilCombat.distributeAIDamage(attacker, blockers, damageDealt);
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#announceRequirements()
+     */
+    @Override
+    public String announceRequirements(SpellAbility ability, String announce) {
+        // For now, these "announcements" are made within the AI classes of the appropriate SA effects
+        return null;
+    }
 
 
 }

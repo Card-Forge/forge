@@ -200,8 +200,19 @@ public class PlayerControllerHuman extends PlayerController {
         return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
                 || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                 && GuiDialog.confirm(attacker, "Do you want to assign its combat damage as though it weren't blocked?"));
-    }    
+    }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#announceRequirements(java.lang.String)
+     */
+    @Override
+    public String announceRequirements(SpellAbility ability, String announce) {
+        StringBuilder sb = new StringBuilder(ability.getSourceCard().getName());
+        sb.append(" - How much will you announce for ");
+        sb.append(announce);
+        sb.append("?");
+        return JOptionPane.showInputDialog(sb.toString());
+    }
 
 
 }

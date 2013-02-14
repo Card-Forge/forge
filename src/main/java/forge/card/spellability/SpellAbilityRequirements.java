@@ -121,6 +121,12 @@ public class SpellAbilityRequirements {
         // requirements.
         Singletons.getModel().getGame().getStack().freezeStack();
 
+        // Announce things like how many times you want to Multikick or the value of X
+        if (!this.ability.announceRequirements()) {
+            this.select.setCancel(true);
+            this.finishedTargeting();
+        }
+
         // Skip to paying if parent ability doesn't target and has no
         // subAbilities.
         // (or trigger case where its already targeted)

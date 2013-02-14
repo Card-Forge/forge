@@ -253,14 +253,7 @@ public final class AbilityFactory {
             abTgt.setDifferentControllers(true);
         }
         if (mapParams.containsKey("DividedAsYouChoose")) {
-            final String toDistribute = mapParams.get("DividedAsYouChoose");
-            if (toDistribute.matches("[0-9][0-9]")) {
-                abTgt.setStillToDivide(Integer.parseInt(toDistribute));
-            } else if (hostC.getSVar(toDistribute).equals("xPaid")) {
-                abTgt.setStillToDivide(hostC.getXManaCostPaid());
-            } else {
-                abTgt.setStillToDivide(AbilityUtils.calculateAmount(hostC, toDistribute, null));
-            }
+            abTgt.calculateStillToDivide(mapParams.get("DividedAsYouChoose"), hostC, null);
             abTgt.setDividedAsYouChoose(true);
         }
         return abTgt;

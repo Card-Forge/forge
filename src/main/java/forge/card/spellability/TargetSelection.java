@@ -183,6 +183,7 @@ public class TargetSelection {
     public final void resetTargets() {
         if (this.target != null) {
             this.target.resetTargets();
+            this.target.calculateStillToDivide(this.ability.getParam("DividedAsYouChoose"), this.getCard(), this.ability);
         }
     }
 

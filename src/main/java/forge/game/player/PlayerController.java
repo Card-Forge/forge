@@ -92,4 +92,5 @@ public abstract class PlayerController {
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender);
 
+    public abstract String announceRequirements(SpellAbility ability, String announce);
 }

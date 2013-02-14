@@ -921,6 +921,21 @@ public class Target {
     public void setStillToDivide(final int remaining) {
         this.stillToDivide = remaining;
     }
+    
+    public void calculateStillToDivide(String toDistribute, Card source, SpellAbility sa) {
+        // Recalculate this value just in case it's variable
+        if (!this.dividedAsYouChoose) {
+            return;
+        }
+
+        if (toDistribute.matches("[0-9][0-9]")) {
+            this.setStillToDivide(Integer.parseInt(toDistribute));
+        } else if (source.getSVar(toDistribute).equals("xPaid")) {
+            this.setStillToDivide(source.getXManaCostPaid());
+        } else {
+            this.setStillToDivide(AbilityUtils.calculateAmount(source, toDistribute, sa));
+        }
+    }
 
     /**
      * Store divided amount relative to a specific card/player.
