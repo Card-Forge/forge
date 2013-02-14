@@ -8588,6 +8588,7 @@ res/cardsfolder/r/roc_hatchling.txt svneol=native#text/plain
 res/cardsfolder/r/roc_of_kher_ridges.txt svneol=native#text/plain
 res/cardsfolder/r/rock_badger.txt svneol=native#text/plain
 res/cardsfolder/r/rock_basilisk.txt svneol=native#text/plain
+res/cardsfolder/r/rock_slide.txt -text
 res/cardsfolder/r/rockcaster_platoon.txt svneol=native#text/plain
 res/cardsfolder/r/rockshard_elemental.txt svneol=native#text/plain
 res/cardsfolder/r/rockslide_ambush.txt svneol=native#text/plain
@@ -9160,6 +9161,7 @@ res/cardsfolder/s/serra_zealot.txt svneol=native#text/plain
 res/cardsfolder/s/serras_blessing.txt svneol=native#text/plain
 res/cardsfolder/s/serras_boon.txt svneol=native#text/plain
 res/cardsfolder/s/serras_embrace.txt svneol=native#text/plain
+res/cardsfolder/s/serras_hymn.txt -text
 res/cardsfolder/s/serras_liturgy.txt svneol=native#text/plain
 res/cardsfolder/s/serras_sanctum.txt svneol=native#text/plain
 res/cardsfolder/s/serrated_arrows.txt svneol=native#text/plain
@@ -11617,6 +11619,7 @@ res/cardsfolder/v/volcanic_island.txt svneol=native#text/plain
 res/cardsfolder/v/volcanic_spray.txt svneol=native#text/plain
 res/cardsfolder/v/volcanic_strength.txt svneol=native#text/plain
 res/cardsfolder/v/volcanic_submersion.txt svneol=native#text/plain
+res/cardsfolder/v/volcanic_wind.txt -text
 res/cardsfolder/v/volcano_imp.txt svneol=native#text/plain
 res/cardsfolder/v/volition_reins.txt svneol=native#text/plain
 res/cardsfolder/v/volley_of_boulders.txt -text

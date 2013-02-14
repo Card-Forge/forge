@@ -3,13 +3,7 @@ ManaCost:8 R
 Types:Sorcery
 Text:no text
 K:Flashback R R R R R R
-A:SP$DealDamage | Cost$ 8 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TgtPrompt$ Select target creature or player (1) | NumDmg$ 1 | SubAbility$ Dmg2 | SpellDescription$ CARDNAME deals 6 damage divided as you choose among any number of target creatures and/or players.
-SVar:Dmg2:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ Dmg3
-SVar:Dmg3:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TgtPrompt$ Select target creature or player (3) | NumDmg$ 1 | SubAbility$ Dmg4
-SVar:Dmg4:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TgtPrompt$ Select target creature or player (4) | NumDmg$ 1 | SubAbility$ Dmg5
-SVar:Dmg5:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TgtPrompt$ Select target creature or player (5) | NumDmg$ 1 | SubAbility$ Dmg6
-SVar:Dmg6:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TgtPrompt$ Select target creature or player (6) | NumDmg$ 1
-SVar:RemAIDeck:True
+A:SP$ DealDamage | Cost$ 8 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 6 | TargetMin$ 1 | TargetMax$ 6 | DividedAsYouChoose$ 6 | SpellDescription$ CARDNAME deals 6 damage divided as you choose among any number of target creatures and/or players.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volley_of_boulders.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/227.jpg

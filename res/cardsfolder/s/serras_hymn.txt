@@ -1,0 +1,15 @@
+Name:Serra's Hymn
+ManaCost:W
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
+A:AB$ PreventDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to prevent damage to | Amount$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,MaxTgts,NumCreatures | SpellDescription$ Prevent the next X damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose, where X is the number of verse counters on CARDNAME.
+SVar:X:Count$CardCounters.VERSE
+SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.NumCreatures
+SVar:NumCreatures:Count$Valid Creature
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_hymn.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/48.jpg
+Oracle:At the beginning of your upkeep, you may put a verse counter on Serra's Hymn.\nSacrifice Serra's Hymn: Prevent the next X damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose, where X is the number of verse counters on Serra's Hymn.
+End
