@@ -116,6 +116,8 @@ public class DamageDealEffect extends SpellEffect {
             }
         }
 
+        final boolean remember = sa.hasParam("RememberDamaged");
+
         final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         if (definedSources == null) {
             return;
@@ -128,13 +130,20 @@ public class DamageDealEffect extends SpellEffect {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
                     if (noPrevention) {
-                        c.addDamageWithoutPrevention(dmg, source);
+                        if (c.addDamageWithoutPrevention(dmg, source) && remember) {
+                            source.addRemembered(c);
+                        }
                     } else if (combatDmg) {
                         HashMap<Card, Integer> combatmap = new HashMap<Card, Integer>();
                         combatmap.put(source, dmg);
                         c.addCombatDamage(combatmap);
+                        if (remember) {
+                            source.addRemembered(c);
+                        }
                     } else {
-                        c.addDamage(dmg, source);
+                        if (c.addDamage(dmg, source) && remember) {
+                            source.addRemembered(c);
+                        }
                     }
                 }
 
@@ -142,11 +151,18 @@ public class DamageDealEffect extends SpellEffect {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
                     if (noPrevention) {
-                        p.addDamageWithoutPrevention(dmg, source);
+                        if (p.addDamageWithoutPrevention(dmg, source) && remember) {
+                            source.addRemembered(p);
+                        }
                     } else if (combatDmg) {
                         p.addCombatDamage(dmg, source);
+                        if (remember) {
+                            source.addRemembered(p);
+                        }
                     } else {
-                        p.addDamage(dmg, source);
+                        if (p.addDamage(dmg, source) && remember) {
+                            source.addRemembered(p);
+                        }
                     }
                 }
             }
