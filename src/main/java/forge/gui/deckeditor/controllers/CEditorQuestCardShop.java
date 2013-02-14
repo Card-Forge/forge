@@ -317,32 +317,37 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         } else if (item instanceof OpenablePack) {
             this.getTableCatalog().removeCard(item, qty);
-
-            OpenablePack booster = null;
-            if (item instanceof BoosterPack) {
-                booster = (BoosterPack) ((BoosterPack) item).clone();
-            } else if (item instanceof TournamentPack) {
-                booster = (TournamentPack) ((TournamentPack) item).clone();
-            } else if (item instanceof FatPack) {
-                booster = (FatPack) ((FatPack) item).clone();
+            for (int i = 0; qty > i; ++i) {
+                OpenablePack booster = null;
+                if (item instanceof BoosterPack) {
+                    booster = (BoosterPack) ((BoosterPack) item).clone();
+                } else if (item instanceof TournamentPack) {
+                    booster = (TournamentPack) ((TournamentPack) item).clone();
+                } else if (item instanceof FatPack) {
+                    booster = (FatPack) ((FatPack) item).clone();
+                }
+                this.questData.getCards().buyPack(booster, value);
+                final List<CardPrinted> newCards = booster.getCards();
+                final List<InventoryItem> newInventory = new LinkedList<InventoryItem>(newCards);
+                getTableDeck().addCards(newInventory);
+                final CardListViewer c = new CardListViewer(booster.getName(),
+                        "You have found the following cards inside:", newCards);
+                c.show();
             }
-            this.questData.getCards().buyPack(booster, value);
-            final List<CardPrinted> newCards = booster.getCards();
-            final List<InventoryItem> newInventory = new LinkedList<InventoryItem>(newCards);
-            getTableDeck().addCards(newInventory);
-            final CardListViewer c = new CardListViewer(booster.getName(),
-                    "You have found the following cards inside:", newCards);
-            c.show();
         } else if (item instanceof PreconDeck) {
             this.getTableCatalog().removeCard(item, qty);
             final PreconDeck deck = (PreconDeck) item;
             this.questData.getCards().buyPreconDeck(deck, value);
             final ItemPool<InventoryItem> newInventory =
                     ItemPool.createFrom(deck.getDeck().getMain(), InventoryItem.class);
-            getTableDeck().addCards(newInventory);
+            for (int i = 0; qty > i; ++i) {
+                getTableDeck().addCards(newInventory);
+            }
             JOptionPane.showMessageDialog(null, String.format(
-                    "Deck '%s' was added to your decklist.%n%nCards from it were also added to your pool.",
-                    deck.getName()), "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
+                    "%s '%s' %s added to your decklist.%n%nCards from it were also added to your pool.",
+                    1 == qty ? "Deck" : String.format("%d copies of deck", qty),
+                    deck.getName(), 1 == qty ? "was" : "were"),
+                    "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
         }
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
