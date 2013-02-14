@@ -3555,6 +3555,7 @@ res/cardsfolder/f/fire_ants.txt svneol=native#text/plain
 res/cardsfolder/f/fire_at_will.txt svneol=native#text/plain
 res/cardsfolder/f/fire_belly_changeling.txt svneol=native#text/plain
 res/cardsfolder/f/fire_bowman.txt svneol=native#text/plain
+res/cardsfolder/f/fire_covenant.txt -text
 res/cardsfolder/f/fire_diamond.txt svneol=native#text/plain
 res/cardsfolder/f/fire_dragon.txt svneol=native#text/plain
 res/cardsfolder/f/fire_drake.txt svneol=native#text/plain
@@ -4591,6 +4592,7 @@ res/cardsfolder/h/hada_spy_patrol.txt svneol=native#text/plain
 res/cardsfolder/h/hag_hedge_mage.txt svneol=native#text/plain
 res/cardsfolder/h/hagra_crocodile.txt svneol=native#text/plain
 res/cardsfolder/h/hagra_diabolist.txt svneol=native#text/plain
+res/cardsfolder/h/hail_of_arrows.txt -text
 res/cardsfolder/h/hail_storm.txt svneol=native#text/plain
 res/cardsfolder/h/hair_strung_koto.txt svneol=native#text/plain
 res/cardsfolder/h/hakim_loreweaver.txt -text
