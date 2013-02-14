@@ -9,7 +9,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -38,11 +37,15 @@ import forge.gui.GuiChoose;
 public class GameActionPlay {
     
     private final GameState game;
-    private final InputControl matchInput;
+    private InputControl matchInput;
     
-    public GameActionPlay(final GameState game0, final InputControl matchInput0) {
+
+    public GameActionPlay(final GameState game0) {
         game = game0;
-        matchInput = matchInput0;
+    }
+    
+    void setMatchInput(InputControl input) {
+        this.matchInput = input; // TODO: Add 0 to parameter's name.
     }
     
     public final void playCardWithoutManaCost(final Card c, Player player) {
@@ -408,9 +411,9 @@ public class GameActionPlay {
                 game.getStack().add(sa);
                 return;
             } else if (sa.getBeforePayMana() == null) {
-                Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCost(sa, manaCost));
+                matchInput.setInput(new InputPayManaCost(sa, manaCost));
             } else {
-                Singletons.getModel().getMatch().getInput().setInput(sa.getBeforePayMana());
+                matchInput.setInput(sa.getBeforePayMana());
             }
         }
     }

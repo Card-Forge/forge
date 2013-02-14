@@ -108,7 +108,7 @@ public class GameState {
         allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
         action = new GameAction(this);
-        actionPlay = new GameActionPlay(this, match.getInput());
+        actionPlay = new GameActionPlay(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
         

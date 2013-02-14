@@ -129,11 +129,10 @@ public class MatchController {
      */
     public void startRound() {
 
-        // Will this lose all the ordering?s
+        // Deal with circular dependencies here
         currentGame = Singletons.getModel().newGame(players.keySet(),gameType, this);
-        
-        // Instantiate AI
         input = new InputControl(currentGame);
+        currentGame.getActionPlay().setMatchInput(input);
 
 
         Map<Player, PlayerStartConditions> startConditions = new HashMap<Player, PlayerStartConditions>();
