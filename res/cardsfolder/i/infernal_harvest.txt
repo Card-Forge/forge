@@ -1,0 +1,13 @@
+Name:Infernal Harvest
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$ DealDamage | Announce$ X | Cost$ 1 B Return<X/Swamp> | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures.
+SVar:MaxTgts:Count$Valid Creature
+SVar:X:Count$XChoice
+#X Will get overwritten by Announce
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_harvest.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/12.jpg
+Oracle:As an additional cost to cast Infernal Harvest, return X Swamps you control to their owner's hand.\nInfernal Harvest deals X damage divided as you choose among any number of target creatures.
+End

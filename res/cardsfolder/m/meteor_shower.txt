@@ -1,0 +1,17 @@
+Name:Meteor Shower
+ManaCost:X X R
+Types:Sorcery
+Text:no text
+CARDNAME deals X plus 1 damage divided as you choose among any number of target creatures and/or players.
+A:SP$ DealDamage | Announce$ X | Cost$ X X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature and/or player to distribute damage to | NumDmg$ DistroDmg | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ DistroDmg | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures and/or players.
+SVar:NumPlayers:PlayerCountPlayers$Amount/Plus.NumCreatures
+SVar:NumCreatures:Count$Valid Creature
+SVar:MaxTgts:SVar$NumPlayers/Plus.1
+SVar:DistroDmg:SVar$X/Plus.1
+SVar:X:Count$xPaid
+#X Will get overwritten by Announce
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_shower.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/202.jpg
+Oracle:Meteor Shower deals X plus 1 damage divided as you choose among any number of target creatures and/or players.
+End

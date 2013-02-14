@@ -5142,6 +5142,7 @@ res/cardsfolder/i/infectious_rage.txt -text
 res/cardsfolder/i/infernal_caretaker.txt svneol=native#text/plain
 res/cardsfolder/i/infernal_contract.txt svneol=native#text/plain
 res/cardsfolder/i/infernal_genesis.txt svneol=native#text/plain
+res/cardsfolder/i/infernal_harvest.txt -text
 res/cardsfolder/i/infernal_kirin.txt svneol=native#text/plain
 res/cardsfolder/i/infernal_medusa.txt svneol=native#text/plain
 res/cardsfolder/i/infernal_plunge.txt -text
@@ -6479,6 +6480,7 @@ res/cardsfolder/m/metathran_soldier.txt svneol=native#text/plain
 res/cardsfolder/m/metathran_transport.txt svneol=native#text/plain
 res/cardsfolder/m/metathran_zombie.txt svneol=native#text/plain
 res/cardsfolder/m/meteor_crater.txt svneol=native#text/plain
+res/cardsfolder/m/meteor_shower.txt -text
 res/cardsfolder/m/meteor_storm.txt svneol=native#text/plain
 res/cardsfolder/m/metrognome.txt -text
 res/cardsfolder/m/metropolis_sprite.txt -text
