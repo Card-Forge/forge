@@ -42,7 +42,7 @@ public class InputPayManaX extends InputPayMana {
             // only cancel if partially paid an X value
             // or X is 0, and x can't be 0
         } else {
-            ButtonUtil.enableAll();
+            ButtonUtil.enableAllFocusOk();
         }
 
         StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");

@@ -218,7 +218,7 @@ public class InputPayManaCostAbility extends InputPayMana {
     public final void showMessage() {
         ButtonUtil.enableOnlyCancel();
         if (this.showOnlyOKButton) {
-            ButtonUtil.enableOnlyOK();
+            ButtonUtil.enableOnlyOk();
         }
         final StringBuilder msg = new StringBuilder(this.message + "Pay Mana Cost: " + this.manaCost);
         if (this.phyLifeToLose > 0) {

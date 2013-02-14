@@ -43,6 +43,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
@@ -190,6 +191,12 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             btnStart.setVisible(true);
             btnStart.addActionListener(actStartDownload);
         }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                btnStart.requestFocusInWindow();
+            }
+        });
     }
 
     private void setCancel(final boolean cancel) {

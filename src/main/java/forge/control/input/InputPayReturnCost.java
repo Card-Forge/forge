@@ -107,7 +107,7 @@ public class InputPayReturnCost extends Input {
             ButtonUtil.enableOnlyCancel();
         }
         else {
-            ButtonUtil.enableAll();
+            ButtonUtil.enableAllFocusOk();
         }
     }
 

@@ -39,13 +39,13 @@ public abstract class InputSelectMany<T extends GameEntity> extends Input {
         boolean canOk = hasEnoughTargets();
 
         if (canOk && canCancel) {
-            ButtonUtil.enableAll();
+            ButtonUtil.enableAllFocusOk();
         }
         if (!canOk && canCancel) {
             ButtonUtil.enableOnlyCancel();
         }
         if (canOk && !canCancel) {
-            ButtonUtil.enableOnlyOK();
+            ButtonUtil.enableOnlyOk();
         }
         if (!canOk && !canCancel) {
             ButtonUtil.disableAll();

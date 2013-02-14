@@ -1,7 +1,5 @@
 package forge.gui.deckeditor.controllers;
 
-import java.awt.Component;
-import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -155,7 +153,6 @@ public enum CCardCatalog implements ICDoc {
                 GuiUtils.addMenuItem(popup, "Sets...", null, new Runnable() {
                     @Override
                     public void run() {
-                        final Component prevFocusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
                         final DialogChooseSets dialog = new DialogChooseSets(null, null, true);
                         dialog.setOkCallback(new Runnable() {
                             @Override
@@ -187,9 +184,6 @@ public enum CCardCatalog implements ICDoc {
                                 }
                                 
                                 addRestriction(buildSetRestriction(label.toString(), setCodes, dialog.getWantReprints()), null, null);
-                                if (null != prevFocusOwner) {
-                                    prevFocusOwner.requestFocusInWindow();
-                                }
                             }
                         });
                     }

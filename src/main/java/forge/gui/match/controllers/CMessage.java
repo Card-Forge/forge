@@ -41,7 +41,6 @@ public enum CMessage implements ICDoc {
         @Override
         public void actionPerformed(final ActionEvent evt) {
             inputControl.selectButtonCancel();
-            VMessage.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
         }
     };
 
@@ -49,7 +48,6 @@ public enum CMessage implements ICDoc {
         @Override
         public void actionPerformed(final ActionEvent evt) {
             inputControl.selectButtonOK();
-            VMessage.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
         }
     };
 

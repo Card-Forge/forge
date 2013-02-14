@@ -22,103 +22,49 @@ import javax.swing.JButton;
 import forge.gui.match.VMatchUI;
 
 /**
- * <p>
- * ButtonUtil class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
+ * Manages match UI OK/Cancel button enabling and focus
  */
 public class ButtonUtil {
-    /**
-     * <p>
-     * reset.
-     * </p>
-     */
+    public static void setButtonText(String okLabel, String cancelLabel) {
+        getOk().setText(okLabel);
+        getCancel().setText(cancelLabel);
+    }
+    
     public static void reset() {
-        ButtonUtil.getOK().setText("OK");
-        ButtonUtil.getCancel().setText("Cancel");
-
-        ButtonUtil.getOK().setEnabled(false);
-        ButtonUtil.getCancel().setEnabled(false);
+        disableAll();
+        getOk().setText("OK");
+        getCancel().setText("Cancel");
     }
 
-    /**
-     * <p>
-     * enableOnlyOK.
-     * </p>
-     */
-    public static void enableOnlyOK() {
-        ButtonUtil.getOK().setEnabled(true);
-        ButtonUtil.getCancel().setEnabled(false);
+    public static void enableOnlyOk() {
+        getCancel().setEnabled(false);
+        enableAndFocus(getOk());
     }
 
-    /**
-     * <p>
-     * enableOnlyCancel.
-     * </p>
-     */
     public static void enableOnlyCancel() {
-        ButtonUtil.getOK().setEnabled(false);
-        ButtonUtil.getCancel().setEnabled(true);
+        getOk().setEnabled(false);
+        enableAndFocus(getCancel());
     }
 
-    /**
-     * <p>
-     * disableAll.
-     * </p>
-     */
     public static void disableAll() {
-        ButtonUtil.getOK().setEnabled(false);
-        ButtonUtil.getCancel().setEnabled(false);
+        getOk().setEnabled(false);
+        getCancel().setEnabled(false);
     }
 
-    /**
-     * <p>
-     * enableAll.
-     * </p>
-     */
-    public static void enableAll() {
-        ButtonUtil.getOK().setEnabled(true);
-        ButtonUtil.getCancel().setEnabled(true);
+    public static void enableAllFocusOk() {
+        enableAndFocus(getOk());
+        getCancel().setEnabled(true);
     }
 
-    /**
-     * <p>
-     * disableOK.
-     * </p>
-     */
-    public static void disableOK() {
-        ButtonUtil.getOK().setEnabled(false);
+    private static void enableAndFocus(final JButton button) {
+        button.setEnabled(true);
+        button.requestFocusInWindow();
     }
-
-    /**
-     * <p>
-     * disableCancel.
-     * </p>
-     */
-    public static void disableCancel() {
-        ButtonUtil.getCancel().setEnabled(false);
-    }
-
-    /**
-     * <p>
-     * getOK.
-     * </p>
-     * 
-     * @return a {@link forge.MyButton} object.
-     */
-    private static JButton getOK() {
+    
+    private static JButton getOk() {
         return VMatchUI.SINGLETON_INSTANCE.getBtnOK();
     }
 
-    /**
-     * <p>
-     * getCancel.
-     * </p>
-     * 
-     * @return a {@link forge.MyButton} object.
-     */
     private static JButton getCancel() {
         return VMatchUI.SINGLETON_INSTANCE.getBtnCancel();
     }

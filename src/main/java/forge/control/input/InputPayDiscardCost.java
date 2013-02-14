@@ -20,10 +20,9 @@ package forge.control.input;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
-
 import forge.CardLists;
 import forge.Command;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.spellability.SpellAbility;
@@ -108,7 +107,7 @@ public class InputPayDiscardCost extends Input {
             ButtonUtil.enableOnlyCancel();
         }
         else {
-            ButtonUtil.enableAll();
+            ButtonUtil.enableAllFocusOk();
         }
     }
 

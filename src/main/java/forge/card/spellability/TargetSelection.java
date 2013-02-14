@@ -395,11 +395,11 @@ public class TargetSelection {
                 if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa) || tgt.isDividedAsYouChoose()) {
                     ButtonUtil.enableOnlyCancel();
                 } else {
-                    ButtonUtil.enableAll();
+                    ButtonUtil.enableAllFocusOk();
                 }
 
                 if (mandatory && tgt.hasCandidates(sa, true)) {
-                    ButtonUtil.disableCancel();
+                    ButtonUtil.enableOnlyOk();
                 }
             }
 

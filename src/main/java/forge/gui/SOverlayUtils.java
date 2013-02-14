@@ -1,11 +1,13 @@
 package forge.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.FocusManager;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -117,7 +119,9 @@ public final class SOverlayUtils {
         return overlay;
     }
 
+    private static Component prevFocusOwner;
     public static void showOverlay() {
+        prevFocusOwner = FocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
         // ensure no background element has focus
         FOverlay.SINGLETON_INSTANCE.getPanel().requestFocusInWindow();
@@ -129,6 +133,10 @@ public final class SOverlayUtils {
     public static void hideOverlay() {
         FOverlay.SINGLETON_INSTANCE.getPanel().removeAll();
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
+        if (null != prevFocusOwner) {
+            prevFocusOwner.requestFocusInWindow();
+            prevFocusOwner = null;
+        }
     }
 
     public static void showTargetingOverlay() {

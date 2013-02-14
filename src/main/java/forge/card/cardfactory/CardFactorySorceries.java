@@ -18,12 +18,12 @@
 package forge.card.cardfactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Vector;
-import java.util.List;
-import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
@@ -31,7 +31,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -55,7 +54,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
-
 import forge.util.Aggregates;
 import forge.view.ButtonUtil;
 
@@ -802,7 +800,7 @@ public class CardFactorySorceries {
                 sb.append(card.getName()).append(" - Select a target creature to gain Fear (up to ");
                 sb.append(this.stop - this.count).append(" more)");
                 CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                ButtonUtil.enableAll();
+                ButtonUtil.enableAllFocusOk();
             }
 
             @Override

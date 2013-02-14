@@ -23,7 +23,6 @@ import java.util.List;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
@@ -61,9 +60,8 @@ public class InputMulligan extends Input {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        ButtonUtil.enableAll();
-        VMatchUI.SINGLETON_INSTANCE.getBtnOK().setText("No");
-        VMatchUI.SINGLETON_INSTANCE.getBtnCancel().setText("Yes");
+        ButtonUtil.setButtonText("No", "Yes");
+        ButtonUtil.enableAllFocusOk();
 
         final String str =
                 (Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().equals(Singletons.getControl().getPlayer())
@@ -77,14 +75,10 @@ public class InputMulligan extends Input {
         this.end();
     }
 
-
-
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
         final Player humanPlayer = Singletons.getControl().getPlayer();
-
-
         final int newHand = humanPlayer.doMulligan();
 
         if (newHand == 0) {

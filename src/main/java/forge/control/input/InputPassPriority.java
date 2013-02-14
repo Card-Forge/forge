@@ -46,7 +46,7 @@ public class InputPassPriority extends Input {
     @Override
     public final void showMessage() {
         GuiDisplayUtil.updateGUI();
-        ButtonUtil.enableOnlyOK();
+        ButtonUtil.enableOnlyOk();
 
         final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
         final Player player = Singletons.getModel().getGame().getPhaseHandler().getPriorityPlayer();

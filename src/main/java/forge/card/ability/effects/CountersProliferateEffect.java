@@ -50,7 +50,7 @@ public class CountersProliferateEffect extends SpellEffect {
 
             @Override
             public void showMessage() {
-                ButtonUtil.enableOnlyOK();
+                ButtonUtil.enableOnlyOk();
                 CMatchUI.SINGLETON_INSTANCE.showMessage("Proliferate: Choose permanents and/or players");
             }
 

@@ -29,6 +29,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -50,6 +51,7 @@ public class FButton extends JButton implements ILocalRepaint {
     private int w, h = 0;
     private boolean allImagesPresent = false;
     private boolean toggle = false;
+    private boolean hovered = false; 
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
     private KeyAdapter klEnter;
 
@@ -60,14 +62,8 @@ public class FButton extends JButton implements ILocalRepaint {
         this("");
     }
 
-    /**
-     * Instantiates a new FButton.
-     *
-     * @param msg
-     *            the msg
-     */
-    public FButton(final String msg) {
-        super(msg);
+    public FButton(final String label) {
+        super(label);
         this.setOpaque(false);
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setBackground(Color.red);
@@ -96,52 +92,35 @@ public class FButton extends JButton implements ILocalRepaint {
         // Mouse events
         this.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseEntered(final java.awt.event.MouseEvent evt) {
-                if (isToggled()) { return; }
-
-                if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_LEFT).getImage();
-                    FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_CENTER).getImage();
-                    FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_RIGHT).getImage();
-                }
+            public void mouseEntered(MouseEvent evt) {
+                hovered = true;
+                if (isToggled() || !isEnabled()) { return; }
+                resetImg();
+                repaintSelf();
             }
 
             @Override
-            public void mouseExited(final java.awt.event.MouseEvent evt) {
-                if (isToggled()) { return; }
-
-                if (FButton.this.isEnabled() && !FButton.this.isFocusOwner()) {
-                    FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT).getImage();
-                    FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER).getImage();
-                    FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT).getImage();
-                }
-                else if (FButton.this.isEnabled() && FButton.this.isFocusOwner()) {
-                    FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_LEFT).getImage();
-                    FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_CENTER).getImage();
-                    FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_RIGHT).getImage();
-                }
+            public void mouseExited(MouseEvent evt) {
+                hovered = false;
+                if (isToggled() || !isEnabled()) { return; }
+                resetImg();
+                repaintSelf();
             }
 
             @Override
-            public void mousePressed(final java.awt.event.MouseEvent evt) {
-                if (isToggled()) { return; }
-
-                if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_LEFT).getImage();
-                    FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_CENTER).getImage();
-                    FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_RIGHT).getImage();
-                }
+            public void mousePressed(MouseEvent evt) {
+                if (isToggled() || !isEnabled()) { return; }
+                imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_LEFT).getImage();
+                imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_CENTER).getImage();
+                imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_RIGHT).getImage();
+                repaintSelf();
             }
 
             @Override
-            public void mouseReleased(final java.awt.event.MouseEvent evt) {
-                if (isToggled()) { return; }
-
-                if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_LEFT).getImage();
-                    FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_CENTER).getImage();
-                    FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DOWN_RIGHT).getImage();
-                }
+            public void mouseReleased(MouseEvent evt) {
+                if (isToggled() || !isEnabled()) { return; }
+                resetImg();
+                repaintSelf();
             }
         });
 
@@ -150,45 +129,51 @@ public class FButton extends JButton implements ILocalRepaint {
             @Override
             public void focusGained(FocusEvent e) {
                 if (isToggled()) { return; }
-
-                if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_LEFT).getImage();
-                    FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_CENTER).getImage();
-                    FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_RIGHT).getImage();
-                }
-
+                resetImg();
                 addKeyListener(klEnter);
+                repaintSelf();
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (isToggled()) { return; }
-
-                if (FButton.this.isEnabled()) {
-                    FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT).getImage();
-                    FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER).getImage();
-                    FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT).getImage();
-                }
-
+                resetImg();
                 removeKeyListener(klEnter);
+                repaintSelf();
             }
         });
     }
 
+    private void resetImg() {
+        if (hovered) {
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_LEFT).getImage();
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_CENTER).getImage();
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_OVER_RIGHT).getImage();
+        }
+        else if (isFocusOwner()) {
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_LEFT).getImage();
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_CENTER).getImage();
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_FOCUS_RIGHT).getImage();
+        } else {
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT).getImage();
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER).getImage();
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT).getImage();
+        }
+    }
+    
     @Override
     public void setEnabled(boolean b0) {
         if (!b0) {
-            FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT).getImage();
-            FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER).getImage();
-            FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT).getImage();
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT).getImage();
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER).getImage();
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT).getImage();
         }
         else {
-            FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT).getImage();
-            FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER).getImage();
-            FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT).getImage();
+            resetImg();
         }
 
         super.setEnabled(b0);
+        repaintSelf();
     }
 
     /** 
@@ -203,40 +188,32 @@ public class FButton extends JButton implements ILocalRepaint {
     /** @param b0 &emsp; boolean. */
     public void setToggled(boolean b0) {
         if (b0) {
-            FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_LEFT).getImage();
-            FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_CENTER).getImage();
-            FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_RIGHT).getImage();
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_LEFT).getImage();
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_CENTER).getImage();
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_TOGGLE_RIGHT).getImage();
         }
         else if (isEnabled()) {
-            FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT).getImage();
-            FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER).getImage();
-            FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT).getImage();
-            repaintSelf();
+            resetImg();
         }
         else {
-            FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT).getImage();
-            FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER).getImage();
-            FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT).getImage();
-            repaintSelf();
+            imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT).getImage();
+            imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER).getImage();
+            imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT).getImage();
         }
         this.toggle = b0;
+        repaintSelf();
     }
 
     /** Prevent button from repainting the whole screen. */
     @Override
     public void repaintSelf() {
-        final Dimension d = FButton.this.getSize();
+        final Dimension d = getSize();
         repaint(0, 0, d.width, d.height);
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-     */
     @Override
     protected void paintComponent(final Graphics g) {
-        if (!this.allImagesPresent) {
+        if (!allImagesPresent) {
             return;
         }
 
@@ -246,16 +223,16 @@ public class FButton extends JButton implements ILocalRepaint {
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
-        if (!this.isEnabled()) {
+        if (!isEnabled()) {
             g2d.setComposite(this.disabledComposite);
         }
 
-        this.w = this.getWidth();
-        this.h = this.getHeight();
+        w = getWidth();
+        h = getHeight();
 
-        g2d.drawImage(this.imgL, 0, 0, this.h, this.h, null);
-        g2d.drawImage(this.imgM, this.h, 0, this.w - (2 * this.h), this.h, null);
-        g2d.drawImage(this.imgR, this.w - this.h, 0, this.h, this.h, null);
+        g2d.drawImage(imgL, 0, 0, this.h, this.h, null);
+        g2d.drawImage(imgM, this.h, 0, this.w - (2 * this.h), this.h, null);
+        g2d.drawImage(imgR, this.w - this.h, 0, this.h, this.h, null);
 
         super.paintComponent(g);
     }

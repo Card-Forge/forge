@@ -52,7 +52,7 @@ public class InputAttack extends Input {
     public final void showMessage() {
         // TODO still seems to have some issues with multiple planeswalkers
 
-        ButtonUtil.enableOnlyOK();
+        ButtonUtil.enableOnlyOk();
 
         final Object o = Singletons.getModel().getGame().getCombat().nextDefender();
         if (o == null) {

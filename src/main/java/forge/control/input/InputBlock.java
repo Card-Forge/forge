@@ -75,7 +75,7 @@ public class InputBlock extends Input {
     @Override
     public final void showMessage() {
         // could add "Reset Blockers" button
-        ButtonUtil.enableOnlyOK();
+        ButtonUtil.enableOnlyOk();
 
         if (this.currentAttacker == null) {
 

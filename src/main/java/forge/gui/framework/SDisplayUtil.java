@@ -1,6 +1,8 @@
 package forge.gui.framework;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.KeyboardFocusManager;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -84,6 +86,11 @@ public class SDisplayUtil {
 
     /** @param tab0 &emsp; {@link java.gui.framework.IVDoc} */
     public static void showTab(final IVDoc<? extends ICDoc> tab0) {
+        Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
         tab0.getParentCell().setSelected(tab0);
+        // set focus back to previous owner, if any
+        if (null != c) {
+            c.requestFocusInWindow();
+        }
     }
 }

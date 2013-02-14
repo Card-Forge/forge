@@ -38,7 +38,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.VMatchUI;
 import forge.gui.match.controllers.CMessage;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.HandArea;
@@ -186,7 +185,6 @@ public class CHand implements ICDoc {
         final Card c = view.getHandArea().getCardFromMouseOverPanel();
         if (c != null) {
             CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, Singletons.getControl().getPlayer().getZone(ZoneType.Hand));
-            VMatchUI.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
         }
     }
 

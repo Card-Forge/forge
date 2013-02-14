@@ -41,7 +41,6 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.VMatchUI;
 import forge.gui.match.controllers.CStack;
 import forge.gui.toolbox.FSkin;
 import forge.properties.NewConstants;
@@ -203,7 +202,6 @@ public enum VStack implements IVDoc<CStack> {
             }
         }
 
-        VMatchUI.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
         parentCell.getBody().repaint();
     }
 
