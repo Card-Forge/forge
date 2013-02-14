@@ -19,6 +19,8 @@ The Deck Editor has also gained some hotkey and context menu abilities.  R-click
 
 In recent weeks people had noticed that the computer was picking the weakest cards in Draft mode rather than the strongest cards. This left the AI with a draft mode deck that was suboptimal. The computer should now pick the strongest cards rather than the weakest cards.
 
+Work was also done on making the UI more keyboard-friendly.  For example, the OK button should now stay focused during matches, so you can advance through the stages by hitting Enter without having to go over and click the button all the time.  If you find the button is losing focus, please report it as a bug.
+
 --
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
