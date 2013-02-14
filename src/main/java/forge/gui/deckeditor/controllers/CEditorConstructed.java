@@ -20,8 +20,8 @@ package forge.gui.deckeditor.controllers;
 import java.util.List;
 
 import com.google.common.base.Supplier;
-import forge.Command;
 
+import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -29,10 +29,10 @@ import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
+import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
-import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.EDocID;
@@ -129,6 +129,19 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         }
         this.getTableDeck().removeCard(card, qty);
         this.controller.notifyModelChanged();
+    }
+
+    @Override
+    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+        cmb.addMoveItems(sideboardMode ? "Move" : "Add", "card", "cards", sideboardMode ? "to sideboard" : "to deck");
+        cmb.addMoveAlternateItems(sideboardMode ? "Remove" : "Add", "card", "cards", sideboardMode ? "from deck" : "to sideboard");
+        cmb.addTextFilterItem();
+    }
+    
+    @Override
+    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+        cmb.addMoveItems(sideboardMode ? "Move" : "Remove", "card", "cards", sideboardMode ? "to deck" : "from deck");
+        cmb.addMoveAlternateItems(sideboardMode ? "Remove" : "Move", "card", "cards", sideboardMode ? "from sideboard" : "to sideboard");
     }
 
     /*

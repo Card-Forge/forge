@@ -195,16 +195,20 @@ public final class EditorTableView<T extends InventoryItem> {
             }
         };
 
+        // use different selection highlight colors for focused vs. unfocused tables
         table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
         table.addFocusListener(new FocusListener() {
             @Override
-            public void focusLost(FocusEvent arg0) {
-                table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+            public void focusLost(FocusEvent e) {
+                if (!e.isTemporary()) {
+                    table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+                }
             }
             
             @Override
-            public void focusGained(FocusEvent arg0) {
+            public void focusGained(FocusEvent e) {
                 table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+                // if nothing selected when we gain focus, select the first row (if exists)
                 if (-1 == table.getSelectedRow() && 0 < table.getRowCount()) {
                     table.setRowSelectionInterval(0, 0);
                 }

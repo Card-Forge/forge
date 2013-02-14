@@ -17,20 +17,26 @@
  */
 package forge.gui;
 
-import forge.Card;
-import forge.gui.match.VMatchUI;
-import forge.gui.match.nonsingleton.VField;
-import forge.view.arcane.CardPanel;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Rectangle;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+
+import forge.Card;
+import forge.gui.match.VMatchUI;
+import forge.gui.match.nonsingleton.VField;
+import forge.view.arcane.CardPanel;
 
 /**
  * <p>
@@ -132,5 +138,47 @@ public final class GuiUtils {
                 }
             }
         }
+    }
+
+    public static JMenuItem createMenuItem(String label, KeyStroke accelerator, final Runnable onClick, boolean enabled, boolean bold) {
+        JMenuItem item = new JMenuItem(label);
+        item.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (null != onClick) {
+                    onClick.run();
+                }
+            }
+        });
+        item.setEnabled(enabled);
+        item.setAccelerator(accelerator);
+        if (bold) {
+            item.setFont(item.getFont().deriveFont(Font.BOLD));
+        }
+        return item;
+    }
+    
+    public static void addMenuItem(JPopupMenu parent, String label, KeyStroke accelerator, Runnable onClick) {
+        parent.add(createMenuItem(label, accelerator, onClick, true, false));
+    }
+    
+    public static void addMenuItem(JMenuItem parent, String label, KeyStroke accelerator, Runnable onClick) {
+        parent.add(createMenuItem(label, accelerator, onClick, true, false));
+    }
+    
+    public static void addMenuItem(JPopupMenu parent, String label, KeyStroke accelerator, Runnable onClick, boolean enabled) {
+        parent.add(createMenuItem(label, accelerator, onClick, enabled, false));
+    }
+    
+    public static void addMenuItem(JMenuItem parent, String label, KeyStroke accelerator, Runnable onClick, boolean enabled) {
+        parent.add(createMenuItem(label, accelerator, onClick, enabled, false));
+    }
+    
+    public static void addMenuItem(JPopupMenu parent, String label, KeyStroke accelerator, Runnable onClick, boolean enabled, boolean bold) {
+        parent.add(createMenuItem(label, accelerator, onClick, enabled, bold));
+    }
+    
+    public static void addMenuItem(JMenuItem parent, String label, KeyStroke accelerator, Runnable onClick, boolean enabled, boolean bold) {
+        parent.add(createMenuItem(label, accelerator, onClick, enabled, bold));
     }
 }

@@ -182,6 +182,19 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         this.controller.notifyModelChanged();
     }
 
+    @Override
+    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+        cmb.addMoveItems(sideboardMode ? "Move" : "Add", "card", "cards", sideboardMode ? "to sideboard" : "to deck");
+        cmb.addMoveAlternateItems(sideboardMode ? "Remove" : "Add", "card", "cards", sideboardMode ? "from deck" : "to sideboard");
+        cmb.addTextFilterItem();
+    }
+    
+    @Override
+    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+        cmb.addMoveItems(sideboardMode ? "Move" : "Remove", "card", "cards", sideboardMode ? "to deck" : "from deck");
+        cmb.addMoveAlternateItems(sideboardMode ? "Remove" : "Move", "card", "cards", sideboardMode ? "from sideboard" : "to sideboard");
+    }
+
     /*
      * (non-Javadoc)
      * 

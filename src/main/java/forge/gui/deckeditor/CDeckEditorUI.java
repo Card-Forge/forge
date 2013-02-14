@@ -20,6 +20,7 @@ package forge.gui.deckeditor;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -30,7 +31,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
 import javax.swing.SwingConstants;
@@ -40,9 +43,12 @@ import javax.swing.Timer;
 import org.apache.commons.lang.CharUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.google.common.primitives.Ints;
+
 import forge.Card;
 import forge.deck.DeckBase;
 import forge.gui.CardContainer;
+import forge.gui.GuiUtils;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CProbabilities;
@@ -176,6 +182,121 @@ public enum CDeckEditorUI implements CardContainer {
     }
     
     //========== Other methods
+    private interface _MoveCard {
+        void moveCard(boolean toAlternate, int qty);
+    }
+    
+    private class _ContextMenuBuilder implements ACEditorBase.ContextMenuBuilder {
+        private final MouseEvent _e;
+        private final JTable     _nextTable;
+        private final _MoveCard  _onMove;
+        private final int        _numSelected;
+        private final JPopupMenu _menu = new JPopupMenu("TableContextMenu");
+        private boolean          _showTextFilterItem = false;
+        
+        public _ContextMenuBuilder(MouseEvent e, JTable table, JTable nextTable, _MoveCard onMove) {
+            _e         = e;
+            _nextTable = nextTable;
+            _onMove    = onMove;
+            
+            // ensure the table has focus
+            if (!table.hasFocus()) {
+                table.requestFocusInWindow();
+            }
+            
+            // if item under the cursor is not selected, select it
+            int row = table.rowAtPoint(e.getPoint());
+            if (!Ints.contains(table.getSelectedRows(), row)) {
+                table.setRowSelectionInterval(row, row);
+            }
+            
+            // record selection count
+            _numSelected = table.getSelectedRowCount();
+        }
+        
+        private void show() {
+            _menu.addSeparator();
+            
+            GuiUtils.addMenuItem(_menu, "Jump to previous table",
+                    KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), new Runnable() {
+                @Override public void run() { _nextTable.requestFocusInWindow(); }
+            });
+            GuiUtils.addMenuItem(_menu, "Jump to next table",
+                    KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), new Runnable() {
+                @Override public void run() { _nextTable.requestFocusInWindow(); }
+            });
+            
+            if (_showTextFilterItem) {
+                GuiUtils.addMenuItem(_menu, "Jump to text filter",
+                        KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                        new Runnable() {
+                    @Override public void run() {
+                        VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().requestFocusInWindow();
+                    }
+                });
+            }
+
+            _menu.show(_e.getComponent(), _e.getX(), _e.getY());
+        }
+
+        private String _doNoun(String nounSingular, String nounPlural) {
+            if (1 == _numSelected) {
+                return nounSingular;
+            }
+            return String.format("%d %s", _numSelected, nounPlural);
+        }
+        
+        private String _doDest(String destination) {
+            if (null == destination) {
+                return "";
+            }
+            return " " + destination;
+        }
+        
+        @Override
+        public void addMoveItems(String verb, String nounSingular, String nounPlural, String destination) {
+            String noun = _doNoun(nounSingular, nounPlural);
+            String dest = _doDest(destination);
+
+            GuiUtils.addMenuItem(_menu,
+                    String.format("%s %s%s", verb, noun, dest),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), new Runnable() {
+                        @Override public void run() { _onMove.moveCard(false, 1); }
+                    }, true, true);
+            GuiUtils.addMenuItem(_menu,
+                    String.format("%s 4 copies of %s%s", verb, noun, dest),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.SHIFT_DOWN_MASK), new Runnable() {
+                        @Override public void run() { _onMove.moveCard(false, 4); }
+                    });
+        }
+        
+        @Override
+        public void addMoveAlternateItems(String verb, String nounSingular, String nounPlural, String destination) {
+            String noun = _doNoun(nounSingular, nounPlural);
+            String dest = _doDest(destination);
+            
+            // yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
+            GuiUtils.addMenuItem(_menu,
+                    String.format("%s %s%s", verb, noun, dest),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.CTRL_DOWN_MASK), new Runnable() {
+                        @Override public void run() { _onMove.moveCard(true, 1); }
+                    });
+            
+            // getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
+            GuiUtils.addMenuItem(_menu,
+                    String.format("%s 4 copies of %s%s", verb, noun, dest),
+                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, KeyEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                    new Runnable() {
+                        @Override public void run() { _onMove.moveCard(true, 4); }
+                    });
+        }
+        
+        @Override
+        public void addTextFilterItem() {
+            _showTextFilterItem = true;
+        }
+    }
+    
     /**
      * Updates listeners for current controller.
      */
@@ -214,17 +335,40 @@ public enum CDeckEditorUI implements CardContainer {
             }
         });
 
+        final _MoveCard onAdd = new _MoveCard() {
+            @Override
+            public void moveCard(boolean toAlternate, int qty) {
+                addSelectedCards(toAlternate, qty);
+            }
+        };
+        final _MoveCard onRemove = new _MoveCard() {
+            @Override
+            public void moveCard(boolean toAlternate, int qty) {
+                removeSelectedCards(toAlternate, qty);
+            }
+        };
+        
         catTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (2 == e.getClickCount()) { addSelectedCards(false, 1); }
+                if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { addSelectedCards(false, 1); }
+                else if (MouseEvent.BUTTON3 == e.getButton()) {
+                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, catTable, deckTable, onAdd);
+                    childController.buildAddContextMenu(cmb);
+                    cmb.show();
+                }
             }
         });
 
         deckTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (2 == e.getClickCount()) { removeSelectedCards(false, 1); }
+                if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { removeSelectedCards(false, 1); }
+                else if (MouseEvent.BUTTON3 == e.getButton()) {
+                    _ContextMenuBuilder cmb = new _ContextMenuBuilder(e, deckTable, catTable, onRemove);
+                    childController.buildRemoveContextMenu(cmb);
+                    cmb.show();
+                }
             }
         });
 
@@ -393,3 +537,4 @@ public enum CDeckEditorUI implements CardContainer {
         }
     }
 }
+

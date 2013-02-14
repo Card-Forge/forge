@@ -368,6 +368,21 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
     
+    @Override
+    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+        if (!showingFullCatalog) {
+            cmb.addMoveItems("Buy", "item", "items", null);
+        }
+        cmb.addTextFilterItem();
+    }
+    
+    @Override
+    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+        if (!showingFullCatalog) {
+            cmb.addMoveItems("Sell", "card", "cards", null);
+        }
+    }
+
     public void removeCards(List<Map.Entry<InventoryItem, Integer>> cardsToRemove) {
         if (showingFullCatalog) {
             return;

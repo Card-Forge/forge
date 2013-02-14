@@ -39,6 +39,20 @@ import forge.item.InventoryItem;
  */
 public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends DeckBase> {
 
+    public interface ContextMenuBuilder {
+        /**
+         * Adds move-related items to the context menu
+         * 
+         * @param verb Examples: "Sell", "Add"
+         * @param nounSingular Examples: "item", "card"
+         * @param nounPlural Examples: "items", "cards"
+         * @param destination Examples: null, "to deck", "to sideboard"
+         */
+        public void addMoveItems (String verb, String nounSingular, String nounPlural, String destination);
+        public void addMoveAlternateItems (String verb, String nounSingular, String nounPlural, String destination);
+        public void addTextFilterItem ();
+    }
+    
     private EditorTableView<TItem> tblCatalog;
     private EditorTableView<TItem> tblDeck;
     
@@ -52,6 +66,9 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
      */
     public abstract void removeCard(InventoryItem item, boolean toAlternate, int qty);
 
+    public abstract void buildAddContextMenu(ContextMenuBuilder cmb);
+    public abstract void buildRemoveContextMenu(ContextMenuBuilder cmb);
+    
     /**
      * Resets the cards in the catalog table and current deck table.
      */

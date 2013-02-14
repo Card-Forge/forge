@@ -29,10 +29,10 @@ import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
+import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
-import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.EDocID;
@@ -116,6 +116,17 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
         final CardPrinted card = (CardPrinted) item;
         this.getTableDeck().removeCard(card, qty);
         this.controller.notifyModelChanged();
+    }
+
+    @Override
+    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+        cmb.addMoveItems("Move", "card", "cards", "to deck");
+        cmb.addTextFilterItem();
+    }
+    
+    @Override
+    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+        cmb.addMoveItems("Move", "card", "cards", "to sideboard");
     }
 
     /*

@@ -118,6 +118,17 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
         this.getDeckController().notifyModelChanged();
     }
 
+    @Override
+    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+        cmb.addMoveItems("Move", "card", "cards", "to deck");
+        cmb.addTextFilterItem();
+    }
+    
+    @Override
+    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+        cmb.addMoveItems("Move", "card", "cards", "to sideboard");
+    }
+
     /*
      * (non-Javadoc)
      * 

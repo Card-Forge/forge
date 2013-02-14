@@ -3,8 +3,6 @@ package forge.gui.deckeditor.controllers;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
@@ -17,7 +15,6 @@ import java.util.Set;
 
 import javax.swing.JComponent;
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JSpinner;
@@ -37,6 +34,7 @@ import forge.card.CardEdition;
 import forge.card.EditionCollection;
 import forge.deck.DeckBase;
 import forge.game.GameFormat;
+import forge.gui.GuiUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.SFilterUtil;
@@ -135,28 +133,28 @@ public enum CCardCatalog implements ICDoc {
         VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction().setCommand(new Command() {
             @Override
             public void execute() {
-                JPopupMenu popup = new JPopupMenu("Popup");
-                addMenuItem(popup, "Current text search", canSearch(),
+                JPopupMenu popup = new JPopupMenu("RestrictionPopupMenu");
+                GuiUtils.addMenuItem(popup, "Current text search",
                         KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                        new Command() {
+                        new Runnable() {
                     @Override
-                    public void execute() {
+                    public void run() {
                         addRestriction(buildSearchRestriction(), null, null);
                     }
-                });
+                }, canSearch());
                 JMenu fmt = new JMenu("Format");
                 for (final GameFormat f : Singletons.getModel().getFormats()) {
-                    addMenuItem(fmt, f.getName(), !isActive(activeFormats, f), null, new Command() {
+                    GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
                         @Override
-                        public void execute() {
+                        public void run() {
                             addRestriction(buildFormatRestriction(f.toString(), f, true), activeFormats, f);
                         }
-                    });
+                    }, !isActive(activeFormats, f));
                 }
                 popup.add(fmt);
-                addMenuItem(popup, "Sets...", true, null, new Command() {
+                GuiUtils.addMenuItem(popup, "Sets...", null, new Runnable() {
                     @Override
-                    public void execute() {
+                    public void run() {
                         final Component prevFocusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
                         final DialogChooseSets dialog = new DialogChooseSets(null, null, true);
                         dialog.setOkCallback(new Runnable() {
@@ -198,22 +196,22 @@ public enum CCardCatalog implements ICDoc {
                 });
                 JMenu range = new JMenu("Value range");
                 for (final RangeTypes t : RangeTypes.values()) {
-                    addMenuItem(range, t.toLabelString() + " restriction", !isActive(activeRanges, t), null, new Command() {
+                    GuiUtils.addMenuItem(range, t.toLabelString() + " restriction", null, new Runnable() {
                         @Override
-                        public void execute() {
+                        public void run() {
                             addRestriction(buildRangeRestriction(t), activeRanges, t);
                         }
-                    });
+                    }, !isActive(activeRanges, t));
                 }
                 popup.add(range);
                 JMenu world = new JMenu("Quest world");
                 for (final QuestWorld w : Singletons.getModel().getWorlds()) {
-                    addMenuItem(world, w.getName(), !isActive(activeWorlds, w), null, new Command() {
+                    GuiUtils.addMenuItem(world, w.getName(), null, new Runnable() {
                         @Override
-                        public void execute() {
+                        public void run() {
                             addRestriction(buildWorldRestriction(w), activeWorlds, w);
                         }
-                    });
+                    }, !isActive(activeWorlds, w));
                 }
                 popup.add(world);
                 popup.show(VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction(), 0, 0);
@@ -371,29 +369,6 @@ public enum CCardCatalog implements ICDoc {
     
     private <T> boolean isActive(Set<T> activeSet, T key) {
         return activeSet.contains(key);
-    }
-    
-    private JMenuItem createMenuItem(String label, boolean enabled, KeyStroke accelerator, final Command onClick) {
-        JMenuItem item = new JMenuItem(label);
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                if (null != onClick) {
-                    onClick.execute();
-                }
-            }
-        });
-        item.setEnabled(enabled);
-        item.setAccelerator(accelerator);
-        return item;
-    }
-    
-    private void addMenuItem(JPopupMenu parent, String label, boolean enabled, KeyStroke accelerator, Command onClick) {
-        parent.add(createMenuItem(label, enabled, accelerator, onClick));
-    }
-    
-    private void addMenuItem(JMenuItem parent, String label, boolean enabled, KeyStroke accelerator, Command onClick) {
-        parent.add(createMenuItem(label, enabled, accelerator, onClick));
     }
     
 //    private interface _RestrictionBuilder<T> {

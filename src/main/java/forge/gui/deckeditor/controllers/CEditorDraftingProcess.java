@@ -18,6 +18,7 @@
 package forge.gui.deckeditor.controllers;
 
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 
 import forge.Singletons;
@@ -125,7 +126,8 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
 
         final CardPrinted card = (CardPrinted) item;
 
-        this.getTableDeck().addCard(card, qty);
+        // can only draft one at a time, regardless of the requested quantity
+        this.getTableDeck().addCard(card, 1);
 
         // get next booster pack
         this.boosterDraft.setChoice(card);
@@ -138,12 +140,22 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         }
     }
 
-
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
     public void removeCard(InventoryItem item, boolean toAlternate, int qty) {
+    }
+
+    @Override
+    public void buildAddContextMenu(ContextMenuBuilder cmb) {
+        cmb.addMoveItems("Draft", "card", "cards", null);
+        cmb.addTextFilterItem();
+    }
+    
+    @Override
+    public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
+        // no valid remove options
     }
 
     /**
@@ -299,6 +311,9 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
                 allDecksParent.setSelected(allDecksParent.getDocs().get(0));
             }
         }
+        
+        // set catalog table to single-selection only mode
+        getTableCatalog().getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // Fill in gaps
         SwingUtilities.invokeLater(new Runnable() {
@@ -338,6 +353,10 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         if (allDecksParent != null) {
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
         }
+        
+        // set catalog table back to free-selection mode
+        getTableCatalog().getTable().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
 
         return true;
     }
