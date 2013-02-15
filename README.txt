@@ -146,6 +146,11 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+Optional choice for abilities that are on the stack:
+
+When a spell or an ability appears on the stack and it says "(OPTIONAL)" you can right-click it to decide if you want to always accept or to decline it.
+
+
 Multiple quest files:
  
 Multiple quest files are now supported. This allows you to start a new quest and give it a unique name, and it will not overwrite your previous quest game file.
