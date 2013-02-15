@@ -146,6 +146,32 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+A note about winning booster packs in quest mode:
+
+If you win a quest mode match, you get a booster pack for every 1 or 2 (default) Wins, depending on the difficulty level. If you lose and you are playing on easy mode, you get a booster pack every 1 (default) Loss.
+
+
+The new UI:
+
+The work on the new UI is now for the most part finished. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
+
+
+The new Alpha Strike button:
+
+A new Alpha Strike button was added to the dock. The Dock is one of the tabs availble in the battlefield view.
+
+
+Using Forge with the new Mac OS Mountain Lion:
+
+If you update your OS to Apple OSX 10.8 Mountain Lion and try to launch a new version of forge that you will likely get a dialog which states "File is damaged and cannot be opened. Please move to trash." 
+
+Mountain Lion comes with a new Gatekeeper feature and this is probably blocking your ability to launch this newer version of forge. Visit the link below and follow the instructions. They are fairly long and detailed.
+
+http://support.apple.com/kb/HT5290?viewlocale=en_US&locale=en_US
+
+Please note that the issue is most likely caused by Mountain Lion's Gatekeeper feature and it is extremely unlikely that the forge dev team will attempt to get a unique Developer ID from Apple and use it to digitally sign our forge app.
+
+
 The Forge sealed deck mode:
 
 The Forge sealed deck mode has undergone significant changes. You can find these in the 1.2.14 beta and later versions. Instead of a single sealed deck match, you can now choose a 1-5 round gauntlet-style tournament where you will face increasingly difficult (probably) opponent decks. You can also choose to use starter packs instead of boosters in the block mode, choose to use 3-12 boosters instead of the default 6 in the full cardpool and custom (cube) modes, and so on.
