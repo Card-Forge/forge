@@ -146,6 +146,11 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+Informational icons overlays for cards on the battlefield:
+
+Added icons that will be drawn over the cards in the battlefield for phasing and counters. The attack/block/phasing icons and counters will now also be shown on large cards, only casting cost will be omitted. Lands and tokens with different amounts/types of counters will no longer stack. Tokens with different summoning sickness will no longer stack. Lands that become creatures will now always be moved to the front row.
+
+
 Optional choice for abilities that are on the stack:
 
 When a spell or an ability appears on the stack and it says "(OPTIONAL)" you can right-click it to decide if you want to always accept or to decline it.
