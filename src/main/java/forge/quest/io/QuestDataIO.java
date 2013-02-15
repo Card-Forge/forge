@@ -78,7 +78,6 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestItemCondition;
 import forge.util.IgnoringXStream;
-import forge.util.MyRandom;
 import forge.util.XmlUtil;
 
 /**
