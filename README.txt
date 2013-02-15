@@ -146,6 +146,30 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+The dock tab has a new button labeled "Open Layout":
+
+The dock now has a new button labeled "Open Layout" along with old button with original function "Revert Layout". Modifying the battlefield layout will result in your changes being saved to a file named  "match_preferred.xml". You can copy and rename that file to share your layouts with other people.
+
+
+The res/images/icons/ folder:
+
+The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
+
+
+The new Deck Editors:
+
+The work on the new UI is now finished and this version adds the new UI to the deck editors. We all would like to thank Doublestrike for his contributions to the new UI.
+
+The new deck editors include:
+
+* a better text search (can search for multiple terms, and "not" terms
+* interval filters for P/T and CMC
+* add/remove 4
+* better statistics and draw probabilities
+* Toggle-able, sort-able, resize-able, move-able columns
+* and of course uses the drag cell layout.
+
+
 Performance issues on low end machines:
 
 Some performance changes were made to Forge and it should now operate more quickly on low end machines. Mid to high level machines are unlikely to notice as much of a performance increase. We tried to hunt down all of the bugs that resulted from these changes but there may still be a bug or two in this beta release.
