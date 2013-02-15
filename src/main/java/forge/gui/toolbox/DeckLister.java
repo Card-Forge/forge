@@ -425,30 +425,31 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         switch (this.gametype) {
             case Quest:
                     final CEditorQuest qEditor = new CEditorQuest(Singletons.getModel().getQuest());
-                    qEditor.load(d0);
                     FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_QUEST);
                     CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(qEditor);
+                    qEditor.load(d0);
                 break;
             case Constructed:
                     FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
                     final CEditorConstructed cEditor = new CEditorConstructed();
-                    cEditor.getDeckController().load(d0.getName());
                     CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(cEditor);
+                    cEditor.getDeckController().load(d0.getName());
                 break;
             case Sealed:
                 final ACEditorBase<?, T> sEditor = (ACEditorBase<?, T>)
                     new CEditorLimited(Singletons.getModel().getDecks().getSealed());
-                sEditor.getDeckController().load(d0.getName());
                 FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_LIMITED);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(sEditor);
+                sEditor.getDeckController().load(d0.getName());
                 break;
             case Draft:
                 final ACEditorBase<?, T> dEditor = (ACEditorBase<?, T>)
                         new CEditorLimited(Singletons.getModel().getDecks().getDraft());
-                dEditor.getDeckController().load(d0.getName());
                 FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_LIMITED);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(dEditor);
+                dEditor.getDeckController().load(d0.getName());
                 break;
+                
             default:
                 break;
         }
