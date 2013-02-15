@@ -2509,6 +2509,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             if (this.lifeLostThisTurn <= 0) {
                 return false;
             }
+        } else if (property.startsWith("DeclaredAttackerThisTurn")) {
+            if (this.attackersDeclaredThisTurn <= 0) {
+                return false;
+            }
         } else if (property.equals("IsRemembered")) {
             if (!source.getRemembered().contains(this)) {
                 return false;
