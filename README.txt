@@ -241,6 +241,8 @@ If you win a quest mode match, you get a booster pack for every 1 or 2 (default)
 
 The new UI:
 
+The first step was to update the battlefield window. The second step was to update the New Game window (now named Home view). We got constructed mode and then quest modes working first. We got the draft and sealed modes working again afterwards.
+
 The work on the new UI is now for the most part finished. We should not expect major changes or major additions to the UI. Future betas may include a few minor bug fixes to the UI. And we may also include a few minor tweaks.
 
 
