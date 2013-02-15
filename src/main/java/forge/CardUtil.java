@@ -28,11 +28,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardCharacteristics;
 import forge.card.EditionInfo;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDisplayUtil;
@@ -448,7 +448,7 @@ public final class CardUtil {
                 if (strCol.equals("colorless")) {
                     continue;
                 }
-                if (cost.toString().contains(InputPayManaCostUtil.getShortColorString(strCol))) {
+                if (cost.toString().contains(MagicColor.toShortString(strCol))) {
                     usableColors.add(strCol.toString());
                 }
             }
@@ -554,7 +554,7 @@ public final class CardUtil {
         } else if (reflectProperty.equals("Produced")) {
             final String producedColors = (String) abMana.getTriggeringObject("Produced");
             for (final String col : Constant.Color.ONLY_COLORS) {
-                final String s = InputPayManaCostUtil.getShortColorString(col);
+                final String s = MagicColor.toShortString(col);
                 if (producedColors.contains(s)) {
                     colors.add(col);
                 }
@@ -605,7 +605,7 @@ public final class CardUtil {
     public static Set<String> canProduce(final int maxChoices, final AbilityManaPart ab,
             final Set<String> colors) {
         for (final String col : Constant.Color.ONLY_COLORS) {
-            final String s = InputPayManaCostUtil.getShortColorString(col);
+            final String s = MagicColor.toShortString(col);
             if (ab.canProduce(s)) {
                 colors.add(col);
             }

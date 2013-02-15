@@ -6,22 +6,24 @@ import forge.card.cost.CostMana;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
-public class InputPayManaCost2 extends InputPayMana {
+public class InputPayManaOfCostPayment extends InputPayManaBase {
 
-    private ManaCostBeingPaid manaCost;
     private final CostMana costMana;
+    
     // I would kill the one who made 2 classes like above
     private final String originalManaCost;
     private final SpellAbility sa;
     private final int manaToAdd;
     private final CostPayment payment;
 
-    public InputPayManaCost2(CostMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd) {
+    public InputPayManaOfCostPayment(final GameState game, CostMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd) {
+        super(game);
         manaCost = new ManaCostBeingPaid(costMana.getManaToPay());
         manaCost.increaseColorlessMana(toAdd);
 
@@ -48,7 +50,7 @@ public class InputPayManaCost2 extends InputPayMana {
     public void selectCard(final Card card) {
         // prevent cards from tapping themselves if ability is a
         // tapability, although it should already be tapped
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, this.manaCost);
+        this.manaCost = activateManaAbility(sa, card, this.manaCost);
 
         if (this.manaCost.isPaid()) {
             this.done();
@@ -82,7 +84,7 @@ public class InputPayManaCost2 extends InputPayMana {
             payment.paidCost(costMana);
         } else {
             source.setXManaCostPaid(0);
-            final Input inp = new InputPayManaX(sa, payment, costMana);
+            final Input inp = new InputPayManaX(game, sa, payment, costMana);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         }
 
@@ -147,7 +149,7 @@ public class InputPayManaCost2 extends InputPayMana {
 
     @Override
     public void selectManaPool(String color) {
-        manaCost = InputPayManaCostUtil.activateManaAbility(color, sa, this.manaCost);
+        manaCost = InputPayManaBase.activateManaAbility(color, sa, this.manaCost);
 
         if (this.manaCost.isPaid()) {
             this.done();

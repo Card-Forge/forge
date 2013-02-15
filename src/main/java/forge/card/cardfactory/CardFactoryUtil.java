@@ -46,6 +46,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardCharacteristics;
 import forge.card.CardType;
+import forge.card.MagicColor;
 import forge.card.SpellManaCost;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -70,7 +71,6 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
-import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameState;
 import forge.game.ai.AiAttackController;
 import forge.game.ai.ComputerUtil;
@@ -3895,8 +3895,8 @@ public class CardFactoryUtil {
                     final String parse = card.getKeyword().get(cardnameSpot).toString();
                     card.removeIntrinsicKeyword(parse);
                     color += " "
-                            + InputPayManaCostUtil.getShortColorString(parse.replace("CARDNAME is ", "").replace(".",
-                                    ""));
+                            + MagicColor.toShortString(parse.replace("CARDNAME is ", "").replace(".",
+                            ""));
                     cardnameSpot = CardFactoryUtil.hasKeyword(card, "CARDNAME is ");
                 }
             }

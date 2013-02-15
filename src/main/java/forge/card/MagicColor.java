@@ -37,6 +37,16 @@ public class MagicColor {
         return 0; // colorless
     }
 
+    public static String toShortString(String color) {
+        if (color.equalsIgnoreCase(Constant.Color.SNOW)) return "S"; // compatibility
+        return toShortString(fromName(color));
+    }
+    
+    public static String toLongString(String color) {
+        if (color.equalsIgnoreCase("s")) return Constant.Color.SNOW; // compatibility
+        return toLongString(fromName(color));
+    }
+        
     public static String toShortString(byte color) {
         switch(color){
             case GREEN: return "G";

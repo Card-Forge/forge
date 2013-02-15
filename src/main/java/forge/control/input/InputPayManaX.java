@@ -9,21 +9,22 @@ import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
+import forge.game.GameState; 
 
-public class InputPayManaX extends InputPayMana {
+public class InputPayManaX extends InputPayManaBase {
     private static final long serialVersionUID = -6900234444347364050L;
     private int xPaid = 0;
     private final String colorX;
     private final String strX;
     private String colorsPaid;
-    private ManaCostBeingPaid manaCost;
     private final CostMana costMana;
     private final CostPayment payment;
     private final SpellAbility sa;
 
 
-    public InputPayManaX(final SpellAbility sa0, final CostPayment payment0, final CostMana costMana0)
+    public InputPayManaX(final GameState game, final SpellAbility sa0, final CostPayment payment0, final CostMana costMana0)
     {
+        super(game);
         sa = sa0;
         payment = payment0;
         xPaid = 0;
@@ -58,7 +59,7 @@ public class InputPayManaX extends InputPayMana {
     // selectCard
     @Override
     public void selectCard(final Card card) {
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card,
+        this.manaCost = activateManaAbility(sa, card,
                 this.colorX.isEmpty() ? this.manaCost : new ManaCostBeingPaid(this.colorX));
         if (this.manaCost.isPaid()) {
             if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
@@ -91,7 +92,7 @@ public class InputPayManaX extends InputPayMana {
 
     @Override
     public void selectManaPool(String color) {
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(color, sa,
+        this.manaCost = activateManaAbility(color, sa,
                 this.colorX.isEmpty() ? this.manaCost : new ManaCostBeingPaid(this.colorX));
         if (this.manaCost.isPaid()) {
             if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {

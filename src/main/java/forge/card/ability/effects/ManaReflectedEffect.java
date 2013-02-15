@@ -6,11 +6,11 @@ import java.util.HashSet;
 import java.util.List;
 import forge.Card;
 import forge.CardUtil;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellEffect;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -70,7 +70,7 @@ public class ManaReflectedEffect extends SpellEffect {
         if (colors.size() == 0) {
             return "0";
         } else if (colors.size() == 1) {
-            baseMana = InputPayManaCostUtil.getShortColorString(colors.iterator().next());
+            baseMana = MagicColor.toShortString(colors.iterator().next());
         } else {
             if (player.isHuman()) {
                 final Object o = GuiChoose.oneOrNone("Select Mana to Produce", colors);
@@ -79,11 +79,11 @@ public class ManaReflectedEffect extends SpellEffect {
                     sa.getManaPart().setCanceled(true);
                     return "";
                 } else {
-                    baseMana = InputPayManaCostUtil.getShortColorString((String) o);
+                    baseMana = MagicColor.toShortString((String) o);
                 }
             } else {
                 // AI doesn't really have anything here yet
-                baseMana = InputPayManaCostUtil.getShortColorString(colors.iterator().next());
+                baseMana = MagicColor.toShortString(colors.iterator().next());
             }
         }
 

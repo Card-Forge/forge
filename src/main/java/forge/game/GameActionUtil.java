@@ -57,7 +57,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.control.input.Input;
 import forge.control.input.InputPayDiscardCost;
-import forge.control.input.InputPayManaCostAbility;
+import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayReturnCost;
 import forge.game.ai.ComputerUtil;
 import forge.game.event.CardDamagedEvent;
@@ -400,10 +400,11 @@ public final class GameActionUtil {
             final Command unpaid) {
         // temporarily disable the Resolve flag, so the user can payMana for the
         // resolving Ability
-        final boolean bResolving = Singletons.getModel().getGame().getStack().isResolving();
-        Singletons.getModel().getGame().getStack().setResolving(false);
-        Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCostAbility(message, spellManaCost.toString(), paid, unpaid));
-        Singletons.getModel().getGame().getStack().setResolving(bResolving);
+        GameState game = Singletons.getModel().getGame(); 
+        final boolean bResolving = game.getStack().isResolving();
+        game.getStack().setResolving(false);
+        Singletons.getModel().getMatch().getInput().setInput(new InputPayManaExecuteCommands(game, message, spellManaCost.toString(), paid, unpaid));
+        game.getStack().setResolving(bResolving);
     }
 
     /**
@@ -619,7 +620,7 @@ public final class GameActionUtil {
             toSet = new InputPayDiscardCost((CostDiscard) costPart, ability, paid, unpaid);
         }
         else if (costPart instanceof CostMana) {
-            toSet = new InputPayManaCostAbility(source + "\r\n", ability.getManaCost().toString(), paid, unpaid);
+            toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString(), paid, unpaid);
         }
         
         

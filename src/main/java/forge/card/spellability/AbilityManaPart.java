@@ -23,10 +23,10 @@ import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
+import forge.card.MagicColor;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerType;
-import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.Player;
 
 /**
@@ -213,8 +213,8 @@ public class AbilityManaPart implements java.io.Serializable {
     public final String mana() {
         if (this.getOrigProduced().contains("Chosen")) {
             if (this.getSourceCard() != null && !this.getSourceCard().getChosenColor().isEmpty()) {
-                return InputPayManaCostUtil.getShortColorString(this.getSourceCard()
-                        .getChosenColor().get(0));
+                return MagicColor.toShortString(this.getSourceCard()
+                .getChosenColor().get(0));
             }
         }
         return this.getOrigProduced();
@@ -335,7 +335,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         if (this.getOrigProduced().contains("Chosen")) {
             if (this.getSourceCard() != null && !this.getSourceCard().getChosenColor().isEmpty()
-                    && InputPayManaCostUtil.getShortColorString(this.getSourceCard().getChosenColor().get(0))
+                    && MagicColor.toShortString(this.getSourceCard().getChosenColor().get(0))
                     .contains(s)) {
                 return true;
             }

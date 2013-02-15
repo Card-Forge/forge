@@ -39,9 +39,9 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
-import forge.control.input.InputPayMana;
-import forge.control.input.InputPayManaCost;
-import forge.control.input.InputPayManaCostAbility;
+import forge.control.input.InputPayManaBase;
+import forge.control.input.InputPayManaSimple;
+import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPaySacCost;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
@@ -399,7 +399,7 @@ public class CField implements ICDoc {
         final Input input = CMessage.SINGLETON_INSTANCE.getInputControl().getInput();
 
         if (c != null && c.isInZone(ZoneType.Battlefield)) {
-            if (c.isTapped() && (input instanceof InputPayManaCost || input instanceof InputPayManaCostAbility)) {
+            if (c.isTapped() && (input instanceof InputPayManaSimple || input instanceof InputPayManaExecuteCommands)) {
                 final forge.view.arcane.CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(c.getUniqueNumber());
                 for (final forge.view.arcane.CardPanel cp : cardPanel.getAttachedPanels()) {
                     if (cp.getCard().isUntapped()) {
@@ -452,9 +452,9 @@ public class CField implements ICDoc {
     private void manaAction(String constantColor) {
         if (CField.this.player == CField.this.playerViewer) {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputPayMana) {
+            if (in instanceof InputPayManaBase) {
                 // Do something
-                ((InputPayMana) in).selectManaPool(constantColor);
+                ((InputPayManaBase) in).selectManaPool(constantColor);
             }
         }
     }

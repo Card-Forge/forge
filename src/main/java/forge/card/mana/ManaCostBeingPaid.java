@@ -24,7 +24,6 @@ import java.util.Map.Entry;
 import forge.Constant;
 import forge.card.MagicColor;
 import forge.card.SpellManaCost;
-import forge.control.input.InputPayManaCostUtil;
 
 /**
  * <p>
@@ -224,7 +223,7 @@ public class ManaCostBeingPaid {
             }
         }
         if (mana.length() > 1) {
-            mana = InputPayManaCostUtil.getShortColorString(mana);
+            mana = MagicColor.toShortString(mana);
         }
         for (ManaCostShard shard : unpaidShards.keySet()) {
             if (canBePaidWith(shard, mana)) {
@@ -295,7 +294,7 @@ public class ManaCostBeingPaid {
                     this.payMana(Constant.Color.COLORLESS);
                 }
             } else {
-                this.payMana(InputPayManaCostUtil.getLongColorString(manaPart));
+                this.payMana(forge.card.MagicColor.toLongString(manaPart));
             }
         }
     }
@@ -313,7 +312,7 @@ public class ManaCostBeingPaid {
         if (this.manaNeededToAvoidNegativeEffect.contains(color) && !this.manaPaidToAvoidNegativeEffect.contains(color)) {
             this.manaPaidToAvoidNegativeEffect.add(color);
         }
-        color = InputPayManaCostUtil.getShortColorString(color);
+        color = MagicColor.toShortString(color);
         return this.addMana(color);
     }
 
@@ -454,7 +453,7 @@ public class ManaCostBeingPaid {
         }
         //System.err.println(String.format("ManaPaid: paying for %s with %s" , shard, mana));
         // debug here even more;
-        return canBePaidWith(shard, InputPayManaCostUtil.getShortColorString(mana.getColor()));
+        return canBePaidWith(shard, MagicColor.toShortString(mana.getColor()));
     }
 
     private boolean canBePaidWith(ManaCostShard shard, String mana) {

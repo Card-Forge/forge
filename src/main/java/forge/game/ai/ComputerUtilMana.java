@@ -11,6 +11,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
+import forge.card.MagicColor;
 import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -21,7 +22,6 @@ import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
@@ -429,7 +429,7 @@ public class ComputerUtilMana {
             for (int nStr = 0; nStr < negEffects.length; nStr++) {
                 // convert long color strings to short color strings
                 if (negEffects[nStr].length() > 1) {
-                    negEffects[nStr] = InputPayManaCostUtil.getShortColorString(negEffects[nStr]);
+                    negEffects[nStr] = MagicColor.toShortString(negEffects[nStr]);
                 }
                 // make mana mandatory for AI
                 if (!cost.isColor(negEffects[nStr])) {
@@ -733,8 +733,8 @@ public class ComputerUtilMana {
                 // check if combo mana can produce most common color in hand
                 String commonColor = CardFactoryUtil.getMostProminentColor(ai.getCardsIn(
                         ZoneType.Hand));
-                if (!commonColor.isEmpty() && abMana.getComboColors().contains(InputPayManaCostUtil.getShortColorString(commonColor))) {
-                    choice = InputPayManaCostUtil.getShortColorString(commonColor);
+                if (!commonColor.isEmpty() && abMana.getComboColors().contains(MagicColor.toShortString(commonColor))) {
+                    choice = MagicColor.toShortString(commonColor);
                 }
                 else {
                     // default to first color

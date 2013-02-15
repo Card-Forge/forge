@@ -6,13 +6,13 @@ import forge.Card;
 import forge.Constant;
 import forge.CounterType;
 import forge.Singletons;
+import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameActionUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -52,7 +52,7 @@ public class ManaEffect extends SpellEffect {
                             colorMenu = new String[colorsProduced.length];
                             //loop through colors to make menu
                             for (int nColor = 0; nColor < colorsProduced.length; nColor++) {
-                                colorMenu[nColor] = InputPayManaCostUtil.getLongColorString(colorsProduced[nColor]);
+                                colorMenu[nColor] = forge.card.MagicColor.toLongString(colorsProduced[nColor]);
                             }
                         }
                         else {
@@ -67,7 +67,7 @@ public class ManaEffect extends SpellEffect {
                                     sb.append(sa.getSourceCard().getName());
                                     throw new RuntimeException(sb.toString());
                                 } else {
-                                    choice = InputPayManaCostUtil.getShortColorString((String) o);
+                                    choice = MagicColor.toShortString((String) o);
                                     if (nMana != 1) {
                                         choiceString.append(" ");
                                     }
@@ -89,7 +89,7 @@ public class ManaEffect extends SpellEffect {
                                 chosen = Constant.Color.BLACK;
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
-                            abMana.setExpressChoice(InputPayManaCostUtil.getShortColorString(chosen));
+                            abMana.setExpressChoice(MagicColor.toShortString(chosen));
                         }
                         if (abMana.getExpressChoice().isEmpty()) {
                             final StringBuilder sb = new StringBuilder();
@@ -118,7 +118,7 @@ public class ManaEffect extends SpellEffect {
                                 colorMenu = new String[colorsNeeded.length()];
                                 //loop through colors to make menu
                                 for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
-                                    colorMenu[nChar] = InputPayManaCostUtil.getLongColorString(colorsNeeded.substring(nChar, nChar + 1));
+                                    colorMenu[nChar] = forge.card.MagicColor.toLongString(colorsNeeded.substring(nChar, nChar + 1));
                                 }
                             }
                             else {
@@ -131,7 +131,7 @@ public class ManaEffect extends SpellEffect {
                                 sb.append(sa.getSourceCard().getName());
                                 throw new RuntimeException(sb.toString());
                             } else {
-                                choice = InputPayManaCostUtil.getShortColorString(s);
+                                choice = MagicColor.toShortString(s);
                             }
                         }
                         abMana.setExpressChoice(choice);
@@ -144,7 +144,7 @@ public class ManaEffect extends SpellEffect {
                                 chosen = CardFactoryUtil.getMostProminentColor(act.getCardsIn(ZoneType.Hand));
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
-                            abMana.setExpressChoice(InputPayManaCostUtil.getShortColorString(chosen));
+                            abMana.setExpressChoice(MagicColor.toShortString(chosen));
                         }
                         if (abMana.getExpressChoice().isEmpty()) {
                             final StringBuilder sb = new StringBuilder();

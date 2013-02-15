@@ -9,6 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
+import forge.card.MagicColor;
 import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -24,8 +25,7 @@ import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
 import forge.control.input.InputControl;
-import forge.control.input.InputPayManaCost;
-import forge.control.input.InputPayManaCostUtil;
+import forge.control.input.InputPayManaSimple;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -215,7 +215,7 @@ public class GameActionPlay {
                     } else {
                         String newCostStr = newCost.toString();
                         newCostStr = newCostStr.replaceFirst(
-                                InputPayManaCostUtil.getShortColorString(chosenColor), "").replaceFirst("  ", " ");
+                                MagicColor.toShortString(chosenColor), "").replaceFirst("  ", " ");
                         newCost = new ManaCostBeingPaid(newCostStr.trim());
                     }
 
@@ -411,7 +411,7 @@ public class GameActionPlay {
                 game.getStack().add(sa);
                 return;
             } else if (sa.getBeforePayMana() == null) {
-                matchInput.setInput(new InputPayManaCost(sa, manaCost));
+                matchInput.setInput(new InputPayManaSimple(game, sa, manaCost));
             } else {
                 matchInput.setInput(sa.getBeforePayMana());
             }
@@ -453,7 +453,7 @@ public class GameActionPlay {
                 AbilityUtils.resolve(sa, false);
                 return;
             } else if (sa.getBeforePayMana() == null) {
-                matchInput.setInput(new InputPayManaCost(sa, true));
+                matchInput.setInput(new InputPayManaSimple(game, sa, true));
             } else {
                 matchInput.setInput(sa.getBeforePayMana());
             }

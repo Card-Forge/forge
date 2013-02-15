@@ -22,6 +22,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
@@ -39,7 +40,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputPayManaCostAbility extends InputPayMana {
+public class InputPayManaExecuteCommands extends InputPayManaBase {
     /**
      * Constant <code>serialVersionUID=3836655722696348713L</code>.
      */
@@ -47,9 +48,8 @@ public class InputPayManaCostAbility extends InputPayMana {
 
     private String originalManaCost;
     private String message = "";
-    private ManaCostBeingPaid manaCost;
     private SpellAbility fakeAbility;
-    private int phyLifeToLose = 0;
+
 
     private Command paidCommand;
     private Command unpaidCommand;
@@ -57,35 +57,6 @@ public class InputPayManaCostAbility extends InputPayMana {
     // only used for X costs:
     private boolean showOnlyOKButton = false;
 
-    /**
-     * <p>
-     * Constructor for Input_PayManaCost_Ability.
-     * </p>
-     * 
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     * @param paid
-     *            a {@link forge.Command} object.
-     */
-    public InputPayManaCostAbility(final String manaCost, final Command paid) {
-        this(manaCost, paid, Command.BLANK);
-    }
-
-    /**
-     * <p>
-     * Constructor for Input_PayManaCost_Ability.
-     * </p>
-     * 
-     * @param manaCost2
-     *            a {@link java.lang.String} object.
-     * @param paidCommand2
-     *            a {@link forge.Command} object.
-     * @param unpaidCommand2
-     *            a {@link forge.Command} object.
-     */
-    public InputPayManaCostAbility(final String manaCost2, final Command paidCommand2, final Command unpaidCommand2) {
-        this("", manaCost2, paidCommand2, unpaidCommand2);
-    }
 
     /**
      * <p>
@@ -101,9 +72,8 @@ public class InputPayManaCostAbility extends InputPayMana {
      * @param unpaidCommand2
      *            a {@link forge.Command} object.
      */
-    public InputPayManaCostAbility(final String m, final String manaCost2, final Command paidCommand2,
-            final Command unpaidCommand2) {
-        this(m, manaCost2, paidCommand2, unpaidCommand2, false);
+    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2, final Command paidCommand2, final Command unpaidCommand2) {
+        this(game, prompt, manaCost2, paidCommand2, unpaidCommand2, false);
     }
 
     /**
@@ -111,7 +81,7 @@ public class InputPayManaCostAbility extends InputPayMana {
      * Constructor for Input_PayManaCost_Ability.
      * </p>
      * 
-     * @param m
+     * @param prompt
      *            a {@link java.lang.String} object.
      * @param manaCost2
      *            a {@link java.lang.String} object.
@@ -122,8 +92,8 @@ public class InputPayManaCostAbility extends InputPayMana {
      * @param showOKButton
      *            a boolean.
      */
-    public InputPayManaCostAbility(final String m, final String manaCost2, final Command paidCommand2,
-            final Command unpaidCommand2, final boolean showOKButton) {
+    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2, final Command paid, final Command unpaid, final boolean showOKButton) {
+        super(game);
         this.fakeAbility = new SpellAbility(null) {
             @Override
             public void resolve() {
@@ -136,11 +106,11 @@ public class InputPayManaCostAbility extends InputPayMana {
         };
         this.originalManaCost = manaCost2;
         this.phyLifeToLose = 0;
-        this.message = m;
+        this.message = prompt;
 
         this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
-        this.paidCommand = paidCommand2;
-        this.unpaidCommand = unpaidCommand2;
+        this.paidCommand = paid;
+        this.unpaidCommand = unpaid;
         this.showOnlyOKButton = showOKButton;
     }
 
@@ -155,7 +125,7 @@ public class InputPayManaCostAbility extends InputPayMana {
 
     @Override
     public void selectPlayer(final Player player) {
-        if (player.isHuman()) {
+        if (player == whoPays) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }
@@ -172,7 +142,7 @@ public class InputPayManaCostAbility extends InputPayMana {
     @Override
     public final void selectCard(final Card card) {
         // only tap card if the mana is needed
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(this.fakeAbility, card, this.manaCost);
+        this.manaCost = activateManaAbility(this.fakeAbility, card, this.manaCost);
 
         if (card.getManaAbility().isEmpty() || card.isInZone(ZoneType.Hand)) {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
@@ -239,7 +209,7 @@ public class InputPayManaCostAbility extends InputPayMana {
      */
     @Override
     public void selectManaPool(String color) {
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(color, this.fakeAbility, this.manaCost);
+        this.manaCost = activateManaAbility(color, this.fakeAbility, this.manaCost);
 
         if (this.manaCost.isPaid()) {
             this.done();

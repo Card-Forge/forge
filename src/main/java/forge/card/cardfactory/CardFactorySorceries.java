@@ -44,8 +44,9 @@ import forge.card.mana.ManaCostParser;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
-import forge.control.input.InputPayManaCost;
-import forge.control.input.InputPayManaCostAbility;
+import forge.control.input.InputPayManaSimple;
+import forge.control.input.InputPayManaExecuteCommands;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerUtil;
@@ -380,7 +381,7 @@ public class CardFactorySorceries {
                 this.showMessage();
 
                 if (index[0] >= humanBasic.size()) {
-                    this.stopSetNext(new InputPayManaCost(spell));
+                    this.stopSetNext(new InputPayManaSimple(Singletons.getModel().getGame(), spell));
                 }
 
                 // need to sacrifice the other non-basic land types
@@ -830,7 +831,7 @@ public class CardFactorySorceries {
 
             private void done() {
                 setStackDescription.execute();
-                this.stopSetNext(new InputPayManaCost(spell));
+                this.stopSetNext(new InputPayManaSimple(Singletons.getModel().getGame(), spell));
             }
         };
 
@@ -865,7 +866,7 @@ public class CardFactorySorceries {
                         sb.append("Input_PayManaCost for spell is getting: ");
                         sb.append(spell.getManaCost());
                         System.out.println(sb.toString());
-                        this.stopSetNext(new InputPayManaCost(spell));
+                        this.stopSetNext(new InputPayManaSimple(Singletons.getModel().getGame(), spell));
                     }
                 } // if
             } // selectCard()
@@ -904,7 +905,7 @@ public class CardFactorySorceries {
                 } else if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
                     this.stopSetNext(targetXCreatures);
                 } else {
-                    this.stopSetNext(new InputPayManaCost(spell));
+                    this.stopSetNext(new InputPayManaSimple(Singletons.getModel().getGame(), spell));
                 }
             }
         }; // Input
@@ -939,7 +940,7 @@ public class CardFactorySorceries {
                     } else if (userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) {
                         this.stopSetNext(targetXCreatures);
                     } else {
-                        this.stopSetNext(new InputPayManaCost(spell));
+                        this.stopSetNext(new InputPayManaSimple(Singletons.getModel().getGame(), spell));
                     }
                 }
             } // selectPlayer()
@@ -1132,11 +1133,12 @@ public class CardFactorySorceries {
                 final int newCMC = newArtifact[0].getCMC();
 
                 // if <= baseCMC, put it onto the battlefield
+                final GameState game = Singletons.getModel().getGame(); 
                 if (newCMC <= baseCMC) {
-                    Singletons.getModel().getGame().getAction().moveToPlay(newArtifact[0]);
+                    game.getAction().moveToPlay(newArtifact[0]);
                 } else {
                     final String diffCost = String.valueOf(newCMC - baseCMC);
-                    Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCostAbility(diffCost, new Command() {
+                    Singletons.getModel().getMatch().getInput().setInput(new InputPayManaExecuteCommands(game, "Pay difference in artifacts CMC",  diffCost, new Command() {
                         private static final long serialVersionUID = -8729850321341068049L;
 
                         @Override

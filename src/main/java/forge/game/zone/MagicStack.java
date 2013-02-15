@@ -49,7 +49,7 @@ import forge.card.spellability.TargetSelection;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
-import forge.control.input.InputPayManaCostAbility;
+import forge.control.input.InputPayManaExecuteCommands;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -503,7 +503,7 @@ public class MagicStack extends MyObservable {
                         ability.resolve();
                         final Card crd = sa.getSourceCard();
                         Singletons.getModel().getMatch().getInput().setInput(
-                                new InputPayManaCostAbility("Pay X cost for " + crd.getName() + " (X="
+                                new InputPayManaExecuteCommands(game, "Pay X cost for " + crd.getName() + " (X="
                                         + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost().toString(), this, unpaidCommand,
                                         true));
                     }
@@ -513,7 +513,7 @@ public class MagicStack extends MyObservable {
                 Player player = sp.getSourceCard().getController();
                 if (player.isHuman()) {
                     Singletons.getModel().getMatch().getInput().setInput(
-                            new InputPayManaCostAbility("Pay X cost for " + sp.getSourceCard().getName() + " (X="
+                            new InputPayManaExecuteCommands(game, "Pay X cost for " + sp.getSourceCard().getName() + " (X="
                                     + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost().toString(), paidCommand,
                                     unpaidCommand, true));
                 } else {
@@ -559,67 +559,26 @@ public class MagicStack extends MyObservable {
                         if (manaCost.isPaid()) {
                             this.execute();
                         } else {
-                            if ((game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaid() == 0)
-                                    && game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaidColored()
-                                            .equals("")) {
-
-                                Singletons.getModel().getMatch().getInput().setInput(
-                                        new InputPayManaCostAbility("Multikicker for " + sa.getSourceCard() + "\r\n"
-                                                + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude()
-                                                + "\r\n", manaCost.toString(), this, unpaidCommand));
+                            String prompt;
+                            int mkCostPaid = game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaid(); 
+                            String mkCostPaidColored = game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaidColored();
+                            int mkMagnitude = sa.getSourceCard().getMultiKickerMagnitude();
+                            if ((mkCostPaid == 0) && mkCostPaidColored.equals("")) {
+                                prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sa.getSourceCard(), mkMagnitude );
                             } else {
-                                Singletons.getModel().getMatch().getInput()
-                                        .setInput(
-                                                new InputPayManaCostAbility(
-                                                        "Multikicker for "
-                                                                + sa.getSourceCard()
-                                                                + "\r\n"
-                                                                + "Mana in Reserve: "
-                                                                + ((game.getActionPlay()
-                                                                        .getCostCuttingGetMultiKickerManaCostPaid() != 0)
-                                                                        ? game.getActionPlay()
-                                                                        .getCostCuttingGetMultiKickerManaCostPaid()
-                                                                        : "")
-                                                                + game.getActionPlay()
-                                                                        .getCostCuttingGetMultiKickerManaCostPaidColored()
-                                                                + "\r\n" + "Times Kicked: "
-                                                                + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
-                                                        manaCost.toString(), this, unpaidCommand));
+                                prompt = String.format("Multikicker for %s\r\nMana in Reserve: %s %s\r\nTimes Kicked: %d", sa.getSourceCard(), 
+                                        (mkCostPaid != 0) ? Integer.toString(mkCostPaid) : "", mkCostPaidColored, mkMagnitude);
                             }
+                            Input toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString(), this, unpaidCommand);
+                            Singletons.getModel().getMatch().getInput().setInput(toSet);
                         }
                     }
                 };
                 Player activating = sp.getActivatingPlayer();
 
                 if (activating.isHuman()) {
-                    final ManaCostBeingPaid manaCost = this.getMultiKickerSpellCostChange(ability);
-
-                    if (manaCost.isPaid()) {
-                        paidCommand.execute();
-                    } else {
-                        if ((game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaid() == 0)
-                                && game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaidColored().equals("")) {
-                            Singletons.getModel().getMatch().getInput().setInput(
-                                    new InputPayManaCostAbility("Multikicker for " + sa.getSourceCard() + "\r\n"
-                                            + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
-                                            manaCost.toString(), paidCommand, unpaidCommand));
-                        } else {
-                            Singletons.getModel().getMatch().getInput().setInput(
-                                    new InputPayManaCostAbility(
-                                            "Multikicker for "
-                                                    + sa.getSourceCard()
-                                                    + "\r\n"
-                                                    + "Mana in Reserve: "
-                                                    + ((game.getActionPlay()
-                                                            .getCostCuttingGetMultiKickerManaCostPaid() != 0)
-                                                            ? game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaid()
-                                                            : "")
-                                                    + game.getActionPlay()
-                                                            .getCostCuttingGetMultiKickerManaCostPaidColored() + "\r\n"
-                                                    + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude()
-                                                    + "\r\n", manaCost.toString(), paidCommand, unpaidCommand));
-                        }
-                    }
+                    sa.getSourceCard().addMultiKickerMagnitude(-1);
+                    paidCommand.execute();
                 } else {
                     // computer
 
@@ -664,27 +623,17 @@ public class MagicStack extends MyObservable {
                         if (manaCost.isPaid()) {
                             this.execute();
                         } else {
-
-                            Singletons.getModel().getMatch().getInput().setInput(
-                                    new InputPayManaCostAbility("Replicate for " + sa.getSourceCard() + "\r\n"
-                                            + "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude()
-                                            + "\r\n", manaCost.toString(), this, unpaidCommand));
+                            String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sa.getSourceCard(), sa.getSourceCard().getReplicateMagnitude());
+                            Input toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString(), this, unpaidCommand);
+                            Singletons.getModel().getMatch().getInput().setInput(toSet);
                         }
                     }
                 };
 
                 Player controller = sp.getSourceCard().getController();
                 if (controller.isHuman()) {
-                    final ManaCostBeingPaid manaCost = this.getMultiKickerSpellCostChange(ability);
-
-                    if (manaCost.isPaid()) {
-                        paidCommand.execute();
-                    } else {
-                        Singletons.getModel().getMatch().getInput().setInput(
-                                new InputPayManaCostAbility("Replicate for " + sa.getSourceCard() + "\r\n"
-                                        + "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n",
-                                        manaCost.toString(), paidCommand, unpaidCommand));
-                    }
+                    sa.getSourceCard().addReplicateMagnitude(-1);
+                    paidCommand.execute();
                 } else {
                     // computer
                     while (ComputerUtilCost.canPayCost(ability, controller)) {

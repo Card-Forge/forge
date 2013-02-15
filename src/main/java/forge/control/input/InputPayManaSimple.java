@@ -19,8 +19,10 @@ package forge.control.input;
 
 import forge.Card;
 import forge.Singletons;
+//import forge.Singletons;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -37,23 +39,15 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputPayManaCost extends InputPayMana {
+public class InputPayManaSimple extends InputPayManaBase {
     // anything that uses this should be converted to Ability_Cost
     /** Constant <code>serialVersionUID=3467312982164195091L</code>. */
     private static final long serialVersionUID = 3467312982164195091L;
 
-    private final String originalManaCost;
-
-    private final Card originalCard;
-
-    /** The mana cost. */
-    private ManaCostBeingPaid manaCost;
-
-    private final SpellAbility spell;
-
     private boolean skipStack;
-
-    private int phyLifeToLose = 0;
+    private final SpellAbility spell;
+    private final Card originalCard;
+    private final String originalManaCost;
 
     /**
      * <p>
@@ -65,23 +59,9 @@ public class InputPayManaCost extends InputPayMana {
      * @param noStack
      *            a boolean.
      */
-    public InputPayManaCost(final SpellAbility sa, final boolean noStack) {
+    public InputPayManaSimple(final GameState game, final SpellAbility sa, final boolean noStack) {
+        this(game, sa, game.getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost())));
         this.skipStack = noStack;
-        this.originalManaCost = sa.getManaCost().toString(); // Change
-        this.originalCard = sa.getSourceCard();
-
-        this.spell = sa;
-
-        if (Singletons.getModel().getGame() != null) {
-            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                this.manaCost = new ManaCostBeingPaid("0");
-                Singletons.getModel().getGame().getStack().add(this.spell);
-            } else {
-                this.manaCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(this.originalManaCost));
-            }
-        } else {
-            this.manaCost = new ManaCostBeingPaid(sa.getManaCost());
-        }
     }
 
     /**
@@ -92,8 +72,8 @@ public class InputPayManaCost extends InputPayMana {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public InputPayManaCost(final SpellAbility sa) {
-        this(sa, new ManaCostBeingPaid(sa.getManaCost()));
+    public InputPayManaSimple(final GameState game, final SpellAbility sa) {
+        this(game, sa, new ManaCostBeingPaid(sa.getManaCost()));
     }
 
     /**
@@ -107,21 +87,17 @@ public class InputPayManaCost extends InputPayMana {
      * @param manaCostToPay
      *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public InputPayManaCost(final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
+    public InputPayManaSimple(final GameState game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
+        super(game);
         this.originalManaCost = manaCostToPay.toString(); // Change
         this.originalCard = sa.getSourceCard();
-
         this.spell = sa;
 
-        if (Singletons.getModel().getGame() != null) {
-            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                this.manaCost = new ManaCostBeingPaid("0");
-                Singletons.getModel().getGame().getStack().add(this.spell);
-            } else {
-                this.manaCost = manaCostToPay;
-            }
+        if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+            this.manaCost = new ManaCostBeingPaid("0");
+            game.getStack().add(this.spell);
         } else {
-            this.manaCost = new ManaCostBeingPaid(sa.getManaCost());
+            this.manaCost = manaCostToPay;
         }
     }
 
@@ -143,7 +119,7 @@ public class InputPayManaCost extends InputPayMana {
         // Kher Keep, Pendelhaven, Blinkmoth Nexus, and Mikokoro, Center of the
         // Sea, ....
 
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(this.spell, card, this.manaCost);
+        this.manaCost = activateManaAbility(this.spell, card, this.manaCost);
 
         // only show message if this is the active input
         if (Singletons.getModel().getMatch().getInput().getInput() == this) {
@@ -160,7 +136,7 @@ public class InputPayManaCost extends InputPayMana {
     @Override
     public final void selectPlayer(final Player player) {
 
-        if (player.isHuman()) {
+        if (player == whoPays) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }
@@ -177,22 +153,22 @@ public class InputPayManaCost extends InputPayMana {
      */
     private void done() {
         if (this.phyLifeToLose > 0) {
-            Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, this.originalCard);
+            whoPays.payLife(this.phyLifeToLose, this.originalCard);
         }
         if (this.spell.getSourceCard().isCopiedSpell()) {
             Singletons.getModel().getMatch().getInput().resetInput();
         } else {
-            Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.spell, false);
+            whoPays.getManaPool().clearManaPaid(this.spell, false);
             this.resetManaCost();
 
             if (this.spell.isSpell()) {
-                this.spell.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(this.originalCard));
+                this.spell.setSourceCard(game.getAction().moveToStack(this.originalCard));
             }
 
             if (this.skipStack) {
                 this.spell.resolve();
             } else {
-                Singletons.getModel().getGame().getStack().add(this.spell);
+                game.getStack().add(this.spell);
             }
             Singletons.getModel().getMatch().getInput().resetInput();
 
@@ -226,9 +202,9 @@ public class InputPayManaCost extends InputPayMana {
         }
 
         this.resetManaCost();
-        Player human = Singletons.getControl().getPlayer();
-        human.getManaPool().refundManaPaid(this.spell, true);
-        human.getZone(ZoneType.Battlefield).updateObservers(); // DO
+
+        whoPays.getManaPool().refundManaPaid(this.spell, true);
+        whoPays.getZone(ZoneType.Battlefield).updateObservers(); // DO
 
         this.stop();
     }
@@ -262,7 +238,7 @@ public class InputPayManaCost extends InputPayMana {
      */
     @Override
     public void selectManaPool(String color) {
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(color, this.spell, this.manaCost);
+        this.manaCost = InputPayManaBase.activateManaAbility(color, this.spell, this.manaCost);
 
         // only show message if this is the active input
         if (Singletons.getModel().getMatch().getInput().getInput() == this) {
