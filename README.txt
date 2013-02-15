@@ -143,6 +143,76 @@ To report a bug with an official beta release, please follow the instructions at
 To report a bug (1) with an alpha test, (2) with a nightly build, (3) with something compiled from the official Forge software repository, or (4) with the leading edge (formerly "SVN Bug Reports"), please do not submit your bugs to the forum. Instead, please follow the instructions at http://www.slightlymagic.net/wiki/How_to_File_a_Bug_Report_with_Mantis .
 
 
+*************************** start adding material from the old betas starting here ***************************
+
+
+We are looking for help in finding additional sound files for the new sound feature:
+
+This version of forge includes a few sound files for the new sound effect system. While we have several sounds assigned to a few of the available events there are a number of events that do not yet have a assigned sound file. This should be considered a work in progress and we could use some help in finding interesting sounds that we can add to forge.
+
+The sound files need to be in wav or au format, wav appears to be more widespread but the code can handle either format. The sound files need to be copyright-free and they should be in the public domain.
+
+You can either record your own sounds if you have the necessary equipment or you may be able to find an appropriate sound on a website such as http://www.freesound.org/browse/
+
+You should note that sound files can be large and we would like to avoid this if possible. A good size to shoot for would be 50 K or less. There is a freeware sound editor that may have versions for all operating systems. This app is named Audacity.
+
+We have a forge forum topic at the Collectible Card Games Headquarters web site that is devoted to finding sounds for this new sound system. Please visit this topic and contribute a sound or two. We can use your help and assistance. :)
+
+http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8570
+
+
+Notes about the second Quest World, Jamuraa:
+
+A second Quest World, Jamuraa, has been added to Forge. When playing Quest mode, it is now possible to 'Travel' between the regular Quest environment and the two Worlds, Shandalar and Jamuraa, both of which include special formats, opponents and challenges. Or you can start a new Quest in any of them.
+
+Like Shandalar, Jamuraa is a fantasy world. Its peaceful existence has recently been wrecked by a planar conjunction that shattered the barriers between Jamuraa and the infernal planes known as Jahim, Saqar, and Jahannam. The demon planeswalkers who rule those planes, and their hellish sister, Lilith, are now extending their influence over Jamuraa and gradually destroying the whole continent. Your task is to fight their minions and ultimately challenge the four demons - but beware, their destructive might is unfathomable!
+
+From a technical perspective, the following sets are available to the player in Jamuraa: 
+5th Edition, Arabian Nights, Mirage, Visions, Weatherlight.
+
+Jamuraa contains:
+- 81 opponent decks, broken down as follows: 13 'easy' decks, 17 'medium' decks, 31 'hard' decks, and 20 'very hard' decks.
+- 9 challenges, including the 4 demon planeswalkers (the 3 demon rulers and Lilith) and 5 other special scenarios set in Jamuraa. All challenges are repeatable. All are fairly hard, and the 4 demon challenges are especially fiendish.
+For the most part, the opponent duel and challenge decks are built with the same format restrictions as your own cardpool, and some of the easiest opponent decks were in fact based on a limited cardpool. But there will be exceptions, especially in the hard/very hard decks and challenges, which can be more like Vintage/T1 decks than pure Mirage + 5th Edition decks. There will be older cards here and there, and maybe even a random Tempest card or two (although these are extremely scarce!). 
+Hint: if you find the later 'Vintage' opponent decks unfair or near-impossible to beat with your 5th Edition/Mirage block cards, you can Travel to Shandalar and collect some old power cards there, and then return to Jamuraa. Just remember to complete your challenges before traveling.
+
+
+New Deck Editor features with improved Filters:
+
+Some work is being done on the various deck editors -- including the quest spell shop -- and we hope to add in additional features while improving the UI. Here is a quick tutorial on the new features:
+
+FILTERS
+The Filters tab has been removed and filters are now controlled from the Card Catalog tab. Pretty much everything that used to be a checkbox is now represented by a toggle button. The statistics labels at the top for colors and card types can now be clicked to toggle display of the related cards. Clicking the Total Cards label in the upper left will alternately set all filters on and off.
+
+Text searches are done by just typing the the text box. The results will update as you type. Use the combo box to the right of the text box to set whether the search should be for cards with or without the specified text. The three toggle buttons to the right of the combo box allow you to specify where in the card the text should (or should not) match. Complex text searches, such as for goblin creatures with haste but not with kicker costs, are possible by stacking the search filters. Put the current search filter on the stack by selecting the "Add filter" button to the left of the text box and choosing the "Current text search" option. You can also use the keyboard shortcut Ctrl+Enter (Cmd+Enter on OSX). This will keep your current text search applied, but will clear the text box and allow you to input the next search filter. To perform the example goblin search above, you would:
+1) Ensure "in" is displayed in the the combo box. Enter "goblin" in the text box and deselect Name and Text so that only Type is selected.
+2) Hit Ctrl+Enter (Cmd+Enter on OSX). Notice the "Contains: 'goblin" in: type" filter appears below the text box.
+3) Type "haste" in the text box. Deselect Type and select Text. Hit Ctrl+Enter.
+4) Change the combo box from "in" to "not in". Type "kicker" in the text box.
+The shown entries match your combined search filter. Click the little 'x' in the upper right corner of each search widget to remove that filter from the filter stack.
+
+Format filters allow you to restrict the shown cards to those that are legal in a particular format. Select the "Add filter" button, hover over the "Format" submenu, and choose one of the defined formats. The filter will appear below the text box and will be combined with whatever other filters you have on the stack. Hover the mouse over the filter widget to see details on allowed sets and banned cards. Keep in mind that cards from other, non-listed sets may still appear in the results if they are just reprints of allowed cards.
+
+Set filters are similar to format filters except that a window will come up with a grid of checkboxes so you can select exactly which sets you would like shown. There is a checkbox at the bottom (off by default) that will allow the filter to include cards reprinted in unselected sets, just like the format filter above. If you don't check this checkbox, only cards printed in the selected sets will be shown, allowing you to focus on just that set's version of a particular card. This is very useful in quest mode when determining which cards in a set you have yet to collect.
+
+Value range filters allow you to restrict the cards by power, toughness, and/or converted mana cost (CMC). The text boxes that appear in the filter widget are editable and update the shown cards in realtime as you modify the numbers.
+
+Quest World filters are similar to Format filters in that they restrict the shown cards to a group of sets, respecting lists of banned cards. They are useful when constructing decks that will be valid in the various quest worlds. You can have more than one quest world filter active at the same time; useful if you are constructing a deck that will be used in multiple worlds.
+
+SPELL SHOP
+The spell shop interface has also received some usability enhancements. The first one you may notice is the addition of a new column named "Owned". This column is intended to help players decide whether buying an item is likely to be beneficial. The data in this column varies depending on what kind of item the row represents:
+Cards: A number indicating how many of a particular card a player already owns
+Preconstructed decks: A "YES" or "NO" indicating whether the deck exists in the player's deck list
+Booster/fat packs: A percentage indicating how close a player is to completing the related set.  "Complete" means at least one of every basic land and at least 4 of every other card.
+If you don't want this column, it can be turned off in the editor preferences.
+
+The new "Sell excess cards" button appears above the player's library. Clicking it will sell all cards that are not basic lands until only four copies of the cards remain. It's a one-click "cleanup" of the library and a great way to safely and quickly regain some cash.
+
+The "Full catalog view" button appears to the left of the "Buy Card" button. Toggling this button will switch between showing the store's inventory and the full catalog. By applying a filter to show only a particular set (or group of sets), players can use this view to discover exactly which cards they do not own. Buying and selling cards is disabled while in this view.
+
+Multibuy: By selecting any number of items and hitting space (or selecting the "Buy Card" or "Sell Card" buttons), a player can buy one of everything selected.
+
+
 Our Lawyers Made Us Do This:
 
 This product includes software developed by the Indiana University Extreme! Lab (http://www.extreme.indiana.edu/).
