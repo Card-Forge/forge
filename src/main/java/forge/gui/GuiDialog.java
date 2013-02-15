@@ -46,7 +46,8 @@ public class GuiDialog {
     public static boolean confirm(final Card c, String question, final boolean defaultChoice) {
         CMatchUI.SINGLETON_INSTANCE.setCard(c);
         final StringBuilder title = new StringBuilder();
-        title.append(c.getName()).append(" - Ability");
+        if ( c != null)
+            title.append(c.getName()).append(" - Ability");
     
         if (!(question.length() > 0)) {
             question = "Activate card's ability?";
