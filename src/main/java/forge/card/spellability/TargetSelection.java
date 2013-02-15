@@ -242,7 +242,9 @@ public class TargetSelection {
         SpellAbility child = ability;
         while (child instanceof AbilitySub) {
             child = ((AbilitySub) child).getParent();
-            targets.addAll(child.getTarget().getTargets());
+            if (child.getTarget() != null) {
+                targets.addAll(child.getTarget().getTargets());
+            }
         }
 
         return targets;
