@@ -208,7 +208,8 @@ public enum CCardCatalog implements ICDoc {
                     }, !isActive(activeWorlds, w));
                 }
                 popup.add(world);
-                popup.show(VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction(), 0, 0);
+                popup.show(VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction(), 0,
+                        VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction().getHeight());
             }
         });
         
