@@ -321,7 +321,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             this.questData.getCards().buyCard(card, value);
 
         } else if (item instanceof OpenablePack) {
-            this.getTableCatalog().removeCard(item, qty);
             for (int i = 0; qty > i; ++i) {
                 OpenablePack booster = null;
                 if (item instanceof BoosterPack) {
@@ -339,8 +338,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                         "You have found the following cards inside:", newCards);
                 c.show();
             }
-        } else if (item instanceof PreconDeck) {
             this.getTableCatalog().removeCard(item, qty);
+        } else if (item instanceof PreconDeck) {
             final PreconDeck deck = (PreconDeck) item;
             this.questData.getCards().buyPreconDeck(deck, value);
             final ItemPool<InventoryItem> newInventory =
@@ -348,11 +347,13 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             for (int i = 0; qty > i; ++i) {
                 getTableDeck().addCards(newInventory);
             }
+            boolean one = 1 == qty;
             JOptionPane.showMessageDialog(null, String.format(
-                    "%s '%s' %s added to your decklist.%n%nCards from it were also added to your pool.",
-                    1 == qty ? "Deck" : String.format("%d copies of deck", qty),
-                    deck.getName(), 1 == qty ? "was" : "were"),
+                    "%s '%s' %s added to your decklist.%n%n%s cards were also added to your pool.",
+                    one ? "Deck" : String.format("%d copies of deck", qty),
+                    deck.getName(), one ? "was" : "were", one ? "Its" : "Their"),
                     "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
+            this.getTableCatalog().removeCard(item, qty);
         }
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());

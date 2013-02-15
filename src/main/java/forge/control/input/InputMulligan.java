@@ -39,7 +39,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.VMatchUI;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
@@ -83,8 +82,10 @@ public class InputMulligan extends Input {
 
         if (newHand == 0) {
             this.end();
+        } else {
+            ButtonUtil.enableAllFocusOk();
         }
-    } // selectButtonOK()
+    }
 
     final void end() {
         GameState game = Singletons.getModel().getGame();
