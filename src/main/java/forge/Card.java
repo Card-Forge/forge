@@ -98,6 +98,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
     private Map<CounterType, Integer> counters = new TreeMap<CounterType, Integer>();
+    private Map<Card, Map<CounterType, Integer>> countersAddedBy = new TreeMap<Card, Map<CounterType, Integer>>();
     private final Map<String, Object> triggeringObjects = new TreeMap<String, Object>();
     private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
     // Hidden keywords won't be displayed on the card
@@ -347,7 +348,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public void setPreFaceDownCharacteristic(CardCharacteristicName preCharacteristic) {
         this.preTFDCharacteristic = preCharacteristic;
     }
-    
+
     /**
      * Turn face down.
      * 
@@ -700,7 +701,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void clearImprinted() {
         this.imprintedCards.clear();
     }
-    
+
     /**
      * <p>
      * addEncoded.
@@ -750,7 +751,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void clearEncoded() {
         this.encodedCards.clear();
-    }    
+    }
 
     /**
      * <p>
@@ -1260,6 +1261,15 @@ public class Card extends GameEntity implements Comparable<Card> {
         return true;
     }
 
+    public final int getTotalCountersToAdd(final CounterType counterType, final int baseAmount, final boolean applyMultiplier) {
+        if (!this.canHaveCountersPlacedOnIt(counterType)) {
+            return 0;
+        }
+        final int multiplier = applyMultiplier ? this.getController().getCounterDoublersMagnitude(counterType) : 1;
+
+        return multiplier * baseAmount;
+    }
+
     public final void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier) {
         if (!this.canHaveCountersPlacedOnIt(counterType)) {
             return;
@@ -1283,6 +1293,38 @@ public class Card extends GameEntity implements Comparable<Card> {
         Singletons.getModel().getGame().getEvents().post(new CounterAddedEvent(addAmount));
 
         this.updateObservers();
+    }
+
+    /**
+     * <p>
+     * addCountersAddedBy.
+     * </p>
+     * @param source    the card adding the counters to this card
+     * @param counterType    the counter type added
+     * @param counterAmount    the amount of counters added
+     */
+    public final void addCountersAddedBy(final Card source, final CounterType counterType, final int counterAmount) {
+        final Map<CounterType, Integer> counterMap = new TreeMap<CounterType, Integer>();
+        counterMap.put(counterType, counterAmount);
+        this.countersAddedBy.put(source, counterMap);
+    }
+
+    /**
+     * <p>
+     * getCountersAddedBy.
+     * </p>
+     * @param source    the card the counters were added by
+     * @param counterType    the counter type added
+     * @return the amount of counters added.
+     */
+    public final int getCountersAddedBy(final Card source, final CounterType counterType) {
+        int counterAmount = 0;
+        if (this.countersAddedBy.containsKey(source)) {
+            final Map<CounterType, Integer> counterMap = this.countersAddedBy.get(source);
+            counterAmount = counterMap.containsKey(counterType) ? counterMap.get(counterType) : 0;
+            this.countersAddedBy.remove(source);
+        }
+        return counterAmount;
     }
 
     /**
@@ -9076,11 +9118,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
             }
-    
+
             if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
                 continue;
             }
-    
+
             if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
                 continue;
             }
@@ -9102,11 +9144,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!(re instanceof ReplaceMoved)) {
                 continue;
             }
-    
+
             if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
                 continue;
             }
-    
+
             if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
                 continue;
             }
@@ -9130,9 +9172,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (isToken() && !isCopiedToken()) {
             return 0;
         }
-    
+
         int xPaid = 0;
-    
+
         // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
         if (Singletons.getModel().getGame().getCardsIn(ZoneType.Stack).contains(this) && getManaCost() != null) {
             xPaid = getXManaCostPaid() * getManaCost().countX();

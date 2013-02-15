@@ -74,6 +74,7 @@ public class CountersPutEffect extends SpellEffect {
             return;
         }
 
+        final boolean remember = sa.hasParam("RememberCounters");
         int counterAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
@@ -109,6 +110,10 @@ public class CountersPutEffect extends SpellEffect {
                 if (zone == null) {
                     // Do nothing, token disappeared
                 } else if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
+                    if (remember) {
+                        final int value = tgtCard.getTotalCountersToAdd(counterType, counterAmount, true);
+                        tgtCard.addCountersAddedBy(card, counterType, value);
+                    }
                     tgtCard.addCounter(counterType, counterAmount, true);
                 } else {
                     // adding counters to something like re-suspend cards

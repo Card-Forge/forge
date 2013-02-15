@@ -1210,6 +1210,7 @@ res/cardsfolder/b/boundless_realms.txt -text
 res/cardsfolder/b/bounteous_kirin.txt svneol=native#text/plain
 res/cardsfolder/b/bountiful_harvest.txt svneol=native#text/plain
 res/cardsfolder/b/bounty_hunter.txt svneol=native#text/plain
+res/cardsfolder/b/bounty_of_the_hunt.txt -text
 res/cardsfolder/b/bower_passage.txt -text
 res/cardsfolder/b/brace_for_impact.txt -text
 res/cardsfolder/b/brackwater_elemental.txt svneol=native#text/plain
@@ -9210,6 +9211,7 @@ res/cardsfolder/s/shambleshark.txt -text
 res/cardsfolder/s/shambling_remains.txt svneol=native#text/plain
 res/cardsfolder/s/shambling_shell.txt svneol=native#text/plain
 res/cardsfolder/s/shambling_strider.txt svneol=native#text/plain
+res/cardsfolder/s/shambling_swarm.txt -text
 res/cardsfolder/s/shanodin_dryads.txt svneol=native#text/plain
 res/cardsfolder/s/shape_anew.txt -text
 res/cardsfolder/s/shape_stealer.txt -text svneol=unset#text/plain

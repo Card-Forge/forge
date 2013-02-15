@@ -57,7 +57,7 @@ public class CountersRemoveEffect extends SpellEffect {
         final Card card = sa.getSourceCard();
         final String type = sa.getParam("CounterType");
         int counterAmount = 0;
-        if (!sa.getParam("CounterNum").equals("All")) {
+        if (!sa.getParam("CounterNum").equals("All") && !sa.getParam("CounterNum").equals("Remembered")) {
             counterAmount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         }
 
@@ -83,6 +83,8 @@ public class CountersRemoveEffect extends SpellEffect {
                 final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
                 if (sa.getParam("CounterNum").equals("All")) {
                     counterAmount = tgtCard.getCounters(counterType);
+                } else if (sa.getParam("CounterNum").equals("Remembered")) {
+                    counterAmount = tgtCard.getCountersAddedBy(card, counterType);
                 }
 
                 if (type.matches("Any")) {

@@ -4,6 +4,7 @@ Types:Sorcery
 Text:no text
 K:Miracle:G
 A:SP$ PutCounter | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ Distribute four +1+1 counters among any number of target creatures.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessings_of_nature.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/168.jpg
