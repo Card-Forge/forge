@@ -146,6 +146,11 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+Performance issues on low end machines:
+
+Some performance changes were made to Forge and it should now operate more quickly on low end machines. Mid to high level machines are unlikely to notice as much of a performance increase. We tried to hunt down all of the bugs that resulted from these changes but there may still be a bug or two in this beta release.
+
+
 A note about winning booster packs in quest mode:
 
 If you win a quest mode match, you get a booster pack for every 1 or 2 (default) Wins, depending on the difficulty level. If you lose and you are playing on easy mode, you get a booster pack every 1 (default) Loss.
