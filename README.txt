@@ -146,12 +146,61 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+When choosing cards, sources, etc. using a list box:
+
+When choosing cards, sources, etc. using a list box, the currently selected card will now be visually highlighted on the playfield (to better distinguish between e.g. three different cards with the same name on the playfield). Now the visual highlighting of a card will also work when declaring the order of blockers.
+
+
+Return to Ravnica Guild Sealed Deck mode:
+
+Added Return to Ravnica Guild Sealed Deck mode. Start a new sealed deck game, choose "Block / Set" and then scroll down until you find "Return to Ravnica Guild Sealed (block)". Select that. From the "Choose Set Combination" menu, select the first option. You will be prompted twice to pick your guild (once for the promo cards, once for the actual booster - you should choose the same guild both times). After that you're ready to go.
+
+
 Targeting arrows are now available in the battlefield display:
+
+The Targeting Overlay has been fixed and re-enabled. It now correctly shows the targeting arcs in cases when it previously showed them in the wrong direction. The match UI is properly refreshed when the targeting arcs are switched on/off. The defunct "mouseover-only" mode is currently disabled (it crashes Forge, difficult to fix).
 
 The visuals for targeting arrows has been improved and looks better, with an adaptation of the arrow drawing code from MAGE. Thanks to the MAGE team for permission for the adaptation.
 
 
 The new sound system:
+
+Forge now has a sound effect system in place. Several basic sounds are linked to the code now and will be enabled when "Enable Sounds" option is checked in the preferences. It supports WAV and AU file formats.
+
+Currently supported sound effects are:
+
+AddCounter - add_counter.wav - triggered when a counter is added to a permanent.
+Artifact - artifact.wav - triggered when an artifact is played.
+ArtifactCreature - artifact_creature.wav - triggered when an artifact creature is played.
+BlackLand - black_land.wav - triggered when a land with the "B" mana ability is played.
+BlueLand[*] - blue_land.wav - triggered when a land with the "U" mana ability is played.
+Creature - creature.wav - triggered when a creature is played.
+Damage - damage.wav - triggered when a creature is damaged.
+Destroy - destroy.wav - triggered when a permanent is destroyed.
+Discard - discard.wav - triggered when a player discards a card.
+Draw - draw.wav - triggered when a player draws a card.
+Enchantment - enchant.wav - triggered when an enchantment is played.
+EndOfTurn - end_of_turn.wav - triggered at the end of turn.
+Equip - equip.wav - triggered when an equipment is equipped.
+FlipCoin - flip_coin.wav - triggered when a coin is flipped.
+GreenLand - green_land.wav - triggered when a land with the "G" mana ability is played.
+Instant - instant.wav - triggered when an instant is played.
+LifeLoss - life_loss.wav - triggered when a player loses life.
+LoseDuel[*] - lose_duel.wav - triggered when a player loses a duel.
+ManaBurn - mana_burn.wav - triggered during a mana burn if the appropriate rule is enabled.
+OtherLand - other_land.wav - triggered when a land with non-color mana abilities or any other land is played.
+Planeswalker - planeswalker.wav - triggered when a planeswalker is played.
+Poison - poison.wav - triggered when a player receives a poison counter.
+RedLand - red_land.wav - triggered when a land with the "R" mana ability is played.
+Regen - regeneration.wav - triggered when a creature is regenerated.
+RemoveCounter - remove_counter.wav - triggered when a counter is removed from a permanent.
+Sacrifice - sacrifice.wav - triggered when a permanent is sacrificed.
+Sorcery - sorcery.wav - triggered when a sorcery is played.
+Shuffle[*] - shuffle.wav - triggered when a player shuffles his deck.
+Tap[*] - tap.wav - triggered when a permanent is tapped.
+Untap - untap.wav - triggered when a permanent is untapped.
+WhiteLand - white_land.wav - triggered when a land with the "W" mana ability is played.
+WinDuel - win_duel.wav - triggered when a player wins the duel.
 
 All sounds use the event bus model now and are not called directly. Two new sounds to the list of sounds supported by Forge, Blocker Assigned and Token Created.
 
