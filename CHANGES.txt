@@ -24,7 +24,7 @@ Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed M
 The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
 
 
-Added the following cards:
+New Cards:
 
 Ghosts of the Innocent
 Pendrell Flux
@@ -95,13 +95,13 @@ Shambling Swarm
 Fire and Brimstone
 
 
-Added the following Phenomenons:
+New Phenomenons:
 
 Chaotic AEther
 Planewide Disaster
 
 
-Added the following Vanguard Avatars:
+New Vanguard Avatars:
 
 Sisters of Stone Death Avatar
 Viridian Zealot Avatar
