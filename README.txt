@@ -146,6 +146,21 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+Targeting arrows are now available in the battlefield display:
+
+The visuals for targeting arrows has been improved and looks better, with an adaptation of the arrow drawing code from MAGE. Thanks to the MAGE team for permission for the adaptation.
+
+
+The new sound system:
+
+All sounds use the event bus model now and are not called directly. Two new sounds to the list of sounds supported by Forge, Blocker Assigned and Token Created.
+
+
+The new Vanguard mode:
+
+We now have a Vanguard mode implemented. This is a work in progress. The older match layout files are incompatible with the new Vanguard mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files need to be deleted and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
+
+
 The new Archenemy mode:
 
 Schemes have been added to the Archenemy mode. This is a work in progress and there may be a bug or two for us to find.
