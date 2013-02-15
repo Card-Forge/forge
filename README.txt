@@ -146,6 +146,30 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+The quest mode card shop:
+
+You can now buy PreCon decks, Starter packs, Tournament packs and Fat packs from the quest mode card shop.
+
+
+Player Avatar pictures:
+
+The UI has a few new features including the option to pick an avatar from a collection of pictures. This can be accessed from the Settings -> Avatars tab.
+
+
+The organizational structure of the /res/decks/ folder:
+
+The organizational structure of the /res/decks/ folder has been improved and we now have these six subdirectories:
+
+/decks/constructed/
+/decks/cube/
+/decks/draft/
+/decks/plane/
+/decks/scheme/
+/decks/sealed/
+
+You can place your deck files from an earlier version of Forge into the /res/decks/ folder. When you next launch Forge these decks will be converted to a newer format and will be moved into the proper subdirectory.
+
+
 User-created themes for Forge's background, fonts, colors and icons:
 
 When you select a new skin in the Preferences view Forge should save the change to the preference file, quit and then automatically re-launch with the new skin displayed. During testing some people have noticed that Forge is not restarting on their computer and they have to re-launch Forge themselves.
