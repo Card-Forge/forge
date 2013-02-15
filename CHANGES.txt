@@ -194,6 +194,19 @@ Fixes/Features:
 - Added a notice about the missing cards in the Gatecrash Guild Sealed mode to CHANGES.txt.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- reevaluate cursor hover after clicking on a card while playing a match. this enables tapping multiple lands without moving the mouse
+- keep the focus on the ok/cancel buttons during a match
+- restore focus to previous owner when the overlay is hidden
+- properly handle all the various combinations of hover/focus/button presses in FButton
+- Add CHANGES blurb about the OK button and keyboard focus during a match
+- add the correct number of packs/decks when multiple are purchased at once
+- Fix NPE in getUniqueTargets if getTarget() is null
+- Fixed a bug introduced by Target Same Controller related to Unique Targets
+- check in the wav files Chris converted from ADPCM to PCM so they work on non-Windows platforms
+- show the add filter popup menu below the Add Filter button, not on top of it
+- change FControl state from int into an enum
+- ensure All Decks and Deck Generation tabs only show up in the Constructed deck editor
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -278,6 +291,10 @@ Rock Slide
 Serra's Hymn
 Volcanic Wind
 Spoils of War
+Fiery Justice
+Bounty of the Hunt
+Shambling Swarm
+Fire and Brimstone
 
 
 end
