@@ -155,7 +155,7 @@ If you do not like your efforts to personalize the battlefield display you can r
 
 The pets in quest mode:
 
-Some adjustments to the pets in quest mode were made. This includes a new pet.
+Some adjustments to the pets in quest mode were made. The quest mode plant wall's Deathtouch ability was deemed to be too strong against the AI's attack code and this ability was changed to Wither in this version. This includes a new pet.
 
 
 The dock tab has a new button labeled "Open Layout":
