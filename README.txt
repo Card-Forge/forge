@@ -146,6 +146,27 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+The new Gauntlet mode:
+
+A new Gauntlet mode has been added. This mode gives you four options: Quick Gauntlet, Build A Gauntlet, Load Gauntlet and Gauntlet Contests. You can create a group of computer decks to play against by choosing either Custom user decks, Quest Decks, Fully random color decks or Semi-random theme decks.
+
+
+The new Variant mode (was named Multiplayer):
+
+A new multiplayer mode has also been added. You should be able to play against multiple AI opponents at this time. You should note that the current Archenemy mode does not use Schemes at this time.
+
+A lot of things are planned for this new multiplayer mode and it will take time to finish. Please enjoy what we have at this time and be patient. :)
+
+Since Multiplayer is so new, not all cards will be 100% compatible right away as we expand scripting to handle multiple players.
+
+The older match layout files are incompatible with the new multiplayer mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files have to go and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
+
+
+The new damage dialog:
+
+The new damage dialog now uses the new UI.
+
+
 When choosing cards, sources, etc. using a list box:
 
 When choosing cards, sources, etc. using a list box, the currently selected card will now be visually highlighted on the playfield (to better distinguish between e.g. three different cards with the same name on the playfield). Now the visual highlighting of a card will also work when declaring the order of blockers.
