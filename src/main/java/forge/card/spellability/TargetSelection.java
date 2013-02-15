@@ -347,6 +347,12 @@ public class TargetSelection {
             }
         }
 
+        if (!tgt.isUniqueTargets()) {
+            // Previously targeted objects needed to be used for same controller above, but causes problems
+            // if passed through with certain card functionality to inputTargetSpecific so resetting now
+            objects = new ArrayList<Object>();
+        }
+        
         if (zone.contains(ZoneType.Battlefield) && zone.size() == 1) {
             Singletons.getModel().getMatch().getInput().setInput(this.inputTargetSpecific(choices, true, mandatory, objects));
         } else {
