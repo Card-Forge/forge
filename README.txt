@@ -146,6 +146,16 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+The deck conformance/legality limitaion:
+
+The deck conformance/legality is now a user-togglable preference and is enabled by default. You no longer need to turn on dev mode to play an illegal deck.
+
+
+Using Forge on displays that are only 600 pixels tall or slightly larger:
+
+The "Sanctioned Format: Constructed" view should now be compatible with displays that are only 600 pixels tall. The deck list at 600 pixels tall should now display three lines of text rather than less than a single line of text.
+
+
 We are looking for help in finding additional sound files for the new sound feature:
 
 This version of forge includes a few sound files for the new sound effect system. While we have several sounds assigned to a few of the available events there are a number of events that do not yet have a assigned sound file. This should be considered a work in progress and we could use some help in finding interesting sounds that we can add to forge.
@@ -175,6 +185,10 @@ Jamuraa contains:
 - 9 challenges, including the 4 demon planeswalkers (the 3 demon rulers and Lilith) and 5 other special scenarios set in Jamuraa. All challenges are repeatable. All are fairly hard, and the 4 demon challenges are especially fiendish.
 For the most part, the opponent duel and challenge decks are built with the same format restrictions as your own cardpool, and some of the easiest opponent decks were in fact based on a limited cardpool. But there will be exceptions, especially in the hard/very hard decks and challenges, which can be more like Vintage/T1 decks than pure Mirage + 5th Edition decks. There will be older cards here and there, and maybe even a random Tempest card or two (although these are extremely scarce!). 
 Hint: if you find the later 'Vintage' opponent decks unfair or near-impossible to beat with your 5th Edition/Mirage block cards, you can Travel to Shandalar and collect some old power cards there, and then return to Jamuraa. Just remember to complete your challenges before traveling.
+
+Information on the quest worlds format can be found in this topic:
+
+http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9258
 
 
 New Deck Editor features with improved Filters:
