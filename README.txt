@@ -146,6 +146,11 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+The new Archenemy mode:
+
+Schemes have been added to the Archenemy mode. This is a work in progress and there may be a bug or two for us to find.
+
+
 Quest Worlds information, stage 1:
 
 This version simply allows you to travel between the regular quest world and the newly-added Shandalar world to get different duel opponents and challenges. You will have to complete your current challenges before travelling or you will lose them. 
