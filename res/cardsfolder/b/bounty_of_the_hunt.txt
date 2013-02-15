@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Instant
 Text:no text
 A:SP$ PutCounter | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | RememberCounters$ True | SubAbility$ DelayedRemoveCounters | RememberTargets$ True | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures. For each +1/+1 counter you put on a creature this way, remove a +1/+1 counter from that creature at the beginning of the next cleanup step.
-A:SP$ PutCounter | Cost$ ExileFromHand<1/Card.Green> | CostDesc$ You may exile a green card from your hand | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | RememberCounters$ True | SubAbility$ DelayedRemoveCounters | RememberTargets$ True | SpellDescription$  rather than pay CARDNAME's mana cost.
+SVar:AltCost:Cost$ExileFromHand<1/Card.Green> | Description$ You may exile a green card from your hand rather than pay CARDNAME's mana cost.
 SVar:DelayedRemoveCounters:DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | Execute$ TrigRemoveCounter | Secondary$ True | TriggerDescription$ For each +1/+1 counter you put on a creature this way, remove a +1/+1 counter from that creature at the beginning of the next cleanup step.
 SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
