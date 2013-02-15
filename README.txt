@@ -146,6 +146,16 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+Multiple quest files:
+ 
+Multiple quest files are now supported. This allows you to start a new quest and give it a unique name, and it will not overwrite your previous quest game file.
+
+
+The new UI now uses tabbed panes:
+
+We now have a tab system for sub-menus in the home screen. Quest mode refactored to fit this tab system. It's now considerably easier to use - less cramped, less clicks, more functionality.
+
+
 The quest mode card shop:
 
 You can now buy PreCon decks, Starter packs, Tournament packs and Fat packs from the quest mode card shop.
