@@ -146,6 +146,29 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+Quest Worlds information, stage 1:
+
+This version simply allows you to travel between the regular quest world and the newly-added Shandalar world to get different duel opponents and challenges. You will have to complete your current challenges before travelling or you will lose them. 
+
+World-specific format enforcing and starting world selection will be added in later stages. Also, something has to be done about locked (non-repeatabled) challenges so they do not end up locking other challenges in different worlds.
+
+
+Forge now has sideboards for the human player:
+
+Sideboards have been implemented for Human players. We currently have:
+
+* Sideboard creation support in relevant deck editor modes.
+* In-game sideboarding with persistence between rounds in a match.
+* Sideboard supported as a zone, with some relevant cards already in.
+* Correct validation of decks, both before the game starts and between the rounds (Limited min 40, Constructed min 60, free-form sideboard/main in Draft and Sealed, 1:1 sideboarding with 0 or 15 cards allowed in sideboard in Constructed (all variants) and Quest; OK to have less than minimum between rounds in a match in all modes if lost cards on ante).
+* Correct (fingers crossed) interaction of sideboarding with other relevant aspects of Forge rule enforcement (mulligan and ante interactions were corrected, initial hand and library between rounds were both corrected, everything else looks so far so good).
+
+We don't yet have:
+
+* Sorting in the in-game sideboard editor.
+* AI sideboarding.
+
+
 The deck conformance/legality limitaion:
 
 The deck conformance/legality is now a user-togglable preference and is enabled by default. You no longer need to turn on dev mode to play an illegal deck.
