@@ -143,10 +143,8 @@ To report a bug with an official beta release, please follow the instructions at
 To report a bug (1) with an alpha test, (2) with a nightly build, (3) with something compiled from the official Forge software repository, or (4) with the leading edge (formerly "SVN Bug Reports"), please do not submit your bugs to the forum. Instead, please follow the instructions at http://www.slightlymagic.net/wiki/How_to_File_a_Bug_Report_with_Mantis .
 
 
-*************************** start adding material from the old betas starting here ***************************
 
-
-A new very hard tier category Quest mode:
+A new very hard tier category in Quest mode:
 
 You will notice a new very hard tier category for the opponent. As you change from the previous tier to the next tier (easy to medium, etc.) you will now notice that there is not an abrupt change over. There is now a mixture of decks from the previous tier and the next tier for you to chose from. When you win a match you will complete the advancement to the next tier.
 
@@ -170,7 +168,7 @@ Rob and Marc have worked together to add in a new feature which will overlay a c
 
 Informational icons overlays for cards on the battlefield:
 
-Added icons that will be drawn over the cards in the battlefield for phasing and counters. The attack/block/phasing icons and counters will now also be shown on large cards, only casting cost will be omitted. Lands and tokens with different amounts/types of counters will no longer stack. Tokens with different summoning sickness will no longer stack. Lands that become creatures will now always be moved to the front row.
+The Battlefield will now display three symbolic icons that will overlay creature cards. These icons are used to denote summoning sickness and whether a creature is attacking or blocking.  Added additional icons that will be drawn over the cards in the battlefield for phasing and counters at a later date. The attack/block/phasing icons and counters will now also be shown on large cards, only casting cost will be omitted. Lands and tokens with different amounts/types of counters will no longer stack. Tokens with different summoning sickness will no longer stack. Lands that become creatures will now always be moved to the front row.
 
 
 Optional choice for abilities that are on the stack:
