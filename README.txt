@@ -146,6 +146,13 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+The developer mode:
+
+The developer mode gives us a few new features. These new features will primarily interest the devs as it will now help to test out specific cards while testing combat code changes. You can turn on or off this mode at the Home View -> Game Settings -> Preferences -> Gameplay Options section.
+
+When turned on the battlefield will have a tab named "Dev Mode". There are a number of useful options in this tab. You can disable loss by milling, generate mana in your mana pool, tutor for card, etc.
+
+
 New foil card image available:
 
 Rob and Marc have worked together to add in a new feature which will overlay a card's image with a foil like film. A few random cards will have a foil like image in constructed mode games and possibly quest mode games. There is a check box on the Home View -> Game Settings -> Preferences view that you can use to turn this feature on or off.
