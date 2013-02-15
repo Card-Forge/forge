@@ -106,7 +106,7 @@ public class GuiChoose {
         return GuiChoose.getChoices(message, 0, choices.length, choices);
     } // getChoice()
 
-    public static <T> List<T> noneOrMany(final String message, final List<T> choices) {
+    public static <T> List<T> noneOrMany(final String message, final Collection<T> choices) {
         return GuiChoose.getChoices(message, 0, choices.size(), choices);
     }
 

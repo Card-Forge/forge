@@ -168,7 +168,7 @@ public class PlayerControllerAi extends PlayerController {
      */
     @Override
     public Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender) {
-        return ComputerUtilCombat.distributeAIDamage(attacker, blockers, damageDealt);
+        return ComputerUtilCombat.distributeAIDamage(attacker, blockers, damageDealt, defender);
     }
 
     /* (non-Javadoc)

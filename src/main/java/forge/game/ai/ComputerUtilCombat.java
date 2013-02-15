@@ -27,6 +27,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
+import forge.GameEntity;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
@@ -1640,19 +1641,20 @@ public class ComputerUtilCombat {
      *            a {@link forge.Card} object.
      * @param block
      *            a {@link forge.CardList} object.
-     * @param damage
+     * @param dmgCanDeal
      *            a int.
+     * @param defender 
      */
-    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final List<Card> block, int damage) {
+    public static Map<Card, Integer> distributeAIDamage(final Card attacker, final List<Card> block, int dmgCanDeal, GameEntity defender) {
         Map<Card, Integer> damageMap = new HashMap<Card, Integer>();
         
         if (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                 || attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")) {
-            damageMap.put(null, damage);
+            damageMap.put(null, dmgCanDeal);
             return damageMap;
         }
     
-
+        boolean isAttacking = defender != null; 
         
         final boolean hasTrample = attacker.hasKeyword("Trample");
     
@@ -1663,55 +1665,52 @@ public class ComputerUtilCombat {
             // trample
             if (hasTrample) {
     
-                int damageNeeded = 0;
+                int dmgToKill = ComputerUtilCombat.getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
     
-                // TODO if the human can be killed distribute only the minimum
-                // of damage to the blocker
-    
-                damageNeeded = ComputerUtilCombat.getEnoughDamageToKill(blocker, damage, attacker, true);
-    
-                if (damageNeeded > damage) {
-                    damageNeeded = Math.min(blocker.getLethalDamage(), damage);
+                if (dmgCanDeal < dmgToKill) {
+                    dmgToKill = Math.min(blocker.getLethalDamage(), dmgCanDeal);
                 } else {
-                    damageNeeded = Math.max(blocker.getLethalDamage(), damageNeeded);
+                    dmgToKill = Math.max(blocker.getLethalDamage(), dmgToKill);
+                }
+                
+                if (!isAttacking) { // no entity to deliver damage via trample
+                    dmgToKill = dmgCanDeal;
                 }
     
-                final int trample = damage - damageNeeded;
+                final int remainingDmg = dmgCanDeal - dmgToKill;
     
-                // If Extra trample damage, assign to defending
-                // player/planeswalker
-                if (0 < trample) {
-                    damageMap.put(null, trample);
+                // If Extra trample damage, assign to defending player/planeswalker (when there is one)
+                if (remainingDmg > 0) {
+                    damageMap.put(null, remainingDmg);
                 }
     
-                damageMap.put(blocker, damageNeeded);
+                damageMap.put(blocker, dmgToKill);
             } else {
-                damageMap.put(blocker, damage);
+                damageMap.put(blocker, dmgCanDeal);
             }
         } // 1 blocker
         else {
-            boolean killsAllBlockers = true;
             // Does the attacker deal lethal damage to all blockers
             //Blocking Order now determined after declare blockers
             Card lastBlocker = null;
             for (final Card b : block) {
-                final int enoughDamageToKill = ComputerUtilCombat.getEnoughDamageToKill(b, damage, attacker, true);
-                if (enoughDamageToKill <= damage) {
-                    damage -= enoughDamageToKill;
-                    damageMap.put(b, enoughDamageToKill);
-                } else {
-                    killsAllBlockers = false;
-                }
                 lastBlocker = b;
+                final int enoughDamageToKill = ComputerUtilCombat.getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
+                if (enoughDamageToKill <= dmgCanDeal) {
+                    damageMap.put(b, enoughDamageToKill);
+                    dmgCanDeal -= enoughDamageToKill;
+                } else {
+                    damageMap.put(b, dmgCanDeal);
+                    dmgCanDeal = 0;
+                    break;
+                }
             } // for
     
-            if (killsAllBlockers && damage > 0) {
-            // if attacker has no trample, and there's damage left, assign the rest to the last blocker
-                if (!hasTrample && lastBlocker != null) {
-                    damageMap.put(lastBlocker, damage);
-                    damage = 0;
-                } else if (hasTrample) {
-                    damageMap.put(null, damage);
+            if (dmgCanDeal > 0 ) { // if any damage left undistributed, 
+                if (hasTrample && isAttacking) // if you have trample, deal damage to defending entity
+                    damageMap.put(null, dmgCanDeal);
+                else if ( lastBlocker != null ) { // otherwise flush it into last blocker
+                    damageMap.put(lastBlocker, dmgCanDeal + damageMap.get(lastBlocker));
                 }
             }
         }
