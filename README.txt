@@ -146,6 +146,13 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+The Forge sealed deck mode:
+
+The Forge sealed deck mode has undergone significant changes. You can find these in the 1.2.14 beta and later versions. Instead of a single sealed deck match, you can now choose a 1-5 round gauntlet-style tournament where you will face increasingly difficult (probably) opponent decks. You can also choose to use starter packs instead of boosters in the block mode, choose to use 3-12 boosters instead of the default 6 in the full cardpool and custom (cube) modes, and so on.
+
+Perhaps the most notable changes to the sealed deck mode are related to "fantasy blocks" and the greatly increased flexibility you have when you are building your own blocks.
+
+
 The new Gauntlet mode:
 
 A new Gauntlet mode has been added. This mode gives you four options: Quick Gauntlet, Build A Gauntlet, Load Gauntlet and Gauntlet Contests. You can create a group of computer decks to play against by choosing either Custom user decks, Quest Decks, Fully random color decks or Semi-random theme decks.
