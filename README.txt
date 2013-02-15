@@ -146,6 +146,15 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+User-created themes for Forge's background, fonts, colors and icons:
+
+When you select a new skin in the Preferences view Forge should save the change to the preference file, quit and then automatically re-launch with the new skin displayed. During testing some people have noticed that Forge is not restarting on their computer and they have to re-launch Forge themselves.
+
+If anyone is interested in creating additional themes for inclusion in the Forge project then you should visit this topic at CCGH:
+
+http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8449
+
+
 The Battlefield UI:
 
 The Battlefield UI has a new feature implemented which allows us to move and resize the panels to new places on the battlefield. This allows us to personalize the battlefield display to our own liking. You should try moving panels by clicking and dragging their tabs.
