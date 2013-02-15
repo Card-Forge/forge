@@ -227,6 +227,10 @@ The new deck editors include:
 
 Performance issues on low end machines:
 
+Several people have noticed forge slowing down after playing a number of matches without quitting forge in between the matches that are played. The new UI may be involved somehow. We also hope to have this figured out and fixed in the near future. Please be patient in the meanwhile. A recent fix was implemented that should improve the slowdown problem somewhat.
+
+A lot of time and effort have gone into fixing the memory leak problems that were recently noticed and reported to the dev team. Doublestrike and Slapshot deserve our applause and we are very thankful. People should be able to now play long multi match sessions without noticing slow downs and pauses.
+
 Some performance changes were made to Forge and it should now operate more quickly on low end machines. Mid to high level machines are unlikely to notice as much of a performance increase. We tried to hunt down all of the bugs that resulted from these changes but there may still be a bug or two in this beta release.
 
 
