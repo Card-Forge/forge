@@ -146,6 +146,18 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+The Battlefield UI:
+
+The Battlefield UI has a new feature implemented which allows us to move and resize the panels to new places on the battlefield. This allows us to personalize the battlefield display to our own liking. You should try moving panels by clicking and dragging their tabs.
+
+If you do not like your efforts to personalize the battlefield display you can revert the display to the default layout by clicking on the Dock button labeled "Revert layout".
+
+
+The pets in quest mode:
+
+Some adjustments to the pets in quest mode were made. This includes a new pet.
+
+
 The dock tab has a new button labeled "Open Layout":
 
 The dock now has a new button labeled "Open Layout" along with old button with original function "Revert Layout". Modifying the battlefield layout will result in your changes being saved to a file named  "match_preferred.xml". You can copy and rename that file to share your layouts with other people.
