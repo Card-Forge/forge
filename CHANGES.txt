@@ -1,11 +1,10 @@
 Forge Beta: 0#-##-2013 ver 1.3.9
 
-(Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
-(Thanks to the MAGE team for permission to use their targeting arrows.)
-(Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
 12### cards in total.
 
+
+New Features:
 
 You can now cast cards for it's miracle cost without getting a crash. Blocking with a creature was not resetting after combat and this would prevent this creature from blocking in subsequent turns, now fixed.
 
@@ -21,7 +20,94 @@ In recent weeks people had noticed that the computer was picking the weakest car
 
 Work was also done on making the UI more keyboard-friendly.  For example, the OK button should now stay focused during matches, so you can advance through the stages by hitting Enter without having to go over and click the button all the time.  If you find the button is losing focus, please report it as a bug.
 
---
+Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards). 
+The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
+
+
+Added the following cards:
+
+Ghosts of the Innocent
+Pendrell Flux
+Disruption Aura
+Library of Leng
+Temporal Extortion
+Aven Shrine
+Bloom Tender
+Bomb Squad
+Cabal Shrine
+Chant of Vitu-Ghazi
+Covenant of Minds
+Crashing Boars
+Crush Underfoot
+Desecrator Hag
+Dwarven Shrine
+Eye for an Eye
+Hint of Insanity
+Holistic Wisdom
+Infectious Rage
+Knowledge Exploitation
+Lightning Dart
+Memory Crystal
+Mist of Stagnation
+Moonring Mirror
+Nantuko Shrine
+Phyrexian Purge
+Planeswalker's Mischief
+Protean Hulk
+Purgatory
+Quenchable Fire
+Retribution
+Reviving Vapors
+Reweave
+Sapphire Drake
+Searing Rays
+Sisters of Stone Death Avatar
+Sphinx Ambassador
+Talara's Bane
+Thelon of Havenwood
+Mist of Stagnation
+Unforge
+Viridian Zealot Avatar
+Warren Weirding
+Worldpurge
+Flash
+Forked Lightning
+Embolden
+Jaws of Stone
+Living Inferno
+Magmatic Core
+Remedy
+Rolling Thunder
+Aurelia's Fury
+Pollen Remedy
+Conflagrate
+Hail of Arrows
+Fire Covenant
+Meteor Shower
+Infernal Harvest
+Rock Slide
+Serra's Hymn
+Volcanic Wind
+Spoils of War
+Fiery Justice
+Bounty of the Hunt
+Shambling Swarm
+Fire and Brimstone
+
+
+Added the following Phenomenons:
+
+Chaotic AEther
+Planewide Disaster
+
+
+Added the following Vanguard Avatars:
+
+Sisters of Stone Death Avatar
+Viridian Zealot Avatar
+
+
+Known Issues:
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
 
@@ -40,22 +126,24 @@ We are now using a different system for our snapshot and beta releases. Unfortun
 
 Forge is likely to be compatible with Java 7 at this time. Some people have used forge with Java 7 and have not reported any problems that are related to Java 7. If you would like to upgrade to Java 7 and have held off because of Forge then you may upgrade as we do not think that it will cause an incompatibility type of problem. We will continue to try to maintain compatibility with Java 6 for the foreseeable future.
 
---
-
-Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards). 
-The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
-
---
-
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove useful. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
 
 The archive format used for the Forge distribution is ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to extract/decompress these ".tar.bz2" archives. We recommend that you extract/decompress the Forge archive into a new and unused folder.
 
 Some people use the Windows application 7zip. This utility can be found at http://www.7-zip.org/download.html. Mac users can double click on the archive and the application Archive Utility will launch and extract the archive. Mac users do not need to download a separate utility.
 
---
 
-Fixes/Features:
+Contributors to This Release:
+
+
+
+
+(Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
+(Thanks to the MAGE team for permission to use their targeting arrows.)
+(Thanks to http://www.freesound.org/browse/ for providing some sound files.)
+
+
+Detailed Changelog: (This will likely be deleted in the near future)
 
 - Added set info for Sewers of Estark
 - Cleared out the changes.txt file, now ready for new material.
@@ -207,94 +295,6 @@ Fixes/Features:
 - change FControl state from int into an enum
 - ensure All Decks and Deck Generation tabs only show up in the Constructed deck editor
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-
-
-Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
-
-
-
-
-Added the following Vanguard Avatar:
-
-Sisters of Stone Death Avatar
-Viridian Zealot Avatar
-
-
-Added the following Phenomenons:
-
-Chaotic AEther
-Planewide Disaster
-
-
-Added the following cards:
-
-Ghosts of the Innocent
-Pendrell Flux
-Disruption Aura
-Library of Leng
-Temporal Extortion
-Aven Shrine
-Bloom Tender
-Bomb Squad
-Cabal Shrine
-Chant of Vitu-Ghazi
-Covenant of Minds
-Crashing Boars
-Crush Underfoot
-Desecrator Hag
-Dwarven Shrine
-Eye for an Eye
-Hint of Insanity
-Holistic Wisdom
-Infectious Rage
-Knowledge Exploitation
-Lightning Dart
-Memory Crystal
-Mist of Stagnation
-Moonring Mirror
-Nantuko Shrine
-Phyrexian Purge
-Planeswalker's Mischief
-Protean Hulk
-Purgatory
-Quenchable Fire
-Retribution
-Reviving Vapors
-Reweave
-Sapphire Drake
-Searing Rays
-Sisters of Stone Death Avatar
-Sphinx Ambassador
-Talara's Bane
-Thelon of Havenwood
-Mist of Stagnation
-Unforge
-Viridian Zealot Avatar
-Warren Weirding
-Worldpurge
-Flash
-Forked Lightning
-Embolden
-Jaws of Stone
-Living Inferno
-Magmatic Core
-Remedy
-Rolling Thunder
-Aurelia's Fury
-Pollen Remedy
-Conflagrate
-Hail of Arrows
-Fire Covenant
-Meteor Shower
-Infernal Harvest
-Rock Slide
-Serra's Hymn
-Volcanic Wind
-Spoils of War
-Fiery Justice
-Bounty of the Hunt
-Shambling Swarm
-Fire and Brimstone
 
 
 end
