@@ -279,6 +279,10 @@ Please note that the issue is most likely caused by Mountain Lion's Gatekeeper f
 
 The Forge sealed deck mode:
 
+Sealed Deck mode has had a complete rewrite. Full cardpool, block and custom modes are supported. Custom sealed files in the res/sealed folder are exactly the same as custom draft files, except the file extension ".sealed".
+
+A distinction may now be made between AI decks and Human decks, with the addition of a deck Metadata "PlayerType", which right now just helps by sorting human decks into the human combo box and AI decks into the AI combo box.
+
 The Forge sealed deck mode has undergone significant changes. You can find these in the 1.2.14 beta and later versions. Instead of a single sealed deck match, you can now choose a 1-5 round gauntlet-style tournament where you will face increasingly difficult (probably) opponent decks. You can also choose to use starter packs instead of boosters in the block mode, choose to use 3-12 boosters instead of the default 6 in the full cardpool and custom (cube) modes, and so on.
 
 Perhaps the most notable changes to the sealed deck mode are related to "fantasy blocks" and the greatly increased flexibility you have when you are building your own blocks.
