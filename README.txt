@@ -146,6 +146,16 @@ To report a bug (1) with an alpha test, (2) with a nightly build, (3) with somet
 *************************** start adding material from the old betas starting here ***************************
 
 
+A new very hard tier category Quest mode:
+
+You will notice a new very hard tier category for the opponent. As you change from the previous tier to the next tier (easy to medium, etc.) you will now notice that there is not an abrupt change over. There is now a mixture of decks from the previous tier and the next tier for you to chose from. When you win a match you will complete the advancement to the next tier.
+
+
+The Forge Booster Draft mode:
+
+A significant re-write of the Booster Draft functionality has taken place. Draft from the Full card pool, sets/blocks or custom drafts (like cube). The AI will pick cards more intelligently, and builds decks from picked cards. Old method would pick cards for deck and then stop picking new cards.
+
+
 The developer mode:
 
 The developer mode gives us a few new features. These new features will primarily interest the devs as it will now help to test out specific cards while testing combat code changes. You can turn on or off this mode at the Home View -> Game Settings -> Preferences -> Gameplay Options section.
