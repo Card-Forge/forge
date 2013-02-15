@@ -301,7 +301,7 @@ public class QuestWinLose extends ControlWinLose {
         Singletons.getModel().getPreferences().writeMatchPreferences();
         Singletons.getModel().getPreferences().save();
 
-        Singletons.getControl().changeState(FControl.HOME_SCREEN);
+        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
 
         SOverlayUtils.hideOverlay();
     }

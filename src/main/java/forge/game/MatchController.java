@@ -146,7 +146,7 @@ public class MatchController {
             CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getRegisteredPlayers(), localHuman);
             CDock.SINGLETON_INSTANCE.onGameStarts(currentGame, localHuman);
             Singletons.getModel().getPreferences().actuateMatchPreferences();
-            Singletons.getControl().changeState(FControl.MATCH_SCREEN);
+            Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
             SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
             // set all observers

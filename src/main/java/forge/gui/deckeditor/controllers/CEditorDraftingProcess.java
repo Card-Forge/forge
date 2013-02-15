@@ -19,7 +19,6 @@ package forge.gui.deckeditor.controllers;
 
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
 
 import forge.Singletons;
 import forge.control.FControl;
@@ -37,13 +36,11 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.framework.DragCell;
-import forge.gui.framework.SRearrangingUtil;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
-import forge.view.FView;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
@@ -98,21 +95,8 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, SColumnUtil.getCatalogDefaultColumns());
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
-        /*
-        this.getTableCatalog().getTable().addMouseListener(this.pickWithMouse);
-        this.getTableCatalog().getTable().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') {
-                    CEditorDraftingProcess.this.addCard();
-                }
-            }
-        });
-        */
-
         ccAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
-
     }
 
     /* (non-Javadoc)
@@ -247,7 +231,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
             Singletons.getModel().getDecks().getDraft().add(finishedDraft);
         }
 
-        FControl.SINGLETON_INSTANCE.changeState(FControl.HOME_SCREEN);
+        FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.HOME_SCREEN);
     }
 
     //========== Overridden from ACEditorBase
@@ -291,42 +275,11 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
-        if (VDeckgen.SINGLETON_INSTANCE.getParentCell() != null) {
-            deckGenParent = VDeckgen.SINGLETON_INSTANCE.getParentCell();
-            deckGenParent.removeDoc(VDeckgen.SINGLETON_INSTANCE);
-            VDeckgen.SINGLETON_INSTANCE.setParentCell(null);
-
-            // If Deck Gen was first tab, the new first tab needs re-selecting.
-            if (deckGenParent.getDocs().size() > 0) {
-                deckGenParent.setSelected(deckGenParent.getDocs().get(0));
-            }
-        }
-        if (VAllDecks.SINGLETON_INSTANCE.getParentCell() != null) {
-            allDecksParent = VAllDecks.SINGLETON_INSTANCE.getParentCell();
-            allDecksParent.removeDoc(VAllDecks.SINGLETON_INSTANCE);
-            VAllDecks.SINGLETON_INSTANCE.setParentCell(null);
-
-            // If All Decks was first tab, the new first tab needs re-selecting.
-            if (allDecksParent.getDocs().size() > 0) {
-                allDecksParent.setSelected(allDecksParent.getDocs().get(0));
-            }
-        }
+        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
         
         // set catalog table to single-selection only mode
         getTableCatalog().getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        // Fill in gaps
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                for (final DragCell c : FView.SINGLETON_INSTANCE.getDragCells()) {
-                    if (c.getDocs().size() == 0) {
-                        SRearrangingUtil.fillGap(c);
-                        FView.SINGLETON_INSTANCE.removeDragCell(c);
-                    }
-                }
-            }
-        });
     }
 
     /* (non-Javadoc)
@@ -356,7 +309,6 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         
         // set catalog table back to free-selection mode
         getTableCatalog().getTable().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
 
         return true;
     }

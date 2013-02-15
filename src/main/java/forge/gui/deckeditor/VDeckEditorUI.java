@@ -1,8 +1,7 @@
 package forge.gui.deckeditor;
 
-import javax.swing.SwingWorker;
+import javax.swing.SwingUtilities;
 
-import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
@@ -33,15 +32,12 @@ public enum VDeckEditorUI implements IVTopLevelUI {
      */
     @Override
     public void populate() {
-        final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
+        SLayoutIO.loadLayout(null);
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public Void doInBackground() {
-                SLayoutIO.loadLayout(null);
+            public void run() {
                 VCardCatalog.SINGLETON_INSTANCE.focusTable();
-                return null;
             }
-        };
-        CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
-        w.execute();
+        });
     }
 }

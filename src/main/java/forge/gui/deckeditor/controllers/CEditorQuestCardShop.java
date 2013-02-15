@@ -43,8 +43,11 @@ import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
+import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.deckeditor.views.VDeckgen;
+import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -95,6 +98,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private final ItemPool<InventoryItem> fullCatalogCards =
             ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), InventoryItem.class);
     private boolean showingFullCatalog = false;
+    private DragCell allDecksParent = null;
+    private DragCell deckGenParent = null;
 
     // get pricelist:
     private final ReadPriceList r = new ReadPriceList();
@@ -484,6 +489,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 + "% of their value.<br>" + maxSellingPrice + "</html>");
         
         VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.PACK).setVisible(true);
+        
+        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
     }
 
     /* (non-Javadoc)
@@ -515,6 +523,14 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText(CDRemLabel);
         
         VCardCatalog.SINGLETON_INSTANCE.getStatLabel(SEditorUtil.StatTypes.PACK).setVisible(false);
+        
+        //Re-add tabs
+        if (deckGenParent != null) {
+            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
+        }
+        if (allDecksParent != null) {
+            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        }
         
         return true;
     }

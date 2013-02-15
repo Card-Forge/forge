@@ -37,8 +37,11 @@ import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
+import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.deckeditor.views.VDeckgen;
+import forge.gui.framework.DragCell;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
@@ -61,6 +64,8 @@ import forge.quest.QuestController;
 public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     private final QuestController questData;
     private final DeckController<Deck> controller;
+    private DragCell allDecksParent = null;
+    private DragCell deckGenParent = null;
     private boolean sideboardMode = false;
 
     private Map<CardPrinted, Integer> decksUsingMyCards;
@@ -68,7 +73,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            final Integer iValue = CEditorQuest.this.decksUsingMyCards.get(from.getKey());
+            final Integer iValue = decksUsingMyCards.get(from.getKey());
             return iValue == null ? Integer.valueOf(0) : iValue;
         }
     };
@@ -76,7 +81,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     private final Function<Entry<InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            final Integer iValue = CEditorQuest.this.decksUsingMyCards.get(from.getKey());
+            final Integer iValue = decksUsingMyCards.get(from.getKey());
             return iValue == null ? "" : iValue.toString();
         }
     };
@@ -289,6 +294,9 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
                 sideboardMode = !sideboardMode;
                 switchEditorMode(sideboardMode);
         } });
+        
+        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
 
         this.getDeckController().setModel(deck);
     }
@@ -302,6 +310,14 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         if (okToExit) {
             Singletons.getModel().getQuest().save();
             CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
+            //Re-add tabs
+            if (deckGenParent != null) {
+                deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
+            }
+            if (allDecksParent != null) {
+                allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+            }
+            
         }
         return okToExit;
     }

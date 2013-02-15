@@ -282,7 +282,7 @@ public enum TargetingOverlay {
         @Override
         public void paintComponent(final Graphics g) {
             // No need for this except in match view
-            if (FControl.SINGLETON_INSTANCE.getState() != 1) { return; }
+            if (FControl.SINGLETON_INSTANCE.getState() != FControl.Screens.MATCH_SCREEN) { return; }
 
             super.paintComponent(g);
 

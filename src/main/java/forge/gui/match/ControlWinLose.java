@@ -91,7 +91,7 @@ public class ControlWinLose {
     public void actionOnQuit() {
         // Reset other stuff
         saveOptions();
-        Singletons.getControl().changeState(FControl.HOME_SCREEN);
+        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
         SOverlayUtils.hideOverlay();
     }
 

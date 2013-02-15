@@ -67,26 +67,21 @@ public enum FControl {
 
     private List<Shortcut> shortcuts;
     private JLayeredPane display;
-    private int state = -1;
+    private Screens state = Screens.UNKNOWN;
 
     private WindowListener waDefault, waConcede, waLeaveBazaar, waLeaveEditor;
 
-    /** */
-    public static final int HOME_SCREEN = 0;
-    /** */
-    public static final int MATCH_SCREEN = 1;
-    /** */
-    public static final int DECK_EDITOR_CONSTRUCTED = 2;
-    /** */
-    public static final int QUEST_BAZAAR = 3;
-    /** */
-    public static final int DECK_EDITOR_LIMITED = 4;
-    /** */
-    public static final int DECK_EDITOR_QUEST = 5;
-    /** */
-    public static final int QUEST_CARD_SHOP = 6;
-    /** */
-    public static final int DRAFTING_PROCESS = 7;
+    public static enum Screens {
+        UNKNOWN,
+        HOME_SCREEN,
+        MATCH_SCREEN,
+        DECK_EDITOR_CONSTRUCTED,
+        QUEST_BAZAAR,
+        DECK_EDITOR_LIMITED,
+        DECK_EDITOR_QUEST,
+        QUEST_CARD_SHOP,
+        DRAFTING_PROCESS
+    }
 
     private final SoundSystem soundSystem = new SoundSystem();
 
@@ -127,7 +122,7 @@ public enum FControl {
                 Singletons.getView().getFrame().setDefaultCloseOperation(
                         WindowConstants.DO_NOTHING_ON_CLOSE);
 
-                changeState(FControl.HOME_SCREEN);
+                changeState(Screens.HOME_SCREEN);
             }
         };
 
@@ -137,7 +132,7 @@ public enum FControl {
                  Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
                  if (CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().exit()) {
-                     changeState(FControl.HOME_SCREEN);
+                     changeState(Screens.HOME_SCREEN);
                  }
              }
          };
@@ -185,17 +180,11 @@ public enum FControl {
     }
 
     /**
-     * <p>
-     * changeState.
-     * </p>
      * Switches between display states in top level JFrame.
-     * 
-     * @param i0
-     *            &emsp; State index: 0 for home, 1 for match, etc.
      */
-    public void changeState(final int i0) {
+    public void changeState(Screens screen) {
         clearChildren(JLayeredPane.DEFAULT_LAYER);
-        this.state = i0;
+        this.state = screen;
 
         Singletons.getView().getFrame().removeWindowListener(waDefault);
         Singletons.getView().getFrame().removeWindowListener(waConcede);
@@ -203,7 +192,7 @@ public enum FControl {
         Singletons.getView().getFrame().removeWindowListener(waLeaveEditor);
 
         // Fire up new state
-        switch (i0) {
+        switch (screen) {
             case HOME_SCREEN:
                 SOverlayUtils.hideTargetingOverlay();
                 VHomeUI.SINGLETON_INSTANCE.populate();
@@ -242,6 +231,7 @@ public enum FControl {
                 break;
 
             default:
+                throw new RuntimeException("unhandled screen: " + screen);
         }
     }
 
@@ -251,7 +241,7 @@ public enum FControl {
      * 
      * @return {@link java.lang.Integer}
      * */
-    public int getState() {
+    public Screens getState() {
         return this.state;
     }
 
@@ -313,7 +303,6 @@ public enum FControl {
      * @return
      */
     public SoundSystem getSoundSystem() {
-        // TODO Auto-generated method stub
         return soundSystem;
     }
 }

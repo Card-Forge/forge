@@ -425,31 +425,29 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         switch (this.gametype) {
             case Quest:
                     final CEditorQuest qEditor = new CEditorQuest(Singletons.getModel().getQuest());
-                    CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(qEditor);
                     qEditor.load(d0);
-                    FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);
+                    FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_QUEST);
+                    CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(qEditor);
                 break;
             case Constructed:
-                    CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorConstructed());
-                    FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
-                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().load(d0.getName());
+                    FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
+                    final CEditorConstructed cEditor = new CEditorConstructed();
+                    cEditor.getDeckController().load(d0.getName());
+                    CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(cEditor);
                 break;
             case Sealed:
                 final ACEditorBase<?, T> sEditor = (ACEditorBase<?, T>)
                     new CEditorLimited(Singletons.getModel().getDecks().getSealed());
-
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(sEditor);
-
                 sEditor.getDeckController().load(d0.getName());
-                FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
+                FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_LIMITED);
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(sEditor);
                 break;
             case Draft:
                 final ACEditorBase<?, T> dEditor = (ACEditorBase<?, T>)
                         new CEditorLimited(Singletons.getModel().getDecks().getDraft());
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(dEditor);
-
                 dEditor.getDeckController().load(d0.getName());
-                FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
+                FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_LIMITED);
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(dEditor);
                 break;
             default:
                 break;

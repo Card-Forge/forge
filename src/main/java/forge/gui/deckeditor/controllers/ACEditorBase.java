@@ -17,10 +17,17 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import javax.swing.SwingUtilities;
+
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.EditorTableView;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.gui.framework.SRearrangingUtil;
 import forge.item.InventoryItem;
+import forge.view.FView;
 
 /**
  * Maintains a generically typed architecture for various editing
@@ -38,7 +45,6 @@ import forge.item.InventoryItem;
  * @param <TModel> extends {@link forge.deck.DeckBase}
  */
 public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends DeckBase> {
-
     public interface ContextMenuBuilder {
         /**
          * Adds move-related items to the context menu
@@ -130,4 +136,33 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         this.tblCatalog = table0;
     }
 
+    /**
+     * Removes the specified tab and returns its parent for later re-adding
+     */
+    protected DragCell removeTab (IVDoc<? extends ICDoc> tab) {
+        final DragCell parent;
+        if (tab.getParentCell() == null) {
+            parent = null;
+        } else {
+            parent = tab.getParentCell();
+            parent.removeDoc(tab);
+            tab.setParentCell(null);
+
+            if (parent.getDocs().size() > 0) {
+                // if specified tab was first child of its parent, the new first tab needs re-selecting.
+                parent.setSelected(parent.getDocs().get(0));
+            } else {
+                // if the parent is now childless, fill in the resultant gap
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SRearrangingUtil.fillGap(parent);
+                        FView.SINGLETON_INSTANCE.removeDragCell(parent);
+                    }
+                });
+            }
+        }
+
+        return parent;
+    }
 }

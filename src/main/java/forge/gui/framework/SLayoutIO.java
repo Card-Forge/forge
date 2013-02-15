@@ -220,23 +220,23 @@ public final class SLayoutIO {
         final String dir = NewConstants.LAYOUT_DIR;
 
         switch(FControl.SINGLETON_INSTANCE.getState()) {
-            case FControl.HOME_SCREEN:
+            case HOME_SCREEN:
                 fileDefault = dir + "home_default.xml";
                 filePreferred = dir + "home_preferred.xml";
                 break;
-            case FControl.MATCH_SCREEN:
+            case MATCH_SCREEN:
                 fileDefault = dir + "match_default.xml";
                 filePreferred = dir + "match_preferred.xml";
                 break;
-            case FControl.DECK_EDITOR_CONSTRUCTED:
-            case FControl.DECK_EDITOR_LIMITED:
-            case FControl.DECK_EDITOR_QUEST:
-            case FControl.DRAFTING_PROCESS:
-            case FControl.QUEST_CARD_SHOP:
+            case DECK_EDITOR_CONSTRUCTED:
+            case DECK_EDITOR_LIMITED:
+            case DECK_EDITOR_QUEST:
+            case DRAFTING_PROCESS:
+            case QUEST_CARD_SHOP:
                 fileDefault = dir + "editor_default.xml";
                 filePreferred = dir + "editor_preferred.xml";
                 break;
-            case FControl.QUEST_BAZAAR:
+            case QUEST_BAZAAR:
                 fileDefault = dir + "bazaar_default.xml";
                 filePreferred = dir + "bazaar_preferred.xml";
                 break;

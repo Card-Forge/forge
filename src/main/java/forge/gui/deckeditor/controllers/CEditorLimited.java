@@ -27,8 +27,11 @@ import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.tables.SColumnUtil;
+import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.deckeditor.views.VDeckgen;
+import forge.gui.framework.DragCell;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
 import forge.item.CardPrinted;
@@ -46,6 +49,8 @@ import forge.util.IStorage;
 public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
 
     private final DeckController<DeckGroup> controller;
+    private DragCell allDecksParent = null;
+    private DragCell deckGenParent = null;
 
     //========== Constructor
 
@@ -169,6 +174,9 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
 
         VCardCatalog.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
         VCardCatalog.SINGLETON_INSTANCE.getLblTitle().setText("Deck Editor: Limited Mode");
+        
+        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
     }
 
     /* (non-Javadoc)
@@ -181,6 +189,15 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
         if (okToExit) {
             CSubmenuDraft.SINGLETON_INSTANCE.update();
             CSubmenuSealed.SINGLETON_INSTANCE.update();
+            
+            //Re-add tabs
+            if (deckGenParent != null) {
+                deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
+            }
+            if (allDecksParent != null) {
+                allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+            }
+            
         }
 
         return okToExit;

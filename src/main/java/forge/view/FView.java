@@ -107,7 +107,7 @@ public enum FView {
         }
 
         // All is ready to go - fire up home screen and discard splash frame.
-        Singletons.getControl().changeState(FControl.HOME_SCREEN);
+        Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
         //CMainMenu.SINGLETON_INSTANCE.selectPrevious();
 
         FView.this.frmSplash.dispose();
@@ -203,7 +203,7 @@ public enum FView {
 
     /** @return {@link forge.view.ViewBazaarUI} */
     public ViewBazaarUI getViewBazaar() {
-        if (Singletons.getControl().getState() != FControl.QUEST_BAZAAR) {
+        if (Singletons.getControl().getState() != FControl.Screens.QUEST_BAZAAR) {
             throw new IllegalArgumentException("FView$getViewBazaar\n"
                     + "may only be called while the bazaar UI is showing.");
         }

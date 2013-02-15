@@ -250,9 +250,9 @@ public class SSubmenuQuestUtil {
         if (!checkActiveQuest("visit the Spell Shop.")) {
             return;
         }
+        FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_QUEST);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
                 new CEditorQuestCardShop(Singletons.getModel().getQuest()));
-        FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);
     }
 
     /** */
@@ -260,7 +260,7 @@ public class SSubmenuQuestUtil {
         if (!checkActiveQuest("Visit the Bazzar.")) {
             return;
         }
-        Singletons.getControl().changeState(FControl.QUEST_BAZAAR);
+        Singletons.getControl().changeState(FControl.Screens.QUEST_BAZAAR);
         Singletons.getView().getFrame().validate();
     }
 

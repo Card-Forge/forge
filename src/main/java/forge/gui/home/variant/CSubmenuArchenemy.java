@@ -79,8 +79,9 @@ public enum CSubmenuArchenemy implements ICDoc {
                     
                 };
                 
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorVariant(Singletons.getModel().getDecks().getScheme(),predSchemes,EDocID.HOME_ARCHENEMY));
-                FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
+                FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
+                        new CEditorVariant(Singletons.getModel().getDecks().getScheme(),predSchemes,EDocID.HOME_ARCHENEMY));
             }
         });
 

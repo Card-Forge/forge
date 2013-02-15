@@ -170,7 +170,7 @@ public enum CSubmenuDraft implements ICDoc {
             draft.showGui(new BoosterDraft(CardPoolLimitation.Custom));
         }
 
-        FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
+        FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DRAFTING_PROCESS);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);
     }
 

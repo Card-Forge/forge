@@ -51,6 +51,7 @@ import forge.gui.CardContainer;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
+import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.tables.EditorTableModel;
@@ -125,6 +126,7 @@ public enum CDeckEditorUI implements CardContainer {
             childController.getTableDeck().setWantElasticColumns(wantElastic);
             childController.getTableCatalog().setWantUnique(wantUnique);
             childController.getTableDeck().setWantUnique(wantUnique);
+            CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
         }
     }
     

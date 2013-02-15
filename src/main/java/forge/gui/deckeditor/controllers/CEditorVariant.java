@@ -33,8 +33,11 @@ import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
+import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.deckeditor.views.VDeckgen;
+import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -55,6 +58,8 @@ import forge.util.IStorage;
  */
 public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
     private final DeckController<Deck> controller;
+    private DragCell allDecksParent = null;
+    private DragCell deckGenParent = null;
     private final Predicate<CardPrinted> cardPoolCondition;
     private final EDocID exitToScreen;
 
@@ -165,6 +170,9 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
         SEditorUtil.resetUI();
+        
+        deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
+        allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);        
 
         this.controller.newModel();
     }
@@ -177,6 +185,19 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
         // Override the submenu save choice - tell it to go to "constructed".
         Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, exitToScreen.toString());
 
-        return SEditorIO.confirmSaveChanges();
+        if (!SEditorIO.confirmSaveChanges())
+        {
+            return false;
+        }
+        
+        //Re-add tabs
+        if (deckGenParent != null) {
+            deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
+        }
+        if (allDecksParent != null) {
+            allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
+        }
+        
+        return true;
     }
 }
