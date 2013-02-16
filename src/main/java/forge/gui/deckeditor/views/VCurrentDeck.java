@@ -99,10 +99,10 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
             .iconScaleAuto(false).hoverable().build();
 
-    private final JLabel btnDoSideboard = new FLabel.Builder()
+    private final JLabel btnCycleSection = new FLabel.Builder()
             .fontSize(14)
-            .text("Deck/Sideboard")
-            .tooltip("Toggle between editing the deck and the sideboard for this deck")
+            .text("Change Section")
+            .tooltip("Toggle between editing the deck and the sideboard/planar/scheme/vanguard parts of this deck")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT))
             .iconScaleAuto(false).hoverable().build();
 
@@ -142,7 +142,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         pnlRemove.setLayout(new MigLayout("insets 0, gap 0, ax center"));
         pnlRemove.add(btnRemove, "w 30%!, h 30px!, gap 10 10 5 5");
         pnlRemove.add(btnRemove4, "w 30%!, h 30px!, gap 10 10 5 5");
-        pnlRemove.add(btnDoSideboard, "w 30%!, h 30px!, gap 10 10 5 5");
+        pnlRemove.add(btnCycleSection, "w 30%!, h 30px!, gap 10 10 5 5");
 
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
@@ -165,7 +165,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         pnlRemoveButtons.setOpaque(false);
         pnlRemoveButtons.add(btnRemove, "w 30%!, h 30px!, gap 0 0 5px 5px");
         pnlRemoveButtons.add(btnRemove4, "w 30%!, h 30px!, gap 0 0 5px 5px");
-        pnlRemoveButtons.add(btnDoSideboard, "w 30%!, h 30px!, gap 0 0 5px 5px");
+        pnlRemoveButtons.add(btnCycleSection, "w 30%!, h 30px!, gap 0 0 5px 5px");
     }
 
     //========== Overridden from IVDoc
@@ -322,7 +322,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     /** @return {@link javax.swing.JPanel} */
     public JLabel getBtnDoSideboard() {
-        return btnDoSideboard;
+        return btnCycleSection;
     }
 
     //========== Other methods

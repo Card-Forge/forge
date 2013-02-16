@@ -17,9 +17,14 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
+import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.Singletons;
@@ -41,6 +46,7 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 import forge.properties.ForgePreferences.FPref;
 
 /**
@@ -55,8 +61,15 @@ import forge.properties.ForgePreferences.FPref;
  */
 public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     private final DeckController<Deck> controller;
-    private boolean sideboardMode = false;
-
+    //private boolean sideboardMode = false;
+    
+    private List<DeckSection> allSections = new ArrayList<DeckSection>();
+    private DeckSection sectionMode = DeckSection.Main;
+    
+    private ItemPoolView<CardPrinted> avatarPool;
+    private ItemPoolView<CardPrinted> planePool;
+    private ItemPoolView<CardPrinted> schemePool;
+    
     //=========== Constructor
     /**
      * Child controller for constructed deck editor UI.
@@ -65,6 +78,55 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
      */
     public CEditorConstructed() {
         super();
+        
+        allSections.add(DeckSection.Main);
+        allSections.add(DeckSection.Sideboard);
+        allSections.add(DeckSection.Avatar);
+        allSections.add(DeckSection.Schemes);
+        allSections.add(DeckSection.Planes);
+        //allSections.add(DeckSection.Commander);
+        
+        avatarPool = ItemPool.createFrom(Iterables.filter(CardDb.variants().getAllCards(),new Predicate<CardPrinted>() {
+
+            @Override
+            public boolean apply(CardPrinted arg0) {
+                if(arg0.getCard().getType().isVanguard())
+                {
+                    return true;
+                }
+                
+                return false;
+            }
+            
+        }),CardPrinted.class);
+        
+        planePool = ItemPool.createFrom(Iterables.filter(CardDb.variants().getAllCards(),new Predicate<CardPrinted>() {
+
+            @Override
+            public boolean apply(CardPrinted arg0) {
+                if(arg0.getCard().getType().isPlane() || arg0.getCard().getType().isPhenomenon())
+                {
+                    return true;
+                }
+                
+                return false;
+            }
+            
+        }),CardPrinted.class);
+        
+        schemePool = ItemPool.createFrom(Iterables.filter(CardDb.variants().getAllCards(),new Predicate<CardPrinted>() {
+
+            @Override
+            public boolean apply(CardPrinted arg0) {
+                if(arg0.getCard().getType().isScheme())
+                {
+                    return true;
+                }
+                
+                return false;
+            }
+            
+        }),CardPrinted.class);
 
         boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
 
@@ -98,17 +160,25 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
             return;
         }
 
+        if (sectionMode == DeckSection.Avatar || sectionMode == DeckSection.Commander) {
+            for(Map.Entry<CardPrinted, Integer> cp : getTableDeck().getCards())
+            {
+                getTableDeck().removeCard(cp.getKey(), cp.getValue());
+            }
+        }
+
         final CardPrinted card = (CardPrinted) item;
         if (toAlternate) {
-            if (!sideboardMode) {
+            if (sectionMode != DeckSection.Sideboard) {
                 controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
             }
         } else {
             getTableDeck().addCard(card, qty);
         }
-        if (sideboardMode) {
+        if (sectionMode == DeckSection.Sideboard) {
             this.getTableCatalog().removeCard(card, qty);
         }
+        
         this.controller.notifyModelChanged();
     }
 
@@ -122,9 +192,9 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         }
 
         final CardPrinted card = (CardPrinted) item;
-        if (toAlternate && !sideboardMode) {
+        if (toAlternate && sectionMode != DeckSection.Sideboard) {
             controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
-        } else if (sideboardMode) {
+        } else if (sectionMode == DeckSection.Sideboard) {
             this.getTableCatalog().addCard(card, qty);
         }
         this.getTableDeck().removeCard(card, qty);
@@ -133,15 +203,15 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
 
     @Override
     public void buildAddContextMenu(ContextMenuBuilder cmb) {
-        cmb.addMoveItems(sideboardMode ? "Move" : "Add", "card", "cards", sideboardMode ? "to sideboard" : "to deck");
-        cmb.addMoveAlternateItems(sideboardMode ? "Remove" : "Add", "card", "cards", sideboardMode ? "from deck" : "to sideboard");
+        cmb.addMoveItems(sectionMode == DeckSection.Sideboard ? "Move" : "Add", "card", "cards", sectionMode == DeckSection.Sideboard ? "to sideboard" : "to deck");
+        cmb.addMoveAlternateItems(sectionMode == DeckSection.Sideboard ? "Remove" : "Add", "card", "cards", sectionMode == DeckSection.Sideboard ? "from deck" : "to sideboard");
         cmb.addTextFilterItem();
     }
     
     @Override
     public void buildRemoveContextMenu(ContextMenuBuilder cmb) {
-        cmb.addMoveItems(sideboardMode ? "Move" : "Remove", "card", "cards", sideboardMode ? "to deck" : "from deck");
-        cmb.addMoveAlternateItems(sideboardMode ? "Remove" : "Move", "card", "cards", sideboardMode ? "from sideboard" : "to sideboard");
+        cmb.addMoveItems(sectionMode == DeckSection.Sideboard ? "Move" : "Remove", "card", "cards", sectionMode == DeckSection.Sideboard ? "to deck" : "from deck");
+        cmb.addMoveAlternateItems(sectionMode == DeckSection.Sideboard ? "Remove" : "Move", "card", "cards", sectionMode == DeckSection.Sideboard ? "from sideboard" : "to sideboard");
     }
 
     /*
@@ -169,28 +239,70 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     /**
      * Switch between the main deck and the sideboard editor.
      */
-    public void switchEditorMode(boolean isSideboarding) {
+    public void cycleEditorMode() {
+        int curindex = allSections.indexOf(sectionMode);
+
+        curindex = curindex == (allSections.size()-1) ? 0 : curindex+1;
+        sectionMode = allSections.get(curindex);
+        
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
 
-        if (isSideboarding) {
-            this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-            this.getTableCatalog().setDeck(this.controller.getModel().getMain());
-            this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
-        } else {
-            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
-            this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-            this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class), true);
-            this.getTableDeck().setDeck(this.controller.getModel().getMain());
+        String title = "";
+        String tabtext = "";
+        Boolean showOptions = true;
+        switch(sectionMode)
+        {
+            case Main:
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
+                this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class), true);
+                this.getTableDeck().setDeck(this.controller.getModel().getMain());
+                showOptions = true;
+                title = "Title: ";
+                tabtext = "Main Deck";
+                break;
+            case Sideboard:
+                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
+                this.getTableCatalog().setDeck(this.controller.getModel().getMain());
+                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Sideboard));
+                showOptions = false;
+                title = "Sideboard";
+                tabtext = "Card Catalog";
+                break;
+            case Avatar:
+                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
+                this.getTableCatalog().setDeck(avatarPool,true);
+                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Avatar));
+                showOptions = false;
+                title = "Vanguard";
+                tabtext = "Card Catalog";
+                break;
+            case Planes:
+                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
+                this.getTableCatalog().setDeck(planePool,true);
+                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Planes));
+                showOptions = false;
+                title = "Planar";
+                tabtext = "Card Catalog";
+                break;
+            case Schemes:
+                this.getTableCatalog().setAvailableColumns(lstCatalogCols);
+                this.getTableCatalog().setDeck(schemePool,true);
+                this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Schemes));
+                showOptions = false;
+                title = "Scheme";
+                tabtext = "Card Catalog";
+                break;
         }
 
-        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(isSideboarding ? "Main Deck" : "Card Catalog");
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(!isSideboarding);
-        VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(isSideboarding ? "Sideboard" : "Title:");
+        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(tabtext);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(showOptions);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(showOptions);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(showOptions);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(showOptions);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(showOptions);
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(showOptions);
+        VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(title);
 
         this.controller.notifyModelChanged();
     }
@@ -213,8 +325,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard()).setCommand(new Command() {
             @Override
             public void execute() {
-                sideboardMode = !sideboardMode;
-                switchEditorMode(sideboardMode);
+                cycleEditorMode();
         } });
 
         this.controller.newModel();
