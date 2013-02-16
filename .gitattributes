@@ -3142,6 +3142,7 @@ res/cardsfolder/e/encroach.txt svneol=native#text/plain
 res/cardsfolder/e/encrust.txt -text
 res/cardsfolder/e/endangered_armodon.txt svneol=native#text/plain
 res/cardsfolder/e/endbringers_revel.txt svneol=native#text/plain
+res/cardsfolder/e/endemic_plague.txt -text
 res/cardsfolder/e/endless_cockroaches.txt svneol=native#text/plain
 res/cardsfolder/e/endless_horizons.txt -text svneol=unset#text/plain
 res/cardsfolder/e/endless_ranks_of_the_dead.txt -text

@@ -1,0 +1,11 @@
+Name:Endemic Plague
+ManaCost:3 B
+Types:Sorcery
+Text:no text
+A:SP$ DestroyAll | Cost$ 3 B Sac<1/Creature> | RememberCostCards$ True | ValidCards$ Creature.sharesCreatureTypeWith Remembered | SubAbility$ DBCleanup | SpellDescription$ Destroy all creatures that share a creature type with the sacrificed creature. They can't be regenerated.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/endemic_plague.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/142.jpg
+Oracle:As an additional cost to cast Endemic Plague, sacrifice a creature.\nDestroy all creatures that share a creature type with the sacrificed creature. They can't be regenerated.
+End
