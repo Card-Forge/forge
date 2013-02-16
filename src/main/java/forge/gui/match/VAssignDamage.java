@@ -336,7 +336,8 @@ public class VAssignDamage {
         }
         if ( dmgLeft < 0 )
             throw new RuntimeException("initialAssignDamage managed to assign more damage than it could");
-        if ( dmgLeft > 0) { // flush the remaining damage into last defender
+        if (toAllBlockers && dmgLeft > 0) { 
+            // flush the remaining damage into last defender if assigning all damage
             addDamage(dtLast.card, dmgLeft );
         }
         updateLabels();
