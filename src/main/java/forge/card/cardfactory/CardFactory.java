@@ -99,7 +99,7 @@ public class CardFactory {
         if (in.isInAlternateState()) {
             in.setState(CardCharacteristicName.Original);
         }
-        final Card out = this.getCard(CardDb.instance().getCard(in), in.getOwner());
+        final Card out = this.getCard(CardDb.getCard(in), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
 
         CardFactoryUtil.copyCharacteristics(in, out);

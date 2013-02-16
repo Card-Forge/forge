@@ -89,7 +89,7 @@ public class GuiDialog {
      * @return a boolean.
      */
     public static boolean flipCoin(final Player caller, final Card source) {
-        String choice = "";
+        String choice;
         final String[] choices = { "heads", "tails" };
     
         final boolean flip = MyRandom.getRandom().nextBoolean();
@@ -99,7 +99,7 @@ public class GuiDialog {
             choice = choices[MyRandom.getRandom().nextInt(2)];
         }
     
-        final boolean winFlip = flip == choice.equals("heads");
+        final boolean winFlip = flip == choice.equals(choices[0]);
         final String winMsg = winFlip ? " wins flip." : " loses flip.";
     
         // Play the Flip A Coin sound

@@ -358,7 +358,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
      */
     public Iterable<CardPrinted> getAllAvatars() {
         if ( allAvatars.isEmpty() ) {
-            for(CardPrinted c : CardDb.instance().getAllNonTraditionalCards()) {
+            for(CardPrinted c : CardDb.variants().getAllCards()) {
                 if( c.getCard().getType().isVanguard())
                     allAvatars.add(c);
             }

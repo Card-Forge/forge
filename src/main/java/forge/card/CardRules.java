@@ -413,6 +413,11 @@ public final class CardRules {
     public Integer getLife() {
         return life;
     }
+    
+
+    public boolean isTraditional() {
+        return !(getType().isVanguard() || getType().isScheme() || getType().isPlane() || getType().isPhenomenon());
+    }
 
 
 }

@@ -141,7 +141,7 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void resetTables() {
-        Iterable<CardPrinted> allNT = CardDb.instance().getAllNonTraditionalCards();
+        Iterable<CardPrinted> allNT = CardDb.variants().getAllCards();
         allNT = Iterables.filter(allNT, cardPoolCondition);
         
         this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, CardPrinted.class), true);

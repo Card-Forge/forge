@@ -135,7 +135,7 @@ public class QuestWinLose extends ControlWinLose {
                         continue;
                     }
                     for (Card c : p.getCardsIn(ZoneType.Ante)) {
-                        anteCards.add(CardDb.instance().getCard(c));
+                        anteCards.add(CardDb.getCard(c));
                     }
                 }
 

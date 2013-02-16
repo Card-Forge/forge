@@ -20,12 +20,12 @@ package forge.item;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +37,6 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.card.CardInSet;
 import forge.card.CardRules;
-import forge.card.MtgDataParser;
 import forge.util.Aggregates;
 
 
@@ -50,8 +49,8 @@ import forge.util.Aggregates;
  * @version $Id: CardDb.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardDb {
-    private static volatile CardDb onlyInstance = null; // 'volatile' keyword
-                                                        // makes this working
+    private static volatile CardDb commonCards = null; // 'volatile' keyword makes this working
+    private static volatile CardDb variantCards = null; // 'volatile' keyword makes this working
     private final String foilSuffix = " foil";
 
     /**
@@ -60,12 +59,20 @@ public final class CardDb {
      * @return the card db
      */
     public static CardDb instance() {
-        if (CardDb.onlyInstance == null) {
+        if (CardDb.commonCards == null) {
             throw new NullPointerException("CardDb has not yet been initialized, run setup() first");
         }
-        return CardDb.onlyInstance;
+        return CardDb.commonCards;
+    }
+    
+    public static CardDb variants() {
+        if (CardDb.variantCards == null) {
+            throw new NullPointerException("CardDb has not yet been initialized, run setup() first");
+        }
+        return CardDb.variantCards;
     }
 
+    
     /**
      * Sets the up.
      * 
@@ -73,14 +80,14 @@ public final class CardDb {
      *            the new up
      */
     public static void setup(final Iterator<CardRules> list) {
-        if (CardDb.onlyInstance != null) {
+        if (CardDb.commonCards != null) {
             throw new RuntimeException("CardDb has already been initialized, don't do it twice please");
         }
         synchronized (CardDb.class) {
-            if (CardDb.onlyInstance == null) { // It's broken under 1.4 and
-                                               // below, on
-                // 1.5+ works again!
-                CardDb.onlyInstance = new CardDb(list);
+            if (CardDb.commonCards == null) { // It's broken under 1.4 and below, on 1.5+ works again!
+                CardSorter cs = new CardSorter(list);
+                commonCards = new CardDb(cs.uniqueCommonCards, cs.allCommonCardsFlat, cs.allCommonCardsBySet);
+                variantCards = new CardDb(cs.uniqueSpecialCards, cs.allSpecialCardsFlat, cs.allSpecialCardsBySet);
             }
         }
     }
@@ -92,13 +99,12 @@ public final class CardDb {
     // Here are refs, get them by name
     private final Map<String, CardPrinted> uniqueCards;
 
+    
     // need this to obtain cardReference by name+set+artindex
-    private final Map<String, Map<String, CardPrinted[]>> allCardsBySet = new Hashtable<String, Map<String, CardPrinted[]>>();
+    private final Map<String, Map<String, CardPrinted[]>> allCardsBySet;
     // this is the same list in flat storage
-    private final List<CardPrinted> allTraditionalCardsFlat = new ArrayList<CardPrinted>();
-
-    private final List<CardPrinted> allNonTraditionalCardsFlat = new ArrayList<CardPrinted>();
-
+    private final List<CardPrinted> allCardsFlat;
+    
     // Lambda to get rules for selects from list of printed cards
     /** The Constant fnGetCardPrintedByForgeCard. */
     public static final Function<Card, CardPrinted> FN_GET_CARD_PRINTED_BY_FORGE_CARD = new Function<Card, CardPrinted>() {
@@ -108,80 +114,10 @@ public final class CardDb {
         }
     };
 
-    private CardDb() {
-        this(new MtgDataParser()); // I wish cardname.txt parser was here.
-    }
-
-    private CardDb(final Iterator<CardRules> parser) {
-        Map<String, CardPrinted> uniques = new Hashtable<String, CardPrinted>();
-        while (parser.hasNext()) {
-            this.addNewCard(parser.next(), uniques);
-        }
-        
-        this.uniqueCards = Collections.unmodifiableMap(uniques);
-    }
-
-    /**
-     * Adds the new card.
-     * 
-     * @param card
-     *            the card
-     */
-    private void addNewCard(final CardRules card, Map<String, CardPrinted> uniques) {
-        if (null == card) {
-            return;
-        } // consider that a success
-          // System.out.println(card.getName());
-        final String cardName = card.getName().toLowerCase();
-
-        // 1. register among oracle uniques
-        // cards.put(cardName, card);
-
-        // 2. Save refs into two lists: one flat and other keyed with sets &
-        // name
-        CardPrinted lastAdded = null;
-        for (final Entry<String, CardInSet> s : card.getSetsPrinted()) {
-            lastAdded = this.addToLists(card, cardName, s);
-        }
-        uniques.put(cardName, lastAdded);
-    }
-    
-    /**
-     * Adds the to lists.
-     * 
-     * @param card
-     *            the card
-     * @param cardName
-     *            the card name
-     * @param s
-     *            the s
-     * @return the card printed
-     */
-    public CardPrinted addToLists(final CardRules card, final String cardName, final Entry<String, CardInSet> s) {
-        CardPrinted lastAdded = null;
-        final String set = s.getKey();
-
-        // get this set storage, if not found, create it!
-        Map<String, CardPrinted[]> setMap = this.allCardsBySet.get(set);
-        if (null == setMap) {
-            setMap = new Hashtable<String, CardPrinted[]>();
-            this.allCardsBySet.put(set, setMap);
-        }
-
-        final int count = s.getValue().getCopiesCount();
-        final CardPrinted[] cardCopies = new CardPrinted[count];
-        setMap.put(cardName, cardCopies);
-        for (int i = 0; i < count; i++) {
-            lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i);
-            if (lastAdded.isTraditional()) {
-                this.allTraditionalCardsFlat.add(lastAdded);
-            } else {
-                this.allNonTraditionalCardsFlat.add(lastAdded);
-            }
-            cardCopies[i] = lastAdded;
-        }
-
-        return lastAdded;
+    private CardDb(Map<String, CardPrinted> uniqueCards, List<CardPrinted> cardsFlat, Map<String, Map<String, CardPrinted[]>> cardsBySet) {
+        this.uniqueCards = Collections.unmodifiableMap(uniqueCards);
+        this.allCardsFlat = Collections.unmodifiableList(cardsFlat);
+        this.allCardsBySet = cardsBySet;
     }
 
     /**
@@ -223,29 +159,29 @@ public final class CardDb {
      *            the card name
      * @return true, if is card supported
      */
-    public boolean isCardSupported(final String cardName0) {
+    public CardPrinted tryGetCard(final String cardName0) {
         if (null == cardName0) {
-            return false;  // obviously
+            return null;  // obviously
         }
 
         final boolean isFoil = this.isFoil(cardName0);
         final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
         final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);
         if (nameWithSet.right == null) {
-            return this.uniqueCards.containsKey(nameWithSet.left.toLowerCase());
+            return this.uniqueCards.get(nameWithSet.left);
         }
-        return isCardSupported(nameWithSet.left, nameWithSet.right);
+        return tryGetCard(nameWithSet.left, nameWithSet.right);
     }
 
-    public boolean isCardSupported(final String cardName, String setName) {
+    public CardPrinted tryGetCard(final String cardName, String setName) {
         // Set exists?
         final Map<String, CardPrinted[]> cardsFromset = this.allCardsBySet.get(setName.toUpperCase());
         if (cardsFromset == null) {
-            return false;
+            return null;
         }
         // Card exists?
         final CardPrinted[] cardCopies = cardsFromset.get(cardName.toLowerCase());
-        return (cardCopies != null) && (cardCopies.length > 0);
+        return cardCopies != null ? cardCopies[0] : null;
     }
 
     // Single fetch
@@ -318,27 +254,17 @@ public final class CardDb {
      *            the forge card
      * @return the card
      */
-    public CardPrinted getCard(final Card forgeCard) {
+    public static CardPrinted getCard(final Card forgeCard) {
         final String name = forgeCard.getName();
         final String set = forgeCard.getCurSetCode();
+        
         if (StringUtils.isNotBlank(set)) {
-            return this.getCard(name, set);
+            CardPrinted cp = variants().tryGetCard(name, set);
+            
+            return cp == null ? instance().getCard(name, set) : cp;
         }
-        return this.getCard(name);
-    }
-
-    /**
-     * Gets the cards from latest sets.
-     *
-     * @param names the names
-     * @return the cards from latest sets
-     */
-    public List<CardPrinted> getCardsFromLatestSets(final Iterable<String> names) {
-        final List<CardPrinted> result = new ArrayList<CardPrinted>();
-        for (final String name : names) {
-            result.add(this.getCard(name, true));
-        }
-        return result;
+        CardPrinted cp = variants().tryGetCard(name);
+        return cp == null ? instance().getCard(name) : cp;
     }
 
     // returns a list of all cards from their respective latest editions
@@ -351,6 +277,8 @@ public final class CardDb {
         return this.uniqueCards.values();
     }
 
+
+    
     // public Iterable<CardRules> getAllCardRules() { return cards.values(); }
     // // still not needed
     /**
@@ -358,12 +286,8 @@ public final class CardDb {
      * 
      * @return the all cards
      */
-    public Iterable<CardPrinted> getAllTraditionalCards() {
-        return this.allTraditionalCardsFlat;
-    }
-
-    public Iterable<CardPrinted> getAllNonTraditionalCards() {
-        return this.allNonTraditionalCardsFlat;
+    public Collection<CardPrinted> getAllCards() {
+        return this.allCardsFlat;
     }
 
     /**
@@ -393,16 +317,11 @@ public final class CardDb {
             } else {
                 // OK, plain name here
                 final Predicate<CardPrinted> predicate = CardPrinted.Predicates.name(nameWithSet.left);
-                final Iterable<CardPrinted> namedCards = Iterables.filter(this.allTraditionalCardsFlat, predicate);
+                final Iterable<CardPrinted> namedCards = Iterables.filter(this.allCardsFlat, predicate);
                 // Find card with maximal set index
                 result = Aggregates.itemWithMax(namedCards, CardPrinted.FN_GET_EDITION_INDEX);
                 if (null == result) {
-                    // 2nd chance: look in planes, schemes and so on
-                    final Iterable<CardPrinted> namedNonTraditionals = Iterables.filter(this.allNonTraditionalCardsFlat, predicate);
-                    result = Aggregates.itemWithMax(namedNonTraditionals, CardPrinted.FN_GET_EDITION_INDEX);
-                    
-                    if ( null == result ) // sure thing, throw exception
-                        throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
+                    throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
                 }
 
             }
@@ -413,4 +332,92 @@ public final class CardDb {
         return result;
     }
 
+    private static class CardSorter{
+        // Here oracle cards
+        // private final Map<String, CardRules> cards = new Hashtable<String,
+        // CardRules>();
+        
+        // need this to obtain cardReference by name+set+artindex
+        public final Map<String, Map<String, CardPrinted[]>> allCommonCardsBySet = new TreeMap<String, Map<String, CardPrinted[]>>(String.CASE_INSENSITIVE_ORDER);
+        public final Map<String, Map<String, CardPrinted[]>> allSpecialCardsBySet = new TreeMap<String, Map<String, CardPrinted[]>>(String.CASE_INSENSITIVE_ORDER);
+        // Here are refs, get them by name
+        public final Map<String, CardPrinted> uniqueCommonCards = new TreeMap<String, CardPrinted>(String.CASE_INSENSITIVE_ORDER);
+        public final Map<String, CardPrinted> uniqueSpecialCards = new TreeMap<String, CardPrinted>(String.CASE_INSENSITIVE_ORDER);
+        // this is the same list in flat storage
+        public final List<CardPrinted> allCommonCardsFlat = new ArrayList<CardPrinted>();
+        public final List<CardPrinted> allSpecialCardsFlat = new ArrayList<CardPrinted>();
+
+        /**
+         * Adds the to lists.
+         * 
+         * @param card
+         *            the card
+         * @param cardName
+         *            the card name
+         * @param s
+         *            the s
+         * @return the card printed
+         */
+        public CardPrinted addToLists(final CardRules card, final String cardName, final Entry<String, CardInSet> s) {
+            CardPrinted lastAdded = null;
+            final String set = s.getKey();
+        
+            final Map<String, Map<String, CardPrinted[]>> allCardsBySet = card.isTraditional() ? allCommonCardsBySet : allSpecialCardsBySet;
+            // get this set storage, if not found, create it!
+            Map<String, CardPrinted[]> setMap = allCardsBySet.get(set);
+            if (null == setMap) {
+                setMap = new TreeMap<String, CardPrinted[]>(String.CASE_INSENSITIVE_ORDER);
+                allCardsBySet.put(set, setMap);
+            }
+        
+            final int count = s.getValue().getCopiesCount();
+            final CardPrinted[] cardCopies = new CardPrinted[count];
+            setMap.put(cardName, cardCopies);
+            for (int i = 0; i < count; i++) {
+                lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i);
+                if (card.isTraditional()) {
+                    this.allCommonCardsFlat.add(lastAdded);
+                } else {
+                    this.allSpecialCardsFlat.add(lastAdded);
+                }
+                cardCopies[i] = lastAdded;
+            }
+        
+            return lastAdded;
+        }
+
+        /**
+         * Adds the new card.
+         * 
+         * @param card
+         *            the card
+         */
+        private void addNewCard(final CardRules card) {
+            if (null == card) {
+                return;
+            } // consider that a success
+              // System.out.println(card.getName());
+            final String cardName = card.getName().toLowerCase();
+        
+            // 1. register among oracle uniques
+            // cards.put(cardName, card);
+        
+            // 2. Save refs into two lists: one flat and other keyed with sets &
+            // name
+            CardPrinted lastAdded = null;
+            for (final Entry<String, CardInSet> s : card.getSetsPrinted()) {
+                lastAdded = this.addToLists(card, cardName, s);
+            }
+            if ( lastAdded.getCard().isTraditional() )
+                uniqueCommonCards.put(cardName, lastAdded);
+            else
+                uniqueSpecialCards.put(cardName, lastAdded);
+        }
+
+        CardSorter(final Iterator<CardRules> parser) {
+            while (parser.hasNext()) {
+                this.addNewCard(parser.next());
+            }
+        }
+    }
 }

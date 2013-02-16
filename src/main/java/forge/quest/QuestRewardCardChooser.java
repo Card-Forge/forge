@@ -223,7 +223,7 @@ public class QuestRewardCardChooser implements InventoryItem  {
         } else if (type == poolType.predicateFilter) {
             List<CardPrinted> cardChoices = new ArrayList<CardPrinted>();
 
-            for (final CardPrinted card : Iterables.filter(CardDb.instance().getAllTraditionalCards(), predicates)) {
+            for (final CardPrinted card : Iterables.filter(CardDb.instance().getAllCards(), predicates)) {
                 cardChoices.add(card);
             }
             Collections.sort(cardChoices);

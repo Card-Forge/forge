@@ -92,7 +92,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         // read token names and urls
         final ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
-        Iterable<CardPrinted> allPrinted = Iterables.concat(CardDb.instance().getAllTraditionalCards(), CardDb.instance().getAllNonTraditionalCards());
+        Iterable<CardPrinted> allPrinted = Iterables.concat(CardDb.instance().getAllCards(), CardDb.variants().getAllCards());
 
         for (final CardPrinted c : allPrinted) {
             final String setCode3 = c.getEdition();

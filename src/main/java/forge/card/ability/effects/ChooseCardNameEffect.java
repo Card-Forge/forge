@@ -1,13 +1,20 @@
 package forge.card.ability.effects;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.card.CardRulesPredicates;
 import forge.card.ability.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -51,10 +58,29 @@ public class ChooseCardNameEffect extends SpellEffect {
                 boolean ok = false;
                 while (!ok) {
                     if (p.isHuman()) {
-                        final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc
-                                + " card. (Case sensitive)";
+                        
+                        final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
+                        
+                        List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getAllUniqueCards());
+                        if ( StringUtils.containsIgnoreCase(valid, "nonland") )
+                        {
+                            Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES);
+                            cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                        }
+                        if ( StringUtils.containsIgnoreCase(valid, "nonbasic") )
+                        {
+                            Predicate<CardPrinted> cpp = Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), CardPrinted.FN_GET_RULES);
+                            cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                        }
+                        if ( StringUtils.containsIgnoreCase(valid, "creature") )
+                        {
+                            Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES);
+                            cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                        }
 
-                        CardPrinted cp = GuiChoose.one(message, CardDb.instance().getAllUniqueCards());
+                        Collections.sort(cards);
+                            
+                        CardPrinted cp = GuiChoose.one(message, cards);
                         if (cp.getMatchingForgeCard().isValid(valid, host.getController(), host)) {
                             host.setNamedCard(cp.getName());
                             ok = true;

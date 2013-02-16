@@ -152,7 +152,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     @Override
     public void resetTables() {
         // Constructed mode can use all cards, no limitations.
-        this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), CardPrinted.class), true);
+        this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class), true);
         this.getTableDeck().setDeck(this.controller.getModel().getMain());
     }
 
@@ -179,7 +179,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         } else {
             lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
             this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-            this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), CardPrinted.class), true);
+            this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllCards(), CardPrinted.class), true);
             this.getTableDeck().setDeck(this.controller.getModel().getMain());
         }
 

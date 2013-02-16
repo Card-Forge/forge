@@ -314,7 +314,7 @@ public class DeckgenUtil {
     public static CardPool generateSchemeDeck() {
         CardPool schemes = new CardPool();
         List<CardPrinted> allSchemes = new ArrayList<CardPrinted>();
-        for (CardPrinted c : CardDb.instance().getAllNonTraditionalCards()) {
+        for (CardPrinted c : CardDb.variants().getAllCards()) {
             if (c.getCard().getType().isScheme()) {
                 allSchemes.add(c);
             }
@@ -339,7 +339,7 @@ public class DeckgenUtil {
     public static CardPool generatePlanarDeck() {
         CardPool res = new CardPool();
         List<CardPrinted> allPlanars = new ArrayList<CardPrinted>();
-        for (CardPrinted c : CardDb.instance().getAllNonTraditionalCards()) {
+        for (CardPrinted c : CardDb.variants().getAllCards()) {
             if (c.getCard().getType().isPlane() || c.getCard().getType().isPhenomenon()) {
                 allPlanars.add(c);
             }

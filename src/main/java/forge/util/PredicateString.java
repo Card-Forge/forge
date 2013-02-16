@@ -108,13 +108,5 @@ public abstract class PredicateString<T> implements Predicate<T> {
             }
         };
     }
-    public static PredicateString<String> equalsIgnoreCase(final String what) {
-        return new PredicateString<String>(StringOp.EQUALS_IC) {
-            @Override
-            public boolean apply(String subject) {
-                return op(subject, what);
-            }
-        };
-    }
 
 }

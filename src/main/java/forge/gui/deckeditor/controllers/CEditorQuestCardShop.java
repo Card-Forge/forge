@@ -96,7 +96,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     
     private ItemPoolView<InventoryItem> cardsForSale;
     private final ItemPool<InventoryItem> fullCatalogCards =
-            ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), InventoryItem.class);
+            ItemPool.createFrom(CardDb.instance().getAllCards(), InventoryItem.class);
     private boolean showingFullCatalog = false;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;

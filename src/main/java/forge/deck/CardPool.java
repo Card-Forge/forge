@@ -58,7 +58,7 @@ public class CardPool extends ItemPool<CardPrinted> {
     public void set(final Iterable<String> cardNames) {
         this.clear();
         for (final String name : cardNames) {
-            this.add(CardDb.instance().getCard(name));
+            this.add(name);
         }
     }
 
@@ -69,7 +69,7 @@ public class CardPool extends ItemPool<CardPrinted> {
      *            the card
      */
     public void add(final Card card) {
-        this.add(CardDb.instance().getCard(card));
+        this.add(CardDb.getCard(card));
     }
 
     /**
@@ -81,7 +81,7 @@ public class CardPool extends ItemPool<CardPrinted> {
      *            the set code
      */
     public void add(final String cardName, final String setCode) {
-        this.add(CardDb.instance().getCard(cardName, setCode));
+        this.add(cardName, setCode, 1);
     }
 
     /**
@@ -92,7 +92,14 @@ public class CardPool extends ItemPool<CardPrinted> {
      * @param amount the amount
      */
     public void add(final String cardName, final String setCode, final int amount) {
-        this.add(CardDb.instance().getCard(cardName, setCode), amount);
+        CardPrinted cp = CardDb.instance().tryGetCard(cardName, setCode);
+        if ( cp == null )
+            cp = CardDb.variants().tryGetCard(cardName, setCode);
+
+        if ( cp != null)
+            this.add(cp, amount);
+        else
+            throw new RuntimeException(String.format("Card %s from %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName, setCode ));
     }
 
     /**
@@ -125,7 +132,14 @@ public class CardPool extends ItemPool<CardPrinted> {
      * @param cardName the card name
      */
     public void add(final String cardName) {
-        this.add(CardDb.instance().getCard(cardName));
+        CardPrinted cp = CardDb.instance().tryGetCard(cardName);
+        if ( cp == null )
+            cp = CardDb.variants().tryGetCard(cardName);
+
+        if ( cp != null)
+            this.add(cp);
+        else
+            throw new RuntimeException(String.format("Card %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName));
     }
 
     /**

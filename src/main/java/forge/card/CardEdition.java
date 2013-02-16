@@ -186,7 +186,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
             @Override
             public boolean apply(CardEdition ed) {
-                return CardDb.instance().isCardSupported("Plains", ed.getCode());
+                return null != CardDb.instance().tryGetCard("Plains", ed.getCode());
             };
         };
 

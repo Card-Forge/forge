@@ -171,7 +171,7 @@ public class QuestRewardCardFiltered implements IQuestRewardCard {
      */
     public final List<CardPrinted> getChoices() {
         List<CardPrinted> cardChoices = new ArrayList<CardPrinted>();
-        for (final CardPrinted card : Iterables.filter(CardDb.instance().getAllTraditionalCards(), predicates)) {
+        for (final CardPrinted card : Iterables.filter(CardDb.instance().getAllCards(), predicates)) {
             cardChoices.add(card);
         }
         Collections.sort(cardChoices);

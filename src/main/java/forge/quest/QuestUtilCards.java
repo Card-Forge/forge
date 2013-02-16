@@ -90,7 +90,7 @@ public final class QuestUtilCards {
         if (usedFormat != null) {
             List<String> availableEditions = usedFormat.getAllowedSetCodes();
             for (String edition : availableEditions) {
-                if (db.isCardSupported("Plains", edition)) {
+                if (null != db.tryGetCard("Plains", edition)) {
                     landCodes.add(edition);
                 }
             }
@@ -205,7 +205,7 @@ public final class QuestUtilCards {
 
         final Predicate<CardPrinted> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllTraditionalCards(), myFilter));
+        final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter));
         this.addSingleCard(card);
         return card;
     }
@@ -220,7 +220,7 @@ public final class QuestUtilCards {
     public List<CardPrinted> addRandomRare(final int n) {
         final Predicate<CardPrinted> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final List<CardPrinted> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllTraditionalCards(), myFilter), n);
+        final List<CardPrinted> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter), n);
         this.addAllCards(newCards);
         return newCards;
     }
@@ -509,9 +509,9 @@ public final class QuestUtilCards {
 
         Iterable<CardPrinted> cardList = null;
         if (qc.getFormat() == null) {
-              cardList = CardDb.instance().getAllTraditionalCards(); }
+              cardList = CardDb.instance().getAllCards(); }
         else {
-            cardList = Iterables.filter(CardDb.instance().getAllTraditionalCards(),
+            cardList = Iterables.filter(CardDb.instance().getAllCards(),
                     qc.getFormat().getFilterPrinted());
         }
 
@@ -627,7 +627,7 @@ public final class QuestUtilCards {
     public int getCompletionPercent(String edition) {
         // get all cards in the specified edition
         Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(edition);
-        Iterable<CardPrinted> editionCards = Iterables.filter(CardDb.instance().getAllTraditionalCards(), filter);
+        Iterable<CardPrinted> editionCards = Iterables.filter(CardDb.instance().getAllCards(), filter);
 
         ItemPool<CardPrinted> ownedCards = qa.getCardPool();
         // 100% means at least one of every basic land and at least 4 of every other card in the set

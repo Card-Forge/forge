@@ -115,13 +115,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         return this.foiled;
     }
 
-    public boolean isTraditional() {
-        return !(getCard().getType().isVanguard()
-                || getCard().getType().isScheme()
-                || getCard().getType().isPlane()
-                || getCard().getType().isPhenomenon());
-    }
-
     /**
      * Gets the card.
      * 

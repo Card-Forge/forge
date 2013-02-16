@@ -135,7 +135,7 @@ public class ControlWinLose {
                 Deck oDeck = match.getPlayersOriginalDeck(loser.getLobbyPlayer());
 
                 for (Card c : compAntes) {
-                    CardPrinted toRemove = CardDb.instance().getCard(c);
+                    CardPrinted toRemove = CardDb.getCard(c);
                     cDeck.getMain().remove(toRemove);
                     if ( cDeck != oDeck )
                         oDeck.getMain().remove(toRemove);

@@ -82,7 +82,7 @@ public class CopyPermanentEffect extends SpellEffect {
                     if (!c.isToken() || c.isCopiedToken()) {
                         // copy creature and put it onto the battlefield
 
-                        copy = Singletons.getModel().getCardFactory().getCard(CardDb.instance().getCard(c), sa.getActivatingPlayer());
+                        copy = Singletons.getModel().getCardFactory().getCard(CardDb.getCard(c), sa.getActivatingPlayer());
 
                         // when copying something stolen:
                         copy.addController(controller);

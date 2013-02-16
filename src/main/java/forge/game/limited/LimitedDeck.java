@@ -265,7 +265,7 @@ public class LimitedDeck {
     private void findBasicLandSets() {
         Set<String> sets = new HashSet<String>();
         for (CardPrinted cp : aiPlayables) {
-            if (CardDb.instance().isCardSupported("Plains", cp.getEdition())) {
+            if (null != CardDb.instance().tryGetCard("Plains", cp.getEdition())) {
                 sets.add(cp.getEdition());
             }
         }

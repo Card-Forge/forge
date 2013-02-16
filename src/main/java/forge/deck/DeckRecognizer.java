@@ -189,7 +189,7 @@ public class DeckRecognizer {
            * Token(cardName, amount); }
            */
         else {
-            if (CardDb.instance().isCardSupported(line)) {
+            if (null != CardDb.instance().tryGetCard(line)) {
                 return Token.knownCard(CardDb.instance().getCard(line, newestEdition), 1);
             }
             result = DeckRecognizer.recognizeNonCard(line, 1);
@@ -198,7 +198,7 @@ public class DeckRecognizer {
     }
 
     private static Token recognizePossibleNameAndNumber(final String name, final int n, final boolean newestEdition) {
-        if (CardDb.instance().isCardSupported(name)) {
+        if (null != CardDb.instance().tryGetCard(name)) {
             return Token.knownCard(CardDb.instance().getCard(name, newestEdition), n);
         }
 

@@ -785,7 +785,7 @@ public class ChangeZoneEffect extends SpellEffect {
             }
         }
         if (sa.hasParam("Reveal") && !movedCards.isEmpty()) {
-            GuiChoose.one(card + " - Revealed card: ", movedCards.toArray());
+            GuiChoose.one(card + " - Revealed card: ", movedCards);
         }
 
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
