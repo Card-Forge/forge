@@ -7936,6 +7936,7 @@ res/cardsfolder/p/psionic_entity.txt svneol=native#text/plain
 res/cardsfolder/p/psionic_gift.txt svneol=native#text/plain
 res/cardsfolder/p/psionic_sliver.txt svneol=native#text/plain
 res/cardsfolder/p/psychatog.txt svneol=native#text/plain
+res/cardsfolder/p/psychic_allergy.txt -text
 res/cardsfolder/p/psychic_barrier.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_drain.txt svneol=native#text/plain
 res/cardsfolder/p/psychic_membrane.txt svneol=native#text/plain
