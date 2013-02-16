@@ -365,31 +365,32 @@ public class QuestWinLose extends ControlWinLose {
 
                 final PlayerOutcome outcome = kvRating.getValue().getOutcome();
                 final GameLossReason whyAiLost = outcome.lossState;
-                final int altReward = this.getCreditsRewardForAltWin(whyAiLost);
+                int altReward = this.getCreditsRewardForAltWin(whyAiLost);
+
+                String winConditionName = "Unknown (bug)";
+                if (game.getWinCondition() == GameEndReason.WinsGameSpellEffect) {
+                    winConditionName = game.getWinSpellEffect();
+                    altReward = this.getCreditsRewardForAltWin(null);
+                } else {
+                    switch (whyAiLost) {
+                    case Poisoned:
+                        winConditionName = "Poison";
+                        break;
+                    case Milled:
+                        winConditionName = "Milled";
+                        break;
+                    case SpellEffect:
+                        winConditionName = outcome.loseConditionSpell;
+                        break;
+                    default:
+                        break;
+                    }
+                }
 
                 if (altReward > 0) {
-                    String winConditionName = "Unknown (bug)";
-                    if (game.getWinCondition() == GameEndReason.WinsGameSpellEffect) {
-                        winConditionName = game.getWinSpellEffect();
-                    } else {
-                        switch (whyAiLost) {
-                        case Poisoned:
-                            winConditionName = "Poison";
-                            break;
-                        case Milled:
-                            winConditionName = "Milled";
-                            break;
-                        case SpellEffect:
-                            winConditionName = outcome.loseConditionSpell;
-                            break;
-                        default:
-                            break;
-                        }
-                    }
-
-                    credGameplay += 50;
+                    credGameplay += altReward;
                     sb.append(String.format("Alternate win condition: <u>%s</u>! " + "Bonus: %d credits.<br>",
-                            winConditionName, 50));
+                            winConditionName, altReward));
                 }
             }
             // Mulligan to zero
@@ -756,7 +757,7 @@ public class QuestWinLose extends ControlWinLose {
         QuestPreferences qp = Singletons.getModel().getQuestPreferences();
         if (null == whyAiLost) {
             // Felidar, Helix Pinnacle, etc.
-            return qp.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            return qp.getPreferenceInt(QPref.REWARDS_ALTERNATIVE);
         }
         switch (whyAiLost) {
         case LifeReachedZero:
@@ -766,7 +767,7 @@ public class QuestWinLose extends ControlWinLose {
         case Poisoned:
             return qp.getPreferenceInt(QPref.REWARDS_POISON);
         case SpellEffect: // Door to Nothingness, etc.
-            return qp.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            return qp.getPreferenceInt(QPref.REWARDS_ALTERNATIVE);
         default:
             return 0;
         }
