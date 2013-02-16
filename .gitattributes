@@ -13545,6 +13545,7 @@ res/sound/shuffle.wav -text
 res/sound/sorcery.wav -text
 res/sound/tap.wav -text
 res/sound/untap.wav -text
+res/sound/white_land.wav -text
 res/token-images.txt -text
 src/main/config/Forge.icns -text
 src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
