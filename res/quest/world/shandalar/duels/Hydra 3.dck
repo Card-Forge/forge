@@ -4,7 +4,7 @@ Name=Hydra 3
 Title=Crag Hydra
 Icon=Hydra.jpg
 Difficulty=hard
-Description=Red burn/dragon deck with Power Surge.
+Description=Red burn/dragon deck.
 Deck Type=constructed
 [main]
 2 Balduvian Hydra|ICE
@@ -14,12 +14,15 @@ Deck Type=constructed
 4 Dragon Whelp|4ED
 2 Fireball|4ED
 4 Lightning Bolt|4ED
+1 Mana Vault|LEB
 2 Mishra's Factory|ATQ
 22 Mountain|4ED
-4 Onulet|ATQ
-4 Power Surge|LEB
+1 Mox Ruby|LEB
+3 Onulet|ATQ
+2 Pyrotechnics|LEG
 2 Shivan Dragon|4ED
-2 Strip Mine|ATQ
-3 The Hive|LEB
+1 Sol Ring|LEB
+3 Strip Mine|ATQ
+2 The Hive|LEB
 4 Wall of Fire|4ED
 [sideboard]

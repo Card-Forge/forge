@@ -4,20 +4,19 @@ Name=Kiska-Ra 2
 Title=Kiska-Ra
 Icon=KiskaRa.jpg
 Difficulty=medium
-Description=URG weenies with pumping effects.
+Description=WUG weenies with pumping effects.
 Deck Type=constructed
 [main]
-1 Ancestral Recall|LEB
 2 Arcades Sabboth|LEG
 2 Birds of Paradise|4ED
 1 Braingeyser|LEB
-1 Celestial Prism|LEA
 2 Control Magic|LEB
 2 Desert Twister|4ED
 1 Divine Transformation|LEG
 2 Elvish Archers|LEB
 2 Emerald Dragonfly|CHR
 2 Fellwar Stone|DRK
+2 Flying Men|ARN
 2 Forest|4ED
 4 Giant Growth|4ED
 2 Giant Tortoise|ARN
@@ -31,8 +30,7 @@ Deck Type=constructed
 2 Samite Healer|LEB
 4 Savannah|LEB
 2 Savannah Lions|LEB
-2 Scryb Sprites|LEB
-1 Time Walk|LEB
+3 Scryb Sprites|LEB
 1 Timetwister|LEB
 4 Tropical Island|LEB
 4 Tundra|LEB
