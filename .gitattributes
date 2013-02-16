@@ -3464,6 +3464,7 @@ res/cardsfolder/f/feedback.txt svneol=native#text/plain
 res/cardsfolder/f/feedback_bolt.txt svneol=native#text/plain
 res/cardsfolder/f/feeding_frenzy.txt svneol=native#text/plain
 res/cardsfolder/f/feeling_of_dread.txt -text
+res/cardsfolder/f/feint.txt -text
 res/cardsfolder/f/feldons_cane.txt svneol=native#text/plain
 res/cardsfolder/f/felidar_sovereign.txt svneol=native#text/plain
 res/cardsfolder/f/felidar_umbra.txt -text
