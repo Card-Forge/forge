@@ -34,6 +34,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.card.CardInSet;
 import forge.card.CardRules;
@@ -286,9 +288,15 @@ public final class CardDb {
      * 
      * @return the all cards
      */
-    public Collection<CardPrinted> getAllCards() {
+    public List<CardPrinted> getAllCards() {
         return this.allCardsFlat;
     }
+
+    /**  Returns a modifiable list of cards matching the given predicate */
+    public List<CardPrinted> getAllCards(Predicate<CardPrinted> predicate) {
+        return Lists.newArrayList(Iterables.filter(this.allCardsFlat, predicate));
+    }
+
 
     /**
      * Gets the card.

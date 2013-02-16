@@ -21,12 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
-
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.deckeditor.SEditorIO;
@@ -65,9 +64,9 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     private List<DeckSection> allSections = new ArrayList<DeckSection>();
     private DeckSection sectionMode = DeckSection.Main;
     
-    private ItemPoolView<CardPrinted> avatarPool;
-    private ItemPoolView<CardPrinted> planePool;
-    private ItemPoolView<CardPrinted> schemePool;
+    private final ItemPoolView<CardPrinted> avatarPool;
+    private final ItemPoolView<CardPrinted> planePool;
+    private final ItemPoolView<CardPrinted> schemePool;
     
     //=========== Constructor
     /**
@@ -85,47 +84,10 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         allSections.add(DeckSection.Planes);
         //allSections.add(DeckSection.Commander);
         
-        avatarPool = ItemPool.createFrom(Iterables.filter(CardDb.variants().getAllCards(),new Predicate<CardPrinted>() {
-
-            @Override
-            public boolean apply(CardPrinted arg0) {
-                if(arg0.getCard().getType().isVanguard())
-                {
-                    return true;
-                }
-                
-                return false;
-            }
-            
-        }),CardPrinted.class);
         
-        planePool = ItemPool.createFrom(Iterables.filter(CardDb.variants().getAllCards(),new Predicate<CardPrinted>() {
-
-            @Override
-            public boolean apply(CardPrinted arg0) {
-                if(arg0.getCard().getType().isPlane() || arg0.getCard().getType().isPhenomenon())
-                {
-                    return true;
-                }
-                
-                return false;
-            }
-            
-        }),CardPrinted.class);
-        
-        schemePool = ItemPool.createFrom(Iterables.filter(CardDb.variants().getAllCards(),new Predicate<CardPrinted>() {
-
-            @Override
-            public boolean apply(CardPrinted arg0) {
-                if(arg0.getCard().getType().isScheme())
-                {
-                    return true;
-                }
-                
-                return false;
-            }
-            
-        }),CardPrinted.class);
+        avatarPool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, CardPrinted.FN_GET_RULES)),CardPrinted.class);
+        planePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, CardPrinted.FN_GET_RULES)),CardPrinted.class);
+        schemePool = ItemPool.createFrom(CardDb.variants().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, CardPrinted.FN_GET_RULES)),CardPrinted.class);
 
         boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
 
@@ -238,6 +200,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     /**
      * Switch between the main deck and the sideboard editor.
      */
+    @SuppressWarnings("incomplete-switch")
     public void cycleEditorMode() {
         int curindex = allSections.indexOf(sectionMode);
 

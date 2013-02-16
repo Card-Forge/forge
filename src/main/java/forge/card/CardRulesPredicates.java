@@ -519,8 +519,13 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_SORCERY = CardRulesPredicates.coreType(true, CardCoreType.Sorcery);
 
         /** The Constant isEnchantment. */
-        public static final Predicate<CardRules> IS_ENCHANTMENT = CardRulesPredicates.coreType(true,
-                CardCoreType.Enchantment);
+        public static final Predicate<CardRules> IS_ENCHANTMENT = CardRulesPredicates.coreType(true, CardCoreType.Enchantment);
+        
+        public static final Predicate<CardRules> IS_PLANE = CardRulesPredicates.coreType(true, CardCoreType.Enchantment);
+        public static final Predicate<CardRules> IS_PHENOMENON = CardRulesPredicates.coreType(true, CardCoreType.Phenomenon);
+        public static final Predicate<CardRules> IS_PLANE_OR_PHENOMENON = Predicates.or(IS_PLANE, IS_PHENOMENON);
+        public static final Predicate<CardRules> IS_SCHEME = CardRulesPredicates.coreType(true, CardCoreType.Scheme);
+        public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(true, CardCoreType.Vanguard);
 
         /** The Constant isNonLand. */
         public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardCoreType.Land);
