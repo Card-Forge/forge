@@ -273,7 +273,7 @@ public final class CardDb {
      * 
      * @return the all unique cards
      */
-    public Collection<CardPrinted> getAllUniqueCards() {
+    public Collection<CardPrinted> getUniqueCards() {
         return this.uniqueCards.values();
     }
 

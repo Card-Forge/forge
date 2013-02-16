@@ -61,7 +61,7 @@ public class ChooseCardNameEffect extends SpellEffect {
                         
                         final String message = validDesc.equals("card") ? "Name a card" : "Name a " + validDesc + " card.";
                         
-                        List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getAllUniqueCards());
+                        List<CardPrinted> cards = Lists.newArrayList(CardDb.instance().getUniqueCards());
                         if ( StringUtils.containsIgnoreCase(valid, "nonland") )
                         {
                             Predicate<CardPrinted> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES);

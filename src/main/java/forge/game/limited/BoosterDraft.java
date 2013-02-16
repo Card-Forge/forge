@@ -83,7 +83,7 @@ public final class BoosterDraft implements IBoosterDraft {
 
         switch (draftType) {
         case Full: // Draft from all cards in Forge
-            final BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
+            final BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getUniqueCards());
             for (int i = 0; i < 3; i++) {
                 this.product.add(new UnOpenedProduct(BoosterGenerator.IDENTITY_PICK, bpFull));
             }

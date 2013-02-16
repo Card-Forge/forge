@@ -757,7 +757,7 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getAllUniqueCards());
+        final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getUniqueCards());
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
@@ -778,7 +778,7 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getAllUniqueCards());
+        final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getUniqueCards());
         Collections.sort(cards);
 
         // use standard forge's list selection dialog

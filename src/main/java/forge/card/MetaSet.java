@@ -218,7 +218,7 @@ public class MetaSet {
             return new UnOpenedProduct(fnPick, bpCustom);
         }
         else if ("full".equalsIgnoreCase(type)) {
-            final BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getAllUniqueCards());
+            final BoosterGenerator bpFull = new BoosterGenerator(CardDb.instance().getUniqueCards());
             return new UnOpenedProduct(BoosterGenerator.IDENTITY_PICK, bpFull);
         }
         else if ("meta".equalsIgnoreCase(type)) {
@@ -276,7 +276,7 @@ public class MetaSet {
                         System.out.println("WARNING - MetaSet type '" + typeTest[0] + "' ignored in pool creation.");
                     }
             else if (typeTest[0].equalsIgnoreCase("full")) {
-                for (CardPrinted aCard : CardDb.instance().getAllUniqueCards()) {
+                for (CardPrinted aCard : CardDb.instance().getUniqueCards()) {
                     cardPool.add(aCard);
                 }
                 return cardPool;

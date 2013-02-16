@@ -62,7 +62,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         baseFolder = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
         downloads = new ArrayList<DownloadObject>();
 
-        for (final CardPrinted c : CardDb.instance().getAllUniqueCards()) {
+        for (final CardPrinted c : CardDb.instance().getUniqueCards()) {
             //System.out.println(c.getName());
             CardRules firstSide = c.getCard();
             this.createDLObjects(firstSide);
