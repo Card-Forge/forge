@@ -4,7 +4,7 @@ Forge Beta: 0#-##-2013 ver 1.3.9
 12### cards in total.
 
 
-New Features:
+Release Notes:
 
 You can now cast cards for it's miracle cost without getting a crash. Blocking with a creature was not resetting after combat and this would prevent this creature from blocking in subsequent turns, now fixed.
 
@@ -93,6 +93,10 @@ Fiery Justice
 Bounty of the Hunt
 Shambling Swarm
 Fire and Brimstone
+Marble Priest
+Talruum Piper
+Endemic Plague
+Feint
 
 
 New Phenomenons:
@@ -295,6 +299,49 @@ Detailed Changelog: (This will likely be deleted in the near future)
 - change FControl state from int into an enum
 - ensure All Decks and Deck Generation tabs only show up in the Constructed deck editor
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- load decks after setting the editor
+- Adjusted the content of the CHANGES.txt file.
+- don't remove packs from spell shop until after buying them
+- restore focus to 'no' button after mulliganing
+- Updated CHANGES.txt headers.
+- Moved material from the 1.3.7 beta changes.txt file to the readme.txt file.
+- Improved Bounty of the Hunt's script
+- Moved material from the 1.3.5 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.3.4 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.3.3 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.3.2 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.3.1 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.3.0 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.14 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.13 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.11 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.8 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.7 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.6 beta changes.txt file to the readme.txt file.
+- InputPayMana* classes use a common Ancestor, given more meaningful names, 
+- InputPayManaCostUtil . toShort/Long string removed in favour of MagicColor's methods
+- removed input creation duplication in MagicStack
+- removes 2 warnings
+- Moved material from the 1.2.5 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.4 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.3 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.1 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.2.0 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.1.8 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.1.6 beta changes.txt file to the readme.txt file.
+- AI was dealing trample damage to player even if it was defending
+- fix NPE if no card was passed to GuiConfirm
+- Moved material from the 1.1.00 beta changes.txt file to the readme.txt file.
+- Moved material from the 1.0.14 beta changes.txt file to the readme.txt file.
+- Moved material from the 06/12/2011 beta changes.txt file to the readme.txt file.
+- Moved material from the 05/17/2011 beta changes.txt file to the readme.txt file.
+- Moved material from the 01/14/2011 beta changes.txt file to the readme.txt file. I am now finished moving material. :)
+- CardDb - split DB in two parts: one is for common cards and another one is for avatars, planes, schemes and phenomena (CardDb.variants)
+- ChooseCardName - cards are sorted and filtered if criteria is nonland, basic or creature
+- Restore previous functionality in VAssignDamage to only assign Lethal Damage to first blocker when the popup first displays
+- rename of carddb.getAllUniqueCards method => getUniqueCards
+- only highlight next item if no other items have been removed since the callback started
+
 
 
 end
