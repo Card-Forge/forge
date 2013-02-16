@@ -83,7 +83,7 @@ public class ManaReflectedEffect extends SpellEffect {
                 }
             } else {
                 // AI doesn't really have anything here yet
-                baseMana = MagicColor.toShortString(colors.iterator().next());
+                baseMana = sa.getManaPart().getExpressChoice();
             }
         }
 

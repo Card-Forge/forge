@@ -36,6 +36,7 @@ import forge.CardPredicates.Presets;
 import forge.card.SpellManaCost;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
+import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
@@ -1531,6 +1532,9 @@ public final class GameActionUtil {
             if (baseMana.isEmpty()) {
                 baseMana = "Any";
             }
+        }
+        else if (sa.getApi().equals(ApiType.ManaReflected)) {
+            baseMana = abMana.getExpressChoice();
         }
         else {
             baseMana = abMana.mana();

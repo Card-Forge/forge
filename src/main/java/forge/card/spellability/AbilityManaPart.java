@@ -46,9 +46,6 @@ public class AbilityManaPart implements java.io.Serializable {
     private String manaRestrictions = "";
     private transient ArrayList<Mana> lastProduced = new ArrayList<Mana>();
 
-    /** The reflected. */
-    private boolean reflected = false;
-
     /** The canceled. */
     private boolean canceled = false;
 
@@ -222,18 +219,6 @@ public class AbilityManaPart implements java.io.Serializable {
 
     /**
      * <p>
-     * setReflectedMana.
-     * </p>
-     * 
-     * @param bReflect
-     *            a boolean.
-     */
-    public final void setReflectedMana(final boolean bReflect) {
-        this.reflected = bReflect;
-    }
-
-    /**
-     * <p>
      * setAnyChoice.
      * </p>
      *
@@ -284,17 +269,6 @@ public class AbilityManaPart implements java.io.Serializable {
      */
     public final boolean isSnow() {
         return this.getSourceCard().isSnow();
-    }
-
-    /**
-     * <p>
-     * isReflectedMana.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isReflectedMana() {
-        return this.reflected;
     }
 
     /**

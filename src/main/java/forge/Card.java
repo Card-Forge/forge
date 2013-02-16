@@ -2657,7 +2657,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             AbilityManaPart am = a.getManaPart();
-            if ((am.isBasic() || am.isReflectedMana()) && !res.contains(a)) {
+            if (am.isBasic() && !res.contains(a)) {
                 res.add(a);
             }
 
@@ -5973,7 +5973,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean isReflectedLand() {
         for (final SpellAbility a : this.getCharacteristics().getManaAbility()) {
-            if (a.getManaPart().isReflectedMana()) {
+            if (a.getApi().equals(ApiType.ManaReflected)) {
                 return true;
             }
         }

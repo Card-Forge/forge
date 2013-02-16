@@ -3,6 +3,7 @@ package forge.game.ai;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -10,10 +11,13 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardUtil;
+import forge.Constant;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
+import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
@@ -128,7 +132,13 @@ public class ComputerUtilMana {
                         m.setExpressChoice(colorChoice);
                         colorChoice = ComputerUtilMana.getComboManaChoice(ai, ma, sa, cost);
                         m.setExpressChoice(colorChoice);
-                    }
+                    } else if (ma.getApi().equals(ApiType.ManaReflected)) {
+                        if (CardUtil.getReflectableManaColors(ma, ma, new HashSet<String>(), new ArrayList<Card>()).contains(MagicColor.toLongString(costParts[nPart]))) {
+                            m.setExpressChoice(costParts[nPart]);
+                        } else {
+                            m.setExpressChoice("0");
+                        }     
+                    } 
                     // check if ability produces any color
                     else if (m.isAnyMana()) {
                         String colorChoice = costParts[nPart];
@@ -602,19 +612,24 @@ public class ComputerUtilMana {
                 colorlessSources.add(m);
     
                 // find possible colors
-                if (m.getManaPart().canProduce("W")) {
+                if (m.getManaPart().canProduce("W") 
+                        || CardUtil.getReflectableManaColors(m, m, new HashSet<String>(), new ArrayList<Card>()).contains(Constant.Color.WHITE)) {
                     whiteSources.add(m);
                 }
-                if (m.getManaPart().canProduce("U")) {
+                if (m.getManaPart().canProduce("U") 
+                        || CardUtil.getReflectableManaColors(m, m, new HashSet<String>(), new ArrayList<Card>()).contains(Constant.Color.BLUE)) {
                     blueSources.add(m);
                 }
-                if (m.getManaPart().canProduce("B")) {
+                if (m.getManaPart().canProduce("B") 
+                        || CardUtil.getReflectableManaColors(m, m, new HashSet<String>(), new ArrayList<Card>()).contains(Constant.Color.BLACK)) {
                     blackSources.add(m);
                 }
-                if (m.getManaPart().canProduce("R")) {
+                if (m.getManaPart().canProduce("R") 
+                        || CardUtil.getReflectableManaColors(m, m, new HashSet<String>(), new ArrayList<Card>()).contains(Constant.Color.RED)) {
                     redSources.add(m);
                 }
-                if (m.getManaPart().canProduce("G")) {
+                if (m.getManaPart().canProduce("G") 
+                        || CardUtil.getReflectableManaColors(m, m, new HashSet<String>(), new ArrayList<Card>()).contains(Constant.Color.GREEN)) {
                     greenSources.add(m);
                 }
                 if (m.getManaPart().isSnow()) {

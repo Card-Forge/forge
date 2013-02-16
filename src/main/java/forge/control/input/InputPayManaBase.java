@@ -11,6 +11,7 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.MagicColor;
+import forge.card.ability.ApiType;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
@@ -68,7 +69,7 @@ public abstract class InputPayManaBase extends Input {
         if (m.isAnyMana()) {
             return true;
         }
-        if (m.isReflectedMana()) {
+        if (am.getApi().equals(ApiType.ManaReflected)) {
             final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new HashSet<String>(), new ArrayList<Card>());
             for (final String color : reflectableColors) {
                 if (mana.contains(MagicColor.toShortString(color))) {
@@ -227,7 +228,7 @@ public abstract class InputPayManaBase extends Input {
     
             for (final SpellAbility am : abilities) {
                 AbilityManaPart m = am.getManaPart();
-                if (m.isReflectedMana()) {
+                if (am.getApi().equals(ApiType.ManaReflected)) {
                     final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new HashSet<String>(), new ArrayList<Card>());
                     for (final String color : reflectableColors) {
                         if (manaCost.isColor(color)) {

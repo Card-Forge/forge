@@ -30,6 +30,7 @@ import forge.card.CardCharacteristics;
 import forge.card.EditionInfo;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
+import forge.card.ability.ApiType;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -501,6 +502,10 @@ public final class CardUtil {
         // so we basically need to have a recursive list that send the parents
         // so we don't infinite recurse.
         final Card card = abMana.getSourceCard();
+        
+        if (!abMana.getApi().equals(ApiType.ManaReflected)) {
+            return colors;
+        }
 
         if (!parents.contains(card)) {
             parents.add(card);
@@ -577,7 +582,7 @@ public final class CardUtil {
                     break;
                 }
 
-                if (ab.getManaPart().isReflectedMana()) {
+                if (ab.getApi().equals(ApiType.ManaReflected)) {
                     if (!parents.contains(ab.getSourceCard())) {
                         // Recursion!
                         reflectAbilities.add(ab);
