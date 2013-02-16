@@ -654,7 +654,7 @@ public class CardFactorySorceries {
         };
     }
 
-    private static final SpellAbility getProfaneCommand(final Card card) {
+    /*private static final SpellAbility getProfaneCommand(final Card card) {
         // not sure what to call variables, so I just made up something
         final Player[] ab0player = new Player[1];
         final Card[] ab1card = new Card[1];
@@ -1080,7 +1080,7 @@ public class CardFactorySorceries {
         spell.setBeforePayMana(chooseTwoInput);
         card.setSpellWithChoices(true);
         return spell;
-    }
+    }*/
 
     private static final SpellAbility getTransmuteArtifact(final Card card) {
         /*
@@ -1169,7 +1169,6 @@ public class CardFactorySorceries {
         } else if (cardName.equals("Balance")) { card.addSpellAbility(getBalance(card));
         } else if (cardName.equals("Patriarch's Bidding")) { card.addSpellAbility(getPatriarchsBidding(card));
         } else if (cardName.equals("Sanity Grinding")) { card.addSpellAbility(getSanityGrinding(card));
-        } else if (cardName.equals("Profane Command")) { card.addSpellAbility(getProfaneCommand(card));
         } else if (cardName.equals("Transmute Artifact")) { card.addSpellAbility(getTransmuteArtifact(card));
         }
     } // getCard

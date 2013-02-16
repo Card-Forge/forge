@@ -1,7 +1,14 @@
 Name:Profane Command
 ManaCost:X B B
 Types:Sorcery
-Text:Choose two - Target player loses X life; or return target creature card with converted mana cost X or less from your graveyard to the battlefield; or target creature gets -X/-X until end of turn; or up to X target creatures gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
+Text:no text
+A:SP$ Charm | Announce$ X | Cost$ X B B | Choices$ DBLose,DBChange,DBWeaken,DBSearch | CharmNum$ 2 | References$ X | SpellDescription$ Choose two - Target player loses X life; or return target creature card with converted mana cost X or less from your graveyard to the battlefield; or target creature gets -X/-X until end of turn; or up to X target creatures gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
+SVar:DBLose:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player to lose life | LifeAmount$ X | SpellDescription$ Target player loses X life.
+SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | References$ X | TgtPrompt$ Choose target creature in your graveyard | ValidTgts$ Creature.YouCtrl+cmcLEX | SpellDescription$ Return target creature card with converted mana cost X or less from your graveyard to the battlefield.
+SVar:DBWeaken:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -X/-X | IsCurse$ True | NumAtt$ -X | NumDef$ -X | SpellDescription$ Target creature gets -X/-X until end of turn.
+SVar:DBSearch:DB$ Pump | Cost$ 0 | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | KW$ Fear | TgtPrompt$ Select target creature to gain Fear | SpellDescription$ Up to X target creatures gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
+SVar:X:Count$xPaid
+#X Will get overwritten by Announce
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/profane_command.jpg
