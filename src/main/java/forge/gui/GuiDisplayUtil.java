@@ -35,11 +35,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
 
+import forge.CardLists;
+import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Constant;
 import forge.CounterType;
@@ -678,7 +681,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeTapPerm() {
         final List<Card> play = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        final Object o = GuiChoose.oneOrNone("Choose a permanent", play);
+        final Object o = GuiChoose.oneOrNone("Choose a permanent", CardLists.filter(play, Predicates.not(CardPredicates.Presets.TAPPED)));
         if (null == o) {
             return;
         } else {
@@ -696,7 +699,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeUntapPerm() {
         final List<Card> play = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        final Object o = GuiChoose.oneOrNone("Choose a permanent", play);
+        final Object o = GuiChoose.oneOrNone("Choose a permanent", CardLists.filter(play, CardPredicates.Presets.TAPPED));
         if (null == o) {
             return;
         } else {

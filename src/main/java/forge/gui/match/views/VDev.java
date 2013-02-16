@@ -56,15 +56,15 @@ public enum VDev implements IVDoc<CDev> {
     private List<JLabel> devLBLs = new ArrayList<JLabel>();
 
     // Top-level containers
-    private final JPanel viewport = new JPanel(new MigLayout("wrap, insets 0"));
+    private final JPanel viewport = new JPanel(new MigLayout("wrap, insets 0, ax center"));
     private final JScrollPane scroller = new JScrollPane(viewport,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     // Dev labels
     private final DevLabel lblMilling = new DevLabel("Loss by Milling: Enabled", "Loss by Milling: Disabled");
-    private final DevLabel lblUnlimitedLands = new DevLabel("Play Unlimited Lands This Turn: Enabled",
-            "Play Unlimited Lands This Turn: Disabled");
+    private final DevLabel lblUnlimitedLands = new DevLabel("Play many lands per Turn: Enabled",
+            "Play many lands per Turn: Disabled");
     private final DevLabel lblGenerateMana = new DevLabel("Generate Mana");
     private final DevLabel lblSetupGame = new DevLabel("Setup Game State");
     private final DevLabel lblTutor = new DevLabel("Tutor for Card");
@@ -99,18 +99,20 @@ public enum VDev implements IVDoc<CDev> {
         scroller.getViewport().setOpaque(false);
         viewport.setOpaque(false);
 
-        final String constraints = "w 95%!, gap 0 0 5px 0";
+        final String constraints = "w 95%!, gap 0 0 4px 0";
+        final String halfConstraints = "w 47%!, gap 0 0 4px 0";
+        viewport.add(this.lblGenerateMana, constraints);
+        viewport.add(this.lblTutor, constraints);
+        viewport.add(this.lblCardToHand, halfConstraints + ", split 2");
+        viewport.add(this.lblCardToBattlefield, halfConstraints);
+        
         viewport.add(this.lblRiggedRoll, constraints);
         viewport.add(this.lblMilling, constraints);
         viewport.add(this.lblUnlimitedLands, constraints);
-        viewport.add(this.lblGenerateMana, constraints);
         viewport.add(this.lblSetupGame, constraints);
-        viewport.add(this.lblTutor, constraints);
-        viewport.add(this.lblCardToHand, constraints);
-        viewport.add(this.lblCardToBattlefield, constraints);
         viewport.add(this.lblCounterPermanent, constraints);
-        viewport.add(this.lblTapPermanent, constraints);
-        viewport.add(this.lblUntapPermanent, constraints);
+        viewport.add(this.lblTapPermanent, halfConstraints + ", split 2");
+        viewport.add(this.lblUntapPermanent, halfConstraints);
         viewport.add(this.lblSetLife, constraints);
         viewport.add(this.lblBreakpoint, constraints);
     }
