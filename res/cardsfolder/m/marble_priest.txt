@@ -1,0 +1,12 @@
+Name:Marble Priest
+ManaCost:5
+Types:Artifact Creature Cleric
+Text:no text
+PT:3/3
+K:All Walls able to block CARDNAME do so.
+S:Mode$ PreventDamage | Source$ Wall | Target$ Card.Self | CombatDamage$ True | Description$ Prevent all combat damage that would be dealt to CARDNAME by Walls.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/marble_priest.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/231.jpg
+Oracle:All Walls able to block Marble Priest do so.\nPrevent all combat damage that would be dealt to Marble Priest by Walls.
+End

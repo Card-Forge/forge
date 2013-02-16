@@ -6290,6 +6290,7 @@ res/cardsfolder/m/maraxus.txt -text
 res/cardsfolder/m/maraxus_of_keld.txt svneol=native#text/plain
 res/cardsfolder/m/marble_chalice.txt svneol=native#text/plain
 res/cardsfolder/m/marble_diamond.txt svneol=native#text/plain
+res/cardsfolder/m/marble_priest.txt -text
 res/cardsfolder/m/marble_titan.txt svneol=native#text/plain
 res/cardsfolder/m/marcadian_bazaar.txt -text
 res/cardsfolder/m/march_of_souls.txt svneol=native#text/plain
@@ -10501,6 +10502,7 @@ res/cardsfolder/t/talrand_sky_summoner.txt -text
 res/cardsfolder/t/talrands_invocation.txt -text
 res/cardsfolder/t/talruum_champion.txt svneol=native#text/plain
 res/cardsfolder/t/talruum_minotaur.txt svneol=native#text/plain
+res/cardsfolder/t/talruum_piper.txt -text
 res/cardsfolder/t/talus_paladin.txt svneol=native#text/plain
 res/cardsfolder/t/tamanoa.txt svneol=native#text/plain
 res/cardsfolder/t/tamiyo_the_moon_sage.txt -text
