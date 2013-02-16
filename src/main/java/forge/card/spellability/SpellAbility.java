@@ -1777,6 +1777,7 @@ public abstract class SpellAbility implements ISpellAbility {
                      return false;
                  }
                  this.setSVar(aVar, "Number$" + value);
+                 this.getSourceCard().setSVar(aVar, "Number$" + value);
             }
         }
         return true;
