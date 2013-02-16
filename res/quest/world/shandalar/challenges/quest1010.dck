@@ -7,7 +7,7 @@ Wins=100
 Card Reward=duplicate card;chosen card sets:3ED,4ED,ARN,ATQ,DRK,LEG desc:any card;1 blue rare;1 black rare;1 red rare;1 green rare;1 white rare;1 multicolor rare;1 colorless rare;1 artifact rare;1 land rare
 Credit Reward=1000
 HumanExtras=Mightstone
-AIExtras=Celestial Prism
+AIExtras=Fellwar Stone
 [metadata]
 Name=quest10
 Title=Arzakon's home plane
@@ -22,6 +22,7 @@ Deck Type=constructed
 3 Badlands|3ED
 3 Bayou|3ED
 1 Berserk|2ED
+4 Birds of Paradise|2ED
 1 Black Mana Battery|4ED
 2 Blood Lust|5ED
 1 Blue Mana Battery|4ED
@@ -33,7 +34,7 @@ Deck Type=constructed
 1 Circle of Protection: Green|2ED
 1 Circle of Protection: Red|2ED
 1 Circle of Protection: White|2ED
-2 City of Brass|ARN
+1 City of Brass|ARN
 1 Clockwork Avian|4ED
 1 Clockwork Beast|5ED
 1 Colossus of Sardia|ATQ
@@ -44,16 +45,15 @@ Deck Type=constructed
 2 Elvish Archers|4ED
 2 Erg Raiders|ARN
 1 Exorcist|DRK
-4 Fellwar Stone|4ED
+3 Fellwar Stone|4ED
 2 Fog|2ED
 2 Giant Growth|2ED
-2 Giant Strength|4ED
 1 Grapeshot Catapult|ATQ
 1 Green Mana Battery|4ED
 2 Grizzly Bears|4ED
-2 Howl from Beyond|4ED
 2 Hurr Jackal|4ED
 2 Immolation|4ED
+4 Kird Ape|ARN
 2 Lightning Bolt|2ED
 1 Mind Twist|4ED
 1 Mirror Universe|LEG
@@ -74,10 +74,9 @@ Deck Type=constructed
 3 Savannah|3ED
 2 Savannah Lions|4ED
 3 Scrubland|3ED
-1 Shapeshifter|4ED
-2 Siren's Call|4ED
-3 Sol Ring|2ED
+1 Sol Ring|2ED
 2 Spirit Link|4ED
+2 Su-Chi|ATQ
 3 Taiga|3ED
 1 Tetravus|4ED
 2 The Hive|2ED
@@ -90,7 +89,6 @@ Deck Type=constructed
 3 Underground Sea|3ED
 3 Volcanic Island|3ED
 2 Wall of Dust|4ED
-1 Wheel of Fortune|3ED
 1 White Mana Battery|4ED
 2 Will-o'-the-Wisp|2ED
 2 Zephyr Falcon|4ED
