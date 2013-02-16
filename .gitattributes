@@ -13540,6 +13540,7 @@ res/sound/green_land.wav -text
 res/sound/lose_duel.wav -text
 res/sound/poison.wav -text
 res/sound/shuffle.wav -text
+res/sound/sorcery.wav -text
 res/sound/tap.wav -text
 res/sound/untap.wav -text
 res/token-images.txt -text
