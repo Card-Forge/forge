@@ -199,26 +199,31 @@ public class DualListBox<T> extends FPanel {
 
     private void addCardViewListener(final FList list) {
         list.getModel().addListDataListener(new ListDataListener() {
+            int callCount = 0;
             @Override
-            public void intervalRemoved(ListDataEvent e) {
-                final ListModel model = list.getModel();
-                if (0 == model.getSize()) {
-                    // nothing left to show
-                    return;
-                }
-                
-                int cardIdxPre = e.getIndex0();
-                if (model.getSize() <= cardIdxPre) {
-                    // the last element got removed, get the one above it
-                    --cardIdxPre;
-                }
-                final int cardIdx = cardIdxPre;
-                
+            public void intervalRemoved(final ListDataEvent e) {
+                final int callNum = ++callCount;
                 // invoke this later since the list is out of sync with the model
                 // at this moment.
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+                        if (callNum != callCount) {
+                            // don't run stale callbacks
+                            return;
+                        }
+                        
+                        ListModel model = list.getModel();
+                        if (0 == model.getSize()) {
+                            // nothing left to show
+                            return;
+                        }
+                        
+                        int cardIdx = e.getIndex0();
+                        if (model.getSize() <= cardIdx) {
+                            // the last element got removed, get the one above it
+                            cardIdx = model.getSize() - 1;
+                        }
                         showCard = false;
                         list.setSelectedIndex(cardIdx);
                         showCard = true;
