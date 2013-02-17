@@ -203,12 +203,15 @@ public class KeyboardShortcuts {
         public void attach() {
             detach();
             str = Singletons.getModel().getPreferences().getPref(prefkeys);
-            key = assembleKeystrokes(str.split(" "));
-
-            // Attach key stroke to input map...
-            inputMap.put(key, str);
-            // ...then attach actionListener to action map
-            actionMap.put(str, handler);
+            if (!str.isEmpty()) {
+                key = assembleKeystrokes(str.split(" "));
+    
+                // Attach key stroke to input map...
+                inputMap.put(key, str);
+                
+                // ...then attach actionListener to action map
+                actionMap.put(str, handler);
+            }
         }
 
         /** */
@@ -230,11 +233,9 @@ public class KeyboardShortcuts {
         // in the form of an input event object. So, first test if these were pressed.
         // ALT shortcuts will be ignored.
         for (final String s : keys0) {
-            if (s.equals("16")) {
-                inputEvents[0] = 16; }
-            if (s.equals("17")) { inputEvents[1] = 17; }
-
-            if (!s.equals("16") && !s.equals("17")) {
+            if (s.equals("16"))      { inputEvents[0] = 16; }
+            else if (s.equals("17")) { inputEvents[1] = 17; }
+            else {
                 keyEvent = Integer.valueOf(s);
             }
         }
