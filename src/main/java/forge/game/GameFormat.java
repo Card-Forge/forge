@@ -34,7 +34,7 @@ import forge.item.CardPrinted;
  * TODO: Write javadoc for this type.
  * 
  */
-public class GameFormat {
+public class GameFormat implements Comparable<GameFormat> {
 
     private final String name;
     // contains allowed sets, when empty allows all sets
@@ -157,5 +157,23 @@ public class GameFormat {
             return arg1.getName();
         }
     };
+
+    /* (non-Javadoc)
+     * just used for ordering -- comparing the name is sufficient
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(GameFormat other) {
+        if (null == other) {
+            return 1;
+        }
+        if (name == other.name) {
+            return 0;
+        }
+        if (null == name) {
+            return -1;
+        }
+        return name.compareTo(other.name);
+    }
 
 }

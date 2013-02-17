@@ -25,8 +25,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -65,7 +65,7 @@ import javax.swing.event.ListSelectionListener;
  * @author Forge
  * @version $Id$
  */
-public class ListChooser<T> {
+public class ListChooser<T extends Comparable<? super T>> {
 
     // Data and number of choices for the list
     private List<T> list;
@@ -83,68 +83,15 @@ public class ListChooser<T> {
     private JOptionPane optionPane;
     private Action ok, cancel;
 
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param minChoices
-     *            a int.
-     * @param maxChoices
-     *            a int.
-     * @param list
-     *            a T object.
-     */
-    public ListChooser(final String title, final String message, final int minChoices, final int maxChoices,
-            final T[] list) {
-        this(title, message, minChoices, maxChoices, Arrays.asList(list));
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param minChoices
-     *            a int.
-     * @param maxChoices
-     *            a int.
-     * @param list
-     *            a {@link java.util.List} object.
-     */
-    public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list) {
-        this(title, null, minChoices, maxChoices, list);
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param minChoices
-     *            a int.
-     * @param maxChoices
-     *            a int.
-     * @param list
-     *            a {@link java.util.List} object.
-     */
-    public ListChooser(final String title, final String message, final int minChoices, final int maxChoices,
-            final Collection<T> list) {
+    public ListChooser(final String title, final int minChoices, final int maxChoices,
+            final List<T> list, boolean startSorted, Comparator<T> sortComparator) {
         this.title = title;
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;
         this.list = new ArrayList<T>(list);
+        if (startSorted) {
+            Collections.sort(this.list, sortComparator);
+        }
         this.jList = new JList(new ChooserListModel());
         this.ok = new CloseAction(JOptionPane.OK_OPTION, "OK");
         this.ok.setEnabled(minChoices == 0);
@@ -160,7 +107,7 @@ public class ListChooser<T> {
             this.jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         }
 
-        this.optionPane = new JOptionPane(new Object[] { message, new JScrollPane(this.jList) }, JOptionPane.QUESTION_MESSAGE,
+        this.optionPane = new JOptionPane(new JScrollPane(this.jList), JOptionPane.QUESTION_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, options, options[0]);
         this.jList.getSelectionModel().addListSelectionListener(new SelListener());
         this.jList.addMouseListener(new DblListener());
@@ -178,7 +125,7 @@ public class ListChooser<T> {
 
     /** @return boolean */
     public synchronized boolean show() {
-        return this.show(0);
+        return show(list.get(0));
     }
 
     /**
@@ -187,7 +134,7 @@ public class ListChooser<T> {
      * @param index0 index to select when shown
      * @return a boolean.
      */
-    public synchronized boolean show(int index0) {
+    public synchronized boolean show(T item) {
         if (this.called) {
             throw new IllegalStateException("Already shown");
         }
@@ -198,7 +145,11 @@ public class ListChooser<T> {
                 this.dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             }
 
-            this.jList.setSelectedIndex(index0);
+            if (list.contains(item)) {
+                jList.setSelectedValue(item, true);
+            } else {
+                jList.setSelectedIndex(0);
+            }
 
             this.dialog.addWindowFocusListener(new WindowFocusListener() {
                 @Override

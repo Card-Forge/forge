@@ -30,7 +30,7 @@ import forge.util.StorageReaderFile;
  * This function holds the "world info" for the current quest.
  *
  */
-public class QuestWorld {
+public class QuestWorld implements Comparable<QuestWorld>{
     private final String name;
     private final String dir;
     private final GameFormatQuest format;
@@ -160,5 +160,22 @@ public class QuestWorld {
 
         }
 
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(QuestWorld other) {
+        if (null == other) {
+            return 1;
+        }
+        if (name == other.name) {
+            return 0;
+        }
+        if (null == name) {
+            return -1;
+        }
+        return name.compareTo(other.name);
     }
 }

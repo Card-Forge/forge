@@ -142,32 +142,28 @@ public class PlayerControllerHuman extends PlayerController {
         CardPool sideboard = deck.get(DeckSection.Sideboard);
         CardPool main = deck.get(DeckSection.Main);
 
-        //  + deck.getSideboard().countAll()
         int deckMinSize = Math.min(main.countAll(), gameType.getDecksFormat().getMainRange().getMinimumInteger());
-        //IntRange sbRange = gameType.getDecksFormat().getSideRange();
-        int sideboardSize = sideboard.countAll();
     
         CardPool newSb = new CardPool();
         List<CardPrinted> newMain = null;
         
-    
         while (newMain == null || newMain.size() < deckMinSize) {
-            
-            if ( newMain != null ) {
+            if (newMain != null) {
                 String errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
                 JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             }
             
-            newMain = GuiChoose.order("Sideboard", "Main Deck", sideboardSize, sideboard.toFlatList(), main.toFlatList(), null, true);
+            newMain = GuiChoose.sideboard(sideboard.toFlatList(), main.toFlatList());
         }
     
         newSb.clear();
         newSb.addAll(main);
         newSb.addAll(sideboard);
-        for(CardPrinted c : newMain)
+        for(CardPrinted c : newMain) {
             newSb.remove(c);
+        }
     
-        Deck res = (Deck) deck.copyTo(deck.getName());
+        Deck res = (Deck)deck.copyTo(deck.getName());
         res.getMain().clear();
         res.getMain().add(newMain);
         CardPool resSb = res.getOrCreate(DeckSection.Sideboard);

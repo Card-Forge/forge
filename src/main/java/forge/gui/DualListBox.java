@@ -10,7 +10,11 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JDialog;
@@ -21,7 +25,7 @@ import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
@@ -42,41 +46,141 @@ import forge.item.CardPrinted;
 // Single Arrows in between left box and right box for ordering
 // Multi Arrows for moving everything in order
 // Up/down arrows on the right of the right box for swapping
-// Single ok button, disabled until left box is empty
+// Single ok button, disabled until left box has specified number of items remaining
 
 @SuppressWarnings("serial")
-public class DualListBox<T> extends FPanel {
-    private FList sourceList;
+public class DualListBox<T extends Comparable<? super T>> extends FPanel {
+    private final FList sourceList;
+    private final UnsortedListModel<T> sourceListModel;
 
-    private UnsortedListModel<T> sourceListModel;
+    private final FList destList;
+    private final UnsortedListModel<T> destListModel;
 
-    private FList destList;
+    private final FButton addButton;
+    private final FButton addAllButton;
+    private final FButton removeButton;
+    private final FButton removeAllButton;
+    private final FButton okButton;
+    private final FButton autoButton;
 
-    private UnsortedListModel<T> destListModel;
+    private final FLabel orderedLabel;
+    private final FLabel selectOrder;
 
-    private FButton addButton;
-    private FButton addAllButton;
-
-    private FButton removeButton;
-    private FButton removeAllButton;
-
-    private FButton okButton;
-    private FButton autoButton;
-
-    private FLabel orderedLabel;
-    private FLabel selectOrder;
-
-    private int remainingObjects = 0;
+    private final int targetRemainingSources;
 
     private boolean sideboardingMode = false;
     private boolean showCard = true;
 
-    public DualListBox(int remainingObjects, String label, List<T> sourceElements, List<T> destElements,
-            Card referenceCard) {
-        this.remainingObjects = remainingObjects;
-        initScreen();
-        orderedLabel.setText(label);
+    public DualListBox(int remainingSources, String label, List<T> sourceElements, List<T> destElements,
+            boolean startSorted, Comparator<T> sortComparator) {
+        targetRemainingSources = remainingSources;
+        sourceListModel = new UnsortedListModel<T>();
+        sourceList = new FList(sourceListModel);
+        destListModel = new UnsortedListModel<T>();
+        destList = new FList(destListModel);
+        
+        setPreferredSize(new Dimension(650, 300));
+        setLayout(new GridLayout(0, 3));
+        setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+
+        final Runnable onAdd = new Runnable() {
+            @Override
+            public void run() {
+                @SuppressWarnings("unchecked")
+                List<T> selected = (List<T>) Arrays.asList(sourceList.getSelectedValues());
+                addDestinationElements(selected);
+                clearSourceSelected();
+                sourceList.validate();
+                _setButtonState();
+            }
+        };
+
+        final Runnable onRemove = new Runnable() {
+            @Override
+            public void run() {
+                @SuppressWarnings("unchecked")
+                List<T> selected = (List<T>) Arrays.asList(destList.getSelectedValues());
+                clearDestinationSelected();
+                addSourceElements(selected);
+                _setButtonState();
+            }
+        };
+
+        sourceList.addKeyListener(new KeyAdapter() {
+            @Override public void keyPressed(final KeyEvent e) {
+                _handleListKey(e, onAdd, destList);
+            }
+        });
+        sourceList.addMouseListener(new MouseAdapter() {
+            @Override public void mouseClicked(MouseEvent e) {
+                if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { onAdd.run(); }
+            }
+        });
+        
+        destList.addKeyListener(new KeyAdapter() {
+            @Override public void keyPressed(final KeyEvent e) {
+                _handleListKey(e, onRemove, sourceList);
+            }
+        });
+        destList.addMouseListener(new MouseAdapter() {
+            @Override public void mouseClicked(MouseEvent e) {
+                if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) { onRemove.run(); }
+            }
+        });
+        
+        // Dual List control buttons
+        addButton = new FButton(">");
+        addButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { onAdd.run(); } });
+        addAllButton = new FButton(">>");
+        addAllButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _addAll(); } });
+        removeButton = new FButton("<");
+        removeButton.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) { onRemove.run(); } });
+        removeAllButton = new FButton("<<");
+        removeAllButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _removeAll(); } });
+
+        // Dual List Complete Buttons
+        okButton = new FButton("OK");
+        okButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _finish(); } });
+        autoButton = new FButton("Auto");
+        autoButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _addAll(); _finish(); } });
+
+        FPanel leftPanel = new FPanel(new BorderLayout());
+        selectOrder = new FLabel.Builder().text("Select Order:").build();
+        leftPanel.setSize(300, 300);
+        leftPanel.add(selectOrder, BorderLayout.NORTH);
+        leftPanel.add(new FScrollPane(sourceList), BorderLayout.CENTER);
+        leftPanel.add(okButton, BorderLayout.SOUTH);
+
+        FPanel centerPanel = new FPanel(new GridLayout(6, 1));
+        centerPanel.setSize(50, this.getHeight());
+        centerPanel.add(new FPanel()); // empty panel to take up the first slot
+        centerPanel.add(addButton);
+        centerPanel.add(addAllButton);
+        centerPanel.add(removeButton);
+        centerPanel.add(removeAllButton);
+
+        orderedLabel = new FLabel.Builder().text(label).build();
+
+        FPanel rightPanel = new FPanel(new BorderLayout());
+        rightPanel.setSize(300, 300);
+        rightPanel.add(orderedLabel, BorderLayout.NORTH);
+        rightPanel.add(new FScrollPane(destList), BorderLayout.CENTER);
+        rightPanel.add(autoButton, BorderLayout.SOUTH);
+
+        add(leftPanel);
+        add(centerPanel);
+        add(rightPanel);
+
+        _addListListeners(sourceList);
+        _addListListeners(destList);
+        
         if (destElements != null && !destElements.isEmpty()) {
+            if (startSorted) {
+                // it would be nice if we could sort in place, but it might mess up our callers
+                destElements = Lists.newArrayList(destElements);
+                Collections.sort(destElements, sortComparator);
+            }
             addDestinationElements(destElements);
             
             SwingUtilities.invokeLater(new Runnable() {
@@ -86,7 +190,12 @@ public class DualListBox<T> extends FPanel {
                 }
             });
         }
+        
         if (sourceElements != null && !sourceElements.isEmpty()) {
+            if (startSorted) {
+                sourceElements = Lists.newArrayList(sourceElements);
+                Collections.sort(sourceElements, sortComparator);
+            }
             addSourceElements(sourceElements);
             
             SwingUtilities.invokeLater(new Runnable() {
@@ -96,19 +205,42 @@ public class DualListBox<T> extends FPanel {
                 }
             });
         }
-        this.setButtonState();
+        
+        _setButtonState();
     }
     
-    public DualListBox(int remainingObjects, String label, List<T> sourceElements, List<T> destElements, Card referenceCard, boolean isSideboardDialog) {
-        this(remainingObjects, label, sourceElements, destElements, referenceCard);
-
-        this.sideboardingMode = isSideboardDialog;
+    public void setSideboardMode( boolean isSideboardMode) {
+        sideboardingMode = isSideboardMode;
         if (sideboardingMode) {
             addAllButton.setVisible(false);
             removeAllButton.setVisible(false);
             autoButton.setEnabled(false);
             selectOrder.setText(String.format("Sideboard (%d):", sourceListModel.getSize()));
             orderedLabel.setText(String.format("Main Deck (%d):", destListModel.getSize()));
+        }
+    }
+
+    private void _handleListKey (KeyEvent e, Runnable onSpace, FList arrowFocusTarget) {
+        switch (e.getKeyCode()) {
+        case KeyEvent.VK_SPACE:
+            onSpace.run();
+            break;
+            
+        case KeyEvent.VK_LEFT:
+        case KeyEvent.VK_RIGHT:
+            arrowFocusTarget.requestFocusInWindow();
+            break;
+            
+        case KeyEvent.VK_ENTER:
+            if (okButton.isEnabled()) {
+                okButton.doClick();
+            } else if (autoButton.isEnabled()) {
+                autoButton.doClick();
+            }
+            break;
+            
+        default:
+            break;
         }
     }
 
@@ -197,7 +329,7 @@ public class DualListBox<T> extends FPanel {
         }
     }
 
-    private void addCardViewListener(final FList list) {
+    private void _addListListeners(final FList list) {
         list.getModel().addListDataListener(new ListDataListener() {
             int callCount = 0;
             @Override
@@ -276,157 +408,19 @@ public class DualListBox<T> extends FPanel {
         });
     }
 
-    private void initScreen() {
-        setPreferredSize(new Dimension(650, 300));
-        setLayout(new GridLayout(0, 3));
-        setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
-        setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        sourceListModel = new UnsortedListModel<T>();
-        sourceList = new FList(sourceListModel);
-        destListModel = new UnsortedListModel<T>();
-        destList = new FList(destListModel);
-
-        final Runnable onAdd = new Runnable() {
-            @Override
-            public void run() {
-                @SuppressWarnings("unchecked")
-                List<T> selected = (List<T>) Arrays.asList(sourceList.getSelectedValues());
-                addDestinationElements(selected);
-                clearSourceSelected();
-                sourceList.validate();
-                setButtonState();
-            }
-        };
-
-        final Runnable onRemove = new Runnable() {
-            @Override
-            public void run() {
-                @SuppressWarnings("unchecked")
-                List<T> selected = (List<T>) Arrays.asList(destList.getSelectedValues());
-                clearDestinationSelected();
-                addSourceElements(selected);
-                setButtonState();
-            }
-        };
-
-        ActionListener addListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onAdd.run();
-            }
-        };
-
-        ActionListener removeListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onRemove.run();
-            }
-        };
-        
-        final Function<KeyEvent, Void> onEnter = new Function<KeyEvent, Void>() {
-            @Override
-            public Void apply (KeyEvent e) {
-                if (e.getKeyCode() == 10) {
-                    if (e.isControlDown() || e.isMetaDown()) {
-                        autoButton.doClick();
-                    } else {
-                        okButton.doClick();
-                    }
-                }
-                
-                return null;
-            }
-        };
-
-        sourceList.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { onAdd.run(); }
-                else { onEnter.apply(e); }
-            }
-        });
-        
-        destList.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { onRemove.run(); }
-                else { onEnter.apply(e); }
-            }
-        });
-        
-        // Dual List control buttons
-        addButton = new FButton(">");
-        addButton.addActionListener(addListener);
-        addAllButton = new FButton(">>");
-        addAllButton.addActionListener(new AddAllListener());
-        removeButton = new FButton("<");
-        removeButton.addActionListener(removeListener);
-        removeAllButton = new FButton("<<");
-        removeAllButton.addActionListener(new RemoveAllListener());
-
-        // Dual List Complete Buttons
-        okButton = new FButton("OK");
-        okButton.addActionListener(new OkListener());
-
-        autoButton = new FButton("Auto");
-        autoButton.addActionListener(new AutoListener());
-
-        FPanel leftPanel = new FPanel(new BorderLayout());
-        selectOrder = new FLabel.Builder().build();
-        selectOrder.setText("Select Order:");
-        leftPanel.setSize(300, 300);
-        leftPanel.add(selectOrder, BorderLayout.NORTH);
-        leftPanel.add(new FScrollPane(sourceList), BorderLayout.CENTER);
-        leftPanel.add(okButton, BorderLayout.SOUTH);
-
-        FPanel centerPanel = new FPanel(new GridLayout(5, 1));
-        centerPanel.setSize(50, this.getHeight());
-        centerPanel.add(addButton);
-        centerPanel.add(addAllButton);
-        centerPanel.add(removeButton);
-        centerPanel.add(removeAllButton);
-
-        orderedLabel = new FLabel.Builder().build();
-        orderedLabel.setText("Selected Elements:");
-
-        FPanel rightPanel = new FPanel(new BorderLayout());
-        rightPanel.setSize(300, 300);
-        rightPanel.add(orderedLabel, BorderLayout.NORTH);
-        rightPanel.add(new FScrollPane(destList), BorderLayout.CENTER);
-        rightPanel.add(autoButton, BorderLayout.SOUTH);
-
-        add(leftPanel);
-        add(centerPanel);
-        add(rightPanel);
-
-        addCardViewListener(sourceList);
-        addCardViewListener(destList);
-    }
-
-    private void addAll() {
+    private void _addAll() {
         addDestinationElements(sourceListModel);
         clearSourceListModel();
-        setButtonState();
+        _setButtonState();
+    }
+    
+    private void _removeAll() {
+        addSourceElements(destListModel);
+        clearDestinationListModel();
+        _setButtonState();
     }
 
-    private class AddAllListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            addAll();
-            setButtonState();
-        }
-    }
-
-    private class RemoveAllListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            addSourceElements(destListModel);
-            clearDestinationListModel();
-            setButtonState();
-        }
-    }
-
-    public void setButtonState() {
+    private void _setButtonState() {
         if (sideboardingMode) {
             removeAllButton.setVisible(false);
             addAllButton.setVisible(false);
@@ -434,15 +428,11 @@ public class DualListBox<T> extends FPanel {
             orderedLabel.setText(String.format("Main Deck (%d):", destListModel.getSize()));
         }
         
-        if (remainingObjects != -1) {
-            okButton.setEnabled(sourceListModel.getSize() == remainingObjects);
+        if (targetRemainingSources != -1) {
+            okButton.setEnabled(sourceListModel.getSize() == targetRemainingSources);
         }
-        if (remainingObjects < 1) {
-            if (!sideboardingMode) {
-                autoButton.setEnabled(sourceListModel.getSize() != remainingObjects);
-            } else {
-                autoButton.setEnabled(false);
-            }
+        if (targetRemainingSources < 1 && !sideboardingMode) {
+            autoButton.setEnabled(sourceListModel.getSize() != targetRemainingSources);
         } else {
             autoButton.setEnabled(false);
         }
@@ -453,27 +443,11 @@ public class DualListBox<T> extends FPanel {
         addAllButton.setEnabled(sourceListModel.getSize() != 0);
     }
 
-    private void finishOrdering() {
-        System.out.println("Attempting to finish.");
+    private void _finish() {
         this.setVisible(false);
 
         Container grandpa = this.getParent().getParent();
         JDialog dialog = (JDialog) grandpa.getParent();
         dialog.dispose();
-    }
-
-    private class OkListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            finishOrdering();
-        }
-    }
-
-    private class AutoListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            addAll();
-            finishOrdering();
-        }
     }
 }

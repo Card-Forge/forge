@@ -179,14 +179,13 @@ public class GameActionPlay {
         untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
 
         if (untappedCreats.size() != 0) {
-            final ArrayList<Object> choices = new ArrayList<Object>();
+            final List<Card> choices = new ArrayList<Card>();
             for (final Card c : untappedCreats) {
                 choices.add(c);
             }
-            choices.add("DONE");
             ArrayList<String> usableColors = new ArrayList<String>();
             ManaCostBeingPaid newCost = new ManaCostBeingPaid(originalCost.toString());
-            Object tapForConvoke = null;
+            Card tapForConvoke = null;
             if (sa.getActivatingPlayer().isHuman()) {
                 tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(),
                         choices);
@@ -195,7 +194,7 @@ public class GameActionPlay {
                 // Probably along with deciding how many creatures to
                 // tap
             }
-            while ((tapForConvoke != null) && (tapForConvoke instanceof Card) && (untappedCreats.size() != 0)) {
+            while (tapForConvoke != null && untappedCreats.size() != 0) {
                 final Card workingCard = (Card) tapForConvoke;
                 usableColors = CardUtil.getConvokableColors(workingCard, newCost);
 

@@ -26,7 +26,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 
 import forge.Card;
-
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.SpellManaCost;
@@ -48,7 +47,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public abstract class SpellAbility implements ISpellAbility {
+public abstract class SpellAbility implements ISpellAbility, Comparable<SpellAbility> {
 
     // choices for constructor isPermanent argument
     private String description = "";
@@ -1781,5 +1780,26 @@ public abstract class SpellAbility implements ISpellAbility {
             }
         }
         return true;
+    }
+
+    /* (non-Javadoc)
+     * used for ordering in lists -- we just want to group by card
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(SpellAbility other) {
+        if (null == other) {
+            return 1;
+        }
+        if (sourceCard == other.sourceCard) {
+            return 0;
+        }
+        if (null == sourceCard) {
+            return -1;
+        }
+        if (null == other.sourceCard) {
+            return 1;
+        }
+        return sourceCard.getName().compareTo(other.sourceCard.getName());
     }
 }
