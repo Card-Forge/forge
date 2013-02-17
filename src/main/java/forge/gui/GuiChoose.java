@@ -149,7 +149,9 @@ public class GuiChoose {
         return order(title, top, remainingObjects, sourceChoices, destChoices, referenceCard, false);
     }
 
-    public static <T> List<T> sideboard(List<T> sideboard, List<T> deck) {
+    public static <T extends Comparable<? super T>> List<T> sideboard(List<T> sideboard, List<T> deck) {
+        Collections.sort(deck);
+        Collections.sort(sideboard);
         return order("Sideboard", "Main Deck", sideboard.size(), sideboard, deck, null, true);
     }
 
