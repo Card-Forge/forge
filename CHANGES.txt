@@ -23,6 +23,12 @@ Work was also done on making the UI more keyboard-friendly.  For example, the OK
 Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards). 
 The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
 
+All Traditional sets are now up to 85% complete. Standard Format is supported at 99.19%. We are now at under 900 unsupported cards that are missing from Forge.
+
+A person reported "Love the game but I seem to be having a problem using a draft pool to start a quest. It works for sealed for me but when I select the draft deck option it's always blank even if I have one or several drafts completed." This should now be fixed and draft decks should now show up in quest start combobox.
+
+Several of the exiting sound file were changed and a handful of new sounds were added to the /res/sound/ folder.
+
 
 New Cards:
 
@@ -95,6 +101,21 @@ Marble Priest
 Talruum Piper
 Endemic Plague
 Feint
+Reincarnation
+Killing Glare
+Gargantuan Gorilla
+Psychic Allergy
+Invoke Prejudice
+Conjurer's Ban
+Cephalid Shrine
+Bioshift
+Glamer Spinners
+Mark of Eviction
+Plague Boiler
+Razia's Purification
+Reins of the Vinesteed
+Shared Animosity
+Simic Guildmage
 
 
 New Phenomenons:
@@ -105,6 +126,7 @@ Planewide Disaster
 
 New Vanguard Avatars:
 
+Figure of Destiny Avatar
 Sisters of Stone Death Avatar
 Viridian Zealot Avatar
 
@@ -339,7 +361,49 @@ Detailed Changelog: (This will likely be deleted in the near future)
 - Restore previous functionality in VAssignDamage to only assign Lethal Damage to first blocker when the popup first displays
 - rename of carddb.getAllUniqueCards method => getUniqueCards
 - only highlight next item if no other items have been removed since the callback started
-
+- Removed two avatars from the newly added cards section (they were already in the avatar section)
+- Fixed some bugs related to reflected mana.
+- The AI can now use reflected mana sources.
+- Updated some Shandalar quest decks.
+- Updated some more Shandalar quest decks.
+- Added a sorcery.wav file from Foreroes.
+- Added ability to edit variant sections of decks. (Default avatar,default scheme deck,default planar deck)
+- Removed unused import
+- The "Announce" parameter can now be used for targeting.
+- Converted Profane Command to script.
+- Fix description to Lys Alana Scarblade cost
+- Fixing logic error in QuestWinLose that prevent WinGameEffects from awarding alternate win bonus 
+- Fix issue with not actually using the alt win number that's calculated and using the wrong preference value where it is calculated
+- Moved the hardcoded predicates for variants cards from CEditorConstructed to card/CardRulesPredicates.java
+- Added a method in CardDb that returns only the cards matching the supplied predicate
+- Developers' menu - changed order of buttons and groupped on a single line actions of similiar nature
+- fixing a typo
+- removing imports unused
+- Fix Blood Speaker's script to actually use a trigger
+- Updating mtgdata and PerSetTracking.py to give a bit cleaner output
+- Added a white_land.wav file.
+- Include Wither on the list of keywords that get added to getCardText() for instants/sorceries
+- add framework for sorting lists presented to the user for choice selection
+- no existing behavior is changed -- callers have to make the explicit choice to sort
+- allow left-right arrow keys to switch lists when choosing order
+- sort sideboard
+- fixed In the Eye of Chaos
+- commit Chris's non-poppy version of the draw sound effect
+- Fixed Minamo Sightbender
+- rewrite type conversion to be more compatible across compilers
+- fix draft decks not showing up in quest start combobox
+- fix npe when removing a keyboard shortcut
+- Updated AI parameters of two cards.
+- Updated some more Shandalar quest decks.
+- GuiChoose - reverting lists sorting inside GUI components
+- Commiting overloads to have GuiChoose lists sorted
+- Added four more new sounds: add_counter.wav, artifact_creature.wav, block.wav and win_duel.wav
+- Cleaning up damage dealt by myk's enforcement of sorting info GuiChoose lists
+- When human wins game by spell effect, that's a special condition not equal to alternative
+- sideboarding method will have deck parts sorted before showing the UI
+- rem unused import
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 end
