@@ -17,8 +17,14 @@
  */
 package forge.gui.match.controllers;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.JButton;
 
 import forge.Command;
 import forge.game.MatchController;
@@ -37,27 +43,43 @@ public enum CMessage implements ICDoc {
     SINGLETON_INSTANCE;
 
     private GuiInput inputControl = new GuiInput();
+    private Component lastFocusedButton = null;
+    
     private final ActionListener actCancel = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent evt) {
             inputControl.selectButtonCancel();
         }
     };
-
     private final ActionListener actOK = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent evt) {
             inputControl.selectButtonOK();
         }
     };
+    
+    private final FocusListener onFocus = new FocusAdapter() {
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (null != VMessage.SINGLETON_INSTANCE.getParentCell() && VMessage.SINGLETON_INSTANCE == VMessage.SINGLETON_INSTANCE.getParentCell().getSelected()) {
+                // only record focus changes when we're showing -- otherwise it is due to a tab visibility change
+                lastFocusedButton = e.getComponent();
+            }
+        }
+    };
 
+    private void _initButton(JButton button, ActionListener onClick) {
+        // remove to ensure listeners don't accumulate over many initializations
+        button.removeActionListener(onClick);
+        button.addActionListener(onClick);
+        button.removeFocusListener(onFocus);
+        button.addFocusListener(onFocus);
+    }
+    
     @Override
     public void initialize() {
-        VMessage.SINGLETON_INSTANCE.getBtnCancel().removeActionListener(actCancel);
-        VMessage.SINGLETON_INSTANCE.getBtnCancel().addActionListener(actCancel);
-
-        VMessage.SINGLETON_INSTANCE.getBtnOK().removeActionListener(actOK);
-        VMessage.SINGLETON_INSTANCE.getBtnOK().addActionListener(actOK);
+        _initButton(VMessage.SINGLETON_INSTANCE.getBtnCancel(), actCancel);
+        _initButton(VMessage.SINGLETON_INSTANCE.getBtnOK(), actOK);
     }
 
     /**
@@ -103,6 +125,9 @@ public enum CMessage implements ICDoc {
      */
     @Override
     public void update() {
-
+        // set focus back to button that last had it
+        if (null != lastFocusedButton) {
+            lastFocusedButton.requestFocusInWindow();
+        }
     }
 }
