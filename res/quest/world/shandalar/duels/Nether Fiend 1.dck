@@ -9,6 +9,7 @@ Deck Type=constructed
 [main]
 4 Animate Dead|LEB
 4 Black Knight|4ED
+3 Bog Rats|DRK
 3 Erg Raiders|ARN
 2 Frozen Shade|LEB
 2 Junun Efreet|ARN
@@ -20,5 +21,4 @@ Deck Type=constructed
 20 Swamp|4ED
 3 Terror|4ED
 4 The Hive|LEB
-3 Xenic Poltergeist|ATQ
 [sideboard]

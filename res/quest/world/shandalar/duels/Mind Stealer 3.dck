@@ -7,11 +7,12 @@ Difficulty=hard
 Description=UB deck with tough fliers and creature stealing.
 Deck Type=constructed
 [main]
+1 Air Elemental|LEB
 4 Animate Dead|LEB
 4 Control Magic|LEB
 2 Fellwar Stone|DRK
-3 Hypnotic Specter|4ED
-11 Island|4ED
+4 Hypnotic Specter|4ED
+9 Island|4ED
 2 Junun Efreet|ARN
 2 Mana Drain|LEG
 1 Mind Twist|LEB
@@ -19,9 +20,9 @@ Deck Type=constructed
 2 Phantom Monster|LEB
 4 Sengir Vampire|4ED
 3 Sindbad|4ED
-2 Siren's Call|LEB
 2 Steal Artifact|LEB
-11 Swamp|4ED
+9 Swamp|4ED
+4 Underground Sea|LEB
 4 Unholy Strength|4ED
 3 Will-o'-the-Wisp|LEB
 [sideboard]
