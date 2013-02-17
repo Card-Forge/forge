@@ -1,5 +1,6 @@
 package forge.gui.framework;
 
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -10,8 +11,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JPanel;
 
@@ -106,7 +109,6 @@ public final class SResizingUtil {
         }
     };
 
-    /** */
     public static void resizeWindow() {
         final List<DragCell> cells = FView.SINGLETON_INSTANCE.getDragCells();
         final JPanel pnlContent = FView.SINGLETON_INSTANCE.getPnlContent();
@@ -121,6 +123,11 @@ public final class SResizingUtil {
 
         double roughVal = 0;
         int smoothVal = 0;
+        
+        Set<Component> existingComponents = new HashSet<Component>();
+        for (Component c : pnlContent.getComponents()) {
+            existingComponents.add(c);
+        }
 
         // This is the core of the pixel-perfect layout. To avoid ±1 px errors on borders
         // from rounding individual panels, the intermediate values (exactly accurate, in %)
@@ -151,7 +158,12 @@ public final class SResizingUtil {
             // X and Y coordinate can be rounded as usual.
             cellA.setSmoothX((int) Math.round(cellA.getRoughX() * w));
             cellA.setSmoothY((int) Math.round(cellA.getRoughY() * h));
-            pnlContent.add(cellA);
+
+            // only add component if not already in container; otherwise the keyboard focus
+            // jumps around to the most recenly added component 
+            if (!existingComponents.contains(cellA)) {
+                pnlContent.add(cellA);
+            }
         }
 
         // Lock in final bounds and build heads.

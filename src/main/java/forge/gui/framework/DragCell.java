@@ -300,6 +300,11 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      * @param doc0 &emsp; {@link forge.gui.framework.IVDoc} tab document.
      */
     public void setSelected(final IVDoc<? extends ICDoc> doc0) {
+        if (null != doc0 && docSelected == doc0) {
+            // already selected
+            return;
+        }
+        
         docSelected = null;
         pnlBody.removeAll();
 
