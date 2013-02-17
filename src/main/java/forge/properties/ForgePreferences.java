@@ -185,6 +185,8 @@ public class ForgePreferences {
 
                 if (split.length == 2) {
                     this.setPref(split[0], split[1]);
+                } else if (split.length == 1 && line.endsWith("=")) {
+                    this.setPref(split[0], "");
                 }
             }
         } catch (FileNotFoundException ex) {

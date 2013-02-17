@@ -10,7 +10,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -39,6 +41,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 
@@ -87,6 +90,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRandomizeArt = new OptionsCheckBox("Randomize Card Art");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
 
+    private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
+    
+    
     /**
      * Constructor.
      */
@@ -165,7 +171,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         for (final Shortcut s : shortcuts) {
             pnlPrefs.add(new FLabel.Builder().text(s.getDescription())
                     .fontAlign(SwingConstants.RIGHT).build(), "w 50%!, h 22px!, gap 0 2% 0 1%");
-            pnlPrefs.add(new KeyboardShortcutField(s), "w 25%!");
+            KeyboardShortcutField field = new KeyboardShortcutField(s);
+            pnlPrefs.add(field, "w 25%!");
+            shortcutFields.put(s.getPrefKey(), field);
         }
 
         // Reset button
@@ -175,6 +183,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         scrContent.setBorder(null);
     }
 
+    public void reloadShortcuts() {
+        for (Map.Entry<FPref, KeyboardShortcutField> e : shortcutFields.entrySet()) {
+            e.getValue().reload(e.getKey());
+        }
+    }
+    
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()
      */
@@ -280,7 +294,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             super();
             this.setEditable(false);
             this.setFont(FSkin.getFont(14));
-            this.setCodeString(Singletons.getModel().getPreferences().getPref(shortcut0.getPrefKey()));
+            final FPref prefKey = shortcut0.getPrefKey();
+            reload(prefKey);
 
             this.addKeyListener(new KeyAdapter() {
                 @Override
@@ -297,8 +312,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
                 @Override
                 public void focusLost(final FocusEvent evt) {
-                    Singletons.getModel().getPreferences().setPref(
-                            shortcut0.getPrefKey(), getCodeString());
+                    Singletons.getModel().getPreferences().setPref(prefKey, getCodeString());
                     Singletons.getModel().getPreferences().save();
                     shortcut0.attach();
                     KeyboardShortcutField.this.setBackground(Color.white);
@@ -306,6 +320,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             });
         }
 
+        public void reload(FPref prefKey) {
+            this.setCodeString(Singletons.getModel().getPreferences().getPref(prefKey));
+        }
+        
         /**
          * Gets the code string.
          * 

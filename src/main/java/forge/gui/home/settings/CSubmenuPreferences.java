@@ -169,7 +169,9 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getBtnReset().setCommand(new Command() {
             @Override
             public void execute() {
-                Singletons.getModel().getPreferences().reset();
+                ForgePreferences prefs = Singletons.getModel().getPreferences();
+                prefs.reset();
+                prefs.save();
                 update();
             }
         });
@@ -198,6 +200,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbScaleLarger().setSelected(prefs.getPrefBoolean(FPref.UI_SCALE_LARGER));
         view.getCbTextMana().setSelected(prefs.getPrefBoolean(FPref.UI_CARD_OVERLAY));
         view.getCbEnableSounds().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
+        view.reloadShortcuts();
     }
 
     private void updateSkinNames() {
@@ -228,8 +231,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getLblChooseSkin().setText("Please restart Forge (click here to close).");
         view.getLblChooseSkin().setHoverable(true);
         view.getLblChooseSkin().setCommand(new Command() { @Override
-            public void execute() { RestartUtil.restartApplication(new Runnable() {
-                    @Override public void run() { } }); } });
+            public void execute() { RestartUtil.restartApplication(null); } });
 
         prefs.setPref(FPref.UI_SKIN, name);
         prefs.save();
