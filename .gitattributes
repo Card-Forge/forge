@@ -13553,7 +13553,9 @@ res/sound/black_land.wav -text
 res/sound/block.wav -text
 res/sound/blue_land.wav -text
 res/sound/draw.wav -text
+res/sound/enchant.wav -text
 res/sound/equip.wav -text
+res/sound/flip_coin.wav -text
 res/sound/green_land.wav -text
 res/sound/lose_duel.wav -text
 res/sound/poison.wav -text
