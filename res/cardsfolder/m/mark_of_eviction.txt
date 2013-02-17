@@ -1,0 +1,13 @@
+Name:Mark of Eviction
+ManaCost:U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRem | TriggerDescription$ At the beginning of your upkeep, return enchanted creature and all Auras attached to that creature to their owners' hands.
+SVar:TrigRem:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.EnchantedBy,Aura.AttachedTo Card.EnchantedBy | Origin$ Battlefield | Destination$ Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_eviction.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/58.jpg
+Oracle:Enchant creature\nAt the beginning of your upkeep, return enchanted creature and all Auras attached to that creature to their owners' hands.
+End

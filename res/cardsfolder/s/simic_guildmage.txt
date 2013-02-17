@@ -1,0 +1,16 @@
+Name:Simic Guildmage
+ManaCost:GU GU
+Types:Creature Elf Wizard
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature to remove +1/+1 counter | SubAbility$ DBMove | RememberObjects$ Targeted | StackDescription$ None | SpellDescription$ Move a +1/+1 counter from target creature onto another target creature with the same controller.
+SVar:DBMove:DB$ MoveCounter | Source$ Remembered | ValidTgts$ Creature | TgtPrompt$ Select another target creature with the same controller to get +1/+1 counter | TargetUnique$ True | TargetsWithSameController$ True | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Creature.sharesControllerWith Remembered | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Pump| Cost$ 1 U | ValidTgts$ Aura.AttachedTo Permanent | TgtPrompt$ Select target aura to move | RememberObjects$ Valid Permanent.EnchantedBy Targeted | SubAbility$ ChooseNewHost | StackDescription$ None | SpellDescription$ Attach target Aura enchanting a permanent to another permanent with the same controller.
+SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Permanent.NotEnchantedByTargeted+sharesControllerWith Remembered+CanBeEnchantedByTargeted | ChoiceZone$ Battlefield | SubAbility$ DBAttach | AILogic$ AtLeast1
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_guildmage.jpg
+Oracle: ({G/U} can be paid with either {G} or {U}.)\n{1}{G}: Move a +1/+1 counter from target creature onto another target creature with the same controller.\n{1}{U}: Attach target Aura enchanting a permanent to another permanent with the same controller.
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/148.jpg
+End

@@ -6610,6 +6610,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                 }
+            } else if (property.substring(16).equals("AllRemembered")) {
+                for (final Object rem : source.getRemembered()) {
+                    if (rem instanceof Card) {
+                        final Card card = (Card) rem;
+                        if (!this.canBeEnchantedBy(card)) {
+                            return false;
+                        }
+                    }
+                }
             } else {
                 if (!this.canBeEnchantedBy(source)) {
                     return false;
@@ -6743,6 +6752,19 @@ public class Card extends GameEntity implements Comparable<Card> {
             String color = props[1];
 
             return CardFactoryUtil.isMostProminentColor(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), color);
+        } else if (property.startsWith("notSharesColorWith")) {
+            if (property.equals("notSharesColorWith")) {
+                if (this.sharesColorWith(source)) {
+                    return false;
+                }
+            } else {
+                final String restriction = property.split("notSharesColorWith ")[1];
+                for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {
+                    if (card.isValid(restriction, sourceController, source) && this.sharesColorWith(card)) {
+                        return false;
+                    }
+                }
+            }
         } else if (property.startsWith("sharesCreatureTypeWith")) {
             if (property.equals("sharesCreatureTypeWith")) {
                 if (!this.sharesCreatureTypeWith(source)) {
@@ -6874,6 +6896,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                             if (!this.sharesControllerWith(card)) {
                                 return false;
                             }
+                        }
+                    }
+                } else if (restriction.equals("Imprinted")) {
+                    for (final Card card : source.getImprinted()) {
+                        if (!this.sharesControllerWith(card)) {
+                            return false;
                         }
                     }
                 }

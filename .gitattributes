@@ -918,6 +918,7 @@ res/cardsfolder/b/biomantic_mastery.txt svneol=native#text/plain
 res/cardsfolder/b/biomass_mutation.txt -text
 res/cardsfolder/b/bioplasm.txt -text svneol=unset#text/plain
 res/cardsfolder/b/biorhythm.txt svneol=native#text/plain
+res/cardsfolder/b/bioshift.txt -text
 res/cardsfolder/b/biovisionary.txt -text
 res/cardsfolder/b/birchlore_rangers.txt svneol=native#text/plain
 res/cardsfolder/b/bird_maiden.txt svneol=native#text/plain
@@ -4121,6 +4122,7 @@ res/cardsfolder/g/glacial_wall.txt svneol=native#text/plain
 res/cardsfolder/g/glaciers.txt svneol=native#text/plain
 res/cardsfolder/g/glade_gnarr.txt svneol=native#text/plain
 res/cardsfolder/g/gladecover_scout.txt svneol=native#text/plain
+res/cardsfolder/g/glamer_spinners.txt -text
 res/cardsfolder/g/glare_of_subdual.txt svneol=native#text/plain
 res/cardsfolder/g/glarewielder.txt svneol=native#text/plain
 res/cardsfolder/g/glaring_spotlight.txt -text
@@ -6305,6 +6307,7 @@ res/cardsfolder/m/maritime_guard.txt svneol=native#text/plain
 res/cardsfolder/m/marjhan.txt svneol=native#text/plain
 res/cardsfolder/m/mark_for_death.txt -text
 res/cardsfolder/m/mark_of_asylum.txt svneol=native#text/plain
+res/cardsfolder/m/mark_of_eviction.txt -text
 res/cardsfolder/m/mark_of_fury.txt svneol=native#text/plain
 res/cardsfolder/m/mark_of_mutiny.txt svneol=native#text/plain
 res/cardsfolder/m/mark_of_the_oni.txt svneol=native#text/plain
@@ -7724,6 +7727,7 @@ res/cardsfolder/p/pithing_needle.txt svneol=native#text/plain
 res/cardsfolder/p/pixie_queen.txt svneol=native#text/plain
 res/cardsfolder/p/plagiarize.txt -text svneol=unset#text/plain
 res/cardsfolder/p/plague_beetle.txt svneol=native#text/plain
+res/cardsfolder/p/plague_boiler.txt -text
 res/cardsfolder/p/plague_dogs.txt svneol=native#text/plain
 res/cardsfolder/p/plague_fiend.txt svneol=native#text/plain
 res/cardsfolder/p/plague_myr.txt svneol=native#text/plain
@@ -8226,6 +8230,7 @@ res/cardsfolder/r/ray_of_erasure.txt svneol=native#text/plain
 res/cardsfolder/r/ray_of_revelation.txt svneol=native#text/plain
 res/cardsfolder/r/rayne_academy_chancellor.txt -text
 res/cardsfolder/r/raze.txt svneol=native#text/plain
+res/cardsfolder/r/razias_purification.txt -text
 res/cardsfolder/r/razing_snidd.txt svneol=native#text/plain
 res/cardsfolder/r/razor_barrier.txt svneol=native#text/plain
 res/cardsfolder/r/razor_golem.txt svneol=native#text/plain
@@ -8331,6 +8336,7 @@ res/cardsfolder/r/reign_of_chaos.txt svneol=native#text/plain
 res/cardsfolder/r/reincarnation.txt -text
 res/cardsfolder/r/reinforced_bulwark.txt svneol=native#text/plain
 res/cardsfolder/r/reinforcements.txt svneol=native#text/plain
+res/cardsfolder/r/reins_of_the_vinesteed.txt -text
 res/cardsfolder/r/reiterate.txt svneol=native#text/plain
 res/cardsfolder/r/reito_lantern.txt svneol=native#text/plain
 res/cardsfolder/r/reiver_demon.txt -text
@@ -9233,6 +9239,7 @@ res/cardsfolder/s/shard_phoenix.txt svneol=native#text/plain
 res/cardsfolder/s/shard_volley.txt svneol=native#text/plain
 res/cardsfolder/s/sharding_sphinx.txt svneol=native#text/plain
 res/cardsfolder/s/shardless_agent.txt -text
+res/cardsfolder/s/shared_animosity.txt -text
 res/cardsfolder/s/shared_discovery.txt svneol=native#text/plain
 res/cardsfolder/s/shared_triumph.txt svneol=native#text/plain
 res/cardsfolder/s/sharpened_pitchfork.txt -text
@@ -9435,6 +9442,7 @@ res/cardsfolder/s/simic_charm.txt -text
 res/cardsfolder/s/simic_fluxmage.txt -text
 res/cardsfolder/s/simic_growth_chamber.txt svneol=native#text/plain
 res/cardsfolder/s/simic_guildgate.txt -text
+res/cardsfolder/s/simic_guildmage.txt -text
 res/cardsfolder/s/simic_initiate.txt -text
 res/cardsfolder/s/simic_keyrune.txt -text
 res/cardsfolder/s/simic_ragworm.txt svneol=native#text/plain
