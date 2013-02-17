@@ -5242,6 +5242,7 @@ res/cardsfolder/i/invincible_hymn.txt svneol=native#text/plain
 res/cardsfolder/i/inviolability.txt svneol=native#text/plain
 res/cardsfolder/i/invisibility.txt svneol=native#text/plain
 res/cardsfolder/i/invisible_stalker.txt -text
+res/cardsfolder/i/invoke_prejudice.txt -text
 res/cardsfolder/i/invoke_the_firemind.txt svneol=native#text/plain
 res/cardsfolder/i/invulnerability.txt -text
 res/cardsfolder/i/iona_shield_of_emeria.txt svneol=native#text/plain
