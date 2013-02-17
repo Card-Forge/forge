@@ -12,7 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -85,10 +85,13 @@ public class DualListBox<T extends Comparable<? super T>> extends FPanel {
         setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         final Runnable onAdd = new Runnable() {
+            @SuppressWarnings("unchecked")
             @Override
             public void run() {
-                @SuppressWarnings("unchecked")
-                List<T> selected = (List<T>) Arrays.asList(sourceList.getSelectedValues());
+                List<T> selected = new ArrayList<T>();
+                for (Object item : sourceList.getSelectedValues()) {
+                    selected.add((T)item);
+                }
                 addDestinationElements(selected);
                 clearSourceSelected();
                 sourceList.validate();
@@ -97,10 +100,13 @@ public class DualListBox<T extends Comparable<? super T>> extends FPanel {
         };
 
         final Runnable onRemove = new Runnable() {
+            @SuppressWarnings("unchecked")
             @Override
             public void run() {
-                @SuppressWarnings("unchecked")
-                List<T> selected = (List<T>) Arrays.asList(destList.getSelectedValues());
+                List<T> selected = new ArrayList<T>();
+                for (Object item : destList.getSelectedValues()) {
+                    selected.add((T)item);
+                }
                 clearDestinationSelected();
                 addSourceElements(selected);
                 _setButtonState();
