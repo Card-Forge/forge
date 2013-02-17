@@ -235,16 +235,14 @@ public class GuiChoose {
     public static <T> List<T> sortedGetChoices(final String message, final int min, final int max, final T[] choices, Comparator<T> comparer) {
         // You may create a copy of source array if callers expect the collection to be unchanged
         Arrays.sort(choices, comparer);
-        final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-        return getChoices(c);
+        return getChoices(message, min, max, choices);
     }
 
     // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> List<T> sortedGetChoices(final String message, final int min, final int max, final List<T> choices, Comparator<T> comparer) {
         // You may create a copy of source list if callers expect the collection to be unchanged
         Collections.sort(choices, comparer);
-        final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-        return getChoices(c);
+        return getChoices(message, min, max, choices);
     }
 
 }

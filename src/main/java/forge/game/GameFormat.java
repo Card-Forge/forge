@@ -47,6 +47,8 @@ public class GameFormat implements Comparable<GameFormat> {
     protected final transient Predicate<CardPrinted> filterRules;
     protected final transient Predicate<CardPrinted> filterPrinted;
 
+    private final int index; 
+    
     /**
      * Instantiates a new game format.
      * 
@@ -58,6 +60,11 @@ public class GameFormat implements Comparable<GameFormat> {
      *            the banned cards
      */
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
+        this(fName, sets, bannedCards, 0);
+    }
+    
+    public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards, int compareIdx) {
+        this.index = compareIdx;
         this.name = fName;
         this.allowedSetCodes = Lists.newArrayList(sets);
         this.bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
@@ -167,13 +174,11 @@ public class GameFormat implements Comparable<GameFormat> {
         if (null == other) {
             return 1;
         }
-        if (name == other.name) {
-            return 0;
-        }
-        if (null == name) {
-            return -1;
-        }
-        return name.compareTo(other.name);
+        return index - other.index;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
 }

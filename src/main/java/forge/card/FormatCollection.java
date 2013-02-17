@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import forge.game.GameFormat;
+import forge.util.FileSection;
 import forge.util.StorageView;
 import forge.util.StorageReaderFile;
 
@@ -93,30 +94,27 @@ public final class FormatCollection extends StorageView<GameFormat> {
          */
         @Override
         protected GameFormat read(String line) {
-            String name = null;
-            final List<String> sets = new ArrayList<String>(); // default: all
-                                                               // sets
-            // allowed
+            final List<String> sets = new ArrayList<String>(); // default: all sets allowed
             final List<String> bannedCards = new ArrayList<String>(); // default:
             // nothing
             // banned
 
-            final String[] sParts = line.trim().split("\\|");
-            for (final String sPart : sParts) {
-                final String[] kv = sPart.split(":", 2);
-                final String key = kv[0].toLowerCase();
-                if ("name".equals(key)) {
-                    name = kv[1];
-                } else if ("sets".equals(key)) {
-                    sets.addAll(Arrays.asList(kv[1].split(", ")));
-                } else if ("banned".equals(key)) {
-                    bannedCards.addAll(Arrays.asList(kv[1].split("; ")));
-                }
+            FileSection section = FileSection.parse(line, ":", "|");
+            String name = section.get("name");
+            int index = section.getInt("index", 0);
+            String strSets = section.get("sets");
+            if ( null != strSets ) {
+                sets.addAll(Arrays.asList(strSets.split(", ")));
             }
+            String strCars = section.get("banned");
+            if ( strCars != null ) {
+                bannedCards.addAll(Arrays.asList(strCars.split("; ")));
+            }
+
             if (name == null) {
                 throw new RuntimeException("Format must have a name! Check formats.txt file");
             }
-            return new GameFormat(name, sets, bannedCards);
+            return new GameFormat(name, sets, bannedCards, index);
 
         }
 
