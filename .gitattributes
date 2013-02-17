@@ -13552,6 +13552,7 @@ res/sound/artifact_creature.wav -text
 res/sound/black_land.wav -text
 res/sound/block.wav -text
 res/sound/blue_land.wav -text
+res/sound/creature.wav -text
 res/sound/draw.wav -text
 res/sound/enchant.wav -text
 res/sound/equip.wav -text
