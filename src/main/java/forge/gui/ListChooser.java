@@ -24,6 +24,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.AbstractList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -82,11 +84,15 @@ public class ListChooser<T> {
     private JOptionPane optionPane;
     private Action ok, cancel;
 
-    public ListChooser(final String title, final int minChoices, final int maxChoices, final Iterable<T> list) {
+    public ListChooser(final String title, final int minChoices, final int maxChoices, final T[] list) {
+        this(title, minChoices, maxChoices, Arrays.asList(list));
+    }
+    
+    public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list) {
         this.title = title;
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;
-        this.list = Lists.newArrayList(list);
+        this.list = list.getClass().isInstance(List.class) ? (List<T>)list : Lists.newArrayList(list);
         this.jList = new JList(new ChooserListModel());
         this.ok = new CloseAction(JOptionPane.OK_OPTION, "OK");
         this.ok.setEnabled(minChoices == 0);
