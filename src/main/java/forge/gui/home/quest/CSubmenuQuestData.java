@@ -41,8 +41,6 @@ public enum CSubmenuQuestData implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-
-
     private final Map<String, QuestData> arrQuests = new HashMap<String, QuestData>();
 
     private final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;

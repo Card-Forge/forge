@@ -138,10 +138,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
                 cbxCustomDeck.removeAllItems();
                 CardCollections decks = Singletons.getModel().getDecks();
                 IStorage<DeckGroup> storage = newVal == StartingPoolType.SealedDeck ? decks.getSealed() : decks.getDraft();
-                if (newVal == StartingPoolType.SealedDeck) {
-                    for (DeckGroup d : storage) {
-                        cbxCustomDeck.addItem(d.getHumanDeck());
-                    }
+                for (DeckGroup d : storage) {
+                    cbxCustomDeck.addItem(d.getHumanDeck());
                 }
             }
         }
