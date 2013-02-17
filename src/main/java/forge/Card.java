@@ -8897,6 +8897,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         return Singletons.getModel().getGame().isCardInZone(this, zone);
     }
 
+    public final boolean canBeDestroyed() { 
+        return isInPlay() && (!hasKeyword("Indestructible") || (isCreature() && getNetDefense() <= 0));
+    }
+
     /**
      * Can target.
      * 
@@ -9208,6 +9212,19 @@ public class Card extends GameEntity implements Comparable<Card> {
             xPaid = getXManaCostPaid() * getManaCost().countX();
         }
         return getManaCost().getCMC() + xPaid;
+    }
+
+    public final boolean canBeSacrificedBy(final SpellAbility source)
+    {
+        if (isImmutable()) {
+            System.out.println("Trying to sacrifice immutables: " + this);
+            return false;
+        }
+        if (source != null && !getController().isOpponentOf(source.getActivatingPlayer())
+                && getController().hasKeyword("Spells and abilities your opponents control can't cause you to sacrifice permanents.")) {
+            return false;
+        }
+        return true;
     }
 
 } // end Card class

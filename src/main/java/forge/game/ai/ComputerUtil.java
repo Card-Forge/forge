@@ -625,84 +625,78 @@ public class ComputerUtil {
      * <p>
      * sacrificePermanents.
      * </p>
-     * 
      * @param amount
      *            a int.
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @param destroy
-     *            the destroy
      * @param source
      *            the source SpellAbility
+     * @param destroy
+     *            the destroy
+     * @param list
+     *            a {@link forge.CardList} object.
+     * 
      * @return the card list
      */
-    public static List<Card> sacrificePermanents(final Player ai, final int amount, final List<Card> cardlist, final boolean destroy,
-            SpellAbility source) {
-        final List<Card> list = new ArrayList<Card>(cardlist);
-        final List<Card> sacList = new ArrayList<Card>();
-        // used in Annihilator and AF_Sacrifice
-        int max = list.size();
-        if (max > amount) {
-            max = amount;
-        }
+    public static List<Card> choosePermanentsToSacrifice(final Player ai, final List<Card> cardlist, final int amount, SpellAbility source, 
+            final boolean destroy, final boolean isOptional) {
+        final List<Card> remaining = new ArrayList<Card>(cardlist);
+        final List<Card> sacrificed = new ArrayList<Card>();
 
-        CardLists.sortCMC(list);
-        Collections.reverse(list);
+        if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) { 
+            return sacrificed; // sacrifice none 
+        }
+        
+        CardLists.sortCMC(remaining);
+        Collections.reverse(remaining);
+
+        final int max = Math.min(remaining.size(), amount);
 
         for (int i = 0; i < max; i++) {
-            Card c = null;
-
-            if (destroy) {
-                final List<Card> indestructibles = CardLists.getKeyword(list, "Indestructible");
-                if (!indestructibles.isEmpty()) {
-                    c = indestructibles.get(0);
-                }
-            }
-            for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
-                final int priority = 6 - ip;
-                for (Card card : list) {
-                    if (!card.getSVar("SacMe").equals("") && Integer.parseInt(card.getSVar("SacMe")) == priority) {
-                        c = card;
-                        break;
-                    }
-                }
-            }
-
-            if (c == null) {
-                if (CardLists.getNotType(list, "Creature").size() == 0) {
-                    c = CardFactoryUtil.getWorstCreatureAI(list);
-                } else if (CardLists.getNotType(list, "Land").size() == 0) {
-                    c = CardFactoryUtil.getWorstLand(ai);
-                } else {
-                    c = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
-                }
-
-                final ArrayList<Card> auras = c.getEnchantedBy();
-
-                if (auras.size() > 0) {
-                    // TODO: choose "worst" controlled enchanting Aura
-                    for (int j = 0; j < auras.size(); j++) {
-                        final Card aura = auras.get(j);
-                        if (aura.getController().equals(c.getController()) && list.contains(aura)) {
-                            c = aura;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (destroy) {
-                if (!Singletons.getModel().getGame().getAction().destroy(c)) {
-                    continue;
-                }
-            } else {
-                if (!Singletons.getModel().getGame().getAction().sacrifice(c, source)) {
-                    continue;
-                }
-            }
-            list.remove(c);
-            sacList.add(c);
+            Card c = chooseCardToSacrifice(remaining, ai, destroy);
+            remaining.remove(c);
+            sacrificed.add(c);
         }
-        return sacList;
+        return sacrificed;
+    }
+
+    // Precondition it wants: remaining are reverse-sorted by CMC
+    private static Card chooseCardToSacrifice(final List<Card> remaining, final Player ai, final boolean destroy) {
+        if (destroy) {
+            final List<Card> indestructibles = CardLists.getKeyword(remaining, "Indestructible");
+            if (!indestructibles.isEmpty()) {
+                return indestructibles.get(0);
+            }
+        }
+        for (int ip = 0; ip < 6; ip++) { // priority 0 is the lowest, priority 5 the highest
+            final int priority = 6 - ip;
+            for (Card card : remaining) {
+                if (!card.getSVar("SacMe").equals("") && Integer.parseInt(card.getSVar("SacMe")) == priority) {
+                    return card;
+                }
+            }
+        }
+
+        Card c;
+
+        if (CardLists.getNotType(remaining, "Creature").size() == 0) {
+            c = CardFactoryUtil.getWorstCreatureAI(remaining);
+        } else if (CardLists.getNotType(remaining, "Land").size() == 0) {
+            c = CardFactoryUtil.getWorstLand(CardLists.filter(remaining, CardPredicates.Presets.LANDS));
+        } else {
+            c = CardFactoryUtil.getWorstPermanentAI(remaining, false, false, false, false);
+        }
+
+        final ArrayList<Card> auras = c.getEnchantedBy();
+
+        if (auras.size() > 0) {
+            // TODO: choose "worst" controlled enchanting Aura
+            for (int j = 0; j < auras.size(); j++) {
+                final Card aura = auras.get(j);
+                if (aura.getController().equals(c.getController()) && remaining.contains(aura)) {
+                    return aura;
+                }
+            }
+        }
+        return c;
     }
 
     /**

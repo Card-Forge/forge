@@ -37,7 +37,6 @@ import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.SpellManaCost;
-import forge.card.ability.effects.SacrificeEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -1247,37 +1246,34 @@ public class CombatUtil {
         // Annihilator:
         if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
             final ArrayList<String> kws = c.getKeyword();
-            final Pattern p = Pattern.compile("Annihilator [0-9]+");
-            Matcher m;
             for (final String key : kws) {
-                m = p.matcher(key);
-                if (m.find()) {
-                    final String[] k = key.split(" ");
-                    final int a = Integer.valueOf(k[1]);
-                    final Card crd = c;
+                if( !key.startsWith("Annihilator ") ) continue;
+                final String[] k = key.split(" ", 2);
+                final int a = Integer.valueOf(k[1]);
 
-                    final Ability ability = new Ability(c, SpellManaCost.ZERO) {
-                        @Override
-                        public void resolve() {
-                            final Player cp = crd.getController();
-                            final Player opponent = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(c);
-                            if (cp.isHuman()) {
-                                final List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
-                                ComputerUtil.sacrificePermanents(opponent,  a, list, false, this);
-                            } else {
-                                SacrificeEffect.sacrificeHuman(opponent, a, "Permanent", this, false, false);
-                            }
+                final Ability ability = new Ability(c, SpellManaCost.ZERO) {
+                    @Override
+                    public void resolve() {
+                        final Player opponent = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(c);
+                        //List<Card> list = AbilityUtils.filterListByType(opponent.getCardsIn(ZoneType.Battlefield), "Permanent", this);
+                        final List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
+                        List<Card> toSac = opponent.getController().choosePermanentsToSacrifice(list, a, this, false, false);
+
+                        for(Card sacd : toSac) {
+                            final GameState game = Singletons.getModel().getGame(); 
+                            game.getAction().sacrifice(sacd, this);
                         }
-                    };
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Annihilator - Defending player sacrifices ").append(a).append(" permanents.");
-                    ability.setStackDescription(sb.toString());
-                    ability.setDescription(sb.toString());
-                    ability.setActivatingPlayer(c.getController());
-                    ability.setTrigger(true);
+                        
+                    }
+                };
+                String sb = String.format("Annihilator - Defending player sacrifices %d permanents.", a);
+                ability.setStackDescription(sb);
+                ability.setDescription(sb);
+                ability.setActivatingPlayer(c.getController());
+                ability.setTrigger(true);
 
-                    Singletons.getModel().getGame().getStack().add(ability);
-                } // find
+                Singletons.getModel().getGame().getStack().add(ability);
+
             } // for
         } // creatureAttacked
           // Annihilator

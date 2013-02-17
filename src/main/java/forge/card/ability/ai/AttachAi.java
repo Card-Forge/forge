@@ -400,7 +400,7 @@ public class AttachAi extends SpellAiLogic {
                     @Override
                     public boolean apply(final Card c) {
                         // Don't enchant creatures that can survive
-                        if (c.hasKeyword("Indestructible") || c.getNetCombatDamage() < c.getNetDefense()) {
+                        if (!c.canBeDestroyed() || c.getNetCombatDamage() < c.getNetDefense()) {
                             return false;
                         }
                         return true;

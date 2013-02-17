@@ -1,5 +1,6 @@
 package forge.game.player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -208,6 +209,33 @@ public class PlayerControllerHuman extends PlayerController {
         sb.append(announce);
         sb.append("?");
         return JOptionPane.showInputDialog(sb.toString());
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#choosePermanentsToSacrifice(java.util.List, int, forge.card.spellability.SpellAbility, boolean, boolean)
+     */
+    @Override
+    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
+        List<Card> result = new ArrayList<Card>();
+
+        for (int i = 0; i < amount; i++) {
+            if (validTargets.isEmpty()) {
+                break;
+            }
+            Card c;
+            if (isOptional) {
+                c = GuiChoose.oneOrNone("Select a card to sacrifice", validTargets);
+            } else {
+                c = GuiChoose.one("Select a card to sacrifice", validTargets);
+            }
+            if (c != null) {
+                result.add(c);
+                validTargets.remove(c);
+            } else {
+                return result;
+            }
+        }
+        return result;
     }
 
 

@@ -1,6 +1,5 @@
 package forge.card.ability.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -8,10 +7,9 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellEffect;
 import forge.card.spellability.SpellAbility;
-import forge.game.ai.ComputerUtil;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 
 public class SacrificeEffect extends SpellEffect {
@@ -19,6 +17,7 @@ public class SacrificeEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
+        final GameState game = Singletons.getModel().getGame();
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
@@ -41,29 +40,31 @@ public class SacrificeEffect extends SpellEffect {
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
 
         if (valid.equals("Self")) {
-            if (Singletons.getModel().getGame().getZoneOf(card).is(ZoneType.Battlefield)) {
-                if (Singletons.getModel().getGame().getAction().sacrifice(card, sa) && remSacrificed) {
+            if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
+                if (game.getAction().sacrifice(card, sa) && remSacrificed) {
                     card.addRemembered(card);
                 }
             }
         }
         else {
-            List<Card> sacList = null;
+            List<Card> choosenToSacrifice = null;
             for (final Player p : tgts) {
+                List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
+                List<Card> validTargets = AbilityUtils.filterListByType(battlefield, valid, sa);
+                
                 if (sa.hasParam("Random")) {
-                    sacList = sacrificeRandom(p, amount, valid, sa, destroy);
-                } else if (p.isComputer()) {
-                    if (sa.hasParam("Optional") && sa.getActivatingPlayer().isOpponentOf(p)) {
-                        continue;
-                    }
-                    sacList = sacrificeAI(p, amount, valid, sa, destroy);
+                    choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()));
                 } else {
-                    sacList = sacrificeHuman(p, amount, valid, sa, destroy,
-                            sa.hasParam("Optional"));
+                    boolean isOptional = sa.hasParam("Optional");
+                    choosenToSacrifice = p.getController().choosePermanentsToSacrifice(validTargets, amount, sa, destroy, isOptional);
                 }
-                if (remSacrificed) {
-                    for (int i = 0; i < sacList.size(); i++) {
-                        card.addRemembered(sacList.get(i));
+                
+                for(Card sac : choosenToSacrifice) {
+                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa);
+                    boolean wasDestroyed = destroy && game.getAction().destroy(sac);
+                    
+                    if ( remSacrificed && (wasDestroyed || wasSacrificed) ) {
+                        card.addRemembered(sac);
                     }
                 }
             }
@@ -111,115 +112,4 @@ public class SacrificeEffect extends SpellEffect {
 
         return sb.toString();
     }
-
-    /**
-     * <p>
-     * sacrificeAI.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     * @param amount
-     *            a int.
-     * @param valid
-     *            a {@link java.lang.String} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    private List<Card> sacrificeAI(final Player p, final int amount, final String valid, final SpellAbility sa,
-            final boolean destroy) {
-        List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
-        List<Card> sacList = AbilityUtils.filterListByType(battlefield, valid, sa);
-        sacList = ComputerUtil.sacrificePermanents(p, amount, sacList, destroy, sa);
-
-        return sacList;
-    }
-
-    /**
-     * <p>
-     * sacrificeHuman.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     * @param amount
-     *            a int.
-     * @param valid
-     *            a {@link java.lang.String} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     */
-    public static List<Card> sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
-            final boolean destroy, final boolean optional) {
-        List<Card> list = AbilityUtils.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, sa);
-        List<Card> sacList = new ArrayList<Card>();
-
-        for (int i = 0; i < amount; i++) {
-            if (list.isEmpty()) {
-                break;
-            }
-            Card c;
-            if (optional) {
-                c = GuiChoose.oneOrNone("Select a card to sacrifice", list);
-            } else {
-                c = GuiChoose.one("Select a card to sacrifice", list);
-            }
-            if (c != null) {
-                if (destroy) {
-                    if (Singletons.getModel().getGame().getAction().destroy(c)) {
-                        sacList.add(c);
-                    }
-                } else {
-                    if (Singletons.getModel().getGame().getAction().sacrifice(c, sa)) {
-                        sacList.add(c);
-                    }
-                }
-
-                list.remove(c);
-
-            } else {
-                return sacList;
-            }
-        }
-        return sacList;
-    }
-
-    /**
-     * <p>
-     * sacrificeRandom.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     * @param amount
-     *            a int.
-     * @param valid
-     *            a {@link java.lang.String} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    private List<Card> sacrificeRandom(final Player p, final int amount, final String valid, final SpellAbility sa,
-            final boolean destroy) {
-        List<Card> sacList = new ArrayList<Card>();
-        for (int i = 0; i < amount; i++) {
-            List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
-            List<Card> list = AbilityUtils.filterListByType(battlefield, valid, sa);
-            if (list.size() != 0) {
-                final Card sac = Aggregates.random(list);
-                if (destroy) {
-                    if (Singletons.getModel().getGame().getAction().destroy(sac)) {
-                        sacList.add(sac);
-                    }
-                } else {
-                    if (Singletons.getModel().getGame().getAction().sacrifice(sac, sa)) {
-                        sacList.add(sac);
-                    }
-                }
-            }
-        }
-        return sacList;
-    }
-
 }

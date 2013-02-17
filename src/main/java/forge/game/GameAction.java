@@ -1166,27 +1166,11 @@ public class GameAction {
         }
     } // destroyLegendaryCreatures()
 
-    /**
-     * <p>
-     * sacrifice.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param source
-     *            a SpellAbility object.
-     * @return a boolean.
-     */
+
     public final boolean sacrifice(final Card c, final SpellAbility source) {
-        if (c.isImmutable()) {
-            System.out.println("Trying to sacrifice immutables: " + c);
+        if(!c.canBeSacrificedBy(source))
             return false;
-        }
-        if (source != null && !c.getController().equals(source.getActivatingPlayer())
-                && c.getController().hasKeyword("Spells and abilities your opponents control can't cause"
-                        + " you to sacrifice permanents.")) {
-            return false;
-        }
+        
         this.sacrificeDestroy(c);
 
         // Play the Sacrifice sound
@@ -1196,7 +1180,6 @@ public class GameAction {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
         game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
-
         return true;
     }
 
@@ -1210,8 +1193,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean destroy(final Card c) {
-        if (!c.isInPlay()
-                || (c.hasKeyword("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) {
+        if (!c.canBeDestroyed()) {
             return false;
         }
 
@@ -1242,10 +1224,8 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean destroyNoRegeneration(final Card c) {
-        if (!c.isInPlay()
-                || (c.hasKeyword("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) {
+        if ( !c.canBeDestroyed() )
             return false;
-        }
 
         if (c.isEnchanted()) {
             List<Card> list = new ArrayList<Card>(c.getEnchantedBy());

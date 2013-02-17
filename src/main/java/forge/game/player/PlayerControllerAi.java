@@ -180,5 +180,13 @@ public class PlayerControllerAi extends PlayerController {
         return null;
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#choosePermanentsToSacrifice(java.util.List, int, forge.card.spellability.SpellAbility, boolean, boolean)
+     */
+    @Override
+    public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
+        return ComputerUtil.choosePermanentsToSacrifice(player, validTargets, amount, sa, destroy, isOptional);
+    }
+
 
 }
