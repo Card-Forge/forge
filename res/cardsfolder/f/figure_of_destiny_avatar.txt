@@ -1,0 +1,12 @@
+Name:Figure of Destiny Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/+3
+A:AB$ PutCounter | ActivationZone$ Command | Announce$ X | Cost$ X | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature.counters_LTX_P1P1 | TgtPrompt$ Select target creature with fewer than X +1/+1 counters on it | References$ X | SpellDescription$ Put a +1/+1 counter on target creature with fewer than X +1/+1 counters on it.
+SVar:X:Count$xPaid
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/figure_of_destiny_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/figure-of-destiny.jpg
+Oracle:{X}: Put a +1/+1 counter on target creature with fewer than X +1/+1 counters on it.
+End

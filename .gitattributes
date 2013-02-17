@@ -1585,6 +1585,7 @@ res/cardsfolder/c/cephalid_pathmage.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_retainer.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_sage.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_scout.txt svneol=native#text/plain
+res/cardsfolder/c/cephalid_shrine.txt -text
 res/cardsfolder/c/cephalid_snitch.txt svneol=native#text/plain
 res/cardsfolder/c/cephalid_vandal.txt svneol=native#text/plain
 res/cardsfolder/c/cerebral_eruption.txt svneol=native#text/plain
@@ -3543,6 +3544,7 @@ res/cardsfolder/f/fight_to_the_death.txt svneol=native#text/plain
 res/cardsfolder/f/fighting_chance.txt -text
 res/cardsfolder/f/fighting_drake.txt svneol=native#text/plain
 res/cardsfolder/f/figure_of_destiny.txt svneol=native#text/plain
+res/cardsfolder/f/figure_of_destiny_avatar.txt -text
 res/cardsfolder/f/filigree_angel.txt svneol=native#text/plain
 res/cardsfolder/f/filigree_fracture.txt svneol=native#text/plain
 res/cardsfolder/f/filigree_sages.txt svneol=native#text/plain

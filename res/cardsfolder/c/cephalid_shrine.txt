@@ -1,0 +1,14 @@
+Name:Cephalid Shrine
+ManaCost:1 U U
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigCounterRem | TriggerDescription$ Whenever a player casts a spell, counter that spell unless that player pays X, where X is the number of cards in all graveyards with the same name as the spell.
+SVar:TrigCounterRem:AB$ Pump | Cost$ 0 | RememberObjects$ TriggeredCard | SubAbility$ DBCounter
+SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ X | UnlessPayer$ TriggeredActivator | References$ X | SubAbility$ DBCleanup
+SVar:X:Count$ValidGraveyard Card.sharesNameWith Remembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_shrine.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/75.jpg
+Oracle:Whenever a player casts a spell, counter that spell unless that player pays {X}, where X is the number of cards in all graveyards with the same name as the spell.
+End
