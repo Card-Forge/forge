@@ -13,8 +13,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JDialog;
@@ -24,8 +22,6 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
@@ -49,7 +45,7 @@ import forge.item.CardPrinted;
 // Single ok button, disabled until left box has specified number of items remaining
 
 @SuppressWarnings("serial")
-public class DualListBox<T extends Comparable<? super T>> extends FPanel {
+public class DualListBox<T> extends FPanel {
     private final FList sourceList;
     private final UnsortedListModel<T> sourceListModel;
 
@@ -71,8 +67,7 @@ public class DualListBox<T extends Comparable<? super T>> extends FPanel {
     private boolean sideboardingMode = false;
     private boolean showCard = true;
 
-    public DualListBox(int remainingSources, String label, List<T> sourceElements, List<T> destElements,
-            boolean startSorted, Comparator<T> sortComparator) {
+    public DualListBox(int remainingSources, List<T> sourceElements, List<T> destElements ) {
         targetRemainingSources = remainingSources;
         sourceListModel = new UnsortedListModel<T>();
         sourceList = new FList(sourceListModel);
@@ -166,7 +161,7 @@ public class DualListBox<T extends Comparable<? super T>> extends FPanel {
         centerPanel.add(removeButton);
         centerPanel.add(removeAllButton);
 
-        orderedLabel = new FLabel.Builder().text(label).build();
+        orderedLabel = new FLabel.Builder().build();
 
         FPanel rightPanel = new FPanel(new BorderLayout());
         rightPanel.setSize(300, 300);
@@ -182,11 +177,6 @@ public class DualListBox<T extends Comparable<? super T>> extends FPanel {
         _addListListeners(destList);
         
         if (destElements != null && !destElements.isEmpty()) {
-            if (startSorted) {
-                // it would be nice if we could sort in place, but it might mess up our callers
-                destElements = Lists.newArrayList(destElements);
-                Collections.sort(destElements, sortComparator);
-            }
             addDestinationElements(destElements);
             
             SwingUtilities.invokeLater(new Runnable() {
@@ -198,10 +188,6 @@ public class DualListBox<T extends Comparable<? super T>> extends FPanel {
         }
         
         if (sourceElements != null && !sourceElements.isEmpty()) {
-            if (startSorted) {
-                sourceElements = Lists.newArrayList(sourceElements);
-                Collections.sort(sourceElements, sortComparator);
-            }
             addSourceElements(sourceElements);
             
             SwingUtilities.invokeLater(new Runnable() {
@@ -213,6 +199,10 @@ public class DualListBox<T extends Comparable<? super T>> extends FPanel {
         }
         
         _setButtonState();
+    }
+    
+    public void setSecondColumnLabelText(String label) {
+        orderedLabel.setText(label);
     }
     
     public void setSideboardMode( boolean isSideboardMode) {

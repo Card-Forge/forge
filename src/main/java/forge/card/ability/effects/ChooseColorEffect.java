@@ -46,11 +46,11 @@ public class ChooseColorEffect extends SpellEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (sa.hasParam("OrColors")) {
-                        final List<String> o = GuiChoose.oneOrMany("Choose a color or colors",
-                                Constant.Color.ONLY_COLORS);
+                        String[] choices = Constant.Color.ONLY_COLORS;
+                        final List<String> o = GuiChoose.getChoices("Choose a color or colors", 1, choices.length, choices);
                         card.setChosenColor(new ArrayList<String>(o));
                     } else if (sa.hasParam("TwoColors")) {
-                        final List<String> o = GuiChoose.amount("Choose two colors", Constant.Color.ONLY_COLORS, 2);
+                        final List<String> o = GuiChoose.getChoices("Choose two colors", 2, 2, Constant.Color.ONLY_COLORS);
                         card.setChosenColor(new ArrayList<String>(o));
                     } else {
                         final Object o = GuiChoose.one("Choose a color", Constant.Color.ONLY_COLORS);

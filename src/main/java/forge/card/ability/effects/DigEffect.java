@@ -258,7 +258,7 @@ public class DigEffect extends SpellEffect {
                                     break;
                                 }
                                 if (changeValid.length() > 0) {
-                                    GuiChoose.one("Computer picked: ", chosen);
+                                    GuiChoose.show("Computer picked: ", chosen);
                                 }
                                 movedCards.add(chosen);
                                 valid.remove(chosen);

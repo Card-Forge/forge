@@ -24,9 +24,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -41,6 +38,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import com.google.common.collect.Lists;
 
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
@@ -65,7 +64,7 @@ import javax.swing.event.ListSelectionListener;
  * @author Forge
  * @version $Id$
  */
-public class ListChooser<T extends Comparable<? super T>> {
+public class ListChooser<T> {
 
     // Data and number of choices for the list
     private List<T> list;
@@ -83,15 +82,11 @@ public class ListChooser<T extends Comparable<? super T>> {
     private JOptionPane optionPane;
     private Action ok, cancel;
 
-    public ListChooser(final String title, final int minChoices, final int maxChoices,
-            final List<T> list, boolean startSorted, Comparator<T> sortComparator) {
+    public ListChooser(final String title, final int minChoices, final int maxChoices, final Iterable<T> list) {
         this.title = title;
         this.minChoices = minChoices;
         this.maxChoices = maxChoices;
-        this.list = new ArrayList<T>(list);
-        if (startSorted) {
-            Collections.sort(this.list, sortComparator);
-        }
+        this.list = Lists.newArrayList(list);
         this.jList = new JList(new ChooserListModel());
         this.ok = new CloseAction(JOptionPane.OK_OPTION, "OK");
         this.ok.setEnabled(minChoices == 0);

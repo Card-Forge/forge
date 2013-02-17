@@ -57,6 +57,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -555,7 +556,8 @@ public class QuestWinLose extends ControlWinLose {
                 }
             }
 
-            final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, 1, formats, true, null);
+            Collections.sort(formats);
+            final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, 1, formats);
             ch.show(pref);
 
             final GameFormat selected = ch.getSelectedValue();

@@ -32,6 +32,8 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
@@ -290,6 +292,19 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         @Override
         public String apply(Deck arg1) {
             return arg1.getName();
+        }
+    };
+    
+    public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
+        @Override
+        public boolean apply(Deck d) {
+            for(Entry<DeckSection, CardPool> cp: d) {
+                for(Entry<CardPrinted, Integer> e : cp.getValue()) {
+                    if ( e.getKey().getCard().getRemAIDecks() )
+                        return false;
+                }
+            }
+            return true;
         }
     };
 
