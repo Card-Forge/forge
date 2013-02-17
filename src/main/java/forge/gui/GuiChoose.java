@@ -188,20 +188,7 @@ public class GuiChoose {
         return objects;
     }
 
-    /**
-     * Convenience for getChoices(message, 0, 1, choices).
-     * 
-     * @param <T>
-     *            is automatically inferred.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @return null if choices is missing, empty, or if the users' choices are
-     *         empty; otherwise, returns the first item in the List returned by
-     *         getChoices.
-     * @see #getChoices(String, int, int, Object...)
-     */
+    // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOneOrNone(final String message, final T[] choices, Comparator<T> comparer) {
         if ((choices == null) || (choices.length == 0)) {
             return null;
@@ -210,6 +197,7 @@ public class GuiChoose {
         return choice.isEmpty() ? null : choice.get(0);
     } // getChoiceOptional(String,T...)
 
+    // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOneOrNone(final String message, final List<T> choices, Comparator<T> comparer) {
         if ((choices == null) || choices.isEmpty()) {
             return null;
@@ -218,26 +206,15 @@ public class GuiChoose {
         return choice.isEmpty() ? null : choice.get(0);
     } // getChoiceOptional(String,T...)
 
-    // returned Object will never be null
-    /**
-     * <p>
-     * getChoice.
-     * </p>
-     * 
-     * @param <T>
-     *            a T object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
-     * @return a T object.
-     */
+
+    // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOne(final String message, final T[] choices, Comparator<T> comparer) {
         final List<T> choice = GuiChoose.sortedGetChoices(message, 1, 1, choices, comparer);
         assert choice.size() == 1;
         return choice.get(0);
     } // getChoice()
 
+    // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> T sortedOne(final String message, final List<T> choices, Comparator<T> comparer) {
         if ((choices == null) || (choices.size() == 0)) {
             return null;
@@ -247,18 +224,22 @@ public class GuiChoose {
         return choice.get(0);
     }
 
+    // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> List<T> sortedNoneOrMany(final String message, final List<T> choices, Comparator<T> comparer) {
         return GuiChoose.sortedGetChoices(message, 0, choices.size(), choices, comparer);
     }
 
-    // If comparer is NULL, T must be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
+    // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> List<T> sortedGetChoices(final String message, final int min, final int max, final T[] choices, Comparator<T> comparer) {
+        // You may create a copy of source array if callers expect the collection to be unchanged
         Arrays.sort(choices, comparer);
         final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
         return getChoices(c);
     }
 
+    // If comparer is NULL, T has to be comparable. Otherwise you'll get an exception from inside the Arrays.sort() routine
     public static <T> List<T> sortedGetChoices(final String message, final int min, final int max, final List<T> choices, Comparator<T> comparer) {
+        // You may create a copy of source list if callers expect the collection to be unchanged
         Collections.sort(choices, comparer);
         final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
         return getChoices(c);

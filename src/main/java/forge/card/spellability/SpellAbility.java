@@ -47,7 +47,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public abstract class SpellAbility implements ISpellAbility, Comparable<SpellAbility> {
+public abstract class SpellAbility implements ISpellAbility {
 
     // choices for constructor isPermanent argument
     private String description = "";
@@ -1780,26 +1780,5 @@ public abstract class SpellAbility implements ISpellAbility, Comparable<SpellAbi
             }
         }
         return true;
-    }
-
-    /* (non-Javadoc)
-     * used for ordering in lists -- we just want to group by card
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    @Override
-    public int compareTo(SpellAbility other) {
-        if (null == other) {
-            return 1;
-        }
-        if (sourceCard == other.sourceCard) {
-            return 0;
-        }
-        if (null == sourceCard) {
-            return -1;
-        }
-        if (null == other.sourceCard) {
-            return 1;
-        }
-        return sourceCard.getName().compareTo(other.sourceCard.getName());
     }
 }

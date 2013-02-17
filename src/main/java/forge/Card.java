@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -5642,32 +5641,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else {
             return 0;
         }
-    }
-    
-    private static Comparator<Card> _nameComparator = new Comparator<Card>() {
-        @Override
-        public int compare(Card me, Card other) {
-            if (me == other) {
-                return 0;
-            }
-            if (null == other) {
-                return 1;
-            }
-            if (me.getName() == other.getName()) {
-                return 0;
-            }
-            if (null == me.getName()) {
-                return -1;
-            }
-            return me.getName().compareTo(other.getName());
-        }
-    };
-    
-    /**
-     * For sorting lists of cards by name instead of by id
-     */
-    public static final Comparator<Card> getNameComparator() {
-        return _nameComparator;
     }
 
     /** {@inheritDoc} */

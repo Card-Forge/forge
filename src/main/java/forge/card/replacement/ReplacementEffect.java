@@ -38,7 +38,7 @@ import forge.util.Expressions;
  * TODO: Write javadoc for this type.
  * 
  */
-public abstract class ReplacementEffect extends TriggerReplacementBase implements Comparable<ReplacementEffect> {
+public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     private ReplacementLayer layer = ReplacementLayer.None;
 
@@ -437,26 +437,5 @@ public abstract class ReplacementEffect extends TriggerReplacementBase implement
      */
     public void setLayer(ReplacementLayer layer0) {
         this.layer = layer0;
-    }
-
-    /* (non-Javadoc)
-     * used only for ordering, just sort by card
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    @Override
-    public int compareTo(ReplacementEffect other) {
-        if (null == other) {
-            return 1;
-        }
-        if (hostCard == other.hostCard) {
-            return 0;
-        }
-        if (null == hostCard) {
-            return -1;
-        }
-        if (null == other.hostCard) {
-            return 1;
-        }
-        return hostCard.getName().compareTo(other.hostCard.getName());
     }
 }

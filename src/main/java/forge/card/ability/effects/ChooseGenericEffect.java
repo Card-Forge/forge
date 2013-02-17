@@ -51,7 +51,7 @@ public class ChooseGenericEffect extends SpellEffect {
             }
             SpellAbility chosenSA = null;
             if (p.isHuman()) {
-                String choice = GuiChoose.one("Choose one", Lists.newArrayList(choices.values()));
+                String choice = GuiChoose.one("Choose one", choices.values());
                 chosenSA = AbilityFactory.getAbility(host.getSVar(choices.inverse().get(choice)), host);
             } else { //Computer AI
                 chosenSA = AbilityFactory.getAbility(host.getSVar(sa.getParam("Choices").split(",")[0]), host);
