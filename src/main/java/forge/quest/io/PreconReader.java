@@ -22,7 +22,7 @@ import java.io.FilenameFilter;
 
 import forge.deck.io.DeckSerializer;
 import forge.item.PreconDeck;
-import forge.util.StorageReaderFolder;
+import forge.util.storage.StorageReaderFolder;
 
 /**
  * TODO: Write javadoc for this type.

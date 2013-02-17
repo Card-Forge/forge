@@ -29,7 +29,7 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.framework.ICDoc;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
-import forge.util.IStorage;
+import forge.util.storage.IStorage;
 
 /** 
  * Controls the "build gauntlet" submenu in the home UI.

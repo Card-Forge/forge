@@ -26,8 +26,8 @@ import forge.item.ItemPoolView;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventManager;
 import forge.util.Aggregates;
-import forge.util.IStorage;
 import forge.util.MyRandom;
+import forge.util.storage.IStorage;
 
 /** 
  * Utility collection for various types of decks.

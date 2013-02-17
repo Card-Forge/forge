@@ -22,7 +22,7 @@ import java.util.TreeMap;
 
 import com.google.common.base.Function;
 
-import forge.util.StorageView;
+import forge.util.storage.StorageView;
 
 public final class EditionCollection extends StorageView<CardEdition> {
 

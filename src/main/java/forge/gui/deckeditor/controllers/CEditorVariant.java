@@ -44,7 +44,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.IStorage;
+import forge.util.storage.IStorage;
 
 /**
  * Child controller for constructed deck editor UI.

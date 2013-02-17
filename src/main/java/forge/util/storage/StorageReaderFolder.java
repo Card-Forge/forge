@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.util;
+package forge.util.storage;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -35,6 +35,7 @@ import com.google.common.base.Function;
 
 import forge.deck.io.OldDeckFileFormatException;
 import forge.error.ErrorViewer;
+import forge.util.IItemReader;
 
 /**
  * This class treats every file in the given folder as a source for a named

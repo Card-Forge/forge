@@ -50,9 +50,9 @@ import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
-import forge.util.IStorageView;
 import forge.util.MultiplexOutputStream;
-import forge.util.StorageView;
+import forge.util.storage.IStorageView;
+import forge.util.storage.StorageView;
 
 /**
  * The default Model implementation for Forge.
@@ -387,27 +387,27 @@ public enum FModel {
         }
     }
 
-    /** @return {@link forge.util.IStorageView}<{@link forge.card.CardBlock}> */
+    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */
     public IStorageView<CardBlock> getBlocks() {
         return blocks;
     }
 
-    /** @return {@link forge.util.IStorageView}<{@link forge.card.CardBlock}> */
+    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */
     public IStorageView<CardBlock> getFantasyBlocks() {
         return fantasyBlocks;
     }
 
-    /** @return {@link forge.util.IStorageView}<{@link forge.card.FatPackData}> */
+    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.FatPackData}> */
     public IStorageView<FatPackData> getFatPacks() {
         return fatPacks;
     }
 
-    /** @return {@link forge.util.IStorageView}<{@link forge.card.BoosterData}> */
+    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterData}> */
     public final IStorageView<BoosterData> getTournamentPacks() {
         return tournaments;
     }
 
-    /** @return {@link forge.util.IStorageView}<{@link forge.card.BoosterData}> */
+    /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.BoosterData}> */
     public final IStorageView<BoosterData> getBoosters() {
         return boosters;
     }

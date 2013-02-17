@@ -40,8 +40,8 @@ import forge.item.PreconDeck;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.StartingPoolType;
-import forge.util.IStorage;
-import forge.util.IStorageView;
+import forge.util.storage.IStorage;
+import forge.util.storage.IStorageView;
 
 /**
  * Assembles Swing components of quest data submenu singleton.

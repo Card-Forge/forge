@@ -3,7 +3,7 @@ package forge.card;
 import com.google.common.base.Function;
 
 import forge.util.FileSection;
-import forge.util.StorageReaderFile;
+import forge.util.storage.StorageReaderFile;
 
 /** 
  * TODO: Write javadoc for this type.

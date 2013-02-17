@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import forge.deck.Deck;
-import forge.util.IStorage;
+import forge.util.storage.IStorage;
 
 /**
  * TODO: Write javadoc for this type.

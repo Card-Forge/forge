@@ -15,7 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.util;
+package forge.util.storage;
+
+import forge.util.IItemSerializer;
 
 //reads and writeDeck Deck objects
 /**

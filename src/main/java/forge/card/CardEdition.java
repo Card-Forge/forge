@@ -26,7 +26,7 @@ import forge.Singletons;
 import forge.game.GameFormat;
 import forge.item.CardDb;
 import forge.util.FileSection;
-import forge.util.StorageReaderFile;
+import forge.util.storage.StorageReaderFile;
 
 
 /**

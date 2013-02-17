@@ -35,7 +35,7 @@ import forge.deck.DeckGroup;
 import forge.game.player.PlayerType;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.IStorage;
+import forge.util.storage.IStorage;
 
 /**
  * TODO: Write javadoc for this type.

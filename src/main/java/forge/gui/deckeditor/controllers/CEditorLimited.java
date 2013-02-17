@@ -36,7 +36,7 @@ import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
-import forge.util.IStorage;
+import forge.util.storage.IStorage;
 
 /**
  * Child controller for limited deck editor UI.
@@ -57,7 +57,7 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
     /**
      * Child controller for limited deck editor UI.
      *
-     * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.IStorage}>
+     * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.storage.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
         final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(false, CardPrinted.class);

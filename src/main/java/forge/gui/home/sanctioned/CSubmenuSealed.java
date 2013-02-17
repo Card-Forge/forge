@@ -33,8 +33,8 @@ import forge.gui.framework.ICDoc;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
-import forge.util.IStorage;
 import forge.util.TextUtil;
+import forge.util.storage.IStorage;
 
 /** 
  * Controls the sealed submenu in the home UI.

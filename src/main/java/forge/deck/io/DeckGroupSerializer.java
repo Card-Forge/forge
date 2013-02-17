@@ -27,7 +27,7 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.util.FileUtil;
 import forge.util.IItemSerializer;
-import forge.util.StorageReaderFolder;
+import forge.util.storage.StorageReaderFolder;
 
 /**
  * TODO: Write javadoc for this type.

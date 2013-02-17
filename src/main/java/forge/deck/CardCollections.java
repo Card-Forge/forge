@@ -22,8 +22,8 @@ import java.io.File;
 import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.OldDeckParser;
-import forge.util.StorageImmediatelySerialized;
-import forge.util.IStorage;
+import forge.util.storage.IStorage;
+import forge.util.storage.StorageImmediatelySerialized;
 
 /**
  * Holds editable maps of decks saved to disk. Adding or removing items to(from)

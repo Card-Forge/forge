@@ -36,7 +36,7 @@ import forge.gui.CardListViewer;
 import forge.gui.GuiChoose;
 import forge.item.CardPrinted;
 import forge.quest.io.ReadPriceList;
-import forge.util.IStorageView;
+import forge.util.storage.IStorageView;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited

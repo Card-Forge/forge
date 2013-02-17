@@ -37,9 +37,9 @@ import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.PreconReader;
-import forge.util.IStorage;
-import forge.util.IStorageView;
-import forge.util.StorageView;
+import forge.util.storage.IStorage;
+import forge.util.storage.IStorageView;
+import forge.util.storage.StorageView;
 
 /**
  * TODO: Write javadoc for this type.

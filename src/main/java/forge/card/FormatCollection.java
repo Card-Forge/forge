@@ -22,8 +22,8 @@ import java.util.Arrays;
 import java.util.List;
 import forge.game.GameFormat;
 import forge.util.FileSection;
-import forge.util.StorageView;
-import forge.util.StorageReaderFile;
+import forge.util.storage.StorageReaderFile;
+import forge.util.storage.StorageView;
 
 /**
  * The Class FormatUtils.

@@ -39,7 +39,7 @@ import forge.util.FileSection;
 import forge.util.FileSectionManual;
 import forge.util.FileUtil;
 import forge.util.IItemSerializer;
-import forge.util.StorageReaderFolder;
+import forge.util.storage.StorageReaderFolder;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;

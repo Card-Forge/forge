@@ -29,7 +29,7 @@ import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
-import forge.util.IStorageView;
+import forge.util.storage.IStorageView;
 
 /**
  * <p>

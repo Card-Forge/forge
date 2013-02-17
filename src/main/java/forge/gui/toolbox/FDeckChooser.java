@@ -30,7 +30,7 @@ import forge.deck.generate.GenerateThemeDeck;
 import forge.game.player.PlayerType;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
-import forge.util.IStorage;
+import forge.util.storage.IStorage;
 
 /** 
  * TODO: Write javadoc for this type.

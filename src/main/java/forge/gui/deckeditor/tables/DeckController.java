@@ -28,7 +28,7 @@ import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CProbabilities;
 import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.deckeditor.views.VCurrentDeck;
-import forge.util.IStorage;
+import forge.util.storage.IStorage;
 
 /**
  * TODO: Write javadoc for this type.

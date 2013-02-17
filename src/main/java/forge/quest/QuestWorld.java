@@ -24,7 +24,7 @@ import java.util.List;
 import com.google.common.base.Function;
 
 import forge.quest.data.GameFormatQuest;
-import forge.util.StorageReaderFile;
+import forge.util.storage.StorageReaderFile;
 
 /** 
  * This function holds the "world info" for the current quest.

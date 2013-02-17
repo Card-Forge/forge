@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.util;
+package forge.util.storage;
 
 import java.io.File;
 import java.util.Map;
@@ -27,6 +27,9 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
+
+import forge.util.FileUtil;
+import forge.util.IItemReader;
 
 /**
  * This class treats every line of a given file as a source for a named object.

@@ -24,7 +24,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.item.CardPrinted;
-import forge.util.StorageReaderFile;
+import forge.util.storage.StorageReaderFile;
 
 // import forge.deck.Deck;
 
