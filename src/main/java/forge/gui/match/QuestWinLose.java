@@ -758,7 +758,7 @@ public class QuestWinLose extends ControlWinLose {
         QuestPreferences qp = Singletons.getModel().getQuestPreferences();
         if (null == whyAiLost) {
             // Felidar, Helix Pinnacle, etc.
-            return qp.getPreferenceInt(QPref.REWARDS_ALTERNATIVE);
+            return qp.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
         }
         switch (whyAiLost) {
         case LifeReachedZero:
