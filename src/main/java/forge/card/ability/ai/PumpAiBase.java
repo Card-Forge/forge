@@ -491,10 +491,12 @@ public abstract class PumpAiBase extends SpellAiLogic {
     protected List<Card> getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
         List<Card> list = ai.getOpponent().getCreaturesInPlay();
         list = CardLists.getTargetableCards(list, sa);
+        
+        if (list.isEmpty()) {
+            return list;
+        }
 
-        if ((defense < 0) && !list.isEmpty()) { // with spells that give -X/-X,
-                                                // compi will try to destroy a
-                                                // creature
+        if (defense < 0) { // with spells that give -X/-X, compi will try to destroy a creature
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -505,8 +507,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end
-        else if ((attack < 0) && !list.isEmpty()
-                && !Singletons.getModel().getGame().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+        else if (attack < 0 && !Singletons.getModel().getGame().getPhaseHandler().isPreventCombatDamageThisTurn()) {
             // spells that give -X/0
             boolean isMyTurn = Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai);
             if (isMyTurn) {
@@ -540,7 +541,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
                 }
             }
         } // -X/0 end
-        else if (!list.isEmpty()) {
+        else {
             final boolean addsKeywords = keywords.size() > 0;
             if (addsKeywords) {
                 list = CardLists.filter(list, new Predicate<Card>() {
@@ -549,7 +550,8 @@ public abstract class PumpAiBase extends SpellAiLogic {
                         return containsUsefulKeyword(ai, keywords, c, sa, attack);
                     }
                 });
-            } else {
+            } else if (sa.hasParam("NumAtt") || sa.hasParam("NumDef")) { 
+                // X is zero
                 list = new ArrayList<Card>();
             }
         }
