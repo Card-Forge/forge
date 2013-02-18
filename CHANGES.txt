@@ -27,7 +27,7 @@ All Traditional sets are now up to 85% complete. Standard Format is supported at
 
 A person reported "Love the game but I seem to be having a problem using a draft pool to start a quest. It works for sealed for me but when I select the draft deck option it's always blank even if I have one or several drafts completed." This should now be fixed and draft decks should now show up in quest start combobox.
 
-Several of the exiting sound file were changed and a handful of new sounds were added to the /res/sound/ folder.
+Several of the exiting sound files were changed and a handful of new sounds were added to the /res/sound/ folder.
 
 
 New Cards:
@@ -116,6 +116,14 @@ Razia's Purification
 Reins of the Vinesteed
 Shared Animosity
 Simic Guildmage
+Rite of Ruin
+Common Cause
+Sabertooth Cobra
+Archery Training
+Barrin's Spite
+Cryptic Gateway
+Deepwood Elder
+Knollspine Invocation
 
 
 New Phenomenons:
@@ -128,6 +136,7 @@ New Vanguard Avatars:
 
 Figure of Destiny Avatar
 Sisters of Stone Death Avatar
+Two Headed Giant of Foriys Avatar
 Viridian Zealot Avatar
 
 
@@ -167,7 +176,7 @@ Contributors to This Release:
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
 
-Detailed Changelog: (This will likely be deleted in the near future)
+Detailed Changelog: (This section will likely be deleted in the near future and will no longer be maintained)
 
 - Added set info for Sewers of Estark
 - Cleared out the changes.txt file, now ready for new material.
@@ -403,6 +412,31 @@ Detailed Changelog: (This will likely be deleted in the near future)
 - sideboarding method will have deck parts sorted before showing the UI
 - rem unused import
 - Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Formats Comparable sorts formats according to number of sets they include
+- added indices for formats
+- Updating the extremely useless comments in QuestPreferences for anyone curious what these preferences actual do
+- Added a flip_coin.wav file and a enchant.wav file from Foreroes.
+- rollback or 19689
+- Added a instant.wav file.
+- Added a creature.wav file.
+- restore focus to ok/cancel button when the Prompt panel is hidden and then reshown
+- Sacrificed cards are gathered to a list before actually sacrificing them, that returns a method of PlayerController
+- When preferences are explicitly set to an empty string, don't revert to default value on reload
+- reset keyboard shortcuts too when preferences are reset
+- avoid having the keyboard focus jump around when the window is resized
+- Added a red_land.wav file.
+- in preparation for tags addition to decks and IStorage, all storage-related classes were moved to their own package (there will be more classes)
+- ensure correct card detail is shown in constructed deck editor when adding a card and not in sideboard mode
+- Forgot to commit this with Reincarnate
+- Fixes phase skipping for human
+- CardPrinted - getCard() field that returns CardRules instance is now known as getRules()
+- getRules() method from CardRules was renamed to getOracleText()
+- fix errant edit when other deck sections were merged into CEditorConstructed
+- ItemPoolView - final Functions are made public, useless getters removed
+- ItemPoolView - countAll() now accepts predicates, this allowed to drop 'fnToCard' field as well as reference to forge.card.*
+- rem imports
+- Fixed Forgotten Ancient
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
