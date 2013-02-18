@@ -5,7 +5,6 @@ import java.util.Map;
 
 import forge.Card;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.deck.Deck;
@@ -13,7 +12,6 @@ import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.gui.match.CMatchUI;
 
 
 /** 

@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 
 import forge.Card;
 import forge.GameEntity;
-import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputBlock;
