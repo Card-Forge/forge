@@ -151,8 +151,12 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         }
 
         final CardPrinted card = (CardPrinted) item;
-        if (toAlternate && sectionMode != DeckSection.Sideboard) {
-            controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
+        if (toAlternate) {
+            if (sectionMode != DeckSection.Sideboard) {
+                controller.getModel().getOrCreate(DeckSection.Sideboard).add(card, qty);
+            } else {
+                // "added" to library, but library will be recalculated when it is shown again
+            }
         } else if (sectionMode == DeckSection.Sideboard) {
             this.getTableCatalog().addCard(card, qty);
         }
