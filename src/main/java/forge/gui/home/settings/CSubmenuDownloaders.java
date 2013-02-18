@@ -1,5 +1,7 @@
 package forge.gui.home.settings;
 
+import javax.swing.SwingUtilities;
+
 import forge.Command;
 import forge.error.BugzReporter;
 import forge.gui.GuiImportPicture;
@@ -43,8 +45,8 @@ public enum CSubmenuDownloaders implements ICDoc {
 
     private final Command cmdReportBug = new Command() { @Override
         public void execute() {
-        final BugzReporter br = new BugzReporter();
-        br.setVisible(true);
+            final BugzReporter br = new BugzReporter();
+            br.setVisible(true);
         }
     };
 
@@ -54,21 +56,28 @@ public enum CSubmenuDownloaders implements ICDoc {
     @Override
     public void initialize() {
         final VSubmenuDownloaders view = VSubmenuDownloaders.SINGLETON_INSTANCE;
-        view.getBtnDownloadPics().setCommand(cmdPicDownload);
-        view.getBtnDownloadSetPics().setCommand(cmdSetDownload);
-        view.getBtnDownloadQuestImages().setCommand(cmdQuestImages);
-        view.getBtnReportBug().setCommand(cmdReportBug);
-        view.getBtnImportPictures().setCommand(cmdImportPictures);
-        view.getBtnHowToPlay().setCommand(cmdHowToPlay);
-        view.getBtnDownloadPrices().setCommand(cmdDownloadPrices);
-        view.getBtnLicensing().setCommand(cmdLicensing);
+        view.setDownloadPicsCommand(cmdPicDownload);
+        view.setDownloadSetPicsCommand(cmdSetDownload);
+        view.setDownloadQuestImagesCommand(cmdQuestImages);
+        view.setReportBugCommand(cmdReportBug);
+        view.setImportPicturesCommand(cmdImportPictures);
+        view.setHowToPlayCommand(cmdHowToPlay);
+        view.setDownloadPricesCommand(cmdDownloadPrices);
+        view.setLicensingCommand(cmdLicensing);
     }
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
     @Override
-    public void update() { }
+    public void update() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                VSubmenuDownloaders.SINGLETON_INSTANCE.focusTopButton();
+            }
+        });
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()

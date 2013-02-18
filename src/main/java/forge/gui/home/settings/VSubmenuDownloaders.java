@@ -1,23 +1,17 @@
 package forge.gui.home.settings;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.Rectangle;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Command;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -27,9 +21,9 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FScrollPane;
-import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FTextArea;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
 
@@ -48,75 +42,50 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final DragTab tab = new DragTab("Utilities");
 
     /** */
-    private final JPanel pnlContent = new JPanel();
+    private final JPanel pnlContent = new JPanel(new MigLayout("insets 0, gap 0, wrap, ay center"));
     private final FScrollPane scrContent = new FScrollPane(pnlContent);
 
-    private final FLabel btnDownloadSetPics = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Download LQ Set Pictures").fontSize(14).build();
-    private final FLabel btnDownloadPics = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Download LQ Card Pictures").fontSize(14).build();
-    private final FLabel btnDownloadQuestImages = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Download Quest Images").fontSize(14).build();
-    private final FLabel btnReportBug = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Report a Bug").fontSize(14).build();
-    private final FLabel btnImportPictures = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Import Pictures").fontSize(14).build();
-    private final FLabel btnHowToPlay = new FLabel.Builder().opaque(true)
-            .hoverable(true).fontSize(14).text("How To Play").build();
-    private final FLabel btnDownloadPrices = new FLabel.Builder().opaque(true).hoverable(true)
-            .text("Download Card Prices").fontSize(14).build();
-    private final FLabel btnLicensing = new FLabel.Builder().opaque(true)
-            .hoverable(true).fontSize(14).text("License Details").build();
+    private final FLabel btnDownloadSetPics     = _makeButton("Download LQ Set Pictures");
+    private final FLabel btnDownloadPics        = _makeButton("Download LQ Card Pictures");
+    private final FLabel btnDownloadQuestImages = _makeButton("Download Quest Images");
+    private final FLabel btnReportBug           = _makeButton("Report a Bug");
+    private final FLabel btnImportPictures      = _makeButton("Import Pictures");
+    private final FLabel btnHowToPlay           = _makeButton("How To Play");
+    private final FLabel btnDownloadPrices      = _makeButton("Download Card Prices");
+    private final FLabel btnLicensing           = _makeButton("License Details");
 
     /**
      * Constructor.
      */
     private VSubmenuDownloaders() {
-        final String constraintsLBL = "w 90%!, h 20px!, gap 5% 0 3px 8px";
-        final String constraintsBTN = "h 30px!, w 50%!, gap 25% 0 0 0";
+        final String constraintsLBL = "w 90%!, h 20px!, center, gap 0 0 3px 8px";
+        final String constraintsBTN = "h 30px!, w 50%!, center";
 
         pnlContent.setOpaque(false);
-        pnlContent.setLayout(new MigLayout("insets 0, gap 0, wrap, ay center"));
 
         pnlContent.add(btnDownloadPics, constraintsBTN);
-        pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("Download default card picture for each card.")
-                .fontStyle(Font.ITALIC).build(), constraintsLBL);
+        pnlContent.add(_makeLabel("Download default card picture for each card."), constraintsLBL);
 
         pnlContent.add(btnDownloadSetPics, constraintsBTN);
-        pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("Download all pictures of each card (one for each set the card appeared in)")
-                .fontStyle(Font.ITALIC).build(), constraintsLBL);
+        pnlContent.add(_makeLabel("Download all pictures of each card (one for each set the card appeared in)"), constraintsLBL);
 
         pnlContent.add(btnDownloadQuestImages, constraintsBTN);
-        pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("Download tokens and icons used in Quest mode.")
-                .fontStyle(Font.ITALIC).build(), constraintsLBL);
+        pnlContent.add(_makeLabel("Download tokens and icons used in Quest mode."), constraintsLBL);
 
         pnlContent.add(btnDownloadPrices, constraintsBTN);
-        pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("Download up-to-date price list for in-game card shops.")
-                .fontStyle(Font.ITALIC).build(), constraintsLBL);
+        pnlContent.add(_makeLabel("Download up-to-date price list for in-game card shops."), constraintsLBL);
 
         pnlContent.add(btnImportPictures, constraintsBTN);
-        pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("Import card pictures from a local version of Forge.")
-                .fontStyle(Font.ITALIC).build(), constraintsLBL);
+        pnlContent.add(_makeLabel("Import card pictures from a local version of Forge."), constraintsLBL);
 
         pnlContent.add(btnReportBug, constraintsBTN);
-        pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("Something broken?")
-                .fontStyle(Font.ITALIC).build(), constraintsLBL);
+        pnlContent.add(_makeLabel("Something broken?"), constraintsLBL);
 
         pnlContent.add(btnHowToPlay, constraintsBTN);
-        pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("Rules of the Game.")
-                .fontStyle(Font.ITALIC).build(), constraintsLBL);
+        pnlContent.add(_makeLabel("Rules of the Game."), constraintsLBL);
 
         pnlContent.add(btnLicensing, constraintsBTN);
-        pnlContent.add(new FLabel.Builder().fontAlign(SwingConstants.CENTER)
-                .text("About Forge")
-                .fontStyle(Font.ITALIC).build(), constraintsLBL);
+        pnlContent.add(_makeLabel("About Forge"), constraintsLBL);
 
         scrContent.setBorder(null);
     }
@@ -131,8 +100,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0"));
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrContent, "w 98%!, h 98%!, gap 1% 0 1% 0");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
     }
 
     /* (non-Javadoc)
@@ -143,135 +112,77 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         return EMenuGroup.SETTINGS;
     }
 
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnDownloadPics() {
-        return btnDownloadPics;
-    }
+    public void setDownloadPicsCommand(Command command)        { btnDownloadPics.setCommand(command);        }
+    public void setDownloadSetPicsCommand(Command command)     { btnDownloadSetPics.setCommand(command);     }
+    public void setDownloadQuestImagesCommand(Command command) { btnDownloadQuestImages.setCommand(command); }
+    public void setReportBugCommand(Command command)           { btnReportBug.setCommand(command);           }
+    public void setImportPicturesCommand(Command command)      { btnImportPictures.setCommand(command);      }
+    public void setHowToPlayCommand(Command command)           { btnHowToPlay.setCommand(command);           }
+    public void setDownloadPricesCommand(Command command)      { btnDownloadPrices.setCommand(command);      }
+    public void setLicensingCommand(Command command)           { btnLicensing.setCommand(command);           }
 
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnDownloadSetPics() {
-        return btnDownloadSetPics;
+    public void focusTopButton() {
+        btnDownloadPics.requestFocusInWindow();
     }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnDownloadQuestImages() {
-        return btnDownloadQuestImages;
-    }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnReportBug() {
-        return btnReportBug;
-    }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnImportPictures() {
-        return btnImportPictures;
-    }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnHowToPlay() {
-        return btnHowToPlay;
-    }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnDownloadPrices() {
-        return btnDownloadPrices;
-    }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnLicensing() {
-        return btnLicensing;
-    }
-
+    
     /** */
     public void showLicensing() {
-        final JPanel overlay = SOverlayUtils.genericOverlay();
-        final int w = overlay.getWidth();
+        final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
+        overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
 
-        final String license = "Forge License Information" + "\r\n\r\n"
+        final String license = "<html>Forge License Information<br><br>"
                 + "This program is free software : you can redistribute it and/or modify "
                 + "it under the terms of the GNU General Public License as published by "
                 + "the Free Software Foundation, either version 3 of the License, or "
-                + "(at your option) any later version." + "\r\n\r\n"
+                + "(at your option) any later version.<br><br>"
                 + "This program is distributed in the hope that it will be useful, "
                 + "but WITHOUT ANY WARRANTY; without even the implied warranty of "
                 + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-                + "GNU General Public License for more details." + "\r\n\r\n"
+                + "GNU General Public License for more details.<br><br>"
                 + "You should have received a copy of the GNU General Public License "
-                + "along with this program.  If not, see <http://www.gnu.org/licenses/>.";
+                + "along with this program.  If not, see http://www.gnu.org/licenses/.</html>";
 
-        // Init directions text pane
-        final JTextPane tpnDirections = new JTextPane();
-        tpnDirections.setOpaque(false);
-        tpnDirections.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnDirections.setFont(FSkin.getFont(15));
-        tpnDirections.setAlignmentX(SwingConstants.CENTER);
-        tpnDirections.setFocusable(false);
-        tpnDirections.setEditable(false);
-        tpnDirections.setBorder(null);
-        tpnDirections.setText(license);
+        FLabel licenseLabel = new FLabel.Builder().text(license).fontSize(15).build();
 
-        final StyledDocument doc = tpnDirections.getStyledDocument();
-        final SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
-
-        final JButton btnCloseBig = new FButton("OK");
-        btnCloseBig.setBounds(new Rectangle((w / 2 - 100), 510, 200, 30));
-        btnCloseBig.addActionListener(new ActionListener() { @Override
+        final FButton btnClose = new FButton("OK");
+        btnClose.addActionListener(new ActionListener() { @Override
             public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
-        final FPanel pnl = new FPanel();
-        pnl.setCornerDiameter(0);
-        pnl.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
-        pnl.setLayout(new MigLayout("insets 0, gap 0"));
-        pnl.add(tpnDirections, "w 90%!, h 90%!, gap 5% 0 5% 0");
-        pnl.setBounds(new Rectangle((w / 2 - 250), 80, 500, 400));
-
-        overlay.setLayout(null);
-        overlay.add(btnCloseBig);
-        overlay.add(pnl);
+        overlay.add(licenseLabel, "w 500!, center");
+        overlay.add(btnClose, "w 200!, h pref+12, center, gaptop 30");
         SOverlayUtils.showOverlay();
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                btnClose.requestFocusInWindow();
+            }
+        });
     }
 
-    /** */
     public void showHowToPlay() {
-        final JPanel overlay = SOverlayUtils.genericOverlay();
-        final int w = overlay.getWidth();
+        final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
+        overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
 
-        final String directions = ForgeProps.getLocalized(Lang.HowTo.MESSAGE);
+        FTextArea directions = new FTextArea(ForgeProps.getLocalized(Lang.HowTo.MESSAGE));
+        final FScrollPane scr = new FScrollPane(directions, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        // Init directions text pane
-        final JTextPane tpnDirections = new JTextPane();
-        tpnDirections.setOpaque(true);
-        tpnDirections.setBackground(Color.white);
-        tpnDirections.setForeground(Color.black);
-        tpnDirections.setFont(FSkin.getFont(15));
-        tpnDirections.setAlignmentX(SwingConstants.CENTER);
-        tpnDirections.setFocusable(false);
-        tpnDirections.setEditable(false);
-        tpnDirections.setBorder(new EmptyBorder(10, 20, 10, 20));
-        tpnDirections.setText(directions);
-
-        final StyledDocument doc = tpnDirections.getStyledDocument();
-        final SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
-
-        final JButton btnCloseBig = new FButton("OK");
-        btnCloseBig.setBounds(new Rectangle((w / 2 - 100), 510, 200, 30));
-        btnCloseBig.addActionListener(new ActionListener() { @Override
+        final FButton btnClose = new FButton("OK");
+        btnClose.addActionListener(new ActionListener() { @Override
             public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
-        final FScrollPane scr = new FScrollPane(tpnDirections, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scr.setBorder(new LineBorder(Color.black, 1));
-        scr.setBounds(new Rectangle((w / 2 - 250), 80, 500, 400));
-
-        overlay.setLayout(null);
-        overlay.add(btnCloseBig);
-        overlay.add(scr);
+        overlay.add(scr, "w 500!, h 500!, center");
+        overlay.add(btnClose, "w 200!, h pref+12, center, gaptop 30");
         SOverlayUtils.showOverlay();
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                scr.getViewport().setViewPosition(new Point(0, 0));
+                btnClose.requestFocusInWindow();
+            }
+        });
     }
 
     /* (non-Javadoc)
@@ -330,5 +241,14 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     @Override
     public DragCell getParentCell() {
         return parentCell;
+    }
+    
+    private static FLabel _makeButton(String label) {
+        return new FLabel.Builder().opaque().hoverable().text(label).fontSize(14).build();
+    }
+    
+    private static FLabel _makeLabel(String label) {
+        return new FLabel.Builder().fontAlign(SwingConstants.CENTER)
+                .text(label).fontStyle(Font.ITALIC).build();
     }
 }
