@@ -5,9 +5,8 @@ Text:no text
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target player skips his or her next untap step. Tap up to five target permanents that player controls.
-SVar:TrigPump:DB$Pump | ValidTgts$ Player | IsCurse$ True | KW$ Skip your next untap step. | Permanent$ True | SubAbility$ TrigTap
-SVar:TrigTap:DB$Tap | TargetMin$ 0 | TargetMax$ 5 | TargetsWithDefinedController$ Targeted | ValidTgts$ Permanent
-SVar:RemAIDeck:True
+SVar:TrigPump:DB$ Pump | ValidTgts$ Player | IsCurse$ True | KW$ Skip your next untap step. | Permanent$ True | IsCurse$ True | SubAbility$ TrigTap
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 5 | TargetsWithDefinedController$ Targeted | ValidTgts$ Permanent
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yosei_the_morning_star.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/50.jpg
