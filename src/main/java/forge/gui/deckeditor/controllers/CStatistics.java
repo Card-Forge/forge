@@ -6,8 +6,6 @@ import javax.swing.JLabel;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
 import forge.Command;
 import forge.card.MagicColor;
 import forge.card.CardRulesPredicates;
@@ -21,7 +19,6 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
-import forge.util.Aggregates;
 
 
 /** 
@@ -60,7 +57,7 @@ public enum CStatistics implements ICDoc {
     }
 
     private void setLabelValue(JLabel label, ItemPoolView<CardPrinted> deck, Predicate<CardRules> predicate, int total) {
-        int tmp = Aggregates.sum(Iterables.filter(deck, Predicates.compose(predicate, deck.getFnToCard())), deck.getFnToCount());
+        int tmp = deck.countAll(Predicates.compose(predicate, CardPrinted.FN_GET_RULES));
         label.setText(tmp + " (" + SEditorUtil.calculatePercentage(tmp, total) + "%)");
 
     }

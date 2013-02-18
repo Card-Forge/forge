@@ -25,9 +25,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 
-
-import forge.card.CardRules;
 
 /**
  * <p>
@@ -41,18 +40,8 @@ import forge.card.CardRules;
  */
 public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, Integer>> {
 
-    // Field Accessors for select/aggregate operations with filters.
-    /** The fn to card. */
-    private final transient Function<Entry<T, Integer>, CardRules> fnToCard = new Function<Entry<T, Integer>, CardRules>() {
-        @Override
-        public CardRules apply(final Entry<T, Integer> from) {
-            final T item = from.getKey();
-            return item instanceof CardPrinted ? ((CardPrinted) item).getRules() : null;
-        }
-    };
-
     /** The fn to printed. */
-    private final transient Function<Entry<T, Integer>, T> fnToPrinted = new Function<Entry<T, Integer>, T>() {
+    public final transient Function<Entry<T, Integer>, T> FN_GET_KEY = new Function<Entry<T, Integer>, T>() {
         @Override
         public T apply(final Entry<T, Integer> from) {
             return from.getKey();
@@ -60,7 +49,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     };
 
     /** The fn to card name. */
-    private final transient Function<Entry<T, Integer>, String> fnToCardName = new Function<Entry<T, Integer>, String>() {
+    public final transient Function<Entry<T, Integer>, String> FN_GET_NAME = new Function<Entry<T, Integer>, String>() {
         @Override
         public String apply(final Entry<T, Integer> from) {
             return from.getKey().getName();
@@ -68,7 +57,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
     };
 
     /** The fn to count. */
-    private final transient Function<Entry<T, Integer>, Integer> fnToCount = new Function<Entry<T, Integer>, Integer>() {
+    public final transient Function<Entry<T, Integer>, Integer> FN_GET_COUNT = new Function<Entry<T, Integer>, Integer>() {
         @Override
         public Integer apply(final Entry<T, Integer> from) {
             return from.getValue();
@@ -150,15 +139,28 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
      * @return int
      */
     public final int countAll() {
+        return countAll(null, myClass); 
+    }
+
+    public final int countAll(Predicate<T> condition) {
+        return countAll(condition, myClass); 
+    }
+    
+    public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
         int result = 0;
         if (this.getCards() != null) {
-            for (final Integer n : this.getCards().values()) {
-                result += n;
+            final boolean isSameClass = cls == myClass;
+            for (final Entry<T, Integer> kv : this) {
+                final T key = kv.getKey();
+                @SuppressWarnings("unchecked")
+                final U castKey = isSameClass || cls.isInstance(key) ? (U)key : null;
+                if (null == condition || castKey != null && condition.apply(castKey))
+                    result += kv.getValue();
             }
         }
         return result;
     }
-
+    
     /**
      * 
      * countDistinct.
@@ -255,41 +257,6 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         this.isListInSync = isListInSync0;
     }
 
-    /**
-     * Gets the fn to card.
-     * 
-     * @return the fnToCard
-     */
-    public Function<Entry<T, Integer>, CardRules> getFnToCard() {
-        return this.fnToCard;
-    }
-
-    /**
-     * Gets the fn to card name.
-     * 
-     * @return the fnToCardName
-     */
-    public Function<Entry<T, Integer>, String> getFnToCardName() {
-        return this.fnToCardName;
-    }
-
-    /**
-     * Gets the fn to count.
-     * 
-     * @return the fnToCount
-     */
-    public Function<Entry<T, Integer>, Integer> getFnToCount() {
-        return this.fnToCount;
-    }
-
-    /**
-     * Gets the fn to printed.
-     * 
-     * @return the fnToPrinted
-     */
-    public Function<Entry<T, Integer>, T> getFnToPrinted() {
-        return this.fnToPrinted;
-    }
 
     /**
      * To item list string.

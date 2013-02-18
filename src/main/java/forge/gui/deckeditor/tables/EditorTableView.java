@@ -479,14 +479,14 @@ public final class EditorTableView<T extends InventoryItem> {
         }
 
         if (useFilter && this.wantUnique) {
-            Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filter, this.pool.getFnToPrinted());
-            Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(Iterables.filter(this.pool, filterForPool), this.pool.getFnToCardName());
+            Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filter, this.pool.FN_GET_KEY);
+            Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(Iterables.filter(this.pool, filterForPool), this.pool.FN_GET_NAME);
             this.model.addCards(cards);
         } else if (useFilter) {
-            Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filter, this.pool.getFnToPrinted());
+            Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filter, this.pool.FN_GET_KEY);
             this.model.addCards(Iterables.filter(this.pool, pred));
         } else if (this.wantUnique) {
-            Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(this.pool, this.pool.getFnToCardName());
+            Iterable<Entry<T, Integer>> cards = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);
             this.model.addCards(cards);
         } else if (!useFilter && bForceFilter) {
             this.model.addCards(this.pool);

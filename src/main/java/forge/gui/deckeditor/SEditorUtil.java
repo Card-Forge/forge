@@ -93,15 +93,14 @@ public final class SEditorUtil  {
             switch (s) {
             case TOTAL:
                 view.getStatLabel(s).setText(String.valueOf(
-                        Aggregates.sum(Iterables.filter(items, Predicates.compose(totalPred, items.getFnToPrinted())), items.getFnToCount())));
+                        Aggregates.sum(Iterables.filter(items, Predicates.compose(totalPred, items.FN_GET_KEY)), items.FN_GET_COUNT)));
                 break;
             case PACK:
                 view.getStatLabel(s).setText(String.valueOf(
-                        Aggregates.sum(Iterables.filter(items, Predicates.compose(packPred, items.getFnToPrinted())), items.getFnToCount())));
+                        Aggregates.sum(Iterables.filter(items, Predicates.compose(packPred, items.FN_GET_KEY)), items.FN_GET_COUNT)));
                 break;
             default:
-                view.getStatLabel(s).setText(String.valueOf(
-                        Aggregates.sum(Iterables.filter(items, Predicates.compose(s.predicate, items.getFnToCard())), items.getFnToCount())));
+                view.getStatLabel(s).setText(String.valueOf(items.countAll(Predicates.compose(s.predicate, CardPrinted.FN_GET_RULES), CardPrinted.class)));
             }
         }
     }
