@@ -8,7 +8,7 @@ SVar:NafsEffect:AB$ Effect | Cost$ 0 | Name$ Glass Asp Effect | EffectOwner$ Tri
 SVar:DrawTrig:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ Bleed | TriggerDescription$ You lose 2 life at the beginning of your next draw step unless you pay 2 before that step.
 SVar:Bleed:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 2 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:PayUp:AB$ ChangeZone | Cost$ 2 | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay 1 to remove this effect.
+SVar:PayUp:AB$ ChangeZone | Cost$ 2 | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay 2 to remove this effect.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glass_asp.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/197.jpg

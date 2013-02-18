@@ -1888,6 +1888,7 @@ res/cardsfolder/c/commander_greven_il_vec.txt svneol=native#text/plain
 res/cardsfolder/c/commanders_authority.txt -text
 res/cardsfolder/c/commando_raid.txt -text svneol=unset#text/plain
 res/cardsfolder/c/common_bond.txt -text
+res/cardsfolder/c/common_cause.txt -text
 res/cardsfolder/c/commune_with_nature.txt svneol=native#text/plain
 res/cardsfolder/c/complex_automaton.txt svneol=native#text/plain
 res/cardsfolder/c/complicate.txt -text
@@ -8765,6 +8766,7 @@ res/cardsfolder/r/ryusei_the_falling_star.txt svneol=native#text/plain
 res/cardsfolder/s/saber_ants.txt svneol=native#text/plain
 res/cardsfolder/s/saberclaw_golem.txt svneol=native#text/plain
 res/cardsfolder/s/sabertooth_alley_cat.txt svneol=native#text/plain
+res/cardsfolder/s/sabertooth_cobra.txt -text
 res/cardsfolder/s/sabertooth_nishoba.txt svneol=native#text/plain
 res/cardsfolder/s/sabertooth_wyvern.txt svneol=native#text/plain
 res/cardsfolder/s/sabretooth_tiger.txt svneol=native#text/plain
@@ -11186,6 +11188,7 @@ res/cardsfolder/t/twisted_justice.txt -text
 res/cardsfolder/t/twitch.txt svneol=native#text/plain
 res/cardsfolder/t/two_headed_dragon.txt -text
 res/cardsfolder/t/two_headed_giant_of_foriys.txt -text
+res/cardsfolder/t/two_headed_giant_of_foriys_avatar.txt -text
 res/cardsfolder/t/two_headed_sliver.txt -text
 res/cardsfolder/t/typhoid_rats.txt -text
 res/cardsfolder/t/typhoon.txt svneol=native#text/plain
