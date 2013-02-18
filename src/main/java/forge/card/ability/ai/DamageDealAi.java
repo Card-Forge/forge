@@ -350,21 +350,43 @@ public class DamageDealAi extends DamageAiBase {
     private boolean damageChooseNontargeted(AIPlayer ai, final SpellAbility saMe, final int dmg) {
         // TODO: Improve circumstances where the Defined Damage is unwanted
         final ArrayList<Object> objects = AbilityUtils.getDefinedObjects(saMe.getSourceCard(), saMe.getParam("Defined"), saMe);
+        boolean urgent = false; // can it wait?
+        boolean positive = false;
 
         for (final Object o : objects) {
             if (o instanceof Card) {
-                // Card c = (Card)o;
+                Card c = (Card) o;
+                final int restDamage = ComputerUtilCombat.predictDamageTo(c, dmg, saMe.getSourceCard(), false);
+                if (c.getLethalDamage() <= restDamage) {
+                    if (c.getController().equals(ai)) {
+                        return false;
+                    } else {
+                        urgent = true;
+                    }
+                }
+                if (c.getController().isOpponentOf(ai)) {
+                    positive = true;
+                }
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
                 final int restDamage = ComputerUtilCombat.predictDamageTo(p, dmg, saMe.getSourceCard(), false);
-                if (p == ai && p.canLoseLife() && ((restDamage + 3) >= p.getLife()) && (restDamage > 0)) {
+                if (!p.isOpponentOf(ai) && p.canLoseLife() && restDamage + 3 >= p.getLife() && restDamage > 0) {
                     // from this spell will kill me
                     return false;
                 }
-                if (p.isOpponentOf(ai) && !p.canLoseLife()) {
-                    return false;
+                if (p.isOpponentOf(ai) && p.canLoseLife()) {
+                    positive = true;
+                    if (p.getLife() + 3 <= restDamage) {
+                        urgent = true;
+                    }
                 }
             }
+        }
+        if (!positive) {
+            return false;
+        }
+        if (!urgent && !SpellAiLogic.playReusable(ai, saMe)) {
+            return false;
         }
         return true;
     }
