@@ -1,0 +1,59 @@
+Name:Rite of Ruin
+ManaCost:5 R R
+Types:Sorcery
+Text:no text
+A:SP$ GenericChoice | Cost$ 5 R R | Choices$ ChooseC1L2A3,ChooseL1C2A3,ChooseA1L2C3,ChooseA1C2L3,ChooseC1A2L3,ChooseL1A2C3 | Defined$ You | StackDescription$ SpellDescription | SpellDescription$ Choose an order for artifacts, creatures, and lands. Each player sacrifices one permanent of the first type, sacrifices two of the second type, then sacrifices three of the third type.
+SVar:ChooseC1L2A3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseC1 | SubAbility$ SacC1L2A3 | ChoiceDescription$ Creature,Land,Artifact
+SVar:ChooseL1C2A3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseL1 | SubAbility$ SacL1C2A3 | ChoiceDescription$ Land,Creature,Artifact
+SVar:ChooseA1L2C3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseA1 | SubAbility$ SacA1L2C3 | ChoiceDescription$ Artifact,Land,Creature
+SVar:ChooseA1C2L3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseA1 | SubAbility$ SacA1C2L3 | ChoiceDescription$ Artifact,Creature,Land
+SVar:ChooseC1A2L3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseC1 | SubAbility$ SacC1A2L3 | ChoiceDescription$ Creature,Artifact,Land
+SVar:ChooseL1A2C3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseL1 | SubAbility$ SacL1A2C3 | ChoiceDescription$ Land,Artifact,Creature
+SVar:ChooseC1:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | RememberChosen$ True
+SVar:ChooseC2:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl | Amount$ 2 | Mandatory$ True | RememberChosen$ True
+SVar:ChooseC3:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl | Amount$ 3 | Mandatory$ True | RememberChosen$ True
+SVar:ChooseL1:DB$ ChooseCard | Defined$ Remembered | Choices$ Land.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | RememberChosen$ True
+SVar:ChooseL2:DB$ ChooseCard | Defined$ Remembered | Choices$ Land.RememberedPlayerCtrl | Amount$ 2 | Mandatory$ True | RememberChosen$ True
+SVar:ChooseL3:DB$ ChooseCard | Defined$ Remembered | Choices$ Land.RememberedPlayerCtrl | Amount$ 3 | Mandatory$ True | RememberChosen$ True
+SVar:ChooseA1:DB$ ChooseCard | Defined$ Remembered | Choices$ Artifact.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | RememberChosen$ True
+SVar:ChooseA2:DB$ ChooseCard | Defined$ Remembered | Choices$ Artifact.RememberedPlayerCtrl | Amount$ 2 | Mandatory$ True | RememberChosen$ True
+SVar:ChooseA3:DB$ ChooseCard | Defined$ Remembered | Choices$ Artifact.RememberedPlayerCtrl | Amount$ 3 | Mandatory$ True | RememberChosen$ True
+SVar:SacC1L2A3:DB$ SacrificeAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanC1L2A3
+SVar:DBCleanC1L2A3:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseL2A3
+SVar:DBChooseL2A3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseL2 | SubAbility$ SacL2A3
+SVar:SacL2A3:DB$ SacrificeAll | ValidCards$ Land.IsRemembered | SubAbility$ DBCleanA3
+SVar:DBCleanA3:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseA3
+SVar:SacL1C2A3:DB$ SacrificeAll | ValidCards$ Land.IsRemembered | SubAbility$ DBCleanL1C2A3
+SVar:DBCleanL1C2A3:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseC2A3
+SVar:DBChooseC2A3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseC2 | SubAbility$ SacC2A3
+SVar:SacC2A3:DB$ SacrificeAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanA3
+SVar:SacA1L2C3:DB$ SacrificeAll | ValidCards$ Artifact.IsRemembered | SubAbility$ DBCleanA1L2C3
+SVar:DBCleanA1L2C3:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseL2C3
+SVar:DBChooseL2C3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseL2 | SubAbility$ SacL2C3
+SVar:SacL2C3:DB$ SacrificeAll | ValidCards$ Land.IsRemembered | SubAbility$ DBCleanC3
+SVar:DBCleanC3:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseC3
+SVar:SacA1C2L3:DB$ SacrificeAll | ValidCards$ Artifact.IsRemembered | SubAbility$ DBCleanA1C2L3
+SVar:DBCleanA1C2L3:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseC2L3
+SVar:DBChooseC2L3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseC2 | SubAbility$ SacC2L3
+SVar:SacC2L3:DB$ SacrificeAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanL3
+SVar:DBCleanL3:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseL3
+SVar:SacC1A2L3:DB$ SacrificeAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanC1A2L3
+SVar:DBCleanC1A2L3:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseA2L3
+SVar:DBChooseA2L3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseA2 | SubAbility$ SacA2L3
+SVar:SacA2L3:DB$ SacrificeAll | ValidCards$ Artifact.IsRemembered | SubAbility$ DBCleanL3
+SVar:SacL1A2C3:DB$ SacrificeAll | ValidCards$ Land.IsRemembered | SubAbility$ DBCleanL1A2C3
+SVar:DBCleanL1A2C3:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseA2C3
+SVar:DBChooseA2C3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseA2 | SubAbility$ SacA2C3
+SVar:SacA2C3:DB$ SacrificeAll | ValidCards$ Artifact.IsRemembered | SubAbility$ DBCleanC3
+SVar:DBChooseC3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseC3 | SubAbility$ SacC3
+SVar:SacC3:DB$ SacrificeAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanup
+SVar:DBChooseL3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseL3 | SubAbility$ SacL3
+SVar:SacL3:DB$ SacrificeAll | ValidCards$ Land.IsRemembered | SubAbility$ DBCleanup
+SVar:DBChooseA3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseA3 | SubAbility$ SacA3
+SVar:SacA3:DB$ SacrificeAll | ValidCards$ Artifact.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_ruin.jpg
+SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/153.jpg
+Oracle:Choose an order for artifacts, creatures, and lands. Each player sacrifices one permanent of the first type, sacrifices two of the second type, then sacrifices three of the third type.
+End

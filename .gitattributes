@@ -8571,6 +8571,7 @@ res/cardsfolder/r/rite_of_consumption.txt -text
 res/cardsfolder/r/rite_of_flame.txt svneol=native#text/plain
 res/cardsfolder/r/rite_of_passage.txt svneol=native#text/plain
 res/cardsfolder/r/rite_of_replication.txt svneol=native#text/plain
+res/cardsfolder/r/rite_of_ruin.txt -text
 res/cardsfolder/r/rites_of_flourishing.txt svneol=native#text/plain
 res/cardsfolder/r/rites_of_initiation.txt -text
 res/cardsfolder/r/rites_of_reaping.txt -text
