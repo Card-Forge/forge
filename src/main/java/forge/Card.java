@@ -6888,6 +6888,28 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
+        } else if (property.startsWith("sharesOwnerWith")) {
+            if (property.equals("sharesOwnerWith")) {
+                if (!this.getOwner().equals(source.getOwner())) {
+                    return false;
+                }
+            } else {
+                final String restriction = property.split("sharesOwnerWith ")[1];
+                if (restriction.equals("Remembered")) {
+                    for (final Object rem : source.getRemembered()) {
+                        if (rem instanceof Card) {
+                            final Card card = (Card) rem;
+                            System.out.println(this + " vs " + card);
+                            System.out.println(this.getOwner().equals(card.getOwner()));
+                            System.out.println(this.getOwner());
+                            System.out.println(card.getOwner());
+                            if (!this.getOwner().equals(card.getOwner())) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
             final List<Card> list = CardUtil.getThisTurnCast("Card", source);
             if (list.size() < 2)  {
