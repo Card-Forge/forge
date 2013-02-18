@@ -311,6 +311,7 @@ public class Upkeep extends Phase {
                             }
                         }
                     };
+                    upkeepAbility.setActivatingPlayer(controller);
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
@@ -366,6 +367,7 @@ public class Upkeep extends Phase {
                             }
                         }
                     };
+                    upkeepAbility.setActivatingPlayer(controller);
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
@@ -410,6 +412,7 @@ public class Upkeep extends Phase {
                             }
                         }
                     };
+                    upkeepAbility.setActivatingPlayer(controller);
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
