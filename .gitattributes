@@ -13562,12 +13562,16 @@ res/sound/black_land.wav -text
 res/sound/block.wav -text
 res/sound/blue_land.wav -text
 res/sound/creature.wav -text
+res/sound/destroy.wav -text
+res/sound/discard.wav -text
 res/sound/draw.wav -text
 res/sound/enchant.wav -text
+res/sound/end_of_turn.wav -text
 res/sound/equip.wav -text
 res/sound/flip_coin.wav -text
 res/sound/green_land.wav -text
 res/sound/instant.wav -text
+res/sound/life_loss.wav -text
 res/sound/lose_duel.wav -text
 res/sound/planeswalker.wav -text
 res/sound/poison.wav -text
@@ -13575,6 +13579,7 @@ res/sound/red_land.wav -text
 res/sound/shuffle.wav -text
 res/sound/sorcery.wav -text
 res/sound/tap.wav -text
+res/sound/token.wav -text
 res/sound/untap.wav -text
 res/sound/white_land.wav -text
 res/sound/win_duel.wav -text
