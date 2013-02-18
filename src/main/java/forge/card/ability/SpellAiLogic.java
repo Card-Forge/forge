@@ -12,11 +12,25 @@ import forge.game.player.Player;
 public abstract class SpellAiLogic {
 
     public final boolean canPlayAIWithSubs(final AIPlayer aiPlayer, final SpellAbility sa) {
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback(aiPlayer)) {
+        if (!canPlayAI(aiPlayer, sa)) {
             return false;
         }
-        return canPlayAI(aiPlayer, sa);
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null && !chkAIDrawbackWithSubs(aiPlayer, subAb)) {
+            return false;
+        }
+        return true;
+    }
+
+    public final boolean chkAIDrawbackWithSubs(final AIPlayer aiPlayer, final SpellAbility sa) {
+        if (!chkAIDrawback(sa, aiPlayer)) {
+            return false;
+        }
+        final AbilitySub subAb = sa.getSubAbility();
+        if (subAb != null && !chkAIDrawbackWithSubs(aiPlayer, subAb)) {
+            return false;
+        }
+        return true;
     }
 
     protected abstract boolean canPlayAI(final AIPlayer aiPlayer, final SpellAbility sa);
