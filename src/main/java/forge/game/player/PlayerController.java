@@ -49,14 +49,12 @@ public abstract class PlayerController {
 
 
     public boolean mayAutoPass(PhaseType phase) {
-
         return phase.isBefore(autoPassUntil);
     }
 
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
-        boolean isLocalPlayer = getPlayer().equals(Singletons.getControl().getPlayer());
-        return isLocalPlayer && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
+        return false; // human has it's overload
     }
 
     /**

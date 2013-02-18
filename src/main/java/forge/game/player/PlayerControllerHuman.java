@@ -34,9 +34,6 @@ import forge.item.CardPrinted;
  */
 public class PlayerControllerHuman extends PlayerController {
 
-
-    private PhaseType autoPassUntil = null;
-
     private final Input defaultInput;
     private final Input blockInput;
     private final Input cleanupInput;
@@ -55,15 +52,9 @@ public class PlayerControllerHuman extends PlayerController {
         cleanupInput = new InputCleanup(game);
     }
 
-    public boolean mayAutoPass(PhaseType phase) {
-
-        return phase.isBefore(autoPassUntil);
-    }
-
-
+	@Override
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
-        boolean isLocalPlayer = getPlayer().equals(Singletons.getControl().getPlayer());
-        return isLocalPlayer && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
+        return !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
 
     /**
