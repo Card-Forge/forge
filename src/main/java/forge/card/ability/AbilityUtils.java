@@ -1143,6 +1143,11 @@ public class AbilityUtils {
                 for (final Card SacrificedAsCost : paidListSacrificed) {
                     host.addRemembered(SacrificedAsCost);
                 }
+            } else if (sa.getParam("Cost").contains("tapXType")) {
+                final List<Card> paidListTapped = sa.getPaidList("Tapped");
+                for (final Card tappedAsCost : paidListTapped) {
+                    host.addRemembered(tappedAsCost);
+                }
             }
         }
     }

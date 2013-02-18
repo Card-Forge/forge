@@ -6773,6 +6773,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                     return false;
+                } if (restriction.equals("AllRemembered")) {
+                    for (final Object rem : source.getRemembered()) {
+                        if (rem instanceof Card) {
+                            final Card card = (Card) rem;
+                            if (!this.sharesCreatureTypeWith(card)) {
+                                return false;
+                            }
+                        }
+                    }
                 } else {
                     boolean shares = false;
                     for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {

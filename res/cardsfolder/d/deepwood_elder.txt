@@ -1,0 +1,16 @@
+Name:Deepwood Elder
+ManaCost:G G
+Types:Creature Dryad Spellshaper
+Text:no text
+PT:2/2
+A:AB$ Animate | Cost$ X G G T Discard<1/Card> | TargetMin$ 0 | TargetMax$ Maxtgt | ValidTgts$ Land | TgtPrompt$ Select target land to become forest | Types$ Forest | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True | References$ MaxTgt | SpellDescription$ X target lands become Forests until end of turn.
+SVar:X:TargetedObjects$Amount
+SVar:RemAIDeck:True
+SVar:Maxtgt:Count$Valid Land
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_elder.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/240.jpg
+Oracle:{X}{G}{G}, {T}, Discard a card: X target lands become Forests until end of turn.
+End

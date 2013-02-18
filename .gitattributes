@@ -786,6 +786,7 @@ res/cardsfolder/b/barrenton_medic.txt svneol=native#text/plain
 res/cardsfolder/b/barrin.txt -text
 res/cardsfolder/b/barrin_master_wizard.txt svneol=native#text/plain
 res/cardsfolder/b/barrins_codex.txt svneol=native#text/plain
+res/cardsfolder/b/barrins_spite.txt -text
 res/cardsfolder/b/barrins_unmaking.txt -text
 res/cardsfolder/b/barrow_ghoul.txt -text
 res/cardsfolder/b/bartel_runeaxe.txt svneol=native#text/plain
@@ -2158,6 +2159,7 @@ res/cardsfolder/c/crypt_sliver.txt svneol=native#text/plain
 res/cardsfolder/c/cryptborn_horror.txt -text
 res/cardsfolder/c/cryptic_annelid.txt svneol=native#text/plain
 res/cardsfolder/c/cryptic_command.txt svneol=native#text/plain
+res/cardsfolder/c/cryptic_gateway.txt -text
 res/cardsfolder/c/cryptoplasm.txt -text
 res/cardsfolder/c/cryptwailing.txt svneol=native#text/plain
 res/cardsfolder/c/crystal_ball.txt svneol=native#text/plain
@@ -2442,6 +2444,7 @@ res/cardsfolder/d/deepchannel_mentor.txt svneol=native#text/plain
 res/cardsfolder/d/deepfire_elemental.txt -text
 res/cardsfolder/d/deeptread_merrow.txt svneol=native#text/plain
 res/cardsfolder/d/deepwood_drummer.txt svneol=native#text/plain
+res/cardsfolder/d/deepwood_elder.txt -text
 res/cardsfolder/d/deepwood_ghoul.txt svneol=native#text/plain
 res/cardsfolder/d/deepwood_legate.txt -text
 res/cardsfolder/d/deepwood_tantiv.txt svneol=native#text/plain
@@ -5674,6 +5677,7 @@ res/cardsfolder/k/knight_watch.txt -text
 res/cardsfolder/k/knighthood.txt svneol=native#text/plain
 res/cardsfolder/k/knightly_valor.txt -text
 res/cardsfolder/k/knollspine_dragon.txt -text
+res/cardsfolder/k/knollspine_invocation.txt -text
 res/cardsfolder/k/knotvine_mystic.txt svneol=native#text/plain
 res/cardsfolder/k/knotvine_paladin.txt svneol=native#text/plain
 res/cardsfolder/k/know_naught_but_fire.txt -text
