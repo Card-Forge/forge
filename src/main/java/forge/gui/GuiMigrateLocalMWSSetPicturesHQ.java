@@ -501,7 +501,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
 
             if (imgFN.equals("none") || (!imgFN.contains(edCode) && !imgFN.contains(setCode2))) {
                 imgFN = GuiDisplayUtil.cleanStringMWS(cp.getName());
-                final int maxIndex = cp.getCard().getEditionInfo(cp.getEdition()).getCopiesCount();
+                final int maxIndex = cp.getRules().getEditionInfo(cp.getEdition()).getCopiesCount();
                 String k = maxIndex > 1 ? Integer.valueOf(cp.getArtIndex() + 1).toString() : "";
                 final String fn = GuiDisplayUtil.cleanStringMWS(cp.getName()) + k + ".full.jpg";
                 final String destFn = imgBase + File.pathSeparator + edCode + File.pathSeparator + imgFN + k + ".jpg";

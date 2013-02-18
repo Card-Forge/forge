@@ -101,7 +101,7 @@ public enum CStatistics implements ICDoc {
         int tmc = 0;
 
         for (final Entry<CardPrinted, Integer> e : deck) {
-            final CardRules cardRules = e.getKey().getCard();
+            final CardRules cardRules = e.getKey().getRules();
             final int count = e.getValue();
             final int cmc = cardRules.getManaCost().getCMC();
 

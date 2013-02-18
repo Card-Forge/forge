@@ -64,7 +64,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
 
         for (final CardPrinted c : CardDb.instance().getUniqueCards()) {
             //System.out.println(c.getName());
-            CardRules firstSide = c.getCard();
+            CardRules firstSide = c.getRules();
             this.createDLObjects(firstSide);
 
             CardRules secondSide = firstSide.getSlavePart();

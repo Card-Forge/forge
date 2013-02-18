@@ -28,8 +28,8 @@ public class MatchStartHelper {
 
         PlayerStartConditions start = new PlayerStartConditions(deck);
 
-        start.setStartingLife(start.getStartingLife() + avatar.getCard().getLife());
-        start.setStartingHand(start.getStartingHand() + avatar.getCard().getHand());
+        start.setStartingLife(start.getStartingLife() + avatar.getRules().getLife());
+        start.setStartingHand(start.getStartingHand() + avatar.getRules().getHand());
         start.setCardsInCommand(Arrays.asList(avatar));
 
         players.put(player, start);

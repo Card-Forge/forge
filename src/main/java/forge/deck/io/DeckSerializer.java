@@ -149,7 +149,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             for (final Entry<CardPrinted, Integer> card : d.getMain()) {
                 // System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
                 for( int i = card.getValue().intValue(); i > 0; --i ) {
-                    list.add(card.getKey().getCard().getEditionInfo(card.getKey().getEdition()).getUrl());
+                    list.add(card.getKey().getRules().getEditionInfo(card.getKey().getEdition()).getUrl());
                 }
             }
             /*

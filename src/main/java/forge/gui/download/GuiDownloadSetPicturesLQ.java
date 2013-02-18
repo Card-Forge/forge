@@ -68,7 +68,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         final boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);
 
         if (!foundSetImage) {
-            final int artsCnt = c.getCard().getEditionInfo(setCode3).getCopiesCount();
+            final int artsCnt = c.getRules().getEditionInfo(setCode3).getCopiesCount();
             final String filename = CardUtil.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
             String url = urlBase + setCode2 + "/" + Base64Coder.encodeString(filename, true);
             cList.add(new DownloadObject(url, new File(this.picturesPath + File.separator + setCode3, filename)));
@@ -100,9 +100,9 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
                 continue; // we don't want cards from unknown sets
             }
 
-            this.addCardToList(cList, c, c.getCard().getName());
-            if (c.getCard().isDoubleFaced()) {
-                this.addCardToList(cList, c, c.getCard().getSlavePart().getName());
+            this.addCardToList(cList, c, c.getRules().getName());
+            if (c.getRules().isDoubleFaced()) {
+                this.addCardToList(cList, c, c.getRules().getSlavePart().getName());
             }
         }
 

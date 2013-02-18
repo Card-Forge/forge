@@ -201,19 +201,19 @@ public class LimitedDeck {
         System.out.println("DECK");
         for (CardPrinted c : deckList) {
             i++;
-            System.out.println(i + ". " + c.toString() + ": " + c.getCard().getManaCost().toString());
+            System.out.println(i + ". " + c.toString() + ": " + c.getRules().getManaCost().toString());
         }
         i = 0;
         System.out.println("NOT PLAYABLE");
         for (CardPrinted c : availableList) {
             i++;
-            System.out.println(i + ". " + c.toString() + ": " + c.getCard().getManaCost().toString());
+            System.out.println(i + ". " + c.toString() + ": " + c.getRules().getManaCost().toString());
         }
         i = 0;
         System.out.println("NOT PICKED");
         for (CardPrinted c : getAiPlayables()) {
             i++;
-            System.out.println(i + ". " + c.toString() + ": " + c.getCard().getManaCost().toString());
+            System.out.println(i + ". " + c.toString() + ": " + c.getRules().getManaCost().toString());
         }
     }
 
@@ -363,7 +363,7 @@ public class LimitedDeck {
 
         // count each card color using mana costs
         for (int i = 0; i < deckList.size(); i++) {
-            final SpellManaCost mc = deckList.get(i).getCard().getManaCost();
+            final SpellManaCost mc = deckList.get(i).getRules().getManaCost();
 
             // count each mana symbol in the mana cost
             for (ManaCostShard shard : mc.getShards()) {
@@ -428,7 +428,7 @@ public class LimitedDeck {
             List<Pair<Double, CardPrinted>> ranked = rankCards(others);
             for (Pair<Double, CardPrinted> bean : ranked) {
                 // Want a card that has just one "off" color.
-                ColorSet off = colors.getOffColors(bean.getValue().getCard().getColor());
+                ColorSet off = colors.getOffColors(bean.getValue().getRules().getColor());
                 if (off.isWhite() || off.isBlue() || off.isBlack() || off.isRed() || off.isGreen()) {
                     colors = ColorSet.fromMask(colors.getColor() | off.getColor());
                     break;
@@ -447,7 +447,7 @@ public class LimitedDeck {
                     nCards--;
                     if (Preferences.DEV_MODE) {
                         System.out.println("Third Color[" + nCards + "]:" + bean.getValue().getName() + "("
-                                + bean.getValue().getCard().getManaCost() + ")");
+                                + bean.getValue().getRules().getManaCost() + ")");
                     }
                 } else {
                     break;
@@ -472,7 +472,7 @@ public class LimitedDeck {
                 nCards--;
                 if (Preferences.DEV_MODE) {
                     System.out.println("Random[" + nCards + "]:" + bean.getValue().getName() + "("
-                            + bean.getValue().getCard().getManaCost() + ")");
+                            + bean.getValue().getRules().getManaCost() + ")");
                 }
             } else {
                 break;
@@ -496,7 +496,7 @@ public class LimitedDeck {
                 getAiPlayables().remove(cardToAdd);
                 if (Preferences.DEV_MODE) {
                     System.out.println("Others[" + num + "]:" + cardToAdd.getName() + " ("
-                            + cardToAdd.getCard().getManaCost() + ")");
+                            + cardToAdd.getRules().getManaCost() + ")");
                 }
                 num = addDeckHintsCards(cardToAdd, num);
             } else {
@@ -516,9 +516,9 @@ public class LimitedDeck {
      */
     private int addDeckHintsCards(CardPrinted cardToAdd, int num) {
         // cards with DeckHints will try to grab additional cards from the pool
-        if (cardToAdd.getCard().getDeckHints() != null
-                && cardToAdd.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
-            DeckHints hints = cardToAdd.getCard().getDeckHints();
+        if (cardToAdd.getRules().getDeckHints() != null
+                && cardToAdd.getRules().getDeckHints().getType() != DeckHints.Type.NONE) {
+            DeckHints hints = cardToAdd.getRules().getDeckHints();
             Iterable<CardPrinted> onColor = Iterables.filter(aiPlayables,
                     Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
             List<CardPrinted> comboCards = hints.filter(onColor);
@@ -557,16 +557,16 @@ public class LimitedDeck {
         int numOthers = 0;
         for (ListIterator<CardPrinted> it = deckList.listIterator(); it.hasNext();) {
             CardPrinted card = it.next();
-            if (card.getCard().getRemRandomDecks()) {
+            if (card.getRules().getRemRandomDecks()) {
                 List<CardPrinted> comboCards = new ArrayList<CardPrinted>();
-                if (card.getCard().getDeckNeeds() != null
-                        && card.getCard().getDeckNeeds().getType() != DeckHints.Type.NONE) {
-                    DeckHints needs = card.getCard().getDeckNeeds();
+                if (card.getRules().getDeckNeeds() != null
+                        && card.getRules().getDeckNeeds().getType() != DeckHints.Type.NONE) {
+                    DeckHints needs = card.getRules().getDeckNeeds();
                     comboCards.addAll(needs.filter(deckList));
                 }
-                if (card.getCard().getDeckHints() != null
-                        && card.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
-                    DeckHints hints = card.getCard().getDeckHints();
+                if (card.getRules().getDeckHints() != null
+                        && card.getRules().getDeckHints().getType() != DeckHints.Type.NONE) {
+                    DeckHints hints = card.getRules().getDeckHints();
                     comboCards.addAll(hints.filter(deckList));
                 }
                 if (comboCards.isEmpty()) {
@@ -575,7 +575,7 @@ public class LimitedDeck {
                     }
                     it.remove();
                     availableList.add(card);
-                    if (card.getCard().getType().isCreature()) {
+                    if (card.getRules().getType().isCreature()) {
                         numCreatures++;
                     } else {
                         numOthers++;
@@ -616,7 +616,7 @@ public class LimitedDeck {
                 num--;
                 getAiPlayables().remove(c);
                 if (Preferences.DEV_MODE) {
-                    System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
+                    System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getRules().getManaCost() + ")");
                 }
                 num = addDeckHintsCards(c, num);
             } else {
@@ -642,7 +642,7 @@ public class LimitedDeck {
         Predicate<CardPrinted> filter = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE,
                 CardPrinted.FN_GET_RULES);
         for (CardPrinted creature : Iterables.filter(deckList, filter)) {
-            int cmc = creature.getCard().getManaCost().getCMC();
+            int cmc = creature.getRules().getManaCost().getCMC();
             if (cmc < 1) {
                 cmc = 1;
             } else if (cmc > 6) {
@@ -653,7 +653,7 @@ public class LimitedDeck {
 
         for (Pair<Double, CardPrinted> bean : creatures) {
             CardPrinted c = bean.getValue();
-            int cmc = c.getCard().getManaCost().getCMC();
+            int cmc = c.getRules().getManaCost().getCMC();
             if (cmc < 1) {
                 cmc = 1;
             } else if (cmc > 6) {
@@ -681,12 +681,12 @@ public class LimitedDeck {
                 getAiPlayables().remove(c);
                 creatureCosts.put(cmc, creatureCosts.get(cmc) + 1);
                 if (Preferences.DEV_MODE) {
-                    System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getCard().getManaCost() + ")");
+                    System.out.println("Creature[" + num + "]:" + c.getName() + " (" + c.getRules().getManaCost() + ")");
                 }
                 num = addDeckHintsCards(c, num);
             } else {
                 if (Preferences.DEV_MODE) {
-                    System.out.println(c.getName() + " not added because CMC " + c.getCard().getManaCost().getCMC()
+                    System.out.println(c.getName() + " not added because CMC " + c.getRules().getManaCost().getCMC()
                             + " has " + currentAtCmc + " already.");
                 }
             }
@@ -727,7 +727,7 @@ public class LimitedDeck {
     private double getAverageCMC(List<CardPrinted> cards) {
         double sum = 0.0;
         for (CardPrinted cardPrinted : cards) {
-            sum += cardPrinted.getCard().getManaCost().getCMC();
+            sum += cardPrinted.getRules().getManaCost().getCMC();
         }
         return sum / cards.size();
     }

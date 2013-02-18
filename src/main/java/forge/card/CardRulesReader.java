@@ -152,7 +152,7 @@ public class CardRulesReader {
             case 'O':
                 if (line.startsWith("Oracle:")) {
                     this.characteristics[this.curCharacteristics].setCardRules(CardRulesReader
-                            .getValueAfterKey(line, "Oracle:").split("\\n"));
+                            .getValueAfterKey(line, "Oracle:"));
 
                 }
                 break;

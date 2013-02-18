@@ -203,9 +203,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
             // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
             CardPrinted sample = pool.get(0); 
-            if ( sample != null && ( sample.getCard().getType().isPlane() || sample.getCard().getType().isPhenomenon() ) )
+            if ( sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon() ) )
                 sec = DeckSection.Planes;
-            if ( sample != null && sample.getCard().getType().isScheme() )
+            if ( sample != null && sample.getRules().getType().isScheme() )
                 sec = DeckSection.Schemes;
 
             d.parts.put(sec, pool);
@@ -300,7 +300,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         public boolean apply(Deck d) {
             for(Entry<DeckSection, CardPool> cp: d) {
                 for(Entry<CardPrinted, Integer> e : cp.getValue()) {
-                    if ( e.getKey().getCard().getRemAIDecks() )
+                    if ( e.getKey().getRules().getRemAIDecks() )
                         return false;
                 }
             }

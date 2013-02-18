@@ -307,19 +307,19 @@ public final class SColumnUtil {
     private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
 
     private static SpellManaCost toManaCost(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost() : SpellManaCost.NO_COST;
+        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getManaCost() : SpellManaCost.NO_COST;
     }
 
     private static ColorSet toColor(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getColor() : ColorSet.getNullColor();
+        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getColor() : ColorSet.getNullColor();
     }
 
     private static Integer toPower(final InventoryItem i) {
         Integer result = -1;
         if (i instanceof CardPrinted) {
-            result = ((CardPrinted) i).getCard().getIntPower();
+            result = ((CardPrinted) i).getRules().getIntPower();
             if (result == null) {
-                result = Integer.valueOf(((CardPrinted) i).getCard().getLoyalty());
+                result = Integer.valueOf(((CardPrinted) i).getRules().getLoyalty());
                 if (result == null) { result = -1; }
             }
         }
@@ -327,11 +327,11 @@ public final class SColumnUtil {
     }
 
     private static Integer toToughness(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getIntToughness() : -1;
+        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getIntToughness() : -1;
     }
 
     private static Integer toCMC(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost().getCMC() : -1;
+        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getManaCost().getCMC() : -1;
     }
 
     private static CardRarity toRarity(final InventoryItem i) {
@@ -348,11 +348,11 @@ public final class SColumnUtil {
     }
 
     private static Integer toAiCmp(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getAiStatusComparable() : Integer.valueOf(-1);
+        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getAiStatusComparable() : Integer.valueOf(-1);
     }
 
     private static String toAiStr(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getAiStatus() : "n/a";
+        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getAiStatus() : "n/a";
     }
 
     //==========
@@ -427,7 +427,7 @@ public final class SColumnUtil {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
-            return i instanceof CardPrinted ? ((CardPrinted)i).getCard().getType().toString() : i.getItemType();
+            return i instanceof CardPrinted ? ((CardPrinted)i).getRules().getType().toString() : i.getItemType();
         }
     };
 
@@ -436,7 +436,7 @@ public final class SColumnUtil {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
-            return i instanceof CardPrinted ? ((CardPrinted)i).getCard().getType().toString() : i.getItemType();
+            return i instanceof CardPrinted ? ((CardPrinted)i).getRules().getType().toString() : i.getItemType();
         }
     };
 

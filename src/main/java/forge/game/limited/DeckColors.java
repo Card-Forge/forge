@@ -45,7 +45,7 @@ class DeckColors {
      */
     public void addColorsOf(CardPrinted pickedCard) {
         
-        SpellManaCost colorsInCard = pickedCard.getCard().getManaCost();
+        SpellManaCost colorsInCard = pickedCard.getRules().getManaCost();
 
         int colorsCanAdd = MagicColor.ALL_COLORS & ~getChosenColors().getColor();
         int colorsWantAdd = colorsInCard.getColorProfile() & colorsCanAdd;

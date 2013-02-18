@@ -104,8 +104,8 @@ public final class CardRules {
      * 
      * @return the rules
      */
-    public String[] getRules() {
-        return this.characteristics.getCardRules();
+    public String getOracleText() {
+        return this.characteristics.getOracleText();
     }
 
     /**
@@ -285,13 +285,12 @@ public final class CardRules {
      * @return true, if successful
      */
     public boolean rulesContain(final String text) {
-        if (this.characteristics.getCardRules() == null) {
+        if (this.characteristics.getOracleText() == null) {
             return false;
         }
-        for (final String r : this.characteristics.getCardRules()) {
-            if (StringUtils.containsIgnoreCase(r, text)) {
-                return true;
-            }
+
+        if (StringUtils.containsIgnoreCase(this.characteristics.getOracleText(), text)) {
+            return true;
         }
         return false;
     }

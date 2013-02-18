@@ -95,13 +95,13 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         aiListData.add("Random");
         for (CardPrinted cp : getAllAvatars()) {
             humanListData.add(cp);
-            if (!cp.getCard().getRemRandomDecks()) {
+            if (!cp.getRules().getRemRandomDecks()) {
                 nonRandomHumanAvatars.add(cp);
             }
-            if (!cp.getCard().getRemAIDecks()) {
+            if (!cp.getRules().getRemAIDecks()) {
                 aiListData.add(cp);
                 allAiAvatars.add(cp);
-                if (!cp.getCard().getRemRandomDecks()) {
+                if (!cp.getRules().getRemRandomDecks()) {
                     nonRandomAiAvatars.add(cp);
                 }
             }
@@ -359,7 +359,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     public Iterable<CardPrinted> getAllAvatars() {
         if ( allAvatars.isEmpty() ) {
             for(CardPrinted c : CardDb.variants().getAllCards()) {
-                if( c.getCard().getType().isVanguard())
+                if( c.getRules().getType().isVanguard())
                     allAvatars.add(c);
             }
         }

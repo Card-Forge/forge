@@ -48,7 +48,7 @@ public class SealedDeck extends LimitedDeck {
         for (int i = 0; i < limit; i++) {
             CardPrinted cp = rankedCards.get(i).getValue();
             colorChooserList.add(cp);
-            System.out.println(cp.getName() + " " + cp.getCard().getManaCost().toString());
+            System.out.println(cp.getName() + " " + cp.getRules().getManaCost().toString());
         }
 
         Iterable<CardRules> rules = Iterables.transform(colorChooserList, CardPrinted.FN_GET_RULES);

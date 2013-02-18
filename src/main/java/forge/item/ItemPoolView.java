@@ -47,7 +47,7 @@ public class ItemPoolView<T extends InventoryItem> implements Iterable<Entry<T, 
         @Override
         public CardRules apply(final Entry<T, Integer> from) {
             final T item = from.getKey();
-            return item instanceof CardPrinted ? ((CardPrinted) item).getCard() : null;
+            return item instanceof CardPrinted ? ((CardPrinted) item).getRules() : null;
         }
     };
 

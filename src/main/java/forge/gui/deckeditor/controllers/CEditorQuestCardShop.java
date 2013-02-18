@@ -460,7 +460,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
                 for (Map.Entry<InventoryItem, Integer> item : getTableDeck().getCards()) {
                     CardPrinted card = (CardPrinted)item.getKey();
-                    int numToKeep = card.getCard().getType().isBasic() ? 50 : 4;
+                    int numToKeep = card.getRules().getType().isBasic() ? 50 : 4;
                     if ("Relentless Rats".equals(card.getName())) {
                         numToKeep = Integer.MAX_VALUE;
                     }

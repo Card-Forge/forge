@@ -69,7 +69,7 @@ public enum CSubmenuArchenemy implements ICDoc {
 
                     @Override
                     public boolean apply(CardPrinted arg0) {
-                        if(arg0.getCard().getType().isScheme())
+                        if(arg0.getRules().getType().isScheme())
                         {
                             return true;
                         }

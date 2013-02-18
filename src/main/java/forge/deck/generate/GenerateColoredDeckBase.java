@@ -114,10 +114,10 @@ public abstract class GenerateColoredDeckBase {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Cr12");
             }
 
-            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getCard().getSetsPrinted()).getKey()));
+            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getRules().getSetsPrinted()).getKey()));
             final int n = this.cardCounts.get(cp.getName());
             this.cardCounts.put(cp.getName(), n + 1);
-            tmpDeck.append(cp.getName() + " " + cp.getCard().getManaCost() + "\n");
+            tmpDeck.append(cp.getName() + " " + cp.getRules().getManaCost() + "\n");
         }
     }
 
@@ -133,7 +133,7 @@ public abstract class GenerateColoredDeckBase {
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
             CardPrinted cp = CardDb.instance().getCard(s);
-            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getCard().getSetsPrinted()).getKey()));
+            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getRules().getSetsPrinted()).getKey()));
 
             final int n = this.cardCounts.get(s);
             this.cardCounts.put(s, n + 1);
@@ -169,7 +169,7 @@ public abstract class GenerateColoredDeckBase {
             this.cardCounts.put(color, nLand);
 
             CardPrinted cp = CardDb.instance().getCard(color);
-            String basicLandSet = Aggregates.random(cp.getCard().getSetsPrinted()).getKey();
+            String basicLandSet = Aggregates.random(cp.getRules().getSetsPrinted()).getKey();
             for (int j = 0; j <= nLand; j++) {
                 tDeck.add(CardDb.instance().getCard(cp.getName(), basicLandSet));
             }
@@ -236,7 +236,7 @@ public abstract class GenerateColoredDeckBase {
         // TODO: count hybrid mana differently?
         for (Entry<CardPrinted, Integer> cpe : outList) {
 
-            int profile = cpe.getKey().getCard().getManaCost().getColorProfile();
+            int profile = cpe.getKey().getRules().getManaCost().getColorProfile();
 
             if ((profile & MagicColor.WHITE) != 0) {
                 increment(res, Constant.Color.BASIC_LANDS.get(0), cpe.getValue());

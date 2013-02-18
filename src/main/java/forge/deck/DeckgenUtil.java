@@ -315,7 +315,7 @@ public class DeckgenUtil {
         CardPool schemes = new CardPool();
         List<CardPrinted> allSchemes = new ArrayList<CardPrinted>();
         for (CardPrinted c : CardDb.variants().getAllCards()) {
-            if (c.getCard().getType().isScheme()) {
+            if (c.getRules().getType().isScheme()) {
                 allSchemes.add(c);
             }
         }
@@ -340,7 +340,7 @@ public class DeckgenUtil {
         CardPool res = new CardPool();
         List<CardPrinted> allPlanars = new ArrayList<CardPrinted>();
         for (CardPrinted c : CardDb.variants().getAllCards()) {
-            if (c.getCard().getType().isPlane() || c.getCard().getType().isPhenomenon()) {
+            if (c.getRules().getType().isPlane() || c.getRules().getType().isPhenomenon()) {
                 allPlanars.add(c);
             }
         }
@@ -352,12 +352,12 @@ public class DeckgenUtil {
             CardPrinted rndPlane = Aggregates.random(allPlanars);
             allPlanars.remove(rndPlane);
             
-            if(rndPlane.getCard().getType().isPhenomenon() && phenoms < 2)
+            if(rndPlane.getRules().getType().isPhenomenon() && phenoms < 2)
             {
                 res.add(rndPlane);
                 phenoms++;
             }
-            else if (rndPlane.getCard().getType().isPlane())
+            else if (rndPlane.getRules().getType().isPlane())
             {
                 res.add(rndPlane);
             }

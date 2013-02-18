@@ -32,7 +32,7 @@ public class CardRuleCharacteristics {
     private SpellManaCost manaCost = SpellManaCost.NO_COST;
     private ColorSet color = null;
     private String ptLine = null;
-    private String[] cardRules = null;
+    private String oracleText = null;
     private Map<String, CardInSet> setsData = new TreeMap<String, CardInSet>();
     private String dlUrl;
     private DeckHints deckHints;
@@ -140,8 +140,8 @@ public class CardRuleCharacteristics {
      * 
      * @return the cardRules
      */
-    public final String[] getCardRules() {
-        return this.cardRules;
+    public final String getOracleText() {
+        return this.oracleText;
     }
 
     /**
@@ -150,8 +150,8 @@ public class CardRuleCharacteristics {
      * @param cardRules0
      *            the cardRules to set
      */
-    public final void setCardRules(final String[] cardRules0) {
-        this.cardRules = cardRules0;
+    public final void setCardRules(final String cardRules0) {
+        this.oracleText = cardRules0;
     }
 
     /**

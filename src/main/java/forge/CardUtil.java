@@ -183,7 +183,7 @@ public final class CardUtil {
      * @return the string
      */
     public static String buildFilename(final CardPrinted card) {
-        final int maxIndex = card.getCard().getEditionInfo(card.getEdition()).getCopiesCount();
+        final int maxIndex = card.getRules().getEditionInfo(card.getEdition()).getCopiesCount();
         return CardUtil.buildFilename(card.getName(), card.getEdition(), card.getArtIndex(), maxIndex, false);
     }
 
@@ -197,7 +197,7 @@ public final class CardUtil {
      * @return the string
      */
     public static String buildFilename(final CardPrinted card, final String nameToUse) {
-        final int maxIndex = card.getCard().getEditionInfo(card.getEdition()).getCopiesCount();
+        final int maxIndex = card.getRules().getEditionInfo(card.getEdition()).getCopiesCount();
         return CardUtil.buildFilename(nameToUse, card.getEdition(), card.getArtIndex(), maxIndex, false);
     }
 

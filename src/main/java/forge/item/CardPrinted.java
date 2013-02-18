@@ -120,7 +120,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * 
      * @return the card
      */
-    public CardRules getCard() {
+    public CardRules getRules() {
         return this.card;
     }
 

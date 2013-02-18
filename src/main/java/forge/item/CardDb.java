@@ -416,7 +416,7 @@ public final class CardDb {
             for (final Entry<String, CardInSet> s : card.getSetsPrinted()) {
                 lastAdded = this.addToLists(card, cardName, s);
             }
-            if ( lastAdded.getCard().isTraditional() )
+            if ( lastAdded.getRules().isTraditional() )
                 uniqueCommonCards.put(cardName, lastAdded);
             else
                 uniqueSpecialCards.put(cardName, lastAdded);

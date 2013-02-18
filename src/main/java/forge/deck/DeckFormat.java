@@ -136,7 +136,7 @@ public enum DeckFormat {
                 if (null == cmd || cmd.isEmpty()) {
                     return "is missing a commander";
                 }
-                if (!cmd.get(0).getCard().getType().isLegendary()) {
+                if (!cmd.get(0).getRules().getType().isLegendary()) {
                     return "has a commander that is not a legendary creature";
                 }
                 
@@ -152,7 +152,7 @@ public enum DeckFormat {
                 int phenoms = 0;
                 for (Entry<CardPrinted, Integer> cp : planes) {
 
-                    if (cp.getKey().getCard().getType().typeContains(CardCoreType.Phenomenon)) {
+                    if (cp.getKey().getRules().getType().typeContains(CardCoreType.Phenomenon)) {
                         phenoms++;
                     }
                     if (cp.getValue() > 1) {
@@ -197,7 +197,7 @@ public enum DeckFormat {
             for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, CardPrinted.FN_GET_NAME)) {
 
                 CardPrinted simpleCard = CardDb.instance().getCard(cp.getKey());
-                boolean canHaveMultiple = simpleCard.getCard().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
+                boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
 
                 if (!canHaveMultiple && cp.getValue() > maxCopies) {
                     return String.format("must not contain more than %d of '%s' card", maxCopies, cp.getKey());

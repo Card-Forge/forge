@@ -60,7 +60,7 @@ public class GameNew {
 
                 // apply random pictures for cards
                 if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
-                    final int cntVariants = cardPrinted.getCard().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
+                    final int cntVariants = cardPrinted.getRules().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
                     if (cntVariants > 1) {
                         card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
                         card.setImageFilename(CardUtil.buildFilename(card));
@@ -195,7 +195,7 @@ public class GameNew {
         
         for ( Entry<DeckSection, CardPool> ds : toUse ) {
             for (Entry<CardPrinted, Integer> cp : ds.getValue()) {
-                if ( cp.getKey().getCard().getRemAIDecks() ) 
+                if ( cp.getKey().getRules().getRemAIDecks() ) 
                     result.add(cp.getKey());
             }
         }
@@ -207,7 +207,7 @@ public class GameNew {
         Set<CardPrinted> myRemovedAnteCards = new HashSet<CardPrinted>();
         for ( Entry<DeckSection, CardPool> ds : toUse ) {
             for (Entry<CardPrinted, Integer> cp : ds.getValue()) {
-                if ( cp.getKey().getCard().rulesContain(keywordToRemove) ) 
+                if ( cp.getKey().getRules().rulesContain(keywordToRemove) ) 
                     myRemovedAnteCards.add(cp.getKey());
             }
         }

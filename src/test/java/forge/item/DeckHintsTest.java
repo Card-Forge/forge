@@ -29,7 +29,7 @@ public class DeckHintsTest {
     void test() {
         CardPrinted cp = readCard("griffin_rider.txt");
         Assert.assertEquals("Griffin Rider", cp.getName());
-        DeckHints hints = cp.getCard().getDeckHints();
+        DeckHints hints = cp.getRules().getDeckHints();
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.TYPE, hints.getType());
 
@@ -50,7 +50,7 @@ public class DeckHintsTest {
     void testCards() {
         CardPrinted cp = readCard("throne_of_empires.txt");
         Assert.assertEquals("Throne of Empires", cp.getName());
-        DeckHints hints = cp.getCard().getDeckHints();
+        DeckHints hints = cp.getRules().getDeckHints();
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.NAME, hints.getType());
 
@@ -71,7 +71,7 @@ public class DeckHintsTest {
     @Test(timeOut = 1000, enabled = true)
     void testKeywords() {
         CardPrinted cp = readCard("mwonvuli_beast_tracker.txt");
-        DeckHints hints = cp.getCard().getDeckHints();
+        DeckHints hints = cp.getRules().getDeckHints();
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.KEYWORD, hints.getType());
 
@@ -90,7 +90,7 @@ public class DeckHintsTest {
     @Test(timeOut = 1000, enabled = true)
     void testColor() {
         CardPrinted cp = readCard("wurms_tooth.txt");
-        DeckHints hints = cp.getCard().getDeckNeeds();
+        DeckHints hints = cp.getRules().getDeckNeeds();
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.COLOR, hints.getType());
 
@@ -110,7 +110,7 @@ public class DeckHintsTest {
     @Test(timeOut = 1000, enabled = false)
     void testNoFilter() {
         CardPrinted cp = readCard("assault_griffin.txt");
-        DeckHints hints = cp.getCard().getDeckHints();
+        DeckHints hints = cp.getRules().getDeckHints();
         Assert.assertEquals("Assault Griffin", cp.getName());
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.NONE, hints.getType());

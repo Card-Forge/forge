@@ -227,7 +227,7 @@ public class CardFactory {
     public final Card getCard(final CardPrinted cp, final Player owner) {
 
         //System.out.println(cardName);
-        Card c = this.getCard2(cp.getCard().getCardScript(), owner);
+        Card c = this.getCard2(cp.getRules().getCardScript(), owner);
 
         if (c != null) {
             c.setCurSetCode(cp.getEdition());

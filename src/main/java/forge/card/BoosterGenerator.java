@@ -301,14 +301,14 @@ public class BoosterGenerator {
     }
 
     private void addToRarity(final CardPrinted c) {
-        if (c.getCard().isAltState()) {
+        if (c.getRules().isAltState()) {
             return;
         }
 
-        Map<CardRarity, List<CardPrinted>> targetList = c.getCard().isDoubleFaced() ? twoFacedByRarity : singleFacedByRarity;
+        Map<CardRarity, List<CardPrinted>> targetList = c.getRules().isDoubleFaced() ? twoFacedByRarity : singleFacedByRarity;
         targetList.get(c.getRarity()).add(c);
 
-        if (!c.getCard().getType().isBasicLand()) {
+        if (!c.getRules().getType().isBasicLand()) {
             this.allButLands.add(c);
         }
     }

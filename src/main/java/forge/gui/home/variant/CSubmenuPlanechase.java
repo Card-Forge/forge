@@ -68,7 +68,7 @@ public enum CSubmenuPlanechase implements ICDoc {
 
                     @Override
                     public boolean apply(CardPrinted arg0) {
-                        if(arg0.getCard().getType().isPlane() || arg0.getCard().getType().isPhenomenon())
+                        if(arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon())
                         {
                             return true;
                         }
