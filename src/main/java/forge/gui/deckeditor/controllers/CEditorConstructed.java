@@ -122,8 +122,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         }
 
         if (sectionMode == DeckSection.Avatar || sectionMode == DeckSection.Commander) {
-            for(Map.Entry<CardPrinted, Integer> cp : getTableDeck().getCards())
-            {
+            for(Map.Entry<CardPrinted, Integer> cp : getTableDeck().getCards()) {
                 getTableDeck().removeCard(cp.getKey(), cp.getValue());
             }
         }
@@ -136,9 +135,8 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         } else {
             getTableDeck().addCard(card, qty);
         }
-        if (sectionMode == DeckSection.Sideboard) {
-            this.getTableCatalog().removeCard(card, qty);
-        }
+        // if not in sideboard mode, "remove" 0 cards in order to re-show the selected card
+        this.getTableCatalog().removeCard(card, sectionMode == DeckSection.Sideboard ? qty : 0);
         
         this.controller.notifyModelChanged();
     }
