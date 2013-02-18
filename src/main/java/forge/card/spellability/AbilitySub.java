@@ -65,6 +65,17 @@ public abstract class AbilitySub extends SpellAbility implements java.io.Seriali
      * @return a boolean.
      */
     public abstract boolean chkAIDrawback(AIPlayer ai);
+    
+    public final boolean chkAIDrawbackWithSubs(final AIPlayer aiPlayer) {
+        if (!chkAIDrawback(aiPlayer)) {
+            return false;
+        }
+        final AbilitySub subAb = this.getSubAbility();
+        if (subAb != null && !subAb.chkAIDrawbackWithSubs(aiPlayer)) {
+            return false;
+        }
+        return true;
+    }
 
     public abstract AbilitySub getCopy();
 

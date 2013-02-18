@@ -16,18 +16,7 @@ public abstract class SpellAiLogic {
             return false;
         }
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !chkAIDrawbackWithSubs(aiPlayer, subAb)) {
-            return false;
-        }
-        return true;
-    }
-
-    public final boolean chkAIDrawbackWithSubs(final AIPlayer aiPlayer, final SpellAbility sa) {
-        if (!chkAIDrawback(sa, aiPlayer)) {
-            return false;
-        }
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !chkAIDrawbackWithSubs(aiPlayer, subAb)) {
+        if (subAb != null && !subAb.chkAIDrawbackWithSubs(aiPlayer)) {
             return false;
         }
         return true;
