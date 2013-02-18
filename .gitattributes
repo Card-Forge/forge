@@ -13569,6 +13569,7 @@ res/sound/flip_coin.wav -text
 res/sound/green_land.wav -text
 res/sound/instant.wav -text
 res/sound/lose_duel.wav -text
+res/sound/planeswalker.wav -text
 res/sound/poison.wav -text
 res/sound/red_land.wav -text
 res/sound/shuffle.wav -text
