@@ -53,8 +53,8 @@ import forge.util.Aggregates;
 public final class CardDb {
     private static volatile CardDb commonCards = null; // 'volatile' keyword makes this working
     private static volatile CardDb variantCards = null; // 'volatile' keyword makes this working
-    private final String foilSuffix = " foil";
-    private final int foilSuffixLength = foilSuffix.length(); 
+    public final static String foilSuffix = " foil";
+    private final static int foilSuffixLength = foilSuffix.length(); 
 
     /**
      * Instance.
@@ -142,7 +142,7 @@ public final class CardDb {
     }
 
     private boolean isFoil(final String cardName) {
-        return cardName.toLowerCase().endsWith(this.foilSuffix) && (cardName.length() > this.foilSuffixLength);
+        return cardName.toLowerCase().endsWith(CardDb.foilSuffix) && (cardName.length() > CardDb.foilSuffixLength);
     }
 
     /**
@@ -152,7 +152,7 @@ public final class CardDb {
      * @return the string
      */
     public String removeFoilSuffix(final String cardName) {
-        return cardName.substring(0, cardName.length() - this.foilSuffixLength);
+        return cardName.substring(0, cardName.length() - CardDb.foilSuffixLength);
     }
 
     /**

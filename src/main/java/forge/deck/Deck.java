@@ -37,6 +37,7 @@ import com.google.common.base.Predicate;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
@@ -255,11 +256,16 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private static String serializeSingleCard(CardPrinted card, Integer n) {
 
         final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
-        if (hasBadSetInfo) {
-            return String.format("%d %s", n, card.getName());
-        } else {
-            return String.format("%d %s|%s", n, card.getName(), card.getEdition());
+        StringBuilder sb = new StringBuilder();
+        sb.append(n).append(" ").append(card.getName());
+        
+        if (!hasBadSetInfo) {
+            sb.append("|").append(card.getEdition());
         }
+        if(card.isFoil()) {
+            sb.append(CardDb.foilSuffix);
+        }
+        return sb.toString();
     }
 
     /**
