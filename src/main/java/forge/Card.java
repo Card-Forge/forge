@@ -2652,7 +2652,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // if there is a parent ability the AI can't use it
             final Cost cost = a.getPayCosts();
             if (!cost.hasNoManaCost()
-                || (!a.getApi().equals(ApiType.Mana) && !a.getApi().equals(ApiType.ManaReflected))) {
+                || (a.getApi() != ApiType.Mana && a.getApi() != ApiType.ManaReflected)) {
                 continue;
             }
 
@@ -5973,7 +5973,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean isReflectedLand() {
         for (final SpellAbility a : this.getCharacteristics().getManaAbility()) {
-            if (a.getApi().equals(ApiType.ManaReflected)) {
+            if (a.getApi() == ApiType.ManaReflected) {
                 return true;
             }
         }

@@ -69,7 +69,7 @@ public abstract class InputPayManaBase extends Input {
         if (m.isAnyMana()) {
             return true;
         }
-        if (am.getApi().equals(ApiType.ManaReflected)) {
+        if (am.getApi() == ApiType.ManaReflected) {
             final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new HashSet<String>(), new ArrayList<Card>());
             for (final String color : reflectableColors) {
                 if (mana.contains(MagicColor.toShortString(color))) {
@@ -228,7 +228,7 @@ public abstract class InputPayManaBase extends Input {
     
             for (final SpellAbility am : abilities) {
                 AbilityManaPart m = am.getManaPart();
-                if (am.getApi().equals(ApiType.ManaReflected)) {
+                if (am.getApi() == ApiType.ManaReflected) {
                     final Iterable<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new HashSet<String>(), new ArrayList<Card>());
                     for (final String color : reflectableColors) {
                         if (manaCost.isColor(color)) {

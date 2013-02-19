@@ -1,9 +1,12 @@
 package forge.card.ability;
 
-import java.lang.reflect.Constructor;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 import forge.card.ability.ai.*;
 import forge.card.ability.effects.*;
+import forge.util.ReflectionUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -113,69 +116,41 @@ public enum ApiType {
     UnattachAll (UnattachAllEffect.class, UnattachAllAi.class),
     Untap (UntapEffect.class, UntapAi.class),
     UntapAll (UntapAllEffect.class, UntapAllAi.class),
-    WinsGame (GameWinEffect.class, GameWinAi.class);
+    WinsGame (GameWinEffect.class, GameWinAi.class), 
+    
+    
+    
+    InternalEtbReplacement(ETBReplacementEffect.class, CanPlayAsDrawbackAi.class);
+
+    private final Class<? extends SpellEffect> clsEffect;
+    private final Class<? extends SpellAiLogic> clsAi;
+    
+
+    private static final Map<String, ApiType> allValues = new TreeMap<String, ApiType>(String.CASE_INSENSITIVE_ORDER);
 
     ApiType(Class<? extends SpellEffect> clsEf, Class<? extends SpellAiLogic> clsAI) {
         clsEffect = clsEf;
         clsAi = clsAI;
     }
 
-    private final Class<? extends SpellEffect> clsEffect;
-    private final Class<? extends SpellAiLogic> clsAi;
-
     public static ApiType smartValueOf(String value) {
-
-        final String valToCompate = value.trim();
-        for (final ApiType v : ApiType.values()) {
-            if (v.name().compareToIgnoreCase(valToCompate) == 0) {
-                return v;
-            }
-        }
-
-        throw new RuntimeException("Element " + value + " not found in ApiType enum");
+        if (allValues.isEmpty())
+            for(ApiType c : ApiType.values())
+                allValues.put(c.toString(), c);
+        
+        ApiType v = allValues.get(value);
+        if ( v == null )
+            throw new RuntimeException("Element " + value + " not found in ApiType enum");
+        return v;
     }
 
     public SpellEffect getSpellEffect() {
-        if (null == clsEffect) {
-            return null;
-        }
-        @SuppressWarnings("unchecked")
-        Constructor<? extends SpellEffect>[] cc = (Constructor<? extends SpellEffect>[]) clsEffect.getConstructors();
-        for (Constructor<? extends SpellEffect> c : cc) {
-            Class<?>[] pp = c.getParameterTypes();
-            if (pp.length == 0) {
-                try {
-                    SpellEffect res = c.newInstance();
-                    return res;
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e.printStackTrace();
-                }
-            }
-        }
-        throw new RuntimeException("No default constructor found in class " + clsEffect.getName());
+        return clsEffect == null ? null : ReflectionUtil.makeDefaultInstanceOf(clsEffect);
+
     }
 
     public SpellAiLogic getAi() {
-        if (null == clsAi) {
-            return null;
-        }
-
-        @SuppressWarnings("unchecked")
-        Constructor<? extends SpellAiLogic>[] cc = (Constructor<? extends SpellAiLogic>[]) clsAi.getConstructors();
-        for (Constructor<? extends SpellAiLogic> c : cc) {
-            Class<?>[] pp = c.getParameterTypes();
-            if (pp.length == 0) {
-                try {
-                    SpellAiLogic res = c.newInstance();
-                    return res;
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e.printStackTrace();
-                }
-            }
-        }
-        throw new RuntimeException("No default constructor found in class " + clsEffect.getName());
+        return clsAi == null ? null : ReflectionUtil.makeDefaultInstanceOf(clsAi);
     }
 
 }

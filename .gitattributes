@@ -13650,7 +13650,6 @@ src/main/java/forge/card/ability/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/ability/AbilityUtils.java -text
 src/main/java/forge/card/ability/ApiType.java -text
 src/main/java/forge/card/ability/CommonAbility.java -text
-src/main/java/forge/card/ability/CommonDrawback.java svneol=native#text/plain
 src/main/java/forge/card/ability/CommonSpell.java -text
 src/main/java/forge/card/ability/SpellAiLogic.java -text
 src/main/java/forge/card/ability/SpellEffect.java -text
@@ -13799,6 +13798,7 @@ src/main/java/forge/card/ability/effects/DigUntilEffect.java -text
 src/main/java/forge/card/ability/effects/DiscardEffect.java -text
 src/main/java/forge/card/ability/effects/DrainManaEffect.java -text
 src/main/java/forge/card/ability/effects/DrawEffect.java -text
+src/main/java/forge/card/ability/effects/ETBReplacementEffect.java -text
 src/main/java/forge/card/ability/effects/EffectEffect.java -text
 src/main/java/forge/card/ability/effects/EncodeEffect.java -text
 src/main/java/forge/card/ability/effects/EndTurnEffect.java -text
@@ -14427,6 +14427,7 @@ src/main/java/forge/util/MultiplexOutputStream.java svneol=native#text/plain
 src/main/java/forge/util/MyObservable.java svneol=native#text/plain
 src/main/java/forge/util/MyRandom.java svneol=native#text/plain
 src/main/java/forge/util/PredicateString.java -text
+src/main/java/forge/util/ReflectionUtil.java -text
 src/main/java/forge/util/TextUtil.java -text
 src/main/java/forge/util/ThreadUtil.java svneol=native#text/plain
 src/main/java/forge/util/TreeProperties.java svneol=native#text/plain

@@ -132,7 +132,7 @@ public class ComputerUtilMana {
                         m.setExpressChoice(colorChoice);
                         colorChoice = ComputerUtilMana.getComboManaChoice(ai, ma, sa, cost);
                         m.setExpressChoice(colorChoice);
-                    } else if (ma.getApi().equals(ApiType.ManaReflected)) {
+                    } else if (ma.getApi() == ApiType.ManaReflected) {
                         if (CardUtil.getReflectableManaColors(ma, ma, new HashSet<String>(), new ArrayList<Card>()).contains(MagicColor.toLongString(costParts[nPart]))) {
                             m.setExpressChoice(costParts[nPart]);
                         } else {

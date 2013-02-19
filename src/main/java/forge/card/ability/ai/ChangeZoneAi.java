@@ -295,9 +295,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         chance &= (r.nextFloat() < .8);
 
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback(ai);
-        }
+        chance &= subAb == null || subAb.chkAIDrawback(ai);
 
         return chance;
     }
@@ -589,13 +587,13 @@ public class ChangeZoneAi extends SpellAiLogic {
                 }
 
                 final AbilitySub abSub = sa.getSubAbility();
-                ApiType subAPI = null;
+                ApiType subApi = null;
                 if (abSub != null) {
-                    subAPI = abSub.getApi();
+                    subApi = abSub.getApi();
                 }
 
                 // only use blink or bounce effects
-                if (!(destination.equals(ZoneType.Exile) && (subAPI == ApiType.DelayedTrigger || subAPI == ApiType.ChangeZone))
+                if (!(destination.equals(ZoneType.Exile) && (subApi == ApiType.DelayedTrigger || subApi == ApiType.ChangeZone))
                         && !destination.equals(ZoneType.Hand)) {
                     return false;
                 }
@@ -629,11 +627,9 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback(ai);
-        }
+        chance &= subAb == null || subAb.chkAIDrawback(ai);
 
-        return (chance);
+        return chance;
     }
 
     /**
@@ -676,10 +672,10 @@ public class ChangeZoneAi extends SpellAiLogic {
         final Target tgt = sa.getTarget();
 
         final AbilitySub abSub = sa.getSubAbility();
-        ApiType subAPI = null;
+        ApiType subApi = null;
         String subAffected = "";
         if (abSub != null) {
-            subAPI = abSub.getApi();
+            subApi = abSub.getApi();
             if (abSub.hasParam("Defined")) {
                 subAffected = abSub.getParam("Defined");
             }
@@ -714,7 +710,7 @@ public class ChangeZoneAi extends SpellAiLogic {
 
             // if it's blink or bounce, try to save my about to die stuff
             if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile)
-                    && (subAPI == ApiType.DelayedTrigger || (subAPI == ApiType.ChangeZone && subAffected.equals("Remembered")))))
+                    && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone && subAffected.equals("Remembered")))))
                     && (tgt.getMinTargets(sa.getSourceCard(), sa) <= 1)) {
 
                 // check stack for something on the stack that will kill
@@ -792,7 +788,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         // blink human targets only during combat
         if (origin.equals(ZoneType.Battlefield)
                 && destination.equals(ZoneType.Exile)
-                && (subAPI == ApiType.DelayedTrigger || (subAPI == ApiType.ChangeZone  && subAffected.equals("Remembered")))
+                && (subApi == ApiType.DelayedTrigger || (subApi == ApiType.ChangeZone  && subAffected.equals("Remembered")))
                 && !(Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
                         .isAbility())) {
             return false;

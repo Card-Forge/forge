@@ -17,7 +17,18 @@
  */
 package forge.card.spellability;
 
+import java.util.Map;
+
 import forge.Card;
+import forge.card.ability.AbilityFactory;
+import forge.card.ability.ApiType;
+import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellEffect;
+import forge.card.ability.effects.ChangeZoneAllEffect;
+import forge.card.ability.effects.ChangeZoneEffect;
+import forge.card.ability.effects.ManaEffect;
+import forge.card.ability.effects.ManaReflectedEffect;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.player.AIPlayer;
 
 /**
@@ -28,60 +39,11 @@ import forge.game.player.AIPlayer;
  * @author Forge
  * @version $Id$
  */
-public abstract class AbilitySub extends SpellAbility implements java.io.Serializable {
+public final class AbilitySub extends SpellAbility implements java.io.Serializable {
     /** Constant <code>serialVersionUID=4650634415821733134L</code>. */
     private static final long serialVersionUID = 4650634415821733134L;
 
     private SpellAbility parent = null;
-
-    /**
-     * <p>
-     * Constructor for Ability_Sub.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param tgt
-     *            a {@link forge.card.spellability.Target} object.
-     */
-    public AbilitySub(final Card sourceCard, final Target tgt) {
-        super(sourceCard);
-        this.setTarget(tgt);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean canPlay() {
-        // this should never be on the Stack by itself
-        return false;
-    }
-
-    /**
-     * <p>
-     * chkAI_Drawback.
-     * </p>
-     * @param ai TODO
-     * 
-     * @return a boolean.
-     */
-    public abstract boolean chkAIDrawback(AIPlayer ai);
-    
-    public final boolean chkAIDrawbackWithSubs(final AIPlayer aiPlayer) {
-        if (!chkAIDrawback(aiPlayer)) {
-            return false;
-        }
-        final AbilitySub subAb = this.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawbackWithSubs(aiPlayer)) {
-            return false;
-        }
-        return true;
-    }
-
-    public abstract AbilitySub getCopy();
-
-    /** {@inheritDoc} */
-    @Override
-    public abstract boolean doTrigger(boolean mandatory, AIPlayer ai);
 
     /**
      * <p>
@@ -105,5 +67,67 @@ public abstract class AbilitySub extends SpellAbility implements java.io.Seriali
     @Override
     public final SpellAbility getParent() {
         return this.parent;
+    }
+
+
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean canPlay() {
+        // this should never be on the Stack by itself
+        return false;
+    }
+
+    
+    private final SpellEffect effect;
+    private final SpellAiLogic ai;
+
+    public AbilitySub(ApiType api0, final Card ca, final Target tgt, Map<String, String> params0) {
+        super(ca);
+        this.setTarget(tgt);
+        api = api0;
+        params = params0;
+        ai = api.getAi();
+        effect = api.getSpellEffect();
+
+        if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
+            this.setManaPart(new AbilityManaPart(ca, params));
+        }
+
+        if (effect instanceof ChangeZoneEffect || effect instanceof ChangeZoneAllEffect) {
+            AbilityFactory.adjustChangeZoneTarget(params, this);
+        }
+    }
+
+    public AbilitySub getCopy() {
+        Target t = getTarget() == null ? null : new Target(getTarget());
+        AbilitySub res = new AbilitySub(api, getSourceCard(), t, params);
+        CardFactoryUtil.copySpellAbility(this, res);
+        return res;
+    }
+
+    @Override
+    public String getStackDescription() {
+        return effect.getStackDescriptionWithSubs(params, this);
+    }
+
+    @Override
+    public boolean canPlayAI() {
+        return ai.canPlayAIWithSubs((AIPlayer)getActivatingPlayer(), this);
+    }
+
+    @Override
+    public void resolve() {
+        effect.resolve(this);
+    }
+
+    public boolean chkAIDrawback(AIPlayer aiPlayer) {
+        final AbilitySub subAb = getSubAbility();
+        return ai.chkAIDrawback(this, aiPlayer) && (subAb == null || subAb.chkAIDrawback(aiPlayer));  
+    }
+
+    @Override
+    public boolean doTrigger(final boolean mandatory, AIPlayer aiPlayer) {
+        return ai.doTriggerAI(aiPlayer, this, mandatory);
     }
 }

@@ -126,15 +126,13 @@ public final class AbilityFactory {
             }
         }
 
-        SpellAiLogic ai = api.getAi();
-        SpellEffect se = api.getSpellEffect();
 
         if (isAb) {
-            spellAbility = new CommonAbility(api, hostCard, abCost, abTgt, mapParams, se, ai);
+            spellAbility = new CommonAbility(api, hostCard, abCost, abTgt, mapParams);
         } else if (isSp) {
-            spellAbility = new CommonSpell(api, hostCard, abCost, abTgt, mapParams, se, ai);
+            spellAbility = new CommonSpell(api, hostCard, abCost, abTgt, mapParams);
         } else if (isDb) {
-            spellAbility = new CommonDrawback(api, hostCard, abTgt, mapParams, se, ai);
+            spellAbility = new AbilitySub(api, hostCard, abTgt, mapParams);
         }
 
 

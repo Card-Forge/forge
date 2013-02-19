@@ -503,7 +503,7 @@ public final class CardUtil {
         // so we don't infinite recurse.
         final Card card = abMana.getSourceCard();
         
-        if (!abMana.getApi().equals(ApiType.ManaReflected)) {
+        if (abMana.getApi() != ApiType.ManaReflected) {
             return colors;
         }
 

@@ -20,20 +20,20 @@ public class CommonAbility extends AbilityActivated {
 
     private static final long serialVersionUID = -4183793555528531978L;
 
-    public CommonAbility(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0, SpellEffect effect0, SpellAiLogic ai0) {
+    public CommonAbility(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0) {
         super(sourceCard, abCost, tgt);
         params = params0;
         api = api0;
-        effect = effect0;
-        ai = ai0;
+        effect = api.getSpellEffect();
+        ai = api.getAi();
 
-        if (effect0 instanceof ManaEffect || effect0 instanceof ManaReflectedEffect) {
+        if (effect instanceof ManaEffect || effect instanceof ManaReflectedEffect) {
 
             this.setManaPart(new AbilityManaPart(sourceCard, params));
             this.setUndoable(true); // will try at least
         }
 
-        if (effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect) {
+        if (effect instanceof ChangeZoneEffect || effect instanceof ChangeZoneAllEffect) {
             AbilityFactory.adjustChangeZoneTarget(params, this);
         }
     }
@@ -49,7 +49,7 @@ public class CommonAbility extends AbilityActivated {
     @Override
     public AbilityActivated getCopy() {
         Target tgt = getTarget() == null ? null : new Target(getTarget());
-        AbilityActivated res = new CommonAbility(api, getSourceCard(), getPayCosts(), tgt, params, effect, ai);
+        AbilityActivated res = new CommonAbility(api, getSourceCard(), getPayCosts(), tgt, params);
         CardFactoryUtil.copySpellAbility(this, res);
         return res;
     }

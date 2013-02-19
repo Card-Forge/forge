@@ -28,6 +28,7 @@ import forge.Singletons;
 
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
+import forge.card.ability.ApiType;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -442,11 +443,11 @@ public class TargetSelection {
                                 choices[i - 1] = i;
                             }
                             String apiBasedMessage = "Distribute how much to ";
-                            if (sa.getApi().toString().equals("DealDamage")) {
+                            if (sa.getApi() == ApiType.DealDamage) {
                                 apiBasedMessage = "Select how much damage to deal to ";
-                            } else if (sa.getApi().toString().equals("PreventDamage")) {
+                            } else if (sa.getApi() == ApiType.PreventDamage) {
                                 apiBasedMessage = "Select how much damage to prevent to ";
-                            } else if (sa.getApi().toString().equals("PutCounter")) {
+                            } else if (sa.getApi() == ApiType.PutCounter) {
                                 apiBasedMessage = "Select how many counters to distribute to ";
                             }
                             final StringBuilder sb = new StringBuilder();
@@ -486,9 +487,9 @@ public class TargetSelection {
                                 choices[i - 1] = i;
                             }
                             String apiBasedMessage = "Distribute how much to ";
-                            if (sa.getApi().toString().equals("DealDamage")) {
+                            if (sa.getApi() == ApiType.DealDamage) {
                                 apiBasedMessage = "Select how much damage to deal to ";
-                            } else if (sa.getApi().toString().equals("PreventDamage")) {
+                            } else if (sa.getApi() == ApiType.PreventDamage) {
                                 apiBasedMessage = "Select how much damage to prevent to ";
                             }
                             final StringBuilder sb = new StringBuilder();

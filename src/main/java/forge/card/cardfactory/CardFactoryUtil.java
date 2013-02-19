@@ -50,9 +50,7 @@ import forge.card.MagicColor;
 import forge.card.SpellManaCost;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.CommonDrawback;
-import forge.card.ability.SpellEffect;
-import forge.card.ability.ai.CanPlayAsDrawbackAi;
+import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
@@ -62,6 +60,7 @@ import forge.card.replacement.ReplacementLayer;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -4469,14 +4468,7 @@ public class CardFactoryUtil {
             tailend = tailend.getSubAbility();
         }
 
-        class ETBReplacementEffect extends SpellEffect {
-            @Override
-            public void resolve(SpellAbility sa) {
-                forge.Singletons.getModel().getGame().getAction().moveToPlay(((Card) sa.getReplacingObject("Card")));
-            }
-        }
-
-        tailend.setSubAbility(new CommonDrawback(null, sa.getSourceCard(), null, null, new ETBReplacementEffect(), new CanPlayAsDrawbackAi()));
+        tailend.setSubAbility(new AbilitySub(ApiType.InternalEtbReplacement, sa.getSourceCard(), null, null));
         // ETBReplacementMove(sa.getSourceCard(), null));
     }
 

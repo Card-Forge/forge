@@ -1533,7 +1533,7 @@ public final class GameActionUtil {
                 baseMana = "Any";
             }
         }
-        else if (sa.getApi().equals(ApiType.ManaReflected)) {
+        else if (sa.getApi() == ApiType.ManaReflected) {
             baseMana = abMana.getExpressChoice();
         }
         else {
