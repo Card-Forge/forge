@@ -364,11 +364,15 @@ public final class SColumnUtil {
     }
     
     private static Double toRankingCmp(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRanking() : 0D;
+        Double ranking = 500D;
+        if (i != null && i instanceof CardPrinted){
+            ranking = ((CardPrinted) i).getRanking() != null ? ((CardPrinted) i).getRanking() : 500D;
+        }
+        return ranking;
     }
 
     private static String toRankingStr(final InventoryItem i) {
-        return i instanceof CardPrinted ? String.valueOf(((CardPrinted) i).getRanking()) : "n/a";
+        return String.valueOf(toRankingCmp(i));
     }
 
     //==========
