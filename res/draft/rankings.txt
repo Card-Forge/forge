@@ -1,4 +1,259 @@
 //Rank|Name|Rarity|Set
+#1|Aurelia the Warleader|M|GTC
+#2|Obzedat Ghost Council|M|GTC
+#3|Gideon Champion of Justice|M|GTC
+#4|Aurelias Fury|M|GTC
+#5|Deathpact Angel|M|GTC
+#6|Domri Rade|M|GTC
+#7|Prime Speaker Zegana|M|GTC
+#8|Master Biomancer|M|GTC
+#9|Duskmantle Seer|M|GTC
+#10|Lord of the Void|M|GTC
+#11|Lazav Dimir Mastermind|M|GTC
+#12|Hellkite Tyrant|M|GTC
+#13|Giant Adephage|M|GTC
+#14|Borborygmos Enraged|M|GTC
+#15|Boros Reckoner|R|GTC
+#16|Angelic Skirmisher|R|GTC
+#17|Firemane Avenger|R|GTC
+#18|Frontline Medic|R|GTC
+#19|Rubblebelt Raiders|R|GTC
+#20|Foundry Champion|R|GTC
+#21|Clan Defiance|R|GTC
+#22|Wrecking Ogre|R|GTC
+#23|Assemble the Legion|R|GTC
+#24|Merciless Eviction|R|GTC
+#25|Treasury Thrull|R|GTC
+#26|Consuming Aberration|R|GTC
+#27|Fathom Mage|R|GTC
+#28|Nightveil Specter|R|GTC
+#29|Spark Trooper|R|GTC
+#30|Crypt Ghast|R|GTC
+#31|Blind Obedience|R|GTC
+#32|Ogre Slumlord|R|GTC
+#33|Stolen Identity|R|GTC
+#34|Simic Manipulator|R|GTC
+#35|Legion Loyalist|R|GTC
+#36|Sepulchral Primordial|R|GTC
+#37|Biomass Mutation|R|GTC
+#38|Alms Beast|R|GTC
+#39|Luminate Primordial|R|GTC
+#40|Rubblehulk|R|GTC
+#41|Gruul Ragebeast|R|GTC
+#42|Molten Primordial|R|GTC
+#43|Mind Grind|R|GTC
+#44|High Priest of Penance|R|GTC
+#45|Sylvan Primordial|R|GTC
+#46|Gyre Sage|R|GTC
+#47|Soul Ransom|R|GTC
+#48|Godless Shrine|R|GTC
+#49|Boros Charm|U|GTC
+#50|Skarrg Goliath|R|GTC
+#51|Arrows of Justice|U|GTC
+#52|Ghor-Clan Rampager|U|GTC
+#53|Gift of Orzhova|U|GTC
+#54|Sunhome Guildmage|U|GTC
+#55|Immortal Servitude|R|GTC
+#56|Stomping Ground|R|GTC
+#57|Truefire Paladin|U|GTC
+#58|Diluvian Primordial|R|GTC
+#59|Sacred Foundry|R|GTC
+#60|Breeding Pool|R|GTC
+#61|One Thousand Lashes|U|GTC
+#62|Guardian of the Gateless|U|GTC
+#63|Mystic Genesis|R|GTC
+#64|Watery Grave|R|GTC
+#65|Five Alarm Fire|R|GTC
+#66|Undercity Plague|R|GTC
+#67|Homing Lightning|U|GTC
+#68|Killing Glare|U|GTC
+#69|Cinder Elemental|U|GTC
+#70|Skarrg Guildmage|U|GTC
+#71|Orzhov Charm|U|GTC
+#72|Ooze Flux|R|GTC
+#73|Vizkopa Guildmage|U|GTC
+#74|Elusive Krasis|U|GTC
+#75|Zameck Guildmage|U|GTC
+#76|Burning-Tree Emissary|U|GTC
+#77|Experiment One|U|GTC
+#78|Knight of Obligation|U|GTC
+#79|Holy Mantle|U|GTC
+#80|Ground Assault|U|GTC
+#81|Boros Elite|U|GTC
+#82|Crowned Ceratok|U|GTC
+#83|Ordruun Veteran|U|GTC
+#84|Simic Charm|U|GTC
+#85|Firefist Striker|U|GTC
+#86|Fortress Cyclops|U|GTC
+#87|Sapphire Drake|U|GTC
+#88|Nimbus Swimmer|U|GTC
+#89|Urbis Protector|U|GTC
+#90|Viashino Shanktail|U|GTC
+#91|Wasteland Viper|U|GTC
+#92|Skyknight Legionnaire|C|GTC
+#93|AEtherize|U|GTC
+#94|Grisly Spectacle|C|GTC
+#95|Dinrova Horror|U|GTC
+#96|Wojek Halberdiers|C|GTC
+#97|Glaring Spotlight|R|GTC
+#98|Thrull Parasite|U|GTC
+#99|Dimir Charm|U|GTC
+#100|Rapid Hybridization|U|GTC
+#101|Duskmantle Guildmage|U|GTC
+#102|Simic Fluxmage|U|GTC
+#103|Wight of Precinct Six|U|GTC
+#104|Kingpins Pet|C|GTC
+#105|Illusionists Bracers|R|GTC
+#106|Syndic of Tithes|C|GTC
+#107|Whispering Madness|R|GTC
+#108|Gruul Charm|U|GTC
+#109|Mugging|C|GTC
+#110|Miming Slime|U|GTC
+#111|Deathcult Rogue|C|GTC
+#112|Urban Evolution|U|GTC
+#113|Pit Fight|C|GTC
+#114|Call of the Nightwing|U|GTC
+#115|Daring Skyjek|C|GTC
+#116|Undercity Informer|U|GTC
+#117|Signal the Clans|R|GTC
+#118|Cloudfin Raptor|C|GTC
+#119|Basilica Screecher|C|GTC
+#120|Hellraiser Goblin|U|GTC
+#121|Ripscale Predator|U|GTC
+#122|Madcap Skills|C|GTC
+#123|Angelic Edict|C|GTC
+#124|Mindeye Drake|U|GTC
+#125|Bane Alley Broker|U|GTC
+#126|Gridlock|U|GTC
+#127|Assault Griffin|C|GTC
+#128|Cartel Aristocrat|U|GTC
+#129|Drakewing Krasis|C|GTC
+#130|Unexpected Results|R|GTC
+#131|Court Street Denizen|C|GTC
+#132|Realmwright|R|GTC
+#133|Devour Flesh|C|GTC
+#134|Vizkopa Confessor|U|GTC
+#135|Smog Elemental|U|GTC
+#136|Crocanura|C|GTC
+#137|Slaughterhorn|C|GTC
+#138|Rust Scarab|U|GTC
+#139|Basilica Guards|C|GTC
+#140|Smite|C|GTC
+#141|Orzhov Keyrune|U|GTC
+#142|Boros Keyrune|U|GTC
+#143|Zhur-Taa Swine|C|GTC
+#144|Executioners Swing|C|GTC
+#145|Warmind Infantry|C|GTC
+#146|Dimir Keyrune|U|GTC
+#147|Skullcrack|U|GTC
+#148|Skinbrand Goblin|C|GTC
+#149|Bomber Corps|C|GTC
+#150|Ember Beast|C|GTC
+#151|Ivy Lane Denizen|C|GTC
+#152|Balustrade Spy|C|GTC
+#153|Gruul Keyrune|U|GTC
+#154|Hands of Binding|C|GTC
+#155|Agoraphobia|U|GTC
+#156|Shambleshark|C|GTC
+#157|Orzhov Guildgate|C|GTC
+#158|Scorchwalker|C|GTC
+#159|Massive Raid|C|GTC
+#160|Boros Guildgate|C|GTC
+#161|Martial Glory|C|GTC
+#162|Righteous Charge|U|GTC
+#163|Gruul Guildgate|C|GTC
+#164|Mark for Death|U|GTC
+#165|Thespians Stage|R|GTC
+#166|Simic Keyrune|U|GTC
+#167|Syndicate Enforcer|C|GTC
+#168|Disciple of the Old Ways|C|GTC
+#169|Gateway Shade|U|GTC
+#170|Deaths Approach|C|GTC
+#171|Scab-Clan Charger|C|GTC
+#172|Act of Treason|C|GTC
+#173|Prophetic Prism|C|GTC
+#174|Keymaster Rogue|C|GTC
+#175|Debtors Pulpit|U|GTC
+#176|Dimir Guildgate|C|GTC
+#177|Frilled Oculus|C|GTC
+#178|Simic Guildgate|C|GTC
+#179|Greenside Watcher|C|GTC
+#180|Metropolis Sprite|C|GTC
+#181|Dutiful Thrull|C|GTC
+#182|Beckon Apparition|C|GTC
+#183|Psychic Strike|C|GTC
+#184|Sages Row Denizen|C|GTC
+#185|Knight Watch|C|GTC
+#186|Towering Thunderfist|C|GTC
+#187|Biovisionary|R|GTC
+#188|Adaptive Snapjaw|C|GTC
+#189|Coerced Confession|U|GTC
+#190|Foundry Street Denizen|C|GTC
+#191|Slate Street Ruffian|C|GTC
+#192|Alpha Authority|U|GTC
+#193|Ruination Wurm|C|GTC
+#194|Paranoid Delusions|C|GTC
+#195|Incursion Specialist|U|GTC
+#196|Armored Transport|C|GTC
+#197|Nav Squad Commandos|C|GTC
+#198|Aerial Maneuver|C|GTC
+#199|Spire Tracer|C|GTC
+#200|Corpse Blockade|C|GTC
+#201|Gutter Skulk|C|GTC
+#202|Zarichi Tiger|C|GTC
+#203|Totally Lost|C|GTC
+#204|Merfolk of the Depths|U|GTC
+#205|Burst of Strength|C|GTC
+#206|Shadow Alley Denizen|C|GTC
+#207|Mortus Strider|C|GTC
+#208|Verdant Haven|C|GTC
+#209|Clinging Anemones|C|GTC
+#210|Purge the Profane|C|GTC
+#211|Forced Adaptation|C|GTC
+#212|Shadow Slice|C|GTC
+#213|Spell Rupture|C|GTC
+#214|Shattering Blow|C|GTC
+#215|Murder Investigation|U|GTC
+#216|Bioshift|C|GTC
+#217|Hydroform|C|GTC
+#218|Leyline Phantom|C|GTC
+#219|Millennial Gargoyle|C|GTC
+#220|Primal Visitation|C|GTC
+#221|Way of the Thief|C|GTC
+#222|Last Thoughts|C|GTC
+#223|Voidwalk|U|GTC
+#224|Furious Resistance|C|GTC
+#225|Hold the Gates|U|GTC
+#226|Riot Gear|C|GTC
+#227|Frenzied Tilling|U|GTC
+#228|Horror of the Dim|C|GTC
+#229|Midnight Recovery|C|GTC
+#230|Wildwood Rebirth|C|GTC
+#231|Shielded Passage|C|GTC
+#232|Naturalize|C|GTC
+#233|Scatter Arc|C|GTC
+#234|Contaminated Ground|C|GTC
+#235|Skyblinder Staff|C|GTC
+#236|Guildscorn Ward|C|GTC
+#237|Hindervines|U|GTC
+#238|Predators Rapport|C|GTC
+#239|Skygames|C|GTC
+#240|Mental Vapors|U|GTC
+#241|Razortip Whip|C|GTC
+#242|Dying Wish|U|GTC
+#243|Tin Street Market|C|GTC
+#244|Structural Collapse|C|GTC
+#245|Tower Defense|U|GTC
+#246|Enter the Infinite|M|GTC
+#247|Crackling Perimeter|U|GTC
+#248|Illness in the Ranks|U|GTC
+#249|Serene Remembrance|U|GTC
+#250|Mountain|L|GTC
+#251|Swamp|L|GTC
+#252|Plains|L|GTC
+#253|Island|L|GTC
+#254|Forest|L|GTC
+//Rank|Name|Rarity|Set
 #1|Vraska the Unseen|M|RTR
 #2|Trostani Selesnyas Voice|M|RTR
 #3|Niv Mizzet Dracogenius|M|RTR

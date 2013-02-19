@@ -73,6 +73,7 @@ public final class SColumnUtil {
         CAT_NEW, /** */
         CAT_PURCHASE_PRICE, /** */
         CAT_OWNED, /** */
+        CAT_RANKING,
         DECK_QUANTITY, /** */
         DECK_NAME, /** */
         DECK_COST, /** */
@@ -86,7 +87,8 @@ public final class SColumnUtil {
         DECK_AI, /** */
         DECK_NEW, /** */
         DECK_SALE_PRICE, /** */
-        DECK_DECKS;
+        DECK_DECKS,
+        DECK_RANKING;
     }
 
     /** Possible states of data sorting in a column: none, ascending, or descending. */
@@ -111,6 +113,7 @@ public final class SColumnUtil {
         columns.add(SColumnUtil.getColumn(ColumnName.CAT_RARITY));
         columns.add(SColumnUtil.getColumn(ColumnName.CAT_SET));
         columns.add(SColumnUtil.getColumn(ColumnName.CAT_AI));
+        columns.add(SColumnUtil.getColumn(ColumnName.CAT_RANKING));
 
         return columns;
     }
@@ -130,6 +133,7 @@ public final class SColumnUtil {
         columns.add(SColumnUtil.getColumn(ColumnName.DECK_RARITY));
         columns.add(SColumnUtil.getColumn(ColumnName.DECK_SET));
         columns.add(SColumnUtil.getColumn(ColumnName.DECK_AI));
+        columns.add(SColumnUtil.getColumn(ColumnName.DECK_RANKING));
 
         return columns;
     }
@@ -158,6 +162,8 @@ public final class SColumnUtil {
                 SColumnUtil.FN_SET_COMPARE, SColumnUtil.FN_SET_GET);
         SColumnUtil.getColumn(ColumnName.CAT_AI).setSortAndDisplayFunctions(
                 SColumnUtil.FN_AI_STATUS_COMPARE, SColumnUtil.FN_AI_STATUS_GET);
+        SColumnUtil.getColumn(ColumnName.CAT_RANKING).setSortAndDisplayFunctions(
+                SColumnUtil.FN_RANKING_COMPARE, SColumnUtil.FN_RANKING_GET);
 
         SColumnUtil.getColumn(ColumnName.DECK_QUANTITY).setSortAndDisplayFunctions(
                 SColumnUtil.FN_QTY_COMPARE, SColumnUtil.FN_QTY_GET);
@@ -181,6 +187,8 @@ public final class SColumnUtil {
                 SColumnUtil.FN_SET_COMPARE, SColumnUtil.FN_SET_GET);
         SColumnUtil.getColumn(ColumnName.DECK_AI).setSortAndDisplayFunctions(
                 SColumnUtil.FN_AI_STATUS_COMPARE, SColumnUtil.FN_AI_STATUS_GET);
+        SColumnUtil.getColumn(ColumnName.DECK_RANKING).setSortAndDisplayFunctions(
+                SColumnUtil.FN_RANKING_COMPARE, SColumnUtil.FN_RANKING_GET);
 
         SColumnUtil.getColumn(ColumnName.CAT_COST).setCellRenderer(new ManaCostRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_POWER).setCellRenderer(new IntegerRenderer());
@@ -353,6 +361,14 @@ public final class SColumnUtil {
 
     private static String toAiStr(final InventoryItem i) {
         return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getAiStatus() : "n/a";
+    }
+    
+    private static Double toRankingCmp(final InventoryItem i) {
+        return i instanceof CardPrinted ? ((CardPrinted) i).getRanking() : 0D;
+    }
+
+    private static String toRankingStr(final InventoryItem i) {
+        return i instanceof CardPrinted ? String.valueOf(((CardPrinted) i).getRanking()) : "n/a";
     }
 
     //==========
@@ -533,6 +549,22 @@ public final class SColumnUtil {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return SColumnUtil.toAiStr(from.getKey());
+        }
+    };
+    
+    /** Lamda sort fnRankingCompare. */
+    private static final Function<Entry<InventoryItem, Integer>, Comparable<?>> FN_RANKING_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+        @Override
+        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+            return SColumnUtil.toRankingCmp(from.getKey());
+        }
+    };
+
+    /** Lamda sort fnRankingGet. */
+    private static final Function<Entry<InventoryItem, Integer>, Object> FN_RANKING_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
+        @Override
+        public Object apply(final Entry<InventoryItem, Integer> from) {
+            return SColumnUtil.toRankingStr(from.getKey());
         }
     };
 }

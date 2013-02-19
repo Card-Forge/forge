@@ -54,6 +54,7 @@ public enum CEditorPreferences implements ICDoc {
         prefsDict.put(prefsInstance.getChbCatalogCMC(), ColumnName.CAT_CMC);
         prefsDict.put(prefsInstance.getChbCatalogSet(), ColumnName.CAT_SET);
         prefsDict.put(prefsInstance.getChbCatalogAI(), ColumnName.CAT_AI);
+        prefsDict.put(prefsInstance.getChbCatalogRanking(), ColumnName.CAT_RANKING);
         prefsDict.put(prefsInstance.getChbCatalogPower(), ColumnName.CAT_POWER);
         prefsDict.put(prefsInstance.getChbCatalogToughness(), ColumnName.CAT_TOUGHNESS);
         prefsDict.put(prefsInstance.getChbCatalogOwned(), ColumnName.CAT_OWNED);
@@ -64,6 +65,7 @@ public enum CEditorPreferences implements ICDoc {
         prefsDict.put(prefsInstance.getChbDeckCMC(), ColumnName.DECK_CMC);
         prefsDict.put(prefsInstance.getChbDeckSet(), ColumnName.DECK_SET);
         prefsDict.put(prefsInstance.getChbDeckAI(), ColumnName.DECK_AI);
+        prefsDict.put(prefsInstance.getChbDeckRanking(), ColumnName.DECK_RANKING);
         prefsDict.put(prefsInstance.getChbDeckPower(), ColumnName.DECK_POWER);
         prefsDict.put(prefsInstance.getChbDeckToughness(), ColumnName.DECK_TOUGHNESS);
 

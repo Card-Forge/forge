@@ -14,6 +14,7 @@
 	<col enumval="CAT_RARITY" identifier="Rarity" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="CAT_SET" identifier="Set" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="CAT_AI" identifier="AI" show="false" sortpriority="0" sortstate="NONE" width="30"></col>
+	<col enumval="CAT_RANKING" identifier="Ranking" show="false" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="CAT_NEW" identifier="New" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="CAT_PURCHASE_PRICE" identifier="Purchase Price" show="true" sortpriority="3" sortstate="DESC" width="30"></col>
 	<col enumval="CAT_OWNED" identifier="Owned" show="true" sortpriority="1" sortstate="ASC" width="40"></col>
@@ -28,6 +29,7 @@
 	<col enumval="DECK_RARITY" identifier="Rarity" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="DECK_SET" identifier="Set" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="DECK_AI" identifier="AI" show="false" sortpriority="0" sortstate="NONE" width="30"></col>
+	<col enumval="DECK_RANKING" identifier="Ranking" show="false" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="DECK_NEW" identifier="New" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="DECK_SALE_PRICE" identifier="Sale Price" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
 	<col enumval="DECK_DECKS" identifier="Decks" show="true" sortpriority="0" sortstate="NONE" width="30"></col>
