@@ -15,7 +15,7 @@ public class DelayedTriggerAi extends SpellAiLogic {
         trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
-            return ((AbilitySub) trigsa).chkAIDrawback(ai);
+            return ((AbilitySub) trigsa).getAi().chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
         } else {
             return trigsa.canPlayAI();
         }

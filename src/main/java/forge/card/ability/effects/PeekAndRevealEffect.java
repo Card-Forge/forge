@@ -65,7 +65,7 @@ public class PeekAndRevealEffect extends SpellEffect {
             if (doReveal && revealOptional) {
                 // If 
                 AbilitySub subAb = sa.getSubAbility();
-                doReveal = subAb != null && subAb.chkAIDrawback((AIPlayer)peekingPlayer);
+                doReveal = subAb != null && subAb.getAi().chkDrawbackWithSubs((AIPlayer)peekingPlayer, subAb);
             }
         }
         

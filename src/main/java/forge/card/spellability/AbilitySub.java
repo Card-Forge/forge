@@ -82,6 +82,13 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     private final SpellEffect effect;
     private final SpellAiLogic ai;
 
+    /**
+     * @return the ai
+     */
+    public SpellAiLogic getAi() {
+        return ai;
+    }
+
     public AbilitySub(ApiType api0, final Card ca, final Target tgt, Map<String, String> params0) {
         super(ca);
         this.setTarget(tgt);
@@ -119,11 +126,6 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     @Override
     public void resolve() {
         effect.resolve(this);
-    }
-
-    public boolean chkAIDrawback(AIPlayer aiPlayer) {
-        final AbilitySub subAb = getSubAbility();
-        return ai.chkAIDrawback(this, aiPlayer) && (subAb == null || subAb.chkAIDrawback(aiPlayer));  
     }
 
     @Override

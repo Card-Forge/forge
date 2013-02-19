@@ -295,7 +295,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         chance &= (r.nextFloat() < .8);
 
         final AbilitySub subAb = sa.getSubAbility();
-        chance &= subAb == null || subAb.chkAIDrawback(ai);
+        chance &= subAb == null || subAb.getAi().chkDrawbackWithSubs(ai, subAb);
 
         return chance;
     }
@@ -627,7 +627,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        chance &= subAb == null || subAb.chkAIDrawback(ai);
+        chance &= subAb == null || subAb.getAi().chkDrawbackWithSubs(ai, subAb);
 
         return chance;
     }

@@ -25,6 +25,7 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
@@ -528,12 +529,12 @@ public class ComputerUtilMana {
                 }
     
                 // don't use abilities with dangerous drawbacks
-                if (m.getSubAbility() != null && !card.getName().equals("Pristine Talisman")) {
-                    if (ai instanceof AIPlayer && !m.getSubAbility().chkAIDrawback((AIPlayer)ai)) {
+                AbilitySub sub = m.getSubAbility(); 
+                if (sub != null && !card.getName().equals("Pristine Talisman")) {
+                    if (ai instanceof AIPlayer && !sub.getAi().chkDrawbackWithSubs((AIPlayer)ai, sub)) {
                         continue;
                     }
-                    needsLimitedResources = true; // TODO: check for good
-                                                  // drawbacks (gainLife)
+                    needsLimitedResources = true; // TODO: check for good drawbacks (gainLife)
                 }
                 usableManaAbilities++;
             }
@@ -602,8 +603,9 @@ public class ComputerUtilMana {
                 }
     
                 // don't use abilities with dangerous drawbacks
-                if (m.getSubAbility() != null) {
-                    if (ai instanceof AIPlayer && !m.getSubAbility().chkAIDrawback((AIPlayer)ai)) {
+                AbilitySub sub = m.getSubAbility(); 
+                if (sub != null) {
+                    if (ai instanceof AIPlayer && !sub.getAi().chkDrawbackWithSubs((AIPlayer)ai, sub)) {
                         continue;
                     }
                 }

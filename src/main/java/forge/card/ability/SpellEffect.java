@@ -71,11 +71,8 @@ import forge.game.player.Player;
                 final String baseDesc = this.getStackDescription(sa);
                 if (conditionDesc != null) {
                     sb.append(conditionDesc).append(" ");
-                    sb.append(baseDesc.substring(0, 2).toLowerCase());
-                    sb.append(baseDesc.substring(2));
-                } else {
-                    sb.append(this.getStackDescription(sa));
-                }
+                } 
+                sb.append(baseDesc);
             }
 
             // This includes all subAbilities
