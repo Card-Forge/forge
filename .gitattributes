@@ -3691,6 +3691,7 @@ res/cardsfolder/f/fleshformer.txt svneol=native#text/plain
 res/cardsfolder/f/fleshgrafter.txt svneol=native#text/plain
 res/cardsfolder/f/fleshwrither.txt svneol=native#text/plain
 res/cardsfolder/f/flicker.txt svneol=native#text/plain
+res/cardsfolder/f/flickerform.txt -text
 res/cardsfolder/f/flickering_spirit.txt svneol=native#text/plain
 res/cardsfolder/f/flickering_ward.txt -text
 res/cardsfolder/f/flickerwisp.txt svneol=native#text/plain
