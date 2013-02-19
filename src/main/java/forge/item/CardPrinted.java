@@ -32,8 +32,6 @@ import forge.CardUtil;
 import forge.Singletons;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.game.limited.DraftRankCache;
-import forge.game.limited.ReadDraftRankings;
 import forge.game.player.Player;
 import forge.util.PredicateString;
 
@@ -166,10 +164,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     @Override
     public String getItemType() {
         return "Card";
-    }
-    
-    public Double getRanking(){
-        return DraftRankCache.getRanking(name, edition);
     }
 
     /**

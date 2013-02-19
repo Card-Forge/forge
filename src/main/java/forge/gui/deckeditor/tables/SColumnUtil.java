@@ -35,6 +35,7 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.mana.ManaCost;
 import forge.deck.DeckBase;
+import forge.game.limited.DraftRankCache;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.controllers.ACEditorBase;
@@ -366,7 +367,10 @@ public final class SColumnUtil {
     private static Double toRankingCmp(final InventoryItem i) {
         Double ranking = 500D;
         if (i != null && i instanceof CardPrinted){
-            ranking = ((CardPrinted) i).getRanking() != null ? ((CardPrinted) i).getRanking() : 500D;
+            CardPrinted cp = (CardPrinted) i;
+            ranking = DraftRankCache.getRanking(cp.getName(), cp.getEdition());
+            if ( ranking == null )
+                ranking = 500D;
         }
         return ranking;
     }
