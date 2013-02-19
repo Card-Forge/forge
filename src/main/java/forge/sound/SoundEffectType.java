@@ -36,7 +36,7 @@ package forge.sound;
 public enum SoundEffectType {
     // Sounds must be listed in alphabetic order.
 
-    AddCounter("add_counter.wav", false),
+    AddCounter("add_counter.wav", true),
     Artifact("artifact.wav", false),
     ArtifactCreature("artifact_creature.wav", false),
     BlackLand("black_land.wav", false),
@@ -58,17 +58,17 @@ public enum SoundEffectType {
     ManaBurn("mana_burn.wav", false),
     OtherLand("other_land.wav", false),
     Planeswalker("planeswalker.wav", false),
-    Poison("poison.wav", false),
+    Poison("poison.wav", true),
     RedLand("red_land.wav", false),
     Regen("regeneration.wav", false),
-    RemoveCounter("remove_counter.wav", false),
-    Sacrifice("sacrifice.wav", false),
+    RemoveCounter("remove_counter.wav", true),
+    Sacrifice("sacrifice.wav", true),
     ScriptedEffect("", false), // Plays the effect defined by SVar:SoundEffect
     Shuffle("shuffle.wav", false),
     Sorcery("sorcery.wav", false),
     Tap("tap.wav", false),
-    Token("token.wav", false),
-    Untap("untap.wav", false),
+    Token("token.wav", true),
+    Untap("untap.wav", true),
     WhiteLand("white_land.wav", false),
     WinDuel("win_duel.wav", false);
 
