@@ -582,7 +582,7 @@ public final class CardUtil {
                     break;
                 }
 
-                if (ab.getApi().equals(ApiType.ManaReflected)) {
+                if (ab.getApi() == ApiType.ManaReflected) {
                     if (!parents.contains(ab.getSourceCard())) {
                         // Recursion!
                         reflectAbilities.add(ab);
