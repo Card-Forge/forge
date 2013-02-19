@@ -296,7 +296,7 @@ public class CostPayment {
         final List<CostPart> parts = this.cost.getCostParts();
 
         if (this.getCost().getCostMana() == null) {
-            parts.add(new CostMana("0", 0, false));
+            parts.add(new CostPartMana("0", 0, false));
         }
 
         // Set all of the decisions before attempting to pay anything

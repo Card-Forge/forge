@@ -25,6 +25,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.card.mana.ManaCost;
+
 
 
 
@@ -86,7 +88,7 @@ public final class CardRules {
      * 
      * @return the mana cost
      */
-    public SpellManaCost getManaCost() {
+    public ManaCost getManaCost() {
         return this.characteristics.getManaCost();
     }
 

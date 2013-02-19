@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import forge.Constant;
 import forge.card.MagicColor;
-import forge.card.SpellManaCost;
 
 /**
  * <p>
@@ -55,10 +54,10 @@ public class ManaCostBeingPaid {
      *            a {@link java.lang.String} object.
      */
     public ManaCostBeingPaid(String sCost) {
-        this("0".equals(sCost) || "C".equals(sCost) || sCost.isEmpty() ? null : new SpellManaCost(new ManaCostParser(sCost)));
+        this("0".equals(sCost) || "C".equals(sCost) || sCost.isEmpty() ? null : new ManaCost(new ManaCostParser(sCost)));
     }
 
-    public ManaCostBeingPaid(SpellManaCost manaCost) {
+    public ManaCostBeingPaid(ManaCost manaCost) {
         if ( null == manaCost )
             return;
 
@@ -521,7 +520,7 @@ public class ManaCostBeingPaid {
      *            a {@link java.lang.String} object.
      */
     public final void combineManaCost(final String extra) {
-        final SpellManaCost manaCost = new SpellManaCost(new ManaCostParser(extra));
+        final ManaCost manaCost = new ManaCost(new ManaCostParser(extra));
         for (ManaCostShard shard : manaCost.getShards()) {
             if (shard == ManaCostShard.X) {
                 cntX++;

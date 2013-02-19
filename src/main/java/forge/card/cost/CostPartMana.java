@@ -32,9 +32,9 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
 /**
- * The Class CostMana.
+ * The mana component of any spell or ability cost
  */
-public class CostMana extends CostPart {
+public class CostPartMana extends CostPart {
     // "Leftover"
     private String mana = "";
     private int amountX = 0;
@@ -151,7 +151,7 @@ public class CostMana extends CostPart {
      *            the amount
      * @param xCantBe0 TODO
      */
-    public CostMana(final String mana, final int amount, boolean xCantBe0) {
+    public CostPartMana(final String mana, final int amount, boolean xCantBe0) {
         this.mana = mana.trim();
         this.amountX = amount;
         this.setxCantBe0(xCantBe0);

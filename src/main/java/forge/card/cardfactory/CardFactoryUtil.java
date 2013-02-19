@@ -47,13 +47,13 @@ import forge.Singletons;
 import forge.card.CardCharacteristics;
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.card.SpellManaCost;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
+import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.replacement.ReplacementLayer;
@@ -880,7 +880,7 @@ public class CardFactoryUtil {
             }
         };
 
-        morphDown.setManaCost(new SpellManaCost(new ManaCostParser("3")));
+        morphDown.setManaCost(new ManaCost(new ManaCostParser("3")));
         morphDown.setDescription("(You may cast this face down as a 2/2 creature for 3.)");
         morphDown.setStackDescription("Morph - Creature 2/2");
         morphDown.setCastFaceDown(true);
@@ -3387,7 +3387,7 @@ public class CardFactoryUtil {
                 final String s = parse[1];
                 final int magnitude = Integer.parseInt(s);
 
-                final Ability ability = new Ability(c, SpellManaCost.ZERO) {
+                final Ability ability = new Ability(c, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         final Command untilEOT = new Command() {
@@ -3524,7 +3524,7 @@ public class CardFactoryUtil {
         if (extraLand) {
             final List<Card> fastbonds = player.getCardsIn(ZoneType.Battlefield, "Fastbond");
             for (final Card f : fastbonds) {
-                final SpellAbility ability = new Ability(f, SpellManaCost.ZERO) {
+                final SpellAbility ability = new Ability(f, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         f.getController().addDamage(1, f);
@@ -3721,7 +3721,7 @@ public class CardFactoryUtil {
 
                 final SpellAbility sa = card.getSpellAbility()[0];
                 sa.setIsMultiKicker(true);
-                sa.setMultiKickerManaCost(new SpellManaCost( new ManaCostParser(k[1])));
+                sa.setMultiKickerManaCost(new ManaCost( new ManaCostParser(k[1])));
             }
         }
 
@@ -3733,7 +3733,7 @@ public class CardFactoryUtil {
 
                 final SpellAbility sa = card.getSpellAbility()[0];
                 sa.setIsReplicate(true);
-                sa.setReplicateManaCost(new SpellManaCost(new ManaCostParser(k[1])));
+                sa.setReplicateManaCost(new ManaCost(new ManaCostParser(k[1])));
             }
         }
 
@@ -3762,7 +3762,7 @@ public class CardFactoryUtil {
             final String[] k = parse.split(":");
             final String evokedCost = k[1];
 
-            evokedSpell.setManaCost(new SpellManaCost(new ManaCostParser(evokedCost)));
+            evokedSpell.setManaCost(new ManaCost(new ManaCostParser(evokedCost)));
 
             final StringBuilder desc = new StringBuilder();
             desc.append("Evoke ").append(evokedCost);
@@ -4037,7 +4037,7 @@ public class CardFactoryUtil {
             final Trigger haunterDies = forge.card.trigger.TriggerHandler
                     .parseTrigger(sbHaunter.toString(), card, true);
 
-            final Ability haunterDiesWork = new Ability(card, SpellManaCost.ZERO) {
+            final Ability haunterDiesWork = new Ability(card, ManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     this.getTargetCard().addHauntedBy(card);
@@ -4072,7 +4072,7 @@ public class CardFactoryUtil {
                 }
             };
 
-            final Ability haunterDiesSetup = new Ability(card, SpellManaCost.ZERO) {
+            final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final List<Card> creats = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
@@ -4133,7 +4133,7 @@ public class CardFactoryUtil {
             final Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger(sbUnExiled.toString(), card,
                     true);
 
-            final Ability haunterUnExiledWork = new Ability(card, SpellManaCost.ZERO) {
+            final Ability haunterUnExiledWork = new Ability(card, ManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     if (card.getHaunting() != null) {
@@ -4255,7 +4255,7 @@ public class CardFactoryUtil {
             newSA.setDescription(origSA.getDescription());
 
             origSA.setPayCosts(null);
-            origSA.setManaCost(SpellManaCost.ZERO);
+            origSA.setManaCost(ManaCost.ZERO);
 
             card.clearSpellAbility();
             card.addSpellAbility(newSA);
@@ -4762,7 +4762,7 @@ public class CardFactoryUtil {
                 card.addIntrinsicKeyword("etbCounter:P1P1:" + m + ":no Condition:"
                         + "Modular " + m + " (This enters the battlefield with " + m + " +1/+1 counters on it. When it's put into a graveyard, you may put its +1/+1 counters on target artifact creature.)");
 
-                final SpellAbility ability = new Ability(card, SpellManaCost.ZERO) {
+                final SpellAbility ability = new Ability(card, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         final Card card2 = this.getTargetCard();

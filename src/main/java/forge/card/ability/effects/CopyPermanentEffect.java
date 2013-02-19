@@ -10,10 +10,10 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.Command;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -154,7 +154,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     final int index = i;
                     target[index] = crds[index];
 
-                    final SpellAbility sac = new Ability(target[index], SpellManaCost.ZERO) {
+                    final SpellAbility sac = new Ability(target[index], ManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             // technically your opponent could steal the token

@@ -7,9 +7,9 @@ import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.ISpellAbility;
@@ -38,7 +38,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     boolean mandatory = false;
 
     public WrappedAbility(final Trigger regTrig, final SpellAbility sa0, final Player decider0) {
-        super(regTrig.getHostCard(), SpellManaCost.ZERO);
+        super(regTrig.getHostCard(), ManaCost.ZERO);
         regtrig = regTrig;
         sa = sa0;
         decider = decider0;
@@ -165,12 +165,12 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public SpellManaCost getMultiKickerManaCost() {
+    public ManaCost getMultiKickerManaCost() {
         return sa.getMultiKickerManaCost();
     }
 
     @Override
-    public SpellManaCost getReplicateManaCost() {
+    public ManaCost getReplicateManaCost() {
         return sa.getReplicateManaCost();
     }
 
@@ -301,7 +301,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setMultiKickerManaCost(final SpellManaCost cost) {
+    public void setMultiKickerManaCost(final ManaCost cost) {
         sa.setMultiKickerManaCost(cost);
     }
 

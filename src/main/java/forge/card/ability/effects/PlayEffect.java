@@ -11,13 +11,13 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostMana;
+import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPart;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -212,13 +212,13 @@ public class PlayEffect extends SpellAbilityEffect {
                     final Cost cost = new Cost(tgtCard, "", false);
                     if (newSA.getPayCosts() != null) {
                         for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                            if (!(part instanceof CostMana)) {
+                            if (!(part instanceof CostPartMana)) {
                                 cost.getCostParts().add(part);
                             }
                         }
                     }
                     newSA.setPayCosts(cost);
-                    newSA.setManaCost(SpellManaCost.NO_COST);
+                    newSA.setManaCost(ManaCost.NO_COST);
                     newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
                     game.getActionPlay().playSpellAbility(newSA, activator);
                     if (remember) {

@@ -36,13 +36,13 @@ import com.google.common.collect.Iterables;
 
 import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
-import forge.card.SpellManaCost;
 import forge.card.EditionInfo;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
+import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
@@ -1611,7 +1611,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s
      *            a {@link java.lang.String} object.
      */
-    public final void setManaCost(final SpellManaCost s) {
+    public final void setManaCost(final ManaCost s) {
         this.getCharacteristics().setManaCost(s);
     }
 
@@ -1622,7 +1622,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final SpellManaCost getManaCost() {
+    public final ManaCost getManaCost() {
         return this.getCharacteristics().getManaCost();
     }
 

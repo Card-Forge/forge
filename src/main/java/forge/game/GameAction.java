@@ -34,9 +34,9 @@ import forge.Command;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.card.CardType;
-import forge.card.SpellManaCost;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
@@ -524,7 +524,7 @@ public class GameAction {
         final StringBuilder sb = new StringBuilder();
         sb.append("Recover ").append(recoverable).append("\n");
 
-        final Ability recoverAbility = new Ability(recoverable, SpellManaCost.ZERO) {
+        final Ability recoverAbility = new Ability(recoverable, ManaCost.ZERO) {
             @Override
             public void resolve() {
                 Player p = recoverable.getController();
@@ -778,7 +778,7 @@ public class GameAction {
         madness.setStackDescription(sb.toString());
 
         // TODO Convert this to a Trigger
-        final Ability activate = new Ability(card, SpellManaCost.ZERO) {
+        final Ability activate = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
                 // pay madness cost here.
@@ -1250,7 +1250,7 @@ public class GameAction {
                 }
 
                 final Card card = c;
-                final AbilityStatic ability = new AbilityStatic(crd, SpellManaCost.ZERO) {
+                final AbilityStatic ability = new AbilityStatic(crd, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         GameAction.this.destroy(crd);
@@ -1356,7 +1356,7 @@ public class GameAction {
 
         if (persist) {
             final Card persistCard = newCard;
-            final Ability persistAb = new Ability(persistCard, SpellManaCost.ZERO) {
+            final Ability persistAb = new Ability(persistCard, ManaCost.ZERO) {
 
                 @Override
                 public void resolve() {
@@ -1376,7 +1376,7 @@ public class GameAction {
 
         if (undying) {
             final Card undyingCard = newCard;
-            final Ability undyingAb = new Ability(undyingCard, SpellManaCost.ZERO) {
+            final Ability undyingAb = new Ability(undyingCard, ManaCost.ZERO) {
 
                 @Override
                 public void resolve() {

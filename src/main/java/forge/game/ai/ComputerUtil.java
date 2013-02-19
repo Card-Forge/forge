@@ -31,16 +31,16 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostMana;
+import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayment;
 import forge.card.cost.CostUtil;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -257,13 +257,13 @@ public class ComputerUtil {
         final Cost cost = new Cost(sa.getSourceCard(), "", false);
         if (newSA.getPayCosts() != null) {
             for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                if (!(part instanceof CostMana)) {
+                if (!(part instanceof CostPartMana)) {
                     cost.getCostParts().add(part);
                 }
             }
         }
         newSA.setPayCosts(cost);
-        newSA.setManaCost(SpellManaCost.ZERO);
+        newSA.setManaCost(ManaCost.ZERO);
         final StringBuilder sb = new StringBuilder();
         sb.append(sa.getDescription()).append(" (without paying its mana cost)");
         newSA.setDescription(sb.toString());

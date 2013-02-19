@@ -24,9 +24,9 @@ import java.util.regex.Pattern;
 import forge.Card;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -78,7 +78,7 @@ public class Cost {
      * @return a boolean.
      */
     public final boolean hasNoManaCost() {
-        return this.getTotalMana() == SpellManaCost.ZERO;
+        return this.getTotalMana() == ManaCost.ZERO;
     }
 
     /**
@@ -91,7 +91,7 @@ public class Cost {
     public final boolean isOnlyManaCost() {
         // Only used by Morph and Equip... why do we need this?
         for (final CostPart part : this.costParts) {
-            if (!(part instanceof CostMana)) {
+            if (!(part instanceof CostPartMana)) {
                 return false;
             }
         }
@@ -106,21 +106,21 @@ public class Cost {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final SpellManaCost getTotalMana() {
+    public final ManaCost getTotalMana() {
         for (final CostPart part : this.costParts) {
-            if (part instanceof CostMana) {
-                return new SpellManaCost(new ManaCostParser(part.toString()));
+            if (part instanceof CostPartMana) {
+                return new ManaCost(new ManaCostParser(part.toString()));
             }
         }
 
-        return SpellManaCost.ZERO;
+        return ManaCost.ZERO;
     }
 
     private final String name;
 
     // Parsing Strings
 
-    public Cost(final Card card, SpellManaCost cost, final boolean bAbility) {
+    public Cost(final Card card, ManaCost cost, final boolean bAbility) {
         this(card, cost.toString(), bAbility);
     }
 
@@ -161,7 +161,7 @@ public class Cost {
         }
 
         if ((amountX > 0) || manaParts.length() > 0) {
-            this.costParts.add(0, new CostMana(manaParts.toString(), amountX, xCantBe0));
+            this.costParts.add(0, new CostPartMana(manaParts.toString(), amountX, xCantBe0));
         }
         
         
@@ -350,26 +350,26 @@ public class Cost {
         boolean costChanged = false;
         // TODO: Change where ChangeCost happens
         for (final CostPart part : this.costParts) {
-            if (part instanceof CostMana) {
-                final SpellManaCost mana = new SpellManaCost(new ManaCostParser(part.toString()));
+            if (part instanceof CostPartMana) {
+                final ManaCost mana = new ManaCost(new ManaCostParser(part.toString()));
                 final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid(mana));
 
-                ((CostMana)part).setAdjustedMana(changedCost.toString(false));
+                ((CostPartMana)part).setAdjustedMana(changedCost.toString(false));
                 costChanged = true;
             }
         }
         if (!costChanged) {
             // Spells with a cost of 0 should be affected too
             final ManaCostBeingPaid changedCost = Singletons.getModel().getGame().getActionPlay().getSpellCostChange(sa, new ManaCostBeingPaid("0"));
-            this.costParts.add(new CostMana(changedCost.toString(), 0, false));
+            this.costParts.add(new CostPartMana(changedCost.toString(), 0, false));
         }
     }
 
-    public final CostMana getCostMana() {
+    public final CostPartMana getCostMana() {
         // TODO: Change where ChangeCost happens
         for (final CostPart part : this.costParts) {
-            if (part instanceof CostMana) {
-                return (CostMana) part;
+            if (part instanceof CostPartMana) {
+                return (CostPartMana) part;
             }
         }
         return null;
@@ -500,7 +500,7 @@ public class Cost {
         }
 
         for (final CostPart part : this.costParts) {
-            if (part instanceof CostMana) {
+            if (part instanceof CostPartMana) {
                 continue;
             }
             if (!first) {
@@ -535,7 +535,7 @@ public class Cost {
         for (final CostPart part : this.costParts) {
             boolean append = true;
             if (!first) {
-                if (part instanceof CostMana) {
+                if (part instanceof CostPartMana) {
                     cost.insert(0, ", ").insert(0, part.toString());
                     append = false;
                 } else {

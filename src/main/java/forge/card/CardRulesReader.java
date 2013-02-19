@@ -23,6 +23,7 @@ import java.util.Map;
 
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.IParserManaCost;
+import forge.card.mana.ManaCost;
 
 
 /**
@@ -135,8 +136,8 @@ public class CardRulesReader {
             case 'M':
                 if (line.startsWith("ManaCost:")) {
                     final String sCost = CardRulesReader.getValueAfterKey(line, "ManaCost:");
-                    this.characteristics[this.curCharacteristics].setManaCost("no cost".equals(sCost) ? SpellManaCost.NO_COST
-                            : new SpellManaCost(new ParserCardnameTxtManaCost(sCost)));
+                    this.characteristics[this.curCharacteristics].setManaCost("no cost".equals(sCost) ? ManaCost.NO_COST
+                            : new ManaCost(new ParserCardnameTxtManaCost(sCost)));
                 }
 
             case 'N':

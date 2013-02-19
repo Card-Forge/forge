@@ -28,11 +28,11 @@ import org.apache.commons.lang.StringUtils;
 import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
+import forge.card.mana.ManaCost;
 import forge.control.input.Input;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -53,9 +53,9 @@ public abstract class SpellAbility implements ISpellAbility {
     private String description = "";
     private Player targetPlayer = null;
     private String stackDescription = "";
-    private SpellManaCost manaCost = null;
-    private SpellManaCost multiKickerManaCost = null;
-    private SpellManaCost replicateManaCost = null;
+    private ManaCost manaCost = null;
+    private ManaCost multiKickerManaCost = null;
+    private ManaCost replicateManaCost = null;
     private int xManaCost = 0;
     private Player activatingPlayer = null;
 
@@ -231,7 +231,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public SpellManaCost getManaCost() {
+    public ManaCost getManaCost() {
         return this.manaCost;
     }
 
@@ -243,7 +243,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param cost
      *            a {@link java.lang.String} object.
      */
-    public void setManaCost(final SpellManaCost cost) {
+    public void setManaCost(final ManaCost cost) {
         this.manaCost = cost;
     }
 
@@ -254,7 +254,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public SpellManaCost getMultiKickerManaCost() {
+    public ManaCost getMultiKickerManaCost() {
         return this.multiKickerManaCost;
     }
 
@@ -266,7 +266,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param cost
      *            a {@link java.lang.String} object.
      */
-    public void setMultiKickerManaCost(final SpellManaCost cost) {
+    public void setMultiKickerManaCost(final ManaCost cost) {
         this.multiKickerManaCost = cost;
     }
 
@@ -277,7 +277,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public SpellManaCost getReplicateManaCost() {
+    public ManaCost getReplicateManaCost() {
         return this.replicateManaCost;
     }
 
@@ -289,7 +289,7 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param spellManaCost
      *            a {@link java.lang.String} object.
      */
-    public final void setReplicateManaCost(final SpellManaCost spellManaCost) {
+    public final void setReplicateManaCost(final ManaCost spellManaCost) {
         this.replicateManaCost = spellManaCost;
     }
 

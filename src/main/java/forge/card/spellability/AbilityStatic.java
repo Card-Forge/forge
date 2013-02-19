@@ -18,8 +18,8 @@
 package forge.card.spellability;
 
 import forge.Card;
-import forge.card.SpellManaCost;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 
 /**
  * <p>
@@ -40,7 +40,7 @@ public abstract class AbilityStatic extends Ability {
      * @param manaCost
      *            a {@link java.lang.String} object.
      */
-    public AbilityStatic(final Card sourceCard, final SpellManaCost manaCost) {
+    public AbilityStatic(final Card sourceCard, final ManaCost manaCost) {
         super(sourceCard, manaCost);
     }
 

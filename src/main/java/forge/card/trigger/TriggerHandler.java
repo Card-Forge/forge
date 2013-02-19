@@ -27,11 +27,11 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -488,7 +488,7 @@ public class TriggerHandler {
         sa = regtrig.getOverridingAbility();
         if (sa == null) {
             if (!triggerParams.containsKey("Execute")) {
-                sa = new Ability(regtrig.getHostCard(), SpellManaCost.ZERO) {
+                sa = new Ability(regtrig.getHostCard(), ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                     }

@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import forge.CardColor;
+import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -35,7 +36,7 @@ import forge.card.trigger.Trigger;
 public class CardCharacteristics {
     private String name = "";
     private ArrayList<String> type = new ArrayList<String>();
-    private SpellManaCost manaCost = SpellManaCost.NO_COST;
+    private ManaCost manaCost = ManaCost.NO_COST;
     private ArrayList<CardColor> cardColor = new ArrayList<CardColor>();
     private boolean cardColorsOverridden = false;
     private int baseAttack = 0;
@@ -97,7 +98,7 @@ public class CardCharacteristics {
      * 
      * @return the manaCost
      */
-    public final SpellManaCost getManaCost() {
+    public final ManaCost getManaCost() {
         return this.manaCost;
     }
 
@@ -107,7 +108,7 @@ public class CardCharacteristics {
      * @param manaCost0
      *            the manaCost to set
      */
-    public final void setManaCost(final SpellManaCost manaCost0) {
+    public final void setManaCost(final ManaCost manaCost0) {
         this.manaCost = manaCost0;
     }
 

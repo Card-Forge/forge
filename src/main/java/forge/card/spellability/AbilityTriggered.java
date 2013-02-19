@@ -23,7 +23,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.Command;
 import forge.card.CardCharacteristics;
-import forge.card.SpellManaCost;
+import forge.card.mana.ManaCost;
 import forge.card.trigger.ZCTrigger;
 
 /**
@@ -82,7 +82,7 @@ public class AbilityTriggered extends Ability implements Command {
      *            a {@link forge.card.trigger.ZCTrigger} object.
      */
     public AbilityTriggered(final Card sourceCard, final Command sourceCommand, final ZCTrigger situation) {
-        super(sourceCard, SpellManaCost.ZERO);
+        super(sourceCard, ManaCost.ZERO);
         this.todo = sourceCommand;
         this.trigger = situation;
         if (this.todo instanceof AbilityTriggered) {

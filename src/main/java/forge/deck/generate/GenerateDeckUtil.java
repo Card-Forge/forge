@@ -27,8 +27,8 @@ import com.google.common.base.Predicate;
 
 import forge.card.MagicColor;
 import forge.card.ColorSet;
-import forge.card.SpellManaCost;
 import forge.card.CardRules;
+import forge.card.mana.ManaCost;
 
 /**
  * <p>
@@ -57,7 +57,7 @@ public class GenerateDeckUtil {
     public static final Predicate<CardRules> COLORLESS_CARDS = new Predicate<CardRules>() {
         @Override
         public boolean apply(CardRules c) {
-            SpellManaCost mc = c.getManaCost();
+            ManaCost mc = c.getManaCost();
             return mc.getColorProfile() == 0 && !mc.isNoCost();
         }
     };
@@ -71,7 +71,7 @@ public class GenerateDeckUtil {
 
         @Override
         public boolean apply(CardRules subject) {
-            SpellManaCost mc = subject.getManaCost();
+            ManaCost mc = subject.getManaCost();
             return !mc.isPureGeneric() && mc.canBePaidWithAvaliable(allowedColor);
             // return allowedColor.containsAllColorsFrom(mc.getColorProfile());
         }
@@ -88,7 +88,7 @@ public class GenerateDeckUtil {
 
         @Override
         public boolean apply(CardRules c) {
-            SpellManaCost mc = c.getManaCost();
+            ManaCost mc = c.getManaCost();
             int cmc = mc.getCMC();
             return cmc >= min && cmc <= max && !mc.isNoCost();
         }

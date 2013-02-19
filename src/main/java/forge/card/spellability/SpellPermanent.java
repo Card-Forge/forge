@@ -30,11 +30,11 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.trigger.Trigger;
@@ -92,7 +92,7 @@ public class SpellPermanent extends Spell {
     }; // CommandReturn
 
     /** The champion ability comes. */
-    private final SpellAbility championAbilityComes = new Ability(this.getSourceCard(), SpellManaCost.ZERO) {
+    private final SpellAbility championAbilityComes = new Ability(this.getSourceCard(), ManaCost.ZERO) {
         @Override
         public void resolve() {
 
@@ -153,7 +153,7 @@ public class SpellPermanent extends Spell {
         @Override
         public void execute() {
 
-            final SpellAbility ability = new Ability(SpellPermanent.this.getSourceCard(), SpellManaCost.ZERO) {
+            final SpellAbility ability = new Ability(SpellPermanent.this.getSourceCard(), ManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final Card c = this.getSourceCard().getChampionedCard();
@@ -282,7 +282,7 @@ public class SpellPermanent extends Spell {
     public boolean canPlayAI() {
 
         final Card card = this.getSourceCard();
-        SpellManaCost mana = this.getPayCosts().getTotalMana();
+        ManaCost mana = this.getPayCosts().getTotalMana();
         Player ai = getActivatingPlayer();
         if (mana.countX() > 0) {
             // Set PayX here to maximum value.
@@ -329,7 +329,7 @@ public class SpellPermanent extends Spell {
         }
         final AIPlayer ai = (AIPlayer) getActivatingPlayer();
         final Card card = this.getSourceCard();
-        SpellManaCost mana = this.getPayCosts().getTotalMana();
+        ManaCost mana = this.getPayCosts().getTotalMana();
         final Cost cost = this.getPayCosts();
 
         if (cost != null) {

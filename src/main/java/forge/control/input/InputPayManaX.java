@@ -2,7 +2,7 @@ package forge.control.input;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.cost.CostMana;
+import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
@@ -17,12 +17,12 @@ public class InputPayManaX extends InputPayManaBase {
     private final String colorX;
     private final String strX;
     private String colorsPaid;
-    private final CostMana costMana;
+    private final CostPartMana costMana;
     private final CostPayment payment;
     private final SpellAbility sa;
 
 
-    public InputPayManaX(final GameState game, final SpellAbility sa0, final CostPayment payment0, final CostMana costMana0)
+    public InputPayManaX(final GameState game, final SpellAbility sa0, final CostPayment payment0, final CostPartMana costMana0)
     {
         super(game);
         sa = sa0;

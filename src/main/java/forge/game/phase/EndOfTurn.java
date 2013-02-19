@@ -20,7 +20,7 @@ package forge.game.phase;
 import forge.Card;
 
 import forge.Singletons;
-import forge.card.SpellManaCost;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameLossReason;
@@ -57,7 +57,7 @@ public class EndOfTurn extends Phase {
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
                 final Card card = c;
-                final SpellAbility sac = new Ability(card, SpellManaCost.ZERO) {
+                final SpellAbility sac = new Ability(card, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         if (card.isInPlay()) {
@@ -75,7 +75,7 @@ public class EndOfTurn extends Phase {
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
                 final Card card = c;
-                final SpellAbility exile = new Ability(card, SpellManaCost.ZERO) {
+                final SpellAbility exile = new Ability(card, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         if (card.isInPlay()) {
@@ -93,7 +93,7 @@ public class EndOfTurn extends Phase {
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
                 final Card card = c;
-                final SpellAbility destroy = new Ability(card, SpellManaCost.ZERO) {
+                final SpellAbility destroy = new Ability(card, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         if (card.isInPlay()) {
@@ -113,7 +113,7 @@ public class EndOfTurn extends Phase {
             if (c.hasKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
                 if (c.getDamageHistory().getCreatureAttackedThisTurn()) {
                     final Card card = c;
-                    final SpellAbility sac = new Ability(card, SpellManaCost.ZERO) {
+                    final SpellAbility sac = new Ability(card, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             if (card.isInPlay()) {
@@ -137,7 +137,7 @@ public class EndOfTurn extends Phase {
             if (c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
                     && game.getPhaseHandler().isPlayerTurn(c.getController())) {
                 final Card source = c;
-                final SpellAbility change = new Ability(source, SpellManaCost.ZERO) {
+                final SpellAbility change = new Ability(source, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         if (source.isInPlay()) {
@@ -158,7 +158,7 @@ public class EndOfTurn extends Phase {
         Player activePlayer = game.getPhaseHandler().getPlayerTurn();
         if (activePlayer.hasKeyword("At the beginning of this turn's end step, you lose the game.")) {
             final Card source = new Card();
-            final SpellAbility change = new Ability(source, SpellManaCost.ZERO) {
+            final SpellAbility change = new Ability(source, ManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     this.getActivatingPlayer().loseConditionMet(GameLossReason.SpellEffect, "");

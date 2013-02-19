@@ -2,7 +2,7 @@ package forge.control.input;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.cost.CostMana;
+import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
@@ -14,7 +14,7 @@ import forge.view.ButtonUtil;
 
 public class InputPayManaOfCostPayment extends InputPayManaBase {
 
-    private final CostMana costMana;
+    private final CostPartMana costMana;
     
     // I would kill the one who made 2 classes like above
     private final String originalManaCost;
@@ -22,7 +22,7 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
     private final int manaToAdd;
     private final CostPayment payment;
 
-    public InputPayManaOfCostPayment(final GameState game, CostMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd) {
+    public InputPayManaOfCostPayment(final GameState game, CostPartMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd) {
         super(game);
         manaCost = new ManaCostBeingPaid(costMana.getManaToPay());
         manaCost.increaseColorlessMana(toAdd);

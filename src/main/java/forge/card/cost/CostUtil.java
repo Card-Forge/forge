@@ -139,10 +139,10 @@ public class CostUtil {
         }
 
         for (final CostPart part : cost1.getCostParts()) {
-            if (!(part instanceof CostMana)) {
+            if (!(part instanceof CostPartMana)) {
                 cost2.getCostParts().add(part);
             } else {
-                CostMana newCostMana = cost2.getCostMana();
+                CostPartMana newCostMana = cost2.getCostMana();
                 if (newCostMana != null) {
                     ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(part.toString());
                     newCostMana.setXMana(oldManaCost.getXcounter() + newCostMana.getXMana());

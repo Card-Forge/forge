@@ -17,9 +17,9 @@
  */
 package forge.game.limited;
 
-import forge.card.SpellManaCost;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.mana.ManaCost;
 import forge.item.CardPrinted;
 
 /**
@@ -45,7 +45,7 @@ class DeckColors {
      */
     public void addColorsOf(CardPrinted pickedCard) {
         
-        SpellManaCost colorsInCard = pickedCard.getRules().getManaCost();
+        ManaCost colorsInCard = pickedCard.getRules().getManaCost();
 
         int colorsCanAdd = MagicColor.ALL_COLORS & ~getChosenColors().getColor();
         int colorsWantAdd = colorsInCard.getColorProfile() & colorsCanAdd;

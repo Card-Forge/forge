@@ -43,10 +43,10 @@ import forge.Constant.Preferences;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaPool;
+import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Spell;
@@ -3225,7 +3225,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         playForMiracleCost.setStackDescription(card.getName() + " - Cast via Miracle");
 
         // TODO Convert this to a Trigger
-        final Ability miracleTrigger = new MiracleTrigger(card, SpellManaCost.ZERO, card, playForMiracleCost);
+        final Ability miracleTrigger = new MiracleTrigger(card, ManaCost.ZERO, card, playForMiracleCost);
         miracleTrigger.setStackDescription(card.getName() + " - Miracle.");
         miracleTrigger.setActivatingPlayer(card.getOwner());
         miracleTrigger.setTrigger(true);
@@ -3248,7 +3248,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
          * @param card
          * @param miracle
          */
-        private MiracleTrigger(Card sourceCard, SpellManaCost manaCost, Card card, SpellAbility miracle) {
+        private MiracleTrigger(Card sourceCard, ManaCost manaCost, Card card, SpellAbility miracle) {
             super(sourceCard, manaCost);
             this.card = card;
             this.miracle = miracle;

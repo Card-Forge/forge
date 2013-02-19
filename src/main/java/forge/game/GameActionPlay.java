@@ -10,7 +10,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.card.MagicColor;
-import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
@@ -19,6 +18,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
 import forge.card.spellability.Target;
@@ -92,7 +92,7 @@ public class GameActionPlay {
 
             game.getStack().add(sa, x);
         } else {
-            sa.setManaCost(SpellManaCost.ZERO); // Beached As
+            sa.setManaCost(ManaCost.ZERO); // Beached As
             matchInput.setInput(sa.getBeforePayMana());
         }
     }

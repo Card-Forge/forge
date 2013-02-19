@@ -27,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.IParserManaCost;
+import forge.card.mana.ManaCost;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
@@ -168,10 +169,10 @@ public final class MtgDataParser implements Iterator<CardRules> {
         }
 
         String manaCost = this.it.next();
-        ret.setManaCost(SpellManaCost.NO_COST);
+        ret.setManaCost(ManaCost.NO_COST);
         CardType type = null;
         if (manaCost.startsWith("{")) {
-            ret.setManaCost(new SpellManaCost(new ManaParserMtgData(manaCost)));
+            ret.setManaCost(new ManaCost(new ManaParserMtgData(manaCost)));
             if (!this.it.hasNext()) {
                 this.weHaveNext = false;
                 return null;

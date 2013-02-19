@@ -13642,7 +13642,6 @@ src/main/java/forge/card/FormatCollection.java -text
 src/main/java/forge/card/MagicColor.java -text
 src/main/java/forge/card/MetaSet.java -text
 src/main/java/forge/card/MtgDataParser.java -text
-src/main/java/forge/card/SpellManaCost.java -text
 src/main/java/forge/card/TriggerReplacementBase.java -text
 src/main/java/forge/card/UnOpenedMeta.java -text
 src/main/java/forge/card/UnOpenedProduct.java -text
@@ -13870,9 +13869,9 @@ src/main/java/forge/card/cost/CostDamage.java -text
 src/main/java/forge/card/cost/CostDiscard.java -text
 src/main/java/forge/card/cost/CostExile.java -text
 src/main/java/forge/card/cost/CostGainLife.java -text
-src/main/java/forge/card/cost/CostMana.java -text
 src/main/java/forge/card/cost/CostMill.java -text
 src/main/java/forge/card/cost/CostPart.java -text
+src/main/java/forge/card/cost/CostPartMana.java -text
 src/main/java/forge/card/cost/CostPartWithList.java -text
 src/main/java/forge/card/cost/CostPayLife.java -text
 src/main/java/forge/card/cost/CostPayment.java svneol=native#text/plain
@@ -13889,6 +13888,7 @@ src/main/java/forge/card/cost/CostUtil.java -text
 src/main/java/forge/card/cost/package-info.java svneol=native#text/plain
 src/main/java/forge/card/mana/IParserManaCost.java -text
 src/main/java/forge/card/mana/Mana.java svneol=native#text/plain
+src/main/java/forge/card/mana/ManaCost.java -text
 src/main/java/forge/card/mana/ManaCostBeingPaid.java svneol=native#text/plain
 src/main/java/forge/card/mana/ManaCostParser.java -text
 src/main/java/forge/card/mana/ManaCostShard.java -text

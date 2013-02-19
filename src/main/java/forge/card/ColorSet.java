@@ -18,6 +18,7 @@
 package forge.card;
 
 import forge.Constant;
+import forge.card.mana.ManaCost;
 import forge.util.BinaryUtil;
 
 /**
@@ -73,7 +74,7 @@ public final class ColorSet implements Comparable<ColorSet> {
         return fromMask(mask);
     }
 
-    public static ColorSet fromManaCost(final SpellManaCost mana) {
+    public static ColorSet fromManaCost(final ManaCost mana) {
         return fromMask(mana.getColorProfile());
     }
 

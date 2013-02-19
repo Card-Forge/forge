@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import forge.card.mana.ManaCost;
+
 /**
  * TODO: Write javadoc for this type.
  * 
@@ -29,7 +31,7 @@ import java.util.TreeMap;
 public class CardRuleCharacteristics {
     private String cardName = null;
     private CardType cardType = null;
-    private SpellManaCost manaCost = SpellManaCost.NO_COST;
+    private ManaCost manaCost = ManaCost.NO_COST;
     private ColorSet color = null;
     private String ptLine = null;
     private String oracleText = null;
@@ -82,7 +84,7 @@ public class CardRuleCharacteristics {
      * 
      * @return the manaCost
      */
-    public final SpellManaCost getManaCost() {
+    public final ManaCost getManaCost() {
         return this.manaCost;
     }
 
@@ -92,7 +94,7 @@ public class CardRuleCharacteristics {
      * @param manaCost0
      *            the manaCost to set
      */
-    public final void setManaCost(final SpellManaCost manaCost0) {
+    public final void setManaCost(final ManaCost manaCost0) {
         this.manaCost = manaCost0;
         this.color = ColorSet.fromManaCost(this.manaCost);
     }

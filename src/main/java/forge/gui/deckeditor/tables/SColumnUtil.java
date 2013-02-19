@@ -32,8 +32,8 @@ import com.google.common.base.Function;
 import forge.Singletons;
 import forge.card.ColorSet;
 import forge.card.CardEdition;
-import forge.card.SpellManaCost;
 import forge.card.CardRarity;
+import forge.card.mana.ManaCost;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorIO;
@@ -306,8 +306,8 @@ public final class SColumnUtil {
 
     private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
 
-    private static SpellManaCost toManaCost(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getManaCost() : SpellManaCost.NO_COST;
+    private static ManaCost toManaCost(final InventoryItem i) {
+        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getManaCost() : ManaCost.NO_COST;
     }
 
     private static ColorSet toColor(final InventoryItem i) {

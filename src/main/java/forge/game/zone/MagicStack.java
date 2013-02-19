@@ -32,11 +32,11 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
-import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;
@@ -477,7 +477,7 @@ public class MagicStack extends MyObservable {
             } else if (sp.isXCost()) {
                 // TODO: convert any X costs to use abCost so it happens earlier
                 final SpellAbility sa = sp;
-                final SpellManaCost mc = new SpellManaCost( new ManaCostParser(Integer.toString(sa.getXManaCost())));
+                final ManaCost mc = new ManaCost( new ManaCostParser(Integer.toString(sa.getXManaCost())));
                 final Ability ability = new Ability(sp.getSourceCard(), mc) {
                     @Override
                     public void resolve() {
@@ -734,7 +734,7 @@ public class MagicStack extends MyObservable {
                 // be
                 // 1...
                 for (final Card bazaar : bazaars) {
-                    final SpellAbility counter = new Ability(bazaar, SpellManaCost.ZERO) {
+                    final SpellAbility counter = new Ability(bazaar, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             if (game.getStack().size() > 0) {
@@ -854,7 +854,7 @@ public class MagicStack extends MyObservable {
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && game.getZoneOf(source).is(ZoneType.Graveyard)) {
             final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-            final Ability haunterDiesWork = new Ability(source, SpellManaCost.ZERO) {
+            final Ability haunterDiesWork = new Ability(source, ManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     game.getAction().exile(source);

@@ -15,14 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.card;
+package forge.card.mana;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import forge.card.mana.ManaCostShard;
-import forge.card.mana.IParserManaCost;
+import forge.card.ColorSet;
 
 /**
  * <p>
@@ -33,7 +32,7 @@ import forge.card.mana.IParserManaCost;
  * @version $Id: CardManaCost.java 9708 2011-08-09 19:34:12Z jendave $
  */
 
-public final class SpellManaCost implements Comparable<SpellManaCost> {
+public final class ManaCost implements Comparable<ManaCost> {
     private final List<ManaCostShard> shards;
     private final int genericCost;
     private final boolean hasNoCost; // lands cost
@@ -42,12 +41,12 @@ public final class SpellManaCost implements Comparable<SpellManaCost> {
     private Float compareWeight = null;
 
     /** The Constant empty. */
-    public static final SpellManaCost NO_COST = new SpellManaCost(-1);
-    public static final SpellManaCost ZERO = new SpellManaCost(0);
-    public static final SpellManaCost ONE = new SpellManaCost(1);
+    public static final ManaCost NO_COST = new ManaCost(-1);
+    public static final ManaCost ZERO = new ManaCost(0);
+    public static final ManaCost ONE = new ManaCost(1);
 
     // pass mana cost parser here
-    private SpellManaCost(int cmc) {
+    private ManaCost(int cmc) {
         this.hasNoCost = cmc < 0;
         this.genericCost = cmc < 0 ? 0 : cmc;
         this.shards = Collections.unmodifiableList(new ArrayList<ManaCostShard>());
@@ -61,7 +60,7 @@ public final class SpellManaCost implements Comparable<SpellManaCost> {
      * @param parser
      *            the parser
      */
-    public SpellManaCost(final IParserManaCost parser) {
+    public ManaCost(final IParserManaCost parser) {
         if (!parser.hasNext()) {
             throw new RuntimeException("Empty manacost passed to parser (this should have been handled before)");
         }
@@ -187,7 +186,7 @@ public final class SpellManaCost implements Comparable<SpellManaCost> {
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public int compareTo(final SpellManaCost o) {
+    public int compareTo(final ManaCost o) {
         return this.getCompareWeight().compareTo(o.getCompareWeight());
     }
 
