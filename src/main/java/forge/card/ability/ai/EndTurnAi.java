@@ -1,7 +1,7 @@
 package forge.card.ability.ai;
 
 
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.AIPlayer;
 
@@ -9,7 +9,7 @@ import forge.game.player.AIPlayer;
  * TODO: Write javadoc for this type.
  *
  */
-public class EndTurnAi extends SpellAiLogic  {
+public class EndTurnAi extends SpellAbilityAi  {
 
     @Override
     protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {

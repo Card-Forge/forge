@@ -8,7 +8,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.CardType;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -17,7 +17,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 
-public class ChooseCardEffect extends SpellEffect {
+public class ChooseCardEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

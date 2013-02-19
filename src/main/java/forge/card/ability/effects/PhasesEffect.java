@@ -5,10 +5,10 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 
-public class PhasesEffect extends SpellEffect {
+public class PhasesEffect extends SpellAbilityEffect {
 
     // ******************************************
     // ************** Phases ********************

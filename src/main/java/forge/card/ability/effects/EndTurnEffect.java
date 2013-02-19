@@ -3,13 +3,13 @@ package forge.card.ability.effects;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 
-public class EndTurnEffect extends SpellEffect {
+public class EndTurnEffect extends SpellAbilityEffect {
 
     // *************************************************************************
     // ************************* END TURN **************************************

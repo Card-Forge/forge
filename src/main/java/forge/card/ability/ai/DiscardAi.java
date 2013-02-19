@@ -6,7 +6,7 @@ import java.util.Random;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -19,7 +19,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class DiscardAi extends SpellAiLogic {
+public class DiscardAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {

@@ -4,13 +4,13 @@ import java.util.List;
 
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.ExtraTurn;
 import forge.game.player.Player;
 
-public class AddTurnEffect extends SpellEffect {
+public class AddTurnEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

@@ -1,11 +1,11 @@
 package forge.card.ability.effects;
 
 import forge.Card;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 
-public class StoreSVarEffect extends SpellEffect {
+public class StoreSVarEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {

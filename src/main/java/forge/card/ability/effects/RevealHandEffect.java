@@ -5,14 +5,14 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import forge.Card;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
-public class RevealHandEffect extends SpellEffect {
+public class RevealHandEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

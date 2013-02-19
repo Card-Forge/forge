@@ -5,11 +5,11 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
-public class TapEffect extends SpellEffect {
+public class TapEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)

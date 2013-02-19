@@ -1,7 +1,7 @@
 package forge.card.ability.ai;
 
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -12,7 +12,7 @@ import forge.game.player.AIPlayer;
  * AbilityFactory for Creature Spells.
  *
  */
-public class PermanentNoncreatureAi extends SpellAiLogic {
+public class PermanentNoncreatureAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)

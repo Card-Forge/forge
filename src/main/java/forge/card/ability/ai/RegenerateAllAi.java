@@ -7,7 +7,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtil;
@@ -17,7 +17,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 
-public class RegenerateAllAi extends SpellAiLogic {
+public class RegenerateAllAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {

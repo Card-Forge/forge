@@ -8,7 +8,7 @@ import forge.Card;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
@@ -25,7 +25,7 @@ import forge.game.zone.ZoneType;
  * @version $Id: AbilityFactoryAnimate.java 17608 2012-10-20 22:27:27Z Max mtg $
  */
 
-public class AnimateAi extends SpellAiLogic {
+public class AnimateAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
@@ -44,7 +44,7 @@ public class AnimateAi extends SpellAiLogic {
         // Combat_Begin step
         if (!Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
                 && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(aiPlayer)
-                && !SpellAiLogic.isSorcerySpeed(sa)
+                && !SpellAbilityAi.isSorcerySpeed(sa)
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
             return false;
         }

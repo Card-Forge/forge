@@ -6,7 +6,7 @@ import forge.Card;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtilMana;
@@ -15,7 +15,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
-public class LifeSetAi extends SpellAiLogic {
+public class LifeSetAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {

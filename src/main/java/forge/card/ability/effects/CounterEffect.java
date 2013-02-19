@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import forge.Card;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
 
-public class CounterEffect extends SpellEffect {
+public class CounterEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
 

@@ -1,7 +1,7 @@
 package forge.card.ability.effects;
 
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -10,7 +10,7 @@ import forge.game.phase.PhaseType;
  * TODO: Write javadoc for this type.
  *
  */
-public class AddPhaseEffect extends SpellEffect {
+public class AddPhaseEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {

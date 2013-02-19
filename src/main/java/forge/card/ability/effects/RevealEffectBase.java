@@ -23,7 +23,7 @@ import java.util.List;
 
 import forge.Card;
 
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -35,7 +35,7 @@ import forge.gui.GuiChoose;
  * @author Forge
  * @version $Id$
  */
-public abstract class RevealEffectBase extends SpellEffect {
+public abstract class RevealEffectBase extends SpellAbilityEffect {
 
 
     // *************************************************************************

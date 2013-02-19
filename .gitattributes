@@ -13646,13 +13646,13 @@ src/main/java/forge/card/SpellManaCost.java -text
 src/main/java/forge/card/TriggerReplacementBase.java -text
 src/main/java/forge/card/UnOpenedMeta.java -text
 src/main/java/forge/card/UnOpenedProduct.java -text
+src/main/java/forge/card/ability/AbilityApiBased.java -text
 src/main/java/forge/card/ability/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/ability/AbilityUtils.java -text
 src/main/java/forge/card/ability/ApiType.java -text
-src/main/java/forge/card/ability/CommonAbility.java -text
-src/main/java/forge/card/ability/CommonSpell.java -text
-src/main/java/forge/card/ability/SpellAiLogic.java -text
-src/main/java/forge/card/ability/SpellEffect.java -text
+src/main/java/forge/card/ability/SpellAbilityAi.java -text
+src/main/java/forge/card/ability/SpellAbilityEffect.java -text
+src/main/java/forge/card/ability/SpellApiBased.java -text
 src/main/java/forge/card/ability/ai/AddPhaseAi.java -text
 src/main/java/forge/card/ability/ai/AddTurnAi.java svneol=native#text/plain
 src/main/java/forge/card/ability/ai/AlwaysPlayAi.java -text

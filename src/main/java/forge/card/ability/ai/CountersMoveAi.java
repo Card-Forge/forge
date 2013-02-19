@@ -7,7 +7,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -16,7 +16,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class CountersMoveAi extends SpellAiLogic {
+public class CountersMoveAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -36,7 +36,7 @@ public class CountersMoveAi extends SpellAiLogic {
         // prevent run-away activations - first time will always return true
         boolean chance = false;
 
-        if (SpellAiLogic.playReusable(ai, sa)) {
+        if (SpellAbilityAi.playReusable(ai, sa)) {
             return chance;
         }
 

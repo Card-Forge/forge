@@ -1,11 +1,11 @@
 package forge.card.ability.ai;
 
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.AIPlayer;
 
-public class UntapAllAi extends SpellAiLogic {
+public class UntapAllAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {

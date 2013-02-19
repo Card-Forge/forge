@@ -1,13 +1,13 @@
 package forge.card.ability.ai;
 
 
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
-public class RearrangeTopOfLibraryAi extends SpellAiLogic {
+public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */

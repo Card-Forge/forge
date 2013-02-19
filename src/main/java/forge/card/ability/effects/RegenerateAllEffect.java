@@ -6,11 +6,11 @@ import forge.Card;
 import forge.CardLists;
 import forge.Command;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-public class RegenerateAllEffect extends SpellEffect {
+public class RegenerateAllEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

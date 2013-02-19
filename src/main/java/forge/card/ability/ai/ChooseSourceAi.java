@@ -10,7 +10,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -20,7 +20,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 
-public class ChooseSourceAi extends SpellAiLogic {
+public class ChooseSourceAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)

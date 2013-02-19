@@ -18,7 +18,7 @@
 package forge.card.ability.ai;
 
 import forge.card.spellability.SpellAbility;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.game.player.AIPlayer;
 
 /**
@@ -29,7 +29,7 @@ import forge.game.player.AIPlayer;
  * @author Forge
  * @version $Id: AbilityFactoryBond.java 15090 2012-04-07 12:50:31Z Max mtg $
  */
-public final class BondAi extends SpellAiLogic {
+public final class BondAi extends SpellAbilityAi {
     /**
      * <p>
      * bondCanPlayAI.

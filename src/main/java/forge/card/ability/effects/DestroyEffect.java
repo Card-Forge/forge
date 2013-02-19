@@ -7,11 +7,11 @@ import java.util.List;
 import forge.Card;
 import forge.CardUtil;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
-public class DestroyEffect extends SpellEffect {
+public class DestroyEffect extends SpellAbilityEffect {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */

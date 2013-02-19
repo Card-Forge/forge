@@ -10,7 +10,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -21,7 +21,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public abstract class TapAiBase extends SpellAiLogic  {
+public abstract class TapAiBase extends SpellAbilityAi  {
 
     /**
      * <p>

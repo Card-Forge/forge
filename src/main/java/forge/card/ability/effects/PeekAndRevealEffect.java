@@ -6,7 +6,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.AIPlayer;
@@ -23,7 +23,7 @@ import forge.gui.GuiDialog;
  * by just using PeekAndReveal
  *
  */
-public class PeekAndRevealEffect extends SpellEffect {
+public class PeekAndRevealEffect extends SpellAbilityEffect {
     
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(forge.card.spellability.SpellAbility)

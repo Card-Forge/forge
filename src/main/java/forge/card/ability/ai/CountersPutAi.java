@@ -11,7 +11,7 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -25,7 +25,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class CountersPutAi extends SpellAiLogic {
+public class CountersPutAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer ai, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex

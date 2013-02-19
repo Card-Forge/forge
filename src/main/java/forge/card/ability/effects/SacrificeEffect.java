@@ -5,14 +5,14 @@ import java.util.List;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
-public class SacrificeEffect extends SpellEffect {
+public class SacrificeEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {

@@ -3,14 +3,14 @@ package forge.card.ability.ai;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 
-public class DamagePreventAllAi extends SpellAiLogic {
+public class DamagePreventAllAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)

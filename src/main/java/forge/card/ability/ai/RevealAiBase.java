@@ -1,14 +1,14 @@
 package forge.card.ability.ai;
 
 
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public abstract class RevealAiBase extends SpellAiLogic {
+public abstract class RevealAiBase extends SpellAbilityAi {
 
     protected  boolean revealHandTargetAI(final Player ai, final SpellAbility sa) {
         final Target tgt = sa.getTarget();

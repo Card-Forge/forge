@@ -24,14 +24,14 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
 
-public class TokenEffect extends SpellEffect {
+public class TokenEffect extends SpellAbilityEffect {
 
     private String tokenOwner;
     private String[] tokenColors;

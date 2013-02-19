@@ -8,7 +8,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -18,7 +18,7 @@ import forge.gui.GuiChoose;
  * TODO: Write javadoc for this type.
  *
  */
-public class TapOrUntapAllEffect extends SpellEffect {
+public class TapOrUntapAllEffect extends SpellAbilityEffect {
 
     private enum TapOrUntap {
         TAP, UNTAP

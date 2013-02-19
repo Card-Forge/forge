@@ -1,13 +1,13 @@
 package forge.card.ability.ai;
 
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
-public class ChooseTypeAi extends SpellAiLogic {
+public class ChooseTypeAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
         if (!sa.hasParam("AILogic")) {

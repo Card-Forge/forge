@@ -11,7 +11,7 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -22,7 +22,7 @@ import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.util.MyRandom;
 
-public class DigEffect extends SpellEffect {
+public class DigEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

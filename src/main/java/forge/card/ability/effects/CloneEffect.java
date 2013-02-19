@@ -11,7 +11,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -19,7 +19,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.gui.GuiDialog;
 
-public class CloneEffect extends SpellEffect {
+public class CloneEffect extends SpellAbilityEffect {
     // TODO update this method
 
     @Override

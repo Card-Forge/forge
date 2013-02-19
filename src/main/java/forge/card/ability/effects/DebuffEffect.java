@@ -8,10 +8,10 @@ import java.util.List;
 import forge.Card;
 import forge.Command;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 
-public class DebuffEffect extends SpellEffect {
+public class DebuffEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

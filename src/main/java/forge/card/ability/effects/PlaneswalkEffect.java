@@ -1,7 +1,7 @@
 package forge.card.ability.effects;
 
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
@@ -10,7 +10,7 @@ import forge.game.player.Player;
  * TODO: Write javadoc for this type.
  *
  */
-public class PlaneswalkEffect extends SpellEffect {
+public class PlaneswalkEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(forge.card.spellability.SpellAbility)

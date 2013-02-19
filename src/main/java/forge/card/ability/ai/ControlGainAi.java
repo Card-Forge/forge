@@ -28,7 +28,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -61,7 +61,7 @@ import forge.game.zone.ZoneType;
  * @author Forge
  * @version $Id: AbilityFactoryGainControl.java 17764 2012-10-29 11:04:18Z Sloth $
  */
-public class ControlGainAi extends SpellAiLogic {
+public class ControlGainAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer ai, final SpellAbility sa) {
         boolean hasCreature = false;

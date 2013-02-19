@@ -5,11 +5,11 @@ import java.util.List;
 import forge.Card;
 import forge.CounterType;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
-public class CountersMoveEffect extends SpellEffect {
+public class CountersMoveEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

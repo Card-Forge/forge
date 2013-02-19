@@ -122,13 +122,13 @@ public enum ApiType {
     
     InternalEtbReplacement(ETBReplacementEffect.class, CanPlayAsDrawbackAi.class);
 
-    private final Class<? extends SpellEffect> clsEffect;
-    private final Class<? extends SpellAiLogic> clsAi;
+    private final Class<? extends SpellAbilityEffect> clsEffect;
+    private final Class<? extends SpellAbilityAi> clsAi;
     
 
     private static final Map<String, ApiType> allValues = new TreeMap<String, ApiType>(String.CASE_INSENSITIVE_ORDER);
 
-    ApiType(Class<? extends SpellEffect> clsEf, Class<? extends SpellAiLogic> clsAI) {
+    ApiType(Class<? extends SpellAbilityEffect> clsEf, Class<? extends SpellAbilityAi> clsAI) {
         clsEffect = clsEf;
         clsAi = clsAI;
     }
@@ -144,12 +144,12 @@ public enum ApiType {
         return v;
     }
 
-    public SpellEffect getSpellEffect() {
+    public SpellAbilityEffect getSpellEffect() {
         return clsEffect == null ? null : ReflectionUtil.makeDefaultInstanceOf(clsEffect);
 
     }
 
-    public SpellAiLogic getAi() {
+    public SpellAbilityAi getAi() {
         return clsAi == null ? null : ReflectionUtil.makeDefaultInstanceOf(clsAi);
     }
 

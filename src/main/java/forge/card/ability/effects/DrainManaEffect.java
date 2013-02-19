@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 
-public class DrainManaEffect extends SpellEffect {
+public class DrainManaEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

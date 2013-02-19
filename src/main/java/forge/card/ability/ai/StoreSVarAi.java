@@ -2,13 +2,13 @@ package forge.card.ability.ai;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 
-public class StoreSVarAi extends SpellAiLogic {
+public class StoreSVarAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {

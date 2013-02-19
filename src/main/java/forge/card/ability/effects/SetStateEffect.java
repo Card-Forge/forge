@@ -5,10 +5,10 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 
-public class SetStateEffect extends SpellEffect {
+public class SetStateEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

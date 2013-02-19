@@ -1,12 +1,12 @@
 package forge.card.ability.ai;
 
 import forge.card.ability.AbilityFactory;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.AIPlayer;
 
-public class DelayedTriggerAi extends SpellAiLogic {
+public class DelayedTriggerAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {

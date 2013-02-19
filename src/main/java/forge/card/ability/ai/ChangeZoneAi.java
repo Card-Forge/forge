@@ -18,7 +18,7 @@ import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -43,7 +43,7 @@ import forge.gui.GuiChoose;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
-public class ChangeZoneAi extends SpellAiLogic {
+public class ChangeZoneAi extends SpellAbilityAi {
 
     /**
      * <p>
@@ -745,7 +745,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     }
                 }
                 // Blink permanents with ETB triggers
-                else if (sa.isAbility() && (sa.getPayCosts() != null) && SpellAiLogic.playReusable(ai, sa)) {
+                else if (sa.isAbility() && (sa.getPayCosts() != null) && SpellAbilityAi.playReusable(ai, sa)) {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {

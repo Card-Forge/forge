@@ -9,13 +9,13 @@ import forge.Card;
 import forge.CardUtil;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
-public class ManaReflectedEffect extends SpellEffect {
+public class ManaReflectedEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)

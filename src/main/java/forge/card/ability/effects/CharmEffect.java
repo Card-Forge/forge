@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import forge.Card;
 import forge.card.ability.AbilityFactory;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.ai.CharmAi;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -12,7 +12,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
-public class CharmEffect extends SpellEffect {
+public class CharmEffect extends SpellAbilityEffect {
 
     public static List<AbilitySub> makePossibleOptions(final SpellAbility sa) {
         final Card source = sa.getSourceCard();

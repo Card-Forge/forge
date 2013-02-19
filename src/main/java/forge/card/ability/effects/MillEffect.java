@@ -5,13 +5,13 @@ import java.util.List;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public class MillEffect extends SpellEffect {
+public class MillEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {

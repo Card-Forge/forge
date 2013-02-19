@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -22,7 +22,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class EffectAi extends SpellAiLogic {
+public class EffectAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         final GameState game = Singletons.getModel().getGame();

@@ -10,7 +10,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -307,7 +307,7 @@ public class DamageDealAi extends DamageAiBase {
             // because we can
             else if (saMe.canTarget(enemy)) {
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
-                        || (SpellAiLogic.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
+                        || (SpellAbilityAi.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
                         || saMe.getPayCosts() == null || isTrigger
                         || this.shouldTgtP(ai, saMe, dmg, noPrevention)) {
                     tgt.addTarget(enemy);
@@ -385,7 +385,7 @@ public class DamageDealAi extends DamageAiBase {
         if (!positive) {
             return false;
         }
-        if (!urgent && !SpellAiLogic.playReusable(ai, saMe)) {
+        if (!urgent && !SpellAbilityAi.playReusable(ai, saMe)) {
             return false;
         }
         return true;

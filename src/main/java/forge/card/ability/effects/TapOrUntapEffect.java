@@ -5,12 +5,12 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.gui.GuiChoose;
 
-public class TapOrUntapEffect extends SpellEffect {
+public class TapOrUntapEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)

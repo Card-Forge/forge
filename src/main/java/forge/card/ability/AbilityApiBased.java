@@ -14,13 +14,13 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
 
-public class CommonAbility extends AbilityActivated {
-    private final SpellEffect effect;
-    private final SpellAiLogic ai;
+public class AbilityApiBased extends AbilityActivated {
+    private final SpellAbilityEffect effect;
+    private final SpellAbilityAi ai;
 
     private static final long serialVersionUID = -4183793555528531978L;
 
-    public CommonAbility(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0) {
+    public AbilityApiBased(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0) {
         super(sourceCard, abCost, tgt);
         params = params0;
         api = api0;
@@ -49,7 +49,7 @@ public class CommonAbility extends AbilityActivated {
     @Override
     public AbilityActivated getCopy() {
         Target tgt = getTarget() == null ? null : new Target(getTarget());
-        AbilityActivated res = new CommonAbility(api, getSourceCard(), getPayCosts(), tgt, params);
+        AbilityActivated res = new AbilityApiBased(api, getSourceCard(), getPayCosts(), tgt, params);
         CardFactoryUtil.copySpellAbility(this, res);
         return res;
     }

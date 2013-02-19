@@ -8,12 +8,12 @@ import forge.Card;
 import forge.CardLists;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public class UnattachAllEffect extends SpellEffect {
+public class UnattachAllEffect extends SpellAbilityEffect {
 
     private void handleUnattachment(final GameEntity o, final Card cardToUnattach) {
 

@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
@@ -17,7 +17,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class DebuffAllAi extends SpellAiLogic {
+public class DebuffAllAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
         String valid = "";

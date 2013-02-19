@@ -2,13 +2,13 @@ package forge.card.ability.ai;
 
 
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 
-public class FogAi extends SpellAiLogic {
+public class FogAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)

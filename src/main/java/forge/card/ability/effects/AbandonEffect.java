@@ -3,14 +3,14 @@ package forge.card.ability.effects;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public class AbandonEffect extends SpellEffect {
+public class AbandonEffect extends SpellAbilityEffect {
 
     private GameState game = Singletons.getModel().getGame();
 

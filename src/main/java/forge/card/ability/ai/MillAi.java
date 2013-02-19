@@ -6,7 +6,7 @@ import java.util.Random;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -19,7 +19,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class MillAi extends SpellAiLogic {
+public class MillAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
@@ -64,7 +64,7 @@ public class MillAi extends SpellAiLogic {
 
         double chance = .4; // 40 percent chance of milling with instant speed
                             // stuff
-        if (SpellAiLogic.isSorcerySpeed(sa)) {
+        if (SpellAbilityAi.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed
         }
 
@@ -85,7 +85,7 @@ public class MillAi extends SpellAiLogic {
             }
         }
 
-        if (SpellAiLogic.playReusable(ai, sa)) {
+        if (SpellAbilityAi.playReusable(ai, sa)) {
             randomReturn = true;
             // some other variables here, like deck size, and phase and other fun stuff
         }

@@ -22,7 +22,7 @@ import java.util.List;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
@@ -34,7 +34,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public class AddTurnAi extends SpellAiLogic {
+public class AddTurnAi extends SpellAbilityAi {
 
 
     @Override

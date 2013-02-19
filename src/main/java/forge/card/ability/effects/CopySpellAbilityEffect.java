@@ -7,12 +7,12 @@ import java.util.List;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
-public class CopySpellAbilityEffect extends SpellEffect {
+public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
     // *************************************************************************
     // ************************* CopySpell *************************************

@@ -27,7 +27,7 @@ import forge.Card;
 
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
@@ -43,7 +43,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class DrawAi extends SpellAiLogic {
+public class DrawAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
@@ -110,7 +110,7 @@ public class DrawAi extends SpellAiLogic {
         }
         if ((!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
                     || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !SpellAiLogic.isSorcerySpeed(sa)
+                && !sa.hasParam("PlayerTurn") && !SpellAbilityAi.isSorcerySpeed(sa)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1) {
             return false;
         }
@@ -124,7 +124,7 @@ public class DrawAi extends SpellAiLogic {
                             // stuff
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
-        if (SpellAiLogic.isSorcerySpeed(sa)) {
+        if (SpellAbilityAi.isSorcerySpeed(sa)) {
             randomReturn = true;
         }
         if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
@@ -132,7 +132,7 @@ public class DrawAi extends SpellAiLogic {
             randomReturn = true;
         }
 
-        if (SpellAiLogic.playReusable(ai, sa)) {
+        if (SpellAbilityAi.playReusable(ai, sa)) {
             randomReturn = true;
         }
 

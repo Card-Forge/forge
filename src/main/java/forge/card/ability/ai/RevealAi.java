@@ -3,7 +3,7 @@ package forge.card.ability.ai;
 import java.util.Random;
 
 import forge.Card;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
@@ -47,7 +47,7 @@ public class RevealAi extends RevealAiBase {
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
-        if (SpellAiLogic.playReusable(ai, sa)) {
+        if (SpellAbilityAi.playReusable(ai, sa)) {
             randomReturn = true;
         }
         return randomReturn;

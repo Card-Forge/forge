@@ -13,7 +13,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
@@ -30,7 +30,7 @@ import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.item.CardDb;
 
-public class PlayEffect extends SpellEffect {
+public class PlayEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

@@ -10,7 +10,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -23,7 +23,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public class DebuffAi extends SpellAiLogic {
+public class DebuffAi extends SpellAbilityAi {
     // *************************************************************************
     // ***************************** Debuff ************************************
     // *************************************************************************
@@ -60,7 +60,7 @@ public class DebuffAi extends SpellAiLogic {
                 || !Singletons.getModel().getGame().getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            if (!SpellAiLogic.isSorcerySpeed(sa)) {
+            if (!SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
         }

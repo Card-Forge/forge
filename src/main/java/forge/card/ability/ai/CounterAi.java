@@ -3,7 +3,7 @@ package forge.card.ability.ai;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -14,7 +14,7 @@ import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
 import forge.util.MyRandom;
 
-public class CounterAi extends SpellAiLogic {
+public class CounterAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {

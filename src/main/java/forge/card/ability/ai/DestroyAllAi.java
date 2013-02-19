@@ -7,7 +7,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
@@ -18,7 +18,7 @@ import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class DestroyAllAi extends SpellAiLogic {
+public class DestroyAllAi extends SpellAbilityAi {
 
     private static final Predicate<Card> predicate = new Predicate<Card>() {
         @Override

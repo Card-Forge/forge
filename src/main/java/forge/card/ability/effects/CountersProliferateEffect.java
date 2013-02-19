@@ -11,7 +11,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -21,7 +21,7 @@ import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
-public class CountersProliferateEffect extends SpellEffect {
+public class CountersProliferateEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

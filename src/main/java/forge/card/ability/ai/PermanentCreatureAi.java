@@ -8,7 +8,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -20,7 +20,7 @@ import forge.game.zone.ZoneType;
  * AbilityFactory for Creature Spells.
  *
  */
-public class PermanentCreatureAi extends SpellAiLogic {
+public class PermanentCreatureAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)

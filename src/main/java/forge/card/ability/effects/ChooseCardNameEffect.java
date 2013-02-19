@@ -15,7 +15,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.CardRulesPredicates;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -25,7 +25,7 @@ import forge.gui.GuiChoose;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 
-public class ChooseCardNameEffect extends SpellEffect {
+public class ChooseCardNameEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

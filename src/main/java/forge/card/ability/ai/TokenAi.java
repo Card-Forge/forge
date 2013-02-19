@@ -5,7 +5,7 @@ import java.util.Random;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -27,7 +27,7 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id: AbilityFactoryToken.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
-public class TokenAi extends SpellAiLogic {
+public class TokenAi extends SpellAbilityAi {
 
 
     private String tokenAmount;
@@ -106,7 +106,7 @@ public class TokenAi extends SpellAiLogic {
                 || ph.getPhase().isBefore(
                         PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn")
-                && !SpellAiLogic.isSorcerySpeed(sa) && !haste) {
+                && !SpellAbilityAi.isSorcerySpeed(sa) && !haste) {
             return false;
         }
         if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(
@@ -159,7 +159,7 @@ public class TokenAi extends SpellAiLogic {
             }
         }
 
-        if (SpellAiLogic.playReusable(ai, sa)) {
+        if (SpellAbilityAi.playReusable(ai, sa)) {
             return true;
         }
 

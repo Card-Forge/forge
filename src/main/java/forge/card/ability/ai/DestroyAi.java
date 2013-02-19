@@ -11,7 +11,7 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPart;
@@ -25,7 +25,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class DestroyAi extends SpellAiLogic {
+public class DestroyAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
@@ -74,7 +74,7 @@ public class DestroyAi extends SpellAiLogic {
                 list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
             }
             list = CardLists.getNotKeyword(list, "Indestructible");
-            if (!SpellAiLogic.playReusable(ai, sa)) {
+            if (!SpellAbilityAi.playReusable(ai, sa)) {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {

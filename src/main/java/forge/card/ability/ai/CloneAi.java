@@ -5,14 +5,14 @@ import java.util.List;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 
-public class CloneAi extends SpellAiLogic {
+public class CloneAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
@@ -37,7 +37,7 @@ public class CloneAi extends SpellAiLogic {
         // don't use instant speed clone abilities outside computers
         // Combat_Begin step
         if (!phase.is(PhaseType.COMBAT_BEGIN)
-                && phase.isPlayerTurn(ai) && !SpellAiLogic.isSorcerySpeed(sa)
+                && phase.isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
             return false;
         }

@@ -9,7 +9,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.CardPredicates.Presets;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
@@ -20,7 +20,7 @@ import forge.game.zone.ZoneType;
  * TODO: Write javadoc for this type.
  *
  */
-public class RepeatEachAi extends SpellAiLogic {
+public class RepeatEachAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, forge.card.spellability.SpellAbility)

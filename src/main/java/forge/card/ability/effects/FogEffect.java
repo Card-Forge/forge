@@ -1,10 +1,10 @@
 package forge.card.ability.effects;
 
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 
-public class FogEffect extends SpellEffect {
+public class FogEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

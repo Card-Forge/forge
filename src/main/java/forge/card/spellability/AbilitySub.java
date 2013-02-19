@@ -22,8 +22,8 @@ import java.util.Map;
 import forge.Card;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.ApiType;
-import forge.card.ability.SpellAiLogic;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityAi;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.effects.ChangeZoneAllEffect;
 import forge.card.ability.effects.ChangeZoneEffect;
 import forge.card.ability.effects.ManaEffect;
@@ -79,13 +79,13 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     }
 
     
-    private final SpellEffect effect;
-    private final SpellAiLogic ai;
+    private final SpellAbilityEffect effect;
+    private final SpellAbilityAi ai;
 
     /**
      * @return the ai
      */
-    public SpellAiLogic getAi() {
+    public SpellAbilityAi getAi() {
         return ai;
     }
 

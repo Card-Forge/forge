@@ -6,11 +6,11 @@ import java.util.List;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
-public class SacrificeAllEffect extends SpellEffect {
+public class SacrificeAllEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

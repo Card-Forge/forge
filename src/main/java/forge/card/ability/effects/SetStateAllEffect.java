@@ -7,13 +7,13 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public class SetStateAllEffect extends SpellEffect {
+public class SetStateAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {

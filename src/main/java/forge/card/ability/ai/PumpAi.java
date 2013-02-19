@@ -10,7 +10,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -71,7 +71,7 @@ public class PumpAi extends PumpAiBase {
         if ((Singletons.getModel().getGame().getStack().size() == 0) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            if (!sa.isCurse() && !SpellAiLogic.isSorcerySpeed(sa)) {
+            if (!sa.isCurse() && !SpellAbilityAi.isSorcerySpeed(sa)) {
                 return false;
             }
         } else if (Singletons.getModel().getGame().getStack().size() > 0) {

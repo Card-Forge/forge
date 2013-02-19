@@ -2,7 +2,7 @@ package forge.card.ability.effects;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -10,7 +10,7 @@ import forge.game.zone.ZoneType;
  * TODO: Write javadoc for this type.
  *
  */
-public class PermanentNoncreatureEffect extends SpellEffect {
+public class PermanentNoncreatureEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(forge.card.spellability.SpellAbility)

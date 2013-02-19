@@ -9,14 +9,14 @@ import com.google.common.collect.HashBiMap;
 import forge.Card;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
-public class ChooseGenericEffect extends SpellEffect {
+public class ChooseGenericEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

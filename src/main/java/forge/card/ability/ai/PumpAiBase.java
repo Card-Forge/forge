@@ -12,7 +12,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -26,7 +26,7 @@ import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public abstract class PumpAiBase extends SpellAiLogic {
+public abstract class PumpAiBase extends SpellAbilityAi {
 
     public boolean containsUsefulKeyword(final Player ai, final List<String> keywords, final Card card, final SpellAbility sa, final int attack) {
         for (final String keyword : keywords) {
@@ -401,7 +401,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
-                && SpellAiLogic.isSorcerySpeed(sa)
+                && SpellAbilityAi.isSorcerySpeed(sa)
                 && attack > 0
                 && CardFactoryUtil.doesCreatureAttackAI(ai, c)) {
             return true;

@@ -8,7 +8,7 @@ import forge.CounterType;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -18,7 +18,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
-public class ManaEffect extends SpellEffect {
+public class ManaEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {

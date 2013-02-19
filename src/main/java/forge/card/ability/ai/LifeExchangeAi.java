@@ -2,14 +2,14 @@ package forge.card.ability.ai;
 
 import java.util.Random;
 
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
-public class LifeExchangeAi extends SpellAiLogic {
+public class LifeExchangeAi extends SpellAbilityAi {
 
     /*
      * (non-Javadoc)

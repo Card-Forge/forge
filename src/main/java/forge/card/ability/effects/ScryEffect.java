@@ -3,12 +3,12 @@ package forge.card.ability.effects;
 import java.util.List;
 
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 
-public class ScryEffect extends SpellEffect {
+public class ScryEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

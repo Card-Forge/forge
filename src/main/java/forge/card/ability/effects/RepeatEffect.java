@@ -7,7 +7,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -15,7 +15,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.util.Expressions;
 
-public class RepeatEffect extends SpellEffect {
+public class RepeatEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

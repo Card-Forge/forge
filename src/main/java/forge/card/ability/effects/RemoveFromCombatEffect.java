@@ -6,11 +6,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
-public class RemoveFromCombatEffect extends SpellEffect {
+public class RemoveFromCombatEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

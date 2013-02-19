@@ -13,12 +13,12 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
 
-public class CommonSpell extends Spell {
+public class SpellApiBased extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;
-    private final SpellEffect effect;
-    private final SpellAiLogic ai;
+    private final SpellAbilityEffect effect;
+    private final SpellAbilityAi ai;
 
-    public CommonSpell(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0) {
+    public SpellApiBased(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0) {
         super(sourceCard, abCost, tgt);
         params = params0;
         api = api0;

@@ -10,7 +10,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -19,7 +19,7 @@ import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class CopyPermanentAi extends SpellAiLogic {
+public class CopyPermanentAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
@@ -33,7 +33,7 @@ public class CopyPermanentAi extends SpellAiLogic {
             return false;
         } else {
             double chance = .4; // 40 percent chance with instant speed stuff
-            if (SpellAiLogic.isSorcerySpeed(sa)) {
+            if (SpellAbilityAi.isSorcerySpeed(sa)) {
                 chance = .667; // 66.7% chance for sorcery speed (since it will
                                // never activate EOT)
             }

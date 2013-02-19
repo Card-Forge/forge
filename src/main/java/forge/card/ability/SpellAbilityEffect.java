@@ -23,7 +23,7 @@ import forge.game.player.Player;
  * @version $Id: AbilityFactoryAlterLife.java 17656 2012-10-22 19:32:56Z Max mtg $
  */
 
-    public abstract class SpellEffect {
+    public abstract class SpellAbilityEffect {
 
         public abstract void resolve(final SpellAbility sa);
 

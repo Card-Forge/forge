@@ -9,7 +9,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.ai.AttachAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -18,7 +18,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 
-public class AttachEffect extends SpellEffect {
+public class AttachEffect extends SpellAbilityEffect {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)

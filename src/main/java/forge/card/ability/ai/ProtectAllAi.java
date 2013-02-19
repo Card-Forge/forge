@@ -2,13 +2,13 @@ package forge.card.ability.ai;
 
 
 import forge.Card;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.AIPlayer;
 
-public class ProtectAllAi extends SpellAiLogic {
+public class ProtectAllAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {

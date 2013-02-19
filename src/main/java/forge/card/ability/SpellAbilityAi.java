@@ -10,7 +10,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
-public abstract class SpellAiLogic {
+public abstract class SpellAbilityAi {
 
     public final boolean canPlayAIWithSubs(final AIPlayer aiPlayer, final SpellAbility sa) {
         if (!canPlayAI(aiPlayer, sa)) {

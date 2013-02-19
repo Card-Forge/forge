@@ -6,7 +6,7 @@ import java.util.Random;
 import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -18,7 +18,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
-public class LifeLoseAi extends SpellAiLogic {
+public class LifeLoseAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
@@ -132,7 +132,7 @@ public class LifeLoseAi extends SpellAiLogic {
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
-        if (SpellAiLogic.playReusable(ai, sa) || priority) {
+        if (SpellAbilityAi.playReusable(ai, sa) || priority) {
             randomReturn = true;
         }
 

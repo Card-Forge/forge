@@ -20,12 +20,12 @@ package forge.card.ability.effects;
 import java.util.ArrayList;
 import forge.Card;
 
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 
-public abstract class AnimateEffectBase extends SpellEffect {
+public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
     /**
      * <p>

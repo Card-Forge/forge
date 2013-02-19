@@ -4,7 +4,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -13,7 +13,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public class SacrificeAi extends SpellAiLogic {
+public class SacrificeAi extends SpellAbilityAi {
     // **************************************************************
     // *************************** Sacrifice ***********************
     // **************************************************************

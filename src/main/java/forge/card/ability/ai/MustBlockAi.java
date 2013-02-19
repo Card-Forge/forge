@@ -9,7 +9,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -19,7 +19,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 
-public class MustBlockAi extends SpellAiLogic {
+public class MustBlockAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {

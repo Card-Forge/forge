@@ -5,7 +5,7 @@ import java.util.Random;
 import forge.Card;
 import forge.CounterType;
 import forge.Singletons;
-import forge.card.ability.SpellAiLogic;
+import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -14,7 +14,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.util.MyRandom;
 
-public class CountersRemoveAi extends SpellAiLogic {
+public class CountersRemoveAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {

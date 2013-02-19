@@ -11,7 +11,7 @@ import forge.CardPredicates;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.ability.SpellEffect;
+import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.ai.ChangeZoneAi;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
@@ -25,7 +25,7 @@ import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.util.Aggregates;
 
-public class ChangeZoneEffect extends SpellEffect {
+public class ChangeZoneEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
 
