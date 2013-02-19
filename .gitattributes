@@ -3768,6 +3768,7 @@ res/cardsfolder/f/footsteps_of_the_goryo.txt svneol=native#text/plain
 res/cardsfolder/f/foratog.txt svneol=native#text/plain
 res/cardsfolder/f/forbid.txt svneol=native#text/plain
 res/cardsfolder/f/forbidden_alchemy.txt -text
+res/cardsfolder/f/forbidden_crypt.txt -text
 res/cardsfolder/f/forbidden_lore.txt svneol=native#text/plain
 res/cardsfolder/f/forbidden_orchard.txt svneol=native#text/plain
 res/cardsfolder/f/forbidding_watchtower.txt svneol=native#text/plain
