@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Amphibian 2
+Title=Amphibian
+Difficulty=medium
+Description=UG Landfall deck
+Icon=Amphibian.jpg
+Deck Type=constructed
+[main]
+5 Forest|ZEN
+5 Island|ZEN
+4 Misty Rainforest
+4 Tropical Island
+4 Undiscovered Paradise
+1 Thawing Glaciers
+1 Reliquary Tower
+4 Exploration
+1 Explore
+1 Burgeoning
+1 Ior Ruin Expedition
+4 Khalni Heart Expedition
+2 Daze
+1 Overburden
+1 Urban Evolution
+1 Avenger of Zendikar
+1 Baloth Woodcrasher
+3 Grazing Gladehart
+1 Living Tsunami
+1 Meloku the Clouded Mirror
+1 Rampaging Baloths
+1 Roil Elemental
+3 Sea Drake
+1 Shoal Serpent
+2 Snapping Creeper
+1 Territorial Baloth
+4 Vinelasher Kudzu
+1 Windrider Eel
+[sideboard]
