@@ -7,10 +7,10 @@ A:SP$ Attach | Cost$ W | AILogic$ Pump | ValidTgts$ Creature
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put an arrow counter on CARDNAME.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ ARROW | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ArcheryDamage | AddSVar$ DBArcheryDamage & ArcheryX & DBArcheryCleanup | Description$ Enchanted creature has "T: This creature deals X damage to target attacking or blocking creature, where X is the number of arrow counters on CARDNAME."
-SVar:ArcheryDamage:AB$ Pump | Cost$ T | RememberObjects$ OriginalHost | SubAbility$ DBArcheryDamage | SpellDescription$ CARDNAME deals X damage to target attacking or blocking creature, where X is the number of arrow counters on original aura.
+SVar:ArcheryDamage:AB$ Pump | Cost$ T | ImprintCards$ OriginalHost | SubAbility$ DBArcheryDamage | SpellDescription$ CARDNAME deals X damage to target attacking or blocking creature, where X is the number of arrow counters on original aura.
 SVar:DBArcheryDamage:DB$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ ArcheryX | SubAbility$ DBArcheryCleanup
-SVar:ArcheryX:Count$TotalCounters_ARROW_Card.IsRemembered
-SVar:DBArcheryCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:ArcheryX:Count$TotalCounters_ARROW_Card.IsImprinted+namedArchery Training
+SVar:DBArcheryCleanup:DB$ Pump | ForgetLastImprinted$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archery_training.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/2.jpg
