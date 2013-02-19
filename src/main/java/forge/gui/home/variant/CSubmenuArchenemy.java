@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -28,6 +30,7 @@ import forge.gui.deckeditor.controllers.CEditorVariant;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
+import forge.gui.toolbox.FList;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -50,9 +53,26 @@ public enum CSubmenuArchenemy implements ICDoc {
      */
     @Override
     public void update() {
-        // Nothing to see here...
-    }
+        // reinit deck list and restore last selections (if any)
+        FList deckList = VSubmenuArchenemy.SINGLETON_INSTANCE.getArchenemySchemes();
+        Vector<Object> listData = new Vector<Object>();
+        listData.add("Random");
+        listData.add("Generate");
+        for (Deck schemeDeck : Singletons.getModel().getDecks().getScheme()) {
+            listData.add(schemeDeck);
+        }
 
+        Object val = deckList.getSelectedValue();
+        deckList.setListData(listData);
+        if (null != val) {
+            deckList.setSelectedValue(val, true);
+        }
+        
+        if (-1 == deckList.getSelectedIndex()) {
+            deckList.setSelectedIndex(0);
+        }
+    }
+    
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
      */

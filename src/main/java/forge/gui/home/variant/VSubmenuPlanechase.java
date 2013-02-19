@@ -4,7 +4,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -15,7 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;
@@ -119,7 +117,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
         }
         settingsPanel.add(radioPane, "span 1 2");
         settingsPanel.add(cbUseDefaultPlanes);
-        settingsPanel.add(lblEditor);
+        settingsPanel.add(lblEditor, "w pref+24, h pref+8");
         tabPane.add("Settings", settingsPanel);
 
         //Player panels (Human + 7 AIs)
@@ -138,15 +136,6 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
 
             tempPlanarDeckList = new FList();
             
-            Vector<Object> listData = new Vector<Object>();
-            listData.add("Random");
-            listData.add("Generate");
-            for (Deck planarDeck : Singletons.getModel().getDecks().getPlane()) {
-                listData.add(planarDeck);
-            }
-
-            tempPlanarDeckList.setListData(listData);
-            tempPlanarDeckList.setSelectedIndex(0);
             tempPlanarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
             JScrollPane scrPlanes = new FScrollPane(tempPlanarDeckList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

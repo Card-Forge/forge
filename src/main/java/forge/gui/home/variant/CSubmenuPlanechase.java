@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -28,6 +30,7 @@ import forge.gui.deckeditor.controllers.CEditorVariant;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
+import forge.gui.toolbox.FList;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -50,7 +53,25 @@ public enum CSubmenuPlanechase implements ICDoc {
      */
     @Override
     public void update() {
-        // Nothing to see here...
+        // reinit deck lists and restore last selections (if any)
+        for (FList deckList : VSubmenuPlanechase.SINGLETON_INSTANCE.getPlanarDeckLists()) {
+            Vector<Object> listData = new Vector<Object>();
+            listData.add("Random");
+            listData.add("Generate");
+            for (Deck planarDeck : Singletons.getModel().getDecks().getPlane()) {
+                listData.add(planarDeck);
+            }
+
+            Object val = deckList.getSelectedValue();
+            deckList.setListData(listData);
+            if (null != val) {
+                deckList.setSelectedValue(val, true);
+            }
+            
+            if (-1 == deckList.getSelectedIndex()) {
+                deckList.setSelectedIndex(0);
+            }
+        }
     }
 
     /* (non-Javadoc)

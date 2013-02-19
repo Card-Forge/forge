@@ -4,7 +4,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -118,7 +117,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         }
         settingsPanel.add(radioPane, "span 1 2");
         settingsPanel.add(cbUseDefaultSchemes);
-        settingsPanel.add(lblEditor);
+        settingsPanel.add(lblEditor, "w pref+24, h pref+8");
         tabPane.add("Settings", settingsPanel);
 
         for (Deck schemeDeck : Singletons.getModel().getDecks().getScheme()) {
@@ -142,15 +141,6 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
 
                 tempPanel.add(new FLabel.Builder().text("Select Scheme deck:").build(), "flowy");
 
-                Vector<Object> listData = new Vector<Object>();
-                listData.add("Random");
-                listData.add("Generate");
-                for (Deck schemeDeck : Singletons.getModel().getDecks().getScheme()) {
-                    listData.add(schemeDeck);
-                }
-
-                archenemySchemes.setListData(listData);
-                archenemySchemes.setSelectedIndex(0);
                 archenemySchemes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
                 JScrollPane scrSchemes = new FScrollPane(archenemySchemes, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

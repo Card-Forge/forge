@@ -272,6 +272,7 @@ res/decks/constructed/*.dck
 res/decks/draft/*
 res/decks/o1.bdk
 res/decks/plane/*.dck
+res/decks/scheme/*.dck
 res/decks/sealed/*
 res/gauntlet
 res/images
