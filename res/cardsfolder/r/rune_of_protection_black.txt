@@ -10,6 +10,7 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Common
 SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_of_protection_black.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/36.jpg
 Oracle:{W}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End

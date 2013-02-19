@@ -9,6 +9,7 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_black.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/10.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/220.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/195.jpg

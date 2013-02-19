@@ -10,6 +10,7 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_of_protection_artifacts.jpg
 SetInfo:USG|Uncommon|http://no.pic.yet
 Oracle:{W}: The next time an artifact source of your choice would deal damage to you this turn, prevent that damage.\nCycling {2} ({2}, Discard this card: Draw a card.)
 End
