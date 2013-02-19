@@ -36,7 +36,7 @@ public abstract class SpellAbilityAi {
             return false;
         }
         final AbilitySub subAb = sa.getSubAbility();
-        return mandatory || subAb == null || chkDrawbackWithSubs(aiPlayer,  subAb);
+        return subAb == null || chkDrawbackWithSubs(aiPlayer,  subAb) || mandatory;
     }
 
     protected boolean doTriggerAINoCost(final AIPlayer aiPlayer, final SpellAbility sa, final boolean mandatory) {
@@ -97,6 +97,6 @@ public abstract class SpellAbilityAi {
      */
     public boolean chkDrawbackWithSubs(AIPlayer aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
-        return chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));  
+        return ab.getAi().chkAIDrawback(ab, aiPlayer) && (subAb == null || chkDrawbackWithSubs(aiPlayer, subAb));  
     }
 }
