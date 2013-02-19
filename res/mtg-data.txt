@@ -683,7 +683,7 @@ UZ C
 Act of Aggression
 {3}{P/R}{P/R}
 Instant
- ({P/R} can be paid with either {R} or 2 life.)
+({P/R} can be paid with either {R} or 2 life.)
 Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
 NPH U
 
@@ -824,7 +824,7 @@ ZEN C
 Advice from the Fae
 {2/U}{2/U}{2/U}
 Sorcery
- ({2/U} can be paid with any two mana or with {U}. This card's converted mana cost is 6.)
+({2/U} can be paid with any two mana or with {U}. This card's converted mana cost is 6.)
 Look at the top five cards of your library. If you control more creatures than each other player, put two of those cards into your hand. Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order.
 SHM U
 
@@ -1123,17 +1123,19 @@ LE C
 Ajani Goldmane
 {2}{W}{W}
 Planeswalker - Ajani
-+1: You gain 2 life.
--1: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
--6: Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."
+4
+[+1] You gain 2 life.
+[-1] Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.
+[-6] Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."
 LRW R, M10 M, M11 M
 
 Ajani Vengeant
 {2}{R}{W}
 Planeswalker - Ajani
-+1: Target permanent doesn't untap during its controller's next untap step.
--2: Ajani Vengeant deals 3 damage to target creature or player and you gain 3 life.
--7: Destroy all lands target player controls.
+3
+[+1] Target permanent doesn't untap during its controller's next untap step.
+[-2] Ajani Vengeant deals 3 damage to target creature or player and you gain 3 life.
+[-7] Destroy all lands target player controls.
 ALA M, DDH M
 
 Ajani's Mantra
@@ -1159,9 +1161,10 @@ M13 C
 Ajani, Caller of the Pride
 {1}{W}{W}
 Planeswalker - Ajani
-+1: Put a +1/+1 counter on up to one target creature.
--3: Target creature gains flying and double strike until end of turn.
--8: Put X 2/2 white Cat creature tokens onto the battlefield, where X is your life total.
+4
+[+1] Put a +1/+1 counter on up to one target creature.
+[-3] Target creature gains flying and double strike until end of turn.
+[-8] Put X 2/2 white Cat creature tokens onto the battlefield, where X is your life total.
 M13 M
 
 Akki Avalanchers
@@ -1317,6 +1320,7 @@ LGN R, TSB S, DDC M
 
 Akroma, Angel of Wrath Avatar
 Vanguard
+Hand +1, life +7
 Whenever a creature enters the battlefield under your control, it gains two abilities chosen at random from flying, first strike, trample, haste, protection from black, protection from red, and vigilance.
 VAN S
 
@@ -2077,7 +2081,7 @@ P2 R, P3 R
 
 Ancient Den
 Artifact Land
- (Ancient Den isn't a spell.)
+(Ancient Den isn't a spell.)
 {T}: Add {W} to your mana pool.
 MRD C, HOP C
 
@@ -2742,7 +2746,7 @@ CON M
 Apostle's Blessing
 {1}{P/W}
 Instant
- ({P/W} can be paid with either {W} or 2 life.)
+({P/W} can be paid with either {W} or 2 life.)
 Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
 NPH C
 
@@ -2988,6 +2992,7 @@ ONS R, 10E R
 
 Arcanis, the Omnipotent Avatar
 Vanguard
+Hand +1, life -3
 {X}, Return a creature you control with converted mana cost X to its owner's hand: Draw a number of cards chosen at random between 0 and X. X can't be 0.
 VAN S
 
@@ -3050,6 +3055,7 @@ DST R
 
 Arcbound Overseer Avatar
 Vanguard
+Hand +0, life +3
 At the beginning of your upkeep, you may put a +1/+1 counter on target creature you control.
 At the beginning of your upkeep, you may put a charge counter on target permanent you control.
 VAN S
@@ -3903,6 +3909,7 @@ LRW R
 
 Ashling the Pilgrim Avatar
 Vanguard
+Hand -1, life +6
 {2}: Ashling the Pilgrim Avatar deals 1 damage to each creature and each player.
 VAN S
 
@@ -3923,6 +3930,7 @@ EVE R
 
 Ashling, the Extinguisher Avatar
 Vanguard
+Hand +1, life -3
 {5}: Destroy all nonland permanents. Activate this ability only once and only during your turn.
 VAN S
 
@@ -3935,6 +3943,7 @@ ISD C
 
 Ashnod
 Vanguard
+Hand +1, life -8
 Whenever a creature deals damage to you, destroy it.
 VAN S
 
@@ -4549,7 +4558,7 @@ Avatar of Discord
 {B/R}{B/R}{B/R}
 Creature - Avatar
 5/3
- ({B/R} can be paid with either {B} or {R}.)
+({B/R} can be paid with either {B} or {R}.)
 Flying
 When Avatar of Discord enters the battlefield, sacrifice it unless you discard two cards.
 DIS R, ARC R
@@ -5818,6 +5827,7 @@ SHM C
 
 Barrin
 Vanguard
+Hand +0, life +6
 Sacrifice a permanent: Return target creature to its owner's hand.
 VAN S
 
@@ -6746,7 +6756,7 @@ M10 C, M11 C
 Beseech the Queen
 {2/B}{2/B}{2/B}
 Sorcery
- ({2/B} can be paid with any two mana or with {B}. This card's converted mana cost is 6.)
+({2/B} can be paid with any two mana or with {B}. This card's converted mana cost is 6.)
 Search your library for a card with converted mana cost less than or equal to the number of lands you control, reveal it, and put it into your hand. Then shuffle your library.
 SHM U, HOP U
 
@@ -6840,7 +6850,7 @@ IA U, 5E U, ME2 R
 Biomantic Mastery
 {4}{G/U}{G/U}{G/U}
 Sorcery
- ({G/U} can be paid with either {G} or {U}.)
+({G/U} can be paid with either {G} or {U}.)
 Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
 DIS R
 
@@ -6901,13 +6911,14 @@ Flying
 
 Birds of Paradise Avatar
 Vanguard
+Hand +0, life -3
 Lands you control have "{T}: Add one mana of any color to your mana pool."
 VAN S (x2)
 
 Birthing Pod
 {3}{P/G}
 Artifact
- ({P/G} can be paid with either {G} or 2 life.)
+({P/G} can be paid with either {G} or 2 life.)
 {1}{P/G}, {T}, Sacrifice a creature: Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
 NPH R
 
@@ -7688,7 +7699,7 @@ SOK R
 
 Blood Crypt
 Land - Swamp Mountain
- ({T}: Add {B} or {R} to your mana pool.)
+({T}: Add {B} or {R} to your mana pool.)
 As Blood Crypt enters the battlefield, you may pay 2 life. If you don't, Blood Crypt enters the battlefield tapped.
 DIS R, RTR R
 
@@ -8896,7 +8907,7 @@ Boros Recruit
 {R/W}
 Creature - Goblin Soldier
 1/1
- ({R/W} can be paid with either {R} or {W}.)
+({R/W} can be paid with either {R} or {W}.)
 First strike
 RAV C
 
@@ -8941,6 +8952,7 @@ MRD R, HOP R
 
 Bosh, Iron Golem Avatar
 Vanguard
+Hand +0, life -2
 {X}, Sacrifice an artifact with converted mana cost X: Bosh, Iron Golem Avatar deals X damage to target creature or player.
 VAN S
 
@@ -9082,6 +9094,7 @@ PLC R
 
 Braids, Conjurer Adept Avatar
 Vanguard
+Hand +0, life +3
 {2}: Each player may put a land card from his or her hand onto the battlefield tapped.
 {3}: Each player may put a noncreature artifact card from his or her hand onto the battlefield.
 {4}: Each player may put a creature card from his or her hand onto the battlefield. Activate this ability only any time you could cast a sorcery.
@@ -9416,7 +9429,7 @@ FE U, 5E U, MED U, DDC U
 
 Breeding Pool
 Land - Forest Island
- ({T}: Add {G} or {U} to your mana pool.)
+({T}: Add {G} or {U} to your mana pool.)
 As Breeding Pool enters the battlefield, you may pay 2 life. If you don't, Breeding Pool enters the battlefield tapped.
 DIS R, GTC R
 
@@ -11451,7 +11464,7 @@ Cathedral Membrane
 {1}{P/W}
 Artifact Creature - Wall
 0/3
- ({P/W} can be paid with either {W} or 2 life.)
+({P/W} can be paid with either {W} or 2 life.)
 Defender
 When Cathedral Membrane dies during combat, it deals 6 damage to each creature it blocked this combat.
 NPH U
@@ -11844,7 +11857,7 @@ Centaur Safeguard
 {2}{G/W}
 Creature - Centaur Warrior
 3/1
- ({G/W} can be paid with either {G} or {W}.)
+({G/W} can be paid with either {G} or {W}.)
 When Centaur Safeguard dies, you may gain 3 life.
 RAV C
 
@@ -12293,17 +12306,19 @@ HM C
 Chandra Ablaze
 {4}{R}{R}
 Planeswalker - Chandra
-+1: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to target creature or player.
--2: Each player discards his or her hand, then draws three cards.
--7: Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
+5
+[+1] Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to target creature or player.
+[-2] Each player discards his or her hand, then draws three cards.
+[-7] Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
 ZEN M
 
 Chandra Nalaar
 {3}{R}{R}
 Planeswalker - Chandra
-+1: Chandra Nalaar deals 1 damage to target player.
--X: Chandra Nalaar deals X damage to target creature.
--8: Chandra Nalaar deals 10 damage to target player and each creature he or she controls.
+6
+[+1] Chandra Nalaar deals 1 damage to target player.
+[null] null
+[-8] Chandra Nalaar deals 10 damage to target player and each creature he or she controls.
 LRW R, DD2 M, M10 M, M11 M
 
 Chandra's Fury
@@ -12338,9 +12353,10 @@ M11 U
 Chandra, the Firebrand
 {3}{R}
 Planeswalker - Chandra
-+1: Chandra, the Firebrand deals 1 damage to target creature or player.
--2: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
--6: Chandra, the Firebrand deals 6 damage to each of up to six target creatures and/or players.
+3
+[+1] Chandra, the Firebrand deals 1 damage to target creature or player.
+[-2] When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+[-6] Chandra, the Firebrand deals 6 damage to each of up to six target creatures and/or players.
 M12 M, M13 M
 
 Change of Heart
@@ -13040,6 +13056,7 @@ VI R
 
 Chronatog Avatar
 Vanguard
+Hand -1, life +1
 You have no maximum hand size.
 {0}: Draw three cards. You skip your next turn. Activate this ability only once each turn.
 VAN S
@@ -15159,7 +15176,7 @@ VI R
 Corrosive Gale
 {X}{P/G}
 Sorcery
- ({P/G} can be paid with either {G} or 2 life.)
+({P/G} can be paid with either {G} or 2 life.)
 Corrosive Gale deals X damage to each creature with flying.
 NPH U
 
@@ -16002,6 +16019,7 @@ UZ U
 
 Crovax
 Vanguard
+Hand +2, life +0
 Whenever a creature you control deals damage to a creature or player, you gain 1 life.
 VAN S
 
@@ -16980,6 +16998,7 @@ LE R, CH R, MED R
 
 Dakkon Blackblade Avatar
 Vanguard
+Hand +1, life +0
 You may play any colored card from your hand as a copy of a basic land card chosen at random that can produce mana of one of the card's colors.
 VAN S
 
@@ -17635,6 +17654,7 @@ ARB R
 
 Dauntless Escort Avatar
 Vanguard
+Hand +1, life +1
 Creatures you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)
 VAN S
 
@@ -18369,7 +18389,7 @@ GTC U
 Debtors' Knell
 {4}{W/B}{W/B}{W/B}
 Enchantment
- ({W/B} can be paid with either {W} or {B}.)
+({W/B} can be paid with either {W} or {B}.)
 At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.
 GPT R
 
@@ -19689,6 +19709,7 @@ CSP R
 
 Diamond Faerie Avatar
 Vanguard
+Hand +0, life +5
 {S}: Target creature you control gets +1/+1 until end of turn.
 VAN S
 
@@ -19795,7 +19816,7 @@ Dimir Guildmage
 {U/B}{U/B}
 Creature - Human Wizard
 2/2
- ({U/B} can be paid with either {U} or {B}.)
+({U/B} can be paid with either {U} or {B}.)
 {3}{U}: Target player draws a card. Activate this ability only any time you could cast a sorcery.
 {3}{B}: Target player discards a card. Activate this ability only any time you could cast a sorcery.
 RAV U
@@ -20135,7 +20156,7 @@ IN C
 Dismember
 {1}{P/B}{P/B}
 Instant
- ({P/B} can be paid with either {B} or 2 life.)
+({P/B} can be paid with either {B} or 2 life.)
 Target creature gets -5/-5 until end of turn.
 NPH U
 
@@ -20475,7 +20496,7 @@ Djinn Illuminatus
 {5}{U/R}{U/R}
 Creature - Djinn
 3/5
- ({U/R} can be paid with either {U} or {R}.)
+({U/R} can be paid with either {U} or {R}.)
 Flying
 Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost. (When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)
 GPT R, DDJ R
@@ -20574,9 +20595,10 @@ EVE R, CMD R
 Domri Rade
 {1}{R}{G}
 Planeswalker - Domri
-+1: Look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand.
--2: Target creature you control fights another target creature.
--7: You get an emblem with "Creatures you control have double strike, trample, hexproof, and haste."
+3
+[+1] Look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand.
+[-2] Target creature you control fights another target creature.
+[-7] You get an emblem with "Creatures you control have double strike, trample, hexproof, and haste."
 GTC M
 
 Donate
@@ -20765,7 +20787,7 @@ GPT C
 Dovescape
 {3}{W/U}{W/U}{W/U}
 Enchantment
- ({W/U} can be paid with either {W} or {U}.)
+({W/U} can be paid with either {W} or {U}.)
 Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost.
 DIS R
 
@@ -21851,7 +21873,7 @@ Dryad Arbor
 (Green)
 Land Creature - Forest Dryad
 1/1
- (Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{T}: Add {G} to your mana pool.")
+(Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{T}: Add {G} to your mana pool.")
 FUT U, V12 M
 
 Dryad Militant
@@ -22779,6 +22801,7 @@ CHK R
 
 Eight-and-a-Half-Tails Avatar
 Vanguard
+Hand +2, life -3
 {1}: Until end of turn, target permanent you control gains protection from a color chosen at random from colors it doesn't have protection from.
 VAN S
 
@@ -22812,6 +22835,7 @@ AN R, 3E R, 4E R
 
 Eladamri
 Vanguard
+Hand -1, life +15
 {0}: The next 1 damage that would be dealt to target creature you control is dealt to you instead.
 VAN S
 
@@ -22837,6 +22861,7 @@ TE R
 
 Eladamri, Lord of Leaves Avatar
 Vanguard
+Hand -1, life +2
 At the beginning of each player's precombat main phase, that player adds {G}{G} to his or her mana pool.
 VAN S
 
@@ -23199,17 +23224,19 @@ SHM C
 Elspeth Tirel
 {3}{W}{W}
 Planeswalker - Elspeth
-+2: You gain 1 life for each creature you control.
--2: Put three 1/1 white Soldier creature tokens onto the battlefield.
--5: Destroy all other permanents except for lands and tokens.
+4
+[+2] You gain 1 life for each creature you control.
+[-2] Put three 1/1 white Soldier creature tokens onto the battlefield.
+[-5] Destroy all other permanents except for lands and tokens.
 SOM M
 
 Elspeth, Knight-Errant
 {2}{W}{W}
 Planeswalker - Elspeth
-+1: Put a 1/1 white Soldier creature token onto the battlefield.
-+1: Target creature gets +3/+3 and gains flying until end of turn.
--8: You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."
+4
+[+1] Put a 1/1 white Soldier creature token onto the battlefield.
+[+1] Target creature gets +3/+3 and gains flying until end of turn.
+[-8] You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."
 ALA M, DDF M
 
 Elusive Krasis
@@ -23324,6 +23351,7 @@ IN R, 7E R, 8ED R, 9ED R, 10E R
 
 Elvish Champion Avatar
 Vanguard
+Hand +0, life -5
 You begin the game with a 1/1 green Elf creature token on the battlefield. It has "{T}: Add {G} to your mana pool."
 VAN S
 
@@ -24105,6 +24133,7 @@ ARB R, PC2 R
 
 Enigma Sphinx Avatar
 Vanguard
+Hand +0, life +5
 Whenever you cast a colored artifact spell for the first time in a turn, search your library for a colored artifact card chosen at random whose converted mana cost is less than that spell's converted mana cost. You may play that card without paying its mana cost. If you don't, put that card on the bottom of your library.
 VAN S
 
@@ -24407,6 +24436,7 @@ AN R, CH U, BD U, JUD R
 
 Erhnam Djinn Avatar
 Vanguard
+Hand +0, life +3
 Whenever you cast a creature spell, put a 1/1 green Saproling creature token onto the battlefield.
 VAN S (x2)
 
@@ -24507,6 +24537,7 @@ MI U
 
 Ertai
 Vanguard
+Hand -1, life +4
 Creatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
 VAN S
 
@@ -24743,6 +24774,7 @@ Sunburst (This enters the battlefield with a +1/+1 counter on it for each color 
 
 Etched Oracle Avatar
 Vanguard
+Hand +1, life -4
 You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.
 VAN S
 
@@ -24990,7 +25022,7 @@ SHM R
 Evermind
 (Blue)
 Instant - Arcane
- (Nonexistent mana costs can't be paid.)
+(Nonexistent mana costs can't be paid.)
 Draw a card.
 Splice onto Arcane {1}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
 SOK U
@@ -25836,6 +25868,7 @@ LE U, CH U, 5E U, 6E R, BD R, 7E R, 8ED R, DDC R, CMD R
 
 Fallen Angel Avatar
 Vanguard
+Hand +0, life -5
 Whenever a creature you control dies, target opponent loses 1 life and you gain 1 life.
 VAN S
 
@@ -26936,6 +26969,7 @@ EVE R, PD2 R
 
 Figure of Destiny Avatar
 Vanguard
+Hand +0, life +3
 {X}: Put a +1/+1 counter on target creature with fewer than X +1/+1 counters on it.
 VAN S
 
@@ -27492,7 +27526,7 @@ EVE C
 Flame Javelin
 {2/R}{2/R}{2/R}
 Instant
- ({2/R} can be paid with any two mana or with {R}. This card's converted mana cost is 6.)
+({2/R} can be paid with any two mana or with {R}. This card's converted mana cost is 6.)
 Flame Javelin deals 4 damage to target creature or player.
 SHM U, DD2 U
 
@@ -27641,6 +27675,7 @@ PS U, DD2 U, HOP U, CMD U
 
 Flametongue Kavu Avatar
 Vanguard
+Hand +0, life -6
 Whenever a nontoken creature enters the battlefield under your control, that creature deals X damage to target creature, where X is a number chosen at random from 0 to 4.
 VAN S
 
@@ -28995,6 +29030,7 @@ MI R
 
 Frenetic Efreet Avatar
 Vanguard
+Hand -1, life -3
 Each permanent you control has phasing. (It phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)
 At the beginning of your end step, flip a coin. If you win the flip, take an extra turn after this one.
 VAN S
@@ -29891,24 +29927,26 @@ M11 U
 Garruk Relentless
 {3}{G}
 Planeswalker - Garruk
-When Garruk Relentless has two or fewer loyalty counters on him, transform him.
-0: Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him.
-0: Put a 2/2 green Wolf creature token onto the battlefield.
+3
+[null] null
+[null] null
+[null] null
 ----
 Garruk, the Veil-Cursed
 (Black, Green)
 Planeswalker - Garruk
-+1: Put a 1/1 black Wolf creature token with deathtouch onto the battlefield.
--1: Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
--3: Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
+[+1] Put a 1/1 black Wolf creature token with deathtouch onto the battlefield.
+[-1] Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
+[-3] Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
 ISD M
 
 Garruk Wildspeaker
 {2}{G}{G}
 Planeswalker - Garruk
-+1: Untap two target lands.
--1: Put a 3/3 green Beast creature token onto the battlefield.
--4: Creatures you control get +3/+3 and gain trample until end of turn.
+3
+[+1] Untap two target lands.
+[-1] Put a 3/3 green Beast creature token onto the battlefield.
+[-4] Creatures you control get +3/+3 and gain trample until end of turn.
 LRW R, M10 M, DDD M, M11 M, CMD M
 
 Garruk's Companion
@@ -29937,9 +29975,10 @@ M11 U, M13 U
 Garruk, Primal Hunter
 {2}{G}{G}{G}
 Planeswalker - Garruk
-+1: Put a 3/3 green Beast creature token onto the battlefield.
--3: Draw cards equal to the greatest power among creatures you control.
--6: Put a 6/6 green Wurm creature token onto the battlefield for each land you control.
+3
+[+1] Put a 3/3 green Beast creature token onto the battlefield.
+[-3] Draw cards equal to the greatest power among creatures you control.
+[-6] Put a 6/6 green Wurm creature token onto the battlefield for each land you control.
 M12 M, M13 M
 
 Garza Zol, Plague Queen
@@ -30122,7 +30161,7 @@ IA C
 Gaze of the Gorgon
 {3}{B/G}
 Instant
- ({B/G} can be paid with either {B} or {G}.)
+({B/G} can be paid with either {B} or {G}.)
 Regenerate target creature. At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
 RAV C
 
@@ -30398,6 +30437,7 @@ DKA R
 
 Gerrard
 Vanguard
+Hand -4, life +0
 At the beginning of your draw step, draw an additional card.
 VAN S
 
@@ -30938,7 +30978,7 @@ Giant Solifuge
 {2}{R/G}{R/G}
 Creature - Insect
 4/1
- ({R/G} can be paid with either {R} or {G}.)
+({R/G} can be paid with either {R} or {G}.)
 Trample, haste, shroud (This permanent can't be the target of spells or abilities.)
 GPT R
 
@@ -31023,9 +31063,10 @@ CHK C
 Gideon Jura
 {3}{W}{W}
 Planeswalker - Gideon
-+2: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.
--2: Destroy target tapped creature.
-0: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
+6
+[+2] During target opponent's next turn, creatures that player controls attack Gideon Jura if able.
+[-2] Destroy target tapped creature.
+[null] null
 ROE M, M12 M
 
 Gideon's Avenger
@@ -31045,9 +31086,10 @@ M12 C
 Gideon, Champion of Justice
 {2}{W}{W}
 Planeswalker - Gideon
-+1: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.
-0: Until end of turn, Gideon, Champion of Justice becomes an indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.
--15: Exile all other permanents.
+4
+[+1] Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.
+[null] null
+[-15] Exile all other permanents.
 GTC M
 
 Gift of Estates
@@ -31204,13 +31246,14 @@ AVR M
 Gitaxian Probe
 {P/U}
 Sorcery
- ({P/U} can be paid with either {U} or 2 life.)
+({P/U} can be paid with either {U} or 2 life.)
 Look at target player's hand.
 Draw a card.
 NPH C
 
 Gix
 Vanguard
+Hand -2, life +18
 {3}: Return target creature card from your graveyard to your hand.
 VAN S
 
@@ -31369,7 +31412,7 @@ Gleancrawler
 {3}{B/G}{B/G}{B/G}
 Creature - Insect Horror
 6/6
- ({B/G} can be paid with either {B} or {G}.)
+({B/G} can be paid with either {B} or {G}.)
 Trample
 At the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
 RAV R, DDJ R
@@ -32635,6 +32678,7 @@ SCG U, EVG U
 
 Goblin Warchief Avatar
 Vanguard
+Hand +1, life +2
 Attacking creatures you control get +1/+0.
 VAN S (x2)
 
@@ -32684,7 +32728,7 @@ SHM R
 
 Godless Shrine
 Land - Plains Swamp
- ({T}: Add {W} or {B} to your mana pool.)
+({T}: Add {W} or {B} to your mana pool.)
 As Godless Shrine enters the battlefield, you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped.
 GPT R, GTC R
 
@@ -33611,7 +33655,7 @@ LE U
 
 Great Furnace
 Artifact Land
- (Great Furnace isn't a spell.)
+(Great Furnace isn't a spell.)
 {T}: Add {R} to your mana pool.
 MRD C, HOP C
 
@@ -33814,6 +33858,7 @@ NPH C
 
 Greven il-Vec
 Vanguard
+Hand -1, life +2
 Whenever a creature you control deals damage to a creature, destroy the other creature. It can't be regenerated.
 VAN S
 
@@ -34029,6 +34074,7 @@ ONS R
 
 Grinning Demon Avatar
 Vanguard
+Hand -1, life -2
 Whenever a nontoken creature you control dies, target opponent discards a card.
 VAN S (x2)
 
@@ -34363,7 +34409,7 @@ Gruul Guildmage
 {R/G}{R/G}
 Creature - Human Shaman
 2/2
- ({R/G} can be paid with either {R} or {G}.)
+({R/G} can be paid with either {R} or {G}.)
 {3}{R}, Sacrifice a land: Gruul Guildmage deals 2 damage to target player.
 {3}{G}: Target creature gets +2/+2 until end of turn.
 GPT U
@@ -34739,7 +34785,7 @@ ALA C
 Gut Shot
 {P/R}
 Instant
- ({P/R} can be paid with either {R} or 2 life.)
+({P/R} can be paid with either {R} or 2 life.)
 Gut Shot deals 1 damage to target creature or player.
 NPH U
 
@@ -34854,6 +34900,7 @@ CSP R
 
 Haakon, Stromgald Scourge Avatar
 Vanguard
+Hand +0, life -3
 Pay 1 life: You may play target creature card in your graveyard this turn.
 Whenever you play a creature card from your graveyard, it becomes a black Zombie Knight.
 If a Zombie Knight would be put into your graveyard from the battlefield, exile it instead.
@@ -35025,7 +35072,7 @@ EVE R
 
 Hallowed Fountain
 Land - Plains Island
- ({T}: Add {W} or {U} to your mana pool.)
+({T}: Add {W} or {U} to your mana pool.)
 As Hallowed Fountain enters the battlefield, you may pay 2 life. If you don't, Hallowed Fountain enters the battlefield tapped.
 DIS R, RTR R
 
@@ -35209,6 +35256,7 @@ CHK U
 
 Hanna
 Vanguard
+Hand +1, life -5
 Spells you cast cost {1} less to cast.
 VAN S
 
@@ -35950,6 +35998,7 @@ FUT R
 
 Heartwood Storyteller Avatar
 Vanguard
+Hand -1, life +4
 The first creature spell you cast each turn costs {1} less to cast.
 The first noncreature spell each opponent casts each turn costs {1} more to cast.
 VAN S
@@ -36180,6 +36229,7 @@ LE R, CH R, 9ED R
 
 Hell's Caretaker Avatar
 Vanguard
+Hand -1, life -4
 {3}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield.
 VAN S
 
@@ -36476,6 +36526,7 @@ ST R
 
 Hermit Druid Avatar
 Vanguard
+Hand -2, life -2
 At the beginning of your upkeep, put a land card from your library chosen at random onto the battlefield.
 VAN S
 
@@ -36748,6 +36799,7 @@ BOK R, PC2 R
 
 Higure, the Still Wind Avatar
 Vanguard
+Hand -1, life +3
 Whenever a nontoken creature you control deals combat damage to an opponent, choose a creature card at random from your library, reveal that card, and put it into your hand. Then shuffle your library.
 VAN S
 
@@ -38104,7 +38156,7 @@ ONS R
 
 I Bask in Your Silent Awe
 Ongoing Scheme
- (An ongoing scheme remains face up until it's abandoned.)
+(An ongoing scheme remains face up until it's abandoned.)
 Each opponent can't cast more than one spell each turn.
 At the beginning of your upkeep, if no opponent cast a spell since your last turn ended, abandon this scheme.
 ARC C
@@ -38121,7 +38173,7 @@ ARC C
 
 I Know All, I See All
 Ongoing Scheme
- (An ongoing scheme remains face up until it's abandoned.)
+(An ongoing scheme remains face up until it's abandoned.)
 Untap all permanents you control during each opponent's untap step.
 At the beginning of each end step, if three or more cards were put into your graveyard this turn from anywhere, abandon this scheme.
 ARC C
@@ -39381,6 +39433,7 @@ BOK R, PC2 R
 
 Ink-Eyes, Servant of Oni Avatar
 Vanguard
+Hand +0, life -3
 At the beginning of the game, look at target opponent's hand and choose a nonland card from it. That player discards that card.
 {X}, Pay X life: Put target creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control.
 VAN S
@@ -40323,7 +40376,7 @@ Izzet Guildmage
 {U/R}{U/R}
 Creature - Human Wizard
 2/2
- ({U/R} can be paid with either {U} or {R}.)
+({U/R} can be paid with either {U} or {R}.)
 {2}{U}: Copy target instant spell you control with converted mana cost 2 or less. You may choose new targets for the copy.
 {2}{R}: Copy target sorcery spell you control with converted mana cost 2 or less. You may choose new targets for the copy.
 GPT U, DDJ U
@@ -40373,9 +40426,10 @@ MI R
 Jace Beleren
 {1}{U}{U}
 Planeswalker - Jace
-+2: Each player draws a card.
--1: Target player draws a card.
--10: Target player puts the top twenty cards of his or her library into his or her graveyard.
+3
+[+2] Each player draws a card.
+[-1] Target player draws a card.
+[-10] Target player puts the top twenty cards of his or her library into his or her graveyard.
 LRW R, DD2 M, M10 M, M11 M
 
 Jace's Archivist
@@ -40408,26 +40462,29 @@ M13 U
 Jace, Architect of Thought
 {2}{U}{U}
 Planeswalker - Jace
-+1: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
--2: Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.
--8: For each player, search that player's library for a nonland card and exile it, then that player shuffles his or her library. You may cast those cards without paying their mana costs.
+4
+[+1] Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
+[-2] Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.
+[-8] For each player, search that player's library for a nonland card and exile it, then that player shuffles his or her library. You may cast those cards without paying their mana costs.
 RTR M
 
 Jace, Memory Adept
 {3}{U}{U}
 Planeswalker - Jace
-+1: Draw a card. Target player puts the top card of his or her library into his or her graveyard.
-0: Target player puts the top ten cards of his or her library into his or her graveyard.
--7: Any number of target players each draw twenty cards.
+4
+[+1] Draw a card. Target player puts the top card of his or her library into his or her graveyard.
+[null] null
+[-7] Any number of target players each draw twenty cards.
 M12 M, M13 M
 
 Jace, the Mind Sculptor
 {2}{U}{U}
 Planeswalker - Jace
-+2: Look at the top card of target player's library. You may put that card on the bottom of that player's library.
-0: Draw three cards, then put two cards from your hand on top of your library in any order.
--1: Return target creature to its owner's hand.
--12: Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.
+3
+[+2] Look at the top card of target player's library. You may put that card on the bottom of that player's library.
+[null] null
+[-1] Return target creature to its owner's hand.
+[-12] Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.
 WWK M
 
 Jackal Familiar
@@ -40623,6 +40680,7 @@ SHM U, DDG U, DDI U
 
 Jaya Ballard Avatar
 Vanguard
+Hand +0, life +1
 {X}: Jaya Ballard Avatar deals an amount of damage chosen at random from 0 to X to target creature or player. Activate this ability only once each turn.
 VAN S
 
@@ -40786,6 +40844,7 @@ FUT R
 
 Jhoira of the Ghitu Avatar
 Vanguard
+Hand +1, life +0
 {3}, Discard a card: Copy three instant cards chosen at random. You may cast one of the copies without paying its mana cost.
 {3}, Discard a card: Copy three sorcery cards chosen at random. You may cast one of the copies without paying its mana cost. Activate this ability only any time you could cast a sorcery.
 VAN S
@@ -41720,15 +41779,17 @@ OD R
 
 Karn
 Vanguard
+Hand +1, life +6
 Each noncreature artifact you control is an artifact creature with power and toughness each equal to its converted mana cost.
 VAN S
 
 Karn Liberated
 {7}
 Planeswalker - Karn
-+4: Target player exiles a card from his or her hand.
--3: Exile target permanent.
--14: Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.
+6
+[+4] Target player exiles a card from his or her hand.
+[-3] Exile target permanent.
+[-14] Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.
 NPH M
 
 Karn's Touch
@@ -41764,6 +41825,7 @@ SCG R
 
 Karona, False God Avatar
 Vanguard
+Hand -1, life +8
 At the beginning of your upkeep, exchange control of a permanent you control chosen at random and a permanent target opponent controls chosen at random.
 VAN S
 
@@ -43575,9 +43637,10 @@ HM U
 Koth of the Hammer
 {2}{R}{R}
 Planeswalker - Koth
-+1: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.
--2: Add {R} to your mana pool for each Mountain you control.
--5: You get an emblem with "Mountains you control have ' {T}: This land deals 1 damage to target creature or player.'"
+3
+[+1] Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.
+[-2] Add {R} to your mana pool for each Mountain you control.
+[-5] You get an emblem with "Mountains you control have ' {T}: This land deals 1 damage to target creature or player.'"
 SOM M, DDI M
 
 Koth's Courier
@@ -43699,6 +43762,7 @@ ALA M, V11 M
 
 Kresh the Bloodbraided Avatar
 Vanguard
+Hand +1, life -3
 Whenever a creature you control is devoured, put an X/X green Ooze creature token onto the battlefield, where X is the devoured creature's power.
 VAN S
 
@@ -44890,7 +44954,7 @@ TE U
 
 Leechridden Swamp
 Land - Swamp
- ({T}: Add {B} to your mana pool.)
+({T}: Add {B} to your mana pool.)
 Leechridden Swamp enters the battlefield tapped.
 {B}, {T}: Each opponent loses 1 life. Activate this ability only if you control two or more black permanents.
 SHM U, HOP U
@@ -45681,25 +45745,28 @@ LRW C, DDD C
 Liliana Vess
 {3}{B}{B}
 Planeswalker - Liliana
-+1: Target player discards a card.
--2: Search your library for a card, then shuffle your library and put that card on top of it.
--8: Put all creature cards from all graveyards onto the battlefield under your control.
+5
+[+1] Target player discards a card.
+[-2] Search your library for a card, then shuffle your library and put that card on top of it.
+[-8] Put all creature cards from all graveyards onto the battlefield under your control.
 LRW R, M10 M, DDD M, M11 M
 
 Liliana of the Dark Realms
 {2}{B}{B}
 Planeswalker - Liliana
-+1: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.
--3: Target creature gets +X/+X or -X/-X until end of turn, where X is the number of Swamps you control.
--6: You get an emblem with "Swamps you control have ' {T}: Add {B}{B}{B}{B} to your mana pool.'"
+3
+[+1] Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.
+[-3] Target creature gets +X/+X or -X/-X until end of turn, where X is the number of Swamps you control.
+[-6] You get an emblem with "Swamps you control have ' {T}: Add {B}{B}{B}{B} to your mana pool.'"
 M13 M
 
 Liliana of the Veil
 {1}{B}{B}
 Planeswalker - Liliana
-+1: Each player discards a card.
--2: Target player sacrifices a creature.
--6: Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice.
+3
+[+1] Each player discards a card.
+[-2] Target player sacrifices a creature.
+[-6] Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice.
 ISD M
 
 Liliana's Caress
@@ -46600,6 +46667,7 @@ RAV R, DDH R
 
 Loxodon Hierarch Avatar
 Vanguard
+Hand +0, life +12
 Sacrifice a permanent: Regenerate target creature you control.
 VAN S
 
@@ -46951,7 +47019,7 @@ Lurking Informant
 {1}{U/B}
 Creature - Human Rogue
 1/2
- ({U/B} can be paid with either {U} or {B}.)
+({U/B} can be paid with either {U} or {B}.)
 {2}, {T}: Look at the top card of target player's library. You may put that card into that player's graveyard.
 RAV C
 
@@ -47033,6 +47101,7 @@ FUT C
 
 Lyna
 Vanguard
+Hand +2, life -4
 Creatures you control have shadow. (They can block and be blocked only by creatures with shadow.)
 VAN S
 
@@ -47074,6 +47143,7 @@ DIS R
 
 Lyzolda, the Blood Witch Avatar
 Vanguard
+Hand -1, life -1
 Hellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
 Hellbent - At the beginning of your end step, if you have no cards in hand, each of your opponents discards a card.
 VAN S
@@ -47138,7 +47208,7 @@ AVR C
 
 Madblind Mountain
 Land - Mountain
- ({T}: Add {R} to your mana pool.)
+({T}: Add {R} to your mana pool.)
 Madblind Mountain enters the battlefield tapped.
 {R}, {T}: Shuffle your library. Activate this ability only if you control two or more red permanents.
 SHM U
@@ -47183,6 +47253,7 @@ CON M
 
 Maelstrom Archangel Avatar
 Vanguard
+Hand +0, life +5
 At end of combat, for each creature you controlled at the time it dealt combat damage to a player this turn, copy a random card with the same mana cost as that creature. You may pay {3}. If you do, choose one of those copies. If a copy of a permanent card is chosen, you may put a token onto the battlefield that's a copy of that card. If a copy of an instant or sorcery card is chosen, you may cast the copy without paying its mana cost.
 VAN S
 
@@ -47697,6 +47768,7 @@ CON M, CMD M
 
 Malfegor Avatar
 Vanguard
+Hand +2, life -2
 Whenever a creature enters the battlefield under your control, if it was unearthed, it gets +3/+0.
 Whenever a creature you control is exiled, if it was unearthed, shuffle that card into its owner's library.
 VAN S
@@ -48129,6 +48201,7 @@ MOR R
 
 Maralen of the Mornsong Avatar
 Vanguard
+Hand +0, life -3
 At the beginning of the game, you may pay any amount of life.
 You can't draw cards.
 At the beginning of your draw step, look at the top X cards of your library, where X is the amount of life paid with Maralen of the Mornsong Avatar. Put one of them into your hand, then shuffle your library.
@@ -48144,6 +48217,7 @@ IN R
 
 Maraxus
 Vanguard
+Hand +1, life +2
 Creatures you control get +1/+0.
 VAN S
 
@@ -48320,6 +48394,7 @@ MI R, 6E R, 7E R, 8ED R, 9ED R
 
 Maro Avatar
 Vanguard
+Hand +2, life -7
 Tap an untapped creature you control, Discard a card: Target creature you control gets +X/+X until end of turn, where X is the number of cards in your hand.
 VAN S
 
@@ -48342,7 +48417,7 @@ ARB U
 Marrow Shards
 {P/W}
 Instant
- ({P/W} can be paid with either {W} or 2 life.)
+({P/W} can be paid with either {W} or 2 life.)
 Marrow Shards deals 1 damage to each attacking creature.
 NPH U
 
@@ -48788,6 +48863,7 @@ M10 M
 
 Master of the Wild Hunt Avatar
 Vanguard
+Hand +1, life +3
 {2}{G}: Put a green creature token onto the battlefield that's a 2/2 Wolf, a 2/3 Antelope with forestwalk, a 3/2 Cat with shroud, or a 4/4 Rhino with trample, chosen at random.
 VAN S
 
@@ -48901,6 +48977,7 @@ ALA M
 
 Mayael the Anima Avatar
 Vanguard
+Hand +1, life +5
 At the beginning of your upkeep, reveal the top card of your library. If it's a creature card with power 5 or greater, put it into your hand. Otherwise, you may put it on the bottom of your library.
 VAN S
 
@@ -49198,7 +49275,7 @@ CG C
 Mental Misstep
 {P/U}
 Instant
- ({P/U} can be paid with either {U} or 2 life.)
+({P/U} can be paid with either {U} or 2 life.)
 Counter target spell with converted mana cost 1.
 NPH U
 
@@ -50371,7 +50448,7 @@ Minister of Impediments
 {2}{W/U}
 Creature - Human Advisor
 1/1
- ({W/U} can be paid with either {W} or {U}.)
+({W/U} can be paid with either {W} or {U}.)
 {T}: Tap target creature.
 DIS C
 
@@ -50511,6 +50588,7 @@ MBS C
 
 Mirri
 Vanguard
+Hand +0, life +5
 If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type.
 VAN S
 
@@ -50524,6 +50602,7 @@ PLC R
 
 Mirri the Cursed Avatar
 Vanguard
+Hand -2, life -3
 Creatures you control have "{T}: Another target creature gets -1/-1 until end of turn. Put a +1/+1 counter on this creature."
 VAN S
 
@@ -50557,6 +50636,7 @@ LRW R
 
 Mirror Entity Avatar
 Vanguard
+Hand +1, life -2
 {X}: Choose a creature type. Until end of turn, creatures you control of the chosen type become X/X and gain all creature types.
 VAN S
 
@@ -50710,6 +50790,7 @@ SCG C
 
 Mishra
 Vanguard
+Hand +0, life -3
 If a creature you control would deal damage, it deals double that damage instead.
 VAN S
 
@@ -50967,7 +51048,7 @@ DIS U
 
 Mistveil Plains
 Land - Plains
- ({T}: Add {W} to your mana pool.)
+({T}: Add {W} to your mana pool.)
 Mistveil Plains enters the battlefield tapped.
 {W}, {T}: Put target card from your graveyard on the bottom of your library. Activate this ability only if you control two or more white permanents.
 SHM U
@@ -51388,7 +51469,7 @@ Moltensteel Dragon
 {4}{P/R}{P/R}
 Artifact Creature - Dragon
 4/4
- ({P/R} can be paid with either {R} or 2 life.)
+({P/R} can be paid with either {R} or 2 life.)
 Flying
 {P/R}: Moltensteel Dragon gets +1/+0 until end of turn.
 NPH R
@@ -51458,6 +51539,7 @@ DIS R
 
 Momir Vig, Simic Visionary Avatar
 Vanguard
+Hand +0, life +4
 {X}, Discard a card: Put a token onto the battlefield that's a copy of a creature card with converted mana cost X chosen at random. Activate this ability only any time you could cast a sorcery and only once each turn.
 VAN S
 
@@ -51640,7 +51722,7 @@ ISD C
 
 Moonring Island
 Land - Island
- ({T}: Add {U} to your mana pool.)
+({T}: Add {U} to your mana pool.)
 Moonring Island enters the battlefield tapped.
 {U}, {T}: Look at the top card of target player's library. Activate this ability only if you control two or more blue permanents.
 SHM U
@@ -51781,6 +51863,7 @@ WL R
 
 Morinfen Avatar
 Vanguard
+Hand +0, life +30
 At the beginning of your upkeep, you lose 1 life for each permanent you control.
 VAN S
 
@@ -52120,7 +52203,7 @@ Mourning Thrull
 {1}{W/B}
 Creature - Thrull
 1/1
- ({W/B} can be paid with either {W} or {B}.)
+({W/B} can be paid with either {W} or {B}.)
 Flying
 Whenever Mourning Thrull deals damage, you gain that much life.
 GPT C
@@ -52300,6 +52383,7 @@ LRW C, DD2 C, CMD C
 
 Multani
 Vanguard
+Hand -3, life -2
 Creatures you control get +X/+0, where X is the number of cards in your hand.
 VAN S
 
@@ -52408,6 +52492,7 @@ SHM U
 
 Murderous Redcap Avatar
 Vanguard
+Hand +0, life -2
 Whenever a creature enters the battlefield under your control with a counter on it, you may have it deal damage equal to its power to target creature or player.
 VAN S
 
@@ -52441,7 +52526,7 @@ EVE R
 
 Murmuring Bosk
 Land - Forest
- ({T}: Add {G} to your mana pool.)
+({T}: Add {G} to your mana pool.)
 As Murmuring Bosk enters the battlefield, you may reveal a Treefolk card from your hand. If you don't, Murmuring Bosk enters the battlefield tapped.
 {T}: Add {W} or {B} to your mana pool. Murmuring Bosk deals 1 damage to you.
 MOR R, V12 M
@@ -52483,7 +52568,7 @@ IA R, ME2 R
 Mutagenic Growth
 {P/G}
 Instant
- ({P/G} can be paid with either {G} or 2 life.)
+({P/G} can be paid with either {G} or 2 life.)
 Target creature gets +2/+2 until end of turn.
 NPH C
 
@@ -52544,7 +52629,7 @@ ARC C
 
 My Undead Horde Awakens
 Ongoing Scheme
- (An ongoing scheme remains face up until it's abandoned.)
+(An ongoing scheme remains face up until it's abandoned.)
 At the beginning of your end step, you may put target creature card from an opponent's graveyard onto the battlefield under your control.
 When a creature put onto the battlefield with this scheme dies, abandon this scheme.
 ARC C
@@ -53285,7 +53370,7 @@ ARC C
 
 Nature Shields Its Own
 Ongoing Scheme
- (An ongoing scheme remains face up until it's abandoned.)
+(An ongoing scheme remains face up until it's abandoned.)
 Whenever a creature attacks and isn't blocked, if you're the defending player, put a 0/1 green Plant creature token onto the battlefield blocking that creature.
 When four or more creatures attack you, abandon this scheme at end of combat.
 ARC C
@@ -53619,6 +53704,7 @@ IA R, 5E R, ME2 R, V09 M
 
 Necropotence Avatar
 Vanguard
+Hand +0, life +4
 Skip your draw step.
 At the beginning of your end step, if it's not the first turn of the game, put a death counter on Necropotence Avatar. You draw X cards and you lose X life, where X is the number of death counters on Necropotence Avatar.
 VAN S
@@ -53781,6 +53867,7 @@ VI U, BR U, 8ED U, 9ED U, 10E U
 
 Nekrataal Avatar
 Vanguard
+Hand -1, life -4
 Creature spells you cast cost {B} less to cast. This effect reduces only the amount of colored mana you pay.
 VAN S
 
@@ -54186,9 +54273,10 @@ LE R, CH R, TSB S, DRB R, ME3 R
 Nicol Bolas, Planeswalker
 {4}{U}{B}{B}{R}
 Planeswalker - Bolas
-+3: Destroy target noncreature permanent.
--2: Gain control of target creature.
--9: Nicol Bolas, Planeswalker deals 7 damage to target player. That player discards seven cards, then sacrifices seven permanents.
+5
+[+3] Destroy target noncreature permanent.
+[-2] Gain control of target creature.
+[-9] Nicol Bolas, Planeswalker deals 7 damage to target player. That player discards seven cards, then sacrifices seven permanents.
 CON M, DDH M, M13 M
 
 Night Dealings
@@ -54582,9 +54670,10 @@ ROE M
 Nissa Revane
 {2}{G}{G}
 Planeswalker - Nissa
-+1: Search your library for a card named Nissa's Chosen and put it onto the battlefield. Then shuffle your library.
-+1: You gain 2 life for each Elf you control.
--7: Search your library for any number of Elf creature cards and put them onto the battlefield. Then shuffle your library.
+2
+[+1] Search your library for a card named Nissa's Chosen and put it onto the battlefield. Then shuffle your library.
+[+1] You gain 2 life for each Elf you control.
+[-7] Search your library for any number of Elf creature cards and put them onto the battlefield. Then shuffle your library.
 ZEN M
 
 Nissa's Chosen
@@ -54843,7 +54932,7 @@ TSP R
 Norn's Annex
 {3}{P/W}{P/W}
 Artifact
- ({P/W} can be paid with either {W} or 2 life.)
+({P/W} can be paid with either {W} or 2 life.)
 Creatures can't attack you or a planeswalker you control unless their controller pays {P/W} for each of those creatures.
 NPH R
 
@@ -54931,7 +55020,7 @@ ROE U
 
 Nothing Can Stop Me Now
 Ongoing Scheme
- (An ongoing scheme remains face up until it's abandoned.)
+(An ongoing scheme remains face up until it's abandoned.)
 If a source an opponent controls would deal damage to you, prevent 1 of that damage.
 At the beginning of each end step, if you've been dealt 5 or more damage this turn, abandon this scheme.
 ARC C
@@ -55032,7 +55121,7 @@ EVE U
 Noxious Revival
 {P/G}
 Instant
- ({P/G} can be paid with either {G} or 2 life.)
+({P/G} can be paid with either {G} or 2 life.)
 Put target card from a graveyard on top of its owner's library.
 NPH U
 
@@ -55832,6 +55921,7 @@ SOK U, CMD U
 
 Oni of Wild Places Avatar
 Vanguard
+Hand +0, life -2
 Creatures you control have haste.
 At the beginning of your upkeep, return a creature you control to its owner's hand.
 VAN S
@@ -56066,6 +56156,7 @@ IN C
 
 Oracle
 Vanguard
+Hand +1, life +9
 {0}: Untap target attacking creature you control and remove it from combat.
 VAN S
 
@@ -56288,6 +56379,7 @@ IA R, 5E R, ME2 R
 
 Orcish Squatters Avatar
 Vanguard
+Hand -1, life -1
 At the beginning of your precombat main phase, add {X} to your mana pool, where X is the number of lands target opponent controls.
 VAN S
 
@@ -56422,6 +56514,7 @@ SOM C
 
 Orim
 Vanguard
+Hand +0, life +12
 Creatures you control have reach.
 VAN S
 
@@ -56771,7 +56864,7 @@ AP R
 
 Overgrown Tomb
 Land - Swamp Forest
- ({T}: Add {B} or {G} to your mana pool.)
+({T}: Add {B} or {G} to your mana pool.)
 As Overgrown Tomb enters the battlefield, you may pay 2 life. If you don't, Overgrown Tomb enters the battlefield tapped.
 RAV R, RTR R
 
@@ -57716,6 +57809,7 @@ WL R
 
 Peacekeeper Avatar
 Vanguard
+Hand +0, life +9
 {3}: For each opponent who controls a creature, put a token onto the battlefield that's a copy of a card named Arrest and attach it to a creature that player controls chosen at random.
 VAN S
 
@@ -58174,7 +58268,7 @@ Petrahydrox
 {3}{U/R}
 Creature - Weird
 3/3
- ({U/R} can be paid with either {U} or {R}.)
+({U/R} can be paid with either {U} or {R}.)
 When Petrahydrox becomes the target of a spell or ability, return Petrahydrox to its owner's hand.
 GPT C
 
@@ -58227,6 +58321,7 @@ LGN R, 10E R
 
 Phage the Untouchable Avatar
 Vanguard
+Hand +0, life -5
 Pay 1 life: Until end of turn, whenever a creature deals combat damage to you, destroy that creature.
 Pay 1 life: Until end of turn, whenever target creature you control deals combat damage to a creature, destroy the damaged creature.
 VAN S
@@ -58699,7 +58794,7 @@ Phyrexian Metamorph
 {3}{P/U}
 Artifact Creature - Shapeshifter
 0/0
- ({P/U} can be paid with either {U} or 2 life.)
+({P/U} can be paid with either {U} or 2 life.)
 You may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
 NPH R
 
@@ -59193,7 +59288,7 @@ Pith Driller
 {4}{P/B}
 Artifact Creature - Horror
 2/4
- ({P/B} can be paid with either {B} or 2 life.)
+({P/B} can be paid with either {B} or 2 life.)
 When Pith Driller enters the battlefield, put a -1/-1 counter on target creature.
 NPH C
 
@@ -59518,6 +59613,7 @@ MRD R, 10E R, M10 M, M11 M
 
 Platinum Angel Avatar
 Vanguard
+Hand -1, life -2
 If you control an artifact, a creature, an enchantment, and a land, you can't lose the game and your opponents can't win the game.
 VAN S (x2)
 
@@ -59729,7 +59825,7 @@ Porcelain Legionnaire
 {2}{P/W}
 Artifact Creature - Soldier
 3/1
- ({P/W} can be paid with either {W} or 2 life.)
+({P/W} can be paid with either {W} or 2 life.)
 First strike
 NPH C
 
@@ -59802,7 +59898,7 @@ At the beginning of each end step, each player sacrifices a permanent unless he 
 Postmortem Lunge
 {X}{P/B}
 Sorcery
- ({P/B} can be paid with either {B} or 2 life.)
+({P/B} can be paid with either {B} or 2 life.)
 Return target creature card with converted mana cost X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
 NPH U
 
@@ -60558,7 +60654,7 @@ CG U
 Privileged Position
 {2}{G/W}{G/W}{G/W}
 Enchantment
- ({G/W} can be paid with either {G} or {W}.)
+({G/W} can be paid with either {G} or {W}.)
 Other permanents you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
 RAV R
 
@@ -60608,6 +60704,7 @@ Creature - Human Wizard
 
 Prodigal Sorcerer Avatar
 Vanguard
+Hand +0, life +5
 At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
 VAN S (x2)
 
@@ -62089,7 +62186,7 @@ DIS U
 Rage Extractor
 {4}{P/R}
 Artifact
- ({P/R} can be paid with either {R} or 2 life.)
+({P/R} can be paid with either {R} or 2 life.)
 Whenever you cast a spell with {P} in its mana cost, Rage Extractor deals damage equal to that spell's converted mana cost to target creature or player.
 NPH U
 
@@ -62396,7 +62493,7 @@ Rakdos Guildmage
 {B/R}{B/R}
 Creature - Zombie Shaman
 2/2
- ({B/R} can be paid with either {B} or {R}.)
+({B/R} can be paid with either {B} or {R}.)
 {3}{B}, Discard a card: Target creature gets -2/-2 until end of turn.
 {3}{R}: Put a 2/1 red Goblin creature token with haste onto the battlefield. Exile it at the beginning of the next end step.
 DIS U, ARC U
@@ -62523,6 +62620,7 @@ As long as Raksha Golden Cub is equipped, Cat creatures you control get +2/+2 an
 
 Raksha Golden Cub Avatar
 Vanguard
+Hand +1, life +9
 Creatures you control get +0/+1.
 Equipped creatures you control get +1/+0 and have first strike.
 VAN S
@@ -63319,13 +63417,14 @@ Reaper King
 {2/W}{2/U}{2/B}{2/R}{2/G}
 Legendary Artifact Creature - Scarecrow
 6/6
- ({2/W} can be paid with any two mana or with {W}. This card's converted mana cost is 10.)
+({2/W} can be paid with any two mana or with {W}. This card's converted mana cost is 10.)
 Other Scarecrow creatures you control get +1/+1.
 Whenever another Scarecrow enters the battlefield under your control, destroy target permanent.
 SHM R
 
 Reaper King Avatar
 Vanguard
+Hand -2, life -5
 Each creature you control gets +1/+1 for each of its colors.
 VAN S
 
@@ -65264,7 +65363,7 @@ AVR C
 Riot Spikes
 {B/R}
 Enchantment - Aura
- ({B/R} can be paid with either {B} or {R}.)
+({B/R} can be paid with either {B} or {R}.)
 Enchant creature
 Enchanted creature gets +2/-1.
 DIS C
@@ -65540,6 +65639,7 @@ IN R, DRB R, DDE R
 
 Rith, the Awakener Avatar
 Vanguard
+Hand +0, life +6
 Whenever a creature you control deals combat damage to a player, you may pay {5}. If you do, put a 5/5 red Dragon creature token with flying onto the battlefield.
 VAN S (x2)
 
@@ -65839,6 +65939,7 @@ Artifact
 
 Rofellos
 Vanguard
+Hand -2, life +4
 Whenever a creature you control dies, draw a card.
 VAN S
 
@@ -66329,6 +66430,7 @@ Creature - Human Assassin
 
 Royal Assassin Avatar
 Vanguard
+Hand -2, life +0
 At the beginning of your upkeep, you draw a card and you lose 1 life.
 VAN S (x2)
 
@@ -66500,6 +66602,7 @@ GPT R, HOP R
 
 Rumbling Slum Avatar
 Vanguard
+Hand +1, life +1
 At the beginning of your upkeep, Rumbling Slum Avatar deals 1 damage to each opponent.
 VAN S
 
@@ -66879,7 +66982,7 @@ WWK C
 Ruthless Invasion
 {3}{P/R}
 Sorcery
- ({P/R} can be paid with either {R} or 2 life.)
+({P/R} can be paid with either {R} or 2 life.)
 Nonartifact creatures can't block this turn.
 NPH C
 
@@ -66978,7 +67081,7 @@ IA U, 5E U, ME2 U
 
 Sacred Foundry
 Land - Mountain Plains
- ({T}: Add {R} or {W} to your mana pool.)
+({T}: Add {R} or {W} to your mana pool.)
 As Sacred Foundry enters the battlefield, you may pay 2 life. If you don't, Sacred Foundry enters the battlefield tapped.
 RAV R, GTC R
 
@@ -67217,6 +67320,7 @@ SOK R
 
 Sakashima the Impostor Avatar
 Vanguard
+Hand +0, life +1
 {2}: Choose a creature you control. It becomes a copy of target creature except for its name.
 VAN S
 
@@ -67758,7 +67862,7 @@ IN R
 
 Sapseep Forest
 Land - Forest
- ({T}: Add {G} to your mana pool.)
+({T}: Add {G} to your mana pool.)
 Sapseep Forest enters the battlefield tapped.
 {G}, {T}: You gain 1 life. Activate this ability only if you control two or more green permanents.
 SHM U, DDH U
@@ -67789,17 +67893,19 @@ FUT C, HOP C
 Sarkhan Vol
 {2}{R}{G}
 Planeswalker - Sarkhan
-+1: Creatures you control get +1/+1 and gain haste until end of turn.
--2: Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
--6: Put five 4/4 red Dragon creature tokens with flying onto the battlefield.
+4
+[+1] Creatures you control get +1/+1 and gain haste until end of turn.
+[-2] Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+[-6] Put five 4/4 red Dragon creature tokens with flying onto the battlefield.
 ALA M
 
 Sarkhan the Mad
 {3}{B}{R}
 Planeswalker - Sarkhan
-0: Reveal the top card of your library and put it into your hand. Sarkhan the Mad deals damage to himself equal to that card's converted mana cost.
--2: Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.
--4: Each Dragon creature you control deals damage equal to its power to target player.
+7
+[null] null
+[-2] Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.
+[-4] Each Dragon creature you control deals damage equal to its power to target player.
 ROE M
 
 Sarpadian Empires, Vol. VII
@@ -69185,7 +69291,7 @@ AL U
 
 Seat of the Synod
 Artifact Land
- (Seat of the Synod isn't a spell.)
+(Seat of the Synod isn't a spell.)
 {T}: Add {U} to your mana pool.
 MRD C, HOP C, DDF C
 
@@ -69572,6 +69678,7 @@ WWK R
 
 Selenia
 Vanguard
+Hand +1, life +7
 Creatures you control have vigilance.
 VAN S
 
@@ -69962,6 +70069,7 @@ IN C
 
 Serra
 Vanguard
+Hand +1, life +1
 Creatures you control get +0/+2.
 VAN S
 
@@ -69983,6 +70091,7 @@ Vigilance (Attacking doesn't cause this creature to tap.)
 
 Serra Angel Avatar
 Vanguard
+Hand +0, life -1
 Whenever you cast a spell, you gain 2 life.
 VAN S (x2)
 
@@ -70161,6 +70270,7 @@ CHK R
 
 Seshiro the Anointed Avatar
 Vanguard
+Hand +0, life -1
 At the beginning of the game, choose a creature type. Creatures you control, creature spells you control, and creature cards you own in any zone other than the battlefield or the stack have the chosen type in addition to their other types.
 VAN S
 
@@ -70336,7 +70446,7 @@ TSP C
 Shadow of Doubt
 {U/B}{U/B}
 Instant
- ({U/B} can be paid with either {U} or {B}.)
+({U/B} can be paid with either {U} or {B}.)
 Players can't search libraries this turn.
 Draw a card.
 RAV R
@@ -70868,7 +70978,7 @@ GTC C
 Shielding Plax
 {2}{G/U}
 Enchantment - Aura
- ({G/U} can be paid with either {G} or {U}.)
+({G/U} can be paid with either {G} or {U}.)
 Enchant creature
 When Shielding Plax enters the battlefield, draw a card.
 Enchanted creature can't be the target of spells or abilities your opponents control.
@@ -71646,6 +71756,7 @@ MI R
 
 Sidar Kondo
 Vanguard
+Hand -1, life +12
 {3}: Target creature gets +3/+3 until end of turn.
 VAN S
 
@@ -72158,7 +72269,7 @@ Simic Guildmage
 {G/U}{G/U}
 Creature - Elf Wizard
 2/2
- ({G/U} can be paid with either {G} or {U}.)
+({G/U} can be paid with either {G} or {U}.)
 {1}{G}: Move a +1/+1 counter from target creature onto another target creature with the same controller.
 {1}{U}: Attach target Aura enchanting a permanent to another permanent with the same controller.
 DIS U
@@ -72340,6 +72451,7 @@ MI U
 
 Sisay
 Vanguard
+Hand -2, life -3
 Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
 VAN S
 
@@ -72368,6 +72480,7 @@ RAV R
 
 Sisters of Stone Death Avatar
 Vanguard
+Hand +1, life -5
 Each creature you control must be blocked if able.
 {4}: Exile target creature that's blocking a creature you control.
 VAN S
@@ -73318,7 +73431,7 @@ Slash Panther
 {4}{P/R}
 Artifact Creature - Cat
 4/2
- ({P/R} can be paid with either {R} or 2 life.)
+({P/R} can be paid with either {R} or 2 life.)
 Haste
 NPH C
 
@@ -73668,11 +73781,13 @@ ST R
 
 Sliver Queen Avatar
 Vanguard
+Hand +0, life +7
 Whenever you cast a non-Sliver creature spell, exile that spell. If you do, put a token onto the battlefield that's a copy of a random non-Shapeshifter Sliver creature card with the same converted mana cost as that spell.
 VAN S
 
 Sliver Queen, Brood Mother
 Vanguard
+Hand +0, life +8
 {3}: Put a 1/1 colorless Sliver creature token onto the battlefield.
 VAN S
 
@@ -74611,9 +74726,10 @@ PO C
 Sorin Markov
 {3}{B}{B}{B}
 Planeswalker - Sorin
-+2: Sorin Markov deals 2 damage to target creature or player and you gain 2 life.
--3: Target opponent's life total becomes 10.
--7: You control target player during that player's next turn.
+4
+[+2] Sorin Markov deals 2 damage to target creature or player and you gain 2 life.
+[-3] Target opponent's life total becomes 10.
+[-7] You control target player during that player's next turn.
 ZEN M, M12 M
 
 Sorin's Thirst
@@ -74631,9 +74747,10 @@ M12 R
 Sorin, Lord of Innistrad
 {2}{W}{B}
 Planeswalker - Sorin
-+1: Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
--2: You get an emblem with "Creatures you control get +1/+0."
--6: Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
+3
+[+1] Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
+[-2] You get an emblem with "Creatures you control get +1/+0."
+[-6] Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
 DKA M
 
 Sorrow's Path
@@ -75329,7 +75446,7 @@ AVR C
 Spectral Procession
 {2/W}{2/W}{2/W}
 Sorcery
- ({2/W} can be paid with any two mana or with {W}. This card's converted mana cost is 6.)
+({2/W} can be paid with any two mana or with {W}. This card's converted mana cost is 6.)
 Put three 1/1 white Spirit creature tokens with flying onto the battlefield.
 SHM U
 
@@ -75972,7 +76089,7 @@ Spined Thopter
 {2}{P/U}
 Artifact Creature - Thopter
 2/1
- ({P/U} can be paid with either {U} or 2 life.)
+({P/U} can be paid with either {U} or 2 life.)
 Flying
 NPH C
 
@@ -76723,6 +76840,7 @@ DIS U
 
 Squee
 Vanguard
+Hand +3, life -4
 Your opponents play with their hands revealed.
 VAN S
 
@@ -76755,6 +76873,7 @@ MM R, 10E R
 
 Squee, Goblin Nabob Avatar
 Vanguard
+Hand +3, life -4
 {1}: Prevent the next 1 damage that would be dealt to target creature you control this turn.
 VAN S
 
@@ -76914,6 +77033,7 @@ MI C, PO C, 6E C, PK C, 10E C
 
 Stalking Tiger Avatar
 Vanguard
+Hand +0, life +2
 Whenever you cast a creature spell, you may pay {1}. If you do, draw a card.
 VAN S
 
@@ -77052,6 +77172,7 @@ PS U, 8ED U
 
 Starke
 Vanguard
+Hand +0, life -2
 At the beginning of your draw step, you may draw an additional card. If you do, put a card from your hand on the bottom of your library.
 VAN S
 
@@ -77227,7 +77348,7 @@ CSP U
 
 Steam Vents
 Land - Island Mountain
- ({T}: Add {U} or {R} to your mana pool.)
+({T}: Add {U} or {R} to your mana pool.)
 As Steam Vents enters the battlefield, you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped.
 GPT R, RTR R
 
@@ -77636,7 +77757,7 @@ ROE C
 
 Stomping Ground
 Land - Mountain Forest
- ({T}: Add {R} or {G} to your mana pool.)
+({T}: Add {R} or {G} to your mana pool.)
 As Stomping Ground enters the battlefield, you may pay 2 life. If you don't, Stomping Ground enters the battlefield tapped.
 GPT R, GTC R
 
@@ -77774,6 +77895,7 @@ MOR R
 
 Stonehewer Giant Avatar
 Vanguard
+Hand +1, life -5
 Whenever a creature enters the battlefield under your control, put a token onto the battlefield that's a copy of a random Equipment card with converted mana cost less than or equal to that creature's converted mana cost. Attach that Equipment to that creature.
 VAN S
 
@@ -78477,6 +78599,7 @@ TSP R, M13 R
 
 Stuffy Doll Avatar
 Vanguard
+Hand +0, life -6
 {0}: If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
 VAN S
 
@@ -79222,7 +79345,7 @@ LRW R
 Surgical Extraction
 {P/B}
 Instant
- ({P/B} can be paid with either {B} or 2 life.)
+({P/B} can be paid with either {B} or 2 life.)
 Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.
 NPH R
 
@@ -79927,6 +80050,7 @@ RTR U
 
 Tahngarth
 Vanguard
+Hand -1, life +7
 Creatures you control have haste.
 VAN S
 
@@ -80042,6 +80166,7 @@ ROE R
 
 Takara
 Vanguard
+Hand +3, life -8
 Sacrifice a creature: Takara deals 1 damage to target creature or player.
 VAN S
 
@@ -80283,9 +80408,10 @@ CSP R
 Tamiyo, the Moon Sage
 {3}{U}{U}
 Planeswalker - Tamiyo
-+1: Tap target permanent. It doesn't untap during its controller's next untap step.
--2: Draw a card for each tapped creature target player controls.
--8: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
+4
+[+1] Tap target permanent. It doesn't untap during its controller's next untap step.
+[-2] Draw a card for each tapped creature target player controls.
+[-8] You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
 AVR M
 
 Tandem Lookout
@@ -80605,6 +80731,7 @@ RTR U
 
 Tawnos
 Vanguard
+Hand +3, life -4
 You may cast artifact, creature, and enchantment spells as though they had flash.
 VAN S
 
@@ -81023,7 +81150,7 @@ P2 U
 
 Temple Garden
 Land - Forest Plains
- ({T}: Add {G} or {W} to your mana pool.)
+({T}: Add {G} or {W} to your mana pool.)
 As Temple Garden enters the battlefield, you may pay 2 life. If you don't, Temple Garden enters the battlefield tapped.
 RAV R, RTR R
 
@@ -81401,30 +81528,33 @@ GPT R
 
 Teysa, Orzhov Scion Avatar
 Vanguard
+Hand +0, life -2
 Whenever a nontoken creature dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
 VAN S
 
 Tezzeret the Seeker
 {3}{U}{U}
 Planeswalker - Tezzeret
-+1: Untap up to two target artifacts.
--X: Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
--5: Artifacts you control become 5/5 artifact creatures until end of turn.
+4
+[+1] Untap up to two target artifacts.
+[null] null
+[-5] Artifacts you control become 5/5 artifact creatures until end of turn.
 ALA M, DDF M
 
 Tezzeret's Gambit
 {3}{P/U}
 Sorcery
- ({P/U} can be paid with either {U} or 2 life.)
+({P/U} can be paid with either {U} or 2 life.)
 Draw two cards, then proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
 NPH U
 
 Tezzeret, Agent of Bolas
 {2}{U}{B}
 Planeswalker - Tezzeret
-+1: Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
--1: Target artifact becomes a 5/5 artifact creature.
--4: Target player loses X life and you gain X life, where X is twice the number of artifacts you control.
+3
+[+1] Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+[-1] Target artifact becomes a 5/5 artifact creature.
+[-4] Target player loses X life and you gain X life, where X is twice the number of artifacts you control.
 MBS M
 
 Thada Adel, Acquisitor
@@ -81690,7 +81820,7 @@ CHK R
 
 The Very Soil Shall Shake
 Ongoing Scheme
- (An ongoing scheme remains face up until it's abandoned.)
+(An ongoing scheme remains face up until it's abandoned.)
 Creatures you control get +2/+2 and have trample.
 When a creature you control dies, abandon this scheme.
 ARC C
@@ -82665,7 +82795,7 @@ Thundering Tanadon
 {4}{P/G}{P/G}
 Artifact Creature - Beast
 5/4
- ({P/G} can be paid with either {G} or 2 life.)
+({P/G} can be paid with either {G} or 2 life.)
 Trample
 NPH C
 
@@ -82757,9 +82887,10 @@ MM U
 Tibalt, the Fiend-Blooded
 {R}{R}
 Planeswalker - Tibalt
-+1: Draw a card, then discard a card at random.
--4: Tibalt, the Fiend-Blooded deals damage equal to the number of cards in target player's hand to that player.
--6: Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
+2
+[+1] Draw a card, then discard a card at random.
+[-4] Tibalt, the Fiend-Blooded deals damage equal to the number of cards in target player's hand to that player.
+[-6] Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
 AVR M
 
 Tibor and Lumia
@@ -83231,6 +83362,7 @@ MOR R
 
 Titania
 Vanguard
+Hand +2, life -5
 You may play an additional land on each of your turns.
 VAN S
 
@@ -83815,7 +83947,7 @@ FE R
 Tower Above
 {2/G}{2/G}{2/G}
 Sorcery
- ({2/G} can be paid with any two mana or with {G}. This card's converted mana cost is 6.)
+({2/G} can be paid with any two mana or with {G}. This card's converted mana cost is 6.)
 Until end of turn, target creature gets +4/+4 and gains trample, wither, and "When this creature attacks, target creature blocks it this turn if able." (It deals damage to creatures in the form of -1/-1 counters.)
 SHM U
 
@@ -84007,6 +84139,7 @@ TE R
 
 Tradewind Rider Avatar
 Vanguard
+Hand +1, life +4
 {3}: Each player returns a permanent he or she controls to its owner's hand unless he or she pays 2 life.
 VAN S (x2)
 
@@ -84434,7 +84567,7 @@ ISD M
 
 Tree of Tales
 Artifact Land
- (Tree of Tales isn't a spell.)
+(Tree of Tales isn't a spell.)
 {T}: Add {G} to your mana pool.
 MRD C, HOP C
 
@@ -85331,6 +85464,7 @@ Two-Headed Giant of Foriys can block an additional creature.
 
 Two-Headed Giant of Foriys Avatar
 Vanguard
+Hand +1, life -4
 Each creature you control can block an additional creature each combat.
 Each creature you control can't be blocked except by two or more creatures.
 VAN S
@@ -86271,6 +86405,7 @@ CSP U
 
 Urza
 Vanguard
+Hand -1, life +10
 {3}: Urza deals 1 damage to target creature or player.
 VAN S
 
@@ -86583,6 +86718,7 @@ M10 M, M13 M
 
 Vampire Nocturnus Avatar
 Vanguard
+Hand -1, life -2
 Play with the top card of your library revealed.
 As long as the top card of your library is black, black creatures you control get +2/+1.
 VAN S
@@ -86789,7 +86925,7 @@ Vault Skirge
 {1}{P/B}
 Artifact Creature - Imp
 1/1
- ({P/B} can be paid with either {B} or 2 life.)
+({P/B} can be paid with either {B} or 2 life.)
 Flying
 Lifelink (Damage dealt by this creature also causes you to gain that much life.)
 NPH C
@@ -86802,7 +86938,7 @@ SOM C
 
 Vault of Whispers
 Artifact Land
- (Vault of Whispers isn't a spell.)
+(Vault of Whispers isn't a spell.)
 {T}: Add {B} to your mana pool.
 MRD C, HOP C
 
@@ -87266,9 +87402,10 @@ FUT R
 Venser, the Sojourner
 {3}{W}{U}
 Planeswalker - Venser
-+2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
--1: Creatures are unblockable this turn.
--8: You get an emblem with "Whenever you cast a spell, exile target permanent."
+3
+[+2] Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
+[-1] Creatures are unblockable this turn.
+[-8] You get an emblem with "Whenever you cast a spell, exile target permanent."
 SOM M, DDI M
 
 Vent Sentinel
@@ -88167,6 +88304,7 @@ DST R
 
 Viridian Zealot Avatar
 Vanguard
+Hand +0, life +2
 {2}, Sacrifice a creature: Destroy target artifact or enchantment. Search your library for a card with the same name as the sacrificed creature, reveal that card, and put it into your hand. Then shuffle your library.
 VAN S
 
@@ -88784,6 +88922,7 @@ OD R, DDI R
 
 Volrath
 Vanguard
+Hand +2, life -3
 Whenever a creature you control is put into your graveyard from the battlefield, you may put it on top of your library.
 VAN S
 
@@ -89002,9 +89141,10 @@ RAV U
 Vraska the Unseen
 {3}{B}{G}
 Planeswalker - Vraska
-+1: Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature.
--3: Destroy target nonland permanent.
--7: Put three 1/1 black Assassin creature tokens onto the battlefield with "Whenever this creature deals combat damage to a player, that player loses the game."
+5
+[+1] Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature.
+[-3] Destroy target nonland permanent.
+[-7] Put three 1/1 black Assassin creature tokens onto the battlefield with "Whenever this creature deals combat damage to a player, that player loses the game."
 RTR M
 
 Vug Lizard
@@ -90244,7 +90384,7 @@ CHK U
 
 Watery Grave
 Land - Island Swamp
- ({T}: Add {U} or {B} to your mana pool.)
+({T}: Add {U} or {B} to your mana pool.)
 As Watery Grave enters the battlefield, you may pay 2 life. If you don't, Watery Grave enters the battlefield tapped.
 RAV R, GTC R
 
@@ -91059,7 +91199,7 @@ Wild Cantor
 {R/G}
 Creature - Human Druid
 1/1
- ({R/G} can be paid with either {R} or {G}.)
+({R/G} can be paid with either {R} or {G}.)
 Sacrifice Wild Cantor: Add one mana of any color to your mana pool.
 GPT C
 
@@ -92718,6 +92858,7 @@ AN C (x2), 5E R, 6E R, MED C
 
 Xantcha
 Vanguard
+Hand +1, life +3
 Sacrifice a permanent: Regenerate target creature.
 VAN S
 
