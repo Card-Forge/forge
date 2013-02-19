@@ -29,7 +29,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Card;
-
 import forge.Command;
 import forge.Constant;
 import forge.Constant.Preferences;
@@ -40,8 +39,8 @@ import forge.control.input.Input;
 import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
 import forge.control.input.InputPayManaBase;
-import forge.control.input.InputPayManaSimple;
 import forge.control.input.InputPayManaExecuteCommands;
+import forge.control.input.InputPayManaSimple;
 import forge.control.input.InputPaySacCost;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
@@ -73,7 +72,7 @@ public class CField implements ICDoc {
 
     private MouseMotionListener mmlCardOver = new MouseMotionAdapter() { @Override
         public void mouseMoved(final MouseEvent e) {
-            cardoverAction(); } };
+            cardoverAction(e); } };
 
     private final MouseListener madHand = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
@@ -382,8 +381,8 @@ public class CField implements ICDoc {
     }
 
     /** */
-    private void cardoverAction() {
-        final Card c = CField.this.view.getTabletop().getCardFromMouseOverPanel();
+    private void cardoverAction(MouseEvent e) {
+        final Card c = CField.this.view.getTabletop().getHoveredCard(e);
         if (c != null) {
             CMatchUI.SINGLETON_INSTANCE.setCard(c);
         }
@@ -394,7 +393,7 @@ public class CField implements ICDoc {
         // original version:
         // final Card c = t.getDetailController().getCurrentCard();
         // Roujin's bug fix version dated 2-12-2012
-        final Card c = CField.this.view.getTabletop().getCardFromMouseOverPanel();
+        final Card c = CField.this.view.getTabletop().getHoveredCard(e);
 
         final Input input = CMessage.SINGLETON_INSTANCE.getInputControl().getInput();
 

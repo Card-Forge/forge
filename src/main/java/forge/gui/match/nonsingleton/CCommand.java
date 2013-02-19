@@ -45,7 +45,7 @@ public class CCommand implements ICDoc {
 
     private MouseMotionListener mmlCardOver = new MouseMotionAdapter() { @Override
         public void mouseMoved(final MouseEvent e) {
-            cardoverAction(); } };
+            cardoverAction(e); } };
 
     private final MouseListener madCardClick = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
@@ -102,8 +102,8 @@ public class CCommand implements ICDoc {
     }
 
     /** */
-    private void cardoverAction() {
-        final Card c = CCommand.this.view.getTabletop().getCardFromMouseOverPanel();
+    private void cardoverAction(MouseEvent e) {
+        final Card c = CCommand.this.view.getTabletop().getHoveredCard(e);
         if (c != null) {
             CMatchUI.SINGLETON_INSTANCE.setCard(c);
         }
@@ -114,7 +114,7 @@ public class CCommand implements ICDoc {
         // original version:
         // final Card c = t.getDetailController().getCurrentCard();
         // Roujin's bug fix version dated 2-12-2012
-        final Card c = CCommand.this.view.getTabletop().getCardFromMouseOverPanel();
+        final Card c = CCommand.this.view.getTabletop().getHoveredCard(e);
 
         if (c != null && c.isInZone(ZoneType.Command)) {
             //TODO: Cast commander/activate avatar/roll planar dice here.

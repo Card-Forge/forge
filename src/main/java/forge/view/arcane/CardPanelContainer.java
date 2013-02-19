@@ -560,25 +560,17 @@ public abstract class CardPanelContainer extends JPanel {
     }
 
     /**
-     * @return {@link forge.view.arcane.CardPanel}
-     */
-    public final CardPanel getMouseOverPanel() {
-        return this.hoveredPanel;
-    }
-
-    /**
      * <p>
      * getCardFromMouseOverPanel.
      * </p>
      * 
      * @return a {@link forge.Card} object.
      */
-    public final Card getCardFromMouseOverPanel() {
-        if (this.hoveredPanel != null) {
-            return this.hoveredPanel.getGameCard();
-        } else {
-            return null;
-        }
+    public final Card getHoveredCard(MouseEvent e) {
+        // re-evaluate cursor position so if we hovered over a card, alt-tabbed out of the application, then
+        // clicked back on the application somewhere else, the last hovered card won't register the click
+        CardPanel p = getCardPanel(e.getX(), e.getY());
+        return (p == null && p == hoveredPanel) ? null : p.getGameCard();
     }
 
     /**

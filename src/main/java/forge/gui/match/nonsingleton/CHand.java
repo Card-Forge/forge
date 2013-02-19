@@ -182,7 +182,7 @@ public class CHand implements ICDoc {
         if (e.getButton() != MouseEvent.BUTTON1) {
             return;
         }
-        final Card c = view.getHandArea().getCardFromMouseOverPanel();
+        final Card c = view.getHandArea().getHoveredCard(e);
         if (c != null) {
             CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, Singletons.getControl().getPlayer().getZone(ZoneType.Hand));
         }
