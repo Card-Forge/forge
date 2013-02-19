@@ -1,5 +1,6 @@
 package forge.gui.home.settings;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -22,7 +23,9 @@ import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang;
@@ -124,13 +127,37 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     public void focusTopButton() {
         btnDownloadPics.requestFocusInWindow();
     }
-    
-    /** */
-    public void showLicensing() {
-        final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
-        overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
 
-        final String license = "<html>Forge License Information<br><br>"
+    private void _showDialog(Component c, final Runnable onShow) {
+        JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
+        overlay.setLayout(new MigLayout("insets 0, gap 0, ax center, ay center"));
+
+        FPanel p = new FPanel(new MigLayout("insets dialog, wrap, center"));
+        p.setOpaque(false);
+        p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        
+        final FButton btnClose = new FButton("OK");
+        btnClose.addActionListener(new ActionListener() { @Override
+            public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
+
+        p.add(c, "w 500!");
+        p.add(btnClose, "w 200!, h pref+12, center, gaptop 30");
+        overlay.add(p);
+        SOverlayUtils.showOverlay();
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (null != onShow) {
+                    onShow.run();
+                }
+                btnClose.requestFocusInWindow();
+            }
+        });
+    }
+    
+    public void showLicensing() {
+        String license = "<html>Forge License Information<br><br>"
                 + "This program is free software : you can redistribute it and/or modify "
                 + "it under the terms of the GNU General Public License as published by "
                 + "the Free Software Foundation, either version 3 of the License, or "
@@ -141,47 +168,21 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 + "GNU General Public License for more details.<br><br>"
                 + "You should have received a copy of the GNU General Public License "
                 + "along with this program.  If not, see http://www.gnu.org/licenses/.</html>";
-
+        
         FLabel licenseLabel = new FLabel.Builder().text(license).fontSize(15).build();
 
-        final FButton btnClose = new FButton("OK");
-        btnClose.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
-
-        overlay.add(licenseLabel, "w 500!, center");
-        overlay.add(btnClose, "w 200!, h pref+12, center, gaptop 30");
-        SOverlayUtils.showOverlay();
-        
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                btnClose.requestFocusInWindow();
-            }
-        });
+        _showDialog(licenseLabel, null);
     }
 
     public void showHowToPlay() {
-        final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
-        overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
-
         FTextArea directions = new FTextArea(ForgeProps.getLocalized(Lang.HowTo.MESSAGE));
         final FScrollPane scr = new FScrollPane(directions, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        final FButton btnClose = new FButton("OK");
-        btnClose.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
-
-        overlay.add(scr, "w 500!, h 500!, center");
-        overlay.add(btnClose, "w 200!, h pref+12, center, gaptop 30");
-        SOverlayUtils.showOverlay();
+        scr.setBorder(null);
         
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                scr.getViewport().setViewPosition(new Point(0, 0));
-                btnClose.requestFocusInWindow();
-            }
+
+        _showDialog(scr, new Runnable() {
+            @Override public void run() { scr.getViewport().setViewPosition(new Point(0, 0)); }
         });
     }
 
