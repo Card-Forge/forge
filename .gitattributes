@@ -9933,6 +9933,7 @@ res/cardsfolder/s/spidersilk_net.txt svneol=native#text/plain
 res/cardsfolder/s/spiderwig_boggart.txt svneol=native#text/plain
 res/cardsfolder/s/spidery_grasp.txt -text
 res/cardsfolder/s/spike_breeder.txt svneol=native#text/plain
+res/cardsfolder/s/spike_cannibal.txt -text
 res/cardsfolder/s/spike_colony.txt svneol=native#text/plain
 res/cardsfolder/s/spike_drone.txt svneol=native#text/plain
 res/cardsfolder/s/spike_feeder.txt svneol=native#text/plain
@@ -10292,6 +10293,7 @@ res/cardsfolder/s/structural_collapse.txt -text
 res/cardsfolder/s/student_of_elements_tobita_master_of_winds.txt -text
 res/cardsfolder/s/student_of_warfare.txt svneol=native#text/plain
 res/cardsfolder/s/stuffy_doll.txt svneol=native#text/plain
+res/cardsfolder/s/stuffy_doll_avatar.txt -text
 res/cardsfolder/s/stun.txt svneol=native#text/plain
 res/cardsfolder/s/stun_sniper.txt svneol=native#text/plain
 res/cardsfolder/s/stunted_growth.txt svneol=native#text/plain

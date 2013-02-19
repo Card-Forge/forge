@@ -1,0 +1,21 @@
+Name:Stuffy Doll Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/-6
+A:AB$ ChooseSource | Cost$ 0 | ActivationZone$ Command | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBTargetOpp | ActivationLimit$ 1 | SpellDescription$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. CARDNAME deals damage to you and target opponent equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
+SVar:DBTargetOpp:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to give damamge | RememberObjects$ Targeted | StackDescription$ None | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessNonCombat,SelflessCombat | RememberObjects$ Remembered | ImprintCards$ Self | SVars$ CombatDmg,NonCombatDmg,AvatarCombat,AvatarnonCombat,X | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
+SVar:SelflessNonCombat:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.IsRemembered | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | Description$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
+SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ You | DamageSource$ Imprinted | CombatDamage$ True | NumDmg$ X | SubAbility$ AvatarCombat
+SVar:AvatarCombat:DB$ DealDamage | Defined$ Player.IsRemembered | DamageSource$ Imprinted | CombatDamage$ True | NumDmg$ X
+SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ You | DamageSource$ Imprinted | CombatDamage$ False | NumDmg$ X | SubAbility$ AvatarnonCombat
+SVar:AvatarnonCombat:DB$ DealDamage | Defined$ Player.IsRemembered | DamageSource$ Imprinted | CombatDamage$ False | NumDmg$ X
+SVar:X:ReplaceCount$DamageAmount/HalfUp
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/stuffy_doll_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/stuffy-doll.jpg
+Oracle:Hand +0, life -6\n{0}: If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
+End

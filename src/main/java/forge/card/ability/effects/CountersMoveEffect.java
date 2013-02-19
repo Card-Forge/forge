@@ -48,7 +48,10 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         final Card host = sa.getSourceCard();
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        int amount = 0;
+        if (!sa.getParam("CounterNum").equals("All")) {
+            amount = AbilityUtils.calculateAmount(host, sa.getParam("CounterNum"), sa);
+        }
 
         Card source = null;
         List<Card> srcCards;
@@ -60,6 +63,9 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         }
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
+        }
+        if (sa.getParam("CounterNum").equals("All")) {
+            amount = source.getCounters(cType);
         }
         List<Card> tgtCards;
         if (!sa.hasParam("Defined") && tgt != null) {

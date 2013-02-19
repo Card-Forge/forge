@@ -26,8 +26,10 @@ public class CountersMoveAi extends SpellAbilityAi {
         final String amountStr = sa.getParam("CounterNum");
 
         // TODO handle proper calculation of X values based on Cost
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
-
+        int amount = 0;
+        if (!sa.getParam("CounterNum").equals("All")) {
+            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        }
         // don't use it if no counters to add
         if (amount <= 0) {
             return false;
@@ -49,13 +51,19 @@ public class CountersMoveAi extends SpellAbilityAi {
         final Target abTgt = sa.getTarget();
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
-        final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        int amount = 0;
+        if (!sa.getParam("CounterNum").equals("All")) {
+            amount = AbilityUtils.calculateAmount(sa.getSourceCard(), amountStr, sa);
+        }
         boolean chance = false;
         boolean preferred = true;
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final List<Card> srcCards = AbilityUtils.getDefinedCards(host, sa.getParam("Source"), sa);
         final List<Card> destCards = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
+        if ((srcCards.size() > 0 && sa.getParam("CounterNum").equals("All"))) {
+            amount = srcCards.get(0).getCounters(cType);
+        }
         if (abTgt == null) {
             if ((srcCards.size() > 0)
                     && cType.equals(CounterType.P1P1) // move +1/+1 counters away
