@@ -5,7 +5,7 @@ Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.
 SVar:TrigRepeat:AB$ RepeatEach | Cost$ 0 | RepeatCards$ Permanent.nonBasic | RepeatSubAbility$ DBDestroy | UseImprinted$ True | SubAbility$ DBCleanup
 SVar:DBDestroy:DB$ Destroy | Defined$ Valid Permanent.sharesNameWith Imprinted+IsNotImprinted | NoRegen$ True
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.nonBasic | Execute$ TrigDestroyRem | TriggerDescription$ Whenever a permanent other than a basic land enters the battlefield, destroy all other permanents with that name. They can't be regenerated.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.nonBasic | TriggerZones$ Battlefield | Execute$ TrigDestroyRem | TriggerDescription$ Whenever a permanent other than a basic land enters the battlefield, destroy all other permanents with that name. They can't be regenerated.
 SVar:TrigDestroyRem:AB$ Pump | Cost$ 0 | RememberObjects$ TriggeredCard | SubAbility$ DBDestroyAll
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.IsNotRemembered+sharesNameWith Remembered | NoRegen$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
