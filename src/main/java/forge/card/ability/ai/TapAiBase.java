@@ -121,6 +121,21 @@ public abstract class TapAiBase extends SpellAbilityAi  {
         final String[] tappablePermanents = { "Creature", "Land", "Artifact" };
         tapList = CardLists.getValidCards(tapList, tappablePermanents, source.getController(), source);
         tapList = CardLists.getTargetableCards(tapList, sa);
+        tapList = CardLists.filter(tapList, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                if (c.isCreature()) {
+                    return true;
+                }
+
+                for (final SpellAbility sa : c.getSpellAbilities()) {
+                    if (sa.isAbility() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+                        return true;
+                    }
+                }
+                return true;
+            }
+        });
 
         if (tapList.size() == 0) {
             return false;
