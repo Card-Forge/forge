@@ -29,6 +29,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.Command;
 import forge.Constant;
 import forge.Constant.Preferences;
@@ -303,7 +304,7 @@ public class CField implements ICDoc {
                             choices2.add(faceDown);
                         } else {
                             final Card faceDown = Singletons.getModel().getCardFactory().copyCard(crd);
-                            faceDown.turnFaceUp();
+                            faceDown.setState(CardCharacteristicName.Original);
                             choices2.add(faceDown);
                         }
                     } else {
