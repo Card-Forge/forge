@@ -34,13 +34,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             origin = sa.getParam("Origin");
         }
 
-        if (ZoneType.isHidden(origin, sa.hasParam("Hidden"))) {
+        if (sa.hasParam("Hidden") || ZoneType.isHidden(origin)) {
             return changeHiddenOriginStackDescription(sa);
-        } else if (ZoneType.isKnown(origin)) {
-            return changeKnownOriginStackDescription(sa);
         }
-
-        return "";
+        return changeKnownOriginStackDescription(sa);
     }
 
     /**
@@ -280,8 +277,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
         }
-
-        if (ZoneType.isHidden(origin, sa.hasParam("Hidden")) && !sa.hasParam("Ninjutsu")) {
+        if ((sa.hasParam("Hidden") || ZoneType.isHidden(origin)) && !sa.hasParam("Ninjutsu")) {
             changeHiddenOriginResolve(sa);
         } else {
             //else if (isKnown(origin) || sa.containsKey("Ninjutsu")) {

@@ -78,10 +78,10 @@ public enum ZoneType {
     }
 
 
-    public static boolean isHidden(final String origin, final boolean hiddenOverride) {
+    public static boolean isHidden(final String origin) {
         List<ZoneType> zone = ZoneType.listValueOf(origin);
 
-        if (hiddenOverride || zone.isEmpty()) {
+        if (zone.isEmpty()) {
             return true;
         }
 
@@ -94,7 +94,7 @@ public enum ZoneType {
     }
 
     public static boolean isKnown(final String origin) {
-        return !isHidden(origin, false);
+        return !isHidden(origin);
     }
 
 }

@@ -58,7 +58,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(AIPlayer aiPlayer, SpellAbility sa) {
-        String origin = "";
+        String origin = null;
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
         }
@@ -69,13 +69,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        if (ZoneType.isHidden(origin, sa.hasParam("Hidden"))) {
+        if (sa.hasParam("Hidden") || ZoneType.isHidden(origin)) {
             return hiddenOriginCanPlayAI(aiPlayer, sa);
-        } else if (ZoneType.isKnown(origin)) {
-            return knownOriginCanPlayAI(aiPlayer, sa);
         }
-
-        return false;
+        return knownOriginCanPlayAI(aiPlayer, sa);
     }
 
     /**
@@ -91,18 +88,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, AIPlayer aiPlayer) {
-        String origin = "";
+        String origin = null;
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
         }
 
-        if (ZoneType.isHidden(origin, sa.hasParam("Hidden"))) {
+        if (sa.hasParam("Hidden") || ZoneType.isHidden(origin)) {
             return hiddenOriginPlayDrawbackAI(aiPlayer, sa);
-        } else if (ZoneType.isKnown(origin)) {
-            return knownOriginPlayDrawbackAI(aiPlayer, sa);
         }
-
-        return false;
+        return knownOriginPlayDrawbackAI(aiPlayer, sa);
     }
 
 
@@ -122,18 +116,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(AIPlayer aiPlayer, SpellAbility sa, boolean mandatory) {
-        String origin = "";
+        String origin = null;
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
         }
 
-        if (ZoneType.isHidden(origin, sa.hasParam("Hidden"))) {
+        if (sa.hasParam("Hidden") || ZoneType.isHidden(origin)) {
             return hiddenTriggerAI(aiPlayer, sa, mandatory);
-        } else if (ZoneType.isKnown(origin)) {
-            return knownOriginTriggerAI(aiPlayer, sa, mandatory);
         }
-
-        return false;
+        return knownOriginTriggerAI(aiPlayer, sa, mandatory);
     }
 
 
