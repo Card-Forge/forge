@@ -124,6 +124,12 @@ Barrin's Spite
 Cryptic Gateway
 Deepwood Elder
 Knollspine Invocation
+Eye of Yawgmoth
+Spike Cannibal
+Flickerform
+Epochrasite
+Eye of Singularity
+Heroic Defiance
 
 
 New Phenomenons:
@@ -132,10 +138,16 @@ Chaotic AEther
 Planewide Disaster
 
 
+New Planes:
+
+Undercity Reaches
+
+
 New Vanguard Avatars:
 
 Figure of Destiny Avatar
 Sisters of Stone Death Avatar
+Stuffy Doll Avatar
 Two Headed Giant of Foriys Avatar
 Viridian Zealot Avatar
 
@@ -437,6 +449,43 @@ Detailed Changelog: (This section will likely be deleted in the near future and 
 - ItemPoolView - countAll() now accepts predicates, this allowed to drop 'fnToCard' field as well as reference to forge.card.*
 - rem imports
 - Fixed Forgotten Ancient
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Creating a branch for SplitCards
+- Added a planeswalker.wav file from Foreroes.
+- The AI will now check all drawbacks of spellAbilities and in the proper order.
+- The AI can now use Barrin's Spite and Retribution.
+- Merge test: merging r19719-r19721 from trunk into SplitCards.
+- Added a destroy.wav, discard.wav, end_of_turn.wav, life_loss.wav and token.wav file.
+- Increased the volume for the poison.wav sound file.
+- Updated some AI parameters.
+- Fix for r19720.
+- fix up license and how to play overlays
+- Improved damageChooseNontargeted.
+- Set some ActivatingPlayer.
+- Updating mtgdata so Avatars have modifiers listed
+- Merge: merging trunk changes up to r19730.
+- reinit deck lists for planechase and archenemy submenus so newly-created decks show up
+- CommonDrawback merged into AbilitySub, as there are no other SubAbilities without api.
+- (fixes for 19720 & 19724) CheckAiDrawback was already recursivelly checking every subability, so no special methods were required
+- numerous fixes to make ApiType comparisons null-safe
+- CommonXXX classes do not take SpellEffect and AILogic as separate parameters. These are obtained from ApiType instead
+- chkAIDrawback moved from AbilitySub to SpellAiLogic.chkDrawbackWithSubs (since it's a method used only by AI, as part of decoupling AI from game)
+- You may use SpellAiLogic.chkAIDrawback to test drawbacks of given ability only, or chkDrawbackWithSubs to do so for the whole list of ability and its subs
+- renamed base classes in SpellAbility factory
+- SpellManaCost renamed to ManaCost and moved to forge.card.mana
+- CostMana renamed to CostPartMana to avoid mixing them up
+- Added the quest deck Amphibian 2.
+- Fixed Embargo triggering on all upkeeps
+- Fixed a possible "no enum found bug" in isHidden and some cleanup.
+- Fixed one more instance of using .equals() instead of == in conjunction with getAPI()
+- Convert Archery Training to imprint and change the cleanup effect to a proper "ForgetLastImprinted" parameter
+- Fixed chkDrawbackWithSubs.
+- ensure card that last registered the cursor hover isn't tapped when the application loses focus via alt-tab and then is clicked on again
+- ensure only one audio clip is played for (near-)simultaneous events of: AddCounter, Poison, RemoveCounter, Sacrifice, Token, Untap
+- Draft assist using rankings. Activated from preferences
+- GTC rankings added
+- Draft assist ranking fix
+- removing ratings from CardPrinted
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
