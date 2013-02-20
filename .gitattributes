@@ -13630,6 +13630,7 @@ src/main/java/forge/CounterType.java svneol=native#text/plain
 src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameLog.java -text
 src/main/java/forge/ImageCache.java svneol=native#text/plain
+src/main/java/forge/ImageLoader.java -text
 src/main/java/forge/Singletons.java svneol=native#text/plain
 src/main/java/forge/StaticEffect.java svneol=native#text/plain
 src/main/java/forge/StaticEffects.java svneol=native#text/plain
@@ -14473,7 +14474,6 @@ src/main/java/forge/view/arcane/package-info.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/Animation.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/CardPanelMouseListener.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/GlowText.java svneol=native#text/plain
-src/main/java/forge/view/arcane/util/ImageUtil.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/UI.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
