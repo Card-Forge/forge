@@ -20,6 +20,8 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
+
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.mana.ManaCostShard;
@@ -294,28 +296,14 @@ public class CardRulesReader {
      * The Class ParserCardnameTxtManaCost.
      */
     public static class ParserCardnameTxtManaCost implements IParserManaCost {
-        private final String[] cost;
-        private int nextToken;
+        private final StringTokenizer st; 
         private int colorlessCost;
 
-        /**
-         * Instantiates a new parser cardname txt mana cost.
-         * 
-         * @param cost
-         *            the cost
-         */
         public ParserCardnameTxtManaCost(final String cost) {
-            this.cost = cost.split(" ");
-            // System.out.println(cost);
-            this.nextToken = 0;
+            st = new StringTokenizer(cost, " ");
             this.colorlessCost = 0;
         }
 
-        /*
-         * (non-Javadoc)
-         * 
-         * @see forge.card.CardManaCost.ManaParser#getTotalColorlessCost()
-         */
         @Override
         public final int getTotalColorlessCost() {
             if (this.hasNext()) {
@@ -331,7 +319,7 @@ public class CardRulesReader {
          */
         @Override
         public final boolean hasNext() {
-            return this.nextToken < this.cost.length;
+            return st.hasMoreTokens();
         }
 
         /*
@@ -342,7 +330,7 @@ public class CardRulesReader {
         @Override
         public final ManaCostShard next() {
 
-            final String unparsed = this.cost[this.nextToken++];
+            final String unparsed = st.nextToken();
             // System.out.println(unparsed);
             try {
                 int iVal = Integer.parseInt(unparsed);
