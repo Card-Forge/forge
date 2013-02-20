@@ -14,38 +14,16 @@ public abstract class ItemPredicate {
     // Static builder methods - they choose concrete implementation by
     // themselves
 
-    /**
-     * Checks that the inventory item is a Booster Pack.
-     * 
-     * @return the predicate
-     */
-    public static Predicate<InventoryItem> IsBoosterPack = new Predicate<InventoryItem>() {
-
-        @Override
-        public boolean apply(final InventoryItem card) {
-            return card instanceof BoosterPack;
-        }
-    };
-
-    /**
-     * Checks that the inventory item is a Fat Pack.
-     * 
-     * @return the predicate
-     */
-    public static Predicate<InventoryItem> IsFatPack = new Predicate<InventoryItem>() {
-
-        @Override
-        public boolean apply(final InventoryItem card) {
-            return card instanceof FatPack;
-        }
-    };
+    public static final Predicate<Object> IsBoosterPack = Predicates.instanceOf(BoosterPack.class);
+    public static final Predicate<Object> IsPrebuiltDeck = Predicates.instanceOf(PreconDeck.class);
+    public static final Predicate<Object> IsFatPack = Predicates.instanceOf(TournamentPack.class);
 
     /**
      * Checks that the inventory item is a Tournament Pack.
      * 
      * @return the predicate
      */
-    public static Predicate<InventoryItem> IsTournamentPack = new Predicate<InventoryItem>() {
+    public static final Predicate<InventoryItem> IsTournamentPack = new Predicate<InventoryItem>() {
 
         @Override
         public boolean apply(final InventoryItem card) {
@@ -58,7 +36,7 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    public static Predicate<InventoryItem> IsStarterDeck = new Predicate<InventoryItem>() {
+    public static final Predicate<InventoryItem> IsStarterDeck = new Predicate<InventoryItem>() {
 
         @Override
         public boolean apply(final InventoryItem card) {
@@ -71,21 +49,12 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    public static Predicate<InventoryItem> IsPrebuiltDeck = new Predicate<InventoryItem>() {
-
-        @Override
-        public boolean apply(final InventoryItem card) {
-            return card instanceof PreconDeck;
-        }
-    };
+    
 
     /**
      * The Class Presets.
      */
     public static class Presets {
-
-
-
         /** The Item IsPack. */
         @SuppressWarnings("unchecked")
         public static final Predicate<InventoryItem> IS_PACK = Predicates.or(IsBoosterPack, IsFatPack, IsTournamentPack);
