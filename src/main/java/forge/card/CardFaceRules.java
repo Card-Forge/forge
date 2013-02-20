@@ -57,7 +57,7 @@ final class CardFaceRules implements ICardCharacteristics {
     public final void setColor(ColorSet color0)           { this.color = color0; }
     public final void setOracleText(String text)          { this.oracleText = text; }
     public final void addKeyword(String value)            { this.keywords.add(value); }
-    public final void setInitialLoaylty(int value)        { this.initialLoyalty = value; }
+    public final void setInitialLoyalty(int value)        { this.initialLoyalty = value; }
     public final Map<String, CardInSet> getSetsData()     { return this.setsPrinted; } // reader will add sets here
 
     public void setPtText(String value) {

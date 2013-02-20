@@ -150,7 +150,7 @@ public class CardRulesReader {
 
             case 'L':
                 if ("Loyalty".equals(key)) {
-                    this.faces[this.curFace].setInitialLoaylty(Integer.valueOf(value));
+                    this.faces[this.curFace].setInitialLoyalty(Integer.valueOf(value));
                 }
                 break;
 
