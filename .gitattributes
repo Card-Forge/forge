@@ -8253,6 +8253,7 @@ res/cardsfolder/r/raze.txt svneol=native#text/plain
 res/cardsfolder/r/razias_purification.txt -text
 res/cardsfolder/r/razing_snidd.txt svneol=native#text/plain
 res/cardsfolder/r/razor_barrier.txt svneol=native#text/plain
+res/cardsfolder/r/razor_boomerang.txt -text
 res/cardsfolder/r/razor_golem.txt svneol=native#text/plain
 res/cardsfolder/r/razor_hippogriff.txt svneol=native#text/plain
 res/cardsfolder/r/razor_pendulum.txt svneol=native#text/plain
