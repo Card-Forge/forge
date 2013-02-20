@@ -142,7 +142,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         p.add(c, "w 500!");
         p.add(btnClose, "w 200!, h pref+12, center, gaptop 30");
-        overlay.add(p);
+        overlay.add(p, "gap 0 0 10% 10%");
         SOverlayUtils.showOverlay();
         
         SwingUtilities.invokeLater(new Runnable() {
@@ -179,7 +179,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         final FScrollPane scr = new FScrollPane(directions, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scr.setBorder(null);
-        
 
         _showDialog(scr, new Runnable() {
             @Override public void run() { scr.getViewport().setViewPosition(new Point(0, 0)); }
