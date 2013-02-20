@@ -19,7 +19,6 @@ package forge.card;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import com.google.common.collect.Lists;
 
@@ -43,8 +42,6 @@ public final class CardRules implements ICardCharacteristics {
     private final ICardCharacteristics otherPart;
     
     private CardAiHints aiHints;
-
-    Map<String, CardInSet> setsPrinted = null;
     private Iterable<String> forgeScript;
 
 
@@ -57,32 +54,6 @@ public final class CardRules implements ICardCharacteristics {
         forgeScript = Lists.newArrayList(script);
     }
 
-
-    /**
-     * Gets the latest set printed.
-     * 
-     * @return the latest set printed
-     */
-    public String getLatestSetPrinted() {
-        String lastSet = null;
-        // TODO: Make a true release-date based sorting
-        for (final String cs : this.setsPrinted.keySet()) {
-            lastSet = cs;
-        }
-        return lastSet;
-    }
-
-
-
-    /**
-     * Gets the rarity from latest set.
-     * 
-     * @return the rarity from latest set
-     */
-    public CardRarity getRarityFromLatestSet() {
-        final CardInSet cis = this.setsPrinted.get(this.getLatestSetPrinted());
-        return cis.getRarity();
-    }
 
     /**
      * TODO: Write javadoc for this method.
