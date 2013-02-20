@@ -72,6 +72,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         private boolean bldIconInBackground   = false;
         private boolean bldIconScaleAuto      = true;
         protected boolean bldReactOnMouseDown = false;
+        private boolean bldUseSkinColors      = true;
 
         protected String  bldText, bldToolTip;
         private ImageIcon bldIcon;
@@ -124,6 +125,10 @@ public class FLabel extends JLabel implements ILocalRepaint {
         public Builder reactOnMouseDown(final boolean b0) { this.bldReactOnMouseDown = b0; return this; }
         public Builder reactOnMouseDown() { reactOnMouseDown(true); return this; }
 
+        /**@param b0 &emsp; boolean that controls whether the text uses skin colors
+         * @return {@link forge.gui.toolbox.Builder} */
+        public Builder useSkinColors(final boolean b0) { bldUseSkinColors = b0; return this; }
+        
         /**@param c0 &emsp; {@link forge.Command} to execute if clicked
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder cmdClick(final Command c0) { this.bldCmd = c0; return this; }
@@ -217,9 +222,11 @@ public class FLabel extends JLabel implements ILocalRepaint {
             });
         }
         
-        // Non-custom display properties
-        this.setForeground(clrText);
-        this.setBackground(clrMain);
+        if (b0.bldUseSkinColors) {
+            // Non-custom display properties
+            this.setForeground(clrText);
+            this.setBackground(clrMain);
+        }
 
         // Resize adapter
         this.removeComponentListener(cadResize);
