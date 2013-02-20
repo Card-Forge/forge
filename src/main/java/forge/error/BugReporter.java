@@ -90,7 +90,7 @@ public class BugReporter {
         
         _buildSpoilerFooter(sb);
 
-        _showDialog("Report a crash", sb.toString(), false);
+        _showDialog("Report a crash", sb.toString(), true);
     }
 
     /**
@@ -222,7 +222,7 @@ public class BugReporter {
         JOptionPane pane = new JOptionPane(p, JOptionPane.PLAIN_MESSAGE,
                 JOptionPane.DEFAULT_OPTION, null, options.toArray(), options.get(0));
         JDialog dlg = pane.createDialog(null, title);
-        dlg.setSize(600, 500);
+        dlg.setSize(780, 500);
         dlg.setResizable(true);
         dlg.setLocationRelativeTo(null);
         dlg.setVisible(true);
