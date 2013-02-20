@@ -63,7 +63,7 @@ def printDistinctOracle(missingSet, fileName):
 	with open(filePath, "w") as outfile:
 		for s in missing:
 			if s:
-			oracle = mtgOracleCards.get(s, "")
+				oracle = mtgOracleCards.get(s, "")
 				outfile.write("%s\n%s\n" % (s, oracle))
 
 
