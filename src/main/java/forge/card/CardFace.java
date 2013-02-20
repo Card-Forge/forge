@@ -32,7 +32,7 @@ final class CardFace implements ICardCharacteristics {
     private int iToughness = -1;
     private String power = null;
     private String toughness = null;
-    private int initialLoyalty = 0;
+    private int initialLoyalty = -1;
 
     private final List<String> keywords = new ArrayList<String>();
 

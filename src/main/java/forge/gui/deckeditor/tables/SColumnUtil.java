@@ -324,19 +324,18 @@ public final class SColumnUtil {
         return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getColor() : ColorSet.getNullColor();
     }
 
-    private static Integer toPower(final InventoryItem i) {
-        Integer result = -1;
+    private static int toPower(final InventoryItem i) {
+        int result = -1;
         if (i instanceof CardPrinted) {
             result = ((CardPrinted) i).getRules().getIntPower();
-            if (result == null) {
-                result = Integer.valueOf(((CardPrinted) i).getRules().getInitialLoyalty());
-                if (result == null) { result = -1; }
+            if (result == -1) {
+                result = ((CardPrinted) i).getRules().getInitialLoyalty();
             }
         }
         return result;
     }
 
-    private static Integer toToughness(final InventoryItem i) {
+    private static int toToughness(final InventoryItem i) {
         return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getIntToughness() : -1;
     }
 
@@ -381,10 +380,6 @@ public final class SColumnUtil {
                 ranking = 500D;
         }
         return ranking;
-    }
-
-    private static String toRankingStr(final InventoryItem i) {
-        return String.valueOf(toRankingCmp(i));
     }
 
     //==========
@@ -476,7 +471,7 @@ public final class SColumnUtil {
     private static final Function<Entry<InventoryItem, Integer>, Comparable<?>> FN_POWER_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return SColumnUtil.toPower(from.getKey());
+            return Integer.valueOf(SColumnUtil.toPower(from.getKey()));
         }
     };
 
@@ -484,7 +479,7 @@ public final class SColumnUtil {
     private static final Function<Entry<InventoryItem, Integer>, Object> FN_POWER_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return SColumnUtil.toPower(from.getKey());
+            return Integer.valueOf(SColumnUtil.toPower(from.getKey()));
         }
     };
 
@@ -492,7 +487,7 @@ public final class SColumnUtil {
     private static final Function<Entry<InventoryItem, Integer>, Comparable<?>> FN_TOUGHNESS_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return SColumnUtil.toToughness(from.getKey());
+            return Integer.valueOf(SColumnUtil.toToughness(from.getKey()));
         }
     };
 
@@ -500,7 +495,7 @@ public final class SColumnUtil {
     private static final Function<Entry<InventoryItem, Integer>, Object> FN_TOUGHNESS_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return SColumnUtil.toToughness(from.getKey());
+            return Integer.valueOf(SColumnUtil.toToughness(from.getKey()));
         }
     };
 
@@ -580,7 +575,7 @@ public final class SColumnUtil {
     private static final Function<Entry<InventoryItem, Integer>, Object> FN_RANKING_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return SColumnUtil.toRankingStr(from.getKey());
+            return String.valueOf(SColumnUtil.toRankingCmp(from.getKey()));
         }
     };
 }
