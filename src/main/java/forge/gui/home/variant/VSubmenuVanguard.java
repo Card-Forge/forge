@@ -95,13 +95,13 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         aiListData.add("Random");
         for (CardPrinted cp : getAllAvatars()) {
             humanListData.add(cp);
-            if (!cp.getRules().getRemRandomDecks()) {
+            if (!cp.getRules().getAiHints().getRemRandomDecks()) {
                 nonRandomHumanAvatars.add(cp);
             }
-            if (!cp.getRules().getRemAIDecks()) {
+            if (!cp.getRules().getAiHints().getRemAIDecks()) {
                 aiListData.add(cp);
                 allAiAvatars.add(cp);
-                if (!cp.getRules().getRemRandomDecks()) {
+                if (!cp.getRules().getAiHints().getRemRandomDecks()) {
                     nonRandomAiAvatars.add(cp);
                 }
             }

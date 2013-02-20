@@ -195,7 +195,7 @@ public class GameNew {
         
         for ( Entry<DeckSection, CardPool> ds : toUse ) {
             for (Entry<CardPrinted, Integer> cp : ds.getValue()) {
-                if ( cp.getKey().getRules().getRemAIDecks() ) 
+                if ( cp.getKey().getRules().getAiHints().getRemAIDecks() ) 
                     result.add(cp.getKey());
             }
         }
@@ -207,7 +207,7 @@ public class GameNew {
         Set<CardPrinted> myRemovedAnteCards = new HashSet<CardPrinted>();
         for ( Entry<DeckSection, CardPool> ds : toUse ) {
             for (Entry<CardPrinted, Integer> cp : ds.getValue()) {
-                if ( cp.getKey().getRules().rulesContain(keywordToRemove) ) 
+                if ( Iterables.contains(cp.getKey().getRules().getKeywords(), keywordToRemove) ) 
                     myRemovedAnteCards.add(cp.getKey());
             }
         }

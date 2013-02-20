@@ -30,6 +30,7 @@ import javax.swing.table.TableColumnModel;
 import com.google.common.base.Function;
 
 import forge.Singletons;
+import forge.card.CardAiHints;
 import forge.card.ColorSet;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
@@ -328,7 +329,7 @@ public final class SColumnUtil {
         if (i instanceof CardPrinted) {
             result = ((CardPrinted) i).getRules().getIntPower();
             if (result == null) {
-                result = Integer.valueOf(((CardPrinted) i).getRules().getLoyalty());
+                result = Integer.valueOf(((CardPrinted) i).getRules().getInitialLoyalty());
                 if (result == null) { result = -1; }
             }
         }
@@ -357,11 +358,18 @@ public final class SColumnUtil {
     }
 
     private static Integer toAiCmp(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getAiStatusComparable() : Integer.valueOf(-1);
+        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getAiHints().getAiStatusComparable() : Integer.valueOf(-1);
     }
 
     private static String toAiStr(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getAiStatus() : "n/a";
+        if (!(i instanceof CardPrinted))
+            return "n/a";
+        
+        CardPrinted cp = (CardPrinted) i;
+        CardAiHints ai = cp.getRules().getAiHints();
+        
+        return ai.getRemAIDecks() ? (ai.getRemRandomDecks() ? "AI ?" : "AI")
+                : (ai.getRemRandomDecks() ? "?" : "");
     }
     
     private static Double toRankingCmp(final InventoryItem i) {

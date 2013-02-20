@@ -306,7 +306,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         public boolean apply(Deck d) {
             for(Entry<DeckSection, CardPool> cp: d) {
                 for(Entry<CardPrinted, Integer> e : cp.getValue()) {
-                    if ( e.getKey().getRules().getRemAIDecks() )
+                    if ( e.getKey().getRules().getAiHints().getRemAIDecks() )
                         return false;
                 }
             }

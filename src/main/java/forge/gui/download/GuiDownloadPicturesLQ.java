@@ -21,6 +21,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import forge.card.CardRules;
+import forge.card.CardSplitType;
+import forge.card.ICardCharacteristics;
 import forge.gui.GuiDisplayUtil;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -64,12 +66,12 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
 
         for (final CardPrinted c : CardDb.instance().getUniqueCards()) {
             //System.out.println(c.getName());
-            CardRules firstSide = c.getRules();
-            this.createDLObjects(firstSide);
+            CardRules cardRules = c.getRules();
+            this.createDLObjects(cardRules.getPictureUrl(), cardRules.getMainPart().getName());
 
-            CardRules secondSide = firstSide.getSlavePart();
-            if (secondSide != null) {
-                this.createDLObjects(secondSide);
+            ICardCharacteristics secondSide = cardRules.getOtherPart();
+            if (secondSide != null && cardRules.getSplitType() == CardSplitType.Transform) {
+                this.createDLObjects(cardRules.getPictureOtherSideUrl(), secondSide.getName());
             }
         }
 
@@ -85,13 +87,12 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         return downloads.toArray(new DownloadObject[downloads.size()]);
     } // getNeededImages()
 
-    private void createDLObjects(final CardRules c) {
+    private void createDLObjects(final String url, final String cardName) {
 
-        final String url = c.getPictureUrl();
         if (url != null && !url.isEmpty()) {
             final String[] urls = url.split("\\\\");
 
-            final String sName = GuiDisplayUtil.cleanString(c.getName());
+            final String sName = GuiDisplayUtil.cleanString(cardName);
             addDownloadObject(urls[0], new File(baseFolder, sName + ".jpg"));
 
             for (int j = 1; j < urls.length; j++) {

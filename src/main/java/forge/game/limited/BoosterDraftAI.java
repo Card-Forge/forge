@@ -79,7 +79,7 @@ public class BoosterDraftAI {
         
         for(Pair<CardPrinted, Double> p : rankedCards) {
             // If a card is not ai playable, somewhat decrease its rating
-            if( p.getKey().getRules().getRemAIDecks() )
+            if( p.getKey().getRules().getAiHints().getRemAIDecks() )
                 p.setValue(p.getValue() + TAKE_BEST_THRESHOLD);
 
             // if I cannot choose more colors, and the card cannot be played with chosen colors, decrease its rating.

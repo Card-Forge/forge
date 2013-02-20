@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.util.ComparableOp;
 import forge.util.PredicateString;
@@ -19,7 +20,7 @@ public final class CardRulesPredicates {
     public static final Predicate<CardRules> IS_KEPT_IN_AI_DECKS = new Predicate<CardRules>() {
         @Override
         public boolean apply(final CardRules card) {
-            return !card.isRemovedFromAIDecks;
+            return !card.getAiHints().getRemAIDecks();
         }
     };
 
@@ -27,7 +28,7 @@ public final class CardRulesPredicates {
     public static final Predicate<CardRules> IS_KEPT_IN_RANDOM_DECKS = new Predicate<CardRules>() {
         @Override
         public boolean apply(final CardRules card) {
-            return !card.isRemovedFromRandomDecks;
+            return !card.getAiHints().getRemRandomDecks();
         }
     };
 
@@ -81,7 +82,7 @@ public final class CardRulesPredicates {
      * @return the predicate
      */
     public static Predicate<CardRules> rules(final PredicateString.StringOp op, final String what) {
-        return new LeafString(LeafString.CardField.RULES, op, what);
+        return new LeafString(LeafString.CardField.ORACLE_TEXT, op, what);
     }
 
     /**
@@ -145,7 +146,7 @@ public final class CardRulesPredicates {
         return new Predicate<CardRules>() {
             @Override
             public boolean apply(final CardRules card) {
-                return card.getKeywords().contains(keyword);
+                return Iterables.contains(card.getKeywords(), keyword);
             }
         };
     }
@@ -291,7 +292,7 @@ public final class CardRulesPredicates {
 
     private static class LeafString extends PredicateString<CardRules> {
         public enum CardField {
-            RULES, NAME, SUBTYPE, JOINED_TYPE
+            ORACLE_TEXT, NAME, SUBTYPE, JOINED_TYPE
         }
 
         private final String operand;
@@ -306,9 +307,9 @@ public final class CardRulesPredicates {
             case SUBTYPE:
                 shouldContain = (this.getOperator() == StringOp.CONTAINS) || (this.getOperator() == StringOp.EQUALS);
                 return shouldContain == card.getType().subTypeContains(this.operand);
-            case RULES:
+            case ORACLE_TEXT:
                 shouldContain = (this.getOperator() == StringOp.CONTAINS) || (this.getOperator() == StringOp.EQUALS);
-                return shouldContain == card.rulesContain(this.operand);
+                return shouldContain == card.getOracleText().contains(this.operand);
             case JOINED_TYPE:
                 return this.op(card.getType().toString(), this.operand);
             default:

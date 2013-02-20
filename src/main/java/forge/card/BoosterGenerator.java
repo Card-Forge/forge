@@ -301,11 +301,8 @@ public class BoosterGenerator {
     }
 
     private void addToRarity(final CardPrinted c) {
-        if (c.getRules().isAltState()) {
-            return;
-        }
 
-        Map<CardRarity, List<CardPrinted>> targetList = c.getRules().isDoubleFaced() ? twoFacedByRarity : singleFacedByRarity;
+        Map<CardRarity, List<CardPrinted>> targetList = c.getRules().getSplitType() == CardSplitType.Transform ? twoFacedByRarity : singleFacedByRarity;
         targetList.get(c.getRarity()).add(c);
 
         if (!c.getRules().getType().isBasicLand()) {

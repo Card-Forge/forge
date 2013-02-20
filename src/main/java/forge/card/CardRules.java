@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
+import com.google.common.collect.Lists;
 
 import forge.card.mana.ManaCost;
 
@@ -38,264 +36,27 @@ import forge.card.mana.ManaCost;
  * @author Forge
  * @version $Id: CardRules.java 9708 2011-08-09 19:34:12Z jendave $
  */
-public final class CardRules {
+public final class CardRules implements ICardCharacteristics {
 
-    private final CardRuleCharacteristics characteristics;
-
-    private int iPower = -1;
-    private int iToughness = -1;
-    private String power = null;
-    private String toughness = null;
-
-    private String loyalty = null;
-
-    //Vanguard avatar modifiers
-    private Integer life = null;
-    private Integer hand = null;
+    private final CardSplitType splitType;
+    private final ICardCharacteristics mainPart;
+    private final ICardCharacteristics otherPart;
+    
+    private CardAiHints aiHints;
 
     Map<String, CardInSet> setsPrinted = null;
+    private Iterable<String> forgeScript;
 
-    boolean isRemovedFromAIDecks = false;
-    boolean isRemovedFromRandomDecks = false;
 
-    private final CardRules slavePart;
 
-    private final boolean hasOtherFace;
-
-    private List<String> originalScript;
-
-    // Ctor and builders are needed here
-    /**
-     * Gets the name.
-     * 
-     * @return the name
-     */
-    public String getName() {
-        return this.characteristics.getCardName();
+    public CardRules(ICardCharacteristics[] faces, CardSplitType altMode, CardAiHints cah, Iterable<String> script) {
+        splitType = altMode;
+        mainPart = faces[0];
+        otherPart = faces[1];
+        aiHints = cah;
+        forgeScript = Lists.newArrayList(script);
     }
 
-    /**
-     * Gets the type.
-     * 
-     * @return the type
-     */
-    public CardType getType() {
-        return this.characteristics.getCardType();
-    }
-
-    /**
-     * Gets the mana cost.
-     * 
-     * @return the mana cost
-     */
-    public ManaCost getManaCost() {
-        return this.characteristics.getManaCost();
-    }
-
-    /**
-     * Gets the color.
-     * 
-     * @return the color
-     */
-    public ColorSet getColor() {
-        return this.characteristics.getColor();
-    }
-
-    /**
-     * Gets the rules.
-     * 
-     * @return the rules
-     */
-    public String getOracleText() {
-        return this.characteristics.getOracleText();
-    }
-
-    /**
-     * 
-     * Gets Slave Part.
-     * 
-     * @return CardRules
-     */
-    public CardRules getSlavePart() {
-        return this.slavePart;
-    }
-
-    /**
-     * Gets the sets printed.
-     * 
-     * @return the sets printed
-     */
-    public Set<Entry<String, CardInSet>> getSetsPrinted() {
-        return this.characteristics.getSetsData().entrySet();
-    }
-
-    /**
-     * Gets the power.
-     * 
-     * @return the power
-     */
-    public String getPower() {
-        return this.power;
-    }
-
-    /**
-     * Gets the int power.
-     * 
-     * @return the int power
-     */
-    public int getIntPower() {
-        return this.iPower;
-    }
-
-    /**
-     * Gets the toughness.
-     * 
-     * @return the toughness
-     */
-    public String getToughness() {
-        return this.toughness;
-    }
-
-    /**
-     * Gets the int toughness.
-     * 
-     * @return the int toughness
-     */
-    public int getIntToughness() {
-        return this.iToughness;
-    }
-
-    /**
-     * Gets the loyalty.
-     * 
-     * @return the loyalty
-     */
-    public String getLoyalty() {
-        return this.loyalty;
-    }
-
-    /**
-     * Gets the rem ai decks.
-     * 
-     * @return the rem ai decks
-     */
-    public boolean getRemAIDecks() {
-        return this.isRemovedFromAIDecks;
-    }
-
-    /**
-     * Gets the rem random decks.
-     * 
-     * @return the rem random decks
-     */
-    public boolean getRemRandomDecks() {
-        return this.isRemovedFromRandomDecks;
-    }
-
-    /**
-     * Gets the p tor loyalty.
-     * 
-     * @return the p tor loyalty
-     */
-    public String getPTorLoyalty() {
-        if (this.getType().isCreature()) {
-            return this.power + "/" + this.toughness;
-        }
-        if (this.getType().isPlaneswalker()) {
-            return this.loyalty;
-        }
-        return "";
-    }
-
-    /**
-     * Checks if is alt state.
-     * 
-     * @return true, if is alt state
-     */
-    public boolean isAltState() {
-        return this.isDoubleFaced() && (this.slavePart == null);
-    }
-
-    /**
-     * Checks if is double faced.
-     * 
-     * @return true, if is double faced
-     */
-    public boolean isDoubleFaced() {
-        return this.hasOtherFace;
-    }
-
-    /**
-     * Instantiates a new card rules.
-     * 
-     * @param chars
-     *            the chars
-     * @param isDoubleFacedCard
-     *            the is double faced card
-     * @param otherPart
-     *            the otherPart
-     * @param removedFromRandomDecks
-     *            the removed from random decks
-     * @param removedFromAIDecks
-     *            the removed from ai decks
-     */
-    public CardRules(final CardRuleCharacteristics chars, List<String> forgeScript, final boolean isDoubleFacedCard,
-            final CardRules otherPart, final boolean removedFromRandomDecks, final boolean removedFromAIDecks) {
-        this.characteristics = chars;
-        this.slavePart = otherPart;
-        this.hasOtherFace = isDoubleFacedCard;
-        this.isRemovedFromAIDecks = removedFromAIDecks;
-        this.isRemovedFromRandomDecks = removedFromRandomDecks;
-        this.originalScript = forgeScript == null ? null : new ArrayList<String>(forgeScript);
-        // System.out.println(cardName);
-
-        if (this.getType().isCreature()) {
-            final int slashPos = this.characteristics.getPtLine() == null ? -1 : this.characteristics.getPtLine()
-                    .indexOf('/');
-            if (slashPos == -1) {
-                throw new RuntimeException(String.format("Creature '%s' has bad p/t stats", this.getName()));
-            }
-            this.power = this.characteristics.getPtLine().substring(0, slashPos);
-            this.toughness = this.characteristics.getPtLine().substring(slashPos + 1,
-                    this.characteristics.getPtLine().length());
-            this.iPower = StringUtils.isNumeric(this.power) ? Integer.parseInt(this.power) : 0;
-            this.iToughness = StringUtils.isNumeric(this.toughness) ? Integer.parseInt(this.toughness) : 0;
-        } else if (this.getType().isPlaneswalker()) {
-            this.loyalty = this.characteristics.getPtLine();
-        } else if (this.getType().isVanguard()) {
-            String pt = this.characteristics.getPtLine();
-            final int slashPos = this.characteristics.getPtLine() == null ? -1 : this.characteristics.getPtLine()
-                    .indexOf('/');
-            if (slashPos == -1) {
-                throw new RuntimeException(String.format("Vanguard '%s' has bad hand/life stats", this.getName()));
-            }
-            this.hand = Integer.parseInt(pt.substring(0, pt.indexOf('/')).replace("+", ""));
-            this.life = Integer.parseInt(pt.substring(pt.indexOf('/') + 1).replace("+", ""));
-        }
-
-        if (this.characteristics.getSetsData().isEmpty()) {
-            this.characteristics.getSetsData().put("???", new CardInSet(CardRarity.Unknown, 1, null));
-        }
-        this.setsPrinted = this.characteristics.getSetsData();
-    }
-
-    /**
-     * Rules contain.
-     * 
-     * @param text
-     *            the text
-     * @return true, if successful
-     */
-    public boolean rulesContain(final String text) {
-        if (this.characteristics.getOracleText() == null) {
-            return false;
-        }
-
-        if (StringUtils.containsIgnoreCase(this.characteristics.getOracleText(), text)) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * Gets the latest set printed.
@@ -311,21 +72,7 @@ public final class CardRules {
         return lastSet;
     }
 
-    /**
-     * Gets the sets the info.
-     * 
-     * @param setCode
-     *            the set code
-     * @return the sets the info
-     */
-    public CardInSet getEditionInfo(final String setCode) {
-        final CardInSet result = this.setsPrinted.get(setCode);
-        if (result != null) {
-            return result;
-        }
-        throw new RuntimeException(String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode));
 
-    }
 
     /**
      * Gets the rarity from latest set.
@@ -338,87 +85,144 @@ public final class CardRules {
     }
 
     /**
-     * Gets the ai status.
-     * 
-     * @return the ai status
-     */
-    public String getAiStatus() {
-        return this.isRemovedFromAIDecks ? (this.isRemovedFromRandomDecks ? "AI ?" : "AI")
-                : (this.isRemovedFromRandomDecks ? "?" : "");
-    }
-
-    /**
-     * Gets the ai status comparable.
-     * 
-     * @return the ai status comparable
-     */
-    public Integer getAiStatusComparable() {
-        if (this.isRemovedFromAIDecks && this.isRemovedFromRandomDecks) {
-            return Integer.valueOf(3);
-        } else if (this.isRemovedFromAIDecks) {
-            return Integer.valueOf(4);
-        } else if (this.isRemovedFromRandomDecks) {
-            return Integer.valueOf(2);
-        } else {
-            return Integer.valueOf(1);
-        }
-    }
-
-    /**
      * TODO: Write javadoc for this method.
      * @return
      */
-    public Iterable<String> getCardScript() {
-        return originalScript;
+    public Iterable<String> getForgeScript() {
+        return forgeScript;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public String getPictureUrl() {
-        return characteristics.getDlUrl();
-    }
 
-    /**
-     * @return the deckHints
-     */
-    public DeckHints getDeckHints() {
-        return characteristics.getDeckHints();
-    }
-
-    /**
-     * @return the deckHints
-     */
-    public DeckHints getDeckNeeds() {
-        return characteristics.getDeckNeeds();
-    }
-
-    /**
-     * @return the keywords
-     */
-    public List<String> getKeywords() {
-        return characteristics.getKeywords();
-    }
-
-    /**
-     * @return the hand
-     */
-    public Integer getHand() {
-        return hand;
-    }
-
-    /**
-     * @return the life
-     */
-    public Integer getLife() {
-        return life;
-    }
-    
 
     public boolean isTraditional() {
         return !(getType().isVanguard() || getType().isScheme() || getType().isPlane() || getType().isPhenomenon());
     }
+
+
+    /**
+     * @return the splitType
+     */
+    public CardSplitType getSplitType() {
+        return splitType;
+    }
+
+    public ICardCharacteristics getMainPart() {
+        // TODO Auto-generated method stub
+        return mainPart;
+    }
+
+
+    public ICardCharacteristics getOtherPart() {
+        return otherPart;
+    }
+
+
+    public String getName() {
+        switch(splitType.getAggregationMethod()) {
+            case AGGREGATE:
+                return mainPart.getName() + " // " + otherPart.getName();
+            default:
+                return mainPart.getName();
+        }
+    }
+
+    public CardAiHints getAiHints() {
+        return aiHints;
+    }
+
+    @Override
+    public CardType getType() {
+        switch(splitType.getAggregationMethod()) {
+            case AGGREGATE: // no cards currently have different types
+                return CardType.combine(mainPart.getType(), otherPart.getType());
+            default:
+                return mainPart.getType();
+        }
+    }
+
+
+    @Override
+    public ManaCost getManaCost() {
+        switch(splitType.getAggregationMethod()) {
+        case AGGREGATE:
+            return ManaCost.combine(mainPart.getManaCost(), otherPart.getManaCost());
+        default:
+            return mainPart.getManaCost();
+        }
+    }
+
+
+    @Override
+    public ColorSet getColor() {
+        switch(splitType.getAggregationMethod()) {
+        case AGGREGATE:
+            return ColorSet.fromMask(mainPart.getColor().getColor() | otherPart.getColor().getColor()); 
+        default:
+            return mainPart.getColor();
+        }
+    }
+
+
+    @Override     public int getIntPower() { return mainPart.getIntPower(); }
+    @Override     public int getIntToughness() { return mainPart.getIntToughness(); }
+    @Override     public String getPower() { return mainPart.getPower(); }
+    @Override     public String getToughness() { return mainPart.getToughness(); }
+    @Override     public int getInitialLoyalty() { return mainPart.getInitialLoyalty(); }
+
+
+    @Override
+    public String getOracleText() {
+        switch(splitType.getAggregationMethod()) {
+        case AGGREGATE:
+            return mainPart.getOracleText() + "\r\n\r\n" + otherPart.getOracleText(); 
+        default:
+            return mainPart.getOracleText();
+        }
+    }
+
+
+    @Override
+    public Iterable<String> getKeywords() {
+        switch(splitType.getAggregationMethod()) {
+        case AGGREGATE:
+            List<String> res = new ArrayList<String>();
+            for(String ka : mainPart.getKeywords())
+                res.add(ka);
+            for(String kb : otherPart.getKeywords())
+                res.add(kb);
+            return res; 
+        default:
+            return mainPart.getKeywords();
+        }
+    }
+
+    
+    public Iterable<Entry<String, CardInSet>> getSetsPrinted() { return mainPart.getSetsPrinted(); }
+    public CardInSet getEditionInfo(final String setCode) { return mainPart.getEditionInfo(setCode); }
+
+
+    // vanguard card fields, they don't use sides.
+    private int deltaHand;
+    private int deltaLife;
+
+    public int getHand() { return deltaHand; }
+    public int getLife() { return deltaLife; }
+    public void setVanguardProperties(String pt) {
+        final int slashPos = pt == null ? -1 : pt.indexOf('/');
+        if (slashPos == -1) {
+            throw new RuntimeException(String.format("Vanguard '%s' has bad hand/life stats", this.getName()));
+        }
+        this.deltaHand = Integer.parseInt(pt.substring(0, pt.indexOf('/')).replace("+", ""));
+        this.deltaLife = Integer.parseInt(pt.substring(pt.indexOf('/') + 1).replace("+", ""));
+    }
+
+    // Downloadable image
+    private String dlUrl;
+    private String dlUrlOtherSide;
+    public String getPictureUrl() { return dlUrl; }
+    public String getPictureOtherSideUrl() { return dlUrlOtherSide; }
+    public void setDlUrls(String[] dlUrls) { this.dlUrl = dlUrls[0]; this.dlUrlOtherSide = dlUrls[1]; }
+
 
 
 }

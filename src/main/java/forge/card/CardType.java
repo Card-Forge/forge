@@ -86,6 +86,17 @@ public final class CardType implements Comparable<CardType> {
         return result;
     }
 
+    public static CardType combine(final CardType a, final CardType b) {
+        CardType result = new CardType();
+        result.superType.addAll(a.superType);
+        result.superType.addAll(b.superType);
+        result.coreType.addAll(a.coreType);
+        result.coreType.addAll(b.coreType);
+        result.subType.addAll(a.subType);
+        result.subType.addAll(b.subType);
+        return result;
+    }
+    
     private static boolean isMultiwordType(final String type) {
         final String[] multiWordTypes = { "Serra's Realm", "Bolas's Meditation Realm" };
         // no need to loop for only 2 exceptions!

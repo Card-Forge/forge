@@ -43,14 +43,14 @@ public class GenerateDeckUtil {
     public static final Predicate<CardRules> AI_CAN_PLAY = new Predicate<CardRules>() {
         @Override
         public boolean apply(CardRules c) {
-            return !c.getRemAIDecks() && !c.getRemRandomDecks();
+            return !c.getAiHints().getRemAIDecks() && !c.getAiHints().getRemRandomDecks();
         }
     };
 
     public static final Predicate<CardRules> HUMAN_CAN_PLAY = new Predicate<CardRules>() {
         @Override
         public boolean apply(CardRules c) {
-            return !c.getRemRandomDecks();
+            return !c.getAiHints().getRemRandomDecks();
         }
     };
 

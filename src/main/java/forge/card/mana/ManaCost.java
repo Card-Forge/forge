@@ -33,10 +33,10 @@ import forge.card.ColorSet;
  */
 
 public final class ManaCost implements Comparable<ManaCost> {
-    private final List<ManaCostShard> shards;
+    private List<ManaCostShard> shards;
     private final int genericCost;
     private final boolean hasNoCost; // lands cost
-    private final String stringValue; // precalculated for toString;
+    private String stringValue; // precalculated for toString;
 
     private Float compareWeight = null;
 
@@ -49,7 +49,11 @@ public final class ManaCost implements Comparable<ManaCost> {
     private ManaCost(int cmc) {
         this.hasNoCost = cmc < 0;
         this.genericCost = cmc < 0 ? 0 : cmc;
-        this.shards = Collections.unmodifiableList(new ArrayList<ManaCostShard>());
+        sealClass(new ArrayList<ManaCostShard>());
+    }
+    
+    private void sealClass(List<ManaCostShard> shards0) {
+        this.shards = Collections.unmodifiableList(shards0);
         this.stringValue = this.getSimpleString();
     }
 
@@ -75,8 +79,7 @@ public final class ManaCost implements Comparable<ManaCost> {
         this.genericCost = parser.getTotalColorlessCost(); // collect generic
                                                            // mana
         // here
-        this.shards = Collections.unmodifiableList(shardsTemp);
-        this.stringValue = this.getSimpleString();
+        sealClass(shardsTemp);
     }
 
     private String getSimpleString() {
@@ -254,6 +257,21 @@ public final class ManaCost implements Comparable<ManaCost> {
             }
         }
         return true;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param manaCost
+     * @param manaCost2
+     * @return
+     */
+    public static ManaCost combine(ManaCost a, ManaCost b) {
+        ManaCost res = new ManaCost(a.genericCost + b.genericCost);
+        List<ManaCostShard> sh = new ArrayList<ManaCostShard>();
+        sh.addAll(a.shards);
+        sh.addAll(b.shards);
+        res.sealClass(sh);
+        return res;
     }
 
 }
