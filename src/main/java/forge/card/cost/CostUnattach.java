@@ -103,6 +103,7 @@ public class CostUnattach extends CostPartWithList {
         Card equippingCard = cardToUnattach.getEquipping().get(0);
         cardToUnattach.unEquipCard(equippingCard);
         this.addToList(cardToUnattach);
+        this.addListToHash(ability, "Unattached");
     }
 
     /*
@@ -121,6 +122,7 @@ public class CostUnattach extends CostPartWithList {
             Card equippingCard = cardToUnattach.getEquipping().get(0);
             cardToUnattach.unEquipCard(equippingCard);
             this.addToList(cardToUnattach);
+            this.addListToHash(ability, "Unattached");
             payment.setPaidManaPart(this);
         } else {
             payment.setCancel(true);
