@@ -18,6 +18,7 @@
 package forge.quest;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -34,9 +35,11 @@ import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.card.UnOpenedProduct;
+import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
+import forge.item.TournamentPack;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -304,8 +307,15 @@ public final class BoosterUtils {
         } else if (temp.length >= 2 && temp[0].equalsIgnoreCase("chosen") && temp[1].equalsIgnoreCase("card")) {
             // Type 3: a duplicate card of the players choice
             rewards.add(new QuestRewardCardFiltered(temp));
-        } else if (temp.length > 0) {
-            // Type 4: assume we are asking for a single copy of a specific card
+        } else if (temp.length >= 3 && temp[0].equalsIgnoreCase("booster") && temp[1].equalsIgnoreCase("pack")) {
+            // Type 4: a predetermined extra booster pack
+            rewards.add(BoosterPack.FN_FROM_SET.apply(Singletons.getModel().getEditions().get(temp[2])));
+        } else if (temp.length >= 3 && temp[0].equalsIgnoreCase("tournament") && temp[1].equalsIgnoreCase("pack")) {
+            // Type 5: a predetermined extra tournament ("starter") pack
+            rewards.add(TournamentPack.FN_FROM_SET.apply(Singletons.getModel().getEditions().get(temp[2])));
+        }
+        else if (temp.length > 0) {
+            // default: assume we are asking for a single copy of a specific card
             final CardPrinted specific = CardDb.instance().getCard(s);
             if (specific != null) {
                 rewards.add(specific);

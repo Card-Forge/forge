@@ -40,9 +40,12 @@ import forge.gui.SOverlayUtils;
 import forge.gui.home.quest.CSubmenuChallenges;
 import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
+import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
+import forge.item.OpenablePack;
+import forge.item.TournamentPack;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
@@ -694,7 +697,24 @@ public class QuestWinLose extends ControlWinLose {
         for (InventoryItem ii : itemsWon) {
             if (ii instanceof CardPrinted) {
                 cardsWon.add((CardPrinted) ii);
-            } else if (ii instanceof IQuestRewardCard) {
+            } else if (ii instanceof TournamentPack || ii instanceof BoosterPack) {
+                List<CardPrinted> boosterCards = new ArrayList<CardPrinted>();
+                OpenablePack booster = null;
+                if (ii instanceof BoosterPack) {
+                    booster = (BoosterPack) ((BoosterPack) ii).clone();
+                    boosterCards.addAll(booster.getCards());
+                } else if (ii instanceof TournamentPack) {
+                    booster = (TournamentPack) ((TournamentPack) ii).clone();
+                    boosterCards.addAll(booster.getCards());
+                }
+                if (!boosterCards.isEmpty()) {
+                    qData.getCards().addAllCards(boosterCards);
+                    final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(boosterCards);
+                    this.view.getPnlCustom().add(new TitleLabel("Extra " + ii.getName() + "!"), QuestWinLose.CONSTRAINTS_TITLE);
+                    this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
+                }
+            }
+            else if (ii instanceof IQuestRewardCard) {
                 final List<CardPrinted> cardChoices = ((IQuestRewardCard) ii).getChoices();
                 final CardPrinted chosenCard = (null == cardChoices ? null : GuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName() + ":", cardChoices));
                 if (null != chosenCard) {
