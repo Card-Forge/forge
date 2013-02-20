@@ -4739,6 +4739,7 @@ res/cardsfolder/h/heartlash_cinder.txt svneol=native#text/plain
 res/cardsfolder/h/heartless_hidetsugu.txt svneol=native#text/plain
 res/cardsfolder/h/heartless_summoning.txt -text
 res/cardsfolder/h/heartmender.txt svneol=native#text/plain
+res/cardsfolder/h/heartseeker.txt -text
 res/cardsfolder/h/heartstabber_mosquito.txt svneol=native#text/plain
 res/cardsfolder/h/heartstone.txt svneol=native#text/plain
 res/cardsfolder/h/heartwood_dryad.txt svneol=native#text/plain
@@ -13888,6 +13889,7 @@ src/main/java/forge/card/cost/CostReveal.java -text
 src/main/java/forge/card/cost/CostSacrifice.java -text
 src/main/java/forge/card/cost/CostTap.java -text
 src/main/java/forge/card/cost/CostTapType.java -text
+src/main/java/forge/card/cost/CostUnattach.java -text
 src/main/java/forge/card/cost/CostUntap.java -text
 src/main/java/forge/card/cost/CostUntapType.java -text
 src/main/java/forge/card/cost/CostUtil.java -text

@@ -1,0 +1,12 @@
+Name:Heartseeker
+ManaCost:4
+Types:Artifact Equipment
+Text:no text
+K:Equip 5
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | AddAbility$ SeekerDestroy | Description$ Equipped creature gets +2/+1 and has "{T}, Unattach Heartseeker: Destroy target creature."
+SVar:SeekerDestroy:AB$ Destroy | Cost$ T Unattach<Card.Attached+namedHeartseeker/equipped Heartseeker> | ValidTgts$ Creature | SpellDescription$ Destroy target creature.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heartseeker.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/124.jpg
+Oracle:Equipped creature gets +2/+1 and has "{T}, Unattach Heartseeker: Destroy target creature."\nEquip {5} ({5}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+End

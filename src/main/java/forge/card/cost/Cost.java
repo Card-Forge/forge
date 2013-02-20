@@ -232,14 +232,21 @@ public class Cost {
             return new CostGainLife(splitStr[0], splitStr[1], cnt);
         }
     
+        if(parse.startsWith("Unattach<")) {
+            // Unattach<Type/Desc>
+            final String[] splitStr = abCostParse(parse, 2);
+            final String description = splitStr.length > 1 ? splitStr[1] : null;
+            return new CostUnattach(splitStr[0], description);
+        }  
+
         if(parse.startsWith("DamageYou<")) {
-            // PayLife<LifeCost>
+            // Damage<NumDmg>
             final String[] splitStr = abCostParse(parse, 1);
             return new CostDamage(splitStr[0]);
         }
     
         if(parse.startsWith("Mill<")) {
-            // PayLife<LifeCost>
+            // Mill<NumCards>
             final String[] splitStr = abCostParse(parse, 1);
             return new CostMill(splitStr[0]);
         }
