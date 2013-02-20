@@ -46,7 +46,7 @@ public class CardRulesReader {
     private CardFace[] faces = new CardFace[] { null, null };
     private String[] pictureUrl = new String[] { null, null };
     private int curFace = 0;
-    private CardSplitType altMode;
+    private CardSplitType altMode = CardSplitType.None;
     private String handLife = null; 
     
     // fields to build CardAiHints
