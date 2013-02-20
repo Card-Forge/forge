@@ -3,8 +3,8 @@ ManaCost:4
 Types:Artifact Equipment
 Text:no text
 K:Equip 5
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | AddAbility$ SeekerDestroy | Description$ Equipped creature gets +2/+1 and has "{T}, Unattach Heartseeker: Destroy target creature."
-SVar:SeekerDestroy:AB$ Destroy | Cost$ T Unattach<Card.Attached+namedHeartseeker/equipped Heartseeker> | ValidTgts$ Creature | SpellDescription$ Destroy target creature.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | AddAbility$ SeekerDestroy | Description$ Equipped creature gets +2/+1 and has "{T}, Unattach CARDNAME: Destroy target creature."
+SVar:SeekerDestroy:AB$ Destroy | Cost$ T Unattach<OriginalHost/Heartseeker> | ValidTgts$ Creature | SpellDescription$ Destroy target creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartseeker.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/124.jpg

@@ -33,22 +33,20 @@ import forge.gui.GuiDialog;
 public class CostUnattach extends CostPartWithList {
     // Unattach<CARDNAME> if ability is on the Equipment
     // Unattach<Card.Attached+namedHeartseeker/Equipped Heartseeker> if equipped creature has the ability
-    
+
     /**
      * Instantiates a new cost unattach.
      */
     public CostUnattach(final String type, final String desc) {
         super("1", type, desc);
     }
-    
+
     @Override
     public boolean isUndoable() { return false; }
-    
 
     @Override
     public boolean isReusable() { return false; }
 
-    
     /*
      * (non-Javadoc)
      * 
@@ -73,6 +71,11 @@ public class CostUnattach extends CostPartWithList {
             if (source.isEquipping()) {
                 return true;
             }
+        } else if (type.equals("OriginalHost")) {
+            Card originalEquipment = ability.getOriginalHost();
+            if (originalEquipment.isEquipping()) {
+                return true;
+            }
         } else {
             List<Card> equipped = source.getEquippedBy();
             if (CardLists.getValidCards(equipped, type, activator, source).size() > 0) {
@@ -91,7 +94,7 @@ public class CostUnattach extends CostPartWithList {
      */
     @Override
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        Card cardToUnattach = findCardToUnattach(source, (Player)ai);
+        Card cardToUnattach = findCardToUnattach(source, (Player) ai, ability);
         if (cardToUnattach == null) {
             // We really shouldn't be able to get here if there's nothing to unattach
             return;
@@ -113,7 +116,7 @@ public class CostUnattach extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         this.resetList();
         Player activator = ability.getActivatingPlayer();
-        Card cardToUnattach = findCardToUnattach(source, activator);
+        Card cardToUnattach = findCardToUnattach(source, activator, ability);
         if (cardToUnattach != null && GuiDialog.confirm(source, String.format("Unattach %s?", cardToUnattach.toString()))) {
             Card equippingCard = cardToUnattach.getEquipping().get(0);
             cardToUnattach.unEquipCard(equippingCard);
@@ -127,11 +130,16 @@ public class CostUnattach extends CostPartWithList {
 
         return true;
     }
-    
-    private Card findCardToUnattach(final Card source, Player activator) {
+
+    private Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {
         if (getType().equals("CARDNAME")) {
             if (source.isEquipping()) {
                 return source;
+            }
+        } else if (getType().equals("OriginalHost")) {
+            Card originalEquipment = ability.getOriginalHost();
+            if (originalEquipment.isEquipping()) {
+                return originalEquipment;
             }
         } else {
             List<Card> attachees = CardLists.getValidCards(source.getEquippedBy(), this.getType(), activator, source);

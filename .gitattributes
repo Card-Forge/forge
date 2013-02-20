@@ -1008,6 +1008,7 @@ res/cardsfolder/b/blinding_angel.txt -text
 res/cardsfolder/b/blinding_beam.txt -text
 res/cardsfolder/b/blinding_light.txt svneol=native#text/plain
 res/cardsfolder/b/blinding_mage.txt svneol=native#text/plain
+res/cardsfolder/b/blinding_powder.txt -text
 res/cardsfolder/b/blinding_souleater.txt svneol=native#text/plain
 res/cardsfolder/b/blinking_spirit.txt svneol=native#text/plain
 res/cardsfolder/b/blinkmoth_infusion.txt svneol=native#text/plain
