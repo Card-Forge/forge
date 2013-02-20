@@ -12349,9 +12349,9 @@ res/lang/en.properties svneol=native#text/plain
 res/lang/howTo/de.properties svneol=native#text/plain
 res/lang/howTo/en.properties svneol=native#text/plain
 res/lang/lang.properties svneol=native#text/plain
-res/layouts/editor_default.xml -text
-res/layouts/home_default.xml -text
-res/layouts/match_default.xml -text
+res/layouts/editor_default.xml svneol=native#text/xml
+res/layouts/home_default.xml svneol=native#text/xml
+res/layouts/match_default.xml svneol=native#text/xml
 res/licenses/java-yield-license.txt svneol=native#text/plain
 res/licenses/log4j-license.txt svneol=native#text/plain
 res/licenses/multiline-label-license.txt svneol=native#text/plain
@@ -12672,7 +12672,7 @@ res/pics_product/tournamentpacks/TMP.jpg -text
 res/pics_product/tournamentpacks/TSP.jpg -text
 res/pics_product/tournamentpacks/USG.jpg -text
 res/preferences/.project -text
-res/preferences/editor.default.preferences -text svneol=native#application/xml
+res/preferences/editor.default.preferences svneol=native#text/xml
 res/preferences/main.properties -text
 res/product-images.txt -text
 res/quest/all-prices.txt svneol=native#text/plain
@@ -12692,7 +12692,7 @@ res/quest/bazaar/hound_pet_l1.txt -text
 res/quest/bazaar/hound_pet_l2.txt -text
 res/quest/bazaar/hound_pet_l3.txt -text
 res/quest/bazaar/hound_pet_l4.txt -text
-res/quest/bazaar/index.xml -text
+res/quest/bazaar/index.xml svneol=native#text/xml
 res/quest/bazaar/plant_wall_l1.txt -text
 res/quest/bazaar/plant_wall_l2.txt -text
 res/quest/bazaar/plant_wall_l3.txt -text
