@@ -234,6 +234,12 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
                 tabtext = "Card Catalog";
                 break;
             case Avatar:
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COST));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COLOR));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_CMC));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_POWER));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS));
                 this.getTableCatalog().setAvailableColumns(lstCatalogCols);
                 this.getTableCatalog().setDeck(avatarPool,true);
                 this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Avatar));
@@ -242,6 +248,12 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
                 tabtext = "Card Catalog";
                 break;
             case Planes:
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COST));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_CMC));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COLOR));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_POWER));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS));
                 this.getTableCatalog().setAvailableColumns(lstCatalogCols);
                 this.getTableCatalog().setDeck(planePool,true);
                 this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Planes));
@@ -250,6 +262,12 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
                 tabtext = "Card Catalog";
                 break;
             case Schemes:
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_CMC));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COST));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_COLOR));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_POWER));
+                lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS));
                 this.getTableCatalog().setAvailableColumns(lstCatalogCols);
                 this.getTableCatalog().setDeck(schemePool,true);
                 this.getTableDeck().setDeck(this.controller.getModel().getOrCreate(DeckSection.Schemes));
