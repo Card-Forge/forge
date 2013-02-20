@@ -56,6 +56,17 @@ def printCardSet(implementedSet, missingSet, fileName, setCoverage=None, printIm
 			for s in missing:
 				outfile.write("\n%s" % s)
 
+def printDistinctOracle(missingSet, fileName):
+	filePath = os.path.join(sys.path[0], "PerSetTrackingResults", fileName)
+	missing = list(missingSet)
+	missing.sort()
+	with open(filePath, "w") as outfile:
+		for s in missing:
+			if s:
+			oracle = mtgOracleCards.get(s, "")
+				outfile.write("%s\n%s\n" % (s, oracle))
+
+
 if __name__ == '__main__':
 	if not os.path.exists(pathToMtgData) :
 		print("This script requires the text version of Arch's mtg-data to be present.You can download it from slightlymagic.net's forum and either place the text version next to this script or edit this script and provide the path to the file at the top.")
@@ -69,6 +80,7 @@ if __name__ == '__main__':
 	forgeFolderFiles = []
 	forgeCards = []
 	mtgDataCards = {}
+	mtgOracleCards = {}
 	setCodes = []
 	setCodeToName = {}
 	forgeCardCount = 0
@@ -80,6 +92,7 @@ if __name__ == '__main__':
 	tmpName = ""
 	line = ""
 	prevline = ""
+	twoPrior = ""
 
 	#Parse mtg-data
 	print("Parsing mtg-data")
@@ -99,7 +112,9 @@ if __name__ == '__main__':
 				if not hasFetchedCardName :
 					tmpName = line.rstrip().replace("AE", "Ae")
 					hasFetchedCardName = True
+
 				if line == "\n" :
+					mtgOracleCards[tmpName] = twoPrior
 					sets = prevline.split(", ")
 					for i in range(len(sets)):
 						sets[i] = sets[i].split(' ')[0]
@@ -107,6 +122,7 @@ if __name__ == '__main__':
 					mtgDataCards[tmpName] = sets
 					hasFetchedCardName = False
 
+			twoPrior = prevline
 			prevline = line
 
 	#Parse Forge
@@ -196,5 +212,6 @@ if __name__ == '__main__':
 
 	printCardSet(allImplemented, allMissing, "DistinctStats.txt")
 	printCardSet(standardImplemented, standardMissing, "FormatStandard.txt", setCoverage=standardSets)
+	printDistinctOracle(allMissing, "DistinctOracle.txt")
 
 	print "Done!"
