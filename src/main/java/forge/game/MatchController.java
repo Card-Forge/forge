@@ -12,7 +12,7 @@ import forge.Constant.Preferences;
 import forge.control.FControl;
 import forge.control.input.InputControl;
 import forge.deck.Deck;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -179,7 +179,7 @@ public class MatchController {
 
             CMatchUI.SINGLETON_INSTANCE.setCard(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Hand).get(0));
         } catch (Exception e) {
-            ErrorViewer.showError(e);
+            BugReporter.reportException(e);
         }
 
     }

@@ -21,7 +21,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import forge.deck.CardPool;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.IgnoringXStream;
@@ -128,7 +128,7 @@ public class GauntletIO {
 
             return data;
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex, "Error loading Gauntlet Data");
+            BugReporter.reportException(ex, "Error loading Gauntlet Data");
             throw new RuntimeException(ex);
         }
     }
@@ -146,7 +146,7 @@ public class GauntletIO {
             final XStream xStream = GauntletIO.getSerializer(false);
             GauntletIO.savePacked(xStream, gd0);
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex, "Error saving Gauntlet Data.");
+            BugReporter.reportException(ex, "Error saving Gauntlet Data.");
             throw new RuntimeException(ex);
         }
     }

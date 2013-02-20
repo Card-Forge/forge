@@ -34,7 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Function;
 
 import forge.deck.io.OldDeckFileFormatException;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.util.IItemReader;
 
 /**
@@ -81,7 +81,7 @@ public abstract class StorageReaderFolder<T> implements IItemReader<T> {
                 }
             }
         } catch (final IOException ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             throw new RuntimeException("DeckManager : writeDeck() error, " + ex.getMessage());
         }
     }

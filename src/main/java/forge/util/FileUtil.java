@@ -32,7 +32,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiDownloadPictures.Errors;
 
@@ -103,7 +103,7 @@ public final class FileUtil {
             io.flush();
             io.close();
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
         }
     } // writeAllDecks()
@@ -140,7 +140,7 @@ public final class FileUtil {
             }
             return FileUtil.readAllLines(new FileReader(file), false);
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             throw new RuntimeException("FileUtil : readFile() error, " + ex);
         }
     } // readFile()
@@ -175,7 +175,7 @@ public final class FileUtil {
             }
             in.close();
         } catch (final IOException ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             throw new RuntimeException("FileUtil : readAllLines() error, " + ex);
         }
         return list;
@@ -207,7 +207,7 @@ public final class FileUtil {
             out.flush();
             out.close();
         } catch (final IOException ioex) {
-            ErrorViewer.showError(ioex, ForgeProps.getLocalized(Errors.OTHER), "deck_temp.html", url);
+            BugReporter.reportException(ioex, ForgeProps.getLocalized(Errors.OTHER), "deck_temp.html", url);
         }
 
     }

@@ -52,7 +52,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.CardUtil;
 import forge.Singletons;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
@@ -360,7 +360,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
                 p = new Proxy(GuiMigrateLocalMWSSetPicturesHQ.TYPES[this.type], new InetSocketAddress(
                         this.addr.getText(), Integer.parseInt(this.port.getText())));
             } catch (final Exception ex) {
-                ErrorViewer.showError(ex,
+                BugReporter.reportException(ex,
                         ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Errors.PROXY_CONNECT),
                         this.addr.getText(), this.port.getText());
                 // throw new

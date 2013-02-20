@@ -14036,8 +14036,6 @@ src/main/java/forge/deck/io/OldDeckFileFormatException.java -text
 src/main/java/forge/deck/io/OldDeckParser.java -text
 src/main/java/forge/deck/io/package-info.java svneol=native#text/plain
 src/main/java/forge/deck/package-info.java svneol=native#text/plain
-src/main/java/forge/error/BugzReporter.java svneol=native#text/plain
-src/main/java/forge/error/ErrorViewer.java svneol=native#text/plain
 src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 src/main/java/forge/error/package-info.java svneol=native#text/plain
 src/main/java/forge/game/GameAction.java svneol=native#text/plain

@@ -31,7 +31,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.game.player.Player;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
@@ -79,7 +79,7 @@ public class CardFactory {
             CardDb.setup(listCardRules.iterator());
 
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
         }
 
     } // constructor

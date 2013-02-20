@@ -44,7 +44,7 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
@@ -760,7 +760,7 @@ public class ComputerUtil {
                     }
 
                 } catch (final Exception ex) {
-                    ErrorViewer.showError(ex, "There is an error in the card code for %s:%n", c.getName(),
+                    BugReporter.reportException(ex, "There is an error in the card code for %s:%n", c.getName(),
                             ex.getMessage());
                 }
             }
@@ -806,7 +806,7 @@ public class ComputerUtil {
                         }
                     }
                 } catch (final Exception ex) {
-                    ErrorViewer.showError(ex, "There is an error in the card code for %s:%n", c.getName(),
+                    BugReporter.reportException(ex, "There is an error in the card code for %s:%n", c.getName(),
                             ex.getMessage());
                 }
             }

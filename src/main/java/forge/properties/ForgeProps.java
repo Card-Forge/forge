@@ -27,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.util.TreeProperties;
 
 /**
@@ -47,7 +47,7 @@ public class ForgeProps {
             p = new TreeProperties(NewConstants.PREFS_MAIN_PROPERTIES_FILE);
             p.rethrow();
         } catch (final IOException ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             p = null;
         }
         PROPERTIES = p;

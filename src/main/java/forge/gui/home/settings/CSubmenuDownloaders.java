@@ -3,7 +3,7 @@ package forge.gui.home.settings;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
-import forge.error.BugzReporter;
+import forge.error.BugReporter;
 import forge.gui.GuiImportPicture;
 import forge.gui.download.GuiDownloadPicturesLQ;
 import forge.gui.download.GuiDownloadPrices;
@@ -45,8 +45,7 @@ public enum CSubmenuDownloaders implements ICDoc {
 
     private final Command cmdReportBug = new Command() { @Override
         public void execute() {
-            final BugzReporter br = new BugzReporter();
-            br.setVisible(true);
+            BugReporter.reportBug(null);
         }
     };
 

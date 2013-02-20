@@ -48,7 +48,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
     /** {@inheritDoc} */
     @Override
     public final void uncaughtException(final Thread t, final Throwable ex) {
-        ErrorViewer.showError(ex);
+        BugReporter.reportException(ex);
     }
 
     /**
@@ -59,6 +59,6 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
      *            a {@link java.lang.Throwable} object.
      */
     public final void handle(final Throwable ex) {
-        ErrorViewer.showError(ex);
+        BugReporter.reportException(ex);
     }
 }

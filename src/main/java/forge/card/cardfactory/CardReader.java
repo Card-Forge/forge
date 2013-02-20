@@ -46,7 +46,7 @@ import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.gui.toolbox.FProgressBar;
 import forge.util.FileUtil;
 import forge.view.FView;
@@ -474,7 +474,7 @@ public class CardReader {
             fileInputStream = new FileInputStream(pathToTxtFile);
             return this.loadCard(fileInputStream);
         } catch (final FileNotFoundException ex) {
-            ErrorViewer.showError(ex, "File \"%s\" exception", pathToTxtFile.getAbsolutePath());
+            BugReporter.reportException(ex, "File \"%s\" exception", pathToTxtFile.getAbsolutePath());
             throw new RuntimeException("CardReader : run error -- file exception -- filename is "
                     + pathToTxtFile.getPath(), ex);
         } finally {

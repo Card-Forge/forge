@@ -13,7 +13,7 @@ import forge.Command;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.io.DeckSerializer;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.tables.DeckController;
@@ -137,7 +137,7 @@ public enum CCurrentDeck implements ICDoc {
                 }
             });
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             throw new RuntimeException("Error creating new deck. " + ex);
         }
     }
@@ -156,7 +156,7 @@ public enum CCurrentDeck implements ICDoc {
                         .setModel(Deck.fromFile(file));
 
             } catch (final Exception ex) {
-                ErrorViewer.showError(ex);
+                BugReporter.reportException(ex);
                 throw new RuntimeException("Error importing deck." + ex);
             }
         }
@@ -191,7 +191,7 @@ public enum CCurrentDeck implements ICDoc {
                 ((DeckController<Deck>) CDeckEditorUI.SINGLETON_INSTANCE
                 .getCurrentEditorController().getDeckController()).getModel(), filename);
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             throw new RuntimeException("Error exporting deck." + ex);
         }
     }
@@ -209,7 +209,7 @@ public enum CCurrentDeck implements ICDoc {
                 ((DeckController<Deck>) CDeckEditorUI.SINGLETON_INSTANCE
                 .getCurrentEditorController().getDeckController()).getModel(), filename);
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             throw new RuntimeException("Error exporting deck." + ex);
         }
     }

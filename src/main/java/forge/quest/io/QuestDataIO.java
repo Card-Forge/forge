@@ -58,7 +58,7 @@ import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.quest.data.GameFormatQuest;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
@@ -142,13 +142,13 @@ public class QuestDataIO {
                 try {
                     QuestDataIO.updateSaveFile(data, xml.toString(), xmlSaveFile.getName().replace(".dat", ""));
                 } catch (final Exception e) {
-                    forge.error.ErrorViewer.showError(e);
+                    forge.error.BugReporter.reportException(e);
                 }
             }
 
             return data;
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex, "Error loading Quest Data");
+            BugReporter.reportException(ex, "Error loading Quest Data");
             throw new RuntimeException(ex);
         }
     }
@@ -361,7 +361,7 @@ public class QuestDataIO {
             // QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
 
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex, "Error saving Quest Data.");
+            BugReporter.reportException(ex, "Error saving Quest Data.");
             throw new RuntimeException(ex);
         }
     }

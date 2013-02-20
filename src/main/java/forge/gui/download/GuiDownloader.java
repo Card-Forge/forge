@@ -56,7 +56,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Command;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
@@ -337,7 +337,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 p = new Proxy(GuiDownloader.TYPES[this.type], new InetSocketAddress(this.txfAddr.getText(),
                         Integer.parseInt(this.txfPort.getText())));
             } catch (final Exception ex) {
-                ErrorViewer.showError(ex,
+                BugReporter.reportException(ex,
                         ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Errors.PROXY_CONNECT),
                         this.txfAddr.getText(), this.txfPort.getText());
                 return;

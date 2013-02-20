@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import org.testng.annotations.Test;
 
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 
 /**
  * <p>
@@ -47,7 +47,7 @@ public class PanelTest extends JFrame {
         try {
             this.jbInit();
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             ex.printStackTrace();
         }
     }

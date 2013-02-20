@@ -28,7 +28,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -180,7 +180,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         try {
             return super.clone();
         } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
+            BugReporter.reportException(ex);
             throw new RuntimeException("Spell : clone() error, " + ex);
         }
     }

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import forge.error.ErrorViewer;
+import forge.error.BugReporter;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
@@ -156,7 +156,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase {
 
         tmpDeck += "DeckSize:" + tDeck.countAll() + "\n";
         if (testing) {
-            ErrorViewer.showError(tmpDeck);
+            BugReporter.reportBug(tmpDeck);
         }
 
         return tDeck;
