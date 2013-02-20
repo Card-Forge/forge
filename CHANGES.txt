@@ -130,6 +130,13 @@ Flickerform
 Epochrasite
 Eye of Singularity
 Heroic Defiance
+Forbidden Crypt
+Charm Peddler
+Heartseeker
+Blinding Powder
+leonin Bola
+Razor Boomerang
+Surestrike Trident
 
 
 New Phenomenons:
@@ -486,6 +493,23 @@ Detailed Changelog: (This section will likely be deleted in the near future and 
 - GTC rankings added
 - Draft assist ranking fix
 - removing ratings from CardPrinted
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Improved tapPrefTargeting.
+- Added LQ non-set pic URLs to several cards.
+- Little change for cards exiled face down.
+- give how to play and license details popups standard backgrounds
+- carddb: support for getting foiled cards
+- deck saves 'foil' attribute of a card
+- add hyperlink widget that opens a URL in the default browser (or copies it in to the clipboard if browsing functionality is not available on the current platform)
+- Add CostUnattach
+- add a small margin around the 'how to play' panel so it doesn't hug the edges of the screen
+- combine ErrorViewer and BugzReporter into a new combined dialog with forum-launching capabilities
+- make everything use the new bug reporter dialog
+- PerSetTracking.py will now output a file called DistinctOracle.txt that is basically mtgdata but with only cardname + oracle for cards that are missing from Forge
+- Might have broken a tab right before committing
+- Unattach cost can use OriginalHost (preferred method for pumped activated abilities that require unattaching the card granting the ability)
+- Updated some SVars.
+- Added support for specific extra boosters and even tournament packs as challenge rewards. Needless to say, caution should be exercised before handing out such generous rewards, especially tournament packs.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
