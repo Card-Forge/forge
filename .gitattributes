@@ -13638,7 +13638,7 @@ src/main/java/forge/card/CardBlock.java -text
 src/main/java/forge/card/CardCharacteristics.java -text
 src/main/java/forge/card/CardCoreType.java -text
 src/main/java/forge/card/CardEdition.java -text
-src/main/java/forge/card/CardFaceRules.java -text
+src/main/java/forge/card/CardFace.java -text
 src/main/java/forge/card/CardInSet.java -text
 src/main/java/forge/card/CardRarity.java -text
 src/main/java/forge/card/CardRules.java -text

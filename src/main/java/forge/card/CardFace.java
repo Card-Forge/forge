@@ -16,10 +16,11 @@ import forge.card.mana.ManaCost;
 // 
 
 /** 
- * TODO: Write javadoc for this type.
- *
+ * Represents a single side or part of a magic card with its original characteristics. 
+ * <br><br>
+ * <i>Do not use reference to class except for card parsing.<br>Always use reference to interface type outside of package.</i>
  */
-final class CardFaceRules implements ICardCharacteristics {
+final class CardFace implements ICardCharacteristics {
 
     private final String name;
     private CardType type = null;
@@ -41,17 +42,20 @@ final class CardFaceRules implements ICardCharacteristics {
     @Override public final int getIntToughness()          { return iToughness; }
     @Override public final String getPower()              { return power; }
     @Override public final String getToughness()          { return toughness; }
-    @Override public int getInitialLoyalty()        { return initialLoyalty; }
-    @Override public final String getName()         { return this.name; }
-    @Override public final CardType getType()       { return this.type; }
-    @Override public final ManaCost getManaCost()   { return this.manaCost; }
-    @Override public final ColorSet getColor()      { return this.color; }
+    @Override public int getInitialLoyalty()              { return initialLoyalty; }
+    @Override public final String getName()               { return this.name; }
+    @Override public final CardType getType()             { return this.type; }
+    @Override public final ManaCost getManaCost()         { return this.manaCost; }
+    @Override public final ColorSet getColor()            { return this.color; }
     @Override public final Iterable<String> getKeywords() { return keywords; }
 
 
+    public CardFace(String name0) { 
+        this.name = name0; 
+        if ( StringUtils.isBlank(name0) )
+            throw new RuntimeException("Card name is empty");
+    }
     // Here come setters to allow parser supply values
-    public CardFaceRules(String name0) { this.name = name0; if ( StringUtils.isBlank(name0) ) throw new RuntimeException("Card name is empty"); }
-
     public final void setType(CardType type0)             { this.type = type0; }
     public final void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
     public final void setColor(ColorSet color0)           { this.color = color0; }
@@ -78,7 +82,7 @@ final class CardFaceRules implements ICardCharacteristics {
     }
 
 
-    // This should not be here
+    // This should not be here, but I don't know a better place yet 
     private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
     @Override public Set<Entry<String, CardInSet>> getSetsPrinted() { return this.setsPrinted.entrySet(); }
     @Override public CardInSet getEditionInfo(final String setCode) {

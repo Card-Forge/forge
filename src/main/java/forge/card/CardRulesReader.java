@@ -41,7 +41,7 @@ public class CardRulesReader {
     // fields to build 
     private List<String> originalScript = new ArrayList<String>();
 
-    private CardFaceRules[] faces = new CardFaceRules[] { null, null };
+    private CardFace[] faces = new CardFace[] { null, null };
     private String[] pictureUrl = new String[] { null, null };
     private int curFace = 0;
     private CardSplitType altMode;
@@ -163,7 +163,7 @@ public class CardRulesReader {
 
             case 'N':
                 if ("Name".equals(key)) {
-                    this.faces[this.curFace] = new CardFaceRules(value);
+                    this.faces[this.curFace] = new CardFace(value);
                 }
                 break;
 
