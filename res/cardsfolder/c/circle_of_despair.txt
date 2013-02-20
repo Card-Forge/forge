@@ -1,0 +1,15 @@
+Name:Circle of Despair
+ManaCost:1 W B
+Types:Enchantment
+Text:no text
+A:AB$ ChooseSource | Cost$ 1 Sac<1/Creature> | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to prevent damage to | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Targeted | ImprintCards$ Remembered | SVars$ RPreventNextFromSource,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsImprinted | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the targeted creature or player, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_despair.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/319.jpg
+Oracle:{1}, Sacrifice a creature: The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
+End

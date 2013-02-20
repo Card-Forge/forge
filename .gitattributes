@@ -1741,6 +1741,7 @@ res/cardsfolder/c/cinder_wall.txt svneol=native#text/plain
 res/cardsfolder/c/cinderbones.txt svneol=native#text/plain
 res/cardsfolder/c/cinderhaze_wretch.txt svneol=native#text/plain
 res/cardsfolder/c/circle_of_affliction.txt -text
+res/cardsfolder/c/circle_of_despair.txt -text
 res/cardsfolder/c/circle_of_flame.txt svneol=native#text/plain
 res/cardsfolder/c/circle_of_protection_artifacts.txt -text
 res/cardsfolder/c/circle_of_protection_black.txt -text
@@ -6365,6 +6366,7 @@ res/cardsfolder/m/martyr_of_sands.txt -text
 res/cardsfolder/m/martyr_of_spores.txt -text
 res/cardsfolder/m/martyred_rusalka.txt svneol=native#text/plain
 res/cardsfolder/m/martyrs_bond.txt -text svneol=unset#text/plain
+res/cardsfolder/m/martyrs_cause.txt -text
 res/cardsfolder/m/martyrs_cry.txt -text
 res/cardsfolder/m/martyrs_of_korlis.txt -text svneol=unset#text/plain
 res/cardsfolder/m/martyrs_tomb.txt svneol=native#text/plain
