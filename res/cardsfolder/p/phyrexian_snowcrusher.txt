@@ -5,8 +5,6 @@ Text:no text
 PT:6/5
 K:CARDNAME attacks each turn if able.
 A:AB$ Pump | Cost$ 1 S | NumAtt$ +1 | SpellDescription$ Phyrexian Snowcrusher gets +1/+0 until end of turn.
-# AI can now use snow mana to pay for activated abilities.
-SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_snowcrusher.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/140.jpg
