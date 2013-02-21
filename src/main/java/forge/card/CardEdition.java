@@ -48,7 +48,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
     
     /** The Constant unknown. */
-    public static final CardEdition UNKNOWN = new CardEdition(-1, "??", "???", Type.UNKNOWN, "Undefined", null);
+    public static final CardEdition UNKNOWN = new CardEdition(-1, "??", "???", Type.UNKNOWN, "Undefined", null, false);
 
     private final int    index;
     private final String code2;
@@ -56,6 +56,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private final Type   type;
     private final String name;
     private final String alias;
+    private final boolean whiteBorder;
 
     /**
      * Instantiates a new card set.
@@ -70,13 +71,14 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
      * @param name the name of the set
      * @param an optional secondary code alias for the set
      */
-    private CardEdition(int index, String code2, String code, Type type, String name, String alias) {
+    private CardEdition(int index, String code2, String code, Type type, String name, String alias, boolean whiteBorder) {
         this.index = index;
         this.code2 = code2;
         this.code  = code;
         this.type  = type;
         this.name  = name;
         this.alias = alias;
+        this.whiteBorder = whiteBorder;
     }
 
     public int    getIndex() { return index; }
@@ -126,6 +128,14 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     @Override
     public String toString() {
         return this.name + " (set)";
+    }
+
+
+    /**
+     * @return the whiteBorder
+     */
+    public boolean isWhiteBorder() {
+        return whiteBorder;
     }
 
 
@@ -206,6 +216,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             String type  = section.get("type");
             String name  = section.get("name");
             String alias = section.get("alias");
+            boolean borderWhite = "white".equalsIgnoreCase(section.get("border"));
 
             Type enumType = Type.UNKNOWN;
             if (null != type && !type.isEmpty()) {
@@ -217,7 +228,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 }
             }
 
-            return new CardEdition(index, code2, code, enumType, name, alias);
+            return new CardEdition(index, code2, code, enumType, name, alias, borderWhite);
         }
 
     }

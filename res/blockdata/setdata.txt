@@ -1,22 +1,22 @@
 Index:0|Code2:MBP|Code3:MBP|Type:Other|Name:Media Insert Promo|Alias:PRO
 Index:1|Code2:A|Code3:LEA|Type:Core|Name:Limited Edition Alpha
 Index:2|Code2:B|Code3:LEB|Type:Core|Name:Limited Edition Beta
-Index:3|Code2:U|Code3:2ED|Type:Core|Name:Unlimited Edition
+Index:3|Code2:U|Code3:2ED|Type:Core|Border:White|Name:Unlimited Edition
 Index:4|Code2:AN|Code3:ARN|Type:Expansion|Name:Arabian Nights
 Index:5|Code2:AQ|Code3:ATQ|Type:Expansion|Name:Antiquities
-Index:6|Code2:R|Code3:3ED|Type:Core|Name:Revised Edition
+Index:6|Code2:R|Code3:3ED|Type:Core|Border:White|Name:Revised Edition
 Index:7|Code2:LG|Code3:LEG|Type:Expansion|Name:Legends
 Index:8|Code2:DK|Code3:DRK|Type:Expansion|Name:The Dark
 Index:9|Code2:FE|Code3:FEM|Type:Expansion|Name:Fallen Empires
 
-Index:10|Code2:4E|Code3:4ED|Type:Core|Name:Fourth Edition
+Index:10|Code2:4E|Code3:4ED|Type:Core|Border:White|Name:Fourth Edition
 Index:11|Code2:IA|Code3:ICE|Type:Expansion|Name:Ice Age
-Index:12|Code2:CH|Code3:CHR|Type:Reprint|Name:Chronicles
+Index:12|Code2:CH|Code3:CHR|Type:Reprint|Border:White|Name:Chronicles
 Index:13|Code2:HL|Code3:HML|Type:Expansion|Name:Homelands
 Index:14|Code2:AL|Code3:ALL|Type:Expansion|Name:Alliances
 Index:15|Code2:MI|Code3:MIR|Type:Expansion|Name:Mirage
 Index:16|Code2:VI|Code3:VIS|Type:Expansion|Name:Visions
-Index:17|Code2:5E|Code3:5ED|Type:Core|Name:Fifth Edition
+Index:17|Code2:5E|Code3:5ED|Type:Core|Border:White|Name:Fifth Edition
 Index:18|Code2:PT|Code3:POR|Type:Starter|Name:Portal
 Index:19|Code2:WL|Code3:WTH|Type:Expansion|Name:Weatherlight
 
@@ -26,18 +26,18 @@ Index:22|Code2:EX|Code3:EXO|Type:Expansion|Name:Exodus
 Index:23|Code2:P2|Code3:PO2|Type:Starter|Name:Portal Second Age|Alias:P02
 Index:24|Code2:US|Code3:USG|Type:Expansion|Name:Urza's Saga
 Index:25|Code2:UL|Code3:ULG|Type:Expansion|Name:Urza's Legacy
-Index:26|Code2:6E|Code3:6ED|Type:Core|Name:Classic (Sixth Edition)
+Index:26|Code2:6E|Code3:6ED|Type:Core|Border:White|Name:Classic (Sixth Edition)
 Index:27|Code2:UD|Code3:UDS|Type:Expansion|Name:Urza's Destiny
-Index:28|Code2:P3|Code3:PTK|Type:Starter|Name:Portal Three Kingdoms
-Index:29|Code2:ST|Code3:S99|Type:Starter|Name:Starter 1999
+Index:28|Code2:P3|Code3:PTK|Type:Starter|Border:White|Name:Portal Three Kingdoms
+Index:29|Code2:ST|Code3:S99|Type:Starter|Border:White|Name:Starter 1999
 
 Index:30|Code2:MM|Code3:MMQ|Type:Expansion|Name:Mercadian Masques
 Index:31|Code2:NE|Code3:NMS|Type:Expansion|Name:Nemesis|Alias:NEM
-Index:32|Code2:S2K|Code3:S00|Type:Starter|Name:Starter 2000
+Index:32|Code2:S2K|Code3:S00|Type:Starter|Border:White|Name:Starter 2000
 Index:33|Code2:PY|Code3:PCY|Type:Expansion|Name:Prophecy
 Index:34|Code2:IN|Code3:INV|Type:Expansion|Name:Invasion
 Index:35|Code2:PS|Code3:PLS|Type:Expansion|Name:Planeshift
-Index:36|Code2:7E|Code3:7ED|Type:Core|Name:Seventh Edition
+Index:36|Code2:7E|Code3:7ED|Type:Core|Border:White|Name:Seventh Edition
 Index:37|Code2:AP|Code3:APC|Type:Expansion|Name:Apocalypse
 Index:38|Code2:OD|Code3:ODY|Type:Expansion|Name:Odyssey
 Index:39|Code2:TO|Code3:TOR|Type:Expansion|Name:Torment
@@ -46,7 +46,7 @@ Index:40|Code2:JU|Code3:JUD|Type:Expansion|Name:Judgment
 Index:41|Code2:ON|Code3:ONS|Type:Expansion|Name:Onslaught
 Index:42|Code2:LE|Code3:LGN|Type:Expansion|Name:Legions
 Index:43|Code2:SC|Code3:SCG|Type:Expansion|Name:Scourge
-Index:44|Code2:8E|Code3:8ED|Type:Core|Name:Core Set - Eighth Edition
+Index:44|Code2:8E|Code3:8ED|Type:Core|Border:White|Name:Core Set - Eighth Edition
 Index:45|Code2:MR|Code3:MRD|Type:Expansion|Name:Mirrodin
 Index:46|Code2:DS|Code3:DST|Type:Expansion|Name:Darksteel
 Index:47|Code2:FD|Code3:5DN|Type:Expansion|Name:Fifth Dawn
@@ -54,7 +54,7 @@ Index:48|Code2:CHK|Code3:CHK|Type:Expansion|Name:Champions of Kamigawa
 Index:49|Code2:BOK|Code3:BOK|Type:Expansion|Name:Betrayers of Kamigawa
 
 Index:50|Code2:SOK|Code3:SOK|Type:Expansion|Name:Saviors of Kamigawa
-Index:51|Code2:9E|Code3:9ED|Type:Core|Name:Core Set - Ninth Edition
+Index:51|Code2:9E|Code3:9ED|Type:Core|Border:White|Name:Core Set - Ninth Edition
 Index:52|Code2:RAV|Code3:RAV|Type:Expansion|Name:Ravnica: City of Guilds
 Index:53|Code2:GP|Code3:GPT|Type:Expansion|Name:Guildpact
 Index:54|Code2:DIS|Code3:DIS|Type:Expansion|Name:Dissension
