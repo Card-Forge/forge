@@ -93,7 +93,7 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
 
         parentCell.getBody().add(btnImport, "w 120px!, h 30px!, gap 0 0 5px 5px");
 
-        //parentCell.getBody().add(scroller, "w 96%!, h 96%!, gap 2% 0 2% 0");
+        parentCell.getBody().add(scroller, "w 96%!, growy, pushy, gap 2% 0 2% 0");
     }
 
     //========== Retrieval methods

@@ -116,7 +116,7 @@ public class DeckgenUtil {
      * @param selection {java.lang.String}
      * @return {@link forge.deck.Deck}
      */
-    public static Deck buildCustomDeck(final String[] selection) {
+    public static Deck getConstructedDeck(final String[] selection) {
         return Singletons.getModel().getDecks().getConstructed().get(selection[0]);
     }
 

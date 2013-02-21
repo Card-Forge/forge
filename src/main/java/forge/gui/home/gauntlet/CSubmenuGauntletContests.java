@@ -230,7 +230,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
                 userDeck = DeckgenUtil.buildThemeDeck(selection);
             }
             else {
-                userDeck = DeckgenUtil.buildCustomDeck(selection);
+                userDeck = DeckgenUtil.getConstructedDeck(selection);
             }
             gd.setUserDeck(userDeck);
         }

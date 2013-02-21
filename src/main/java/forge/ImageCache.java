@@ -86,11 +86,13 @@ public class ImageCache {
         if (null != cached) {
             return cached;
         }
+        
+        boolean mayEnlarge = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
 
         BufferedImage original = getImage(key);
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling option in menu ?
-        if ((scale > 1) && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER)) {
+        if ((scale > 1) && !mayEnlarge) {
             scale = 1;
         }
 
@@ -103,8 +105,8 @@ public class ImageCache {
             ResampleOp resampler = new ResampleOp(destWidth, destHeight);
             
             result = resampler.filter(original, null);
+            CACHE.put(resizedKey, result);
         }
-        CACHE.put(resizedKey, result);
         return result;
     }
 

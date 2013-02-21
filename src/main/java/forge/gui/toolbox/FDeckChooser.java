@@ -271,7 +271,7 @@ public class FDeckChooser extends JPanel {
         }
         // Custom deck
         else if (lst0.getName().equals(ESubmenuConstructedTypes.CUSTOM.toString())) {
-            deck = DeckgenUtil.buildCustomDeck(selection);
+            deck = DeckgenUtil.getConstructedDeck(selection);
         }
         // Failure, for some reason
         else {

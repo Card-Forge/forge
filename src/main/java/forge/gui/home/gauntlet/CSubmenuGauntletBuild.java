@@ -245,7 +245,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
             deckToAdd = DeckgenUtil.buildThemeDeck(selection);
         }
         else {
-            deckToAdd = DeckgenUtil.buildCustomDeck(selection);
+            deckToAdd = DeckgenUtil.getConstructedDeck(selection);
         }
 
         workingDecks.add(deckToAdd);
