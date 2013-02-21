@@ -134,7 +134,7 @@ Forbidden Crypt
 Charm Peddler
 Heartseeker
 Blinding Powder
-leonin Bola
+Leonin Bola
 Razor Boomerang
 Surestrike Trident
 Sunforger
@@ -151,6 +151,7 @@ Planewide Disaster
 New Planes:
 
 Undercity Reaches
+Aretopolis
 
 
 New Vanguard Avatars:
