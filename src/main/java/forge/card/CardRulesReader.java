@@ -272,7 +272,7 @@ public class CardRulesReader {
             throw new RuntimeException("Unrecognized rarity string <<" + txtRarity + ">>");
         }
 
-        final CardInSet cardInSet = new CardInSet(rarity, numIllustrations, pieces[2]);
+        final CardInSet cardInSet = new CardInSet(rarity, numIllustrations, pieces.length > 2 ? pieces[2] : null);
 
         setsData.put(setCode, cardInSet);
     }
