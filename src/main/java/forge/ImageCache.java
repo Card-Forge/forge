@@ -76,13 +76,12 @@ public class ImageCache {
         rsKey.append("#").append(width).append('x').append(height);
         String resizedKey = rsKey.toString();
         
-        
         final BufferedImage ready = CACHE.getIfPresent(resizedKey);
-        if ( null != ready )
+        if (null != ready) {
             return ready;
+        }
         
         BufferedImage original = getImage(key);
-        //return original;
         
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling option in menu ?
@@ -96,6 +95,12 @@ public class ImageCache {
         } else {
             int destWidth = (int) (original.getWidth() * scale);
             int destHeight = (int) (original.getHeight() * scale);
+
+            if (3 > width || 3 > height) {
+                // picture too small; return a blank
+                return null;
+            }
+            
             ResampleOp resampler = new ResampleOp(destWidth, destHeight);
             
             result = resampler.filter(original, null);
