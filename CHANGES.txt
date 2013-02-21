@@ -137,6 +137,9 @@ Blinding Powder
 leonin Bola
 Razor Boomerang
 Surestrike Trident
+Sunforger
+Circle of Despair
+Martyr's Cause
 
 
 New Phenomenons:
@@ -510,6 +513,40 @@ Detailed Changelog: (This section will likely be deleted in the near future and 
 - Unattach cost can use OriginalHost (preferred method for pumped activated abilities that require unattaching the card granting the ability)
 - Updated some SVars.
 - Added support for specific extra boosters and even tournament packs as challenge rewards. Needless to say, caution should be exercised before handing out such generous rewards, especially tournament packs.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- delver was missing oracle text for its day side
+- Refactored CardPrinted to support split cards
+- restricted class visibility and performed some style adjustments on CardFaceRules
+- Fixed a small typo
+- CardFace prettifying
+- Missing changes to unattach cost from earlier commit
+- Using guava Predicates to simplify item-related preset predicates
+- DeckEditor now shows planewalkers' initial loyalty properly (in the power column)
+- added some AI svars to Sunforger
+- replaces string split with a faster thing - string tokenizer
+- Merge: merging r19733 - r19785 from trunk.
+- fixing altMode for 1st card from databse
+- removed all dependencies from mantis-connect
+- add svn:mime-type properties to xml files; no content changes
+- Removed some unnecessary columns from variant deck section editing
+- ensure the bug reporting dialog is wide enough to see the 'Exit Application' button
+- better handling of nulls when updating the shown card in tables
+- removed non-functional fields and methods from CardRules
+- ImageCache cleared from old unused stuff
+- don't enable world filter unless there is an active quest
+- pretty up the bug report forum post template
+- Simplify how DistinctOracle text in PerSetTracking.py is accumulated
+- make the bug reporter dialog width dependent on the number of buttons
+- check in quick fix to imagecache exception -- Max plz review
+- Improved Sunforger script
+- updated quest opponent icon download list
+- won't crash if card wasn't given oracle text
+- cleanup in ImageCache
+- less spam more brains
+- White-border property was added to setdata
+- removed white-bordered sets hardcode
+- alldecks - enabled list of all decks
+- NPE trying to scale a missing image
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
