@@ -64,7 +64,7 @@ def printDistinctOracle(missingSet, fileName):
 		for s in missing:
 			if s:
 				oracle = mtgOracleCards.get(s, "")
-				outfile.write("%s\n%s\n" % (s, oracle))
+				outfile.write("%s\n%s" % (s, oracle))
 
 
 if __name__ == '__main__':
@@ -92,12 +92,12 @@ if __name__ == '__main__':
 	tmpName = ""
 	line = ""
 	prevline = ""
-	twoPrior = ""
 
 	#Parse mtg-data
 	print("Parsing mtg-data")
 	with open(pathToMtgData) as mtgdata :
 		for line in mtgdata :
+			# Parse the sets at the top of the mtgdata file
 			if not hasFetchedSets :
 				if line != "\n" :
 					splitLine = line.split('  ') 
@@ -108,13 +108,18 @@ if __name__ == '__main__':
 				else :
 					hasFetchedSets = True
 
+			# Once all sets are parsed, time to parse the cards
 			if hasFetchedSets :
 				if not hasFetchedCardName :
 					tmpName = line.rstrip().replace("AE", "Ae")
 					hasFetchedCardName = True
+					oracle = ""
+
+				else:
+					oracle += line
 
 				if line == "\n" :
-					mtgOracleCards[tmpName] = twoPrior
+					mtgOracleCards[tmpName] = oracle.replace(prevline, '')
 					sets = prevline.split(", ")
 					for i in range(len(sets)):
 						sets[i] = sets[i].split(' ')[0]
@@ -122,7 +127,6 @@ if __name__ == '__main__':
 					mtgDataCards[tmpName] = sets
 					hasFetchedCardName = False
 
-			twoPrior = prevline
 			prevline = line
 
 	#Parse Forge
