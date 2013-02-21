@@ -317,7 +317,7 @@ public enum CDeckEditorUI implements CardContainer {
                     addSelectedCards(e.isControlDown() || e.isMetaDown(), e.isShiftDown() ? 4: 1);
                 } else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
                     deckTable.requestFocusInWindow();
-                } else if (e.getKeyChar() == 'f') {
+                } else if (KeyEvent.VK_F == e.getKeyCode()) {
                     // let ctrl/cmd-F set focus to the text filter box
                     if (e.isControlDown() || e.isMetaDown()) {
                         VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().requestFocusInWindow();
