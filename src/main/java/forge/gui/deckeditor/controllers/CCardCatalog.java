@@ -200,12 +200,18 @@ public enum CCardCatalog implements ICDoc {
                 popup.add(range);
                 JMenu world = new JMenu("Quest world");
                 for (final QuestWorld w : Singletons.getModel().getWorlds()) {
+                    GameFormatQuest format = w.getFormat();
+                    if (null == format) {
+                        // assumes that no world other than the main world will have a null format
+                        format = Singletons.getModel().getQuest().getMainFormat();
+                    }
+                    final GameFormatQuest f = format;
                     GuiUtils.addMenuItem(world, w.getName(), null, new Runnable() {
                         @Override
                         public void run() {
-                            addRestriction(buildWorldRestriction(w), activeWorlds, w);
+                            addRestriction(buildFormatRestriction(w.getName(), f, true), activeWorlds, w);
                         }
-                    }, !isActive(activeWorlds, w));
+                    }, !isActive(activeWorlds, w) && null != f);
                 }
                 popup.add(world);
                 popup.show(VCardCatalog.SINGLETON_INSTANCE.getBtnAddRestriction(), 0,
@@ -366,12 +372,6 @@ public enum CCardCatalog implements ICDoc {
         return activeSet.contains(key);
     }
     
-//    private interface _RestrictionBuilder<T> {
-//        Predicate<CardPrinted> getPredicate();
-//        JComponent buildRestrictionWidget();
-//        boolean buildMenu(JPopupMenu root, Set<T> activeSet, T key);
-//    }
-    
     @SuppressWarnings("serial")
     private <T> void addRestriction(Pair<? extends JComponent, Predicate<CardPrinted>> restriction, final Set<T> activeSet, final T key) {
         final Predicate<CardPrinted> predicate = restriction.getRight();
@@ -462,7 +462,7 @@ public enum CCardCatalog implements ICDoc {
         int lineLen = 0;
         
         // use HTML tooltips so we can insert line breaks
-        List<String> sets = null == format ? null : format.getAllowedSetCodes();
+        List<String> sets = format.getAllowedSetCodes();
         if (null == sets || sets.isEmpty()) {
             tooltip.append(" All");
         } else {
@@ -487,7 +487,7 @@ public enum CCardCatalog implements ICDoc {
             }
         }
 
-        List<String> bannedCards = null == format ? null : format.getBannedCardNames();
+        List<String> bannedCards = format.getBannedCardNames();
         if (null != bannedCards && !bannedCards.isEmpty()) {
             tooltip.append("<br><br>Banned:");
             lastLen += lineLen;
@@ -517,14 +517,5 @@ public enum CCardCatalog implements ICDoc {
     
     private Pair<FLabel, Predicate<CardPrinted>> buildSetRestriction(String displayName, List<String> setCodes, boolean allowReprints) {
         return buildFormatRestriction(displayName, new GameFormat(null, setCodes, null), allowReprints);
-    }
-
-    private Pair<FLabel, Predicate<CardPrinted>> buildWorldRestriction(QuestWorld world) {
-        GameFormatQuest format = world.getFormat();
-        if (null == format) {
-            // assumes that no world other than the main world will have a null format
-            format = Singletons.getModel().getQuest().getMainFormat();
-        }
-        return buildFormatRestriction(world.getName(), format, true);
     }
 }
