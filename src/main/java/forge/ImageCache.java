@@ -60,6 +60,7 @@ public class ImageCache {
 
 
     public static BufferedImage getImage(final InventoryItem card, final int width, final int height) {
+        // TODO: move all the path-building logics here from the very objects. They don't have to know where their picture is
         String key = card.getImageFilename();
         
         return scaleImage(key, width, height);
@@ -72,55 +73,39 @@ public class ImageCache {
      * @return
      */
     private static BufferedImage scaleImage(String key, final int width, final int height) {
+        if (3 > width || 3 > height) {
+            // picture too small; return a blank
+            return null;
+        }
+
         StringBuilder rsKey = new StringBuilder(key);
         rsKey.append("#").append(width).append('x').append(height);
         String resizedKey = rsKey.toString();
-        
-        final BufferedImage ready = CACHE.getIfPresent(resizedKey);
-        if (null != ready) {
-            return ready;
+
+        final BufferedImage cached = CACHE.getIfPresent(resizedKey);
+        if (null != cached) {
+            return cached;
         }
-        
+
         BufferedImage original = getImage(key);
-        
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling option in menu ?
         if ((scale > 1) && !Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER)) {
             scale = 1;
         }
-    
+
         BufferedImage result;
         if ( 1 == scale ) { 
             result = original;
         } else {
             int destWidth = (int) (original.getWidth() * scale);
             int destHeight = (int) (original.getHeight() * scale);
-
-            if (3 > width || 3 > height) {
-                // picture too small; return a blank
-                return null;
-            }
-            
             ResampleOp resampler = new ResampleOp(destWidth, destHeight);
             
             result = resampler.filter(original, null);
         }
         CACHE.put(resizedKey, result);
         return result;
-    }
-
-    /**
-     * <p>
-     * getOriginalImage.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link java.awt.image.BufferedImage} object.
-     */
-    public static BufferedImage getOriginalImage(final Card card) {
-        final String key = card.canBeShownTo(Singletons.getControl().getPlayer()) ? ImageCache.getKey(card) : "Morph" ;
-        return ImageCache.getImage(key);
     }
 
     /**
