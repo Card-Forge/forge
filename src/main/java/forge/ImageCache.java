@@ -88,8 +88,10 @@ public class ImageCache {
         }
         
         boolean mayEnlarge = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
-
         BufferedImage original = getImage(key);
+        if ( null == original )
+            return null;
+        
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
         // here would be the place to limit the scaling option in menu ?
         if ((scale > 1) && !mayEnlarge) {
