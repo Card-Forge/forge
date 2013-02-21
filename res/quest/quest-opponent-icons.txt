@@ -2,6 +2,7 @@ http://www.cardforge.org/fpics/questAvatars/A%20Wolf%20in%20Sheeps%20Clothing.jp
 http://www.cardforge.org/fpics/questAvatars/Abraham%20Lincoln.jpg
 http://www.cardforge.org/fpics/questAvatars/Albert%20Einstein.jpg
 http://www.cardforge.org/fpics/questAvatars/Alice%20in%20Wonderland.jpg
+http://www.cardforge.org/fpics/questAvatars/amphibian.jpg
 http://www.cardforge.org/fpics/questAvatars/Ancient%20Battlefield.jpg
 http://www.cardforge.org/fpics/questAvatars/Apu%20Nahasapeemapetilon.jpg
 http://www.cardforge.org/fpics/questAvatars/Aquaman.jpg
@@ -53,6 +54,7 @@ http://www.cardforge.org/fpics/questAvatars/Dr%20Doom.jpg
 http://www.cardforge.org/fpics/questAvatars/Dr%20Fate.jpg
 http://www.cardforge.org/fpics/questAvatars/Dr%20No.jpg
 http://www.cardforge.org/fpics/questAvatars/Dr%20Strangelove.jpg
+http://www.cardforge.org/fpics/questAvatars/Dr%20Watson.jpg
 http://www.cardforge.org/fpics/questAvatars/Dream.jpg
 http://www.cardforge.org/fpics/questAvatars/Dungeon%20Crawling%20Black.jpg
 http://www.cardforge.org/fpics/questAvatars/Dungeon%20Crawling%20Blue.jpg
@@ -120,6 +122,7 @@ http://www.cardforge.org/fpics/questAvatars/Maggie%20Simpson.jpg
 http://www.cardforge.org/fpics/questAvatars/Magneto.jpg
 http://www.cardforge.org/fpics/questAvatars/Magnum.jpg
 http://www.cardforge.org/fpics/questAvatars/Marge%20Simpson.jpg
+http://www.cardforge.org/fpics/questAvatars/Milhouse_van_Houten.jpg
 http://www.cardforge.org/fpics/questAvatars/Mines%20of%20Kazum%20Durl.jpg
 http://www.cardforge.org/fpics/questAvatars/Mister%20Fantastic.jpg
 http://www.cardforge.org/fpics/questAvatars/Morpheus.jpg
@@ -167,8 +170,10 @@ http://www.cardforge.org/fpics/questAvatars/Scotty.jpg
 http://www.cardforge.org/fpics/questAvatars/Seabiscuit.jpg
 http://www.cardforge.org/fpics/questAvatars/Secret%20Squirrel.jpg
 http://www.cardforge.org/fpics/questAvatars/Sentinel.jpg
+http://www.cardforge.org/fpics/questAvatars/Severus%20Snape.jpg
 http://www.cardforge.org/fpics/questAvatars/Sherlock%20Holmes.jpg
 http://www.cardforge.org/fpics/questAvatars/Shrek.jpg
+http://www.cardforge.org/fpics/questAvatars/Sideshow%20Bob.jpg
 http://www.cardforge.org/fpics/questAvatars/Silver%20Samurai.jpg
 http://www.cardforge.org/fpics/questAvatars/Silver%20Surfer.jpg
 http://www.cardforge.org/fpics/questAvatars/Snow%20White.jpg
@@ -190,6 +195,7 @@ http://www.cardforge.org/fpics/questAvatars/The%20Pied%20Piper.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Spectre.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Thing.jpg
 http://www.cardforge.org/fpics/questAvatars/The%20Torpor%20Orb.jpg
+http://www.cardforge.org/fpics/questAvatars/The%20Zombie.jpg
 http://www.cardforge.org/fpics/questAvatars/Tom%20Bombadil.jpg
 http://www.cardforge.org/fpics/questAvatars/Totoro.jpg
 http://www.cardforge.org/fpics/questAvatars/Treebeard.jpg
@@ -201,6 +207,7 @@ http://www.cardforge.org/fpics/questAvatars/Wilma%20Flintstone.jpg
 http://www.cardforge.org/fpics/questAvatars/Wolverine.jpg
 http://www.cardforge.org/fpics/questAvatars/Wonder%20Woman.jpg
 http://www.cardforge.org/fpics/questAvatars/Wyatt%20Earp.jpg
+http://www.cardforge.org/fpics/questAvatars/zatanna.jpg
 http://www.cardforge.org/fpics/questAvatars/Zombie%20Attack.jpg
 #JAMURAA WORLD ICONS
 http://www.cardforge.org/fpics/questAvatars/Abassi.jpg
