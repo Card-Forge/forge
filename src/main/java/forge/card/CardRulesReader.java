@@ -87,8 +87,8 @@ public class CardRulesReader {
      */
     public final CardRules getCard() {
         CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs );
-        faces[0].calculateColor();
-        if ( null != faces[1] ) faces[1].calculateColor();
+        faces[0].checkFieldsAndAssignMissingOnes();
+        if ( null != faces[1] ) faces[1].checkFieldsAndAssignMissingOnes();
         final CardRules result = new CardRules(faces, altMode, cah, originalScript);
         result.setDlUrls(pictureUrl);
         if ( StringUtils.isNotBlank(handLife))

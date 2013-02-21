@@ -75,8 +75,9 @@ final class CardFace implements ICardCharacteristics {
         this.iToughness = StringUtils.isNumeric(this.toughness) ? Integer.parseInt(this.toughness) : 0;
     }
 
-    public void calculateColor() { // Most scripts do not specify color explicitly
-        if ( null == oracleText ) { System.err.println(name + " has no Oracle text"); oracleText = ""; }
+    public void checkFieldsAndAssignMissingOnes() { // Most scripts do not specify color explicitly
+        if ( null == oracleText ) { System.err.println(name + " has no Oracle text. Assigned empty line."); oracleText = ""; }
+        if ( setsPrinted.isEmpty() ) { System.err.println(name + " was not assigned any set. Assigned CardEdition.UNKNOWN."); setsPrinted.put(CardEdition.UNKNOWN.getCode(), new CardInSet(CardRarity.Common, 1, null) ) ; }
         if ( manaCost == null && color == null ) System.err.println(name + " has neither ManaCost nor Color");
         if ( color == null ) color = ColorSet.fromManaCost(manaCost);
     }
