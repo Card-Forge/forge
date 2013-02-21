@@ -272,6 +272,9 @@ public enum CounterType {
     /** The SCREAM. */
     SCREAM(),
 
+    /** The SCROLL. */
+    SCROLL(),
+
     /** The SHELL. */
     SHELL(),
 
