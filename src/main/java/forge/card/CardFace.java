@@ -27,7 +27,7 @@ final class CardFace implements ICardCharacteristics {
     private ManaCost manaCost = ManaCost.NO_COST;
     private ColorSet color = null;
 
-    private String oracleText = "";
+    private String oracleText = null;
     private int iPower = -1;
     private int iToughness = -1;
     private String power = null;
@@ -76,7 +76,7 @@ final class CardFace implements ICardCharacteristics {
     }
 
     public void calculateColor() { // Most scripts do not specify color explicitly
-        if ( StringUtils.isBlank( oracleText ) ) System.err.println(name + " has no Oracle text");
+        if ( null == oracleText ) { System.err.println(name + " has no Oracle text"); oracleText = ""; }
         if ( manaCost == null && color == null ) System.err.println(name + " has neither ManaCost nor Color");
         if ( color == null ) color = ColorSet.fromManaCost(manaCost);
     }
