@@ -27,7 +27,7 @@ final class CardFace implements ICardCharacteristics {
     private ManaCost manaCost = ManaCost.NO_COST;
     private ColorSet color = null;
 
-    private String oracleText = null;
+    private String oracleText = "";
     private int iPower = -1;
     private int iToughness = -1;
     private String power = null;
@@ -76,7 +76,7 @@ final class CardFace implements ICardCharacteristics {
     }
 
     public void calculateColor() { // Most scripts do not specify color explicitly
-        if ( oracleText == null ) System.err.println(name + " has no Oracle text");
+        if ( StringUtils.isBlank( oracleText ) ) System.err.println(name + " has no Oracle text");
         if ( manaCost == null && color == null ) System.err.println(name + " has neither ManaCost nor Color");
         if ( color == null ) color = ColorSet.fromManaCost(manaCost);
     }
@@ -87,10 +87,7 @@ final class CardFace implements ICardCharacteristics {
     @Override public Set<Entry<String, CardInSet>> getSetsPrinted() { return this.setsPrinted.entrySet(); }
     @Override public CardInSet getEditionInfo(final String setCode) {
         final CardInSet result = this.setsPrinted.get(setCode);
-        if (result != null) {
-            return result;
-        }
-        throw new RuntimeException(String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode));
+        return result; // if returns null, String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode);
     }
 
 }
