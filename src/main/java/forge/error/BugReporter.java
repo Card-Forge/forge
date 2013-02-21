@@ -81,7 +81,11 @@ public class BugReporter {
         StringBuilder sb = new StringBuilder();
         sb.append("Description: [describe what you were doing when the crash occurred]\n\n");
         _buildSpoilerHeader(sb, ex.getClass().getSimpleName());
-        sb.append(null == message ? ex.getMessage() : message).append("\n\n");
+        sb.append("\n\n");
+        if (null != message && !message.isEmpty()) {
+            sb.append(message);
+            sb.append("\n");
+        }
         
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
@@ -130,10 +134,11 @@ public class BugReporter {
         StringBuilder sb = new StringBuilder();
         sb.append("Description: [describe what you were doing at the time]\n\n");
         _buildSpoilerHeader(sb, "Thread stack dump");
-        if (null != message) {
-            sb.append(message);
-        }
         sb.append("\n\n");
+        if (null != message && !message.isEmpty()) {
+            sb.append(message);
+            sb.append("\n");
+        }
         
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
@@ -170,7 +175,7 @@ public class BugReporter {
     }
     
     private static StringBuilder _buildSpoilerFooter(StringBuilder sb) {
-        sb.append("\n[/code][/spoiler]");
+        sb.append("[/code][/spoiler]");
         return sb;
     }
     
