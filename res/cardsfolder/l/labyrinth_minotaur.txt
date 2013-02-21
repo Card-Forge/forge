@@ -5,8 +5,10 @@ Text:no text
 PT:1/4
 T:Mode$ AttackerBlocked | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature, that creature doesn't untap during its controller's next untap step.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Triggered | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+SVar:HasCombatEffect:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/labyrinth_minotaur.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/97|2
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/37.jpg|2
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/97.jpg
 Oracle:Whenever Labyrinth Minotaur blocks a creature, that creature doesn't untap during its controller's next untap step.
 End
