@@ -40,6 +40,7 @@ import forge.Card;
 import forge.CounterType;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.card.CardEdition;
 import forge.gui.CardContainer;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;
@@ -332,18 +333,9 @@ public class CardPanel extends JPanel implements CardContainer {
 
         if (this.getGameCard() != null && (!this.getGameCard().getImageFilename().equals("none"))
                 && (!this.getGameCard().getName().equals("Morph"))) {
-            if ((this.getGameCard().getCurSetCode().equals("2ED"))
-                    || (this.getGameCard().getCurSetCode().equals("3ED"))
-                    || (this.getGameCard().getCurSetCode().equals("4ED"))
-                    || (this.getGameCard().getCurSetCode().equals("5ED"))
-                    || (this.getGameCard().getCurSetCode().equals("6ED"))
-                    || (this.getGameCard().getCurSetCode().equals("7ED"))
-                    || (this.getGameCard().getCurSetCode().equals("8ED"))
-                    || (this.getGameCard().getCurSetCode().equals("9ED"))
-                    || (this.getGameCard().getCurSetCode().equals("CHR"))
-                    || (this.getGameCard().getCurSetCode().equals("S99"))
-                    || (this.getGameCard().getCurSetCode().equals("PTK"))
-                    || (this.getGameCard().getCurSetCode().equals("S00"))) {
+            CardEdition ed = Singletons.getModel().getEditions().get(this.getGameCard().getCurSetCode());
+
+            if (ed != null && ed.isWhiteBorder()) {
                 if (!this.isSelected) {
                     g2d.setColor(Color.black);
                     final int offset = this.isTapped() ? 1 : 0;
