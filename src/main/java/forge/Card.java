@@ -2065,9 +2065,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Vanguard Modifiers
         if (this.isType("Vanguard")) {
-            final IPaperCard avatar = CardDb.getCard(this);
-            sb.append("Hand Modifier: ").append(avatar.getRules().getHand());
-            sb.append("\r\nLife Modifier: ").append(avatar.getRules().getLife());
+            sb.append("Hand Modifier: ").append(getRules().getHand());
+            sb.append("\r\nLife Modifier: ").append(getRules().getLife());
             sb.append("\r\n\r\n");
         }
         sb.append(this.getAbilityText());
