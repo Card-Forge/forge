@@ -1,6 +1,7 @@
 package forge.item;
 
 import forge.Card;
+import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -30,7 +31,7 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
 
     @Override public CardRarity getRarity() { return CardRarity.Common; } // They don't have rarity though!
 
-    @Override public String getImageFilename() { return imageFileName; }
+    @Override public String getImageFilename() { return ImageCache.TOKEN + imageFileName; }
 
     @Override public String getItemType() { return "Token"; }
     @Override public Card getMatchingForgeCard() { return toForgeCard(null); } // hope this won't be queried too frequently, so no cache 

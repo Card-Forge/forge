@@ -48,7 +48,7 @@ public class ImageCache {
     /** Constant <code>FULL_SIZE</code>. */
 
     public static final String SEALED_PRODUCT = "sealed://";
-    static final String TOKEN = "token://";
+    public static final String TOKEN = "token://";
 
     public static BufferedImage getImage(final Card card, final int width, final int height) {
         //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS"); 
