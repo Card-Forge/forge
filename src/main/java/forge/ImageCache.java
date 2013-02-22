@@ -144,7 +144,7 @@ public class ImageCache {
     private static String getKey(final Card card) {
 
         if ((card.isToken() && !card.isCopiedToken()) || card.isFaceDown()) {
-            return ImageCache.TOKEN + GuiDisplayUtil.cleanString(card.getImageName());
+            return ImageCache.TOKEN + GuiDisplayUtil.cleanString(card.getImageFilename());
         }
 
         return card.getImageFilename(); // key;

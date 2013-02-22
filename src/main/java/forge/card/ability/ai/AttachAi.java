@@ -499,8 +499,8 @@ public class AttachAi extends SpellAbilityAi {
                 continue;
             }
             if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
-                totToughness += CardFactoryUtil.parseSVar(attachSource, stabMap.get("AddToughness"));
-                totPower += CardFactoryUtil.parseSVar(attachSource, stabMap.get("AddPower"));
+                totToughness += AttachAi.parseSVar(attachSource, stabMap.get("AddToughness"));
+                totPower += AttachAi.parseSVar(attachSource, stabMap.get("AddPower"));
 
                 String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
@@ -612,6 +612,30 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     /**
+     * parseSVar TODO - flesh out javadoc for this method.
+     * 
+     * @param hostCard
+     *            the Card with the SVar on it
+     * @param amount
+     *            a String
+     * @return the calculated number
+     */
+    public static int parseSVar(final Card hostCard, final String amount) {
+        int num = 0;
+        if (amount == null) {
+            return num;
+        }
+    
+        try {
+            num = Integer.valueOf(amount);
+        } catch (final NumberFormatException e) {
+            num = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount).split("\\$")[1]);
+        }
+    
+        return num;
+    }
+
+    /**
      * Attach preference.
      * 
      * @param af
@@ -720,8 +744,8 @@ public class AttachAi extends SpellAbilityAi {
                 continue;
             }
             if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
-                totToughness += CardFactoryUtil.parseSVar(attachSource, stabMap.get("AddToughness"));
-                totPower += CardFactoryUtil.parseSVar(attachSource, stabMap.get("AddPower"));
+                totToughness += AttachAi.parseSVar(attachSource, stabMap.get("AddToughness"));
+                totPower += AttachAi.parseSVar(attachSource, stabMap.get("AddPower"));
 
                 grantingAbilities |= stabMap.containsKey("AddAbility");
 

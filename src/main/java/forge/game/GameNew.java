@@ -221,10 +221,12 @@ public class GameNew {
         return myRemovedAnteCards;
     }
     
-    private static void putCardsOnBattlefield(Player player, Iterable<Card> cards) {
+    private static void putCardsOnBattlefield(Player player, Iterable<? extends IPaperCard> cards) {
         PlayerZone bf = player.getZone(ZoneType.Battlefield);
         if (cards != null) {
-            for (final Card c : cards) {
+            for (final IPaperCard cp : cards) {
+                Card c = cp.toForgeCard(player);
+                c.setOwner(player);
                 c.addController(player);
                 bf.add(c, false);
                 c.setSickness(true);

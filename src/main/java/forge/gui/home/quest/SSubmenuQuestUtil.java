@@ -11,8 +11,6 @@ import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import com.google.common.base.Function;
-import forge.Card;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.control.FControl;
@@ -21,7 +19,6 @@ import forge.game.GameType;
 import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
-import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
@@ -413,10 +410,8 @@ public class SSubmenuQuestUtil {
             humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
             aiStart.setStartingLife(lifeAI);
 
-            humanStart.setCardsOnBattlefield(new Function<Player, Iterable<Card>>() {
-                @Override public Iterable<Card> apply(Player p) { return QuestUtil.getHumanStartingCards(qData, event, p); } });
-            aiStart.setCardsOnBattlefield(new Function<Player, Iterable<Card>>() {
-                @Override public Iterable<Card> apply(Player p) { return QuestUtil.getComputerStartingCards(event, p); } });
+            humanStart.setCardsOnBattlefield(QuestUtil.getHumanStartingCards(qData, event));
+            aiStart.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         } // End isFantasy
 
         MatchStartHelper msh = new MatchStartHelper();

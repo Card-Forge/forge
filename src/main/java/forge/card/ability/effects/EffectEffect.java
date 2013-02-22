@@ -104,13 +104,10 @@ public class EffectEffect extends SpellAbilityEffect {
                             // nuked
         eff.addController(controller);
         eff.setOwner(controller);
-        eff.setImageName(hostCard.getImageName());
+        eff.setImageFilename(hostCard.getImageFilename());
         eff.setColor(hostCard.getColor());
         eff.setImmutable(true);
         eff.setEffectSource(hostCard);
-        if (sa.hasParam("Image")) {
-            eff.setImageName(sa.getParam("Image"));
-        }
 
         // Effects should be Orange or something probably
 

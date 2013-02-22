@@ -3,12 +3,10 @@ package forge.game;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.google.common.base.Function;
-
-import forge.Card;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 
 
 public class PlayerStartConditions {
@@ -18,9 +16,9 @@ public class PlayerStartConditions {
     private static final Iterable<CardPrinted> EmptyList = Collections.unmodifiableList(new ArrayList<CardPrinted>());
     private int startingLife = 20;
     private int startingHand = 7;
-    private Function<Player, Iterable<Card>> cardsOnBattlefield = null;
-    private Iterable<CardPrinted> cardsInCommand = null;
-    private Iterable<CardPrinted> schemes = null;
+    private Iterable<IPaperCard> cardsOnBattlefield = null;
+    private Iterable<? extends IPaperCard> cardsInCommand = null;
+    private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<CardPrinted> planes = null;
 
     public PlayerStartConditions(Deck deck0) {
@@ -44,15 +42,15 @@ public class PlayerStartConditions {
     public final int getStartingLife() {
         return startingLife;
     }
-    public final Iterable<Card> getCardsOnBattlefield(Player p) {
-        return cardsOnBattlefield == null ? null : cardsOnBattlefield.apply(p);
+    public final Iterable<? extends IPaperCard> getCardsOnBattlefield(Player p) {
+        return cardsOnBattlefield == null ? EmptyList : cardsOnBattlefield;
     }
 
     public final void setStartingLife(int startingLife) {
         this.startingLife = startingLife;
     }
 
-    public final void setCardsOnBattlefield(Function<Player, Iterable<Card>> cardsOnTable) {
+    public final void setCardsOnBattlefield(Iterable<IPaperCard> cardsOnTable) {
         this.cardsOnBattlefield = cardsOnTable;
     }
 
@@ -73,28 +71,28 @@ public class PlayerStartConditions {
     /**
      * @return the cardsInCommand
      */
-    public Iterable<CardPrinted> getCardsInCommand(Player p) {
+    public Iterable<? extends IPaperCard> getCardsInCommand(Player p) {
         return cardsInCommand == null ? EmptyList : cardsInCommand;
     }
 
     /**
      * @param function the cardsInCommand to set
      */
-    public void setCardsInCommand(Iterable<CardPrinted> function) {
+    public void setCardsInCommand(Iterable<? extends IPaperCard> function) {
         this.cardsInCommand = function;
     }
 
     /**
      * @return the schemes
      */
-    public Iterable<CardPrinted> getSchemes(Player p) {
+    public Iterable<? extends IPaperCard> getSchemes(Player p) {
         return schemes == null ? EmptyList : schemes;
     }
 
     /**
      * @param schemes0 the schemes to set
      */
-    public void setSchemes(Iterable<CardPrinted> s) {
+    public void setSchemes(Iterable<? extends IPaperCard> s) {
         this.schemes = s;
     }
 

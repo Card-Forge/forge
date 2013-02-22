@@ -1948,64 +1948,6 @@ public class CardFactoryUtil {
     }
 
     /**
-     * parseSVar TODO - flesh out javadoc for this method.
-     * 
-     * @param hostCard
-     *            the Card with the SVar on it
-     * @param amount
-     *            a String
-     * @return the calculated number
-     */
-    public static int parseSVar(final Card hostCard, final String amount) {
-        int num = 0;
-        if (amount == null) {
-            return num;
-        }
-
-        try {
-            num = Integer.valueOf(amount);
-        } catch (final NumberFormatException e) {
-            num = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amount).split("\\$")[1]);
-        }
-
-        return num;
-    }
-
-    /**
-     * <p>
-     * Parse non-mana X variables.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param s
-     *            a {@link java.lang.String} object.
-     * @param sa
-     *            a {@link forge.SpellAbility} object.
-     * @return a int.
-     */
-    public static int xCount(final Card c, final String s, final SpellAbility sa) {
-
-        final String[] l = s.split("/");
-        final String[] m = CardFactoryUtil.parseMath(l);
-
-        final String[] sq;
-        sq = l[0].split("\\.");
-
-        if (sa != null) {
-            // Count$Kicked.<numHB>.<numNotHB>
-            if (sq[0].startsWith("Kicked")) {
-                if (sa.isKicked()) {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
-                } else {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
-                }
-            }
-        }
-        return xCount(c, s);
-    }
-
-    /**
      * <p>
      * Parse non-mana X variables.
      * </p>
@@ -3295,7 +3237,7 @@ public class CardFactoryUtil {
         final List<Card> list = new ArrayList<Card>();
         final Card c = new Card();
         c.setName(name);
-        c.setImageName(imageName);
+        c.setImageFilename(imageName);
 
         // TODO - most tokens mana cost is 0, this needs to be fixed
         // c.setManaCost(manaCost);
@@ -3356,7 +3298,7 @@ public class CardFactoryUtil {
         final List<String> kal = thisToken.getIntrinsicKeyword();
         final String[] tokenKeywords = new String[kal.size()];
         kal.toArray(tokenKeywords);
-        final List<Card> tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageName(),
+        final List<Card> tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageFilename(),
                 thisToken.getController(), thisToken.getManaCost().toString(), tokenTypes, thisToken.getBaseAttack(),
                 thisToken.getBaseDefense(), tokenKeywords);
 
@@ -3607,7 +3549,6 @@ public class CardFactoryUtil {
         to.setSVars(from.getSVars());
         to.setIntrinsicAbilities(from.getIntrinsicAbilities());
 
-        to.setImageName(from.getImageName());
         to.setImageFilename(from.getImageFilename());
         to.setTriggers(from.getTriggers());
         to.setReplacementEffects(from.getReplacementEffects());
@@ -4222,7 +4163,6 @@ public class CardFactoryUtil {
                                             // play it gets nuked
                         eff.addController(card.getController());
                         eff.setOwner(card.getController());
-                        eff.setImageName(card.getImageName());
                         eff.setColor(card.getColor());
                         eff.setImmutable(true);
                         eff.setEffectSource(card);

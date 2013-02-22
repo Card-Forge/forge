@@ -93,7 +93,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy = CardFactoryUtil.copyStats(c);
 
                         copy.setName(c.getName());
-                        copy.setImageName(c.getImageName());
+                        copy.setImageFilename(c.getImageFilename());
 
                         copy.setOwner(controller);
                         copy.addController(controller);

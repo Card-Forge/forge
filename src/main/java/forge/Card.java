@@ -3526,32 +3526,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Setter for the field <code>imageName</code>.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void setImageName(final String s) {
-        this.getCharacteristics().setImageName(s);
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>imageName</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getImageName() {
-        if (!this.getCharacteristics().getImageName().equals("")) {
-            return this.getCharacteristics().getImageName();
-        }
-        return this.getName();
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>owner</code>.
      * </p>
      * 

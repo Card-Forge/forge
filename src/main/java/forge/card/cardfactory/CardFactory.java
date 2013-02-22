@@ -234,11 +234,16 @@ public class CardFactory {
     public final Card getCard(final IPaperCard cp, final Player owner) {
 
         //System.out.println(cardName);
-        Card c = this.getCard2(cp.getRules(), owner);
+        CardRules cardRules = cp.getRules();
+        final Card c = readCard(cardRules);
+        c.setRules(cardRules);
+        c.setOwner(owner);
+        buildAbilities(c);
 
         c.setCurSetCode(cp.getEdition());
         c.setRandomPicture(cp.getArtIndex() + 1);
         String originalPicture = cp.getImageFilename();
+        //System.out.println(c.getName() + " -> " + originalPicture);
         c.setImageFilename(originalPicture);
         c.setToken(cp.isToken());
 
@@ -261,14 +266,6 @@ public class CardFactory {
         }
         return c;
 
-    }
-
-    protected Card getCard2(final CardRules cardRules, final Player owner) {
-        final Card card = readCard(cardRules);
-        card.setRules(cardRules);
-        card.setOwner(owner);
-        buildAbilities(card);
-        return card;
     }
 
     private static void buildAbilities(final Card card) {
@@ -319,7 +316,7 @@ public class CardFactory {
 
 
     
-    public static Card readCard(final CardRules rules) {
+    private static Card readCard(final CardRules rules) {
 
         final Card card = new Card();
 

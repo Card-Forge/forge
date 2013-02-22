@@ -328,7 +328,7 @@ public class AbilityUtils {
             }
 
             if (calcX[0].startsWith("Count")) {
-                return CardFactoryUtil.xCount(card, calcX[1], ability) * multiplier;
+                return AbilityUtils.xCount(card, calcX[1], ability) * multiplier;
             } else if (calcX[0].startsWith("Number")) {
                 return CardFactoryUtil.xCount(card, svarval) * multiplier;
             } else if (calcX[0].startsWith("SVar")) {
@@ -1194,6 +1194,40 @@ public class AbilityUtils {
             }
         }
         resolveSubAbilities(sa, usedStack, game);
+    }
+
+    /**
+     * <p>
+     * Parse non-mana X variables.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @param s
+     *            a {@link java.lang.String} object.
+     * @param sa
+     *            a {@link forge.SpellAbility} object.
+     * @return a int.
+     */
+    public static int xCount(final Card c, final String s, final SpellAbility sa) {
+    
+        final String[] l = s.split("/");
+        final String[] m = CardFactoryUtil.parseMath(l);
+    
+        final String[] sq;
+        sq = l[0].split("\\.");
+    
+        if (sa != null) {
+            // Count$Kicked.<numHB>.<numNotHB>
+            if (sq[0].startsWith("Kicked")) {
+                if (sa.isKicked()) {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
+                } else {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
+                }
+            }
+        }
+        return CardFactoryUtil.xCount(c, s);
     }
 
 }

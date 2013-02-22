@@ -19,9 +19,11 @@ package forge.quest;
 
 import forge.Card;
 
-import forge.game.player.Player;
+import forge.card.CardEdition;
+import forge.card.CardRulesReader;
 import forge.item.CardDb;
 import forge.item.CardToken;
+import forge.item.IPaperCard;
 import forge.quest.bazaar.QuestPetController;
 
 import java.util.ArrayList;
@@ -62,11 +64,11 @@ public class QuestUtil {
      *            a {@link forge.quest.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> getComputerStartingCards(final QuestEvent qe, Player ai) {
-        final List<Card> list = new ArrayList<Card>();
+    public static List<IPaperCard> getComputerStartingCards(final QuestEvent qe) {
+        final List<IPaperCard> list = new ArrayList<IPaperCard>();
 
         for (final String s : qe.getAiExtraCards()) {
-            list.add(QuestUtil.readExtraCard(s, ai));
+            list.add(QuestUtil.readExtraCard(s));
         }
 
         return list;
@@ -83,18 +85,16 @@ public class QuestUtil {
      *            a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> getHumanStartingCards(final QuestController qc, Player human) {
-        final List<Card> list = new ArrayList<Card>();
+    public static List<IPaperCard> getHumanStartingCards(final QuestController qc) {
+        final List<IPaperCard> list = new ArrayList<IPaperCard>();
 
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
             String petName = qc.getSelectedPet(iSlot);
             QuestPetController pet = qc.getPetsStorage().getPet(petName);
             if (pet != null) {
-                CardToken c = pet.getPetCard(qc.getAssets());
+                IPaperCard c = pet.getPetCard(qc.getAssets());
                 if (c != null) {
-                    Card copy = c.toForgeCard(human);
-                    copy.setSickness(true);
-                    list.add(copy);
+                    list.add(c);
                 }
             }
         }
@@ -115,10 +115,10 @@ public class QuestUtil {
      *            a {@link forge.quest.QuestEvent} object.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> getHumanStartingCards(final QuestController qc, final QuestEvent qe, final Player human) {
-        final List<Card> list = QuestUtil.getHumanStartingCards(qc, human);
+    public static List<IPaperCard> getHumanStartingCards(final QuestController qc, final QuestEvent qe) {
+        final List<IPaperCard> list = QuestUtil.getHumanStartingCards(qc);
         for (final String s : qe.getHumanExtraCards()) {
-            list.add(QuestUtil.readExtraCard(s, human));
+            list.add(QuestUtil.readExtraCard(s));
         }
         return list;
     }
@@ -134,24 +134,17 @@ public class QuestUtil {
      *            (TOKEN;W;1;1;sheep;type;type;type...)
      * @return token Card
      */
-    public static Card createToken(final String s) {
-        final String[] properties = s.split(";");
-        final Card c = new Card();
-        c.setToken(true);
+    public static CardToken createToken(final String s) {
+        final String[] properties = s.split(";", 5);
 
+        List<String> script = new ArrayList<String>();
+        script.add("Name:" + properties[4]);
+        script.add("Colors:" + properties[1]);
+        script.add("PT:"+ properties[2] + "/" + properties[3]);
+        script.add("Types:" + properties[5].replace(';', ' '));
         // c.setManaCost(properties[1]);
-        c.addColor(properties[1]);
-        c.setBaseAttack(Integer.parseInt(properties[2]));
-        c.setBaseDefense(Integer.parseInt(properties[3]));
-        c.setName(properties[4]);
-
-        c.setImageName(properties[1] + " " + properties[2] + " " + properties[3] + " " + properties[4]);
-
-        int x = 5;
-        while (x != properties.length) {
-            c.addType(properties[x++]);
-        }
-
+        String fileName = properties[1] + " " + properties[2] + " " + properties[3] + " " + properties[4];
+        final CardToken c = new CardToken(CardRulesReader.parseSingleCard(script), CardEdition.UNKNOWN.getCode(), fileName);
         return c;
     }
 
@@ -167,16 +160,15 @@ public class QuestUtil {
      *            the owner
      * @return the card
      */
-    public static Card readExtraCard(final String name, Player owner) {
+    public static IPaperCard readExtraCard(final String name) {
         // Token card creation
-        Card tempcard;
+        IPaperCard tempcard;
         if (name.startsWith("TOKEN")) {
             tempcard = QuestUtil.createToken(name);
-            tempcard.setOwner(owner);
             return tempcard;
         }
         // Standard card creation
-        return CardDb.instance().getCard(name, true).toForgeCard(owner);
+        return CardDb.instance().getCard(name, true);
     }
 
 } // QuestUtil
