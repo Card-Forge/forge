@@ -159,7 +159,7 @@ public class CardFactory {
             final boolean bCopyDetails) {
         Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
-        final Card c = Singletons.getModel().getCardFactory().copyCard(original);
+        final Card c = copyCard(original);
 
         // change the color of the copy (eg: Fork)
         final SpellAbility sourceSA = source.getFirstSpellAbility();
@@ -239,7 +239,8 @@ public class CardFactory {
 
         c.setCurSetCode(cp.getEdition());
         c.setRandomPicture(cp.getArtIndex() + 1);
-        c.setImageFilename(cp.getImageFilename());
+        String originalPicture = cp.getImageFilename();
+        c.setImageFilename(originalPicture);
         c.setToken(cp.isToken());
 
         if (c.hasAlternateState()) {
@@ -249,8 +250,14 @@ public class CardFactory {
             if (c.isDoubleFaced()) {
                 c.setState(CardCharacteristicName.Transformed);
             }
-            c.setCurSetCode(cp.getEdition());
-            c.setImageFilename(CardUtil.buildFilename(c));
+            if (c.getRules().getSplitType() == CardSplitType.Split) {
+                c.setState(CardCharacteristicName.LeftSplit);
+                c.setImageFilename(originalPicture);
+                c.setState(CardCharacteristicName.RightSplit);
+                c.setImageFilename(originalPicture);
+            } else {
+                c.setImageFilename(CardUtil.buildFilename(c));
+            }
             c.setState(CardCharacteristicName.Original);
         }
         return c;
@@ -344,7 +351,8 @@ public class CardFactory {
             card.setState(CardCharacteristicName.Original);
         }
         if ( st == CardSplitType.Split ) {
-            // BUILD COMBINED 'ORIGINAL' SIDE
+            card.setName(rules.getName());
+            // BUILD COMBINED 'Original' SIDE HERE
         }
 
         return card;
