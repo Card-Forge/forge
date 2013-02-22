@@ -267,9 +267,7 @@
                 </executions>
                 <configuration>
                     <file>${configSourceDirectory}/forge.sh</file>
-                    <outputFile>
-                        ${project.build.directory}/forge.sh
-                    </outputFile>
+                    <outputFile>${project.build.directory}/forge.sh</outputFile>
                     <regex>false</regex>
                     <replacements>
                         <replacement>
@@ -810,12 +808,6 @@
     <profiles>
         <profile>
             <id>windows-linux</id>
-            <activation>
-                <os>
-                    <!-- <family>windows</family> -->
-                    <!-- <family>unix</family> -->
-                </os>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -832,9 +824,7 @@
                                 <configuration>
                                     <headerType>gui</headerType>
                                     <outfile>${project.build.directory}/forge.exe</outfile>
-                                    <jar>
-                                        ${project.build.finalName}-jar-with-dependencies.jar
-                                    </jar>
+                                    <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                     <dontWrapJar>true</dontWrapJar>
                                     <errTitle>forge</errTitle>
                                     <icon>${configSourceDirectory}/forge.ico</icon>
@@ -882,7 +872,7 @@
                         <executions>
                             <execution>
                                 <id>win-linux-app-bundle</id>
-                                <phase>package</phase>
+                                <phase>pre-integration-test</phase>
                                 <configuration>
                                     <target>
                                         <!-- Windows/Linux archive -->
@@ -944,7 +934,7 @@
                             </execution>
                             <execution>
                                 <id>attach-distribution</id>
-                                <phase>package</phase>
+                                <phase>post-integration-test</phase>
                                 <goals>
                                     <goal>attach-artifact</goal>
                                 </goals>
@@ -971,11 +961,6 @@
                 <applications.file.name>"Applications"</applications.file.name>
             </properties>
             <id>osx</id>
-            <activation>
-                <os>
-                    <!-- <family>mac</family> -->
-                </os>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -997,7 +982,7 @@
                         <executions>
                             <execution>
                                 <id>osx-appbundle</id>
-                                <phase>package</phase>
+                                <phase>pre-integration-test</phase>
                                 <configuration>
                                     <target>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}-osx" />
@@ -1058,7 +1043,7 @@
                             </execution>
                             <execution>
                                 <id>attach-distribution-osx</id>
-                                <phase>package</phase>
+                                <phase>post-integration-test</phase>
                                 <goals>
                                     <goal>attach-artifact</goal>
                                 </goals>
