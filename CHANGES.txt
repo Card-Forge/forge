@@ -140,6 +140,9 @@ Surestrike Trident
 Sunforger
 Circle of Despair
 Martyr's Cause
+Cannibalize
+Shuriken
+Rally the Horde
 
 
 New Phenomenons:
@@ -548,6 +551,19 @@ Detailed Changelog: (This section will likely be deleted in the near future and 
 - removed white-bordered sets hardcode
 - alldecks - enabled list of all decks
 - NPE trying to scale a missing image
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CardDb is more forgiving to incomplete card scripts
+- missing HQ pic won't crash cardloader
+- Increased the volume for the white_land.wav sound and added the new lose_duel.wav sound file.
+- Updated some AI SVars.
+- Fixed capitalization error in CHANGES.txt
+- make 'ctrl/cmd-f' shortcut detection more cross-platform
+- If a SA can target the Stack and another zone, remove the host spell if it's on the Stack
+- Card is read from CardRules, old CardLoader removed
+- CardToken class is now available to represent out-of-game tokens.
+- Licids use an altername mode named 'Licid'
+- Split cards' images are properly shown
+- Revert to the original lose_duel.wav sound file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
