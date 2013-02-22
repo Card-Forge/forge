@@ -313,8 +313,8 @@ public class CardPanel extends JPanel implements CardContainer {
         // + White borders for Core sets Unlimited - 9th +
         final int cornerSize = Math.max(4, Math.round(this.cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
 
-        if (this.getGameCard() != null && (!this.getGameCard().getImageFilename().equals("none"))
-                && (!this.getGameCard().getName().equals("Morph"))) {
+        if (this.getGameCard() != null && this.getGameCard().getImageFilename() != null
+                && !this.getGameCard().getImageFilename().equals("none") && !this.getGameCard().getName().equals("Morph")) {
             CardEdition ed = Singletons.getModel().getEditions().get(this.getGameCard().getCurSetCode());
 
             if (ed != null && ed.isWhiteBorder()) {
