@@ -266,14 +266,23 @@ public class TargetSelection {
         final List<ZoneType> zone = tgt.getZone();
         final boolean mandatory = this.target.getMandatory() ? this.target.hasCandidates(this.ability, true) : false;
 
-        if (zone.contains(ZoneType.Stack) && (zone.size() == 1)) {
+        final boolean canTgtStack = zone.contains(ZoneType.Stack);
+        
+        if (canTgtStack && (zone.size() == 1)) {
             // If Zone is Stack, the choices are handled slightly differently
             this.chooseCardFromStack(mandatory);
             return;
         }
 
         List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(zone), this.target.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
-
+        if (canTgtStack) {
+            // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
+            // Remove the activating card from targeting itself if its on the Stack
+            Card activatingCard = tgt.getSourceCard();
+            if (activatingCard.isInZone(ZoneType.Stack)) {
+                choices.remove(tgt.getSourceCard());
+            }
+        }
         ArrayList<Object> objects = getUniqueTargets(this.ability);
 
         if (tgt.isUniqueTargets()) {
@@ -549,7 +558,7 @@ public class TargetSelection {
         final Card divLibrary = new Card();
         divLibrary.setName("--CARDS IN LIBRARY:--");
         final Card divStack = new Card();
-        divStack.setName("--CARDS IN LIBRARY:--");
+        divStack.setName("--CARDS IN STACK:--");
 
         List<Card> choicesZoneUnfiltered = choices;
         final List<Card> crdsBattle = new ArrayList<Card>();
