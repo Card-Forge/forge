@@ -8390,12 +8390,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final boolean addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat) {
         final int damageToAdd = damageIn;
-        boolean wither = false;
 
         if (damageToAdd == 0) {
             return false; // Rule 119.8
         }
-        Log.debug("Adding " + damageToAdd + " damage to " + this.getName());
 
         this.addReceivedDamageFromThisTurn(source, damageToAdd);
         source.addDealtDamageToThisTurn(this, damageToAdd);
@@ -8410,26 +8408,30 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("IsCombatDamage", isCombat);
         Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
+        String additionalLog = "";
         if (this.isPlaneswalker()) {
             this.subtractCounter(CounterType.LOYALTY, damageToAdd);
-            return true;
+            additionalLog = String.format("(Removing %d Loyalty Counters)", damageToAdd);
+        } else {
+            boolean wither = (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
+                    || source.hasKeyword("Wither") || source.hasKeyword("Infect"));
+
+            GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
+
+            if (this.isInPlay() && wither) {
+                this.addCounter(CounterType.M1M1, damageToAdd, true);
+                additionalLog = "(As -1/-1 Counters)";
+            }
+            if (source.hasKeyword("Deathtouch") && this.isCreature()) {
+                Singletons.getModel().getGame().getAction().destroy(this);
+                additionalLog = "(Deathtouch)";
+            } else if (this.isInPlay() && !wither) {
+                this.damage += damageToAdd;
+            }
         }
 
-        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
-                || source.hasKeyword("Wither") || source.hasKeyword("Infect")) {
-            wither = true;
-        }
-
-        GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
-
-        if (this.isInPlay() && wither) {
-            this.addCounter(CounterType.M1M1, damageToAdd, true);
-        }
-        if (source.hasKeyword("Deathtouch") && this.isCreature()) {
-            Singletons.getModel().getGame().getAction().destroy(this);
-        } else if (this.isInPlay() && !wither) {
-            this.damage += damageToAdd;
-        }
+        Singletons.getModel().getGame().getGameLog().add("Damage", String.format("Dealing %d damage to %s. %s", 
+                damageToAdd, this.getName(), additionalLog), 3);
         return true;
     }
 

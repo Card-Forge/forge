@@ -608,7 +608,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (damageToDo == 0) {
             return false;
         }
-
+        String additionalLog = "";
         source.addDealtDamageToPlayerThisTurn(this.getName(), damageToDo);
 
         boolean infect = source.hasKeyword("Infect")
@@ -616,12 +616,14 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         if (infect) {
             this.addPoisonCounters(damageToDo, source);
+            additionalLog = "(as Poison Counters)";
         } else {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
             if (this.hasKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.")
                     && this.life <= damageToDo) {
                 this.loseLife(Math.min(damageToDo, this.life - 1));
+                additionalLog = "(would reduce life total to less than 1, reduced to 1 instead.)";
             } else {
                 // rule 118.2. Damage dealt to a player normally causes that
                 // player to lose that much life.
@@ -647,6 +649,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         runParams.put("DamageAmount", damageToDo);
         runParams.put("IsCombatDamage", isCombat);
         game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
+
+        Singletons.getModel().getGame().getGameLog().add("Damage", String.format("Dealing %d damage to %s. %s", 
+                damageToDo, this.getName(), additionalLog), 3);
 
         return true;
     }
