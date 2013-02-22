@@ -194,6 +194,11 @@
                         <artifactId>ant-nodeps</artifactId>
                         <version>1.8.1</version>
                     </dependency>
+                    <dependency>
+                        <groupId>net.sourceforge.jarbundler</groupId>
+                        <artifactId>jarbundler</artifactId>
+                        <version>2.2.0</version>
+                    </dependency>
                 </dependencies>
                 <executions>
                     <execution>
