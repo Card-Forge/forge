@@ -135,7 +135,7 @@ public class QuestUtil {
      * @return token Card
      */
     public static CardToken createToken(final String s) {
-        final String[] properties = s.split(";", 5);
+        final String[] properties = s.split(";", 6);
 
         List<String> script = new ArrayList<String>();
         script.add("Name:" + properties[4]);
