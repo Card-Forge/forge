@@ -1,0 +1,14 @@
+Name:Deathlace
+ManaCost:B
+Types:Instant
+A:SP$ Animate | Cost$ B | Colors$ Black | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Permanent$ True | SpellDescription$ Target spell or permanent becomes black. (Mana symbols on that permanent remain unchanged.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathlace.jpg
+SVar:RemAIDeck:True
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/10.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/10.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/10.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/15.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/10.jpg
+Oracle:Target spell or permanent becomes black. (Mana symbols on that permanent remain unchanged.)
+End

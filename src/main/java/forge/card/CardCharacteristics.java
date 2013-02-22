@@ -129,6 +129,13 @@ public class CardCharacteristics {
     public final void setCardColor(final Iterable<CardColor> cardColor0) {
         this.cardColor = Lists.newArrayList(cardColor0);
     }
+    
+    /**
+     * Resets the card color.
+     */
+    public final void resetCardColor() {
+        this.cardColor = Lists.newArrayList(this.cardColor.subList(0, 1));
+    }
 
     /**
      * Gets the base attack.

@@ -243,6 +243,10 @@ public class GameAction {
                 (!zoneTo.is(ZoneType.Battlefield) && !c.getName().equals("Skullbriar, the Walking Grave"))) {
             copied.clearCounters();
         }
+        
+        if (!zoneTo.is(ZoneType.Battlefield)) {
+            copied.getCharacteristics().resetCardColor();
+        }
 
         if (zoneFrom.is(ZoneType.Battlefield)) {
             copied.setSuspendCast(false);
