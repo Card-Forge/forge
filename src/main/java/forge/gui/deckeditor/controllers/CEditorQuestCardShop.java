@@ -375,7 +375,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards()
                 .getSellPriceLimit());
-        this.questData.getCards().sellCard(card, 1, price);
+        this.questData.getCards().sellCard(card, qty, price);
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
