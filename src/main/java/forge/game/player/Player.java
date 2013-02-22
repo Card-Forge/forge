@@ -650,7 +650,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         runParams.put("IsCombatDamage", isCombat);
         game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
-        Singletons.getModel().getGame().getGameLog().add("Damage", String.format("Dealing %d damage to %s. %s", 
+        game.getGameLog().add("Damage", String.format("Dealing %d damage to %s. %s", 
                 damageToDo, this.getName(), additionalLog), 3);
 
         return true;
