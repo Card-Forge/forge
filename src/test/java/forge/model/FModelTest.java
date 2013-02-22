@@ -76,27 +76,9 @@ public class FModelTest {
      */
     @Test(enabled = false)
     public final void test_getVersion() throws FileNotFoundException {
-        final String version = this.model.getBuildInfo().getVersion();
+        final String version = BuildInfo.getVersionString();
 
         Assert.assertEquals(version, "SVN", "version is default");
-    }
-
-    /**
-     * Test getBuildID.
-     * 
-     * @throws FileNotFoundException
-     *             if something is really wrong
-     */
-    @Test(enabled = false)
-    public final void test_getBuildID() throws FileNotFoundException {
-        // by
-        // Braids
-        // on
-        // 8/12/11
-        // 10:36
-        // AM
-        // Just test for an unexpected exception.
-        this.model.getBuildInfo().getBuildID();
     }
 
     /**

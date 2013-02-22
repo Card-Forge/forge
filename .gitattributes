@@ -14504,5 +14504,4 @@ src/test/java/forge/deck/generate/Generate5ColorDeckTest.java svneol=native#text
 src/test/java/forge/gui/ListChooserTest.java svneol=native#text/plain
 src/test/java/forge/gui/game/CardDetailPanelTest.java svneol=native#text/plain
 src/test/java/forge/item/DeckHintsTest.java -text
-src/test/java/forge/model/BuildInfoTest.java -text
 src/test/java/forge/model/FModelTest.java -text

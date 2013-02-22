@@ -28,7 +28,6 @@ import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardUtil;
 import forge.Color;
-import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;

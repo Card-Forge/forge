@@ -46,10 +46,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
+import net.miginfocom.swing.MigLayout;
+
 import org.apache.commons.lang3.StringUtils;
 
-import net.miginfocom.swing.MigLayout;
-import forge.Singletons;
 import forge.gui.WrapLayout;
 import forge.gui.toolbox.FHyperlink;
 import forge.gui.toolbox.FLabel;
@@ -165,7 +165,7 @@ public class BugReporter {
 
     private static StringBuilder _buildSpoilerHeader(StringBuilder sb, String reportTitle) {
         sb.append("[spoiler=").append(reportTitle).append("][code]");
-        sb.append("\nForge Version:    ").append(Singletons.getModel().getBuildInfo().toPrettyString());
+        sb.append("\nForge Version:    ").append(BuildInfo.getVersionString());
         sb.append("\nOperating System: ").append(System.getProperty("os.name"))
                                          .append(" ").append(System.getProperty("os.version"))
                                          .append(" ").append(System.getProperty("os.arch"));
@@ -204,8 +204,7 @@ public class BugReporter {
         p.add(new JScrollPane(area), "w 100%, h 100%, gaptop 5");
         
         // determine proper forum URL
-        BuildInfo bi = Singletons.getModel().getBuildInfo();
-        String forgeVersion = bi.getVersion();
+        String forgeVersion = BuildInfo.getVersionString();
         final String url;
         if (StringUtils.containsIgnoreCase(forgeVersion, "svn")
          || StringUtils.containsIgnoreCase(forgeVersion, "snapshot")) {

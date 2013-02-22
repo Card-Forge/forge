@@ -171,24 +171,48 @@
 
     <build>
         <plugins>
-
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.1</version>
+                <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
+                <artifactId>svn-revision-number-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>validate</phase>
                         <goals>
-                            <goal>create</goal>
+                            <goal>revision</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <revisionOnScmFailure>0000</revisionOnScmFailure>
-                    <providerImplementations>
-                    </providerImplementations>
+                    <failOnError>false</failOnError>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant-nodeps</artifactId>
+                        <version>1.8.1</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>build-version-string</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <exportAntProperties>true</exportAntProperties>
+                            <target>
+                                <condition property="fullversionstring" value="${project.version}-r${forge.revision}${forge.specialStatus}" else="${project.version}-r${forge.revision}${forge.specialStatus} (mixed revisions detected; please update from the root directory)">
+                                    <contains string="${forge.mixedRevisions}" substring="false"/>
+                                </condition>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -202,7 +226,7 @@
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
                         <manifestEntries>
-                            <Implementation-Version>${project.version}-r${buildNumber}</Implementation-Version>
+                            <Implementation-Version>${fullversionstring}</Implementation-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -265,7 +289,7 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
-                            <Implementation-Version>${project.version}-r${buildNumber}</Implementation-Version>
+                            <Implementation-Version>${fullversionstring}</Implementation-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -289,16 +313,16 @@
                     <source>1.6</source>
                     <target>1.6</target>
                     <compilerId>groovy-eclipse-compiler</compilerId>
-							      <!-- set verbose to be true if you want lots of uninteresting messages -->
-							      <!-- <verbose>true</verbose> -->
+                    <!-- set verbose to be true if you want lots of uninteresting messages -->
+                    <!-- <verbose>true</verbose> -->
                 </configuration>
-						    <dependencies>
-						      <dependency>
-						        <groupId>org.codehaus.groovy</groupId>
-						        <artifactId>groovy-eclipse-compiler</artifactId>
-						        <version>2.7.0-01</version>
-						      </dependency>
-						    </dependencies>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-compiler</artifactId>
+                        <version>2.7.0-01</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
@@ -380,6 +404,12 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
+                    <artifactId>svn-revision-number-maven-plugin</artifactId>
+                    <version>1.13</version>
+                </plugin>
+
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>1.7</version>
@@ -423,47 +453,44 @@
                             <pluginExecutions>
                                 <pluginExecution>
                                     <pluginExecutionFilter>
-                                        <groupId>
-                                            org.codehaus.mojo
-                                        </groupId>
-                                        <artifactId>
-                                            build-helper-maven-plugin
-                                        </artifactId>
-                                        <versionRange>
-                                            [1.7,)
-                                        </versionRange>
+                                        <groupId>org.codehaus.mojo</groupId>
+                                        <artifactId>build-helper-maven-plugin</artifactId>
+                                        <versionRange>[1.7,)</versionRange>
                                         <goals>
-                                            <goal>
-                                                released-version
-                                            </goal>
-                                            <goal>
-                                                parse-version
-                                            </goal>
+                                            <goal>released-version</goal>
+                                            <goal>parse-version</goal>
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore />
+                                        <ignore/>
                                     </action>
                                 </pluginExecution>
                                 <pluginExecution>
-                                	<pluginExecutionFilter>
-                                		<groupId>
-                                			org.apache.maven.plugins
-                                		</groupId>
-                                		<artifactId>
-                                			maven-compiler-plugin
-                                		</artifactId>
-                                		<versionRange>
-                                			[2.5.1,)
-                                		</versionRange>
-                                		<goals>
-                                			<goal>testCompile</goal>
-                                			<goal>compile</goal>
-                                		</goals>
-                                	</pluginExecutionFilter>
-                                	<action>
-                                		<execute />
-                                	</action>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-compiler-plugin</artifactId>
+                                        <versionRange>[2.5.1,)</versionRange>
+                                        <goals>
+                                            <goal>testCompile</goal>
+                                            <goal>compile</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute/>
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
+                                        <artifactId>svn-revision-number-maven-plugin</artifactId>
+                                        <versionRange>[1.0.0,)</versionRange>
+                                        <goals>
+                                            <goal>revision</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute/>
+                                    </action>
                                 </pluginExecution>
                             </pluginExecutions>
                         </lifecycleMappingMetadata>
@@ -471,8 +498,8 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-
     </build>
+
     <reporting>
         <plugins>
             <!-- Configure Built-In Dependency Reports NOT to scan Repos, Saves a
@@ -693,11 +720,11 @@
             <version>6.5.2</version>
             <scope>test</scope>
         </dependency>
-	<dependency>
-		<groupId>log4j</groupId>
-		<artifactId>log4j</artifactId>
-		<version>1.2.16</version>
-	</dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
         <dependency>
             <groupId>com.googlecode</groupId>
             <artifactId>minlog</artifactId>
@@ -709,11 +736,11 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.1</version>
         </dependency>
-	<dependency>
-		<groupId>commons-lang</groupId>
-		<artifactId>commons-lang</artifactId>
-		<version>2.6</version>
-	</dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
@@ -750,6 +777,7 @@
             </snapshots>
         </repository>
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>arcane-maven-repo</id>

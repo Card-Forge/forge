@@ -29,6 +29,7 @@ import forge.gui.match.VMatchUI;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
+import forge.model.BuildInfo;
 
 /** */
 public enum FView {
@@ -73,7 +74,7 @@ public enum FView {
         frmDocument.setExtendedState(frmDocument.getExtendedState() | Frame.MAXIMIZED_BOTH);
         frmDocument.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frmDocument.setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON).getImage());
-        frmDocument.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
+        frmDocument.setTitle("Forge: " + BuildInfo.getVersionString());
 
         // Frame components
         frmDocument.setContentPane(lpnDocument);

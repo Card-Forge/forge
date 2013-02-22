@@ -71,7 +71,6 @@ public enum FModel {
 
     private final PrintStream oldSystemOut;
     private final PrintStream oldSystemErr;
-    private BuildInfo buildInfo;
     private OutputStream logFileStream;
 
 
@@ -152,7 +151,6 @@ public enum FModel {
 
         testNetworkConnection();
 
-        this.setBuildInfo(new BuildInfo());
         this.loadDynamicGamedata();
 
         // Loads all cards (using progress bar).
@@ -284,25 +282,6 @@ public enum FModel {
          * Constant.Keywords.loaded[0] = true; if (Constant.Runtime.DevMode[0])
          * { System.out.println(Constant.Keywords.NonStackingList[0].list); } }
          */
-    }
-
-    /**
-     * Gets the builds the info.
-     * 
-     * @return {@link forge.model.BuildInfo}
-     */
-    public final BuildInfo getBuildInfo() {
-        return this.buildInfo;
-    }
-
-    /**
-     * Sets the builds the info.
-     * 
-     * @param bi0
-     *            &emsp; {@link forge.model.BuildInfo}
-     */
-    protected final void setBuildInfo(final BuildInfo bi0) {
-        this.buildInfo = bi0;
     }
 
     /**
