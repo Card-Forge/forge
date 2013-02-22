@@ -1436,6 +1436,7 @@ res/cardsfolder/c/candelabra_of_tawnos.txt svneol=native#text/plain
 res/cardsfolder/c/candles_of_leng.txt -text svneol=unset#text/plain
 res/cardsfolder/c/canker_abomination.txt svneol=native#text/plain
 res/cardsfolder/c/cankerous_thirst.txt -text
+res/cardsfolder/c/cannibalize.txt -text
 res/cardsfolder/c/canopy_claws.txt svneol=native#text/plain
 res/cardsfolder/c/canopy_cover.txt svneol=native#text/plain
 res/cardsfolder/c/canopy_crawler.txt -text
@@ -9391,6 +9392,7 @@ res/cardsfolder/s/shu_general.txt svneol=native#text/plain
 res/cardsfolder/s/shu_grain_caravan.txt svneol=native#text/plain
 res/cardsfolder/s/shu_soldier_farmers.txt svneol=native#text/plain
 res/cardsfolder/s/shuko.txt svneol=native#text/plain
+res/cardsfolder/s/shuriken.txt -text
 res/cardsfolder/s/shyft.txt -text
 res/cardsfolder/s/sibilant_spirit.txt svneol=native#text/plain
 res/cardsfolder/s/sick_and_tired.txt svneol=native#text/plain

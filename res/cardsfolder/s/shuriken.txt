@@ -1,0 +1,15 @@
+Name:Shuriken
+ManaCost:1
+Types:Artifact Equipment
+Text:no text
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ ShurikenDamage | AddSVar$ ShurikenGainCtrl & ShurikenForget | Description$ Equipped creature has "Tap, Unattach CARDNAME: CARDNAME deals 2 damage to target creature. That creature's controller gains control of CARDNAME unless it was unattached from a Ninja."
+SVar:ShurikenDamage:AB$ DealDamage | Cost$ T Unattach<OriginalHost/Shuriken> | NumDmg$ 2 | DamageSource$ OriginalHost | RememberCostCards$ True | ValidTgts$ Creature | SubAbility$ ShurikenGainCtrl | SpellDescription$ Shuriken deals 2 damage to target creature. That creature's controller gains control of Shuriken unless it was unattached from a Ninja
+SVar:ShurikenGainCtrl:DB$ GainControl | NewController$ TargetedController | Defined$ Valid Card.IsRemembered+namedShuriken | ConditionDefined$ Self | ConditionPresent$ Ninja | ConditionCompare$ EQ0 | SubAbility$ ShurikenForget
+SVar:ShurikenForget:DB$ Pump | ForgetObjects$ Valid Card.IsRemembered+namedShuriken | StackDescription$ None
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shuriken.jpg
+Oracle:Equipped creature has "{T}, Unattach Shuriken: Shuriken deals 2 damage to target creature. That creature's controller gains control of Shuriken unless it was unattached from a Ninja."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/160.jpg
+End
