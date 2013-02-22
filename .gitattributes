@@ -8188,6 +8188,7 @@ res/cardsfolder/r/raksha_golden_cub.txt svneol=native#text/plain
 res/cardsfolder/r/raksha_golden_cub_avatar.txt -text
 res/cardsfolder/r/rally.txt svneol=native#text/plain
 res/cardsfolder/r/rally_the_forces.txt svneol=native#text/plain
+res/cardsfolder/r/rally_the_horde.txt -text
 res/cardsfolder/r/rally_the_peasants.txt -text
 res/cardsfolder/r/rally_the_righteous.txt -text
 res/cardsfolder/r/rally_the_troops.txt -text
