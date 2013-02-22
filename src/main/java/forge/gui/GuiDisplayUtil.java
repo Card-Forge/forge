@@ -58,6 +58,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.view.arcane.PlayArea;
 import forge.view.arcane.util.Animation;
 
@@ -764,7 +765,7 @@ public final class GuiDisplayUtil {
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
-        final CardPrinted c = GuiChoose.oneOrNone("Name the card", cards);
+        final IPaperCard c = GuiChoose.oneOrNone("Name the card", cards);
         if (c == null) {
             return;
         }
@@ -785,7 +786,7 @@ public final class GuiDisplayUtil {
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
-        final CardPrinted c = GuiChoose.oneOrNone("Name the card", cards);
+        final IPaperCard c = GuiChoose.oneOrNone("Name the card", cards);
         if (c == null) {
             return;
         }

@@ -17,16 +17,8 @@
  */
 package forge.card;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
-import com.google.common.collect.Lists;
-
 import forge.card.mana.ManaCost;
-
-
-
-
 
 /**
  * A collection of methods containing full
@@ -38,32 +30,19 @@ import forge.card.mana.ManaCost;
 public final class CardRules implements ICardCharacteristics {
 
     private final CardSplitType splitType;
-    private final ICardCharacteristics mainPart;
-    private final ICardCharacteristics otherPart;
+    private final ICardFace mainPart;
+    private final ICardFace otherPart;
     
     private CardAiHints aiHints;
-    private Iterable<String> forgeScript;
 
 
 
-    public CardRules(ICardCharacteristics[] faces, CardSplitType altMode, CardAiHints cah, Iterable<String> script) {
+    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
         aiHints = cah;
-        forgeScript = Lists.newArrayList(script);
     }
-
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public Iterable<String> getForgeScript() {
-        return forgeScript;
-    }
-
-
 
     public boolean isTraditional() {
         return !(getType().isVanguard() || getType().isScheme() || getType().isPlane() || getType().isPhenomenon());
@@ -77,13 +56,13 @@ public final class CardRules implements ICardCharacteristics {
         return splitType;
     }
 
-    public ICardCharacteristics getMainPart() {
+    public ICardFace getMainPart() {
         // TODO Auto-generated method stub
         return mainPart;
     }
 
 
-    public ICardCharacteristics getOtherPart() {
+    public ICardFace getOtherPart() {
         return otherPart;
     }
 
@@ -152,23 +131,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
 
-    @Override
-    public Iterable<String> getKeywords() {
-        switch(splitType.getAggregationMethod()) {
-        case AGGREGATE:
-            List<String> res = new ArrayList<String>();
-            for(String ka : mainPart.getKeywords())
-                res.add(ka);
-            for(String kb : otherPart.getKeywords())
-                res.add(kb);
-            return res; 
-        default:
-            return mainPart.getKeywords();
-        }
-    }
-
-    
-    public Iterable<Entry<String, CardInSet>> getSetsPrinted() { return mainPart.getSetsPrinted(); }
+    public Iterable<String> getSets() { return mainPart.getSets(); }
     public CardInSet getEditionInfo(final String setCode) { return mainPart.getEditionInfo(setCode); }
 
 
@@ -183,8 +146,8 @@ public final class CardRules implements ICardCharacteristics {
         if (slashPos == -1) {
             throw new RuntimeException(String.format("Vanguard '%s' has bad hand/life stats", this.getName()));
         }
-        this.deltaHand = Integer.parseInt(pt.substring(0, pt.indexOf('/')).replace("+", ""));
-        this.deltaLife = Integer.parseInt(pt.substring(pt.indexOf('/') + 1).replace("+", ""));
+        this.deltaHand = Integer.parseInt(pt.substring(0, slashPos).replace("+", ""));
+        this.deltaLife = Integer.parseInt(pt.substring(slashPos+1).replace("+", ""));
     }
 
     // Downloadable image
@@ -193,6 +156,38 @@ public final class CardRules implements ICardCharacteristics {
     public String getPictureUrl() { return dlUrl; }
     public String getPictureOtherSideUrl() { return dlUrlOtherSide; }
     public void setDlUrls(String[] dlUrls) { this.dlUrl = dlUrls[0]; this.dlUrlOtherSide = dlUrls[1]; }
+
+
+    /* (non-Javadoc)
+     * @see forge.card.ICardCharacteristics#getReplacements()
+     */
+    public final List<String> getReplacements() {
+        return null;
+    }
+
+
+    /* (non-Javadoc)
+     * @see forge.card.ICardCharacteristics#getTriggers()
+     */
+    public final List<String> getTriggers() {
+        return null;
+    }
+
+
+    /* (non-Javadoc)
+     * @see forge.card.ICardCharacteristics#getStaticAbilities()
+     */
+    public final List<String> getStaticAbilities() {
+        return null;
+    }
+
+
+    /* (non-Javadoc)
+     * @see forge.card.ICardCharacteristics#getAbilities()
+     */
+    public final List<String> getAbilities() {
+        return null;
+    }
 
 
 

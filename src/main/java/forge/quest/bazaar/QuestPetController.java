@@ -26,7 +26,7 @@ import javax.swing.ImageIcon;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-import forge.Card;
+import forge.item.CardToken;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestAssets;
@@ -78,7 +78,7 @@ public class QuestPetController implements IQuestBazaarItem {
      * @return a {@link forge.Card} object.
      */
 
-    public Card getPetCard(final QuestAssets qA) {
+    public CardToken getPetCard(final QuestAssets qA) {
         return this.levels.get(this.getPetLevel(qA)).getCard();
     }
 

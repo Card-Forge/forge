@@ -27,7 +27,9 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardCharacteristics;
-import forge.card.EditionInfo;
+import forge.card.CardInSet;
+import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -164,14 +166,8 @@ public final class CardUtil {
         final boolean token = card.isToken() && !card.isCopiedToken();
 
         final String set = card.getCurSetCode();
-        EditionInfo neededSet = null;
-        for(EditionInfo e : card.getSets()) {
-            if ( e.getCode().equals(set) ) {
-                neededSet = e;
-                break;
-            }
-        }
-        final int cntPictures = neededSet == null ? 1 : neededSet.getPicCount();
+        CardInSet neededSet = card.getRules().getEditionInfo(set);
+        final int cntPictures = neededSet == null ? 1 : neededSet.getCopiesCount();
         return CardUtil.buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
     }
 
@@ -183,8 +179,15 @@ public final class CardUtil {
      * @return the string
      */
     public static String buildFilename(final CardPrinted card) {
-        final int maxIndex = card.getRules().getEditionInfo(card.getEdition()).getCopiesCount();
-        return CardUtil.buildFilename(card.getName(), card.getEdition(), card.getArtIndex(), maxIndex, false);
+        CardRules cr = card.getRules();
+        final int maxIndex = cr.getEditionInfo(card.getEdition()).getCopiesCount();
+        // picture is named AssaultBattery.full.jpg
+        String imageName = cr.getSplitType() != CardSplitType.Split ? card.getName() : buildSplitCardFilename(cr);
+        return CardUtil.buildFilename(imageName, card.getEdition(), card.getArtIndex(), maxIndex, false);
+    }
+    
+    public static String buildSplitCardFilename(CardRules cr) {
+        return cr.getMainPart().getName() + cr.getOtherPart().getName();
     }
 
     /**
@@ -622,6 +625,8 @@ public final class CardUtil {
 
         return colors;
     }
+
+
 
 
 } // end class CardUtil

@@ -2,10 +2,6 @@ package forge.card;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -149,7 +145,7 @@ public final class CardRulesPredicates {
         return new Predicate<CardRules>() {
             @Override
             public boolean apply(final CardRules card) {
-                return Iterables.contains(card.getKeywords(), keyword);
+                return Iterables.contains(card.getMainPart().getKeywords(), keyword);
             }
         };
     }
@@ -444,10 +440,9 @@ public final class CardRulesPredicates {
 
         @Override
         public boolean apply(final CardRules subject) {
-            for(Entry<String, CardInSet> cs : subject.getSetsPrinted())
-                for (final String s : this.sets)
-                    if ( StringUtils.equalsIgnoreCase(cs.getKey(), s) )
-                        return true;
+            for (final String s : this.sets)
+                if ( null != subject.getEditionInfo(s) )
+                    return true;
             return false;
         }
     }

@@ -27,6 +27,7 @@ import com.google.common.collect.Iterables;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.CardEdition;
+import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -100,10 +101,11 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
             if (StringUtils.isBlank(setCode3) || "???".equals(setCode3)) {
                 continue; // we don't want cards from unknown sets
             }
-
-            this.addCardToList(cList, c, c.getRules().getName());
-            if (c.getRules().getSplitType() == CardSplitType.Transform) {
-                this.addCardToList(cList, c, c.getRules().getOtherPart().getName());
+            CardRules cr = c.getRules();
+            String firstPartName = cr.getSplitType() == CardSplitType.Split ? CardUtil.buildSplitCardFilename(cr) : c.getName();
+            this.addCardToList(cList, c, firstPartName);
+            if (cr.getSplitType() == CardSplitType.Transform) {
+                this.addCardToList(cList, c, cr.getOtherPart().getName());
             }
         }
 

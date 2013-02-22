@@ -21,21 +21,29 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map.Entry;
+
 import forge.Card;
 import forge.CardCharacteristicName;
+import forge.CardColor;
 import forge.CardUtil;
+import forge.Color;
 import forge.Singletons;
 import forge.card.CardRules;
+import forge.card.CardSplitType;
+import forge.card.ICardFace;
 import forge.card.cost.Cost;
+import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
+import forge.card.trigger.TriggerHandler;
 import forge.error.BugReporter;
 import forge.game.player.Player;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -67,12 +75,12 @@ public class CardFactory {
      * @param file
      *            a {@link java.io.File} object.
      */
-    private final CardReader reader;
+    private final CardStorageReader reader;
 
     public CardFactory(final File file) {
 
         GuiUtils.checkEDT("CardFactory$constructor", false);
-        reader = new CardReader(ForgeProps.getFile(NewConstants.CARDSFOLDER), true);
+        reader = new CardStorageReader(ForgeProps.getFile(NewConstants.CARDSFOLDER), true);
         try {
             // this fills in our map of card names to Card instances.
             final List<CardRules> listCardRules = reader.loadCards();
@@ -224,53 +232,42 @@ public class CardFactory {
      * @return a {@link forge.Card} instance, owned by owner; or the special
      *         blankCard
      */
-    public final Card getCard(final CardPrinted cp, final Player owner) {
+    public final Card getCard(final IPaperCard cp, final Player owner) {
 
         //System.out.println(cardName);
-        Card c = this.getCard2(cp.getRules().getForgeScript(), owner);
+        Card c = this.getCard2(cp.getRules(), owner);
 
-        if (c != null) {
-            c.setCurSetCode(cp.getEdition());
-            c.setRandomPicture(cp.getArtIndex() + 1);
-            c.setImageFilename(cp.getImageFilename());
+        c.setCurSetCode(cp.getEdition());
+        c.setRandomPicture(cp.getArtIndex() + 1);
+        c.setImageFilename(cp.getImageFilename());
+        c.setToken(cp.isToken());
 
-            if (c.hasAlternateState()) {
-                if (c.isFlipCard()) {
-                    c.setState(CardCharacteristicName.Flipped);
-                }
-                if (c.isDoubleFaced()) {
-                    c.setState(CardCharacteristicName.Transformed);
-                }
-                c.setCurSetCode(cp.getEdition());
-                c.setImageFilename(CardUtil.buildFilename(c));
-                c.setState(CardCharacteristicName.Original);
+        if (c.hasAlternateState()) {
+            if (c.isFlipCard()) {
+                c.setState(CardCharacteristicName.Flipped);
             }
+            if (c.isDoubleFaced()) {
+                c.setState(CardCharacteristicName.Transformed);
+            }
+            c.setCurSetCode(cp.getEdition());
+            c.setImageFilename(CardUtil.buildFilename(c));
+            c.setState(CardCharacteristicName.Original);
         }
-        // else throw "Unsupported card";
         return c;
 
     }
 
-    protected Card getCard2(final Iterable<String> script, final Player owner) {
-        final Card card = CardReader.readCard(script);
+    protected Card getCard2(final CardRules cardRules, final Player owner) {
+        final Card card = readCard(cardRules);
+        card.setRules(cardRules);
         card.setOwner(owner);
         buildAbilities(card);
         return card;
     }
 
-    public static Card getCard2(final Card o, final Player owner) {
-        final Card copy = CardFactoryUtil.copyStats(o);
-        copy.setOwner(owner);
-        buildAbilities(copy);
-        return copy;
-    }
-
     private static void buildAbilities(final Card card) {
         final String cardName = card.getName();
 
-        if (!card.isCardColorsOverridden()) {
-            card.addColor(card.getManaCost().toString());
-        }
         // may have to change the spell
 
         // this is the "default" spell for permanents like creatures and artifacts 
@@ -313,4 +310,79 @@ public class CardFactory {
 
         CardFactoryUtil.postFactoryKeywords(card);
     } // getCard2
+
+
+    
+    public static Card readCard(final CardRules rules) {
+
+        final Card card = new Card();
+
+        // 1. The states we may have:
+        CardSplitType st = rules.getSplitType();
+        switch ( st ) {
+            case Split:
+                card.addAlternateState(CardCharacteristicName.LeftSplit);
+                card.setState(CardCharacteristicName.LeftSplit);
+                break;
+            
+            case Transform: card.setDoubleFaced(true);break;
+            case Flip: card.setFlipCard(true); break;
+            case None: break;
+
+            default: card.setTransformable(st.getChangedStateName()); break;
+        } 
+
+        readCardFace(card, rules.getMainPart());
+
+        if ( st != CardSplitType.None) {
+            card.addAlternateState(st.getChangedStateName());
+            card.setState(st.getChangedStateName());
+            readCardFace(card, rules.getOtherPart());
+        }
+        
+        if (card.isInAlternateState()) {
+            card.setState(CardCharacteristicName.Original);
+        }
+        if ( st == CardSplitType.Split ) {
+            // BUILD COMBINED 'ORIGINAL' SIDE
+        }
+
+        return card;
+    }
+
+    private static void readCardFace(Card c, ICardFace face) {
+        for(String a : face.getAbilities())                 c.addIntrinsicAbility(a);
+        for(String k : face.getKeywords())                  c.addIntrinsicKeyword(k);
+        for(String r : face.getReplacements())              c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c));
+        for(String s : face.getStaticAbilities())           c.addStaticAbilityString(s);
+        for(String t : face.getTriggers())                  c.addTrigger(TriggerHandler.parseTrigger(t, c, true));
+        for(Entry<String, String> v : face.getVariables())  c.setSVar(v.getKey(), v.getValue());
+
+        c.setName(face.getName());
+        c.setManaCost(face.getManaCost());
+        c.setText(face.getNonAbilityText());
+        if( face.getInitialLoyalty() > 0 ) c.setBaseLoyalty(face.getInitialLoyalty());
+
+        // Super and 'middle' types should use enums.
+        List<String> coreTypes = face.getType().getTypesBeforeDash();
+        coreTypes.addAll(face.getType().getSubTypes());
+        c.setType(coreTypes);
+        
+        // What a perverted color code we have!
+        CardColor col1 = new CardColor(c);
+        col1.addToCardColor(Color.fromColorSet(face.getColor()));
+        ArrayList<CardColor> ccc = new ArrayList<CardColor>();
+        ccc.add(col1);
+        c.setColor(ccc);
+
+        if ( face.getIntPower() >= 0 ) {
+            c.setBaseAttack(face.getIntPower());
+            c.setBaseAttackString(face.getPower());
+        }
+        if ( face.getIntToughness() >= 0 ) {
+            c.setBaseDefense(face.getIntToughness());
+            c.setBaseDefenseString(face.getToughness());
+        }
+    }
+
 } // end class AbstractCardFactory

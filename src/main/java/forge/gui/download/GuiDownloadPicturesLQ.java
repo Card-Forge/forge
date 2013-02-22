@@ -25,7 +25,7 @@ import forge.card.CardSplitType;
 import forge.card.ICardCharacteristics;
 import forge.gui.GuiDisplayUtil;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -64,7 +64,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         baseFolder = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
         downloads = new ArrayList<DownloadObject>();
 
-        for (final CardPrinted c : CardDb.instance().getUniqueCards()) {
+        for (final IPaperCard c : CardDb.instance().getUniqueCards()) {
             //System.out.println(c.getName());
             CardRules cardRules = c.getRules();
             this.createDLObjects(cardRules.getPictureUrl(), cardRules.getMainPart().getName());

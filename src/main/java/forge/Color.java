@@ -19,6 +19,8 @@ package forge;
 
 import java.util.EnumSet;
 
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCostBeingPaid;
 
 /**
@@ -43,6 +45,8 @@ public enum Color {
     Black(8),
     /** The Blue. */
     Blue(16);
+    
+    public static final Color[] WUBRG = new Color[] { White, Blue, Black, Red, Green };  
 
     @SuppressWarnings("unused")
     private int flag = 0;
@@ -118,9 +122,20 @@ public enum Color {
         }
 
         return Color.Colorless;
-
     }
 
+    public static EnumSet<Color> fromColorSet(ColorSet cc) {
+        final EnumSet<Color> colors = EnumSet.of(Color.Colorless);
+        for( int i = 0; i < MagicColor.NUMBER_OR_COLORS; i++ ) {
+            if( cc.hasAnyColor(MagicColor.WUBRG[i]) )
+                colors.add(Color.WUBRG[i]);
+        }
+        if (colors.size() > 1) {
+            colors.remove(Color.Colorless);
+        }
+        return colors;
+    }
+    
     /**
      * <p>
      * ConvertManaCostToColor.

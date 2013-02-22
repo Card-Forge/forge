@@ -10,8 +10,10 @@ public enum CardCharacteristicName {
     Flipped,
     Cloner,
     Transformed,
-    Alternate,
-    Cloned;
+    Licid,
+    Cloned, 
+    LeftSplit,
+    RightSplit;
 
     /**
      * TODO: Write javadoc for this method.

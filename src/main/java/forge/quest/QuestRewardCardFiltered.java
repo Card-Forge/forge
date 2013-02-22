@@ -12,6 +12,7 @@ import forge.Singletons;
 import forge.card.CardRules;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 
 /** 
  * Allows the player to choose a card from a predicate-filtered list of cards.
@@ -86,7 +87,7 @@ public class QuestRewardCardFiltered implements IQuestRewardCard {
                             // else { System.out.println("Unknown set code " + code); }
                         }
                         if (sets.size() > 0) {
-                            filters = CardPrinted.Predicates.printedInSets(sets, true);
+                            filters = IPaperCard.Predicates.printedInSets(sets, true);
                         }
                     }
                 }
@@ -110,13 +111,13 @@ public class QuestRewardCardFiltered implements IQuestRewardCard {
                     if (rarityCodes.length > 0) {
                         for (String rarity : rarityCodes) {
                             if (rarity.startsWith("C") || rarity.startsWith("c")) {
-                                filterRarity = (filterRarity == null ? CardPrinted.Predicates.Presets.IS_COMMON : Predicates.or(filterRarity, CardPrinted.Predicates.Presets.IS_COMMON));
+                                filterRarity = (filterRarity == null ? IPaperCard.Predicates.Presets.IS_COMMON : Predicates.or(filterRarity, IPaperCard.Predicates.Presets.IS_COMMON));
                             } else if (rarity.startsWith("U") || rarity.startsWith("u")) {
-                                filterRarity = (filterRarity == null ? CardPrinted.Predicates.Presets.IS_UNCOMMON : Predicates.or(filterRarity, CardPrinted.Predicates.Presets.IS_UNCOMMON));
+                                filterRarity = (filterRarity == null ? IPaperCard.Predicates.Presets.IS_UNCOMMON : Predicates.or(filterRarity, IPaperCard.Predicates.Presets.IS_UNCOMMON));
                             } else if (rarity.startsWith("R") || rarity.startsWith("r")) {
-                                filterRarity = (filterRarity == null ? CardPrinted.Predicates.Presets.IS_RARE : Predicates.or(filterRarity, CardPrinted.Predicates.Presets.IS_RARE));
+                                filterRarity = (filterRarity == null ? IPaperCard.Predicates.Presets.IS_RARE : Predicates.or(filterRarity, IPaperCard.Predicates.Presets.IS_RARE));
                             } else if (rarity.startsWith("M") || rarity.startsWith("m")) {
-                                filterRarity = (filterRarity == null ? CardPrinted.Predicates.Presets.IS_MYTHIC_RARE : Predicates.or(filterRarity, CardPrinted.Predicates.Presets.IS_MYTHIC_RARE));
+                                filterRarity = (filterRarity == null ? IPaperCard.Predicates.Presets.IS_MYTHIC_RARE : Predicates.or(filterRarity, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE));
                             }
                         }
                     }

@@ -70,7 +70,7 @@ public class DeckHintsTest {
      */
     @Test(timeOut = 1000, enabled = true)
     void testKeywords() {
-        CardPrinted cp = readCard("mwonvuli_beast_tracker.txt");
+        IPaperCard cp = readCard("mwonvuli_beast_tracker.txt");
         DeckHints hints = cp.getRules().getAiHints().getDeckHints();
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.KEYWORD, hints.getType());
@@ -89,7 +89,7 @@ public class DeckHintsTest {
      */
     @Test(timeOut = 1000, enabled = true)
     void testColor() {
-        CardPrinted cp = readCard("wurms_tooth.txt");
+        IPaperCard cp = readCard("wurms_tooth.txt");
         DeckHints hints = cp.getRules().getAiHints().getDeckNeeds();
         Assert.assertNotNull(hints);
         Assert.assertEquals(DeckHints.Type.COLOR, hints.getType());

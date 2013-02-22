@@ -17,15 +17,10 @@
  */
 package forge.item;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardUtil;
@@ -33,7 +28,6 @@ import forge.Singletons;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.game.player.Player;
-import forge.util.PredicateString;
 
 
 /**
@@ -45,7 +39,7 @@ import forge.util.PredicateString;
  * @author Forge
  * @version $Id: CardReference.java 9708 2011-08-09 19:34:12Z jendave $
  */
-public final class CardPrinted implements Comparable<CardPrinted>, InventoryItemFromSet {
+public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard {
     // Reference to rules
     private final transient CardRules card;
 
@@ -59,10 +53,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     private final transient CardRarity rarity; // rarity is given in ctor when
                                                // set is assigned
 
-    // need this to be sure that different cased names won't break the system
-    // (and create unique cardref entries)
-    private final transient String nameLcase;
-
     // image filename is calculated only after someone request it
     private transient String imageFilename = null;
 
@@ -72,10 +62,8 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * 
      * @see forge.item.InventoryItemFromSet#getName()
      */
-    /**
-     * Gets the name.
-     * 
-     * @return String
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#getName()
      */
     @Override
     public String getName() {
@@ -87,48 +75,42 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * 
      * @see forge.item.InventoryItemFromSet#getSet()
      */
-    /**
-     * Gets the edition code of the card.
-     * 
-     * @return String
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#getEdition()
      */
     @Override
     public String getEdition() {
         return this.edition;
     }
 
-    /**
-     * Gets the art index.
-     * 
-     * @return the art index
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#getArtIndex()
      */
+    @Override
     public int getArtIndex() {
         return this.artIndex;
     }
 
-    /**
-     * Checks if is foil.
-     * 
-     * @return true, if is foil
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#isFoil()
      */
+    @Override
     public boolean isFoil() {
         return this.foiled;
     }
 
-    /**
-     * Gets the card.
-     * 
-     * @return the card
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#getRules()
      */
+    @Override
     public CardRules getRules() {
         return this.card;
     }
 
-    /**
-     * Gets the rarity.
-     * 
-     * @return the rarity
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#getRarity()
      */
+    @Override
     public CardRarity getRarity() {
         return this.rarity;
     }
@@ -138,10 +120,8 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * 
      * @see forge.item.InventoryItemFromSet#getImageFilename()
      */
-    /**
-     * Gets the image filename.
-     * 
-     * @return String
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#getImageFilename()
      */
     @Override
     public String getImageFilename() {
@@ -156,10 +136,8 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * 
      * @see forge.item.InventoryItem#getType()
      */
-    /**
-     * Gets the type.
-     * 
-     * @return String
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#getItemType()
      */
     @Override
     public String getItemType() {
@@ -198,7 +176,6 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         this.artIndex = index;
         this.foiled = foil;
         this.rarity = rare;
-        this.nameLcase = this.name.toLowerCase();
     }
 
     /* package visibility */
@@ -270,7 +247,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      */
     @Override
     public int hashCode() {
-        final int code = (this.nameLcase.hashCode() * 11) + (this.edition.hashCode() * 59) + (this.artIndex * 2);
+        final int code = (this.name.hashCode() * 11) + (this.edition.hashCode() * 59) + (this.artIndex * 2);
         if (this.foiled) {
             return code + 1;
         }
@@ -295,6 +272,10 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * @return the card
      */
     private static final Map<CardPrinted, Card> cp2card = new HashMap<CardPrinted, Card>();
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#getMatchingForgeCard()
+     */
+    @Override
     public Card getMatchingForgeCard() {
         Card res = cp2card.get(this);
         if (null == res) { 
@@ -304,12 +285,10 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         return res;
     }
 
-    /**
-     * To forge card.
-     *
-     * @param owner the owner
-     * @return the card
+    /* (non-Javadoc)
+     * @see forge.item.ICardPrinted#toForgeCard(forge.game.player.Player)
      */
+    @Override
     public Card toForgeCard(Player owner) {
         final Card c = Singletons.getModel().getCardFactory().getCard(this, owner);
         return c;
@@ -321,190 +300,17 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public int compareTo(final CardPrinted o) {
-        final int nameCmp = this.nameLcase.compareTo(o.nameLcase);
+    public int compareTo(final IPaperCard o) {
+        final int nameCmp = this.getName().compareToIgnoreCase(o.getName());
         if (0 != nameCmp) {
             return nameCmp;
         }
         // TODO compare sets properly
-        return this.edition.compareTo(o.edition);
+        return this.edition.compareTo(o.getEdition());
     }
 
-    /**
-     * Number of filters based on CardPrinted values.
-     */
-    public abstract static class Predicates {
-
-        /**
-         * Rarity.
-         * 
-         * @param isEqual
-         *            the is equal
-         * @param value
-         *            the value
-         * @return the predicate
-         */
-        public static Predicate<CardPrinted> rarity(final boolean isEqual, final CardRarity value) {
-            return new PredicateRarity(value, isEqual);
-        }
-
-        /**
-         * Printed in sets.
-         * 
-         * @param value
-         *            the value
-         * @param shouldContain
-         *            the should contain
-         * @return the predicate
-         */
-        public static Predicate<CardPrinted> printedInSets(final List<String> value, final boolean shouldContain) {
-            if ((value == null) || value.isEmpty()) {
-                return com.google.common.base.Predicates.alwaysTrue();
-            }
-            return new PredicateSets(value, shouldContain);
-        }
-
-        /**
-         * Printed in sets.
-         * 
-         * @param value
-         *            the value
-         * @return the predicate
-         */
-        public static Predicate<CardPrinted> printedInSets(final String value) {
-            if ((value == null) || value.isEmpty()) {
-                return com.google.common.base.Predicates.alwaysTrue();
-            }
-            return new PredicateSets(Arrays.asList(new String[] { value }), true);
-        }
-
-        /**
-         * Name.
-         * 
-         * @param what
-         *            the what
-         * @return the predicate
-         */
-        public static Predicate<CardPrinted> name(final String what) {
-            return new PredicateName(PredicateString.StringOp.EQUALS_IC, what);
-        }
-
-        /**
-         * Name.
-         * 
-         * @param op
-         *            the op
-         * @param what
-         *            the what
-         * @return the predicate
-         */
-        public static Predicate<CardPrinted> name(final PredicateString.StringOp op, final String what) {
-            return new PredicateName(op, what);
-        }
-
-        /**
-         * Names except.
-         * 
-         * @param what
-         *            the what
-         * @return the predicate
-         */
-        public static Predicate<CardPrinted> namesExcept(final List<String> what) {
-            return new PredicateNamesExcept(what);
-        }
-
-        private static class PredicateRarity implements Predicate<CardPrinted> {
-            private final CardRarity operand;
-            private final boolean shouldBeEqual;
-
-            @Override
-            public boolean apply(final CardPrinted card) {
-                return card.rarity.equals(this.operand) == this.shouldBeEqual;
-            }
-
-            public PredicateRarity(final CardRarity type, final boolean wantEqual) {
-                this.operand = type;
-                this.shouldBeEqual = wantEqual;
-            }
-        }
-
-        private static class PredicateSets implements Predicate<CardPrinted> {
-            private final Set<String> sets;
-            private final boolean mustContain;
-
-            @Override
-            public boolean apply(final CardPrinted card) {
-                return this.sets.contains(card.edition) == this.mustContain;
-            }
-
-            public PredicateSets(final List<String> wantSets, final boolean shouldContain) {
-                this.sets = new HashSet<String>(wantSets);
-                this.mustContain = shouldContain;
-            }
-        }
-
-        private static class PredicateName extends PredicateString<CardPrinted> {
-            private final String operand;
-
-            @Override
-            public boolean apply(final CardPrinted card) {
-                return this.op(card.getName(), this.operand);
-            }
-
-            public PredicateName(final PredicateString.StringOp operator, final String operand) {
-                super(operator);
-                this.operand = operand;
-            }
-        }
-
-        private static class PredicateNamesExcept extends PredicateString<CardPrinted> {
-            private final List<String> operand;
-
-            @Override
-            public boolean apply(final CardPrinted card) {
-                final String cardName = card.getName();
-                for (final String element : this.operand) {
-                    if (this.op(cardName, element)) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            public PredicateNamesExcept(final List<String> operand) {
-                super(StringOp.EQUALS);
-                this.operand = operand;
-            }
-        }
-
-        /**
-         * Pre-built predicates are stored here to allow their re-usage and
-         * easier access from code.
-         */
-        public abstract static class Presets {
-            // Think twice before using these, since rarity is a prop of printed
-            // card.
-            /** The Constant isCommon. */
-            public static final Predicate<CardPrinted> IS_COMMON = Predicates.rarity(true, CardRarity.Common);
-
-            /** The Constant isUncommon. */
-            public static final Predicate<CardPrinted> IS_UNCOMMON = Predicates.rarity(true, CardRarity.Uncommon);
-
-            /** The Constant isRare. */
-            public static final Predicate<CardPrinted> IS_RARE = Predicates.rarity(true, CardRarity.Rare);
-
-            /** The Constant isMythicRare. */
-            public static final Predicate<CardPrinted> IS_MYTHIC_RARE = Predicates.rarity(true, CardRarity.MythicRare);
-
-            /** The Constant isRareOrMythic. */
-            public static final Predicate<CardPrinted> IS_RARE_OR_MYTHIC = com.google.common.base.Predicates.or(Presets.IS_RARE,
-                    Presets.IS_MYTHIC_RARE);
-
-            /** The Constant isSpecial. */
-            public static final Predicate<CardPrinted> IS_SPECIAL = Predicates.rarity(true, CardRarity.Special);
-
-            /** The Constant exceptLands. */
-            public static final Predicate<CardPrinted> EXCEPT_LANDS = Predicates.rarity(false, CardRarity.BasicLand);
-        }
+    @Override
+    public boolean isToken() {
+        return false;
     }
 }

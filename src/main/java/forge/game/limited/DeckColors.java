@@ -20,7 +20,7 @@ package forge.game.limited;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson Date: 6/24/11 Time: 8:42 PM To change
@@ -43,7 +43,7 @@ class DeckColors {
      * TODO: Write javadoc for this method.
      * @param pickedCard
      */
-    public void addColorsOf(CardPrinted pickedCard) {
+    public void addColorsOf(IPaperCard pickedCard) {
         
         ManaCost colorsInCard = pickedCard.getRules().getManaCost();
 

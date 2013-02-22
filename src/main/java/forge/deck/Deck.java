@@ -39,6 +39,7 @@ import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.item.ItemPoolView;
 import forge.util.FileSection;
 import forge.util.FileUtil;
@@ -203,7 +204,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             pool.set(Deck.readCardList(s.getValue()));
 
             // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
-            CardPrinted sample = pool.get(0); 
+            IPaperCard sample = pool.get(0); 
             if ( sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon() ) )
                 sec = DeckSection.Planes;
             if ( sample != null && sample.getRules().getType().isScheme() )

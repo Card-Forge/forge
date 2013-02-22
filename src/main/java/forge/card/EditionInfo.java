@@ -93,26 +93,6 @@ public class EditionInfo {
 
     /**
      * <p>
-     * Constructor for SetInfo.
-     * </p>
-     * 
-     * @param parse
-     *            a {@link java.lang.String} object.
-     */
-    public EditionInfo(final String parse) {
-        final String[] pp = parse.split("\\|");
-        this.setCode(pp[0]);
-        this.setRarity(pp[1]);
-        this.setUrl(pp[2]);
-        if (pp.length > 3) {
-            this.setPicCount(Integer.parseInt(pp[3]));
-        } else {
-            this.setPicCount(0);
-        }
-    }
-
-    /**
-     * <p>
      * toString.
      * </p>
      * 

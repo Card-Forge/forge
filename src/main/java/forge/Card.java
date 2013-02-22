@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -36,7 +35,9 @@ import com.google.common.collect.Iterables;
 
 import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
-import forge.card.EditionInfo;
+import forge.card.CardEdition;
+import forge.card.CardRarity;
+import forge.card.CardRules;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -65,9 +66,8 @@ import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
-import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.util.Expressions;
-import forge.util.MyRandom;
 
 /**
  * <p>
@@ -189,6 +189,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int semiPermanentDefenseBoost = 0;
 
     private int randomPicture = 0;
+    private CardRarity rarity = CardRarity.Unknown;
+    private String curSetCode = CardEdition.UNKNOWN.getCode();
 
     private int xManaCostPaid = 0;
 
@@ -235,6 +237,8 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // Soulbond pairing card
     private Card pairedWith = null;
+    
+
 
     /**
      * Instantiates a new card.
@@ -1724,7 +1728,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param colors
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setColor(final ArrayList<CardColor> colors) {
+    public final void setColor(final Iterable<CardColor> colors) {
         this.getCharacteristics().setCardColor(colors);
     }
 
@@ -2061,7 +2065,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // Vanguard Modifiers
         if (this.isType("Vanguard")) {
-            final CardPrinted avatar = CardDb.getCard(this);
+            final IPaperCard avatar = CardDb.getCard(this);
             sb.append("Hand Modifier: ").append(avatar.getRules().getHand());
             sb.append("\r\nLife Modifier: ").append(avatar.getRules().getLife());
             sb.append("\r\n\r\n");
@@ -2792,8 +2796,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return an array of {@link forge.card.spellability.SpellAbility} objects.
      */
     public final SpellAbility[] getSpellAbility() {
-        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>(this.getCharacteristics().getSpellAbility());
-        res.addAll(this.getManaAbility());
+        final ArrayList<SpellAbility> res = getSpellAbilities();
         final SpellAbility[] s = new SpellAbility[res.size()];
         res.toArray(s);
         return s;
@@ -4052,7 +4055,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param a
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setType(final ArrayList<String> a) {
+    public final void setType(final List<String> a) {
         this.getCharacteristics().setType(new ArrayList<String>(a));
     }
 
@@ -8432,41 +8435,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * addSet.
-     * </p>
-     * 
-     * @param sInfo
-     *            a {@link forge.card.EditionInfo} object.
-     */
-    public final void addSet(final EditionInfo sInfo) {
-        this.getCharacteristics().getSets().add(sInfo);
-    }
-
-    /**
-     * <p>
-     * getSets.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<EditionInfo> getSets() {
-        return this.getCharacteristics().getSets();
-    }
-
-    /**
-     * <p>
-     * setSets.
-     * </p>
-     * 
-     * @param siList
-     *            a {@link java.util.ArrayList} object.
-     */
-    public final void setSets(final ArrayList<EditionInfo> siList) {
-        this.getCharacteristics().setSets(siList);
-    }
-
-    /**
-     * <p>
      * Setter for the field <code>curSetCode</code>.
      * </p>
      * 
@@ -8474,7 +8442,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.lang.String} object.
      */
     public final void setCurSetCode(final String setCode) {
-        this.getCharacteristics().setCurSetCode(setCode);
+        curSetCode = setCode;
     }
 
     /**
@@ -8485,48 +8453,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getCurSetCode() {
-        return this.getCharacteristics().getCurSetCode();
-    }
-
-    /**
-     * <p>
-     * setRandomSetCode.
-     * </p>
-     */
-    public final void setRandomSetCode() {
-        if (this.getCharacteristics().getSets().size() < 1) {
-            return;
-        }
-
-        final Random r = MyRandom.getRandom();
-        final EditionInfo si = this.getCharacteristics().getSets()
-                .get(r.nextInt(this.getCharacteristics().getSets().size()));
-
-        this.getCharacteristics().setCurSetCode(si.getCode());
-    }
-
-    /**
-     * <p>
-     * getSetImageName.
-     * </p>
-     * 
-     * @param setCode
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getSetImageName(final String setCode) {
-        return "/" + setCode + "/" + this.getImageName();
-    }
-
-    /**
-     * <p>
-     * getCurSetImage.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getCurSetImage() {
-        return this.getSetImageName(this.getCharacteristics().getCurSetCode());
+        return curSetCode;
     }
 
     /**
@@ -8536,31 +8463,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final String getCurSetRarity() {
-        for (int i = 0; i < this.getCharacteristics().getSets().size(); i++) {
-            if (this.getCharacteristics().getSets().get(i).getCode().equals(getCharacteristics().getCurSetCode())) {
-                return this.getCharacteristics().getSets().get(i).getRarity();
-            }
-        }
-
-        return "";
-    }
-
-    /**
-     * <p>
-     * getCurSetURL.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getCurSetURL() {
-        for (int i = 0; i < this.getCharacteristics().getSets().size(); i++) {
-            if (this.getCharacteristics().getSets().get(i).getCode().equals(this.getCharacteristics().getCurSetCode())) {
-                return this.getCharacteristics().getSets().get(i).getUrl();
-            }
-        }
-
-        return "";
+    public final CardRarity getRarity() {
+        return rarity;
     }
 
     /**
@@ -8796,24 +8700,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return sum;
     }
 
-    /**
-     * Checks if is card colors overridden.
-     * 
-     * @return the cardColorsOverridden
-     */
-    public final boolean isCardColorsOverridden() {
-        return this.getCharacteristics().isCardColorsOverridden();
-    }
-
-    /**
-     * Sets the card colors overridden.
-     * 
-     * @param cardColorsOverridden0
-     *            the cardColorsOverridden to set
-     */
-    public final void setCardColorsOverridden(final boolean cardColorsOverridden0) {
-        this.getCharacteristics().setCardColorsOverridden(cardColorsOverridden0);
-    }
 
     /*
      * (non-Javadoc)
@@ -9255,5 +9141,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         return true;
     }
+
+
+    CardRules cardRules;
+    public CardRules getRules() {
+        return cardRules;
+    }
+    public void setRules(CardRules r) {
+        cardRules = r;
+    }    
 
 } // end Card class

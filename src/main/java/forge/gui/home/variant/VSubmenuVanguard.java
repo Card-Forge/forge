@@ -38,6 +38,7 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTabbedPane;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 
 /** 
  * Assembles Swing components of constructed submenu singleton.
@@ -132,7 +133,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
                 Object obj = avatarLists.get(index).getSelectedValue();
 
                 if (obj instanceof CardPrinted) {
-                    cdpAvatarDetails.get(index).setCard(((CardPrinted) obj).getMatchingForgeCard());
+                    cdpAvatarDetails.get(index).setCard(((IPaperCard) obj).getMatchingForgeCard());
                 }
             }
 

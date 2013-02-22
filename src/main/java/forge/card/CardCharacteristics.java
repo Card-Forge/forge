@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.google.common.collect.Lists;
+
 import forge.CardColor;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
@@ -38,7 +40,6 @@ public class CardCharacteristics {
     private ArrayList<String> type = new ArrayList<String>();
     private ManaCost manaCost = ManaCost.NO_COST;
     private ArrayList<CardColor> cardColor = new ArrayList<CardColor>();
-    private boolean cardColorsOverridden = false;
     private int baseAttack = 0;
     private int baseDefense = 0;
     private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
@@ -51,9 +52,7 @@ public class CardCharacteristics {
     private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
     private String imageFilename = "";
     private String imageName = "";
-    private ArrayList<EditionInfo> sets = new ArrayList<EditionInfo>();
     private Map<String, String> sVars = new TreeMap<String, String>();
-    private String curSetCode = "";
 
     /**
      * Gets the name.
@@ -127,27 +126,8 @@ public class CardCharacteristics {
      * @param cardColor0
      *            the cardColor to set
      */
-    public final void setCardColor(final ArrayList<CardColor> cardColor0) {
-        this.cardColor = new ArrayList<CardColor>(cardColor0);
-    }
-
-    /**
-     * Checks if is card colors overridden.
-     * 
-     * @return the cardColorsOverridden
-     */
-    public final boolean isCardColorsOverridden() {
-        return this.cardColorsOverridden;
-    }
-
-    /**
-     * Sets the card colors overridden.
-     * 
-     * @param cardColorsOverridden0
-     *            the cardColorsOverridden to set
-     */
-    public final void setCardColorsOverridden(final boolean cardColorsOverridden0) {
-        this.cardColorsOverridden = cardColorsOverridden0;
+    public final void setCardColor(final Iterable<CardColor> cardColor0) {
+        this.cardColor = Lists.newArrayList(cardColor0);
     }
 
     /**
@@ -303,26 +283,6 @@ public class CardCharacteristics {
     }
 
     /**
-     * Gets the sets.
-     * 
-     * @return the sets
-     */
-    public final ArrayList<EditionInfo> getSets() {
-        return this.sets;
-    }
-
-    /**
-     * Sets the sets.
-     * 
-     * @param sets0
-     *            the sets to set
-     */
-    public final void setSets(final ArrayList<EditionInfo> sets0) {
-        this.sets = new ArrayList<EditionInfo>(sets0);
-        // name.
-    }
-
-    /**
      * Gets the static ability strings.
      * 
      * @return the staticAbilityStrings
@@ -447,8 +407,6 @@ public class CardCharacteristics {
         this.manaCost = source.getManaCost();
         // ArrayList<CardColor> cardColor : not sure if a deep copy is needed
         this.cardColor = new ArrayList<CardColor>(source.getCardColor());
-        // boolean cardColorsOverridden : set value
-        this.cardColorsOverridden = source.isCardColorsOverridden();
         // int baseAttack : set value
         this.baseAttack = source.getBaseAttack();
         // int baseDefense : set value
@@ -463,30 +421,12 @@ public class CardCharacteristics {
         this.imageFilename = source.getImageFilename();
         // String imageName = "";
         this.imageName = source.getImageName();
-        // ArrayList<EditionInfo> sets : deep copy not needed, just copy reference
-        this.sets = source.getSets();
         // Map<String, String> sVars
         this.sVars = new TreeMap<String, String>(source.getSVars());
-        // String curSetCode = "";
-        this.curSetCode = source.getCurSetCode();
-
         this.replacementEffects = new ArrayList<ReplacementEffect>();
         for (ReplacementEffect RE : source.getReplacementEffects()) {
             this.replacementEffects.add(RE.getCopy());
         }
     }
 
-    /**
-     * @return the curSetCode
-     */
-    public String getCurSetCode() {
-        return curSetCode;
-    }
-
-    /**
-     * @param curSetCode0 the curSetCode to set
-     */
-    public void setCurSetCode(String curSetCode0) {
-        this.curSetCode = curSetCode0;
-    }
 }

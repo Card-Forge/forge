@@ -27,6 +27,7 @@ import forge.Singletons;
 import forge.card.CardCoreType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 
@@ -196,7 +197,7 @@ public enum DeckFormat {
             // should group all cards by name, so that different editions of same card are really counted as the same card
             for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, CardPrinted.FN_GET_NAME)) {
 
-                CardPrinted simpleCard = CardDb.instance().getCard(cp.getKey());
+                IPaperCard simpleCard = CardDb.instance().getCard(cp.getKey());
                 boolean canHaveMultiple = simpleCard.getRules().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
 
                 if (!canHaveMultiple && cp.getValue() > maxCopies) {

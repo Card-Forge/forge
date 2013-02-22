@@ -19,20 +19,19 @@
 package forge.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
 import forge.Card;
 import forge.ImageCache;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.view.arcane.ScaledImagePanel;
-import forge.view.arcane.ScaledImagePanel.MultipassType;
-import forge.view.arcane.ScaledImagePanel.ScalingType;
 
 /**
  * The class CardPicturePanel. Shows the full-sized image in a label. if there's
@@ -45,13 +44,13 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
     /** Constant <code>serialVersionUID=-3160874016387273383L</code>. */
     private static final long serialVersionUID = -3160874016387273383L;
 
-    private Card card;
-    private InventoryItem inventoryItem;
+    private Object displayed;
+    private Object imageShownFor = null;
 
     // private JLabel label;
     // private ImageIcon icon;
     private final ScaledImagePanel panel;
-    private Image currentImage;
+    private BufferedImage currentImage;
 
     /**
      * <p>
@@ -66,10 +65,6 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
         // add(label = new JLabel(icon = new ImageIcon()));
         this.panel = new ScaledImagePanel();
         this.add(this.panel);
-        this.panel.setScalingBlur(false);
-        this.panel.setScalingType(ScalingType.bicubic);
-        this.panel.setScalingMultiPassType(MultipassType.none);
-
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(final ComponentEvent e) {
@@ -93,7 +88,8 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
      * </p>
      */
     public void update() {
-        this.setCard(this.getCard());
+        // if (!this.isShowing()) return; -- does this work or not?
+        this.setImage();
     }
 
     /**
@@ -103,40 +99,36 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
      *            the new card
      */
     public void setCard(final InventoryItem cp) {
-        this.card = null;
-        this.inventoryItem = cp;
-        if (!this.isShowing()) {
-        // This line didn't seem to be helping, and doesn't exist down there
-        //    return;
-        }
-
-        this.setImage();
+        this.displayed = cp;
+        update();
     }
 
     /** {@inheritDoc} */
     @Override
     public void setCard(final Card c) {
-        this.card = c;
-        this.inventoryItem = null;
-        this.setImage();
+        this.displayed = c;
+        update();
     }
 
     /** */
     public void setImage() {
         final Insets i = this.getInsets();
-        Image image = null;
-        if (this.inventoryItem != null) {
-            image = ImageCache.getImage(this.inventoryItem, this.getWidth() - i.left - i.right, this.getHeight()
+        BufferedImage image = null;
+        if ( displayed == imageShownFor )
+            return;
+        
+        if (displayed instanceof InventoryItem) {
+            image = ImageCache.getImage((InventoryItem)this.displayed, this.getWidth() - i.left - i.right, this.getHeight()
                     - i.top - i.bottom);
-        }
-        if ((this.card != null) && (image == null)) {
-            image = ImageCache.getImage(this.card, this.getWidth() - i.left - i.right - 2, this.getHeight() - i.top
+        } else if ( displayed instanceof Card ) {
+            image = ImageCache.getImage((Card)this.displayed, this.getWidth() - i.left - i.right - 2, this.getHeight() - i.top
                     - i.bottom - 2);
         }
 
         if (image != this.currentImage) {
+            imageShownFor = displayed;
             this.currentImage = image;
-            this.panel.setImage(image, null);
+            this.panel.setImage(image);
             this.panel.repaint();
         }
         // if(image == null) {
@@ -159,9 +151,10 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
      */
     @Override
     public Card getCard() {
-        if ((this.card == null) && this.inventoryItem instanceof CardPrinted) {
-            this.card = ((CardPrinted) this.inventoryItem).getMatchingForgeCard();
-        }
-        return this.card;
+        if ( displayed instanceof Card )
+            return (Card)displayed;
+        if ( displayed instanceof CardPrinted )
+            return ((IPaperCard)displayed).getMatchingForgeCard();
+        return null;
     }
 }

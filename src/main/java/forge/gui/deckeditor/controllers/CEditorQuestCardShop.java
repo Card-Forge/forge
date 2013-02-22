@@ -55,6 +55,7 @@ import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.FatPack;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -235,7 +236,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         if (this.mapPrices.containsKey(ns)) {
             return this.mapPrices.get(ns);
         } else if (card instanceof CardPrinted) {
-            switch (((CardPrinted) card).getRarity()) {
+            switch (((IPaperCard) card).getRarity()) {
             case BasicLand:
                 return Integer.valueOf(4);
             case Common:

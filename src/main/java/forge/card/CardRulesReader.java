@@ -17,8 +17,6 @@
  */
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -41,8 +39,6 @@ import forge.card.mana.ManaCost;
 public class CardRulesReader {
 
     // fields to build 
-    private List<String> originalScript = new ArrayList<String>();
-
     private CardFace[] faces = new CardFace[] { null, null };
     private String[] pictureUrl = new String[] { null, null };
     private int curFace = 0;
@@ -63,8 +59,6 @@ public class CardRulesReader {
      * Reset.
      */
     public final void reset() {
-        originalScript.clear();
-
         this.curFace = 0;
         this.faces[0] = null;
         this.faces[1] = null;
@@ -87,15 +81,27 @@ public class CardRulesReader {
      */
     public final CardRules getCard() {
         CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs );
-        faces[0].checkFieldsAndAssignMissingOnes();
-        if ( null != faces[1] ) faces[1].checkFieldsAndAssignMissingOnes();
-        final CardRules result = new CardRules(faces, altMode, cah, originalScript);
+        faces[0].assignMissingFields();
+        if ( null != faces[1] ) faces[1].assignMissingFields();
+        final CardRules result = new CardRules(faces, altMode, cah);
         result.setDlUrls(pictureUrl);
         if ( StringUtils.isNotBlank(handLife))
             result.setVanguardProperties(handLife);
         return result;
     }
 
+    public final CardRules readCard(final Iterable<String> script) {
+        this.reset();
+        for (String line : script) {
+            if (line.isEmpty() || line.charAt(0) == '#') {
+                continue;
+            }
+            this.parseLine(line);
+        }
+        return this.getCard();
+    }
+    
+    
     /**
      * Parses the line.
      * 
@@ -104,8 +110,7 @@ public class CardRulesReader {
      */
     public final void parseLine(final String line) {
 
-        originalScript.add(line);
-        
+
         int colonPos = line.indexOf(':');
         String key = colonPos > 0 ? line.substring(0, colonPos) : line;
         String value = colonPos > 0 ? line.substring(1+colonPos).trim() : null;
@@ -113,7 +118,9 @@ public class CardRulesReader {
 
         switch(key.charAt(0)) {
             case 'A':
-                if ("AlternateMode".equals(key)) {
+                if ("A".equals(key))
+                    this.faces[curFace].addAbility(value);
+                else if ("AlternateMode".equals(key)) {
                     //System.out.println(faces[curFace].getName());
                     this.altMode = CardSplitType.smartValueOf(value);
                 } else if ("ALTERNATE".equals(key)) {
@@ -182,8 +189,16 @@ public class CardRulesReader {
                 }
                 break;
 
+            case 'R':
+                if ("R".equals(key)) {
+                    this.faces[this.curFace].addReplacementEffect(value);
+                }
+                break;
+
             case 'S':
-                if ( "SVar".equals(key) ) {
+                if ("S".equals(key)) {
+                    this.faces[this.curFace].addStaticAbility(value);
+                } else if ( "SVar".equals(key) ) {
                     if ( null == value ) throw new IllegalArgumentException("SVar has no variable name");
 
                     colonPos = value.indexOf(':');
@@ -196,15 +211,22 @@ public class CardRulesReader {
                         this.removedFromRandomDecks = "True".equalsIgnoreCase(value);
                     } else if ( "Picture".equals(variable) ) {
                         this.pictureUrl[this.curFace] = value;
-                    }
-                } else if (line.startsWith("SetInfo:")) {
+                    } else if ( "Rarity".equals(variable) ) {
+                        // discard that, they should supply it in SetInfo
+                    } else
+                        this.faces[curFace].addSVar(variable, value);
+                } else if ("SetInfo".equals(key)) {
                     CardRulesReader.parseSetInfoLine(value, this.faces[this.curFace].getSetsData());
                 }
                 break;
 
             case 'T':
-                if ("Types".equals(key)) {
+                if ("T".equals(key)) {
+                    this.faces[this.curFace].addTrigger(value);
+                } else if ("Types".equals(key)) {
                     this.faces[this.curFace].setType(CardType.parse(value));
+                } else if ("Text".equals(key) && !"no text".equals(value) && StringUtils.isNotBlank(value)) {
+                    this.faces[this.curFace].setNonAbilityText(value);
                 }
                 break;
         }
@@ -219,7 +241,7 @@ public class CardRulesReader {
      * @param setsData
      *            the current mapping of set names to CardInSet instances
      */
-    public static void parseSetInfoLine(final String value, final Map<String, CardInSet> setsData) {
+    private static void parseSetInfoLine(final String value, final Map<String, CardInSet> setsData) {
         final int setCodeIx = 0;
         final int rarityIx = 1;
         final int numPicIx = 3;
@@ -278,20 +300,18 @@ public class CardRulesReader {
     }
 
     /**
-     * Gets the value after key.
-     * 
-     * @param line
-     *            the line
-     * @param fieldNameWithColon
-     *            the field name with colon
-     * @return the value after key
+     * Instantiates class, reads a card. Do not use for batch operations.
+     * @param script
+     * @return
      */
-    public static String getValueAfterKey(final String line, final String fieldNameWithColon) {
-        final int startIx = fieldNameWithColon.length();
-        final String lineAfterColon = line.substring(startIx);
-        return lineAfterColon.trim();
+    public static CardRules parseSingleCard(Iterable<String> script) {
+        CardRulesReader crr = new CardRulesReader();
+        for(String line : script) {
+            crr.parseLine(line);
+        }
+        return crr.getCard();
     }
-
+    
     /**
      * The Class ParserCardnameTxtManaCost.
      */

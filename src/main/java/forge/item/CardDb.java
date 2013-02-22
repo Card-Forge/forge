@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
@@ -330,7 +329,7 @@ public final class CardDb {
                 }
             } else {
                 // OK, plain name here
-                final Predicate<CardPrinted> predicate = CardPrinted.Predicates.name(nameWithSet.left);
+                final Predicate<CardPrinted> predicate = IPaperCard.Predicates.name(nameWithSet.left);
                 final Iterable<CardPrinted> namedCards = Iterables.filter(this.allCardsFlat, predicate);
                 // Find card with maximal set index
                 result = Aggregates.itemWithMax(namedCards, CardPrinted.FN_GET_EDITION_INDEX);
@@ -372,9 +371,8 @@ public final class CardDb {
          *            the s
          * @return the card printed
          */
-        public CardPrinted addToLists(final CardRules card, final String cardName, final Entry<String, CardInSet> s) {
+        public CardPrinted addToLists(final CardRules card, final String cardName, final String set, CardInSet cs) {
             CardPrinted lastAdded = null;
-            final String set = s.getKey();
         
             final Map<String, Map<String, CardPrinted[]>> allCardsBySet = card.isTraditional() ? allCommonCardsBySet : allSpecialCardsBySet;
             // get this set storage, if not found, create it!
@@ -384,11 +382,11 @@ public final class CardDb {
                 allCardsBySet.put(set, setMap);
             }
         
-            final int count = s.getValue().getCopiesCount();
+            final int count = cs.getCopiesCount();
             final CardPrinted[] cardCopies = new CardPrinted[count];
             setMap.put(cardName, cardCopies);
             for (int i = 0; i < count; i++) {
-                lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i);
+                lastAdded = CardPrinted.build(card, set, cs.getRarity(), i);
                 if (card.isTraditional()) {
                     this.allCommonCardsFlat.add(lastAdded);
                 } else {
@@ -419,8 +417,8 @@ public final class CardDb {
             // 2. Save refs into two lists: one flat and other keyed with sets &
             // name
             CardPrinted lastAdded = null;
-            for (final Entry<String, CardInSet> s : card.getSetsPrinted()) {
-                lastAdded = this.addToLists(card, cardName, s);
+            for (final String s : card.getSets()) {
+                lastAdded = this.addToLists(card, cardName, s, card.getEditionInfo(s));
             }
             if ( lastAdded.getRules().isTraditional() )
                 uniqueCommonCards.put(cardName, lastAdded);

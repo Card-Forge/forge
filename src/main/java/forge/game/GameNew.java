@@ -40,6 +40,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.views.VAntes;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -175,18 +176,18 @@ public class GameNew {
         PlayerZone com = player.getZone(ZoneType.Command);
 
         // Mainly for avatar, but might find something else here
-        for (final CardPrinted c : psc.getCardsInCommand(player)) {
+        for (final IPaperCard c : psc.getCardsInCommand(player)) {
             com.add(c.toForgeCard(player), false);
         }
 
         // Schemes
         List<Card> sd = new ArrayList<Card>();
-        for(CardPrinted cp : psc.getSchemes(player)) sd.add(cp.toForgeCard(player));
+        for(IPaperCard cp : psc.getSchemes(player)) sd.add(cp.toForgeCard(player));
         if ( !sd.isEmpty()) player.setSchemeDeck(sd);
 
         // Planes
         List<Card> l = new ArrayList<Card>();
-        for(CardPrinted cp : psc.getPlanes(player)) l.add(cp.toForgeCard(player));
+        for(IPaperCard cp : psc.getPlanes(player)) l.add(cp.toForgeCard(player));
         if ( !l.isEmpty() ) player.setPlanarDeck(l);
     }
 
@@ -207,7 +208,7 @@ public class GameNew {
         Set<CardPrinted> myRemovedAnteCards = new HashSet<CardPrinted>();
         for ( Entry<DeckSection, CardPool> ds : toUse ) {
             for (Entry<CardPrinted, Integer> cp : ds.getValue()) {
-                if ( Iterables.contains(cp.getKey().getRules().getKeywords(), keywordToRemove) ) 
+                if ( Iterables.contains(cp.getKey().getRules().getMainPart().getKeywords(), keywordToRemove) ) 
                     myRemovedAnteCards.add(cp.getKey());
             }
         }

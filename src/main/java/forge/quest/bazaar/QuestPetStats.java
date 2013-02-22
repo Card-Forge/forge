@@ -6,8 +6,10 @@ import java.util.List;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-import forge.Card;
-import forge.card.cardfactory.CardReader;
+import forge.card.CardEdition;
+import forge.card.CardRules;
+import forge.card.CardRulesReader;
+import forge.item.CardToken;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
@@ -39,7 +41,7 @@ public class QuestPetStats {
     @XStreamAsAttribute()
     private String nextLevel;
 
-    private transient Card petCard = null;
+    private transient CardToken petCard = null;
 
     private QuestPetStats() { }
 
@@ -55,13 +57,11 @@ public class QuestPetStats {
         return stats;
     }
 
-    public final Card getCard() {
+    public final CardToken getCard() {
         if (null == petCard) {
-
             List<String> cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.Quest.BAZAAR_DIR), cardFile));
-            petCard = CardReader.readCard(cardLines);
-            petCard.setImageName(picture.replace('_', ' '));
-            petCard.setToken(true);
+            CardRules rules = CardRulesReader.parseSingleCard(cardLines);
+            petCard = new CardToken(rules, CardEdition.UNKNOWN.getCode(), picture.replace('_', ' '));
         }
         return petCard;
     }

@@ -3,10 +3,10 @@ ManaCost:1 B
 Types:Creature Licid
 Text:At the beginning of the upkeep of enchanted creature's controller, CARDNAME deals 1 damage to that player.
 PT:1/1
-A:AB$ SetState | Cost$ B T | Defined$ Self | NewState$ Alternate | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay B to end this effect.
+A:AB$ SetState | Cost$ B T | Defined$ Self | NewState$ Licid | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay B to end this effect.
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Curse
 #If the value of AlternateMode isn't Flip or DoubleFaced, it will be the name of the state defined below, so you can switch to it with SetState+NewState$.The name of the first state defined is always "Original".
-AlternateMode:Alternate
+AlternateMode:Licid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leeching_licid.jpg

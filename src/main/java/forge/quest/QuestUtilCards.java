@@ -37,6 +37,7 @@ import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.FatPack;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
@@ -147,11 +148,11 @@ public final class QuestUtilCards {
         final int nRare = this.qpref.getPreferenceInt(QPref.BOOSTER_RARES);
 
         final ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
-        Predicate<CardPrinted> predCommons = Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_COMMON);
+        Predicate<CardPrinted> predCommons = Predicates.and(fSets, IPaperCard.Predicates.Presets.IS_COMMON);
         newCards.addAll(BoosterUtils.generateDistinctCards(predCommons, nCommon));
-        Predicate<CardPrinted> predUncommons = Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_UNCOMMON);
+        Predicate<CardPrinted> predUncommons = Predicates.and(fSets, IPaperCard.Predicates.Presets.IS_UNCOMMON);
         newCards.addAll(BoosterUtils.generateDistinctCards(predUncommons, nUncommon));
-        Predicate<CardPrinted> predRareMythics = Predicates.and(fSets, CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC);
+        Predicate<CardPrinted> predRareMythics = Predicates.and(fSets, IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC);
         newCards.addAll(BoosterUtils.generateDistinctCards(predRareMythics, nRare));
 
         this.addAllCards(newCards);
@@ -183,7 +184,7 @@ public final class QuestUtilCards {
         this.qa.getNewCardList().add(card);
     }
 
-    private static final Predicate<CardPrinted> RARE_PREDICATE = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
+    private static final Predicate<CardPrinted> RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC;
 
 
     /**
@@ -626,7 +627,7 @@ public final class QuestUtilCards {
     
     public int getCompletionPercent(String edition) {
         // get all cards in the specified edition
-        Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(edition);
+        Predicate<CardPrinted> filter = IPaperCard.Predicates.printedInSets(edition);
         Iterable<CardPrinted> editionCards = Iterables.filter(CardDb.instance().getAllCards(), filter);
 
         ItemPool<CardPrinted> ownedCards = qa.getCardPool();

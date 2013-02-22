@@ -38,6 +38,7 @@ import forge.card.UnOpenedProduct;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.TournamentPack;
 import forge.util.Aggregates;
@@ -93,14 +94,14 @@ public final class BoosterUtils {
         // This will save CPU time when sets are limited
         final List<CardPrinted> cardpool = Lists.newArrayList(Iterables.filter(CardDb.instance().getAllCards(), filter));
 
-        final Predicate<CardPrinted> pCommon = CardPrinted.Predicates.Presets.IS_COMMON;
+        final Predicate<CardPrinted> pCommon = IPaperCard.Predicates.Presets.IS_COMMON;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, numCommon, colorFilters));
 
-        final Predicate<CardPrinted> pUncommon = CardPrinted.Predicates.Presets.IS_UNCOMMON;
+        final Predicate<CardPrinted> pUncommon = IPaperCard.Predicates.Presets.IS_UNCOMMON;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pUncommon, numUncommon, colorFilters));
 
         int nRares = numRare, nMythics = 0;
-        final Predicate<CardPrinted> filterMythics = CardPrinted.Predicates.Presets.IS_MYTHIC_RARE;
+        final Predicate<CardPrinted> filterMythics = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
         final boolean haveMythics = Iterables.any(cardpool, filterMythics);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
             if (MyRandom.getRandom().nextInt(10) < 1) {
@@ -110,7 +111,7 @@ public final class BoosterUtils {
             }
         }
 
-        final Predicate<CardPrinted> pRare = CardPrinted.Predicates.Presets.IS_RARE;
+        final Predicate<CardPrinted> pRare = IPaperCard.Predicates.Presets.IS_RARE;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pRare, nRares, colorFilters));
         if (nMythics > 0) {
             cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, filterMythics, nMythics, colorFilters));
@@ -279,7 +280,7 @@ public final class BoosterUtils {
             // Type 1: 'n (color) rares'
             final int qty = Integer.parseInt(temp[0]);
             // Determine rarity
-            final Predicate<CardPrinted> rar = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
+            final Predicate<CardPrinted> rar = IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC;
 
             // Determine color ("random" defaults to null color)
             Predicate<CardRules> col = Predicates.alwaysTrue();

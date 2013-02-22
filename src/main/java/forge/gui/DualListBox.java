@@ -33,6 +33,7 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -315,7 +316,7 @@ public class DualListBox<T> extends FPanel {
         } else if (obj instanceof SpellAbility) {
             card = ((SpellAbility) obj).getSourceCard();
         } else if (obj instanceof CardPrinted) {
-            card = ((CardPrinted) obj).getMatchingForgeCard();
+            card = ((IPaperCard) obj).getMatchingForgeCard();
         }
 
         GuiUtils.clearPanelSelections();

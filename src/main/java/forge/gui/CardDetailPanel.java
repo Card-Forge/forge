@@ -203,28 +203,37 @@ public class CardDetailPanel extends FPanel implements CardContainer {
 
         if (!this.setInfoLabel.getText().equals("")) {
             this.setInfoLabel.setOpaque(true);
-            final String csr = card.getCurSetRarity();
-            if (csr.equals("Common") || csr.equals("Land")) {
-                this.setInfoLabel.setBackground(Color.BLACK);
-                this.setInfoLabel.setForeground(Color.WHITE);
-                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-            } else if (csr.equals("Uncommon")) {
-                this.setInfoLabel.setBackground(Color.LIGHT_GRAY);
-                this.setInfoLabel.setForeground(Color.BLACK);
-                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            } else if (csr.equals("Rare")) {
-                this.setInfoLabel.setBackground(Color.YELLOW);
-                this.setInfoLabel.setForeground(Color.BLACK);
-                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            } else if (csr.equals("Mythic")) {
-                this.setInfoLabel.setBackground(Color.RED);
-                this.setInfoLabel.setForeground(Color.BLACK);
-                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            } else if (csr.equals("Special")) {
-                // "Timeshifted" or other Special Rarity Cards
-                this.setInfoLabel.setBackground(CardDetailPanel.purple);
-                this.setInfoLabel.setForeground(Color.BLACK);
-                this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            switch( card.getRarity() ) {
+                case Uncommon:
+                    this.setInfoLabel.setBackground(Color.LIGHT_GRAY);
+                    this.setInfoLabel.setForeground(Color.BLACK);
+                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    break;
+
+                case Rare:
+                    this.setInfoLabel.setBackground(Color.YELLOW);
+                    this.setInfoLabel.setForeground(Color.BLACK);
+                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    break;
+
+                case MythicRare:
+                    this.setInfoLabel.setBackground(Color.RED);
+                    this.setInfoLabel.setForeground(Color.BLACK);
+                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    break; 
+
+                case Special:
+                    // "Timeshifted" or other Special Rarity Cards
+                    this.setInfoLabel.setBackground(CardDetailPanel.purple);
+                    this.setInfoLabel.setForeground(Color.BLACK);
+                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    break;
+
+                default: //case BasicLand: + case Common:
+                    this.setInfoLabel.setBackground(Color.BLACK);
+                    this.setInfoLabel.setForeground(Color.WHITE);
+                    this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+                    break;
             }
             // cdLabel7.setText(card.getCurSetCode());
         }

@@ -271,31 +271,6 @@ public final class CardType implements Comparable<CardType> {
         return this.isBasic() && this.isLand();
     }
 
-    /**
-     * Gets the types before dash.
-     * 
-     * @return the types before dash
-     */
-    public String getTypesBeforeDash() {
-        final ArrayList<String> types = new ArrayList<String>();
-        for (final CardSuperType st : this.superType) {
-            types.add(st.name());
-        }
-        for (final CardCoreType ct : this.coreType) {
-            types.add(ct.name());
-        }
-        return StringUtils.join(types, ' ');
-    }
-
-    /**
-     * Gets the types after dash.
-     * 
-     * @return the types after dash
-     */
-    public String getTypesAfterDash() {
-        return StringUtils.join(this.subType, " ");
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -311,10 +286,26 @@ public final class CardType implements Comparable<CardType> {
 
     private String toStringImpl() {
         if (this.subType.isEmpty()) {
-            return this.getTypesBeforeDash();
+            return StringUtils.join(this.getTypesBeforeDash(), ' ');
         } else {
-            return String.format("%s - %s", this.getTypesBeforeDash(), this.getTypesAfterDash());
+            return String.format("%s - %s", StringUtils.join(this.getTypesBeforeDash(), ' '), StringUtils.join(this.subType, " "));
         }
+    }
+
+    /**
+     * Gets the types before dash.
+     * 
+     * @return the types before dash
+     */
+    public List<String> getTypesBeforeDash() {
+        final ArrayList<String> types = new ArrayList<String>();
+        for (final CardSuperType st : this.superType) {
+            types.add(st.name());
+        }
+        for (final CardCoreType ct : this.coreType) {
+            types.add(ct.name());
+        }
+        return types;
     }
 
     /*

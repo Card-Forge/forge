@@ -19,9 +19,9 @@ package forge.quest;
 
 import forge.Card;
 
-import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
 import forge.item.CardDb;
+import forge.item.CardToken;
 import forge.quest.bazaar.QuestPetController;
 
 import java.util.ArrayList;
@@ -87,16 +87,13 @@ public class QuestUtil {
         final List<Card> list = new ArrayList<Card>();
 
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
-
             String petName = qc.getSelectedPet(iSlot);
             QuestPetController pet = qc.getPetsStorage().getPet(petName);
             if (pet != null) {
-                Card c = pet.getPetCard(qc.getAssets());
+                CardToken c = pet.getPetCard(qc.getAssets());
                 if (c != null) {
-                    Card copy = CardFactory.getCard2(c, human);
+                    Card copy = c.toForgeCard(human);
                     copy.setSickness(true);
-                    copy.setImageName(c.getImageName());
-                    copy.setToken(true);
                     list.add(copy);
                 }
             }

@@ -28,6 +28,7 @@ import com.google.common.collect.Lists;
 
 import forge.card.CardRulesPredicates;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 
 
 /**
@@ -77,15 +78,15 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     private Predicate<CardPrinted> buildFilterPrinted() {
-        final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
+        final Predicate<CardPrinted> banNames = IPaperCard.Predicates.namesExcept(this.bannedCardNames);
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
-        return Predicates.and(banNames, CardPrinted.Predicates.printedInSets(this.allowedSetCodes, true));
+        return Predicates.and(banNames, IPaperCard.Predicates.printedInSets(this.allowedSetCodes, true));
     }
 
     private Predicate<CardPrinted> buildFilterRules() {
-        final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
+        final Predicate<CardPrinted> banNames = IPaperCard.Predicates.namesExcept(this.bannedCardNames);
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }

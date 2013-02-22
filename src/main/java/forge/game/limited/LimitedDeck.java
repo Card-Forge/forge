@@ -32,6 +32,7 @@ import forge.deck.DeckSection;
 import forge.deck.generate.GenerateDeckUtil;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.util.MyRandom;
 
 /**
@@ -641,7 +642,7 @@ public class LimitedDeck {
         }
         Predicate<CardPrinted> filter = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE,
                 CardPrinted.FN_GET_RULES);
-        for (CardPrinted creature : Iterables.filter(deckList, filter)) {
+        for (IPaperCard creature : Iterables.filter(deckList, filter)) {
             int cmc = creature.getRules().getManaCost().getCMC();
             if (cmc < 1) {
                 cmc = 1;
@@ -726,7 +727,7 @@ public class LimitedDeck {
      */
     private double getAverageCMC(List<CardPrinted> cards) {
         double sum = 0.0;
-        for (CardPrinted cardPrinted : cards) {
+        for (IPaperCard cardPrinted : cards) {
             sum += cardPrinted.getRules().getManaCost().getCMC();
         }
         return sum / cards.size();

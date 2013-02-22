@@ -42,6 +42,7 @@ import forge.deck.Deck;
 import forge.gui.GuiChoose;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.properties.ForgeProps;
@@ -300,7 +301,7 @@ public final class BoosterDraft implements IBoosterDraft {
 
             final List<Card> forAi = new ArrayList<Card>();
             final List<CardPrinted> booster = this.pack.get((iHumansBooster + i) % this.pack.size());
-            for (final CardPrinted cr : booster) {
+            for (final IPaperCard cr : booster) {
                 forAi.add(cr.getMatchingForgeCard());
             }
 

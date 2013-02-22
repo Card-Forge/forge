@@ -24,6 +24,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.util.storage.StorageReaderFile;
 
 // import forge.deck.Deck;
@@ -134,7 +135,7 @@ public final class CardBlock implements Comparable<CardBlock> {
         for (final CardEdition set : this.sets) {
             setCodes.add(set.getCode());
         }
-        return CardPrinted.Predicates.printedInSets(setCodes, true);
+        return IPaperCard.Predicates.printedInSets(setCodes, true);
     }
 
     /*

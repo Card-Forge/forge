@@ -1,7 +1,5 @@
 package forge.card;
 
-import java.util.Map.Entry;
-
 import forge.card.mana.ManaCost;
 
 /** 
@@ -19,12 +17,11 @@ public interface ICardCharacteristics {
     public abstract int getIntToughness();
     public abstract String getPower();
     public abstract String getToughness();
-
     public abstract int getInitialLoyalty();
 
     public abstract String getOracleText();
-    public abstract Iterable<String> getKeywords();
-    public abstract Iterable<Entry<String, CardInSet>> getSetsPrinted();
-    public abstract CardInSet getEditionInfo(final String setCode);
 
+    public abstract Iterable<String> getSets();
+    public abstract CardInSet getEditionInfo(final String setCode);
+    
 }

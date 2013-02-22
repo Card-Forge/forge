@@ -41,6 +41,7 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
 
@@ -317,34 +318,34 @@ public final class SColumnUtil {
     private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
 
     private static ManaCost toManaCost(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getManaCost() : ManaCost.NO_COST;
+        return i instanceof CardPrinted ? ((IPaperCard) i).getRules().getManaCost() : ManaCost.NO_COST;
     }
 
     private static ColorSet toColor(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getColor() : ColorSet.getNullColor();
+        return i instanceof CardPrinted ? ((IPaperCard) i).getRules().getColor() : ColorSet.getNullColor();
     }
 
     private static int toPower(final InventoryItem i) {
         int result = -1;
         if (i instanceof CardPrinted) {
-            result = ((CardPrinted) i).getRules().getIntPower();
+            result = ((IPaperCard) i).getRules().getIntPower();
             if (result == -1) {
-                result = ((CardPrinted) i).getRules().getInitialLoyalty();
+                result = ((IPaperCard) i).getRules().getInitialLoyalty();
             }
         }
         return result;
     }
 
     private static int toToughness(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getIntToughness() : -1;
+        return i instanceof CardPrinted ? ((IPaperCard) i).getRules().getIntToughness() : -1;
     }
 
     private static Integer toCMC(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getManaCost().getCMC() : -1;
+        return i instanceof CardPrinted ? ((IPaperCard) i).getRules().getManaCost().getCMC() : -1;
     }
 
     private static CardRarity toRarity(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRarity() : CardRarity.Unknown;
+        return i instanceof CardPrinted ? ((IPaperCard) i).getRarity() : CardRarity.Unknown;
     }
 
     private static CardEdition toSetCmp(final InventoryItem i) {
@@ -357,14 +358,14 @@ public final class SColumnUtil {
     }
 
     private static Integer toAiCmp(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getRules().getAiHints().getAiStatusComparable() : Integer.valueOf(-1);
+        return i instanceof CardPrinted ? ((IPaperCard) i).getRules().getAiHints().getAiStatusComparable() : Integer.valueOf(-1);
     }
 
     private static String toAiStr(final InventoryItem i) {
         if (!(i instanceof CardPrinted))
             return "n/a";
         
-        CardPrinted cp = (CardPrinted) i;
+        IPaperCard cp = (IPaperCard) i;
         CardAiHints ai = cp.getRules().getAiHints();
         
         return ai.getRemAIDecks() ? (ai.getRemRandomDecks() ? "AI ?" : "AI")
@@ -454,7 +455,7 @@ public final class SColumnUtil {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
-            return i instanceof CardPrinted ? ((CardPrinted)i).getRules().getType().toString() : i.getItemType();
+            return i instanceof CardPrinted ? ((IPaperCard)i).getRules().getType().toString() : i.getItemType();
         }
     };
 
@@ -463,7 +464,7 @@ public final class SColumnUtil {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
-            return i instanceof CardPrinted ? ((CardPrinted)i).getRules().getType().toString() : i.getItemType();
+            return i instanceof CardPrinted ? ((IPaperCard)i).getRules().getType().toString() : i.getItemType();
         }
     };
 

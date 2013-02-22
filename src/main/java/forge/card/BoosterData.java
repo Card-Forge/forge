@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.util.FileSection;
 import forge.util.storage.StorageReaderFile;
 
@@ -93,10 +94,10 @@ public class BoosterData {
     }
 
     public final Predicate<CardPrinted> getEditionFilter() {
-        return CardPrinted.Predicates.printedInSets(edition);
+        return IPaperCard.Predicates.printedInSets(edition);
     }
     public final Predicate<CardPrinted> getLandEditionFilter() {
-        return CardPrinted.Predicates.printedInSets(landEdition);
+        return IPaperCard.Predicates.printedInSets(landEdition);
     }
     /**
      * Gets the uncommon.

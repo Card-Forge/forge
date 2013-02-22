@@ -13659,6 +13659,8 @@ src/main/java/forge/card/EditionInfo.java svneol=native#text/plain
 src/main/java/forge/card/FatPackData.java -text
 src/main/java/forge/card/FormatCollection.java -text
 src/main/java/forge/card/ICardCharacteristics.java -text
+src/main/java/forge/card/ICardFace.java -text
+src/main/java/forge/card/ICardRawAbilites.java -text
 src/main/java/forge/card/MagicColor.java -text
 src/main/java/forge/card/MetaSet.java -text
 src/main/java/forge/card/TriggerReplacementBase.java -text
@@ -13881,7 +13883,7 @@ src/main/java/forge/card/cardfactory/CardFactoryLands.java svneol=native#text/pl
 src/main/java/forge/card/cardfactory/CardFactoryPlaneswalkers.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactorySorceries.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryUtil.java svneol=native#text/plain
-src/main/java/forge/card/cardfactory/CardReader.java svneol=native#text/plain
+src/main/java/forge/card/cardfactory/CardStorageReader.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cost/Cost.java svneol=native#text/plain
 src/main/java/forge/card/cost/CostDamage.java -text
@@ -14104,7 +14106,6 @@ src/main/java/forge/game/limited/CCnt.java svneol=native#text/plain
 src/main/java/forge/game/limited/CardPoolLimitation.java -text
 src/main/java/forge/game/limited/CardRankingComparator.java -text
 src/main/java/forge/game/limited/CardRatings.java -text
-src/main/java/forge/game/limited/CreatureComparator.java -text
 src/main/java/forge/game/limited/CustomLimited.java svneol=native#text/plain
 src/main/java/forge/game/limited/DeckColors.java svneol=native#text/plain
 src/main/java/forge/game/limited/DraftRankCache.java -text
@@ -14356,7 +14357,9 @@ src/main/java/forge/gui/toolbox/package-info.java svneol=native#text/plain
 src/main/java/forge/item/BoosterPack.java -text
 src/main/java/forge/item/CardDb.java -text
 src/main/java/forge/item/CardPrinted.java -text
+src/main/java/forge/item/CardToken.java -text
 src/main/java/forge/item/FatPack.java -text
+src/main/java/forge/item/IPaperCard.java -text
 src/main/java/forge/item/InventoryItem.java -text
 src/main/java/forge/item/InventoryItemFromSet.java -text
 src/main/java/forge/item/ItemPool.java -text
