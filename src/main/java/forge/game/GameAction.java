@@ -114,7 +114,7 @@ public class GameAction {
             }
             return c;
         }
-        if ((zoneFrom == null) && !c.isToken()) {
+        if (zoneFrom == null && !c.isToken()) {
             if (position == null) {
                 zoneTo.add(c);
             }
@@ -127,9 +127,7 @@ public class GameAction {
         }
 
         boolean suppress;
-        if ((zoneFrom == null) && !c.isToken()) {
-            suppress = true;
-        } else if (c.isToken()) {
+        if (c.isToken()) {
             suppress = false;
         } else {
             suppress = zoneFrom.equals(zoneTo);

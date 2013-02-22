@@ -107,9 +107,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     counterAmount = max - tgtCard.getCounters(counterType);
                 }
                 final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
-                if (zone == null) {
-                    // Do nothing, token disappeared
-                } else if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
+                if (zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
                     if (remember) {
                         final int value = tgtCard.getTotalCountersToAdd(counterType, counterAmount, true);
                         tgtCard.addCountersAddedBy(card, counterType, value);
