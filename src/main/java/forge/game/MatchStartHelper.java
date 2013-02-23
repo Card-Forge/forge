@@ -27,7 +27,6 @@ public class MatchStartHelper {
     public void addVanguardPlayer(final LobbyPlayer player, final Deck deck, final CardPrinted avatar) {
 
         PlayerStartConditions start = new PlayerStartConditions(deck);
-
         start.setStartingLife(start.getStartingLife() + avatar.getRules().getLife());
         start.setStartingHand(start.getStartingHand() + avatar.getRules().getHand());
         start.setCardsInCommand(Arrays.asList(avatar));

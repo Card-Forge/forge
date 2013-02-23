@@ -44,14 +44,17 @@ public class CardCharacteristics {
     private int baseDefense = 0;
     private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
     private final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
-    private ArrayList<String> intrinsicAbility = new ArrayList<String>();
     private final List<SpellAbility> manaAbility = new ArrayList<SpellAbility>();
+    private ArrayList<String> intrinsicAbility = new ArrayList<String>();
     private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
     private ArrayList<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
     private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
     private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
     private String imageFilename = "";
     private Map<String, String> sVars = new TreeMap<String, String>();
+
+    private CardRarity rarity = CardRarity.Unknown;
+    private String curSetCode = CardEdition.UNKNOWN.getCode();
 
     /**
      * Gets the name.
@@ -406,12 +409,34 @@ public class CardCharacteristics {
         this.staticAbilityStrings = new ArrayList<String>(source.getStaticAbilityStrings());
         // String imageFilename = copy reference
         this.imageFilename = source.getImageFilename();
+        this.rarity = source.rarity;
+        this.curSetCode = source.curSetCode;
         // Map<String, String> sVars
         this.sVars = new TreeMap<String, String>(source.getSVars());
         this.replacementEffects = new ArrayList<ReplacementEffect>();
         for (ReplacementEffect RE : source.getReplacementEffects()) {
             this.replacementEffects.add(RE.getCopy());
         }
+    }
+
+
+    public CardRarity getRarity() {
+        return rarity;
+    }
+
+
+    public void setRarity(CardRarity rarity) {
+        this.rarity = rarity;
+    }
+
+
+    public String getCurSetCode() {
+        return curSetCode;
+    }
+
+
+    public void setCurSetCode(String curSetCode) {
+        this.curSetCode = curSetCode; 
     }
 
 }

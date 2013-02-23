@@ -241,6 +241,9 @@ public class CardFactory {
         buildAbilities(c);
 
         c.setCurSetCode(cp.getEdition());
+        c.setRarity(cp.getRarity());
+
+        
         c.setRandomPicture(cp.getArtIndex() + 1);
         String originalPicture = cp.getImageFilename();
         //System.out.println(c.getName() + " -> " + originalPicture);
@@ -257,11 +260,15 @@ public class CardFactory {
             if (c.getRules().getSplitType() == CardSplitType.Split) {
                 c.setState(CardCharacteristicName.LeftSplit);
                 c.setImageFilename(originalPicture);
+                c.setCurSetCode(cp.getEdition());
+                c.setRarity(cp.getRarity());
                 c.setState(CardCharacteristicName.RightSplit);
                 c.setImageFilename(originalPicture);
             } else {
                 c.setImageFilename(CardUtil.buildFilename(c));
             }
+            c.setCurSetCode(cp.getEdition());
+            c.setRarity(cp.getRarity());
             c.setState(CardCharacteristicName.Original);
         }
         return c;
@@ -371,7 +378,7 @@ public class CardFactory {
         List<String> coreTypes = face.getType().getTypesBeforeDash();
         coreTypes.addAll(face.getType().getSubTypes());
         c.setType(coreTypes);
-        
+
         // What a perverted color code we have!
         CardColor col1 = new CardColor(c);
         col1.addToCardColor(Color.fromColorSet(face.getColor()));

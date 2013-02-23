@@ -142,6 +142,7 @@ public class QuestUtil {
         script.add("Colors:" + properties[1]);
         script.add("PT:"+ properties[2] + "/" + properties[3]);
         script.add("Types:" + properties[5].replace(';', ' '));
+        script.add("Oracle:"); // tokens don't have texts yet
         // c.setManaCost(properties[1]);
         String fileName = properties[1] + " " + properties[2] + " " + properties[3] + " " + properties[4];
         final CardToken c = new CardToken(CardRulesReader.parseSingleCard(script), CardEdition.UNKNOWN.getCode(), fileName);

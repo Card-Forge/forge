@@ -35,7 +35,6 @@ import com.google.common.collect.Iterables;
 
 import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
-import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.ability.AbilityUtils;
@@ -66,7 +65,6 @@ import forge.game.phase.Combat;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
-import forge.item.IPaperCard;
 import forge.util.Expressions;
 
 /**
@@ -189,9 +187,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int semiPermanentDefenseBoost = 0;
 
     private int randomPicture = 0;
-    private CardRarity rarity = CardRarity.Unknown;
-    private String curSetCode = CardEdition.UNKNOWN.getCode();
-
     private int xManaCostPaid = 0;
 
     private int multiKickerMagnitude = 0;
@@ -8417,7 +8412,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link java.lang.String} object.
      */
     public final void setCurSetCode(final String setCode) {
-        curSetCode = setCode;
+        this.getCharacteristics().setCurSetCode(setCode);
     }
 
     /**
@@ -8428,7 +8423,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final String getCurSetCode() {
-        return curSetCode;
+        return this.getCharacteristics().getCurSetCode();
     }
 
     /**
@@ -8439,9 +8434,13 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link java.lang.String} object.
      */
     public final CardRarity getRarity() {
-        return rarity;
+        return this.getCharacteristics().getRarity();
     }
 
+    public final void setRarity(CardRarity r) {
+        this.getCharacteristics().setRarity(r);
+    }
+    
     /**
      * <p>
      * getMostRecentSet.
