@@ -1377,20 +1377,31 @@ public class CardFactoryUtil {
      * @param colorAbb
      *            a {@link java.lang.String} object.
      * @param cards
-     *            a {@link forge.CardList} object.
+     *            a {@link forge.List<Card>} object.
      * @return a int.
      */
     public static int getNumberOfManaSymbolsByColor(final String colorAbb, final List<Card> cards) {
         int count = 0;
-        for (int i = 0; i < cards.size(); i++) {
-            final Card c = cards.get(i);
-            if (!c.isToken()) {
-                String manaCost = c.getManaCost().toString();
-                manaCost = manaCost.trim();
-                count += CardFactoryUtil.countOccurrences(manaCost, colorAbb);
-            }
+        for(Card c : cards) {
+            // Certain tokens can have mana cost, so don't skip them
+            count += CardFactoryUtil.getNumberOfManaSymbolsByColor(colorAbb, c);
         }
         return count;
+    }
+    
+    /**
+     * <p>
+     * getNumberOfManaSymbolsByColor.
+     * </p>
+     * 
+     * @param colorAbb
+     *            a {@link java.lang.String} object.
+     * @param card
+     *            a {@link forge.Card} object.
+     * @return a int.
+     */
+    public static int getNumberOfManaSymbolsByColor(final String colorAbb, final Card card) {
+        return CardFactoryUtil.countOccurrences(card.getManaCost().toString().trim(), colorAbb);
     }
 
     /**
@@ -2311,9 +2322,18 @@ public class CardFactoryUtil {
 
         // Count$Chroma.<mana letter>
         if (sq[0].contains("Chroma")) {
-            return CardFactoryUtil.doXMath(
+            if (sq[0].contains("ChromaSource")) {
+                // Runs Chroma for passed in Source card
+                List<Card> chromaList = CardLists.createCardList(c);
+                return CardFactoryUtil.doXMath(CardFactoryUtil.getNumberOfManaSymbolsByColor(sq[1], chromaList), m, c);
+            }
+            else {
+                return CardFactoryUtil.doXMath(
                     CardFactoryUtil.getNumberOfManaSymbolsControlledByColor(sq[1], cardController), m, c);
+            }
         }
+        
+        
 
         // Count$Hellbent.<numHB>.<numNotHB>
         if (sq[0].contains("Hellbent")) {

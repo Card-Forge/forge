@@ -1,7 +1,10 @@
 Name:Sanity Grinding
 ManaCost:U U U
 Types:Sorcery
-Text:Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
+A:SP$ Dig | Cost$ U U U | DigNum$ 10 | Reveal$ True | ChangeNum$ 0 | RememberRevealed$ True | SubAbility$ MillTargeted | SpellDescription$ Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
+SVar:MillTargeted:DB$ Mill | NumCards$ X | ValidTgts$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$ChromaSource.U
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanity_grinding.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/29.jpg
