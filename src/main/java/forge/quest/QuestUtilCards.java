@@ -167,7 +167,7 @@ public final class QuestUtilCards {
      */
     public void addAllCards(final Iterable<CardPrinted> newCards) {
         for (final CardPrinted card : newCards) {
-            this.addSingleCard(card);
+            this.addSingleCard(card, 1);
         }
     }
 
@@ -177,11 +177,11 @@ public final class QuestUtilCards {
      * @param card
      *            the card
      */
-    public void addSingleCard(final CardPrinted card) {
-        this.qa.getCardPool().add(card);
+    public void addSingleCard(final CardPrinted card, int qty) {
+        this.qa.getCardPool().add(card, qty);
 
         // register card into that list so that it would appear as a new one.
-        this.qa.getNewCardList().add(card);
+        this.qa.getNewCardList().add(card, qty);
     }
 
     private static final Predicate<CardPrinted> RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC;
@@ -207,7 +207,7 @@ public final class QuestUtilCards {
         final Predicate<CardPrinted> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
         final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter));
-        this.addSingleCard(card);
+        this.addSingleCard(card, 1);
         return card;
     }
 
@@ -250,11 +250,12 @@ public final class QuestUtilCards {
      * @param value
      *            the value
      */
-    public void buyCard(final CardPrinted card, final int value) {
-        if (this.qa.getCredits() >= value) {
-            this.qa.setCredits(this.qa.getCredits() - value);
-            this.qa.getShopList().remove(card);
-            this.addSingleCard(card);
+    public void buyCard(final CardPrinted card, int qty, final int value) {
+        int totalCost = qty * value;
+        if (this.qa.getCredits() >= totalCost) {
+            this.qa.setCredits(this.qa.getCredits() - totalCost);
+            this.qa.getShopList().remove(card, qty);
+            this.addSingleCard(card, qty);
         }
     }
 

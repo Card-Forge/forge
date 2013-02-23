@@ -319,7 +319,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             final CardPrinted card = (CardPrinted) item;
             this.getTableDeck().addCard(card, qty);
             this.getTableCatalog().removeCard(item, qty);
-            this.questData.getCards().buyCard(card, value);
+            this.questData.getCards().buyCard(card, qty, value);
 
         } else if (item instanceof OpenablePack) {
             for (int i = 0; qty > i; ++i) {
