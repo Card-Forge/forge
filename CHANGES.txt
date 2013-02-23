@@ -143,6 +143,7 @@ Martyr's Cause
 Cannibalize
 Shuriken
 Rally the Horde
+Deathlace
 
 
 New Phenomenons:
@@ -564,6 +565,33 @@ Detailed Changelog: (This section will likely be deleted in the near future and 
 - Licids use an altername mode named 'Licid'
 - Split cards' images are properly shown
 - Revert to the original lose_duel.wav sound file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixing a pretty hard NPE crash. Not sure what scenario this occurs, but it basically spawned a crash report in high order
+- Merge: merging up to r19824 from trunk.
+- Adding Damage Dealing strings to the Game Log so it's clear how much damage things are doing (with occasional extra info)
+- Didn't notice Player already had a game field
+- detect mixed svn revisions at build time and add a warning to the version string if mixed revisions are detected
+- This should fix quest token images (cannot test yet in a lack of pictures)
+- clean up eclipse warnings in pom
+- Tokens can now enter the battlefield with counters on them.
+- add missing pom dependency
+- When cards move to a non-Battlefield zone, reset it to its base colors
+- restores token images
+- Card: dropped imageName field (which was commonly mixed up with imageFileName)
+- Starting cards for quest and challenges no longer use functions (CardToken helps a lot)
+- Quest challenges code: Token parsing remake (to produce CardRules instance and wrap it into CardToken)
+- some utility functions were moved closer to usage points
+- tie package preparation steps to different lifecycle phases in the pom to ensure plugin execution order is always correct
+- bugfix in token creation for challenge
+- streamlined vanguard readings of life/hand modifiers
+- sell correct quantity of cards in the card shop
+- ensure cards are bought in the correct quantity too
+- don't include pics folder items in distributable
+- correct the template format for mktemp
+- Rarity is going to be displayed properly on any side of card, including clones
+- ensure the card image gets refreshed when the panel is resized or a dual-sided card is flipped
+- add rarity information to card details panel set code label tooltip
+- Updated some AI SVars.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
