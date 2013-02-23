@@ -45,24 +45,13 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
     private static final long serialVersionUID = -3160874016387273383L;
 
     private Object displayed;
-    private Object imageShownFor = null;
 
-    // private JLabel label;
-    // private ImageIcon icon;
     private final ScaledImagePanel panel;
     private BufferedImage currentImage;
 
-    /**
-     * <p>
-     * Constructor for CardPicturePanel.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
     public CardPicturePanel(final Card c) {
         super(new BorderLayout());
-        // add(label = new JLabel(icon = new ImageIcon()));
+
         this.panel = new ScaledImagePanel();
         this.add(this.panel);
         this.addComponentListener(new ComponentAdapter() {
@@ -77,46 +66,27 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
             }
         });
 
-
-
         this.setCard(c);
     }
 
-    /**
-     * <p>
-     * update.
-     * </p>
-     */
     public void update() {
-        // if (!this.isShowing()) return; -- does this work or not?
         this.setImage();
     }
 
-    /**
-     * Sets the card.
-     * 
-     * @param cp
-     *            the new card
-     */
     public void setCard(final InventoryItem cp) {
         this.displayed = cp;
         update();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setCard(final Card c) {
         this.displayed = c;
         update();
     }
 
-    /** */
     public void setImage() {
         final Insets i = this.getInsets();
         BufferedImage image = null;
-        if ( displayed == imageShownFor )
-            return;
-        
         if (displayed instanceof InventoryItem) {
             image = ImageCache.getImage((InventoryItem)this.displayed, this.getWidth() - i.left - i.right, this.getHeight()
                     - i.top - i.bottom);
@@ -126,29 +96,12 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
         }
 
         if (image != this.currentImage) {
-            imageShownFor = displayed;
             this.currentImage = image;
             this.panel.setImage(image);
             this.panel.repaint();
         }
-        // if(image == null) {
-        // label.setIcon(null);
-        // //avoid a hard reference to the image while not needed
-        // icon.setImage(null);
-        // label.setText(card.isFaceDown()? "Morph":card.getName());
-        // } else if(image != icon.getImage()) {
-        // icon.setImage(image);
-        // label.setIcon(icon);
-        // }
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>card</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
     @Override
     public Card getCard() {
         if ( displayed instanceof Card )
