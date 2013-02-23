@@ -264,6 +264,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if ((type != null) && p == ai) {
                 // AI only "knows" about his information
                 list = CardLists.getValidCards(list, type, source.getController(), source);
+                list = CardLists.filter(list, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        if (c.isType("Legendary")) {
+                            if (!ai.getCardsIn(ZoneType.Battlefield, c.getName()).isEmpty()) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                });
             }
 
             if (list.isEmpty()) {
