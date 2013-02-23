@@ -183,27 +183,19 @@ public class CardDetailPanel extends FPanel implements CardContainer {
                 this.nameCostLabel.setText(card.getName() + " - " + card.getManaCost());
             }
             this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
+            
             String set = card.getCurSetCode();
             this.setInfoLabel.setText(set);
             if (null != set && !set.isEmpty()) {
                 CardEdition edition = Singletons.getModel().getEditions().get(set);
-                if (null != edition) {
-                    this.setInfoLabel.setToolTipText(edition.getName());
+                if (null == edition) {
+                    setInfoLabel.setToolTipText(card.getRarity().name());
+                } else {
+                    setInfoLabel.setToolTipText(String.format("%s (%s)", edition.getName(), card.getRarity().name()));
                 }
-            }
-        } else {
-            this.nameCostLabel.setText("Morph");
-            this.typeLabel.setText("Creature");
-        }
-        if (card.isCreature()) {
-            this.powerToughnessLabel.setText(card.getNetAttack() + " / " + card.getNetDefense());
-        }
-
-        this.idLabel.setText("Card ID  " + card.getUniqueNumber());
-
-        if (!this.setInfoLabel.getText().equals("")) {
-            this.setInfoLabel.setOpaque(true);
-            switch( card.getRarity() ) {
+                
+                this.setInfoLabel.setOpaque(true);
+                switch(card.getRarity()) {
                 case Uncommon:
                     this.setInfoLabel.setBackground(Color.LIGHT_GRAY);
                     this.setInfoLabel.setForeground(Color.BLACK);
@@ -234,12 +226,20 @@ public class CardDetailPanel extends FPanel implements CardContainer {
                     this.setInfoLabel.setForeground(Color.WHITE);
                     this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
                     break;
+                }
             }
-            // cdLabel7.setText(card.getCurSetCode());
+        } else {
+            this.nameCostLabel.setText("Morph");
+            this.typeLabel.setText("Creature");
+        }
+        
+        if (card.isCreature()) {
+            this.powerToughnessLabel.setText(card.getNetAttack() + " / " + card.getNetDefense());
         }
 
-        // fill the card text
+        this.idLabel.setText("Card ID  " + card.getUniqueNumber());
 
+        // fill the card text
         this.cdArea.setText(composeCardText(card, canShowThis));
 
         SwingUtilities.invokeLater(new Runnable() {
