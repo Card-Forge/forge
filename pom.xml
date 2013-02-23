@@ -887,6 +887,7 @@
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
                                                 <exclude name="res/lib/**" />
+                                                <exclude name="res/pics/**" />
                                             </fileset>
                                             <fileset dir="${project.build.directory}" includes="forge.exe" />
                                             <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
@@ -1000,6 +1001,7 @@
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
                                                 <exclude name="res/lib/**" />
+                                                <exclude name="res/pics/**" />
                                             </javafileset>
                                             <javafileset dir="${project.build.directory}">
                                                 <include name="res/cardsfolder/cardsfolder.zip" />
