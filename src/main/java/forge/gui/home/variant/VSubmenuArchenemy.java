@@ -208,9 +208,9 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
     @Override
     public void populate() {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax center"));
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, span 2, ax right");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, span 2, ax center");
 
         for (FDeckChooser fdc : deckChoosers) {
             fdc.populate();
