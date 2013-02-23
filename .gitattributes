@@ -13724,6 +13724,7 @@ src/main/java/forge/card/ability/ai/DiscardAi.java -text
 src/main/java/forge/card/ability/ai/DrainManaAi.java -text
 src/main/java/forge/card/ability/ai/DrawAi.java svneol=native#text/plain
 src/main/java/forge/card/ability/ai/EffectAi.java -text
+src/main/java/forge/card/ability/ai/EncodeAi.java -text
 src/main/java/forge/card/ability/ai/EndTurnAi.java -text
 src/main/java/forge/card/ability/ai/FightAi.java -text
 src/main/java/forge/card/ability/ai/FogAi.java -text
