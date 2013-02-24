@@ -59,13 +59,17 @@ public class ImageCache {
     }
 
 
-    public static BufferedImage getImage(final InventoryItem card, final int width, final int height) {
+    public static BufferedImage getImage(final InventoryItem ii, final int width, final int height) {
         // TODO: move all the path-building logics here from the very objects. They don't have to know where their picture is
-        String key = card.getImageFilename();
+        String key = getKey(ii);
         
         return scaleImage(key, width, height);
     }
 
+    public static BufferedImage getImage(final String key, final int width, final int height) {
+        return scaleImage(key, width, height);
+    }
+    
     /**
      * TODO: Write javadoc for this method.
      * @param original
@@ -141,13 +145,15 @@ public class ImageCache {
      *            a {@link forge.Card} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String getKey(final Card card) {
-
+    public static String getKey(final Card card) {
         if ((card.isToken() && !card.isCopiedToken()) || card.isFaceDown()) {
             return ImageCache.TOKEN + GuiDisplayUtil.cleanString(card.getImageFilename());
         }
-
         return card.getImageFilename(); // key;
+    }
+    
+    public static String getKey(final InventoryItem ii) {
+        return ii.getImageFilename();
     }
 
 }

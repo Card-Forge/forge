@@ -39,7 +39,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDisplayUtil;
-import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -178,7 +178,7 @@ public final class CardUtil {
      *            the card
      * @return the string
      */
-    public static String buildFilename(final CardPrinted card) {
+    public static String buildFilename(final IPaperCard card) {
         CardRules cr = card.getRules();
         final int maxIndex = cr.getEditionInfo(card.getEdition()).getCopiesCount();
         // picture is named AssaultBattery.full.jpg
@@ -199,7 +199,7 @@ public final class CardUtil {
      *            the name to use
      * @return the string
      */
-    public static String buildFilename(final CardPrinted card, final String nameToUse) {
+    public static String buildFilename(final IPaperCard card, final String nameToUse) {
         final int maxIndex = card.getRules().getEditionInfo(card.getEdition()).getCopiesCount();
         return CardUtil.buildFilename(nameToUse, card.getEdition(), card.getArtIndex(), maxIndex, false);
     }
