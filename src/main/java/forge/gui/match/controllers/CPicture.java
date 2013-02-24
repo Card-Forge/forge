@@ -83,11 +83,7 @@ public enum CPicture implements ICDoc {
         VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                if (VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard() == null) { return; }
-
-                if (VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().isDoubleFaced()) {
-                    flipCard();
-                }
+                flipCard();
             }
         });
     }
