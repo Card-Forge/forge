@@ -104,18 +104,17 @@ public enum CPicture implements ICDoc {
     /** */
     public void flipCard() {
         flipped = !flipped;
-        Card cd = VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard();
-        if ( null == cd ) return;
+        if ( null == currentCard ) return;
         
-        CardCharacteristicName newState = flipped && cd.isDoubleFaced() ? CardCharacteristicName.Transformed : CardCharacteristicName.Original; 
-        CardCharacteristicName oldState = cd.getCurState();
+        CardCharacteristicName newState = flipped && currentCard.isDoubleFaced() ? CardCharacteristicName.Transformed : CardCharacteristicName.Original; 
+        CardCharacteristicName oldState = currentCard.getCurState();
         if ( oldState != newState ) { 
-            cd.setState(newState);
+            currentCard.setState(newState);
         }
         CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setImage();
         if ( oldState != newState ) {
-            cd.setState(oldState);
+            currentCard.setState(oldState);
         }
     }
 }

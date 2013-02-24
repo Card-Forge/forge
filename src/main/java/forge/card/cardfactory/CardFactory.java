@@ -253,11 +253,13 @@ public class CardFactory {
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
                 c.setState(CardCharacteristicName.Flipped);
+                c.setImageFilename(originalPicture); // should assign a 180 degrees rotated picture here?
             }
-            if (c.isDoubleFaced()) {
+            else if (c.isDoubleFaced()) {
                 c.setState(CardCharacteristicName.Transformed);
+                c.setImageFilename(CardUtil.buildFilename(cp, cp.getRules().getOtherPart().getName()));
             }
-            if (c.getRules().getSplitType() == CardSplitType.Split) {
+            else if (c.getRules().getSplitType() == CardSplitType.Split) {
                 c.setState(CardCharacteristicName.LeftSplit);
                 c.setImageFilename(originalPicture);
                 c.setCurSetCode(cp.getEdition());
@@ -267,6 +269,8 @@ public class CardFactory {
             } else {
                 c.setImageFilename(CardUtil.buildFilename(c));
             }
+            
+
             c.setCurSetCode(cp.getEdition());
             c.setRarity(cp.getRarity());
             c.setState(CardCharacteristicName.Original);

@@ -28,8 +28,6 @@ import javax.swing.JPanel;
 
 import forge.Card;
 import forge.ImageCache;
-import forge.item.CardPrinted;
-import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.view.arcane.ScaledImagePanel;
 
@@ -40,7 +38,7 @@ import forge.view.arcane.ScaledImagePanel;
  * @author Clemens Koza
  * @version V0.0 17.02.2010
  */
-public final class CardPicturePanel extends JPanel implements CardContainer {
+public final class CardPicturePanel extends JPanel {
     /** Constant <code>serialVersionUID=-3160874016387273383L</code>. */
     private static final long serialVersionUID = -3160874016387273383L;
 
@@ -76,7 +74,7 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
         update();
     }
 
-    @Override
+    //@Override
     public void setCard(final Card c) {
         this.displayed = c;
         update();
@@ -98,13 +96,5 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
             this.panel.setImage(image);
             this.panel.repaint();
         }
-    }
-
-    public Card getCard() {
-        if ( displayed instanceof Card )
-            return (Card)displayed;
-        if ( displayed instanceof CardPrinted )
-            return ((IPaperCard)displayed).getMatchingForgeCard();
-        return null;
     }
 }
