@@ -217,7 +217,9 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(final ListSelectionEvent arg0) {
-                EditorTableModel.this.showSelectedCard(table);
+                if (table.isFocusOwner()) {
+                    EditorTableModel.this.showSelectedCard(table);
+                }
             }
         });
         
