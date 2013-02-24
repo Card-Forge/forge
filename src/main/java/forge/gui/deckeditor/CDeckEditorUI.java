@@ -45,7 +45,6 @@ import org.apache.commons.lang.StringUtils;
 
 import com.google.common.primitives.Ints;
 
-import forge.Card;
 import forge.deck.DeckBase;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
@@ -78,13 +77,6 @@ public enum CDeckEditorUI {
     private boolean isFindingAsYouType = false;
 
     private CDeckEditorUI() {
-    }
-
-    //========== Overridden from CardContainer
-
-    public void setCard(final Card c) {
-        CDetail.SINGLETON_INSTANCE.showCard(c);
-        CPicture.SINGLETON_INSTANCE.showCard(c);
     }
 
     /**

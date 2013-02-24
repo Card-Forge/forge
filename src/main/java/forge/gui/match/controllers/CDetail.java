@@ -24,6 +24,7 @@ import forge.Card;
 import forge.Command;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDetail;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 
 /**
@@ -36,21 +37,31 @@ public enum CDetail implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
+    private VDetail view = VDetail.SINGLETON_INSTANCE;
+    //private InventoryItem item = null;
+
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
      * 
      * @param c &emsp; Card object
      */
     public void showCard(final Card c) {
-        VDetail.SINGLETON_INSTANCE.getLblFlipcard().setVisible(c != null && c.isDoubleFaced());
-        VDetail.SINGLETON_INSTANCE.getPnlDetail().setCard(c);
-        VDetail.SINGLETON_INSTANCE.getParentCell().repaintSelf();
+        view.getLblFlipcard().setVisible(c != null && c.isDoubleFaced());
+        view.getPnlDetail().setCard(c);
+        view.getParentCell().repaintSelf();
     }
 
     public void showCard(InventoryItem item) {
-        VDetail.SINGLETON_INSTANCE.getLblFlipcard().setVisible(false);
-        VDetail.SINGLETON_INSTANCE.getPnlDetail().setCard(null);
-        VDetail.SINGLETON_INSTANCE.getParentCell().repaintSelf();
+        if ( item instanceof IPaperCard ) {
+            showCard(((IPaperCard)item).getMatchingForgeCard());
+            return;
+        }
+        
+        // TODO If we want to display an Items Written Text in the Detail Panel we need to add something into CardDetailPanel
+        //this.item = item;
+        view.getLblFlipcard().setVisible(false);
+        view.getPnlDetail().setCard(null);
+        view.getParentCell().repaintSelf();
     }
 
     /* (non-Javadoc)
@@ -66,7 +77,7 @@ public enum CDetail implements ICDoc {
      */
     @Override
     public void initialize() {
-        VDetail.SINGLETON_INSTANCE.getPnlDetail().addMouseListener(new MouseAdapter() {
+        view.getPnlDetail().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 CPicture.SINGLETON_INSTANCE.flipCard();

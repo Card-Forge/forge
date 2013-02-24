@@ -24,6 +24,7 @@ import forge.CardCharacteristicName;
 import forge.Command;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPicture;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 
 /**
@@ -53,6 +54,11 @@ public enum CPicture implements ICDoc {
     }
 
     public void showCard(final InventoryItem item) {
+        if ( item instanceof IPaperCard ) {
+            showCard(((IPaperCard)item).getMatchingForgeCard());
+            return;
+        }
+
         this.currentCard = null;
         VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(false);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(item);
