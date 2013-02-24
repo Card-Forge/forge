@@ -49,7 +49,7 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
     private final ScaledImagePanel panel;
     private BufferedImage currentImage;
 
-    public CardPicturePanel(final Card c) {
+    public CardPicturePanel() {
         super(new BorderLayout());
 
         this.panel = new ScaledImagePanel();
@@ -65,8 +65,6 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
                 CardPicturePanel.this.update();
             }
         });
-
-        this.setCard(c);
     }
 
     public void update() {

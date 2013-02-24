@@ -109,7 +109,7 @@ public class CardListViewer {
         this.list = Collections.unmodifiableList(list);
         this.jList = new JList(new ChooserListModel());
         this.detail = new CardDetailPanel(null);
-        this.picture = new CardPicturePanel(null);
+        this.picture = new CardPicturePanel();
         this.ok = new CloseAction(JOptionPane.OK_OPTION, "OK");
 
         final Object[] options = new Object[] { new JButton(this.ok) };

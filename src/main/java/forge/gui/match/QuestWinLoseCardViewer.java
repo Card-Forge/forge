@@ -62,7 +62,7 @@ public class QuestWinLoseCardViewer extends FPanel {
         this.list = Collections.unmodifiableList(list);
         this.jList = new FList(new ChooserListModel());
         this.detail = new CardDetailPanel(null);
-        this.picture = new CardPicturePanel(null);
+        this.picture = new CardPicturePanel();
         this.scroller = new FScrollPane(this.jList);
 
         this.setCornerDiameter(20);

@@ -180,7 +180,9 @@ public enum VAntes implements IVDoc<CAntes> {
             setLayout(new MigLayout("gap 0, insets 0, wrap"));
             add(new FLabel.Builder().fontSize(14).text(player.getName())
                     .fontAlign(SwingConstants.CENTER).build(), "w 160px, h 20px");
-            add(new CardPicturePanel(c0), "w 160px, h 230px");
+            CardPicturePanel picPanel = new CardPicturePanel();
+            add(picPanel, "w 160px, h 230px");
+            picPanel.setCard(c0);
         }
 
         /** @return {@link forge.game.player.Player} */

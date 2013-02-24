@@ -42,7 +42,7 @@ public enum VPicture implements IVDoc<CPicture> {
     private final DragTab tab = new DragTab("Card Picture");
 
     // Top-level containers
-    private final CardPicturePanel pnlPicture = new CardPicturePanel(null);
+    private final CardPicturePanel pnlPicture = new CardPicturePanel();
     private final JLabel lblFlipcard = new JLabel(
             FSkin.getIcon(FSkin.InterfaceIcons.ICO_FLIPCARD));
 
