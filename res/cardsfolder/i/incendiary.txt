@@ -6,8 +6,8 @@ K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a fuse counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ FUSE | CounterNum$ 1
-T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ When enchanted creature is put into a graveyard, CARDNAME deals X damage to target creature or player, where X is the number of fuse counters on CARDNAME.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Any | Destination$ Graveyard | Execute$ TrigDamage | TriggerDescription$ When enchanted creature dies, CARDNAME deals X damage to target creature or player, where X is the number of fuse counters on CARDNAME.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X
 SVar:X:Count$CardCounters.FUSE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incendiary.jpg

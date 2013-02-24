@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
-T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When a creature is put into a graveyard from the battlefield, destroy enchanted creature.
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When a creature dies, destroy enchanted creature.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Enchanted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yoke_of_the_damned.jpg

@@ -5,8 +5,8 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Pump | Description$ Enchanted creature has "B: This creature gets +1/+1 until end of turn."
-T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When enchanted creature is put into a graveyard, return that card to the battlefield under your control.
-SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When enchanted creature dies, return that card to the battlefield under your control.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
 SVar:Pump:AB$Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shades_form.jpg

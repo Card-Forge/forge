@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
-T:Mode$ ChangesZone | ValidCard$ Creature.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigReturnOwner | TriggerDescription$ When enchanted creature dies, you may return CARDNAME from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
+T:Mode$ ChangesZone | ValidCard$ Creature.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ TrigReturnOwner | TriggerDescription$ When enchanted creature dies, you may return CARDNAME from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
 SVar:TrigReturnOwner:AB$ Pump | Cost$ 0 | RememberObjects$ TriggeredCard | SubAbility$ DBReturnChoose
 SVar:DBReturnChoose:DB$ ChooseCard | Choices$ Creature.sharesCreatureTypeWith Remembered+CanBeEnchantedBy | ChoiceTitle$ Choose a creature shares a creature type with the former enchanted creature | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ChosenCard | SubAbility$ DBCleanup
