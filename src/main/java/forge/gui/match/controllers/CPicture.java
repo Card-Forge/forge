@@ -45,8 +45,10 @@ public enum CPicture implements ICDoc {
      *            &emsp; Card object
      */
     public void showCard(final Card c) {
+        boolean canFlip = c != null && c.isDoubleFaced();
         this.currentCard = c;
-        VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(c != null && c.isDoubleFaced() ? true : false);
+        flipped = canFlip && c.getCurState() == CardCharacteristicName.Transformed; 
+        VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(canFlip);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(c);
     }
 
@@ -99,16 +101,19 @@ public enum CPicture implements ICDoc {
 
     /** */
     public void flipCard() {
-        if (flipped) {
-            flipped = false;
-            VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().setState(CardCharacteristicName.Original);
-            CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
+        flipped = !flipped;
+        Card cd = VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard();
+        if ( null == cd ) return;
+        
+        CardCharacteristicName newState = flipped && cd.isDoubleFaced() ? CardCharacteristicName.Transformed : CardCharacteristicName.Original; 
+        CardCharacteristicName oldState = cd.getCurState();
+        if ( oldState != newState ) { 
+            cd.setState(newState);
         }
-        else {
-            flipped = true;
-            VPicture.SINGLETON_INSTANCE.getPnlPicture().getCard().setState(CardCharacteristicName.Transformed);
-            CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
-        }
+        CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setImage();
+        if ( oldState != newState ) {
+            cd.setState(oldState);
+        }
     }
 }

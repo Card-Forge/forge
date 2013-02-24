@@ -102,7 +102,6 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
         }
     }
 
-    @Override
     public Card getCard() {
         if ( displayed instanceof Card )
             return (Card)displayed;

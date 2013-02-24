@@ -52,13 +52,11 @@ import forge.gui.toolbox.FTextArea;
  * @author Clemens Koza
  * @version V0.0 17.02.2010
  */
-public class CardDetailPanel extends FPanel implements CardContainer {
+public class CardDetailPanel extends FPanel {
     /** Constant <code>serialVersionUID=-8461473263764812323L</code>. */
     private static final long serialVersionUID = -8461473263764812323L;
 
     private static Color purple = new Color(14381203);
-
-    private Card card;
 
     private final FLabel nameCostLabel;
     private final FLabel typeLabel;
@@ -157,7 +155,6 @@ public class CardDetailPanel extends FPanel implements CardContainer {
     }
 
     /** {@inheritDoc} */
-    @Override
     public final void setCard(final Card card) {
         this.nameCostLabel.setText("");
         this.typeLabel.setText("");
@@ -170,11 +167,9 @@ public class CardDetailPanel extends FPanel implements CardContainer {
         this.cdArea.setText("");
         this.setBorder(GuiDisplayUtil.getBorder(card));
 
-        this.card = card;
-        if (card == null) {
+        if ( null == card )
             return;
-        }
-
+            
         final boolean canShowThis = card.canBeShownTo(Singletons.getControl().getPlayer());
         if (canShowThis) {
             if (card.getManaCost().toString().equals("") || card.isLand()) {
@@ -506,18 +501,6 @@ public class CardDetailPanel extends FPanel implements CardContainer {
             area.append("Must block an attacker");
         }
         return area.toString();
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>card</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    @Override
-    public final Card getCard() {
-        return this.card;
     }
 
     /** @return JLabel */

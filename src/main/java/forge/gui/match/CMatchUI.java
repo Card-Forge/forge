@@ -31,7 +31,6 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.gui.CardContainer;
 import forge.gui.framework.EDocID;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CMessage;
@@ -54,7 +53,7 @@ import forge.properties.NewConstants;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CMatchUI implements CardContainer {
+public enum CMatchUI {
     /** */
     SINGLETON_INSTANCE;
 
@@ -125,7 +124,7 @@ public enum CMatchUI implements CardContainer {
         newHand.getLayoutControl().initialize();
         hands.add(newHand);
 
-// Max: 2+ hand are needed at 2HG (but this is quite far now) - yet it's nice to have this possibility
+// Max: 2+ hands are needed at 2HG (but this is quite far from now) - yet it's nice to have this possibility
 //        for (int i = 0; i < numHandPanels; i++) {
 //            switch (i) {
 //                    hands.add(i, new VHand(EDocID.valueOf("HAND_" + i), null));
@@ -234,7 +233,6 @@ public enum CMatchUI implements CardContainer {
         return true;
     }
 
-    @Override
     public void setCard(final Card c) {
         CDetail.SINGLETON_INSTANCE.showCard(c);
         CPicture.SINGLETON_INSTANCE.showCard(c);
@@ -243,10 +241,5 @@ public enum CMatchUI implements CardContainer {
     public void setCard(final InventoryItem c) {
         CDetail.SINGLETON_INSTANCE.showCard(c);
         CPicture.SINGLETON_INSTANCE.showCard(c);
-    }
-
-    @Override
-    public Card getCard() {
-        return CDetail.SINGLETON_INSTANCE.getCurrentCard();
     }
 }

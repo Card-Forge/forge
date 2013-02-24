@@ -47,7 +47,6 @@ import com.google.common.primitives.Ints;
 
 import forge.Card;
 import forge.deck.DeckBase;
-import forge.gui.CardContainer;
 import forge.gui.GuiUtils;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
@@ -71,7 +70,7 @@ import forge.item.InventoryItem;
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
-public enum CDeckEditorUI implements CardContainer {
+public enum CDeckEditorUI {
     /** */
     SINGLETON_INSTANCE;
 
@@ -83,15 +82,9 @@ public enum CDeckEditorUI implements CardContainer {
 
     //========== Overridden from CardContainer
 
-    @Override
     public void setCard(final Card c) {
         CDetail.SINGLETON_INSTANCE.showCard(c);
         CPicture.SINGLETON_INSTANCE.showCard(c);
-    }
-
-    @Override
-    public Card getCard() {
-        return CDetail.SINGLETON_INSTANCE.getCurrentCard();
     }
 
     /**

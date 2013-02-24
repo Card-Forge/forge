@@ -612,7 +612,6 @@ public class CardPanel extends JPanel implements CardContainer {
      * 
      * @return a {@link forge.Card} object.
      */
-    @Override
     public final Card getCard() {
         return this.getGameCard();
     }
