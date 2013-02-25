@@ -2,9 +2,10 @@ Name:Purelace
 ManaCost:W
 Types:Instant
 A:SP$ Animate | Cost$ W | Colors$ White | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Permanent$ True | SpellDescription$ Target spell or permanent becomes white. (Mana symbols on that permanent remain unchanged.)
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purelace.jpg
-SVar:RemAIDeck:True
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/216.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/218.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/216.jpg

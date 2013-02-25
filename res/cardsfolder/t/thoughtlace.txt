@@ -2,9 +2,10 @@ Name:Thoughtlace
 ManaCost:U
 Types:Instant
 A:SP$ Animate | Cost$ U | Colors$ Blue | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Permanent$ True | SpellDescription$ Target spell or permanent becomes blue. (Mana symbols on that permanent remain unchanged.)
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtlace.jpg
-SVar:RemAIDeck:True
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/83.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/83.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/85.jpg

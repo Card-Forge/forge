@@ -5,7 +5,6 @@ Text:no text
 PT:3/3
 A:AB$ ChooseColor | Cost$ 1 U | Defined$ You | SubAbility$ Animate | SpellDescription$ Target spell or permanent becomes the color of your choice until end of turn.
 SVar:Animate:DB$ Animate | ValidTgts$ Card | TgtPrompt$ Select target spell or permanent to change the color of | TgtZone$ Stack,Battlefield | Colors$ ChosenColor | OverwriteColors$ True
-SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_seer.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/47.jpg

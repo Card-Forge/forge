@@ -12,6 +12,8 @@ SVar:DBReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsImprinted | Origin$ Exile |
 SVar:DBGoYard:DB$ ChangeZoneAll | ChangeType$ Card.IsNotImprinted+IsRemembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Count$ValidHand Card.IsRemembered
+SVar:NeedsToPlayVar:Y GE2
+SVar:Y:Count$InOppHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/struggle_for_sanity.jpg
 Oracle:Target opponent reveals his or her hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards he or she exiled this way to his or her hand and puts the rest into his or her graveyard.
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/145.jpg
