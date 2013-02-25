@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.CardType;
@@ -102,19 +105,19 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                                 if (logic.equals("MostProminentOnBattlefield")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
                                 }
-                                if (logic.equals("MostProminentComputerControls")) {
+                                else if (logic.equals("MostProminentComputerControls")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Battlefield));
                                 }
-                                if (logic.equals("MostProminentHumanControls")) {
+                                else if (logic.equals("MostProminentHumanControls")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(opp.getCardsIn(ZoneType.Battlefield));
                                     if (!CardType.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
                                         chosen = CardFactoryUtil.getMostProminentCreatureType(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), opp));
                                     }
                                 }
-                                if (logic.equals("MostProminentInComputerDeck")) {
+                                else if (logic.equals("MostProminentInComputerDeck")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), ai));
                                 }
-                                if (logic.equals("MostProminentInComputerGraveyard")) {
+                                else if (logic.equals("MostProminentInComputerGraveyard")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Graveyard));
                                 }
                             }
@@ -143,8 +146,38 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                                 card.setChosenType(choice);
                             }
                         } else {
-                            // TODO AttachAI for ChosenType should have the exact same logic
-                            card.setChosenType("Island");
+                            Player ai = sa.getActivatingPlayer();
+                            String chosen = "";
+                            if (sa.hasParam("AILogic")) {
+                                final String logic = sa.getParam("AILogic");
+                                if (logic.equals("MostNeededType")) {
+                                    // Choose a type that is in the deck, but not in hand or on the battlefield 
+                                    final ArrayList<String> basics = new ArrayList<String>();
+                                    basics.addAll(Constant.CardTypes.BASIC_TYPES);
+                                    List<Card> presentCards = ai.getCardsIn(ZoneType.Battlefield);
+                                    presentCards.addAll(ai.getCardsIn(ZoneType.Hand));
+                                    List<Card> possibleCards = ai.getAllCards();
+                                    
+                                    for (String b : basics) {
+                                        if(!Iterables.any(presentCards, CardPredicates.isType(b)) && Iterables.any(possibleCards, CardPredicates.isType(b))) {
+                                            chosen = b;
+                                        }
+                                    }
+                                    if (chosen.equals("")) {
+                                        for (String b : basics) {
+                                            if(Iterables.any(possibleCards, CardPredicates.isType(b))) {
+                                                chosen = b;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (!CardType.isABasicLandType(chosen) || invalidTypes.contains(chosen)) {
+                                chosen = "Island";
+                            }
+                            GuiChoose.one("Computer picked: ", new String[]{chosen});
+                            card.setChosenType(chosen);
                             valid = true;
                         }
                     }
