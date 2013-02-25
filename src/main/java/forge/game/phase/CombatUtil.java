@@ -36,6 +36,7 @@ import forge.Command;
 import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -1254,6 +1255,7 @@ public class CombatUtil {
                 final Ability ability = new Ability(c, ManaCost.ZERO) {
                     @Override
                     public void resolve() {
+                        this.api = ApiType.Sacrifice;
                         final Player opponent = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(c);
                         //List<Card> list = AbilityUtils.filterListByType(opponent.getCardsIn(ZoneType.Battlefield), "Permanent", this);
                         final List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);

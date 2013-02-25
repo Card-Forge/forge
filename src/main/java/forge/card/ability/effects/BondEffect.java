@@ -6,10 +6,8 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
 
 public class BondEffect extends SpellAbilityEffect {
     @Override
@@ -32,15 +30,7 @@ public class BondEffect extends SpellAbilityEffect {
         Card partner = cards.get(0);
         // skip choice if only one card on list
         if (cards.size() > 1) {
-            if (sa.getActivatingPlayer().isHuman()) {
-                Card o = GuiChoose.one("Select a card to pair with", cards);
-                if (o != null) {
-                    partner = o;
-                }
-            } else {
-                // TODO - Pick best creature instead of just the first on the list
-                partner = CardFactoryUtil.getBestCreatureAI(cards);
-            }
+            sa.getActivatingPlayer().getController().chooseSingleCardForEffect(cards, sa, "Select a card to pair with");
         }
 
         // pair choices together

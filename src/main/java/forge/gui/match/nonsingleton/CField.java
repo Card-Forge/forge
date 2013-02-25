@@ -426,7 +426,7 @@ public class CField implements ICDoc {
                     Singletons.getModel().getGame().getCombat().removeFromCombat(c);
                     CombatUtil.showCombat();
                 } else if (input instanceof InputBlock) {
-                    if (c.getController().isHuman()) {
+                    if (c.getController() == Singletons.getControl().getPlayer() ) {
                         Singletons.getModel().getGame().getCombat().removeFromCombat(c);
                     }
                     ((InputBlock) input).removeFromAllBlocking(c);

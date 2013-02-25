@@ -91,4 +91,7 @@ public abstract class PlayerController {
     public abstract String announceRequirements(SpellAbility ability, String announce);
 
     public abstract List<Card> choosePermanentsToSacrifice(List<Card> validTargets, int amount, SpellAbility sa, boolean destroy, boolean isOptional);
+
+    public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title); }
+    public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);
 }

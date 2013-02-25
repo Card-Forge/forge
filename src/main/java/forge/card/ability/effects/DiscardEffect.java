@@ -90,68 +90,66 @@ public class DiscardEffect extends RevealEffectBase {
         final Card source = sa.getSourceCard();
         List<Card> dPChHand = new ArrayList<Card>(victim.getCardsIn(ZoneType.Hand));
         dPChHand = CardLists.getValidCards(dPChHand, dValid, source.getController(), source);
-        final List<Card> discarded = new ArrayList<Card>();
+        final List<Card> toDiscard = new ArrayList<Card>();
 
-        if (victim.isComputer()) { // discard AI cards
-            int max = dPChHand.size();
-            max = Math.min(max, numCards);
-            List<Card> list = ((AIPlayer) victim).getAi().getCardsToDiscard(max, dValid, sa);
-            if (isReveal) {
-                GuiChoose.oneOrNone("Computer has chosen", list);
-            }
-            if (list != null) {
-                discarded.addAll(list);
-                for (Card card : list) {
-                    victim.discard(card, sa);
-                }
-            }
-            return discarded;
-        }
-
-        // discard human cards
-        for (int i = 0; i < numCards; i++) {
-            if (dPChHand.size() > 0) {
-                List<Card> goodChoices = CardLists.filter(dPChHand, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        if (!c.getSVar("DiscardMeByOpp").equals("") || !c.getSVar("DiscardMe").equals("")) {
-                            return false;
-                        }
-                        return true;
-                    }
-                });
-                if (goodChoices.isEmpty()) {
-                    goodChoices = dPChHand;
-                }
-                final List<Card> dChoices = new ArrayList<Card>();
-                if (sa.hasParam("DiscardValid")) {
-                    final String validString = sa.getParam("DiscardValid");
-                    if (validString.contains("Creature") && !validString.contains("nonCreature")) {
-                        final Card c = CardFactoryUtil.getBestCreatureAI(goodChoices);
-                        if (c != null) {
-                            dChoices.add(CardFactoryUtil.getBestCreatureAI(goodChoices));
-                        }
-                    }
-                }
-
-                Collections.sort(goodChoices, CardLists.TextLenReverseComparator);
-
-                CardLists.sortCMC(goodChoices);
-                dChoices.add(goodChoices.get(0));
-
-                final Card dC = Aggregates.random(goodChoices);
+        int max = Math.min(dPChHand.size(), numCards);
+        List<Card> list = new ArrayList<Card>();
+        
+        if (!victim.isOpponentOf(chooser) && victim instanceof AIPlayer) { // discard AI cards
+            list = ((AIPlayer) victim).getAi().getCardsToDiscard(max, dValid, sa);
+        } else {
+            // discard hostile or human opponent
+            for (int i = 0; i < max; i++) {
+                Card dC = chooseCardToDiscardFromOpponent(sa, dPChHand);
                 dPChHand.remove(dC);
-
-                if (isReveal) {
-                    final List<Card> dCs = new ArrayList<Card>();
-                    dCs.add(dC);
-                    GuiChoose.oneOrNone("Computer has chosen", dCs);
-                }
-                discarded.add(dC);
-                victim.discard(dC, sa);
+                list.add(dC);
             }
         }
-        return discarded;
+        
+        if (isReveal) {
+            GuiChoose.oneOrNone("Computer has chosen", list);
+        }
+        
+        return toDiscard;
+
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param sa
+     * @param opponentHand
+     * @param list
+     */
+    private Card chooseCardToDiscardFromOpponent(SpellAbility sa, List<Card> opponentHand) {
+        List<Card> goodChoices = CardLists.filter(opponentHand, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                if (!c.getSVar("DiscardMeByOpp").equals("") || !c.getSVar("DiscardMe").equals("")) {
+                    return false;
+                }
+                return true;
+            }
+        });
+        if (goodChoices.isEmpty()) {
+            goodChoices = opponentHand;
+        }
+        final List<Card> dChoices = new ArrayList<Card>();
+        if (sa.hasParam("DiscardValid")) {
+            final String validString = sa.getParam("DiscardValid");
+            if (validString.contains("Creature") && !validString.contains("nonCreature")) {
+                final Card c = CardFactoryUtil.getBestCreatureAI(goodChoices);
+                if (c != null) {
+                    dChoices.add(CardFactoryUtil.getBestCreatureAI(goodChoices));
+                }
+            }
+        }
+
+        Collections.sort(goodChoices, CardLists.TextLenReverseComparator);
+
+        CardLists.sortCMC(goodChoices);
+        dChoices.add(goodChoices.get(0));
+
+        return Aggregates.random(goodChoices);
     }
 
     @Override
@@ -275,34 +273,47 @@ public class DiscardEffect extends RevealEffectBase {
                             chooser = source.getController().getOpponent();
                         }
 
+                        List<Card> toBeDiscarded = new ArrayList<Card>(); 
                         if (chooser.isComputer()) {
-                            discarded.addAll(discardComputerChooses(sa, p, chooser, numCards, dValid, mode.startsWith("Reveal")));
+                            toBeDiscarded = discardComputerChooses(sa, p, chooser, numCards, dValid, mode.startsWith("Reveal"));
                         } else {
                             // human
                             if (mode.startsWith("Reveal")) {
                                 GuiChoose.oneOrNone("Revealed " + p + "  hand", dPHand);
                             }
 
-                            for (int i = 0; i < numCards; i++) {
-                                if (dPChHand.size() > 0) {
-                                    Card dC = null;
-                                    if (sa.hasParam("AnyNumber")) {
-                                        dPChHand = getDiscardedList(p, dPChHand, dPChHand.size(), true);
-                                        for (Card c : dPChHand) {
-                                            discarded.add(c);
-                                            p.discard(c, sa);
-                                        }
-                                    }
-                                    else if (sa.hasParam("Optional")) {
-                                        dC = GuiChoose.oneOrNone("Choose a card to be discarded", dPChHand);
-                                    } else {
-                                        dC = GuiChoose.one("Choose a card to be discarded", dPChHand);
-                                    } if (dC != null) {
-                                        dPChHand.remove(dC);
-                                        discarded.add(dC);
-                                        p.discard(dC, sa);
-                                    }
+                            if (sa.hasParam("AnyNumber")) {
+                                List<Card> chosen = getDiscardedList(p, dPChHand, dPChHand.size(), true);
+
+                                for (Card c : chosen) {
+                                    dPChHand.remove(chosen);
+                                    toBeDiscarded.add(c);
                                 }
+                            } else 
+                                for (int i = 0; i < numCards; i++) {
+                                if (dPChHand.isEmpty()) {
+                                    break;
+                                }
+                                Card dC = null;
+                                if (sa.hasParam("Optional")) {
+                                    dC = GuiChoose.oneOrNone("Choose a card to be discarded", dPChHand);
+                                } else {
+                                    dC = GuiChoose.one("Choose a card to be discarded", dPChHand);
+                                } 
+                                
+                                if (dC != null) {
+                                    dPChHand.remove(dC);
+                                    toBeDiscarded.add(dC);
+                                }
+                                else break;
+                            }
+                        }
+
+                        if (toBeDiscarded != null) {
+                            for (Card card : toBeDiscarded) {
+                                if ( null == card ) continue;
+                                p.discard(card, sa);
+                                discarded.add(card);
                             }
                         }
                     }
