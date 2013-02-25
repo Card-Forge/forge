@@ -1,0 +1,14 @@
+Name:Thoughtlace
+ManaCost:U
+Types:Instant
+A:SP$ Animate | Cost$ U | Colors$ Blue | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Permanent$ True | SpellDescription$ Target spell or permanent becomes blue. (Mana symbols on that permanent remain unchanged.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtlace.jpg
+SVar:RemAIDeck:True
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/83.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/83.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/85.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/107.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/83.jpg
+Oracle:Target spell or permanent becomes blue. (Mana symbols on that permanent remain unchanged.)
+End

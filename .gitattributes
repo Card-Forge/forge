@@ -1650,6 +1650,7 @@ res/cardsfolder/c/chaos_harlequin.txt -text
 res/cardsfolder/c/chaos_imps.txt -text
 res/cardsfolder/c/chaos_lord.txt -text
 res/cardsfolder/c/chaos_warp.txt svneol=native#text/plain
+res/cardsfolder/c/chaoslace.txt -text
 res/cardsfolder/c/chaosphere.txt svneol=native#text/plain
 res/cardsfolder/c/chaotic_aether.txt -text
 res/cardsfolder/c/chaotic_backlash.txt -text
@@ -5964,6 +5965,7 @@ res/cardsfolder/l/life_matrix.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lifeblood.txt svneol=native#text/plain
 res/cardsfolder/l/lifeforce.txt svneol=native#text/plain
 res/cardsfolder/l/lifegift.txt svneol=native#text/plain
+res/cardsfolder/l/lifelace.txt -text
 res/cardsfolder/l/lifeline.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lifelink.txt svneol=native#text/plain
 res/cardsfolder/l/lifes_finale.txt svneol=native#text/plain
@@ -6771,6 +6773,7 @@ res/cardsfolder/m/moonglove_changeling.txt svneol=native#text/plain
 res/cardsfolder/m/moonglove_extract.txt svneol=native#text/plain
 res/cardsfolder/m/moonglove_winnower.txt svneol=native#text/plain
 res/cardsfolder/m/moonhold.txt -text
+res/cardsfolder/m/moonlace.txt -text
 res/cardsfolder/m/moonlight_geist.txt -text
 res/cardsfolder/m/moonlit_strider.txt svneol=native#text/plain
 res/cardsfolder/m/moonlit_wake.txt svneol=native#text/plain
@@ -8014,6 +8017,7 @@ res/cardsfolder/p/puppeteer_clique.txt svneol=native#text/plain
 res/cardsfolder/p/puppets_verdict.txt -text
 res/cardsfolder/p/pure_intentions.txt -text svneol=unset#text/plain
 res/cardsfolder/p/pure_reflection.txt -text
+res/cardsfolder/p/purelace.txt -text
 res/cardsfolder/p/puresight_merrow.txt svneol=native#text/plain
 res/cardsfolder/p/puresteel_paladin.txt -text
 res/cardsfolder/p/purgatory.txt -text
@@ -10796,6 +10800,7 @@ res/cardsfolder/t/thoughtbind.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtcast.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtcutter_agent.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtflare.txt -text
+res/cardsfolder/t/thoughtlace.txt -text
 res/cardsfolder/t/thoughtleech.txt svneol=native#text/plain
 res/cardsfolder/t/thoughtpicker_witch.txt svneol=native#text/plain
 res/cardsfolder/t/thoughts_of_ruin.txt -text

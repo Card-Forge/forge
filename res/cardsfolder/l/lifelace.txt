@@ -1,0 +1,14 @@
+Name:Lifelace
+ManaCost:G
+Types:Instant
+A:SP$ Animate | Cost$ G | Colors$ Green | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Permanent$ True | SpellDescription$ Target spell or permanent becomes green. (Mana symbols on that permanent remain unchanged.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lifelace.jpg
+SVar:RemAIDeck:True
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/116.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/116.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/115.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/142.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/116.jpg
+Oracle:Target spell or permanent becomes green. (Mana symbols on that permanent remain unchanged.)
+End
