@@ -1,0 +1,13 @@
+Name:Eight-and-a-Half-Tails
+ManaCost:W W
+Types:Legendary Creature Fox Cleric
+Text:no text
+PT:2/2
+A:AB$ Protection | Cost$ 1 W | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Gains$ white | SpellDescription$ Target permanent you control gains protection from white until end of turn.
+A:AB$ Animate | Cost$ 1 | Colors$ White | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | SpellDescription$ Target spell or permanent becomes white until end of turn.
+SVar:RemAIDeck:True
+DeckHints:Name$Pious Kitsune
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eight_and_a_half_tails.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/8.jpg
+Oracle:{1}{W}: Target permanent you control gains protection from white until end of turn.\n{1}: Target spell or permanent becomes white until end of turn.
+End
