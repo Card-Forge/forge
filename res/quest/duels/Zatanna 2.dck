@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Zatanna 2
+Title=Zatanna
+Difficulty=medium
+Description=Mono U non-creature deck
+Icon=Zatanna.jpg
+Deck Type=constructed
+[main]
+23 Island
+1 Mishra's Factory
+2 Chimeric Egg
+4 Razortip Whip
+3 Decimator Web
+2 AEther Barrier
+3 Invoke Prejudice
+1 Jace Beleren
+4 Negate
+1 Overburden
+2 Pendrell Mists
+1 Repulse
+1 Silent Departure
+4 Spell Pierce
+4 Sunken Hope
+4 Vapor Snag
+[sideboard]
