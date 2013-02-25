@@ -17,7 +17,6 @@ import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
@@ -748,7 +747,7 @@ public class ComputerUtilMana {
                     }
                 }
                 // check if combo mana can produce most common color in hand
-                String commonColor = CardFactoryUtil.getMostProminentColor(ai.getCardsIn(
+                String commonColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(
                         ZoneType.Hand));
                 if (!commonColor.isEmpty() && abMana.getComboColors().contains(MagicColor.toShortString(commonColor))) {
                     choice = MagicColor.toShortString(commonColor);

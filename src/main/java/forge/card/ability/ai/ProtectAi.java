@@ -11,11 +11,11 @@ import forge.Constant;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameState;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -86,7 +86,7 @@ public class ProtectAi extends SpellAbilityAi {
                 // will the creature attack (only relevant for sorcery speed)?
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && game.getPhaseHandler().isPlayerTurn(ai)
-                        && CardFactoryUtil.doesCreatureAttackAI(ai, c)) {
+                        && ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
                     return true;
                 }
 
@@ -241,7 +241,7 @@ public class ProtectAi extends SpellAbilityAi {
                 }
             }
 
-            t = CardFactoryUtil.getBestCreatureAI(list);
+            t = ComputerUtilCard.getBestCreatureAI(list);
             tgt.addTarget(t);
             list.remove(t);
         }
@@ -290,9 +290,9 @@ public class ProtectAi extends SpellAbilityAi {
 
             Card c;
             if (CardLists.getNotType(pref, "Creature").size() == 0) {
-                c = CardFactoryUtil.getBestCreatureAI(pref);
+                c = ComputerUtilCard.getBestCreatureAI(pref);
             } else {
-                c = CardFactoryUtil.getMostExpensivePermanentAI(pref, sa, true);
+                c = ComputerUtilCard.getMostExpensivePermanentAI(pref, sa, true);
             }
 
             pref.remove(c);
@@ -307,9 +307,9 @@ public class ProtectAi extends SpellAbilityAi {
 
             Card c;
             if (CardLists.getNotType(pref2, "Creature").size() == 0) {
-                c = CardFactoryUtil.getBestCreatureAI(pref2);
+                c = ComputerUtilCard.getBestCreatureAI(pref2);
             } else {
-                c = CardFactoryUtil.getMostExpensivePermanentAI(pref2, sa, true);
+                c = ComputerUtilCard.getMostExpensivePermanentAI(pref2, sa, true);
             }
 
             pref2.remove(c);
@@ -324,9 +324,9 @@ public class ProtectAi extends SpellAbilityAi {
 
             Card c;
             if (CardLists.getNotType(forced, "Creature").size() == 0) {
-                c = CardFactoryUtil.getWorstCreatureAI(forced);
+                c = ComputerUtilCard.getWorstCreatureAI(forced);
             } else {
-                c = CardFactoryUtil.getCheapestPermanentAI(forced, sa, true);
+                c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, true);
             }
 
             forced.remove(c);

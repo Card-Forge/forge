@@ -596,7 +596,7 @@ public class AiController {
                     discardList.add(hand.get(0));
                     hand.remove(hand.get(0));
                 } else { //Discard worst card
-                    Card worst = CardFactoryUtil.getWorstAI(hand);
+                    Card worst = ComputerUtilCard.getWorstAI(hand);
                     discardList.add(worst);
                     hand.remove(worst);
                 }
@@ -606,14 +606,64 @@ public class AiController {
         return discardList;
     }
 
+    // These methods might be moved into matching SpellAbilityAi classes just without all these switches here
     public Card chooseSingleCardForEffect(List<Card> options, SpellAbility sa, String title, boolean isOptional) {
         ApiType api = sa.getApi();
         if ( null == api ) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        
+
+        Card choice = null;
+        Card host = sa.getSourceCard();
+        String logic = sa.getParam("AILogic");
+
         switch(api) {
-            case Bond: return CardFactoryUtil.getBestCreatureAI(options);
+            case Bond: 
+                return ComputerUtilCard.getBestCreatureAI(options);
+                
+            case ChooseCard:
+                if (logic == null) {
+                    // Base Logic is choose "best"
+                    choice = ComputerUtilCard.getBestAI(options);
+                } else if ("WorstCard".equals(logic)) {
+                    choice = ComputerUtilCard.getWorstAI(options);
+                } else if (logic.equals("BestBlocker")) {
+                    if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
+                        options = CardLists.filter(options, Presets.UNTAPPED);
+                    }
+                    choice = ComputerUtilCard.getBestCreatureAI(options);
+                } else if (logic.equals("Clone")) {
+                    if (!CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host).isEmpty()) {
+                        options = CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
+                    }
+                    choice = ComputerUtilCard.getBestAI(options);
+                } else if (logic.equals("Untap")) {
+                    if (!CardLists.getValidCards(options, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host).isEmpty()) {
+                        options = CardLists.getValidCards(options, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host);
+                    }
+                    choice = ComputerUtilCard.getBestAI(options);
+                }
+                return choice;
+            
+            case Encode:
+                if (logic == null) {
+                    // Base Logic is choose "best"
+                    choice = ComputerUtilCard.getBestAI(options);
+                } else if ("WorstCard".equals(logic)) {
+                    choice = ComputerUtilCard.getWorstAI(options);
+                } else if (logic.equals("BestBlocker")) {
+                    if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
+                        options = CardLists.filter(options, Presets.UNTAPPED);
+                    }
+                    choice = ComputerUtilCard.getBestCreatureAI(options);
+                } else if (logic.equals("Clone")) {
+                    if (!CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host).isEmpty()) {
+                        options = CardLists.getValidCards(options, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
+                    }
+                    choice = ComputerUtilCard.getBestAI(options);
+                }
+                return choice;
+                
             default: throw new InvalidParameterException("AI chooseSingleCard does not know how to choose card for " + api);
         }
     }
@@ -627,11 +677,14 @@ public class AiController {
         
         switch(api) {
             case Discard:
-                if ( mode.equals("Random") ) { //
+                if ( mode.startsWith("Random") ) { //
                     // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
                     return true;
                 }
             break;
+            
+            case Encode:
+                return true;
                 
             default: 
         }

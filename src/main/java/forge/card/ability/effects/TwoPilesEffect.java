@@ -9,10 +9,10 @@ import forge.CardLists;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -221,11 +221,11 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     break;
                 }
             } else {
-                int cmc1 = CardFactoryUtil.evaluatePermanentList(new ArrayList<Card>(pile1));
-                int cmc2 = CardFactoryUtil.evaluatePermanentList(new ArrayList<Card>(pile2));
+                int cmc1 = ComputerUtilCard.evaluatePermanentList(new ArrayList<Card>(pile1));
+                int cmc2 = ComputerUtilCard.evaluatePermanentList(new ArrayList<Card>(pile2));
                 if (CardLists.getNotType(pool, "Creature").isEmpty()) {
-                    cmc1 = CardFactoryUtil.evaluateCreatureList(new ArrayList<Card>(pile1));
-                    cmc2 = CardFactoryUtil.evaluateCreatureList(new ArrayList<Card>(pile2));
+                    cmc1 = ComputerUtilCard.evaluateCreatureList(new ArrayList<Card>(pile1));
+                    cmc2 = ComputerUtilCard.evaluateCreatureList(new ArrayList<Card>(pile2));
                     System.out.println("value:" + cmc1 + " " + cmc2);
                 }
 

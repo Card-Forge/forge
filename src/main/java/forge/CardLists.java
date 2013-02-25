@@ -27,8 +27,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -74,13 +74,6 @@ public class CardLists {
             return b.getNetCombatDamage() - a.getNetCombatDamage();
         }
     };
-    public static final Comparator<Card> EvaluateCreatureComparator = new Comparator<Card>() {
-        @Override
-        public int compare(final Card a, final Card b) {
-            return CardFactoryUtil.evaluateCreature(b) - CardFactoryUtil.evaluateCreature(a);
-        }
-    };
-
     public static final Comparator<Card> CmcComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
@@ -131,7 +124,7 @@ public class CardLists {
      *            a {@link forge.CardList} object.
      */
     public static void sortByEvaluateCreature(final List<Card> list) {
-        Collections.sort(list, EvaluateCreatureComparator);
+        Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
     } // sortByEvaluateCreature()
 
     /**

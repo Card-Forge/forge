@@ -8,9 +8,9 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -103,9 +103,9 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                 else {
                     if (type.equals("M1M1")) {
-                        choice = CardFactoryUtil.getWorstCreatureAI(list);
+                        choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        choice = CardFactoryUtil.getRandomCard(list);
+                        choice = ComputerUtilCard.getRandomCard(list);
                     }
                 }
             } else {
@@ -115,9 +115,9 @@ public class CountersMoveAi extends SpellAbilityAi {
 
                 else {
                     if (type.equals("P1P1")) {
-                        choice = CardFactoryUtil.getWorstCreatureAI(list);
+                        choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        choice = CardFactoryUtil.getRandomCard(list);
+                        choice = ComputerUtilCard.getRandomCard(list);
                     }
                 }
             }

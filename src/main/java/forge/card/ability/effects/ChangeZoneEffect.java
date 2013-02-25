@@ -13,11 +13,11 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.ability.ai.ChangeZoneAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -403,7 +403,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                                         attachedTo = list.get(0);
                                     }
                                 } else { // AI player
-                                    attachedTo = CardFactoryUtil.getBestAI(list);
+                                    attachedTo = ComputerUtilCard.getBestAI(list);
                                 }
                                 if (tgtC.isAura()) {
                                     if (tgtC.isEnchanting()) {

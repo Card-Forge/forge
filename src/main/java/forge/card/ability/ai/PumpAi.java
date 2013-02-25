@@ -11,13 +11,13 @@ import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
@@ -259,7 +259,7 @@ public class PumpAi extends PumpAiBase {
                 }
             }
 
-            t = CardFactoryUtil.getBestAI(list);
+            t = ComputerUtilCard.getBestAI(list);
             tgt.addTarget(t);
             list.remove(t);
         }
@@ -303,9 +303,9 @@ public class PumpAi extends PumpAiBase {
 
             Card c;
             if (CardLists.getNotType(pref, "Creature").size() == 0) {
-                c = CardFactoryUtil.getBestCreatureAI(pref);
+                c = ComputerUtilCard.getBestCreatureAI(pref);
             } else {
-                c = CardFactoryUtil.getMostExpensivePermanentAI(pref, sa, true);
+                c = ComputerUtilCard.getMostExpensivePermanentAI(pref, sa, true);
             }
 
             pref.remove(c);
@@ -320,9 +320,9 @@ public class PumpAi extends PumpAiBase {
 
             Card c;
             if (CardLists.getNotType(forced, "Creature").size() == 0) {
-                c = CardFactoryUtil.getWorstCreatureAI(forced);
+                c = ComputerUtilCard.getWorstCreatureAI(forced);
             } else {
-                c = CardFactoryUtil.getCheapestPermanentAI(forced, sa, true);
+                c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, true);
             }
 
             forced.remove(c);

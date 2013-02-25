@@ -50,6 +50,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
 import forge.control.input.InputSelectManyCards;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -190,7 +191,7 @@ public class CardFactoryCreatures {
                 }
 
                 this.getTarget().resetTargets();
-                this.setTargetCard(CardFactoryUtil.getBestCreatureAI(targetables));
+                this.setTargetCard(ComputerUtilCard.getBestCreatureAI(targetables));
 
                 return true;
             }
@@ -262,7 +263,7 @@ public class CardFactoryCreatures {
 
                         // Kill Wolves that can be killed first
                         if (wolvesLeft.size() > 0) {
-                            final Card best = CardFactoryUtil.getBestCreatureAI(wolvesLeft);
+                            final Card best = ComputerUtilCard.getBestCreatureAI(wolvesLeft);
                             best.addDamage(1, target);
                             if ((ComputerUtilCombat.getDamageToKill(best) <= 0) || target.hasKeyword("Deathtouch")) {
                                 wolvesLeft.remove(best);

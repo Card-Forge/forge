@@ -8,10 +8,10 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
@@ -60,13 +60,13 @@ public class DestroyAllAi extends SpellAbilityAi {
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
         if ((CardLists.getNotType(humanlist, "Creature").size() == 0) && (CardLists.getNotType(computerlist, "Creature").size() == 0)) {
-            if (CardFactoryUtil.evaluateCreatureList(computerlist) >= CardFactoryUtil.evaluateCreatureList(humanlist)
+            if (ComputerUtilCard.evaluateCreatureList(computerlist) >= ComputerUtilCard.evaluateCreatureList(humanlist)
                     && !computerlist.isEmpty()) {
                 return false;
             }
         } // otherwise evaluate both lists by CMC and pass only if human
           // permanents are more valuable
-        else if (CardFactoryUtil.evaluatePermanentList(computerlist) >= CardFactoryUtil.evaluatePermanentList(humanlist)) {
+        else if (ComputerUtilCard.evaluatePermanentList(computerlist) >= ComputerUtilCard.evaluatePermanentList(humanlist)) {
             return false;
         }
         return true;
@@ -127,19 +127,19 @@ public class DestroyAllAi extends SpellAbilityAi {
         // if only creatures are affected evaluate both lists and pass only if
         // human creatures are more valuable
         if ((CardLists.getNotType(humanlist, "Creature").size() == 0) && (CardLists.getNotType(computerlist, "Creature").size() == 0)) {
-            if ((CardFactoryUtil.evaluateCreatureList(computerlist) + 200) >= CardFactoryUtil
+            if ((ComputerUtilCard.evaluateCreatureList(computerlist) + 200) >= ComputerUtilCard
                     .evaluateCreatureList(humanlist)) {
                 return false;
             }
         } // only lands involved
         else if ((CardLists.getNotType(humanlist, "Land").size() == 0) && (CardLists.getNotType(computerlist, "Land").size() == 0)) {
-            if ((CardFactoryUtil.evaluatePermanentList(computerlist) + 1) >= CardFactoryUtil
+            if ((ComputerUtilCard.evaluatePermanentList(computerlist) + 1) >= ComputerUtilCard
                     .evaluatePermanentList(humanlist)) {
                 return false;
             }
         } // otherwise evaluate both lists by CMC and pass only if human
           // permanents are more valuable
-        else if ((CardFactoryUtil.evaluatePermanentList(computerlist) + 3) >= CardFactoryUtil
+        else if ((ComputerUtilCard.evaluatePermanentList(computerlist) + 3) >= ComputerUtilCard
                 .evaluatePermanentList(humanlist)) {
             return false;
         }

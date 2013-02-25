@@ -172,7 +172,7 @@ public class ComputerUtil {
         if (unless != null && !unless.endsWith(">")) {
             final int amount = AbilityUtils.calculateAmount(source, unless, sa);
 
-            final int usableManaSources = CardFactoryUtil.getUsableManaSources(ai.getOpponent());
+            final int usableManaSources = ComputerUtilCard.getUsableManaSources(ai.getOpponent());
 
             // If the Unless isn't enough, this should be less likely to be used
             if (amount > usableManaSources) {
@@ -384,7 +384,7 @@ public class ComputerUtil {
                 if (landsInPlay.size() >= highestCMC
                         || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)) {
                     // Don't need more land.
-                    return CardFactoryUtil.getWorstLand(landsInHand);
+                    return ComputerUtilCard.getWorstLand(landsInHand);
                 }
             }
         }
@@ -678,11 +678,11 @@ public class ComputerUtil {
         Card c;
 
         if (CardLists.getNotType(remaining, "Creature").size() == 0) {
-            c = CardFactoryUtil.getWorstCreatureAI(remaining);
+            c = ComputerUtilCard.getWorstCreatureAI(remaining);
         } else if (CardLists.getNotType(remaining, "Land").size() == 0) {
-            c = CardFactoryUtil.getWorstLand(CardLists.filter(remaining, CardPredicates.Presets.LANDS));
+            c = ComputerUtilCard.getWorstLand(CardLists.filter(remaining, CardPredicates.Presets.LANDS));
         } else {
-            c = CardFactoryUtil.getWorstPermanentAI(remaining, false, false, false, false);
+            c = ComputerUtilCard.getWorstPermanentAI(remaining, false, false, false, false);
         }
 
         final ArrayList<Card> auras = c.getEnchantedBy();

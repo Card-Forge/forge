@@ -9,10 +9,10 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameState;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -61,7 +61,7 @@ public class EffectAi extends SpellAbilityAi {
                     List<Card> list = game.getCombat().getAttackerList();
                     list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                     list = CardLists.getTargetableCards(list, sa);
-                    Card target = CardFactoryUtil.getBestCreatureAI(list);
+                    Card target = ComputerUtilCard.getBestCreatureAI(list);
                     if (target == null) {
                         return false;
                     }

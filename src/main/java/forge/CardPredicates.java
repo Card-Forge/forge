@@ -23,7 +23,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.Untap;
@@ -391,13 +390,6 @@ public final class CardPredicates {
             @Override
             public Integer apply(Card a) {
                 return a.getCMC();
-            }
-        };
-
-        public static final Function<Card, Integer> fnEvaluateCreature = new Function<Card, Integer>() {
-            @Override
-            public Integer apply(Card a) {
-                return CardFactoryUtil.evaluateCreature(a);
             }
         };
     }

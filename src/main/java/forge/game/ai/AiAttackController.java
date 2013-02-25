@@ -29,7 +29,6 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
@@ -909,7 +908,7 @@ public class AiAttackController {
                     // see if the defending creature is of higher or lower
                     // value. We don't want to attack only to lose value
                     if (isWorthLessThanAllKillers && attacker.getSVar("SacMe").equals("")
-                            && CardFactoryUtil.evaluateCreature(defender) <= CardFactoryUtil.evaluateCreature(attacker)) {
+                            && ComputerUtilCard.evaluateCreature(defender) <= ComputerUtilCard.evaluateCreature(attacker)) {
                         isWorthLessThanAllKillers = false;
                     }
                 }

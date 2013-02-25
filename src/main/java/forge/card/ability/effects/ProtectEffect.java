@@ -13,9 +13,9 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -124,7 +124,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                             list = CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), ai.getOpponents());
                         }
                         if (!list.isEmpty()) {
-                            choice = CardFactoryUtil.getMostProminentColor(list);
+                            choice = ComputerUtilCard.getMostProminentColor(list);
                         }
                     }
                 }

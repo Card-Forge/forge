@@ -13,7 +13,6 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPart;
@@ -23,6 +22,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -126,7 +126,7 @@ public class PlayEffect extends SpellAbilityEffect {
                             return true;
                         }
                     });
-                    tgtCard = CardFactoryUtil.getBestAI(tgtCards);
+                    tgtCard = ComputerUtilCard.getBestAI(tgtCards);
                     if (tgtCard == null) {
                         return;
                     }

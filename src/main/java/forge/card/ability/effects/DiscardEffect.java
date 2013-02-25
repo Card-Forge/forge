@@ -15,6 +15,7 @@ import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -109,9 +110,9 @@ public class DiscardEffect extends RevealEffectBase {
         if (sa.hasParam("DiscardValid")) {
             final String validString = sa.getParam("DiscardValid");
             if (validString.contains("Creature") && !validString.contains("nonCreature")) {
-                final Card c = CardFactoryUtil.getBestCreatureAI(goodChoices);
+                final Card c = ComputerUtilCard.getBestCreatureAI(goodChoices);
                 if (c != null) {
-                    dChoices.add(CardFactoryUtil.getBestCreatureAI(goodChoices));
+                    dChoices.add(ComputerUtilCard.getBestCreatureAI(goodChoices));
                 }
             }
         }

@@ -6,14 +6,13 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.Card;
+import forge.CardColor;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.CardUtil;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
@@ -26,6 +25,7 @@ import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
 import forge.control.input.InputControl;
 import forge.control.input.InputPayManaSimple;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -196,7 +196,7 @@ public class GameActionPlay {
             }
             while (tapForConvoke != null && untappedCreats.size() != 0) {
                 final Card workingCard = (Card) tapForConvoke;
-                usableColors = CardUtil.getConvokableColors(workingCard, newCost);
+                usableColors = GameActionPlay.getConvokableColors(workingCard, newCost);
 
                 if (usableColors.size() != 0) {
                     String chosenColor = usableColors.get(0);
@@ -317,7 +317,7 @@ public class GameActionPlay {
                     }
                 }
                 if (chosen == null) {
-                    chosen = CardFactoryUtil.getWorstCreatureAI(grave);
+                    chosen = ComputerUtilCard.getWorstCreatureAI(grave);
                 }
 
                 if (chosen == null) {
@@ -502,5 +502,34 @@ public class GameActionPlay {
     public void setCostCuttingGetMultiKickerManaCostPaidColored(
             final String costCuttingGetMultiKickerManaCostPaidColored0) {
         this.costCuttingGetMultiKickerManaCostPaidColored = costCuttingGetMultiKickerManaCostPaidColored0;
+    }
+
+    /**
+     * Gets the convokable colors.
+     * 
+     * @param cardToConvoke
+     *            the card to convoke
+     * @param cost
+     *            the cost
+     * @return the convokable colors
+     */
+    public static ArrayList<String> getConvokableColors(final Card cardToConvoke, final ManaCostBeingPaid cost) {
+        final ArrayList<String> usableColors = new ArrayList<String>();
+    
+        if (cost.getColorlessManaAmount() > 0) {
+            usableColors.add("colorless");
+        }
+        for (final CardColor col : cardToConvoke.getColor()) {
+            for (final String strCol : col.toStringList()) {
+                if (strCol.equals("colorless")) {
+                    continue;
+                }
+                if (cost.toString().contains(MagicColor.toShortString(strCol))) {
+                    usableColors.add(strCol.toString());
+                }
+            }
+        }
+    
+        return usableColors;
     }
 }

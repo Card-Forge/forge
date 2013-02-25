@@ -50,6 +50,7 @@ import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -1573,7 +1574,7 @@ public class CombatUtil {
                                 enchantment = ((Card) check);
                             }
                         } else {
-                            enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantments, this, false);
+                            enchantment = ComputerUtilCard.getBestEnchantmentAI(enchantments, this, false);
                         }
                         if ((enchantment != null) && attacker.isInPlay()) {
                             Singletons.getModel().getGame().getAction().changeZone(Singletons.getModel().getGame().getZoneOf(enchantment),

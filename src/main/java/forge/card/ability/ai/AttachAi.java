@@ -24,6 +24,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -96,7 +97,7 @@ public class AttachAi extends SpellAbilityAi {
 
         // TODO If Not Mandatory, make sure the card is "good enough"
         if (c.isCreature()) {
-            final int eval = CardFactoryUtil.evaluateCreature(c);
+            final int eval = ComputerUtilCard.evaluateCreature(c);
             if (eval < 130) {
                 return null;
             }
@@ -119,7 +120,7 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
 
-        return CardFactoryUtil.getWorstPermanentAI(list, true, true, true, false);
+        return ComputerUtilCard.getWorstPermanentAI(list, true, true, true, false);
     }
 
     /**
@@ -136,7 +137,7 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
 
-        return CardFactoryUtil.getBestAI(list);
+        return ComputerUtilCard.getBestAI(list);
     }
 
     /**
@@ -174,7 +175,7 @@ public class AttachAi extends SpellAbilityAi {
         list = CardLists.getNotType(list, type); // Filter out Basic Lands that have the
                                       // same type as the changing type
 
-        final Card c = CardFactoryUtil.getBestAI(list);
+        final Card c = ComputerUtilCard.getBestAI(list);
 
         // TODO Port over some of the existing code, but rewrite most of it.
         // Ultimately, these spells need to be used to reduce mana base of a
@@ -234,7 +235,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         });
 
-        final Card c = CardFactoryUtil.getBestAI(prefList);
+        final Card c = ComputerUtilCard.getBestAI(prefList);
 
         if (c == null) {
             return chooseLessPreferred(mandatory, list);
@@ -333,7 +334,7 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
-        final Card c = CardFactoryUtil.getMostExpensivePermanentAI(betterList);
+        final Card c = ComputerUtilCard.getMostExpensivePermanentAI(betterList);
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
@@ -361,7 +362,7 @@ public class AttachAi extends SpellAbilityAi {
             final Card attachSource) {
         // AI For choosing a Card to Animate.
         // TODO Add some more restrictions for Reanimation Auras
-        final Card c = CardFactoryUtil.getBestCreatureAI(list);
+        final Card c = ComputerUtilCard.getBestCreatureAI(list);
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
@@ -406,7 +407,7 @@ public class AttachAi extends SpellAbilityAi {
                         return true;
                     }
                 });
-                chosen = CardFactoryUtil.getBestCreatureAI(creatures);
+                chosen = ComputerUtilCard.getBestCreatureAI(creatures);
             }
         }
 
@@ -445,7 +446,7 @@ public class AttachAi extends SpellAbilityAi {
 
         }
 
-        final Card c = CardFactoryUtil.getBestAI(list);
+        final Card c = ComputerUtilCard.getBestAI(list);
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
@@ -537,7 +538,7 @@ public class AttachAi extends SpellAbilityAi {
         if ((prefList == null) || prefList.isEmpty()) {
             prefList = new ArrayList<Card>(list);
         } else {
-            c = CardFactoryUtil.getBestAI(prefList);
+            c = ComputerUtilCard.getBestAI(prefList);
             if (c != null) {
                 return c;
             }
@@ -559,7 +560,7 @@ public class AttachAi extends SpellAbilityAi {
             });
         }
 
-        c = CardFactoryUtil.getBestAI(prefList);
+        c = ComputerUtilCard.getBestAI(prefList);
 
         if (c == null) {
             return chooseLessPreferred(mandatory, list);
@@ -602,7 +603,7 @@ public class AttachAi extends SpellAbilityAi {
             //don't equip a worse creature
             if (card.isEquipping()) {
                 Card oldTarget = card.getEquipping().get(0);
-                if (CardFactoryUtil.evaluateCreature(oldTarget) > CardFactoryUtil.evaluateCreature(newTarget)) {
+                if (ComputerUtilCard.evaluateCreature(oldTarget) > ComputerUtilCard.evaluateCreature(newTarget)) {
                     return false;
                 }
             }
@@ -723,7 +724,7 @@ public class AttachAi extends SpellAbilityAi {
                 }
             });
 
-            return CardFactoryUtil.getBestAI(magnetList);
+            return ComputerUtilCard.getBestAI(magnetList);
         }
 
         int totToughness = 0;
@@ -809,11 +810,11 @@ public class AttachAi extends SpellAbilityAi {
                     return !c.isCreature() || CombatUtil.canAttackNextTurn(c);
                 }
             });
-            c = CardFactoryUtil.getBestAI(prefList);
+            c = ComputerUtilCard.getBestAI(prefList);
         } else {
             // If we grant abilities, we may want to put it on something Weak?
             // Possibly more defensive?
-            c = CardFactoryUtil.getWorstPermanentAI(prefList, false, false, false, false);
+            c = ComputerUtilCard.getWorstPermanentAI(prefList, false, false, false, false);
         }
 
         if (c == null) {

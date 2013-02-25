@@ -13,10 +13,10 @@ import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
@@ -403,7 +403,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 && phase.isPlayerTurn(ai)
                 && SpellAbilityAi.isSorcerySpeed(sa)
                 && attack > 0
-                && CardFactoryUtil.doesCreatureAttackAI(ai, c)) {
+                && ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
             return true;
         }
 

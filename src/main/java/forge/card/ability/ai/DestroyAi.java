@@ -12,13 +12,13 @@ import forge.CounterType;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -130,11 +130,11 @@ public class DestroyAi extends SpellAbilityAi {
                 Card choice = null;
                 // If the targets are only of one type, take the best
                 if (CardLists.getNotType(list, "Creature").isEmpty()) {
-                    choice = CardFactoryUtil.getBestCreatureAI(list);
+                    choice = ComputerUtilCard.getBestCreatureAI(list);
                 } else if (CardLists.getNotType(list, "Land").isEmpty()) {
-                    choice = CardFactoryUtil.getBestLandAI(list);
+                    choice = ComputerUtilCard.getBestLandAI(list);
                 } else {
-                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
                 }
 
                 if (choice == null) { // can't find anything left
@@ -218,11 +218,11 @@ public class DestroyAi extends SpellAbilityAi {
                 } else {
                     Card c;
                     if (CardLists.getNotType(preferred, "Creature").size() == 0) {
-                        c = CardFactoryUtil.getBestCreatureAI(preferred);
+                        c = ComputerUtilCard.getBestCreatureAI(preferred);
                     } else if (CardLists.getNotType(preferred, "Land").size() == 0) {
-                        c = CardFactoryUtil.getBestLandAI(preferred);
+                        c = ComputerUtilCard.getBestLandAI(preferred);
                     } else {
-                        c = CardFactoryUtil.getMostExpensivePermanentAI(preferred, sa, false);
+                        c = ComputerUtilCard.getMostExpensivePermanentAI(preferred, sa, false);
                     }
                     tgt.addTarget(c);
                     preferred.remove(c);
@@ -235,9 +235,9 @@ public class DestroyAi extends SpellAbilityAi {
                 } else {
                     Card c;
                     if (CardLists.getNotType(list, "Creature").size() == 0) {
-                        c = CardFactoryUtil.getWorstCreatureAI(list);
+                        c = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        c = CardFactoryUtil.getCheapestPermanentAI(list, sa, false);
+                        c = ComputerUtilCard.getCheapestPermanentAI(list, sa, false);
                     }
                     tgt.addTarget(c);
                     list.remove(c);

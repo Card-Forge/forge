@@ -11,10 +11,10 @@ import forge.CardPredicates;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -69,9 +69,9 @@ public abstract class TapAiBase extends SpellAbilityAi  {
 
             if (CardLists.getNotType(tapList, "Creature").size() == 0) {
                 // if only creatures take the best
-                choice = CardFactoryUtil.getBestCreatureAI(tapList);
+                choice = ComputerUtilCard.getBestCreatureAI(tapList);
             } else {
-                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
+                choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
             }
 
             if (choice == null) { // can't find anything left
@@ -179,9 +179,9 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                 Predicate<Card> findBlockers = CardPredicates.possibleBlockerForAtLeastOne(attackers);
                 List<Card> creatureList = CardLists.filter(tapList, findBlockers);
                 if (!attackers.isEmpty() && !creatureList.isEmpty()) {
-                    choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+                    choice = ComputerUtilCard.getBestCreatureAI(creatureList);
                 } else if (sa.isTrigger()) {
-                    choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
                 }
 
             } else if (phase.isPlayerTurn(opp)
@@ -194,12 +194,12 @@ public abstract class TapAiBase extends SpellAbilityAi  {
                             return c.isCreature() && CombatUtil.canAttack(c, opp);
                         }
                     });
-                    choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+                    choice = ComputerUtilCard.getBestCreatureAI(creatureList);
                 } else { // no creatures available
-                    choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
                 }
             } else {
-                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
+                choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
             }
 
             if (choice == null) { // can't find anything left

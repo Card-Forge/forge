@@ -9,9 +9,9 @@ import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -39,19 +39,19 @@ public class ControlExchangeAi extends SpellAbilityAi {
                 return !vars.containsKey("RemAIDeck") && c.canBeTargetedBy(sa);
             }
         });
-        object1 = CardFactoryUtil.getBestAI(list);
+        object1 = ComputerUtilCard.getBestAI(list);
         if (sa.hasParam("Defined")) {
             object2 = AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
         } else if (tgt.getMinTargets(sa.getSourceCard(), sa) > 1) {
             List<Card> list2 = ai.getCardsIn(ZoneType.Battlefield);
             list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getSourceCard());
-            object2 = CardFactoryUtil.getWorstAI(list2);
+            object2 = ComputerUtilCard.getWorstAI(list2);
             tgt.addTarget(object2);
         }
         if (object1 == null || object2 == null) {
             return false;
         }
-        if (CardFactoryUtil.evaluateCreature(object1) > CardFactoryUtil.evaluateCreature(object2) + 40) {
+        if (ComputerUtilCard.evaluateCreature(object1) > ComputerUtilCard.evaluateCreature(object2) + 40) {
             tgt.addTarget(object1);
             return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
         }

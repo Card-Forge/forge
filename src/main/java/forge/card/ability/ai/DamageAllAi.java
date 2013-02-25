@@ -11,10 +11,10 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -96,7 +96,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         // evaluate both lists and pass only if human creatures are more valuable
-        if ((CardFactoryUtil.evaluateCreatureList(computerList) + minGain) >= CardFactoryUtil
+        if ((ComputerUtilCard.evaluateCreatureList(computerList) + minGain) >= ComputerUtilCard
                 .evaluateCreatureList(humanList)) {
             return false;
         }
@@ -144,7 +144,7 @@ public class  DamageAllAi extends SpellAbilityAi {
             return true;
         }
 
-        if (!computerList.isEmpty() && CardFactoryUtil.evaluateCreatureList(computerList) > CardFactoryUtil
+        if (!computerList.isEmpty() && ComputerUtilCard.evaluateCreatureList(computerList) > ComputerUtilCard
                 .evaluateCreatureList(humanList)) {
             return false;
         }
@@ -233,7 +233,7 @@ public class  DamageAllAi extends SpellAbilityAi {
             return true;
         }
 
-        if (!computerList.isEmpty() && CardFactoryUtil.evaluateCreatureList(computerList) + 50 >= CardFactoryUtil
+        if (!computerList.isEmpty() && ComputerUtilCard.evaluateCreatureList(computerList) + 50 >= ComputerUtilCard
                 .evaluateCreatureList(humanList)) {
             return false;
         }

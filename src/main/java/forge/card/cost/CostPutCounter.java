@@ -25,10 +25,10 @@ import forge.CardLists;
 import forge.CounterType;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -223,9 +223,9 @@ public class CostPutCounter extends CostPartWithList {
 
             Card card = null;
             if (this.getType().equals("Creature.YouCtrl")) {
-                card = CardFactoryUtil.getWorstCreatureAI(typeList);
+                card = ComputerUtilCard.getWorstCreatureAI(typeList);
             } else {
-                card = CardFactoryUtil.getWorstPermanentAI(typeList, false, false, false, false);
+                card = ComputerUtilCard.getWorstPermanentAI(typeList, false, false, false, false);
             }
             this.addToList(card);
         }

@@ -14096,6 +14096,7 @@ src/main/java/forge/game/ai/AiInputBlock.java -text
 src/main/java/forge/game/ai/AiInputCommon.java svneol=native#text/plain
 src/main/java/forge/game/ai/ComputerUtil.java svneol=native#text/plain
 src/main/java/forge/game/ai/ComputerUtilBlock.java svneol=native#text/plain
+src/main/java/forge/game/ai/ComputerUtilCard.java -text
 src/main/java/forge/game/ai/ComputerUtilCombat.java -text
 src/main/java/forge/game/ai/ComputerUtilCost.java -text
 src/main/java/forge/game/ai/ComputerUtilMana.java -text

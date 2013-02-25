@@ -9,11 +9,11 @@ import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameActionUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -82,7 +82,7 @@ public class ManaEffect extends SpellAbilityEffect {
                             final String logic = sa.getParam("AILogic");
                             String chosen = Constant.Color.BLACK;
                             if (logic.equals("MostProminentInComputerHand")) {
-                                chosen = CardFactoryUtil.getMostProminentColor(activator.getCardsIn(
+                                chosen = ComputerUtilCard.getMostProminentColor(activator.getCardsIn(
                                         ZoneType.Hand));
                             }
                             if (chosen.equals("")) {
@@ -141,7 +141,7 @@ public class ManaEffect extends SpellAbilityEffect {
                             final String logic = sa.getParam("AILogic");
                             String chosen = Constant.Color.BLACK;
                             if (logic.equals("MostProminentInComputerHand")) {
-                                chosen = CardFactoryUtil.getMostProminentColor(act.getCardsIn(ZoneType.Hand));
+                                chosen = ComputerUtilCard.getMostProminentColor(act.getCardsIn(ZoneType.Hand));
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
                             abMana.setExpressChoice(MagicColor.toShortString(chosen));

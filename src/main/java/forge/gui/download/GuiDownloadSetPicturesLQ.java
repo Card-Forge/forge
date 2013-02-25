@@ -71,7 +71,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
 
         if (!foundSetImage) {
             final int artsCnt = c.getRules().getEditionInfo(setCode3).getCopiesCount();
-            final String filename = CardUtil.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
+            final String filename = GuiDownloadPicturesLQ.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
             String url = urlBase + setCode2 + "/" + Base64Coder.encodeString(filename, true);
             cList.add(new DownloadObject(url, new File(this.picturesPath + File.separator + setCode3, filename)));
 

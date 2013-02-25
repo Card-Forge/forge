@@ -12,6 +12,7 @@ import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -86,7 +87,7 @@ public class UntapEffect extends SpellAbilityEffect {
                 while ((list.size() != 0) && (count < num)) {
                     for (int i = 0; (i < list.size()) && (count < num); i++) {
 
-                        final Card c = CardFactoryUtil.getBestLandAI(list);
+                        final Card c = ComputerUtilCard.getBestLandAI(list);
                         c.untap();
                         list.remove(c);
                         count++;

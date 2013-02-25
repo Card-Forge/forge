@@ -11,12 +11,12 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -165,7 +165,7 @@ public class DamageDealAi extends DamageAiBase {
 
         Card targetCard;
         if (pl.isOpponentOf(ai) && (killables.size() > 0)) {
-            targetCard = CardFactoryUtil.getBestCreatureAI(killables);
+            targetCard = ComputerUtilCard.getBestCreatureAI(killables);
 
             return targetCard;
         }
@@ -176,9 +176,9 @@ public class DamageDealAi extends DamageAiBase {
 
         if (hPlay.size() > 0) {
             if (pl.isOpponentOf(ai)) {
-                targetCard = CardFactoryUtil.getBestCreatureAI(hPlay);
+                targetCard = ComputerUtilCard.getBestCreatureAI(hPlay);
             } else {
-                targetCard = CardFactoryUtil.getWorstCreatureAI(hPlay);
+                targetCard = ComputerUtilCard.getWorstCreatureAI(hPlay);
             }
 
             return targetCard;

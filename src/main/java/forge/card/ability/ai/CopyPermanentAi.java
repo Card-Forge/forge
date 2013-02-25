@@ -11,9 +11,9 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
@@ -82,9 +82,9 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
                 Card choice;
                 if (!CardLists.filter(list, Presets.CREATURES).isEmpty()) {
-                    choice = CardFactoryUtil.getBestCreatureAI(list);
+                    choice = ComputerUtilCard.getBestCreatureAI(list);
                 } else {
-                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
                 }
 
                 if (choice == null) { // can't find anything left

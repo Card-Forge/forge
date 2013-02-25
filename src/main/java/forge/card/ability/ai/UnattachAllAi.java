@@ -7,10 +7,10 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
@@ -84,7 +84,7 @@ public class UnattachAllAi extends SpellAbilityAi {
             //don't equip a worse creature
             if (card.isEquipping()) {
                 Card oldTarget = card.getEquipping().get(0);
-                if (CardFactoryUtil.evaluateCreature(oldTarget) > CardFactoryUtil.evaluateCreature(newTarget)) {
+                if (ComputerUtilCard.evaluateCreature(oldTarget) > ComputerUtilCard.evaluateCreature(newTarget)) {
                     return false;
                 }
             }

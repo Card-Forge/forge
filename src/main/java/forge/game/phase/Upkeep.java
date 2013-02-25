@@ -44,6 +44,7 @@ import forge.control.input.InputSelectManyCards;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
@@ -501,7 +502,7 @@ public class Upkeep extends Phase {
                         if (indestruct.size() > 0) {
                             game.getAction().destroyNoRegeneration(indestruct.get(0));
                         } else if (targets.size() > 0) {
-                            final Card target = CardFactoryUtil.getWorstCreatureAI(targets);
+                            final Card target = ComputerUtilCard.getWorstCreatureAI(targets);
                             if (null == target) {
                                 // must be nothing valid to destroy
                             } else {
@@ -632,7 +633,7 @@ public class Upkeep extends Phase {
                     if (c.getController().isComputer()) {
                         target = GuiChoose.one("Select a card to sacrifice", playerLand);
                     } else {
-                        target = CardFactoryUtil.getBestLandAI(playerLand);
+                        target = ComputerUtilCard.getBestLandAI(playerLand);
                     }
                     game.getAction().sacrifice(target, null);
                 } // end resolve()
@@ -1027,7 +1028,7 @@ public class Upkeep extends Phase {
 
                     for (int i = 0; i < num; i++) {
                         if (player.isComputer()) {
-                            Card toTap = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
+                            Card toTap = ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
                             // try to find non creature cards without tap abilities
                             List<Card> betterList = CardLists.filter(list, new Predicate<Card>() {
                                 @Override

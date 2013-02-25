@@ -74,52 +74,19 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
-                    if (p.isHuman()) {
-                        final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
-                        Card o;
-                        if (sa.hasParam("AtRandom")) {
-                            o = Aggregates.random(choices);
-                        } else if (sa.hasParam("Mandatory")) {
-                            o = GuiChoose.one(choiceTitle, choices);
-                        } else {
-                            o = GuiChoose.oneOrNone(choiceTitle, choices);
-                        }
-                        if (o != null) {
-                            chosen.add(o);
-                            choices.remove(o);
-                        } else {
-                            break;
-                        }
-                    } else { // Computer
-                        String logic = sa.getParam("AILogic");
-                        Card choice = null;
-                        if (logic == null) {
-                            // Base Logic is choose "best"
-                            choice = CardFactoryUtil.getBestAI(choices);
-                        } else if ("WorstCard".equals(logic)) {
-                            choice = CardFactoryUtil.getWorstAI(choices);
-                        } else if (logic.equals("BestBlocker")) {
-                            if (!CardLists.filter(choices, Presets.UNTAPPED).isEmpty()) {
-                                choices = CardLists.filter(choices, Presets.UNTAPPED);
-                            }
-                            choice = CardFactoryUtil.getBestCreatureAI(choices);
-                        } else if (logic.equals("Clone")) {
-                            if (!CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host).isEmpty()) {
-                                choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
-                            }
-                            choice = CardFactoryUtil.getBestAI(choices);
-                        } else if (logic.equals("Untap")) {
-                            if (!CardLists.getValidCards(choices, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host).isEmpty()) {
-                                choices = CardLists.getValidCards(choices, "Permanent.YouCtrl,Permanent.tapped", host.getController(), host);
-                            }
-                            choice = CardFactoryUtil.getBestAI(choices);
-                        }
-                        if (choice != null) {
-                            chosen.add(choice);
-                            choices.remove(choice);
-                        } else {
-                            break;
-                        }
+                    
+                    Card c;
+                    if (sa.hasParam("AtRandom")) {
+                        c = Aggregates.random(choices);
+                    } else {
+                        c = p.getController().chooseSingleCardForEffect(choices, sa, sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ", !sa.hasParam("Mandatory"));
+                    }
+                
+                    if (c != null) {
+                        chosen.add(c);
+                        choices.remove(c);
+                    } else {
+                        break;
                     }
                 }
                 host.setChosenCard(chosen);

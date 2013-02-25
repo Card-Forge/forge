@@ -27,11 +27,11 @@ import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -132,7 +132,7 @@ public class RegenerateAi extends SpellAbilityAi {
 
                 if (!threatenedTargets.isEmpty()) {
                     // Choose "best" of the remaining to regenerate
-                    tgt.addTarget(CardFactoryUtil.getBestCreatureAI(threatenedTargets));
+                    tgt.addTarget(ComputerUtilCard.getBestCreatureAI(threatenedTargets));
                     chance = true;
                 }
             } else {
@@ -225,7 +225,7 @@ public class RegenerateAi extends SpellAbilityAi {
             }
         }
 
-        tgt.addTarget(CardFactoryUtil.getCheapestPermanentAI(targetables, sa, true));
+        tgt.addTarget(ComputerUtilCard.getCheapestPermanentAI(targetables, sa, true));
         return true;
     }
 

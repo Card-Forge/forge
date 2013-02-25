@@ -29,9 +29,9 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -139,15 +139,15 @@ public class ControlGainAi extends SpellAbilityAi {
             }
 
             if (hasCreature) {
-                t = CardFactoryUtil.getBestCreatureAI(list);
+                t = ComputerUtilCard.getBestCreatureAI(list);
             } else if (hasArtifact) {
-                t = CardFactoryUtil.getBestArtifactAI(list);
+                t = ComputerUtilCard.getBestArtifactAI(list);
             } else if (hasLand) {
-                t = CardFactoryUtil.getBestLandAI(list);
+                t = ComputerUtilCard.getBestLandAI(list);
             } else if (hasEnchantment) {
-                t = CardFactoryUtil.getBestEnchantmentAI(list, sa, true);
+                t = ComputerUtilCard.getBestEnchantmentAI(list, sa, true);
             } else {
-                t = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);
+                t = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
             }
 
             tgt.addTarget(t);

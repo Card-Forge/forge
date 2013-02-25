@@ -53,6 +53,7 @@ import forge.control.input.InputPayManaExecuteCommands;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseType;
@@ -901,9 +902,9 @@ public class MagicStack extends MyObservable {
                     // AI choosing what to haunt
                     final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponents());
                     if (oppCreats.size() != 0) {
-                        haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(oppCreats));
+                        haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(oppCreats));
                     } else {
-                        haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(creats));
+                        haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(creats));
                     }
                     this.add(haunterDiesWork);
                 }

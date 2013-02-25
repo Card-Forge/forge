@@ -9,10 +9,10 @@ import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -148,14 +148,14 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             if (CardLists.getNotType(untapList, "Creature").size() == 0) {
-                choice = CardFactoryUtil.getBestCreatureAI(untapList); // if
+                choice = ComputerUtilCard.getBestCreatureAI(untapList); // if
                                                                        // only
                                                                        // creatures
                                                                        // take
                                                                        // the
                                                                        // best
             } else {
-                choice = CardFactoryUtil.getMostExpensivePermanentAI(untapList, sa, false);
+                choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
             }
 
             if (choice == null) { // can't find anything left
@@ -267,13 +267,13 @@ public class UntapAi extends SpellAbilityAi {
             }
 
             if (CardLists.getNotType(tapList, "Creature").size() == 0) {
-                choice = CardFactoryUtil.getBestCreatureAI(tapList); // if only
+                choice = ComputerUtilCard.getBestCreatureAI(tapList); // if only
                                                                      // creatures
                                                                      // take
                                                                      // the
                                                                      // best
             } else {
-                choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
+                choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
             }
 
             if (choice == null) { // can't find anything left

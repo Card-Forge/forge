@@ -20,7 +20,6 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.ability.effects.AttachEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
@@ -29,6 +28,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.game.GlobalRuleChange;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
@@ -507,7 +507,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         } else {
             // not urgent, get the largest creature possible
-            card = CardFactoryUtil.getBestCreatureAI(list);
+            card = ComputerUtilCard.getBestCreatureAI(list);
         }
         return card;
     }
@@ -730,7 +730,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                     if (!threatenedTargets.isEmpty()) {
                         // Choose "best" of the remaining to save
-                        tgt.addTarget(CardFactoryUtil.getBestAI(threatenedTargets));
+                        tgt.addTarget(ComputerUtilCard.getBestAI(threatenedTargets));
                         return true;
                     }
                 }
@@ -762,7 +762,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     });
                     if (!aiPermanents.isEmpty()) {
                         // Choose "best" of the remaining to save
-                        tgt.addTarget(CardFactoryUtil.getBestAI(aiPermanents));
+                        tgt.addTarget(ComputerUtilCard.getBestAI(aiPermanents));
                         return true;
                     }
                 }
@@ -839,15 +839,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                final Card mostExpensive = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, false);
+                final Card mostExpensive = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
                 if (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield)) {
                     if (mostExpensive.isCreature()) {
                         // if a creature is most expensive take the best one
                         if (destination.equals(ZoneType.Exile)) {
                             // If Exiling things, don't give bonus to Tokens
-                            choice = CardFactoryUtil.getBestCreatureAI(list);
+                            choice = ComputerUtilCard.getBestCreatureAI(list);
                         } else {
-                            choice = CardFactoryUtil.getBestCreatureToBounceAI(list);
+                            choice = ComputerUtilCard.getBestCreatureToBounceAI(list);
                         }
                     } else {
                         choice = mostExpensive;
@@ -870,7 +870,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         } else {
                             // Get the best card in there.
                             System.out.println("No creature and lots of life, finding something good.");
-                            choice = CardFactoryUtil.getBestAI(nonLands);
+                            choice = ComputerUtilCard.getBestAI(nonLands);
                         }
                     }
                     if (choice == null) {
@@ -879,7 +879,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         choice = list.get(0);
                     }
                 } else {
-                    choice = CardFactoryUtil.getBestAI(list);
+                    choice = ComputerUtilCard.getBestAI(list);
                 }
             }
             if (choice == null) { // can't find anything left
@@ -957,12 +957,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                if (CardFactoryUtil.getMostExpensivePermanentAI(list, sa, false).isCreature()
+                if (ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false).isCreature()
                         && (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield))) {
                     // if a creature is most expensive take the best
-                    choice = CardFactoryUtil.getBestCreatureToBounceAI(list);
+                    choice = ComputerUtilCard.getBestCreatureToBounceAI(list);
                 } else if (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield)) {
-                    choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, false);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
@@ -981,7 +981,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         } else {
                             // Get the best card in there.
                             System.out.println("No creature and lots of life, finding something good.");
-                            choice = CardFactoryUtil.getBestAI(nonLands);
+                            choice = ComputerUtilCard.getBestAI(nonLands);
                         }
                     }
                     if (choice == null) {
@@ -990,7 +990,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         choice = list.get(0);
                     }
                 } else {
-                    choice = CardFactoryUtil.getBestAI(list);
+                    choice = ComputerUtilCard.getBestAI(list);
                 }
             }
             if (choice == null) { // can't find anything left
@@ -1168,9 +1168,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)) {
                     // Exiling or bouncing stuff
                     if (player.isOpponentOf(ai)) {
-                        c = CardFactoryUtil.getBestAI(fetchList);
+                        c = ComputerUtilCard.getBestAI(fetchList);
                     } else {
-                        c = CardFactoryUtil.getWorstAI(fetchList);
+                        c = ComputerUtilCard.getWorstAI(fetchList);
                     }
                 } else if (origin.contains(ZoneType.Library)
                         && (type.contains("Basic") || areAllBasics(type))) {
@@ -1179,9 +1179,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     c = chooseCreature(ai, fetchList);
                 } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
                     if (!activator.equals(ai) && sa.hasParam("GainControl")) {
-                        c = CardFactoryUtil.getWorstAI(fetchList);
+                        c = ComputerUtilCard.getWorstAI(fetchList);
                     } else {
-                        c = CardFactoryUtil.getBestAI(fetchList);
+                        c = ComputerUtilCard.getBestAI(fetchList);
                     }
                 } else {
                     // Don't fetch another tutor with the same name
@@ -1222,7 +1222,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         } else {
                             // Get the best card in there.
                             System.out.println("No creature and lots of life, finding something good.");
-                            c = CardFactoryUtil.getBestAI(fetchList);
+                            c = ComputerUtilCard.getBestAI(fetchList);
                         }
                     }
                 }
@@ -1263,7 +1263,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), c.getController(), c);
                     }
                     if (!list.isEmpty()) {
-                        final Card attachedTo = CardFactoryUtil.getBestAI(list);
+                        final Card attachedTo = ComputerUtilCard.getBestAI(list);
                         if (c.isEnchanting()) {
                             // If this Card is already Enchanting something, need
                             // to unenchant it, then clear out the commands

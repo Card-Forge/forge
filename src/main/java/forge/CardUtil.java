@@ -33,7 +33,6 @@ import forge.card.CardSplitType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
-import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
@@ -99,29 +98,6 @@ public final class CardUtil {
         return c.determineColor().toStringList();
     }
 
-
-    // this function checks, if duplicates of a keyword are not necessary (like
-    // flying, trample, etc.)
-    /**
-     * <p>
-     * isNonStackingKeyword.
-     * </p>
-     * 
-     * @param keyword
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public static boolean isNonStackingKeyword(final String keyword) {
-        String kw = new String(keyword);
-        if (kw.startsWith("HIDDEN")) {
-            kw = kw.substring(7);
-        }
-        if (kw.startsWith("Protection")) {
-            return true;
-        }
-        return Constant.Keywords.NON_STACKING_LIST.contains(kw);
-    }
-
     /**
      * <p>
      * isStackingKeyword.
@@ -132,25 +108,12 @@ public final class CardUtil {
      * @return a boolean.
      */
     public static boolean isStackingKeyword(final String keyword) {
-        return !CardUtil.isNonStackingKeyword(keyword);
-    }
-
-    /**
-     * Builds the ideal filename.
-     * 
-     * @param cardName
-     *            the card name
-     * @param artIndex
-     *            the art index
-     * @param artIndexMax
-     *            the art index max
-     * @return the string
-     */
-    public static String buildIdealFilename(final String cardName, final int artIndex, final int artIndexMax) {
-        final String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
-        final String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
-        // 3 letter set code with MWS filename format
-        return String.format("%s%s.full.jpg", mwsCardName, nn);
+        String kw = new String(keyword);
+        if (kw.startsWith("HIDDEN")) {
+            kw = kw.substring(7);
+        }
+        
+        return !kw.startsWith("Protection") && !Constant.Keywords.NON_STACKING_LIST.contains(kw);
     }
 
     /**
@@ -430,35 +393,6 @@ public final class CardUtil {
         }
 
         return res;
-    }
-
-    /**
-     * Gets the convokable colors.
-     * 
-     * @param cardToConvoke
-     *            the card to convoke
-     * @param cost
-     *            the cost
-     * @return the convokable colors
-     */
-    public static ArrayList<String> getConvokableColors(final Card cardToConvoke, final ManaCostBeingPaid cost) {
-        final ArrayList<String> usableColors = new ArrayList<String>();
-
-        if (cost.getColorlessManaAmount() > 0) {
-            usableColors.add("colorless");
-        }
-        for (final CardColor col : cardToConvoke.getColor()) {
-            for (final String strCol : col.toStringList()) {
-                if (strCol.equals("colorless")) {
-                    continue;
-                }
-                if (cost.toString().contains(MagicColor.toShortString(strCol))) {
-                    usableColors.add(strCol.toString());
-                }
-            }
-        }
-
-        return usableColors;
     }
 
     /**

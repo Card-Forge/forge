@@ -25,10 +25,10 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.AiController;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -175,7 +175,7 @@ public class AIPlayer extends Player {
     public final void sacrificePermanent(final String prompt, final List<Card> choices) {
         if (choices.size() > 0) {
             // TODO - this could probably use better AI
-            final Card c = CardFactoryUtil.getWorstPermanentAI(choices, false, false, false, false);
+            final Card c = ComputerUtilCard.getWorstPermanentAI(choices, false, false, false, false);
             game.getAction().sacrificeDestroy(c);
         }
     }

@@ -29,7 +29,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -360,9 +359,9 @@ public class ComputerUtilBlock {
                 // destroyed
                 killingBlockers = ComputerUtilBlock.getKillingBlockers(ai, attacker, safeBlockers, combat);
                 if (killingBlockers.size() > 0) {
-                    blocker = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
+                    blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 } else if (!attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
-                    blocker = CardFactoryUtil.getWorstCreatureAI(safeBlockers);
+                    blocker = ComputerUtilCard.getWorstCreatureAI(safeBlockers);
                     ComputerUtilBlock.getBlockedButUnkilled().add(attacker);
                 }
             } // no safe blockers
@@ -378,9 +377,9 @@ public class ComputerUtilBlock {
                 }
                 // 4.Blockers that can destroy the attacker and are worth less
                 if (blocker == null && killingBlockers.size() > 0) {
-                    final Card worst = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
+                    final Card worst = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
 
-                    if ((CardFactoryUtil.evaluateCreature(worst) + ComputerUtilBlock.getDiff()) < CardFactoryUtil
+                    if ((ComputerUtilCard.evaluateCreature(worst) + ComputerUtilBlock.getDiff()) < ComputerUtilCard
                             .evaluateCreature(attacker)) {
                         blocker = worst;
                     }
@@ -471,7 +470,7 @@ public class ComputerUtilBlock {
                             && !(c.hasKeyword("First Strike") || c.hasKeyword("Double Strike"))) {
                         return false;
                     }
-                    return lifeInDanger || (CardFactoryUtil.evaluateCreature(c) + ComputerUtilBlock.getDiff()) < CardFactoryUtil
+                    return lifeInDanger || (ComputerUtilCard.evaluateCreature(c) + ComputerUtilBlock.getDiff()) < ComputerUtilCard
                             .evaluateCreature(attacker);
                 }
             });
@@ -479,11 +478,11 @@ public class ComputerUtilBlock {
                 return combat;
             }
 
-            final Card leader = CardFactoryUtil.getBestCreatureAI(usableBlockers);
+            final Card leader = ComputerUtilCard.getBestCreatureAI(usableBlockers);
             blockGang.add(leader);
             usableBlockers.remove(leader);
             absorbedDamage = ComputerUtilCombat.getEnoughDamageToKill(leader, attacker.getNetCombatDamage(), attacker, true);
-            currentValue = CardFactoryUtil.evaluateCreature(leader);
+            currentValue = ComputerUtilCard.evaluateCreature(leader);
 
             for (final Card blocker : usableBlockers) {
                 // Add an additional blocker if the current blockers are not
@@ -491,7 +490,7 @@ public class ComputerUtilBlock {
                 final int currentDamage = ComputerUtilCombat.totalDamageOfBlockers(attacker, blockGang);
                 final int additionalDamage = ComputerUtilCombat.dealsDamageAsBlocker(attacker, blocker);
                 final int absorbedDamage2 = ComputerUtilCombat.getEnoughDamageToKill(blocker, attacker.getNetCombatDamage(), attacker, true);
-                final int addedValue = CardFactoryUtil.evaluateCreature(blocker);
+                final int addedValue = ComputerUtilCard.evaluateCreature(blocker);
                 final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
                         + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                 if ((damageNeeded > currentDamage || CombatUtil.needsBlockers(attacker) > blockGang.size())
@@ -499,7 +498,7 @@ public class ComputerUtilBlock {
                         // The attacker will be killed
                         && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage()
                         // only one blocker can be killed
-                        || currentValue + addedValue - 50 <= CardFactoryUtil.evaluateCreature(attacker)
+                        || currentValue + addedValue - 50 <= ComputerUtilCard.evaluateCreature(attacker)
                         // or attacker is worth more
                         || (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)))
                         // or life is in danger
@@ -545,7 +544,7 @@ public class ComputerUtilBlock {
                     ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, true),
                     combat);
             if ((killingBlockers.size() > 0) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                final Card blocker = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
+                final Card blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 combat.addBlocker(attacker, blocker);
                 currentAttackers.remove(attacker);
             }
@@ -579,7 +578,7 @@ public class ComputerUtilBlock {
             chumpBlockers = ComputerUtilBlock
                     .getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, true);
             if ((chumpBlockers.size() > 0) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                final Card blocker = CardFactoryUtil.getWorstCreatureAI(chumpBlockers);
+                final Card blocker = ComputerUtilCard.getWorstCreatureAI(chumpBlockers);
                 combat.addBlocker(attacker, blocker);
                 currentAttackers.remove(attacker);
                 ComputerUtilBlock.getBlockedButUnkilled().add(attacker);
@@ -697,7 +696,7 @@ public class ComputerUtilBlock {
                 final int additionalDamage = ComputerUtilCombat.dealsDamageAsBlocker(attacker, blocker);
                 if ((damageNeeded > currentDamage)
                         && !(damageNeeded > (currentDamage + additionalDamage))
-                        && ((CardFactoryUtil.evaluateCreature(blocker) + ComputerUtilBlock.getDiff()) < CardFactoryUtil
+                        && ((ComputerUtilCard.evaluateCreature(blocker) + ComputerUtilBlock.getDiff()) < ComputerUtilCard
                                 .evaluateCreature(attacker)) && CombatUtil.canBlock(attacker, blocker, combat)) {
                     combat.addBlocker(attacker, blocker);
                     ComputerUtilBlock.getBlockersLeft().remove(blocker);

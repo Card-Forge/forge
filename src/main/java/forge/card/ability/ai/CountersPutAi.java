@@ -12,11 +12,11 @@ import forge.CounterType;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
@@ -279,9 +279,9 @@ public class CountersPutAi extends SpellAbilityAi {
 
                 else {
                     if (type.equals("M1M1")) {
-                        choice = CardFactoryUtil.getWorstCreatureAI(list);
+                        choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        choice = CardFactoryUtil.getRandomCard(list);
+                        choice = ComputerUtilCard.getRandomCard(list);
                     }
                 }
             } else {
@@ -291,9 +291,9 @@ public class CountersPutAi extends SpellAbilityAi {
 
                 else {
                     if (type.equals("P1P1")) {
-                        choice = CardFactoryUtil.getWorstCreatureAI(list);
+                        choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        choice = CardFactoryUtil.getRandomCard(list);
+                        choice = ComputerUtilCard.getRandomCard(list);
                     }
                 }
             }

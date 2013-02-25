@@ -30,9 +30,9 @@ import forge.CardPredicates;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.input.Input;
 import forge.game.GameState;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -246,7 +246,7 @@ public class Untap extends Phase {
                 artList = CardLists.filter(artList, Presets.ARTIFACTS);
                 artList = CardLists.filter(artList, tappedCanUntap);
                 if (artList.size() > 0) {
-                    CardFactoryUtil.getBestArtifactAI(artList).untap();
+                    ComputerUtilCard.getBestArtifactAI(artList).untap();
                 }
             } else {
                 final Input target = new Input() {

@@ -107,4 +107,22 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         }
     }
 
+    /**
+     * Builds the ideal filename.
+     * 
+     * @param cardName
+     *            the card name
+     * @param artIndex
+     *            the art index
+     * @param artIndexMax
+     *            the art index max
+     * @return the string
+     */
+    public static String buildIdealFilename(final String cardName, final int artIndex, final int artIndexMax) {
+        final String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
+        final String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
+        // 3 letter set code with MWS filename format
+        return String.format("%s%s.full.jpg", mwsCardName, nn);
+    }
+
 }

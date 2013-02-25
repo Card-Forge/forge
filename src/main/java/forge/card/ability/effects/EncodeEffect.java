@@ -5,16 +5,12 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.CardPredicates.Presets;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 
 public class EncodeEffect extends SpellAbilityEffect {
     @Override
@@ -43,10 +39,11 @@ public class EncodeEffect extends SpellAbilityEffect {
 
         }
         // Handle choice of whether or not to encoded
+        
+        
         final StringBuilder sb = new StringBuilder();
         sb.append("Do you want to exile " + host + " and encode it onto a creature you control?");
-        if (player.isHuman()
-                && !GuiDialog.confirm(host, sb.toString())) {
+        if (!player.getController().confirmAction(sa, null, sb.toString())) {
             return;
         }
         // Note: AI will always choose to encode
@@ -56,31 +53,8 @@ public class EncodeEffect extends SpellAbilityEffect {
         Card movedCard = Singletons.getModel().getGame().getAction().moveTo(ZoneType.Exile, host);
 
         // choose a creature
-        Card choice = null;
-        if (player.isHuman()) {
-            final String choiceTitle = "Choose a creature you control to encode ";
-            choice = GuiChoose.oneOrNone(choiceTitle, choices);
-        }
-        else { // Computer
-            // TODO: move this to AI method
-            String logic = sa.getParam("AILogic");
-            if (logic == null) {
-                // Base Logic is choose "best"
-                choice = CardFactoryUtil.getBestAI(choices);
-            } else if ("WorstCard".equals(logic)) {
-                choice = CardFactoryUtil.getWorstAI(choices);
-            } else if (logic.equals("BestBlocker")) {
-                if (!CardLists.filter(choices, Presets.UNTAPPED).isEmpty()) {
-                    choices = CardLists.filter(choices, Presets.UNTAPPED);
-                }
-                choice = CardFactoryUtil.getBestCreatureAI(choices);
-            } else if (logic.equals("Clone")) {
-                if (!CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host).isEmpty()) {
-                    choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
-                }
-                choice = CardFactoryUtil.getBestAI(choices);
-            }
-        }
+        Card choice = player.getController().chooseSingleCardForEffect(choices, sa, "Choose a creature you control to encode ", true);
+
         if (choice == null) {
           return;
         }

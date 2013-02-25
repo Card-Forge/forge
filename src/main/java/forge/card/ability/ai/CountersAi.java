@@ -25,7 +25,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CounterType;
-import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.ai.ComputerUtilCard;
 
 
 /**
@@ -63,13 +63,13 @@ public abstract class CountersAi {
                 }
             });
             if (killable.size() > 0) {
-                choice = CardFactoryUtil.getBestCreatureAI(killable);
+                choice = ComputerUtilCard.getBestCreatureAI(killable);
             } else {
-                choice = CardFactoryUtil.getBestCreatureAI(list);
+                choice = ComputerUtilCard.getBestCreatureAI(list);
             }
         } else {
             // improve random choice here
-            choice = CardFactoryUtil.getRandomCard(list);
+            choice = ComputerUtilCard.getRandomCard(list);
         }
         return choice;
     }
@@ -88,7 +88,7 @@ public abstract class CountersAi {
     public static Card chooseBoonTarget(final List<Card> list, final String type) {
         Card choice;
         if (type.equals("P1P1")) {
-            choice = CardFactoryUtil.getBestCreatureAI(list);
+            choice = ComputerUtilCard.getBestCreatureAI(list);
         } else if (type.equals("DIVINITY")) {
             final List<Card> boon = CardLists.filter(list, new Predicate<Card>() {
                 @Override
@@ -96,12 +96,12 @@ public abstract class CountersAi {
                     return c.getCounters(CounterType.DIVINITY) == 0;
                 }
             });
-            choice = CardFactoryUtil.getMostExpensivePermanentAI(boon, null, false);
+            choice = ComputerUtilCard.getMostExpensivePermanentAI(boon, null, false);
         } else {
             // The AI really should put counters on cards that can use it.
             // Charge counters on things with Charge abilities, etc. Expand
             // these above
-            choice = CardFactoryUtil.getRandomCard(list);
+            choice = ComputerUtilCard.getRandomCard(list);
         }
         return choice;
     }

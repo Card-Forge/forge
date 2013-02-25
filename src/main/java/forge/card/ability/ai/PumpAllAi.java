@@ -10,9 +10,9 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.CombatUtil;
@@ -106,7 +106,7 @@ public class PumpAllAi extends PumpAiBase {
 
             // evaluate both lists and pass only if human creatures are more
             // valuable
-            if ((CardFactoryUtil.evaluateCreatureList(comp) + 200) >= CardFactoryUtil.evaluateCreatureList(human)) {
+            if ((ComputerUtilCard.evaluateCreatureList(comp) + 200) >= ComputerUtilCard.evaluateCreatureList(human)) {
                 return false;
             }
             return true;

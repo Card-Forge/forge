@@ -10,9 +10,9 @@ import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
@@ -86,7 +86,7 @@ public class MustBlockAi extends SpellAbilityAi {
             if (list.isEmpty()) {
                 return false;
             }
-            final Card blocker = CardFactoryUtil.getBestCreatureAI(list);
+            final Card blocker = ComputerUtilCard.getBestCreatureAI(list);
             if (blocker == null) {
                 return false;
             }

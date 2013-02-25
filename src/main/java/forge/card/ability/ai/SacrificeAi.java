@@ -5,9 +5,9 @@ import forge.Card;
 import forge.CardLists;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -128,7 +128,7 @@ public class SacrificeAi extends SpellAbilityAi {
             List<Card> computerList =
                     CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
             for (Card c : computerList) {
-                if (!c.getSVar("SacMe").equals("") || CardFactoryUtil.evaluateCreature(c) <= 135) {
+                if (!c.getSVar("SacMe").equals("") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return true;
                 }
             }

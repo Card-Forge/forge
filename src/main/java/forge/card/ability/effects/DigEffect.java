@@ -12,9 +12,9 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -195,9 +195,9 @@ public class DigEffect extends SpellAbilityEffect {
                             chosen = GuiChoose.one(prompt + destZone2, valid);
                             movedCards.remove(chosen);
                         } else { // Computer
-                            Card chosen = CardFactoryUtil.getBestAI(valid);
+                            Card chosen = ComputerUtilCard.getBestAI(valid);
                             if (sa.getActivatingPlayer().isHuman() && p.isHuman()) {
-                                chosen = CardFactoryUtil.getWorstAI(valid);
+                                chosen = ComputerUtilCard.getWorstAI(valid);
                             }
                             movedCards.remove(chosen);
                         }
@@ -250,9 +250,9 @@ public class DigEffect extends SpellAbilityEffect {
                                 changeNum = valid.size(); // always take all
                             }
                             for (j = 0; j < changeNum; j++) {
-                                Card chosen = CardFactoryUtil.getBestAI(valid);
+                                Card chosen = ComputerUtilCard.getBestAI(valid);
                                 if (sa.getActivatingPlayer().isHuman() && p.isHuman()) {
-                                    chosen = CardFactoryUtil.getWorstAI(valid);
+                                    chosen = ComputerUtilCard.getWorstAI(valid);
                                 }
                                 if (chosen == null) {
                                     break;

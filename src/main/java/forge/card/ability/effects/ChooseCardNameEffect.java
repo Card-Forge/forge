@@ -16,9 +16,9 @@ import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -90,9 +90,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                         if (sa.hasParam("AILogic")) {
                             final String logic = sa.getParam("AILogic");
                             if (logic.equals("MostProminentInComputerDeck")) {
-                                chosen = CardFactoryUtil.getMostProminentCardName(p.getCardsIn(ZoneType.Library));
+                                chosen = ComputerUtilCard.getMostProminentCardName(p.getCardsIn(ZoneType.Library));
                             } else if (logic.equals("MostProminentInHumanDeck")) {
-                                chosen = CardFactoryUtil.getMostProminentCardName(p.getOpponent().getCardsIn(ZoneType.Library));
+                                chosen = ComputerUtilCard.getMostProminentCardName(p.getOpponent().getCardsIn(ZoneType.Library));
                             }
                         } else {
                             List<Card> list = CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), p.getOpponent());

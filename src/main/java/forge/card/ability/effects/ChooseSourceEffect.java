@@ -14,6 +14,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -181,10 +182,10 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                                         return ComputerUtilCombat.damageIfUnblocked(c, ai, Singletons.getModel().getGame().getCombat()) > 0;
                                     }
                                 });
-                                chosen.add(CardFactoryUtil.getBestCreatureAI(sourcesToChooseFrom));
+                                chosen.add(ComputerUtilCard.getBestCreatureAI(sourcesToChooseFrom));
                             }
                         } else {
-                            chosen.add(CardFactoryUtil.getBestAI(sourcesToChooseFrom));
+                            chosen.add(ComputerUtilCard.getBestAI(sourcesToChooseFrom));
                         }
                     }
                 }

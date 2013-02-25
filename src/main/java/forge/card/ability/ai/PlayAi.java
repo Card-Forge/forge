@@ -9,10 +9,10 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.AIPlayer;
 import forge.game.zone.ZoneType;
@@ -62,7 +62,7 @@ public class PlayAi extends SpellAbilityAi {
             if (cards.isEmpty()) {
                 return false;
             }
-            tgt.addTarget(CardFactoryUtil.getBestAI(cards));
+            tgt.addTarget(ComputerUtilCard.getBestAI(cards));
         } else if (!sa.hasParam("Valid")) {
             cards = new ArrayList<Card>(AbilityUtils.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
             if (cards.isEmpty()) {
