@@ -1,7 +1,6 @@
 Name:Kithkin Zealot
 ManaCost:1 W
 Types:Creature Kithkin Cleric
-Text:no text
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ ZealotGained | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life for each black and/or red permanent target opponent controls.
 SVar:ZealotGained:AB$ GainLife | Cost$ 0 | LifeAmount$ KithkinZealot | Defined$ You | TgtPrompt$ Select target opponent | ValidTgts$ Opponent
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_zealot.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/9.jpg
 Oracle:When Kithkin Zealot enters the battlefield, you gain 1 life for each black and/or red permanent target opponent controls.
-End

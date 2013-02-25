@@ -1,7 +1,6 @@
 Name:Witch Hunter
 ManaCost:2 W W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ CARDNAME deals 1 damage to target player.
 A:AB$ ChangeZone | Cost$ 1 W W T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you don't control to its owner's hand.
@@ -11,4 +10,3 @@ Oracle:{T}: Witch Hunter deals 1 damage to target player.\n{1}{W}{W}, {T}: Retur
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/92.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/17.jpg
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/70.jpg
-End

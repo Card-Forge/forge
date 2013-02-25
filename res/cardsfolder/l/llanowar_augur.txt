@@ -1,11 +1,9 @@
 Name:Llanowar Augur
 ManaCost:G
 Types:Creature Elf Shaman
-Text:no text
 PT:0/3
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | ValidTgts$ Creature | TgtPrompt$ Select target creature | ActivationPhases$ Upkeep | PlayerTurn$ True| SpellDescription$ Target creature gets +3/+3 and gains trample until end of turn. Activate this ability only during your upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_augur.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/129.jpg
 Oracle:Sacrifice Llanowar Augur: Target creature gets +3/+3 and gains trample until end of turn. Activate this ability only during your upkeep.
-End

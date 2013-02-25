@@ -1,7 +1,6 @@
 Name:Veteran Brawlers
 ManaCost:1 R
 Types:Creature Human Soldier
-Text:no text
 PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can't attack if defending player controls an untapped land.
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME can't can't block if you control an untapped land.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_brawlers.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/106.jpg
 Oracle:Veteran Brawlers can't attack if defending player controls an untapped land.\nVeteran Brawlers can't block if you control an untapped land.
-End

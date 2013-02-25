@@ -1,7 +1,6 @@
 Name:Bloodhall Ooze
 ManaCost:R
 Types:Creature Ooze
-Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.Black+YouCtrl | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, if you control a black permanent, you may put a +1/+1 counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.Green+YouCtrl | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, if you control a green permanent, you may put a +1/+1 counter on CARDNAME.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodhall_ooze.j
 SVar:Rarity:Rare
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/59.jpg
 Oracle:At the beginning of your upkeep, if you control a black permanent, you may put a +1/+1 counter on Bloodhall Ooze.\nAt the beginning of your upkeep, if you control a green permanent, you may put a +1/+1 counter on Bloodhall Ooze.
-End

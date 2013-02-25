@@ -1,11 +1,9 @@
 Name:Viashino Slasher
 ManaCost:1 R
 Types:Creature Viashino Warrior
-Text:no text
 PT:1/2
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_slasher.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/149.jpg
 Oracle:{R}: Viashino Slasher gets +1/-1 until end of turn.
-End

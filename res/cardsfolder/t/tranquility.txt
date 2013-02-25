@@ -1,7 +1,6 @@
 Name:Tranquility
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 A:SP$ DestroyAll | Cost$ 2 G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquility.jpg
@@ -17,4 +16,3 @@ SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/128.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/195.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/129.jpg
 Oracle:Destroy all enchantments.
-End

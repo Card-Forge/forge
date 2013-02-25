@@ -1,11 +1,9 @@
 Name:Absolute Law
 ManaCost:1 W
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Protection from red | Description$ All creatures have protection from red.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_law.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/2.jpg
 Oracle:All creatures have protection from red.
-End

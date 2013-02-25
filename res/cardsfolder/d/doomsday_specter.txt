@@ -1,7 +1,6 @@
 Name:Doomsday Specter
 ManaCost:2 U B
 Types:Creature Specter
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a blue or black creature you control to its owner's hand.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doomsday_specter.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/103.jpg
 Oracle:Flying\nWhen Doomsday Specter enters the battlefield, return a blue or black creature you control to its owner's hand.\nWhenever Doomsday Specter deals combat damage to a player, look at that player's hand and choose a card from it. The player discards that card.
-End

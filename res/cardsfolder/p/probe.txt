@@ -1,7 +1,6 @@
 Name:Probe
 ManaCost:2 U
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | SubAbility$ DBDiscardYou | SpellDescription$ Draw three cards, then discard two cards.
 SVar:DBDiscardYou:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 A:SP$ Draw | Cost$ 3 U B | SetAsKicked$ True | NumCards$ 3 | SubAbility$ DBDiscardYou2 | SpellDescription$ Kicker 1 B (You may pay an additional 1 B as you cast this spell.) If CARDNAME was kicked, target player discards two cards.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/probe.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/66.jpg
 Oracle:Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nDraw three cards, then discard two cards.\nIf Probe was kicked, target player discards two cards.
-End

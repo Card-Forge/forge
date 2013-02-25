@@ -1,10 +1,8 @@
 Name:Gift of the Gargantuan
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 A:SP$ Dig | Cost$ 2 G | DigNum$ 4 | ChangeValid$ Creature | AndOrValid$ Land | ChangeNum$ 2 | SpellDescription$ Look at the top four cards of your library. You may reveal a creature card and/or a land card from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_the_gargantuan.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/132.jpg
 Oracle:Look at the top four cards of your library. You may reveal a creature card and/or a land card from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
-End

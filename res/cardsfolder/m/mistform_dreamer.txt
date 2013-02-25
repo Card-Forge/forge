@@ -1,7 +1,6 @@
 Name:Mistform Dreamer
 ManaCost:2 U
 Types:Creature Illusion
-Text:no text
 PT:2/1
 K:Flying
 A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_dreamer.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/93.jpg
 Oracle:Flying\n{1}: Mistform Dreamer becomes the creature type of your choice until end of turn.
-End

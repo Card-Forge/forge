@@ -1,7 +1,6 @@
 Name:Shrine of Limitless Power
 ManaCost:3
 Types:Artifact
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ At the beginning of your upkeep or whenever you cast a black spell, put a charge counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep or whenever you cast a black spell, put a charge counter on CARDNAME.
 SVar:TrigAddCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_limitless_power.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/154.jpg
 Oracle:At the beginning of your upkeep or whenever you cast a black spell, put a charge counter on Shrine of Limitless Power.\n{4}, {T}, Sacrifice Shrine of Limitless Power: Target player discards a card for each charge counter on Shrine of Limitless Power.
-End

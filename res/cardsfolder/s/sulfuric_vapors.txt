@@ -1,7 +1,6 @@
 Name:Sulfuric Vapors
 ManaCost:3 R
 Types:Enchantment
-Text:no text
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell.Red | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1 | Description$ If a red spell would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
 SVar:DmgPlus1:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.1
@@ -10,4 +9,3 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfuric_vapors.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/220.jpg
 Oracle:If a red spell would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
-End

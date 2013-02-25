@@ -1,7 +1,6 @@
 Name:Vintara Snapper
 ManaCost:G G
 Types:Creature Turtle
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Shroud | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME has shroud as long as you control no untapped lands. (It can't be the target of spells or abilities.)
 SVar:X:Count$Valid Land.YouCtrl+untapped
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vintara_snapper.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/132.jpg
 Oracle:Vintara Snapper has shroud as long as you control no untapped lands. (It can't be the target of spells or abilities.)
-End

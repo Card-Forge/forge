@@ -1,7 +1,6 @@
 Name:Vedalken Mastermind
 ManaCost:U U
 Types:Creature Vedalken Wizard
-Text:no text
 PT:1/2
 A:AB$ ChangeZone | Cost$ U T | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent you control to its owner's hand.
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50834.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/40.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/123.jpg
 Oracle:{U}, {T}: Return target permanent you control to its owner's hand.
-End

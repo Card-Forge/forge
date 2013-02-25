@@ -1,7 +1,6 @@
 Name:Thornweald Archer
 ManaCost:1 G
 Types:Creature Elf Archer
-Text:no text
 PT:2/1
 K:Deathtouch
 K:Reach
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornweald_archer.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/154.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
-End

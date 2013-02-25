@@ -1,11 +1,9 @@
 Name:Fungal Sprouting
 ManaCost:3 G
 Types:Sorcery
-Text:no text
 A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | References$ X | SpellDescription$ Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the greatest power among creatures you control.
 SVar:X:Count$GreatestPowerYouControl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_sprouting.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/173.jpg
 Oracle:Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the greatest power among creatures you control.
-End

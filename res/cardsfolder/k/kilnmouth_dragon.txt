@@ -1,7 +1,6 @@
 Name:Kilnmouth Dragon
 ManaCost:5 R R
 Types:Creature Dragon
-Text:no text
 PT:5/5
 K:Amplify:3:Dragon
 K:Flying
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kilnmouth_dragon.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/104.jpg
 Oracle:Amplify 3 (As this creature enters the battlefield, put three +1/+1 counters on it for each Dragon card you reveal in your hand.)\nFlying\n{T}: Kilnmouth Dragon deals damage equal to the number of +1/+1 counters on it to target creature or player.
-End

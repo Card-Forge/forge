@@ -1,7 +1,6 @@
 Name:Relic Crush
 ManaCost:4 G
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 4 G | ValidTgts$ Artifact,Enchantment | TargetMin$ 1 | TargetMax$ 2 | TgtPrompt$ Select at least one but no more than two target artifacts or enchantments | SpellDescription$ Destroy target artifact or enchantment and up to one other target artifact or enchantment.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/Relic_Crush.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/179.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/168.jpg
 Oracle:Destroy target artifact or enchantment and up to one other target artifact or enchantment.
-End

@@ -1,7 +1,6 @@
 Name:Devoted Caretaker
 ManaCost:W
 Types:Creature Human Cleric
-Text:no text
 PT:1/2
 A:AB$ Pump | Cost$ W T | KW$ Protection:Spell.Instant,Spell.Sorcery:Protection from instant spells and from sorcery spells | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SpellDescription$ Target permanent you control gains protection from instant spells and from sorcery spells until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_caretaker.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/18.jpg
 Oracle:{W}, {T}: Target permanent you control gains protection from instant spells and from sorcery spells until end of turn.
-End

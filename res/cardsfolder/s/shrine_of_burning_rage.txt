@@ -1,7 +1,6 @@
 Name:Shrine of Burning Rage
 ManaCost:2
 Types:Artifact
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ At the beginning of your upkeep or whenever you cast a red spell, put a charge counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep or whenever you cast a red spell, put a charge counter on CARDNAME.
 SVar:TrigAddCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_burning_rage.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/153.jpg
 Oracle:At the beginning of your upkeep or whenever you cast a red spell, put a charge counter on Shrine of Burning Rage.\n{3}, {T}, Sacrifice Shrine of Burning Rage: Shrine of Burning Rage deals damage equal to the number of charge counters on it to target creature or player.
-End

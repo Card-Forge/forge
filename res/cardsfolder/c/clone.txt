@@ -1,7 +1,6 @@
 Name:Clone
 ManaCost:3 U
 Types:Creature Shapeshifter
-Text:no text
 PT:0/0
 K:ETBReplacement:Copy:ChooseCreature:Optional
 SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield.
@@ -19,4 +18,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/51.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/75.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/52.jpg
 Oracle:You may have Clone enter the battlefield as a copy of any creature on the battlefield.
-End

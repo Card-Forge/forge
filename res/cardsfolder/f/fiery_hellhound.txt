@@ -1,7 +1,6 @@
 Name:Fiery Hellhound
 ManaCost:1 R R
 Types:Creature Elemental Hound
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Rarity:Common
@@ -10,4 +9,3 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/136.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/135.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/130.jpg
 Oracle:{R}: Fiery Hellhound gets +1/+0 until end of turn.
-End

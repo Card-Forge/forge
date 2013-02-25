@@ -1,7 +1,6 @@
 Name:Call to the Kindred
 ManaCost:3 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You| Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, you may look at the top five cards of your library. If you do, you may put a creature card that shares a creature type with enchanted creature from among them onto the battlefield, then you put the rest of those cards on the bottom of your library in any order.
@@ -9,4 +8,3 @@ SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ 5 | ChangeNum$ 1 | ChangeValid$ Creatur
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_the_kindred.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/30.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, you may look at the top five cards of your library. If you do, you may put a creature card that shares a creature type with enchanted creature from among them onto the battlefield, then you put the rest of those cards on the bottom of your library in any order.
-End

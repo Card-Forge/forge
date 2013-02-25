@@ -1,7 +1,6 @@
 Name:Kokusho, the Evening Star
 ManaCost:4 B B
 Types:Legendary Creature Dragon Spirit
-Text:no text
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each opponent loses 5 life. You gain life equal to the life lost this way.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50445.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/122.jpg
 Oracle:Flying\nWhen Kokusho, the Evening Star dies, each opponent loses 5 life. You gain life equal to the life lost this way.
-End

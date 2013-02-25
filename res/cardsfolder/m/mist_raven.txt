@@ -1,7 +1,6 @@
 Name:Mist Raven
 ManaCost:2 U U
 Types:Creature Bird
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_raven.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/67.jpg
 Oracle:Flying\nWhen Mist Raven enters the battlefield, return target creature to its owner's hand.
-End

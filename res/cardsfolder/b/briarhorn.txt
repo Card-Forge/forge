@@ -1,7 +1,6 @@
 Name:Briarhorn
 ManaCost:3 G
 Types:Creature Elemental
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +3/+3 until end of turn.
 K:Evoke:1 G
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briarhorn.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/199.jpg
 Oracle:Flash\nWhen Briarhorn enters the battlefield, target creature gets +3/+3 until end of turn.\nEvoke {1}{G} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
-End

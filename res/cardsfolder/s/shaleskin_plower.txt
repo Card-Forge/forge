@@ -1,7 +1,6 @@
 Name:Shaleskin Plower
 ManaCost:3 R
 Types:Creature Beast
-Text:no text
 PT:3/2
 K:Morph:4 R
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target land.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaleskin_plower.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/110.jpg
 Oracle:Morph {4}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Shaleskin Plower is turned face up, destroy target land.
-End

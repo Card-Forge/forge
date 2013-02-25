@@ -1,7 +1,6 @@
 Name:Goblin Rock Sled
 ManaCost:1 R
 Types:Creature Goblin
-Text:no text
 PT:3/1
 K:Trample
 S:Mode$ Continuous | Affected$ Card.Self+attackedLastTurn | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ CARDNAME doesn't untap during your untap step if it attacked during your last turn.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_rock_sled
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/66.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/217.jpg
 Oracle:Trample\nGoblin Rock Sled doesn't untap during your untap step if it attacked during your last turn.\nGoblin Rock Sled can't attack unless defending player controls a Mountain.
-End

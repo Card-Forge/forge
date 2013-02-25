@@ -1,7 +1,6 @@
 Name:Bog Glider
 ManaCost:2 B
 Types:Creature Human Mercenary
-Text:no text
 PT:1/1
 K:Flying
 A:AB$ ChangeZone | Cost$ T Sac<1/Land> | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE2 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with converted mana cost 2 or less and put it onto the battlefield. Then shuffle your library.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_glider.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/58.jpg
 Oracle:Flying\n{T}, Sacrifice a land: Search your library for a Mercenary permanent card with converted mana cost 2 or less and put it onto the battlefield. Then shuffle your library.
-End

@@ -1,7 +1,6 @@
 Name:Slith Ascendant
 ManaCost:1 W W
 Types:Creature Slith
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_ascendant.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/23.jpg
 Oracle:Flying\nWhenever Slith Ascendant deals combat damage to a player, put a +1/+1 counter on it.
-End

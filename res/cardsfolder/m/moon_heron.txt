@@ -1,11 +1,9 @@
 Name:Moon Heron
 ManaCost:3 U
 Types:Creature Spirit Bird
-Text:no text
 PT:3/2
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moon_heron.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/69.jpg
 Oracle:Flying
-End

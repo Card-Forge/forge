@@ -1,7 +1,6 @@
 Name:Bloodflow Connoisseur
 ManaCost:2 B
 Types:Creature Vampire
-Text:no text
 PT:1/1
 A:AB$ PutCounter | Cost$ Sac<1/Creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodflow_connoisseur.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/87.jpg
 Oracle:Sacrifice a creature: Put a +1/+1 counter on Bloodflow Connoisseur.
-End

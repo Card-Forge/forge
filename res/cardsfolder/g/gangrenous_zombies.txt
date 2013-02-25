@@ -1,7 +1,6 @@
 Name:Gangrenous Zombies
 ManaCost:1 B B
 Types:Creature Zombie
-Text:no text
 PT:2/2
 A:AB$ DamageAll | Cost$ T Sac<1/CARDNAME> | IsPresent$ Swamp.Snow+YouCtrl | PresentCompare$ EQ0 | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 1 | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player. If you control a snow Swamp, CARDNAME deals 2 damage to each creature and each player instead.
 A:AB$ DamageAll | Cost$ T Sac<1/CARDNAME> | IsPresent$ Swamp.Snow+YouCtrl | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 2 | ValidDescription$ each creature and each player.
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gangrenous_zombi
 SVar:Rarity:Common
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/15.jpg
 Oracle:{T}, Sacrifice Gangrenous Zombies: Gangrenous Zombies deals 1 damage to each creature and each player. If you control a snow Swamp, Gangrenous Zombies deals 2 damage to each creature and each player instead.
-End

@@ -1,7 +1,6 @@
 Name:Volcanic Eruption
 ManaCost:X U U U
 Types:Sorcery
-Text:no text
 A:SP$ Destroy | Cost$ X U U U | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain  | SpellDescription$ Destroy X target Mountains. CARDNAME deals damage to each creature and each player equal to the number of Mountains destroyed this way. | SubAbility$ DB
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
@@ -16,4 +15,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/89.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/112.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/89.jpg
 Oracle:Destroy X target Mountains. Volcanic Eruption deals damage to each creature and each player equal to the number of Mountains destroyed this way.
-End

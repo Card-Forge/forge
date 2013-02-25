@@ -7,4 +7,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tarmogoyf.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/153.jpg
 Oracle:Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
-End

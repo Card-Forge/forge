@@ -1,7 +1,6 @@
 Name:Mind Swords
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 B | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True | SubAbility$ DBExileOpp | SpellDescription$ Each player exiles two cards from his or her hand.
 A:SP$ ChangeZone | Cost$ Sac<1/Creature> | IsPresent$ Swamp.YouCtrl | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True | SubAbility$ DBExileOpp | CostDesc$ If you control a Swamp, you may sacrifice a creature | SpellDescription$ rather than pay CARDNAME's mana cost.
 SVar:DBExileOpp:DB$ ChangeZone | DefinedPlayer$ Opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True | Hidden$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_swords.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/60.jpg
 Oracle:If you control a Swamp, you may sacrifice a creature rather than pay Mind Swords's mana cost.\nEach player exiles two cards from his or her hand.
-End

@@ -1,10 +1,8 @@
 Name:Heartstone
 ManaCost:3
 Types:Artifact
-Text:no text
 S:Mode$ ReduceCost | ValidCard$ Creature.YouCtrl | Type$ Ability | Amount$ 1 | MinMana$ 1 | AffectedZone$ Battlefield | Description$ Activated abilities of creatures you control cost 1 less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartstone.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/128.jpg
 Oracle:Activated abilities of creatures cost {1} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
-End

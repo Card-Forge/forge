@@ -1,7 +1,6 @@
 Name:Truefire Paladin
 ManaCost:R W
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 K:Vigilance
 A:AB$ Pump | Cost$ R W | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/truefire_paladin.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/202.jpg
 Oracle:Vigilance\n{R}{W}: Truefire Paladin gets +2/+0 until end of turn.\n{R}{W}: Truefire Paladin gains first strike until end of turn.
-End

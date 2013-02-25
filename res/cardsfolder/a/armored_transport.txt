@@ -8,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_transport.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/226.jpg
 Oracle:Prevent all combat damage that would be dealt to Armored Transport by creatures blocking it.
-End

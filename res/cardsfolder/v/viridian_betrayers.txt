@@ -1,7 +1,6 @@
 Name:Viridian Betrayers
 ManaCost:1 G G
 Types:Creature Elf Warrior
-Text:no text
 PT:3/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Infect | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has infect as long as an opponent is poisoned. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 SVar:X:Count$OppPoisonCounters
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_betrayers.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/124.jpg
 Oracle:Viridian Betrayers has infect as long as an opponent is poisoned. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-End

@@ -1,11 +1,9 @@
 Name:Valor Made Real
 ManaCost:W
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can block any number of creatures. | SpellDescription$ Target creature can block any number of creatures this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valor_made_real.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/20.jpg
 Oracle:Target creature can block any number of creatures this turn.
-End

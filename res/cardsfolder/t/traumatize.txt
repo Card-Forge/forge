@@ -1,7 +1,6 @@
 Name:Traumatize
 ManaCost:3 U U
 Types:Sorcery
-Text:no text
 A:SP$ Mill | Cost$ 3 U U | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | SpellDescription$ Target player puts the top half of his or her library, rounded down, into his or her graveyard.
 SVar:X:TargetedPlayer$CardsInLibrary/HalfDown
 SVar:Rarity:Rare
@@ -12,4 +11,3 @@ SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/119.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/109.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/110.jpg
 Oracle:Target player puts the top half of his or her library, rounded down, into his or her graveyard.
-End

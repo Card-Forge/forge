@@ -1,7 +1,6 @@
 Name:Furnace Whelp
 ManaCost:2 R R
 Types:Creature Dragon
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -12,4 +11,3 @@ SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/133.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/124.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/205.jpg
 Oracle:Flying\n{R}: Furnace Whelp gets +1/+0 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:See Beyond
 ManaCost:1 U
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 1 U | NumCards$ 2 | SubAbility$ DBShuffle | SpellDescription$ Draw two cards, then shuffle a card from your hand into your library.
 SVar:DBShuffle:DB$ChangeZone | Origin$ Hand | Destination$ Library | Shuffle$ True | ChangeType$ Card.YouOwn | ChangeNum$ 1
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/see_beyond.jpg
 SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/25.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/86.jpg
 Oracle:Draw two cards, then shuffle a card from your hand into your library.
-End

@@ -1,11 +1,9 @@
 Name:Grim Harvest
 ManaCost:1 B
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature | SpellDescription$ Return target creature card from your graveyard to your hand.
 K:Recover:2 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_harvest.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/58.jpg
 Oracle:Return target creature card from your graveyard to your hand.\nRecover {2}{B} (When a creature is put into your graveyard from the battlefield, you may pay {2}{B}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)
-End

@@ -1,7 +1,6 @@
 Name:Epic Struggle
 ManaCost:2 G G
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | PresentCompare$ GE20 | IsPresent$ Creature.YouCtrl | Execute$ TrigWinsLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
 SVar:TrigWinsLife:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epic_struggle.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/112.jpg
 Oracle:At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
-End

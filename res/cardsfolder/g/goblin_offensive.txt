@@ -1,11 +1,9 @@
 Name:Goblin Offensive
 ManaCost:X 1 R R
 Types:Sorcery
-Text:no text
 A:SP$ Token | Cost$ X 1 R R | TokenAmount$ X | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | References$ X | SpellDescription$ Put X 1/1 red Goblin creature tokens onto the battlefield.
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_offensive.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/192.jpg
 Oracle:Put X 1/1 red Goblin creature tokens onto the battlefield.
-End

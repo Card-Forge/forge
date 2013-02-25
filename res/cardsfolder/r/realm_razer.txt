@@ -1,7 +1,6 @@
 Name:Realm Razer
 ManaCost:3 R G W
 Types:Creature Beast
-Text:no text
 PT:4/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all lands.
 SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Land | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/realm_razer.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/187.jpg
 Oracle:When Realm Razer enters the battlefield, exile all lands.\nWhen Realm Razer leaves the battlefield, return the exiled cards to the battlefield tapped under their owners' control.
-End

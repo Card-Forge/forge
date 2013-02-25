@@ -1,7 +1,6 @@
 Name:Shield Sphere
 ManaCost:0
 Types:Artifact Creature Wall
-Text:no text
 PT:0/6
 K:Defender
 T:Mode$ Blocks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME blocks, put a -0/-1 counter on it.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_sphere.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/172.jpg
 Oracle:Defender\nWhenever Shield Sphere blocks, put a -0/-1 counter on it.
-End

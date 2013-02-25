@@ -1,7 +1,6 @@
 Name:Surrakar Banisher
 ManaCost:4 U
 Types:Creature Surrakar
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target tapped creature to its owner's hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Hand
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surrakar_banisher.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/39.jpg
 Oracle:When Surrakar Banisher enters the battlefield, you may return target tapped creature to its owner's hand.
-End

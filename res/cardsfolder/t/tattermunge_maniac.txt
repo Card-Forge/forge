@@ -1,11 +1,9 @@
 Name:Tattermunge Maniac
 ManaCost:RG
 Types:Creature Goblin Warrior
-Text:no text
 PT:2/1
 K:CARDNAME attacks each turn if able.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_maniac.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/219.jpg
 Oracle:Tattermunge Maniac attacks each turn if able.
-End

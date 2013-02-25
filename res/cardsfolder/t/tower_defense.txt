@@ -1,11 +1,9 @@
 Name:Tower Defense
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ PumpAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | NumDef$ +5 | KW$ Reach | SpellDescription$ Creatures you control get +0/+5 and gain reach until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_defense.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/137.jpg
 Oracle:Creatures you control get +0/+5 and gain reach until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Dermoplasm
 ManaCost:2 U
 Types:Creature Shapeshifter
-Text:no text
 PT:1/1
 K:Flying
 K:Morph:2 U U
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dermoplasm.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/35.jpg
 Oracle:Flying\nMorph {2}{U}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Dermoplasm is turned face up, you may put a creature card with morph from your hand onto the battlefield face up. If you do, return Dermoplasm to its owner's hand.
-End

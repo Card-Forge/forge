@@ -1,7 +1,6 @@
 Name:Declaration of Naught
 ManaCost:U U
 Types:Enchantment
-Text:no text
 K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, name a card.
 A:AB$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell with the chosen name. | ValidTgts$ Card.NamedCard | SpellDescription$ Counter target spell with the chosen name.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/declaration_of_naught.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/29.jpg
 Oracle:As Declaration of Naught enters the battlefield, name a card.\n{U}: Counter target spell with the chosen name.
-End

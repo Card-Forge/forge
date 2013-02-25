@@ -12,4 +12,3 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_of_stagnation.jpg
 Oracle:Permanents don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, that player chooses a permanent for each card in his or her graveyard, then untaps those permanents.
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/48.jpg
-End

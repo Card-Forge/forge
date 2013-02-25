@@ -1,7 +1,6 @@
 Name:Stigma Lasher
 ManaCost:R R
 Types:Creature Elemental Shaman
-Text:no text
 PT:2/2
 K:Wither
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player can't gain life for the rest of the game.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stigma_lasher.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/62.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever Stigma Lasher deals damage to a player, that player can't gain life for the rest of the game.
-End

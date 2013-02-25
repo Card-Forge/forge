@@ -1,7 +1,6 @@
 Name:Untamed Wilds
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/untamed_wilds.jpg
@@ -14,4 +13,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/263.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/197.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/148.jpg
 Oracle:Search your library for a basic land card and put that card onto the battlefield. Then shuffle your library.
-End

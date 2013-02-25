@@ -1,7 +1,6 @@
 Name:Lich's Mirror
 ManaCost:5
 Types:Artifact
-Text:no text
 R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ShuffleDrawSetLife | Description$ If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20.
 SVar:ShuffleDrawSetLife:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.YouOwn | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ Shuffle2
 SVar:Shuffle2:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Hand | Destination$ Library | Shuffle$ True | SubAbility$ Shuffle3
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lichs_mirror.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/210.jpg
 Oracle:If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20.
-End

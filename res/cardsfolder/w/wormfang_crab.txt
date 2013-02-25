@@ -1,7 +1,6 @@
 Name:Wormfang Crab
 ManaCost:3 U
 Types:Creature Nightmare Crab
-Text:no text
 PT:3/6
 K:Unblockable
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoice | TriggerDescription$ When CARDNAME enters the battlefield, an opponent chooses a permanent you control other than CARDNAME and exiles it.
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_crab.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/56.jpg
 Oracle:Wormfang Crab is unblockable.\nWhen Wormfang Crab enters the battlefield, an opponent chooses a permanent you control other than Wormfang Crab and exiles it.\nWhen Wormfang Crab leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-End

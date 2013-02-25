@@ -1,7 +1,6 @@
 Name:Minamo Sightbender
 ManaCost:1 U
 Types:Creature Human Wizard
-Text:no text
 PT:1/2
 A:AB$ Pump | Announce$ X | Cost$ X T | KW$ HIDDEN Unblockable | TgtPrompt$ Select target creature with power X or less | ValidTgts$ Creature.powerLEX | References$ X | SpellDescription$ Target creature with power X or less is unblockable this turn.
 SVar:X:Count$xPaid
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_sightbender.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/41.jpg
 Oracle:{X}, {T}: Target creature with power X or less is unblockable this turn.
-End

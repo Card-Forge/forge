@@ -1,7 +1,6 @@
 Name:Final-Sting Faerie
 ManaCost:3 B
 Types:Creature Faerie Assassin
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature that was dealt damage this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/final_sting_faerie.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/63.jpg
 Oracle:Flying\nWhen Final-Sting Faerie enters the battlefield, destroy target creature that was dealt damage this turn.
-End

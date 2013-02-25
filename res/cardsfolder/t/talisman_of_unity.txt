@@ -1,7 +1,6 @@
 Name:Talisman of Unity
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | SubAbility$ DBPain | SpellDescription$ Add W to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_unity.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/257.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {G} or {W} to your mana pool. Talisman of Unity deals 1 damage to you.
-End

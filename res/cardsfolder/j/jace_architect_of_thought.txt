@@ -1,7 +1,6 @@
 Name:Jace, Architect of Thought
 ManaCost:2 U U
 Types:Planeswalker Jace
-Text:no text
 Loyalty:4
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ TrigAttack | SVars$ JacePump | Duration$ UntilYourNextTurn | Name$ Jace, Architect of Thought Effect | SpellDescription$ Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
 SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.OppCtrl | TriggerZones$ Command | Execute$ JacePump | TriggerDescription$ Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.
@@ -19,4 +18,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_architect_of_thought.jpg
 SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/44.jpg
 Oracle:[+1] Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.\n[-2] Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.\n[-8] For each player, search that player's library for a nonland card and exile it, then that player shuffles his or her library. You may cast those cards without paying their mana costs.
-End

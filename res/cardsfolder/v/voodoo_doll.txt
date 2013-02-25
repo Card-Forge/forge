@@ -1,7 +1,6 @@
 Name:Voodoo Doll
 ManaCost:6
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, put a pin counter on CARDNAME.
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+untapped | PresentCompare$ EQ1 | ValidPlayer$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$  At the beginning of your end step, if CARDNAME is untapped, destroy CARDNAME and it deals damage to you equal to the number of pin counters on it.
 A:AB$ DealDamage | Cost$ X X T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of pin counters on it to target creature or player. X is the number of pin counters on CARDNAME.
@@ -15,4 +14,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/voodoo_doll.jpg
 Oracle:At the beginning of your upkeep, put a pin counter on Voodoo Doll.\nAt the beginning of your end step, if Voodoo Doll is untapped, destroy Voodoo Doll and it deals damage to you equal to the number of pin counters on it.\n{X}{X}, {T}: Voodoo Doll deals damage equal to the number of pin counters on it to target creature or player. X is the number of pin counters on Voodoo Doll.
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/91.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/243.jpg
-End

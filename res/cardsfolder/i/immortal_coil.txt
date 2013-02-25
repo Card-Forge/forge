@@ -1,7 +1,6 @@
 Name:Immortal Coil
 ManaCost:2 B B
 Types:Artifact
-Text:no text
 A:AB$ Draw | Cost$ T ExileFromGrave<2/Card> | CostDesc$ T, Exile two cards from your graveyard | NumCards$ 1 | SpellDescription$ Draw a card.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ ChangeZone | PreventionEffect$ True | Description$ If damage would be dealt to you, prevent that damage. Exile a card from your graveyard for each 1 damage prevented this way.
 SVar:ChangeZone:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Card | ChangeNum$ X | DefinedPlayer$ ReplacedTarget | Origin$ Graveyard | Destination$ Exile | References$ X
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immortal_coil.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/79.jpg
 Oracle:{T}, Exile two cards from your graveyard: Draw a card.\nIf damage would be dealt to you, prevent that damage. Exile a card from your graveyard for each 1 damage prevented this way.\nWhen there are no cards in your graveyard, you lose the game.
-End

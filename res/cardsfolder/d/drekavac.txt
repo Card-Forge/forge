@@ -13,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111258.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/43.jpg
 Oracle:When Drekavac enters the battlefield, sacrifice it unless you discard a noncreature card.
-End

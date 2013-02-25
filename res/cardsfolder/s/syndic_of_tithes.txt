@@ -1,11 +1,9 @@
 Name:Syndic of Tithes
 ManaCost:1 W
 Types:Creature Human Cleric
-Text:no text
 PT:2/2
 K:Extort
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syndic_of_tithes.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/26.jpg
 Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)
-End

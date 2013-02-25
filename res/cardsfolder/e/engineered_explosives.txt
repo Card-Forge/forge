@@ -1,7 +1,6 @@
 Name:Engineered Explosives
 ManaCost:X
 Types:Artifact
-Text:no text
 K:Sunburst
 A:AB$ DestroyAll | Cost$ 2 Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQX | References$ X | SpellDescription$ Destroy each nonland permanent with converted mana cost equal to the number of charge counters on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_explosives.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/118.jpg
 Oracle:Sunburst (This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)\n{2}, Sacrifice Engineered Explosives: Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Engineered Explosives.
-End

@@ -1,7 +1,6 @@
 Name:Jade Monolith
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ ChooseSource | Cost$ 1 | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,X | RememberObjects$ Remembered | ImprintCards$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ Card.IsImprinted | ValidSource$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
@@ -23,4 +22,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/293.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/255.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/253.jpg
 Oracle:{1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
-End

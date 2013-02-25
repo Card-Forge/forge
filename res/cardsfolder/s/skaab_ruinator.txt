@@ -10,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skaab_ruinator.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/77.jpg
 Oracle:As an additional cost to cast Skaab Ruinator, exile three creature cards from your graveyard.\nFlying\nYou may cast Skaab Ruinator from your graveyard.
-End

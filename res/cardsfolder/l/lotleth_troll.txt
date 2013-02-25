@@ -1,7 +1,6 @@
 Name:Lotleth Troll
 ManaCost:B G
 Types:Creature Zombie Troll
-Text:no text
 PT:2/1
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 K:Trample
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotleth_troll.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/177.jpg
 Oracle:Trample\nDiscard a creature card: Put a +1/+1 counter on Lotleth Troll.\n{B}: Regenerate Lotleth Troll.
-End

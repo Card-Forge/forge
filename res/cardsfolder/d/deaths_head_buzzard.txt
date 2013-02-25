@@ -1,7 +1,6 @@
 Name:Death's-Head Buzzard
 ManaCost:1 B B
 Types:Creature Bird
-Text:no text
 PT:2/1
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPumpAll | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, all creatures get -1/-1 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_head_buzzard.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/63.jpg
 Oracle:Flying\nWhen Death's-Head Buzzard dies, all creatures get -1/-1 until end of turn.
-End

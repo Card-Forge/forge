@@ -1,7 +1,6 @@
 Name:Unwilling Recruit
 ManaCost:X R R R
 Types:Sorcery
-Text:no text
 A:SP$ GainControl | Cost$ X R R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ X | KW$ Haste | References$ X 
 SVar:X:Count$xPaid
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unwilling_recruit.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/64.jpg
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.
-End

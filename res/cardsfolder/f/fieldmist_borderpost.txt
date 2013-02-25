@@ -1,7 +1,6 @@
 Name:Fieldmist Borderpost
 ManaCost:1 W U
 Types:Artifact
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fieldmist_borderpost.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/5.jpg
 Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay Fieldmist Borderpost's mana cost.\nFieldmist Borderpost enters the battlefield tapped.\n{T}: Add {W} or {U} to your mana pool.
-End

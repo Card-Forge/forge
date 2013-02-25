@@ -1,7 +1,6 @@
 Name:Baneslayer Angel
 ManaCost:3 W W
 Types:Creature Angel
-Text:no text
 PT:5/5
 K:Flying
 K:First Strike
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/baneslayer_angel
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/7.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/4.jpg
 Oracle:Flying, first strike, lifelink, protection from Demons and from Dragons
-End

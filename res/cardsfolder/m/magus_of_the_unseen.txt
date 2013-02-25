@@ -1,7 +1,6 @@
 Name:Magus of the Unseen
 ManaCost:1 U
 Types:Creature Human Wizard
-Text:no text
 PT:1/1
 A:AB$ GainControl | Cost$ 1 U T | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact opponent controls | LoseControl$ EOT | AddKWs$ Haste | Untap$ True | TapOnLose$ True | SpellDescription$ Untap target artifact an opponent controls and gain control of it until end of turn. It gains haste until end of turn. When you lose control of the artifact, tap it.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_uns
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/102.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/82.jpg
 Oracle:{1}{U}, {T}: Untap target artifact an opponent controls and gain control of it until end of turn. It gains haste until end of turn. When you lose control of the artifact, tap it.
-End

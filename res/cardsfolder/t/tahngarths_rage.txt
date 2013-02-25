@@ -1,7 +1,6 @@
 Name:Tahngarth's Rage
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+attacking | AddPower$ 3 | Description$ Enchanted creature gets +3/+0 as long as it's attacking. Otherwise, it gets -2/-1.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tahngarths_rage.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/209.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+0 as long as it's attacking. Otherwise, it gets -2/-1.
-End

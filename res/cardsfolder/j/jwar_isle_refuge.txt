@@ -1,7 +1,6 @@
 Name:Jwar Isle Refuge
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 K:CARDNAME enters the battlefield tapped.
@@ -13,4 +12,3 @@ SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/120.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/215.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/279.jpg
 Oracle:Jwar Isle Refuge enters the battlefield tapped.\nWhen Jwar Isle Refuge enters the battlefield, you gain 1 life.\n{T}: Add {U} or {B} to your mana pool.
-End

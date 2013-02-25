@@ -1,7 +1,6 @@
 Name:Shard Phoenix
 ManaCost:4 R
 Types:Creature Phoenix
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ ChangeZone | Cost$ R R R | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Play this ability only during your upkeep.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/shard_phoenix.jp
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/97.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/217.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nSacrifice Shard Phoenix: Shard Phoenix deals 2 damage to each creature without flying.\n{R}{R}{R}: Return Shard Phoenix from your graveyard to your hand. Activate this ability only during your upkeep.
-End

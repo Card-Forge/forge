@@ -1,7 +1,6 @@
 Name:Ashnod's Altar
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ Sac<1/Creature>  | Produced$ 1 | Amount$ 2 | SpellDescription$ Add 2 to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
@@ -11,4 +10,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/349.jpg
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/72.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/274.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/3.jpg
-End

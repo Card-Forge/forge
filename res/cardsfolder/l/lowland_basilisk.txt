@@ -1,7 +1,6 @@
 Name:Lowland Basilisk
 ManaCost:2 G
 Types:Creature Basilisk
-Text:no text
 PT:1/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME deals damage to a creature, destroy that creature at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy damaged creature at end of combat.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lowland_basilisk.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/59.jpg
 Oracle:Whenever Lowland Basilisk deals damage to a creature, destroy that creature at end of combat.
-End

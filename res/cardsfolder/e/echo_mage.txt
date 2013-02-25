@@ -1,7 +1,6 @@
 Name:Echo Mage
 ManaCost:1 U U
 Types:Creature Human Wizard
-Text:no text
 PT:2/3
 K:Level up:1 U
 K:maxLevel:4
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echo_mage.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/64.jpg
 Oracle:Level up {1}{U} ({1}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-3\n2/4\n{U}{U}, {T}: Copy target instant or sorcery spell. You may choose new targets for the copy.\nLEVEL 4+\n2/5\n{U}{U}, {T}: Copy target instant or sorcery spell twice. You may choose new targets for the copies.
-End

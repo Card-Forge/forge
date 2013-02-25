@@ -1,7 +1,6 @@
 Name:Abuna's Chant
 ManaCost:3 W
 Types:Instant
-Text:no text
 A:SP$ GainLife | Cost$ 3 W | LifeAmount$ 5 | SpellDescription$ Choose one - You gain 5 life;
 A:SP$ PreventDamage | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Amount$ 5 | SpellDescription$  or prevent the next 5 damage that would be dealt to target creature this turn.
 A:SP$ GainLife | Cost$ 5 W | PrecostDesc$ Entwine | CostDesc$ 2 | LifeAmount$ 5 | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.) | SubAbility$ DBPreventDamage
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abunas_chant.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/1.jpg
 Oracle:Choose one - You gain 5 life; or prevent the next 5 damage that would be dealt to target creature this turn.\nEntwine {2} (Choose both if you pay the entwine cost.)
-End

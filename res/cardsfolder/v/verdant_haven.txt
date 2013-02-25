@@ -1,7 +1,6 @@
 Name:Verdant Haven
 ManaCost:2 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
@@ -12,4 +11,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_haven.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/138.jpg
 Oracle:Enchant land\nWhen Verdant Haven enters the battlefield, you gain 2 life.\nWhenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool (in addition to the mana the land produces).
-End

@@ -1,7 +1,6 @@
 Name:Nest Invader
 ManaCost:1 G
 Types:Creature Eldrazi Drone
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/nest_invader.jpg
 SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/69.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/201.jpg
 Oracle:When Nest Invader enters the battlefield, put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."
-End

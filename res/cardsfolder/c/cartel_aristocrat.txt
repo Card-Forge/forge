@@ -1,7 +1,6 @@
 Name:Cartel Aristocrat
 ManaCost:W B
 Types:Creature Human Advisor
-Text:no text
 PT:2/2
 A:AB$ Protection | Cost$ Sac<1/Creature.Other/another creature> | Gains$ Choice | Choices$ AnyColor | SpellDescription$ CARDNAME gains protection from the color of your choice until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cartel_aristocrat.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/150.jpg
 Oracle:Sacrifice another creature: Cartel Aristocrat gains protection from the color of your choice until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Death Bomb
 ManaCost:3 B
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 3 B Sac<1/Creature> | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature | SubAbility$ DBDrain | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
 SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 2
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_bomb.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/41.jpg
 Oracle:As an additional cost to cast Death Bomb, sacrifice a creature.\nDestroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
-End

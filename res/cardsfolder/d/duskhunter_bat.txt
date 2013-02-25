@@ -1,7 +1,6 @@
 Name:Duskhunter Bat
 ManaCost:1 B
 Types:Creature Bat
-Text:no text
 PT:1/1
 K:Flying
 K:Bloodthirst 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskhunter_bat.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/97.jpg
 Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)\nFlying
-End

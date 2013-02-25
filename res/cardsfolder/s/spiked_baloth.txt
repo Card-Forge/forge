@@ -1,11 +1,9 @@
 Name:Spiked Baloth
 ManaCost:3 G
 Types:Creature Beast
-Text:no text
 PT:4/2
 K:Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiked_baloth.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/192.jpg
 Oracle:Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)
-End

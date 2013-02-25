@@ -1,11 +1,9 @@
 Name:Ronin Cavekeeper
 ManaCost:5 R
 Types:Creature Human Samurai
-Text:no text
 PT:4/3
 K:Bushido 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_cavekeeper.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/111.jpg
 Oracle:Bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
-End

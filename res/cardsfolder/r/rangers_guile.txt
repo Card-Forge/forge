@@ -1,10 +1,8 @@
 Name:Ranger's Guile
 ManaCost:G
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | NumDef$ +1 | KW$ Hexproof | SpellDescription$ Target creature you control gets +1/+1 and gains hexproof until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rangers_guile.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/201.jpg
 Oracle:Target creature you control gets +1/+1 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
-End

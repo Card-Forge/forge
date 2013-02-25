@@ -1,7 +1,6 @@
 Name:Steely Resolve
 ManaCost:1 G
 Types:Enchantment
-Text:no text
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
 S:Mode$ Continuous | Affected$ Creature.ChosenType | AddKeyword$ Shroud | Description$ Creatures of the chosen type have shroud. (They can't be the targets of spells or abilities.)
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steely_resolve.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/286.jpg
 Oracle:As Steely Resolve enters the battlefield, choose a creature type.\nCreatures of the chosen type have shroud. (They can't be the targets of spells or abilities.)
-End

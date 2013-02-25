@@ -1,7 +1,6 @@
 Name:Hive Mind
 ManaCost:5 U
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Player | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an instant or sorcery spell, each other player copies that spell. Each of those players may choose new targets for his or her copy.
 SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Controller$ TriggeredCardOpponent
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hive_mind.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/54.jpg
 Oracle:Whenever a player casts an instant or sorcery spell, each other player copies that spell. Each of those players may choose new targets for his or her copy.
-End

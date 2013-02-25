@@ -1,7 +1,6 @@
 Name:Cave Tiger
 ManaCost:2 G
 Types:Creature Cat
-Text:no text
 PT:2/2
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME get +1/+1 until end of turn.
 SVar:TrigBlockedPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ +1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cave_tiger.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/241.jpg
 Oracle:Whenever Cave Tiger becomes blocked by a creature, Cave Tiger gets +1/+1 until end of turn.
-End

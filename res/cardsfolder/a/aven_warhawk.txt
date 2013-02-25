@@ -1,7 +1,6 @@
 Name:Aven Warhawk
 ManaCost:4 W
 Types:Creature Bird Soldier
-Text:no text
 PT:2/2
 K:Amplify:1:Bird,Soldier
 K:Flying
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_warhawk.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/4.jpg
 Oracle:Amplify 1 (As this creature enters the battlefield, put a +1/+1 counter on it for each Bird and/or Soldier card you reveal in your hand.)\nFlying
-End

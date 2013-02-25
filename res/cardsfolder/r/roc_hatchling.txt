@@ -1,7 +1,6 @@
 Name:Roc Hatchling
 ManaCost:R
 Types:Creature Bird
-Text:no text
 PT:0/1
 K:etbCounter:SHELL:4
 S:Mode$ Continuous | Affected$ Card.Self+counters_EQ0_SHELL | AddPower$ 3 | AddToughness$ 2 | AddKeyword$ Flying | Description$ As long as CARDNAME has no shell counters on it, it gets +3/+2 and has flying.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roc_hatchling.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/113.jpg
 Oracle:Roc Hatchling enters the battlefield with four shell counters on it.\nAt the beginning of your upkeep, remove a shell counter from Roc Hatchling.\nAs long as Roc Hatchling has no shell counters on it, it gets +3/+2 and has flying.
-End

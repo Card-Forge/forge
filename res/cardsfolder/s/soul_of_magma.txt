@@ -1,7 +1,6 @@
 Name:Soul of Magma
 ManaCost:3 R R
 Types:Creature Spirit
-Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME deals 1 damage to target creature.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_magma.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/189.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, Soul of Magma deals 1 damage to target creature.
-End

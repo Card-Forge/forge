@@ -1,7 +1,6 @@
 Name:Rage Forger
 ManaCost:2 R
 Types:Creature Elemental Shaman
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter each other Shaman creature you control.
 SVar:TrigPutCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.Shaman+Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_forger.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/97.jpg
 Oracle:When Rage Forger enters the battlefield, put a +1/+1 counter on each other Shaman creature you control.\nWhenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player.
-End

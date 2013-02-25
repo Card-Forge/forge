@@ -1,7 +1,6 @@
 Name:Wintermoon Mesa
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Tap | Cost$ 2 T Sac<1/CARDNAME> | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target land | ValidTgts$ Land | SpellDescription$ Tap two target lands.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wintermoon_mesa.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/143.jpg
 Oracle:Wintermoon Mesa enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\n{2}, {T}, Sacrifice Wintermoon Mesa: Tap two target lands.
-End

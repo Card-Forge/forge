@@ -1,7 +1,6 @@
 Name:Anodet Lurker
 ManaCost:5
 Types:Artifact Creature Construct
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you gain 3 life.
 SVar:TrigSac:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 3
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anodet_lurker.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/101.jpg
 Oracle:When Anodet Lurker dies, you gain 3 life.
-End

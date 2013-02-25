@@ -1,7 +1,6 @@
 Name:Death Watch
 ManaCost:B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLose | TriggerDescription$ When enchanted creature dies, its controller loses life equal to its power and you gain life equal to its toughness.
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_watch.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/7.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, its controller loses life equal to its power and you gain life equal to its toughness.
-End

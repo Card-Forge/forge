@@ -1,7 +1,6 @@
 Name:Abbey Griffin
 ManaCost:3 W
 Types:Creature Griffin
-Text:no text
 PT:2/2
 K:Flying
 K:Vigilance
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abbey_griffin.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/1.jpg
 Oracle:Flying, vigilance
-End

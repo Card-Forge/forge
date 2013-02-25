@@ -1,7 +1,6 @@
 Name:Seshiro the Anointed
 ManaCost:4 G G
 Types:Legendary Creature Snake Monk
-Text:no text
 PT:3/4
 S:Mode$ Continuous | Affected$ Creature.Snake+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Snake creatures you control get +2/+2.
 T:Mode$ DamageDone | ValidSource$ Snake.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a Snake you control deals combat damage to a player, you may draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seshiro_the_anointed.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/241.jpg
 Oracle:Other Snake creatures you control get +2/+2.\nWhenever a Snake you control deals combat damage to a player, you may draw a card.
-End

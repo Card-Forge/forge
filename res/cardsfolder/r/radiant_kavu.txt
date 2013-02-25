@@ -1,7 +1,6 @@
 Name:Radiant Kavu
 ManaCost:R G W
 Types:Creature Kavu
-Text:no text
 PT:3/3
 A:AB$ Effect | Cost$ R G W | Name$ Radiant Kavu Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all combat damage blue creatures and black creatures would deal this turn.
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.Blue,Creature.Black | CombatDamage$ True | Description$ Prevent all combat damage blue creatures and black creatures would deal this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiant_kavu.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/120.jpg
 Oracle:{R}{G}{W}: Prevent all combat damage blue creatures and black creatures would deal this turn.
-End

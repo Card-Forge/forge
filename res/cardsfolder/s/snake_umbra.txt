@@ -1,7 +1,6 @@
 Name:Snake Umbra
 ManaCost:2 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 K:Totem armor
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_umbra.jpg
 SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/78.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/207.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has "Whenever this creature deals damage to an opponent, you may draw a card."\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
-End

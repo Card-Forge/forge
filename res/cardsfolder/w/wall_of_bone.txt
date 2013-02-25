@@ -1,7 +1,6 @@
 Name:Wall of Bone
 ManaCost:2 B
 Types:Creature Skeleton Wall
-Text:no text
 PT:1/4
 K:Defender
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
@@ -16,4 +15,3 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/119.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/42.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/41.jpg
 Oracle:Defender (This creature can't attack.)\n{B}: Regenerate Wall of Bone. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
-End

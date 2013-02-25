@@ -1,7 +1,6 @@
 Name:Telepathic Spies
 ManaCost:2 U
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When CARDNAME enters the battlefield, look at target opponent's hand.
 SVar:TrigPeek:AB$RevealHand | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/telepathic_spies
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/47.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/101.jpg
 Oracle:When Telepathic Spies enters the battlefield, look at target opponent's hand.
-End

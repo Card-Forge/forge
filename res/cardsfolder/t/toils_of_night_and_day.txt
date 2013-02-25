@@ -1,7 +1,6 @@
 Name:Toils of Night and Day
 ManaCost:2 U
 Types:Instant Arcane
-Text:no text
 A:SP$ TapOrUntap | Cost$ 2 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBTapOrUntap | SpellDescription$ You may tap or untap target permanent, then you may tap or untap another target permanent.
 SVar:DBTapOrUntap:DB$TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent (2) | TargetUnique$ True
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/toils_of_night_and_day.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/57.jpg
 Oracle:You may tap or untap target permanent, then you may tap or untap another target permanent.
-End

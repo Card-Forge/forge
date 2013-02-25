@@ -1,7 +1,6 @@
 Name:Palace Guard
 ManaCost:2 W
 Types:Creature Human Soldier
-Text:no text
 PT:1/4
 K:CARDNAME can block any number of creatures.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/palace_guard.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/24.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/23.jpg
 Oracle:Palace Guard can block any number of creatures.
-End

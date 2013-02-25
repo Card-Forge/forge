@@ -1,11 +1,9 @@
 Name:Phyrexian Infiltrator
 ManaCost:2 B
 Types:Creature Minion
-Text:no text
 PT:2/2
 A:AB$ ExchangeControl | Cost$ 2 U U | Defined$ Self | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Exchange control of CARDNAME and target creature. (This effect lasts indefinitely.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_infiltrator.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/116.jpg
 Oracle:{2}{U}{U}: Exchange control of Phyrexian Infiltrator and target creature. (This effect lasts indefinitely.)
-End

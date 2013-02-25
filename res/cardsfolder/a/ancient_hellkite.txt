@@ -8,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_hellkite.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/122.jpg
 Oracle:Flying\n{R}: Ancient Hellkite deals 1 damage to target creature defending player controls. Activate this ability only if Ancient Hellkite is attacking.
-End

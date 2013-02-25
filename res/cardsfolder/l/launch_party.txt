@@ -1,7 +1,6 @@
 Name:Launch Party
 ManaCost:3 B
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 3 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDrain | SpellDescription$ Destroy target creature. Its controller loses 2 life.
 SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 2
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/launch_party.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/69.jpg
 Oracle:As an additional cost to cast Launch Party, sacrifice a creature.\nDestroy target creature. Its controller loses 2 life.
-End

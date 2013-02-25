@@ -1,7 +1,6 @@
 Name:Advice from the Fae
 ManaCost:2/U 2/U 2/U
 Types:Sorcery
-Text:no text
 A:SP$ Dig | Cost$ 2/U 2/U 2/U | DigNum$ 4 | ChangeNum$ 1 | SubAbility$ Dig2 | ConditionCheckSVar$ X | ConditionSVarCompare$ LEY | References$ X,Y | SpellDescription$ Look at the top five cards of your library. If you control more creatures than each other player, put two of those cards into your hand. Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order.
 SVar:Dig2:DB$ Dig | DigNum$ 4 | ChangeNum$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | References$ X,Y
 SVar:X:Count$Valid Creature.YouCtrl
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/advice_from_the_fae.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/28.jpg
 Oracle:({2/U} can be paid with any two mana or with {U}. This card's converted mana cost is 6.)\nLook at the top five cards of your library. If you control more creatures than each other player, put two of those cards into your hand. Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order.
-End

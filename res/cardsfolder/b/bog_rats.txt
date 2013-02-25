@@ -1,7 +1,6 @@
 Name:Bog Rats
 ManaCost:B
 Types:Creature Rat
-Text:no text
 PT:1/1
 K:CARDNAME can't be blocked by Walls.
 SVar:Rarity:Common
@@ -11,4 +10,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/8.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/4.jpg
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/2.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/117.jpg
-End

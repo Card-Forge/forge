@@ -1,7 +1,6 @@
 Name:Timbermaw Larva
 ManaCost:3 G
 Types:Creature Beast
-Text:no text
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn for each Forest you control.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timbermaw_larva.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/189.jpg
 Oracle:Whenever Timbermaw Larva attacks, it gets +1/+1 until end of turn for each Forest you control.
-End

@@ -1,11 +1,9 @@
 Name:Darba
 ManaCost:3 G
 Types:Creature Bird Beast
-Text:no text
 PT:5/4
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darba.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/111.jpg
 Oracle:At the beginning of your upkeep, sacrifice Darba unless you pay {G}{G}.
-End

@@ -1,7 +1,6 @@
 Name:Graveborn Muse
 ManaCost:2 B B
 Types: Creature Zombie Spirit
-Text:no text
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, you draw X cards and you lose X life, where X is the number of Zombies you control.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife | References$ X
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/graveborn_muse.j
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/145.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/73.jpg
 Oracle:At the beginning of your upkeep, you draw X cards and you lose X life, where X is the number of Zombies you control.
-End

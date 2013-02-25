@@ -1,7 +1,6 @@
 Name:Deathrender
 ManaCost:4
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ CleanTheBlade | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature dies, you may put a creature card from your hand onto the battlefield and attach CARDNAME to it.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathrender.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/255.jpg
 Oracle:Equipped creature gets +2/+2.\nWhenever equipped creature dies, you may put a creature card from your hand onto the battlefield and attach Deathrender to it.\nEquip {2}
-End

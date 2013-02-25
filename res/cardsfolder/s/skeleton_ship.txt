@@ -1,7 +1,6 @@
 Name:Skeleton Ship
 ManaCost:3 U B
 Types:Legendary Creature Skeleton
-Text:no text
 PT:0/3
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeleton_ship.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/379.jpg
 Oracle:When you control no Islands, sacrifice Skeleton Ship.\n{T}: Put a -1/-1 counter on target creature.
-End

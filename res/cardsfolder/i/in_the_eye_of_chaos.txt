@@ -1,7 +1,6 @@
 Name:In the Eye of Chaos
 ManaCost:2 U
 Types:World Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Instant | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an instant spell, counter it unless that player pays X, where X is its converted mana cost.
 SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | UnlessCost$ X | UnlessPayer$ TriggeredActivator | References$ X
 SVar:X:TriggeredCard$CardManaCost
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/in_the_eye_of_chaos.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/61.jpg
 Oracle:Whenever a player casts an instant spell, counter it unless that player pays {X}, where X is its converted mana cost.
-End

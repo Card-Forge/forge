@@ -1,7 +1,6 @@
 Name:Hedge Troll
 ManaCost:2 G
 Types:Creature Troll Cleric
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Plains.
 SVar:X:Count$Valid Plains.YouCtrl
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedge_troll.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/151.jpg
 Oracle:Hedge Troll gets +1/+1 as long as you control a Plains.\n{W}: Regenerate Hedge Troll.
-End

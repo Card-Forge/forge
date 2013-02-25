@@ -1,7 +1,6 @@
 Name:Royal Assassin
 ManaCost:1 B B
 Types:Creature Human Assassin
-Text:no text
 PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
 SVar:Rarity:Rare
@@ -18,4 +17,3 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/110.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/105.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/32.jpg
 Oracle:{T}: Destroy target tapped creature.
-End

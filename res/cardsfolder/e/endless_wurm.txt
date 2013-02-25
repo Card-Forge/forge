@@ -1,7 +1,6 @@
 Name:Endless Wurm
 ManaCost:3 G G
 Types:Creature Wurm
-Text:no text
 PT:9/9
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacUnless | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you sacrifice an enchantment.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_wurm.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/249.jpg
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice Endless Wurm unless you sacrifice an enchantment.
-End

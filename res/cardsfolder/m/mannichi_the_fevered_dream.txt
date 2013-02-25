@@ -1,7 +1,6 @@
 Name:Mannichi, the Fevered Dream
 ManaCost:2 R
 Types:Legendary Creature Spirit
-Text:no text
 PT:1/2
 A:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch each creature's power and toughness until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mannichi_the_fevered_dream.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/112.jpg
 Oracle:{1}{R}: Switch each creature's power and toughness until end of turn.
-End

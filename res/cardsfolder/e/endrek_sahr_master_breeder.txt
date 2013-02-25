@@ -1,7 +1,6 @@
 Name:Endrek Sahr, Master Breeder
 ManaCost:4 B
 Types:Legendary Creature Human Wizard
-Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, put X 1/1 black Thrull creature tokens onto the battlefield, where X is that spell's converted mana cost.
 T:Mode$ Always | IsPresent$ Card.Thrull+YouCtrl | PresentCompare$ GE7 | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you control seven or more Thrulls, sacrifice CARDNAME.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endrek_sahr_master_breeder.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/106.jpg
 Oracle:Whenever you cast a creature spell, put X 1/1 black Thrull creature tokens onto the battlefield, where X is that spell's converted mana cost.\nWhen you control seven or more Thrulls, sacrifice Endrek Sahr, Master Breeder.
-End

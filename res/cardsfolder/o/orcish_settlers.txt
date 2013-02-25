@@ -1,7 +1,6 @@
 Name:Orcish Settlers
 ManaCost:1 R
 Types:Creature Orc
-Text:no text
 PT:1/1
 A:AB$ Destroy | Cost$ X X R T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Land | TgtPrompt$ Select target lands | SpellDescription$ Destroy X target lands.
 SVar:X:Targeted$Amount
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_settlers.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/112.jpg
 Oracle:{X}{X}{R}, {T}, Sacrifice Orcish Settlers: Destroy X target lands.
-End

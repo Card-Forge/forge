@@ -1,7 +1,6 @@
 Name:Torpor Dust
 ManaCost:2 UB
 Types:Enchantment Aura
-Text:no text
 K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 UB | ValidTgts$ Creature | AILogic$ Curse
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torpor_dust.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/177.jpg
 Oracle:Flash\nEnchant creature\nEnchanted creature gets -3/-0.
-End

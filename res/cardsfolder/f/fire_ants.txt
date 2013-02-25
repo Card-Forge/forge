@@ -1,11 +1,9 @@
 Name:Fire Ants
 ManaCost:2 R
 Types:Creature Insect
-Text:no text
 PT:2/1
 A:AB$ DamageAll | Cost$ T | ValidCards$ Creature.withoutFlying+Other | NumDmg$ 1 | ValidDescription$ each other creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each other creature without flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_ants.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/187.jpg
 Oracle:{T}: Fire Ants deals 1 damage to each other creature without flying.
-End

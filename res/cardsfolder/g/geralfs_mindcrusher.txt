@@ -1,7 +1,6 @@
 Name:Geralf's Mindcrusher
 ManaCost:4 U U
 Types:Creature Zombie Horror
-Text:no text
 PT:5/5
 K:Undying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player puts the top 5 cards of his or her library into his or her graveyard.
@@ -9,4 +8,3 @@ SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geralfs_mindcrusher.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/37.jpg
 Oracle:When Geralf's Mindcrusher enters the battlefield, target player puts the top five cards of his or her library into his or her graveyard.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
-End

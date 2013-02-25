@@ -1,7 +1,6 @@
 Name:Sunscour
 ManaCost:5 W W
 Types:Sorcery
-Text:no text
 A:SP$ DestroyAll | Cost$ 5 W W | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 A:SP$ DestroyAll | Cost$ ExileFromHand<2/Card.White> | ValidCards$ Creature | CostDesc$ You may exile two white cards from your hand | SpellDescription$ rather than pay CARDNAME's mana cost.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscour.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/19.jpg
 Oracle:You may exile two white cards from your hand rather than pay Sunscour's mana cost.\nDestroy all creatures.
-End

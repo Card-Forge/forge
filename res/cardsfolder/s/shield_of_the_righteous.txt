@@ -1,7 +1,6 @@
 Name:Shield of the Righteous
 ManaCost:W U
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+2 and has vigilance.
 T:Mode$ AttackerBlocked | ValidBlocker$ Card.EquippedBy | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature blocks a creature, that creature doesn't untap during its controller's next untap step.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_the_righteous.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/11.jpg
 Oracle:Equipped creature gets +0/+2 and has vigilance.\nWhenever equipped creature blocks a creature, that creature doesn't untap during its controller's next untap step.\nEquip {2}
-End

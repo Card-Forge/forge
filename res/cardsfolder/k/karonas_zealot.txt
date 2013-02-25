@@ -1,7 +1,6 @@
 Name:Karona's Zealot
 ManaCost:4 W
 Types:Creature Human Cleric
-Text:no text
 PT:2/5
 K:Morph:3 W W
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ KaronaEffect | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, all damage that would be dealt to it this turn is dealt to target creature instead.
@@ -18,4 +17,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karonas_zealot.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/18.jpg
 Oracle:Morph {3}{W}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Karona's Zealot is turned face up, all damage that would be dealt to it this turn is dealt to target creature instead.
-End

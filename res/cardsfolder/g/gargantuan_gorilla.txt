@@ -1,7 +1,6 @@
 Name:Gargantuan Gorilla
 ManaCost:4 G G G
 Types:Creature Ape
-Text:no text
 PT:7/7
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice a Forest. If you sacrifice a snow Forest this way, CARDNAME gains trample until end of turn. If you don't sacrifice a Forest, sacrifice CARDNAME and it deals 7 damage to you.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Optional$ True | SacValid$ Forest | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBPump
@@ -18,4 +17,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gargantuan_gorilla.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/72.jpg
 Oracle:At the beginning of your upkeep, you may sacrifice a Forest. If you sacrifice a snow Forest this way, Gargantuan Gorilla gains trample until end of turn. If you don't sacrifice a Forest, sacrifice Gargantuan Gorilla and it deals 7 damage to you.\n{T}: Gargantuan Gorilla deals damage equal to its power to another target creature. That creature deals damage equal to its power to Gargantuan Gorilla.
-End

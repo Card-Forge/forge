@@ -1,7 +1,6 @@
 Name:Rivalry
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ RivalDamage | CheckSVar$ ActiveLands | SVarCompare$ GTRivalLands | References$ ActiveLands,RivalLands | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls more lands than each other player, CARDNAME deals 2 damage to him or her.
 SVar:RivalDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ 2 | Defined$ TriggeredPlayer
 SVar:ActiveLands:Count$Valid Land.ActivePlayerCtrl
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rivalry.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/90.jpg
 Oracle:At the beginning of each player's upkeep, if that player controls more lands than each other player, Rivalry deals 2 damage to him or her.
-End

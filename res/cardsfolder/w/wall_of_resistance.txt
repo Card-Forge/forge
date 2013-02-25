@@ -1,7 +1,6 @@
 Name:Wall of Resistance
 ManaCost:1 W
 Types:Creature Wall
-Text:no text
 PT:0/3
 K:Flying
 K:Defender
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_resistance.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/250.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nAt the beginning of each end step, if Wall of Resistance was dealt damage this turn, put a +0/+1 counter on it.
-End

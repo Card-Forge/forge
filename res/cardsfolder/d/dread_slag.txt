@@ -1,7 +1,6 @@
 Name:Dread Slag
 ManaCost:3 B R
 Types:Creature Horror
-Text:no text
 PT:9/9
 K:Trample
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets -4/-4 for each card in your hand.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_slag.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/109.jpg
 Oracle:Trample\nDread Slag gets -4/-4 for each card in your hand.
-End

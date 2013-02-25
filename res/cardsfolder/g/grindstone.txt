@@ -1,9 +1,7 @@
 Name:Grindstone
 ManaCost:1
 Types:Artifact
-Text:no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grindstone.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/280.jpg
 Oracle:{3}, {T}: Put the top two cards of target player's library into that player's graveyard. If both cards share a color, repeat this process.
-End

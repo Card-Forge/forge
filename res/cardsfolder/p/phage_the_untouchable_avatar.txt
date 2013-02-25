@@ -1,7 +1,6 @@
 Name:Phage the Untouchable Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/-5
 A:AB$ Effect | Cost$ PayLife<1> | ActivationZone$ Command | Triggers$ TrigPhageDestroy | SVars$ PhageAvatarDestroy | References$ TrigPhageDestroy,PhageAvatarDestroy | SpellDescription$ Until end of turn, whenever a creature deals combat damage to you, destroy that creature.
 SVar:TrigPhageDestroy:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | TriggerZones$ Command | CombatDamage$ True | Execute$ PhageAvatarDestroy | TriggerDescription$ Whenever a creature deals combat damage to you, destroy that creature.
@@ -13,4 +12,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/phage_the_untouchable_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/phage-the-untouchable.jpg
 Oracle:Hand +0, life -5\nPay 1 life: Until end of turn, whenever a creature deals combat damage to you, destroy that creature.\nPay 1 life: Until end of turn, whenever target creature you control deals combat damage to a creature, destroy the damaged creature.
-End

@@ -1,7 +1,6 @@
 Name:Elvish Champion
 ManaCost:1 G G
 Types:Creature Elf
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Elf+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Forestwalk | Description$ Other Elf creatures get +1/+1 and have forestwalk.
 SVar:PlayMain1:TRUE
@@ -14,4 +13,3 @@ SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/240.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/238.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/261.jpg
 Oracle:Other Elf creatures get +1/+1 and have forestwalk. (They're unblockable as long as defending player controls a Forest.)
-End

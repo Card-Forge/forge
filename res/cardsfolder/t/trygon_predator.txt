@@ -1,7 +1,6 @@
 Name:Trygon Predator
 ManaCost:1 G U
 Types:Creature Beast
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | OptionalDecider$ You | CombatDamage$ True | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may destroy target artifact or enchantment that player controls.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trygon_predator.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/133.jpg
 Oracle:Flying\nWhenever Trygon Predator deals combat damage to a player, you may destroy target artifact or enchantment that player controls.
-End

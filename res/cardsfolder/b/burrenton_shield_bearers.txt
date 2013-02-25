@@ -1,7 +1,6 @@
 Name:Burrenton Shield-Bearers
 ManaCost:4 W
 Types:Creature Kithkin Soldier
-Text:no text
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature gets +0/+3 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +3
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burrenton_shield_bearers.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/4.jpg
 Oracle:Whenever Burrenton Shield-Bearers attacks, target creature gets +0/+3 until end of turn.
-End

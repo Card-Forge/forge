@@ -1,7 +1,6 @@
 Name:Grizzly Bears
 ManaCost:1 G
 Types:Creature Bear
-Text:no text
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83115.jpg
@@ -19,4 +18,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/163.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/129.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/108.jpg
 Oracle:
-End

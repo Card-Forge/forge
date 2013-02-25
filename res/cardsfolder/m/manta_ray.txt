@@ -12,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manta_ray.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/42.jpg
 Oracle:Manta Ray can't attack unless defending player controls an Island.\nManta Ray can't be blocked except by blue creatures.\nWhen you control no Islands, sacrifice Manta Ray.
-End

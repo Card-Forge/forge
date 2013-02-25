@@ -1,7 +1,6 @@
 Name:Lavamancer's Skill
 ManaCost:1 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonWizard | AddAbility$ Damage1 | Description$ Enchanted creature has "tap: This creature deals 1 damage to target creature."
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavamancers_skill.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/215.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to target creature."\nAs long as enchanted creature is a Wizard, it has "{T}: This creature deals 2 damage to target creature."
-End

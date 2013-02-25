@@ -1,11 +1,9 @@
 Name:Lantern Kami
 ManaCost:W
 Types:Creature Spirit
-Text:no text
 PT:1/1
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75319.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/32.jpg
 Oracle:Flying
-End

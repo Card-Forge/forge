@@ -1,7 +1,6 @@
 Name:Insist
 ManaCost:G
 Types:Sorcery
-Text:no text
 A:SP$Effect | Cost$ G | Name$ Insist effect | Triggers$ SpellCastTrig | SVars$ Insistence,DBCleanup | SubAbility$ DBDraw | SpellDescription$ The next creature spell you cast this turn can't be countered by spells or abilities.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ Insistence | TriggerDescription$ The next creature spell you cast this turn can't be countered by spells or abilities.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insist.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/127.jpg
 Oracle:The next creature spell you cast this turn can't be countered by spells or abilities.\nDraw a card.
-End

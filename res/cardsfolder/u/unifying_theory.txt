@@ -1,7 +1,6 @@
 Name:Unifying Theory
 ManaCost:1 U
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerController$ TriggeredActivator | TriggerDescription$ Whenever a player casts a spell, that player may pay 2. If the player does, he or she draws a card.
 SVar:TrigDraw:AB$Draw | Cost$ 2 | Defined$ TriggeredActivator | NumCards$ 1
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unifying_theory.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/112.jpg
 Oracle:Whenever a player casts a spell, that player may pay {2}. If the player does, he or she draws a card.
-End

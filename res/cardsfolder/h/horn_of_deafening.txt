@@ -1,7 +1,6 @@
 Name:Horn of Deafening
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_deafenin
 Oracle:{2}, {T}: Prevent all combat damage that would be dealt by target creature this turn.
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/80.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/224.jpg
-End

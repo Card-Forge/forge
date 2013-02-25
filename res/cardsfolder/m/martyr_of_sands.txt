@@ -1,7 +1,6 @@
 Name:Martyr of Sands
 ManaCost:W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ GainLife | Cost$ 1 Reveal<X/Card.White> Sac<1/CARDNAME> | CostDesc$ 1, Reveal X white cards from your hand, Sacrifice Martyr of Sands: | LifeAmount$ Y | References$ X,Y | SpellDescription$ You gain three times X life.
 SVar:X:XChoice
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyr_of_sands.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/15.jpg
 Oracle:{1}, Reveal X white cards from your hand, Sacrifice Martyr of Sands: You gain three times X life.
-End

@@ -1,7 +1,6 @@
 Name:Plague Boiler
 ManaCost:3
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ PutPlagueCounter | TriggerDescription$ At the beginning of your upkeep, put a plague counter on CARDNAME.
 SVar:PutPlagueCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PLAGUE | CounterNum$ 1
 A:AB$ GenericChoice | Cost$ 1 B G | Choices$ DBPutPlagueCounter,DBRemovePlagueCounter | SpellDescription$ Put a plague counter on CARDNAME or remove a plague counter from it.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_boiler.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/269.jpg
 Oracle:At the beginning of your upkeep, put a plague counter on Plague Boiler.\n{1}{B}{G}: Put a plague counter on Plague Boiler or remove a plague counter from it.\nWhen Plague Boiler has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.
-End

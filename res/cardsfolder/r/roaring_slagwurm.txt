@@ -1,7 +1,6 @@
 Name:Roaring Slagwurm
 ManaCost:5 G G
 Types:Creature Wurm
-Text:no text
 PT:6/4
 T:Mode$Attacks | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ Whenever CARDNAME attacks, tap all artifacts.
 SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Artifact
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roaring_slagwurm.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/83.jpg
 Oracle:Whenever Roaring Slagwurm attacks, tap all artifacts.
-End

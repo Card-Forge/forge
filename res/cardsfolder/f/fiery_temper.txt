@@ -1,7 +1,6 @@
 Name:Fiery Temper
 ManaCost:1 R R
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
 K:Madness:R
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_temper.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/97.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/62.jpg
 Oracle:Fiery Temper deals 3 damage to target creature or player.\nMadness {R} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-End

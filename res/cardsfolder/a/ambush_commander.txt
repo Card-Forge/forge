@@ -1,7 +1,6 @@
 Name:Ambush Commander
 ManaCost:3 G G
 Types:Creature Elf
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Forest.YouCtrl | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature & Elf | SetColor$ Green | Description$ Forests you control are 1/1 green Elf creatures that are still lands.
 A:AB$Pump | Cost$ 1 G Sac<1/Elf> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambush_commander.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/111.jpg
 Oracle:Forests you control are 1/1 green Elf creatures that are still lands.\n{1}{G}, Sacrifice an Elf: Target creature gets +3/+3 until end of turn.
-End

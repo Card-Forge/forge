@@ -1,7 +1,6 @@
 Name:Ice Cage
 ManaCost:1 U
 Types:Enchantment Aura
-Text:no text
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
 T:Mode$ BecomesTarget | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When enchanted creature becomes the target of a spell or ability, destroy CARDNAME.
@@ -12,4 +11,3 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/57.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/56.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/57.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.\nWhen enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
-End

@@ -1,7 +1,6 @@
 Name:Mad Dog
 ManaCost:1 R
 Types:Creature Hound
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if CARDNAME didn't attack or come under your control this turn, sacrifice it.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X,Y,Z
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_dog.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/202.jpg
 Oracle:At the beginning of your end step, if Mad Dog didn't attack or come under your control this turn, sacrifice it.
-End

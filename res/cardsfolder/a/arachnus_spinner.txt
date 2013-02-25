@@ -1,7 +1,6 @@
 Name:Arachnus Spinner
 ManaCost:5 G
 Types:Creature Spider
-Text:no text
 PT:5/7
 K:Reach
 A:AB$ ChangeZone | Cost$ tapXType<1/Spider> | Hidden$ True | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Battlefield | ChangeType$ Card.namedArachnus Web | SpellDescription$ Search your graveyard and/or library for a card named Arachnus Web and put it onto the battlefield attached to target creature. If you search your library this way, shuffle it.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arachnus_spinner.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nTap an untapped Spider you control: Search your graveyard and/or library for a card named Arachnus Web and put it onto the battlefield attached to target creature. If you search your library this way, shuffle it.
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/162.jpg
-End

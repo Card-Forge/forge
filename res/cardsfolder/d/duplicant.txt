@@ -1,7 +1,6 @@
 Name:Duplicant
 ManaCost:6
 Types:Artifact Creature Shapeshifter
-Text:no text
 PT:2/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile target nontoken creature.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Unimprint$ True | Imprint$ True | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature
@@ -16,4 +15,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duplicant.jpg
 Oracle:Imprint - When Duplicant enters the battlefield, you may exile target nontoken creature.\nAs long as the exiled card is a creature card, Duplicant has that card's power, toughness, and creature types. It's still a Shapeshifter.
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/165.jpg
-End

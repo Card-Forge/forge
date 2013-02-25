@@ -1,7 +1,6 @@
 Name:Azor's Elocutors
 ManaCost:3 WU WU
 Types:Creature Human Advisor
-Text:no text
 PT:3/5
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ PutCounter | TriggerDescription$ At the beginning of your upkeep, put a filibuster counter on CARDNAME. Then if CARDNAME has five or more filibuster counters on it, you win the game.
 SVar:PutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ FILIBUSTER | CounterNum$ 1 | SubAbility$ WinGame
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azors_elocutors.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/210.jpg
 Oracle:At the beginning of your upkeep, put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game.\nWhenever a source deals damage to you, remove a filibuster counter from Azor's Elocutors.
-End

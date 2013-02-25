@@ -1,7 +1,6 @@
 Name:Centaur Chieftain
 ManaCost:3 G
 Types:Creature Centaur
-Text:no text
 PT:3/3
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | Threshold$ True | TriggerDescription$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters the battlefield, creatures you control get +1/+1 and gain trample until end of turn."
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_chieftain.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/122.jpg
 Oracle:Haste\nThreshold - As long as seven or more cards are in your graveyard, Centaur Chieftain has "When Centaur Chieftain enters the battlefield, creatures you control get +1/+1 and gain trample until end of turn."
-End

@@ -1,7 +1,6 @@
 Name:Instill Energy
 ManaCost:G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Untap | Cost$ 0 | PlayerTurn$ True | ActivationLimit$ 1 | Defined$ Enchanted | SpellDescription$ Untap enchanted creature. Activate this ability only during your turn and only once each turn.
@@ -15,4 +14,3 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/136.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/110.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/111.jpg
 Oracle:Enchant creature\nEnchanted creature can attack as though it had haste.\n{0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.
-End

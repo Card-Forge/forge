@@ -1,11 +1,9 @@
 Name:Holy Mantle
 ManaCost:2 W W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Protection:Creature:Protection from creatures | Description$ Enchanted creature gets +2/+2 and has protection from creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_mantle.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/17.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has protection from creatures.
-End

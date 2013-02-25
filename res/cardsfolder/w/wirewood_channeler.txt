@@ -1,7 +1,6 @@
 Name:Wirewood Channeler
 ManaCost:3 G
 Types:Creature Elf Druid
-Text:no text
 PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | References$ X | SpellDescription$ Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield.
 SVar:X:Count$Valid Elf
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_channeler.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/144.jpg
 Oracle:{T}: Add X mana of any one color to your mana pool, where X is the number of Elves on the battlefield.
-End

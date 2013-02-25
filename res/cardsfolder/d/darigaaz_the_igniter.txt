@@ -1,7 +1,6 @@
 Name:Darigaaz, the Igniter
 ManaCost:3 B R G
 Types:Legendary Creature Dragon
-Text:no text
 PT:6/6
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChooseColor | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 R. If you do, choose a color, then that player reveals his or her hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaaz_the_igniter.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/243.jpg
 Oracle:Flying\nWhenever Darigaaz, the Igniter deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals his or her hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.
-End

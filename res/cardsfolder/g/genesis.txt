@@ -1,7 +1,6 @@
 Name:Genesis
 ManaCost:4 G
 Types:Creature Incarnation
-Text:no text
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, you may pay 2 G. If you do, return target creature card from your graveyard to your hand.
 SVar:TrigChange:AB$ChangeZone | Cost$ 2 G | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genesis.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/117.jpg
 Oracle:At the beginning of your upkeep, if Genesis is in your graveyard, you may pay {2}{G}. If you do, return target creature card from your graveyard to your hand.
-End

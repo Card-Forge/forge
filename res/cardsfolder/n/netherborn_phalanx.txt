@@ -1,7 +1,6 @@
 Name:Netherborn Phalanx
 ManaCost:5 B
 Types:Creature Horror
-Text:no text
 PT:2/4
 K:Transmute:1 B B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEachOpp | TriggerDescription$ When CARDNAME enters the battlefield, each opponent loses 1 life for each creature he or she controls.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/netherborn_phalanx.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/99.jpg
 Oracle:When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature he or she controls.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
-End

@@ -1,7 +1,6 @@
 Name:Algae Gharial
 ManaCost:3 G
 Types:Creature Crocodile
-Text:no text
 PT:1/1
 K:Shroud
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature.Other | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/algae_gharial.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/123.jpg
 Oracle:Shroud\nWhenever another creature dies, you may put a +1/+1 counter on Algae Gharial.
-End

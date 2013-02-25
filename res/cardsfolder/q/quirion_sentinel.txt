@@ -1,7 +1,6 @@
 Name:Quirion Sentinel
 ManaCost:1 G
 Types:Creature Elf Druid
-Text:no text
 PT:2/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add one mana of any color to your mana pool.
 SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ Any | Amount$ 1
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_sentinel.jpg
 Oracle:When Quirion Sentinel enters the battlefield, add one mana of any color to your mana pool.
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/204.jpg
-End

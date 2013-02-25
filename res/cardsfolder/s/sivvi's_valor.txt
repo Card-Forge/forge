@@ -1,7 +1,6 @@
 Name:Sivvi's Valor
 ManaCost:2 W
 Types:Instant
-Text:no text
 A:SP$ Effect | Name$ Sivvi's Effect | Cost$ tapXType<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,X | RememberObjects$ Targeted | IsPresent$ Plains.YouCtrl | CostDesc$ If you control a Plains, | SpellDescription$ you may tap an untapped creature you control rather than pay CARDNAME's mana cost.
 A:SP$ Effect | Name$ Sivvi's Effect | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,X | RememberObjects$ Targeted | SpellDescription$ All damage that would be dealt to target creature this turn is dealt to you instead.
 SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ All damage that would be dealt to target creature this turn is dealt to you instead.
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sivvis_valor.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/22.jpg
 Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay Sivvi's Valor's mana cost.\nAll damage that would be dealt to target creature this turn is dealt to you instead.
-End

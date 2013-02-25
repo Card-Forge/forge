@@ -1,7 +1,6 @@
 Name:Zombie Master
 ManaCost:1 B B
 Types:Creature Zombie
-Text:no text
 PT:2/3
 S:Mode$ Continuous | Affected$ Creature.Zombie+Other | AddKeyword$ Swampwalk | Description$ Other Zombie creatures have swampwalk.
 S:Mode$ Continuous | Affected$ Card.Zombie+Other | AddAbility$ Regenerate | Description$ Other Zombies have "B: Regenerate this permanent."
@@ -17,4 +16,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/162.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/46.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/46.jpg
 Oracle:Other Zombie creatures have swampwalk.\nOther Zombies have "{B}: Regenerate this permanent."
-End

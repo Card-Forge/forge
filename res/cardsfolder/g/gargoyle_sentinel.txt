@@ -1,7 +1,6 @@
 Name:Gargoyle Sentinel
 ManaCost:3
 Types:Artifact Creature Gargoyle
-Text:no text
 PT:3/3
 K:Defender
 A:AB$ Debuff | Cost$ 3 | Keywords$ Defender | Defined$ Self | SubAbility$ Flight | SpellDescription$ Until end of turn, CARDNAME loses defender and gains flying.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gargoyle_sentinel.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/207.jpg
 Oracle:Defender (This creature can't attack.)\n{3}: Until end of turn, Gargoyle Sentinel loses defender and gains flying.
-End

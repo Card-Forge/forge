@@ -1,7 +1,6 @@
 Name:Ruin Ghost
 ManaCost:1 W
 Types:Creature Spirit
-Text:no text
 PT:1/1
 A:AB$ ChangeZone | Cost$ W T | TargetMin$ 1 | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | SpellDescription$ Exile target land you control, then return it to the battlefield under your control.
 SVar:DBReturn:DB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruin_ghost.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/19.jpg
 Oracle:{W}, {T}: Exile target land you control, then return it to the battlefield under your control.
-End

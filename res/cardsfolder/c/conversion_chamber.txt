@@ -1,7 +1,6 @@
 Name:Conversion Chamber
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ChangeZone | Cost$ 2 T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Artifact | TgtPrompt$ Select target artifact card in a graveyard | SubAbility$ DBPutCounter | SpellDescription$ Exile target artifact card from a graveyard. Put a charge counter on CARDNAME.
 SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 A:AB$ Token | Cost$ 2 T SubCounter<1/CHARGE> | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 3 | TokenOwner$ You | SpellDescription$ Put a 3/3 colorless Golem artifact creature token onto the battlefield.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conversion_chamber.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/133.jpg
 Oracle:{2}, {T}: Exile target artifact card from a graveyard. Put a charge counter on Conversion Chamber.\n{2}, {T}, Remove a charge counter from Conversion Chamber: Put a 3/3 colorless Golem artifact creature token onto the battlefield.
-End

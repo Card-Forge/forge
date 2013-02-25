@@ -1,7 +1,6 @@
 Name:Typhoon
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 A:SP$ RepeatEach | Cost$ 2 G | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TyphoonDmg | SpellDescription$ Typhoon deals damage to each opponent equal to the number of Islands that player controls.
 SVar:TyphoonDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | References$ X
 SVar:X:Count$Valid Island.RememberedPlayerCtrl
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/typhoon.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/123.jpg
 Oracle:Typhoon deals damage to each opponent equal to the number of Islands that player controls.
-End

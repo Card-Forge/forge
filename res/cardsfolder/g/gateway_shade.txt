@@ -1,7 +1,6 @@
 Name:Gateway Shade
 ManaCost:2 B
 Types:Creature Shade
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 A:AB$ Pump | Cost$ tapXType<1/Gate> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
@@ -10,4 +9,3 @@ DeckNeeds:Type$Gate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gateway_shade.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/65.jpg
 Oracle:{B}: Gateway Shade gets +1/+1 until end of turn.\nTap an untapped Gate you control: Gateway Shade gets +2/+2 until end of turn.
-End

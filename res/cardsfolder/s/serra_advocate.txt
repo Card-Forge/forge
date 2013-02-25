@@ -1,7 +1,6 @@
 Name:Serra Advocate
 ManaCost:3 W
 Types:Creature Angel
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target attacking or blocking creature gets +2/+2 until end of turn.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_advocate.j
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/19.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/41.jpg
 Oracle:Flying\n{T}: Target attacking or blocking creature gets +2/+2 until end of turn.
-End

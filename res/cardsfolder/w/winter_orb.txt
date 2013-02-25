@@ -12,4 +12,3 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/376.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/280.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/276.jpg
 Oracle:Players can't untap more than one land during their untap steps.
-End

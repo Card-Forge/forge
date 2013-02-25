@@ -1,7 +1,6 @@
 Name:Multani's Acolyte
 ManaCost:G G
 Types:Creature Elf
-Text:no text
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_acolyte.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/108.jpg
 Oracle:Echo {G}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Multani's Acolyte enters the battlefield, draw a card.
-End

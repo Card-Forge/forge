@@ -10,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tuktuk_the_explorer.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/169.jpg
 Oracle:Haste\nWhen Tuktuk the Explorer dies, put a legendary 5/5 colorless Goblin Golem artifact creature token named Tuktuk the Returned onto the battlefield.
-End

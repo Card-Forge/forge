@@ -1,7 +1,6 @@
 Name:Arrogant Bloodlord
 ManaCost:1 B B
 Types:Creature Vampire Knight
-Text:no text
 PT:4/4
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.powerLE1 | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature with power 1 or less, destroy CARDNAME at end of combat.
 T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature.powerLE1 | DelayedTrigger$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature with power 1 or less, destroy CARDNAME at end of combat.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrogant_bloodlord.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/94.jpg
 Oracle:Whenever Arrogant Bloodlord blocks or becomes blocked by a creature with power 1 or less, destroy Arrogant Bloodlord at end of combat.
-End

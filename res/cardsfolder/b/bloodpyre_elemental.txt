@@ -1,11 +1,9 @@
 Name:Bloodpyre Elemental
 ManaCost:4 R
 Types:Creature Elemental
-Text:no text
 PT:4/1
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SorcerySpeed$ True | SpellDescription$ CARDNAME deals 4 damage to target creature. Activate this ability only any time you could cast a sorcery.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodpyre_elemental.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/93.jpg
 Oracle:Sacrifice Bloodpyre Elemental: Bloodpyre Elemental deals 4 damage to target creature. Activate this ability only any time you could cast a sorcery.
-End

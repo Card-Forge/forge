@@ -1,7 +1,6 @@
 Name:Devout Lightcaster
 ManaCost:W W W
 Types:Creature Kor Cleric
-Text:no text
 PT:2/2
 K:Protection from black
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, exile target black permanent.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_lightcaster.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/10.jpg
 Oracle:Protection from black\nWhen Devout Lightcaster enters the battlefield, exile target black permanent.
-End

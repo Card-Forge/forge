@@ -1,7 +1,6 @@
 Name:Sedge Troll
 ManaCost:2 R
 Types:Creature Troll
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
@@ -13,4 +12,3 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/174.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/173.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/173.jpg
 Oracle:Sedge Troll gets +1/+1 as long as you control a Swamp.\n{B}: Regenerate Sedge Troll.
-End

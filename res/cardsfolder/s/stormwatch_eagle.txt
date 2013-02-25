@@ -1,7 +1,6 @@
 Name:Stormwatch Eagle
 ManaCost:3 U
 Types:Creature Bird
-Text:no text
 PT:2/1
 K:Flying
 A:AB$ ChangeZone | Cost$ Sac<1/Land> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormwatch_eagle.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/50.jpg
 Oracle:Flying\nSacrifice a land: Return Stormwatch Eagle to its owner's hand.
-End

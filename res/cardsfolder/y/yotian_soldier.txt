@@ -1,7 +1,6 @@
 Name:Yotian Soldier
 ManaCost:3
 Types:Artifact Creature Soldier
-Text:no text
 PT:1/4
 K:Vigilance
 SVar:Rarity:Common
@@ -10,4 +9,3 @@ SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/277.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/378.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/44.jpg
 Oracle:Vigilance
-End

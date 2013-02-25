@@ -1,7 +1,6 @@
 Name:Skirk Fire Marshal
 ManaCost:3 R R
 Types:Creature Goblin
-Text:no text
 PT:2/2
 A:AB$ DamageAll | Cost$ tapXType<5/Goblin> | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 10 | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 10 damage to each creature and each player.
 K:Protection from red
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_fire_marshal.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/229.jpg
 Oracle:Protection from red\nTap five untapped Goblins you control: Skirk Fire Marshal deals 10 damage to each creature and each player.
-End

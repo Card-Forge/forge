@@ -1,7 +1,6 @@
 Name:Belbe's Portal
 ManaCost:5
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.ChosenType | ChangeNum$ 1 | SpellDescription$ You may put a creature card of the chosen type from your hand onto the battlefield.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_portal.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/127.jpg
 Oracle:As Belbe's Portal enters the battlefield, choose a creature type.\n{3}, {T}: You may put a creature card of the chosen type from your hand onto the battlefield.
-End

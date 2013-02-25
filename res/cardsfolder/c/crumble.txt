@@ -1,7 +1,6 @@
 Name:Crumble
 ManaCost:G
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
 SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
@@ -12,4 +11,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/98.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/123.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/62.jpg
 Oracle:Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
-End

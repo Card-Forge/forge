@@ -1,7 +1,6 @@
 Name:Clockwork Beetle
 ManaCost:1
 Types:Artifact Creature Insect
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:2
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it at end of combat.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_beetle.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/153.jpg
 Oracle:Clockwork Beetle enters the battlefield with two +1/+1 counters on it.\nWhenever Clockwork Beetle attacks or blocks, remove a +1/+1 counter from it at end of combat.
-End

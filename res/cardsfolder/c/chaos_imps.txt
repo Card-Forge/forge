@@ -1,7 +1,6 @@
 Name:Chaos Imps
 ManaCost:4 R R
 Types:Creature Imp
-Text:no text
 PT:6/5
 K:Flying
 K:ETBReplacement:Other:Unleash:Optional
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_imps.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/90.jpg
 Oracle:Flying\nUnleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)\nChaos Imps has trample as long as it has a +1/+1 counter on it.
-End

@@ -1,7 +1,6 @@
 Name:Battlefield Medic
 ManaCost:1 W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature | Amount$ X | TgtPrompt$ Select target creature | References$ X | SpellDescription$ Prevent the next X damage that would be dealt to target creature this turn, where X is the number of Clerics on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Cleric
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlefield_medic.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/9.jpg
 Oracle:{T}: Prevent the next X damage that would be dealt to target creature this turn, where X is the number of Clerics on the battlefield.
-End

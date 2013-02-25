@@ -1,7 +1,6 @@
 Name:Cerulean Wyvern
 ManaCost:4 U
 Types:Creature Drake
-Text:no text
 PT:3/3
 K:Flying
 K:Protection from green
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cerulean_wyvern.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/57.jpg
 Oracle:Flying, protection from green
-End

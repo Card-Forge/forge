@@ -1,7 +1,6 @@
 Name:Heroic Defiance
 ManaCost:1 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ Enchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common.
@@ -10,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heroic_defiance.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/6.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common.
-End

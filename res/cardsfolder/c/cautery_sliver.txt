@@ -1,7 +1,6 @@
 Name:Cautery Sliver
 ManaCost:R W
 Types:Creature Sliver
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Damage | Description$ All Slivers have "1, Sacrifice this permanent: This permanent deals 1 damage to target creature or player."
 SVar:Damage:AB$ DealDamage | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cautery_sliver.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/154.jpg
 Oracle:All Slivers have "{1}, Sacrifice this permanent: This permanent deals 1 damage to target creature or player."\nAll Slivers have "{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target Sliver creature or player this turn."
-End

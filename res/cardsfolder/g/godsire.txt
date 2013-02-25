@@ -1,7 +1,6 @@
 Name:Godsire
 ManaCost:4 R G G W
 Types:Creature Beast
-Text:no text
 PT:8/8
 K:Vigilance
 A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ White,Red,Green | TokenPower$ 8 | TokenToughness$ 8 | SpellDescription$ Put an 8/8 Beast creature token that's red, green, and white onto the battlefield.
@@ -9,4 +8,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godsire.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/170.jpg
 Oracle:Vigilance\n{T}: Put an 8/8 Beast creature token that's red, green, and white onto the battlefield.
-End

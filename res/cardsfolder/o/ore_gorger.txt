@@ -1,7 +1,6 @@
 Name:Ore Gorger
 ManaCost:3 R R
 Types:Creature Spirit
-Text:no text
 PT:3/1
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDestroy | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may destroy target nonbasic land.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ore_gorger.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/182.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may destroy target nonbasic land.
-End

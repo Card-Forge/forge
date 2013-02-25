@@ -1,11 +1,9 @@
 Name:Viashino Shanktail
 ManaCost:3 R
 Types:Creature Viashino Warrior
-Text:no text
 PT:3/1
 K:First Strike
 A:AB$ Pump | Cost$ 2 R Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +3 | NumDef$ +1 | KW$ First Strike | SpellDescription$ Target attacking creature gets +3/+1 and gains first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_shanktail.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/110.jpg
 Oracle:First strike\nBloodrush - {2}{R}, Discard Viashino Shanktail: Target attacking creature gets +3/+1 and gains first strike until end of turn.
-End

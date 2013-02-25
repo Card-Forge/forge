@@ -1,7 +1,6 @@
 Name:Goblin Shrine
 ManaCost:1 R R
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Land | AITgts$ Mountain.Basic | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.Goblin | AddPower$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ If enchanted land is a basic Mountain, Goblin creatures get +1/+0.
@@ -15,4 +14,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_shrine.jp
 Oracle:Enchant land\nAs long as enchanted land is a basic Mountain, Goblin creatures get +1/+0.\nWhen Goblin Shrine leaves the battlefield, it deals 1 damage to each Goblin creature.
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/67.jpg
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/50.jpg
-End

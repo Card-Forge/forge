@@ -1,7 +1,6 @@
 Name:Deceiver Exarch
 ManaCost:2 U
 Types:Creature Cleric
-Text:no text
 PT:1/4
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, choose one - Untap target permanent you control; or tap target permanent an opponent controls.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deceiver_exarch.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/33.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Deceiver Exarch enters the battlefield, choose one - Untap target permanent you control; or tap target permanent an opponent controls.
-End

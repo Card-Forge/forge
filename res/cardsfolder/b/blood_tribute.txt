@@ -1,7 +1,6 @@
 Name:Blood Tribute
 ManaCost:4 B B
 Types:Sorcery
-Text:no text
 K:Kicker tapXType<1/Vampire>
 A:SP$ LoseLife | Cost$ 4 B B | ValidTgts$ Opponent | LifeAmount$ X | References$ X | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses half his or her life, rounded up. If CARDNAME was kicked, you gain life equal to the life lost this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | Condition$ Kicked | ConditionDescription$ If it was kicked,
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_tribute.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/81.jpg
 Oracle:Kicker-Tap an untapped Vampire you control. (You may tap a Vampire you control in addition to any other costs as you cast this spell.)\nTarget opponent loses half his or her life, rounded up. If Blood Tribute was kicked, you gain life equal to the life lost this way.
-End

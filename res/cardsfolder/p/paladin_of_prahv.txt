@@ -1,7 +1,6 @@
 Name:Paladin of Prahv
 ManaCost:4 W W
 Types:Creature Human Knight
-Text:no text
 PT:3/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
 SVar:TrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paladin_of_prahv.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/14.jpg
 Oracle:Whenever Paladin of Prahv deals damage, you gain that much life.\nForecast - {1}{W}, Reveal Paladin of Prahv from your hand: Whenever target creature deals damage this turn, you gain that much life. (Activate this ability only during your upkeep and only once each turn.)
-End

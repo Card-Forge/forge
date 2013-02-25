@@ -14,4 +14,3 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/108.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/58.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/173.jpg
 Oracle:Relentless Rats gets +1/+1 for each other creature on the battlefield named Relentless Rats.\nA deck can have any number of cards named Relentless Rats.
-End

@@ -8,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurker.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/43.jpg
 Oracle:Lurker can't be the target of spells unless it attacked or blocked this turn.
-End

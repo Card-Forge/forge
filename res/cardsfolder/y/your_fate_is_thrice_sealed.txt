@@ -1,11 +1,9 @@
 Name:Your Fate Is Thrice Sealed
 ManaCost:no cost
 Types:Scheme
-Text:no text
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ RevealFate | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, reveal the top three cards of your library. Put all land cards revealed this way onto the battlefield and the rest into your hand.
 SVar:RevealFate:AB$ Dig | Cost$ 0 | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | DestinationZone2$ Hand |
 SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/your_fate_is_thrice_sealed.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/your-fate-is-thrice-sealed.jpg
 Oracle:When you set this scheme in motion, reveal the top three cards of your library. Put all land cards revealed this way onto the battlefield and the rest into your hand.
-End

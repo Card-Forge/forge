@@ -1,7 +1,6 @@
 Name:Orcish Healer
 ManaCost:R R
 Types:Creature Orc Cleric
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ R R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't be regenerated. | IsCurse$ True | SpellDescription$ Target creature can't be regenerated this turn.
 A:AB$ Regenerate | Cost$ B B R T | ValidTgts$ Creature.Black,Creature.Green | TgtPrompt$ Select target black or green creature | SpellDescription$ Regenerate target black or green creature.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_healer.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/208.jpg
 Oracle:{R}{R}, {T}: Target creature can't be regenerated this turn.\n{B}{B}{R}, {T}: Regenerate target black or green creature.\n{R}{G}{G}, {T}: Regenerate target black or green creature.
-End

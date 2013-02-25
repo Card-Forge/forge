@@ -1,7 +1,6 @@
 Name:Ashes of the Fallen
 ManaCost:2
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 S:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Graveyard | AddType$ ChosenType | Description$ Each creature card in your graveyard has the chosen creature type in addition to its other types.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashes_of_the_fallen.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/152.jpg
 Oracle:As Ashes of the Fallen enters the battlefield, choose a creature type.\nEach creature card in your graveyard has the chosen creature type in addition to its other types.
-End

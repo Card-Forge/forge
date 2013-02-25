@@ -7,4 +7,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/scorching_winds.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/155.jpg
 Oracle:Cast Scorching Winds only during the declare attackers step and only if you've been attacked this step.\nScorching Winds deals 1 damage to each attacking creature.
-End

@@ -10,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rapid_fire.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/201.jpg
 Oracle:Cast Rapid Fire only before blockers are declared.\nTarget creature gains first strike until end of turn. If it doesn't have rampage, that creature gains rampage 2 until end of turn. (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)
-End

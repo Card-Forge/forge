@@ -1,7 +1,6 @@
 Name:Stampede Driver
 ManaCost:G
 Types:Creature Human Spellshaper
-Text:no text
 PT:1/1
 A:AB$ PumpAll | Cost$ 1 G T Discard<1/Card> | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | SpellDescription$ Creatures you control get +1/+1 and gain trample until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stampede_driver.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/122.jpg
 Oracle:{1}{G}, {T}, Discard a card: Creatures you control get +1/+1 and gain trample until end of turn.
-End

@@ -1,11 +1,9 @@
 Name:Sudden Shock
 ManaCost:1 R
 Types:Instant
-Text:no text
 K:Split second
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_shock.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/179.jpg
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nSudden Shock deals 2 damage to target creature or player.
-End

@@ -1,7 +1,6 @@
 Name:Oathsworn Giant
 ManaCost:4 W W
 Types:Creature Giant Soldier
-Text:no text
 PT:3/4
 K:Vigilance
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Other creatures you control get +0/+2 and have vigilance.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/27.jpg
 Oracle:Vigilance\nOther creatures you control get +0/+2 and have vigilance.
-End

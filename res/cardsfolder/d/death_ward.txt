@@ -1,7 +1,6 @@
 Name:Death Ward
 ManaCost:W
 Types:Instant
-Text:no text
 A:SP$ Regenerate | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_ward.jpg
@@ -13,4 +12,3 @@ SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/243.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/200.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/202.jpg
 Oracle:Regenerate target creature.
-End

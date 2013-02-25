@@ -1,7 +1,6 @@
 Name:Feed the Pack
 ManaCost:5 G
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, you may sacrifice a nontoken creature. If you do, put X 2/2 green Wolf creature tokens onto the battlefield where X is the sacrificed creature's toughness.
 SVar:TrigToken:AB$ Token | Cost$ Sac<1/Creature.nonToken/nontoken creature> | TokenAmount$ X | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | ConditionCheckSVar$ X | References$ X
 SVar:X:Sacrificed$CardToughness
@@ -9,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feed_the_pack.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/114.jpg
 Oracle:At the beginning of your end step, you may sacrifice a nontoken creature. If you do, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the sacrificed creature's toughness.
-End

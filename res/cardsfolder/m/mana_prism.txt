@@ -1,7 +1,6 @@
 Name:Mana Prism
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_prism.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/296.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/273.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Add one mana of any color to your mana pool.
-End

@@ -1,7 +1,6 @@
 Name:Forsaken City
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME doesn't untap during your untap step.
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may exile a card from your hand. If you do, untap CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forsaken_city.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/139.jpg
 Oracle:Forsaken City doesn't untap during your untap step.\nAt the beginning of your upkeep, you may exile a card from your hand. If you do, untap Forsaken City.\n{T}: Add one mana of any color to your mana pool.
-End

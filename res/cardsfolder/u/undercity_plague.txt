@@ -1,7 +1,6 @@
 Name:Undercity Plague
 ManaCost:4 B B
 Types:Sorcery
-Text:no text
 A:SP$ LoseLife | Cost$ 4 B B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SubAbility$ DBDiscard | SpellDescription$ Target player loses 1 life, discards a card, then sacrifices a permanent. Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
 SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBSacPermanent
 SVar:DBSacPermanent:DB$ Sacrifice | Defined$ Targeted | SacValid$ Permanent | Amount$ 1 | SubAbility$ Cipher
@@ -10,4 +9,3 @@ SVar:IsEncoded:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undercity_plague.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/83.jpg
 Oracle:Target player loses 1 life, discards a card, then sacrifices a permanent.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
-End

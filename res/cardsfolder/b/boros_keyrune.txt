@@ -1,7 +1,6 @@
 Name:Boros Keyrune
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Animate | Cost$ R W | Defined$ Self | Power$ 1| Toughness$ 1 | Types$ Artifact,Creature,Soldier | Colors$ Red,White | Keywords$ Double Strike | SpellDescription$ CARDNAME becomes a 1/1 red and white Soldier artifact creature with double strike until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_keyrune.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/227.jpg
 Oracle:{T}: Add {R} or {W} to your mana pool.\n{R}{W}: Boros Keyrune becomes a 1/1 red and white Soldier artifact creature with double strike until end of turn. (It deals both first-strike and regular combat damage.)
-End

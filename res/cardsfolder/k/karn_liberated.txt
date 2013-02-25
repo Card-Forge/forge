@@ -1,7 +1,6 @@
 Name:Karn Liberated
 ManaCost:7
 Types:Planeswalker Karn
-Text:no text
 Loyalty:6
 A:AB$ ChangeZone | Cost$ AddCounter<4/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | Chooser$ Targeted | Hidden$ True | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player exiles a card from his or her hand.
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SpellDescription$ Exile target permanent.
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karn_liberated.jpg
 SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/1.jpg
 Oracle:[+4] Target player exiles a card from his or her hand.\n[-3] Exile target permanent.\n[-14] Restart the game, leaving in exile all non-Aura permanent cards exiled with Karn Liberated. Then put those cards onto the battlefield under your control.
-End

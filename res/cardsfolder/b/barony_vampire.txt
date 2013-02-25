@@ -1,10 +1,8 @@
 Name:Barony Vampire
 ManaCost:2 B
 Types:Creature Vampire
-Text:no text
 PT:3/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barony_vampire.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/82.jpg
 Oracle:
-End

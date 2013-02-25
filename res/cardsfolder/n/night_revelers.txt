@@ -1,7 +1,6 @@
 Name:Night Revelers
 ManaCost:4 R
 Types:Creature Vampire
-Text:no text
 PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME has haste as long as an opponent controls a human.
 SVar:X:Count$Valid Human.OppCtrl
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/night_revelers.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/153.jpg
 Oracle:Night Revelers has haste as long as an opponent controls a Human.
-End

@@ -1,7 +1,6 @@
 Name:Myr Servitor
 ManaCost:1
 Types:Artifact Creature Myr
-Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self | PresentZone$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is on the battlefield, each player returns all cards named CARDNAME from his or her graveyard to the battlefield.
 SVar:TrigReturn:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card.namedMyr Servitor | Origin$ Graveyard | Destination$ Battlefield
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_servitor.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/139.jpg
 Oracle:At the beginning of your upkeep, if Myr Servitor is on the battlefield, each player returns all cards named Myr Servitor from his or her graveyard to the battlefield.
-End

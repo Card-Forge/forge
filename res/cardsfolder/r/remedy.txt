@@ -1,11 +1,9 @@
 Name:Remedy
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ PreventDamage | Cost$ 1 W | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to prevent damage to | Amount$ 5 | TargetMin$ 1 | TargetMax$ 5 | DividedAsYouChoose$ 5 | SpellDescription$ Prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/remedy.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/117.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/36.jpg
 Oracle:Prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
-End

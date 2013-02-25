@@ -1,7 +1,6 @@
 Name:Surgical Extraction
 ManaCost:PB
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ PB | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.nonBasic | TgtPrompt$ Choose target card in a graveyard | Optional$ True | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ ExileYard | SpellDescription$ Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.
 SVar:ExileYard:DB$ ChangeZone | ChangeType$ Remembered.sameName | Origin$ Graveyard | DefinedPlayer$ TargetedController | Chooser$ You | Destination$ Exile | ChangeNum$ NumInYard | Hidden$ True | SubAbility$ ExileHand | StackDescription$ Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surgical_extraction.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/74.jpg
 Oracle:({B/P} can be paid with either {B} or 2 life.)\nChoose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.
-End

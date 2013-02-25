@@ -1,7 +1,6 @@
 Name:Nettling Imp
 ManaCost:2 B
 Types:Creature Imp
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.nonWall+ActivePlayerCtrl+notFirstTurnControlled | TgtPrompt$ Select target non-Wall creature the active player has controlled continuously since the beginning of the turn. | ActivationPhases$ Upkeep->BeginCombat | OpponentTurn$ True | KW$ HIDDEN CARDNAME attacks each turn if able. | RememberTargets$ True | SubAbility$ DestroyPacifist | SpellDescription$ Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only before attackers are declared.
 SVar:DestroyPacifist:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigDestroy | IsPresent$ Creature.IsRemembered+notAttackedThisTurn | TriggerDescription$ At the beginning of the end step, destroy that creature if it didn't attack this turn.
@@ -15,4 +14,3 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/26.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/27.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/26.jpg
 Oracle:{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.
-End

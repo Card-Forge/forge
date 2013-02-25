@@ -1,7 +1,6 @@
 Name:Retromancer
 ManaCost:2 R R
 Types:Creature Viashino Shaman
-Text:no text
 PT:3/3
 T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, CARDNAME deals 3 damage to that spell or ability's controller.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 3
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retromancer.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/209.jpg
 Oracle:Whenever Retromancer becomes the target of a spell or ability, Retromancer deals 3 damage to that spell or ability's controller.
-End

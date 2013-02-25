@@ -1,7 +1,6 @@
 Name:Capashen Knight
 ManaCost:1 W
 Types:Creature Human Knight
-Text:no text
 PT:1/1
 K:First Strike
 A:AB$ Pump | Cost$ 1 W | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_knight.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/3.jpg
 Oracle:First strike\n{1}{W}: Capashen Knight gets +1/+0 until end of turn.
-End

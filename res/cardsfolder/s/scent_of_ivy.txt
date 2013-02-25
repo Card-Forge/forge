@@ -1,7 +1,6 @@
 Name:Scent of Ivy
 ManaCost:G
 Types:Instant
-Text:no text
 A:SP$ Reveal | Cost$ G | Defined$ You | RevealValid$ Card.Green | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfIvyPump | SpellDescription$ Reveal any number of green cards in your hand. Target creature gets +X/+X until end of turn, where X is the number of cards revealed this way.
 SVar:DBScentOfIvyPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ ScentOfIvyX | NumDef$ ScentOfIvyX | SubAbility$ DBScentOfIvyCleanup | References$ ScentOfIvyX
 SVar:ScentOfIvyX:Remembered$Amount
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scent_of_ivy.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/120.jpg
 Oracle:Reveal any number of green cards in your hand. Target creature gets +X/+X until end of turn, where X is the number of cards revealed this way.
-End

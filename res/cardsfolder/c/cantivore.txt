@@ -1,7 +1,6 @@
 Name:Cantivore
 ManaCost:1 W W
 Types:Creature Lhurgoyf
-Text:no text
 PT:*/*
 K:Vigilance
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of enchantment cards in all graveyards.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cantivore.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/13.jpg
 Oracle:Vigilance\nCantivore's power and toughness are each equal to the number of enchantment cards in all graveyards.
-End

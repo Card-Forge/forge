@@ -1,7 +1,6 @@
 Name:Enigma Sphinx
 ManaCost:4 W U B
 Types:Artifact Creature Sphinx
-Text:no text
 PT:5/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into your graveyard from the battlefield, put it into your library third from the top.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/89.jpg
 SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/106.jpg
 Oracle:Flying\nWhen Enigma Sphinx is put into your graveyard from the battlefield, put it into your library third from the top.\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-End

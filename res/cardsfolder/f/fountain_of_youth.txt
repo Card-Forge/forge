@@ -1,7 +1,6 @@
 Name:Fountain of Youth
 ManaCost:0
 Types:Artifact
-Text:no text
 A:AB$ GainLife | Cost$ 2 T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fountain_of_youth.jpg
@@ -11,4 +10,3 @@ SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/100.jpg
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/78.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/286.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/323.jpg
-End

@@ -1,7 +1,6 @@
 Name:Surveilling Sprite
 ManaCost:1 U
 Types:Creature Faerie Rogue
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may draw a card.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surveilling_sprite.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/67.jpg
 Oracle:Flying\nWhen Surveilling Sprite dies, you may draw a card.
-End

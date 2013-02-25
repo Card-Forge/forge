@@ -1,7 +1,6 @@
 Name:Mask of Riddles
 ManaCost:U B
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Fear | Description$ Equipped creature has fear.
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_riddles.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/25.jpg
 Oracle:Equipped creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)\nWhenever equipped creature deals combat damage to a player, you may draw a card.\nEquip {2}
-End

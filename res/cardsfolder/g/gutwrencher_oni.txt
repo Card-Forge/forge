@@ -1,7 +1,6 @@
 Name:Gutwrencher Oni
 ManaCost:3 B B
 Types:Creature Demon Spirit
-Text:no text
 PT:5/4
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, discard a card if you don't control an Ogre.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gutwrencher_oni.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/113.jpg
 Oracle:Trample\nAt the beginning of your upkeep, discard a card if you don't control an Ogre.
-End

@@ -1,7 +1,6 @@
 Name:Read the Runes
 ManaCost:X U
 Types:Instant
-Text:no text
 A:SP$ Draw | Cost$ X U | NumCards$ X | SubAbility$ DBRepeat | References$ X | RememberDrawn$ True | SpellDescription$ Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | Zone$ Hand | RepeatSubAbility$ DBDiscard | SubAbility$ DBCleanup
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | UnlessCost$ Sac<1/Permanent> | UnlessPayer$ You
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/read_the_runes.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/104.jpg
 Oracle:Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.
-End

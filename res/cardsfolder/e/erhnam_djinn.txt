@@ -1,7 +1,6 @@
 Name:Erhnam Djinn
 ManaCost:3 G
 Types:Creature Djinn
-Text:no text
 PT:4/5
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.nonWall+OppCtrl | TgtPrompt$ Select target non-Wall creature an opponent controls | KW$ Forestwalk | UntilYourNextUpkeep$ True
@@ -11,4 +10,3 @@ Oracle:At the beginning of your upkeep, target non-Wall creature an opponent con
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/36.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/32.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/113.jpg
-End

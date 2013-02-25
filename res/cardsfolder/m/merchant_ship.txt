@@ -1,7 +1,6 @@
 Name:Merchant Ship
 ManaCost:U
 Types:Creature Human
-Text:no text
 PT:0/2
 K:CARDNAME can't attack unless defending player controls an Island.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_ship.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/23.jpg
 Oracle:Merchant Ship can't attack unless defending player controls an Island.\nWhenever Merchant Ship attacks and isn't blocked, you gain 2 life.\nWhen you control no Islands, sacrifice Merchant Ship.
-End

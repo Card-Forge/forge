@@ -1,11 +1,9 @@
 Name:Plated Spider
 ManaCost:4 G
 Types:Creature Spider
-Text:no text
 PT:4/4
 K:Reach
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card19239.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/116.jpg
 Oracle:Reach (This creature can block creatures with flying.)
-End

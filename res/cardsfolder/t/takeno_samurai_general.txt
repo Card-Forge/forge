@@ -1,7 +1,6 @@
 Name:Takeno, Samurai General
 ManaCost:5 W
 Types:Legendary Creature Human Samurai
-Text:no text
 PT:3/3
 K:Bushido 2
 S:Mode$ Continuous | Affected$ Creature.Samurai+Other+YouCtrl | AffectedZone$ Battlefield | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each other Samurai creature you control gets +1/+1 for each point of bushido it has.
@@ -10,4 +9,3 @@ SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/takeno_samurai_general.jpg
 Oracle:Bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)\nEach other Samurai creature you control gets +1/+1 for each point of bushido it has.
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/46.jpg
-End

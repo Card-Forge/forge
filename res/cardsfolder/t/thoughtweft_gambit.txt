@@ -1,7 +1,6 @@
 Name:Thoughtweft Gambit
 ManaCost:4 WU WU
 Types:Instant
-Text:no text
 #Switched order of abilities since DB$UntapAll doesn't exist yet
 A:SP$ UntapAll | Cost$ 4 WU WU | ValidCards$ Creature.YouCtrl | SubAbility$ DBTap | SpellDescription$ Tap all creatures your opponents control and untap all creatures you control.
 SVar:DBTap:DB$ TapAll | ValidCards$ Creature.OppCtrl
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtweft_gambit.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/154.jpg
 Oracle:Tap all creatures your opponents control and untap all creatures you control.
-End

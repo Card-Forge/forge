@@ -1,7 +1,6 @@
 Name:Spineless Thug
 ManaCost:1 B
 Types:Creature Zombie Mercenary
-Text:no text
 PT:2/2
 K:CARDNAME can't block.
 SVar:Rarity:Common
@@ -12,4 +11,3 @@ SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/71.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/165.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/164.jpg
 Oracle:Spineless Thug can't block.
-End

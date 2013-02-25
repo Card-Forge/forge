@@ -1,7 +1,6 @@
 Name:Helm of Kaldra
 ManaCost:3
 Types:Legendary Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike & Trample & Haste | Description$ Equipped creature has first strike, trample, and haste.
 A:AB$ Token | Cost$ 1 | TokenAmount$ 1 | TokenImage$ C 4 4 Kaldra | TokenName$ Kaldra | TokenTypes$ Legendary,Creature,Avatar | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 4 | TokenToughness$ 4 | SubAbility$ DBAttachEach | RememberTokens$ True | ConditionCheckSVar$ HelmX | ConditionSVarCompare$ EQ2 | SpellDescription$ If you control Equipment named CARDNAME, Sword of Kaldra, and Shield of Kaldra, put a legendary 4/4 colorless Avatar creature token named Kaldra onto the battlefield and attach those Equipment to it.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_kaldra.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/131.jpg
 Oracle:Equipped creature has first strike, trample, and haste.\n{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, put a legendary 4/4 colorless Avatar creature token named Kaldra onto the battlefield and attach those Equipment to it.\nEquip {2}
-End

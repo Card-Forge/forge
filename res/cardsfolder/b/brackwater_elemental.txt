@@ -1,7 +1,6 @@
 Name:Brackwater Elemental
 ManaCost:2 U
 Types:Creature Elemental
-Text:no text
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME attacks or blocks, sacrifice it at the beginning of the next end step.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, sacrifice it at the beginning of the next end step.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brackwater_elemental.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/21.jpg
 Oracle:When Brackwater Elemental attacks or blocks, sacrifice it at the beginning of the next end step.\nUnearth {2}{U} ({2}{U}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-End

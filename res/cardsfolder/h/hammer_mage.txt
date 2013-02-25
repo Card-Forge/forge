@@ -1,7 +1,6 @@
 Name:Hammer Mage
 ManaCost:1 R
 Types:Creature Human Spellshaper
-Text:no text
 PT:1/1
 A:AB$ DestroyAll | Cost$ X R T Discard<1/Card> | ValidCards$ Artifact.cmcLEX | References$ X | SpellDescription$ Destroy all artifacts with converted mana cost X or less.
 SVar:X:Count$xPaid
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_mage.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/193.jpg
 Oracle:{X}{R}, {T}, Discard a card: Destroy all artifacts with converted mana cost X or less.
-End

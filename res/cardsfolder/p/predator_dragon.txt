@@ -1,7 +1,6 @@
 Name:Predator Dragon
 ManaCost:3 R R R
 Types:Creature Dragon
-Text:no text
 PT:4/4
 K:Flying
 K:Haste
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predator_dragon.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/109.jpg
 Oracle:Flying, haste\nDevour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)
-End

@@ -1,7 +1,6 @@
 Name:Samite Alchemist
 ManaCost:3 W
 Types:Creature Human Cleric
-Text:no text
 PT:0/2
 A:AB$ PreventDamage | Cost$ W W T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Amount$ 4 |  SubAbility$ DBTap | SpellDescription$ Prevent the next 4 damage that would be dealt this turn to target creature you control. Tap that creature. It doesn't untap during your next untap step.
 SVar:DBTap:DB$Tap | Cost$ 0 | Defined$ Targeted | SubAbility$ DBStayTapped
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_alchemist.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/116.jpg|2
 Oracle:{W}{W}, {T}: Prevent the next 4 damage that would be dealt this turn to target creature you control. Tap that creature. It doesn't untap during your next untap step.
-End

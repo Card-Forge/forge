@@ -1,7 +1,6 @@
 Name:Lantern of Insight
 ManaCost:1
 Types:Artifact
-Text:no text
 K:Players play with the top card of their libraries revealed.
 A:AB$ Shuffle | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player shuffles his or her library.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lantern_of_insight.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/135.jpg
 Oracle:Each player plays with the top card of his or her library revealed.\n{T}, Sacrifice Lantern of Insight: Target player shuffles his or her library.
-End

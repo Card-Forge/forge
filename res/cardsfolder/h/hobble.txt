@@ -1,7 +1,6 @@
 Name:Hobble
 ManaCost:2 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hobble.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/7.jpg
 Oracle:Enchant creature\nWhen Hobble enters the battlefield, draw a card.\nEnchanted creature can't attack.\nEnchanted creature can't block if it's black.
-End

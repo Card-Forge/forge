@@ -1,7 +1,6 @@
 Name:Phantom Monster
 ManaCost:3 U
 Types:Creature Phantasm
-Text:no text
 PT:3/3
 K:Flying
 SVar:Rarity:Uncommon
@@ -13,4 +12,3 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/90.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/71.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/70.jpg
 Oracle:Flying
-End

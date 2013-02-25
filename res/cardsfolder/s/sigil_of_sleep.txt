@@ -1,7 +1,6 @@
 Name:Sigil of Sleep
 ManaCost:U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ You | Execute$ TrigReturnYou | TriggerDescription$ Whenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_sleep.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/46.jpg
-End

@@ -1,7 +1,6 @@
 Name:Soldier Replica
 ManaCost:3
 Types:Artifact Creature Soldier
-Text:no text
 PT:1/3
 A:AB$ DealDamage | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target attacking or blocking creature.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldier_replica.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/244.jpg
 Oracle:{1}{W}, Sacrifice Soldier Replica: Soldier Replica deals 3 damage to target attacking or blocking creature.
-End

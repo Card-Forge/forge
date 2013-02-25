@@ -1,7 +1,6 @@
 Name:Goblin Charbelcher
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ DigUntil | Cost$ 3 T | Valid$ Land | ValidDescription$ land | RememberRevealed$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | SubAbility$ DBBelch | SpellDescription$ Reveal cards from the top of your library until you reveal a land card. CARDNAME deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, CARDNAME deals double that damage instead. Put the revealed cards on the bottom of your library in any order. | StackDescription$ SpellDescription
 SVar:DBBelch:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | ConditionCheckSVar$ FoundMountain | ConditionSVarCompare$ EQ0 | SubAbility$ DBDoubleBelch  | StackDescription$ None
 SVar:DBDoubleBelch:DB$ DealDamage | Defined$ Targeted | NumDmg$ DoubleX | SubAbility$ DBCleanup | ConditionCheckSVar$ FoundMountain | ConditionSVarCompare$ EQ1 | StackDescription$ None
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_charbelcher.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/176.jpg
 Oracle:{3}, {T}: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.
-End

@@ -1,7 +1,6 @@
 Name:Legacy Weapon
 ManaCost:7
 Types:Legendary Artifact
-Text:no text
 A:AB$ ChangeZone | Cost$ W U B R G | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target permanent.
 K:If CARDNAME would be put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.
 SVar:RemRandomDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/legacy_weapon.jp
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/137.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/330.jpg
 Oracle:{W}{U}{B}{R}{G}: Exile target permanent.\nIf Legacy Weapon would be put into a graveyard from anywhere, reveal Legacy Weapon and shuffle it into its owner's library instead.
-End

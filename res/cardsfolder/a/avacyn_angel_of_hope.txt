@@ -1,7 +1,6 @@
 Name:Avacyn, Angel of Hope
 ManaCost:5 W W W
 Types:Legendary Creature Angel
-Text:no text
 PT:8/8
 K:Flying
 K:Vigilance
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyn_angel_of_hope.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/6.jpg
 Oracle:Flying, vigilance\nAvacyn, Angel of Hope and other permanents you control are indestructible.
-End

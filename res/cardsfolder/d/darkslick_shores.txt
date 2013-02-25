@@ -9,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkslick_shores.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/226.jpg
 Oracle:Darkslick Shores enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {U} or {B} to your mana pool.
-End

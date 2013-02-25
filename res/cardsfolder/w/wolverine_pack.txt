@@ -1,7 +1,6 @@
 Name:Wolverine Pack
 ManaCost:2 G G
 Types:Creature Wolverine
-Text:no text
 PT:2/4
 K:Rampage 2
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/wolverine_pack.j
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/206.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/128.jpg
 Oracle:Rampage 2 (Whenever this creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)
-End

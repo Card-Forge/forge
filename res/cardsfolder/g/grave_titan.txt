@@ -1,7 +1,6 @@
 Name:Grave Titan
 ManaCost:4 B B
 Types:Creature Giant
-Text:no text
 PT:6/6
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield,  put two 2/2 black Zombie creature tokens onto the battlefield.
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_titan.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/97.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/98.jpg
 Oracle:Deathtouch\nWhenever Grave Titan enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield.
-End

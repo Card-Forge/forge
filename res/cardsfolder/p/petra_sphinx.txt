@@ -1,7 +1,6 @@
 Name:Petra Sphinx
 ManaCost:2 W W W
 Types:Creature Sphinx
-Text:no text
 PT:3/4
 A:AB$ NameCard | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDig | AILogic$ MostProminentInComputerDeck | SpellDescription$ Target player names a card, then reveals the top card of his or her library. If that card is the named card, that player puts it into his or her hand. If it isn't, the player puts it into his or her graveyard.
 SVar:DBDig:DB$ Dig | DigNum$ 1 | Defined$ Targeted | ChangeNum$ All | ChangeValid$ Card.NamedCard | DestinationZone2$ Graveyard | Reveal$ True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/petra_sphinx.jpg
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/66.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/199.jpg
 Oracle:{T}: Target player names a card, then reveals the top card of his or her library. If that card is the named card, that player puts it into his or her hand. If it isn't, the player puts it into his or her graveyard.
-End

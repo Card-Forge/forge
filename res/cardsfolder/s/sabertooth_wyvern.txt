@@ -1,7 +1,6 @@
 Name:Sabertooth Wyvern
 ManaCost:4 R
 Types:Creature Drake
-Text:no text
 PT:3/2
 K:Flying
 K:First Strike
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sabertooth_wyvern.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/99.jpg
 Oracle:Flying, first strike
-End

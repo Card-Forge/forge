@@ -1,7 +1,6 @@
 Name:Sea Drake
 ManaCost:2 U
 Types:Creature Drake
-Text:no text
 PT:4/3
 K:Flying
 T:Mode$ ChangesZone$ | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return two target lands you control to their owner's hand.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_drake.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/45.jpg
 Oracle:Flying\nWhen Sea Drake enters the battlefield, return two target lands you control to their owner's hand.
-End

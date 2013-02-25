@@ -1,11 +1,9 @@
 Name:Constant Mists
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ Fog | Cost$ 1 G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 K:Buyback Sac<1/Land>
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/constant_mists.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/54.jpg
 Oracle:Buyback-Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nPrevent all combat damage that would be dealt this turn.
-End

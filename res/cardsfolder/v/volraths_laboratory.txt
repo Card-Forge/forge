@@ -1,7 +1,6 @@
 Name:Volrath's Laboratory
 ManaCost:5
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SubAbility$ ChooseCT | SpellDescription$ As CARDNAME enters the battlefield, choose a color and a creature type.
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_laboratory.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/136.jpg
 Oracle:As Volrath's Laboratory enters the battlefield, choose a color and a creature type./n{5}, {T}: Put a 2/2 creature token of the chosen color and type onto the battlefield
-End

@@ -1,7 +1,6 @@
 Name:Putrid Cyclops
 ManaCost:2 B
 Types:Creature Zombie Cyclops
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSrcy | TriggerDescription$ When CARDNAME enters the battlefield, scry 1, then reveal the top card of your library. Putrid Cyclops gets -X/-X until end of turn, where X is that card's converted mana cost. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)| Static$ True
 SVar:TrigSrcy:AB$ Scry | Cost$ 0 | ScryNum$ 1 | SubAbility$ DBReveal
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_cyclops.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/75.jpg
 Oracle:When Putrid Cyclops enters the battlefield, scry 1, then reveal the top card of your library. Putrid Cyclops gets -X/-X until end of turn, where X is that card's converted mana cost. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
-End

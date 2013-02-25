@@ -1,7 +1,6 @@
 Name:Wu Admiral
 ManaCost:4 U
 Types:Creature Human Soldier
-Text:no text
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as an opponent controls an Island.
 SVar:X:Count$Valid Island.OppCtrl
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_admiral.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/57.jpg
 Oracle:Wu Admiral gets +1/+1 as long as an opponent controls an Island.
-End

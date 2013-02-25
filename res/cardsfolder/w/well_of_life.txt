@@ -1,7 +1,6 @@
 Name:Well of Life
 ManaCost:4
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Land.untapped+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your end step, if you control no untapped lands, you gain 2 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/well_of_life.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/141.jpg
 Oracle:At the beginning of your end step, if you control no untapped lands, you gain 2 life.
-End

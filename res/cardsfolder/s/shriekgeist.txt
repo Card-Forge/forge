@@ -1,7 +1,6 @@
 Name:Shriekgeist
 ManaCost:1 U
 Types:Creature Spirit
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player puts the top two cards of his or her library into his or her graveyard.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekgeist.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/49.jpg
 Oracle:Flying\nWhenever Shriekgeist deals combat damage to a player, that player puts the top two cards of his or her library into his or her graveyard.
-End

@@ -1,7 +1,6 @@
 Name:Bathe in Light
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$Protection | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Gains$ Choice | Choices$ AnyColor | Radiance$ True | SpellDescription$ Radiance - Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/bathe_in_light.j
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/2.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/9.jpg
 Oracle:Radiance - Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn.
-End

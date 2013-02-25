@@ -1,7 +1,6 @@
 Name:Bulwark
 ManaCost:3 R R
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ PsychicSlap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand.
 SVar:PsychicSlap:AB$ DealDamage | Cost$ 0 | ValidTgts$ Opponent | NumDmg$ X
 SVar:A:Count$InYourHand
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bulwark.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/178.jpg
 Oracle:At the beginning of your upkeep, Bulwark deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand.
-End

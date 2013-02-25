@@ -1,7 +1,6 @@
 Name:Conqueror's Pledge
 ManaCost:2 W W W
 Types:Sorcery
-Text:no text
 K:Kicker 6
 A:SP$ Token | Cost$ 2 W W W | TokenAmount$ WasKicked | References$ WasKicked | TokenName$ Kor Soldier | TokenTypes$ Creature,Kor,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put six 1/1 white Kor Soldier creature tokens onto the battlefield. If CARDNAME was kicked, put twelve of those tokens onto the battlefield instead.
 SVar:WasKicked:Count$Kicked.12.6
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conquerors_pledge.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/8.jpg
 Oracle:Kicker {6} (You may pay an additional {6} as you cast this spell.)\nPut six 1/1 white Kor Soldier creature tokens onto the battlefield. If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.
-End

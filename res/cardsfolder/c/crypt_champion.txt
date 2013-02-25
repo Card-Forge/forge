@@ -1,7 +1,6 @@
 Name:Crypt Champion
 ManaCost:3 B
 Types:Creature Zombie
-Text:no text
 PT:2/2
 K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneHuman | TriggerDescription$ When CARDNAME enters the battlefield, each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_champion.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/40.jpg
 Oracle:Double strike\nWhen Crypt Champion enters the battlefield, each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.\nWhen Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
-End

@@ -1,7 +1,6 @@
 Name:Thran Tome
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ Dig | Cost$ 5 T | DigNum$ 3 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.
 SVar:DBChoose:DB$ ChooseCard | ValidTgts$ Opponent | Choices$ Card.IsRemembered | ChoiceZone$ Library | Amount$ 1 | SubAbility$ DBDig | Mandatory$ True | StackDescription$ None
 SVar:DBDig:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | Defined$ ChosenCard | Shuffle$ False | StackDescription$ None | SubAbility$ DBDraw
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_tome.jpg
 Oracle:{5}, {T}: Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/160.jpg
-End

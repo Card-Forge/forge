@@ -1,7 +1,6 @@
 Name:Thalakos Dreamsower
 ManaCost:2 U
 Types:Creature Thalakos Wizard
-Text:no text
 PT:1/1
 K:Shadow
 K:You may choose not to untap CARDNAME during your untap step.
@@ -16,4 +15,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_dreamsower.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/92.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nYou may choose not to untap Thalakos Dreamsower during your untap step.\nWhenever Thalakos Dreamsower deals damage to an opponent, tap target creature. That creature doesn't untap during its controller's untap step for as long as Thalakos Dreamsower remains tapped.
-End

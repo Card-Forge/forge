@@ -1,7 +1,6 @@
 Name:Barrin
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/+6
 A:AB$ ChangeZone | ActivationZone$ Command | Cost$ Sac<1/Permanent> | ValidTgts$ Creature | TgtPrompt$ Select target Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/barrin.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/barrin.jpg
 Oracle:Hand +0, life +6\nSacrifice a permanent: Return target creature to its owner's hand.
-End

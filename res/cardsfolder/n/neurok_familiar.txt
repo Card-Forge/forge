@@ -1,7 +1,6 @@
 Name:Neurok Familiar
 ManaCost:1 U
 Types:Creature Bird
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top card of your library. If it's an artifact card, put it into your hand. Otherwise, put it into your graveyard.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_familiar.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/43.jpg
 Oracle:Flying\nWhen Neurok Familiar enters the battlefield, reveal the top card of your library. If it's an artifact card, put it into your hand. Otherwise, put it into your graveyard.
-End

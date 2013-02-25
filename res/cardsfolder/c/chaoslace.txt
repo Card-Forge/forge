@@ -12,4 +12,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/140.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/200.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/140.jpg
 Oracle:Target spell or permanent becomes red. (Its mana symbols remain unchanged.)
-End

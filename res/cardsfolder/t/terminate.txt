@@ -1,7 +1,6 @@
 Name:Terminate
 ManaCost:B R
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terminate.jpg
@@ -9,4 +8,3 @@ SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/231.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/46.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/128.jpg
 Oracle:Destroy target creature. It can't be regenerated.
-End

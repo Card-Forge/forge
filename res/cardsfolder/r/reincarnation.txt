@@ -1,7 +1,6 @@
 Name:Reincarnation
 ManaCost:1 G G
 Types:Instant
-Text:no text
 A:SP$ Effect | Cost$ 1 G G | ValidTgts$ Creature | TgtPrompt$ Choose target creature to reincarnate if it dies | Triggers$ TargetDies | SVars$ Reincarnate,ExileEffect | References$ TargetDies,Reincarnate,ExileEffect | RememberObjects$ Targeted | AILogic$ Fog | SpellDescription$ Choose target creature. When that creature dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner.
 SVar:TargetDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ Reincarnate | TriggerController$ You | TriggerDescription$ When the target of Reincarnate dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner.
 SVar:Reincarnate:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature.sharesOwnerWith Remembered | Origin$ Graveyard | Destination$ Battlefield | Mandatory$ True | ChangeNum$ 1 | Hidden$ True | SubAbility$ ExileEffect
@@ -10,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reincarnation.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/115.jpg
 Oracle:Choose target creature. When that creature dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner.
-End

@@ -1,7 +1,6 @@
 Name:Inspired Sprite
 ManaCost:3 U
 Types:Creature Faerie Wizard
-Text:no text
 PT:2/2
 K:Flash
 K:Flying
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inspired_sprite.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/37.jpg
 Oracle:Flash\nFlying\nWhenever you cast a Wizard spell, you may untap Inspired Sprite.\n{T}: Draw a card, then discard a card.
-End

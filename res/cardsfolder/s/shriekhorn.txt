@@ -1,11 +1,9 @@
 Name:Shriekhorn
 ManaCost:1
 Types:Artifact
-Text:no text
 K:etbCounter:CHARGE:3
 A:AB$ Mill | Cost$ T SubCounter<1/CHARGE> | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top two cards of his or her library into his or her graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekhorn.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/130.jpg
 Oracle:Shriekhorn enters the battlefield with three charge counters on it.\n{T}, Remove a charge counter from Shriekhorn: Target player puts the top two cards of his or her library into his or her graveyard.
-End

@@ -1,7 +1,6 @@
 Name:Hurr Jackal
 ManaCost:R
 Types:Creature Hound
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't be regenerated. | IsCurse$ True | SpellDescription$ Target creature can't be regenerated this turn.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/hurr_jackal.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/221.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/48.jpg
 Oracle:{T}: Target creature can't be regenerated this turn.
-End

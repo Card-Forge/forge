@@ -1,7 +1,6 @@
 Name:Ronin Houndmaster
 ManaCost:2 R
 Types:Creature Human Samurai
-Text:no text
 PT:2/2
 K:Haste
 K:Bushido 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_houndmaster.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/184.jpg
 Oracle:Haste\nBushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
-End

@@ -1,7 +1,6 @@
 Name:Masako the Humorless
 ManaCost:2 W
 Types:Legendary Creature Human Advisor
-Text:no text
 PT:2/1
 K:Flash
 S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl | AddHiddenKeyword$ CARDNAME can block as though it were untapped. | Description$ Tapped creatures you control can block as though they were untapped.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masako_the_humorless.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/33.jpg
 Oracle:Flash\nTapped creatures you control can block as though they were untapped.
-End

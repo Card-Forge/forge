@@ -1,7 +1,6 @@
 Name:Azorius Guildmage
 ManaCost:WU WU
 Types:Creature Vedalken Wizard
-Text:no text
 PT:2/2
 A:AB$ Tap | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 A:AB$ Counter | Cost$ 2 U | TgtPrompt$ Select target Activated Ability | ValidTgts$ Card | TargetType$ Activated | SpellDescription$ Counter target activated ability.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_guildmag
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/183.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/141.jpg
 Oracle:{2}{W}: Tap target creature.\n{2}{U}: Counter target activated ability. (Mana abilities can't be targeted.)
-End

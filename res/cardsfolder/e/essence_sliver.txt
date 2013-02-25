@@ -1,7 +1,6 @@
 Name:Essence Sliver
 ManaCost:3 W
 Types:Creature Sliver
-Text:no text
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Sliver | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Sliver deals damage, its controller gains that much life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ TriggeredSourceController | LifeAmount$ X | References$ X
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_sliver.j
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/13.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/8.jpg
 Oracle:Whenever a Sliver deals damage, its controller gains that much life.
-End

@@ -1,7 +1,6 @@
 Name:Thromok the Insatiable
 ManaCost:3 R G
 Types:Legendary Creature Hellion
-Text:no text
 PT:0/0
 K:Devour:X:, where X is the number of creatures devoured this way
 SVar:X:Count$Devoured Creature
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thromok_the_insatiable.jpg
 SetInfo:PC2|Mythic|http://magiccards.info/scans/en/pc2/106.jpg
 Oracle:Devour X, where X is the number of creatures devoured this way (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with X +1/+1 counters on it for each of those creatures.)
-End

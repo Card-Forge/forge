@@ -1,7 +1,6 @@
 Name:Harrier Griffin
 ManaCost:5 W
 Types:Creature Griffin
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of your upkeep, tap target creature.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harrier_griffin.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/9.jpg
 Oracle:Flying\nAt the beginning of your upkeep, tap target creature.
-End

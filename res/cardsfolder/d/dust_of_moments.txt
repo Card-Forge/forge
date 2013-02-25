@@ -1,7 +1,6 @@
 Name:Dust of Moments
 ManaCost:2 W
 Types:Instant
-Text:no text
 A:SP$ Charm | Cost$ 2 W | CharmNum$ 1 | Choices$ LoseTime,GainTime | SpellDescription$ Choose one - Remove two time counters from each permanent and each suspended card; or put two time counters on each permanent with a time counter on it and each suspended card.
 SVar:LoseTime:DB$ RemoveCounterAll | ValidCards$ Permanent | CounterType$ TIME | CounterNum$ 2 | SubAbility$ QuickenTime | SpellDescription$ Remove two time counters from each permanent and each suspended card.
 SVar:QuickenTime:DB$ RemoveCounterAll | ValidCards$ Card.suspended | CounterType$ TIME | CounterNum$ 2 | ValidZone$ Exile
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_of_moments.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/5.jpg
 Oracle:Choose one - Remove two time counters from each permanent and each suspended card; or put two time counters on each permanent with a time counter on it and each suspended card.
-End

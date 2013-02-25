@@ -1,7 +1,6 @@
 Name:Gaea's Blessing
 ManaCost:1 G
 Types:Sorcery
-Text:no text
 A:SP$ Pump | Cost$ 1 G | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Target player shuffles up to three target cards from his or her graveyard into his or her library.
 SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | TargetsWithDefinedController$ Targeted | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Choose target card | ValidTgts$ Card | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_blessing.j
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/71.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/77.jpg
 Oracle:Target player shuffles up to three target cards from his or her graveyard into his or her library.\nDraw a card.\nWhen Gaea's Blessing is put into your graveyard from your library, shuffle your graveyard into your library.
-End

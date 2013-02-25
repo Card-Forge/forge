@@ -1,11 +1,9 @@
 Name:Stabilizer
 ManaCost:2
 Types:Artifact
-Text:no text
 S:Mode$ Continuous | GlobalRule$ Players can't cycle cards. | Description$ Players can't cycle cards.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stabilizer.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/142.jpg
 Oracle:Players can't cycle cards.
-End

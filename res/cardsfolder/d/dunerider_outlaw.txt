@@ -1,7 +1,6 @@
 Name:Dunerider Outlaw
 ManaCost:B B
 Types:Creature Human Rebel Rogue
-Text:no text
 PT:1/1
 K:Protection from green
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | IsPresent$ Card.Self+dealtDamageToOppThisTurn | TriggerDescription$ At the beginning of each end step, if CARDNAME dealt damage to an opponent this turn, put a +1/+1 counter on it.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dunerider_outlaw.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/86.jpg
 Oracle:Protection from green\nAt the beginning of each end step, if Dunerider Outlaw dealt damage to an opponent this turn, put a +1/+1 counter on it.
-End

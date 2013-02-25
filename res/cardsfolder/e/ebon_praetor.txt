@@ -1,7 +1,6 @@
 Name:Ebon Praetor
 ManaCost:4 B B
 Types:Creature Avatar
-Text:no text
 PT:5/5
 K:First Strike
 K:Trample
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_praetor.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/11.jpg
 Oracle:First strike, trample\nAt the beginning of your upkeep, put a -2/-2 counter on Ebon Praetor.\nSacrifice a creature: Remove a -2/-2 counter from Ebon Praetor. If the sacrificed creature was a Thrull, put a +1/+0 counter on Ebon Praetor. Activate this ability only during your upkeep and only once each turn.
-End

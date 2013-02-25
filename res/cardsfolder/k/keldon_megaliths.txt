@@ -1,7 +1,6 @@
 Name:Keldon Megaliths
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | Activation$ Hellbent | PrecostDesc$ Hellbent - | SpellDescription$ CARDNAME deals 1 damage to target creature or player. Activate this ability only if you have no cards in hand.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_megaliths.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/170.jpg
 Oracle:Keldon Megaliths enters the battlefield tapped.\n{T}: Add {R} to your mana pool.\nHellbent - {1}{R}, {T}: Keldon Megaliths deals 1 damage to target creature or player. Activate this ability only if you have no cards in hand.
-End

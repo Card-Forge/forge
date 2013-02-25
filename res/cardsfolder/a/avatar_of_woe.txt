@@ -1,7 +1,6 @@
 Name:Avatar of Woe
 ManaCost:6 B B
 Types:Creature Avatar
-Text:no text
 PT:6/5
 K:Fear
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
@@ -13,4 +12,3 @@ SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/37.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/56.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/73.jpg
 Oracle:If there are ten or more creature cards total in all graveyards, Avatar of Woe costs {6} less to cast.\nFear (This creature can't be blocked except by artifact creatures and/or black creatures.)\n{T}: Destroy target creature. It can't be regenerated.
-End

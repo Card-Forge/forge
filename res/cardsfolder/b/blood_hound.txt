@@ -12,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_hound.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/176.jpg
 Oracle:Whenever you're dealt damage, you may put that many +1/+1 counters on Blood Hound.\nAt the beginning of your end step, remove all +1/+1 counters from Blood Hound.
-End

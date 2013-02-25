@@ -1,7 +1,6 @@
 Name:Flailing Drake
 ManaCost:3 G
 Types:Creature Drake
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flailing_drake.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/121.jpg
 Oracle:Flying\nWhenever Flailing Drake blocks or becomes blocked by a creature, that creature gets +1/+1 until end of turn.
-End

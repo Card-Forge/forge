@@ -1,7 +1,6 @@
 Name:Enigma Eidolon
 ManaCost:3 U
 Types:Creature Spirit
-Text:no text
 PT:2/2
 A:AB$ Mill | Cost$ U Sac<1/CARDNAME> | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player puts the top three cards of his or her library into his or her graveyard.
 T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a multicolored spell, you may return CARDNAME from your graveyard to your hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enigma_eidolon.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/24.jpg
 Oracle:{U}, Sacrifice Enigma Eidolon: Target player puts the top three cards of his or her library into his or her graveyard.\nWhenever you cast a multicolored spell, you may return Enigma Eidolon from your graveyard to your hand.
-End

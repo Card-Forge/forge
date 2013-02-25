@@ -1,7 +1,6 @@
 Name:Fog Bank
 ManaCost:1 U
 Types:Creature Wall
-Text:no text
 PT:0/2
 K:Defender
 K:Flying
@@ -12,4 +11,3 @@ SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/75.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/52.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/47.jpg
 Oracle:Defender, flying\nPrevent all combat damage that would be dealt to and dealt by Fog Bank.
-End

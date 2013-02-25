@@ -1,7 +1,6 @@
 Name:Blinding Angel
 ManaCost:3 W W
 Types:Creature Angel
-Text:no text
 PT:2/4
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player skips his or her next combat phase.
@@ -12,4 +11,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/8.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/3.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/7.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Blinding Angel deals combat damage to a player, that player skips his or her next combat phase.
-End

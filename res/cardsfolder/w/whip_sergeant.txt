@@ -1,7 +1,6 @@
 Name:Whip Sergeant
 ManaCost:2 R
 Types:Creature Human Soldier
-Text:no text
 PT:2/1
 A:AB$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_sergeant.jp
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/107.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/227.jpg
 Oracle:{R}: Target creature gains haste until end of turn. (It can attack this turn.)
-End

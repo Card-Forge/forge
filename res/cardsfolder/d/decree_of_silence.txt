@@ -1,7 +1,6 @@
 Name:Decree of Silence
 ManaCost:6 U U
 Types:Enchantment
-Text:no text
 K:Cycling:4 U U
 T:Mode$ SpellCast | ValidCard$ Card.OppCtrl | Execute$ TrigCounterSpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a spell, counter that spell and put a depletion counter on CARDNAME. If there are three or more depletion counters on CARDNAME, sacrifice it.
 SVar:TrigCounterSpell:AB$ Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | SubAbility$ DBPutCounter
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decree_of_silence.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/32.jpg
 Oracle:Whenever an opponent casts a spell, counter that spell and put a depletion counter on Decree of Silence. If there are three or more depletion counters on Decree of Silence, sacrifice it.\nCycling {4}{U}{U} ({4}{U}{U}, Discard this card: Draw a card.)\nWhen you cycle Decree of Silence, you may counter target spell.
-End

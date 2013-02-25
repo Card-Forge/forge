@@ -1,7 +1,6 @@
 Name:Tumble Magnet
 ManaCost:3
 Types:Artifact
-Text:no text
 K:etbCounter:CHARGE:3
 A:AB$ Tap | Cost$ T SubCounter<1/CHARGE> | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | SpellDescription$ Tap target artifact or creature.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tumble_magnet.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/218.jpg
 Oracle:Tumble Magnet enters the battlefield with three charge counters on it.\n{T}, Remove a charge counter from Tumble Magnet: Tap target artifact or creature.
-End

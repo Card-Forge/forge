@@ -1,7 +1,6 @@
 Name:Pallimud
 ManaCost:2 R
 Types:Creature Beast
-Text:no text
 PT:*/3
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pallimud.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/195.jpg
 Oracle:As Pallimud enters the battlefield, choose an opponent.\nPallimud's power is equal to the number of tapped lands the chosen player controls.
-End

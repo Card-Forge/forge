@@ -1,7 +1,6 @@
 Name:Nyxathid
 ManaCost:1 B B
 Types:Creature Elemental
-Text:no text
 PT:7/7
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxathid.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/49.jpg
 Oracle:As Nyxathid enters the battlefield, choose an opponent.\nNyxathid gets -1/-1 for each card in the chosen player's hand.
-End

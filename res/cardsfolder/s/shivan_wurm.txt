@@ -1,7 +1,6 @@
 Name:Shivan Wurm
 ManaCost:3 R G
 Types:Creature Wurm
-Text:no text
 PT:7/7
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a red or green creature you control to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_wurm.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/124.jpg
 Oracle:Trample\nWhen Shivan Wurm enters the battlefield, return a red or green creature you control to its owner's hand.
-End

@@ -1,7 +1,6 @@
 Name:Nantuko Shaman
 ManaCost:2 G
 Types:Creature Insect Shaman
-Text:no text
 PT:3/2
 K:Suspend:1:2 G G
 T:Mode$ ChangesZone | ValidCard$ Card.Self | IsPresent$ Land.tapped+YouCtrl | PresentCompare$ EQ0 | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if you control no tapped lands, draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_shaman.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/208.jpg
 Oracle:When Nantuko Shaman enters the battlefield, if you control no tapped lands, draw a card.\nSuspend 1-{2}{G}{G} (Rather than cast this card from your hand, you may pay {2}{G}{G} and exile it with a time counter on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
-End

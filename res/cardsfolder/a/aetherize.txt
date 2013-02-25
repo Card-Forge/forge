@@ -1,10 +1,8 @@
 Name:AEtherize
 ManaCost:3 U
 Types:Instant
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 3 U | ChangeType$ Creature.attacking | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all attacking creatures to their owners' hands.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherize.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/29.jpg
 Oracle:Return all attacking creatures to their owner's hand.
-End

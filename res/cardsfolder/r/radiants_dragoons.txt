@@ -1,7 +1,6 @@
 Name:Radiant's Dragoons
 ManaCost:3 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 5 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 5
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_dragoons.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/21.jpg
 Oracle:Echo {3}{W} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Radiant's Dragoons enters the battlefield, you gain 5 life.
-End

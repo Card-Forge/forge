@@ -1,7 +1,6 @@
 Name:Stormbound Geist
 ManaCost:1 U U
 Types:Creature Spirit
-Text:no text
 PT:2/2
 K:Flying
 K:CARDNAME can block only creatures with flying.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormbound_geist.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/51.jpg
 Oracle:Flying\nStormbound Geist can block only creatures with flying.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
-End

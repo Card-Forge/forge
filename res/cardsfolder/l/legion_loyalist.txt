@@ -1,7 +1,6 @@
 Name:Legion Loyalist
 ManaCost:R
 Types:Creature Goblin Soldier
-Text:no text
 PT:1/1
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | CheckSVar$ BattalionTest | SVarCompare$ GE2 | TriggerDescription$ Battalion - Whenever CARDNAME and at least two other creatures attack, creatures you control gain first strike and trample until end of turn and can't be blocked by creature tokens this turn.
@@ -10,4 +9,3 @@ SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/legion_loyalist.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/97.jpg
 Oracle:Haste\nBattalion - Whenever Legion Loyalist and at least two other creatures attack, creatures you control gain first strike and trample until end of turn and can't be blocked by creature tokens this turn.
-End

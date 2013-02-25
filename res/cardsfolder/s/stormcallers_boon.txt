@@ -1,7 +1,6 @@
 Name:Stormcaller's Boon
 ManaCost:2 W U
 Types:Enchantment
-Text:no text
 K:Cascade
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Flying | SpellDescription$ Creatures you control gain flying until end of turn.
 SVar:PlayMain1:TRUE
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormcallers_boon.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/13.jpg
 Oracle:Sacrifice Stormcaller's Boon: Creatures you control gain flying until end of turn.\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-End

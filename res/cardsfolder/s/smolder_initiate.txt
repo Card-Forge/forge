@@ -1,7 +1,6 @@
 Name:Smolder Initiate
 ManaCost:B
 Types:Creature Elemental Shaman
-Text:no text
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a black spell, you may pay 1. If you do, target player loses 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 1 | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smolder_initiate.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/78.jpg
 Oracle:Whenever a player casts a black spell, you may pay {1}. If you do, target player loses 1 life.
-End

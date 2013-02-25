@@ -1,7 +1,6 @@
 Name:Bazaar Krovod
 ManaCost:4 W
 Types:Creature Beast
-Text:no text
 PT:2/5
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, another target attacking creature gets +0/+2 until end of turn. Untap that creature.
 SVar:TrigPump:DB$Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature. | NumDef$ +2 | SubAbility$ DBUntap
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_krovod.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/7.jpg
 Oracle:Whenever Bazaar Krovod attacks, another target attacking creature gets +0/+2 until end of turn. Untap that creature.
-End

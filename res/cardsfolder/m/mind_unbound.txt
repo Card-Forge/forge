@@ -1,7 +1,6 @@
 Name:Mind Unbound
 ManaCost:4 U U
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a lore counter on CARDNAME, then draw a card for each lore counter on CARDNAME.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ LORE | CounterNum$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_unbound.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/68.jpg
 Oracle:At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.
-End

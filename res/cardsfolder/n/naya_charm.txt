@@ -1,7 +1,6 @@
 Name:Naya Charm
 ManaCost:R G W
 Types:Instant
-Text:no text
 A:SP$ Charm | Cost$ R G W | Choices$ DBDealDamage,DBReturn,DBTapAll | SpellDescription$ Choose one - CARDNAME deals 3 damage to target creature; or return target card from a graveyard to its owner's hand; or tap all creatures target player controls.
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals 3 damage to target creature;
 SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Card | TgtPrompt$ Select target card in a graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ or return target card from a graveyard to its owner's hand;
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_charm.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/180.jpg
 Oracle:Choose one - Naya Charm deals 3 damage to target creature; or return target card from a graveyard to its owner's hand; or tap all creatures target player controls.
-End

@@ -1,7 +1,6 @@
 Name:Tuknir Deathlock
 ManaCost:R R G G
 Types:Legendary Creature Human Wizard
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ Pump | Cost$ R G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tuknir_deathlock.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/307.jpg
 Oracle:Flying\n{R}{G}, {T}: Target creature gets +2/+2 until end of turn.
-End

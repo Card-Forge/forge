@@ -1,7 +1,6 @@
 Name:Alloy Golem
 ManaCost:6
 Types:Artifact Creature Golem
-Text:no text
 PT:4/4
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alloy_golem.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/297.jpg
 Oracle:As Alloy Golem enters the battlefield, choose a color.\nAlloy Golem is the chosen color. (It's still an artifact.)
-End

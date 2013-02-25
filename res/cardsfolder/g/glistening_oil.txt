@@ -1,7 +1,6 @@
 Name:Glistening Oil
 ManaCost:B B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ B B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Infect | Description$ Enchanted creature has infect.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glistening_oil.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/62.jpg
 Oracle:Enchant creature\nEnchanted creature has infect.\nAt the beginning of your upkeep, put a -1/-1 counter on enchanted creature.\nWhen Glistening Oil is put into a graveyard from the battlefield, return Glistening Oil to its owner's hand.
-End

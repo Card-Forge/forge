@@ -1,7 +1,6 @@
 Name:Mistform Seaswift
 ManaCost:3 U
 Types:Creature Illusion
-Text:no text
 PT:3/1
 K:Flying
 A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_seaswift.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/45.jpg
 Oracle:Flying\n{1}: Mistform Seaswift becomes the creature type of your choice until end of turn.\nMorph {1}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

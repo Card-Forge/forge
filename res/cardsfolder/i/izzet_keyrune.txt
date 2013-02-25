@@ -1,7 +1,6 @@
 Name:Izzet Keyrune
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Animate | Cost$ U R | Defined$ Self | Power$ 2 | Toughness$ 1 | Types$ Artifact,Creature,Elemental | Colors$ Blue,Red | SpellDescription$ Until end of turn, CARDNAME becomes a 2/1 blue and red Elemental artifact creature.
@@ -16,4 +15,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_keyrune.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/230.jpg
 Oracle:{T}: Add {U} or {R} to your mana pool.\n{U}{R}: Until end of turn, Izzet Keyrune becomes a 2/1 blue and red Elemental artifact creature.\nWhenever Izzet Keyrune deals combat damage to a player, you may draw a card. If you do, discard a card.
-End

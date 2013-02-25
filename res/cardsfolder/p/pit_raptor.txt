@@ -1,7 +1,6 @@
 Name:Pit Raptor
 ManaCost:2 B B
 Types:Creature Bird Mercenary
-Text:no text
 PT:4/3
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 2 B B
 K:Flying
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_raptor.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/72.jpg
 Oracle:Flying, first strike\nAt the beginning of your upkeep, sacrifice Pit Raptor unless you pay {2}{B}{B}.
-End

@@ -1,7 +1,6 @@
 Name:Sheltered Valley
 ManaCost:no cost
 Types:Land
-Text:no text
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ SacBeforeETB | Description$ If CARDNAME would enter the battlefield, instead sacrifice each other permanent named Sheltered Valley you control, then put CARDNAME onto the battlefield.
 SVar:SacBeforeETB:DB$ SacrificeAll | ValidCards$ Permanent.YouCtrl+namedSheltered Valley | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://wizards.com/global/images/magic/general/sheltered_valley.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/187.jpg
 Oracle:If Sheltered Valley would enter the battlefield, instead sacrifice each other permanent named Sheltered Valley you control, then put Sheltered Valley onto the battlefield.\nAt the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.\n{T}: Add {1} to your mana pool.
-End

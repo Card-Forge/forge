@@ -1,7 +1,6 @@
 Name:Falling Timber
 ManaCost:2 G
 Types:Instant
-Text:no text
 K:Kicker Sac<1/Land>
 A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ X | TargetMax$ X | References$ X | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | IsCurse$ True | SpellDescription$ Prevent all combat damage target creature would deal this turn. If CARDNAME was kicked, prevent all combat damage another target creature would deal this turn.
 SVar:X:Count$Kicked.2.1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falling_timber.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/79.jpg
 Oracle:Kicker-Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell.)\nPrevent all combat damage target creature would deal this turn. If Falling Timber was kicked, prevent all combat damage another target creature would deal this turn.
-End

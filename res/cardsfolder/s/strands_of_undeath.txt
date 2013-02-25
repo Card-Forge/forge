@@ -1,7 +1,6 @@
 Name:Strands of Undeath
 ManaCost:3 B
 Types:Enchantment Aura
-Text:no text
 PT:2/2
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Pump
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strands_of_undeath.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/108.jpg
 Oracle:Enchant creature\nWhen Strands of Undeath enters the battlefield, target player discards two cards.\n{B}: Regenerate enchanted creature.
-End

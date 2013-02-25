@@ -1,7 +1,6 @@
 Name:Shivan Dragon
 ManaCost:4 R R
 Types:Creature Dragon
-Text:no text
 PT:5/5
 K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -19,4 +18,3 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/156.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/176.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/175.jpg
 Oracle:Flying\n{R}: Shivan Dragon gets +1/+0 until end of turn.
-End

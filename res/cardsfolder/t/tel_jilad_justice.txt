@@ -1,11 +1,9 @@
 Name:Tel-Jilad Justice
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SubAbility$ DBScry | SpellDescription$ Destroy target artifact. Scry 2 (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:DBScry:DB$Scry | ScryNum$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_justice.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/95.jpg
 Oracle:Destroy target artifact.\nScry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-End

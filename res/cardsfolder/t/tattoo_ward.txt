@@ -1,7 +1,6 @@
 Name:Tattoo Ward
 ManaCost:2 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Protection from enchantments | Description$ Enchanted creature gets +1/+1 and has protection from enchantments. This effect doesn't remove CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattoo_ward.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/54.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has protection from enchantments. This effect doesn't remove Tattoo Ward.\nSacrifice Tattoo Ward: Destroy target enchantment.
-End

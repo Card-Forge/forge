@@ -1,7 +1,6 @@
 Name:Blighted Agent
 ManaCost:1 U
 Types:Creature Human Rogue
-Text:no text
 PT:1/1
 K:Infect
 K:Unblockable
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_agent.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/29.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nBlighted Agent is unblockable.
-End

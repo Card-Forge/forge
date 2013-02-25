@@ -1,7 +1,6 @@
 Name:Wood Elemental
 ManaCost:3 G
 Types:Creature Elemental
-Text:no text
 PT:*/*
 K:ETBReplacement:Other:TrigSac
 SVar:TrigSac:DB$ Sacrifice | Amount$ SacX | References$ SacX | SacValid$ Forest.untapped | Defined$ You | RememberSacrificed$ True | Optional$ True | SpellDescription$ As CARDNAME enters the battlefield, sacrifice any number of untapped Forests.
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wood_elemental.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/129.jpg
 Oracle:As Wood Elemental enters the battlefield, sacrifice any number of untapped Forests.\nWood Elemental's power and toughness are each equal to the number of Forests sacrificed as it entered the battlefield.
-End

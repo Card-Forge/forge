@@ -1,7 +1,6 @@
 Name:Enclave Cryptologist
 ManaCost:U
 Types:Creature Merfolk Wizard
-Text:no text
 PT:0/1
 K:Level up:1 U
 K:maxLevel:3
@@ -16,4 +15,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enclave_cryptologist.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/66.jpg
 Oracle:Level up {1}{U} ({1}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n0/1\n{T}: Draw a card, then discard a card.\nLEVEL 3+\n0/1\n{T}: Draw a card.
-End

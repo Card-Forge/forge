@@ -1,7 +1,6 @@
 Name:Soothsaying
 ManaCost:U
 Types:Enchantment
-Text:no text
 A:AB$ Shuffle | Cost$ 3 U U | Defined$ You | SpellDescription$ Shuffle your library.
 A:AB$ RearrangeTopOfLibrary | Cost$ X | Defined$ You | NumCards$ X | References$ X | SpellDescription$ Look at the top X cards of your library, then put them back in any order.
 SVar:X:Count$xPaid
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soothsaying.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/104.jpg
 Oracle:{3}{U}{U}: Shuffle your library.\n{X}: Look at the top X cards of your library, then put them back in any order.
-End

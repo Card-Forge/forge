@@ -1,7 +1,6 @@
 Name:Vigorous Charge
 ManaCost:G
 Types:Instant
-Text:no text
 K:Kicker W
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | KW$ Trample | SubAbility$ VigorousPumping | SpellDescription$ Target creature gains trample until end of turn. Whenever that creature deals combat damage this turn, if CARDNAME was kicked, you gain life equal to that damage.
 SVar:VigorousPumping:DB$ Effect | TgtPrompt$ Select target creature | Triggers$ TrigDamage,EndTrackingEffect | SVars$ VigorousLife,X,ExileEffect | RememberObjects$ Targeted | Condition$ Kicked | ConditionDescription$ If Vigorous Charge was kicked,
@@ -15,4 +14,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigorous_charge.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/222.jpg
 Oracle:Kicker {W} (You may pay an additional {W} as you cast this spell.)\nTarget creature gains trample until end of turn. Whenever that creature deals combat damage this turn, if Vigorous Charge was kicked, you gain life equal to that damage.
-End

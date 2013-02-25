@@ -1,11 +1,9 @@
 Name:Simoon
 ManaCost:R G
 Types:Instant
-Text:no text
 A:SP$ DamageAll | Cost$ R G | NumDmg$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | ValidCards$ Creature | ValidDescription$ each creature the opponent controls. | SpellDescription$ CARDNAME deals 1 damage to each creature target opponent controls.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simoon.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/136.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/272.jpg
 Oracle:Simoon deals 1 damage to each creature target opponent controls.
-End

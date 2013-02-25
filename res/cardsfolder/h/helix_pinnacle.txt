@@ -1,7 +1,6 @@
 Name:Helix Pinnacle
 ManaCost:G
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE100_TOWER | Execute$ TrigWinGame | TriggerDescription$ At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
 SVar:TrigWinGame:AB$WinsGame | Cost$ 0 | Defined$ You
 K:Shroud
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helix_pinnacle.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/68.jpg
 Oracle:Shroud\n{X}: Put X tower counters on Helix Pinnacle.\nAt the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
-End

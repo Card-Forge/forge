@@ -1,7 +1,6 @@
 Name:Spike Rogue
 ManaCost:1 G G
 Types:Creature Spike
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:2
 A:AB$ PutCounter | Cost$ 2 SubCounter<1/P1P1> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_rogue.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/127.jpg
 Oracle:Spike Rogue enters the battlefield with two +1/+1 counters on it.\n{2}, Remove a +1/+1 counter from Spike Rogue: Put a +1/+1 counter on target creature.\n{2}, Remove a +1/+1 counter from a creature you control: Put a +1/+1 counter on Spike Rogue.
-End

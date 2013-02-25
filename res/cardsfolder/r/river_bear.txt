@@ -1,7 +1,6 @@
 Name:River Bear
 ManaCost:3 G
 Types:Creature Bear
-Text:no text
 PT:3/3
 K:Islandwalk
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83022.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/84.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/266.jpg
 Oracle:Islandwalk (This creature is unblockable as long as defending player controls an Island.)
-End

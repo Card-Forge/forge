@@ -1,7 +1,6 @@
 Name:Hulking Cyclops
 ManaCost:3 R R
 Types:Creature Cyclops
-Text:no text
 PT:5/5
 K:CARDNAME can't block.
 SVar:Rarity:Uncommon
@@ -11,4 +10,3 @@ SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/84.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/189.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/139.jpg
 Oracle:Hulking Cyclops can't block.
-End

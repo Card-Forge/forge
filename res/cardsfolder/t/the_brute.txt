@@ -1,7 +1,6 @@
 Name:The Brute
 ManaCost:1 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
@@ -12,4 +11,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/272.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/244.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/164.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+0.\n{R}{R}{R}: Regenerate enchanted creature.
-End

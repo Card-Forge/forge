@@ -1,7 +1,6 @@
 Name:Circu, Dimir Lobotomist
 ManaCost:2 U B
 Types:Legendary Creature Human Wizard
-Text:no text
 PT:2/3
 T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLibraryChoice | TriggerDescription$ Whenever you cast a blue spell, exile the top card of target library.
 T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLibraryChoice | TriggerDescription$ Whenever you cast a black spell, exile the top card of target library.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circu_dimir_lobotomist.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/196.jpg
 Oracle:Whenever you cast a blue spell, exile the top card of target library.\nWhenever you cast a black spell, exile the top card of target library.\nYour opponents can't cast nonland cards with the same name as a card exiled with Circu, Dimir Lobotomist.
-End

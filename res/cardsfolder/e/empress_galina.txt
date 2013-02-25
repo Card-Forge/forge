@@ -1,11 +1,9 @@
 Name:Empress Galina
 ManaCost:3 U U
 Types:Legendary Creature Merfolk
-Text:no text
 PT:1/3
 A:AB$ GainControl | Cost$ U U T | ValidTgts$ Permanent.Legendary | TgtPrompt$ Select target legendary permanent | SpellDescription$ Gain control of target legendary permanent. (This effect lasts indefinitely.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empress_galina.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/54.jpg
 Oracle:{U}{U}, {T}: Gain control of target legendary permanent. (This effect lasts indefinitely.)
-End

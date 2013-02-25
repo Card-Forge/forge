@@ -1,11 +1,9 @@
 Name:Scorching Missile
 ManaCost:3 R
 Types:Sorcery
-Text:no text
 K:Flashback 9 R
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorching_missile.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/219.jpg
 Oracle:Scorching Missile deals 4 damage to target player.\nFlashback {9}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

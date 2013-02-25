@@ -1,7 +1,6 @@
 Name:Serra Angel Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/-1
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a spell, you gain 2 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/serra_angel_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/serra-angel.jpg
 Oracle:Hand +0, life -1\nWhenever you cast a spell, you gain 2 life.
-End

@@ -1,7 +1,6 @@
 Name:Mind Spring
 ManaCost:X U U
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ X U U | NumCards$ X | References$ X | SpellDescription$ Draw X cards.
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_spring.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/41.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/64.jpg
 Oracle:Draw X cards.
-End

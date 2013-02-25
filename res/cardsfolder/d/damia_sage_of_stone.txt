@@ -1,7 +1,6 @@
 Name:Damia, Sage of Stone
 ManaCost:4 G U B
 Types:Legendary Creature Gorgon Wizard
-Text:no text
 PT:4/4
 K:Deathtouch
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/damia_sage_of_stone.jpg
 SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/191.jpg
 Oracle:Deathtouch\nSkip your draw step.\nAt the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
-End

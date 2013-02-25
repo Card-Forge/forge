@@ -1,11 +1,9 @@
 Name:Vedalken Outlander
 ManaCost:W U
 Types:Artifact Creature Vedalken Scout
-Text:no text
 PT:2/2
 K:Protection from red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_outlander.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/132.jpg
 Oracle:Protection from red
-End

@@ -1,7 +1,6 @@
 Name:Body Snatcher
 ManaCost:2 B B
 Types:Creature Minion
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigBodySnatcherDiscardCreature | TriggerDescription$ When CARDNAME enters the battlefield, exile it unless you discard a creature card.
 SVar:TrigBodySnatcherDiscardCreature:AB$ Discard | Cost$ 0 | Mode$ TgtChoose | DiscardValid$ Creature | RememberDiscarded$ True | Optional$ True | SubAbility$ DBBodySnatcherExileMe
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_snatcher.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/53.jpg
 Oracle:When Body Snatcher enters the battlefield, exile it unless you discard a creature card.\nWhen Body Snatcher dies, exile Body Snatcher and return target creature card from your graveyard to the battlefield.
-End

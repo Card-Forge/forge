@@ -1,7 +1,6 @@
 Name:Sirocco
 ManaCost:1 R
 Types:Instant
-Text:no text
 A:SP$ RevealHand | Cost$ 1 R | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBRepeatDiscard | SpellDescription$ Target player reveals his or her hand. For each blue instant card revealed this way, that player discards that card unless he or she pays 4 life.
 SVar:DBRepeatDiscard:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered+Instant+Blue | Zone$ Hand | RepeatSubAbility$ DBDiscard | SubAbility$ DBCleanup
 SVar:DBDiscard:DB$ Discard | DefinedCards$ Imprinted | Mode$ Defined | UnlessCost$ PayLife<4> | UnlessPayer$ Targeted
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sirocco.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/192.jpg
 Oracle:Target player reveals his or her hand. For each blue instant card revealed this way, that player discards that card unless he or she pays 4 life.
-End

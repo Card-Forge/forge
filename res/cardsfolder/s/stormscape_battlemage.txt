@@ -1,7 +1,6 @@
 Name:Stormscape Battlemage
 ManaCost:2 U
 Types:Creature Metathran Wizard
-Text:no text
 PT:2/2
 K:Kicker W
 K:Kicker 2 B
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_battlemage.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/35.jpg
 Oracle:Kicker {W} and/or {2}{B} (You may pay an additional {W} and/or {2}{B} as you cast this spell.)\nWhen Stormscape Battlemage enters the battlefield, if it was kicked with its {W} kicker, you gain 3 life.\nWhen Stormscape Battlemage enters the battlefield, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated.
-End

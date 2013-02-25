@@ -1,11 +1,9 @@
 Name:Essence Scatter
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_scatter.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/51.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/50.jpg
 Oracle:Counter target creature spell.
-End

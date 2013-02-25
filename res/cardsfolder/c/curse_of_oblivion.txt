@@ -1,7 +1,6 @@
 Name:Curse of Oblivion
 ManaCost:3 B
 Types:Enchantment Aura Curse
-Text:no text
 K:Enchant player
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of enchanted player's upkeep, that player exiles two cards from his or her graveyard.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_oblivion.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/95.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player exiles two cards from his or her graveyard.
-End

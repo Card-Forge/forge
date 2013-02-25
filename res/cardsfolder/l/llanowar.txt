@@ -1,7 +1,6 @@
 Name:Llanowar
 ManaCost:no cost
 Types:Plane Dominaria
-Text:no text
 S:Mode$ Continuous | Affected$ Creature | EffectZone$ Command | AddAbility$ LlanowarAb | Description$ All creatures have "T: Add G G to your mana pool.".
 SVar:LlanowarAb:AB$ Mana | Cost$ T | Amount$ 2 | Produced$ G | SpellDescription$ Add G G to your mana pool.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, untap all creatures you control.
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar.jpg
 SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/llanowar.jpg
 Oracle:All creatures have "{T}: Add {G}{G} to your mana pool."\nWhenever you roll {C}, untap all creatures you control.
-End

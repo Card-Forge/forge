@@ -1,7 +1,6 @@
 Name:Death's Approach
 ManaCost:B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets -X/-X, where X is the number of creature cards in its controller's graveyard.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_approach.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/62.jpg
 Oracle:Enchant creature\nEnchanted creature gets -X/-X, where X is the number of creature cards in its controller's graveyard.
-End

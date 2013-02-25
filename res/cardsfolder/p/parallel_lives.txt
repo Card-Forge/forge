@@ -6,4 +6,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallel_lives.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/199.jpg
 Oracle:If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.
-End

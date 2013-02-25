@@ -1,7 +1,6 @@
 Name:Goblin Balloon Brigade
 ManaCost:R
 Types:Creature Goblin Warrior
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ R | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 SVar:Rarity:Uncommon
@@ -14,4 +13,3 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/140.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/153.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/154.jpg
 Oracle:{R}: Goblin Balloon Brigade gains flying until end of turn.
-End

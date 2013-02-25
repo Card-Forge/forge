@@ -1,7 +1,6 @@
 Name:Junk Diver
 ManaCost:3
 Types:Artifact Creature Bird
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return another target artifact card from your graveyard to your hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/junk_diver.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/132.jpg
 Oracle:Flying\nWhen Junk Diver dies, return another target artifact card from your graveyard to your hand.
-End

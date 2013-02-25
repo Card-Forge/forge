@@ -1,7 +1,6 @@
 Name:Elvish Archers
 ManaCost:1 G
 Types:Creature Elf Archer
-Text:no text
 PT:2/1
 K:First Strike
 SVar:Rarity:Rare
@@ -15,4 +14,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/226.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/100.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/100.jpg
 Oracle:First strike
-End

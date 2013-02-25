@@ -1,7 +1,6 @@
 Name:Root-Kin Ally
 ManaCost:4 G G
 Types:Creature Elemental Warrior
-Text:no text
 PT:3/3
 K:Convoke
 A:AB$Pump | Cost$ tapXType<2/Creature> | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_kin_ally.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/180.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nTap two untapped creatures you control: Root-Kin Ally gets +2/+2 until end of turn.
-End

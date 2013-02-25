@@ -1,7 +1,6 @@
 Name:Cinder Wall
 ManaCost:R
 Types:Creature Wall
-Text:no text
 PT:3/3
 K:Defender
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME blocks, destroy it at end of combat.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_wall.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/182.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/94.jpg
 Oracle:Defender (This creature can't attack.)\nWhen Cinder Wall blocks, destroy it at end of combat.
-End

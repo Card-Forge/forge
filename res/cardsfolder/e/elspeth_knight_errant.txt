@@ -1,7 +1,6 @@
 Name:Elspeth, Knight-Errant
 ManaCost:2 W W
 Types:Planeswalker Elspeth
-Text:no text
 Loyalty:4
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenName$ Soldier | TokenColors$ White | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | Planeswalker$ True | SpellDescription$ Put a 1/1 white Soldier creature token onto the battlefield.
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | KW$ Flying | Planeswalker$ True | SpellDescription$ Target creature gets +3/+3 and gains flying until end of turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_knight_errant.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/9.jpg
 Oracle:[+1] Put a 1/1 white Soldier creature token onto the battlefield.\n[+1] Target creature gets +3/+3 and gains flying until end of turn.\n[-8] You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."
-End

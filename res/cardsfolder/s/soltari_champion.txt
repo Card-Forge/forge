@@ -1,7 +1,6 @@
 Name:Soltari Champion
 ManaCost:2 W
 Types:Creature Soltari Soldier
-Text:no text
 PT:2/2
 K:Shadow
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, all other creatures you control get +1/+1 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_champion.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/118.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Soltari Champion attacks, all other creatures you control get +1/+1 until end of turn.
-End

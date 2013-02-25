@@ -1,7 +1,6 @@
 Name:Cranial Plating
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | Description$ Equipped creature gets +1/+0 for each artifact you control.
 A:AB$ Attach | Cost$ B B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cranial_plating.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/113.jpg
 Oracle:Equipped creature gets +1/+0 for each artifact you control.\n{B}{B}: Attach Cranial Plating to target creature you control.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-End

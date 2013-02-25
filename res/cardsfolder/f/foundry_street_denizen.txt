@@ -1,7 +1,6 @@
 Name:Foundry Street Denizen
 ManaCost:R
 Types:Creature Goblin Warrior
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl+Red | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another red creature enters the battlefield under your control, CARDNAME gets +1/+0 until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | NumAtt$ +1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foundry_street_denizen.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/92.jpg
 Oracle:Whenever another red creature enters the battlefield under your control, Foundry Street Denizen gets +1/+0 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Blistering Firecat
 ManaCost:1 R R R
 Types:Creature Elemental Cat
-Text:no text
 PT:7/1
 K:Morph:R R
 K:Trample
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39737.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/189.jpg
 Oracle:Trample, haste\nAt the beginning of the end step, sacrifice Blistering Firecat.\nMorph {R}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

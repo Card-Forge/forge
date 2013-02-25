@@ -1,11 +1,9 @@
 Name:Roar of Reclamation
 ManaCost:5 W W
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 5 W W | ChangeType$ Artifact | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Each player returns all artifact cards from his or her graveyard to the battlefield.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_reclamation.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/14.jpg
 Oracle:Each player returns all artifact cards from his or her graveyard to the battlefield.
-End

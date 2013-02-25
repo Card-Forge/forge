@@ -1,7 +1,6 @@
 Name:Diabolic Machine
 ManaCost:7
 Types:Artifact Creature Construct
-Text:no text
 PT:4/4
 A:AB$ Regenerate | Cost$ 3 | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
@@ -10,4 +9,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/363.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/98.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/332.jpg
 Oracle:{3}: Regenerate Diabolic Machine.
-End

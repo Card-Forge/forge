@@ -1,7 +1,6 @@
 Name:Oran-Rief Recluse
 ManaCost:2 G
 Types:Creature Spider
-Text:no text
 PT:1/3
 K:Kicker 2 G
 K:Reach
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oran_rief_recluse.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/173.jpg
 Oracle:Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)\nReach (This creature can block creatures with flying.)\nWhen Oran-Rief Recluse enters the battlefield, if it was kicked, destroy target creature with flying.
-End

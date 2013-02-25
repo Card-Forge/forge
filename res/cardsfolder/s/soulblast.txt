@@ -1,7 +1,6 @@
 Name:Soulblast
 ManaCost:3 R R R
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ 3 R R R Sac<All/Creature> | NumDmg$ X | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | CostDesc$ As an additional cost to cast CARDNAME, sacrifice all creatures you control. | SpellDescription$ CARDNAME deals damage to target creature or player equal to the total power of the sacrificed creatures.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/soulblast.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/190.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/236.jpg
 Oracle:As an additional cost to cast Soulblast, sacrifice all creatures you control.\nSoulblast deals damage to target creature or player equal to the total power of the sacrificed creatures.
-End

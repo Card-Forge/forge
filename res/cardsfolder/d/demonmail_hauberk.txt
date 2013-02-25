@@ -1,11 +1,9 @@
 Name:Demonmail Hauberk
 ManaCost:4
 Types:Artifact Equipment
-Text:no text
 K:Equip Sac<1/Creature>
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 4 | AddToughness$ 2 | Description$ Equipped creature gets +4/+2.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonmail_hauberk.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/221.jpg
 Oracle:Equipped creature gets +4/+2.\nEquip-Sacrifice a creature.
-End

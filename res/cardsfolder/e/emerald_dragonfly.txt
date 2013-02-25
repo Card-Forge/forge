@@ -1,7 +1,6 @@
 Name:Emerald Dragonfly
 ManaCost:1 G
 Types:Creature Insect
-Text:no text
 PT:1/1
 K:Flying
 A:AB$ Pump | Cost$ G G | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_dragonfl
 Oracle:Flying\n{G}{G}: Emerald Dragonfly gains first strike until end of turn.
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/35.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/98.jpg
-End

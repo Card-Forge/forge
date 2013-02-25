@@ -1,7 +1,6 @@
 Name:Brown Ouphe
 ManaCost:G
 Types:Creature Ouphe
-Text:no text
 PT:1/1
 A:AB$Counter | Cost$ 1 G T | TargetType$ Activated | TgtPrompt$ Select target activated ability from an artifact source | ValidTgts$ Artifact | SpellDescription$ Counter target activated ability from an artifact source. (Mana abilities can't be targeted.)
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/brown_ouphe.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/115.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/116.jpg
 Oracle:{1}{G}, {T}: Counter target activated ability from an artifact source. (Mana abilities can't be targeted.)
-End

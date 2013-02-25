@@ -1,7 +1,6 @@
 Name:Goblin War Paint
 ManaCost:1 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Enchanted creature gets +2/+2 and has haste.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_paint
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/143.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/129.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has haste. (It can attack and {T} no matter when it came under its controller's control.)
-End

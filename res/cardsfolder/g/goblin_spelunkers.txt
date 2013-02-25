@@ -1,7 +1,6 @@
 Name:Goblin Spelunkers
 ManaCost:2 R
 Types:Creature Goblin Warrior
-Text:no text
 PT:2/2
 K:Mountainwalk
 SVar:Rarity:Common
@@ -10,4 +9,3 @@ SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/128.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/195.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/193.jpg
 Oracle:Mountainwalk
-End

@@ -1,11 +1,9 @@
 Name:Indentured Oaf
 ManaCost:3 R
 Types:Creature Ogre Warrior
-Text:no text
 PT:4/3
 S:Mode$ PreventDamage | Source$ Card.Self | Target$ Creature.Red | Description$ Prevent all damage that CARDNAME would deal to red creatures.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indentured_oaf.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/133.jpg
 Oracle:Prevent all damage that Indentured Oaf would deal to red creatures.
-End

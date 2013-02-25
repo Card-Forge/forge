@@ -1,7 +1,6 @@
 Name:Metathran Zombie
 ManaCost:1 U
 Types:Creature Metathran Zombie
-Text:no text
 PT:1/1
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:RemRandomDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_zombie.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/63.jpg
 Oracle:{B}: Regenerate Metathran Zombie.
-End

@@ -1,7 +1,6 @@
 Name:Throne of Bone
 ManaCost:1
 Types:Artifact
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a black spell, you may pay 1. If you do, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 1 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
@@ -17,4 +16,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/316.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/279.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/274.jpg
 Oracle:Whenever a player casts a black spell, you may pay {1}. If you do, you gain 1 life.
-End

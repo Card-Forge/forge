@@ -1,7 +1,6 @@
 Name:Wine of Blood and Iron
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Pump | Cost$ 4 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SubAbility$ DBPump | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is its power. Sacrifice CARDNAME at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | KW$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | Defined$ Self
 SVar:X:Targeted$CardPower
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wine_of_blood_and_iron.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/161.jpg
 Oracle:{4}: Target creature gets +X/+0 until end of turn, where X is its power. Sacrifice Wine of Blood and Iron at the beginning of the next end step.
-End

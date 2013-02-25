@@ -1,7 +1,6 @@
 Name:Sabretooth Tiger
 ManaCost:2 R
 Types:Creature Cat
-Text:no text
 PT:2/1
 K:First Strike
 SVar:Rarity:Common
@@ -12,4 +11,3 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/203.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/215.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/215.jpg
 Oracle:First strike
-End

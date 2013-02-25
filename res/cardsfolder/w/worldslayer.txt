@@ -1,7 +1,6 @@
 Name:Worldslayer
 ManaCost:5
 Types:Artifact Equipment
-Text:no text
 K:Equip 5
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Player | Execute$ TrigDestroyAll | TriggerZones$ Battlefield | CombatDamage$ True | TriggerDescription$ Whenever equipped creature deals combat damage to a player, destroy all permanents other than CARDNAME.
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Permanent.Other
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/worldslayer.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/276.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/222.jpg
 Oracle:Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.\nEquip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)
-End

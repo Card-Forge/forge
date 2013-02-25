@@ -1,7 +1,6 @@
 Name:Time Reversal
 ManaCost:3 U U
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 3 U U |  ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True  | SubAbility$ DBChangeAll | SpellDescription$ Each player shuffles his or her graveyard and hand into his or her library
 SVar:DBChangeAll:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 7 | Defined$ Each | SubAbility$ DBChange | SpellDescription$ , then draws seven cards.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/time_reversal.jp
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/75.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/77.jpg
 Oracle:Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards. Exile Time Reversal.
-End

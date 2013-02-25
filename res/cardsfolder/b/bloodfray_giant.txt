@@ -1,7 +1,6 @@
 Name:Bloodfray Giant
 ManaCost:2 R R
 Types:Creature Giant
-Text:no text
 PT:4/3
 K:Trample
 K:ETBReplacement:Other:Unleash:Optional
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfray_giant.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/89.jpg
 Oracle:Trample\nUnleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
-End

@@ -1,7 +1,6 @@
 Name:Martyrs of Korlis
 ManaCost:3 W W
 Types:Creature Human
-Text:no text
 PT:1/6
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Artifact | ValidTarget$ You | ReplaceWith$ DmgMartyrsofKorlisSelf | IsCombat$ False | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by artifacts is dealt to CARDNAME instead.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Artifact | ValidTarget$ You | ReplaceWith$ DmgMartyrsofKorlisSelfCombat | IsCombat$ True | IsPresent$ Card.Self+untapped | Secondary$ True | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by artifacts is dealt to CARDNAME instead.
@@ -11,4 +10,3 @@ SVar:MartyrsofKorlisX:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_of_korlis.jpg
 Oracle:As long as Martyrs of Korlis is untapped, all damage that would be dealt to you by artifacts is dealt to Martyrs of Korlis instead.
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/99.jpg
-End

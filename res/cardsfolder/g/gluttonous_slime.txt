@@ -1,7 +1,6 @@
 Name:Gluttonous Slime
 ManaCost:2 G
 Types:Creature Ooze
-Text:no text
 PT:2/2
 K:Flash
 K:Devour:1
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gluttonous_slime
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/65.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/83.jpg
 Oracle:Flash\nDevour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with that many +1/+1 counters on it.)
-End

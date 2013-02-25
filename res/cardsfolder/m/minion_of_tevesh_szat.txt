@@ -1,7 +1,6 @@
 Name:Minion of Tevesh Szat
 ManaCost:4 B B B
 Types:Creature Demon Minion
-Text:no text
 PT:4/4
 K:At the beginning of your upkeep, CARDNAME deals 2 damage to you unless you pay B B
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -2 | SpellDescription$ Target creature gets +3/-2 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minion_of_tevesh_szat.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/39.jpg
 Oracle:At the beginning of your upkeep, Minion of Tevesh Szat deals 2 damage to you unless you pay {B}{B}.\n{T}: Target creature gets +3/-2 until end of turn.
-End

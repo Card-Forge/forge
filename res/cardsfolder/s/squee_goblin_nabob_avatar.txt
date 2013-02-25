@@ -1,11 +1,9 @@
 Name:Squee, Goblin Nabob Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+3/-4
 A:AB$ PreventDamage | ActivationZone$ Command | Cost$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature you control this turn.
 SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/squee_goblin_nabob_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/squee-goblin-nabob.jpg
 Oracle:Hand +3, life -4\n{1}: Prevent the next 1 damage that would be dealt to target creature you control this turn.
-End

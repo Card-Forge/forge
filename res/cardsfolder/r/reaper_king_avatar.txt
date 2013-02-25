@@ -1,7 +1,6 @@
 Name:Reaper King Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:-2/-5
 S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl+White | AddPower$ 1 | AddToughness$ 1 | Description$ Each creature you control gets +1/+1 for each of its colors.
 S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl+Blue | AddPower$ 1 | AddToughness$ 1
@@ -12,4 +11,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/reaper_king_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/reaper-king.jpg
 Oracle:Hand -2, life -5\nEach creature you control gets +1/+1 for each of its colors.
-End

@@ -1,7 +1,6 @@
 Name:Relearn
 ManaCost:1 U U
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 U U | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relearn.jpg
@@ -9,4 +8,3 @@ SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/51.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/48.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/93.jpg
 Oracle:Return target instant or sorcery card from your graveyard to your hand.
-End

@@ -1,7 +1,6 @@
 Name:Teardrop Kami
 ManaCost:U
 Types:Creature Spirit
-Text:no text
 PT:1/1
 A:AB$ TapOrUntap | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teardrop_kami.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/55.jpg
 Oracle:Sacrifice Teardrop Kami: You may tap or untap target creature.
-End

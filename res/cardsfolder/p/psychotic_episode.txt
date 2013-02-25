@@ -1,7 +1,6 @@
 Name:Psychotic Episode
 ManaCost:1 B B
 Types:Sorcery
-Text:no text
 K:Madness:1 B
 A:SP$ RevealHand | Cost$ 1 B B | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBRevealTopLibrary | SpellDescription$ Target player reveals his or her hand and the top card of his or her library. You choose a card revealed this way. That player puts the chosen card on the bottom of his or her library.
 SVar:DBRevealTopLibrary:DB$ Dig | DigNum$ 1 | Reveal$ True | Defined$ Targeted | NoMove$ True | SubAbility$ DBRevealHand
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotic_episode.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/126.jpg
 Oracle:Target player reveals his or her hand and the top card of his or her library. You choose a card revealed this way. That player puts the chosen card on the bottom of his or her library.\nMadness {1}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-End

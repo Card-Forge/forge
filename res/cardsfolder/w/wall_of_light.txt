@@ -1,7 +1,6 @@
 Name:Wall of Light
 ManaCost:2 W
 Types:Creature Wall
-Text:no text
 PT:1/5
 K:Defender
 K:Protection from black
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_light.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/212.jpg
 Oracle:Defender (This creature can't attack.)\nProtection from black
-End

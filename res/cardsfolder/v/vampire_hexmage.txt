@@ -1,7 +1,6 @@
 Name:Vampire Hexmage
 ManaCost:B B
 Types:Creature Vampire Shaman
-Text:no text
 PT:2/1
 K:First Strike
 A:AB$ RepeatEach | Cost$ Sac<1/CARDNAME> | ValidTgts$ Permanent | RepeatCounters$ True | RepeatSubAbility$ RemoveAllCounters | SpellDescription$ Remove all counters from target permanent. | StackDescription$ SpellDescription | AILogic$ RemoveAllCounters | SubAbility$ DBCleanup
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_hexmage.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/114.jpg
 Oracle:First strike\nSacrifice Vampire Hexmage: Remove all counters from target permanent.
-End

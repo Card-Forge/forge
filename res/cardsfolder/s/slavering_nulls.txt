@@ -1,7 +1,6 @@
 Name:Slavering Nulls
 ManaCost:1 R
 Types:Creature Goblin Zombie
-Text:no text
 PT:2/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ Swamp.YouCtrl | CombatDamage$ True | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you control a Swamp, you may have that player discard a card.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slavering_nulls.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/92.jpg
 Oracle:Whenever Slavering Nulls deals combat damage to a player, if you control a Swamp, you may have that player discard a card.
-End

@@ -12,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vindictive_mob.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/112.jpg
 Oracle:When Vindictive Mob enters the battlefield, sacrifice a creature.\nVindictive Mob can't be blocked by Saprolings.
-End

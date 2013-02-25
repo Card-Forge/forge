@@ -1,7 +1,6 @@
 Name:Skizzik Surger
 ManaCost:4 R R
 Types:Creature Elemental
-Text:no text
 PT:6/4
 K:Haste
 K:Echo:Sac<2/Land>:Sacrifice two lands.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skizzik_surger.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/120.jpg
 Oracle:Haste\nEcho-Sacrifice two lands. (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
-End

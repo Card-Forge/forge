@@ -1,7 +1,6 @@
 Name:Soulshriek
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | References$ X | KW$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ Target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard. Sacrifice that creature at the beginning of the next end step.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulshriek.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/43.jpg
 Oracle:Target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard. Sacrifice that creature at the beginning of the next end step.
-End

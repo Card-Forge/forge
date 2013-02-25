@@ -1,7 +1,6 @@
 Name:Snarling Undorak
 ManaCost:2 G G
 Types:Creature Beast
-Text:no text
 PT:3/3
 A:AB$ Pump | Cost$ 2 G | ValidTgts$ Creature.Beast | NumAtt$ +1 | NumDef$ +1 | TgtPrompt$ Select target Beast creature | SpellDescription$ Target Beast creature gets +1/+1 until end of turn.
 K:Morph:1 G G
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snarling_undorak.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/283.jpg
 Oracle:{2}{G}: Target Beast creature gets +1/+1 until end of turn.\nMorph {1}{G}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

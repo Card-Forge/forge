@@ -1,7 +1,6 @@
 Name:Avatar of Fury
 ManaCost:6 R R
 Types:Creature Avatar
-Text:no text
 PT:6/6
 K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_fury.j
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/82.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/110.jpg
 Oracle:If an opponent controls seven or more lands, Avatar of Fury costs {6} less to cast.\nFlying\n{R}: Avatar of Fury gets +1/+0 until end of turn.
-End

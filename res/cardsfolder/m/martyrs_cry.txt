@@ -1,7 +1,6 @@
 Name:Martyr's Cry
 ManaCost:W W
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ W W | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ChangeType$ Creature.White+YouCtrl | SubAbility$ DBDrawYou | SpellDescription$ Exile all white creatures. For each creature exiled this way, its controller draws a card.
 SVar:DBDrawYou:DB$Draw | NumCards$ X | References$ X | SubAbility$ DBExileOpp
 SVar:DBExileOpp:DB$ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ChangeType$ Creature.White+YouDontCtrl | SubAbility$ DBDrawOpp
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_cry.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/85.jpg
 Oracle:Exile all white creatures. For each creature exiled this way, its controller draws a card.
-End

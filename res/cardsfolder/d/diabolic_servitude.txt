@@ -1,7 +1,6 @@
 Name:Diabolic Servitude
 ManaCost:3 B
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReturnFromGraveyard | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card from your graveyard to the battlefield.
 SVar:TrigReturnFromGraveyard:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield | RememberTargets$ True
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExileAndBounce | TriggerZones$ Battlefield | TriggerDescription$ When the creature put onto the battlefield with CARDNAME dies, exile it and return CARDNAME to its owner's hand.
@@ -20,4 +19,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_servitude.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/130.jpg
 Oracle:When Diabolic Servitude enters the battlefield, return target creature card from your graveyard to the battlefield.\nWhen the creature put onto the battlefield with Diabolic Servitude dies, exile it and return Diabolic Servitude to its owner's hand.\nWhen Diabolic Servitude leaves the battlefield, exile the creature put onto the battlefield with Diabolic Servitude.
-End

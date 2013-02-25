@@ -1,7 +1,6 @@
 Name:Purify the Grave
 ManaCost:W
 Types:Instant
-Text:no text
 K:Flashback W
 A:SP$ ChangeZone | Cost$ W | ValidTgts$ Card | TgtPrompt$ Select card to exile | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile target card from a graveyard.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purify_the_grave.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/27.jpg
 Oracle:Exile target card from a graveyard.\nFlashback {W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

@@ -1,7 +1,6 @@
 Name:Giant Growth
 ManaCost:G
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_growth.jpg
@@ -21,4 +20,3 @@ SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/106.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/125.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/106.jpg
 Oracle:Target creature gets +3/+3 until end of turn.
-End

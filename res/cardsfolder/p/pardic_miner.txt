@@ -1,7 +1,6 @@
 Name:Pardic Miner
 ManaCost:1 R
 Types:Creature Dwarf
-Text:no text
 PT:1/1
 A:AB$ Effect | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | Name$ Pardic Miner Effect | StaticAbilities$ STCantPlayLand | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SpellDescription$ Target player can't play lands this turn.
 SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ Player.IsRemembered | Description$ Target player can't play land cards this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_miner.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/212.jpg
 Oracle:Sacrifice Pardic Miner: Target player can't play lands this turn.
-End

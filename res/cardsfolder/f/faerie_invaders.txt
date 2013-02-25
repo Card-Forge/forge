@@ -1,7 +1,6 @@
 Name:Faerie Invaders
 ManaCost:4 U
 Types:Creature Faerie Rogue
-Text:no text
 PT:3/3
 K:Flash
 K:Flying
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_invaders.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/51.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying
-End

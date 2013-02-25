@@ -1,11 +1,9 @@
 Name:Chandra's Fury
 ManaCost:4 R
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Player | NumDmg$ 4 | SubAbility$ DmgAll | SpellDescription$ CARDNAME deals 4 damage to target player and 1 damage to each creature that player controls.
 SVar:DmgAll:DB$ DamageAll | Cost$ 0 | NumDmg$ 1 | ValidCards$ Creature.TargetedPlayerCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_fury.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/124.jpg
 Oracle:Chandra's Fury deals 4 damage to target player and 1 damage to each creature that player controls.
-End

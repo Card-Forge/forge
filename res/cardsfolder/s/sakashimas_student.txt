@@ -1,7 +1,6 @@
 Name:Sakashima's Student
 ManaCost:2 U U
 Types:Creature Human Ninja
-Text:no text
 PT:0/0
 A:AB$ ChangeZone | Cost$ 1 U Return<1/Creature.attacking+unblocked> | CostDesc$ Ninjutsu 1 U | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ (1 U, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
 K:ETBReplacement:Copy:ChooseCreature:Optional
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sakashimas_student.jpg
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/24.jpg
 Oracle:Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nYou may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
-End

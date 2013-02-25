@@ -1,7 +1,6 @@
 Name:Drakewing Krasis
 ManaCost:1 G U
 Types:Creature Lizard Drake
-Text:no text
 PT:3/1
 K:Flying
 K:Trample
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drakewing_krasis.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/157.jpg
 Oracle:Flying, trample
-End

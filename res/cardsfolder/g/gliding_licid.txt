@@ -1,7 +1,6 @@
 Name:Gliding Licid
 ManaCost:2 U
 Types:Creature Licid
-Text:no text
 PT:2/2
 A:AB$ SetState | Cost$ U T | Defined$ Self | NewState$ Licid | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay U to end this effect.
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
@@ -29,4 +28,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gliding_licid.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/31.jpg
 Oracle:{U}, {T}: Glidinging Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {U} to end this effect.\nEnchanted creature has flying.
-End

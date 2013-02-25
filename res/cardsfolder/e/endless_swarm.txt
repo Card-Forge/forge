@@ -1,7 +1,6 @@
 Name:Endless Swarm
 ManaCost:5 G G G
 Types:Sorcery
-Text:no text
 K:Epic
 A:SP$ Token | Cost$ 5 G G G | TokenAmount$ X | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | References$ X | SpellDescription$ Put a 1/1 green Snake creature token onto the battlefield for each card in your hand.
 SVar:X:Count$InYourHand
@@ -10,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_swarm.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/129.jpg
 Oracle:Put a 1/1 green Snake creature token onto the battlefield for each card in your hand.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability.)
-End

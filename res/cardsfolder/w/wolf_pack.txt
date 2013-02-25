@@ -1,11 +1,9 @@
 Name:Wolf Pack
 ManaCost:6 G G
 Types:Creature Wolf
-Text:no text
 PT:7/6
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolf_pack.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/158.jpg
 Oracle:You may have Wolf Pack assign its combat damage as though it weren't blocked.
-End

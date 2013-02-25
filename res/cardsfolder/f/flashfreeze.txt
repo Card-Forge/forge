@@ -1,7 +1,6 @@
 Name:Flashfreeze
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Red or Green spell | ValidTgts$ Card.Red,Card.Green | SpellDescription$ Counter target red or green spell.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfreeze.jpg
@@ -11,4 +10,3 @@ SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/52.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/33.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/84.jpg
 Oracle:Counter target red or green spell.
-End

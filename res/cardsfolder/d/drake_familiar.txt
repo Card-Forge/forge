@@ -1,7 +1,6 @@
 Name:Drake Familiar
 ManaCost:1 U
 Types:Creature Drake
-Text:no text
 PT:2/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_familiar.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/44.jpg
 Oracle:Flying\nWhen Drake Familiar enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
-End

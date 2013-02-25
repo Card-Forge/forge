@@ -1,7 +1,6 @@
 Name:Archangel
 ManaCost:5 W W
 Types:Creature Angel
-Text:no text
 PT:5/5
 K:Flying
 K:Vigilance
@@ -14,4 +13,3 @@ SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/101.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/2.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/4.jpg
 Oracle:Flying, vigilance
-End

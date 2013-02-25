@@ -1,7 +1,6 @@
 Name:Decaying Soil
 ManaCost:1 B B
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile a card from your graveyard.
 SVar:TrigExile:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | DefinedPlayer$ You | Origin$ Graveyard | Destination$ Exile
 S:Mode$ Continuous | Affected$ Card.Self | AddTrigger$ TrigDies | AddAbility$ TrigReturn | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay 1. If you do, return that card to your hand."
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decaying_soil.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/127.jpg
 Oracle:At the beginning of your upkeep, exile a card from your graveyard.\nThreshold - As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
-End

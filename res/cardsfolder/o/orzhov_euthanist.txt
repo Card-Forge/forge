@@ -1,11 +1,9 @@
 Name:Orzhov Euthanist
 ManaCost:2 B
 Types:Creature Human Assassin
-Text:no text
 PT:2/2
 K:Haunt:TrigDestroy:Destroy target creature that was dealt damage this turn.
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_euthanist.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/54.jpg
 Oracle:Haunt (When this creature dies, exile it haunting target creature.)\nWhen Orzhov Euthanist enters the battlefield or the creature it haunts dies, destroy target creature that was dealt damage this turn.
-End

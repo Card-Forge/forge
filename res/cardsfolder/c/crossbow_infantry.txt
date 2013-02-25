@@ -1,7 +1,6 @@
 Name:Crossbow Infantry
 ManaCost:1 W
 Types:Creature Human Soldier Archer
-Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
 SVar:Rarity:Common
@@ -11,4 +10,3 @@ SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/16.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/12.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/12.jpg
 Oracle:{T}: Crossbow Infantry deals 1 damage to target attacking or blocking creature.
-End

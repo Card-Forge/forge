@@ -1,7 +1,6 @@
 Name:Rootborn Defenses
 ManaCost:2 W
 Types:Instant
-Text:no text
 A:SP$ ChooseCard | Cost$ 2 W | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ AtLeast1 | SpellDescription$ Populate. Creatures you control are indestructible this turn. (To populate, put a token onto the battlefield that's a copy of a creature token you control. Damage and effects that say "destroy" don't destroy indestructible creatures.)
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 1 | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ Effect | Name$ Rootborn Defenses Effect | StaticAbilities$ KWPump | SubAbility$ DBCleanup
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootborn_defenses.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/19.jpg
 Oracle:Populate. Creatures you control are indestructible this turn. (To populate, put a token onto the battlefield that's a copy of a creature token you control. Damage and effects that say "destroy" don't destroy indestructible creatures.)
-End

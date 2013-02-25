@@ -1,7 +1,6 @@
 Name:Spreading Algae
 ManaCost:G
 Types:Enchantment Aura
-Text:no text
 K:Enchant Swamp
 A:SP$ Attach | Cost$ G | ValidTgts$ Swamp | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_algae.
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/281.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/274.jpg
 Oracle:Enchant Swamp\nWhen enchanted land becomes tapped, destroy it.\nWhen Spreading Algae is put into a graveyard from the battlefield, return Spreading Algae to its owner's hand.
-End

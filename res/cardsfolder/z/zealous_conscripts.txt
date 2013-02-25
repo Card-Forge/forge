@@ -1,7 +1,6 @@
 Name:Zealous Conscripts
 ManaCost:4 R
 Types:Creature Human Warrior
-Text:no text
 PT:3/3
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, untap target permanent and gain control of it until end of turn. It gains haste until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealous_conscripts.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/166.jpg
 Oracle:Haste\nWhen Zealous Conscripts enters the battlefield, gain control of target permanent until end of turn. Untap that permanent. It gains haste until end of turn.
-End

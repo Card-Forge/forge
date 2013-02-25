@@ -1,7 +1,6 @@
 Name:Gloryscale Viashino
 ManaCost:1 R G W
 Types:Creature Viashino Soldier
-Text:no text
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a multicolored spell, CARDNAME gets +3/+3 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +3 | NumDef$ +3 | Defined$ Self
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gloryscale_viash
 SVar:Rarity:Uncommon
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/120.jpg
 Oracle:Whenever you cast a multicolored spell, Gloryscale Viashino gets +3/+3 until end of turn.
-End

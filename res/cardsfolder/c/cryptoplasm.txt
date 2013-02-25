@@ -1,7 +1,6 @@
 Name:Cryptoplasm
 ManaCost:1 U U
 Types:Creature Shapeshifter
-Text:no text
 PT:2/2
 # Make Svars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ CryptoplasmCopy | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may have CARDNAME become a copy of another target creature. If you do, CARDNAME gains this ability.
@@ -11,4 +10,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptoplasm.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/23.jpg
 Oracle:At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
-End

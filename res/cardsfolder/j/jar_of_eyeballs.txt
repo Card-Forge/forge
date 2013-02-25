@@ -1,7 +1,6 @@
 Name:Jar of Eyeballs
 ManaCost:3
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control dies, put two eyeball counters on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ EYEBALL | CounterNum$ 2
 A:AB$ Dig | Cost$ 3 T SubCounter<All/EYEBALL> | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | References$ X | SpellDescription$ Look at the top X cards of your library where X is the number of eyeball counters removed this way. Put one of them into your hand and the rest on the bottom of your library in any order.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jar_of_eyeballs.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/152.jpg
 Oracle:Whenever a creature you control dies, put two eyeball counters on Jar of Eyeballs.\n{3}, {T}, Remove all eyeball counters from Jar of Eyeballs: Look at the top X cards of your library, where X is the number of eyeball counters removed this way. Put one of them into your hand and the rest on the bottom of your library in any order.
-End

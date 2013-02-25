@@ -1,11 +1,9 @@
 Name:Okina, Temple to the Grandfathers
 ManaCost:no cost
 Types:Legendary Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Pump | Cost$ G T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target legendary creature gets +1/+1 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/okina_temple_to_the_grandfathers.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/280.jpg
 Oracle:{T}: Add {G} to your mana pool.\n{G}, {T}: Target legendary creature gets +1/+1 until end of turn.
-End

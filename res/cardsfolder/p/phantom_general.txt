@@ -1,11 +1,9 @@
 Name:Phantom General
 ManaCost:3 W
 Types:Creature Spirit Soldier
-Text:no text
 PT:2/3
 S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creature tokens you control get +1/+1.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_general.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/16.jpg
 Oracle:Creature tokens you control get +1/+1.
-End

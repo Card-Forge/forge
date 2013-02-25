@@ -1,7 +1,6 @@
 Name:Skithiryx, the Blight Dragon
 ManaCost:3 B B
 Types:Legendary Creature Dragon Skeleton
-Text:no text
 PT:4/4
 K:Flying
 K:Infect
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skithiryx_the_blight_dragon.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/79.jpg
 Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{B}: Skithiryx, the Blight Dragon gains haste until end of turn.\n{B}{B}: Regenerate Skithiryx.
-End

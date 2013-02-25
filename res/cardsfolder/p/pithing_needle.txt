@@ -1,7 +1,6 @@
 Name:Pithing Needle
 ManaCost:1
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, name a card.
 S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | NonMana$ True | Description$ Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
@@ -13,4 +12,3 @@ SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/158.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/231.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/338.jpg
 Oracle:As Pithing Needle enters the battlefield, name a card.\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.
-End

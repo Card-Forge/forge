@@ -1,11 +1,9 @@
 Name:An-Havva Inn
 ManaCost:1 G G
 Types:Sorcery
-Text:no text
 A:SP$ GainLife | Cost$ 1 G G | LifeAmount$ X | References$ X | SpellDescription$ You gain X plus 1 life, where X is the number of green creatures on the battlefield.
 SVar:X:Count$GreenTypeOnBattlefield.Creature/Plus.1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/an_havva_inn.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/52.jpg
 Oracle:You gain X plus 1 life, where X is the number of green creatures on the battlefield.
-End

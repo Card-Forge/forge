@@ -1,7 +1,6 @@
 Name:Overblaze
 ManaCost:3 R
 Types:Instant Arcane
-Text:no text
 K:Splice onto Arcane 2 R R
 A:SP$ Effect | Cost$ 3 R | Name$ Overblaze Effect | ValidTgts$ Permanent | RememberObjects$ Targeted | ReplacementEffects$ OverblazeEvent1,OverblazeEvent2 | SVars$ DmgTwice,DmgTwiceCombat,X | References$ OverblazeEvent1,OverblazeEvent2,DmgTwice,DmgTwiceCombat,X | SpellDescription$ Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
 SVar:OverblazeEvent1:Event$ DamageDone | ValidSource$ Permanent.IsRemembered | ValidTarget$ Creature,Player | IsCombat$ False | ReplaceWith$ DmgTwice | Description$ Each time target permanent would deal noncombat damage to a creature or player this turn, it deals double that damage to that creature or player instead.
@@ -16,4 +15,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overblaze.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/114.jpg
 Oracle:Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.\nSplice onto Arcane {2}{R}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-End

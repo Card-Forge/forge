@@ -1,7 +1,6 @@
 Name:Stonybrook Schoolmaster
 ManaCost:2 W
 Types:Creature Merfolk Wizard
-Text:no text
 PT:1/2
 T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME becomes tapped, you may put a 1/1 blue Merfolk Wizard creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ U 1 1 Merfolk Wizard | TokenName$ Merfolk Wizard | TokenAmount$ 1 | TokenColors$ Blue | TokenTypes$ Creature,Merfolk,Wizard | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_schoolmaster.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/25.jpg
 Oracle:Whenever Stonybrook Schoolmaster becomes tapped, you may put a 1/1 blue Merfolk Wizard creature token onto the battlefield.
-End

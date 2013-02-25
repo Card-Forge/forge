@@ -1,7 +1,6 @@
 Name:Tuktuk Scrapper
 ManaCost:3 R
 Types:Creature Goblin Artificer Ally
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TuktukDestroy | OptionalDecider$ You | TriggerDescription$ Whenever Tuktuk Scrapper or another Ally enters the battlefield under your control, you may destroy target artifact. If that artifact is put into a graveyard this way, Tuktuk Scrapper deals damage to that artifact's controller equal to the number of Allies you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TuktukDestroy | Secondary$ True | OptionalDecider$ You | TriggerDescription$ Whenever Tuktuk Scrapper or another Ally enters the battlefield under your control, you may destroy target artifact. If that artifact is put into a graveyard this way, Tuktuk Scrapper deals damage to that artifact's controller equal to the number of Allies you control.
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tuktuk_scrapper.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/94.jpg
 Oracle:Whenever Tuktuk Scrapper or another Ally enters the battlefield under your control, you may destroy target artifact. If that artifact is put into a graveyard this way, Tuktuk Scrapper deals damage to that artifact's controller equal to the number of Allies you control.
-End

@@ -1,7 +1,6 @@
 Name:Divine Congregation
 ManaCost:3 W
 Types:Sorcery
-Text:no text
 K:Suspend:5:1 W
 A:SP$ GainLife | Cost$ 3 W | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Select target player | Defined$ You | References$ X | SpellDescription$ You gain 2 life for each creature target player controls.
 SVar:X:TargetedPlayer$CreaturesInPlay/Times.2
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_congregation.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/13.jpg
 Oracle:You gain 2 life for each creature target player controls.\nSuspend 5-{1}{W} (Rather than cast this card from your hand, you may pay {1}{W} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
-End

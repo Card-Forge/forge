@@ -1,7 +1,6 @@
 Name:Thragtusk
 ManaCost:4 G
 Types:Creature Beast
-Text:no text
 PT:5/3
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Life | TriggerDescription$ When CARDNAME enters the battlefield, you gain 5 life.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ Token | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, put a 3/3 green Beast creature token onto the battlefield
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thragtusk.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/193.jpg
 Oracle:When Thragtusk enters the battlefield, you gain 5 life.\nWhen Thragtusk leaves the battlefield, put a 3/3 green Beast creature token onto the battlefield.
-End

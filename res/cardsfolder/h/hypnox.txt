@@ -1,7 +1,6 @@
 Name:Hypnox
 ManaCost:8 B B B
 Types:Creature Nightmare Horror
-Text:no text
 PT:8/8
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, exile all cards from target opponent's hand.
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnox.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/64.jpg
 Oracle:Flying\nWhen Hypnox enters the battlefield, if you cast it from your hand, exile all cards from target opponent's hand.\nWhen Hypnox leaves the battlefield, return the exiled cards to their owner's hand.
-End

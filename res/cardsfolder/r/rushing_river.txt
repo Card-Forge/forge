@@ -1,7 +1,6 @@
 Name:Rushing River
 ManaCost:2 U
 Types:Instant
-Text:no text
 K:Kicker Sac<1/Land>
 A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | TargetMin$ X | TargetMax$ X | References$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand. If CARDNAME was kicked, return another target nonland permanent to its owner's hand.
 SVar:X:Count$Kicked.2.1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rushing_river.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/30.jpg
 Oracle:Kicker-Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell.)\nReturn target nonland permanent to its owner's hand. If Rushing River was kicked, return another target nonland permanent to its owner's hand.
-End

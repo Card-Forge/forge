@@ -1,7 +1,6 @@
 Name:Cabal Therapy
 ManaCost:B
 Types:Sorcery
-Text:no text
 K:Flashback Sac<1/Creature> 
 A:SP$ NameCard | Cost$ B | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ DBDiscard | SpellDescription$ Name a nonland card. Target player reveals his or her hand and discards all cards with that name.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealDiscardAll | DiscardValid$ Card.NamedCard
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_therapy.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/62.jpg
 Oracle:Name a nonland card. Target player reveals his or her hand and discards all cards with that name.\nFlashback-Sacrifice a creature. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

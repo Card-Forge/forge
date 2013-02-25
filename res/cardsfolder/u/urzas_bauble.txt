@@ -1,7 +1,6 @@
 Name:Urza's Bauble
 ManaCost:0
 Types:Artifact
-Text:no text
 A:AB$ Reveal | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | Random$ True | SubAbility$ DBDraw | SpellDescription$ Look at a card at random in target player's hand. You draw a card at the beginning of the next turn's upkeep.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_bauble.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/406.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/318.jpg
 Oracle:{T}, Sacrifice Urza's Bauble: Look at a card at random in target player's hand. You draw a card at the beginning of the next turn's upkeep.
-End

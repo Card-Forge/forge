@@ -1,7 +1,6 @@
 Name:Angel of Flight Alabaster
 ManaCost:4 W
 Types:Creature Angel
-Text:no text
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You |TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, return target Spirit card from your graveyard to your hand.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_flight_alabaster.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/2.jpg
 Oracle:Flying\nAt the beginning of your upkeep, return target Spirit card from your graveyard to your hand.
-End

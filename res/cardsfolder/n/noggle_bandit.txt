@@ -8,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_bandit.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/106.jpg
 Oracle:Noggle Bandit can't be blocked except by creatures with defender.
-End

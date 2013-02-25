@@ -1,11 +1,9 @@
 Name:Leonin Bladetrap
 ManaCost:3
 Types:Artifact
-Text:no text
 K:Flash
 A:AB$ DamageAll | Cost$ 2 Sac<1/CARDNAME> | ValidCards$ Creature.attacking+withoutFlying | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each attacking creature without flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_bladetrap.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/192.jpg
 Oracle:Flash\n{2}, Sacrifice Leonin Bladetrap: Leonin Bladetrap deals 2 damage to each attacking creature without flying.
-End

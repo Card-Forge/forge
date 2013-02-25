@@ -1,7 +1,6 @@
 Name:Corrupt Official
 ManaCost:4 B
 Types:Creature Human Minion
-Text:no text
 PT:3/1
 A:AB$ Regenerate | Cost$ 2 B | SpellDescription$ Regenerate CARDNAME.
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player discards a card at random.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_official.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/128.jpg
 Oracle:{2}{B}: Regenerate Corrupt Official.\nWhenever Corrupt Official becomes blocked, defending player discards a card at random.
-End

@@ -1,7 +1,6 @@
 Name:Death Pits of Rath
 ManaCost:3 B B
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ When CARDNAME is dealt damage, destroy it. It can't be regenerated. | Description$ Whenever a creature is dealt damage, destroy it. It can't be regenerated.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/125.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/21.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/123.jpg
 Oracle:Whenever a creature is dealt damage, destroy it. It can't be regenerated.
-End

@@ -1,7 +1,6 @@
 Name:Avatar of Discord
 ManaCost:BR BR BR
 Types:Creature Avatar
-Text:no text
 PT:5/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard two cards.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_discord.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/140.jpg
 Oracle:({B/R} can be paid with either {B} or {R}.)\nFlying\nWhen Avatar of Discord enters the battlefield, sacrifice it unless you discard two cards.
-End

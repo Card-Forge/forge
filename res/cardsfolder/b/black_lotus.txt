@@ -1,7 +1,6 @@
 Name:Black Lotus
 ManaCost:0
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/232.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/234.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/233.jpg
 Oracle:{T}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.
-End

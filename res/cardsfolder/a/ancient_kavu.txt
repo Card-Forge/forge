@@ -1,11 +1,9 @@
 Name:Ancient Kavu
 ManaCost:3 R
 Types:Creature Kavu
-Text:no text
 PT:3/3
 A:AB$ Animate | Cost$ 2 | Defined$ Self | Colors$ Colorless | OverwriteColors$ True | SpellDescription$ CARDNAME becomes colorless until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_kavu.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/136.jpg
 Oracle:{2}: Ancient Kavu becomes colorless until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Endless Horizons
 ManaCost:3 W
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for any number of Plains cards and exile them. Then shuffle your library.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Exile | ChangeType$ Plains | ChangeNum$ X | RememberChanged$ True | References$ X
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigRetrieve | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may put a card you own exiled with CARDNAME into your hand.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_horizons.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/4.jpg
 Oracle:When Endless Horizons enters the battlefield, search your library for any number of Plains cards and exile them. Then shuffle your library.\nAt the beginning of your upkeep, you may put a card you own exiled with Endless Horizons into your hand.
-End

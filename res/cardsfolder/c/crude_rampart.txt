@@ -1,7 +1,6 @@
 Name:Crude Rampart
 ManaCost:3 W
 Types:Creature Wall
-Text:no text
 PT:4/5
 K:Defender
 K:Morph:4 W
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crude_rampart.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/17.jpg
 Oracle:Defender (This creature can't attack.)\nMorph {4}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

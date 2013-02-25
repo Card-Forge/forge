@@ -1,7 +1,6 @@
 Name:Gathan Raiders
 ManaCost:3 R R
 Types:Creature Human Warrior
-Text:no text
 PT:3/3
 K:Morph:Discard<1/Card>
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Hellbent | CheckSVar$ X | SVarCompare$ EQ1 | Description$ Hellbent - CARDNAME gets +2/+2 as long as you have no cards in hand.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gathan_raiders.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/99.jpg
 Oracle:Hellbent - Gathan Raiders gets +2/+2 if you have no cards in hand.\nMorph-Discard a card. (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

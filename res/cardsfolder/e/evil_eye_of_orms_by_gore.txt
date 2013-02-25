@@ -12,4 +12,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/126.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/42.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/10.jpg
 Oracle:Non-Eye creatures you control can't attack.\nEvil Eye of Orms-by-Gore can't be blocked except by Walls.
-End

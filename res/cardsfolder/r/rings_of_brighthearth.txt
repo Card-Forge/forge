@@ -1,11 +1,9 @@
 Name:Rings of Brighthearth
 ManaCost:3
 Types:Artifact
-Text:no text
 T:Mode$ AbilityCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopySpell | OptionalDecider$ You | TriggerDescription$ Whenever you activate an ability, if it isn't a mana ability, you may pay 2. If you do, copy that ability. You may choose new targets for the copy.
 SVar:TrigCopySpell:AB$CopySpellAbility | Cost$ 2 | Defined$ TriggeredSpellAbility
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rings_of_brighthearth.jpg
 Oracle:Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/259.jpg
-End

@@ -1,7 +1,6 @@
 Name:Cephalid Coliseum
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBPain | SpellDescription$ Add U to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Draw | Cost$ U T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 3 | Activation$ Threshold | PrecostDesc$ Threshold - | SpellDescription$ Target player draws three cards, then discards three cards. Activate this ability only if seven or more cards are in your graveyard. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 3 | Mode$ TgtChoose | Defined$ Targeted
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_coliseum.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/317.jpg
 Oracle:{T}: Add {U} to your mana pool. Cephalid Coliseum deals 1 damage to you.\nThreshold - {U}, {T}, Sacrifice Cephalid Coliseum: Target player draws three cards, then discards three cards. Activate this ability only if seven or more cards are in your graveyard.
-End

@@ -1,7 +1,6 @@
 Name:Relic Ward
 ManaCost:1 W
 Types:Enchantment Aura
-Text:no text
 K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
 K:Enchant artifact
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDelayedSac | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_ward.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/116.jpg
 Oracle:You may cast Relic Ward as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant artifact\nEnchanted artifact has shroud. (It can't be the target of spells or abilities.)
-End

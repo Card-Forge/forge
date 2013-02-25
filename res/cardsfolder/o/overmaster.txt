@@ -1,7 +1,6 @@
 Name:Overmaster
 ManaCost:R
 Types:Sorcery
-Text:no text
 A:SP$Effect | Cost$ R | Name$ Overmaster effect | Triggers$ SpellCastTrig | SVars$ Mastery,DBCleanup | SubAbility$ DBDraw | SpellDescription$ The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ Mastery | TriggerDescription$ The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overmaster.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/104.jpg
 Oracle:The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.\nDraw a card.
-End

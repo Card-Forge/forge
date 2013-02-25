@@ -1,11 +1,9 @@
 Name:Vedalken Engineer
 ManaCost:1 U
 Types:Creature Vedalken Artificer
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | RestrictValid$ Card.Artifact,Activated.Artifact | SpellDescription$ Add 2 to your mana pool. Spend this mana only to cast artifact spells or activate abilities of artifacts.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_engineer.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/35.jpg
 Oracle:{T}: Add two mana of any one color to your mana pool. Spend this mana only to cast artifact spells or activate abilities of artifacts.
-End

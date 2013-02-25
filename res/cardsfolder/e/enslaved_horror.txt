@@ -1,7 +1,6 @@
 Name:Enslaved Horror
 ManaCost:3 B
 Types:Creature Horror
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatPlayers | TriggerDescription$ When CARDNAME enters the battlefield, each other player may return a creature card from his or her graveyard to the battlefield.
 SVar:RepeatPlayers:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ TrigChange
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enslaved_horror.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/134.jpg
 Oracle:When Enslaved Horror enters the battlefield, each other player may return a creature card from his or her graveyard to the battlefield.
-End

@@ -1,7 +1,6 @@
 Name:Vesuvan Shapeshifter
 ManaCost:3 U U
 Types:Creature Shapeshifter
-Text:no text
 PT:0/0
 K:Morph:1 U
 K:ETBReplacement:Copy:ChooseCreature:Optional
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vesuvan_shapeshifter.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/90.jpg
 Oracle:As Vesuvan Shapeshifter enters the battlefield or is turned face up, you may choose another creature on the battlefield. If you do, until Vesuvan Shapeshifter is turned face down, it becomes a copy of that creature and gains "At the beginning of your upkeep, you may turn this creature face down."\nMorph {1}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

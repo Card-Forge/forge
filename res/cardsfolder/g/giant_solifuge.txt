@@ -1,7 +1,6 @@
 Name:Giant Solifuge
 ManaCost:2 RG RG
 Types:Creature Insect
-Text:no text
 PT:4/1
 K:Trample
 K:Haste
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_solifuge.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/143.jpg
 Oracle:({R/G} can be paid with either {R} or {G}.)\nTrample; haste; shroud (This permanent can't be the target of spells or abilities.)
-End

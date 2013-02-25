@@ -1,7 +1,6 @@
 Name:Longhorn Firebeast
 ManaCost:2 R
 Types:Creature Elemental Ox Beast
-Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | OptionalDecider$ Opponent | TriggerDescription$ When CARDNAME enters the battlefield, any opponent may have it deal 5 damage to him or her. If a player does, sacrifice CARDNAME.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 5 | SubAbility$ DBSacrifice
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/longhorn_firebeast.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/103.jpg
 Oracle:When Longhorn Firebeast enters the battlefield, any opponent may have it deal 5 damage to him or her. If a player does, sacrifice Longhorn Firebeast.
-End

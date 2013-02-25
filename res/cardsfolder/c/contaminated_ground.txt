@@ -1,7 +1,6 @@
 Name:Contaminated Ground
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Land | AILogic$ ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Swamp | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is a Swamp.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/contaminated_gro
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/59.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/102.jpg
 Oracle:Enchant land\nEnchanted land is a Swamp.\nWhenever enchanted land becomes tapped, its controller loses 2 life.
-End

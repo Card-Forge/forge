@@ -1,7 +1,6 @@
 Name:Crown of the Ages
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Pump | Cost$ 4 T | Amount$ 1 | ValidTgts$ Aura.AttachedTo Creature | TgtPrompt$ Select target Aura attached to a creature| SubAbility$ ChooseNewHost | StackDescription$ None | SpellDescription$ Attach target Aura attached to a creature to another creature.
 SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.NotEnchantedByTargeted | ChoiceZone$ Battlefield | SubAbility$ CrownAttach | RememberChosen$ True | AILogic$ AtLeast1
 SVar:CrownAttach:DB$ Attach | Object$ ParentTarget | Defined$ Remembered | SubAbility$ DBCleanup
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_the_age
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/360.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/290.jpg
 Oracle:{4}, {T}: Attach target Aura attached to a creature to another creature.
-End

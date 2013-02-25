@@ -1,7 +1,6 @@
 Name:Soltari Trooper
 ManaCost:1 W
 Types:Creature Soltari Soldier
-Text:no text
 PT:1/1
 K:Shadow
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_trooper.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/259.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Soltari Trooper attacks, it gets +1/+1 until end of turn.
-End

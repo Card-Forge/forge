@@ -1,11 +1,9 @@
 Name:Hyalopterous Lemure
 ManaCost:4 B
 Types:Creature Spirit
-Text:no text
 PT:4/3
 A:AB$Pump | Cost$ 0 | NumAtt$ -1 | KW$ Flying | SpellDescription$ Hyalopterous Lemure gets -1/-0 and gains flying until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hyalopterous_lemure.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/21.jpg
 Oracle:{0}: Hyalopterous Lemure gets -1/-0 and gains flying until end of turn.
-End

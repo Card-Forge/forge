@@ -1,7 +1,6 @@
 Name:Two-Headed Giant of Foriys
 ManaCost:4 R
 Types:Creature Giant
-Text:no text
 PT:4/4
 K:Trample
 K:CARDNAME can block an additional creature.
@@ -11,4 +10,3 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/180.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/181.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/180.jpg
 Oracle:Trample\nTwo-Headed Giant of Foriys can block an additional creature.
-End

@@ -1,7 +1,6 @@
 Name:Clockwork Condor
 ManaCost:4
 Types:Artifact Creature Bird
-Text:no text
 PT:0/0
 K:Flying
 K:etbCounter:P1P1:3
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_condor.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/154.jpg
 Oracle:Flying\nClockwork Condor enters the battlefield with three +1/+1 counters on it.\nWhenever Clockwork Condor attacks or blocks, remove a +1/+1 counter from it at end of combat.
-End

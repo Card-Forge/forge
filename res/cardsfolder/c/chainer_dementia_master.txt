@@ -1,7 +1,6 @@
 Name:Chainer, Dementia Master
 ManaCost:3 B B
 Types:Legendary Creature Human Minion
-Text:no text
 PT:3/3
 S:Mode$ Continuous | Affected$ Creature.Nightmare | AddPower$ 1 | AddToughness$ 1 | Description$ Nightmare creatures get +1/+1.
 A:AB$ ChangeZone | Cost$ B B B PayLife<3> | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ DBAnimate| SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainer_dementia_master.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/56.jpg
 Oracle:Nightmare creatures get +1/+1.\n{B}{B}{B}, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.\nWhen Chainer, Dementia Master leaves the battlefield, exile all Nightmares.
-End

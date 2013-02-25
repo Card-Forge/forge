@@ -1,7 +1,6 @@
 Name:Dire Undercurrents
 ManaCost:3 UB UB
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Blue+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a blue creature enters the battlefield under your control, you may have target player draw a card.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Black+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDiscard | TriggerDescription$ Whenever a black creature enters the battlefield under your control, you may have target player discard a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ select target player to draw a card | NumCards$ 1
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dire_undercurrents.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/159.jpg
 Oracle:Whenever a blue creature enters the battlefield under your control, you may have target player draw a card.\nWhenever a black creature enters the battlefield under your control, you may have target player discard a card.
-End

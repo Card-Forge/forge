@@ -1,7 +1,6 @@
 Name:Spellstutter Sprite
 ManaCost:1 U
 Types:Creature Faerie Wizard
-Text:no text
 PT:1/1
 K:Flash
 K:Flying
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellstutter_sprite.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/89.jpg
 Oracle:Flash\nFlying\nWhen Spellstutter Sprite enters the battlefield, counter target spell with converted mana cost X or less, where X is the number of Faeries you control.
-End

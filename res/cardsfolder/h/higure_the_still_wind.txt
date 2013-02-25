@@ -1,7 +1,6 @@
 Name:Higure, the Still Wind
 ManaCost:3 U U
 Types:Legendary Creature Human Ninja
-Text:no text
 PT:3/4
 A:AB$ ChangeZone | Cost$ 2 U U Return<1/Creature.attacking+unblocked> | CostDesc$ Ninjutsu 2 U U | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ (2 U U, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigSearch | OptionalDecider$ You | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may search your library for a Ninja card, reveal it, and put it into your hand. If you do, shuffle your library.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/higure_the_still
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/18.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/37.jpg
 Oracle:Ninjutsu {2}{U}{U} ({2}{U}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Higure, the Still Wind deals combat damage to a player, you may search your library for a Ninja card, reveal it, and put it into your hand. If you do, shuffle your library.\n{2}: Target Ninja creature is unblockable this turn.
-End

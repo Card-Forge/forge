@@ -1,7 +1,6 @@
 Name:Stuffy Doll
 ManaCost:5
 Types:Artifact Creature Construct
-Text:no text
 PT:0/1
 K:Indestructible
 K:ETBReplacement:Other:ChooseP
@@ -16,4 +15,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card116724.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/218.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/264.jpg
 Oracle:As Stuffy Doll enters the battlefield, choose a player.\nStuffy Doll is indestructible.\nWhenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.\n{T}: Stuffy Doll deals 1 damage to itself.
-End

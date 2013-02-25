@@ -1,7 +1,6 @@
 Name:Civilized Scholar
 ManaCost:2 U
 Types:Creature Human Advisor
-Text:no text
 PT:0/1
 A:AB$ Draw | Cost$ T | NumCards$ 1  | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. If a creature card is discarded this way, untap CARDNAME, then transform it.
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBTransform
@@ -20,7 +19,6 @@ Name:Homicidal Brute
 ManaCost:no cost
 Colors:red
 Types:Creature Human Mutant
-Text:no text
 PT:5/1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | IsPresent$ Card.notAttackedThisTurn+Self | TriggerDescription$ At the beginning of your end step, if CARDNAME didn't attack this turn, tap CARDNAME, then transform it.
 SVar:TrigTap:AB$ Tap | Cost$ 0 | Defined$ Self | SubAbility$ DBTransform2
@@ -28,5 +26,4 @@ SVar:DBTransform2:DB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homicidal_brute.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/47b.jpg
 Oracle:At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.
-End
 

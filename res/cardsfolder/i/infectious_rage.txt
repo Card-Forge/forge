@@ -1,7 +1,6 @@
 Name:Infectious Rage
 ManaCost:1 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ -1 | Description$ Enchanted creature gets +2/-1.
@@ -11,4 +10,3 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_rage.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/-1.\nWhen enchanted creature dies, choose a creature at random Infectious Rage can enchant. Return Infectious Rage to the battlefield attached to that creature.
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/92.jpg
-End

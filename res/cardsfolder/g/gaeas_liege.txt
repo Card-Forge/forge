@@ -1,7 +1,6 @@
 Name:Gaea's Liege
 ManaCost:3 G G G
 Types:Creature Avatar
-Text:no text
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | CheckSVar$ A | SVarCompare$ EQ1 | Description$ As long as CARDNAME isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as CARDNAME is attacking, its power and toughness are each equal to the number of Forests defending player controls.
 SVar:A:Count$Valid Card.Self+notattacking
@@ -21,4 +20,3 @@ SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/78.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/105.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/105.jpg
 Oracle:As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.\n{T}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.
-End

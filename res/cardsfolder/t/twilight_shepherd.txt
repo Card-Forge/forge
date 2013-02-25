@@ -1,7 +1,6 @@
 Name:Twilight Shepherd
 ManaCost:3 W W W
 Types:Creature Angel
-Text:no text
 PT:5/5
 K:Flying
 K:Vigilance
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twilight_shepherd.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/25.jpg
 Oracle:Flying, vigilance\nWhen Twilight Shepherd enters the battlefield, return to your hand all cards in your graveyard that were put there from the battlefield this turn.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
-End

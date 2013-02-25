@@ -1,10 +1,8 @@
 Name:Norn's Annex
 ManaCost:3 PW PW
 Types:Artifact
-Text:no text
 S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You,Planeswalker.YouCtrl | Cost$ PW | Description$ Creatures can't attack you or a planeswalker you control unless their controller pays PW for each of those creatures.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/norns_annex.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/17.jpg
 Oracle:({W/P} can be paid with either {W} or 2 life.)\nCreatures can't attack you or a planeswalker you control unless their controller pays {W/P} for each of those creatures.
-End

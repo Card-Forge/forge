@@ -1,10 +1,8 @@
 Name:Alaborn Trooper
 ManaCost:2 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6493.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/124.jpg
 Oracle:
-End

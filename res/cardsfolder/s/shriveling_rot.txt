@@ -15,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriveling_rot.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/54.jpg
 Oracle:Choose one - Until end of turn, whenever a creature is dealt damage, destroy it; or until end of turn, whenever a creature dies, that creature's controller loses life equal to its toughness.\nEntwine {2}{B} (Choose both if you pay the entwine cost.)
-End

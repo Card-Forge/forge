@@ -1,7 +1,6 @@
 Name:Harbinger of Night
 ManaCost:2 B B
 Types:Creature Spirit
-Text:no text
 PT:2/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of your upkeep, put a -1/-1 counter on each creature.
 SVar:TrigPutCounterAll:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbinger_of_night.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/26.jpg
 Oracle:At the beginning of your upkeep, put a -1/-1 counter on each creature.
-End

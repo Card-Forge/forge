@@ -1,7 +1,6 @@
 Name:Overgrowth
 ManaCost:2 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds G G to his or her mana pool (in addition to the mana the land produces).
@@ -13,4 +12,3 @@ SetInfo:STH|Common|http://magiccards.info/scans/en/sh/61.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/262.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/283.jpg
 Oracle:Enchant land (Target a land as you cast this. This card enters the battlefield attached to that land.)\nWhenever enchanted land is tapped for mana, its controller adds {G}{G} to his or her mana pool (in addition to the mana the land produces).
-End

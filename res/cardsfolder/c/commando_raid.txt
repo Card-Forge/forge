@@ -1,7 +1,6 @@
 Name:Commando Raid
 ManaCost:2 R
 Types:Instant
-Text:no text
 A:SP$ Animate | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Triggers$ TrigDamage | sVars$ Damage,CommandoRaidX | SpellDescription$ Until end of turn, target creature you control gains "When this creature deals combat damage to a player, you may have it deal damage equal to its power to target creature that player controls."
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ Damage | OptionalDecider$ You | TriggerDescription$ When this creature deals combat damage to a player, you may have it deal damage equal to its power to target creature that player controls.
 SVar:Damage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumDmg$ CommandoRaidX | References$ CommandoRaidX
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commando_raid.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/195.jpg
 Oracle:Until end of turn, target creature you control gains "When this creature deals combat damage to a player, you may have it deal damage equal to its power to target creature that player controls."
-End

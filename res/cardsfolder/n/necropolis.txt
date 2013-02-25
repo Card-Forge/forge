@@ -1,7 +1,6 @@
 Name:Necropolis
 ManaCost:5
 Types:Artifact Creature Wall
-Text:no text
 PT:0/1
 K:Defender
 A:AB$ PutCounter | Cost$ ExileFromGrave<1/Creature> | CounterType$ P0P1 | CounterNum$ X | References$ X | SpellDescription$ Put X +0/+1 counters on CARDNAME, where X is the exiled card's converted mana cost.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropolis.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/102.jpg
 Oracle:Defender (This creature can't attack.)\nExile a creature card from your graveyard: Put X +0/+1 counters on Necropolis, where X is the exiled card's converted mana cost.
-End

@@ -1,7 +1,6 @@
 Name:Treefolk Harbinger
 ManaCost:G
 Types:Creature Treefolk Druid
-Text:no text
 PT:0/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Treefolk or Forest card, reveal it, then shuffle your library and put that card on top of it.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.Treefolk,Card.Forest | ChangeNum$ 1
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treefolk_harbinger.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/239.jpg
 Oracle:When Treefolk Harbinger enters the battlefield, you may search your library for a Treefolk or Forest card, reveal it, then shuffle your library and put that card on top of it.
-End

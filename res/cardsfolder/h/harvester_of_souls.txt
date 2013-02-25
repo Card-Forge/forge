@@ -1,7 +1,6 @@
 Name:Harvester of Souls
 ManaCost:4 B B
 Types:Creature Demon
-Text:no text
 PT:5/5
 K:Deathtouch
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken creature dies, you may draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harvester_of_souls.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/107.jpg
 Oracle:Deathtouch\nWhenever another nontoken creature dies, you may draw a card.
-End

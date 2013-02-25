@@ -1,7 +1,6 @@
 Name:Lammastide Weave
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ NameCard | Cost$ 1 G | Defined$ You | SubAbility$ DBMill | SpellDescription$ Name a card, then target player puts the top card of his or her library into his or her graveyard. If that card is the named card, you gain life equal to its converted mana cost. Draw a card.
 SVar:DBMill:DB$ Mill | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | RememberMilled$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X,Y | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ1 | SubAbility$ DBDraw
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lammastide_weave.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/226.jpg
 Oracle:Name a card, then target player puts the top card of his or her library into his or her graveyard. If that card is the named card, you gain life equal to its converted mana cost.\nDraw a card.
-End

@@ -1,11 +1,9 @@
 Name:Soldevi Digger
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ ChangeZone | Cost$ 2 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | Hidden$ True | Mandatory$ True | ChangeType$ Card.TopGraveyard+YouOwn | SpellDescription$ Put the top card of your graveyard on the bottom of your library. | StackDescription$ Put the top card of your graveyard on the bottom of your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_digger.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/174.jpg
 Oracle:{2}: Put the top card of your graveyard on the bottom of your library.
-End

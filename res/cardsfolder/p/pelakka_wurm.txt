@@ -1,7 +1,6 @@
 Name:Pelakka Wurm
 ManaCost:4 G G G
 Types:Creature Wurm
-Text:no text
 PT:7/7
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 7 life.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pelakka_wurm.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/204.jpg
 Oracle:Trample\nWhen Pelakka Wurm enters the battlefield, you gain 7 life.\nWhen Pelakka Wurm dies, draw a card.
-End

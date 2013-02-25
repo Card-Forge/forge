@@ -1,7 +1,6 @@
 Name:Marshaling the Troops
 ManaCost:1 G
 Types:Sorcery
-Text:no text
 A:SP$ ChooseCard | Cost$ 1 G | Defined$ You | Amount$ X | References$ X | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap | SpellDescription$ Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.
 SVar:TrigTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Z | SubAbility$ DBCleanup | References$ Y,Z
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marshaling_the_troops.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/141.jpg
 Oracle:Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.
-End

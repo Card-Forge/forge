@@ -1,7 +1,6 @@
 Name:Moss Diamond
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon
@@ -10,4 +9,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/300.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/277.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/309.jpg
 Oracle:Moss Diamond enters the battlefield tapped.\n{T}: Add {G} to your mana pool.
-End

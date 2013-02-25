@@ -1,7 +1,6 @@
 Name:Gomazoa
 ManaCost:2 U
 Types:Creature Jellyfish
-Text:no text
 PT:0/3
 K:Defender
 K:Flying
@@ -16,4 +15,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gomazoa.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/46.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/48.jpg
 Oracle:Defender, flying\n{T}: Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
-End

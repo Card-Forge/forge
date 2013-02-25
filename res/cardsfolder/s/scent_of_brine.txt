@@ -1,7 +1,6 @@
 Name:Scent of Brine
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ Reveal | Cost$ 1 U | Defined$ You | RevealValid$ Card.Blue | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfBrineCounter | SpellDescription$ Reveal any number of blue cards in your hand. Counter target spell unless its controller pays 1 for each card revealed this way.
 SVar:DBScentOfBrineCounter:DB$ Counter | Cost$ 0 | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ ScentOfBrineX | SubAbility$ DBScentOfBrineCleanup | References$ ScentOfBrineX
 SVar:DBScentOfBrineCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scent_of_brine.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/45.jpg
 Oracle:Reveal any number of blue cards in your hand. Counter target spell unless its controller pays {1} for each card revealed this way.
-End

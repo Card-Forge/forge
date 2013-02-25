@@ -1,7 +1,6 @@
 Name:Ash Zealot
 ManaCost:R R
 Types:Creature Human Warrior
-Text:no text
 PT:2/2
 K:First Strike
 K:Haste
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ash_zealot.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/86.jpg
 Oracle:First strike, haste\nWhenever a player casts a spell from a graveyard, Ash Zealot deals 3 damage to that player.
-End

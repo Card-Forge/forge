@@ -1,7 +1,6 @@
 Name:Mycoloth
 ManaCost:3 G G
 Types:Creature Fungus
-Text:no text
 PT:4/4
 K:Devour:2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put a 1/1 green Saproling creature token onto the battlefield for each +1/+1 counter on CARDNAME.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoloth.jpg
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/68.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/140.jpg
 Oracle:Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)\nAt the beginning of your upkeep, put a 1/1 green Saproling creature token onto the battlefield for each +1/+1 counter on Mycoloth.
-End

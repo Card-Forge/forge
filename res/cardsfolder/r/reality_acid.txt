@@ -1,7 +1,6 @@
 Name:Reality Acid
 ManaCost:2 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant permanent
 K:Vanishing:3
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AILogic$ Curse
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_acid.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/45.jpg
 Oracle:Enchant permanent\nVanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Reality Acid leaves the battlefield, enchanted permanent's controller sacrifices it.
-End

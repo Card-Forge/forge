@@ -1,7 +1,6 @@
 Name:Eternal Dragon
 ManaCost:5 W W
 Types:Creature Dragon Spirit
-Text:no text
 PT:5/5
 K:Flying
 K:TypeCycling:Plains:2
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_dragon.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/12.jpg
 Oracle:Flying\n{3}{W}{W}: Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, and put it into your hand. Then shuffle your library.)
-End

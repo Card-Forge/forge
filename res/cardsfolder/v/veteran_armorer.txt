@@ -1,7 +1,6 @@
 Name:Veteran Armorer
 ManaCost:1 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddToughness$ 1 | Description$ Other creatures you control get +0/+1.
 SVar:PlayMain1:TRUE
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87950.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/34.jpg
 Oracle:Other creatures you control get +0/+1.
-End

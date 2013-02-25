@@ -1,7 +1,6 @@
 Name:Dwarven Catapult
 ManaCost:X R
 Types:Instant
-Text:no text
 A:SP$ DamageAll | Cost$ X R | ValidTgts$ Opponent | TgtPrompt$ Select a opponent | ValidCards$ Creature | NumDmg$ Z | References$ X,Y,Z | SpellDescription$ CARDNAME deals X damage divided evenly, rounded down, among all creatures target opponent controls.
 SVar:X:Count$xPaid
 SVar:Y:Count$Valid Creature.TargetedPlayerCtrl
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_catapult
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/220.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/105.jpg
 Oracle:Dwarven Catapult deals X damage divided evenly, rounded down, among all creatures target opponent controls.
-End

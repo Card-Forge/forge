@@ -1,7 +1,6 @@
 Name:Aladdin's Lamp
 ManaCost:10
 Types:Artifact
-Text:no text
 A:AB$ StoreSVar | Cost$ XCantBe0 X T | SVar$ DigNum | Type$ Count | Expression$ xPaid | SubAbility$ TheMagic | SpellDescription$ The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
 SVar:TheMagic:DB$ Effect | Name$ Aladdin's Wish | ReplacementEffects$ DrawReplace | SVars$ ExileEffect,AladdinDraw,DBDraw,DigNum,AllButOne
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ AladdinDraw | Description$ The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card.
@@ -18,4 +17,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/231.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/309.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/70.jpg
 Oracle:{X}, {T}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
-End

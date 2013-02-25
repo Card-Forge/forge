@@ -1,7 +1,6 @@
 Name:Child of Night
 ManaCost:1 B
 Types:Creature Vampire
-Text:no text
 PT:2/1
 K:Lifelink
 SVar:Rarity:Common
@@ -10,4 +9,3 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/88.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/88.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/87.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)
-End

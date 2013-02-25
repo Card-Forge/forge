@@ -1,7 +1,6 @@
 Name:Nameless One
 ManaCost:3 U
 Types:Creature Wizard Avatar
-Text:no text
 PT:*/*
 K:Morph:2 U
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | CheckSVar$ Y | SVarCompare$ EQ1 | References$ X,Y | Description$ CARDNAME's power and toughness are each equal to the number of Wizards on the battlefield.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_one.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/100.jpg
 Oracle:Nameless One's power and toughness are each equal to the number of Wizards on the battlefield.\nMorph {2}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

@@ -1,11 +1,9 @@
 Name:Headstone
 ManaCost:1 B
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/headstone.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/15.jpg
 Oracle:Exile target card from a graveyard.\nDraw a card at the beginning of the next turn's upkeep.
-End

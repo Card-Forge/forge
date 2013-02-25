@@ -1,7 +1,6 @@
 Name:Surging Sentinels
 ManaCost:2 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/1
 K:First Strike
 K:Ripple:4
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_sentinels.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/20.jpg
 Oracle:First strike\nRipple 4 (When you cast this spell, you may reveal the top four cards of your library. You may cast any revealed cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library.)
-End

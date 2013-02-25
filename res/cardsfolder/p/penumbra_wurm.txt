@@ -1,7 +1,6 @@
 Name:Penumbra Wurm
 ManaCost:5 G G
 Types:Creature Wurm
-Text:no text
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a 6/6 black Wurm creature token with trample onto the battlefield.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/penumbra_wurm.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/84.jpg
 Oracle:Trample\nWhen Penumbra Wurm dies, put a 6/6 black Wurm creature token with trample onto the battlefield.
-End

@@ -1,7 +1,6 @@
 Name:Transmogrifying Licid
 ManaCost:3
 Types:Creature Artifact Licid
-Text:no text
 PT:2/2
 A:AB$ SetState | Cost$ 1 T | Defined$ Self | NewState$ Licid | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay 1 to end this effect.
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
@@ -28,4 +27,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transmogrifying_licid.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/141.jpg
 Oracle:{1}, {T}: Transmogrifying Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {1} to end this effect.\nEnchanted creature gets +1/+1 and is an artifact in addition to its other types.
-End

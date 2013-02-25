@@ -1,7 +1,6 @@
 Name:Naya Hushblade
 ManaCost:RW G
 Types:Creature Elf Rogue
-Text:no text
 PT:2/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Shroud | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ As long as you control another multicolored permanent, CARDNAME gets +1/+1 and has shroud. (It can't be the target of spells or abilities.)
 SVar:X:Count$Valid Permanent.MultiColor+Other+YouCtrl
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_hushblade.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/141.jpg
 Oracle:As long as you control another multicolored permanent, Naya Hushblade gets +1/+1 and has shroud. (It can't be the target of spells or abilities.)
-End

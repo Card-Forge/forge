@@ -1,7 +1,6 @@
 Name:Sekki, Seasons' Guide
 ManaCost:5 G G G
 Types:Legendary Creature Spirit
-Text:no text
 PT:0/0
 K:etbCounters:P1P1:8
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ SekkiCounters | PreventionEffect$ True | Description$ If damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and put that many 1/1 colorless Spirit creature tokens onto the battlefield.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sekki_seasons_guide.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/148.jpg
 Oracle:Sekki, Seasons' Guide enters the battlefield with eight +1/+1 counters on it.\nIf damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and put that many 1/1 colorless Spirit creature tokens onto the battlefield.\nSacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
-End

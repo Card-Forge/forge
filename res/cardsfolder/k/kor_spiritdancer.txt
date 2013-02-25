@@ -1,7 +1,6 @@
 Name:Kor Spiritdancer
 ManaCost:1 W
 Types:Creature Kor Wizard
-Text:no text
 PT:0/2
 T:Mode$ SpellCast | ValidCard$ Aura | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast an Aura spell, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_spiritdancer
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/9.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/31.jpg
 Oracle:Kor Spiritdancer gets +2/+2 for each Aura attached to it.\nWhenever you cast an Aura spell, you may draw a card.
-End

@@ -1,7 +1,6 @@
 Name:Guiding Spirit
 ManaCost:1 W U
 Types:Creature Angel Spirit
-Text:no text
 PT:1/2
 K:Flying
 A:AB$ ChangeZoneAll | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card.TopGraveyardCreature | SpellDescription$ If the top card of target player's graveyard is a creature card, put that card on top of that player's library.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guiding_spirit.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/131.jpg
 Oracle:Flying\n{T}: If the top card of target player's graveyard is a creature card, put that card on top of that player's library.
-End

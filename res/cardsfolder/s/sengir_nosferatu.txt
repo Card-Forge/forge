@@ -1,7 +1,6 @@
 Name:Sengir Nosferatu
 ManaCost:3 B B
 Types:Creature Vampire
-Text:no text
 PT:4/4
 K:Flying
 A:AB$ Token | Cost$ 1 B Exile<1/CARDNAME> | TokenAmount$ 1 | TokenName$ Bat | TokenTypes$ Creature,Bat | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 2 | TokenKeywords$ Flying | TokenAbilities$ ABReturn | SpellDescription$ Put a 1/2 black Bat creature token with flying onto the battlefield. It has "1 B, Sacrifice this creature: Return an exiled card named CARDNAME to the battlefield under its owner's control."
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sengir_nosferatu.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/128.jpg
 Oracle:Flying\n{1}{B}, Exile Sengir Nosferatu: Put a 1/2 black Bat creature token with flying onto the battlefield. It has "{1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control."
-End

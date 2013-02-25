@@ -1,7 +1,6 @@
 Name:Rockshard Elemental
 ManaCost:5 R R
 Types:Creature Elemental
-Text:no text
 PT:4/3
 K:Double Strike
 K:Morph:4 R R
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rockshard_elemental.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/109.jpg
 Oracle:Double strike (This creature deals both first-strike and regular combat damage.)\nMorph {4}{R}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

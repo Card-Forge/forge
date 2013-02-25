@@ -7,4 +7,3 @@ SVar:Rarity:None
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130634.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/145.jpg
 Oracle:Spend only mana produced by basic lands to cast Imperiosaur.
-End

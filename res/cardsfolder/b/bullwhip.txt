@@ -1,11 +1,9 @@
 Name:Bullwhip
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ DealDamage | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to target creature. That creature attacks this turn if able.
 SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME attacks each turn if able.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bullwhip.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/126.jpg
 Oracle:{2}, {T}: Bullwhip deals 1 damage to target creature. That creature attacks this turn if able.
-End

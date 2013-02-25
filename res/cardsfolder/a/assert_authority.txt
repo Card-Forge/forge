@@ -1,7 +1,6 @@
 Name:Assert Authority
 ManaCost:5 U U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ 5 U U | TargetType$ Spell | ValidTgts$ Card | Destination$ Exile | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
 SVar:X:Count$Valid Artifact.YouCtrl
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/30.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nCounter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-End

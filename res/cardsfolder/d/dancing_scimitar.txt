@@ -1,7 +1,6 @@
 Name:Dancing Scimitar
 ManaCost:4
 Types:Artifact Creature Spirit
-Text:no text
 PT:1/5
 K:Flying
 SVar:Rarity:Uncommon
@@ -13,4 +12,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/279.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/243.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/75.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)
-End

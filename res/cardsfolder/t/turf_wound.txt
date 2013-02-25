@@ -1,7 +1,6 @@
 Name:Turf Wound
 ManaCost:2 R
 Types:Instant
-Text:no text
 A:SP$ Effect | Cost$ 2 R | ValidTgts$ Player | Name$ Turf Wound Effect | StaticAbilities$ STCantPlayLand | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SubAbility$ DBDraw | SpellDescription$ Target player can't play land cards this turn.
 SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ Player.IsRemembered | Description$ Target player can't play land cards this turn.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turf_wound.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/177.jpg
 Oracle:Target player can't play land cards this turn.\nDraw a card.
-End

@@ -1,11 +1,9 @@
 Name:Search for Tomorrow
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 K:Suspend:2:G
 A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/search_for_tomorrow.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/216.jpg
 Oracle:Search your library for a basic land card and put it onto the battlefield. Then shuffle your library.\nSuspend 2-{G} (Rather than cast this card from your hand, you may pay {G} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
-End

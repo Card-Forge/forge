@@ -1,11 +1,9 @@
 Name:Wu Warship
 ManaCost:2 U
 Types:Creature Human Soldier
-Text:no text
 PT:3/3
 K:CARDNAME can't attack unless defending player controls an Island.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_warship.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/64.jpg
 Oracle:Wu Warship can't attack unless defending player controls an Island.
-End

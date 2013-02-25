@@ -1,7 +1,6 @@
 Name:Time Spiral
 ManaCost:4 U U
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 4 U U |  ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True  | SubAbility$ DBChangeAll | SpellDescription$ Each player shuffles his or her graveyard and hand into his or her library
 SVar:DBChangeAll:DB$ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 7 | Defined$ Each | SubAbility$ DBChange | SpellDescription$ , then draws seven cards.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_spiral.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/103.jpg
 Oracle:Exile Time Spiral. Each player shuffles his or her graveyard and hand into his or her library, then draws seven cards. You untap up to six lands.
-End

@@ -1,7 +1,6 @@
 Name:Dwarven Weaponsmith
 ManaCost:1 R
 Types:Creature Dwarf Artificer
-Text:no text
 PT:1/1
 A:AB$ PutCounter | Cost$ T Sac<1/Artifact> | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put a +1/+1 counter on target creature. Activate this ability only during your upkeep.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_weaponsm
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/144.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/90.jpg
 Oracle:{T}, Sacrifice an artifact: Put a +1/+1 counter on target creature. Activate this ability only during your upkeep.
-End

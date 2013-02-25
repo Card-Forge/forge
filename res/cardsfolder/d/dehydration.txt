@@ -1,7 +1,6 @@
 Name:Dehydration
 ManaCost:3 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
@@ -12,4 +11,3 @@ SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/73.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/73.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/78.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature doesn't untap during its controller's untap step.
-End

@@ -1,7 +1,6 @@
 Name:Possessed Portal
 ManaCost:8
 Types:Artifact
-Text:no text
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | Prevent$ True | Description$ If a player would draw a card, that player skips that draw instead.
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of each end step, each player sacrifices a permanent unless he or she discards a card.
 SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Permanent | Defined$ You | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | SubAbility$ OppSac
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_portal.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/144.jpg
 Oracle:If a player would draw a card, that player skips that draw instead.\nAt the beginning of each end step, each player sacrifices a permanent unless he or she discards a card.
-End

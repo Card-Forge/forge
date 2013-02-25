@@ -1,7 +1,6 @@
 Name:Soulquake
 ManaCost:3 U U B B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 3 U U B B | ChangeType$ Creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZoneAll | SpellDescription$ Return all creatures on the battlefield and all creature cards in graveyards to their owners' hands.
 SVar:DBChangeZoneAll:DB$ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard | Destination$ Hand
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulquake.jpg
 SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/30.jpg
 Oracle:Return all creatures on the battlefield and all creature cards in graveyards to their owners' hands.
-End

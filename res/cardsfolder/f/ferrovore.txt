@@ -1,11 +1,9 @@
 Name:Ferrovore
 ManaCost:2 R
 Types:Creature Beast
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ R Sac<1/Artifact> | NumAtt$ +3 | SpellDescription$ CARDNAME gets +3/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ferrovore.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/88.jpg
 Oracle:{R}, Sacrifice an artifact: Ferrovore gets +3/+0 until end of turn.
-End

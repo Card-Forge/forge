@@ -1,7 +1,6 @@
 Name:Aura Mutation
 ManaCost:G W
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ G W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ TrigToken | SpellDescription$ Destroy target enchantment. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that enchantment's converted mana cost.
 #X will be the Converted Mana Cost of the target of Mutation
 SVar:TrigToken:DB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | References$ X
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_mutation.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/232.jpg
 Oracle:Destroy target enchantment. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that enchantment's converted mana cost.
-End

@@ -1,7 +1,6 @@
 Name:Wild Nacatl
 ManaCost:G
 Types:Creature Cat Warrior
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Mountain.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Plains.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_nacatl.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/152.jpg
 Oracle:Wild Nacatl gets +1/+1 as long as you control a Mountain.\nWild Nacatl gets +1/+1 as long as you control a Plains.
-End

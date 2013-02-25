@@ -1,7 +1,6 @@
 Name:Wave Elemental
 ManaCost:2 U U
 Types:Creature Elemental
-Text:no text
 PT:2/3
 A:AB$ Tap | Cost$ U T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target creatures without flying | ValidTgts$ Creature.withoutFlying | SpellDescription$ Tap up to three target creatures without flying.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_elemental.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/102.jpg
 Oracle:{U}, {T}, Sacrifice Wave Elemental: Tap up to three target creatures without flying.
-End

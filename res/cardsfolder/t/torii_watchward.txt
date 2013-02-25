@@ -1,7 +1,6 @@
 Name:Torii Watchward
 ManaCost:4 W
 Types:Creature Spirit
-Text:no text
 PT:3/3
 K:Vigilance
 K:Soulshift 4
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87342.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/30.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nSoulshift 4 (When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)
-End

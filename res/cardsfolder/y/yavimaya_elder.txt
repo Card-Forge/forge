@@ -1,7 +1,6 @@
 Name:Yavimaya Elder
 ManaCost:1 G G
 Types:Creature Human Druid
-Text:no text
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFetch | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may search your library for up to two basic land cards, reveal them, and put them into your hand. If you do, shuffle your library.
 SVar:TrigFetch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_elder.j
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/124.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/179.jpg
 Oracle:When Yavimaya Elder dies, you may search your library for up to two basic land cards, reveal them, and put them into your hand. If you do, shuffle your library.\n{2}, Sacrifice Yavimaya Elder: Draw a card.
-End

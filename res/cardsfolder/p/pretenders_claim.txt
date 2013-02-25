@@ -1,7 +1,6 @@
 Name:Pretender's Claim
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ AttackerBlocked | ValidCard$ Card.AttachedBy | Execute$ TrigTapAll | TriggerDescription$ Whenever enchanted creature becomes blocked, tap all lands defending player controls.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pretenders_claim.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/151.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes blocked, tap all lands defending player controls.
-End

@@ -1,7 +1,6 @@
 Name:Genju of the Realm
 ManaCost:W U B R G
 Types:Legendary Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ W U B R G | ValidTgts$ Land | AILogic$ Pump
 A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 8 | Toughness$ 12 | Types$ Creature,Legendary,Spirit | Keywords$ Trample | SpellDescription$ Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genju_of_the_realm.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/151.jpg
 Oracle:Enchant land\n{2}: Enchanted land becomes a legendary 8/12 Spirit creature with trample until end of turn. It's still a land.\nWhen enchanted land is put into a graveyard, you may return Genju of the Realm from your graveyard to your hand.
-End

@@ -1,7 +1,6 @@
 Name:Sigil of Distinction
 ManaCost:X
 Types:Artifact Equipment
-Text:no text
 K:etbCounter:CHARGE:X
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddPower$ Y | AddToughness$ Y | Description$ Equipped creature gets +1/+1 for each charge counter on CARDNAME.
 K:Equip SubCounter<1/CHARGE>
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_distinction.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/219.jpg
 Oracle:Sigil of Distinction enters the battlefield with X charge counters on it.\nEquipped creature gets +1/+1 for each charge counter on Sigil of Distinction.\nEquip-Remove a charge counter from Sigil of Distinction.
-End

@@ -9,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card25956.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/83.jpg
 Oracle:When Penumbra Kavu dies, put a 3/3 black Kavu creature token onto the battlefield.
-End

@@ -1,7 +1,6 @@
 Name:Shell of the Last Kappa
 ManaCost:3
 Types:Legendary Artifact
-Text:no text
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Stack | Destination$ Exile | TargetValidTargeting$ You | TgtPrompt$ Choose target instant or sorcery spell that targets you | ValidTgts$ Card.Instant,Card.Sorcery | RememberChanged$ True | SpellDescription$ Exile target instant or sorcery spell that targets you. (The spell has no effect.)
 A:AB$ Play | Cost$ 3 T Sac<1/CARDNAME> | Valid$ Card.IsRemembered | ValidZone$ Exile | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | SubAbility$ DBCleanup | SpellDescription$ You may cast a card exiled with CARDNAME without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shell_of_the_last_kappa.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/269.jpg
 Oracle:{3}, {T}: Exile target instant or sorcery spell that targets you. (The spell has no effect.)\n{3}, {T}, Sacrifice Shell of the Last Kappa: You may cast a card exiled with Shell of the Last Kappa without paying its mana cost.
-End

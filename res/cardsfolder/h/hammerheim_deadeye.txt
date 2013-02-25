@@ -1,7 +1,6 @@
 Name:Hammerheim Deadeye
 ManaCost:3 R
 Types:Creature Giant Warrior
-Text:no text
 PT:3/3
 K:Echo:5 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature with flying.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammerheim_deadeye.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/101.jpg
 Oracle:Echo {5}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Hammerheim Deadeye enters the battlefield, destroy target creature with flying.
-End

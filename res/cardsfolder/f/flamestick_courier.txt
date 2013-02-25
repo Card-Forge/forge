@@ -1,7 +1,6 @@
 Name:Flamestick Courier
 ManaCost:2 R
 Types:Creature Goblin
-Text:no text
 PT:2/1
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ 2 R T | ValidTgts$ Creature.Goblin | TgtPrompt$ Select target Goblin creature | RememberTargets$ True |  SpellDescription$ Target Goblin creature gets +2/+2 and has haste for as long as CARDNAME remains tapped.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamestick_courier.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/203.jpg
 Oracle:You may choose not to untap Flamestick Courier during your untap step.\n{2}{R}, {T}: Target Goblin creature gets +2/+2 and has haste for as long as Flamestick Courier remains tapped.
-End

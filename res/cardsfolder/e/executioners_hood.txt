@@ -1,10 +1,8 @@
 Name:Executioner's Hood
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Intimidate | Description$ Equipped creature has intimidate.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/executioners_hood.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/148.jpg
 Oracle:Equipped creature has intimidate. (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
-End

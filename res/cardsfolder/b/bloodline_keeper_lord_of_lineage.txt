@@ -1,7 +1,6 @@
 Name:Bloodline Keeper
 ManaCost:2 B B
 Types:Creature Vampire
-Text:no text
 PT:3/3
 K:Flying
 A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Vampire | TokenColors$ Black | TokenImage$ B 2 2 Vampire | TokenTypes$ Creature,Vampire | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying | SpellDescription$ Put a 2/2 black Vampire creature token with flying onto the battlefield.
@@ -18,7 +17,6 @@ Name:Lord of Lineage
 ManaCost:no cost
 Colors:black
 Types:Creature Vampire
-Text:no text
 PT:5/5
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Vampire creatures you control get +2/+2.
@@ -27,4 +25,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_lineage.
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/90b.jpg
 Oracle:Other Vampire creatures you control get +2/+2.\n{T}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
 
-End

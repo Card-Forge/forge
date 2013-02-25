@@ -1,7 +1,6 @@
 Name:Rites of Spring
 ManaCost:1 G
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ 1 G | Defined$ You | AnyNumber$ True | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBChangeZone | SpellDescription$ Discard any number of cards. Search your library for that many basic land cards, reveal those cards, and put them into your hand. Then shuffle your library.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rites_of_spring.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/265.jpg
 Oracle:Discard any number of cards. Search your library for that many basic land cards, reveal those cards, and put them into your hand. Then shuffle your library.
-End

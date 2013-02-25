@@ -1,7 +1,6 @@
 Name:Lyzolda, the Blood Witch Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:-1/-1
 R:Event$ DamageDone | ValidSource$ Card.YouCtrl | ValidTarget$ Creature,Player | Hellbent$ True | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ Hellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
 R:Event$ DamageDone | ValidSource$ Card.YouCtrl | ValidTarget$ Creature,Player | Hellbent$ True | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ Hellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
@@ -14,4 +13,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/lyzolda_the_blood_witch_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/lyzolda-the-blood-witch.jpg
 Oracle:Hand -1, life -1\nHellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.\nHellbent - At the beginning of your end step, if you have no cards in hand, each of your opponents discards a card.
-End

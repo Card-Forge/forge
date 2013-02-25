@@ -1,11 +1,9 @@
 Name:Shifting Sliver
 ManaCost:3 U
 Types:Creature Sliver
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddHiddenKeyword$ CantBeBlockedBy Creature.nonSliver | Description$ Slivers can't be blocked except by Slivers.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_sliver.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/52.jpg
 Oracle:Slivers can't be blocked except by Slivers.
-End

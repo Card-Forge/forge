@@ -1,7 +1,6 @@
 Name:Contaminated Bond
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLifeAttack | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
@@ -14,4 +13,3 @@ SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/61.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/120.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/132.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nWhenever enchanted creature attacks or blocks, its controller loses 3 life.
-End

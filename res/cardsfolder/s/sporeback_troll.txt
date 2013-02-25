@@ -1,7 +1,6 @@
 Name:Sporeback Troll
 ManaCost:3 G
 Types:Creature Troll Mutant
-Text:no text
 PT:0/0
 K:Graft 2
 A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | SpellDescription$ Regenerate target creature with a +1/+1 counter on it.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sporeback_troll.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/94.jpg
 Oracle:Graft 2 (This creature enters the battlefield with two +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\n{1}{G}: Regenerate target creature with a +1/+1 counter on it.
-End

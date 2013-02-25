@@ -1,7 +1,6 @@
 Name:Wandering Mage
 ManaCost:W U B
 Types:Creature Human Cleric Wizard
-Text:no text
 PT:0/3
 A:AB$ PreventDamage | Cost$ W PayLife<1> | ValidTgts$ Creature | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to target creature this turn.
 A:AB$ PreventDamage | Cost$ U | ValidTgts$ Cleric,Wizard | TgtPrompt$ Select target Cleric or Wizard | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target Cleric or Wizard this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_mage.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/198.jpg
 Oracle:{W}, Pay 1 life: Prevent the next 2 damage that would be dealt to target creature this turn.\n{U}: Prevent the next 1 damage that would be dealt to target Cleric or Wizard creature this turn.\n{B}, Put a -1/-1 counter on a creature you control: Prevent the next 2 damage that would be dealt to target player this turn.
-End

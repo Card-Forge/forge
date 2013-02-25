@@ -1,7 +1,6 @@
 Name:Elvish Bard
 ManaCost:3 G G
 Types:Creature Elf Shaman
-Text:no text
 PT:2/4
 K:All creatures able to block CARDNAME do so.
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_bard.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/66.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/236.jpg
 Oracle:All creatures able to block Elvish Bard do so.
-End

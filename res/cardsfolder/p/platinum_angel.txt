@@ -1,7 +1,6 @@
 Name:Platinum Angel
 ManaCost:7
 Types:Artifact Creature Angel
-Text:no text
 PT:4/4
 K:Flying
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game.
@@ -13,4 +12,3 @@ SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/218.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/339.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/228.jpg
 Oracle:Flying\nYou can't lose the game and your opponents can't win the game.
-End

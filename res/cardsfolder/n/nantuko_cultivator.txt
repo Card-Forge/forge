@@ -1,7 +1,6 @@
 Name:Nantuko Cultivator
 ManaCost:3 G
 Types:Creature Insect Druid
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigNantukoDiscardLand | TriggerDescription$ When CARDNAME enters the battlefield, you may discard any number of land cards. Put that many +1/+1 counters on CARDNAME and draw that many cards.
 SVar:TrigNantukoDiscardLand:AB$ Discard | Cost$ 0 | DiscardValid$ Land | NumCards$ NantukoX | References$ NantukoX | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBNantukoPutCounter
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_cultivator.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/133.jpg
 Oracle:When Nantuko Cultivator enters the battlefield, you may discard any number of land cards. Put that many +1/+1 counters on Nantuko Cultivator and draw that many cards.
-End

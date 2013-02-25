@@ -1,7 +1,6 @@
 Name:Lightning Axe
 ManaCost:R
 Types:Instant
-Text:no text
 K:AlternateAdditionalCost:Discard<1/Card>:5
 A:SP$ DealDamage | Cost$ R | NumDmg$ 5 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals 5 damage to target creature.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_axe.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/168.jpg
 Oracle:As an additional cost to cast Lightning Axe, discard a card or pay {5}.\nLightning Axe deals 5 damage to target creature.
-End

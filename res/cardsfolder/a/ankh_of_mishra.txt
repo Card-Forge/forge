@@ -1,7 +1,6 @@
 Name:Ankh of Mishra
 ManaCost:2
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a land enters the battlefield, CARDNAME deals 2 damage to that land's controller.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 2
 SVar:RemRandomDeck:True
@@ -15,4 +14,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/273.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/233.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/231.jpg
 Oracle:Whenever a land enters the battlefield, Ankh of Mishra deals 2 damage to that land's controller.
-End

@@ -1,7 +1,6 @@
 Name:Forbidden Crypt
 ManaCost:3 B B
 Types:Enchantment
-Text:no text
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ CheckLoseCondition | Description$ If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game.
 SVar:CheckLoseCondition:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ CardsInGrave | ConditionSVarCompare$ EQ0 | SubAbility$ ForbiddenPractice
 SVar:ForbiddenPractice:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_crypt.
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/132.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/22.jpg
 Oracle:If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game.\nIf a card would be put into your graveyard from anywhere, exile that card instead.
-End

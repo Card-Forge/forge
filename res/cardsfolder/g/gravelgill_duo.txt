@@ -1,7 +1,6 @@
 Name:Gravelgill Duo
 ManaCost:2 UB
 Types:Creature Merfolk Rogue Warrior
-Text:no text
 PT:2/1
 T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump11 | TriggerDescription$ Whenever you cast a blue spell, CARDNAME gets +1/+1 until end of turn.
 T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpFear | TriggerDescription$ Whenever you cast a black spell, CARDNAME gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravelgill_duo.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/165.jpg
 Oracle:Whenever you cast a blue spell, Gravelgill Duo gets +1/+1 until end of turn.\nWhenever you cast a black spell, Gravelgill Duo gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
-End

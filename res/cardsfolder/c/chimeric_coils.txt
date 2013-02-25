@@ -1,7 +1,6 @@
 Name:Chimeric Coils
 ManaCost:1
 Types:Artifact
-Text:no text
 A:AB$ Animate | Cost$ X 1 | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Construct | Keywords$ At the beginning of the end step, sacrifice CARDNAME. | References$ X | SpellDescription$ CARDNAME becomes an X/X Construct artifact creature. Sacrifice it at the beginning of the next end step.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_coils.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/108.jpg
 Oracle:{X}{1}: Chimeric Coils becomes an X/X Construct artifact creature. Sacrifice it at the beginning of the next end step.
-End

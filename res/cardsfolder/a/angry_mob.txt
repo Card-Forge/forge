@@ -1,7 +1,6 @@
 Name:Angry Mob
 ManaCost:2 W W
 Types:Creature Human
-Text:no text
 PT:2+*/2+*
 K:Trample
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME's power and toughness are each equal to 2 plus the number of Swamps your opponents control. As long as it's not your turn, CARDNAME's power and toughness are each 2.
@@ -14,4 +13,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/280.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/74.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/253.jpg
 Oracle:Trample\nAs long as it's your turn, Angry Mob's power and toughness are each equal to 2 plus the number of Swamps your opponents control. As long as it's not your turn, Angry Mob's power and toughness are each 2.
-End

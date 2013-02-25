@@ -1,7 +1,6 @@
 Name:Burn Trail
 ManaCost:3 R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
 K:Conspire
 T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burn_trail.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/86.jpg
 Oracle:Burn Trail deals 3 damage to target creature or player.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)
-End

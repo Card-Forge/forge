@@ -1,7 +1,6 @@
 Name:Reign of Chaos
 ManaCost:2 R R
 Types:Sorcery
-Text:no text
 A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Plains | TgtPrompt$ Select target Plains | SubAbility$ DBDestroyWhite | SpellDescription$ Choose one - Destroy target Plains and target white creature;
 A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Island | TgtPrompt$ Select target Island | SubAbility$ DBDestroyBlue | SpellDescription$ or destroy target Island and target blue creature.
 SVar:DBDestroyWhite:DB$Destroy | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reign_of_chaos.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/190.jpg
 Oracle:Choose one - Destroy target Plains and target white creature; or destroy target Island and target blue creature.
-End

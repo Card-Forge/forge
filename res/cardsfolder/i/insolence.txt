@@ -1,7 +1,6 @@
 Name:Insolence
 ManaCost:2 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted creature becomes tapped, CARDNAME deals 2 damage to that creature's controller.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insolence.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/63.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, Insolence deals 2 damage to that creature's controller.
-End

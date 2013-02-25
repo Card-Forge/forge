@@ -1,7 +1,6 @@
 Name:Tribal Golem
 ManaCost:6
 Types:Artifact Creature Golem
-Text:no text
 PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | CheckSVar$ BEAST | SVarCompare$ GE1 | Description$ CARDNAME has trample as long as you control a Beast,
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ GOBLIN | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as you control a Goblin,
@@ -19,4 +18,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tribal_golem.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/311.jpg
 Oracle:Tribal Golem has trample as long as you control a Beast, haste as long as you control a Goblin, first strike as long as you control a Soldier, flying as long as you control a Wizard, and "{B}: Regenerate Tribal Golem" as long as you control a Zombie.
-End

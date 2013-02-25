@@ -1,11 +1,9 @@
 Name:Venser's Sliver
 ManaCost:5
 Types:Artifact Creature Sliver
-Text:no text
 PT:3/3
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card125866.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/267.jpg
 Oracle:
-End

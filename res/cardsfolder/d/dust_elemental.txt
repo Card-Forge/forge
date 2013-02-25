@@ -1,7 +1,6 @@
 Name:Dust Elemental
 ManaCost:2 W W
 Types:Creature Elemental
-Text:no text
 PT:6/6
 K:Flash
 K:Flying
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_elemental.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/5.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying; fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen Dust Elemental enters the battlefield, return three creatures you control to their owner's hand.
-End

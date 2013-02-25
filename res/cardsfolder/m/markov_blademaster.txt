@@ -9,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markov_blademaster.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/96.jpg
 Oracle:Double strike\nWhenever Markov Blademaster deals combat damage to a player, put a +1/+1 counter on it.
-End

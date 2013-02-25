@@ -1,7 +1,6 @@
 Name:Numai Outcast
 ManaCost:3 B
 Types:Creature Human Samurai
-Text:no text
 PT:1/1
 K:Bushido 2
 A:AB$ Regenerate | Cost$ B PayLife<5> | SpellDescription$ Regenerate CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/numai_outcast.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/134.jpg
 Oracle:Bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)\n{B}, Pay 5 life: Regenerate Numai Outcast.
-End

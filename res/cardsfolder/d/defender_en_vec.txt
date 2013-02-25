@@ -1,7 +1,6 @@
 Name:Defender en-Vec
 ManaCost:3 W
 Types:Creature Human Cleric
-Text:no text
 PT:2/4
 K:Fading:4
 A:AB$ PreventDamage | Cost$ SubCounter<1/FADE> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to target creature or player this turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defender_en_vec.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/5.jpg
 Oracle:Fading 4 (This creature enters the battlefield with four fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Defender en-Vec: Prevent the next 2 damage that would be dealt to target creature or player this turn.
-End

@@ -1,7 +1,6 @@
 Name:Knighthood
 ManaCost:2 W
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ First Strike | Description$ Creatures you control have first strike.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/knighthood.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/12.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/25.jpg
 Oracle:Creatures you control have first strike.
-End

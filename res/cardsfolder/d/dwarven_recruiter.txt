@@ -1,7 +1,6 @@
 Name:Dwarven Recruiter
 ManaCost:2 R
 Types:Creature Dwarf
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for any number of Dwarf cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ChangeNum$ X | ChangeType$ Dwarf | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | References$ X
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_recruiter.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/186.jpg
 Oracle:When Dwarven Recruiter enters the battlefield, search your library for any number of Dwarf cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
-End

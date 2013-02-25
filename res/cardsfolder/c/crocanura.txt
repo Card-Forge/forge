@@ -1,7 +1,6 @@
 Name:Crocanura
 ManaCost:2 G
 Types:Creature Crocodile Frog
-Text:no text
 PT:1/3
 K:Reach
 K:Evolve
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crocanura.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/116.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nEvolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
-End

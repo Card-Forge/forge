@@ -1,7 +1,6 @@
 Name:Imperial Seal
 ManaCost:B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ B | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SubAbility$ DBLoseLife | SpellDescription$ Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_seal.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/78.jpg
 Oracle:Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
-End

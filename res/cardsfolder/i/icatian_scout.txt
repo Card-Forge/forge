@@ -1,7 +1,6 @@
 Name:Icatian Scout
 ManaCost:W
 Types:Creature Human Soldier Scout
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_scout.jp
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/313.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/157.jpg|4
 Oracle:{1}, {T}: Target creature gains first strike until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Overwhelming Instinct
 ManaCost:2 G
 Types:Enchantment
-Text:no text
 T:Mode$ AttackersDeclared | Execute$ TrigDraw | CheckSVar$ OverwhelmInstinct | SVarCompare$ GE3 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with three or more creatures, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
 SVar:OverwhelmInstinct:Count$Valid Creature.attacking
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_instinct.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/276.jpg
 Oracle:Whenever you attack with three or more creatures, draw a card.
-End

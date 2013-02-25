@@ -1,10 +1,8 @@
 Name:Uphill Battle
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 S:Mode$ ETBTapped | ValidCard$ Creature.YouDontCtrl | Description$ Creatures played by your opponents enter the battlefield tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uphill_battle.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/222.jpg
 Oracle:Creatures played by your opponents enter the battlefield tapped.
-End

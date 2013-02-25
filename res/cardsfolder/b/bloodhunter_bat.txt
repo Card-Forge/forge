@@ -1,7 +1,6 @@
 Name:Bloodhunter Bat
 ManaCost:3 B
 Types:Creature Bat
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target player loses 2 life and you gain 2 life.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodhunter_bat.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/82.jpg
 Oracle:Flying\nWhen Bloodhunter Bat enters the battlefield, target player loses 2 life and you gain 2 life.
-End

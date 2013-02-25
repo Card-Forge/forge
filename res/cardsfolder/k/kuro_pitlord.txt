@@ -1,7 +1,6 @@
 Name:Kuro, Pitlord
 ManaCost:6 B B B
 Types:Legendary Creature Demon Spirit
-Text:no text
 PT:9/9
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B B B B
 A:AB$ Pump | Cost$ PayLife<1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuro_pitlord.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/123.jpg
 Oracle:At the beginning of your upkeep, sacrifice Kuro, Pitlord unless you pay {B}{B}{B}{B}.\nPay 1 life: Target creature gets -1/-1 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Vulshok Berserker
 ManaCost:3 R
 Types:Creature Human Berserker
-Text:no text
 PT:3/2
 K:Haste
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card5585.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/159.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/111.jpg
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)
-End

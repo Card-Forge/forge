@@ -1,11 +1,9 @@
 Name:Gavony Township
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ PutCounterAll | Cost$ 2 G W T | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gavony_township.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/239.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{2}{G}{W}, {T}: Put a +1/+1 counter on each creature you control.
-End

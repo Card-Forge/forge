@@ -1,7 +1,6 @@
 Name:Thada Adel, Acquisitor
 ManaCost:1 U U
 Types:Legendary Creature Merfolk Rogue
-Text:no text
 PT:2/2
 K:Islandwalk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles his or her library. Until end of turn, you may play that card.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thada_adel_acquisitor.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/40.jpg
 Oracle:Islandwalk\nWhenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles his or her library. Until end of turn, you may play that card.
-End

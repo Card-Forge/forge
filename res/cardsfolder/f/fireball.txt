@@ -1,7 +1,6 @@
 Name:Fireball
 ManaCost:X R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTargets | DivideEvenly$ RoundedDown | References$ X,MaxTargets,Maxplayer,Maxcreature | SpellDescription$ CARDNAME deals X damage divided evenly, rounded down, among any number of target creatures and/or players.
 S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | EffectZone$ All | Description$ CARDNAME costs 1 more to cast for each target beyond the first.
 SVar:X:Count$xPaid
@@ -22,4 +21,3 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/136.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/131.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/150.jpg
 Oracle:Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\nFireball costs {1} more to cast for each target beyond the first.
-End

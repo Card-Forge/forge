@@ -1,10 +1,8 @@
 Name:Forked Bolt
 ManaCost:R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two target creatures and/or players.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forked_bolt.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/146.jpg
 Oracle:Forked Bolt deals 2 damage divided as you choose among one or two target creatures and/or players.
-End

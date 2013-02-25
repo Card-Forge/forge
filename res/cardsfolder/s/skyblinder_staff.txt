@@ -1,7 +1,6 @@
 Name:Skyblinder Staff
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
 K:Equip 3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0 and can't be blocked by creatures with flying.
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ CantBeBlockedBy Creature.withFlying
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyblinder_staff.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/238.jpg
 Oracle:Equipped creature gets +1/+0 and can't be blocked by creatures with flying.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
-End

@@ -1,7 +1,6 @@
 Name:Liliana of the Veil
 ManaCost:1 B B
 Types:Planeswalker Liliana
-Text:no text
 Loyalty:3
 A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | NumCards$ 1 | Mode$ TgtChoose | Defined$ Each | Planeswalker$ True | SpellDescription$ Each player discards a card.
 A:AB$ Sacrifice | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | Planeswalker$ True | SpellDescription$ Target player sacrifices a creature.
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_of_the_veil.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/105.jpg
 Oracle:[+1] Each player discards a card.\n[-2] Target player sacrifices a creature.\n[-6] Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice.
-End

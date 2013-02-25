@@ -1,7 +1,6 @@
 Name:Felidar Sovereign
 ManaCost:4 W W
 Types:Creature Cat Beast
-Text:no text
 PT:4/6
 K:Vigilance
 K:Lifelink
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/felidar_sovereign.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/12.jpg
 Oracle:Vigilance, lifelink\nAt the beginning of your upkeep, if you have 40 or more life, you win the game.
-End

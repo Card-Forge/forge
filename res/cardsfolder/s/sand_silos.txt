@@ -1,7 +1,6 @@
 Name:Sand Silos
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 K:You may choose not to untap CARDNAME during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+tapped | Execute$ TrigStore | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is tapped, put a storage counter on it.
@@ -15,4 +14,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/sand_silos.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/439.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/186.jpg
 Oracle:Sand Silos enters the battlefield tapped.\nYou may choose not to untap Sand Silos during your untap step.\nAt the beginning of your upkeep, if Sand Silos is tapped, put a storage counter on it.\n{T}, Remove any number of storage counters from Sand Silos: Add {U} to your mana pool for each storage counter removed this way.
-End

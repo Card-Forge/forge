@@ -1,7 +1,6 @@
 Name:Acidic Dagger
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ Effect | Cost$ 4 T | Name$ Acidic Dagger Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigDam,TrigLeave | SVars$ TrigDestroy,TrigSac,ExileEffect | RememberObjects$ Targeted | ImprintCards$ Self | ActivationPhases$ Upkeep->Declare Attackers - Play Instants and Abilities | SpellDescription$ Whenever target creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature. When the targeted creature leaves the battlefield this turn, sacrifice CARDNAME. Activate this ability only before blockers are declared.
 SVar:TrigDam:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTarget$ Creature.nonWall | CombatDamage$ True | TriggerZones$ Command | Execute$ TrigDestroy | TriggerDescription$ Whenever targeted creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature.
 SVar:TrigLeave:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ TrigSac | TriggerZones$ Command | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice Acidic Dagger.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_dagger.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/256.jpg
 Oracle:{4}, {T}: Whenever target creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature. When the targeted creature leaves the battlefield this turn, sacrifice Acidic Dagger. Activate this ability only before blockers are declared.
-End

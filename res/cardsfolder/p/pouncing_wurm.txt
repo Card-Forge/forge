@@ -1,7 +1,6 @@
 Name:Pouncing Wurm
 ManaCost:3 G
 Types:Creature Wurm
-Text:no text
 PT:3/3
 K:Kicker 2 G
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigPut | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with three +1/+1 counters on it and with haste.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pouncing_wurm.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/136.jpg
 Oracle:Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)\nIf Pouncing Wurm was kicked, it enters the battlefield with three +1/+1 counters on it and with haste.
-End

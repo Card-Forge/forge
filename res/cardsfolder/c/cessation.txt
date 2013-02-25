@@ -1,7 +1,6 @@
 Name:Cessation
 ManaCost:2 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cessation.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/4.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack.\nWhen Cessation is put into a graveyard from the battlefield, return Cessation to its owner's hand.
-End

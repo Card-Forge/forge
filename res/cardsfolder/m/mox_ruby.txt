@@ -1,7 +1,6 @@
 Name:Mox Ruby
 ManaCost:0
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/264.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/266.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/265.jpg
 Oracle:{T}: Add {R} to your mana pool.
-End

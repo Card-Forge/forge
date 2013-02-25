@@ -1,7 +1,6 @@
 Name:Twiddle
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ TapOrUntap | Cost$ U | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ You may tap or untap target artifact, creature, or land.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
@@ -14,4 +13,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/130.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/109.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/86.jpg
 Oracle:You may tap or untap target artifact, creature, or land.
-End

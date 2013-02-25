@@ -1,7 +1,6 @@
 Name:Shivan Wumpus
 ManaCost:3 R
 Types:Creature Beast
-Text:no text
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, any player may sacrifice a land. If a player does, put CARDNAME on top of its owner's library.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_wumpus.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/121.jpg
 Oracle:Trample\nWhen Shivan Wumpus enters the battlefield, any player may sacrifice a land. If a player does, put Shivan Wumpus on top of its owner's library.
-End

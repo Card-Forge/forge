@@ -1,11 +1,9 @@
 Name:Trailblazer's Boots
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Nonbasic landwalk | Description$ Equipped creature has nonbasic landwalk.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trailblazers_boots.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/208.jpg
 Oracle:Equipped creature has nonbasic landwalk. (It's unblockable as long as defending player controls a nonbasic land.)\nEquip {2}
-End

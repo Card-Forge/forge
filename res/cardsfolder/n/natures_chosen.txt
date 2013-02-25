@@ -1,7 +1,6 @@
 Name:Nature's Chosen
 ManaCost:G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Untap | Cost$ 0 | Defined$ Enchanted | ActivationLimit$ 1 | PlayerTurn$ True | SpellDescription$ Untap enchanted creature. Activate this ability only during your turn and only once each turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_chosen.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/81.jpg
 Oracle:Enchant creature you control\n{0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.\nTap enchanted creature: Untap target artifact, creature, or land. Activate this ability only if enchanted creature is white and is untapped and only once each turn.
-End

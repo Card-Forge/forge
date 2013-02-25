@@ -1,11 +1,9 @@
 Name:Nakaya Shade
 ManaCost:1 B
 Types:Creature Shade
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ B | NumAtt$ 1 | NumDef$ 1 | UnlessCost$ 2 | UnlessPayer$ Player | SpellDescription$ CARDNAME gets +1/+1 until end of turn unless any player pays 2.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nakaya_shade.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/69.jpg
 Oracle:{B}: Nakaya Shade gets +1/+1 until end of turn unless any player pays {2}.
-End

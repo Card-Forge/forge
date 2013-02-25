@@ -1,7 +1,6 @@
 Name:Pardic Dragon
 ManaCost:4 R R
 Types:Creature Dragon
-Text:no text
 PT:4/4
 K:Flying
 K:Suspend:2:R R
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_dragon.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/173.jpg
 Oracle:Flying\n{R}: Pardic Dragon gets +1/+0 until end of turn.\nSuspend 2-{R}{R} (Rather than cast this card from your hand, you may pay {R}{R} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhenever an opponent casts a spell, if Pardic Dragon is suspended, that player may put a time counter on Pardic Dragon.
-End

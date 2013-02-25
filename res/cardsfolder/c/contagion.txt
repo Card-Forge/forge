@@ -1,7 +1,6 @@
 Name:Contagion
 ManaCost:3 B B
 Types:Instant
-Text:no text
 A:SP$ PutCounter | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ M2M1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | IsCurse$ True | SpellDescription$ Distribute two -2/-1 counters among one or two target creatures.
 SVar:AltCost:Cost$ PayLife<1> ExileFromHand<1/Card.Black> | Description$ You may pay 1 life and exile a black card from your hand rather than pay Contagion's mana cost.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/contagion.jpg
 SVar:Rarity:Uncommon
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/4.jpg
 Oracle:You may pay 1 life and exile a black card from your hand rather than pay Contagion's mana cost.\nDistribute two -2/-1 counters among one or two target creatures.
-End

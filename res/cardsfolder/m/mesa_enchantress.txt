@@ -1,7 +1,6 @@
 Name:Mesa Enchantress
 ManaCost:1 W W
 Types:Creature Human Druid
-Text:no text
 PT:0/2
 T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast an enchantment spell, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
@@ -13,4 +12,3 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/20.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/25.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/26.jpg
 Oracle:Whenever you cast an enchantment spell, you may draw a card.
-End

@@ -1,7 +1,6 @@
 Name:Living Artifact
 ManaCost:G
 Types:Enchantment Aura
-Text:no text
 K:Enchant artifact
 A:SP$ Attach | Cost$ G | ValidTgts$ Artifact | AILogic$ Pump
 T:Mode$ DamageDone | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you're dealt damage, put that many vitality counters on CARDNAME.
@@ -18,4 +17,3 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/143.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/116.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/117.jpg
 Oracle:Enchant artifact\nWhenever you're dealt damage, put that many vitality counters on Living Artifact.\nAt the beginning of your upkeep, you may remove a vitality counter from Living Artifact. If you do, you gain 1 life.
-End

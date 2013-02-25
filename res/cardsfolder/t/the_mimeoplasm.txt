@@ -1,7 +1,6 @@
 Name:The Mimeoplasm
 ManaCost:2 G U B
 Types:Legendary Creature Ooze
-Text:no text
 PT:0/0
 K:ETBReplacement:Copy:MimeoChooseTwo:Optional
 # Make SVars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
@@ -18,4 +17,3 @@ SVar:NeedsToPlayVar:MimeoInYard GE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_mimeoplasm.jpg
 SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/210.jpg
 Oracle:As The Mimeoplasm enters the battlefield, you may exile two creature cards from graveyards. If you do, it enters the battlefield as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card.
-End

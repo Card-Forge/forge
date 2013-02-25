@@ -1,7 +1,6 @@
 Name:Furystoke Giant
 ManaCost:3 R R
 Types:Creature Giant Warrior
-Text:no text
 PT:3/3
 K:Persist
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, other creatures you control gain "T: This creature deals 2 damage to target creature or player" until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furystoke_giant.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/93.jpg
 Oracle:When Furystoke Giant enters the battlefield, other creatures you control gain "{T}: This creature deals 2 damage to target creature or player" until end of turn.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
-End

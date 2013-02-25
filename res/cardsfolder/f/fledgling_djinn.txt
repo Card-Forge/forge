@@ -1,7 +1,6 @@
 Name:Fledgling Djinn
 ManaCost:1 B
 Types:Creature Djinn
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/wl/en-us/card4457.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/11.jpg
 Oracle:Flying\nAt the beginning of your upkeep, Fledgling Djinn deals 1 damage to you.
-End

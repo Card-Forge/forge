@@ -1,7 +1,6 @@
 Name:Dangerous Wager
 ManaCost:1 R
 Types:Instant
-Text:no text
 A:SP$ Discard | Cost$ 1 R | Mode$ Hand | Defined$ You | SubAbility$ BetThat | SpellDescription$ Discard your hand, then draw two cards.
 SVar:BetThat:DB$ Draw | Defined$ You | NumCards$ 2
 SVar:RemRandomDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dangerous_wager.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/131.jpg
 Oracle:Discard your hand, then draw two cards.
-End

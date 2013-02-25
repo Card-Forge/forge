@@ -1,7 +1,6 @@
 Name:Mikaeus, the Lunarch
 ManaCost:X W
 Types:Legendary Creature Human Cleric
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mikaeus_the_lunarch.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/23.jpg
 Oracle:Mikaeus, the Lunarch enters the battlefield with X +1/+1 counters on it.\n{T}: Put a +1/+1 counter on Mikaeus.\n{T}, Remove a +1/+1 counter from Mikaeus: Put a +1/+1 counter on each other creature you control.
-End

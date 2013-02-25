@@ -12,4 +12,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/216.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/293.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/217.jpg
 Oracle:Target spell or permanent becomes white. (Mana symbols on that permanent remain unchanged.)
-End

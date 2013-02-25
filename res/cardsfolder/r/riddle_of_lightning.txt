@@ -1,7 +1,6 @@
 Name:Riddle of Lightning
 ManaCost:3 R R
 Types:Instant
-Text:no text
 A:SP$Scry | Cost$ 3 R R | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Choose target creature or player. Scry 3, then reveal the top card of your library. CARDNAME deals damage equal to that card's converted mana cost to that creature or player. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:DBReveal:DB$ Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riddle_of_lightning.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/105.jpg
 Oracle:Choose target creature or player. Scry 3, then reveal the top card of your library. Riddle of Lightning deals damage equal to that card's converted mana cost to that creature or player. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-End

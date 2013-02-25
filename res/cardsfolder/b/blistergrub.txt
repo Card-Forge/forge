@@ -1,7 +1,6 @@
 Name:Blistergrub
 ManaCost:2 B
 Types:Creature Horror
-Text:no text
 PT:2/2
 K:Swampwalk
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each opponent loses 2 life.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blistergrub.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/56.jpg
 Oracle:Swampwalk\nWhen Blistergrub dies, each opponent loses 2 life.
-End

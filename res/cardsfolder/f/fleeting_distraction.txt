@@ -1,7 +1,6 @@
 Name:Fleeting Distraction
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-0 until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_distrac
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/67.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/53.jpg
 Oracle:Target creature gets -1/-0 until end of turn.\nDraw a card.
-End

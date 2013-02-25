@@ -2,10 +2,8 @@ Name:Mundungu
 ManaCost:1 U B
 Types:Creature Human Wizard
 PT:1/1
-Text:no text
 A:AB$ Counter | Cost$ T | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 PayLife<1> | SpellDescription$ Counter target spell unless its controller pays 1 and 1 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mundungu.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/132.jpg
 Oracle:{T}: Counter target spell unless its controller pays {1} and 1 life.
-End

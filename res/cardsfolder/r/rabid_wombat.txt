@@ -1,7 +1,6 @@
 Name:Rabid Wombat
 ManaCost:2 G G
 Types:Creature Wombat
-Text:no text
 PT:0/1
 K:Vigilance
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
@@ -13,4 +12,3 @@ Oracle:Vigilance\nRabid Wombat gets +2/+2 for each Aura attached to it.
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/181.jpg
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/39.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/112.jpg
-End

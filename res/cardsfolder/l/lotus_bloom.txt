@@ -1,7 +1,6 @@
 Name:Lotus Bloom
 ManaCost:no cost
 Types:Artifact
-Text:no text
 K:Suspend:3:0
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | SpellDescription$ Add three mana of any one color to your mana pool.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_bloom.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/259.jpg
 Oracle:Suspend 3-{0} (Rather than cast this card from your hand, pay {0} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\n{T}, Sacrifice Lotus Bloom: Add three mana of any one color to your mana pool.
-End

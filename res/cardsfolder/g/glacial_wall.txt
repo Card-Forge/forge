@@ -1,7 +1,6 @@
 Name:Glacial Wall
 ManaCost:2 U
 Types:Creature Wall
-Text:no text
 PT:0/7
 K:Defender
 SVar:Rarity:Uncommon
@@ -11,4 +10,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/72.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/71.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/78.jpg
 Oracle:Defender (This creature can't attack.)
-End

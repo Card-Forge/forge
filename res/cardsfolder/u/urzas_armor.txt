@@ -1,11 +1,9 @@
 Name:Urza's Armor
 ManaCost:6
 Types:Artifact
-Text:no text
 S:Mode$ PreventDamage | Target$ You | Source$ Card | Amount$ 1 | Description$ If a source would deal damage to you, prevent 1 of that damage.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_armor.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/318.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/313.jpg
 Oracle:If a source would deal damage to you, prevent 1 of that damage.
-End

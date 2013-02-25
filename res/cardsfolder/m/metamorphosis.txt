@@ -1,7 +1,6 @@
 Name:Metamorphosis
 ManaCost:G
 Types:Sorcery
-Text:no text
 A:SP$ Mana | Cost$ G Sac<1/Creature> | Produced$ Any | Amount$ X | References$ X | RestrictValid$ Card.Creature | SpellDescription$ Add X mana of any one color to your mana pool, where X is one plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.
 SVar:X:Sacrificed$CardManaCost/Plus.1
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/metamorphosis.jp
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/38.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/35.jpg
 Oracle:As an additional cost to cast Metamorphosis, sacrifice a creature.\nAdd X mana of any one color to your mana pool, where X is one plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.
-End

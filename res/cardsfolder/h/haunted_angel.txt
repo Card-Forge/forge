@@ -1,7 +1,6 @@
 Name:Haunted Angel
 ManaCost:2 W
 Types:Creature Angel
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, exile CARDNAME and each other player puts a 3/3 black Angel creature token with flying onto the battlefield.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card25910.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/12.jpg
 Oracle:Flying\nWhen Haunted Angel dies, exile Haunted Angel and each other player puts a 3/3 black Angel creature token with flying onto the battlefield.
-End

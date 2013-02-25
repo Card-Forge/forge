@@ -1,11 +1,9 @@
 Name:Grim Affliction
 ManaCost:2 B
 Types:Instant
-Text:no text
 A:SP$ PutCounter | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBProliferate | SpellDescription$ Put a -1/-1 counter on target creature, then proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
 SVar:DBProliferate:DB$Proliferate
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_affliction.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/63.jpg
 Oracle:Put a -1/-1 counter on target creature, then proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
-End

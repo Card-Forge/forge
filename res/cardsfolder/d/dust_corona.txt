@@ -1,7 +1,6 @@
 Name:Dust Corona
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddHiddenKeyword$ CantBeBlockedBy Creature.withFlying | Description$ Enchanted creature gets +2/+0 and can't be blocked by creatures with flying.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_corona.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/97.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0 and can't be blocked by creatures with flying.
-End

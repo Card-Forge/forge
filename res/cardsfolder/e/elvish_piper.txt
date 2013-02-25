@@ -1,7 +1,6 @@
 Name:Elvish Piper
 ManaCost:3 G
 Types:Creature Elf Shaman
-Text:no text
 A:AB$ ChangeZone | Cost$ G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
 PT:1/1
 SVar:Rarity:Rare
@@ -13,4 +12,3 @@ SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/239.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/262.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/177.jpg
 Oracle:{G}, {T}: You may put a creature card from your hand onto the battlefield.
-End

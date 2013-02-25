@@ -1,7 +1,6 @@
 Name:Niveous Wisps
 ManaCost:W
 Types:Instant
-Text:no text
 A:SP$ Animate | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ White | OverwriteColors$ True | SubAbility$ DBDraw | SpellDescription$ Target creature becomes white until end of turn. Tap that creature. Draw a card.
 SVar:DBDraw:DB$Draw | SubAbility$ DBTap | NumCards$ 1
 SVar:DBTap:DB$Tap | Defined$ Targeted
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niveous_wisps.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/15.jpg
 Oracle:Target creature becomes white until end of turn. Tap that creature.\nDraw a card.
-End

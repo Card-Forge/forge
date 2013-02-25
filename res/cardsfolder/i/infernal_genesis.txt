@@ -1,7 +1,6 @@
 Name:Infernal Genesis
 ManaCost:4 B B
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she puts X 1/1 black Minion creature tokens onto the battlefield, where X is that card's converted mana cost.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 1 | RememberMilled$ True | SubAbility$ TrigToken
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenName$ Minion | TokenTypes$ Creature,Minion | TokenOwner$ TriggeredPlayer | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ DBCleanup | References$ X
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_genesis.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/68.jpg
 Oracle:At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she puts X 1/1 black Minion creature tokens onto the battlefield, where X is that card's converted mana cost.
-End

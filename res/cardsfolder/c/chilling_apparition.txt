@@ -1,7 +1,6 @@
 Name:Chilling Apparition
 ManaCost:2 B
 Types:Creature Spirit
-Text:no text
 PT:1/1
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chilling_apparition.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/59.jpg
 Oracle:{B}: Regenerate Chilling Apparition.\nWhenever Chilling Apparition deals combat damage to a player, that player discards a card.
-End

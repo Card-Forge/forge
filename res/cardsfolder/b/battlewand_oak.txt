@@ -1,7 +1,6 @@
 Name:Battlewand Oak
 ManaCost:2 G
 Types:Creature Treefolk Warrior
-Text:no text
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Forest.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Forest enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
 T:Mode$ SpellCast | ValidCard$ Treefolk | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Treefolk spell, CARDNAME gets +2/+2 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlewand_oak.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/197.jpg
 Oracle:Whenever a Forest enters the battlefield under your control, Battlewand Oak gets +2/+2 until end of turn.\nWhenever you cast a Treefolk spell, Battlewand Oak gets +2/+2 until end of turn.
-End

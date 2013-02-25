@@ -1,7 +1,6 @@
 Name:Mahamoti Djinn
 ManaCost:4 U U
 Types:Creature Djinn
-Text:no text
 PT:5/6
 K:Flying
 SVar:Rarity:Rare
@@ -16,4 +15,3 @@ SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/90.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/66.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/65.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)
-End

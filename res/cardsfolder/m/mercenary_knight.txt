@@ -1,7 +1,6 @@
 Name:Mercenary Knight
 ManaCost:2 B
 Types:Creature Human Mercenary Knight
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a creature card.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | DiscardValid$ Creature | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacSelf
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4228&type=card
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/22.jpg
 Oracle:When Mercenary Knight enters the battlefield, sacrifice it unless you discard a creature card.
-End

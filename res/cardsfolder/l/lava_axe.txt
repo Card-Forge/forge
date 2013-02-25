@@ -1,7 +1,6 @@
 Name:Lava Axe
 ManaCost:4 R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_axe.jpg
@@ -17,4 +16,3 @@ SetInfo:M12|Common|http://magiccards.info/scans/en/m12/148.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/111.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/84.jpg
 Oracle:Lava Axe deals 5 damage to target player.
-End

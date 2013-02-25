@@ -1,7 +1,6 @@
 Name:Volcanic Strength
 ManaCost:1 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Mountainwalk | Description$ Enchanted creature gets +2/+2 and has mountainwalk. (It's unblockable as long as defending player controls a Mountain.)
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_strengt
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/158.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/155.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has mountainwalk. (It's unblockable as long as defending player controls a Mountain.)
-End

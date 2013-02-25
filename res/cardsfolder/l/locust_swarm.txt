@@ -1,7 +1,6 @@
 Name:Locust Swarm
 ManaCost:3 G
 Types:Creature Insect
-Text:no text
 PT:1/1
 K:Flying
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/locust_swarm.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/124.jpg
 Oracle:Flying\n{G}: Regenerate Locust Swarm.\n{G}: Untap Locust Swarm. Activate this ability only once each turn.
-End

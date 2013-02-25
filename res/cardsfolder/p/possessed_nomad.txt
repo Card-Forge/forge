@@ -1,7 +1,6 @@
 Name:Possessed Nomad
 ManaCost:2 W W
 Types:Creature Human Nomad Horror
-Text:no text
 PT:3/3
 K:Vigilance
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ CARDNAME is black. | AddAbility$ Destroy | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1, is black, and has "2 B, tap: Destroy target white creature."
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_nomad.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/13.jpg
 Oracle:Vigilance\nThreshold - As long as seven or more cards are in your graveyard, Possessed Nomad gets +1/+1, is black, and has "{2}{B}, {T}: Destroy target white creature."
-End

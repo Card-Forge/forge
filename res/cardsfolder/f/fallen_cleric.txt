@@ -1,7 +1,6 @@
 Name:Fallen Cleric
 ManaCost:4 B
 Types:Creature Zombie Cleric
-Text:no text
 PT:4/2
 K:Protection from Clerics
 K:Morph:4 B
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_cleric.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/145.jpg
 Oracle:Protection from Clerics\nMorph {4}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

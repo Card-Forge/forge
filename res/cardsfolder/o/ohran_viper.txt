@@ -1,7 +1,6 @@
 Name:Ohran Viper
 ManaCost:1 G G
 Types:Snow Creature Snake
-Text:no text
 PT:1/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy damaged creature at end of combat.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ohran_viper.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/115.jpg
 Oracle:Whenever Ohran Viper deals combat damage to a creature, destroy that creature at end of combat.\nWhenever Ohran Viper deals combat damage to a player, you may draw a card.
-End

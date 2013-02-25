@@ -8,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/fleet_footed_monk.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/177.jpg
 Oracle:Fleet-Footed Monk can't be blocked by creatures with power 2 or greater.
-End

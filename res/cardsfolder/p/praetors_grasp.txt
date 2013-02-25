@@ -1,7 +1,6 @@
 Name:Praetor's Grasp
 ManaCost:1 B B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 B B | Origin$ Library | Destination$ Exile | ValidTgts$ Opponent | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Search target opponent's library for a card and exile it face down. Then that player shuffles his or her library. You may look at and play that card for as long as it remains exiled.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Your opponent may look at this card. & May be played by your opponent | PumpZone$ Exile | Permanent$ True
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/praetors_grasp.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/71.jpg
 Oracle:Search target opponent's library for a card and exile it face down. Then that player shuffles his or her library. You may look at and play that card for as long as it remains exiled.
-End

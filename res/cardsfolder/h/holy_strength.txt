@@ -1,7 +1,6 @@
 Name:Holy Strength
 ManaCost:W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Enchanted creature gets +1/+2.
@@ -20,4 +19,3 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/15.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/208.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/209.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+2.
-End

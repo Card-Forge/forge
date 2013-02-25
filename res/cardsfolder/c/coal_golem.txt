@@ -1,7 +1,6 @@
 Name:Coal Golem
 ManaCost:5
 Types:Artifact Creature Golem
-Text:no text
 PT:3/3
 A:AB$ Mana | Cost$ 3 Sac<1/CARDNAME> | Produced$ R | Amount$ 3 | SpellDescription$ Add R R R to your mana pool.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coal_golem.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/96.jpg
 Oracle:{3}, Sacrifice Coal Golem: Add {R}{R}{R} to your mana pool.
-End

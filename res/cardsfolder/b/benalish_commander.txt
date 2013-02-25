@@ -14,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_commander.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/2.jpg
 Oracle:Benalish Commander's power and toughness are each equal to the number of Soldiers you control.\nSuspend X-{X}{W}{W}. X can't be 0. (Rather than cast this card from your hand, you may pay {X}{W}{W} and exile it with X time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhenever a time counter is removed from Benalish Commander while it's exiled, put a 1/1 white Soldier creature token onto the battlefield.
-End

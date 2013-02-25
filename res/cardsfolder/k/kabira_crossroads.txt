@@ -1,7 +1,6 @@
 Name:Kabira Crossroads
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_crossroads.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/216.jpg
 Oracle:Kabira Crossroads enters the battlefield tapped.\nWhen Kabira Crossroads enters the battlefield, you gain 2 life.\n{T}: Add {W} to your mana pool.
-End

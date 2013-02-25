@@ -1,7 +1,6 @@
 Name:Whipcorder
 ManaCost:W W
 Types:Creature Human Soldier Rebel
-Text:no text
 PT:2/2
 K:Morph:W
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whipcorder.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/60.jpg
 Oracle:{W}, {T}: Tap target creature.\nMorph {W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

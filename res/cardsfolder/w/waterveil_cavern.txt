@@ -1,7 +1,6 @@
 Name:Waterveil Cavern
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBStayTapped | SpellDescription$ Add U to your mana pool. CARDNAME doesn't untap during your next untap step.
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBStayTapped | SpellDescription$ Add B to your mana pool. CARDNAME doesn't untap during your next untap step.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waterveil_cavern.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/286.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {U} or {B} to your mana pool. Waterveil Cavern doesn't untap during your next untap step.
-End

@@ -1,7 +1,6 @@
 Name:Thopter Assembly
 ManaCost:6
 Types:Artifact Creature Thopter
-Text:no text
 PT:5/5
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Thopter.Other+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, if you control no Thopters other than CARDNAME, return CARDNAME to its owner's hand and put five 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thopter_assembly.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/140.jpg
 Oracle:Flying\nAt the beginning of your upkeep, if you control no Thopters other than Thopter Assembly, return Thopter Assembly to its owner's hand and put five 1/1 colorless Thopter artifact creature tokens with flying onto the battlefield.
-End

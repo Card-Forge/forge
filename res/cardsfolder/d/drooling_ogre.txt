@@ -1,7 +1,6 @@
 Name:Drooling Ogre
 ManaCost:1 R
 Types:Creature Ogre
-Text:no text
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Artifact | Execute$ TrigControl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an artifact spell, that player gains control of CARDNAME. (This effect lasts indefinitely.)
 SVar:TrigControl:AB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ TriggeredPlayer
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drooling_ogre.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/58.jpg
 Oracle:Whenever a player casts an artifact spell, that player gains control of Drooling Ogre. (This effect lasts indefinitely.)
-End

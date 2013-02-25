@@ -1,11 +1,9 @@
 Name:Devout Chaplain
 ManaCost:2 W
 Types:Creature Human Cleric
-Text:no text
 PT:2/2
 A:AB$ ChangeZone | Cost$ T tapXType<2/Human> | IsCurse$ True | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devout_chaplain.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/17.jpg
 Oracle:{T}, Tap two untapped Humans you control: Exile target artifact or enchantment.
-End

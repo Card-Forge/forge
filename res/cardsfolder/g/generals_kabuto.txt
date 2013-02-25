@@ -1,11 +1,9 @@
 Name:General's Kabuto
 ManaCost:4
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Shroud | AddHiddenKeyword$ Prevent all combat damage that would be dealt to CARDNAME. | Description$ Equipped creature has shroud. (It can't be the target of spells or abilities.) Prevent all combat damage that would be dealt to equipped creature. 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/generals_kabuto.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/251.jpg
 Oracle:Equipped creature has shroud. (It can't be the target of spells or abilities.)\nPrevent all combat damage that would be dealt to equipped creature.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
-End

@@ -1,7 +1,6 @@
 Name:Thrun, the Last Troll
 ManaCost:2 G G
 Types:Legendary Creature Troll Shaman
-Text:no text
 PT:4/4
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 K:CARDNAME can't be countered.
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrun_the_last_troll.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/92.jpg
 Oracle:Thrun, the Last Troll can't be countered.\nHexproof (This creature can't be the target of spells or abilities your opponents control.)\n{1}{G}: Regenerate Thrun.
-End

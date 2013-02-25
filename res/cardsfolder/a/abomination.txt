@@ -1,7 +1,6 @@
 Name:Abomination
 ManaCost:3 B B
 Types:Creature Horror
-Text:no text
 PT:2/6
 T:Mode$ AttackerBlocked | ValidCard$ Creature.Green,Creature.White | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.
 T:Mode$ Blocks | ValidCard$ Creature.Green,Creature.White | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/abomination.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/1.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/1.jpg
 Oracle:Whenever Abomination blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.
-End

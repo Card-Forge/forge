@@ -1,7 +1,6 @@
 Name:Animate Artifact
 ManaCost:3 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant artifact
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Artifact | AITgts$ Card.nonCreature | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Card.AttachedBy+nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
@@ -14,4 +13,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/48.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/60.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/49.jpg
 Oracle:Enchant artifact\nAs long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
-End

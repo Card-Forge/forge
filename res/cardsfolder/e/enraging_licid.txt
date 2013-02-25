@@ -1,7 +1,6 @@
 Name:Enraging Licid
 ManaCost:1 R
 Types:Creature Licid
-Text:no text
 PT:1/1
 A:AB$ SetState | Cost$ R T | Defined$ Self | NewState$ Licid | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay R to end this effect.
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
@@ -29,4 +28,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enraging_licid.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/171.jpg
 Oracle:{R}, {T}: Enraging Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {R} to end this effect.\nEnchanted creature has haste.
-End

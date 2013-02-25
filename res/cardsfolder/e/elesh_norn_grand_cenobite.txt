@@ -1,7 +1,6 @@
 Name:Elesh Norn, Grand Cenobite
 ManaCost:5 W W
 Types:Legendary Creature Praetor
-Text:no text
 PT:4/7
 K:Vigilance
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 2 | AddToughness$ 2 | Description$ Other creatures you control get +2/+2.
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elesh_norn_grand_cenobite.jpg
 SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/9.jpg
 Oracle:Vigilance\nOther creatures you control get +2/+2.\nCreatures your opponents control get -2/-2.
-End

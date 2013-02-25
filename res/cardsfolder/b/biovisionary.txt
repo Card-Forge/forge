@@ -1,11 +1,9 @@
 Name:Biovisionary
 ManaCost:1 G U
 Types:Creature Human Wizard
-Text:no text
 PT:2/3
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature.YouCtrl+namedBiovisionary | PresentCompare$ GE4 | Execute$ TrigWinGame | TriggerDescription$ At the beginning of the end step, if you control four or more creatures named CARDNAME, you win the game.
 SVar:TrigWinGame:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biovisionary.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/146.jpg
 Oracle:At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
-End

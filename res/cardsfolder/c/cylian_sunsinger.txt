@@ -1,11 +1,9 @@
 Name:Cylian Sunsinger
 ManaCost:1 G
 Types:Creature Elf Shaman
-Text:no text
 PT:2/2
 A:AB$ PumpAll | Cost$ R G W | NumAtt$ +3 | NumDef$ +3 | ValidCards$ Creature.sameName | SpellDescription$ CARDNAME and each other creature with the same name as it get +3/+3 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cylian_sunsinger.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/80.jpg
 Oracle:{R}{G}{W}: Cylian Sunsinger and each other creature with the same name as it get +3/+3 until end of turn.
-End

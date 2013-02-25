@@ -1,7 +1,6 @@
 Name:Detainment Spell
 ManaCost:W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature's activated abilities can't be activated.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/detainment_spell.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/12.jpg
 Oracle:Enchant creature\nEnchanted creature's activated abilities can't be activated.\n{1}{W}: Attach Detainment Spell to target creature.
-End

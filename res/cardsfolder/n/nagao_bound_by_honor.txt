@@ -1,7 +1,6 @@
 Name:Nagao, Bound by Honor
 ManaCost:3 W
 Types:Legendary Creature Human Samurai
-Text:no text
 PT:3/3
 K:Bushido 1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, Samurai creatures you control get +1/+1 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nagao_bound_by_honor.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/36.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhenever Nagao, Bound by Honor attacks, Samurai creatures you control get +1/+1 until end of turn.
-End

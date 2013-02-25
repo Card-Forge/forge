@@ -1,11 +1,9 @@
 Name:Tainted Sigil
 ManaCost:1 W B
 Types:Artifact
-Text:no text
 A:AB$ GainLife | Cost$ T Sac<1/CARDNAME> | LifeAmount$ X | References$ X,Y | SpellDescription$ You gain life equal to the total life lost by all players this turn. (Damage causes loss of life.)
 SVar:X:PlayerCountPlayers$LifeLostThisTurn
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_sigil.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/83.jpg
 Oracle:{T}, Sacrifice Tainted Sigil: You gain life equal to the total life lost by all players this turn. (Damage causes loss of life.)
-End

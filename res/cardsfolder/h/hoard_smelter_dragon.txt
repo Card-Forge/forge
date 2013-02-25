@@ -1,7 +1,6 @@
 Name:Hoard-Smelter Dragon
 ManaCost:4 R R
 Types:Creature Dragon
-Text:no text
 PT:5/5
 K:Flying
 A:AB$ Destroy | Cost$ 3 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBPump | SpellDescription$ Destroy target artifact. CARDNAME gets +X/+0 until end of turn, where X is that artifact's converted mana cost.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoard_smelter_dragon.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/93.jpg
 Oracle:Flying\n{3}{R}: Destroy target artifact. Hoard-Smelter Dragon gets +X/+0 until end of turn, where X is that artifact's converted mana cost.
-End

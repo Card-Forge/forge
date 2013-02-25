@@ -9,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_fury.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/127.jpg
 Oracle:Flying\nWhen Angel of Fury is put into your graveyard from the battlefield, you may shuffle it into your library.
-End

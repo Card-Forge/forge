@@ -1,7 +1,6 @@
 Name:Lost in the Woods
 ManaCost:3 G G
 Types:Enchantment
-Text:no text
 T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library.
 SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Library | LibraryPosition$ -1 | LibraryPosition2$ -1 | RememberChanged$ True | SubAbility$ DBRemoveCombat
 SVar:DBRemoveCombat:DB$ RemoveFromCombat | Defined$ TriggeredAttacker | ConditionCheckSVar$ IsForest | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | References$ IsForest
@@ -10,4 +9,3 @@ SVar:IsForest:Remembered$Valid Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_in_the_woods.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/123.jpg
 Oracle:Whenever a creature attacks you or a planeswalker you control, reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library.
-End

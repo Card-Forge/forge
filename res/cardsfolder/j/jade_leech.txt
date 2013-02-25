@@ -1,11 +1,9 @@
 Name:Jade Leech
 ManaCost:2 G G
 Types:Creature Leech
-Text:no text
 PT:5/5
 S:Mode$ RaiseCost | ValidCard$ Card.Green | Activator$ You | Type$ Spell | Color$ G | Amount$ 1 | Description$ Green spells you cast cost G more to cast.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_leech.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/190.jpg
 Oracle:Green spells you cast cost {G} more to cast.
-End

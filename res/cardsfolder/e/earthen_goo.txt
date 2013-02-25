@@ -1,7 +1,6 @@
 Name:Earthen Goo
 ManaCost:2 R
 Types:Creature Ooze
-Text:no text
 PT:2/2
 K:Trample
 K:Cumulative upkeep:RG
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthen_goo.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/80.jpg
 Oracle:Trample\nCumulative upkeep {R} or {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nEarthen Goo gets +1/+1 for each age counter on it.
-End

@@ -7,4 +7,3 @@ SVar:X:Count$wasCastFromGraveyard.10.5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/increasing_savagery.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/120.jpg
 Oracle:Put five +1/+1 counters on target creature. If Increasing Savagery was cast from a graveyard, put ten +1/+1 counters on that creature instead.\nFlashback {5}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

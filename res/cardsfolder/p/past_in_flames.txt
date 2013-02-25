@@ -1,7 +1,6 @@
 Name:Past in Flames
 ManaCost:3 R
 Types:Sorcery
-Text:no text
 K:Flashback 4 R
 A:SP$PumpAll | Cost$ 3 R | ValidCards$ Instant.YouCtrl,Sorcery.YouCtrl | KW$ Flashback | PumpZone$ Graveyard | SpellDescription$ Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/past_in_flames.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/155.jpg
 Oracle:Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.\nFlashback {4}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

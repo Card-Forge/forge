@@ -1,7 +1,6 @@
 Name:Oyobi, Who Split the Heavens
 ManaCost:6 W
 Types:Legendary Creature Spirit
-Text:no text
 PT:3/6
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, put a 3/3 white Spirit creature token with flying onto the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oyobi_who_split_the_heavens.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/18.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, put a 3/3 white Spirit creature token with flying onto the battlefield.
-End

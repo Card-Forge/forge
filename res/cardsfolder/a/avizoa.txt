@@ -1,7 +1,6 @@
 Name:Avizoa
 ManaCost:3 U
 Types:Creature Jellyfish
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ Pump | Cost$ 0 | NumAtt$ 2 | NumDef$ 2 | ActivationLimit$ 1 | SubAbility$ DBSkipTurn | SpellDescription$ CARDNAME gets +2/+2 until end of turn. You skip your next untap step. Activate this ability only once each turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avizoa.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/35.jpg
 Oracle:Flying\n{0}: Avizoa gets +2/+2 until end of turn. You skip your next untap step. Activate this ability only once each turn.
-End

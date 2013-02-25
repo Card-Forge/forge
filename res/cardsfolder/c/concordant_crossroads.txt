@@ -1,7 +1,6 @@
 Name:Concordant Crossroads
 ManaCost:G
 Types:World Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Haste | Description$ All creatures have haste.
 SVar:BuffedBy:Creature
 SVar:AntiBuffedBy:Creature
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/concordant_cross
 Oracle:All creatures have haste.
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/32.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/93.jpg
-End

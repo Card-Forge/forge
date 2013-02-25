@@ -1,7 +1,6 @@
 Name:Carrion Wurm
 ManaCost:3 B B
 Types:Creature Zombie Wurm
-Text:no text
 PT:6/5
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigNoCombatDamage | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile three cards from his or her graveyard. If a player does, CARDNAME assigns no combat damage this turn.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigNoCombatDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile three cards from his or her graveyard. If a player does, CARDNAME assigns no combat damage this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_wurm.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/55.jpg
 Oracle:Whenever Carrion Wurm attacks or blocks, any player may exile three cards from his or her graveyard. If a player does, Carrion Wurm assigns no combat damage this turn.
-End

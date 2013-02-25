@@ -1,7 +1,6 @@
 Name:Eradicate
 ManaCost:2 B B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 2 B B | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBSearch | SpellDescription$ Exile target nonblack creature. Search its controller's graveyard, hand, and library for all cards with the same name as that creature and exile them. Then that player shuffles his or her library.
 SVar:DBSearch:DB$ChangeZoneAll | Origin$ Graveyard,Hand,Library | Defined$ TargetedController | Destination$ Exile | ChangeType$ Remembered.sameName | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/eradicate.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/60.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/65.jpg
 Oracle:Exile target nonblack creature. Search its controller's graveyard, hand, and library for all cards with the same name as that creature and exile them. Then that player shuffles his or her library.
-End

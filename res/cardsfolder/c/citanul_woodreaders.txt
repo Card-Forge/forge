@@ -1,7 +1,6 @@
 Name:Citanul Woodreaders
 ManaCost:2 G
 Types:Creature Human Druid
-Text:no text
 PT:1/4
 K:Kicker 2 G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, draw two cards.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/citanul_woodreaders.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/125.jpg
 Oracle:Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)\nWhen Citanul Woodreaders enters the battlefield, if it was kicked, draw two cards.
-End

@@ -1,7 +1,6 @@
 Name:Archangel of Strife
 ManaCost:5 W W
 Types:Creature Angel
-Text:no text
 PT:6/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Tolstoy | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, each player chooses war or peace. Creatures controlled by players who chose war get +3/+0. Creatures controlled by players who chose peace get +0/+3.
@@ -26,4 +25,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archangel_of_strife.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/7.jpg
 Oracle:Flying\nAs Archangel of Strife enters the battlefield, each player chooses war or peace.\nCreatures controlled by players who chose war get +3/+0.\nCreatures controlled by players who chose peace get +0/+3.
-End

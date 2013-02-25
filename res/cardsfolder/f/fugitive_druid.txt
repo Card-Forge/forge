@@ -1,7 +1,6 @@
 Name:Fugitive Druid
 ManaCost:3 G
 Types:Creature Human Druid
-Text:no text
 PT:3/2
 T:Mode$ SpellCast | TargetsValid$ Card.Self | ValidCard$ Aura | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes the target of an Aura spell, you draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fugitive_druid.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/123.jpg
 Oracle:Whenever Fugitive Druid becomes the target of an Aura spell, you draw a card.
-End

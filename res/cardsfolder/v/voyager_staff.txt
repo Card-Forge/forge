@@ -1,7 +1,6 @@
 Name:Voyager Staff
 ManaCost:1
 Types:Artifact
-Text:no text
 A:AB$ChangeZone | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DelTrig | SpellDescription$ Exile target creature. Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
 SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return exiled creatures to the battlefield.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered
@@ -9,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voyager_staff.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/274.jpg
 Oracle:{2}, Sacrifice Voyager Staff: Exile target creature. Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
-End

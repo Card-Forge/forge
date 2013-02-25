@@ -1,7 +1,6 @@
 Name:Plover Knights
 ManaCost:3 W W
 Types:Creature Kithkin Knight
-Text:no text
 PT:3/3
 K:Flying
 K:First Strike
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plover_knights.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/35.jpg
 Oracle:Flying, first strike
-End

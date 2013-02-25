@@ -1,7 +1,6 @@
 Name:Spincrusher
 ManaCost:2
 Types:Artifact Creature Construct
-Text:no text
 PT:0/2
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME blocks, put a +1/+1 counter on it.
 A:AB$ Pump | Cost$ SubCounter<1/P1P1> | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME is unblockable this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spincrusher.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/144.jpg
 Oracle:Whenever Spincrusher blocks, put a +1/+1 counter on it.\nRemove a +1/+1 counter from Spincrusher: Spincrusher is unblockable this turn.
-End

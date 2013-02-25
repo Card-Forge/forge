@@ -1,7 +1,6 @@
 Name:Embalmed Brawler
 ManaCost:2 B
 Types:Creature Zombie
-Text:no text
 PT:2/2
 K:Amplify:1:Zombie
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks or blocks, you lose 1 life for each +1/+1 counter on it.
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/embalmed_brawler.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/69.jpg
 Oracle:Amplify 1 (As this creature enters the battlefield, put a +1/+1 counter on it for each Zombie card you reveal in your hand.)\nWhenever Embalmed Brawler attacks or blocks, you lose 1 life for each +1/+1 counter on it.
-End

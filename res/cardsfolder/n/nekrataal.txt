@@ -1,7 +1,6 @@
 Name:Nekrataal
 ManaCost:2 B B
 Types:Creature Human Assassin
-Text:no text
 PT:2/1
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature.
@@ -14,4 +13,3 @@ SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/16.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/149.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/163.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhen Nekrataal enters the battlefield, destroy target nonartifact, nonblack creature. That creature can't be regenerated.
-End

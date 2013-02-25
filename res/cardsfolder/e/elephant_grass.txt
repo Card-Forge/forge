@@ -1,7 +1,6 @@
 Name:Elephant Grass
 ManaCost:G
 Types:Enchantment
-Text:no text
 K:Cumulative upkeep:1
 S:Mode$ CantAttack | ValidCard$ Creature.Black | Target$ You | Description$ Black creatures can't attack you.
 S:Mode$ CantAttackUnless | ValidCard$ Creature.nonBlack | Target$ You | Cost$ 2 | Description$ Nonblack creatures can't attack you unless their controller pays 2 for each creature he or she controls that's attacking you.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_grass.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/54.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nBlack creatures can't attack you.\nNonblack creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
-End

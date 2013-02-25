@@ -1,11 +1,9 @@
 Name:Kodama's Might
 ManaCost:G
 Types:Instant Arcane
-Text:no text
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 K:Splice onto Arcane G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kodamas_might.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/224.jpg
 Oracle:Target creature gets +2/+2 until end of turn.\nSplice onto Arcane {G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
-End

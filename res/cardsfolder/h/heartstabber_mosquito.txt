@@ -1,7 +1,6 @@
 Name:Heartstabber Mosquito
 ManaCost:3 B
 Types:Creature Insect
-Text:no text
 PT:2/2
 K:Flying
 K:Kicker 2 B
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Heartstabber_Mosquito.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/97.jpg
 Oracle:Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)\nFlying\nWhen Heartstabber Mosquito enters the battlefield, if it was kicked, destroy target creature.
-End

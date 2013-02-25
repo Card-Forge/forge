@@ -1,7 +1,6 @@
 Name:Aven Fleetwing
 ManaCost:3 U
 Types:Creature Bird Soldier
-Text:no text
 PT:2/2
 K:Flying
 K:Hexproof
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_fleetwing.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/44.jpg
 Oracle:Flying\nHexproof (This creature can't be the target of spells or abilities your opponents control.)
-End

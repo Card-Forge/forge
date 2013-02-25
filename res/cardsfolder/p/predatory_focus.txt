@@ -1,11 +1,9 @@
 Name:Predatory Focus
 ManaCost:3 G G
 Types:Sorcery
-Text:no text
 A:SP$ Effect | Cost$ 3 G G | Name$ Predatory Focus Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ You may have creatures you control assign their combat damage this turn as though they weren't blocked.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ You may have CARDNAME assign its combat damage as though it weren't blocked. | Description$ You may have creatures you control assign their combat damage this turn as though they weren't blocked.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_focus.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/92.jpg
 Oracle:You may have creatures you control assign their combat damage this turn as though they weren't blocked.
-End

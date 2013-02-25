@@ -1,7 +1,6 @@
 Name:Seed Spark
 ManaCost:3 W
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ MakeToken | SpellDescription$ Destroy target artifact or enchantment. If G was spent to cast CARDNAME, put two 1/1 green Saproling creature tokens onto the battlefield.
 SVar:MakeToken:DB$ Token | ConditionManaSpent$ G | TokenAmount$ 2 | TokenOwner$ You | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:ManaNeededToAvoidNegativeEffect:green
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seed_spark.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/30.jpg
 Oracle:Destroy target artifact or enchantment. If {G} was spent to cast Seed Spark, put two 1/1 green Saproling creature tokens onto the battlefield.
-End

@@ -1,7 +1,6 @@
 Name:Lashknife Barrier
 ManaCost:2 W
 Types:Enchantment
-Text:no text
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.YouCtrl | ReplaceWith$ DmgMinus1 | IsCombat$ False | Description$ If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.YouCtrl | ReplaceWith$ DmgMinus1Combat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
 SVar:DmgMinus1:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
@@ -13,4 +12,3 @@ SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lashknife_barrier.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/9.jpg
 Oracle:When Lashknife Barrier enters the battlefield, draw a card.\nIf a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
-End

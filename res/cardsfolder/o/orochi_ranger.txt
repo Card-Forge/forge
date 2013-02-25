@@ -1,7 +1,6 @@
 Name:Orochi Ranger
 ManaCost:1 G
 Types:Creature Snake Warrior
-Text:no text
 PT:2/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ TriggeredTarget | SubAbility$ DBPump
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_ranger.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/235.jpg
 Oracle:Whenever Orochi Ranger deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
-End

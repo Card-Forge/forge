@@ -1,7 +1,6 @@
 Name:Chieftain en-Dal
 ManaCost:1 W W
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, attacking creatures gain first strike until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking | KW$ First Strike
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chieftain_en_dal.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/4.jpg
 Oracle:Whenever Chieftain en-Dal attacks, attacking creatures gain first strike until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Pulse of the Forge
 ManaCost:1 R R
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4 | SubAbility$ ReheatTheForge | SpellDescription$ CARDNAME deals 4 damage to target player. Then if that player has more life than you, return CARDNAME to its owner's hand.
 SVar:ReheatTheForge:DB$ ChangeZone | ConditionLifeTotal$ You | ConditionLifeAmount$ LTX | References$ X | Defined$ Self | Origin$ Stack | Destination$ Hand | ConditionDescription$ If an opponent has more life than you,
 SVar:X:Count$TargetedLifeTotal
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_the_forge.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/66.jpg
 Oracle:Pulse of the Forge deals 4 damage to target player. Then if that player has more life than you, return Pulse of the Forge to its owner's hand.
-End

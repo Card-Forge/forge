@@ -1,7 +1,6 @@
 Name:Karrthus, Tyrant of Jund
 ManaCost:4 B R G
 Types:Legendary Creature Dragon
-Text:no text
 PT:7/7
 K:Flying
 K:Haste
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karrthus_tyrant_of_jund.jpg
 SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/117.jpg
 Oracle:Flying, haste\nWhen Karrthus, Tyrant of Jund enters the battlefield, gain control of all Dragons, then untap all Dragons.\nOther Dragon creatures you control have haste.
-End

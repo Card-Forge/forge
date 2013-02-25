@@ -1,7 +1,6 @@
 Name:Echoing Truth
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | RememberTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Remembered.sameName | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46162.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/21.jpg
 Oracle:Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
-End

@@ -1,7 +1,6 @@
 Name:Barbed Shocker
 ManaCost:3 R
 Types:Creature Insect
-Text:no text
 PT:2/2
 K:Trample
 K:Haste
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_shocker.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/144.jpg
 Oracle:Trample, haste\nWhenever Barbed Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
-End

@@ -1,7 +1,6 @@
 Name:Freewind Equenaut
 ManaCost:2 W
 Types:Creature Human Archer
-Text:no text
 PT:2/2
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddAbility$ DealDamage | Description$ As long as CARDNAME is enchanted, it has "Tap: CARDNAME deals 2 damage to target attacking or blocking creature."
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freewind_equenaut.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/9.jpg
 Oracle:Flying\nAs long as Freewind Equenaut is enchanted, it has "{T}: Freewind Equenaut deals 2 damage to target attacking or blocking creature."
-End

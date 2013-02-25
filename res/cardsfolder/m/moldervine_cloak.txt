@@ -1,7 +1,6 @@
 Name:Moldervine Cloak
 ManaCost:2 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moldervine_cloak.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/173.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nDredge 2 (If you would draw a card, instead you may put exactly two cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
-End

@@ -1,7 +1,6 @@
 Name:Thopter Squadron
 ManaCost:5
 Types:Artifact Creature Thopter
-Text:no text
 PT:0/0
 K:Flying
 K:etbCounter:P1P1:3
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thopter_squadron.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/140.jpg
 Oracle:Flying\nThopter Squadron enters the battlefield with three +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from Thopter Squadron: Put a 1/1 colorless Thopter artifact creature token with flying onto the battlefield. Activate this ability only any time you could cast a sorcery.\n{1}, Sacrifice another Thopter: Put a +1/+1 counter on Thopter Squadron. Activate this ability only any time you could cast a sorcery.
-End

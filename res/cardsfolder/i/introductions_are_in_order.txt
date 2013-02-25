@@ -1,7 +1,6 @@
 Name:Introductions Are in Order
 ManaCost:no cost
 Types:Scheme
-Text:no text
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose one - Search your library for a creature card, reveal it, put it into your hand, then shuffle your library; or you may put a creature card from your hand onto the battlefield.
 SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBTutorCreature,DBPutCreature | CharmNum$ 1
 SVar:DBTutorCreature:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal it, put it into your hand, then shuffle your library;
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/introductions_are_in_order.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/introductions-are-in-order.jpg
 Oracle:When you set this scheme in motion, choose one - Search your library for a creature card, reveal it, put it into your hand, then shuffle your library; or you may put a creature card from your hand onto the battlefield.
-End

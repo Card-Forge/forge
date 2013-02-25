@@ -1,7 +1,6 @@
 Name:The Unspeakable
 ManaCost:6 U U U
 Types:Legendary Creature Spirit
-Text:no text
 PT:6/7
 K:Flying
 K:Trample
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78693.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/98.jpg
 Oracle:Flying, trample\nWhenever The Unspeakable deals combat damage to a player, you may return target Arcane card from your graveyard to your hand.
-End

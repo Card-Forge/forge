@@ -1,7 +1,6 @@
 Name:Soul Net
 ManaCost:1
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, you may pay 1. If you do, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 1 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Uncommon
@@ -15,4 +14,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/312.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/275.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/271.jpg
 Oracle:Whenever a creature dies, you may pay {1}. If you do, you gain 1 life.
-End

@@ -1,7 +1,6 @@
 Name:Beetleback Chief
 ManaCost:2 R R
 Types:Creature Goblin Warrior
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 1/1 red Goblin creature tokens onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 2 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beetleback_chief.jpg
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/40.jpg
 Oracle:When Beetleback Chief enters the battlefield, put two 1/1 red Goblin creature tokens onto the battlefield.
-End

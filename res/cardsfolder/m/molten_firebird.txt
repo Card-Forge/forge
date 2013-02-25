@@ -1,7 +1,6 @@
 Name:Molten Firebird
 ManaCost:4 R
 Types:Creature Phoenix
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDelay | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield under its owner's control at the beginning of the next end step and you skip your next draw step.
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_firebird.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/117.jpg
 Oracle:Flying\nWhen Molten Firebird dies, return it to the battlefield under its owner's control at the beginning of the next end step and you skip your next draw step.\n{4}{R}: Exile Molten Firebird.
-End

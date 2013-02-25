@@ -1,7 +1,6 @@
 Name:Nim Devourer
 ManaCost:3 B B
 Types:Creature Zombie
-Text:no text
 PT:4/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | References$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_devourer.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/70.jpg
 Oracle:Nim Devourer gets +1/+0 for each artifact you control.\n{B}{B}: Return Nim Devourer from your graveyard to the battlefield, then sacrifice a creature. Activate this ability only during your upkeep.
-End

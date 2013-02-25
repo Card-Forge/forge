@@ -1,7 +1,6 @@
 Name:Nicol Bolas, Planeswalker
 ManaCost:4 U B B R
 Types:Planeswalker Bolas
-Text:no text
 Loyalty:5
 A:AB$ Destroy | Cost$ AddCounter<3/LOYALTY> | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select a noncreature permanent. | Planeswalker$ True | SpellDescription$ Destroy target noncreature permanent.
 A:AB$ GainControl | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature | Planeswalker$ True | SpellDescription$ Gain control of target creature.
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/nicol_bolas_plan
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/199.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/120.jpg
 Oracle:[+3] Destroy target noncreature permanent.\n[-2] Gain control of target creature.\n[-9] Nicol Bolas, Planeswalker deals 7 damage to target player. That player discards seven cards, then sacrifices seven permanents.
-End

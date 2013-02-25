@@ -1,7 +1,6 @@
 Name:Jareth, Leonine Titan
 ManaCost:3 W W W
 Types:Legendary Creature Cat Giant
-Text:no text
 PT:4/7
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks, it gets +7/+7 until end of turn.
 A:AB$ Protection | Cost$ W | Gains$ Choice | Choices$ AnyColor | SpellDescription$ CARDNAME gains protection from the color of your choice until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jareth_leonine_titan.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/43.jpg
 Oracle:Whenever Jareth, Leonine Titan blocks, it gets +7/+7 until end of turn.\n{W}: Jareth gains protection from the color of your choice until end of turn.
-End

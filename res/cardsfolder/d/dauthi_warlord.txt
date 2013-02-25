@@ -1,7 +1,6 @@
 Name:Dauthi Warlord
 ManaCost:1 B
 Types:Creature Dauthi Soldier
-Text:no text
 PT:*/1
 K:Shadow
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures with shadow on the battlefield.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_warlord.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/59.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nDauthi Warlord's power is equal to the number of creatures with shadow on the battlefield.
-End

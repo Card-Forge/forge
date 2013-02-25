@@ -1,7 +1,6 @@
 Name:Sphinx of the Chimes
 ManaCost:4 U U
 Types:Creature Sphinx
-Text:no text
 PT:5/6
 K:Flying
 A:AB$ Draw | Cost$ Discard<2/Card.nonLand+WithSameName/nonland cards with the same name> | NumCards$ 4 | CostDesc$ Discard two nonland cards with the same name | SpellDescription$ Draw four cards.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_the_chimes.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/52.jpg
 Oracle:Flying\nDiscard two nonland cards with the same name: Draw four cards.
-End

@@ -1,7 +1,6 @@
 Name:Goblin Caves
 ManaCost:1 R R
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Land | AITgts$ Mountain.Basic | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.Goblin | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ If enchanted land is a basic Mountain, Goblin creatures get +0/+2.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_caves.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/63.jpg
 Oracle:Enchant land\nAs long as enchanted land is a basic Mountain, Goblin creatures get +0/+2.
-End

@@ -1,7 +1,6 @@
 Name:Budoka Pupil
 ManaCost:1 G G
 Types:Creature Human Monk
-Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on Budoka Pupil, you may flip it.
@@ -18,7 +17,6 @@ Name:Ichiga, Who Topples Oaks
 ManaCost:1 G G
 Colors:green
 Types:Legendary Creature Spirit
-Text:no text
 PT:4/3
 K:Trample
 A:AB$ Pump | Cost$ SubCounter<1/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
@@ -26,4 +24,3 @@ SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/ichiga
 # This link may be a temporary solution and could change in the near future.
 Oracle:Trample\nRemove a ki counter from Ichiga, Who Topples Oaks: Target creature gets +2/+2 until end of turn.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/170.jpg
-End

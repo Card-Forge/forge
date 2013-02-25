@@ -1,7 +1,6 @@
 Name:Precognition
 ManaCost:4 U
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, you may look at the top card of target opponent's library. If you do, you may put that card on the bottom of that player's library.
 SVar:TrigDig:AB$ Dig | Cost$ 0 | ValidTgts$ Opponent | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/precognition.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/79.jpg
 Oracle:At the beginning of your upkeep, you may look at the top card of target opponent's library. If you do, you may put that card on the bottom of that player's library.
-End

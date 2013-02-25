@@ -1,7 +1,6 @@
 Name:Plagiarize
 ManaCost:3 U
 Types:Instant
-Text:no text
 A:SP$ Effect | Cost$ 3 U | Name$ Plagiarize Effect | ReplacementEffects$ EventDraw | SVars$ ABDraw | RememberObjects$ Targeted | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | SpellDescription$ Until end of turn, if target player would draw a card, instead that player skips that draw and you draw a card.
 SVar:EventDraw:Event$ Draw | ValidPlayer$ Player.IsRemembered | ReplaceWith$ ABDraw | Description$ If the targeted player would draw a card, that player skips that draw and you draw a card.
 SVar:ABDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SpellDescription$ You draw a card.
@@ -12,4 +11,3 @@ SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/44.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/89.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/97.jpg
 Oracle:Until end of turn, if target player would draw a card, instead that player skips that draw and you draw a card.
-End

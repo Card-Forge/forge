@@ -1,7 +1,6 @@
 Name:Horned Troll
 ManaCost:2 G
 Types:Creature Troll
-Text:no text
 PT:2/2
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_troll.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/257.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/251.jpg
 Oracle:{G}: Regenerate Horned Troll.
-End

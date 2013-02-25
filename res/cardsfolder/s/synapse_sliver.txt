@@ -1,7 +1,6 @@
 Name:Synapse Sliver
 ManaCost:4 U
 Types:Creature Sliver
-Text:no text
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Sliver | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | OptionalDecider$ TriggeredSourceController | Execute$ TrigDraw | TriggerDescription$ Whenever a Sliver deals combat damage to a player, its controller may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredSourceController | NumCards$ 1
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synapse_sliver.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/53.jpg
 Oracle:Whenever a Sliver deals combat damage to a player, its controller may draw a card.
-End

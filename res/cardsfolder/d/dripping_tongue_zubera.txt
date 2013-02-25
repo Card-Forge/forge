@@ -1,7 +1,6 @@
 Name:Dripping-Tongue Zubera
 ManaCost:1 G
 Types:Creature Zubera Spirit
-Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield for each Zubera put into a graveyard from the battlefield this turn.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Colorless | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenAmount$ X | References$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80511.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/206.jpg
 Oracle:When Dripping-Tongue Zubera dies, put a 1/1 colorless Spirit creature token onto the battlefield for each Zubera that died this turn.
-End

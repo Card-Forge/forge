@@ -1,7 +1,6 @@
 Name:An-Havva Constable
 ManaCost:1 G G
 Types:Creature Human
-Text:no text
 PT:2/1+*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to 1 plus the number of green creatures on the battlefield.
 SVar:X:Count$Valid Creature.Green/Plus.1
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/an_havva_constab
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/51.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/139.jpg
 Oracle:An-Havva Constable's toughness is equal to 1 plus the number of green creatures on the battlefield.
-End

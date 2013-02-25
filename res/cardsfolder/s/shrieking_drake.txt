@@ -1,7 +1,6 @@
 Name:Shrieking Drake
 ManaCost:U
 Types:Creature Drake
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_drake.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/43.jpg
 Oracle:Flying\nWhen Shrieking Drake enters the battlefield, return a creature you control to its owner's hand.
-End

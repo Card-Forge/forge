@@ -1,7 +1,6 @@
 Name:Twitch
 ManaCost:2 U
 Types:Instant
-Text:no text
 A:SP$ TapOrUntap | Cost$ 2 U | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SubAbility$ DBDraw | SpellDescription$ You may tap or untap target artifact, creature, or land.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
@@ -11,4 +10,3 @@ SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/99.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/43.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/121.jpg
 Oracle:You may tap or untap target artifact, creature, or land.\nDraw a card.
-End

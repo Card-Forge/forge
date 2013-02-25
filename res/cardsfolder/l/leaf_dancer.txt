@@ -1,11 +1,9 @@
 Name:Leaf Dancer
 ManaCost:1 G G
 Types:Creature Centaur
-Text:no text
 PT:2/2
 K:Forestwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29782.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/249.jpg
 Oracle:Forestwalk
-End

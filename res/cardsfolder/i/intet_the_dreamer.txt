@@ -1,7 +1,6 @@
 Name:Intet, the Dreamer
 ManaCost:3 U R G
 Types:Legendary Creature Dragon
-Text:no text
 PT:6/6
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 U. If you do, exile the top card of your library face down. You may look at that card for as long as it remains exiled. You may play that card without paying its mana cost for as long as Intet remains on the battlefield.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/intet_the_dreame
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/204.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/158.jpg
 Oracle:Flying\nWhenever Intet, the Dreamer deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down. You may look at that card for as long as it remains exiled. You may play that card without paying its mana cost for as long as Intet remains on the battlefield.
-End

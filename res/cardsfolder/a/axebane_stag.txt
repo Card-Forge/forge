@@ -1,10 +1,8 @@
 Name:Axebane Stag
 ManaCost:6 G
 Types:Creature Elk
-Text:no text
 PT:6/7
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/axebane_stag.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/116.jpg
 Oracle:
-End

@@ -1,7 +1,6 @@
 Name:Call of the Wild
 ManaCost:2 G G
 Types:Enchantment
-Text:no text
 A:AB$ Dig | Cost$ 2 G G | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_of_the_wild.jpg
@@ -9,4 +8,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/235.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/64.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/218.jpg
 Oracle:{2}{G}{G}: Reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, put it into your graveyard.
-End

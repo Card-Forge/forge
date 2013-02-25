@@ -1,7 +1,6 @@
 Name:Ring of Valkas
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 1 | AITgts$ Creature.Red
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste| AILogic$ Color:Red | Description$ Equipped creature has haste.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ValkasCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's red.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_valkas.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/214.jpg
 Oracle:Equipped creature has haste. (It can attack and {T} no matter when it came under your control.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's red.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-End

@@ -1,7 +1,6 @@
 Name:Dredge
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ Sacrifice | Cost$ B | SacValid$ Creature,Land | SacMessage$ Creature or Land | SpellDescription$ Sacrifice a creature or land. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dredge.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/103.jpg
 Oracle:Sacrifice a creature or land.\nDraw a card.
-End

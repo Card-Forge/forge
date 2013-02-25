@@ -1,7 +1,6 @@
 Name:Living Lands
 ManaCost:3 G
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Forest | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature | Description$ All Forests are 1/1 creatures that are still lands.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
@@ -14,4 +13,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/238.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/117.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/118.jpg
 Oracle:All Forests are 1/1 creatures that are still lands.
-End

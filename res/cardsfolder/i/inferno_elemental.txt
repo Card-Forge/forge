@@ -1,7 +1,6 @@
 Name:Inferno Elemental
 ManaCost:4 R R
 Types:Creature Elemental
-Text:no text
 PT:4/4
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigDealDamageAttack | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigDealDamageBlock | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_elemental.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/142.jpg
 Oracle:Whenever Inferno Elemental blocks or becomes blocked by a creature, Inferno Elemental deals 3 damage to that creature.
-End

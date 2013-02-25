@@ -1,7 +1,6 @@
 Name:Fire Drake
 ManaCost:1 R R
 Types:Creature Drake
-Text:no text
 PT:1/2
 K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability only once each turn.
@@ -11,4 +10,3 @@ Oracle:Flying\n{R}: Fire Drake gets +1/+0 until end of turn. Activate this abili
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/226.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/61.jpg
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/47.jpg
-End

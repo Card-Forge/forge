@@ -1,7 +1,6 @@
 Name:Repentant Vampire
 ManaCost:3 B B
 Types:Creature Vampire
-Text:no text
 PT:3/3
 K:Flying
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repentant_vampire.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/157.jpg
 Oracle:Flying\nWhenever a creature dealt damage by Repentant Vampire this turn dies, put a +1/+1 counter on Repentant Vampire.\nThreshold - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has "{T}: Destroy target black creature."
-End

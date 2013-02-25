@@ -1,7 +1,6 @@
 Name:Aggression
 ManaCost:2 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant non-Wall creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature.nonWall | TgtPrompt$ Select target non-Wall creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike & Trample | Description$ Enchanted creature has first strike and trample.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aggression.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/169.jpg
 Oracle:Enchant non-Wall creature\nEnchanted creature has first strike and trample.\nAt the beginning of the end step of enchanted creature's controller, destroy that creature if it didn't attack this turn.
-End

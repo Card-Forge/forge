@@ -1,11 +1,9 @@
 Name:Sakura-Tribe Scout
 ManaCost:G
 Types:Creature Snake Shaman Scout
-Text:no text
 PT:1/1
 A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ You may put a land card from your hand onto the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sakura_tribe_scout.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/144.jpg
 Oracle:{T}: You may put a land card from your hand onto the battlefield.
-End

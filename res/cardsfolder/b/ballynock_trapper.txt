@@ -1,7 +1,6 @@
 Name:Ballynock Trapper
 ManaCost:3 W
 Types:Creature Kithkin Soldier
-Text:no text
 PT:2/2
 A:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a white spell, you may untap CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_trapper.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/2.jpg
 Oracle:{T}: Tap target creature.\nWhenever you cast a white spell, you may untap Ballynock Trapper.
-End

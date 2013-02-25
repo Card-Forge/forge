@@ -1,7 +1,6 @@
 Name:Stalwart Shield-Bearers
 ManaCost:1 W
 Types:Creature Human Soldier
-Text:no text
 PT:0/3
 K:Defender
 S:Mode$ Continuous | Affected$ Creature.withDefender+Other+YouCtrl | AddToughness$ 2 | Description$ Other creatures you control with defender get +0/+2.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalwart_shield_bearers.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/46.jpg
 Oracle:Defender\nOther creatures you control with defender get +0/+2.
-End

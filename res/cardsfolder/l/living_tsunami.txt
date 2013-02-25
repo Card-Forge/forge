@@ -1,7 +1,6 @@
 Name:Living Tsunami
 ManaCost:2 U U
 Types:Creature Elemental
-Text:no text
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you return a land you control to its owner's hand.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_tsunami.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/52.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Living Tsunami unless you return a land you control to its owner's hand.
-End

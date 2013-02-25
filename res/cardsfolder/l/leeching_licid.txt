@@ -19,7 +19,6 @@ Name:Leeching Licid
 ManaCost:1 B
 Colors:black
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, CARDNAME deals 1 damage to that player.
@@ -30,4 +29,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leeching_licid.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/35.jpg
 Oracle:{B}, {T}: Leeching Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {B} to end this effect.\nAt the beginning of the upkeep of enchanted creature's controller, Leeching Licid deals 1 damage to that player.
-End

@@ -13,4 +13,3 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/282.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/210.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/211.jpg
 Oracle:At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.
-End

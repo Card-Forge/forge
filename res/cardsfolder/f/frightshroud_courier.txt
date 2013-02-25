@@ -1,7 +1,6 @@
 Name:Frightshroud Courier
 ManaCost:2 B
 Types:Creature Zombie
-Text:no text
 PT:2/1
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ 2 B T | ValidTgts$ Creature.Zombie | TgtPrompt$ Select target Zombie creature | RememberTargets$ True |  SpellDescription$ Target Zombie creature gets +2/+2 and has fear for as long as CARDNAME remains tapped. (It can't be blocked except by artifact creatures and/or black creatures.)
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frightshroud_courier.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/149.jpg
 Oracle:You may choose not to untap Frightshroud Courier during your untap step.\n{2}{B}, {T}: Target Zombie creature gets +2/+2 and has fear for as long as Frightshroud Courier remains tapped. (It can't be blocked except by artifact creatures and/or black creatures.)
-End

@@ -1,7 +1,6 @@
 Name:Kormus Bell
 ManaCost:4
 Types:Artifact
-Text:no text
 S:Mode$ Continuous | Affected$ Swamp | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature | SetColor$ Black | Description$ All Swamps are 1/1 black creatures that are still lands.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
@@ -12,4 +11,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/260.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/350.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/257.jpg
 Oracle:All Swamps are 1/1 black creatures that are still lands.
-End

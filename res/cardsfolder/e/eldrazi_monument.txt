@@ -1,7 +1,6 @@
 Name:Eldrazi Monument
 ManaCost:5
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature | SubAbility$ DBSacSelf | RememberSacrificed$ True
 SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup | References$ X
@@ -15,4 +14,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/199.jpg
 Oracle:Creatures you control get +1/+1, have flying, and are indestructible.\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
-End

@@ -1,7 +1,6 @@
 Name:Obzedat, Ghost Council
 ManaCost:1 W W B B
 Types:Legendary Creature Spirit Advisor
-Text:no text
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 2 life and you gain 2 life.
 SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
@@ -17,4 +16,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obzedat_ghost_council.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/182.jpg
 Oracle:When Obzedat, Ghost Council enters the battlefield, target opponent loses 2 life and you gain 2 life.\nAt the beginning of your end step, you may exile Obzedat. If you do, return it to the battlefield under its owner's control at the beginning of your next upkeep. It gains haste.
-End

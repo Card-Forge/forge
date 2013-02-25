@@ -1,7 +1,6 @@
 Name:Stalking Tiger Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/+2
 T:Mode$ SpellCast | ValidCard$ Card.Creature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a creature spell, you may pay {1}. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 1 | NumCards$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/stalking_tiger_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/stalking-tiger.jpg
 Oracle:Hand +0, life +2\nWhenever you cast a creature spell, you may pay {1}. If you do, draw a card.
-End

@@ -1,7 +1,6 @@
 Name:Meloku the Clouded Mirror
 ManaCost:4 U
 Types:Legendary Creature Moonfolk Wizard
-Text:no text
 PT:2/4
 K:Flying
 A:AB$ Token | Cost$ 1 Return<1/Land> | TokenAmount$ 1 | TokenName$ Illusion | TokenTypes$ Creature,Illusion | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put a 1/1 blue Illusion creature token with flying onto the battlefield.
@@ -10,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75268.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/74.jpg
 Oracle:Flying\n{1}, Return a land you control to its owner's hand: Put a 1/1 blue Illusion creature token with flying onto the battlefield.
-End

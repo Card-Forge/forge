@@ -1,7 +1,6 @@
 Name:Hunter's Insight
 ManaCost:2 G
 Types:Instant
-Text:no text
 A:SP$ Effect | Cost$ 2 G | Name$ Hunter's Insight Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigDamage | SVars$ TrigDraw,X | RememberObjects$ Targeted | SpellDescription$ Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTarget$ Player,Planeswalker | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunters_insight.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/180.jpg
 Oracle:Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.
-End

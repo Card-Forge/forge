@@ -1,7 +1,6 @@
 Name:Wild Beastmaster
 ManaCost:2 G
 Types:Creature Human Shaman
-Text:no text
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, each other creature you control gets +X/+X until end of turn, where X is CARDNAME's power.
 SVar:TrigPump:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl+Other| NumAtt$ X | NumDef$ X | References$ X
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_beastmaster.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/139.jpg
 Oracle:Whenever Wild Beastmaster attacks, each other creature you control gets +X/+X until end of turn, where X is Wild Beastmaster's power.
-End

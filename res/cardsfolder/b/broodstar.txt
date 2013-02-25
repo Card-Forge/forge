@@ -1,7 +1,6 @@
 Name:Broodstar
 ManaCost:8 U U
 Types:Creature Beast
-Text:no text
 PT:*/*
 K:Flying
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifacts you control.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodstar.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/31.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nBroodstar's power and toughness are each equal to the number of artifacts you control.
-End

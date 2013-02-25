@@ -1,7 +1,6 @@
 Name:Psychic Venom
 ManaCost:1 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted land becomes tapped, CARDNAME deals 2 damage to that land's controller.
@@ -16,4 +15,3 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/91.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/76.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/76.jpg
 Oracle:Enchant land\nWhenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that land's controller.
-End

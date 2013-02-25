@@ -1,11 +1,9 @@
 Name:Doran, the Siege Tower
 ManaCost:B G W
 Types:Legendary Creature Treefolk Shaman
-Text:no text
 PT:0/5
 S:Mode$ Continuous | GlobalRule$ Each creature assigns combat damage equal to its toughness rather than its power. | Description$ Each creature assigns combat damage equal to its toughness rather than its power.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doran_the_siege_tower.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/247.jpg
 Oracle:Each creature assigns combat damage equal to its toughness rather than its power.
-End

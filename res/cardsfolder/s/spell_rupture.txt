@@ -1,11 +1,9 @@
 Name:Spell Rupture
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ X | UnlessPayer$ TargetedController | References$ X | SpellDescription$ Counter target spell unless its controller pays X, where X is the greatest power among creatures you control.
 SVar:X:Count$GreatestPowerYouControl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_rupture.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/52.jpg
 Oracle:Counter target spell unless its controller pays {X}, where X is the greatest power among creatures you control.
-End

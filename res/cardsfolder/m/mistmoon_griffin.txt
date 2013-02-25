@@ -1,7 +1,6 @@
 Name:Mistmoon Griffin
 ManaCost:3 W
 Types:Creature Griffin
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExileMe | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, exile CARDNAME, then return the top creature card of your graveyard to the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistmoon_griffin.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/137.jpg
 Oracle:Flying\nWhen Mistmoon Griffin dies, exile Mistmoon Griffin, then return the top creature card of your graveyard to the battlefield.
-End

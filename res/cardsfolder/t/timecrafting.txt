@@ -1,7 +1,6 @@
 Name:Timecrafting
 ManaCost:X R
 Types:Instant
-Text:no text
 A:SP$ Charm | Cost$ X R | CharmNum$ 1 | Choices$ LoseTime,GainTime | References$ X | SpellDescription$ Choose one - Remove X time counters from target permanent or suspended card; or put X time counters on target permanent with a time counter on it or suspended card.
 SVar:LoseTime:DB$ RemoveCounter | ValidTgts$ Permanent.inZoneBattlefield,Card.suspended | AITgts$ Permanent.counters_GE1_TIME+inZoneBattlefield+YouDontCtrl,Card.suspended+YouCtrl | TgtPrompt$ Select target permanent or suspended card. | CounterType$ TIME | CounterNum$ X | References$ X | TgtZone$ Battlefield,Exile | SpellDescription$ Remove X time counters from target permanent or suspended card.
 SVar:GainTime:DB$ PutCounter | ValidTgts$ Permanent.counters_GE1_TIME+inZoneBattlefield,Card.suspended | AITgts$ Permanent.counters_GE1_TIME+inZoneBattlefield+YouCtrl,Card.suspended+YouDontCtrl | TgtPrompt$ Select target permanent with a time counter on it or suspended card. | CounterType$ TIME | CounterNum$ X | References$ X | TgtZone$ Battlefield,Exile | SpellDescription$ Put X time counters target permanent with a time counter on it or suspended card.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timecrafting.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/109.jpg
 Oracle:Choose one - Remove X time counters from target permanent or suspended card; or put X time counters on target permanent with a time counter on it or suspended card.
-End

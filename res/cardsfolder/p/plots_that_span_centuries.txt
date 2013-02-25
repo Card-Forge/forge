@@ -1,7 +1,6 @@
 Name:Plots That Span Centuries
 ManaCost:no cost
 Types:Scheme
-Text:no text
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ PlotEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, the next time you would set a scheme in motion, set three schemes in motion instead.
 SVar:PlotEffect:AB$ Effect | Cost$ 0 | Name$ Plots Scheme | Duration$ Permanent | ReplacementEffects$ PlotPower | SVars$ PlotRep,ExilePlot
 SVar:PlotPower:Event$ SetInMotion | ReplaceWith$ PlotRep | Description$ The next time you would set a scheme in motion, set three schemes in motion instead.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/plots_that_span_centuries.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/plots-that-span-centuries.jpg
 Oracle:When you set this scheme in motion, the next time you would set a scheme in motion, set three schemes in motion instead.
-End

@@ -1,7 +1,6 @@
 Name:Renewing Touch
 ManaCost:G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | References$ X | Shuffle$ True | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Shuffle any number of target creature cards from your graveyard into your library.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/renewing_touc
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/140.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/83.jpg
 Oracle:Shuffle any number of target creature cards from your graveyard into your library.
-End

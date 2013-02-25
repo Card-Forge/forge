@@ -10,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disharmony.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/140.jpg
 Oracle:Cast Disharmony only during combat before blockers are declared.\nUntap target attacking creature and remove it from combat. Gain control of that creature until end of turn.
-End

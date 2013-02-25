@@ -1,7 +1,6 @@
 Name:Hostile Realm
 ManaCost:2 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ Pump | Description$ Enchanted land has "T: Target creature can't block this turn."
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hostile_realm.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/91.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Target creature can't block this turn."
-End

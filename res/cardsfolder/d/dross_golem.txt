@@ -1,7 +1,6 @@
 Name:Dross Golem
 ManaCost:5
 Types:Artifact Creature Golem
-Text:no text
 PT:3/2
 K:Fear
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for Swamps (This spell costs 1 less to cast for each Swamp you control.)
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_golem.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/119.jpg
 Oracle:Affinity for Swamps (This spell costs {1} less to cast for each Swamp you control.)\nFear (This creature can't be blocked except by artifact creatures and/or black creatures.)
-End

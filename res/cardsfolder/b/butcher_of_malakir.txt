@@ -1,7 +1,6 @@
 Name:Butcher of Malakir
 ManaCost:5 B B
 Types:Creature Vampire Warrior
-Text:no text
 PT:5/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME or another creature you control is put into a graveyard from the battlefield, each opponent sacrifices a creature.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/butcher_of_malak
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/75.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/53.jpg
 Oracle:Flying\nWhenever Butcher of Malakir or another creature you control dies, each opponent sacrifices a creature.
-End

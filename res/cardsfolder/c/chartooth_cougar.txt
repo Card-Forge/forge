@@ -1,7 +1,6 @@
 Name:Chartooth Cougar
 ManaCost:5 R
 Types:Creature Cat Beast
-Text:no text
 PT:4/4
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 K:TypeCycling:Mountain:2
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/chartooth_cougar
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/84.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/115.jpg
 Oracle:{R}: Chartooth Cougar gets +1/+0 until end of turn.\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, and put it into your hand. Then shuffle your library.)
-End

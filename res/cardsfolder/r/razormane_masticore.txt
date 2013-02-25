@@ -1,7 +1,6 @@
 Name:Razormane Masticore
 ManaCost:5
 Types:Artifact Creature Masticore
-Text:no text
 PT:5/5
 K:First Strike
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card.
@@ -17,4 +16,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/razormane_mastic
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/146.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/340.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nAt the beginning of your upkeep, sacrifice Razormane Masticore unless you discard a card.\nAt the beginning of your draw step, you may have Razormane Masticore deal 3 damage to target creature.
-End

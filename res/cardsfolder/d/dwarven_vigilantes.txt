@@ -1,7 +1,6 @@
 Name:Dwarven Vigilantes
 ManaCost:2 R
 Types:Creature Dwarf
-Text:no text
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may have it deal damage equal to its power to target creature. If you do, CARDNAME assigns no combat damage this turn.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBNoCombatDamage | References$ X
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_vigilantes.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/77.jpg
 Oracle:Whenever Dwarven Vigilantes attacks and isn't blocked, you may have it deal damage equal to its power to target creature. If you do, Dwarven Vigilantes assigns no combat damage this turn.
-End

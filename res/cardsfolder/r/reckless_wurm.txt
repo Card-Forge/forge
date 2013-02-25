@@ -1,7 +1,6 @@
 Name:Reckless Wurm
 ManaCost:3 R R
 Types:Creature Wurm
-Text:no text
 PT:4/4
 K:Trample
 K:Madness:2 R
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card126818.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/120.jpg
 Oracle:Trample\nMadness {2}{R} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-End

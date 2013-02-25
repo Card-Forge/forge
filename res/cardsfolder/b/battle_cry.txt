@@ -1,7 +1,6 @@
 Name:Battle Cry
 ManaCost:2 W
 Types:Instant
-Text:no text
 A:SP$ UntapAll | Cost$ 2 W | ValidCards$ Creature.White+YouCtrl | SubAbility$ Battlecry | SpellDescription$ Untap all white creatures you control. Whenever a creature blocks this turn, it gets +0/+1 until end of turn.
 SVar:Battlecry:DB$Effect | Name$ Battle Cry Effect | Triggers$ TrigBlocking | SVars$ Pump
 SVar:TrigBlocking:Mode$ AttackerBlocked | Execute$ Pump | TriggerDescription$ Whenever a creature blocks this turn, it gets +0/+1 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_cry.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/229.jpg
 Oracle:Untap all white creatures you control.\nWhenever a creature blocks this turn, it gets +0/+1 until end of turn.
-End

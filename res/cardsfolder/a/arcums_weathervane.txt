@@ -1,7 +1,6 @@
 Name:Arcum's Weathervane
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Animate | Cost$ 2 T | ValidTgts$ Land.Snow | TgtPrompt$ Select target snow land | RemoveTypes$ Snow | Permanent$ True | SpellDescription$ Target snow land is no longer snow.
 A:AB$ Animate | Cost$ 2 T | ValidTgts$ Land.nonSnow | TgtPrompt$ Select target nonsnow land | Types$ Snow | Permanent$ True | SpellDescription$ Target nonsnow basic land becomes snow.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcums_weathervane.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/285.jpg
 Oracle:{2}, {T}: Target snow land is no longer snow.\n{2}, {T}: Target nonsnow basic land becomes snow.
-End

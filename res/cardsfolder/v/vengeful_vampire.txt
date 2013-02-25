@@ -1,11 +1,9 @@
 Name:Vengeful Vampire
 ManaCost:4 B B
 Types:Creature Vampire
-Text:no text
 PT:3/2
 K:Flying
 K:Undying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_vampire.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/78.jpg
 Oracle:Flying\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
-End

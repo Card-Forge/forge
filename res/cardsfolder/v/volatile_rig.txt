@@ -1,7 +1,6 @@
 Name:Volatile Rig
 ManaCost:4
 Types:Artifact Creature Construct
-Text:no text
 PT:4/4
 K:Trample
 K:CARDNAME attacks each turn if able.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volatile_rig.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/236.jpg
 Oracle:Trample\nVolatile Rig attacks each turn if able.\nWhenever Volatile Rig is dealt damage, flip a coin. If you lose the flip, sacrifice Volatile Rig.\nWhen Volatile Rig dies, flip a coin. If you lose the flip, it deals 4 damage to each creature and each player.
-End

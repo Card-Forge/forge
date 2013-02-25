@@ -1,7 +1,6 @@
 Name:Welkin Guide
 ManaCost:4 W
 Types:Creature Bird Cleric
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+2 and gains flying until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/welkin_guide.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/30.jpg
 Oracle:Flying\nWhen Welkin Guide enters the battlefield, target creature gets +2/+2 and gains flying until end of turn.
-End

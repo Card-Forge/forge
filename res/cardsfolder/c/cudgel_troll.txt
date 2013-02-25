@@ -1,7 +1,6 @@
 Name:Cudgel Troll
 ManaCost:2 G G
 Types:Creature Troll
-Text:no text
 PT:4/3
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
@@ -10,4 +9,3 @@ SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/167.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/174.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/169.jpg
 Oracle:{G}: Regenerate Cudgel Troll. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
-End

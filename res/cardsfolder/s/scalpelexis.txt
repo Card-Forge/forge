@@ -9,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/scalpelexis.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/50.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/105.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Scalpelexis deals combat damage to a player, that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process.
-End

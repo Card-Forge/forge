@@ -1,7 +1,6 @@
 Name:Wall of Fire
 ManaCost:1 R R
 Types:Creature Wall
-Text:no text
 PT:0/5
 K:Defender
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -19,4 +18,3 @@ SetInfo:M13|Common|http://magiccards.info/scans/en/m13/156.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/182.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/182.jpg
 Oracle:Defender (This creature can't attack.)\n{R}: Wall of Fire gets +1/+0 until end of turn.
-End

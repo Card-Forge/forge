@@ -1,7 +1,6 @@
 Name:Vow of Flight
 ManaCost:2 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+2, has flying, and can't attack you or a planeswalker you control.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vow_of_flight.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/68.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2, has flying, and can't attack you or a planeswalker you control.
-End

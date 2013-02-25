@@ -1,7 +1,6 @@
 Name:Wall of Blossoms
 ManaCost:1 G
 Types:Creature Wall
-Text:no text
 PT:0/4
 K:Defender
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
@@ -11,4 +10,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5265.jpg
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/81.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/75.jpg
 Oracle:Defender\nWhen Wall of Blossoms enters the battlefield, draw a card.
-End

@@ -1,7 +1,6 @@
 Name:White Shield Crusader
 ManaCost:W W
 Types:Creature Human Knight
-Text:no text
 PT:2/1
 K:Protection from black
 A:AB$ Pump | Cost$ W | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121216.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/24.jpg
 Oracle:Protection from black\n{W}: White Shield Crusader gains flying until end of turn.\n{W}{W}: White Shield Crusader gets +1/+0 until end of turn.
-End

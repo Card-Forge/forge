@@ -1,7 +1,6 @@
 Name:Pine Barrens
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pine_barrens.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/323.jpg
 Oracle:Pine Barrens enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\n{T}: Add {B} or {G} to your mana pool. Pine Barrens deals 1 damage to you.
-End

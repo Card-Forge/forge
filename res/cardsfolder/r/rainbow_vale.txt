@@ -11,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rainbow_vale.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/184.jpg
 Oracle:{T}: Add one mana of any color to your mana pool. An opponent gains control of Rainbow Vale at the beginning of the next end step.
-End

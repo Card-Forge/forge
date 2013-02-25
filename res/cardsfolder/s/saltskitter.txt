@@ -1,7 +1,6 @@
 Name:Saltskitter
 ManaCost:3 W
 Types:Creature Wurm
-Text:no text
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other |TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever another creature enters the battlefield, exile CARDNAME. | Static$ True
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDelTrig
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saltskitter.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/14.jpg
 Oracle:Whenever another creature enters the battlefield, exile Saltskitter. Return Saltskitter to the battlefield under its owner's control at the beginning of the next end step.
-End

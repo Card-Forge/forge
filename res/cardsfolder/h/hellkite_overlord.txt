@@ -1,7 +1,6 @@
 Name:Hellkite Overlord
 ManaCost:4 B R R G
 Types:Creature Dragon
-Text:no text
 PT:8/8
 K:Flying
 K:Trample
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellkite_overlord.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/172.jpg
 Oracle:Flying, trample, haste\n{R}: Hellkite Overlord gets +1/+0 until end of turn.\n{B}{G}: Regenerate Hellkite Overlord.
-End

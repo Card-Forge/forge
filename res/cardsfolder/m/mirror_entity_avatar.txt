@@ -1,7 +1,6 @@
 Name:Mirror Entity Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+1/-2
 A:AB$ ChooseType | ActivationZone$ Command | Cost$ X | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBAnimate | SpellDescription$ Choose a creature type. Until end of turn, creatures you control of the chosen type become X/X and gain all creature types.
 SVar:DBAnimate:DB$ AnimateAll | Power$ X | Toughness$ X | References$ X | Types$ AllCreatureTypes | ValidCards$ Creature.YouCtrl+ChosenType
@@ -10,4 +9,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/mirror_entity_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/mirror-entity.jpg
 Oracle:Hand +1, life -2\n{X}: Choose a creature type. Until end of turn, creatures you control of the chosen type become X/X and gain all creature types.
-End

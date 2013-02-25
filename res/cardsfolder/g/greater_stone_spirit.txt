@@ -1,7 +1,6 @@
 Name:Greater Stone Spirit
 ManaCost:4 R R
 Types:Creature Elemental Spirit
-Text:no text
 PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CantBeBlockedBy Creature.withFlying | Description$ CARDNAME can't be blocked by creatures with flying.
 A:AB$ Pump | Cost$ 2 R | ValidTgts$ Creature | NumDef$ 2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +0/+2 and gains "R: This creature gets +1/+0 until end of turn."
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_stone_spirit.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/84.jpg
 Oracle:Greater Stone Spirit can't be blocked by creatures with flying.\n{2}{R}: Until end of turn, target creature gets +0/+2 and gains "{R}: This creature gets +1/+0 until end of turn."
-End

@@ -1,11 +1,9 @@
 Name:Dissipate
 ManaCost:1 U U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Exile | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dissipate.jpg
 Oracle:Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/61.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/53.jpg
-End

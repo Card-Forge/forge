@@ -1,7 +1,6 @@
 Name:Simian Grunts
 ManaCost:2 G
 Types:Creature Ape
-Text:no text
 PT:3/4
 K:Flash
 K:Echo:2 G
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simian_grunts.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/113.jpg
 Oracle:Flash\nEcho {2}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
-End

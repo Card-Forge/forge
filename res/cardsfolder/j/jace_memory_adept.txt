@@ -1,7 +1,6 @@
 Name:Jace, Memory Adept
 ManaCost:3 U U
 Types:Planeswalker Jace
-Text:no text
 Loyalty:4
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Defined$ You | SubAbility$ DBMill | Planeswalker$ True | SpellDescription$ Draw a card.  Target player puts the top card of his or her library into his or her graveyard.
 SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/jace_memory_adep
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/56.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/58.jpg
 Oracle:[+1] Draw a card. Target player puts the top card of his or her library into his or her graveyard.\n[0] Target player puts the top ten cards of his or her library into his or her graveyard.\n[-7] Any number of target players each draw twenty cards.
-End

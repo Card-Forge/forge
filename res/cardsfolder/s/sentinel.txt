@@ -1,7 +1,6 @@
 Name:Sentinel
 ManaCost:4
 Types:Artifact Creature Shapeshifter
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.blockedBySource,Creature.blockingSource | TgtPrompt$ Select target creature blocking or being blocked by this creature | SubAbility$ DBAnimate | StackDescription$ None | SpellDescription$ CARDNAME's toughness becomes 1 plus the power of target creature blocking or blocked by CARDNAME. (This effect lasts indefinitely.)
 SVar:DBAnimate:DB$ Animate | Defined$ Self | Toughness$ X | Permanent$ True
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/sentinel.jpg
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/87.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/239.jpg
 Oracle:{0}: Sentinel's toughness becomes 1 plus the power of target creature blocking or blocked by Sentinel. (This effect lasts indefinitely.)
-End

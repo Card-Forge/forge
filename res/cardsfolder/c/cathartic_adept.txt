@@ -1,11 +1,9 @@
 Name:Cathartic Adept
 ManaCost:U
 Types:Creature Human Wizard
-Text:no text
 PT:1/1
 A:AB$ Mill | Cost$ T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top card of his or her library into his or her graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathartic_adept.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/34.jpg
 Oracle:{T}: Target player puts the top card of his or her library into his or her graveyard.
-End

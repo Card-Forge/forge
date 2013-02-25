@@ -1,7 +1,6 @@
 Name:Mayor of Avabruck
 ManaCost:1 G
 Types:Creature Human Advisor Werewolf
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Human+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Human creatures you control get +1/+1.
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
@@ -17,7 +16,6 @@ Name:Howlpack Alpha
 ManaCost:no cost
 Colors:green
 Types:Creature Werewolf
-Text:no text
 PT:3/3
 S:Mode$ Continuous | Affected$ Creature.Werewolf+Other+YouCtrl,Creature.Wolf+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Werewolf and Wolf creatures you control get +1/+1.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield.
@@ -27,4 +25,3 @@ SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wolf | TokenCol
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howlpack_alpha.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/193b.jpg
 Oracle:Other Werewolf and Wolf creatures you control get +1/+1.\nAt the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack Alpha.
-End

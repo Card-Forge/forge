@@ -1,7 +1,6 @@
 Name:Tidal Control
 ManaCost:1 U U
 Types:Enchantment
-Text:no text
 K:Cumulative upkeep:2
 A:AB$ Counter | Cost$ 2 | TargetType$ Spell | TgtPrompt$ Select target red or green spell | ValidTgts$ Card.Green,Card.Red | AnyPlayer$ True | SpellDescription$ Counter target red or green spell. Any player may activate this ability.
 A:AB$ Counter | Cost$ PayLife<2> | TargetType$ Spell | TgtPrompt$ Select target red of green spell | ValidTgts$ Card.Green,Card.Red | AnyPlayer$ True | SpellDescription$ Counter target red or green spell. Any player may activate this ability.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_control.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/59.jpg
 Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nPay 2 life or {2}: Counter target red or green spell. Any player may activate this ability.
-End

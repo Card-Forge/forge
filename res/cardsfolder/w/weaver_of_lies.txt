@@ -1,7 +1,6 @@
 Name:Weaver of Lies
 ManaCost:5 U U
 Types:Creature Beast
-Text:no text
 PT:4/4
 K:Morph:4 U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ DBWeaverofLiesSetState | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, turn any number of target creatures with morph other than CARDNAME face down.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weaver_of_lies.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/57.jpg
 Oracle:Morph {4}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Weaver of Lies is turned face up, turn any number of target creatures with morph other than Weaver of Lies face down.
-End

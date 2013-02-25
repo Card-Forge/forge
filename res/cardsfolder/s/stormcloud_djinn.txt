@@ -1,7 +1,6 @@
 Name:Stormcloud Djinn
 ManaCost:4 U
 Types:Creature Djinn
-Text:no text
 PT:3/3
 K:Flying
 K:CARDNAME can block only creatures with flying.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormcloud_djinn.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/82.jpg
 Oracle:Flying\nStormcloud Djinn can block only creatures with flying.\n{R}{R}: Stormcloud Djinn gets +2/+0 until end of turn and deals 1 damage to you.
-End

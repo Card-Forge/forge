@@ -1,7 +1,6 @@
 Name:Scarwood Hag
 ManaCost:1 G
 Types:Creature Hag
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ G G G G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Forestwalk | SpellDescription$ Target creature gains forestwalk until end of turn.
 A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Forestwalk | SpellDescription$ Target creature loses forestwalk until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarwood_hag.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/49.jpg
 Oracle:{G}{G}{G}{G}, {T}: Target creature gains forestwalk until end of turn.\n{T}: Target creature loses forestwalk until end of turn.
-End

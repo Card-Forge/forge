@@ -1,7 +1,6 @@
 Name:Furyborn Hellkite
 ManaCost:4 R R R
 Types:Creature Dragon
-Text:no text
 PT:6/6
 K:Bloodthirst 6
 K:Flying
@@ -9,4 +8,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furyborn_hellkite.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/135.jpg
 Oracle:Bloodthirst 6 (If an opponent was dealt damage this turn, this creature enters the battlefield with six +1/+1 counters on it.)\nFlying
-End

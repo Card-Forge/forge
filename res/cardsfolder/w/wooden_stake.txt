@@ -1,7 +1,6 @@
 Name:Wooden Stake
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
 T:Mode$ AttackerBlocked | ValidCard$ Creature.Vampire | ValidBlocker$ Card.AttachedBy | Execute$ TrigDestroyBlocked | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a Vampire, destroy that creature. It can't be regenerated.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wooden_stake.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/237.jpg
 Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature blocks or becomes blocked by a Vampire, destroy that creature. It can't be regenerated.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-End

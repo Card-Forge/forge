@@ -1,7 +1,6 @@
 Name:Lowland Tracker
 ManaCost:4 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/2
 K:First Strike
 K:Provoke
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lowland_tracker.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/17.jpg
 Oracle:First strike\nProvoke (When this attacks, you may have target creature defending player controls untap and block it if able.)
-End

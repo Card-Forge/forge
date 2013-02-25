@@ -1,7 +1,6 @@
 Name:Mad Auntie
 ManaCost:2 B
 Types:Creature Goblin Shaman
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Goblin+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Goblin creatures you control get +1/+1.
 A:AB$ Regenerate | ValidTgts$ Creature.Goblin+Other | TgtPrompt$ Select another target Goblin | Cost$ T | SpellDescription$ Regenerate another target Goblin.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_auntie.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/123.jpg
 Oracle:Other Goblin creatures you control get +1/+1.\n{T}: Regenerate another target Goblin.
-End

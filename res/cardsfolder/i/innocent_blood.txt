@@ -1,11 +1,9 @@
 Name:Innocent Blood
 ManaCost:B
 Types:Sorcery
-Text:no text
 A:SP$ Sacrifice | Cost$ B | SacValid$ Creature | Defined$ Each | SpellDescription$ Each player sacrifices a creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/innocent_blood.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/145.jpg
 Oracle:Each player sacrifices a creature.
-End

@@ -1,7 +1,6 @@
 Name:Elephant Resurgence
 ManaCost:1 G
 Types:Sorcery
-Text:no text
 A:SP$ Token | Cost$ 1 G | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | TokenStaticAbilities$ Static | TokenSVars$ X | SubAbility$ DBOppToken | References$ X | SpellDescription$ Each player puts a green Elephant creature token onto the battlefield. Those creatures have "This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard."
 SVar:DBOppToken:DB$Token | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ Opponent | TokenColors$ Green | TokenPower$ Y | TokenToughness$ Y | TokenStaticAbilities$ Static | TokenSVars$ X | References$ X,Y
 SVar:Static:Mode$ Continuous | SetPower$ X | SetToughness$ X | EffectZone$ Battlefield | CharacteristicDefining$ True | Description$ This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard. | References$ X 
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_resurgence.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/113.jpg
 Oracle:Each player puts a green Elephant creature token onto the battlefield. Those creatures have "This creature's power and toughness are each equal to the number of creature cards in its controller's graveyard."
-End

@@ -1,7 +1,6 @@
 Name:Shimian Night Stalker
 ManaCost:3 B B
 Types:Creature Nightstalker
-Text:no text
 PT:4/4
 A:AB$ Effect | Cost$ B T | Name$ Shimian Night Stalker Effect | ReplacementEffects$ DamageEvent,CombatDamageEvent | SVars$ MirrorStrikeDmg,MirrorStrikeCombatDmg,MirroredX | References$ MirrorStrikeDmg,MirrorStrikeCombatDmg,MirroredX | ImprintCards$ Targeted | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | AILogic$ Fog | SpellDescription$ All damage that would be dealt to you this turn by target attacking creature is dealt to CARDNAME instead.
 SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature.IsImprinted | ValidTarget$ You | ReplaceWith$ MirrorStrikeDmg |  IsCombat$ False | Description$ All damage that would be dealt to you this turn by the attacking creature is dealt to Shimian Night Stalker instead.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/shimian_night_st
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/8.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/30.jpg
 Oracle:{B}, {T}: All damage that would be dealt to you this turn by target attacking creature is dealt to Shimian Night Stalker instead.
-End

@@ -1,7 +1,6 @@
 Name:Paraselene
 ManaCost:2 W
 Types:Sorcery
-Text:no text
 A:SP$ DestroyAll | Cost$ 2 W | ValidCards$ Enchantment | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all enchantments. You gain 1 life for each enchantment destroyed this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Remembered$Amount
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paraselene.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/26.jpg
 Oracle:Destroy all enchantments. You gain 1 life for each enchantment destroyed this way.
-End

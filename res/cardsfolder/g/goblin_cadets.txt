@@ -1,7 +1,6 @@
 Name:Goblin Cadets
 ManaCost:R
 Types:Creature Goblin
-Text:no text
 PT:2/1
 T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | Execute$ ChangeControl | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, target opponent gains control of it. (This removes CARDNAME from combat.)
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ ChangeControl | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, target opponent gains control of it. (This removes CARDNAME from combat.)
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_cadets.jp
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/189.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/125.jpg
 Oracle:Whenever Goblin Cadets blocks or becomes blocked, target opponent gains control of it. (This removes Goblin Cadets from combat.)
-End

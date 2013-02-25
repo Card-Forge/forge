@@ -1,11 +1,9 @@
 Name:Sphere of Safety
 ManaCost:4 W
 Types:Enchantment
-Text:no text
 S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You,Planeswalker.YouCtrl | Cost$ X | Description$ Creatures can't attack you or a planeswalker you control unless their controller pays X for each of those creatures, where X is the number of enchantments you control.
 SVar:X:Count$Valid Enchantment.YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_safety.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/24.jpg
 Oracle:Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
-End

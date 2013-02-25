@@ -1,7 +1,6 @@
 Name:False Demise
 ManaCost:2 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChange | TriggerDescription$ When enchanted creature dies, return that card to the battlefield under your control.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/false_demise.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/40.jpg|2
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/80.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, return that card to the battlefield under your control.
-End

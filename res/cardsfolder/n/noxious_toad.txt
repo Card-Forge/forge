@@ -1,7 +1,6 @@
 Name:Noxious Toad
 ManaCost:2 B
 Types:Creature Frog
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each opponent discards a card.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/noxious_toad.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/27.jpg
 Oracle:When Noxious Toad dies, each opponent discards a card.
-End

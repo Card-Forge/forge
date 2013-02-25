@@ -1,7 +1,6 @@
 Name:Nath's Elite
 ManaCost:4 G
 Types:Creature Elf Warrior
-Text:no text
 PT:4/2
 K:All creatures able to block CARDNAME do so.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self |  Execute$ TrigClash | TriggerDescription$ When CARDNAME enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naths_elite.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/231.jpg
 Oracle:All creatures able to block Nath's Elite do so.\nWhen Nath's Elite enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Nath's Elite. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-End

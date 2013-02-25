@@ -1,7 +1,6 @@
 Name:Anti-Magic Aura
 ManaCost:2 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ CantTarget | ValidCard$ Creature.EnchantedBy | Spell$ True | Description$ Enchanted creature can't be the target of spells and can't be enchanted. This effect doesn't remove CARDNAME.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/anti_magic_aura.
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/72.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/45.jpg
 Oracle:Enchant creature\nEnchanted creature can't be the target of spells and can't be enchanted. This effect doesn't remove Anti-Magic Aura.
-End

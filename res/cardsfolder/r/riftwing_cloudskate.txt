@@ -1,7 +1,6 @@
 Name:Riftwing Cloudskate
 ManaCost:3 U U
 Types:Creature Illusion
-Text:no text
 PT:2/2
 K:Flying
 K:Suspend:3:1 U
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riftwing_cloudskate.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/73.jpg
 Oracle:Flying\nWhen Riftwing Cloudskate enters the battlefield, return target permanent to its owner's hand.\nSuspend 3-{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
-End

@@ -1,7 +1,6 @@
 Name:Timberline Ridge
 ManaCost:no cost
 Types:Land
-Text:no text
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | CheckSVar$ X | SVarCompare$ EQ1 | Description$ CARDNAME doesn't untap during your untap step if it has a depletion counter on it.
 A:AB$ Mana | Cost$ T | Produced$ R | Amount$ 1 | SubAbility$ AddCounter | SpellDescription$ Add R to your mana pool. Put a depletion counter on CARDNAME.
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 1 | SubAbility$ AddCounter | SpellDescription$ Add G to your mana pool. Put a depletion counter on CARDNAME.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timberline_ridge.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/356.jpg
 Oracle:Timberline Ridge doesn't untap during your untap step if it has a depletion counter on it.\nAt the beginning of your upkeep, remove a depletion counter from Timberline Ridge.\n{T}: Add {R} or {G} to your mana pool. Put a depletion counter on Timberline Ridge.
-End

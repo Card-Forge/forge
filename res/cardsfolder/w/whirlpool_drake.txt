@@ -1,7 +1,6 @@
 Name:Whirlpool Drake
 ManaCost:3 U
 Types:Creature Drake
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeAll | TriggerDescription$ When CARDNAME enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlpool_drake.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/34.jpg
 Oracle:Flying\nWhen Whirlpool Drake enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.\nWhen Whirlpool Drake dies, shuffle the cards from your hand into your library, then draw that many cards.
-End

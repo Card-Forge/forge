@@ -1,7 +1,6 @@
 Name:Syncopate
 ManaCost:X U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ X U | References$ X | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Exile | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays X. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 SVar:X:Count$xPaid
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/syncopate.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/103.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/54.jpg
 Oracle:Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-End

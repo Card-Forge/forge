@@ -1,7 +1,6 @@
 Name:Curse of Stalked Prey
 ManaCost:1 R
 Types:Enchantment Aura Curse
-Text:no text
 K:Enchant player
 A:SP$ Attach | Cost$ 1 R| ValidTgts$ Player | AILogic$ Curse
 T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Player.EnchantedBy | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_stalked_prey.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/136.jpg
 Oracle:Enchant player\nWhenever a creature deals combat damage to enchanted player, put a +1/+1 counter on that creature.
-End

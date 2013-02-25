@@ -1,7 +1,6 @@
 Name:Mystic Retrieval
 ManaCost:3 U
 Types:Sorcery
-Text:no text
 K:Flashback 2 R
 A:SP$ ChangeZone | Cost$ 3 U | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_retrieval.jpg
@@ -10,4 +9,3 @@ DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_retrieval.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/42.jpg
 Oracle:Return target instant or sorcery card from your graveyard to your hand.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

@@ -1,7 +1,6 @@
 Name:Riptide Replicator
 ManaCost:X 4
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SubAbility$ ChooseCT | SpellDescription$ As CARDNAME enters the battlefield, choose a color and a creature type.
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_replicator.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/309.jpg
 Oracle:As Riptide Replicator enters the battlefield, choose a color and a creature type.\nRiptide Replicator enters the battlefield with X charge counters on it.\n{4}, {T}: Put an X/X creature token of the chosen color and type onto the battlefield, where X is the number of charge counters on Riptide Replicator.
-End

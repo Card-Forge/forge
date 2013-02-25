@@ -1,7 +1,6 @@
 Name:Stonehewer Giant
 ManaCost:3 W W
 Types:Creature Giant Warrior
-Text:no text
 PT:4/4
 K:Vigilance
 A:AB$ ChangeZone | Cost$ 1 W T | Origin$ Library | Destination$ Battlefield | ChangeType$ Equipment | ChangeNum$ 1 | Imprint$ True | SubAbility$ DBChoose | SpellDescription$ Search your library for an Equipment card and put it onto the battlefield. Attach it to a creature you control. Then shuffle your library.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonehewer_giant.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/24.jpg
 Oracle:Vigilance\n{1}{W}, {T}: Search your library for an Equipment card and put it onto the battlefield. Attach it to a creature you control. Then shuffle your library.
-End

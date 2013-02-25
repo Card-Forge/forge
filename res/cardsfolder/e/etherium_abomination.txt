@@ -1,11 +1,9 @@
 Name:Etherium Abomination
 ManaCost:3 U B
 Types:Artifact Creature Horror
-Text:no text
 PT:4/3
 K:Unearth:1 U B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etherium_abomination.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/20.jpg
 Oracle:Unearth {1}{U}{B} ({1}{U}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-End

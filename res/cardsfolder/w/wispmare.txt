@@ -1,7 +1,6 @@
 Name:Wispmare
 ManaCost:2 W
 Types:Creature Elemental
-Text:no text
 PT:1/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wispmare.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/48.jpg
 Oracle:Flying\nWhen Wispmare enters the battlefield, destroy target enchantment.\nEvoke {W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
-End

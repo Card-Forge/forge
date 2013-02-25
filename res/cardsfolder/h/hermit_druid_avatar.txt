@@ -1,7 +1,6 @@
 Name:Hermit Druid Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:-2/-2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, put a land card from your library chosen at random onto the battlefield.
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | AtRandom$ True | ChangeType$ Land
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/hermit_druid_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/hermit-druid.jpg
 Oracle:Hand -2, life -2\nAt the beginning of your upkeep, put a land card from your library chosen at random onto the battlefield.
-End

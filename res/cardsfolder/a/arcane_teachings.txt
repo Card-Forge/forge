@@ -1,7 +1,6 @@
 Name:Arcane Teachings
 ManaCost:2 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddAbility$ Damage | Description$ Enchanted creature gets +2/+2 and has "T: This creature deals 1 damage to target creature or player."
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_teachings
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +2/+2 and has "{T}: This creature deals 1 damage to target creature or player."
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/78.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/188.jpg
-End

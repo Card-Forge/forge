@@ -1,7 +1,6 @@
 Name:Keymaster Rogue
 ManaCost:3 U
 Types:Creature Human Rogue
-Text:no text
 PT:3/2
 K:Unblockable
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keymaster_rogue.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/39.jpg
 Oracle:Keymaster Rogue is unblockable.\nWhen Keymaster Rogue enters the battlefield, return a creature you control to its owner's hand.
-End

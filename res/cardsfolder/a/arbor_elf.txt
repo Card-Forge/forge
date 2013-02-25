@@ -1,7 +1,6 @@
 Name:Arbor Elf
 ManaCost:G
 Types:Creature Elf Druid
-Text:no text
 PT:1/1
 A:AB$ Untap | Cost$ T | ValidTgts$ Forest | TgtPrompt$ Select target forest | SpellDescription$ Untap target Forest.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/arbor_elf.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/160.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/95.jpg
 Oracle:{T}: Untap target Forest.
-End

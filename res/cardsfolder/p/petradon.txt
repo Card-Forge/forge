@@ -1,7 +1,6 @@
 Name:Petradon
 ManaCost:6 R R
 Types:Creature Nightmare Beast
-Text:no text
 PT:5/6
 A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile two target lands.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petradon.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/108.jpg
 Oracle:When Petradon enters the battlefield, exile two target lands.\nWhen Petradon leaves the battlefield, return the exiled cards to the battlefield under their owners' control.\n{R}: Petradon gets +1/+0 until end of turn.
-End

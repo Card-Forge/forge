@@ -1,7 +1,6 @@
 Name:Urborg Stalker
 ManaCost:3 B
 Types:Creature Horror
-Text:no text
 PT:2/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Permanent.nonBlack+nonLand+YouCtrl | PresentCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigDamageYou | TriggerDescription$ At the beginning of each player's upkeep, if that player controls a nonblack, nonland permanent, CARDNAME deals 1 damage to that player.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | IsPresent$ Permanent.nonBlack+nonLand+YouDontCtrl | PresentCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigDamageOpp | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, if that player controls a nonblack, nonland permanent, CARDNAME deals 1 damage to that player.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_stalker.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/27.jpg
 Oracle:At the beginning of each player's upkeep, if that player controls a nonblack, nonland permanent, Urborg Stalker deals 1 damage to that player.
-End

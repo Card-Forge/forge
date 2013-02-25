@@ -1,7 +1,6 @@
 Name:Moonring Mirror
 ManaCost:5
 Types:Artifact
-Text:no text
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, exile the top card of your library face down.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 1 | Defined$ You | Destination$ Exile | ExileFaceDown$ True | RememberMilled$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeHandExile | TriggerDescription$ At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with CARDNAME into your hand.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonring_mirror.jpg
 Oracle:Whenever you draw a card, exile the top card of your library face down.\nAt the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Moonring Mirror into your hand.
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/262.jpg
-End

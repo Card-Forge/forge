@@ -1,7 +1,6 @@
 Name:Sepulchral Primordial
 ManaCost:5 B B
 Types:Creature Avatar
-Text:no text
 PT:5/4
 K:Intimidate
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ReturnOneEach | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, you may put up to one target creature card from that player's graveyard onto the battlefield under your control.
@@ -10,4 +9,3 @@ SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sepulchral_primordial.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/75.jpg
 Oracle:Intimidate\nWhen Sepulchral Primordial enters the battlefield, for each opponent, you may put up to one target creature card from that player's graveyard onto the battlefield under your control.
-End

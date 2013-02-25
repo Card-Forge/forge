@@ -1,7 +1,6 @@
 Name:Shivan Emissary
 ManaCost:2 R
 Types:Creature Human Wizard
-Text:no text
 PT:1/1
 K:Kicker 1 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target nonblack creature. It can't be regenerated.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_emissary.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/166.jpg
 Oracle:Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nWhen Shivan Emissary enters the battlefield, if it was kicked, destroy target nonblack creature. It can't be regenerated.
-End

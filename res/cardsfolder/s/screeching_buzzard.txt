@@ -1,7 +1,6 @@
 Name:Screeching Buzzard
 ManaCost:3 B
 Types:Creature Bird
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each opponent discards a card.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_buzzard.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/165.jpg
 Oracle:Flying\nWhen Screeching Buzzard dies, each opponent discards a card.
-End

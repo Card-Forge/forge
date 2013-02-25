@@ -14,4 +14,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/abduction.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/30.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/55.jpg
 Oracle:Enchant creature\nWhen Abduction enters the battlefield, untap enchanted creature.\nYou control enchanted creature.\nWhen enchanted creature dies, return that card to the battlefield under its owner's control.
-End

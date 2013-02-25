@@ -1,7 +1,6 @@
 Name:Spirit Link
 ManaCost:W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
@@ -18,4 +17,3 @@ SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/47.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/45.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/43.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nWhenever enchanted creature deals damage, you gain that much life.
-End

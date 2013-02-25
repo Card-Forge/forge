@@ -1,7 +1,6 @@
 Name:Mikaeus, the Unhallowed
 ManaCost:3 B B B
 Types:Legendary Creature Zombie Cleric
-Text:no text
 PT:5/5
 K:Intimidate
 T:Mode$ DamageDone | ValidSource$ Human | ValidTarget$ You  | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Human deals damage to you, destroy it.
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mikaeus_the_unhallowed.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/70.jpg
 Oracle:Intimidate\nWhenever a Human deals damage to you, destroy it.\nOther non-Human creatures you control get +1/+1 and have undying. (When a creature with undying dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
-End

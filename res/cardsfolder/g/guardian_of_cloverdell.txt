@@ -1,7 +1,6 @@
 Name:Guardian of Cloverdell
 ManaCost:5 G G
 Types:Creature Treefolk Shaman
-Text:no text
 PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_cloverdell.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/216.jpg
 Oracle:When Guardian of Cloverdell enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.\n{G}, Sacrifice a Kithkin: You gain 1 life.
-End

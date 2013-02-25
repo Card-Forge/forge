@@ -1,7 +1,6 @@
 Name:Rukh Egg
 ManaCost:3 R
 Types:Creature Bird
-Text:no text
 PT:0/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | DelayedTrigger$ DelTrigLeaves | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step.
 SVar:DelTrigLeaves:Mode$ Phase | Phase$ End of Turn | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ Put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step.
@@ -13,4 +12,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/216.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/214.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/52.jpg|2
 Oracle:When Rukh Egg dies, put a 4/4 red Bird creature token with flying onto the battlefield at the beginning of the next end step.
-End

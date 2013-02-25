@@ -1,7 +1,6 @@
 Name:Peace of Mind
 ManaCost:1 W
 Types:Enchantment
-Text:no text
 A:AB$ GainLife | Cost$ W Discard<1/Card> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/peace_of_mind.jp
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/13.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/33.jpg
 Oracle:{W}, Discard a card: You gain 3 life.
-End

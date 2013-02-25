@@ -1,7 +1,6 @@
 Name:Bargaining Table
 ManaCost:5
 Types:Artifact
-Text:no text
 # The ability is untargeted (see: http://magiccards.info/mm/en/288.html), so the opponent is automaticaly chosen. This has to be modified as soon as multiplayer formats get supported.
 A:AB$ Draw| Cost$ X T | NumCards$ 1 | References$ X | SpellDescription$ Draw a card. X is the number of cards in an opponent's hand.
 SVar:X:Count$InOppHand
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bargaining_table.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/288.jpg
 Oracle:{X}, {T}: Draw a card. X is the number of cards in an opponent's hand.
-End

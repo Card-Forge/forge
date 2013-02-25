@@ -1,7 +1,6 @@
 Name:Landslide
 ManaCost:R
 Types:Sorcery
-Text:no text
 A:SP$ Sacrifice | Cost$ R | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Mountain | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDamage | SpellDescription$ Sacrifice any number of Mountains. CARDNAME deals that much damage to target player.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ DmgX | References$ DmgX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/landslide.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/92.jpg
 Oracle:Sacrifice any number of Mountains. Landslide deals that much damage to target player.
-End

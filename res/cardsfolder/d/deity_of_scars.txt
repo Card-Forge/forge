@@ -1,7 +1,6 @@
 Name:Deity of Scars
 ManaCost:BG BG BG BG BG
 Types:Creature Spirit Avatar
-Text:no text
 PT:7/7
 K:Trample
 K:etbCounter:M1M1:2
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://wizards.com/global/images/magic/general/deity_of_scars.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/118.jpg
 Oracle:Trample\nDeity of Scars enters the battlefield with two -1/-1 counters on it.\n{B/G}, Remove a -1/-1 counter from Deity of Scars: Regenerate Deity of Scars.
-End

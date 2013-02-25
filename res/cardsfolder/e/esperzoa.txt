@@ -1,7 +1,6 @@
 Name:Esperzoa
 ManaCost:2 U
 Types:Artifact Creature Jellyfish
-Text:no text
 PT:4/3
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, return an artifact you control to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esperzoa.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/25.jpg
 Oracle:Flying\nAt the beginning of your upkeep, return an artifact you control to its owner's hand.
-End

@@ -1,7 +1,6 @@
 Name:Memory Jar
 ManaCost:5
 Types:Artifact
-Text:no text
 A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | ChangeType$ Card | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ YouDraw | SpellDescription$ Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.
 SVar:YouDraw:DB$ Draw | Defined$ You | NumCards$ 7 | SubAbility$ OppDraw
 SVar:OppDraw:DB$ Draw | Defined$ Opponent | NumCards$ 7 | SubAbility$ DelayedReturn
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_jar.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/129.jpg
 Oracle:{T}, Sacrifice Memory Jar: Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.
-End

@@ -1,7 +1,6 @@
 Name:Avatar of Will
 ManaCost:6 U U
 Types:Creature Avatar
-Text:no text
 PT:5/6
 K:Flying
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | Description$ If an opponent has no cards in hand, CARDNAME costs 6 less to cast.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_will.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/30.jpg
 Oracle:If an opponent has no cards in hand, Avatar of Will costs {6} less to cast.\nFlying
-End

@@ -1,10 +1,8 @@
 Name:Scare Tactics
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ PumpAll | Cost$ B | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card6086.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/73.jpg
 Oracle:Creatures you control get +1/+0 until end of turn.
-End

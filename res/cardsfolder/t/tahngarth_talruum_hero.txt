@@ -1,7 +1,6 @@
 Name:Tahngarth, Talruum Hero
 ManaCost:3 R R
 Types:Legendary Creature Minotaur Warrior
-Text:no text
 PT:4/4
 K:Vigilance
 A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SubAbility$ DamageThis | SpellDescription$ CARDNAME deals damage equal to its power to target creature. That creature deals damage equal to its power to CARDNAME.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tahngarth_talruum_hero.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/74.jpg|2
 Oracle:Vigilance\n{1}{R}, {T}: Tahngarth, Talruum Hero deals damage equal to its power to target creature. That creature deals damage equal to its power to Tahngarth.
-End

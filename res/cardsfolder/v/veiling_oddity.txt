@@ -1,7 +1,6 @@
 Name:Veiling Oddity
 ManaCost:3 U
 Types:Creature Illusion
-Text:no text
 PT:2/3
 K:Suspend:4:1 U
 T:Mode$ CounterRemoved | ValidCard$ Card.Self  | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigEffect | IsPresent$ Card.Self+counters_GE1_TIME | PresentZone$ Exile | PresentCompare$ EQ0 | TriggerDescription$ When the last time counter is removed from CARDNAME while it's exiled, creatures are unblockable this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veiling_oddity.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/51.jpg
 Oracle:Suspend 4-{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhen the last time counter is removed from Veiling Oddity while it's exiled, creatures are unblockable this turn.
-End

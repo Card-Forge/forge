@@ -1,7 +1,6 @@
 Name:Crystal Seer
 ManaCost:4 U
 Types:Creature Vedalken Wizard
-Text:no text
 PT:2/2
 A:AB$ ChangeZone | Cost$ 4 U | Origin$ Battlefield | Destination$ Hand | Defined$ Self | SpellDescription$ Return CARDNAME to it's owner's hand.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, then put them back in any order.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_seer.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/23.jpg
 Oracle:When Crystal Seer enters the battlefield, look at the top four cards of your library, then put them back in any order.\n{4}{U}: Return Crystal Seer to its owner's hand.
-End

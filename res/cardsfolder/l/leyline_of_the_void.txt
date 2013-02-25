@@ -10,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_the_v
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/52.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/101.jpg
 Oracle:If Leyline of the Void is in your opening hand, you may begin the game with it on the battlefield.\nIf a card would be put into an opponent's graveyard from anywhere, exile it instead.
-End

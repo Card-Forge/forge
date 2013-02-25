@@ -1,7 +1,6 @@
 Name:Soul Warden
 ManaCost:W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
@@ -12,4 +11,3 @@ SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/44.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/46.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/21.jpg
 Oracle:Whenever another creature enters the battlefield, you gain 1 life.
-End

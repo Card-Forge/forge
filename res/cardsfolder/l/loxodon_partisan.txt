@@ -1,7 +1,6 @@
 Name:Loxodon Partisan
 ManaCost:4 W
 Types:Creature Elephant Soldier
-Text:no text
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBattleCry | TriggerDescription$ Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
 SVar:TrigBattleCry:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | NumAtt$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_partisan.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/12.jpg
 Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
-End

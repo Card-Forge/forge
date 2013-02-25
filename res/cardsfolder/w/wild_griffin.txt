@@ -1,7 +1,6 @@
 Name:Wild Griffin
 ManaCost:2 W
 Types:Creature Griffin
-Text:no text
 PT:2/2
 K:Flying
 SVar:Rarity:Common
@@ -11,4 +10,3 @@ SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/150.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/31.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/59.jpg
 Oracle:Flying
-End

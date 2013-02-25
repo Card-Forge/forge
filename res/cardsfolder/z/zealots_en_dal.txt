@@ -1,7 +1,6 @@
 Name:Zealots en-Dal
 ManaCost:3 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Permanent.nonLand+White+YouCtrl | PresentCompare$ EQX | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1 | References$ X
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealots_en_dal.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/26.jpg
 Oracle:At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life.
-End

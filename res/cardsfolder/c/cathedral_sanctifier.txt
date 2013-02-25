@@ -1,7 +1,6 @@
 Name:Cathedral Sanctifier
 ManaCost:W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathedral_sanctifier.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/11.jpg
 Oracle:When Cathedral Sanctifier enters the battlefield, you gain 3 life.
-End

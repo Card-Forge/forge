@@ -1,7 +1,6 @@
 Name:Slitherhead
 ManaCost:BG
 Types:Creature Plant Zombie
-Text:no text
 PT:1/1
 A:AB$ PutCounter | Cost$ 0 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | References$ X | PrecostDesc$ Scavenge | SpellDescription$ Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.
 SVar:X:Count$CardPower
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slitherhead.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/222.jpg
 Oracle:Scavenge {0} ({0}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
-End

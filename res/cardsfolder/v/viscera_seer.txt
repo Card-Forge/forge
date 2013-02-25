@@ -1,7 +1,6 @@
 Name:Viscera Seer
 ManaCost:B
 Types:Creature Vampire Wizard
-Text:no text
 PT:1/1
 A:AB$ Scry | Cost$ Sac<1/Creature> | ScryNum$ 1 | SpellDescription$ Scry 1. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscera_seer.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/120.jpg
 Oracle:Sacrifice a creature: Scry 1. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
-End

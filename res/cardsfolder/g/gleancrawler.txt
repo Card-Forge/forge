@@ -1,7 +1,6 @@
 Name:Gleancrawler
 ManaCost:3 BG BG BG
 Types:Creature Insect Horror
-Text:no text
 PT:6/6
 K:Trample
 T:Mode$Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleancrawler.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/247.jpg
 Oracle:({B/G} can be paid with either {B} or {G}.)\nTrample\nAt the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
-End

@@ -1,7 +1,6 @@
 Name:Telim'Tor
 ManaCost:4 R
 Types:Legendary Creature Human Knight
-Text:no text
 PT:2/2
 K:Flanking
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME attacks, all attacking creatures with flanking get +1/+1 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telimtor.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/197.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhenever Telim'Tor attacks, all attacking creatures with flanking get +1/+1 until end of turn.
-End

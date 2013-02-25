@@ -1,7 +1,6 @@
 Name:Selkie Hedge-Mage
 ManaCost:2 GU
 Types:Creature Merfolk Wizard
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Forest.YouCtrl | PresentCompare$ GE2 | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Forests, you may gain 3 life.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Island.YouCtrl | PresentCompare$ GE2 | Execute$ TrigBounce | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selkie_hedge_mage.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/158.jpg
 Oracle:When Selkie Hedge-Mage enters the battlefield, if you control two or more Forests, you may gain 3 life.\nWhen Selkie Hedge-Mage enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.
-End

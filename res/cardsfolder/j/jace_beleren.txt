@@ -1,7 +1,6 @@
 Name:Jace Beleren
 ManaCost:1 U U
 Types:Planeswalker Jace
-Text:no text
 Loyalty:3
 A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Defined$ Each | Planeswalker$ True | SpellDescription$ Each player draws a card.
 A:AB$ Draw | Cost$ SubCounter<1/LOYALTY> | ValidTgts$ Player | Planeswalker$ True | SpellDescription$ Target player draws a card.
@@ -12,4 +11,3 @@ SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/58.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/58.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/71.jpg
 Oracle:[+2] Each player draws a card.\n[-1] Target player draws a card.\n[-10] Target player puts the top twenty cards of his or her library into his or her graveyard.
-End

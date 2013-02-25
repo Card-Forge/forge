@@ -1,10 +1,8 @@
 Name:Sylvan Tutor
 ManaCost:G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ G | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card and reveal that card. Shuffle your library, then put the card on top of it.
 SVar:Rarity:Rare
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/sylvan_tutor.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/114.jpg
 Oracle:Search your library for a creature card and reveal that card. Shuffle your library, then put the card on top of it.
-End

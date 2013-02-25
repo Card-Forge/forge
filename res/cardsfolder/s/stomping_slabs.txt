@@ -1,7 +1,6 @@
 Name:Stomping Slabs
 ManaCost:2 R
 Types:Sorcery
-Text:no text
 A:SP$ Dig | Cost$ 2 R | DigNum$ 7 | Reveal$ True | RememberRevealed$ True | DestinationZone$ Library | LibraryPosition$ -1 | LibraryPosition2$ -1 | SubAbility$ DBDamage | SpellDescription$ Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named CARDNAME was revealed this way, CARDNAME deals 7 damage to target creature or player.
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 7 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | ConditionDefined$ Remembered | ConditionPresent$ Card.namedStomping Slabs | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stomping_slabs.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/107.jpg
 Oracle:Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, Stomping Slabs deals 7 damage to target creature or player.
-End

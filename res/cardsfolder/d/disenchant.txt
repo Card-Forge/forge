@@ -1,7 +1,6 @@
 Name:Disenchant
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disenchant.jpg
@@ -20,4 +19,3 @@ SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/214.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/203.jpg
 SetInfo:LEA|Common|http://magiccards.info/scans/en/al/202.jpg
 Oracle:Destroy target artifact or enchantment.
-End

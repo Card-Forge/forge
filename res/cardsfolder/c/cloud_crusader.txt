@@ -1,7 +1,6 @@
 Name:Cloud Crusader
 ManaCost:2 W W
 Types:Creature Human Knight
-Text:no text
 PT:2/3
 K:Flying
 K:First Strike
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_crusader.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/10.jpg
 Oracle:Flying\nFirst strike (This creature deals combat damage before creatures without first strike.)
-End

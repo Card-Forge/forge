@@ -1,7 +1,6 @@
 Name:Obelisk of Naya
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_naya.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/216.jpg
 Oracle:{T}: Add {R}, {G}, or {W} to your mana pool.
-End

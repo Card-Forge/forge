@@ -1,11 +1,9 @@
 Name:Enchanted Evening
 ManaCost:3 WU WU
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Permanent | AddType$ Enchantment | Description$ All permanents are enchantments in addition to their other types.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enchanted_evening.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/140.jpg
 Oracle:All permanents are enchantments in addition to their other types.
-End

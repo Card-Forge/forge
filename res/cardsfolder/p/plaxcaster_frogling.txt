@@ -1,7 +1,6 @@
 Name:Plaxcaster Frogling
 ManaCost:1 G U
 Types:Creature Frog Mutant
-Text:no text
 PT:0/0
 K:Graft 3
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | KW$ Shroud | SpellDescription$ Target creature with a +1/+1 counter on it gains shroud until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plaxcaster_frogling.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/123.jpg
 Oracle:Graft 3 (This creature enters the battlefield with three +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\n{2}: Target creature with a +1/+1 counter on it gains shroud until end of turn. (It can't be the target of spells or abilities.)
-End

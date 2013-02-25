@@ -1,7 +1,6 @@
 Name:Ambition's Cost
 ManaCost:3 B
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 3 B | NumCards$ 3 | SpellDescription$ You draw three cards and you lose 3 life. | SubAbility$ DB
 SVar:DB:DB$LoseLife | LifeAmount$ 3
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ambitions_cost.j
 Oracle:You draw three cards and you lose 3 life.
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/118.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/67.jpg
-End

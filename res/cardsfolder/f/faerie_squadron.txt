@@ -1,7 +1,6 @@
 Name:Faerie Squadron
 ManaCost:U
 Types:Creature Faerie
-Text:no text
 PT:1/1
 K:Kicker 3 U
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ SquadronEnlist | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with flying.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_squadron.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/58.jpg
 Oracle:Kicker {3}{U} (You may pay an additional {3}{U} as you cast this spell.)\nIf Faerie Squadron was kicked, it enters the battlefield with two +1/+1 counters on it and with flying.
-End

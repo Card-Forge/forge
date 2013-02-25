@@ -1,7 +1,6 @@
 Name:Ashling, the Extinguisher
 ManaCost:2 B B
 Types:Legendary Creature Elemental Shaman
-Text:no text
 PT:4/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose target creature that player controls. He or she sacrifices that creature.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | Sacrifice$ True | TgtPrompt$ Select target creature defending player controls
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Eventide/ashling_the_extinguisher.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/33.jpg
 Oracle:Whenever Ashling, the Extinguisher deals combat damage to a player, choose target creature that player controls. He or she sacrifices that creature.
-End

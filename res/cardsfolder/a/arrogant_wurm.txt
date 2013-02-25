@@ -1,7 +1,6 @@
 Name:Arrogant Wurm
 ManaCost:3 G G
 Types:Creature Wurm
-Text:no text
 PT:4/4
 K:Trample
 K:Madness:2 G
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrogant_wurm.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/120.jpg
 Oracle:Trample\nMadness {2}{G} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-End

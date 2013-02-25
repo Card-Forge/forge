@@ -1,7 +1,6 @@
 Name:Ogre Arsonist
 ManaCost:4 R
 Types:Creature Ogre
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target land.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_arsonist.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/110.jpg
 Oracle:When Ogre Arsonist enters the battlefield, destroy target land.
-End

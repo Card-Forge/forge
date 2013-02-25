@@ -1,7 +1,6 @@
 Name:Elder Spawn
 ManaCost:4 U U U
 Types:Creature Spawn
-Text:no text
 PT:6/6
 K:CARDNAME can't be blocked by red creatures.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigElderSpawnSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, unless you sacrifice an Island, sacrifice CARDNAME and it deals 6 damage to you. CARDNAME can't be blocked by red creatures.
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_spawn.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/52.jpg
 Oracle:At the beginning of your upkeep, unless you sacrifice an Island, sacrifice Elder Spawn and it deals 6 damage to you.\nElder Spawn can't be blocked by red creatures.
-End

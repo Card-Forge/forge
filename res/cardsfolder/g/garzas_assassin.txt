@@ -1,7 +1,6 @@
 Name:Garza's Assassin
 ManaCost:B B B
 Types:Creature Human Assassin
-Text:no text
 PT:2/2
 K:Recover:PayLife<X>
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | References$ X | SpellDescription$ Destroy target nonblack creature.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garzas_assassin.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/57.jpg
 Oracle:Sacrifice Garza's Assassin: Destroy target nonblack creature.\nRecover-Pay half your life, rounded up. (When another creature is put into your graveyard from the battlefield, you may pay half your life, rounded up. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)
-End

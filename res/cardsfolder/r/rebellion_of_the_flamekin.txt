@@ -1,7 +1,6 @@
 Name:Rebellion of the Flamekin
 ManaCost:3 R
 Types:Tribal Enchantment Elemental
-Text:no text
 T:Mode$ Clashed | ValidPlayer$ You | Won$ True | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigTokenW | TriggerDescription$ Whenever you clash, you may pay 1. If you do, put a 3/1 red Elemental Shaman creature token onto the battlefield. If you won, that token gains haste until end of turn. (This ability triggers after the clash ends.)
 SVar:TrigTokenW:AB$Token | Cost$ 1 | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Elemental Shaman | TokenColors$ Red | TokenTypes$ Creature,Elemental,Shaman | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste
 T:Mode$ Clashed | ValidPlayer$ You | Won$ False | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigTokenL | Secondary$ True | TriggerDescription$ Whenever you clash, you may pay 1. If you do, put a 3/1 red Elemental Shaman creature token onto the battlefield. If you won, that token gains haste until end of turn. (This ability triggers after the clash ends.)
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rebellion_of_the_flamekin.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/188.jpg
 Oracle:Whenever you clash, you may pay {1}. If you do, put a 3/1 red Elemental Shaman creature token onto the battlefield. If you won, that token gains haste until end of turn. (This ability triggers after the clash ends.)
-End

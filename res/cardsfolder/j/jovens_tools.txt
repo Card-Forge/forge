@@ -1,7 +1,6 @@
 Name:Joven's Tools
 ManaCost:6
 Types:Artifact
-Text:no text
 A:AB$ Pump | Cost$ 4 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't be blocked except by Walls. | SpellDescription$ Target creature can't be blocked this turn except by Walls.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/jovens_tools.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/133.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/386.jpg
 Oracle:{4}, {T}: Target creature can't be blocked this turn except by Walls.
-End

@@ -1,7 +1,6 @@
 Name:Lawbringer
 ManaCost:2 W
 Types:Creature Kor Rebel
-Text:no text
 PT:2/2
 A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.Red | TgtPrompt$ Select target red Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target red creature.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lawbringer.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/10.jpg
 Oracle:{T}, Sacrifice Lawbringer: Exile target red creature.
-End

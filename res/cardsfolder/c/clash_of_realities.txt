@@ -1,7 +1,6 @@
 Name:Clash of Realities
 ManaCost:3 R
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.Spirit | EffectZone$ Battlefield | AffectedZone$ Exile,Graveyard,Hand,Library | AddTrigger$ CoRSpiritETB | AddSVar$ CoRSpiritDmg | Description$ All Spirits have "When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature."
 S:Mode$ Continuous | Affected$ Creature.nonSpirit | EffectZone$ Battlefield | AffectedZone$ Exile,Graveyard,Hand,Library | AddTrigger$ CoRNonETB | AddSVar$ CoRNonDmg | Description$ Non-Spirit creatures have "When this permanent enters the battlefield, you may have it deal 3 damage to target Spirit creature."
 SVar:CoRSpiritETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | TriggerZones$ Battlefield | Execute$ CoRSpiritDmg | TriggerDescription$ When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clash_of_realities.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/97.jpg
 Oracle:All Spirits have "When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature."\nNon-Spirit creatures have "When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature."
-End

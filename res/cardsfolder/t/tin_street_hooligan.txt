@@ -1,7 +1,6 @@
 Name:Tin Street Hooligan
 ManaCost:1 R
 Types:Creature Goblin Rogue
-Text:no text
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ManaSpent$ G | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if G was spent to cast CARDNAME, destroy target artifact.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tin_street_hooligan.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/78.jpg
 Oracle:When Tin Street Hooligan enters the battlefield, if {G} was spent to cast Tin Street Hooligan, destroy target artifact.
-End

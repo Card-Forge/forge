@@ -1,7 +1,6 @@
 Name:Insidious Dreams
 ManaCost:3 B
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 3 B Discard<X/Card> | Origin$ Library | Destination$ Library | ChangeType$ Card | ChangeNum$ ChosenX | LibraryPosition$ 0 | References$ X | SpellDescription$ Search your library for X cards. Then shuffle your library and put those cards on top of it in any order.
 SVar:X:XChoice
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insidious_dreams.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/66.jpg
 Oracle:As an additional cost to cast Insidious Dreams, discard X cards.\nSearch your library for X cards. Then shuffle your library and put those cards on top of it in any order.
-End

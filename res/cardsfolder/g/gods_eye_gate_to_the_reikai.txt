@@ -1,7 +1,6 @@
 Name:Gods' Eye, Gate to the Reikai
 ManaCost:no cost
 Types:Legendary Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ TriggeredCardController
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gods_eye_gate_to_the_reikai.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/164.jpg
 Oracle:{T}: Add {1} to your mana pool.\nWhen Gods' Eye, Gate to the Reikai is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield.
-End

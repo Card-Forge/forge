@@ -1,7 +1,6 @@
 Name:Gobhobbler Rats
 ManaCost:B R
 Types:Creature Rat
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddAbility$ Pump | Condition$ Hellbent | Description$ Hellbent - As long as you have no cards in hand, CARDNAME gets +1/+0 and has "B: Regenerate CARDNAME."
 SVar:Pump:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gobhobbler_rats.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/111.jpg
 Oracle:Hellbent - As long as you have no cards in hand, Gobhobbler Rats gets +1/+0 and has "{B}: Regenerate Gobhobbler Rats."
-End

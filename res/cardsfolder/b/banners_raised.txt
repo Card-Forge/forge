@@ -1,10 +1,8 @@
 Name:Banners Raised
 ManaCost:R
 Types:Instant
-Text:no text
 A:SP$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banners_raised.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/127.jpg
 Oracle:Creatures you control get +1/+0 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Tombstalker
 ManaCost:6 B B
 Types:Creature Demon
-Text:no text
 PT:5/5
 K:Flying
 K:Delve
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tombstalker.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/91.jpg
 Oracle:Flying\nDelve (You may exile any number of cards from your graveyard as you cast this spell. It costs {1} less to cast for each card exiled this way.)
-End

@@ -1,7 +1,6 @@
 Name:Myr Adapter
 ManaCost:3
 Types:Artifact Creature Myr
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each Equipment attached to it.
 SVar:X:Count$Valid Equipment.Attached
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_adapter.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/210.jpg
 Oracle:Myr Adapter gets +1/+1 for each Equipment attached to it.
-End

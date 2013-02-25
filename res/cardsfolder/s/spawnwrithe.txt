@@ -1,7 +1,6 @@
 Name:Spawnwrithe
 ManaCost:2 G
 Types:Creature Elemental
-Text:no text
 PT:2/2
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a token that's a copy of CARDNAME onto the battlefield.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/spawnwrithe.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/171.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/129.jpg
 Oracle:Trample\nWhenever Spawnwrithe deals combat damage to a player, put a token that's a copy of Spawnwrithe onto the battlefield.
-End

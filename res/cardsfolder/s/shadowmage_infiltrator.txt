@@ -1,7 +1,6 @@
 Name:Shadowmage Infiltrator
 ManaCost:1 U B
 Types:Creature Human Wizard
-Text:no text
 PT:1/3
 K:Fear
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowmage_infil
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/294.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/99.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever Shadowmage Infiltrator deals combat damage to a player, you may draw a card.
-End

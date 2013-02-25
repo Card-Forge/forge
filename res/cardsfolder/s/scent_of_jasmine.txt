@@ -1,7 +1,6 @@
 Name:Scent of Jasmine
 ManaCost:W
 Types:Instant
-Text:no text
 A:SP$ Reveal | Cost$ W | Defined$ You | RevealValid$ Card.White | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfJasmineLife | SpellDescription$ Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
 SVar:DBScentOfJasmineLife:DB$ GainLife | LifeAmount$ ScentOfJasmineX | SubAbility$ DBScentOfJasmineCleanup | References$ ScentOfJasmineX
 SVar:ScentOfJasmineX:Remembered$Amount.Twice
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scent_of_jasmine.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/17.jpg
 Oracle:Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
-End

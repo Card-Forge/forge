@@ -1,7 +1,6 @@
 Name:Guardian of the Gateless
 ManaCost:4 W
 Types:Creature Angel
-Text:no text
 PT:3/3
 K:Flying
 K:CARDNAME can block any number of creatures.
@@ -11,4 +10,3 @@ SVar:X:Count$Valid Creature.blockedBySource
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_the_gateless.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/14.jpg
 Oracle:Flying\nGuardian of the Gateless can block any number of creatures.\nWhenever Guardian of the Gateless blocks, it gets +1/+1 until end of turn for each creature it's blocking.
-End

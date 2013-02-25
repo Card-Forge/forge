@@ -1,7 +1,6 @@
 Name:Cradle of Vitality
 ManaCost:3 W
 Types:Enchantment
-Text:no text
 T:Mode$ LifeGained | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you gain life, you may pay 1 W. If you do, put a +1/+1 counter on target creature for each 1 life you gained.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:TriggerCount$LifeAmount
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_of_vitality.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/7.jpg
 Oracle:Whenever you gain life, you may pay {1}{W}. If you do, put a +1/+1 counter on target creature for each 1 life you gained.
-End

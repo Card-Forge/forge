@@ -1,7 +1,6 @@
 Name:Blood Speaker
 ManaCost:3 B
 Types:Creature Ogre Shaman
-Text:no text
 PT:3/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice CARDNAME. If you do, search your library for a Demon card, reveal that card, and put it into your hand. Then shuffle your library.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Optional$ True | SacValid$ Card.Self | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBTutorDemon
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_speaker.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/103.jpg
 Oracle:At the beginning of your upkeep, you may sacrifice Blood Speaker. If you do, search your library for a Demon card, reveal that card, and put it into your hand. Then shuffle your library.\nWhenever a Demon enters the battlefield under your control, return Blood Speaker from your graveyard to your hand.
-End

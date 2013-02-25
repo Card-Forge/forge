@@ -1,7 +1,6 @@
 Name:Phantasmal Terrain
 ManaCost:U U
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ ChangeType
 K:ETBReplacement:Other:DBChooseBasic
@@ -19,4 +18,3 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/84.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/70.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/69.jpg
 Oracle:Enchant land\nAs Phantasmal Terrain enters the battlefield, choose a basic land type.\nEnchanted land is the chosen type.
-End

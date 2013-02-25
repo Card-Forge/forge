@@ -1,7 +1,6 @@
 Name:Skyclaw Thrash
 ManaCost:3 U R
 Types:Artifact Creature Viashino Warrior
-Text:no text
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ FlipCoin | TriggerDescription$ Whenever CARDNAME attacks, flip a coin. If you win the flip, CARDNAME gets +1/+1 and gains flying until end of turn.
 SVar:FlipCoin:AB$ FlipACoin | Cost$ 0 | WinSubAbility$ DBPump
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyclaw_thrash.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/89.jpg
 Oracle:Whenever Skyclaw Thrash attacks, flip a coin. If you win the flip, Skyclaw Thrash gets +1/+1 and gains flying until end of turn.
-End

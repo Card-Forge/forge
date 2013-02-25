@@ -1,7 +1,6 @@
 Name:Samite Elder
 ManaCost:2 W
 Types:Creature Human Cleric
-Text:no text
 PT:1/2
 A:AB$ ProtectionAll | Cost$ T | ValidCards$ Creature.YouCtrl | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Gains$ TargetedCardColor | StackDescription$ SpellDescription | SpellDescription$ Creatures you control gain protection from the colors of target permanent you control until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_elder.jpg
 Oracle:{T}: Creatures you control gain protection from the colors of target permanent you control until end of turn.
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/14.jpg
-End

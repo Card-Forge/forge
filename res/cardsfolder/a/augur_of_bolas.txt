@@ -1,7 +1,6 @@
 Name:Augur of Bolas
 ManaCost:1 U
 Types:Creature Merfolk Wizard
-Text:no text
 PT:1/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards from your library. You may reveal an instant or sorcery card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Instant,Sorcery
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/augur_of_bolas.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/43.jpg
 Oracle:When Augur of Bolas enters the battlefield, look at the top three cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
-End

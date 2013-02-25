@@ -1,7 +1,6 @@
 Name:Smoldering Spires
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature can't block this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Smoldering_Spires.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/143.jpg
 Oracle:Smoldering Spires enters the battlefield tapped.\nWhen Smoldering Spires enters the battlefield, target creature can't block this turn.\n{T}: Add {R} to your mana pool.
-End

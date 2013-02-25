@@ -1,7 +1,6 @@
 Name:Flash of Insight
 ManaCost:X 1 U
 Types:Instant
-Text:no text
 A:SP$ Dig | Cost$ X 1 U | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | References$ X | SpellDescription$ Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
 A:SP$ Dig | Cost$ 1 U ExileFromGrave<Y/Card.Blue+Other> | Flashback$ True | CostDesc$ Flashback - 1 U, Exile X blue cards from your graveyard.  Flash of Insight cannot be one of them. | DigNum$ ChosenX | ChangeNum$ 1 | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | References$ Y | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Y:XChoice
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_of_insight.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/40.jpg
 Oracle:Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.\nFlashback-{1}{U}, Exile X blue cards from your graveyard. (You may cast this card from your graveyard for its flashback cost, then exile it. You can't exile Flash of Insight to pay for its own flashback cost.)
-End

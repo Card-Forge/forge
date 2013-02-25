@@ -1,7 +1,6 @@
 Name:Nezumi Shadow-Watcher
 ManaCost:B
 Types:Creature Rat Warrior
-Text:no text
 PT:1/1
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Ninja | TgtPrompt$ Select target Ninja | SpellDescription$ Destroy target Ninja.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_shadow_watcher.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/74.jpg
 Oracle:Sacrifice Nezumi Shadow-Watcher: Destroy target Ninja.
-End

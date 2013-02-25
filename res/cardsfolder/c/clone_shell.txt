@@ -1,7 +1,6 @@
 Name:Clone Shell
 ManaCost:5
 Types:Artifact Creature Shapeshifter
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order.
 SVar:TrigDig:AB$ Dig | Cost$ 0  | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | Imprint$ True
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clone_shell.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/143.jpg
 Oracle:Imprint - When Clone Shell enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order.\nWhen Clone Shell dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
-End

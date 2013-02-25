@@ -1,7 +1,6 @@
 Name:Maggot Carrier
 ManaCost:B
 Types:Creature Zombie
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each player loses 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Each | LifeAmount$ 1
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/maggot_carrier.j
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/142.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/45.jpg
 Oracle:When Maggot Carrier enters the battlefield, each player loses 1 life.
-End

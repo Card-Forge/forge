@@ -1,7 +1,6 @@
 Name:Myr Sire
 ManaCost:2
 Types:Artifact Creature Myr
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a 1/1 colorless Myr artifact creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_sire.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/116.jpg
 Oracle:When Myr Sire dies, put a 1/1 colorless Myr artifact creature token onto the battlefield.
-End

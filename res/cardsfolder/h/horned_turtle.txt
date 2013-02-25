@@ -1,7 +1,6 @@
 Name:Horned Turtle
 ManaCost:2 U
 Types:Creature Turtle
-Text:no text
 PT:1/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83125.jpg
@@ -13,4 +12,3 @@ SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/81.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/55.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/74.jpg
 Oracle:
-End

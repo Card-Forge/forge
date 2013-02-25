@@ -15,4 +15,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_steed.
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/128.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/357.jpg
 Oracle:Clockwork Steed enters the battlefield with four +1/+0 counters on it.\nClockwork Steed can't be blocked by artifact creatures.\nAt end of combat, if Clockwork Steed attacked or blocked this combat, remove a +1/+0 counter from it.\n{X}, {T}: Put up to X +1/+0 counters on Clockwork Steed. This ability can't cause the total number of +1/+0 counters on Clockwork Steed to be greater than four. Activate this ability only during your upkeep.
-End

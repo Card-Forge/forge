@@ -1,7 +1,6 @@
 Name:Martial Coup
 ManaCost:X W W
 Types:Sorcery
-Text:no text
 A:SP$ Token | Cost$ X W W | TokenAmount$ X | References$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | RememberTokens$ True | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ CoupDestroy | SpellDescription$ Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures.
 SVar:CoupDestroy:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | ConditionCheckSVar$ CoupCount | ConditionSVarCompare$ GE5 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martial_coup.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/11.jpg
 Oracle:Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures.
-End

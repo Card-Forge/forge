@@ -1,10 +1,8 @@
 Name:Tower of Fortunes
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ Draw | Cost$ 8 T | NumCards$ 4 | SpellDescription$ Draw four cards.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_fortunes.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/267.jpg
 Oracle:{8}, {T}: Draw four cards.
-End

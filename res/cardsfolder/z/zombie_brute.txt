@@ -1,7 +1,6 @@
 Name:Zombie Brute
 ManaCost:6 B
 Types:Creature Zombie
-Text:no text
 PT:5/4
 K:Amplify:1:Zombie
 K:Trample
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_brute.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/87.jpg
 Oracle:Amplify 1 (As this creature enters the battlefield, put a +1/+1 counter on it for each Zombie card you reveal in your hand.)\nTrample
-End

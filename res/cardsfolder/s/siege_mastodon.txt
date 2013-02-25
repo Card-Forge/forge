@@ -1,7 +1,6 @@
 Name:Siege Mastodon
 ManaCost:4 W
 Types:Creature Elephant
-Text:no text
 PT:3/5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/siege_mastodon.jpg
@@ -9,4 +8,3 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/29.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/30.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/34.jpg
 Oracle:
-End

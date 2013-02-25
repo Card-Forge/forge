@@ -1,7 +1,6 @@
 Name:Matsu-Tribe Sniper
 ManaCost:1 G
 Types:Creature Snake Warrior Archer
-Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature with flying.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/matsu_tribe_sniper.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/136.jpg
 Oracle:{T}: Matsu-Tribe Sniper deals 1 damage to target creature with flying.\nWhenever Matsu-Tribe Sniper deals damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
-End

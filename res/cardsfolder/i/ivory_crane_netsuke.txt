@@ -1,7 +1,6 @@
 Name:Ivory Crane Netsuke
 ManaCost:2
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ GT6 | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 4
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_crane_netsuke.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/155.jpg
 Oracle:At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
-End

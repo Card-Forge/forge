@@ -1,7 +1,6 @@
 Name:Scrapdiver Serpent
 ManaCost:5 U U
 Types:Creature Serpent
-Text:no text
 PT:5/5
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME is unblockable as long as defending player controls an artifact.
 SVar:X:Count$Valid Artifact.YouDontCtrl
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapdiver_serpent.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/41.jpg
 Oracle:Scrapdiver Serpent is unblockable as long as defending player controls an artifact.
-End

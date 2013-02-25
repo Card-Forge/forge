@@ -1,7 +1,6 @@
 Name:Brink of Disaster
 ManaCost:2 B B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature or land
 A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature,Land | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted permanent becomes tapped, destroy it.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/brink_of_disaste
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/84.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/52.jpg
 Oracle:Enchant creature or land\nWhen enchanted permanent becomes tapped, destroy it.
-End

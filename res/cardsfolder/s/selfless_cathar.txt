@@ -1,7 +1,6 @@
 Name:Selfless Cathar
 ManaCost:W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ PumpAll | Cost$ 1 W Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selfless_cathar.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/30.jpg
 Oracle:{1}{W}, Sacrifice Selfless Cathar: Creatures you control get +1/+1 until end of turn.
-End

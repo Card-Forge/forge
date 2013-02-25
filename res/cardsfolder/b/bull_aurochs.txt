@@ -1,7 +1,6 @@
 Name:Bull Aurochs
 ManaCost:1 G
 Types:Creature Aurochs
-Text:no text
 PT:2/1
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bull_aurochs.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/107.jpg
 Oracle:Trample\nWhenever Bull Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-End

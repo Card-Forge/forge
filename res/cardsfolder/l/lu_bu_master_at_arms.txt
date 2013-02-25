@@ -1,7 +1,6 @@
 Name:Lu Bu, Master-at-Arms
 ManaCost:5 R
 Types:Legendary Creature Human Soldier Warrior
-Text:no text
 PT:4/3
 K:Haste
 K:Horsemanship
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lu_bu_master_at_arms.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/115.jpg
 Oracle:Haste; horsemanship (This creature can't be blocked except by creatures with horsemanship.)
-End

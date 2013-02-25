@@ -1,7 +1,6 @@
 Name:Nantuko Husk
 ManaCost:2 B
 Types:Creature Zombie Insect
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:RemAIDeck:True
@@ -12,4 +11,3 @@ SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/90.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/148.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/162.jpg
 Oracle:Sacrifice a creature: Nantuko Husk gets +2/+2 until end of turn.
-End

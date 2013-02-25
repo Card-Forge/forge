@@ -1,7 +1,6 @@
 Name:Llanowar Elves
 ManaCost:G
 Types:Creature Elf Druid
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
@@ -20,4 +19,3 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/239.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/182.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/119.jpg
 Oracle:{T}: Add {G} to your mana pool.
-End

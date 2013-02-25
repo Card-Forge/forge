@@ -1,7 +1,6 @@
 Name:Xantid Swarm
 ManaCost:G
 Types:Creature Insect
-Text:no text
 PT:0/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME attacks, defending player can't cast spells this turn.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xantid_swarm.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/135.jpg
 Oracle:Flying\nWhenever Xantid Swarm attacks, defending player can't cast spells this turn.
-End

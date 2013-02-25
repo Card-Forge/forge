@@ -1,7 +1,6 @@
 Name:Presence of Gond
 ManaCost:2 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.AttachedBy | AddAbility$ Token | Description$ Enchanted creature has "Tap: Put a 1/1 green Elf Warrior creature token onto the battlefield."
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/presence_of_gond.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/125.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Put a 1/1 green Elf Warrior creature token onto the battlefield."
-End

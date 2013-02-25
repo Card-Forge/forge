@@ -1,7 +1,6 @@
 Name:Scythe Tiger
 ManaCost:G
 Types:Creature Cat
-Text:no text
 PT:3/2
 K:Shroud
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice a Land.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scythe_tiger.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/183.jpg
 Oracle:Shroud (This creature can't be the target of spells or abilities.)\nWhen Scythe Tiger enters the battlefield, sacrifice it unless you sacrifice a land.
-End

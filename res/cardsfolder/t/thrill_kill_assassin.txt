@@ -1,7 +1,6 @@
 Name:Thrill-Kill Assassin
 ManaCost:1 B
 Types:Creature Human Assassin
-Text:no text
 PT:1/2
 K:Deathtouch
 K:ETBReplacement:Other:Unleash:Optional
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrill_kill_assassin.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/81.jpg
 Oracle:Deathtouch\nUnleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
-End

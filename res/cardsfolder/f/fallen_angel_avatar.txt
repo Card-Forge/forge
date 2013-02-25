@@ -1,7 +1,6 @@
 Name:Fallen Angel Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/-5
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | Execute$ TrigDrain | TriggerZones$ Command | TriggerDescription$ Whenever a creature you control dies, target opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
@@ -10,4 +9,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/fallen_angel_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/fallen-angel.jpg
 Oracle:Hand +0, life -5\nWhenever a creature you control dies, target opponent loses 1 life and you gain 1 life.
-End

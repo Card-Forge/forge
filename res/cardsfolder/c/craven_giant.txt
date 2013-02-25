@@ -1,7 +1,6 @@
 Name:Craven Giant
 ManaCost:2 R
 Types:Creature Giant
-Text:no text
 PT:4/1
 K:CARDNAME can't block.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5130.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/126.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/78.jpg
 Oracle:Craven Giant can't block.
-End

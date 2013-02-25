@@ -1,7 +1,6 @@
 Name:Floodgate
 ManaCost:3 U
 Types:Creature Wall
-Text:no text
 PT:0/5
 K:Defender
 T:Mode$ Always | IsPresent$ Card.Self+withFlying | Execute$ Sacrifice | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME has flying, sacrifice it.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/floodgate.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/67.jpg
 Oracle:Defender (This creature can't attack.)\nWhen Floodgate has flying, sacrifice it.\nWhen Floodgate leaves the battlefield, it deals damage equal to half the number of Islands you control, rounded down, to each nonblue creature without flying.
-End

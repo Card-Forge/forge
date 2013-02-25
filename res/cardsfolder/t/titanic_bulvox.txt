@@ -1,7 +1,6 @@
 Name:Titanic Bulvox
 ManaCost:6 G G
 Types:Creature Beast
-Text:no text
 PT:7/4
 K:Trample
 K:Morph:4 G G G
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titanic_bulvox.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/129.jpg
 Oracle:Trample\nMorph {4}{G}{G}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

@@ -1,7 +1,6 @@
 Name:Jungle Barrier
 ManaCost:2 G U
 Types:Creature Plant Wall
-Text:no text
 PT:2/6
 K:Defender
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_barrier.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/106.jpg
 Oracle:Defender (This creature can't attack.)\nWhen Jungle Barrier enters the battlefield, draw a card.
-End

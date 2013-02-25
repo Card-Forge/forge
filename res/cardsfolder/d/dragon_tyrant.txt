@@ -1,7 +1,6 @@
 Name:Dragon Tyrant
 ManaCost:8 R R
 Types:Creature Dragon
-Text:no text
 PT:6/6
 K:Flying
 K:Trample
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_tyrant.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/88.jpg
 Oracle:Flying, trample\nDouble strike (This creature deals both first-strike and regular combat damage.)\nAt the beginning of your upkeep, sacrifice Dragon Tyrant unless you pay {R}{R}{R}{R}.\n{R}: Dragon Tyrant gets +1/+0 until end of turn.
-End

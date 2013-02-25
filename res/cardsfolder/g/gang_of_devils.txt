@@ -1,7 +1,6 @@
 Name:Gang of Devils
 ManaCost:5 R
 Types:Creature Devil
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DevilTakeYou | TriggerDescription$ When CARDNAME dies, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
 SVar:DevilTakeYou:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gang_of_devils.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/136.jpg
 Oracle:When Gang of Devils dies, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
-End

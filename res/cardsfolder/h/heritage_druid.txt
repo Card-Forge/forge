@@ -1,7 +1,6 @@
 Name:Heritage Druid
 ManaCost:G
 Types:Creature Elf Druid
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ tapXType<3/Elf> | Produced$ G | Amount$ 3 | SpellDescription$ Add G G G to your mana pool.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heritage_druid.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/126.jpg
 Oracle:Tap three untapped Elves you control: Add {G}{G}{G} to your mana pool.
-End

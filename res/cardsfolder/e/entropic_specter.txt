@@ -1,7 +1,6 @@
 Name:Entropic Specter
 ManaCost:3 B B
 Types:Creature Specter Spirit
-Text:no text
 PT:*/*
 K:Flying
 K:ETBReplacement:Other:ChooseP
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entropic_specter.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/61.jpg
 Oracle:Flying\nAs Entropic Specter enters the battlefield, choose an opponent.\nEntropic Specter's power and toughness are each equal to the number of cards in the chosen player's hand.\nWhenever Entropic Specter deals damage to a player, that player discards a card.
-End

@@ -1,7 +1,6 @@
 Name:Mountain Yeti
 ManaCost:2 R R
 Types:Creature Yeti
-Text:no text
 PT:3/3
 K:Mountainwalk
 K:Protection from white
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_yeti.jp
 Oracle:Mountainwalk, protection from white
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/53.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/156.jpg
-End

@@ -1,7 +1,6 @@
 Name:Distorting Wake
 ManaCost:X U U U
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ X U U U | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | References$ X,MaxTgts | SpellDescription$ Return X target nonland permanents to their owners' hands.
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Permanent.nonLand
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distorting_wake.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/52.jpg
 Oracle:Return X target nonland permanents to their owners' hands.
-End

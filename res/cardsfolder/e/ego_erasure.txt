@@ -1,7 +1,6 @@
 Name:Ego Erasure
 ManaCost:2 U
 Types:Tribal Instant Shapeshifter
-Text:no text
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:SP$ PumpAll | Cost$ 2 U | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -0 | IsCurse$ True | SubAbility$ DBAnimateAll | SpellDescription$ Creatures target player controls get -2/-0 and lose all creature types until end of turn.
 SVar:DBAnimateAll:DB$ AnimateAll | Cost$ 0 | Defined$ Targeted | RemoveCreatureTypes$ True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ego_erasure.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/59.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nCreatures target player controls get -2/-0 and lose all creature types until end of turn.
-End

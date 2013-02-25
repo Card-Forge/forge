@@ -1,7 +1,6 @@
 Name:Frostweb Spider
 ManaCost:2 G
 Types:Snow Creature Spider
-Text:no text
 PT:1/3
 K:Reach
 T:Mode$ AttackerBlocked | ValidCard$ Creature.withFlying | ValidBlocker$ Card.Self  | DelayedTrigger$ DelayedTrig | TriggerDescription$ Whenever CARDNAME blocks a creature with flying, put a +1/+1 counter on CARDNAME at end of combat.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121197.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/109.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nWhenever Frostweb Spider blocks a creature with flying, put a +1/+1 counter on Frostweb Spider at end of combat.
-End

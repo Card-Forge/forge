@@ -7,4 +7,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97102.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/238.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/171.jpg
 Oracle:({T}: Add {B} or {R} to your mana pool.)\nAs Blood Crypt enters the battlefield, you may pay 2 life. If you don't, Blood Crypt enters the battlefield tapped.
-End

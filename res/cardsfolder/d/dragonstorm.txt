@@ -1,7 +1,6 @@
 Name:Dragonstorm
 ManaCost:8 R
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 8 R | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Dragon | ChangeNum$ 1 | SpellDescription$ Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library.
 K:Storm
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonstorm.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/90.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/60.jpg
 Oracle:Search your library for a Dragon permanent card and put it onto the battlefield. Then shuffle your library.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
-End

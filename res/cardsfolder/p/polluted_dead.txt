@@ -1,7 +1,6 @@
 Name:Polluted Dead
 ManaCost:4 B
 Types:Creature Zombie
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, destroy target land.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/polluted_dead.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/116.jpg
 Oracle:When Polluted Dead dies, destroy target land.
-End

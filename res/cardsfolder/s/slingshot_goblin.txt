@@ -1,7 +1,6 @@
 Name:Slingshot Goblin
 ManaCost:2 R
 Types:Creature Goblin
-Text:no text
 PT:2/2
 A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target blue creature.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slingshot_goblin.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/72.jpg
 Oracle:{R}, {T}: Slingshot Goblin deals 2 damage to target blue creature.
-End

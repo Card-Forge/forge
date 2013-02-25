@@ -1,7 +1,6 @@
 Name:Sadistic Glee
 ManaCost:B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, put a +1/+1 counter on enchanted creature.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_glee.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/47.jpg
 Oracle:Enchant creature\nWhenever a creature dies, put a +1/+1 counter on enchanted creature.
-End

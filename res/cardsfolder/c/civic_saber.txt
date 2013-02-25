@@ -1,7 +1,6 @@
 Name:Civic Saber
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
 A:AB$ Attach | Cost$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AITgts$ Card.nonColorless | SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature | PrecostDesc$ Equip | SpellDescription$ (Attach to target creature you control. Equip only as a sorcery.)
 S:Mode$ Continuous | Affected$ Creature.EquippedBy+White | AddPower$ 1 | Description$ Equipped creature gets +1/+0 for each of its colors.
 S:Mode$ Continuous | Affected$ Creature.EquippedBy+Blue | AddPower$ 1
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/civic_saber.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/227.jpg
 Oracle:Equipped creature gets +1/+0 for each of its colors.\nEquip {1}
-End

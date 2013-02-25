@@ -1,7 +1,6 @@
 Name:Centaur Veteran
 ManaCost:5 G
 Types:Creature Centaur
-Text:no text
 PT:3/3
 K:Trample
 A:AB$ Regenerate | Cost$ G Discard<1/Card> | SpellDescription$ Regenerate CARDNAME.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_veteran.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/123.jpg
 Oracle:Trample\n{G}, Discard a card: Regenerate Centaur Veteran.
-End

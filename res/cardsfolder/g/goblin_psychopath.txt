@@ -1,7 +1,6 @@
 Name:Goblin Psychopath
 ManaCost:3 R
 Types:Creature Goblin Mutant
-Text:no text
 PT:5/5
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ CoinFlip | TriggerDescription$ Whenever CARDNAME attacks or blocks, flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ CoinFlip | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead.
@@ -16,4 +15,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_psychopath.jpg
 Oracle:Whenever Goblin Psychopath attacks or blocks, flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead.
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/95.jpg
-End

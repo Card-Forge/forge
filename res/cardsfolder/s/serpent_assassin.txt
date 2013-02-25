@@ -1,7 +1,6 @@
 Name:Serpent Assassin
 ManaCost:3 B B
 Types:Creature Snake Assassin
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target nonblack creature.
 SVar:TrigDestroy:DB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal/serpent_assassin.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/31.jpg
 Oracle:When Serpent Assassin enters the battlefield, you may destroy target nonblack creature.
-End

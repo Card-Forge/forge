@@ -1,7 +1,6 @@
 Name:Tunnel
 ManaCost:R
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ R | ValidTgts$ Creature.Wall | TgtPrompt$ Select target Wall | NoRegen$ True | SpellDescription$ Destroy target Wall. It can't be regenerated.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
@@ -12,4 +11,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/180.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/245.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/179.jpg
 Oracle:Destroy target Wall. It can't be regenerated.
-End

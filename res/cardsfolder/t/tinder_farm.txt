@@ -1,7 +1,6 @@
 Name:Tinder Farm
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Mana | Cost$T Sac<1/CARDNAME> | Produced$ R W | SpellDescription$ Add R W to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinder_farm.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/329.jpg
 Oracle:Tinder Farm enters the battlefield tapped.\n{T}: Add {G} to your mana pool.\n{T}, Sacrifice Tinder Farm: Add {R}{W} to your mana pool.
-End

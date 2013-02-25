@@ -1,7 +1,6 @@
 Name:Riptide Chronologist
 ManaCost:3 U U
 Types:Creature Human Wizard
-Text:no text
 PT:1/3
 A:AB$ ChooseType | Cost$ U Sac<1/CARDNAME> | Type$ Creature | SubAbility$ DBUntapAll | SpellDescription$ Untap all creatures of the creature type of your choice.
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.ChosenType
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_chronologist.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/107.jpg
 Oracle:{U}, Sacrifice Riptide Chronologist: Untap all creatures of the creature type of your choice.
-End

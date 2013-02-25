@@ -1,7 +1,6 @@
 Name:Doom Cannon
 ManaCost:6
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
 A:AB$ DealDamage | Cost$ 3 T Sac<1/Creature.ChosenType> | NumDmg$ 3 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | CostDesc$ 3, Tap, Sacrifice a creature of the chosen type | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doom_cannon.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/307.jpg
 Oracle:As Doom Cannon enters the battlefield, choose a creature type.\n{3}, {T}, Sacrifice a creature of the chosen type: Doom Cannon deals 3 damage to target creature or player.
-End

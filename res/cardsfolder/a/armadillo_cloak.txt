@@ -1,7 +1,6 @@
 Name:Armadillo Cloak
 ManaCost:1 G W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Enchanted creature gets +2/+2 and has trample.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armadillo_cloak.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/229.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has trample.\nWhenever enchanted creature deals damage, you gain that much life.
-End

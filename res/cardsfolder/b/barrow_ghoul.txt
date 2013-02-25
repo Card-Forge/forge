@@ -1,7 +1,6 @@
 Name:Barrow Ghoul
 ManaCost:1 B
 Types:Creature Zombie
-Text:no text
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you exile the top creature card of your graveyard.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Creature.YouOwn+TopGraveyardCreature | RememberChanged$ True | SubAbility$ DBSac
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrow_ghoul.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/3.jpg
 Oracle:At the beginning of your upkeep, sacrifice Barrow Ghoul unless you exile the top creature card of your graveyard.
-End

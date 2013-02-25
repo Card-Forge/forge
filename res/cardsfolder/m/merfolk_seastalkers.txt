@@ -1,7 +1,6 @@
 Name:Merfolk Seastalkers
 ManaCost:3 U
 Types:Creature Merfolk Scout
-Text:no text
 PT:2/3
 K:Islandwalk
 A:AB$ Tap | Cost$ 2 U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_seastalkers.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/55.jpg
 Oracle:Islandwalk\n{2}{U}: Tap target creature without flying.
-End

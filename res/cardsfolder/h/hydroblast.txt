@@ -1,7 +1,6 @@
 Name:Hydroblast
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | AITgts$ Card.Red | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | PrecostDesc$ Choose one -  | References$ X | SpellDescription$ Counter target spell if it's red;
 A:SP$ Destroy | Cost$ U | ValidTgts$ Permanent | AITgts$ Card.Red | TgtPrompt$ Select target permanent | ConditionDefined$ Targeted | ConditionPresent$ Card.Red | ConditionCompare$ GE1 | SpellDescription$  or destroy target permanent if it's red.
 SVar:X:Targeted$Valid Card.Red
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/hydroblast.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/94.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/72.jpg
 Oracle:Choose one - Counter target spell if it's red; or destroy target permanent if it's red.
-End

@@ -1,7 +1,6 @@
 Name:Righteous Cause
 ManaCost:3 W W
 Types:Enchantment
-Text:no text
 T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature attacks, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1 | SpellDescription$ You gain 1 life for each attacking creature.
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_cause.
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/51.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/29.jpg
 Oracle:Whenever a creature attacks, you gain 1 life.
-End

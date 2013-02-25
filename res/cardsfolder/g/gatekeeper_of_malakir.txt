@@ -1,7 +1,6 @@
 Name:Gatekeeper of Malakir
 ManaCost:B B
 Types:Creature Vampire Warrior
-Text:no text
 PT:2/2
 K:Kicker B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, target player sacrifices a creature.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gatekeeper_of_malakir.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/89.jpg
 Oracle:Kicker {B} (You may pay an additional {B} as you cast this spell.)\nWhen Gatekeeper of Malakir enters the battlefield, if it was kicked, target player sacrifices a creature.
-End

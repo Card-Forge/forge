@@ -1,7 +1,6 @@
 Name:Malakir Bloodwitch
 ManaCost:3 B B
 Types:Creature Vampire Shaman
-Text:no text
 PT:4/4
 K:Flying
 K:Protection from white
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malakir_bloodwitch.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/100.jpg
 Oracle:Flying, protection from white\nWhen Malakir Bloodwitch enters the battlefield, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.
-End

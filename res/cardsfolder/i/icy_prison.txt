@@ -1,7 +1,6 @@
 Name:Icy Prison
 ManaCost:U U
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature.
 SVar:TrigExile:DB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icy_prison.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/74.jpg
 Oracle:When Icy Prison enters the battlefield, exile target creature.\nAt the beginning of your upkeep, sacrifice Icy Prison unless any player pays {3}.\nWhen Icy Prison leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-End

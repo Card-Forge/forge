@@ -1,7 +1,6 @@
 Name:Seraph of Dawn
 ManaCost:2 W W
 Types:Creature Angel
-Text:no text
 PT:2/4
 K:Flying
 K:Lifelink
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seraph_of_dawn.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/35.jpg
 Oracle:Flying\nLifelink (Damage dealt by this creature also causes you to gain that much life.)
-End

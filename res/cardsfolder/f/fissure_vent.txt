@@ -1,7 +1,6 @@
 Name:Fissure Vent
 ManaCost:3 R R
 Types:Sorcery
-Text:no text
 A:SP$ Charm | Cost$ 3 R R | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DestroyArtifact,DestroyLand | SpellDescription$ Choose one or both - Destroy target artifact; and/or destroy target nonbasic land.
 SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact;
 SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land;
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fissure_vent.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/144.jpg
 Oracle:Choose one or both - Destroy target artifact; and/or destroy target nonbasic land.
-End

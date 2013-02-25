@@ -1,7 +1,6 @@
 Name:Contempt
 ManaCost:1 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Attacks | ValidCard$ Card.EnchantedBy | DelayedTrigger$ DelBounce | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, return it and CARDNAME to their owners' hands at end of combat.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contempt.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/27.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks, return it and Contempt to their owners' hands at end of combat.
-End

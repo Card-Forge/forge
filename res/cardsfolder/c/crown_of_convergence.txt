@@ -1,7 +1,6 @@
 Name:Crown of Convergence
 ManaCost:2
 Types:Artifact
-Text:no text
 K:Play with the top card of your library revealed.
 S:Mode$ Continuous | Affected$ Creature.SharesColorWith TopCardOfLibrary+YouCtrl | AddPower$ 1 | AddToughness$ 1 | TopCardOfLibraryIs$ Creature | Description$ As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1.
 A:AB$ Dig | Cost$ G W | LibraryPosition$ -1 | DigNum$ 1 | Reveal$ False | DestinationZone$ Library | SpellDescription$ Put the top card of your library on the bottom of your library
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_convergence.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/258.jpg
 Oracle:Play with the top card of your library revealed.\nAs long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1.\n{G}{W}: Put the top card of your library on the bottom of your library.
-End

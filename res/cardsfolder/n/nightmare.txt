@@ -1,7 +1,6 @@
 Name:Nightmare
 ManaCost:5 B
 Types:Creature Nightmare Horse
-Text:no text
 PT:*/*
 K:Flying
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of Swamps you control.
@@ -22,4 +21,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/146.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/28.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/27.jpg
 Oracle:Flying\nNightmare's power and toughness are each equal to the number of Swamps you control.
-End

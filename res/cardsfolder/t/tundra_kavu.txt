@@ -1,7 +1,6 @@
 Name:Tundra Kavu
 ManaCost:2 R
 Types:Creature Kavu
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ TypeChoice | StackDescription$ Target land becomes a  | SpellDescription$ Target land becomes a Plains or an Island until end of turn.
 SVar:TypeChoice:DB$ GenericChoice | Choices$ SVar1,SVar2 | StackDescription$ Plains or an Island until end of turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tundra_kavu.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/71.jpg
 Oracle:{T}: Target land becomes a Plains or an Island until end of turn.
-End

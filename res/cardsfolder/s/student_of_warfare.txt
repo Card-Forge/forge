@@ -1,7 +1,6 @@
 Name:Student of Warfare
 ManaCost:W
 Types:Creature Human Knight
-Text:no text
 PT:1/1
 K:Level up:W
 K:maxLevel:7
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/student_of_warfare.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/47.jpg
 Oracle:Level up {W} ({W}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-6\n3/3\nFirst strike\nLEVEL 7+\n4/4\nDouble strike
-End

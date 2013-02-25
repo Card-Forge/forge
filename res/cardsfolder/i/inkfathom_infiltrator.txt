@@ -1,7 +1,6 @@
 Name:Inkfathom Infiltrator
 ManaCost:UB UB
 Types:Creature Merfolk Rogue
-Text:no text
 PT:2/1
 K:CARDNAME can't block.
 K:Unblockable
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inkfathom_infiltrator.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/167.jpg
 Oracle:Inkfathom Infiltrator can't block and is unblockable.
-End

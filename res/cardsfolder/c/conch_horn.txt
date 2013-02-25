@@ -1,7 +1,6 @@
 Name:Conch Horn
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 2 | SubAbility$ DBTop | SpellDescription$ Draw two cards, then put a card from your hand on top of your library.
 SVar:DBTop:DB$ChangeZone | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conch_horn.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/168.jpg
 Oracle:{1}, {T}, Sacrifice Conch Horn: Draw two cards, then put a card from your hand on top of your library.
-End

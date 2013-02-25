@@ -1,7 +1,6 @@
 Name:Hesitation
 ManaCost:1 U
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME and counter that spell.
 SVar:TrigCounter:AB$ Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hesitation.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/33.jpg
 Oracle:When a player casts a spell, sacrifice Hesitation and counter that spell.
-End

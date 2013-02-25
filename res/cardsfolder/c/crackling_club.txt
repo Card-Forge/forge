@@ -1,7 +1,6 @@
 Name:Crackling Club
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crackling_club.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/93.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+0.\nSacrifice Crackling Club: Crackling Club deals 1 damage to target creature.
-End

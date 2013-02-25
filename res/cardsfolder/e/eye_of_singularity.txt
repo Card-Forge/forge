@@ -1,7 +1,6 @@
 Name:Eye of Singularity
 ManaCost:3 W
 Types:World Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.
 SVar:TrigRepeat:AB$ RepeatEach | Cost$ 0 | RepeatCards$ Permanent.nonBasic | RepeatSubAbility$ DBDestroy | UseImprinted$ True | SubAbility$ DBCleanup
 SVar:DBDestroy:DB$ Destroy | Defined$ Valid Permanent.sharesNameWith Imprinted+IsNotImprinted | NoRegen$ True
@@ -13,4 +12,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_singularity.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/104.jpg
 Oracle:When Eye of Singularity enters the battlefield, destroy each permanent with the same name as another permanent, except for basic lands. They can't be regenerated.\nWhenever a permanent other than a basic land enters the battlefield, destroy all other permanents with that name. They can't be regenerated.
-End

@@ -1,7 +1,6 @@
 Name:Ouphe Vandals
 ManaCost:2 G
 Types:Creature Ouphe Rogue
-Text:no text
 PT:2/2
 A:AB$ Counter | Cost$ G Sac<1/CARDNAME> | TargetType$ Activated | TgtPrompt$ Select target ability | ValidTgts$ Artifact | SubAbility$ DBDestroy | RememberTargets$ True | SpellDescription$ Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield. (Mana abilities can't be targeted.)
 SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBCleanup
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ouphe_vandals.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/90.jpg
 Oracle:{G}, Sacrifice Ouphe Vandals: Counter target activated ability from an artifact source and destroy that artifact if it's on the battlefield. (Mana abilities can't be targeted.)
-End

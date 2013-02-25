@@ -1,7 +1,6 @@
 Name:Tsabo's Decree
 ManaCost:5 B
 Types:Instant
-Text:no text
 # You can not clear a remembered object from a card on the stack, so this card is cleaned beforehand.
 A:SP$ Pump | Cost$ 5 B | SubAbility$ DBCleanup | Static$ True | StackDescription$ None | SpellDescription$ Choose a creature type. Target player reveals his or her hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
 SVar:TsabosChoice:DB$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ TsabosDiscard
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tsabos_decree.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/129.jpg
 Oracle:Choose a creature type. Target player reveals his or her hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
-End

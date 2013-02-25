@@ -1,7 +1,6 @@
 Name:Nirkana Cutthroat
 ManaCost:2 B
 Types:Creature Vampire Warrior
-Text:no text
 PT:3/2
 K:Level up:2 B
 K:maxLevel:3
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nirkana_cutthroat.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/119.jpg
 Oracle:Level up {2}{B} ({2}{B}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n4/3\nDeathtouch\nLEVEL 3+\n5/4\nFirst strike, deathtouch
-End

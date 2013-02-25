@@ -1,11 +1,9 @@
 Name:Myr Mindservant
 ManaCost:1
 Types:Artifact Creature Myr
-Text:no text
 PT:1/1
 A:AB$ Shuffle | Cost$ 2 T | Defined$ You | SpellDescription$ Shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_mindservant.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/213.jpg
 Oracle:{2}, {T}: Shuffle your library.
-End

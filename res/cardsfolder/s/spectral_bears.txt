@@ -1,7 +1,6 @@
 Name:Spectral Bears
 ManaCost:1 G
 Types:Creature Bear Spirit
-Text:no text
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ StayTapped | IsPresent$ Permanent.Black+nonToken+DefenderCtrl | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if defending player controls no black nontoken permanents, it doesn't untap during your next untap step.
 SVar:StayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_bears.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/72.jpg
 Oracle:Whenever Spectral Bears attacks, if defending player controls no black nontoken permanents, it doesn't untap during your next untap step.
-End

@@ -1,7 +1,6 @@
 Name:Felidar Umbra
 ManaCost:1 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 K:Totem armor
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/felidar_umbra.jpg
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/6.jpg
 Oracle:Enchant creature\nEnchanted creature has lifelink.\n{1}{W}: Attach Felidar Umbra to target creature you control.\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
-End

@@ -1,7 +1,6 @@
 Name:Kavu Chameleon
 ManaCost:3 G G
 Types:Creature Kavu
-Text:no text
 PT:4/4
 K:CARDNAME can't be countered.
 A:AB$ ChooseColor | Cost$ G | Defined$ You | SubAbility$ Animate | SpellDescription$ CARDNAME becomes the color of your choice until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_chameleon.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/191.jpg
 Oracle:Kavu Chameleon can't be countered.\n{G}: Kavu Chameleon becomes the color of your choice until end of turn.
-End

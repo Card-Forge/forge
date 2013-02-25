@@ -1,7 +1,6 @@
 Name:Raka Disciple
 ManaCost:R
 Types:Creature Minotaur Wizard
-Text:no text
 PT:1/1
 A:AB$ PreventDamage | Cost$ W T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature or player this turn.
 A:AB$ Pump | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raka_disciple.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/66.jpg
 Oracle:{W}, {T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.\n{U}, {T}: Target creature gains flying until end of turn.
-End

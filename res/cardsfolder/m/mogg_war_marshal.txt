@@ -1,7 +1,6 @@
 Name:Mogg War Marshal
 ManaCost:1 R
 Types:Creature Goblin Warrior
-Text:no text
 PT:1/1
 K:Echo:1 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, put a 1/1 red Goblin creature token onto the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_war_marshal.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/170.jpg
 Oracle:Echo {1}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Mogg War Marshal enters the battlefield or dies, put a 1/1 red Goblin creature token onto the battlefield.
-End

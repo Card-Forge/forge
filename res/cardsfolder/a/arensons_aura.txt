@@ -1,7 +1,6 @@
 Name:Arenson's Aura
 ManaCost:2 W
 Types:Enchantment
-Text:no text
 A:AB$ Destroy | Cost$ W Sac<1/Enchantment> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 A:AB$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target Enchantment | ValidTgts$ Enchantment | SpellDescription$ Counter target enchantment spell.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/arensons_aura.jp
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/282.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/227.jpg
 Oracle:{W}, Sacrifice an enchantment: Destroy target enchantment.\n{3}{U}{U}: Counter target enchantment spell.
-End

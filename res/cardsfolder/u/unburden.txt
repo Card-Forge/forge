@@ -1,11 +1,9 @@
 Name:Unburden
 ManaCost:1 B B
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ 1 B B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unburden.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/77.jpg
 Oracle:Target player discards two cards.\nCycling {2} ({2}, Discard this card: Draw a card.)
-End

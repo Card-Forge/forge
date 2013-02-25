@@ -1,7 +1,6 @@
 Name:Noggle Hedge-Mage
 ManaCost:2 UR
 Types:Creature Noggle Wizard
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Island.YouCtrl | PresentCompare$ GE2 | Execute$ TrigTap | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Islands, you may tap two target permanents.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Mountain.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Mountains, you may have CARDNAME deal 2 damage to target player.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_hedge_mage.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/108.jpg
 Oracle:When Noggle Hedge-Mage enters the battlefield, if you control two or more Islands, you may tap two target permanents.\nWhen Noggle Hedge-Mage enters the battlefield, if you control two or more Mountains, you may have Noggle Hedge-Mage deal 2 damage to target player.
-End

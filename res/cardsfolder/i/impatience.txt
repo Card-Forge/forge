@@ -1,7 +1,6 @@
 Name:Impatience
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ YouCast | SVarCompare$ EQ0 | Execute$ TrigDamageYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, if that player didn't cast a spell this turn, CARDNAME deals 2 damage to him or her.
 SVar:TrigDamageYou:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | CheckSVar$ OppCast | SVarCompare$ EQ0 | Execute$ TrigDamageOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of each player's end step, if that player didn't cast a spell this turn, CARDNAME deals 2 damage to him or her.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/impatience.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/88.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/197.jpg
 Oracle:At the beginning of each player's end step, if that player didn't cast a spell this turn, Impatience deals 2 damage to him or her.
-End

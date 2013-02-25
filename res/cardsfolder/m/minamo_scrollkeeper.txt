@@ -1,7 +1,6 @@
 Name:Minamo Scrollkeeper
 ManaCost:1 U
 Types:Creature Human Wizard
-Text:no text
 PT:2/3
 S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ 1 | Description$ Your maximum hand size is increased by one.
 K:Defender
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minamo_scrollkeeper.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/45.jpg
 Oracle:Defender (This creature can't attack.)\nYour maximum hand size is increased by one.
-End

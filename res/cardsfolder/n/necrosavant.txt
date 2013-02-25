@@ -1,7 +1,6 @@
 Name:Necrosavant
 ManaCost:3 B B B
 Types:Creature Zombie Giant
-Text:no text
 PT:5/5
 A:AB$ ChangeZone | Cost$3 B B Sac<1/Creature> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate this ability only during your upkeep.
 SVar:DiscardMe:1
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/necrosavant.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/15.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/145.jpg
 Oracle:{3}{B}{B}, Sacrifice a creature: Return Necrosavant from your graveyard to the battlefield. Activate this ability only during your upkeep.
-End

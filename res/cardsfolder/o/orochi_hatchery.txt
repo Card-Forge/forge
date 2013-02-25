@@ -1,7 +1,6 @@
 Name:Orochi Hatchery
 ManaCost:X X
 Types:Artifact
-Text:no text
 K:etbCounter:CHARGE:X
 A:AB$ Token | Cost$ 5 T | TokenAmount$ Y | References$ Y | TokenController$ You | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Snake creature token onto the battlefield for each charge counter on CARDNAME.
 SVar:X:Count$xPaid
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_hatchery.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/266.jpg
 Oracle:Orochi Hatchery enters the battlefield with X charge counters on it.\n{5}, {T}: Put a 1/1 green Snake creature token onto the battlefield for each charge counter on Orochi Hatchery.
-End

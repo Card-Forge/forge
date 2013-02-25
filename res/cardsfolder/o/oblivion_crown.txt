@@ -1,7 +1,6 @@
 Name:Oblivion Crown
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 K:Flash
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oblivion_crown.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/73.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature has "Discard a card: This creature gets +1/+1 until end of turn."
-End

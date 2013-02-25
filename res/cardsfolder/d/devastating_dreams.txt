@@ -1,7 +1,6 @@
 Name:Devastating Dreams
 ManaCost:R R
 Types:Sorcery
-Text:no text
 A:SP$ Sacrifice | Cost$ R R Discard<X/Random> | Defined$ Each | SacValid$ Land | Amount$ ChosenX | SubAbility$ DBDamage | References$ X | SpellDescription$ Each player sacrifices X lands. CARDNAME deals X damage to each creature.
 SVar:DBDamage:DB$ DamageAll | NumDmg$ ChosenX | ValidCards$ Creature | References$ X
 SVar:X:XChoice
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devastating_dreams.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/95.jpg
 Oracle:As an additional cost to cast Devastating Dreams, discard X cards at random.\nEach player sacrifices X lands. Devastating Dreams deals X damage to each creature.
-End

@@ -1,7 +1,6 @@
 Name:Wurmweaver Coil
 ManaCost:4 G G
 Types:Enchantment Aura
-Text:no text
 K:Enchant green creature
 A:SP$ Attach | Cost$ 4 G G | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 6 | AddToughness$ 6 | Description$ Enchanted creature gets +6/+6.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmweaver_coil.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/99.jpg
 Oracle:Enchant green creature\nEnchanted creature gets +6/+6.\n{G}{G}{G}, Sacrifice Wurmweaver Coil: Put a 6/6 green Wurm creature token onto the battlefield.
-End

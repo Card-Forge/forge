@@ -1,7 +1,6 @@
 Name:Acorn Catapult
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ DealDamage | Cost$ 1 T | NumDmg$ 1 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | SubAbility$ SquirrelTokenCtrl | SpellDescription$ CARDNAME deals 1 damage to target creature or player. That creature's controller or that player puts a 1/1 green Squirrel creature token onto the battlefield.
 SVar:SquirrelTokenCtrl:DB$ Token | TokenAmount$ 1 | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ Targeted | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ SquirrelTokenPlayer | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0
 SVar:SquirrelTokenPlayer:DB$ Token | TokenAmount$ 1 | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ TargetedController | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ GE1
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acorn_catapult.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/241.jpg
 Oracle:{1}, {T}: Acorn Catapult deals 1 damage to target creature or player. That creature's controller or that player puts a 1/1 green Squirrel creature token onto the battlefield.
-End

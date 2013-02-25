@@ -1,7 +1,6 @@
 Name:Jilt
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature |TgtPrompt$ Select target creature | TargetUnique$ True | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. If CARDNAME was kicked, it deals 2 damage to another target creature.
 A:SP$ ChangeZone | Cost$ 2 U R | SetAsKicked$ True | ValidTgts$ Creature |TgtPrompt$ Select target creature | TargetUnique$ True | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDamage | SpellDescription$ Kicker 1 R (You may pay an additional 1 R as you cast this spell.)
 SVar:DBDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | NumDmg$ 2
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jilt.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/27.jpg
 Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nReturn target creature to its owner's hand. If Jilt was kicked, it deals 2 damage to another target creature.
-End

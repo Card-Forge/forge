@@ -1,7 +1,6 @@
 Name:Goblin Tinkerer
 ManaCost:1 R
 Types:Creature Goblin Artificer
-Text:no text
 PT:1/2
 A:AB$ Destroy | Cost$ R T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBDamage | SpellDescription$ Destroy target artifact. That artifact deals damage equal to its converted mana cost to CARDNAME.
 SVar:DBDamage:DB$DealDamage | Defined$ Self | NumDmg$ X | References$ X
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_tinkerer.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/180.jpg
 Oracle:{R}, {T}: Destroy target artifact. That artifact deals damage equal to its converted mana cost to Goblin Tinkerer.
-End

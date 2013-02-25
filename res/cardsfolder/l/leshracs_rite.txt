@@ -1,7 +1,6 @@
 Name:Leshrac's Rite
 ManaCost:B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Swampwalk | Description$ Enchanted creature has swampwalk.
@@ -12,4 +11,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/141.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/31.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/144.jpg
 Oracle:Enchant creature\nEnchanted creature has swampwalk.
-End

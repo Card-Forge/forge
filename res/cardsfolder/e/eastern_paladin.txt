@@ -1,7 +1,6 @@
 Name:Eastern Paladin
 ManaCost:2 B B
 Types:Creature Zombie Knight
-Text:no text
 PT:3/3
 A:AB$ Destroy | Cost$ B B T | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | SpellDescription$ Destroy target green creature.
 SVar:RemRandomDeck:True
@@ -11,4 +10,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/131.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/133.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/132.jpg
 Oracle:{B}{B}, {T}: Destroy target green creature.
-End

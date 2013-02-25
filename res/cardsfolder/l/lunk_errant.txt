@@ -1,7 +1,6 @@
 Name:Lunk Errant
 ManaCost:5 R
 Types:Creature Giant Warrior
-Text:no text
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks alone, it gets +1/+1 and gains trample until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lunk_errant.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/94.jpg
 Oracle:Whenever Lunk Errant attacks alone, it gets +1/+1 and gains trample until end of turn.
-End

@@ -1,11 +1,9 @@
 Name:Sorin's Vengeance
 ManaCost:4 B B B
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 4 B B B | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 10 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 10 damage to target player and you gain 10 life.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 10
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorins_vengeance.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/111.jpg
 Oracle:Sorin's Vengeance deals 10 damage to target player and you gain 10 life.
-End

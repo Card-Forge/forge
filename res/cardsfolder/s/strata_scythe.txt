@@ -1,7 +1,6 @@
 Name:Strata Scythe
 ManaCost:3
 Types:Artifact Equipment
-Text:no text
 K:Equip 3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, search your library for a land card, exile it, then shuffle your library.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Library | Destination$ Exile | ChangeType$ Land | ChangeNum$ 1
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strata_scythe.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/206.jpg
 Oracle:Imprint - When Strata Scythe enters the battlefield, search your library for a land card, exile it, then shuffle your library.\nEquipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.\nEquip {3}
-End

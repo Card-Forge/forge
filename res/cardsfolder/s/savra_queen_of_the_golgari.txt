@@ -1,7 +1,6 @@
 Name:Savra, Queen of the Golgari
 ManaCost:2 B G
 Types:Legendary Creature Elf Shaman
-Text:no text
 PT:2/2
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Black | TriggerZones$ Battlefield | Execute$ TrigSacrifice | OptionalDecider$ You | TriggerDescription$ Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Green | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever you sacrifice a green creature, you may gain 2 life.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savra_queen_of_the_golgari.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/225.jpg
 Oracle:Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.\nWhenever you sacrifice a green creature, you may gain 2 life.
-End

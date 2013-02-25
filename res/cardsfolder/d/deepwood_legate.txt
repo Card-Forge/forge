@@ -1,7 +1,6 @@
 Name:Deepwood Legate
 ManaCost:3 B
 Types:Creature Shade
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddHiddenKeyword$ Alternative Cost 0 | CheckSVar$ X | CheckSecondSVar$ Y | Description$ If an opponent controls a Forest and you control a Swamp, you may cast CARDNAME without paying its mana cost.
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_legate.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/132.jpg
 Oracle:If an opponent controls a Forest and you control a Swamp, you may cast Deepwood Legate without paying its mana cost.\n{B}: Deepwood Legate gets +1/+1 until end of turn.
-End

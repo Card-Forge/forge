@@ -1,7 +1,6 @@
 Name:Goblin Sharpshooter
 ManaCost:2 R
 Types:Creature Goblin
-Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 K:CARDNAME doesn't untap during your untap step.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_sharpshooter.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/207.jpg
 Oracle:Goblin Sharpshooter doesn't untap during your untap step.\nWhenever a creature dies, untap Goblin Sharpshooter.\n{T}: Goblin Sharpshooter deals 1 damage to target creature or player.
-End

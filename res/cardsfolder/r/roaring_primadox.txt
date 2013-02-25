@@ -1,7 +1,6 @@
 Name:Roaring Primadox
 ManaCost:3 G
 Types:Creature Beast
-Text:no text
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, return a creature you control to its owner's hand.
 SVar:TrigBounce:DB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roaring_primadox.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/188.jpg
 Oracle:At the beginning of your upkeep, return a creature you control to its owner's hand.
-End

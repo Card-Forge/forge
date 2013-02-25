@@ -1,7 +1,6 @@
 Name:Perimeter Captain
 ManaCost:W
 Types:Creature Human Soldier
-Text:no text
 PT:0/4
 K:Defender
 T:Mode$ Blocks | ValidCard$ Creature.YouCtrl+withDefender | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control with defender blocks, you may gain 2 life.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perimeter_captain.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/16.jpg
 Oracle:Defender\nWhenever a creature you control with defender blocks, you may gain 2 life.
-End

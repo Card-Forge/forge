@@ -1,7 +1,6 @@
 Name:Resounding Thunder
 ManaCost:2 R
 Types:Instant
-Text:no text
 K:Cycling:5 R B G
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When you cycle CARDNAME, it deals 6 damage to target creature or player.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resounding_thunder.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/110.jpg
 Oracle:Resounding Thunder deals 3 damage to target creature or player.\nCycling {5}{B}{R}{G} ({5}{B}{R}{G}, Discard this card: Draw a card.)\nWhen you cycle Resounding Thunder, it deals 6 damage to target creature or player.
-End

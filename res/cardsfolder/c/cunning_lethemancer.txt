@@ -1,7 +1,6 @@
 Name:Cunning Lethemancer
 ManaCost:2 B
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your upkeep, each player discards a card.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Each | NumCards$ 1 | Mode$ TgtChoose
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_lethemancer.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/69.jpg
 Oracle:At the beginning of your upkeep, each player discards a card.
-End

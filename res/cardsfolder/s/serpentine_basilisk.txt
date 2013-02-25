@@ -1,7 +1,6 @@
 Name:Serpentine Basilisk
 ManaCost:2 G G
 Types:Creature Basilisk
-Text:no text
 PT:2/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy damaged creature at end of combat.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serpentine_basilisk.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/280.jpg
 Oracle:Whenever Serpentine Basilisk deals combat damage to a creature, destroy that creature at end of combat.\nMorph {1}{G}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

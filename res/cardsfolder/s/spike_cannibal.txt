@@ -1,7 +1,6 @@
 Name:Spike Cannibal
 ManaCost:1 B B
 Types:Creature Spike
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMoveCounter | TriggerDescription$ When CARDNAME enters the battlefield, move all +1/+1 counters from all creatures onto it.
@@ -10,4 +9,3 @@ SVar:DBMove:DB$ MoveCounter | Source$ Remembered | Defined$ Self | CounterNum$ A
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_cannibal.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/75.jpg
 Oracle:Spike Cannibal enters the battlefield with a +1/+1 counter on it.\nWhen Spike Cannibal enters the battlefield, move all +1/+1 counters from all creatures onto it.
-End

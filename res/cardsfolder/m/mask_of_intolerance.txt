@@ -1,7 +1,6 @@
 Name:Mask of Intolerance
 ManaCost:2
 Types:Artifact
-Text:no text
 #This is not correct
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Land.Basic+YouCtrl | PresentCompare$ GE4 | Execute$ TrigDamageYou | TriggerDescription$ At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, CARDNAME deals 3 damage to him or her.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Land.Basic+YouDontCtrl | PresentCompare$ GE4 | Execute$ TrigDamageOpp | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, CARDNAME deals 3 damage to him or her.
@@ -12,4 +11,3 @@ SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_intolerance.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/138.jpg
 Oracle:At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, Mask of Intolerance deals 3 damage to him or her.
-End

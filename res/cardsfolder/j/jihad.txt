@@ -1,7 +1,6 @@
 Name:Jihad
 ManaCost:W W W
 Types:Enchantment
-Text:no text
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SubAbility$ ChooseP | SpellDescription$ As CARDNAME enters the battlefield, choose a color and an opponent.
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jihad.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/60.jpg
 Oracle:As Jihad enters the battlefield, choose a color and an opponent.\nWhite creatures get +2/+1 as long as the chosen player controls a nontoken permanent of the chosen color.\nWhen the chosen player controls no nontoken permanents of the chosen color, sacrifice Jihad.
-End

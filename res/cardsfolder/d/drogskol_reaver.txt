@@ -1,7 +1,6 @@
 Name:Drogskol Reaver
 ManaCost:5 W U
 Types:Creature Spirit
-Text:no text
 PT:3/5
 K:Flying
 K:Double Strike
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drogskol_reaver.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/137.jpg
 Oracle:Flying, double strike, lifelink\nWhenever you gain life, draw a card.
-End

@@ -1,7 +1,6 @@
 Name:Ashnod's Battle Gear
 ManaCost:2
 Types:Artifact
-Text:no text
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberTargets$ True |  SpellDescription$ Target creature you control gets +2/-2 for as long as CARDNAME remains tapped.
 S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddPower$ 2 | AddToughness$ -2
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ashnods_battle_g
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/314.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/4.jpg
 Oracle:You may choose not to untap Ashnod's Battle Gear during your untap step.\n{2}, {T}: Target creature you control gets +2/-2 for as long as Ashnod's Battle Gear remains tapped.
-End

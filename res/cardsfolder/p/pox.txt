@@ -1,7 +1,6 @@
 Name:Pox
 ManaCost:B B B
 Types:Sorcery
-Text:no text
 A:SP$ LoseLife | Cost$ B B B | LifeAmount$ A | References$ A | Defined$ You | SubAbility$ DBOppLife | SpellDescription$ Each player loses a third of his or her life, then discards a third of the cards in his or her hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.
 SVar:DBOppLife:DB$ LoseLife | LifeAmount$ B | References$ B | Defined$ Opponent | SubAbility$ DBDiscardYou
 SVar:DBDiscardYou:DB$ Discard | NumCards$ C | References$ C | Defined$ You | Mode$ TgtChoose | SubAbility$ DBDiscardOpp
@@ -24,4 +23,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/pox.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/51.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/46.jpg
 Oracle:Each player loses a third of his or her life, then discards a third of the cards in his or her hand, then sacrifices a third of the creatures he or she controls, then sacrifices a third of the lands he or she controls. Round up each time.
-End

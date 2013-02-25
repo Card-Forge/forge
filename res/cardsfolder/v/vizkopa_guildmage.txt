@@ -1,7 +1,6 @@
 Name:Vizkopa Guildmage
 ManaCost:W B
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ 1 W B | ValidTgts$ Creature | KW$ Lifelink | SpellDescription$ Target creature gains lifelink until end of turn.
 A:AB$ Effect | Cost$ 1 W B | Triggers$ VizkopaMageTrig | SVars$ VizkopaMageDrain,VizkopaMageX | References$ VizkopaMageTrig,VizkopaMageDrain,VizkopaMageX | SpellDescription$ Whenever you gain life this turn, each opponent loses that much life.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vizkopa_guildmage.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/206.jpg
 Oracle:{1}{W}{B}: Target creature gains lifelink until end of turn.\n{1}{W}{B}: Whenever you gain life this turn, each opponent loses that much life.
-End

@@ -1,7 +1,6 @@
 Name:Talon of Pain
 ManaCost:4
 Types:Artifact
-Text:no text
 T:Mode$ DamageDone | ValidSource$ Card.Other+YouCtrl | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TalonPutCounter | TriggerDescription$ Whenever a source you control other than CARDNAME deals damage to an opponent, put a charge counter on CARDNAME.
 SVar:TalonPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
 A:AB$ DealDamage | Cost$ X T SubCounter<X/CHARGE> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talon_of_pain.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/150.jpg
 Oracle:Whenever a source you control other than Talon of Pain deals damage to an opponent, put a charge counter on Talon of Pain.\n{X}, {T}, Remove X charge counters from Talon of Pain: Talon of Pain deals X damage to target creature or player.
-End

@@ -1,7 +1,6 @@
 Name:Pearlspear Courier
 ManaCost:2 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/1
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ 2 W T | ValidTgts$ Creature.Soldier | TgtPrompt$ Select target Soldier creature | RememberTargets$ True |  SpellDescription$ Target Soldier creature gets +2/+2 and has vigilance for as long as CARDNAME remains tapped.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pearlspear_courier.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/48.jpg
 Oracle:You may choose not to untap Pearlspear Courier during your untap step.\n{2}{W}, {T}: Target Soldier creature gets +2/+2 and has vigilance for as long as Pearlspear Courier remains tapped.
-End

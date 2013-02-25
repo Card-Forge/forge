@@ -1,7 +1,6 @@
 Name:Ascendant Evincar
 ManaCost:4 B B
 Types:Legendary Creature Vampire
-Text:no text
 PT:3/3
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Black+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other black creatures get +1/+1.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ascendant_evinca
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/51.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/127.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nOther black creatures get +1/+1.\nNonblack creatures get -1/-1.
-End

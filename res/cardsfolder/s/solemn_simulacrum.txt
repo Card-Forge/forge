@@ -1,7 +1,6 @@
 Name:Solemn Simulacrum
 ManaCost:4
 Types:Artifact Creature Golem
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card and put that card onto the battlefield tapped. If you do, shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
@@ -14,4 +13,3 @@ SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/245.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/217.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/262.jpg
 Oracle:When Solemn Simulacrum enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.\nWhen Solemn Simulacrum dies, you may draw a card.
-End

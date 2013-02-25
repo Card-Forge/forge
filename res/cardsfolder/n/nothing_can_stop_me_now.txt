@@ -10,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/nothing_can_stop_me_now.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/nothing-can-stop-me-now.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nIf a source an opponent controls would deal damage to you, prevent 1 of that damage.\nAt the beginning of each end step, if you've been dealt 5 or more damage this turn, abandon this scheme.
-End

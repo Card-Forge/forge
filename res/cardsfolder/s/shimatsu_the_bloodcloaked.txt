@@ -1,7 +1,6 @@
 Name:Shimatsu the Bloodcloaked
 ManaCost:3 R
 Types:Legendary Creature Demon Spirit
-Text:no text
 PT:0/0
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, sacrifice any number of permanents. Shimatsu enters the battlefield with that many +1/+1 counters on it.
 SVar:TrigSac:DB$ Sacrifice | Amount$ SacX | References$ SacX | SacValid$ Permanent | Defined$ You | RememberSacrificed$ True | Optional$ True | SubAbility$ DBPutcounter
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimatsu_the_bloodcloaked.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/186.jpg
 Oracle:As Shimatsu the Bloodcloaked enters the battlefield, sacrifice any number of permanents. Shimatsu enters the battlefield with that many +1/+1 counters on it.
-End

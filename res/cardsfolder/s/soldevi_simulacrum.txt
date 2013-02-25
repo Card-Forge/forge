@@ -1,7 +1,6 @@
 Name:Soldevi Simulacrum
 ManaCost:4
 Types:Artifact Creature Soldier
-Text:no text
 PT:2/4
 K:Cumulative upkeep:1
 A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_simulacrum.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/314.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\n{1}: Soldevi Simulacrum gets +1/+0 until end of turn.
-End

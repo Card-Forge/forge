@@ -1,11 +1,9 @@
 Name:Ertai
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:-1/+4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Hexproof | Description$ Creatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
 SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/ertai.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/ertai.jpg
 Oracle:Hand -1, life +4\nCreatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
-End

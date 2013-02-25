@@ -1,7 +1,6 @@
 Name:Inquisitor's Flail
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.EquippedBy | ReplaceWith$ DmgTimes2 | IsCombat$ True | Description$ If equipped creature would deal combat damage, it deals double that damage instead.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.EquippedBy | ValidSource$ Creature.Other | ReplaceWith$ DmgTimes2 | IsCombat$ True | Description$ If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead.
@@ -10,4 +9,3 @@ SVar:X:ReplaceCount$DamageAmount/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitors_flail.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/227.jpg
 Oracle:If equipped creature would deal combat damage, it deals double that damage instead.\nIf another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead.\nEquip {2}
-End

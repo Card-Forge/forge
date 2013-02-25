@@ -1,11 +1,9 @@
 Name:Wasteland
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | Cost$ T Sac<1/CARDNAME> | SpellDescription$ Destroy target nonbasic land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wasteland.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/340.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Wasteland: Destroy target nonbasic land.
-End

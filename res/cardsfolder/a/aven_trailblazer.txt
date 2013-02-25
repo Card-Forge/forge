@@ -1,7 +1,6 @@
 Name:Aven Trailblazer
 ManaCost:2 W
 Types:Creature Bird Soldier
-Text:no text
 PT:2/*
 K:Flying
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ Domain - CARDNAME's toughness is equal to the number of basic land types among lands you control.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_trailblazer.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/4.jpg
 Oracle:Flying\nDomain - Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
-End

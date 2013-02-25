@@ -8,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexias_core.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/165.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}, Sacrifice an artifact: You gain 1 life.
-End

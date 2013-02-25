@@ -1,7 +1,6 @@
 Name:Wayfaring Giant
 ManaCost:5 W
 Types:Creature Giant
-Text:no text
 PT:1/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ Domain - CARDNAME gets +1/+1 for each basic land type among lands you control.
 SVar:X:Count$Domain
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wayfaring_giant.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/44.jpg
 Oracle:Domain - Wayfaring Giant gets +1/+1 for each basic land type among lands you control.
-End

@@ -1,7 +1,6 @@
 Name:Ophidian Eye
 ManaCost:2 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 K:Flash
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ophidian_eye.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/70.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nWhenever enchanted creature deals damage to an opponent, you may draw a card.
-End

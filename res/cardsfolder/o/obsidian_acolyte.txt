@@ -1,7 +1,6 @@
 Name:Obsidian Acolyte
 ManaCost:1 W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 K:Protection from black
 A:AB$ Protection | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ black | SpellDescription$ Target creature gains protection from black until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_acolyte.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/22.jpg
 Oracle:Protection from black\n{W}: Target creature gains protection from black until end of turn.
-End

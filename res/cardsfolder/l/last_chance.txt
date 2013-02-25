@@ -1,7 +1,6 @@
 Name:Last Chance
 ManaCost:R R
 Types:Sorcery
-Text:no text
 A:SP$ AddTurn | Cost$ R R | NumTurns$ 1 | LoseAtEndStep$ True | SpellDescription$ Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/last_chance.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/110.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/141.jpg
 Oracle:Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-End

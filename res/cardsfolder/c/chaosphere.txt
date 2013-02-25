@@ -1,7 +1,6 @@
 Name:Chaosphere
 ManaCost:2 R
 Types:World Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.withFlying | AddHiddenKeyword$ CARDNAME can block only creatures with flying. | Description$ Creatures with flying can block only creatures with flying.
 S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddKeyword$ Reach | Description$ Creatures without flying have reach. (They can block creatures with flying.)
 SVar:PlayMain1:TRUE
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaosphere.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/164.jpg
 Oracle:Creatures with flying can block only creatures with flying.\nCreatures without flying have reach. (They can block creatures with flying.)
-End

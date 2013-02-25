@@ -1,7 +1,6 @@
 Name:Kavu Recluse
 ManaCost:2 R
 Types:Creature Kavu
-Text:no text
 PT:2/2
 A:AB$Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Forest | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | SpellDescription$ Target land becomes a Forest until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_recluse.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/64.jpg
 Oracle:{T}: Target land becomes a Forest until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Flying Men
 ManaCost:U
 Types:Creature Human
-Text:no text
 PT:1/1
 K:Flying
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/flying_men.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/20.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/19.jpg
 Oracle:Flying
-End

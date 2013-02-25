@@ -1,7 +1,6 @@
 Name:Squee
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+3/-4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Opponent | AddKeyword$ Play with your hand revealed. | Description$ Your opponents play with their hands revealed.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/squee.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/squee.jpg
 Oracle:Hand +3, life -4\nYour opponents play with their hands revealed.
-End

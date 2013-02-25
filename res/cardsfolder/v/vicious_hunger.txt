@@ -1,7 +1,6 @@
 Name:Vicious Hunger
 ManaCost:B B
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to target creature and you gain 2 life.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_hunger.j
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/171.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/74.jpg
 Oracle:Vicious Hunger deals 2 damage to target creature and you gain 2 life.
-End

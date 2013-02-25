@@ -1,7 +1,6 @@
 Name:Dominating Licid
 ManaCost:1 U U
 Types:Creature Licid
-Text:no text
 PT:1/1
 A:AB$ SetState | Cost$ 1 U U T | Defined$ Self | NewState$ Licid | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay U to end this effect.
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
@@ -28,4 +27,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominating_licid.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/30.jpg
 Oracle:{1}{U}{U}, {T}: Dominating Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay  to end this effect.\nYou control enchanted creature.
-End

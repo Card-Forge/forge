@@ -1,7 +1,6 @@
 Name:Erratic Explosion
 ManaCost:2 R
 Types:Sorcery
-Text:no text
 A:SP$ DigUntil | Cost$ 2 R | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Library | RevealedDestination$ Library | FoundLibraryPosition$ -1 | RevealedLibraryPosition$ -1 | RememberFound$ True | SubAbility$ Damage | SpellDescription$ Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Erratic Explosion deals damage equal to that card's converted mana cost to that creature or player. Put the revealed cards on the bottom of your library in any order.
 SVar:Damage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -11,4 +10,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card12484.jpg
 SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/41.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/201.jpg
 Oracle:Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Erratic Explosion deals damage equal to that card's converted mana cost to that creature or player. Put the revealed cards on the bottom of your library in any order.
-End

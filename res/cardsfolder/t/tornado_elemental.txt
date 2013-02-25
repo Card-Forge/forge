@@ -1,7 +1,6 @@
 Name:Tornado Elemental
 ManaCost:5 G G
 Types:Creature Elemental
-Text:no text
 PT:6/6
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAllFlyers | TriggerDescription$ When CARDNAME enters the battlefield, it deals 6 damage to each creature with flying.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tornado_elemental.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/97.jpg
 Oracle:When Tornado Elemental enters the battlefield, it deals 6 damage to each creature with flying.\nYou may have Tornado Elemental assign its combat damage as though it weren't blocked.
-End

@@ -1,7 +1,6 @@
 Name:Talisman of Indulgence
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPain | SpellDescription$ Add R to your mana pool. CARDNAME deals 1 damage to you.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_indulgence.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/255.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {B} or {R} to your mana pool. Talisman of Indulgence deals 1 damage to you.
-End

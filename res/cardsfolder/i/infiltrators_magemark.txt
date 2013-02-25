@@ -1,7 +1,6 @@
 Name:Infiltrator's Magemark
 ManaCost:2 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddHiddenKeyword$ CARDNAME can't be blocked except by creatures with defender. | Description$ Creatures you control that are enchanted get +1/+1 and can't be blocked except by creatures with defender.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infiltrators_magemark.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/28.jpg
 Oracle:Enchant creature\nCreatures you control that are enchanted get +1/+1 and can't be blocked except by creatures with defender.
-End

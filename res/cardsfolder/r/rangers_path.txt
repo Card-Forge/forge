@@ -1,10 +1,8 @@
 Name:Ranger's Path
 ManaCost:3 G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 2 | Tapped$ True | SpellDescription$ Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rangers_path.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/186.jpg
 Oracle:Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.
-End

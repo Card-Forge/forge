@@ -1,7 +1,6 @@
 Name:Mishra's Factory
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Animate | Cost$ 1 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Assembly-Worker | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes a 2/2 Assembly-Worker artifact creature until end of turn. It's still a land.
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Assembly-Worker | TgtPrompt$ Select target Assembly-Worker creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target Assembly-Worker creature gets +1/+1 until end of turn.
@@ -10,4 +9,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/aq/en-us/card1074.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/181.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/66.jpg|4
 Oracle:{T}: Add {1} to your mana pool.\n{1}: Mishra's Factory becomes a 2/2 Assembly-Worker artifact creature until end of turn. It's still a land.\n{T}: Target Assembly-Worker creature gets +1/+1 until end of turn.
-End

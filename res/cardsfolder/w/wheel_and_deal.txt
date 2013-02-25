@@ -1,7 +1,6 @@
 Name:Wheel and Deal
 ManaCost:3 U
 Types:Instant
-Text:no text
 A:SP$ Discard | Cost$ 3 U | ValidTgts$ Opponent | TargetMin$ 0 | Mode$ Hand | SpellDescription$ Any number of target opponents each discards his or her hand and draws seven cards. | SubAbility$ DBDrawOpp
 SVar:DBDrawOpp:DB$Draw | Defined$ Targeted | NumCards$ 7 | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_and_deal.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/121.jpg
 Oracle:Any number of target opponents each discards his or her hand and draws seven cards.\nDraw a card.
-End

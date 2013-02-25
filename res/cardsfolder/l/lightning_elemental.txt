@@ -1,7 +1,6 @@
 Name:Lightning Elemental
 ManaCost:3 R
 Types:Creature Elemental
-Text:no text
 PT:4/1
 K:Haste
 SVar:Rarity:Common
@@ -14,4 +13,3 @@ SetInfo:10E|Common|http://magiccards.info/scans/en/10e/217.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/147.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/149.jpg
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)
-End

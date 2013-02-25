@@ -1,7 +1,6 @@
 Name:Knacksaw Clique
 ManaCost:3 U
 Types:Creature Faerie Rogue
-Text:no text
 PT:1/4
 K:Flying
 A:AB$ Mill | Cost$ 1 U Q | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBPump | SpellDescription$ Target opponent exiles the top card of his or her library. Until end of turn, you may play that card.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knacksaw_clique.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/42.jpg
 Oracle:Flying\n{1}{U}, {Q}: Target opponent exiles the top card of his or her library. Until end of turn, you may play that card. ({Q} is the untap symbol.)
-End

@@ -1,7 +1,6 @@
 Name:Patriarch's Desire
 ManaCost:3 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ Y | References$ X,Y | Description$ Enchanted creature gets +2/-2. Threshold - Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patriarchs_desire.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/156.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/-2.\nThreshold - Enchanted creature gets an additional +2/-2 as long as seven or more cards are in your graveyard.
-End

@@ -1,7 +1,6 @@
 Name:Alaborn Cavalier
 ManaCost:2 W W
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, you may tap target creature.
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_cavalier.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/121.jpg
 Oracle:Whenever Alaborn Cavalier attacks, you may tap target creature.
-End

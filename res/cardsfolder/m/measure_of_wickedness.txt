@@ -1,7 +1,6 @@
 Name:Measure of Wickedness
 ManaCost:3 B
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, sacrifice CARDNAME and you lose 8 life.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 8
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/measure_of_wickedness.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/82.jpg
 Oracle:At the beginning of your end step, sacrifice Measure of Wickedness and you lose 8 life.\nWhenever another card is put into your graveyard from anywhere, target opponent gains control of Measure of Wickedness.
-End

@@ -1,7 +1,6 @@
 Name:Grixis Battlemage
 ManaCost:2 B
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 A:AB$ Draw | Cost$ U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_battlemage.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/78.jpg
 Oracle:{U}, {T}: Draw a card, then discard a card.\n{R}, {T}: Target creature can't block this turn.
-End

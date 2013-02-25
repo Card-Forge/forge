@@ -1,7 +1,6 @@
 Name:Righteous Fury
 ManaCost:4 W W
 Types:Sorcery
-Text:no text
 A:SP$ DestroyAll | Cost$ 4 W W | ValidCards$ Creature.tapped | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ X | References$ X
 SVar:X:Remembered$Amount.Twice
@@ -10,4 +9,3 @@ SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/righteous_fur
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/141.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/23.jpg
 Oracle:Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
-End

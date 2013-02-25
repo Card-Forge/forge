@@ -1,7 +1,6 @@
 Name:Rhystic Syphon
 ManaCost:3 B B
 Types:Sorcery
-Text:no text
 A:SP$ StoreSVar | Cost$ 3 B B | ValidTgts$ Player | TgtPrompt$ Target a player to lose life | SVar$ SyphonPaid | Type$ CountSVar | Expression$ SyphonPaid/Plus.1 | UnlessCost$ 3 | UnlessPayer$ Targeted | SubAbility$ DBLoseLife | SpellDescription$ Unless target player pays 3, he or she loses 5 life and you gain 5 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 5 | Defined$ Targeted | SubAbility$ DBGainLife | ConditionCheckSVar$ SyphonPaid | ConditionSVarCompare$ EQ1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5 | ConditionCheckSVar$ SyphonPaid | ConditionSVarCompare$ EQ1 | SubAbility$ DBReset
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_syphon.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/75.jpg
 Oracle:Unless target player pays {3}, he or she loses 5 life and you gain 5 life.
-End

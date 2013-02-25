@@ -1,7 +1,6 @@
 Name:Callow Jushi
 ManaCost:1 U U
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on CARDNAME, you may flip it.
@@ -18,7 +17,6 @@ Name:Jaraku the Interloper
 ManaCost:1 U U
 Colors:blue
 Types:Legendary Creature Spirit
-Text:no text
 PT:3/4
 A:AB$ Counter | Cost$ SubCounter<1/KI> | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell. | Destination$ Graveyard | UnlessCost$ 2 | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays 2.
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/jaraku_the_interloper.jpg
@@ -26,4 +24,3 @@ SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/jaraku
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/167.jpg
 Oracle:Remove a ki counter from Jaraku the Interloper: Counter target spell unless its controller pays {2}.
 
-End

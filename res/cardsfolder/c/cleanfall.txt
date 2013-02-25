@@ -1,10 +1,8 @@
 Name:Cleanfall
 ManaCost:2 W
 Types:Sorcery Arcane
-Text:no text
 A:SP$ DestroyAll | Cost$ 2 W | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanfall.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/6.jpg
 Oracle:Destroy all enchantments.
-End

@@ -1,7 +1,6 @@
 Name:Tidings
 ManaCost:3 U U
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 3 U U | NumCards$ 4 | SpellDescription$ Draw four cards.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidings.jpg
@@ -9,4 +8,3 @@ SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/54.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/106.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/116.jpg
 Oracle:Draw four cards.
-End

@@ -1,7 +1,6 @@
 Name:Duskdale Wurm
 ManaCost:5 G G
 Types:Creature Wurm
-Text:no text
 PT:7/7
 K:Trample
 SVar:Rarity:Uncommon
@@ -10,4 +9,3 @@ SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/170.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/166.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/67.jpg
 Oracle:Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)
-End

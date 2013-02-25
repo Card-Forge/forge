@@ -1,7 +1,6 @@
 Name:Pulse of the Grid
 ManaCost:1 U U
 Types:Instant
-Text:no text
 A:SP$ Draw | Cost$ 1 U U | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return CARDNAME to its owner's hand.
 SVar:DBDiscard:DB$Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ TrigReturn
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X,Y
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_the_grid.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/29.jpg
 Oracle:Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return Pulse of the Grid to its owner's hand.
-End

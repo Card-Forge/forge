@@ -1,7 +1,6 @@
 Name:Kami of the Waning Moon
 ManaCost:2 B
 Types:Creature Spirit
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_waning_moon.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/120.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
-End

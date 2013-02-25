@@ -1,7 +1,6 @@
 Name:Endless Scream
 ManaCost:X B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 K:etbCounter:SCREAM:X
 SVar:X:Count$xPaid
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endless_scream.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/26.jpg
 Oracle:Enchant creature\nEndless Scream enters the battlefield with X scream counters on it.\nEnchanted creature gets +1/+0 for each scream counter on Endless Scream.
-End

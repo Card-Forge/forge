@@ -1,7 +1,6 @@
 Name:Tariel, Reckoner of Souls
 ManaCost:4 W B R
 Types:Legendary Creature Angel
-Text:no text
 PT:4/7
 K:Flying
 K:Vigilance
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tariel_reckoner_of_souls.jpg
 SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/229.jpg
 Oracle:Flying, vigilance\n{T}: Choose a creature card at random from target opponent's graveyard. Put that card onto the battlefield under your control.
-End

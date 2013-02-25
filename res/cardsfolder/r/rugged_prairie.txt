@@ -1,7 +1,6 @@
 Name:Rugged Prairie
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ RW T | Produced$ W | Amount$ 2 | SpellDescription$ Add W W to your mana pool.
 A:AB$ Mana | Cost$ RW T | Produced$ W R | SpellDescription$ Add W R to your mana pool.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rugged_prairie.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/178.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W} to your mana pool.
-End

@@ -1,7 +1,6 @@
 Name:Skyship Weatherlight
 ManaCost:4
 Types:Legendary Artifact
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library.
 SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature.YouOwn,Artifact.YouOwn | ChangeNum$ X | Origin$ Library | Destination$ Exile | RememberChanged$ True | References$ X
 A:AB$ ChooseCard | Cost$ 4 T | Defined$ You | Amount$ 1 | AtRandom$ True | Choices$ Card.IsRemembered | ChoiceZone$ Exile | SubAbility$ DBChange | SpellDescription$ Choose a card at random that was exiled with CARDNAME. Put that card into its owner's hand.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyship_weatherlight.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/133a.jpg
 Oracle:When Skyship Weatherlight enters the battlefield, search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library.\n{4}, {T}: Choose a card at random that was exiled with Skyship Weatherlight. Put that card into its owner's hand.
-End

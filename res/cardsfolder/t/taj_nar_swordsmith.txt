@@ -1,7 +1,6 @@
 Name:Taj-Nar Swordsmith
 ManaCost:3 W
 Types:Creature Cat Soldier
-Text:no text
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may pay X. If you do, search your library for an Equipment card with converted mana cost X or less and put that card onto the battlefield. Then shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ X | References$ X | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Equipment+cmcLEX | ChangeNum$ 1
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taj_nar_swordsmith.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/27.jpg
 Oracle:When Taj-Nar Swordsmith enters the battlefield, you may pay {X}. If you do, search your library for an Equipment card with converted mana cost X or less and put that card onto the battlefield. Then shuffle your library.
-End

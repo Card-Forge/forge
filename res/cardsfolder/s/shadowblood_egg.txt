@@ -1,7 +1,6 @@
 Name:Shadowblood Egg
 ManaCost:1
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ B R | SubAbility$ DBDraw | SpellDescription$ Add B R to your mana pool. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowblood_egg.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/308.jpg
 Oracle:{2}, {T}, Sacrifice Shadowblood Egg: Add {B}{R} to your mana pool. Draw a card.
-End

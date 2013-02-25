@@ -1,7 +1,6 @@
 Name:Reinforced Bulwark
 ManaCost:3
 Types:Artifact Creature Wall
-Text:no text
 PT:0/4
 K:Defender
 A:AB$ PreventDamage | Cost$ T | Defined$ You | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to you this turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reinforced_bulwark.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/223.jpg
 Oracle:Defender\n{T}: Prevent the next 1 damage that would be dealt to you this turn.
-End

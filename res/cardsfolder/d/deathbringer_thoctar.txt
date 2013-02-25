@@ -1,7 +1,6 @@
 Name:Deathbringer Thoctar
 ManaCost:4 B R
 Types:Creature Zombie Beast
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on CARDNAME.
 A:AB$ DealDamage | Cost$ SubCounter<1/P1P1> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathbringer_thoctar.jpg
 SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/36.jpg
 Oracle:Whenever another creature dies, you may put a +1/+1 counter on Deathbringer Thoctar.\nRemove a +1/+1 counter from Deathbringer Thoctar: Deathbringer Thoctar deals 1 damage to target creature or player.
-End

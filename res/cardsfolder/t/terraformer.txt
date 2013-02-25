@@ -1,7 +1,6 @@
 Name:Terraformer
 ManaCost:2 U
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 A:AB$ ChooseType | Cost$ 1 | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Choose a basic land type. Each land you control becomes that type until end of turn.
 SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Land.YouCtrl | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terraformer.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/70.jpg
 Oracle:{1}: Choose a basic land type. Each land you control becomes that type until end of turn.
-End

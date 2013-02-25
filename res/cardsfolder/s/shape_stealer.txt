@@ -1,7 +1,6 @@
 Name:Shape Stealer
 ManaCost:U U
 Types:Creature Shapeshifter Spirit
-Text:no text
 PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigAnimateBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, change CARDNAME's power and toughness to that creature's power and toughness until end of turn.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigAnimateAttacker | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, change CARDNAME's power and toughness to that creature's power and toughness until end of turn.
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shape_stealer.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/55.jpg
 Oracle:Whenever Shape Stealer blocks or becomes blocked by a creature, change Shape Stealer's power and toughness to that creature's power and toughness until end of turn.
-End

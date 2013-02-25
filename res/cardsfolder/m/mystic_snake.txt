@@ -1,7 +1,6 @@
 Name:Mystic Snake
 ManaCost:1 G U U
 Types:Creature Snake
-Text:no text
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, counter target spell.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/112.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/97.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Mystic Snake enters the battlefield, counter target spell.
-End

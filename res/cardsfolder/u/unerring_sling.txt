@@ -1,7 +1,6 @@
 Name:Unerring Sling
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ DealDamage | Cost$ 3 T tapXType<1/Creature> | ValidTgts$Creature.attacking+withFlying,Creature.blocking+withFlying | TgtPrompt$ Select target attacking or blocking creature with Flying | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the tapped creature's power to target attacking or blocking creature with flying.
 SVar:X:Tapped$CardPower
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unerring_sling.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/287.jpg
 Oracle:{3}, {T}, Tap an untapped creature you control: Unerring Sling deals damage equal to the tapped creature's power to target attacking or blocking creature with flying.
-End

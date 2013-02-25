@@ -1,7 +1,6 @@
 Name:Carrion Rats
 ManaCost:B
 Types:Creature Rat
-Text:no text
 PT:2/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigNoCombatDamage | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile a card from his or her graveyard. If a player does, CARDNAME assigns no combat damage this turn.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigNoCombatDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, any player may exile a card from his or her graveyard. If a player does, CARDNAME assigns no combat damage this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_rats.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/54.jpg
 Oracle:Whenever Carrion Rats attacks or blocks, any player may exile a card from his or her graveyard. If a player does, Carrion Rats assigns no combat damage this turn.
-End

@@ -1,11 +1,9 @@
 Name:Taste of Blood
 ManaCost:B
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 1 damage to target player and you gain 1 life.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taste_of_blood.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/113.jpg
 Oracle:Taste of Blood deals 1 damage to target player and you gain 1 life.
-End

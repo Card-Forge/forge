@@ -1,7 +1,6 @@
 Name:Drowned Catacomb
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped unless you control an Island or a Swamp.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
@@ -12,4 +11,3 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/224.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/223.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/226.jpg
 Oracle:Drowned Catacomb enters the battlefield tapped unless you control an Island or a Swamp.\n{T}: Add {U} or {B} to your mana pool.
-End

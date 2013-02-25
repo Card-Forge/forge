@@ -11,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blizzard.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/115.jpg
 Oracle:Cast Blizzard only if you control a snow land.\nCumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nCreatures with flying don't untap during their controllers' untap steps.
-End

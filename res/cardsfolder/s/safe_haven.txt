@@ -1,7 +1,6 @@
 Name:Safe Haven
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target permanent you control. | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SpellDescription$ Exile target permanent you control.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may sacrifice CARDNAME. If you do, return each card exiled with CARDNAME to the battlefield under its owner's control.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
@@ -12,4 +11,3 @@ Oracle:{2}, {T}: Exile target creature you control.\nAt the beginning of your up
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/115.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/121.jpg
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/93.jpg
-End

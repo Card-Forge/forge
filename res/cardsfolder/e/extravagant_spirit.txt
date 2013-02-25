@@ -1,7 +1,6 @@
 Name:Extravagant Spirit
 ManaCost:3 U
 Types:Creature Spirit
-Text:no text
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 for each card in your hand.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extravagant_spirit.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/79.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Extravagant Spirit unless you pay {1} for each card in your hand.
-End

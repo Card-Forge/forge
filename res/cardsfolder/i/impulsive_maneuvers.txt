@@ -1,7 +1,6 @@
 Name:Impulsive Maneuvers
 ManaCost:2 R R
 Types:Enchantment
-Text:no text
 T:Mode$ Attacks | ValidCard$ Creature | Execute$ CoinFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacks, flip a coin. If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage.
 SVar:CoinFlip:DB$ FlipACoin | WinSubAbility$ CreateWinEffect | LoseSubAbility$ CreateLossEffect
 # Winning Effect
@@ -18,4 +17,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impulsive_maneuvers.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/197.jpg
 Oracle:Whenever a creature attacks, flip a coin. If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage.
-End

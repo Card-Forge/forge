@@ -1,7 +1,6 @@
 Name:Sphinx of Magosi
 ManaCost:3 U U U
 Types:Creature Sphinx
-Text:no text
 PT:6/6
 K:Flying
 A:AB$ Draw | Cost$ 2 U | NumCards$ 1 | Defined$ You | SubAbility$ DBPutCounter | SpellDescription$ Draw a card, then put a +1/+1 counter on CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_magosi.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/89.jpg
 Oracle:Flying\n{2}{U}: Draw a card, then put a +1/+1 counter on Sphinx of Magosi.
-End

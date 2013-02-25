@@ -1,7 +1,6 @@
 Name:Krosan Constrictor
 ManaCost:3 G
 Types:Creature Snake
-Text:no text
 PT:2/2
 K:Swampwalk
 A:AB$ Pump | Cost$ T | NumAtt$ -2 | IsCurse$ True | TgtPrompt$ Choose target Black creature | ValidTgts$ Creature.Black | SpellDescription$ Target black creature gets -2/-0 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_constrictor.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/129.jpg
 Oracle:Swampwalk\n{T}: Target black creature gets -2/-0 until end of turn.
-End

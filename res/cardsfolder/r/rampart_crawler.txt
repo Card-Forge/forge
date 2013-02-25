@@ -1,11 +1,9 @@
 Name:Rampart Crawler
 ManaCost:B
 Types:Creature Lizard Mercenary
-Text:no text
 PT:1/1
 K:CARDNAME can't be blocked by Walls.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rampart_crawler.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/156.jpg
 Oracle:Rampart Crawler can't be blocked by Walls.
-End

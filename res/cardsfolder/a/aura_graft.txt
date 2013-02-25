@@ -1,7 +1,6 @@
 Name:Aura Graft
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ GainControl | Cost$ 1 U | ValidTgts$ Aura.AttachedTo Permanent | TgtPrompt$ Select target Aura attached to a permanent | SubAbility$ ChooseNewHost | SpellDescription$ Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
 SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Permanent.CanBeEnchantedByTargeted+NotEnchantedByTargeted | ChoiceZone$ Battlefield | SubAbility$ ReEnchant | RememberChosen$ True | AILogic$ AtLeast1 |
 SVar:ReEnchant:DB$ Attach | Object$ ParentTarget | Defined$ Remembered
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_graft.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/62.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/67.jpg
 Oracle:Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
-End

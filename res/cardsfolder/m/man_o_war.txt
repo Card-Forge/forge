@@ -1,7 +1,6 @@
 Name:Man-o'-War
 ManaCost:2 U
 Types:Creature Jellyfish
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature to its owner's hand.
 SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
@@ -11,4 +10,3 @@ SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/37.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/41.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/60.jpg
 Oracle:When Man-o'-War enters the battlefield, return target creature to its owner's hand.
-End

@@ -1,7 +1,6 @@
 Name:Shaman en-Kor
 ManaCost:1 W
 Types:Creature Kor Cleric Shaman
-Text:no text
 PT:1/2
 A:AB$ Effect | Cost$ 0 | Name$ en-Kor Redirection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage to | ReplacementEffects$ EnKorCombat,EnKorNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | References$ EnKorCombat,EnKorNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | Duration$ HostLeavesOrEOT | RememberObjects$ Self | ImprintCards$ Targeted | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to target creature you control instead.
 SVar:EnKorCombat:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next 1 damage that would be dealt to Shaman en-Kor this turn is dealt to target creature you control instead.
@@ -27,4 +26,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaman_en_kor.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/115.jpg
 Oracle:{0}: The next 1 damage that would be dealt to Shaman en-Kor this turn is dealt to target creature you control instead.\n{1}{W}: The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to Shaman en-Kor instead.
-End

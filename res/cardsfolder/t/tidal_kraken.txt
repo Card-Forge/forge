@@ -1,7 +1,6 @@
 Name:Tidal Kraken
 ManaCost:5 U U U
 Types:Creature Kraken
-Text:no text
 PT:6/6
 K:Unblockable
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/108.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/110.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/105.jpg
 Oracle:Tidal Kraken is unblockable.
-End

@@ -1,7 +1,6 @@
 Name:Cetavolver
 ManaCost:1 U
 Types:Creature Volver
-Text:no text
 PT:1/1
 K:Kicker 1 R
 K:Kicker G
@@ -17,4 +16,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cetavolver.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/21.jpg
 Oracle:Kicker {1}{R} and/or {G} (You may pay an additional {1}{R} and/or {G} as you cast this spell.)\nIf Cetavolver was kicked with its {1}{R} kicker, it enters the battlefield with two +1/+1 counters on it and with first strike.\nIf Cetavolver was kicked with its {G} kicker, it enters the battlefield with a +1/+1 counter on it and with trample.
-End

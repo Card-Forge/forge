@@ -1,7 +1,6 @@
 Name:Venerable Monk
 ManaCost:2 W
 Types:Creature Human Monk Cleric
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
@@ -16,4 +15,3 @@ SetInfo:10E|Common|http://magiccards.info/scans/en/10e/55.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/50.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/28.jpg
 Oracle:When Venerable Monk enters the battlefield, you gain 2 life.
-End

@@ -1,7 +1,6 @@
 Name:Heavy Arbalest
 ManaCost:3
 Types:Artifact Equipment
-Text:no text
 K:Equip 4
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Equipped creature doesn't untap during its controller's untap step.
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | Description$ Equipped creature has "Tap: This creature deals 2 damage to target creature or player."
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heavy_arbalest.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/164.jpg
 Oracle:Equipped creature doesn't untap during its controller's untap step.\nEquipped creature has "{T}: This creature deals 2 damage to target creature or player."\nEquip {4}
-End

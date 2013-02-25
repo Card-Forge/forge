@@ -1,7 +1,6 @@
 Name:Razorfoot Griffin
 ManaCost:3 W
 Types:Creature Griffin
-Text:no text
 PT:2/2
 K:Flying
 K:First Strike
@@ -12,4 +11,3 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/25.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/29.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/32.jpg
 Oracle:Flying\nFirst strike (This creature deals combat damage before creatures without first strike.)
-End

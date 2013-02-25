@@ -1,7 +1,6 @@
 Name:Hellkite Tyrant
 ManaCost:4 R R
 Types:Creature Dragon
-Text:no text
 PT:6/5
 K:Flying
 K:Trample
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellkite_tyrant.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/94.jpg
 Oracle:Flying, trample\nWhenever Hellkite Tyrant deals combat damage to a player, gain control of all artifacts that player controls.\nAt the beginning of your upkeep, if you control twenty or more artifacts, you win the game.
-End

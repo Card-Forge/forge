@@ -1,7 +1,6 @@
 Name:Thought Devourer
 ManaCost:2 U U
 Types:Creature Beast
-Text:no text
 PT:4/4
 S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ -4 | Description$ Your maximum hand size is reduced by four.
 K:Flying
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_devourer.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/105.jpg
 Oracle:Flying\nYour maximum hand size is reduced by four.
-End

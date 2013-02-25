@@ -9,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_kithkin.jp
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/252.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/172.jpg
 Oracle:Amrou Kithkin can't be blocked by creatures with power 3 or greater.
-End

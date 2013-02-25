@@ -1,7 +1,6 @@
 Name:Carrion Ants
 ManaCost:2 B B
 Types:Creature Insect
-Text:no text
 PT:0/1
 A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Rarity:Uncommon
@@ -10,4 +9,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/12.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/9.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/4.jpg
 Oracle:{1}: Carrion Ants gets +1/+1 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Mobilization
 ManaCost:2 W
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.Soldier | AddKeyword$ Vigilance | Description$ Soldier creatures have vigilance.
 A:AB$ Token | Cost$ 2 W | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Soldier creature token onto the battlefield.
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mobilization.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/44.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/29.jpg
 Oracle:Soldier creatures have vigilance. (Attacking doesn't cause them to tap.)\n{2}{W}: Put a 1/1 white Soldier creature token onto the battlefield.
-End

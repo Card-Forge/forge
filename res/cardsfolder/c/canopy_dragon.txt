@@ -1,7 +1,6 @@
 Name:Canopy Dragon
 ManaCost:4 G G
 Types:Creature Dragon
-Text:no text
 PT:4/4
 K:Trample
 A:AB$Pump | Cost$ 1 G | Defined$ Self | KW$ Flying | SubAbility$ DBDebuff | SpellDescription$ CARDNAME gains flying and loses trample until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_dragon.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/107.jpg
 Oracle:Trample\n{1}{G}: Canopy Dragon gains flying and loses trample until end of turn.
-End

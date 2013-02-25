@@ -1,11 +1,9 @@
 Name:Marsh Threader
 ManaCost:1 W
 Types:Creature Kor Scout
-Text:no text
 PT:2/1
 K:Swampwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_threader.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/14.jpg
 Oracle:Swampwalk
-End

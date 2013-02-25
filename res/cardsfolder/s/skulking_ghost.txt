@@ -1,7 +1,6 @@
 Name:Skulking Ghost
 ManaCost:1 B
 Types:Creature Spirit
-Text:no text
 PT:2/1
 K:Flying
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skulking_ghost.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/41.jpg
 Oracle:Flying\nWhen Skulking Ghost becomes the target of a spell or ability, sacrifice it.
-End

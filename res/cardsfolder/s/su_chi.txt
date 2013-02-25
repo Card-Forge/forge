@@ -1,7 +1,6 @@
 Name:Su-Chi
 ManaCost:4
 Types:Artifact Creature Construct
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigAddMana | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, add 4 to your mana pool.
 SVar:TrigAddMana:AB$Mana | Cost$ 0 | Produced$1 | Amount$ 4
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/su_chi.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/31.jpg
 Oracle:When Su-Chi dies, add {4} to your mana pool.
-End

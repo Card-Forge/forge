@@ -1,7 +1,6 @@
 Name:Guardian of Vitu-Ghazi
 ManaCost:6 G W
 Types:Creature Elemental
-Text:no text
 PT:4/7
 K:Convoke
 K:Vigilance
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_vitu_ghazi.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/212.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nVigilance
-End

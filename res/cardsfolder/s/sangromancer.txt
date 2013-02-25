@@ -1,7 +1,6 @@
 Name:Sangromancer
 ManaCost:2 B B
 Types:Creature Vampire Shaman
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever a creature an opponent controls is put into a graveyard from the battlefield, you may gain 3 life.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sangromancer.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/53.jpg
 Oracle:Flying\nWhenever a creature an opponent controls dies, you may gain 3 life.\nWhenever an opponent discards a card, you may gain 3 life.
-End

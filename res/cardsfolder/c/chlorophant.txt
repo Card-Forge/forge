@@ -1,7 +1,6 @@
 Name:Chlorophant
 ManaCost:G G G
 Types:Creature Elemental
-Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ GimmeSome | TriggerDescription$ At the beginning of your upkeep, you may put a +1/+1 counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Threshold$ True | Execute$ GimmeSome | TriggerDescription$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME has "At the beginning of your upkeep, you may put another +1/+1 counter on CARDNAME."
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chlorophant.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/234.jpg
 Oracle:At the beginning of your upkeep, you may put a +1/+1 counter on Chlorophant.\nThreshold - As long as seven or more cards are in your graveyard, Chlorophant has "At the beginning of your upkeep, you may put another +1/+1 counter on Chlorophant."
-End

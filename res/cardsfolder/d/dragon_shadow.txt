@@ -1,7 +1,6 @@
 Name:Dragon Shadow
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Fear | Description$ Enchanted creature gets +1/+0 and has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_shadow.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/65.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has fear. (It can't be blocked except by artifact creatures and/or black creatures.)\nWhen a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Shadow from your graveyard to the battlefield attached to that creature.
-End

@@ -1,10 +1,8 @@
 Name:Swelter
 ManaCost:3 R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 3 R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each of two target creatures.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swelter.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/101.jpg
 Oracle:Swelter deals 2 damage to each of two target creatures.
-End

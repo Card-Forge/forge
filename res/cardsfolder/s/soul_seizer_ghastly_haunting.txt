@@ -1,7 +1,6 @@
 Name:Soul Seizer
 ManaCost:3 U U
 Types:Creature Spirit
-Text:no text
 PT:1/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
@@ -25,4 +24,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_haunting.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/50b.jpg
 Oracle:Enchant creature\nYou control enchanted creature.
-End

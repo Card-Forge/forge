@@ -1,7 +1,6 @@
 Name:Giant Trap Door Spider
 ManaCost:1 R G
 Types:Creature Spider
-Text:no text
 PT:2/3
 A:AB$ ChangeZone | Cost$ 1 R G T | ValidTgts$ Creature.attackingYou+withoutFlying | TgtPrompt$ Select target creature without flying that's attacking you | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile CARDNAME and target creature without flying that's attacking you. | SubAbility$ ExileME
 SVar:ExileME:DB$ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_trap_door_spider.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/371.jpg
 Oracle:{1}{R}{G}, {T}: Exile Giant Trap Door Spider and target creature without flying that's attacking you.
-End

@@ -1,7 +1,6 @@
 Name:Dominus of Fealty
 ManaCost:UR UR UR UR UR
 Types:Creature Spirit Avatar
-Text:no text
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainControl | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may gain control of target permanent until end of turn. If you do, untap it and it gains haste until end of turn.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dominus_of_fealt
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/194.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/102.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you may gain control of target permanent until end of turn. If you do, untap it and it gains haste until end of turn.
-End

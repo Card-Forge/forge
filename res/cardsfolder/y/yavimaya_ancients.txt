@@ -1,11 +1,9 @@
 Name:Yavimaya Ancients
 ManaCost:3 G G
 Types:Creature Treefolk
-Text:no text
 PT:2/7
 A:AB$ Pump | Cost$ G | NumAtt$ +1 | NumDef$ -2 | SpellDescription$ CARDNAME gets +1/-2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_ancients.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/91.jpg|2
 Oracle:{G}: Yavimaya Ancients gets +1/-2 until end of turn.
-End

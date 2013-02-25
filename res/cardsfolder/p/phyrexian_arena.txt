@@ -1,7 +1,6 @@
 Name:Phyrexian Arena
 ManaCost:1 B B
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, you draw a card and you lose 1 life.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 1
@@ -11,4 +10,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/152.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/47.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/152.jpg
 Oracle:At the beginning of your upkeep, you draw a card and you lose 1 life.
-End

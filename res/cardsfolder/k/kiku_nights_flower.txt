@@ -1,7 +1,6 @@
 Name:Kiku, Night's Flower
 ManaCost:B B
 Types:Legendary Creature Human Assassin
-Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ 2 B B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | DamageSource$ Targeted | References$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
 SVar:X:Targeted$CardPower
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiku_nights_flower.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/121.jpg
 Oracle:{2}{B}{B}, {T}: Target creature deals damage to itself equal to its power.
-End

@@ -1,11 +1,9 @@
 Name:Watercourser
 ManaCost:2 U
 Types:Creature Elemental
-Text:no text
 PT:2/3
 A:AB$ Pump | Cost$ U | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/watercourser.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/78.jpg
 Oracle:{U}: Watercourser gets +1/-1 until end of turn.
-End

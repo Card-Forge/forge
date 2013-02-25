@@ -1,7 +1,6 @@
 Name:Geist Trappers
 ManaCost:4 G
 Types:Creature Human Warrior
-Text:no text
 PT:3/5
 K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Reach | Description$ As long as CARDNAME is paired with another creature, both creatures have reach.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_trappers.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/179.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Geist Trappers is paired with another creature, both creatures have reach.
-End

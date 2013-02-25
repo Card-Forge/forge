@@ -1,11 +1,9 @@
 Name:Dream Twist
 ManaCost:U
 Types:Instant
-Text:no text
 K:Flashback 1 U
 A:SP$ Mill | Cost$ U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top three cards of his or her library into his or her graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_twist.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/54.jpg
 Oracle:Target player puts the top three cards of his or her library into his or her graveyard.\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

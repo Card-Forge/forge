@@ -1,7 +1,6 @@
 Name:Greater Basilisk
 ManaCost:3 G G
 Types:Creature Basilisk
-Text:no text
 PT:3/5
 K:Deathtouch
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_basilisk
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/180.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/179.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
-End

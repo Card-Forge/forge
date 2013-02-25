@@ -1,7 +1,6 @@
 Name:Crusade
 ManaCost:W W
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ 1 | Description$ White creatures get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
@@ -14,4 +13,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/13.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/199.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/201.jpg
 Oracle:White creatures get +1/+1.
-End

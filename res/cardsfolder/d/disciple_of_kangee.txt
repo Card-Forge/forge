@@ -1,7 +1,6 @@
 Name:Disciple of Kangee
 ManaCost:2 W
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SubAbility$ Blue | SpellDescription$ Target creature gains flying and becomes blue until end of turn.
 SVar:Blue:DB$ Animate | Defined$ Targeted | Colors$ Blue | OverwriteColors$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_kangee.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/3.jpg
 Oracle:{U}, {T}: Target creature gains flying and becomes blue until end of turn.
-End

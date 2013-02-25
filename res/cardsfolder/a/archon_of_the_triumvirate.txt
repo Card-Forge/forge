@@ -1,7 +1,6 @@
 Name:Archon of the Triumvirate
 ManaCost:5 W U
 Types:Creature Archon
-Text:no text
 PT:4/5
 K:Flying
 T:Mode$ Attacks | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ Whenever CARDNAME attacks, detain up to two target nonland permanents your opponents control. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archon_of_the_triumvirate.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/142.jpg
 Oracle:Flying\nWhenever Archon of the Triumvirate attacks, detain up to two target nonland permanents your opponents control. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
-End

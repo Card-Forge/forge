@@ -1,11 +1,9 @@
 Name:Primal Huntbeast
 ManaCost:3 G
 Types:Creature Beast
-Text:no text
 PT:3/3
 K:Hexproof
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_huntbeast.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/182.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)
-End

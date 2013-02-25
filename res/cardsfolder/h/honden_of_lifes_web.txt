@@ -1,7 +1,6 @@
 Name:Honden of Life's Web
 ManaCost:4 G
 Types:Legendary Enchantment Shrine
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put a 1/1 colorless Spirit creature token onto the battlefield for each Shrine you control.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | References$ X
 SVar:X:Count$TypeYouCtrl.Shrine
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_lifes_web.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/213.jpg
 Oracle:At the beginning of your upkeep, put a 1/1 colorless Spirit creature token onto the battlefield for each Shrine you control.
-End

@@ -1,7 +1,6 @@
 Name:Vigean Hydropon
 ManaCost:1 G U
 Types:Creature Plant Mutant
-Text:no text
 PT:0/0
 K:Graft 5
 K:CARDNAME can't attack or block.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigean_hydropon.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/135.jpg
 Oracle:Graft 5 (This creature enters the battlefield with five +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\nVigean Hydropon can't attack or block.
-End

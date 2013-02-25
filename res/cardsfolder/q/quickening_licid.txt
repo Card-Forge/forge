@@ -1,7 +1,6 @@
 Name:Quickening Licid
 ManaCost:1 W
 Types:Creature Licid
-Text:no text
 PT:1/1
 A:AB$ SetState | Cost$ 1 W T | Defined$ Self | NewState$ Licid | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay W to end this effect.
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
@@ -29,4 +28,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quickening_licid.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/248.jpg
 Oracle:{1}{W}, {T}: Quickening Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {W} to end this effect.\nEnchanted creature has first strike.
-End

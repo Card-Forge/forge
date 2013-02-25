@@ -1,7 +1,6 @@
 Name:Incendiary
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a fuse counter on CARDNAME.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incendiary.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/89.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, you may put a fuse counter on Incendiary.\nWhen enchanted creature dies, Incendiary deals X damage to target creature or player, where X is the number of fuse counters on Incendiary.
-End

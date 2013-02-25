@@ -1,7 +1,6 @@
 Name:Graceful Antelope
 ManaCost:2 W W
 Types:Creature Antelope
-Text:no text
 PT:1/4
 K:Plainswalk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may have target land become a Plains until CARDNAME leaves the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_antelope.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/24.jpg
 Oracle:Plainswalk\nWhenever Graceful Antelope deals combat damage to a player, you may have target land become a Plains until Graceful Antelope leaves the battlefield.
-End

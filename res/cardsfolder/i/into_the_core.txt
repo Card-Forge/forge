@@ -1,10 +1,8 @@
 Name:Into the Core
 ManaCost:2 R R
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 2 R R | Origin$ Battlefield | Destination$ Exile | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Exile two target artifacts.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_the_core.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/67.jpg
 Oracle:Exile two target artifacts.
-End

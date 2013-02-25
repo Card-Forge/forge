@@ -1,7 +1,6 @@
 Name:Dewdrop Spy
 ManaCost:1 U U
 Types:Creature Faerie Rogue
-Text:no text
 PT:2/2
 K:Flash
 K:Flying
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dewdrop_spy.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/30.jpg
 Oracle:Flash\nFlying\nWhen Dewdrop Spy enters the battlefield, look at the top card of target player's library.
-End

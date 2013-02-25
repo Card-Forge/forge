@@ -1,7 +1,6 @@
 Name:Skirk Drill Sergeant
 ManaCost:1 R
 Types:Creature Goblin
-Text:no text
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Goblin.Other | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME or another Goblin dies, you may pay 2 R. If you do, reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDig | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Goblin dies, you may pay 2 R. If you do, reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_drill_sergeant.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/112.jpg
 Oracle:Whenever Skirk Drill Sergeant or another Goblin dies, you may pay {2}{R}. If you do, reveal the top card of your library. If it's a Goblin permanent card, put it onto the battlefield. Otherwise, put it into your graveyard.
-End

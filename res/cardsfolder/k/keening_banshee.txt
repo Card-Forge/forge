@@ -1,7 +1,6 @@
 Name:Keening Banshee
 ManaCost:2 B B
 Types:Creature Spirit
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpCurse | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets -2/-2 until end of turn.
 SVar:TrigPumpCurse:DB$Pump| ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -2 | NumDef$ -2
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83599.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/92.jpg
 Oracle:Flying\nWhen Keening Banshee enters the battlefield, target creature gets -2/-2 until end of turn.
-End

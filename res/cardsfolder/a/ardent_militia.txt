@@ -1,7 +1,6 @@
 Name:Ardent Militia
 ManaCost:4 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/5
 K:Vigilance
 SVar:Rarity:Uncommon
@@ -13,4 +12,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/3.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/121.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/5.jpg
 Oracle:Vigilance
-End

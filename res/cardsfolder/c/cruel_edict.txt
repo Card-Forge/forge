@@ -1,7 +1,6 @@
 Name:Cruel Edict
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_edict.jpg
@@ -9,4 +8,3 @@ SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/7.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/121.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/133.jpg
 Oracle:Target opponent sacrifices a creature.
-End

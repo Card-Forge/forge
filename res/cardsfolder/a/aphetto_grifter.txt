@@ -1,7 +1,6 @@
 Name:Aphetto Grifter
 ManaCost:2 U
 Types:Creature Human Wizard
-Text:no text
 PT:1/1
 A:AB$ Tap | Cost$ tapXType<2/Wizard> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_grifter.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/65.jpg
 Oracle:Tap two untapped Wizards you control: Tap target permanent.
-End

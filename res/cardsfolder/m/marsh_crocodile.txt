@@ -1,7 +1,6 @@
 Name:Marsh Crocodile
 ManaCost:2 U B
 Types:Creature Crocodile
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a blue or black creature you control to its owner's hand.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each player discards a card.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_crocodile.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/115.jpg
 Oracle:When Marsh Crocodile enters the battlefield, return a blue or black creature you control to its owner's hand.\nWhen Marsh Crocodile enters the battlefield, each player discards a card.
-End

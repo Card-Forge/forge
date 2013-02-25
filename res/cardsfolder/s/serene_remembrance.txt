@@ -1,10 +1,8 @@
 Name:Serene Remembrance
 ManaCost:G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ G | Origin$ Stack | Destination$ Library | Shuffle$ True | Defined$ Self | SubAbility$ DBShuffleGrave | SpellDescription$ Shuffle CARDNAME and up to three target cards from a single graveyard into their owners' libraries.
 SVar:DBShuffleGrave:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | TargetsFromSingleZone$ True | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card.Other | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_remembrance.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/132.jpg
 Oracle:Shuffle Serene Remembrance and up to three target cards from a single graveyard into their owners' libraries.
-End

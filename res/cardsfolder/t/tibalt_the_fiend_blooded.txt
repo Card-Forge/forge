@@ -1,7 +1,6 @@
 Name:Tibalt, the Fiend-Blooded
 ManaCost:R R
 Types:Planeswalker Tibalt
-Text:no text
 Loyalty:2
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | NumCards$ 1 | Planeswalker$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card at random.
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ Random
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tibalt_the_fiend_blooded.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/161.jpg
 Oracle:[+1] Draw a card, then discard a card at random.\n[-4] Tibalt, the Fiend-Blooded deals damage equal to the number of cards in target player's hand to that player.\n[-6] Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
-End

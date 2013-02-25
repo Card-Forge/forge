@@ -1,7 +1,6 @@
 Name:Dimir Aqueduct
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U B | SpellDescription$ Add U B to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
@@ -13,4 +12,3 @@ SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/276.jpg
 SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/116.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/270.jpg
 Oracle:Dimir Aqueduct enters the battlefield tapped.\nWhen Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {U}{B} to your mana pool.
-End

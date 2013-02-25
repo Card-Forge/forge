@@ -1,7 +1,6 @@
 Name:Grinning Demon Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:-1/-2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Command | Execute$ GrinningDiscard | TriggerDescription$ Whenever a nontoken creature you control dies, target opponent discards a card.
 SVar:GrinningDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent to discard | NumCards$ 1 | Mode$ TgtChoose
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/grinning_demon_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/grinning-demon.jpg
 Oracle:Hand -1, life -2\nWhenever a nontoken creature you control dies, target opponent discards a card.
-End

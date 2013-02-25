@@ -1,7 +1,6 @@
 Name:Slayer of the Wicked
 ManaCost:3 W
 Types:Creature Human Soldier
-Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestory | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target Vampire, Werewolf, or Zombie.
 SVar:TrigDestory:DB$ Destroy | Cost$ 0 | ValidTgts$ Creature.Vampire,Creature.Werewolf,Creature.Zombie | TgtPrompt$ Select target Vampire, Werewolf, or Zombie
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slayer_of_the_wicked.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/32.jpg
 Oracle:When Slayer of the Wicked enters the battlefield, you may destroy target Vampire, Werewolf, or Zombie.
-End

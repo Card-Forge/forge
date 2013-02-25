@@ -1,7 +1,6 @@
 Name:Dark Hatchling
 ManaCost:4 B B
 Types:Creature Horror
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonblack creature.  It can't be regenerated.
@@ -12,4 +11,3 @@ SetInfo:USG|Rare|http://magiccards.info/scans/en/us/126.jpg
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/32.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/76.jpg
 Oracle:Flying\nWhen Dark Hatchling enters the battlefield, destroy target nonblack creature. It can't be regenerated.
-End

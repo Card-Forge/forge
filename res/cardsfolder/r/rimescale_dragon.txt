@@ -1,7 +1,6 @@
 Name:Rimescale Dragon
 ManaCost:5 R R
 Types:Snow Creature Dragon
-Text:no text
 PT:5/5
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.counters_GE1_ICE | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures with ice counters on them don't untap during their controllers' untap steps.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimescale_dragon.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/95.jpg
 Oracle:Flying\n{2}{S}: Tap target creature and put an ice counter on it. ({S} can be paid with one mana from a snow permanent.)\nCreatures with ice counters on them don't untap during their controllers' untap steps.
-End

@@ -1,11 +1,9 @@
 Name:Part the Veil
 ManaCost:3 U
 Types:Instant Arcane
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 3 U | ChangeType$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all creatures you control to their owner's hand.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/part_the_veil.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/77.jpg
 Oracle:Return all creatures you control to their owner's hand.
-End

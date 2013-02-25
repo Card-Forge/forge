@@ -1,7 +1,6 @@
 Name:Sky Swallower
 ManaCost:3 U U
 Types:Creature Leviathan
-Text:no text
 PT:8/8
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, target opponent gains control of all other permanents you control.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96835.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/34.jpg
 Oracle:Flying\nWhen Sky Swallower enters the battlefield, target opponent gains control of all other permanents you control.
-End

@@ -1,7 +1,6 @@
 Name:Spell Blast
 ManaCost:X U
 Types:Instant
-Text:no text
 A:SP$Counter | Cost$ X U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell with converted mana cost X.
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
@@ -15,4 +14,3 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/100.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/82.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/80.jpg
 Oracle:Counter target spell with converted mana cost X.
-End

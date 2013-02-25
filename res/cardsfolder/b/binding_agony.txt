@@ -1,7 +1,6 @@
 Name:Binding Agony
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ DamageDone | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever enchanted creature is dealt damage, CARDNAME deals that much damage to that creature's controller.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/binding_agony.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/4.jpg
 Oracle:Enchant creature\nWhenever enchanted creature is dealt damage, Binding Agony deals that much damage to that creature's controller.
-End

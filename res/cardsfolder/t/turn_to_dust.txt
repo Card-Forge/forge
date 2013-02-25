@@ -1,7 +1,6 @@
 Name:Turn to Dust
 ManaCost:G
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ G | ValidTgts$ Equipment | TgtPrompt$ Select target Equipment | SubAbility$ DBMana | SpellDescription$ Destroy target Equipment. Add G to your mana pool.
 SVar:DBMana:DB$Mana | Produced$ G | Amount$ 1
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_to_dust.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/137.jpg
 Oracle:Destroy target Equipment. Add {G} to your mana pool.
-End

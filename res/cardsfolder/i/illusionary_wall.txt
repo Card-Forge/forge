@@ -1,7 +1,6 @@
 Name:Illusionary Wall
 ManaCost:4 U
 Types:Creature Illusion Wall
-Text:no text
 PT:7/4
 K:Defender
 K:Flying
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_wall.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/78.jpg
 Oracle:Defender, flying, first strike\nCumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
-End

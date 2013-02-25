@@ -1,10 +1,8 @@
 Name:Turn Aside
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl | SpellDescription$ Counter target spell that targets a permanent you control.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_aside.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/49.jpg
 Oracle:Counter target spell that targets a permanent you control.
-End

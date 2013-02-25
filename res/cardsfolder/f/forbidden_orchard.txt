@@ -1,7 +1,6 @@
 Name:Forbidden Orchard
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 T:Mode$ TapsForMana | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever you tap CARDNAME for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ Opponent
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_orchard.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/276.jpg
 Oracle:{T}: Add one mana of any color to your mana pool.\nWhenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
-End

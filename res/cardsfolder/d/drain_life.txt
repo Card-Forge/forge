@@ -1,7 +1,6 @@
 Name:Drain Life
 ManaCost:X 1 B
 Types:Sorcery
-Text:no text
 A:SP$ StoreSVar | Cost$ X 1 B | XColor$ B | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | SVar$ Limit | Type$ Targeted | Expression$ CardToughness | SubAbility$ StoreTgtP | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | SpellDescription$ CARDNAME deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before CARDNAME dealt damage or the creature's toughness.
 SVar:StoreTgtP:DB$ StoreSVar | SVar$ Limit | Type$ Count | Expression$ TargetedLifeTotal | SubAbility$ DBDamage | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBGainLife | References$ X
@@ -20,4 +19,3 @@ SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/14.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/16.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/14.jpg
 Oracle:Spend only black mana on X.\nDrain Life deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness.
-End

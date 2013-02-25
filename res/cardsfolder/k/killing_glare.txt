@@ -1,7 +1,6 @@
 Name:Killing Glare
 ManaCost:X B
 Types:Instant
-Text:no text
 A:SP$ Destroy | Announce$ X | Cost$ X B | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power X or less | References$ X | SpellDescription$ Destroy target creature with power X or less.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/killing_glare.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/70.jpg
 Oracle:Destroy target creature with power X or less.
-End

@@ -1,7 +1,6 @@
 Name:Ceta Sanctuary
 ManaCost:2 U
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
 SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBDraw | References$ X,Y,Z
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | SubAbility$ DBDiscard | References$ X,Y,Z
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://wizards.com/global/images/magic/general/ceta_sanctuary.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/20.jpg
 Oracle:At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
-End

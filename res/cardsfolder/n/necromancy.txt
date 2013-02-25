@@ -1,7 +1,6 @@
 Name:Necromancy
 ManaCost:2 B
 Types:Enchantment
-Text:no text
 K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDelayedSac | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
 SVar:TrigDelayedSac:AB$ Animate | Cost$ 0 | Defined$ Self | Triggers$ CleanupTrig | sVars$ Sac | Permanent$ True
@@ -20,4 +19,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancy.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/14.jpg
 Oracle:You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nWhen Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it. When Necromancy leaves the battlefield, that creature's controller sacrifices it.
-End

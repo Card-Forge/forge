@@ -1,7 +1,6 @@
 Name:Griffin Protector
 ManaCost:3 W
 Types:Creature Griffin
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_protector.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/16.jpg
 Oracle:Flying\nWhenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.
-End

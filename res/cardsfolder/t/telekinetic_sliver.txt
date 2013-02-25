@@ -1,7 +1,6 @@
 Name:Telekinetic Sliver
 ManaCost:2 U U
 Types:Creature Sliver
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Tap | Description$ All Slivers have "Tap: Tap target permanent."
 SVar:Tap:AB$Tap | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent. | SpellDescription$ Tap target permanent.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telekinetic_sliver.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/84.jpg
 Oracle:All Slivers have "{T}: Tap target permanent."
-End

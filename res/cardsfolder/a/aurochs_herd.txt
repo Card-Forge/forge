@@ -1,7 +1,6 @@
 Name:Aurochs Herd
 ManaCost:5 G
 Types:Creature Aurochs
-Text:no text
 PT:4/4
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Aurochs card, reveal it, and put it into your hand. If you do, shuffle your library.
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurochs_herd.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/103.jpg
 Oracle:Trample\nWhen Aurochs Herd enters the battlefield, you may search your library for an Aurochs card, reveal it, and put it into your hand. If you do, shuffle your library.\nWhenever Aurochs Herd attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
-End

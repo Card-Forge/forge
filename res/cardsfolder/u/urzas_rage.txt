@@ -1,7 +1,6 @@
 Name:Urza's Rage
 ManaCost:2 R
 Types:Instant
-Text:no text
 K:Kicker 8 R
 K:CARDNAME can't be countered.
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SubAbility$ Kicked | SpellDescription$ CARDNAME deals 3 damage to target creature or player. If CARDNAME was kicked, instead it deals 10 damage to that creature or player and the damage can't be prevented.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_rage.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/178.jpg
 Oracle:Kicker {8}{R} (You may pay an additional {8}{R} as you cast this spell.)\nUrza's Rage can't be countered by spells or abilities.\nUrza's Rage deals 3 damage to target creature or player. If Urza's Rage was kicked, instead it deals 10 damage to that creature or player and the damage can't be prevented.
-End

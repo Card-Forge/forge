@@ -1,11 +1,9 @@
 Name:Gruul Nodorog
 ManaCost:4 G G
 Types:Creature Beast
-Text:no text
 PT:4/4
 A:AB$ Pump | Cost$ R | KW$ CARDNAME can't be blocked except by two or more creatures. | SpellDescription$ CARDNAME can't be blocked this turn except by two or more creatures.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_nodorog.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/88.jpg
 Oracle:{R}: Gruul Nodorog can't be blocked this turn except by two or more creatures.
-End

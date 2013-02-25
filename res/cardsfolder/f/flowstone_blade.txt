@@ -1,7 +1,6 @@
 Name:Flowstone Blade
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Enchanted creature gets +1/-1 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_blade.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/83.jpg
 Oracle:Enchant creature\n{R}: Enchanted creature gets +1/-1 until end of turn.
-End

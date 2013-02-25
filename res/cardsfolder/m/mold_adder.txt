@@ -1,7 +1,6 @@
 Name:Mold Adder
 ManaCost:G
 Types:Creature Fungus Snake
-Text:no text
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card.Blue,Card.Black | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts a blue or black spell, you may put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mold_adder.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/194.jpg
 Oracle:Whenever an opponent casts a blue or black spell, you may put a +1/+1 counter on Mold Adder.
-End

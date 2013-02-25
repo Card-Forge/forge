@@ -1,7 +1,6 @@
 Name:Faithful Squire
 ManaCost:1 W W
 Types:Creature Human Soldier
-Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on CARDNAME, you may flip it.
@@ -18,11 +17,9 @@ Name:Kaiso, Memory of Loyalty
 ManaCost:1 W W
 Colors:white
 Types:Legendary Creature Spirit
-Text:no text
 PT:3/4
 A:AB$ Pump | Cost$ SubCounter<1/KI> | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Prevent all damage that would be dealt to target creature this turn.
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/kaiso_memory_of_loyalty.jpg
 # This link may be a temporary solution and could change in the near future.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/166.jpg
 Oracle:Remove a ki counter from Kaiso, Memory of Loyalty: Prevent all damage that would be dealt to target creature this turn.
-End

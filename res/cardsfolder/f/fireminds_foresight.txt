@@ -1,7 +1,6 @@
 Name:Firemind's Foresight
 ManaCost:5 U R
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 5 U R | ChangeType$ Instant.cmcEQ3 | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | SubAbility$ FindCMC2 | StackDescription$ Search your library for an instant card with converted mana cost 3, reveal it, and put it into your hand. | SpellDescription$ Search your library for an instant card with converted mana cost 3, reveal it, and put it into your hand. Then repeat this process for instant cards with converted mana costs 2 and 1. Then shuffle your library.
 SVar:FindCMC2:DB$ ChangeZone | Cost$ 0 | ChangeType$ Instant.cmcEQ2 | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | SubAbility$ FindCMC1 | StackDescription$ Then repeat this process for instant cards with converted mana costs 2 and 1. 
 SVar:FindCMC1:DB$ ChangeZone | Cost$ 0 | ChangeType$ Instant.cmcEQ1 | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | Shuffle$ True | StackDescription$ Then shuffle your library.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireminds_foresight.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/162.jpg
 Oracle:Search your library for an instant card with converted mana cost 3, reveal it, and put it into your hand. Then repeat this process for instant cards with converted mana costs 2 and 1. Then shuffle your library.
-End

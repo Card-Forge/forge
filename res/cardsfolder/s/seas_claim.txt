@@ -1,7 +1,6 @@
 Name:Sea's Claim
 ManaCost:U
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ U | ValidTgts$ Land | AILogic$ ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Island | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is an Island.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/seas_claim.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/113.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/97.jpg
 Oracle:Enchant land (Target a land as you cast this. This card enters the battlefield attached to that land.)\nEnchanted land is an Island.
-End

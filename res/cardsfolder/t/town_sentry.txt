@@ -1,7 +1,6 @@
 Name:Town Sentry
 ManaCost:2 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/2
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks, it gets +0/+2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 2
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=6494&type=card
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/145.jpg
 Oracle:Whenever Town Sentry blocks, it gets +0/+2 until end of turn.
-End

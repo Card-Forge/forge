@@ -1,7 +1,6 @@
 Name:Village Survivors
 ManaCost:4 G
 Types:Creature Human
-Text:no text
 PT:4/5
 K:Vigilance
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddKeyword$ Vigilance | Condition$ FatefulHour | Description$ Fateful hour - As long as you have 5 or less life, other creatures you control have vigilance.
@@ -9,4 +8,3 @@ SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/village_survivors.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/130.jpg
 Oracle:Vigilance\nFateful hour - As long as you have 5 or less life, other creatures you control have vigilance.
-End

@@ -1,7 +1,6 @@
 Name:Goblin Vandal
 ManaCost:R
 Types:Creature Goblin Rogue
-Text:no text
 PT:1/1
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may pay R. If you do, destroy target artifact defending player controls and CARDNAME assigns no combat damage this turn.
 SVar:TrigDestroy:AB$Destroy | Cost$ R | ValidTgts$ Artifact.DefenderCtrl | TgtPrompt$ Select target artifact defending player controls | SubAbility$ DBPump | Mandatory$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_vandal.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/105.jpg
 Oracle:Whenever Goblin Vandal attacks and isn't blocked, you may pay {R}. If you do, destroy target artifact defending player controls and Goblin Vandal assigns no combat damage this turn.
-End

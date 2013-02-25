@@ -1,7 +1,6 @@
 Name:Clockwork Vorrac
 ManaCost:5
 Types:Artifact Creature Boar Beast
-Text:no text
 PT:0/0
 K:Trample
 K:etbCounter:P1P1:4
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_vorrac.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/156.jpg
 Oracle:Trample\nClockwork Vorrac enters the battlefield with four +1/+1 counters on it.\nWhenever Clockwork Vorrac attacks or blocks, remove a +1/+1 counter from it at end of combat.\n{T}: Put a +1/+1 counter on Clockwork Vorrac.
-End

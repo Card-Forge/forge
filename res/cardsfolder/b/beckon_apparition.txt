@@ -1,7 +1,6 @@
 Name:Beckon Apparition
 ManaCost:WB
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ WB | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard. Put a 1/1 white and black Spirit creature token with flying onto the battlefield.
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White,Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/beckon_apparitio
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/212.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/82.jpg
 Oracle:Exile target card from a graveyard. Put a 1/1 white and black Spirit creature token with flying onto the battlefield.
-End

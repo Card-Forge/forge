@@ -1,7 +1,6 @@
 Name:Master of the Pearl Trident
 ManaCost:U U
 Types:Creature Merfolk
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Merfolk+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Islandwalk | Description$ Other Merfolk you control get +1/+1 and have islandwalk.
 SVar:PlayMain1:TRUE
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_the_pearl_trident.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/59.jpg
 Oracle:Other Merfolk creatures you control get +1/+1 and have islandwalk. (They are unblockable as long as defending player controls an Island.)
-End

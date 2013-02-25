@@ -1,7 +1,6 @@
 Name:Baleful Strix
 ManaCost:U B
 Types:Artifact Creature Bird
-Text:no text
 PT:1/1
 K:Flying
 K:Deathtouch
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baleful_strix.jpg
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/82.jpg
 Oracle:Flying, deathtouch\nWhen Baleful Strix enters the battlefield, draw a card.
-End

@@ -1,7 +1,6 @@
 Name:Fiddlehead Kami
 ManaCost:4 G
 Types:Creature Spirit
-Text:no text
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You  | TriggerZones$ Battlefield  | Execute$ TrigRegen | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, regenerate CARDNAME.
 SVar:TrigRegen:AB$Regenerate | Cost$ 0 | Defined$ Self
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiddlehead_kami.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/130.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, regenerate Fiddlehead Kami.
-End

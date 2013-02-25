@@ -1,7 +1,6 @@
 Name:War Report
 ManaCost:3 W
 Types:Instant
-Text:no text
 A:SP$ GainLife | Cost$ 3 W | LifeAmount$ X | References$ X,Y | SpellDescription$ You gain life equal to the number of creatures on the battlefield plus the number of artifacts on the battlefield.
 SVar:X:Count$Valid Creature/Plus.Y
 SVar:Y:Count$Valid Artifact
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_report.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/26.jpg
 Oracle:You gain life equal to the number of creatures on the battlefield plus the number of artifacts on the battlefield.
-End

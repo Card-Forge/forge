@@ -1,7 +1,6 @@
 Name:Sewers of Estark
 ManaCost:2 B B
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 2 B B | TgtPrompt$ Select target creature | ValidTgts$ Creature | RememberObjects$ Targeted | StackDescription$ SpellDescription | SubAbility$ DBPump | SpellDescription$ Choose target creature. If it's attacking, it's unblockable this turn. If it's blocking, prevent all combat damage that would be dealt this combat by it and each creature it's blocking.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | KW$ HIDDEN Unblockable | SubAbility$ DBPumpAll | StackDescription$ None
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.IsRemembered,Creature.isBlockedByRemembered | StackDescription$ None | UntilEndOfCombat$ True | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
@@ -12,4 +11,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewers_of_estark.jpg
 SetInfo:MBP|Special|http://magiccards.info/scans/en/mbp/2.jpg
 Oracle:Choose target creature. If it's attacking, it's unblockable this turn. If it's blocking, prevent all combat damage that would be dealt this combat by it and each creature it's blocking.
-End

@@ -1,7 +1,6 @@
 Name:Necropouncer
 ManaCost:6
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 K:Living Weapon
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 1 | AddKeyword$ Haste | Description$ Equipped creature gets +3/+1 and has haste.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropouncer.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/147.jpg
 Oracle:Living weapon (When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)\nEquipped creature gets +3/+1 and has haste.\nEquip {2}
-End

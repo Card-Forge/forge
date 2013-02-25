@@ -1,7 +1,6 @@
 Name:Glimpse of Nature
 ManaCost:G
 Types:Sorcery
-Text:no text
 A:SP$ Effect | Cost$ G | Name$ Glimpse of Nature Effect | Triggers$ CreatureSpell | SVars$ TrigDraw | SpellDescription$ Whenever you cast a creature spell this turn, draw a card.
 SVar:CreatureSpell:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Command | TriggerDescription$ Whenever you cast a creature spell this turn, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimpse_of_nature.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/210.jpg
 Oracle:Whenever you cast a creature spell this turn, draw a card.
-End

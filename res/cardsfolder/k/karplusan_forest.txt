@@ -1,7 +1,6 @@
 Name:Karplusan Forest
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPain | SpellDescription$ Add R to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
@@ -15,4 +14,3 @@ SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/337.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/354.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/326.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {R} or {G} to your mana pool. Karplusan Forest deals 1 damage to you.
-End

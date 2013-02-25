@@ -1,7 +1,6 @@
 Name:Cockatrice
 ManaCost:3 G G
 Types:Creature Cockatrice
-Text:no text
 PT:2/4
 K:Flying
 T:Mode$ AttackerBlocked | ValidCard$ Creature.nonWall | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
@@ -20,4 +19,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/96.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/146.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/98.jpg
 Oracle:Flying\nWhenever Cockatrice blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
-End

@@ -1,7 +1,6 @@
 Name:Sun Droplet
 ManaCost:2
 Types:Artifact
-Text:no text
 T:Mode$ DamageDone | ValidTarget$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you're dealt damage, put that many charge counters on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | IsPresent$ Card.Self+counters_GE1_CHARGE | Execute$ TrigGainLife | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of each upkeep, you may remove a charge counter from CARDNAME. If you do, you gain 1 life.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ X | References$ X | Defined$ Self
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_droplet.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/249.jpg
 Oracle:Whenever you're dealt damage, put that many charge counters on Sun Droplet.\nAt the beginning of each upkeep, you may remove a charge counter from Sun Droplet. If you do, you gain 1 life.
-End

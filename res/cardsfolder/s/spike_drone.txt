@@ -1,7 +1,6 @@
 Name:Spike Drone
 ManaCost:G
 Types:Creature Spike
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:1
 A:AB$ PutCounter | Cost$ 2 SubCounter<1/P1P1> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_drone.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/152.jpg
 Oracle:Spike Drone enters the battlefield with a +1/+1 counter on it.\n{2}, Remove a +1/+1 counter from Spike Drone: Put a +1/+1 counter on target creature.
-End

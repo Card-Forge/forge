@@ -1,7 +1,6 @@
 Name:Endoskeleton
 ManaCost:2
 Types:Artifact
-Text:no text
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | RememberTargets$ True |  SpellDescription$ Target creature gets +0/+3 for as long as Endoskeleton remains tapped.
 # Need to Remember the Target up there, so the Static ability here can pump it.
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endoskeleton.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/294.jpg
 Oracle:You may choose not to untap Endoskeleton during your untap step.\n{2}, {T}: Target creature gets +0/+3 for as long as Endoskeleton remains tapped.
-End

@@ -1,7 +1,6 @@
 Name:Changeling Hero
 ManaCost:4 W
 Types:Creature Shapeshifter
-Text:no text
 PT:4/4
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 K:Lifelink
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_hero.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/9.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nChampion a creature (When this enters the battlefield, sacrifice it unless you exile another creature you control. When this leaves the battlefield, that card returns to the battlefield.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)
-End

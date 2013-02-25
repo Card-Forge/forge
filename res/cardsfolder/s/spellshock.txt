@@ -1,7 +1,6 @@
 Name:Spellshock
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, CARDNAME deals 2 damage to that player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredActivator | NumDmg$ 2
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellshock.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/104.jpg
 Oracle:Whenever a player casts a spell, Spellshock deals 2 damage to that player.
-End

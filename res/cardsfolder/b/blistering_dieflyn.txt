@@ -1,7 +1,6 @@
 Name:Blistering Dieflyn
 ManaCost:3 R
 Types:Creature Imp
-Text:no text
 PT:0/1
 K:Flying
 A:AB$ Pump | Cost$ BR | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blistering_dieflyn.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/82.jpg
 Oracle:Flying\n{B/R}: Blistering Dieflyn gets +1/+0 until end of turn.
-End

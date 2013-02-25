@@ -12,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_exhaustion.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/5.jpg
 Oracle:Enchant player\nEnchanted player can't cast more than one spell each turn.
-End

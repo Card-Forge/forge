@@ -1,7 +1,6 @@
 Name:Disturbing Plot
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature in a graveyard to return | Origin$ Graveyard | Destination$ Hand| SpellDescription$ Return target creature card from a graveyard to its owner's hand.
 K:Conspire
 T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disturbing_plot.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/64.jpg
 Oracle:Return target creature card from a graveyard to its owner's hand.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)
-End

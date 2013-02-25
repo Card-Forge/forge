@@ -1,7 +1,6 @@
 Name:Siren's Call
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Effect | Cost$ U | Name$ Siren's Call Effect | StaticAbilities$ KWPump | ActivationPhases$ Upkeep->BeginCombat | OpponentTurn$ True | SpellDescription$ Cast CARDNAME only during an opponent's turn, before attackers are declared. Creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn. | SubAbility$ DestroyPacifist
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.ActivePlayerCtrl | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Creatures the active player controls attack this turn if able. 
 SVar:DestroyPacifist:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy | TriggerDescription$ At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn.
@@ -17,4 +16,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/80.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/101.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/78.jpg
 Oracle:Cast Siren's Call only during an opponent's turn, before attackers are declared.\nCreatures the active player controls attack this turn if able.\nAt the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
-End

@@ -1,11 +1,9 @@
 Name:Steel Wall
 ManaCost:1
 Types:Artifact Creature Wall
-Text:no text
 PT:0/4
 K:Defender
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48910.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/248.jpg
 Oracle:Defender (This creature can't attack.)
-End

@@ -1,7 +1,6 @@
 Name:Kamahl, Fist of Krosa
 ManaCost:4 G G
 Types:Legendary Creature Human Druid
-Text:no text
 PT:4/3
 A:AB$ Animate | Cost$ G | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 1 | Toughness$ 1 | Types$ Creature | SpellDescription$ Target land becomes a 1/1 creature until end of turn. It's still a land.
 A:AB$ PumpAll | Cost$ 2 G G G | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Creatures you control get +3/+3 and gain trample until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahl_fist_of_krosa.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/268.jpg
 Oracle:{G}: Target land becomes a 1/1 creature until end of turn. It's still a land.\n{2}{G}{G}{G}: Creatures you control get +3/+3 and gain trample until end of turn.
-End

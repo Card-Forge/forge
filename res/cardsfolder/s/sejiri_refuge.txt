@@ -1,7 +1,6 @@
 Name:Sejiri Refuge
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 K:CARDNAME enters the battlefield tapped.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_refuge.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/224.jpg
 Oracle:Sejiri Refuge enters the battlefield tapped.\nWhen Sejiri Refuge enters the battlefield, you gain 1 life.\n{T}: Add {W} or {U} to your mana pool.
-End

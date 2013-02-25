@@ -1,7 +1,6 @@
 Name:Tangleroot
 ManaCost:3
 Types:Artifact
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Creature | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a creature spell, that player adds G to his or her mana pool.
 SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ G | Amount$ 1 | Defined$ TriggeredActivator
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangleroot.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/259.jpg
 Oracle:Whenever a player casts a creature spell, that player adds {G} to his or her mana pool.
-End

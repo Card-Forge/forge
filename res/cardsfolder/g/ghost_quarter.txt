@@ -1,7 +1,6 @@
 Name:Ghost Quarter
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select target land. | SubAbility$ DBChange | SpellDescription$ Destroy target land. Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library.
 SVar:DBChange:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | DefinedPlayer$ TargetedController
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_quarter.jp
 Oracle:{T}: Add {1} to your mana pool.\n{T}, Sacrifice Ghost Quarter: Destroy target land. Its controller may search his or her library for a basic land card, put it onto the battlefield, then shuffle his or her library.
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/240.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/173.jpg
-End

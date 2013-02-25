@@ -1,7 +1,6 @@
 Name:Elvish Harbinger
 ManaCost:2 G
 Types:Creature Elf Druid
-Text:no text
 PT:1/2
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Elf card, reveal it, then shuffle your library and put that card on top of it.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_harbinger.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/207.jpg
 Oracle:When Elvish Harbinger enters the battlefield, you may search your library for an Elf card, reveal it, then shuffle your library and put that card on top of it.\n{T}: Add one mana of any color to your mana pool.
-End

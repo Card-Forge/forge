@@ -1,7 +1,6 @@
 Name:Parallax Tide
 ManaCost:2 U U
 Types:Enchantment
-Text:no text
 K:Fading:5
 A:AB$ ChangeZone | Cost$ SubCounter<1/FADE> | ValidTgts$ Land | TgtPrompt$ Select target land | RememberTargets$ True | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target land.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, each player returns to the battlefield all cards he or she owns exiled with CARDNAME.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_tide.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/37.jpg
 Oracle:Fading 5 (This enchantment enters the battlefield with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Parallax Tide: Exile target land.\nWhen Parallax Tide leaves the battlefield, each player returns to the battlefield all cards he or she owns exiled with Parallax Tide.
-End

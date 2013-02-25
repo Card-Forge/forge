@@ -1,7 +1,6 @@
 Name:Peregrine Drake
 ManaCost:4 U
 Types:Creature Drake
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to five lands.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/peregrine_drake.
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/88.jpg
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/22.jpg
 Oracle:Flying\nWhen Peregrine Drake enters the battlefield, untap up to five lands.
-End

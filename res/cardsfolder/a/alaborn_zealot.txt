@@ -1,7 +1,6 @@
 Name:Alaborn Zealot
 ManaCost:W
 Types:Creature Human Soldier
-Text:no text
 PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self  | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME blocks a creature, destroy that creature and CARDNAME.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker | SubAbility$ DestroySelf
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_zealot.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/126.jpg
 Oracle:When Alaborn Zealot blocks a creature, destroy that creature and Alaborn Zealot.
-End

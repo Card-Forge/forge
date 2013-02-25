@@ -1,7 +1,6 @@
 Name:Uktabi Wildcats
 ManaCost:4 G
 Types:Creature Cat
-Text:no text
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl
@@ -13,4 +12,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/261.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/146.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/278.jpg
 Oracle:Uktabi Wildcats's power and toughness are each equal to the number of Forests you control.\n{G}, Sacrifice a Forest: Regenerate Uktabi Wildcats.
-End

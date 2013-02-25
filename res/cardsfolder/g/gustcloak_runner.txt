@@ -1,7 +1,6 @@
 Name:Gustcloak Runner
 ManaCost:W
 Types:Creature Human Soldier
-Text:no text
 PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, you may untap it and remove it from combat.
 SVar:TrigUntap:AB$ Untap | Cost$ 0 | Defined$ Self | SubAbility$ RemCombat
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gustcloak_runner.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/35.jpg
 Oracle:Whenever Gustcloak Runner becomes blocked, you may untap it and remove it from combat.
-End

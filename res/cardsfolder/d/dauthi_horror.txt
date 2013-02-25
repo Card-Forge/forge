@@ -9,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_horror.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/16.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nDauthi Horror can't be blocked by white creatures.
-End

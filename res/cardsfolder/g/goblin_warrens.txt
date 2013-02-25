@@ -1,7 +1,6 @@
 Name:Goblin Warrens
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 A:AB$ Token | Cost$ 2 R Sac<2/Goblin> | TokenAmount$ 3 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put three 1/1 red Goblin Soldier creature tokens onto the battlefield.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
@@ -11,4 +10,3 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/238.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/187.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/122.jpg
 Oracle:{2}{R}, Sacrifice two Goblins: Put three 1/1 red Goblin creature tokens onto the battlefield.
-End

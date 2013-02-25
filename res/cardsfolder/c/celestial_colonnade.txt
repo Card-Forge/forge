@@ -1,7 +1,6 @@
 Name:Celestial Colonnade
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_colonnade.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/133.jpg
 Oracle:Celestial Colonnade enters the battlefield tapped.\n{T}: Add {W} or {U} to your mana pool.\n{3}{W}{U}: Until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.
-End

@@ -1,11 +1,9 @@
 Name:Savage Conception
 ManaCost:3 G G
 Types:Sorcery
-Text:no text
 A:SP$ Token | Cost$ 3 G G | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Beast creature token onto the battlefield.
 A:SP$ Token | Cost$ 3 G G Discard<1/Land> | ActivationZone$ Graveyard | CostDesc$ Retrace | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3| TokenToughness$ 3 | NonBasicSpell$ True | SpellDescription$ (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_conception.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/75.jpg
 Oracle:Put a 3/3 green Beast creature token onto the battlefield.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
-End

@@ -1,7 +1,6 @@
 Name:Joraga Bard
 ManaCost:3 G
 Types:Creature Elf Rogue Ally
-Text:no text
 PT:1/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain vigilance until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain vigilance until end of turn.
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_bard.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/166.jpg
 Oracle:Whenever Joraga Bard or another Ally enters the battlefield under your control, you may have Ally creatures you control gain vigilance until end of turn.
-End

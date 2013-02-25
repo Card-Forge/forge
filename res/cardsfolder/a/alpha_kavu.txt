@@ -1,7 +1,6 @@
 Name:Alpha Kavu
 ManaCost:2 G
 Types:Creature Kavu
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ 1 G | NumAtt$ -1 | NumDef$ +1 | ValidTgts$ Creature.Kavu | TgtPrompt$ Select target Kavu creature | SpellDescription$ Target Kavu creature gets -1/+1 until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_kavu.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/77.jpg
 Oracle:{1}{G}: Target Kavu creature gets -1/+1 until end of turn.
-End

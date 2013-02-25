@@ -1,11 +1,9 @@
 Name:Slagwurm Armor
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
 K:Equip 3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 6 | Description$ Equipped creature gets +0/+6.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slagwurm_armor.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/243.jpg
 Oracle:Equipped creature gets +0/+6.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
-End

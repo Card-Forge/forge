@@ -1,11 +1,9 @@
 Name:Accelerate
 ManaCost:1 R
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SubAbility$ DBDraw | SpellDescription$ Target creature gains haste until end of turn.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accelerate.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/90.jpg
 Oracle:Target creature gains haste until end of turn.\nDraw a card.
-End

@@ -1,7 +1,6 @@
 Name:Dryad Militant
 ManaCost:GW
 Types:Creature Dryad Soldier
-Text:no text
 PT:2/1
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Instant,Sorcery | ReplaceWith$ Exile | Description$ If an instant or sorcery would be put in a graveyard from anywhere, exile it instead.
 SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dryad_militant.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/214.jpg
 Oracle:If an instant or sorcery card would be put into a graveyard from anywhere, exile it instead.
-End

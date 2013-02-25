@@ -2,10 +2,8 @@ Name:Tonic Peddler
 ManaCost:1 W
 Types:Creature Human Spellshaper
 PT:1/1
-Text:no text
 A:AB$ GainLife | Cost$ W T Discard<1/Card> | LifeAmount$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 3 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tonic_peddler.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/54.jpg
 Oracle:{W}, {T}, Discard a card: Target player gains 3 life.
-End

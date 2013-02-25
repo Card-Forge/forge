@@ -1,7 +1,6 @@
 Name:Soul Scourge
 ManaCost:4 B
 Types:Creature Nightmare Horror
-Text:no text
 PT:3/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target player loses 3 life.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_scourge.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/85.jpg
 Oracle:Flying\nWhen Soul Scourge enters the battlefield, target player loses 3 life.\nWhen Soul Scourge leaves the battlefield, that player gains 3 life.
-End

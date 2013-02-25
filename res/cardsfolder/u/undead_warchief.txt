@@ -1,7 +1,6 @@
 Name:Undead Warchief
 ManaCost:2 B B
 Types:Creature Zombie
-Text:no text
 PT:1/1
 S:Mode$ ReduceCost | ValidCard$ Zombie | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Zombie spells you cast cost 1 less to cast.
 S:Mode$ Continuous | Affected$ Creature.Zombie+YouCtrl | AddPower$ 2 | AddToughness$ 1 | Description$ Zombie creatures you control get +2/+1.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/78.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/52.jpg
 Oracle:Zombie spells you cast cost {1} less to cast.\nZombie creatures you control get +2/+1.
-End

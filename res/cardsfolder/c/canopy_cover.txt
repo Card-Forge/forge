@@ -1,7 +1,6 @@
 Name:Canopy Cover
 ManaCost:1 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't be blocked except by creatures with flying or reach. | Description$ Enchanted creature can't be blocked except by creatures with flying or reach.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_cover.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/98.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by creatures with flying or reach.\nEnchanted creature can't be the target of spells or abilities your opponents control.
-End

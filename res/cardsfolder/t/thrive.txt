@@ -1,7 +1,6 @@
 Name:Thrive
 ManaCost:X G
 Types:Sorcery
-Text:no text
 A:SP$ PutCounter | Cost$ X G | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target creatures | SpellDescription$ Put a +1/+1 counter on each of X target creatures.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/thrive.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/129.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/98.jpg
 Oracle:Put a +1/+1 counter on each of X target creatures.
-End

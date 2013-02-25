@@ -1,7 +1,6 @@
 Name:AEther Flash
 ManaCost:2 R R
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a creature enters the battlefield, CARDNAME deals 2 damage to it.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCard | NumDmg$ 2
 SVar:RemRandomDeck:True
@@ -11,4 +10,3 @@ Oracle:Whenever a creature enters the battlefield, AEther Flash deals 2 damage t
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/88.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/163.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/172.jpg
-End

@@ -1,7 +1,6 @@
 Name:Auriok Steelshaper
 ManaCost:1 W
 Types:Creature Human Soldier
-Text:no text
 PT:1/1
 S:Mode$ ReduceCost | ValidCard$ Card | Type$ Equip | Activator$ You | Amount$ 1 | Description$ Equip costs you pay cost 1 less.
 S:Mode$ Continuous | Affected$ Creature.Soldier+YouCtrl,Creature.Knight+YouCtrl | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | References$ X | Description$ As long as CARDNAME is equipped, Soldier and/or Knight creatures you control get +1/+1.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_steelshaper.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/4.jpg
 Oracle:Equip costs you pay cost {1} less.\nAs long as Auriok Steelshaper is equipped, Soldier and/or Knight creatures you control get +1/+1.
-End

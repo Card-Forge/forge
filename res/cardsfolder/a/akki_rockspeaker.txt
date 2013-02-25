@@ -1,7 +1,6 @@
 Name:Akki Rockspeaker
 ManaCost:1 R
 Types:Creature Goblin Shaman
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add R to your mana pool.
 SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ R | Amount$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_rockspeaker.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/154.jpg
 Oracle:When Akki Rockspeaker enters the battlefield, add {R} to your mana pool.
-End

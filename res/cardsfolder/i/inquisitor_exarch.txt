@@ -1,7 +1,6 @@
 Name:Inquisitor Exarch
 ManaCost:W W
 Types:Creature Cleric
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, choose one - You gain 2 life; or target opponent loses 2 life.
 SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBGain,DBLose | SpellDescription$ Choose one - You gain 2 life; or target opponent loses 2 life.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitor_exarch.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/12.jpg
 Oracle:When Inquisitor Exarch enters the battlefield, choose one - You gain 2 life; or target opponent loses 2 life.
-End

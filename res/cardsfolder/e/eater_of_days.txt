@@ -1,7 +1,6 @@
 Name:Eater of Days
 ManaCost:4
 Types:Artifact Creature Leviathan
-Text:no text
 PT:9/8
 K:Flying
 K:Trample
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eater_of_days.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/120.jpg
 Oracle:Flying, trample\nWhen Eater of Days enters the battlefield, you skip your next two turns.
-End

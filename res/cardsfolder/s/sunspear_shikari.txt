@@ -1,7 +1,6 @@
 Name:Sunspear Shikari
 ManaCost:1 W
 Types:Creature Cat Soldier
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self+equipped | AddKeyword$ First Strike & Lifelink | Description$ As long as CARDNAME is equipped, it has first strike and lifelink.
 SVar:EquipMe:Once
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunspear_shikari.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/23.jpg
 Oracle:As long as Sunspear Shikari is equipped, it has first strike and lifelink.
-End

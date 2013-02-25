@@ -1,11 +1,9 @@
 Name:Pull from Eternity
 ManaCost:W
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ W | Origin$ Exile | Destination$ Graveyard | ValidTgts$ Card.faceUp | ChangeNum$ 1 | SpellDescription$ Put target face-up exiled card into its owner's graveyard.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pull_from_eternity.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/35.jpg
 Oracle:Put target face-up exiled card into its owner's graveyard.
-End

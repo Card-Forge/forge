@@ -1,7 +1,6 @@
 Name:Lantern-Lit Graveyard
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBStayTapped | SpellDescription$ Add B to your mana pool. CARDNAME doesn't untap during your next untap step.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBStayTapped | SpellDescription$ Add R to your mana pool. CARDNAME doesn't untap during your next untap step.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lantern_lit_graveyard.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/278.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {B} or {R} to your mana pool. Lantern-Lit Graveyard doesn't untap during your next untap step.
-End

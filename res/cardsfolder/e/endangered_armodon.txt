@@ -1,7 +1,6 @@
 Name:Endangered Armodon
 ManaCost:2 G G
 Types:Creature Elephant
-Text:no text
 PT:4/5
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature.toughnessLE2+YouCtrl | PresentCompare$ GE1 | Execute$ TrigSac | TriggerDescription$ When you control a creature with toughness 2 or less, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endangered_armodon.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/57.jpg
 Oracle:When you control a creature with toughness 2 or less, sacrifice Endangered Armodon.
-End

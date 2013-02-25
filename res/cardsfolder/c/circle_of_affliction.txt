@@ -1,7 +1,6 @@
 Name:Circle of Affliction
 ManaCost:1 B
 Types:Enchantment
-Text:no text
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 T:Mode$ DamageDone | ValidSource$ Card.ChosenColor | ValidTarget$ You | Execute$ TrigDrain | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a source of the chosen color deals damage to you, you may pay 1. If you do, target player loses 1 life and you gain 1 life.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_affliction.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/66.jpg
 Oracle:As Circle of Affliction enters the battlefield, choose a color.\nWhenever a source of the chosen color deals damage to you, you may pay {1}. If you do, target player loses 1 life and you gain 1 life.
-End

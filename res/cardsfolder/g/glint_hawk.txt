@@ -1,7 +1,6 @@
 Name:Glint Hawk
 ManaCost:W
 Types:Creature Bird
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_hawk.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/10.jpg
 Oracle:Flying\nWhen Glint Hawk enters the battlefield, sacrifice it unless you return an artifact you control to its owner's hand.
-End

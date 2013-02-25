@@ -1,7 +1,6 @@
 Name:Kazuul, Tyrant of the Cliffs
 ManaCost:3 R R
 Types:Legendary Creature Ogre Warrior
-Text:no text
 PT:5/4
 T:Mode$ Attacks | ValidCard$ Creature.OppCtrl | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature an opponent controls attacks, if you're the defending player, put a 3/3 red Ogre creature token onto the battlefield unless that creature's controller pays 3.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Ogre | TokenColors$ Red | TokenTypes$ Creature,Ogre | TokenPower$ 3 | TokenToughness$ 3 | UnlessCost$ 3 | UnlessPayer$ TriggeredAttackerController
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazuul_tyrant_of_the_cliffs.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/84.jpg
 Oracle:Whenever a creature an opponent controls attacks, if you're the defending player, put a 3/3 red Ogre creature token onto the battlefield unless that creature's controller pays {3}.
-End

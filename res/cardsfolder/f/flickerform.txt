@@ -1,7 +1,6 @@
 Name:Flickerform
 ManaCost:1 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Pump | Cost$ 2 W W | Defined$ Enchanted | ImprintCards$ Enchanted | StackDescription$ None | SubAbility$ DBRemAura | SpellDescription$ Exile enchanted creature and all Auras attached to it. At the beginning of the next end step, return that card to the battlefield under its owner's control. If you do, return those Auras to the battlefield under their owners' control attached to that creature.
@@ -19,4 +18,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flickerform.jpg
 Oracle:Enchant creature\n{2}{W}{W}: Exile enchanted creature and all Auras attached to it. At the beginning of the next end step, return that card to the battlefield under its owner's control. If you do, return those Auras to the battlefield under their owners'control attached to that creature.
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/18.jpg
-End

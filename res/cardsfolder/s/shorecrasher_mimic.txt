@@ -1,7 +1,6 @@
 Name:Shorecrasher Mimic
 ManaCost:1 GU
 Types:Creature Shapeshifter
-Text:no text
 PT:2/1
 T:Mode$ SpellCast | ValidCard$ Card.Green+Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that's both green and blue, CARDNAME becomes 5/3 and gains trample until end of turn.
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 5 | Toughness$ 3 | Keywords$ Trample
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shorecrasher_mimic.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/159.jpg
 Oracle:Whenever you cast a spell that's both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
-End

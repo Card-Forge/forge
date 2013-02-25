@@ -1,10 +1,8 @@
 Name:Temporal Aperture
 ManaCost:2
 Types:Artifact
-Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_aperture.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/310.jpg
 Oracle:{5}, {T}: Shuffle your library, then reveal the top card. Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)
-End

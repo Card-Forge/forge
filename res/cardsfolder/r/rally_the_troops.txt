@@ -1,7 +1,6 @@
 Name:Rally the Troops
 ManaCost:W
 Types:Instant
-Text:no text
 A:SP$ UntapAll | Cost$ W | ValidCards$ Creature.YouCtrl | OpponentTurn$ True | ActivationPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. Untap all creatures you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_troops
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/16.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/139.jpg
 Oracle:Cast Rally the Troops only during the declare attackers step and only if you've been attacked this step.\nUntap all creatures you control.
-End

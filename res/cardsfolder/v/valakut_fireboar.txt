@@ -1,7 +1,6 @@
 Name:Valakut Fireboar
 ManaCost:4 R
 Types:Creature Elemental Boar
-Text:no text
 PT:1/7
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, switch its power and toughness until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN CARDNAME's power and toughness are switched
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valakut_fireboar.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/170.jpg
 Oracle:Whenever Valakut Fireboar attacks, switch its power and toughness until end of turn.
-End

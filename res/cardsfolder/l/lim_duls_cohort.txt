@@ -1,7 +1,6 @@
 Name:Lim-Dul's Cohort
 ManaCost:1 B B
 Types:Creature Zombie
-Text:no text
 PT:2/3
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_cohort.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/33.jpg
 Oracle:Whenever Lim-Dul's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
-End

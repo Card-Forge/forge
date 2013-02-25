@@ -1,7 +1,6 @@
 Name:Fire-Belly Changeling
 ManaCost:1 R
 Types:Creature Shapeshifter
-Text:no text
 PT:1/1
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_belly_changeling.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/164.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{R}: Fire-Belly Changeling gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
-End

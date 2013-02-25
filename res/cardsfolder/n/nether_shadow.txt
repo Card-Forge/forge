@@ -1,7 +1,6 @@
 Name:Nether Shadow
 ManaCost:B B
 Types:Creature Spirit
-Text:no text
 PT:1/1
 K:Haste
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Creature.YouOwn+Above | PresentZone$ Graveyard | PresentCompare$ GE3 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard with three or more creature cards above it, you may put CARDNAME onto the battlefield.
@@ -16,4 +15,3 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/33.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/26.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/25.jpg
 Oracle:Haste\nAt the beginning of your upkeep, if Nether Shadow is in your graveyard with three or more creature cards above it, you may put Nether Shadow onto the battlefield.
-End

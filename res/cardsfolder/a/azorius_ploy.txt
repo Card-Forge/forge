@@ -1,7 +1,6 @@
 Name:Azorius Ploy
 ManaCost:1 W W U
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 W W U | ValidTgts$ Creature | TgtPrompt$ Select target creature whose combat damage will be prevented | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SubAbility$ DBPump | SpellDescription$ Prevent all combat damage target creature would deal this turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature that will have all damage dealt to it prevented | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to target creature this turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_ploy.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/106.jpg
 Oracle:Prevent all combat damage target creature would deal this turn.\nPrevent all combat damage that would be dealt to target creature this turn.
-End

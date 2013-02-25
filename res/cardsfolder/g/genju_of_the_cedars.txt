@@ -1,7 +1,6 @@
 Name:Genju of the Cedars
 ManaCost:G
 Types:Enchantment Aura
-Text:no text
 K:Enchant Forest
 A:SP$ Attach | Cost$ G | ValidTgts$ Forest | AILogic$ Pump
 A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 4 | Toughness$ 4 | Types$ Creature,Spirit | Colors$ Green | SpellDescription$ Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genju_of_the_cedars.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/126.jpg
 Oracle:Enchant Forest\n{2}: Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land.\nWhen enchanted Forest is put into a graveyard, you may return Genju of the Cedars from your graveyard to your hand.
-End

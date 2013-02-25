@@ -1,11 +1,9 @@
 Name:Diabolic Intent
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 B Sac<1/Creature> | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card and put that card into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_intent.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/42.jpg
 Oracle:As an additional cost to cast Diabolic Intent, sacrifice a creature.\nSearch your library for a card and put that card into your hand. Then shuffle your library.
-End

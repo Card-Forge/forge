@@ -1,7 +1,6 @@
 Name:Myr Reservoir
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | RestrictValid$ Creature.Myr,Activated.Myr | SpellDescription$ Add 2 to your mana pool. Spend this mana only to cast Myr spells or activate abilities of Myr.
 A:AB$ ChangeZone | Cost$ 3 T | TgtPrompt$ Choose target Myr card in your graveyard | ValidTgts$ Card.Myr+YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Myr card from your graveyard to your hand.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_reservoir.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/183.jpg
 Oracle:{T}: Add {2} to your mana pool. Spend this mana only to cast Myr spells or activate abilities of Myr.\n{3}, {T}: Return target Myr card from your graveyard to your hand.
-End

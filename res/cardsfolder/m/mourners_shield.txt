@@ -1,7 +1,6 @@
 Name:Mourner's Shield
 ManaCost:4
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile target card from a graveyard.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Imprint$ True
 A:AB$ ChooseSource | Cost$ 2 T | Choices$ Card.SharesColorWith Imprinted | ChoiceTitle$ Choose a source that shares a color with the exiled card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourners_shield.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/209.jpg
 Oracle:Imprint - When Mourner's Shield enters the battlefield, you may exile target card from a graveyard.\n{2}, {T}: Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.
-End

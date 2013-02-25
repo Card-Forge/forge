@@ -9,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_beyond.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/149.jpg
 Oracle:As Primal Beyond enters the battlefield, you may reveal an Elemental card from your hand. If you don't, Primal Beyond enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\n{T}: Add one mana of any color to your mana pool. Spend this mana only to cast an Elemental spell or activate an ability of an Elemental.
-End

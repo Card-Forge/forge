@@ -1,7 +1,6 @@
 Name:Ring of Evos Isle
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 A:AB$ Pump | Cost$ 2 | Defined$ Equipped | KW$ Hexproof | AILogic$ Color:Blue | SpellDescription$ Equipped creature gains hexproof until end of turn.
 K:Equip 1 | AITgts$ Creature.Blue
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ EvosCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_evos_isle.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/211.jpg
 Oracle:{2}: Equipped creature gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-End

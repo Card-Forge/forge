@@ -1,7 +1,6 @@
 Name:Flinthoof Boar
 ManaCost:1 G
 Types:Creature Boar
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Mountain.
 A:AB$ Pump | Cost$ R | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flinthoof_boar.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/171.jpg
 Oracle:Flinthoof Boar gets +1/+1 as long as you control a Mountain.\n{R}: Flinthoof Boar gains haste until end of turn. (It can attack and {T} this turn.)
-End

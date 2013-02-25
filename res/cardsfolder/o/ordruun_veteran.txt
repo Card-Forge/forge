@@ -1,7 +1,6 @@
 Name:Ordruun Veteran
 ManaCost:2 R W
 Types:Creature Minotaur Soldier
-Text:no text
 PT:3/1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ BattalionTest | SVarCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion - Whenever CARDNAME and at least two other creatures attack, CARDNAME gains double strike until end of turn.
 SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | KW$ Double Strike
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordruun_veteran.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/184.jpg
 Oracle:Battalion - Whenever Ordruun Veteran and at least two other creatures attack, Ordruun Veteran gains double strike until end of turn. (It deals both first-strike and regular combat damage.)
-End

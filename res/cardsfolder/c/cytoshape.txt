@@ -1,7 +1,6 @@
 Name:Cytoshape
 ManaCost:1 G U
 Types:Instant
-Text:no text
 A:SP$ ChooseCard | Cost$ 1 G U | Defined$ You | Amount$ 1 | Choices$ Creature.nonLegendary | Mandatory$ True | SubAbility$ Pump4Tgt | RememberChosen$ True | AILogic$ Clone | SpellDescription$ Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.
 SVar:Pump4Tgt:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose target creature | AILogic$ Pump | SubAbility$ ShapeTgt | StackDescription$ None
 SVar:ShapeTgt:DB$ Clone | Defined$ Remembered | CloneTarget$ ParentTarget | Duration$ UntilEndOfTurn
@@ -9,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cytoshape.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/108.jpg
 Oracle:Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.
-End

@@ -1,11 +1,9 @@
 Name:Sphere of Purity
 ManaCost:3 W
 Types:Enchantment
-Text:no text
 S:Mode$ PreventDamage | Target$ You | Source$ Artifact | Amount$ 1 | Description$ If an artifact source would deal damage to you, prevent 1 of that damage.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_purity.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/26.jpg
 Oracle:If an artifact would deal damage to you, prevent 1 of that damage.
-End

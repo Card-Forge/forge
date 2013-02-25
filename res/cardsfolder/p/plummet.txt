@@ -1,7 +1,6 @@
 Name:Plummet
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plummet.jpg
@@ -9,4 +8,3 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/190.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/179.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/187.jpg
 Oracle:Destroy target creature with flying.
-End

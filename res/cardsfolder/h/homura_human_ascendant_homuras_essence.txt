@@ -1,7 +1,6 @@
 Name:Homura, Human Ascendant
 ManaCost:4 R R
 Types:Legendary Creature Human Monk
-Text:no text
 PT:4/4
 K:CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield flipped.
@@ -18,7 +17,6 @@ Name:Homura's Essence
 ManaCost:4 R R
 Colors:red
 Types:Legendary Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | AddAbility$ ABPump | Description$ Creatures you control get +2/+2 and have flying and "R: This creature gets +1/+0 until end of turn."
 SVar:ABPump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ This creature gets +1/+0 until end of turn.
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/homuras_essence.jpg
@@ -26,4 +24,3 @@ SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/homura
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/169.jpg
 Oracle:Creatures you control get +2/+2 and have flying and "{R}: This creature gets +1/+0 until end of turn."
 
-End

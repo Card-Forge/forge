@@ -1,11 +1,9 @@
 Name:Haunting Hymn
 ManaCost:4 B B
 Types:Instant
-Text:no text
 A:SP$ Discard | Cost$ 4 B B | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | References$ X | SpellDescription$ Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.
 SVar:X:Count$IfMainPhase.4.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_hymn.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/112.jpg
 Oracle:Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.
-End

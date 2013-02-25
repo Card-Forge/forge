@@ -1,7 +1,6 @@
 Name:Adarkar Wastes
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | SubAbility$ DBPain | SpellDescription$ Add W to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBPain | SpellDescription$ Add U to your mana pool. CARDNAME deals 1 damage to you.
@@ -15,4 +14,3 @@ SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/326.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/347.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/319.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {W} or {U} to your mana pool. Adarkar Wastes deals 1 damage to you.
-End

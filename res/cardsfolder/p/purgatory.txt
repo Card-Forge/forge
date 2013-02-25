@@ -1,7 +1,6 @@
 Name:Purgatory
 ManaCost:2 W B
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouOwn | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature is put into your graveyard from the battlefield, exile that card.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, you may pay 4 and 2 life. If you do, return a card exiled with CARDNAME to the battlefield.
@@ -12,4 +11,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purgatory.jpg
 Oracle:Whenever a nontoken creature is put into your graveyard from the battlefield, exile that card.\nAt the beginning of your upkeep, you may pay {4} and 2 life. If you do, return a card exiled with Purgatory to the battlefield.
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/335.jpg
-End

@@ -1,7 +1,6 @@
 Name:Serrated Arrows
 ManaCost:4
 Types:Artifact
-Text:no text
 K:etbCounter:ARROWHEAD:3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_ARROWHEAD | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, if there are no arrowhead counters on CARDNAME, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/serrated_arrows.
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/135.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/114.jpg
 Oracle:Serrated Arrows enters the battlefield with three arrowhead counters on it.\nAt the beginning of your upkeep, if there are no arrowhead counters on Serrated Arrows, sacrifice it.\n{T}, Remove an arrowhead counter from Serrated Arrows: Put a -1/-1 counter on target creature.
-End

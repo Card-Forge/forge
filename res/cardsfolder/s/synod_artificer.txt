@@ -1,7 +1,6 @@
 Name:Synod Artificer
 ManaCost:2 U
 Types:Creature Vedalken Artificer
-Text:no text
 PT:1/2
 A:AB$ Tap | Cost$ X T | References$ X,MaxTgts | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Tap X target noncreature artifacts.
 A:AB$ Untap | Cost$ X T | References$ X,MaxTgts | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Untap X target noncreature artifacts.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synod_artificer.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/34.jpg
 Oracle:{X}, {T}: Tap X target noncreature artifacts.\n{X}, {T}: Untap X target noncreature artifacts.
-End

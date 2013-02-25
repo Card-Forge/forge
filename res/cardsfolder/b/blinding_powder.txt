@@ -1,11 +1,9 @@
 Name:Blinding Powder
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ BlindEnemies | Description$ Equipped creature has "Unattach CARDNAME: Prevent all combat damage that would be dealt to this creature this turn."
 SVar:BlindEnemies:AB$ Pump | Cost$ Unattach<OriginalHost/Blinding Powder> | Defined$ Self | KW$ HIDDEN Prevent all combat damage that would be dealt to CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to CARDNAME this turn.
 K:Equip 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_powder.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/153.jpg
 Oracle:Equipped creature has "Unattach Blinding Powder: Prevent all combat damage that would be dealt to this creature this turn."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
-End

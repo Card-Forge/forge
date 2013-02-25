@@ -1,7 +1,6 @@
 Name:Liege of the Pit
 ManaCost:5 B B B
 Types:Creature Demon
-Text:no text
 PT:7/7
 K:Flying
 K:Trample
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_pit.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/113.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Liege of the Pit. If you can't, Liege of the Pit deals 7 damage to you.\nMorph {B}{B}{B}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

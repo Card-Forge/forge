@@ -1,7 +1,6 @@
 Name:Pyroclast Consul
 ManaCost:3 R R
 Types:Creature Elemental Shaman
-Text:no text
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigKinship | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with CARDNAME, you may reveal it. If you do, CARDNAME deals 2 damage to each creature.
 SVar:TrigKinship:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Card.sharesCreatureTypeWith | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBDamageAll
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyroclast_consul.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/96.jpg
 Oracle:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Pyroclast Consul, you may reveal it. If you do, Pyroclast Consul deals 2 damage to each creature.
-End

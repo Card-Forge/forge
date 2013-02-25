@@ -1,11 +1,9 @@
 Name:Tivadar's Crusade
 ManaCost:1 W W
 Types:Sorcery
-Text:no text
 A:SP$ DestroyAll | Cost$ 1 W W | ValidCards$ Goblin | SpellDescription$ Destroy all Goblins.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tivadars_crusade.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/91.jpg
 Oracle:Destroy all Goblins.
-End

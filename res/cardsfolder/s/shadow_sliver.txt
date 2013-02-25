@@ -1,7 +1,6 @@
 Name:Shadow Sliver
 ManaCost:2 U
 Types:Creature Sliver
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Shadow | Description$ All Sliver creatures have shadow. (They can block or be blocked by only creatures with shadow.)
 SVar:PlayMain1:TRUE
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_sliver.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/76.jpg
 Oracle:All Sliver creatures have shadow. (They can block or be blocked by only creatures with shadow.)
-End

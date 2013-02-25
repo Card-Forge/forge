@@ -8,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_aether.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/47.jpg
 Oracle:Ripple 4 (When you cast this spell, you may reveal the top four cards of your library. You may cast any revealed cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library.)\nReturn target permanent to its owner's hand.
-End

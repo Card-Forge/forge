@@ -1,7 +1,6 @@
 Name:Gabriel Angelfire
 ManaCost:3 G G W W
 Types:Legendary Creature Angel
-Text:no text
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. CARDNAME gains that ability until your next upkeep.
 SVar:TrigChoice:AB$ GenericChoice | Cost$ 0 | Defined$ You | Choices$ SVar1,SVar2,SVar3,SVar4
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gabriel_angelfir
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/111.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/266.jpg
 Oracle:At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. Gabriel Angelfire gains that ability until your next upkeep. (Whenever a creature with rampage 3 becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)
-End

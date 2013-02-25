@@ -1,7 +1,6 @@
 Name:Unhallowed Pact
 ManaCost:2 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChange | TriggerDescription$ When enchanted creature dies, return that card to the battlefield under your control.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unhallowed_pact.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/124.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, return that card to the battlefield under your control.
-End

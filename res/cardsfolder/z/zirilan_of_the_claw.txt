@@ -1,7 +1,6 @@
 Name:Zirilan of the Claw
 ManaCost:3 R R
 Types:Legendary Creature Viashino Shaman
-Text:no text
 PT:3/4
 A:AB$ ChangeZone | Cost$ 1 R R T | Origin$ Library | Destination$ Battlefield | ChangeType$ Dragon | ChangeNum$ 1 | Shuffle$ True | SubAbility$ DBPump | RememberChanged$ True | ForgetOtherRemembered$ True | SpellDescription$ Search your library for a Dragon permanent card and put that card onto the battlefield. Then shuffle your library. That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DBDelTrig
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zirilan_of_the_claw.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/204.jpg
 Oracle:{1}{R}{R}, {T}: Search your library for a Dragon permanent card and put that card onto the battlefield. Then shuffle your library. That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.
-End

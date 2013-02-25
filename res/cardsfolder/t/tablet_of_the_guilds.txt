@@ -1,7 +1,6 @@
 Name:Tablet of the Guilds
 ManaCost:2
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:ChooseColors
 SVar:ChooseColors:DB$ ChooseColor | Defined$ You | TwoColors$ True | AILogic$ MostProminentDualInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose two colors.
 T:Mode$ SpellCast | ValidCard$ Card.AnyChosenColor | ValidActivatingPlayer$ You | Execute$ TrigGainFirstLife | TriggerDescription$ Whenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.
@@ -11,4 +10,3 @@ SVar:AllCols:TriggeredCard$Valid Card.AllChosenColors
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tablet_of_the_guilds.jpg
 Oracle:As Tablet of the Guilds enters the battlefield, choose two colors.\nWhenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/235.jpg
-End

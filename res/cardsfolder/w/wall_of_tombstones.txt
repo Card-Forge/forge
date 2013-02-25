@@ -1,7 +1,6 @@
 Name:Wall of Tombstones
 ManaCost:1 B
 Types:Creature Wall
-Text:no text
 PT:0/1
 K:Defender
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTough | TriggerDescription$ At the beginning of your upkeep, CARDNAME's toughness becomes 1 plus the number of creature cards in your graveyard.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tombstones.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/43.jpg
 Oracle:Defender (This creature can't attack.)\nAt the beginning of your upkeep, Wall of Tombstones's toughness becomes 1 plus the number of creature cards in your graveyard. (This effect lasts indefinitely.)
-End

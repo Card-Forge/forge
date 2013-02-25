@@ -1,7 +1,6 @@
 Name:Kjeldoran Outpost
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Token | Cost$ 1 W T | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Soldier creature token onto the battlefield.
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice a Plains instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_outpost.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/184.jpg
 Oracle:If Kjeldoran Outpost would enter the battlefield, sacrifice a Plains instead. If you do, put Kjeldoran Outpost onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {W} to your mana pool.\n{1}{W}, {T}: Put a 1/1 white Soldier creature token onto the battlefield.
-End

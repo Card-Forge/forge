@@ -1,7 +1,6 @@
 Name:Treva's Charm
 ManaCost:G W U
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ G W U | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | PrecostDesc$ Choose one - | SpellDescription$ Destroy target enchantment;
 A:SP$ ChangeZone | Cost$ G W U | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | PrecostDesc$ or | SpellDescription$ exile target attacking creature;
 A:SP$ Draw | Cost$ G W U | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard | PrecostDesc$ or | SpellDescription$ draw a card, then discard a card.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trevas_charm.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/129.jpg
 Oracle:Choose one - Destroy target enchantment; or exile target attacking creature; or draw a card, then discard a card.
-End

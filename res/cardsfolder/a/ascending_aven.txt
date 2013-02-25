@@ -1,7 +1,6 @@
 Name:Ascending Aven
 ManaCost:2 U U
 Types:Creature Bird Soldier
-Text:no text
 PT:3/2
 K:Flying
 K:CARDNAME can block only creatures with flying.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ascending_aven.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/68.jpg
 Oracle:Flying\nAscending Aven can block only creatures with flying.\nMorph {2}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

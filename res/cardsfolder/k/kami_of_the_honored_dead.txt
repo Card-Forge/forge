@@ -1,7 +1,6 @@
 Name:Kami of the Honored Dead
 ManaCost:5 W W
 Types:Creature Spirit
-Text:no text
 PT:3/5
 K:Flying
 K:Soulshift 6
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_honored_dead.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/12.jpg
 Oracle:Flying\nWhenever Kami of the Honored Dead is dealt damage, you gain that much life.\nSoulshift 6 (When this creature dies, you may return target Spirit card with converted mana cost 6 or less from your graveyard to your hand.)
-End

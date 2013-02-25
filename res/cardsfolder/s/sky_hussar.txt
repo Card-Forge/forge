@@ -1,7 +1,6 @@
 Name:Sky Hussar
 ManaCost:3 W U
 Types:Creature Human Knight
-Text:no text
 PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntapAll | TriggerDescription$ When CARDNAME enters the battlefield, untap all creatures you control.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_hussar.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/131.jpg
 Oracle:Flying\nWhen Sky Hussar enters the battlefield, untap all creatures you control.\nForecast - Tap two untapped white and/or blue creatures you control, Reveal Sky Hussar from your hand: Draw a card. (Activate this ability only during your upkeep and only once each turn.)
-End

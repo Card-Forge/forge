@@ -1,7 +1,6 @@
 Name:Teroh's Vanguard
 ManaCost:3 W
 Types:Creature Human Nomad
-Text:no text
 PT:2/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | Threshold$ True | TriggerDescription$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters the battlefield, creatures you control gain protection from black until end of turn."
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terohs_vanguard.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/19.jpg
 Oracle:Flash\nThreshold - As long as seven or more cards are in your graveyard, Teroh's Vanguard has "When Teroh's Vanguard enters the battlefield, creatures you control gain protection from black until end of turn."
-End

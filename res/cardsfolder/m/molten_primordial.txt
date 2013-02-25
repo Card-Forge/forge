@@ -1,7 +1,6 @@
 Name:Molten Primordial
 ManaCost:5 R R
 Types:Creature Avatar
-Text:no text
 PT:6/4
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TakeOneEach | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, take control of up to one target creature that player controls until end of turn. Untap those creatures. They have haste until end of turn.
@@ -10,4 +9,3 @@ SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_primordial.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/101.jpg
 Oracle:Haste\nWhen Molten Primordial enters the battlefield, for each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
-End

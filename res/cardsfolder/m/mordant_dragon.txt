@@ -1,7 +1,6 @@
 Name:Mordant Dragon
 ManaCost:3 R R R
 Types:Creature Dragon
-Text:no text
 PT:5/5
 K:Flying
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mordant_dragon.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/85.jpg
 Oracle:Flying\n{1}{R}: Mordant Dragon gets +1/+0 until end of turn.\nWhenever Mordant Dragon deals combat damage to a player, you may have it deal that much damage to target creature that player controls.
-End

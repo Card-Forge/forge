@@ -1,7 +1,6 @@
 Name:Kathari Remnant
 ManaCost:2 U B
 Types:Creature Bird Skeleton
-Text:no text
 PT:0/1
 K:Flying
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/kathari_remnant.
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/98.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/23.jpg
 Oracle:Flying\n{B}: Regenerate Kathari Remnant.\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
-End

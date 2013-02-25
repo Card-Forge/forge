@@ -1,7 +1,6 @@
 Name:Phantom Warrior
 ManaCost:1 U U
 Types:Creature Illusion Warrior
-Text:no text
 PT:2/2
 K:Unblockable
 SVar:Rarity:Uncommon
@@ -16,4 +15,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/85.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/48.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/44.jpg
 Oracle:Phantom Warrior is unblockable.
-End

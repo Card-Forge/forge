@@ -1,7 +1,6 @@
 Name:Goblin Rimerunner
 ManaCost:2 R
 Types:Snow Creature Goblin Warrior
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 A:AB$ Pump | Cost$ S | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_rimerunner.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/83.jpg
 Oracle:{T}: Target creature can't block this turn.\n{S}: Goblin Rimerunner gains haste until end of turn. ({S} can be paid with one mana from a snow permanent.)
-End

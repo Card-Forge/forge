@@ -1,7 +1,6 @@
 Name:Savage Firecat
 ManaCost:3 R R
 Types:Creature Elemental Cat
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:7
 K:Trample
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_firecat.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/218.jpg
 Oracle:Trample\nSavage Firecat enters the battlefield with seven +1/+1 counters on it.\nWhenever you tap a land for mana, remove a +1/+1 counter from Savage Firecat.
-End

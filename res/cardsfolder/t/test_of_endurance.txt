@@ -1,7 +1,6 @@
 Name:Test of Endurance
 ManaCost:2 W W
 Types:Enchantment
-Text:no text
 T:Mode$Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | LifeTotal$ You | LifeAmount$ GE50 | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if you have 50 or more life, you win the game.
 SVar:TrigWin:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/test_of_endurance.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/29.jpg
 Oracle:At the beginning of your upkeep, if you have 50 or more life, you win the game.
-End

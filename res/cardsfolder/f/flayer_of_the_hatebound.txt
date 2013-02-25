@@ -1,7 +1,6 @@
 Name:Flayer of the Hatebound
 ManaCost:5 R
 Types:Creature Devil
-Text:no text
 PT:4/2
 K:Undying
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouOwn | Execute$ ReanimateDmg | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flayer_of_the_hatebound.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/89.jpg
 Oracle:Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)\nWhenever Flayer of the Hatebound or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.
-End

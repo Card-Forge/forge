@@ -1,11 +1,9 @@
 Name:Stonefare Crocodile
 ManaCost:2 G
 Types:Creature Crocodile
-Text:no text
 PT:3/2
 A:AB$ Pump | Cost$ 2 B | KW$ Lifelink | SpellDescription$ CARDNAME gets lifelink until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonefare_crocodile.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/136.jpg
 Oracle:{2}{B}: Stonefare Crocodile gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)
-End

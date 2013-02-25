@@ -1,10 +1,8 @@
 Name:Krenko's Command
 ManaCost:1 R
 Types:Sorcery
-Text:no text
 A:SP$ Token | Cost$ 1 R | TokenAmount$ 2 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 red Goblin creature tokens onto the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krenkos_command.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/139.jpg
 Oracle:Put two 1/1 red Goblin creature tokens onto the battlefield.
-End

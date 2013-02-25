@@ -1,7 +1,6 @@
 Name:Oaken Brawler
 ManaCost:3 W
 Types:Creature Treefolk Warrior
-Text:no text
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigClash | TriggerDescription$ When CARDNAME enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on CARDNAME.
 SVar:TrigClash:AB$Clash | Cost$ 0 | WinSubAbility$ DBPutCounter
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oaken_brawler.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/33.jpg
 Oracle:When Oaken Brawler enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Oaken Brawler. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-End

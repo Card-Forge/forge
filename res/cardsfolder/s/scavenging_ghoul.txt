@@ -1,7 +1,6 @@
 Name:Scavenging Ghoul
 ManaCost:3 B
 Types:Creature Zombie
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, put a corpse counter on CARDNAME for each creature put into a graveyard from the battlefield this turn.
 A:AB$ Regenerate | Cost$ SubCounter<1/CORPSE> | SpellDescription$ Regenerate CARDNAME.
@@ -15,4 +14,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/36.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/43.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/35.jpg
 Oracle:At the beginning of each end step, put a corpse counter on Scavenging Ghoul for each creature that died this turn.\nRemove a corpse counter from Scavenging Ghoul: Regenerate Scavenging Ghoul.
-End

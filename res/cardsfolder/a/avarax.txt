@@ -1,7 +1,6 @@
 Name:Avarax
 ManaCost:3 R R
 Types:Creature Beast
-Text:no text
 PT:3/3
 K:Haste
 A:AB$ Pump | Cost$ 1 R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avarax.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/187.jpg
 Oracle:Haste\nWhen Avarax enters the battlefield, you may search your library for a card named Avarax, reveal it, and put it into your hand. If you do, shuffle your library.\n{1}{R}: Avarax gets +1/+0 until end of turn.
-End

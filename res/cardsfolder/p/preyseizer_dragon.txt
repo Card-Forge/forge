@@ -1,7 +1,6 @@
 Name:Preyseizer Dragon
 ManaCost:4 R R
 Types:Creature Dragon
-Text:no text
 PT:4/4
 K:Flying
 K:Devour:2
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/preyseizer_dragon.jpg
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/50.jpg
 Oracle:Flying\nDevour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)\nWhenever Preyseizer Dragon attacks, it deals damage to target creature or player equal to the number of +1/+1 counters on Preyseizer Dragon.
-End

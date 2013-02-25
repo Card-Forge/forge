@@ -1,7 +1,6 @@
 Name:Crackling Perimeter
 ManaCost:1 R
 Types:Enchantment
-Text:no text
 A:AB$ DealDamage | Cost$ tapXType<1/Gate> | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
 SVar:RemRandomDeck:True
 DeckNeeds:Type$Gate
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crackling_perimeter.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/88.jpg
 Oracle:Tap an untapped Gate you control: Crackling Perimeter deals 1 damage to each opponent.
-End

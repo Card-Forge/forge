@@ -1,7 +1,6 @@
 Name:Aven Brigadier
 ManaCost:3 W W W
 Types:Creature Bird Soldier
-Text:no text
 PT:3/5
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Bird+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other Bird creatures get +1/+1.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_brigadier.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/7.jpg
 Oracle:Flying\nOther Bird creatures get +1/+1.\nOther Soldier creatures get +1/+1.
-End

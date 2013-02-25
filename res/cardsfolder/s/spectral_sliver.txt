@@ -1,7 +1,6 @@
 Name:Spectral Sliver
 ManaCost:2 B
 Types:Creature Sliver
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddAbility$ Pump | Description$ All Sliver creatures have "2: This creature gets +1/+1 until end of turn."
 SVar:Pump:AB$Pump | Cost$ 2 | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_sliver.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/83.jpg
 Oracle:All Sliver creatures have "{2}: This creature gets +1/+1 until end of turn."
-End

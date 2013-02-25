@@ -1,7 +1,6 @@
 Name:All Suns' Dawn
 ManaCost:4 G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 4 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target white card in your graveyard | ValidTgts$ Card.White+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ ReturnU | SpellDescription$ Return target white card from your graveyard to your hand.
 SVar:ReturnU:DB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target blue card in your graveyard | ValidTgts$ Card.Blue+YouCtrl | TargetMin$ 0 | TargetMax$ 1 |SubAbility$ ReturnB | SpellDescription$ Return target blue card from your graveyard to your hand.
 SVar:ReturnB:DB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target black card in your graveyard | ValidTgts$ Card.Black+YouCtrl |TargetMin$ 0 | TargetMax$ 1 | SubAbility$ ReturnR | SpellDescription$ Return target black card from your graveyard to your hand.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/all_suns_dawn.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/81.jpg
 Oracle:For each color, return up to one target card of that color from your graveyard to your hand. Exile All Suns' Dawn.
-End

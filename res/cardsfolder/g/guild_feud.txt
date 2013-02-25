@@ -1,7 +1,6 @@
 Name:Guild Feud
 ManaCost:5 R
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ OppPick | TriggerDescription$ At the beginning of your upkeep, target opponent reveals the top three cards of his or her library, may put a creature card from among them onto the battlefield, then puts the rest into his or her graveyard. You do the same with the top three cards of your library. If two creatures are put onto the battlefield this way, those creatures fight each other.
 SVar:OppPick:AB$ Dig | Cost$ 0 | ValidTgts$ Opponent | DigNum$ 3 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Creature | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | Choser$ Targeted | Optional$ True | RememberChanged$ True | SubAbility$ YouPick
 SVar:YouPick:DB$ Dig | Cost$ 0 | Defined$ You | DigNum$ 3 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Creature | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | Optional$ True | RememberChanged$ True | SubAbility$ PicksFight
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guild_feud.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/97.jpg
 Oracle:At the beginning of your upkeep, target opponent reveals the top three cards of his or her library, may put a creature card from among them onto the battlefield, then puts the rest into his or her graveyard. You do the same with the top three cards of your library. If two creatures are put onto the battlefield this way, those creatures fight each other.
-End

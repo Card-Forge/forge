@@ -1,7 +1,6 @@
 Name:Reviving Vapors
 ManaCost:2 W U
 Types:Instant
-Text:no text
 A:SP$ Dig | Cost$ 2 W U | DigNum$ 3 | Reveal$ True | ChangeNum$ 1 | LibraryPosition2$ 0 | RememberRevealed$ True | SubAbility$ DBimprint | StackDescription$ SpellDescription | SpellDescription$ Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's converted mana cost. Put all other cards revealed this way into your graveyard.
 SVar:DBimprint:DB$ Pump | ImprintCards$ ValidHand Card.IsRemembered | StackDescription$ None | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBMill | StackDescription$ None
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reviving_vapors.jpg
 Oracle:Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's converted mana cost. Put all other cards revealed this way into your graveyard.
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/265.jpg
-End

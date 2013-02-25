@@ -1,7 +1,6 @@
 Name:Burnt Offering
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ Mana | Cost$ B Sac<1/Creature> | Produced$ Combo B R | Amount$ X | References$ X | SpellDescription$ Add X mana in any combination of {B} and/or {R} to your mana pool, where X is the sacrificed creature's converted mana cost.
 SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burnt_offering.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/4.jpg
 Oracle:As an additional cost to cast Burnt Offering, sacrifice a creature.\nAdd X mana in any combination of {B} and/or {R} to your mana pool, where X is the sacrificed creature's converted mana cost.
-End

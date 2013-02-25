@@ -1,7 +1,6 @@
 Name:Spirit Loop
 ManaCost:1 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_loop.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/42.jpg
 Oracle:Enchant creature you control\nWhenever enchanted creature deals damage, you gain that much life.\nWhen Spirit Loop is put into a graveyard from the battlefield, return Spirit Loop to its owner's hand.
-End

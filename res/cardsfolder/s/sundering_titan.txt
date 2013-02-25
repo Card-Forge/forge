@@ -1,7 +1,6 @@
 Name:Sundering Titan
 ManaCost:8
 Types:Artifact Creature Golem
-Text:no text
 PT:7/10
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sundering_titan.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/146.jpg
 Oracle:When Sundering Titan enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
-End

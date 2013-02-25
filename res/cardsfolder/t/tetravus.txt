@@ -1,7 +1,6 @@
 Name:Tetravus
 ManaCost:6
 Types:Artifact Creature Construct
-Text:no text
 PT:1/1
 K:etbCounter:P1P1:3
 K:Flying
@@ -18,4 +17,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/tetravus.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/368.jpg
 SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/36.jpg
 Oracle:Flying\nTetravus enters the battlefield with three +1/+1 counters on it.\nAt the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, put that many 1/1 colorless Tetravite artifact creature tokens onto the battlefield. They each have flying and "This creature can't be enchanted."\nAt the beginning of your upkeep, you may exile any number of tokens put onto the battlefield with Tetravus. If you do, put that many +1/+1 counters on Tetravus.
-End

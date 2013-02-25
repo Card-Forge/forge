@@ -1,7 +1,6 @@
 Name:Krosan Archer
 ManaCost:3 G
 Types:Creature Centaur Archer
-Text:no text
 PT:2/3
 K:Reach
 A:AB$ Pump | Cost$ G Discard<1/Card> | NumDef$ +2 | SpellDescription$ CARDNAME gets +0/+2 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_archer.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/246.jpg
 Oracle:Reach (This creature can block creatures with flying.)\n{G}, Discard a card: Krosan Archer gets +0/+2 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Necrogen Mists
 ManaCost:2 B
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of each player's upkeep, that player discards a card.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_mists.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/69.jpg
 Oracle:At the beginning of each player's upkeep, that player discards a card.
-End

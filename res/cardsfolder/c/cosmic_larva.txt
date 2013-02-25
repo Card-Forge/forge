@@ -1,7 +1,6 @@
 Name:Cosmic Larva
 ManaCost:1 R R
 Types:Creature Beast
-Text:no text
 PT:7/6
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacUnless | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you sacrifice two lands.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cosmic_larva.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/63.jpg
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice Cosmic Larva unless you sacrifice two lands.
-End

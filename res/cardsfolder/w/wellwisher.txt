@@ -1,7 +1,6 @@
 Name:Wellwisher
 ManaCost:1 G
 Types:Creature Elf
-Text:no text
 PT:1/1
 A:AB$ GainLife | Cost$ T | LifeAmount$ X | References$ X | SpellDescription$ You gain 1 life for each Elf on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Elf
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39497.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/300.jpg
 Oracle:{T}: You gain 1 life for each Elf on the battlefield.
-End

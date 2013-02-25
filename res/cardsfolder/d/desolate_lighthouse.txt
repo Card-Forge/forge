@@ -1,7 +1,6 @@
 Name:Desolate Lighthouse
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Draw | Cost$ 1 U R T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolate_lighthouse.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/227.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}{U}{R}, {T}: Draw a card, then discard a card.
-End

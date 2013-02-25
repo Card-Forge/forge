@@ -1,7 +1,6 @@
 Name:Orcish Squatters
 ManaCost:4 R
 Types:Creature Orc
-Text:no text
 PT:2/3
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may gain control of target land defending player controls for as long as you control CARDNAME. If you do, CARDNAME assigns no combat damage this turn.
 SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | ValidTgts$ Land.DefenderCtrl | TgtPrompt$ Select target land defending player controls | LoseControl$ LoseControl,LeavesPlay | SubAbility$ DBPump
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_squatters
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/258.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/211.jpg
 Oracle:Whenever Orcish Squatters attacks and isn't blocked, you may gain control of target land defending player controls for as long as you control Orcish Squatters. If you do, Orcish Squatters assigns no combat damage this turn.
-End

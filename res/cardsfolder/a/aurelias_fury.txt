@@ -1,7 +1,6 @@
 Name:Aurelia's Fury
 ManaCost:X R W
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Announce$ X | Cost$ X W R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature and/or player to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,MaxTgts | RememberDamaged$ True | SubAbility$ CowedByAurelia | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures and/or players. Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
 SVar:CowedByAurelia:DB$ TapAll | ValidCards$ Creature.IsRemembered | SubAbility$ SpellLimitations
 SVar:SpellLimitations:DB$ Effect | StaticAbilities$ STCantBeCast | RememberObjects$ Player.IsRemembered | SubAbility$ DBCleanup
@@ -14,4 +13,3 @@ SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurelias_fury.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/144.jpg
 Oracle:Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players. Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
-End

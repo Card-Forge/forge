@@ -1,7 +1,6 @@
 Name:Invisible Stalker
 ManaCost:1 U
 Types:Creature Human Rogue
-Text:no text
 PT:1/1
 K:Hexproof
 K:Unblockable
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invisible_stalker.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/60.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nInvisible Stalker is unblockable.
-End

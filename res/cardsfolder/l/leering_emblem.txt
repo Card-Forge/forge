@@ -1,7 +1,6 @@
 Name:Leering Emblem
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a spell, equipped creature gets +2/+2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Equipped | NumAtt$ +2 | NumDef$ +2
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leering_emblem.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/171.jpg
 Oracle:Whenever you cast a spell, equipped creature gets +2/+2 until end of turn.\nEquip {2}
-End

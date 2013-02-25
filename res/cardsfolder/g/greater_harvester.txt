@@ -1,7 +1,6 @@
 Name:Greater Harvester
 ManaCost:2 B B B
 Types:Creature Horror
-Text:no text
 PT:5/6
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice a permanent.
 SVar:TrigSacYou:AB$ Sacrifice | Cost$ 0 | SacValid$ Permanent | Defined$ You
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_harvester.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/44.jpg
 Oracle:At the beginning of your upkeep, sacrifice a permanent.\nWhenever Greater Harvester deals combat damage to a player, that player sacrifices two permanents.
-End

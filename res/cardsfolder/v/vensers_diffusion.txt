@@ -1,7 +1,6 @@
 Name:Venser's Diffusion
 ManaCost:2 U
 Types:Instant
-Text:no text
 A:SP$ Charm | Cost$ 2 U | CharmNum$ 1 | Choices$ Permanent,Suspended | SpellDescription$ Return target nonland permanent or suspended card to its owner's hand.
 SVar:Permanent:DB$ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Choose target non-Land permanent. | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Target nonland permanent
 SVar:Suspended:DB$ChangeZone | ValidTgts$ Card.suspended | TgtPrompt$ Choose target suspended card. | Origin$ Exile | Destination$ Hand | SpellDescription$ Target suspended card
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vensers_diffusion.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/47.jpg
 Oracle:Return target nonland permanent or suspended card to its owner's hand.
-End

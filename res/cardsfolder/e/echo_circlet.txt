@@ -1,11 +1,9 @@
 Name:Echo Circlet
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ CARDNAME can block an additional creature. | Description$ Equipped creature can block an additional creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echo_circlet.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/153.jpg
 Oracle:Equipped creature can block an additional creature.\nEquip {1}
-End

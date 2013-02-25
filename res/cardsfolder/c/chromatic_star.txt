@@ -1,7 +1,6 @@
 Name:Chromatic Star
 ManaCost:1
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_star.j
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/251.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/314.jpg
 Oracle:{1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.\nWhen Chromatic Star is put into a graveyard from the battlefield, draw a card.
-End

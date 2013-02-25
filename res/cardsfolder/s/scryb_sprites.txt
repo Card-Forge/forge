@@ -1,7 +1,6 @@
 Name:Scryb Sprites
 ManaCost:G
 Types:Creature Faerie
-Text:no text
 PT:1/1
 K:Flying
 SVar:Rarity:Common
@@ -13,4 +12,3 @@ SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/154.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/122.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/124.jpg
 Oracle:Flying
-End

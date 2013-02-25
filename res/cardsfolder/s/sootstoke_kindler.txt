@@ -1,7 +1,6 @@
 Name:Sootstoke Kindler
 ManaCost:1 BR
 Types:Creature Elemental Shaman
-Text:no text
 PT:1/1
 K:Haste
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Black,Creature.Red | TgtPrompt$ Select target black or red creature | KW$ Haste | SpellDescription$ Target black or red creature gains haste until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sootstoke_kindler.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/195.jpg
 Oracle:Haste\n{T}: Target black or red creature gains haste until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Rainbow Crow
 ManaCost:3 U
 Types:Creature Bird
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ ChooseColor | Cost$ 1 | Defined$ You | SubAbility$ Animate | SpellDescription$ CARDNAME becomes the color of your choice until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rainbow_crow.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/69.jpg
 Oracle:Flying\n{1}: Rainbow Crow becomes the color of your choice until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Incite War
 ManaCost:2 R
 Types:Instant
-Text:no text
 A:SP$ Effect | Cost$ 2 R | Name$ Incite War Effect | ValidTgts$ Player | TgtPrompt$ Select target player | StaticAbilities$ MustAttack | References$ MustAttack | RememberObjects$ Targeted | PreCostDesc$ Choose one : | SpellDescription$ Creatures target player controls attack this turn if able;
 SVar:MustAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Creatures target player controls attack this turn if able.
 A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | KW$ First Strike | SpellDescription$ or creatures you control gain first strike until end of turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incite_war.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/96.jpg
 Oracle:Choose one - Creatures target player controls attack this turn if able; or creatures you control gain first strike until end of turn.\nEntwine {2} (Choose both if you pay the entwine cost.)
-End

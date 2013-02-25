@@ -1,7 +1,6 @@
 Name:Fire-Lit Thicket
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ RG T | Produced$ R | Amount$ 2 | SpellDescription$ Add R R to your mana pool.
 A:AB$ Mana | Cost$ RG T | Produced$ R G | SpellDescription$ Add R G to your mana pool.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_lit_thicket.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/271.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{R/G}, {T}: Add {R}{R}, {R}{G}, or {G}{G} to your mana pool.
-End

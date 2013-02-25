@@ -9,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/howl_of_the_nigh
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/187.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/119.jpg
 Oracle:Put a 2/2 green Wolf creature token onto the battlefield for each Forest you control.
-End

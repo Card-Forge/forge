@@ -1,7 +1,6 @@
 Name:Manaforce Mace
 ManaCost:4
 Types:Artifact Equipment
-Text:no text
 K:Equip 3
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Domain - Equipped creature gets +1/+1 for each basic land type among lands you control.
 SVar:X:Count$Domain
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manaforce_mace.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/139.jpg
 Oracle:Domain - Equipped creature gets +1/+1 for each basic land type among lands you control.\nEquip {3}
-End

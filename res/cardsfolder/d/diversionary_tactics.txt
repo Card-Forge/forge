@@ -1,11 +1,9 @@
 Name:Diversionary Tactics
 ManaCost:3 W
 Types:Enchantment
-Text:no text
 A:AB$ Tap | Cost$ tapXType<2/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diversionary_tactics.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/7.jpg
 Oracle:Tap two untapped creatures you control: Tap target creature.
-End

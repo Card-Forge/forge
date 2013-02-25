@@ -1,7 +1,6 @@
 Name:Rain of Thorns
 ManaCost:4 G G
 Types:Sorcery
-Text:no text
 A:SP$ Charm | Cost$ 4 G G | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DestroyArtifact,DestroyEnchantment,DestroyLand | SpellDescription$ Choose one or more - Destroy target artifact; or destroy target enchantment; or destroy target land.
 SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact;
 SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment;
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_thorns.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/190.jpg
 Oracle:Choose one or more - Destroy target artifact; destroy target enchantment; and/or destroy target land.
-End

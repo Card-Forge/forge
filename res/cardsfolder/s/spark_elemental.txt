@@ -1,7 +1,6 @@
 Name:Spark Elemental
 ManaCost:R
 Types:Creature Elemental
-Text:no text
 PT:3/1
 K:Trample
 K:Haste
@@ -11,4 +10,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73579.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/79.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/237.jpg
 Oracle:Trample, haste (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker. This creature can attack and {T} as soon as it comes under your control.)\nAt the beginning of the end step, sacrifice Spark Elemental.
-End

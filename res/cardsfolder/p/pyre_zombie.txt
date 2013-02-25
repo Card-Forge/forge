@@ -1,7 +1,6 @@
 Name:Pyre Zombie
 ManaCost:1 B R
 Types:Creature Zombie
-Text:no text
 PT:2/1
 A:AB$ DealDamage | Cost$ 1 R R Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 #The IsPresent stuff in the trigger is necessary because it must be checked on resolve as well.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_zombie.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/261.jpg
 Oracle:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie to your hand.\n{1}{R}{R}, Sacrifice Pyre Zombie: Pyre Zombie deals 2 damage to target creature or player.
-End

@@ -1,7 +1,6 @@
 Name:Dense Foliage
 ManaCost:2 G
 Types:Enchantment
-Text:no text
 S:Mode$ CantTarget | ValidCard$ Creature | Spell$ True | Description$ Creatures can't be the target of spells.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dense_foliage.jp
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/66.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/221.jpg
 Oracle:Creatures can't be the targets of spells.
-End

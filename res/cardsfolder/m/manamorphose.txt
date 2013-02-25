@@ -1,7 +1,6 @@
 Name:Manamorphose
 ManaCost:1 RG
 Types:Instant
-Text:no text
 A:SP$ Mana | Cost$ 1 RG | Produced$ Combo Any | Amount$ 2 | AILogic$ MostProminentInComputerHand | SubAbility$ DBDraw | SpellDescription$ Add two mana in any combination of colors to your mana pool. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manamorphose.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/211.jpg
 Oracle:Add two mana in any combination of colors to your mana pool.\nDraw a card.
-End

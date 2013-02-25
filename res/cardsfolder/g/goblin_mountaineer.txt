@@ -1,7 +1,6 @@
 Name:Goblin Mountaineer
 ManaCost:R
 Types:Creature Goblin Scout
-Text:no text
 PT:1/1
 K:Mountainwalk
 SVar:Rarity:Common
@@ -11,4 +10,3 @@ SetInfo:S99|Common|http://magiccards.info/scans/en/st/105.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/193.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/102.jpg
 Oracle:Mountainwalk
-End

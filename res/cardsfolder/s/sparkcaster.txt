@@ -1,7 +1,6 @@
 Name:Sparkcaster
 ManaCost:2 R G
 Types:Creature Kavu
-Text:no text
 PT:5/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a red or green creature you control to its owner's hand.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target player.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sparkcaster.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/126.jpg
 Oracle:When Sparkcaster enters the battlefield, return a red or green creature you control to its owner's hand.\nWhen Sparkcaster enters the battlefield, it deals 1 damage to target player.
-End

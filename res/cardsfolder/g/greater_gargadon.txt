@@ -1,7 +1,6 @@
 Name:Greater Gargadon
 ManaCost:9 R
 Types:Creature Beast
-Text:no text
 PT:9/7
 K:Suspend:10:R
 A:AB$ RemoveCounter | Cost$ Sac<1/Artifact;Creature;Land/artifact, creature or land> | CostDesc$ Sacrifice an artifact, creature, or land: | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | ActivationZone$ Exile | IsPresent$ Card.Self+suspended | PresentZone$ Exile | SpellDescription$ Remove a time counter from CARDNAME. Activate this ability only if CARDNAME is suspended.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_gargadon.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/161.jpg
 Oracle:Suspend 10-{R} (Rather than cast this card from your hand, you may pay {R} and exile it with ten time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nSacrifice an artifact, creature, or land: Remove a time counter from Greater Gargadon. Activate this ability only if Greater Gargadon is suspended.
-End

@@ -1,11 +1,9 @@
 Name:Smother
 ManaCost:1 B
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with converted mana cost 3 or less | NoRegen$ True | SpellDescription$ Destroy target creature with converted mana cost 3 or less. It can't be regenerated.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smother.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/170.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/68.jpg
 Oracle:Destroy target creature with converted mana cost 3 or less. It can't be regenerated.
-End

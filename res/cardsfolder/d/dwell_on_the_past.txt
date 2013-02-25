@@ -1,7 +1,6 @@
 Name:Dwell on the Past
 ManaCost:G
 Types:Sorcery
-Text:no text
 A:SP$ Pump | Cost$ G | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Target player shuffles up to four target cards from his or her graveyard into his or her library.
 SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 4 | TargetsWithDefinedController$ Targeted | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Choose target card | ValidTgts$ Card
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwell_on_the_past.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/124.jpg
 Oracle:Target player shuffles up to four target cards from his or her graveyard into his or her library.
-End

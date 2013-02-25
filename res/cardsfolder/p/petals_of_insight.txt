@@ -1,7 +1,6 @@
 Name:Petals of Insight
 ManaCost:4 U
 Types:Sorcery Arcane
-Text:no text
 A:SP$ Dig | Cost$ 4 U | DigNum$ 3 | NoMove$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBPetalChoose | SpellDescription$ Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return CARDNAME to its owner's hand. Otherwise, draw three cards.
 SVar:DBPetalChoose:DB$ GenericChoice | Choices$ ReturnPetals,DrawCards | Defined$ You
 SVar:ReturnPetals:DB$ Dig | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Library | LibraryPosition$ -1 | SubAbility$ DBChangeZone | ChoiceDescription$ You may put those cards on the bottom of your library in any order. If you do, return CARDNAME to its owner's hand.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petals_of_insight.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/79.jpg
 Oracle:Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return Petals of Insight to its owner's hand. Otherwise, draw three cards.
-End

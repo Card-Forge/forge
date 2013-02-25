@@ -1,7 +1,6 @@
 Name:Carrier Pigeons
 ManaCost:3 W
 Types:Creature Bird
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card at the beginning of the next turn's upkeep.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrier_pigeons.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/125.jpg|2
 Oracle:Flying\nWhen Carrier Pigeons enters the battlefield, draw a card at the beginning of the next turn's upkeep.
-End

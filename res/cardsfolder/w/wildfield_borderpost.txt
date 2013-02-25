@@ -1,7 +1,6 @@
 Name:Wildfield Borderpost
 ManaCost:1 G W
 Types:Artifact
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfield_borderpost.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/80.jpg
 Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay Wildfield Borderpost's mana cost.\nWildfield Borderpost enters the battlefield tapped.\n{T}: Add {G} or {W} to your mana pool.
-End

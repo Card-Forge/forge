@@ -1,7 +1,6 @@
 Name:Ghost Warden
 ManaCost:1 W
 Types:Creature Spirit
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96901.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/5.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/16.jpg
 Oracle:{T}: Target creature gets +1/+1 until end of turn.
-End

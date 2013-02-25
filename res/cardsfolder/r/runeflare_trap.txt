@@ -1,7 +1,6 @@
 Name:Runeflare Trap
 ManaCost:4 R R
 Types:Instant Trap
-Text:no text
 A:SP$DealDamage | Cost$ R | ValidTgts$ Player | NumDmg$ X | CheckSVar$ Y | SVarCompare$ GE3 | References$ X,Y | SpellDescription$ If an opponent drew three or more cards this turn, you may pay R rather than pay CARDNAME's mana cost.
 A:SP$DealDamage | Cost$ 4 R R | ValidTgts$ Player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of cards in that player's hand.
 SVar:X:TargetedPlayer$CardsInHand
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runeflare_trap.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/146.jpg
 Oracle:If an opponent drew three or more cards this turn, you may pay {R} rather than pay Runeflare Trap's mana cost.\nRuneflare Trap deals damage to target player equal to the number of cards in that player's hand.
-End

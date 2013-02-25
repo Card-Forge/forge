@@ -1,7 +1,6 @@
 Name:Fencer Clique
 ManaCost:2 U U
 Types:Creature Faerie Soldier
-Text:no text
 PT:3/2
 K:Flying
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination $ Library | LibraryPosition$ 0 | SpellDescription$ Put CARDNAME on top of its owner's library.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fencer_clique.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/33.jpg
 Oracle:Flying\n{U}: Put Fencer Clique on top of its owner's library.
-End

@@ -1,7 +1,6 @@
 Name:Kitsune Diviner
 ManaCost:W
 Types:Creature Fox Cleric
-Text:no text
 PT:0/1
 A:AB$ Tap | Cost$ T | ValidTgts$ Spirit | TgtPrompt$ Select target Spirit | SpellDescription$ Tap target Spirit.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_diviner.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/26.jpg
 Oracle:{T}: Tap target Spirit.
-End

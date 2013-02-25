@@ -1,7 +1,6 @@
 Name:Launch
 ManaCost:1 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/launch.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/82.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nWhen Launch is put into a graveyard from the battlefield, return Launch to its owner's hand.
-End

@@ -1,7 +1,6 @@
 Name:Workhorse
 ManaCost:6
 Types:Artifact Creature Horse
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:4
 A:AB$ Mana | Cost$ SubCounter<1/P1P1> | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/workhorse.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/142.jpg
 Oracle:Workhorse enters the battlefield with four +1/+1 counters on it.\nRemove a +1/+1 counter from Workhorse: Add {1} to your mana pool.
-End

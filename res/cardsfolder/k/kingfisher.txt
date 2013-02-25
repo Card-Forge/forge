@@ -1,7 +1,6 @@
 Name:Kingfisher
 ManaCost:3 U
 Types:Creature Bird
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, draw a card.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kingfisher.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/36.jpg
 Oracle:Flying\nWhen Kingfisher dies, draw a card.
-End

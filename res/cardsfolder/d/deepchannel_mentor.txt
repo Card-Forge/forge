@@ -1,7 +1,6 @@
 Name:Deepchannel Mentor
 ManaCost:5 U
 Types:Creature Merfolk Rogue
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Blue+YouCtrl | AddKeyword$ Unblockable | Description$ Blue creatures you control are unblockable.
 SVar:PlayMain1:TRUE
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepchannel_mentor.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/35.jpg
 Oracle:Blue creatures you control are unblockable.
-End

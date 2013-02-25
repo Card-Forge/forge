@@ -1,7 +1,6 @@
 Name:Gurzigost
 ManaCost:3 G G
 Types:Creature Beast
-Text:no text
 PT:6/8
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGurzigostChangeZone | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you put two cards from your graveyard on the bottom of your library.
 SVar:TrigGurzigostChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | Optional$ True | ChangeType$ Card.YouOwn | ChangeNum$ 2 | Hidden$ True | RememberChanged$ True | SubAbility$ DBGurzigostSacrifice
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gurzigost.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/126.jpg
 Oracle:At the beginning of your upkeep, sacrifice Gurzigost unless you put two cards from your graveyard on the bottom of your library.\n{G}{G}, Discard a card: You may have Gurzigost assign its combat damage this turn as though it weren't blocked.
-End

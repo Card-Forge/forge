@@ -1,7 +1,6 @@
 Name:Overburden
 ManaCost:1 U
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBounceYou | TriggerDescription$ Whenever a player puts a nontoken creature onto the battlefield, that player returns a land he or she controls to its owner's hand.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigBounceOpp | Secondary$ True | TriggerDescription$ Whenever a player puts a nontoken creature onto the battlefield, that player returns a land he or she controls to its owner's hand.
 SVar:TrigBounceYou:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeType$ Land.YouCtrl | ChangeNum$ 1 | Mandatory$ True | DefinedPlayer$ You | Hidden$ True
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overburden.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/39.jpg
 Oracle:Whenever a player puts a nontoken creature onto the battlefield, that player returns a land he or she controls to its owner's hand.
-End

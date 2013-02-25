@@ -1,7 +1,6 @@
 Name:Empyrial Archangel
 ManaCost:4 G W W U
 Types:Creature Angel
-Text:no text
 PT:5/8
 K:Flying
 K:Shroud
@@ -13,4 +12,3 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empyrial_archangel.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/166.jpg
 Oracle:Flying, shroud\nAll damage that would be dealt to you is dealt to Empyrial Archangel instead.
-End

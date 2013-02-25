@@ -1,11 +1,9 @@
 Name:Flowstone Flood
 ManaCost:3 R
 Types:Sorcery
-Text:no text
 K:Buyback PayLife<3> Discard<1/Random> 
 A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Rarity:Uncommon
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/83.jpg
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_flood.jpg
 Oracle:Buyback-Pay 3 life, Discard a card at random. (You may pay 3 life and discard a card at random in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nDestroy target land.
-End

@@ -1,7 +1,6 @@
 Name:Matsu-Tribe Decoy
 ManaCost:2 G
 Types:Creature Snake Warrior
-Text:no text
 PT:1/3
 A:AB$ MustBlock | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/matsu_tribe_decoy.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/227.jpg
 Oracle:{2}{G}: Target creature blocks Matsu-Tribe Decoy this turn if able.\nWhenever Matsu-Tribe Decoy deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
-End

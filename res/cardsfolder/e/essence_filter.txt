@@ -1,11 +1,9 @@
 Name:Essence Filter
 ManaCost:1 G G
 Types:Sorcery
-Text:no text
 A:SP$ DestroyAll | Cost$ 1 G G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments
 A:SP$ DestroyAll | Cost$ 1 G G | ValidCards$ Enchantment.nonWhite | SpellDescription$ or all nonwhite enchantments.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_filter.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/121.jpg
 Oracle:Destroy all enchantments or all nonwhite enchantments.
-End

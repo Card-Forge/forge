@@ -1,7 +1,6 @@
 Name:Ludevic's Test Subject
 ManaCost:1 U
 Types:Creature Lizard
-Text:no text
 PT:0/3
 K:Defender
 A:AB$PutCounter | Cost$ 1 U | Defined$ Self | CounterType$ HATCHLING | CounterNum$ 1 | SubAbility$ DBTransform | SpellDescription$ Put a hatchling counter on CARDNAME. Then if there are five or more hatchling counters on it, remove all of them and transform it.
@@ -20,7 +19,6 @@ Name:Ludevic's Abomination
 ManaCost:no cost
 Colors:blue
 Types:Creature Lizard Horror
-Text:no text
 PT:13/13
 K:Trample
 #Special case: SVars must be here as well because by the time it's needed, the card will have transformed.
@@ -29,4 +27,3 @@ SVar:All:Count$CardCounters.HATCHLING
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ludevics_abomination.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/64b.jpg
 Oracle:Trample
-End

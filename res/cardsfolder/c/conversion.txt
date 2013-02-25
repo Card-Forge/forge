@@ -1,7 +1,6 @@
 Name:Conversion
 ManaCost:2 W W
 Types:Enchantment
-Text:no text
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W W
 S:Mode$ Continuous | Affected$ Mountain | AddType$ Plains | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ All Mountains are Plains.
 SVar:RemRandomDeck:True
@@ -13,4 +12,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/198.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/269.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/200.jpg
 Oracle:At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.\nAll Mountains are Plains.
-End

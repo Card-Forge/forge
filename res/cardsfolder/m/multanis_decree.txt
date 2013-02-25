@@ -8,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/multanis_decree.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/114.jpg
 Oracle:Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.
-End

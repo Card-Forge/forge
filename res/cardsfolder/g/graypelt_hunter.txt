@@ -1,7 +1,6 @@
 Name:Graypelt Hunter
 ManaCost:3 G
 Types:Creature Human Warrior Ally
-Text:no text
 PT:2/2
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may put a +1/+1 counter on CARDNAME.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_hunter.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/103.jpg
 Oracle:Trample\nWhenever Graypelt Hunter or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Graypelt Hunter.
-End

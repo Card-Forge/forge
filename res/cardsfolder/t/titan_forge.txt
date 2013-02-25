@@ -1,11 +1,9 @@
 Name:Titan Forge
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ PutCounter | Cost$ 3 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$ Token | Cost$ T SubCounter<3/CHARGE> | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 9 | TokenToughness$ 9 | SpellDescription$ Put a 9/9 colorless Golem artifact creature token onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titan_forge.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/141.jpg
 Oracle:{3}, {T}: Put a charge counter on Titan Forge.\n{T}, Remove three charge counters from Titan Forge: Put a 9/9 colorless Golem artifact creature token onto the battlefield.
-End

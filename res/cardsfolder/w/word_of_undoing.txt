@@ -1,7 +1,6 @@
 Name:Word of Undoing
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZoneAll | RememberTargets$ True | SpellDescription$ Return target creature and all white Auras you own attached to it to their owners' hands.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.Aura+White+Attached+YouOwn | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/word_of_undoing.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/108.jpg
 Oracle:Return target creature and all white Auras you own attached to it to their owners' hands.
-End

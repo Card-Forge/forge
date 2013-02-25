@@ -1,7 +1,6 @@
 Name:Kederekt Leviathan
 ManaCost:6 U U
 Types:Creature Leviathan
-Text:no text
 PT:5/5
 K:Unearth:6 U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return all other nonland permanents to their owners' hands.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kederekt_leviathan.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/48.jpg
 Oracle:When Kederekt Leviathan enters the battlefield, return all other nonland permanents to their owners' hands.\nUnearth {6}{U} ({6}{U}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-End

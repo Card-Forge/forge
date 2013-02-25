@@ -1,7 +1,6 @@
 Name:Entomber Exarch
 ManaCost:2 B B
 Types:Creature Cleric
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, choose one - Return target creature card from your graveyard to your hand; or target opponent reveals his or her hand, you choose a noncreature card from it, then that player discards that card.
 SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBSearch,DBRemove | SpellDescription$ Choose one - Return target creature card from your graveyard to your hand; or target opponent reveals his or her hand, you choose a noncreature card from it, then that player discards that card.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entomber_exarch.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/59.jpg
 Oracle:When Entomber Exarch enters the battlefield, choose one - Return target creature card from your graveyard to your hand; or target opponent reveals his or her hand, you choose a noncreature card from it, then that player discards that card.
-End

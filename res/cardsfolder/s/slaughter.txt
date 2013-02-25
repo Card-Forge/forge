@@ -1,11 +1,9 @@
 Name:Slaughter
 ManaCost:2 B B
 Types:Instant
-Text:no text
 K:Buyback PayLife<4>
 A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slaughter.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/74.jpg
 Oracle:Buyback-Pay 4 life. (You may pay 4 life in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nDestroy target nonblack creature. It can't be regenerated.
-End

@@ -7,4 +7,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umbra_stalker.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/48.jpg
 Oracle:Chroma - Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.
-End

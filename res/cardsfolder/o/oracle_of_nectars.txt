@@ -2,11 +2,9 @@ Name:Oracle of Nectars
 ManaCost:2 GW
 Types:Creature Elf Cleric
 PT:2/2
-Text:no text
 A:AB$ GainLife | LifeAmount$ X | Cost$ T X | References$ X | SpellDescription$ You gain X life.
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_nectars.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/233.jpg
 Oracle:{X}, {T}: You gain X life.
-End

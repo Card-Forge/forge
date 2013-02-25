@@ -1,11 +1,9 @@
 Name:Ravenous Baloth
 ManaCost:2 G G
 Types:Creature Beast
-Text:no text
 PT:4/4
 A:AB$ GainLife | Cost$ Sac<1/Beast> | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_baloth.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/278.jpg
 Oracle:Sacrifice a Beast: You gain 4 life.
-End

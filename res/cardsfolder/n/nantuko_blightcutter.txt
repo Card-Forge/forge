@@ -1,7 +1,6 @@
 Name:Nantuko Blightcutter
 ManaCost:2 G
 Types:Creature Insect Druid
-Text:no text
 PT:2/2
 K:Protection from black
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Condition$ Threshold | Description$ Threshold - CARDNAME gets +1/+1 for each black permanent your opponents control as long as seven or more cards are in your graveyard.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_blightcutter.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/131.jpg
 Oracle:Protection from black\nThreshold - Nantuko Blightcutter gets +1/+1 for each black permanent your opponents control as long as seven or more cards are in your graveyard.
-End

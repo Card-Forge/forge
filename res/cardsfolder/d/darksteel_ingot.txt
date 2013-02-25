@@ -1,7 +1,6 @@
 Name:Darksteel Ingot
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 K:Indestructible
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_ingot.
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/112.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/245.jpg
 Oracle:Darksteel Ingot is indestructible. ("Destroy" effects and lethal damage don't destroy it.)\n{T}: Add one mana of any color to your mana pool.
-End

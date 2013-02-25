@@ -1,11 +1,9 @@
 Name:Deep-Sea Serpent
 ManaCost:4 U U
 Types:Creature Serpent
-Text:no text
 PT:5/5
 K:CARDNAME can't attack unless defending player controls an Island.
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/deep_sea_serpent.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/52.jpg
 Oracle:Deep-Sea Serpent can't attack unless defending player controls an Island.
-End

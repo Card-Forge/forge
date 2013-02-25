@@ -1,7 +1,6 @@
 Name:Rag Man
 ManaCost:2 B B
 Types:Creature Human Minion
-Text:no text
 PT:2/1
 A:AB$ RevealHand | Cost$ B B B T | ValidTgts$ Player | TgtPrompt$ Select target player | PlayerTurn$ True | SubAbility$ DBDiscard | SpellDescription$ Target opponent reveals his or her hand and discards a creature card at random. Activate this ability only during your turn.
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ Random | DiscardValid$ Creature
@@ -13,4 +12,3 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/39.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/151.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/156.jpg
 Oracle:{B}{B}{B}, {T}: Target opponent reveals his or her hand and discards a creature card at random. Activate this ability only during your turn.
-End

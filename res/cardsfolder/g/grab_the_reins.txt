@@ -1,7 +1,6 @@
 Name:Grab the Reins
 ManaCost:3 R
 Types:Instant
-Text:no text
 A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain control of | LoseControl$ EOT | AddKWs$ Haste | SpellDescription$ Choose one - Until end of turn, you gain control of target creature and it gains haste;
 A:SP$ Sacrifice | Cost$ 3 R | Amount$ 1 | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ GrabDmg | SpellDescription$ or sacrifice a creature, then CARDNAME deals damage equal to that creature's power to target creature or player.
 A:SP$ GainControl | Cost$ 5 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain control of | LoseControl$ EOT | AddKWs$ Haste | NonBasicSpell$ True | SubAbility$ GrabASacrifice | PrecostDesc$ Entwine | CostDesc$ 2 R | SpellDescription$ (Choose both if you pay the entwine cost.)
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grab_the_reins.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/95.jpg
 Oracle:Choose one - Until end of turn, you gain control of target creature and it gains haste; or sacrifice a creature, then Grab the Reins deals damage equal to that creature's power to target creature or player.\nEntwine {2}{R} (Choose both if you pay the entwine cost.)
-End

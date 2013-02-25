@@ -1,7 +1,6 @@
 Name:Caltrops
 ManaCost:3
 Types:Artifact
-Text:no text
 T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature attacks, CARDNAME deals 1 damage to it.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 1
 SVar:RemRandomDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/caltrops.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/129.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/288.jpg
 Oracle:Whenever a creature attacks, Caltrops deals 1 damage to it.
-End

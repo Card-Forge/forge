@@ -1,10 +1,8 @@
 Name:Traveler's Amulet
 ManaCost:1
 Types:Artifact
-Text:no text
 A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/travelers_amulet.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/234.jpg
 Oracle:{1}, Sacrifice Traveler's Amulet: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
-End

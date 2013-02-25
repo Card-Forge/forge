@@ -1,11 +1,9 @@
 Name:Wild Hunger
 ManaCost:2 G
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +1 | KW$ Trample | SpellDescription$ Target creature gets +3/+1 and gains trample until end of turn.
 K:Flashback 3 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_hunger.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/132.jpg
 Oracle:Target creature gets +3/+1 and gains trample until end of turn.\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

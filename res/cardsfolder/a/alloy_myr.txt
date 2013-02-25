@@ -1,11 +1,9 @@
 Name:Alloy Myr
 ManaCost:3
 Types:Artifact Creature Myr
-Text:no text
 PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alloy_myr.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/129.jpg
 Oracle:{T}: Add one mana of any color to your mana pool.
-End

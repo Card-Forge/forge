@@ -1,7 +1,6 @@
 Name:Battlefield Percher
 ManaCost:3 B B
 Types:Creature Bird
-Text:no text
 PT:2/2
 K:Flying
 K:CARDNAME can block only creatures with flying.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlefield_percher.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/52.jpg
 Oracle:Flying\nBattlefield Percher can block only creatures with flying.\n{1}{B}: Battlefield Percher gets +1/+1 until end of turn.
-End

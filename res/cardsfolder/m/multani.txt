@@ -1,7 +1,6 @@
 Name:Multani
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:-3/-2
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddPower$ X | References$ X | Description$ Creatures you control get +X/+0, where X is the number of cards in your hand.
 SVar:X:Count$CardsInYourHand
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/multani.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/multani.jpg
 Oracle:Hand -3, life -2\nCreatures you control get +X/+0, where X is the number of cards in your hand.
-End

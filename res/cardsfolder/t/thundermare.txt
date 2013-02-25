@@ -1,7 +1,6 @@
 Name:Thundermare
 ManaCost:5 R
 Types:Creature Elemental Horse
-Text:no text
 PT:5/5
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all other creatures.
@@ -12,4 +11,3 @@ SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/116.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/158.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/224.jpg
 Oracle:Haste (This creature can attack the turn it comes under your control.)\nWhen Thundermare enters the battlefield, tap all other creatures.
-End

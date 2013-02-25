@@ -1,7 +1,6 @@
 Name:Bog Witch
 ManaCost:2 B
 Types:Creature Human Spellshaper
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ B T Discard<1/Card> | Produced$ B | Amount$ 3 | SpellDescription$ Add B B B to your mana pool.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_witch.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/118.jpg
 Oracle:{B}, {T}, Discard a card: Add {B}{B}{B} to your mana pool.
-End

@@ -1,11 +1,9 @@
 Name:Blustersquall
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Tap | Cost$ U | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | SpellDescription$ Tap target creature you don't control.
 A:SP$ TapAll | Cost$ 3 U | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | PrecostDesc$ Overload | CostDesc$ 3 U | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blustersquall.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/30.jpg
 Oracle:Tap target creature you don't control.\nOverload {3}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
-End

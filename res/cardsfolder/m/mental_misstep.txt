@@ -1,10 +1,8 @@
 Name:Mental Misstep
 ManaCost:PU
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ PU | TargetType$ Spell | TgtPrompt$ Select target spell with CMC 1 | ValidTgts$ Card.cmcEQ1 | SpellDescription$ Counter target spell with converted mana cost 1.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mental_misstep.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/38.jpg
 Oracle:({U/P} can be paid with either {U} or 2 life.)\nCounter target spell with converted mana cost 1.
-End

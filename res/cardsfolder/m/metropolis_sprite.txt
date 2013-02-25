@@ -1,11 +1,9 @@
 Name:Metropolis Sprite
 ManaCost:1 U
 Types:Creature Faerie Rogue
-Text:no text
 PT:1/2
 K:Flying
 A:AB$ Pump | Cost$ U | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metropolis_sprite.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/42.jpg
 Oracle:Flying\n{U}: Metropolis Sprite gets +1/-1 until end of turn.
-End

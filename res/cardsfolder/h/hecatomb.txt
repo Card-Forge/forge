@@ -1,7 +1,6 @@
 Name:Hecatomb
 ManaCost:1 B B
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice CARDNAME unless you sacrifice four creatures.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Amount$ 4 | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBSacSelf
 SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT4
@@ -15,4 +14,3 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/29.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/136.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/18.jpg
 Oracle:When Hecatomb enters the battlefield, sacrifice Hecatomb unless you sacrifice four creatures.\nTap an untapped Swamp you control: Hecatomb deals 1 damage to target creature or player.
-End

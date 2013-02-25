@@ -12,4 +12,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/10.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/15.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/10.jpg
 Oracle:Target spell or permanent becomes black. (Mana symbols on that permanent remain unchanged.)
-End

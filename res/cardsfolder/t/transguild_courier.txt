@@ -8,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transguild_courier.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/168.jpg
 Oracle:Transguild Courier is all colors (even if this card isn't on the battlefield).
-End

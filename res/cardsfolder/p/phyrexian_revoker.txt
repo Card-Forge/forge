@@ -1,7 +1,6 @@
 Name:Phyrexian Revoker
 ManaCost:2
 Types:Artifact Creature Horror
-Text:no text
 PT:2/1
 K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SpellDescription$ As CARDNAME enters the battlefield, name a nonland card.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_revoker.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/122.jpg
 Oracle:As Phyrexian Revoker enters the battlefield, name a nonland card.\nActivated abilities of sources with the chosen name can't be activated.
-End

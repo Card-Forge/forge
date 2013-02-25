@@ -1,7 +1,6 @@
 Name:Barrin's Codex
 ManaCost:4
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a page counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
 A:AB$ Draw | Cost$ 4 T Sac<1/CARDNAME> | NumCards$ X | References$ X | SpellDescription$ Draw X cards, where X is the number of page counters on CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Barrins_Codex.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/286.jpg
 Oracle:At the beginning of your upkeep, you may put a page counter on Barrin's Codex.\n{4}, {T}, Sacrifice Barrin's Codex: Draw X cards, where X is the number of page counters on Barrin's Codex.
-End

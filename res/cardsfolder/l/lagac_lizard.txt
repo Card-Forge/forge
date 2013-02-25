@@ -1,10 +1,8 @@
 Name:Lagac Lizard
 ManaCost:3 R
 Types:Creature Lizard
-Text:no text
 PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lagac_lizard.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/154.jpg
 Oracle:
-End

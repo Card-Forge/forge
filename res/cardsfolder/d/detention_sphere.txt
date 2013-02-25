@@ -1,7 +1,6 @@
 Name:Detention Sphere
 ManaCost:1 W U
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, you may exile target nonland permanent not named CARDNAME and all other permanents with the same name as that permanent.
 SVar:TrigExile:DB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+notnamedDetention Sphere | TgtPrompt$ Choose target nonland permanent not named Detention Sphere | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBChangeZoneAll
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.sameName | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/detention_sphere.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/155.jpg
 Oracle:When Detention Sphere enters the battlefield, you may exile target nonland permanent not named Detention Sphere and all other permanents with the same name as that permanent.\nWhen Detention Sphere leaves the battlefield, return the exiled cards to the battlefield under their owner's control.
-End

@@ -1,7 +1,6 @@
 Name:Sandstorm Eidolon
 ManaCost:3 R
 Types:Creature Spirit
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a multicolored spell, you may return CARDNAME from your graveyard to your hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstorm_eidolon.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/70.jpg
 Oracle:{R}, Sacrifice Sandstorm Eidolon: Target creature can't block this turn.\nWhenever you cast a multicolored spell, you may return Sandstorm Eidolon from your graveyard to your hand.
-End

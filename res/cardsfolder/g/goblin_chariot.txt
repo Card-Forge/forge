@@ -1,7 +1,6 @@
 Name:Goblin Chariot
 ManaCost:2 R
 Types:Creature Goblin Warrior
-Text:no text
 PT:2/2
 K:Haste
 SVar:Rarity:Common
@@ -11,4 +10,3 @@ SetInfo:S99|Common|http://magiccards.info/scans/en/st/99.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/191.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/185.jpg
 Oracle:Haste (This creature can attack the turn it comes under your control.)
-End

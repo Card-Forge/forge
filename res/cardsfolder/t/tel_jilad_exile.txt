@@ -1,11 +1,9 @@
 Name:Tel-Jilad Exile
 ManaCost:3 G
 Types:Creature Troll Warrior
-Text:no text
 PT:2/3
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_exile.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/133.jpg
 Oracle:{1}{G}: Regenerate Tel-Jilad Exile.
-End

@@ -1,7 +1,6 @@
 Name:Keldon Necropolis
 ManaCost:no cost
 Types:Legendary Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ DealDamage | Cost$ 4 R T Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_necropolis.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/325.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{4}{R}, {T}, Sacrifice a creature: Keldon Necropolis deals 2 damage to target creature or player.
-End

@@ -1,10 +1,8 @@
 Name:Withstand Death
 ManaCost:G
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Indestructible | SpellDescription$ Target creature is indestructible this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withstand_death.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/134.jpg
 Oracle:Target creature is indestructible this turn. (Lethal damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)
-End

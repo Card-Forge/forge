@@ -1,7 +1,6 @@
 Name:Cloudchaser Eagle
 ManaCost:3 W
 Types:Creature Bird
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudchaser_eagl
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/227.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/11.jpg
 Oracle:Flying\nWhen Cloudchaser Eagle enters the battlefield, destroy target enchantment.
-End

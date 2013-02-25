@@ -1,7 +1,6 @@
 Name:Markov Warlord
 ManaCost:5 R
 Types:Creature Vampire Warrior
-Text:no text
 PT:4/4
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, up to two target creatures can't block this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markov_warlord.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/97.jpg
 Oracle:Haste\nWhen Markov Warlord enters the battlefield, up to two target creatures can't block this turn.
-End

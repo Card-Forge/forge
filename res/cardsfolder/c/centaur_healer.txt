@@ -1,7 +1,6 @@
 Name:Centaur Healer
 ManaCost:1 G W
 Types:Creature Centaur Cleric
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 3
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_healer.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/148.jpg
 Oracle:When Centaur Healer enters the battlefield, you gain 3 life.
-End

@@ -1,7 +1,6 @@
 Name:Skymark Roc
 ManaCost:2 W U
 Types:Creature Bird
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME attacks, you may return target creature defending player controls with toughness 2 or less to its owner's hand.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skymark_roc.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/196.jpg
 Oracle:Flying\nWhenever Skymark Roc attacks, you may return target creature defending player controls with toughness 2 or less to its owner's hand.
-End

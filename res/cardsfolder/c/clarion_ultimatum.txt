@@ -1,7 +1,6 @@
 Name:Clarion Ultimatum
 ManaCost:W W W U U G G
 Types:Sorcery
-Text:no text
 A:SP$ ChooseCard | Cost$ W W W U U G G | Defined$ You | Amount$ 5 | Choices$ Permanent.YouCtrl | ChoiceTitle$ Choose five permanents you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ DBSearch | SpellDescription$ Choose five permanents you control. For each of those permanents, you may search your library for a card with the same name as that permanent. Put those cards onto the battlefield tapped, then shuffle your library.
 SVar:DBSearch:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Permanent.IsRemembered | ChooseOrder$ True | Zone$ Battlefield | RepeatSubAbility$ DBClarion | SubAbility$ DBCleanup
 SVar:DBClarion:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.sharesNameWith Imprinted | ChangeNum$ 1 | Tapped$ True
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clarion_ultimatum.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/163.jpg
 Oracle:Choose five permanents you control. For each of those permanents, you may search your library for a card with the same name as that permanent. Put those cards onto the battlefield tapped, then shuffle your library.
-End

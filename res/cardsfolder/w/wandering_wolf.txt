@@ -1,11 +1,9 @@
 Name:Wandering Wolf
 ManaCost:1 G
 Types:Creature Wolf
-Text:no text
 PT:2/1
 K:Creatures with power less than CARDNAME's power can't block it.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_wolf.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/202.jpg
 Oracle:Creatures with power less than Wandering Wolf's power can't block it.
-End

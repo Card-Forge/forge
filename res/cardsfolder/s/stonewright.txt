@@ -1,7 +1,6 @@
 Name:Stonewright
 ManaCost:R
 Types:Creature Human Shaman
-Text:no text
 PT:1/1
 K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddAbility$ Pump | Description$ As long as CARDNAME is paired with another creature, each of those creatures have "R: This creature gets +1/+0 until end of turn."
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonewright.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/157.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Stonewright is paired with another creature, each of those creatures has "{R}: This creature gets +1/+0 until end of turn."
-End

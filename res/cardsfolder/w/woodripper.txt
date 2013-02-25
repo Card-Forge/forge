@@ -1,7 +1,6 @@
 Name:Woodripper
 ManaCost:3 G G
 Types:Creature Beast
-Text:no text
 PT:4/6
 A:AB$ Destroy | Cost$ 1 SubCounter<1/FADE> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 K:Fading:3
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodripper.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/125.jpg
 Oracle:Fading 3 (This creature enters the battlefield with three fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\n{1}, Remove a fade counter from Woodripper: Destroy target artifact.
-End

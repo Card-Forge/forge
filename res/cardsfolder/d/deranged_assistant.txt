@@ -1,11 +1,9 @@
 Name:Deranged Assistant
 ManaCost:1 U
 Types:Creature Human Wizard
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ T Mill<1> | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deranged_assistant.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/52.jpg
 Oracle:{T}, Put the top card of your library into your graveyard: Add {1} to your mana pool.
-End

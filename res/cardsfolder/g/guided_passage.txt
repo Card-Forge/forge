@@ -1,7 +1,6 @@
 Name:Guided Passage
 ManaCost:U R G
 Types:Sorcery
-Text:no text
 A:SP$ Dig | Cost$ U R G | NumCards$ X | Reveal$ True | NoMove$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBCreature | References$ X | SpellDescription$ Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle your library.
 SVar:DBCreature:DB$ ChangeZone | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Chooser$ Opponent | Origin$ Library | Destination$ Hand | SubAbility$ DBLand
 SVar:DBLand:DB$ ChangeZone | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Chooser$ Opponent | Origin$ Library | Destination$ Hand | SubAbility$ DBNonCreatureNonLand
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guided_passage.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/105.jpg
 Oracle:Reveal the cards in your library. An opponent chooses from among them a creature card, a land card, and a noncreature, nonland card. You put the chosen cards into your hand. Then shuffle your library.
-End

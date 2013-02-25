@@ -1,7 +1,6 @@
 Name:Leonin Relic-Warder
 ManaCost:W W
 Types:Creature Cat Cleric
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile target artifact or enchantment.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_relic_warder.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/10.jpg
 Oracle:When Leonin Relic-Warder enters the battlefield, you may exile target artifact or enchantment.\nWhen Leonin Relic-Warder leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-End

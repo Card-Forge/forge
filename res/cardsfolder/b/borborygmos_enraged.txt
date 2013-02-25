@@ -1,7 +1,6 @@
 Name:Borborygmos Enraged
 ManaCost:4 R R G G
 Types:Legendary Creature Cyclops
-Text:no text
 PT:7/6
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borborygmos_enraged.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/147.jpg
 Oracle:Trample\nWhenever Borborygmos Enraged deals combat damage to a player, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.\nDiscard a land card: Borborygmos Enraged deals 3 damage to target creature or player.
-End

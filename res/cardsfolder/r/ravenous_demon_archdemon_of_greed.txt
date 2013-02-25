@@ -1,7 +1,6 @@
 Name:Ravenous Demon
 ManaCost:3 B B
 Types:Creature Demon
-Text:no text
 PT:4/4
 A:AB$SetState | Cost$ Sac<1/Human> | Defined$ Self | SorcerySpeed$ True | Mode$ Transform | SpellDescription$ Transform CARDNAME. Activate this only any time you could cast a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_demon.jpg
@@ -15,7 +14,6 @@ Name:Archdemon of Greed
 ManaCost:no cost
 Colors:black
 Types:Creature Demon
-Text:no text
 PT:9/9
 K:Flying
 K:Trample
@@ -28,4 +26,3 @@ SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archdemon_of_greed.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/71b.jpg
 Oracle:At the beginning of your upkeep, sacrifice a Human. If you can't, tap Archdemon of Greed and it deals 9 damage to you.
-End

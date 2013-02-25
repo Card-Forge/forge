@@ -1,7 +1,6 @@
 Name:Selesnya Charm
 ManaCost:G W
 Types:Instant
-Text:no text
 A:SP$ Charm | Cost$ G W | Choices$ Buff,Exile,Knight | CharmNum$ 1 | SpellDescription$ Choose one - Target creature gets +2/+2 and gains trample until end of turn; or exile target creature with power 5 or greater; or put a 2/2 white Knight creature token with vigilance onto the battlefield.
 SVar:Buff:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature. | NumAtt$ 2 | NumDef$ 2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn.
 SVar:Exile:DB$ ChangeZone | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Choose target creature with power 5 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 5 or greater.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_charm.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/194.jpg
 Oracle:Choose one - Target creature gets +2/+2 and gains trample until end of turn; or exile target creature with power 5 or greater; or put a 2/2 white Knight creature token with vigilance onto the battlefield.
-End

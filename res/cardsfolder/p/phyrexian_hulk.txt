@@ -1,7 +1,6 @@
 Name:Phyrexian Hulk
 ManaCost:6
 Types:Artifact Creature Golem
-Text:no text
 PT:5/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83203.jpg
@@ -12,4 +11,3 @@ SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/312.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/306.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/209.jpg
 Oracle:
-End

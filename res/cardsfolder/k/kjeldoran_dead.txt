@@ -1,7 +1,6 @@
 Name:Kjeldoran Dead
 ManaCost:B
 Types:Creature Skeleton
-Text:no text
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature
@@ -13,4 +12,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/32.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/140.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/25.jpg
 Oracle:When Kjeldoran Dead enters the battlefield, sacrifice a creature.\n{B}: Regenerate Kjeldoran Dead.
-End

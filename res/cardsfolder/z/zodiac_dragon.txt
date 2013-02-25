@@ -1,7 +1,6 @@
 Name:Zodiac Dragon
 ManaCost:7 R R
 Types:Creature Dragon
-Text:no text
 PT:8/8
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME is put into your graveyard from the battlefield, you may return it to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zodiac_dragon.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/131.jpg
 Oracle:When Zodiac Dragon is put into your graveyard from the battlefield, you may return it to your hand.
-End

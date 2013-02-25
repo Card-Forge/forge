@@ -1,7 +1,6 @@
 Name:Farrelite Priest
 ManaCost:1 W W
 Types:Creature Human Cleric
-Text:no text
 PT:1/3
 A:AB$ Mana | Cost$ 1 | Produced$ W | ActivationNumberSacrifice$ 4 | SpellDescription$ Add W to your mana pool. If this ability has been activated four or more times this turn, sacrifice CARDNAME at the beginning of the next end step.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/farrelite_priest.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/137.jpg
 Oracle:{1}: Add {W} to your mana pool. If this ability has been activated four or more times this turn, sacrifice Farrelite Priest at the beginning of the next end step.
-End

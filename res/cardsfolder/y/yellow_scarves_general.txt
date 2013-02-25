@@ -1,7 +1,6 @@
 Name:Yellow Scarves General
 ManaCost:3 R
 Types:Creature Human Soldier
-Text:no text
 PT:2/2
 K:Horsemanship
 K:CARDNAME can't block.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yellow_scarves_general.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/126.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nYellow Scarves General can't block.
-End

@@ -1,7 +1,6 @@
 Name:Deathless Angel
 ManaCost:4 W W
 Types:Creature Angel
-Text:no text
 PT:5/7
 K:Flying
 A:AB$ Pump | Cost$ W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Indestructible | SpellDescription$ Target creature is indestructible this turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathless_angel.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/17.jpg
 Oracle:Flying\n{W}{W}: Target creature is indestructible this turn.
-End

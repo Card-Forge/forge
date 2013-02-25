@@ -12,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/enslave.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/70.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/58.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your upkeep, enchanted creature deals 1 damage to its owner.
-End

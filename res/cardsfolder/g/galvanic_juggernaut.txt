@@ -1,7 +1,6 @@
 Name:Galvanic Juggernaut
 ManaCost:4
 Types:Artifact Creature Juggernaut
-Text:no text
 PT:5/5
 K:CARDNAME attacks each turn if able.
 K:CARDNAME doesn't untap during your untap step.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_juggernaut.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/222.jpg
 Oracle:Galvanic Juggernaut attacks each turn if able.\nGalvanic Juggernaut doesn't untap during your untap step.\nWhenever another creature dies, untap Galvanic Juggernaut.
-End

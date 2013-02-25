@@ -1,7 +1,6 @@
 Name:Thunder Dragon
 ManaCost:5 R R
 Types:Creature Dragon
-Text:no text
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAllNonFlyers | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to each creature without flying.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_dragon.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/119.jpg
 Oracle:Flying\nWhen Thunder Dragon enters the battlefield, it deals 3 damage to each creature without flying.
-End

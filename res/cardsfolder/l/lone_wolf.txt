@@ -1,7 +1,6 @@
 Name:Lone Wolf
 ManaCost:2 G
 Types:Creature Wolf
-Text:no text
 PT:2/2
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
 SVar:Rarity:Common
@@ -13,4 +12,3 @@ SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/71.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/130.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/105.jpg
 Oracle:You may have Lone Wolf assign its combat damage as though it weren't blocked.
-End

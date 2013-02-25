@@ -1,7 +1,6 @@
 Name:Gwyllion Hedge-Mage
 ManaCost:2 WB
 Types:Creature Hag Wizard
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Plains.YouCtrl | PresentCompare$ GE2 | OptionalDecider$ You | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Plains, you may put a 1/1 white Kithkin Soldier creature token onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Swamp.YouCtrl | PresentCompare$ GE2 | OptionalDecider$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gwyllion_hedge_m
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/202.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/89.jpg
 Oracle:When Gwyllion Hedge-Mage enters the battlefield, if you control two or more Plains, you may put a 1/1 white Kithkin Soldier creature token onto the battlefield.\nWhen Gwyllion Hedge-Mage enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.
-End

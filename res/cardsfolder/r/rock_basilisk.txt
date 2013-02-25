@@ -1,7 +1,6 @@
 Name:Rock Basilisk
 ManaCost:4 R G
 Types:Creature Basilisk
-Text:no text
 PT:4/5
 T:Mode$ AttackerBlocked | ValidCard$ Creature.nonWall | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
 T:Mode$ Blocks | ValidCard$ Creature.nonWall | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rock_basilisk.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/339.jpg
 Oracle:Whenever Rock Basilisk blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
-End

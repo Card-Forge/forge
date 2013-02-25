@@ -1,7 +1,6 @@
 Name:Jester's Mask
 ManaCost:5
 Types:Artifact
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ ChangeZoneAll | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Opponent | Origin$ Hand | Destination$ Library | ChangeType$ Card | RememberChanged$ True | IsCurse$ True | SubAbility$ DBMask | SpellDescription$ Target opponent puts the cards from his or her hand on top of his or her library. Search that player's library for that many cards. That player puts those cards into his or her hand, then shuffles his or her library.
 SVar:DBMask:DB$ ChangeZone | DefinedPlayer$ Targeted | Origin$ Library | Destination$ Hand | ChangeNum$ X | ChangeType$ Card | Chooser$ You | SubAbility$ DBCleanup | References$ X
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jesters_mask.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/300.jpg
 Oracle:Jester's Mask enters the battlefield tapped.\n{1}, {T}, Sacrifice Jester's Mask: Target opponent puts the cards from his or her hand on top of his or her library. Search that player's library for that many cards. That player puts those cards into his or her hand, then shuffles his or her library.
-End

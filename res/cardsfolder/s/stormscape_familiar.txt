@@ -1,7 +1,6 @@
 Name:Stormscape Familiar
 ManaCost:1 U
 Types:Creature Bird
-Text:no text
 PT:1/1
 K:Flying
 S:Mode$ ReduceCost | ValidCard$ Card.White,Card.Black | Type$ Spell | Activator$ You | Amount$ 1 | Description$ White spells and black spells you cast cost 1 less to cast.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_famil
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/32.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/36.jpg
 Oracle:Flying\nWhite spells and black spells you cast cost {1} less to cast.
-End

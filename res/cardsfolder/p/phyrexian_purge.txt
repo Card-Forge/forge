@@ -1,7 +1,6 @@
 Name:Phyrexian Purge
 ManaCost:2 B R
 Types:Sorcery
-Text:no text
 A:SP$ Destroy | Cost$ 2 B R PayLife<X> | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxPayLifeLimit | References$ X,Y,MaxPayLifeLimit | SpellDescription$ Destroy any number of target creatures. CARDNAME costs 3 life more to cast for each target.
 SVar:MaxPayLifeLimit:Count$YourLifeTotal/DivideEvenlyDown.3
 SVar:X:SVar$Y/Times.3
@@ -10,4 +9,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_purge.jpg
 Oracle:Destroy any number of target creatures.\nPhyrexian Purge costs 3 life more to cast for each target.
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/333.jpg
-End

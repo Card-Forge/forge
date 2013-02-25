@@ -1,7 +1,6 @@
 Name:Fatal Attraction
 ManaCost:2 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDamage2 | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to enchanted creature.
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_attraction.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/98.jpg
 Oracle:Enchant creature\nWhen Fatal Attraction enters the battlefield, it deals 2 damage to enchanted creature.\nAt the beginning of your upkeep, Fatal Attraction deals 4 damage to enchanted creature.
-End

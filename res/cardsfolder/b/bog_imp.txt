@@ -1,7 +1,6 @@
 Name:Bog Imp
 ManaCost:1 B
 Types:Creature Imp
-Text:no text
 PT:1/1
 K:Flying
 SVar:Rarity:Common
@@ -16,4 +15,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/7.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/65.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/116.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)
-End

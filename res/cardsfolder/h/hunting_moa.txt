@@ -1,7 +1,6 @@
 Name:Hunting Moa
 ManaCost:2 G
 Types:Creature Bird Beast
-Text:no text
 PT:3/2
 K:Echo:2 G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield or dies, put a +1/+1 counter on target creature.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_moa.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/109.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/80.jpg
 Oracle:Echo {2}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Hunting Moa enters the battlefield or dies, put a +1/+1 counter on target creature.
-End

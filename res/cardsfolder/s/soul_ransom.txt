@@ -10,4 +10,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_ransom.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/198.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nDiscard two cards: Soul Ransom's controller sacrifices it, then draws two cards. Only any opponent may activate this ability.
-End

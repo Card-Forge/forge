@@ -1,7 +1,6 @@
 Name:Slith Firewalker
 ManaCost:R R
 Types:Creature Slith
-Text:no text
 PT:1/1
 K:Haste
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_firewalker.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/107.jpg
 Oracle:Haste\nWhenever Slith Firewalker deals combat damage to a player, put a +1/+1 counter on it.
-End

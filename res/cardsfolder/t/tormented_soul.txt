@@ -1,7 +1,6 @@
 Name:Tormented Soul
 ManaCost:B
 Types:Creature Spirit
-Text:no text
 PT:1/1
 K:CARDNAME can't block.
 K:Unblockable
@@ -11,4 +10,3 @@ SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/38.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/111.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/114.jpg
 Oracle:Tormented Soul can't block and is unblockable.
-End

@@ -1,7 +1,6 @@
 Name:Vigilant Drake
 ManaCost:4 U
 Types:Creature Drake
-Text:no text
 PT:3/3
 K:Flying
 A:AB$ Untap | Cost$ 2 U | SpellDescription$ Untap CARDNAME.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_drake.j
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/46.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/109.jpg
 Oracle:Flying\n{2}{U}: Untap Vigilant Drake.
-End

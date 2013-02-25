@@ -1,7 +1,6 @@
 Name:Surprise Deployment
 ManaCost:3 W
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 3 W | Origin$ Hand | Destination$ Battlefield | OptionalDecider$ You | ChangeType$ Creature.nonWhite | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | TgtPrompt$ Select target creature | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ DBAnimate | SpellDescription$ Cast CARDNAME only during combat. You may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ TrigBounce | sVars$ TrigReturn
 SVar:TrigBounce:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return CARDNAME to its owner's hand.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surprise_deployment.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/18.jpg
 Oracle:Cast Surprise Deployment only during combat.\nYou may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
-End

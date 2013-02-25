@@ -1,7 +1,6 @@
 Name:Curse of Bloodletting
 ManaCost:3 R R
 Types:Enchantment Aura Curse
-Text:no text
 K:Enchant player
 A:SP$ Attach | Cost$ 3 R R | ValidTgts$ Player | AILogic$ Curse
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player.EnchantedBy | ReplaceWith$ DmgTimes2 | IsCombat$ False | Description$ If a source would deal damage to enchanted player, it deals double that damage instead.
@@ -12,4 +11,3 @@ SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_bloodletting.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/85.jpg
 Oracle:Enchant player\nIf a source would deal damage to enchanted player, it deals double that damage to that player instead.
-End

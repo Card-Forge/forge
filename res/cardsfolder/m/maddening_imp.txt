@@ -1,7 +1,6 @@
 Name:Maddening Imp
 ManaCost:2 B
 Types:Creature Imp
-Text:no text
 PT:1/1
 K:Flying
 A:AB$ Effect | Cost$ T | Name$ Maddening Imp Effect | StaticAbilities$ KWPump | ActivationPhases$ Upkeep->Main1 | OpponentTurn$ True | SpellDescription$ Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate this ability only during an opponent's turn and only before combat. | SubAbility$ DestroyPacifist
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maddening_imp.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/37.jpg
 Oracle:Flying\n{T}: Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate this ability only during an opponent's turn and only before combat.
-End

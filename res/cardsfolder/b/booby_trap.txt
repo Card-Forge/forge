@@ -1,7 +1,6 @@
 Name:Booby Trap
 ManaCost:6
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonBasic | ValidDesc$ card other than a basic land | SubAbility$ ChooseP | SpellDescription$ As CARDNAME enters the battlefield, name a card other than a basic land card and choose an opponent.
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | AILogic$ Curse
@@ -18,4 +17,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/booby_trap.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/267.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/289.jpg
 Oracle:As Booby Trap enters the battlefield, name a card other than a basic land card and choose an opponent.\nThe chosen player reveals each card he or she draws.\nWhen the chosen player draws the named card, sacrifice Booby Trap. If you do, Booby Trap deals 10 damage to that player.
-End

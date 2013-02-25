@@ -1,7 +1,6 @@
 Name:Funeral Charm
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ Discard | Cost$ B | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ 1 | Mode$ TgtChoose | PrecostDesc$ Choose one - | SpellDescription$ Target player discards a card;
 A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ or target creature gets +2/-1 until end of turn;
 A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Swampwalk | SpellDescription$ or target creature gains swampwalk until end of turn.
@@ -11,4 +10,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108895.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/11.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/44.jpg
 Oracle:Choose one - Target player discards a card; or target creature gets +2/-1 until end of turn; or target creature gains swampwalk until end of turn.
-End

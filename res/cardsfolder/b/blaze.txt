@@ -1,7 +1,6 @@
 Name:Blaze
 ManaCost:X R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
@@ -15,4 +14,3 @@ SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/190.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/91.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/168.jpg
 Oracle:Blaze deals X damage to target creature or player.
-End

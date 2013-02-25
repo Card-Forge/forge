@@ -1,7 +1,6 @@
 Name:Manabond
 ManaCost:G
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeAll | TriggerDescription$ At the beginning of your end step, you may reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand.
 SVar:TrigChangeAll:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Land.YouCtrl | Origin$ Hand | Destination$ Battlefield | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Mode$ Hand
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manabond.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/113.jpg
 Oracle:At the beginning of your end step, you may reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand.
-End

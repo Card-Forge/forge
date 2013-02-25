@@ -1,7 +1,6 @@
 Name:Foul Spirit
 ManaCost:2 B
 Types:Creature Spirit
-Text:no text
 PT:3/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a land.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_spirit.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/13.jpg
 Oracle:Flying\nWhen Foul Spirit enters the battlefield, sacrifice a land.
-End

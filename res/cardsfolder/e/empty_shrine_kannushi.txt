@@ -1,7 +1,6 @@
 Name:Empty-Shrine Kannushi
 ManaCost:W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from white | CheckSVar$ WHITE | SVarCompare$ GE1 | Description$ CARDNAME has protection from the colors of permanents you control.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from blue | CheckSVar$ BLUE | SVarCompare$ GE1
@@ -17,4 +16,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_shrine_kannushi.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/2.jpg
 Oracle:Empty-Shrine Kannushi has protection from the colors of permanents you control.
-End

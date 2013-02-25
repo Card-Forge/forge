@@ -1,7 +1,6 @@
 Name:Faerie Conclave
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Animate | Cost$ 1 U | Defined$ Self | Power$ 2 | Toughness$ 1 | Types$ Creature,Faerie | Colors$ Blue | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 2/1 blue Faerie creature with flying until end of turn. It's still a land. (It can't be blocked except by creatures with flying or reach.)
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_conclave.
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/139.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/351.jpg
 Oracle:Faerie Conclave enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\n{1}{U}: Faerie Conclave becomes a 2/1 blue Faerie creature with flying until end of turn. It's still a land. (It can't be blocked except by creatures with flying or reach.)
-End

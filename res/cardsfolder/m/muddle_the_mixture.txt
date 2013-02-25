@@ -1,11 +1,9 @@
 Name:Muddle the Mixture
 ManaCost:U U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ U U | TargetType$ Spell | TgtPrompt$ Select target Instant or Sorcery spell | ValidTgts$ Instant,Sorcery | SpellDescription$ Counter target instant or sorcery spell.
 K:Transmute:1 U U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muddle_the_mixture.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/60.jpg
 Oracle:Counter target instant or sorcery spell.\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
-End

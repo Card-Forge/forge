@@ -1,10 +1,8 @@
 Name:Skullscorch
 ManaCost:R R
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ R R | ValidTgts$ Player | NumCards$ 2 | Mode$ Random | UnlessCost$ DamageYou<4> | UnlessPayer$ Targeted | SpellDescription$ Target player discards two cards at random unless that player has CARDNAME deal 4 damage to him or her.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skullscorch.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/114.jpg
 Oracle:Target player discards two cards at random unless that player has Skullscorch deal 4 damage to him or her.
-End

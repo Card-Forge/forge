@@ -1,7 +1,6 @@
 Name:Soulsworn Spirit
 ManaCost:3 U
 Types:Creature Spirit
-Text:no text
 PT:2/1
 K:Unblockable
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ When CARDNAME enters the battlefield, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsworn_spirit.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/51.jpg
 Oracle:Soulsworn Spirit is unblockable.\nWhen Soulsworn Spirit enters the battlefield, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
-End

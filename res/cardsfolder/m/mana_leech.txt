@@ -1,7 +1,6 @@
 Name:Mana Leech
 ManaCost:2 B
 Types:Creature Leech
-Text:no text
 PT:1/1
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | RememberTargets$ True |  SubAbility$ DBTap | SpellDescription$ Tap target land. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_leech.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/141.jpg
 Oracle:You may choose not to untap Mana Leech during your untap step.\n{T}: Tap target land. It doesn't untap during its controller's untap step for as long as Mana Leech remains tapped.
-End

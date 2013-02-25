@@ -15,4 +15,3 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/105.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/84.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/82.jpg
 Oracle:Enchant artifact\nYou control enchanted artifact.
-End

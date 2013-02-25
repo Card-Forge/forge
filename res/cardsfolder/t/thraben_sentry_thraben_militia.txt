@@ -1,7 +1,6 @@
 Name:Thraben Sentry
 ManaCost:3 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/2
 K:Vigilance
 T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ Whenever another creature you control dies, you may transform CARDNAME.
@@ -17,10 +16,8 @@ Name:Thraben Militia
 ManaCost:no cost
 Colors:white
 Types:Creature Human Soldier
-Text:no text
 PT:5/4
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_militia.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/38b.jpg
 Oracle:Trample
-End

@@ -1,7 +1,6 @@
 Name:Selesnya Evangel
 ManaCost:G W
 Types:Creature Elf Shaman
-Text:no text
 PT:1/2
 A:AB$ Token | Cost$ 1 T tapXType<1/Creature> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_evangel
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/228.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/223.jpg
 Oracle:{1}, {T}, Tap an untapped creature you control: Put a 1/1 green Saproling creature token onto the battlefield.
-End

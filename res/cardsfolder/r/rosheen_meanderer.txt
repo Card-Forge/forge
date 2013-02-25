@@ -1,11 +1,9 @@
 Name:Rosheen Meanderer
 ManaCost:3 RG
 Types:Legendary Creature Giant Shaman
-Text:no text
 PT:4/4
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 4 | RestrictValid$ CostContainsX | SpellDescription$ Add 4 to your mana pool. Spend this mana only on costs that contain X.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rosheen_meanderer.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/214.jpg
 Oracle:{T}: Add {4} to your mana pool. Spend this mana only on costs that contain {X}.
-End

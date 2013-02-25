@@ -1,11 +1,9 @@
 Name:Rooftop Storm
 ManaCost:5 U
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Zombie | AddHiddenKeyword$ Alternative Cost 0 | AffectedZone$ Hand,Graveyard,Exile,Library | Description$ You may pay 0 rather than pay the mana cost for Zombie creature spells you cast.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rooftop_storm.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/71.jpg
 Oracle:You may pay {0} rather than pay the mana cost for Zombie creature spells you cast.
-End

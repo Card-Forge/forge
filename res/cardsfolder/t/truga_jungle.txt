@@ -1,7 +1,6 @@
 Name:Truga Jungle
 ManaCost:no cost
 Types:Plane Ergamon
-Text:no text
 S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land | AddAbility$ AnyMana | Description$ All lands have "Tap: Add one mana of any color to your mana pool."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.
@@ -13,4 +12,3 @@ SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/truga_jungle.jpg
 SetInfo:PC2|Common|http://magiccards.info/extras/plane/planechase-2012-edition/truga-jungle.jpg
 Oracle:All lands have "{T}: Add one mana of any color to your mana pool."\nWhenever you roll {C}, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.
-End

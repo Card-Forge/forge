@@ -1,7 +1,6 @@
 Name:Cauldron Dance
 ManaCost:4 B R
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 4 B R | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ DBAnimate | SpellDescription$ Cast CARDNAME only during combat. Return target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step. You may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ Haste | Triggers$ TrigBounce | sVars$ TrigReturn | SubAbility$ DBChangeZone
 SVar:TrigBounce:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return CARDNAME to its owner's hand.
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cauldron_dance.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/238.jpg
 Oracle:Cast Cauldron Dance only during combat.\nReturn target creature card from your graveyard to the battlefield. That creature gains haste. Return it to your hand at the beginning of the next end step.\nYou may put a creature card from your hand onto the battlefield. That creature gains haste. Its controller sacrifices it at the beginning of the next end step.
-End

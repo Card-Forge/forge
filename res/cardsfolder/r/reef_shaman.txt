@@ -1,7 +1,6 @@
 Name:Reef Shaman
 ManaCost:U
 Types:Creature Merfolk Shaman
-Text:no text
 PT:0/2
 A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Target land becomes the basic land type of your choice until end of turn.
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reef_shaman.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/29.jpg
 Oracle:{T}: Target land becomes the basic land type of your choice until end of turn.
-End

@@ -1,11 +1,9 @@
 Name:Feral Instinct
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_instinct.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/57.jpg
 Oracle:Target creature gets +1/+1 until end of turn.\nDraw a card at the beginning of the next turn's upkeep.
-End

@@ -1,7 +1,6 @@
 Name:Onulet
 ManaCost:3
 Types:Artifact Creature Construct
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you gain 2 life.
 SVar:TrigSac:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 2
@@ -11,4 +10,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/269.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/358.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/24.jpg
 Oracle:When Onulet dies, you gain 2 life.
-End

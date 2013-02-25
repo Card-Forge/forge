@@ -1,7 +1,6 @@
 Name:Vampire Nocturnus
 ManaCost:1 B B B
 Types:Creature Vampire
-Text:no text
 PT:3/3
 K:Play with the top card of your library revealed.
 S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl,Card.Self | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Flying | TopCardOfLibraryIs$ Card.Black | Description$ As long as the top card of your library is black, CARDNAME and other Vampire creatures you control get +2/+1 and have flying.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nocturnu
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/118.jpg
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/113.jpg
 Oracle:Play with the top card of your library revealed.\nAs long as the top card of your library is black, Vampire Nocturnus and other Vampire creatures you control get +2/+1 and have flying.
-End

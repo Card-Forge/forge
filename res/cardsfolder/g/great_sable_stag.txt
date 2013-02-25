@@ -1,7 +1,6 @@
 Name:Great Sable Stag
 ManaCost:1 G G
 Types:Creature Elk
-Text:no text
 PT:3/3
 K:Protection from blue
 K:Protection from black
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_sable_stag.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/186.jpg
 Oracle:Great Sable Stag can't be countered.\nProtection from blue and from black (This creature can't be blocked, targeted, dealt damage, or enchanted by anything blue or black.)
-End

@@ -9,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclaw_buzzardiers.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/165.jpg
 Oracle:Ironclaw Buzzardiers can't block creatures with power 2 or greater.\n{R}: Ironclaw Buzzardiers gains flying until end of turn.
-End

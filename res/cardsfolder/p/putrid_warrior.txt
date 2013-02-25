@@ -1,7 +1,6 @@
 Name:Putrid Warrior
 ManaCost:W B
 Types:Creature Zombie Soldier Warrior
-Text:no text
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigChoice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, choose one - Each player loses 1 life; or each player gains 1 life.
 SVar:TrigChoice:AB$ GenericChoice | Cost$ 0 | Defined$ You | Choices$ SVar1,SVar2
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_warrior.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/117.jpg
 Oracle:Whenever Putrid Warrior deals damage, choose one - Each player loses 1 life; or each player gains 1 life.
-End

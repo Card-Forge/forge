@@ -1,7 +1,6 @@
 Name:Magma Giant
 ManaCost:5 R R
 Types:Creature Giant
-Text:no text
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to each creature and each player.
 SVar:TrigDamageAll:DB$DamageAll | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 2 | ValidDescription$ each creature and each player.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_giant.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/108.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/72.jpg
 Oracle:When Magma Giant enters the battlefield, it deals 2 damage to each creature and each player.
-End

@@ -1,7 +1,6 @@
 Name:Khalni Heart Expedition
 ManaCost:1 G
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 A:AB$ ChangeZone | Cost$ SubCounter<3/QUEST> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 2 | Tapped$ True | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_heart_expedition.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/167.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Khalni Heart Expedition.\nRemove three quest counters from Khalni Heart Expedition and sacrifice it: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
-End

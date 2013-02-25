@@ -1,11 +1,9 @@
 Name:Tempered Steel
 ManaCost:1 W W
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Artifact creatures you control get +2/+2.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempered_steel.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/24.jpg
 Oracle:Artifact creatures you control get +2/+2.
-End

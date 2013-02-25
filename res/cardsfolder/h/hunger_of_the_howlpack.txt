@@ -1,11 +1,9 @@
 Name:Hunger of the Howlpack
 ManaCost:G
 Types:Instant
-Text:no text
 A:SP$ PutCounter | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X | References$ X | SpellDescription$ Put a +1/+1 counter on target creature. Morbid - Put three +1/+1 counters on that creature instead if a creature died this turn.
 SVar:X:Count$Morbid.3.1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunger_of_the_howlpack.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/119.jpg
 Oracle:Put a +1/+1 counter on target creature.\nMorbid - Put three +1/+1 counters on that creature instead if a creature died this turn.
-End

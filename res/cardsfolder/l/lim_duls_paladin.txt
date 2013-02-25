@@ -1,7 +1,6 @@
 Name:Lim-Dul's Paladin
 ManaCost:2 B R
 Types:Creature Human Knight
-Text:no text
 PT:0/3
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may discard a card. If you don't, sacrifice CARDNAME and draw a card.
@@ -20,4 +19,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_paladin.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/191.jpg
 Oracle:Trample\nAt the beginning of your upkeep, you may discard a card. If you don't, sacrifice Lim-Dul's Paladin and draw a card.\nWhenever Lim-Dul's Paladin becomes blocked, it gets +6/+3 until end of turn.\nWhenever Lim-Dul's Paladin attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.
-End

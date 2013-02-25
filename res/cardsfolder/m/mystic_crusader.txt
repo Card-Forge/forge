@@ -1,7 +1,6 @@
 Name:Mystic Crusader
 ManaCost:1 W W
 Types:Creature Human Nomad Mystic
-Text:no text
 PT:2/1
 K:Protection from black
 K:Protection from red
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_crusader.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/33.jpg
 Oracle:Protection from black and from red\nThreshold - As long as seven or more cards are in your graveyard, Mystic Crusader gets +1/+1 and has flying.
-End

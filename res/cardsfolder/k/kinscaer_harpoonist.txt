@@ -1,7 +1,6 @@
 Name:Kinscaer Harpoonist
 ManaCost:3 U
 Types:Creature Kithkin Soldier
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have target creature lose flying until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kinscaer_harpoonist.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/41.jpg
 Oracle:Flying\nWhenever Kinscaer Harpoonist attacks, you may have target creature lose flying until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Wydwen, the Biting Gale
 ManaCost:2 U B
 Types:Legendary Creature Faerie Wizard
-Text:no text
 PT:3/3
 K:Flying
 K:Flash
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wydwen_the_biting_gale.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/253.jpg
 Oracle:Flash\nFlying\n{U}{B}, Pay 1 life: Return Wydwen, the Biting Gale to its owner's hand.
-End

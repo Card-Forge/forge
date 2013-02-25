@@ -1,7 +1,6 @@
 Name:Oppression
 ManaCost:1 B B
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever a player casts a spell, that player discards a card.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredActivator | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/oppression.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/143.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/152.jpg
 Oracle:Whenever a player casts a spell, that player discards a card.
-End

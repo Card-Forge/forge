@@ -7,4 +7,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_mask.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/23.jpg
 Oracle:When Imperial Mask enters the battlefield, if it's not a token, each of your teammates puts a token that's a copy of Imperial Mask onto the battlefield.\nYou have hexproof. (You can't be the target of spells or abilities your opponents control.)
-End

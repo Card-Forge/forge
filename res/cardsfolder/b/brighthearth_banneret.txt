@@ -1,7 +1,6 @@
 Name:Brighthearth Banneret
 ManaCost:1 R
 Types:Creature Elemental Warrior
-Text:no text
 PT:1/1
 S:Mode$ ReduceCost | ValidCard$ Elemental,Warrior | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Elemental spells and Warrior spells you cast cost 1 less to cast.
 A:AB$ PutCounter | Cost$ 1 R Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | ActivationZone$ Hand | CounterNum$ 1 | PrecostDesc$ Reinforce 1 - | SpellDescription$ Put a +1/+1 counter on target creature.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brighthearth_banneret.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/88.jpg
 Oracle:Elemental spells and Warrior spells you cast cost {1} less to cast.\nReinforce 1-{1}{R} ({1}{R}, Discard this card: Put a +1/+1 counter on target creature.)
-End

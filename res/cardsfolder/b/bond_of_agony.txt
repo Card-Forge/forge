@@ -1,7 +1,6 @@
 Name:Bond of Agony
 ManaCost:X B
 Types:Sorcery
-Text:no text
 A:SP$ LoseLife | Cost$ X B PayLife<X> | Defined$ Player.Other | LifeAmount$ X | References$ X | SpellDescription$ Each other player loses X life.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bond_of_agony.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/38.jpg
 Oracle:As an additional cost to cast Bond of Agony, pay X life.\nEach other player loses X life.
-End

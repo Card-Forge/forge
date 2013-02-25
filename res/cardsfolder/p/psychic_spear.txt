@@ -1,11 +1,9 @@
 Name:Psychic Spear
 ManaCost:B
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ B | ValidTgts$ Player | NumCards$ 1 | DiscardValid$ Creature.Spirit,Instant.Arcane,Sorcery.Arcane | Mode$ RevealYouChoose | SpellDescription$ Target player reveals his or her hand. You choose a Spirit or Arcane card from it. That player discards that card.
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_spear.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/78.jpg
 Oracle:Target player reveals his or her hand. You choose a Spirit or Arcane card from it. That player discards that card.
-End

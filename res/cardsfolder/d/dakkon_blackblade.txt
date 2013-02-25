@@ -1,7 +1,6 @@
 Name:Dakkon Blackblade
 ManaCost:2 B U U W
 Types:Legendary Creature Human Warrior
-Text:no text
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dakkon_blackblad
 Oracle:Dakkon Blackblade's power and toughness are each equal to the number of lands you control.
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/110.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/265.jpg
-End

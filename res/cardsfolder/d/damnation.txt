@@ -1,10 +1,8 @@
 Name:Damnation
 ManaCost:2 B B
 Types:Sorcery
-Text:no text
 A:SP$ DestroyAll | Cost$ 2 B B | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy all creatures. They can't be regenerated.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122423.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/85.jpg
 Oracle:Destroy all creatures. They can't be regenerated.
-End

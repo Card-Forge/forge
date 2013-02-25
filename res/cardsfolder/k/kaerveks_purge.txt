@@ -1,7 +1,6 @@
 Name:Kaervek's Purge
 ManaCost:X B R
 Types:Sorcery
-Text:no text
 A:SP$ Destroy | Cost$ X B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberDestroyed$ True | SubAbility$ DBDamage | References$ X | SpellDescription$ Destroy target creature with converted mana cost X. If that creature dies this way, CARDNAME deals damage equal to the creature's power to the creature's controller.
 SVar:DBDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ Z | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | References$ Y,Z
 SVar:X:Targeted$CardManaCost
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaerveks_purge.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/330.jpg
 Oracle:Destroy target creature with converted mana cost X. If that creature dies this way, Kaervek's Purge deals damage equal to the creature's power to the creature's controller.
-End

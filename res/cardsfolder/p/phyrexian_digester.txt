@@ -1,11 +1,9 @@
 Name:Phyrexian Digester
 ManaCost:3
 Types:Artifact Creature Construct
-Text:no text
 PT:2/1
 K:Infect
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_digester.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/120.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-End

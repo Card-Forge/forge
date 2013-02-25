@@ -1,7 +1,6 @@
 Name:Foul Imp
 ManaCost:B B
 Types:Creature Imp
-Text:no text
 PT:2/2
 K:Flying
 # Note: The Executing Ability needs to be a Drawback for the AI to properly test it's conditions
@@ -13,4 +12,3 @@ SetInfo:STH|Common|http://magiccards.info/scans/en/sh/9.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/132.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/136.jpg
 Oracle:Flying\nWhen Foul Imp enters the battlefield, you lose 2 life.
-End

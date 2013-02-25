@@ -8,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mijae_djinn.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/165.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/51.jpg
 Oracle:Whenever Mijae Djinn attacks, flip a coin. If you lose the flip, remove Mijae Djinn from combat and tap it.
-End

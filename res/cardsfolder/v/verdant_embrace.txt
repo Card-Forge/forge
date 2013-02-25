@@ -1,7 +1,6 @@
 Name:Verdant Embrace
 ManaCost:3 G G
 Types:Enchantment Aura
-Text:no text
 K:Enchant Creature
 A:SP$ Attach | Cost$ 3 G G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddTrigger$ VerdantTrig | AddSVar$ VerdantToken | Description$ Enchanted creature gets +3/+3 and has "At the beginning of each upkeep, put a 1/1 green Saproling creature token onto the battlefield."
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_embrace.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/232.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3 and has "At the beginning of each upkeep, put a 1/1 green Saproling creature token onto the battlefield."
-End

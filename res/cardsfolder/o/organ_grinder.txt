@@ -1,11 +1,9 @@
 Name:Organ Grinder
 ManaCost:2 B
 Types:Creature Zombie
-Text:no text
 PT:3/1
 A:AB$ LoseLife | Cost$ T ExileFromGrave<3/Card>  | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SpellDescription$ Target player loses 3 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/organ_grinder.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/75.jpg
 Oracle:{T}, Exile three cards from your graveyard: Target player loses 3 life.
-End

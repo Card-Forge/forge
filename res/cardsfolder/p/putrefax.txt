@@ -1,7 +1,6 @@
 Name:Putrefax
 ManaCost:3 G G
 Types:Creature Horror
-Text:no text
 PT:5/3
 K:Trample
 K:Haste
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefax.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/126.jpg
 Oracle:Trample, haste\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nAt the beginning of the end step, sacrifice Putrefax.
-End

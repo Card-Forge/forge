@@ -1,7 +1,6 @@
 Name:Blinding Light
 ManaCost:2 W
 Types:Sorcery
-Text:no text
 A:SP$ TapAll | Cost$ 2 W | ValidCards$ Creature.nonWhite | SpellDescription$ Tap all nonwhite creatures.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
@@ -11,4 +10,3 @@ SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/209.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/170.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/9.jpg
 Oracle:Tap all nonwhite creatures.
-End

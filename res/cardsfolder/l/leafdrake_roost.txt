@@ -1,7 +1,6 @@
 Name:Leafdrake Roost
 ManaCost:3 G U
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 3 G U | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.AttachedBy | AddAbility$ Token | Description$ Enchanted land has "G U, Tap: Put a 2/2 green and blue Drake creature token with flying onto the battlefield."
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leafdrake_roost.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/116.jpg
 Oracle:Enchant land\nEnchanted land has "{G}{U}, {T}: Put a 2/2 green and blue Drake creature token with flying onto the battlefield."
-End

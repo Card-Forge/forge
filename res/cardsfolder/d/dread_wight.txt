@@ -1,7 +1,6 @@
 Name:Dread Wight
 ManaCost:3 B B
 Types:Creature Zombie
-Text:no text
 PT:3/4
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$At end of combat, put a paralyzation counter on each creature blocking or blocked by CARDNAME and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "4: Remove a paralyzation counter from this creature."
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ At end of combat, put a paralyzation counter on each creature blocking or blocked by CARDNAME and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "4: Remove a paralyzation counter from this creature."
@@ -19,4 +18,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_wight.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/10.jpg
 Oracle:At end of combat, put a paralyzation counter on each creature blocking or blocked by Dread Wight and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "{4}: Remove a paralyzation counter from this creature."
-End

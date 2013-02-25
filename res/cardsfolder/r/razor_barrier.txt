@@ -1,7 +1,6 @@
 Name:Razor Barrier
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Protection | Cost$ 1 W | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Gains$ Choice | Choices$ AnyColor,artifacts | SpellDescription$ Target permanent you control gains protection from artifacts or from the color of your choice until end of turn.
 #Computer isn't very good at picking a color to get protection from yet
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_barrier.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/17.jpg
 Oracle:Target permanent you control gains protection from artifacts or from the color of your choice until end of turn.
-End

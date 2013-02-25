@@ -1,7 +1,6 @@
 Name:Bitterblossom
 ManaCost:1 B
 Types:Tribal Enchantment Faerie
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You |TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Faerie Rogue | TokenTypes$ Creature,Faerie,Rogue | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ DB
 SVar:DB:DB$LoseLife | LifeAmount$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bitterblossom.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/58.jpg
 Oracle:At the beginning of your upkeep, you lose 1 life and put a 1/1 black Faerie Rogue creature token with flying onto the battlefield.
-End

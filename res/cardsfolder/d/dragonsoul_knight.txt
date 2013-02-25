@@ -1,7 +1,6 @@
 Name:Dragonsoul Knight
 ManaCost:2 R
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 K:First Strike
 A:AB$ Animate | Cost$ W U B R G | Defined$ Self | Types$ Dragon | Keywords$ Flying & Trample | SubAbility$ DBPump | SpellDescription$ Until end of turn, CARDNAME becomes a Dragon, gets +5/+3, and gains flying and trample.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonsoul_knight.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/62.jpg
 Oracle:First strike\n{W}{U}{B}{R}{G}: Until end of turn, Dragonsoul Knight becomes a Dragon, gets +5/+3, and gains flying and trample.
-End

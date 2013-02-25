@@ -1,7 +1,6 @@
 Name:Rapacious One
 ManaCost:5 R
 Types:Creature Eldrazi Drone
-Text:no text
 PT:5/4
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put that many 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/rapacious_one.jp
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/133.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/162.jpg
 Oracle:Trample\nWhenever Rapacious One deals combat damage to a player, put that many 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
-End

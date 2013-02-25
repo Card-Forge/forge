@@ -1,7 +1,6 @@
 Name:Mind Maggots
 ManaCost:3 B
 Types:Creature Insect
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseDiscardCount | TriggerDescription$ When CARDNAME enters the battlefield, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on CARDNAME.
 SVar:ChooseDiscardCount:AB$ ChooseNumber | Cost$ 0 | Defined$ You | Min$ 0 | Max$ MaxChoice | References$ MaxChoice | ListTitle$ Discard how many creatures? | SubAbility$ MindMaggotsDiscard
@@ -18,4 +17,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_maggots.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/66.jpg
 Oracle:When Mind Maggots enters the battlefield, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on Mind Maggots.
-End

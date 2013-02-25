@@ -1,7 +1,6 @@
 Name:Strangleroot Geist
 ManaCost:G G
 Types:Creature Spirit
-Text:no text
 PT:2/1
 K:Haste
 K:Undying
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://media.wizards.com/images/magic/tcg/products/dka/ykcv734set_en.jpg
 Oracle:Haste\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/127.jpg
-End

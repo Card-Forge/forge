@@ -1,7 +1,6 @@
 Name:Search Warrant
 ManaCost:W U
 Types:Sorcery
-Text:no text
 A:SP$ RevealHand | Cost$ W U | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBGainLife | SpellDescription$ Target player reveals his or her hand. You gain life equal to the number of cards in that player's hand.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$InTargetedHand
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/search_warrant.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/193.jpg
 Oracle:Target player reveals his or her hand. You gain life equal to the number of cards in that player's hand.
-End

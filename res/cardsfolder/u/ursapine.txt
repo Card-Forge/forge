@@ -1,11 +1,9 @@
 Name:Ursapine
 ManaCost:3 G G
 Types:Creature Beast
-Text:no text
 PT:3/3
 A:AB$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ursapine.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/188.jpg
 Oracle:{G}: Target creature gets +1/+1 until end of turn.
-End

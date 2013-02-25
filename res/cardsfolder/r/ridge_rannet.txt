@@ -1,11 +1,9 @@
 Name:Ridge Rannet
 ManaCost:5 R R
 Types:Creature Beast
-Text:no text
 PT:6/4
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ridge_rannet.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/111.jpg
 Oracle:Cycling {2} ({2}, Discard this card: Draw a card.)
-End

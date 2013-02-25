@@ -1,7 +1,6 @@
 Name:Cavern of Souls
 ManaCost:no cost
 Types:Land
-Text:no text
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavern_of_souls.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/226.jpg
 Oracle:As Cavern of Souls enters the battlefield, choose a creature type.\n{T}: Add {1} to your mana pool.\n{T}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
-End

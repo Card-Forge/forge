@@ -1,7 +1,6 @@
 Name:Seedtime
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ AddTurn | Cost$ 1 G | NumTurns$ 1 | PlayerTurn$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SpellDescription$ Cast CARDNAME only during your turn. Take an extra turn after this one if an opponent cast a blue spell this turn.
 SVar:X:Count$ThisTurnCast_Card.Blue+YouDontCtrl
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seedtime.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/130.jpg
 Oracle:Cast Seedtime only during your turn.\nTake an extra turn after this one if an opponent cast a blue spell this turn.
-End

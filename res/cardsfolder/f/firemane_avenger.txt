@@ -1,7 +1,6 @@
 Name:Firemane Avenger
 ManaCost:2 R W
 Types:Creature Angel
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ BattalionTest | SVarCompare$ GE2 | Execute$ TrigBattalionDmg | TriggerDescription$ Battalion - Whenever CARDNAME and at least two other creatures attack, CARDNAME deals 3 damage to target creature or player and you gain 3 life.
@@ -11,4 +10,3 @@ SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firemane_avenger.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/163.jpg
 Oracle:Flying\nBattalion - Whenever Firemane Avenger and at least two other creatures attack, Firemane Avenger deals 3 damage to target creature or player and you gain 3 life.
-End

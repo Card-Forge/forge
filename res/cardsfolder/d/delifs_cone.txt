@@ -1,7 +1,6 @@
 Name:Delif's Cone
 ManaCost:0
 Types:Artifact
-Text:no text
 A:AB$ Animate | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | Triggers$ TrigAttackerUnblocked | sVars$ GainLife,DBPump,DelifX | SpellDescription$ This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
 SVar:TrigAttackerUnblocked:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ GainLife | OptionalDecider$ You | TriggerDescription$ This turn, when CARDNAME attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
 SVar:GainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ DelifX | SubAbility$ DBPump | References$ DelifX
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delifs_cone.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/169.jpg
 Oracle:{T}, Sacrifice Delif's Cone: This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
-End

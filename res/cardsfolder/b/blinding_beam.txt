@@ -1,7 +1,6 @@
 Name:Blinding Beam
 ManaCost:2 W
 Types:Instant
-Text:no text
 A:SP$ Tap | Cost$ 2 W |  ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target creatures | SpellDescription$  Choose one - Tap two target creatures;
 A:SP$ Effect | Cost$ 2 W | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RestoreSight | SVars$ ExileEffect | RememberObjects$ Targeted | Duration$ Permanent | SpellDescription$  or creatures don't untap during target player's next untap step.
 A:SP$ Effect | Cost$ 3 W | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RestoreSight | SVars$ ExileEffect | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | Duration$ Permanent | SubAbility$ BlindTheFoe | PrecostDesc$ Entwine | CostDesc$ 1 | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_beam.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/7.jpg
 Oracle:Choose one - Tap two target creatures; or creatures don't untap during target player's next untap step.\nEntwine {1} (Choose both if you pay the entwine cost.)
-End

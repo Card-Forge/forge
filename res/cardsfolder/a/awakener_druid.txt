@@ -1,7 +1,6 @@
 Name:Awakener Druid
 ManaCost:2 G
 Types:Creature Human Druid
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, target Forest becomes a 4/5 green Treefolk creature for as long as CARDNAME is on the battlefield. It's still a land.
 SVar:TrigAnimate:AB$ Animate | Cost$ 0 | ValidTgts$ Forest | TgtPrompt$ Select target Forest | Types$ Creature,Treefolk | Power$ 4 | Toughness$ 5 | Colors$ Green | UntilHostLeavesPlay$ True
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/awakener_druid.j
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/163.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/167.jpg
 Oracle:When Awakener Druid enters the battlefield, target Forest becomes a 4/5 green Treefolk creature for as long as Awakener Druid remains on the battlefield. It's still a land.
-End

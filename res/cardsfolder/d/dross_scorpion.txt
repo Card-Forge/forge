@@ -1,7 +1,6 @@
 Name:Dross Scorpion
 ManaCost:4
 Types:Artifact Creature Scorpion
-Text:no text
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.Creature+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME or another artifact creature is put into a graveyard from the battlefield,
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ you may untap target artifact.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dross_scorpion.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/164.jpg
 Oracle:Whenever Dross Scorpion or another artifact creature dies, you may untap target artifact.
-End

@@ -1,10 +1,8 @@
 Name:Purge
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Creature.Artifact,Creature.Black | TgtPrompt$ Select target artifact creature or black creature | NoRegen$ True | SpellDescription$ Destroy target artifact creature or black creature. It can't be regenerated.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purge.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/12.jpg
 Oracle:Destroy target artifact creature or black creature. It can't be regenerated.
-End

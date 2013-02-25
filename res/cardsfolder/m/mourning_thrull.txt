@@ -1,7 +1,6 @@
 Name:Mourning Thrull
 ManaCost:1 WB
 Types:Creature Thrull
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourning_thrull.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/146.jpg
 Oracle:({W/B} can be paid with either {W} or {B}.)\nFlying\nWhenever Mourning Thrull deals damage, you gain that much life.
-End

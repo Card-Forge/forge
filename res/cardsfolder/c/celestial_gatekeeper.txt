@@ -1,7 +1,6 @@
 Name:Celestial Gatekeeper
 ManaCost:3 W W
 Types:Creature Bird Cleric
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, exile it, then return up to two target Bird and/or Cleric permanent cards from your graveyard to the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_gatekeeper.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/6.jpg
 Oracle:Flying\nWhen Celestial Gatekeeper dies, exile it, then return up to two target Bird and/or Cleric permanent cards from your graveyard to the battlefield.
-End

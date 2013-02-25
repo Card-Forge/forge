@@ -1,7 +1,6 @@
 Name:Cunning Bandit
 ManaCost:1 R R
 Types:Creature Human Warrior
-Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may put a ki counter on CARDNAME.
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+counters_GE2_KI | Execute$ TrigFlip | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if there are two or more ki counters on CARDNAME, you may flip it.
@@ -18,11 +17,9 @@ Name:Azamuki, Treachery Incarnate
 ManaCost:1 R R
 Colors:red
 Types:Legendary Creature Spirit
-Text:no text
 PT:5/2
 A:AB$ GainControl | Cost$ SubCounter<1/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | SpellDescription$ Gain control of target creature until end of turn.
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/azamuki_treachery_incarnate.jpg
 # This link may be a temporary solution and could change in the near future.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/169.jpg
 Oracle:Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.
-End

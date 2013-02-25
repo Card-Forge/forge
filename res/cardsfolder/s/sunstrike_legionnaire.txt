@@ -1,7 +1,6 @@
 Name:Sunstrike Legionnaire
 ManaCost:1 W
 Types:Creature Human Soldier
-Text:no text
 PT:1/2
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another creature enters the battlefield, untap CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunstrike_legionnaire.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/22.jpg
 Oracle:Sunstrike Legionnaire doesn't untap during your untap step.\nWhenever another creature enters the battlefield, untap Sunstrike Legionnaire.\n{T}: Tap target creature with converted mana cost 3 or less.
-End

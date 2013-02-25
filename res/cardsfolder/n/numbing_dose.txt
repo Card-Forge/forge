@@ -1,7 +1,6 @@
 Name:Numbing Dose
 ManaCost:3 U U
 Types:Enchantment Aura
-Text:no text
 K:Enchant artifact or creature
 A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted permanent doesn't untap during its controller's untap step.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/numbing_dose.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/40.jpg
 Oracle:Enchant artifact or creature\nEnchanted permanent doesn't untap during its controller's untap step.\nAt the beginning of the upkeep of enchanted permanent's controller, that player loses 1 life.
-End

@@ -1,7 +1,6 @@
 Name:Ursine Fylgja
 ManaCost:4 W
 Types:Creature Spirit Bear
-Text:no text
 PT:3/3
 K:etbCounter:HEALING:4
 A:AB$ PreventDamage | Cost$ SubCounter<1/HEALING> | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ursine_fylgja.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/22.jpg
 Oracle:Ursine Fylgja enters the battlefield with four healing counters on it.\nRemove a healing counter from Ursine Fylgja: Prevent the next 1 damage that would be dealt to Ursine Fylgja this turn.\n{2}{W}: Put a healing counter on Ursine Fylgja.
-End

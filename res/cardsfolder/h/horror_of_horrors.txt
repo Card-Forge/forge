@@ -1,7 +1,6 @@
 Name:Horror of Horrors
 ManaCost:3 B B
 Types:Enchantment
-Text:no text
 A:AB$ Regenerate | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | Cost$ Sac<1/Swamp> | SpellDescription$ Regenerate target black creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/horror_of_horror
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/140.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/20.jpg
 Oracle:Sacrifice a Swamp: Regenerate target black creature. (The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
-End

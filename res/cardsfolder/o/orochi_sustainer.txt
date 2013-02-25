@@ -1,11 +1,9 @@
 Name:Orochi Sustainer
 ManaCost:1 G
 Types:Creature Snake Shaman
-Text:no text
 PT:1/2
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card75403.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/236.jpg
 Oracle:{T}: Add {G} to your mana pool.
-End

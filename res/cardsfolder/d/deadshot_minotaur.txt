@@ -1,7 +1,6 @@
 Name:Deadshot Minotaur
 ManaCost:3 R G
 Types:Creature Minotaur
-Text:no text
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to target creature with flying.
 SVar:TrigDealDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 3
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadshot_minotaur.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/52.jpg
 Oracle:When Deadshot Minotaur enters the battlefield, it deals 3 damage to target creature with flying.\nCycling {R/G} ({R/G}, Discard this card: Draw a card.)
-End

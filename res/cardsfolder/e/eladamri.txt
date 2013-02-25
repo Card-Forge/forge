@@ -1,7 +1,6 @@
 Name:Eladamri
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:-1/+15
 A:AB$ Effect | ActivationZone$ Command | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,ExileEffect,X,Y | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,ExileEffect,X,Y | RememberObjects$ Targeted | Duration$ Permanent | SpellDescription$ The next 1 damage that would be dealt to target creature you control is dealt to you instead.
 SVar:SelflessCombat:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next 1 damage that would be dealt to target creature you control is dealt to you instead.
@@ -19,4 +18,3 @@ SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/eladamri.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/eladamri.jpg
 SVar:RemAIDeck:True
 Oracle:Hand -1, life +15\n{0}: The next 1 damage that would be dealt to target creature you control is dealt to you instead.
-End

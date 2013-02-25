@@ -1,7 +1,6 @@
 Name:Rustspore Ram
 ManaCost:4
 Types:Artifact Creature Sheep
-Text:no text
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target Equipment.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Equipment | TgtPrompt$ Select target Equipment.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustspore_ram.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/235.jpg
 Oracle:When Rustspore Ram enters the battlefield, destroy target Equipment.
-End

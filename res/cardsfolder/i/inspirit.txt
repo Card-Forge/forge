@@ -1,7 +1,6 @@
 Name:Inspirit
 ManaCost:2 W
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +4 | SubAbility$ DBUntap | SpellDescription$ Untap target creature. It gets +2/+4 until end of turn.
 SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84552.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/41.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/22.jpg
 Oracle:Untap target creature. It gets +2/+4 until end of turn.
-End

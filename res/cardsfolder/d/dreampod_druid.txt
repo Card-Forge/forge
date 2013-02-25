@@ -1,7 +1,6 @@
 Name:Dreampod Druid
 ManaCost:1 G
 Types:Creature Human Druid
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | IsPresent$ Card.Self+enchanted | TriggerDescription$ At the beginning of each upkeep, if CARDNAME is enchanted, put a 1/1 green Saproling creature token onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreampod_druid.jpg
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/64.jpg
 Oracle:At the beginning of each upkeep, if Dreampod Druid is enchanted, put a 1/1 green Saproling creature token onto the battlefield.
-End

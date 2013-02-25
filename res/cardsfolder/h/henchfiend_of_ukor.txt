@@ -1,7 +1,6 @@
 Name:Henchfiend of Ukor
 ManaCost:3 R
 Types:Creature Ogre
-Text:no text
 PT:3/2
 K:Haste
 K:Echo:1 B
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/henchfiend_of_ukor.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/117.jpg
 Oracle:Haste\nEcho {1}{B} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice this permanent unless you pay its echo cost.)\n{B/R}: Henchfiend of Ukor gets +1/+0 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Harabaz Druid
 ManaCost:1 G
 Types:Creature Human Druid Ally
-Text:no text
 PT:0/1
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | References$ X | SpellDescription$ Add X mana of any one color to your mana pool, where X is the number of Allies you control.
 SVar:X:Count$Valid Ally.YouCtrl
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/105.jpg
 Oracle:{T}: Add X mana of any one color to your mana pool, where X is the number of Allies you control.
-End

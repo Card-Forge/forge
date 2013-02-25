@@ -1,7 +1,6 @@
 Name:Lightning Angel
 ManaCost:1 R W U
 Types:Creature Angel
-Text:no text
 PT:3/4
 K:Flying
 K:Vigilance
@@ -11,4 +10,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card109746.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/108.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/94.jpg
 Oracle:Flying, vigilance, haste
-End

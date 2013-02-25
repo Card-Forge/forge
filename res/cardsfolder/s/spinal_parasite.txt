@@ -1,7 +1,6 @@
 Name:Spinal Parasite
 ManaCost:5
 Types:Artifact Creature Insect
-Text:no text
 PT:-1/-1
 K:Sunburst
 A:AB$ RemoveCounter | Cost$ SubCounter<2/P1P1> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ 1 | SpellDescription$ Remove a counter from target permanent.
@@ -9,4 +8,3 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinal_parasite.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/155.jpg
 Oracle:Sunburst (This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)\nRemove two +1/+1 counters from Spinal Parasite: Remove a counter from target permanent.
-End

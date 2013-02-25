@@ -1,7 +1,6 @@
 Name:Corrupted Zendikon
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Land | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddType$ Creature & Ooze | SetColor$ Black | SetPower$ 3 | SetToughness$ 3 | Description$ Enchanted land is a 3/3 black Ooze creature. It's still a land.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupted_zendikon.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/55.jpg
 Oracle:Enchant land\nEnchanted land is a 3/3 black Ooze creature. It's still a land.\nWhen enchanted land dies, return that card to its owner's hand.
-End

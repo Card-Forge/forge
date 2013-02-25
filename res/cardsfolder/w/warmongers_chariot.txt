@@ -1,7 +1,6 @@
 Name:Warmonger's Chariot
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
 S:Mode$ Continuous | Affected$ Card.EquippedBy+withDefender | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as equipped creature has defender, it can attack as though it didn't have defender.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warmongers_chariot.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/226.jpg
 Oracle:Equipped creature gets +2/+2.\nAs long as equipped creature has defender, it can attack as though it didn't have defender.\nEquip {3}
-End

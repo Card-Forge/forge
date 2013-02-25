@@ -1,11 +1,9 @@
 Name:Angelic Shield
 ManaCost:W U
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ 1 | Description$ Creatures you control get +0/+1.
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_shield.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/228.jpg
 Oracle:Creatures you control get +0/+1.\nSacrifice Angelic Shield: Return target creature to its owner's hand.
-End

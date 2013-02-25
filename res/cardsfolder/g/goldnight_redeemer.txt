@@ -1,7 +1,6 @@
 Name:Goldnight Redeemer
 ManaCost:4 W W
 Types:Creature Angel
-Text:no text
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life for each other creature you control.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldnight_redeemer.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/23.jpg
 Oracle:Flying\nWhen Goldnight Redeemer enters the battlefield, you gain 2 life for each other creature you control.
-End

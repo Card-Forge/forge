@@ -1,11 +1,9 @@
 Name:Gigantomancer
 ManaCost:7 G
 Types:Creature Human Shaman
-Text:no text
 PT:1/1
 A:AB$ Animate | Cost$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 7 | Toughness$ 7 | SpellDescription$ Target creature you control becomes 7/7 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gigantomancer.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/184.jpg
 Oracle:{1}: Target creature you control becomes 7/7 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Yavimaya Coast
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBPain | SpellDescription$ Add U to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
@@ -12,4 +11,3 @@ SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/143.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/330.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/363.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {G} or {U} to your mana pool. Yavimaya Coast deals 1 damage to you.
-End

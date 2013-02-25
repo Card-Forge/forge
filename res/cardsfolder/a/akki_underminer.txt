@@ -1,7 +1,6 @@
 Name:Akki Underminer
 ManaCost:3 R
 Types:Creature Goblin Rogue Shaman
-Text:no text
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices a permanent.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredTarget | SacValid$ Permanent
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_underminer.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/155.jpg
 Oracle:Whenever Akki Underminer deals combat damage to a player, that player sacrifices a permanent.
-End

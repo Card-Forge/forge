@@ -1,7 +1,6 @@
 Name:Scuzzback Marauders
 ManaCost:4 RG
 Types:Creature Goblin Warrior
-Text:no text
 PT:5/2
 K:Trample
 K:Persist
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scuzzback_marauders.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/216.jpg
 Oracle:Trample\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
-End

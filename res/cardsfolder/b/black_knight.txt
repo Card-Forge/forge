@@ -1,7 +1,6 @@
 Name:Black Knight
 ManaCost:B B
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 K:First Strike
 K:Protection from white
@@ -16,4 +15,3 @@ SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/85.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/3.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/3.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nProtection from white (This creature can't be blocked, targeted, dealt damage, or enchanted by anything white.)
-End

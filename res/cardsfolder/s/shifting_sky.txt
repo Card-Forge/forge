@@ -1,7 +1,6 @@
 Name:Shifting Sky
 ManaCost:2 U
 Types:Enchantment
-Text:no text
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 S:Mode$ Continuous| Affected$ Permanent.nonLand | SetColor$ ChosenColor | Description$ All nonland permanents are the chosen color.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_sky.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/100.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/32.jpg
 Oracle:As Shifting Sky enters the battlefield, choose a color.\nAll nonland permanents are the chosen color.
-End

@@ -1,11 +1,9 @@
 Name:Glacial Crevasses
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 A:AB$ Fog | Cost$ Sac<1/Mountain.Snow/snow Mountain> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_crevasses.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/187.jpg
 Oracle:Sacrifice a snow Mountain: Prevent all combat damage that would be dealt this turn.
-End

@@ -1,7 +1,6 @@
 Name:Rouse
 ManaCost:1 B
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | NumAtt$ +2 | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets +2/+0 until end of turn.
 A:SP$ Pump | Cost$ PayLife<2> | ValidTgts$ Creature | NumAtt$ +2 | TgtPrompt$ Select target creature | isPresent$ Swamp.YouCtrl | SpellDescription$ If you control a Swamp, you may pay 2 life rather than pay Rouse's mana cost.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rouse.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/157.jpg
 Oracle:If you control a Swamp, you may pay 2 life rather than pay Rouse's mana cost.\nTarget creature gets +2/+0 until end of turn.
-End

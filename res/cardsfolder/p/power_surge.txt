@@ -11,4 +11,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/169.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/234.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/168.jpg
 Oracle:At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.
-End

@@ -1,11 +1,9 @@
 Name:Skyshroud Ridgeback
 ManaCost:G
 Types:Creature Beast
-Text:no text
 PT:2/3
 K:Fading:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_ridgeback.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/120.jpg
 Oracle:Fading 2 (This creature enters the battlefield with two fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)
-End

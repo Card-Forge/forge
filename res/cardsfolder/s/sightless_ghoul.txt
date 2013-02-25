@@ -1,11 +1,9 @@
 Name:Sightless Ghoul
 ManaCost:3 B
 Types:Creature Zombie Soldier
-Text:no text
 PT:2/2
 K:CARDNAME can't block.
 K:Undying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sightless_ghoul.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/73.jpg
 Oracle:Sightless Ghoul can't block.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
-End

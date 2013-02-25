@@ -1,11 +1,9 @@
 Name:Avacyn's Pilgrim
 ManaCost:G
 Types:Creature Human Monk
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyns_pilgrim.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/170.jpg
 Oracle:{T}: Add {W} to your mana pool.
-End

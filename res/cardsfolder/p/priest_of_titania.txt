@@ -1,7 +1,6 @@
 Name:Priest of Titania
 ManaCost:1 G
 Types:Creature Elf Druid
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add G to your mana pool for each Elf on the battlefield.
 SVar:X:Count$Valid Elf
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_titania.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/270.jpg
 Oracle:{T}: Add {G} to your mana pool for each Elf on the battlefield.
-End

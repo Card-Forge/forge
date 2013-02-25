@@ -1,7 +1,6 @@
 Name:Sokenzan Renegade
 ManaCost:2 R
 Types:Creature Ogre Samurai Mercenary
-Text:no text
 PT:3/3
 K:Bushido 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainControl | APlayerHasMostCardsInHand$ True | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sokenzan_renegade.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/114.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nAt the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of Sokenzan Renegade.
-End

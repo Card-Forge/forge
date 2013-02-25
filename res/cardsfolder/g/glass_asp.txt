@@ -1,7 +1,6 @@
 Name:Glass Asp
 ManaCost:1 G G
 Types:Creature Snake
-Text:no text
 PT:2/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ NafsEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses 2 life at the beginning of his or her next draw step unless he or she pays 2 before that step.
 SVar:NafsEffect:AB$ Effect | Cost$ 0 | Name$ Glass Asp Effect | EffectOwner$ TriggeredTarget | Duration$ Permanent | Triggers$ DrawTrig | Abilities$ PayUp | SVars$ Bleed,ExileEffect
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glass_asp.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/197.jpg
 Oracle:Whenever Glass Asp deals combat damage to a player, that player loses 2 life at the beginning of his or her next draw step unless he or she pays {2} before that step.
-End

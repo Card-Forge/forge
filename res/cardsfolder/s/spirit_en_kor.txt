@@ -1,7 +1,6 @@
 Name:Spirit en-Kor
 ManaCost:3 W
 Types:Creature Kor Spirit
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ Effect | Cost$ 0 | Name$ en-Kor Redirection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage to | ReplacementEffects$ EnKorCombat,EnKorNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | References$ EnKorCombat,EnKorNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | Duration$ HostLeavesOrEOT | RememberObjects$ Self | ImprintCards$ Targeted | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to target creature you control instead.
@@ -20,4 +19,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_en_kor.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/119.jpg
 Oracle:Flying\n{0}: The next 1 damage that would be dealt to Spirit en-Kor this turn is dealt to target creature you control instead.
-End

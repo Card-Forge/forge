@@ -1,7 +1,6 @@
 Name:Rootwalla
 ManaCost:2 G
 Types:Creature Lizard
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ 1 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate this ability only once each turn.
 SVar:Rarity:Common
@@ -10,4 +9,3 @@ SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/146.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/268.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/293.jpg
 Oracle:{1}{G}: Rootwalla gets +2/+2 until end of turn. Activate this ability only once each turn.
-End

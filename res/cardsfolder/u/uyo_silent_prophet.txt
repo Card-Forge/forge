@@ -1,7 +1,6 @@
 Name:Uyo, Silent Prophet
 ManaCost:4 U U
 Types:Legendary Creature Moonfolk Wizard
-Text:no text
 PT:4/4
 K:Flying
 A:AB$CopySpellAbility | Cost$ 2 Return<2/Land> | ValidTgts$ Instant,Sorcery | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uyo_silent_prophet.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/99.jpg
 Oracle:Flying\n{2}, Return two lands you control to their owner's hand: Copy target instant or sorcery spell. You may choose new targets for the copy.
-End

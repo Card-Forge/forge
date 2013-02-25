@@ -1,7 +1,6 @@
 Name:Kiku's Shadow
 ManaCost:B B
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | DamageSource$ Targeted | References$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
 SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kikus_shadow.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/77.jpg
 Oracle:Target creature deals damage to itself equal to its power.
-End

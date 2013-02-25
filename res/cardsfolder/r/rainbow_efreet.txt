@@ -1,7 +1,6 @@
 Name:Rainbow Efreet
 ManaCost:3 U
 Types:Creature Efreet
-Text:no text
 PT:3/1
 K:Flying
 A:AB$ Phases | Cost$ U U | Defined$ Self | SpellDescription$ CARDNAME phases out.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rainbow_efreet.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/41.jpg
 Oracle:Flying\n{U}{U}: Rainbow Efreet phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before you untap during your next untap step.)
-End

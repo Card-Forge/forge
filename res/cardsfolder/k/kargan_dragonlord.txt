@@ -1,7 +1,6 @@
 Name:Kargan Dragonlord
 ManaCost:R R
 Types:Creature Human Warrior
-Text:no text
 PT:2/2
 K:Level up:R
 K:maxLevel:8
@@ -14,4 +13,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kargan_dragonlord.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/152.jpg
 Oracle:Level up {R} ({R}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 4-7\n4/4\nFlying\nLEVEL 8+\n8/8\nFlying, trample\n{R}: Kargan Dragonlord gets +1/+0 until end of turn.
-End

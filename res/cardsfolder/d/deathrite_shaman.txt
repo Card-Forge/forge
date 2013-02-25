@@ -1,7 +1,6 @@
 Name:Deathrite Shaman
 ManaCost:BG
 Types:Creature Elf Shaman
-Text:no text
 PT:1/2
 A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Land | TgtPrompt$ Select target land card in a graveyard | SubAbility$ DBMana | SpellDescription$ Exile target land card from a graveyard. Add one mana of any color to your mana pool.
 SVar:DBMana:DB$ Mana | Produced$ Any | Amount$ 1 | AILogic$ MostProminentInComputerHand
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathrite_shaman.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/213.jpg
 Oracle:{T}: Exile target land card from a graveyard. Add one mana of any color to your mana pool.\n{B}, {T}: Exile target instant or sorcery card from a graveyard. Each opponent loses 2 life.\n{G}, {T}: Exile target creature card from a graveyard. You gain 2 life.
-End

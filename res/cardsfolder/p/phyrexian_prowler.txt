@@ -1,7 +1,6 @@
 Name:Phyrexian Prowler
 ManaCost:3 B
 Types:Creature Zombie Mercenary
-Text:no text
 PT:3/3
 K:Fading:3
 A:AB$ Pump | Cost$ SubCounter<1/FADE> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_prowler.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/65.jpg
 Oracle:Fading 3 (This creature enters the battlefield with three fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Phyrexian Prowler: Phyrexian Prowler gets +1/+1 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Grazing Kelpie
 ManaCost:3 GU
 Types:Creature Beast
-Text:no text
 PT:2/3
 K:Persist
 A:AB$ ChangeZone | Cost$ GU Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard | LibraryPosition$ -1 | SpellDescription$ Put target card from a graveyard on the bottom of its owner's library.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grazing_kelpie.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/153.jpg
 Oracle:{G/U}, Sacrifice Grazing Kelpie: Put target card from a graveyard on the bottom of its owner's library.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
-End

@@ -1,7 +1,6 @@
 Name:Ornithopter
 ManaCost:0
 Types:Artifact Creature Thopter
-Text:no text
 PT:0/2
 K:Flying
 SVar:Rarity:Uncommon
@@ -17,4 +16,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/270.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/25.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/224.jpg
 Oracle:Flying
-End

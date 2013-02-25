@@ -1,7 +1,6 @@
 Name:Predatory Hunger
 ManaCost:G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts a creature spell, put a +1/+1 counter on enchanted creature.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_hunger.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/117.jpg
 Oracle:Enchant creature\nWhenever an opponent casts a creature spell, put a +1/+1 counter on enchanted creature.
-End

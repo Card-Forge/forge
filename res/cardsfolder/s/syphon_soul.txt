@@ -1,7 +1,6 @@
 Name:Syphon Soul
 ManaCost:2 B
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 2 B | Defined$ Opponent | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to each other player. You gain life equal to the damage dealt this way.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X | StackDescription$ You gain life equal to the damage dealt this way.
 SVar:X:Count$TotalDamageDoneByThisTurn
@@ -11,4 +10,3 @@ SetInfo:ONS|Common|http://magiccards.info/scans/en/on/176.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/159.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/32.jpg
 Oracle:Syphon Soul deals 2 damage to each other player. You gain life equal to the damage dealt this way.
-End

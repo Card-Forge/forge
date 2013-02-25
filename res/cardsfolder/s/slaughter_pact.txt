@@ -1,7 +1,6 @@
 Name:Slaughter Pact
 ManaCost:0
 Types:Instant
-Text:no text
 Colors:black
 A:SP$ Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SubAbility$ DBDelTrig | SpellDescription$ Destroy target nonblack creature. At the beginning of your next upkeep, pay 2 B. If you don't, you lose the game.
 SVar:DBDelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ At the beginning of your next upkeep, pay 2 B. If you don't, you lose the game.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slaughter_pact.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/78.jpg
 Oracle:Slaughter Pact is black.\nDestroy target nonblack creature.\nAt the beginning of your next upkeep, pay {2}{B}. If you don't, you lose the game.
-End

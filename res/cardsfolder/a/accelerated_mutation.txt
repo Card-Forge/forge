@@ -1,11 +1,9 @@
 Name:Accelerated Mutation
 ManaCost:3 G G
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the highest converted mana cost among permanents you control.
 SVar:X:Count$MaxCMCYouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accelerated_mutation.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/109.jpg
 Oracle:Target creature gets +X/+X until end of turn, where X is the highest converted mana cost among permanents you control.
-End

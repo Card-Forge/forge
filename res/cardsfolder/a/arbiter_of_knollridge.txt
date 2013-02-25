@@ -1,7 +1,6 @@
 Name:Arbiter of Knollridge
 ManaCost:6 W
 Types:Creature Giant Wizard
-Text:no text
 PT:5/5
 K:Vigilance
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLife | TriggerDescription$ When CARDNAME enters the battlefield, each player's life total becomes the highest life total among all players.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/arbiter_of_knoll
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/6.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/2.jpg
 Oracle:Vigilance\nWhen Arbiter of Knollridge enters the battlefield, each player's life total becomes the highest life total among all players.
-End

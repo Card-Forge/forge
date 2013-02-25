@@ -1,7 +1,6 @@
 Name:Insight
 ManaCost:2 U
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent casts a green spell, you draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/insight.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/68.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/75.jpg
 Oracle:Whenever an opponent casts a green spell, you draw a card.
-End

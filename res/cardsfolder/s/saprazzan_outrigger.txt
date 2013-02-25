@@ -1,7 +1,6 @@
 Name:Saprazzan Outrigger
 ManaCost:3 U
 Types:Creature Merfolk
-Text:no text
 PT:5/5
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME attacks or blocks, put it on top of its owner’s library at end of combat.
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, put it on top of its owner’s library at end of combat.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_outrigger.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/101.jpg
 Oracle:When Saprazzan Outrigger attacks or blocks, put it on top of its owner's library at end of combat.
-End

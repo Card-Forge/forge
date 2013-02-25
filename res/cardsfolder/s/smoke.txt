@@ -12,4 +12,3 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/240.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/177.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/176.jpg
 Oracle:Players can't untap more than one creature during their untap steps.
-End

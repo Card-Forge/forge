@@ -1,7 +1,6 @@
 Name:Spitebellows
 ManaCost:5 R
 Types:Creature Elemental
-Text:no text
 PT:6/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDamageCreature | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, it deals 6 damage to target creature.
 K:Evoke:1 R R
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/spitebellows.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/105.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/135.jpg
 Oracle:When Spitebellows leaves the battlefield, it deals 6 damage to target creature.\nEvoke {1}{R}{R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
-End

@@ -1,7 +1,6 @@
 Name:Entropic Eidolon
 ManaCost:3 B
 Types:Creature Spirit
-Text:no text
 PT:2/2
 A:AB$ LoseLife | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 1 life and you gain 1 life.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entropic_eidolon.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/45.jpg
 Oracle:{B}, Sacrifice Entropic Eidolon: Target player loses 1 life and you gain 1 life.\nWhenever you cast a multicolored spell, you may return Entropic Eidolon from your graveyard to your hand.
-End

@@ -1,7 +1,6 @@
 Name:Linvala, Keeper of Silence
 ManaCost:2 W W
 Types:Legendary Creature Angel
-Text:no text
 PT:3/4
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of creatures your opponents control can't be activated.
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/linvala_keeper_of_silence.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/33.jpg
 Oracle:Flying\nActivated abilities of creatures your opponents control can't be activated.
-End

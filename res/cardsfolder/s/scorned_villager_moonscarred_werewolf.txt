@@ -1,7 +1,6 @@
 Name:Scorned Villager
 ManaCost:1 G
 Types:Creature Human Werewolf
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
@@ -17,7 +16,6 @@ Name:Moonscarred Werewolf
 ManaCost:no cost
 Colors:green
 Types:Creature Werewolf
-Text:no text
 PT:2/2
 K:Vigilance
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
@@ -26,4 +24,3 @@ SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonscarred_werewolf.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/125b.jpg
 Oracle:Vigilance\n{T}: Add {G}{G} to your mana pool.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Moonscarred Werewolf.
-End

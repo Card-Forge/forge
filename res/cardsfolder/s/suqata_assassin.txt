@@ -1,7 +1,6 @@
 Name:Suq'Ata Assassin
 ManaCost:1 B B
 Types:Creature Human Assassin
-Text:no text
 PT:1/1
 K:Fear
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_assassin.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/19.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever Suq'Ata Assassin attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
-End

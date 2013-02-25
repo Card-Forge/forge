@@ -1,7 +1,6 @@
 Name:Hanabi Blast
 ManaCost:1 R R
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SubAbility$ DBBounce | SpellDescription$ CARDNAME deals 2 damage to target creature or player. Return CARDNAME to its owner's hand, then discard a card at random.
 SVar:DBBounce:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ Random | NumCards$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hanabi_blast.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/170.jpg
 Oracle:Hanabi Blast deals 2 damage to target creature or player. Return Hanabi Blast to its owner's hand, then discard a card at random.
-End

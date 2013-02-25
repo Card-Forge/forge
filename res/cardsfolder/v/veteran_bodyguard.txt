@@ -1,7 +1,6 @@
 Name:Veteran Bodyguard
 ManaCost:3 W W
 Types:Creature Human
-Text:no text
 PT:2/5
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ False | IsPresent$ Card.Self+untapped | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelfCombat | IsCombat$ True | IsPresent$ Card.Self+untapped | Secondary$ True | Description$ As long as CARDNAME is untapped, all damage that would be dealt to you by unblocked creatures is dealt to CARDNAME instead.
@@ -14,4 +13,3 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/227.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/226.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/226.jpg
 Oracle:As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.
-End

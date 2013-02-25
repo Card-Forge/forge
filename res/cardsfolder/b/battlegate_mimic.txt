@@ -1,7 +1,6 @@
 Name:Battlegate Mimic
 ManaCost:1 RW
 Types:Creature Shapeshifter
-Text:no text
 PT:2/1
 T:Mode$ SpellCast | ValidCard$ Card.Red+White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that's both red and white, CARDNAME becomes 4/2 and gains first strike until end of turn.
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 2 | Keywords$ First Strike
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlegate_mimic.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/133.jpg
 Oracle:Whenever you cast a spell that's both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
-End

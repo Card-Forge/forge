@@ -1,7 +1,6 @@
 Name:Momir Vig, Simic Visionary
 ManaCost:3 G U
 Types:Legendary Creature Elf Wizard
-Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Creature.Green | ValidActivatingPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever you cast a green creature spell, you may search your library for a creature card and reveal it. If you do, shuffle your library and put that card on top of it.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 1
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/momir_vig_simic_visionary.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/118.jpg
 Oracle:Whenever you cast a green creature spell, you may search your library for a creature card and reveal it. If you do, shuffle your library and put that card on top of it.\nWhenever you cast a blue creature spell, reveal the top card of your library. If it's a creature card, put that card into your hand.
-End

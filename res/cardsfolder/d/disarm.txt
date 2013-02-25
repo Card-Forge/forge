@@ -1,10 +1,8 @@
 Name:Disarm
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ UnattachAll | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | UnattachValid$ Equipment | SpellDescription$ Unattach all Equipment from target creature.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disarm.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/32.jpg
 Oracle:Unattach all Equipment from target creature.
-End

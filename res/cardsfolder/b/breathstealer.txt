@@ -1,11 +1,9 @@
 Name:Breathstealer
 ManaCost:2 B
 Types:Creature Nightstalker
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breathstealer.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/7.jpg
 Oracle:{B}: Breathstealer gets +1/-1 until end of turn.
-End

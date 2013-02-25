@@ -1,7 +1,6 @@
 Name:Saprazzan Legate
 ManaCost:3 U
 Types:Creature Merfolk Soldier
-Text:no text
 PT:1/3
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddHiddenKeyword$ Alternative Cost 0 | CheckSVar$ X | CheckSecondSVar$ Y | Description$ If an opponent controls a Mountain and you control an Island, you may cast CARDNAME without paying its mana cost.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_legate.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/100.jpg
 Oracle:Flying\nIf an opponent controls a Mountain and you control an Island, you may cast Saprazzan Legate without paying its mana cost.
-End

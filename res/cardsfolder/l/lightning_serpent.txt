@@ -1,7 +1,6 @@
 Name:Lightning Serpent
 ManaCost:X R
 Types:Creature Elemental Serpent
-Text:no text
 PT:2/1
 K:Trample
 K:Haste
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_serpent.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/88.jpg
 Oracle:Trample, haste\nLightning Serpent enters the battlefield with X +1/+0 counters on it.\nAt the beginning of the end step, sacrifice Lightning Serpent.
-End

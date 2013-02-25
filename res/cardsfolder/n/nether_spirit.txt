@@ -1,7 +1,6 @@
 Name:Nether Spirit
 ManaCost:1 B B
 Types:Creature Spirit
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Creature.YouOwn | PresentZone$ Graveyard | PresentCompare$ EQ1 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is the only creature card in your graveyard, you may return CARDNAME to the battlefield.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_spirit.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/149.jpg
 Oracle:At the beginning of your upkeep, if Nether Spirit is the only creature card in your graveyard, you may return Nether Spirit to the battlefield.
-End

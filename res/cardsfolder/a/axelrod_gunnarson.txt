@@ -1,7 +1,6 @@
 Name:Axelrod Gunnarson
 ManaCost:4 B B R R
 Types:Legendary Creature Giant
-Text:no text
 PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | Execute$ TrigDealDamage | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, you gain 1 life and CARDNAME deals 1 damage to target player.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/axelrod_gunnarso
 Oracle:Trample\nWhenever a creature dealt damage by Axelrod Gunnarson this turn dies, you gain 1 life and Axelrod deals 1 damage to target player.
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/107.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/259.jpg
-End

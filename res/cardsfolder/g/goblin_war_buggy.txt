@@ -1,7 +1,6 @@
 Name:Goblin War Buggy
 ManaCost:1 R
 Types:Creature Goblin
-Text:no text
 PT:2/2
 K:Haste
 K:Echo:1 R
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_buggy.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/196.jpg
 Oracle:Haste\nEcho {1}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
-End

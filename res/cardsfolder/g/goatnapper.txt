@@ -1,7 +1,6 @@
 Name:Goatnapper
 ManaCost:2 R
 Types:Creature Goblin Rogue
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGoatGrab | TriggerDescription$ When CARDNAME enters the battlefield, untap target Goat and gain control of it until end of turn. It gains haste until end of turn.
 SVar:TrigGoatGrab:AB$GainControl | Cost$ 0 | ValidTgts$ Permanent.Goat | TgtPrompt$ Select target Goat | LoseControl$ EOT | Untap$ True | AddKWs$ Haste
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goatnapper.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/172.jpg
 Oracle:When Goatnapper enters the battlefield, untap target Goat and gain control of it until end of turn. It gains haste until end of turn.
-End

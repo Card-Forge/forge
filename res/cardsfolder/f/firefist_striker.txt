@@ -1,7 +1,6 @@
 Name:Firefist Striker
 ManaCost:1 R
 Types:Creature Human Soldier
-Text:no text
 PT:2/1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | CheckSVar$ BattalionTest | SVarCompare$ GE2 | TriggerDescription$ Battalion - Whenever CARDNAME and at least two other creatures attack, target creature can't block this turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firefist_striker.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/90.jpg
 Oracle:Battalion - Whenever Firefist Striker and at least two other creatures attack, target creature can't block this turn.
-End

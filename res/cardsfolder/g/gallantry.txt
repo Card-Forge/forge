@@ -1,7 +1,6 @@
 Name:Gallantry
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature.blocking | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ Target blocking creature gets +4/+4 until end of turn. | TgtPrompt$Select target blocking creature. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gallantry.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/232.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/23.jpg
 Oracle:Target blocking creature gets +4/+4 until end of turn.\nDraw a card.
-End

@@ -1,7 +1,6 @@
 Name:Orzhov Pontiff
 ManaCost:1 W B
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 K:Haunt:TrigChoose:Choose one - Creatures you control get +1/+1 until end of turn; or creatures you don't control get -1/-1 until end of turn.
 SVar:TrigChoose:AB$ Charm | Cost$ 0 | Choices$ DBPump,DBCurse | CharmNum$ 1
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_pontiff.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/124.jpg
 Oracle:Haunt (When this creature dies, exile it haunting target creature.)\nWhen Orzhov Pontiff enters the battlefield or the creature it haunts dies, choose one - Creatures you control get +1/+1 until end of turn; or creatures you don't control get -1/-1 until end of turn.
-End

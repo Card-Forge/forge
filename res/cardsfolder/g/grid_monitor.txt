@@ -1,7 +1,6 @@
 Name:Grid Monitor
 ManaCost:4
 Types:Artifact Creature Construct
-Text:no text
 PT:4/6
 S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ You | Description$ You can't cast creature spells.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grid_monitor.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/183.jpg
 Oracle:You can't cast creature spells.
-End

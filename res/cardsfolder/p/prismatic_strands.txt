@@ -1,7 +1,6 @@
 Name:Prismatic Strands
 ManaCost:2 W
 Types:Instant
-Text:no text
 K:Flashback tapXType<1/Creature.White/white creature>
 A:SP$ ChooseColor | Cost$ 2 W | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ Prismatic Strands Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that sources of the color of your choice would deal this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_strands.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/18.jpg
 Oracle:Prevent all damage that sources of the color of your choice would deal this turn.\nFlashback-Tap an untapped white creature you control. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

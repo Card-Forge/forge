@@ -1,7 +1,6 @@
 Name:Utvara Hellkite
 ManaCost:6 R R
 Types:Creature Dragon
-Text:no text
 PT:6/6
 K:Flying
 T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a dragon you control attacks, put a 6/6 red dragon creature token with flying onto the battlefield.
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/utvara_hellkite.jpg
 SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/110.jpg
 Oracle:Flying\nWhenever a Dragon you control attacks, put a 6/6 red Dragon creature token with flying onto the battlefield.
-End

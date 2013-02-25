@@ -1,7 +1,6 @@
 Name:Segovian Leviathan
 ManaCost:4 U
 Types:Creature Leviathan
-Text:no text
 PT:3/3
 K:Islandwalk
 SVar:Rarity:Uncommon
@@ -11,4 +10,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/97.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/99.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/76.jpg
 Oracle:Islandwalk
-End

@@ -1,7 +1,6 @@
 Name:Kobold Taskmaster
 ManaCost:1 R
 Types:Creature Kobold
-Text:no text
 PT:1/2
 S:Mode$ Continuous | Affected$ Creature.Kobold+Other+YouCtrl | AddPower$ 1 | Description$ Other Kobold creatures you control get +1/+0.
 SVar:PlayMain1:TRUE
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_taskmaste
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/65.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/154.jpg
 Oracle:Other Kobold creatures you control get +1/+0.
-End

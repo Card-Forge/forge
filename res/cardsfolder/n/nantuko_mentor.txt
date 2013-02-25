@@ -1,7 +1,6 @@
 Name:Nantuko Mentor
 ManaCost:2 G
 Types:Creature Insect Druid
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ 2 G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is that creature's power.
 SVar:X:Targeted$CardPower
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_mentor.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/255.jpg
 Oracle:{2}{G}, {T}: Target creature gets +X/+X until end of turn, where X is that creature's power.
-End

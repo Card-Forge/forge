@@ -1,7 +1,6 @@
 Name:Timberland Ruins
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 K:CARDNAME enters the battlefield tapped.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timberland_ruins.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/330.jpg
 Oracle:Timberland Ruins enters the battlefield tapped.\n{T}: Add {G} to your mana pool.\n{T}, Sacrifice Timberland Ruins: Add one mana of any color to your mana pool.
-End

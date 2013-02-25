@@ -1,11 +1,9 @@
 Name:Oona's Grace
 ManaCost:2 U
 Types:Instant
-Text:no text
 A:SP$ Draw | Cost$ 2 U | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws a card.
 A:SP$ Draw | Cost$ 2 U Discard<1/Land> | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | ActivationZone$ Graveyard | CostDesc$ Retrace | NonBasicSpell$ True | SpellDescription$ (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oonas_grace.jpg
 SVar:Rarity:Common
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/27.jpg
 Oracle:Target player draws a card.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
-End

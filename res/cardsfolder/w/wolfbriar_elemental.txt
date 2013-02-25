@@ -1,7 +1,6 @@
 Name:Wolfbriar Elemental
 ManaCost:2 G G
 Types:Creature Elemental
-Text:no text
 PT:4/4
 K:Multikicker G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 2/2 green Wolf creature token onto the battlefield for each time it was kicked.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfbriar_elemental.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/118.jpg
 Oracle:Multikicker {G} (You may pay an additional {G} any number of times as you cast this spell.)\nWhen Wolfbriar Elemental enters the battlefield, put a 2/2 green Wolf creature token onto the battlefield for each time it was kicked.
-End

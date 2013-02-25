@@ -1,7 +1,6 @@
 Name:Spitting Gourna
 ManaCost:3 G G
 Types:Creature Beast
-Text:no text
 PT:3/4
 K:Reach
 K:Morph:4 G
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_gourna.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/284.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nMorph {4}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

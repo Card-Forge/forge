@@ -1,7 +1,6 @@
 Name:Gaea's Herald
 ManaCost:1 G
 Types:Creature Elf
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Creature spells can't be countered.
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/252.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/80.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/265.jpg
 Oracle:Creature spells can't be countered.
-End

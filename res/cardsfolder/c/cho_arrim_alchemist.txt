@@ -1,7 +1,6 @@
 Name:Cho-Arrim Alchemist
 ManaCost:W
 Types:Creature Human Spellshaper
-Text:no text
 PT:1/1
 A:AB$ ChooseSource | Cost$ 1 W W T Discard<1/Card> | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource,ExileEffect,GainLifeInstead,X | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cho_arrim_alchemist.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/8.jpg
 Oracle:{1}{W}{W}, {T}, Discard a card: The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
-End

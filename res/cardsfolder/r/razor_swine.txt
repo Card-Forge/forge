@@ -1,7 +1,6 @@
 Name:Razor Swine
 ManaCost:2 R
 Types:Creature Boar
-Text:no text
 PT:2/1
 K:First Strike
 K:Infect
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_swine.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/92.jpg
 Oracle:First strike\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-End

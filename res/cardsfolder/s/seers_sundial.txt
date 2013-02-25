@@ -1,11 +1,9 @@
 Name:Seer's Sundial
 ManaCost:4
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you may pay 2. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 2 | Defined$ You | NumCards$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seers_sundial.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/130.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, you may pay {2}. If you do, draw a card.
-End

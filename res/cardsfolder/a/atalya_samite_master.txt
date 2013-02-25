@@ -1,7 +1,6 @@
 Name:Atalya, Samite Master
 ManaCost:3 W W
 Types:Legendary Creature Human Cleric
-Text:no text
 PT:2/3
 A:AB$ Charm | Cost$ X T | XColor$ W | Choices$ PreventDamage,GainLife | CharmNum$ 1 | SpellDescription$ Choose one - Prevent the next X damage that would be dealt to target creature this turn; or you gain X life. Spend only white mana this way.
 SVar:PreventDamage:DB$ PreventDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | Amount$ X | References$ X | SpellDescription$ Prevent the next X damage that would be dealt to target creature or player this turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/atalya_samite_master.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/4.jpg
 Oracle:{X}, {T}: Choose one - Prevent the next X damage that would be dealt to target creature this turn; or you gain X life. Spend only white mana this way.
-End

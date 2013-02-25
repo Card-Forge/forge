@@ -1,7 +1,6 @@
 Name:Shaleskin Bruiser
 ManaCost:6 R
 Types:Creature Beast
-Text:no text
 PT:4/4
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +3/+0 until end of turn for each other attacking Beast.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaleskin_bruiser.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/226.jpg
 Oracle:Trample\nWhenever Shaleskin Bruiser attacks, it gets +3/+0 until end of turn for each other attacking Beast.
-End

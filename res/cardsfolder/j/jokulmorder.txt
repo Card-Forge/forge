@@ -1,7 +1,6 @@
 Name:Jokulmorder
 ManaCost:4 U U U
 Types:Creature Leviathan
-Text:no text
 PT:12/12
 K:Trample
 K:CARDNAME enters the battlefield tapped.
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jokulmorder.jpg
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/37.jpg
 Oracle:Trample\nJokulmorder enters the battlefield tapped.\nWhen Jokulmorder enters the battlefield, sacrifice it unless you sacrifice five lands.\nJokulmorder doesn't untap during your untap step.\nWhenever you play an Island, you may untap Jokulmorder.
-End

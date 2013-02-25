@@ -1,10 +1,8 @@
 Name:Second Sunrise
 ManaCost:1 W W
 Types:Instant
-Text:no text
 A:SP$ChangeZone | Cost$ 1 W W | Origin$ Graveyard | Destination$ Battlefield | Defined$ ThisTurnEntered_Graveyard_from_Battlefield_Card.Artifact,Card.Creature,Card.Enchantment,Card.Land | SpellDescription$ Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_sunrise.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/20.jpg
 Oracle:Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn.
-End

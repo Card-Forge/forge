@@ -1,11 +1,9 @@
 Name:Cephalid Retainer
 ManaCost:2 U U
 Types:Creature Cephalid
-Text:no text
 PT:2/3
 A:AB$ Tap | Cost$ U U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_retainer.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/73.jpg
 Oracle:{U}{U}: Tap target creature without flying.
-End

@@ -1,7 +1,6 @@
 Name:Distorting Lens
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ ChooseColor | Cost$ T | Defined$ You | SubAbility$ Animate | SpellDescription$ Target permanent becomes the color of your choice until end of turn.
 SVar:Animate:DB$ Animate | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ ChosenColor | OverwriteColors$ True
 SVar:RemRandomDeck:True
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/distorting_lens.
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/299.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/293.jpg
 Oracle:{T}: Target permanent becomes the color of your choice until end of turn.
-End

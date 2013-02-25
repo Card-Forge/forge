@@ -1,7 +1,6 @@
 Name:Uktabi Drake
 ManaCost:G
 Types:Creature Drake
-Text:no text
 PT:2/1
 K:Flying
 K:Haste
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_drake.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/141.jpg
 Oracle:Flying, haste\nEcho {1}{G}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
-End

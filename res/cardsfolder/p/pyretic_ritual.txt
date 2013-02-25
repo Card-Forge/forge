@@ -1,11 +1,9 @@
 Name:Pyretic Ritual
 ManaCost:1 R
 Types:Instant
-Text:no text
 A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ 3 | SpellDescription$ Add R R R to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyretic_ritual.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/153.jpg
 Oracle:Add {R}{R}{R} to your mana pool.
-End

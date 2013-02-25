@@ -1,7 +1,6 @@
 Name:Folk of An-Havva
 ManaCost:G
 Types:Creature Human
-Text:no text
 PT:1/1
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks, it gets +2/+0 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_of_an_havva.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/58.jpg|2
 Oracle:Whenever Folk of An-Havva blocks, it gets +2/+0 until end of turn.
-End

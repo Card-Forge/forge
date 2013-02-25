@@ -1,7 +1,6 @@
 Name:Shattered Angel
 ManaCost:3 W W
 Types:Creature Angel
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigGain | OptionalDecider$ You | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, you may gain 3 life.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_angel.
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/31.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/23.jpg
 Oracle:Flying\nWhenever a land enters the battlefield under an opponent's control, you may gain 3 life.
-End

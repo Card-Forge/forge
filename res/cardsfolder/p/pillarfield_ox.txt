@@ -1,11 +1,9 @@
 Name:Pillarfield Ox
 ManaCost:3 W
 Types:Creature Ox
-Text:no text
 PT:2/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillarfield_ox.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/25.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/31.jpg
 Oracle:
-End

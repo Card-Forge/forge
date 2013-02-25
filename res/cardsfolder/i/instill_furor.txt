@@ -1,7 +1,6 @@
 Name:Instill Furor
 ManaCost:1 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ EOTTrigger | AddSVar$ InstillTrigSac & MustAttack | Description$ Enchanted creature has "At the beginning of your end step, sacrifice this creature unless it attacked this turn."
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_furor.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/134.jpg
 Oracle:Enchant creature\nEnchanted creature has "At the beginning of your end step, sacrifice this creature unless it attacked this turn."
-End

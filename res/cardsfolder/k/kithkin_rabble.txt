@@ -1,7 +1,6 @@
 Name:Kithkin Rabble
 ManaCost:3 W
 Types:Creature Kithkin
-Text:no text
 PT:*/*
 K:Vigilance
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of white permanents you control.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_rabble.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/9.jpg
 Oracle:Vigilance\nKithkin Rabble's power and toughness are each equal to the number of white permanents you control.
-End

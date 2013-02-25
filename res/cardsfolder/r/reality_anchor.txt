@@ -1,7 +1,6 @@
 Name:Reality Anchor
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ Debuff | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Shadow | SubAbility$ DBDraw | SpellDescription$ Target creature loses shadow until end of turn. Draw a card.
 SVar:DBDraw:DB$Draw | Cost$ 0 | NumCards$ 1
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_anchor.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/140.jpg
 Oracle:Target creature loses shadow until end of turn.\nDraw a card.
-End

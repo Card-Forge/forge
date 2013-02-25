@@ -1,7 +1,6 @@
 Name:Merfolk Sovereign
 ManaCost:1 U U
 Types:Creature Merfolk
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Merfolk+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Merfolk creatures you control get +1/+1.
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Merfolk | TgtPrompt$ Select target Merfolk creature | KW$ HIDDEN Unblockable | SpellDescription$ Target Merfolk creature is unblockable this turn.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_sovereig
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/65.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/62.jpg
 Oracle:Other Merfolk creatures you control get +1/+1.\n{T}: Target Merfolk creature is unblockable this turn.
-End

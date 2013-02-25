@@ -1,7 +1,6 @@
 Name:Giant Spider
 ManaCost:3 G
 Types:Creature Spider
-Text:no text
 PT:2/4
 K:Reach
 SVar:Rarity:Common
@@ -22,4 +21,3 @@ SetInfo:M12|Common|http://magiccards.info/scans/en/m12/177.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/162.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/107.jpg
 Oracle:Reach (This creature can block creatures with flying.)
-End

@@ -1,7 +1,6 @@
 Name:Magus of the Jar
 ManaCost:3 U U
 Types:Creature Human Wizard
-Text:no text
 PT:3/3
 A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | ChangeType$ Card | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ YouDraw | SpellDescription$ Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.
 SVar:YouDraw:DB$ Draw | Defined$ You | NumCards$ 7 | SubAbility$ OppDraw
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_jar.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/67.jpg
 Oracle:{T}, Sacrifice Magus of the Jar: Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.
-End

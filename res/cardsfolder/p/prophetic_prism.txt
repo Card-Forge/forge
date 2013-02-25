@@ -1,7 +1,6 @@
 Name:Prophetic Prism
 ManaCost:2
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
@@ -12,4 +11,3 @@ SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/234.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/256.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/222.jpg
 Oracle:When Prophetic Prism enters the battlefield, draw a card.\n{1}, {T}: Add one mana of any color to your mana pool.
-End

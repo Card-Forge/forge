@@ -1,7 +1,6 @@
 Name:Predator Ooze
 ManaCost:G G G
 Types:Creature Ooze
-Text:no text
 PT:1/1
 K:Indestructible
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predator_ooze.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/124.jpg
 Oracle:Predator Ooze is indestructible.\nWhenever Predator Ooze attacks, put a +1/+1 counter on it.\nWhenever a creature dealt damage by Predator Ooze this turn dies, put a +1/+1 counter on Predator Ooze.
-End

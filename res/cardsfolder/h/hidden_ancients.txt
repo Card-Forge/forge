@@ -1,11 +1,9 @@
 Name:Hidden Ancients
 ManaCost:1 G
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.Self+Enchantment | Execute$ TrigAnimate | TriggerDescription$ When an opponent casts an enchantment spell, if CARDNAME is an enchantment, CARDNAME becomes a 5/5 Treefolk creature.
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 5 | Toughness$ 5 | Types$ Creature,Treefolk | OverwriteTypes$ True | Permanent$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_ancients.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/260.jpg
 Oracle:When an opponent casts an enchantment spell, if Hidden Ancients is an enchantment, Hidden Ancients becomes a 5/5 Treefolk creature.
-End

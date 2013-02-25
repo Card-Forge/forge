@@ -1,7 +1,6 @@
 Name:Braids, Cabal Minion
 ManaCost:2 B B
 Types:Legendary Creature Human Minion
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices an artifact, creature or land.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature,Artifact,Land | Defined$ TriggeredPlayer | SpellDescription$ Sacrifice an artifact, creature or land.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/braids_cabal_minion.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/117.jpg
 Oracle:At the beginning of each player's upkeep, that player sacrifices an artifact, creature, or land.
-End

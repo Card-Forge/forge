@@ -1,7 +1,6 @@
 Name:Vanish into Memory
 ManaCost:2 W U
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 2 W U | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature. You draw cards equal to that creature's power. At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to its toughness.
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to its toughness.
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vanish_into_memory.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/133.jpg
 Oracle:Exile target creature. You draw cards equal to that creature's power. At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to its toughness.
-End

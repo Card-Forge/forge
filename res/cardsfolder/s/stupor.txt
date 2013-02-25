@@ -1,7 +1,6 @@
 Name:Stupor
 ManaCost:2 B
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | NumCards$ 1 | Mode$ Random | SpellDescription$ Target opponent discards a card at random, then discards a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Uncommon
@@ -10,4 +9,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/158.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/45.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/48.jpg
 Oracle:Target opponent discards a card at random, then discards a card.
-End

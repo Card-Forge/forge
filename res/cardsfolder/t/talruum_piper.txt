@@ -1,11 +1,9 @@
 Name:Talruum Piper
 ManaCost:4 R
 Types:Creature Minotaur
-Text:no text
 PT:3/3
 K:All creatures with flying able to block CARDNAME do so.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talruum_piper.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/98.jpg
 Oracle:All creatures with flying able to block Talruum Piper do so.
-End

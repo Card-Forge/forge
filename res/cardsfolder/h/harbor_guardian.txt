@@ -1,7 +1,6 @@
 Name:Harbor Guardian
 ManaCost:2 W U
 Types:Creature Gargoyle
-Text:no text
 PT:3/4
 K:Reach
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ Opponent | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, defending player may draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_guardian.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/326.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nWhenever Harbor Guardian attacks, defending player may draw a card.
-End

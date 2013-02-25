@@ -1,7 +1,6 @@
 Name:Fling
 ManaCost:1 R
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target creature or player.
 SVar:X:Sacrificed$CardPower
 SVar:RemRandomDeck:True
@@ -13,4 +12,3 @@ SetInfo:M12|Common|http://magiccards.info/scans/en/m12/134.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/82.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/90.jpg
 Oracle:As an additional cost to cast Fling, sacrifice a creature.\nFling deals damage equal to the sacrificed creature's power to target creature or player.
-End

@@ -1,7 +1,6 @@
 Name:Protean Hulk
 ManaCost:5 G G
 Types:Creature Beast
-Text:no text
 PT:6/6
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, search your library for any number of creature cards with total converted mana cost 6 or less and put them onto the battlefield. Then shuffle your library.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeNum$ X | WithTotalCMC$ 6 | ChangeType$ Creature.YouCtrl | Optional$ True | References$ X
@@ -10,4 +9,3 @@ SVar:SacMe:4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/protean_hulk.jpg
 Oracle:When Protean Hulk dies, search your library for any number of creature cards with total converted mana cost 6 or less and put them onto the battlefield. Then shuffle your library.
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/90.jpg
-End

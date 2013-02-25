@@ -1,7 +1,6 @@
 Name:Sphinx Sovereign
 ManaCost:4 W U U B
 Types:Artifact Creature Sphinx
-Text:no text
 PT:6/6
 K:Flying
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you gain 3 life if CARDNAME is untapped. Otherwise, each opponent loses 3 life.
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_sovereign.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/196.jpg
 Oracle:Flying\nAt the beginning of your end step, you gain 3 life if Sphinx Sovereign is untapped. Otherwise, each opponent loses 3 life.
-End

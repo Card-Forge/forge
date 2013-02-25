@@ -1,7 +1,6 @@
 Name:Belligerent Hatchling
 ManaCost:3 RW
 Types:Creature Elemental
-Text:no text
 PT:6/6
 K:etbCounter:M1M1:4
 K:First Strike
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Belligerent_Hatchling.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/134.jpg
 Oracle:First strike\nBelligerent Hatchling enters the battlefield with four -1/-1 counters on it.\nWhenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling.\nWhenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.
-End

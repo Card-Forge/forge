@@ -1,11 +1,9 @@
 Name:Gnat Miser
 ManaCost:B
 Types:Creature Rat Shaman
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Opponent | RaiseMaxHandSize$ -1 | Description$ Each opponent's maximum hand size is reduced by one.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gnat_miser.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/70.jpg
 Oracle:Each opponent's maximum hand size is reduced by one.
-End

@@ -1,7 +1,6 @@
 Name:Controlled Instincts
 ManaCost:U
 Types:Enchantment Aura
-Text:no text
 K:Enchant red or green creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature.Green,Creature.Red | TgtPrompt$ Select target red or green creature | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/controlled_instincts.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/23.jpg
 Oracle:Enchant red or green creature\nEnchanted creature doesn't untap during its controller's untap step.
-End

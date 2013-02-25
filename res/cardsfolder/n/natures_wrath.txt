@@ -1,7 +1,6 @@
 Name:Nature's Wrath
 ManaCost:4 G G
 Types:Enchantment
-Text:no text
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G
 T:Mode$ ChangesZone | ValidCard$ Island,Card.Blue | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigSacrificeBlue | TriggerDescription$ Whenever a player puts an Island or blue permanent onto the battlefield, he or she sacrifices an Island or blue permanent.
 SVar:TrigSacrificeBlue:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredCardController | SacValid$ Island,Card.Blue | SacMessage$ Island or a blue permanent
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_wrath.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/82.jpg
 Oracle:At the beginning of your upkeep, sacrifice Nature's Wrath unless you pay {G}.\nWhenever a player puts an Island or blue permanent onto the battlefield, he or she sacrifices an Island or blue permanent.\nWhenever a player puts a Swamp or black permanent onto the battlefield, he or she sacrifices a Swamp or black permanent.
-End

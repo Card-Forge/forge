@@ -1,7 +1,6 @@
 Name:Folk Medicine
 ManaCost:2 G
 Types:Instant
-Text:no text
 K:Flashback 1 W
 A:SP$ GainLife | Cost$ 2 G | LifeAmount$ X | References$ X | SpellDescription$ You gain 1 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_medicine.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/115.jpg
 Oracle:You gain 1 life for each creature you control.\nFlashback {1}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

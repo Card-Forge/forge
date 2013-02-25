@@ -1,7 +1,6 @@
 Name:Qasali Ambusher
 ManaCost:1 G W
 Types:Creature Cat Warrior
-Text:no text
 PT:2/3
 K:Reach
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | CheckSVar$ X | CheckSecondSVar$ Y | CheckThirdSVar$ Z | References$ X,Y,Z | AddHiddenKeyword$ May be played without paying its mana cost and as though it has flash | Description$ If a creature is attacking you and you control a Forest and a Plains, you may cast CARDNAME without paying its mana cost and as though it had flash.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/qasali_ambusher.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/184.jpg
 Oracle:Reach\nIf a creature is attacking you and you control a Forest and a Plains, you may cast Qasali Ambusher without paying its mana cost and as though it had flash.
-End

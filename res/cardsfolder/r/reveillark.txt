@@ -1,7 +1,6 @@
 Name:Reveillark
 ManaCost:4 W
 Types:Creature Elemental
-Text:no text
 PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturnCreatures | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return up to two target creature cards with power 2 or less from your graveyard to the battlefield.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reveillark.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/22.jpg
 Oracle:Flying\nWhen Reveillark leaves the battlefield, return up to two target creature cards with power 2 or less from your graveyard to the battlefield.\nEvoke {5}{W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
-End

@@ -1,7 +1,6 @@
 Name:Gustcloak Harrier
 ManaCost:1 W W
 Types:Creature Bird Soldier
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, you may untap it and remove it from combat.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gustcloak_harrier.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/34.jpg
 Oracle:Flying\nWhenever Gustcloak Harrier becomes blocked, you may untap it and remove it from combat.
-End

@@ -1,7 +1,6 @@
 Name:Psychic Transfer
 ManaCost:4 U
 Types:Sorcery
-Text:no text
 A:SP$ ExchangeLife | Cost$ 4 U | ValidTgts$ Player | ConditionCheckSVar$ Y | ConditionSVarCompare$ LE5 | References$ Y,Z | SpellDescription$ If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.
 SVar:Y:Count$HighestLifeTotal/Minus.Z
 SVar:Z:Count$LowestLifeTotal
@@ -12,4 +11,3 @@ SetInfo:S99|Rare|http://magiccards.info/scans/en/st/46.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/85.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/90.jpg
 Oracle:If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.
-End

@@ -1,7 +1,6 @@
 Name:Oracle's Attendants
 ManaCost:3 W
 Types:Creature Human Soldier
-Text:no text
 PT:1/5
 A:AB$ ChooseSource | Cost$ T | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ All damage that would be dealt to target creature this turn by a source of your choice is dealt to CARDNAME instead.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,X | Duration$ HostLeavesOrEOT | RememberObjects$ Remembered | ImprintCards$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
@@ -20,4 +19,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/32.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/30.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/16.jpg
 Oracle:{T}: All damage that would be dealt to target creature this turn by a source of your choice is dealt to Oracle's Attendants instead.
-End

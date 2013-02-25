@@ -1,7 +1,6 @@
 Name:Heat Stroke
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 T:Mode$ Blocks | ValidBlocked$ Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At end of combat, destroy each creature that blocked or was blocked this turn.
 T:Mode$ AttackerBlocked | ValidAttacker$ Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy2 | Secondary$ True | TriggerDescription$ At end of combat, destroy each creature that blocked or was blocked this turn.
 SVar:TrigDestroy:AB$ Pump | Cost$ 0 | Defined$ TriggeredBlocker | KW$ HIDDEN At the beginning of the end step, destroy CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_stroke.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/107.jpg
 Oracle:At end of combat, destroy each creature that blocked or was blocked this turn.
-End

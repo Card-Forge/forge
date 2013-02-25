@@ -1,7 +1,6 @@
 Name:Hinterland Harbor
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped unless you control a Forest or an Island.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hinterland_harbor.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/241.jpg
 Oracle:Hinterland Harbor enters the battlefield tapped unless you control a Forest or an Island.\n{T}: Add {G} or {U} to your mana pool.
-End

@@ -1,7 +1,6 @@
 Name:Acid Web Spider
 ManaCost:3 G G
 Types:Creature Spider
-Text:no text
 PT:3/5
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target Equipment.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_web_spider.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/108.jpg
 Oracle:Reach\nWhen Acid Web Spider enters the battlefield, you may destroy target Equipment.
-End

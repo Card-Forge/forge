@@ -1,11 +1,9 @@
 Name:Winter's Grasp
 ManaCost:1 G G
 Types:Sorcery
-Text:no text
 A:SP$ Destroy | Cost$ 1 G G | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winters_grasp.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/159.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/120.jpg
 Oracle:Destroy target land.
-End

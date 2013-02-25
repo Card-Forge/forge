@@ -1,11 +1,9 @@
 Name:Field Surgeon
 ManaCost:1 W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ PreventDamage | Cost$ tapXType<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_surgeon.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/8.jpg
 Oracle:Tap an untapped creature you control: Prevent the next 1 damage that would be dealt to target creature this turn.
-End

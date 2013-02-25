@@ -1,10 +1,8 @@
 Name:Bull Rush
 ManaCost:R
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bull_rush.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/73.jpg
 Oracle:Target creature gets +2/+0 until end of turn.
-End

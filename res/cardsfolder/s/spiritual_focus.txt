@@ -1,7 +1,6 @@
 Name:Spiritual Focus
 ManaCost:1 W
 Types:Enchantment
-Text:no text
 T:Mode$ Discarded | ValidCard$ Card.YouCtrl | ValidCause$ Card.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a spell or ability an opponent controls causes you to discard a card, you gain 2 life and you may draw a card.
 SVar:TrigGainLife:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | OptionalDecider$ You
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_focus.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/49.jpg
 Oracle:Whenever a spell or ability an opponent controls causes you to discard a card, you gain 2 life and you may draw a card.
-End

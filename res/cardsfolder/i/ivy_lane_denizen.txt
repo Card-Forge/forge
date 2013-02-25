@@ -1,7 +1,6 @@
 Name:Ivy Lane Denizen
 ManaCost:3 G
 Types:Creature Elf Warrior
-Text:no text
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl+Green | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on target creature.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivy_lane_denizen.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/125.jpg
 Oracle:Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on target creature.
-End

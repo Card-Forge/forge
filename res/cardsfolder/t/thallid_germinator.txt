@@ -1,7 +1,6 @@
 Name:Thallid Germinator
 ManaCost:2 G
 Types:Creature Fungus
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a spore counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_germinator.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/225.jpg
 Oracle:At the beginning of your upkeep, put a spore counter on Thallid Germinator.\nRemove three spore counters from Thallid Germinator: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Target creature gets +1/+1 until end of turn.
-End

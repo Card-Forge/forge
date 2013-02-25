@@ -1,7 +1,6 @@
 Name:Fangren Marauder
 ManaCost:5 G
 Types:Creature Beast
-Text:no text
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever an artifact is put into a graveyard from the battlefield, you may gain 5 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 5
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fangren_marauder.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/79.jpg
 Oracle:Whenever an artifact is put into a graveyard from the battlefield, you may gain 5 life.
-End

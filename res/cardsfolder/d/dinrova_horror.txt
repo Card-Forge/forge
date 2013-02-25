@@ -10,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dinrova_horror.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/155.jpg
 Oracle:When Dinrova Horror enters the battlefield, return target permanent to its owner's hand, then that player discards a card.
-End

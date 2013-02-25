@@ -1,7 +1,6 @@
 Name:Skirsdag High Priest
 ManaCost:1 B
 Types:Creature Human Cleric
-Text:no text
 PT:1/2
 A:AB$ Token | Cost$ T tapXType<2/Creature> | CheckSVar$ Morbid | SVarCompare$ GE1 | TokenImage$ B 5 5 Demon | TokenAmount$ 1 | TokenName$ Demon | TokenTypes$ Creature,Demon | TokenOwner$ You | TokenColors$ Black | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying | CostDesc$ Morbid - Tap, Tap two untapped creatures you control: | References$ Morbid | SpellDescription$ Put a 5/5 black Demon creature token with flying onto the battlefield. Activate this ability only if a creature died this turn.
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirsdag_high_priest.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/117.jpg
 Oracle:Morbid - {T}, Tap two untapped creatures you control: Put a 5/5 black Demon creature token with flying onto the battlefield. Activate this ability only if a creature died this turn.
-End

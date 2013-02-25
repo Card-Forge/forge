@@ -1,11 +1,9 @@
 Name:Inkmoth Nexus
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Animate | Cost$ 1 | Defined$ Self | Power$ 1 | Toughness$ 1 | Types$ Creature,Artifact,Blinkmoth | Keywords$ Flying & Infect | SpellDescription$ CARDNAME becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inkmoth_nexus.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/145.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}: Inkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying and infect until end of turn. It's still a land. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-End

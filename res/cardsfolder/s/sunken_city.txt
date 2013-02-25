@@ -1,7 +1,6 @@
 Name:Sunken City
 ManaCost:U U
 Types:Enchantment
-Text:no text
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U U
 S:Mode$ Continuous | Affected$ Creature.Blue | AddPower$ 1 | AddToughness$ 1 | Description$ Blue creatures get +1/+1.
 SVar:PlayMain1:TRUE
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_city.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/35.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/106.jpg
 Oracle:At the beginning of your upkeep, sacrifice Sunken City unless you pay {U}{U}.\nBlue creatures get +1/+1.
-End

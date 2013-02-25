@@ -1,7 +1,6 @@
 Name:Soltari Guerrillas
 ManaCost:2 W R
 Types:Creature Soltari Soldier
-Text:no text
 PT:3/2
 K:Shadow
 A:AB$ Effect | Cost$ 0 | Name$ Soltari Guerrillas Effect | ReplacementEffects$ EventGuerrillasDamageDone | SVars$ DamageGuerrillasCreature,GuerrillasX | References$ EventGuerrillasDamageDone,DamageGuerrillasCreature,GuerrillasX | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | ImprintCards$ Self | SpellDescription$ The next time CARDNAME would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_guerrillas.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/347.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\n{0}: The next time Soltari Guerrillas would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
-End

@@ -9,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_pack.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/121.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/160.jpg
 Oracle:Put a 4/4 green Beast creature token onto the battlefield.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
-End

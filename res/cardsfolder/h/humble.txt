@@ -1,11 +1,9 @@
 Name:Humble
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Animate | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 0 | Toughness$ 1 | RemoveAllAbilities$ True | SpellDescription$ Target creature loses all abilities and becomes 0/1 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/humble.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/18.jpg
 Oracle:Target creature loses all abilities and becomes 0/1 until end of turn.
-End

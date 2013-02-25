@@ -1,11 +1,9 @@
 Name:Shivan Gorge
 ManaCost:no cost
 Types:Legendary Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ DealDamage | Cost$ 2 R T | NumDmg$ 1 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 1 damage to each opponent.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_gorge.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/326.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{2}{R}, {T}: Shivan Gorge deals 1 damage to each opponent.
-End

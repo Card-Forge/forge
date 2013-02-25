@@ -11,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_harness.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/78.jpg
 Oracle:Enchant red or green creature\nCumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nYou control enchanted creature.
-End

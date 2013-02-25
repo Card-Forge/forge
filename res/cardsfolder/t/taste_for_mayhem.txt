@@ -1,7 +1,6 @@
 Name:Taste for Mayhem
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Description$ Enchanted creature gets +2/+0.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taste_for_mayhem.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/75.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0.\nHellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
-End

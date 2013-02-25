@@ -1,7 +1,6 @@
 Name:Mox Diamond
 ManaCost:0
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, you may discard a land card instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
 SVar:PayBeforeETB:AB$ Discard | Cost$ 0 | DiscardValid$ Card.Land | Mode$ TgtChoose | RememberDiscarded$ True | Optional$ True | SubAbility$ MoveToGraveyard
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_diamond.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/132.jpg
 Oracle:If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add one mana of any color to your mana pool.
-End

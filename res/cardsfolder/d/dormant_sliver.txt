@@ -1,7 +1,6 @@
 Name:Dormant Sliver
 ManaCost:2 G U
 Types:Creature Sliver
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Defender | Description$ All Sliver creatures have defender.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Sliver | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ All Slivers have "When this permanent enters the battlefield, draw a card."
@@ -11,4 +10,3 @@ SVar:Rarity:uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dormant_sliver.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/156.jpg
 Oracle:All Sliver creatures have defender.\nAll Slivers have "When this permanent enters the battlefield, draw a card."
-End

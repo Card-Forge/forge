@@ -1,7 +1,6 @@
 Name:Skyshroud Elite
 ManaCost:G
 Types:Creature Elf
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+2 as long as an opponent controls a nonbasic land.
 SVar:X:Count$Valid Land.OppCtrl+nonBasic
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_elite.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/123.jpg
 Oracle:Skyshroud Elite gets +1/+2 as long as an opponent controls a nonbasic land.
-End

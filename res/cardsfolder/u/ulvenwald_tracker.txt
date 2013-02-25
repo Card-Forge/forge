@@ -1,7 +1,6 @@
 Name:Ulvenwald Tracker
 ManaCost:G
 Types:Creature Human Shaman
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ TrackerFight | StackDescription$ None | SpellDescription$ Target creature you control fights another target creature.
 SVar:TrackerFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Choose target creature to fight the first target
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ulvenwald_tracker.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/200.jpg
 Oracle:{1}{G}, {T}: Target creature you control fights another target creature. (Each deals damage equal to its power to the other.)
-End

@@ -1,7 +1,6 @@
 Name:Screams from Within
 ManaCost:1 B B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | Description$ Enchanted creature gets -1/-1.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screams_from_within.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/52.jpg
 Oracle:Enchant creature\nEnchanted creature gets -1/-1.\nWhen enchanted creature dies, return Screams from Within from your graveyard to the battlefield.
-End

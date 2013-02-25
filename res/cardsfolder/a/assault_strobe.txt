@@ -1,10 +1,8 @@
 Name:Assault Strobe
 ManaCost:R
 Types:Sorcery
-Text:no text
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assault_strobe.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/82.jpg
 Oracle:Target creature gains double strike until end of turn. (It deals both first-strike and regular combat damage.)
-End

@@ -1,7 +1,6 @@
 Name:Mystic Familiar
 ManaCost:1 W
 Types:Creature Bird
-Text:no text
 PT:1/2
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Protection from black | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has protection from black.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_familiar.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/11.jpg
 Oracle:Flying\nThreshold - As long as seven or more cards are in your graveyard, Mystic Familiar gets +1/+1 and has protection from black.
-End

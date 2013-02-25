@@ -1,7 +1,6 @@
 Name:Kukemssa Serpent
 ManaCost:3 U
 Types:Creature Serpent
-Text:no text
 PT:4/3
 K:CARDNAME can't attack unless defending player controls an Island.
 A:AB$ Animate | Cost$ U Sac<1/Island> | ValidTgts$ Land.OppCtrl | TgtPrompt$ Select target land an opponent controls | Types$ Island | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | SpellDescription$ Target land an opponent controls becomes an Island until end of turn.
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kukemssa_serpent.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/72.jpg
 Oracle:Kukemssa Serpent can't attack unless defending player controls an Island.\n{U}, Sacrifice an Island: Target land an opponent controls becomes an Island until end of turn.\nWhen you control no Islands, sacrifice Kukemssa Serpent.
-End

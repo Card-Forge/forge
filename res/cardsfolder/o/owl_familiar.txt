@@ -1,7 +1,6 @@
 Name:Owl Familiar
 ManaCost:1 U
 Types:Creature Bird
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card, then discard a card.
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/owl_familiar.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/43.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/64.jpg
 Oracle:Flying\nWhen Owl Familiar enters the battlefield, draw a card, then discard a card.
-End

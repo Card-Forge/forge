@@ -1,7 +1,6 @@
 Name:Elder Land Wurm
 ManaCost:4 W W W
 Types:Creature Dragon Wurm
-Text:no text
 PT:5/5
 K:Defender
 K:Trample
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_land_wurm.
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/274.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/180.jpg
 Oracle:Defender, trample\nWhen Elder Land Wurm blocks, it loses defender.
-End

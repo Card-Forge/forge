@@ -1,7 +1,6 @@
 Name:Thorn Thallid
 ManaCost:1 G G
 Types:Creature Fungus
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a spore counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_thallid.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/96.jpg|4
 Oracle:At the beginning of your upkeep, put a spore counter on Thorn Thallid.\nRemove three spore counters from Thorn Thallid: Thorn Thallid deals 1 damage to target creature or player.
-End

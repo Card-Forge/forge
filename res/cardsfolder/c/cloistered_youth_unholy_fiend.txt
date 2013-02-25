@@ -1,7 +1,6 @@
 Name:Cloistered Youth
 ManaCost:1 W
 Types:Creature Human
-Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may transform CARDNAME.
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
@@ -16,7 +15,6 @@ Name:Unholy Fiend
 ManaCost:no cost
 Colors:black
 Types:Creature Horror
-Text:no text
 PT:3/3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you lose 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
@@ -24,4 +22,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/unholy_fiend.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/8b.jpg
 Oracle:Creature - Horror\n3/3\nAt the beginning of your end step, you lose 1 life.
 
-End

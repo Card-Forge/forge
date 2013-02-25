@@ -1,7 +1,6 @@
 Name:Crusader of Odric
 ManaCost:2 W
 Types:Creature Human Soldier
-Text:no text
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crusader_of_odric.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/10.jpg
 Oracle:Crusader of Odric's power and toughness are each equal to the number of creatures you control.
-End

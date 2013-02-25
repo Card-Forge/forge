@@ -1,7 +1,6 @@
 Name:Ichorclaw Myr
 ManaCost:2
 Types:Artifact Creature Myr
-Text:no text
 PT:1/1
 K:Infect
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +2/+2 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichorclaw_myr.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/166.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhenever Ichorclaw Myr becomes blocked, it gets +2/+2 until end of turn.
-End

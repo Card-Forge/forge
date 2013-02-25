@@ -1,7 +1,6 @@
 Name:Darksteel Sentinel
 ManaCost:6
 Types:Artifact Creature Golem
-Text:no text
 PT:3/3
 K:Vigilance
 K:Indestructible
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_sentinel.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/152.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nVigilance\nDarksteel Sentinel is indestructible. (Lethal damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)
-End

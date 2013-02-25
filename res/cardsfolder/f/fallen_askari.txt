@@ -1,7 +1,6 @@
 Name:Fallen Askari
 ManaCost:1 B
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 K:Flanking
 K:CARDNAME can't block.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_askari.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/9.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nFallen Askari can't block.
-End

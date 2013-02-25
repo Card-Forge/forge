@@ -1,7 +1,6 @@
 Name:Death Charmer
 ManaCost:2 B
 Types:Creature Worm Mercenary
-Text:no text
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, that creature's controller loses 2 life unless he or she pays 2.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredTargetController | LifeAmount$ 2 | UnlessCost$ 2 | UnlessPayer$ TriggeredTargetController
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_charmer.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/61.jpg
 Oracle:Whenever Death Charmer deals combat damage to a creature, that creature's controller loses 2 life unless he or she pays {2}.
-End

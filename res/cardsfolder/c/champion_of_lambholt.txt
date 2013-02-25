@@ -1,7 +1,6 @@
 Name:Champion of Lambholt
 ManaCost:1 G G
 Types:Creature Human Warrior
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.YouDontCtrl+powerLTX | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures with power less than CARDNAME's power can't block creatures you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_lambholt.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/171.jpg
 Oracle:Creatures with power less than Champion of Lambholt's power can't block creatures you control.\nWhenever another creature enters the battlefield under your control, put a +1/+1 counter on Champion of Lambholt.
-End

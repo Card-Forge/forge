@@ -1,7 +1,6 @@
 Name:Rampant Elephant
 ManaCost:3 W
 Types:Creature Elephant
-Text:no text
 PT:2/2
 A:AB$ MustBlock | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rampant_elephant.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/28.jpg
 Oracle:{G}: Target creature blocks Rampant Elephant this turn if able.
-End

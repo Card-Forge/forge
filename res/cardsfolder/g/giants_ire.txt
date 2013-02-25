@@ -1,7 +1,6 @@
 Name:Giant's Ire
 ManaCost:3 R
 Types:Tribal Sorcery Giant
-Text:no text
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 4 damage to target player. If you control a Giant, draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Giant.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Giant,
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giants_ire.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/170.jpg
 Oracle:Giant's Ire deals 4 damage to target player. If you control a Giant, draw a card.
-End

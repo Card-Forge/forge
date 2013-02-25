@@ -1,11 +1,9 @@
 Name:Tajuru Preserver
 ManaCost:1 G
 Types:Creature Elf Shaman
-Text:no text
 PT:2/1
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Spells and abilities your opponents control can't cause you to sacrifice permanents. | Description$ Spells and abilities your opponents control can't cause you to sacrifice permanents.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tajuru_preserver.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/211.jpg
 Oracle:Spells and abilities your opponents control can't cause you to sacrifice permanents.
-End

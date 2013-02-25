@@ -1,7 +1,6 @@
 Name:Birds of Paradise
 ManaCost:G
 Types:Creature Bird
-Text:no text
 PT:0/1
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 K:Flying
@@ -22,4 +21,3 @@ SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/165.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/95.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/95.jpg
 Oracle:Flying\n{T}: Add one mana of any color to your mana pool.
-End

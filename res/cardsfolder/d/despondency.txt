@@ -1,7 +1,6 @@
 Name:Despondency
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | Description$ Enchanted creature gets -2/-0.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/despondency.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/129.jpg
 Oracle:Enchant creature\nEnchanted creature gets -2/-0.\nWhen Despondency is put into a graveyard from the battlefield, return Despondency to its owner's hand.
-End

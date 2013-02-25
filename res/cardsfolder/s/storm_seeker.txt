@@ -1,7 +1,6 @@
 Name:Storm Seeker
 ManaCost:3 G
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ 3 G | ValidTgts$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of cards in target player's hand to that player.
 SVar:X:TargetedPlayer$CardsInHand
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_seeker.jpg
 Oracle:Storm Seeker deals damage equal to the number of cards in target player's hand to that player.
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/42.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/119.jpg
-End

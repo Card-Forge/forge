@@ -1,7 +1,6 @@
 Name:Underworld Dreams
 ManaCost:B B B
 Types:Enchantment
-Text:no text
 T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent draws a card, CARDNAME deals 1 damage to him or her.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ 1
 SVar:Rarity:Rare
@@ -12,4 +11,3 @@ SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/38.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/167.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/184.jpg
 Oracle:Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or her.
-End

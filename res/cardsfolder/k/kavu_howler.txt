@@ -1,7 +1,6 @@
 Name:Kavu Howler
 ManaCost:4 G G
 Types:Creature Kavu
-Text:no text
 PT:4/5
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all Kavu cards revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Kavu
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_howler.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/79.jpg
 Oracle:When Kavu Howler enters the battlefield, reveal the top four cards of your library. Put all Kavu cards revealed this way into your hand and the rest on the bottom of your library in any order.
-End

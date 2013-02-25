@@ -1,7 +1,6 @@
 Name:Crookclaw Elder
 ManaCost:5 U
 Types:Creature Bird Wizard
-Text:no text
 PT:3/2
 K:Flying
 A:AB$ Draw | Cost$ tapXType<2/Bird> | NumCards$ 1 | SpellDescription$ Draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crookclaw_elder.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/34.jpg
 Oracle:Flying\nTap two untapped Birds you control: Draw a card.\nTap two untapped Wizards you control: Target creature gains flying until end of turn.
-End

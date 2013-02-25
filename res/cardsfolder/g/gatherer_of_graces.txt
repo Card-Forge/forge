@@ -1,7 +1,6 @@
 Name:Gatherer of Graces
 ManaCost:1 G
 Types:Creature Human Druid
-Text:no text
 PT:1/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Aura attached to it.
 A:AB$ Regenerate | Cost$ Sac<1/Aura> | SpellDescription$ Regenerate Gatherer of Graces.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gatherer_of_graces.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/85.jpg
 Oracle:Gatherer of Graces gets +1/+1 for each Aura attached to it.\nSacrifice an Aura: Regenerate Gatherer of Graces.
-End

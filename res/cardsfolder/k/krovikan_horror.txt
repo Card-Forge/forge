@@ -1,7 +1,6 @@
 Name:Krovikan Horror
 ManaCost:3 B
 Types:Creature Horror Spirit
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Graveyard | IsPresent$ Creature.YouOwn+DirectlyAbove | PresentZone$ Graveyard | PresentCompare$ EQ1 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of the end step, if CARDNAME is in your graveyard with a creature card directly above it, you may return CARDNAME to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_horror.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/15.jpg
 Oracle:At the beginning of the end step, if Krovikan Horror is in your graveyard with a creature card directly above it, you may return Krovikan Horror to your hand.\n{1}, Sacrifice a creature: Krovikan Horror deals 1 damage to target creature or player.
-End

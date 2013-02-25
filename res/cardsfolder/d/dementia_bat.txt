@@ -1,7 +1,6 @@
 Name:Dementia Bat
 ManaCost:4 B
 Types:Creature Bat
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ Discard | Cost$ Sac<1/CARDNAME> 4 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dementia_bat.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/55.jpg
 Oracle:Flying\n{4}{B}, Sacrifice Dementia Bat: Target player discards two cards.
-End

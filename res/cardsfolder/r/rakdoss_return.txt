@@ -1,7 +1,6 @@
 Name:Rakdos's Return
 ManaCost:X B R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ X B R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X | References$ X | SubAbility$ DBDiscardOpp | SpellDescription$ CARDNAME deals X damage to target opponent. That player discards X cards.
 SVar:DBDiscardOpp:DB$Discard | Defined$ Targeted | NumCards$ X | References$ X | Mode$ TgtChoose
 SVar:X:Count$xPaid
@@ -9,4 +8,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdoss_return.jpg
 SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/188.jpg
 Oracle:Rakdos's Return deals X damage to target opponent. That player discards X cards.
-End

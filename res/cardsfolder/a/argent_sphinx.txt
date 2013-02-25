@@ -1,7 +1,6 @@
 Name:Argent Sphinx
 ManaCost:2 U U
 Types:Creature Sphinx
-Text:no text
 PT:4/3
 K:Flying
 A:AB$ ChangeZone | Cost$ U | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | Activation$ Metalcraft | PrecostDesc$ Metalcraft - | SpellDescription$ Exile CARDNAME. Return it to the battlefield under your control at the beginning of the next end step. Activate this ability only if you control three or more artifacts.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argent_sphinx.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/28.jpg
 Oracle:Flying\nMetalcraft - {U}: Exile Argent Sphinx. Return it to the battlefield under your control at the beginning of the next end step. Activate this ability only if you control three or more artifacts.
-End

@@ -1,7 +1,6 @@
 Name:Lyzolda, the Blood Witch
 ManaCost:1 B R
 Types:Legendary Creature Human Cleric
-Text:no text
 PT:3/1
 A:AB$DealDamage | Cost$ 2 Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBDraw | References$ X | SpellDescription$ CARDNAME deals 2 damage to target creature or player if the sacrificed creature was red. Draw a card if the sacrificed creature was black.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | Defined$ You | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | References$ Y
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lyzolda_the_blood_witch.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/117.jpg
 Oracle:{2}, Sacrifice a creature: Lyzolda, the Blood Witch deals 2 damage to target creature or player if the sacrificed creature was red. Draw a card if the sacrificed creature was black.
-End

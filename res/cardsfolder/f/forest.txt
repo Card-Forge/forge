@@ -1,7 +1,6 @@
 Name:Forest
 ManaCost:no cost
 Types:Basic Land Forest
-Text:no text
 SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
@@ -50,4 +49,3 @@ SetInfo:M12|Land|http://magiccards.info/scans/en/m12/246.jpg|4
 SetInfo:LRW|Land|http://magiccards.info/scans/en/lw/298.jpg|4
 SetInfo:2ED|Land|http://magiccards.info/scans/en/un/280.jpg|3
 Oracle:G
-End

@@ -1,7 +1,6 @@
 Name:Mark of the Vampire
 ManaCost:3 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Lifelink | Description$ Enchanted creature gets +2/+2 and has lifelink.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_the_vampire.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/99.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
-End

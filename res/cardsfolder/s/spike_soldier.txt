@@ -1,7 +1,6 @@
 Name:Spike Soldier
 ManaCost:2 G G
 Types:Creature Spike Soldier
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:3
 A:AB$ PutCounter | Cost$ 2 SubCounter<1/P1P1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_soldier.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/69.jpg
 Oracle:Spike Soldier enters the battlefield with three +1/+1 counters on it.\n{2}, Remove a +1/+1 counter from Spike Soldier: Put a +1/+1 counter on target creature.\nRemove a +1/+1 counter from Spike Soldier: Spike Soldier gets +2/+2 until end of turn.
-End

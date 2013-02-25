@@ -1,7 +1,6 @@
 Name:Boggart Mob
 ManaCost:3 B
 Types:Creature Goblin Warrior
-Text:no text
 PT:5/5
 K:Champion:Goblin
 T:Mode$ DamageDone | ValidSource$ Goblin.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever a Goblin you control deals combat damage to a player, you may put a 1/1 black Goblin Rogue creature token onto the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_mob.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/104.jpg
 Oracle:Champion a Goblin (When this enters the battlefield, sacrifice it unless you exile another Goblin you control. When this leaves the battlefield, that card returns to the battlefield.)\nWhenever a Goblin you control deals combat damage to a player, you may put a 1/1 black Goblin Rogue creature token onto the battlefield.
-End

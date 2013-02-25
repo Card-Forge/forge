@@ -1,11 +1,9 @@
 Name:Downdraft
 ManaCost:2 G
 Types:Enchantment
-Text:no text
 A:AB$ Debuff | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
 A:AB$ DamageAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.withFlying | NumDmg$ 2 | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals 2 damage to each creature with flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/downdraft.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/67.jpg
 Oracle:{G}: Target creature loses flying until end of turn.\nSacrifice Downdraft: Downdraft deals 2 damage to each creature with flying.
-End

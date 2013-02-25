@@ -1,7 +1,6 @@
 Name:Paradise Plume
 ManaCost:4
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInComputerDeck
 T:Mode$ SpellCast | ValidCard$ Card.ChosenColor | OptionalDecider$ You | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell of the chosen color, you may gain 1 life.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paradise_plume.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/260.jpg
 Oracle:As Paradise Plume enters the battlefield, choose a color.\nWhenever a player casts a spell of the chosen color, you may gain 1 life.\n{T}: Add one mana of the chosen color to your mana pool.
-End

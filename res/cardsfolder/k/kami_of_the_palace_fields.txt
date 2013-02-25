@@ -1,7 +1,6 @@
 Name:Kami of the Palace Fields
 ManaCost:5 W
 Types:Creature Spirit
-Text:no text
 PT:3/2
 K:Flying
 K:First Strike
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_palace_fields.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/24.jpg
 Oracle:Flying, first strike\nSoulshift 5 (When this creature dies, you may return target Spirit card with converted mana cost 5 or less from your graveyard to your hand.)
-End

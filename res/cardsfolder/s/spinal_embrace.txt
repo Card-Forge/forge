@@ -1,7 +1,6 @@
 Name:Spinal Embrace
 ManaCost:3 U U B
 Types:Instant
-Text:no text
 A:SP$ GainControl | Cost$ 3 U U B | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | ActivationPhases$ BeginCombat->EndCombat | Untap$ True | AddKWs$ Haste | SubAbility$ DBAnimate | SpellDescription$ Cast CARDNAME only during combat.  Untap target creature you don't control and gain control of it. It gains haste until end of turn.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ DBDelTrig | sVars$ Sac,DBGainLife,X | References$ Sac,DBGainLife,X | SpellDescription$ At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Sac | TriggerDescription$ At the beginning of the next end step, sacrifice CARDNAME. If you do, you gain life equal to its toughness.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinal_embrace.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/276.jpg
 Oracle:Cast Spinal Embrace only during combat.\nUntap target creature you don't control and gain control of it. It gains haste until end of turn. At the beginning of the next end step, sacrifice it. If you do, you gain life equal to its toughness.
-End

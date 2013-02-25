@@ -1,7 +1,6 @@
 Name:Nafs Asp
 ManaCost:G
 Types:Creature Snake
-Text:no text
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ NafsEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player loses 1 life at the beginning of his or her next draw step unless he or she pays 1 before that draw step.
 SVar:NafsEffect:AB$ Effect | Cost$ 0 | Name$ Nafs Asp Effect | EffectOwner$ TriggeredTarget | Duration$ Permanent | Triggers$ DrawTrig | Abilities$ PayUp | SVars$ Bleed,ExileEffect
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/nafs_asp.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/148.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/36.jpg|2
 Oracle:Whenever Nafs Asp deals damage to a player, that player loses 1 life at the beginning of his or her next draw step unless he or she pays {1} before that draw step.
-End

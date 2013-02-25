@@ -1,7 +1,6 @@
 Name:Suppress
 ManaCost:2 B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | Origin$ Hand | Destination$ Exile | Hidden$ True | ExileFaceDown$ True | RememberTargets$ True | RememberChanged$ True | Reveal$ False | SubAbility$ DelTrig | SpellDescription$ Target player exiles all cards from his or her hand face down. At the beginning of the end step of that player's next turn, that player returns those cards to his or her hand.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.IsRemembered | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ Return exiled cards to targeted player's hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suppress.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/52.jpg
 Oracle:Target player exiles all cards from his or her hand face down. At the beginning of the end step of that player's next turn, that player returns those cards to his or her hand.
-End

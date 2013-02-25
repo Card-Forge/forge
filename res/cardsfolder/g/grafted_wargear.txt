@@ -1,7 +1,6 @@
 Name:Grafted Wargear
 ManaCost:3
 Types:Artifact Equipment
-Text:no text
 K:Equip 0
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 2 | Description$ Equipped creature gets +3/+2.
 T:Mode$ Unequip | ValidEquipment$ Card.Self | ValidCard$ Permanent | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME becomes unattached from a permanent, sacrifice that permanent.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grafted_wargear.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/126.jpg
 Oracle:Equipped creature gets +3/+2.\nWhenever Grafted Wargear becomes unattached from a permanent, sacrifice that permanent.\nEquip {0} ({0}: Attach to target creature you control. Equip only as a sorcery.)
-End

@@ -9,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steal_enchantment.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/90.jpg
 Oracle:Enchant enchantment\nYou control enchanted enchantment.
-End

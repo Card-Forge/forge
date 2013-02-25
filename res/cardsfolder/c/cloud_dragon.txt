@@ -1,7 +1,6 @@
 Name:Cloud Dragon
 ManaCost:5 U
 Types:Creature Illusion Dragon
-Text:no text
 PT:5/4
 K:Flying
 K:CARDNAME can block only creatures with flying.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_dragon.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/46.jpg
 Oracle:Flying\nCloud Dragon can block only creatures with flying.
-End

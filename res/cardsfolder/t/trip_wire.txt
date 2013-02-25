@@ -1,11 +1,9 @@
 Name:Trip Wire
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withHorsemanship | TgtPrompt$ Select target creature with horsemanship | SpellDescription$ Destroy target creature with horsemanship.
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_wire.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/156.jpg
 Oracle:Destroy target creature with horsemanship.
-End

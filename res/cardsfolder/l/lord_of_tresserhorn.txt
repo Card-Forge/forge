@@ -1,7 +1,6 @@
 Name:Lord of Tresserhorn
 ManaCost:1 U B R
 Types:Legendary Creature Zombie
-Text:no text
 PT:10/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigLose | TriggerDescription$ When CARDNAME enters the battlefield, you lose 2 life, you sacrifice two creatures, and target opponent draws two cards.
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_tresserhorn.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/193.jpg
 Oracle:When Lord of Tresserhorn enters the battlefield, you lose 2 life, you sacrifice two creatures, and target opponent draws two cards.\n{B}: Regenerate Lord of Tresserhorn.
-End

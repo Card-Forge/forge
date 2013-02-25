@@ -1,7 +1,6 @@
 Name:Metathran Aerostat
 ManaCost:2 U U
 Types:Creature Metathran
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ ChangeZone | Cost$ X U | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | References$ X | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ You may put a creature card with converted mana cost X from your hand onto the battlefield. If you do, return CARDNAME to its owner's hand.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_aerostat.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/61.jpg
 Oracle:Flying\n{X}{U}: You may put a creature card with converted mana cost X from your hand onto the battlefield. If you do, return Metathran Aerostat to its owner's hand.
-End

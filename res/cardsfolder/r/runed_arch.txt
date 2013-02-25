@@ -1,7 +1,6 @@
 Name:Runed Arch
 ManaCost:3
 Types:Artifact
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Pump | Cost$ X T Sac<1/CARDNAME> | KW$ HIDDEN Unblockable | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | SpellDescription$ X target creatures with power 2 or less are unblockable this turn.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_arch.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/309.jpg
 Oracle:Runed Arch enters the battlefield tapped.\n{X}, {T}, Sacrifice Runed Arch: X target creatures with power 2 or less are unblockable this turn.
-End

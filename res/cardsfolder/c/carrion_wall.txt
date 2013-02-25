@@ -1,7 +1,6 @@
 Name:Carrion Wall
 ManaCost:1 B B
 Types:Creature Wall
-Text:no text
 PT:3/2
 K:Defender
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_wall.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/121.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/54.jpg
 Oracle:Defender (This creature can't attack.)\n{1}{B}: Regenerate Carrion Wall.
-End

@@ -1,11 +1,9 @@
 Name:Brushstrider
 ManaCost:1 G
 Types:Creature Beast
-Text:no text
 PT:3/1
 K:Vigilance
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brushstrider.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/117.jpg
 Oracle:Vigilance
-End

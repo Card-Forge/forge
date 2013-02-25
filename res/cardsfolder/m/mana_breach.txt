@@ -1,7 +1,6 @@
 Name:Mana Breach
 ManaCost:2 U
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounceYou | TriggerDescription$ Whenever a player casts a spell, that player returns a land he or she controls to its owner's hand.
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigBounceOpp | Secondary$ True | TriggerDescription$ Whenever a player casts a spell, that player returns a land he or she controls to its owner's hand.
 SVar:TrigBounceYou:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeNum$ 1 | ChangeType$ Land.YouCtrl | Mandatory$ True | DefinedPlayer$ You | Hidden$ True
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_breach.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/38.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/85.jpg
 Oracle:Whenever a player casts a spell, that player returns a land he or she controls to its owner's hand.
-End

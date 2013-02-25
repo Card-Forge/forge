@@ -1,7 +1,6 @@
 Name:Mark of Fury
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste | Description$ Enchanted creature has haste.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_fury.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/93.jpg
 Oracle:Enchant creature\nEnchanted creature has haste.\nAt the beginning of the end step, return Mark of Fury to its owner's hand.
-End

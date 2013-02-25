@@ -1,7 +1,6 @@
 Name:Needle Specter
 ManaCost:1 B B
 Types:Creature Specter
-Text:no text
 PT:1/1
 K:Flying
 K:Wither
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/needle_specter.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/39.jpg
 Oracle:Flying\nWither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever Needle Specter deals combat damage to a player, that player discards that many cards.
-End

@@ -1,7 +1,6 @@
 Name:Bant Sojourners
 ManaCost:1 U W G
 Types:Creature Human Soldier
-Text:no text
 PT:2/4
 K:Cycling:2 W
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME or it's put into a graveyard from the battlefield, you may put a 1/1 white Soldier creature token onto the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sojourners.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/125.jpg
 Oracle:When you cycle Bant Sojourners or it dies, you may put a 1/1 white Soldier creature token onto the battlefield.\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)
-End

@@ -1,7 +1,6 @@
 Name:Exalted Dragon
 ManaCost:4 W W
 Types:Creature Dragon
-Text:no text
 PT:5/5
 K:Flying
 S:Mode$ CantAttackUnless | ValidCard$ Creature.Self | Target$ Player,Planeswalker | Cost$ Sac<1/Land> | Description$ CARDNAME can't attack unless you sacrifice a land.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exalted_dragon.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/5.jpg
 Oracle:Flying\nExalted Dragon can't attack unless you sacrifice a land.
-End

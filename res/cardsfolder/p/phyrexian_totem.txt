@@ -1,7 +1,6 @@
 Name:Phyrexian Totem
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add B to your mana pool.
 A:AB$ Animate | Cost$ 2 B | Defined$ Self | Power$ 5 | Toughness$ 5 | Types$ Creature,Artifact,Horror | Colors$ Black | Keywords$ Trample | SpellDescription$ CARDNAME becomes a 5/5 black Horror artifact creature with trample until end of turn.
 T:Mode$ DamageDone | ValidTarget$ Creature.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME is dealt damage, if it's a creature, sacrifice that many permanents.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_totem.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/261.jpg
 Oracle:{T}: Add {B} to your mana pool.\n{2}{B}: Phyrexian Totem becomes a 5/5 black Horror artifact creature with trample until end of turn.\nWhenever Phyrexian Totem is dealt damage, if it's a creature, sacrifice that many permanents.
-End

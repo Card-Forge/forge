@@ -1,7 +1,6 @@
 Name:Bringer of the Black Dawn
 ManaCost:7 B B
 Types:Creature Bringer
-Text:no text
 PT:5/5
 K:Trample
 SVar:AltCost:Cost$ W U B R G | Description$ You may pay W U B R G rather than pay CARDNAME's mana cost.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_black_dawn.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/43.jpg
 Oracle:You may pay {W}{U}{B}{R}{G} rather than pay Bringer of the Black Dawn's mana cost.\nTrample\nAt the beginning of your upkeep, you may pay 2 life. If you do, search your library for a card, then shuffle your library and put that card on top of it.
-End

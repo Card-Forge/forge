@@ -1,7 +1,6 @@
 Name:Dusk Urchins
 ManaCost:2 B
 Types:Creature Ouphe
-Text:no text
 PT:4/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a -1/-1 counter on it.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a -1/-1 counter on it.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_urchins.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/65.jpg
 Oracle:Whenever Dusk Urchins attacks or blocks, put a -1/-1 counter on it.\nWhen Dusk Urchins dies, draw a card for each -1/-1 counter on it.
-End

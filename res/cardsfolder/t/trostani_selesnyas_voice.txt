@@ -1,7 +1,6 @@
 Name:Trostani, Selesnya's Voice
 ManaCost:G G W W
 Types:Legendary Creature Dryad
-Text:no text
 PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ Life | References$ Life
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trostani_selesnyas_voice.jpg
 SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/206.jpg
 Oracle:Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.\n{1}{G}{W}, {T}: Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-End

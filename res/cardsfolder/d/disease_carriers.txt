@@ -1,7 +1,6 @@
 Name:Disease Carriers
 ManaCost:2 B B
 Types:Creature Rat
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target creature gets -2/-2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disease_carriers.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/57.jpg
 Oracle:When Disease Carriers dies, target creature gets -2/-2 until end of turn.
-End

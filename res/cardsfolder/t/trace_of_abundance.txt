@@ -1,7 +1,6 @@
 Name:Trace of Abundance
 ManaCost:RW G
 Types:Enchantment Aura
-Text:no text
 K:Enchant Land
 A:SP$ Attach | Cost$ RW G |  ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddKeyword$ Shroud | Description$ Enchanted land has shroud. (It can't be the target of spells or abilities.)
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trace_of_abundance.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/142.jpg
 Oracle:Enchant land\nEnchanted land has shroud. (It can't be the target of spells or abilities.)\nWhenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool (in addition to the mana the land produces).
-End

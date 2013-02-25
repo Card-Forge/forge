@@ -1,10 +1,8 @@
 Name:Watchwolf
 ManaCost:W G
 Types:Creature Wolf
-Text:no text
 PT:3/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83625.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/239.jpg
 Oracle:
-End

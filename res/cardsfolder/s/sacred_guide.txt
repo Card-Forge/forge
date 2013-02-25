@@ -1,7 +1,6 @@
 Name:Sacred Guide
 ManaCost:W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ DigUntil | Cost$ 1 W Sac<1/CARDNAME>  | Valid$ Card.White | ValidDescription$ white | FoundDestination$ Hand | RevealedDestination$ Exile | SpellDescription$ Reveal cards from the top of your library until you reveal a white card. Put that card into your hand and exile all other cards revealed this way.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_guide.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/250.jpg
 Oracle:{1}{W}, Sacrifice Sacred Guide: Reveal cards from the top of your library until you reveal a white card. Put that card into your hand and exile all other cards revealed this way.
-End

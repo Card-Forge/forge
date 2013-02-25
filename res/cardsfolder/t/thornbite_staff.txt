@@ -1,7 +1,6 @@
 Name:Thornbite Staff
 ManaCost:2
 Types:Tribal Artifact Shaman Equipment
-Text:no text
 K:Equip 4
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | AddTrigger$ TrigChangeZone | AddSVar$ ThornbiteTrigUntap | Description$ Equipped creature has "2, Tap: This creature deals 1 damage to target creature or player" and "Whenever a creature dies, untap this creature."
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Shaman | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Shaman creature enters the battlefield, you may attach CARDNAME to it.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/thornbite_staff.
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/145.jpg
 Oracle:Equipped creature has “{2}, {T}: This creature deals 1 damage to target creature or player” and “Whenever a creature dies, untap this creature.”\nWhenever a Shaman creature enters the battlefield, you may attach Thornbite Staff to it.
 \nEquip {4}
-End

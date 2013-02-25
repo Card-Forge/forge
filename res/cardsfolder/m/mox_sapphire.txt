@@ -1,7 +1,6 @@
 Name:Mox Sapphire
 ManaCost:0
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/265.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/267.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/266.jpg
 Oracle:{T}: Add {U} to your mana pool.
-End

@@ -1,7 +1,6 @@
 Name:Auratouched Mage
 ManaCost:5 W
 Types:Creature Human Wizard
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for an Aura card that could enchant it. If CARDNAME is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle your library.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource | AttachedTo$ Self | ConditionPresent$ Card.Self | SubAbility$ DBChangeZone
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/auratouched_mage
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/1.jpg
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/3.jpg
 Oracle:When Auratouched Mage enters the battlefield, search your library for an Aura card that could enchant it. If Auratouched Mage is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle your library.
-End

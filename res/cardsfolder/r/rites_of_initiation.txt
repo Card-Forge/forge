@@ -1,7 +1,6 @@
 Name:Rites of Initiation
 ManaCost:R
 Types:Instant
-Text:no text
 A:SP$ ChooseNumber | Cost$ R | Defined$ You | Min$ 0 | Max$ MaxChoice | References$ MaxChoice | ListTitle$ Discard how many cards? | SubAbility$ DBDiscard | SpellDescription$ Discard any number of cards at random. Creatures you control get +1/+0 until end of turn for each card discarded this way.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ ChosenInitiation | Mode$ Random | RememberDiscarded$ True | References$ ChosenInitiation | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +Y | SubAbility$ DBCleanup | References$ Y
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rites_of_initiation.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/217.jpg
 Oracle:Discard any number of cards at random. Creatures you control get +1/+0 until end of turn for each card discarded this way.
-End

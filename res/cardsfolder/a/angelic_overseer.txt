@@ -1,7 +1,6 @@
 Name:Angelic Overseer
 ManaCost:3 W W
 Types:Creature Angel
-Text:no text
 PT:5/3
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof & Indestructible | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a Human, CARDNAME has hexproof and is indestructible.
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_overseer.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/3.jpg
 Oracle:Flying\nAs long as you control a Human, Angelic Overseer has hexproof and is indestructible.
-End

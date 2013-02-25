@@ -1,7 +1,6 @@
 Name:Goblin Piledriver
 ManaCost:1 R
 Types:Creature Goblin Warrior
-Text:no text
 PT:1/2
 K:Protection from blue
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn for each other attacking Goblin.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_piledriver.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/205.jpg
 Oracle:Protection from blue\nWhenever Goblin Piledriver attacks, it gets +2/+0 until end of turn for each other attacking Goblin.
-End

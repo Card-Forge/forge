@@ -1,7 +1,6 @@
 Name:Spire Owl
 ManaCost:1 U
 Types:Creature Bird
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, then put them back in any order.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_owl.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/98.jpg
 Oracle:Flying\nWhen Spire Owl enters the battlefield, look at the top four cards of your library, then put them back in any order.
-End

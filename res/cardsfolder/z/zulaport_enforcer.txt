@@ -1,7 +1,6 @@
 Name:Zulaport Enforcer
 ManaCost:B
 Types:Creature Human Warrior
-Text:no text
 PT:1/1
 K:Level up:4
 K:maxLevel:3
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zulaport_enforcer.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/133.jpg
 Oracle:Level up {4} ({4}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n3/3\nLEVEL 3+\n5/5\nZulaport Enforcer can't be blocked except by black creatures.
-End

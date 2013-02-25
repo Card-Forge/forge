@@ -1,7 +1,6 @@
 Name:Buoyancy
 ManaCost:1 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 K:Flash
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/buoyancy.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/63.jpg
 Oracle:Flash\nEnchant creature\nEnchanted creature has flying.
-End

@@ -1,7 +1,6 @@
 Name:Blessed Orator
 ManaCost:3 W
 Types:Creature Human Cleric
-Text:no text
 PT:1/4
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddToughness$ 1 | Description$ Other creatures you control get +0/+1.
 SVar:PlayMain1:TRUE
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_orator.j
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/12.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/6.jpg
 Oracle:Other creatures you control get +0/+1.
-End

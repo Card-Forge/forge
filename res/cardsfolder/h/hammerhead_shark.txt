@@ -1,11 +1,9 @@
 Name:Hammerhead Shark
 ManaCost:1 U
 Types:Creature Fish
-Text:no text
 PT:2/3
 K:CARDNAME can't attack unless defending player controls an Island.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammerhead_shark.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/32.jpg
 Oracle:Hammerhead Shark can't attack unless defending player controls an Island.
-End

@@ -1,11 +1,9 @@
 Name:Samite Sanctuary
 ManaCost:2 W
 Types:Enchantment
-Text:no text
 A:AB$ PreventDamage | Cost$ 2 | ValidTgts$ Creature | Amount$ 1 | TgtPrompt$ Select target creature | AnyPlayer$ True | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature this turn. Any player may activate this ability.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_sanctuary.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/21.jpg
 Oracle:{2}: Prevent the next 1 damage that would be dealt to target creature this turn. Any player may activate this ability.
-End

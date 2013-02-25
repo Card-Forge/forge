@@ -1,7 +1,6 @@
 Name:Field Marshal
 ManaCost:1 W W
 Types:Creature Human Soldier
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Soldier+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | Description$ Other Soldier creatures get +1/+1 and have first strike.
 SVar:PlayMain1:TRUE
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/field_marshal.jp
 SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/5.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/15.jpg
 Oracle:Other Soldier creatures get +1/+1 and have first strike. (They deal combat damage before creatures without first strike.)
-End

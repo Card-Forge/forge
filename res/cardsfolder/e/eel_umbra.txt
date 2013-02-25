@@ -1,7 +1,6 @@
 Name:Eel Umbra
 ManaCost:1 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 K:Flash
 K:Totem armor
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eel_umbra.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/65.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature gets +1/+1.\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
-End

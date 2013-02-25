@@ -1,7 +1,6 @@
 Name:Necromancer's Covenant
 ManaCost:3 W B B
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, exile all creature cards from target player's graveyard, then put a 2/2 black Zombie creature token onto the battlefield for each card exiled this way.
 SVar:TrigChange:DB$ ChangeZoneAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Creature | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ X | References$ X | SubAbility$ DBClearRemember
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancers_covenant.jpg
 SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/82.jpg
 Oracle:When Necromancer's Covenant enters the battlefield, exile all creature cards from target player's graveyard, then put a 2/2 black Zombie creature token onto the battlefield for each card exiled this way.\nZombies you control have lifelink.
-End

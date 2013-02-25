@@ -1,7 +1,6 @@
 Name:Hero of Oxid Ridge
 ManaCost:2 R R
 Types:Creature Human Knight
-Text:no text
 PT:4/2
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBattleCry | TriggerDescription$ Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hero_of_oxid_ridge.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/66.jpg
 Oracle:Haste\nBattle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhenever Hero of Oxid Ridge attacks, creatures with power 1 or less can't block this turn.
-End

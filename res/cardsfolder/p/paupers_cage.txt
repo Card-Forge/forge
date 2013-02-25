@@ -1,7 +1,6 @@
 Name:Paupers' Cage
 ManaCost:3
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ CardsInHand | SVarCompare$ LE2 | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, CARDNAME deals 2 damage to him or her.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 2
 SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paupers_cage.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/279.jpg
 Oracle:At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Paupers' Cage deals 2 damage to him or her.
-End

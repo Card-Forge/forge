@@ -11,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_vapor.jp
 Oracle:Defender (This creature can't attack.)\nPrevent all damage that would be dealt to Wall of Vapor by creatures it's blocking.
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/27.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/84.jpg
-End

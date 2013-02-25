@@ -1,7 +1,6 @@
 Name:Bellowing Fiend
 ManaCost:4 B
 Types:Creature Spirit
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME deals damage to a creature, CARDNAME deals 3 damage to that creature's controller and 3 damage to you.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/bellowing_fiend.
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/2.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/119.jpg
 Oracle:Flying\nWhenever Bellowing Fiend deals damage to a creature, Bellowing Fiend deals 3 damage to that creature's controller and 3 damage to you.
-End

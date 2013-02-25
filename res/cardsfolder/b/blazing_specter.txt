@@ -1,7 +1,6 @@
 Name:Blazing Specter
 ManaCost:2 B R
 Types:Creature Specter
-Text:no text
 PT:2/2
 K:Flying
 K:Haste
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_specter.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/236.jpg
 Oracle:Flying, haste\nWhenever Blazing Specter deals combat damage to a player, that player discards a card.
-End

@@ -1,7 +1,6 @@
 Name:Wayfaring Temple
 ManaCost:1 G W
 Types:Creature Elemental
-Text:no text
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wayfaring_temple.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/209.jpg
 Oracle:Wayfaring Temple's power and toughness are each equal to the number of creatures you control.\nWhenever Wayfaring Temple deals combat damage to a player, populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-End

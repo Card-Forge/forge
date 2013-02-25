@@ -1,11 +1,9 @@
 Name:Hold the Gates
 ManaCost:2 W
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ X | AddKeyword$ Vigilance | References$ X | Description$ Creatures you control get +0/+1 for each Gate you control and have vigilance.
 SVar:X:Count$Valid Gate.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hold_the_gates.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/16.jpg
 Oracle:Creatures you control get +0/+1 for each Gate you control and have vigilance.
-End

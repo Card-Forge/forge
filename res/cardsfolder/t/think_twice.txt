@@ -1,7 +1,6 @@
 Name:Think Twice
 ManaCost:1 U
 Types:Instant
-Text:no text
 K:Flashback 2 U
 A:SP$ Draw | Cost$ 1 U | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/think_twice.jpg
 Oracle:Draw a card.\nFlashback {2}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/86.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/83.jpg
-End

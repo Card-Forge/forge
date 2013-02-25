@@ -1,7 +1,6 @@
 Name:Exoskeletal Armor
 ManaCost:1 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +X/+X, where X is the number of creature cards in all graveyards.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exoskeletal_armor.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/114.jpg
 Oracle:Enchant creature\nEnchanted creature gets +X/+X, where X is the number of creature cards in all graveyards.
-End

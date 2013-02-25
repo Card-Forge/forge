@@ -1,7 +1,6 @@
 Name:Elven Warhounds
 ManaCost:3 G
 Types:Creature Hound
-Text:no text
 PT:2/2
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, put that creature on top of its owner's library.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredBlocker | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_warhounds.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/119.jpg
 Oracle:Whenever Elven Warhounds becomes blocked by a creature, put that creature on top of its owner's library.
-End

@@ -1,7 +1,6 @@
 Name:Repentance
 ManaCost:2 W
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | DamageSource$ Targeted | NumDmg$ X | References$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
 SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repentance.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/249.jpg
 Oracle:Target creature deals damage to itself equal to its power.
-End

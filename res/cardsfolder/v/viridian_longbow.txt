@@ -1,7 +1,6 @@
 Name:Viridian Longbow
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
 K:Equip 3
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | Description$ Equipped creature has "Tap: This creature deals 1 damage to target creature or player."
 SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_longbow.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/270.jpg
 Oracle:Equipped creature has "{T}: This creature deals 1 damage to target creature or player."\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
-End

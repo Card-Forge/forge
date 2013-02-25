@@ -1,7 +1,6 @@
 Name:Faceless Butcher
 ManaCost:2 B B
 Types:Creature Nightmare Horror
-Text:no text
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
@@ -13,4 +12,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/60.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/43.jpg
 Oracle:When Faceless Butcher enters the battlefield, exile target creature other than Faceless Butcher.\nWhen Faceless Butcher leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-End

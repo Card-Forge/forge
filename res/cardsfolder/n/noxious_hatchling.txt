@@ -1,7 +1,6 @@
 Name:Noxious Hatchling
 ManaCost:3 BG
 Types:Creature Elemental
-Text:no text
 PT:6/6
 K:etbCounter:M1M1:4
 K:Wither
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_hatchling.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/124.jpg
 Oracle:Noxious Hatchling enters the battlefield with four -1/-1 counters on it.\nWither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.\nWhenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
-End

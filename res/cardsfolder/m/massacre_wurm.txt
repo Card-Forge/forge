@@ -1,7 +1,6 @@
 Name:Massacre Wurm
 ManaCost:3 B B B
 Types:Creature Wurm
-Text:no text
 PT:6/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMassacre | TriggerDescription$ When CARDNAME enters the battlefield, creatures your opponents control get -2/-2 until end of turn.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature an opponent controls is put into a graveyard from the battlefield, that player loses 2 life.
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/massacre_wurm.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/46.jpg
 Oracle:When Massacre Wurm enters the battlefield, creatures your opponents control get -2/-2 until end of turn.\nWhenever a creature an opponent controls dies, that player loses 2 life.
-End

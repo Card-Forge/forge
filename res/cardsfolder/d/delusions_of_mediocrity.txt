@@ -1,7 +1,6 @@
 Name:Delusions of Mediocrity
 ManaCost:3 U
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 10 life.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, you lose 10 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 10
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/delusions_of_med
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/30.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/70.jpg
 Oracle:When Delusions of Mediocrity enters the battlefield, you gain 10 life.\nWhen Delusions of Mediocrity leaves the battlefield, you lose 10 life.
-End

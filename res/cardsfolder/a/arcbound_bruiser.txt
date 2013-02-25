@@ -1,11 +1,9 @@
 Name:Arcbound Bruiser
 ManaCost:5
 Types:Artifact Creature Golem
-Text:no text
 PT:0/0
 K:Modular 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_bruiser.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/94.jpg
 Oracle:Modular 3 (This enters the battlefield with three +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
-End

@@ -1,7 +1,6 @@
 Name:Winged Coatl
 ManaCost:1 G U
 Types:Creature Snake
-Text:no text
 PT:1/1
 K:Flash
 K:Flying
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_coatl.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/105.jpg
 Oracle:Flash\nFlying\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
-End

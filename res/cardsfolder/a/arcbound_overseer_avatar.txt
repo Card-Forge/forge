@@ -1,7 +1,6 @@
 Name:Arcbound Overseer Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/+3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ BuildCounter | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a +1/+1 counter on target creature you control.
 SVar:BuildCounter:AB$ PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
@@ -11,4 +10,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/arcbound_overseer_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/arcbound-overseer.jpg
 Oracle:Hand +0, life +3\nAt the beginning of your upkeep, you may put a +1/+1 counter on target creature you control.\nAt the beginning of your upkeep, you may put a charge counter on target permanent you control.
-End

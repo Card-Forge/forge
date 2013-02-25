@@ -1,7 +1,6 @@
 Name:Eldrazi Conscription
 ManaCost:8
 Types:Tribal Enchantment Eldrazi Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 8 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 10 | AddToughness$ 10 | AddKeyword$ Trample & Annihilator 2 | Description$ Enchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defending player sacrifices two permanents.)
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_conscription.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/3.jpg
 Oracle:Enchant creature\nEnchanted creature gets +10/+10 and has trample and annihilator 2. (Whenever it attacks, defending player sacrifices two permanents.)
-End

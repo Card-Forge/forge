@@ -1,7 +1,6 @@
 Name:Word of Binding
 ManaCost:X B B
 Types:Sorcery
-Text:no text
 A:SP$ Tap | Cost$ X B B | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target Creatures | SpellDescription$ Tap X target creatures.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/word_of_binding.
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/17.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/56.jpg
 Oracle:Tap X target creatures.
-End

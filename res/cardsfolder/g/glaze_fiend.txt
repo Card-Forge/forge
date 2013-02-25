@@ -1,7 +1,6 @@
 Name:Glaze Fiend
 ManaCost:1 B
 Types:Artifact Creature Illusion
-Text:no text
 PT:0/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another artifact enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glaze_fiend.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/77.jpg
 Oracle:Flying\nWhenever another artifact enters the battlefield under your control, Glaze Fiend gets +2/+2 until end of turn.
-End

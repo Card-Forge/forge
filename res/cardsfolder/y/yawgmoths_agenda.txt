@@ -1,7 +1,6 @@
 Name:Yawgmoth's Agenda
 ManaCost:3 B B
 Types:Enchantment
-Text:no text
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | CheckSVar$ X | Description$ You can't cast more than one spell each turn.
 SVar:X:Count$ThisTurnCast_Card.YouOwn
 S:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Graveyard | AddHiddenKeyword$ May be played | Description$ You may play cards from your graveyard.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_agenda.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/135.jpg
 Oracle:You can't cast more than one spell each turn.\nYou may play cards from your graveyard.\nIf a card would be put into your graveyard from anywhere, exile it instead.
-End

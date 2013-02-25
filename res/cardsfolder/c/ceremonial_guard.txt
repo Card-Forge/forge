@@ -1,7 +1,6 @@
 Name:Ceremonial Guard
 ManaCost:2 R
 Types:Creature Human Soldier
-Text:no text
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME attacks or blocks, destroy it at end of combat.
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, destroy it at end of combat.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ceremonial_guard.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/182.jpg
 Oracle:When Ceremonial Guard attacks or blocks, destroy it at end of combat.
-End

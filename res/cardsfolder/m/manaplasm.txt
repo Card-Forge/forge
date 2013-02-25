@@ -1,7 +1,6 @@
 Name:Manaplasm
 ManaCost:2 G
 Types:Creature Ooze
-Text:no text
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a spell, CARDNAME gets +X/+X until end of turn, where X is that spell's converted mana cost.
 SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +X | NumDef$ +X | References$ X
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manaplasm.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/138.jpg
 Oracle:Whenever you cast a spell, Manaplasm gets +X/+X until end of turn, where X is that spell's converted mana cost.
-End

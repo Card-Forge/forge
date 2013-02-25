@@ -1,7 +1,6 @@
 Name:Bitterheart Witch
 ManaCost:4 B
 Types:Creature Human Shaman
-Text:no text
 PT:1/2
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle your library.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bitterheart_witch.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/88.jpg
 Oracle:Deathtouch\nWhen Bitterheart Witch dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle your library.
-End

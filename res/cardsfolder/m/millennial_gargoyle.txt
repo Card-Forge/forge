@@ -1,11 +1,9 @@
 Name:Millennial Gargoyle
 ManaCost:4
 Types:Artifact Creature Gargoyle
-Text:no text
 PT:2/2
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/millennial_gargoyle.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/232.jpg
 Oracle:Flying
-End

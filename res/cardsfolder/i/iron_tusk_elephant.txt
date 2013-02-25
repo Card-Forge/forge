@@ -1,11 +1,9 @@
 Name:Iron Tusk Elephant
 ManaCost:4 W
 Types:Creature Elephant
-Text:no text
 PT:3/3
 K:Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3497.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/226.jpg
 Oracle:Trample
-End

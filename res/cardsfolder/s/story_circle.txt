@@ -1,7 +1,6 @@
 Name:Story Circle
 ManaCost:1 W W
 Types:Enchantment
-Text:no text
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 A:AB$ ChooseSource | Cost$ W | Choices$ Card.ChosenColor | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
@@ -16,4 +15,3 @@ SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/51.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/48.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/49.jpg
 Oracle:As Story Circle enters the battlefield, choose a color.\n{W}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
-End

@@ -1,7 +1,6 @@
 Name:Shambling Remains
 ManaCost:1 B R
 Types:Creature Zombie Horror
-Text:no text
 PT:4/3
 K:CARDNAME can't block.
 K:Unearth:B R
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shambling_remains.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/124.jpg
 Oracle:Shambling Remains can't block.\nUnearth {B}{R} ({B}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-End

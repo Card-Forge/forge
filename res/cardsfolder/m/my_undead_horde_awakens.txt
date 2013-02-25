@@ -1,7 +1,6 @@
 Name:My Undead Horde Awakens
 ManaCost:no cost
 Types:Ongoing Scheme
-Text:no text
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigNecromancy | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step, you may put target creature card from an opponent's graveyard onto the battlefield under your control.
 SVar:TrigNecromancy:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.OppCtrl | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True
 T:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigAbandon | TriggerZones$ Command | TriggerDescription$ When a creature put onto the battlefield with this scheme dies, abandon this scheme.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/my_undead_horde_awakens.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/my-undead-horde-awakens.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nAt the beginning of your end step, you may put target creature card from an opponent's graveyard onto the battlefield under your control.\nWhen a creature put onto the battlefield with this scheme dies, abandon this scheme.
-End

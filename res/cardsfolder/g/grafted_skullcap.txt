@@ -1,7 +1,6 @@
 Name:Grafted Skullcap
 ManaCost:4
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your end step, discard your hand.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/grafted_skullcap
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/296.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/298.jpg
 Oracle:At the beginning of your draw step, draw an additional card.\nAt the beginning of your end step, discard your hand.
-End

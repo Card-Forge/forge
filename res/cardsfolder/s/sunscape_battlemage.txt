@@ -1,7 +1,6 @@
 Name:Sunscape Battlemage
 ManaCost:2 W
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 K:Kicker 2 U
 K:Kicker 1 G
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscape_battlemage.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/16.jpg
 Oracle:Kicker {1}{G} and/or {2}{U} (You may pay an additional {1}{G} and/or {2}{U} as you cast this spell.)\nWhen Sunscape Battlemage enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.\nWhen Sunscape Battlemage enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
-End

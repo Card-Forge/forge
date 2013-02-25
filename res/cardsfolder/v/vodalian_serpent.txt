@@ -1,7 +1,6 @@
 Name:Vodalian Serpent
 ManaCost:3 U
 Types:Creature Serpent
-Text:no text
 PT:2/2
 K:CARDNAME can't attack unless defending player controls an Island.
 K:Kicker 2
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_serpent.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/86.jpg
 Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nVodalian Serpent can't attack unless defending player controls an Island.\nIf Vodalian Serpent was kicked, it enters the battlefield with four +1/+1 counters on it.
-End

@@ -1,10 +1,8 @@
 Name:Hallowed Burial
 ManaCost:3 W W
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 3 W W | ChangeType$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 |SpellDescription$ Put all creatures on the bottom of their owners' libraries.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_burial.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/7.jpg
 Oracle:Put all creatures on the bottom of their owners' libraries.
-End

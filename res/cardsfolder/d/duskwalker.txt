@@ -1,7 +1,6 @@
 Name:Duskwalker
 ManaCost:B
 Types:Creature Human Minion
-Text:no text
 PT:1/1
 K:Kicker 3 B
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ GatherDust | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with fear. (It can't be blocked except by artifact creatures and/or black creatures.)
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskwalker.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/104.jpg
 Oracle:Kicker {3}{B} (You may pay an additional {3}{B} as you cast this spell.)\nIf Duskwalker was kicked, it enters the battlefield with two +1/+1 counters on it and with fear. (It can't be blocked except by artifact creatures and/or black creatures.)
-End

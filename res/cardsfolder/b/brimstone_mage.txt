@@ -1,7 +1,6 @@
 Name:Brimstone Mage
 ManaCost:2 R
 Types:Creature Human Shaman
-Text:no text
 PT:2/2
 K:Level up:3 R
 K:maxLevel:3
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brimstone_mage.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/137.jpg
 Oracle:Level up {3}{R} ({3}{R}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n2/3\n{T}: Brimstone Mage deals 1 damage to target creature or player.\nLEVEL 3+\n2/4\n{T}: Brimstone Mage deals 3 damage to target creature or player.
-End

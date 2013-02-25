@@ -1,7 +1,6 @@
 Name:Lifespinner
 ManaCost:3 G
 Types:Creature Spirit
-Text:no text
 PT:3/3
 A:AB$ ChangeZone | Cost$ T Sac<3/Spirit> | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Spirit+Legendary | ChangeNum$ 1 | SpellDescription$ Search your library for a legendary Spirit permanent card and put it onto the battlefield. Then shuffle your library.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifespinner.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/133.jpg
 Oracle:{T}, Sacrifice three Spirits: Search your library for a legendary Spirit permanent card and put it onto the battlefield. Then shuffle your library.
-End

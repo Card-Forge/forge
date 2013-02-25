@@ -1,7 +1,6 @@
 Name:Evolution Vat
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPutCounter | SpellDescription$ Tap target creature and put a +1/+1 counter on it. Until end of turn, that creature gains "2 G U: Double the number of +1/+1 counters on this creature."
 SVar:DBPutCounter:DB$PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$Animate | Defined$ Targeted | Abilities$ ABPutCounter | sVars$ EvolutionVatX
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evolution_vat.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/161.jpg
 Oracle:{3}, {T}: Tap target creature and put a +1/+1 counter on it. Until end of turn, that creature gains "{2}{G}{U}: Double the number of +1/+1 counters on this creature."
-End

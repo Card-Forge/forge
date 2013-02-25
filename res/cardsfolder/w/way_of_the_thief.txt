@@ -1,7 +1,6 @@
 Name:Way of the Thief
 ManaCost:3 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
@@ -10,4 +9,3 @@ SVar:X:Count$Valid Gate.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/way_of_the_thief.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/56.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nEnchanted creature is unblockable as long as you control a Gate.
-End

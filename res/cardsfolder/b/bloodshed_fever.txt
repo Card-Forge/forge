@@ -1,7 +1,6 @@
 Name:Bloodshed Fever
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Enchanted creature attacks each turn if able.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshed_fever.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/84.jpg
 Oracle:Enchant creature\nEnchanted creature attacks each turn if able.
-End

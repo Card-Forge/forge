@@ -1,7 +1,6 @@
 Name:Pentarch Paladin
 ManaCost:2 W W W
 Types:Creature Human Knight
-Text:no text
 PT:3/3
 K:Flanking
 K:ETBReplacement:Other:ChooseColor
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentarch_paladin.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/32.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nAs Pentarch Paladin enters the battlefield, choose a color.\n{W}{W}, {T}: Destroy target permanent of the chosen color.
-End

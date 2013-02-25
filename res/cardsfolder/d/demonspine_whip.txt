@@ -1,7 +1,6 @@
 Name:Demonspine Whip
 ManaCost:B R
 Types:Artifact Equipment
-Text:no text
 K:Equip 1
 A:AB$ Pump | Cost$ X | Defined$ Equipped | NumAtt$ +X | References$ X | SpellDescription$ Equipped creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonspine_whip.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/39.jpg
 Oracle:{X}: Equipped creature gets +X/+0 until end of turn.\nEquip {1}
-End

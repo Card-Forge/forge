@@ -1,7 +1,6 @@
 Name:Gremlin Mine
 ManaCost:1
 Types:Artifact
-Text:no text
 A:AB$ DealDamage | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target artifact creature.
 A:AB$ RemoveCounter | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | CounterType$ CHARGE | CounterNum$ 4 | UpTo$ True | SpellDescription$ Remove up to four charge counters from target noncreature artifact.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gremlin_mine.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/136.jpg
 Oracle:{1}, {T}, Sacrifice Gremlin Mine: Gremlin Mine deals 4 damage to target artifact creature.\n{1}, {T}, Sacrifice Gremlin Mine: Remove up to four charge counters from target noncreature artifact.
-End

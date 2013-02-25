@@ -1,7 +1,6 @@
 Name:Vigilant Martyr
 ManaCost:W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 A:AB$ Counter | Cost$ W W T Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Enchantment | SpellDescription$ Counter target spell that targets an enchantment.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_martyr.
 SVar:Rarity:Uncommon
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/249.jpg
 Oracle:Sacrifice Vigilant Martyr: Regenerate target creature.\n{W}{W}, {T}, Sacrifice Vigilant Martyr: Counter target spell that targets an enchantment.
-End

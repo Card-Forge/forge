@@ -1,7 +1,6 @@
 Name:Gorgon Recluse
 ManaCost:3 B B
 Types:Creature Gorgon
-Text:no text
 PT:2/4
 T:Mode$ AttackerBlocked | ValidCard$ Creature.nonBlack | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
 T:Mode$ Blocks | ValidCard$ Creature.nonBlack | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_recluse.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/111.jpg
 Oracle:Whenever Gorgon Recluse blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.\nMadness {B}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-End

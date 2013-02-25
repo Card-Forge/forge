@@ -1,7 +1,6 @@
 Name:Sulfurous Springs
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPain | SpellDescription$ Add R to your mana pool. CARDNAME deals 1 damage to you.
@@ -15,4 +14,3 @@ SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/352.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/359.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/328.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {B} or {R} to your mana pool. Sulfurous Springs deals 1 damage to you.
-End

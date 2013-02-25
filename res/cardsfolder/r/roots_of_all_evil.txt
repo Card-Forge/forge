@@ -1,11 +1,9 @@
 Name:Roots of All Evil
 ManaCost:no cost
 Types:Scheme
-Text:no text
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GetSaps | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, put five 1/1 green Saproling creature tokens onto the battlefield.
 SVar:GetSaps:DB$ Token | Cost$ 0 | TokenAmount$ 5 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212602&type=card
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/roots-of-all-evil.jpg
 Oracle:When you set this scheme in motion, put five 1/1 green Saproling creature tokens onto the battlefield.
-End

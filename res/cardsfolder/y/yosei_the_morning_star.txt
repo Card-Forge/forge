@@ -1,7 +1,6 @@
 Name:Yosei, the Morning Star
 ManaCost:4 W W
 Types:Legendary Creature Dragon Spirit
-Text:no text
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigPump | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target player skips his or her next untap step. Tap up to five target permanents that player controls.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yosei_the_morning_star.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/50.jpg
 Oracle:Flying\nWhen Yosei, the Morning Star dies, target player skips his or her next untap step. Tap up to five target permanents that player controls.
-End

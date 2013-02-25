@@ -1,7 +1,6 @@
 Name:Ring of Thune
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 1 | AITgts$ Creature.White
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Vigilance | AILogic$ Color:White | Description$ Equipped creature has vigilance.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ThuneCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's white.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_thune.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/213.jpg
 Oracle:Equipped creature has vigilance. (Attacking doesn't cause it to tap.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's white.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-End

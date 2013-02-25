@@ -1,11 +1,9 @@
 Name:Reckless Abandon
 ManaCost:R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ R Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or player.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_abandon.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/94.jpg
 Oracle:As an additional cost to cast Reckless Abandon, sacrifice a creature.\nReckless Abandon deals 4 damage to target creature or player.
-End

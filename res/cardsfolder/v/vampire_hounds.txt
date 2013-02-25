@@ -1,7 +1,6 @@
 Name:Vampire Hounds
 ManaCost:2 B
 Types:Creature Vampire Hound
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ Discard<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_hounds.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/77.jpg
 Oracle:Discard a creature card: Vampire Hounds gets +2/+2 until end of turn.
-End

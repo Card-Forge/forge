@@ -1,7 +1,6 @@
 Name:Stun
 ManaCost:1 R
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
@@ -10,4 +9,3 @@ SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/207.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/172.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/240.jpg
 Oracle:Target creature can't block this turn.\nDraw a card.
-End

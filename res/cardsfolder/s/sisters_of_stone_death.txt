@@ -1,7 +1,6 @@
 Name:Sisters of Stone Death
 ManaCost:4 B B G G
 Types:Legendary Creature Gorgon
-Text:no text
 PT:7/5
 A:AB$ MustBlock | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 A:AB$ ChangeZone | Cost$ B G | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.blockingSource,Creature.blockedBySource | TgtPrompt$ Select target creature blocking Sisters of Stone Death | RememberTargets$ True | SpellDescription$ Exile target creature blocking or blocked by CARDNAME.
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sisters_of_stone_death.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/231.jpg
 Oracle:{G}: Target creature blocks Sisters of Stone Death this turn if able.\n{B}{G}: Exile target creature blocking or blocked by Sisters of Stone Death.\n{2}{B}: Put a creature card exiled with Sisters of Stone Death onto the battlefield under your control.
-End

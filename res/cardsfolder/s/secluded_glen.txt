@@ -8,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/secluded_glen.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/271.jpg
 Oracle:As Secluded Glen enters the battlefield, you may reveal a Faerie card from your hand. If you don't, Secluded Glen enters the battlefield tapped.\n{T}: Add {U} or {B} to your mana pool.
-End

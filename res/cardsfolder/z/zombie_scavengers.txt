@@ -1,11 +1,9 @@
 Name:Zombie Scavengers
 ManaCost:2 B
 Types:Creature Zombie
-Text:no text
 PT:3/1
 A:AB$ Regenerate | Cost$ ExileFromGrave<1/Card.TopGraveyardCreature> | CostDesc$ Exile the top creature card of your graveyard: | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_scavengers.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/29.jpg
 Oracle:Exile the top creature card of your graveyard: Regenerate Zombie Scavengers.
-End

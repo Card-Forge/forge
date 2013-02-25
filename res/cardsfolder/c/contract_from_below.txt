@@ -1,7 +1,6 @@
 Name:Contract from Below
 ManaCost:B
 Types:Sorcery
-Text:no text
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
 A:SP$ Discard | Cost$ B | Mode$ Hand | Defined$ You | SubAbility$ DBAnte | SpellDescription$ Discard your hand, add the top card of your library to the ante, then draw seven cards.
 SVar:DBAnte:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Ante | SubAbility$ DBDraw
@@ -15,4 +14,3 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/5.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/5.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/5.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/5.jpg
-End

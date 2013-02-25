@@ -1,11 +1,9 @@
 Name:Cryptic Gateway
 ManaCost:5
 Types:Artifact
-Text:no text
 A:AB$ ChangeZone | Cost$ tapXType<2/Creature> | RememberCostCards$ True | ChangeType$ Creature.sharesCreatureTypeWith AllRemembered | Origin$ Hand | Destination$ Battlefield | ChangeNum$ 1 | Optional$ True | SpellDescription$ You may put a creature card from your hand that shares a creature type with each creature tapped this way onto the battlefield. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_gateway.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/306.jpg
 Oracle:Tap two untapped creatures you control: You may put a creature card from your hand that shares a creature type with each creature tapped this way onto the battlefield.
-End

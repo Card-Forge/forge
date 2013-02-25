@@ -1,7 +1,6 @@
 Name:Golgari Keyrune
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Animate | Cost$ B G | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Insect | Colors$ Black,Green | Keywords$ Deathtouch | SpellDescription$ CARDNAME becomes a 2/2 black and green Insect artifact creature with deathtouch until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_keyrune.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/229.jpg
 Oracle:{T}: Add {B} or {G} to your mana pool.\n{B}{G}: Golgari Keyrune becomes a 2/2 black and green Insect artifact creature with deathtouch until end of turn.
-End

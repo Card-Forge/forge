@@ -1,7 +1,6 @@
 Name:Cateran Overlord
 ManaCost:4 B B B
 Types:Creature Horror Mercenary
-Text:no text
 PT:7/5
 A:AB$ ChangeZone | Cost$ 6 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE6 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with converted mana cost 6 or less and put it onto the battlefield. Then shuffle your library.
 A:AB$ Regenerate | Cost$ Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_overlord.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/123.jpg
 Oracle:Sacrifice a creature: Regenerate Cateran Overlord.\n{6}, {T}: Search your library for a Mercenary permanent card with converted mana cost 6 or less and put it onto the battlefield. Then shuffle your library.
-End

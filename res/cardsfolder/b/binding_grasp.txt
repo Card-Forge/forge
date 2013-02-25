@@ -12,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/binding_grasp.jp
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/74.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/60.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, sacrifice Binding Grasp unless you pay {1}{U}.\nYou control enchanted creature.\nEnchanted creature gets +0/+1.
-End

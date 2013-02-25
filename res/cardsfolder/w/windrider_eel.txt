@@ -1,7 +1,6 @@
 Name:Windrider Eel
 ManaCost:3 U
 Types:Creature Fish
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windrider_eel.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/78.jpg
 Oracle:Flying\nLandfall - Whenever a land enters the battlefield under your control, Windrider Eel gets +2/+2 until end of turn.
-End

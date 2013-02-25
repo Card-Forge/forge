@@ -1,7 +1,6 @@
 Name:Martyr of Spores
 ManaCost:G
 Types:Creature Human Shaman
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ 1 Reveal<X/Card.Green> Sac<1/CARDNAME> | CostDesc$ 1, Reveal X green cards from your hand, Sacrifice Martyr of Spores: | NumAtt$ ChosenX | NumDef$ ChosenX | References$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets +X/+X until end of turn.
 SVar:X:XChoice
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyr_of_spores.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/113.jpg
 Oracle:{1}, Reveal X green cards from your hand, Sacrifice Martyr of Spores: Target creature gets +X/+X until end of turn.
-End

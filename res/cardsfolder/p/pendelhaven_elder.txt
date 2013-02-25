@@ -1,11 +1,9 @@
 Name:Pendelhaven Elder
 ManaCost:1 G
 Types:Creature Elf Shaman
-Text:no text
 PT:1/1
 A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.YouCtrl+powerEQ1+toughnessEQ1 | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Each 1/1 creature you control gets +1/+2 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pendelhaven_elder.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/209.jpg
 Oracle:{T}: Each 1/1 creature you control gets +1/+2 until end of turn.
-End

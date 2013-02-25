@@ -13,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/aethersnipe.jpg
 Oracle:When AEthersnipe enters the battlefield, return target nonland permanent to its owner's hand.\nEvoke {1}{U}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/39.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/50.jpg
-End

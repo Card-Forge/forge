@@ -1,7 +1,6 @@
 Name:Symbiotic Beast
 ManaCost:4 G G
 Types:Creature Insect Beast
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put four 1/1 green Insect creature tokens onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ G 1 1 Insect | TokenAmount$ 4 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ TriggeredCardController | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/symbiotic_beast.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/287.jpg
 Oracle:When Symbiotic Beast dies, put four 1/1 green Insect creature tokens onto the battlefield.
-End

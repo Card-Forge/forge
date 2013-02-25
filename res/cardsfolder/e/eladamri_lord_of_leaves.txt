@@ -1,7 +1,6 @@
 Name:Eladamri, Lord of Leaves
 ManaCost:G G
 Types:Legendary Creature Elf Warrior
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Elf+Other | AddKeyword$ Forestwalk | Description$ Other Elf creatures have forestwalk.
 S:Mode$ Continuous | Affected$ Card.Elf+Other | AddKeyword$ Shroud | Description$ Other Elves have shroud. (They can't be the targets of spells or abilities.)
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/117.jpg
 Oracle:Other Elf creatures have forestwalk.\nOther Elves have shroud. (They can't be the targets of spells or abilities.)
-End

@@ -1,7 +1,6 @@
 Name:Biomass Mutation
 ManaCost:X GU GU
 Types:Instant
-Text:no text
 A:SP$ AnimateAll | Cost$ X GU GU | Power$ X | Toughness$ X | References$ X | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control become X/X until end of turn.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biomass_mutation.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/213.jpg
 Oracle:Creatures you control become X/X until end of turn.
-End

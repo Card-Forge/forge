@@ -1,11 +1,9 @@
 Name:Mist Leopard
 ManaCost:3 G
 Types:Creature Cat
-Text:no text
 PT:3/2
 K:Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_leopard.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/193.jpg
 Oracle:Shroud (This creature can't be the target of spells or abilities.)
-End

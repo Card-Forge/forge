@@ -1,7 +1,6 @@
 Name:Divine Reckoning
 ManaCost:2 W W
 Types:Sorcery
-Text:no text
 K:Flashback 5 W W
 A:SP$ RepeatEach | Cost$ 2 W W | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBDestroyAll | SpellDescription$ Each player chooses a creature he or she controls. Destroy the rest.
 SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | RememberChosen$ True
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_reckoning.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/10.jpg
 Oracle:Each player chooses a creature he or she controls. Destroy the rest.\nFlashback {5}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

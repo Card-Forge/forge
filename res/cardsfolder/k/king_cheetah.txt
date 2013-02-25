@@ -1,7 +1,6 @@
 Name:King Cheetah
 ManaCost:3 G
 Types:Creature Cat
-Text:no text
 PT:3/2
 K:Flash
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/king_cheetah.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/60.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/250.jpg
 Oracle:Flash
-End

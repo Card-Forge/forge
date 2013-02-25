@@ -1,7 +1,6 @@
 Name:Battle Strain
 ManaCost:1 R
 Types:Enchantment
-Text:no text
 T:Mode$ Blocks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature blocks, CARDNAME deals 1 damage to that creature's controller.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredBlockerController | NumDmg$ 1
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_strain.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/177.jpg
 Oracle:Whenever a creature blocks, Battle Strain deals 1 damage to that creature's controller.
-End

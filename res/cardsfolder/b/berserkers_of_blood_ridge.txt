@@ -1,7 +1,6 @@
 Name:Berserkers of Blood Ridge
 ManaCost:4 R
 Types:Creature Human Berserker
-Text:no text
 PT:4/4
 K:CARDNAME attacks each turn if able.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/berserkers_of_bl
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/124.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/126.jpg
 Oracle:Berserkers of Blood Ridge attacks each turn if able.
-End

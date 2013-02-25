@@ -1,7 +1,6 @@
 Name:Homarid
 ManaCost:2 U
 Types:Creature Homarid
-Text:no text
 PT:2/2
 K:etbCounter:TIDE:1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a tide counter on CARDNAME.
@@ -15,4 +14,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/38.jpg|4
 Oracle:Homarid enters the battlefield with a tide counter on it.\nAt the beginning of your upkeep, put a tide counter on Homarid.\nAs long as there is exactly one tide counter on Homarid, it gets -1/-1.\nAs long as there are exactly three tide counters on Homarid, it gets +1/+1.\nWhenever there are four tide counters on Homarid, remove all tide counters from it.
-End

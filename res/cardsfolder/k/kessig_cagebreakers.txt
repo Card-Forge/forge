@@ -1,7 +1,6 @@
 Name:Kessig Cagebreakers
 ManaCost:4 G
 Types:Creature Human Rogue
-Text:no text
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, put a 2/2 green Wolf creature token onto the battlefield tapped and attacking for each creature card in your graveyard.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ G 2 2 Wolf | TokenAmount$ X | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | TokenTapped$ True | TokenAttacking$ True | References$ X
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_cagebreakers.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/189.jpg
 Oracle:Whenever Kessig Cagebreakers attacks, put a 2/2 green Wolf creature token onto the battlefield tapped and attacking for each creature card in your graveyard.
-End

@@ -1,10 +1,8 @@
 Name:Fire Ambush
 ManaCost:1 R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Three_Kingdoms/fire_ambush.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/111.jpg
 Oracle:Fire Ambush deals 3 damage to target creature or player.
-End

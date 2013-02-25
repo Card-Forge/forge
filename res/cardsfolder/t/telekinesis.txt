@@ -1,7 +1,6 @@
 Name:Telekinesis
 ManaCost:U U
 Types:Instant
-Text:no text
 A:SP$ Tap | Cost$ U U | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. Prevent all combat damage that would be dealt by that creature this turn. It doesn't untap during its controller's next two untap steps.
 SVar:DBPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SubAbility$ DBPump2
 SVar:DBPump2:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next two untap steps. | Permanent$ True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telekinesis.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/79.jpg
 Oracle:Tap target creature. Prevent all combat damage that would be dealt by that creature this turn. It doesn't untap during its controller's next two untap steps.
-End

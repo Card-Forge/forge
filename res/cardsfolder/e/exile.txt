@@ -1,7 +1,6 @@
 Name:Exile
 ManaCost:2 W
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.attacking+nonWhite | TgtPrompt$ Select target nonwhite attacking creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target nonwhite attacking creature. You gain life equal to its toughness.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardToughness
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/exile.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/21.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/129.jpg
 Oracle:Exile target nonwhite attacking creature. You gain life equal to its toughness.
-End

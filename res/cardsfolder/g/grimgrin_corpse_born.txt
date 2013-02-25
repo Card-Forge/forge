@@ -1,7 +1,6 @@
 Name:Grimgrin, Corpse-Born
 ManaCost:3 U B
 Types:Legendary Creature Zombie Warrior
-Text:no text
 PT:5/5
 K:CARDNAME enters the battlefield tapped.
 K:CARDNAME doesn't untap during your untap step.
@@ -16,4 +15,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grimgrin_corpse_born.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/214.jpg
 Oracle:Grimgrin, Corpse-Born enters the battlefield tapped and doesn't untap during your untap step.\nSacrifice another creature: Untap Grimgrin and put a +1/+1 counter on it.\nWhenever Grimgrin attacks, destroy target creature defending player controls, then put a +1/+1 counter on Grimgrin.
-End

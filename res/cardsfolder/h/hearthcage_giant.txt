@@ -1,7 +1,6 @@
 Name:Hearthcage Giant
 ManaCost:6 R R
 Types:Creature Giant Warrior
-Text:no text
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ R 3 1 Elemental Shaman | TokenName$ Elemental Shaman | TokenColors$ Red | TokenTypes$ Creature,Elemental,Shaman | TokenPower$ 3 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ 2
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hearthcage_giant.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/174.jpg
 Oracle:When Hearthcage Giant enters the battlefield, put two 3/1 red Elemental Shaman creature tokens onto the battlefield.\nSacrifice an Elemental: Target Giant creature gets +3/+1 until end of turn.
-End

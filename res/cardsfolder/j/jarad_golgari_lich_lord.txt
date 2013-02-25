@@ -1,7 +1,6 @@
 Name:Jarad, Golgari Lich Lord
 ManaCost:B B G G
 Types:Legendary Creature Zombie Elf
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each creature card in your graveyard.
 A:AB$ LoseLife | Cost$ 1 B G Sac<1/Creature.Other/creature other than CARDNAME> | Defined$ Player.Opponent | LifeAmount$ LichLeech | References$ LichLeech | SpellDescription$ Each opponent loses life equal to the sacrificed creature's power.
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jarad_golgari_lich_lord.jpg
 SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/174.jpg
 Oracle:Jarad, Golgari Lich Lord gets +1/+1 for each creature card in your graveyard.\n{1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.\nSacrifice a Swamp and a Forest: Return Jarad from your graveyard to your hand.
-End

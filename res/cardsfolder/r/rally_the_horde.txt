@@ -1,7 +1,6 @@
 Name:Rally the Horde
 ManaCost:5 R
 Types:Sorcery
-Text:no text
 A:SP$ Repeat | Cost$ 5 R | RepeatSubAbility$ DBExileThree | RepeatCheckSVar$ X | RepeatSVarCompare$ EQ0 | References$ X | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Put a 1/1 red Warrior creature token onto the battlefield for each nonland card exiled this way.
 SVar:DBExileThree:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBMill1
 SVar:DBMill1:DB$ Mill | RememberMilled$ True | Destination$ Exile | NumCards$ 1 | SubAbility$ DBMill2
@@ -15,4 +14,3 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_horde.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/110.jpg
 Oracle:Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Put a 1/1 red Warrior creature token onto the battlefield for each nonland card exiled this way.
-End

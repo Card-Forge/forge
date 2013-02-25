@@ -1,7 +1,6 @@
 Name:Blood Lust
 ManaCost:1 R
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 R | NumAtt$ +4 | NumDef$ -X | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionDefined$ Targeted | ConditionPresent$ Creature.toughnessLT5 | ConditionCompare$ EQ1 | SubAbility$ DBPump | References$ X
 SVar:DBPump:DB$Pump | NumAtt$ +4 | NumDef$ -4 | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Creature.toughnessGE5 | ConditionCompare$ EQ1 | SpellDescription$ If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1.
 SVar:X:Targeted$CardToughness/Minus.1
@@ -11,4 +10,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/212.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/196.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/135.jpg
 Oracle:If target creature has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1.
-End

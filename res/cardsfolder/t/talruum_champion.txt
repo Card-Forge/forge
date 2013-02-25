@@ -1,7 +1,6 @@
 Name:Talruum Champion
 ManaCost:4 R
 Types:Creature Minotaur
-Text:no text
 PT:3/3
 K:First Strike
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talruum_champion.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/97.jpg
 Oracle:First strike\nWhenever Talruum Champion blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Phyrexian Metamorph
 ManaCost:3 PU
 Types:Artifact Creature Shapeshifter
-Text:no text
 PT:0/0
 K:ETBReplacement:Copy:ChooseCreature:Optional
 SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other,Artifact.Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_metamorph.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/42.jpg
 Oracle:({U/P} can be paid with either {U} or 2 life.)\nYou may have Phyrexian Metamorph enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.
-End

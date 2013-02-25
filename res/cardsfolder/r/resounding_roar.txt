@@ -1,7 +1,6 @@
 Name:Resounding Roar
 ManaCost:1 G
 Types:Instant
-Text:no text
 K:Cycling:5 R G W
 A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When you cycle CARDNAME, target creature gets +6/+6 until end of turn
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resounding_roar.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/144.jpg
 Oracle:Target creature gets +3/+3 until end of turn.\nCycling {5}{R}{G}{W} ({5}{R}{G}{W}, Discard this card: Draw a card.)\nWhen you cycle Resounding Roar, target creature gets +6/+6 until end of turn.
-End

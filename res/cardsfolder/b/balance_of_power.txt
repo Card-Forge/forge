@@ -1,7 +1,6 @@
 Name:Balance of Power
 ManaCost:3 U U
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 3 U U | NumCards$ Y | Defined$ You | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ConditionPresent$ Card.YouDontCtrl | ConditionSVarCompare$ GTX | ConditionZone$ Hand | References$ X,Y | SpellDescription$ If target opponent has more cards in hand than you, draw cards equal to the difference.
 SVar:X:Count$InYourHand
 SVar:Y:Count$InOppHand/Minus.X
@@ -12,4 +11,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/62.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/34.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/42.jpg
 Oracle:If target opponent has more cards in hand than you, draw cards equal to the difference.
-End

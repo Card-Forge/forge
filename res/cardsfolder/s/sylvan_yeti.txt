@@ -1,7 +1,6 @@
 Name:Sylvan Yeti
 ManaCost:2 G G
 Types:Creature Yeti
-Text:no text
 PT:*/4
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
@@ -11,4 +10,3 @@ SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/sylvan_yeti.j
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/146.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/87.jpg
 Oracle:Sylvan Yeti's power is equal to the number of cards in your hand.
-End

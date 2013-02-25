@@ -1,10 +1,8 @@
 Name:Uproot
 ManaCost:3 G
 Types:Sorcery Arcane
-Text:no text
 A:SP$ ChangeZone | Cost$ 3 G | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination $ Library | LibraryPosition$ 0 | SpellDescription$ Put target land on top of its owner's library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uproot.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/149.jpg
 Oracle:Put target land on top of its owner's library.
-End

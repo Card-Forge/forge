@@ -11,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_thirst.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/57.jpg
 Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to him or her.
-End

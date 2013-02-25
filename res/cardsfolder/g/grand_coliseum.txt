@@ -1,7 +1,6 @@
 Name:Grand Coliseum
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBPain | SpellDescription$ Add one mana of any color to your mana pool. CARDNAME deals 1 damage to you.
 SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_coliseum.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/319.jpg
 Oracle:Grand Coliseum enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\n{T}: Add one mana of any color to your mana pool. Grand Coliseum deals 1 damage to you.
-End

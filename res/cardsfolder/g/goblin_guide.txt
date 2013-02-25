@@ -1,7 +1,6 @@
 Name:Goblin Guide
 ManaCost:R
 Types:Creature Goblin Scout
-Text:no text
 PT:2/2
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_guide.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/126.jpg
 Oracle:Haste\nWhenever Goblin Guide attacks, defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand.
-End

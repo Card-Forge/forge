@@ -1,7 +1,6 @@
 Name:Searing Spear Askari
 ManaCost:2 R
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 K:Flanking
 A:AB$ Pump | Cost$ 1 R | KW$ CARDNAME can't be blocked except by two or more creatures. | SpellDescription$ CARDNAME can't be blocked except by two or more creatures this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_spear_askari.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/191.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{R}: Searing Spear Askari can't be blocked except by two or more creatures this turn.
-End

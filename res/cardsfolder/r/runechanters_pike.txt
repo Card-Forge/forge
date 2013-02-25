@@ -1,7 +1,6 @@
 Name:Runechanter's Pike
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | References$ X,Y | AddKeyword$ First Strike | Description$ Equipped creature has first strike and gets +X/+0 where X is the number of instant and sorcery cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Instant/Plus.Y
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runechanters_pike.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/231.jpg
 Oracle:Equipped creature has first strike and gets +X/+0, where X is the number of instant and sorcery cards in your graveyard.\nEquip {2}
-End

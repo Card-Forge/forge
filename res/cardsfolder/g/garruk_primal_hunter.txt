@@ -1,7 +1,6 @@
 Name:Garruk, Primal Hunter
 ManaCost:2 G G G
 Types:Planeswalker Garruk
-Text:no text
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Beast creature token onto the battlefield.
 A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ X | References$ X | SpellDescription$ Draw cards equal to the greatest power among creatures you control.
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/garruk_primal_hu
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/174.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/174.jpg
 Oracle:[+1] Put a 3/3 green Beast creature token onto the battlefield.\n[-3] Draw cards equal to the greatest power among creatures you control.\n[-6] Put a 6/6 green Wurm creature token onto the battlefield for each land you control.
-End

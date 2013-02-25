@@ -1,7 +1,6 @@
 Name:Consecrated Sphinx
 ManaCost:4 U U
 Types:Creature Sphinx
-Text:no text
 PT:4/6
 K:Flying
 T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever an opponent draws a card, you may draw two cards.
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consecrated_sphinx.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/21.jpg
 Oracle:Flying\nWhenever an opponent draws a card, you may draw two cards.
-End

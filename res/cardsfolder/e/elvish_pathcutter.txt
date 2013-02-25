@@ -1,7 +1,6 @@
 Name:Elvish Pathcutter
 ManaCost:3 G
 Types:Creature Elf Scout
-Text:no text
 PT:1/2
 A:AB$ Pump | Cost$ 2 G | ValidTgts$ Creature.elf | TgtPrompt$ Select target Elf creature | KW$ Forestwalk | SpellDescription$ Target Elf creature gains forestwalk until end of turn.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_pathcutter.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/256.jpg
 Oracle:{2}{G}: Target Elf creature gains forestwalk until end of turn.
-End

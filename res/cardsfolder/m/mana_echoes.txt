@@ -1,7 +1,6 @@
 Name:Mana Echoes
 ManaCost:2 R R
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | TriggerController$ You | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever a creature enters the battlefield, you may add X to your mana pool, where X is the number of creatures you control that share a creature type with it.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | RememberObjects$ TriggeredCard | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ 1 | Defined$ You | Amount$ X | References$ X | SubAbility$ DBCleanup
@@ -11,4 +10,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_echoes.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/218.jpg
 Oracle:Whenever a creature enters the battlefield, you may add {X} to your mana pool, where X is the number of creatures you control that share a creature type with it.
-End

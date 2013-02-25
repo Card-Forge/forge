@@ -1,11 +1,9 @@
 Name:Gate to Phyrexia
 ManaCost:B B
 Types:Enchantment
-Text:no text
 A:AB$ Destroy | Cost$ Sac<1/Creature> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | ActivationPhases$ Upkeep | ActivationLimit$ 1 | PlayerTurn$ True | SpellDescription$ Destroy target artifact. Activate this ability only during your upkeep and only once each turn.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gate_to_phyrexia.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/46.jpg
 Oracle:Sacrifice a creature: Destroy target artifact. Activate this ability only during your upkeep and only once each turn.
-End

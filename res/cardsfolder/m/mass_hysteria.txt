@@ -1,7 +1,6 @@
 Name:Mass Hysteria
 ManaCost:R
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Haste | Description$ All creatures have haste.
 SVar:RemRandomDeck:True
 SVar:BuffedBy:Creature
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_hysteria.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/99.jpg
 Oracle:All creatures have haste.
-End

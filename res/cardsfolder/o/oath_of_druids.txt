@@ -6,4 +6,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_druids.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/115.jpg
 Oracle:At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is his or her opponent. The first player may reveal cards from the top of his or her library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.
-End

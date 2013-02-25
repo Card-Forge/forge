@@ -7,4 +7,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simplify.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/269.jpg
 Oracle:Each player sacrifices an enchantment.
-End

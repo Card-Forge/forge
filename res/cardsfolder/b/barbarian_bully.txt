@@ -1,11 +1,9 @@
 Name:Barbarian Bully
 ManaCost:2 R
 Types:Creature Human Barbarian
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ Discard<1/Random> | NumAtt$ 2 | NumDef$ 2 | UnlessCost$ DamageYou<4> | UnlessPayer$ Player | UnlessAI$ Never | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn unless a player has CARDNAME deal 4 damage to him or her. Activate this ability only once each turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_bully.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/79.jpg
 Oracle:Discard a card at random: Barbarian Bully gets +2/+2 until end of turn unless a player has Barbarian Bully deal 4 damage to him or her. Activate this ability only once each turn.
-End

@@ -1,7 +1,6 @@
 Name:Remote Farm
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 K:ETBReplacement:Other:ETBCounters
 SVar:ETBCounters:DB$ PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 2 | SpellDescription$ CARDNAME enters the battlefield with 2 depletion counters on it.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://wizards.com/global/images/magic/general/remote_farm.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/323.jpg
 Oracle:Remote Farm enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Remote Farm: Add {W}{W} to your mana pool. If there are no depletion counters on Remote Farm, sacrifice it.
-End

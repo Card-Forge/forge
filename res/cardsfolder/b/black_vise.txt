@@ -1,7 +1,6 @@
 Name:Black Vise
 ManaCost:1
 Types:Artifact
-Text:no text
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals X damage to that player, where X is the number of cards in his or her hand minus 4.
@@ -15,4 +14,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/236.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/317.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/234.jpg
 Oracle:As Black Vise enters the battlefield, choose an opponent.\nAt the beginning of the chosen player's upkeep, Black Vise deals X damage to that player, where X is the number of cards in his or her hand minus 4.
-End

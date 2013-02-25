@@ -1,7 +1,6 @@
 Name:Primal Command
 ManaCost:3 G G
 Types:Sorcery
-Text:no text
 A:SP$ Charm | Cost$ 3 G G | Choices$ DBGain,DBChange,DBChangeAll,DBSearch | CharmNum$ 2 | SpellDescription$ Choose two - Target player gains 7 life; or put target noncreature permanent on top of its owner's library; or target player shuffles his or her graveyard into his or her library; or search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
 SVar:DBGain:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player to gain life | LifeAmount$ 7 | SpellDescription$ Target player gains 7 life.
 SVar:DBChange:DB$ ChangeZone | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target noncreature permanent on top of its owner's library.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_command.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/233.jpg
 Oracle:Choose two - Target player gains 7 life; or put target noncreature permanent on top of its owner's library; or target player shuffles his or her graveyard into his or her library; or search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
-End

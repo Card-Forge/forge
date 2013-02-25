@@ -10,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/alabaster_dragon
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/118.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/163.jpg
 Oracle:Flying\nWhen Alabaster Dragon dies, shuffle it into its owner's library.
-End

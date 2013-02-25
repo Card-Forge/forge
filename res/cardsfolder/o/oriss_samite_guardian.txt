@@ -1,7 +1,6 @@
 Name:Oriss, Samite Guardian
 ManaCost:1 W W
 Types:Legendary Creature Human Cleric
-Text:no text
 PT:1/3
 A:AB$ Pump | Cost$ T | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Prevent all damage that would be dealt to target creature this turn.
 A:AB$ Effect | Cost$ Discard<1/Card.namedOriss, Samite Guardian> | CostDesc$ Grandeur - Discard another card named CARDNAME:| Name$ Oriss Effect | IsCurse$ True | StaticAbilities$ CantBeCast,CantAttack | ValidTgts$ Player | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SpellDescription$ Target player can't cast spells this turn, and creatures that player controls can't attack this turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oriss_samite_guardian.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/28.jpg
 Oracle:{T}: Prevent all damage that would be dealt to target creature this turn.\nGrandeur - Discard another card named Oriss, Samite Guardian: Target player can't cast spells this turn, and creatures that player controls can't attack this turn.
-End

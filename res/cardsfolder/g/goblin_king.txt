@@ -1,7 +1,6 @@
 Name:Goblin King
 ManaCost:1 R R
 Types:Creature Goblin
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Goblin+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Mountainwalk | Description$ Other Goblin creatures get +1/+1 and have mountainwalk.
 SVar:PlayMain1:TRUE
@@ -19,4 +18,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/185.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/154.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/155.jpg
 Oracle:Other Goblin creatures get +1/+1 and have mountainwalk. (They're unblockable as long as defending player controls a Mountain.)
-End

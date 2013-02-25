@@ -1,7 +1,6 @@
 Name:Gift of Orzhova
 ManaCost:1 WB WB
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 WB WB | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink & Flying | Description$ Enchanted creature gets +1/+1 and has flying and lifelink.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_orzhova.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/219.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has flying and lifelink.
-End

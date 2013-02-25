@@ -1,7 +1,6 @@
 Name:Entangling Trap
 ManaCost:1 W
 Types:Enchantment
-Text:no text
 T:Mode$ Clashed | ValidPlayer$ You | Won$ True | TriggerZones$ Battlefield | Execute$ TrigTapW | TriggerDescription$ Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step. (This ability triggers after the clash ends.)
 SVar:TrigTapW:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.OppCtrl | SubAbility$ TrigTapW2
 SVar:TrigTapW2:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entangling_trap.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/13.jpg
 Oracle:Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step. (This ability triggers after the clash ends.)
-End

@@ -1,7 +1,6 @@
 Name:Roar of the Kha
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ PumpAll | Cost$ 1 W | NumAtt$ 1 | NumDef$ 1 | ValidCards$ Creature.YouCtrl | PreCostDesc$ Choose one : | SpellDescription$ Creatures you control get +1/+1 until end of turn;
 A:SP$ UntapAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | SpellDescription$ or untap all creatures you control.
 A:SP$ UntapAll | Cost$ 2 W W | ValidCards$ Creature.YouCtrl | SubAbility$ DBPump | PrecostDesc$ Entwine 1 W | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_the_kha.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/18.jpg
 Oracle:Choose one - Creatures you control get +1/+1 until end of turn; or untap all creatures you control.\nEntwine {1}{W} (Choose both if you pay the entwine cost.)
-End

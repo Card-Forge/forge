@@ -1,7 +1,6 @@
 Name:Cerulean Wisps
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Blue | OverwriteColors$ True | SubAbility$ DBDraw | SpellDescription$ Target creature becomes blue until end of turn. Untap that creature. Draw a card.
 SVar:DBDraw:DB$Draw | SubAbility$ DBUntap | NumCards$ 1
 SVar:DBUntap:DB$Untap | Defined$ Targeted
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cerulean_wisps.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/31.jpg
 Oracle:Target creature becomes blue until end of turn. Untap that creature.\nDraw a card.
-End

@@ -1,7 +1,6 @@
 Name:Sabertooth Cobra
 ManaCost:2 G
 Types:Creature Snake
-Text:no text
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ PoisonTarget | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, he or she gets a poison counter. That player gets another poison counter at the beginning of his or her next upkeep unless he or she pays 2 before that turn. (A player with ten or more poison counters loses the game.)
 SVar:PoisonTarget:AB$ Poison | Cost$ 0 | Num$ 1 | Defined$ TriggeredTarget | SubAbility$ CobraEffect
@@ -13,4 +12,3 @@ SVar:PayUp:AB$ ChangeZone | Cost$ 2 | Defined$ Self | Origin$ Command | Destinat
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sabertooth_cobra.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/136.jpg
 Oracle:Whenever Sabertooth Cobra deals damage to a player, he or she gets a poison counter. That player gets another poison counter at the beginning of his or her next upkeep unless he or she pays {2} before that turn. (A player with ten or more poison counters loses the game.)
-End

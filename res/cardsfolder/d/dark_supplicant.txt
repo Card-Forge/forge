@@ -1,7 +1,6 @@
 Name:Dark Supplicant
 ManaCost:B
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ ChangeZone | Cost$ Sac<3/Cleric> | Hidden$ True | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard,Hand | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Battlefield | ChangeType$ Card.namedScion of Darkness | SpellDescription$ Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle it.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_supplicant.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/64.jpg
 Oracle:{T}, Sacrifice three Clerics: Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle it.
-End

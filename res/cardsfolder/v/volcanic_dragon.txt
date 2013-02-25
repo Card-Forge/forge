@@ -1,7 +1,6 @@
 Name:Volcanic Dragon
 ManaCost:4 R R
 Types:Creature Dragon
-Text:no text
 PT:4/4
 K:Flying
 K:Haste
@@ -13,4 +12,3 @@ SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/158.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/159.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/214.jpg
 Oracle:Flying\nHaste (This creature can attack and {T} as soon as it comes under your control.)
-End

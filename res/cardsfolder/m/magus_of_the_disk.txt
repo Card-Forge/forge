@@ -1,7 +1,6 @@
 Name:Magus of the Disk
 ManaCost:2 W W
 Types:Creature Human Wizard
-Text:no text
 PT:2/4
 K:CARDNAME enters the battlefield tapped.
 A:AB$ DestroyAll | Cost$ 1 T | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures, and enchantments.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card126298.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/27.jpg
 Oracle:Magus of the Disk enters the battlefield tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments.
-End

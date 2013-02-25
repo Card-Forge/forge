@@ -1,7 +1,6 @@
 Name:Prismatic Boon
 ManaCost:X W U
 Types:Instant
-Text:no text
 A:SP$ Protection | Cost$ X W U | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Creature | TgtPrompt$ Select target creatures | Gains$ Choice | Choices$ AnyColor | SpellDescription$ X target creatures gain protection from the chosen color until end of turn.
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_boon.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/334.jpg
 Oracle:Choose a color. X target creatures gain protection from the chosen color until end of turn.
-End

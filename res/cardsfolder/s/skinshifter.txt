@@ -1,7 +1,6 @@
 Name:Skinshifter
 ManaCost:1 G
 Types:Creature Human Shaman
-Text:no text
 PT:1/1
 A:AB$ Charm | Cost$ G | Choices$ DBRhino,DBBird,DBPlant | CharmNum$ 1 | ActivationLimit$ 1 | SpellDescription$ Choose one - Until end of turn, CARDNAME becomes a 4/4 Rhino and gains trample; or until end of turn, CARDNAME becomes a 2/2 Bird and gains flying; or until end of turn, CARDNAME becomes a 0/8 Plant. Activate this ability only once each turn.
 SVar:DBRhino:DB$Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Rhino | OverwriteTypes$ True | Keywords$ Trample | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 Rhino and gains trample.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skinshifter.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/195.jpg
 Oracle:{G}: Choose one - Until end of turn, Skinshifter becomes a 4/4 Rhino and gains trample; or until end of turn, Skinshifter becomes a 2/2 Bird and gains flying; or until end of turn, Skinshifter becomes a 0/8 Plant. Activate this ability only once each turn.
-End

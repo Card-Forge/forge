@@ -1,7 +1,6 @@
 Name:Lord of Atlantis
 ManaCost:U U
 Types:Creature Merfolk
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Merfolk+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Islandwalk | Description$ Other Merfolk creatures get +1/+1 and have islandwalk.
 SVar:PlayMain1:TRUE
@@ -17,4 +16,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/64.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/100.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/63.jpg
 Oracle:Other Merfolk creatures get +1/+1 and have islandwalk.
-End

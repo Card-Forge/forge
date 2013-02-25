@@ -1,7 +1,6 @@
 Name:Zephyr Falcon
 ManaCost:1 U
 Types:Creature Bird
-Text:no text
 PT:1/1
 K:Flying
 K:Vigilance
@@ -11,4 +10,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/137.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/116.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/86.jpg
 Oracle:Flying, vigilance
-End

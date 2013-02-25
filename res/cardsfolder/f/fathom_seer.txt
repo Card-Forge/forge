@@ -1,7 +1,6 @@
 Name:Fathom Seer
 ManaCost:1 U
 Types:Creature Illusion
-Text:no text
 PT:1/3
 K:Morph:Return<2/Island>
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, draw two cards.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fathom_seer.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/62.jpg
 Oracle:Morph-Return two Islands you control to their owner's hand. (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Fathom Seer is turned face up, draw two cards.
-End

@@ -1,7 +1,6 @@
 Name:Stalking Yeti
 ManaCost:2 R R
 Types:Snow Creature Yeti
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, if it's on the battlefield, it deals damage equal to its power to target creature an opponent controls and that creature deals damage equal to its power to CARDNAME.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | IsPresent$ Card.Self | PresentZone$ Battlefield | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | References$ X | SubAbility$ DBDamage
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_yeti.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/98.jpg
 Oracle:When Stalking Yeti enters the battlefield, if it's on the battlefield, it deals damage equal to its power to target creature an opponent controls and that creature deals damage equal to its power to Stalking Yeti.\n{2}{S}: Return Stalking Yeti to its owner's hand. Activate this ability only any time you could cast a sorcery. ({S} can be paid with one mana from a snow permanent.)
-End

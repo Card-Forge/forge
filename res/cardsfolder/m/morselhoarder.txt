@@ -1,7 +1,6 @@
 Name:Morselhoarder
 ManaCost:4 RG RG
 Types:Creature Elemental
-Text:no text
 PT:6/4
 K:etbCounter:M1M1:2
 A:AB$ Mana | Cost$ SubCounter<1/M1M1> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morselhoarder.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/212.jpg
 Oracle:Morselhoarder enters the battlefield with two -1/-1 counters on it.\nRemove a -1/-1 counter from Morselhoarder: Add one mana of any color to your mana pool.
-End

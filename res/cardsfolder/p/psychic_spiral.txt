@@ -1,7 +1,6 @@
 Name:Psychic Spiral
 ManaCost:4 U
 Types:Instant
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 4 U | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | RememberChanged$ True | SubAbility$ DBMill | SpellDescription$ Shuffle all cards from your graveyard into your library. Target player puts that many cards from the top of his or her library into his or her graveyard.
 SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player to mill | NumCards$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_spiral.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/47.jpg
 Oracle:Shuffle all cards from your graveyard into your library. Target player puts that many cards from the top of his or her library into his or her graveyard.
-End

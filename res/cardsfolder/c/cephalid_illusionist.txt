@@ -1,7 +1,6 @@
 Name:Cephalid Illusionist
 ManaCost:1 U
 Types:Creature Cephalid Wizard
-Text:no text
 PT:1/1
 T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, put the top three cards of your library into your graveyard.
 A:AB$ Pump | Cost$ 2 U T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_illusionist.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/28.jpg
 Oracle:Whenever Cephalid Illusionist becomes the target of a spell or ability, put the top three cards of your library into your graveyard.\n{2}{U}, {T}: Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
-End

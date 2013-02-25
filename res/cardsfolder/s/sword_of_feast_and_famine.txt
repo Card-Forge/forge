@@ -1,7 +1,6 @@
 Name:Sword of Feast and Famine
 ManaCost:3
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Protection from black & Protection from green | Description$ Equipped creature gets +2/+2 and has protection from black and from green.
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, that player discards a card and you untap all lands you control.
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_feast_and_famine.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/138.jpg
 Oracle:Equipped creature gets +2/+2 and has protection from black and from green.\nWhenever equipped creature deals combat damage to a player, that player discards a card and you untap all lands you control.\nEquip {2}
-End

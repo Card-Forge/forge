@@ -1,7 +1,6 @@
 Name:Screeching Sliver
 ManaCost:U
 Types:Creature Sliver
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Mill | Description$ All Slivers have "Tap: Target player puts the top card of his or her library into his or her graveyard."
 SVar:Mill:AB$Mill | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | SpellDescription$ Target player puts the top card of his or her library into his or her graveyard.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_sliver.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/75.jpg
 Oracle:All Slivers have "{T}: Target player puts the top card of his or her library into his or her graveyard."
-End

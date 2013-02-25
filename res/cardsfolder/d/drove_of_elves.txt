@@ -1,7 +1,6 @@
 Name:Drove of Elves
 ManaCost:3 G
 Types:Creature Elf
-Text:no text
 PT:*/*
 K:Hexproof
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of green permanents you control.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drove_of_elves.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/112.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nDrove of Elves's power and toughness are each equal to the number of green permanents you control.
-End

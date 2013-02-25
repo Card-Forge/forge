@@ -1,7 +1,6 @@
 Name:Cabal Executioner
 ManaCost:2 B B
 Types:Creature Human Cleric
-Text:no text
 PT:2/2
 K:Morph:3 B B
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices a creature.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_executioner.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/130.jpg
 Oracle:Whenever Cabal Executioner deals combat damage to a player, that player sacrifices a creature.\nMorph {3}{B}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

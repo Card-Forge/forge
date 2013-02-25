@@ -1,7 +1,6 @@
 Name:Wall of Stone
 ManaCost:1 R R
 Types:Creature Wall
-Text:no text
 PT:0/8
 K:Defender
 SVar:Rarity:Uncommon
@@ -14,4 +13,3 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/249.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/183.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/183.jpg
 Oracle:Defender (This creature can't attack.)
-End

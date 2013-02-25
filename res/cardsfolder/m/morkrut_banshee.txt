@@ -1,7 +1,6 @@
 Name:Morkrut Banshee
 ManaCost:3 B B
 Types:Creature Spirit
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | References$ Morbid | Execute$ TrigPump | TriggerDescription$ Morbid - When CARDNAME enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -4 | NumDef$ -4
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morkrut_banshee.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/110.jpg
 Oracle:Morbid - When Morkrut Banshee enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.
-End

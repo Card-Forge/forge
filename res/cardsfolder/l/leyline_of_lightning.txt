@@ -9,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_lightning.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/68.jpg
 Oracle:If Leyline of Lightning is in your opening hand, you may begin the game with it on the battlefield.\nWhenever you cast a spell, you may pay {1}. If you do, Leyline of Lightning deals 1 damage to target player.
-End

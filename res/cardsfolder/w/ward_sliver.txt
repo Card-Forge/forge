@@ -1,7 +1,6 @@
 Name:Ward Sliver
 ManaCost:4 W
 Types:Creature Sliver
-Text:no text
 PT:2/2
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_sliver.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/25.jpg
 Oracle:As Ward Sliver enters the battlefield, choose a color.\nAll Slivers have protection from the chosen color.
-End

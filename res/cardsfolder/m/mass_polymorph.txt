@@ -1,7 +1,6 @@
 Name:Mass Polymorph
 ManaCost:5 U
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 5 U | ChangeType$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBMassReveal | SpellDescription$ Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards. Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.
 SVar:DBMassReveal:DB$ DigUntil | Amount$ MassX | References$ MassX | Valid$ Creature.YouOwn | ValidDescription$ creature | RevealedDestination$ Library | RevealedLibraryPosition$ 0 | FoundDestination$ Battlefield | SubAbility$ DBMassCleanup
 SVar:DBMassCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMassShuffle
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_polymorph.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/64.jpg
 Oracle:Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards. Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.
-End

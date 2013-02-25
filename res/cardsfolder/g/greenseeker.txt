@@ -1,7 +1,6 @@
 Name:Greenseeker
 ManaCost:G
 Types:Creature Elf Spellshaper
-Text:no text
 PT:1/1
 A:AB$ ChangeZone | Cost$ G T Discard<1/Card> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greenseeker.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/198.jpg
 Oracle:{G}, {T}, Discard a card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
-End

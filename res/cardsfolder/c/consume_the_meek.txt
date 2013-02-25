@@ -1,10 +1,8 @@
 Name:Consume the Meek
 ManaCost:3 B B
 Types:Instant
-Text:no text
 A:SP$ DestroyAll | Cost$ 3 B B | ValidCards$ Creature.cmcLE3 | NoRegen$ True | SpellDescription$ Destroy each creature with converted mana cost 3 or less. They can't be regenerated.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consume_the_meek.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/100.jpg
 Oracle:Destroy each creature with converted mana cost 3 or less. They can't be regenerated.
-End

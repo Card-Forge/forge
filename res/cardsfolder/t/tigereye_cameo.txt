@@ -1,7 +1,6 @@
 Name:Tigereye Cameo
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:RemRandomDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tigereye_cameo.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/314.jpg
 Oracle:{T}: Add {G} or {W} to your mana pool.
-End

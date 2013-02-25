@@ -1,11 +1,9 @@
 Name:Spirit of Resistance
 ManaCost:2 W
 Types:Enchantment
-Text:no text
 S:Mode$ PreventDamage | Target$ You | Condition$ PermanentOfEachColor | Description$ As long as you control a permanent of each color, prevent all damage that would be dealt to you.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_of_resistance.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/38.jpg
 Oracle:As long as you control a permanent of each color, prevent all damage that would be dealt to you.
-End

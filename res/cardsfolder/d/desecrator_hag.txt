@@ -1,7 +1,6 @@
 Name:Desecrator Hag
 ManaCost:2 BG BG
 Types:Creature Hag
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return to your hand the creature card in your graveyard with the greatest power. If two or more cards are tied for greatest power, you choose one of them.
 SVar:TrigReturn:AB$ ChooseCard | Cost$ 0 | Choices$ Creature.yardGreatestPower+YouOwn | Amount$ 1 | ChoiceZone$ Graveyard | SubAbility$ DBChangeZone
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/desecrator_hag.j
 Oracle:When Desecrator Hag enters the battlefield, return to your hand the creature card in your graveyard with the greatest power. If two or more cards are tied for greatest power, you choose one of them.
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/193.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/119.jpg
-End

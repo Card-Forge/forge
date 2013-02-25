@@ -1,7 +1,6 @@
 Name:Ogre Savant
 ManaCost:4 R
 Types:Creature Ogre Wizard
-Text:no text
 PT:3/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, if U was spent to cast Ogre Savant, return target creature to its owner's hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionManaSpent$ U
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_savant.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/70.jpg
 Oracle:When Ogre Savant enters the battlefield, if {U} was spent to cast Ogre Savant, return target creature to its owner's hand.
-End

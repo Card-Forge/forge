@@ -1,7 +1,6 @@
 Name:Flux
 ManaCost:2 U
 Types:Sorcery
-Text:no text
 A:SP$ RepeatEach | Cost$ 2 U | RepeatPlayers$ Player | RepeatSubAbility$ DBFluxDiscard | SubAbility$ DBDraw | SpellDescription$ Each player discards any number of cards, then draws that many cards. Draw a card.
 SVar:DBFluxDiscard:DB$ Discard | Defined$ Player.IsRemembered | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBFluxDraw
 SVar:DBFluxDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | References$ X | SubAbility$ CleanTheFlux
@@ -15,4 +14,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/flux.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/39.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/56.jpg
 Oracle:Each player discards any number of cards, then draws that many cards.\nDraw a card.
-End

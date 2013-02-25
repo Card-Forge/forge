@@ -1,7 +1,6 @@
 Name:Ghost-Lit Redeemer
 ManaCost:W
 Types:Creature Spirit
-Text:no text
 A:AB$ GainLife | Cost$ W T | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 A:AB$ GainLife | Cost$ 1 W Discard<1/CARDNAME> | LifeAmount$ 4 | ActivationZone$ Hand | PrecostDesc$ Channel - | SpellDescription$ You gain 4 life.
 PT:1/1
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74082.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/10.jpg
 Oracle:{W}, {T}: You gain 2 life.\nChannel - {1}{W}, Discard Ghost-Lit Redeemer: You gain 4 life.
-End

@@ -1,7 +1,6 @@
 Name:Remote Isle
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 K:Cycling:2
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/remote_isle.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/324.jpg
 Oracle:Remote Isle enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\nCycling {2} ({2}, Discard this card: Draw a card.)
-End

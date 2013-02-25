@@ -1,7 +1,6 @@
 Name:Pincher Beetles
 ManaCost:2 G
 Types:Creature Insect
-Text:no text
 PT:3/1
 K:Shroud
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/pincher_beetles.
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/138.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/285.jpg
 Oracle:Shroud (This creature can't be the target of spells or abilities.)
-End

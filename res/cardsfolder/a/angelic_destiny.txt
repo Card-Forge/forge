@@ -1,7 +1,6 @@
 Name:Angelic Destiny
 ManaCost:2 W W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 4 | AddToughness$ 4 | AddKeyword$ Flying & First Strike | AddType$ Angel | Description$ Enchanted creature gets +4/+4, has flying and first strike, and is an Angel in addition to its other types.
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_destiny.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/3.jpg
 Oracle:Enchant creature\nEnchanted creature gets +4/+4, has flying and first strike, and is an Angel in addition to its other types.\nWhen enchanted creature dies, return Angelic Destiny to its owner's hand.
-End

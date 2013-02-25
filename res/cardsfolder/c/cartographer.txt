@@ -10,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/cartographer.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/107.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/232.jpg
 Oracle:When Cartographer enters the battlefield, you may return target land card from your graveyard to your hand.
-End

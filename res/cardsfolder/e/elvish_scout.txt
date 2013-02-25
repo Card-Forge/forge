@@ -1,7 +1,6 @@
 Name:Elvish Scout
 ManaCost:G
 Types:Creature Elf Scout
-Text:no text
 PT:1/1
 A:AB$ Untap | Cost$ G T | ValidTgts$ Creature.attacking+YouCtrl | TgtPrompt$ Select target attacking creature you control | SubAbility$ DBPump | SpellDescription$ Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by it this turn.
 SVar:DBPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_scout.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/75.jpg|3
 Oracle:{G}, {T}: Untap target attacking creature you control. Prevent all combat damage that would be dealt to and dealt by it this turn.
-End

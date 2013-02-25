@@ -1,7 +1,6 @@
 Name:Bladewing's Thrall
 ManaCost:2 B B
 Types:Creature Zombie
-Text:no text
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has flying as long as you control a Dragon.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ When a Dragon enters the battlefield, you may return CARDNAME from your graveyard to the battlefield.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladewings_thrall.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/55.jpg
 Oracle:Bladewing's Thrall has flying as long as you control a Dragon.\nWhen a Dragon enters the battlefield, you may return Bladewing's Thrall from your graveyard to the battlefield.
-End

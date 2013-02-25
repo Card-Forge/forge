@@ -1,7 +1,6 @@
 Name:Elvish Berserker
 ManaCost:G
 Types:Creature Elf Berserker
-Text:no text
 PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +X | NumDef$ +X | References$ X
@@ -12,4 +11,3 @@ SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/110.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/237.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/260.jpg
 Oracle:Whenever Elvish Berserker becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
-End

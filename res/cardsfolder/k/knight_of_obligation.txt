@@ -1,11 +1,9 @@
 Name:Knight of Obligation
 ManaCost:3 W
 Types:Creature Human Knight
-Text:no text
 PT:2/4
 K:Vigilance
 K:Extort
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_obligation.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/18.jpg
 Oracle:Vigilance\nExtort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)
-End

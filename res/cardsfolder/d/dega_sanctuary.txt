@@ -1,7 +1,6 @@
 Name:Dega Sanctuary
 ManaCost:2 W
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, if you control a black or red permanent, you gain 2 life. If you control a black permanent and a red permanent, you gain 4 life instead.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBGainLife | References$ X,Y,Z 
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X,Y,Z
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://wizards.com/global/images/magic/general/dega_sanctuary.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/5.jpg
 Oracle:At the beginning of your upkeep, if you control a black or red permanent, you gain 2 life. If you control a black permanent and a red permanent, you gain 4 life instead.
-End

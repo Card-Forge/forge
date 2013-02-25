@@ -1,7 +1,6 @@
 Name:Shield of Kaldra
 ManaCost:4
 Types:Legendary Artifact Equipment
-Text:no text
 K:Equip 4
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ Indestructible | Description$ Equipped creature is indestructible.
 S:Mode$ Continuous | Affected$ Equipment.namedSword of Kaldra,Equipment.namedShield of Kaldra,Equipment.namedHelm of Kaldra | AddHiddenKeyword$ Indestructible | Description$ Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra are indestructible.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_of_kaldra.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/139.jpg
 Oracle:Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra are indestructible.\nEquipped creature is indestructible. ("Destroy" effects and lethal damage don't destroy it.)\nEquip {4}
-End

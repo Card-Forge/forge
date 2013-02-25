@@ -1,7 +1,6 @@
 Name:Sandals of Abdallah
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ Pump | Cost$ 2 T | KW$ Islandwalk | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ AbdallahsSandalsEffect | SpellDescription$ Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy CARDNAME.
 SVar:AbdallahsSandalsEffect:DB$ Effect | Name$ Sandals of Abdallah Effect | Triggers$ SandalWearerDied | SVars$ ExileEffect,SandalsDestroyed | References$ SandalWearerDied,ExileEffect,SandalsDestroyed  | RememberObjects$ Targeted | ImprintCards$ Self
 SVar:SandalWearerDied:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ SandalsDestroyed | TriggerDescription$ When the targeted creature dies this turn, destroy Sandals of Abdallah.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandals_of_abdallah.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/83.jpg
 Oracle:{2}, {T}: Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy Sandals of Abdallah.
-End

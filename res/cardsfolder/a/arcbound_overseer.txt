@@ -1,7 +1,6 @@
 Name:Arcbound Overseer
 ManaCost:8
 Types:Artifact Creature Golem
-Text:no text
 PT:0/0
 K:Modular 6
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on each creature with modular you control.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_overseer.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/99.jpg
 Oracle:At the beginning of your upkeep, put a +1/+1 counter on each creature with modular you control.\nModular 6 (This enters the battlefield with six +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
-End

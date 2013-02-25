@@ -1,7 +1,6 @@
 Name:Phantasmal Mount
 ManaCost:1 U
 Types:Creature Illusion Horse
-Text:no text
 PT:1/1
 K:Flying
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl+toughnessLE2 | TgtPrompt$ Select target creature you control with toughness 2 or less | NumAtt$ +1 | NumDef$ +1 | KW$ Flying | SubAbility$ PhantasmalMountEffect | SpellDescription$ Target creature you control with toughness 2 or less gets +1/+1 and gains flying until end of turn. When CARDNAME leaves the battlefield this turn, sacrifice that creature. When the creature leaves the battlefield this turn, sacrifice CARDNAME.
@@ -17,4 +16,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_mount.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/88.jpg
 Oracle:Flying\n{T}: Target creature you control with toughness 2 or less gets +1/+1 and gains flying until end of turn. When Phantasmal Mount leaves the battlefield this turn, sacrifice that creature. When the creature leaves the battlefield this turn, sacrifice Phantasmal Mount.
-End

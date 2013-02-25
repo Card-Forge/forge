@@ -1,7 +1,6 @@
 Name:Malicious Advice
 ManaCost:X U B
 Types:Instant
-Text:no text
 A:SP$ Tap | Cost$ X U B | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ Tap X target artifacts, creatures, and/or lands. You lose X life. | SubAbility$ Drain
 SVar:Drain:DB$LoseLife | LifeAmount$ X | References$ X
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malicious_advice.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/114.jpg
 Oracle:Tap X target artifacts, creatures, and/or lands. You lose X life.
-End

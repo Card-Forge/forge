@@ -1,7 +1,6 @@
 Name:Moroii
 ManaCost:2 U B
 Types:Creature Vampire
-Text:no text
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moroii.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/216.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you lose 1 life.
-End

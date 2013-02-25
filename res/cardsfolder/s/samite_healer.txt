@@ -1,7 +1,6 @@
 Name:Samite Healer
 ManaCost:1 W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target creature or player this turn.
 SVar:Rarity:Common
@@ -18,4 +17,3 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/40.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/222.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/222.jpg
 Oracle:{T}: Prevent the next 1 damage that would be dealt to target creature or player this turn.
-End

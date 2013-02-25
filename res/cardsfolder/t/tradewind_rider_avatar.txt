@@ -1,7 +1,6 @@
 Name:Tradewind Rider Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+1/+4
 A:AB$ RepeatEach | Cost$ 3 | ActivationZone$ Command | RepeatPlayers$ Player | RepeatSubAbility$ DBBounce | SpellDescription$ Each player returns a permanent he or she controls to its owner's hand unless he or she pays 2 life.
 SVar:DBBounce:DB$ ChangeZone | ChangeType$ Permanent | ChangeNum$ 1 | DefinedPlayer$ Remembered | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | UnlessPayer$ Remembered | UnlessCost$ PayLife<2>
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/tradewind_rider_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/tradewind-rider.jpg
 Oracle:Hand +1, life +4\n{3}: Each player returns a permanent he or she controls to its owner's hand unless he or she pays 2 life.
-End

@@ -1,7 +1,6 @@
 Name:Sorin, Lord of Innistrad
 ManaCost:2 W B
 Types:Planeswalker Sorin
-Text:no text
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenImage$ b 1 1 vampire dka | TokenName$ Vampire | TokenColors$ Black | TokenTypes$ Creature,Vampire | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Lifelink | Planeswalker$ True | SpellDescription$ Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
 A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Name$ Sorin, Lord of Innistrad emblem | Image$ sorin_lord_of_innistrad_emblem | StaticAbilities$ STPump | Planeswalker$ True | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control get +1/+0."
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sorin_lord_of_innistrad.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/142.jpg
 Oracle:[+1] Put a 1/1 black Vampire creature token with lifelink onto the battlefield.\n[-2] You get an emblem with "Creatures you control get +1/+0."\n[-6] Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
-End

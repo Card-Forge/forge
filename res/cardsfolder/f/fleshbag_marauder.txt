@@ -1,7 +1,6 @@
 Name:Fleshbag Marauder
 ManaCost:2 B
 Types:Creature Zombie Warrior
-Text:no text
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices a creature.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Each | SacValid$ Creature
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshbag_maraude
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/83.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/76.jpg
 Oracle:When Fleshbag Marauder enters the battlefield, each player sacrifices a creature.
-End

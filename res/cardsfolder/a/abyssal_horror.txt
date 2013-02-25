@@ -1,7 +1,6 @@
 Name:Abyssal Horror
 ManaCost:4 B B
 Types:Creature Horror
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target player discards two cards.
@@ -12,4 +11,3 @@ SetInfo:USG|Rare|http://magiccards.info/scans/en/us/115.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/63.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/115.jpg
 Oracle:Flying\nWhen Abyssal Horror enters the battlefield, target player discards two cards.
-End

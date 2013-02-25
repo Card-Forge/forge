@@ -1,11 +1,9 @@
 Name:Browbeat
 ManaCost:2 R
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 2 R | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | UnlessCost$ DamageYou<5> | UnlessPayer$ Player | SpellDescription$ Any player may have CARDNAME deal 5 damage to him or her. If no one does, target player draws three cards.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/browbeat.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/56.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/82.jpg
 Oracle:Any player may have Browbeat deal 5 damage to him or her. If no one does, target player draws three cards.
-End

@@ -1,7 +1,6 @@
 Name:Infernal Medusa
 ManaCost:3 B B
 Types:Creature Gorgon
-Text:no text
 PT:2/4
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks a creature, destroy that creature at end of combat.
 T:Mode$ Blocks | ValidCard$ Creature.nonWall | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | TriggerDescription$ Whenever CARDNAME becomes blocked by a non-Wall creature, destroy that creature at end of combat.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_medusa.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/22.jpg
 Oracle:Whenever Infernal Medusa blocks a creature, destroy that creature at end of combat.\nWhenever Infernal Medusa becomes blocked by a non-Wall creature, destroy that creature at end of combat.
-End

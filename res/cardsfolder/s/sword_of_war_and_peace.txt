@@ -1,7 +1,6 @@
 Name:Sword of War and Peace
 ManaCost:3
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Protection from red & Protection from white | Description$ Equipped creature gets +2/+2 and has protection from red and from white.
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, CARDNAME deals damage to that player equal to the number of cards in his or her hand and you gain 1 life for each card in your hand.
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_war_and_peace.jpg
 SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/161.jpg
 Oracle:Equipped creature gets +2/+2 and has protection from red and from white.\nWhenever equipped creature deals combat damage to a player, Sword of War and Peace deals damage to that player equal to the number of cards in his or her hand and you gain 1 life for each card in your hand.\nEquip {2}
-End

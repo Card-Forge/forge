@@ -1,7 +1,6 @@
 Name:Golem Artisan
 ManaCost:5
 Types:Artifact Creature Golem
-Text:no text
 PT:3/3
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Artifact | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target artifact creature gets +1/+1 until end of turn. | TgtPrompt$ Select target artifact creature.
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Artifact | KW$ Flying | SpellDescription$ Target artifact creature gains flying until end of turn. | TgtPrompt$ Select target artifact creature.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golem_artisan.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/159.jpg
 Oracle:{2}: Target artifact creature gets +1/+1 until end of turn.\n{2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Huntmaster of the Fells
 ManaCost:2 R G
 Types:Creature Human Werewolf
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TokenAndLife | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TokenAndLife | Secondary$ True | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.
@@ -20,7 +19,6 @@ Name:Ravager of the Fells
 ManaCost:no cost
 Colors:green,red
 Types:Creature Werewolf
-Text:no text
 PT:4/4
 K:Trample
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ DamageAndMoreDamage | TriggerDescription$ Whenever this creature transforms into CARDNAME, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
@@ -31,4 +29,3 @@ SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravager_of_the_fells.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/140b.jpg
 Oracle:Trample\nWhenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
-End

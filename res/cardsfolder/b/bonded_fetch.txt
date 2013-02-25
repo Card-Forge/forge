@@ -1,7 +1,6 @@
 Name:Bonded Fetch
 ManaCost:2 U
 Types:Creature Homunculus
-Text:no text
 PT:0/2
 K:Defender
 K:Haste
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card132229.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/50.jpg
 Oracle:Defender, haste\n{T}: Draw a card, then discard a card.
-End

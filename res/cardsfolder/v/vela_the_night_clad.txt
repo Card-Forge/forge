@@ -1,7 +1,6 @@
 Name:Vela the Night-Clad
 ManaCost:4 U B
 Types:Legendary Creature Human Wizard
-Text:no text
 PT:4/4
 K:Intimidate
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Intimidate | Description$ Other creatures you control have Intimidate.
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vela_the_night_clad.jpg
 SetInfo:PC2|Mythic|http://magiccards.info/scans/en/pc2/107.jpg
 Oracle:Intimidate\nOther creatures you control have intimidate.\nWhenever Vela the Night-Clad or another creature you control leaves the battlefield, each opponent loses 1 life.
-End

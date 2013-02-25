@@ -1,7 +1,6 @@
 Name:Sarkhan Vol
 ManaCost:2 R G
 Types:Planeswalker Sarkhan
-Text:no text
 Loyalty:4
 A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Haste | SpellDescription$ Creatures you control get +1/+1 and gain haste until end of turn.
 A:AB$ GainControl | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarkhan_vol.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/191.jpg
 Oracle:[+1] Creatures you control get +1/+1 and gain haste until end of turn.\n[-2] Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.\n[-6] Put five 4/4 red Dragon creature tokens with flying onto the battlefield.
-End

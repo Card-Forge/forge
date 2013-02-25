@@ -1,7 +1,6 @@
 Name:Sturmgeist
 ManaCost:3 U U
 Types:Creature Spirit
-Text:no text
 PT:*/*
 K:Flying
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X |  SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sturmgeist.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/82.jpg
 Oracle:Flying\nSturmgeist's power and toughness are each equal to the number of cards in your hand.\nWhenever Sturmgeist deals combat damage to a player, draw a card.
-End

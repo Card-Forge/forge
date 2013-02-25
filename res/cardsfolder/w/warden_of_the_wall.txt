@@ -1,7 +1,6 @@
 Name:Warden of the Wall
 ManaCost:3
 Types:Artifact
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 S:Mode$ Continuous | Affected$ Card.Self | Condition$ NotPlayerTurn | EffectZone$ Battlefield | SetPower$ 2 | SetToughness$ 3 | AddType$ Creature & Gargoyle | AddKeyword$ Flying | Description$ As long as it's not your turn, CARDNAME is a 2/3 Gargoyle artifact creature with flying.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warden_of_the_wall.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/153.jpg
 Oracle:Warden of the Wall enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\nAs long as it's not your turn, Warden of the Wall is a 2/3 Gargoyle artifact creature with flying.
-End

@@ -1,7 +1,6 @@
 Name:Enchantment Alteration
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ U | ValidTgts$ Aura.AttachedTo Creature,Aura.AttachedTo Land | TgtPrompt$ Select target Aura attached to a creature or land | SubAbility$ DBRem | StackDescription$ None | SpellDescription$ Attach target Aura attached to a creature or land to another permanent of that type.
 SVar:DBRem:DB$ PumpAll | ValidCards$ Land.EnchantedBy Targeted,Creature.EnchantedBy Targeted | RememberAllPumped$ True | SubAbility$ ChooseNewHost
 SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Permanent.CanBeEnchantedByTargeted+NotEnchantedByTargeted+sharesCardTypeWith Remembered | ChoiceZone$ Battlefield | SubAbility$ AlterationAttach | AILogic$ AtLeast1
@@ -12,4 +11,3 @@ SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/72.jpg
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/19.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/53.jpg
 Oracle:Attach target Aura attached to a creature or land to another permanent of that type.
-End

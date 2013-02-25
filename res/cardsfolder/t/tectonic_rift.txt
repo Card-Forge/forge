@@ -1,7 +1,6 @@
 Name:Tectonic Rift
 ManaCost:3 R
 Types:Sorcery
-Text:no text
 A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBEffect | SpellDescription$ Destroy target land. Creatures without flying can't block this turn.
 SVar:DBEffect:DB$ Effect | Name$ Tectonic Rift Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying can't block this turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_rift.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/157.jpg
 Oracle:Destroy target land. Creatures without flying can't block this turn.
-End

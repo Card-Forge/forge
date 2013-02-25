@@ -1,7 +1,6 @@
 Name:Momir Vig, Simic Visionary Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/+4
 A:AB$ ChooseCard | Cost$ X Discard<1/Card> | ActivationZone$ Command | AtRandom$ True | Choices$ Creature.cmcEQX | References$ X | Amount$ 1 | SubAbility$ DBToken | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ Put a token onto the battlefield that's a copy of a creature card with converted mana cost X chosen at random. Activate this ability only any time you could cast a sorcery and only once each turn.
 SVar:DBToken:DB$ CopyPermanent | Defined$ ChosenCard | NumCopies$ 1
@@ -10,4 +9,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/momir_vig_simic_visionary_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/momir-vig-simic-visionary.jpg
 Oracle:Hand +0, life +4\n{X}, Discard a card: Put a token onto the battlefield that's a copy of a creature card with converted mana cost X chosen at random. Activate this ability only any time you could cast a sorcery and only once each turn.
-End

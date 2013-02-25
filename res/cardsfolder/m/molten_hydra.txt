@@ -1,7 +1,6 @@
 Name:Molten Hydra
 ManaCost:1 R
 Types:Creature Hydra
-Text:no text
 PT:1/1
 A:AB$ PutCounter | Cost$ 1 R R | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 A:AB$ DealDamage | Cost$ T SubCounter<All/P1P1> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature or player equal to the number of +1/+1 counters removed this way.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_hydra.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/85.jpg
 Oracle:{1}{R}{R}: Put a +1/+1 counter on Molten Hydra.\n{T}, Remove all +1/+1 counters from Molten Hydra: Molten Hydra deals damage to target creature or player equal to the number of +1/+1 counters removed this way.
-End

@@ -1,7 +1,6 @@
 Name:Thought Prison
 ManaCost:5
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may have target player reveal his or her hand. If you do, choose a nonland card from it and exile that card.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Chooser$ You | Imprint$ True | Hidden$ True
 T:Mode$ SpellCast | ValidCard$ Card.cmcEQThoughtX,Card.SharesColorWith Imprinted | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell that shares a color or converted mana cost with the exiled card, CARDNAME deals 2 damage to that player.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_prison.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/261.jpg
 Oracle:Imprint - When Thought Prison enters the battlefield, you may have target player reveal his or her hand. If you do, choose a nonland card from it and exile that card.\nWhenever a player casts a spell that shares a color or converted mana cost with the exiled card, Thought Prison deals 2 damage to that player.
-End

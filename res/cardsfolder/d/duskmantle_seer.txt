@@ -1,7 +1,6 @@
 Name:Duskmantle Seer
 ManaCost:2 U B
 Types:Creature Vampire Wizard
-Text:no text
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your upkeep, each player reveals the top card of his or her library, loses life equal to that card's converted mana cost, then puts it into his or her hand.
@@ -13,4 +12,3 @@ SVar:X:Imprinted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskmantle_seer.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/159.jpg
 Oracle:Flying\nAt the beginning of your upkeep, each player reveals the top card of his or her library, loses life equal to that card's converted mana cost, then puts it into his or her hand.
-End

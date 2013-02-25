@@ -1,7 +1,6 @@
 Name:Spoils of the Vault
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ NameCard | Cost$ B | Defined$ You | SubAbility$ DBDigUntil | SpellDescription$ Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards.
 SVar:DBDigUntil:DB$ DigUntil | Valid$ Card.NamedCard | FoundDestination$ Hand | RevealedDestination$ Exile | ValidDescription$ named card | RememberRevealed$ True | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spoils_of_the_vault.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/78.jpg
 Oracle:Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards.
-End

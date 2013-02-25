@@ -1,7 +1,6 @@
 Name:Caterwauling Boggart
 ManaCost:3 R
 Types:Creature Goblin Shaman
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Goblin.YouCtrl | AddHiddenKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ Each Goblin you control can't be blocked except by two or more creatures.
 S:Mode$ Continuous | Affected$ Elemental.YouCtrl | AddHiddenKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ Each Elemental you control can't be blocked except by two or more creatures.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caterwauling_boggart.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/157.jpg
 Oracle:Each Goblin you control can't be blocked except by two or more creatures.\nEach Elemental you control can't be blocked except by two or more creatures.
-End

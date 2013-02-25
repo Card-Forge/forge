@@ -1,7 +1,6 @@
 Name:Canopy Claws
 ManaCost:G
 Types:Instant
-Text:no text
 K:Flashback G
 A:SP$ Debuff | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_claws.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/108.jpg
 Oracle:Target creature loses flying until end of turn.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

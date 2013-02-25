@@ -15,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_forge.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/81.jpg
 Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.\nWhen Chancellor of the Forge enters the battlefield, put X 1/1 red Goblin creature tokens with haste onto the battlefield, where X is the number of creatures you control.
-End

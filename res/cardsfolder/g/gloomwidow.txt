@@ -1,7 +1,6 @@
 Name:Gloomwidow
 ManaCost:2 G
 Types:Creature Spider
-Text:no text
 PT:3/3
 K:Reach
 K:CARDNAME can block only creatures with flying.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomwidow.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/117.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/180.jpg
 Oracle:Reach\nGloomwidow can block only creatures with flying.
-End

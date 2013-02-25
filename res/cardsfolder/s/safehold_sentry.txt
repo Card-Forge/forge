@@ -1,11 +1,9 @@
 Name:Safehold Sentry
 ManaCost:1 W
 Types:Creature Elf Warrior
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ 2 W Untap | NumDef$ +2 | SpellDescription$ CARDNAME gets +0/+2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_sentry.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/22.jpg
 Oracle:{2}{W}, {Q}: Safehold Sentry gets +0/+2 until end of turn. ({Q} is the untap symbol.)
-End

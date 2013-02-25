@@ -1,7 +1,6 @@
 Name:Radiant Essence
 ManaCost:1 W G
 Types:Creature Spirit
-Text:no text
 PT:2/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | References$ X | Description$ CARDNAME gets +1/+2 as long as an opponent controls a black permanent.
 SVar:X:Count$Valid Creature.OppCtrl+Black
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiant_essence.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/336.jpg
 Oracle:Radiant Essence gets +1/+2 as long as an opponent controls a black permanent.
-End

@@ -1,11 +1,9 @@
 Name:Dispel
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Instant | TgtPrompt$ Select target Instant Spell | SpellDescription$ Counter target instant spell.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispel.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/26.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/36.jpg
 Oracle:Counter target instant spell.
-End

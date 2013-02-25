@@ -1,7 +1,6 @@
 Name:Looming Shade
 ManaCost:2 B
 Types:Creature Shade
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:Rarity:Common
@@ -13,4 +12,3 @@ SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/142.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/153.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/103.jpg
 Oracle:{B}: Looming Shade gets +1/+1 until end of turn.
-End

@@ -1,10 +1,8 @@
 Name:Haunted Fengraf
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ ChangeZone | Cost$ 3 T Sac<1/CARDNAME> | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Hand | Hidden$ True | AtRandom$ True | SpellDescription$ Return a creature card at random from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_fengraf.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/157.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{3}, {T}, Sacrifice Haunted Fengraf: Return a creature card at random from your graveyard to your hand.
-End

@@ -1,7 +1,6 @@
 Name:Elspeth Tirel
 ManaCost:3 W W
 Types:Planeswalker Elspeth
-Text:no text
 Loyalty:4
 A:AB$ GainLife | Cost$ AddCounter<2/LOYALTY> | LifeAmount$ XLife | Planeswalker$ True | References$ XLife | SpellDescription$ You gain 1 life for each creature you control.
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | TokenAmount$ 3 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | Planeswalker$ True | SpellDescription$ Put three 1/1 white Soldier creature tokens onto the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_tirel.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/6.jpg
 Oracle:[+2] You gain 1 life for each creature you control.\n[-2] Put three 1/1 white Soldier creature tokens onto the battlefield.\n[-5] Destroy all other permanents except for lands and tokens. 
-End

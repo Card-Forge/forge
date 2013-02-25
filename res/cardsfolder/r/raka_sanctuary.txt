@@ -1,7 +1,6 @@
 Name:Raka Sanctuary
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | References$ X,Y,Z | Execute$ TrigDmg | TriggerDescription$ At the beginning of your upkeep, if you control a white or blue permanent, CARDNAME deals 1 damage to target creature. If you control a white permanent and a blue permanent, CARDNAME deals 3 damage to that creature instead.
 SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBDmg | References$ X,Y,Z
 SVar:DBDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X,Y,Z
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raka_sanctuary.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/67.jpg
 Oracle:At the beginning of your upkeep, if you control a white or blue permanent, Raka Sanctuary deals 1 damage to target creature. If you control a white permanent and a blue permanent, Raka Sanctuary deals 3 damage to that creature instead.
-End

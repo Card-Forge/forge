@@ -1,7 +1,6 @@
 Name:Lesser Werewolf
 ManaCost:3 B
 Types:Creature Werewolf
-Text:no text
 PT:2/4
 A:AB$ PutCounter | Cost$ B | ConditionDefined$ Self | ConditionPresent$ Creature.powerGE1 | ConditionCompare$ EQ1 | ValidTgts$ Creature.blockedBySource,Creature.blockingSource | TgtPrompt$ Select target creature blocking or blocked by Lesser Werewolf | CounterType$ M0M1 | CounterNum$ 1 | ActivationPhases$ Declare Blockers - Play Instants and Abilities | SubAbility$ DBPump | SpellDescription$ If CARDNAME's power is 1 or more, it gets -1/-0 until end of turn and put a -0/-1 counter on target creature blocking or blocked by CARDNAME. Activate this ability only during the declare blockers step.
 SVar:DBPump:DB$ Pump | NumAtt$ -1 | Defined$ Self | ConditionDefined$ Self | ConditionPresent$ Creature.powerGE1 | ConditionCompare$ EQ1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lesser_werewolf.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/24.jpg
 Oracle:{B}: If Lesser Werewolf's power is 1 or more, it gets -1/-0 until end of turn and put a -0/-1 counter on target creature blocking or blocked by Lesser Werewolf. Activate this ability only during the declare blockers step.
-End

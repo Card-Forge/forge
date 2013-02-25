@@ -1,11 +1,9 @@
 Name:Flowstone Giant
 ManaCost:2 R R
 Types:Creature Giant
-Text:no text
 PT:3/3
 A:AB$ Pump | Cost$ R | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ CARDNAME gets +2/-2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_giant.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/174.jpg
 Oracle:{R}: Flowstone Giant gets +2/-2 until end of turn.
-End

@@ -1,10 +1,8 @@
 Name:Lava Blister
 ManaCost:1 R
 Types:Sorcery
-Text:no text
 A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | UnlessCost$ DamageYou<6> | UnlessPayer$ TargetedController | SpellDescription$ Destroy target nonbasic land unless its controller has CARDNAME deal 6 damage to him or her.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_blister.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/200.jpg
 Oracle:Destroy target nonbasic land unless its controller has Lava Blister deal 6 damage to him or her.
-End

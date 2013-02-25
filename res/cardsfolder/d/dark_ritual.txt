@@ -1,7 +1,6 @@
 Name:Dark Ritual
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ Mana | Cost$ B | Produced$ B | Amount$ 3 | SpellDescription$ Add B B B to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
@@ -18,4 +17,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/15.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/14.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/7.jpg
 Oracle:Add {B}{B}{B} to your mana pool.
-End

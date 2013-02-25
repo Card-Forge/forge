@@ -1,7 +1,6 @@
 Name:Ravaging Riftwurm
 ManaCost:1 G G
 Types:Creature Wurm
-Text:no text
 PT:6/6
 K:Kicker 4
 K:Vanishing:2
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravaging_riftwurm.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/135.jpg
 Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nVanishing 2 (This permanent enters the battlefield with two time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nIf Ravaging Riftwurm was kicked, it enters the battlefield with three additional time counters on it.
-End

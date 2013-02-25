@@ -1,7 +1,6 @@
 Name:Wing Puncture
 ManaCost:G
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | SpellDescription$ Target creature you control deals damage equal to its power to target creature with flying.
 SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ X | DamageSource$ Targeted
 SVar:X:Targeted$CardPower
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_puncture.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/133.jpg
 Oracle:Target creature you control deals damage equal to its power to target creature with flying.
-End

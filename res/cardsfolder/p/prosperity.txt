@@ -1,7 +1,6 @@
 Name:Prosperity
 ManaCost:X U
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ X U | Defined$ Each | NumCards$ X | References$ X | SpellDescription$ Each player draws X cards.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
@@ -11,4 +10,3 @@ SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/40.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/89.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/67.jpg
 Oracle:Each player draws X cards.
-End

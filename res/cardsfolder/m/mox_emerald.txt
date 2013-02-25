@@ -1,7 +1,6 @@
 Name:Mox Emerald
 ManaCost:0
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/261.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/263.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/262.jpg
 Oracle:{T}: Add {G} to your mana pool.
-End

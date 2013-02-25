@@ -1,7 +1,6 @@
 Name:Clay Statue
 ManaCost:4
 Types:Artifact Creature Golem
-Text:no text
 PT:3/1
 A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
@@ -10,4 +9,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/355.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/323.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/9.jpg
 Oracle:{2}: Regenerate Clay Statue.
-End

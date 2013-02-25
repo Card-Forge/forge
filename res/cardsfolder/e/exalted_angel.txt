@@ -1,7 +1,6 @@
 Name:Exalted Angel
 ManaCost:4 W W
 Types:Creature Angel
-Text:no text
 PT:4/5
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exalted_angel.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/28.jpg
 Oracle:Flying\nWhenever Exalted Angel deals damage, you gain that much life.\nMorph {2}{W}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

@@ -1,7 +1,6 @@
 Name:Deviant Glee
 ManaCost:B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | AddAbility$ DeviantGleeTrample | Description$ Enchanted creature gets +2/+1 and has "{R}: This creature gains trample until end of turn."
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deviant_glee.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/65.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 and has "{R}: This creature gains trample until end of turn."
-End

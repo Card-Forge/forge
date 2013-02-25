@@ -1,7 +1,6 @@
 Name:Revive
 ManaCost:1 G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target green card in your graveyard | ValidTgts$ Card.Green+YouCtrl | SpellDescription$ Return target green card from your graveyard to your hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revive.jpg
@@ -9,4 +8,3 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/276.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/187.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/262.jpg
 Oracle:Return target green card from your graveyard to your hand.
-End

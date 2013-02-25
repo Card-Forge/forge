@@ -1,7 +1,6 @@
 Name:Tricks of the Trade
 ManaCost:3 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddHiddenKeyword$ Unblockable | Description$ Enchanted creature gets +2/+0 and is unblockable.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tricks_of_the_trade.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/74.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+0 and is unblockable.
-End

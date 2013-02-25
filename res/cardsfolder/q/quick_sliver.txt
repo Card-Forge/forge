@@ -1,7 +1,6 @@
 Name:Quick Sliver
 ManaCost:1 G
 Types:Creature Sliver
-Text:no text
 PT:1/1
 K:Flash
 S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ Any player may play Sliver cards as though they had flash.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quick_sliver.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/136.jpg
 Oracle:Flash\nAny player may play Sliver cards as though they had flash.
-End

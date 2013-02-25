@@ -1,7 +1,6 @@
 Name:Craw Giant
 ManaCost:3 G G G G
 Types:Creature Giant
-Text:no text
 PT:6/4
 K:Trample
 K:Rampage 2
@@ -12,4 +11,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/147.jpg
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/33.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/76.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/94.jpg
-End

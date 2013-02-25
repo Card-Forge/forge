@@ -1,7 +1,6 @@
 Name:Venarian Gold
 ManaCost:X U U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ X U U | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature and put X sleep counters on it.
@@ -15,4 +14,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venarian_gold.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/83.jpg
 Oracle:Enchant creature\nWhen Venarian Gold enters the battlefield, tap enchanted creature and put X sleep counters on it.\nEnchanted creature doesn't untap during its controller's untap step if it has a sleep counter on it.\nAt the beginning of the upkeep of enchanted creature's controller, remove a sleep counter from that creature.
-End

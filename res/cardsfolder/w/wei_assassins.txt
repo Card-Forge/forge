@@ -1,7 +1,6 @@
 Name:Wei Assassins
 ManaCost:3 B B
 Types:Creature Human Soldier Assassin
-Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, target opponent chooses a creature he or she controls. Destroy it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | ValidTgts$ Opponent | SacValid$ Creature | Destroy$ True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=10583&type=card
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/86.jpg
 Oracle:When Wei Assassins enters the battlefield, target opponent chooses a creature he or she controls. Destroy it.
-End

@@ -1,7 +1,6 @@
 Name:Boneshard Slasher
 ManaCost:1 B
 Types:Creature Horror
-Text:no text
 PT:1/1
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ SpellTarget | AddSVar$ TrigSac | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +2/+2 and has "When CARDNAME becomes the target of a spell or ability, sacrifice it."
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boneshard_slasher.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/50.jpg
 Oracle:Flying\nThreshold - As long as seven or more cards are in your graveyard, Boneshard Slasher gets +2/+2 and has "When Boneshard Slasher becomes the target of a spell or ability, sacrifice it."
-End

@@ -1,7 +1,6 @@
 Name:Addle
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ ChooseColor | Cost$ 1 B | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBRevealDiscard | SpellDescription$ Choose a color. Target player reveals his or her hand and you choose a card of that color from it. That player discards that card.
 SVar:DBRevealDiscard:DB$ Discard | Mode$ RevealYouChoose | NumCards$ 1 | DiscardValid$ Card.ChosenColor | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/addle.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/91.jpg
 Oracle:Choose a color. Target player reveals his or her hand and you choose a card of that color from it. That player discards that card.
-End

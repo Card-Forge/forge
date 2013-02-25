@@ -1,7 +1,6 @@
 Name:Ancient Hydra
 ManaCost:4 R
 Types:Creature Hydra
-Text:no text
 PT:5/1
 K:Fading:5
 A:AB$ DealDamage | Cost$ 1 SubCounter<1/FADE> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_hydra.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/76.jpg
 Oracle:Fading 5 (This creature enters the battlefield with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\n{1}, Remove a fade counter from Ancient Hydra: Ancient Hydra deals 1 damage to target creature or player.
-End

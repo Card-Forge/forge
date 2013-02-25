@@ -1,7 +1,6 @@
 Name:Feral Ridgewolf
 ManaCost:2 R
 Types:Creature Wolf
-Text:no text
 PT:1/2
 K:Trample
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | NumDef$ +0 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_ridgewolf.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/142.jpg
 Oracle:Trample\n{1}{R}: Feral Ridgewolf gets +2/+0 until end of turn.
-End

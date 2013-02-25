@@ -1,7 +1,6 @@
 Name:Hollowhenge Spirit
 ManaCost:3 W
 Types:Creature Spirit
-Text:no text
 PT:2/2
 K:Flash
 K:Flying
@@ -10,4 +9,3 @@ SVar:TrigRemove:AB$ RemoveFromCombat | Cost$ 0 | ValidTgts$ Creature.attacking,C
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hollowhenge_spirit.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/10.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Hollowhenge Spirit enters the battlefield, remove target attacking or blocking creature from combat.
-End

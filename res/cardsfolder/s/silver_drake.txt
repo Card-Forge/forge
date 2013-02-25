@@ -1,7 +1,6 @@
 Name:Silver Drake
 ManaCost:1 U W
 Types:Creature Drake
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a white or blue creature you control to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silver_drake.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/125.jpg
 Oracle:Flying\nWhen Silver Drake enters the battlefield, return a white or blue creature you control to its owner's hand.
-End

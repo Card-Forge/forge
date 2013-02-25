@@ -1,7 +1,6 @@
 Name:Howltooth Hollow
 ManaCost:no cost
 Types:Land
-Text:no text
 K:Hideaway
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.
 SVar:TrigDig:AB$ Dig | Cost$ 0  | Defined$ You | DigNum$ 4 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howltooth_hollow.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/269.jpg
 Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {B} to your mana pool.\n{B}, {T}: You may play the exiled card without paying its mana cost if each player has no cards in hand.
-End

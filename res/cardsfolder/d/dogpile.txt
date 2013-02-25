@@ -1,7 +1,6 @@
 Name:Dogpile
 ManaCost:3 R
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature or player equal to the number of attacking creatures you control.
 SVar:X:Count$Valid Creature.attacking+YouCtrl
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dogpile.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/120.jpg
 Oracle:Dogpile deals damage to target creature or player equal to the number of attacking creatures you control.
-End

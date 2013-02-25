@@ -1,7 +1,6 @@
 Name:Blood Moon
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Nonbasic lands are Mountains.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
@@ -11,4 +10,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/178.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/57.jpg
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/46.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/176.jpg
-End

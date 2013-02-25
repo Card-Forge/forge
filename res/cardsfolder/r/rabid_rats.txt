@@ -1,11 +1,9 @@
 Name:Rabid Rats
 ManaCost:1 B
 Types:Creature Rat
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.blocking | TgtPrompt$ Select target blocking creature | IsCurse$ True | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Target blocking creature gets -1/-1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rabid_rats.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/17.jpg
 Oracle:{T}: Target blocking creature gets -1/-1 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Fallow Wurm
 ManaCost:2 G
 Types:Creature Wurm
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a land card.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | DiscardValid$ Land | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacSelf
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallow_wurm.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/68.jpg
 Oracle:When Fallow Wurm enters the battlefield, sacrifice it unless you discard a land card.
-End

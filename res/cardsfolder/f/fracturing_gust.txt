@@ -1,7 +1,6 @@
 Name:Fracturing Gust
 ManaCost:2 GW GW GW
 Types:Instant
-Text:no text
 A:SP$ DestroyAll | Cost$ 2 GW GW GW | ValidCards$ Artifact,Enchantment | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ X | References$ X
 SVar:X:Remembered$Amount.Twice
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fracturing_gust.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/227.jpg
 Oracle:Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
-End

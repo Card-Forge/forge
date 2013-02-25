@@ -1,7 +1,6 @@
 Name:Druid's Deliverance
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ Effect | Cost$ 1 G | Name$ Druid's Deliverance Effect | StaticAbilities$ STPrevent | AILogic$ Fog | SubAbility$ DBChoose | SpellDescription$ Prevent all combat damage that would be dealt to you this turn. Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | CombatDamage$ True | Target$ You | Description$ Prevent all combat damage that would be dealt to you this turn.
 SVar:DBChoose:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | RememberChosen$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druids_deliverance.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/123.jpg
 Oracle:Prevent all combat damage that would be dealt to you this turn. Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-End

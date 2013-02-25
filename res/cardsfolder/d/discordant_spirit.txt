@@ -1,7 +1,6 @@
 Name:Discordant Spirit
 ManaCost:2 B R
 Types:Creature Spirit
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.Opponent | TriggerZones$ Battlefield | Execute$ GhostCounter | TriggerDescription$ At the beginning of each end step, if it's an opponent's turn, put a +1/+1 counter on CARDNAME for each 1 damage dealt to you this turn.
 SVar:GhostCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/discordant_spirit.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/321.jpg
 Oracle:At the beginning of each end step, if it's an opponent's turn, put a +1/+1 counter on Discordant Spirit for each 1 damage dealt to you this turn.\nAt the beginning of your end step, remove all +1/+1 counters from Discordant Spirit.
-End

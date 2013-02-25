@@ -1,7 +1,6 @@
 Name:Entrails Feaster
 ManaCost:B
 Types:Creature Zombie Cat
-Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may exile a creature card from a graveyard. If you do, put a +1/+1 counter on CARDNAME. If you don't, tap CARDNAME.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Exile | Optional$ True | IsCurse$ True | RememberChanged$ True | Hidden$ True | Chooser$ You | SubAbility$ DBPutCounter
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entrails_feaster.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/143.jpg
 Oracle:At the beginning of your upkeep, you may exile a creature card from a graveyard. If you do, put a +1/+1 counter on Entrails Feaster. If you don't, tap Entrails Feaster.
-End

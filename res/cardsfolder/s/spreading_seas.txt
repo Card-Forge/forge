@@ -1,7 +1,6 @@
 Name:Spreading Seas
 ManaCost:1 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Island | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is an Island.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_seas.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/70.jpg
 Oracle:Enchant land\nWhen Spreading Seas enters the battlefield, draw a card.\nEnchanted land is an Island.
-End

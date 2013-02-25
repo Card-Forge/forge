@@ -1,7 +1,6 @@
 Name:Bull Elephant
 ManaCost:3 G
 Types:Creature Elephant
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return two Forests you control to their owner's hand.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Forest.YouCtrl | ChangeNum$ 2 | RememberChanged$ True | SubAbility$ DBSac
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bull_elephant.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/51.jpg
 Oracle:When Bull Elephant enters the battlefield, sacrifice it unless you return two Forests you control to their owner's hand.
-End

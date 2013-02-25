@@ -1,11 +1,9 @@
 Name:Marisi's Twinclaws
 ManaCost:2 RW G
 Types:Creature Cat Warrior
-Text:no text
 PT:2/4
 K:Double Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marisis_twinclaws.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/140.jpg
 Oracle:Double strike
-End

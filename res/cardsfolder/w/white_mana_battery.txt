@@ -1,7 +1,6 @@
 Name:White Mana Battery
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ PutCounter | Cost$ 2 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ W | Amount$ Y | CostDesc$ Tap, Remove any number of charge counters from CARDNAME: | SpellDescription$ Add W to your mana pool, then add an additional W to your mana pool for each charge counter removed this way.
 SVar:Y:Number$1/Plus.ChosenX
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/white_mana_batte
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/375.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/244.jpg
 Oracle:{2}, {T}: Put a charge counter on White Mana Battery.\n{T}, Remove any number of charge counters from White Mana Battery: Add {W} to your mana pool, then add an additional {W} to your mana pool for each charge counter removed this way.
-End

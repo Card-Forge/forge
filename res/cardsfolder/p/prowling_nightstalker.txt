@@ -8,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prowling_nightstalker.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/23.jpg
 Oracle:Prowling Nightstalker can't be blocked except by black creatures.
-End

@@ -1,7 +1,6 @@
 Name:Stolen Goods
 ManaCost:3 U
 Types:Sorcery
-Text:no text
 A:SP$ DigUntil | Cost$ 3 U | ValidTgts$ Opponent | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBPump | SpellDescription$ Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent without paying its mana cost | PumpZone$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stolen_goods.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/78.jpg
 Oracle:Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost.
-End

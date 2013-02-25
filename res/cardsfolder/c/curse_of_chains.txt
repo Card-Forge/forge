@@ -1,7 +1,6 @@
 Name:Curse of Chains
 ManaCost:1 WU
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 WU | ValidTgts$ Creature | AILogic$ KeepTapped
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of each upkeep, tap enchanted creature.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chains.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/139.jpg
 Oracle:Enchant creature\nAt the beginning of each upkeep, tap enchanted creature.
-End

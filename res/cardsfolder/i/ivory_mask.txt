@@ -1,7 +1,6 @@
 Name:Ivory Mask
 ManaCost:2 W W
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have shroud. (You can't be the target of spells or abilities.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_mask.jpg
@@ -9,4 +8,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/27.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/24.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/23.jpg
 Oracle:You have shroud. (You can't be the target of spells or abilities.)
-End

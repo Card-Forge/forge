@@ -1,7 +1,6 @@
 Name:Anaconda
 ManaCost:3 G
 Types:Creature Snake
-Text:no text
 PT:3/3
 K:Swampwalk
 SVar:Rarity:Uncommon
@@ -11,4 +10,3 @@ SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/81.jpg|2
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/229.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/229.jpg
 Oracle:Swampwalk (This creature is unblockable as long as defending player controls a Swamp.)
-End

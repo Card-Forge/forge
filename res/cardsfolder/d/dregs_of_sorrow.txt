@@ -1,7 +1,6 @@
 Name:Dregs of Sorrow
 ManaCost:X 4 B
 Types:Sorcery
-Text:no text
 A:SP$ Destroy | Cost$ X 4 B | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonBlack creature | References$ X,MaxTgts | SpellDescription$ Destroy X target nonblack creatures. Draw X cards. | SubAbility$ DB
 # It may seem wrong to not use X in the target, but since the Targets are what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$Amount
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dregs_of_sorrow.
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/25.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/129.jpg
 Oracle:Destroy X target nonblack creatures. Draw X cards.
-End

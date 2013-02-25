@@ -1,7 +1,6 @@
 Name:Gravedigger
 ManaCost:3 B
 Types:Creature Zombie
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature card from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
@@ -21,4 +20,3 @@ SetInfo:M12|Common|http://magiccards.info/scans/en/m12/99.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/78.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/86.jpg
 Oracle:When Gravedigger enters the battlefield, you may return target creature card from your graveyard to your hand.
-End

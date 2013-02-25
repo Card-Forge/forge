@@ -1,7 +1,6 @@
 Name:Glen Elendra Liege
 ManaCost:1 UB UB UB
 Types:Creature Faerie Knight
-Text:no text
 PT:2/3
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Blue+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other blue creatures you control get +1/+1.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/glen_elendra_lie
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/94.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/163.jpg
 Oracle:Flying\nOther blue creatures you control get +1/+1.\nOther black creatures you control get +1/+1.
-End

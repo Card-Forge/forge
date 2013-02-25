@@ -1,7 +1,6 @@
 Name:Slay
 ManaCost:2 B
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | NoRegen$ True | SpellDescription$ Destroy target green creature. It can't be regenerated. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemRandomDeck:True
@@ -11,4 +10,3 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/164.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/55.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/163.jpg
 Oracle:Destroy target green creature. It can't be regenerated.\nDraw a card.
-End

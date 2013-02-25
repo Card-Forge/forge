@@ -1,11 +1,9 @@
 Name:Exhumer Thrull
 ManaCost:5 B
 Types:Creature Thrull
-Text:no text
 PT:3/3
 K:Haunt:TrigReturn:Return target creature card from your graveyard to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature card in your graveyard. | Origin$ Graveyard | Destination$ Hand
 Oracle:Haunt (When this creature dies, exile it haunting target creature.)\nWhen Exhumer Thrull enters the battlefield or the creature it haunts dies, return target creature card from your graveyard to your hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exhumer_thrull.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/50.jpg
-End

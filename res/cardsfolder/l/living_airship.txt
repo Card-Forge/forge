@@ -1,7 +1,6 @@
 Name:Living Airship
 ManaCost:3 U
 Types:Creature Metathran
-Text:no text
 PT:2/3
 K:Flying
 A:AB$ Regenerate | Cost$ 2 G | SpellDescription$ Regenerate CARDNAME.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_airship.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/28.jpg
 Oracle:Flying\n{2}{G}: Regenerate Living Airship.
-End

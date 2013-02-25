@@ -1,7 +1,6 @@
 Name:Thrummingbird
 ManaCost:1 U
 Types:Creature Bird Horror
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, proliferate.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrummingbird.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/47.jpg
 Oracle:Flying\nWhenever Thrummingbird deals combat damage to a player, proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
-End

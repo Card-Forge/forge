@@ -1,7 +1,6 @@
 Name:Ringskipper
 ManaCost:1 U
 Types:Creature Faerie Wizard
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigClash | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, clash with an opponent. If you win, return CARDNAME to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ringskipper.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/81.jpg
 Oracle:Flying\nWhen Ringskipper dies, clash with an opponent. If you win, return Ringskipper to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-End

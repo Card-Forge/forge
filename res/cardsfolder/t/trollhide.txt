@@ -1,7 +1,6 @@
 Name:Trollhide
 ManaCost:2 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddAbility$ ABRegen | Description$ Enchanted creature gets +2/+2 and has "1 G: Regenerate this creature."
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trollhide.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/199.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has "{1}{G}: Regenerate this creature." (The next time the creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
-End

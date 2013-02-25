@@ -1,7 +1,6 @@
 Name:Reminisce
 ManaCost:2 U
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 2 U | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card | Shuffle$ True | SpellDescription$ Target player shuffles his or her graveyard into his or her library.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
@@ -10,4 +9,3 @@ SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/105.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/92.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/99.jpg
 Oracle:Target player shuffles his or her graveyard into his or her library.
-End

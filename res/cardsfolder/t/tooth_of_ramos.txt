@@ -1,7 +1,6 @@
 Name:Tooth of Ramos
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tooth_of_ramos.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/313.jpg
 Oracle:{T}: Add {W} to your mana pool.\nSacrifice Tooth of Ramos: Add {W} to your mana pool.
-End

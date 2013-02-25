@@ -1,7 +1,6 @@
 Name:Akroma, Angel of Wrath
 ManaCost:5 W W W
 Types:Legendary Creature Angel
-Text:no text
 PT:6/6
 K:Flying
 K:Vigilance
@@ -15,4 +14,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106645.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/1.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/1.jpg
 Oracle:Flying, first strike, vigilance, trample, haste, protection from black and from red
-End

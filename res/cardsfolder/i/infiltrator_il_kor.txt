@@ -1,7 +1,6 @@
 Name:Infiltrator il-Kor
 ManaCost:4 U
 Types:Creature Kor Rogue
-Text:no text
 PT:3/1
 K:Shadow
 K:Suspend:2:1 U
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infiltrator_il_kor.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/37.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nSuspend 2-{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
-End

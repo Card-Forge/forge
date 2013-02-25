@@ -1,11 +1,9 @@
 Name:Uktabi Efreet
 ManaCost:2 G G
 Types:Creature Efreet
-Text:no text
 PT:5/4
 K:Cumulative upkeep:G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_efreet.jpg
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/85.jpg
 Oracle:Cumulative upkeep {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
-End

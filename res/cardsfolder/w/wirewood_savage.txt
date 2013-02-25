@@ -1,7 +1,6 @@
 Name:Wirewood Savage
 ManaCost:2 G
 Types:Creature Elf
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Beast | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a Beast enters the battlefield, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_savage.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/304.jpg
 Oracle:Whenever a Beast enters the battlefield, you may draw a card.
-End

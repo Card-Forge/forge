@@ -1,7 +1,6 @@
 Name:Ashen-Skin Zubera
 ManaCost:1 B
 Types:Creature Zubera Spirit
-Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target opponent discards a card for each Zubera put into a graveyard from the battlefield this turn.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ X | Mode$ TgtChoose | References$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Zubera
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80509.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/101.jpg
 Oracle:When Ashen-Skin Zubera dies, target opponent discards a card for each Zubera that died this turn.
-End

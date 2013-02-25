@@ -1,11 +1,9 @@
 Name:Cyclopean Snare
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature, then return CARDNAME to its owner's hand. | SubAbility$ DBBounce
 SVar:DBBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_snare.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/259.jpg
 Oracle:{3}, {T}: Tap target creature, then return Cyclopean Snare to its owner's hand.
-End

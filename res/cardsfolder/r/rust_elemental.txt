@@ -1,7 +1,6 @@
 Name:Rust Elemental
 ManaCost:4
 Types:Artifact Creature Elemental
-Text:no text
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice an artifact other than CARDNAME. If you can't, tap CARDNAME and you lose 4 life.
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rust_elemental.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/234.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice an artifact other than Rust Elemental. If you can't, tap Rust Elemental and you lose 4 life.
-End

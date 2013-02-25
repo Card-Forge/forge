@@ -1,7 +1,6 @@
 Name:Gorilla Shaman
 ManaCost:R
 Types:Creature Ape Shaman
-Text:no text
 PT:1/1
 A:AB$ Destroy | Cost$ X X 1 | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | References$ X | SpellDescription$ Destroy target noncreature artifact with converted mana cost X.
 # It may seem wrong to not use X in the target, but since the Target is what defines X, it's redundant (and not supported by the code)
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_shaman.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/106.jpg|2
 Oracle:{X}{X}{1}: Destroy target noncreature artifact with converted mana cost X.
-End

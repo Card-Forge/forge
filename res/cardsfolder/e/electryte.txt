@@ -1,7 +1,6 @@
 Name:Electryte
 ManaCost:3 R R
 Types:Creature Beast
-Text:no text
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDmgBlockers | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to defending player, it deals damage equal to its power to each blocking creature.
 SVar:TrigDmgBlockers:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.blocking | NumDmg$ X | ValidDescription$ each blocking creature | References$ X
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electryte.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/183.jpg
 Oracle:Whenever Electryte deals combat damage to defending player, it deals damage equal to its power to each blocking creature.
-End

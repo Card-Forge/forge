@@ -1,7 +1,6 @@
 Name:Neurok Commando
 ManaCost:1 U U
 Types:Creature Human Rogue
-Text:no text
 PT:2/1
 K:Shroud
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_commando.jpg
 SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/28.jpg
 Oracle:Shroud\nWhenever Neurok Commando deals combat damage to a player, you may draw a card.
-End

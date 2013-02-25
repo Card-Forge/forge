@@ -1,7 +1,6 @@
 Name:Voice of All
 ManaCost:2 W W
 Types:Creature Angel
-Text:no text
 PT:2/2
 K:Flying
 K:ETBReplacement:Other:ChooseColor
@@ -13,4 +12,3 @@ SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/35.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/19.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/56.jpg
 Oracle:Flying\nAs Voice of All enters the battlefield, choose a color.\nVoice of All has protection from the chosen color.
-End

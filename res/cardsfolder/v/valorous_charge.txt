@@ -1,10 +1,8 @@
 Name:Valorous Charge
 ManaCost:1 W W
 Types:Sorcery
-Text:no text
 A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.White | NumAtt$ +2 | SpellDescription$ White creatures get +2/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4402.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/196.jpg
 Oracle:White creatures get +2/+0 until end of turn.
-End

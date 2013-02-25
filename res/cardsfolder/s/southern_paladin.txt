@@ -1,7 +1,6 @@
 Name:Southern Paladin
 ManaCost:2 W W
 Types:Creature Human Knight
-Text:no text
 PT:3/3
 A:AB$ Destroy | Cost$ W W T | ValidTgts$ Permanent.Red | TgtPrompt$ Select target red permanent | SpellDescription$ Destroy target red permanent.
 SVar:RemRandomDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/southern_paladin
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/143.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/46.jpg
 Oracle:{W}{W}, {T}: Destroy target red permanent.
-End

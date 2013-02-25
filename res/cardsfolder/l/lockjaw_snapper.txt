@@ -1,7 +1,6 @@
 Name:Lockjaw Snapper
 ManaCost:4
 Types:Artifact Creature Scarecrow
-Text:no text
 PT:2/2
 K:Wither
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a -1/-1 counter on each creature with a -1/-1 counter on it.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lockjaw_snapper.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/255.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhen Lockjaw Snapper dies, put a -1/-1 counter on each creature with a -1/-1 counter on it.
-End

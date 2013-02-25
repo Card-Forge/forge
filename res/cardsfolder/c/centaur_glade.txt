@@ -1,10 +1,8 @@
 Name:Centaur Glade
 ManaCost:3 G G
 Types:Enchantment
-Text:no text
 A:AB$ Token | Cost$ 2 G G | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Centaur | TokenTypes$ Creature,Centaur | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 green Centaur creature token onto the battlefield.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_glade.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/251.jpg
 Oracle:{2}{G}{G}: Put a 3/3 green Centaur creature token onto the battlefield.
-End

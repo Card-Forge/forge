@@ -1,7 +1,6 @@
 Name:Ventifact Bottle
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ PutCounter | Cost$ X 1 T | CounterType$ CHARGE | CounterNum$ X | References$ X | SorcerySpeed$ True | SpellDescription$ Put X charge counters on Ventifact Bottle. Activate this ability only any time you could cast a sorcery.
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGetMana | CheckSVar$ Y | SVarCompare$ GE1 | TriggerDescription$ At the beginning of your precombat main phase, if CARDNAME has a charge counter on it, tap it and remove all charge counters from it. Add {1} to your mana pool for each charge counter removed this way.
 SVar:TrigGetMana:DB$ Mana | Produced$ 1 | Amount$ Y | SubAbility$ TrigRemove
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ventifact_bottle.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/288.jpg
 Oracle:{X}{1}, {T}: Put X charge counters on Ventifact Bottle. Activate this ability only any time you could cast a sorcery.\nAt the beginning of your precombat main phase, if Ventifact Bottle has a charge counter on it, tap it and remove all charge counters from it. Add {1} to your mana pool for each charge counter removed this way.
-End

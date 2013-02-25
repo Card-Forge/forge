@@ -1,7 +1,6 @@
 Name:Riptide Crab
 ManaCost:1 W U
 Types:Creature Crab
-Text:no text
 PT:1/3
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_crab.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/266.jpg
 Oracle:Vigilance\nWhen Riptide Crab dies, draw a card.
-End

@@ -1,7 +1,6 @@
 Name:Blazethorn Scarecrow
 ManaCost:5
 Types:Artifact Creature Scarecrow
-Text:no text
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as you control a red creature.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Wither | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME has wither as long as you control a green creature. (It deals damage to creatures in the form of -1/-1 counters.)
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazethorn_scarecrow.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/246.jpg
 Oracle:Blazethorn Scarecrow has haste as long as you control a red creature.\nBlazethorn Scarecrow has wither as long as you control a green creature. (It deals damage to creatures in the form of -1/-1 counters.)
-End

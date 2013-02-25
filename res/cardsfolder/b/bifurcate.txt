@@ -1,7 +1,6 @@
 Name:Bifurcate
 ManaCost:3 G
 Types:Sorcery
-Text:no text
 A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | Static$ True | StackDescription$ None | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a permanent card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Targeted.Permanent+sameName | ChangeNum$ 1 | StackDescription$ Search your library for a permanent card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bifurcate.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/230.jpg
 Oracle:Search your library for a permanent card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
-End

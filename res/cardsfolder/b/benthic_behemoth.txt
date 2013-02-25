@@ -1,7 +1,6 @@
 Name:Benthic Behemoth
 ManaCost:5 U U U
 Types:Creature Serpent
-Text:no text
 PT:7/6
 K:Islandwalk
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card13030.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/54.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/63.jpg
 Oracle:Islandwalk
-End

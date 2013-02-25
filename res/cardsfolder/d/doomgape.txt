@@ -1,7 +1,6 @@
 Name:Doomgape
 ManaCost:4 BG BG BG
 Types:Creature Elemental
-Text:no text
 PT:10/10
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature. You gain life equal to that creature's toughness.
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doomgape.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/120.jpg
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice a creature. You gain life equal to that creature's toughness.
-End

@@ -1,7 +1,6 @@
 Name:Wei Ambush Force
 ManaCost:1 B
 Types:Creature Human Soldier
-Text:no text
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Three_Kingdoms/wei_ambush_force.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/85.jpg
 Oracle:Whenever Wei Ambush Force attacks, it gets +2/+0 until end of turn.
-End

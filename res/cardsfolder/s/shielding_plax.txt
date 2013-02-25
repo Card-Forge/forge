@@ -1,7 +1,6 @@
 Name:Shielding Plax
 ManaCost:2 GU
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 GU | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ CantTarget | ValidCard$ Card.EnchantedBy | Activator$ Opponent | Description$ Enchanted creature can't be the target of spells or abilities your opponents control.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shielding_plax.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/147.jpg
 Oracle:({G/U} can be paid with either {G} or {U}.)\nEnchant creature\nWhen Shielding Plax enters the battlefield, draw a card.\nEnchanted creature can't be the target of spells or abilities your opponents control.
-End

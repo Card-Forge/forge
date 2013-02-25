@@ -1,7 +1,6 @@
 Name:Scrying Glass
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ ChooseNumber | Cost$ 3 T | Min$ 1 | SubAbility$ DBScryingGlassChooseColor | SpellDescription$ Choose a number greater than 0 and a color. Target opponent reveals his or her hand. If that opponent reveals exactly the chosen number of cards of the chosen color, you draw a card.
 SVar:DBScryingGlassChooseColor:DB$ ChooseColor | SubAbility$ DBScryingGlassRevealHand
 SVar:DBScryingGlassRevealHand:DB$ RevealHand | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBScryingGlassDraw
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrying_glass.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/137.jpg
 Oracle:{3}, {T}: Choose a number greater than 0 and a color. Target opponent reveals his or her hand. If that opponent reveals exactly the chosen number of cards of the chosen color, you draw a card.
-End

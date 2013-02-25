@@ -1,7 +1,6 @@
 Name:Bog Raiders
 ManaCost:2 B
 Types:Creature Zombie
-Text:no text
 PT:2/2
 K:Swampwalk
 SVar:Rarity:Common
@@ -11,4 +10,3 @@ SetInfo:USG|Common|http://magiccards.info/scans/en/us/119.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/66.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/4.jpg
 Oracle:Swampwalk (This creature is unblockable as long as defending player controls a Swamp.)
-End

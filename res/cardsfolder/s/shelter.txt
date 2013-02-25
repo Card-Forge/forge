@@ -1,7 +1,6 @@
 Name:Shelter
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Protection | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SubAbility$ DBDraw | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shelter.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/46.jpg
 Oracle:Target creature you control gains protection from the color of your choice until end of turn.\nDraw a card.
-End

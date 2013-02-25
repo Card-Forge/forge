@@ -1,7 +1,6 @@
 Name:Craw Wurm
 ManaCost:4 G G
 Types:Creature Wurm
-Text:no text
 PT:6/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83040.jpg
@@ -16,4 +15,3 @@ SetInfo:M10|Common|http://magiccards.info/scans/en/m10/173.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/97.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/99.jpg
 Oracle:
-End

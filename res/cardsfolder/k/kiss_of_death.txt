@@ -1,11 +1,9 @@
 Name:Kiss of Death
 ManaCost:4 B B
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 4 B B | ValidTgts$ Opponent | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target opponent. You gain 4 life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 4
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/kiss_of_death.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/16.jpg
 Oracle:Kiss of Death deals 4 damage to target opponent. You gain 4 life.
-End

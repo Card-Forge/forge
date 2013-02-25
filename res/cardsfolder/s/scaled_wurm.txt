@@ -1,7 +1,6 @@
 Name:Scaled Wurm
 ManaCost:7 G
 Types:Creature Wurm
-Text:no text
 PT:7/6
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83272.jpg
@@ -10,4 +9,3 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/251.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/269.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/150.jpg
 Oracle:
-End

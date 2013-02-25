@@ -1,7 +1,6 @@
 Name:Writ of Passage
 ManaCost:U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigPump | TriggerZones$ Battlefield | IsPresent$ Card.AttachedBy+powerLE2 | PresentCompare$ GE1 |TriggerDescription$ Whenever enchanted creature attacks, if its power is 2 or less, it's unblockable this turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/writ_of_passage.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/37.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks, if its power is 2 or less, it's unblockable this turn.\nForecast - {1}{U}, Reveal Writ of Passage from your hand: Target creature with power 2 or less is unblockable this turn. (Activate this ability only during your upkeep and only once each turn.)
-End

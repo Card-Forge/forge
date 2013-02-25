@@ -1,7 +1,6 @@
 Name:Scourge of the Nobilis
 ManaCost:2 RW
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 RW | ValidTgts$ Creature | AITgts$ Card.White,Card.Red | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Red | AddPower$ 1 | AddToughness$ 1 | AddAbility$ Pump | Description$ As long as enchanted creature is red, it gets +1/+1 and has "RW: This creature gets +1/+0 until end of turn."
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_the_nobilis.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/146.jpg
 Oracle:Enchant creature\nAs long as enchanted creature is red, it gets +1/+1 and has "{R/W}: This creature gets +1/+0 until end of turn."\nAs long as enchanted creature is white, it gets +1/+1 and has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
-End

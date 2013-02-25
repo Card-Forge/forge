@@ -1,7 +1,6 @@
 Name:Goblin Electromancer
 ManaCost:U R
 Types:Creature Goblin Wizard
-Text:no text
 PT:2/2
 S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost 1 less to cast.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ DeckHints:Type$Instant|Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_electromancer.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/163.jpg
 Oracle:Instant and sorcery spells you cast cost {1} less to cast.
-End

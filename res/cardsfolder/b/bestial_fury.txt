@@ -1,7 +1,6 @@
 Name:Bestial Fury
 ManaCost:2 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card at the beginning of the next turn's upkeep.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bestial_fury.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/99.jpg|2
 Oracle:Enchant creature\nWhen Bestial Fury enters the battlefield, draw a card at the beginning of the next turn's upkeep.\nWhenever enchanted creature becomes blocked, it gets +4/+0 and gains trample until end of turn.
-End

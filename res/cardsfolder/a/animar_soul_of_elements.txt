@@ -1,7 +1,6 @@
 Name:Animar, Soul of Elements
 ManaCost:U R G
 Types:Legendary Creature Elemental
-Text:no text
 PT:1/1
 K:Protection from white
 K:Protection from black
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animar_soul_of_elements.jpg
 SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/181.jpg
 Oracle:Protection from white and from black\nWhenever you cast a creature spell, put a +1/+1 counter on Animar, Soul of Elements.\nCreature spells you cast cost {1} less to cast for each +1/+1 counter on Animar.
-End

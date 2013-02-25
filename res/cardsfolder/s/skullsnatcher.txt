@@ -1,7 +1,6 @@
 Name:Skullsnatcher
 ManaCost:1 B
 Types:Creature Rat Ninja
-Text:no text
 PT:2/1
 A:AB$ ChangeZone | Cost$ B Return<1/Creature.attacking+unblocked> | CostDesc$ Ninjutsu B | ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True | Destination$ Battlefield | Defined$ Self | SpellDescription$ (B, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile up to two target cards from that player's graveyard.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/skullsnatcher.jp
 SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/36.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/84.jpg
 Oracle:Ninjutsu {B} ({B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Skullsnatcher deals combat damage to a player, exile up to two target cards from that player's graveyard.
-End

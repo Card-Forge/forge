@@ -1,7 +1,6 @@
 Name:Kavu Monarch
 ManaCost:2 R R
 Types:Creature Kavu
-Text:no text
 PT:3/3
 S:Mode$ Continuous | Affected$ Creature.Kavu | AddKeyword$ Trample | Description$ Kavu creatures have trample.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Kavu.Other | TriggerZones$ Battlefield | Execute$TrigPutCounter | TriggerDescription$ Whenever another Kavu enters the battlefield, put a +1/+1 counter on CARDNAME.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_monarch.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/149.jpg
 Oracle:Kavu creatures have trample.\nWhenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
-End

@@ -1,7 +1,6 @@
 Name:Benalish Lancer
 ManaCost:2 W
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 K:Kicker 2 W
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigPut | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with first strike.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_lancer.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/7.jpg
 Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nIf Benalish Lancer was kicked, it enters the battlefield with two +1/+1 counters on it and with first strike.
-End

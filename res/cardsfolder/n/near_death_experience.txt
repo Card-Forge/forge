@@ -1,7 +1,6 @@
 Name:Near-Death Experience
 ManaCost:2 W W W
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | LifeTotal$ You | LifeAmount$ EQ1 | TriggerZones$ Battlefield | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if you have exactly 1 life, you win the game.
 SVar:TrigWin:AB$WinsGame | Cost$ 0 | Defined$ You
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/near_death_experience.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/38.jpg
 Oracle:At the beginning of your upkeep, if you have exactly 1 life, you win the game.
-End

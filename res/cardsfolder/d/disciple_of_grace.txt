@@ -1,7 +1,6 @@
 Name:Disciple of Grace
 ManaCost:1 W
 Types:Creature Human Cleric
-Text:no text
 PT:1/2
 K:Protection from black
 K:Cycling:2
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_grac
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/10.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/25.jpg
 Oracle:Protection from black\nCycling {2} ({2}, Discard this card: Draw a card.)
-End

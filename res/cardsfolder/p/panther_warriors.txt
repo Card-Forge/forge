@@ -1,7 +1,6 @@
 Name:Panther Warriors
 ManaCost:4 G
 Types:Creature Cat Warrior
-Text:no text
 PT:6/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16453.jpg
@@ -9,4 +8,3 @@ SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/65.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/243.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/106.jpg
 Oracle:
-End

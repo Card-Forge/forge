@@ -1,7 +1,6 @@
 Name:Dwarven Demolition Team
 ManaCost:2 R
 Types:Creature Dwarf
-Text:no text
 PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Wall | TgtPrompt$ Select target Wall | SpellDescription$ Destroy target Wall.
 SVar:Rarity:Uncommon
@@ -11,4 +10,3 @@ SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/143.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/144.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/143.jpg
 Oracle:{T}: Destroy target Wall.
-End

@@ -1,7 +1,6 @@
 Name:Thundering Giant
 ManaCost:3 R R
 Types:Creature Giant
-Text:no text
 PT:4/3
 K:Haste
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card130381.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/221.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/243.jpg
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)
-End

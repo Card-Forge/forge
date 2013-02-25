@@ -1,7 +1,6 @@
 Name:Wall of Tears
 ManaCost:1 U
 Types:Creature Wall
-Text:no text
 PT:0/4
 K:Defender
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | DelayedTrigger$ DelayedTrig | TriggerDescription$ Whenever CARDNAME blocks a creature, return that creature to its owner's hand at end of combat.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tears.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/50.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Wall of Tears blocks a creature, return that creature to its owner's hand at end of combat.
-End

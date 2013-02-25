@@ -1,7 +1,6 @@
 Name:Nevermaker
 ManaCost:3 U
 Types:Creature Elemental
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, put target nonland permanent on top of its owner's library.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nevermaker.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/44.jpg
 Oracle:Flying\nWhen Nevermaker leaves the battlefield, put target nonland permanent on top of its owner's library.\nEvoke {3}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
-End

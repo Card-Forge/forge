@@ -1,7 +1,6 @@
 Name:Knight of Infamy
 ManaCost:1 B
 Types:Creature Human Knight
-Text:no text
 PT:2/1
 K:Exalted
 K:Protection from white
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_infamy.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/96.jpg
 Oracle:Protection from white (This creature can't be blocked, targeted, dealt damage, or enchanted by anything white.)\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
-End

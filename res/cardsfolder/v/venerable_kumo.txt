@@ -1,7 +1,6 @@
 Name:Venerable Kumo
 ManaCost:4 G
 Types:Creature Spirit
-Text:no text
 PT:2/3
 K:Reach
 K:Soulshift 4
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venerable_kumo.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/248.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nSoulshift 4 (When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)
-End

@@ -1,7 +1,6 @@
 Name:Howl from Beyond
 ManaCost:X B
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ X B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
@@ -17,4 +16,3 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/138.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/22.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/20.jpg
 Oracle:Target creature gets +X/+0 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Pyrostatic Pillar
 ManaCost:1 R
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.cmcLE3 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player casts a spell with converted mana cost 3 or less, CARDNAME deals 2 damage to that player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredActivator | NumDmg$ 2
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrostatic_pillar.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/100.jpg
 Oracle:Whenever a player casts a spell with converted mana cost 3 or less, Pyrostatic Pillar deals 2 damage to that player.
-End

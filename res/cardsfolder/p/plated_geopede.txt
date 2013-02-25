@@ -1,7 +1,6 @@
 Name:Plated Geopede
 ManaCost:1 R
 Types:Creature Insect
-Text:no text
 PT:1/1
 K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_geopede.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/141.jpg
 Oracle:First strike\nLandfall - Whenever a land enters the battlefield under your control, Plated Geopede gets +2/+2 until end of turn.
-End

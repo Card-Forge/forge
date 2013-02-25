@@ -1,7 +1,6 @@
 Name:Singe-Mind Ogre
 ManaCost:2 B R
 Types:Creature Ogre Mutant
-Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
 SVar:TrigReveal:AB$ Reveal | Cost$ 0 | Random$ True | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBLose
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/singe_mind_ogre.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/45.jpg
 Oracle:When Singe-Mind Ogre enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
-End

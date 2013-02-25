@@ -1,7 +1,6 @@
 Name:Oversoul of Dusk
 ManaCost:GW GW GW GW GW
 Types:Creature Spirit Avatar
-Text:no text
 PT:5/5
 K:Protection from blue
 K:Protection from black
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oversoul_of_dusk.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/234.jpg
 Oracle:Protection from blue, from black, and from red
-End

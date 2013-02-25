@@ -1,7 +1,6 @@
 Name:Zerapa Minotaur
 ManaCost:2 R R
 Types:Creature Minotaur
-Text:no text
 PT:3/3
 K:First Strike
 A:AB$ Debuff | Cost$ 2 | Defined$ Self | Keywords$ First Strike | AnyPlayer$ True | SpellDescription$ CARDNAME loses first strike until end of turn. Any player may activate this ability.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zerapa_minotaur.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/108.jpg
 Oracle:First strike\n{2}: Zerapa Minotaur loses first strike until end of turn. Any player may activate this ability.
-End

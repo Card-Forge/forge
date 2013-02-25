@@ -1,7 +1,6 @@
 Name:Wildfire Emissary
 ManaCost:3 R
 Types:Creature Efreet
-Text:no text
 PT:2/4
 K:Protection from white
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfire_emissar
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/203.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/72.jpg
 Oracle:Protection from white\n{1}{R}: Wildfire Emissary gets +1/+0 until end of turn.
-End

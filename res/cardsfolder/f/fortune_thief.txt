@@ -1,7 +1,6 @@
 Name:Fortune Thief
 ManaCost:4 R
 Types:Creature Human Rogue
-Text:no text
 PT:0/1
 K:Morph:R R
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Damage that would reduce your life total to less than 1 reduces it to 1 instead. | Description$ Damage that would reduce your life total to less than 1 reduces it to 1 instead.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fortune_thief.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/156.jpg
 Oracle:Damage that would reduce your life total to less than 1 reduces it to 1 instead.\nMorph {R}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
-End

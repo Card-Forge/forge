@@ -1,7 +1,6 @@
 Name:Flurry of Wings
 ManaCost:G W U
 Types:Instant
-Text:no text
 A:SP$ Token | Cost$ G W U | TokenAmount$ X | TokenName$ Bird Soldier | TokenTypes$ Creature,Bird,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | References$ X | SpellDescription$ Put X 1/1 white Bird Soldier creature tokens with flying onto the battlefield, where X is the number of attacking creatures.
 SVar:X:Count$Valid Creature.attacking
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flurry_of_wings.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/127.jpg
 Oracle:Put X 1/1 white Bird Soldier creature tokens with flying onto the battlefield, where X is the number of attacking creatures.
-End

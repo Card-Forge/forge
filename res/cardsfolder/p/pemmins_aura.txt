@@ -1,7 +1,6 @@
 Name:Pemmin's Aura
 ManaCost:1 U U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Untap | Cost$ U | Defined$ Enchanted | SpellDescription$ Untap enchanted creature.
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pemmins_aura.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/45.jpg
 Oracle:Enchant creature\n{U}: Untap enchanted creature.\n{U}: Enchanted creature gains flying until end of turn.\n{U}: Enchanted creature gains shroud until end of turn. (It can't be the target of spells or abilities.)\n{1}: Enchanted creature gets +1/-1 or -1/+1 until end of turn.
-End

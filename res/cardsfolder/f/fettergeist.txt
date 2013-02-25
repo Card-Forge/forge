@@ -1,7 +1,6 @@
 Name:Fettergeist
 ManaCost:2 U
 Types:Creature Spirit
-Text:no text
 PT:3/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 for each other creature you control.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fettergeist.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/52.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Fettergeist unless you pay {1} for each other creature you control.
-End

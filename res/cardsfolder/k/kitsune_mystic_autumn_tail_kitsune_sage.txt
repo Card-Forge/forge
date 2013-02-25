@@ -1,7 +1,6 @@
 Name:Kitsune Mystic
 ManaCost:3 W
 Types:Creature Fox Wizard
-Text:no text
 PT:2/3
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Aura.Attached | PresentCompare$ GE2 | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if Kitsune Mystic is enchanted by two or more Auras, flip it.
 SVar:TrigFlip:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
@@ -18,7 +17,6 @@ ALTERNATE
 Name:Autumn-Tail, Kitsune Sage
 ManaCost:3 W
 Types:Legendary Creature Fox Wizard
-Text:no text
 PT:4/5
 A:AB$ Pump | Cost$ 1 | Amount$ 1 | ValidTgts$ Aura.AttachedTo Creature | TgtPrompt$ Select target Aura attached to a creature | SubAbility$ ChooseNewHost | StackDescription$ None | SpellDescription$ Attach target Aura attached to a creature to another creature.
 SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.NotEnchantedByTargeted | ChoiceZone$ Battlefield | SubAbility$ KitsuneAttach | RememberChosen$ True | AILogic$ AtLeast1
@@ -29,4 +27,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/autumn_tail_kits
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/28b.jpg
 Oracle:{1}: Attach target Aura attached to a creature to another creature.
 
-End

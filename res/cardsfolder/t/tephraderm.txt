@@ -1,7 +1,6 @@
 Name:Tephraderm
 ManaCost:4 R
 Types:Creature Beast
-Text:no text
 PT:4/5
 T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Card.Self | Execute$ TrigDealDamage1 | TriggerDescription$ Whenever a creature deals damage to CARDNAME, CARDNAME deals that much damage to that creature.
 T:Mode$ DamageDone | ValidSource$ Instant,Sorcery | ValidTarget$ Card.Self | Execute$ TrigDealDamage2 | TriggerDescription$ Whenever a spell deals damage to CARDNAME, CARDNAME deals that much damage to that spell's controller.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tephraderm.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/239.jpg
 Oracle:Whenever a creature deals damage to Tephraderm, Tephraderm deals that much damage to that creature.\nWhenever a spell deals damage to Tephraderm, Tephraderm deals that much damage to that spell's controller.
-End

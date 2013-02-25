@@ -1,7 +1,6 @@
 Name:Draining Whelk
 ManaCost:4 U U
 Types:Creature Illusion
-Text:no text
 PT:1/1
 K:Flash
 K:Flying
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/draining_whelk.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/57.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Draining Whelk enters the battlefield, counter target spell. Put X +1/+1 counters on Draining Whelk, where X is that spell's converted mana cost.
-End

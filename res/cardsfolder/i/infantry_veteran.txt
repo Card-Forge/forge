@@ -1,7 +1,6 @@
 Name:Infantry Veteran
 ManaCost:W
 Types:Creature Human Soldier
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature. | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target attacking creature gets +1/+1 until end of turn.
 SVar:Rarity:Common
@@ -11,4 +10,3 @@ SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/109.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/26.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/21.jpg
 Oracle:{T}: Target attacking creature gets +1/+1 until end of turn.
-End

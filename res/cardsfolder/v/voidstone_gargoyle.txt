@@ -1,7 +1,6 @@
 Name:Voidstone Gargoyle
 ManaCost:3 W W
 Types:Creature Gargoyle
-Text:no text
 PT:3/3
 K:Flying
 K:ETBReplacement:Other:DBNameCard
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidstone_gargoyle.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/21.jpg
 Oracle:Flying\nAs Voidstone Gargoyle enters the battlefield, name a nonland card.\nThe named card can't be cast.\nActivated abilities of sources with the chosen name can't be activated.
-End

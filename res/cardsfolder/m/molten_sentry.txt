@@ -1,7 +1,6 @@
 Name:Molten Sentry
 ManaCost:3 R
 Types:Creature Elemental
-Text:no text
 PT:*/*
 K:ETBReplacement:Other:TrigFlip
 SVar:TrigFlip:DB$ FlipACoin | WinSubAbility$ DBAttacker | LoseSubAbility$ DBDefender | SpellDescription$ As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a 5/2 creature with haste. If it comes up tails, Molten Sentry enters the battlefield as a 2/5 creature with defender.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_sentry.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/136.jpg
 Oracle:As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a 5/2 creature with haste. If it comes up tails, Molten Sentry enters the battlefield as a 2/5 creature with defender.
-End

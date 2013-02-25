@@ -1,7 +1,6 @@
 Name:Plated Pegasus
 ManaCost:2 W
 Types:Creature Pegasus
-Text:no text
 PT:1/2
 K:Flash
 K:Flying
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_pegasus.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/34.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nIf a spell would deal damage to a creature or player, prevent 1 damage that spell would deal to that creature or player.
-End

@@ -1,7 +1,6 @@
 Name:Orc General
 ManaCost:2 R
 Types:Creature Orc Warrior
-Text:no text
 PT:2/2
 A:AB$ PumpAll | Cost$ T Sac<1/Goblin.Other;Orc.Other/another Orc or Goblin> | ValidCards$ Creature.Orc+Other | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Other Orc creatures get +1/+1 until end of turn.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orc_general.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/72.jpg
 Oracle:{T}, Sacrifice another Orc or Goblin: Other Orc creatures get +1/+1 until end of turn.
-End

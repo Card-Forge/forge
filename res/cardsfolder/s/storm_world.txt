@@ -1,7 +1,6 @@
 Name:Storm World
 ManaCost:R
 Types:World Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ LT4 | TriggerZones$ Battlefield | Execute$ TrigDamageYou | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals X damage to that player, where X is 4 minus the number of cards in his or her hand.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | IsPresent$ Card.YouDontCtrl | PresentZone$ Hand | PresentCompare$ LT4 | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigDamageOpp | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals X damage to that player, where X is 4 minus the number of cards in his or her hand.
 SVar:TrigDamageYou:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ X | References$ X
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_world.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/162.jpg
 Oracle:At the beginning of each player's upkeep, Storm World deals X damage to that player, where X is 4 minus the number of cards in his or her hand.
-End

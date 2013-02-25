@@ -1,7 +1,6 @@
 Name:Bloodfire Colossus
 ManaCost:6 R R
 Types:Creature Giant
-Text:no text
 PT:6/6
 A:AB$ DamageAll | Cost$ R Sac<1/CARDNAME> | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ 6 | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 6 damage to each creature and each player.
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/55.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/177.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/191.jpg
 Oracle:{R}, Sacrifice Bloodfire Colossus: Bloodfire Colossus deals 6 damage to each creature and each player.
-End

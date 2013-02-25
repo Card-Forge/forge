@@ -1,10 +1,8 @@
 Name:Urza's Filter
 ManaCost:4
 Types:Artifact
-Text:no text
 S:Mode$ ReduceCost | ValidCard$ Card.MultiColor | Type$ Spell | Amount$ 2 | Description$ Multicolored spells cost up to 2 less to cast.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_filter.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/318.jpg
 Oracle:Multicolored spells cost up to {2} less to cast.
-End

@@ -1,7 +1,6 @@
 Name:Mind Twist
 ManaCost:X B
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ X B | ValidTgts$ Player | NumCards$ X | References$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
@@ -13,4 +12,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/25.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/31.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/24.jpg
 Oracle:Target player discards X cards at random.
-End

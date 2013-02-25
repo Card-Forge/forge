@@ -1,7 +1,6 @@
 Name:Wormfang Turtle
 ManaCost:2 U
 Types:Creature Nightmare Turtle Beast
-Text:no text
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile a land you control.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_turtle.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/60.jpg
 Oracle:When Wormfang Turtle enters the battlefield, exile a land you control.\nWhen Wormfang Turtle leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-End

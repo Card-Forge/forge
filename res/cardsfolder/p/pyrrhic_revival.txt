@@ -1,7 +1,6 @@
 Name:Pyrrhic Revival
 ManaCost:3 WB WB WB
 Types:Sorcery
-Text:no text
 A:SP$ Effect | Cost$ 3 WB WB WB | Name$ Pyrrhic Revival Effect | ReplacementEffects$ PyrrhicEvent | Triggers$ RemoveEffect | SVars$ PyrrhicAddExtraCounter,PyrrhicMoveToBattlefield,PyrrhicCleanup | References$ PyrrhicAddExtraCounter,PyrrhicMoveToBattlefield,PyrrhicCleanup | ImprintCards$ Self | SubAbility$ DBChangeZoneAll | SpellDescription$ Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.
 SVar:PyrrhicEvent:Event$ Moved | Origin$ Graveyard | Destination$ Battlefield | ValidCard$ Creature | ReplaceWith$ PyrrhicAddExtraCounter | Description$ Each creature enters the battlefield with an additional -1/-1 counters on it.
 SVar:PyrrhicAddExtraCounter:AB$ PutCounter | Cost$ 0 | Defined$ ReplacedCard | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ PyrrhicMoveToBattlefield
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrrhic_revival.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/93.jpg
 Oracle:Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.
-End

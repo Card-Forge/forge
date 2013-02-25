@@ -1,11 +1,9 @@
 Name:Scarwood Treefolk
 ManaCost:3 G
 Types:Creature Treefolk
-Text:no text
 PT:3/5
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarwood_treefolk.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/214.jpg
 Oracle:Scarwood Treefolk enters the battlefield tapped.
-End

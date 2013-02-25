@@ -1,7 +1,6 @@
 Name:Mindblaze
 ManaCost:5 R
 Types:Sorcery
-Text:no text
 A:SP$ NameCard | Cost$ 5 R | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ DBChooseNumber | SpellDescription$ Name a nonland card and choose a number greater than 0. Target player reveals his or her library. If that library contains exactly the chosen number of the named card, CARDNAME deals 8 damage to that player. Then that player shuffles his or her library.
 SVar:DBChooseNumber:DB$ ChooseNumber | Min$ 1 | SubAbility$ DBDig
 SVar:DBDig:DB$ Dig | DigNum$ X | References$ X | ValidTgts$ Player | TgtPrompt$ Select target player | Reveal$ True | NoMove$ True | RememberRevealed$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBDamage
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindblaze.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/180.jpg
 Oracle:Name a nonland card and choose a number greater than 0. Target player reveals his or her library. If that library contains exactly the chosen number of the named card, Mindblaze deals 8 damage to that player. Then that player shuffles his or her library.
-End

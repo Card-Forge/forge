@@ -1,7 +1,6 @@
 Name:Psionic Gift
 ManaCost:1 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Damage | Description$ Enchanted creature has "tap: This creature deals 1 damage to target creature or player."
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psionic_gift.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/95.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to target creature or player."
-End

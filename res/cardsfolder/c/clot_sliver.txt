@@ -1,7 +1,6 @@
 Name:Clot Sliver
 ManaCost:1 B
 Types:Creature Sliver
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Pump | Description$ All Slivers have "2: Regenerate this permanent."
 SVar:Pump:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clot_sliver.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/6.jpg
 Oracle:All Slivers have "{2}: Regenerate this permanent."
-End

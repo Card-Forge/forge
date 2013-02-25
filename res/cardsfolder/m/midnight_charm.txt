@@ -1,7 +1,6 @@
 Name:Midnight Charm
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ Charm | Cost$ B | Choices$ DBDamage,DBPump,DBTap | SpellDescription$ Choose one - CARDNAME deals 1 damage to target creature and you gain 1 life; or target creature gains first strike until end of turn; or tap target creature.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage | NumDmg$ 1 | SubAbility$ DBGain | SpellDescription$ CARDNAME deals 1 damage to target creature and you gain 1 life.
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ 1
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_charm.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/74.jpg
 Oracle:Choose one - Midnight Charm deals 1 damage to target creature and you gain 1 life; or target creature gains first strike until end of turn; or tap target creature.
-End

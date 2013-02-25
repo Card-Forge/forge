@@ -1,7 +1,6 @@
 Name:Wild Pair
 ManaCost:4 G G
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Creature.wasCastFromHand+YouCtrl | Execute$ TrigChange | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.totalPT_EQX | ChangeNum$ 1
 SVar:X:TriggeredCard$CardSumPT
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_pair.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/144.jpg
 Oracle:Whenever a creature enters the battlefield, if you cast it from your hand, you may search your library for a creature card with the same total power and toughness and put it onto the battlefield. If you do, shuffle your library.
-End

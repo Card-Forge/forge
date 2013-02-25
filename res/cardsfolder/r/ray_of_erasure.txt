@@ -1,11 +1,9 @@
 Name:Ray of Erasure
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Mill | Cost$ U | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top card of his or her library into his or her graveyard. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_erasure.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/93.jpg
 Oracle:Target player puts the top card of his or her library into his or her graveyard.\nDraw a card at the beginning of the next turn's upkeep.
-End

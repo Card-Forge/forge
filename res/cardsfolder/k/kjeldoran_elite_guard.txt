@@ -1,7 +1,6 @@
 Name:Kjeldoran Elite Guard
 ManaCost:3 W
 Types:Creature Human Soldier
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ T | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ EliteGuardEffect | SpellDescription$ Target creature gets +2/+2 until end of turn. When that creature leaves the battlefield this turn, sacrifice CARDNAME. Activate this ability only during combat.
 SVar:EliteGuardEffect:DB$ Effect | Name$ Elite Guard Escort | Triggers$ LostTheGuarded | SVars$ ExileEffect,EliteDefence | References$ LostTheGuarded,ExileEffect,EliteDefence | RememberObjects$ Targeted | ImprintCards$ Self
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_elite_guard.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/258.jpg
 Oracle:{T}: Target creature gets +2/+2 until end of turn. When that creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard. Activate this ability only during combat.
-End

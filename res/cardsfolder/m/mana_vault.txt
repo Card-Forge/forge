@@ -1,7 +1,6 @@
 Name:Mana Vault
 ManaCost:1
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add 3 to your mana pool.
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay 4. If you do, untap CARDNAME.
@@ -18,4 +17,3 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/352.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/263.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/260.jpg
 Oracle:Mana Vault doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {4}. If you do, untap Mana Vault.\nAt the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.\n{T}: Add {3} to your mana pool.
-End

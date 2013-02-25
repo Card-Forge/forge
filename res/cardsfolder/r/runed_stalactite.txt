@@ -1,11 +1,9 @@
 Name:Runed Stalactite
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddType$ AllCreatureTypes | Description$ Equipped creature gets +1/+1 and is every creature type.
 K:Equip 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_stalactite.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/260.jpg
 Oracle:Equipped creature gets +1/+1 and is every creature type.\nEquip {2}
-End

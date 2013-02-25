@@ -1,7 +1,6 @@
 Name:Divination
 ManaCost:2 U
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divination.jpg
@@ -10,4 +9,3 @@ SetInfo:M13|Common|http://magiccards.info/scans/en/m13/47.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/50.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/35.jpg
 Oracle:Draw two cards.
-End

@@ -9,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/annex.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/63.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/59.jpg
 Oracle:Enchant land (Target a land as you cast this. This card enters the battlefield attached to that land.)\nYou control enchanted land.
-End

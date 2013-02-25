@@ -1,7 +1,6 @@
 Name:Lunar Avenger
 ManaCost:7
 Types:Artifact Creature Golem
-Text:no text
 PT:2/2
 K:Sunburst
 A:AB$ Pump | Cost$ SubCounter<1/P1P1> | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lunar_avenger.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/136.jpg
 Oracle:Sunburst (This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)\nRemove a +1/+1 counter from Lunar Avenger: Lunar Avenger gains your choice of flying, first strike, or haste until end of turn.
-End

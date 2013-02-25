@@ -1,7 +1,6 @@
 Name:Emperor Crocodile
 ManaCost:3 G
 Types:Creature Crocodile
-Text:no text
 PT:5/5
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature.Other+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no other creatures, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
@@ -12,4 +11,3 @@ SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/246.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/105.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/241.jpg
 Oracle:When you control no other creatures, sacrifice Emperor Crocodile.
-End

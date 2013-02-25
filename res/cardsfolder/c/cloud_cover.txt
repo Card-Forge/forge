@@ -1,11 +1,9 @@
 Name:Cloud Cover
 ManaCost:2 W U
 Types:Enchantment
-Text:no text
 T:Mode$ BecomesTarget | ValidTarget$ Permanent.YouCtrl+Other | ValidSource$ Card.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigBounce | OptionalDecider$ You | TriggerDescription$ Whenever another permanent you control becomes the target of a spell or ability an opponent controls, you may return that permanent to its owner's hand.
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredTarget
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_cover.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/98.jpg
 Oracle:Whenever another permanent you control becomes the target of a spell or ability an opponent controls, you may return that permanent to its owner's hand.
-End

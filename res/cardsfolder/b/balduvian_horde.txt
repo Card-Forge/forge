@@ -1,7 +1,6 @@
 Name:Balduvian Horde
 ManaCost:2 R R
 Types:Creature Human Barbarian
-Text:no text
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a card at random.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | Mode$ Random | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacrifice
@@ -15,4 +14,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_horde.
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/167.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/96.jpg
 Oracle:When Balduvian Horde enters the battlefield, sacrifice it unless you discard a card at random.
-End

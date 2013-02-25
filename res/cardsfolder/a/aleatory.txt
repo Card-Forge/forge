@@ -9,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aleatory.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/155.jpg
 Oracle:Cast Aleatory only during combat after blockers are declared.\nFlip a coin. If you win the flip, target creature gets +1/+1 until end of turn.\nDraw a card at the beginning of the next turn's upkeep.
-End

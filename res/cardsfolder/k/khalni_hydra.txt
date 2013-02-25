@@ -1,7 +1,6 @@
 Name:Khalni Hydra
 ManaCost:G G G G G G G G
 Types:Creature Hydra
-Text:no text
 PT:8/8
 K:Trample
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Color$ G | Amount$ X | EffectZone$ All | Description$ CARDNAME costs G less to cast for each green creature you control.
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_hydra.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/192.jpg
 Oracle:Khalni Hydra costs {G} less to cast for each green creature you control.\nTrample
-End

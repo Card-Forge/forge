@@ -1,7 +1,6 @@
 Name:Bioshift
 ManaCost:GU
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ GU | ValidTgts$ Creature | TgtPrompt$ Select target creature to remove +1/+1 counter | SubAbility$ DBChooseNum | RememberObjects$ Targeted | StackDescription$ SpellDescription | SpellDescription$ Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
 SVar:DBChooseNum:DB$ ChooseNumber | Min$ 0 | Max$ X | References$ X | ListTitle$ Choose how many counters to move | SubAbility$ DBMove | StackDescription$ None
 SVar:DBMove:DB$ MoveCounter | Source$ Remembered | ValidTgts$ Creature | TgtPrompt$ Select another target creature with the same controller to get +1/+1 counter | TargetUnique$ True | TargetsWithSameController$ True | CounterType$ P1P1 | CounterNum$ Y | References$ Y | ConditionDefined$ Targeted | ConditionPresent$ Creature.sharesControllerWith Remembered | ConditionCompare$ EQ1 | SubAbility$ DBCleanup | StackDescription$ None
@@ -12,4 +11,3 @@ SVar:X:Count$TotalCounters_P1P1_Card.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bioshift.jpg
 Oracle:Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/214.jpg
-End

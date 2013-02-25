@@ -1,7 +1,6 @@
 Name:Gruesome Discovery
 ManaCost:2 B B
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ 2 B B | ValidTgts$ Player | Mode$ TgtChoose | NumCards$ 2 | ConditionCheckSVar$ Morbid | ConditionSVarCompare$ EQ0 | SubAbility$ MorbidDiscard | SpellDescription$ Target player discards two cards.
 SVar:MorbidDiscard:DB$ Discard | Defined$ Targeted | Mode$ RevealYouChoose | NumCards$ 2 | ConditionCheckSVar$ Morbid | ConditionSVarCompare$ GE1 | References$ Morbid | SpellDescription$ Morbid - If a creature died this turn, instead that player reveals his or her hand, you choose two cards from it, then that player discards those cards.
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruesome_discovery.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/66.jpg
 Oracle:Target player discards two cards.\nMorbid - If a creature died this turn, instead that player reveals his or her hand, you choose two cards from it, then that player discards those cards.
-End

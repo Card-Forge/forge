@@ -1,7 +1,6 @@
 Name:Rhox Meditant
 ManaCost:3 W
 Types:Creature Rhino Monk
-Text:no text
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.Green+YouCtrl | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if you control a green permanent, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_meditant.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/16.jpg
 Oracle:When Rhox Meditant enters the battlefield, if you control a green permanent, draw a card.
-End

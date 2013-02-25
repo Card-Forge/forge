@@ -1,7 +1,6 @@
 Name:Crovax
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+2/+0
 T:Mode$ DamageDone | ValidSource$ Creature+YouCtrl | ValidTarget$ Creature,Player | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control deals damage to a creature or player, you gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/crovax.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/crovax.jpg
 Oracle:Hand +2, life +0\nWhenever a creature you control deals damage to a creature or player, you gain 1 life.
-End

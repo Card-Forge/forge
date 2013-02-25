@@ -1,11 +1,9 @@
 Name:Goliath Sphinx
 ManaCost:5 U U
 Types:Creature Sphinx
-Text:no text
 PT:8/7
 K:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goliath_sphinx.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/28.jpg
 Oracle:Flying
-End

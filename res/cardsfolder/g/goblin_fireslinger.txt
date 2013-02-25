@@ -1,11 +1,9 @@
 Name:Goblin Fireslinger
 ManaCost:R
 Types:Creature Goblin Warrior
-Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_fireslinger.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/139.jpg
 Oracle:{T}: Goblin Fireslinger deals 1 damage to target player.
-End

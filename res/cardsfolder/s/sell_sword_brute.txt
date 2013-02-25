@@ -1,7 +1,6 @@
 Name:Sell-Sword Brute
 ManaCost:1 R
 Types:Creature Human Mercenary
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, it deals 2 damage to you.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 2
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sell_sword_brute.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/142.jpg
 Oracle:When Sell-Sword Brute dies, it deals 2 damage to you.
-End

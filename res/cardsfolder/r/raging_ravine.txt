@@ -1,7 +1,6 @@
 Name:Raging Ravine
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_ravine.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/141.jpg
 Oracle:Raging Ravine enters the battlefield tapped.\n{T}: Add {R} or {G} to your mana pool.\n{2}{R}{G}: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with "Whenever this creature attacks, put a +1/+1 counter on it." It's still a land.
-End

@@ -1,7 +1,6 @@
 Name:Oakenform
 ManaCost:2 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oakenform.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/197.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3.
-End

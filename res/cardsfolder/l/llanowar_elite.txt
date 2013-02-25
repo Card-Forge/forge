@@ -1,7 +1,6 @@
 Name:Llanowar Elite
 ManaCost:G
 Types:Creature Elf
-Text:no text
 PT:1/1
 K:Trample
 K:Kicker 8
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_elite.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/196.jpg
 Oracle:Kicker {8} (You may pay an additional {8} as you cast this spell.)\nTrample\nIf Llanowar Elite was kicked, it enters the battlefield with five +1/+1 counters on it.
-End

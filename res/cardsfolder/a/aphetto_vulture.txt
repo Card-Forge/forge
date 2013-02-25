@@ -1,7 +1,6 @@
 Name:Aphetto Vulture
 ManaCost:4 B B
 Types:Creature Zombie Bird
-Text:no text
 PT:3/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may put target Zombie card from your graveyard on top of your library.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_vulture.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/126.jpg
 Oracle:Flying\nWhen Aphetto Vulture dies, you may put target Zombie card from your graveyard on top of your library.
-End

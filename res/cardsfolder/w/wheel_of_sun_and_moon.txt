@@ -1,7 +1,6 @@
 Name:Wheel of Sun and Moon
 ManaCost:GW GW
 Types:Enchantment Aura
-Text:no text
 K:Enchant player
 A:SP$ Attach | Cost$ GW GW | ValidTgts$ Player
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.OwnedBy Player.EnchantedBy | ReplaceWith$ Reveal | Description$ If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_sun_and_moon.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/243.jpg
 Oracle:Enchant player\nIf a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.
-End

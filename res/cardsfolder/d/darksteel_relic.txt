@@ -1,11 +1,9 @@
 Name:Darksteel Relic
 ManaCost:0
 Types:Artifact
-Text:no text
 K:Indestructible
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_relic.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/134.jpg
 Oracle:Darksteel Relic is indestructible. (Effects that say "destroy" don't destroy it.)
-End

@@ -9,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murmuring_bosk.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/147.jpg
 Oracle:({T}: Add {G} to your mana pool.)\nAs Murmuring Bosk enters the battlefield, you may reveal a Treefolk card from your hand. If you don't, Murmuring Bosk enters the battlefield tapped.\n{T}: Add {W} or {B} to your mana pool. Murmuring Bosk deals 1 damage to you.
-End

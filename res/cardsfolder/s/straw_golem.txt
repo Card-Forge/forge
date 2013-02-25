@@ -1,7 +1,6 @@
 Name:Straw Golem
 ManaCost:1
 Types:Artifact Creature Golem
-Text:no text
 PT:2/3
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ When an opponent casts a creature spell, sacrifice CARDNAME.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Defined$ Self
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/straw_golem.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/158.jpg
 Oracle:When an opponent casts a creature spell, sacrifice Straw Golem.
-End

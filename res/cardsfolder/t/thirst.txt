@@ -1,7 +1,6 @@
 Name:Thirst
 ManaCost:2 U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ KeepTapped
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thirst.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/99.jpg
 Oracle:Enchant creature\nWhen Thirst enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\nAt the beginning of your upkeep, sacrifice Thirst unless you pay {U}.
-End

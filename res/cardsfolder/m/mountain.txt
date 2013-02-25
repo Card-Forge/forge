@@ -1,7 +1,6 @@
 Name:Mountain
 ManaCost:no cost
 Types:Basic Land Mountain
-Text:no text
 SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73958.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159286\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159285\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159284
@@ -51,4 +50,3 @@ SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/91.jpg
 SetInfo:LRW|Land|http://magiccards.info/scans/en/lw/294.jpg|4
 SetInfo:2ED|Land|http://magiccards.info/scans/en/un/286.jpg|3
 Oracle:R
-End

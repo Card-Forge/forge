@@ -1,7 +1,6 @@
 Name:Geth, Lord of the Vault
 ManaCost:4 B B
 Types:Legendary Creature Zombie
-Text:no text
 PT:5/5
 K:Intimidate
 A:AB$ ChangeZone | Cost$ X B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in an opponent's graveyard | ValidTgts$ Creature.OppOwn,Artifact.OppOwn | Tapped$ True | SubAbility$ DBMill | SpellDescription$ Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player puts the top X cards of his or her library into his or her graveyard.
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geth_lord_of_the_vault.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/64.jpg
 Oracle:Intimidate\n{X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped. Then that player puts the top X cards of his or her library into his or her graveyard.
-End

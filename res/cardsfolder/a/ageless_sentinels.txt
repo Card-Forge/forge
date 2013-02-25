@@ -1,7 +1,6 @@
 Name:Ageless Sentinels
 ManaCost:3 W
 Types:Creature Wall
-Text:no text
 PT:4/4
 K:Flying
 K:Defender
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ageless_sentinels.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/1.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nWhen Ageless Sentinels blocks, it becomes a Bird Giant, and it loses defender. (It's no longer a Wall. This effect lasts indefinitely.)
-End

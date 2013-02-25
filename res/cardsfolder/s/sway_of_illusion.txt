@@ -1,7 +1,6 @@
 Name:Sway of Illusion
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ ChooseColor | Cost$ 1 U | Defined$ You | SubAbility$ DBSwayAnimate | SpellDescription$ Any number of target creatures become the color of your choice until end of turn. Draw a card.
 SVar:DBSwayAnimate:DB$ Animate | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | References$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ ChosenColor | OverwriteColors$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sway_of_illusion.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/77.jpg
 Oracle:Any number of target creatures become the color of your choice until end of turn.\nDraw a card.
-End

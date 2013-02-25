@@ -1,7 +1,6 @@
 Name:Levitation
 ManaCost:2 U U
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
@@ -12,4 +11,3 @@ SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/61.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/83.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/35.jpg
 Oracle:Creatures you control have flying.
-End

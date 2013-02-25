@@ -1,7 +1,6 @@
 Name:Burr Grafter
 ManaCost:3 G
 Types:Creature Spirit
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 K:Soulshift 3
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burr_grafter.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/203.jpg
 Oracle:Sacrifice Burr Grafter: Target creature gets +2/+2 until end of turn.\nSoulshift 3 (When this creature dies, you may return target Spirit card with converted mana cost 3 or less from your graveyard to your hand.)
-End

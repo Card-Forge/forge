@@ -1,7 +1,6 @@
 Name:Myr Incubator
 ManaCost:6
 Types:Artifact
-Text:no text
 A:AB$ ChangeZone | Cost$ 6 Sac<1/CARDNAME> | Origin$ Library | Destination$ Exile | ChangeType$ Artifact | ChangeNum$ X | References$ X | RememberChanged$ True | ForgetOtherRemembered$ True | Shuffle$ True | SubAbility$ Token | SpellDescription$ Search your library for any number of artifact cards, exile them, then put that many 1/1 colorless Myr artifact creature tokens onto the battlefield. Then shuffle your library.
 SVar:Token:DB$Token | TokenAmount$ Y | References$ Y | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_incubator.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/212.jpg
 Oracle:{6}, {T}, Sacrifice Myr Incubator: Search your library for any number of artifact cards, exile them, then put that many 1/1 colorless Myr artifact creature tokens onto the battlefield. Then shuffle your library.
-End

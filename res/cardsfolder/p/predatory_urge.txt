@@ -1,7 +1,6 @@
 Name:Predatory Urge
 ManaCost:3 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ DamageTgt | AddSVar$ DamageThis & PredatoryX & PredatoryY | Description$ Enchanted creature has "Tap: This creature deals damage equal to its power to target creature. That creature deals damage equal to its power to this creature."
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_urge.j
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/74.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/175.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals damage equal to its power to target creature. That creature deals damage equal to its power to this creature."
-End

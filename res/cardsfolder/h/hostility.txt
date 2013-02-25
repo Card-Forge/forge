@@ -1,7 +1,6 @@
 Name:Hostility
 ManaCost:3 R R R
 Types:Creature Elemental Incarnation
-Text:no text
 PT:6/6
 K:Haste
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell.YouCtrl | ValidTarget$ Opponent | PreventionEffect$ True | ReplaceWith$ HostilityTokens | Description$ If a spell you control would deal damage to an opponent, prevent that damage. Put a 3/1 red Elemental Shaman creature token with haste onto the battlefield for each 1 damage prevented this way.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hostility.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/176.jpg
 Oracle:Haste\nIf a spell you control would deal damage to an opponent, prevent that damage. Put a 3/1 red Elemental Shaman creature token with haste onto the battlefield for each 1 damage prevented this way.\nWhen Hostility is put into a graveyard from anywhere, shuffle it into its owner's library.
-End

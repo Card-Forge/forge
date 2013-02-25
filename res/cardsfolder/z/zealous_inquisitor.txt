@@ -1,7 +1,6 @@
 Name:Zealous Inquisitor
 ManaCost:2 W
 Types:Creature Human Cleric
-Text:no text
 PT:2/2
 A:AB$ Effect | Cost$ 1 W | Name$ Inquisitor Redirection | ValidTgts$ Creature | TgtPrompt$ Select target creature you control to redirect the damage to | ReplacementEffects$ InquisitorCombat,InquisitorNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | References$ InquisitorCombat,InquisitorNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | Duration$ HostLeavesOrEOT | ImprintCards$ Self | RememberObjects$ Targeted | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to target creature instead.
 SVar:InquisitorCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next 1 damage that would be dealt to Zealous Inquisitor this turn is dealt to target creature instead.
@@ -20,4 +19,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/zealous_inquisit
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/27.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/57.jpg
 Oracle:{1}{W}: The next 1 damage that would be dealt to Zealous Inquisitor this turn is dealt to target creature instead.
-End

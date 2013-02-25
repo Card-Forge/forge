@@ -1,7 +1,6 @@
 Name:Chosen of Markov
 ManaCost:2 B
 Types:Creature Human
-Text:no text
 PT:2/2
 A:AB$SetState | Cost$ T tapXType<1/Vampire> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chosen_of_markov.jpg
@@ -15,9 +14,7 @@ Name:Markov's Servant
 ManaCost:no cost
 Colors:black
 Types:Creature Vampire
-Text:no text
 PT:4/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markovs_servant.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/55b.jpg
 Oracle:
-End

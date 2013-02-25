@@ -1,7 +1,6 @@
 Name:Etherwrought Page
 ManaCost:1 W U B
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, choose one - You gain 2 life; or look at the top card of your library, then you may put that card into your graveyard; or each opponent loses 1 life.
 SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBGainLife,DBDig,DBLoseLife | CharmNum$ 1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etherwrought_page.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/108.jpg
 Oracle:At the beginning of your upkeep, choose one - You gain 2 life; or look at the top card of your library, then you may put that card into your graveyard; or each opponent loses 1 life.
-End

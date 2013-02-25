@@ -1,11 +1,9 @@
 Name:Lurking Jackals
 ManaCost:B
 Types:Enchantment
-Text:no text
 T:Mode$ Always | LifeTotal$ Opponent | LifeAmount$ LE10 | TriggerZones$ Battlefield | Execute$ TrigLurkingJackalsAnimate | IsPresent$ Card.Self+Enchantment | TriggerDescription$ When an opponent has 10 or less life, if CARDNAME is an enchantment, CARDNAME becomes a 3/2 Hound creature.
 SVar:TrigLurkingJackalsAnimate:AB$ Animate | Cost$ 0 | Types$ Creature,Hound | Power$ 3 | Toughness$ 2 | OverwriteTypes$ True | Permanent$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_jackals.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/62.jpg
 Oracle:When an opponent has 10 or less life, if Lurking Jackals is an enchantment, it becomes a 3/2 Hound creature.
-End

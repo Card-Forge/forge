@@ -1,7 +1,6 @@
 Name:War Elemental
 ManaCost:R R R
 Types:Creature Elemental
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless an opponent was dealt damage this turn.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | ConditionCheckSVar$ WarElementalX | ConditionSVarCompare$ EQ0 | References$ WarElementalX
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_elemental.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/112.jpg
 Oracle:When War Elemental enters the battlefield, sacrifice it unless an opponent was dealt damage this turn.\nWhenever an opponent is dealt damage, put that many +1/+1 counters on War Elemental.
-End

@@ -1,7 +1,6 @@
 Name:Goblin Settler
 ManaCost:3 R
 Types:Creature Goblin
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target land.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Starter_1999/goblin_settler.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/106.jpg
 Oracle:When Goblin Settler enters the battlefield, destroy target land.
-End

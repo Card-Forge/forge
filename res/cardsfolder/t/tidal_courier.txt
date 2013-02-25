@@ -1,7 +1,6 @@
 Name:Tidal Courier
 ManaCost:3 U
 Types:Creature Merfolk
-Text:no text
 PT:1/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all Merfolk cards revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Merfolk
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_courier.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/31.jpg
 Oracle:When Tidal Courier enters the battlefield, reveal the top four cards of your library. Put all Merfolk cards revealed this way into your hand and the rest on the bottom of your library in any order.\n{3}{U}: Tidal Courier gains flying until end of turn.
-End

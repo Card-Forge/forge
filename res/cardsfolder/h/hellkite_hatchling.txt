@@ -1,7 +1,6 @@
 Name:Hellkite Hatchling
 ManaCost:2 R G
 Types:Creature Dragon
-Text:no text
 PT:2/2
 K:Devour:1
 S:Mode$ Continuous | Affected$ Card.Self+HasDevoured | AddKeyword$ Flying & Trample | Description$ CARDNAME has flying and trample if it devoured a creature.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/hellkite_hatchli
 SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/95.jpg
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/111.jpg
 Oracle:Devour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with that many +1/+1 counters on it.)\nHellkite Hatchling has flying and trample if it devoured a creature.
-End

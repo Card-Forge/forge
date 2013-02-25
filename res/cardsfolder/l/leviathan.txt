@@ -1,7 +1,6 @@
 Name:Leviathan
 ManaCost:5 U U U U
 Types:Creature Leviathan
-Text:no text
 PT:10/10
 K:Trample
 K:CARDNAME enters the battlefield tapped.
@@ -19,4 +18,3 @@ SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/29.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/80.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/98.jpg
 Oracle:Trample\nLeviathan enters the battlefield tapped and doesn't untap during your untap step.\nAt the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.\nLeviathan can't attack unless you sacrifice two Islands.
-End

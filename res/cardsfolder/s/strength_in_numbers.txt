@@ -1,11 +1,9 @@
 Name:Strength in Numbers
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+X, where X is the number of attacking creatures.
 SVar:X:Count$Valid Creature.attacking
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_in_numbers.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/224.jpg
 Oracle:Until end of turn, target creature gains trample and gets +X/+X, where X is the number of attacking creatures.
-End

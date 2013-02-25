@@ -1,11 +1,9 @@
 Name:Magewright's Stone
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Untap | Cost$ 1 T | ValidTgts$ Creature.hasActivatedAbilityWithTapCost | TgtPrompt$ Select target creature that has an activated ability with Tap in its cost. | SpellDescription$ Untap target creature that has an activated ability with Tap in its cost.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magewrights_stone.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/162.jpg
 Oracle:{1}, {T}: Untap target creature that has an activated ability with {T} in its cost.
-End

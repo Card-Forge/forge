@@ -1,11 +1,9 @@
 Name:Durkwood Baloth
 ManaCost:4 G G
 Types:Creature Beast
-Text:no text
 PT:5/5
 K:Suspend:5:G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/durkwood_baloth.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/193.jpg
 Oracle:Suspend 5-{G} (Rather than cast this card from your hand, you may pay {G} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
-End

@@ -1,7 +1,6 @@
 Name:Howling Banshee
 ManaCost:2 B B
 Types:Creature Spirit
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each player loses 3 life.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_banshee.
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/100.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/99.jpg
 Oracle:Flying\nWhen Howling Banshee enters the battlefield, each player loses 3 life.
-End

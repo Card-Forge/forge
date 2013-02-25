@@ -1,7 +1,6 @@
 Name:Phantasmal Sphere
 ManaCost:1 U
 Types:Creature Illusion
-Text:no text
 PT:0/1
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME, then sacrifice CARDNAME unless you pay 1 for each +1/+1 counter on it.
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_sphere.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/48.jpg
 Oracle:Flying\nAt the beginning of your upkeep, put a +1/+1 counter on Phantasmal Sphere, then sacrifice Phantasmal Sphere unless you pay {1} for each +1/+1 counter on it.\nWhen Phantasmal Sphere leaves the battlefield, put a blue Orb creature token with flying onto the battlefield under target opponent's control. That creature's power and toughness are each equal to the number of +1/+1 counters on Phantasmal Sphere.
-End

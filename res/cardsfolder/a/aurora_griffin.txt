@@ -1,7 +1,6 @@
 Name:Aurora Griffin
 ManaCost:3 W
 Types:Creature Griffin
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ Animate | Cost$ W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ White | OverwriteColors$ True | SpellDescription$ Target permanent becomes white until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurora_griffin.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/2.jpg
 Oracle:Flying\n{W}: Target permanent becomes white until end of turn.
-End

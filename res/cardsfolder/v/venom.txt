@@ -1,7 +1,6 @@
 Name:Venom
 ManaCost:1 G G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ AttackerBlocked | ValidCard$ Creature.nonWall | ValidBlocker$ Card.AttachedBy | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
@@ -16,4 +15,3 @@ SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/198.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/53.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/164.jpg
 Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
-End

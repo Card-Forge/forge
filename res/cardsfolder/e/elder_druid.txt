@@ -1,7 +1,6 @@
 Name:Elder Druid
 ManaCost:3 G
 Types:Creature Elf Cleric Druid
-Text:no text
 PT:2/2
 A:AB$ TapOrUntap | Cost$ 3 G T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ You may tap or untap target artifact, creature, or land.
 SVar:RemAIDeck:True
@@ -12,4 +11,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/223.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/120.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/238.jpg
 Oracle:{3}{G}, {T}: You may tap or untap target artifact, creature, or land.
-End

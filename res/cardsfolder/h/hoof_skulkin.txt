@@ -1,11 +1,9 @@
 Name:Hoof Skulkin
 ManaCost:3
 Types:Artifact Creature Scarecrow
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target green creature gets +1/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoof_skulkin.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/169.jpg
 Oracle:{3}: Target green creature gets +1/+1 until end of turn.
-End

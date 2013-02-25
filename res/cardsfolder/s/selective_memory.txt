@@ -1,7 +1,6 @@
 Name:Selective Memory
 ManaCost:3 U
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 3 U | Origin$ Library | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ XFetch | References$ XFetch | SpellDescription$ Search your library for any number of nonland cards and exile them. Then shuffle your library.
 SVar:XFetch:Count$InYourLibrary
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selective_memory.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/37.jpg
 Oracle:Search your library for any number of nonland cards and exile them. Then shuffle your library.
-End

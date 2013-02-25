@@ -1,7 +1,6 @@
 Name:Cloud of Faeries
 ManaCost:1 U
 Types:Creature Faerie
-Text:no text
 PT:1/1
 K:Flying
 K:Cycling:2
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gu/en-us/card11588.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/29.jpg
 Oracle:Flying\nWhen Cloud of Faeries enters the battlefield, untap up to two lands.\nCycling {2} ({2}, Discard this card: Draw a card.)
-End

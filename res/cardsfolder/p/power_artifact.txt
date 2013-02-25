@@ -1,7 +1,6 @@
 Name:Power Artifact
 ManaCost:U U
 Types:Enchantment Aura
-Text:no text
 K:Enchant artifact
 S:Mode$ ReduceCost | ValidCard$ Artifact.EnchantedBy | Type$ Ability | Amount$ 2 | MinMana$ 1 | Description$ Enchanted artifact's activated abilities cost 2 less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
 A:SP$ Attach | Cost$ U U | ValidTgts$ Artifact | AILogic$ Pump
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_artifact.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/55.jpg
 Oracle:Enchant artifact\nEnchanted artifact's activated abilities cost {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
-End

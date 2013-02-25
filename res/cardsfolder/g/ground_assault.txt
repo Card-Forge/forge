@@ -1,11 +1,9 @@
 Name:Ground Assault
 ManaCost:R G
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ R G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of lands you control to target creature.
 SVar:X:Count$TypeYouCtrl.Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ground_assault.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/168.jpg
 Oracle:Ground Assault deals damage to target creature equal to the number of lands you control.
-End

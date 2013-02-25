@@ -1,7 +1,6 @@
 Name:Kor Skyfisher
 ManaCost:1 W
 Types:Creature Kor Soldier
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a permanent you control to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_skyfisher.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/23.jpg
 Oracle:Flying\nWhen Kor Skyfisher enters the battlefield, return a permanent you control to its owner's hand.
-End

@@ -1,7 +1,6 @@
 Name:Necromancer's Magemark
 ManaCost:2 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control that are enchanted get +1/+1.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancers_magemark.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/53.jpg
 Oracle:Enchant creature\nCreatures you control that are enchanted get +1/+1.\nIf a creature you control that's enchanted would die, return it to its owner's hand instead.
-End

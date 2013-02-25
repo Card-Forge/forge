@@ -1,7 +1,6 @@
 Name:Vampire Interloper
 ManaCost:1 B
 Types:Creature Vampire Scout
-Text:no text
 PT:2/1
 K:Flying
 K:CARDNAME can't block.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_interloper.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/123.jpg
 Oracle:Flying\nVampire Interloper can't block.
-End

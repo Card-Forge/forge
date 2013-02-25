@@ -1,7 +1,6 @@
 Name:Faceless Devourer
 ManaCost:2 B
 Types:Creature Nightmare Horror
-Text:no text
 PT:2/1
 K:Shadow
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target creature with shadow.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faceless_devourer.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/108.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhen Faceless Devourer enters the battlefield, exile another target creature with shadow.\nWhen Faceless Devourer leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-End

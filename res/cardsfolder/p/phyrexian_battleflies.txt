@@ -1,7 +1,6 @@
 Name:Phyrexian Battleflies
 ManaCost:B
 Types:Creature Insect
-Text:no text
 PT:0/1
 K:Flying
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_battleflies.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/114.jpg
 Oracle:Flying\n{B}: Phyrexian Battleflies gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
-End

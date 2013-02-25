@@ -1,7 +1,6 @@
 Name:Voiceless Spirit
 ManaCost:2 W
 Types:Creature Spirit
-Text:no text
 PT:2/1
 K:Flying
 K:First Strike
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voiceless_spirit.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/42.jpg
 Oracle:Flying, first strike
-End

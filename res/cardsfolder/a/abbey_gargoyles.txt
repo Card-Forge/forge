@@ -1,7 +1,6 @@
 Name:Abbey Gargoyles
 ManaCost:2 W W W
 Types:Creature Gargoyle
-Text:no text
 PT:3/4
 K:Flying
 K:Protection from red
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/abbey_gargoyles.
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/101.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/277.jpg
 Oracle:Flying, protection from red
-End

@@ -1,7 +1,6 @@
 Name:Security Blockade
 ManaCost:2 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ PreventDamage | Description$ Enchanted land has "Tap: Prevent the next 1 damage that would be dealt to you this turn."
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/security_blockade.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/20.jpg
 Oracle:Enchant land\nWhen Security Blockade enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.\nEnchanted land has "{T}: Prevent the next 1 damage that would be dealt to you this turn."
-End

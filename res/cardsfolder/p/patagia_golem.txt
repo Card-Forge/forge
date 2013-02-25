@@ -1,7 +1,6 @@
 Name:Patagia Golem
 ManaCost:4
 Types:Artifact Creature Golem
-Text:no text
 PT:2/3
 A:AB$ Pump | Cost$ 3 | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 SVar:Rarity:Uncommon
@@ -11,4 +10,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/304.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/278.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/310.jpg
 Oracle:{3}: Patagia Golem gains flying until end of turn.
-End

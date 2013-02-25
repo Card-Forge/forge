@@ -1,7 +1,6 @@
 Name:Siege-Gang Commander
 ManaCost:3 R R
 Types:Creature Goblin
-Text:no text
 PT:2/2
 A:AB$ DealDamage | Cost$ 1 R Sac<1/Goblin> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put three 1/1 red Goblin creature tokens onto the battlefield.
@@ -12,4 +11,3 @@ Oracle:When Siege-Gang Commander enters the battlefield, put three 1/1 red Gobli
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/157.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/103.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/234.jpg
-End

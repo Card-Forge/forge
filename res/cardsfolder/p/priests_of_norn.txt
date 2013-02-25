@@ -1,7 +1,6 @@
 Name:Priests of Norn
 ManaCost:2 W
 Types:Creature Cleric
-Text:no text
 PT:1/4
 K:Vigilance
 K:Infect
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priests_of_norn.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/16.jpg
 Oracle:Vigilance\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-End

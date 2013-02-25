@@ -1,7 +1,6 @@
 Name:Parasitic Strix
 ManaCost:2 U
 Types:Artifact Creature Bird
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.Black+YouCtrl | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, if you control a black permanent, target player loses 2 life and you gain 2 life.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/parasitic_strix.
 SVar:Rarity:Common
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/32.jpg
 Oracle:Flying\nWhen Parasitic Strix enters the battlefield, if you control a black permanent, target player loses 2 life and you gain 2 life.
-End

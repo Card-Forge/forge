@@ -1,7 +1,6 @@
 Name:Primal Clay
 ManaCost:4
 Types:Artifact Creature Shapeshifter
-Text:no text
 PT:*/*
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ MoldChoice | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
 SVar:MoldChoice:AB$ Charm | Cost$ 0 | Defined$ You | Choices$ GroundMold,AirMold,WallMold | CharmNum$ 1
@@ -18,4 +17,3 @@ SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/210.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/271.jpg
 SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/26.jpg
 Oracle:As Primal Clay enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
-End

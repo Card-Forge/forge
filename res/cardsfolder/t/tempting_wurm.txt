@@ -1,7 +1,6 @@
 Name:Tempting Wurm
 ManaCost:1 G
 Types:Creature Wurm
-Text:no text
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EachOpponent | TriggerDescription$ When CARDNAME enters the battlefield, each opponent may put any number of artifact, creature, enchantment, and/or land cards from his or her hand onto the battlefield.
 SVar:EachOpponent:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TemptingChange
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_wurm.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/291.jpg
 Oracle:When Tempting Wurm enters the battlefield, each opponent may put any number of artifact, creature, enchantment, and/or land cards from his or her hand onto the battlefield.
-End

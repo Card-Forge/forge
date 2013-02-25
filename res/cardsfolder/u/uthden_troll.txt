@@ -1,7 +1,6 @@
 Name:Uthden Troll
 ManaCost:2 R
 Types:Creature Troll
-Text:no text
 PT:2/2
 A:AB$ Regenerate | Cost$ R | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
@@ -13,4 +12,3 @@ SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/71.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/181.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/181.jpg
 Oracle:{R}: Regenerate Uthden Troll.
-End

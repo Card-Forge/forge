@@ -1,7 +1,6 @@
 Name:Viscera Dragger
 ManaCost:3 B
 Types:Creature Zombie Ogre Warrior
-Text:no text
 PT:3/3
 K:Cycling:2
 K:Unearth:1 B
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscera_dragger.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/92.jpg
 Oracle:Cycling {2} ({2}, Discard this card: Draw a card.)\nUnearth {1}{B} ({1}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-End

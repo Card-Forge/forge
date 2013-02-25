@@ -1,7 +1,6 @@
 Name:Goldnight Commander
 ManaCost:3 W
 Types:Creature Human Cleric Soldier
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldnight_commander.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/22.jpg
 Oracle:Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
-End

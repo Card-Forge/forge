@@ -1,11 +1,9 @@
 Name:Hell Swarm
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ PumpAll | Cost$ B | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -0 | IsCurse$ True | SpellDescription$ All creatures get -1/-0 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hell_swarm.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/17.jpg
 Oracle:All creatures get -1/-0 until end of turn.
-End

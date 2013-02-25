@@ -1,7 +1,6 @@
 Name:Primal Plasma
 ManaCost:3 U
 Types:Creature Elemental Shapeshifter
-Text:no text
 PT:*/*
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ PlasmaChoice | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
 SVar:PlasmaChoice:AB$ Charm | Cost$ 0 | Defined$ You | Choices$ GroundPlasma,AirPlasma,WallPlasma | CharmNum$ 1
@@ -13,4 +12,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card124757.jpg
 SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/23.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/59.jpg
 Oracle:As Primal Plasma enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
-End

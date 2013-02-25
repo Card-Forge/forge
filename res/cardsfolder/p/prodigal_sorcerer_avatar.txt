@@ -1,7 +1,6 @@
 Name:Prodigal Sorcerer Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/+5
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
 SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/prodigal_sorcerer_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/prodigal-sorcerer.jpg
 Oracle:Hand +0, life +5\nAt the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
-End

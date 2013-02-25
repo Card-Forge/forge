@@ -1,7 +1,6 @@
 Name:Joiner Adept
 ManaCost:1 G
 Types:Creature Elf Druid
-Text:no text
 PT:2/1
 S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "Tap: Add one mana of any color to your mana pool."
 SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/joiner_adept.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/89.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/271.jpg
 Oracle:Lands you control have "{T}: Add one mana of any color to your mana pool."
-End

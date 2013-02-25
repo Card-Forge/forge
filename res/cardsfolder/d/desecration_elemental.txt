@@ -1,7 +1,6 @@
 Name:Desecration Elemental
 ManaCost:3 B
 Types:Creature Elemental
-Text:no text
 PT:8/8
 K:Fear
 T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell, sacrifice a creature.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desecration_elemental.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/45.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever a player casts a spell, sacrifice a creature.
-End

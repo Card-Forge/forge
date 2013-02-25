@@ -1,7 +1,6 @@
 Name:Stormtide Leviathan
 ManaCost:5 U U U
 Types:Creature Leviathan
-Text:no text
 PT:8/8
 K:Islandwalk
 S:Mode$ Continuous | Affected$ Land | AddType$ Island | Description$ All lands are Islands in addition to their other types.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/stormtide_leviat
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/74.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/70.jpg
 Oracle:Islandwalk (This creature is unblockable as long as defending player controls an Island.)\nAll lands are Islands in addition to their other types.\nCreatures without flying or islandwalk can't attack.
-End

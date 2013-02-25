@@ -1,7 +1,6 @@
 Name:Roughshod Mentor
 ManaCost:5 G
 Types:Creature Giant Warrior
-Text:no text
 PT:5/4
 S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddKeyword$ Trample | Description$ Green creatures you control have trample.
 SVar:PlayMain1:TRUE
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roughshod_mentor.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/128.jpg
 Oracle:Green creatures you control have trample.
-End

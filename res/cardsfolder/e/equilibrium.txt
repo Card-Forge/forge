@@ -1,7 +1,6 @@
 Name:Equilibrium
 ManaCost:1 U U
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a creature spell, you may pay 1. If you do, return target creature to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/equilibrium.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/71.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/32.jpg
 Oracle:Whenever you cast a creature spell, you may pay {1}. If you do, return target creature to its owner's hand.
-End

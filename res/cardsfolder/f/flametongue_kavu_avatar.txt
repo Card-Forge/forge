@@ -1,7 +1,6 @@
 Name:Flametongue Kavu Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/-6
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerZones$ Command | TriggerDescription$ Whenever a nontoken creature enters the battlefield under your control, that creature deals X damage to target creature, where X is a number chosen at random from 0 to 4.
 SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | NumDmg$ X | DamageSource$ TriggeredCard
@@ -9,4 +8,3 @@ SVar:X:Count$Random.0.4
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/flametongue_kavu_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/flametongue-kavu.jpg
 Oracle:Hand +0, life -6\nWhenever a nontoken creature enters the battlefield under your control, that creature deals X damage to target creature, where X is a number chosen at random from 0 to 4.
-End

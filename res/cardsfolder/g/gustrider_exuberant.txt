@@ -1,7 +1,6 @@
 Name:Gustrider Exuberant
 ManaCost:2 W
 Types:Creature Human Wizard
-Text:no text
 PT:1/2
 K:Flying
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.powerGE5+YouCtrl | KW$ Flying | SpellDescription$ Creatures you control with power 5 or greater gain flying until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gustrider_exuberant.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/13.jpg
 Oracle:Flying\nSacrifice Gustrider Exuberant: Creatures you control with power 5 or greater gain flying until end of turn.
-End

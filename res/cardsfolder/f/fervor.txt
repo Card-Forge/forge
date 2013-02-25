@@ -1,7 +1,6 @@
 Name:Fervor
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
 SVar:BuffedBy:Creature
 SVar:PlayMain1:TRUE
@@ -12,4 +11,3 @@ SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/129.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/174.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/181.jpg
 Oracle:Creatures you control have haste.
-End

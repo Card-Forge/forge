@@ -1,7 +1,6 @@
 Name:Orzhov Charm
 ManaCost:W B
 Types:Instant
-Text:no text
 A:SP$ Charm | Cost$ W B | Choices$ ReturnAll,DBDestroy,DBZombify | CharmNum$ 1 | SpellDescription$ Choose one - Return target creature you control and all Auras you control attached to it to their owners' hands; or destroy target creature and you lose life equal to that creature's toughness; or return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
 SVar:ReturnAll:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | StackDescription$ None | SubAbility$ DBChangeZoneAll | RememberObjects$ Targeted | SpellDescription$ Return target creature you control and all Auras you control attached to it to their owners' hands
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered,Aura.AttachedTo Creature.IsRemembered+YouCtrl | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_charm.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/185.jpg
 Oracle:Choose one — Return target creature you control and all Auras you control attached to it to their owner's hand; or destroy target creature and you lose life equal to its toughness; or return target creature card with converted mana cost 1 or less from your graveyard to the battlefield.
-End

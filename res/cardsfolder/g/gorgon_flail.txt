@@ -1,11 +1,9 @@
 Name:Gorgon Flail
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Deathtouch | Description$ Equipped creature gets +1/+1 and has deathtouch.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_flail.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/211.jpg
 Oracle:Equipped creature gets +1/+1 and has deathtouch. (Any amount of damage it deals to a creature is enough to destroy that creature.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
-End

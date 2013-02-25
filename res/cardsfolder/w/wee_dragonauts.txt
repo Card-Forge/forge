@@ -1,7 +1,6 @@
 Name:Wee Dragonauts
 ManaCost:1 U R
 Types:Creature Faerie Wizard
-Text:no text
 PT:1/3
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +2/+0 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wee_dragonauts.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/137.jpg
 Oracle:Flying\nWhenever you cast an instant or sorcery spell, Wee Dragonauts gets +2/+0 until end of turn.
-End

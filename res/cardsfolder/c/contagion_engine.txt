@@ -1,7 +1,6 @@
 Name:Contagion Engine
 ManaCost:6
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on each creature target player controls.
 A:AB$ Proliferate | Cost$ 4 T | SubAbility$ DBProliferate | SpellDescription$ Proliferate, then proliferate again.
 SVar:DBProliferate:DB$Proliferate | Cost$ 0
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contagion_engine.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/145.jpg
 Oracle:When Contagion Engine enters the battlefield, put a -1/-1 counter on each creature target player controls.\n{4}, {T}: Proliferate, then proliferate again. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there. Then do it again.)
-End

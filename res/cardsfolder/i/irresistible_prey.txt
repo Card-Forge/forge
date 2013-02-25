@@ -1,7 +1,6 @@
 Name:Irresistible Prey
 ManaCost:G
 Types:Sorcery
-Text:no text
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SubAbility$ DBDraw | SpellDescription$ Target creature must be blocked this turn if able.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/irresistible_prey.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/188.jpg
 Oracle:Target creature must be blocked this turn if able.\nDraw a card.
-End

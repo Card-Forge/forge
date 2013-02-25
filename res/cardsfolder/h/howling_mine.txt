@@ -1,7 +1,6 @@
 Name:Howling Mine
 ManaCost:2
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self+untapped | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, if CARDNAME is untapped, that player draws an additional card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredPlayer
 SVar:Rarity:Rare
@@ -20,4 +19,3 @@ SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/251.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/251.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/248.jpg
 Oracle:At the beginning of each player's draw step, if Howling Mine is untapped, that player draws an additional card.
-End

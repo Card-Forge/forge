@@ -1,7 +1,6 @@
 Name:Kabira Vindicator
 ManaCost:3 W
 Types:Creature Human Knight
-Text:no text
 PT:2/4
 K:Level up:2 W
 K:maxLevel:5
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_vindicator.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/28.jpg
 Oracle:Level up {2}{W} ({2}{W}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-4\n3/6\nOther creatures you control get +1/+1.\nLEVEL 5+\n4/8\nOther creatures you control get +2/+2.
-End

@@ -1,7 +1,6 @@
 Name:Moonlight Geist
 ManaCost:2 W
 Types:Creature Spirit
-Text:no text
 PT:2/1
 K:Flying
 A:AB$ Pump | Cost$ 3 W | Defined$ Self | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by CARDNAME this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlight_geist.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/29.jpg
 Oracle:Flying\n{3}{W}: Prevent all combat damage that would be dealt to and dealt by Moonlight Geist this turn.
-End

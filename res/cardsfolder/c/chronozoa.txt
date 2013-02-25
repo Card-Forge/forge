@@ -1,7 +1,6 @@
 Name:Chronozoa
 ManaCost:3 U
 Types:Creature Illusion
-Text:no text
 PT:3/3
 K:Flying
 K:Vanishing:3
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chronozoa.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/37.jpg
 Oracle:Flying\nVanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Chronozoa dies, if it had no time counters on it, put two tokens that are copies of it onto the battlefield.
-End

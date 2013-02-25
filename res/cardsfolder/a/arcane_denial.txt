@@ -1,7 +1,6 @@
 Name:Arcane Denial
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep. You draw a card at the beginning of the next turn's upkeep.
 SVar:DBDraw:DB$Draw | NumCards$ 2 | NextUpkeep$ True | Defined$ TargetedController | OptionalDecider$ True | SubAbility$ DBDraw2
 SVar:DBDraw2:DB$Draw | NumCards$ 1 | NextUpkeep$ True | Defined$ You
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_denial.jpg
 SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/32.jpg|2
 Oracle:Counter target spell. Its controller may draw up to two cards at the beginning of the next turn's upkeep.\nYou draw a card at the beginning of the next turn's upkeep.
-End

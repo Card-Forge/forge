@@ -1,7 +1,6 @@
 Name:Burning-Tree Emissary
 ManaCost:RG RG
 Types:Creature Human Shaman
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add R G to your mana pool.
 SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ R G
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning-tree_emissary.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/216.jpg
 Oracle:When Burning-Tree Emissary enters the battlefield, add {R}{G} to your mana pool.
-End

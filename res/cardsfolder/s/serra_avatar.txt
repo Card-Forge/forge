@@ -1,7 +1,6 @@
 Name:Serra Avatar
 ManaCost:4 W W W
 Types:Creature Avatar
-Text:no text
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to your life total.
 SVar:X:Count$YourLifeTotal
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_avatar.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/45.jpg
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/32.jpg
 Oracle:Serra Avatar's power and toughness are each equal to your life total.\nWhen Serra Avatar is put into a graveyard from anywhere, shuffle it into its owner's library.
-End

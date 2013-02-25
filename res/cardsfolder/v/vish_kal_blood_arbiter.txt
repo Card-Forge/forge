@@ -1,7 +1,6 @@
 Name:Vish Kal, Blood Arbiter
 ManaCost:4 W B B
 Types:Legendary Creature Vampire
-Text:no text
 PT:5/5
 K:Flying
 K:Lifelink
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vish_kal_blood_arbiter.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/234.jpg
 Oracle:Flying, lifelink\nSacrifice a creature: Put X +1/+1 counters on Vish Kal, Blood Arbiter, where X is the sacrificed creature's power.\nRemove all +1/+1 counters from Vish Kal: Target creature gets -1/-1 until end of turn for each +1/+1 counter removed this way.
-End

@@ -1,7 +1,6 @@
 Name:Argothian Enchantress
 ManaCost:1 G
 Types:Creature Human Druid
-Text:no text
 PT:0/1
 K:Shroud
 T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, draw a card.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_enchantress.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/234.jpg
 Oracle:Shroud (This permanent can't be the target of spells or abilities.)\nWhenever you cast an enchantment spell, draw a card.
-End

@@ -1,11 +1,9 @@
 Name:Magistrate's Veto
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.White,Creature.Blue | AddHiddenKeyword$ CARDNAME can't block. | Description$ White creatures and blue creatures can't block.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magistrates_veto.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/204.jpg
 Oracle:White creatures and blue creatures can't block.
-End

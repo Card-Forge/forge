@@ -1,7 +1,6 @@
 Name:Johtull Wurm
 ManaCost:5 G
 Types:Creature Wurm
-Text:no text
 PT:6/6
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ -X | NumDef$ -Y | References$ X,Y
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/johtull_wurm.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/168.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/138.jpg
 Oracle:Whenever Johtull Wurm becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
-End

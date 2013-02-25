@@ -1,7 +1,6 @@
 Name:Boldwyr Intimidator
 ManaCost:5 R R
 Types:Creature Giant Warrior
-Text:no text
 PT:5/5
 S:Mode$ Continuous | Affected$ Creature.Coward | AddKeyword$ CantBlock Creature.Warrior | Description$ Cowards can't block Warriors.
 A:AB$ Animate | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Coward | RemoveCreatureTypes$ True | SpellDescription$ Target creature becomes a Coward until end of turn.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/boldwyr_intimida
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/86.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/111.jpg
 Oracle:Cowards can't block Warriors.\n{R}: Target creature becomes a Coward until end of turn.\n{2}{R}: Target creature becomes a Warrior until end of turn.
-End

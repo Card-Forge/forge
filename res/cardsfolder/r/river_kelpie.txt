@@ -1,7 +1,6 @@
 Name:River Kelpie
 ManaCost:3 U U
 Types:Creature Beast
-Text:no text
 PT:3/3
 K:Persist
 T:Mode$ ChangesZone | ValidCard$ Permanent | Origin$ Graveyard | Destination$ Battlefield | Execute$ DBDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another permanent is put onto the battlefield from a graveyard, draw a card.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/river_kelpie.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/49.jpg
 Oracle:Whenever River Kelpie or another permanent is put onto the battlefield from a graveyard, draw a card.\nWhenever a player casts a spell from a graveyard, draw a card.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
-End

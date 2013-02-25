@@ -1,7 +1,6 @@
 Name:Oona's Gatewarden
 ManaCost:UB
 Types:Creature Faerie Soldier
-Text:no text
 PT:2/1
 K:Flying
 K:Defender
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oonas_gatewarden.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/173.jpg
 Oracle:Defender, flying\nWither (This deals damage to creatures in the form of -1/-1 counters.)
-End

@@ -1,7 +1,6 @@
 Name:Sacred Nectar
 ManaCost:1 W
 Types:Sorcery
-Text:no text
 A:SP$ GainLife | Cost$ 1 W | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_nectar.jpg
@@ -11,4 +10,3 @@ SetInfo:POR|Common|http://magiccards.info/scans/en/po/187.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/38.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/37.jpg
 Oracle:You gain 4 life.
-End

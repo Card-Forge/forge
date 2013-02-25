@@ -1,7 +1,6 @@
 Name:Rakdos Riteknife
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | References$ X | AddAbility$ RitualSac | Description$ Equipped creature gets +1/+0 for each blood counter on CARDNAME and has "T, Sacrifice a creature: Put a blood counter on CARDNAME."
 SVar:RitualSac:AB$ PutCounter | Cost$ T Sac<1/Creature> | Defined$ OriginalHost | CounterType$ BLOOD | CounterNum$ 1 | SpellDescription$ Put a blood counter on Rakdos Riteknife.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_riteknife.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/164.jpg
 Oracle:Equipped creature gets +1/+0 for each blood counter on Rakdos Riteknife and has "{T}, Sacrifice a creature: Put a blood counter on Rakdos Riteknife."\n{B}{R}, Sacrifice Rakdos Riteknife: Target player sacrifices a permanent for each blood counter on Rakdos Riteknife.\nEquip {2}
-End

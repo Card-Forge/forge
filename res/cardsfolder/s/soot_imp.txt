@@ -1,7 +1,6 @@
 Name:Soot Imp
 ManaCost:1 B B
 Types:Creature Imp
-Text:no text
 PT:1/2
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Card.nonBlack | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a nonblack spell, that player loses 1 life.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soot_imp.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/43.jpg
 Oracle:Flying\nWhenever a player casts a nonblack spell, that player loses 1 life.
-End

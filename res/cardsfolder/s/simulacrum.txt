@@ -1,7 +1,6 @@
 Name:Simulacrum
 ManaCost:1 B
 Types:Instant
-Text:no text
 A:SP$ GainLife | Cost$ 1 B | Defined$ You | LifeAmount$ X | SubAbility$ Dmg | References$ X | SpellDescription$ You gain life equal to the damage dealt to you this turn. CARDNAME deals damage to target creature you control equal to the damage dealt to you this turn.
 SVar:Dmg:DB$ DealDamage | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDmg$ X | References$ X
 SVar:X:Count$YourDamageThisTurn
@@ -14,4 +13,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/38.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/45.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/37.jpg
 Oracle:You gain life equal to the damage dealt to you this turn. Simulacrum deals damage to target creature you control equal to the damage dealt to you this turn.
-End

@@ -1,7 +1,6 @@
 Name:Trinisphere
 ManaCost:3
 Types:Artifact
-Text:no text
 S:Mode$ SetCost | ValidCard$ Card | Type$ Spell | Amount$ Min3 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, each spell that would cost less than three mana to cast costs three mana to cast. (Additional mana in the cost may be paid with any color of mana or colorless mana. For example, a spell that would cost 1 B to cast costs 2 B to cast instead.)
 SVar:X:Count$Valid Card.Self+untapped
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trinisphere.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/154.jpg
 Oracle:As long as Trinisphere is untapped, each spell that would cost less than three mana to cast costs three mana to cast. (Additional mana in the cost may be paid with any color of mana or colorless mana. For example, a spell that would cost {1}{B} to cast costs {2}{B} to cast instead.)
-End

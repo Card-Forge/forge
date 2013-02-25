@@ -1,11 +1,9 @@
 Name:Hornet Cobra
 ManaCost:1 G G
 Types:Creature Snake
-Text:no text
 PT:2/1
 K:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hornet_cobra.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/104.jpg
 Oracle:First strike
-End

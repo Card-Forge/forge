@@ -1,7 +1,6 @@
 Name:March of the Machines
 ManaCost:3 U
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost. (Equipment that's a creature can't equip a creature.)
 SVar:AffectedX:Count$CardManaCost
 SVar:PlayMain1:TRUE
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_the_mac
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/42.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/91.jpg
 Oracle:Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost. (Equipment that's a creature can't equip a creature.)
-End

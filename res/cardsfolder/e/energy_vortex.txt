@@ -1,7 +1,6 @@
 Name:Energy Vortex
 ManaCost:3 U U
 Types:Enchantment
-Text:no text
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ At the beginning of your upkeep, remove all energy counters from CARDNAME.
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_vortex.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/64.jpg
 Oracle:As Energy Vortex enters the battlefield, choose an opponent.\nAt the beginning of your upkeep, remove all energy counters from Energy Vortex.\nAt the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless he or she pays {1} for each energy counter on Energy Vortex.\n{X}: Put X energy counters on Energy Vortex. Activate this ability only during your upkeep.
-End

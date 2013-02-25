@@ -1,11 +1,9 @@
 Name:Terminus
 ManaCost:4 W W
 Types:Sorcery
-Text:no text
 K:Miracle:W
 A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 |SpellDescription$ Put all creatures on the bottom of their owners' libraries.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terminus.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/38.jpg
 Oracle:Put all creatures on the bottom of their owners' libraries.\nMiracle {W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
-End

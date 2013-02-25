@@ -1,7 +1,6 @@
 Name:Demonic Tutor
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card and put that card into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
@@ -11,4 +10,3 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/13.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/13.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/13.jpg
 Oracle:Search your library for a card and put that card into your hand. Then shuffle your library.
-End

@@ -1,7 +1,6 @@
 Name:Goblin Gardener
 ManaCost:3 R
 Types:Creature Goblin
-Text:no text
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, destroy target land.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_gardener.
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/84.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/188.jpg
 Oracle:When Goblin Gardener dies, destroy target land.
-End

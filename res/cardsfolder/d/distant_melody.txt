@@ -1,7 +1,6 @@
 Name:Distant Melody
 ManaCost:3 U
 Types:Sorcery
-Text:no text
 A:SP$ ChooseType | Cost$ 3 U | Defined$ You | Type$ Creature | SubAbility$ DBDraw | AILogic$ MostProminentOnBattlefield | SpellDescription$ Choose a creature type. Draw a card for each permanent you control of that type.
 SVar:DBDraw:DB$ Draw | Cost$ 0 | NumCards$ X | References$ X
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distant_melody.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/32.jpg
 Oracle:Choose a creature type. Draw a card for each permanent you control of that type.
-End

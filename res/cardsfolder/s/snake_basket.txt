@@ -1,7 +1,6 @@
 Name:Snake Basket
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ Token | Cost$ X Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ X | References$ X | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SorcerySpeed$ True | SpellDescription$ Put X 1/1 green Snake creature tokens onto the battlefield. Activate this ability only any time you could cast a sorcery.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_basket.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/155.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/311.jpg
 Oracle:{X}, Sacrifice Snake Basket: Put X 1/1 green Snake creature tokens onto the battlefield. Activate this ability only any time you could cast a sorcery.
-End

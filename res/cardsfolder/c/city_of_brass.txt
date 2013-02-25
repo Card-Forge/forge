@@ -1,7 +1,6 @@
 Name:City of Brass
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
 T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes tapped, it deals 1 damage to you.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
@@ -14,4 +13,3 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/413.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/321.jpg
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/92.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/85.jpg
-End

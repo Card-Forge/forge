@@ -1,7 +1,6 @@
 Name:Dracoplasm
 ManaCost:U R
 Types:Creature Shapeshifter
-Text:no text
 PT:0/0
 K:Flying
 K:ETBReplacement:Other:TrigSac
@@ -16,4 +15,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dracoplasm.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/341.jpg
 Oracle:Flying\nAs Dracoplasm enters the battlefield, sacrifice any number of creatures. Dracoplasm's power becomes the total power of those creatures and its toughness becomes their total toughness.\n{R}: Dracoplasm gets +1/+0 until end of turn.
-End

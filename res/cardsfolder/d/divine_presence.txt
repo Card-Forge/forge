@@ -1,7 +1,6 @@
 Name:Divine Presence
 ManaCost:2 W
 Types:Enchantment
-Text:no text
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature,Player | DamageAmount$ GE4 | ReplaceWith$ Dmg3 | IsCombat$ False | Description$ If a source would deal 4 or more damage to a creature or player, that source deals 3 damage to that creature or player instead.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature,Player | DamageAmount$ GE4 | IsCombat$ True | ReplaceWith$ Dmg3Combat | Secondary$ True | Description$ If a source would deal 4 or more damage to a creature or player, that source deals 3 damage to that creature or player instead.
 SVar:Dmg3:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ 3
@@ -11,4 +10,3 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_presence.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/15.jpg
 Oracle:If a source would deal 4 or more damage to a creature or player, that source deals 3 damage to that creature or player instead.
-End

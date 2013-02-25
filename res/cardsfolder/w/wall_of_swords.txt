@@ -1,7 +1,6 @@
 Name:Wall of Swords
 ManaCost:3 W
 Types:Creature Wall
-Text:no text
 PT:3/5
 K:Flying
 K:Defender
@@ -19,4 +18,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/227.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/343.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/227.jpg
 Oracle:Defender, flying (This creature can't attack, and it can block creatures with flying.)
-End

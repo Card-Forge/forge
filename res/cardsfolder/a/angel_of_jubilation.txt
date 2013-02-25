@@ -1,7 +1,6 @@
 Name:Angel of Jubilation
 ManaCost:1 W W W
 Types:Creature Angel
-Text:no text
 PT:3/3
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.nonBlack+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other nonblack creatures you control get +1/+1.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_jubilation.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/2.jpg
 Oracle:Flying\nOther nonblack creatures you control get +1/+1.\nPlayers can't pay life or sacrifice creatures to cast spells or activate abilities.
-End

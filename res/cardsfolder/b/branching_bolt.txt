@@ -1,7 +1,6 @@
 Name:Branching Bolt
 ManaCost:1 R G
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ 1 R G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 3 | SpellDescription$ Choose one - CARDNAME deals 3 damage to target creature with flying;
 A:SP$ DealDamage | Cost$ 1 R G | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying. | NumDmg$ 3 | SpellDescription$ or CARDNAME deals 3 damage to target creature without flying;
 A:SP$ DealDamage | Cost$ 1 R G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 3 | SubAbility$ DBDamage | SpellDescription$ or CARDNAME deals 3 damage to target creature with flying and 3 damage to target creature without flying.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/branching_bolt.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/158.jpg
 Oracle:Choose one or both - Branching Bolt deals 3 damage to target creature with flying; and/or Branching Bolt deals 3 damage to target creature without flying.
-End

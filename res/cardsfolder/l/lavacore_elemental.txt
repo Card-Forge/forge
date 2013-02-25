@@ -1,7 +1,6 @@
 Name:Lavacore Elemental
 ManaCost:2 R
 Types:Creature Elemental
-Text:no text
 PT:5/3
 K:Vanishing:1
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control deals combat damage to a player, put a time counter on CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavacore_elemental.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/103.jpg
 Oracle:Vanishing 1 (This permanent enters the battlefield with a time counter on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhenever a creature you control deals combat damage to a player, put a time counter on Lavacore Elemental.
-End

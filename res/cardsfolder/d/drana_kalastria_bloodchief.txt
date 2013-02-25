@@ -1,7 +1,6 @@
 Name:Drana, Kalastria Bloodchief
 ManaCost:3 B B
 Types:Legendary Creature Vampire Shaman
-Text:no text
 PT:4/4
 K:Flying
 A:AB$ Pump | Cost$ X B B | NumDef$ -X | ValidTgts$ Creature | IsCurse$ True | TgtPrompt$ Select target creature. | SubAbility$ DBPump | References$ X | SpellDescription$ Target creature gets -0/-X until end of turn and CARDNAME gets +X/+0 until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drana_kalastria_bloodchief.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/107.jpg
 Oracle:Flying\n{X}{B}{B}: Target creature gets -0/-X until end of turn and Drana, Kalastria Bloodchief gets +X/+0 until end of turn.
-End

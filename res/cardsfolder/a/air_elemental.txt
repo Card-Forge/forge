@@ -1,7 +1,6 @@
 Name:Air Elemental
 ManaCost:3 U U
 Types:Creature Elemental
-Text:no text
 PT:4/4
 K:Flying
 SVar:Rarity:Uncommon
@@ -21,4 +20,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/71.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/32.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/47.jpg
 Oracle:Flying
-End

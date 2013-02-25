@@ -1,7 +1,6 @@
 Name:Vulshok War Boar
 ManaCost:2 R R
 Types:Creature Boar Beast
-Text:no text
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice an artifact.
 SVar:TrigSacUnless:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_war_boar.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/72.jpg
 Oracle:When Vulshok War Boar enters the battlefield, sacrifice it unless you sacrifice an artifact.
-End

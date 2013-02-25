@@ -1,11 +1,9 @@
 Name:Boundless Realms
 ManaCost:6 G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 6 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X | References$ X | Tapped$ True | SpellDescription$ Search your library for X basic land cards, where X is the number of lands you control, and put them onto the battlefield tapped. Then shuffle your library.
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boundless_realms.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/162.jpg
 Oracle:Search your library for up to X basic land cards, where X is the number of lands you control, and put them onto the battlefield tapped. Then shuffle your library.
-End

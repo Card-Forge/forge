@@ -1,11 +1,9 @@
 Name:Scatter Arc
 ManaCost:3 U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target nonCreature spell | SubAbility$ DBDraw | SpellDescription$ Counter target noncreature spell. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scatter_arc.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/48.jpg
 Oracle:Counter target noncreature spell.\nDraw a card.
-End

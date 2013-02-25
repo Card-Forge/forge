@@ -1,7 +1,6 @@
 Name:Lost Order of Jarkeld
 ManaCost:2 W W
 Types:Creature Human Knight
-Text:no text
 PT:1/1
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_order_of_jarkeld.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/267.jpg
 Oracle:As Lost Order of Jarkeld enters the battlefield, choose an opponent.\nLost Order of Jarkeld's power and toughness are each equal to 1 plus the number of creatures the chosen player controls.
-End

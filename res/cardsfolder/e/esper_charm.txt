@@ -1,7 +1,6 @@
 Name:Esper Charm
 ManaCost:W U B
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ W U B | ValidTgts$ Enchantment | TgtPrompt$ Select target Enchantment. | SpellDescription$ Choose one - Destroy target Enchantment;
 A:SP$ Draw | Cost$ W U B | NumCards$ 2 | SpellDescription$ or draw two cards;
 A:SP$ Discard | Cost$ W U B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ or target player discards two cards.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_charm.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/167.jpg
 Oracle:Choose one - Destroy target enchantment; or draw two cards; or target player discards two cards.
-End

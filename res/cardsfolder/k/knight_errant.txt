@@ -1,7 +1,6 @@
 Name:Knight Errant
 ManaCost:1 W
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card13099.jpg
@@ -9,4 +8,3 @@ SetInfo:S99|Common|http://magiccards.info/scans/en/st/19.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/182.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/24.jpg
 Oracle:
-End

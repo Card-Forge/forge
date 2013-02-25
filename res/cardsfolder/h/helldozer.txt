@@ -1,7 +1,6 @@
 Name:Helldozer
 ManaCost:3 B B B
 Types:Creature Zombie Giant
-Text:no text
 PT:6/5
 A:AB$ Destroy | Cost$ B B B T | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBUntap | SpellDescription$ Destroy target land. If that land was nonbasic, untap CARDNAME.
 SVar:DBUntap:DB$Untap | Cost$ 0 | ConditionDefined$ Targeted | ConditionPresent$ Land.nonBasic | ConditionCompare$ EQ1 | Defined$ Self
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card88990.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/88.jpg
 Oracle:{B}{B}{B}, {T}: Destroy target land. If that land was nonbasic, untap Helldozer.
-End

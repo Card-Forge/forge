@@ -1,7 +1,6 @@
 Name:Deep-Slumber Titan
 ManaCost:2 R R
 Types:Creature Giant Warrior
-Text:no text
 PT:7/7
 K:CARDNAME enters the battlefield tapped.
 K:CARDNAME doesn't untap during your untap step.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deep_slumber_titan.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/89.jpg
 Oracle:Deep-Slumber Titan enters the battlefield tapped.\nDeep-Slumber Titan doesn't untap during your untap step.\nWhenever Deep-Slumber Titan is dealt damage, untap it.
-End

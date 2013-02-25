@@ -1,7 +1,6 @@
 Name:Faerie Swarm
 ManaCost:3 U
 Types:Creature Faerie
-Text:no text
 PT:*/*
 K:Flying
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of blue permanents you control.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_swarm.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/37.jpg
 Oracle:Flying\nFaerie Swarm's power and toughness are each equal to the number of blue permanents you control.
-End

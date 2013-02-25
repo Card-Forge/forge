@@ -1,7 +1,6 @@
 Name:Soul of the Harvest
 ManaCost:4 G G
 Types:Creature Elemental
-Text:no text
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken+Other+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another nontoken creature enters the battlefield under your control, you may draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_the_harvest.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/195.jpg
 Oracle:Trample\nWhenever another nontoken creature enters the battlefield under your control, you may draw a card.
-End

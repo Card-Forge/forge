@@ -1,7 +1,6 @@
 Name:Sphinx of Lost Truths
 ManaCost:3 U U
 Types:Creature Sphinx
-Text:no text
 PT:3/5
 K:Flying
 K:Kicker 1 U
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_lost_truths.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/69.jpg
 Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nFlying\nWhen Sphinx of Lost Truths enters the battlefield, draw three cards. Then if it wasn't kicked, discard three cards.
-End

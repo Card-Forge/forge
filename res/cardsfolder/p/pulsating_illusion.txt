@@ -1,7 +1,6 @@
 Name:Pulsating Illusion
 ManaCost:4 U
 Types:Creature Illusion
-Text:no text
 PT:0/1
 K:Flying
 A:AB$ Pump | Cost$ Discard<1/Card> | NumAtt$ +4 | NumDef$ +4 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +4/+4 until end of turn. Activate this ability only once each turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulsating_illusion.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/96.jpg
 Oracle:Flying\nDiscard a card: Pulsating Illusion gets +4/+4 until end of turn. Activate this ability only once each turn.
-End

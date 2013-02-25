@@ -1,7 +1,6 @@
 Name:Enlightened Tutor
 ManaCost:W
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ W | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Artifact,Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_tuto
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/19.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/218.jpg
 Oracle:Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
-End

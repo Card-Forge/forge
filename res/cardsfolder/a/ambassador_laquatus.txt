@@ -1,7 +1,6 @@
 Name:Ambassador Laquatus
 ManaCost:1 U U
 Types:Legendary Creature Merfolk Wizard
-Text:no text
 PT:1/3
 A:AB$ Mill | Cost$ 3 | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top three cards of his or her library into his or her graveyard.
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ambassador_laqua
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/23.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/65.jpg
 Oracle:{3}: Target player puts the top three cards of his or her library into his or her graveyard.
-End

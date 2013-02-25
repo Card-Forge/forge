@@ -1,7 +1,6 @@
 Name:Teleport
 ManaCost:U U U
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ U U U | ActivationPhases$ Declare Attackers - Play Instants and Abilities | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Cast CARDNAME only during the declare attackers step. Target creature is unblockable this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/teleport.jpg
 Oracle:Cast Teleport only during the declare attackers step.\nTarget creature is unblockable this turn.
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/26.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/80.jpg
-End

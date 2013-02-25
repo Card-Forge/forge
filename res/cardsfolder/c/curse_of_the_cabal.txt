@@ -1,7 +1,6 @@
 Name:Curse of the Cabal
 ManaCost:9 B
 Types:Sorcery
-Text:no text
 K:Suspend:2:2 B B
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigCursePayUP | TriggerZones$ Exile | IsPresent$ Card.suspended+Self | PresentZone$ Exile | TriggerDescription$ At the beginning of each player's upkeep, if CARDNAME is suspended, that player may sacrifice a permanent. If he or she does, put two time counters on CARDNAME.
 A:SP$ Sacrifice | Cost$ 9 B | ValidTgts$ Player | TgtPrompt$ Select target player | Amount$ CurseX | SacValid$ Permanent | References$ CurseX | SpellDescription$ Target player sacrifices half the permanents he or she controls, rounded down.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_the_cabal.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/99.jpg
 Oracle:Target player sacrifices half the permanents he or she controls, rounded down.\nSuspend 2-{2}{B}{B} (Rather than cast this card from your hand, you may pay {2}{B}{B} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nAt the beginning of each player's upkeep, if Curse of the Cabal is suspended, that player may sacrifice a permanent. If he or she does, put two time counters on Curse of the Cabal.
-End

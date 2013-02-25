@@ -1,7 +1,6 @@
 Name:Triassic Egg
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ PutCounter | Cost$ 3 T | CounterType$ HATCHLING | CounterNum$ 1 | SpellDescription$ Put a hatchling counter on CARDNAME.
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | IsPresent$ Card.Self+counters_GE2_HATCHLING | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | SpellDescription$ Choose one - You may put a creature card from your hand onto the battlefield;
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | IsPresent$ Card.Self+counters_GE2_HATCHLING | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | CostDesc$ or | SpellDescription$ return target creature card from your graveyard to the battlefield. Activate this ability only if two or more hatchling counters are on CARDNAME.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/triassic_egg.jpg
 Oracle:{3}, {T}: Put a hatchling counter on Triassic Egg.\nSacrifice Triassic Egg: Choose one - You may put a creature card from your hand onto the battlefield; or return target creature card from your graveyard to the battlefield. Activate this ability only if two or more hatchling counters are on Triassic Egg.
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/90.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/242.jpg
-End

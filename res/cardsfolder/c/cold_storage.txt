@@ -1,7 +1,6 @@
 Name:Cold Storage
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SpellDescription$ Exile target creature you control.
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup | SpellDescription$ Return each creature card exiled with CARDNAME to the battlefield under your control.
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_storage.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/270.jpg
 Oracle:{3}: Exile target creature you control.\nSacrifice Cold Storage: Return each creature card exiled with Cold Storage to the battlefield under your control.
-End

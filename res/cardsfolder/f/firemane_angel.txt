@@ -1,7 +1,6 @@
 Name:Firemane Angel
 ManaCost:3 W W R
 Types:Creature Angel
-Text:no text
 PT:4/3
 K:Flying
 K:First Strike
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firemane_angel.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/205.jpg
 Oracle:Flying, first strike\nAt the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.\n{6}{R}{R}{W}{W}: Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
-End

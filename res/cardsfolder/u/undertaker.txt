@@ -1,7 +1,6 @@
 Name:Undertaker
 ManaCost:1 B
 Types:Creature Human Spellshaper
-Text:no text
 PT:1/1
 A:AB$ ChangeZone | Cost$ B T Discard<1/Card> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/undertaker.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/53.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/167.jpg
 Oracle:{B}, {T}, Discard a card: Return target creature card from your graveyard to your hand.
-End

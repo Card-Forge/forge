@@ -1,7 +1,6 @@
 Name:Intrepid Hero
 ManaCost:2 W
 Types:Creature Human Soldier
-Text:no text
 PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 SVar:Rarity:Rare
@@ -11,4 +10,3 @@ SetInfo:USG|Rare|http://magiccards.info/scans/en/us/19.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/20.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/22.jpg
 Oracle:{T}: Destroy target creature with power 4 or greater.
-End

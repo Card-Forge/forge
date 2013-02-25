@@ -1,7 +1,6 @@
 Name:Electrostatic Bolt
 ManaCost:R
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Cost$ R | NumDmg$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | ConditionCheckSVar$ ElectrostaticCheck | ConditionSVarCompare$ EQ0 | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 2 damage to target creature. If it's an artifact creature, CARDNAME deals 4 damage to it instead.
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ 4 | ConditionCheckSVar$ ElectrostaticCheck | ConditionSVarCompare$ EQ1 | StackDescription$ If it's an artifact creature, Electrostatic Bolt deals 4 damage to it instead. | References$ ElectrostaticCheck 
 SVar:ElectrostaticCheck:Targeted$Valid Creature.Artifact
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electrostatic_bolt.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/89.jpg
 Oracle:Electrostatic Bolt deals 2 damage to target creature. If it's an artifact creature, Electrostatic Bolt deals 4 damage to it instead.
-End

@@ -1,7 +1,6 @@
 Name:Ragnar
 ManaCost:U W G
 Types:Legendary Creature Human Cleric
-Text:no text
 PT:2/2
 A:AB$ Regenerate | Cost$ U W G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ragnar.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/290.jpg
 Oracle:{G}{W}{U}, {T}: Regenerate target creature.
-End

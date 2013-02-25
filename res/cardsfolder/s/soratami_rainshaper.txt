@@ -1,7 +1,6 @@
 Name:Soratami Rainshaper
 ManaCost:2 U
 Types:Creature Moonfolk Wizard
-Text:no text
 PT:2/1
 K:Flying
 A:AB$ Pump | Cost$ 3 Return<1/Land> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Shroud | SpellDescription$ Target creature you control gains shroud until end of turn. (It can't be the target of spells or abilities.)
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_rainshaper.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/89.jpg
 Oracle:Flying\n{3}, Return a land you control to its owner's hand: Target creature you control gains shroud until end of turn. (It can't be the target of spells or abilities.)
-End

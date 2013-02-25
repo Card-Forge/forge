@@ -1,7 +1,6 @@
 Name:Drelnoch
 ManaCost:4 U
 Types:Creature Yeti Mutant
-Text:no text
 PT:3/3
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes blocked, you may draw two cards.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drelnoch.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/32.jpg
 Oracle:Whenever Drelnoch becomes blocked, you may draw two cards.
-End

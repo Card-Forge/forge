@@ -1,7 +1,6 @@
 Name:Primordial Ooze
 ManaCost:R
 Types:Creature Ooze
-Text:no text
 PT:1/1
 K:CARDNAME attacks each turn if able.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME. Then you may pay X, where X is the number of +1/+1 counters on it. If you don't, tap CARDNAME and it deals X damage to you.
@@ -18,4 +17,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/261.jpg
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/54.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/157.jpg
 Oracle:Primordial Ooze attacks each turn if able.\nAt the beginning of your upkeep, put a +1/+1 counter on Primordial Ooze. Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap Primordial Ooze and it deals X damage to you.
-End

@@ -1,7 +1,6 @@
 Name:Gaea's Balance
 ManaCost:3 G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 3 G Sac<5/Land> | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains | SubAbility$ DBIsland | Shuffle$ False | SpellDescription$ Search your library for a land card of each basic land type and put them onto the battlefield. Then shuffle your library.
 SVar:DBIsland:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Island | SubAbility$ DBMountain | Shuffle$ False
 SVar:DBMountain:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Mountain | SubAbility$ DBSwamp | Shuffle$ False
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_balance.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/77.jpg
 Oracle:As an additional cost to cast Gaea's Balance, sacrifice five lands.\nSearch your library for a land card of each basic land type and put them onto the battlefield. Then shuffle your library.
-End

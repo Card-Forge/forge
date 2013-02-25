@@ -1,7 +1,6 @@
 Name:Plains
 ManaCost:no cost
 Types:Basic Land Plains
-Text:no text
 SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=8322&type=card\http://gatherer.wizards.com/handlers/image.ashx?multiverseid=159288&type=card\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=4428
@@ -50,4 +49,3 @@ SetInfo:M12|Land|http://magiccards.info/scans/en/m12/230.jpg|4
 SetInfo:LRW|Land|http://magiccards.info/scans/en/lw/282.jpg|4
 SetInfo:2ED|Land|http://magiccards.info/scans/en/un/289.jpg|3
 Oracle:W
-End

@@ -1,7 +1,6 @@
 Name:Guided Strike
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Target creature gets +1/+0 and gains first strike until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/guided_strike.jp
 SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/132.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/13.jpg
 Oracle:Target creature gets +1/+0 and gains first strike until end of turn.\nDraw a card.
-End

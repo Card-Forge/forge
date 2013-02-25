@@ -1,10 +1,8 @@
 Name:Champion's Victory
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Hand | OpponentTurn$ True | ActivationPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. Return target attacking creature to its owner's hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champions_victory.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/39.jpg
 Oracle:Cast Champion's Victory only during the declare attackers step and only if you've been attacked this step.\nReturn target attacking creature to its owner's hand.
-End

@@ -8,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlace.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/68.jpg
 Oracle:Target spell or permanent becomes colorless.
-End

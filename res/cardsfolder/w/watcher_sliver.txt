@@ -1,7 +1,6 @@
 Name:Watcher Sliver
 ManaCost:3 W
 Types:Creature Sliver
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddToughness$ 2 | Description$ All Sliver creatures get +0/+2.
 SVar:PlayMain1:TRUE
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/watcher_sliver.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/45.jpg
 Oracle:All Sliver creatures get +0/+2.
-End

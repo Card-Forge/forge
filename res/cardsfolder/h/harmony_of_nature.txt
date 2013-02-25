@@ -1,7 +1,6 @@
 Name:Harmony of Nature
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 A:SP$ ChooseCard | Cost$ 2 G | Defined$ You | Amount$ X | References$ X | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap | SpellDescription$ Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.
 SVar:TrigTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Z | SubAbility$ DBCleanup | References$ Y,Z
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmony_of_nature.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/68.jpg
 Oracle:Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.
-End

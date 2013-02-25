@@ -1,7 +1,6 @@
 Name:Snapping Drake
 ManaCost:3 U
 Types:Creature Drake
-Text:no text
 PT:3/2
 K:Flying
 SVar:Rarity:Common
@@ -12,4 +11,3 @@ SetInfo:S99|Common|http://magiccards.info/scans/en/st/52.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/68.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/110.jpg
 Oracle:Flying
-End

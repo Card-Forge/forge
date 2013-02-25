@@ -11,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treachery.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/50.jpg
 Oracle:Enchant creature\nWhen Treachery enters the battlefield, untap up to five lands.\nYou control enchanted creature.
-End

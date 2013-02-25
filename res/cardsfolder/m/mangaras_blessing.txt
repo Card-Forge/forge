@@ -1,7 +1,6 @@
 Name:Mangara's Blessing
 ManaCost:2 W
 Types:Instant
-Text:no text
 A:SP$ GainLife | Cost$ 2 W | Defined$ You | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigGainLife | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, you gain 2 life, and you return CARDNAME from your graveyard to your hand at the beginning of the next end step.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2 | SubAbility$ DelayReturn
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mangaras_blessing.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/229.jpg
 Oracle:You gain 5 life.\nWhen a spell or ability an opponent controls causes you to discard Mangara's Blessing, you gain 2 life, and you return Mangara's Blessing from your graveyard to your hand at the beginning of the next end step.
-End

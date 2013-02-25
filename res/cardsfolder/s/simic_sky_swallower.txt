@@ -1,7 +1,6 @@
 Name:Simic Sky Swallower
 ManaCost:5 G U
 Types:Creature Leviathan
-Text:no text
 PT:6/6
 K:Flying
 K:Trample
@@ -11,4 +10,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111204.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/226.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/130.jpg
 Oracle:Flying, trample\nShroud (This creature can't be the target of spells or abilities.)
-End

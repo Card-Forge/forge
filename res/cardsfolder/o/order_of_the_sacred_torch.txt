@@ -1,7 +1,6 @@
 Name:Order of the Sacred Torch
 ManaCost:1 W W
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 A:AB$ Counter | Cost$ T PayLife<1> | TargetType$ Spell | TgtPrompt$ Select target Black spell | ValidTgts$ Card.Black | SpellDescription$ Counter target black spell.
 SVar:RemRandomDeck:True
@@ -11,4 +10,3 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/324.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/32.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/269.jpg
 Oracle:{T}, Pay 1 life: Counter target black spell.
-End

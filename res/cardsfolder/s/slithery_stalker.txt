@@ -1,7 +1,6 @@
 Name:Slithery Stalker
 ManaCost:1 B B
 Types:Creature Nightmare Horror
-Text:no text
 PT:1/1
 K:Swampwalk
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target green or white creature an opponent controls.
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slithery_stalker.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/84.jpg
 Oracle:Swampwalk\nWhen Slithery Stalker enters the battlefield, exile target green or white creature an opponent controls.\nWhen Slithery Stalker leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-End

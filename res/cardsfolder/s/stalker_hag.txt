@@ -1,7 +1,6 @@
 Name:Stalker Hag
 ManaCost:BG BG BG
 Types:Creature Hag
-Text:no text
 PT:3/2
 K:Swampwalk
 K:Forestwalk
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalker_hag.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/129.jpg
 Oracle:Swampwalk, forestwalk
-End

@@ -1,7 +1,6 @@
 Name:Firewild Borderpost
 ManaCost:1 R G
 Types:Artifact
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firewild_borderpost.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/54.jpg
 Oracle:You may pay {1} and return a basic land you control to its owner's hand rather than pay Firewild Borderpost's mana cost.\nFirewild Borderpost enters the battlefield tapped.\n{T}: Add {R} or {G} to your mana pool.
-End

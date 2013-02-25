@@ -1,7 +1,6 @@
 Name:Phantasmal Forces
 ManaCost:3 U
 Types:Creature Illusion
-Text:no text
 PT:4/1
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U
 K:Flying
@@ -14,4 +13,3 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/88.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/69.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/68.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Phantasmal Forces unless you pay {U}.
-End

@@ -1,7 +1,6 @@
 Name:Aven Archer
 ManaCost:3 W W
 Types:Creature Bird Soldier Archer
-Text:no text
 PT:2/2
 K:Flying
 A:AB$ DealDamage | Cost$ 2 W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_archer.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/6.jpg
 Oracle:Flying\n{2}{W}, {T}: Aven Archer deals 2 damage to target attacking or blocking creature.
-End

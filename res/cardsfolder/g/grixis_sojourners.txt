@@ -1,7 +1,6 @@
 Name:Grixis Sojourners
 ManaCost:1 U B R
 Types:Creature Zombie Ogre
-Text:no text
 PT:4/3
 K:Cycling:2 B
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME or it's put into a graveyard from the battlefield, you may exile target card from a graveyard.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_sojourners.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/112.jpg
 Oracle:When you cycle Grixis Sojourners or it dies, you may exile target card from a graveyard.\nCycling {2}{B} ({2}{B}, Discard this card: Draw a card.)
-End

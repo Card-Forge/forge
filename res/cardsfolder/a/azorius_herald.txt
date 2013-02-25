@@ -1,7 +1,6 @@
 Name:Azorius Herald
 ManaCost:2 W
 Types:Creature Spirit
-Text:no text
 PT:2/1
 K:Unblockable
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_herald.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/2.jpg
 Oracle:Azorius Herald is unblockable.\nWhen Azorius Herald enters the battlefield, you gain 4 life.\nWhen Azorius Herald enters the battlefield, sacrifice it unless {U} was spent to cast it.
-End

@@ -1,11 +1,9 @@
 Name:Lightning Blow
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_blow.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/266.jpg
 Oracle:Target creature gains first strike until end of turn.\nDraw a card at the beginning of the next turn's upkeep.
-End

@@ -12,4 +12,3 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/274.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/276.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/275.jpg
 Oracle:Time Vault enters the battlefield tapped.\nTime Vault doesn't untap during your untap step.\nIf you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.\n{T}: Take an extra turn after this one.
-End

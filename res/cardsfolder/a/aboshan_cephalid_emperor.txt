@@ -1,7 +1,6 @@
 Name:Aboshan, Cephalid Emperor
 ManaCost:4 U U
 Types:Legendary Creature Cephalid
-Text:no text
 PT:3/3
 A:AB$ Tap | Cost$ tapXType<1/Cephalid> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
 A:AB$ TapAll | Cost$ U U U | ValidCards$ Creature.withoutFlying | SpellDescription$ Tap all creatures without flying.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aboshan_cephalid_emperor.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/58.jpg
 Oracle:Tap an untapped Cephalid you control: Tap target permanent.\n{U}{U}{U}: Tap all creatures without flying.
-End

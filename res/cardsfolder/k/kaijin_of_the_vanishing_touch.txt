@@ -1,7 +1,6 @@
 Name:Kaijin of the Vanishing Touch
 ManaCost:1 U
 Types:Creature Spirit
-Text:no text
 PT:0/3
 K:Defender
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | DelayedTrigger$ DelayedTrig | TriggerDescription$ Whenever CARDNAME blocks a creature, return that creature to its owner's hand at end of combat.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaijin_of_the_vanishing_touch.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/39.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Kaijin of the Vanishing Touch blocks a creature, return that creature to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
-End

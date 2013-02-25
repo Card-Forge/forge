@@ -1,7 +1,6 @@
 Name:Iona, Shield of Emeria
 ManaCost:6 W W W
 Types:Legendary Creature Angel
-Text:no text
 PT:7/7
 K:Flying
 K:ETBReplacement:Other:ChooseColor
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iona_shield_of_emeria.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/13.jpg
 Oracle:Flying\nAs Iona, Shield of Emeria enters the battlefield, choose a color.\nYour opponents can't cast spells of the chosen color.
-End

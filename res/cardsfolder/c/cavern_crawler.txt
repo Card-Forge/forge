@@ -1,7 +1,6 @@
 Name:Cavern Crawler
 ManaCost:2 R
 Types:Creature Insect
-Text:no text
 PT:0/3
 K:Mountainwalk
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavern_crawler.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/181.jpg
 Oracle:Mountainwalk\n{R}: Cavern Crawler gets +1/-1 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Toxic Stench
 ManaCost:1 B
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | ConditionCheckSVar$ X | References$ X | ConditionSVarCompare$ LT7 | SubAbility$ DBDestroy | SpellDescription$ Target nonblack creature gets -1/-1 until end of turn.
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | SpellDescription$ Threshold - If seven or more cards are in your graveyard, instead destroy that creature. It can't be regenerated.
 SVar:X:Count$InYourYard
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/toxic_stench.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/74.jpg
 Oracle:Target nonblack creature gets -1/-1 until end of turn.\nThreshold - If seven or more cards are in your graveyard, instead destroy that creature. It can't be regenerated.
-End

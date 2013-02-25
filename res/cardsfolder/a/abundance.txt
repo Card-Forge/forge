@@ -1,7 +1,6 @@
 Name:Abundance
 ManaCost:2 G G
 Types:Enchantment
-Text:no text
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ AbundantChoice | Optional$ True | Description$ If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order.
 SVar:AbundantChoice:AB$ GenericChoice | Cost$ 0 | Choices$ DigLand,DigNonland | Defined$ You
 SVar:DigLand:DB$ DigUntil | Valid$ Card.Land | ValidDescription$ land | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | ChoiceDescription$ Land
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/abundance.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/229.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/249.jpg
 Oracle:If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order.
-End

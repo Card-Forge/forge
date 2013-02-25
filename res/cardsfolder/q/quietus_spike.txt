@@ -1,7 +1,6 @@
 Name:Quietus Spike
 ManaCost:3
 Types:Artifact Equipment
-Text:no text
 K:Equip 3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch | Description$ Equipped creature has deathtouch. Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/quietus_spike.jp
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/112.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/217.jpg
 Oracle:Equipped creature has deathtouch.\nWhenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.\nEquip {3}
-End

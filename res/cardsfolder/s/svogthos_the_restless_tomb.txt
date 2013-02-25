@@ -1,7 +1,6 @@
 Name:Svogthos, the Restless Tomb
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Animate | Cost$ 3 B G | Defined$ Self | Types$ Creature,Zombie,Plant | Colors$ Black,Green | staticAbilities$ Static | References$ X | SpellDescription$ Until end of turn, CARDNAME becomes a black and green Plant Zombie creature with "This creature's power and toughness are each equal to the number of creature cards in your graveyard." It's still a land.
 SVar:Static:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of creature cards in your graveyard.
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/svogthos_the_res
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/283.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/289.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{3}{B}{G}: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with "This creature's power and toughness are each equal to the number of creature cards in your graveyard." It's still a land.
-End

@@ -1,7 +1,6 @@
 Name:Nightshade Peddler
 ManaCost:1 G
 Types:Creature Human Druid
-Text:no text
 PT:1/1
 K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Deathtouch | Description$ As long as CARDNAME is paired with another creature, both creatures have deathtouch.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightshade_peddler.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/187.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Nightshade Peddler is paired with another creature, both creatures have deathtouch.
-End

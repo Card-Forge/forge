@@ -1,10 +1,8 @@
 Name:Spell Snare
 ManaCost:U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell with CMC 2 | ValidTgts$ Card.cmcEQ2 | SpellDescription$ Counter target spell with converted mana cost 2.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_snare.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/33.jpg
 Oracle:Counter target spell with converted mana cost 2.
-End

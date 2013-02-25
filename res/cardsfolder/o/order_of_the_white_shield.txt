@@ -1,7 +1,6 @@
 Name:Order of the White Shield
 ManaCost:W W
 Types:Creature Human Knight
-Text:no text
 PT:2/1
 K:Protection from black
 A:AB$ Pump | Cost$ W | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_whi
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/325.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/270.jpg
 Oracle:Protection from black\n{W}: Order of the White Shield gains first strike until end of turn.\n{W}{W}: Order of the White Shield gets +1/+0 until end of turn.
-End

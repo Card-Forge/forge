@@ -1,7 +1,6 @@
 Name:Spectral Shield
 ManaCost:1 W U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can't be the target of spells. | Description$ Enchanted creature gets +0/+2 and can't be the target of spells.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_shield.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/380.jpg
 Oracle:Enchant creature\nEnchanted creature gets +0/+2 and can't be the target of spells.
-End

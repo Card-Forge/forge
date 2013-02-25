@@ -1,7 +1,6 @@
 Name:Firecat Blitz
 ManaCost:X R R
 Types:Sorcery
-Text:no text
 A:SP$ Token | Cost$ X R R | TokenAmount$ X | TokenName$ Elemental Cat | TokenTypes$ Creature,Elemental,Cat | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenHiddenKeywords$ At the beginning of the end step, exile CARDNAME. | References$ X | SpellDescription$ Put X 1/1 red Elemental Cat creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
 A:SP$ Token | Cost$ R R Sac<Y/Mountain> | TokenAmount$ ChosenX | TokenName$ Elemental Cat | TokenTypes$ Creature,Elemental,Cat | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenHiddenKeywords$ At the beginning of the end step, exile CARDNAME. | Flashback$ True | CostDesc$ Flashback - R R, Sacrifice X Mountains. | References$ Y | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:X:Count$xPaid
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firecat_blitz.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/88.jpg
 Oracle:Put X 1/1 red Elemental Cat creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.\nFlashback-{R}{R}, Sacrifice X Mountains. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

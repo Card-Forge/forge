@@ -1,7 +1,6 @@
 Name:Trophy Hunter
 ManaCost:2 G
 Types:Creature Human Archer
-Text:no text
 PT:2/3
 A:AB$ DealDamage | Cost$ 1 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature with flying.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.withFlying+wasDealtDamageByHostThisTurn | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature with flying dealt damage by CARDNAME this turn dies, put a +1/+1 counter on CARDNAME.
@@ -9,4 +8,3 @@ SVar:TrigCounter:AB$PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1 | D
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trophy_hunter.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/187.jpg
 Oracle:{1}{G}: Trophy Hunter deals 1 damage to target creature with flying.\nWhenever a creature with flying dealt damage by Trophy Hunter this turn dies, put a +1/+1 counter on Trophy Hunter.
-End

@@ -1,7 +1,6 @@
 Name:Hedron Crab
 ManaCost:U
 Types:Creature Crab
-Text:no text
 PT:0/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, target player puts the top three cards of his or her library into his or her graveyard.
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_crab.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/47.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, target player puts the top three cards of his or her library into his or her graveyard.
-End

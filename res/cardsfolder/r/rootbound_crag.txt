@@ -1,7 +1,6 @@
 Name:Rootbound Crag
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped unless you control a Mountain or a Forest.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
@@ -12,4 +11,3 @@ SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/227.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/228.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/228.jpg
 Oracle:Rootbound Crag enters the battlefield tapped unless you control a Mountain or a Forest.\n{T}: Add {R} or {G} to your mana pool.
-End

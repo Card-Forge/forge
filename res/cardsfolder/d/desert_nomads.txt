@@ -9,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_nomads.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/47.jpg
 Oracle:Desertwalk\nPrevent all damage that would be dealt to Desert Nomads by Deserts.
-End

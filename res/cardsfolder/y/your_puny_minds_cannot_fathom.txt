@@ -1,7 +1,6 @@
 Name:Your Puny Minds Cannot Fathom
 ManaCost:no cost
 Types:Scheme
-Text:no text
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GreatMind | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, draw four cards. You have no maximum hand size until your next turn.
 SVar:GreatMind:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 4 | SubAbility$ Unfathomable
 SVar:Unfathomable:DB$ Effect | Name$ Unfathomable Mind Effect | StaticAbilities$ STHandSize | Duration$ UntilYourNextTurn
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/your_puny_minds_cannot_fathom.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/your-puny-minds-cannot-fathom.jpg
 Oracle:When you set this scheme in motion, draw four cards. You have no maximum hand size until your next turn.
-End

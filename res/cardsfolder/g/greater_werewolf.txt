@@ -1,7 +1,6 @@
 Name:Greater Werewolf
 ManaCost:4 B
 Types:Creature Werewolf
-Text:no text
 PT:2/4
 T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ At end of combat, put a -0/-2 counter on each creature blocking or blocked by CARDNAME.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ At end of combat, put a -0/-2 counter on each creature blocking or blocked by CARDNAME.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_werewolf
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/14.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/28.jpg
 Oracle:At end of combat, put a -0/-2 counter on each creature blocking or blocked by Greater Werewolf.
-End

@@ -1,7 +1,6 @@
 Name:Emblem of the Warmind
 ManaCost:1 R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature.YouCtrl | AILogic$ Pump | TgtPrompt$ Select target you control
 S:Mode$ Continuous | Affected$ Creature.YouCtrl| AddKeyword$ Haste | Description$ Creatures you control have haste.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emblem_of_the_warmind.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/112.jpg
 Oracle:Enchant creature you control\nCreatures you control have haste.
-End

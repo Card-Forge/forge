@@ -1,7 +1,6 @@
 Name:Bridge from Below
 ManaCost:B B B
 Types:Enchantment
-Text:no text
 A:SP$ PermanentNoncreature | Cost$ B B B | AILogic$ DontCast
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouOwn | Execute$ TrigToken | TriggerZones$ Graveyard | TriggerDescription$ Whenever a nontoken creature is put into your graveyard from the battlefield, if CARDNAME is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
@@ -14,4 +13,3 @@ SVar:SacMe:5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bridge_from_below.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/81.jpg
 Oracle:Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from Below is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.\nWhen a creature is put into an opponent's graveyard from the battlefield, if Bridge from Below is in your graveyard, exile Bridge from Below.
-End

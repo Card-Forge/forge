@@ -1,7 +1,6 @@
 Name:Blazing Torch
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ CantBeBlockedBy Creature.Vampire,Creature.Zombie | Description$ Equipped creature can't be blocked by Vampires or Zombies.
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ TorchDamage | Description$ Equipped creature has "T, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to target creature or player."
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_torch.jp
 Oracle:Equipped creature can't be blocked by Vampires or Zombies.\nEquipped creature has "{T}, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to target creature or player."\nEquip {1}
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/197.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/216.jpg
-End

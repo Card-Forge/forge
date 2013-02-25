@@ -1,7 +1,6 @@
 Name:Monstrous Carabid
 ManaCost:3 B R
 Types:Creature Insect
-Text:no text
 PT:4/4
 K:CARDNAME attacks each turn if able.
 K:Cycling:BR
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrous_carabid.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/43.jpg
 Oracle:Monstrous Carabid attacks each turn if able.\nCycling {B/R} ({B/R}, Discard this card: Draw a card.)
-End

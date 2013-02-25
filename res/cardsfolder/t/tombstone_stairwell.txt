@@ -1,7 +1,6 @@
 Name:Tombstone Stairwell
 ManaCost:2 B B
 Types:World Enchantment
-Text:no text
 K:Cumulative upkeep:1 B
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self | Execute$ TrigTokenYou | TriggerDescription$ At the beginning of each upkeep, if CARDNAME is on the battlefield, each player puts a 2/2 black Zombie creature token with haste named Tombspawn onto the battlefield for each creature card in his or her graveyard.
 SVar:TrigTokenYou:DB$Token | TokenAmount$ X | References$ X | TokenName$ Tombspawn | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Haste | SubAbility$ TrigTokenOpp | RememberTokens$ True
@@ -17,4 +16,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tombstone_stairwell.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/47.jpg
 Oracle:Cumulative upkeep {1}{B} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of each upkeep, if Tombstone Stairwell is on the battlefield, each player puts a 2/2 black Zombie creature token with haste named Tombspawn onto the battlefield for each creature card in his or her graveyard.\nAt the beginning of each end step or when Tombstone Stairwell leaves the battlefield, destroy all tokens put onto the battlefield with Tombstone Stairwell. They can't be regenerated.
-End

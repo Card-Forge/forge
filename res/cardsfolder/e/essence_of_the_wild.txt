@@ -1,10 +1,8 @@
 Name:Essence of the Wild
 ManaCost:3 G G G
 Types:Creature Avatar
-Text:no text
 PT:6/6
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_of_the_wild.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/178.jpg
 Oracle:Creatures you control enter the battlefield as a copy of Essence of the Wild.
-End

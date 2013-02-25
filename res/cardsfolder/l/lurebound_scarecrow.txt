@@ -1,7 +1,6 @@
 Name:Lurebound Scarecrow
 ManaCost:3
 Types:Artifact Creature Scarecrow
-Text:no text
 PT:4/4
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentComputerControls
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurebound_scarecrow.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/256.jpg
 Oracle:As Lurebound Scarecrow enters the battlefield, choose a color.\nWhen you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
-End

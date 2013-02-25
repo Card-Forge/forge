@@ -1,7 +1,6 @@
 Name:Faerie Impostor
 ManaCost:U
 Types:Creature Faerie Rogue
-Text:no text
 PT:2/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return another creature you control to its owner's hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_impostor.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/39.jpg
 Oracle:Flying\nWhen Faerie Impostor enters the battlefield, sacrifice it unless you return another creature you control to its owner's hand.
-End

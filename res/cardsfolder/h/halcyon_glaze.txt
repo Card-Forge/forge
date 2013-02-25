@@ -1,7 +1,6 @@
 Name:Halcyon Glaze
 ManaCost:1 U U
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a creature spell, CARDNAME becomes a 4/4 Illusion creature with flying until end of turn. It's still an enchantment.
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Illusion | Keywords$ Flying
 SVar:BuffedBy:Creature
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halcyon_glaze.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/54.jpg
 Oracle:Whenever you cast a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying until end of turn. It's still an enchantment.
-End

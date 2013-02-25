@@ -1,7 +1,6 @@
 Name:Irrigation Ditch
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ G U | SpellDescription$ Add G U to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/irrigation_ditch.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/324.jpg
 Oracle:Irrigation Ditch enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\n{T}, Sacrifice Irrigation Ditch: Add {G}{U} to your mana pool.
-End

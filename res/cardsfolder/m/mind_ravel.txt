@@ -1,7 +1,6 @@
 Name:Mind Ravel
 ManaCost:2 B
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Target player discards a card. Draw a card at the beginning of the next turn's upkeep.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_ravel.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/38.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/35.jpg
 Oracle:Target player discards a card.\nDraw a card at the beginning of the next turn's upkeep.
-End

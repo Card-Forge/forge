@@ -1,7 +1,6 @@
 Name:Trestle Troll
 ManaCost:1 B G
 Types:Creature Troll
-Text:no text
 PT:1/4
 K:Defender
 K:Reach
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trestle_troll.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/205.jpg
 Oracle:Defender\nReach (This creature can block creatures with flying.)\n{1}{B}{G}: Regenerate Trestle Troll.
-End

@@ -1,7 +1,6 @@
 Name:Duergar Assailant
 ManaCost:RW
 Types:Creature Dwarf Soldier
-Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_assailant.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/136.jpg
 Oracle:Sacrifice Duergar Assailant: Duergar Assailant deals 1 damage to target attacking or blocking creature.
-End

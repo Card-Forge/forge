@@ -1,7 +1,6 @@
 Name:Blinkmoth Nexus
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Animate | Cost$ 1 | Defined$ Self | Power$ 1 | Toughness$ 1 | Types$ Creature,Artifact,Blinkmoth | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.
 A:AB$ Pump | Cost$ 1 T | ValidTgts$ Creature.Blinkmoth | TgtPrompt$ Select target Blinkmoth creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target Blinkmoth creature gets +1/+1 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card39439.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/163.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.\n{1}, {T}: Target Blinkmoth creature gets +1/+1 until end of turn.
-End

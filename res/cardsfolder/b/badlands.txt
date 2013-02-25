@@ -1,7 +1,6 @@
 Name:Badlands
 ManaCost:no cost
 Types:Land Swamp Mountain
-Text:no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/badlands.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/277.jpg
@@ -9,4 +8,3 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/139.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/282.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/278.jpg
 Oracle:
-End

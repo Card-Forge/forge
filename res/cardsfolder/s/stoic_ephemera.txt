@@ -1,7 +1,6 @@
 Name:Stoic Ephemera
 ManaCost:2 W
 Types:Creature Spirit
-Text:no text
 PT:5/5
 K:Defender
 K:Flying
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_ephemera.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/19.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nWhen Stoic Ephemera blocks, sacrifice it at end of combat.
-End

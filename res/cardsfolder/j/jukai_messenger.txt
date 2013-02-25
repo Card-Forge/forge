@@ -1,11 +1,9 @@
 Name:Jukai Messenger
 ManaCost:G
 Types:Creature Human Monk
-Text:no text
 PT:1/1
 K:Forestwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80525.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/218.jpg
 Oracle:Forestwalk
-End

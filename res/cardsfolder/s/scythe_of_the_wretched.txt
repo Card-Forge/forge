@@ -1,7 +1,6 @@
 Name:Scythe of the Wretched
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 4
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.wasDealtDamageByEquipeeThisTurn | TriggerZones$ Battlefield | Execute$ ScytheReturn | TriggerDescription$ Whenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach CARDNAME to that creature.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scythe_of_the_wretched.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/239.jpg
 Oracle:Equipped creature gets +2/+2.\nWhenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach Scythe of the Wretched to that creature.\nEquip {4}
-End

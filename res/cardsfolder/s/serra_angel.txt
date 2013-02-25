@@ -1,7 +1,6 @@
 Name:Serra Angel
 ManaCost:3 W W
 Types:Creature Angel
-Text:no text
 PT:4/4
 K:Flying
 K:Vigilance
@@ -22,4 +21,3 @@ SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/33.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/30.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/224.jpg
 Oracle:Flying\nVigilance (Attacking doesn't cause this creature to tap.)
-End

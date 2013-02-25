@@ -1,7 +1,6 @@
 Name:Keldon Berserker
 ManaCost:3 R
 Types:Creature Human Soldier Berserker
-Text:no text
 PT:2/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | IsPresent$ Land.untapped+YouCtrl | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if you control no untapped lands, it gets +3/+0 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 3
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_berserker.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/93.jpg
 Oracle:Whenever Keldon Berserker attacks, if you control no untapped lands, it gets +3/+0 until end of turn.
-End

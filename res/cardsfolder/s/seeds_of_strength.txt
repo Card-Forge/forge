@@ -1,7 +1,6 @@
 Name:Seeds of Strength
 ManaCost:G W
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ G W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPump1 | SpellDescription$ Target creature gets +1/+1 until end of turn. Target creature gets +1/+1 until end of turn. Target creature gets +1/+1 until end of turn.
 SVar:DBPump1:DB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPump2
 SVar:DBPump2:DB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seeds_of_strength.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/227.jpg
 Oracle:Target creature gets +1/+1 until end of turn.\nTarget creature gets +1/+1 until end of turn.\nTarget creature gets +1/+1 until end of turn.
-End

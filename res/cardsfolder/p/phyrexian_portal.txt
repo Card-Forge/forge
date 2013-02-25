@@ -1,7 +1,6 @@
 Name:Phyrexian Portal
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Dig | Cost$ 3 | DigNum$ 10 | RememberRevealed$ True | NoMove$ True | Choser$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | SubAbility$ DBTwoPiles | SpellDescription$ If your library has ten or more cards in it, target opponent looks at the top ten cards of your library and separates them into two face-down piles. Exile one of those piles. Search the other pile for a card, put it into your hand, then shuffle the rest of that pile into your library. | StackDescription$ If your library has ten or more cards in it, target opponent looks at the top ten cards of your library and separates them into two face-down piles. Exile one of those piles. Search the other pile for a card, put it into your hand, then shuffle the rest of that pile into your library.
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | FaceDown$ True |  ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | ChosenPile$ DBHand | UnchosenPile$ DBExile | SubAbility$ DBCleanup
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | Shuffle$ True
@@ -14,4 +13,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_portal.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/168.jpg
 Oracle:{3}: If your library has ten or more cards in it, target opponent looks at the top ten cards of your library and separates them into two face-down piles. Exile one of those piles. Search the other pile for a card, put it into your hand, then shuffle the rest of that pile into your library.
-End

@@ -1,11 +1,9 @@
 Name:Pygmy Razorback
 ManaCost:1 G
 Types:Creature Boar
-Text:no text
 PT:2/1
 K:Trample
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24663.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/120.jpg
 Oracle:Trample
-End

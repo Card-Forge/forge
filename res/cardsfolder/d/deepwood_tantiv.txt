@@ -1,7 +1,6 @@
 Name:Deepwood Tantiv
 ManaCost:4 G
 Types:Creature Beast
-Text:no text
 PT:2/4
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME becomes blocked, you gain 2 life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_tantiv.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/241.jpg
 Oracle:Whenever Deepwood Tantiv becomes blocked, you gain 2 life.
-End

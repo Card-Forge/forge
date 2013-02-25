@@ -1,7 +1,6 @@
 Name:Nirkana Revenant
 ManaCost:4 B B
 Types:Creature Vampire Shade
-Text:no text
 PT:4/4
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 T:Mode$ TapsForMana | ValidCard$ Swamp.YouCtrl | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a Swamp for mana, add B to your mana pool (in addition to the mana the land produces).
@@ -11,4 +10,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nirkana_revenant.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/120.jpg
 Oracle:Whenever you tap a Swamp for mana, add {B} to your mana pool (in addition to the mana the land produces).\n{B}: Nirkana Revenant gets +1/+1 until end of turn.
-End

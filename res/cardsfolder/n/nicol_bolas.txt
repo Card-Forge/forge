@@ -1,7 +1,6 @@
 Name:Nicol Bolas
 ManaCost:2 U U B B R R
 Types:Legendary Creature Elder Dragon
-Text:no text
 PT:7/7
 K:Flying
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U B R
@@ -13,4 +12,3 @@ Oracle:Flying\nAt the beginning of your upkeep, sacrifice Nicol Bolas unless you
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/116.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/98.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/286.jpg
-End

@@ -8,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldmeadow_dodger.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/16.jpg
 Oracle:Goldmeadow Dodger can't be blocked by creatures with power 4 or greater.
-End

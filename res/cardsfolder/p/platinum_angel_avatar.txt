@@ -1,7 +1,6 @@
 Name:Platinum Angel Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:-1/-2
 S:Mode$ Continuous | EffectZone$ Command | Affected$ You | CheckSVar$ AvatarAX | CheckSecondSVar$ AvatarCX | CheckThirdSVar$ AvatarEX | CheckFourthSVar$ AvatarLX | AddKeyword$ You can't lose the game. | Description$ If you control an artifact, a creature, an enchantment, and a land, you can't lose the game and your opponents can't win the game.
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Player.Opponent | CheckSVar$ AvatarAX | CheckSecondSVar$ AvatarCX | CheckThirdSVar$ AvatarEX | CheckFourthSVar$ AvatarLX | AddKeyword$ You can't win the game.
@@ -13,4 +12,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/platinum_angel_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/platinum-angel.jpg
 Oracle:Hand -1, life -2\nIf you control an artifact, a creature, an enchantment, and a land, you can't lose the game and your opponents can't win the game.
-End

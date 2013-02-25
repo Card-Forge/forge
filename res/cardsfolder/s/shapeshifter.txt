@@ -1,7 +1,6 @@
 Name:Shapeshifter
 ManaCost:6
 Types:Artifact Creature Shapeshifter
-Text:no text
 PT:*/7-*
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseNumber | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a number between 0 and 7.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ ChooseNumber | TriggerDescription$ At the beginning of your upkeep, you may choose a number between 0 and 7. 
@@ -15,4 +14,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/398.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/363.jpg
 SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/29.jpg
 Oracle:As Shapeshifter enters the battlefield, choose a number between 0 and 7.\nAt the beginning of your upkeep, you may choose a number between 0 and 7.\nShapeshifter's power is equal to the last chosen number and its toughness is equal to 7 minus that number.
-End

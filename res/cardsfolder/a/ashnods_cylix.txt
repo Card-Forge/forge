@@ -1,11 +1,9 @@
 Name:Ashnod's Cylix
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Dig | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 3 | ChangeNum$ 1 | Choser$ Targeted | DestinationZone$ Library | LibraryPosition$ 0 | DestinationZone2$ Exile | SpellDescription$ Target player looks at the top three cards of his or her library, puts one of them back on top of his or her library, then exiles the rest.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashnods_cylix.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/158.jpg
 Oracle:{3}, {T}: Target player looks at the top three cards of his or her library, puts one of them back on top of his or her library, then exiles the rest.
-End

@@ -1,7 +1,6 @@
 Name:Shade's Form
 ManaCost:1 B B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Pump | Description$ Enchanted creature has "B: This creature gets +1/+1 until end of turn."
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shades_form.jpg
 SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/81.jpg
 Oracle:Enchant creature\nEnchanted creature has "{B}: This creature gets +1/+1 until end of turn."\nWhen enchanted creature dies, return that card to the battlefield under your control.
-End

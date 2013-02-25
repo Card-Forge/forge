@@ -1,7 +1,6 @@
 Name:Phyrexian Rebirth
 ManaCost:4 W W
 Types:Sorcery
-Text:no text
 A:SP$ DestroyAll | Cost$ 4 W W | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBToken | SpellDescription$ Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way.
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Horror | TokenTypes$ Artifact,Creature,Horror | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ X | TokenToughness$ X | References$ X
 SVar:X:Remembered$Amount
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_rebirth.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/15.jpg
 Oracle:Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way.
-End

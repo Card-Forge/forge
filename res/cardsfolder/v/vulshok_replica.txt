@@ -1,11 +1,9 @@
 Name:Vulshok Replica
 ManaCost:3
 Types:Artifact Creature Berserker
-Text:no text
 PT:3/1
 A:AB$ DealDamage | Cost$ 1 R Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_replica.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/221.jpg
 Oracle:{1}{R}, Sacrifice Vulshok Replica: Vulshok Replica deals 3 damage to target player.
-End

@@ -1,7 +1,6 @@
 Name:Nameless Race
 ManaCost:3 B
 Types:Creature
-Text:no text
 PT:*/*
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ PayLife | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
@@ -18,4 +17,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_race.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/12.jpg
 Oracle:Trample\nAs Nameless Race enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.\nNameless Race's power and toughness are each equal to the life paid as it entered the battlefield.
-End

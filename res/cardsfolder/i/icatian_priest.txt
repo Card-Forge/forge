@@ -1,7 +1,6 @@
 Name:Icatian Priest
 ManaCost:W
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ 1 W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_priest.j
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/156.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/24.jpg
 Oracle:{1}{W}{W}: Target creature gets +1/+1 until end of turn.
-End

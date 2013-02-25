@@ -1,7 +1,6 @@
 Name:Merfolk Skyscout
 ManaCost:2 U U
 Types:Creature Merfolk Scout
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks or blocks, untap target permanent.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_skyscout.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/77.jpg
 Oracle:Flying\nWhenever Merfolk Skyscout attacks or blocks, untap target permanent.
-End

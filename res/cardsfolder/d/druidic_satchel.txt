@@ -1,7 +1,6 @@
 Name:Druidic Satchel
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Dig | Cost$ 2 T | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBToken | SpellDescription$ Reveal the top card of your library. If it's a creature card, put a 1/1 green Saproling creature token onto the battlefield. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life.
 SVar:DBToken:DB$ Token | Cost$ 0 | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ DBMove | StackDescription$ If it's a creature card, put a 1/1 green Saproling creature token onto the battlefield.
 SVar:DBMove:DB$ ChangeZone | Cost$ 0 | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | SubAbility$ DBGainLife | StackDescription$ If it's a land card, put that card onto the battlefield under your control.
@@ -10,4 +9,3 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druidic_satchel.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/207.jpg
 Oracle:{2}, {T}: Reveal the top card of your library. If it's a creature card, put a 1/1 green Saproling creature token onto the battlefield. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life.
-End

@@ -1,7 +1,6 @@
 Name:Consuming Vapors
 ManaCost:3 B
 Types:Sorcery
-Text:no text
 K:Rebound
 A:SP$ Sacrifice | Cost$ 3 B | SacValid$ Creature | ValidTgts$ Player | TgtPrompt$ Select target opponent | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBGainLife | SpellDescription$ Target player sacrifices a creature. You gain life equal to that creature's toughness.
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup | References$ X
@@ -10,4 +9,3 @@ SVar:X:Remembered$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consuming_vapors.jpg
 Oracle:Target player sacrifices a creature. You gain life equal to that creature's toughness.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/101.jpg
-End

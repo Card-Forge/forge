@@ -1,7 +1,6 @@
 Name:Ancient Grudge
 ManaCost:1 R
 Types:Instant
-Text:no text
 K:Flashback G
 A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_grudge.j
 Oracle:Destroy target artifact.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/143.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/127.jpg
-End

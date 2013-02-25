@@ -1,7 +1,6 @@
 Name:Judge of Currents
 ManaCost:1 W
 Types:Creature Merfolk Wizard
-Text:no text
 PT:1/1
 T:Mode$ Taps | ValidCard$ Merfolk.YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a Merfolk you control becomes tapped, you may gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/judge_of_currents.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/22.jpg
 Oracle:Whenever a Merfolk you control becomes tapped, you may gain 1 life.
-End

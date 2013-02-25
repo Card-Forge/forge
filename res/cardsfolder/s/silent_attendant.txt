@@ -1,11 +1,9 @@
 Name:Silent Attendant
 ManaCost:2 W
 Types:Creature Human Cleric
-Text:no text
 PT:0/2
 A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_attendant.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/51.jpg
 Oracle:{T}: You gain 1 life.
-End

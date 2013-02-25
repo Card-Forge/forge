@@ -1,7 +1,6 @@
 Name:Vodalian Merchant
 ManaCost:1 U
 Types:Creature Merfolk
-Text:no text
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card, then discard a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBDiscard
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card26296.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/85.jpg
 Oracle:When Vodalian Merchant enters the battlefield, draw a card, then discard a card.
-End

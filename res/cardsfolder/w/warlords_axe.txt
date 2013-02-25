@@ -1,11 +1,9 @@
 Name:Warlord's Axe
 ManaCost:3
 Types:Artifact Equipment
-Text:no text
 K:Equip 4
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 1 | Description$ Equipped creature gets +3/+1.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warlords_axe.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/220.jpg
 Oracle:Equipped creature gets +3/+1.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)
-End

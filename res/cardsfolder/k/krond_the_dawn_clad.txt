@@ -1,7 +1,6 @@
 Name:Krond the Dawn-Clad
 ManaCost:G G G W W W
 Types:Legendary Creature Archon
-Text:no text
 PT:6/6
 K:Flying
 K:Vigilance
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krond_the_dawn_clad.jpg
 SetInfo:PC2|Mythic|http://magiccards.info/scans/en/pc2/99.jpg
 Oracle:Flying, vigilance\nWhenever Krond the Dawn-Clad attacks, if it's enchanted, exile target permanent.
-End

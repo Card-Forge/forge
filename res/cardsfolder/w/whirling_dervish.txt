@@ -1,7 +1,6 @@
 Name:Whirling Dervish
 ManaCost:G G
 Types:Creature Human Monk
-Text:no text
 PT:1/1
 K:Protection from black
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | IsPresent$ Card.Self+dealtDamageToOppThisTurn | TriggerDescription$ At the beginning of each end step, if CARDNAME dealt damage to an opponent this turn, put a +1/+1 counter on it.
@@ -13,4 +12,3 @@ SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/90.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/172.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/125.jpg
 Oracle:Protection from black\nAt the beginning of each end step, if Whirling Dervish dealt damage to an opponent this turn, put a +1/+1 counter on it.
-End

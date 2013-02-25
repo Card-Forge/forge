@@ -1,7 +1,6 @@
 Name:Spirit Shackle
 ManaCost:B B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ B B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_shackle.j
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/47.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/31.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes tapped, put a -0/-2 counter on it.
-End

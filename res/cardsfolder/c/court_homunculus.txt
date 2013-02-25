@@ -1,7 +1,6 @@
 Name:Court Homunculus
 ManaCost:W
 Types:Artifact Creature Homunculus
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control another artifact.
 SVar:X:Count$Valid Artifact.Other+YouCtrl
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/court_homunculus.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/6.jpg
 Oracle:Court Homunculus gets +1/+1 as long as you control another artifact.
-End

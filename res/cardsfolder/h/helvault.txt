@@ -1,7 +1,6 @@
 Name:Helvault
 ManaCost:3
 Types:Legendary Artifact
-Text:no text
 A:AB$ ChangeZone | Cost$ 1 T | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SpellDescription$ Exile target creature you control.
 A:AB$ ChangeZone | Cost$ 7 T | ValidTgts$ Creature.YouDontCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you don't control | RememberTargets$ True | IsCurse$ True | SpellDescription$ Exile target creature you don't control.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return all cards exiled with it to the battlefield under their owners' control.
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helvault.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/151.jpg
 Oracle:{1}, {T}: Exile target creature you control.\n{7}, {T}: Exile target creature you don't control.\nWhen Helvault is put into a graveyard from the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-End

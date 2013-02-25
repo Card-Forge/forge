@@ -1,10 +1,8 @@
 Name:Altar's Light
 ManaCost:2 W W
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 2 W W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altars_light.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/1.jpg
 Oracle:Exile target artifact or enchantment.
-End

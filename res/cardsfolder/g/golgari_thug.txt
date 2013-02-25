@@ -1,7 +1,6 @@
 Name:Golgari Thug
 ManaCost:1 B
 Types:Creature Human Warrior
-Text:no text
 PT:1/1
 K:Dredge 4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put target creature card from your graveyard on top of your library.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_thug.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/87.jpg
 Oracle:When Golgari Thug dies, put target creature card from your graveyard on top of your library.\nDredge 4 (If you would draw a card, instead you may put exactly four cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
-End

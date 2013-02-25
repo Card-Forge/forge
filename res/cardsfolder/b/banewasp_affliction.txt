@@ -1,7 +1,6 @@
 Name:Banewasp Affliction
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLose | TriggerDescription$ When enchanted creature dies, that creature's controller loses life equal to its toughness.
 SVar:TrigLose:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ X | References$ X
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banewasp_affliction.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/65.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, that creature's controller loses life equal to its toughness.
-End

@@ -1,11 +1,9 @@
 Name:Squire
 ManaCost:1 W
 Types:Creature Human Soldier
-Text:no text
 PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108908.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/90.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/15.jpg
 Oracle:
-End

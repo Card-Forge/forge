@@ -1,7 +1,6 @@
 Name:Spike Breeder
 ManaCost:3 G
 Types:Creature Spike
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:3
 A:AB$ PutCounter | Cost$ 2 SubCounter<1/P1P1> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_breeder.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/66.jpg
 Oracle:Spike Breeder enters the battlefield with three +1/+1 counters on it.\n{2}, Remove a +1/+1 counter from Spike Breeder: Put a +1/+1 counter on target creature.\n{2}, Remove a +1/+1 counter from Spike Breeder: Put a 1/1 green Spike creature token onto the battlefield.
-End

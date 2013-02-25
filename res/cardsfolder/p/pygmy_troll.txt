@@ -1,7 +1,6 @@
 Name:Pygmy Troll
 ManaCost:1 G
 Types:Creature Troll
-Text:no text
 PT:1/1
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME get +1/+1 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_troll.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/118.jpg
 Oracle:Whenever Pygmy Troll becomes blocked by a creature, Pygmy Troll gets +1/+1 until end of turn.\n{G}: Regenerate Pygmy Troll.
-End

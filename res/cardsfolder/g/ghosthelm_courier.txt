@@ -1,7 +1,6 @@
 Name:Ghosthelm Courier
 ManaCost:2 U
 Types:Creature Wizard
-Text:no text
 PT:2/1
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ 2 U T | ValidTgts$ Creature.Wizard | TgtPrompt$ Select target Wizard creature | RememberTargets$ True |  SpellDescription$ Target Wizard creature gets +2/+2 and has shroud for as long as CARDNAME remains tapped. (It can't be the target of spells or abilities.)
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghosthelm_courier.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/85.jpg
 Oracle:You may choose not to untap Ghosthelm Courier during your untap step.\n{2}{U}, {T}: Target Wizard creature gets +2/+2 and has shroud for as long as Ghosthelm Courier remains tapped. (It can't be the target of spells or abilities.)
-End

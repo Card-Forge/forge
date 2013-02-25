@@ -1,7 +1,6 @@
 Name:Wind Drake
 ManaCost:2 U
 Types:Creature Drake
-Text:no text
 PT:2/2
 K:Flying
 SVar:Rarity:Common
@@ -16,4 +15,3 @@ SetInfo:M13|Common|http://magiccards.info/scans/en/m13/80.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/61.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/106.jpg
 Oracle:Flying
-End

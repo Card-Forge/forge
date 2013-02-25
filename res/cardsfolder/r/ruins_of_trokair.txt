@@ -1,7 +1,6 @@
 Name:Ruins of Trokair
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ W | Amount$ 2 | SpellDescription$ Add W W to your mana pool.
@@ -12,4 +11,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/438.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/327.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/185.jpg
 Oracle:Ruins of Trokair enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\n{T}, Sacrifice Ruins of Trokair: Add {W}{W} to your mana pool.
-End

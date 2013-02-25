@@ -1,7 +1,6 @@
 Name:Treefolk Seedlings
 ManaCost:2 G
 Types:Creature Treefolk
-Text:no text
 PT:2/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/treefolk_seedlin
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/278.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/277.jpg
 Oracle:Treefolk Seedlings's toughness is equal to the number of Forests you control.
-End

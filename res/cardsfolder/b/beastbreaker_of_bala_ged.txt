@@ -1,7 +1,6 @@
 Name:Beastbreaker of Bala Ged
 ManaCost:1 G
 Types:Creature Human Warrior
-Text:no text
 PT:2/2
 K:Level up:2 G
 K:maxLevel:4
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beastbreaker_of_bala_ged.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/178.jpg
 Oracle:Level up {2}{G} ({2}{G}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-3\n4/4\nLEVEL 4+\n6/6\nTrample
-End

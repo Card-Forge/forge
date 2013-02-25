@@ -1,7 +1,6 @@
 Name:Bioplasm
 ManaCost:3 G G
 Types:Creature Ooze
-Text:no text
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of your library. If it's a creature card, CARDNAME gets +X/+Y until end of turn, where X is the exiled creature card's power and Y is its toughness.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBPump
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bioplasm.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/81.jpg
 Oracle:Whenever Bioplasm attacks, exile the top card of your library. If it's a creature card, Bioplasm gets +X/+Y until end of turn, where X is the exiled creature card's power and Y is its toughness.
-End

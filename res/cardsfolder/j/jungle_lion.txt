@@ -1,11 +1,9 @@
 Name:Jungle Lion
 ManaCost:G
 Types:Creature Cat
-Text:no text
 PT:2/1
 K:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4302.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/96.jpg
 Oracle:Jungle Lion can't block.
-End

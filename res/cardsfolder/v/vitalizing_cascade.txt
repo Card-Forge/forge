@@ -1,7 +1,6 @@
 Name:Vitalizing Cascade
 ManaCost:X G W
 Types:Instant
-Text:no text
 A:SP$ GainLife | Cost$ X G W | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBGain3 | SpellDescription$ You gain X plus 3 life.
 SVar:DBGain3:DB$GainLife | LifeAmount$ 3 | Defined$ You
 SVar:X:Count$xPaid
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitalizing_cascade.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/346.jpg
 Oracle:You gain X plus 3 life.
-End

@@ -1,7 +1,6 @@
 Name:Dandan
 ManaCost:U U
 Types:Creature Fish
-Text:no text
 PT:4/1
 K:CARDNAME can't attack unless defending player controls an Island.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
@@ -14,4 +13,3 @@ SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/18.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/19.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/16.jpg
 Oracle:Dandan can't attack unless defending player controls an Island.\nWhen you control no Islands, sacrifice Dandan.
-End

@@ -1,7 +1,6 @@
 Name:Goblin Goon
 ManaCost:3 R
 Types:Creature Goblin Mutant
-Text:no text
 PT:6/6
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME can't attack. & CARDNAME can't block. | CheckSVar$ X | SVarCompare$ LEY | Description$ CARDNAME can't attack unless you control more creatures than defending player.  CARDNAME can't block unless you control more creatures than attacking player.
 SVar:X:Count$Valid Creature.YouCtrl
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_goon.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/99.jpg
 Oracle:Goblin Goon can't attack unless you control more creatures than defending player.\nGoblin Goon can't block unless you control more creatures than attacking player.
-End

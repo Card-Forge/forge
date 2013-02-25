@@ -1,7 +1,6 @@
 Name:Diregraf Captain
 ManaCost:1 U B
 Types:Creature Zombie Soldier
-Text:no text
 PT:2/2
 K:Deathtouch
 S:Mode$ Continuous | Affected$ Creature.Zombie+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Zombie creatures you control get +1/+1.
@@ -11,4 +10,3 @@ SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diregraf_captain.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/135.jpg
 Oracle:Deathtouch\nOther Zombie creatures you control get +1/+1.\nWhenever another Zombie you control dies, target opponent loses 1 life.
-End

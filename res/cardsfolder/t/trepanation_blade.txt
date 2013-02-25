@@ -1,7 +1,6 @@
 Name:Trepanation Blade
 ManaCost:3
 Types:Artifact Equipment
-Text:no text
 K:Equip 2
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigDig | TriggerDescription$ Whenever equipped creature attacks, defending player reveals cards from the top of his or her library until he or she reveals a land card. The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into his or her graveyard.
 SVar:TrigDig:AB$ DigUntil | Defined$ DefendingPlayer | Cost$ 0 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard | RememberRevealed$ True | SubAbility$ TrigPump
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trepanation_blade.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/235.jpg
 Oracle:Whenever equipped creature attacks, defending player reveals cards from the top of his or her library until he or she reveals a land card. The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into his or her graveyard.\nEquip {2}
-End

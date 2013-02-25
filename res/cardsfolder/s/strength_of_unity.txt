@@ -1,7 +1,6 @@
 Name:Strength of Unity
 ManaCost:3 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Domain - Enchanted creature gets +1/+1 for each basic land type among lands you control.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_unity.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/40.jpg
 Oracle:Enchant creature\nDomain - Enchanted creature gets +1/+1 for each basic land type among lands you control.
-End

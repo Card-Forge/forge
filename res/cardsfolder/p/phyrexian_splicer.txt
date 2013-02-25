@@ -1,7 +1,6 @@
 Name:Phyrexian Splicer
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Debuff | Cost$ 2 T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | Keywords$ Flying | SubAbility$ DBGainFly | SpellDescription$ Target creature loses flying until end of turn and another target creature gains it until end of turn.
 A:AB$ Debuff | Cost$ 2 T | ValidTgts$ Creature.withFirst Strike | TgtPrompt$ Select target creature with first strike | Keywords$ First Strike | SubAbility$ DBGainFs | SpellDescription$ Target creature loses first strike until end of turn and another target creature gains it until end of turn.
 A:AB$ Debuff | Cost$ 2 T | ValidTgts$ Creature.withShadow | TgtPrompt$ Select target creature with shadow | Keywords$ Shadow | SubAbility$ DBGainShdw | SpellDescription$ Target creature loses shadow until end of turn and another target creature gains it until end of turn.
@@ -15,4 +14,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_splicer.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/293.jpg
 Oracle:{2}, {T}: Choose one - flying; first strike; shadow; or trample. Target creature with that ability loses it until end of turn and another target creature gains it until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Utopia Tree
 ManaCost:1 G
 Types:Creature Plant
-Text:no text
 PT:0/2
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84434.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/219.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/277.jpg
 Oracle:{T}: Add one mana of any color to your mana pool.
-End

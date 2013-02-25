@@ -1,7 +1,6 @@
 Name:Sengir Vampire
 ManaCost:3 B B
 Types:Creature Vampire
-Text:no text
 PT:4/4
 K:Flying
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
@@ -17,4 +16,3 @@ SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/37.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/107.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/36.jpg
 Oracle:Flying\nWhenever a creature dealt damage by Sengir Vampire this turn dies, put a +1/+1 counter on Sengir Vampire.
-End

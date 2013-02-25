@@ -1,7 +1,6 @@
 Name:Ronin Cliffrider
 ManaCost:3 R R
 Types:Creature Human Samurai
-Text:no text
 PT:2/2
 K:Bushido 1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You| TriggerDescription$ Whenever CARDNAME attacks, you may have it deal 1 damage to each creature defending player controls.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_cliffrider.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/116.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhenever Ronin Cliffrider attacks, you may have it deal 1 damage to each creature defending player controls.
-End

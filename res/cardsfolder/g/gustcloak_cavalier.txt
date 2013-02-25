@@ -1,7 +1,6 @@
 Name:Gustcloak Cavalier
 ManaCost:3 W W
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 K:Flanking
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, you may tap target creature.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gustcloak_cavalier.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhenever Gustcloak Cavalier attacks, you may tap target creature.\nWhenever Gustcloak Cavalier becomes blocked, you may untap Gustcloak Cavalier and remove it from combat.
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/22.jpg
-End

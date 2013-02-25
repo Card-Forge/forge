@@ -1,7 +1,6 @@
 Name:Liliana's Shade
 ManaCost:2 B B
 Types:Creature Shade
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Swamp card, reveal it, put it into your hand, then shuffle your library.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_shade.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/98.jpg
 Oracle:When Liliana's Shade enters the battlefield, you may search your library for a Swamp card, reveal it, put it into your hand, then shuffle your library.\n{B}: Liliana's Shade gets +1/+1 until end of turn.
-End

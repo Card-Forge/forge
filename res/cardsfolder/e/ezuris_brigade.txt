@@ -1,7 +1,6 @@
 Name:Ezuri's Brigade
 ManaCost:2 G G
 Types:Creature Elf Warrior
-Text:no text
 PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 4 | AddToughness$ 4 | AddKeyword$ Trample | Condition$ Metalcraft | Description$ Metalcraft - As long as you control three or more artifacts, CARDNAME gets +4/+4 and has trample.
 SVar:BuffedBy:Artifact
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ezuris_brigade.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/121.jpg
 Oracle:Metalcraft - As long as you control three or more artifacts, Ezuri's Brigade gets +4/+4 and has trample.
-End

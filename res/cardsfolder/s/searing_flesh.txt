@@ -1,10 +1,8 @@
 Name:Searing Flesh
 ManaCost:6 R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 6 R | ValidTgts$ Opponent | NumDmg$ 7 | SpellDescription$ CARDNAME deals 7 damage to target opponent.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_flesh.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/225.jpg
 Oracle:Searing Flesh deals 7 damage to target opponent.
-End

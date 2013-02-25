@@ -1,7 +1,6 @@
 Name:Scavenged Weaponry
 ManaCost:2 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenged_weaponry.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/123.jpg
 Oracle:Enchant creature\nWhen Scavenged Weaponry enters the battlefield, draw a card.\nEnchanted creature gets +1/+1.
-End

@@ -1,7 +1,6 @@
 Name:Rushwood Herbalist
 ManaCost:2 G
 Types:Creature Human Spellshaper
-Text:no text
 PT:2/2
 A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ G T Discard<1/Card> | SpellDescription$ Regenerate target creature.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rushwood_herbalist.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/265.jpg
 Oracle:{G}, {T}, Discard a card: Regenerate target creature.
-End

@@ -1,7 +1,6 @@
 Name:Kaalia of the Vast
 ManaCost:1 W B R
 Types:Legendary Creature Human Cleric
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks an opponent, you may put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent.
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaalia_of_the_vast.jpg
 SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/206.jpg
 Oracle:Flying\nWhenever Kaalia of the Vast attacks an opponent, you may put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent.
-End

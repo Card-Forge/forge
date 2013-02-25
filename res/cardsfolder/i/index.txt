@@ -1,7 +1,6 @@
 Name:Index
 ManaCost:U
 Types:Sorcery
-Text:no text
 A:SP$ RearrangeTopOfLibrary | Cost$ U | Defined$ You | NumCards$ 5 | SpellDescription$ Look at the top five cards of your library, then put them back in any order.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
@@ -11,4 +10,3 @@ SetInfo:APC|Common|http://magiccards.info/scans/en/ap/25.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9eb/5.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/55.jpg
 Oracle:Look at the top five cards of your library, then put them back in any order.
-End

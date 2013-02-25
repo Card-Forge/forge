@@ -1,11 +1,9 @@
 Name:Koth's Courier
 ManaCost:1 R R
 Types:Creature Human Rogue
-Text:no text
 PT:2/3
 K:Forestwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/koths_courier.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/68.jpg
 Oracle:Forestwalk
-End

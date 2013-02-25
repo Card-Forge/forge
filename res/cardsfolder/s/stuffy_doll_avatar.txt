@@ -1,7 +1,6 @@
 Name:Stuffy Doll Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/-6
 A:AB$ ChooseSource | Cost$ 0 | ActivationZone$ Command | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBTargetOpp | ActivationLimit$ 1 | SpellDescription$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. CARDNAME deals damage to you and target opponent equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
 SVar:DBTargetOpp:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to give damamge | RememberObjects$ Targeted | StackDescription$ None | SubAbility$ DBEffect
@@ -18,4 +17,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/stuffy_doll_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/stuffy-doll.jpg
 Oracle:Hand +0, life -6\n{0}: If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
-End

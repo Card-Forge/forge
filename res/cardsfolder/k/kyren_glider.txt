@@ -1,7 +1,6 @@
 Name:Kyren Glider
 ManaCost:1 R
 Types:Creature Goblin
-Text:no text
 PT:1/1
 K:Flying
 K:CARDNAME can't block.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card19604.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/196.jpg
 Oracle:Flying\nKyren Glider can't block.
-End

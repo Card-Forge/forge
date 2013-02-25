@@ -15,4 +15,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/298.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/264.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/261.jpg
 Oracle:Creatures with power 3 or greater don't untap during their controllers' untap steps.
-End

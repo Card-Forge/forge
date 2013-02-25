@@ -1,7 +1,6 @@
 Name:Splinter Twin
 ManaCost:2 R R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABCopy | Description$ Enchanted creature has "T: Put a token that's a copy of this creature onto the battlefield. That token has haste. Exile it at the beginning of the next end step."
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/splinter_twin.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/165.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: Put a token that's a copy of this creature onto the battlefield. That token has haste. Exile it at the beginning of the next end step."
-End

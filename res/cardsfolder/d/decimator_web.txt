@@ -1,7 +1,6 @@
 Name:Decimator Web
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ LoseLife | Cost$ 4 T | LifeAmount$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player to decimate | SubAbility$ DBPoison | SpellDescription$ Target player loses 2 life, gets a poison counter, then puts the top six cards of his or her library into his or her graveyard.
 SVar:DBPoison:DB$ Poison | Num$ 1 | Defined$ Targeted | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | NumCards$ 6 | Defined$ Targeted
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decimator_web.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/105.jpg
 Oracle:{4}, {T}: Target opponent loses 2 life, gets a poison counter, then puts the top six cards of his or her library into his or her graveyard.
-End

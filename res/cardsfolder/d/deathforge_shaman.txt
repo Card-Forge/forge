@@ -1,7 +1,6 @@
 Name:Deathforge Shaman
 ManaCost:4 R
 Types:Creature Ogre Shaman
-Text:no text
 PT:4/3
 K:Multikicker R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to target player equal to twice the number of times it was kicked.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Deathforge_Shaman.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/80.jpg
 Oracle:Multikicker {R} (You may pay an additional {R} any number of times as you cast this spell.)\nWhen Deathforge Shaman enters the battlefield, it deals damage to target player equal to twice the number of times it was kicked.
-End

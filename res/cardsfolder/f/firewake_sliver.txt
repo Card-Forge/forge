@@ -1,7 +1,6 @@
 Name:Firewake Sliver
 ManaCost:1 R G
 Types:Creature Sliver
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Haste | Description$ All Sliver creatures have haste.
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Pump | Description$ All Slivers have "1, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn."
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firewake_sliver.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/238.jpg
 Oracle:All Sliver creatures have haste.\nAll Slivers have "{1}, Sacrifice this permanent: Target Sliver creature gets +2/+2 until end of turn."
-End

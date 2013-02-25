@@ -1,7 +1,6 @@
 Name:Turn to Slag
 ManaCost:3 R R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SubAbility$ ChompEquip | SpellDescription$ CARDNAME deals 5 damage to target creature. Destroy all Equipment attached to that creature.
 SVar:ChompEquip:DB$ DestroyAll | ValidCards$ Targeted.Equipment+Attached
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_to_slag.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/153.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/106.jpg
 Oracle:Turn to Slag deals 5 damage to target creature. Destroy all Equipment attached to that creature.
-End

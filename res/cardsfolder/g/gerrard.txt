@@ -1,7 +1,6 @@
 Name:Gerrard
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:-4/+0
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You
@@ -9,4 +8,3 @@ SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/gerrard.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/gerrard.jpg
 Oracle:Hand -4, life +0\nAt the beginning of your draw step, draw an additional card.
-End

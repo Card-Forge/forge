@@ -1,7 +1,6 @@
 Name:Sarcomite Myr
 ManaCost:2 U
 Types:Artifact Creature Myr
-Text:no text
 PT:2/1
 A:AB$ Pump | Cost$ 2 | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136212.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/56.jpg
 Oracle:{2}: Sarcomite Myr gains flying until end of turn.\n{2}, Sacrifice Sarcomite Myr: Draw a card.
-End

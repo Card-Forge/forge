@@ -1,7 +1,6 @@
 Name:Ana Sanctuary
 ManaCost:2 G
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigPump | TriggerDescription$ At the beginning of your upkeep, if you control a blue or black permanent, target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to pump | NumAtt$ 1 | NumDef$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBPump | References$ X,Y,Z
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ 5 | NumDef$ 5 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X,Y,Z
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ana_sanctuary.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/74.jpg
 Oracle:At the beginning of your upkeep, if you control a blue or black permanent, target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead.
-End

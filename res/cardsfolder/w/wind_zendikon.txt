@@ -1,7 +1,6 @@
 Name:Wind Zendikon
 ManaCost:U
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ U | ValidTgts$ Land | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddType$ Creature & Elemental | SetColor$ Blue | SetPower$ 2 | SetToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted land is a 2/2 blue Elemental creature with flying. It's still a land.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_zendikon.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/46.jpg
 Oracle:Enchant land\nEnchanted land is a 2/2 blue Elemental creature with flying. It's still a land.\nWhen enchanted land dies, return that card to its owner's hand.
-End

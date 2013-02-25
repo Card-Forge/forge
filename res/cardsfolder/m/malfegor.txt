@@ -1,7 +1,6 @@
 Name:Malfegor
 ManaCost:2 B B R R
 Types:Legendary Creature Demon Dragon
-Text:no text
 PT:6/6
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard your hand. Each opponent sacrifices a creature for each card discarded this way.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/malfegor.jpg
 SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/208.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/117.jpg
 Oracle:Flying\nWhen Malfegor enters the battlefield, discard your hand. Each opponent sacrifices a creature for each card discarded this way.
-End

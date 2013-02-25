@@ -1,11 +1,9 @@
 Name:Dauthi Marauder
 ManaCost:2 B
 Types:Creature Dauthi Minion
-Text:no text
 PT:3/1
 K:Shadow
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_marauder.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/17.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)
-End

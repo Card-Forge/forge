@@ -8,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spoils_of_war.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/52.jpg
 Oracle:X is the number of artifact and/or creature cards in an opponent's graveyard as you cast Spoils of War.\nDistribute X +1/+1 counters among any number of target creatures.
-End

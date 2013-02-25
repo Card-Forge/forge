@@ -1,7 +1,6 @@
 Name:Bushi Tenderfoot
 ManaCost:W
 Types:Creature Human Soldier
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When a creature dealt damage by CARDNAME this turn dies, flip CARDNAME.
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
@@ -16,7 +15,6 @@ Name:Kenzo the Hardhearted
 ManaCost:W
 Colors:white
 Types:Legendary Creature Human Samurai
-Text:no text
 PT:3/4
 K:Double Strike
 K:Bushido 2
@@ -24,4 +22,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/kenzo_the_hardhe
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/307.jpg
 Oracle:Double strike; bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
 
-End

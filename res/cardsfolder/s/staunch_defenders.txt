@@ -1,7 +1,6 @@
 Name:Staunch Defenders
 ManaCost:3 W W
 Types:Creature Human Soldier
-Text:no text
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
@@ -12,4 +11,3 @@ SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/261.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/45.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/50.jpg
 Oracle:When Staunch Defenders enters the battlefield, you gain 4 life.
-End

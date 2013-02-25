@@ -1,11 +1,9 @@
 Name:Pavel Maliki
 ManaCost:4 B R
 Types:Legendary Creature Human
-Text:no text
 PT:5/3
 A:AB$ Pump | Cost$ B R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pavel_maliki.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/288.jpg
 Oracle:{B}{R}: Pavel Maliki gets +1/+0 until end of turn.
-End

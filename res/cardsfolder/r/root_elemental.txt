@@ -1,7 +1,6 @@
 Name:Root Elemental
 ManaCost:4 G G
 Types:Creature Elemental
-Text:no text
 PT:6/5
 K:Morph:5 G G
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you may put a creature card from your hand onto the battlefield.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_elemental.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/127.jpg
 Oracle:Morph {5}{G}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Root Elemental is turned face up, you may put a creature card from your hand onto the battlefield.
-End

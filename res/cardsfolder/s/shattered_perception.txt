@@ -1,7 +1,6 @@
 Name:Shattered Perception
 ManaCost:2 R
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ 2 R | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Discard all the cards in your hand, then draw that many cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -11,4 +10,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_perception.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/104.jpg
 Oracle:Discard all the cards in your hand, then draw that many cards.\nFlashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

@@ -1,11 +1,9 @@
 Name:Earthblighter
 ManaCost:1 B
 Types:Creature Human Cleric
-Text:no text
 PT:1/1
 A:AB$ Destroy | Cost$ 2 B T Sac<1/Goblin> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthblighter.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/68.jpg
 Oracle:{2}{B}, {T}, Sacrifice a Goblin: Destroy target land.
-End

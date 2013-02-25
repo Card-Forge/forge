@@ -1,11 +1,9 @@
 Name:Markov Patrician
 ManaCost:2 B
 Types:Creature Vampire
-Text:no text
 PT:3/1
 K:Lifelink
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markov_patrician.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/107.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)
-End

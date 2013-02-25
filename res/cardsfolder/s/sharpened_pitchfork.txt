@@ -1,7 +1,6 @@
 Name:Sharpened Pitchfork
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First Strike | Description$ Equipped creature has first strike.
 S:Mode$ Continuous | Affected$ Human.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ As long as equipped creature is a Human, it gets +1/+1.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sharpened_pitchfork.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/232.jpg
 Oracle:Equipped creature has first strike.\nAs long as equipped creature is a Human, it gets +1/+1.\nEquip {1}
-End

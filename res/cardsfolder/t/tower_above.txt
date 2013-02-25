@@ -1,7 +1,6 @@
 Name:Tower Above
 ManaCost:2G 2G 2G
 Types:Sorcery
-Text:no text
 A:SP$ Pump | Cost$ 2G 2G 2G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4 | NumDef$ 4 | KW$ Trample & Wither | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, CARDNAME gets +4/+4 and gains trample, wither, and "When this creature attacks, target creature blocks it this turn if able." (It deals damage to creatures in the form of -1/-1 counters.)
 SVar:DBAnimate:DB$ Animate | Cost$ 0 | Defined$ Targeted | Triggers$ TrigAttack | sVars$ TowerAboveTrigBlock
 SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TowerAboveTrigBlock | TriggerDescription$ Whenever CARDNAME attacks, target creature blocks it this turn if able
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_above.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/131.jpg
 Oracle:({2/G} can be paid with any two mana or with {G}. This card's converted mana cost is 6.)\nUntil end of turn, target creature gets +4/+4 and gains trample, wither, and "When this creature attacks, target creature blocks it this turn if able." (It deals damage to creatures in the form of -1/-1 counters.)
-End

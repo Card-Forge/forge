@@ -1,11 +1,9 @@
 Name:Skyshroud Troopers
 ManaCost:3 G
 Types:Creature Elf Druid Warrior
-Text:no text
 PT:3/3
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5230.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/65.jpg
 Oracle:{T}: Add {G} to your mana pool.
-End

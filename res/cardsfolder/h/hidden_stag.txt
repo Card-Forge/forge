@@ -1,7 +1,6 @@
 Name:Hidden Stag
 ManaCost:1 G
 Types:Enchantment
-Text:no text
 T:Mode$ LandPlayed | ValidCard$ Land.OppCtrl | IsPresent$ Card.Self+Enchantment | Execute$ TrigHiddenStagAnimateOppLand | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent plays a land, if CARDNAME is an enchantment, CARDNAME becomes a 3/2 Elk Beast creature.
 SVar:TrigHiddenStagAnimateOppLand:AB$ Animate | Cost$ 0 | Defined$ Self | Types$ Creature,Elk,Beast | Power$ 3 | Toughness$ 2 | OverwriteTypes$ True | Permanent$ True
 T:Mode$ LandPlayed | ValidCard$ Land.YouCtrl | IsPresent$ Card.Self+Creature | Execute$ TrigHiddenStagAnimateYourLand | TriggerZones$ Battlefield | TriggerDescription$ Whenever you play a land, if CARDNAME is a creature, CARDNAME becomes an enchantment.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_stag.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/265.jpg
 Oracle:Whenever an opponent plays a land, if Hidden Stag is an enchantment, Hidden Stag becomes a 3/2 Elk Beast creature.\nWhenever you play a land, if Hidden Stag is a creature, Hidden Stag becomes an enchantment.
-End

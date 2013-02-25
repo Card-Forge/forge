@@ -1,7 +1,6 @@
 Name:Bronze Bombshell
 ManaCost:4
 Types:Artifact Creature Construct
-Text:no text
 PT:4/1
 T:Mode$ Always | IsPresent$ Card.Self+OwnerDoesntControl | Execute$ TrigSac | TriggerDescription$ When a player other than CARDNAME's owner controls it, that player sacrifices it. If the player does, CARDNAME deals 7 damage to him or her.
 SVar:TrigSac:AB$SacrificeAll | Cost$ 0 | Defined$ Self | RememberSacrificed$ True | SubAbility$ DBDmg
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bronze_bombshell.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/160.jpg
 Oracle:When a player other than Bronze Bombshell's owner controls it, that player sacrifices it. If the player does, Bronze Bombshell deals 7 damage to him or her.
-End

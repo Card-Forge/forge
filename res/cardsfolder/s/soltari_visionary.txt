@@ -1,7 +1,6 @@
 Name:Soltari Visionary
 ManaCost:1 W W
 Types:Creature Soltari Cleric
-Text:no text
 PT:2/2
 K:Shadow
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ You | Execute$ TrigDestroyOwn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, destroy target enchantment that player controls.
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_visionary.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/20.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Soltari Visionary deals damage to a player, destroy target enchantment that player controls.
-End

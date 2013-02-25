@@ -1,7 +1,6 @@
 Name:Hollow Specter
 ManaCost:1 B B
 Types:Creature Specter
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay X. If you do, that player reveals X cards from his or her hand and you choose one of them. That player discards that card.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hollow_specter.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/75.jpg
 Oracle:Flying\nWhenever Hollow Specter deals combat damage to a player, you may pay {X}. If you do, that player reveals X cards from his or her hand and you choose one of them. That player discards that card.
-End

@@ -1,7 +1,6 @@
 Name:Trigon of Rage
 ManaCost:2
 Types:Artifact
-Text:no text
 K:etbCounter:CHARGE:3
 A:AB$ PutCounter | Cost$ R R T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$ Pump | Cost$ 2 T SubCounter<1/CHARGE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | SpellDescription$ Target creature gets +3/+0 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_rage.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/216.jpg
 Oracle:Trigon of Rage enters the battlefield with three charge counters on it.\n{R}{R}, {T}: Put a charge counter on Trigon of Rage.\n{2}, {T}, Remove a charge counter from Trigon of Rage: Target creature gets +3/+0 until end of turn.
-End

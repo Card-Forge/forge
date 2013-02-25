@@ -10,4 +10,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/216.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/171.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/180.jpg
 Oracle:Enchant land\nYou control enchanted land.
-End

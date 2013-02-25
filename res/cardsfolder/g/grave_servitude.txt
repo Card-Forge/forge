@@ -1,7 +1,6 @@
 Name:Grave Servitude
 ManaCost:1 B
 Types:Enchantment Aura
-Text:no text
 K:You may cast CARDNAME as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
 K:Enchant creature
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDelayedSac | Static$ True | Secondary$ True | SpellSpeed$ NotSorcerySpeed | TriggerDescription$ If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.
@@ -15,4 +14,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_servitude.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/24.jpg
 Oracle:You may cast Grave Servitude as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant creature\nEnchanted creature gets +3/-1 and is black.
-End

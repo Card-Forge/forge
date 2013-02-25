@@ -1,7 +1,6 @@
 Name:Wall of Heat
 ManaCost:2 R
 Types:Creature Wall
-Text:no text
 PT:2/6
 K:Defender
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_heat.jpg
 Oracle:Defender (This creature can't attack.)
 SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/55.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/167.jpg
-End

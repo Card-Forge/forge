@@ -1,7 +1,6 @@
 Name:Gutter Grime
 ManaCost:4 G
 Types:Enchantment
-Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a nontoken creature you control dies, put a slime counter on CARDNAME, then put a green Ooze creature token onto the battlefield with "This creature's power and toughness are each equal to the number of slime counters on CARDNAME."
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SLIME | CounterNum$ 1 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ G X X Ooze | TokenSVars$ GutterGrimePT | RememberSource$ True | TokenStaticAbilities$ Static
@@ -11,4 +10,3 @@ SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gutter_grime.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/186.jpg
 Oracle:Whenever a nontoken creature you control dies, put a slime counter on Gutter Grime, then put a green Ooze creature token onto the battlefield with "This creature's power and toughness are each equal to the number of slime counters on Gutter Grime."
-End

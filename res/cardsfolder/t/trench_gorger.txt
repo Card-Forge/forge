@@ -1,7 +1,6 @@
 Name:Trench Gorger
 ManaCost:6 U U
 Types:Creature Leviathan
-Text:no text
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for any number of land cards, exile them, then shuffle your library. If you do, Trench Gorger's power and toughness each become equal to the number of cards exiled this way.
@@ -15,4 +14,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trench_gorger.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/65.jpg
 Oracle:Trample\nWhen Trench Gorger enters the battlefield, you may search your library for any number of land cards, exile them, then shuffle your library. If you do, Trench Gorger's power and toughness each become equal to the number of cards exiled this way.
-End

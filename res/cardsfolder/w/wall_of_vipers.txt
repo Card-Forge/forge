@@ -1,7 +1,6 @@
 Name:Wall of Vipers
 ManaCost:2 B
 Types:Creature Snake Wall
-Text:no text
 PT:2/4
 K:Defender
 A:AB$ Destroy | Cost$ 3 | Defined$ Self | AnyPlayer$ True | SubAbility$ SnakeBite | SpellDescription$ Destroy CARDNAME and target creature it's blocking. Any player may activate this ability.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_vipers.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/80.jpg
 Oracle:Defender (This creature can't attack.)\n{3}: Destroy Wall of Vipers and target creature it's blocking. Any player may activate this ability.
-End

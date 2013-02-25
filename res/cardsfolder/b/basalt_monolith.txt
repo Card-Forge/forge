@@ -1,7 +1,6 @@
 Name:Basalt Monolith
 ManaCost:3
 Types:Artifact
-Text:no text
 K:CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 3 | SpellDescription$ Untap CARDNAME.
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add 3 to your mana pool.
@@ -13,4 +12,3 @@ SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/233.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/235.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/232.jpg
 Oracle:Basalt Monolith doesn't untap during your untap step.\n{T}: Add {3} to your mana pool.\n{3}: Untap Basalt Monolith.
-End

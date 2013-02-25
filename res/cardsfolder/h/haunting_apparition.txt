@@ -1,7 +1,6 @@
 Name:Haunting Apparition
 ManaCost:1 U B
 Types:Creature Spirit
-Text:no text
 PT:1/2
 K:Flying
 K:ETBReplacement:Other:ChooseP
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_apparition.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/327.jpg
 Oracle:Flying\nAs Haunting Apparition enters the battlefield, choose an opponent.\nHaunting Apparition's power is equal to 1 plus the number of green creature cards in the chosen player's graveyard.
-End

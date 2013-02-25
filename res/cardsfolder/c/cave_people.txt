@@ -1,7 +1,6 @@
 Name:Cave People
 ManaCost:1 R R
 Types:Creature Human
-Text:no text
 PT:1/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/-2 until end of turn.
 A:AB$ Pump | Cost$ 1 R R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Mountainwalk | SpellDescription$ Target creature gains mountainwalk until end of turn.
@@ -12,4 +11,3 @@ SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/215.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/59.jpg
 SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/199.jpg
 Oracle:Whenever Cave People attacks, it gets +1/-2 until end of turn.\n{1}{R}{R}, {T}: Target creature gains mountainwalk until end of turn.
-End

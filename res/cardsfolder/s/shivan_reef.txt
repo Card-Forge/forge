@@ -1,7 +1,6 @@
 Name:Shivan Reef
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBPain | SpellDescription$ Add U to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPain | SpellDescription$ Add R to your mana pool. CARDNAME deals 1 damage to you.
@@ -12,4 +11,3 @@ SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/142.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/324.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/357.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {U} or {R} to your mana pool. Shivan Reef deals 1 damage to you.
-End

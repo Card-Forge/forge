@@ -1,7 +1,6 @@
 Name:Snake Cult Initiation
 ManaCost:3 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Poisonous 3 | Description$ Enchanted creature has poisonous 3. (Whenever it deals combat damage to a player, that player gets three poison counters. A player with ten or more poison counters loses the game.)
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snake_cult_initiation.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/89.jpg
 Oracle:Enchant creature\nEnchanted creature has poisonous 3. (Whenever it deals combat damage to a player, that player gets three poison counters. A player with ten or more poison counters loses the game.)
-End

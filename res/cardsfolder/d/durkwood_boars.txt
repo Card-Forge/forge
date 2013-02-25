@@ -1,7 +1,6 @@
 Name:Durkwood Boars
 ManaCost:4 G
 Types:Creature Boar
-Text:no text
 PT:4/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3972.jpg
@@ -10,4 +9,3 @@ SetInfo:S99|Common|http://magiccards.info/scans/en/st/127.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/125.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/96.jpg
 Oracle:
-End

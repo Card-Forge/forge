@@ -1,7 +1,6 @@
 Name:Angel of Serenity
 ManaCost:4 W W W
 Types:Creature Angel
-Text:no text
 PT:5/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_serenity.jpg
 SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/1.jpg
 Oracle:Flying\nWhen Angel of Serenity enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.\nWhen Angel of Serenity leaves the battlefield, return the exiled cards to their owners' hands.
-End

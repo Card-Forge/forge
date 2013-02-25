@@ -1,7 +1,6 @@
 Name:Mistform Ultimus
 ManaCost:3 U
 Types:Legendary Creature Illusion
-Text:no text
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ CARDNAME is every creature type (even if this card isn't on the battlefield).
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_ultimus
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/47.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/26.jpg
 Oracle:Mistform Ultimus is every creature type (even if this card isn't on the battlefield).
-End

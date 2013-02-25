@@ -1,11 +1,9 @@
 Name:Phyrexian Altar
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ Sac<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_altar.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/306.jpg
 Oracle:Sacrifice a creature: Add one mana of any color to your mana pool.
-End

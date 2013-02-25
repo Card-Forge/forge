@@ -1,7 +1,6 @@
 Name:Palladia-Mors
 ManaCost:2 W W R R G G
 Types:Legendary Creature Elder Dragon
-Text:no text
 PT:7/7
 K:Flying
 K:Trample
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/palladia_mors.jp
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice Palladia-Mors unless you pay {R}{G}{W}.
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/117.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/287.jpg
-End

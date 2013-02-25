@@ -1,7 +1,6 @@
 Name:Storm Crow
 ManaCost:1 U
 Types:Creature Bird
-Text:no text
 PT:1/2
 K:Flying
 SVar:Rarity:Common
@@ -13,4 +12,3 @@ SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/100.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/101.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/53.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)
-End

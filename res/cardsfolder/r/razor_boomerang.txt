@@ -1,7 +1,6 @@
 Name:Razor Boomerang
 ManaCost:3
 Types:Artifact Equipment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ RazorDamage | AddSVar$ BoomerangCatch | Description$ Equipped creature has "{T}, Unattach CARDNAME: CARDNAME deals 1 damage to target creature or player. Return CARDNAME to its owner's hand."
 SVar:RazorDamage:AB$ DealDamage | Cost$ T Unattach<OriginalHost/Razor Boomerang> | NumDmg$ 1 | DamageSource$ OriginalHost | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | RememberCostCards$ True | SubAbility$ BoomerangCatch | SpellDescription$ Razor Boomerang deals 1 damage to target creature or player. Return Razor Boomerang to its owner's hand.
 SVar:BoomerangCatch:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Remembered | ForgetChanged$ True
@@ -9,4 +8,3 @@ K:Equip 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_boomerang.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/129.jpg
 Oracle:Equipped creature has "{T}, Unattach Razor Boomerang: Razor Boomerang deals 1 damage to target creature or player. Return Razor Boomerang to its owner's hand."\nEquip {2}
-End

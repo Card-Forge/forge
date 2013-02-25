@@ -1,7 +1,6 @@
 Name:Icatian Moneychanger
 ManaCost:W
 Types:Creature Human
-Text:no text
 PT:0/2
 K:etbCounter:CREDIT:3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to you.
@@ -15,4 +14,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_moneychanger.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/152.jpg|3
 Oracle:Icatian Moneychanger enters the battlefield with three credit counters on it.\nWhen Icatian Moneychanger enters the battlefield, it deals 3 damage to you.\nAt the beginning of your upkeep, put a credit counter on Icatian Moneychanger.\nSacrifice Icatian Moneychanger: You gain 1 life for each credit counter on Icatian Moneychanger. Activate this ability only during your upkeep.
-End

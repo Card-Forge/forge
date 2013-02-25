@@ -1,11 +1,9 @@
 Name:Goblin Soothsayer
 ManaCost:R
 Types:Creature Goblin Shaman
-Text:no text
 PT:1/1
 A:AB$ PumpAll | Cost$ R T Sac<1/Goblin> | ValidCards$ Creature.Red | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Red creatures get +1/+1 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_soothsayer.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/179.jpg
 Oracle:{R}, {T}, Sacrifice a Goblin: Red creatures get +1/+1 until end of turn.
-End

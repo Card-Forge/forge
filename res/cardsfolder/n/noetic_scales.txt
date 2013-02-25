@@ -1,7 +1,6 @@
 Name:Noetic Scales
 ManaCost:4
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounceYou | TriggerDescription$ At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in his or her hand.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigBounceOpp | TriggerDescription$ At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in his or her hand.
 SVar:TrigBounceYou:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Creature.YouCtrl+powerGTX | Origin$ Battlefield | Destination$ Hand | References$ X
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noetic_scales.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/304.jpg
 Oracle:At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in his or her hand.
-End

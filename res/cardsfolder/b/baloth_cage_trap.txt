@@ -1,7 +1,6 @@
 Name:Baloth Cage Trap
 ManaCost:3 G G
 Types:Instant Trap
-Text:no text
 A:SP$Token | Cost$ 3 G G | TokenAmount$ 1 | TokenName$ Beast | TokenOwner$ You | TokenTypes$ Creature,Beast | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | SpellDescription$ Put a 4/4 green Beast creature token onto the battlefield.
 A:SP$Token | Cost$ 1 G | CheckSVar$ ArtifactsEntered | TokenAmount$ 1 | TokenName$ Beast | TokenOwner$ You | TokenTypes$ Creature,Beast | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | SpellDescription$ If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay 1 G rather than pay Baloth Cage Trap's mana cost.
 SVar:ArtifactsEntered:Count$ThisTurnEntered_Battlefield_Artifact.YouDontCtrl
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baloth_cage_trap.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/156.jpg
 Oracle:If an opponent had an artifact enter the battlefield under his or her control this turn, you may pay {1}{G} rather than pay Baloth Cage Trap's mana cost.\nPut a 4/4 green Beast creature token onto the battlefield.
-End

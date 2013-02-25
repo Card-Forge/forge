@@ -1,7 +1,6 @@
 Name:Fighting Chance
 ManaCost:R
 Types:Instant
-Text:no text
 A:SP$ RepeatEach | Cost$ R | RepeatCards$ Creature.blocking | Zone$ Battlefield | RepeatSubAbility$ DBFlip | SpellDescription$ For each blocking creature, flip a coin. If you win the flip, prevent all combat damage that would be dealt by that creature this turn.
 SVar:DBFlip:DB$ FlipACoin | WinSubAbility$ DBPreventDmg
 SVar:DBPreventDmg:DB$ Pump | Defined$ Remembered | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fighting_chance.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/82.jpg
 Oracle:For each blocking creature, flip a coin. If you win the flip, prevent all combat damage that would be dealt by that creature this turn.
-End

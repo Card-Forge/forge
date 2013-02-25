@@ -1,7 +1,6 @@
 Name:Nemata, Grove Guardian
 ManaCost:4 G G
 Types:Legendary Creature Treefolk
-Text:no text
 PT:4/5
 A:AB$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 A:AB$ PumpAll | Cost$ Sac<1/Saproling> | ValidCards$ Creature.Saproling | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Saproling creatures get +1/+1 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nemata_grove_guardian.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/85.jpg
 Oracle:{2}{G}: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Saproling creatures get +1/+1 until end of turn.
-End

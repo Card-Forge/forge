@@ -1,11 +1,9 @@
 Name:Wind Sail
 ManaCost:1 U
 Types:Sorcery
-Text:no text
 A:SP$ Pump | Cost$ 1 U | TargetMin$ 1 | TargetMax$ 2 | KW$ Flying | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ One or two target creatures gain flying until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/wind_sail.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/60.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/62.jpg
 Oracle:One or two target creatures gain flying until end of turn.
-End

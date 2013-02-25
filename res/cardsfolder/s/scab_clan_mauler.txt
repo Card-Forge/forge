@@ -1,7 +1,6 @@
 Name:Scab-Clan Mauler
 ManaCost:R G
 Types:Creature Human Berserker
-Text:no text
 PT:1/1
 K:Bloodthirst 2
 K:Trample
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scab_clan_mauler.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/128.jpg
 Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)\nTrample
-End

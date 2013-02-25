@@ -1,11 +1,9 @@
 Name:Akki Drillmaster
 ManaCost:2 R
 Types:Creature Goblin Shaman
-Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74393.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/92.jpg
 Oracle:{T}: Target creature gains haste until end of turn.
-End

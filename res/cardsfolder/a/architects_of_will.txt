@@ -1,7 +1,6 @@
 Name:Architects of Will
 ManaCost:2 U B
 Types:Artifact Creature Human Wizard
-Text:no text
 PT:3/3
 K:Cycling:UB
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards of target player's library, then put them back in any order.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/architects_of_will.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/17.jpg
 Oracle:When Architects of Will enters the battlefield, look at the top three cards of target player's library, then put them back in any order.\nCycling {U/B} ({U/B}, Discard this card: Draw a card.)
-End

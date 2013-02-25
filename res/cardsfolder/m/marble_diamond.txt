@@ -1,7 +1,6 @@
 Name:Marble Diamond
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 K:CARDNAME enters the battlefield tapped.
 SVar:Rarity:Uncommon
@@ -10,4 +9,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/297.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/275.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/306.jpg
 Oracle:Marble Diamond enters the battlefield tapped.\n{T}: Add {W} to your mana pool.
-End

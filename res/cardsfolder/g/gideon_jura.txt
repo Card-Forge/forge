@@ -1,7 +1,6 @@
 Name:Gideon Jura
 ManaCost:3 W W
 Types:Planeswalker Gideon
-Text:no text
 Loyalty:6
 A:AB$ MustAttack | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defender$ Self | Planeswalker$ True | SpellDescription$ During target opponent's next turn, creatures that player controls attack CARDNAME if able.
 A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Planeswalker$ True | SpellDescription$ Destroy target tapped creature.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/gideon_jura.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/16.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/21.jpg
 Oracle:[+2] During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n[-2] Destroy target tapped creature.\n[0] Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-End

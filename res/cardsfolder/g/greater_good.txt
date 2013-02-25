@@ -1,7 +1,6 @@
 Name:Greater Good
 ManaCost:2 G G
 Types:Enchantment
-Text:no text
 A:AB$ Draw | Cost$ Sac<1/Creature> | NumCards$ X | SubAbility$ DB | References$ X | SpellDescription$ Draw cards equal to the sacrificed creature's power, then discard three cards.
 SVar:DB:DB$Discard | NumCards$ 3 | Mode$ TgtChoose
 SVar:X:Sacrificed$CardPower
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_good.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/257.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/245.jpg
 Oracle:Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards.
-End

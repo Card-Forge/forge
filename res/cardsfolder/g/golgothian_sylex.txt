@@ -1,11 +1,9 @@
 Name:Golgothian Sylex
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ SacrificeAll | Cost$ 1 T | ValidCards$ Permanent.nonToken+setATQ | SpellDescription$ Each nontoken permanent from the Antiquities expansion is sacrificed by its controller.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgothian_sylex.jpg
 SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/16.jpg
 Oracle:{1}, {T}: Each nontoken permanent from the Antiquities expansion is sacrificed by its controller.
-End

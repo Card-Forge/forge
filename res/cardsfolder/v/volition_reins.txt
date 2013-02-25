@@ -11,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volition_reins.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/53.jpg
 Oracle:Enchant permanent\nWhen Volition Reins enters the battlefield, if enchanted permanent is tapped, untap it.\nYou control enchanted permanent.
-End

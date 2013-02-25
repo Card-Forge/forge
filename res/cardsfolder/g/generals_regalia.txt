@@ -1,7 +1,6 @@
 Name:General's Regalia
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ ChooseSource | Cost$ 3 | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect damage to | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,X | RememberObjects$ Remembered | ImprintCards$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead.
@@ -17,4 +16,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/generals_regalia.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/295.jpg
 Oracle:{3}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead.
-End

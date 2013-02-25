@@ -1,7 +1,6 @@
 Name:Ignoble Soldier
 ManaCost:2 W
 Types:Creature Human Soldier
-Text:no text
 PT:3/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigNodamage | TriggerDescription$ Whenever CARDNAME becomes blocked, prevent all combat damage that would be dealt by it this turn.
 SVar:TrigNodamage:AB$ Pump | Cost$ 0 | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt by CARDNAME this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ignoble_soldier.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/22.jpg
 Oracle:Whenever Ignoble Soldier becomes blocked, prevent all combat damage that would be dealt by it this turn.
-End

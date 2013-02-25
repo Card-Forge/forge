@@ -1,7 +1,6 @@
 Name:Graceful Reprieve
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Effect | Cost$ 1 W | Name$ Graceful Reprieve Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigGracefulReprieve | SVars$ GracefulReprieveReturn,ExileEffect | References$ TrigGracefulReprieve,GracefulReprieveReturn,ExileEffect | RememberObjects$ Targeted | SpellDescription$ When target creature dies this turn, return that card to the battlefield under its owner's control.
 SVar:TrigGracefulReprieve:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.IsRemembered | Execute$ GracefulReprieveReturn | TriggerDescription$ When target creature dies this turn, return that card to the battlefield under its owner's control.
 SVar:GracefulReprieveReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ ExileEffect
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_reprieve.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/11.jpg
 Oracle:When target creature dies this turn, return that card to the battlefield under its owner's control.
-End

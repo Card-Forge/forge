@@ -1,11 +1,9 @@
 Name:Latch Seeker
 ManaCost:1 U U
 Types:Creature Spirit
-Text:no text
 PT:3/1
 K:Unblockable
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/latch_seeker.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/63.jpg
 Oracle:Latch Seeker is unblockable.
-End

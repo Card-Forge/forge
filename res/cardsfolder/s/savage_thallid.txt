@@ -1,7 +1,6 @@
 Name:Savage Thallid
 ManaCost:3 G G
 Types:Creature Fungus
-Text:no text
 PT:5/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a spore counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_thallid.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/213.jpg
 Oracle:At the beginning of your upkeep, put a spore counter on Savage Thallid.\nRemove three spore counters from Savage Thallid: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Regenerate target Fungus.
-End

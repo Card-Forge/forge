@@ -1,11 +1,9 @@
 Name:Squeeze
 ManaCost:3 U
 Types:Enchantment
-Text:no text
 S:Mode$ RaiseCost | ValidCard$ Sorcery | Type$ Spell | Amount$ 3 | Description$ Sorcery spells cost 3 more to cast.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squeeze.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/105.jpg
 Oracle:Sorcery spells cost {3} more to cast.
-End

@@ -1,11 +1,9 @@
 Name:Hunding Gjornersen
 ManaCost:3 U U W
 Types:Legendary Creature Human Warrior
-Text:no text
 PT:5/4
 K:Rampage 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunding_gjornersen.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/271.jpg
 Oracle:Rampage 1 (Whenever this creature becomes blocked, it gets +1/+1 until end of turn for each creature blocking it beyond the first.)
-End

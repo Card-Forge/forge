@@ -1,11 +1,9 @@
 Name:Princess Lucrezia
 ManaCost:3 U U B
 Types:Legendary Creature Human Wizard
-Text:no text
 PT:5/4
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1675.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/289.jpg
 Oracle:{T}: Add {U} to your mana pool.
-End

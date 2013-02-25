@@ -1,7 +1,6 @@
 Name:Reflex Sliver
 ManaCost:3 G
 Types:Creature Sliver
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Haste | Description$ All Sliver creatures have haste.
 SVar:PlayMain1:TRUE
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reflex_sliver.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/138.jpg
 Oracle:All Sliver creatures have haste.
-End

@@ -1,7 +1,6 @@
 Name:Keldon Halberdier
 ManaCost:4 R
 Types:Creature Human Warrior
-Text:no text
 PT:4/1
 K:First Strike
 K:Suspend:4:R
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_halberdier.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/167.jpg
 Oracle:First strike\nSuspend 4-{R} (Rather than cast this card from your hand, you may pay {R} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
-End

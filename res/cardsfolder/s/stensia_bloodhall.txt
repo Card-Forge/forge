@@ -1,11 +1,9 @@
 Name:Stensia Bloodhall
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ DealDamage | Cost$ 3 B R T | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stensia_bloodhall.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/247.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{3}{B}{R}, {T}: Stensia Bloodhall deals 2 damage to target player.
-End

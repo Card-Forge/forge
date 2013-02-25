@@ -1,7 +1,6 @@
 Name:Seeker of Skybreak
 ManaCost:1 G
 Types:Creature Elf
-Text:no text
 PT:2/1
 A:AB$ Untap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/seeker_of_skybre
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/148.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/268.jpg
 Oracle:{T}: Untap target creature.
-End

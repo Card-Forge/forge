@@ -1,7 +1,6 @@
 Name:Kagemaro's Clutch
 ManaCost:3 B
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets -X/-X, where X is the number of cards in your hand.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kagemaros_clutch.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/74.jpg
 Oracle:Enchant creature\nEnchanted creature gets -X/-X, where X is the number of cards in your hand.
-End

@@ -1,7 +1,6 @@
 Name:Notorious Throng
 ManaCost:3 U
 Types:Tribal Sorcery Rogue
-Text:no text
 A:SP$ Token | Cost$ 5 U | Activation$ Prowl | PrecostDesc$ Prowl 5 U | TokenAmount$ X | References$ X | TokenColors$ Black | TokenTypes$ Faerie,Rogue,Creature | TokenName$ Faerie Rogue | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ DBTakeTurn | SpellDescription$ (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)
 SVar:DBTakeTurn:DB$ AddTurn | NumTurns$ 1
 A:SP$ Token | Cost$ 3 U | TokenAmount$ X | References$ X | TokenColors$ Black | TokenTypes$ Faerie,Rogue,Creature | TokenName$ Faerie Rogue | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put X 1/1 black Faerie Rogue creature tokens with flying onto the battlefield, where X is the damage dealt to your opponents this turn. If CARDNAME prowl cost was paid, take an extra turn after this one.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/notorious_throng.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/45.jpg
 Oracle:Prowl {5}{U} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)\nPut X 1/1 black Faerie Rogue creature tokens with flying onto the battlefield, where X is the damage dealt to your opponents this turn. If Notorious Throng's prowl cost was paid, take an extra turn after this one.
-End

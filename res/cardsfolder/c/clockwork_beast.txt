@@ -1,7 +1,6 @@
 Name:Clockwork Beast
 ManaCost:6
 Types:Artifact Creature Beast
-Text:no text
 PT:0/4
 K:etbCounter:P1P0:7
 T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | IsPresent$ Card.attacking+Self,Card.blocking+Self | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At end of combat, if CARDNAME attacked or blocked this combat, remove a +1/+0 counter from it.
@@ -18,4 +17,3 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/325.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/240.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/237.jpg
 Oracle:Clockwork Beast enters the battlefield with seven +1/+0 counters on it.\nAt end of combat, if Clockwork Beast attacked or blocked this combat, remove a +1/+0 counter from it.\n{X}, {T}: Put up to X +1/+0 counters on Clockwork Beast. This ability can't cause the total number of +1/+0 counters on Clockwork Beast to be greater than seven. Activate this ability only during your upkeep.
-End

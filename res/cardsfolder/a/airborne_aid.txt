@@ -1,7 +1,6 @@
 Name:Airborne Aid
 ManaCost:3 U
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 3 U | NumCards$ X | References$ X | SpellDescription$ Draw a card for each Bird on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Bird
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/airborne_aid.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/62.jpg
 Oracle:Draw a card for each Bird on the battlefield.
-End

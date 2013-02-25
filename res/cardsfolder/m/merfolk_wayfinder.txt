@@ -1,7 +1,6 @@
 Name:Merfolk Wayfinder
 ManaCost:2 U
 Types:Creature Merfolk Scout
-Text:no text
 PT:1/2
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top three cards of your library. Put all Island cards revealed this way into your hand and the rest on the bottom of your library in any order.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_wayfinder.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/56.jpg
 Oracle:Flying\nWhen Merfolk Wayfinder enters the battlefield, reveal the top three cards of your library. Put all Island cards revealed this way into your hand and the rest on the bottom of your library in any order.
-End

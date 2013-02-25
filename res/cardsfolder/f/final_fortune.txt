@@ -1,7 +1,6 @@
 Name:Final Fortune
 ManaCost:R R
 Types:Instant
-Text:no text
 A:SP$ AddTurn | Cost$ R R | NumTurns$ 1 | LoseAtEndStep$ True | SpellDescription$ Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/175.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/173.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/182.jpg
 Oracle:Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
-End

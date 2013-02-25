@@ -1,7 +1,6 @@
 Name:Echoing Calm
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBDestroyAll | RememberTargets$ True | ForgetOtherTargets$ True | SpellDescription$ Destroy target enchantment and all other enchantments with the same name as that enchantment.
 SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Remembered.Enchantment+Other+sameName | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_calm.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/2.jpg
 Oracle:Destroy target enchantment and all other enchantments with the same name as that enchantment.
-End

@@ -1,7 +1,6 @@
 Name:Kuro's Taken
 ManaCost:1 B
 Types:Creature Rat Samurai
-Text:no text
 PT:1/1
 K:Bushido 1
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuros_taken.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/79.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{1}{B}: Regenerate Kuro's Taken.
-End

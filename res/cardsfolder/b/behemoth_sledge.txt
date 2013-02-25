@@ -1,11 +1,9 @@
 Name:Behemoth Sledge
 ManaCost:1 G W
 Types:Artifact Equipment
-Text:no text
 K:Equip 3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Lifelink & Trample | Description$ Equipped creature gets +2/+2 and has lifelink and trample.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/behemoth_sledge.jpg
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/65.jpg
 Oracle:Equipped creature gets +2/+2 and has lifelink and trample.\nEquip {3}
-End

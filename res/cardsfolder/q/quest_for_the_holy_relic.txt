@@ -1,7 +1,6 @@
 Name:Quest for the Holy Relic
 ManaCost:W
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a creature spell, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1 | SpellDescription$ Whenever you cast a creature spell, you may put a quest counter on CARDNAME.
 A:AB$ ChangeZone | Cost$ SubCounter<5/QUEST> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Equipment+YouOwn | ChangeNum$ 1 | AttachedTo$ Creature.YouCtrl | SpellDescription$ Search your library for an Equipment card, put it onto the battlefield, and attach it to a creature you control. Then shuffle your library.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_the_holy_relic.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/33.jpg
 Oracle:Whenever you cast a creature spell, you may put a quest counter on Quest for the Holy Relic.\nRemove five quest counters from Quest for the Holy Relic and sacrifice it: Search your library for an Equipment card, put it onto the battlefield, and attach it to a creature you control. Then shuffle your library.
-End

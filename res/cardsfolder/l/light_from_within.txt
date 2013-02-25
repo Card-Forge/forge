@@ -1,10 +1,8 @@
 Name:Light from Within
 ManaCost:2 W W
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Chroma - Each creature you control gets +1/+1 for each white mana symbol in its mana cost.
 SVar:AffectedX:Count$ChromaSource.W
 SVar:Picture:http://www.wizards.com/global/images/magic/general/light_from_within.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/10.jpg
 Oracle:Chroma - Each creature you control gets +1/+1 for each white mana symbol in its mana cost.
-End

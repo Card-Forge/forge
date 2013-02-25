@@ -1,7 +1,6 @@
 Name:Collapsing Borders
 ManaCost:3 R
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands he or she controls. Then CARDNAME deals 3 damage to him or her.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ DomainX | SubAbility$ DBDamage | References$ DomainX
 SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 3
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/collapsing_borders.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/141.jpg
 Oracle:Domain - At the beginning of each player's upkeep, that player gains 1 life for each basic land type among lands he or she controls. Then Collapsing Borders deals 3 damage to him or her.
-End

@@ -1,7 +1,6 @@
 Name:Transcendent Master
 ManaCost:1 W W
 Types:Creature Human Cleric Avatar
-Text:no text
 PT:3/3
 K:Level up:1
 K:maxLevel:12
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transcendent_master.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/51.jpg
 Oracle:Level up {1} ({1}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 6-11\n6/6\nLifelink\nLEVEL 12+\n9/9\nLifelink\nTranscendent Master is indestructible.
-End

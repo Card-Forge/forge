@@ -1,7 +1,6 @@
 Name:Hedron Matrix
 ManaCost:4
 Types:Artifact Equipment
-Text:no text
 K:Equip 4
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +X/+X, where X is its converted mana cost.
 SVar:X:Count$EquippedCardManaCost
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_matrix.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/218.jpg
 Oracle:Equipped creature gets +X/+X, where X is its converted mana cost.\nEquip {4}
-End

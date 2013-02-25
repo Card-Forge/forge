@@ -1,7 +1,6 @@
 Name:Thalakos Seer
 ManaCost:U U
 Types:Creature Thalakos Wizard
-Text:no text
 PT:1/1
 K:Shadow
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_seer.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/94.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhen Thalakos Seer leaves the battlefield, draw a card.
-End

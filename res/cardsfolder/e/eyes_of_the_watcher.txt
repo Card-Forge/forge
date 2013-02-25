@@ -1,7 +1,6 @@
 Name:Eyes of the Watcher
 ManaCost:2 U
 Types:Enchantment
-Text:no text
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigScry | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may pay 1. If you do, scry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:TrigScry:AB$Scry | Cost$ 1 | ScryNum$ 2
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eyes_of_the_watcher.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/30.jpg
 Oracle:Whenever you cast an instant or sorcery spell, you may pay {1}. If you do, scry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
-End

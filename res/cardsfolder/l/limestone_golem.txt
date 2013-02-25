@@ -2,11 +2,9 @@ Name:Limestone Golem
 ManaCost:6
 Types:Artifact Creature Golem
 PT:3/4
-Text:no text
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player to draw a card | SpellDescription$ Target player draws a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/limestone_golem.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/301.jpg
 Oracle:{2}, Sacrifice Limestone Golem: Target player draws a card.
-End

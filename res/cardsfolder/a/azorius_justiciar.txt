@@ -1,7 +1,6 @@
 Name:Azorius Justiciar
 ManaCost:2 W W
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ When CARDNAME enters the battlefield, detain up to two target creatures your opponents control. (Until your next turn, those creatures can't attack or block and their activated abilities can't be activated.)
 SVar:Detain:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | UntilYourNextTurn$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_justiciar.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/6.jpg
 Oracle:When Azorius Justiciar enters the battlefield, detain up to two target creatures your opponents control. (Until your next turn, those creatures can't attack or block and their activated abilities can't be activated.)
-End

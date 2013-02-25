@@ -1,7 +1,6 @@
 Name:Dream Thrush
 ManaCost:1 U
 Types:Creature Bird
-Text:no text
 PT:1/1
 K:Flying
 A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Target land becomes the basic land type of your choice until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_thrush.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/53.jpg
 Oracle:Flying\n{T}: Target land becomes the basic land type of your choice until end of turn.
-End

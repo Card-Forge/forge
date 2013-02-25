@@ -1,7 +1,6 @@
 Name:Recross the Paths
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 A:SP$ DigUntil | Cost$ 2 G | Valid$ Land | ValidDescription$ land | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RememberFound$ True | SubAbility$ RecrossClash | SpellDescription$ Reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield and the rest on the bottom of your library in any order. Clash with an opponent. If you win, return CARDNAME to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
 SVar:RecrossClash:DB$Clash | WinSubAbility$ RecrossReturn
 SVar:RecrossReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recross_the_paths.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/133.jpg
 Oracle:Reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield and the rest on the bottom of your library in any order. Clash with an opponent. If you win, return Recross the Paths to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-End

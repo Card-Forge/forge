@@ -1,7 +1,6 @@
 Name:Psychic Surgery
 ManaCost:1 U
 Types:Enchantment
-Text:no text
 T:Mode$ Shuffled | ValidPlayer$ Opponent | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDig | TriggerDescription$ Whenever an opponent shuffles his or her library, you may look at the top two cards of that library. You may exile one of those cards. Then put the rest on top of that library in any order.
 SVar:TrigDig:AB$ Dig | Cost$ 0 | Defined$ TriggeredPlayer | DigNum$ 2 | ChangeNum$ 1 | Optional$ True | DestinationZone$ Exile | LibraryPosition2$ 0
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_surgery.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/44.jpg
 Oracle:Whenever an opponent shuffles his or her library, you may look at the top two cards of that library. You may exile one of those cards. Then put the rest on top of that library in any order.
-End

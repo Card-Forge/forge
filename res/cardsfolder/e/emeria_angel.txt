@@ -1,7 +1,6 @@
 Name:Emeria Angel
 ManaCost:2 W W
 Types:Creature Angel
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you may put a 1/1 white Bird creature token with flying onto the battlefield.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emeria_angel.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/11.jpg
 Oracle:Flying\nLandfall - Whenever a land enters the battlefield under your control, you may put a 1/1 white Bird creature token with flying onto the battlefield.
-End

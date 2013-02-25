@@ -1,7 +1,6 @@
 Name:Dwarven Soldier
 ManaCost:1 R
 Types:Creature Dwarf Soldier
-Text:no text
 PT:2/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Orc | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by one or more Orcs, CARDNAME gets +0/+2 until end of turn.
 T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Orc | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by one or more Orcs, CARDNAME gets +0/+2 until end of turn.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_soldier.
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/221.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/107.jpg|3
 Oracle:Whenever Dwarven Soldier blocks or becomes blocked by one or more Orcs, Dwarven Soldier gets +0/+2 until end of turn.
-End

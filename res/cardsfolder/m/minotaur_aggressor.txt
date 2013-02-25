@@ -1,7 +1,6 @@
 Name:Minotaur Aggressor
 ManaCost:6 R
 Types:Creature Minotaur Berserker
-Text:no text
 PT:6/2
 K:First Strike
 K:Haste
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_aggressor.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/100.jpg
 Oracle:First strike, haste
-End

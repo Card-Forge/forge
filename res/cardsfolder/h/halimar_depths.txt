@@ -1,7 +1,6 @@
 Name:Halimar Depths
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When Halimar Depths enters the battlefield, look at the top three cards of your library, then put them back in any order.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halimar_depths.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/137.jpg
 Oracle:Halimar Depths enters the battlefield tapped.\nWhen Halimar Depths enters the battlefield, look at the top three cards of your library, then put them back in any order.\n{T}: Add {U} to your mana pool.
-End

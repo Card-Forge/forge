@@ -1,7 +1,6 @@
 Name:Arcbound Reclaimer
 ManaCost:4
 Types:Artifact Creature Golem
-Text:no text
 PT:0/0
 A:AB$ ChangeZone | Cost$ SubCounter<1/P1P1> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Library | SpellDescription$ Put target artifact card from your graveyard on top of your library.
 K:Modular 2
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_reclaimer.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/101.jpg
 Oracle:Remove a +1/+1 counter from Arcbound Reclaimer: Put target artifact card from your graveyard on top of your library.\nModular 2 (This enters the battlefield with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
-End

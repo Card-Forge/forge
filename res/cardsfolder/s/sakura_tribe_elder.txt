@@ -1,7 +1,6 @@
 Name:Sakura-Tribe Elder
 ManaCost:1 G
 Types:Creature Snake Shaman
-Text:no text
 PT:1/1
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50510.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/239.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/169.jpg
 Oracle:Sacrifice Sakura-Tribe Elder: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
-End

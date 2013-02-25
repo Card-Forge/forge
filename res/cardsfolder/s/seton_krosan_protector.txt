@@ -1,11 +1,9 @@
 Name:Seton, Krosan Protector
 ManaCost:G G G
 Types:Legendary Creature Centaur Druid
-Text:no text
 PT:2/2
 A:AB$ Mana | Cost$ tapXType<1/Druid> | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seton_krosan_protector.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/267.jpg
 Oracle:Tap an untapped Druid you control: Add {G} to your mana pool.
-End

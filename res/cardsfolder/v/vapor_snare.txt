@@ -13,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vapor_snare.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/44.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of your upkeep, sacrifice Vapor Snare unless you return a land you control to its owner's hand.
-End

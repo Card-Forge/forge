@@ -1,7 +1,6 @@
 Name:Countryside Crusher
 ManaCost:1 R R
 Types:Creature Giant Warrior
-Text:no text
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ At the beginning of your upkeep, reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Land.YouOwn | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Countryside Crusher.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/countryside_crusher.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/89.jpg
 Oracle:At the beginning of your upkeep, reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process.\nWhenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Countryside Crusher.
-End

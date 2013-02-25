@@ -1,7 +1,6 @@
 Name:Assault Griffin
 ManaCost:3 W
 Types:Creature Griffin
-Text:no text
 PT:3/2
 K:Flying
 SVar:Rarity:Common
@@ -10,4 +9,3 @@ SetInfo:M11|Common|http://magiccards.info/scans/en/m11/6.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/4.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/8.jpg
 Oracle:Flying
-End

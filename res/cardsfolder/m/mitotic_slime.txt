@@ -1,7 +1,6 @@
 Name:Mitotic Slime
 ManaCost:4 G
 Types:Creature Ooze
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTokenSenior | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put two 2/2 green Ooze creature tokens onto the battlefield. They have "When this creature is put into a graveyard, put two 1/1 green Ooze creature tokens onto the battlefield."
 SVar:TrigTokenSenior:AB$Token | Cost$ 0 | TokenImage$ g 2 2 ooze | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenColors$ Green | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | TokenAmount$ 2 | TokenTriggers$ TriggerJunior | TokenSVars$ TrigTokenJunior
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mitotic_slime.jp
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/185.jpg
 SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/67.jpg
 Oracle:When Mitotic Slime dies, put two 2/2 green Ooze creature tokens onto the battlefield. They have "When this creature dies, put two 1/1 green Ooze creature tokens onto the battlefield."
-End

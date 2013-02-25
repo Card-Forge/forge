@@ -1,7 +1,6 @@
 Name:Numot, the Devastator
 ManaCost:3 R W U
 Types:Legendary Creature Dragon
-Text:no text
 PT:6/6
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 R. If you do, destroy up to two target lands.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/numot_the_devast
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/215.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/160.jpg
 Oracle:Flying\nWhenever Numot, the Devastator deals combat damage to a player, you may pay {2}{R}. If you do, destroy up to two target lands.
-End

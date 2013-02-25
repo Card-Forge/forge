@@ -1,7 +1,6 @@
 Name:Orcish Oriflamme
 ManaCost:3 R
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.attacking+YouCtrl | AddPower$ 1 | Description$ Attacking creatures you control get +1/+0.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
@@ -15,4 +14,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/197.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/168.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/167.jpg
 Oracle:Attacking creatures you control get +1/+0.
-End

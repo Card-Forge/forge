@@ -1,7 +1,6 @@
 Name:Island
 ManaCost:no cost
 Types:Basic Land Island
-Text:no text
 SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73951.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159281\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159282\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=25964
@@ -50,4 +49,3 @@ SetInfo:M12|Land|http://magiccards.info/scans/en/m12/234.jpg|4
 SetInfo:LRW|Land|http://magiccards.info/scans/en/lw/286.jpg|4
 SetInfo:2ED|Land|http://magiccards.info/scans/en/un/283.jpg|3
 Oracle:U
-End

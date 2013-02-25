@@ -1,7 +1,6 @@
 Name:Sigarda, Host of Herons
 ManaCost:2 G W W
 Types:Legendary Creature Angel
-Text:no text
 PT:5/5
 K:Flying
 K:Hexproof
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigarda_host_of_herons.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/210.jpg
 Oracle:Flying, hexproof\nSpells and abilities your opponents control can't cause you to sacrifice permanents.
-End

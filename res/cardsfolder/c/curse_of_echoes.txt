@@ -1,7 +1,6 @@
 Name:Curse of Echoes
 ManaCost:4 U
 Types:Enchantment Aura Curse
-Text:no text
 K:Enchant player
 A:SP$ Attach | Cost$ 4 U | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Player.EnchantedBy | Execute$ TrigCopy | TriggerZones$ Battlefield | OptionalDecider$ TriggeredCardOpponent | TriggerDescription$ Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_echoes.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/34.jpg
 Oracle:Enchant player\nWhenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.
-End

@@ -1,7 +1,6 @@
 Name:Jandor's Saddlebags
 ManaCost:2
 Types:Artifact
-Text:no text
 A:AB$ Untap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
@@ -12,4 +11,3 @@ SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/348.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/79.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/304.jpg
 Oracle:{3}, {T}: Untap target creature.
-End

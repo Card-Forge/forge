@@ -1,7 +1,6 @@
 Name:Flailing Manticore
 ManaCost:3 R
 Types:Creature Manticore
-Text:no text
 PT:3/3
 K:Flying
 K:First Strike
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flailing_manticore.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/187.jpg
 Oracle:Flying, first strike\n{1}: Flailing Manticore gets +1/+1 until end of turn. Any player may activate this ability.\n{1}: Flailing Manticore gets -1/-1 until end of turn. Any player may activate this ability.
-End

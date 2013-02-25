@@ -1,7 +1,6 @@
 Name:Rock Slide
 ManaCost:X R
 Types:Instant
-Text:no text
 A:SP$ DealDamage | Announce$ X | Cost$ X R | ValidTgts$ Creature.attacking+withoutFlying,Creature.blocking+withoutFlying | TgtPrompt$ Select target attacking or blocking creature to distribute damage to | NumDmg$ X | TargetMin$ 1 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | References$ X,MaxTgts | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target attacking or blocking creatures without flying.
 SVar:MaxTgts:Count$Valid Creature.attacking+withoutFlying,Creature.blocking+withoutFlying
 SVar:X:Count$xPaid
@@ -9,4 +8,3 @@ SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rock_slide.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/92.jpg
 Oracle:Rock Slide deals X damage divided as you choose among any number of target attacking or blocking creatures without flying.
-End

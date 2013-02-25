@@ -1,11 +1,9 @@
 Name:Weatherseed Elf
 ManaCost:G
 Types:Creature Elf
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Forestwalk | SpellDescription$ Target creature gains forestwalk until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weatherseed_elf.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/115.jpg
 Oracle:{T}: Target creature gains forestwalk until end of turn.
-End

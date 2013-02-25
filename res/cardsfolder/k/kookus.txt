@@ -1,7 +1,6 @@
 Name:Kookus
 ManaCost:3 R R
 Types:Creature Djinn
-Text:no text
 PT:3/5
 K:Trample
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kookus.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/86.jpg
 Oracle:Trample\nAt the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, Kookus deals 3 damage to you and attacks this turn if able.\n{R}: Kookus gets +1/+0 until end of turn.
-End

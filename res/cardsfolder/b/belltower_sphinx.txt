@@ -1,7 +1,6 @@
 Name:Belltower Sphinx
 ManaCost:4 U
 Types:Creature Sphinx
-Text:no text
 PT:2/5
 K:Flying
 T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller puts that many cards from the top of his or her library into his or her graveyard.
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/belltower_sphinx
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/38.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/46.jpg
 Oracle:Flying\nWhenever a source deals damage to Belltower Sphinx, that source's controller puts that many cards from the top of his or her library into his or her graveyard.
-End

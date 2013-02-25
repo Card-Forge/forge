@@ -1,7 +1,6 @@
 Name:Necra Sanctuary
 ManaCost:2 B
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, if you control a green or white permanent, target player loses 1 life. If you control a green permanent and a white permanent, that player loses 3 life instead.
 SVar:TrigLoseLife:DB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player to lose life | LifeAmount$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X,Y,Z | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$LoseLife | Cost$ 0 | Defined$ Targeted | LifeAmount$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | References$ X,Y,Z
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necra_sanctuary.jpg
 SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/45.jpg
 Oracle:At the beginning of your upkeep, if you control a green or white permanent, target player loses 1 life. If you control a green permanent and a white permanent, that player loses 3 life instead.
-End

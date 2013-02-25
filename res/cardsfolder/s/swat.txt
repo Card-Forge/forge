@@ -1,7 +1,6 @@
 Name:Swat
 ManaCost:1 B B
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | SpellDescription$ Destroy target creature with power 2 or less.
 K:Cycling:2
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/swat.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/174.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/69.jpg
 Oracle:Destroy target creature with power 2 or less.\nCycling {2} ({2}, Discard this card: Draw a card.)
-End

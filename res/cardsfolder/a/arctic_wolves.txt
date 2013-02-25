@@ -1,7 +1,6 @@
 Name:Arctic Wolves
 ManaCost:3 G G
 Types:Creature Wolf
-Text:no text
 PT:4/5
 K:Cumulative upkeep:2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_wolves.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/60.jpg
 Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Arctic Wolves enters the battlefield, draw a card.
-End

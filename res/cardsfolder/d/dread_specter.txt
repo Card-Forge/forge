@@ -1,7 +1,6 @@
 Name:Dread Specter
 ManaCost:3 B
 Types:Creature Specter
-Text:no text
 PT:2/2
 T:Mode$ AttackerBlocked | ValidCard$ Creature.nonBlack | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
 T:Mode$ Blocks | ValidCard$ Creature.nonBlack | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_specter.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/17.jpg
 Oracle:Whenever Dread Specter blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
-End

@@ -1,7 +1,6 @@
 Name:Fabricate
 ManaCost:2 U
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 2 U | Origin$ Library | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/35.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/52.jpg
 Oracle:Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
-End

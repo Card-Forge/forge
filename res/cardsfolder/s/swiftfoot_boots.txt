@@ -1,11 +1,9 @@
 Name:Swiftfoot Boots
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste & Hexproof | Description$ Equipped creature has hexproof and haste.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swiftfoot_boots.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/229.jpg
 Oracle:Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control, and it can attack and {T} as soon as it comes under your control.)\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-End

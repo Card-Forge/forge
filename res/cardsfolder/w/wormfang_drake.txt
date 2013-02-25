@@ -1,7 +1,6 @@
 Name:Wormfang Drake
 ManaCost:2 U
 Types:Creature Nightmare Drake
-Text:no text
 PT:3/4
 K:Flying
 K:Champion:Creature
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_drake.jpg
 SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/57.jpg
 Oracle:Flying\nWhen Wormfang Drake enters the battlefield, sacrifice it unless you exile a creature you control other than Wormfang Drake.\nWhen Wormfang Drake leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-End

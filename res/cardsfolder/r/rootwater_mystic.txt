@@ -1,7 +1,6 @@
 Name:Rootwater Mystic
 ManaCost:U
 Types:Creature Merfolk Wizard
-Text:no text
 PT:1/1
 A:AB$ Dig | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | SpellDescription$ Look at the top card of target player's library.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_mystic.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/44.jpg
 Oracle:{1}{U}: Look at the top card of target player's library.
-End

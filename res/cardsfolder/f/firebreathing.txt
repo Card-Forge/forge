@@ -1,7 +1,6 @@
 Name:Firebreathing
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
@@ -20,4 +19,3 @@ SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/150.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/132.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/151.jpg
 Oracle:Enchant creature\n{R}: Enchanted creature gets +1/+0 until end of turn.
-End

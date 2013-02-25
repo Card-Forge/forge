@@ -1,7 +1,6 @@
 Name:Kashi-Tribe Reaver
 ManaCost:3 G
 Types:Creature Snake Warrior
-Text:no text
 PT:3/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ TriggeredTarget | SubAbility$ DBPump
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_reaver.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/220.jpg
 Oracle:Whenever Kashi-Tribe Reaver deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.\n{1}{G}: Regenerate Kashi-Tribe Reaver.
-End

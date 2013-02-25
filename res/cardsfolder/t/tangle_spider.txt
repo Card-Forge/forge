@@ -1,7 +1,6 @@
 Name:Tangle Spider
 ManaCost:4 G G
 Types:Creature Spider
-Text:no text
 PT:3/4
 K:Flash
 K:Reach
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_spider.jp
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/85.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/303.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nReach (This creature can block creatures with flying.)
-End

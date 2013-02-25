@@ -1,7 +1,6 @@
 Name:Traitor's Roar
 ManaCost:4 BR
 Types:Sorcery
-Text:no text
 A:SP$ Tap | Cost$ 4 BR | ValidTgts$ Creature.untapped | TgtPrompt$ Select an untapped creature | SubAbility$ DBDamage | SpellDescription$ Tap target untapped creature. It deals damage equal to its power to its controller.
 SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ TargetedController | DamageSource$ Targeted | NumDmg$ X | References$ X
 SVar:X:Targeted$CardPower
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traitors_roar.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/200.jpg
 Oracle:Tap target untapped creature. It deals damage equal to its power to its controller.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)
-End

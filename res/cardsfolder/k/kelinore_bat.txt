@@ -1,11 +1,9 @@
 Name:Kelinore Bat
 ManaCost:2 B
 Types:Creature Bat
-Text:no text
 PT:2/1
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kelinore_bat.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/101.jpg
 Oracle:Flying
-End

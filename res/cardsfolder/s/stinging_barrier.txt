@@ -1,7 +1,6 @@
 Name:Stinging Barrier
 ManaCost:2 U U
 Types:Creature Wall
-Text:no text
 PT:0/4
 K:Defender
 A:AB$ DealDamage | Cost$ U T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stinging_barrier.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/107.jpg
 Oracle:Defender (This creature can't attack.)\n{U}, {T}: Stinging Barrier deals 1 damage to target creature or player.
-End

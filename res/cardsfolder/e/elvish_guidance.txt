@@ -1,7 +1,6 @@
 Name:Elvish Guidance
 ManaCost:2 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds G to his or her mana pool for each Elf on the battlefield (in addition to the mana the land produces).
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_guidance.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/255.jpg
 Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool for each Elf on the battlefield (in addition to the mana the land produces).
-End

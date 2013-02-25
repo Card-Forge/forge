@@ -1,7 +1,6 @@
 Name:Foundry Champion
 ManaCost:4 R W
 Types:Creature Elemental Soldier
-Text:no text
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to target creature or player equal to the number of creatures you control.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foundry_champion.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/165.jpg
 Oracle:When Foundry Champion enters the battlefield, it deals damage to target creature or player equal to the number of creatures you control.\n{R}: Foundry Champion gets +1/+0 until end of turn.\n{W}: Foundry Champion gets +0/+1 until end of turn.
-End

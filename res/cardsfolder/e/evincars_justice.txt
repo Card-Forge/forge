@@ -1,7 +1,6 @@
 Name:Evincar's Justice
 ManaCost:2 B B
 Types:Sorcery
-Text:no text
 A:SP$ DamageAll | Cost$ 2 B B | NumDmg$ 2 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 2 damage to each creature and each player.
 K:Buyback 3
 SVar:Rarity:Common
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/evincars_justice
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/28.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/80.jpg
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nEvincar's Justice deals 2 damage to each creature and each player.
-End

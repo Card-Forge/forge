@@ -1,7 +1,6 @@
 Name:Inkfathom Divers
 ManaCost:3 U U
 Types:Creature Merfolk Soldier
-Text:no text
 PT:3/3
 K:Islandwalk
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, then put them back in any order.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inkfathom_divers.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/70.jpg
 Oracle:Islandwalk\nWhen Inkfathom Divers enters the battlefield, look at the top four cards of your library, then put them back in any order.
-End

@@ -1,7 +1,6 @@
 Name:Void
 ManaCost:3 B R
 Types:Sorcery
-Text:no text
 A:SP$ ChooseNumber | Cost$ 3 B R | SubAbility$ DBVoidDestroyAll | SpellDescription$ Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals his or her hand and discards all nonland cards with converted mana cost equal to the number.
 SVar:DBVoidDestroyAll:DB$ DestroyAll | ValidCards$ Artifact.cmcEQX,Creature.cmcEQX | SubAbility$ DBVoidRevealDiscard
 SVar:DBVoidRevealDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealDiscardAll | DiscardValid$ Card.nonLand+cmcEQX
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/void.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/287.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/105.jpg
 Oracle:Choose a number. Destroy all artifacts and creatures with converted mana cost equal to that number. Then target player reveals his or her hand and discards all nonland cards with converted mana cost equal to the number.
-End

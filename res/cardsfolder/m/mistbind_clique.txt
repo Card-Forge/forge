@@ -1,7 +1,6 @@
 Name:Mistbind Clique
 ManaCost:3 U
 Types:Creature Faerie Wizard
-Text:no text
 PT:4/4
 K:Flash
 K:Flying
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistbind_clique.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/75.jpg
 Oracle:Flash\nFlying\nChampion a Faerie (When this enters the battlefield, sacrifice it unless you exile another Faerie you control. When this leaves the battlefield, that card returns to the battlefield.)\nWhen a Faerie is championed with Mistbind Clique, tap all lands target player controls.
-End

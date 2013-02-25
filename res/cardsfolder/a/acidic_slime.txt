@@ -1,7 +1,6 @@
 Name:Acidic Slime
 ManaCost:3 G G
 Types:Creature Ooze
-Text:no text
 PT:2/2
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact, enchantment, or land.
@@ -15,4 +14,3 @@ SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/159.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/161.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/140.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhen Acidic Slime enters the battlefield, destroy target artifact, enchantment, or land.
-End

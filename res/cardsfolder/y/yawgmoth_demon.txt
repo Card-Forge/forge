@@ -1,7 +1,6 @@
 Name:Yawgmoth Demon
 ManaCost:4 B B
 Types:Creature Demon
-Text:no text
 PT:6/6
 K:Flying
 K:First Strike
@@ -18,4 +17,3 @@ Oracle:Flying (This creature can't be blocked except by creatures with flying or
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/14.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/170.jpg
 SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/51.jpg
-End

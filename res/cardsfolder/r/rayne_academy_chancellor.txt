@@ -1,7 +1,6 @@
 Name:Rayne, Academy Chancellor
 ManaCost:2 U
 Types:Legendary Creature Human Wizard
-Text:no text
 PT:1/1
 T:Mode$ BecomesTarget | ValidTarget$ You,Permanent.YouCtrl | ValidSource$ Card.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card. You may draw an additional card if CARDNAME is enchanted.
 SVar:TrigDraw:DB$Draw | NumCards$ 1 | SubAbility$ TrigAddDraw | SpellDescription$ Draw a card.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rayne_academy_chancellor.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/43.jpg
 Oracle:Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card. You may draw an additional card if Rayne, Academy Chancellor is enchanted.
-End

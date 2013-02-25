@@ -1,7 +1,6 @@
 Name:Every Last Vestige Shall Rot
 ManaCost:no cost
 Types:Scheme
-Text:no text
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ MoveToBottom | TriggerZones$ Command | OptionalDecider$ You | TriggerDescription$ When you set this scheme in motion, you may pay X. If you do, put each nonland permanent target player controls with converted mana cost X or less on the bottom of its owner's library.
 SVar:MoveToBottom:AB$ ChangeZoneAll | Cost$ X | ChangeType$ Permanent.nonLand+cmcLEX | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1
 SVar:X:Count$xPaid
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/every_last_vestige_shall_rot.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/every-last-vestige-shall-rot.jpg
 Oracle:When you set this scheme in motion, you may pay {X}. If you do, put each nonland permanent target player controls with converted mana cost X or less on the bottom of its owner's library.
-End

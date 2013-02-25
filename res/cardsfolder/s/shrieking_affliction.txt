@@ -1,7 +1,6 @@
 Name:Shrieking Affliction
 ManaCost:B
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | CheckSVar$ CardsInHand | SVarCompare$ LE1 | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, he or she loses 3 life.
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 3
 SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_affliction.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/76.jpg
 Oracle:At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, he or she loses 3 life.
-End

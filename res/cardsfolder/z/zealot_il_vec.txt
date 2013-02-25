@@ -1,7 +1,6 @@
 Name:Zealot il-Vec
 ManaCost:2 W
 Types:Creature Human Rebel
-Text:no text
 PT:1/1
 K:Shadow
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may have it deal 1 damage to target creature. If you do, prevent all combat damage CARDNAME would deal this turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealot_il_vec.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/47.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Zealot il-Vec attacks and isn't blocked, you may have it deal 1 damage to target creature. If you do, prevent all combat damage Zealot il-Vec would deal this turn.
-End

@@ -1,7 +1,6 @@
 Name:Kaleidostone
 ManaCost:2
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 A:AB$ Mana | Cost$ 5 T Sac<1/CARDNAME> | Produced$ W U B R G | SpellDescription$ Add W U B R G to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaleidostone.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/137.jpg
 Oracle:When Kaleidostone enters the battlefield, draw a card.\n{5}, {T}, Sacrifice Kaleidostone: Add {W}{U}{B}{R}{G} to your mana pool.
-End

@@ -1,10 +1,8 @@
 Name:Deception
 ManaCost:2 B
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deception.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/73.jpg
 Oracle:Target opponent discards two cards.
-End

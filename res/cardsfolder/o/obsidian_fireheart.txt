@@ -1,11 +1,9 @@
 Name:Obsidian Fireheart
 ManaCost:1 R R R
 Types:Creature Elemental
-Text:no text
 PT:4/4
 A:AB$ PutCounter | Cost$ 1 R R | IsCurse$ True | ValidTgts$ Land.counters_EQ0_BLAZE | TgtPrompt$ Select target Land without a Blaze Counter | CounterType$ BLAZE | CounterNum$ 1 | SpellDescription$ Put a blaze counter on target land without a blaze counter on it. For as long as that land has a blaze counter on it, it has "At the beginning of your upkeep, this land deals 1 damage to you." (The land continues to burn after Obsidian Fireheart has left the battlefield.)
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_fireheart.jpg
 SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/140.jpg
 Oracle:{1}{R}{R}: Put a blaze counter on target land without a blaze counter on it. For as long as that land has a blaze counter on it, it has "At the beginning of your upkeep, this land deals 1 damage to you." (The land continues to burn after Obsidian Fireheart has left the battlefield.)
-End

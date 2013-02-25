@@ -1,7 +1,6 @@
 Name:Megatherium
 ManaCost:2 G
 Types:Creature Beast
-Text:no text
 PT:4/4
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you pay 1 for each card in your hand.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/megatherium.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/259.jpg
 Oracle:Trample\nWhen Megatherium enters the battlefield, sacrifice it unless you pay {1} for each card in your hand.
-End

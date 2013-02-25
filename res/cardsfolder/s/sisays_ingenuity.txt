@@ -1,7 +1,6 @@
 Name:Sisay's Ingenuity
 ManaCost:U
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sisays_ingenuity.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/33.jpg
 Oracle:Enchant creature\nWhen Sisay's Ingenuity enters the battlefield, draw a card.\nEnchanted creature has "{2}{U}: Target creature becomes the color of your choice until end of turn."
-End

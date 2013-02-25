@@ -1,7 +1,6 @@
 Name:Morality Shift
 ManaCost:5 B B
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZoneAll | Cost$ 5 B B | ChangeType$ Card.YouCtrl | Origin$ Library | Destination$ Graveyard | SubAbility$ GraveShift | RememberChanged$ True | SpellDescription$ Exchange your graveyard and library. Then shuffle your library.
 SVar:GraveShift:DB$ ChangeZoneAll | ChangeType$ Card.YouCtrl+IsNotRemembered | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morality_shift.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/70.jpg
 Oracle:Exchange your graveyard and library. Then shuffle your library.
-End

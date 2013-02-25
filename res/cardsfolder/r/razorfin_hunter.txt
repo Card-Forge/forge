@@ -1,11 +1,9 @@
 Name:Razorfin Hunter
 ManaCost:U R
 Types:Creature Merfolk Goblin
-Text:no text
 PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorfin_hunter.jpg
 SetInfo:APC|Common|http://magiccards.info/scans/en/ap/119.jpg
 Oracle:{T}: Razorfin Hunter deals 1 damage to target creature or player.
-End

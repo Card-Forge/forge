@@ -1,7 +1,6 @@
 Name:War Mammoth
 ManaCost:3 G
 Types:Creature Elephant
-Text:no text
 PT:3/3
 K:Trample
 SVar:Rarity:Common
@@ -13,4 +12,3 @@ SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/170.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/135.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/136.jpg
 Oracle:Trample
-End

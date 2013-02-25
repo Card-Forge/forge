@@ -1,7 +1,6 @@
 Name:Glacial Chasm
 ManaCost:no cost
 Types:Land
-Text:no text
 K:Cumulative upkeep:PayLife<2>:Pay 2 life.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a land.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | ChangeNum$ 1
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_chasm.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/331.jpg
 Oracle:Cumulative upkeep-Pay 2 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Glacial Chasm enters the battlefield, sacrifice a land.\nCreatures you control can't attack.\nPrevent all damage that would be dealt to you.
-End

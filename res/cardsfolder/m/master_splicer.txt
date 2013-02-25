@@ -1,7 +1,6 @@
 Name:Master Splicer
 ManaCost:3 W
 Types:Creature Human Artificer
-Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Golem+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Golem creatures you control get +1/+1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 3/3 colorless Golem artifact creature token onto the battlefield.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_splicer.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/16.jpg
 Oracle:When Master Splicer enters the battlefield, put a 3/3 colorless Golem artifact creature token onto the battlefield.\nGolem creatures you control get +1/+1.
-End

@@ -1,7 +1,6 @@
 Name:Renegade Doppelganger
 ManaCost:1 U
 Types:Creature Shapeshifter
-Text:no text
 PT:0/1
 # Make SVars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ RDCopy | TriggerDescription$ Whenever another creature enters the battlefield under your control, you may have CARDNAME become a copy of that creature until end of turn. (If it does, it loses this ability for the rest of the turn.)
@@ -9,4 +8,3 @@ SVar:RDCopy:AB$ Clone | Cost$ 0 | Defined$ TriggeredCard | Duration$ UntilEndOfT
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_doppelganger.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/84.jpg
 Oracle:Whenever another creature enters the battlefield under your control, you may have Renegade Doppelganger become a copy of that creature until end of turn. (If it does, it loses this ability for the rest of the turn.)
-End

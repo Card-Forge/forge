@@ -1,11 +1,9 @@
 Name:Vile Rebirth
 ManaCost:B
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_rebirth.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/115.jpg
 Oracle:Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.
-End

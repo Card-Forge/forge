@@ -1,7 +1,6 @@
 Name:Resistance Fighter
 ManaCost:W
 Types:Creature Human Soldier
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | IsCurse$True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Prevent all combat damage target creature would deal this turn.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/resistance_fight
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/118.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/38.jpg
 Oracle:Sacrifice Resistance Fighter: Prevent all combat damage target creature would deal this turn.
-End

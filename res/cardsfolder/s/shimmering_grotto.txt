@@ -1,7 +1,6 @@
 Name:Shimmering Grotto
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
@@ -11,4 +10,3 @@ SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/126.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/273.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/246.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Add one mana of any color to your mana pool.
-End

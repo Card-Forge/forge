@@ -17,4 +17,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightveil_specter.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/222.jpg
 Oracle:Flying\nWhenever Nightveil Specter deals combat damage to a player, that player exiles the top card of his or her library.\nYou may play cards exiled with Nightveil Specter.
-End

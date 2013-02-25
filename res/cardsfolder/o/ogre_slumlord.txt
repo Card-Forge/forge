@@ -1,7 +1,6 @@
 Name:Ogre Slumlord
 ManaCost:3 B B
 Types:Creature Ogre Rogue
-Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another nontoken creature dies, put a 1/1 black Rat creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Rat | TokenTypes$ Creature,Rat | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1
@@ -9,4 +8,3 @@ S:Mode$ Continuous | Affected$ Creature.Rat+YouCtrl | AddKeyword$ Deathtouch | D
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_slumlord.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/74.jpg
 Oracle:Whenever another nontoken creature dies, you may put a 1/1 black Rat creature token onto the battlefield.\nRats you control have deathtouch.
-End

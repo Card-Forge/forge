@@ -1,7 +1,6 @@
 Name:Swords to Plowshares
 ManaCost:W
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature. Its controller gains life equal to its power. | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ X
 SVar:X:Targeted$CardPower
@@ -14,4 +13,3 @@ SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/278.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/225.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/225.jpg
 Oracle:Exile target creature. Its controller gains life equal to its power.
-End

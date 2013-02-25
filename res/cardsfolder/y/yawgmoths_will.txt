@@ -1,7 +1,6 @@
 Name:Yawgmoth's Will
 ManaCost:2 B
 Types:Sorcery
-Text:no text
 A:SP$ Effect | Cost$ 2 B | Name$ Yawgmoth's Will Effect | ReplacementEffects$ GraveToExile | StaticAbilities$ STPlay | SVars$ Exile | SpellDescription$ Until end of turn, you may play cards from your graveyard. If a card would be put into your graveyard from anywhere this turn, exile that card instead.
 SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Graveyard | AddHiddenKeyword$ May be played | Description$ You may play cards from your graveyard.
 SVar:GraveToExile:Event$ Moved | ActiveZones$ Command | Destination$ Graveyard | ValidCard$ Card.nonToken+YouOwn | ReplaceWith$ Exile | Description$ If a card would be put into your graveyard from anywhere, exile it instead.
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_will.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/171.jpg
 Oracle:Until end of turn, you may play cards from your graveyard.\nIf a card would be put into your graveyard from anywhere this turn, exile that card instead.
-End

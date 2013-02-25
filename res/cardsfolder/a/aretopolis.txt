@@ -1,7 +1,6 @@
 Name:Aretopolis
 ManaCost:no cost
 Types:Plane Kephalai
-Text:no text
 T:Mode$ PlaneswalkedTo | ValidCard$ Plane.Self | TriggerZones$ Command | Execute$ AcquireScrolls | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, put a scroll counter on CARDNAME, then you gain life equal to the number of scroll counters on it.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ AcquireScrolls | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME or at the beginning of your upkeep, put a scroll counter on CARDNAME, then you gain life equal to the number of scroll counters on it.
 SVar:AcquireScrolls:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SCROLL | CounterNum$ 1 | SubAbility$ ScrollsOfLife
@@ -18,4 +17,3 @@ SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aretopolis.jpg
 SetInfo:PC2|Common|http://magiccards.info/extras/plane/planechase-2012-edition/aretopolis.jpg
 Oracle:When you planeswalk to Aretopolis or at the beginning of your upkeep, put a scroll counter on Aretopolis, then you gain life equal to the number of scroll counters on it.\nWhen Aretopolis has ten or more scroll counters on it, planeswalk.\nWhenever you roll {C}, put a scroll counter on Aretopolis, then draw cards equal to the number of scroll counters on it.
-End

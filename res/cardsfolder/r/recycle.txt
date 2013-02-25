@@ -1,7 +1,6 @@
 Name:Recycle
 ManaCost:4 G G
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ 2 | Description$ Your maximum hand size is 2.
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you play a card, draw a card.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recycle.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/142.jpg
 Oracle:Skip your draw step.\nWhenever you play a card, draw a card.\nYour maximum hand size is two.
-End

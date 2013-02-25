@@ -1,7 +1,6 @@
 Name:Increasing Confusion
 ManaCost:X U
 Types:Sorcery
-Text:no text
 K:Flashback X U
 A:SP$ Mill | Cost$ X U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X,Y | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard. If CARDNAME was cast from a graveyard, that player puts twice as many cards into his or her graveyard instead.
 SVar:X:Count$xPaid/Times.Y
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/increasing_confusion.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/41.jpg
 Oracle:Target player puts the top X cards of his or her library into his or her graveyard. If Increasing Confusion was cast from a graveyard, that player puts twice that many cards into his or her graveyard instead.\nFlashback {X}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

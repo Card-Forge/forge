@@ -1,7 +1,6 @@
 Name:Pouncing Kavu
 ManaCost:1 R
 Types:Creature Kavu
-Text:no text
 PT:1/1
 K:Kicker 2 R
 K:First Strike
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pouncing_kavu.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/158.jpg
 Oracle:Kicker {2}{R} (You may pay an additional {2}{R} as you cast this spell.)\nFirst strike\nIf Pouncing Kavu was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.
-End

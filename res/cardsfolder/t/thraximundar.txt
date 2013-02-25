@@ -1,7 +1,6 @@
 Name:Thraximundar
 ManaCost:4 U B R
 Types:Legendary Creature Zombie Assassin
-Text:no text
 PT:6/6
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever Thraximundar attacks, defending player sacrifices a creature.
@@ -13,4 +12,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraximundar.jpg
 SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/113.jpg
 Oracle:Haste\nWhenever Thraximundar attacks, defending player sacrifices a creature.\nWhenever a player sacrifices a creature, you may put a +1/+1 counter on Thraximundar.
-End

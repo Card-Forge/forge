@@ -1,7 +1,6 @@
 Name:Revelation
 ManaCost:G
 Types:World Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ Play with your hand revealed. | Description$ Players play with their hands revealed.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/revelation.jpg
 SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/40.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/116.jpg
 Oracle:Players play with their hands revealed.
-End

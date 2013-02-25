@@ -1,7 +1,6 @@
 Name:Oros, the Avenger
 ManaCost:3 W B R
 Types:Legendary Creature Dragon
-Text:no text
 PT:6/6
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDamageAll | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 W.  If you do, CARDNAME deals 3 damage to each nonwhite creature.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/oros_the_avenger
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/216.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/161.jpg
 Oracle:Flying\nWhenever Oros, the Avenger deals combat damage to a player, you may pay {2}{W}. If you do, Oros deals 3 damage to each nonwhite creature.
-End

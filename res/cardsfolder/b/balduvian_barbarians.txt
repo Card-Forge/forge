@@ -1,7 +1,6 @@
 Name:Balduvian Barbarians
 ManaCost:1 R R
 Types:Creature Human Barbarian
-Text:no text
 PT:3/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83001.jpg
@@ -11,4 +10,3 @@ SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/174.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/172.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/173.jpg
 Oracle:
-End

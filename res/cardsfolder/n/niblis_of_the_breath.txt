@@ -1,7 +1,6 @@
 Name:Niblis of the Breath
 ManaCost:2 U
 Types:Creature Spirit
-Text:no text
 PT:2/1
 K:Flying
 A:AB$ TapOrUntap | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ You may tap or untap target creature.
@@ -9,4 +8,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niblis_of_the_breath.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/44.jpg
 Oracle:Flying\n{U}, {T}: You may tap or untap target creature.
-End

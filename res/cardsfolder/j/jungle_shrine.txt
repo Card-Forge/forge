@@ -1,7 +1,6 @@
 Name:Jungle Shrine
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_shrine.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/226.jpg
 Oracle:Jungle Shrine enters the battlefield tapped.\n{T}: Add {R}, {G}, or {W} to your mana pool.
-End

@@ -1,7 +1,6 @@
 Name:Promise of Power
 ManaCost:2 B B B
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 2 B B B | NumCards$ 5 | SpellDescription$ Choose one - You draw five cards and you lose 5 life; | SubAbility$ DBLoseLife
 A:SP$ Token | Cost$ 2 B B B | TokenAmount$ 1 | TokenName$ Demon | TokenTypes$ Creature,Demon | TokenOwner$ You | TokenColors$ Black | TokenKeywords$ Flying | TokenPower$ X | TokenToughness$ X | References$ X | SpellDescription$ or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.
 A:SP$ Draw | Cost$ 6 B B B | NumCards$ 5 | PrecostDesc$ Entwine | CostDesc$ 4 | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.) | SubAbility$ DBLoseLife2
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/promise_of_power.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/74.jpg
 Oracle:Choose one - You draw five cards and you lose 5 life; or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.\nEntwine {4} (Choose both if you pay the entwine cost.)
-End

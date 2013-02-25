@@ -1,7 +1,6 @@
 Name:Primal Growth
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 K:Kicker Sac<1/Creature>
 A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | References$ X | ChangeNum$ X | SpellDescription$ Search your library for a basic land card, put that card onto the battlefield, then shuffle your library. If CARDNAME was kicked, instead search your library for two basic land cards, put them onto the battlefield, then shuffle your library.
 SVar:X:Count$Kicked.2.1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_growth.jpg
 SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/87.jpg
 Oracle:Kicker-Sacrifice a creature. (You may sacrifice a creature in addition to any other costs as you cast this spell.)\nSearch your library for a basic land card, put that card onto the battlefield, then shuffle your library. If Primal Growth was kicked, instead search your library for two basic land cards, put them onto the battlefield, then shuffle your library.
-End

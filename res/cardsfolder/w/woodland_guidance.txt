@@ -1,7 +1,6 @@
 Name:Woodland Guidance
 ManaCost:3 G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 3 G | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBClash | SpellDescription$ Return target card from your graveyard to your hand. Clash with an opponent. If you win, untap all Forests you control. Exile CARDNAME.
 SVar:DBClash:DB$Clash | WinSubAbility$ DBUntap | OtherwiseSubAbility$ DBExile
 SVar:DBUntap:DB$UntapAll | ValidCards$ Forest.YouCtrl | SubAbility$ DBExile
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_guidance.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/243.jpg
 Oracle:Return target card from your graveyard to your hand. Clash with an opponent. If you win, untap all Forests you control. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)\nExile Woodland Guidance.
-End

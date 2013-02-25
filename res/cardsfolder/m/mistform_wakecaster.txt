@@ -1,7 +1,6 @@
 Name:Mistform Wakecaster
 ManaCost:4 U
 Types:Creature Illusion
-Text:no text
 PT:2/3
 K:Flying
 A:AB$ ChooseType | Cost$ 1 | Type$ Creature | Defined$ You | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_wakecaster.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/48.jpg
 Oracle:Flying\n{1}: Mistform Wakecaster becomes the creature type of your choice until end of turn.\n{2}{U}{U}, {T}: Choose a creature type. Each creature you control becomes that type until end of turn.
-End

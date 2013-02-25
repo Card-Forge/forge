@@ -1,11 +1,9 @@
 Name:Fuel for the Cause
 ManaCost:2 U U
 Types:Instant
-Text:no text
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBProliferate | SpellDescription$ Counter target spell, then proliferate.
 SVar:DBProliferate:DB$Proliferate
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fuel_for_the_cause.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/25.jpg
 Oracle:Counter target spell, then proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
-End

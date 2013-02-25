@@ -1,7 +1,6 @@
 Name:Scorched Ruins
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 4 | SpellDescription$ Add 4 to your mana pool.
 R:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ PayBeforeETB | Description$ If CARDNAME would enter the battlefield, sacrifice two untapped lands instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
 SVar:PayBeforeETB:AB$ Sacrifice | Cost$ 0 | SacValid$ Land.untapped | Defined$ You | RememberSacrificed$ True | Amount$ 2 | SubAbility$ MoveToGraveyard
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_ruins.jpg
 SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/166.jpg
 Oracle:If Scorched Ruins would enter the battlefield, sacrifice two untapped lands instead. If you do, put Scorched Ruins onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {4} to your mana pool.
-End

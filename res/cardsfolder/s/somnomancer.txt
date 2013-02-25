@@ -1,7 +1,6 @@
 Name:Somnomancer
 ManaCost:1 WU
 Types:Creature Kithkin Wizard
-Text:no text
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, you may tap target creature.
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somnomancer.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/149.jpg
 Oracle:When Somnomancer enters the battlefield, you may tap target creature.
-End

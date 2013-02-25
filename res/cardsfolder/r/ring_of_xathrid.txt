@@ -1,7 +1,6 @@
 Name:Ring of Xathrid
 ManaCost:2
 Types:Artifact Equipment
-Text:no text
 A:AB$ Regenerate | Cost$ 2 | Defined$ Equipped | AILogic$ Color:Black | SpellDescription$ Regenerate equipped creature.
 K:Equip 1 | AITgts$ Creature.Black
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ XathridCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_xathrid.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/215.jpg
 Oracle:{2}: Regenerate equipped creature. (The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
-End

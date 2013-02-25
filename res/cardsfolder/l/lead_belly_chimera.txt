@@ -1,7 +1,6 @@
 Name:Lead-Belly Chimera
 ManaCost:4
 Types:Artifact Creature Chimera
-Text:no text
 PT:2/2
 K:Trample
 A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.Chimera | TgtPrompt$ Select target Chimera creature | CounterType$ P2P2 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +2/+2 counter on target Chimera creature. It gains trample. (This effect lasts indefinitely.)
@@ -12,4 +11,3 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lead_belly_chimera.jpg
 SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/148.jpg
 Oracle:Trample\nSacrifice Lead-Belly Chimera: Put a +2/+2 counter on target Chimera creature. It gains trample. (This effect lasts indefinitely.)
-End

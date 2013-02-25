@@ -1,7 +1,6 @@
 Name:Questing Phelddagrif
 ManaCost:1 G W U
 Types:Creature Phelddagrif
-Text:no text
 PT:4/4
 A:AB$ Pump | Cost$ G | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBToken | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Target opponent puts a 1/1 green Hippo creature token onto the battlefield.
 A:AB$ Protection | Cost$ W | Defined$ Self | Gains$ black,red | SubAbility$ DBGain | SpellDescription$ CARDNAME gains protection from black and from red until end of turn. Target opponent gains 2 life.
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/questing_phelddagrif.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/119.jpg
 Oracle:{G}: Questing Phelddagrif gets +1/+1 until end of turn. Target opponent puts a 1/1 green Hippo creature token onto the battlefield.\n{W}: Questing Phelddagrif gains protection from black and from red until end of turn. Target opponent gains 2 life.\n{U}: Questing Phelddagrif gains flying until end of turn. Target opponent may draw a card.
-End

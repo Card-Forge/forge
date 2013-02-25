@@ -1,7 +1,6 @@
 Name:Myojin of Night's Reach
 ManaCost:5 B B B
 Types:Legendary Creature Spirit
-Text:no text
 PT:5/2
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Static$ True | Execute$ ETBCounter | TriggerDescription$ CARDNAME enters the battlefield with a divinity counter on it if you cast it from your hand.
 SVar:ETBCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DIVINITY | CounterNum$ 1
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myojin_of_nights_reach.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/126.jpg
 Oracle:Myojin of Night's Reach enters the battlefield with a divinity counter on it if you cast it from your hand.\nMyojin of Night's Reach is indestructible as long as it has a divinity counter on it.\nRemove a divinity counter from Myojin of Night's Reach: Each opponent discards his or her hand.
-End

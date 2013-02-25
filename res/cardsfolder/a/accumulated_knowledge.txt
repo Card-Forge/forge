@@ -1,7 +1,6 @@
 Name:Accumulated Knowledge
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ Draw | Cost$ 1 U | Defined$ You | NumCards$ 1 | SubAbility$ DBDraw | SpellDescription$ Draw a card, then draw cards equal to the number of cards named CARDNAME in all graveyards.
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$NamedInAllYards.Accumulated Knowledge
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accumulated_knowledge.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/26.jpg
 Oracle:Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.
-End

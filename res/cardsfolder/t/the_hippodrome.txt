@@ -1,7 +1,6 @@
 Name:The Hippodrome
 ManaCost:no cost
 Types:Plane Segovia
-Text:no text
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddPower$ -5 | Description$ All Creatures get -5/-0.
 T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, you may destroy target creature if it's power is 0 or less.
 SVar:RolledChaos:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature | ConditionCheckSVar$ TgtPow | ConditionCompareSVar$ EQ1 | AITgts$ Creature.OpponentCtrl+powerLE0
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_hippodrome.jpg
 SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/the-hippodrome.jpg
 Oracle:All creatures get -5/-0.\nWhenever you roll {C}, you may destroy target creature if its power is 0 or less.
-End

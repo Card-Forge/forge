@@ -1,7 +1,6 @@
 Name:Scandalmonger
 ManaCost:3 B
 Types:Creature Boar Monger
-Text:no text
 PT:3/3
 A:AB$ Discard | Cost$ 2 | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SorcerySpeed$ True | AnyPlayer$ True | IsCurse$ True | SpellDescription$ Target player discards a card. Any player may activate this ability but only any time he or she could cast a sorcery.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scandalmonger.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/158.jpg
 Oracle:{2}: Target player discards a card. Any player may activate this ability but only any time he or she could cast a sorcery.
-End

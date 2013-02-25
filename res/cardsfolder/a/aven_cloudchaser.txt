@@ -1,7 +1,6 @@
 Name:Aven Cloudchaser
 ManaCost:3 W
 Types:Creature Bird Soldier
-Text:no text
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
@@ -13,4 +12,3 @@ SetInfo:ODY|Common|http://magiccards.info/scans/en/od/7.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/3.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/7.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Aven Cloudchaser enters the battlefield, destroy target enchantment.
-End

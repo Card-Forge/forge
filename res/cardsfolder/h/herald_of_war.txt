@@ -1,7 +1,6 @@
 Name:Herald of War
 ManaCost:3 W W
 Types:Creature Angel
-Text:no text
 PT:3/3
 K:Flying
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ HeraldsWarCry | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on it.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_war.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/24.jpg
 Oracle:Flying\nWhenever Herald of War attacks, put a +1/+1 counter on it.\nAngel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on Herald of War.
-End

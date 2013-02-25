@@ -1,7 +1,6 @@
 Name:Orochi Leafcaller
 ManaCost:G
 Types:Creature Snake Shaman
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ G | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_leafcaller.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/234.jpg
 Oracle:{G}: Add one mana of any color to your mana pool.
-End

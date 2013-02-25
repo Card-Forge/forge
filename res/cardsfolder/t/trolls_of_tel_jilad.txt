@@ -1,11 +1,9 @@
 Name:Trolls of Tel-Jilad
 ManaCost:5 G G
 Types:Creature Troll Shaman
-Text:no text
 PT:5/6
 A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature. | SpellDescription$ Regenerate target green creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trolls_of_tel_jilad.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/136.jpg
 Oracle:{1}{G}: Regenerate target green creature.
-End

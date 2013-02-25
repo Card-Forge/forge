@@ -1,7 +1,6 @@
 Name:Malignus
 ManaCost:3 R R
 Types:Creature Elemental Spirit
-Text:no text
 PT:*/*
 K:Damage that would be dealt by CARDNAME can't be prevented.
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to half the highest life total among your opponents, rounded up.
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malignus.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/148.jpg
 Oracle:Malignus's power and toughness are each equal to half the highest life total among your opponents, rounded up.\nDamage that would be dealt by Malignus can't be prevented.
-End

@@ -1,7 +1,6 @@
 Name:Norritt
 ManaCost:3 B
 Types:Creature Imp
-Text:no text
 PT:1/1
 A:AB$ Untap | Cost$ T | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature | SpellDescription$ Untap target blue creature.
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.nonWall+ActivePlayerCtrl+notFirstTurnControlled | TgtPrompt$ Select target non-Wall creature the active player has controlled continuously since the beginning of the turn. | ActivationPhases$ Upkeep->BeginCombat | KW$ HIDDEN CARDNAME attacks each turn if able. | RememberTargets$ True | SubAbility$ DestroyPacifist | SpellDescription$ Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only before attackers are declared.
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/norritt.jpg
 SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/43.jpg
 Oracle:{T}: Untap target blue creature.\n{T}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only before attackers are declared.
-End

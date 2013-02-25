@@ -9,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaotic_strike.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/140.jpg
 Oracle:Cast Chaotic Strike only during combat after blockers are declared.\nFlip a coin. If you win the flip, target creature gets +1/+1 until end of turn.\nDraw a card.
-End

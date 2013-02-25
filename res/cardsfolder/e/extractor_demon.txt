@@ -1,7 +1,6 @@
 Name:Extractor Demon
 ManaCost:4 B B
 Types:Creature Demon
-Text:no text
 PT:5/5
 K:Flying
 K:Unearth:2 B
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/81.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/44.jpg
 Oracle:Flying\nWhenever another creature leaves the battlefield, you may have target player put the top two cards of his or her library into his or her graveyard.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-End

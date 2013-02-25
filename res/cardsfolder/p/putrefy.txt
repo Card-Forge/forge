@@ -1,10 +1,8 @@
 Name:Putrefy
 ManaCost:1 B G
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 1 B G | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | NoRegen$ True | SpellDescription$ Destroy target artifact or creature. It can't be regenerated.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefy.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/221.jpg
 Oracle:Destroy target artifact or creature. It can't be regenerated.
-End

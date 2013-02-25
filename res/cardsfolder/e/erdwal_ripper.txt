@@ -1,7 +1,6 @@
 Name:Erdwal Ripper
 ManaCost:1 R R
 Types:Creature Vampire
-Text:no text
 PT:2/1
 K:Haste
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erdwal_ripper.jpg
 SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/86.jpg
 Oracle:Haste\nWhenever Erdwal Ripper deals combat damage to a player, put a +1/+1 counter on it.
-End

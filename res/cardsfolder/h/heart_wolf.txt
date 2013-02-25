@@ -1,7 +1,6 @@
 Name:Heart Wolf
 ManaCost:3 R
 Types:Creature Wolf
-Text:no text
 PT:2/2
 K:First Strike
 A:AB$ Pump | Cost$ T | NumAtt$ +2 | KW$ First Strike | ValidTgts$ Creature.Dwarf | TgtPrompt$ Select target dwarf creature | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ EliteGuardEffect | SpellDescription$ Target Dwarf creature gets +2/+0 and gains first strike until end of turn. When that creature leaves the battlefield this turn, sacrifice CARDNAME. Activate this ability only during combat.
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_wolf.jpg
 SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/95.jpg
 Oracle:First strike\n{T}: Target Dwarf creature gets +2/+0 and gains first strike until end of turn. When that creature leaves the battlefield this turn, sacrifice Heart Wolf. Activate this ability only during combat.
-End

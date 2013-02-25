@@ -1,7 +1,6 @@
 Name:Lava Runner
 ManaCost:1 R R
 Types:Creature Lizard
-Text:no text
 PT:2/2
 K:Haste
 T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | ValidControllingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacYou | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, that spell or ability's controller sacrifices a land.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_runner.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/200.jpg
 Oracle:Haste\nWhenever Lava Runner becomes the target of a spell or ability, that spell or ability's controller sacrifices a land.
-End

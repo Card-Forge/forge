@@ -1,7 +1,6 @@
 Name:Xathrid Demon
 ManaCost:3 B B B
 Types:Creature Demon
-Text:no text
 PT:7/7
 K:Flying
 K:Trample
@@ -20,4 +19,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xathrid_demon.jpg
 SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/122.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Xathrid Demon, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap Xathrid Demon and you lose 7 life.
-End

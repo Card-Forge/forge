@@ -1,7 +1,6 @@
 Name:Talara's Bane
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ RevealHand | Cost$ 1 B | ValidTgts$ Opponent | RememberRevealed$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card.
 SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Hand | Amount$ 1 | Choices$ Creature.Green+IsRemembered,Creature.White+IsRemembered | SubAbility$ DBImprint | StackDescription$ None
 SVar:DBImprint:DB$ Pump | Defined$ ChosenCard | PumpZone$ Hand | ImprintCards$ ChosenCard | SubAbility$ DBGainLife | StackDescription$ None
@@ -14,4 +13,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talaras_bane.jpg
 Oracle:Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card.
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/47.jpg
-End

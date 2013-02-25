@@ -1,7 +1,6 @@
 Name:Elderscale Wurm
 ManaCost:4 G G G
 Types:Creature Wurm
-Text:no text
 PT:7/7
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLife | CheckSVar$ ElderscaleCondition | SVarCompare$ LT7 | TriggerDescription$ When CARDNAME enters the battlefield, if your life total is less than 7, your life total becomes 7.
@@ -20,4 +19,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elderscale_wurm.jpg
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/167.jpg
 Oracle:Trample\nWhen Elderscale Wurm enters the battlefield, if your life total is less than 7, your life total becomes 7.\nAs long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
-End

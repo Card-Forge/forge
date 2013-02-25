@@ -1,7 +1,6 @@
 Name:Skullcage
 ManaCost:4
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals 2 damage to that player unless he or she has exactly three or exactly four cards in hand.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ 2 | Defined$ TriggeredPlayer | ConditionCheckSVar$ X | ConditionSVarCompare$ LT3 | SubAbility$ DBDamage | References$ X
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredPlayer | ConditionCheckSVar$ X | ConditionSVarCompare$ GT4 | References$ X
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skullcage.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/151.jpg
 Oracle:At the beginning of each opponent's upkeep, Skullcage deals 2 damage to that player unless he or she has exactly three or exactly four cards in hand.
-End

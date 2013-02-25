@@ -1,7 +1,6 @@
 Name:Ballista Squad
 ManaCost:3 W
 Types:Creature Human Rebel
-Text:no text
 PT:2/2
 A:AB$ DealDamage | Cost$ X W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target attacking or blocking creature.
 SVar:X:Count$xPaid
@@ -11,4 +10,3 @@ SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/5.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/5.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/8.jpg
 Oracle:{X}{W}, {T}: Ballista Squad deals X damage to target attacking or blocking creature.
-End

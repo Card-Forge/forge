@@ -1,7 +1,6 @@
 Name:Squirrel Wrangler
 ManaCost:2 G G
 Types:Creature Human Druid
-Text:no text
 PT:2/2
 A:AB$ Token | Cost$ 1 G Sac<1/Land> | TokenAmount$ 2 | TokenName$ Squirrel | TokenTypes$ Creature,Squirrel | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 green Squirrel creature tokens onto the battlefield.
 A:AB$ PumpAll | Cost$ 1 G Sac<1/Land> | ValidCards$ Creature.Squirrel | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Squirrel creatures get +1/+1 until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squirrel_wrangler.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/127.jpg
 Oracle:{1}{G}, Sacrifice a land: Put two 1/1 green Squirrel creature tokens onto the battlefield.\n{1}{G}, Sacrifice a land: Squirrel creatures get +1/+1 until end of turn.
-End

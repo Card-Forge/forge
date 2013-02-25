@@ -1,7 +1,6 @@
 Name:Olivia Voldaren
 ManaCost:2 B R
 Types:Legendary Creature Vampire
-Text:no text
 PT:3/3
 K:Flying
 A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.Other | NumDmg$ 1 | SubAbility$ Animate | SpellDescription$ CARDNAME deas 1 damage to another target creature. That creature becomes a Vampire in addition to its other types. Put a +1/+1 counter on CARDNAME.
@@ -12,4 +11,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/olivia_voldaren.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/215.jpg
 Oracle:Flying\n{1}{R}: Olivia Voldaren deals 1 damage to another target creature. That creature becomes a Vampire in addition to its other types. Put a +1/+1 counter on Olivia Voldaren.\n{3}{B}{B}: Gain control of target Vampire for as long as you control Olivia Voldaren.
-End

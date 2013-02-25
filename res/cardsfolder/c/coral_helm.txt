@@ -1,7 +1,6 @@
 Name:Coral Helm
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Pump | Cost$ 3 Discard<1/Random> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/359.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/328.jpg
 SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/12.jpg
 Oracle:{3}, Discard a card at random: Target creature gets +2/+2 until end of turn.
-End

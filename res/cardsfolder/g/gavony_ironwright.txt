@@ -1,11 +1,9 @@
 Name:Gavony Ironwright
 ManaCost:2 W
 Types:Creature Human Soldier
-Text:no text
 PT:1/4
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 1 | AddToughness$ 4 | Condition$ FatefulHour | Description$ Fateful hour - As long as you have 5 or less life, other creatures you control get +1/+4
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gavony_ironwright.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/9.jpg
 Oracle:Fateful hour - As long as you have 5 or less life, other creatures you control get +1/+4.
-End

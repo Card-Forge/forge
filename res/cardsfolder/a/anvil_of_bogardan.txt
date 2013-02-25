@@ -1,7 +1,6 @@
 Name:Anvil of Bogardan
 ManaCost:2
 Types:Artifact
-Text:no text
 S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players have no maximum hand size.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card, then discards a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredPlayer | SubAbility$ DBDiscard
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anvil_of_bogardan.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/141.jpg
 Oracle:Players have no maximum hand size.\nAt the beginning of each player's draw step, that player draws an additional card, then discards a card.
-End

@@ -1,7 +1,6 @@
 Name:Scathe Zombies
 ManaCost:2 B
 Types:Creature Zombie
-Text:no text
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83247.jpg
@@ -17,4 +16,3 @@ SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/154.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/35.jpg
 SetInfo:2ED|Common|http://magiccards.info/scans/en/un/34.jpg
 Oracle:
-End

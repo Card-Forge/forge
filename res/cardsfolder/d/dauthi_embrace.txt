@@ -1,10 +1,8 @@
 Name:Dauthi Embrace
 ManaCost:2 B
 Types:Enchantment
-Text:no text
 A:AB$ Pump | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Shadow | SpellDescription$ Target creature gains shadow until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_embrace.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/14.jpg
 Oracle:{B}{B}: Target creature gains shadow until end of turn. (It can block or be blocked by only creatures with shadow.)
-End

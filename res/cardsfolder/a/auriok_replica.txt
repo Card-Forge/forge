@@ -1,7 +1,6 @@
 Name:Auriok Replica
 ManaCost:3
 Types:Artifact Creature Cleric
-Text:no text
 PT:2/2
 A:AB$ ChooseSource | Cost$ W Sac<1/CARDNAME> | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage a source of your choice would deal to you this turn.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_replica.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/138.jpg
 Oracle:{W}, Sacrifice Auriok Replica: Prevent all damage a source of your choice would deal to you this turn.
-End

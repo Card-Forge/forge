@@ -1,7 +1,6 @@
 Name:Mox Pearl
 ManaCost:0
 Types:Artifact
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
@@ -10,4 +9,3 @@ SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/263.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/265.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/264.jpg
 Oracle:{T}: Add {W} to your mana pool.
-End

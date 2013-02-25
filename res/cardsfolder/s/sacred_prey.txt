@@ -1,7 +1,6 @@
 Name:Sacred Prey
 ManaCost:G
 Types:Creature Horse
-Text:no text
 PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigGain | TriggerDescription$ Whenever CARDNAME becomes blocked, you gain 1 life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_prey.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/268.jpg
 Oracle:Whenever Sacred Prey becomes blocked, you gain 1 life.
-End

@@ -1,7 +1,6 @@
 Name:Vintara Elephant
 ManaCost:4 G
 Types:Creature Elephant
-Text:no text
 PT:4/3
 K:Trample
 A:AB$ Debuff | Cost$ 3 | Defined$ Self | Keywords$ Trample | AnyPlayer$ True | SpellDescription$ CARDNAME loses trample until end of turn. Any player may activate this ability.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vintara_elephant.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/131.jpg
 Oracle:Trample\n{3}: Vintara Elephant loses trample until end of turn. Any player may activate this ability.
-End

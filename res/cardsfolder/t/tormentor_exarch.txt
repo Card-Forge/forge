@@ -1,7 +1,6 @@
 Name:Tormentor Exarch
 ManaCost:3 R
 Types:Creature Cleric
-Text:no text
 PT:2/2
 T:Mode$ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose one - Target creature gets +2/+0 until end of turn; or target creature gets -0/-2 until end of turn.
 SVar:TrigChoose:AB$ Charm | Cost$ 0 | Choices$ DBPump,DBCurse
@@ -10,4 +9,3 @@ SVar:DBCurse:DB$ Pump | ValidTgts$ Creature | NumDef$ -2 | SpellDescription$ Tar
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormentor_exarch.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/97.jpg
 Oracle:When Tormentor Exarch enters the battlefield, choose one - Target creature gets +2/+0 until end of turn; or target creature gets -0/-2 until end of turn.
-End

@@ -1,7 +1,6 @@
 Name:Steward of Valeron
 ManaCost:G W
 Types:Creature Human Druid Knight
-Text:no text
 PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 K:Vigilance
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steward_of_valeron.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/198.jpg
 Oracle:Vigilance\n{T}: Add {G} to your mana pool.
-End

@@ -1,7 +1,6 @@
 Name:Strongarm Tactics
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ Discard | Cost$ 1 B | Mode$ TgtChoose | Defined$ Each | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBLoseLifeYou | SpellDescription$ Each player discards a card. Then each player who didn't discard a creature card this way loses 4 life.
 SVar:DBLoseLifeYou:DB$ LoseLife | LifeAmount$ 4 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | Defined$ You | SubAbility$ DBLoseLifeOpp
 SVar:DBLoseLifeOpp:DB$ LoseLife | LifeAmount$ 4 | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0 | Defined$ Opponent
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strongarm_tactics.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/173.jpg
 Oracle:Each player discards a card. Then each player who didn't discard a creature card this way loses 4 life.
-End

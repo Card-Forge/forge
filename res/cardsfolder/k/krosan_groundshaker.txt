@@ -1,11 +1,9 @@
 Name:Krosan Groundshaker
 ManaCost:4 G G G
 Types:Creature Beast
-Text:no text
 PT:6/6
 A:AB$ Pump | Cost$ G | ValidTgts$ Creature.beast | TgtPrompt$ Select target Beast creature | KW$ Trample | SpellDescription$ Target Beast creature gains trample until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_groundshaker.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/271.jpg
 Oracle:{G}: Target Beast creature gains trample until end of turn.
-End

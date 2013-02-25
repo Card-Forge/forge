@@ -1,7 +1,6 @@
 Name:Clock of Omens
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ Untap | Cost$ tapXType<2/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Untap target artifact.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/clock_of_omens.j
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/202.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/110.jpg
 Oracle:Tap two untapped artifacts you control: Untap target artifact.
-End

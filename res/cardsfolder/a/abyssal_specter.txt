@@ -1,7 +1,6 @@
 Name:Abyssal Specter
 ManaCost:2 B B
 Types:Creature Specter
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player discards a card.
@@ -14,4 +13,3 @@ SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/110.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/1.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/116.jpg
 Oracle:Flying\nWhenever Abyssal Specter deals damage to a player, that player discards a card.
-End

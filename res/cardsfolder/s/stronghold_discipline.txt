@@ -1,7 +1,6 @@
 Name:Stronghold Discipline
 ManaCost:2 B B
 Types:Sorcery
-Text:no text
 A:SP$ LoseLife | Cost$ 2 B B | Defined$ Opponent | LifeAmount$ X | References$ X | SubAbility$ DBLoseLife | SpellDescription$ Each player loses 1 life for each creature he or she controls.
 SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ Y | References$ Y
 SVar:X:Count$TypeOppCtrl.Creature
@@ -12,4 +11,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_disci
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/73.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/181.jpg
 Oracle:Each player loses 1 life for each creature he or she controls.
-End

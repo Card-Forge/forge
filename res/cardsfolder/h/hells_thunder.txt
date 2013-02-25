@@ -1,7 +1,6 @@
 Name:Hell's Thunder
 ManaCost:1 R R
 Types:Creature Elemental
-Text:no text
 PT:4/4
 K:Flying
 K:Haste
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hells_thunder.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/103.jpg
 Oracle:Flying, haste\nAt the beginning of the end step, sacrifice Hell's Thunder.\nUnearth {4}{R} ({4}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
-End

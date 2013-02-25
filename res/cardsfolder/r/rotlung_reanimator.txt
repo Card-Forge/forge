@@ -1,7 +1,6 @@
 Name:Rotlung Reanimator
 ManaCost:2 B
 Types:Creature Zombie Cleric
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Cleric.Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotlung_reanimator.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/164.jpg
 Oracle:Whenever Rotlung Reanimator or another Cleric dies, put a 2/2 black Zombie creature token onto the battlefield.
-End

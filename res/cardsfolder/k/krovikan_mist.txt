@@ -1,7 +1,6 @@
 Name:Krovikan Mist
 ManaCost:1 U
 Types:Creature Illusion
-Text:no text
 PT:*/*
 K:Flying
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Illusions on the battlefield.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_mist.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/38.jpg
 Oracle:Flying\nKrovikan Mist's power and toughness are each equal to the number of Illusions on the battlefield.
-End

@@ -1,7 +1,6 @@
 Name:Izzet Guildmage
 ManaCost:UR UR
 Types:Creature Human Wizard
-Text:no text
 PT:2/2
 A:AB$ CopySpellAbility | Cost$ 2 U | ValidTgts$ Instant.YouCtrl+cmcLE2 | SpellDescription$ Copy target instant spell you control with converted mana cost 2 or less. You may choose new targets for the copy.
 A:AB$ CopySpellAbility | Cost$ 2 R | ValidTgts$ Sorcery.YouCtrl+cmcLE2 | SpellDescription$ Copy target sorcery spell you control with converted mana cost 2 or less. You may choose new targets for the copy.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_guildmage.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/145.jpg
 Oracle:({U/R} can be paid with either {U} or {R}.)\n{2}{U}: Copy target instant spell you control with converted mana cost 2 or less. You may choose new targets for the copy.\n{2}{R}: Copy target sorcery spell you control with converted mana cost 2 or less. You may choose new targets for the copy.
-End

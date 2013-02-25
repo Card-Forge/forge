@@ -1,7 +1,6 @@
 Name:Plague Stinger
 ManaCost:1 B
 Types:Creature Insect Horror
-Text:no text
 PT:1/1
 K:Flying
 K:Infect
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_stinger.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/75.jpg
 Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
-End

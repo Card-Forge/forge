@@ -1,7 +1,6 @@
 Name:Genesis Chamber
 ManaCost:2
 Types:Artifact
-Text:no text
 T:Mode$ ChangesZone | ValidPlayer$ Player | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken | TriggerZones$ Battlefield | Execute$ TrigToken | IsPresent$ Card.Self+untapped | TriggerDescription$ Whenever a nontoken creature enters the battlefield, if CARDNAME is untapped, that creature's controller puts a 1/1 Myr artifact creature token onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ TriggeredCardController | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 Myr artifact creature token onto the battlefield.
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genesis_chamber.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/122.jpg
 Oracle:Whenever a nontoken creature enters the battlefield, if Genesis Chamber is untapped, that creature's controller puts a 1/1 colorless Myr artifact creature token onto the battlefield.
-End

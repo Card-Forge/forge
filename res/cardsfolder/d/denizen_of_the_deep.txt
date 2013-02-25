@@ -1,7 +1,6 @@
 Name:Denizen of the Deep
 ManaCost:6 U U
 Types:Creature Serpent
-Text:no text
 PT:11/11
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, return each other creature you control to its owner's hand.
 SVar:TrigChangeZoneAll:AB$ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.Other+YouCtrl
@@ -11,4 +10,3 @@ SetInfo:S99|Rare|http://magiccards.info/scans/en/st/35.jpg
 SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/36.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/80.jpg
 Oracle:When Denizen of the Deep enters the battlefield, return each other creature you control to its owner's hand.
-End

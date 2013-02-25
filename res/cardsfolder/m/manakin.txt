@@ -1,11 +1,9 @@
 Name:Manakin
 ManaCost:2
 Types:Artifact Creature Construct
-Text:no text
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manakin.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/286.jpg
 Oracle:{T}: Add {1} to your mana pool.
-End

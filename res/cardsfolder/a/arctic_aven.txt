@@ -1,7 +1,6 @@
 Name:Arctic Aven
 ManaCost:2 U
 Types:Creature Bird
-Text:no text
 PT:2/1
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Plains.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_aven.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/42.jpg
 Oracle:Flying\nArctic Aven gets +1/+1 as long as you control a Plains.\n{W}: Arctic Aven gains lifelink until end of turn. (Damage dealt by this creature also causes you to gain that much life.)
-End

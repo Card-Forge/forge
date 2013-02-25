@@ -1,7 +1,6 @@
 Name:Veteran's Armaments
 ManaCost:2
 Types:Tribal Artifact Soldier Equipment
-Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddTrigger$ HeroAttack & HeroBlock | AddSVar$ HeroPump & ArmamentsX | Description$ Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
 SVar:HeroAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HeroPump | TriggerDescription$ Whenever CARDNAME attacks or blocks, it gets +1/+1 until end of turn for each attacking creature.
@@ -14,4 +13,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veterans_armaments.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/146.jpg
 Oracle:Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."\nWhenever a Soldier creature enters the battlefield, you may attach Veteran's Armaments to it.\nEquip {2}
-End

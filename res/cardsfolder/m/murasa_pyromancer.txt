@@ -1,7 +1,6 @@
 Name:Murasa Pyromancer
 ManaCost:4 R R
 Types:Creature Human Shaman Ally
-Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have CARDNAME deal damage to target creature equal to the number of Allies you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have CARDNAME deal damage to target creature equal to the number of Allies you control.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/murasa_pyromance
 SVar:Rarity:Uncommon
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/139.jpg
 Oracle:Whenever Murasa Pyromancer or another Ally enters the battlefield under your control, you may have Murasa Pyromancer deal damage to target creature equal to the number of Allies you control.
-End

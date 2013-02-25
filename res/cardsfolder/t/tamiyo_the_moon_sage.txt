@@ -1,7 +1,6 @@
 Name:Tamiyo, the Moon Sage
 ManaCost:3 U U
 Types:Planeswalker Tamiyo
-Text:no text
 Loyalty:4
 A:AB$ Tap | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Choose target permanent. | Planeswalker$ True | SubAbility$ TamiyoPump | SpellDescription$ Tap target permanent. It doesn't untap during its controller's next untap step.
 SVar:TamiyoPump:DB$ Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
@@ -15,4 +14,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tamiyo_the_moon_sage.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/79.jpg
 Oracle:[+1] Tap target permanent. It doesn't untap during its controller's next untap step.\n[-2] Draw a card for each tapped creature target player controls.\n[-8] You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
-End

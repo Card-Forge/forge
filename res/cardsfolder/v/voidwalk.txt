@@ -1,7 +1,6 @@
 Name:Voidwalk
 ManaCost:3 U
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ 3 U | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | RememberTargets$ True | ForgetOtherTargets$ True | TgtPrompt$ Select target creature | SubAbility$ DelTrig | SpellDescription$ Exile target creature. Return that card to the battlefield under its owner's control at end of turn.  Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
 SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return exiled card to the battlefield. | SubAbility$ Cipher
 SVar:TrigReturn:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
@@ -10,4 +9,3 @@ SVar:IsEncoded:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidwalk.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/55.jpg
 Oracle:Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
-End

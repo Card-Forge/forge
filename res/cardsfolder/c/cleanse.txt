@@ -1,11 +1,9 @@
 Name:Cleanse
 ManaCost:2 W W
 Types:Sorcery
-Text:no text
 A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature.Black | SpellDescription$ Destroy all black creatures.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanse.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/174.jpg
 Oracle:Destroy all black creatures.
-End

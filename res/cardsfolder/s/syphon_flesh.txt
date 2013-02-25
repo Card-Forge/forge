@@ -1,7 +1,6 @@
 Name:Syphon Flesh
 ManaCost:4 B
 Types:Sorcery
-Text:no text
 A:SP$ Sacrifice | Cost$ 4 B | Defined$ Opponent | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ Each other player sacrifices a creature. You put a 2/2 black Zombie creature token onto the battlefield for each creature sacrificed this way.
 SVar:DBToken:DB$Token | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_flesh.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/103.jpg
 Oracle:Each other player sacrifices a creature. You put a 2/2 black Zombie creature token onto the battlefield for each creature sacrificed this way.
-End

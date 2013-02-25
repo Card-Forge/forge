@@ -1,7 +1,6 @@
 Name:Agent of Shauku
 ManaCost:1 B
 Types:Creature Human Mercenary
-Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ 1 B Sac<1/Land> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_shauku.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/55.jpg
 Oracle:{1}{B}, Sacrifice a land: Target creature gets +2/+0 until end of turn.
-End

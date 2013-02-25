@@ -1,7 +1,6 @@
 Name:Banshee
 ManaCost:2 B B
 Types:Creature Spirit
-Text:no text
 PT:0/1
 A:AB$ DealDamage | Cost$ X T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ HalfXDown | SubAbility$ DBDamage | References$ X,HalfXDown | SpellDescription$ CARDNAME deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ HalfXUp | References$ HalfXUp 
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/banshee.jpg
 Oracle:{X}, {T}: Banshee deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/2.jpg
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/1.jpg
-End

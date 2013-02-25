@@ -1,7 +1,6 @@
 Name:Spined Wurm
 ManaCost:4 G
 Types:Creature Wurm
-Text:no text
 PT:5/4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card94914.jpg
@@ -13,4 +12,3 @@ SetInfo:9ED|Common|http://magiccards.info/scans/en/9eb/10.jpg
 SetInfo:10E|Common|http://magiccards.info/scans/en/10e/298.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/197.jpg
 Oracle:
-End

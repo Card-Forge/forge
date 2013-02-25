@@ -1,7 +1,6 @@
 Name:Ronom Serpent
 ManaCost:5 U
 Types:Snow Creature Serpent
-Text:no text
 PT:5/6
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ LT1 | References$ X | Description$ CARDNAME can't attack unless defending player controls a snow land.
 SVar:X:Count$Valid Land.Snow+YouDontCtrl
@@ -13,4 +12,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronom_serpent.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/45.jpg
 Oracle:Ronom Serpent can't attack unless defending player controls a snow land.\nWhen you control no snow lands, sacrifice Ronom Serpent.
-End

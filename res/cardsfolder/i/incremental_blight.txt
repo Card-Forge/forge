@@ -1,7 +1,6 @@
 Name:Incremental Blight
 ManaCost:3 B B
 Types:Sorcery
-Text:no text
 A:SP$ PutCounter | Cost$ 3 B B | ValidTgts$ Creature |TgtPrompt$ Select target creature | TargetUnique$ True | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1 | SubAbility$ DBPutTwo | SpellDescription$ Put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
 SVar:DBPutTwo:DB$ PutCounter | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select another target creature | TargetUnique$ True | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 2 | SubAbility$ DBPutThree
 SVar:DBPutThree:DB$ PutCounter | Cost$ 0 | ValidTgts$ Creature |TgtPrompt$ Select a third target creature | TargetUnique$ True | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 3
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incremental_blight.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/70.jpg
 Oracle:Put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
-End

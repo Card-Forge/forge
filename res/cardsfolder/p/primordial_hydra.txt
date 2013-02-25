@@ -1,7 +1,6 @@
 Name:Primordial Hydra
 ManaCost:X G G
 Types:Creature Hydra
-Text:no text
 PT:0/0
 K:etbCounter:P1P1:X
 S:Mode$ Continuous | Affected$ Card.Self+counters_GT9_P1P1 | AddKeyword$ Trample | Description$ CARDNAME has trample as long as it has ten or more +1/+1 counters on it.
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/primordial_hydra
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/183.jpg
 SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/189.jpg
 Oracle:Primordial Hydra enters the battlefield with X +1/+1 counters on it.\nAt the beginning of your upkeep, double the number of +1/+1 counters on Primordial Hydra.\nPrimordial Hydra has trample as long as it has ten or more +1/+1 counters on it.
-End

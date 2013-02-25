@@ -1,7 +1,6 @@
 Name:Hamlet Captain
 ManaCost:1 G
 Types:Creature Human Warrior
-Text:no text
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME attacks or blocks, other Human creatures you control get +1/+1 until end of turn
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPumpAll | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, other Human creatures you control get +1/+1 until end of turn
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hamlet_captain.jpg
 SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/187.jpg
 Oracle:Whenever Hamlet Captain attacks or blocks, other Human creatures you control get +1/+1 until end of turn.
-End

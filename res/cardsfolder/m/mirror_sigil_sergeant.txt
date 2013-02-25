@@ -1,7 +1,6 @@
 Name:Mirror-Sigil Sergeant
 ManaCost:5 W
 Types:Creature Rhino Soldier
-Text:no text
 PT:4/4
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Permanent.YouCtrl+Blue | PresentCompare$ GE1 | Execute$ TrigCopyPermanent | TriggerDescription$ At the beginning of your upkeep, if you control a blue permanent, you may put a token that's a copy of CARDNAME onto the battlefield.
@@ -10,4 +9,3 @@ SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_sigil_sergeant.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/12.jpg
 Oracle:Trample\nAt the beginning of your upkeep, if you control a blue permanent, you may put a token that's a copy of Mirror-Sigil Sergeant onto the battlefield.
-End

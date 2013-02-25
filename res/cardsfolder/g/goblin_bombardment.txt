@@ -1,11 +1,9 @@
 Name:Goblin Bombardment
 ManaCost:1 R
 Types:Enchantment
-Text:no text
 A:AB$ DealDamage | Cost$ Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_bombardment.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/179.jpg
 Oracle:Sacrifice a creature: Goblin Bombardment deals 1 damage to target creature or player.
-End

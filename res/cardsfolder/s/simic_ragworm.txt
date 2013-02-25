@@ -1,11 +1,9 @@
 Name:Simic Ragworm
 ManaCost:3 G
 Types:Creature Worm
-Text:no text
 PT:3/3
 A:AB$ Untap | Cost$ U | SpellDescription$ Untap CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_ragworm.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/93.jpg
 Oracle:{U}: Untap Simic Ragworm.
-End

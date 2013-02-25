@@ -1,11 +1,9 @@
 Name:Leave No Trace
 ManaCost:1 W
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Radiance$ True | SpellDescription$ Radiance - Destroy target enchantment and each other enchantment that shares a color with it.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leave_no_trace.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/23.jpg
 Oracle:Radiance - Destroy target enchantment and each other enchantment that shares a color with it.
-End

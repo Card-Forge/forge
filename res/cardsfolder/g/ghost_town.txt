@@ -1,11 +1,9 @@
 Name:Ghost Town
 ManaCost:no cost
 Types:Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | OpponentTurn$ True | SpellDescription$ Return CARDNAME to its owner's hand. Activate this ability only if it's not your turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_town.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/312.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{0}: Return Ghost Town to its owner's hand. Activate this ability only if it's not your turn.
-End

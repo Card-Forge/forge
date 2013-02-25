@@ -1,7 +1,6 @@
 Name:Sunseed Nurturer
 ManaCost:2 W
 Types:Creature Human Druid Wizard
-Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | IsPresent$ Creature.powerGE5+YouCtrl | Execute$ TrigLife | TriggerDescription$ At the beginning of your end step, if you control a creature with power 5 or greater, you may gain 2 life.
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunseed_nurturer.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/29.jpg
 Oracle:At the beginning of your end step, if you control a creature with power 5 or greater, you may gain 2 life.\n{T}: Add {1} to your mana pool.
-End

@@ -1,7 +1,6 @@
 Name:Rush of Knowledge
 ManaCost:4 U
 Types:Sorcery
-Text:no text
 A:SP$ Draw | Cost$ 4 U | Defined$ You | NumCards$ X | References$ X | SpellDescription$ Draw cards equal to the highest converted mana cost among permanents you control.
 SVar:X:Count$MaxCMCYouCtrl
 SVar:RemRandomDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rush_of_knowledge.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/49.jpg
 Oracle:Draw cards equal to the highest converted mana cost among permanents you control.
-End

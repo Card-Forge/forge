@@ -1,7 +1,6 @@
 Name:Evil Presence
 ManaCost:B
 Types:Enchantment Aura
-Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ B | ValidTgts$ Land | AILogic$ ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Swamp | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is a Swamp.
@@ -15,4 +14,3 @@ SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/20.jpg
 SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/18.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/16.jpg
 Oracle:Enchant land\nEnchanted land is a Swamp.
-End

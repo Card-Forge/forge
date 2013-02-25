@@ -1,7 +1,6 @@
 Name:Scrubland
 ManaCost:no cost
 Types:Land Plains Swamp
-Text:no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrubland.jpg
 SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/289.jpg
@@ -9,4 +8,3 @@ SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/294.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/298.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/294.jpg
 Oracle:
-End

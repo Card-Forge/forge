@@ -1,11 +1,9 @@
 Name:Razorfin Abolisher
 ManaCost:2 U
 Types:Creature Merfolk Wizard
-Text:no text
 PT:2/2
 A:AB$ ChangeZone | Cost$ 1 U T | ValidTgts$ Creature.HasCounters | TgtPrompt$ Select target creature  with a counter on it | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature with a counter on it to its owner's hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorfin_abolisher.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/28.jpg
 Oracle:{1}{U}, {T}: Return target creature with a counter on it to its owner's hand.
-End

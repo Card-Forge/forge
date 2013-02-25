@@ -1,7 +1,6 @@
 Name:Desperate Research
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ NameCard | Cost$ 1 B | Defined$ You | ValidCards$ Card.nonBasic | ValidDesc$ card other than a basic land | SubAbility$ DBDig | SpellDescription$ Name a card other than a basic land card. Then reveal the top seven cards of your library and put all of them with that name into your hand. Exile the rest.
 SVar:DBDig:DB$ Dig | DigNum$ 7 | Reveal$ True | DestinationZone2$ Exile | ChangeValid$ Card.NamedCard | ChangeNum$ All
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_research.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/100.jpg
 Oracle:Name a card other than a basic land card. Then reveal the top seven cards of your library and put all of them with that name into your hand. Exile the rest.
-End

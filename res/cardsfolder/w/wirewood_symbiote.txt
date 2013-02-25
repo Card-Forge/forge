@@ -1,7 +1,6 @@
 Name:Wirewood Symbiote
 ManaCost:G
 Types:Creature Insect
-Text:no text
 PT:1/1
 A:AB$ Untap | Cost$ Return<1/Elf> | ValidTgts$ Creature | TgtPrompt$ Select target creature | ActivationLimit$ 1 | SpellDescription$ Untap target creature. Activate this ability only once each turn.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_symbiote.jpg
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/133.jpg
 Oracle:Return an Elf you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
-End

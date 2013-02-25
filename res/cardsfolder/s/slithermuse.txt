@@ -1,7 +1,6 @@
 Name:Slithermuse
 ManaCost:2 U U
 Types:Creature Elemental
-Text:no text
 PT:3/3
 K:Evoke:3 U
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slithermuse.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/50.jpg
 Oracle:When Slithermuse leaves the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.\nEvoke {3}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
-End

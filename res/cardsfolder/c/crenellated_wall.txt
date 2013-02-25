@@ -1,7 +1,6 @@
 Name:Crenellated Wall
 ManaCost:4
 Types:Artifact Creature Wall
-Text:no text
 PT:0/4
 K:Defender
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +4 | SpellDescription$ Target creature gets +0/+4 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/290.jpg
 Oracle:Defender (This creature can't attack.)\n{T}: Target creature gets +0/+4 until end of turn.
-End

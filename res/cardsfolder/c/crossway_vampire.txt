@@ -1,7 +1,6 @@
 Name:Crossway Vampire
 ManaCost:1 R R
 Types:Creature Vampire
-Text:no text
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCanNotBlock | TriggerDescription$ When CARDNAME enters the battlefield, target creature can't block this turn.
 SVar:TrigCanNotBlock:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crossway_vampire.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/135.jpg
 Oracle:When Crossway Vampire enters the battlefield, target creature can't block this turn.
-End

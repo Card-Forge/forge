@@ -1,7 +1,6 @@
 Name:Pulling Teeth
 ManaCost:1 B
 Types:Sorcery
-Text:no text
 A:SP$ Clash | Cost$ 1 B | ValidTgts$ Player | TgtPrompt$ Select target player | WinSubAbility$ DBDiscardTwo | OtherwiseSubAbility$ DBDiscardOne | SpellDescription$ Clash with an opponent. If you win, target player discards two cards. Otherwise, that player discards a card.
 SVar:DBDiscardOne:DB$Discard | Cost$ 0 | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose
 SVar:DBDiscardTwo:DB$Discard | Cost$ 0 | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulling_teeth.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/75.jpg
 Oracle:Clash with an opponent. If you win, target player discards two cards. Otherwise, that player discards a card. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
-End

@@ -1,7 +1,6 @@
 Name:Carrion Feeder
 ManaCost:B
 Types:Creature Zombie
-Text:no text
 PT:1/1
 K:CARDNAME can't block.
 A:AB$ PutCounter | Cost$ Sac<1/Creature> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_feeder.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/59.jpg
 Oracle:Carrion Feeder can't block.\nSacrifice a creature: Put a +1/+1 counter on Carrion Feeder.
-End

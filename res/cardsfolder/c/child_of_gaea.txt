@@ -1,7 +1,6 @@
 Name:Child of Gaea
 ManaCost:3 G G G
 Types:Creature Elemental
-Text:no text
 PT:7/7
 K:Trample
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G G
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/242.jpg
 Oracle:Trample\nAt the beginning of your upkeep, sacrifice Child of Gaea unless you pay {G}{G}.\n{1}{G}: Regenerate Child of Gaea.
-End

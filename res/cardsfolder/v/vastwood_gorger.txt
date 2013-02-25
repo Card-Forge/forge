@@ -1,7 +1,6 @@
 Name:Vastwood Gorger
 ManaCost:5 G
 Types:Creature Wurm
-Text:no text
 PT:5/6
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vastwood_gorger.jpg
@@ -9,4 +8,3 @@ SetInfo:M13|Common|http://magiccards.info/scans/en/m13/196.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/200.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/192.jpg
 Oracle:
-End

@@ -1,7 +1,6 @@
 Name:Rime Transfusion
 ManaCost:1 B
 Types:Snow Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | AddAbility$ PumpA | Description$ Enchanted creature gets +2/+1 and has "S: This creature can't be blocked this turn except by snow creatures." (S can be paid with one mana from a snow permanent.)
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rime_transfusion.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/68.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 and has "{S}: This creature can't be blocked this turn except by snow creatures." ({S} can be paid with one mana from a snow permanent.)
-End

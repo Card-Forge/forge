@@ -1,7 +1,6 @@
 Name:Entreat the Angels
 ManaCost:X X W W W
 Types:Sorcery
-Text:no text
 A:SP$ Token | Cost$ X X W W W | TokenAmount$ X | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ You | TokenColors$ White | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying | TokenImage$ w 4 4 angel avr | References$ X | SpellDescription$ Put X 4/4 white Angel creature tokens with flying onto the battlefield.
 K:Miracle:X W W
 SVar:X:Count$xPaid
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entreat_the_angels.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/20.jpg
 Oracle:Put X 4/4 white Angel creature tokens with flying onto the battlefield.\nMiracle {X}{W}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
-End

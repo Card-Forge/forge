@@ -1,7 +1,6 @@
 Name:Triclopean Sight
 ManaCost:1 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 K:Flash
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
@@ -12,4 +11,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triclopean_sight.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/45.jpg
 Oracle:Flash\nEnchant creature\nWhen Triclopean Sight enters the battlefield, untap enchanted creature.\nEnchanted creature gets +1/+1 and has vigilance.
-End

@@ -1,7 +1,6 @@
 Name:Wall of Denial
 ManaCost:1 W U
 Types:Creature Wall
-Text:no text
 PT:0/8
 K:Defender
 K:Flying
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_denial.j
 SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/16.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/237.jpg
 Oracle:Defender, flying\nShroud (This creature can't be the target of spells or abilities.)
-End

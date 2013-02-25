@@ -1,7 +1,6 @@
 Name:Thallid Devourer
 ManaCost:1 G G
 Types:Creature Fungus
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a spore counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_devourer.jpg
 SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/91.jpg
 Oracle:At the beginning of your upkeep, put a spore counter on Thallid Devourer.\nRemove three spore counters from Thallid Devourer: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Thallid Devourer gets +1/+2 until end of turn.
-End

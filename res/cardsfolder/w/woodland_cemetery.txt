@@ -1,7 +1,6 @@
 Name:Woodland Cemetery
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped unless you control a Swamp or a Forest.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodland_cemetery.jpg
 SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/249.jpg
 Oracle:Woodland Cemetery enters the battlefield tapped unless you control a Swamp or a Forest.\n{T}: Add {B} or {G} to your mana pool.
-End

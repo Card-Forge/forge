@@ -1,10 +1,8 @@
 Name:Misstep
 ManaCost:1 U
 Types:Sorcery
-Text:no text
 A:SP$ PumpAll | Cost$ 1 U | ValidTgts$ Player | IsCurse$ True | ValidCards$ Creature.TargetedPlayerCtrl | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step. | SpellDescription$ Creatures target player controls don't untap during that player's next untap step.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misstep.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/88.jpg
 Oracle:Creatures target player controls don't untap during that player's next untap step.
-End

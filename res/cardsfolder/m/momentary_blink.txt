@@ -1,7 +1,6 @@
 Name:Momentary Blink
 ManaCost:1 W
 Types:Instant
-Text:no text
 K:Flashback 3 U
 A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control. | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return it to the battlefield under its owner's control.
 SVar:DBReturn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ Battlefield
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/momentary_blink.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/29.jpg
 Oracle:Exile target creature you control, then return it to the battlefield under its owner's control.\nFlashback {3}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
-End

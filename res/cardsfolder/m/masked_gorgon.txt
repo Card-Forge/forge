@@ -1,7 +1,6 @@
 Name:Masked Gorgon
 ManaCost:4 B
 Types:Creature Gorgon
-Text:no text
 PT:5/5
 S:Mode$ Continuous | Affected$ Creature.Green,Creature.White | AddKeyword$ Protection from Gorgons | Description$ Green creatures and white creatures have protection from Gorgons.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from green & Protection from white | Condition$ Threshold | Description$ Threshold - CARDNAME has protection from green and from white as long as seven or more cards are in your graveyard.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masked_gorgon.jpg
 SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/69.jpg
 Oracle:Green creatures and white creatures have protection from Gorgons.\nThreshold - Masked Gorgon has protection from green and from white as long as seven or more cards are in your graveyard.
-End

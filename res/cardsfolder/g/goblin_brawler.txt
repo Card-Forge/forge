@@ -1,7 +1,6 @@
 Name:Goblin Brawler
 ManaCost:2 R
 Types:Creature Goblin Warrior
-Text:no text
 PT:2/2
 K:First Strike
 K:CARDNAME can't be equipped.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_brawler.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/66.jpg
 Oracle:First strike\nGoblin Brawler can't be equipped.
-End

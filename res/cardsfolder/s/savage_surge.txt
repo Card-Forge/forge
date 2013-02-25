@@ -1,11 +1,9 @@
 Name:Savage Surge
 ManaCost:1 G
 Types:Instant
-Text:no text
 A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBUntap | SpellDescription$ Target creature gets +2/+2 until end of turn. Untap that creature.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_surge.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/133.jpg
 Oracle:Target creature gets +2/+2 until end of turn. Untap that creature.
-End

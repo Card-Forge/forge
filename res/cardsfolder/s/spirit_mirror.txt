@@ -1,7 +1,6 @@
 Name:Spirit Mirror
 ManaCost:2 W W
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Reflection.token | PresentCompare$ EQ0 | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, put a 2/2 white Reflection creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Reflection | TokenTypes$ Creature,Reflection | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2
 A:AB$ Destroy | Cost$ 0 | ValidTgts$ Reflection | TgtPrompt$ Select target Reflection | SpellDescription$ Destroy target Reflection.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_mirror.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/260.jpg
 Oracle:At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, put a 2/2 white Reflection creature token onto the battlefield./n{0}: Destroy target Reflection.
-End

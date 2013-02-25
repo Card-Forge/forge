@@ -1,7 +1,6 @@
 Name:Oran-Rief, the Vastwood
 ManaCost:no cost
 Types:Land
-Text:no text
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$PutCounterAll | Cost$ T | ValidCards$ Creature.Green+enteredBattlefieldThisTurn | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each green creature that entered the battlefield this turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oran_rief_the_vastwood.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/221.jpg
 Oracle:Oran-Rief, the Vastwood enters the battlefield tapped.\n{T}: Add {G} to your mana pool.\n{T}: Put a +1/+1 counter on each green creature that entered the battlefield this turn.
-End

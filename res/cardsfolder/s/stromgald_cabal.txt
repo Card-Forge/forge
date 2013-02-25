@@ -1,7 +1,6 @@
 Name:Stromgald Cabal
 ManaCost:1 B B
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 A:AB$ Counter | Cost$ T PayLife<1> | TargetType$ Spell | TgtPrompt$ Select target White spell | ValidTgts$ Card.White | SpellDescription$ Counter target white spell.
 SVar:RemRandomDeck:True
@@ -11,4 +10,3 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/57.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/157.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/54.jpg
 Oracle:{T}, Pay 1 life: Counter target white spell.
-End

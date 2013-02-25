@@ -1,11 +1,9 @@
 Name:Loxodon Hierarch Avatar
 ManaCost:no cost
 Types:Vanguard
-Text:no text
 HandLifeModifier:+0/+12
 A:AB$ Regenerate | ActivationZone$ Command | Cost$ Sac<1/Permanent> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Regenerate target creature you control.
 SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/loxodon_hierarch_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/loxodon-hierarch.jpg
 Oracle:Hand +0, life +12\nSacrifice a permanent: Regenerate target creature you control.
-End

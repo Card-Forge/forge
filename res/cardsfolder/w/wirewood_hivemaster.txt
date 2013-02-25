@@ -1,7 +1,6 @@
 Name:Wirewood Hivemaster
 ManaCost:1 G
 Types:Creature Elf
-Text:no text
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Elf.nonToken+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMakeToken | TriggerDescription$ Whenever another nontoken Elf enters the battlefield, you may put a 1/1 green Insect creature token onto the battlefield.
 SVar:TrigMakeToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_hivemaster.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/145.jpg
 Oracle:Whenever another nontoken Elf enters the battlefield, you may put a 1/1 green Insect creature token onto the battlefield.
-End

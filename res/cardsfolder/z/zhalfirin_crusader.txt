@@ -1,7 +1,6 @@
 Name:Zhalfirin Crusader
 ManaCost:1 W W
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 K:Flanking
 A:AB$ Effect | Cost$ 1 W | Name$ Zhalfirin Redirection | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to redirect the damage to | ReplacementEffects$ CrusaderCombat,CrusaderNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | References$ CrusaderCombat,CrusaderNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | Duration$ HostLeavesOrEOT | ImprintCards$ Self | RememberObjects$ Targeted | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to target creature or player instead.
@@ -20,4 +19,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhalfirin_crusader.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/125.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{W}: The next 1 damage that would be dealt to Zhalfirin Crusader this turn is dealt to target creature or player instead.
-End

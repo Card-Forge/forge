@@ -1,7 +1,6 @@
 Name:Cloud Key
 ManaCost:3
 Types:Artifact
-Text:no text
 S:Mode$ ReduceCost | ValidCard$ Card.ChosenType | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast of the chosen type cost 1 less to cast.
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Card | ValidTypes$ Artifact,Creature,Enchantment,Instant,Sorcery | SpellDescription$ As CARDNAME enters the battlefield, choose artifact, creature, enchantment, instant, or sorcery.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_key.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/160.jpg
 Oracle:As Cloud Key enters the battlefield, choose artifact, creature, enchantment, instant, or sorcery.\nSpells you cast of the chosen type cost {1} less to cast.
-End

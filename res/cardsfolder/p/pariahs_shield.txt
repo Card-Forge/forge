@@ -1,7 +1,6 @@
 Name:Pariah's Shield
 ManaCost:5
 Types:Artifact Equipment
-Text:no text
 K:Equip 3
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgEquipped | IsCombat$ False | IsEquipping$ True | Description$ All damage that would be dealt to you is dealt to equipped creature instead.
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgEquippedCombat | IsCombat$ True | IsEquipping$ True | Secondary$ True | Description$ All damage that would be dealt to you is dealt to equipped creature instead.
@@ -11,4 +10,3 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pariahs_shield.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/267.jpg
 Oracle:All damage that would be dealt to you is dealt to equipped creature instead.\nEquip {3}
-End

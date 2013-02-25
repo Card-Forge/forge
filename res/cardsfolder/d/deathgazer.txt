@@ -1,7 +1,6 @@
 Name:Deathgazer
 ManaCost:3 B
 Types:Creature Lizard
-Text:no text
 PT:2/2
 T:Mode$ AttackerBlocked | ValidCard$ Creature.nonBlack | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
 T:Mode$ Blocks | ValidCard$ Creature.nonBlack | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
@@ -15,4 +14,3 @@ SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/126.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/130.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/124.jpg
 Oracle:Whenever Deathgazer blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
-End

@@ -1,7 +1,6 @@
 Name:Groffskithur
 ManaCost:5 G
 Types:Creature Beast
-Text:no text
 PT:3/3
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ When CARDNAME becomes blocked, you may return target card named CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidCard$ Card.namedGroffskithur | ChangeNum$ 1
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/groffskithur.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/121.jpg
 Oracle:Whenever Groffskithur becomes blocked, you may return target card named Groffskithur from your graveyard to your hand.
-End

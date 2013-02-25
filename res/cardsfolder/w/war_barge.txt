@@ -1,7 +1,6 @@
 Name:War Barge
 ManaCost:4
 Types:Artifact
-Text:no text
 A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Islandwalk | RememberTargets$ True | SpellDescription$ Target creature gains islandwalk until end of turn.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield this turn, destroy that creature. A creature destroyed this way can't be regenerated.
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Card.IsRemembered | NoRegen$ True
@@ -14,4 +13,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/war_barge.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/112.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/116.jpg
 Oracle:{3}: Target creature gains islandwalk until end of turn. When War Barge leaves the battlefield this turn, destroy that creature. A creature destroyed this way can't be regenerated.
-End

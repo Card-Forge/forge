@@ -1,7 +1,6 @@
 Name:Jacques le Vert
 ManaCost:1 W G R
 Types:Legendary Creature Human Warrior
-Text:no text
 PT:3/2
 S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddToughness$ 2 | Description$ Green creatures you control get +0/+2.
 SVar:PlayMain1:TRUE
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jacques_le_vert.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/272.jpg
 Oracle:Green creatures you control get +0/+2.
-End

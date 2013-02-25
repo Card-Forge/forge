@@ -1,7 +1,6 @@
 Name:Smoldering Tar
 ManaCost:2 B R
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, target player loses 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SorcerySpeed$ True | SpellDescription$ CARDNAME deals 4 damage to target creature. Activate this ability only any time you could cast a sorcery.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_tar.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/275.jpg
 Oracle:At the beginning of your upkeep, target player loses 1 life.\nSacrifice Smoldering Tar: Smoldering Tar deals 4 damage to target creature. Activate this ability only any time you could cast a sorcery.
-End

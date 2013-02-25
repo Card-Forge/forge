@@ -1,7 +1,6 @@
 Name:Amoeboid Changeling
 ManaCost:1 U
 Types:Creature Shapeshifter
-Text:no text
 PT:1/1
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:AB$ Animate | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ AllCreatureTypes | SpellDescription$ Target creature gains all creature types until end of turn.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amoeboid_changeling.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/51.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{T}: Target creature gains all creature types until end of turn.\n{T}: Target creature loses all creature types until end of turn.
-End

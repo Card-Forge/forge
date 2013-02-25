@@ -1,7 +1,6 @@
 Name:Embrace My Diabolical Vision
 ManaCost:no cost
 Types:Scheme
-Text:no text
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GraveEmbrace | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each player shuffles his or her hand and graveyard into his or her library. You draw seven cards, then each other player draws four cards.
 SVar:GraveEmbrace:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ EmbraceShuffle
 SVar:EmbraceShuffle:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True | SubAbility$ MyVision
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/embrace_my_diabolical_vision.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/embrace-my-diabolical-vision.jpg
 Oracle:When you set this scheme in motion, each player shuffles his or her hand and graveyard into his or her library. You draw seven cards, then each other player draws four cards.
-End

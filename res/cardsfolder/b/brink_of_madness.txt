@@ -1,7 +1,6 @@
 Name:Brink of Madness
 ManaCost:2 B B
 Types:Enchantment
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigSacDiscard | TriggerDescription$ At the beginning of your upkeep, if you have no cards in hand, sacrifice CARDNAME and target opponent discards his or her hand.
 SVar:TrigSacDiscard:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ Opponent | Mode$ Hand
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brink_of_madness.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/50.jpg
 Oracle:At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards his or her hand.
-End

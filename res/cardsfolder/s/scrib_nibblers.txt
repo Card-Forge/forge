@@ -1,7 +1,6 @@
 Name:Scrib Nibblers
 ManaCost:2 B
 Types:Creature Rat
-Text:no text
 PT:1/1
 A:AB$ Mill | Cost$ T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | Destination$ Exile | RememberMilled$ True | SubAbility$ DBGainLife | SpellDescription$ Exile the top card of target player's library. If it's a land card, you gain 1 life.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
@@ -13,4 +12,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrib_nibblers.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/66.jpg
 Oracle:{T}: Exile the top card of target player's library. If it's a land card, you gain 1 life.\nLandfall - Whenever a land enters the battlefield under your control, you may untap Scrib Nibblers.
-End

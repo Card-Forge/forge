@@ -1,7 +1,6 @@
 Name:Wall of Reverence
 ManaCost:3 W
 Types:Creature Spirit Wall
-Text:no text
 PT:1/6
 K:Defender
 K:Flying
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_reverence.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/20.jpg
 Oracle:Defender, flying\nAt the beginning of your end step, you may gain life equal to the power of target creature you control.
-End

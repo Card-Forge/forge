@@ -1,7 +1,6 @@
 Name:Luminous Guardian
 ManaCost:3 W
 Types:Creature Human Nomad
-Text:no text
 PT:1/4
 A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ 1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
 A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ HIDDEN CARDNAME can block an additional creature. | SpellDescription$ CARDNAME can block an additional creature this turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminous_guardian.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/31.jpg
 Oracle:{W}: Luminous Guardian gets +0/+1 until end of turn.\n{2}: Luminous Guardian can block an additional creature this turn.
-End

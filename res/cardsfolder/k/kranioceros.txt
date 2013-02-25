@@ -1,11 +1,9 @@
 Name:Kranioceros
 ManaCost:4 R
 Types:Creature Beast
-Text:no text
 PT:5/2
 A:AB$ Pump | Cost$ 1 W | NumDef$ +3 | SpellDescription$ CARDNAME gets +0/+3 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kranioceros.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/67.jpg
 Oracle:{1}{W}: Kranioceros gets +0/+3 until end of turn.
-End

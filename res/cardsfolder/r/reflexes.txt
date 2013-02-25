@@ -1,7 +1,6 @@
 Name:Reflexes
 ManaCost:R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike. (It deals combat damage before creatures without first strike.)
@@ -12,4 +11,3 @@ SetInfo:USG|Common|http://magiccards.info/scans/en/us/208.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/211.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/213.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature has first strike. (It deals combat damage before creatures without first strike.)
-End

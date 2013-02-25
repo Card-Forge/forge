@@ -1,7 +1,6 @@
 Name:Shisato, Whispering Hunter
 ManaCost:3 G
 Types:Legendary Creature Snake Warrior
-Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a Snake.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Snake
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shisato_whispering_hunter.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/242.jpg
 Oracle:At the beginning of your upkeep, sacrifice a Snake.\nWhenever Shisato, Whispering Hunter deals combat damage to a player, that player skips his or her next untap step.
-End

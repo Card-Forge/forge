@@ -1,7 +1,6 @@
 Name:Greater Auramancy
 ManaCost:1 W
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Enchantment.Other+YouCtrl | AddKeyword$ Shroud | Description$ Other enchantments you control have shroud.
 S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddKeyword$ Shroud | Description$ Enchanted creatures you control have shroud.
 SVar:PlayMain1:TRUE
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_auramancy.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/7.jpg
 Oracle:Other enchantments you control have shroud.\nEnchanted creatures you control have shroud.
-End

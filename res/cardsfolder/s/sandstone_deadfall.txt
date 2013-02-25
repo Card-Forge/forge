@@ -1,11 +1,9 @@
 Name:Sandstone Deadfall
 ManaCost:3
 Types:Artifact
-Text:no text
 A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> Sac<2/Land> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Destroy target attacking creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstone_deadfall.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/307.jpg
 Oracle:{T}, Sacrifice two lands and Sandstone Deadfall: Destroy target attacking creature.
-End

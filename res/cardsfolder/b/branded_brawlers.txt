@@ -1,7 +1,6 @@
 Name:Branded Brawlers
 ManaCost:R
 Types:Creature Human Soldier
-Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can't attack if defending player controls an untapped land.
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | CheckSVar$ Y | SVarCompare$ GE1 | Description$ CARDNAME can't block if you control an untapped land.
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/branded_brawlers.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/84.jpg
 Oracle:Branded Brawlers can't attack if defending player controls an untapped land.\nBranded Brawlers can't block if you control an untapped land.
-End

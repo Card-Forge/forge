@@ -1,7 +1,6 @@
 Name:Lord of the Pit
 ManaCost:4 B B B
 Types:Creature Demon
-Text:no text
 PT:7/7
 K:Flying
 K:Trample
@@ -21,4 +20,3 @@ SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/154.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/24.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/23.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
-End

@@ -1,7 +1,6 @@
 Name:Aven Farseer
 ManaCost:1 W
 Types:Creature Bird Soldier
-Text:no text
 PT:1/1
 K:Flying
 T:Mode$ TurnFaceUp | ValidCard$ Permanent | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent is turned face up, put a +1/+1 counter on CARDNAME.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_farseer.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/3.jpg
 Oracle:Flying\nWhenever a permanent is turned face up, put a +1/+1 counter on Aven Farseer.
-End

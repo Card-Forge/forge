@@ -1,7 +1,6 @@
 Name:Benalish Emissary
 ManaCost:2 W
 Types:Creature Human Wizard
-Text:no text
 PT:1/4
 K:Kicker 1 G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target land.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_emissary.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/5.jpg
 Oracle:Kicker {1}{G} (You may pay an additional {1}{G} as you cast this spell.)\nWhen Benalish Emissary enters the battlefield, if it was kicked, destroy target land.
-End

@@ -1,7 +1,6 @@
 Name:Beasts of Bogardan
 ManaCost:4 R
 Types:Creature Beast
-Text:no text
 PT:3/3
 K:Protection from red
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as an opponent controls a white permanent.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/beasts_of_bogard
 Oracle:Protection from red\nBeasts of Bogardan gets +1/+1 as long as an opponent controls a white permanent.
 SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/45.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/133.jpg
-End

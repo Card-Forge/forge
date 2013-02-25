@@ -1,7 +1,6 @@
 Name:Ethereal Champion
 ManaCost:2 W W W
 Types:Creature Avatar
-Text:no text
 PT:3/4
 A:AB$ PreventDamage | Cost$ PayLife<1> | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_champio
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/20.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/219.jpg
 Oracle:Pay 1 life: Prevent the next 1 damage that would be dealt to Ethereal Champion this turn.
-End

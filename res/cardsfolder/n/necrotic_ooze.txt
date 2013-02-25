@@ -1,11 +1,9 @@
 Name:Necrotic Ooze
 ManaCost:2 B B
 Types:Creature Ooze
-Text:no text
 PT:4/3
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature | GainsAbilitiesOfZones$ Graveyard | Description$ As long as CARDNAME is on the battlefield, it has all activated abilities of all creature cards in all graveyards.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrotic_ooze.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/72.jpg
 Oracle:As long as Necrotic Ooze is on the battlefield, it has all activated abilities of all creature cards in all graveyards.
-End

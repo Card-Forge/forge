@@ -1,11 +1,9 @@
 Name:Rejuvenate
 ManaCost:3 G
 Types:Sorcery
-Text:no text
 A:SP$ GainLife | Cost$ 3 G | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rejuvenate.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/271.jpg
 Oracle:You gain 6 life.\nCycling {2} ({2}, Discard this card: Draw a card.)
-End

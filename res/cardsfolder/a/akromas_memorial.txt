@@ -1,7 +1,6 @@
 Name:Akroma's Memorial
 ManaCost:7
 Types:Legendary Artifact
-Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying & First Strike & Vigilance & Trample & Haste & Protection from black & Protection from red | Description$ Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_memorial
 SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/200.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/159.jpg
 Oracle:Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.
-End

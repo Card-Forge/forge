@@ -1,7 +1,6 @@
 Name:Alpha Status
 ManaCost:2 G
 Types:Enchantment Aura
-Text:no text
 K:Enchant Creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ AffectedX | AddToughness$ AffectedX | References$ AffectedX | EffectZone$ Battlefield | Description$ Enchanted creature gets +2/+2 for each other creature on the battlefield that shares a creature type with it.
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_status.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 for each other creature on the battlefield that shares a creature type with it.
 SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/110.jpg
-End

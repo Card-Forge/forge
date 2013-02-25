@@ -1,11 +1,9 @@
 Name:Dryad Sophisticate
 ManaCost:1 G
 Types:Creature Dryad
-Text:no text
 PT:2/1
 K:Nonbasic landwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dryad_sophisticate.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/83.jpg
 Oracle:Nonbasic landwalk
-End

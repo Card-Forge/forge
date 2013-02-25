@@ -1,7 +1,6 @@
 Name:Skullclamp
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ -1 | Description$ Equipped creature gets +1/-1.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EquippedBy | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature is put into a graveyard, draw two cards.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/skullclamp.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/140.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/260.jpg
 Oracle:Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}
-End

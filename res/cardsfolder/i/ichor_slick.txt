@@ -1,7 +1,6 @@
 Name:Ichor Slick
 ManaCost:2 B
 Types:Sorcery
-Text:no text
 K:Cycling:2
 K:Madness:3 B
 A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichor_slick.jpg
 SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/68.jpg
 Oracle:Target creature gets -3/-3 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)\nMadness {3}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
-End

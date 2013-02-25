@@ -1,7 +1,6 @@
 Name:Nomads en-Kor
 ManaCost:W
 Types:Creature Kor Nomad Soldier
-Text:no text
 PT:1/1
 A:AB$ Effect | Cost$ 0 | Name$ en-Kor Redirection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage to | ReplacementEffects$ EnKorCombat,EnKorNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | References$ EnKorCombat,EnKorNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,RestDmgCombat,RestDmg,X,Y | Duration$ HostLeavesOrEOT | RememberObjects$ Self | ImprintCards$ Targeted | SpellDescription$ The next 1 damage that would be dealt to CARDNAME this turn is dealt to target creature you control instead.
 SVar:EnKorCombat:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next 1 damage that would be dealt to Nomads en-Kor this turn is dealt to target creature you control instead.
@@ -19,4 +18,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomads_en_kor.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/109.jpg
 Oracle:{0}: The next 1 damage that would be dealt to Nomads en-Kor this turn is dealt to target creature you control instead.
-End

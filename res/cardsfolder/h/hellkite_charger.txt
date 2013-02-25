@@ -1,7 +1,6 @@
 Name:Hellkite Charger
 ManaCost:4 R R
 Types:Creature Dragon
-Text:no text
 PT:5/5
 K:Flying
 K:Haste
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellkite_charger.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/131.jpg
 Oracle:Flying, haste\nWhenever Hellkite Charger attacks, you may pay {5}{R}{R}. If you do, untap all attacking creatures and after this phase, there is an additional combat phase.
-End

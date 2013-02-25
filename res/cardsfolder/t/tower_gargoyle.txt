@@ -1,11 +1,9 @@
 Name:Tower Gargoyle
 ManaCost:1 W U B
 Types:Artifact Creature Gargoyle
-Text:no text
 PT:4/4
 K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_gargoyle.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/205.jpg
 Oracle:Flying
-End

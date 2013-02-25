@@ -1,7 +1,6 @@
 Name:Village Bell-Ringer
 ManaCost:2 W
 Types:Creature Human Scout
-Text:no text
 PT:1/4
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap all creatures you control.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/village_bell_ringer.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/41.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Village Bell-Ringer enters the battlefield, untap all creatures you control.
-End

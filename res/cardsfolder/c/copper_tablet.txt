@@ -1,7 +1,6 @@
 Name:Copper Tablet
 ManaCost:2
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 1
 SVar:RemRandomDeck:True
@@ -11,4 +10,3 @@ SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/238.jpg
 SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/240.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/239.jpg
 Oracle:At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
-End

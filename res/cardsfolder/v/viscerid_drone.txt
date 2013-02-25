@@ -1,7 +1,6 @@
 Name:Viscerid Drone
 ManaCost:1 U
 Types:Creature Homarid Drone
-Text:no text
 PT:1/2
 A:AB$ Destroy | Cost$ T Sac<1/Creature> Sac<1/Swamp> | ValidTgts$ Creature.nonArtifact | TgtPrompt$ Select target nonartifact creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact creature. It can't be regenerated.
 A:AB$ Destroy | Cost$ T Sac<1/Creature> Sac<1/Swamp.Snow/Snow Swamp> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viscerid_drone.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/62.jpg
 Oracle:{T}, Sacrifice a creature and a Swamp: Destroy target nonartifact creature. It can't be regenerated.\n{T}, Sacrifice a creature and a snow Swamp: Destroy target creature. It can't be regenerated.
-End

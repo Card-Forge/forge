@@ -1,7 +1,6 @@
 Name:Pariah
 ManaCost:2 W
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DmgEnchanted | IsCombat$ False | Description$ All damage that would be dealt to you is dealt to enchanted creature instead.
@@ -14,4 +13,3 @@ SetInfo:USG|Rare|http://magiccards.info/scans/en/us/28.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/30.jpg
 SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/33.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nAll damage that would be dealt to you is dealt to enchanted creature instead.
-End

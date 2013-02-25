@@ -1,7 +1,6 @@
 Name:Shared Animosity
 ManaCost:2 R
 Types:Enchantment
-Text:no text
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ AnimosityPump | TriggerDescription$ Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.
 SVar:AnimosityPump:AB$ Pump | Cost$ 0 | RememberObjects$ TriggeredAttacker | SubAbility$ AnimosityPump2
 SVar:AnimosityPump2:DB$ Pump | Defined$ Remembered | NumAtt$ X | References$ X | SubAbility$ DBCleanup
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_animosity.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/104.jpg
 Oracle:Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.
-End

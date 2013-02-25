@@ -1,7 +1,6 @@
 Name:Erratic Mutation
 ManaCost:2 U
 Types:Instant
-Text:no text
 A:SP$ DigUntil | Cost$ 2 U | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Library | RevealedDestination$ Library | FoundLibraryPosition$ -1 | RevealedLibraryPosition$ -1 | RememberFound$ True | SubAbility$ MutantPump | SpellDescription$ Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order.
 SVar:MutantPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ -X | References$ X | SubAbility$ JitterClean
 SVar:JitterClean:DB$ Cleanup | ClearRemembered$ True
@@ -11,4 +10,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erratic_mutation.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/41.jpg
 Oracle:Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order.
-End

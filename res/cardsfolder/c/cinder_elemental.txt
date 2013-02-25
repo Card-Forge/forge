@@ -1,7 +1,6 @@
 Name:Cinder Elemental
 ManaCost:3 R
 Types:Creature Elemental
-Text:no text
 PT:2/2
 A:AB$ DealDamage | Cost$ X R T Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player.
 SVar:X:Count$xPaid
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_elemental
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/87.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/183.jpg
 Oracle:{X}{R}, {T}, Sacrifice Cinder Elemental: Cinder Elemental deals X damage to target creature or player.
-End

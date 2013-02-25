@@ -1,7 +1,6 @@
 Name:Death's Shadow
 ManaCost:B
 Types:Creature Avatar
-Text:no text
 PT:13/13
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets -X/-X, where X is your life total.
 SVar:X:Count$YourLifeTotal/Negative
@@ -11,4 +10,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_shadow.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/57.jpg
 Oracle:Death's Shadow gets -X/-X, where X is your life total.
-End

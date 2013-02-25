@@ -1,7 +1,6 @@
 Name:Intuition
 ManaCost:2 U
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 2 U | Origin$ Library | Destination$ Library | ChangeType$ Card | ChangeNum$ 3 | RememberChanged$ True | Reveal$ True | Shuffle$ False | SubAbility$ DBChangeZone1 | StackDescription$ Search your library for any three cards and reveal them. An opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library. | SpellDescription$ Search your library for any three cards and reveal them. An opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library.
 SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | Chooser$ Opponent | ChangeNum$ 1 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for the hand | Shuffle$ False | SubAbility$ DBChangeZone2 | StackDescription$ None
 SVar:DBChangeZone2:DB$ ChangeZoneAll | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.IsRemembered | Shuffle$ True | StackDescription$ None | SubAbility$ DBCleanup
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intuition.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/70.jpg
 Oracle:Search your library for any three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library.
-End

@@ -1,7 +1,6 @@
 Name:Urborg
 ManaCost:no cost
 Types:Legendary Land
-Text:no text
 A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add B to your mana pool.
 A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ First Strike | SpellDescription$ Target creature loses first strike until end of turn.
 A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Swampwalk | SpellDescription$ Target creature loses swampwalk until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/255.jpg
 Oracle:{T}: Add {B} to your mana pool.\n{T}: Target creature loses first strike or swampwalk until end of turn.
-End

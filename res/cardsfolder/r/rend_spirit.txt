@@ -1,11 +1,9 @@
 Name:Rend Spirit
 ManaCost:2 B
 Types:Instant
-Text:no text
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.Spirit | TgtPrompt$ Select target Spirit | SpellDescription$ Destroy target Spirit.
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rend_spirit.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/141.jpg
 Oracle:Destroy target Spirit.
-End

@@ -1,7 +1,6 @@
 Name:Lure
 ManaCost:1 G G
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.
@@ -22,4 +21,3 @@ SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/183.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/176.jpg
 SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/120.jpg
 Oracle:Enchant creature\nAll creatures able to block enchanted creature do so.
-End

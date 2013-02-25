@@ -1,7 +1,6 @@
 Name:Zelyon Sword
 ManaCost:3
 Types:Artifact
-Text:no text
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True |  SpellDescription$ Target creature gets +2/+0 for as long as CARDNAME remains tapped.
 S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddPower$ 2
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zelyon_sword.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/176.jpg
 Oracle:You may choose not to untap Zelyon Sword during your untap step.\n{3}, {T}: Target creature gets +2/+0 for as long as Zelyon Sword remains tapped.
-End

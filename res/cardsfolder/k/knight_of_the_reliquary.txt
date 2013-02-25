@@ -1,7 +1,6 @@
 Name:Knight of the Reliquary
 ManaCost:1 G W
 Types:Creature Human Knight
-Text:no text
 PT:2/2
 A:AB$ ChangeZone | Cost$ T Sac<1/Forest;Plains/Forest or Plains> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ Search your library for a land card, put it onto the battlefield, then shuffle your library.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each land card in your graveyard.
@@ -10,4 +9,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_reliquary.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/113.jpg
 Oracle:Knight of the Reliquary gets +1/+1 for each land card in your graveyard.\n{T}, Sacrifice a Forest or Plains: Search your library for a land card, put it onto the battlefield, then shuffle your library.
-End

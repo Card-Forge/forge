@@ -1,7 +1,6 @@
 Name:Wave of Reckoning
 ManaCost:4 W
 Types:Sorcery
-Text:no text
 #for this AF, the DefinedCards$ Self is the target for Each damaging.  They EachDamage themselves.
 A:SP$ EachDamage | Cost$ 4 W | ValidCards$ Creature | NumDmg$ X | References$ X | DamageDesc$ damage equal to its power | DefinedCards$ Self | SpellDescription$ Each creature deals damage to itself equal to its power.
 #NumDmg isn't really used here.  It is left for clarity.  The AF pulls Damage straight from "X" hardcoded.
@@ -12,4 +11,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_reckoning.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/56.jpg
 Oracle:Each creature deals damage to itself equal to its power.
-End

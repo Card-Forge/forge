@@ -1,7 +1,6 @@
 Name:Shiv's Embrace
 ManaCost:2 R R
 Types:Enchantment Aura
-Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+2 and has flying.
@@ -11,4 +10,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/shivs_embrace.jp
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/156.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/216.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying.\n{R}: Enchanted creature gets +1/+0 until end of turn.
-End

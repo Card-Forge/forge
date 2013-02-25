@@ -1,7 +1,6 @@
 Name:Wall of Roots
 ManaCost:1 G
 Types:Creature Plant Wall
-Text:no text
 PT:0/5
 K:Defender
 A:AB$ Mana | Cost$ AddCounter<1/M0M1> | Produced$ G | ActivationLimit$ 1 | SpellDescription$ Add G to your mana pool. Activate this ability only once each turn.
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_roots.jp
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/151.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/89.jpg
 Oracle:Defender\nPut a -0/-1 counter on Wall of Roots: Add {G} to your mana pool. Activate this ability only once each turn.
-End

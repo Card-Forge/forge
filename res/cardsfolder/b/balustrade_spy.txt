@@ -1,7 +1,6 @@
 Name:Balustrade Spy
 ManaCost:3 B
 Types:Creature Vampire Rogue
-Text:no text
 PT:2/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
@@ -9,4 +8,3 @@ SVar:TrigMill:AB$ DigUntil | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select tar
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balustrade_spy.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/57.jpg
 Oracle:Flying\nWhen Balustrade Spy enters the battlefield, target player reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
-End

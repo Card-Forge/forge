@@ -1,7 +1,6 @@
 Name:Wicker Warcrawler
 ManaCost:5
 Types:Artifact Creature Scarecrow
-Text:no text
 PT:6/6
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a -1/-1 counter on it at end of combat.
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a -1/-1 counter on it at end of combat.
@@ -11,4 +10,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wicker_warcrawler.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/269.jpg
 Oracle:Whenever Wicker Warcrawler attacks or blocks, put a -1/-1 counter on it at end of combat.
-End

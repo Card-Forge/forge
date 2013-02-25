@@ -1,7 +1,6 @@
 Name:Quirion Elves
 ManaCost:1 G
 Types:Creature Elf Druid
-Text:no text
 PT:1/1
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
@@ -13,4 +12,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_elves.jp
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/203.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/132.jpg
 Oracle:As Quirion Elves enters the battlefield, choose a color.\n{T}: Add {G} to your mana pool.\n{T}: Add one mana of the chosen color to your mana pool.
-End

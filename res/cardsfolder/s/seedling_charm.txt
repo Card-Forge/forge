@@ -1,7 +1,6 @@
 Name:Seedling Charm
 ManaCost:G
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ G | ValidTgts$ Aura.AttachedTo Creature | TgtPrompt$ Select target Aura attached to a creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$  Choose one - Return target Aura attached to a creature to its owner's hand;
 A:SP$ Regenerate | Cost$ G | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature. | SpellDescription$ or regenerate target green creature;
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SpellDescription$ or target creature gains trample until end of turn.
@@ -10,4 +9,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seedling_charm.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/138.jpg
 Oracle:Choose one - Return target Aura attached to a creature to its owner's hand; or regenerate target green creature; or target creature gains trample until end of turn.
-End

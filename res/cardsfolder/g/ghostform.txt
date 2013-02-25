@@ -1,11 +1,9 @@
 Name:Ghostform
 ManaCost:1 U
 Types:Sorcery
-Text:no text
 A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | KW$ HIDDEN Unblockable | AILogic$ Pump | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | SpellDescription$ Up to two target creatures are unblockable this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostform.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/56.jpg
 Oracle:Up to two target creatures are unblockable this turn.
-End

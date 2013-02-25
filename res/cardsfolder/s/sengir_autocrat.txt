@@ -1,7 +1,6 @@
 Name:Sengir Autocrat
 ManaCost:3 B
 Types:Creature Human
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put three 0/1 black Serf creature tokens onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Serf | TokenTypes$ Creature,Serf | TokenOwner$ You | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 1
@@ -14,4 +13,3 @@ SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/55.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/155.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/45.jpg
 Oracle:When Sengir Autocrat enters the battlefield, put three 0/1 black Serf creature tokens onto the battlefield.\nWhen Sengir Autocrat leaves the battlefield, exile all Serf tokens.
-End

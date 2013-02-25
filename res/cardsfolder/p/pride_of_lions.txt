@@ -1,7 +1,6 @@
 Name:Pride of Lions
 ManaCost:3 G G
 Types:Creature Cat
-Text:no text
 PT:4/4
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
 SVar:Rarity:Uncommon
@@ -9,4 +8,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/pride_of_lions.j
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/139.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/261.jpg
 Oracle:You may have Pride of Lions assign its combat damage as though it weren't blocked.
-End

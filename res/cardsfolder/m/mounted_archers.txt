@@ -1,7 +1,6 @@
 Name:Mounted Archers
 ManaCost:3 W
 Types:Creature Human Soldier Archer
-Text:no text
 PT:2/3
 K:Reach
 A:AB$ Pump | Cost$ W | Defined$ Self | KW$ HIDDEN CARDNAME can block an additional creature. | SpellDescription$ CARDNAME can block an additional creature this turn.
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mounted_archers.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/242.jpg
 Oracle:Reach (This creature can block creatures with flying.)\n{W}: Mounted Archers can block an additional creature this turn.
-End

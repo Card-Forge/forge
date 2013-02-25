@@ -8,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/join_the_ranks.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/9.jpg
 Oracle:Put two 1/1 white Soldier Ally creature tokens onto the battlefield.
-End

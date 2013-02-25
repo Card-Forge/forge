@@ -1,7 +1,6 @@
 Name:Tempting Licid
 ManaCost:2 G
 Types:Creature Licid
-Text:no text
 PT:2/2
 A:AB$ SetState | Cost$ G T | Defined$ Self | NewState$ Licid | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay G to end this effect.
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
@@ -29,4 +28,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_licid.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/72.jpg
 Oracle:{G}, {T}: CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.\nAll creatures able to block enchanted creature do so.
-End

@@ -1,7 +1,6 @@
 Name:Weird Harvest
 ManaCost:X G G
 Types:Sorcery
-Text:no text
 A:SP$ ChangeZone | Cost$ X G G | Origin$ Library | Destination$ Hand | DefinedPlayer$ Each | ChangeType$ Card.Creature | Reveal$ True | Shuffle$ True | ChangeNum$ X | References$ X | SpellDescription$ Each player may search his or her library for up to X creature cards, reveal those cards, and put them into his or her hand. Then each player who searched his or her library this way shuffles it.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
@@ -10,4 +9,3 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/weird_harvest.jp
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/299.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/282.jpg
 Oracle:Each player may search his or her library for up to X creature cards, reveal those cards, and put them into his or her hand. Then each player who searched his or her library this way shuffles it.
-End

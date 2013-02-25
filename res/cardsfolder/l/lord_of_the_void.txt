@@ -1,7 +1,6 @@
 Name:Lord of the Void
 ManaCost:4 B B B
 Types:Creature Demon
-Text:no text
 PT:7/7
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill| TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile the top seven cards of that player's library, then put a creature card from among them onto the battlefield under your control.
@@ -12,4 +11,3 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_void.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/71.jpg
 Oracle:Flying\nWhenever Lord of the Void deals combat damage to a player, exile the top seven cards of that player's library, then put a creature card from among them onto the battlefield under your control.
-End

@@ -1,7 +1,6 @@
 Name:Visara the Dreadful
 ManaCost:3 B B B
 Types:Legendary Creature Gorgon
-Text:no text
 PT:5/5
 K:Flying
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
@@ -9,4 +8,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39863.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/179.jpg
 Oracle:Flying\n{T}: Destroy target creature. It can't be regenerated.
-End

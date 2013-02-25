@@ -1,7 +1,6 @@
 Name:Isperia the Inscrutable
 ManaCost:1 W W U U
 Types:Legendary Creature Sphinx
-Text:no text
 PT:3/6
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigNameCard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, name a card. That player reveals his or her hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library.
@@ -13,4 +12,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isperia_the_inscrutable.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/114.jpg
 Oracle:Flying\nWhenever Isperia the Inscrutable deals combat damage to a player, name a card. That player reveals his or her hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library.
-End

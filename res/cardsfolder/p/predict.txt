@@ -1,7 +1,6 @@
 Name:Predict
 ManaCost:1 U
 Types:Instant
-Text:no text
 A:SP$ NameCard | Cost$ 1 U | Defined$ You | SubAbility$ DBMill | SpellDescription$ Name a card, then put the top card of target player's library into his or her graveyard. If that card is the named card, you draw two cards. Otherwise, you draw a card.
 SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | SubAbility$ DBDraw2
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predict.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/94.jpg
 Oracle:Name a card, then put the top card of target player's library into his or her graveyard. If that card is the named card, you draw two cards. Otherwise, you draw a card.
-End

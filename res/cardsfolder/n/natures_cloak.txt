@@ -1,7 +1,6 @@
 Name:Nature's Cloak
 ManaCost:2 G
 Types:Sorcery
-Text:no text
 A:SP$ PumpAll | Cost$ 2 G | ValidCards$ Creature.Green+YouCtrl | KW$ Forestwalk | SpellDescription$ Green creatures you control gain forestwalk until end of turn.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
@@ -9,4 +8,3 @@ SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/natures_cloak.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/135.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/103.jpg
 Oracle:Green creatures you control gain forestwalk until end of turn.
-End

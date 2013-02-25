@@ -1,7 +1,6 @@
 Name:Seer's Vision
 ManaCost:2 U B
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ Play with your hand revealed. | Description$ Your opponents play with their hands revealed.
 A:AB$ Discard | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player. | Mode$ RevealYouChoose | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Look at target player's hand and choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
 SVar:RemAIDeck:True
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seers_vision.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/270.jpg
 Oracle:Your opponents play with their hands revealed.\nSacrifice Seer's Vision: Look at target player's hand and choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
-End

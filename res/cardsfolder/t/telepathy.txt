@@ -1,7 +1,6 @@
 Name:Telepathy
 ManaCost:U
 Types:Enchantment
-Text:no text
 S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ Play with your hand revealed. | Description$ Your opponents play with their hands revealed.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
@@ -13,4 +12,3 @@ SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/101.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/113.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/74.jpg
 Oracle:Your opponents play with their hands revealed.
-End

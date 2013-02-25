@@ -1,10 +1,8 @@
 Name:Shattering Blow
 ManaCost:1 RW
 Types:Instant
-Text:no text
 A:SP$ ChangeZone | Cost$ 1 RW | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Exile target artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattering_blow.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/225.jpg
 Oracle:Exile target artifact.
-End

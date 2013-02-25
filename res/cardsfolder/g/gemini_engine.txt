@@ -1,7 +1,6 @@
 Name:Gemini Engine
 ManaCost:6
 Types:Artifact Creature Construct
-Text:no text
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, put a colorless Construct artifact creature token named Twin onto the battlefield attacking. Its power is equal to CARDNAME's power and its toughness is equal to CARDNAME's toughness. Sacrifice the token at end of combat.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Twin | TokenTypes$ Artifact,Creature,Construct | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ X | TokenToughness$ Y | TokenAttacking$ True | TokenTriggers$ TrigSac | TokenSVars$ TrigSacrifice | References$ X,Y
@@ -14,4 +13,3 @@ SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemini_engine.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/121.jpg
 Oracle:Whenever Gemini Engine attacks, put a colorless Construct artifact creature token named Twin onto the battlefield attacking. Its power is equal to Gemini Engine's power and its toughness is equal to Gemini Engine's toughness. Sacrifice the token at end of combat.
-End

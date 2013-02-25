@@ -1,7 +1,6 @@
 Name:Manabarbs
 ManaCost:3 R
 Types:Enchantment
-Text:no text
 T:Mode$ TapsForMana | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player taps a land for mana, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 1
 SVar:RemRandomDeck:True
@@ -18,4 +17,3 @@ SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/194.jpg
 SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/150.jpg
 SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/164.jpg
 Oracle:Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
-End

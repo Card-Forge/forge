@@ -1,7 +1,6 @@
 Name:Descendant of Soramaro
 ManaCost:3 U
 Types:Creature Human Wizard
-Text:no text
 PT:2/3
 A:AB$ RearrangeTopOfLibrary | Cost$ 1 U | Defined$ You | NumCards$ X | References$ X | SpellDescription$ Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
 SVar:X:Count$InYourHand
@@ -9,4 +8,3 @@ SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_soramaro.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/33.jpg
 Oracle:{1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
-End

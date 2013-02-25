@@ -1,7 +1,6 @@
 Name:Kobold Drill Sergeant
 ManaCost:1 R
 Types:Creature Kobold Soldier
-Text:no text
 PT:1/2
 S:Mode$ Continuous | Affected$ Creature.Kobold+Other+YouCtrl | AddToughness$ 1 | AddKeyword$ Trample | Description$ Other Kobold creatures you control get +0/+1 and have trample.
 SVar:PlayMain1:TRUE
@@ -9,4 +8,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_drill_sergeant.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/152.jpg
 Oracle:Other Kobold creatures you control get +0/+1 and have trample.
-End

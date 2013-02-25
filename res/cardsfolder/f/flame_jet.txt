@@ -1,11 +1,9 @@
 Name:Flame Jet
 ManaCost:1 R
 Types:Sorcery
-Text:no text
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_jet.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/81.jpg
 Oracle:Flame Jet deals 3 damage to target player.\nCycling {2} ({2}, Discard this card: Draw a card.)
-End

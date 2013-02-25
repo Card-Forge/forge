@@ -1,7 +1,6 @@
 Name:Mana Seism
 ManaCost:1 R
 Types:Sorcery
-Text:no text
 A:SP$ Sacrifice | Cost$ 1 R | Defined$ You | Amount$ SacX | References$ SacX | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBMana | SpellDescription$ Sacrifice any number of lands. Add 1 to your mana pool for each land sacrificed this way.
 SVar:DBMana:DB$ Mana | Produced$ 1 | Amount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -12,4 +11,3 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_seism.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/179.jpg
 Oracle:Sacrifice any number of lands. Add {1} to your mana pool for each land sacrificed this way.
-End
