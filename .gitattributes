@@ -11657,6 +11657,7 @@ res/cardsfolder/v/vodalian_illusionist.txt -text
 res/cardsfolder/v/vodalian_knights.txt svneol=native#text/plain
 res/cardsfolder/v/vodalian_mage.txt svneol=native#text/plain
 res/cardsfolder/v/vodalian_merchant.txt svneol=native#text/plain
+res/cardsfolder/v/vodalian_mystic.txt -text
 res/cardsfolder/v/vodalian_serpent.txt svneol=native#text/plain
 res/cardsfolder/v/vodalian_soldiers.txt svneol=native#text/plain
 res/cardsfolder/v/vodalian_zombie.txt svneol=native#text/plain

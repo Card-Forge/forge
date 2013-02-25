@@ -1,0 +1,13 @@
+Name:Vodalian Mystic
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+Text:no text
+PT:1/1
+A:AB$ ChooseColor | Cost$ T | Defined$ You | SubAbility$ Animate | SpellDescription$ Target instant or sorcery spell becomes the color of your choice.
+SVar:Animate:DB$ Animate | ValidTgts$ Instant.inZoneStack,Sorcery.inZoneStack | TgtPrompt$ Select target instant or sorcery spell to change the color of | TgtZone$ Stack,Battlefield | Colors$ ChosenColor | OverwriteColors$ True | Permanent$ True
+#For the above part to work, another zone MUST be included because of interaction with regular targeting on the stack that stops the ability from working correctly. Use the inZone targeting restriction to limit it to stack. TODO: Probably need to fix this properly.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_mystic.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/33.jpg
+Oracle:{T}: Target instant or sorcery spell becomes the color of your choice.
+End
