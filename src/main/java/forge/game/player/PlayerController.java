@@ -94,4 +94,5 @@ public abstract class PlayerController {
 
     public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title); }
     public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);
+    public abstract boolean confirmAction(SpellAbility sa, String mode, String message);
 }

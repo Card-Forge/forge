@@ -237,5 +237,13 @@ public class PlayerControllerHuman extends PlayerController {
             return GuiChoose.one(title, options);
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#confirmAction(forge.card.spellability.SpellAbility, java.lang.String, java.lang.String)
+     */
+    @Override
+    public boolean confirmAction(SpellAbility sa, String mode, String message) {
+        return GuiDialog.confirm(sa.getSourceCard(), message);
+    }
+
 
 }

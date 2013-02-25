@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.google.common.base.Predicate;
 
@@ -18,7 +19,6 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 import forge.util.Aggregates;
 
 public class DiscardEffect extends RevealEffectBase {
@@ -85,34 +85,6 @@ public class DiscardEffect extends RevealEffectBase {
         }
         return sb.toString();
     } // discardStackDescription()
-
-    private List<Card> discardComputerChooses(SpellAbility sa, Player victim, Player chooser, int numCards, String[] dValid, boolean isReveal) {
-        final Card source = sa.getSourceCard();
-        List<Card> dPChHand = new ArrayList<Card>(victim.getCardsIn(ZoneType.Hand));
-        dPChHand = CardLists.getValidCards(dPChHand, dValid, source.getController(), source);
-        final List<Card> toDiscard = new ArrayList<Card>();
-
-        int max = Math.min(dPChHand.size(), numCards);
-        List<Card> list = new ArrayList<Card>();
-        
-        if (!victim.isOpponentOf(chooser) && victim instanceof AIPlayer) { // discard AI cards
-            list = ((AIPlayer) victim).getAi().getCardsToDiscard(max, dValid, sa);
-        } else {
-            // discard hostile or human opponent
-            for (int i = 0; i < max; i++) {
-                Card dC = chooseCardToDiscardFromOpponent(sa, dPChHand);
-                dPChHand.remove(dC);
-                list.add(dC);
-            }
-        }
-        
-        if (isReveal) {
-            GuiChoose.oneOrNone("Computer has chosen", list);
-        }
-        
-        return toDiscard;
-
-    }
 
     /**
      * TODO: Write javadoc for this method.
@@ -207,19 +179,9 @@ public class DiscardEffect extends RevealEffectBase {
                 }
 
                 if (mode.equals("Random")) {
-                    boolean runDiscard = true;
-                    if (sa.hasParam("Optional")) {
-                       if (p.isHuman()) {
-                           // TODO Ask if Human would like to discard a card at Random
-                           StringBuilder sb = new StringBuilder("Would you like to discard ");
-                           sb.append(numCards).append(" random card(s)?");
-                           runDiscard = GuiDialog.confirm(source, sb.toString());
-                       }
-                       else {
-                           // TODO For now AI will always discard Random used currently with:
-                           // Balduvian Horde and similar cards
-                       }
-                    }
+                    String message = "Would you like to discard " + numCards + " random card(s)?";
+                    boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, mode, message);
+
 
                     if (runDiscard) {
                         final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
@@ -253,68 +215,88 @@ public class DiscardEffect extends RevealEffectBase {
                     // Is Reveal you choose right? I think the wrong player is
                     // being used?
                     List<Card> dPHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
-                    if (dPHand.size() != 0) {
-                        if (sa.hasParam("RevealNumber")) {
-                            String amountString = sa.getParam("RevealNumber");
-                            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
-                                    : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-                            dPHand = getRevealedList(p, dPHand, amount, false);
-                        }
-                        List<Card> dPChHand = new ArrayList<Card>(dPHand);
-                        final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
-                        String[] dValid = ArrayUtils.EMPTY_STRING_ARRAY;
-                        dValid = valid.split(",");
-                        dPChHand = CardLists.getValidCards(dPHand, dValid, source.getController(), source);
+                    if (dPHand.isEmpty())
+                        continue; // for loop over players
 
-                        Player chooser = p;
-                        if (mode.equals("RevealYouChoose")) {
-                            chooser = source.getController();
-                        } else if (mode.equals("RevealOppChoose")) {
-                            chooser = source.getController().getOpponent();
-                        }
+                    if (sa.hasParam("RevealNumber")) {
+                        String amountString = sa.getParam("RevealNumber");
+                        int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                        dPHand = getRevealedList(p, dPHand, amount, false);
+                    }
+                    List<Card> dPChHand = new ArrayList<Card>(dPHand);
+                    final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
+                    String[] dValid = ArrayUtils.EMPTY_STRING_ARRAY;
+                    dValid = valid.split(",");
+                    dPChHand = CardLists.getValidCards(dPHand, dValid, source.getController(), source);
 
-                        List<Card> toBeDiscarded = new ArrayList<Card>(); 
-                        if (chooser.isComputer()) {
-                            toBeDiscarded = discardComputerChooses(sa, p, chooser, numCards, dValid, mode.startsWith("Reveal"));
+                    Player chooser = p;
+                    if (mode.equals("RevealYouChoose")) {
+                        chooser = source.getController();
+                    } else if (mode.equals("RevealOppChoose")) {
+                        chooser = source.getController().getOpponent();
+                    }
+
+                    List<Card> toBeDiscarded = new ArrayList<Card>(); 
+                    if (chooser.isComputer()) {
+                        List<Card> dPChHand1 = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
+                        dPChHand1 = CardLists.getValidCards(dPChHand1, dValid, source.getController(), source);
+                        
+                        int max = Math.min(dPChHand1.size(), numCards);
+                        List<Card> list = new ArrayList<Card>();
+                        
+                        if (!p.isOpponentOf(chooser) && p instanceof AIPlayer) { // discard AI cards
+                            toBeDiscarded = ((AIPlayer) p).getAi().getCardsToDiscard(max, dValid, sa);
                         } else {
-                            // human
-                            if (mode.startsWith("Reveal")) {
-                                GuiChoose.oneOrNone("Revealed " + p + "  hand", dPHand);
-                            }
-
-                            if (sa.hasParam("AnyNumber")) {
-                                List<Card> chosen = getDiscardedList(p, dPChHand, dPChHand.size(), true);
-
-                                for (Card c : chosen) {
-                                    dPChHand.remove(chosen);
-                                    toBeDiscarded.add(c);
-                                }
-                            } else 
-                                for (int i = 0; i < numCards; i++) {
-                                if (dPChHand.isEmpty()) {
-                                    break;
-                                }
-                                Card dC = null;
-                                if (sa.hasParam("Optional")) {
-                                    dC = GuiChoose.oneOrNone("Choose a card to be discarded", dPChHand);
-                                } else {
-                                    dC = GuiChoose.one("Choose a card to be discarded", dPChHand);
-                                } 
-                                
-                                if (dC != null) {
-                                    dPChHand.remove(dC);
-                                    toBeDiscarded.add(dC);
-                                }
-                                else break;
+                            // discard hostile or human opponent
+                            for (int i = 0; i < max; i++) {
+                                Card dC = chooseCardToDiscardFromOpponent(sa, dPChHand1);
+                                dPChHand1.remove(dC);
+                                toBeDiscarded.add(dC);
                             }
                         }
+                        
+                        if (mode.startsWith("Reveal")) {
+                            GuiChoose.oneOrNone("Computer has chosen", list);
+                        }
 
-                        if (toBeDiscarded != null) {
-                            for (Card card : toBeDiscarded) {
-                                if ( null == card ) continue;
-                                p.discard(card, sa);
-                                discarded.add(card);
+                    } else {
+                        // human
+                        if (mode.startsWith("Reveal")) {
+                            GuiChoose.oneOrNone("Revealed " + p + "  hand", dPHand);
+                        }
+
+                        if (sa.hasParam("AnyNumber")) {
+                            List<Card> chosen = getDiscardedList(p, dPChHand);
+
+                            for (Card c : chosen) {
+                                dPChHand.remove(chosen);
+                                toBeDiscarded.add(c);
                             }
+                        } else 
+                            for (int i = 0; i < numCards; i++) {
+                            if (dPChHand.isEmpty()) {
+                                break;
+                            }
+                            Card dC = null;
+                            if (sa.hasParam("Optional")) {
+                                dC = GuiChoose.oneOrNone("Choose a card to be discarded", dPChHand);
+                            } else {
+                                dC = GuiChoose.one("Choose a card to be discarded", dPChHand);
+                            } 
+                            
+                            if (dC != null) {
+                                dPChHand.remove(dC);
+                                toBeDiscarded.add(dC);
+                            }
+                            else break;
+                        }
+                    }
+
+                    if (toBeDiscarded != null) {
+                        for (Card card : toBeDiscarded) {
+                            if ( null == card ) continue;
+                            p.discard(card, sa);
+                            discarded.add(card);
                         }
                     }
                 }
@@ -329,11 +311,11 @@ public class DiscardEffect extends RevealEffectBase {
 
     } // discardResolve()
 
-    public static List<Card> getDiscardedList(final Player player, final List<Card> valid, final int max, boolean anyNumber) {
+    public static List<Card> getDiscardedList(final Player player, final List<Card> valid) {
         final List<Card> chosen = new ArrayList<Card>();
-        final int validamount = Math.min(valid.size(), max);
+        final int validamount = Math.min(valid.size(), valid.size());
 
-        if (anyNumber && player.isHuman() && validamount > 0) {
+        if (player.isHuman() && validamount > 0) {
             final List<Card> selection = GuiChoose.order("Choose Which Cards to Discard", "Discarded", -1, valid, null, null);
             for (final Object o : selection) {
                 if (o != null && o instanceof Card) {

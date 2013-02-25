@@ -1,13 +1,10 @@
 package forge.game.player;
 
-import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.Map;
 
 import forge.Card;
 import forge.GameEntity;
-import forge.card.ability.ApiType;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -193,15 +190,12 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Card chooseSingleCardForEffect(List<Card> options, SpellAbility sa, String title, boolean isOptional) {
-        ApiType api = sa.getApi();
-        if ( null == api ) {
-            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
-        }
-        
-        switch(api) {
-            case Bond: return CardFactoryUtil.getBestCreatureAI(options);
-            default: throw new InvalidParameterException("AI chooseSingleCard does not know how to choose card for " + api);
-        }
+        return brains.chooseSingleCardForEffect(options, sa, title, isOptional);
+    }
+
+    @Override
+    public boolean confirmAction(SpellAbility sa, String mode, String message) {
+        return brains.confirmAction(sa, mode, message);
     }
 
 }

@@ -17,6 +17,7 @@
  */
 package forge.game.ai;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -545,7 +546,7 @@ public class AiController {
         // look for good discards
         while (count < numDiscard) {
             Card prefCard = null;
-            if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isHuman()) {
+            if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isOpponentOf(player)) {
                 for (Card c : hand) {
                     if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
                             + " put it onto the battlefield instead of putting it into your graveyard.")) {
@@ -603,6 +604,39 @@ public class AiController {
         }
     
         return discardList;
+    }
+
+    public Card chooseSingleCardForEffect(List<Card> options, SpellAbility sa, String title, boolean isOptional) {
+        ApiType api = sa.getApi();
+        if ( null == api ) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        
+        switch(api) {
+            case Bond: return CardFactoryUtil.getBestCreatureAI(options);
+            default: throw new InvalidParameterException("AI chooseSingleCard does not know how to choose card for " + api);
+        }
+    }
+
+
+    public boolean confirmAction(SpellAbility sa, String mode, String message) {
+        ApiType api = sa.getApi();
+        if ( null == api ) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        
+        switch(api) {
+            case Discard:
+                if ( mode.equals("Random") ) { //
+                    // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
+                    return true;
+                }
+            break;
+                
+            default: 
+        }
+        String exMsg = String.format("AI confirmAction does not know what to decide about %s with %s mode.", api, mode);
+        throw new InvalidParameterException(exMsg);
     }
 }
 
