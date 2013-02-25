@@ -3551,6 +3551,7 @@ res/cardsfolder/f/fields_of_summer.txt -text
 res/cardsfolder/f/fiend_hunter.txt -text
 res/cardsfolder/f/fiend_of_the_shadows.txt -text
 res/cardsfolder/f/fierce_empath.txt svneol=native#text/plain
+res/cardsfolder/f/fiery_bombardment.txt -text
 res/cardsfolder/f/fiery_conclusion.txt svneol=native#text/plain
 res/cardsfolder/f/fiery_fall.txt svneol=native#text/plain
 res/cardsfolder/f/fiery_gambit.txt -text
@@ -7657,6 +7658,7 @@ res/cardsfolder/p/phantom_wings.txt svneol=native#text/plain
 res/cardsfolder/p/phantom_wurm.txt svneol=native#text/plain
 res/cardsfolder/p/phelddagrif.txt svneol=native#text/plain
 res/cardsfolder/p/phobian_phantasm.txt svneol=native#text/plain
+res/cardsfolder/p/phosphorescent_feast.txt -text
 res/cardsfolder/p/phthisis.txt svneol=native#text/plain
 res/cardsfolder/p/phylactery_lich.txt svneol=native#text/plain
 res/cardsfolder/p/phyresis.txt svneol=native#text/plain
