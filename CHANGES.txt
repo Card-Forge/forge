@@ -146,6 +146,24 @@ Cannibalize
 Shuriken
 Rally the Horde
 Deathlace
+Mana Vapors
+Samite Elder
+Struggle for Sanity
+Takeno, Samurai General
+Thran Tome
+Chaoslace
+Lifelace
+Moonlace
+Purelace
+Thoughtlace
+Eight-and-a-Half-Tails
+Pious Kitsune
+Blind Seer
+Ersatz Gnomes
+Vodalian Mystic
+Light from Within
+Fiery Bombardment
+Phosphorescent Feast
 
 
 New Phenomenons:
