@@ -6291,6 +6291,7 @@ res/cardsfolder/m/mana_seism.txt -text
 res/cardsfolder/m/mana_severance.txt svneol=native#text/plain
 res/cardsfolder/m/mana_short.txt svneol=native#text/plain
 res/cardsfolder/m/mana_tithe.txt svneol=native#text/plain
+res/cardsfolder/m/mana_vapors.txt -text
 res/cardsfolder/m/mana_vault.txt svneol=native#text/plain
 res/cardsfolder/m/mana_vortex.txt svneol=native#text/plain
 res/cardsfolder/m/manabarbs.txt svneol=native#text/plain
@@ -8842,6 +8843,7 @@ res/cardsfolder/s/salvaging_station.txt svneol=native#text/plain
 res/cardsfolder/s/samite_alchemist.txt -text
 res/cardsfolder/s/samite_archer.txt svneol=native#text/plain
 res/cardsfolder/s/samite_censer_bearer.txt -text
+res/cardsfolder/s/samite_elder.txt -text
 res/cardsfolder/s/samite_healer.txt svneol=native#text/plain
 res/cardsfolder/s/samite_pilgrim.txt svneol=native#text/plain
 res/cardsfolder/s/samite_sanctuary.txt -text
@@ -10304,6 +10306,7 @@ res/cardsfolder/s/stronghold_rats.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_taskmaster.txt svneol=native#text/plain
 res/cardsfolder/s/stronghold_zeppelin.txt svneol=native#text/plain
 res/cardsfolder/s/structural_collapse.txt -text
+res/cardsfolder/s/struggle_for_sanity.txt -text
 res/cardsfolder/s/student_of_elements_tobita_master_of_winds.txt -text
 res/cardsfolder/s/student_of_warfare.txt svneol=native#text/plain
 res/cardsfolder/s/stuffy_doll.txt svneol=native#text/plain
@@ -10523,6 +10526,7 @@ res/cardsfolder/t/tajuru_archer.txt svneol=native#text/plain
 res/cardsfolder/t/tajuru_preserver.txt -text
 res/cardsfolder/t/takara.txt -text
 res/cardsfolder/t/take_possession.txt svneol=native#text/plain
+res/cardsfolder/t/takeno_samurai_general.txt -text
 res/cardsfolder/t/takenos_cavalry.txt svneol=native#text/plain
 res/cardsfolder/t/takenuma.txt -text
 res/cardsfolder/t/takenuma_bleeder.txt svneol=native#text/plain
@@ -10812,6 +10816,7 @@ res/cardsfolder/t/thran_foundry.txt svneol=native#text/plain
 res/cardsfolder/t/thran_golem.txt svneol=native#text/plain
 res/cardsfolder/t/thran_lens.txt svneol=native#text/plain
 res/cardsfolder/t/thran_quarry.txt svneol=native#text/plain
+res/cardsfolder/t/thran_tome.txt -text
 res/cardsfolder/t/thran_war_machine.txt svneol=native#text/plain
 res/cardsfolder/t/thran_weaponry.txt -text svneol=unset#text/plain
 res/cardsfolder/t/thrashing_mudspawn.txt svneol=native#text/plain

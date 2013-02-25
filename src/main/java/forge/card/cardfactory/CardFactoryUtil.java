@@ -2478,6 +2478,21 @@ public class CardFactoryUtil {
             }
             return CardFactoryUtil.doXMath(cCount, m, c);
         }
+        
+        // Count$BushidoPoint
+        if (sq[0].contains("BushidoPoint")) {
+            final ArrayList<String> keywords = c.getKeyword();
+            int magnitude = 0;
+            for (final String kw : keywords) {
+                if (kw.contains("Bushido")) {
+                    final String[] parse = kw.split(" ");
+                    final String num = parse[1];
+                    magnitude += Integer.parseInt(num);
+                }
+            }
+            return CardFactoryUtil.doXMath(magnitude, m, c);
+        }
+
         // Count$TimesKicked
         if (sq[0].contains("TimesKicked")) {
             return CardFactoryUtil.doXMath(c.getMultiKickerMagnitude(), m, c);

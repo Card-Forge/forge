@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
@@ -59,6 +60,12 @@ public class ProtectAllEffect extends SpellAbilityEffect {
             if (sa.getParam("Gains").equals("ChosenColor")) {
                 for (final String color : host.getChosenColor()) {
                     gains.add(color.toLowerCase());
+                }
+            } else if (sa.getParam("Gains").equals("TargetedCardColor")) {
+                for (final Card c : sa.getSATargetingCard().getTarget().getTargetCards()) {
+                    for(final String color : CardUtil.getColors(c)) {
+                        gains.add(color.toLowerCase());
+                    }
                 }
             } else {
                 gains.addAll(choices);
