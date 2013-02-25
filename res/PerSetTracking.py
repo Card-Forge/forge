@@ -183,6 +183,7 @@ if __name__ == '__main__':
 			output.write("Missing (" + str(len(currentMissing)) + "):\n")
 			for everyMissing in currentMissing :
 				output.write(everyMissing + '\n')
+				output.write(mtgOracleCards[everyMissing])
 			output.write("\n")
 			output.write("Total: " + str(total) + "\n")
 			output.write("Percentage implemented: " + str(round(percentage,2)) + "%\n")
