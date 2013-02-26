@@ -4566,6 +4566,7 @@ res/cardsfolder/g/gruul_war_plow.txt svneol=native#text/plain
 res/cardsfolder/g/gryff_vanguard.txt -text
 res/cardsfolder/g/guan_yu_sainted_warrior.txt svneol=native#text/plain
 res/cardsfolder/g/guan_yus_1000_li_march.txt svneol=native#text/plain
+res/cardsfolder/g/guard_dogs.txt -text
 res/cardsfolder/g/guard_duty.txt svneol=native#text/plain
 res/cardsfolder/g/guard_gomazoa.txt svneol=native#text/plain
 res/cardsfolder/g/guardian_angel.txt -text
@@ -5357,6 +5358,7 @@ res/cardsfolder/j/jade_leech.txt svneol=native#text/plain
 res/cardsfolder/j/jade_mage.txt svneol=native#text/plain
 res/cardsfolder/j/jade_monolith.txt -text
 res/cardsfolder/j/jade_statue.txt svneol=native#text/plain
+res/cardsfolder/j/jaded_response.txt -text
 res/cardsfolder/j/jagged_lightning.txt svneol=native#text/plain
 res/cardsfolder/j/jagged_poppet.txt svneol=native#text/plain
 res/cardsfolder/j/jagged_scar_archers.txt svneol=native#text/plain

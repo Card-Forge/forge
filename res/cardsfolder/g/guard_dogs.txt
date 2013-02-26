@@ -1,0 +1,12 @@
+Name:Guard Dogs
+ManaCost:3 W
+Types:Creature Hound
+PT:2/2
+A:AB$ ChooseCard | Cost$ 2 W T | Choices$ Permanent.YouCtrl | Amount$ 1 | ChoiceTitle$ Choose a permanent you control | RememberChosen$ True | SubAbility$ DBPrevent | SpellDescription$ Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent.
+SVar:DBPrevent:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature whose combat damage will be prevented | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | ConditionDefined$ Targeted | ConditionPresent$ Card.SharesColorWith Card.IsRemembered | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guard_dogs.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/5.jpg
+Oracle:{2}{W}, {T}: Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent.
