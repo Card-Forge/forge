@@ -32,15 +32,6 @@ import forge.util.storage.IStorage;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel {
-    private enum ESubmenuConstructedTypes {
-        COLORS,
-        THEMES,
-        CUSTOM,
-        QUESTEVENTS
-    }
-
-    private final QuestController quest = Singletons.getModel().getQuest();
-
     private final JRadioButton radColors = new FRadioButton("Fully random color deck");
     private final JRadioButton radThemes = new FRadioButton("Semi-random theme deck");
     private final JRadioButton radCustom = new FRadioButton("Custom user deck");
@@ -60,10 +51,9 @@ public class FDeckChooser extends JPanel {
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
         public void mouseClicked(final MouseEvent e) {
-            if (e.getClickCount() == 2) {
+            if (MouseEvent.BUTTON1 == e.getButton() && e.getClickCount() == 2) {
                 final JList src = ((JList) e.getSource());
-                    if (getRadColors().isSelected()) { return; }
-                    if (getRadThemes().isSelected()) { return; }
+                if (getRadColors().isSelected() || getRadThemes().isSelected()) { return; }
                 DeckgenUtil.showDecklist(src);
             }
         }
@@ -123,7 +113,7 @@ public class FDeckChooser extends JPanel {
 
         lst.setListData(new String[] {"Random 1", "Random 2", "Random 3",
                 "Random 4", "Black", "Blue", "Green", "Red", "White"});
-        lst.setName(ESubmenuConstructedTypes.COLORS.toString());
+        lst.setName(DeckgenUtil.DeckTypes.COLORS.toString());
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
@@ -139,7 +129,6 @@ public class FDeckChooser extends JPanel {
         final JList lst = getLstDecks();
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        lst.setName(ESubmenuConstructedTypes.COLORS.toString());
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
@@ -147,7 +136,7 @@ public class FDeckChooser extends JPanel {
         for (final String s : GenerateThemeDeck.getThemeNames()) { themeNames.add(s); }
 
         lst.setListData(themeNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
-        lst.setName(ESubmenuConstructedTypes.THEMES.toString());
+        lst.setName(DeckgenUtil.DeckTypes.THEMES.toString());
         lst.removeMouseListener(madDecklist);
 
         getBtnRandom().setCommand(new Command() {
@@ -167,7 +156,7 @@ public class FDeckChooser extends JPanel {
         for (final Deck d : allDecks) { customNames.add(d.getName()); }
 
         lst.setListData(customNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
-        lst.setName(ESubmenuConstructedTypes.CUSTOM.toString());
+        lst.setName(DeckgenUtil.DeckTypes.CUSTOM.toString());
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
@@ -185,16 +174,17 @@ public class FDeckChooser extends JPanel {
 
         final List<String> eventNames = new ArrayList<String>();
 
-        for (final QuestEvent e : quest.getDuelsManager().getAllDuels()) {
+        QuestController quest = Singletons.getModel().getQuest();
+        for (QuestEvent e : quest.getDuelsManager().getAllDuels()) {
             eventNames.add(e.getEventDeck().getName());
         }
 
-        for (final QuestEvent e : quest.getChallengesManager().getAllChallenges()) {
+        for (QuestEvent e : quest.getChallengesManager().getAllChallenges()) {
             eventNames.add(e.getEventDeck().getName());
         }
 
         lst.setListData(eventNames.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
-        lst.setName(ESubmenuConstructedTypes.QUESTEVENTS.toString());
+        lst.setName(DeckgenUtil.DeckTypes.QUESTEVENTS.toString());
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
@@ -210,29 +200,20 @@ public class FDeckChooser extends JPanel {
         JList lst0 = getLstDecks();
         final String[] selection = Arrays.copyOf(lst0.getSelectedValues(), lst0.getSelectedValues().length, String[].class);
 
-        final Deck deck;
-
         if (selection.length == 0) { return null; }
 
-        if (lst0.getName().equals(ESubmenuConstructedTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
-            deck = DeckgenUtil.buildColorDeck(selection, getPlayerType());
-        }
-        else if (lst0.getName().equals(ESubmenuConstructedTypes.THEMES.toString())) {
-            deck = DeckgenUtil.buildThemeDeck(selection);
-        }
-        else if (lst0.getName().equals(ESubmenuConstructedTypes.QUESTEVENTS.toString())) {
-            deck = DeckgenUtil.buildQuestDeck(selection);
-        }
-        // Custom deck
-        else if (lst0.getName().equals(ESubmenuConstructedTypes.CUSTOM.toString())) {
-            deck = DeckgenUtil.getConstructedDeck(selection);
-        }
-        // Failure, for some reason
-        else {
-            deck = null;
+        if (lst0.getName().equals(DeckgenUtil.DeckTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
+            return DeckgenUtil.buildColorDeck(selection, getPlayerType());
+        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.THEMES.toString())) {
+            return DeckgenUtil.buildThemeDeck(selection);
+        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.QUESTEVENTS.toString())) {
+            return DeckgenUtil.buildQuestDeck(selection);
+        } else if (lst0.getName().equals(DeckgenUtil.DeckTypes.CUSTOM.toString())) {
+            return DeckgenUtil.getConstructedDeck(selection);
         }
 
-        return deck;
+        // Failure, for some reason
+        return null;
     }
 
     private PlayerType getPlayerType() {

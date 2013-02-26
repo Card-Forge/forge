@@ -54,11 +54,10 @@ public class DeckgenUtil {
         COLOR_VALS.put("White", "white");
     }
 
-    /** */
-    public enum DeckTypes { /** */
-        COLORS, /** */
-        THEMES, /** */
-        CUSTOM, /** */
+    public enum DeckTypes {
+        COLORS,
+        THEMES,
+        CUSTOM,
         QUESTEVENTS
     }
 
