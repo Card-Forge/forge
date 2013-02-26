@@ -197,6 +197,7 @@ public final class EditorTableView<T extends InventoryItem> {
 
         // use different selection highlight colors for focused vs. unfocused tables
         table.setSelectionBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
+        table.setSelectionForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         table.addFocusListener(new FocusListener() {
             @Override
             public void focusLost(FocusEvent e) {
