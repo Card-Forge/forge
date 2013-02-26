@@ -205,15 +205,15 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, span 2, ax right");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, ax right");
 
         for (FDeckChooser fdc : deckChoosers) {
             fdc.populate();
         }
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(tabPane, "gap 0 0 50px 50px, growx, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(tabPane, "gap 20px 20px 20px 20px, pushx, pushy, growx, growy");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 1, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
