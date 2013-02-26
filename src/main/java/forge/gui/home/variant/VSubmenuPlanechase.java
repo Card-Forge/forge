@@ -117,7 +117,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
         }
         settingsPanel.add(radioPane, "span 1 2");
         settingsPanel.add(cbUseDefaultPlanes);
-        settingsPanel.add(lblEditor, "w pref+24, h pref+8");
+        settingsPanel.add(lblEditor, "w pref + 24, h pref + 8, ax center");
         tabPane.add("Settings", settingsPanel);
 
         //Player panels (Human + 7 AIs)
@@ -135,7 +135,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
             tempPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), "flowy");
 
             tempPlanarDeckList = new FList();
-            
+
             tempPlanarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
             JScrollPane scrPlanes = new FScrollPane(tempPlanarDeckList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -292,6 +292,9 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
         return deckChoosers;
     }
 
+    /**
+     * @return the currentNumTabsShown
+     */
     public int getNumPlayers() {
         return currentNumTabsShown;
     }

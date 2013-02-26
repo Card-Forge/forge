@@ -108,7 +108,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         radioPaneContainer.add(radioPane);
         settingsPanel.add(radioPaneContainer, "span 1 2");
         settingsPanel.add(cbUseDefaultSchemes);
-        settingsPanel.add(lblEditor, "w pref+24, h pref+8");
+        settingsPanel.add(lblEditor, "w pref + 24, h pref + 8, ax center");
         tabPane.add("Settings", settingsPanel);
 
         for (Deck schemeDeck : Singletons.getModel().getDecks().getScheme()) {
@@ -152,7 +152,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
-        
+
         // ensure we don't fire the selected event before the tabPane is populated
         fieldRadios.get(fieldRadios.size() - 1).setSelected(true);
     }
@@ -291,6 +291,9 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         return deckChoosers;
     }
 
+    /**
+     * @return the currentNumTabsShown
+     */
     public int getNumPlayers() {
         return currentNumTabsShown;
     }
