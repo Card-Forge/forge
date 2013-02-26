@@ -19,9 +19,6 @@ package forge.deck;
 
 import java.io.Serializable;
 
-import forge.item.CardPrinted;
-import forge.item.ItemPoolView;
-
 /**
  * TODO: Write javadoc for this type.
  * 
@@ -76,13 +73,6 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase> {
     public String getName() {
         return this.name;
     }
-
-    /**
-     * Gets the card pool.
-     *
-     * @return the card pool
-     */
-    public abstract ItemPoolView<CardPrinted> getCardPool();
 
     /**
      * Sets the comment.

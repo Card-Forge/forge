@@ -216,7 +216,6 @@ public class CustomLimited extends DeckBase {
      * 
      * @see forge.item.CardCollectionBase#getCardPool()
      */
-    @Override
     public ItemPoolView<CardPrinted> getCardPool() {
         return this.cardPool;
     }

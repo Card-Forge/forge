@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +34,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
@@ -65,7 +66,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     private final Map<DeckSection, CardPool> parts = new EnumMap<DeckSection, CardPool>(DeckSection.class);
     
-    private final List<String> tags = new ArrayList<String>();
+    private final Set<String> tags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -121,16 +122,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         p = new CardPool();
         this.parts.put(deckSection, p);
         return p;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.CardCollectionBase#getCardPool()
-     */
-    @Override
-    public ItemPoolView<CardPrinted> getCardPool() {
-        return this.parts.get(DeckSection.Main);
     }
 
     /* (non-Javadoc)
@@ -292,7 +283,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (!this.getTags().isEmpty()) {
             out.add(String.format("%s=%s", DeckFileHeader.TAGS, StringUtils.join(getTags(), DeckFileHeader.TAGS_SEPARATOR)));
         }
-        
 
         for(Entry<DeckSection, CardPool> s : parts.entrySet()) {
             out.add(String.format("[%s]", s.getKey().toString()));
@@ -309,19 +299,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
     };
     
-    public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
-        @Override
-        public boolean apply(Deck d) {
-            for(Entry<DeckSection, CardPool> cp: d) {
-                for(Entry<CardPrinted, Integer> e : cp.getValue()) {
-                    if ( e.getKey().getRules().getAiHints().getRemAIDecks() )
-                        return false;
-                }
-            }
-            return true;
-        }
-    };
-
     /* (non-Javadoc)
      * @see java.lang.Iterable#iterator()
      */
@@ -331,9 +308,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     /**
-     * @return the associated tags, a writable list
+     * @return the associated tags, a writable set
      */
-    public List<String> getTags() {
+    public Set<String> getTags() {
         return tags;
     }
 }

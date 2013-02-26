@@ -20,14 +20,9 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-// import java.lang.Double;
 import java.util.List;
 
 import com.google.common.base.Function;
-
-
-import forge.item.CardPrinted;
-import forge.item.ItemPoolView;
 
 /**
  * TODO: Write javadoc for this type.
@@ -110,14 +105,6 @@ public class DeckGroup extends DeckBase {
             return;
         }
         this.aiDecks.add(aiDeck);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.deck.DeckBase#getCardPool()
-     */
-    @Override
-    public ItemPoolView<CardPrinted> getCardPool() {
-        return this.getHumanDeck().getMain();
     }
 
     /**

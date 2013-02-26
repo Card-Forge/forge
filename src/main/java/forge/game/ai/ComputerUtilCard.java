@@ -22,8 +22,12 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.card.CardType;
 import forge.card.spellability.SpellAbility;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.item.CardPrinted;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -913,5 +917,18 @@ public class ComputerUtilCard {
         }
         return worstLand;
     } // end getWorstLand
+
+    public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
+        @Override
+        public boolean apply(Deck d) {
+            for(Entry<DeckSection, CardPool> cp: d) {
+                for(Entry<CardPrinted, Integer> e : cp.getValue()) {
+                    if ( e.getKey().getRules().getAiHints().getRemAIDecks() )
+                        return false;
+                }
+            }
+            return true;
+        }
+    };
 
 }
