@@ -64,6 +64,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private static final long serialVersionUID = -7478025567887481994L;
 
     private final Map<DeckSection, CardPool> parts = new EnumMap<DeckSection, CardPool>(DeckSection.class);
+    
+    private final List<String> tags = new ArrayList<String>();
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -194,6 +196,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         final Deck d = new Deck(dh.getName());
         d.setComment(dh.getComment());
+        d.tags.addAll(dh.getTags());
 
         for(Entry<String, List<String>> s : sections.entrySet()) {
             DeckSection sec = DeckSection.smartValueOf(s.getKey());
@@ -286,6 +289,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (this.getComment() != null) {
             out.add(String.format("%s=%s", DeckFileHeader.COMMENT, this.getComment().replaceAll("\n", "")));
         }
+        if (!this.getTags().isEmpty()) {
+            out.add(String.format("%s=%s", DeckFileHeader.TAGS, StringUtils.join(getTags(), DeckFileHeader.TAGS_SEPARATOR)));
+        }
+        
 
         for(Entry<DeckSection, CardPool> s : parts.entrySet()) {
             out.add(String.format("[%s]", s.getKey().toString()));
@@ -321,5 +328,12 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     @Override
     public Iterator<Entry<DeckSection, CardPool>> iterator() {
         return parts.entrySet().iterator();
+    }
+
+    /**
+     * @return the associated tags, a writable list
+     */
+    public List<String> getTags() {
+        return tags;
     }
 }

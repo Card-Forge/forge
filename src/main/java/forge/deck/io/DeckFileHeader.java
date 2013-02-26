@@ -17,6 +17,11 @@
  */
 package forge.deck.io;
 
+import java.util.Set;
+import java.util.TreeSet;
+
+import org.apache.commons.lang3.StringUtils;
+
 import forge.deck.DeckFormat;
 import forge.game.player.PlayerType;
 import forge.util.FileSection;
@@ -32,7 +37,10 @@ public class DeckFileHeader {
 
     /** The Constant DECK_TYPE. */
     public static final String DECK_TYPE = "Deck Type";
-
+    public static final String TAGS = "Tags";
+    
+    public static final String TAGS_SEPARATOR = ",";
+    
     /** The Constant COMMENT. */
     public static final String COMMENT = "Comment";
     private static final String PLAYER = "Player";
@@ -45,6 +53,8 @@ public class DeckFileHeader {
 
     private final String name;
     private final String comment;
+
+    private final Set<String> tags;
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -59,6 +69,16 @@ public class DeckFileHeader {
         this.customPool = kvPairs.getBoolean(DeckFileHeader.CSTM_POOL);
         boolean isForAi = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE));
         this.playerType = isForAi ? PlayerType.COMPUTER : PlayerType.HUMAN;
+        this.tags = new TreeSet<String>();
+        
+        String rawTags = kvPairs.get(DeckFileHeader.TAGS);
+        if( StringUtils.isNotBlank(rawTags) ) {
+            for( String t: rawTags.split(TAGS_SEPARATOR))
+                if ( StringUtils.isNotBlank(t))
+                    tags.add(t.trim());
+        }
+        
+            
     }
 
     /**
@@ -104,6 +124,10 @@ public class DeckFileHeader {
      */
     public final DeckFormat getDeckType() {
         return this.deckType;
+    }
+
+    public final Set<String> getTags() {
+        return tags;
     }
 
 }
