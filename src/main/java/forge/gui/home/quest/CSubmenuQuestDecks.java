@@ -2,6 +2,8 @@ package forge.gui.home.quest;
 
 import java.util.ArrayList;
 
+import javax.swing.SwingUtilities;
+
 import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;
@@ -93,6 +95,10 @@ public enum CSubmenuQuestDecks implements ICDoc {
         else {
             Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, QPref.CURRENT_DECK.getDefault());
         }
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { view.getBtnNewDeck().requestFocusInWindow(); }
+        });
     }
 
     /** @return forge.deck.Deck */

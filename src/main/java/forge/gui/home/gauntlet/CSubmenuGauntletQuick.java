@@ -83,7 +83,9 @@ public enum CSubmenuGauntletQuick implements ICDoc {
      */
     @Override
     public void update() {
-        // Nothing to see here...
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { view.getBtnStart().requestFocusInWindow(); }
+        });
     }
 
     /* (non-Javadoc)

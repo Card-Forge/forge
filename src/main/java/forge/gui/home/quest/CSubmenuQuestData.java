@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.deck.Deck;
@@ -151,6 +152,10 @@ public enum CSubmenuQuestData implements ICDoc {
 
         view.getLstQuests().setSelectCommand(cmdQuestSelect);
         view.getLstQuests().setDeleteCommand(cmdQuestDelete);
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { view.getBtnEmbark().requestFocusInWindow(); }
+        });
     }
 
     /**

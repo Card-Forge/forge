@@ -178,6 +178,10 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         pnlButtons.add(btnDown, "h 40px!, w 100%!, ay baseline");
     }
 
+    public void focusName() {
+        txfFilename.requestFocusInWindow();
+    }
+    
     /* (non-Javadoc)
      * @see forge.gui.home.IVSubmenu#getGroupEnum()
      */

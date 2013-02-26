@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -21,6 +22,7 @@ import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
+import forge.gui.home.VHomeUI;
 import forge.model.FModel;
 
 /** 
@@ -45,7 +47,16 @@ public enum CSubmenuGauntletLoad implements ICDoc {
      */
     @Override
     public void update() {
-        // Nothing to see here...
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() {
+                JButton btnStart = view.getBtnStart();
+                if (btnStart.isEnabled()) {
+                    view.getBtnStart().requestFocusInWindow();
+                } else {
+                    VHomeUI.SINGLETON_INSTANCE.getLblEditor().requestFocusInWindow();
+                }
+            }
+        });
     }
 
     /* (non-Javadoc)

@@ -1,5 +1,7 @@
 package forge.gui.home.settings;
 
+import javax.swing.SwingUtilities;
+
 import forge.Command;
 import forge.gui.framework.ICDoc;
 
@@ -25,7 +27,9 @@ public enum CSubmenuAvatars implements ICDoc {
      */
     @Override
     public void update() {
-
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { VSubmenuAvatars.SINGLETON_INSTANCE.focusHuman(); }
+        });
     }
 
     /* (non-Javadoc)

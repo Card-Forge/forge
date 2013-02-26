@@ -62,6 +62,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     private final FLabel lblErrShop = new FLabel.Builder().text("Shop Error").fontStyle(Font.BOLD).build();
 
     private final QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
+    private PrefInput focusTarget;
 
     /** */
     public enum QuestPreferencesErrType { /** */
@@ -194,6 +195,10 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     public JLabel getLblErrBooster() {
         return lblErrBooster;
     }
+    
+    public void focusFirstTextbox() {
+        focusTarget.requestFocusInWindow();
+    }
 
     private void populateRewards() {
         pnlRewards.setOpaque(false);
@@ -205,7 +210,8 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         final String constraints2 = "w 150px!, h 26px!";
 
         pnlRewards.add(new FLabel.Builder().text("Base winnings").build(), constraints2);
-        pnlRewards.add(new PrefInput(QPref.REWARDS_BASE, QuestPreferencesErrType.REWARDS), constraints1);
+        focusTarget = new PrefInput(QPref.REWARDS_BASE, QuestPreferencesErrType.REWARDS);
+        pnlRewards.add(focusTarget, constraints1);
 
         pnlRewards.add(new FLabel.Builder().text("No losses").build(), constraints2);
         pnlRewards.add(new PrefInput(QPref.REWARDS_UNDEFEATED, QuestPreferencesErrType.REWARDS), constraints1);

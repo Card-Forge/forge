@@ -13,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -109,7 +110,9 @@ public enum CSubmenuGauntletBuild implements ICDoc {
      */
     @Override
     public void update() {
-        // Nothing to see here...
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { view.focusName(); }
+        });
     }
 
     /* (non-Javadoc)

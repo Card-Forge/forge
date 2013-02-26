@@ -53,9 +53,12 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
     private VSubmenuAvatars() {
         populateAvatars();
         scrContent.setBorder(null);
-
     }
 
+    public void focusHuman() {
+        lblAvatarHuman.requestFocusInWindow();
+    }
+    
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()
      */

@@ -54,7 +54,7 @@ public enum CSubmenuArchenemy implements ICDoc {
     @Override
     public void update() {
         // reinit deck list and restore last selections (if any)
-        FList deckList = VSubmenuArchenemy.SINGLETON_INSTANCE.getArchenemySchemes();
+        FList deckList = view.getArchenemySchemes();
         Vector<Object> listData = new Vector<Object>();
         listData.add("Random");
         listData.add("Generate");
@@ -71,6 +71,10 @@ public enum CSubmenuArchenemy implements ICDoc {
         if (-1 == deckList.getSelectedIndex()) {
             deckList.setSelectedIndex(0);
         }
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { view.getBtnStart().requestFocusInWindow(); }
+        });
     }
     
     /* (non-Javadoc)

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -21,8 +22,8 @@ import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
-import forge.game.limited.ReadDraftRankings;
 import forge.game.GameType;
+import forge.game.limited.ReadDraftRankings;
 import forge.game.limited.SealedDeck;
 import forge.game.limited.SealedDeckFormat;
 import forge.gui.GuiChoose;
@@ -68,17 +69,17 @@ public enum CSubmenuSealed implements ICDoc {
                     public void mousePressed(final MouseEvent e) { setupSealed(); } });
 
         VSubmenuSealed.SINGLETON_INSTANCE.getBtnStart().addMouseListener(
-                new MouseAdapter() {
-                    @Override
-                    public void mouseReleased(final MouseEvent e) {
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                startGame(GameType.Sealed);
-                            }
-                        });
-                    }
-                });
+            new MouseAdapter() {
+                @Override
+                public void mouseReleased(final MouseEvent e) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            startGame(GameType.Sealed);
+                        }
+                    });
+                }
+            });
 
         VSubmenuSealed.SINGLETON_INSTANCE.getBtnDirections().addMouseListener(new MouseAdapter() {
             @Override
@@ -103,7 +104,19 @@ public enum CSubmenuSealed implements ICDoc {
             humanDecks.add(d.getHumanDeck());
         }
 
-        VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().setDecks(humanDecks);
+        final VSubmenuSealed view = VSubmenuSealed.SINGLETON_INSTANCE;
+        view.getLstDecks().setDecks(humanDecks);
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() {
+                JButton btnStart = view.getBtnStart();
+                if (btnStart.isEnabled()) {
+                    view.getBtnStart().requestFocusInWindow();
+                } else {
+                    view.getBtnBuildDeck().requestFocusInWindow();
+                }
+            }
+        });
     }
 
     private void startGame(final GameType gameType) {

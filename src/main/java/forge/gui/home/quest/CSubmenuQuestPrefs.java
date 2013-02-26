@@ -1,5 +1,7 @@
 package forge.gui.home.quest;
 
+import javax.swing.SwingUtilities;
+
 import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;
@@ -29,7 +31,9 @@ public enum CSubmenuQuestPrefs implements ICDoc {
      */
     @Override
     public void update() {
-
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { VSubmenuQuestPrefs.SINGLETON_INSTANCE.focusFirstTextbox(); }
+        });
     }
 
     /**

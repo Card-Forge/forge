@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -71,11 +72,24 @@ public enum CSubmenuDraft implements ICDoc {
             human.add(d.getHumanDeck());
         }
 
-        VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().setDecks(human);
+        final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
+        final JButton btnStart = view.getBtnStart();
+        
+        view.getLstDecks().setDecks(human);
 
         if (human.size() > 1) {
-            VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+            btnStart.setEnabled(true);
         }
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() {
+                if (btnStart.isEnabled()) {
+                    view.getBtnStart().requestFocusInWindow();
+                } else {
+                    view.getBtnBuildDeck().requestFocusInWindow();
+                }
+            }
+        });
     }
 
     private void startGame(final GameType gameType) {

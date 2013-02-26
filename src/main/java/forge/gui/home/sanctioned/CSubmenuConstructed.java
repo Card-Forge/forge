@@ -37,7 +37,9 @@ public enum CSubmenuConstructed implements ICDoc {
      */
     @Override
     public void update() {
-        // Nothing to see here...
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { view.getBtnStart().requestFocusInWindow(); }
+        });
     }
 
     /* (non-Javadoc)
@@ -91,8 +93,6 @@ public enum CSubmenuConstructed implements ICDoc {
         view.getCbRemoveSmall().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_NOSMALL));
     }
 
-
-
     /** @param gameType 
      * @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame(final GameType gameType) {
@@ -137,7 +137,6 @@ public enum CSubmenuConstructed implements ICDoc {
         };
         worker.execute();
     }
-
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()

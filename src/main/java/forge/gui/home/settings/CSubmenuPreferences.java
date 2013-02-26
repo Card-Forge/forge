@@ -5,6 +5,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.SwingUtilities;
+
 import org.apache.commons.lang3.text.WordUtils;
 
 import forge.Command;
@@ -201,6 +203,10 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbTextMana().setSelected(prefs.getPrefBoolean(FPref.UI_CARD_OVERLAY));
         view.getCbEnableSounds().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
         view.reloadShortcuts();
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { view.getCbRemoveSmall().requestFocusInWindow(); }
+        });
     }
 
     private void updateSkinNames() {

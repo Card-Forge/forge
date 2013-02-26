@@ -54,7 +54,7 @@ public enum CSubmenuPlanechase implements ICDoc {
     @Override
     public void update() {
         // reinit deck lists and restore last selections (if any)
-        for (FList deckList : VSubmenuPlanechase.SINGLETON_INSTANCE.getPlanarDeckLists()) {
+        for (FList deckList : view.getPlanarDeckLists()) {
             Vector<Object> listData = new Vector<Object>();
             listData.add("Random");
             listData.add("Generate");
@@ -72,6 +72,10 @@ public enum CSubmenuPlanechase implements ICDoc {
                 deckList.setSelectedIndex(0);
             }
         }
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override public void run() { view.getBtnStart().requestFocusInWindow(); }
+        });
     }
 
     /* (non-Javadoc)
