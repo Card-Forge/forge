@@ -93,7 +93,7 @@ public enum CSubmenuDraft implements ICDoc {
     }
 
     private void startGame(final GameType gameType) {
-        final boolean gauntlet = !VSubmenuDraft.SINGLETON_INSTANCE.getRadSingle().isSelected();
+        final boolean gauntlet = !VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected();
         final Deck humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
         final int aiIndex = (int) Math.floor(Math.random() * 8);
 

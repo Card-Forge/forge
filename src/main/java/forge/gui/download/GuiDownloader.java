@@ -37,7 +37,6 @@ import java.util.Random;
 import java.util.regex.Pattern;
 
 import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
 import javax.swing.DefaultBoundedRangeModel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -65,6 +64,7 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.JXButtonPanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
@@ -123,10 +123,11 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
     /** Constructor. */
     protected GuiDownloader() {
-        final ButtonGroup grpRad = new ButtonGroup();
-        grpRad.add(radProxyNone);
-        grpRad.add(radProxyHTTP);
-        grpRad.add(radProxySocks);
+        String radConstraints = "w 100%!, h 30px!, gap 2% 0 0 10px";
+        JXButtonPanel grpPanel = new JXButtonPanel();
+        grpPanel.add(radProxyNone, radConstraints);
+        grpPanel.add(radProxyHTTP, radConstraints);
+        grpPanel.add(radProxySocks, radConstraints);
 
         radProxyNone.addChangeListener(new ProxyHandler(0));
         radProxyHTTP.addChangeListener(new ProxyHandler(1));
@@ -142,9 +143,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         pnlDialog.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
         // Layout
-        pnlDialog.add(radProxyNone, "w 50%!, h 30px!, gap 2% 0 0 10px");
-        pnlDialog.add(radProxyHTTP, "w 50%!, h 30px!, gap 2% 0 0 10px");
-        pnlDialog.add(radProxySocks, "w 50%!, h 30px!, gap 2% 0 0 10px");
+        pnlDialog.add(grpPanel, "w 50%!");
         pnlDialog.add(txfAddr, "w 95%!, h 30px!, gap 2% 0 0 10px");
         pnlDialog.add(txfPort, "w 95%!, h 30px!, gap 2% 0 0 10px");
         pnlDialog.add(barProgress, "w 95%!, h 40px!, gap 2% 0 20px 0");

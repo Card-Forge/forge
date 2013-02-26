@@ -1,26 +1,24 @@
 package forge.gui.toolbox;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-
-import org.apache.commons.lang3.ArrayUtils;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import forge.Command;
 import forge.Singletons;
@@ -32,17 +30,12 @@ import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.util.storage.IStorage;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel {
-
-    private enum ESubmenuConstructedTypes { /** */
-        COLORS, /** */
-        THEMES, /** */
-        CUSTOM, /** */
+    private enum ESubmenuConstructedTypes {
+        COLORS,
+        THEMES,
+        CUSTOM,
         QUESTEVENTS
     }
 
@@ -56,15 +49,13 @@ public class FDeckChooser extends JPanel {
     private final JList  lstDecks  = new FList();
     private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(16).build();
 
-    private final JScrollPane scrDecks = new FScrollPane(lstDecks, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    private final JScrollPane scrDecks =
+            new FScrollPane(lstDecks, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final FLabel lblDecklist = new FLabel.Builder()
-    .text("Double click a non-random deck for its decklist.")
-    .fontSize(12).build();
+    private final FLabel lblDecklist = new FLabel.Builder().text("Double click a non-random deck for its decklist.").fontSize(12).build();
 
     private final JPanel pnlRadios = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final PlayerType playerType;
-
 
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
@@ -79,86 +70,51 @@ public class FDeckChooser extends JPanel {
     };
 
     public FDeckChooser(String titleText, PlayerType pt) {
-
+        setOpaque(false);
         playerType = pt;
 
-        // Radio button panels: Human and AI
+        // Radio button group
         final String strRadioConstraints = "w 100%!, h 30px!";
-
-        this.setOpaque(false);
-
-        // Radio button group: Human
-        final ButtonGroup grpRadios = new ButtonGroup();
-        grpRadios.add(radCustom);
-        grpRadios.add(radQuests);
-        grpRadios.add(radColors);
-        grpRadios.add(radThemes);
+        JXButtonPanel grpRadios = new JXButtonPanel();
+        grpRadios.add(radCustom, strRadioConstraints);
+        grpRadios.add(radQuests, strRadioConstraints);
+        grpRadios.add(radColors, strRadioConstraints);
+        grpRadios.add(radThemes, strRadioConstraints);
 
         pnlRadios.setOpaque(false);
-        pnlRadios.add(new FLabel.Builder().text(titleText)
-                .fontStyle(Font.BOLD).fontSize(16)
-                .fontAlign(SwingConstants.LEFT).build(), strRadioConstraints);
+        pnlRadios.add(new FLabel.Builder().text(titleText).fontStyle(Font.BOLD).fontSize(16).build());
         pnlRadios.add(lblDecklist, "h 20px!, gap 0 0 0 10px");
-        pnlRadios.add(radCustom, strRadioConstraints);
-        pnlRadios.add(radQuests, strRadioConstraints);
-        pnlRadios.add(radColors, strRadioConstraints);
-        pnlRadios.add(radThemes, strRadioConstraints);
+        pnlRadios.add(grpRadios, "w 100%");
         pnlRadios.add(btnRandom, "w 200px!, h 30px!, gap 0 0 10px 0, ax center");
-
     }
 
+    private void _listen(final JRadioButton btn, final Runnable onSelect) {
+        btn.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent arg0) {
+                if (btn.isSelected()) { onSelect.run(); }
+            }
+        });
+    }
+    
     public void initialize() {
         // Radio button event handling
-        getRadColors().addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                updateColors(); } });
-
-        getRadThemes().addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                updateThemes(); } });
-
-        getRadCustom().addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                updateCustom(); } });
-
-        getRadQuests().addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                updateQuestEvents(); } });
+        _listen(getRadColors(), new Runnable() { @Override public void run() { updateColors();      } });
+        _listen(getRadThemes(), new Runnable() { @Override public void run() { updateThemes();      } });
+        _listen(getRadCustom(), new Runnable() { @Override public void run() { updateCustom();      } });
+        _listen(getRadQuests(), new Runnable() { @Override public void run() { updateQuestEvents(); } });
 
         // First run: colors
         getRadColors().setSelected(true);
-        updateColors();
     }
 
 
-    /** @return {@link javax.swing.JList} */
-    public JList getLstDecks() {
-        return this.lstDecks;
-    }
-    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    public FLabel getBtnRandom() {
-        return this.btnRandom;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadColors() {
-        return this.radColors;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadThemes() {
-        return this.radThemes;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadCustom() {
-        return this.radCustom;
-    }
-
-    /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadQuests() {
-        return this.radQuests;
-    }
+    public JList        getLstDecks()  { return lstDecks;  }
+    public FLabel       getBtnRandom() { return btnRandom; }
+    public JRadioButton getRadColors() { return radColors; }
+    public JRadioButton getRadThemes() { return radThemes; }
+    public JRadioButton getRadCustom() { return radCustom; }
+    public JRadioButton getRadQuests() { return radQuests; }
 
     /** Handles all control for "colors" radio button click. */
     private void updateColors() {
@@ -171,9 +127,8 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final FLabel btn = getBtnRandom();
-
-        btn.setCommand(new Command() { @Override public void execute() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors()); } });
+        getBtnRandom().setCommand(new Command() {
+            @Override public void execute() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors()); } });
 
         // Init basic two color deck
         lst.setSelectedIndices(new int[]{0, 1});
@@ -195,8 +150,8 @@ public class FDeckChooser extends JPanel {
         lst.setName(ESubmenuConstructedTypes.THEMES.toString());
         lst.removeMouseListener(madDecklist);
 
-        final FLabel btn = getBtnRandom();
-        btn.setCommand(new Command() { @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
+        getBtnRandom().setCommand(new Command() {
+            @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
         lst.setSelectedIndex(0);
@@ -216,9 +171,8 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final FLabel btn = getBtnRandom();
-
-        btn.setCommand(new Command() { @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
+        getBtnRandom().setCommand(new Command() {
+            @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
         lst.setSelectedIndex(0);
@@ -244,8 +198,8 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final FLabel btn = getBtnRandom();
-        btn.setCommand(new Command() { @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
+        getBtnRandom().setCommand(new Command() {
+            @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
         lst.setSelectedIndex(0);
@@ -281,24 +235,14 @@ public class FDeckChooser extends JPanel {
         return deck;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     private PlayerType getPlayerType() {
         return playerType;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
     public void populate() {
-
         this.setLayout(new MigLayout("insets 0, gap 0, flowy, ax right"));
 
         this.add(pnlRadios, "w 100%!, gap 0 0 20px 20px");
         this.add(scrDecks, "w 100%!, growy, pushy");
-
     }
-
 }

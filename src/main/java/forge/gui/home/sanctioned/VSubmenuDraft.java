@@ -2,7 +2,6 @@ package forge.gui.home.sanctioned;
 
 import java.awt.Font;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -27,6 +26,7 @@ import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.JXButtonPanel;
 
 /** 
  * Assembles Swing components of draft submenu singleton.
@@ -81,16 +81,15 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        final ButtonGroup grp = new ButtonGroup();
-        grp.add(radSingle);
-        grp.add(radAll);
+        JXButtonPanel grpPanel = new JXButtonPanel();
+        grpPanel.add(radSingle, "w 200px!, h 30px!");
+        grpPanel.add(radAll, "w 200px!, h 30px!");
         radSingle.setSelected(true);
 
         pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         pnlStart.setOpaque(false);
-        pnlStart.add(radSingle, "w 200px!, h 30px!, gap 0 20px 0 0");
-        pnlStart.add(btnStart, "span 1 2, growx, pushx");
-        pnlStart.add(radAll, "w 200px!, h 30px!, gap 0 20px 0 0");
+        pnlStart.add(grpPanel, "gapright 20");
+        pnlStart.add(btnStart);
     }
 
     /* (non-Javadoc)
@@ -128,8 +127,8 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     }
 
     /** @return {@link javax.swing.JRadioButton} */
-    public JRadioButton getRadSingle() {
-        return this.radSingle;
+    public boolean isSingleSelected() {
+        return radSingle.isSelected();
     }
 
     /** @return {@link forge.gui.toolbox.DeckLister} */

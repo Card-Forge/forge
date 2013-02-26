@@ -5,9 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +20,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CHomeUI;
 import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.JXButtonPanel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventChallenge;
 import forge.quest.bazaar.QuestItemType;
@@ -104,6 +107,14 @@ public enum CSubmenuChallenges implements ICDoc {
             }
         }
     };
+    private final MouseAdapter _startOnDblClick = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) {
+                VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().doClick();
+            }
+        }
+    };
     
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -121,20 +132,22 @@ public enum CSubmenuChallenges implements ICDoc {
             view.getPnlChallenges().removeAll();
             final List<QuestEventChallenge> challenges = qCtrl.getChallengesManager().generateChallenges();
 
-            ButtonGroup grp = new ButtonGroup();
+            JXButtonPanel grpPanel = new JXButtonPanel();
 
             for (int i = 0; i < challenges.size(); i++) {
                 final PnlEvent temp = new PnlEvent(challenges.get(i));
-                grp.add(temp.getRad());
+                final JRadioButton rad = temp.getRad();
                 if (i == 0) {
-                    temp.getRad().setSelected(true);
+                    rad.setSelected(true);
                     SwingUtilities.invokeLater(new Runnable() {
-                        @Override public void run() { temp.getRad().requestFocusInWindow(); }
+                        @Override public void run() { rad.requestFocusInWindow(); }
                     });
                 }
-                temp.getRad().addKeyListener(_startOnEnter);
-                view.getPnlChallenges().add(temp, "w 96%!, h 135px!, gap 2% 0 15px 15px");
+                rad.addKeyListener(_startOnEnter);
+                rad.addMouseListener(_startOnDblClick);
+                grpPanel.add(temp, rad, "w 100%!, h 135px!, gap 2% 0 15px 15px");
             }
+            view.getPnlChallenges().add(grpPanel, "w 96%!");
 
             if (challenges.size() == 0) {
                 final FLabel lbl = new FLabel.Builder()

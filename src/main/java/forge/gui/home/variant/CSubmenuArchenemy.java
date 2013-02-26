@@ -90,7 +90,6 @@ public enum CSubmenuArchenemy implements ICDoc {
             public void execute() {
                 
                 Predicate<CardPrinted> predSchemes = new Predicate<CardPrinted>() {
-
                     @Override
                     public boolean apply(CardPrinted arg0) {
                         if(arg0.getRules().getType().isScheme())
@@ -100,7 +99,6 @@ public enum CSubmenuArchenemy implements ICDoc {
                         
                         return false;
                     }
-                    
                 };
                 
                 FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);
@@ -254,7 +252,6 @@ public enum CSubmenuArchenemy implements ICDoc {
         };
         worker.execute();
     }
-
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()

@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
@@ -14,6 +16,7 @@ import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CHomeUI;
+import forge.gui.toolbox.JXButtonPanel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventDuel;
 import forge.quest.bazaar.QuestPetController;
@@ -86,6 +89,14 @@ public enum CSubmenuDuels implements ICDoc {
             }
         }
     };
+    private final MouseAdapter _startOnDblClick = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (MouseEvent.BUTTON1 == e.getButton() && 2 == e.getClickCount()) {
+                VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().doClick();
+            }
+        }
+    };
     
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -102,20 +113,22 @@ public enum CSubmenuDuels implements ICDoc {
             view.getPnlDuels().removeAll();
             final List<QuestEventDuel> duels = Singletons.getModel().getQuest().getDuelsManager().generateDuels();
 
-            ButtonGroup grp = new ButtonGroup();
+            JXButtonPanel grpPanel = new JXButtonPanel();
 
             for (int i = 0; i < duels.size(); i++) {
                 final PnlEvent temp = new PnlEvent(duels.get(i));
-                grp.add(temp.getRad());
+                final JRadioButton rad = temp.getRad();
                 if (i == 0) {
-                    temp.getRad().setSelected(true);
+                    rad.setSelected(true);
                     SwingUtilities.invokeLater(new Runnable() {
-                        @Override public void run() { temp.getRad().requestFocusInWindow(); }
+                        @Override public void run() { rad.requestFocusInWindow(); }
                     });
                 }
-                temp.getRad().addKeyListener(_startOnEnter);
-                view.getPnlDuels().add(temp, "w 96%!, h 135px!, gap 2% 0 15px 15px");
+                rad.addKeyListener(_startOnEnter);
+                rad.addMouseListener(_startOnDblClick);
+                grpPanel.add(temp, rad, "w 100%!, h 135px!, gap 2% 0 15px 15px");
             }
+            view.getPnlDuels().add(grpPanel, "w 96%!");
         }
     }
 

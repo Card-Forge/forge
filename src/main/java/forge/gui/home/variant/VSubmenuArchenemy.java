@@ -5,7 +5,6 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -34,6 +33,7 @@ import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTabbedPane;
+import forge.gui.toolbox.JXButtonPanel;
 
 /** 
  * Assembles Swing components of constructed submenu singleton.
@@ -70,7 +70,6 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
     private final List<Deck> allSchemeDecks = new ArrayList<Deck>();
     private final JCheckBox cbUseDefaultSchemes = new FCheckBox("Use default scheme decks if possible.");
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
-    private final ButtonGroup grpFields = new ButtonGroup();
     private int currentNumTabsShown = 8;
 
     //////////////////////////////
@@ -82,7 +81,6 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         //This listener will look for any of the radio buttons being selected
         //and call the method that shows/hides tabs appropriately.
         ItemListener iListener = new ItemListener() {
-
             @Override
             public void itemStateChanged(ItemEvent arg0) {
                 FRadioButton aButton = (FRadioButton) arg0.getSource();
@@ -94,28 +92,21 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
 
         };
 
-        //Create all 8 player settings panel
-        FRadioButton tempRadio = null;
-        FPanel tempPanel;
-        FDeckChooser tempChooser;
-
         //Settings panel
         FPanel settingsPanel = new FPanel();
         settingsPanel.setLayout(new MigLayout("wrap 2"));
-        FPanel radioPane = new FPanel();
-        radioPane.setLayout(new MigLayout("wrap 1"));
-        radioPane.setOpaque(false);
-        radioPane.add(new FLabel.Builder().text("Set number of opponents").build(), "wrap");
+        FPanel radioPaneContainer = new FPanel(new MigLayout());
+        radioPaneContainer.setOpaque(false);
+        JXButtonPanel radioPane = new JXButtonPanel();
+        radioPane.add(new FLabel.Builder().text("Set number of opponents").build());
         for (int i = 1; i < 8; i++) {
-            tempRadio = new FRadioButton();
-            tempRadio.setText(String.valueOf(i));
+            FRadioButton tempRadio = new FRadioButton(String.valueOf(i));
             fieldRadios.add(tempRadio);
-            grpFields.add(tempRadio);
-            tempRadio.setSelected(true);
             tempRadio.addItemListener(iListener);
-            radioPane.add(tempRadio, "wrap,align 50% 50%");
+            radioPane.add(tempRadio, "align 50% 50%, gaptop 5");
         }
-        settingsPanel.add(radioPane, "span 1 2");
+        radioPaneContainer.add(radioPane);
+        settingsPanel.add(radioPaneContainer, "span 1 2");
         settingsPanel.add(cbUseDefaultSchemes);
         settingsPanel.add(lblEditor, "w pref+24, h pref+8");
         tabPane.add("Settings", settingsPanel);
@@ -128,10 +119,10 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
 
         //Player panels (Human + 7 AIs)
         for (int i = 0; i < 8; i++) {
-            tempPanel = new FPanel();
+            FPanel tempPanel = new FPanel();
             tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy"));
 
-            tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
+            FDeckChooser tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
             tempChooser.initialize();
 
             deckChoosers.add(tempChooser);
@@ -161,6 +152,9 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
+        
+        // ensure we don't fire the selected event before the tabPane is populated
+        fieldRadios.get(fieldRadios.size() - 1).setSelected(true);
     }
 
     private void changeTabs(int toShow) {

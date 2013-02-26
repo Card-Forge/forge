@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -36,6 +35,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.JXButtonPanel;
 import forge.item.PreconDeck;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
@@ -194,11 +194,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
         scrQuests.setBorder(null);
 
-        final ButtonGroup group1 = new ButtonGroup();
-        group1.add(radEasy);
-        group1.add(radMedium);
-        group1.add(radHard);
-        group1.add(radExpert);
+        final JXButtonPanel difficultyPanel = new JXButtonPanel();
+        final String difficulty_constraints = "h 27px!, gapbottom 5";
+        difficultyPanel.add(radEasy, difficulty_constraints);
+        difficultyPanel.add(radMedium, difficulty_constraints);
+        difficultyPanel.add(radHard, difficulty_constraints);
+        difficultyPanel.add(radExpert, difficulty_constraints);
         radEasy.setSelected(true);
 
         cbxStartingPool.addItem(StartingPoolType.Complete);
@@ -272,14 +273,9 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlOptions.setOpaque(false);
         pnlOptions.setLayout(new MigLayout("insets 0, gap 10px, fillx, wrap 2"));
 
-        JPanel pnlDifficultyMode = new JPanel();
-        pnlDifficultyMode.setLayout(new MigLayout("insets 0, gap 1%, flowy"));
-        final String n_constraints = "h 27px!";
-        pnlDifficultyMode.add(radEasy, n_constraints + ", gap 0 4% 0 5px");
-        pnlDifficultyMode.add(radMedium, n_constraints + ", gap 0 4% 0 5px");
-        pnlDifficultyMode.add(radHard, n_constraints + ", gap 0 4% 0 5px");
-        pnlDifficultyMode.add(radExpert, n_constraints + ", gap 0 4% 0 5px");
-        pnlDifficultyMode.add(boxFantasy, n_constraints + ", gap 0 4% 0 5px");
+        JPanel pnlDifficultyMode = new JPanel(new MigLayout("insets 0, gap 1%, flowy"));
+        pnlDifficultyMode.add(difficultyPanel, "gapright 4%");
+        pnlDifficultyMode.add(boxFantasy, difficulty_constraints + ", gapright 4%");
         pnlDifficultyMode.setOpaque(false);
         pnlOptions.add(pnlDifficultyMode, "w 40%");
 
@@ -428,7 +424,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     public DragCell getParentCell() {
         return parentCell;
     }
-
 
     public int getSelectedDifficulty() {
         if (radEasy.isSelected()) {
