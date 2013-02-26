@@ -2,7 +2,7 @@ Name:Reflecting Pool
 ManaCost:no cost
 Types:Land
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Type | Valid$ Land.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add to your mana pool one mana of any type that a land you control could produce.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reflecting_pool.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/328.jpg
