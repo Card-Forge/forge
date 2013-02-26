@@ -10531,6 +10531,7 @@ res/cardsfolder/t/taiga.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_aether.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_field.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_isle.txt svneol=native#text/plain
+res/cardsfolder/t/tainted_pact.txt -text
 res/cardsfolder/t/tainted_peak.txt svneol=native#text/plain
 res/cardsfolder/t/tainted_sigil.txt -text
 res/cardsfolder/t/tainted_strike.txt svneol=native#text/plain
