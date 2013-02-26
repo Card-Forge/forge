@@ -164,6 +164,9 @@ Vodalian Mystic
 Light from Within
 Fiery Bombardment
 Phosphorescent Feast
+Guard Dogs
+Jaded Response
+Tainted Pact
 
 
 New Phenomenons:
@@ -185,6 +188,8 @@ Sisters of Stone Death Avatar
 Stuffy Doll Avatar
 Two Headed Giant of Foriys Avatar
 Viridian Zealot Avatar
+Bosh, Iron Golem Avatar
+Maro Avatar
 
 
 Known Issues:
