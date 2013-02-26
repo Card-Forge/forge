@@ -14191,7 +14191,6 @@ src/main/java/forge/gui/GuiDialog.java -text
 src/main/java/forge/gui/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/gui/GuiImportPicture.java svneol=native#text/plain
 src/main/java/forge/gui/GuiInput.java svneol=native#text/plain
-src/main/java/forge/gui/GuiMigrateLocalMWSSetPicturesHQ.java svneol=native#text/plain
 src/main/java/forge/gui/GuiProgressBarWindow.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
 src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
@@ -14517,7 +14516,6 @@ src/test/java/forge/BoosterDraftTest.java svneol=native#text/plain
 src/test/java/forge/CardColorTest.java svneol=native#text/plain
 src/test/java/forge/GuiDownloadPicturesLQTest.java svneol=native#text/plain
 src/test/java/forge/GuiDownloadSetPicturesLQTest.java svneol=native#text/plain
-src/test/java/forge/GuiMigrateLocalMWSSetPicturesHQTest.java svneol=native#text/plain
 src/test/java/forge/GuiProgressBarWindowTest.java svneol=native#text/plain
 src/test/java/forge/PanelTest.java svneol=native#text/plain
 src/test/java/forge/ReadDraftRankingsTest.java -text
