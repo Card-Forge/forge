@@ -236,17 +236,11 @@ for root, dirnames, filenames in os.walk(folder):
 		card.lines = line + '\n'
 
 		# Start parsing the rest of the data file
-		line = file.readline().strip()
-
-		while line != 'End':
+		for line in file.readlines():
+			line = line.strip()
 			# Skip empty lines
 			if line == '':
-				line = file.readline().strip()
 				continue
-
-			# We really shouldn't
-			if line == 'End':
-				break
 
 			if line.find(setStr) != -1:
 				info = line.replace('SetInfo:','')
@@ -256,8 +250,6 @@ for root, dirnames, filenames in os.walk(folder):
 				card.sets[parts[0]] = SetInfo(parts[0], parts[1], parts[2])
 			else: 
 				card.lines += line +'\n'
-
-			line = file.readline().strip()
 
 		if not card.hasSet:
 			addSets(card)
@@ -269,8 +261,6 @@ for root, dirnames, filenames in os.walk(folder):
 				for s in card.sets.values():
 					file.write('SetInfo:'+ s.set + '|' + s.rarity + '|' + s.image + '\n')
 
-			file.write('End')
-			
 			err.write(card.name + '... Updated\n')
 		
 		file.close()

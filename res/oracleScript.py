@@ -71,8 +71,7 @@ def writeOutCard(root, fileName, lines, oracle, sets):
         else:
             cardfile.write('SetInfo:%s|%s|\n' % (setInfo[0],setInfo[1]))
     '''
-            
-    cardfile.write('End')
+    
     cardfile.close()
 
 
@@ -126,12 +125,12 @@ def getOracleFromMagicCardsInfo(name):
 
 def hasOracleLine(cardFile, lines, offlineSource=True):
     # Start parsing the rest of the data file
-    line = cardFile.readline().strip()
     hasOracle = False
-    while line != 'End':
+    
+    for line in cardFile.readlines():
+        line = line.strip()
         # Skip empty lines
         if line == '':
-            line = cardFile.readline().strip()
             continue
 
         if line.find(oracleStr) != -1:
@@ -143,8 +142,6 @@ def hasOracleLine(cardFile, lines, offlineSource=True):
         #    pass
         else:
             lines += line + '\n'
-
-        line = cardFile.readline().strip()
 
     cardFile.close()
     return hasOracle, lines
