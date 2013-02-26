@@ -6,5 +6,6 @@ A:AB$ DealDamage | ActivationZone$ Command | Announce$ X | Cost$ X Sac<1/Artifac
 SVar:X:Count$xPaid
 SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/bosh_iron_golem_avatar.jpg
+SVar:RemAIDeck:True
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/bosh-iron-golem.jpg
 Oracle:Hand +0, life -2\n{X}, Sacrifice an artifact with converted mana cost X: Bosh, Iron Golem Avatar deals X damage to target creature or player.
