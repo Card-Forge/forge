@@ -92,16 +92,18 @@ public class CostSacrifice extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         // You can always sac all
         if (!this.isTargetingThis()) {
+            // If the sacrificed type is dependant on an annoucement, can't necesarily rule out the CanPlay call
+            boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
+            
             List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
-
             final Integer amount = this.convertAmount();
 
             if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
                 typeList = CardLists.getNotType(typeList, "Creature");
             }
 
-            if ((amount != null) && (typeList.size() < amount)) {
+            if (!needsAnnoucement && (amount != null) && (typeList.size() < amount)) {
                 return false;
             }
 

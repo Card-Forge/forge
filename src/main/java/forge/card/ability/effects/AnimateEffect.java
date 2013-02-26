@@ -328,7 +328,7 @@ public class AnimateEffect extends AnimateEffectBase {
         }
         sb.append("become");
         if (tgts.size() == 1) {
-            sb.append("s a");
+            sb.append("s ");
         }
         // if power is -1, we'll assume it's not just setting toughness
         if (power != -1) {
