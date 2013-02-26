@@ -78,7 +78,7 @@ public class Cost {
      * @return a boolean.
      */
     public final boolean hasNoManaCost() {
-        return this.getTotalMana() == ManaCost.ZERO;
+        return this.getTotalMana().toString().equals(ManaCost.ZERO.toString());
     }
 
     /**
