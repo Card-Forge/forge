@@ -66,7 +66,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     private final JCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
 
     private final List<CardPrinted> allAvatars = new ArrayList<CardPrinted>();
-    
+
     private final List<CardPrinted> allAiAvatars = new ArrayList<CardPrinted>();
     private final List<CardPrinted> nonRandomHumanAvatars = new ArrayList<CardPrinted>();
     private final List<CardPrinted> nonRandomAiAvatars = new ArrayList<CardPrinted>();
@@ -265,7 +265,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             fdc.populate();
         }
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(tabPane, "gap 20px 20px 20px 20px, pushx, pushy, growx, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(tabPane, "gap 20px 20px 20px 0px, pushx, pushy, growx, growy");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
 
@@ -346,10 +346,16 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         return deckChoosers;
     }
 
+    /**
+     * @return the avatarLists
+     */
     public List<FList> getAvatarLists() {
         return avatarLists;
     }
 
+    /**
+     * @return the currentNumTabsShown
+     */
     public int getNumPlayers() {
         return currentNumTabsShown;
     }
@@ -358,10 +364,11 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
      * @return the allAvatars
      */
     public Iterable<CardPrinted> getAllAvatars() {
-        if ( allAvatars.isEmpty() ) {
-            for(CardPrinted c : CardDb.variants().getAllCards()) {
-                if( c.getRules().getType().isVanguard())
+        if (allAvatars.isEmpty()) {
+            for (CardPrinted c : CardDb.variants().getAllCards()) {
+                if (c.getRules().getType().isVanguard()) {
                     allAvatars.add(c);
+                }
             }
         }
         return allAvatars;

@@ -210,7 +210,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
             fdc.populate();
         }
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(tabPane, "gap 20px 20px 20px 20px, pushx, pushy, growx, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(tabPane, "gap 20px 20px 20px 0px, pushx, pushy, growx, growy");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 0 3.5%! 3.5%!, ax center");
 
