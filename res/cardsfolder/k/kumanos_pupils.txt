@@ -1,0 +1,8 @@
+Name:Kumano's Pupils
+ManaCost:4 R
+Types:Creature Human Shaman
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.DamagedBy | AddHiddenKeyword$ If CARDNAME would be put into a graveyard, exile it instead. | Description$ If a creature dealt damage by CARDNAME this turn would die, exile it instead.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kumanos_pupils.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/177.jpg
+Oracle:If a creature dealt damage by Kumano's Pupils this turn would die, exile it instead.

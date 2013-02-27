@@ -1,0 +1,9 @@
+Name:Kumano, Master Yamabushi
+ManaCost:3 R R
+Types:Legendary Creature Human Shaman
+PT:4/4
+A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+S:Mode$ Continuous | Affected$ Creature.DamagedBy | AddHiddenKeyword$ If CARDNAME would be put into a graveyard, exile it instead. | Description$ If a creature dealt damage by CARDNAME this turn would die, exile it instead.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kumano_master_yamabushi.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/176.jpg
+Oracle:{1}{R}: Kumano, Master Yamabushi deals 1 damage to target creature or player.\nIf a creature dealt damage by Kumano this turn would die, exile it instead.
