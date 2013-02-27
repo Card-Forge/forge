@@ -431,14 +431,8 @@ public class ComputerUtil {
                 typeList.remove(prefCard);
                 count++;
             } else {
-                break;
+                return null;
             }
-        }
-
-        CardLists.sortByPowerAsc(typeList);
-
-        for (int i = count; i < amount; i++) {
-            sacList.add(typeList.get(i));
         }
         return sacList;
     }
