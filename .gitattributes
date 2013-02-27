@@ -8496,6 +8496,7 @@ res/cardsfolder/r/revered_dead.txt svneol=native#text/plain
 res/cardsfolder/r/revered_elder.txt svneol=native#text/plain
 res/cardsfolder/r/revered_unicorn.txt -text svneol=unset#text/plain
 res/cardsfolder/r/reverence.txt svneol=native#text/plain
+res/cardsfolder/r/reverent_mantra.txt -text
 res/cardsfolder/r/reverent_silence.txt -text
 res/cardsfolder/r/reverse_damage.txt -text
 res/cardsfolder/r/reverse_polarity.txt -text
