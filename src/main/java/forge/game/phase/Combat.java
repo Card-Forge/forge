@@ -725,7 +725,7 @@ public class Combat {
             blockers = this.getBlockers(attacker);
             assignedDamage = true;
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
-            if (blockers.size() == 0) {
+            if (blockers.isEmpty()) {
                 if (trampler || this.isUnblocked(attacker)) {
                     this.addDefendingDamage(damageDealt, attacker);
                 } else {
@@ -735,7 +735,7 @@ public class Combat {
             } else {
                 Map<Card, Integer> map = this.getAttackingPlayer().getController().assignCombatDamage(attacker, blockers, damageDealt, this.getDefenderByAttacker(attacker));
                 for (Entry<Card, Integer> dt : map.entrySet()) {
-                    if( dt.getKey() == null && trampler) {
+                    if( dt.getKey() == null) {
                         if (dt.getValue() > 0) 
                             addDefendingDamage(dt.getValue(), attacker);
                     } else {
