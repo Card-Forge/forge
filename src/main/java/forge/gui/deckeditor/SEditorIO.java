@@ -22,6 +22,8 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.apache.commons.lang.StringUtils;
+
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.SColumnUtil;
@@ -129,14 +131,17 @@ public class SEditorIO {
         }
         // Confirm if overwrite
         else if (controller.fileExists(name)) {
-            final int m = JOptionPane.showConfirmDialog(null,
+            int confirmResult = JOptionPane.YES_OPTION;
+            if ( !StringUtils.equals(name, controller.getModelName()) ) { // prompt only if name was changed
+                confirmResult = JOptionPane.showConfirmDialog(null,
                     limitedDeckMode ? "Would you like to save changes to your deck?"
                     : "There is already a deck named '" + name + "'. Overwrite?",
                     limitedDeckMode ? "Save changes?" : "Overwrite Deck?",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
+            }
 
-            if (m == JOptionPane.YES_OPTION) { controller.save(); }
+            if (confirmResult == JOptionPane.YES_OPTION) { controller.save(); }
         }
         // Confirm if a new deck will be created
         else {

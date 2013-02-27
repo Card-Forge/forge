@@ -38,6 +38,7 @@ import forge.util.storage.IStorage;
 public class DeckController<T extends DeckBase> {
 
     private T model;
+    private String modelName;
     private boolean saved;
     private boolean modelInStore;
     private final IStorage<T> folder;
@@ -56,6 +57,7 @@ public class DeckController<T extends DeckBase> {
         this.folder = folder0;
         this.view = view0;
         this.model = null;
+        this.modelName = null;
         this.saved = true;
         this.modelInStore = false;
         this.newModelCreator = newModelCreator0;
@@ -88,6 +90,7 @@ public class DeckController<T extends DeckBase> {
     public void setModel(final T document, final boolean isStored) {
         this.modelInStore = isStored;
         this.model = document;
+        this.modelName = document.getName();
         this.view.resetTables();
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(model.getName());
@@ -305,5 +308,9 @@ public class DeckController<T extends DeckBase> {
         this.model = this.newModelCreator.get();
         _setSaved(true);
         this.view.resetTables();
+    }
+
+    public String getModelName() {
+        return modelName;
     }
 }
