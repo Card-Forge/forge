@@ -15,6 +15,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
+import forge.util.Aggregates;
 
 public class ChooseGenericEffect extends SpellAbilityEffect {
 
@@ -48,11 +49,15 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 continue;
             }
             SpellAbility chosenSA = null;
-            if (p.isHuman()) {
-                String choice = GuiChoose.one("Choose one", choices.values());
-                chosenSA = AbilityFactory.getAbility(host.getSVar(choices.inverse().get(choice)), host);
-            } else { //Computer AI
-                chosenSA = AbilityFactory.getAbility(host.getSVar(sa.getParam("Choices").split(",")[0]), host);
+            if (sa.hasParam("AtRandom")) {
+                chosenSA = AbilityFactory.getAbility(host.getSVar(Aggregates.random(choices.keySet())), host);
+            } else {
+                if (p.isHuman()) {
+                    String choice = GuiChoose.one("Choose one", choices.values());
+                    chosenSA = AbilityFactory.getAbility(host.getSVar(choices.inverse().get(choice)), host);
+                } else { //Computer AI
+                    chosenSA = AbilityFactory.getAbility(host.getSVar(sa.getParam("Choices").split(",")[0]), host);
+                }
             }
             chosenSA.setActivatingPlayer(sa.getSourceCard().getController());
             ((AbilitySub) chosenSA).setParent(sa);

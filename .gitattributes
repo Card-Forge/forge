@@ -6415,6 +6415,7 @@ res/cardsfolder/m/master_of_etherium.txt svneol=native#text/plain
 res/cardsfolder/m/master_of_the_pearl_trident.txt -text
 res/cardsfolder/m/master_of_the_veil.txt -text
 res/cardsfolder/m/master_of_the_wild_hunt.txt svneol=native#text/plain
+res/cardsfolder/m/master_of_the_wild_hunt_avatar.txt -text
 res/cardsfolder/m/master_splicer.txt svneol=native#text/plain
 res/cardsfolder/m/master_thief.txt svneol=native#text/plain
 res/cardsfolder/m/master_transmuter.txt svneol=native#text/plain

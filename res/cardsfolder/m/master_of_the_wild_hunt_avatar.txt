@@ -1,0 +1,12 @@
+Name:Master of the Wild Hunt Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/+3
+A:AB$ GenericChoice | Cost$ 2 G | Choices$ Wolf,Antelope,Cat,Rhino | ActivationZone$ Command | AtRandom$ True | StackDescription$ SpellDescription | SpellDescription$ Put a green creature token onto the battlefield that's a 2/2 Wolf, a 2/3 Antelope with forestwalk, a 3/2 Cat with shroud, or a 4/4 Rhino with trample, chosen at random.
+SVar:Wolf:DB$ Token | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | ChoiceDescription$ Wolf
+SVar:Antelope:DB$ Token | TokenAmount$ 1 | TokenName$ Antelope | TokenTypes$ Creature,Antelope | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 3 | TokenKeywords$ Forestwalk | ChoiceDescription$ Antelope
+SVar:Cat:DB$ Token | TokenAmount$ 1 | TokenName$ Cat | TokenTypes$ Creature,Cat | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 2 | TokenKeywords$ Shroud | ChoiceDescription$ Cat
+SVar:Rhino:DB$ Token | TokenAmount$ 1 | TokenName$ Rhino | TokenTypes$ Creature,Rhino | TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Trample | ChoiceDescription$ Rhino
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/master_of_the_wild_hunt_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/master-of-the-wild-hunt.jpg
