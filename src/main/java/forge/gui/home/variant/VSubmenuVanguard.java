@@ -148,7 +148,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
 
         //Settings panel
         FPanel settingsPanel = new FPanel();
-        settingsPanel.setLayout(new MigLayout("wrap 2"));
+        settingsPanel.setLayout(new MigLayout("wrap 2, ax center"));
         FPanel radioPane = new FPanel();
         radioPane.setLayout(new MigLayout("wrap 1"));
         radioPane.setOpaque(false);

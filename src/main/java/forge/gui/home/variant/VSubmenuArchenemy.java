@@ -94,7 +94,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
 
         //Settings panel
         FPanel settingsPanel = new FPanel();
-        settingsPanel.setLayout(new MigLayout("wrap 2"));
+        settingsPanel.setLayout(new MigLayout("wrap 2, ax center"));
         FPanel radioPaneContainer = new FPanel(new MigLayout());
         radioPaneContainer.setOpaque(false);
         JXButtonPanel radioPane = new JXButtonPanel();
