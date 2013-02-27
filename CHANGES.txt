@@ -167,6 +167,12 @@ Phosphorescent Feast
 Guard Dogs
 Jaded Response
 Tainted Pact
+Pledge of Loyalty
+Mirror Golem
+Reverent Mantra
+Frostwielder
+Kumano, Master Yamabushi
+Kumano's Pupils
 
 
 New Phenomenons:
@@ -190,6 +196,8 @@ Two Headed Giant of Foriys Avatar
 Viridian Zealot Avatar
 Bosh, Iron Golem Avatar
 Maro Avatar
+Necropotence Avatar
+Vampire Nocturnus Avatar
 
 
 Known Issues:
