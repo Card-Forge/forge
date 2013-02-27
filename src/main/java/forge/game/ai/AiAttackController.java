@@ -253,7 +253,7 @@ public class AiAttackController {
                 }
             }
         }
-        CardLists.sortAttackLowFirst(attackers);
+        CardLists.sortByPowerAsc(attackers);
         int blockersNeeded = this.oppList.size();
 
         // don't hold back creatures that can't block any of the human creatures
@@ -382,7 +382,7 @@ public class AiAttackController {
             }
         }
 
-        CardLists.sortAttack(this.attackers);
+        CardLists.sortByPowerDesc(this.attackers);
 
         final List<Card> unblockedAttackers = new ArrayList<Card>();
         final List<Card> remainingAttackers = new ArrayList<Card>(this.attackers);
@@ -531,7 +531,7 @@ public class AiAttackController {
         }
         if (bAssault) {
             System.out.println("Assault");
-            CardLists.sortAttack(attackersLeft);
+            CardLists.sortByPowerDesc(attackersLeft);
             for (Card attacker : attackersLeft) {
                 if (CombatUtil.canAttack(attacker, combat) && this.isEffectiveAttacker(ai, attacker, combat)) {
                     combat.addAttacker(attacker);
@@ -563,7 +563,7 @@ public class AiAttackController {
                 }
             }
             if (exalted) {
-                CardLists.sortAttack(this.attackers);
+                CardLists.sortByPowerDesc(this.attackers);
                 System.out.println("Exalted");
                 this.aiAggression = 6;
                 for (Card attacker : this.attackers) {
@@ -663,7 +663,7 @@ public class AiAttackController {
         // *********************
         boolean doAttritionalAttack = false;
         // get list of attackers ordered from low power to high
-        CardLists.sortAttackLowFirst(this.attackers);
+        CardLists.sortByPowerAsc(this.attackers);
         // get player life total
         int humanLife = opp.getLife();
         // get the list of attackers up to the first blocked one
@@ -799,7 +799,7 @@ public class AiAttackController {
                     int attackNum = 0;
                     int damage = 0;
                     List<Card> attacking = combat.getAttackersByDefenderSlot(combat.getCurrentDefenderNumber());
-                    CardLists.sortAttackLowFirst(attacking);
+                    CardLists.sortByPowerAsc(attacking);
                     for (Card atta : attacking) {
                         if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers)) {
                             damage += ComputerUtilCombat.damageIfUnblocked(atta, opp, null);

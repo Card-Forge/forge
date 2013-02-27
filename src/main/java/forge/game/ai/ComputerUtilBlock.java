@@ -285,7 +285,7 @@ public class ComputerUtilBlock {
 
         // Begin with the attackers that pose the biggest threat
         CardLists.sortByEvaluateCreature(firstAttacker);
-        CardLists.sortAttack(firstAttacker);
+        CardLists.sortByPowerDesc(firstAttacker);
 
         // If I don't have any planeswalkers than sorting doesn't really matter
         if (defenders.size() == 1) {
@@ -301,7 +301,7 @@ public class ComputerUtilBlock {
         // if planeswalker will be too difficult to defend don't even bother
         for (List<Card> attacker : attackerLists) {
             // Begin with the attackers that pose the biggest threat
-            CardLists.sortAttack(attacker);
+            CardLists.sortByPowerDesc(attacker);
             for (final Card c : attacker) {
                 sortedAttackers.add(c);
             }
@@ -423,7 +423,7 @@ public class ComputerUtilBlock {
                 }
 
                 if (firstStrikeBlockers.size() > 1) {
-                    CardLists.sortAttack(firstStrikeBlockers);
+                    CardLists.sortByPowerDesc(firstStrikeBlockers);
                     for (final Card blocker : firstStrikeBlockers) {
                         final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
                                 + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
@@ -803,7 +803,7 @@ public class ComputerUtilBlock {
         }
 
         // Begin with the weakest blockers
-        CardLists.sortAttackLowFirst(ComputerUtilBlock.getBlockersLeft());
+        CardLists.sortByPowerAsc(ComputerUtilBlock.getBlockersLeft());
 
         // == 1. choose best blocks first ==
         combat = ComputerUtilBlock.makeGoodBlocks(ai, combat);
@@ -919,7 +919,7 @@ public class ComputerUtilBlock {
         // very very simple ordering of blockers, sort by evaluate, then sort by attack
         //final int damage = attacker.getNetCombatDamage();
         CardLists.sortByEvaluateCreature(blockers);
-        CardLists.sortAttack(blockers);
+        CardLists.sortByPowerDesc(blockers);
 
         // TODO: Take total damage, and attempt to maximize killing the greatest evaluation of creatures
         // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones
@@ -932,7 +932,7 @@ public class ComputerUtilBlock {
         // very very simple ordering of attackers, sort by evaluate, then sort by attack
         //final int damage = attacker.getNetCombatDamage();
         CardLists.sortByEvaluateCreature(blockers);
-        CardLists.sortAttack(blockers);
+        CardLists.sortByPowerDesc(blockers);
 
         // TODO: Take total damage, and attempt to maximize killing the greatest evaluation of creatures
         // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones

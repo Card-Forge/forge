@@ -399,7 +399,7 @@ public class ComputerUtil {
      * 
      * @param type
      *            a {@link java.lang.String} object.
-     * @param activate
+     * @param source
      *            a {@link forge.Card} object.
      * @param target
      *            a {@link forge.Card} object.
@@ -407,10 +407,8 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> chooseSacrificeType(final Player ai, final String type, final Card activate, final Card target,
-            final int amount) {
-        List<Card> typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate);
+    public static List<Card> chooseSacrificeType(final Player ai, final String type, final Card source, final Card target, final int amount) {
+        List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source);
         if (ai.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             typeList = CardLists.getNotType(typeList, "Creature");
         }
@@ -427,7 +425,7 @@ public class ComputerUtil {
         int count = 0;
 
         while (count < amount) {
-            final Card prefCard = ComputerUtil.getCardPreference(ai, activate, "SacCost", typeList);
+            final Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
             if (prefCard != null) {
                 sacList.add(prefCard);
                 typeList.remove(prefCard);
@@ -437,7 +435,7 @@ public class ComputerUtil {
             }
         }
 
-        CardLists.sortAttackLowFirst(typeList);
+        CardLists.sortByPowerAsc(typeList);
 
         for (int i = count; i < amount; i++) {
             sacList.add(typeList.get(i));
@@ -481,7 +479,7 @@ public class ComputerUtil {
             return null;
         }
 
-        CardLists.sortAttackLowFirst(typeList);
+        CardLists.sortByPowerAsc(typeList);
         final List<Card> exileList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
@@ -520,7 +518,7 @@ public class ComputerUtil {
             return null;
         }
 
-        CardLists.sortAttackLowFirst(typeList);
+        CardLists.sortByPowerAsc(typeList);
 
         final List<Card> tapList = new ArrayList<Card>();
 
@@ -560,7 +558,7 @@ public class ComputerUtil {
             return null;
         }
 
-        CardLists.sortAttack(typeList);
+        CardLists.sortByPowerDesc(typeList);
 
         final List<Card> untapList = new ArrayList<Card>();
 
@@ -597,7 +595,7 @@ public class ComputerUtil {
             return null;
         }
 
-        CardLists.sortAttackLowFirst(typeList);
+        CardLists.sortByPowerAsc(typeList);
         final List<Card> returnList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
@@ -645,7 +643,7 @@ public class ComputerUtil {
             return sacrificed; // sacrifice none 
         }
         
-        CardLists.sortCMC(remaining);
+        CardLists.sortByCmcDesc(remaining);
         Collections.reverse(remaining);
 
         final int max = Math.min(remaining.size(), amount);

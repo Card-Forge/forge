@@ -860,7 +860,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
                             System.out.println("5 Life or less, trying to find something castable.");
-                            CardLists.sortByMostExpensive(nonLands);
+                            CardLists.sortByCmcDesc(nonLands);
                             for (Card potentialCard : nonLands) {
                                if (ComputerUtilMana.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
                                    choice = potentialCard;
@@ -971,7 +971,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
                             System.out.println("5 Life or less, trying to find something castable.");
-                            CardLists.sortByMostExpensive(nonLands);
+                            CardLists.sortByCmcDesc(nonLands);
                             for (Card potentialCard : nonLands) {
                                if (ComputerUtilMana.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
                                    choice = potentialCard;
@@ -1212,7 +1212,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         if (ai.getLife() <= 5) { // Desperate?
                             // Get something AI can cast soon.
                             System.out.println("5 Life or less, trying to find something castable.");
-                            CardLists.sortByMostExpensive(fetchList);
+                            CardLists.sortByCmcDesc(fetchList);
                             for (Card potentialCard : fetchList) {
                                if (ComputerUtilMana.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
                                    c = potentialCard;

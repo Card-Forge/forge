@@ -213,7 +213,7 @@ public class RegenerateAi extends SpellAbilityAi {
                 tgt.addTarget(combatants.get(0));
                 return true;
             } else {
-                CardLists.sortByMostExpensive(compTargetables);
+                CardLists.sortByCmcDesc(compTargetables);
                 for (final Card c : compTargetables) {
                     if (c.getShield() == 0) {
                         tgt.addTarget(c);

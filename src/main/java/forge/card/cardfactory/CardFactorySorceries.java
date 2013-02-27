@@ -505,8 +505,8 @@ public class CardFactorySorceries {
                 continue;
             }
             if (p.isComputer()) {
-                CardLists.sortAttackLowFirst(c);
-                CardLists.sortCMC(c);
+                CardLists.sortByPowerAsc(c);
+                CardLists.sortByCmcDesc(c);
                 Collections.reverse(c);
                 for (int i = 0; i < sac; i++) {
                     Singletons.getModel().getGame().getAction().sacrifice(c.get(i), card);

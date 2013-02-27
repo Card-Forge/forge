@@ -62,26 +62,26 @@ public class CardLists {
         });
     }
 
-    public static final Comparator<Card> DefenseComparator = new Comparator<Card>() {
+    public static final Comparator<Card> ToughnessComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
-            return b.getNetDefense() - a.getNetDefense();
+            return a.getNetDefense() - b.getNetDefense();
         }
     };
-    public static final Comparator<Card> AttackComparator = new Comparator<Card>() {
+    public static final Comparator<Card> PowerComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
-            return b.getNetCombatDamage() - a.getNetCombatDamage();
+            return a.getNetCombatDamage() - b.getNetCombatDamage();
         }
     };
-    public static final Comparator<Card> CmcComparator = new Comparator<Card>() {
+    public static final Comparator<Card> CmcComparatorInv = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
             return b.getCMC() - a.getCMC();
         }
     };
 
-    public static final Comparator<Card> TextLenReverseComparator = new Comparator<Card>() {
+    public static final Comparator<Card> TextLenComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
             final int aLen = a.getText().length();
@@ -89,30 +89,6 @@ public class CardLists {
             return aLen - bLen;
         }
     };
-
-    public static final Comparator<Card> getKeywordComparator(final String kw) {
-        return new Comparator<Card>() {
-            @Override
-            public int compare(final Card a, final Card b) {
-                int aV = a.hasKeyword(kw) ? 1 : 0;
-                int bV = b.hasKeyword(kw) ? 1 : 0;
-                return bV - aV;
-            }
-        };
-    }
-
-    // the higher the attack the better
-    /**
-     * <p>
-     * sortAttack.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     */
-    public static void sortAttack(final List<Card> list) {
-        Collections.sort(list, AttackComparator);
-    } // sortAttack()
 
     /**
      * <p>
@@ -129,17 +105,16 @@ public class CardLists {
 
     /**
      * <p>
-     * Sorts a List<Card> by converted mana cost, putting highest first.
+     * Sorts a List<Card> from highest converted mana cost to lowest.
      * </p>
      * 
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortByMostExpensive(final List<Card> list) {
-        Collections.sort(list, CmcComparator);
-    } // sortByMostExpensive()
+    public static void sortByCmcDesc(final List<Card> list) {
+        Collections.sort(list, CmcComparatorInv);
+    } // sortCMC
 
-    // the lower the attack the better
     /**
      * <p>
      * sortAttackLowFirst.
@@ -148,46 +123,24 @@ public class CardLists {
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortAttackLowFirst(final List<Card> list) {
-        Collections.sort(list, Collections.reverseOrder(AttackComparator));
+    public static void sortByPowerAsc(final List<Card> list) {
+        Collections.sort(list, PowerComparator);
     } // sortAttackLowFirst()
 
+    // the higher the attack the better
     /**
      * <p>
-     * Sorts a CardList, putting creatures without Flying first.
+     * sortAttack.
      * </p>
      * 
      * @param list
      *            a {@link forge.CardList} object.
      */
-    public static void sortNonFlyingFirst(final List<Card> list) {
-        CardLists.sortFlying(list);
-        Collections.reverse(list);
-    } // sortNonFlyingFirst
+    public static void sortByPowerDesc(final List<Card> list) {
+        Collections.sort(list, Collections.reverseOrder(PowerComparator));
+    } // sortAttack()
 
-    /**
-     * <p>
-     * Sorts a CardList, putting creatures with Flying first.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     */
-    public static void sortFlying(final List<Card> list) {
-        Collections.sort(list, getKeywordComparator("Flying"));
-    } // sortFlying()
 
-    /**
-     * <p>
-     * Sorts a List<Card> from highest converted mana cost to lowest.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     */
-    public static void sortCMC(final List<Card> list) {
-        Collections.sort(list, CmcComparator);
-    } // sortCMC
 
     /**
      * <p>

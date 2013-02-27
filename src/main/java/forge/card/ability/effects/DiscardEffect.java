@@ -117,9 +117,9 @@ public class DiscardEffect extends RevealEffectBase {
             }
         }
 
-        Collections.sort(goodChoices, CardLists.TextLenReverseComparator);
+        Collections.sort(goodChoices, CardLists.TextLenComparator);
 
-        CardLists.sortCMC(goodChoices);
+        CardLists.sortByCmcDesc(goodChoices);
         dChoices.add(goodChoices.get(0));
 
         return Aggregates.random(goodChoices);

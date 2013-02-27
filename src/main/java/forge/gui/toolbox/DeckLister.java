@@ -419,7 +419,6 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             this.cmdRowSelect.execute();
         }
     }
-    @SuppressWarnings("unchecked")
     private <T extends DeckBase> void editDeck(final Deck d0) {
         switch (this.gametype) {
             case Quest:

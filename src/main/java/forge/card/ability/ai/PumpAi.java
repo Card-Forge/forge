@@ -184,7 +184,7 @@ public class PumpAi extends PumpAiBase {
             if (sa.getParam("AILogic").equals("HighestPower")) {
                 list = CardLists.getValidCards(CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                 list = CardLists.getTargetableCards(list, sa);
-                CardLists.sortAttack(list);
+                CardLists.sortByPowerDesc(list);
                 if (!list.isEmpty()) {
                     tgt.addTarget(list.get(0));
                     return true;

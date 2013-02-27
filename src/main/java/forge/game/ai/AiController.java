@@ -586,7 +586,7 @@ public class AiController {
                 discardList.add(landsInHand.get(0));
                 hand.remove(landsInHand.get(0));
             } else { // Discard other stuff
-                CardLists.sortCMC(hand);
+                CardLists.sortByCmcDesc(hand);
                 int numLandsAvailable = numLandsInPlay;
                 if (numLandsInHand > 0) {
                     numLandsAvailable++;

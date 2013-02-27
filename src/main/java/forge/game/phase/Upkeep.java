@@ -544,7 +544,7 @@ public class Upkeep extends Phase {
                 public void resolve() {
                     final List<Card> creatures = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                     if (creatures.size() > 0) {
-                        CardLists.sortAttackLowFirst(creatures);
+                        CardLists.sortByPowerAsc(creatures);
                         final int power = creatures.get(0).getNetAttack();
                         if (player.isHuman()) {
                             Singletons.getModel().getMatch().getInput().setInput(

@@ -1237,7 +1237,7 @@ public class GameAction {
                     return crd.hasKeyword("Totem armor");
                 }
             });
-            CardLists.sortCMC(list);
+            CardLists.sortByCmcDesc(list);
 
             if (list.size() != 0) {
                 final Card crd;
