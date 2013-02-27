@@ -8,6 +8,7 @@ SVar:ChooseNumber:AB$ ChooseNumber | Cost$ 0 | Defined$ You | Min$ 0 | Max$ 7
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ CARDNAME's power is equal to the last chosen number and its toughness is equal to 7 minus that number.
 SVar:X:Count$ChosenNumber
 SVar:Y:Number$7/Minus.X
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shapeshifter.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/398.jpg

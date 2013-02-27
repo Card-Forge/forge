@@ -7,22 +7,24 @@ Difficulty=medium
 Description=Blue deck with artifact creatures.
 Deck Type=constructed
 [main]
-3 Apprentice Wizard|DRK
 2 Backfire|LEG
-1 Dragon Engine|ATQ
+1 Brass Man|ARN
+1 Clay Statue|ATQ
+1 Dancing Scimitar|ARN
+1 Diabolic Machine|DRK
+3 Dragon Engine|ATQ
 2 Fellwar Stone|DRK
+1 Grapeshot Catapult|ATQ
 1 Flood|DRK
-4 Hurkyl's Recall|ATQ
 20 Island|4ED
 1 Ivory Tower|ATQ
 3 Mana Vault|LEB
-1 Mana Vortex|DRK
+4 Marble Priest|LEG
 4 Mishra's Factory|ATQ
-4 Primal Clay|ATQ
-1 Shapeshifter|4ED
-3 Shapeshifter|ATQ
+1 Onulet|ATQ
 2 Tetravus|4ED
 3 Triskelion|4ED
-4 Unstable Mutation|ARN
+1 Unstable Mutation|ARN
 4 Unsummon|4ED
+4 Yotian Soldier|ATQ
 [sideboard]
