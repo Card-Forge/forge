@@ -262,23 +262,6 @@ public class SpellPermanent extends Spell {
 
     /** {@inheritDoc} */
     @Override
-    public boolean canPlay() {
-        final Card source = this.getSourceCard();
-
-        final Player turn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-
-        if (source.getName().equals("Serra Avenger")) {
-            if (turn.equals(source.getController()) && (turn.getTurn() <= 3)) {
-                return false;
-            }
-        }
-
-        // Flash handled by super.canPlay
-        return super.canPlay();
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public boolean canPlayAI() {
 
         final Card card = this.getSourceCard();

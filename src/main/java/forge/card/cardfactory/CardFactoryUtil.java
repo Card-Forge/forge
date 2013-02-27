@@ -1920,6 +1920,15 @@ public class CardFactoryUtil {
             }
         }
 
+        if (sq[0].equals("YourTurns")) {
+            return CardFactoryUtil.doXMath(cardController.getTurn(), m, c);
+        }
+
+        if (sq[0].equals("TotalTurns")) {
+            // Sorry for the Singleton use, replace this once this function has game passed into it
+            return CardFactoryUtil.doXMath(Singletons.getModel().getGame().getPhaseHandler().getTurn(), m, c);
+        }
+
         // Generic Zone-based counting
         // Count$QualityAndZones.Subquality
 
