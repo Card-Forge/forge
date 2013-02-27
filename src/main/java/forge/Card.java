@@ -8700,23 +8700,28 @@ public class Card extends GameEntity implements Comparable<Card> {
                     continue;
                 }
                 if (kw.equals("Protection from white")) {
-                    if (source.isWhite() && !source.getName().equals("White Ward")) {
+                    if (source.isWhite() && !source.getName().equals("White Ward") 
+                            && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from blue")) {
-                    if (source.isBlue() && !source.getName().equals("Blue Ward")) {
+                    if (source.isBlue() && !source.getName().equals("Blue Ward") 
+                            && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from black")) {
-                    if (source.isBlack() && !source.getName().equals("Black Ward")) {
+                    if (source.isBlack() && !source.getName().equals("Black Ward") 
+                            && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from red")) {
-                    if (source.isRed() && !source.getName().equals("Red Ward")) {
+                    if (source.isRed() && !source.getName().equals("Red Ward") 
+                            && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from green")) {
-                    if (source.isGreen() && !source.getName().equals("Green Ward")) {
+                    if (source.isGreen() && !source.getName().equals("Green Ward") 
+                            && !source.getName().contains("Pledge of Loyalty")) {
                         return true;
                     }
                 } else if (kw.equals("Protection from creatures")) {
@@ -8764,7 +8769,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (source.isValid(characteristics, this.getController(), this)
                       && !source.getName().contains("Flickering Ward") && !source.getName().contains("Pentarch Ward")
                       && !source.getName().contains("Cho-Manno's Blessing") && !source.getName().contains("Floating Shield")
-                      && !source.getName().contains("Ward of Light")) {
+                      && !source.getName().contains("Ward of Lights")) {
                         return true;
                     }
                 }

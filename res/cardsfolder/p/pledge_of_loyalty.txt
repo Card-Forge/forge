@@ -1,0 +1,18 @@
+Name:Pledge of Loyalty
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Protection from white | CheckSVar$ WHITE | SVarCompare$ GE1 | Description$ Enchanted creature has protection from the colors of permanents you control. This effect doesn't remove CARDNAME.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Protection from blue | CheckSVar$ BLUE | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Protection from black | CheckSVar$ BLACK | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Protection from red | CheckSVar$ RED | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ Protection from green | CheckSVar$ GREEN | SVarCompare$ GE1
+SVar:WHITE:Count$Valid Permanent.White+YouCtrl
+SVar:BLUE:Count$Valid Permanent.Blue+YouCtrl
+SVar:BLACK:Count$Valid Permanent.Black+YouCtrl
+SVar:RED:Count$Valid Permanent.Red+YouCtrl
+SVar:GREEN:Count$Valid Permanent.Green+YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pledge_of_loyalty.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/24.jpg
+Oracle:Enchant creature\nEnchanted creature has protection from the colors of permanents you control. This effect doesn't remove Pledge of Loyalty.

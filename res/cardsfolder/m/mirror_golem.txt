@@ -1,0 +1,27 @@
+Name:Mirror Golem
+ManaCost:6
+Types:Artifact Creature Golem
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile target card from a graveyard.
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Imprint$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from creatures | CheckSVar$ CheckCreature | SVarCompare$ GE1 | Description$ CARDNAME has protection from each of the exiled card's card types. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Land:Protection from lands | CheckSVar$ CheckLand | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from enchantments | CheckSVar$ CheckEnchantment | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from artifacts | CheckSVar$ CheckArtifact | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Instant:Protection from instants | CheckSVar$ CheckInstant | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Sorcery:Protection from sorceries | CheckSVar$ CheckSorcery | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Planeswalker:Protection from planeswalkers | CheckSVar$ CheckPlaneswalker | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Tribal:Protection from tribals | CheckSVar$ CheckTribal | SVarCompare$ GE1
+SVar:CheckCreature:Imprinted$Valid Creature
+SVar:CheckArtifact:Imprinted$Valid Artifact
+SVar:CheckEnchantment:Imprinted$Valid Enchantment
+SVar:CheckInstant:Imprinted$Valid Instant
+SVar:CheckSorcery:Imprinted$Valid Sorcery
+SVar:CheckPlaneswalker:Imprinted$Valid Planeswalker
+SVar:CheckTribal:Imprinted$Valid Tribal
+SVar:CheckLand:Imprinted$Valid Land
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_golem.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/208.jpg
+Oracle:Imprint - When Mirror Golem enters the battlefield, you may exile target card from a graveyard.\nMirror Golem has protection from each of the exiled card's card types. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
