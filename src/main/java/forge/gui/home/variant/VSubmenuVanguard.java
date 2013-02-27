@@ -169,7 +169,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         //Player panels (Human + 7 AIs)
         for (int i = 0; i < 8; i++) {
             tempPanel = new FPanel();
-            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy"));
+            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy, ax center"));
 
             tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
             tempChooser.initialize();

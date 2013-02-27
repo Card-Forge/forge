@@ -120,7 +120,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         //Player panels (Human + 7 AIs)
         for (int i = 0; i < 8; i++) {
             FPanel tempPanel = new FPanel();
-            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy"));
+            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy, ax center"));
 
             FDeckChooser tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
             tempChooser.initialize();
