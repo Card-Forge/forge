@@ -64,6 +64,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
+import forge.control.input.InputSelectManyCards;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -2470,7 +2471,7 @@ public class CardFactoryUtil {
             temp.setOwner(controller);
             temp.setToken(true);
             CardFactoryUtil.parseKeywords(temp, temp.getName());
-            CardFactoryUtil.postFactoryKeywords(temp);
+            CardFactoryUtil.setupKeywordedAbilities(temp);
             Singletons.getModel().getGame().getAction().moveToPlay(temp);
             list.add(temp);
         }
@@ -2789,7 +2790,7 @@ public class CardFactoryUtil {
      * @param card
      *            a {@link forge.Card} object.
      */
-    public static void postFactoryKeywords(final Card card) {
+    public static void setupKeywordedAbilities(final Card card) {
         // this function should handle any keywords that need to be added after
         // a spell goes through the factory
         // Cards with Cycling abilities
@@ -2826,46 +2827,9 @@ public class CardFactoryUtil {
             }
         }
 
-        final int evokeKeyword = CardFactoryUtil.hasKeyword(card, "Evoke");
-        if (evokeKeyword != -1) {
-            final SpellAbility evokedSpell = new Spell(card) {
-                private static final long serialVersionUID = -1598664196463358630L;
-
-                @Override
-                public void resolve() {
-                    card.setEvoked(true);
-                    Singletons.getModel().getGame().getAction().moveToPlay(card);
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    if (!SpellPermanent.checkETBEffects(card, (AIPlayer) this.getActivatingPlayer())) {
-                        return false;
-                    }
-                    return super.canPlayAI();
-                }
-            };
-            final String parse = card.getKeyword().get(evokeKeyword).toString();
-            card.removeIntrinsicKeyword(parse);
-
-            final String[] k = parse.split(":");
-            final String evokedCost = k[1];
-
-            evokedSpell.setManaCost(new ManaCost(new ManaCostParser(evokedCost)));
-
-            final StringBuilder desc = new StringBuilder();
-            desc.append("Evoke ").append(evokedCost);
-            desc.append(" (You may cast this spell for its evoke cost. ");
-            desc.append("If you do, when it enters the battlefield, sacrifice it.)");
-
-            evokedSpell.setDescription(desc.toString());
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" (Evoked)");
-            evokedSpell.setStackDescription(sb.toString());
-            evokedSpell.setBasicSpell(false);
-
-            card.addSpellAbility(evokedSpell);
+        final int evokePos = CardFactoryUtil.hasKeyword(card, "Evoke");
+        if (evokePos != -1) {
+            card.addSpellAbility(makeEvokeSpell(card, card.getKeyword().get(evokePos)));
         }
 
         if (CardFactoryUtil.hasKeyword(card, "Cycling") != -1) {
@@ -2911,7 +2875,7 @@ public class CardFactoryUtil {
         int shiftPos = CardFactoryUtil.hasKeyword(card, "Soulshift");
         while (shiftPos != -1) {
             final int n = shiftPos;
-            final String parse = card.getKeyword().get(n).toString();
+            final String parse = card.getKeyword().get(n);
             final String[] k = parse.split(" ");
             final int manacost = Integer.parseInt(k[1]);
 
@@ -2928,29 +2892,26 @@ public class CardFactoryUtil {
             shiftPos = CardFactoryUtil.hasKeyword(card, "Soulshift", n + 1);
         } // Soulshift
 
-        if (CardFactoryUtil.hasKeyword(card, "Echo") != -1) {
-            final int n = CardFactoryUtil.hasKeyword(card, "Echo");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                // card.removeIntrinsicKeyword(parse);
+        final int echoPos = CardFactoryUtil.hasKeyword(card, "Echo");
+        if (echoPos != -1) {
+            // card.removeIntrinsicKeyword(parse);
+            final String parse = card.getKeyword().get(echoPos);
+            final String[] k = parse.split(":");
+            final String manacost = k[1];
 
-                final String[] k = parse.split(":");
-                final String manacost = k[1];
+            card.setEchoCost(manacost);
 
-                card.setEchoCost(manacost);
+            final Command intoPlay = new Command() {
 
-                final Command intoPlay = new Command() {
+                private static final long serialVersionUID = -7913835645603984242L;
 
-                    private static final long serialVersionUID = -7913835645603984242L;
+                @Override
+                public void execute() {
+                    card.addExtrinsicKeyword("(Echo unpaid)");
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
 
-                    @Override
-                    public void execute() {
-                        card.addExtrinsicKeyword("(Echo unpaid)");
-                    }
-                };
-                card.addComesIntoPlayCommand(intoPlay);
-
-            }
         } // echo
 
         if (CardFactoryUtil.hasKeyword(card, "Suspend") != -1) {
@@ -2974,22 +2935,6 @@ public class CardFactoryUtil {
             sa.setIsXCost(true);
             sa.setXManaCost(xCount);
         } // X
-
-        int cardnameSpot = CardFactoryUtil.hasKeyword(card, "CARDNAME is ");
-        if (cardnameSpot != -1) {
-            String color = "1";
-            while (cardnameSpot != -1) {
-                if (cardnameSpot != -1) {
-                    final String parse = card.getKeyword().get(cardnameSpot).toString();
-                    card.removeIntrinsicKeyword(parse);
-                    color += " "
-                            + MagicColor.toShortString(parse.replace("CARDNAME is ", "").replace(".",
-                            ""));
-                    cardnameSpot = CardFactoryUtil.hasKeyword(card, "CARDNAME is ");
-                }
-            }
-            card.addColor(color);
-        }
 
         if (CardFactoryUtil.hasKeyword(card, "Fading") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Fading");
@@ -3029,63 +2974,7 @@ public class CardFactoryUtil {
         if (!card.getSVar("AltCost").equals("")) {
             final SpellAbility[] abilities = card.getSpellAbility();
             if ((abilities.length > 0) && abilities[0].isSpell()) {
-                String altCost = card.getSVar("AltCost");
-                final HashMap<String, String> mapParams = new HashMap<String, String>();
-                String altCostDescription = "";
-                final String[] altCosts = altCost.split("\\|");
-
-                for (int aCnt = 0; aCnt < altCosts.length; aCnt++) {
-                    altCosts[aCnt] = altCosts[aCnt].trim();
-                }
-
-                for (final String altCost2 : altCosts) {
-                    final String[] aa = altCost2.split("\\$");
-
-                    for (int aaCnt = 0; aaCnt < aa.length; aaCnt++) {
-                        aa[aaCnt] = aa[aaCnt].trim();
-                    }
-
-                    if (aa.length != 2) {
-                        final StringBuilder sb = new StringBuilder();
-                        sb.append("StaticEffectFactory Parsing Error: Split length of ");
-                        sb.append(altCost2).append(" in ").append(card.getName()).append(" is not 2.");
-                        throw new RuntimeException(sb.toString());
-                    }
-
-                    mapParams.put(aa[0], aa[1]);
-                }
-
-                altCost = mapParams.get("Cost");
-
-                if (mapParams.containsKey("Description")) {
-                    altCostDescription = mapParams.get("Description");
-                }
-
-                final SpellAbility sa = abilities[0];
-                final SpellAbility altCostSA = sa.copy();
-
-                final Cost abCost = new Cost(card, altCost, altCostSA.isAbility());
-                altCostSA.setPayCosts(abCost);
-
-                final StringBuilder sb = new StringBuilder();
-
-                if (!altCostDescription.equals("")) {
-                    sb.append(altCostDescription);
-                } else {
-                    sb.append("You may ").append(abCost.toStringAlt());
-                    sb.append(" rather than pay ").append(card.getName()).append("'s mana cost.");
-                }
-
-                final SpellAbilityRestriction restriction = new SpellAbilityRestriction();
-                restriction.setRestrictions(mapParams);
-                if (!mapParams.containsKey("ActivationZone")) {
-                    restriction.setZone(ZoneType.Hand);
-                }
-                altCostSA.setRestrictions(restriction);
-                altCostSA.setDescription(sb.toString());
-                altCostSA.setBasicSpell(false);
-
-                card.addSpellAbility(altCostSA);
+                card.addSpellAbility(makeAltCost(card, abilities[0]));
             }
         }
 
@@ -3094,161 +2983,7 @@ public class CardFactoryUtil {
         }
 
         if (card.hasStartOfKeyword("Haunt")) {
-            final int hauntPos = card.getKeywordPosition("Haunt");
-            final String[] splitKeyword = card.getKeyword().get(hauntPos).split(":");
-            final String hauntSVarName = splitKeyword[1];
-            final String abilityDescription = splitKeyword[2];
-            final String hauntAbilityDescription = abilityDescription.substring(0, 1).toLowerCase()
-                    + abilityDescription.substring(1);
-            String hauntDescription;
-            if (card.isCreature()) {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("When ").append(card.getName());
-                sb.append(" enters the battlefield or the creature it haunts dies, ");
-                sb.append(hauntAbilityDescription);
-                hauntDescription = sb.toString();
-            } else {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("When the creature ").append(card.getName());
-                sb.append(" haunts dies, ").append(hauntAbilityDescription);
-                hauntDescription = sb.toString();
-            }
-
-            card.getKeyword().remove(hauntPos);
-
-            // First, create trigger that runs when the haunter goes to the
-            // graveyard
-            final StringBuilder sbHaunter = new StringBuilder();
-            sbHaunter.append("Mode$ ChangesZone | Origin$ Battlefield | ");
-            sbHaunter.append("Destination$ Graveyard | ValidCard$ Card.Self | ");
-            sbHaunter.append("Static$ True | Secondary$ True | TriggerDescription$ Blank");
-
-            final Trigger haunterDies = forge.card.trigger.TriggerHandler
-                    .parseTrigger(sbHaunter.toString(), card, true);
-
-            final Ability haunterDiesWork = new Ability(card, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    this.getTargetCard().addHauntedBy(card);
-                    Singletons.getModel().getGame().getAction().exile(card);
-                }
-            };
-            haunterDiesWork.setDescription(hauntDescription);
-
-            final Input target = new Input() {
-                private static final long serialVersionUID = 1981791992623774490L;
-
-                @Override
-                public void showMessage() {
-                    CMatchUI.SINGLETON_INSTANCE.showMessage("Choose target creature to haunt.");
-                    ButtonUtil.disableAll();
-                }
-
-                @Override
-                public void selectCard(final Card c) {
-                    Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                    if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
-                        return;
-                    }
-                    if (c.canBeTargetedBy(haunterDiesWork)) {
-                        haunterDiesWork.setTargetCard(c);
-                        Singletons.getModel().getGame().getStack().add(haunterDiesWork);
-                        this.stop();
-                    } else {
-                        CMatchUI.SINGLETON_INSTANCE
-                                .showMessage("Cannot target this card (Shroud? Protection?).");
-                    }
-                }
-            };
-
-            final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    final List<Card> creats = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-                    for (int i = 0; i < creats.size(); i++) {
-                        if (!creats.get(i).canBeTargetedBy(this)) {
-                            creats.remove(i);
-                            i--;
-                        }
-                    }
-                    if (creats.size() == 0) {
-                        return;
-                    }
-
-                    // need to do it this way because I don't know quite how to
-                    // make TriggerHandler respect BeforePayMana.
-                    if (card.getController().isHuman()) {
-                        Singletons.getModel().getMatch().getInput().setInput(target);
-                    } else {
-                        // AI choosing what to haunt
-                        final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());
-                        if (!oppCreats.isEmpty()) {
-                            haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(oppCreats));
-                        } else {
-                            haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(creats));
-                        }
-                        Singletons.getModel().getGame().getStack().add(haunterDiesWork);
-                    }
-                }
-            };
-
-            haunterDies.setOverridingAbility(haunterDiesSetup);
-
-            // Second, create the trigger that runs when the haunted creature
-            // dies
-            final StringBuilder sbDies = new StringBuilder();
-            sbDies.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ");
-            sbDies.append("ValidCard$ Creature.HauntedBy | Execute$ ").append(hauntSVarName);
-            sbDies.append(" | TriggerDescription$ ").append(hauntDescription);
-
-            final Trigger hauntedDies = forge.card.trigger.TriggerHandler.parseTrigger(sbDies.toString(), card, true);
-
-            // Third, create the trigger that runs when the haunting creature
-            // enters the battlefield
-            final StringBuilder sbETB = new StringBuilder();
-            sbETB.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ");
-            sbETB.append(hauntSVarName).append(" | Secondary$ True | TriggerDescription$ ");
-            sbETB.append(hauntDescription);
-
-            final Trigger haunterETB = forge.card.trigger.TriggerHandler.parseTrigger(sbETB.toString(), card, true);
-
-            // Fourth, create a trigger that removes the haunting status if the
-            // haunter leaves the exile
-            final StringBuilder sbUnExiled = new StringBuilder();
-            sbUnExiled.append("Mode$ ChangesZone | Origin$ Exile | Destination$ Any | ");
-            sbUnExiled.append("ValidCard$ Card.Self | Static$ True | Secondary$ True | ");
-            sbUnExiled.append("TriggerDescription$ Blank");
-
-            final Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger(sbUnExiled.toString(), card,
-                    true);
-
-            final Ability haunterUnExiledWork = new Ability(card, ManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    if (card.getHaunting() != null) {
-                        card.getHaunting().removeHauntedBy(card);
-                        card.setHaunting(null);
-                    }
-                }
-            };
-
-            haunterUnExiled.setOverridingAbility(haunterUnExiledWork);
-
-            // Fifth, add all triggers and abilities to the card.
-            if (card.isCreature()) {
-                card.addTrigger(haunterETB);
-                card.addTrigger(haunterDies);
-            } else {
-                final String abString = card.getSVar(hauntSVarName).replace("AB$", "SP$")
-                        .replace("Cost$ 0", "Cost$ " + card.getManaCost())
-                        + " | SpellDescription$ " + abilityDescription;
-
-                final SpellAbility sa = AbilityFactory.getAbility(abString, card);
-                card.addSpellAbility(sa);
-            }
-
-            card.addTrigger(hauntedDies);
-            card.addTrigger(haunterUnExiled);
+            setupHauntSpell(card);
         }
 
         if (card.hasKeyword("Provoke")) {
@@ -3293,57 +3028,7 @@ public class CardFactoryUtil {
         }
 
         if (card.hasKeyword("Epic")) {
-            final SpellAbility origSA = card.getSpellAbilities().get(0);
-
-            final SpellAbility newSA = new Spell(card, origSA.getPayCosts(), origSA.getTarget()) {
-                private static final long serialVersionUID = -7934420043356101045L;
-
-                @Override
-                public void resolve() {
-                    final GameState game = Singletons.getModel().getGame();
-
-                    String name = card.toString() + " Epic";
-                    if (card.getController().getCardsIn(ZoneType.Battlefield, name).isEmpty()) {
-                        // Create Epic emblem
-                        final Card eff = new Card();
-                        eff.setName(card.toString() + " Epic");
-                        eff.addType("Effect"); // Or Emblem
-                        eff.setToken(true); // Set token to true, so when leaving
-                                            // play it gets nuked
-                        eff.addController(card.getController());
-                        eff.setOwner(card.getController());
-                        eff.setColor(card.getColor());
-                        eff.setImmutable(true);
-                        eff.setEffectSource(card);
-
-                        eff.addStaticAbility("Mode$ CantBeCast | ValidCard$ Card | Caster$ You "
-                                + "| Description$ For the rest of the game, you can't cast spells.");
-
-                        eff.setSVar("EpicCopy", "AB$ CopySpellAbility | Cost$ 0 | Defined$ EffectSource");
-
-                        final Trigger copyTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
-                                "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
-                                        + "At the beginning of each of your upkeeps, copy " + card.toString()
-                                        + " except for its epic ability.", eff, false);
-
-                        eff.addTrigger(copyTrigger);
-
-                        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                        game.getAction().moveToPlay(eff);
-                        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-                    }
-
-                    if (card.getController().isHuman()) {
-                        game.getActionPlay().playSpellAbilityNoStack(card.getController(), origSA, false);
-                    } else {
-                        ComputerUtil.playNoStack((AIPlayer)card.getController(), origSA, game);
-                    }
-                }
-            };
-            newSA.setDescription(origSA.getDescription());
-
-            origSA.setPayCosts(null);
-            origSA.setManaCost(ManaCost.ZERO);
+            final SpellAbility newSA = makeEpic(card);
 
             card.clearSpellAbility();
             card.addSpellAbility(newSA);
@@ -3470,6 +3155,14 @@ public class CardFactoryUtil {
             card.getIntrinsicAbilities().add(abilityStr.toString());
         }
 
+        setupEtbKeywords(card);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     */
+    private static void setupEtbKeywords(final Card card) {
         for (String kw : card.getKeyword()) {
 
             if (kw.startsWith("ETBReplacement")) {
@@ -3550,6 +3243,332 @@ public class CardFactoryUtil {
         }
     }
 
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     * @return
+     */
+    private static SpellAbility makeEpic(final Card card) {
+        final SpellAbility origSA = card.getSpellAbilities().get(0);
+
+        final SpellAbility newSA = new Spell(card, origSA.getPayCosts(), origSA.getTarget()) {
+            private static final long serialVersionUID = -7934420043356101045L;
+
+            @Override
+            public void resolve() {
+                final GameState game = Singletons.getModel().getGame();
+
+                String name = card.toString() + " Epic";
+                if (card.getController().getCardsIn(ZoneType.Battlefield, name).isEmpty()) {
+                    // Create Epic emblem
+                    final Card eff = new Card();
+                    eff.setName(card.toString() + " Epic");
+                    eff.addType("Effect"); // Or Emblem
+                    eff.setToken(true); // Set token to true, so when leaving
+                                        // play it gets nuked
+                    eff.addController(card.getController());
+                    eff.setOwner(card.getController());
+                    eff.setColor(card.getColor());
+                    eff.setImmutable(true);
+                    eff.setEffectSource(card);
+
+                    eff.addStaticAbility("Mode$ CantBeCast | ValidCard$ Card | Caster$ You "
+                            + "| Description$ For the rest of the game, you can't cast spells.");
+
+                    eff.setSVar("EpicCopy", "AB$ CopySpellAbility | Cost$ 0 | Defined$ EffectSource");
+
+                    final Trigger copyTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
+                            "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
+                                    + "At the beginning of each of your upkeeps, copy " + card.toString()
+                                    + " except for its epic ability.", eff, false);
+
+                    eff.addTrigger(copyTrigger);
+
+                    game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+                    game.getAction().moveToPlay(eff);
+                    game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                }
+
+                if (card.getController().isHuman()) {
+                    game.getActionPlay().playSpellAbilityNoStack(card.getController(), origSA, false);
+                } else {
+                    ComputerUtil.playNoStack((AIPlayer)card.getController(), origSA, game);
+                }
+            }
+        };
+        newSA.setDescription(origSA.getDescription());
+
+        origSA.setPayCosts(null);
+        origSA.setManaCost(ManaCost.ZERO);
+        return newSA;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     */
+    private static void setupHauntSpell(final Card card) {
+        final int hauntPos = card.getKeywordPosition("Haunt");
+        final String[] splitKeyword = card.getKeyword().get(hauntPos).split(":");
+        final String hauntSVarName = splitKeyword[1];
+        final String abilityDescription = splitKeyword[2];
+        final String hauntAbilityDescription = abilityDescription.substring(0, 1).toLowerCase()
+                + abilityDescription.substring(1);
+        String hauntDescription;
+        if (card.isCreature()) {
+            final StringBuilder sb = new StringBuilder();
+            sb.append("When ").append(card.getName());
+            sb.append(" enters the battlefield or the creature it haunts dies, ");
+            sb.append(hauntAbilityDescription);
+            hauntDescription = sb.toString();
+        } else {
+            final StringBuilder sb = new StringBuilder();
+            sb.append("When the creature ").append(card.getName());
+            sb.append(" haunts dies, ").append(hauntAbilityDescription);
+            hauntDescription = sb.toString();
+        }
+
+        card.getKeyword().remove(hauntPos);
+
+        // First, create trigger that runs when the haunter goes to the
+        // graveyard
+        final StringBuilder sbHaunter = new StringBuilder();
+        sbHaunter.append("Mode$ ChangesZone | Origin$ Battlefield | ");
+        sbHaunter.append("Destination$ Graveyard | ValidCard$ Card.Self | ");
+        sbHaunter.append("Static$ True | Secondary$ True | TriggerDescription$ Blank");
+
+        final Trigger haunterDies = forge.card.trigger.TriggerHandler
+                .parseTrigger(sbHaunter.toString(), card, true);
+
+        final Ability haunterDiesWork = new Ability(card, ManaCost.ZERO) {
+            @Override
+            public void resolve() {
+                this.getTargetCard().addHauntedBy(card);
+                Singletons.getModel().getGame().getAction().exile(card);
+            }
+        };
+        haunterDiesWork.setDescription(hauntDescription);
+
+        final InputSelectManyCards target = new InputSelectManyCards(1,1) {
+            private static final long serialVersionUID = 1981791992623774490L;
+
+            @Override
+            protected Input onDone() {
+                haunterDiesWork.setTargetCard(selected.get(0));
+                Singletons.getModel().getGame().getStack().add(haunterDiesWork);
+                return null;
+            }
+
+            @Override
+            protected boolean isValidChoice(Card c) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
+                    return false;
+                }
+                return c.canBeTargetedBy(haunterDiesWork);
+            }
+        }; 
+        target.setMessage("Choose target creature to haunt.");
+
+        final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
+            @Override
+            public void resolve() {
+                final List<Card> creats = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                for (int i = 0; i < creats.size(); i++) {
+                    if (!creats.get(i).canBeTargetedBy(this)) {
+                        creats.remove(i);
+                        i--;
+                    }
+                }
+                if (creats.isEmpty()) {
+                    return;
+                }
+
+                // need to do it this way because I don't know quite how to
+                // make TriggerHandler respect BeforePayMana.
+                if (card.getController().isHuman()) {
+                    Singletons.getModel().getMatch().getInput().setInput(target);
+                } else {
+                    // AI choosing what to haunt
+                    final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());
+                    if (!oppCreats.isEmpty()) {
+                        haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(oppCreats));
+                    } else {
+                        haunterDiesWork.setTargetCard(ComputerUtilCard.getWorstCreatureAI(creats));
+                    }
+                    Singletons.getModel().getGame().getStack().add(haunterDiesWork);
+                }
+            }
+        };
+
+        haunterDies.setOverridingAbility(haunterDiesSetup);
+
+        // Second, create the trigger that runs when the haunted creature dies
+        final StringBuilder sbDies = new StringBuilder();
+        sbDies.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ");
+        sbDies.append("ValidCard$ Creature.HauntedBy | Execute$ ").append(hauntSVarName);
+        sbDies.append(" | TriggerDescription$ ").append(hauntDescription);
+
+        final Trigger hauntedDies = forge.card.trigger.TriggerHandler.parseTrigger(sbDies.toString(), card, true);
+
+        // Third, create the trigger that runs when the haunting creature
+        // enters the battlefield
+        final StringBuilder sbETB = new StringBuilder();
+        sbETB.append("Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ");
+        sbETB.append(hauntSVarName).append(" | Secondary$ True | TriggerDescription$ ");
+        sbETB.append(hauntDescription);
+
+        final Trigger haunterETB = forge.card.trigger.TriggerHandler.parseTrigger(sbETB.toString(), card, true);
+
+        // Fourth, create a trigger that removes the haunting status if the
+        // haunter leaves the exile
+        final StringBuilder sbUnExiled = new StringBuilder();
+        sbUnExiled.append("Mode$ ChangesZone | Origin$ Exile | Destination$ Any | ");
+        sbUnExiled.append("ValidCard$ Card.Self | Static$ True | Secondary$ True | ");
+        sbUnExiled.append("TriggerDescription$ Blank");
+
+        final Trigger haunterUnExiled = forge.card.trigger.TriggerHandler.parseTrigger(sbUnExiled.toString(), card,
+                true);
+
+        final Ability haunterUnExiledWork = new Ability(card, ManaCost.ZERO) {
+            @Override
+            public void resolve() {
+                if (card.getHaunting() != null) {
+                    card.getHaunting().removeHauntedBy(card);
+                    card.setHaunting(null);
+                }
+            }
+        };
+
+        haunterUnExiled.setOverridingAbility(haunterUnExiledWork);
+
+        // Fifth, add all triggers and abilities to the card.
+        if (card.isCreature()) {
+            card.addTrigger(haunterETB);
+            card.addTrigger(haunterDies);
+        } else {
+            final String abString = card.getSVar(hauntSVarName).replace("AB$", "SP$")
+                    .replace("Cost$ 0", "Cost$ " + card.getManaCost())
+                    + " | SpellDescription$ " + abilityDescription;
+
+            final SpellAbility sa = AbilityFactory.getAbility(abString, card);
+            card.addSpellAbility(sa);
+        }
+
+        card.addTrigger(hauntedDies);
+        card.addTrigger(haunterUnExiled);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     * @param abilities
+     * @return 
+     */
+    private static SpellAbility makeAltCost(final Card card, final SpellAbility sa) {
+        String altCost = card.getSVar("AltCost");
+        final HashMap<String, String> mapParams = new HashMap<String, String>();
+        String altCostDescription = "";
+        final String[] altCosts = altCost.split("\\|");
+
+        for (int aCnt = 0; aCnt < altCosts.length; aCnt++) {
+            altCosts[aCnt] = altCosts[aCnt].trim();
+        }
+
+        for (final String altCost2 : altCosts) {
+            final String[] aa = altCost2.split("\\$");
+
+            for (int aaCnt = 0; aaCnt < aa.length; aaCnt++) {
+                aa[aaCnt] = aa[aaCnt].trim();
+            }
+
+            if (aa.length != 2) {
+                final StringBuilder sb = new StringBuilder();
+                sb.append("StaticEffectFactory Parsing Error: Split length of ");
+                sb.append(altCost2).append(" in ").append(card.getName()).append(" is not 2.");
+                throw new RuntimeException(sb.toString());
+            }
+
+            mapParams.put(aa[0], aa[1]);
+        }
+
+        altCost = mapParams.get("Cost");
+
+        if (mapParams.containsKey("Description")) {
+            altCostDescription = mapParams.get("Description");
+        }
+
+        final SpellAbility altCostSA = sa.copy();
+
+        final Cost abCost = new Cost(card, altCost, altCostSA.isAbility());
+        altCostSA.setPayCosts(abCost);
+
+        final StringBuilder sb = new StringBuilder();
+
+        if (!altCostDescription.equals("")) {
+            sb.append(altCostDescription);
+        } else {
+            sb.append("You may ").append(abCost.toStringAlt());
+            sb.append(" rather than pay ").append(card.getName()).append("'s mana cost.");
+        }
+
+        final SpellAbilityRestriction restriction = new SpellAbilityRestriction();
+        restriction.setRestrictions(mapParams);
+        if (!mapParams.containsKey("ActivationZone")) {
+            restriction.setZone(ZoneType.Hand);
+        }
+        altCostSA.setRestrictions(restriction);
+        altCostSA.setDescription(sb.toString());
+        altCostSA.setBasicSpell(false);
+
+        return altCostSA;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     * @param evokeKeyword
+     * @return
+     */
+    private static SpellAbility makeEvokeSpell(final Card card, final String evokeKeyword) {
+        final SpellAbility evokedSpell = new Spell(card) {
+            private static final long serialVersionUID = -1598664196463358630L;
+
+            @Override
+            public void resolve() {
+                card.setEvoked(true);
+                Singletons.getModel().getGame().getAction().moveToPlay(card);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                if (!SpellPermanent.checkETBEffects(card, (AIPlayer) this.getActivatingPlayer())) {
+                    return false;
+                }
+                return super.canPlayAI();
+            }
+        };
+        card.removeIntrinsicKeyword(evokeKeyword);
+
+        final String[] k = evokeKeyword.split(":");
+        final String evokedCost = k[1];
+
+        evokedSpell.setManaCost(new ManaCost(new ManaCostParser(evokedCost)));
+
+        final StringBuilder desc = new StringBuilder();
+        desc.append("Evoke ").append(evokedCost);
+        desc.append(" (You may cast this spell for its evoke cost. ");
+        desc.append("If you do, when it enters the battlefield, sacrifice it.)");
+
+        evokedSpell.setDescription(desc.toString());
+
+        final StringBuilder sb = new StringBuilder();
+        sb.append(card.getName()).append(" (Evoked)");
+        evokedSpell.setStackDescription(sb.toString());
+        evokedSpell.setBasicSpell(false);
+        return evokedSpell;
+    }
+
     public static void setupETBReplacementAbility(SpellAbility sa) {
         SpellAbility tailend = sa;
         while (tailend.getSubAbility() != null) {
@@ -3574,7 +3593,7 @@ public class CardFactoryUtil {
     public static final int hasKeyword(final Card c, final String k) {
         final ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).toString().startsWith(k)) {
+            if (a.get(i).startsWith(k)) {
                 return i;
             }
         }
@@ -3598,7 +3617,7 @@ public class CardFactoryUtil {
     static final int hasKeyword(final Card c, final String k, final int startPos) {
         final ArrayList<String> a = c.getKeyword();
         for (int i = startPos; i < a.size(); i++) {
-            if (a.get(i).toString().startsWith(k)) {
+            if (a.get(i).startsWith(k)) {
                 return i;
             }
         }

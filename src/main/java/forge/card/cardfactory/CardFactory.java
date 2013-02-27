@@ -322,7 +322,7 @@ public class CardFactory {
             CardFactoryArtifacts.buildCard(card, cardName);
         }
 
-        CardFactoryUtil.postFactoryKeywords(card);
+        CardFactoryUtil.setupKeywordedAbilities(card);
     } // getCard2
 
 

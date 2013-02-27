@@ -52,7 +52,7 @@ public class InputPassPriority extends Input {
         final Player player = Singletons.getModel().getGame().getPhaseHandler().getPriorityPlayer();
 
         if (player.isComputer()) {
-            System.out.println(phase + ": Computer in passpriority");
+            System.err.println(phase + ": Computer in passpriority");
         }
 
         final StringBuilder sb = new StringBuilder();
