@@ -11408,6 +11408,7 @@ res/cardsfolder/v/vampire_interloper.txt -text
 res/cardsfolder/v/vampire_lacerator.txt svneol=native#text/plain
 res/cardsfolder/v/vampire_nighthawk.txt svneol=native#text/plain
 res/cardsfolder/v/vampire_nocturnus.txt svneol=native#text/plain
+res/cardsfolder/v/vampire_nocturnus_avatar.txt -text
 res/cardsfolder/v/vampire_outcasts.txt svneol=native#text/plain
 res/cardsfolder/v/vampires_bite.txt svneol=native#text/plain
 res/cardsfolder/v/vampiric_dragon.txt svneol=native#text/plain
