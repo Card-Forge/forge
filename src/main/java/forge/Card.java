@@ -2492,7 +2492,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Add Keywords
-        final ArrayList<String> kw = this.getKeyword();
+        final List<String> kw = this.getKeyword();
 
         // Triggered abilities
         for (final Trigger trig : this.getCharacteristics().getTriggers()) {
@@ -4878,7 +4878,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<String> getKeyword() {
+    public final List<String> getKeyword() {
         final ArrayList<String> keywords = this.getUnhiddenKeyword();
         keywords.addAll(this.getHiddenExtrinsicKeyword());
 
@@ -5978,7 +5978,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean hasStartOfKeyword(final String keyword) {
-        final ArrayList<String> a = this.getKeyword();
+        final List<String> a = this.getKeyword();
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i).toString().startsWith(keyword)) {
                 return true;
@@ -6016,7 +6016,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getKeywordPosition(final String k) {
-        final ArrayList<String> a = this.getKeyword();
+        final List<String> a = this.getKeyword();
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i).toString().startsWith(k)) {
                 return i;
@@ -6097,8 +6097,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getKeywordMagnitude(final String k) {
         int count = 0;
-        final ArrayList<String> keywords = this.getKeyword();
-        for (final String kw : keywords) {
+        for (final String kw : this.getKeyword()) {
             if (kw.startsWith(k)) {
                 final String[] parse = kw.split(" ");
                 final String s = parse[1];
@@ -8691,7 +8690,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (this.getKeyword() != null) {
-            final ArrayList<String> list = this.getKeyword();
+            final List<String> list = this.getKeyword();
 
             String kw = "";
             for (int i = 0; i < list.size(); i++) {
@@ -8829,12 +8828,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (this.getKeyword() != null) {
-            final ArrayList<String> list = this.getKeyword();
             final Card source = sa.getSourceCard();
 
-            String kw = "";
-            for (int i = 0; i < list.size(); i++) {
-                kw = list.get(i);
+            for (String kw : this.getKeyword()) {
                 if (kw.equals("Shroud")) {
                     return false;
                 }

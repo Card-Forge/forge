@@ -333,7 +333,7 @@ public final class GameActionUtil {
                 c.addExtrinsicKeyword("Ripple:4");
             }
 
-            final ArrayList<String> a = c.getKeyword();
+            final List<String> a = c.getKeyword();
             for (int x = 0; x < a.size(); x++) {
                 if (a.get(x).toString().startsWith("Ripple")) {
                     final String parse = c.getKeyword().get(x).toString();
@@ -713,41 +713,38 @@ public final class GameActionUtil {
      *            a {@link forge.Card} object.
      */
     public static void executeVampiricEffects(final Card c) {
-        final ArrayList<String> a = c.getKeyword();
-        for (int i = 0; i < a.size(); i++) {
-            if (c.isInPlay()
-                    && a.get(i)
-                            .toString()
-                            .startsWith(
-                                    "Whenever a creature dealt damage by CARDNAME "
-                                            + "this turn is put into a graveyard, put")) {
-                final Card thisCard = c;
-                final String kw = a.get(i).toString();
-                final Ability ability2 = new Ability(c, ManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        CounterType counter = CounterType.P1P1;
-                        if (kw.contains("+2/+2")) {
-                            counter = CounterType.P2P2;
-                        }
-                        if (thisCard.isInPlay()) {
-                            thisCard.addCounter(counter, 1, true);
-                        }
-                    }
-                }; // ability2
+        if (!c.isInPlay()) return;
 
-                final StringBuilder sb = new StringBuilder();
-                sb.append(c.getName());
-                if (kw.contains("+2/+2")) {
-                    sb.append(" - gets a +2/+2 counter");
-                } else {
-                    sb.append(" - gets a +1/+1 counter");
-                }
-                ability2.setStackDescription(sb.toString());
-
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability2);
-
+        for (final String kw : c.getKeyword()) {
+            if(!kw.startsWith("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put")) {
+                continue;
             }
+            final Card thisCard = c;
+
+            final Ability ability2 = new Ability(c, ManaCost.ZERO) {
+                @Override
+                public void resolve() {
+                    CounterType counter = CounterType.P1P1;
+                    if (kw.contains("+2/+2")) {
+                        counter = CounterType.P2P2;
+                    }
+                    if (thisCard.isInPlay()) {
+                        thisCard.addCounter(counter, 1, true);
+                    }
+                }
+            }; // ability2
+
+            final StringBuilder sb = new StringBuilder();
+            sb.append(c.getName());
+            if (kw.contains("+2/+2")) {
+                sb.append(" - gets a +2/+2 counter");
+            } else {
+                sb.append(" - gets a +1/+1 counter");
+            }
+            ability2.setStackDescription(sb.toString());
+
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability2);
+
         }
     }
 
@@ -823,13 +820,11 @@ public final class GameActionUtil {
             sb.append(".");
 
             ability.setStackDescription(sb.toString());
-            final ArrayList<String> keywords = c.getKeyword();
 
-            for (int i = 0; i < keywords.size(); i++) {
-                if (keywords.get(i).startsWith("Poisonous")) {
+            for (String kw : c.getKeyword()) {
+                if (kw.startsWith("Poisonous")) {
                     Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
                 }
-
             }
         }
 

@@ -880,36 +880,32 @@ public class CombatUtil {
         // CARDNAME can't attack if defending player controls an untapped
         // creature with power ...
         final int[] powerLimit = { 0 };
-        int keywordPosition = 0;
-        boolean hasKeyword = false;
+        String cantAttackKw = null;
 
-        final ArrayList<String> attackerKeywords = c.getKeyword();
-        for (int i = 0; i < attackerKeywords.size(); i++) {
-            if (attackerKeywords.get(i).toString()
-                    .startsWith("CARDNAME can't attack if defending player controls an untapped creature with power")) {
-                hasKeyword = true;
-                keywordPosition = i;
+ 
+        for( String kw : c.getKeyword()) {
+            if (kw.startsWith("CARDNAME can't attack if defending player controls an untapped creature with power")) {
+                cantAttackKw = kw;
             }
         }
 
         // The keyword
         // "CARDNAME can't attack if defending player controls an untapped creature with power"
         // ... is present
-        if (hasKeyword) {
-            final String tmpString = c.getKeyword().get(keywordPosition).toString();
-            final String[] asSeparateWords = tmpString.trim().split(" ");
+        if (cantAttackKw != null) {
+            final String[] asSeparateWords = cantAttackKw.trim().split(" ");
 
             if (asSeparateWords.length >= 15) {
-                if (asSeparateWords[12].matches("[0-9][0-9]?")) {
+                if (StringUtils.isNumeric(asSeparateWords[12])) {
                     powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
 
                     List<Card> list = defendingPlayer.getCreaturesInPlay();
                     list = CardLists.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card ct) {
-                            return ((ct.isUntapped() && (ct.getNetAttack() >= powerLimit[0]) && asSeparateWords[14]
-                                    .contains("greater")) || (ct.isUntapped() && (ct.getNetAttack() <= powerLimit[0]) && asSeparateWords[14]
-                                    .contains("less")));
+                            return (ct.isUntapped()
+                                    && ((ct.getNetAttack() >= powerLimit[0] && asSeparateWords[14].contains("greater")) 
+                                    ||  (ct.getNetAttack() <= powerLimit[0] && asSeparateWords[14].contains("less"))));
                         }
                     });
                     if (!list.isEmpty()) {
@@ -1247,8 +1243,7 @@ public class CombatUtil {
 
         // Annihilator:
         if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
-            final ArrayList<String> kws = c.getKeyword();
-            for (final String key : kws) {
+            for (final String key : c.getKeyword()) {
                 if( !key.startsWith("Annihilator ") ) continue;
                 final String[] k = key.split(" ", 2);
                 final int a = Integer.valueOf(k[1]);
@@ -1419,7 +1414,7 @@ public class CombatUtil {
             }
 
             // Rampage
-            final ArrayList<String> keywords = a.getKeyword();
+            final List<String> keywords = a.getKeyword();
             final Pattern p = Pattern.compile("Rampage [0-9]+");
             Matcher m;
             for (final String keyword : keywords) {
@@ -1437,11 +1432,8 @@ public class CombatUtil {
 
         if (a.hasKeyword("Flanking") && !b.hasKeyword("Flanking")) {
             int flankingMagnitude = 0;
-            String kw = "";
-            final ArrayList<String> list = a.getKeyword();
 
-            for (int i = 0; i < list.size(); i++) {
-                kw = list.get(i);
+            for (String kw : a.getKeyword()) {
                 if (kw.equals("Flanking")) {
                     flankingMagnitude++;
                 }

@@ -40,7 +40,6 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardCharacteristics;
-import forge.card.MagicColor;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -1822,9 +1821,8 @@ public class CardFactoryUtil {
         
         // Count$BushidoPoint
         if (sq[0].contains("BushidoPoint")) {
-            final ArrayList<String> keywords = c.getKeyword();
             int magnitude = 0;
-            for (final String kw : keywords) {
+            for (final String kw : c.getKeyword()) {
                 if (kw.contains("Bushido")) {
                     final String[] parse = kw.split(" ");
                     final String num = parse[1];
@@ -2528,12 +2526,11 @@ public class CardFactoryUtil {
      * @return a {@link java.util.ArrayList} object.
      */
     public static ArrayList<Ability> getBushidoEffects(final Card c) {
-        final ArrayList<String> keywords = c.getKeyword();
         final ArrayList<Ability> list = new ArrayList<Ability>();
 
         final Card crd = c;
 
-        for (final String kw : keywords) {
+        for (final String kw : c.getKeyword()) {
             if (kw.contains("Bushido")) {
                 final String[] parse = kw.split(" ");
                 final String s = parse[1];
@@ -2862,11 +2859,9 @@ public class CardFactoryUtil {
         if (CardFactoryUtil.hasKeyword(card, "Transmute") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Transmute");
             if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
+                final String parse = card.getKeyword().get(n);
                 card.removeIntrinsicKeyword(parse);
-
-                final String[] k = parse.split(":");
-                final String manacost = k[1];
+                final String manacost = parse.split(":")[1];
 
                 card.addSpellAbility(CardFactoryUtil.abilityTransmute(card, manacost));
             }
@@ -2895,8 +2890,7 @@ public class CardFactoryUtil {
         final int echoPos = CardFactoryUtil.hasKeyword(card, "Echo");
         if (echoPos != -1) {
             // card.removeIntrinsicKeyword(parse);
-            final String parse = card.getKeyword().get(echoPos);
-            final String[] k = parse.split(":");
+            final String[] k = card.getKeyword().get(echoPos).split(":");
             final String manacost = k[1];
 
             card.setEchoCost(manacost);
@@ -2918,7 +2912,7 @@ public class CardFactoryUtil {
             // Suspend:<TimeCounters>:<Cost>
             final int n = CardFactoryUtil.hasKeyword(card, "Suspend");
             if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
+                final String parse = card.getKeyword().get(n);
                 card.removeIntrinsicKeyword(parse);
                 card.setSuspend(true);
                 final String[] k = parse.split(":");
@@ -2939,9 +2933,7 @@ public class CardFactoryUtil {
         if (CardFactoryUtil.hasKeyword(card, "Fading") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Fading");
             if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-
-                final String[] k = parse.split(":");
+                final String[] k = card.getKeyword().get(n).split(":");
                 final int power = Integer.parseInt(k[1]);
 
                 card.addComesIntoPlayCommand(CardFactoryUtil.fading(card, power));
@@ -2951,9 +2943,7 @@ public class CardFactoryUtil {
         if (CardFactoryUtil.hasKeyword(card, "Vanishing") != -1) {
             final int n = CardFactoryUtil.hasKeyword(card, "Vanishing");
             if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-
-                final String[] k = parse.split(":");
+                final String[] k = card.getKeyword().get(n).split(":");
                 final int power = Integer.parseInt(k[1]);
 
                 card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
@@ -3591,7 +3581,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static final int hasKeyword(final Card c, final String k) {
-        final ArrayList<String> a = c.getKeyword();
+        final List<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i).startsWith(k)) {
                 return i;
@@ -3615,7 +3605,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     static final int hasKeyword(final Card c, final String k, final int startPos) {
-        final ArrayList<String> a = c.getKeyword();
+        final List<String> a = c.getKeyword();
         for (int i = startPos; i < a.size(); i++) {
             if (a.get(i).startsWith(k)) {
                 return i;

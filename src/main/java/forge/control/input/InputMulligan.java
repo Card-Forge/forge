@@ -121,10 +121,7 @@ public class InputMulligan extends Input {
 
             for (final Card c : openingHand) {
                 if (p.isHuman()) {
-                    final ArrayList<String> kws = c.getKeyword();
-                    for (int i = 0; i < kws.size(); i++) {
-                        final String kw = kws.get(i);
-
+                    for (String kw : c.getKeyword()) {
                         if (kw.startsWith("MayEffectFromOpeningHand")) {
                             final String effName = kw.split(":")[1];
 
@@ -143,10 +140,7 @@ public class InputMulligan extends Input {
                     }
                 } else { // Computer Leylines & Chancellors
                     if (!c.getName().startsWith("Leyline of")) {
-                        final ArrayList<String> kws = c.getKeyword();
-                        for (int i = 0; i < kws.size(); i++) {
-                            final String kw = kws.get(i);
-
+                        for (String kw : c.getKeyword()) {
                             if (kw.startsWith("MayEffectFromOpeningHand")) {
                                 final String effName = kw.split(":")[1];
 

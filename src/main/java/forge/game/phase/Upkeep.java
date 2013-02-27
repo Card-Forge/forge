@@ -268,9 +268,7 @@ public class Upkeep extends Phase {
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
             final Player controller = c.getController();
-            final ArrayList<String> a = c.getKeyword();
-            for (int j = 0; j < a.size(); j++) {
-                final String ability = a.get(j);
+            for (String ability : c.getKeyword()) {
 
                 // destroy
                 if (ability.startsWith("At the beginning of your upkeep, destroy CARDNAME")) {

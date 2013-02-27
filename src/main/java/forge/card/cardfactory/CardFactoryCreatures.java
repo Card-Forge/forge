@@ -750,89 +750,66 @@ public class CardFactoryCreatures {
         // end of card specific code
         // ***************************************************
 
-        if ((CardFactoryCreatures.hasKeyword(card, "Level up") != -1)
-                && (CardFactoryCreatures.hasKeyword(card, "maxLevel") != -1)) {
-            final int n = CardFactoryCreatures.hasKeyword(card, "Level up");
-            final int m = CardFactoryCreatures.hasKeyword(card, "maxLevel");
-            if (n != -1) {
-                final String parse = card.getKeyword().get(n).toString();
-                final String parseMax = card.getKeyword().get(m).toString();
-
-                card.removeIntrinsicKeyword(parse);
-                card.removeIntrinsicKeyword(parseMax);
-
-                final String[] k = parse.split(":");
-                final String manacost = k[1];
-
-                final String[] l = parseMax.split(":");
-                final int maxLevel = Integer.parseInt(l[1]);
-
-                class LevelUpAbility extends AbilityActivated {
-                    public LevelUpAbility(final Card ca, final String s) {
-                        super(ca, new Cost(ca, manacost, true), null);
-                    }
-
-                    @Override
-                    public AbilityActivated getCopy() {
-                        AbilityActivated levelUp = new LevelUpAbility(getSourceCard(), getPayCosts().toString());
-                        levelUp.getRestrictions().setSorcerySpeed(true);
-                        return levelUp;
-                    }
-
-                    private static final long serialVersionUID = 3998280279949548652L;
-
-                    @Override
-                    public void resolve() {
-                        card.addCounter(CounterType.LEVEL, 1, true);
-                    }
-
-                    @Override
-                    public boolean canPlayAI() {
-                        // Todo: Improve Level up code
-                        return card.getCounters(CounterType.LEVEL) < maxLevel;
-                    }
-
-                    @Override
-                    public String getDescription() {
-                        final StringBuilder sbDesc = new StringBuilder();
-                        sbDesc.append("Level up ").append(manacost).append(" (").append(manacost);
-                        sbDesc.append(": Put a level counter on this. Level up only as a sorcery.)");
-                        return sbDesc.toString();
-                    }
-                }
-                final SpellAbility levelUp = new LevelUpAbility(card, manacost);
-                levelUp.getRestrictions().setSorcerySpeed(true);
-                card.addSpellAbility(levelUp);
-
-                final StringBuilder sbStack = new StringBuilder();
-                sbStack.append(card).append(" - put a level counter on this.");
-                levelUp.setStackDescription(sbStack.toString());
-
-                card.setLevelUp(true);
-
-            }
+        final int iLvlUp = CardFactoryUtil.hasKeyword(card, "Level up");
+        final int iLvlMax = CardFactoryUtil.hasKeyword(card, "maxLevel");
+        
+        if (iLvlUp != -1 && iLvlMax != -1) {
+            final String parse = card.getKeyword().get(iLvlUp);
+            final String parseMax = card.getKeyword().get(iLvlMax);
+            card.addSpellAbility(makeLevellerAbility(card, parse, parseMax));
+            card.setLevelUp(true);
         } // level up
     }
 
-    /**
-     * <p>
-     * hasKeyword.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param k
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    private static int hasKeyword(final Card c, final String k) {
-        final ArrayList<String> a = c.getKeyword();
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).toString().startsWith(k)) {
-                return i;
+
+    private static SpellAbility makeLevellerAbility(final Card card, final String strLevelCost, final String strMaxLevel) {
+        card.removeIntrinsicKeyword(strLevelCost);
+        card.removeIntrinsicKeyword(strMaxLevel);
+
+        final String[] k = strLevelCost.split(":");
+        final String manacost = k[1];
+
+        final String[] l = strMaxLevel.split(":");
+        final int maxLevel = Integer.parseInt(l[1]);
+
+        class LevelUpAbility extends AbilityActivated {
+            public LevelUpAbility(final Card ca, final String s) {
+                super(ca, new Cost(ca, manacost, true), null);
+            }
+
+            @Override
+            public AbilityActivated getCopy() {
+                AbilityActivated levelUp = new LevelUpAbility(getSourceCard(), getPayCosts().toString());
+                levelUp.getRestrictions().setSorcerySpeed(true);
+                return levelUp;
+            }
+
+            private static final long serialVersionUID = 3998280279949548652L;
+
+            @Override
+            public void resolve() {
+                card.addCounter(CounterType.LEVEL, 1, true);
+            }
+
+            @Override
+            public boolean canPlayAI() {
+                // Todo: Improve Level up code
+                return card.getCounters(CounterType.LEVEL) < maxLevel;
+            }
+
+            @Override
+            public String getDescription() {
+                final StringBuilder sbDesc = new StringBuilder();
+                sbDesc.append("Level up ").append(manacost).append(" (").append(manacost);
+                sbDesc.append(": Put a level counter on this. Level up only as a sorcery.)");
+                return sbDesc.toString();
             }
         }
-
-        return -1;
+        final SpellAbility levelUp = new LevelUpAbility(card, manacost);
+        levelUp.getRestrictions().setSorcerySpeed(true);
+        final StringBuilder sbStack = new StringBuilder();
+        sbStack.append(card).append(" - put a level counter on this.");
+        levelUp.setStackDescription(sbStack.toString());
+        return levelUp;
     }
 }
