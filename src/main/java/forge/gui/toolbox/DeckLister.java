@@ -45,7 +45,6 @@ import forge.deck.DeckBase;
 import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorConstructed;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.deckeditor.controllers.CEditorQuest;
@@ -436,15 +435,13 @@ public class DeckLister extends JPanel implements ILocalRepaint {
                     cEditor.getDeckController().load(d0.getName());
                 break;
             case Sealed:
-                final ACEditorBase<?, T> sEditor = (ACEditorBase<?, T>)
-                    new CEditorLimited(Singletons.getModel().getDecks().getSealed());
+                final CEditorLimited sEditor = new CEditorLimited(Singletons.getModel().getDecks().getSealed());
                 FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_LIMITED);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(sEditor);
                 sEditor.getDeckController().load(d0.getName());
                 break;
             case Draft:
-                final ACEditorBase<?, T> dEditor = (ACEditorBase<?, T>)
-                        new CEditorLimited(Singletons.getModel().getDecks().getDraft());
+                final CEditorLimited dEditor = new CEditorLimited(Singletons.getModel().getDecks().getDraft());
                 FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_LIMITED);
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(dEditor);
                 dEditor.getDeckController().load(d0.getName());
