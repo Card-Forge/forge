@@ -5,7 +5,7 @@ SVar:AltCost:Cost$ ExileFromHand<1/Card.White> | Description$ You may exile a wh
 A:SP$ ChooseColor | Cost$ 3 W | Defined$ You | SubAbility$ ProtectAll | AILogic$ MostProminentHumanControls | StackDescription$ SpellDescription | SpellDescription$ Choose a color. All creatures gain protection from the chosen color until end of turn.
 SVar:ProtectAll:DB$ Effect | StaticAbilities$ ProtectionChosen
 SVar:ProtectionChosen:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AffectedZone$ Battlefield | AddKeyword$ Protection:Card.ChosenColor:Protection from the chosen color | Description$ All creatures gain protection from the chosen color until end of turn.
-SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverent_mantra.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/44.jpg
 Oracle:You may exile a white card from your hand rather than pay Reverent Mantra's mana cost.\nChoose a color. All creatures gain protection from the chosen color until end of turn.

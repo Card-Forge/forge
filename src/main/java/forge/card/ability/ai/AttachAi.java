@@ -801,7 +801,7 @@ public class AttachAi extends SpellAbilityAi {
             prefList = CardLists.filter(prefList, Predicates.not(Presets.ENCHANTED));
         }
 
-        if (!grantingAbilities) {
+        if (!grantingAbilities && keywords.isEmpty()) {
             // Probably prefer to Enchant Creatures that Can Attack
             // Filter out creatures that can't Attack or have Defender
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
@@ -1061,6 +1061,10 @@ public class AttachAi extends SpellAbilityAi {
             }
         } else if (keyword.endsWith("CARDNAME can block an additional creature.")) {
             if (!CombatUtil.canBlock(card, true) || card.hasKeyword("CARDNAME can block any number of creatures.")) {
+                return false;
+            }
+        } else if (keyword.equals("CARDNAME can attack as though it didn't have defender.")) {
+            if (!card.hasKeyword("Defender") || card.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {

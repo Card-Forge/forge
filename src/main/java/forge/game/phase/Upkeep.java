@@ -249,6 +249,7 @@ public class Upkeep extends Phase {
             };
             slowtrip.setStackDescription(card + " - Draw a card.");
             slowtrip.setDescription(card + " - Draw a card.");
+            slowtrip.setActivatingPlayer(player);
 
             game.getStack().addSimultaneousStackEntry(slowtrip);
 
