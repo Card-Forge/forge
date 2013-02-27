@@ -1,0 +1,16 @@
+Name:Necropotence Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/+4
+S:Mode$ Continuous | Affected$ You | EffectZone$ Command | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
+T:Mode$ Phase | Phase$ End Of Turn | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ Turns | SVarCompare$ GT1 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if it's not the first turn of the game, put a death counter on Necropotence Avatar. You draw X cards and you lose X life, where X is the number of death counters on Necropotence Avatar.
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ DEATH | CounterNum$ 1 | SubAbility$ TrigDraw
+SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife | References$ X
+SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:X:Count$CardCounters.DEATH
+SVar:Turns:Count$TotalTurns
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/necropotence_avatar.jpg
+SVar:RemAIDeck:True
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/necropotence.jpg
+Oracle:Hand +0, life +4\nSkip your draw step.\nAt the beginning of your end step, if it's not the first turn of the game, put a death counter on Necropotence Avatar. You draw X cards and you lose X life, where X is the number of death counters on Necropotence Avatar.
