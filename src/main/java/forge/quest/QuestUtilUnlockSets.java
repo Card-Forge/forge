@@ -135,6 +135,15 @@ public class QuestUtilUnlockSets {
          // get a number of sets between an excluded and any included set
          List<ImmutablePair<CardEdition, Integer>> excludedWithDistances = new ArrayList<ImmutablePair<CardEdition, Integer>>();
          for (CardEdition ex : excludedSets) {
+             switch (ex.getType()) {
+             case CORE: case EXPANSION: case REPRINT: case STARTER: break;
+             case OTHER: case UNKNOWN:
+                 // don't add non-traditional sets
+                 continue;
+                 
+             default:
+                 throw new RuntimeException("unhandled card edition type: " + ex.getType());                 
+             }
              int distance = Integer.MAX_VALUE;
              for (CardEdition in : allowedSets) {
                  int d = Math.abs(ex.getIndex() - in.getIndex());
