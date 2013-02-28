@@ -1,0 +1,19 @@
+Name:Duplicity
+ManaCost:3 U U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile the top five cards of your library face down.
+SVar:TrigExile:AB$ Mill | Cost$ 0 | NumCards$ 5 | Destination$ Exile | ExileFaceDown$ True | RememberMilled$ True
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeHandExile | TriggerDescription$ At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with CARDNAME into your hand.
+SVar:TrigChangeHandExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | ChangeType$ Card.YouCtrl | RememberChanged$ True | Imprint$ True | SubAbility$ ChangeBack
+SVar:ChangeBack:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted | Origin$ Exile | Destination$ Hand | ForgetChanged$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your end step, discard a card.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ GoToYard | TriggerDescription$ When you lose control of CARDNAME, put all cards exiled with CARDNAME into their owner's graveyard.
+T:Mode$ ChangesController | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ GoToYard | Secondary$ True | TriggerDescription$ When you lose control of CARDNAME, put all cards exiled with CARDNAME into their owner's graveyard.
+SVar:GoToYard:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Exile | Destination$ Graveyard | ChangeType$ Card.IsRemembered | ForgetChanged$ True
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/duplicity.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/60.jpg
+Oracle:When Duplicity enters the battlefield, exile the top five cards of your library face down.\nAt the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Duplicity into your hand.\nAt the beginning of your end step, discard a card.\nWhen you lose control of Duplicity, put all cards exiled with Duplicity into their owner's graveyard.

@@ -2912,6 +2912,7 @@ res/cardsfolder/d/dungeon_geists.txt -text
 res/cardsfolder/d/dungeon_shade.txt svneol=native#text/plain
 res/cardsfolder/d/dungrove_elder.txt svneol=native#text/plain
 res/cardsfolder/d/duplicant.txt -text
+res/cardsfolder/d/duplicity.txt -text
 res/cardsfolder/d/duress.txt svneol=native#text/plain
 res/cardsfolder/d/durkwood_baloth.txt svneol=native#text/plain
 res/cardsfolder/d/durkwood_boars.txt svneol=native#text/plain
