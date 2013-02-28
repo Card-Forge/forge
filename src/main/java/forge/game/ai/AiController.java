@@ -30,6 +30,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.GameEntity;
 import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.Singletons;
@@ -690,6 +691,18 @@ public class AiController {
         }
         String exMsg = String.format("AI confirmAction does not know what to decide about %s with %s mode.", api, mode);
         throw new InvalidParameterException(exMsg);
+    }
+
+    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
+        if (logic.equalsIgnoreCase("ProtectFriendly")) {
+            final Player controller = hostCard.getController();
+            if (affected instanceof Player) {
+                return !((Player) affected).isOpponentOf(controller);
+            } else if (affected instanceof Card) {
+                return !((Card) affected).getController().isOpponentOf(controller);
+            }
+        }
+        return true;
     }
 }
 

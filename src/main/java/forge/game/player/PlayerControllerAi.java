@@ -198,4 +198,9 @@ public class PlayerControllerAi extends PlayerController {
         return brains.confirmAction(sa, mode, message);
     }
 
+    @Override
+    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
+        return brains.confirmStaticApplication(hostCard, affected, logic, message);
+    }
+
 }

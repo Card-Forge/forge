@@ -834,6 +834,7 @@ res/cardsfolder/b/battlegate_mimic.txt svneol=native#text/plain
 res/cardsfolder/b/battlegrace_angel.txt svneol=native#text/plain
 res/cardsfolder/b/battleground_geist.txt -text
 res/cardsfolder/b/battlegrowth.txt svneol=native#text/plain
+res/cardsfolder/b/battletide_alchemist.txt -text
 res/cardsfolder/b/battlewand_oak.txt svneol=native#text/plain
 res/cardsfolder/b/battlewise_aven.txt svneol=native#text/plain
 res/cardsfolder/b/batwing_brume.txt -text svneol=unset#text/plain

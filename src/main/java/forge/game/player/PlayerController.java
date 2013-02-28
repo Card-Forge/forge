@@ -95,4 +95,5 @@ public abstract class PlayerController {
     public Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title) { return chooseSingleCardForEffect(sourceList, sa, title, false); }
     public abstract Card chooseSingleCardForEffect(List<Card> sourceList, SpellAbility sa, String title, boolean isOptional);
     public abstract boolean confirmAction(SpellAbility sa, String mode, String message);
+    public abstract boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message);
 }

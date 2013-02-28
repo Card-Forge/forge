@@ -245,5 +245,10 @@ public class PlayerControllerHuman extends PlayerController {
         return GuiDialog.confirm(sa.getSourceCard(), message);
     }
 
+    @Override
+    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
+        return GuiDialog.confirm(hostCard, message);
+    }
+
 
 }

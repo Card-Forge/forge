@@ -1,0 +1,9 @@
+Name:Battletide Alchemist
+ManaCost:3 W W
+Types:Creature Kithkin Cleric
+PT:3/4
+S:Mode$ PreventDamage | Target$ Player | Amount$ AlchemicX | Optional$ True | AILogic$ ProtectFriendly | Description$ If a source would deal damage to a player, you may prevent X of that damage, where X is the number of Clerics you control.
+SVar:AlchemicX:Count$Valid Cleric.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battletide_alchemist.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/2.jpg
+Oracle:If a source would deal damage to a player, you may prevent X of that damage, where X is the number of Clerics you control.
