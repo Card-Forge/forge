@@ -1430,7 +1430,7 @@ public class CardFactoryUtil {
             }
             return highest;
         }
-        
+
         if (l[0].startsWith("DifferentCardNamesRemembered")) {
             final List<Card> list = new ArrayList<Card>();
             final List<String> crdname = new ArrayList<String>();
@@ -1448,11 +1448,27 @@ public class CardFactoryUtil {
             }
             return crdname.size();
         }
-        
+
         if (l[0].startsWith("RememberedSize")) {
             return CardFactoryUtil.doXMath(c.getRemembered().size(), m, c);
         }
-        
+
+        // Count$CountersAdded <CounterType> <ValidSource>
+        if (l[0].startsWith("CountersAdded")) {
+            final String[] components = l[0].split(" ", 3);
+            final CounterType counterType = CounterType.valueOf(components[1]);
+            String restrictions = components[2];
+            final String[] rest = restrictions.split(",");
+            List<Card> candidates = Singletons.getModel().getGame().getCardsInGame();
+            candidates = CardLists.getValidCards(candidates, rest, cardController, c);
+
+            int added = 0;
+            for (final Card counterSource : candidates) {
+                added += c.getCountersAddedBy(counterSource, counterType);
+            }
+            return CardFactoryUtil.doXMath(added, m, c);
+        }
+
         if (l[0].startsWith("RolledThisTurn")) {
             return Singletons.getModel().getGame().getPhaseHandler().getPlanarDiceRolledthisTurn();
         }
@@ -1674,8 +1690,6 @@ public class CardFactoryUtil {
                     CardFactoryUtil.getNumberOfManaSymbolsControlledByColor(sq[1], cardController), m, c);
             }
         }
-        
-        
 
         // Count$Hellbent.<numHB>.<numNotHB>
         if (sq[0].contains("Hellbent")) {

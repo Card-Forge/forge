@@ -10816,6 +10816,7 @@ res/cardsfolder/t/thornwind_faeries.txt svneol=native#text/plain
 res/cardsfolder/t/thought_courier.txt svneol=native#text/plain
 res/cardsfolder/t/thought_devourer.txt svneol=native#text/plain
 res/cardsfolder/t/thought_eater.txt svneol=native#text/plain
+res/cardsfolder/t/thought_gorger.txt -text
 res/cardsfolder/t/thought_hemorrhage.txt -text svneol=unset#text/plain
 res/cardsfolder/t/thought_nibbler.txt svneol=native#text/plain
 res/cardsfolder/t/thought_prison.txt -text svneol=unset#text/plain
