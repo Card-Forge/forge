@@ -140,7 +140,7 @@ public class GameNew {
                 player.shuffle();
             }
             
-            if( player instanceof AIPlayer ) {
+            if(player instanceof AIPlayer) {
                 rAICards.addAll(getCardsAiCantPlayWell(myDeck));
             }
 
@@ -158,7 +158,12 @@ public class GameNew {
 
         if (rAICards.size() > 0) {
             String message = buildFourColumnList("AI deck contains the following cards that it can't play or may be buggy:", rAICards);
-            JOptionPane.showMessageDialog(null, message, "", JOptionPane.INFORMATION_MESSAGE);
+            if (GameType.Quest == game.getType()) {
+                // log, but do not visually warn.  quest decks are supposedly already vetted by the quest creator
+                System.err.println(message);
+            } else {
+                JOptionPane.showMessageDialog(null, message, "", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
 
         if (!removedAnteCards.isEmpty()) {
