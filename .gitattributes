@@ -5797,6 +5797,7 @@ res/cardsfolder/k/kuldotha_rebirth.txt svneol=native#text/plain
 res/cardsfolder/k/kuldotha_ringleader.txt svneol=native#text/plain
 res/cardsfolder/k/kulrath_knight.txt svneol=native#text/plain
 res/cardsfolder/k/kumano_master_yamabushi.txt -text
+res/cardsfolder/k/kumanos_blessing.txt -text
 res/cardsfolder/k/kumanos_pupils.txt -text
 res/cardsfolder/k/kuon_ogre_ascendant_kuons_essence.txt -text
 res/cardsfolder/k/kurgadon.txt svneol=native#text/plain
@@ -12074,6 +12075,7 @@ res/cardsfolder/w/wingrattle_scarecrow.txt svneol=native#text/plain
 res/cardsfolder/w/wings_of_aesthir.txt svneol=native#text/plain
 res/cardsfolder/w/wings_of_hope.txt svneol=native#text/plain
 res/cardsfolder/w/wings_of_velis_vel.txt svneol=native#text/plain
+res/cardsfolder/w/winnow.txt -text
 res/cardsfolder/w/winnower_patrol.txt svneol=native#text/plain
 res/cardsfolder/w/winter_blast.txt -text
 res/cardsfolder/w/winter_orb.txt svneol=native#text/plain

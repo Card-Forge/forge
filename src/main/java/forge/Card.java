@@ -6981,6 +6981,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || !this.getReceivedDamageFromThisTurn().keySet().contains(equipee)) {
                 return false;
             }
+         } else if (property.equals("wasDealtDamageByEnchantedThisTurn")) {
+            Card enchanted = source.getEnchantingCard();
+            if (this.getReceivedDamageFromThisTurn().keySet().isEmpty()
+                    || !this.getReceivedDamageFromThisTurn().keySet().contains(enchanted)) {
+                return false;
+            }
         } else if (property.startsWith("dealtDamageThisTurn")) {
             if (this.getTotalDamageDoneBy() == 0) {
                 return false;

@@ -10,3 +10,4 @@ SVar:Cat:DB$ Token | TokenAmount$ 1 | TokenName$ Cat | TokenTypes$ Creature,Cat 
 SVar:Rhino:DB$ Token | TokenAmount$ 1 | TokenName$ Rhino | TokenTypes$ Creature,Rhino | TokenOwner$ You | TokenColors$ Green | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Trample | ChoiceDescription$ Rhino
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/master_of_the_wild_hunt_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/master-of-the-wild-hunt.jpg
+Oracle:Hand +1, life +3\n{2}{G}: Put a green creature token onto the battlefield that's a 2/2 Wolf, a 2/3 Antelope with forestwalk, a 3/2 Cat with shroud, or a 4/4 Rhino with trample, chosen at random.
