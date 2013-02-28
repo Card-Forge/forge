@@ -6830,6 +6830,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                     return false;
+                } else if (restriction.equals("NonToken")) {
+                    final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield),
+                            Presets.NON_TOKEN);
+                    for (final Card card : list) {
+                        if (this.getName().equals(card.getName())) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             }
         } else if (property.startsWith("sharesControllerWith")) {
