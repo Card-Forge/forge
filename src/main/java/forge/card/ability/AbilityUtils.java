@@ -27,6 +27,7 @@ import forge.game.ai.ComputerUtilCost;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -446,6 +447,15 @@ public class AbilityUtils {
                         }
                     }
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                }
+                if (calcX[0].startsWith("TargetedByTarget")) {
+                    final List<Card> tgtList = new ArrayList<Card>();
+                    final List<SpellAbility> saList = getDefinedSpellAbilities(card, "Targeted", ability);
+
+                    for (final SpellAbility s : saList) {
+                        tgtList.addAll(getDefinedCards(s.getSourceCard(), "Targeted", s));
+                    }
+                    return CardFactoryUtil.handlePaid(tgtList, calcX[1], card) * multiplier;
                 }
                 if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
                     final SpellAbility root = ability.getRootAbility();
@@ -1210,13 +1220,13 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int xCount(final Card c, final String s, final SpellAbility sa) {
-    
+
         final String[] l = s.split("/");
         final String[] m = CardFactoryUtil.parseMath(l);
-    
+
         final String[] sq;
         sq = l[0].split("\\.");
-    
+
         if (sa != null) {
             // Count$Kicked.<numHB>.<numNotHB>
             if (sq[0].startsWith("Kicked")) {
@@ -1224,6 +1234,18 @@ public class AbilityUtils {
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
                 } else {
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
+                }
+            }
+
+            // Count$Compare <int comparator value>.<True>.<False>
+            if (sq[0].startsWith("Compare")) {
+                final String[] compString = sq[0].split(" ");
+                final int lhs = calculateAmount(c, compString[1], sa);
+                final int rhs =  calculateAmount(c, compString[2].substring(2), sa);
+                if (Expressions.compare(lhs, compString[2], rhs)) {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
+                } else {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);
                 }
             }
         }
