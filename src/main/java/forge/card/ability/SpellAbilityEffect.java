@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -80,6 +81,13 @@ import forge.game.player.Player;
             if (abSub != null) {
                 sb.append(abSub.getStackDescription());
             }
+            
+            if (sa.hasParam("Announce")) {
+                String svar = sa.getParam("Announce");
+                int amount = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSVar(svar));
+                sb.append(String.format(" (%s=%d)", svar, amount));
+            }
+
             return sb.toString();
         }
 
