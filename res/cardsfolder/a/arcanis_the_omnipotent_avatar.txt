@@ -1,0 +1,9 @@
+Name:Arcanis, the Omnipotent Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+1/-3
+A:AB$ Draw | ActivationZone$ Command | Announce$ X | Cost$ XCantBe0 X Return<1/Creature.cmcEQX/creature you control with converted mana cost X> | NumCards$ Y | References$ X,Y | SpellDescription$ Draw a number of cards chosen at random between 0 and X. X can't be 0. | StackDescription$ SpellDescription
+SVar:X:Count$xPaid
+SVar:Y:Count$Random.0.X
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/arcanis-the-omnipotent.jpg
+Oracle:Hand +1, life -3\n{X}, Return a creature you control with converted mana cost X to its owner's hand: Draw a number of cards chosen at random between 0 and X. X can't be 0.

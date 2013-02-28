@@ -1774,6 +1774,8 @@ public abstract class SpellAbility implements ISpellAbility {
                 String value = this.getActivatingPlayer().getController().announceRequirements(this, aVar);
                  if (value == null || !StringUtils.isNumeric(value)) { 
                      return false;
+                 } else if (this.getPayCosts().getCostMana().isxCantBe0() && Integer.parseInt(value) == 0) {
+                     return false;
                  }
                  this.setSVar(aVar, "Number$" + value);
                  this.getSourceCard().setSVar(aVar, "Number$" + value);

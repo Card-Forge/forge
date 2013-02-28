@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -2178,8 +2180,21 @@ public class CardFactoryUtil {
 
         //Count$Random.<Min>.<Max>
         if (sq[0].equals("Random")) {
-            int min = Integer.parseInt(sq[1]);
-            int max = Integer.parseInt(sq[2]);
+            int min = 0;
+            int max = 0;
+            
+            if (StringUtils.isNumeric(sq[1])) {
+                min = Integer.parseInt(sq[1]);
+            } else {
+                min = CardFactoryUtil.xCount(c, c.getSVar(sq[1]));
+            }
+            
+            if (StringUtils.isNumeric(sq[2])) {
+                max = Integer.parseInt(sq[2]);
+            } else {
+                max = CardFactoryUtil.xCount(c, c.getSVar(sq[2]));
+            }
+            
             return forge.util.MyRandom.getRandom().nextInt(max) + min;
         }
 

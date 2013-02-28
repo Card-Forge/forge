@@ -125,6 +125,7 @@ public class SpellAbilityRequirements {
         if (!this.ability.announceRequirements()) {
             this.select.setCancel(true);
             this.finishedTargeting();
+            return;
         }
 
         // Skip to paying if parent ability doesn't target and has no

@@ -99,11 +99,13 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         if (!this.isTargetingThis()) {
+            boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
+            
             List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
-            if ((amount != null) && (typeList.size() < amount)) {
+            if (!needsAnnoucement && amount != null && typeList.size() < amount) {
                 return false;
             }
         } else if (!source.isInPlay()) {

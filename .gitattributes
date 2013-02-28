@@ -416,6 +416,7 @@ res/cardsfolder/a/arcane_sanctum.txt svneol=native#text/plain
 res/cardsfolder/a/arcane_spyglass.txt svneol=native#text/plain
 res/cardsfolder/a/arcane_teachings.txt svneol=native#text/plain
 res/cardsfolder/a/arcanis_the_omnipotent.txt svneol=native#text/plain
+res/cardsfolder/a/arcanis_the_omnipotent_avatar.txt -text
 res/cardsfolder/a/arcbound_bruiser.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_crusher.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_fiend.txt -text
