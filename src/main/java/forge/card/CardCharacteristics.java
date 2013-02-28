@@ -136,7 +136,9 @@ public class CardCharacteristics {
      * Resets the card color.
      */
     public final void resetCardColor() {
-        this.cardColor = Lists.newArrayList(this.cardColor.subList(0, 1));
+        if (!this.cardColor.isEmpty()) {
+            this.cardColor = Lists.newArrayList(this.cardColor.subList(0, 1));
+        }
     }
 
     /**
