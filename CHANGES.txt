@@ -173,6 +173,13 @@ Reverent Mantra
 Frostwielder
 Kumano, Master Yamabushi
 Kumano's Pupils
+Master of the Wild Hunt Avatar
+Kumano's Blessing
+Winnow
+Cornered Market
+Not of This World
+Duplicity
+Thought Devourer
 
 
 New Phenomenons:
@@ -198,6 +205,7 @@ Bosh, Iron Golem Avatar
 Maro Avatar
 Necropotence Avatar
 Vampire Nocturnus Avatar
+Arcanis the Omnipotent Avatar
 
 
 Known Issues:
