@@ -338,6 +338,7 @@ public final class CardUtil {
         newCopy.setTriggers(in.getTriggers());
         for (SpellAbility sa : in.getManaAbility()) {
             newCopy.addSpellAbility(sa);
+            sa.setSourceCard(in);
         }
 
         newCopy.setControllerObjects(in.getControllerObjects());
