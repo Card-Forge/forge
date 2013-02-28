@@ -210,7 +210,7 @@ while inputName != 'quit' :
                         print 'SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/'+cleanName+'.jpg'
                 else :
                         print 'SVar:Picture:http://www.wizards.com/global/images/magic/general/'+cleanName+'.jpg'
-                print 'End\n'
+                print '\n'
         else :
                 print inputName+' not found\n'
         inputName = raw_input("Enter Card Name: ")
