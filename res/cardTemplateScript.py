@@ -186,13 +186,13 @@ while inputName != 'quit' :
                         if text.find("When CARDNAME enters the battlefield") != -1 :
                                 print "\n"+text
                                 print "<Trigger Script Start>"
-                                print 'T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ <TriggerFunc> | TriggerDescription$ '+text
+                                print 'T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ <TriggerFunc> | TriggerDescription$ '+text
                                 print 'SVar:<TriggerFunc>:AB$ <Added Triggered Ability HERE>'
                                 print "<Trigger Script End>\n"
                         elif text.find("When CARDNAME leaves the battlefield") != -1 :
                                 print "\n"+text
                                 print "<Trigger Script Start>"
-                                print 'T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Self | Execute$ <TriggerFunc> | TriggerDescription$ '+text
+                                print 'T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ <TriggerFunc> | TriggerDescription$ '+text
                                 print 'SVar:<TriggerFunc>:AB$ <Added Triggered Ability HERE>'
                                 print "<Trigger Script End>\n"
                         elif text.find("Unleash") != -1 :
