@@ -680,7 +680,7 @@ public class MagicStack extends MyObservable {
             // Create a new object, since the triggers aren't happening right away
             runParams = new HashMap<String, Object>();
             runParams.put("SourceSA", sp);
-            if (chosenTargets.size() > 0) { 
+            if (!chosenTargets.isEmpty()) { 
                 HashSet<Object> distinctObjects = new HashSet<Object>();
                 for (final TargetChoices tc : chosenTargets) {
                     if ((tc != null) && (tc.getTargetCards() != null)) {
@@ -703,10 +703,6 @@ public class MagicStack extends MyObservable {
             // for backwards compatibility for hardcoded cards.
             else if (sp.getTargetCard() != null) {
                 runParams.put("Target", sp.getTargetCard());
-
-                game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
-            } else if (sp.getTargetPlayer() != null) {
-                runParams.put("Target", sp.getTargetPlayer());
 
                 game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
@@ -1074,9 +1070,6 @@ public class MagicStack extends MyObservable {
         }
         else if (sa.getTargetCard() != null) {
             fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
-        }
-        else if (sa.getTargetPlayer() != null) {
-            fizzle = !sa.getTargetPlayer().canBeTargetedBy(sa);
         }
         else {
             // Set fizzle to the same as the parent if there's no target info

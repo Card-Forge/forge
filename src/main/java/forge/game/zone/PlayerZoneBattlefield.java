@@ -246,30 +246,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
     /**
      * <p>
-     * Setter for the field <code>trigger</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setTrigger(final boolean b) {
-        this.trigger = b;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>leavesTrigger</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setLeavesTrigger(final boolean b) {
-        this.leavesTrigger = b;
-    }
-
-    /**
-     * <p>
      * setTriggers.
      * </p>
      * 
