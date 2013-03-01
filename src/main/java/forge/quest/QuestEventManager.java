@@ -144,7 +144,8 @@ public class QuestEventManager {
                     outList.add(duel);
                     return;
                 }
-                
+
+		continue;
             }
             
             targetIdx -= opponents.size();
