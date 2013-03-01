@@ -17,7 +17,6 @@
  */
 package forge.game.zone;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -181,7 +180,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
     /** {@inheritDoc} */
     @Override
-    public final void remove(final Object o) {
+    public final void remove(final Card o) {
 
         super.remove(o);
 
@@ -276,7 +275,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
         // getCards(false) to get Phased Out cards
 
         if (!filter) {
-            return new ArrayList<Card>(cardList);
+            return super.getCards(false);
         }
         return Lists.newArrayList(Iterables.filter(cardList, isNotPhased));
 
