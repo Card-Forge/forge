@@ -14530,7 +14530,6 @@ src/main/java/forge/view/arcane/package-info.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/Animation.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/CardPanelMouseListener.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/GlowText.java svneol=native#text/plain
-src/main/java/forge/view/arcane/util/UI.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/resources/proxy-template.ftl -text
