@@ -250,5 +250,14 @@ public class PlayerControllerHuman extends PlayerController {
         return GuiDialog.confirm(hostCard, message);
     }
 
+    @Override
+    public boolean getWillPlayOnFirstTurn(String message) {
+        final String[] possibleValues = { "Play", "Draw" };
 
+        final Object playDraw = JOptionPane.showOptionDialog(null, message + "\n\nWould you like to play or draw?",
+                "Play or Draw?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+                possibleValues, possibleValues[0]);
+
+        return !playDraw.equals(1);
+    }
 }
