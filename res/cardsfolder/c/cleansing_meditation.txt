@@ -1,0 +1,11 @@
+Name:Cleansing Meditation
+ManaCost:1 W W
+Types:Sorcery
+A:SP$ DestroyAll | Cost$ 1 W W | ValidCards$ Enchantment | SubAbility$ ThresholdDestruction | ConditionCheckSVar$ X | ConditionSVarCompare$ LT7 | SpellDescription$ Destroy all enchantments.
+SVar:ThresholdDestruction:DB$ DestroyAll | ValidCards$ Enchantment | SubAbility$ ThresholdReturn | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | RememberDestroyed$ True | StackDescription$ Threshold - If seven or more cards are in your graveyard, instead destroy all enchantments, | SpellDescription$ Threshold - If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.
+SVar:ThresholdReturn:DB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.IsRemembered+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | StackDescription$ then return all cards in your graveyard destroyed this way to the battlefield. | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Card.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cleansing_meditation.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/3.jpg
+Oracle:Destroy all enchantments.\nThreshold - If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.
