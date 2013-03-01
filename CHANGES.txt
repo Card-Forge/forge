@@ -179,6 +179,10 @@ Cornered Market
 Not of This World
 Duplicity
 Thought Gorger
+Battletide Alchemist
+Cleansing Meditation
+Builder's Bane
+Game Preserve
 
 
 New Phenomenons:
@@ -206,6 +210,8 @@ Necropotence Avatar
 Vampire Nocturnus Avatar
 Arcanis the Omnipotent Avatar
 Master of the Wild Hunt Avatar
+Haakon Stromgald Scourge Avatar
+Jaya Ballard Avatar
 
 
 Known Issues:
