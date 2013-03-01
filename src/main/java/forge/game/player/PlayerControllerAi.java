@@ -199,6 +199,10 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public boolean getWillPlayOnFirstTurn(String message) {
+        return true; // AI is brave :)
+    }
+    @Override
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
         return brains.confirmStaticApplication(hostCard, affected, logic, message);
     }

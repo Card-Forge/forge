@@ -293,3 +293,37 @@ http://www.cardforge.org/fpics/questAvatars/WereHyena.jpg
 http://www.cardforge.org/fpics/questAvatars/WitchDoctor.jpg
 http://www.cardforge.org/fpics/questAvatars/Yemaya.jpg
 http://www.cardforge.org/fpics/questAvatars/Yewa.jpg
+#RAVNICA WORLD ICONS
+http://www.cardforge.org/fpics/questAvatars/Agrus.jpg
+http://www.cardforge.org/fpics/questAvatars/Aurelia.jpg
+http://www.cardforge.org/fpics/questAvatars/Azorius-precon.jpg
+http://www.cardforge.org/fpics/questAvatars/Bep.jpg
+http://www.cardforge.org/fpics/questAvatars/Borborygmos.jpg
+http://www.cardforge.org/fpics/questAvatars/Boros-precon.jpg
+http://www.cardforge.org/fpics/questAvatars/Caprio.jpg
+http://www.cardforge.org/fpics/questAvatars/Ghost%20Council.jpg
+http://www.cardforge.org/fpics/questAvatars/Golgari-precon.jpg
+http://www.cardforge.org/fpics/questAvatars/Gruul-precon.jpg
+http://www.cardforge.org/fpics/questAvatars/Hameln.jpg
+http://www.cardforge.org/fpics/questAvatars/Isperia.jpg
+http://www.cardforge.org/fpics/questAvatars/Izzet-precon.jpg
+http://www.cardforge.org/fpics/questAvatars/Jarad.jpg
+http://www.cardforge.org/fpics/questAvatars/Kraj.jpg
+http://www.cardforge.org/fpics/questAvatars/Lazav.jpg
+http://www.cardforge.org/fpics/questAvatars/Lyzolda.jpg
+http://www.cardforge.org/fpics/questAvatars/Momir.jpg
+http://www.cardforge.org/fpics/questAvatars/Niv-Mizzet.jpg
+http://www.cardforge.org/fpics/questAvatars/Orzhov-precon.jpg
+http://www.cardforge.org/fpics/questAvatars/Rakdos.jpg
+http://www.cardforge.org/fpics/questAvatars/Savra.jpg
+http://www.cardforge.org/fpics/questAvatars/Selesnya-precon.jpg
+http://www.cardforge.org/fpics/questAvatars/Simic-precon.jpg
+http://www.cardforge.org/fpics/questAvatars/Sisters%20of%20Stone%20Death.jpg
+http://www.cardforge.org/fpics/questAvatars/Sus Antigoon.jpg
+http://www.cardforge.org/fpics/questAvatars/Szadek.jpg
+http://www.cardforge.org/fpics/questAvatars/Teysa.jpg
+http://www.cardforge.org/fpics/questAvatars/Token.jpg
+http://www.cardforge.org/fpics/questAvatars/Tolsimir.jpg
+http://www.cardforge.org/fpics/questAvatars/Trostani.jpg
+http://www.cardforge.org/fpics/questAvatars/Ulasht.jpg
+http://www.cardforge.org/fpics/questAvatars/Zegana.jpg

@@ -4,8 +4,9 @@ Types:Creature Insect
 PT:0/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME attacks, defending player can't cast spells this turn.
-SVar:TrigEffect:AB$ Effect | Cost$ 0 | Name$ Xantid Swarm Effect | StaticAbilities$ CantBeCast
-SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ DefendingPlayer | Description$ Defending player can't cast spells.
+SVar:TrigEffect:AB$ Effect | Cost$ 0 | Name$ Xantid Swarm Effect | RememberObjects$ DefendingPlayer | StaticAbilities$ CantBeCast | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Defending player can't cast spells.
 SVar:RemRandomDeck:True
 SVar:HasAttackEffect:TRUE
 SVar:Rarity:Rare

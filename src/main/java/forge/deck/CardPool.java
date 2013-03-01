@@ -19,6 +19,7 @@ package forge.deck;
 
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 
 import forge.Card;
 
@@ -139,7 +140,7 @@ public class CardPool extends ItemPool<CardPrinted> {
         if ( cp != null)
             this.add(cp);
         else
-            throw new RuntimeException(String.format("Card %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName));
+            throw new NoSuchElementException(String.format("Card %s is not supported by Forge, as it's neither a known common card nor one of casual variants' card.", cardName));
     }
 
     /**
