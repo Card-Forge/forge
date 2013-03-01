@@ -1,0 +1,11 @@
+Name:Horizon Boughs
+ManaCost:no cost
+Types:Plane Pyrulea
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ All permanents untap during each player's untap step.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ DBFetch | TriggerDescription$ Whenever you roll Chaos, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+SVar:DBFetch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/horizon_boughs.jpg
+SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/horizon-boughs.jpg
+Oracle:All permanents untap during each player's untap step.\nWhenever you roll {C}, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.

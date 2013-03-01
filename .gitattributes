@@ -3491,6 +3491,7 @@ res/cardsfolder/f/feed_the_pack.txt -text
 res/cardsfolder/f/feedback.txt svneol=native#text/plain
 res/cardsfolder/f/feedback_bolt.txt svneol=native#text/plain
 res/cardsfolder/f/feeding_frenzy.txt svneol=native#text/plain
+res/cardsfolder/f/feeding_grounds.txt -text
 res/cardsfolder/f/feeling_of_dread.txt -text
 res/cardsfolder/f/feint.txt -text
 res/cardsfolder/f/feldons_cane.txt svneol=native#text/plain
@@ -4946,6 +4947,7 @@ res/cardsfolder/h/hope_charm.txt svneol=native#text/plain
 res/cardsfolder/h/hopping_automaton.txt svneol=native#text/plain
 res/cardsfolder/h/horde_of_boggarts.txt -text
 res/cardsfolder/h/horde_of_notions.txt svneol=native#text/plain
+res/cardsfolder/h/horizon_boughs.txt -text
 res/cardsfolder/h/horizon_canopy.txt svneol=native#text/plain
 res/cardsfolder/h/horizon_drake.txt svneol=native#text/plain
 res/cardsfolder/h/horizon_seed.txt -text
