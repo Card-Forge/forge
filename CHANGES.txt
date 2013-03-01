@@ -1,7 +1,7 @@
-Forge Beta: 0#-##-2013 ver 1.3.9
+Forge Beta: 03-01-2013 ver 1.3.9
 
 
-12### cards in total.
+12193 cards in total.
 
 
 Release Notes:
@@ -23,7 +23,7 @@ Work was also done on making the UI more keyboard-friendly.  For example, the OK
 Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards). 
 The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
 
-All Traditional sets are now up to 85% complete. Standard Format is supported at 99.19%. We are now at under 900 unsupported cards that are missing from Forge.
+All Traditional sets are now up to 85% complete. Standard Format is supported at 99.19%. We are now at under 800 unsupported cards that are missing from Forge.
 
 A person reported "Love the game but I seem to be having a problem using a draft pool to start a quest. It works for sealed for me but when I select the draft deck option it's always blank even if I have one or several drafts completed." This should now be fixed and draft decks should now show up in quest start combobox.
 
@@ -34,155 +34,155 @@ Our snapshot and beta releases should now display the correct SVN revision numbe
 
 New Cards:
 
-Ghosts of the Innocent
-Pendrell Flux
-Disruption Aura
-Library of Leng
-Temporal Extortion
+Archery Training
+Aurelia's Fury
 Aven Shrine
+Barrin's Spite
+Battletide Alchemist
+Bioshift
+Blind Seer
+Blinding Powder
 Bloom Tender
 Bomb Squad
+Bounty of the Hunt
+Builder's Bane
 Cabal Shrine
+Cannibalize
+Cephalid Shrine
 Chant of Vitu-Ghazi
+Chaoslace
+Charm Peddler
+Circle of Despair
+Cleansing Meditation
+Common Cause
+Conflagrate
+Conjurer's Ban
+Cornered Market
 Covenant of Minds
 Crashing Boars
 Crush Underfoot
+Cryptic Gateway
+Deathlace
+Deepwood Elder
 Desecrator Hag
+Disruption Aura
+Duplicity
 Dwarven Shrine
+Eight-and-a-Half-Tails
+Embolden
+Endemic Plague
+Epochrasite
+Ersatz Gnomes
 Eye for an Eye
+Eye of Singularity
+Eye of Yawgmoth
+Feint
+Fiery Bombardment
+Fiery Justice
+Fire and Brimstone
+Fire Covenant
+Flash
+Flickerform
+Forbidden Crypt
+Forked Lightning
+Frostwielder
+Game Preserve
+Gargantuan Gorilla
+Ghosts of the Innocent
+Glamer Spinners
+Guard Dogs
+Hail of Arrows
+Heartseeker
+Heroic Defiance
 Hint of Insanity
 Holistic Wisdom
 Infectious Rage
-Knowledge Exploitation
-Lightning Dart
-Memory Crystal
-Mist of Stagnation
-Moonring Mirror
-Nantuko Shrine
-Phyrexian Purge
-Planeswalker's Mischief
-Protean Hulk
-Purgatory
-Quenchable Fire
-Retribution
-Reviving Vapors
-Reweave
-Sapphire Drake
-Searing Rays
-Sphinx Ambassador
-Talara's Bane
-Thelon of Havenwood
-Mist of Stagnation
-Unforge
-Warren Weirding
-Worldpurge
-Flash
-Forked Lightning
-Embolden
+Infernal Harvest
+Invoke Prejudice
+Jaded Response
 Jaws of Stone
+Killing Glare
+Knollspine Invocation
+Knowledge Exploitation
+Kumano's Blessing
+Kumano's Pupils
+Kumano, Master Yamabushi
+Leonin Bola
+Library of Leng
+Lifelace
+Light from Within
+Lightning Dart
 Living Inferno
 Magmatic Core
-Remedy
-Rolling Thunder
-Aurelia's Fury
-Pollen Remedy
-Conflagrate
-Hail of Arrows
-Fire Covenant
-Meteor Shower
-Infernal Harvest
-Rock Slide
-Serra's Hymn
-Volcanic Wind
-Spoils of War
-Fiery Justice
-Bounty of the Hunt
-Shambling Swarm
-Fire and Brimstone
-Marble Priest
-Talruum Piper
-Endemic Plague
-Feint
-Reincarnation
-Killing Glare
-Gargantuan Gorilla
-Psychic Allergy
-Invoke Prejudice
-Conjurer's Ban
-Cephalid Shrine
-Bioshift
-Glamer Spinners
-Mark of Eviction
-Plague Boiler
-Razia's Purification
-Reins of the Vinesteed
-Shared Animosity
-Simic Guildmage
-Rite of Ruin
-Common Cause
-Sabertooth Cobra
-Archery Training
-Barrin's Spite
-Cryptic Gateway
-Deepwood Elder
-Knollspine Invocation
-Eye of Yawgmoth
-Spike Cannibal
-Flickerform
-Epochrasite
-Eye of Singularity
-Heroic Defiance
-Forbidden Crypt
-Charm Peddler
-Heartseeker
-Blinding Powder
-Leonin Bola
-Razor Boomerang
-Surestrike Trident
-Sunforger
-Circle of Despair
-Martyr's Cause
-Cannibalize
-Shuriken
-Rally the Horde
-Deathlace
 Mana Vapors
-Samite Elder
-Struggle for Sanity
-Takeno, Samurai General
-Thran Tome
-Chaoslace
-Lifelace
-Moonlace
-Purelace
-Thoughtlace
-Eight-and-a-Half-Tails
-Pious Kitsune
-Blind Seer
-Ersatz Gnomes
-Vodalian Mystic
-Light from Within
-Fiery Bombardment
-Phosphorescent Feast
-Guard Dogs
-Jaded Response
-Tainted Pact
-Pledge of Loyalty
+Marble Priest
+Mark of Eviction
+Martyr's Cause
+Memory Crystal
+Meteor Shower
 Mirror Golem
-Reverent Mantra
-Frostwielder
-Kumano, Master Yamabushi
-Kumano's Pupils
-Kumano's Blessing
-Winnow
-Cornered Market
+Mist of Stagnation
+Mist of Stagnation
+Moonlace
+Moonring Mirror
+Nantuko Shrine
 Not of This World
-Duplicity
+Pendrell Flux
+Phosphorescent Feast
+Phyrexian Purge
+Pious Kitsune
+Plague Boiler
+Planeswalker's Mischief
+Pledge of Loyalty
+Pollen Remedy
+Protean Hulk
+Psychic Allergy
+Purelace
+Purgatory
+Quenchable Fire
+Rally the Horde
+Razia's Purification
+Razor Boomerang
+Reincarnation
+Reins of the Vinesteed
+Remedy
+Retribution
+Reverent Mantra
+Reviving Vapors
+Reweave
+Rite of Ruin
+Rock Slide
+Rolling Thunder
+Sabertooth Cobra
+Samite Elder
+Sapphire Drake
+Searing Rays
+Serra's Hymn
+Shambling Swarm
+Shared Animosity
+Shuriken
+Simic Guildmage
+Sphinx Ambassador
+Spike Cannibal
+Spoils of War
+Struggle for Sanity
+Sunforger
+Surestrike Trident
+Tainted Pact
+Takeno, Samurai General
+Talara's Bane
+Talruum Piper
+Temporal Extortion
+Thelon of Havenwood
 Thought Gorger
-Battletide Alchemist
-Cleansing Meditation
-Builder's Bane
-Game Preserve
+Thoughtlace
+Thran Tome
+Unforge
+Vodalian Mystic
+Volcanic Wind
+Warren Weirding
+Winnow
+Worldpurge
 
 
 New Phenomenons:
@@ -193,25 +193,25 @@ Planewide Disaster
 
 New Planes:
 
-Undercity Reaches
 Aretopolis
+Undercity Reaches
 
 
 New Vanguard Avatars:
 
+Arcanis the Omnipotent Avatar
+Bosh, Iron Golem Avatar
 Figure of Destiny Avatar
+Haakon Stromgald Scourge Avatar
+Jaya Ballard Avatar
+Maro Avatar
+Master of the Wild Hunt Avatar
+Necropotence Avatar
 Sisters of Stone Death Avatar
 Stuffy Doll Avatar
 Two Headed Giant of Foriys Avatar
-Viridian Zealot Avatar
-Bosh, Iron Golem Avatar
-Maro Avatar
-Necropotence Avatar
 Vampire Nocturnus Avatar
-Arcanis the Omnipotent Avatar
-Master of the Wild Hunt Avatar
-Haakon Stromgald Scourge Avatar
-Jaya Ballard Avatar
+Viridian Zealot Avatar
 
 
 Known Issues:
