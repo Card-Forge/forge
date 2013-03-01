@@ -1,0 +1,12 @@
+Name:Haakon, Stromgald Scourge Avatar
+ManaCost:no cost
+Types:Vanguard
+HandLifeModifier:+0/-3
+A:AB$ Pump | ActivationZone$ Command | Cost$ PayLife<1> | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | PumpZone$ Graveyard | TgtPrompt$ Select target creature in your graveyard, you may play it this turn | KW$ HIDDEN May be played | SpellDescription$ You may play target creature card in your graveyard this turn.
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromGraveyard | ValidControllingPlayer$ You | TriggerZones$ Command | Execute$ TrigAnimate | TriggerDescription$  Whenever you play a creature card from your graveyard, it becomes a black Zombie Knight.
+SVar:TrigAnimate:AB$ Animate | Cost$ 0 | Defined$ TriggeredCard | Types$ Zombie,Knight | Colors$ Black | OverwriteColors$ True | Permanent$ True | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Zombie+Knight | AffectedZone$ Battlefield | AddHiddenKeyword$ If CARDNAME would be put into a graveyard, exile it instead. | Description$ If a Zombie Knight would be put into your graveyard from the battlefield, exile it instead.
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/haakon_stromgald_scourge_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/haakon-stromgald-scourge.jpg
+Oracle:Hand +0, life -3\nPay 1 life: You may play target creature card in your graveyard this turn.\nWhenever you play a creature card from your graveyard, it becomes a black Zombie Knight.\nIf a Zombie Knight would be put into your graveyard from the battlefield, exile it instead.

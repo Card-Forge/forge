@@ -1,0 +1,15 @@
+Name:Grim Reminder
+ManaCost:2 B
+Types:Instant
+A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Imprint$ True | Reveal$ True | Shuffle$ False | StackDescription$ SpellDescription | SubAbility$ DBRepeat | SpellDescription$ Search your library for a nonland card and reveal it. Each opponent who cast a card this turn with the same name as that card loses 6 life. Then shuffle your library.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBLoseLife | SubAbility$ DBShuffle
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 6 | ConditionCheckSVar$ LoseLifeCheck | ConditionSVarCompare$ GE1
+SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:LoseLifeCheck:Count$ThisTurnCast_Card.RememberedPlayerCtrl+sharesNameWith Imprinted
+A:AB$ ChangeZone | Cost$ B B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate this ability only during your upkeep..
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_reminder.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/66.jpg
+Oracle:Search your library for a nonland card and reveal it. Each opponent who cast a card this turn with the same name as that card loses 6 life. Then shuffle your library.\n{B}{B}: Return Grim Reminder from your graveyard to your hand. Activate this ability only during your upkeep.

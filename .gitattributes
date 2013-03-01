@@ -1337,6 +1337,7 @@ res/cardsfolder/b/bubbling_beebles.txt svneol=native#text/plain
 res/cardsfolder/b/bubbling_muck.txt svneol=native#text/plain
 res/cardsfolder/b/budoka_gardener_dokai_weaver_of_life.txt -text
 res/cardsfolder/b/budoka_pupil_ichiga_who_topples_oaks.txt -text
+res/cardsfolder/b/builders_bane.txt -text
 res/cardsfolder/b/builders_blessing.txt -text
 res/cardsfolder/b/bull_aurochs.txt svneol=native#text/plain
 res/cardsfolder/b/bull_cerodon.txt svneol=native#text/plain
@@ -3963,6 +3964,7 @@ res/cardsfolder/g/galvanic_juggernaut.txt -text
 res/cardsfolder/g/galvanic_key.txt svneol=native#text/plain
 res/cardsfolder/g/galvanoth.txt -text
 res/cardsfolder/g/gamble.txt svneol=native#text/plain
+res/cardsfolder/g/game_preserve.txt -text
 res/cardsfolder/g/game_trail_changeling.txt svneol=native#text/plain
 res/cardsfolder/g/gamekeeper.txt -text
 res/cardsfolder/g/gang_of_devils.txt -text
@@ -4507,6 +4509,7 @@ res/cardsfolder/g/grim_harvest.txt svneol=native#text/plain
 res/cardsfolder/g/grim_lavamancer.txt svneol=native#text/plain
 res/cardsfolder/g/grim_monolith.txt svneol=native#text/plain
 res/cardsfolder/g/grim_poppet.txt svneol=native#text/plain
+res/cardsfolder/g/grim_reminder.txt -text
 res/cardsfolder/g/grim_roustabout.txt -text
 res/cardsfolder/g/grim_tutor.txt svneol=native#text/plain
 res/cardsfolder/g/grimclaw_bats.txt svneol=native#text/plain
@@ -4624,6 +4627,7 @@ res/cardsfolder/g/gwyllion_hedge_mage.txt svneol=native#text/plain
 res/cardsfolder/g/gyre_sage.txt -text
 res/cardsfolder/g/skarrg_goliath.txt -text
 res/cardsfolder/h/haakon_stromgald_scourge.txt -text
+res/cardsfolder/h/haakon_stromgald_scourge_avatar.txt -text
 res/cardsfolder/h/haazda_exonerator.txt svneol=native#text/plain
 res/cardsfolder/h/haazda_shield_mate.txt -text
 res/cardsfolder/h/hada_freeblade.txt svneol=native#text/plain
@@ -5381,6 +5385,7 @@ res/cardsfolder/j/jasmine_boreal.txt svneol=native#text/plain
 res/cardsfolder/j/jasmine_seer.txt -text
 res/cardsfolder/j/jawbone_skulkin.txt svneol=native#text/plain
 res/cardsfolder/j/jaws_of_stone.txt -text
+res/cardsfolder/j/jaya_ballard_avatar.txt -text
 res/cardsfolder/j/jaya_ballard_task_mage.txt svneol=native#text/plain
 res/cardsfolder/j/jayemdae_tome.txt svneol=native#text/plain
 res/cardsfolder/j/jedit_ojanen.txt svneol=native#text/plain
