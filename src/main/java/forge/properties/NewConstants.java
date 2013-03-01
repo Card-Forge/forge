@@ -17,6 +17,8 @@
  */
 package forge.properties;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * NewConstants.java
  *
@@ -43,6 +45,46 @@ public final class NewConstants {
     /** Constant <code>CARDFORGE_URL = "program/cardforgeURL"</code>. */
     public static final String CARDFORGE_URL = "program/cardforgeURL";
 
+    /** Default base path for user data (settings, decks, quest save files, custom worlds, etc.) */
+    public static final String DEFAULT_USER_DATA_ROOT;
+    
+    /** Default base path for cached program data (downloaded pictures) */
+    public static final String DEFAULT_CACHE_DATA_ROOT;
+    
+    static {
+        String osName = System.getProperty("os.name");
+        String homeDir = System.getProperty("user.home");
+
+        if (StringUtils.isEmpty(osName) || StringUtils.isEmpty(homeDir)) {
+            throw new RuntimeException("cannot determine OS and user home directory");
+        }
+        
+        String fallbackDataDir = String.format("%s/.forge", homeDir);
+        
+        if (StringUtils.containsIgnoreCase("windows", osName)) {
+            // the split between appdata and localappdata on windows is relatively recent.  If
+            // localappdata is not defined, use appdata for both.
+            String appRoot = System.getenv().get("APPDATA");
+            if (StringUtils.isEmpty(appRoot)) {
+                appRoot = fallbackDataDir;
+            }
+            String cacheRoot = System.getenv().get("LOCALAPPDATA");
+            if (StringUtils.isEmpty(cacheRoot)) {
+                cacheRoot = appRoot;
+            }
+            // just use '/' everywhere instead of file.separator.  it always works
+            DEFAULT_USER_DATA_ROOT = String.format("%s/Forge", appRoot);
+            DEFAULT_CACHE_DATA_ROOT = String.format("%s/Forge/Cache", cacheRoot);
+        } else if (StringUtils.containsIgnoreCase("mac os x", osName)) {
+            DEFAULT_USER_DATA_ROOT = String.format("%s/Library/Application Support/Forge", homeDir);
+            DEFAULT_CACHE_DATA_ROOT = String.format("%s/Library/Caches/Forge", homeDir);
+        } else {
+            // Linux or anything else
+            DEFAULT_USER_DATA_ROOT = fallbackDataDir;
+            DEFAULT_CACHE_DATA_ROOT = String.format("%s/.cache/forge", homeDir);
+        }
+    }
+    
     /** Constant <code>PREFS_GLOBAL_FILE = "forge.preferences"</code>. */
     public static final String PREFS_GLOBAL_FILE = "res/preferences/forge.preferences";
     /** Constant <code>PREFS_GLOBAL_FILE = "editor.preferences"</code>. */
