@@ -2,9 +2,12 @@ Name:Astral Slide
 ManaCost:2 W
 Types:Enchantment
 T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a player cycles a card, you may exile target creature. If you do, return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
-SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DelTrig
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return exiled creature to the battlefield.
-SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrigEffect
+SVar:DelTrigEffect:DB$ Effect | Triggers$ EOTTrig | SVars$ TrigBounce,RemoveEffect | RememberObjects$ Remembered | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:EOTTrig:Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerZones$ Command | TriggerDescription$ Return exiled creature to the battlefield.
+SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ RemoveEffect
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_slide.jpg
