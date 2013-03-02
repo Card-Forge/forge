@@ -1319,8 +1319,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             player.shuffle();
         }
 
-        if ((!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined)
-                || (sa.hasParam("Reveal") && !fetched.isEmpty())) {
+        if (((!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined)
+                || (sa.hasParam("Reveal") && !fetched.isEmpty()))
+                && !sa.hasParam("NoReveal")) {
             final String picked = player + " picked:";
             if (fetched.size() > 0) {
                 GuiChoose.one(picked, fetched);

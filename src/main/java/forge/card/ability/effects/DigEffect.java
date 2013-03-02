@@ -143,7 +143,7 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                     // - for when it exists
-                } else if (choser.isHuman()) {
+                } else if (choser.isHuman() && !sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
                     GuiChoose.one("Looking at cards from library", top);
                 }
