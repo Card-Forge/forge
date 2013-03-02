@@ -1110,6 +1110,8 @@ public class AbilityUtils {
                 if (paid) {
                     unpaidCommand = paidCommand;
                 }
+                ability.setActivatingPlayer(payer);
+                ability.setTarget(sa.getTarget());
                 GameActionUtil.payCostDuringAbilityResolve(payer, ability, cost, paidCommand, unpaidCommand, sa, game);
                 waitForInput = true; // wait for the human input
                 break; // multiple human players are not supported
