@@ -106,7 +106,6 @@ public class InputBlock extends Input {
             currentAttacker = null;
             allBlocking.clear();
 
-            stop();
             FControl.SINGLETON_INSTANCE.getPlayer().getController().passPriority();
         }
     }

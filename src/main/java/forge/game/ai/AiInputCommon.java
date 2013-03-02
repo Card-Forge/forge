@@ -108,7 +108,6 @@ public class AiInputCommon extends Input {
             }
         }
         player.getController().passPriority();
-        stop();
     } // getMessage();
 
     /**
