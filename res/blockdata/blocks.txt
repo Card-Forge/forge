@@ -1,53 +1,53 @@
-Index:0|Set0:LEA|Name:Alpha|DraftPacks:3|LandSetCode:LEA|SealedPacks:6
-Index:1|Set0:LEB|Name:Beta|DraftPacks:3|LandSetCode:LEB|SealedPacks:6
-Index:2|Set0:2ED|Name:Unlimited|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
-Index:3|Set0:ARN|Name:Arabian Nights|DraftPacks:5|LandSetCode:2ED|SealedPacks:9
-Index:4|Set0:ATQ|Name:Antiquities|DraftPacks:5|LandSetCode:2ED|SealedPacks:9
-Index:5|Set0:3ED|Name:Revised|DraftPacks:3|LandSetCode:3ED|SealedPacks:6
-Index:6|Set0:LEG|Name:Legends|DraftPacks:3|LandSetCode:3ED|SealedPacks:6
-Index:7|Set0:DRK|Name:The Dark|DraftPacks:5|LandSetCode:3ED|SealedPacks:9
-Index:8|Set0:FEM|Name:Fallen Empires|DraftPacks:5|LandSetCode:3ED|SealedPacks:9
-Index:9|Set0:4ED|Name:Fourth Edition|DraftPacks:3|LandSetCode:4ED|SealedPacks:6
+Set0:LEA|Name:Alpha|DraftPacks:3|LandSetCode:LEA|SealedPacks:6
+Set0:LEB|Name:Beta|DraftPacks:3|LandSetCode:LEB|SealedPacks:6
+Set0:2ED|Name:Unlimited|DraftPacks:3|LandSetCode:2ED|SealedPacks:6
+Set0:ARN|Name:Arabian Nights|DraftPacks:5|LandSetCode:2ED|SealedPacks:9
+Set0:ATQ|Name:Antiquities|DraftPacks:5|LandSetCode:2ED|SealedPacks:9
+Set0:3ED|Name:Revised|DraftPacks:3|LandSetCode:3ED|SealedPacks:6
+Set0:LEG|Name:Legends|DraftPacks:3|LandSetCode:3ED|SealedPacks:6
+Set0:DRK|Name:The Dark|DraftPacks:5|LandSetCode:3ED|SealedPacks:9
+Set0:FEM|Name:Fallen Empires|DraftPacks:5|LandSetCode:3ED|SealedPacks:9
+Set0:4ED|Name:Fourth Edition|DraftPacks:3|LandSetCode:4ED|SealedPacks:6
 
-Index:10|Set0:ICE|Set1:ALL|Set2:CSP|Name:Ice Age|DraftPacks:3|LandSetCode:ICE|SealedPacks:6
-Index:11|Set0:HML|Name:Homelands|DraftPacks:5|LandSetCode:4ED|SealedPacks:9
-Index:12|Set0:MIR|Set1:VIS|Set2:WTH|Name:Mirage|DraftPacks:3|LandSetCode:MIR|SealedPacks:6
-Index:13|Set0:5ED|Name:Fifth Edition|DraftPacks:3|LandSetCode:5ED|SealedPacks:6
-Index:14|Set0:POR|Name:Portal|DraftPacks:3|LandSetCode:POR|SealedPacks:6
-Index:15|Set0:TMP|Set1:STH|Set2:EXO|Name:Tempest|DraftPacks:3|LandSetCode:TMP|SealedPacks:6
-Index:16|Set0:PO2|Name:Portal Second Age|DraftPacks:3|LandSetCode:PO2|SealedPacks:6
-Index:17|Set0:USG|Set1:ULG|Set2:UDS|Name:Urza|DraftPacks:3|LandSetCode:USG|SealedPacks:6
-Index:18|Set0:6ED|Name:Sixth Edition|DraftPacks:3|LandSetCode:6ED|SealedPacks:6
-Index:19|Set0:PTK|Name:Portal Three Kingdoms|DraftPacks:5|LandSetCode:PTK|SealedPacks:9
+Set0:ICE|Set1:ALL|Set2:CSP|Name:Ice Age|DraftPacks:3|LandSetCode:ICE|SealedPacks:6
+Set0:HML|Name:Homelands|DraftPacks:5|LandSetCode:4ED|SealedPacks:9
+Set0:MIR|Set1:VIS|Set2:WTH|Name:Mirage|DraftPacks:3|LandSetCode:MIR|SealedPacks:6
+Set0:5ED|Name:Fifth Edition|DraftPacks:3|LandSetCode:5ED|SealedPacks:6
+Set0:POR|Name:Portal|DraftPacks:3|LandSetCode:POR|SealedPacks:6
+Set0:TMP|Set1:STH|Set2:EXO|Name:Tempest|DraftPacks:3|LandSetCode:TMP|SealedPacks:6
+Set0:PO2|Name:Portal Second Age|DraftPacks:3|LandSetCode:PO2|SealedPacks:6
+Set0:USG|Set1:ULG|Set2:UDS|Name:Urza|DraftPacks:3|LandSetCode:USG|SealedPacks:6
+Set0:6ED|Name:Sixth Edition|DraftPacks:3|LandSetCode:6ED|SealedPacks:6
+Set0:PTK|Name:Portal Three Kingdoms|DraftPacks:5|LandSetCode:PTK|SealedPacks:9
 
-Index:20|Set0:MMQ|Set1:NMS|Set2:PCY|Name:Masques|DraftPacks:3|LandSetCode:MMQ|SealedPacks:6
-Index:21|Set0:INV|Set1:PLS|Set2:APC|Name:Invasion|DraftPacks:3|LandSetCode:INV|SealedPacks:6
-Index:22|Set0:7ED|Name:Seventh Edition|DraftPacks:3|LandSetCode:7ED|SealedPacks:6
-Index:23|Set0:ODY|Set1:TOR|Set2:JUD|Name:Odyssey|DraftPacks:3|LandSetCode:ODY|SealedPacks:6
-Index:24|Set0:ONS|Set1:LGN|Set2:SCG|Name:Onslaught|DraftPacks:3|LandSetCode:ONS|SealedPacks:6
-Index:25|Set0:8ED|Name:Eighth Edition|DraftPacks:3|LandSetCode:8ED|SealedPacks:6
-Index:26|Set0:MRD|Set1:DST|Set2:5DN|Name:Mirrodin|DraftPacks:3|LandSetCode:MRD|SealedPacks:6
-Index:27|Set0:CHK|Set1:BOK|Set2:SOK|Name:Kamigawa|DraftPacks:3|LandSetCode:CHK|SealedPacks:6
-Index:28|Set0:9ED|Name:Ninth Edition|DraftPacks:3|LandSetCode:9ED|SealedPacks:6
-Index:29|Set0:RAV|Set1:GPT|Set2:DIS|Name:Ravnica|DraftPacks:3|LandSetCode:RAV|SealedPacks:6
+Set0:MMQ|Set1:NMS|Set2:PCY|Name:Masques|DraftPacks:3|LandSetCode:MMQ|SealedPacks:6
+Set0:INV|Set1:PLS|Set2:APC|Name:Invasion|DraftPacks:3|LandSetCode:INV|SealedPacks:6
+Set0:7ED|Name:Seventh Edition|DraftPacks:3|LandSetCode:7ED|SealedPacks:6
+Set0:ODY|Set1:TOR|Set2:JUD|Name:Odyssey|DraftPacks:3|LandSetCode:ODY|SealedPacks:6
+Set0:ONS|Set1:LGN|Set2:SCG|Name:Onslaught|DraftPacks:3|LandSetCode:ONS|SealedPacks:6
+Set0:8ED|Name:Eighth Edition|DraftPacks:3|LandSetCode:8ED|SealedPacks:6
+Set0:MRD|Set1:DST|Set2:5DN|Name:Mirrodin|DraftPacks:3|LandSetCode:MRD|SealedPacks:6
+Set0:CHK|Set1:BOK|Set2:SOK|Name:Kamigawa|DraftPacks:3|LandSetCode:CHK|SealedPacks:6
+Set0:9ED|Name:Ninth Edition|DraftPacks:3|LandSetCode:9ED|SealedPacks:6
+Set0:RAV|Set1:GPT|Set2:DIS|Name:Ravnica|DraftPacks:3|LandSetCode:RAV|SealedPacks:6
 
-Index:30|Set0:CSP|Name:Coldsnap|DraftPacks:3|LandSetCode:9ED|SealedPacks:6
-Index:31|Set0:TSP|Set1:PLC|Set2:FUT|Name:Time Spiral|DraftPacks:3|LandSetCode:TSP|SealedPacks:6
-Index:32|Set0:10E|Name:Tenth Edition|DraftPacks:3|LandSetCode:10E|SealedPacks:6
-Index:33|Set0:LRW|Set1:MOR|Name:Lorwyn|DraftPacks:3|LandSetCode:LRW|SealedPacks:6
-Index:34|Set0:SHM|Set1:EVE|Name:Shadowmoor|DraftPacks:3|LandSetCode:SHM|SealedPacks:6
-Index:35|Set0:ALA|Set1:CFX|Set2:ARB|Name:Shards of Alara|DraftPacks:3|LandSetCode:ALA|SealedPacks:6
-Index:36|Set0:M10|Name:Magic 2010|DraftPacks:3|LandSetCode:M10|SealedPacks:6
-Index:37|Set0:ZEN|Set1:WWK|Name:Zendikar|DraftPacks:3|LandSetCode:ZEN|SealedPacks:6
-Index:38|Set0:ROE|Name:Rise of the Eldrazi|DraftPacks:3|LandSetCode:ROE|SealedPacks:6
-Index:39|Set0:M11|Name:Magic 2011|DraftPacks:3|LandSetCode:M11|SealedPacks:6
+Set0:CSP|Name:Coldsnap|DraftPacks:3|LandSetCode:9ED|SealedPacks:6
+Set0:TSP|Set1:PLC|Set2:FUT|Name:Time Spiral|DraftPacks:3|LandSetCode:TSP|SealedPacks:6
+Set0:10E|Name:Tenth Edition|DraftPacks:3|LandSetCode:10E|SealedPacks:6
+Set0:LRW|Set1:MOR|Name:Lorwyn|DraftPacks:3|LandSetCode:LRW|SealedPacks:6
+Set0:SHM|Set1:EVE|Name:Shadowmoor|DraftPacks:3|LandSetCode:SHM|SealedPacks:6
+Set0:ALA|Set1:CFX|Set2:ARB|Name:Shards of Alara|DraftPacks:3|LandSetCode:ALA|SealedPacks:6
+Set0:M10|Name:Magic 2010|DraftPacks:3|LandSetCode:M10|SealedPacks:6
+Set0:ZEN|Set1:WWK|Name:Zendikar|DraftPacks:3|LandSetCode:ZEN|SealedPacks:6
+Set0:ROE|Name:Rise of the Eldrazi|DraftPacks:3|LandSetCode:ROE|SealedPacks:6
+Set0:M11|Name:Magic 2011|DraftPacks:3|LandSetCode:M11|SealedPacks:6
 
-Index:40|Set0:SOM|Set1:MBS|Set2:NPH|Name:Scars of Mirrodin|DraftPacks:3|LandSetCode:SOM|SealedPacks:6
-Index:41|Set0:M12|Name:Magic 2012|DraftPacks:3|LandSetCode:M12|SealedPacks:6
-Index:42|Set0:ISD|Set1:DKA|Name:Innistrad|DraftPacks:3|LandSetCode:ISD|SealedPacks:6
-Index:43|Set0:AVR|Name:Avacyn Restored|DraftPacks:3|LandSetCode:AVR|SealedPacks:6
-Index:44|Set0:M13|Name:Magic 2013|DraftPacks:3|LandSetCode:M13|SealedPacks:6
-Index:45|Set0:RTR|Name:Return to Ravnica|DraftPacks:3|LandSetCode:RTR|SealedPacks:6
-Index:46|Set0:RTR|Set1:RTR|Set2:RTR|Set3:RTR|Set4:RTR|Meta0:CHOOSE1/CUBE/RtRGuildAzorius/Azorius Guild;CUBE/RtRGuildIzzet/Izzet Guild;CUBE/RtRGuildRakdos/Rakdos Guild;CUBE/RtRGuildGolgari/Golgari Guild;CUBE/RtRGuildSelesnya/Selesnya Guild/GUILD|Meta1:CHOOSE1/CUBE/RtRPromoAzorius/Azorius Guild;CUBE/RtRPromoIzzet/Izzet Guild;CUBE/RtRPromoRakdos/Rakdos Guild;CUBE/RtRPromoGolgari/Golgari Guild;CUBE/RtRPromoSelesnya/Selesnya Guild/PROMO|Name:Return to Ravnica Guild Sealed|DraftPacks:3|LandSetCode:RTR|SealedPacks:7
-Index:47|Set0:GTC|Name:Gatecrash|DraftPacks:3|LandSetCode:RTR|SealedPacks:6
-Index:48|Set0:GTC|Set1:GTC|Set2:GTC|Set3:GTC|Set4:GTC|Meta0:CHOOSE1/CUBE/GtcGuildBoros/Boros Guild;CUBE/GtcGuildDimir/Dimir Guild;CUBE/GtcGuildGruul/Gruul Guild;CUBE/GtcGuildOrzhov/Orzhov Guild;CUBE/GtcGuildSimic/Simic Guild/GUILD|Meta1:CHOOSE1/CUBE/GtcPromoBoros/Boros Guild;CUBE/GtcPromoDimir/Dimir Guild;CUBE/GtcPromoGruul/Gruul Guild;CUBE/GtcPromoOrzhov/Orzhov Guild;CUBE/GtcPromoSimic/Simic Guild/PROMO|Name:Gatecrash Guild Sealed|DraftPacks:3|LandSetCode:RTR|SealedPacks:7
+Set0:SOM|Set1:MBS|Set2:NPH|Name:Scars of Mirrodin|DraftPacks:3|LandSetCode:SOM|SealedPacks:6
+Set0:M12|Name:Magic 2012|DraftPacks:3|LandSetCode:M12|SealedPacks:6
+Set0:ISD|Set1:DKA|Name:Innistrad|DraftPacks:3|LandSetCode:ISD|SealedPacks:6
+Set0:AVR|Name:Avacyn Restored|DraftPacks:3|LandSetCode:AVR|SealedPacks:6
+Set0:M13|Name:Magic 2013|DraftPacks:3|LandSetCode:M13|SealedPacks:6
+Set0:RTR|Name:Return to Ravnica|DraftPacks:3|LandSetCode:RTR|SealedPacks:6
+Set0:RTR|Set1:RTR|Set2:RTR|Set3:RTR|Set4:RTR|Meta0:CHOOSE1/CUBE/RtRGuildAzorius/Azorius Guild;CUBE/RtRGuildIzzet/Izzet Guild;CUBE/RtRGuildRakdos/Rakdos Guild;CUBE/RtRGuildGolgari/Golgari Guild;CUBE/RtRGuildSelesnya/Selesnya Guild/GUILD|Meta1:CHOOSE1/CUBE/RtRPromoAzorius/Azorius Guild;CUBE/RtRPromoIzzet/Izzet Guild;CUBE/RtRPromoRakdos/Rakdos Guild;CUBE/RtRPromoGolgari/Golgari Guild;CUBE/RtRPromoSelesnya/Selesnya Guild/PROMO|Name:Return to Ravnica Guild Sealed|DraftPacks:3|LandSetCode:RTR|SealedPacks:7
+Set0:GTC|Name:Gatecrash|DraftPacks:3|LandSetCode:RTR|SealedPacks:6
+Set0:GTC|Set1:GTC|Set2:GTC|Set3:GTC|Set4:GTC|Meta0:CHOOSE1/CUBE/GtcGuildBoros/Boros Guild;CUBE/GtcGuildDimir/Dimir Guild;CUBE/GtcGuildGruul/Gruul Guild;CUBE/GtcGuildOrzhov/Orzhov Guild;CUBE/GtcGuildSimic/Simic Guild/GUILD|Meta1:CHOOSE1/CUBE/GtcPromoBoros/Boros Guild;CUBE/GtcPromoDimir/Dimir Guild;CUBE/GtcPromoGruul/Gruul Guild;CUBE/GtcPromoOrzhov/Orzhov Guild;CUBE/GtcPromoSimic/Simic Guild/PROMO|Name:Gatecrash Guild Sealed|DraftPacks:3|LandSetCode:RTR|SealedPacks:7
