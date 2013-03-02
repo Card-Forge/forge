@@ -15,6 +15,7 @@ SVar:NumPlayerGiveup:Number$0
 SVar:TotalPlayer:PlayerCountPlayers$Amount
 SVar:CheckHand:Count$ValidHand Permanent.IsNotRemembered+RememberedPlayerCtrl
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eureka.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/99.jpg
 Oracle:Starting with you, each player may put a permanent card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.

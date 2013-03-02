@@ -16,6 +16,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumPlayerGiveup:Number$0
 SVar:TotalPlayer:PlayerCountPlayers$Amount
 SVar:CheckHand:Count$ValidHand Artifact.IsNotRemembered+RememberedPlayerCtrl,Creature.IsNotRemembered+RememberedPlayerCtrl,Enchantment.IsNotRemembered+RememberedPlayerCtrl,Land.IsNotRemembered+RememberedPlayerCtrl
+SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hypergenesis.jpg
 SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/201.jpg
