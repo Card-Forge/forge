@@ -11,7 +11,10 @@ Release Notes:
 
 New Cards:
 
-
+Dimensional Breach
+Lim-Dul's Vault
+Eureka
+Hypergenesis
 
 
 New Phenomenons:
@@ -21,7 +24,8 @@ New Phenomenons:
 
 New Planes:
 
-
+Feeding Grounds
+Horizon Boughs
 
 
 New Vanguard Avatars:
