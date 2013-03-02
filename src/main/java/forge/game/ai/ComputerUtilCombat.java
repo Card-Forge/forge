@@ -1648,13 +1648,13 @@ public class ComputerUtilCombat {
     public static Map<Card, Integer> distributeAIDamage(final Card attacker, final List<Card> block, int dmgCanDeal, GameEntity defender) {
         Map<Card, Integer> damageMap = new HashMap<Card, Integer>();
         
-        if (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                || attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")) {
+        boolean isAttacking = defender != null;
+        
+        if (isAttacking && (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                || attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked."))) {
             damageMap.put(null, dmgCanDeal);
             return damageMap;
         }
-    
-        boolean isAttacking = defender != null; 
         
         final boolean hasTrample = attacker.hasKeyword("Trample");
     
