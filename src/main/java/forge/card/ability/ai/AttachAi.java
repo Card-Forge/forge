@@ -25,6 +25,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.game.ai.ComputerUtilCard;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -46,7 +47,13 @@ public class AttachAi extends SpellAbilityAi {
         final Card source = sa.getSourceCard();
 
         if (abCost != null) {
-            // No Aura spells have Additional Costs
+            // AI currently disabled for these costs
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
+                return false;
+            }
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
+                return false;
+            }
         }
 
         // prevent run-away activations - first time will always return true
