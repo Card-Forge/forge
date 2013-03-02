@@ -11,8 +11,6 @@ import java.util.Set;
 
 import javax.swing.JOptionPane;
 
-
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -25,11 +23,13 @@ import forge.CardUtil;
 import forge.Singletons;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.control.input.Input;
 import forge.control.input.InputControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
 import forge.deck.CardPool;
 import forge.deck.DeckSection;
+import forge.error.BugReporter;
 import forge.game.event.FlipCoinEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -38,9 +38,11 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.match.controllers.CMessage;
 import forge.gui.match.views.VAntes;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
+import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -50,6 +52,45 @@ import forge.util.MyRandom;
  * All of these methods can and should be static.
  */
 public class GameNew {
+    
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class GameInputUpdatesThread extends Thread {
+        private final MatchController match;
+        private final GameState game;
+        private boolean wasChangedRecently;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param match
+         * @param game
+         */
+        public GameInputUpdatesThread(MatchController match, GameState game) {
+            this.match = match;
+            this.game = game;
+        }
+
+        public void run(){
+            while(!game.isGameOver()) {
+                boolean needsNewInput = CMessage.SINGLETON_INSTANCE.getInputControl().isValid() == false;
+                if ( needsNewInput ) {
+                    match.getInput().setNewInput(game);
+                    wasChangedRecently = true;
+                }
+                try {
+                    Thread.sleep(wasChangedRecently ? 2 : 40);
+                    wasChangedRecently = false;
+                } catch (InterruptedException e) {
+                    BugReporter.reportException(e);
+                    break;
+                }
+            }
+        }
+    }
+
+    public static final ForgePreferences preferences = Singletons.getModel().getPreferences();
 
     private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool secion, boolean canRandomFoil, Random generator) {
         PlayerZone library = player.getZone(zoneType);
@@ -60,7 +101,7 @@ public class GameNew {
                 final Card card = cardPrinted.toForgeCard(player);
 
                 // apply random pictures for cards
-                if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
+                if (preferences.getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
                     final int cntVariants = cardPrinted.getRules().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
                     if (cntVariants > 1) {
                         card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
@@ -86,8 +127,8 @@ public class GameNew {
      * TODO: Accept something like match state as parameter. Match should be aware of players,
      * their decks and other special starting conditions.
      */
-    public static void newGame(final Map<Player, PlayerStartConditions> playersConditions, final GameState game, final boolean canRandomFoil) {
-        Singletons.getModel().getMatch().getInput().clearInput();
+    public static void newGame(final MatchController match, final Map<Player, PlayerStartConditions> playersConditions, final GameState game, final boolean canRandomFoil) {
+        match.getInput().clearInput();
 
         Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
@@ -97,7 +138,7 @@ public class GameNew {
         trigHandler.clearDelayedTrigger();
 
         // friendliness
-        boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
+        boolean useAnte = preferences.getPrefBoolean(FPref.UI_ANTE);
         final Set<CardPrinted> rAICards = new HashSet<CardPrinted>();
 
         Map<Player, Set<CardPrinted>> removedAnteCards = new HashMap<Player, Set<CardPrinted>>();
@@ -112,8 +153,8 @@ public class GameNew {
 
             initVariantsZones(player, psc);
 
-            GameType gameType = Singletons.getModel().getMatch().getGameType();
-            boolean isFirstGame = Singletons.getModel().getMatch().getPlayedGames().isEmpty();
+            GameType gameType = match.getGameType();
+            boolean isFirstGame = match.getPlayedGames().isEmpty();
             boolean hasSideboard = psc.getOriginalDeck().has(DeckSection.Sideboard);
             boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed() && hasSideboard;
          
@@ -132,7 +173,7 @@ public class GameNew {
                 preparePlayerLibrary(player, ZoneType.Sideboard, myDeck.get(DeckSection.Sideboard), canRandomFoil, generator);
             
             // Shuffling
-            if (player instanceof AIPlayer && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND)) {
+            if (player instanceof AIPlayer && preferences.getPrefBoolean(FPref.UI_SMOOTH_LAND)) {
                 // AI may do this instead of shuffling its deck
                 final Iterable<Card> c1 = GameNew.smoothComputerManaCurve(player.getCardsIn(ZoneType.Library));
                 player.getZone(ZoneType.Library).setCards(c1);
@@ -174,7 +215,7 @@ public class GameNew {
             JOptionPane.showMessageDialog(null, ante.toString(), "", JOptionPane.INFORMATION_MESSAGE);
         }
 
-        GameNew.actuateGame(game, false);
+        GameNew.actuateGame(match, game, false);
     }
 
     private static void initVariantsZones(final Player player, final PlayerStartConditions psc) {
@@ -243,8 +284,7 @@ public class GameNew {
     }
 
     // ultimate of Karn the Liberated
-    public static void restartGame(final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
-        MatchController match = Singletons.getModel().getMatch();
+    public static void restartGame(final MatchController match, final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
 
         Map<LobbyPlayer, PlayerStartConditions> players = match.getPlayers();
         Map<Player, PlayerStartConditions> playersConditions = new HashMap<Player, PlayerStartConditions>();
@@ -291,7 +331,7 @@ public class GameNew {
         PhaseHandler phaseHandler = game.getPhaseHandler();
         phaseHandler.setPlayerTurn(startingTurn);
 
-        GameNew.actuateGame(game, true);
+        GameNew.actuateGame(match, game, true);
     }
 
     /**
@@ -302,10 +342,10 @@ public class GameNew {
      * newGame, then when all is ready, call this function.
      * @param isRestartedGame Whether the actuated game is the first start or a restart
      */
-    private static void actuateGame(final GameState game, boolean isRestartedGame) {
+    private static void actuateGame(final MatchController match, final GameState game, boolean isRestartedGame) {
         if (!isRestartedGame) {
             // Deciding which cards go to ante
-            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
+            if (preferences.getPrefBoolean(FPref.UI_ANTE)) {
                 final String nl = System.getProperty("line.separator");
                 final StringBuilder msg = new StringBuilder();
                 for (final Player p : game.getPlayers()) {
@@ -324,15 +364,24 @@ public class GameNew {
                 JOptionPane.showMessageDialog(null, msg, "Ante", JOptionPane.INFORMATION_MESSAGE);
             }
 
-            GameOutcome lastGameOutcome = Singletons.getModel().getMatch().getLastGameOutcome();
+            GameOutcome lastGameOutcome = match.getLastGameOutcome();
             // Only cut/coin toss if it's the first game of the match
-            if (lastGameOutcome == null) {
-                GameNew.seeWhoPlaysFirstDice();
+            Player goesFirst;
+            Player humanPlayer = Singletons.getControl().getPlayer();
+            boolean isFirstGame = lastGameOutcome == null;
+            if (isFirstGame) {
+                goesFirst = GameNew.seeWhoPlaysFirstDice(game);
             } else {
-                Player human = Singletons.getControl().getPlayer();
-                Player goesFirst = lastGameOutcome.isWinner(human.getLobbyPlayer()) ? human.getOpponent() : human;
-                setPlayersFirstTurn(goesFirst, false);
+                
+                goesFirst = lastGameOutcome.isWinner(humanPlayer.getLobbyPlayer()) ? humanPlayer.getOpponent() : humanPlayer;
             }
+            String message = goesFirst + ( isFirstGame ? " has won the coin toss." : " lost the last game.");
+            boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
+            if ( goesFirst != humanPlayer ) {
+                JOptionPane.showMessageDialog(null, message + "\nComputer Going First", "You are drawing", JOptionPane.INFORMATION_MESSAGE);
+            }
+            goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
+            game.getPhaseHandler().setPlayerTurn(goesFirst);
         }
 
         // Draw <handsize> cards
@@ -340,9 +389,20 @@ public class GameNew {
             p.drawCards(p.getMaxHandSize());
         }
 
+        
+        
         game.getPhaseHandler().setPhaseState(PhaseType.MULLIGAN);
-        InputControl control = Singletons.getModel().getMatch().getInput();
-        control.setInput(new InputMulligan());
+
+        InputControl control = match.getInput();
+        Input tmp = new InputMulligan();
+        control.setInput(tmp);
+        
+        
+        Thread thGame = new GameInputUpdatesThread(match, game);
+        
+        match.getInput().getInput().showMessage();
+        thGame.setName("Game input updater");
+        thGame.start();
     } // newGame()
 
     private static String buildFourColumnList(String firstLine, Iterable<CardPrinted> cAnteRemoved) {
@@ -418,49 +478,14 @@ public class GameNew {
      * <p>
      * seeWhoPlaysFirstCoinToss.
      * </p>
+     * @return 
      */
-    private static void seeWhoPlaysFirstDice() {
-        int playerDie = 0;
-        int computerDie = 0;
-
-        while (playerDie == computerDie) {
-            playerDie = MyRandom.getRandom().nextInt(20);
-            computerDie = MyRandom.getRandom().nextInt(20);
-        }
-
+    private static Player seeWhoPlaysFirstDice(final GameState game) {
         // Play the Flip Coin sound
-        Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
+        game.getEvents().post(new FlipCoinEvent());
 
-        List<Player> allPlayers = Singletons.getModel().getGame().getPlayers();
-        setPlayersFirstTurn(allPlayers.get(MyRandom.getRandom().nextInt(allPlayers.size())), true);
+        List<Player> allPlayers = game.getPlayers();
+        return allPlayers.get(MyRandom.getRandom().nextInt(allPlayers.size()));
     }
 
-    private static void setPlayersFirstTurn(Player goesFirst, boolean firstGame) {
-        StringBuilder sb = new StringBuilder(goesFirst.toString());
-        if (firstGame) {
-            sb.append(" has won the coin toss.");
-        }
-        else {
-          sb.append(" lost the last game.");
-        }
-        if (goesFirst.isHuman()) {
-            if (!humanPlayOrDraw(sb.toString())) {
-                goesFirst = goesFirst.getOpponent();
-            }
-        } else {
-            sb.append("\nComputer Going First");
-            JOptionPane.showMessageDialog(null, sb.toString(), "Play or Draw?", JOptionPane.INFORMATION_MESSAGE);
-        }
-        Singletons.getModel().getGame().getPhaseHandler().setPlayerTurn(goesFirst);
-    } // seeWhoPlaysFirstDice()
-
-    private static boolean humanPlayOrDraw(String message) {
-        final String[] possibleValues = { "Play", "Draw" };
-
-        final Object playDraw = JOptionPane.showOptionDialog(null, message + "\n\nWould you like to play or draw?",
-                "Play or Draw?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                possibleValues, possibleValues[0]);
-
-        return !playDraw.equals(1);
-    }
 }

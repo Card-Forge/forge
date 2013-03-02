@@ -19,7 +19,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
 import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiInput;
+import forge.gui.InputProxy;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -149,8 +149,7 @@ public class MatchController {
             Singletons.getControl().changeState(FControl.Screens.MATCH_SCREEN);
             SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
-            // set all observers
-            GuiInput inputControl = CMessage.SINGLETON_INSTANCE.getInputControl();
+            InputProxy inputControl = CMessage.SINGLETON_INSTANCE.getInputControl();
             input.addObserver(inputControl);
             currentGame.getStack().addObserver(inputControl);
             currentGame.getPhaseHandler().addObserver(inputControl);
@@ -159,7 +158,7 @@ public class MatchController {
             // some observers are set in CMatchUI.initMatch
 
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
-            GameNew.newGame(startConditions, currentGame, canRandomFoil);
+            GameNew.newGame(this, startConditions, currentGame, canRandomFoil);
 
             // TODO restore this functionality!!!
             //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);

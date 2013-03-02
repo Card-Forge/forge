@@ -25,6 +25,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
+import forge.gui.match.controllers.CMessage;
 import forge.util.MyObservable;
 
 /**
@@ -65,7 +66,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final void setInput(final Input in) {
         boolean isInputEmpty = this.input == null || this.input instanceof InputPassPriority;
-        System.out.println(in.getClass().getName());
+        //System.out.println(in.getClass().getName());
         if (!this.game.getStack().isResolving() && isInputEmpty) {
             this.input = in;
         } else {
@@ -134,12 +135,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @param update
      *            a boolean.
      */
-    public final void resetInput() { resetInput(true); }
-    public final void resetInput(final boolean update) {
+    public final void resetInput() { 
         this.input = null;
-        if (update) {
-            this.updateObservers();
-        }
+        this.updateObservers();
     }
 
     /**
@@ -243,5 +241,20 @@ public class InputControl extends MyObservable implements java.io.Serializable {
 
          return pc.getDefaultInput();
     } // getInput()
+
+    public final void setNewInput(GameState game) {
+        PhaseHandler ph = game.getPhaseHandler();
+
+        final Input tmp = getActualInput();
+        //String message = String.format("%s's %s, priority of %s [%sP] input is %s", ph.getPlayerTurn(), ph.getPhase(), ph.getPriorityPlayer(), ph.isPlayerPriorityAllowed() ? "+" : "-", tmp == null ? "null" : tmp.getClass().getSimpleName());
+        //System.out.println(message);
+        if (tmp != null) {
+            //System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer() + " @ input is " + tmp.getClass().getName() );
+            CMessage.SINGLETON_INSTANCE.getInputControl().setInput(tmp);
+        } else if (!ph.isPlayerPriorityAllowed()) {
+            // System.out.println("cannot have priority, forced to pass");
+            ph.getPriorityPlayer().getController().passPriority();
+        }
+    }
 
 } // InputControl

@@ -14220,9 +14220,9 @@ src/main/java/forge/gui/GuiChoose.java -text
 src/main/java/forge/gui/GuiDialog.java -text
 src/main/java/forge/gui/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/gui/GuiImportPicture.java svneol=native#text/plain
-src/main/java/forge/gui/GuiInput.java svneol=native#text/plain
 src/main/java/forge/gui/GuiProgressBarWindow.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
+src/main/java/forge/gui/InputProxy.java svneol=native#text/plain
 src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
