@@ -75,6 +75,7 @@ public class InputPassPriority extends Input {
     @Override
     public final void selectButtonOK() {
         FControl.SINGLETON_INSTANCE.getPlayer().getController().passPriority();
+        stop();
     }
 
     /** {@inheritDoc} */
