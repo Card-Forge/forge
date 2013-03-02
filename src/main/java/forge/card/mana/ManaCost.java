@@ -183,6 +183,10 @@ public final class ManaCost implements Comparable<ManaCost> {
         return this.shards.isEmpty() && !this.isNoCost();
     }
 
+    public boolean isZero() {
+        return genericCost == 0 && isPureGeneric();
+    }
+    
     /*
      * (non-Javadoc)
      * 

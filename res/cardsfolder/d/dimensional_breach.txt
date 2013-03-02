@@ -1,0 +1,16 @@
+Name:Dimensional Breach
+ManaCost:5 W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | Cost$ 5 W W | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards he or she owns to the battlefield.
+SVar:DBEffect:DB$ Effect | Name$ Dimensional Breach Effect | Triggers$ TrigUpkeep,TrigCleanup | SVars$ BreachReturn,BreachCleanup,MoveChosen,BreachX | RememberObjects$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ BreachReturn | TriggerZones$ Command | TriggerController$ TriggeredPlayer | CheckSVar$ BreachX | SVarCompare$ GE1 | TriggerDescription$ At the beginning of each player's upkeep, that player returns one of the exiled cards he or she owns to the battlefield.
+SVar:BreachReturn:AB$ ChooseCard | Cost$ 0 | Defined$ TriggeredPlayer | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose a card to return to the battlefield | Choices$ Card.IsRemembered+ActivePlayerCtrl | ChoiceZone$ Exile | SubAbility$ MoveChosen
+SVar:MoveChosen:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ ChosenCard | ForgetChanged$ True
+SVar:TrigCleanup:Mode$ Always | CheckSVar$ BreachX | SVarCompare$ EQ0 | Static$ True | Execute$ BreachCleanup | TriggerZones$ Command
+SVar:BreachCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:BreachX:Count$ValidExile Card.IsRemembered
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dimensional_breach.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/9.jpg
+Oracle:Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards he or she owns to the battlefield.

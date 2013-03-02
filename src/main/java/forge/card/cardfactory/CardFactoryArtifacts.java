@@ -11,7 +11,6 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.control.input.InputSelectManyCards;
-import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
@@ -54,8 +53,10 @@ class CardFactoryArtifacts {
                 @Override
                 public boolean canPlayAI() {
                     this.getTarget().resetTargets();
-                    final List<Card> libList = getActivatingPlayer().getOpponent().getCardsIn(ZoneType.Library);
-                    return !libList.isEmpty() && ComputerUtil.targetHumanAI(this);
+                    Player human = getActivatingPlayer().getOpponent();
+                    final List<Card> libList = human.getCardsIn(ZoneType.Library);
+                    this.getTarget().addTarget(human);
+                    return !libList.isEmpty() && canTarget(human);
                 }
 
                 @Override
@@ -98,6 +99,7 @@ class CardFactoryArtifacts {
             sb.append("Put the top two cards of target player's library into that player's graveyard. ");
             sb.append("If both cards share a color, repeat this process.");
             ab1.setDescription(sb.toString());
+            ab1.setStackDescription(sb.toString());
             card.addSpellAbility(ab1);
         } // *************** END ************ END **************************
 

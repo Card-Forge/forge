@@ -30,24 +30,6 @@ import forge.Card;
  * @version $Id$
  */
 interface IZone {
-    /**
-     * <p>
-     * setUpdate.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    void setUpdate(boolean b);
-
-    /**
-     * <p>
-     * getUpdate.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    boolean getUpdate();
 
     /**
      * <p>
@@ -101,7 +83,7 @@ interface IZone {
      * @param o
      *            a {@link java.lang.Object} object.
      */
-    void remove(Object o);
+    void remove(Card o);
 
     /**
      * <p>

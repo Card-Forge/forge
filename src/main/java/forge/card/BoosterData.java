@@ -180,7 +180,7 @@ public class BoosterData {
          * @see forge.util.StorageReaderFile#read(java.lang.String)
          */
         @Override
-        protected BoosterData read(String line) {
+        protected BoosterData read(String line, int i) {
             final FileSection section = FileSection.parse(line, ":", "|");
             int nC = section.getInt("Commons", 0);
             int nU = section.getInt("Uncommons", 0);

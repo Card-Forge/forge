@@ -18,7 +18,6 @@
 package forge.gui;
 
 import java.awt.Color;
-import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -61,8 +60,6 @@ import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
-import forge.view.arcane.PlayArea;
-import forge.view.arcane.util.Animation;
 
 /**
  * <p>
@@ -254,91 +251,6 @@ public final class GuiDisplayUtil {
         return out.toString();
     }
 
-
-    /**
-     * <p>
-     * setupPlayZone.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.view.arcane.PlayArea} object.
-     * @param c
-     *            an array of {@link forge.Card} objects.
-     */
-    public static void setupPlayZone(final PlayArea p, final List<Card> c) {
-        List<Card> tmp, diff;
-        tmp = new ArrayList<Card>();
-        for (final forge.view.arcane.CardPanel cpa : p.getCardPanels()) {
-            tmp.add(cpa.getGameCard());
-        }
-        diff = new ArrayList<Card>(tmp);
-        diff.removeAll(c);
-        if (diff.size() == p.getCardPanels().size()) {
-            p.clear();
-        } else {
-            for (final Card card : diff) {
-                p.removeCardPanel(p.getCardPanel(card.getUniqueNumber()));
-            }
-        }
-        diff = new ArrayList<Card>(c);
-        diff.removeAll(tmp);
-
-        List<forge.view.arcane.CardPanel> panelList = new ArrayList<forge.view.arcane.CardPanel>();
-        for (final Card card : diff) {
-            panelList.add(p.addCard(card));
-        }
-        if (!diff.isEmpty()) {
-            p.doLayout();
-        }
-        for (final forge.view.arcane.CardPanel toPanel : panelList) {
-            p.scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel
-                    .getCardWidth(), toPanel.getCardHeight()));
-            Animation.moveCard(toPanel);
-        }
-
-        for (final Card card : c) {
-            final forge.view.arcane.CardPanel toPanel = p.getCardPanel(card.getUniqueNumber());
-            if (card.isTapped()) {
-                toPanel.setTapped(true);
-                toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
-            } else {
-                toPanel.setTapped(false);
-                toPanel.setTappedAngle(0);
-            }
-            toPanel.getAttachedPanels().clear();
-            if (card.isEnchanted()) {
-                final ArrayList<Card> enchants = card.getEnchantedBy();
-                for (final Card e : enchants) {
-                    final forge.view.arcane.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
-                    if (cardE != null) {
-                        toPanel.getAttachedPanels().add(cardE);
-                    }
-                }
-            }
-
-            if (card.isEquipped()) {
-                final ArrayList<Card> enchants = card.getEquippedBy();
-                for (final Card e : enchants) {
-                    final forge.view.arcane.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
-                    if (cardE != null) {
-                        toPanel.getAttachedPanels().add(cardE);
-                    }
-                }
-            }
-
-            if (card.isEnchantingCard()) {
-                toPanel.setAttachedToPanel(p.getCardPanel(card.getEnchantingCard().getUniqueNumber()));
-            } else if (card.isEquipping()) {
-                toPanel.setAttachedToPanel(p.getCardPanel(card.getEquipping().get(0).getUniqueNumber()));
-            } else {
-                toPanel.setAttachedToPanel(null);
-            }
-
-            toPanel.setCard(toPanel.getGameCard());
-        }
-        p.invalidate();
-        p.repaint();
-    }
 
     /**
      * <p>

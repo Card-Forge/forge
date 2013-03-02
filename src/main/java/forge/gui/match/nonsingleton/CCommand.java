@@ -29,9 +29,7 @@ import forge.Card;
 
 import forge.Command;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
@@ -55,8 +53,7 @@ public class CCommand implements ICDoc {
     private final Observer observerPlay = new Observer() {
         @Override
         public void update(final Observable a, final Object b) {
-            final PlayerZone pZone = (PlayerZone) a;
-            GuiDisplayUtil.setupPlayZone(CCommand.this.view.getTabletop(), pZone.getCards(false));
+            CCommand.this.view.getTabletop().setupPlayZone();
         }
     };
 
@@ -118,7 +115,7 @@ public class CCommand implements ICDoc {
 
         if (c != null && c.isInZone(ZoneType.Command)) {
             //TODO: Cast commander/activate avatar/roll planar dice here.
-            CMessage.SINGLETON_INSTANCE.getInputControl().getInput().selectCard(c);
+            CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, player.getZone(ZoneType.Command));
         }
     }
 

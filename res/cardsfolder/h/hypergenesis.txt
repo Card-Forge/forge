@@ -1,0 +1,23 @@
+Name:Hypergenesis
+ManaCost:no cost
+Types:Sorcery
+Colors:green
+K:Suspend:3:1 G G
+A:SP$ Repeat | Cost$ 0 | RepeatSubAbility$ ResetCheck | RepeatCheckSVar$ NumPlayerGiveup | RepeatSVarCompare$ LTTotalPlayer | SubAbility$ DBChangeZoneAll | StackDescription$ SpellDescription | SpellDescription$ Starting with you, each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
+SVar:ResetCheck:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatChoice
+SVar:DBRepeatChoice:DB$ RepeatEach | RepeatSubAbility$ DBChoice | RepeatPlayers$ Player
+SVar:DBChoice:DB$ GenericChoice | Choices$ DBCheckHand,DBNoChange | Defined$ Player.IsRemembered
+SVar:DBCheckHand:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose | ChoiceDescription$ Choose an artifact, creature, enchantment, or land card from your hand onto the battlefield
+SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Artifact.IsNotRemembered+RememberedPlayerCtrl,Creature.IsNotRemembered+RememberedPlayerCtrl,Enchantment.IsNotRemembered+RememberedPlayerCtrl,Land.IsNotRemembered+RememberedPlayerCtrl | ChoiceZone$ Hand | Amount$ 1 | RememberChosen$ True | Mandatory$ True | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ GE1
+SVar:DBNoChange:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ChoiceDescription$ Do not put an artifact, creature, enchantment, or land card from your hand onto the battlefield
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ FinalReset
+SVar:FinalReset:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NumPlayerGiveup:Number$0
+SVar:TotalPlayer:PlayerCountPlayers$Amount
+SVar:CheckHand:Count$ValidHand Artifact.IsNotRemembered+RememberedPlayerCtrl,Creature.IsNotRemembered+RememberedPlayerCtrl,Enchantment.IsNotRemembered+RememberedPlayerCtrl,Land.IsNotRemembered+RememberedPlayerCtrl
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hypergenesis.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/201.jpg
+Oracle:Sorcery\nSuspend 3- {1}{G}{G} (Rather than cast this card from your hand, pay {1}{G}{G} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nStarting with you, each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.

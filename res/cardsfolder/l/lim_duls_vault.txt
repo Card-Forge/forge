@@ -1,0 +1,17 @@
+Name:Lim-Dul's Vault
+ManaCost:U B
+Types:Instant
+A:SP$ Dig | Cost$ U B | DigNum$ 5 | NoMove$ True | SubAbility$ DBRepeat | RememberRevealed$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top five cards of your library. As many times as you choose, you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. Then shuffle your library and put the last cards you looked at this way on top of it in any order.
+SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ CheckLifePaid | RepeatCheckSVar$ LifePaid | RepeatSVarCompare$ EQ0 | SubAbility$ DBShuffle | StackDescription$ None
+SVar:CheckLifePaid:DB$ StoreSVar | SVar$ LifePaid | Type$ Number | Expression$ 1 | UnlessPayer$ You | UnlessCost$ PayLife<1> | UnlessResolveSubs$ WhenPaid | UnlessAI$ Never | SubAbility$ DBResetRem | StackDescription$ No move
+SVar:DBResetRem:DB$ Cleanup | ClearRemembered$ True | SubAbility$ GoToBottom
+SVar:GoToBottom:DB$ Dig | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Library | LibraryPosition$ -1 | NoLooking$ True | SubAbility$ DBLookAgain | StackDescription$ None
+SVar:DBLookAgain:DB$ Dig | DigNum$ 5 | NoMove$ True | RememberRevealed$ True | StackDescription$ None
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.IsRemembered | ChangeNum$ 5 | SubAbility$ DBReset | Hidden$ True | SelectPrompt$ Pick 1 on the top of library | Mandatory$ True | NoReveal$ True | StackDescription$ None
+SVar:DBReset:DB$ StoreSVar | SVar$ LifePaid | Type$ Number | Expression$ 0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:LifePaid:Number$0
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_vault.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/190.jpg
+Oracle:Look at the top five cards of your library. As many times as you choose, you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. Then shuffle your library and put the last cards you looked at this way on top of it in any order.

@@ -59,6 +59,7 @@ public class InputCleanup extends Input {
         // goes to the next phase
         if (active.isUnlimitedHandSize() || n <= max || n <= 0 || active != turnOwner) {
             active.getController().passPriority();
+            stop();
             return;
         }
         ButtonUtil.disableAll();

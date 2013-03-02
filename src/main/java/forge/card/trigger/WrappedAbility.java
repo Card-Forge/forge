@@ -340,16 +340,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         sa.setTargetCard(card);
     }
 
-//        @Override
-//        public void setTargetList(final List<Card> list) {
-//            sa.setTargetList(list);
-//        }
-
-    @Override
-    public void setTargetPlayer(final Player p) {
-        sa.setTargetPlayer(p);
-    }
-
     @Override
     public void setType(final String s) {
         sa.setType(s);

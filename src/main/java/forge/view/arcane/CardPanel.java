@@ -415,7 +415,7 @@ public class CardPanel extends JPanel implements CardContainer {
         if (this.getCard() != null && this.getGameCard().getFoil() > 0) {
             final String fl = String.format("foil%02d", this.getCard().getFoil());
             final int z = Math.round(this.cardWidth * CardPanel.BLACK_BORDER_SIZE);
-            CardFaceSymbols.draw(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
+            CardFaceSymbols.drawOther(g, fl, this.cardXOffset + z, this.cardYOffset + z, this.cardWidth - (2 * z),
                     this.cardHeight - (2 * z));
         }
     }
