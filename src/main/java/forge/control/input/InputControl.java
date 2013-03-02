@@ -25,7 +25,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
-import forge.gui.match.controllers.CMessage;
+import forge.util.MyObservable;
 
 /**
  * <p>
@@ -35,7 +35,7 @@ import forge.gui.match.controllers.CMessage;
  * @author Forge
  * @version $Id$
  */
-public class InputControl implements java.io.Serializable {
+public class InputControl extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=3955194449319994301L</code>. */
     private static final long serialVersionUID = 3955194449319994301L;
 
@@ -134,13 +134,12 @@ public class InputControl implements java.io.Serializable {
      * @param update
      *            a boolean.
      */
-    public final void resetInput() { 
+    public final void resetInput() { resetInput(true); }
+    public final void resetInput(final boolean update) {
         this.input = null;
-        this.updateObservers();
-    }
-
-    private void updateObservers() {
-        CMessage.SINGLETON_INSTANCE.getInputControl().invalidate();
+        if (update) {
+            this.updateObservers();
+        }
     }
 
     /**
