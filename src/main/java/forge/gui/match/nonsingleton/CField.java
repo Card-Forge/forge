@@ -50,7 +50,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
@@ -147,8 +146,7 @@ public class CField implements ICDoc {
     private final Observer observerPlay = new Observer() {
         @Override
         public void update(final Observable a, final Object b) {
-            final PlayerZone pZone = (PlayerZone) a;
-            GuiDisplayUtil.setupPlayZone(CField.this.view.getTabletop(), pZone.getCards(false));
+            CField.this.view.getTabletop().setupPlayZone();
         }
     };
 

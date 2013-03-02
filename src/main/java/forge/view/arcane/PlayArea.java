@@ -27,6 +27,7 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 import forge.Card;
+import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
 /**
@@ -65,6 +66,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private int extraCardSpacingX, cardSpacingX, cardSpacingY;
     private int stackSpacingX, stackSpacingY;
 
+    private List<Card> model;
+    
     /**
      * <p>
      * Constructor for PlayArea.
@@ -76,10 +79,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      *            a boolean.
      * @param modelRef 
      */
-    public PlayArea(final JScrollPane scrollPane, final boolean mirror) {
+    public PlayArea(final JScrollPane scrollPane, final boolean mirror, List<Card> modelRef) {
         super(scrollPane);
         this.setBackground(Color.white);
         this.mirror = mirror;
+        this.model = modelRef;
     }
 
     private final CardStackRow collectAllLands() {
@@ -476,6 +480,89 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             return;
         }
         super.mouseLeftClicked(panel, evt);
+    }
+
+    /**
+     * <p>
+     * setupPlayZone.
+     * </p>
+     * 
+     * @param newList
+     *            an array of {@link forge.Card} objects.
+     */
+    public void setupPlayZone() {
+        List<Card> oldCards, toDelete;
+        oldCards = new ArrayList<Card>();
+        for (final CardPanel cpa : getCardPanels()) {
+            oldCards.add(cpa.getGameCard());
+        }
+        toDelete = new ArrayList<Card>(oldCards);
+        toDelete.removeAll(model);
+        if (toDelete.size() == getCardPanels().size()) {
+            clear();
+        } else {
+            for (final Card card : toDelete) {
+                removeCardPanel(getCardPanel(card.getUniqueNumber()));
+            }
+        }
+    
+        List<Card> toAdd = new ArrayList<Card>(model);
+        toAdd.removeAll(oldCards);
+    
+        List<CardPanel> newPanels = new ArrayList<CardPanel>();
+        for (final Card card : toAdd) {
+            newPanels.add(addCard(card));
+        }
+        if (!toAdd.isEmpty()) {
+            doLayout();
+        }
+        for (final CardPanel toPanel : newPanels) {
+            scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
+            Animation.moveCard(toPanel);
+        }
+    
+        for (final Card card : model) {
+            final CardPanel toPanel = getCardPanel(card.getUniqueNumber());
+            if (card.isTapped()) {
+                toPanel.setTapped(true);
+                toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
+            } else {
+                toPanel.setTapped(false);
+                toPanel.setTappedAngle(0);
+            }
+            toPanel.getAttachedPanels().clear();
+            if (card.isEnchanted()) {
+                final ArrayList<Card> enchants = card.getEnchantedBy();
+                for (final Card e : enchants) {
+                    final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
+                    if (cardE != null) {
+                        toPanel.getAttachedPanels().add(cardE);
+                    }
+                }
+            }
+    
+            if (card.isEquipped()) {
+                final ArrayList<Card> enchants = card.getEquippedBy();
+                for (final Card e : enchants) {
+                    final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
+                    if (cardE != null) {
+                        toPanel.getAttachedPanels().add(cardE);
+                    }
+                }
+            }
+    
+            if (card.isEnchantingCard()) {
+                toPanel.setAttachedToPanel(getCardPanel(card.getEnchantingCard().getUniqueNumber()));
+            } else if (card.isEquipping()) {
+                toPanel.setAttachedToPanel(getCardPanel(card.getEquipping().get(0).getUniqueNumber()));
+            } else {
+                toPanel.setAttachedToPanel(null);
+            }
+    
+            toPanel.setCard(toPanel.getGameCard());
+        }
+        invalidate();
+        repaint();
     }
 
     private static enum RowType {
