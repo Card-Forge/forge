@@ -229,7 +229,7 @@ public final class CardBlock implements Comparable<CardBlock> {
          * @see forge.util.StorageReaderFile#read(java.lang.String)
          */
         @Override
-        protected CardBlock read(String line) {
+        protected CardBlock read(String line, int i) {
             final String[] sParts = line.trim().split("\\|");
 
             String name = null;

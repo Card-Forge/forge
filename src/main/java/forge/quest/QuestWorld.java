@@ -24,6 +24,7 @@ import java.util.List;
 import com.google.common.base.Function;
 
 import forge.quest.data.GameFormatQuest;
+import forge.util.FileSection;
 import forge.util.storage.StorageReaderFile;
 
 /** 
@@ -121,7 +122,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
          * @see forge.util.StorageReaderFile#read(java.lang.String)
          */
         @Override
-        protected QuestWorld read(String line) {
+        protected QuestWorld read(String line, int i) {
             String useName = null;
             String useDir = null;
             GameFormatQuest useFormat = null;
@@ -129,9 +130,13 @@ public class QuestWorld implements Comparable<QuestWorld>{
             final List<String> sets = new ArrayList<String>();
             final List<String> bannedCards = new ArrayList<String>(); // if both empty, no format
 
+            // This is what you need to use here =>
+            // FileSection.parse(line, ":", "|");
+            
             final String[] sParts = line.trim().split("\\|");
 
             for (final String sPart : sParts) {
+                
                 final String[] kv = sPart.split(":", 2);
                 final String key = kv[0].toLowerCase();
                 if ("name".equals(key)) {

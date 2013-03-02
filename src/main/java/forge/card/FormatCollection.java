@@ -93,7 +93,7 @@ public final class FormatCollection extends StorageView<GameFormat> {
          * @see forge.util.StorageReaderFile#read(java.lang.String)
          */
         @Override
-        protected GameFormat read(String line) {
+        protected GameFormat read(String line, int i) {
             final List<String> sets = new ArrayList<String>(); // default: all sets allowed
             final List<String> bannedCards = new ArrayList<String>(); // default:
             // nothing
@@ -101,7 +101,7 @@ public final class FormatCollection extends StorageView<GameFormat> {
 
             FileSection section = FileSection.parse(line, ":", "|");
             String name = section.get("name");
-            int index = section.getInt("index", 0);
+            int index = 1 + i;
             String strSets = section.get("sets");
             if ( null != strSets ) {
                 sets.addAll(Arrays.asList(strSets.split(", ")));

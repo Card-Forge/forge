@@ -208,9 +208,9 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
 
         @Override
-        protected CardEdition read(String line) {
+        protected CardEdition read(String line, int i) {
             FileSection section = FileSection.parse(line, ":", "|");
-            int    index = section.getInt("index", -1);
+            int    index = 1+i;
             String code2 = section.get("code2");
             String code  = section.get("code3");
             String type  = section.get("type");

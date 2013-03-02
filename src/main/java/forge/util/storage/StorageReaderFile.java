@@ -70,12 +70,13 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
     public Map<String, T> readAll() {
         final Map<String, T> result = new TreeMap<String, T>();
 
+        int idx = 0;
         for (final String s : FileUtil.readFile(this.file)) {
             if (!this.lineContainsObject(s)) {
                 continue;
             }
 
-            final T item = this.read(s);
+            final T item = this.read(s, idx);
             if (null == item) {
                 final String msg = "An object stored in " + this.file.getPath()
                         + " failed to load.\nPlease submit this as a bug with the mentioned file attached.";
@@ -83,6 +84,7 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
                 continue;
             }
 
+            idx++;
             result.put(this.keySelector.apply(item), item);
         }
 
@@ -95,8 +97,8 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
      * @param line
      *            the line
      * @return the t
-     */
-    protected abstract T read(String line);
+     */ 
+    protected abstract T read(String line, int idx);
 
     /**
      * Line contains object.
