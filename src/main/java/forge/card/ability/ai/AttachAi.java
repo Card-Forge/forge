@@ -998,10 +998,12 @@ public class AttachAi extends SpellAbilityAi {
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
-        final boolean evasive = (keyword.endsWith("Unblockable") || keyword.equals("Fear")
+        final boolean evasive = (keyword.equals("Unblockable") || keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
-                || keyword.endsWith("walk"));
+                || keyword.endsWith("walk") || keyword.equals("CARDNAME can't be blocked except by Walls.")
+                || keyword.equals("All creatures able to block CARDNAME do so.")
+                || keyword.equals("CARDNAME can't be blocked by more than one creature."));
         // give evasive keywords to creatures that can attack and deal damage
         if (evasive) {
             if (card.getNetCombatDamage() <= 0

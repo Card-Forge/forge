@@ -166,7 +166,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
 
         final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
                 || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow")
-                || keyword.contains("CantBeBlockedBy"));
+                || keyword.contains("CantBeBlockedBy") || keyword.endsWith("CARDNAME can't be blocked except by Walls."));
         final boolean combatRelevant = (keyword.endsWith("First Strike") || keyword.contains("Bushido"));
         // give evasive keywords to creatures that can or do attack
         if (evasive) {

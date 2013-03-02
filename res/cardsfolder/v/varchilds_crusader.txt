@@ -2,7 +2,7 @@ Name:Varchild's Crusader
 ManaCost:3 R
 Types:Creature Human Knight
 PT:3/2
-A:AB$ Pump | Cost$ 0 | KW$ CARDNAME can't be blocked except by Walls. & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ CARDNAME can't be blocked this turn except by Walls. Sacrifice CARDNAME at the beginning of the next end step.
+A:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME can't be blocked except by Walls. & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ CARDNAME can't be blocked this turn except by Walls. Sacrifice CARDNAME at the beginning of the next end step.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/varchilds_crusader.jpg
