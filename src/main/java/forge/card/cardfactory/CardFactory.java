@@ -288,7 +288,7 @@ public class CardFactory {
 
         // this is the "default" spell for permanents like creatures and artifacts 
         if (card.isPermanent() && !card.isAura() && !card.isLand()) {
-            card.addSpellAbility(new SpellPermanent(card)); // ignore the default spell for combined split cards
+            card.addSpellAbility(new SpellPermanent(card));
         }
 
         CardFactoryUtil.parseKeywords(card, cardName);
@@ -385,9 +385,9 @@ public class CardFactory {
             coreTypes.addAll(rules.getType().getSubTypes());
             card.setType(coreTypes);
 
-            // Combined text -- CURRENTLY TAKES ORACLE TEXT BECAUSE THE ABILITY TEXT DOESN'T WORK (?)
-            String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
-            card.setText(combinedText);
+            // Combined text based on Oracle text - might not be necessary, temporarily disabled.
+            //String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
+            //card.setText(combinedText);
         }
 
         return card;
