@@ -294,8 +294,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        chance &= (r.nextFloat() < .8);
-
         final AbilitySub subAb = sa.getSubAbility();
         chance &= subAb == null || subAb.getAi().chkDrawbackWithSubs(ai, subAb);
 
