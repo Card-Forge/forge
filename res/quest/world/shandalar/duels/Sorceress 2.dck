@@ -9,7 +9,6 @@ Deck Type=constructed
 [main]
 3 Ball Lightning|4ED
 4 Bird Maiden|ARN
-4 Blood Lust|LEG
 3 Dragon Whelp|4ED
 4 Dwarven Warriors|LEB
 2 Fire Drake|CHR
@@ -17,7 +16,8 @@ Deck Type=constructed
 2 Hurloon Minotaur|LEB
 4 Hurr Jackal|ARN
 3 Iron Star|LEB
-2 Meekstone|LEB
+2 Lightning Bolt|2ED
+4 Meekstone|LEB
 23 Mountain|4ED
 2 Shatter|4ED
 [sideboard]

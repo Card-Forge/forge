@@ -9,6 +9,7 @@ Deck Type=constructed
 [main]
 3 Ali Baba|ARN
 3 Ankh of Mishra|LEB
+4 Black Vise|LEB
 4 Giant Strength|4ED
 4 Goblin Balloon Brigade|4ED
 3 Hurr Jackal|ARN
@@ -19,5 +20,4 @@ Deck Type=constructed
 16 Mountain|4ED
 4 Sisters of the Flame|DRK
 4 Strip Mine|ATQ
-4 Winds of Change|4ED
 [sideboard]
