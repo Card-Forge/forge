@@ -288,9 +288,7 @@ public class CardFactory {
 
         // this is the "default" spell for permanents like creatures and artifacts 
         if (card.isPermanent() && !card.isAura() && !card.isLand()) {
-            if (card.getRules().getSplitType() != CardSplitType.Split) {
-                card.addSpellAbility(new SpellPermanent(card)); // ignore the default spell for combined split cards
-            }
+            card.addSpellAbility(new SpellPermanent(card)); // ignore the default spell for combined split cards
         }
 
         CardFactoryUtil.parseKeywords(card, cardName);
@@ -306,6 +304,11 @@ public class CardFactory {
                 for (int i = 0; i < stAbs.size(); i++) {
                     card.addStaticAbility(stAbs.get(i));
                 }
+            }
+
+            if ( state == CardCharacteristicName.LeftSplit || state == CardCharacteristicName.RightSplit )
+            {
+                card.getState(CardCharacteristicName.Original).getSpellAbility().addAll(card.getCharacteristics().getSpellAbility());
             }
         }
 
@@ -365,7 +368,6 @@ public class CardFactory {
         if ( st == CardSplitType.Split ) {
             card.setName(rules.getName());
 
-            // BUILD COMBINED 'Original' SIDE HERE
             // Combined mana cost
             ManaCost combinedManaCost = ManaCost.combine(rules.getMainPart().getManaCost(), rules.getOtherPart().getManaCost());
             card.setManaCost(combinedManaCost);
@@ -378,22 +380,10 @@ public class CardFactory {
             combinedCardColorArr.add(combinedCardColor);
             card.setColor(combinedCardColorArr);
 
-            // Combined abilities -- DOESN'T DISPLAY THE ABILITY TEXT IN THE CHOICE BOX YET
-            card.getCharacteristics().getIntrinsicAbility().clear();
-            for (String a : rules.getMainPart().getAbilities()) {
-                final SpellAbility sa = AbilityFactory.getAbility(a, card);
-                if (sa.hasParam("SetAsKicked")) {
-                    sa.addOptionalAdditionalCosts("Kicker");
-                }
-                card.addSpellAbility(sa);
-            }
-            for (String a : rules.getOtherPart().getAbilities()) {
-                final SpellAbility sa = AbilityFactory.getAbility(a, card);
-                if (sa.hasParam("SetAsKicked")) {
-                    sa.addOptionalAdditionalCosts("Kicker");
-                }
-                card.addSpellAbility(sa);
-            }
+            // Super and 'middle' types should use enums.
+            List<String> coreTypes = rules.getType().getTypesBeforeDash();
+            coreTypes.addAll(rules.getType().getSubTypes());
+            card.setType(coreTypes);
 
             // Combined text -- CURRENTLY TAKES ORACLE TEXT BECAUSE THE ABILITY TEXT DOESN'T WORK (?)
             String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
