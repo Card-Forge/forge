@@ -84,6 +84,12 @@ public abstract class SpellAbilityAi {
         if (sa.getRestrictions().getPlaneswalker() && Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             return true;
         }
+        if (sa.isTrigger()) {
+            return true;
+        }
+        if (sa.isSpell() && !sa.isBuyBackAbility()) {
+            return false;
+        }
         
         PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
         return phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai);
