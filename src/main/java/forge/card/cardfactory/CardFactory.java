@@ -31,6 +31,7 @@ import forge.Color;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
+import forge.card.ability.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
@@ -380,10 +381,19 @@ public class CardFactory {
             // Combined abilities -- DOESN'T DISPLAY THE ABILITY TEXT IN THE CHOICE BOX YET
             card.getCharacteristics().getIntrinsicAbility().clear();
             for (String a : rules.getMainPart().getAbilities()) {
-                card.addIntrinsicAbility(a);
+                final SpellAbility sa = AbilityFactory.getAbility(a, card);
+                if (sa.hasParam("SetAsKicked")) {
+                    sa.addOptionalAdditionalCosts("Kicker");
+                }
+                card.addSpellAbility(sa);
             }
             for (String a : rules.getOtherPart().getAbilities()) {
                 card.addIntrinsicAbility(a);
+                final SpellAbility sa = AbilityFactory.getAbility(a, card);
+                if (sa.hasParam("SetAsKicked")) {
+                    sa.addOptionalAdditionalCosts("Kicker");
+                }
+                card.addSpellAbility(sa);
             }
 
             // Combined text -- CURRENTLY TAKES ORACLE TEXT BECAUSE THE ABILITY TEXT DOESN'T WORK (?)
