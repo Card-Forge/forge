@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Ape Spirit
 PT:2/2
 A:AB$ Mana | Cost$ ExileFromHand<1/CARDNAME> | Produced$ R | ActivationZone$ Hand | SpellDescription$ Add R to your mana pool.
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simian_spirit_guide.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/122.jpg
