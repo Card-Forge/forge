@@ -248,7 +248,7 @@ public class GameAction {
             copied.getCharacteristics().resetCardColor();
         }
 
-        if (zoneFrom.is(ZoneType.Battlefield)) {
+        if (zoneFrom.is(ZoneType.Battlefield) && !c.isToken()) {
             copied.setSuspendCast(false);
             copied.setState(CardCharacteristicName.Original);
             // Soulbond unpairing

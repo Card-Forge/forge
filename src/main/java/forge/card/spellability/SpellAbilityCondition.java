@@ -81,6 +81,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Kicked")) {
                 this.setKicked(true);
             }
+            if (value.equals("AllTargetsLegal")) {
+                this.setAllTargetsLegal(true);
+            }
         }
 
         if (params.containsKey("ConditionZone")) {
@@ -194,6 +197,14 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             SpellAbility root = sa.getRootAbility();
             if (!root.isKicked()) {
                 return false;
+            }
+        }
+        if (this.isAllTargetsLegal()) {
+            SpellAbility root = sa.getRootAbility();
+            for (Card c : root.getTarget().getTargetCards()) {
+                if (!CardFactoryUtil.isTargetStillValid(sa, c)) {
+                    return false;
+                }
             }
         }
 
