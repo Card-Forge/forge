@@ -45,7 +45,7 @@ public class CostUnattach extends CostPartWithList {
     public boolean isUndoable() { return false; }
 
     @Override
-    public boolean isReusable() { return false; }
+    public boolean isReusable() { return true; }
 
     /*
      * (non-Javadoc)

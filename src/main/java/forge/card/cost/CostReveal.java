@@ -56,6 +56,9 @@ public class CostReveal extends CostPartWithList {
         super(amount, type, description);
     }
 
+    @Override
+    public boolean isReusable() { return true; }
+
     /*
      * (non-Javadoc)
      * 

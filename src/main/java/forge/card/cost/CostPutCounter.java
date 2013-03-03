@@ -78,7 +78,6 @@ public class CostPutCounter extends CostPartWithList {
         super(amount, type, description);
         this.counter = cntr;
     }
-
     
     @Override
     public boolean isReusable() { return true; }

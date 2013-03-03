@@ -287,7 +287,9 @@ public class CardFactory {
 
         // this is the "default" spell for permanents like creatures and artifacts 
         if (card.isPermanent() && !card.isAura() && !card.isLand()) {
-            card.addSpellAbility(new SpellPermanent(card));
+            if (card.getRules().getSplitType() != CardSplitType.Split) {
+                card.addSpellAbility(new SpellPermanent(card)); // ignore the default spell for combined split cards
+            }
         }
 
         CardFactoryUtil.parseKeywords(card, cardName);
@@ -358,6 +360,7 @@ public class CardFactory {
         if (card.isInAlternateState()) {
             card.setState(CardCharacteristicName.Original);
         }
+
         if ( st == CardSplitType.Split ) {
             card.setName(rules.getName());
 
@@ -374,7 +377,8 @@ public class CardFactory {
             combinedCardColorArr.add(combinedCardColor);
             card.setColor(combinedCardColorArr);
 
-            // Combined abilities -- DOESN'T WORK AS DESIRED (?)
+            // Combined abilities -- DOESN'T DISPLAY THE ABILITY TEXT IN THE CHOICE BOX YET
+            card.getCharacteristics().getIntrinsicAbility().clear();
             for (String a : rules.getMainPart().getAbilities()) {
                 card.addIntrinsicAbility(a);
             }

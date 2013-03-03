@@ -747,7 +747,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
                 // Blink permanents with ETB triggers
-                else if (sa.isAbility() && (sa.getPayCosts() != null) && SpellAbilityAi.playReusable(ai, sa)) {
+                else if (SpellAbilityAi.playReusable(ai, sa)) {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
