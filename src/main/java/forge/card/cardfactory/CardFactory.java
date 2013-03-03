@@ -388,7 +388,6 @@ public class CardFactory {
                 card.addSpellAbility(sa);
             }
             for (String a : rules.getOtherPart().getAbilities()) {
-                card.addIntrinsicAbility(a);
                 final SpellAbility sa = AbilityFactory.getAbility(a, card);
                 if (sa.hasParam("SetAsKicked")) {
                     sa.addOptionalAdditionalCosts("Kicker");
