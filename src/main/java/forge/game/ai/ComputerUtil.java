@@ -425,14 +425,16 @@ public class ComputerUtil {
         int count = 0;
 
         while (count < amount) {
-            final Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
-            if (prefCard != null) {
-                sacList.add(prefCard);
-                typeList.remove(prefCard);
-                count++;
-            } else {
+            Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
+            if (prefCard == null) {
+                prefCard = ComputerUtilCard.getWorstAI(typeList);
+            }
+            if (prefCard == null) {
                 return null;
             }
+            sacList.add(prefCard);
+            typeList.remove(prefCard);
+            count++;
         }
         return sacList;
     }

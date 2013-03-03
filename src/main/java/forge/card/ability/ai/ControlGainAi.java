@@ -77,6 +77,13 @@ public class ControlGainAi extends SpellAbilityAi {
 
         // if Defined, then don't worry about targeting
         if (tgt == null) {
+            if (sa.hasParam("AllValid")) {
+                List<Card> tgtCards = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+                tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
+                if (tgtCards.isEmpty()) {
+                    return false;
+                }
+            }
             return true;
         } else {
             tgt.resetTargets();

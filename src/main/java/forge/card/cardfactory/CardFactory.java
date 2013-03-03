@@ -32,6 +32,7 @@ import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
@@ -359,7 +360,31 @@ public class CardFactory {
         }
         if ( st == CardSplitType.Split ) {
             card.setName(rules.getName());
+
             // BUILD COMBINED 'Original' SIDE HERE
+            // Combined mana cost
+            ManaCost combinedManaCost = ManaCost.combine(rules.getMainPart().getManaCost(), rules.getOtherPart().getManaCost());
+            card.setManaCost(combinedManaCost);
+
+            // Combined card color
+            CardColor combinedCardColor = new CardColor(card);
+            combinedCardColor.addToCardColor(Color.fromColorSet(rules.getMainPart().getColor()));
+            combinedCardColor.addToCardColor(Color.fromColorSet(rules.getOtherPart().getColor()));
+            ArrayList<CardColor> combinedCardColorArr = new ArrayList<CardColor>();
+            combinedCardColorArr.add(combinedCardColor);
+            card.setColor(combinedCardColorArr);
+
+            // Combined abilities -- DOESN'T WORK AS DESIRED (?)
+            for (String a : rules.getMainPart().getAbilities()) {
+                card.addIntrinsicAbility(a);
+            }
+            for (String a : rules.getOtherPart().getAbilities()) {
+                card.addIntrinsicAbility(a);
+            }
+
+            // Combined text -- CURRENTLY TAKES ORACLE TEXT BECAUSE THE ABILITY TEXT DOESN'T WORK (?)
+            String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
+            card.setText(combinedText);
         }
 
         return card;

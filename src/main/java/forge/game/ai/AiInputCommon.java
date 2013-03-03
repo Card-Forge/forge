@@ -108,7 +108,6 @@ public class AiInputCommon extends Input {
             }
         }
         player.getController().passPriority();
-        stop();
     } // getMessage();
 
     /**
@@ -162,7 +161,9 @@ public class AiInputCommon extends Input {
             sa = computer.getSpellAbilityToPlay();
             if ( sa == null ) break;
             //System.out.println("Playing sa: " + sa);
-            ComputerUtil.handlePlayingSpellAbility(player, sa, game);
+            if (!ComputerUtil.handlePlayingSpellAbility(player, sa, game)) {
+                break;
+            }
         } while ( sa != null );
     }
     

@@ -373,7 +373,6 @@ public class Cost {
     }
 
     public final CostPartMana getCostMana() {
-        // TODO: Change where ChangeCost happens
         for (final CostPart part : this.costParts) {
             if (part instanceof CostPartMana) {
                 return (CostPartMana) part;

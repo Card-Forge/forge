@@ -174,12 +174,11 @@ public class InputMulligan extends Input {
             next.initPlane();
         }
 
-        //Set Field shown to current player.
+        //Set Field shown to current player.        
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
         SDisplayUtil.showTab(nextField);
 
         game.getPhaseHandler().nextPhase();
-        stop();
     }
 
     @Override
