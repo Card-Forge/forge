@@ -221,8 +221,7 @@ public class CardRulesReader {
                     } else
                         this.faces[curFace].addSVar(variable, value);
                 } else if ("SetInfo".equals(key)) {
-                    if ( curFace == 0 )
-                        CardRulesReader.parseSetInfoLine(value, sets);
+                    parseSetInfoLine(value);
                 }
                 break;
 
@@ -247,41 +246,33 @@ public class CardRulesReader {
      * @param setsData
      *            the current mapping of set names to CardInSet instances
      */
-    private static void parseSetInfoLine(final String value, final Map<String, CardInSet> setsData) {
-        final int setCodeIx = 0;
-        final int rarityIx = 1;
-        final int numPicIx = 3;
-
+    private void parseSetInfoLine(final String value) {
         // Sample SetInfo line:
-        // SetInfo:POR|Land|http://magiccards.info/scans/en/po/203.jpg|4
+        // SetInfo:POR Land x4
 
-        final String[] pieces = value.split("\\|");
-
-        if (pieces.length <= rarityIx) {
-            throw new RuntimeException("SetInfo line <<" + value + ">> has insufficient pieces");
+        int i = 0;
+        String setCode = null;
+        String txtRarity = "Common";
+        String txtCount = "x1";
+        
+        StringTokenizer stt = new StringTokenizer(value, " ");
+        while(stt.hasMoreTokens()) {
+            if( i == 0 ) setCode = stt.nextToken();
+            if( i == 1 ) txtRarity = stt.nextToken();
+            if( i == 2 ) txtCount = stt.nextToken();
+            i++;
         }
 
-        final String setCode = pieces[setCodeIx];
-        final String txtRarity = pieces[rarityIx];
-        // pieces[2] is the magiccards.info URL for illustration #1, which we do
-        // not need.
-        int numIllustrations = 1;
 
-        if (setsData.containsKey(setCode)) {
+        int numIllustrations = 1;
+        if ( i > 2 )
+            numIllustrations = Integer.parseInt(txtCount.substring(1));
+
+        if (sets.containsKey(setCode)) {
+            System.err.print(faces[0].getName());
             throw new RuntimeException("Found multiple SetInfo lines for set code <<" + setCode + ">>");
         }
 
-        if (pieces.length > numPicIx) {
-            try {
-                numIllustrations = Integer.parseInt(pieces[numPicIx]);
-            } catch (final NumberFormatException nfe) {
-                throw new RuntimeException("Fourth item of SetInfo is not an integer in <<" + value + ">>");
-            }
-
-            if (numIllustrations < 1) {
-                throw new RuntimeException("Fourth item of SetInfo is not a positive integer, but" + numIllustrations);
-            }
-        }
 
         CardRarity rarity = null;
         if ("Land".equals(txtRarity)) {
@@ -302,7 +293,7 @@ public class CardRulesReader {
 
         final CardInSet cardInSet = new CardInSet(rarity, numIllustrations);
 
-        setsData.put(setCode, cardInSet);
+        sets.put(setCode, cardInSet);
     }
 
     /**
