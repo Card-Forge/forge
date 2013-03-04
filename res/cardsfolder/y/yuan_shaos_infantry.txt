@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks alone, CARDNAME is unblockable this combat.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Unblockable | UntilEndOfCombat$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yuan_shaos_infantry.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/129.jpg
 Oracle:Whenever Yuan Shao's Infantry attacks alone, Yuan Shao's Infantry is unblockable this combat.
+SetInfo:PTK Uncommon

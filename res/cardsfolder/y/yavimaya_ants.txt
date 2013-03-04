@@ -5,7 +5,6 @@ PT:5/1
 K:Trample
 K:Haste
 K:Cumulative upkeep:G G
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_ants.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/93.jpg
 Oracle:Trample, haste\nCumulative upkeep {G}{G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
+SetInfo:ALL Uncommon
