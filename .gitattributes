@@ -4342,6 +4342,7 @@ res/cardsfolder/g/goblin_warchief.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_warchief_avatar.txt -text
 res/cardsfolder/g/goblin_wardriver.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_warrens.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_welder.txt -text
 res/cardsfolder/g/goblin_wizard.txt svneol=native#text/plain
 res/cardsfolder/g/goblins_of_the_flarg.txt svneol=native#text/plain
 res/cardsfolder/g/godhead_of_awe.txt svneol=native#text/plain

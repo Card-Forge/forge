@@ -13,6 +13,7 @@ SVar:X:Count$ChosenNumber
 SVar:NumManaMax:Count$Valid Island.RememberedPlayerCtrl
 SVar:CarpetX:Number$0
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carpet_of_flowers.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/240.jpg
 Oracle:At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn, you may add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls.
