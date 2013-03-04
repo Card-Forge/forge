@@ -6,9 +6,11 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.card.CardSplitType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -363,6 +365,23 @@ public class GameActionPlay {
     public final void playSpellAbility(SpellAbility sa, Player activator) {
         sa.setActivatingPlayer(activator);
 
+        final Card source = sa.getSourceCard();
+
+        // Split card support
+        if (source.getRules().getSplitType() == CardSplitType.Split) {
+            if (sa.hasParam("SplitSide")) {
+                if (sa.getParam("SplitSide").equals("LeftSplit")) {
+                    source.setState(CardCharacteristicName.LeftSplit);
+                } else if (sa.getParam("SplitSide").equals("RightSplit")) {
+                    source.setState(CardCharacteristicName.RightSplit);
+                } else {
+                    System.out.println(String.format("ERROR: Split card %s does not define the split face abilities properly.", source.getName()));
+                }
+            } else {
+                System.out.println(String.format("ERROR: Split card %s does not define the split face abilities properly.", source.getName()));
+            }
+        }
+
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
         }
@@ -402,7 +421,6 @@ public class GameActionPlay {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
             if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
-                final Card source = sa.getSourceCard();
                 if (sa.isSpell() && !source.isCopiedSpell()) {
                     sa.setSourceCard(game.getAction().moveToStack(source));
                 }
