@@ -8,3 +8,4 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Insect | TokenTy
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonlair_spider.jpg
 Oracle:Reach\nWhenever an opponent casts a spell, put a 1/1 green Insect creature token onto the battlefield.
 SetInfo:PC2 Rare
+SetInfo:CM1 Rare

@@ -6,4 +6,5 @@ T:Mode$ TapsForMana | ValidCard$ Land.YouCtrl | Execute$ TrigMana | TriggerZones
 SVar:TrigMana:AB$ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miraris_wake.jpg
 Oracle:Creatures you control get +1/+1.\nWhenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+SetInfo:CM1 Rare
 SetInfo:JUD Rare

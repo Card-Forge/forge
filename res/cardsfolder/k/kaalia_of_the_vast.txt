@@ -8,3 +8,4 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefiel
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaalia_of_the_vast.jpg
 Oracle:Flying\nWhenever Kaalia of the Vast attacks an opponent, you may put an Angel, Demon, or Dragon creature card from your hand onto the battlefield tapped and attacking that opponent.
 SetInfo:COM Mythic
+SetInfo:CM1 Mythic

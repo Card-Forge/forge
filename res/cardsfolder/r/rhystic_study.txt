@@ -6,3 +6,4 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | UnlessCost$ 1 | UnlessPayer$ Tr
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_study.jpg
 Oracle:Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.
 SetInfo:PCY Common
+SetInfo:CM1 Common
