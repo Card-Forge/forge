@@ -710,6 +710,12 @@ public class GameAction {
             return c;
         }
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
+
+        // if a split card, convert back to its full face form before going to graveyard
+        if (c.getRules().getSplitType() == CardSplitType.Split) {
+            c.setState(CardCharacteristicName.Original);
+        }
+
         return moveTo(removed, c);
     }
 
