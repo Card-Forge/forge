@@ -6,13 +6,12 @@ S:Mode$ Continuous | Affected$ Creature.Zombie+Other | AddKeyword$ Swampwalk | D
 S:Mode$ Continuous | Affected$ Card.Zombie+Other | AddAbility$ Regenerate | Description$ Other Zombies have "B: Regenerate this permanent."
 SVar:Regenerate:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate this permanent
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_master.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/46.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/46.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/69.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/58.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/162.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/46.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/46.jpg
 Oracle:Other Zombie creatures have swampwalk.\nOther Zombies have "{B}: Regenerate this permanent."
+SetInfo:2ED Rare
+SetInfo:6ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

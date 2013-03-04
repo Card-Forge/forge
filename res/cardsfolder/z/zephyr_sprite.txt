@@ -3,7 +3,6 @@ ManaCost:U
 Types:Creature Faerie
 PT:1/1
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zephyr_sprite.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/82.jpg
 Oracle:Flying
+SetInfo:M10 Common

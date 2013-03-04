@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddPower$ 2
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
 SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zelyon_sword.jpg
-SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/176.jpg
 Oracle:You may choose not to untap Zelyon Sword during your untap step.\n{3}, {T}: Target creature gets +2/+0 for as long as Zelyon Sword remains tapped.
+SetInfo:FEM Rare

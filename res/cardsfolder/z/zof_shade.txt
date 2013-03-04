@@ -3,7 +3,6 @@ ManaCost:3 B
 Types:Creature Shade
 PT:2/2
 A:AB$ Pump | Cost$ 2 B | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zof_shade.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/132.jpg
 Oracle:{2}{B}: Zof Shade gets +2/+2 until end of turn.
+SetInfo:ROE Common

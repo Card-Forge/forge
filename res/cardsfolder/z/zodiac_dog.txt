@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Hound
 PT:2/2
 K:Mountainwalk
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10534.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/130.jpg
 Oracle:Mountainwalk
+SetInfo:PTK Common

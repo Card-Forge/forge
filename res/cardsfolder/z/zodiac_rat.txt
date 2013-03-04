@@ -3,7 +3,6 @@ ManaCost:B
 Types:Creature Rat
 PT:1/1
 K:Swampwalk
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10564.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/98.jpg
 Oracle:Swampwalk
+SetInfo:PTK Common

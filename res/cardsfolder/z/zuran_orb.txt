@@ -2,7 +2,7 @@ Name:Zuran Orb
 ManaCost:0
 Types:Artifact
 A:AB$ GainLife | Cost$ Sac<1/Land> | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zuran_orb.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/325.jpg
 Oracle:Sacrifice a land: You gain 2 life.
+SetInfo:ICE Uncommon
+SetInfo:V10 Mythic

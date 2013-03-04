@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Creature Ox
 PT:3/3
 K:Swampwalk
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10636.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/161.jpg
 Oracle:Swampwalk
+SetInfo:PTK Uncommon
