@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:2/2
 A:AB$ Pump | Cost$ W U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 A:AB$Pump | Cost$ 3 W U | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent your opponent controls to detain. | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | UntilYourNextTurn$ True | SpellDescription$ Detain target nonland permanent an opponent controls. (Until your next turn, that permanent can't attack or block and its activated abilities can't be activated.)
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/new_prahv_guildmage.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/181.jpg
 Oracle:{W}{U}: Target creature gains flying until end of turn.\n{3}{W}{U}: Detain target nonland permanent an opponent controls. (Until your next turn, that permanent can't attack or block and its activated abilities can't be activated.)
+SetInfo:RTR Uncommon

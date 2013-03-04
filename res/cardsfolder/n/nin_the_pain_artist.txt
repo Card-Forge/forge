@@ -6,7 +6,6 @@ A:AB$ DealDamage | Cost$ X U R T | ValidTgts$ Creature | TgtPrompt$ Select targe
 SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ X | References$ X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nin_the_pain_artist.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/213.jpg
 Oracle:{X}{U}{R}, {T}: Nin, the Pain Artist deals X damage to target creature. That creature's controller draws X cards.
+SetInfo:COM Rare

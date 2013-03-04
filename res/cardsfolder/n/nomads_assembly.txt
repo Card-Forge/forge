@@ -5,5 +5,5 @@ K:Rebound
 A:SP$ Token | Cost$ 4 W W | TokenAmount$ X | References$ X | TokenName$ Kor Soldier | TokenTypes$ Creature,Kor,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Kor Soldier creature token onto the battlefield for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomads_assembly.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/39.jpg
 Oracle:Put a 1/1 white Kor Soldier creature token onto the battlefield for each creature you control.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
+SetInfo:ROE Rare

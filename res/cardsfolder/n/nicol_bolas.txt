@@ -6,9 +6,9 @@ K:Flying
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U B R
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player discards his or her hand.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | Mode$ Hand
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nicol_bolas.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Nicol Bolas unless you pay {U}{B}{R}.\nWhenever Nicol Bolas deals damage to an opponent, that player discards his or her hand.
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/116.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/98.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/286.jpg
+SetInfo:DRB Rare
+SetInfo:CHR Rare
+SetInfo:LEG Rare
+SetInfo:TSB Special

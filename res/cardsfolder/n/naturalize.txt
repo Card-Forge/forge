@@ -2,18 +2,17 @@ Name:Naturalize
 ManaCost:1 G
 Types:Instant
 A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naturalize.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/270.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/199.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/127.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/258.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/282.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/186.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/195.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/178.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/185.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/275.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/141.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/197.jpg
 Oracle:Destroy target artifact or enchantment.
+SetInfo:8ED Common
+SetInfo:ROE Common
+SetInfo:GTC Common
+SetInfo:9ED Common
+SetInfo:ALA Common
+SetInfo:M11 Common
+SetInfo:M10 Common
+SetInfo:M13 Common
+SetInfo:M12 Common
+SetInfo:ONS Common
+SetInfo:10E Common
+SetInfo:ISD Common

@@ -8,7 +8,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | Trigger
 T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast a green spell, remove a -1/-1 counter from CARDNAME.
 SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
 SVar:BuffedBy:Card.Black,Card.Green
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_hatchling.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/124.jpg
 Oracle:Noxious Hatchling enters the battlefield with four -1/-1 counters on it.\nWither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.\nWhenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
+SetInfo:EVE Uncommon

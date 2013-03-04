@@ -5,7 +5,6 @@ PT:2/3
 A:AB$ Destroy | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | Condition$ Threshold | Description$ Threshold - CARDNAME gets +1/+1 as long as seven or more cards are in your graveyard.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_calmer.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/132.jpg
 Oracle:{G}, {T}, Sacrifice Nantuko Calmer: Destroy target enchantment.\nThreshold - Nantuko Calmer gets +1/+1 as long as seven or more cards are in your graveyard.
+SetInfo:TOR Common

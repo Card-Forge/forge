@@ -2,7 +2,6 @@ Name:Night Terrors
 ManaCost:2 B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 B | Origin$ Hand | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player reveals his or her hand. You choose a nonland card from it. Exile that card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/night_terrors.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/111.jpg
 Oracle:Target player reveals his or her hand. You choose a nonland card from it. Exile that card.
+SetInfo:ISD Common

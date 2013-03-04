@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:2/1
 K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Lifelink | Description$ As long as CARDNAME is paired with another creature, both creatures have lifelink.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nearheath_pilgrim.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/31.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Nearheath Pilgrim is paired with another creature, both creatures have lifelink.
+SetInfo:AVR Uncommon

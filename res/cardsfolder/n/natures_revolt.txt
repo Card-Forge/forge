@@ -3,8 +3,7 @@ ManaCost:3 G G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Land | SetPower$ 2 | SetToughness$ 2 | AddType$ Creature | Description$ All lands are 2/2 creatures that are still lands.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_revolt.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/134.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/260.jpg
 Oracle:All lands are 2/2 creatures that are still lands.
+SetInfo:7ED Rare
+SetInfo:TMP Rare

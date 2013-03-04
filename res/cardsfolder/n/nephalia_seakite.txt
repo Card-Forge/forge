@@ -4,7 +4,6 @@ Types:Creature Bird
 PT:2/3
 K:Flash
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nephalia_seakite.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/43.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying
+SetInfo:DKA Common

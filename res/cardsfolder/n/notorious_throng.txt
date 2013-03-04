@@ -7,7 +7,6 @@ A:SP$ Token | Cost$ 3 U | TokenAmount$ X | References$ X | TokenColors$ Black | 
 SVar:X:Count$OppDamageThisTurn
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/notorious_throng.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/45.jpg
 Oracle:Prowl {5}{U} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)\nPut X 1/1 black Faerie Rogue creature tokens with flying onto the battlefield, where X is the damage dealt to your opponents this turn. If Notorious Throng's prowl cost was paid, take an extra turn after this one.
+SetInfo:MOR Rare

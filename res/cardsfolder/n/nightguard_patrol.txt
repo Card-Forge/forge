@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:2/1
 K:First Strike
 K:Vigilance
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightguard_patrol.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/26.jpg
 Oracle:First strike, vigilance
+SetInfo:RAV Common

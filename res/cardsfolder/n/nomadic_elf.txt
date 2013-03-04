@@ -4,7 +4,7 @@ Types:Creature Elf Nomad
 PT:2/2
 A:AB$ Mana | Cost$ 1 G | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomadic_elf.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/200.jpg
 Oracle:{1}{G}: Add one mana of any color to your mana pool.
+SetInfo:DDE Common
+SetInfo:INV Common

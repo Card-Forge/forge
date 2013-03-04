@@ -3,7 +3,6 @@ ManaCost:4 G G
 Types:Creature Beast
 PT:3/6
 K:Reach
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card42039.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/133.jpg
 Oracle:Reach (This creature can block creatures with flying.)
+SetInfo:LGN Common

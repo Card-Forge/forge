@@ -2,7 +2,6 @@ Name:Nessian Courser
 ManaCost:2 G
 Types:Creature Centaur Warrior
 PT:3/3
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136138.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/148.jpg
 Oracle:
+SetInfo:FUT Common

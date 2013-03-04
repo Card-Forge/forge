@@ -4,7 +4,7 @@ Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Destroy | Description$ All Slivers have "3, Sacrifice this permanent: Destroy target permanent."
 SVar:Destroy:AB$Destroy | Cost$ 3 Sac<1/CARDNAME> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy target permanent.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrotic_sliver.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/159.jpg
 Oracle:All Slivers have "{3}, Sacrifice this permanent: Destroy target permanent."
+SetInfo:H09 Uncommon
+SetInfo:PLC Uncommon

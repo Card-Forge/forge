@@ -6,7 +6,6 @@ A:SP$ GainLife | Cost$ ExileFromHand<1/Card.Green> | CostDesc$ You may exile a g
 SVar:X:Count$xPaid
 SVar:Y:Exiled$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nourishing_shoal.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/137.jpg
 Oracle:You may exile a green card with converted mana cost X from your hand rather than pay Nourishing Shoal's mana cost.\nYou gain X life.
+SetInfo:BOK Rare

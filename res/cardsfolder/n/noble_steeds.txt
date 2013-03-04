@@ -2,7 +2,6 @@ Name:Noble Steeds
 ManaCost:2 W
 Types:Enchantment
 A:AB$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_steeds.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/140.jpg|2
 Oracle:{1}{W}: Target creature gains first strike until end of turn.
+SetInfo:ALL Common x2
