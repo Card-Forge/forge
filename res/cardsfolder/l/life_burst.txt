@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ GainLife | Cost$ 1 W | LifeAmount$ 4 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBGainLife | SpellDescription$ Target player gains 4 life, then gains 4 life for each card named CARDNAME in each graveyard.
 SVar:DBGainLife:DB$GainLife | Defined$ Targeted | LifeAmount$ X | References$ X
 SVar:X:Count$NamedInAllYards.Life Burst/Times.4
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29704.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/30.jpg
 Oracle:Target player gains 4 life, then gains 4 life for each card named Life Burst in each graveyard.
+SetInfo:ODY Common

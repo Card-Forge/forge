@@ -2,7 +2,6 @@ Name:Leap of Faith
 ManaCost:2 W
 Types:Instant
 A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying & HIDDEN Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Target creature gains flying until end of turn. Prevent all damage that would be dealt to that creature this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leap_of_faith.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/26.jpg
 Oracle:Target creature gains flying until end of turn. Prevent all damage that would be dealt to that creature this turn.
+SetInfo:AVR Common

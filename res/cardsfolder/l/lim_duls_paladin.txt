@@ -15,7 +15,6 @@ SVar:TrigUnBlockedPump:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME assigns no comba
 SVar:DBLoseLife:DB$ LoseLife | Defined$ DefendingPlayer | LifeAmount$ 4
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_paladin.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/191.jpg
 Oracle:Trample\nAt the beginning of your upkeep, you may discard a card. If you don't, sacrifice Lim-Dul's Paladin and draw a card.\nWhenever Lim-Dul's Paladin becomes blocked, it gets +6/+3 until end of turn.\nWhenever Lim-Dul's Paladin attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.
+SetInfo:ALL Uncommon

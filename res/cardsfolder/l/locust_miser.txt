@@ -3,7 +3,6 @@ ManaCost:2 B B
 Types:Creature Rat Shaman
 PT:2/2
 S:Mode$ Continuous | Affected$ Opponent | RaiseMaxHandSize$ -2 | Description$ Each opponent's maximum hand size is reduced by two.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/locust_miser.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/80.jpg
 Oracle:Each opponent's maximum hand size is reduced by two.
+SetInfo:SOK Uncommon

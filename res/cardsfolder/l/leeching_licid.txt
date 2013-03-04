@@ -8,9 +8,7 @@ SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Curse
 #If the value of AlternateMode isn't Flip or DoubleFaced, it will be the name of the state defined below, so you can switch to it with SetState+NewState$.The name of the first state defined is always "Original".
 AlternateMode:Licid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leeching_licid.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/35.jpg
 Oracle:{B}, {T}: Leeching Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {B} to end this effect.\nAt the beginning of the upkeep of enchanted creature's controller, Leeching Licid deals 1 damage to that player.
 
 ALTERNATE
@@ -25,7 +23,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$ 1
 A:AB$ SetState | Cost$ B | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leeching_licid.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/35.jpg
 Oracle:{B}, {T}: Leeching Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {B} to end this effect.\nAt the beginning of the upkeep of enchanted creature's controller, Leeching Licid deals 1 damage to that player.
+SetInfo:TMP Uncommon

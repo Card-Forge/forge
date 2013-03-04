@@ -2,13 +2,13 @@ Name:Lightning Bolt
 ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card27255.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/162.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/163.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/226.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/149.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/146.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/161.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/162.jpg
 Oracle:Lightning Bolt deals 3 damage to target creature or player.
+SetInfo:2ED Common
+SetInfo:PD2 Common
+SetInfo:M11 Common
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:4ED Common
+SetInfo:3ED Common
+SetInfo:M10 Common

@@ -3,7 +3,7 @@ ManaCost:0
 Types:Artifact
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_petal.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/284.jpg
 Oracle:{T}, Sacrifice Lotus Petal: Add one mana of any color to your mana pool.
+SetInfo:TMP Common
+SetInfo:V09 Mythic

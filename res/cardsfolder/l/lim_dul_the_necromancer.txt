@@ -7,7 +7,6 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Ba
 SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Permanent$ True | ConditionDefined$ Remembered | ConditionPresent$ Creature | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Regenerate | ValidTgts$ Zombie | TgtPrompt$ Select target Zombie | Cost$ 1 B | SpellDescription$ Regenerate target Zombie.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_dul_the_necromancer.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/114.jpg
 Oracle:Whenever a creature an opponent controls dies, you may pay {1}{B}. If you do, return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types.\n{1}{B}: Regenerate target Zombie.
+SetInfo:TSP Rare

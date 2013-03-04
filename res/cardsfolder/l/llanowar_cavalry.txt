@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Creature Human Soldier
 PT:1/4
 A:AB$ Pump | Cost$ W | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_cavalry.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/195.jpg
 Oracle:{W}: Llanowar Cavalry gains vigilance until end of turn.
+SetInfo:INV Common

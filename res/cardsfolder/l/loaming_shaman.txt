@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True
 SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefinedController$ Targeted | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Choose target card | ValidTgts$ Card | References$ X
 SVar:X:Count$InAllYards
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loaming_shaman.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/87.jpg
 Oracle:When Loaming Shaman enters the battlefield, target player shuffles any number of target cards from his or her graveyard into his or her library.
+SetInfo:DIS Rare

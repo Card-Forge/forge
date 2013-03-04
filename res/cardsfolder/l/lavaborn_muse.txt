@@ -5,8 +5,7 @@ PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ CardsInHand | SVarCompare$ LE2 | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, CARDNAME deals 3 damage to him or her.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 3
 SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavaborn_muse.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/105.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/216.jpg
 Oracle:At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Lavaborn Muse deals 3 damage to him or her.
+SetInfo:LGN Rare
+SetInfo:10E Rare

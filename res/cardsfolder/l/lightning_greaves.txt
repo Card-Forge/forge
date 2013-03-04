@@ -3,8 +3,9 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip 0
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste & Shroud | Description$ Equipped creature has haste and shroud.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_greaves.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/199.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/253.jpg
 Oracle:Equipped creature has haste and shroud. (It can't be the target of spells or abilities.)\nEquip {0}
+SetInfo:MRD Uncommon
+SetInfo:ARC Uncommon
+SetInfo:COM Uncommon
+SetInfo:DDE Uncommon

@@ -10,7 +10,6 @@ S:Mode$ CantPlayLand | CheckSVar$ X | SVarCompare$ GE10 | Description$ Players c
 SVar:X:Count$Valid Land
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/limited_resources.jpg
-SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/10.jpg
 Oracle:When Limited Resources enters the battlefield, each player chooses five lands he or she controls and sacrifices the rest.\nPlayers can't play lands as long as ten or more lands are on the battlefield.
+SetInfo:EXO Rare

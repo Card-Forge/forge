@@ -3,7 +3,6 @@ ManaCost:3 G G W W
 Types:Legendary Creature Human Archer
 PT:3/6
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target attacking or blocking creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lady_caleria.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/279.jpg
 Oracle:{T}: Lady Caleria deals 3 damage to target attacking or blocking creature.
+SetInfo:LEG Rare

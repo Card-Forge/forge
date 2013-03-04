@@ -9,7 +9,6 @@ T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ Rolle
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lethe_lake.jpg
-SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/lethe-lake.jpg
 Oracle:At the beginning of your upkeep, put the top ten cards of your library into your graveyard.\nWhenever you roll {C}, target player puts the top ten cards of his or her library into his or her graveyard.
+SetInfo:HOP Common

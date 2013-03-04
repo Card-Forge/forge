@@ -4,7 +4,7 @@ Types:Creature Cat
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+2 as long as you control a Forest.
 SVar:X:Count$Valid Forest.YouCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loam_lion.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/13.jpg
 Oracle:Loam Lion gets +1/+2 as long as you control a Forest.
+SetInfo:DDH Uncommon
+SetInfo:WWK Uncommon

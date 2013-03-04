@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.Red | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a player casts a red spell, you may pay R. If you do, CARDNAME deals 1 damage to target creature or player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_cloud.jpg
-SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/87.jpg
 Oracle:Whenever a player casts a red spell, you may pay {R}. If you do, Lightning Cloud deals 1 damage to target creature or player.
+SetInfo:VIS Rare

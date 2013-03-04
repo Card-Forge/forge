@@ -4,7 +4,6 @@ Types:Creature Nightstalker
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
-SVar:Rarity:Common
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/lurking_nightstalker.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/17.jpg
 Oracle:Whenever Lurking Nightstalker attacks, it gets +2/+0 until end of turn.
+SetInfo:PO2 Common

@@ -10,7 +10,6 @@ SVar:X:Count$Valid Card.Self+counters_GE5_HATCHLING
 SVar:All:Count$CardCounters.HATCHLING
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ludevics_test_subject.jpg
 AlternateMode:DoubleFaced
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/64a.jpg
 Oracle:Defender\n{1}{U}: Put a hatchling counter on Ludevic's Test Subject. Then if there are five or more hatchling counters on it, remove all of them and transform it.
 
 ALTERNATE
@@ -25,5 +24,5 @@ K:Trample
 SVar:X:Count$Valid Card.Self+counters_GE5_HATCHLING
 SVar:All:Count$CardCounters.HATCHLING
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ludevics_abomination.jpg
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/64b.jpg
 Oracle:Trample
+SetInfo:ISD Rare

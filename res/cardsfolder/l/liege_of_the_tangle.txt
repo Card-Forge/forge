@@ -10,7 +10,6 @@ SVar:X:Count$Valid Land.YouCtrl
 SVar:DBEffect:DB$ Effect | Cost$ 0 | Name$ Awakening Effect | StaticAbilities$ KWAnimateAll | Unique$ True | Duration$ Permanent
 SVar:KWAnimateAll:Mode$ Continuous | EffectZone$ Command | Affected$ Card.counters_GE1_AWAKENING | SetPower$ 8 | SetToughness$ 8 | AddType$ Creature & Elemental | SetColor$ Green | Description$ Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.
 SVar:MustBeBlocked:True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_tangle.jpg
-SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/123.jpg
 Oracle:Trample\nWhenever Liege of the Tangle deals combat damage to a player, you may choose any number of target lands you control and put an awakening counter on each of them. Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.
+SetInfo:SOM Mythic

@@ -3,8 +3,7 @@ ManaCost:1 G
 Types:Creature Cat
 PT:2/1
 K:Forestwalk
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21053.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/72.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/131.jpg
 Oracle:Forestwalk
+SetInfo:PO2 Common
+SetInfo:S99 Uncommon

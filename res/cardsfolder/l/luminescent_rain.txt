@@ -5,7 +5,6 @@ A:SP$ ChooseType | Cost$ 2 G | Defined$ You | Type$ Creature | AILogic$ MostProm
 SVar:DBGainlife:DB$ Gainlife | LifeAmount$ X | References$ X | StackDescription$ You gain 2 life for each permanent you control of that type.
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl/Times.2
 SVar:NeedsToPlay:Creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminescent_rain.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/129.jpg
 Oracle:Choose a creature type. You gain 2 life for each permanent you control of that type.
+SetInfo:MOR Common

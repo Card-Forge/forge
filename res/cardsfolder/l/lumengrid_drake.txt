@@ -5,7 +5,6 @@ PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | Metalcraft$ True | TriggerDescription$ Metalcraft - When CARDNAME enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lumengrid_drake.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/36.jpg
 Oracle:Flying\nMetalcraft - When Lumengrid Drake enters the battlefield, if you control three or more artifacts, return target creature to its owner's hand.
+SetInfo:SOM Common

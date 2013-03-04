@@ -7,16 +7,16 @@ K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature other than CARDNAME. If you can't, Lord of the Pit deals 7 damage to you.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.Other | SubAbility$ DBDamage | RememberSacrificed$ True
 SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 7 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup | References$ X
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True 
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_pit.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/23.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/23.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/36.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/28.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/154.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/24.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/23.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
+SetInfo:2ED Rare
+SetInfo:10E Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:DDC Mythic
+SetInfo:3ED Rare

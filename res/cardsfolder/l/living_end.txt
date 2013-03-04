@@ -8,7 +8,6 @@ SVar:SacAll:DB$ SacrificeAll | ValidCards$ Creature | SubAbility$ ReturnAll
 SVar:ReturnAll:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_end.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/115.jpg
 Oracle:Living End is black.\nSuspend 3-{2}{B}{B} (Rather than cast this card from your hand, pay {2}{B}{B} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nEach player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
+SetInfo:TSP Rare

@@ -11,5 +11,5 @@ SVar:FirePower:Count$CardPower
 SVar:Min:SVar$FirePower/LimitMax.1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_inferno.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/69.jpg
 Oracle:{T}: Living Inferno deals damage equal to its power divided as you choose among any number of target creatures. Each of those creatures deals damage equal to its power to Living Inferno.
+SetInfo:GPT Rare

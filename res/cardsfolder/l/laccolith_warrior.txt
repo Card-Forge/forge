@@ -6,7 +6,6 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalD
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBPump | References$ X
 SVar:DBPump:DB$Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:X:Count$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laccolith_warrior.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/90.jpg
 Oracle:Whenever Laccolith Warrior becomes blocked, you may have it deal damage equal to its power to target creature. If you do, Laccolith Warrior assigns no combat damage this turn.
+SetInfo:NMS Uncommon

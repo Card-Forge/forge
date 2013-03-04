@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of the end step of enchanted creature's controller, that player sacrifices that creature.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | SacValid$ Card.AttachedBy | Defined$ TriggeredPlayer | SacMessage$ enchanted creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lingering_death.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/69.jpg
 Oracle:Enchant creature\nAt the beginning of the end step of enchanted creature's controller, that player sacrifices that creature.
+SetInfo:SCG Common

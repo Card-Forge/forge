@@ -5,7 +5,6 @@ PT:4/4
 K:First Strike
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may exile target black or red permanent that player controls.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Permanent.Black+DefenderCtrl,Permanent.Red+DefenderCtrl | TgtPrompt$ Choose target black or red permanent. | Origin$ Battlefield | Destination$ Exile | IsCurse$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightwielder_paladin.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/19.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhenever Lightwielder Paladin deals combat damage to a player, you may exile target black or red permanent that player controls.
+SetInfo:M10 Rare

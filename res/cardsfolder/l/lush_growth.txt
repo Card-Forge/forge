@@ -5,7 +5,6 @@ K:Enchant land
 A:SP$ Attach | Cost$ G | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Mountain & Forest & Plains | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is a Mountain, Forest, and Plains.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lush_growth.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/136.jpg
 Oracle:Enchant land\nEnchanted land is a Mountain, Forest, and Plains.
+SetInfo:ALA Common

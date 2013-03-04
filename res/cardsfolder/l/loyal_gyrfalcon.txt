@@ -7,7 +7,6 @@ K:Defender
 T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDebuff | TriggerDescription$ Whenever you cast a white spell, CARDNAME loses defender until end of turn.
 SVar:TrigDebuff:AB$ Debuff | Cost$ 0 | Defined$ Self | Keywords$ Defender
 SVar:BuffedBy:Card.White
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_gyrfalcon.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/11.jpg
 Oracle:Defender, flying\nWhenever you cast a white spell, Loyal Gyrfalcon loses defender until end of turn.
+SetInfo:EVE Uncommon

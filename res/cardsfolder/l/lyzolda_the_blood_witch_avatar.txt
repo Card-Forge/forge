@@ -9,7 +9,6 @@ SVar:DmgTwiceCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Rep
 SVar:X:ReplaceCount$DamageAmount/Twice
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Hellbent$ True | Execute$ LyzoldasDiscard | TriggerDescription$ Hellbent - At the beginning of your end step, if you have no cards in hand, each of your opponents discards a card.
 SVar:LyzoldasDiscard:AB$ Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/lyzolda_the_blood_witch_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/lyzolda-the-blood-witch.jpg
 Oracle:Hand -1, life -1\nHellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.\nHellbent - At the beginning of your end step, if you have no cards in hand, each of your opponents discards a card.
+SetInfo:VAN Special
