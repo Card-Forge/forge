@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Jubilee 2
+Title=Jubilee
+Difficulty=medium
+Description=WUBRG multicolored creature Deck with Blessing of the Nephilim and Knight of New Alara
+Icon=Jubilee.jpg
+Deck Type=constructed
+[main]
+1 Tropical Island
+3 Tundra
+3 Savannah
+4 Flooded Strand
+1 Windswept Heath
+2 Vivid Creek
+1 Vivid Grove
+2 Vivid Meadow
+4 Seaside Citadel
+2 Reflecting Pool
+1 Pillar of the Paruns
+4 Blessing of the Nephilim
+4 Civic Saber
+4 Jaded Response
+4 Knight of New Alara
+4 Pledge of Loyalty
+4 Bant Sureblade
+4 Esper Stormblade
+1 Fusion Elemental
+2 Naya Hushblade
+1 Horde of Notions
+4 Transguild Courier
+[sideboard]
