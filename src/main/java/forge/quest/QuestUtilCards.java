@@ -270,6 +270,7 @@ public final class QuestUtilCards {
     public void buyPack(final OpenablePack booster, final int value) {
         if (this.qa.getCredits() >= value) {
             this.qa.setCredits(this.qa.getCredits() - value);
+            this.qa.getShopList().remove(booster);
             this.addAllCards(booster.getCards());
         }
     }
@@ -510,7 +511,6 @@ public final class QuestUtilCards {
      * Generate cards in shop.
      */
     public void generateCardsInShop() {
-
         Iterable<CardPrinted> cardList = null;
         if (qc.getFormat() == null) {
               cardList = CardDb.instance().getAllCards(); }
