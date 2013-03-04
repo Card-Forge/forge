@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a creature spell, tap target creature.
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:BuffedBy:Creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onslaught.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/92.jpg
 Oracle:Whenever you cast a creature spell, tap target creature.
+SetInfo:EXO Common

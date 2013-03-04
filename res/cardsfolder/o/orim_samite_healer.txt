@@ -3,7 +3,6 @@ ManaCost:1 W W
 Types:Legendary Creature Human Cleric
 PT:1/3
 A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ 3 | SpellDescription$ Prevent the next 3 damage that would be dealt to target creature or player this turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orim_samite_healer.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/244.jpg
 Oracle:{T}: Prevent the next 3 damage that would be dealt to target creature or player this turn.
+SetInfo:TMP Rare

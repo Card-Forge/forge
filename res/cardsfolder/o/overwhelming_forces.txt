@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ 6 B B | ValidCards$ Creature | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberDestroyed$ True | SubAbility$ DBDrawCard | SpellDescription$ Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
 SVar:DBDrawCard:DB$ Draw | NumCards$ X | References$ X
 SVar:X:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overwhelming_forces.jpg
-SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/79.jpg
 Oracle:Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
+SetInfo:PTK Rare

@@ -6,7 +6,6 @@ K:Defender
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can attack as though it didn't have defender as long as you control a Gate.
 SVar:X:Count$Valid Gate.YouCtrl
 DeckHints:Type$Gate
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_jailbreaker.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/72.jpg
 Oracle:Defender\nOgre Jailbreaker can attack as though it didn't have defender as long as you control a Gate.
+SetInfo:RTR Common

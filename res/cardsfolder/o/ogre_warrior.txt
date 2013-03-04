@@ -2,8 +2,8 @@ Name:Ogre Warrior
 ManaCost:3 R
 Types:Creature Ogre Warrior
 PT:3/3
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p4/en-us/card25476.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/113.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/113.jpg
 Oracle:
+SetInfo:PO2 Common
+SetInfo:S99 Common
+SetInfo:S00 Common

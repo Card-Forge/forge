@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_jund.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/215.jpg
 Oracle:{T}: Add {B}, {R}, or {G} to your mana pool.
+SetInfo:ALA Common

@@ -5,10 +5,8 @@ PT:1/1
 A:AB$Token | Cost$ 2 G T | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Snake | TokenTypes$ Creature,Snake | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SubAbility$ DBFlip | SpellDescription$ Put a 1/1 green Snake creature token onto the battlefield. If you control ten or more creatures, flip CARDNAME.
 SVar:DBFlip:DB$SetState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | References$ X | Mode$ Flip
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_eggwatcher.jpg
 AlternateMode:Flip
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/233a.jpg
 Oracle:{2}{G}, {T}: Put a 1/1 green Snake creature token onto the battlefield. If you control ten or more creatures, flip Orochi Eggwatcher.
 
 ALTERNATE
@@ -18,7 +16,6 @@ Colors:green
 Types:Legendary Creature Snake Shaman
 PT:3/3
 A:AB$Pump | Cost$ G Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shidako_broodmistress.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/233b.jpg
 Oracle:{G}, Sacrifice a creature: Target creature gets +3/+3 until end of turn.
+SetInfo:CHK Uncommon

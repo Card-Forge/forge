@@ -7,7 +7,6 @@ SVar:TrigGetMana:AB$ Pump | Cost$ 0 | ValidTgts$ Player | RememberObjects$ Targe
 SVar:DBMana:DB$ Mana | Produced$ 1 | Amount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.RememberedPlayerCtrl
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/orcish_squatters_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/orcish-squatters.jpg
 Oracle:Hand -1, life -1\nAt the beginning of your precombat main phase, add {X} to your mana pool, where X is the number of lands target opponent controls.
+SetInfo:VAN Special

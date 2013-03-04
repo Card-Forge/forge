@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Sliver | AddTrigger$ TrigTargetSpell | AddSVar$ O
 SVar:TrigTargetSpell:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Instant.OppCtrl,Sorcery.OppCtrl | Execute$ OpalineTrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes the target of a spell an opponent controls, you may draw a card.
 SVar:OpalineTrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opaline_sliver.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/244.jpg
 Oracle:All Slivers have "Whenever this permanent becomes the target of a spell an opponent controls, you may draw a card."
+SetInfo:TSP Uncommon

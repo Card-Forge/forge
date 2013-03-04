@@ -3,7 +3,6 @@ ManaCost:1 B
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | IsPresent$ Creature.YouCtrl | PresentZone$ Graveyard | PresentCompare$ GE4 | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeType$ Creature.YouOwn | ChangeNum$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oversold_cemetery.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/160.jpg
 Oracle:At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
+SetInfo:ONS Rare

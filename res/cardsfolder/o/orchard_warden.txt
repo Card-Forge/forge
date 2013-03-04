@@ -5,7 +5,6 @@ PT:4/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Treefolk.YouCtrl+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature's toughness.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ Life | References$ Life
 SVar:Life:TriggeredCard$CardToughness
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orchard_warden.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/131.jpg
 Oracle:Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature's toughness.
+SetInfo:MOR Uncommon

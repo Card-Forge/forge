@@ -7,7 +7,6 @@ SVar:DBSacOpp:DB$Sacrifice | Amount$ OppX | SacValid$ Plains,Permanent.White | D
 SVar:YouX:Count$Valid Permanent.White+YouCtrl
 SVar:OppX:Count$Valid Permanent.White+YouDontCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omen_of_fire.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/112.jpg
 Oracle:Return all Islands to their owners' hands.\nEach player sacrifices a Plains or a white permanent for each white permanent he or she controls.
+SetInfo:ALL Rare

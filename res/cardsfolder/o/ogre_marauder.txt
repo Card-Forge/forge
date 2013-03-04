@@ -8,7 +8,6 @@ SVar:DBOgreMarauderPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | Cond
 SVar:DBOgreMarauderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_marauder.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/75.jpg
 Oracle:Whenever Ogre Marauder attacks, it gains "Ogre Marauder is unblockable" until end of turn unless defending player sacrifices a creature.
+SetInfo:BOK Uncommon

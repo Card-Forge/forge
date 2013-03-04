@@ -3,8 +3,7 @@ ManaCost:R
 Types:Creature Orc Rogue
 PT:1/1
 A:AB$ Dig | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 3 | NoMove$ True | SpellDescription$ Look at the top three cards of target player's library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_spy.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/208.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/124.jpg|3
 Oracle:{T}: Look at the top three cards of target player's library.
+SetInfo:8ED Common
+SetInfo:FEM Common x3

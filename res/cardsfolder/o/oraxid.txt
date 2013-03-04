@@ -3,7 +3,6 @@ ManaCost:3 U
 Types:Creature Crab Beast
 PT:2/3
 K:Protection from red
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oraxid.jpg
-SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/35.jpg
 Oracle:Protection from red
+SetInfo:NMS Common
