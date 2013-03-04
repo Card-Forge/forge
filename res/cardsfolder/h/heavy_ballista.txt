@@ -3,9 +3,8 @@ ManaCost:3 W
 Types:Creature Human Soldier
 PT:2/3
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heavy_ballista.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/133.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/23.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/19.jpg
 Oracle:{T}: Heavy Ballista deals 2 damage to target attacking or blocking creature.
+SetInfo:7ED Uncommon
+SetInfo:WTH Common
+SetInfo:6ED Uncommon

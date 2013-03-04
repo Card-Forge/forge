@@ -6,7 +6,6 @@ K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPumpAll | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, all creatures get -5/-5 until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature | NumAtt$ -5 | NumDef$ -5
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havoc_demon.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/74.jpg
 Oracle:Flying\nWhen Havoc Demon dies, all creatures get -5/-5 until end of turn.
+SetInfo:LGN Rare

@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ Shroud | Description$ All artifacts have shroud. (They can't be the targets of spells or abilities.)
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hannas_custody.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/234.jpg
 Oracle:All artifacts have shroud. (They can't be the targets of spells or abilities.)
+SetInfo:TMP Rare

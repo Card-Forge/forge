@@ -9,7 +9,6 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Remembered$Amount
 SVar:Z:SVar$Y/Times.4
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmony_of_nature.jpg
-SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/68.jpg
 Oracle:Tap any number of untapped creatures you control. You gain 4 life for each creature tapped this way.
+SetInfo:PO2 Uncommon

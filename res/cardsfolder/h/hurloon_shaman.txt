@@ -4,7 +4,6 @@ Types:Creature Minotaur Shaman
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each player sacrifices a land.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ Each
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurloon_shaman.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/108.jpg
 Oracle:When Hurloon Shaman dies, each player sacrifices a land.
+SetInfo:WTH Uncommon

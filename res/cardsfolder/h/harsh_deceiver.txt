@@ -8,7 +8,6 @@ SVar:DBUntap:DB$ Untap | Defined$ Self | SubAbility$ DBPump | ConditionDefined$ 
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ GE1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harsh_deceiver.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/11.jpg
 Oracle:{1}: Look at the top card of your library.\n{2}: Reveal the top card of your library. If it's a land card, untap Harsh Deceiver and it gets +1/+1 until end of turn. Activate this ability only once each turn.
+SetInfo:CHK Common

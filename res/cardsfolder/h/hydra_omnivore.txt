@@ -3,7 +3,6 @@ ManaCost:4 G G
 Types:Creature Hydra
 Text:Whenever CARDNAME deals combat damage to an opponent, it deals that much damage to each other opponent.
 PT:8/8
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hydra_omnivore.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/161.jpg
 Oracle:Whenever Hydra Omnivore deals combat damage to an opponent, it deals that much damage to each other opponent.
+SetInfo:COM Rare

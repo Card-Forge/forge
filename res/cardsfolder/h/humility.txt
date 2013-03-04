@@ -3,7 +3,6 @@ ManaCost:2 W W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | SetPower$ 1 | SetToughness$ 1 | RemoveAllAbilities$ True | Description$ All creatures lose all abilities and are 1/1.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/humility.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/236.jpg
 Oracle:All creatures lose all abilities and are 1/1.
+SetInfo:TMP Rare

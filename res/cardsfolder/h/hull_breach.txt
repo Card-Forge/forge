@@ -6,8 +6,8 @@ A:SP$ Destroy | Cost$ R G | ValidTgts$ Enchantment | TgtPrompt$ Select target en
 A:SP$ Destroy | Cost$ R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | PrecostDesc$ or | SpellDescription$ destroy target artifact and target enchantment. | SubAbility$ DestroyEnch
 SVar:DestroyEnch:DB$ Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hull_breach.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/203.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/111.jpg
 Oracle:Choose one - Destroy target artifact; or destroy target enchantment; or destroy target artifact and target enchantment.
+SetInfo:PLS Common
+SetInfo:COM Common
+SetInfo:HOP Common

@@ -4,7 +4,6 @@ Types:Tribal Sorcery Elf
 #This may look funny, but it works correctly AFAICT from my testing.
 A:SP$ Token | Cost$ 3 G | TokenAmount$ 3 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put three 1/1 green Elf Warrior creature tokens onto the battlefield.
 A:AB$ PutCounter | Cost$ 3 G Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 3 | ActivationZone$ Hand | PrecostDesc$ Reinforce 3 - | SpellDescription$ Put three +1/+1 counters on target creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_triad.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/127.jpg
 Oracle:Put three 1/1 green Elf Warrior creature tokens onto the battlefield.\nReinforce 3-{3}{G} ({3}{G}, Discard this card: Put three +1/+1 counters on target creature.)
+SetInfo:MOR Uncommon

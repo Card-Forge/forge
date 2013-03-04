@@ -2,7 +2,6 @@ Name:Hollowhenge Beast
 ManaCost:3 G G
 Types:Creature Beast
 PT:5/5
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hollowhenge_beast.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/118.jpg
 Oracle:
+SetInfo:DKA Common

@@ -6,7 +6,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ 
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_cheetah.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/251.jpg
 Oracle:Whenever Horned Cheetah deals damage, you gain that much life.
+SetInfo:INV Uncommon

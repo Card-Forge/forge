@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | Defined$ Self | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Angel | TokenTypes$ Creature,Angel | TokenOwner$ Player.Other | TokenColors$ Black | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Flying
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card25910.jpg
-SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/12.jpg
 Oracle:Flying\nWhen Haunted Angel dies, exile Haunted Angel and each other player puts a 3/3 black Angel creature token with flying onto the battlefield.
+SetInfo:APC Uncommon

@@ -3,8 +3,7 @@ ManaCost:X R
 Types:Instant
 A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
 SVar:X:Count$xPaid
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_ray.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/199.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/150.jpg
 Oracle:Heat Ray deals X damage to target creature.
+SetInfo:ROE Common
+SetInfo:USG Common

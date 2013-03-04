@@ -4,7 +4,6 @@ Types:Creature Homarid Shaman
 PT:2/1
 A:AB$ Tap | Cost$ U | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | SpellDescription$ Tap target green creature.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_shaman.jpg
-SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/42.jpg
 Oracle:{U}: Tap target green creature.
+SetInfo:FEM Rare

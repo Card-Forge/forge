@@ -6,6 +6,6 @@ SVar:MaxTgts:Count$Valid Creature.attacking
 SVar:X:Count$XChoice
 #X Will get overwritten by Announce
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hail_of_arrows.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/11.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/18.jpg
 Oracle:Hail of Arrows deals X damage divided as you choose among any number of target attacking creatures.
+SetInfo:SOK Uncommon
+SetInfo:10E Uncommon

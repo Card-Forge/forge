@@ -7,7 +7,6 @@ SVar:DBHereticCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HereticX:Count$HighestCMCRemembered
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heretics_punishment.jpg
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/147.jpg
 Oracle:{3}{R}: Choose target creature or player, then put the top three cards of your library into your graveyard.  Heretic's Punishment deals damage to that creature or player equal to the highest converted mana cost among those cards.
+SetInfo:ISD Rare

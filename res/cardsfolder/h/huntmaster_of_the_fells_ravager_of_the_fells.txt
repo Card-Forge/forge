@@ -10,7 +10,6 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ 
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/huntmaster_of_the_fells.jpg
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/140a.jpg
 Oracle:Whenever this creature enters the battlefield or transforms into Huntmaster of the Fells, put a 2/2 green Wolf creature token onto the battlefield and you gain 2 life.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
 
 ALTERNATE
@@ -27,5 +26,5 @@ SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | NumDmg$ 2 | T
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravager_of_the_fells.jpg
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/140b.jpg
 Oracle:Trample\nWhenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
+SetInfo:DKA Mythic

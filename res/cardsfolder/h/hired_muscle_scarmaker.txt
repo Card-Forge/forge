@@ -8,7 +8,6 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | 
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hired_muscle.jpg
 AlternateMode:Flip
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/69.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Hired Muscle.\nAt the beginning of the end step, if there are two or more ki counters on Hired Muscle, you may flip it.
 
 ALTERNATE
@@ -21,6 +20,6 @@ PT:4/4
 A:AB$ Pump | Cost$ SubCounter<1/KI> | KW$ Fear | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/scarmaker.jpg
 # This link may be a temporary solution and could change in the near future.
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/168.jpg
 Oracle:Remove a ki counter from Scarmaker: Target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
 
+SetInfo:BOK Uncommon

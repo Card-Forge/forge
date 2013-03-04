@@ -7,4 +7,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holistic_wisdom.jpg
 Oracle:{2}, Exile a card from your hand: Return target card from your graveyard to your hand if it shares a card type with the card exiled this way. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/243.jpg
+SetInfo:ODY Rare

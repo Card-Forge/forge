@@ -4,7 +4,6 @@ Types:Enchantment
 A:AB$ Token | Cost$ 1 U U Sac<1/Creature.Blue/blue creature> | TokenImage$ U 1 1 Camarid | TokenAmount$ X | TokenName$ Camarid | TokenTypes$ Creature,Camarid | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | References$ X | SpellDescription$ Put X 1/1 blue Camarid creature tokens onto the battlefield, where X is the sacrificed creature's converted mana cost.
 SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid_spawning_bed.jpg
-SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/106.jpg
 Oracle:{1}{U}{U}, Sacrifice a blue creature: Put X 1/1 blue Camarid creature tokens onto the battlefield, where X is the sacrificed creature's converted mana cost.
+SetInfo:FEM Uncommon

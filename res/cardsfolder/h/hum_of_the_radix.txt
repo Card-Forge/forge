@@ -2,11 +2,10 @@ Name:Hum of the Radix
 ManaCost:2 G G
 Types:Enchantment
 S:Mode$ RaiseCost | ValidCard$ Artifact | Activator$ You | Type$ Spell | Amount$ X | Description$ Each artifact spell costs 1 more to cast for each artifact its controller controls.
-S:Mode$ RaiseCost | ValidCard$ Artifact | Activator$ Opponent | Type$ Spell | Amount$ Y 
+S:Mode$ RaiseCost | ValidCard$ Artifact | Activator$ Opponent | Type$ Spell | Amount$ Y
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Y:Count$Valid Artifact.YouDontCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hum_of_the_radix.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/122.jpg
 Oracle:Each artifact spell costs {1} more to cast for each artifact its controller controls.
+SetInfo:MRD Rare

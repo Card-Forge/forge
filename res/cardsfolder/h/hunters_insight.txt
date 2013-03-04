@@ -6,7 +6,6 @@ SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTar
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunters_insight.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/180.jpg
 Oracle:Choose target creature you control. Whenever that creature deals combat damage to a player or planeswalker this turn, draw that many cards.
+SetInfo:M12 Uncommon

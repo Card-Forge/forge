@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEffect:AB$ Effect | Cost$ 0 | Name$ Haze Frog Effect | StaticAbilities$ HazeFrogPrevent | References$ HazeFrogPrevent | RememberObjects$ Self
 SVar:HazeFrogPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.IsNotRemembered | CombatDamage$ True | Description$ Prevent all combat damage that other creatures would deal this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_frog.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/187.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Haze Frog enters the battlefield, prevent all combat damage that other creatures would deal this turn.
+SetInfo:ROE Common

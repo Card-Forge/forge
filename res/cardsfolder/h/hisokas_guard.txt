@@ -8,7 +8,6 @@ S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddKeyword$ Shroud
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
 SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hisokas_guard.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/68.jpg
 Oracle:You may choose not to untap Hisoka's Guard during your untap step.\n{1}{U}, {T}: Target creature you control other than Hisoka's Guard has shroud for as long as Hisoka's Guard remains tapped. (It can't be the target of spells or abilities.)
+SetInfo:CHK Common

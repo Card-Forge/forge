@@ -9,7 +9,6 @@ SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$Valid Swamp.YouCtrl
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/henchfiend_of_ukor.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/117.jpg
 Oracle:Haste\nEcho {1}{B} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice this permanent unless you pay its echo cost.)\n{B/R}: Henchfiend of Ukor gets +1/+0 until end of turn.
+SetInfo:FUT Common

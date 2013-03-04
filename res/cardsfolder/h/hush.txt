@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 K:Cycling:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hush.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/266.jpg
 Oracle:Destroy all enchantments.\nCycling {2} ({2}, Discard this card: Draw a card.)
+SetInfo:USG Common

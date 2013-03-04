@@ -7,5 +7,5 @@ T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ Rolle
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 SVar:DBFetch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horizon_boughs.jpg
-SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/horizon-boughs.jpg
 Oracle:All permanents untap during each player's untap step.\nWhenever you roll {C}, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.
+SetInfo:HOP Common

@@ -3,7 +3,6 @@ ManaCost:2 B B
 Types:Instant Arcane
 A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
 K:Splice onto Arcane 3 B B
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hideous_laughter.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/115.jpg
 Oracle:All creatures get -2/-2 until end of turn.\nSplice onto Arcane {3}{B}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+SetInfo:CHK Uncommon
