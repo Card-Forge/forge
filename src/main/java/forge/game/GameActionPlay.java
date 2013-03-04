@@ -375,11 +375,13 @@ public class GameActionPlay {
                 for (SpellAbility a : leftSplitAbilities) {
                     if (sa == a) {
                         source.setState(CardCharacteristicName.LeftSplit);
+                        break;
                     }
                 }
                 for (SpellAbility a : rightSplitAbilities) {
                     if (sa == a) {
                         source.setState(CardCharacteristicName.RightSplit);
+                        break;
                     }
                 }
             }
