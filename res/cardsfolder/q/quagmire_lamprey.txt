@@ -4,7 +4,6 @@ Types:Creature Fish
 PT:1/1
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, put a -1/-1 counter on that creature.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ TriggeredBlocker | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quagmire_lamprey.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/154.jpg
 Oracle:Whenever Quagmire Lamprey becomes blocked by a creature, put a -1/-1 counter on that creature.
+SetInfo:MMQ Uncommon

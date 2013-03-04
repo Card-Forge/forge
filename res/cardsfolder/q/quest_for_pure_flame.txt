@@ -11,7 +11,6 @@ SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ 
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_pure_flame.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/144.jpg
 Oracle:Whenever a source you control deals damage to an opponent, you may put a quest counter on Quest for Pure Flame.\nRemove four quest counters from Quest for Pure Flame and sacrifice it: If any source you control would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
+SetInfo:ZEN Uncommon

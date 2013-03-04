@@ -7,8 +7,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZ
 SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ Destroy,GainLife | CharmNum$ 1 | SpellDescription$ Choose one - Destroy enchanted permanent; or you gain 2 life.
 SVar:Destroy:DB$ Destroy | Defined$ Enchanted | IsCurse$ True | SpellDescription$ Destroy enchanted permanent
 SVar:GainLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ or you gain 2 life.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quiet_disrepair.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/75.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/134.jpg
 Oracle:Enchant artifact or enchantment\nAt the beginning of your upkeep, choose one - Destroy enchanted permanent; or you gain 2 life.
+SetInfo:PC2 Common
+SetInfo:FUT Common
