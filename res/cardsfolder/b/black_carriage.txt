@@ -6,7 +6,6 @@ K:Trample
 K:CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ Sac<1/Creature> | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate this ability only during your upkeep.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_carriage.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/2.jpg
 Oracle:Trample\nBlack Carriage doesn't untap during your untap step.\nSacrifice a creature: Untap Black Carriage. Activate this ability only during your upkeep.
+SetInfo:HML Rare

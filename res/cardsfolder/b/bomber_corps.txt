@@ -5,7 +5,6 @@ PT:1/2
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDmg | CheckSVar$ BattalionTest | SVarCompare$ GE2 | TriggerDescription$ Battalion - Whenever CARDNAME and at least two other creatures attack, CARDNAME deals 1 damage to target creature or player.
 SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bomber_corps.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/86.jpg
 Oracle:Battalion - Whenever Bomber Corps and at least two other creatures attack, Bomber Corps deals 1 damage to target creature or player.
+SetInfo:GTC Common

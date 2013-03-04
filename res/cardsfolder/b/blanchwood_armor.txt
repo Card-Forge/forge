@@ -6,11 +6,10 @@ A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each Forest you control.
 SVar:X:Count$TypeYouCtrl.Forest
 SVar:BuffedBy:Forest
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blanchwood_armor.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/234.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/237.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/253.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/232.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/232.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +1/+1 for each Forest you control.
+SetInfo:8ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:9ED Uncommon
+SetInfo:USG Uncommon

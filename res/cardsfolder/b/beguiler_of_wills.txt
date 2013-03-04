@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:1/1
 A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power less than or equal to the number of creatures you control | References$ X | SpellDescription$ Gain control of target creature with power less than or equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beguiler_of_wills.jpg
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/28.jpg
 Oracle:{T}: Gain control of target creature with power less than or equal to the number of creatures you control.
+SetInfo:DKA Mythic

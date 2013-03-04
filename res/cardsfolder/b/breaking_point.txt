@@ -2,7 +2,6 @@ Name:Breaking Point
 ManaCost:1 R R
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 1 R R | ValidCards$ Creature | NoRegen$ True | UnlessCost$ DamageYou<6> | UnlessPayer$ Player | SpellDescription$ Any player may have CARDNAME deal 6 damage to him or her. If no one does, destroy all creatures. Creatures destroyed this way can't be regenerated.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breaking_point.jpg
-SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/81.jpg
 Oracle:Any player may have Breaking Point deal 6 damage to him or her. If no one does, destroy all creatures. Creatures destroyed this way can't be regenerated.
+SetInfo:JUD Rare

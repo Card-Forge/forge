@@ -13,7 +13,6 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_of_destiny.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/5.jpg
 Oracle:{T}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to Beacon of Destiny instead.
+SetInfo:LGN Rare

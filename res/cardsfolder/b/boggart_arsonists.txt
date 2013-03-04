@@ -5,7 +5,6 @@ PT:2/1
 K:Plainswalk
 A:AB$ Destroy | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Scarecrow,Plains | TgtPrompt$ Select target Scarecrow or Plains | SpellDescription$ Destroy target Scarecrow or Plains.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_arsonists.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/85.jpg
 Oracle:Plainswalk\n{2}{R}, Sacrifice Boggart Arsonists: Destroy target Scarecrow or Plains.
+SetInfo:SHM Common

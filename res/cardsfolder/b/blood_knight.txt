@@ -4,7 +4,6 @@ Types:Creature Human Knight
 PT:2/2
 K:First Strike
 K:Protection from white
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_knight.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/115.jpg
 Oracle:First strike, protection from white
+SetInfo:PLC Uncommon

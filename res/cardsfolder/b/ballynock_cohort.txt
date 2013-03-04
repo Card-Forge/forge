@@ -6,7 +6,6 @@ K:First Strike
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control another white creature.
 SVar:X:Count$Valid Creature.White+Other+YouCtrl
 SVar:BuffedBy:Creature.White
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_cohort.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/3.jpg
 Oracle:First strike\nBallynock Cohort gets +1/+1 as long as you control another white creature.
+SetInfo:SHM Common

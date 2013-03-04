@@ -10,7 +10,6 @@ SVar:EndScream:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZone
 SVar:BloodExile:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.YouCtrl | ChangeNum$ 2 | DefinedPlayer$ You | Origin$ Graveyard | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcurdler.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/116.jpg
 Oracle:Flying\nAt the beginning of your upkeep, put the top card of your library into your graveyard.\nThreshold - As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."
+SetInfo:ODY Rare

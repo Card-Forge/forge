@@ -5,5 +5,5 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target opponent discards a card at random.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Opponent | NumCards$ 1 | Mode$ Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_cat.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/54.jpg
 Oracle:When Black Cat dies, target opponent discards a card at random.
+SetInfo:DKA Common

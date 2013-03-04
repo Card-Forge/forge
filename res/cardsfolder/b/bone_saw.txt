@@ -3,7 +3,6 @@ ManaCost:0
 Types:Artifact Equipment
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_saw.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/135.jpg
 Oracle:Equipped creature gets +1/+0.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:CFX Common

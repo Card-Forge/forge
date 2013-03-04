@@ -3,7 +3,6 @@ ManaCost:4 GU GU GU
 Types:Sorcery
 A:SP$ Draw | Cost$ 4 GU GU GU | NumCards$ X | References$ X | SpellDescription$ Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
 SVar:X:Count$TypeOnBattlefield.Creature
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biomantic_mastery.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/142.jpg
 Oracle:({G/U} can be paid with either {G} or {U}.)\nDraw a card for each creature target player controls, then draw a card for each creature another target player controls.
+SetInfo:DIS Rare

@@ -8,7 +8,6 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:EndTrackingEffect:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brace_for_impact.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/5.jpg
 Oracle:Prevent all damage that would be dealt to target multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
+SetInfo:DIS Uncommon

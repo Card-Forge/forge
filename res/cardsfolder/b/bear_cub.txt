@@ -2,7 +2,6 @@ Name:Bear Cub
 ManaCost:1 G
 Types:Creature Bear
 PT:2/2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6613.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/63.jpg
 Oracle:
+SetInfo:PO2 Common

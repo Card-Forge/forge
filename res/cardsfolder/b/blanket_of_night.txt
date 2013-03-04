@@ -3,7 +3,6 @@ ManaCost:1 B B
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Land | AddType$ Swamp | Description$ Each land is a Swamp in addition to its other land types.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blanket_of_night.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/2.jpg
 Oracle:Each land is a Swamp in addition to its other land types.
+SetInfo:VIS Uncommon

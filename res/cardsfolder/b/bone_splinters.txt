@@ -3,8 +3,7 @@ ManaCost:B
 Types:Sorcery
 A:SP$ Destroy | Cost$ B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_splinters.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/88.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/67.jpg
 Oracle:As an additional cost to cast Bone Splinters, sacrifice a creature.\nDestroy target creature.
+SetInfo:AVR Common
+SetInfo:ALA Common

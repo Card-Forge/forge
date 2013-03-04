@@ -3,7 +3,6 @@ ManaCost:RW
 Types:Creature Goblin Soldier
 PT:1/1
 K:First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_recruit.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/243.jpg
 Oracle:({R/W} can be paid with either {R} or {W}.)\nFirst strike
+SetInfo:RAV Common

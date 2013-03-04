@@ -3,9 +3,8 @@ ManaCost:1 B
 Types:Creature Vampire
 PT:1/1
 A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodthrone_vampire.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/85.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/83.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/98.jpg
 Oracle:Sacrifice a creature: Bloodthrone Vampire gets +2/+2 until end of turn.
+SetInfo:M11 Common
+SetInfo:M13 Common
+SetInfo:ROE Common

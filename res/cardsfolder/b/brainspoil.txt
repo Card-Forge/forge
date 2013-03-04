@@ -3,7 +3,6 @@ ManaCost:3 B B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature.unenchanted | TgtPrompt$ Select target creature that isn't enchanted | NoRegen$ True | SpellDescription$ Destroy target creature that isn't enchanted. It can't be regenerated.
 K:Transmute:1 B B
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brainspoil.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/78.jpg
 Oracle:Destroy target creature that isn't enchanted. It can't be regenerated.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
+SetInfo:RAV Common

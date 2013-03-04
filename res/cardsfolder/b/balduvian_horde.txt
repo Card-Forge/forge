@@ -9,8 +9,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$InYourHand
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_horde.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/167.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/96.jpg
 Oracle:When Balduvian Horde enters the battlefield, sacrifice it unless you discard a card at random.
+SetInfo:ALL Rare
+SetInfo:6ED Rare

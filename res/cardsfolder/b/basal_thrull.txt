@@ -4,7 +4,6 @@ Types:Creature Thrull
 PT:1/2
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B | Amount$ 2 | SpellDescription$ Add B B to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basal_thrull.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/5.jpg|4
 Oracle:{T}, Sacrifice Basal Thrull: Add {B}{B} to your mana pool.
+SetInfo:FEM Common x4

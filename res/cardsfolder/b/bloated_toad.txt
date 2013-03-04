@@ -4,7 +4,6 @@ Types:Creature Frog
 PT:2/2
 K:Protection from blue
 K:Cycling:2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloated_toad.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/97.jpg
 Oracle:Protection from blue\nCycling {2} ({2}, Discard this card: Draw a card.)
+SetInfo:ULG Uncommon

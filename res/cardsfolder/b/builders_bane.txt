@@ -10,4 +10,4 @@ SVar:Y:Count$ValidGraveyard Artifact.IsRemembered+RememberedPlayerCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/builders_bane.jpg
 Oracle:Destroy X target artifacts. Builder's Bane deals damage to each player equal to the number of artifacts he or she controlled put into a graveyard this way.
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/160.jpg
+SetInfo:MIR Common

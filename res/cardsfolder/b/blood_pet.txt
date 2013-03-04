@@ -3,9 +3,8 @@ ManaCost:B
 Types:Creature Thrull
 PT:1/1
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add B to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_pet.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/3.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/115.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/121.jpg
 Oracle:Sacrifice Blood Pet: Add {B} to your mana pool.
+SetInfo:7ED Common
+SetInfo:TMP Common
+SetInfo:6ED Common

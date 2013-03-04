@@ -5,8 +5,7 @@ PT:4/4
 K:Lifelink
 A:AB$ DealDamage | Cost$ R T Sac<1/Creature.Other/creature other than Brion Stoutarm> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target player.
 SVar:X:Sacrificed$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brion_stoutarm.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/187.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/246.jpg
 Oracle:Lifelink\n{R}, {T}, Sacrifice a creature other than Brion Stoutarm: Brion Stoutarm deals damage equal to the sacrificed creature's power to target player.
+SetInfo:COM Rare
+SetInfo:LRW Rare

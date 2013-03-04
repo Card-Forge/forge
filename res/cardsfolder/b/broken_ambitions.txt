@@ -5,7 +5,6 @@ A:SP$ Counter | Cost$ X U | TargetType$ Spell | TgtPrompt$ Select target spell |
 SVar:DBClash:DB$Clash | WinSubAbility$ DBMill
 SVar:DBMill:DB$Mill | Defined$ TargetedController | NumCards$ 4
 SVar:X:Count$xPaid
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_ambitions.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/54.jpg
 Oracle:Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of his or her library into his or her graveyard. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
+SetInfo:LRW Common

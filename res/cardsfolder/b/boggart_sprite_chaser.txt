@@ -5,7 +5,6 @@ PT:1/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a Faerie, CARDNAME gets +1/+1 and has flying.
 SVar:X:Count$Valid Faerie.YouCtrl
 SVar:BuffedBy:Faerie
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_sprite_chaser.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/156.jpg
 Oracle:As long as you control a Faerie, Boggart Sprite-Chaser gets +1/+1 and has flying.
+SetInfo:LRW Common

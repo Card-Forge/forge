@@ -9,7 +9,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourYard.Creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrow_ghoul.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/3.jpg
 Oracle:At the beginning of your upkeep, sacrifice Barrow Ghoul unless you exile the top creature card of your graveyard.
+SetInfo:WTH Common

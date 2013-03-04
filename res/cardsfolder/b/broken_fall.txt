@@ -2,7 +2,6 @@ Name:Broken Fall
 ManaCost:2 G
 Types:Enchantment
 A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ Return<1/CARDNAME> | SpellDescription$ Regenerate target creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_fall.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/110.jpg
 Oracle:Return Broken Fall to its owner's hand: Regenerate target creature.
+SetInfo:TMP Common

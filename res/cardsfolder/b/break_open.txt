@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Instant
 A:SP$ SetState | Cost$ 1 R | ValidTgts$ Creature.faceDown+OppCtrl | TgtPrompt$ Select target facedown creature you don't control. | Mode$ TurnFace | SpellDescription$ Turn target face-down creature an opponent controls face up.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/break_open.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/190.jpg
 Oracle:Turn target face-down creature an opponent controls face up.
+SetInfo:ONS Common

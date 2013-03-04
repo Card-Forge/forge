@@ -5,7 +5,6 @@ A:SP$ PutCounterAll | Cost$ X B B | ValidCards$ Creature | CounterType$ M1M1 | C
 SVar:X:Count$xPaid
 SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_suns_zenith.jpg
-SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/39.jpg
 Oracle:Put X -1/-1 counters on each creature. Shuffle Black Sun's Zenith into its owner's library.
+SetInfo:MBS Rare

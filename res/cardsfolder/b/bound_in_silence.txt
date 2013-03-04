@@ -4,7 +4,6 @@ Types:Tribal Enchantment Rebel Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bound_in_silence.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/20.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.
+SetInfo:FUT Uncommon

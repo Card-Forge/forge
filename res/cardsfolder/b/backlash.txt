@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Tap | Cost$ 1 B R| ValidTgts$ Creature.untapped | TgtPrompt$ Select an untapped creature | SubAbility$ DBDamage | SpellDescription$ Tap target untapped creature. That creature deals damage equal to its power to its controller.
 SVar:DBDamage:DB$DealDamage | Cost$ 0 | Defined$ TargetedController | DamageSource$ Targeted | NumDmg$ X | References$ X
 SVar:X:Targeted$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/backlash.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/234.jpg
 Oracle:Tap target untapped creature. That creature deals damage equal to its power to its controller.
+SetInfo:INV Uncommon

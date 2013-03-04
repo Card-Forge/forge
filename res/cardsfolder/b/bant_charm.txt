@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Destroy | Cost$ G W U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Choose one - Destroy target artifact;
 A:SP$ ChangeZone | Cost$ G W U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ or put target creature on the bottom of it's owner's library;
 A:SP$ Counter | Cost$ G W U | TargetType$ Spell | ValidTgts$ Instant | SpellDescription$ or counter target instant spell.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_charm.jpg
-SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/155.jpg
 Oracle:Choose one - Destroy target artifact; or put target creature on the bottom of its owner's library; or counter target instant spell.
+SetInfo:ALA Uncommon

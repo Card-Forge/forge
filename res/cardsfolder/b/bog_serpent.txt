@@ -6,7 +6,6 @@ K:CARDNAME can't attack unless defending player controls a Swamp.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Swamp.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Swamps, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Swamp.YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_serpent.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/84.jpg
 Oracle:Bog Serpent can't attack unless defending player controls a Swamp.\nWhen you control no Swamps, sacrifice Bog Serpent.
+SetInfo:PLC Common

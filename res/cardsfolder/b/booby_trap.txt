@@ -12,8 +12,7 @@ T:Mode$ Drawn | ValidCard$ Card.NamedCard+OwnedBy Player.Chosen | TriggerZones$ 
 SVar:TrapTriggered:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ Explosion
 SVar:Explosion:DB$ DealDamage | NumDmg$ 10 | Defined$ Player.Chosen | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | References$ X
 SVar:X:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/booby_trap.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/267.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/289.jpg
 Oracle:As Booby Trap enters the battlefield, name a card other than a basic land card and choose an opponent.\nThe chosen player reveals each card he or she draws.\nWhen the chosen player draws the named card, sacrifice Booby Trap. If you do, Booby Trap deals 10 damage to that player.
+SetInfo:TMP Rare
+SetInfo:9ED Rare

@@ -10,7 +10,6 @@ SVar:TrigSacBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker | Sacrifice
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Wall | TokenTypes$ Artifact,Creature,Wall | TokenOwner$ TriggeredBlockerController | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 2 | TokenKeywords$ Defender | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basalt_golem.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/259.jpg
 Oracle:Basalt Golem can't be blocked by artifact creatures.\nWhenever Basalt Golem becomes blocked by a creature, that creature's controller sacrifices it at end of combat. If the player does, he or she puts a 0/2 colorless Wall artifact creature token with defender onto the battlefield.
+SetInfo:MIR Uncommon

@@ -5,7 +5,7 @@ PT:5/4
 K:Morph:5 U U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, each opponent skips his or her next untap step.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Player.Opponent | KW$ Skip your next untap step. | Permanent$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brine_elemental.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/50.jpg
 Oracle:Morph {5}{U}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Brine Elemental is turned face up, each opponent skips his or her next untap step.
+SetInfo:DD2 Uncommon
+SetInfo:TSP Uncommon

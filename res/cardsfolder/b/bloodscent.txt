@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Instant
 A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodscent.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/114.jpg
 Oracle:All creatures able to block target creature this turn do so.
+SetInfo:MRD Uncommon

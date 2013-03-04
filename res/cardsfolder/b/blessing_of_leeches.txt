@@ -8,7 +8,6 @@ A:AB$ Regenerate | Cost$ 0 | Defined$ Enchanted | SpellDescription$ Regenerate e
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing_of_leeches.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/62.jpg
 Oracle:Flash\nEnchant creature\nAt the beginning of your upkeep, you lose 1 life.\n{0}: Regenerate enchanted creature.
+SetInfo:BOK Common

@@ -4,9 +4,8 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ CantAttackUnless | ValidCard$ Creature.AttachedBy | Cost$ 3 | Description$ Enchanted creature can't attack unless its controller pays 3.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brainwash.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/289.jpg
-SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/76.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/261.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack unless its controller pays {3}.
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:DRK Common

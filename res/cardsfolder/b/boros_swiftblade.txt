@@ -3,7 +3,7 @@ ManaCost:R W
 Types:Creature Human Soldier
 PT:1/2
 K:Double Strike
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_swiftblade.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/193.jpg
 Oracle:Double strike
+SetInfo:RAV Uncommon
+SetInfo:HOP Uncommon

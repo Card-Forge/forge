@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ X | References$ X | SpellDescription$ Add R to your mana pool for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_hymn.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/128.jpg
 Oracle:Add {R} to your mana pool for each creature you control.
+SetInfo:AVR Common

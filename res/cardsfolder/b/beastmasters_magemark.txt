@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 1 | AddTou
 T:Mode$ AttackerBlocked | ValidCard$ Creature.enchanted+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control that's enchanted becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ +X | NumDef$ +X
 SVar:X:TriggerCount$NumBlockers
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmasters_magemark.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/80.jpg
 Oracle:Enchant creature\nCreatures you control that are enchanted get +1/+1.\nWhenever a creature you control that's enchanted becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
+SetInfo:GPT Common

@@ -6,7 +6,6 @@ K:Flying
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may pay 1. If you do, untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 1 | Defined$ Self
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_gnat.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/249.jpg
 Oracle:Flying\nBrass Gnat doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {1}. If you do, untap Brass Gnat.
+SetInfo:TSP Common
