@@ -6,7 +6,6 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDesc
 SVar:X:Count$xPaid
 SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exsanguinate.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/61.jpg
 Oracle:Each opponent loses X life. You gain life equal to the life lost this way.
+SetInfo:SOM Uncommon

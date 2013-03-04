@@ -3,7 +3,6 @@ ManaCost:G
 Types:Creature Elf
 PT:1/1
 A:AB$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_herder.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/247.jpg
 Oracle:{G}: Target creature gains trample until end of turn.
+SetInfo:USG Common

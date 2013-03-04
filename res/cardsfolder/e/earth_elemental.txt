@@ -2,13 +2,12 @@ Name:Earth Elemental
 ManaCost:3 R R
 Types:Creature Elemental
 PT:4/5
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card129554.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/145.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/146.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/206.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/199.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/145.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/95.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/145.jpg
 Oracle:
+SetInfo:S99 Uncommon
+SetInfo:2ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

@@ -3,7 +3,6 @@ ManaCost:U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ U | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | SpellDescription$ Search target player's library for a card and exile it. Then that player shuffles his or her library.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extract.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/85.jpg
 Oracle:Search target player's library for a card and exile it. Then that player shuffles his or her library.
+SetInfo:ODY Rare

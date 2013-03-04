@@ -11,7 +11,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | Va
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_the_storm.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/48.jpg
 Oracle:Whenever a player casts an instant or sorcery card, exile it. Then that player copies each instant or sorcery card exiled with Eye of the Storm. For each copy, the player may cast the copy without paying its mana cost.
+SetInfo:RAV Rare

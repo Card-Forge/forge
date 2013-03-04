@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Creature Elf Spirit
 PT:2/2
 A:AB$ Mana | Cost$ ExileFromHand<1/CARDNAME> | Produced$ G | ActivationZone$ Hand | SpellDescription$ Add G to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_spirit_guide.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/69.jpg
 Oracle:Exile Elvish Spirit Guide from your hand: Add {G} to your mana pool.
+SetInfo:ALL Uncommon

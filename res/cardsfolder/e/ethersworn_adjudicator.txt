@@ -5,7 +5,6 @@ PT:4/4
 K:Flying
 A:AB$ Untap | Cost$ 2 U | SpellDescription$ Untap CARDNAME.
 A:AB$ Destroy | Cost$ 1 W B T | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | SpellDescription$ Destroy target creature or enchantment.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_adjudicator.jpg
-SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/26.jpg
 Oracle:Flying\n{1}{W}{B}, {T}: Destroy target creature or enchantment.\n{2}{U}: Untap Ethersworn Adjudicator.
+SetInfo:CFX Mythic

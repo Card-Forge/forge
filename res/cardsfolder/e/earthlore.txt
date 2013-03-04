@@ -6,7 +6,6 @@ K:Enchant land
 A:SP$ Attach | Cost$ G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ Pump | Description$ Enchanted land has "Tap: Target blocking creature gets +1/+2 until end of turn."
 SVar:Pump:AB$Pump | Cost$ T | ValidTgts$ Creature.blocking | NumAtt$ 1 | NumDef$ 2 | SpellDescription$ Target blocking creature gets +1/+2 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthlore.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/119.jpg
 Oracle:Enchant land you control\nEnchanted land has "{T}: Target blocking creature gets +1/+2 until end of turn."
+SetInfo:ICE Common

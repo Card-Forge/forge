@@ -4,9 +4,8 @@ Types:Vanguard
 HandLifeModifier:-1/+2
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Player | TriggerZones$ Command | Execute$ TrigAddMana | TriggerDescription$ At the beginning of each player's precombat main phase, that player adds {G}{G} to his or her mana pool.
 SVar:TrigAddMana:AB$ Mana | Cost$ 0 | Produced$ G | Amount$ 2 | Defined$ TriggeredPlayer
-SVar:Rarity:Special
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/eladamri_lord_of_leaves_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/eladamri-lord-of-leaves.jpg
 Oracle:Hand -1, life +2\nAt the beginning of each player's precombat main phase, that player adds {G}{G} to his or her mana pool.
+SetInfo:VAN Special

@@ -10,5 +10,5 @@ SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | De
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 3 | SubAbility$ GiveSuspend
 SVar:GiveSuspend:DB$ Pump | Defined$ Self | KW$ Suspend | PumpZone$ Exile | Permanent$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epochrasite.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/162.jpg
 Oracle:Epochrasite enters the battlefield with three +1/+1 counters on it if you didn't cast it from your hand.\nWhen Epochrasite dies, exile it with three time counters on it and it gains suspend. (At the beginning of your upkeep, remove a time counter. When the last is removed, cast this card without paying its mana cost. It has haste.)
+SetInfo:FUT Rare

@@ -5,7 +5,6 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana
 SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emrakuls_hatcher.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/142.jpg
 Oracle:When Emrakul's Hatcher enters the battlefield, put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
+SetInfo:ROE Common

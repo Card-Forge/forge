@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ X | UnlessPayer$ You | References$ X
 SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extravagant_spirit.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/79.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Extravagant Spirit unless you pay {1} for each card in your hand.
+SetInfo:MMQ Rare

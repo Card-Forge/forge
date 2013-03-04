@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 2
 K:Cascade
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enigma_sphinx.jpg
-SVar:Rarity:Rare
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/89.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/106.jpg
 Oracle:Flying\nWhen Enigma Sphinx is put into your graveyard from the battlefield, put it into your library third from the top.\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
+SetInfo:PC2 Rare
+SetInfo:ARB Rare

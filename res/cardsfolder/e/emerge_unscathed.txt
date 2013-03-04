@@ -7,4 +7,4 @@ A:SP$ Protection | Cost$ W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerge_unscathed.jpg
 Oracle:Target creature you control gains protection from the color of your choice until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/20.jpg
+SetInfo:ROE Uncommon

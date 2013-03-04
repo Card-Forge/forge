@@ -9,7 +9,6 @@ SVar:DBElderSpawnSacrificeMe:DB$ Sacrifice | Defined$ Self | ConditionDefined$ R
 SVar:DBElderSpawnDamage:DB$ DealDamage | Defined$ You | NumDmg$ 6 | ConditionDefined$ Remembered | ConditionPresent$ Island | ConditionCompare$ EQ0 | SubAbility$ DBElderSpawnCleanup
 SVar:DBElderSpawnCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_spawn.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/52.jpg
 Oracle:At the beginning of your upkeep, unless you sacrifice an Island, sacrifice Elder Spawn and it deals 6 damage to you.\nElder Spawn can't be blocked by red creatures.
+SetInfo:LEG Rare

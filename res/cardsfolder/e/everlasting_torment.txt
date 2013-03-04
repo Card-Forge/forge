@@ -5,7 +5,6 @@ S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't gain life. | Descr
 S:Mode$ Continuous | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
 S:Mode$ Continuous | GlobalRule$ All damage is dealt as though it's source had wither. | Description$ All damage is dealt as though it's source had wither. (A source with wither deals damage to creatures in the form of -1/-1 counters.)
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/everlasting_torment.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/186.jpg
 Oracle:Players can't gain life.\nDamage can't be prevented.\nAll damage is dealt as though its source had wither. (A source with wither deals damage to creatures in the form of -1/-1 counters.)
+SetInfo:SHM Rare

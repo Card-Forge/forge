@@ -18,5 +18,5 @@ SVar:RemRandomDeck:True
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Permanent.YouCtrl+cmcGE5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eureka.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/99.jpg
 Oracle:Starting with you, each player may put a permanent card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
+SetInfo:LEG Rare

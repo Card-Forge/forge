@@ -5,5 +5,5 @@ A:AB$ Dig | Cost$ 3 T Sac<1/Creature> | RememberCostCards$ True | DigNum$ X | Re
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_yawgmoth.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/129.jpg
 Oracle:{3}, {T}, Sacrifice a creature: Reveal a number of cards from the top of your library equal to the sacrificed creature's power. Put one into your hand and exile the rest.
+SetInfo:NMS Rare

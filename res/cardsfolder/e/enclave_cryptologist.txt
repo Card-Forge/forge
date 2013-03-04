@@ -11,7 +11,6 @@ SVar:Draw:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LT3_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enclave_cryptologist.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/66.jpg
 Oracle:Level up {1}{U} ({1}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n0/1\n{T}: Draw a card, then discard a card.\nLEVEL 3+\n0/1\n{T}: Draw a card.
+SetInfo:ROE Uncommon

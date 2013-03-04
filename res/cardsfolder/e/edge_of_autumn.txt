@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LE4 | ConditionDescription$ If you control four or fewer lands, | SpellDescription$ If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
 K:Cycling:Sac<1/Land>
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edge_of_autumn.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/144.jpg
 Oracle:If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.\nCycling-Sacrifice a land. (Sacrifice a land, Discard this card: Draw a card.)
+SetInfo:FUT Common
+SetInfo:DDG Common

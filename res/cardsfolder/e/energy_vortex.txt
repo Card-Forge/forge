@@ -11,7 +11,6 @@ A:AB$ PutCounter | Cost$ X | CounterType$ ENERGY | CounterNum$ X | References$ X
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.ENERGY
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_vortex.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/64.jpg
 Oracle:As Energy Vortex enters the battlefield, choose an opponent.\nAt the beginning of your upkeep, remove all energy counters from Energy Vortex.\nAt the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless he or she pays {1} for each energy counter on Energy Vortex.\n{X}: Put X energy counters on Energy Vortex. Activate this ability only during your upkeep.
+SetInfo:MIR Rare

@@ -9,7 +9,8 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ X | References$ X | SpellDescriptio
 SVar:X:Count$CardCounters.CHARGE
 SVar:XKicked:Count$TimesKicked
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/everflowing_chalice.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/123.jpg
 Oracle:Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nEverflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.\n{T}: Add {1} to your mana pool for each charge counter on Everflowing Chalice.
+SetInfo:ARC Uncommon
+SetInfo:DDF Uncommon
+SetInfo:WWK Uncommon

@@ -3,7 +3,6 @@ ManaCost:W
 Types:Instant Arcane
 A:SP$ Effect | Cost$ W | Name$ Ethereal Haze Effect | StaticAbilities$ STPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt by creatures this turn.
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature | Description$ Prevent all damage that would be dealt by creatures this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_haze.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/9.jpg
 Oracle:Prevent all damage that would be dealt by creatures this turn.
+SetInfo:CHK Common

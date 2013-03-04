@@ -6,7 +6,6 @@ K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature.White | PresentZone$ Battlefield | PresentPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a white creature you control to its owner's hand.
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.White+YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eiganjo_free_riders.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/8.jpg
 Oracle:Flying\nAt the beginning of your upkeep, return a white creature you control to its owner's hand.
+SetInfo:SOK Uncommon

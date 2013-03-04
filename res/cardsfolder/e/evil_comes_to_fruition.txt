@@ -5,7 +5,6 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ NewEvil | TriggerZones$ Co
 SVar:NewEvil:AB$ Token | Cost$ 0 | TokenAmount$ 7 | TokenName$ Plant | TokenTypes$ Creature,Plant | TokenOwner$ You | TokenColors$ Green | TokenPower$ 0 | TokenToughness$ 1 | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LT10 | SubAbility$ MatureEvil
 SVar:MatureEvil:DB$ Token | Cost$ 0 | TokenAmount$ 7 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | ConditionPresent$ Land.YouCtrl | ConditionCompare$ GE10
 SVar:X:Count$NumTypeYouCtrl.Land
-SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/evil_comes_to_fruition.jpg
-SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/evil-comes-to-fruition.jpg
 Oracle:When you set this scheme in motion, put seven 0/1 green Plant creature tokens onto the battlefield. If you control ten or more lands, put seven 3/3 green Elemental creature tokens onto the battlefield instead.
+SetInfo:ARC Common

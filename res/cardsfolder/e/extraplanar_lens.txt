@@ -6,7 +6,6 @@ SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Battlefield | 
 T:Mode$ TapsForMana | ValidCard$ Land.sharesNameWith Imprinted | Execute$ TrigMana | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana to his or her mana pool of any type that land produced.
 SVar:TrigMana:AB$ ManaReflected | Cost$ 0 | Valid$ Defined.Triggered | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredPlayer
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extraplanar_lens.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/169.jpg
 Oracle:Imprint - When Extraplanar Lens enters the battlefield, you may exile target land you control.\nWhenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana to his or her mana pool of any type that land produced.
+SetInfo:MRD Rare

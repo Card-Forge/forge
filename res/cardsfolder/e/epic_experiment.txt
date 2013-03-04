@@ -7,7 +7,6 @@ SVar:DBGrave:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Graveyard | Change
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epic_experiment.jpg
-SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/159.jpg
 Oracle:Exile the top X cards of your library. For each instant and sorcery card with converted mana cost X or less among them, you may cast that card without paying its mana cost. Then put all cards exiled this way that weren't cast into your graveyard.
+SetInfo:RTR Mythic

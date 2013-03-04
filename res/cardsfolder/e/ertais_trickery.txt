@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell if it was kicked | ValidTgts$ Card | ConditionCheckSVar$ ConditionKicked | ConditionSVarCompare$ EQ1 | References$ ConditionKicked | SpellDescription$ Counter target spell if it was kicked.
 SVar:ConditionKicked:Targeted$Valid Card.kicked
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ertais_trickery.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/24.jpg
 Oracle:Counter target spell if it was kicked.
+SetInfo:PLS Uncommon

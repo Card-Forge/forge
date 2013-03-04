@@ -5,7 +5,6 @@ A:SP$ LoseLife | Cost$ 4 B | ValidTgts$ Player | TgtPrompt$ Select a player | Li
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$Domain
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exotic_disease.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/43.jpg
 Oracle:Domain - Target player loses X life and you gain X life, where X is the number of basic land types among lands you control.
+SetInfo:PLS Uncommon

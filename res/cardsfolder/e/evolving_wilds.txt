@@ -2,10 +2,10 @@ Name:Evolving Wilds
 ManaCost:no cost
 Types:Land
 A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evolving_wilds.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/224.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/272.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/228.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/155.jpg
 Oracle:{T}, Sacrifice Evolving Wilds: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
+SetInfo:M13 Common
+SetInfo:COM Common
+SetInfo:ROE Common
+SetInfo:DDH Common
+SetInfo:DKA Common

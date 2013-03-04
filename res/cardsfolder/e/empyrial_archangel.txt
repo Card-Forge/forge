@@ -10,5 +10,5 @@ SVar:DmgSelf:AB$DealDamage | Cost$ 0 | Defined$ Self | DamageSource$ ReplacedSou
 SVar:DmgSelfCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empyrial_archangel.jpg
-SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/166.jpg
 Oracle:Flying, shroud\nAll damage that would be dealt to you is dealt to Empyrial Archangel instead.
+SetInfo:ALA Mythic
