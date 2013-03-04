@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Enchantment
 A:AB$ GainLife | Cost$ 2 tapXType<1/Creature> | LifeAmount$ 2 | SorcerySpeed$ True | SpellDescription$ You gain 2 life. Activate this ability only any time you could cast a sorcery.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_gardens.jpg
-SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/74.jpg
 Oracle:{2}, Tap an untapped creature you control: You gain 2 life. Activate this ability only any time you could cast a sorcery.
+SetInfo:STH Rare

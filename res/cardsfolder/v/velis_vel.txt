@@ -10,5 +10,5 @@ SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/velis_vel.jpg
-SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/velis-vel.jpg
 Oracle:Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Elemental Shamans and an Elemental Spirit are on the battlefield, each gets +2/+2.)\nWhenever you roll {C}, target creature gains all creature types until end of turn.
+SetInfo:HOP Common

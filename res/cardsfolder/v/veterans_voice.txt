@@ -4,7 +4,6 @@ Types:Enchantment Aura
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
 A:AB$ Pump | Cost$ tapXType<1/Creature.EnchantedBy/Enchanted Creature> | ValidTgts$ Creature.NotEnchantedBy | TgtPrompt$ Select target creature other than the creature tapped | NumAtt$ 2 | NumDef$ 1 | CostDesc$ Tap enchanted creature: | SpellDescription$ Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate this ability only if enchanted creature is untapped.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veterans_voice.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/123.jpg|2
 Oracle:Enchant creature you control\nTap enchanted creature: Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate this ability only if enchanted creature is untapped.
+SetInfo:ALL Common x2

@@ -6,7 +6,6 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SubAbility$ ChooseCT | SpellDe
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature
 A:AB$ Token | Cost$ 5 T | TokenAmount$ 1 | TokenName$ ChosenType | TokenTypes$ Creature,ChosenType | TokenOwner$ You | TokenColors$ ChosenColor | TokenPower$ 2 | TokenToughness$ 2 | TokenImage$ C 2 2 Volraths Laboratory | SpellDescription$ Put a 2/2 creature token of the chosen color and type onto the battlefield.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_laboratory.jpg
-SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/136.jpg
 Oracle:As Volrath's Laboratory enters the battlefield, choose a color and a creature type./n{5}, {T}: Put a 2/2 creature token of the chosen color and type onto the battlefield
+SetInfo:STH Rare

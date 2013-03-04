@@ -5,7 +5,6 @@ A:AB$ Destroy | Cost$ 1 B Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ X | Refere
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
 SVar:X:Count$CardCounters.VERSE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_requiem.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/167.jpg
 Oracle:At the beginning of your upkeep, you may put a verse counter on Vile Requiem.\n{1}{B}, Sacrifice Vile Requiem: Destroy up to X target nonblack creatures, where X is the number of verse counters on Vile Requiem. They can't be regenerated.
+SetInfo:USG Uncommon

@@ -4,14 +4,15 @@ Types:Creature Human Monk Cleric
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83441.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/55.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/53.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/197.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/121.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/51.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/55.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/50.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/28.jpg
 Oracle:When Venerable Monk enters the battlefield, you gain 2 life.
+SetInfo:8ED Common
+SetInfo:S99 Common
+SetInfo:7ED Common
+SetInfo:6ED Common
+SetInfo:S00 Common
+SetInfo:9ED Common
+SetInfo:STH Common
+SetInfo:DDC Common
+SetInfo:10E Common
+SetInfo:POR Uncommon

@@ -4,8 +4,7 @@ Types:Creature Elf Scout
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_emissary.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/80.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/95.jpg
 Oracle:When Viridian Emissary dies, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+SetInfo:PC2 Common
+SetInfo:MBS Common

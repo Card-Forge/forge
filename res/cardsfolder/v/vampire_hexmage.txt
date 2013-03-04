@@ -7,7 +7,6 @@ A:AB$ RepeatEach | Cost$ Sac<1/CARDNAME> | ValidTgts$ Permanent | RepeatCounters
 SVar:RemoveAllCounters:DB$ RemoveCounter | Defined$ Targeted | CounterType$ RepeatSVarCounter | CounterNum$ RepeatCounterAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_hexmage.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/114.jpg
 Oracle:First strike\nSacrifice Vampire Hexmage: Remove all counters from target permanent.
+SetInfo:ZEN Uncommon

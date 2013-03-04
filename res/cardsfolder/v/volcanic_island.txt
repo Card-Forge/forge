@@ -1,9 +1,8 @@
 Name:Volcanic Island
 ManaCost:no cost
 Types:Land Island Mountain
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_island.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/302.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/306.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/302.jpg
 Oracle:
+SetInfo:LEB Rare
+SetInfo:3ED Rare
+SetInfo:2ED Rare

@@ -7,5 +7,5 @@ SVar:TrigReturn:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile |
 SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
 SVar:IsEncoded:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidwalk.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/55.jpg
 Oracle:Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
+SetInfo:GTC Uncommon

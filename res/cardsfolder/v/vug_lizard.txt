@@ -4,7 +4,6 @@ Types:Creature Lizard
 PT:3/4
 K:Mountainwalk
 K:Echo:1 R R
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vug_lizard.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/227.jpg
 Oracle:Mountainwalk\nEcho {1}{R}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
+SetInfo:USG Uncommon

@@ -3,7 +3,6 @@ ManaCost:1 WU WU
 Types:Creature Spirit
 PT:2/2
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vassal_soul.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/224.jpg
 Oracle:Flying
+SetInfo:RTR Common

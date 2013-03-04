@@ -7,8 +7,7 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B R G
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 A:AB$ Pump | Cost$ G | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vaevictis_asmadi.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Vaevictis Asmadi unless you pay {B}{R}{G}.\n{B}: Vaevictis Asmadi gets +1/+0 until end of turn.\n{R}: Vaevictis Asmadi gets +1/+0 until end of turn.\n{G}: Vaevictis Asmadi gets +1/+0 until end of turn.
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/124.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/309.jpg
+SetInfo:CHR Rare
+SetInfo:LEG Rare

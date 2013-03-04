@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifa
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 4 | NumDef$ 4
 SVar:BuffedBy:Artifact
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vermiculos.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/80.jpg
 Oracle:Whenever an artifact enters the battlefield, Vermiculos gets +4/+4 until end of turn.
+SetInfo:MRD Rare

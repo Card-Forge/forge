@@ -6,7 +6,6 @@ A:AB$ Mana | Cost$ G Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | SpellDescript
 T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a multicolored spell, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_eidolon.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/100.jpg
 Oracle:{G}, Sacrifice Verdant Eidolon: Add three mana of any one color to your mana pool.\nWhenever you cast a multicolored spell, you may return Verdant Eidolon from your graveyard to your hand.
+SetInfo:DIS Common

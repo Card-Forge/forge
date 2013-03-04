@@ -8,8 +8,8 @@ SVar:DmgSelf:AB$DealDamage | Cost$ 0 | Defined$ Self | DamageSource$ ReplacedSou
 SVar:DmgSelfCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Self | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_bodyguard.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/225.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/227.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/226.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/226.jpg
 Oracle:As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:3ED Rare
+SetInfo:2ED Rare

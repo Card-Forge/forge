@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:3/2
 S:Mode$ Continuous | Affected$ Creature.Soldier+YouCtrl+Other | AddPower$ 1 | Description$ Other Soldier creatures you control get +1/+0.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_swordsmith.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/39.jpg
 Oracle:Other Soldier creatures you control get +1/+0.
+SetInfo:M10 Common

@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Creature Vampire Rogue
 PT:2/2
 A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_aristocrat.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/117.jpg
 Oracle:Sacrifice a creature: Vampire Aristocrat gets +2/+2 until end of turn.
+SetInfo:M10 Common

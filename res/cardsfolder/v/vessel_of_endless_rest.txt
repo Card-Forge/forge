@@ -4,7 +4,6 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Disinter | TriggerDescription$ When CARDNAME enters the battlefield, put target card in a graveyard on the bottom of its owner's library.
 SVar:Disinter:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard | LibraryPosition$ -1
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_endless_rest.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/224.jpg
 Oracle:When Vessel of Endless Rest enters the battlefield, put target card from a graveyard on the bottom of its owner's library.\n{T}: Add one mana of any color to your mana pool.
+SetInfo:AVR Uncommon

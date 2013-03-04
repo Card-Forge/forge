@@ -4,7 +4,6 @@ Types:Creature Vampire
 PT:2/2
 K:Bloodthirst 2
 K:Lifelink
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_outcasts.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/115.jpg
 Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)\nLifelink (Damage dealt by this creature also causes you to gain that much life.)
+SetInfo:M12 Uncommon

@@ -6,7 +6,6 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target lan
 SVar:X:Count$Valid Ally.YouCtrl
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vastwood_animist.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/116.jpg
 Oracle:{T}: Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.
+SetInfo:WWK Uncommon

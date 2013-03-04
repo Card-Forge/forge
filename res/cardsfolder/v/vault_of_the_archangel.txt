@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ PumpAll | Cost$ 2 W B T | ValidCards$ Creature.YouCtrl | KW$ Deathtouch & Lifelink | SpellDescription$ Creatures you control gain deathtouch and lifelink until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vault_of_the_archangel.jpg
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/158.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{2}{W}{B}, {T}: Creatures you control gain deathtouch and lifelink until end of turn.
+SetInfo:DKA Rare

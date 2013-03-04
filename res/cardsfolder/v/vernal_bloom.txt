@@ -4,9 +4,8 @@ Types:Enchantment
 T:Mode$ TapsForMana | ValidCard$ Forest | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a Forest is tapped for mana, its controller adds G to his or her mana pool (in addition to the mana the land produces).
 SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ G | Amount$ 1 | Defined$ TriggeredPlayer
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vernal_bloom.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/286.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/281.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/281.jpg
 Oracle:Whenever a Forest is tapped for mana, its controller adds {G} to his or her mana pool (in addition to the mana the land produces).
+SetInfo:8ED Rare
+SetInfo:7ED Rare
+SetInfo:USG Rare

@@ -5,7 +5,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | NumDmg$ X
 SVar:X:TargetedPlayer$CardsInHand
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vicious_shadows.jpg
-SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/119.jpg
 Oracle:Whenever a creature dies, you may have Vicious Shadows deal damage to target player equal to the number of cards in that player's hand.
+SetInfo:ALA Rare

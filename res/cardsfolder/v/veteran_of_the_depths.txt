@@ -4,7 +4,6 @@ Types:Creature Merfolk Soldier
 PT:2/2
 T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigBuff | TriggerDescription$ Whenever CARDNAME becomes tapped, you may put a +1/+1 counter on it.
 SVar:TrigBuff:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_of_the_depths.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/46.jpg
 Oracle:Whenever Veteran of the Depths becomes tapped, you may put a +1/+1 counter on it.
+SetInfo:LRW Uncommon

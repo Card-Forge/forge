@@ -5,8 +5,7 @@ PT:1/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ExchangePlots | TriggerDescription$ When CARDNAME enters the battlefield, exchange control of target land you control and target land an opponent controls.
 SVar:ExchangePlots:AB$ ExchangeControl | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land | TargetsFromDifferentZone$ True | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of target land you control and target land an opponent controls.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_plotter.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/41.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/66.jpg
 Oracle:When Vedalken Plotter enters the battlefield, exchange control of target land you control and target land an opponent controls.
+SetInfo:GPT Uncommon
+SetInfo:COM Uncommon

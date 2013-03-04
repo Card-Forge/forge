@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Viashino
 PT:3/1
 A:AB$ Pump | Cost$ G | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_grappler.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/179.jpg
 Oracle:{G}: Viashino Grappler gains trample until end of turn.
+SetInfo:INV Common

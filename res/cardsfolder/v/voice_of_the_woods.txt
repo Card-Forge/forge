@@ -4,7 +4,7 @@ Types:Creature Elf
 PT:2/2
 A:AB$ Token | Cost$ tapXType<5/Elf> | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenColors$ Green | TokenPower$ 7 | TokenToughness$ 7 | TokenKeywords$ Trample |SpellDescription$ Put a 7/7 green Elemental creature token with trample onto the battlefield.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_the_woods.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/297.jpg
 Oracle:Tap five untapped Elves you control: Put a 7/7 green Elemental creature token with trample onto the battlefield.
+SetInfo:ONS Rare
+SetInfo:EVG Rare

@@ -4,7 +4,6 @@ Types:Creature Elf Shaman
 PT:1/1
 A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_acolyte.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/89.jpg
 Oracle:{1}, {T}: Add one mana of any color to your mana pool.
+SetInfo:DST Common

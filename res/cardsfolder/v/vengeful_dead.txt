@@ -5,7 +5,6 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or another Zombie is put into a graveyard from the battlefield, each opponent loses 1 life.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Zombie.Other | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or another Zombie is put into a graveyard from the battlefield, each opponent loses 1 life.
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_dead.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/80.jpg
 Oracle:Whenever Vengeful Dead or another Zombie dies, each opponent loses 1 life.
+SetInfo:SCG Common
