@@ -4,7 +4,6 @@ Types:Creature Wurm Spirit
 PT:2/0
 K:etbCounter:P1P1:4
 K:If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_wurm.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/211.jpg
 Oracle:Phantom Wurm enters the battlefield with four +1/+1 counters on it.\nIf damage would be dealt to Phantom Wurm, prevent that damage. Remove a +1/+1 counter from Phantom Wurm.
+SetInfo:TSP Uncommon

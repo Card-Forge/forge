@@ -8,7 +8,6 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ Y | References$ Y
 SVar:X:Count$GreatestPowerYouControl
 SVar:Y:TriggeredCard$CardPower
 SVar:NeedsToPlayVar:X GE3
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prime_speaker_zegana.jpg
-SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/188.jpg
 Oracle:Prime Speaker Zegana enters the battlefield with X +1/+1 counters on it, where X is the greatest power among other creatures you control.\nWhen Prime Speaker Zegana enters the battlefield, draw cards equal to its power.
+SetInfo:GTC Mythic

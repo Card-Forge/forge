@@ -8,7 +8,6 @@ SVar:AvatarAX:Count$Valid Artifact.YouCtrl
 SVar:AvatarCX:Count$Valid Creature.YouCtrl
 SVar:AvatarEX:Count$Valid Enchantment.YouCtrl
 SVar:AvatarLX:Count$Valid Land.YouCtrl
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/platinum_angel_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/platinum-angel.jpg
 Oracle:Hand -1, life -2\nIf you control an artifact, a creature, an enchantment, and a land, you can't lose the game and your opponents can't win the game.
+SetInfo:VAN Special x2

@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ Unblockable | AddKeyword$ Shroud | Description$ Enchanted creature is unblockable and has shroud.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/protective_bubble.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/80.jpg
 Oracle:Enchant creature\nEnchanted creature is unblockable and has shroud. (It can't be the target of spells or abilities.)
+SetInfo:LRW Common

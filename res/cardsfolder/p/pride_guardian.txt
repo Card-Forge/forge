@@ -5,7 +5,6 @@ PT:0/3
 K:Defender
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME blocks, you gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pride_guardian.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/31.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Pride Guardian blocks, you gain 3 life.
+SetInfo:M12 Common

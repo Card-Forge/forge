@@ -7,7 +7,6 @@ SVar:TrigChoice:AB$ GenericChoice | Cost$ 0 | Defined$ You | Choices$ SVar1,SVar
 SVar:SVar1:DB$ LoseLife | Defined$ Each | LifeAmount$ 1 | ChoiceDescription$ Each player loses 1 life.
 SVar:SVar2:DB$ GainLife | Defined$ Each | LifeAmount$ 1 | ChoiceDescription$ Each player gains 1 life.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_warrior.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/117.jpg
 Oracle:Whenever Putrid Warrior deals damage, choose one - Each player loses 1 life; or each player gains 1 life.
+SetInfo:APC Common

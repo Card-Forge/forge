@@ -5,7 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield 
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
 SVar:X:Count$Valid Land.nonBasic+ActivePlayerCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_order.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/65.jpg
 Oracle:At the beginning of each player's upkeep, Primal Order deals damage to that player equal to the number of nonbasic lands he or she controls.
+SetInfo:5ED Rare
+SetInfo:HML Rare

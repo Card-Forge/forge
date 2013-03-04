@@ -7,7 +7,6 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 A:AB$ PutCounter | Cost$ ExileFromTop<1/Card> | Defined$ Self | CounterNum$ X | References$ X | CounterType$ P1P1 | SpellDescription$ Put X +1/+1 counters on CARDNAME, where X is the exiled card's converted mana cost.
 SVar:X:Exiled$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_devourer.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/167.jpg
 Oracle:When Phyrexian Devourer's power is 7 or greater, sacrifice it.\nExile the top card of your library: Put X +1/+1 counters on Phyrexian Devourer, where X is the exiled card's converted mana cost.
+SetInfo:ALL Rare

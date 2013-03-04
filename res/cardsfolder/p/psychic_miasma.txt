@@ -6,7 +6,6 @@ A:SP$ Pump | Cost$ 1 B | SubAbility$ DBCleanup | Static$ True
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBChangeZone | SpellDescription$ Target player discards a card. If a land card is discarded this way, return CARDNAME to its owner's hand.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand | Hidden$ True | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBDiscard
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_miasma.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/76.jpg
 Oracle:Target player discards a card. If a land card is discarded this way, return Psychic Miasma to its owner's hand.
+SetInfo:SOM Common

@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigNausea:AB$PumpAll | Cost$ 0 | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn.
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_dogs.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/66.jpg
 Oracle:When Plague Dogs dies, all creatures get -1/-1 until end of turn.\n{2}, Sacrifice Plague Dogs: Draw a card.
+SetInfo:UDS Uncommon

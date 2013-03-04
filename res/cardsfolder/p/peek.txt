@@ -4,8 +4,7 @@ Types:Instant
 A:SP$ RevealHand | Cost$ U | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDraw | SpellDescription$ Look at target player's hand.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peek.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/91.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/94.jpg
 Oracle:Look at target player's hand.\nDraw a card.
+SetInfo:ODY Common
+SetInfo:10E Common

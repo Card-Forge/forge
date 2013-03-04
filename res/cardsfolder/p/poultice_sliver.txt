@@ -5,7 +5,6 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Regen | Description$ All Slivers have "2, Tap, Regenerate target Sliver."
 SVar:Regen:AB$Regenerate | Cost$ 2 T | ValidTgts$ Sliver | TgtPrompt$ Select target Sliver. | SpellDescription$ Regenerate a target Sliver.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poultice_sliver.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/11.jpg
 Oracle:All Slivers have "{2}, {T}: Regenerate target Sliver."
+SetInfo:PLC Common

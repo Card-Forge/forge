@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Targeting:Dies
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_bear.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/70.jpg
 Oracle:When Phantasmal Bear becomes the target of a spell or ability, sacrifice it.
+SetInfo:M12 Common

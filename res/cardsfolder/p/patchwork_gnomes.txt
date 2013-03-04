@@ -3,8 +3,7 @@ ManaCost:3
 Types:Artifact Creature Gnome
 PT:2/1
 A:AB$ Regenerate | Cost$ Discard<1/Card> | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patchwork_gnomes.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/289.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/306.jpg
 Oracle:Discard a card: Regenerate Patchwork Gnomes.
+SetInfo:TMP Uncommon
+SetInfo:ODY Uncommon

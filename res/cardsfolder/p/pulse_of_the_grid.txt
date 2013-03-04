@@ -7,7 +7,6 @@ SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Ha
 SVar:Y:Count$CardsInYourHand
 SVar:X:Count$CardsInOppHand/Minus.Y
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_of_the_grid.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/29.jpg
 Oracle:Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return Pulse of the Grid to its owner's hand.
+SetInfo:DST Rare

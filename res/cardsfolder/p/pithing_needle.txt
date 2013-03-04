@@ -5,10 +5,9 @@ K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, name a card.
 S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | NonMana$ True | Description$ Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pithing_needle.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/217.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/158.jpg
-SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/231.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/338.jpg
 Oracle:As Pithing Needle enters the battlefield, name a card.\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.
+SetInfo:M10 Rare
+SetInfo:SOK Rare
+SetInfo:RTR Rare
+SetInfo:10E Rare

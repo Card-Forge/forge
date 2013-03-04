@@ -5,7 +5,6 @@ A:SP$ ChooseType | Cost$ 1 B | Defined$ You | Type$ Creature | SubAbility$ DBPum
 SVar:DBPump:DB$ Pump | Cost$ 0 | NumAtt$ -X | NumDef$ -X | References$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature.
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/packs_disdain.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/73.jpg
 Oracle:Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control.
+SetInfo:MOR Common

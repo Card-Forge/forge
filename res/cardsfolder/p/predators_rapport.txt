@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Choose target creature you control. You gain life equal to that creature's power plus its toughness.
 SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardSumPT
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predators_rapport.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/129.jpg
 Oracle:Choose target creature you control. You gain life equal to that creature's power plus its toughness.
+SetInfo:GTC Common

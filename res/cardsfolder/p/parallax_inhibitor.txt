@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact
 A:AB$ PutCounterAll | Cost$ 1 T Sac<1/CARDNAME> | ValidCards$ Permanent.withFading+YouCtrl | CounterType$ FADE | CounterNum$ 1 | SpellDescription$ Put a fade counter on each permanent with fading you control.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_inhibitor.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/134.jpg
 Oracle:{1}, {T}, Sacrifice Parallax Inhibitor: Put a fade counter on each permanent with fading you control.
+SetInfo:NMS Rare

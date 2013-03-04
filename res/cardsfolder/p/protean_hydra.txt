@@ -11,6 +11,6 @@ T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Battlefield | Coun
 SVar:ProteanPutCounter:Mode$ Phase | Phase$ End of Turn | Execute$ DBPutCounters | TriggerDescription$ Put two +1/+1 counters on it at the beginning of the next end step.
 SVar:DBPutCounters:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/protean_hydra.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/194.jpg
-SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/200.jpg
 Oracle:Protean Hydra enters the battlefield with X +1/+1 counters on it.\nIf damage would be dealt to Protean Hydra, prevent that damage and remove that many +1/+1 counters from it.\nWhenever a +1/+1 counter is removed from Protean Hydra, put two +1/+1 counters on it at the beginning of the next end step.
+SetInfo:M11 Rare
+SetInfo:M10 Mythic

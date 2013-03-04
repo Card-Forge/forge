@@ -5,7 +5,6 @@ PT:1/1
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 W
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures can't attack.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peacekeeper.jpg
-SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/138.jpg
 Oracle:At the beginning of your upkeep, sacrifice Peacekeeper unless you pay {1}{W}.\nCreatures can't attack.
+SetInfo:WTH Rare

@@ -5,7 +5,6 @@ A:SP$ Pump | Cost$ 5 B | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target 
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | SubAbility$ WeakenOther
 SVar:WeakenOther:DB$ PumpAll | ValidCards$ Creature.RememberedPlayerCtrl+IsNotRemembered | NumAtt$ -2 | IsCurse$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/public_execution.jpg
-SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/105.jpg
 Oracle:Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
+SetInfo:M13 Uncommon

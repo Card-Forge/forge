@@ -5,7 +5,6 @@ A:SP$Tap | Cost$ 2 U U | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | Tgt
 A:SP$Tap | Cost$ U | CheckSVar$ GreenCreats | References$ GreenCreats | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay U rather than pay CARDNAME's mana cost.
 SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:GreenCreats:Count$ThisTurnEntered_Battlefield_Creature.Green+YouDontCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/permafrost_trap.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/34.jpg
 Oracle:If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.\nTap up to two target creatures. Those creatures don't untap during their controller's next untap step.
+SetInfo:WWK Uncommon

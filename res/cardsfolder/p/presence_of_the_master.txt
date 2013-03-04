@@ -4,8 +4,7 @@ Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Enchantment | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts an enchantment spell, counter it.
 SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSpellAbility
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/presence_of_the_master.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/32.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/200.jpg
 Oracle:Whenever a player casts an enchantment spell, counter it.
+SetInfo:LEG Uncommon
+SetInfo:USG Uncommon

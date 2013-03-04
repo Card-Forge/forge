@@ -6,9 +6,8 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | Remember
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentagram_of_the_ages.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/394.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/306.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/307.jpg
 Oracle:{4}, {T}: The next time a source of your choice would deal damage to you this turn, prevent that damage.
+SetInfo:ICE Rare
+SetInfo:5ED Rare
+SetInfo:6ED Rare

@@ -5,7 +5,7 @@ PT:4/5
 K:Reach
 K:TypeCycling:Forest:2
 K:TypeCycling:Plains:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pale_recluse.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/74.jpg
 Oracle:Reach (This can block creatures with flying.)\nForestcycling {2}, plainscycling {2} ({2}, Discard this card: Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.)
+SetInfo:ARB Common
+SetInfo:ARC Common

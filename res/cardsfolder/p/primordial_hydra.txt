@@ -8,8 +8,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDoubleCounters:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ Double | References$ Double
 SVar:X:Count$xPaid
 SVar:Double:Count$CardCounters.P1P1
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primordial_hydra.jpg
-SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/183.jpg
-SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/189.jpg
 Oracle:Primordial Hydra enters the battlefield with X +1/+1 counters on it.\nAt the beginning of your upkeep, double the number of +1/+1 counters on Primordial Hydra.\nPrimordial Hydra has trample as long as it has ten or more +1/+1 counters on it.
+SetInfo:M13 Mythic
+SetInfo:M12 Mythic

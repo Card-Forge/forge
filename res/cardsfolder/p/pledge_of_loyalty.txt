@@ -14,5 +14,5 @@ SVar:BLACK:Count$Valid Permanent.Black+YouCtrl
 SVar:RED:Count$Valid Permanent.Red+YouCtrl
 SVar:GREEN:Count$Valid Permanent.Green+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pledge_of_loyalty.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/24.jpg
 Oracle:Enchant creature\nEnchanted creature has protection from the colors of permanents you control. This effect doesn't remove Pledge of Loyalty.
+SetInfo:INV Uncommon

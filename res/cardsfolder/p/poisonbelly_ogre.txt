@@ -4,7 +4,6 @@ Types:Creature Ogre Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another creature enters the battlefield, its controller loses 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poisonbelly_ogre.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/57.jpg
 Oracle:Whenever another creature enters the battlefield, its controller loses 1 life.
+SetInfo:GPT Common

@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$ Pump | Cost$ X T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | References$ X | KW$ At the beginning of the end step, destroy CARDNAME. | SpellDescription$ Target creature you control gets +X/+X until end of turn. Destroy it at the beginning of the next end step.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puffer_extract.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/310.jpg
 Oracle:{X}, {T}: Target creature you control gets +X/+X until end of turn. Destroy it at the beginning of the next end step.
+SetInfo:MMQ Uncommon

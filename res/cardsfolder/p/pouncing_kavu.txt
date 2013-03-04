@@ -7,7 +7,6 @@ K:First Strike
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ PounceAdvantage | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.
 SVar:PounceAdvantage:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ PounceAmbush
 SVar:PounceAmbush:DB$ Pump | Defined$ Self | KW$ Haste | Permanent$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pouncing_kavu.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/158.jpg
 Oracle:Kicker {2}{R} (You may pay an additional {2}{R} as you cast this spell.)\nFirst strike\nIf Pouncing Kavu was kicked, it enters the battlefield with two +1/+1 counters on it and with haste.
+SetInfo:INV Common

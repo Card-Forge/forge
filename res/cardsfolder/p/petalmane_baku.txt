@@ -8,7 +8,6 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | 
 A:AB$ Mana | Cost$ 1 SubCounter<X/KI> | Produced$ Any | Amount$ ChosenX | References$ X | SpellDescription$ Add X mana of any one color to your mana pool.
 SVar:X:XChoice
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petalmane_baku.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/139.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Petalmane Baku.\n{1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color to your mana pool.
+SetInfo:BOK Common

@@ -3,10 +3,9 @@ ManaCost:2 B B
 Types:Sorcery
 A:SP$ ChooseColor | Cost$ 2 B B | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBRevealDiscard | SpellDescription$ Choose a color. Target player reveals his or her hand and discards all cards of that color.
 SVar:DBRevealDiscard:DB$ Discard | Mode$ RevealDiscardAll | DiscardValid$ Card.ChosenColor | ValidTgts$ Player | TgtPrompt$ Select target player
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/persecute.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/151.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/146.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/151.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/154.jpg
 Oracle:Choose a color. Target player reveals his or her hand and discards all cards of that color.
+SetInfo:8ED Rare
+SetInfo:7ED Rare
+SetInfo:9ED Rare
+SetInfo:USG Rare

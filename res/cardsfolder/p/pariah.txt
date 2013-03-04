@@ -9,7 +9,7 @@ SVar:DmgEnchanted:AB$ DealDamage | Cost$ 0 | Defined$ Enchanted | DamageSource$ 
 SVar:DmgEnchantedCombat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Enchanted | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pariah.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/28.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/30.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/33.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nAll damage that would be dealt to you is dealt to enchanted creature instead.
+SetInfo:7ED Rare
+SetInfo:10E Rare
+SetInfo:USG Rare

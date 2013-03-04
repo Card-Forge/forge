@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Creature Hound
 PT:2/2
 A:AB$ Pump | Cost$ Discard<1/Card> | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patrol_hound.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/38.jpg
 Oracle:Discard a card: Patrol Hound gains first strike until end of turn.
+SetInfo:ODY Common

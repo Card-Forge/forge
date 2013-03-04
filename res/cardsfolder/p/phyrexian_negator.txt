@@ -7,7 +7,7 @@ T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ B
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Amount$ X | SacValid$ Permanent | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_negator.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/65.jpg
 Oracle:Trample\nWhenever Phyrexian Negator is dealt damage, sacrifice that many permanents.
+SetInfo:UDS Rare
+SetInfo:DDE Mythic

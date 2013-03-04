@@ -5,7 +5,6 @@ K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target player loses 1 life.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piranha_marsh.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/222.jpg
 Oracle:Piranha Marsh enters the battlefield tapped.\nWhen Piranha Marsh enters the battlefield, target player loses 1 life.\n{T}: Add {B} to your mana pool.
+SetInfo:ZEN Common

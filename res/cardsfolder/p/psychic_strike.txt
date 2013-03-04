@@ -3,7 +3,6 @@ ManaCost:1 U B
 Types:Instant
 A:SP$ Counter | Cost$ 1 U B | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBMill | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller puts the top two cards of his or her library into his or her graveyard.
 SVar:DBMill:DB$ Mill | NumCards$ 2 | Defined$ TargetedController
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_strike.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/189.jpg
 Oracle:Counter target spell. Its controller puts the top two cards of his or her library into his or her graveyard.
+SetInfo:GTC Common

@@ -5,7 +5,6 @@ A:AB$ ChangeZoneAll | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target pla
 A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Exile target card from a graveyard. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_furnace.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/155.jpg
 Oracle:{T}: Exile the bottom card of target player's graveyard.\n{1}, Sacrifice Phyrexian Furnace: Exile target card from a graveyard. Draw a card.
+SetInfo:WTH Uncommon

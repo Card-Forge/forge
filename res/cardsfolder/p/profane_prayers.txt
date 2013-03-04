@@ -5,7 +5,6 @@ A:SP$ DealDamage | Cost$ 2 B B | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$TypeOnBattlefield.Cleric
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/profane_prayers.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/162.jpg
 Oracle:Profane Prayers deals X damage to target creature or player and you gain X life, where X is the number of Clerics on the battlefield.
+SetInfo:ONS Common

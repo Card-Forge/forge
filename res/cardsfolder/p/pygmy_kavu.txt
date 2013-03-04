@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$Valid Creature.Black+OppCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_kavu.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/88.jpg
 Oracle:When Pygmy Kavu enters the battlefield, draw a card for each black creature your opponents control.
+SetInfo:PLS Common

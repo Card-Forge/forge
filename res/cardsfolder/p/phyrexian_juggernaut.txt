@@ -4,7 +4,6 @@ Types:Artifact Creature Juggernaut
 PT:5/5
 K:Infect
 K:CARDNAME attacks each turn if able.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_juggernaut.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/121.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nPhyrexian Juggernaut attacks each turn if able.
+SetInfo:MBS Uncommon

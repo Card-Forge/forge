@@ -8,8 +8,7 @@ SVar:DamageTgt:AB$DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ PredatoryY | References$ PredatoryY
 SVar:PredatoryX:Count$CardPower
 SVar:PredatoryY:Targeted$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_urge.jpg
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/74.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/175.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals damage equal to its power to target creature. That creature deals damage equal to its power to this creature."
+SetInfo:PC2 Rare
+SetInfo:ZEN Rare

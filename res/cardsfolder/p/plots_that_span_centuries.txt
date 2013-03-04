@@ -6,7 +6,6 @@ SVar:PlotEffect:AB$ Effect | Cost$ 0 | Name$ Plots Scheme | Duration$ Permanent 
 SVar:PlotPower:Event$ SetInMotion | ReplaceWith$ PlotRep | Description$ The next time you would set a scheme in motion, set three schemes in motion instead.
 SVar:PlotRep:AB$ SetInMotion | Cost$ 0 | RepeatNum$ 3 | SubAbility$ ExilePlot
 SVar:ExilePlot:DB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/plots_that_span_centuries.jpg
-SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/plots-that-span-centuries.jpg
 Oracle:When you set this scheme in motion, the next time you would set a scheme in motion, set three schemes in motion instead.
+SetInfo:ARC Common
