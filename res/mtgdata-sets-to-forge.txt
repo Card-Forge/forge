@@ -88,7 +88,7 @@ P4 S00 #  Starter 2000
 PK PTK #  Portal Three Kingdoms
 ===PLC # Planar Chaos
 PO POR #  Portal
----PPR #  Promo set for Gatherer
+PPR MBP #  Promo set for Gatherer
 PR PCY # Prophecy
 PS PLS # Planeshift
 ===RAV # Ravnica: City of Guilds
