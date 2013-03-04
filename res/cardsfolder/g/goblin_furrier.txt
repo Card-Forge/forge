@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Creature Goblin Warrior
 PT:2/2
 S:Mode$ PreventDamage | Source$ Card.Self | Target$ Creature.Snow | Description$ Prevent all damage that CARDNAME would deal to snow creatures.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_furrier.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/82.jpg
 Oracle:Prevent all damage that Goblin Furrier would deal to snow creatures.
+SetInfo:CSP Common

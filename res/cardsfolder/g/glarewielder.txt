@@ -10,7 +10,6 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0
 K:Haste
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glarewielder.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/171.jpg
 Oracle:Haste\nWhen Glarewielder enters the battlefield, up to two target creatures can't block this turn.\nEvoke {1}{R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
+SetInfo:LRW Uncommon

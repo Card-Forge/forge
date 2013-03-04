@@ -4,7 +4,6 @@ Types:World Enchantment
 S:Mode$ Continuous | Affected$ Creature | RemoveKeyword$ Flying | Description$ All creatures lose flying.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravity_sphere.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/149.jpg
 Oracle:All creatures lose flying.
+SetInfo:LEG Rare

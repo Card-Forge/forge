@@ -4,7 +4,6 @@ Types:Creature Viashino Warrior
 PT:2/1
 K:First Strike
 A:AB$ Pump | Cost$ 3 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate this ability only once each turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghor_clan_bloodscale.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/66.jpg
 Oracle:First strike\n{3}{G}: Ghor-Clan Bloodscale gets +2/+2 until end of turn. Activate this ability only once each turn.
+SetInfo:GPT Uncommon

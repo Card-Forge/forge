@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ ExileFromGrave<1/All> | SubAbility$ DBDraw | SpellDescription$ Counter target spell unless its controller exiles all cards from his or her graveyard.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grip_of_amnesia.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/41.jpg
 Oracle:Counter target spell unless its controller exiles all cards from his or her graveyard.\nDraw a card.
+SetInfo:JUD Common

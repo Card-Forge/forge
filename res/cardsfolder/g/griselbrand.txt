@@ -5,7 +5,6 @@ PT:7/7
 K:Flying
 K:Lifelink
 A:AB$ Draw | Cost$ PayLife<7> | NumCards$ 7 | SpellDescription$ Draw seven cards.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griselbrand.jpg
-SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/106.jpg
 Oracle:Flying, lifelink\nPay 7 life: Draw seven cards.
+SetInfo:AVR Mythic

@@ -3,9 +3,8 @@ ManaCost:4 B
 Types:Creature Zombie
 PT:3/3
 K:Fear
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84064.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/136.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/151.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/134.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)
+SetInfo:8ED Uncommon
+SetInfo:ONS Uncommon
+SetInfo:9ED Uncommon

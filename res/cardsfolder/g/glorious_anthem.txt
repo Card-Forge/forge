@@ -3,11 +3,10 @@ ManaCost:1 W W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83106.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/20.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/15.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/17.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/16.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/17.jpg
 Oracle:Creatures you control get +1/+1.
+SetInfo:8ED Rare
+SetInfo:7ED Rare
+SetInfo:10E Rare
+SetInfo:9ED Rare
+SetInfo:USG Rare

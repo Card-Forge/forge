@@ -6,7 +6,6 @@ K:Cycling:WU
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another artifact enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn and is unblockable this turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ HIDDEN Unblockable
 SVar:BuffedBy:Artifact
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glassdust_hulk.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/7.jpg
 Oracle:Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and is unblockable this turn.\nCycling {W/U} ({W/U}, Discard this card: Draw a card.)
+SetInfo:ARB Common

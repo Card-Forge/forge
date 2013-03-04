@@ -5,7 +5,6 @@ K:Enchant creature
 K:Flash
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.enchanted+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control that are enchanted get +1/+1.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardians_magemark.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/8.jpg
 Oracle:Flash\nEnchant creature\nCreatures you control that are enchanted get +1/+1.
+SetInfo:GPT Common

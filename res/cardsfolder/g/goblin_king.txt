@@ -4,17 +4,16 @@ Types:Creature Goblin
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Goblin+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Mountainwalk | Description$ Other Goblin creatures get +1/+1 and have mountainwalk.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_king.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/190.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/155.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/156.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/190.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/236.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/216.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/192.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/207.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/185.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/154.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/155.jpg
 Oracle:Other Goblin creatures get +1/+1 and have mountainwalk. (They're unblockable as long as defending player controls a Mountain.)
+SetInfo:8ED Rare
+SetInfo:2ED Rare
+SetInfo:7ED Rare
+SetInfo:6ED Rare
+SetInfo:9ED Rare
+SetInfo:10E Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

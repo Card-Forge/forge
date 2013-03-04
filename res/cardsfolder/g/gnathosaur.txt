@@ -4,7 +4,6 @@ Types:Creature Lizard
 PT:5/4
 A:AB$ Pump | Cost$ Sac<1/Artifact> | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gnathosaur.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/63.jpg
 Oracle:Sacrifice an artifact: Gnathosaur gains trample until end of turn.
+SetInfo:MBS Common

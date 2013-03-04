@@ -3,7 +3,6 @@ ManaCost:G
 Types:Creature Elf Warrior
 PT:1/1
 K:Infect
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glistener_elf.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/111.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+SetInfo:NPH Common

@@ -8,7 +8,6 @@ SVar:X:Count$ManaPool:All
 SVar:Y:Targeted$CardManaCost
 #AI doesn't have a mana pool
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glissa_sunseeker.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/120.jpg
 Oracle:First strike\n{T}: Destroy target artifact if its converted mana cost is equal to the amount of mana in your mana pool.
+SetInfo:MRD Rare

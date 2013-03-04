@@ -3,7 +3,6 @@ ManaCost:4
 Types:Artifact
 T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent discards a card, you may draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geths_grimoire.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/123.jpg
 Oracle:Whenever an opponent discards a card, you may draw a card.
+SetInfo:DST Uncommon

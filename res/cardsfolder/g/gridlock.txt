@@ -5,7 +5,6 @@ A:SP$ Tap | Cost$ X U | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgt
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Permanent.nonLand
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gridlock.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/36.jpg
 Oracle:Tap X target nonland permanents.
+SetInfo:GTC Uncommon

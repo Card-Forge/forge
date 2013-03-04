@@ -4,7 +4,6 @@ Types:Creature Bat
 PT:1/1
 K:Flying
 A:AB$ Pump | Cost$ B PayLife<1> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grimclaw_bats.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/45.jpg
 Oracle:Flying\n{B}, Pay 1 life: Grimclaw Bats gets +1/+1 until end of turn.
+SetInfo:DST Common

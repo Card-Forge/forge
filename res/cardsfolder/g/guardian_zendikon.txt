@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Land | AILogic$ Animate
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddType$ Creature & Wall | SetColor$ White | SetPower$ 2 | SetToughness$ 6 | AddKeyword$ Defender | Description$ Enchanted land is a 2/6 white Wall creature with defender. It's still a land.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted land is put into a graveyard, return that card to its owner's hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_zendikon.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/6.jpg
 Oracle:Enchant land\nEnchanted land is a 2/6 white Wall creature with defender. It's still a land.\nWhen enchanted land dies, return that card to its owner's hand.
+SetInfo:WWK Common

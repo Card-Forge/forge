@@ -3,7 +3,6 @@ ManaCost:5 G
 Types:Creature Beast
 PT:4/4
 K:Amplify:1:Beast
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glowering_rogon.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/128.jpg
 Oracle:Amplify 1 (As this creature enters the battlefield, put a +1/+1 counter on it for each Beast card you reveal in your hand.)
+SetInfo:LGN Common

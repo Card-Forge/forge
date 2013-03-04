@@ -4,8 +4,7 @@ Types:Creature Spider
 PT:3/3
 K:Reach
 K:CARDNAME can block only creatures with flying.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomwidow.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/117.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/180.jpg
 Oracle:Reach\nGloomwidow can block only creatures with flying.
+SetInfo:SHM Uncommon
+SetInfo:AVR Uncommon

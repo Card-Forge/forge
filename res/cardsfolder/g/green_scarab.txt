@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ Enchanted creature gets +2/+2 as long as an opponent controls a green permanent.
 SVar:X:Count$Valid Permanent.Green+OppCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/green_scarab.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/252.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked by green creatures.\nEnchanted creature gets +2/+2 as long as an opponent controls a green permanent.
+SetInfo:ICE Uncommon

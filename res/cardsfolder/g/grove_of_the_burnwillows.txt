@@ -5,7 +5,7 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBLife | SpellDescription$ Add G to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBLife | SpellDescription$ Add R to your mana pool.
 SVar:DBLife:DB$ GainLife | LifeAmount$ 1 | Defined$ Player.Opponent | SpellDescription$ Each opponent gains 1 life.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grove_of_the_burnwillows.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/176.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {R} or {G} to your mana pool. Each opponent gains 1 life.
+SetInfo:V12 Mythic
+SetInfo:FUT Rare

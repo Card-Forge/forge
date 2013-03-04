@@ -5,7 +5,6 @@ A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Player | DefinedPlayer$ Targeted | Tgt
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graveyard_shovel.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/225.jpg
 Oracle:{2}, {T}: Target player exiles a card from his or her graveyard. If it's a creature card, you gain 2 life.
+SetInfo:ISD Uncommon

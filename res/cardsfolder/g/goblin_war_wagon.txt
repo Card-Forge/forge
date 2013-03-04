@@ -5,7 +5,6 @@ PT:3/3
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay 2. If you do, untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 2 | Defined$ Self
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_wagon.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/179.jpg
 Oracle:Goblin War Wagon doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {2}. If you do, untap Goblin War Wagon.
+SetInfo:MRD Common

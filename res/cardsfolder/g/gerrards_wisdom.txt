@@ -3,9 +3,8 @@ ManaCost:2 W W
 Types:Sorcery
 A:SP$ GainLife | Cost$ 2 W W | LifeAmount$ X | References$ X | SpellDescription$ You gain 2 life for each card in your hand.
 SVar:X:Count$CardsInYourHand/Times.2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_wisdom.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/131.jpg
-SetInfo:S99|Rare|http://magiccards.info/scans/en/st/18.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/16.jpg
 Oracle:You gain 2 life for each card in your hand.
+SetInfo:S99 Rare
+SetInfo:7ED Uncommon
+SetInfo:WTH Uncommon

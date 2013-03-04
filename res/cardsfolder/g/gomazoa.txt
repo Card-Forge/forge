@@ -10,8 +10,7 @@ SVar:WobbleOppJelly:DB$ Shuffle | Defined$ Opponent | SubAbility$ WobbleYourJell
 SVar:WobbleYourJelly:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gomazoa.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/46.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/48.jpg
 Oracle:Defender, flying\n{T}: Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
+SetInfo:COM Uncommon
+SetInfo:ZEN Uncommon

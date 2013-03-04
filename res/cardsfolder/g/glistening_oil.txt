@@ -8,7 +8,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ M1M1 | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glistening_oil.jpg
-SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/62.jpg
 Oracle:Enchant creature\nEnchanted creature has infect.\nAt the beginning of your upkeep, put a -1/-1 counter on enchanted creature.\nWhen Glistening Oil is put into a graveyard from the battlefield, return Glistening Oil to its owner's hand.
+SetInfo:NPH Rare

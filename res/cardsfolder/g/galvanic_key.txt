@@ -4,7 +4,6 @@ Types:Artifact
 K:Flash
 A:AB$ Untap | Cost$ 3 T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Untap target artifact.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_key.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/173.jpg
 Oracle:Flash\n{3}, {T}: Untap target artifact.
+SetInfo:MRD Common

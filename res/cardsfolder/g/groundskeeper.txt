@@ -3,8 +3,7 @@ ManaCost:G
 Types:Creature Human Druid
 PT:1/1
 A:AB$ ChangeZone | Cost$ 1 G | TgtPrompt$ Choose target basic land in your graveyard | ValidTgts$ Land.Basic+YouOwn | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target basic land card from your graveyard to your hand.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/groundskeeper.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/250.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/247.jpg
 Oracle:{1}{G}: Return target basic land card from your graveyard to your hand.
+SetInfo:MMQ Uncommon
+SetInfo:9ED Uncommon

@@ -5,7 +5,6 @@ A:AB$ PutCounter | Cost$ 1 T Discard<1/Card> | Defined$ Self | CounterType$ STUD
 A:AB$ ChangeZoneAll | Cost$ T SubCounter<3/STUDY> Sac<1/CARDNAME> | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | SubAbility$ DBAnimate | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control. They are black Zombies in addition to their other colors and types.
 SVar:DBAnimate:DB$ AnimateAll | Cost$ 0 | ValidCards$ Creature.IsRemembered | Colors$ Black | Types$ Zombie | Permanent$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grimoire_of_the_dead.jpg
-SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/226.jpg
 Oracle:{1}, {T}, Discard a card: Put a study counter on Grimoire of the Dead.\n{T}, Remove three study counters from Grimoire of the Dead and sacrifice it: Put all creature cards from all graveyards onto the battlefield under your control. They're black Zombies in addition to their other colors and types.
+SetInfo:ISD Mythic

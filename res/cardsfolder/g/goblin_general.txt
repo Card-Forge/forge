@@ -4,8 +4,7 @@ Types:Creature Goblin Warrior
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, Goblin creatures you control get +1/+1 until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Goblin+YouCtrl | NumAtt$ +1 | NumDef$ +1
-SVar:Rarity:Uncommon
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/goblin_general.jpg
-SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/97.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/101.jpg
 Oracle:Whenever Goblin General attacks, Goblin creatures you control get +1/+1 until end of turn.
+SetInfo:PO2 Rare
+SetInfo:S99 Uncommon

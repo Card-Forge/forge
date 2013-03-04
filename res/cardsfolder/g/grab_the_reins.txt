@@ -9,7 +9,6 @@ SVar:GrabDmg:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ S
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grab_the_reins.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/95.jpg
 Oracle:Choose one - Until end of turn, you gain control of target creature and it gains haste; or sacrifice a creature, then Grab the Reins deals damage equal to that creature's power to target creature or player.\nEntwine {2}{R} (Choose both if you pay the entwine cost.)
+SetInfo:MRD Uncommon

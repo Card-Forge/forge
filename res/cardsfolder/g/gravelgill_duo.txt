@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | Trigger
 SVar:TrigPump11:AB$Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
 SVar:TrigPumpFear:AB$Pump | Cost$ 0 | KW$ Fear | Defined$ Self
 SVar:BuffedBy:Card.Blue,Card.Black
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravelgill_duo.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/165.jpg
 Oracle:Whenever you cast a blue spell, Gravelgill Duo gets +1/+1 until end of turn.\nWhenever you cast a black spell, Gravelgill Duo gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
+SetInfo:SHM Common

@@ -7,8 +7,7 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 T:Mode$ ChangesZone | Origin$ Library | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into your graveyard from your library, shuffle your graveyard into your library.
 SVar:TrigChange:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SpellDescription$ Shuffle your graveyard into your library.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_blessing.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/71.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/77.jpg
 Oracle:Target player shuffles up to three target cards from his or her graveyard into his or her library.\nDraw a card.\nWhen Gaea's Blessing is put into your graveyard from your library, shuffle your graveyard into your library.
+SetInfo:WTH Uncommon
+SetInfo:TSB Special

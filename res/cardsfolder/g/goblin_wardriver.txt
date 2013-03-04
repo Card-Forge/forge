@@ -4,7 +4,6 @@ Types:Creature Goblin Warrior
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBattleCry | TriggerDescription$ Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
 SVar:TrigBattleCry:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | NumAtt$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_wardriver.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/64.jpg
 Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
+SetInfo:MBS Uncommon

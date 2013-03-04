@@ -6,5 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigFight | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
 SVar:TrigFight:AB$ Fight | Cost$ 0 | Defined$ TriggeredCard | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_ragebeast.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/170.jpg
 Oracle:Whenever Gruul Ragebeast or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
+SetInfo:GTC Rare

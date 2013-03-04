@@ -8,5 +8,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guard_dogs.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/5.jpg
 Oracle:{2}{W}, {T}: Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent.
+SetInfo:PLS Uncommon

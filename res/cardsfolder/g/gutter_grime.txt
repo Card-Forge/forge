@@ -8,5 +8,5 @@ SVar:Static:Mode$ Continuous | SetPower$ GutterGrimePT | SetToughness$ GutterGri
 SVar:GutterGrimePT:Remembered$CardCounters.SLIME
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gutter_grime.jpg
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/186.jpg
 Oracle:Whenever a nontoken creature you control dies, put a slime counter on Gutter Grime, then put a green Ooze creature token onto the battlefield with "This creature's power and toughness are each equal to the number of slime counters on Gutter Grime."
+SetInfo:ISD Rare

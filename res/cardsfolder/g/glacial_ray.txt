@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Instant Arcane
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 K:Splice onto Arcane 1 R
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_ray.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/168.jpg
 Oracle:Glacial Ray deals 2 damage to target creature or player.\nSplice onto Arcane {1}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+SetInfo:CHK Common

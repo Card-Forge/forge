@@ -3,7 +3,6 @@ ManaCost:W U
 Types:Creature Merfolk Knight
 PT:2/2
 K:Protection from red
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galinas_knight.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/248.jpg
 Oracle:Protection from red
+SetInfo:INV Common

@@ -4,5 +4,5 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Draw | Cost$ 2 B G T Sac<1/Creature> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_backwoods.jpg
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/156.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{2}{B}{G}, {T}, Sacrifice a creature: Draw a card.
+SetInfo:DKA Rare

@@ -6,7 +6,6 @@ K:etbCounter:M1M1:4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCurse | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put a -1/-1 counter on target creature for each -1/-1 counter on CARDNAME.
 SVar:TrigCurse:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ X | References$ X
 SVar:X:TriggeredCard$CardCounters.M1M1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grief_tyrant.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/189.jpg
 Oracle:Grief Tyrant enters the battlefield with four -1/-1 counters on it.\nWhen Grief Tyrant dies, put a -1/-1 counter on target creature for each -1/-1 counter on Grief Tyrant.
+SetInfo:SHM Uncommon

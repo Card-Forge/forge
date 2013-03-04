@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:3/3
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Spirit+Other+YouCtrl | AddPower$ 0 | AddToughness$ 1 | Description$ Other Spirit creatures you control get +0/+1.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gallows_warden.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/16.jpg
 Oracle:Flying\nOther Spirit creatures you control get +0/+1.
+SetInfo:ISD Uncommon

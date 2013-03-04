@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ U | ValidTgts$ Island | AILogic$ Pump
 A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 3 | Toughness$ 2 | Types$ Creature,Spirit | Colors$ Blue | Keywords$ Flying | SpellDescription$ Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land.
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | OptionalDecider$ You | TriggerDescription$ When enchanted Island is put into a graveyard, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigReturnOwner:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genju_of_the_falls.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/35.jpg
 Oracle:Enchant Island\n{2}: Enchanted Island becomes a 3/2 blue Spirit creature with flying until end of turn. It's still a land.\nWhen enchanted Island is put into a graveyard, you may return Genju of the Falls from your graveyard to your hand.
+SetInfo:BOK Uncommon

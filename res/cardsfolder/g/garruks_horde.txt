@@ -5,7 +5,6 @@ PT:7/7
 K:Trample
 K:Play with the top card of your library revealed.
 S:Mode$ Continuous | Affected$ Creature.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ May be played | Description$ You may cast the top card of your library if it's a creature card. (Do this only any time you could cast that creature card. You still pay the spell's costs.)
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruks_horde.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/176.jpg
 Oracle:Trample\nPlay with the top card of your library revealed.\nYou may cast the top card of your library if it's a creature card. (Do this only any time you could cast that creature card. You still pay the spell's costs.)
+SetInfo:M12 Rare

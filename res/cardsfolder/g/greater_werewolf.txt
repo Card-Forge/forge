@@ -8,8 +8,7 @@ SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Exe
 SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute$ TrigCounterBlocker | TriggerDescription$ At the end of combat, put a -0/-2 counter on creature(s)
 SVar:TrigCounterBlocked:AB$ PutCounter | Cost$ 0 | CounterType$ M0M2 | CounterNum$ 1 | Defined$ TriggeredAttacker
 SVar:TrigCounterBlocker:AB$ PutCounter | Cost$ 0 | CounterType$ M0M2 | CounterNum$ 1 | Defined$ TriggeredBlocker
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_werewolf.jpg
-SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/14.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/28.jpg
 Oracle:At end of combat, put a -0/-2 counter on each creature blocking or blocked by Greater Werewolf.
+SetInfo:5ED Uncommon
+SetInfo:HML Common

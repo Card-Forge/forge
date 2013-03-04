@@ -3,7 +3,6 @@ ManaCost:G
 Types:Creature Elf Scout
 PT:1/1
 K:Hexproof
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gladecover_scout.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/178.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)
+SetInfo:M12 Common

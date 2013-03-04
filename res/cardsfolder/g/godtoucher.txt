@@ -5,7 +5,6 @@ PT:2/2
 A:AB$ Pump | Cost$ 1 W T | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | ValidTgts$ Creature.powerGE5 | TgtPrompt$ Select target creature with power 5 or greater | SpellDescription$ Prevent all damage that would be dealt to target creature with power 5 or greater this turn.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godtoucher.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/133.jpg
 Oracle:{1}{W}, {T}: Prevent all damage that would be dealt to target creature with power 5 or greater this turn.
+SetInfo:ALA Common

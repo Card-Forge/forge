@@ -3,9 +3,8 @@ ManaCost:2 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ Each creature you control can't be blocked except by two or more creatures.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_drums.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/237.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/118.jpg|4
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/194.jpg
 Oracle:Each creature you control can't be blocked except by two or more creatures.
+SetInfo:5ED Common
+SetInfo:7ED Uncommon
+SetInfo:FEM Common x4

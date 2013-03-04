@@ -4,7 +4,6 @@ Types:Creature Goblin Berserker
 PT:2/2
 K:First Strike
 K:Haste
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_berserker.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/82.jpg
 Oracle:First strike, haste
+SetInfo:UDS Uncommon

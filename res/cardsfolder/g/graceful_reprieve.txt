@@ -6,7 +6,6 @@ SVar:TrigGracefulReprieve:Mode$ ChangesZone | Origin$ Battlefield | Destination$
 SVar:GracefulReprieveReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_reprieve.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/11.jpg
 Oracle:When target creature dies this turn, return that card to the battlefield under its owner's control.
+SetInfo:MOR Uncommon

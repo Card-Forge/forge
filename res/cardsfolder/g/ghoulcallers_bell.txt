@@ -3,7 +3,6 @@ ManaCost:1
 Types:Artifact
 A:AB$ Mill | Cost$ T | NumCards$ 1 | Defined$ Each | SpellDescription$ Each player puts the top card of his or her library into his or her graveyard.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghoulcallers_bell.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/224.jpg
 Oracle:{T}: Each player puts the top card of his or her library into his or her graveyard.
+SetInfo:ISD Common

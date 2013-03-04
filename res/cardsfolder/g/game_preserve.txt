@@ -9,5 +9,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidLibrary Card.nonCreature+IsRemembered
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/game_preserve.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/248.jpg
 Oracle:At the beginning of your upkeep, each player reveals the top card of his or her library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control.
+SetInfo:MMQ Rare

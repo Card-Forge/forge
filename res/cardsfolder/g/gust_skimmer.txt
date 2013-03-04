@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact Creature Insect
 PT:2/1
 A:AB$ Pump | Cost$ U | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gust_skimmer.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/108.jpg
 Oracle:{U}: Gust-Skimmer gains flying until end of turn.
+SetInfo:MBS Common

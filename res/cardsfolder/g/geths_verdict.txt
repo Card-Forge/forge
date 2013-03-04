@@ -3,7 +3,6 @@ ManaCost:B B
 Types:Instant
 A:SP$ Sacrifice | Cost$ B B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBDrain | SpellDescription$ Target player sacrifices a creature and loses 1 life.
 SVar:DBDrain:DB$LoseLife | Defined$ Targeted | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geths_verdict.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/61.jpg
 Oracle:Target player sacrifices a creature and loses 1 life.
+SetInfo:NPH Common

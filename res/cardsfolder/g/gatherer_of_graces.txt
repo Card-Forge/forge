@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 A:AB$ Regenerate | Cost$ Sac<1/Aura> | SpellDescription$ Regenerate Gatherer of Graces.
 SVar:X:Count$Valid Aura.Attached
 SVar:EnchantMe:Multiple
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gatherer_of_graces.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/85.jpg
 Oracle:Gatherer of Graces gets +1/+1 for each Aura attached to it.\nSacrifice an Aura: Regenerate Gatherer of Graces.
+SetInfo:GPT Uncommon
