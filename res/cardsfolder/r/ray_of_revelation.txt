@@ -3,8 +3,7 @@ ManaCost:1 W
 Types:Instant
 K:Flashback G
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment. | SpellDescription$ Destroy target enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_revelation.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/20.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/17.jpg
 Oracle:Destroy target enchantment.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:JUD Common
+SetInfo:DKA Common

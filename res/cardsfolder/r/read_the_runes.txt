@@ -7,7 +7,6 @@ SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | Unle
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/read_the_runes.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/104.jpg
 Oracle:Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.
+SetInfo:ONS Rare

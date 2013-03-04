@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ BR | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ -1 | Description$ Enchanted creature gets +2/-1.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_spikes.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/146.jpg
 Oracle:({B/R} can be paid with either {B} or {R}.)\nEnchant creature\nEnchanted creature gets +2/-1.
+SetInfo:DIS Common

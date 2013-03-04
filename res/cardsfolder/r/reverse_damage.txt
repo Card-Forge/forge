@@ -8,15 +8,14 @@ SVar:GainLifeInstead:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ E
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:ReplaceCount$DamageAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverse_damage.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/219.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/221.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/34.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/331.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/295.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/35.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/39.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/219.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/220.jpg
 Oracle:The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
+SetInfo:2ED Rare
+SetInfo:7ED Rare
+SetInfo:6ED Rare
+SetInfo:9ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

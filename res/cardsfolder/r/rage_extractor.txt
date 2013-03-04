@@ -5,7 +5,6 @@ T:Mode$ SpellCast | ValidCard$ Card.CostsPhyrexianMana | ValidActivatingPlayer$ 
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X
 SVar:X:TriggeredCard$CardManaCost
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_extractor.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/91.jpg
 Oracle:({R/P} can be paid with either {R} or 2 life.)\nWhenever you cast a spell with {P} in its mana cost, Rage Extractor deals damage equal to that spell's converted mana cost to target creature or player.
+SetInfo:NPH Uncommon

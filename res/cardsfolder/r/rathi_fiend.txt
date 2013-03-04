@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Each | LifeAmount$ 3
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_fiend.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/68.jpg
 Oracle:When Rathi Fiend enters the battlefield, each player loses 3 life.\n{3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
+SetInfo:NMS Uncommon

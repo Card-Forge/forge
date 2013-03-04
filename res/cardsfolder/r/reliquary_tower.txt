@@ -3,8 +3,7 @@ ManaCost:no cost
 Types:Land
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reliquary_tower.jpg
-SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/227.jpg
-SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/143.jpg
 Oracle:You have no maximum hand size.\n{T}: Add {1} to your mana pool.
+SetInfo:M13 Uncommon
+SetInfo:CFX Uncommon

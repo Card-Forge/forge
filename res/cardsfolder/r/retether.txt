@@ -5,7 +5,6 @@ A:SP$ RepeatEach | Cost$ 3 W | RepeatCards$ Aura.YouOwn | Zone$ Graveyard | Repe
 SVar:DBAttach:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Remembered | AttachedTo$ Creature.CanBeEnchantedByTargeted
 SVar:RemRandomDeck:True
 DeckNeeds:Type$Aura
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/retether.jpg
-SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/13.jpg
 Oracle:Return each Aura card from your graveyard to the battlefield. Only creatures can be enchanted this way. (Aura cards that can't enchant a creature on the battlefield remain in your graveyard.)
+SetInfo:PLC Rare

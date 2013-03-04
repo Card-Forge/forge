@@ -3,7 +3,6 @@ ManaCost:G W
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ G W | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target multicolored card in your graveyard | ValidTgts$ Card.MultiColor+YouCtrl | SpellDescription$ Return target multicolored card from your graveyard to your hand.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reborn_hope.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/76.jpg
 Oracle:Return target multicolored card from your graveyard to your hand.
+SetInfo:ARB Uncommon

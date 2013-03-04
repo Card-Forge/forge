@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Instant
 A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
 K:Storm
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reaping_the_graves.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/72.jpg
 Oracle:Return target creature card from your graveyard to your hand.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+SetInfo:SCG Common

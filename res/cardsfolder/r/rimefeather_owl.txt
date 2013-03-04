@@ -9,7 +9,6 @@ S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Permanent.counters_GE1_
 SVar:X:Count$Valid Permanent.Snow
 SVar:BuffedBy:Permanent.Snow
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimefeather_owl.jpg
-SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/42.jpg
 Oracle:Flying\nRimefeather Owl's power and toughness are each equal to the number of snow permanents on the battlefield.\n{1}{S}: Put an ice counter on target permanent.\nPermanents with ice counters on them are snow.
+SetInfo:CSP Rare

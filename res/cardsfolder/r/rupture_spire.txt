@@ -6,9 +6,10 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ 1 | UnlessPayer$ You
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:NeedsToPlay:Land.untapped+YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rupture_spire.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/124.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/285.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/144.jpg
 Oracle:Rupture Spire enters the battlefield tapped.\nWhen Rupture Spire enters the battlefield, sacrifice it unless you pay {1}.\n{T}: Add one mana of any color to your mana pool.
+SetInfo:PC2 Common
+SetInfo:H09 Common
+SetInfo:COM Common
+SetInfo:DDH Common
+SetInfo:CFX Common

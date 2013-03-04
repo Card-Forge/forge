@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Token | Cost$ 3 WU | TokenImage$ W 1 1 Kithkin Soldier | TokenAmount$ 2 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | ConditionManaSpent$ W | SubAbility$ UPaid | SpellDescription$ Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield if W was spent to cast CARDNAME. Counter up to one target creature spell if U was spent to cast CARDNAME. (Do both if W U was spent.)
 SVar:UPaid:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | ConditionManaSpent$ U
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repel_intruders.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/147.jpg
 Oracle:Put two 1/1 white Kithkin Soldier creature tokens onto the battlefield if {W} was spent to cast Repel Intruders. Counter up to one target creature spell if {U} was spent to cast Repel Intruders. (Do both if {W}{U} was spent.)
+SetInfo:SHM Uncommon

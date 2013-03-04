@@ -2,18 +2,18 @@ Name:Rod of Ruin
 ManaCost:4
 Types:Artifact
 A:AB$ DealDamage | Cost$ 3 T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rod_of_ruin.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/312.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/268.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/270.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/314.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/396.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/362.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/307.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/341.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/219.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/309.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/273.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/269.jpg
 Oracle:{3}, {T}: Rod of Ruin deals 1 damage to target creature or player.
+SetInfo:8ED Uncommon
+SetInfo:2ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:6ED Uncommon
+SetInfo:S00 Uncommon
+SetInfo:M10 Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

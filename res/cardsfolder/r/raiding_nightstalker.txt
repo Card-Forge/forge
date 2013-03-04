@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Creature Nightstalker
 PT:2/2
 K:Swampwalk
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6558.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/24.jpg
 Oracle:Swampwalk
+SetInfo:PO2 Common

@@ -4,7 +4,6 @@ Types:Legendary Creature Giant Warrior
 Text:At the beginning of combat on your turn, choose an opponent at random. CARDNAME attacks that player this combat if able.
 PT:7/7
 K:CARDNAME attacks each turn if able.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruhan_of_the_fomori.jpg
-SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/221.jpg
 Oracle:At the beginning of combat on your turn, choose an opponent at random. Ruhan of the Fomori attacks that player this combat if able.
+SetInfo:COM Mythic

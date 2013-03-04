@@ -6,5 +6,5 @@ K:ETBReplacement:Other:DBChooseBasic
 SVar:DBChooseBasic:DB$ ChooseType | Type$ Basic Land | AILogic$ MostNeededType | SpellDescription$ As CARDNAME enters the battlefield, choose a basic land type.
 S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ ChosenType | Description$ Lands you control are the chosen type in addition to their other types.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/realmwright.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/45.jpg
 Oracle:As Realmwright enters the battlefield, choose a basic land type.\nLands you control are the chosen type in addition to their other types.
+SetInfo:GTC Rare

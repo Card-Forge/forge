@@ -3,7 +3,6 @@ ManaCost:3 W
 Types:Instant
 K:Flashback 4 W W
 A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment. | SpellDescription$ Destroy target artifact or enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_distortion.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/42.jpg
 Oracle:Destroy target artifact or enchantment.\nFlashback {4}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:ODY Common

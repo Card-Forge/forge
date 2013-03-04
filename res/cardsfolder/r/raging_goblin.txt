@@ -3,16 +3,16 @@ ManaCost:R
 Types:Creature Goblin Berserker
 PT:1/1
 K:Haste
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83218.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/212.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/153.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/96.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/211.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/150.jpg|2
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/209.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/224.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/114.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/200.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/114.jpg
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)
+SetInfo:PO2 Common
+SetInfo:S99 Common
+SetInfo:7ED Common
+SetInfo:6ED Common
+SetInfo:9ED Common
+SetInfo:10E Common
+SetInfo:M10 Common
+SetInfo:EXO Common
+SetInfo:8ED Common
+SetInfo:EVG Common
+SetInfo:POR Common x2

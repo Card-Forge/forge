@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Instant
 A:SP$Phases | Cost$ 1 U | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature or land | IsCurse$ True | SpellDescription$ Target artifact, creature, or land phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during his or her next untap step.)
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_ripple.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/87.jpg
 Oracle:Target artifact, creature, or land phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during his or her next untap step.)
+SetInfo:MIR Common

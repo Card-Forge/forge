@@ -2,7 +2,6 @@ Name:Razorfield Thresher
 ManaCost:7
 Types:Artifact Creature Construct
 PT:6/4
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorfield_thresher.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/197.jpg
 Oracle:
+SetInfo:SOM Common

@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Creature Spider
 PT:1/4
 K:Reach
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24653.jpg
-SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/121.jpg
 Oracle:Reach (This creature can block creatures with flying.)
+SetInfo:PCY Common

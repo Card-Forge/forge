@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:2/2
 A:AB$ Dig | Cost$ 2 U | DigNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0 | SpellDescription$ Look at the top card of your library. You may put that card into your graveyard.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rummaging_wizard.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/110.jpg
 Oracle:{2}{U}: Look at the top card of your library. You may put that card into your graveyard.
+SetInfo:ONS Uncommon

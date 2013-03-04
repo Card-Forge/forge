@@ -6,7 +6,6 @@ SVar:TrigToken:AB$Token | Cost$ X | TokenAmount$ X | References$ X | TokenName$ 
 SVar:X:Count$xPaid
 A:AB$ PumpAll | Cost$ RW | ValidCards$ Creature.Red+YouCtrl,Creature.White+YouCtrl | KW$ First Strike | SpellDescription$ Red creatures and white creatures you control gain first strike until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rise_of_the_hobgoblins.jpg
-SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/145.jpg
 Oracle:When Rise of the Hobgoblins enters the battlefield, you may pay {X}. If you do, put X 1/1 red and white Goblin Soldier creature tokens onto the battlefield.\n{R/W}: Red creatures and white creatures you control gain first strike until end of turn.
+SetInfo:EVE Rare

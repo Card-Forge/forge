@@ -7,8 +7,7 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered |
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_aura.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/120.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/45.jpg
 Oracle:{W}, Pay 2 life: The next time a source of your choice would deal damage to you this turn, prevent that damage.
+SetInfo:MMQ Uncommon
+SetInfo:VIS Common

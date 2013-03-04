@@ -7,7 +7,6 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered |
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_circle.jpg
-SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/19.jpg
 Oracle:{1}: Any player may pay {1}. If no one does, the next time a source of your choice would deal damage to you this turn, prevent that damage.
+SetInfo:PCY Common

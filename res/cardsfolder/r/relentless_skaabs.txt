@@ -6,5 +6,5 @@ PT:4/4
 K:Undying
 SVar:FullCost:3 U U ExileFromGrave<1/Creature>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relentless_skaabs.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/45.jpg
 Oracle:As an additional cost to cast Relentless Skaabs, exile a creature card from your graveyard.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+SetInfo:DKA Uncommon

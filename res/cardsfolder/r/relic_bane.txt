@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Artifact | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddTrigger$ TrigLoseLife | AddSVar$ RelicBaneLoseLife | Description$ Enchanted artifact has "At the beginning of your upkeep, you lose 2 life."
 SVar:TrigLoseLife:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ RelicBaneLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
 SVar:RelicBaneLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ 2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_bane.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/76.jpg
 Oracle:Enchant artifact\nEnchanted artifact has "At the beginning of your upkeep, you lose 2 life."
+SetInfo:MRD Uncommon

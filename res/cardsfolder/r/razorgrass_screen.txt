@@ -4,7 +4,6 @@ Types:Artifact Creature Wall
 PT:2/1
 K:Defender
 K:CARDNAME blocks each turn if able.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorgrass_screen.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/145.jpg
 Oracle:Defender (This creature can't attack.)\nRazorgrass Screen blocks each turn if able.
+SetInfo:5DN Common

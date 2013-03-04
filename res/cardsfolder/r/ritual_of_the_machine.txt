@@ -3,7 +3,6 @@ ManaCost:2 B B
 Types:Sorcery
 A:SP$ GainControl | Cost$ 2 B B Sac<1/Creature> | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$Select target nonartifact, nonblack creature | SpellDescription$ Gain control of target nonblack, nonartifact creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ritual_of_the_machine.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/24.jpg
 Oracle:As an additional cost to cast Ritual of the Machine, sacrifice a creature.\nGain control of target nonartifact, nonblack creature.
+SetInfo:ALL Rare

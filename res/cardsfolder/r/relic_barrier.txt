@@ -3,8 +3,7 @@ ManaCost:2
 Types:Artifact
 A:AB$ Tap | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Tap target artifact.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_barrier.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/147.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/237.jpg
 Oracle:{T}: Tap target artifact.
+SetInfo:LEG Uncommon
+SetInfo:5DN Uncommon

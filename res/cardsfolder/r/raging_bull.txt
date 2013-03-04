@@ -2,7 +2,6 @@ Name:Raging Bull
 ManaCost:2 R
 Types:Creature Ox
 PT:2/2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_bull.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/160.jpg
 Oracle:
+SetInfo:LEG Common

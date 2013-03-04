@@ -10,7 +10,6 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 4 | ConditionCheckSVar
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rust_elemental.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/234.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice an artifact other than Rust Elemental. If you can't, tap Rust Elemental and you lose 4 life.
+SetInfo:MRD Uncommon

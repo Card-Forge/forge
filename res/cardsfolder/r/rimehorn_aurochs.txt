@@ -10,7 +10,6 @@ A:AB$ Pump | Cost$ 2 S | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:DBMustBlock:DB$ MustBlock | DefinedAttacker$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature to block
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimehorn_aurochs.jpg
-SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/118.jpg
 Oracle:Trample\nWhenever Rimehorn Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.\n{2}{S}: Target creature blocks target creature this turn if able. ({S} can be paid with one mana from a snow permanent.)
+SetInfo:CSP Uncommon

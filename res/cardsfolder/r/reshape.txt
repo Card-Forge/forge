@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ X U U Sac<1/Artifact> | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcLEX | References$ X | ChangeNum$ 1 | Shuffle$ True | SpellDescription$ Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reshape.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/31.jpg
 Oracle:As an additional cost to cast Reshape, sacrifice an artifact.\nSearch your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
+SetInfo:DST Rare

@@ -6,7 +6,7 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you may gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recumbent_bliss.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/13.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.\nAt the beginning of your upkeep, you may gain 1 life.
+SetInfo:DDH Common
+SetInfo:EVE Common

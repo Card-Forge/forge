@@ -3,7 +3,6 @@ ManaCost:R G
 Types:Creature Human Warrior
 PT:2/2
 K:Haste
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rip_clan_crasher.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/189.jpg
 Oracle:Haste
+SetInfo:ALA Common

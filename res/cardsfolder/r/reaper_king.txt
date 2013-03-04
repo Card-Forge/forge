@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Scarec
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reaper_king.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/260.jpg
 Oracle:({2/W} can be paid with any two mana or with {W}. This card's converted mana cost is 10.)\nOther Scarecrow creatures you control get +1/+1.\nWhenever another Scarecrow enters the battlefield under your control, destroy target permanent.
+SetInfo:SHM Rare

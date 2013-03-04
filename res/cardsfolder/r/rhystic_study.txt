@@ -3,7 +3,6 @@ ManaCost:2 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a spell, you may draw a card unless that player pays 1.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | UnlessCost$ 1 | UnlessPayer$ TriggeredPlayer | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_study.jpg
-SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/45.jpg
 Oracle:Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.
+SetInfo:PCY Common

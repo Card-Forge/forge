@@ -4,9 +4,8 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Wall | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ Wall creatures can attack as though they didn't have defender.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_stones.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/38.jpg
-SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/111.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/35.jpg
 Oracle:Wall creatures can attack as though they didn't have defender.
+SetInfo:8ED Rare
+SetInfo:7ED Rare
+SetInfo:STH Rare

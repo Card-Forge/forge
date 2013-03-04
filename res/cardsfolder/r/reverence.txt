@@ -2,7 +2,6 @@ Name:Reverence
 ManaCost:2 W W
 Types:Enchantment
 S:Mode$ CantAttack | ValidCard$ Creature.powerLE2 | Target$ You | Description$ Creatures with power 2 or less can't attack you.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverence.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/26.jpg
 Oracle:Creatures with power 2 or less can't attack you.
+SetInfo:SOK Rare

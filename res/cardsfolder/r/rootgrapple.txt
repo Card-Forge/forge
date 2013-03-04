@@ -4,7 +4,6 @@ Types:Tribal Instant Treefolk
 A:SP$ Destroy | Cost$ 4 G | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | SubAbility$ DBDraw | SpellDescription$ Destroy target noncreature permanent. If you control a Treefolk, draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | ConditionPresent$ Treefolk.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Treefolk,
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootgrapple.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/234.jpg
 Oracle:Destroy target noncreature permanent. If you control a Treefolk, draw a card.
+SetInfo:LRW Common

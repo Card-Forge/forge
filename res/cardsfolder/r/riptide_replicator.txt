@@ -9,7 +9,6 @@ SVar:X:Count$xPaid
 A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ ChosenType | TokenTypes$ Creature,ChosenType | TokenOwner$ You | TokenColors$ ChosenColor | TokenPower$ Y | TokenToughness$ Y | References$ Y | TokenImage$ C X X Riptide Replicator | SpellDescription$ Put an X/X creature token of the chosen color and type onto the battlefield, where X is the number of charge counters on CARDNAME.
 SVar:Y:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_replicator.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/309.jpg
 Oracle:As Riptide Replicator enters the battlefield, choose a color and a creature type.\nRiptide Replicator enters the battlefield with X charge counters on it.\n{4}, {T}: Put an X/X creature token of the chosen color and type onto the battlefield, where X is the number of charge counters on Riptide Replicator.
+SetInfo:ONS Rare

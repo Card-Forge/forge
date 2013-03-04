@@ -2,8 +2,7 @@ Name:Recollect
 ManaCost:2 G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recollect.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/178.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/289.jpg
 Oracle:Return target card from your graveyard to your hand.
+SetInfo:RAV Uncommon
+SetInfo:10E Uncommon
