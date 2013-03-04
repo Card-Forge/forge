@@ -8,7 +8,6 @@ SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execu
 SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
 SVar:TrigDestroyBlocked:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_asp.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/94.jpg
 Oracle:Whenever Tangle Asp blocks or becomes blocked by a creature, destroy that creature at end of combat.
+SetInfo:5DN Common

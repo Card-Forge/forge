@@ -6,7 +6,6 @@ A:AB$ DelayedTrigger | Cost$ W Sac<1/CARDNAME> | Mode$ Phase | Phase$ End of Tur
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transluminant.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/186.jpg
 Oracle:{W}, Sacrifice Transluminant: Put a 1/1 white Spirit creature token with flying onto the battlefield at the beginning of the next end step.
+SetInfo:RAV Common

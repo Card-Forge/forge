@@ -7,7 +7,6 @@ T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ C
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_sentry.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/38a.jpg
 Oracle:Vigilance\nWhenever another creature you control dies, you may transform Thraben Sentry.
 
 ALTERNATE
@@ -19,5 +18,5 @@ Types:Creature Human Soldier
 PT:5/4
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_militia.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/38b.jpg
 Oracle:Trample
+SetInfo:ISD Common

@@ -3,7 +3,6 @@ ManaCost:3 PU
 Types:Sorcery
 A:SP$ Draw | Cost$ 3 PU | Defined$ You | NumCards$ 2 | SubAbility$ DBProlif | SpellDescription$ Draw two cards, then proliferate.
 SVar:DBProlif:DB$Proliferate
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzerets_gambit.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/47.jpg
 Oracle:({U/P} can be paid with either {U} or 2 life.)\nDraw two cards, then proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
+SetInfo:NPH Uncommon

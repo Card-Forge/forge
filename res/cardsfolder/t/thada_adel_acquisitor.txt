@@ -8,7 +8,6 @@ SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Ex
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent | PumpZone$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thada_adel_acquisitor.jpg
-SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/40.jpg
 Oracle:Islandwalk\nWhenever Thada Adel, Acquisitor deals combat damage to a player, search that player's library for an artifact card and exile it. Then that player shuffles his or her library. Until end of turn, you may play that card.
+SetInfo:WWK Rare

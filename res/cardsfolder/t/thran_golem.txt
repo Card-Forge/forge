@@ -4,10 +4,9 @@ Types:Artifact Creature Golem
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying & First Strike & Trample | Description$ As long as CARDNAME is enchanted, it gets +2/+2 and has flying, first strike, and trample.
 SVar:EnchantMe:Once
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_golem.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/114.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/141.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/220.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/313.jpg
 Oracle:As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.
+SetInfo:PC2 Uncommon
+SetInfo:M12 Uncommon
+SetInfo:UDS Rare
+SetInfo:9ED Rare

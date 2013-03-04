@@ -5,7 +5,6 @@ A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBPain | SpellDescription$ Add 
 SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0
 A:AB$ Token | Cost$ 2 B B T Sac<All/Land> | TokenAmount$ 1 | TokenController$ You | TokenName$ Urami | TokenTypes$ Legendary,Creature,Demon,Spirit | TokenColors$ Black | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying | CostDesc$ 2  B  B, T, Sacrifice all lands you control: | SpellDescription$ Put a legendary 5/5 black Demon Spirit creature token with flying named Urami onto the battlefield.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tomb_of_urami.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/165.jpg
 Oracle:{T}: Add {B} to your mana pool. Tomb of Urami deals 1 damage to you if you don't control an Ogre.\n{2}{B}{B}, {T}, Sacrifice all lands you control: Put a legendary 5/5 black Demon Spirit creature token with flying named Urami onto the battlefield.
+SetInfo:SOK Rare

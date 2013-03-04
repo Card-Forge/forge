@@ -8,7 +8,6 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ 2 | Defined$ TriggeredActivat
 SVar:ThoughtX:Count$ImprintedCardManaCost
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_prison.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/261.jpg
 Oracle:Imprint - When Thought Prison enters the battlefield, you may have target player reveal his or her hand. If you do, choose a nonland card from it and exile that card.\nWhenever a player casts a spell that shares a color or converted mana cost with the exiled card, Thought Prison deals 2 damage to that player.
+SetInfo:MRD Uncommon

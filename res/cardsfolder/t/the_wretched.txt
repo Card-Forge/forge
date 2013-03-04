@@ -4,9 +4,8 @@ Types:Creature Demon
 PT:2/5
 T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | Execute$ TrigGainControl | TriggerZones$ Battlefield | TriggerDescription$ At end of combat, gain control of all creatures blocking CARDNAME for as long as you control CARDNAME.
 SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | AllValid$ Card.blockingSource | LoseControl$ LoseControl,LeavesPlay
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_wretched.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/59.jpg
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/11.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/35.jpg
 Oracle:At end of combat, gain control of all creatures blocking The Wretched for as long as you control The Wretched.
+SetInfo:5ED Rare
+SetInfo:CHR Rare
+SetInfo:LEG Rare

@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Legendary Land
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ At the beginning of your upkeep, destroy CARDNAME unless you pay 1 | Description$ All creatures have "At the beginning of your upkeep, destroy this creature unless you pay 1."
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_tabernacle_at_pendrell_vale.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/252.jpg
 Oracle:All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."
+SetInfo:LEG Rare

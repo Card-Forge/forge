@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ R | ValidTgts$ Permanent.YouCtrl,Permanent.YouOwn | TgtPrompt$ Select target permanent you own or control | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target permanent you own or control. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telimtors_edict.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/198.jpg
 Oracle:Exile target permanent you own or control.\nDraw a card at the beginning of the next turn's upkeep.
+SetInfo:MIR Rare

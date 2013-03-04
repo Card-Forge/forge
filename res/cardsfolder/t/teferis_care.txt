@@ -4,7 +4,6 @@ Types:Enchantment
 A:AB$ Destroy | Cost$ W Sac<1/Enchantment> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 A:AB$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target Enchantment | ValidTgts$ Enchantment | SpellDescription$ Counter target enchantment spell.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_care.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/43.jpg
 Oracle:{W}, Sacrifice an enchantment: Destroy target enchantment.\n{3}{U}{U}: Counter target enchantment spell.
+SetInfo:INV Uncommon

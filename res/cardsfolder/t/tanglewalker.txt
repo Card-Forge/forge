@@ -4,7 +4,6 @@ Types:Creature Dryad
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ Each creature you control is unblockable as long as defending player controls an artifact land.
 SVar:X:Count$Valid Land.Artifact+YouDontCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tanglewalker.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/86.jpg
 Oracle:Each creature you control is unblockable as long as defending player controls an artifact land.
+SetInfo:DST Uncommon

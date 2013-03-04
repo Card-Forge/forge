@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Creature Beast
 PT:2/4
 K:Reach
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/towering_indrik.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/137.jpg
 Oracle:Reach (This creature can block creatures with flying.)
+SetInfo:RTR Common

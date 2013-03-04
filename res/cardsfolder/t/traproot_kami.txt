@@ -6,7 +6,6 @@ K:Defender
 K:Reach
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Forests on the battlefield.
 SVar:X:Count$Valid Forest
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traproot_kami.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/147.jpg
 Oracle:Defender; reach (This creature can block creatures with flying.)\nTraproot Kami's toughness is equal to the number of Forests on the battlefield.
+SetInfo:BOK Common

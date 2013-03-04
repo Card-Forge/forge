@@ -3,7 +3,6 @@ ManaCost:B
 Types:Sorcery
 A:SP$ Discard | Cost$ B | ValidTgts$ Player | NumCards$ 1 | DiscardValid$ Card.nonLand | Mode$ RevealYouChoose | SubAbility$ DBLoseLife | SpellDescription$ Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145969.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/145.jpg
 Oracle:Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
+SetInfo:LRW Rare

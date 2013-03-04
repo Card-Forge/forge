@@ -3,7 +3,6 @@ ManaCost:4 R R
 Types:Instant
 K:Miracle:R
 A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or player.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderous_wrath.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/160.jpg
 Oracle:Thunderous Wrath deals 5 damage to target creature or player.\nMiracle {R} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
+SetInfo:AVR Uncommon

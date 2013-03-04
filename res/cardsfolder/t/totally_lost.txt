@@ -2,7 +2,6 @@ Name:Totally Lost
 ManaCost:4 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination $ Library | LibraryPosition$ 0 | SpellDescription$ Put target nonland permanent on top of its owner's library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/totally_lost.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/54.jpg
 Oracle:Put target nonland permanent on top of its owner's library.
+SetInfo:GTC Common

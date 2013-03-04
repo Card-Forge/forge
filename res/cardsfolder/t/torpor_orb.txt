@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact
 S:Mode$ Continuous | GlobalRule$ Creatures entering the battlefield don't cause abilities to trigger. | Description$ Creatures entering the battlefield don't cause abilities to trigger.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torpor_orb.jpg
-SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/162.jpg
 Oracle:Creatures entering the battlefield don't cause abilities to trigger.
+SetInfo:NPH Rare

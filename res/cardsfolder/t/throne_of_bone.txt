@@ -4,15 +4,14 @@ Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a black spell, you may pay 1. If you do, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 1 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throne_of_bone.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/317.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/273.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/275.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/322.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/403.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/371.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/316.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/279.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/274.jpg
 Oracle:Whenever a player casts a black spell, you may pay {1}. If you do, you gain 1 life.
+SetInfo:8ED Uncommon
+SetInfo:2ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:6ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

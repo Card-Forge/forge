@@ -3,7 +3,6 @@ ManaCost:4 PG PG
 Types:Artifact Creature Beast
 PT:5/4
 K:Trample
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundering_tanadon.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/122.jpg
 Oracle:({G/P} can be paid with either {G} or 2 life.)\nTrample
+SetInfo:NPH Common

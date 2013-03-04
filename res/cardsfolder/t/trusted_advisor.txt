@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ 2 | Description$ Your max
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a blue creature you control to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.Blue+YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trusted_advisor.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/59.jpg
 Oracle:Your maximum hand size is increased by two.\nAt the beginning of your upkeep, return a blue creature you control to its owner's hand.
+SetInfo:SOK Uncommon

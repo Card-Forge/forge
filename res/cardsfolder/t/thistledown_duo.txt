@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZ
 SVar:TrigPump11:AB$Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
 SVar:TrigPumpKW:AB$Pump | Cost$ 0 | KW$ Flying | Defined$ Self
 SVar:BuffedBy:Card.White,Card.Blue
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/152.jpg
 Oracle:Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.\nWhenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
+SetInfo:SHM Common

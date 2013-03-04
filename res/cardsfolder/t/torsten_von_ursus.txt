@@ -2,7 +2,6 @@ Name:Torsten Von Ursus
 ManaCost:3 W G G
 Types:Legendary Creature Human Soldier
 PT:5/5
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1693.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/306.jpg
 Oracle:
+SetInfo:LEG Uncommon

@@ -4,7 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add W to your mana pool. Activate this ability only if you control a Swamp.
 A:AB$ Mana | Cost$ T | Produced$ B | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add B to your mana pool. Activate this ability only if you control a Swamp.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_field.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/140.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {W} or {B} to your mana pool. Activate this ability only if you control a Swamp.
+SetInfo:TOR Uncommon

@@ -10,5 +10,5 @@ SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/takenuma.jpg
-SetInfo:PC2|Common|http://magiccards.info/extras/plane/planechase-2012-edition/takenuma.jpg
 Oracle:Whenever a creature leaves the battlefield, its controller draws a card.\nWhenever you roll {C}, return target creature you control to its owner's hand.
+SetInfo:PC2 Common

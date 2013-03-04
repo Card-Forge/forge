@@ -10,5 +10,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:TaintedCheck:Count$ValidHand Card.IsImprinted
 SVar:CheckName:Imprinted$Valid Card.sharesNameWith Remembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_pact.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/164.jpg
 Oracle:Exile the top card of your library. You may put that card into your hand unless it has the same name as another card exiled this way. Repeat this process until you put a card into your hand or you exile two cards with the same name, whichever comes first.
+SetInfo:ODY Rare

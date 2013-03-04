@@ -4,7 +4,6 @@ Types:Creature Faerie
 PT:1/1
 K:Flying
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornwind_faeries.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/44.jpg
 Oracle:Flying\n{T}: Thornwind Faeries deals 1 damage to target creature or player.
+SetInfo:ULG Common

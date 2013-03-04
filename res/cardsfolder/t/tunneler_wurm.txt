@@ -3,7 +3,6 @@ ManaCost:6 G G
 Types:Creature Wurm
 PT:6/6
 A:AB$ Regenerate | Cost$ Discard<1/Card> | Defined$ Self | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tunneler_wurm.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/135.jpg
 Oracle:Discard a card: Regenerate Tunneler Wurm.
+SetInfo:JUD Uncommon

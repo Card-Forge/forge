@@ -3,11 +3,10 @@ ManaCost:R
 Types:Instant
 A:SP$ Destroy | Cost$ R | ValidTgts$ Creature.Wall | TgtPrompt$ Select target Wall | NoRegen$ True | SpellDescription$ Destroy target Wall. It can't be regenerated.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tunnel.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/179.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/180.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/180.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/245.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/179.jpg
 Oracle:Destroy target Wall. It can't be regenerated.
+SetInfo:LEB Uncommon
+SetInfo:4ED Uncommon
+SetInfo:LEA Uncommon
+SetInfo:3ED Uncommon
+SetInfo:2ED Uncommon

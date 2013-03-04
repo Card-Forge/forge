@@ -5,7 +5,7 @@ A:SP$ ChooseType | Cost$ X 2 G | References$ X | Defined$ You | Type$ Creature |
 SVar:TribalPump:DB$ PumpAll | ValidCards$ Creature.ChosenType | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tribal_unity.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/294.jpg
 Oracle:Creatures of the creature type of your choice get +X/+X until end of turn.
+SetInfo:ONS Uncommon
+SetInfo:HOP Uncommon

@@ -7,7 +7,6 @@ SVar:X:Count$OppLifeTotal
 SVar:CreatureYouControl:Count$Valid Creature.YouCtrl
 SVar:CreatureOppControl:Count$Valid Creature.YouDontCtrl
 SVar:AIPlayForSub:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timely_reinforcements.jpg
 Oracle:If you have less life than an opponent, you gain 6 life. If you control fewer creatures than an opponent, put three 1/1 white Soldier creature tokens onto the battlefield.
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/40.jpg
+SetInfo:M12 Uncommon

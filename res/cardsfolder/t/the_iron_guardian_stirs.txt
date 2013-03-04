@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, put a 4/6 colorless Golem creature token onto the battlefield.
 SVar:DarkEffect:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 4 | TokenToughness$ 6
-SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/the_iron_guardian_stirs.jpg
-SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/the-iron-guardian-stirs.jpg
 Oracle:When you set this scheme in motion, put a 4/6 colorless Golem artifact creature token onto the battlefield.
+SetInfo:ARC Common

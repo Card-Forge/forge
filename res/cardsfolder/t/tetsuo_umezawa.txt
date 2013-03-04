@@ -4,7 +4,6 @@ Types:Legendary Creature Human Archer
 PT:3/3
 K:CARDNAME can't be the target of Aura spells.
 A:AB$ Destroy | Cost$ U B B R T | ValidTgts$ Creature.tapped,Creature.blocking | TgtPrompt$ Select target tapped or blocking creature | SpellDescription$ Destroy target tapped or blocking creature.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tetsuo_umezawa.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/302.jpg
 Oracle:Tetsuo Umezawa can't be the target of Aura spells.\n{U}{B}{B}{R}, {T}: Destroy target tapped or blocking creature.
+SetInfo:LEG Rare

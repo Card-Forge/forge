@@ -4,7 +4,7 @@ Types:Creature Elf
 PT:1/2
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | References$ X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Elf
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card45121.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/140.jpg
 Oracle:{T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+SetInfo:LGN Common
+SetInfo:EVG Common

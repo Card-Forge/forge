@@ -10,7 +10,6 @@ SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$TypeInYourLibrary.Land
 SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trench_gorger.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/65.jpg
 Oracle:Trample\nWhen Trench Gorger enters the battlefield, you may search your library for any number of land cards, exile them, then shuffle your library. If you do, Trench Gorger's power and toughness each become equal to the number of cards exiled this way.
+SetInfo:COM Rare

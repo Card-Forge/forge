@@ -4,8 +4,10 @@ Types:Creature Zombie Mutant
 PT:5/3
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 K:TypeCycling:Swamp:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twisted_abomination.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/76.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/50.jpg
 Oracle:{B}: Regenerate Twisted Abomination.\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.)
+SetInfo:PD3 Common
+SetInfo:SCG Common
+SetInfo:ARC Common
+SetInfo:TSB Special
+SetInfo:DDD Common

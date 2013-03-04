@@ -7,9 +7,7 @@ SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 #If the value of AlternateMode isn't Flip or DoubleFaced, it will be the name of the state defined below, so you can switch to it with SetState+NewState$.The name of the first state defined is always "Original".
 AlternateMode:Licid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_licid.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/72.jpg
 Oracle:{G}, {T}: CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.\nAll creatures able to block enchanted creature do so.
 
 ALTERNATE
@@ -24,7 +22,6 @@ A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.
 A:AB$ SetState | Cost$ G | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_licid.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/72.jpg
 Oracle:{G}, {T}: CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.\nAll creatures able to block enchanted creature do so.
+SetInfo:STH Uncommon

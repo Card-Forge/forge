@@ -2,7 +2,6 @@ Name:Thraben Purebloods
 ManaCost:4 W
 Types:Creature Hound
 PT:3/5
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_purebloods.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/37.jpg
 Oracle:
+SetInfo:ISD Common

@@ -3,7 +3,6 @@ ManaCost:R W
 Types:Creature Human Soldier
 PT:2/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't attack or block. | SpellDescription$ Target creature can't attack or block this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundersong_trumpeter.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/235.jpg
 Oracle:{T}: Target creature can't attack or block this turn.
+SetInfo:RAV Common

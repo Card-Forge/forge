@@ -4,7 +4,6 @@ Types:Legendary Creature Human Soldier
 PT:2/1
 K:First Strike
 S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost 1 more to cast.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalia_guardian_of_thraben.jpg
 Oracle:First Strike\nNoncreature spells cost {1} more to cast.
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/24.jpg
+SetInfo:DKA Rare

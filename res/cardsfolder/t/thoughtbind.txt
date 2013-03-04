@@ -2,7 +2,6 @@ Name:Thoughtbind
 ManaCost:2 U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell with CMC 4 or less | ValidTgts$ Card.cmcLE4 | SpellDescription$ Counter target spell with converted mana cost 4 or less.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtbind.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/96.jpg
 Oracle:Counter target spell with converted mana cost 4 or less.
+SetInfo:CHK Common

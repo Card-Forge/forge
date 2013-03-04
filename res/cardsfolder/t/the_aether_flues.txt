@@ -13,5 +13,5 @@ SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_aether_flues.jpg
-SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/the-aether-flues.jpg
 Oracle:When you planeswalk to The AEther Flues or at the beginning of your upkeep, you may sacrifice a creature. If you do, reveal cards from the top of your library until you reveal a creature card, put that card onto the battlefield, then shuffle all other cards revealed this way into your library.\nWhenever you roll {C}, you may put a creature card from your hand onto the battlefield.
+SetInfo:HOP Common

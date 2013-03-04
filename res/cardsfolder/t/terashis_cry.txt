@@ -2,7 +2,6 @@ Name:Terashi's Cry
 ManaCost:3 W
 Types:Sorcery Arcane
 A:SP$ Tap | Cost$ 3 W | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SpellDescription$ Tap up to three target creatures.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terashis_cry.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/47.jpg
 Oracle:Tap up to three target creatures.
+SetInfo:CHK Common

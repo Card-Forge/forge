@@ -6,7 +6,6 @@ K:Flying
 K:Kicker 1 W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target enchantment.
 SVar:TrigKicker:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_emissary.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/81.jpg
 Oracle:Kicker {1}{W} (You may pay an additional {1}{W} as you cast this spell.)\nFlying\nWhen Tolarian Emissary enters the battlefield, if it was kicked, destroy target enchantment.
+SetInfo:INV Uncommon

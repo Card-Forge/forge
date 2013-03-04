@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:EachOpponent:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TemptingChange
 SVar:TemptingChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact,Creature,Enchantment,Land | DefinedPlayer$ Remembered | ChangeNum$ X | References$ X
 SVar:X:Count$ValidHand Artifact.RememberedPlayerCtrl,Creature.RememberedPlayerCtrl,Enchantment.RememberedPlayerCtrl,Land.RememberedPlayerCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_wurm.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/291.jpg
 Oracle:When Tempting Wurm enters the battlefield, each opponent may put any number of artifact, creature, enchantment, and/or land cards from his or her hand onto the battlefield.
+SetInfo:ONS Rare

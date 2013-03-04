@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:AltCost:Cost$ Return<3/Island>
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thwart.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/108.jpg
 Oracle:You may return three Islands you control to their owner's hand rather than pay Thwart's mana cost.\nCounter target spell.
+SetInfo:MMQ Uncommon

@@ -3,12 +3,11 @@ ManaCost:3 G
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 3 G | ValidCards$ Island | SpellDescription$ Destroy all Islands.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tsunami.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/130.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/130.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/196.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/162.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/129.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/130.jpg
 Oracle:Destroy all Islands.
+SetInfo:2ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

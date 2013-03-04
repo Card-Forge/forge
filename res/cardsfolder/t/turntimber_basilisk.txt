@@ -5,7 +5,6 @@ PT:2/1
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigProvoke | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you may have target creature block CARDNAME this turn if able.
 SVar:TrigProvoke:AB$ MustBlock | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turntimber_basilisk.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/190.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nLandfall - Whenever a land enters the battlefield under your control, you may have target creature block Turntimber Basilisk this turn if able.
+SetInfo:ZEN Uncommon

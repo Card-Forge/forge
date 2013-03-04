@@ -5,7 +5,6 @@ A:SP$ DealDamage | Cost$ X R R | NumDmg$ X | References$ X | ValidTgts$ Creature
 SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
 SVar:X:Count$xPaid
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titans_revenge.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/110.jpg
 Oracle:Titan's Revenge deals X damage to target creature or player. Clash with an opponent. If you win, return Titan's Revenge to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
+SetInfo:MOR Rare

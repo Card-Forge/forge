@@ -5,7 +5,6 @@ A:SP$ Effect | Cost$ 3 W W | Name$ Turn the Tables Effect | ReplacementEffects$ 
 SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature | ValidTarget$ You | ReplaceWith$ TurnTheTables | IsCombat$ True | Description$ All combat damage that would be dealt to you this turn is dealt to target attacking creature instead.
 SVar:TurnTheTables:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ ReturnedX
 SVar:ReturnedX:ReplaceCount$DamageAmount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_the_tables.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/18.jpg
 Oracle:All combat damage that would be dealt to you this turn is dealt to target attacking creature instead.
+SetInfo:DST Rare

@@ -3,7 +3,6 @@ ManaCost:5
 Types:Artifact Creature Golem
 PT:3/3
 A:AB$ Pump | Cost$ 1 W | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titanium_golem.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/263.jpg
 Oracle:{1}{W}: Titanium Golem gains first strike until end of turn.
+SetInfo:MRD Common
