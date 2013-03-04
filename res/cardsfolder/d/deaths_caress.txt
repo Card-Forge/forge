@@ -7,5 +7,5 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:IsHuman:Remembered$Valid Human
 SVar:Y:Remembered$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_caress.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/59.jpg
 Oracle:Destroy target creature. If that creature was a Human, you gain life equal to its toughness.
+SetInfo:DKA Common

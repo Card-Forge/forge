@@ -4,5 +4,5 @@ Types:Sorcery
 A:SP$ Token | Cost$ 4 R R | ValidTgts$ Player | TgtPrompt$ Select target player who would not get a token | AITgts$ Opponent | RememberTargets$ True | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ Player.IsNotRemembered | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying | StackDescription$ SpellDescription | SubAbility$ DBCleanup | SpellDescription$ Each player other than target player puts a 5/5 red Dragon creature token with flying onto the battlefield.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_by_dragons.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/118.jpg
 Oracle:Each player other than target player puts a 5/5 red Dragon creature token with flying onto the battlefield.
+SetInfo:COM Uncommon

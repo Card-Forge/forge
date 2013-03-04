@@ -4,7 +4,6 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 K:Cycling:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drifting_meadow.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/320.jpg
 Oracle:Drifting Meadow enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\nCycling {2} ({2}, Discard this card: Draw a card.)
+SetInfo:USG Common

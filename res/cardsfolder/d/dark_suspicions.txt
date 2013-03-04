@@ -2,11 +2,10 @@ Name:Dark Suspicions
 ManaCost:2 B B
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, that player loses X life, where X is the number of cards in that player's hand minus the number of cards in your hand.
-SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ X | Defined$ TriggeredPlayer | References$ A,B,X 
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ X | Defined$ TriggeredPlayer | References$ A,B,X
 SVar:A:Count$InYourHand
 SVar:B:TriggeredPlayer$CardsInHand
 SVar:X:SVar$B/Minus.A
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_suspicions.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/40.jpg
 Oracle:At the beginning of each opponent's upkeep, that player loses X life, where X is the number of cards in that player's hand minus the number of cards in your hand.
+SetInfo:PLS Rare

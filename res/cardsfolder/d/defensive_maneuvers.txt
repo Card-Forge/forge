@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ ChooseType | Cost$ 3 W | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice get +0/+4 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.ChosenType | NumDef$ 4
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defensive_maneuvers.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/23.jpg
 Oracle:Creatures of the creature type of your choice get +0/+4 until end of turn.
+SetInfo:ONS Common

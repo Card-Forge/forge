@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.EnchantedBy | Origin$ Battlefield | Destin
 SVar:TrigLose:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | LifeAmount$ X | References$ X | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dying_wish.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/64.jpg
 Oracle:Enchant creature you control\nWhen enchanted creature dies, target player loses X life and you gain X life, where X is its power.
+SetInfo:GTC Uncommon

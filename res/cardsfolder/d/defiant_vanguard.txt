@@ -7,8 +7,7 @@ T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execut
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ HIDDEN At the beginning of the end step, destroy CARDNAME.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump2 | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME blocks, at end of combat, destroy it and all creatures it blocked this turn.
 SVar:TrigPump2:AB$ Pump | Cost$ 0 | Defined$ Card.Self | KW$ HIDDEN At the beginning of the end step, destroy CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defiant_vanguard.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/5.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/7.jpg
 Oracle:When Defiant Vanguard blocks, at end of combat, destroy it and all creatures it blocked this turn.\n{5}, {T}: Search your library for a Rebel permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
+SetInfo:TSB Special
+SetInfo:NMS Uncommon

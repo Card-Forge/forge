@@ -7,7 +7,6 @@ SVar:DBSacCreature:DB$Sacrifice | Amount$ X | SacValid$ Creature | Defined$ Each
 SVar:DBSacLand:DB$Sacrifice | Amount$ X | SacValid$ Land | Defined$ Each | References$ X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_cloud.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/40.jpg
 Oracle:Each player loses X life, then discards X cards, then sacrifices X creatures, then sacrifices X lands.
+SetInfo:DST Rare

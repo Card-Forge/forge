@@ -5,7 +5,6 @@ A:SP$ Animate | Cost$ R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgt
 SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_song.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/141.jpg
 Oracle:Any number of target creatures become red until end of turn.
+SetInfo:LEG Uncommon

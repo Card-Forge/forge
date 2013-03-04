@@ -2,10 +2,9 @@ Name:Disentomb
 ManaCost:B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disentomb.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/94.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/92.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/89.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/93.jpg
 Oracle:Return target creature card from your graveyard to your hand.
+SetInfo:M11 Common
+SetInfo:M10 Common
+SetInfo:M13 Common
+SetInfo:M12 Common

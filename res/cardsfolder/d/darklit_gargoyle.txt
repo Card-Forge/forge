@@ -4,7 +4,6 @@ Types:Artifact Creature Gargoyle
 PT:1/2
 K:Flying
 A:AB$ Pump | Cost$ B | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ CARDNAME gets +2/-1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darklit_gargoyle.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/7.jpg
 Oracle:Flying\n{B}: Darklit Gargoyle gets +2/-1 until end of turn.
+SetInfo:CFX Common

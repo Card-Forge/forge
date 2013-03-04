@@ -4,7 +4,6 @@ Types:Creature Human Rogue
 PT:2/1
 K:First Strike
 K:Shroud
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deft_duelist.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/165.jpg
 Oracle:First strike\nShroud (This creature can't be the target of spells or abilities.)
+SetInfo:ALA Common

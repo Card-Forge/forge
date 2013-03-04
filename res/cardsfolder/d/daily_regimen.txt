@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ PutCounter | Cost$ 1 W | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on enchanted creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daily_regimen.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/8.jpg
 Oracle:Enchant creature\n{1}{W}: Put a +1/+1 counter on enchanted creature.
+SetInfo:MOR Uncommon

@@ -10,7 +10,6 @@ SVar:MoveChosen:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defi
 SVar:TrigCleanup:Mode$ Always | CheckSVar$ BreachX | SVarCompare$ EQ0 | Static$ True | Execute$ BreachCleanup | TriggerZones$ Command
 SVar:BreachCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:BreachX:Count$ValidExile Card.IsRemembered
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimensional_breach.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/9.jpg
 Oracle:Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards he or she owns to the battlefield.
+SetInfo:SCG Rare

@@ -2,8 +2,7 @@ Name:Darkness
 ManaCost:B
 Types:Instant
 A:SP$ Fog | Cost$ B | SpellDescription$ Prevent all combat damage that would be dealt this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkness.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/40.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/8.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.
+SetInfo:LEG Common
+SetInfo:TSB Special

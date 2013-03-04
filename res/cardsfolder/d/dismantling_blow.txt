@@ -4,7 +4,6 @@ Types:Instant
 K:Kicker 2 U
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact or enchantment. If CARDNAME was kicked, draw two cards.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | Condition$ Kicked | ConditionDescription$ If it was kicked,
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismantling_blow.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/14.jpg
 Oracle:Kicker {2}{U} (You may pay an additional {2}{U} as you cast this spell.)\nDestroy target artifact or enchantment.\nIf Dismantling Blow was kicked, draw two cards.
+SetInfo:INV Common

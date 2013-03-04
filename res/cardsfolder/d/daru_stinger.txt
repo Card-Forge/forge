@@ -5,7 +5,6 @@ PT:1/1
 K:Amplify:1:Human,Soldier
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of +1/+1 counters on it to target attacking or blocking creature.
 SVar:X:Count$CardCounters.P1P1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_stinger.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/10.jpg
 Oracle:Amplify 1 (As this creature enters the battlefield, put a +1/+1 counter on it for each Human and/or Soldier card you reveal in your hand.)\n{T}: Daru Stinger deals damage equal to the number of +1/+1 counters on it to target attacking or blocking creature.
+SetInfo:LGN Common

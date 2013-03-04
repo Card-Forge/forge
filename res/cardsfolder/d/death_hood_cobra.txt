@@ -4,7 +4,6 @@ Types:Creature Snake
 PT:2/2
 A:AB$ Pump | Cost$ 1 G | KW$ Reach | SpellDescription$ CARDNAME gains reach until end of turn. (It can block creatures with flying.)
 A:AB$ Pump | Cost$ 1 G | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_hood_cobra.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/108.jpg
 Oracle:{1}{G}: Death-Hood Cobra gains reach until end of turn. (It can block creatures with flying.)\n{1}{G}: Death-Hood Cobra gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
+SetInfo:NPH Common

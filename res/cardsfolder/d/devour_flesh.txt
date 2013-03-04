@@ -6,7 +6,6 @@ SVar:DBGainLife:DB$ GainLife | Defined$ Targeted | LifeAmount$ X | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardToughness
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devour_flesh.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/63.jpg
 Oracle:Target player sacrifices a creature, then gains life equal to that creature's toughness.
+SetInfo:GTC Common

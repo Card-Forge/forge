@@ -3,7 +3,6 @@ ManaCost:B
 Types:Creature Zombie
 PT:1/1
 A:AB$ Pump | Cost$ 1 U R | NumAtt$ +3 | KW$ Flying | SpellDescription$ CARDNAME gets +3/+0 and gains flying until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadwing.jpg
-SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/43.jpg
 Oracle:{1}{U}{R}: Dreadwing gets +3/+0 and gains flying until end of turn.
+SetInfo:CFX Uncommon

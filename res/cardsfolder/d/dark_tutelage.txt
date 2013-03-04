@@ -7,7 +7,6 @@ SVar:DBLose:DB$LoseLife | LifeAmount$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_tutelage.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/90.jpg
 Oracle:At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost.
+SetInfo:M11 Rare

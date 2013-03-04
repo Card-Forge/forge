@@ -4,10 +4,9 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_transformation.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/304.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/17.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/273.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/179.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3.
+SetInfo:5ED Uncommon
+SetInfo:LEG Rare
+SetInfo:6ED Uncommon
+SetInfo:4ED Uncommon

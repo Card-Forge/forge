@@ -3,7 +3,6 @@ ManaCost:1 W W
 Types:Instant
 K:Convoke
 A:SP$ ChangeZone | Cost$ 1 W W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature. | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking or blocking creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devouring_light.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/13.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nExile target attacking or blocking creature.
+SetInfo:RAV Uncommon

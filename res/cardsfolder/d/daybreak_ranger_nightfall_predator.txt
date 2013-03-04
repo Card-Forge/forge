@@ -7,7 +7,6 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ 
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daybreak_ranger.jpg
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/176a.jpg
 Oracle:{T}: Daybreak Ranger deals 2 damage to target creature with flying.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Daybreak Ranger.
 
 ALTERNATE
@@ -21,5 +20,5 @@ A:AB$ Fight | Cost$ R T | Defined$ Self | ValidTgts$ Creature | TgtPrompt$ Selec
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightfall_predator.jpg
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/176b.jpg
 Oracle:{R}, {T}: Nightfall Predator fights target creature. (Each deals damage equal to its power to the other.)\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Nightfall Predator.
+SetInfo:ISD Rare

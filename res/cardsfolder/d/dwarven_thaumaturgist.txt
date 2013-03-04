@@ -4,7 +4,6 @@ Types:Creature Dwarf Shaman
 PT:1/2
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | KW$ HIDDEN CARDNAME's power and toughness are switched | TgtPrompt$ Select target creature. | SpellDescription$ Switch target creature's power and toughness until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_thaumaturgist.jpg
-SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/98.jpg
 Oracle:{T}: Switch target creature's power and toughness until end of turn.
+SetInfo:WTH Rare

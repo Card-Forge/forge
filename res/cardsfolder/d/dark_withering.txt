@@ -3,7 +3,6 @@ ManaCost:4 B B
 Types:Instant
 A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
 K:Madness:B
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_withering.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/101.jpg
 Oracle:Destroy target nonblack creature.\nMadness {B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
+SetInfo:TSP Common

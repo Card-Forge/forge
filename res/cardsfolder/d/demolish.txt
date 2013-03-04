@@ -2,13 +2,12 @@ Name:Demolish
 ManaCost:3 R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demolish.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/183.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/183.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/121.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/179.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/132.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/196.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/132.jpg
 Oracle:Destroy target artifact or land.
+SetInfo:8ED Uncommon
+SetInfo:ODY Uncommon
+SetInfo:ZEN Common
+SetInfo:9ED Uncommon
+SetInfo:AVR Common
+SetInfo:10E Common
+SetInfo:M11 Common

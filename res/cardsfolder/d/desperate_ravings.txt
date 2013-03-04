@@ -4,7 +4,6 @@ Types:Instant
 K:Flashback 2 U
 A:SP$ Draw | Cost$ 1 R | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card at random.
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ Random
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_ravings.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/139.jpg
 Oracle:Draw two cards, then discard a card at random.\nFlashback {2}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:ISD Uncommon

@@ -4,7 +4,6 @@ Types:Creature Elemental
 PT:3/3
 K:Flying
 K:Prevent all damage that would be dealt to CARDNAME.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawn_elemental.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/7.jpg
 Oracle:Flying\nPrevent all damage that would be dealt to Dawn Elemental.
+SetInfo:SCG Rare

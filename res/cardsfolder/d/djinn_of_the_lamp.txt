@@ -3,7 +3,6 @@ ManaCost:5 U U
 Types:Creature Djinn
 PT:5/6
 K:Flying
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4260.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po/54.jpg
 Oracle:Flying
+SetInfo:POR Rare

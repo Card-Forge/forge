@@ -5,7 +5,6 @@ A:AB$ Token | Cost$ B ExileFromGrave<2/Creature> | TokenAmount$ 1 | TokenName$ S
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, destroy all Skeleton tokens. They can't be regenerated.
 SVar:ABRegen:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Skeleton.token | NoRegen$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drudge_spell.jpg
-SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/6.jpg
 Oracle:{B}, Exile two creature cards from your graveyard: Put a 1/1 black Skeleton creature token onto the battlefield. It has "{B}: Regenerate this creature."\nWhen Drudge Spell leaves the battlefield, destroy all Skeleton tokens. They can't be regenerated.
+SetInfo:HML Uncommon

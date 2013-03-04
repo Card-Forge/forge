@@ -5,7 +5,6 @@ K:Cumulative upkeep:PayLife<1>:Pay 1 life.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a green or white permanent.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Permanent.Green,Permanent.White | Defined$ TriggeredPlayer | SpellDescription$ Sacrifice a green or white permanent.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dystopia.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/6.jpg
 Oracle:Cumulative upkeep-Pay 1 life. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of each player's upkeep, that player sacrifices a green or white permanent.
+SetInfo:ALL Rare

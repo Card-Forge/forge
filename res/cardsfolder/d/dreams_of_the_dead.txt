@@ -4,7 +4,6 @@ Types:Enchantment
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.White+YouCtrl,Creature.Black+YouCtrl | TgtPrompt$ Select target white or black creature in your graveyard | SubAbility$ DBPump | SpellDescription$ Return target white or black creature card from your graveyard to the battlefield. That creature gains "Cumulative upkeep 2." If the creature would leave the battlefield, exile it instead of putting it anywhere else.
 SVar:DBPump:DB$ Pump | KW$ Cumulative upkeep:2 & HIDDEN If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else. | Defined$ Targeted | Permanent$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreams_of_the_dead.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/66.jpg
 Oracle:{1}{U}: Return target white or black creature card from your graveyard to the battlefield. That creature gains "Cumulative upkeep {2}." If the creature would leave the battlefield, exile it instead of putting it anywhere else. (At the beginning of its controller's upkeep, that player puts an age counter on it, then sacrifices it unless he or she pays its upkeep cost for each age counter on it.)
+SetInfo:ICE Uncommon

@@ -3,7 +3,6 @@ ManaCost:3
 Types:Artifact
 S:Mode$ CantBeActivated | ValidCard$ Artifact,Creature | NonMana$ True | Description$ Activated abilities of artifacts and creatures can't be activated unless they're mana abilities.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/damping_matrix.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/161.jpg
 Oracle:Activated abilities of artifacts and creatures can't be activated unless they're mana abilities.
+SetInfo:MRD Rare

@@ -7,7 +7,6 @@ T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Creature.AttachedBy | Trigg
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$Destroy | Defined$ TriggeredBlocker
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_iron_sledge.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/162.jpg
 Oracle:Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+SetInfo:MRD Uncommon

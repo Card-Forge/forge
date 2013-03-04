@@ -3,9 +3,8 @@ ManaCost:3 B B
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ When CARDNAME is dealt damage, destroy it. It can't be regenerated. | Description$ Whenever a creature is dealt damage, destroy it. It can't be regenerated.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_pits_of_rath.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/125.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/21.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/123.jpg
 Oracle:Whenever a creature is dealt damage, destroy it. It can't be regenerated.
+SetInfo:8ED Rare
+SetInfo:TMP Rare
+SetInfo:9ED Rare

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ TwoPiles | Cost$ 4 W | Defined$ You | Separator$ You | Chooser$ Opponent | ChosenPile$ DBReturn | UnchosenPile$ DBExile | ValidCards$ Creature | Zone$ Graveyard | AILogic$ Worst | SpellDescription$ Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent's choice and return the other to the battlefield.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield
 SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Exile
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_or_glory.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/13.jpg
 Oracle:Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent's choice and return the other to the battlefield.
+SetInfo:INV Rare

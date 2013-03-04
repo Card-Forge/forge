@@ -4,8 +4,7 @@ Types:Creature Spirit
 PT:1/3
 K:Unblockable
 K:Transmute:1 U B
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_infiltrator.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/203.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/86.jpg
 Oracle:Dimir Infiltrator is unblockable.\nTransmute {1}{U}{B} ({1}{U}{B}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
+SetInfo:RAV Common
+SetInfo:PC2 Common

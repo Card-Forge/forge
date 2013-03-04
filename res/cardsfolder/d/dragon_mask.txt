@@ -6,8 +6,7 @@ SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Tr
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_mask.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/144.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/283.jpg
 Oracle:{3}, {T}: Target creature you control gets +2/+2 until end of turn. Return it to its owner's hand at the beginning of the next end step. (Return it only if it's on the battlefield.)
+SetInfo:VIS Uncommon
+SetInfo:6ED Uncommon

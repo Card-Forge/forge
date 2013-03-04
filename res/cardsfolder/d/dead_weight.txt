@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | AddToughness$ -2 | Description$ Enchanted creature gets -2/-2.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_weight.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/96.jpg
 Oracle:Enchant creature\nEnchanted creature gets -2/-2.
+SetInfo:ISD Common

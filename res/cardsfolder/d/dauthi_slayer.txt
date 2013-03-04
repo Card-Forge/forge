@@ -4,8 +4,7 @@ Types:Creature Dauthi Soldier
 PT:2/2
 K:Shadow
 K:CARDNAME attacks each turn if able.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_slayer.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/20.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/41.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nDauthi Slayer attacks each turn if able.
+SetInfo:TMP Common
+SetInfo:TSB Special

@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:CleanTheBlade:DB$ Cleanup | Cost$ 0 | ClearRemembered$ True | SubAbility$ DeathrendersCall
 SVar:DeathrendersCall:DB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DeathrenderAttach
 SVar:DeathrenderAttach:DB$ Attach | Defined$ Remembered
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathrender.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/255.jpg
 Oracle:Equipped creature gets +2/+2.\nWhenever equipped creature dies, you may put a creature card from your hand onto the battlefield and attach Deathrender to it.\nEquip {2}
+SetInfo:LRW Rare

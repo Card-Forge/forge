@@ -2,8 +2,7 @@ Name:Dragon Roost
 ManaCost:4 R R
 Types:Enchantment
 A:AB$ Token | Cost$ 5 R R | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying | SpellDescription$ Put a 5/5 red Dragon creature token with flying onto the battlefield.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_roost.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/198.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/197.jpg
 Oracle:{5}{R}{R}: Put a 5/5 red Dragon creature token with flying onto the battlefield. (It can't be blocked except by creatures with flying or reach.)
+SetInfo:ONS Rare
+SetInfo:10E Rare

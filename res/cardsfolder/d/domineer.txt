@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant artifact creature
 A:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature.Artifact | AILogic$ GainControl | SpellDescription$ You control enchanted artifact creature.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/domineer.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/33.jpg
 Oracle:Enchant artifact creature\nYou control enchanted artifact creature.
+SetInfo:MRD Uncommon

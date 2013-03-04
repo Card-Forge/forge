@@ -15,7 +15,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Desti
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Library | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Library.
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourYard.Creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_servitude.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/130.jpg
 Oracle:When Diabolic Servitude enters the battlefield, return target creature card from your graveyard to the battlefield.\nWhen the creature put onto the battlefield with Diabolic Servitude dies, exile it and return Diabolic Servitude to its owner's hand.\nWhen Diabolic Servitude leaves the battlefield, exile the creature put onto the battlefield with Diabolic Servitude.
+SetInfo:PD3 Uncommon
+SetInfo:USG Uncommon

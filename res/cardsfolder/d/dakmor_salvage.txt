@@ -5,7 +5,7 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 K:Dredge 2
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_salvage.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/169.jpg
 Oracle:Dakmor Salvage enters the battlefield tapped.\n{T}: Add {B} to your mana pool.\nDredge 2 (If you would draw a card, instead you may put exactly two cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
+SetInfo:DDJ Uncommon
+SetInfo:FUT Uncommon

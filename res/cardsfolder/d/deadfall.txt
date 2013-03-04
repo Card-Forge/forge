@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.withForestwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Forestwalk. | Description$ Creatures with forestwalk can be blocked as though they didn't have forestwalk.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadfall.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/95.jpg
 Oracle:Creatures with forestwalk can be blocked as though they didn't have forestwalk.
+SetInfo:LEG Uncommon

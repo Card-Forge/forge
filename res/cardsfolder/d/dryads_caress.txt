@@ -6,7 +6,6 @@ SVar:DBUntapAll:DB$ UntapAll | ConditionManaSpent$ W | ValidCards$ Creature.YouC
 SVar:X:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dryads_caress.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/160.jpg
 Oracle:You gain 1 life for each creature on the battlefield. If {W} was spent to cast Dryad's Caress, untap all creatures you control.
+SetInfo:RAV Common

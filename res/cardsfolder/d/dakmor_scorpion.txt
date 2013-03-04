@@ -2,8 +2,7 @@ Name:Dakmor Scorpion
 ManaCost:1 B
 Types:Creature Scorpion
 PT:2/1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20383.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/10.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/73.jpg
 Oracle:
+SetInfo:PO2 Common
+SetInfo:S99 Common

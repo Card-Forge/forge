@@ -2,16 +2,15 @@ Name:Disrupting Scepter
 ManaCost:3
 Types:Artifact
 A:AB$ Discard | Cost$ 3 T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | PlayerTurn$ True | SpellDescription$ Target player discards a card. Activate this ability only during your turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disrupting_scepter.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/298.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/242.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/244.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/293.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/365.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/334.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/295.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/281.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/245.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/243.jpg
 Oracle:{3}, {T}: Target player discards a card. Activate this ability only during your turn.
+SetInfo:8ED Rare
+SetInfo:2ED Rare
+SetInfo:7ED Rare
+SetInfo:6ED Rare
+SetInfo:9ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

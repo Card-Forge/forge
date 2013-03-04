@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Elk
 PT:2/2
 A:AB$ ChangeZone | Cost$ G Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped, then shuffle your library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawntreader_elk.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/111.jpg
 Oracle:{G}, Sacrifice Dawntreader Elk: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+SetInfo:DKA Common

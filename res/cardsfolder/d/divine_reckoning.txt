@@ -7,7 +7,6 @@ SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creatu
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_reckoning.jpg
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/10.jpg
 Oracle:Each player chooses a creature he or she controls. Destroy the rest.\nFlashback {5}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:ISD Rare

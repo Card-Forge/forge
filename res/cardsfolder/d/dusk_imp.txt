@@ -3,9 +3,9 @@ ManaCost:2 B
 Types:Creature Imp
 PT:2/1
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dusk_imp.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/130.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/131.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/140.jpg
 Oracle:Flying
+SetInfo:8ED Common
+SetInfo:DDC Common
+SetInfo:ODY Common
+SetInfo:10E Common

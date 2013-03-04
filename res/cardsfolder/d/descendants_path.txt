@@ -7,7 +7,6 @@ SVar:DBPlayIT:DB$ Play | Defined$ Remembered | Controller$ You | WithoutManaCost
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MatchType:Remembered$Valid Creature.sharesCreatureTypeWith Card
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descendants_path.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/173.jpg
 Oracle:At the beginning of your upkeep, reveal the top card of your library. If it's a creature card that shares a creature type with a creature you control, you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
+SetInfo:AVR Rare
