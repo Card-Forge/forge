@@ -113,7 +113,7 @@ public class PlayerControllerHuman extends PlayerController {
      * @see forge.game.player.PlayerController#mayPlaySpellAbilityForFree(forge.card.spellability.SpellAbility)
      */
     @Override
-    public void mayPlaySpellAbilityForFree(SpellAbility copySA) {
+    public void playSpellAbilityForFree(SpellAbility copySA) {
         game.getActionPlay().playSpellAbilityForFree(copySA);
     }
 

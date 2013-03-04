@@ -12,3 +12,4 @@ SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decree_of_pain.jpg
 Oracle:Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.\nCycling {3}{B}{B} ({3}{B}{B}, Discard this card: Draw a card.)\nWhen you cycle Decree of Pain, all creatures get -2/-2 until end of turn.
 SetInfo:SCG Rare
+SetInfo:CM1 Rare

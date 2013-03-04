@@ -139,7 +139,7 @@ public abstract class GameEntity extends MyObservable {
      *            a boolean.
      * @return a int.
      */
-    public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
+    public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat, final boolean isTest) {
         return 0;
     }
 

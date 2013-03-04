@@ -12,4 +12,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_library.j
 Oracle:At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.
 SetInfo:5ED Rare
 SetInfo:LEG Uncommon
+SetInfo:CM1 Rare
 SetInfo:4ED Rare

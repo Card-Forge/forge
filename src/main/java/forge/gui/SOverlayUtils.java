@@ -119,12 +119,18 @@ public final class SOverlayUtils {
         return overlay;
     }
 
+    private static boolean _overlayHasFocus;
+    public static boolean overlayHasFocus() {
+        return _overlayHasFocus;
+    }
+    
     private static Component prevFocusOwner;
     public static void showOverlay() {
         prevFocusOwner = FocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
         // ensure no background element has focus
         FOverlay.SINGLETON_INSTANCE.getPanel().requestFocusInWindow();
+        _overlayHasFocus = true;
     }
 
     /**
@@ -137,6 +143,7 @@ public final class SOverlayUtils {
             prevFocusOwner.requestFocusInWindow();
             prevFocusOwner = null;
         }
+        _overlayHasFocus = false;
     }
 
     public static void showTargetingOverlay() {

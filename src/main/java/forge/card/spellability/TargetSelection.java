@@ -411,13 +411,19 @@ public class TargetSelection {
 
                 // If reached Minimum targets, enable OK button
                 if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa) || tgt.isDividedAsYouChoose()) {
-                    ButtonUtil.enableOnlyCancel();
+                    if (mandatory && tgt.hasCandidates(sa, true)) {
+                        // Player has to click on a target
+                        ButtonUtil.disableAll();
+                    } else {
+                        ButtonUtil.enableOnlyCancel();
+                    }
                 } else {
-                    ButtonUtil.enableAllFocusOk();
-                }
-
-                if (mandatory && tgt.hasCandidates(sa, true)) {
-                    ButtonUtil.enableOnlyOk();
+                    if (mandatory && tgt.hasCandidates(sa, true)) {
+                        // Player has to click on a target or ok
+                        ButtonUtil.enableOnlyOk();
+                    } else {
+                        ButtonUtil.enableAllFocusOk();
+                    }
                 }
             }
 

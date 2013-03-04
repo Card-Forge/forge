@@ -6,3 +6,4 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Batt
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_retainers.jpg
 Oracle:Sacrifice Loyal Retainers: Return target legendary creature card from your graveyard to the battlefield. Activate this ability only during your turn, before attackers are declared.
 SetInfo:PTK Uncommon
+SetInfo:CM1 Uncommon

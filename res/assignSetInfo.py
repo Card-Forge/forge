@@ -120,15 +120,22 @@ if __name__ == '__main__':
 
 			firstLine = cardfile.readline().strip()
 			cardName = firstLine[5:]
+			altName = None
 
-			print (cardName, fileName)
 			validLines = []
 			validLines.append(firstLine)
 
 			for line in cardfile.readlines(): 
 				if line[:8] != "SetInfo:" and line[:8] != "SVar:Rar":
 					validLines.append(line.strip())
+				if line[:5] == "Name:":
+					altName = line[5:].strip()	
 			cardfile.close()
+
+			print (cardName, altName, fileName)
+
+			if not cardName in mtgDataCards and not altName is None:
+				cardName = altName
 
 			for e in mtgDataCards[cardName]:
 				if not setCodeToForge[e] is None:
