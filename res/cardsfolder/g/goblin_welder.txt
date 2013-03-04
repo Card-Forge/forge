@@ -8,6 +8,8 @@ SVar:DBSacrifice:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | ConditionDef
 SVar:DBReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Artifact | ConditionCompare$ GE1 | ConditionCheckSVar$ CheckImprint | ConditionSVarCompare$ GE1 | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:CheckImprint:Imprinted$Valid Artifact.sharesControllerWith Remembered
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_welder.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/80.jpg
 Oracle:{T}: Choose target artifact a player controls and target artifact card in that player's graveyard. If both targets are still legal as this ability resolves, that player simultaneously sacrifices the artifact and returns the artifact card to the battlefield.
