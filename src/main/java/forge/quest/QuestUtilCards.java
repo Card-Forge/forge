@@ -350,11 +350,13 @@ public final class QuestUtilCards {
             int nToRemoveFromThisDeck = cntInMain + cntInSb - leftInPool;
             if ( nToRemoveFromThisDeck <= 0 ) continue; // this is not the deck you are looking for
 
-            int nToRemoveFromSb = cntInSb - nToRemoveFromThisDeck;
-            if( nToRemoveFromSb > 0 ) {
+            int nToRemoveFromSb = Math.min(cntInSb, nToRemoveFromThisDeck);
+            if (nToRemoveFromSb > 0) {
                 deck.get(DeckSection.Sideboard).remove(card, nToRemoveFromSb);
-                nToRemoveFromThisDeck -= cntInSb; // actual removed count should be, but I take upper bound here
-                if ( nToRemoveFromThisDeck <= 0 ) continue; // done here
+                nToRemoveFromThisDeck -= nToRemoveFromSb;
+                if (0 >= nToRemoveFromThisDeck) {
+                    continue; // done here
+                }
             }
 
             deck.getMain().remove(card, nToRemoveFromThisDeck);
