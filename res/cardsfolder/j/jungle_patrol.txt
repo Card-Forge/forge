@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:3/2
 A:AB$ Token | Cost$ 1 G T | TokenAmount$ 1 | TokenName$ Wood | TokenTypes$ Creature,Wall | TokenOwner$ You | TokenColors$ Green | TokenPower$ 0 | TokenToughness$ 1 | TokenKeywords$ Defender | SpellDescription$ Put a 0/1 green Wall creature token with defender named Wood onto the battlefield.
 A:AB$ Mana | Cost$ Sac<1/Permanent.token+namedWood/token named Wood> | Produced$ R | SpellDescription$ Add R to your mana pool.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_patrol.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/121.jpg
 Oracle:{1}{G}, {T}:  Put a 0/1 green Wall creature token with defender named Wood onto the battlefield.\nSacrifice a token named Wood: Add {R} to your mana pool.
+SetInfo:MIR Rare

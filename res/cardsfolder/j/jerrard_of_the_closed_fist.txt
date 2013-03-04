@@ -2,7 +2,6 @@ Name:Jerrard of the Closed Fist
 ManaCost:3 G G R
 Types:Legendary Creature Human Knight
 PT:6/5
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1661.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/275.jpg
 Oracle:
+SetInfo:LEG Uncommon

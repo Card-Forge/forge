@@ -5,7 +5,6 @@ T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Trig
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Artifact,Spirit
 SVar:BuffedBy:Arcane,Spirit
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_idol.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/256.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, Jade Idol becomes a 4/4 Spirit artifact creature until end of turn.
+SetInfo:CHK Uncommon

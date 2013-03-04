@@ -5,7 +5,7 @@ PT:2/4
 K:Fear
 K:TypeCycling:Swamp:2
 K:TypeCycling:Island:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jhessian_zombies.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/22.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nIslandcycling {2}, swampcycling {2} ({2}, Discard this card: Search your library for an Island or Swamp card, reveal it, and put it into your hand. Then shuffle your library.)
+SetInfo:ARB Common
+SetInfo:DDH Common

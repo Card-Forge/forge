@@ -6,8 +6,7 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDesc
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ -X | NumDef$ -Y | References$ X,Y
 SVar:X:SVar$Y/Twice
 SVar:Y:TriggerCount$NumBlockers/Minus.1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/johtull_wurm.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/168.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/138.jpg
 Oracle:Whenever Johtull Wurm becomes blocked, it gets -2/-1 until end of turn for each creature blocking it beyond the first.
+SetInfo:ICE Uncommon
+SetInfo:5ED Uncommon

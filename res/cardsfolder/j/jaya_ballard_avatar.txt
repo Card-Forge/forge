@@ -5,7 +5,6 @@ HandLifeModifier:+0/+1
 A:AB$ DealDamage | ActivationZone$ Command | Cost$ X | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ Y | References$ X,Y | ActivationLimit$ 1 | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals an amount of damage chosen at random from 0 to X to target creature or player. Activate this ability only once each turn.
 SVar:X:Count$xPaid
 SVar:Y:Count$Random.0.X
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/jaya_ballard_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/jaya-ballard-task-mage.jpg
 Oracle:Hand +0, life +1\n{X}: Jaya Ballard Avatar deals an amount of damage chosen at random from 0 to X to target creature or player. Activate this ability only once each turn.
+SetInfo:VAN Special
