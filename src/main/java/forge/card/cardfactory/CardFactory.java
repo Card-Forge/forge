@@ -34,6 +34,7 @@ import forge.card.ICardFace;
 import forge.card.cost.Cost;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
@@ -156,7 +157,7 @@ public class CardFactory {
      */
     public final void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
             final boolean bCopyDetails) {
-        Player originalController = original.getController();
+        //Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
         final Card c = copyCard(original);
 
@@ -174,8 +175,9 @@ public class CardFactory {
 
             c.addColor(finalColors, c, !sourceSA.hasParam("OverwriteColors"), true);
         }
-
-        c.addController(controller);
+        
+        c.clearControllers();
+        c.setOwner(controller);
         c.setCopiedSpell(true);
         c.refreshUniqueNumber();
 
@@ -189,6 +191,14 @@ public class CardFactory {
         {
             copySA = sa.copy();
             copySA.setSourceCard(c);
+            SpellAbility subSA = copySA.getSubAbility();
+            if (subSA != null) {
+                AbilitySub copySubSA = ((AbilitySub) subSA).getCopy();
+                copySA.setSubAbility(copySubSA);
+                copySubSA.setParent(copySA);
+                copySubSA.setSourceCard(c);
+                copySubSA.setCopied(true);
+            }
         }
         copySA.setCopied(true);
         //remove all costs
@@ -216,7 +226,7 @@ public class CardFactory {
 
         controller.getController().mayPlaySpellAbilityForFree(copySA);
 
-        c.addController(originalController);
+        //c.addController(originalController);
     }
 
     /**
