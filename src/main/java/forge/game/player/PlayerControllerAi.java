@@ -138,13 +138,14 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#mayPlaySpellAbilityForFree(forge.card.spellability.SpellAbility)
      */
     @Override
-    public void mayPlaySpellAbilityForFree(SpellAbility copySA) {
+    public void playSpellAbilityForFree(SpellAbility copySA) {
         if (copySA instanceof Spell) {
             Spell spell = (Spell) copySA;
-            if (spell.canPlayFromEffectAI(false, true)) {
+            if (spell.canPlayFromEffectAI(true, true)) {
                 ComputerUtil.playStackFree(getPlayer(), copySA);
             }
-        } else if (copySA.canPlayAI()) {
+        } else {
+            copySA.canPlayAI();
             ComputerUtil.playStackFree(getPlayer(), copySA);
         }
     }
