@@ -18,6 +18,10 @@
 package forge.card;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
 import forge.card.mana.ManaCost;
 
 /**
@@ -34,14 +38,22 @@ public final class CardRules implements ICardCharacteristics {
     private final ICardFace otherPart;
     
     private CardAiHints aiHints;
+    private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
 
 
 
-    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
+
+    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah, Map<String, CardInSet> sets) {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
         aiHints = cah;
+        setsPrinted.putAll(sets);
+        
+        if ( setsPrinted.isEmpty() ) { 
+            System.err.println(getName() + " was not assigned any set."); 
+            setsPrinted.put(CardEdition.UNKNOWN.getCode(), new CardInSet(CardRarity.Common, 1) );
+        }
     }
 
     public boolean isTraditional() {
@@ -131,8 +143,11 @@ public final class CardRules implements ICardCharacteristics {
     }
 
 
-    public Iterable<String> getSets() { return mainPart.getSets(); }
-    public CardInSet getEditionInfo(final String setCode) { return mainPart.getEditionInfo(setCode); }
+    public Set<String> getSets() { return this.setsPrinted.keySet(); }
+    public CardInSet getEditionInfo(final String setCode) {
+        final CardInSet result = this.setsPrinted.get(setCode);
+        return result; // if returns null, String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode);
+    }
 
 
     // vanguard card fields, they don't use sides.

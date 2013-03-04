@@ -34,6 +34,7 @@ import javax.swing.filechooser.FileFilter;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.Deck;
+import forge.gui.download.GuiDownloadSetPicturesLQ;
 import forge.item.CardPrinted;
 import forge.util.FileSection;
 import forge.util.FileSectionManual;
@@ -149,7 +150,8 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             for (final Entry<CardPrinted, Integer> card : d.getMain()) {
                 // System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
                 for( int i = card.getValue().intValue(); i > 0; --i ) {
-                    list.add(card.getKey().getRules().getEditionInfo(card.getKey().getEdition()).getUrl());
+                    String url = GuiDownloadSetPicturesLQ.getCardPictureUrl(card.getKey(), card.getKey().getName());
+                    list.add(url);
                 }
             }
             /*

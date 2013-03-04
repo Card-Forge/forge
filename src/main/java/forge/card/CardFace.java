@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -80,7 +79,6 @@ final class CardFace implements ICardFace {
     public final void setColor(ColorSet color0)           { this.color = color0; }
     public final void setOracleText(String text)          { this.oracleText = text; }
     public final void setInitialLoyalty(int value)        { this.initialLoyalty = value; }
-    public final Map<String, CardInSet> getSetsData()     { return this.setsPrinted; } // reader will add sets here
 
     public void setPtText(String value) {
         final int slashPos = value.indexOf('/');
@@ -105,7 +103,6 @@ final class CardFace implements ICardFace {
     
     public void assignMissingFields() { // Most scripts do not specify color explicitly
         if ( null == oracleText ) { System.err.println(name + " has no Oracle text."); oracleText = ""; }
-        if ( setsPrinted.isEmpty() ) { System.err.println(name + " was not assigned any set."); setsPrinted.put(CardEdition.UNKNOWN.getCode(), new CardInSet(CardRarity.Common, 1, null) ) ; }
         if ( manaCost == null && color == null ) System.err.println(name + " has neither ManaCost nor Color");
         if ( color == null ) color = ColorSet.fromManaCost(manaCost);
 
@@ -117,16 +114,6 @@ final class CardFace implements ICardFace {
         if ( variables == null ) variables = emptyMap;
         if ( null == nonAbilityText ) nonAbilityText = "";
     }
-
-
-    // This should not be here, but I don't know a better place yet 
-    private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
-    @Override public Set<String> getSets() { return this.setsPrinted.keySet(); }
-    @Override public CardInSet getEditionInfo(final String setCode) {
-        final CardInSet result = this.setsPrinted.get(setCode);
-        return result; // if returns null, String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode);
-    }
-
 
 
 }

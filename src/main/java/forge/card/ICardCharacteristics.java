@@ -20,8 +20,4 @@ public interface ICardCharacteristics {
     public abstract int getInitialLoyalty();
 
     public abstract String getOracleText();
-
-    public abstract Iterable<String> getSets();
-    public abstract CardInSet getEditionInfo(final String setCode);
-    
 }

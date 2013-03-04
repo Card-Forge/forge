@@ -19,6 +19,7 @@ package forge.card;
 
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,6 +46,8 @@ public class CardRulesReader {
     private CardSplitType altMode = CardSplitType.None;
     private String handLife = null; 
     
+    private Map<String,CardInSet> sets = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
+    
     // fields to build CardAiHints
     private boolean removedFromAIDecks = false;
     private boolean removedFromRandomDecks = false;
@@ -64,6 +67,8 @@ public class CardRulesReader {
         this.faces[1] = null;
         this.pictureUrl[0] = null;
         this.pictureUrl[1] = null;
+        
+        this.sets.clear();
 
         this.handLife = null;
         this.altMode = CardSplitType.None;
@@ -83,7 +88,7 @@ public class CardRulesReader {
         CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs );
         faces[0].assignMissingFields();
         if ( null != faces[1] ) faces[1].assignMissingFields();
-        final CardRules result = new CardRules(faces, altMode, cah);
+        final CardRules result = new CardRules(faces, altMode, cah, sets);
         result.setDlUrls(pictureUrl);
         if ( StringUtils.isNotBlank(handLife))
             result.setVanguardProperties(handLife);
@@ -216,7 +221,8 @@ public class CardRulesReader {
                     } else
                         this.faces[curFace].addSVar(variable, value);
                 } else if ("SetInfo".equals(key)) {
-                    CardRulesReader.parseSetInfoLine(value, this.faces[this.curFace].getSetsData());
+                    if ( curFace == 0 )
+                        CardRulesReader.parseSetInfoLine(value, sets);
                 }
                 break;
 
@@ -294,7 +300,7 @@ public class CardRulesReader {
             throw new RuntimeException("Unrecognized rarity string <<" + txtRarity + ">>");
         }
 
-        final CardInSet cardInSet = new CardInSet(rarity, numIllustrations, pieces.length > 2 ? pieces[2] : null);
+        final CardInSet cardInSet = new CardInSet(rarity, numIllustrations);
 
         setsData.put(setCode, cardInSet);
     }

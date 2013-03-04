@@ -60,23 +60,34 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
      *            the card name
      */
     protected final void addCardToList(final ArrayList<DownloadObject> cList, final CardPrinted c, final String cardName) {
+        final String setCode3 = c.getEdition();
+        final CardEdition thisSet = Singletons.getModel().getEditions().get(setCode3);
+        final String setCode2 = thisSet.getCode2();
+        final int artsCnt = c.getRules().getEditionInfo(setCode3).getCopiesCount();
+        
+        final String imgFN = CardUtil.buildFilename(c, cardName);
+        final boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);
+
+        if (!foundSetImage) {
+            String url = getCardPictureUrl(c, cardName);
+            
+            final String filename = GuiDownloadPicturesLQ.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
+            cList.add(new DownloadObject(url, new File(this.picturesPath + File.separator + setCode3, filename)));
+
+            System.out.println(String.format("%s [%s - %s]", cardName, setCode3, thisSet.getName()));
+        }
+    }
+    
+    public static String getCardPictureUrl(final CardPrinted c, final String cardName) {
         final String urlBase = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/fpics/";
 
         final String setCode3 = c.getEdition();
         final CardEdition thisSet = Singletons.getModel().getEditions().get(setCode3);
         final String setCode2 = thisSet.getCode2();
-
-        final String imgFN = CardUtil.buildFilename(c, cardName);
-        final boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);
-
-        if (!foundSetImage) {
-            final int artsCnt = c.getRules().getEditionInfo(setCode3).getCopiesCount();
-            final String filename = GuiDownloadPicturesLQ.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
-            String url = urlBase + setCode2 + "/" + Base64Coder.encodeString(filename, true);
-            cList.add(new DownloadObject(url, new File(this.picturesPath + File.separator + setCode3, filename)));
-
-            System.out.println(String.format("%s [%s - %s]", cardName, setCode3, thisSet.getName()));
-        }
+        
+        final int artsCnt = c.getRules().getEditionInfo(setCode3).getCopiesCount();
+        final String filename = GuiDownloadPicturesLQ.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
+        return urlBase + setCode2 + "/" + Base64Coder.encodeString(filename, true);
     }
 
     /**
