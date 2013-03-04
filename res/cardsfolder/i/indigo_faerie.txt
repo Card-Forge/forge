@@ -4,7 +4,6 @@ Types:Creature Faerie Wizard
 PT:1/1
 K:Flying
 A:AB$ Animate | Cost$ U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ Blue | SpellDescription$ Target permanent becomes blue in addition to its other colors until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indigo_faerie.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/24.jpg
 Oracle:Flying\n{U}: Target permanent becomes blue in addition to its other colors until end of turn.
+SetInfo:EVE Uncommon

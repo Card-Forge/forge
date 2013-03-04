@@ -5,8 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ -1 | AddHiddenKeyword$ CantBlock Creature.powerGEIronclawX | AddSVar$ IronclawX | Description$ Enchanted creature gets -0/-1 and can't block creatures with power equal to or greater than the enchanted creature's toughness.
 SVar:IronclawX:Count$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclaw_curse.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/96.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/244.jpg
 Oracle:Enchant creature\nEnchanted creature gets -0/-1.\nEnchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness.
+SetInfo:5ED Rare
+SetInfo:HML Rare

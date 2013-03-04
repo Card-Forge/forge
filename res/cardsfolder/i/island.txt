@@ -2,50 +2,59 @@ Name:Island
 ManaCost:no cost
 Types:Basic Land Island
 SVar:PicCount:4
-SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73951.jpg\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159281\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=159282\http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=25964
-SetInfo:USG|Land|http://magiccards.info/scans/en/us/335.jpg|4
-SetInfo:TMP|Land|http://magiccards.info/scans/en/tp/313.jpg|4
-SetInfo:ZEN|Land|http://magiccards.info/scans/en/zen/234.jpg|4
-SetInfo:4ED|Land|http://magiccards.info/scans/en/4e/178.jpg|3
-SetInfo:3ED|Land|http://magiccards.info/scans/en/rv/287.jpg|3
-SetInfo:SOM|Land|http://magiccards.info/scans/en/som/234.jpg|4
-SetInfo:COM|Land|http://magiccards.info/scans/en/cmd/303.jpg|4
-SetInfo:TSP|Land|http://magiccards.info/scans/en/ts/286.jpg|4
-SetInfo:ISD|Land|http://magiccards.info/scans/en/isd/253.jpg|3
-SetInfo:ODY|Land|http://magiccards.info/scans/en/od/335.jpg|4
-SetInfo:MIR|Land|http://magiccards.info/scans/en/mr/297.jpg|4
-SetInfo:PTK|Land|http://magiccards.info/scans/en/p3k/169.jpg|3
-SetInfo:7ED|Land|http://magiccards.info/scans/en/7e/332.jpg|4
-SetInfo:POR|Land|http://magiccards.info/scans/en/po/207.jpg|4
-SetInfo:ROE|Land|http://magiccards.info/scans/en/roe/233.jpg|4
-SetInfo:10E|Land|http://magiccards.info/scans/en/10e/368.jpg|4
-SetInfo:RAV|Land|http://magiccards.info/scans/en/rav/291.jpg|4
-SetInfo:6ED|Land|http://magiccards.info/scans/en/6e/335.jpg|4
-SetInfo:RTR|Land|http://magiccards.info/scans/en/rtr/256.jpg|5
-SetInfo:5ED|Land|http://magiccards.info/scans/en/5e/425.jpg|4
-SetInfo:ONS|Land|http://magiccards.info/scans/en/on/335.jpg|4
-SetInfo:S99|Land|http://magiccards.info/scans/en/st/158.jpg|4
-SetInfo:MBS|Land|http://magiccards.info/scans/en/mbs/148.jpg|2
-SetInfo:8ED|Land|http://magiccards.info/scans/en/8e/335.jpg|4
-SetInfo:CHK|Land|http://magiccards.info/scans/en/chk/291.jpg|4
-SetInfo:PO2|Land|http://magiccards.info/scans/en/po2/154.jpg|3
-SetInfo:9ED|Land|http://magiccards.info/scans/en/9e/335.jpg|4
-SetInfo:ICE|Land|http://magiccards.info/scans/en/ia/334.jpg|3
-SetInfo:MRD|Land|http://magiccards.info/scans/en/mi/291.jpg|4
-SetInfo:SHM|Land|http://magiccards.info/scans/en/shm/286.jpg|4
-SetInfo:LEA|Land|http://magiccards.info/scans/en/al/281.jpg|2
-SetInfo:LEB|Land|http://magiccards.info/scans/en/be/283.jpg|3
-SetInfo:NPH|Land|http://magiccards.info/scans/en/nph/168.jpg|2
-SetInfo:PC2|Land|http://magiccards.info/scans/en/pc2/137.jpg|5
-SetInfo:INV|Land|http://magiccards.info/scans/en/in/335.jpg|4
-SetInfo:MMQ|Land|http://magiccards.info/scans/en/mm/335.jpg|4
-SetInfo:AVR|Land|http://magiccards.info/scans/en/avr/233.jpg|3
-SetInfo:ALA|Land|http://magiccards.info/scans/en/ala/234.jpg|4
-SetInfo:M11|Land|http://magiccards.info/scans/en/m11/234.jpg|4
-SetInfo:M10|Land|http://magiccards.info/scans/en/m10/234.jpg|4
-SetInfo:M13|Land|http://magiccards.info/scans/en/m13/237.jpg|4
-SetInfo:M12|Land|http://magiccards.info/scans/en/m12/234.jpg|4
-SetInfo:LRW|Land|http://magiccards.info/scans/en/lw/286.jpg|4
-SetInfo:2ED|Land|http://magiccards.info/scans/en/un/283.jpg|3
 Oracle:U
+SetInfo:8ED Land x4
+SetInfo:H09 Land
+SetInfo:S99 Land x4
+SetInfo:ZEN Land x8
+SetInfo:COM Land x4
+SetInfo:MRD Land x4
+SetInfo:DDF Land x4
+SetInfo:LEA Land x2
+SetInfo:5ED Land x4
+SetInfo:3ED Land x3
+SetInfo:ISD Land x3
+SetInfo:RAV Land x4
+SetInfo:7ED Land x4
+SetInfo:DD2 Land x4
+SetInfo:DDJ Land x4
+SetInfo:SOM Land x4
+SetInfo:ROE Land x4
+SetInfo:10E Land x4
+SetInfo:M12 Land x4
+SetInfo:TSP Land x4
+SetInfo:RTR Land x5
+SetInfo:PTK Land x3
+SetInfo:TMP Land x4
+SetInfo:POR Land x4
+SetInfo:MBS Land x2
+SetInfo:PO2 Land x3
+SetInfo:2ED Land x3
+SetInfo:S00 Land x2
+SetInfo:CHK Land x4
+SetInfo:9ED Land x4
+SetInfo:LEB Land x3
+SetInfo:DDI Land x3
+SetInfo:DDE Land
+SetInfo:HOP Land x4
+SetInfo:INV Land x4
+SetInfo:ICE Land x3
+SetInfo:4ED Land x3
+SetInfo:SHM Land x4
+SetInfo:ONS Land x4
+SetInfo:NPH Land x2
+SetInfo:6ED Land x4
+SetInfo:DDH Land
+SetInfo:USG Land x4
+SetInfo:MMQ Land x4
+SetInfo:ODY Land x4
+SetInfo:MIR Land x4
+SetInfo:AVR Land x3
+SetInfo:ALA Land x4
+SetInfo:M11 Land x4
+SetInfo:M10 Land x4
+SetInfo:M13 Land x4
+SetInfo:ARC Land x3
+SetInfo:LRW Land x4
+SetInfo:PC2 Land x5

@@ -4,10 +4,9 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't be blocked except by Walls. | Description$ Enchanted creature can't be blocked except by Walls.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invisibility.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/87.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/60.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/60.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/60.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by Walls.
+SetInfo:8ED Uncommon
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:2ED Common

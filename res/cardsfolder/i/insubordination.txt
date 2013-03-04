@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ B B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the end step of enchanted creature's controller, CARDNAME deals 2 damage to that player unless that creature attacked this turn.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$ 2 | ConditionPresent$ Card.EnchantedBy+notAttackedThisTurn
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insubordination.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/141.jpg
 Oracle:Enchant creature\nAt the beginning of the end step of enchanted creature's controller, Insubordination deals 2 damage to that player unless that creature attacked this turn.
+SetInfo:MMQ Common

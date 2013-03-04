@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 W | Origin$ Library | Destination$ Hand | ChangeType$ Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/idyllic_tutor.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/12.jpg
 Oracle:Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
+SetInfo:MOR Rare

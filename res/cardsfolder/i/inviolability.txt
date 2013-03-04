@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ PreventDamage | Target$ Creature.EnchantedBy | Description$ Prevent all damage that would be dealt to enchanted creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inviolability.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/23.jpg
 Oracle:Enchant creature\nPrevent all damage that would be dealt to enchanted creature.
+SetInfo:MMQ Common

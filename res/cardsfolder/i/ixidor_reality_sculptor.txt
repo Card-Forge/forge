@@ -4,7 +4,6 @@ Types:Legendary Creature Human Wizard
 PT:3/4
 S:Mode$ Continuous | Affected$ Creature.faceDown | AddPower$ 1 | AddToughness$ 1 | Description$ Face-Down creatures get +1/+1.
 A:AB$ SetState | Cost$ 2 U | ValidTgts$ Creature.faceDown | TgtPrompt$ Select target facedown creature. | Mode$ TurnFace | SpellDescription$ Turn target face-down creature face up.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ixidor_reality_sculptor.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/89.jpg
 Oracle:Face-down creatures get +1/+1.\n{2}{U}: Turn target face-down creature face up.
+SetInfo:ONS Rare

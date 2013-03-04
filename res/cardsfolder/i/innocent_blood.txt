@@ -3,7 +3,7 @@ ManaCost:B
 Types:Sorcery
 A:SP$ Sacrifice | Cost$ B | SacValid$ Creature | Defined$ Each | SpellDescription$ Each player sacrifices a creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/innocent_blood.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/145.jpg
 Oracle:Each player sacrifices a creature.
+SetInfo:ODY Common
+SetInfo:HOP Common

@@ -4,7 +4,6 @@ Types:Land Gate
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_guildgate.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/242.jpg
 Oracle:Izzet Guildgate enters the battlefield tapped.\n{T}: Add {U} or {R} to your mana pool.
+SetInfo:RTR Common

@@ -5,8 +5,7 @@ PT:1/1
 K:Fear
 A:AB$ AnimateAll | Cost$ 2 U B | ValidCards$ Creature.unblocked | Power$ 4 | Toughness$ 1 | SpellDescription$ Each unblocked creature becomes 4/1 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inkfathom_witch.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/97.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/168.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\n{2}{U}{B}: Each unblocked creature becomes 4/1 until end of turn.
+SetInfo:PC2 Uncommon
+SetInfo:SHM Uncommon

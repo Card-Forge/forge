@@ -4,7 +4,6 @@ Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | IsPresent$ Card.YouDontCtrl | PresentZone$ Hand | PresentCompare$ GT4 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals X damage to that player, where X is the number of cards in his or her hand minus 4.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
 SVar:X:TriggeredPlayer$CardsInHand/Minus.4
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_maiden.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/127.jpg
 Oracle:At the beginning of each opponent's upkeep, Iron Maiden deals X damage to that player, where X is the number of cards in his or her hand minus 4.
+SetInfo:ULG Rare

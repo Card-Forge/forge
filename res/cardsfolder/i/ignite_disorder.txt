@@ -4,6 +4,6 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.Blue,Creature.White | TgtPrompt$ Select target white and/or blue creature to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target white and/or blue creatures.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ignite_disorder.jpg
-SVar:Rarity:Uncommon
-SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/66.jpg
 Oracle:Ignite Disorder deals 3 damage divided as you choose among one, two, or three target white and/or blue creatures.
+SetInfo:M10 Uncommon
+SetInfo:CFX Uncommon

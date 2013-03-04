@@ -5,7 +5,6 @@ Text:CARDNAME can't block creatures with power 2 or greater.
 PT:2/2
 K:CantBlock Creature.powerGE2
 A:AB$ Pump | Cost$ R | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclaw_buzzardiers.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/165.jpg
 Oracle:Ironclaw Buzzardiers can't block creatures with power 2 or greater.\n{R}: Ironclaw Buzzardiers gains flying until end of turn.
+SetInfo:TSP Common

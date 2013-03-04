@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Pump | Cost$ 1 UR | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch target creature's power and toughness until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inside_out.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/103.jpg
 Oracle:Switch target creature's power and toughness until end of turn.\nDraw a card.
+SetInfo:EVE Common

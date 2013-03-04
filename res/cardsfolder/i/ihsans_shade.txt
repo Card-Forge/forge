@@ -3,7 +3,6 @@ ManaCost:3 B B B
 Types:Legendary Creature Shade Knight
 PT:5/5
 K:Protection from white
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ihsans_shade.jpg
-SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/16.jpg
 Oracle:Protection from white
+SetInfo:HML Uncommon

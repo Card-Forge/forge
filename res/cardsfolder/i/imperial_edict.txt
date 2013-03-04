@@ -2,7 +2,6 @@ Name:Imperial Edict
 ManaCost:1 B
 Types:Sorcery
 A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | Destroy$ True | SpellDescription$ Target opponent chooses a creature he or she controls. Destroy it.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_edict.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/77.jpg
 Oracle:Target opponent chooses a creature he or she controls. Destroy it.
+SetInfo:PTK Common

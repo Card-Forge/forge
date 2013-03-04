@@ -9,7 +9,6 @@ A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inspired_sprite.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/37.jpg
 Oracle:Flash\nFlying\nWhenever you cast a Wizard spell, you may untap Inspired Sprite.\n{T}: Draw a card, then discard a card.
+SetInfo:MOR Uncommon

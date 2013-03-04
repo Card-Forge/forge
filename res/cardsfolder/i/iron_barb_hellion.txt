@@ -4,7 +4,6 @@ Types:Creature Hellion Beast
 PT:5/4
 K:CARDNAME can't block.
 K:Haste
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card44608.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/69.jpg
 Oracle:Haste\nIron-Barb Hellion can't block.
+SetInfo:5DN Uncommon

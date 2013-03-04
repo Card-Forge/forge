@@ -4,8 +4,8 @@ Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_chronarch.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/119.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/205.jpg
 Oracle:When Izzet Chronarch enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
+SetInfo:GPT Common
+SetInfo:DDJ Common
+SetInfo:COM Common

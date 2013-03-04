@@ -4,7 +4,6 @@ Types:Instant Arcane
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Arcane
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ire_of_kaminari.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/109.jpg
 Oracle:Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
+SetInfo:BOK Common

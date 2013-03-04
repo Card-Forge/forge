@@ -3,11 +3,11 @@ ManaCost:1 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SubAbility$ DB | SpellDescription$ CARDNAME deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
 SVar:DB:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incinerate.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/184.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/242.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/146.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/194.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/213.jpg
 Oracle:Incinerate deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
+SetInfo:DD2 Common
+SetInfo:MIR Common
+SetInfo:10E Common
+SetInfo:5ED Common
+SetInfo:M12 Common
+SetInfo:ICE Common
