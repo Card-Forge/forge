@@ -212,7 +212,7 @@ public class SpellAbilityRequirements {
         } else if (this.payment.isCanceled()) {
             final Card c = this.ability.getSourceCard();
 
-            // split cards transform back to full form if targeting is canceled
+            // split cards transform back to full form if mana cost is not paid
             if (c.getRules().getSplitType() == CardSplitType.Split) {
                 c.setState(CardCharacteristicName.Original);
             }
