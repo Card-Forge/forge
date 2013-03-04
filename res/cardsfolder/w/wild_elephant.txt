@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Creature Elephant
 PT:3/3
 K:Trample
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3423.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/152.jpg
 Oracle:Trample
+SetInfo:MIR Common

@@ -7,7 +7,6 @@ SVar:WordLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 5 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_worship.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/on/en/61.jpg
 Oracle:{1}: The next time you would draw a card this turn, you gain 5 life instead.
+SetInfo:ONS Rare

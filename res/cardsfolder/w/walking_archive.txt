@@ -11,7 +11,6 @@ SVar:TrigYouDraw:AB$Draw | Cost$ 0 | NumCards$ X | Defined$ You | References$ X
 SVar:TrigOppDraw:AB$Draw | Cost$ 0 | NumCards$ X | Defined$ Opponent | References$ X
 SVar:X:Count$CardCounters.P1P1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_archive.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/169.jpg
 Oracle:Defender (This creature can't attack.)\nWalking Archive enters the battlefield with a +1/+1 counter on it.\nAt the beginning of each player's upkeep, that player draws a card for each +1/+1 counter on Walking Archive.\n{2}{W}{U}: Put a +1/+1 counter on Walking Archive.
+SetInfo:DIS Rare

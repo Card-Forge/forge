@@ -5,7 +5,6 @@ PT:1/3
 K:Flying
 K:Players play with the top card of their libraries revealed.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizened_snitches.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/75.jpg
 Oracle:Flying\nPlayers play with the top card of their libraries revealed.
+SetInfo:RAV Uncommon

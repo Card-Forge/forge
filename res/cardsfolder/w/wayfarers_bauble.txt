@@ -2,7 +2,7 @@ Name:Wayfarer's Bauble
 ManaCost:1
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wayfarers_bauble.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/165.jpg
 Oracle:{2}, {T}, Sacrifice Wayfarer's Bauble: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
+SetInfo:DDI Common
+SetInfo:5DN Common

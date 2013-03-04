@@ -4,12 +4,11 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | AddKeyword$ Reach | Description$ Enchanted creature gets +0/+2 and has reach. (It can block creatures with flying.)
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/web.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/137.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/137.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/171.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/281.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/136.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/137.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature gets +0/+2 and has reach. (It can block creatures with flying.)
+SetInfo:2ED Rare
+SetInfo:9ED Uncommon
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

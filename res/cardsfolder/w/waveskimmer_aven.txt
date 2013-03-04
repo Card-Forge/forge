@@ -4,7 +4,6 @@ Types:Creature Bird Soldier
 PT:2/4
 K:Flying
 K:Exalted
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waveskimmer_aven.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/207.jpg
 Oracle:Flying\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
+SetInfo:ALA Common

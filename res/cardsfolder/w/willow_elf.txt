@@ -2,8 +2,7 @@ Name:Willow Elf
 ManaCost:G
 Types:Creature Elf
 PT:1/1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21051.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/152.jpg
-SetInfo:S00|Common|http://magiccards.info/scans/en/st2k/20.jpg
 Oracle:
+SetInfo:S99 Common
+SetInfo:S00 Common

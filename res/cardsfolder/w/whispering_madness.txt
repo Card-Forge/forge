@@ -14,5 +14,5 @@ SVar:MaxDiscard:Number$0
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whispering_madness.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/207.jpg
 Oracle:Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
+SetInfo:GTC Rare

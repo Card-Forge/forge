@@ -8,7 +8,6 @@ R:Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | ValidSource$ Card.
 SVar:SurpriseETB:DB$ ChangeZone | DefinedPlayer$ ReplacedPlayer | Defined$ ReplacedCard | Origin$ Hand | Destination$ Battlefield
 SVar:DiscardMeByOpp:2
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wilt_leaf_liege.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/245.jpg
 Oracle:Other green creatures you control get +1/+1.\nOther white creatures you control get +1/+1.\nIf a spell or ability an opponent controls causes you to discard Wilt-Leaf Liege, put it onto the battlefield instead of putting it into your graveyard.
+SetInfo:SHM Rare

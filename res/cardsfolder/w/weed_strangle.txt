@@ -5,7 +5,6 @@ A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:DBClash:DB$Clash | WinSubAbility$ DBGain
 SVar:DBGain:DB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardToughness
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weed_strangle.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/147.jpg
 Oracle:Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
+SetInfo:LRW Common

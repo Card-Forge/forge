@@ -3,10 +3,9 @@ ManaCost:3 W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Damage that would reduce your life total to less than 1 reduces it to 1 instead. | CheckSVar$ X | SVarCompare$ GE1 | Description$ If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worship.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/57.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/57.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/55.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/56.jpg
 Oracle:If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+SetInfo:8ED Rare
+SetInfo:7ED Rare
+SetInfo:9ED Rare
+SetInfo:USG Rare

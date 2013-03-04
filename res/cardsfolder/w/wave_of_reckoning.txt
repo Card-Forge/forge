@@ -7,7 +7,6 @@ A:SP$ EachDamage | Cost$ 4 W | ValidCards$ Creature | NumDmg$ X | References$ X 
 SVar:X:Count$CardPower
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_reckoning.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/56.jpg
 Oracle:Each creature deals damage to itself equal to its power.
+SetInfo:MMQ Rare

@@ -2,8 +2,7 @@ Name:Wrecking Ball
 ManaCost:2 B R
 Types:Instant
 A:SP$Destroy | Cost$ 2 B R | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land | SpellDescription$ Destroy target creature or land.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrecking_ball.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/238.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/139.jpg
 Oracle:Destroy target creature or land.
+SetInfo:COM Common
+SetInfo:DIS Common

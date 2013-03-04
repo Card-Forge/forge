@@ -8,7 +8,6 @@ A:AB$ Tap | Cost$ 1 SubCounter<X/KI> | TargetMin$ 0 | TargetMax$ MaxTgts | Valid
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$CardCounters.KI
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waxmane_baku.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/29.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Waxmane Baku.\n{1}, Remove X ki counters from Waxmane Baku: Tap X target creatures.
+SetInfo:BOK Common

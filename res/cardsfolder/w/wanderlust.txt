@@ -5,12 +5,11 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderlust.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/135.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/135.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/201.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/169.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/134.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/135.jpg
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, Wanderlust deals 1 damage to that player.
+SetInfo:2ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

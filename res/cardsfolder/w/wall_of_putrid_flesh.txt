@@ -6,7 +6,6 @@ PT:2/4
 K:Defender
 K:Protection from white
 K:PreventAllDamageBy Creature.enchanted
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_putrid_flesh.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/41.jpg
 Oracle:Defender (This creature can't attack.)\nProtection from white\nPrevent all damage that would be dealt to Wall of Putrid Flesh by enchanted creatures.
+SetInfo:LEG Uncommon

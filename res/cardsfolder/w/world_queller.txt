@@ -6,7 +6,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | O
 SVar:ChooseType:DB$ChooseType | Defined$ You | Type$ Card | InvalidTypes$ Instant,Sorcery,Tribal | SubAbility$ TrigSac
 SVar:TrigSac:DB$Sacrifice | Cost$ 0 | SacValid$ Permanent.ChosenType | Defined$ Each
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/world_queller.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/39.jpg
 Oracle:At the beginning of your upkeep, you may choose a card type. If you do, each player sacrifices a permanent of that type.
+SetInfo:ZEN Rare

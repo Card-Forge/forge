@@ -7,7 +7,6 @@ T:Mode$ DamageDone | DamageSource$ Any | ValidTarget$ Card.Self | TriggerZones$ 
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_hope.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/24.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Wall of Hope is dealt damage, you gain that much life.
+SetInfo:LGN Common

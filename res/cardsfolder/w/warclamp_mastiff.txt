@@ -3,7 +3,6 @@ ManaCost:W
 Types:Creature Hound
 PT:1/1
 K:First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warclamp_mastiff.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/40.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)
+SetInfo:M13 Common

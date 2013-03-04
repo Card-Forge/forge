@@ -4,7 +4,6 @@ Types:Creature Merfolk Wizard
 PT:1/3
 A:AB$ Pump | Cost$ T | NumAtt$ -2 | ValidTgts$ Creature.Red,Creature.Green | TgtPrompt$ Select target red or green creature | IsCurse$ True | SpellDescription$ Target red or green creature gets -2/-0 until end of turn.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wilderness_hypnotist.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/32.jpg
 Oracle:{T}: Target red or green creature gets -2/-0 until end of turn.
+SetInfo:EVE Common

@@ -6,8 +6,7 @@ SVar:DBDraw:DB$Draw | NumCards$ X | References$ X,Y
 SVar:X:Count$TypeInOppHand.Forest/Plus.Y
 SVar:Y:Count$GreenInOppHand
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_gaze.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/79.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/113.jpg
 Oracle:Target opponent reveals his or her hand. You draw a card for each Forest and green card in it.
+SetInfo:POR Uncommon
+SetInfo:9ED Uncommon

@@ -3,7 +3,6 @@ ManaCost:UB UB UB
 Types:Creature Faerie Soldier
 PT:3/2
 K:Flying
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wasp_lancer.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/179.jpg
 Oracle:Flying
+SetInfo:SHM Uncommon

@@ -5,7 +5,6 @@ PT:2/2
 K:Horsemanship
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player discards a card.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wei_night_raiders.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/89.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Wei Night Raiders deals damage to an opponent, that player discards a card.
+SetInfo:PTK Uncommon

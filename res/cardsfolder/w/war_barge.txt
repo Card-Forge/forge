@@ -8,8 +8,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigClearRem
 SVar:TrigClearRemembered:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_barge.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/112.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/116.jpg
 Oracle:{3}: Target creature gains islandwalk until end of turn. When War Barge leaves the battlefield this turn, destroy that creature. A creature destroyed this way can't be regenerated.
+SetInfo:TSB Special
+SetInfo:DRK Uncommon

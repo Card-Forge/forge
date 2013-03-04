@@ -9,7 +9,6 @@ SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1 | ConditionCheckSVar$ X | ConditionSVar
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderwine_prophets.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/95.jpg
 Oracle:Champion a Merfolk (When this enters the battlefield, sacrifice it unless you exile another Merfolk you control. When this leaves the battlefield, that card returns to the battlefield.)\nWhenever Wanderwine Prophets deals combat damage to a player, you may sacrifice a Merfolk. If you do, take an extra turn after this one.
+SetInfo:LRW Rare

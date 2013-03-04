@@ -7,7 +7,6 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ S
 SVar:PutCounter2:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter3
 SVar:PutCounter3:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmskin_forger.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/140.jpg
 Oracle:When Wurmskin Forger enters the battlefield, distribute three +1/+1 counters among one, two, or three target creatures.
+SetInfo:MRD Common

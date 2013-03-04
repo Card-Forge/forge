@@ -3,7 +3,6 @@ ManaCost:1 B
 Types:Creature Zombie
 PT:1/1
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_dead.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/40.jpg
 Oracle:{B}: Regenerate Walking Dead.
+SetInfo:LEG Common

@@ -5,7 +5,6 @@ PT:2/2
 A:AB$ ChangeZone | Cost$ T | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature. | SubAbility$ DBChangeZone | SpellDescription$ Return CARDNAME and target creature you control to owner's hand.
 SVar:DBChangeZone:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizard_mentor.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/112.jpg
 Oracle:{T}: Return Wizard Mentor and target creature you control to their owner's hand.
+SetInfo:USG Common

@@ -16,5 +16,5 @@ SVar:X:ReplaceCount$DamageAmount/Minus.1
 SVar:Y:ReplaceCount$DamageAmount
 SVar:RemAIDeck:TrueSVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_of_piety.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/28.jpg
 Oracle:Enchant creature\n{1}{W}: The next 1 damage that would be dealt to enchanted creature this turn is dealt to target creature or player instead.
+SetInfo:BOK Uncommon

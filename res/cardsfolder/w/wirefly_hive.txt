@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$ FlipACoin | Cost$ 3 T | WinSubAbility$ DBToken | LoseSubAbility$ DBDestroyAll | SpellDescription$ Flip a coin. If you win the flip, put a 2/2 colorless Insect artifact creature token with flying named Wirefly onto the battlefield. If you lose the flip, destroy all permanents named Wirefly.
 SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Permanent.namedWirefly
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Wirefly | TokenTypes$ Creature,Artifact,Insect | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirefly_hive.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/161.jpg
 Oracle:{3}, {T}: Flip a coin. If you win the flip, put a 2/2 colorless Insect artifact creature token with flying named Wirefly onto the battlefield. If you lose the flip, destroy all permanents named Wirefly.
+SetInfo:DST Uncommon

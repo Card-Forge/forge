@@ -5,7 +5,6 @@ A:SP$ Destroy | Cost$ 3 R R R | ValidTgts$ Land | TgtPrompt$ Select target land 
 SVar:DBWakeofDestructionDestroyThemAll:DB$ DestroyAll | ValidCards$ Remembered.sameName | SubAbility$ DBWakeofDestructionCleanup
 SVar:DBWakeofDestructionCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wake_of_destruction.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/99.jpg
 Oracle:Destroy target land and all other lands with the same name as that land.
+SetInfo:UDS Rare

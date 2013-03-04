@@ -4,7 +4,6 @@ Types:Creature Human Bear Druid
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | Condition$ Threshold | Description$ Threshold - CARDNAME gets +3/+3 as long as seven or more cards are in your graveyard.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/werebear.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/282.jpg
 Oracle:{T}: Add {G} to your mana pool.\nThreshold - Werebear gets +3/+3 as long as seven or more cards are in your graveyard.
+SetInfo:ODY Common

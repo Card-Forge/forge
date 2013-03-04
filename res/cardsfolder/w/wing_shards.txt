@@ -3,7 +3,6 @@ ManaCost:1 W W
 Types:Instant
 A:SP$ Sacrifice | Cost$ 1 W W | ValidTgts$ Player | SacValid$ Creature.attacking | SacMessage$ Creature | SpellDescription$ Target player sacrifices an attacking creature.
 K:Storm
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_shards.jpg
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/25.jpg
 Oracle:Target player sacrifices an attacking creature.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
+SetInfo:SCG Uncommon

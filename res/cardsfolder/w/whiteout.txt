@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ DebuffAll | Cost$ 1 G | ValidCards$ Creature | Keywords$ Flying | SpellDescription$ All creatures lose flying until end of turn.
 A:AB$ ChangeZone | Cost$ Sac<1/Land.Snow/snow land> | ActivationZone$ Graveyard | Defined$ Self | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whiteout.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/163.jpg
 Oracle:All creatures lose flying until end of turn.\nSacrifice a snow land: Return Whiteout from your graveyard to your hand.
+SetInfo:ICE Uncommon

@@ -4,15 +4,15 @@ Types:Creature Human Knight
 PT:2/2
 K:First Strike
 K:Protection from black
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/white_knight.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/227.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/229.jpg
-SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/27.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/344.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/306.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/39.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/41.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/228.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/228.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nProtection from black (This creature can't be blocked, targeted, dealt damage, or enchanted by anything black.)
+SetInfo:2ED Uncommon
+SetInfo:LGN Uncommon
+SetInfo:M10 Uncommon
+SetInfo:DDG Uncommon
+SetInfo:M11 Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

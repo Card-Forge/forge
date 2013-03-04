@@ -4,7 +4,7 @@ Types:Instant Trap
 A:SP$ ChangeZone | Cost$ 3 U U | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target creatures. | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 |  SpellDescription$ Return two target creatures to their owners' hands.
 A:SP$ ChangeZone | Cost$ U | CheckSVar$ CreaturesEntered | SVarCompare$ GE2 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target creatures. | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 |  SpellDescription$ If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay U rather than pay CARDNAME's mana cost.
 SVar:CreaturesEntered:Count$ThisTurnEntered_Battlefield_Creature.YouDontCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whiplash_trap.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/77.jpg
 Oracle:If an opponent had two or more creatures enter the battlefield under his or her control this turn, you may pay {U} rather than pay Whiplash Trap's mana cost.\nReturn two target creatures to their owners' hands.
+SetInfo:ZEN Common
+SetInfo:HOP Common

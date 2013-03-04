@@ -8,7 +8,6 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ PLAGU
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Enchanted creature gets -1/-1 for each plague counter on CARDNAME.
 SVar:X:Count$CardCounters.PLAGUE/Times.-1
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withering_hex.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/181.jpg
 Oracle:Enchant creature\nWhenever a player cycles a card, put a plague counter on Withering Hex.\nEnchanted creature gets -1/-1 for each plague counter on Withering Hex.
+SetInfo:ONS Uncommon

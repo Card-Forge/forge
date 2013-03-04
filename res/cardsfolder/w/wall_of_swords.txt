@@ -4,17 +4,16 @@ Types:Creature Wall
 PT:3/5
 K:Flying
 K:Defender
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card132120.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/56.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/226.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/228.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/55.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/305.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/199.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/57.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/51.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/227.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/343.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/227.jpg
 Oracle:Defender, flying (This creature can't attack, and it can block creatures with flying.)
+SetInfo:8ED Uncommon
+SetInfo:2ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:6ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:POR Uncommon
+SetInfo:3ED Uncommon
