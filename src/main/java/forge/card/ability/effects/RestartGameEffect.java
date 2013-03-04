@@ -48,7 +48,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             playerLibraries.put(p, newLibrary);
         }
 
-        GameNew.restartGame(game, sa.getActivatingPlayer(), playerLibraries);
+        GameNew.restartGame(Singletons.getModel().getMatch(), game, sa.getActivatingPlayer(), playerLibraries);
     }
 
     /* (non-Javadoc)

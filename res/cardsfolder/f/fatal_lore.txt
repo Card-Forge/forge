@@ -1,0 +1,11 @@
+Name:Fatal Lore
+ManaCost:2 B B
+Types:Sorcery
+A:SP$ Charm | Cost$ 2 B B | Chooser$ Opponent | Choices$ DrawThree,DestroyAndDraw | SpellDescription$ An opponent chooses one - You draw three cards; or you destroy up to two target creatures that opponent controls and that player draws up to three cards. Those creatures can't be regenerated.
+SVar:DrawThree:DB$ Draw | NumCards$ 3 | Defined$ You | SpellDescription$ You draw three cards.
+SVar:DestroyAndDraw:DB$ Destroy | ValidTgts$ Creature.ChosenCtrl | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 2 | NoRegen$ True | SpellDescription$ You destroy up to two target creatures that opponent controls and that player draws up to three cards. Those creatures can't be regenerated. | SubAbility$ ChooserDraws
+SVar:ChooserDraws:DB$ Draw | NumCards$ 3 | Defined$ ChosenPlayer
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fatal_lore.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/7.jpg
+Oracle:An opponent chooses one - You draw three cards; or you destroy up to two target creatures that opponent controls and that player draws up to three cards. Those creatures can't be regenerated.

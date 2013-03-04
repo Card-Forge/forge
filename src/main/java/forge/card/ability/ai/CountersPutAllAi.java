@@ -124,7 +124,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             }
         }
 
-        if (sa.isTrigger() || sa instanceof AbilitySub || SpellAbilityAi.playReusable(ai, sa)) {
+        if (SpellAbilityAi.playReusable(ai, sa)) {
             return chance;
         }
 

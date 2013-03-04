@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Orzhov2006 1
+Title=Orzhov 2006
+Icon=Orzhov-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+2 Agent of Masks|GPT
+1 Belfry Spirit|GPT
+2 Blind Hunter|GPT
+2 Castigate|GPT
+2 Hissing Miasma|GPT
+2 Infectious Host|RAV
+2 Mortify|COM
+2 Mourning Thrull|GPT
+2 Orzhov Euthanist|GPT
+1 Orzhov Guildmage|COM
+1 Orzhova, the Church of Deals|GPT
+2 Ostiary Thrull|GPT
+2 Pillory of the Sleepless|GPT
+4 Plagued Rusalka|GPT
+11 Plains|RTR
+2 Poisonbelly Ogre|GPT
+2 Shrieking Grotesque|GPT
+1 Skeletal Vampire|GPT
+2 Souls of the Faultless|GPT
+2 Strands of Undeath|RAV
+12 Swamp|RTR
+1 Teysa, Orzhov Scion|GPT
+[sideboard]
+[planes]
+[schemes]

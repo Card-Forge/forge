@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Jarad 2
+Title=Jarad
+Icon=Jarad.jpg
+Difficulty=medium
+Description=Dead? Undead? Make up your mind!
+Deck Type=constructed
+[main]
+3 Bloodbond March|RAV
+4 Darkblast|RAV
+3 Dimir House Guard|RAV
+4 Elves of Deep Shadow|RAV
+8 Forest|RTR
+2 Golgari Grave-Troll|RAV
+4 Golgari Guildgate|RTR
+4 Grisly Salvage|RTR
+1 Jarad's Orders|RTR
+3 Jarad, Golgari Lich Lord|RTR
+4 Lotleth Troll|RTR
+4 Overgrown Tomb|RTR
+4 Slitherhead|RTR
+4 Stinkweed Imp|RAV
+8 Swamp|RTR
+[sideboard]
+[planes]
+[schemes]

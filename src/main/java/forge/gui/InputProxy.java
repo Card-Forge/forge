@@ -21,9 +21,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Card;
-import forge.Singletons;
 import forge.control.input.Input;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.util.MyObservable;
@@ -36,28 +34,16 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id$
  */
-public class GuiInput extends MyObservable implements Observer {
+public class InputProxy extends MyObservable implements Observer {
 
     /** The input. */
     private Input input;
+    private volatile boolean valid = false;
 
-
-    /** {@inheritDoc} */
     @Override
     public final void update(final Observable observable, final Object obj) {
-        PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
-
-        final Input tmp = Singletons.getModel().getMatch().getInput().getActualInput();
-        // System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer()                + " @ actual input is " + ( tmp == null ? "null" : tmp.getClass().getName()) + "; MHP = " + ph.mayPlayerHavePriority() );
-        if (tmp != null) {
-            // System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer() + " @ input is " + tmp.getClass().getName() );
-            this.setInput(tmp);
-        } else if (!ph.isPlayerPriorityAllowed()) {
-            //System.out.println("cannot have priority, forced to pass");
-            ph.passPriority();
-        }
+        valid = false;
     }
-
     /**
      * <p>
      * Setter for the field <code>input</code>.
@@ -66,9 +52,10 @@ public class GuiInput extends MyObservable implements Observer {
      * @param in
      *            a {@link forge.control.input.Input} object.
      */
-    private void setInput(final Input in) {
+    public void setInput(final Input in) {
+        valid = true;
         this.input = in;
-        this.input.showMessage();
+        this.input.showMessage(); // this call may invalidate the input by the time it returns
     }
 
     /**
@@ -121,10 +108,13 @@ public class GuiInput extends MyObservable implements Observer {
         return this.getInput().toString();
     }
 
-    /** @return {@link forge.gui.GuiInput.Input} */
+    /** @return {@link forge.gui.InputProxy.Input} */
     public Input getInput() {
         return this.input;
     }
 
 
+    public boolean isValid() {
+        return valid;
+    }
 }

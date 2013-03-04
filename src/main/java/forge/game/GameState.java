@@ -478,6 +478,21 @@ public class GameState {
         return roIngamePlayers.get(iPlayer);
 
     }
+    
+    public String getOrdinalPosition(Player player, Player startingPlayer) {
+        int startPosition = roIngamePlayers.indexOf(startingPlayer);
+        int position = roIngamePlayers.indexOf(player) + startPosition + 1;
+        String[] sufixes = new String[] { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
+        switch (position % 100) {
+        case 11:
+        case 12:
+        case 13:
+            return position + "th";
+        default:
+            return position + sufixes[position % 10];
+
+        }
+    }
 
     /**
      * Only game knows how to get suitable players out of just connected clients.

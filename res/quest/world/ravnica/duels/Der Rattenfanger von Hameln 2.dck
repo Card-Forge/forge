@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Der Rattenfanger von Hameln 2
+Title=Der Rattenfanger von Hameln
+Icon=Hameln.jpg
+Difficulty=medium
+Description=Ratata
+Deck Type=constructed
+[main]
+4 Blood Crypt|RTR
+4 Drainpipe Vermin|RTR
+4 Gobhobbler Rats|DIS
+4 Gutter Skulk|GTC
+4 Hellhole Rats|DIS
+8 Mountain|RTR
+4 Ogre Slumlord|GTC
+4 Pack Rat|RTR
+4 Rakdos Guildgate|RTR
+4 Ratcatcher|DIS
+4 Seal of Fire|DIS
+4 Last Gasp|RAV
+8 Swamp|RTR
+[sideboard]
+[planes]
+[schemes]

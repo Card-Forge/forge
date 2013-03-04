@@ -1,217 +1,36 @@
-Forge Beta: 03-01-2013 ver 1.3.9
+Forge Beta: 03-##-2013 ver 1.3.10
 
 
-12193 cards in total.
+12### cards in total.
 
 
 Release Notes:
 
-You can now cast cards for it's miracle cost without getting a crash. Blocking with a creature was not resetting after combat and this would prevent this creature from blocking in subsequent turns, now fixed.
 
-Work continues on the quest worlds format and a new world based on Ravnica is coming along nicely.
-
-Added a 'copy to clipboard' button on WinLose screen so players can easily copy the game log.
-
-Find-as-you-type is now implemented for Deck Editor tables.  Just start typing while the table has focus and the next card with a matching string in its name will be highlighted.  If more than one card matches, hit Enter to select the next matching card.  A popup panel will appear with the search string so you know what you are searching for.  If no cards match the string, the string will be highlighted in red.  Normally, if you hit the spacebar while a card is selected in one table, the card will be moved to the other table (catalog/deck).  When the popup is displayed, space characters are interpreted as part of the search string.  Find-as-you-type mode is automatically exited after 5 seconds of inactivity, or hit Escape to exit find-as-you-type mode immediately.
-
-The Deck Editor has also gained some hotkey and context menu abilities.  R-click on a card (or a group of selected cards) for a list of actions and keyboard shortcuts.  In particular, you can now transfer cards 4 at a time using the keyboard and interact with the sideboard from anywhere.  Also remember that you can jump to the other table with the arrow keys and jump to the text filter with ctrl/cmd+f.  From the text filter, you can jump down to the tables by pressing enter.
-
-In recent weeks people had noticed that the computer was picking the weakest cards in Draft mode rather than the strongest cards. This left the AI with a draft mode deck that was suboptimal. The computer should now pick the strongest cards rather than the weakest cards.
-
-Work was also done on making the UI more keyboard-friendly.  For example, the OK button should now stay focused during matches, so you can advance through the stages by hitting Enter without having to go over and click the button all the time.  If you find the button is losing focus, please report it as a bug.
-
-Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards). 
-The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
-
-All Traditional sets are now up to 85% complete. Standard Format is supported at 99.19%. We are now at under 800 unsupported cards that are missing from Forge.
-
-A person reported "Love the game but I seem to be having a problem using a draft pool to start a quest. It works for sealed for me but when I select the draft deck option it's always blank even if I have one or several drafts completed." This should now be fixed and draft decks should now show up in quest start combobox.
-
-Several of the exiting sound files were changed and a handful of new sounds were added to the /res/sound/ folder.
-
-Our snapshot and beta releases should now display the correct SVN revision number in the title bar. This should allow people to file a bug report with the correct SVN revision number.
 
 
 New Cards:
 
-Archery Training
-Aurelia's Fury
-Aven Shrine
-Barrin's Spite
-Battletide Alchemist
-Bioshift
-Blind Seer
-Blinding Powder
-Bloom Tender
-Bomb Squad
-Bounty of the Hunt
-Builder's Bane
-Cabal Shrine
-Cannibalize
-Cephalid Shrine
-Chant of Vitu-Ghazi
-Chaoslace
-Charm Peddler
-Circle of Despair
-Cleansing Meditation
-Common Cause
-Conflagrate
-Conjurer's Ban
-Cornered Market
-Covenant of Minds
-Crashing Boars
-Crush Underfoot
-Cryptic Gateway
-Deathlace
-Deepwood Elder
-Desecrator Hag
-Disruption Aura
-Duplicity
-Dwarven Shrine
-Eight-and-a-Half-Tails
-Embolden
-Endemic Plague
-Epochrasite
-Ersatz Gnomes
-Eye for an Eye
-Eye of Singularity
-Eye of Yawgmoth
-Feint
-Fiery Bombardment
-Fiery Justice
-Fire and Brimstone
-Fire Covenant
-Flash
-Flickerform
-Forbidden Crypt
-Forked Lightning
-Frostwielder
-Game Preserve
-Gargantuan Gorilla
-Ghosts of the Innocent
-Glamer Spinners
-Guard Dogs
-Hail of Arrows
-Heartseeker
-Heroic Defiance
-Hint of Insanity
-Holistic Wisdom
-Infectious Rage
-Infernal Harvest
-Invoke Prejudice
-Jaded Response
-Jaws of Stone
-Killing Glare
-Knollspine Invocation
-Knowledge Exploitation
-Kumano's Blessing
-Kumano's Pupils
-Kumano, Master Yamabushi
-Leonin Bola
-Library of Leng
-Lifelace
-Light from Within
-Lightning Dart
-Living Inferno
-Magmatic Core
-Mana Vapors
-Marble Priest
-Mark of Eviction
-Martyr's Cause
-Memory Crystal
-Meteor Shower
-Mirror Golem
-Mist of Stagnation
-Mist of Stagnation
-Moonlace
-Moonring Mirror
-Nantuko Shrine
-Not of This World
-Pendrell Flux
-Phosphorescent Feast
-Phyrexian Purge
-Pious Kitsune
-Plague Boiler
-Planeswalker's Mischief
-Pledge of Loyalty
-Pollen Remedy
-Protean Hulk
-Psychic Allergy
-Purelace
-Purgatory
-Quenchable Fire
-Rally the Horde
-Razia's Purification
-Razor Boomerang
-Reincarnation
-Reins of the Vinesteed
-Remedy
-Retribution
-Reverent Mantra
-Reviving Vapors
-Reweave
-Rite of Ruin
-Rock Slide
-Rolling Thunder
-Sabertooth Cobra
-Samite Elder
-Sapphire Drake
-Searing Rays
-Serra's Hymn
-Shambling Swarm
-Shared Animosity
-Shuriken
-Simic Guildmage
-Sphinx Ambassador
-Spike Cannibal
-Spoils of War
-Struggle for Sanity
-Sunforger
-Surestrike Trident
-Tainted Pact
-Takeno, Samurai General
-Talara's Bane
-Talruum Piper
-Temporal Extortion
-Thelon of Havenwood
-Thought Gorger
-Thoughtlace
-Thran Tome
-Unforge
-Vodalian Mystic
-Volcanic Wind
-Warren Weirding
-Winnow
-Worldpurge
+Dimensional Breach
+Lim-Dul's Vault
+Eureka
+Hypergenesis
 
 
 New Phenomenons:
 
-Chaotic AEther
-Planewide Disaster
+
 
 
 New Planes:
 
-Aretopolis
-Undercity Reaches
+Feeding Grounds
+Horizon Boughs
 
 
 New Vanguard Avatars:
 
-Arcanis the Omnipotent Avatar
-Bosh, Iron Golem Avatar
-Figure of Destiny Avatar
-Haakon Stromgald Scourge Avatar
-Jaya Ballard Avatar
-Maro Avatar
-Master of the Wild Hunt Avatar
-Necropotence Avatar
-Sisters of Stone Death Avatar
-Stuffy Doll Avatar
-Two Headed Giant of Foriys Avatar
-Vampire Nocturnus Avatar
-Viridian Zealot Avatar
+
 
 
 Known Issues:
@@ -221,8 +40,6 @@ On several occasions people have noticed that the forge deck editor and/or quest
 Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
 
 Some time was spent turning the static ETB triggers into the proper ETB replacement effects they should be, mainly to interact correctly with each other. This work is not yet finished. As a result there is currently some inconsistencies with "Enters the battlefield with counters" (Not incredibly noticeable).
-
-It seems like the front face of double faced cards aren't triggering properly, but the back face and single faced cards are.
 
 A recent contribution to the code base should fix some of the bugs that people noticed with cloning type abilities. At this time there are two remaining issues that we hope will be addressed in the near future.
 
@@ -240,21 +57,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Contributors to This Release:
 
-Agetian
-Asepetci
-Foreroes
-Gos
-Hellfish
-Marc
-Max
-Myk
-Rooger
-RumbleBBU
-Serrasmurf
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)

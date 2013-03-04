@@ -496,6 +496,27 @@ The "Full catalog view" button appears to the left of the "Buy Card" button. Tog
 
 Multibuy: By selecting any number of items and hitting space (or selecting the "Buy Card" or "Sell Card" buttons), a player can buy one of everything selected.
 
+Find-as-you-type is now implemented for Deck Editor tables. Just start typing while the table has focus and the next card with a matching string in its name will be highlighted. If more than one card matches, hit Enter to select the next matching card. A popup panel will appear with the search string so you know what you are searching for. If no cards match the string, the string will be highlighted in red. Normally, if you hit the spacebar while a card is selected in one table, the card will be moved to the other table (catalog/deck). When the popup is displayed, space characters are interpreted as part of the search string. Find-as-you-type mode is automatically exited after 5 seconds of inactivity, or hit Escape to exit find-as-you-type mode immediately.
+
+The Deck Editor has also gained some hotkey and context menu abilities. R-click on a card (or a group of selected cards) for a list of actions and keyboard shortcuts. In particular, you can now transfer cards 4 at a time using the keyboard and interact with the sideboard from anywhere. Also remember that you can jump to the other table with the arrow keys and jump to the text filter with ctrl/cmd+f. From the text filter, you can jump down to the tables by pressing enter.
+
+
+The Game Log:
+
+Added a 'copy to clipboard' button on WinLose screen so players can easily copy the game log.
+
+
+The UI more keyboard-friendly:
+
+Work was also done on making the UI more keyboard-friendly. For example, the OK button should now stay focused during matches, so you can advance through the stages by hitting Enter without having to go over and click the button all the time. If you find the button is losing focus, please report it as a bug.
+
+
+Gatecrash Guild Sealed game mode:
+
+Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards). 
+
+The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
+
 
 Our Lawyers Made Us Do This:
 

@@ -294,8 +294,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        chance &= (r.nextFloat() < .8);
-
         final AbilitySub subAb = sa.getSubAbility();
         chance &= subAb == null || subAb.getAi().chkDrawbackWithSubs(ai, subAb);
 
@@ -747,7 +745,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
                 // Blink permanents with ETB triggers
-                else if (sa.isAbility() && (sa.getPayCosts() != null) && SpellAbilityAi.playReusable(ai, sa)) {
+                else if (SpellAbilityAi.playReusable(ai, sa)) {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
@@ -1319,8 +1317,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             player.shuffle();
         }
 
-        if ((!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined)
-                || (sa.hasParam("Reveal") && !fetched.isEmpty())) {
+        if (((!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined)
+                || (sa.hasParam("Reveal") && !fetched.isEmpty()))
+                && !sa.hasParam("NoReveal")) {
             final String picked = player + " picked:";
             if (fetched.size() > 0) {
                 GuiChoose.one(picked, fetched);

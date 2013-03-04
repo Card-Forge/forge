@@ -132,7 +132,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
-        if (SpellAbilityAi.playReusable(ai, sa) || priority) {
+        if (priority || SpellAbilityAi.playReusable(ai, sa)) {
             randomReturn = true;
         }
 

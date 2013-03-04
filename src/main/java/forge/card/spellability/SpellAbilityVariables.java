@@ -69,6 +69,7 @@ public class SpellAbilityVariables {
         this.threshold = sav.isThreshold();
         this.metalcraft = sav.isThreshold();
         this.hellbent = sav.isHellbent();
+        this.allTargetsLegal = sav.isAllTargetsLegal();
         this.prowl = new ArrayList<String>(sav.getProwl());
         this.isPresent = sav.getIsPresent();
         this.presentCompare = sav.getPresentCompare();
@@ -136,6 +137,8 @@ public class SpellAbilityVariables {
 
     /** The Kicked. */
     private boolean kicked = false;
+    
+    private boolean allTargetsLegal = false;
 
     /** The prowl. */
     private ArrayList<String> prowl = new ArrayList<String>();
@@ -518,6 +521,21 @@ public class SpellAbilityVariables {
         this.kicked = kicked;
     }
 
+
+    /**
+     * @return the allTargetsLegal
+     */
+    public boolean isAllTargetsLegal() {
+        return allTargetsLegal;
+    }
+
+    /**
+     * @param allTargetsLegal0 the allTargetsLegal to set
+     */
+    public void setAllTargetsLegal(boolean allTargets) {
+        this.allTargetsLegal = allTargets;
+    }
+    
 
     /**
      * <p>

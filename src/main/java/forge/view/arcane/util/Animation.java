@@ -141,6 +141,18 @@ public abstract class Animation {
     }
 
     /**
+     * <p>
+     * invokeLater.
+     * </p>
+     * 
+     * @param runnable
+     *            a {@link java.lang.Runnable} object.
+     */
+    public static void invokeLater(final Runnable runnable) {
+        EventQueue.invokeLater(runnable);
+    }
+
+    /**
      * Uses averaging of the time between the past few frames to provide smooth
      * animation.
      */
@@ -248,7 +260,7 @@ public abstract class Animation {
     public static void moveCardToPlay(final int startX, final int startY, final int startWidth, final int endX,
             final int endY, final int endWidth, final CardPanel animationPanel, final CardPanel placeholder,
             final JLayeredPane layeredPane, final int speed) {
-        UI.invokeLater(new Runnable() {
+        Animation.invokeLater(new Runnable() {
             @Override
             public void run() {
                 final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
@@ -343,7 +355,7 @@ public abstract class Animation {
     public static void moveCard(final int startX, final int startY, final int startWidth, final int endX,
             final int endY, final int endWidth, final CardPanel animationPanel, final CardPanel placeholder,
             final JLayeredPane layeredPane, final int speed) {
-        UI.invokeLater(new Runnable() {
+        Animation.invokeLater(new Runnable() {
             @Override
             public void run() {
                 final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
@@ -397,19 +409,14 @@ public abstract class Animation {
      *            a {@link forge.view.arcane.CardPanel} object.
      */
     public static void moveCard(final CardPanel placeholder) {
-        UI.invokeLater(new Runnable() {
+        Animation.invokeLater(new Runnable() {
             @Override
             public void run() {
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (placeholder != null) {
-                            placeholder.setDisplayEnabled(true);
-                            // placeholder.setImage(imagePanel);
-                            placeholder.setCard(placeholder.getGameCard());
-                        }
-                    }
-                });
+                if (placeholder != null) {
+                    placeholder.setDisplayEnabled(true);
+                    // placeholder.setImage(imagePanel);
+                    placeholder.setCard(placeholder.getGameCard());
+                }
             }
         });
     }

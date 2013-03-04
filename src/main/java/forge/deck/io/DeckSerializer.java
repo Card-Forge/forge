@@ -46,7 +46,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 /**
- * TODO: Write javadoc for this type.
+ * This class knows how to make a file out of a deck object and vice versa.
  * 
  */
 public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSerializer<Deck> {

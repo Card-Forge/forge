@@ -66,6 +66,8 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
     public Zone(final ZoneType zone) {
         this.zoneName = zone;
         this.roCardList = Collections.unmodifiableList(cardList);
+        
+        //System.out.println(zoneName + " (ct) " + Integer.toHexString(System.identityHashCode(roCardList)));
     }
 
     // ************ BEGIN - these methods fire updateObservers() *************
@@ -191,7 +193,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
      *            an Object
      */
     @Override
-    public void remove(final Object c) {
+    public void remove(final Card c) {
         this.cardList.remove(c);
         this.update();
     }
@@ -287,6 +289,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
      */
     @Override
     public final List<Card> getCards() {
+        //System.out.println(zoneName + ": " + Integer.toHexString(System.identityHashCode(roCardList)));
         return this.getCards(true);
     }
 
@@ -320,29 +323,6 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         if (this.update) {
             this.updateObservers();
         }
-    }
-
-    /**
-     * Sets the update.
-     * 
-     * @param b
-     *            a boolean.
-     */
-    @Override
-    public final void setUpdate(final boolean b) {
-        this.update = b;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>update</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    @Override
-    public final boolean getUpdate() {
-        return this.update;
     }
 
     /**

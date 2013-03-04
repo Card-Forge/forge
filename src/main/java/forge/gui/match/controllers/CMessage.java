@@ -28,7 +28,7 @@ import javax.swing.JButton;
 
 import forge.Command;
 import forge.game.MatchController;
-import forge.gui.GuiInput;
+import forge.gui.InputProxy;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.views.VMessage;
@@ -42,7 +42,7 @@ public enum CMessage implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private GuiInput inputControl = new GuiInput();
+    private InputProxy inputControl = new InputProxy();
     private Component lastFocusedButton = null;
     
     private final ActionListener actCancel = new ActionListener() {
@@ -87,7 +87,7 @@ public enum CMessage implements ICDoc {
      * 
      * @return GuiInput
      */
-    public GuiInput getInputControl() {
+    public InputProxy getInputControl() {
         return this.inputControl;
     }
 

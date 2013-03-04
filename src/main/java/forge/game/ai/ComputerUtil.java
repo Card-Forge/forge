@@ -425,14 +425,16 @@ public class ComputerUtil {
         int count = 0;
 
         while (count < amount) {
-            final Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
-            if (prefCard != null) {
-                sacList.add(prefCard);
-                typeList.remove(prefCard);
-                count++;
-            } else {
+            Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
+            if (prefCard == null) {
+                prefCard = ComputerUtilCard.getWorstAI(typeList);
+            }
+            if (prefCard == null) {
                 return null;
             }
+            sacList.add(prefCard);
+            typeList.remove(prefCard);
+            count++;
         }
         return sacList;
     }
@@ -943,19 +945,6 @@ public class ComputerUtil {
             }
         }
         return false;
-    }
-
-
-    public static boolean targetHumanAI(final SpellAbility sa) {
-        if (sa == null || sa.getActivatingPlayer() == null) {
-            return false;
-        }
-        Player human = sa.getActivatingPlayer().getOpponent();
-        if (!sa.canTarget(human)) {
-            return false;
-        }
-        sa.setTargetPlayer(human);
-        return true;
     }
 
     // returns true if it's better to wait until blockers are declared

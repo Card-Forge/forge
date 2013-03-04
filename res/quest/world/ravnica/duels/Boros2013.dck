@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Boros2013 1
+Title=Boros 2013
+Icon=Boros-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+1 Act of Treason|GTC
+2 Aerial Maneuver|GTC
+1 Armored Transport|GTC
+3 Arrows of Justice|GTC
+1 Bomber Corps|GTC
+3 Boros Elite|GTC
+1 Boros Guildgate|GTC
+2 Boros Keyrune|GTC
+1 Court Street Denizen|GTC
+2 Daring Skyjek|GTC
+3 Ember Beast|GTC
+1 Firefist Striker|GTC
+1 Firemane Avenger|GTC
+2 Fortress Cyclops|GTC
+1 Foundry Champion|GTC
+1 Mark for Death|GTC
+12 Mountain|RTR
+1 Mugging|GTC
+1 Ordruun Veteran|GTC
+12 Plains|RTR
+1 Righteous Charge|GTC
+1 Shielded Passage|GTC
+2 Skyknight Legionnaire|GTC
+1 Sunhome Guildmage|GTC
+2 Warmind Infantry|GTC
+3 Wojek Halberdiers|GTC
+[sideboard]
+[planes]
+[schemes]

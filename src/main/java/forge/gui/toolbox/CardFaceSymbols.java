@@ -29,7 +29,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaCost;
-import forge.view.arcane.util.UI;
 
 /**
  * <p>
@@ -167,11 +166,11 @@ public class CardFaceSymbols {
      * @param w an int
      * @param h and int
      */
-    public static void draw(final Graphics g, String s, int x, final int y, final int w, final int h) {
+    public static void drawOther(final Graphics g, String s, int x, final int y, final int w, final int h) {
         if (s.length() == 0) {
             return;
         }
-        s = UI.getDisplayManaCost(s);
+
         StringTokenizer tok = new StringTokenizer(s, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();

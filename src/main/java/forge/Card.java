@@ -6876,10 +6876,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     for (final Object rem : source.getRemembered()) {
                         if (rem instanceof Card) {
                             final Card card = (Card) rem;
-                            System.out.println(this + " vs " + card);
-                            System.out.println(this.getOwner().equals(card.getOwner()));
-                            System.out.println(this.getOwner());
-                            System.out.println(card.getOwner());
                             if (!this.getOwner().equals(card.getOwner())) {
                                 return false;
                             }

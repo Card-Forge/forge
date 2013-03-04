@@ -270,7 +270,7 @@ public class DiscardEffect extends RevealEffectBase {
                             List<Card> chosen = getDiscardedList(p, dPChHand);
 
                             for (Card c : chosen) {
-                                dPChHand.remove(chosen);
+                                dPChHand.remove(c);
                                 toBeDiscarded.add(c);
                             }
                         } else 

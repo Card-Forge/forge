@@ -7,19 +7,18 @@ Difficulty=very hard
 Description=Big Blue fliers and effects to impede opponent's progress.
 Deck Type=constructed
 [main]
+4 Air Elemental|LEB
 1 Ancestral Recall|LEB
-2 Control Magic|LEB
-2 Energy Flux|4ED
+4 Control Magic|LEB
 4 Ghost Ship|DRK
 4 Giant Tortoise|ARN
 22 Island|4ED
-2 Mahamoti Djinn|LEB
-4 Mana Short|LEB
+4 Mahamoti Djinn|LEB
+4 Mana Drain|LEG
 1 Mox Sapphire|LEB
 4 Phantom Monster|LEB
 4 Power Sink|4ED
-4 Psychic Venom|LEB
 1 Sol Ring|LEB
 2 Time Elemental|LEG
-3 Twiddle|LEB
+1 Time Walk|LEB
 [sideboard]

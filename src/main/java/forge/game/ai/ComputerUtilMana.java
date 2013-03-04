@@ -460,6 +460,7 @@ public class ComputerUtilMana {
     private static List<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
         final GameState game = Singletons.getModel().getGame();
         final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
+        list.addAll(ai.getCardsIn(ZoneType.Hand));
         final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

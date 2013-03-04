@@ -1489,6 +1489,7 @@ res/cardsfolder/c/carnival_hellsteed.txt -text
 res/cardsfolder/c/carnival_of_souls.txt svneol=native#text/plain
 res/cardsfolder/c/carnivorous_plant.txt svneol=native#text/plain
 res/cardsfolder/c/carnophage.txt svneol=native#text/plain
+res/cardsfolder/c/carpet_of_flowers.txt -text
 res/cardsfolder/c/carrier_pigeons.txt svneol=native#text/plain
 res/cardsfolder/c/carrion.txt svneol=native#text/plain
 res/cardsfolder/c/carrion_ants.txt svneol=native#text/plain
@@ -2387,6 +2388,7 @@ res/cardsfolder/d/deadwood_treefolk.txt svneol=native#text/plain
 res/cardsfolder/d/dearly_departed.txt -text
 res/cardsfolder/d/death_baron.txt svneol=native#text/plain
 res/cardsfolder/d/death_bomb.txt svneol=native#text/plain
+res/cardsfolder/d/death_by_dragons.txt -text
 res/cardsfolder/d/death_charmer.txt svneol=native#text/plain
 res/cardsfolder/d/death_cloud.txt svneol=native#text/plain
 res/cardsfolder/d/death_cultist.txt svneol=native#text/plain
@@ -2611,6 +2613,7 @@ res/cardsfolder/d/diamond_valley.txt svneol=native#text/plain
 res/cardsfolder/d/didgeridoo.txt svneol=native#text/plain
 res/cardsfolder/d/diligent_farmhand.txt svneol=native#text/plain
 res/cardsfolder/d/diluvian_primordial.txt -text
+res/cardsfolder/d/dimensional_breach.txt -text
 res/cardsfolder/d/diminish.txt svneol=native#text/plain
 res/cardsfolder/d/diminishing_returns.txt svneol=native#text/plain
 res/cardsfolder/d/dimir_aqueduct.txt svneol=native#text/plain
@@ -3299,6 +3302,7 @@ res/cardsfolder/e/ethersworn_canonist.txt -text
 res/cardsfolder/e/ethersworn_shieldmage.txt -text
 res/cardsfolder/e/etherwrought_page.txt -text svneol=unset#text/plain
 res/cardsfolder/e/eunuchs_intrigues.txt -text
+res/cardsfolder/e/eureka.txt -text
 res/cardsfolder/e/evacuation.txt svneol=native#text/plain
 res/cardsfolder/e/evaporate.txt svneol=native#text/plain
 res/cardsfolder/e/evasive_action.txt svneol=native#text/plain
@@ -3465,6 +3469,7 @@ res/cardsfolder/f/fastbond.txt svneol=native#text/plain
 res/cardsfolder/f/fatal_attraction.txt svneol=native#text/plain
 res/cardsfolder/f/fatal_blow.txt svneol=native#text/plain
 res/cardsfolder/f/fatal_frenzy.txt svneol=native#text/plain
+res/cardsfolder/f/fatal_lore.txt -text
 res/cardsfolder/f/fatal_mutation.txt svneol=native#text/plain
 res/cardsfolder/f/fatestitcher.txt svneol=native#text/plain
 res/cardsfolder/f/fathom_mage.txt -text
@@ -3491,6 +3496,7 @@ res/cardsfolder/f/feed_the_pack.txt -text
 res/cardsfolder/f/feedback.txt svneol=native#text/plain
 res/cardsfolder/f/feedback_bolt.txt svneol=native#text/plain
 res/cardsfolder/f/feeding_frenzy.txt svneol=native#text/plain
+res/cardsfolder/f/feeding_grounds.txt -text
 res/cardsfolder/f/feeling_of_dread.txt -text
 res/cardsfolder/f/feint.txt -text
 res/cardsfolder/f/feldons_cane.txt svneol=native#text/plain
@@ -4946,6 +4952,7 @@ res/cardsfolder/h/hope_charm.txt svneol=native#text/plain
 res/cardsfolder/h/hopping_automaton.txt svneol=native#text/plain
 res/cardsfolder/h/horde_of_boggarts.txt -text
 res/cardsfolder/h/horde_of_notions.txt svneol=native#text/plain
+res/cardsfolder/h/horizon_boughs.txt -text
 res/cardsfolder/h/horizon_canopy.txt svneol=native#text/plain
 res/cardsfolder/h/horizon_drake.txt svneol=native#text/plain
 res/cardsfolder/h/horizon_seed.txt -text
@@ -5049,6 +5056,7 @@ res/cardsfolder/h/hydrosurge.txt -text
 res/cardsfolder/h/hyena_umbra.txt svneol=native#text/plain
 res/cardsfolder/h/hymn_of_rebirth.txt svneol=native#text/plain
 res/cardsfolder/h/hymn_to_tourach.txt svneol=native#text/plain
+res/cardsfolder/h/hypergenesis.txt -text
 res/cardsfolder/h/hyperion_blacksmith.txt svneol=native#text/plain
 res/cardsfolder/h/hypersonic_dragon.txt -text
 res/cardsfolder/h/hypervolt_grasp.txt svneol=native#text/plain
@@ -5968,6 +5976,7 @@ res/cardsfolder/l/liability.txt svneol=native#text/plain
 res/cardsfolder/l/liberate.txt svneol=native#text/plain
 res/cardsfolder/l/liberated_dwarf.txt svneol=native#text/plain
 res/cardsfolder/l/library_of_alexandria.txt svneol=native#text/plain
+res/cardsfolder/l/library_of_lat_nam.txt -text
 res/cardsfolder/l/library_of_leng.txt -text
 res/cardsfolder/l/lich.txt svneol=native#text/plain
 res/cardsfolder/l/lich_lord_of_unx.txt svneol=native#text/plain
@@ -6037,6 +6046,7 @@ res/cardsfolder/l/lim_dul_the_necromancer.txt svneol=native#text/plain
 res/cardsfolder/l/lim_duls_cohort.txt svneol=native#text/plain
 res/cardsfolder/l/lim_duls_high_guard.txt svneol=native#text/plain
 res/cardsfolder/l/lim_duls_paladin.txt -text
+res/cardsfolder/l/lim_duls_vault.txt -text
 res/cardsfolder/l/limestone_golem.txt svneol=native#text/plain
 res/cardsfolder/l/limited_resources.txt -text
 res/cardsfolder/l/lin_sivvi_defiant_hero.txt svneol=native#text/plain
@@ -6676,6 +6686,7 @@ res/cardsfolder/m/mischievous_poltergeist.txt svneol=native#text/plain
 res/cardsfolder/m/mischievous_quanar.txt -text
 res/cardsfolder/m/misers_cage.txt svneol=native#text/plain
 res/cardsfolder/m/misery_charm.txt svneol=native#text/plain
+res/cardsfolder/m/misfortune.txt -text
 res/cardsfolder/m/misfortunes_gain.txt svneol=native#text/plain
 res/cardsfolder/m/misguided_rage.txt svneol=native#text/plain
 res/cardsfolder/m/mishra.txt -text
@@ -14214,9 +14225,9 @@ src/main/java/forge/gui/GuiChoose.java -text
 src/main/java/forge/gui/GuiDialog.java -text
 src/main/java/forge/gui/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/gui/GuiImportPicture.java svneol=native#text/plain
-src/main/java/forge/gui/GuiInput.java svneol=native#text/plain
 src/main/java/forge/gui/GuiProgressBarWindow.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
+src/main/java/forge/gui/InputProxy.java svneol=native#text/plain
 src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
@@ -14530,7 +14541,6 @@ src/main/java/forge/view/arcane/package-info.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/Animation.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/CardPanelMouseListener.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/GlowText.java svneol=native#text/plain
-src/main/java/forge/view/arcane/util/UI.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
 src/main/resources/proxy-template.ftl -text

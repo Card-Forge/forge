@@ -91,7 +91,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         int minGain = 200; // The minimum gain in destroyed creatures
-        if (sa.getPayCosts().isReusuableResource()) {
+        if (sa.getPayCosts() != null && sa.getPayCosts().isReusuableResource()) {
             minGain = 100;
         }
 

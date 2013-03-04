@@ -1,3 +1,4 @@
 Name:Main world
 Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, 4ED|Banned:Chaos Orb; Falling Star
 Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH|Banned:Chaos Orb; Falling Star
+Name:Ravnica|Dir:ravnica|Sets:RAV, GPT, DIS, RTR, GTC|Banned:Chaos Orb; Falling Star

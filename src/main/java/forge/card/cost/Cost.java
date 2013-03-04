@@ -78,7 +78,7 @@ public class Cost {
      * @return a boolean.
      */
     public final boolean hasNoManaCost() {
-        return this.getTotalMana().toString().equals(ManaCost.ZERO.toString());
+        return this.getTotalMana().isZero();
     }
 
     /**
@@ -373,7 +373,6 @@ public class Cost {
     }
 
     public final CostPartMana getCostMana() {
-        // TODO: Change where ChangeCost happens
         for (final CostPart part : this.costParts) {
             if (part instanceof CostPartMana) {
                 return (CostPartMana) part;

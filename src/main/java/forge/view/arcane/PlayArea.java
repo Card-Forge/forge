@@ -27,6 +27,7 @@ import java.util.List;
 
 import javax.swing.JScrollPane;
 import forge.Card;
+import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;
 
 /**
@@ -65,6 +66,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private int extraCardSpacingX, cardSpacingX, cardSpacingY;
     private int stackSpacingX, stackSpacingY;
 
+    private List<Card> model;
+    
     /**
      * <p>
      * Constructor for PlayArea.
@@ -76,10 +79,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
      *            a boolean.
      * @param modelRef 
      */
-    public PlayArea(final JScrollPane scrollPane, final boolean mirror) {
+    public PlayArea(final JScrollPane scrollPane, final boolean mirror, List<Card> modelRef) {
         super(scrollPane);
         this.setBackground(Color.white);
         this.mirror = mirror;
+        this.model = modelRef;
     }
 
     private final CardStackRow collectAllLands() {
@@ -210,6 +214,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         while (deltaCardWidth > 0) {
             List<CardStackRow> template = tryArrangePilesOfWidth(lands, tokens, creatures, others);
+            //System.out.println(template == null ? "won't fit" : "Fits @ " + cardWidth + " !!! " + template.toString());
             
             deltaCardWidth = (getCardWidth() - lastGoodCardWidth) / 2;
             if (template != null) {
@@ -254,6 +259,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         int x = 0;
         int y = PlayArea.GUTTER_Y;
 
+        //System.out.println("-------- " + (mirror ? "^" : "_") + " (Positioning ) Card width = " + cardWidth + ". Playarea = " + playAreaWidth + " x " + playAreaHeight );
         for (final CardStackRow row : template) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
@@ -273,10 +279,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     this.setComponentZOrder(panel, panelIndex);
                     final int panelX = x + (stackPosition * this.stackSpacingX);
                     final int panelY = y + (stackPosition * this.stackSpacingY);
+                    //System.out.println("... placinng " + panel.getCard() + " @ (" + panelX + ", " + panelY + ")" );
                     panel.setCardBounds(panelX, panelY, this.getCardWidth(), this.cardHeight);
                 }
                 rowBottom = Math.max(rowBottom, y + stack.getHeight());
-                x += stack.getWidth() + cardSpacingX;
+                x += stack.getWidth();
             }
             y = rowBottom;
         }
@@ -287,6 +294,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         
         int afterFirstRow;
 
+        //System.out.println( "======== "  + ( mirror ? "^" : "_" ) + " (try arrange) Card width = " + cardWidth + ". PlayArea = " + playAreaWidth + " x " + playAreaHeight + " ========");
         boolean landsFit, tokensFit, creaturesFit;
         if (this.mirror) {
             // Wrap all creatures and lands.
@@ -350,13 +358,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         // card width.
         final boolean isMinimalSize = this.getCardWidth() == this.getCardWidthMin();
 
-//        System.err.format("[%d] @ %d - Repaint playarea - %s %n", new Date().getTime(), cntRepaints++, mirror ? "MIRROR" : "DIRECT");
-
         CardStackRow currentRow = new CardStackRow();
         for (final CardStack stack : sourceRow) {
             final int rowWidth = currentRow.getWidth();
+            final int stackWidth = stack.getWidth();
+            //System.out.printf("Adding %s (+%dpx), current row is %dpx and has %s \n", stack, stackWidth, rowWidth, currentRow ); 
             // If the row is not empty and this stack doesn't fit, add the row.
-            if (rowWidth + stack.getWidth() > this.playAreaWidth && !currentRow.isEmpty() ) {
+            if (rowWidth + stackWidth > this.playAreaWidth && !currentRow.isEmpty() ) {
 
                 // Stop processing if the row is too wide or tall.
                 if (rowWidth > this.playAreaWidth || this.getRowsHeight(template) + sourceRow.getHeight() > this.playAreaHeight) {
@@ -384,6 +392,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     template.add(insertIndex, currentRow);
             } else return false;
         }
+        //System.out.println("... row complete! " + currentRow.getWidth() + "px");
         return true;
     }
 
@@ -405,6 +414,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private int planOthersRow(final List<CardStack> sourceRow, final int firstPile, final List<CardStackRow> template, final CardStackRow rowToFill) {
         int rowWidth = rowToFill.getWidth();
 
+        // System.out.println("This row has:" + rowToFill + "; want to add:" + sourceRow );
         for (int i = firstPile; i < sourceRow.size(); i++ ) {
             CardStack stack = sourceRow.get(i);
 
@@ -476,6 +486,89 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             return;
         }
         super.mouseLeftClicked(panel, evt);
+    }
+
+    /**
+     * <p>
+     * setupPlayZone.
+     * </p>
+     * 
+     * @param newList
+     *            an array of {@link forge.Card} objects.
+     */
+    public void setupPlayZone() {
+        List<Card> oldCards, toDelete;
+        oldCards = new ArrayList<Card>();
+        for (final CardPanel cpa : getCardPanels()) {
+            oldCards.add(cpa.getGameCard());
+        }
+        toDelete = new ArrayList<Card>(oldCards);
+        toDelete.removeAll(model);
+        if (toDelete.size() == getCardPanels().size()) {
+            clear();
+        } else {
+            for (final Card card : toDelete) {
+                removeCardPanel(getCardPanel(card.getUniqueNumber()));
+            }
+        }
+    
+        List<Card> toAdd = new ArrayList<Card>(model);
+        toAdd.removeAll(oldCards);
+    
+        List<CardPanel> newPanels = new ArrayList<CardPanel>();
+        for (final Card card : toAdd) {
+            newPanels.add(addCard(card));
+        }
+        if (!toAdd.isEmpty()) {
+            doLayout();
+        }
+        for (final CardPanel toPanel : newPanels) {
+            scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel.getCardWidth(), toPanel.getCardHeight()));
+            Animation.moveCard(toPanel);
+        }
+    
+        for (final Card card : model) {
+            final CardPanel toPanel = getCardPanel(card.getUniqueNumber());
+            if (card.isTapped()) {
+                toPanel.setTapped(true);
+                toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
+            } else {
+                toPanel.setTapped(false);
+                toPanel.setTappedAngle(0);
+            }
+            toPanel.getAttachedPanels().clear();
+            if (card.isEnchanted()) {
+                final ArrayList<Card> enchants = card.getEnchantedBy();
+                for (final Card e : enchants) {
+                    final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
+                    if (cardE != null) {
+                        toPanel.getAttachedPanels().add(cardE);
+                    }
+                }
+            }
+    
+            if (card.isEquipped()) {
+                final ArrayList<Card> enchants = card.getEquippedBy();
+                for (final Card e : enchants) {
+                    final forge.view.arcane.CardPanel cardE = getCardPanel(e.getUniqueNumber());
+                    if (cardE != null) {
+                        toPanel.getAttachedPanels().add(cardE);
+                    }
+                }
+            }
+    
+            if (card.isEnchantingCard()) {
+                toPanel.setAttachedToPanel(getCardPanel(card.getEnchantingCard().getUniqueNumber()));
+            } else if (card.isEquipping()) {
+                toPanel.setAttachedToPanel(getCardPanel(card.getEquipping().get(0).getUniqueNumber()));
+            } else {
+                toPanel.setAttachedToPanel(null);
+            }
+    
+            toPanel.setCard(toPanel.getGameCard());
+        }
+        invalidate();
+        repaint();
     }
 
     private static enum RowType {

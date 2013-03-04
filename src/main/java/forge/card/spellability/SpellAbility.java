@@ -51,7 +51,6 @@ public abstract class SpellAbility implements ISpellAbility {
 
     // choices for constructor isPermanent argument
     private String description = "";
-    private Player targetPlayer = null;
     private String stackDescription = "";
     private ManaCost manaCost = null;
     private ManaCost multiKickerManaCost = null;
@@ -1111,7 +1110,6 @@ public abstract class SpellAbility implements ISpellAbility {
         if (tgt != null) {
             tgt.addTarget(card);
         } else {
-            this.targetPlayer = null; // reset setTargetPlayer()
             this.targetCard = card;
         }
         String desc = "";
@@ -1124,74 +1122,6 @@ public abstract class SpellAbility implements ISpellAbility {
         this.setStackDescription(desc);
     }
 
-//    /**
-//     * <p>
-//     * Getter for the field <code>targetList</code>.
-//     * </p>
-//     * 
-//     * @return a {@link forge.CardList} object.
-//     */
-//    public List<Card> getTargetList() {
-//        return this.targetList;
-//    }
-
-//    /**
-//     * <p>
-//     * Setter for the field <code>targetList</code>.
-//     * </p>
-//     * 
-//     * @param list
-//     *            a {@link forge.CardList} object.
-//     */
-//    public void setTargetList(final List<Card> list) {
-//        // The line below started to create a null error at
-//        // forge.CardFactoryUtil.canBeTargetedBy(CardFactoryUtil.java:3329)
-//        // after ForgeSVN r2699. I hope that commenting out the line below will
-//        // not result in other bugs. :)
-//        // targetPlayer = null;//reset setTargetPlayer()
-//
-//        this.targetList = list;
-//        final StringBuilder sb = new StringBuilder();
-//        sb.append(this.getSourceCard().getName()).append(" - targeting ");
-//        for (int i = 0; i < this.targetList.size(); i++) {
-//
-//            if (!this.targetList.get(i).isFaceDown()) {
-//                sb.append(this.targetList.get(i));
-//            } else {
-//                sb.append("Morph(").append(this.targetList.get(i).getUniqueNumber()).append(")");
-//            }
-//
-//            if (i < (this.targetList.size() - 1)) {
-//                sb.append(", ");
-//            }
-//        }
-//        this.setStackDescription(sb.toString());
-//    }
-
-    /**
-     * <p>
-     * Setter for the field <code>targetPlayer</code>.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     */
-    public void setTargetPlayer(final Player p) {
-        if (p == null) {
-            throw new RuntimeException("SpellAbility : setTargetPlayer() error, argument is " + p + " source card is "
-                    + this.getSourceCard());
-        }
-
-        final Target tgt = this.getTarget();
-        if (tgt != null) {
-            tgt.addTarget(p);
-        } else {
-            this.targetCard = null; // reset setTargetCard()
-            this.targetPlayer = p;
-        }
-        this.setStackDescription(this.getSourceCard().getName() + " - targeting " + p);
-    }
-
     /**
      * <p>
      * Getter for the field <code>targetPlayer</code>.
@@ -1200,18 +1130,15 @@ public abstract class SpellAbility implements ISpellAbility {
      * @return a {@link forge.game.player.Player} object.
      */
     public Player getTargetPlayer() {
-        if (this.targetPlayer == null) {
-            final Target tgt = this.getTarget();
-            if (tgt != null) {
-                final ArrayList<Player> list = tgt.getTargetPlayers();
+        final Target tgt = this.getTarget();
+        if (tgt != null) {
+            final ArrayList<Player> list = tgt.getTargetPlayers();
 
-                if (!list.isEmpty()) {
-                    return list.get(0);
-                }
+            if (!list.isEmpty()) {
+                return list.get(0);
             }
-            return null;
         }
-        return this.targetPlayer;
+        return null;
     }
 
     /**

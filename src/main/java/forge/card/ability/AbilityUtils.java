@@ -143,7 +143,6 @@ public class AbilityUtils {
                 final Object crd = root.getTriggeringObject(defined.substring(9));
                 if (crd instanceof Card) {
                     c = Singletons.getModel().getGame().getCardState((Card) crd);
-                    c = (Card) crd;
                 } else if (crd instanceof List<?>) {
                     for (final Card cardItem : (List<Card>) crd) {
                         cards.add(cardItem);
@@ -1110,6 +1109,8 @@ public class AbilityUtils {
                 if (paid) {
                     unpaidCommand = paidCommand;
                 }
+                ability.setActivatingPlayer(payer);
+                ability.setTarget(sa.getTarget());
                 GameActionUtil.payCostDuringAbilityResolve(payer, ability, cost, paidCommand, unpaidCommand, sa, game);
                 waitForInput = true; // wait for the human input
                 break; // multiple human players are not supported

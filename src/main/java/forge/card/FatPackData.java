@@ -57,7 +57,7 @@ public class FatPackData {
          * @see forge.util.StorageReaderFile#read(java.lang.String)
          */
         @Override
-        protected FatPackData read(String line) {
+        protected FatPackData read(String line, int i) {
             final FileSection section = FileSection.parse(line, ":", "|");
             int nBoosters = section.getInt("Boosters", 0);
             int nLand = section.getInt("BasicLands", 0);
