@@ -1489,6 +1489,7 @@ res/cardsfolder/c/carnival_hellsteed.txt -text
 res/cardsfolder/c/carnival_of_souls.txt svneol=native#text/plain
 res/cardsfolder/c/carnivorous_plant.txt svneol=native#text/plain
 res/cardsfolder/c/carnophage.txt svneol=native#text/plain
+res/cardsfolder/c/carpet_of_flowers.txt -text
 res/cardsfolder/c/carrier_pigeons.txt svneol=native#text/plain
 res/cardsfolder/c/carrion.txt svneol=native#text/plain
 res/cardsfolder/c/carrion_ants.txt svneol=native#text/plain
@@ -2387,6 +2388,7 @@ res/cardsfolder/d/deadwood_treefolk.txt svneol=native#text/plain
 res/cardsfolder/d/dearly_departed.txt -text
 res/cardsfolder/d/death_baron.txt svneol=native#text/plain
 res/cardsfolder/d/death_bomb.txt svneol=native#text/plain
+res/cardsfolder/d/death_by_dragons.txt -text
 res/cardsfolder/d/death_charmer.txt svneol=native#text/plain
 res/cardsfolder/d/death_cloud.txt svneol=native#text/plain
 res/cardsfolder/d/death_cultist.txt svneol=native#text/plain
