@@ -33,6 +33,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.CounterType;
 import forge.GameEntity;
+import forge.card.CardSplitType;
 import forge.card.CardType;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cost.Cost;
@@ -462,6 +463,11 @@ public class GameAction {
 
         if (c.hasKeyword("If CARDNAME is put into a graveyard this turn, its controller gets a poison counter.")) {
             c.getController().addPoisonCounters(1, c);
+        }
+
+        // if a split card, convert back to its full face form before going to graveyard
+        if (c.getRules().getSplitType() == CardSplitType.Split) {
+            c.setState(CardCharacteristicName.Original);
         }
 
         // must put card in OWNER's graveyard not controller's
