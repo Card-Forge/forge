@@ -2,8 +2,7 @@ Name:Ur-Golem's Eye
 ManaCost:4
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | SpellDescription$ Add 2 to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ur_golems_eye.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/155.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/314.jpg
 Oracle:{T}: Add {2} to your mana pool.
+SetInfo:DST Common
+SetInfo:9ED Uncommon

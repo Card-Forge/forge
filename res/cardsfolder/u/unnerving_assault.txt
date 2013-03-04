@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ PumpAll | Cost$ 2 UR | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | IsCurse$ True | ConditionManaSpent$ U | SubAbility$ RPaid | SpellDescription$ Creatures your opponents control get -1/-0 until end of turn if U was spent to cast CARDNAME, and creatures you control get +1/+0 until end of turn if R was spent to cast it. (Do both if U R was spent.)
 SVar:RPaid:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | ConditionManaSpent$ R
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnerving_assault.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/114.jpg
 Oracle:Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast Unnerving Assault, and creatures you control get +1/+0 until end of turn if {R} was spent to cast it. (Do both if {U}{R} was spent.)
+SetInfo:EVE Uncommon

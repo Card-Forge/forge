@@ -5,12 +5,11 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBPain | SpellDescription$ Add U to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
 SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underground_river.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/350.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/446.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/326.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/357.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/362.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/330.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {U} or {B} to your mana pool. Underground River deals 1 damage to you.
+SetInfo:7ED Rare
+SetInfo:6ED Rare
+SetInfo:9ED Rare
+SetInfo:10E Rare
+SetInfo:5ED Rare
+SetInfo:ICE Rare

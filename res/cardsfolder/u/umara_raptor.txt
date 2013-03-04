@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Ally
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umara_raptor.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/75.jpg
 Oracle:Flying\nWhenever Umara Raptor or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Umara Raptor.
+SetInfo:ZEN Common

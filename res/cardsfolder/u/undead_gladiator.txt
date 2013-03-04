@@ -4,7 +4,6 @@ Types:Creature Zombie Barbarian
 PT:3/1
 K:Cycling:1 B
 A:AB$ ChangeZone | Cost$ 1 B Discard<1/Card> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate this ability only during your upkeep.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_gladiator.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/178.jpg
 Oracle:{1}{B}, Discard a card: Return Undead Gladiator from your graveyard to your hand. Activate this ability only during your upkeep.\nCycling {1}{B} ({1}{B}, Discard this card: Draw a card.)
+SetInfo:ONS Rare

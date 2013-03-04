@@ -4,7 +4,6 @@ Types:Creature Goblin Scout
 PT:1/2
 K:Flying
 K:CARDNAME attacks each turn if able.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/utvara_scalper.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/76.jpg
 Oracle:Flying\nUtvara Scalper attacks each turn if able.
+SetInfo:DIS Common

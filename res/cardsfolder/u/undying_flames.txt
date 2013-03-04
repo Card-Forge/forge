@@ -8,7 +8,6 @@ SVar:UndyingDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ 
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undying_flames.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/119.jpg
 Oracle:Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to target creature or player equal to that card's converted mana cost.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability. You may choose a new target for the copy.)
+SetInfo:SOK Rare

@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | AddAbility$ AnyMana | Description$ Enchanted creature can't attack or block. Enchanted creature has "tap: Add one mana of any color to your mana pool."
 SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/utopia_vow.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/142.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.\nEnchanted creature has "{T}: Add one mana of any color to your mana pool."
+SetInfo:PLC Common

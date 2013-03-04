@@ -4,7 +4,6 @@ Types:Creature Shade
 PT:1/1
 K:Fear
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undercity_shade.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/110.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\n{B}: Undercity Shade gets +1/+1 until end of turn.
+SetInfo:RAV Uncommon

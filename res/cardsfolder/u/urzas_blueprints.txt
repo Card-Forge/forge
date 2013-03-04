@@ -3,7 +3,6 @@ ManaCost:6
 Types:Artifact
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 K:Echo:6
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_blueprints.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/137.jpg
 Oracle:Echo {6} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\n{T}: Draw a card.
+SetInfo:ULG Rare

@@ -4,7 +4,6 @@ Types:Sorcery
 K:Flashback 3 W
 A:SP$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
 SVar:DiscardMe:1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unburial_rites.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/122.jpg
 Oracle:Return target creature card from your graveyard to the battlefield.\nFlashback {3}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:ISD Uncommon

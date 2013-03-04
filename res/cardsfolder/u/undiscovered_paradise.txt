@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool | SubAbility$ DBReturn
 SVar:DBReturn:DB$ Pump | Defined$ Self | KW$ HIDDEN During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand. | Permanent$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undiscovered_paradise.jpg
-SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/167.jpg
 Oracle:{T}: Add one mana of any color to your mana pool. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.
+SetInfo:VIS Rare

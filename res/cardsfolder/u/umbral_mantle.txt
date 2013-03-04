@@ -4,7 +4,6 @@ Types:Artifact Equipment
 K:Equip 0
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ UmbralPump | Description$ Equipped creature has "3, Untap: This creature gets +2/+2 until end of turn.".
 SVar:UmbralPump:AB$ Pump | Cost$ 3 Q | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umbral_mantle.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/267.jpg
 Oracle:Equipped creature has "{3}, {Q}: This creature gets +2/+2 until end of turn." ({Q} is the untap symbol.)\nEquip {0}
+SetInfo:SHM Uncommon

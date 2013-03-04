@@ -4,7 +4,6 @@ Types:Enchantment
 A:AB$ Draw | Cost$ 1 PayLife<1> | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unfulfilled_desires.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/345.jpg
 Oracle:{1}, Pay 1 life: Draw a card, then discard a card.
+SetInfo:MIR Rare
