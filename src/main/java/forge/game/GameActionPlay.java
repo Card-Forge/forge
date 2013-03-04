@@ -368,17 +368,20 @@ public class GameActionPlay {
         final Card source = sa.getSourceCard();
 
         // Split card support
-        if (source.getRules().getSplitType() == CardSplitType.Split) {
-            if (sa.hasParam("SplitSide")) {
-                if (sa.getParam("SplitSide").equals("LeftSplit")) {
-                    source.setState(CardCharacteristicName.LeftSplit);
-                } else if (sa.getParam("SplitSide").equals("RightSplit")) {
-                    source.setState(CardCharacteristicName.RightSplit);
-                } else {
-                    System.out.println(String.format("ERROR: Split card %s does not define the split face abilities properly.", source.getName()));
+        if (source.getRules() != null) {
+            if (source.getRules().getSplitType() == CardSplitType.Split) {
+                List<SpellAbility> leftSplitAbilities = source.getState(CardCharacteristicName.LeftSplit).getSpellAbility();
+                List<SpellAbility> rightSplitAbilities = source.getState(CardCharacteristicName.RightSplit).getSpellAbility();
+                for (SpellAbility a : leftSplitAbilities) {
+                    if (sa == a) {
+                        source.setState(CardCharacteristicName.LeftSplit);
+                    }
                 }
-            } else {
-                System.out.println(String.format("ERROR: Split card %s does not define the split face abilities properly.", source.getName()));
+                for (SpellAbility a : rightSplitAbilities) {
+                    if (sa == a) {
+                        source.setState(CardCharacteristicName.RightSplit);
+                    }
+                }
             }
         }
 
