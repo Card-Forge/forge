@@ -7,7 +7,6 @@ A:AB$ ChangeZone | Cost$ 1 U | Defined$ Self | Origin$ Battlefield | Destination
 SVar:DBDig:DB$ DigUntil | Cost$ G T | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | Valid$ Card.namedMirror-Mad Phantasm | ValidDescription$ Mirror-Mad Phantasm | FoundDestination$ Battlefield | RevealedDestination$ Graveyard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_mad_phantasm.jpg
-SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/68.jpg
 Oracle:Flying\n{1}{U}: Mirror-Mad Phantasm's owner shuffles it into his or her library. If that player does, he or she reveals cards from the top of that library until a card named Mirror-Mad Phantasm is revealed. The player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.
+SetInfo:ISD Mythic

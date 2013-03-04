@@ -3,13 +3,12 @@ ManaCost:3 R
 Types:Creature Elemental
 PT:4/1
 K:Haste
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83150.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/201.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/186.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/201.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/201.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/217.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/147.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/149.jpg
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)
+SetInfo:8ED Common
+SetInfo:7ED Common
+SetInfo:9ED Common
+SetInfo:10E Common
+SetInfo:M10 Common
+SetInfo:M12 Common
+SetInfo:TMP Common

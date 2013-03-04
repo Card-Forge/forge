@@ -8,5 +8,5 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ 
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$Valid Creature.blockedBySource
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_the_gateless.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/14.jpg
 Oracle:Flying\nGuardian of the Gateless can block any number of creatures.\nWhenever Guardian of the Gateless blocks, it gets +1/+1 until end of turn for each creature it's blocking.
+SetInfo:GTC Uncommon

@@ -4,7 +4,6 @@ Types:Vanguard
 HandLifeModifier:-1/+3
 T:Mode$ DamageDone | ValidSource$ Creature.nonToken+YouCtrl | ValidTarget$ Opponent | TriggerZones$ Command | CombatDamage$ True | Execute$ TrigChangeZone | TriggerDescription$ Whenever a nontoken creature you control deals combat damage to an opponent, choose a creature card at random from your library, reveal that card, and put it into your hand. Then shuffle your library.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | AtRandom$ True | ChangeType$ Card.Creature | ChangeNum$ 1
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/higure_the_still_wind_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/higure-the-still-wind.jpg
 Oracle:Hand -1, life +3\nWhenever a nontoken creature you control deals combat damage to an opponent, choose a creature card at random from your library, reveal that card, and put it into your hand. Then shuffle your library.
+SetInfo:VAN Special

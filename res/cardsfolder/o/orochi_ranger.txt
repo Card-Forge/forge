@@ -6,7 +6,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDama
 SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ TriggeredTarget | SubAbility$ DBPump
 SVar:DBPump:DB$Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_ranger.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/235.jpg
 Oracle:Whenever Orochi Ranger deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
+SetInfo:CHK Common

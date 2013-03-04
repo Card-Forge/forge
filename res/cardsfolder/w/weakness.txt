@@ -4,13 +4,12 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | AddToughness$ -1 | Description$ Enchanted creature gets -2/-1.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weakness.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/43.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/43.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/67.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/54.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/121.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/44.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/43.jpg
 Oracle:Enchant creature\nEnchanted creature gets -2/-1.
+SetInfo:2ED Common
+SetInfo:M10 Common
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:3ED Common

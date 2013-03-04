@@ -2,7 +2,6 @@ Name:Gnarled Mass
 ManaCost:1 G G
 Types:Creature Spirit
 PT:3/3
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/bok/en-us/card74435.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/127.jpg
 Oracle:
+SetInfo:BOK Common

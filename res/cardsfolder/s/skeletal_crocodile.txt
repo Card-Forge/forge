@@ -2,7 +2,6 @@ Name:Skeletal Crocodile
 ManaCost:3 B
 Types:Creature Crocodile Skeleton
 PT:5/1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4239.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/33.jpg
 Oracle:
+SetInfo:POR Common

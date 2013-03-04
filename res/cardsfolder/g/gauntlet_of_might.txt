@@ -6,9 +6,8 @@ T:Mode$ TapsForMana | ValidCard$ Mountain | Execute$ TrigMana | TriggerZones$ Ba
 SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ R | Amount$ 1 | Defined$ TriggeredPlayer
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gauntlet_of_might.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/244.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/246.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/245.jpg
 Oracle:Red creatures get +1/+1.\nWhenever a Mountain is tapped for mana, its controller adds {R} to his or her mana pool (in addition to the mana the land produces).
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:2ED Rare

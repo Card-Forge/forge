@@ -8,7 +8,6 @@ SVar:ABPump:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +1 | SpellDe
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:SacMe:2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_ideal.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/109.jpg
 Oracle:Enchant creature\nEnchanted creature has flying and "Sacrifice a creature: This creature gets +2/+1 until end of turn."\nWhen Fallen Ideal is put into a graveyard from the battlefield, return Fallen Ideal to its owner's hand.
+SetInfo:TSP Uncommon

@@ -8,9 +8,8 @@ SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Each | NumDmg$ X | Refere
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DOOM | CounterNum$ 1
 SVar:X:Count$CardCounters.DOOM
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armageddon_clock.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/234.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/313.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/2.jpg
 Oracle:At the beginning of your upkeep, put a doom counter on Armageddon Clock.\nAt the beginning of your draw step, Armageddon Clock deals damage equal to the number of doom counters on it to each player.\n{4}: Remove a doom counter from Armageddon Clock. Any player may activate this ability but only during any upkeep step.
+SetInfo:ATQ Uncommon
+SetInfo:4ED Rare
+SetInfo:3ED Rare

@@ -4,7 +4,6 @@ Types:Creature Plant Wall
 PT:3/3
 K:Defender
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_pine_needles.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/162.jpg
 Oracle:Defender (This creature can't attack.)\n{G}: Regenerate Wall of Pine Needles.
+SetInfo:ICE Uncommon

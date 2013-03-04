@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/-5
 S:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast cost 1 less to cast.
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/hanna.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/hanna.jpg
 Oracle:Hand +1, life -5\nSpells you cast cost {1} less to cast.
+SetInfo:VAN Special

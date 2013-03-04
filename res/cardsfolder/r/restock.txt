@@ -3,7 +3,6 @@ ManaCost:3 G G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 G G | Origin$ Graveyard | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SubAbility$ DBChange | SpellDescription$ Return two target cards from your graveyard to your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restock.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/206.jpg
 Oracle:Return two target cards from your graveyard to your hand. Exile Restock.
+SetInfo:INV Rare

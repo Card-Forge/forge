@@ -4,8 +4,8 @@ Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. If you do, shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Artifact.cmcLE1 | ChangeNum$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trinket_mage.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/39.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/48.jpg
 Oracle:When Trinket Mage enters the battlefield, you may search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. If you do, shuffle your library.
+SetInfo:SOM Uncommon
+SetInfo:5DN Common
+SetInfo:DDF Common

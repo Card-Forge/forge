@@ -3,7 +3,6 @@ ManaCost:1 W W
 Types:Creature Griffin
 PT:2/3
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunspire_griffin.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/25.jpg
 Oracle:Flying
+SetInfo:RTR Common

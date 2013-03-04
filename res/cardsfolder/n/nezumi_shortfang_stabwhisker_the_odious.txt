@@ -7,7 +7,6 @@ SVar:DBFlip:DB$ SetState | Defined$ Self | ConditionCheckSVar$ A | ConditionSVar
 SVar:A:TargetedPlayer$CardsInHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nezumi_shortfang.jpg
 AlternateMode:Flip
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/131a.jpg
 Oracle:{1}{B}, {T}: Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
 
 ALTERNATE
@@ -21,5 +20,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefiel
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ DiffX | References$ DiffX
 SVar:DiffX:TriggeredPlayer$CardsInHand/NMinus.3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stabwhisker_the_odious.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/131b.jpg
 Oracle:At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in his or her hand.
+SetInfo:CHK Rare

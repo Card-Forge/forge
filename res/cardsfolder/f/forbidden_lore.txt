@@ -5,7 +5,6 @@ K:Enchant land
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ Damage | Description$ Enchanted land has "Tap: Target creature gets +2/+1 until end of turn."
 SVar:Damage:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Target creature gets +2/+1 until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_lore.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/124.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Target creature gets +2/+1 until end of turn."
+SetInfo:ICE Rare

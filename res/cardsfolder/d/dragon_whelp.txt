@@ -4,14 +4,16 @@ Types:Creature Dragon
 PT:2/3
 K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | ActivationNumberSacrifice$4 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice CARDNAME at the beginning of the next end step.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_whelp.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/142.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/143.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/59.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/204.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/133.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/142.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/120.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/142.jpg
 Oracle:Flying\n{R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.
+SetInfo:2ED Uncommon
+SetInfo:DRB Rare
+SetInfo:M10 Uncommon
+SetInfo:COM Uncommon
+SetInfo:TSB Special
+SetInfo:LEB Uncommon
+SetInfo:ARC Uncommon
+SetInfo:LEA Uncommon
+SetInfo:4ED Uncommon
+SetInfo:DDG Uncommon
+SetInfo:3ED Uncommon

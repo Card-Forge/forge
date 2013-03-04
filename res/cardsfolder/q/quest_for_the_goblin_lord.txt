@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Goblin
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:X:Count$Valid Card.Self+counters_GE5_QUEST
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_the_goblin_lord.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/86.jpg
 Oracle:Whenever a Goblin enters the battlefield under your control, you may put a quest counter on Quest for the Goblin Lord.\nAs long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.
+SetInfo:WWK Uncommon

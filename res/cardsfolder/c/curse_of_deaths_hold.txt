@@ -4,7 +4,6 @@ Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | Cost$ 3 B B | ValidTgts$ Player | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedPlayerCtrl | AddPower$ -1 | AddToughness$ -1 | Description$ Creatures enchanted player controls gets -1/-1.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_deaths_hold.jpg
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/94.jpg
 Oracle:Enchant player\nCreatures enchanted player controls get -1/-1.
+SetInfo:ISD Rare

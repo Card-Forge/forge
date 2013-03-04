@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ LoseLife | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SubAbility$ DBGainLife | References$ X | SpellDescription$ Target player loses X life and you gain X life, where X is the highest power amongst creatures you control.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$GreatestPowerYouControl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_harvest.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/100.jpg
 Oracle:Target player loses X life and you gain X life, where X is the greatest power among creatures you control.
+SetInfo:AVR Common

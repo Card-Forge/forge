@@ -5,7 +5,6 @@ S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Haste | Description$ All c
 SVar:RemRandomDeck:True
 SVar:BuffedBy:Creature
 SVar:AntiBuffedBy:Creature
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_hysteria.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/99.jpg
 Oracle:All creatures have haste.
+SetInfo:MRD Rare

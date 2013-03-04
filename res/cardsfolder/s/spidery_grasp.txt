@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Instant
 A:SP$ Untap | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature |SubAbility$ DBPump  | SpellDescription$ Untap target creature. It gets +2/+4 and gains reach until end of turn.
 SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ +2 | NumDef$ +4 | KW$ Reach
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spidery_grasp.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/204.jpg
 Oracle:Untap target creature. It gets +2/+4 and gains reach until end of turn. (It can block creatures with flying.)
+SetInfo:ISD Common

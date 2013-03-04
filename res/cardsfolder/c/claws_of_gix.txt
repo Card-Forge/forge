@@ -3,8 +3,7 @@ ManaCost:0
 Types:Artifact
 A:AB$ GainLife | Cost$ 1 Sac<1/Permanent> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_gix.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/290.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/107.jpg
 Oracle:{1}, Sacrifice a permanent: You gain 1 life.
+SetInfo:TSB Special
+SetInfo:USG Uncommon

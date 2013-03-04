@@ -4,8 +4,7 @@ Types:Creature Demon Spirit
 PT:4/5
 S:Mode$ Continuous | Affected$ Creature.Black | AddHiddenKeyword$ CARDNAME can't block. | Description$ Black creatures can't block.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorjaw_oni.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/87.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/94.jpg
 Oracle:Black creatures can't block.
+SetInfo:SOK Uncommon
+SetInfo:COM Uncommon

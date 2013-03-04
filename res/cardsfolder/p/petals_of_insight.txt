@@ -7,7 +7,6 @@ SVar:ReturnPetals:DB$ Dig | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Librar
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | Defined$ Self
 SVar:DrawCards:DB$ Draw | NumCards$ 3 | ChoiceDescription$ Otherwise, draw three cards.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petals_of_insight.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/79.jpg
 Oracle:Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return Petals of Insight to its owner's hand. Otherwise, draw three cards.
+SetInfo:CHK Uncommon

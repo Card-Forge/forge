@@ -7,7 +7,6 @@ SVar:Y:Sacrificed$Amount.Plus.1
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devouring_rage.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/164.jpg
 Oracle:As an additional cost to cast Devouring Rage, you may sacrifice any number of Spirits.\nTarget creature gets +3/+0 until end of turn. For each Spirit sacrificed this way, that creature gets an additional +3/+0 until end of turn.
+SetInfo:CHK Common

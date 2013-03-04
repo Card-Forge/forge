@@ -4,7 +4,6 @@ Types:Snow Creature Wolverine Beast
 PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME becomes blocked, you may have it deal 1 damage to target creature or player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_wolverine.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/87.jpg
 Oracle:Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to target creature or player.
+SetInfo:CSP Common

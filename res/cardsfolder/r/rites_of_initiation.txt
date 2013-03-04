@@ -9,7 +9,6 @@ SVar:MaxChoice:Count$InYourHand
 SVar:ChosenInitiation:Count$ChosenNumber
 SVar:Y:Remembered$Amount
 SVar:RemAIdeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rites_of_initiation.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/217.jpg
 Oracle:Discard any number of cards at random. Creatures you control get +1/+0 until end of turn for each card discarded this way.
+SetInfo:ODY Common

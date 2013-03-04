@@ -5,7 +5,6 @@ A:SP$ Token | Cost$ 2 RG | TokenAmount$ 1 | TokenName$ Giant Warrior | TokenType
 K:Conspire
 T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
 SVar:Conspire:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giantbaiting.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/207.jpg
 Oracle:Put a 4/4 red and green Giant Warrior creature token with haste onto the battlefield. Exile it at the beginning of the next end step.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it.)
+SetInfo:SHM Common

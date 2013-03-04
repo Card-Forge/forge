@@ -9,7 +9,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination
 SVar:ForgetCard:DB$ Cleanup | ForgetDefined$ TriggeredCard
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaho_minamo_historian.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/41.jpg
 Oracle:When Kaho, Minamo Historian enters the battlefield, search your library for up to three instant cards and exile them. Then shuffle your library.\n{X}, {T}: You may cast a card with converted mana cost X exiled with Kaho without paying its mana cost.
+SetInfo:SOK Rare

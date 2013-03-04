@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:3/1
 K:CARDNAME can't block.
 A:AB$ ChangeZone | Cost$ B PayLife<1> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_familiar.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/14.jpg
 Oracle:Foul Familiar can't block.\n{B}, Pay 1 life: Return Foul Familiar to its owner's hand.
+SetInfo:ICE Common

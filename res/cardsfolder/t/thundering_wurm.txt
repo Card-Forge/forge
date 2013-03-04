@@ -9,7 +9,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourHand.Land
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundering_wurm.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po/115.jpg
 Oracle:When Thundering Wurm enters the battlefield, sacrifice it unless you discard a land card.
+SetInfo:POR Rare

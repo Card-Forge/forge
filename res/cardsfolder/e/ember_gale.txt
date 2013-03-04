@@ -5,7 +5,6 @@ A:SP$ Effect | Cost$ 3 R | Name$ Ember Gale Effect | ValidTgts$ Player | TgtProm
 SVar:DBDamage:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.White+TargetedPlayerCtrl,Creature.Blue+TargetedPlayerCtrl | ValidDescription$ each creature that's white or blue that player controls.
 SVar:CantBlock:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME can't block. | SubAbility$ DBDamage | SpellDescription$ Creatures targeted player controls can't block this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_gale.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/91.jpg
 Oracle:Creatures target player controls can't block this turn. Ember Gale deals 1 damage to each white and/or blue creature that player controls.
+SetInfo:SHM Common

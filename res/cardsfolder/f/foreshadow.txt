@@ -7,7 +7,6 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBSlowDraw | Ref
 SVar:DBSlowDraw:DB$ Draw | Defined$ You | NextUpkeep$ True | NumCards$ 1
 SVar:X:Remembered$Valid Card.NamedCard
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foreshadow.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/33.jpg
 Oracle:Name a card, then put the top card of target opponent's library into his or her graveyard. If that card is the named card, you draw a card.\nDraw a card at the beginning of the next turn's upkeep.
+SetInfo:VIS Uncommon

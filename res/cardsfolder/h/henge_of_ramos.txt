@@ -4,7 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ 2 T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/henge_of_ramos.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/318.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{2}, {T}: Add one mana of any color to your mana pool.
+SetInfo:MMQ Uncommon

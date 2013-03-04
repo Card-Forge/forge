@@ -4,5 +4,5 @@ Types:Sorcery
 A:SP$ Draw | Cost$ 4 B | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws three cards and loses 3 life.
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 3 | Defined$ Targeted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harrowing_journey.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/67.jpg
 Oracle:Target player draws three cards and loses 3 life.
+SetInfo:DKA Uncommon

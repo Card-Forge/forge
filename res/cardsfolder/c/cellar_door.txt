@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$ Mill | Cost$ 3 T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | FromBottom$ True | RememberMilled$ True | SubAbility$ DBToken | SpellDescription$ Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you put a 2/2 black Zombie creature token onto the battlefield.
 SVar:DBToken:DB$Token | Cost$ 0 | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColors$ Black | TokenTypes$ Creature,Zombie | TokenPower$ 2 | TokenToughness$ 2 | TokenOwner$ You | TokenAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cellar_door.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/218.jpg
 Oracle:{3}, {T}: Target player puts the bottom card of his or her library into his or her graveyard. If it's a creature card, you put a 2/2 black Zombie creature token onto the battlefield.
+SetInfo:ISD Uncommon

@@ -4,7 +4,6 @@ Types:Artifact Creature Human Rogue
 PT:2/2
 K:Cascade
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shardless_agent.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/104.jpg
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
+SetInfo:PC2 Uncommon

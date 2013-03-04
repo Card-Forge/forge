@@ -8,7 +8,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Y:Remembered$Amount
 SVar:RemAIdeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kindle_the_carnage.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/66.jpg
 Oracle:Discard a card at random. If you do, Kindle the Carnage deals damage equal to that card's converted mana cost to each creature. You may repeat this process any number of times.
+SetInfo:DIS Uncommon

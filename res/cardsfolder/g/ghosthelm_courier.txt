@@ -8,7 +8,6 @@ S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddPower$ 2 | AddToughnes
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
 SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghosthelm_courier.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/85.jpg
 Oracle:You may choose not to untap Ghosthelm Courier during your untap step.\n{2}{U}, {T}: Target Wizard creature gets +2/+2 and has shroud for as long as Ghosthelm Courier remains tapped. (It can't be the target of spells or abilities.)
+SetInfo:ONS Uncommon

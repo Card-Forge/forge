@@ -6,7 +6,6 @@ K:Reach
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInComputerDeck
 A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silhana_starfletcher.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/95.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nAs Silhana Starfletcher enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color to your mana pool.
+SetInfo:GPT Common

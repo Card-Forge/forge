@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Pump | Cost$ Sac<1/Creature.untapped/untapped creature> | Defined$ Enchanted | NumAtt$ +2 | SpellDescription$ Enchanted creature get +2/+0 until end of turn.
 A:AB$ PumpAll | Cost$ Sac<1/Card.AttachedBy/enchanted creature> | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | CostDesc$ Sacrifice enchanted creature: | SpellDescription$ Creatures you control get +2/+0 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/betrothed_of_fire.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/89.jpg
 Oracle:Enchant creature\nSacrifice an untapped creature: Enchanted creature gets +2/+0 until end of turn.\nSacrifice enchanted creature: Creatures you control get +2/+0 until end of turn.
+SetInfo:WTH Common

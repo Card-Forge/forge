@@ -5,7 +5,6 @@ A:SP$ Mana | Cost$ R | Produced$ R | Amount$ X | References$ X | SpellDescriptio
 SVar:X:Count$TypeOnBattlefield.Goblin
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brightstone_ritual.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/191.jpg
 Oracle:Add {R} to your mana pool for each Goblin on the battlefield.
+SetInfo:ONS Common

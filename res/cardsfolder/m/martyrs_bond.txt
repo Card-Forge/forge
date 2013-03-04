@@ -5,7 +5,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMartyrsSacrifice | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another nonland permanent you control is put into a graveyard from the battlefield, each opponent sacrifices a permanent that shares a card type with it.
 SVar:TrigMartyrsSacrifice:AB$ Sacrifice | Cost$ 0 | Amount$ 1 | SacValid$ TriggeredCard.sharesCardTypeWith | Defined$ TriggeredCardOpponent | SacMessage$ permanent that shares type with it | SubAbility$ DBMartyrsCleanup
 SVar:DBMartyrsCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_bond.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/19.jpg
 Oracle:Whenever Martyr's Bond or another nonland permanent you control is put into a graveyard from the battlefield, each opponent sacrifices a permanent that shares a card type with it.
+SetInfo:COM Rare

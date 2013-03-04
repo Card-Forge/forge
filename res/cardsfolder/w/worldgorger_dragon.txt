@@ -9,7 +9,6 @@ SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Permanent.YouCtrl+Other 
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to the battlefield under their owners' control.
 SVar:TrigReturn:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Battlefield
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldgorger_dragon.jpg
-SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/103.jpg
 Oracle:Flying, trample\nWhen Worldgorger Dragon enters the battlefield, exile all other permanents you control.\nWhen Worldgorger Dragon leaves the battlefield, return the exiled cards to the battlefield under their owners' control.
+SetInfo:JUD Rare

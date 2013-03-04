@@ -3,7 +3,6 @@ ManaCost:3 U
 Types:Creature Merfolk
 PT:2/2
 A:AB$ Pump | Cost$ U | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME is unblockable this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blockade_runner.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/60.jpg
 Oracle:{U}: Blockade Runner is unblockable this turn.
+SetInfo:MMQ Common

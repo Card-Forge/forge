@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SubAbility$ DBClash | SpellDescription$ Release the Ants deals 1 damage to target creature or player. Clash with an opponent. If you win, return CARDNAME to its owner's hand.
 SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/release_the_ants.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/98.jpg
 Oracle:Release the Ants deals 1 damage to target creature or player. Clash with an opponent. If you win, return Release the Ants to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
+SetInfo:MOR Uncommon

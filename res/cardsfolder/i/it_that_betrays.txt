@@ -5,7 +5,6 @@ PT:11/11
 K:Annihilator 2
 T:Mode$ Sacrificed | ValidCard$ Permanent.nonToken+OppCtrl | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/it_that_betrays.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/7.jpg
 Oracle:Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)\nWhenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control.
+SetInfo:ROE Rare

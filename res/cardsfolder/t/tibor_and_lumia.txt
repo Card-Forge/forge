@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.Blue | TriggerZ
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.Red | TriggerZones$ Battlefield | Execute$ TrigTremor | TriggerDescription$ Whenever you cast a red spell, CARDNAME deals 1 damage to each creature without flying.
 SVar:TrigFlying:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
 SVar:TrigTremor:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | ValidDescription$ each creature without flying.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tibor_and_lumia.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/135.jpg
 Oracle:Whenever you cast a blue spell, target creature gains flying until end of turn.\nWhenever you cast a red spell, Tibor and Lumia deals 1 damage to each creature without flying.
+SetInfo:GPT Rare

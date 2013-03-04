@@ -6,7 +6,6 @@ SVar:Draw:DB$ Draw | ValidTgts$ Player | TgtPrompt$ Select target player |  NumC
 SVar:Pump:DB$ Pump | ValidTgts$ Creature | KW$ Flying | TgtPrompt$ Select target creature | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Phases:DB$ Phases | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SpellDescription$ Target creature an opponent controls phases out.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sapphire_charm.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/89.jpg
 Oracle:Choose one - Target player draws a card at the beginning of the next turn's upkeep; or target creature gains flying until end of turn; or target creature an opponent controls phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during his or her next untap step.)
+SetInfo:MIR Common

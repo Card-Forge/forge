@@ -12,7 +12,6 @@ SVar:TrigOmenExileCardOpp:AB$ Mill | Cost$ 0 | NumCards$ 1 | Destination$ Exile 
 SVar:DBOmenLandOpp:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ChangeType$ Remembered.Land+YouDontCtrl | DefinedPlayer$ Opponent | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | SubAbility$ DBOmenPlayOpp
 SVar:DBOmenPlayOpp:DB$ Play | ValidZone$ Exile | Controller$ TriggeredPlayer | Valid$ Card.IsRemembered | WithoutManaCost$ True | SubAbility$ DBOmenCleanup
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omen_machine.jpg
-SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/148.jpg
 Oracle:Players can't draw cards.\nAt the beginning of each player's draw step, that player exiles the top card of his or her library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
+SetInfo:NPH Rare

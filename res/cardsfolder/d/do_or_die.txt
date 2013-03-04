@@ -3,7 +3,6 @@ ManaCost:1 B
 Types:Sorcery
 A:SP$ TwoPiles | Cost$ 1 B | ValidTgts$ Player | TgtPrompt$ Select target player | Separator$ You | ChosenPile$ DBDestroy | ValidCards$ Creature | Zone$ Battlefield | AILogic$ Worst | SpellDescription$ Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated.
 SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | NoRegen$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/do_or_die.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/102.jpg
 Oracle:Separate all creatures target player controls into two piles. Destroy all creatures in the pile of that player's choice. They can't be regenerated.
+SetInfo:INV Rare

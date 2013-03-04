@@ -3,7 +3,6 @@ ManaCost:4
 Types:Artifact Creature Scarecrow
 PT:3/2
 A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature | KW$ Shroud | SpellDescription$ Target blue creature gains shroud until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shell_skulkin.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/173.jpg
 Oracle:{3}: Target blue creature gains shroud until end of turn.
+SetInfo:EVE Common

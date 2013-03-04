@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Token | Cost$ 2 BG BG BG | TokenAmount$ X | References$ X | TokenName$ Worm | TokenTypes$ Creature,Worm | TokenOwner$ You | TokenColors$ Black,Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 black and green Worm creature token onto the battlefield for each land card in your graveyard.
 A:SP$ Token | Cost$ 2 BG BG BG Discard<1/Land> | ActivationZone$ Graveyard | CostDesc$ Retrace | TokenAmount$ X | References$ X | TokenName$ Worm | TokenTypes$ Creature,Worm | TokenOwner$ You | TokenColors$ Black,Green | TokenPower$ 1 | TokenToughness$ 1 | NonBasicSpell$ True | SpellDescription$ (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
 SVar:X:Count$TypeInYourYard.Land
-SVar:Rarity:Rare
 SVar:Picture:http://magiccards.info/scans/en/eve/131.jpg
-SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/131.jpg
 Oracle:Put a 1/1 black and green Worm creature token onto the battlefield for each land card in your graveyard.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
+SetInfo:EVE Rare

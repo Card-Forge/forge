@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ G | ValidTgts$ Artifact | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigGainLife | TriggerDescription$ When enchanted artifact is put into a graveyard, you gain 6 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 6
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_harvest.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/125.jpg
 Oracle:Enchant artifact\nWhen enchanted artifact is put into a graveyard, you gain 6 life.
+SetInfo:NPH Common

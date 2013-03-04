@@ -5,8 +5,7 @@ PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudchaser_eagle.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/227.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/11.jpg
 Oracle:Flying\nWhen Cloudchaser Eagle enters the battlefield, destroy target enchantment.
+SetInfo:7ED Common
+SetInfo:TMP Common

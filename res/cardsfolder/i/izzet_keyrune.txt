@@ -11,7 +11,6 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue|Red
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_keyrune.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/230.jpg
 Oracle:{T}: Add {U} or {R} to your mana pool.\n{U}{R}: Until end of turn, Izzet Keyrune becomes a 2/1 blue and red Elemental artifact creature.\nWhenever Izzet Keyrune deals combat damage to a player, you may draw a card. If you do, discard a card.
+SetInfo:RTR Uncommon

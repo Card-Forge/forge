@@ -5,7 +5,6 @@ A:AB$ Dig | Cost$ 4 T | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberReveal
 SVar:DBCandlesChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | ConditionDefined$ Remembered | ConditionPresent$ Card.sharesNameWith YourGraveyard | ConditionCompare$ GE1 | SubAbility$ DBCandlesDraw
 SVar:DBCandlesDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.sharesNameWith YourGraveyard | ConditionCompare$ EQ0 | SubAbility$ DBCandlesCleanup
 SVar:DBCandlesCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/candles_of_leng.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/250.jpg
 Oracle:{4}, {T}: Reveal the top card of your library. If it has the same name as a card in your graveyard, put it into your graveyard. Otherwise, draw a card.
+SetInfo:TSP Rare

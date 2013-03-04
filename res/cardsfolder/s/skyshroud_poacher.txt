@@ -4,7 +4,6 @@ Types:Creature Human Rebel
 PT:2/2
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Elf | ChangeNum$ 1 | SpellDescription$ Search your library for an Elf permanent card and put it onto the battlefield. Then shuffle your library.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_poacher.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/119.jpg
 Oracle:{3}, {T}: Search your library for an Elf permanent card and put it onto the battlefield. Then shuffle your library.
+SetInfo:NMS Rare

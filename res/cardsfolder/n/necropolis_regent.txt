@@ -6,7 +6,6 @@ K:Flying
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control deals combat damage to a player, put that many +1/+1 counters on it.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ TriggeredSource | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropolis_regent.jpg
-SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/71.jpg
 Oracle:Flying\nWhenever a creature you control deals combat damage to a player, put that many +1/+1 counters on it.
+SetInfo:RTR Mythic

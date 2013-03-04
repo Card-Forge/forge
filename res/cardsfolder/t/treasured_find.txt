@@ -3,7 +3,6 @@ ManaCost:B G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ B G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouOwn | SubAbility$ DBChange | SpellDescription$ Return target card from your graveyard to your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasured_find.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/204.jpg
 Oracle:Return target card from your graveyard to your hand. Exile Treasured Find.
+SetInfo:RTR Uncommon

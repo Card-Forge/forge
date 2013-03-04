@@ -4,9 +4,8 @@ Types:Creature Elf Shaman
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_shaman.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/139.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/280.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/308.jpg
 Oracle:When Viridian Shaman enters the battlefield, destroy target artifact.
+SetInfo:MRD Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon

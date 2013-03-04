@@ -3,7 +3,6 @@ ManaCost:3
 Types:Artifact
 A:AB$ DealDamage | Cost$ 3 T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_shard.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/182.jpg
 Oracle:{3}, {T} or {R}, {T}: Granite Shard deals 1 damage to target creature or player.
+SetInfo:MRD Uncommon

@@ -3,9 +3,10 @@ ManaCost:3
 Types:Artifact Equipment
 K:Equip 3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddKeyword$ Trample & Lifelink | Description$ Equipped creature gets +3/+0 and has lifelink and trample.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_warhammer.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/201.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/303.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/332.jpg
 Oracle:Equipped creature gets +3/+0 and has trample and lifelink. (If the creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker. Damage dealt by the creature also causes its controller to gain that much life.)\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:MRD Uncommon
+SetInfo:DDG Rare
+SetInfo:9ED Rare
+SetInfo:HOP Rare
+SetInfo:10E Rare

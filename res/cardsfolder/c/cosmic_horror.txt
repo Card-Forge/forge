@@ -5,8 +5,7 @@ Text:If Cosmic Horror is destroyed this way, it deals 7 damage to you.
 PT:7/7
 K:First Strike
 K:At the beginning of your upkeep, destroy CARDNAME unless you pay 3 B B B
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cosmic_horror.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/10.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/6.jpg
 Oracle:First strike\nAt the beginning of your upkeep, destroy Cosmic Horror unless you pay {3}{B}{B}{B}. If Cosmic Horror is destroyed this way, it deals 7 damage to you.
+SetInfo:LEG Rare
+SetInfo:4ED Rare

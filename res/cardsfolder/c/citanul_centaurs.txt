@@ -4,7 +4,6 @@ Types:Creature Centaur
 PT:6/3
 K:Echo:3 G
 K:Shroud
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/citanul_centaurs.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/243.jpg
 Oracle:Shroud (This permanent can't be the target of spells or abilities.)\nEcho {3}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
+SetInfo:USG Rare

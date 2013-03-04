@@ -4,10 +4,9 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lance.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/211.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/213.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/211.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/212.jpg
 Oracle:Enchant creature\nEnchanted creature has first strike.
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:3ED Uncommon
+SetInfo:2ED Uncommon

@@ -6,7 +6,6 @@ A:SP$ ChangeZone | Cost$ 3 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When you cycle CARDNAME, exile up to two target attacking creatures.
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resounding_silence.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/22.jpg
 Oracle:Exile target attacking creature.\nCycling {5}{G}{W}{U} ({5}{G}{W}{U}, Discard this card: Draw a card.)\nWhen you cycle Resounding Silence, exile up to two target attacking creatures.
+SetInfo:ALA Common

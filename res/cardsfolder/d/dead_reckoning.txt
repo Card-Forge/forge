@@ -7,7 +7,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_reckoning.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/56.jpg
 Oracle:You may put target creature card from your graveyard on top of your library. If you do, Dead Reckoning deals damage equal to that card's power to target creature.
+SetInfo:WWK Common

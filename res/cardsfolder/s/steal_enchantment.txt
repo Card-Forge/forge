@@ -5,7 +5,6 @@ Text:You control enchanted enchantment.
 K:Enchant enchantment
 A:SP$ Attach | Cost$ U U | ValidTgts$ Enchantment | AILogic$ GainControl
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steal_enchantment.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/90.jpg
 Oracle:Enchant enchantment\nYou control enchanted enchantment.
+SetInfo:TMP Uncommon

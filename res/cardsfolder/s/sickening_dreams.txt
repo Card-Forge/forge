@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ DamageAll | Cost$ 1 B Discard<X/Card> | NumDmg$ ChosenX | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | References$ X | SpellDescription$ CARDNAME deals X damage to each creature and each player.
 SVar:X:XChoice
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sickening_dreams.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/83.jpg
 Oracle:As an additional cost to cast Sickening Dreams, discard X cards.\nSickening Dreams deals X damage to each creature and each player.
+SetInfo:TOR Uncommon
+SetInfo:PD3 Uncommon

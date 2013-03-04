@@ -15,7 +15,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Triggered.EnchantedBy
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourYard.Creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necromancy.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/14.jpg
 Oracle:You may cast Necromancy as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nWhen Necromancy enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with Necromancy." Put target creature card from a graveyard onto the battlefield under your control and attach Necromancy to it. When Necromancy leaves the battlefield, that creature's controller sacrifices it.
+SetInfo:VIS Uncommon

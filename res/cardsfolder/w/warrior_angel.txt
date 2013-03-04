@@ -7,7 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ 
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warrior_angel.jpg
-SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/123.jpg
 Oracle:Flying\nWhenever Warrior Angel deals damage, you gain that much life.
+SetInfo:STH Rare

@@ -5,7 +5,7 @@ K:Kicker 1 R
 A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SubAbility$ DBDamage | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. If CARDNAME was kicked, it deals damage equal to that creature's power to the creature's controller.
 SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ TargetedController | NumDmg$ X | References$ X | Condition$ Kicked | ConditionDescription$ If it was kicked,
 SVar:X:Targeted$CardPower
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agonizing_demise.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/92.jpg
 Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nDestroy target nonblack creature. It can't be regenerated. If Agonizing Demise was kicked, it deals damage equal to that creature's power to the creature's controller.
+SetInfo:DDH Common
+SetInfo:INV Common

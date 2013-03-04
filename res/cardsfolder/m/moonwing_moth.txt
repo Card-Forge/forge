@@ -4,7 +4,6 @@ Types:Creature Insect
 PT:2/1
 K:Flying
 A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonwing_moth.jpg
-SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/20.jpg
 Oracle:Flying\n{W}: Moonwing Moth gets +0/+1 until end of turn.
+SetInfo:SOK Common

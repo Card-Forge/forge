@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ GainControl | Cost$ 5 U | ValidTgts$ Creature.MonoColor | TgtPrompt$ Select target monocolored creature | SpellDescription$ Gain control of target monocolored creature.
 A:AB$ ChooseColor | Cost$ 1 U | Defined$ You | OrColors$ True | SubAbility$ Animate | ActivationZone$ Hand | ActivationLimit$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | PrecostDesc$ Forecast - | CostDesc$ 1 U, Reveal CARDNAME from your hand: | SpellDescription$ Target creature becomes the color or colors of your choice until end of turn. (Activate this ability only during your upkeep and only once each turn.)
 SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/govern_the_guildless.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/25.jpg
 Oracle:Gain control of target monocolored creature.\nForecast - {1}{U}, Reveal Govern the Guildless from your hand: Target creature becomes the color or colors of your choice until end of turn. (Activate this ability only during your upkeep and only once each turn.)
+SetInfo:DIS Rare

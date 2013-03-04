@@ -2,7 +2,8 @@ Name:Dragon Fodder
 ManaCost:1 R
 Types:Sorcery
 A:SP$ Token | Cost$ 1 R | TokenAmount$ 2 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenOwner$ You | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 red Goblin creature tokens onto the battlefield.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_fodder.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/97.jpg
 Oracle:Put two 1/1 red Goblin creature tokens onto the battlefield.
+SetInfo:ARC Common
+SetInfo:DDG Common
+SetInfo:ALA Common

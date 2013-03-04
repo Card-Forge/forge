@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Cost$ B R G | TgtPrompt$ Choose target creature card in your 
 A:SP$ DealDamage | Cost$ B R G | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ or CARDNAME deals 3 damage to target creature or player;
 A:SP$ Pump | Cost$ B R G | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | TgtPrompt$ Select target creature | SpellDescription$ or target creature gets +3/+3 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_charm.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/100.jpg
 Oracle:Choose one - Return target creature card from your graveyard to your hand; or Darigaaz's Charm deals 3 damage to target creature or player; or target creature gets +3/+3 until end of turn.
+SetInfo:PLS Uncommon
+SetInfo:DDE Uncommon

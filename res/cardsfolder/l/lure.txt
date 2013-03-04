@@ -4,20 +4,19 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lure.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/263.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/120.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/120.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/119.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/255.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/146.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/226.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/258.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/141.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/276.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/240.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/183.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/176.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/120.jpg
 Oracle:Enchant creature\nAll creatures able to block enchanted creature do so.
+SetInfo:8ED Uncommon
+SetInfo:2ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:6ED Uncommon
+SetInfo:5ED Uncommon
+SetInfo:MMQ Uncommon
+SetInfo:CHK Uncommon
+SetInfo:10E Uncommon
+SetInfo:LEB Uncommon
+SetInfo:M12 Uncommon
+SetInfo:LEA Uncommon
+SetInfo:ICE Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

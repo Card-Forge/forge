@@ -6,5 +6,5 @@ S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilit
 A:AB$PutCounter | Cost$ T | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/experiment_kraj.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/110.jpg
 Oracle:Experiment Kraj has all activated abilities of each other creature with a +1/+1 counter on it.\n{T}: Put a +1/+1 counter on target creature.
+SetInfo:DIS Rare

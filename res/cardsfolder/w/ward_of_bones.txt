@@ -5,7 +5,6 @@ S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ Opponent.withMoreCreaturesTha
 S:Mode$ CantBeCast | ValidCard$ Artifact | Caster$ Opponent.withMoreArtifactsThanYou
 S:Mode$ CantBeCast | ValidCard$ Enchantment | Caster$ Opponent.withMoreEnchantmentsThanYou
 S:Mode$ CantPlayLand | Player$ Opponent.withMoreLandsThanYou
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_of_bones.jpg
-SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/174.jpg
 Oracle:Each opponent who controls more creatures than you can't play creature cards. The same is true for artifacts, enchantments, and lands.
+SetInfo:EVE Rare

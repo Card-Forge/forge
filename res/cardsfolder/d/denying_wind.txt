@@ -3,7 +3,6 @@ ManaCost:7 U U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 7 U U | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 7 | IsCurse$ True | SpellDescription$ Search target player's library for up to seven cards and exile them. Then that player shuffles his or her library.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/denying_wind.jpg
-SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/32.jpg
 Oracle:Search target player's library for up to seven cards and exile them. Then that player shuffles his or her library.
+SetInfo:PCY Rare

@@ -6,10 +6,9 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Serf | TokenTypes$ Creature,Serf | TokenOwner$ You | TokenColors$ Black | TokenPower$ 0 | TokenToughness$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExileAllSerfs | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, exile all Serf tokens.
 SVar:TrigExileAllSerfs:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Serf.token | Origin$ Battlefield | Destination$ Exile
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106638.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/19.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/55.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/155.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/45.jpg
 Oracle:When Sengir Autocrat enters the battlefield, put three 0/1 black Serf creature tokens onto the battlefield.\nWhen Sengir Autocrat leaves the battlefield, exile all Serf tokens.
+SetInfo:5ED Rare
+SetInfo:TSB Special
+SetInfo:6ED Rare
+SetInfo:HML Uncommon

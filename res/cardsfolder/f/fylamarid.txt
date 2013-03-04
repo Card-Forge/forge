@@ -6,7 +6,6 @@ K:Flying
 K:CARDNAME can't be blocked by blue creatures.
 A:AB$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Blue | OverwriteColors$ True | SpellDescription$ Target creature becomes blue until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fylamarid.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/64.jpg
 Oracle:Flying\nFylamarid can't be blocked by blue creatures.\n{U}: Target creature becomes blue until end of turn.
+SetInfo:TMP Uncommon

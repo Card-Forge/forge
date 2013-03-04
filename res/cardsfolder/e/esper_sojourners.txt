@@ -7,7 +7,6 @@ T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigTapOrUntap | OptionalDecide
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigTapOrUntap | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When you cycle CARDNAME or it's put into a graveyard from the battlefield, you may tap or untap target permanent.
 SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_sojourners.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/107.jpg
 Oracle:When you cycle Esper Sojourners or it dies, you may tap or untap target permanent.\nCycling {2}{U} ({2}{U}, Discard this card: Draw a card.)
+SetInfo:ARB Common

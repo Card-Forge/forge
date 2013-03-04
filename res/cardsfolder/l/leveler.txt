@@ -5,7 +5,6 @@ PT:10/10
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExileYourLibrary | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from your library.
 SVar:TrigExileYourLibrary:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Card.YouOwn | Origin$ Library | Destination$ Exile
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leveler.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/195.jpg
 Oracle:When Leveler enters the battlefield, exile all cards from your library.
+SetInfo:MRD Rare

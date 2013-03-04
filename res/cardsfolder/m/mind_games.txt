@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Tap | Cost$ U | TgtPrompt$ Choose target artifact, creature or land | ValidTgts$ Artifact,Creature,Land | SpellDescription$ Tap target artifact, creature or land.
 K:Buyback 2 U
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_games.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/38.jpg
 Oracle:Buyback {2}{U} (You may pay an additional {2}{U} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTap target artifact, creature, or land.
+SetInfo:STH Common

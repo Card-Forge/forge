@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Draw | Cost$ 1 U | NumCards$ 2 | SubAbility$ DBDraw | SpellDescription$ You draw two cards, then each other player draws a card.
 SVar:DBDraw:DB$ Draw | Defined$ Player.Other | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card31779.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/114.jpg
 Oracle:You draw two cards, then each other player draws a card.
+SetInfo:ODY Common

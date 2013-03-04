@@ -2,7 +2,7 @@ Name:Metallic Sliver
 ManaCost:1
 Types:Artifact Creature Sliver
 PT:1/1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4617.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/287.jpg
 Oracle:
+SetInfo:H09 Common
+SetInfo:TMP Common

@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Condition$ Metalcraft | Description$ Metalcraft - As long as you control three or more artifacts, CARDNAME gets +2/+2 and has flying.
 SVar:BuffedBy:Artifact
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_sunchaser.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/4.jpg
 Oracle:Metalcraft - As long as you control three or more artifacts, Auriok Sunchaser gets +2/+2 and has flying.
+SetInfo:SOM Common

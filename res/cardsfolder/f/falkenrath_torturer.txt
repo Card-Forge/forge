@@ -6,7 +6,6 @@ A:AB$ Pump | Cost$ Sac<1/Creature> | KW$ Flying | SubAbility$ DBPutCounter | Spe
 SVar:DBPutCounter:DB$PutCounter | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | CounterNum$ 1 | CounterType$ P1P1 | References$ X
 SVar:X:Sacrificed$Valid Human
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falkenrath_torturer.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/60.jpg
 Oracle:Sacrifice a creature: Falkenrath Torturer gains flying until end of turn. If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Torturer.
+SetInfo:DKA Common

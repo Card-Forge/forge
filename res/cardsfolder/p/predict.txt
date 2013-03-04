@@ -7,7 +7,6 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X | SubAbility$ 
 SVar:DBDraw2:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:X:Remembered$Valid Card.NamedCard
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predict.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/94.jpg
 Oracle:Name a card, then put the top card of target player's library into his or her graveyard. If that card is the named card, you draw two cards. Otherwise, you draw a card.
+SetInfo:ODY Uncommon

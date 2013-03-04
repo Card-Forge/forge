@@ -3,7 +3,6 @@ ManaCost:5 G
 Types:Creature Spirit
 PT:5/5
 K:Trample
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card76641.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/228.jpg
 Oracle:Trample
+SetInfo:CHK Common

@@ -5,8 +5,7 @@ PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature enters the battlefield, you may put X +1/+1 counters on CARDNAME, where X is that creature's power.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:TriggeredCard$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hamletback_goliath.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/136.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/173.jpg
 Oracle:Whenever another creature enters the battlefield, you may put X +1/+1 counters on Hamletback Goliath, where X is that creature's power.
+SetInfo:M13 Rare
+SetInfo:LRW Rare

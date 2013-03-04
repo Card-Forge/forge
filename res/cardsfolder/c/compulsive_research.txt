@@ -3,7 +3,6 @@ ManaCost:2 U
 Types:Sorcery
 A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws three cards. Then that player discards two cards unless he or she discards a land card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Land
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/compulsive_research.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/40.jpg
 Oracle:Target player draws three cards. Then that player discards two cards unless he or she discards a land card.
+SetInfo:RAV Common

@@ -8,7 +8,6 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Land.Snow+YouCtrl | Pres
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Land.Snow+YouCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronom_serpent.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/45.jpg
 Oracle:Ronom Serpent can't attack unless defending player controls a snow land.\nWhen you control no snow lands, sacrifice Ronom Serpent.
+SetInfo:CSP Common

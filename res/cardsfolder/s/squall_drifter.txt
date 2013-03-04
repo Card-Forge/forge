@@ -4,7 +4,6 @@ Types:Snow Creature Elemental
 PT:1/1
 K:Flying
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121273.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/17.jpg
 Oracle:Flying\n{W}, {T}: Tap target creature.
+SetInfo:CSP Common

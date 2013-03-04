@@ -5,7 +5,6 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 K:Transmute:1 U U
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolaria_west.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/173.jpg
 Oracle:Tolaria West enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with converted mana cost 0, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
+SetInfo:FUT Uncommon

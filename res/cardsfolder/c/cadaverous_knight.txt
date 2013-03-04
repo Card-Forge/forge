@@ -4,7 +4,7 @@ Types:Creature Zombie Knight
 PT:2/2
 K:Flanking
 A:AB$ Regenerate | Cost$ 1 B B | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cadaverous_knight.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/8.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{B}{B}: Regenerate Cadaverous Knight.
+SetInfo:MIR Common
+SetInfo:HOP Common

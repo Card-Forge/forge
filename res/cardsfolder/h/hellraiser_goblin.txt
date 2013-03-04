@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Descriptio
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME attacks each turn if able.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellraiser_goblin.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/95.jpg
 Oracle:Creatures you control have haste and attack each combat if able.
+SetInfo:GTC Uncommon

@@ -6,8 +6,8 @@ A:AB$ Mana | Cost$ T | Produced$ U R | SpellDescription$ Add U R to your mana po
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_boilerworks.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/159.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/278.jpg
 Oracle:Izzet Boilerworks enters the battlefield tapped.\nWhen Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {U}{R} to your mana pool.
+SetInfo:GPT Common
+SetInfo:DDJ Common
+SetInfo:COM Common

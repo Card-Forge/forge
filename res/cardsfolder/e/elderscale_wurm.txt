@@ -8,14 +8,13 @@ SVar:TrigLife:AB$ SetLife | Cost$ 0 | Defined$ You | LifeAmount$ 7
 R:Event$ DamageDone | ActiveZones$ Battlefield | Affected$ You | ValidTarget$ You | ReplaceWith$ DmgLucky7 | CheckSVar$ ElderscaleCondition | SVarCompare$ GE7 | IsCombat$ False | Description$ As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
 R:Event$ DamageDone | ActiveZones$ Battlefield | Affected$ You | ValidTarget$ You | ReplaceWith$ DmgLucky7Combat | CheckSVar$ ElderscaleCondition | SVarCompare$ GE7 | IsCombat$ True | Secondary$ True | Description$ As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
 SVar:DmgLucky7:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ DmgDone | SubAbility$ NoPain
-SVar:DmgLucky7Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ DmgDone | SubAbility$ NoPain 
+SVar:DmgLucky7Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ DmgDone | SubAbility$ NoPain
 SVar:NoPain:DB$ SetLife | Defined$ You | LifeAmount$ 7 | ConditionCheckSVar$ DmgResult | ConditionSVarCompare$ LT7 | SubAbility$ LifelinkQuirk
 #If you're on 7 life Elderscale Wurm in play and target yourself with a Prodigal Sorcerer that has lifelink you should go up to 8 life, but SetLife occurs after the life gain so it must be added back
 SVar:LifelinkQuirk:DB$ GainLife | Defined$ You | LifeAmount$ DmgDone | ConditionDefined$ ReplacedSource | ConditionPresent$ Card.withLifelink+YouCtrl | ConditionCompare$ EQ1 | ConditionLifeTotal$ You | ConditionLifeAmount$ EQ7
 SVar:ElderscaleCondition:Count$YourLifeTotal
 SVar:DmgDone:ReplaceCount$DamageAmount
 SVar:DmgResult:Count$YourLifeTotal/Minus.DmgDone
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elderscale_wurm.jpg
-SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/167.jpg
 Oracle:Trample\nWhen Elderscale Wurm enters the battlefield, if your life total is less than 7, your life total becomes 7.\nAs long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
+SetInfo:M13 Mythic

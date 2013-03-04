@@ -8,7 +8,6 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ 
 SVar:DBTap:DB$ Tap | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entrails_feaster.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/143.jpg
 Oracle:At the beginning of your upkeep, you may exile a creature card from a graveyard. If you do, put a +1/+1 counter on Entrails Feaster. If you don't, tap Entrails Feaster.
+SetInfo:ONS Rare

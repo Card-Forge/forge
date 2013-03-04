@@ -10,7 +10,6 @@ S:Mode$ CantBeCast | ValidCard$ Card.nonLand+sharesNameWith Remembered | Caster$
 # Clears remembered cards when entering the battlefield
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ StaticClear | Static$ True
 SVar:StaticClear:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circu_dimir_lobotomist.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/196.jpg
 Oracle:Whenever you cast a blue spell, exile the top card of target library.\nWhenever you cast a black spell, exile the top card of target library.\nYour opponents can't cast nonland cards with the same name as a card exiled with Circu, Dimir Lobotomist.
+SetInfo:RAV Rare

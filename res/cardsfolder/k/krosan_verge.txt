@@ -5,8 +5,8 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | Tapped$ True | ChangeNum$ 1 | SubAbility$ DBPlains | SpellDescription$ Search your library for a Forest card and a Plains card and put them onto the battlefield tapped. Then shuffle your library.
 SVar:DBPlains:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains | Tapped$ True | ChangeNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_verge.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/123.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/141.jpg
 Oracle:Krosan Verge enters the battlefield tapped.\n{T}: Add {1} to your mana pool.\n{2}, {T}, Sacrifice Krosan Verge: Search your library for a Forest card and a Plains card and put them onto the battlefield tapped. Then shuffle your library.
+SetInfo:PC2 Uncommon
+SetInfo:ARC Uncommon
+SetInfo:JUD Uncommon

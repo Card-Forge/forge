@@ -5,11 +5,10 @@ A:SP$ GainLife | Cost$ 1 B | Defined$ You | LifeAmount$ X | SubAbility$ Dmg | Re
 SVar:Dmg:DB$ DealDamage | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDmg$ X | References$ X
 SVar:X:Count$YourDamageThisTurn
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simulacrum.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/37.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/37.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/38.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/45.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/37.jpg
 Oracle:You gain life equal to the damage dealt to you this turn. Simulacrum deals damage to target creature you control equal to the damage dealt to you this turn.
+SetInfo:LEB Uncommon
+SetInfo:4ED Uncommon
+SetInfo:LEA Uncommon
+SetInfo:3ED Uncommon
+SetInfo:2ED Uncommon

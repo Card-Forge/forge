@@ -7,7 +7,6 @@ SVar:PreventDamage:DB$ PreventDamage | ValidTgts$ Creature | TgtPrompt$ Select t
 SVar:GainLife:DB$ GainLife | LifeAmount$ X | Defined$ You | References$ X | SpellDescription$ You gain X life.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/atalya_samite_master.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/4.jpg
 Oracle:{X}, {T}: Choose one - Prevent the next X damage that would be dealt to target creature this turn; or you gain X life. Spend only white mana this way.
+SetInfo:INV Rare

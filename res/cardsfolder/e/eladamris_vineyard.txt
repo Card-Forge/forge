@@ -3,7 +3,6 @@ ManaCost:G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of each player's precombat main phase, add G G to that player's mana pool.
 SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ G | Amount$ 2 | Defined$ TriggeredPlayer
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamris_vineyard.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/118.jpg
 Oracle:At the beginning of each player's precombat main phase, add {G}{G} to that player's mana pool.
+SetInfo:TMP Rare

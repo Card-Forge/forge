@@ -9,7 +9,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnox.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/64.jpg
 Oracle:Flying\nWhen Hypnox enters the battlefield, if you cast it from your hand, exile all cards from target opponent's hand.\nWhen Hypnox leaves the battlefield, return the exiled cards to their owner's hand.
+SetInfo:TOR Rare

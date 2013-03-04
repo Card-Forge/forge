@@ -8,7 +8,6 @@ SVar:Counters:AB$PutCounter | Cost$ 0 | Defined$ ReplacedTarget | CounterType$ P
 SVar:X:ReplaceCount$DamageAmount
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self  | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 SVar:TrigShuffle:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ Self
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigor.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/240.jpg
 Oracle:Trample\nIf damage would be dealt to a creature you control other than Vigor, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way.\nWhen Vigor is put into a graveyard from anywhere, shuffle it into its owner's library.
+SetInfo:LRW Rare

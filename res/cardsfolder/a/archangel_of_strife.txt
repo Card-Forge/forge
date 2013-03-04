@@ -21,7 +21,6 @@ SVar:PeaceYou:Count$ValidCommand Card.namedArchangel Peace Effect+YouCtrl+IsReme
 SVar:WarOpp:Count$ValidCommand Card.namedArchangel War Effect+YouDontCtrl+IsRemembered
 SVar:PeaceOpp:Count$ValidCommand Card.namedArchangel Peace Effect+YouDontCtrl+IsRemembered
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archangel_of_strife.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/7.jpg
 Oracle:Flying\nAs Archangel of Strife enters the battlefield, each player chooses war or peace.\nCreatures controlled by players who chose war get +3/+0.\nCreatures controlled by players who chose peace get +0/+3.
+SetInfo:COM Rare

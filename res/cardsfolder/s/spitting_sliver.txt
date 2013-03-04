@@ -4,7 +4,6 @@ Types:Creature Sliver
 PT:3/3
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ First Strike | Description$ All Sliver creatures have first strike.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_sliver.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/80.jpg
 Oracle:All Sliver creatures have first strike.
+SetInfo:PLC Common

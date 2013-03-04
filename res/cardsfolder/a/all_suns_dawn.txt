@@ -8,7 +8,6 @@ SVar:ReturnR:DB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | T
 SVar:ReturnG:DB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target green card in your graveyard | ValidTgts$ Card.Green+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBExile | SpellDescription$ Return target green card from your graveyard to your hand.
 SVar:DBExile:DB$ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/all_suns_dawn.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/81.jpg
 Oracle:For each color, return up to one target card of that color from your graveyard to your hand. Exile All Suns' Dawn.
+SetInfo:5DN Rare

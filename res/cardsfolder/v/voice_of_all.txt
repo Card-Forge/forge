@@ -6,9 +6,8 @@ K:Flying
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 K:Protection:Card.ChosenColor:CARDNAME has protection from the chosen color.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_all.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/35.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/19.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/56.jpg
 Oracle:Flying\nAs Voice of All enters the battlefield, choose a color.\nVoice of All has protection from the chosen color.
+SetInfo:PLS Uncommon
+SetInfo:COM Rare
+SetInfo:10E Rare

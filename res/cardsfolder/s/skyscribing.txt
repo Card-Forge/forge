@@ -5,8 +5,7 @@ A:SP$ Draw | Cost$ X U U | Defined$ Each | NumCards$ X | References$ X | SpellDe
 A:AB$ Draw | Cost$ 2 U | NumCards$ 1 | Defined$ Each | ActivationZone$ Hand | ActivationLimit$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | PrecostDesc$ Forecast - | CostDesc$ 2 U Reveal CARDNAME from your hand:  | SpellDescription$ Each player draws a card. (Activate this ability only during your upkeep and only once each turn.)
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyscribing.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/61.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/32.jpg
 Oracle:Each player draws X cards.\nForecast - {2}{U}, Reveal Skyscribing from your hand: Each player draws a card. (Activate this ability only during your upkeep and only once each turn.)
+SetInfo:COM Uncommon
+SetInfo:DIS Uncommon

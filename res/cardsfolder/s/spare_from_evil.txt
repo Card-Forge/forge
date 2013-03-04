@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Instant
 A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | KW$ Protection:Creature.nonHuman:Protection from non-Human creatures. | SpellDescription$ Creatures you control gain protection from non-Human creatures until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spare_from_evil.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/34.jpg
 Oracle:Creatures you control gain protection from non-Human creatures until end of turn.
+SetInfo:ISD Common

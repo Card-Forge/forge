@@ -4,7 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ 5 T | Produced$ W U B R G | SpellDescription$ Add W U B R G to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_quarry.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/318.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{5}, {T}: Add {W}{U}{B}{R}{G} to your mana pool.
+SetInfo:ODY Rare

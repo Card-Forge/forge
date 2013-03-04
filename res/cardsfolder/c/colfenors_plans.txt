@@ -9,7 +9,6 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Descript
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | CheckSVar$ X | Description$ You can't cast more than one spell each turn.
 SVar:X:Count$ThisTurnCast_Card.YouOwn
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colfenors_plans.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/106.jpg
 Oracle:When Colfenor's Plans enters the battlefield, exile the top seven cards of your library face down.\nYou may look at and play cards exiled with Colfenor's Plans.\nSkip your draw step.\nYou can't cast more than one spell each turn.
+SetInfo:LRW Rare

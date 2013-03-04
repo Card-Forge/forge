@@ -3,8 +3,7 @@ ManaCost:1 U
 Types:Enchantment
 S:Mode$ RaiseCost | ValidCard$ Card.Red | Type$ Spell | Amount$ 2 | Description$ Red spells cost 2 more to cast.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chill.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/56.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/60.jpg
 Oracle:Red spells cost {2} more to cast.
+SetInfo:TMP Uncommon
+SetInfo:6ED Uncommon

@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ AttackersDeclared | AttackingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever one or more creatures attack you, you gain 1 life for each attacking creature.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Creature.attacking
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_prayer.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/245.jpg
 Oracle:Whenever one or more creatures attack you, you gain 1 life for each attacking creature.
+SetInfo:TMP Uncommon

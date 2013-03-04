@@ -5,7 +5,6 @@ PT:2/2
 K:Flying
 A:AB$ ChangeZone | Cost$ 3 W | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | SpellDescription$ Exile CARDNAME, then return it to the battlefield under its owner's control.
 SVar:DBReturn:DB$ChangeZone | Origin$ Exile | Destination$ Battlefield
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flickering_spirit.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/17.jpg
 Oracle:Flying\n{3}{W}: Exile Flickering Spirit, then return it to the battlefield under its owner's control.
+SetInfo:TSP Common

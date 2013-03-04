@@ -6,7 +6,6 @@ K:Flying
 A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | SpellDescription$ CARDNAME becomes the creature type of your choice until end of turn.
 SVar:DBAnimate:DB$ Animate | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_skyreaver.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/97.jpg
 Oracle:Flying\n{1}: Mistform Skyreaver becomes the creature type of your choice until end of turn.
+SetInfo:ONS Rare

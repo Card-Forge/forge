@@ -3,8 +3,7 @@ ManaCost:3 G G
 Types:Creature Basilisk
 PT:3/5
 K:Deathtouch
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_basilisk.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/180.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/179.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
+SetInfo:M11 Common
+SetInfo:M12 Common

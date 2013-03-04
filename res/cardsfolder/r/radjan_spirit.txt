@@ -3,10 +3,9 @@ ManaCost:3 G
 Types:Creature Spirit
 PT:3/2
 A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radjan_spirit.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/182.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/245.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/150.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/113.jpg
 Oracle:{T}: Target creature loses flying until end of turn.
+SetInfo:5ED Uncommon
+SetInfo:LEG Uncommon
+SetInfo:6ED Uncommon
+SetInfo:4ED Uncommon

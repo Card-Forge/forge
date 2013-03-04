@@ -4,7 +4,6 @@ Types:Creature Human Shaman
 PT:2/2
 A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_battlemage.jpg
-SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/142.jpg
 Oracle:{R}, {T}: Target creature gets +2/+0 until end of turn.\n{W}, {T}: Tap target creature.
+SetInfo:ALA Uncommon

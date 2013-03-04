@@ -4,7 +4,6 @@ Types:Artifact
 K:Echo:3
 A:AB$ Tap | Cost$ 1 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ Tap target artifact, creature, or land.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_gix.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/131.jpg
 Oracle:Echo {3} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\n{1}, {T}: Tap target artifact, creature, or land.
+SetInfo:ULG Rare

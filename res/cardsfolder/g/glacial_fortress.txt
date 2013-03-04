@@ -4,10 +4,9 @@ Types:Land
 K:CARDNAME enters the battlefield tapped unless you control a Plains or an Island.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_fortress.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/225.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/226.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/225.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/227.jpg
 Oracle:Glacial Fortress enters the battlefield tapped unless you control a Plains or an Island.\n{T}: Add {W} or {U} to your mana pool.
+SetInfo:M11 Rare
+SetInfo:M10 Rare
+SetInfo:M13 Rare
+SetInfo:M12 Rare

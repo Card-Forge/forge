@@ -6,8 +6,7 @@ A:SP$ Draw | Cost$ 3 B B PayLife<X> | NumCards$ ChosenX | Defined$ You | Activat
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrologia.jpg
-SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/68.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/149.jpg
 Oracle:Cast Necrologia only during your end step.\nAs an additional cost to cast Necrologia, pay X life.\nDraw X cards.
+SetInfo:7ED Uncommon
+SetInfo:EXO Uncommon

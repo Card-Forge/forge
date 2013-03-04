@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
 K:Cycling:2
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fend_off.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/7.jpg
 Oracle:Prevent all combat damage that would be dealt by target creature this turn.\nCycling {2} ({2}, Discard this card: Draw a card.)
+SetInfo:UDS Common

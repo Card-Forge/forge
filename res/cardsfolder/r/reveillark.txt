@@ -8,7 +8,6 @@ K:Evoke:5 W
 SVar:TrigReturnCreatures:DB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.powerLE2+YouCtrl | TgtPrompt$ Choose target creature
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reveillark.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/22.jpg
 Oracle:Flying\nWhen Reveillark leaves the battlefield, return up to two target creature cards with power 2 or less from your graveyard to the battlefield.\nEvoke {5}{W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
+SetInfo:MOR Rare

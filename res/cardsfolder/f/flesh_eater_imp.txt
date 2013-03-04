@@ -5,7 +5,6 @@ PT:2/2
 K:Flying
 K:Infect
 A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_eater_imp.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/42.jpg
 Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nSacrifice a creature: Flesh-Eater Imp gets +1/+1 until end of turn.
+SetInfo:MBS Uncommon

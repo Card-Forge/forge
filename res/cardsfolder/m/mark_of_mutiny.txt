@@ -3,9 +3,8 @@ ManaCost:2 R
 Types:Sorcery
 A:SP$ GainControl | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBPutCounter | SpellDescription$ Gain control of target creature until end of turn. Put a +1/+1 counter on it and untap it. That creature gains haste until end of turn.
 SVar:DBPutCounter:DB$PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_mutiny.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/47.jpg
-SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/141.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/137.jpg
 Oracle:Gain control of target creature until end of turn. Put a +1/+1 counter on it and untap it. That creature gains haste until end of turn. (It can attack and {T} this turn.)
+SetInfo:PC2 Uncommon
+SetInfo:M13 Uncommon
+SetInfo:ZEN Uncommon

@@ -6,7 +6,6 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 A:AB$ AnimateAll | Cost$ X | Power$ X | Toughness$ X | References$ X | Types$ AllCreatureTypes | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control become X/X and gain all creature types until end of turn.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_entity.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/31.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{X}: Creatures you control become X/X and gain all creature types until end of turn.
+SetInfo:LRW Rare

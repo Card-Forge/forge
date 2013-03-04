@@ -3,7 +3,6 @@ ManaCost:X PG
 Types:Sorcery
 A:SP$ DamageAll | Cost$ X PG | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrosive_gale.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/107.jpg
 Oracle:({G/P} can be paid with either {G} or 2 life.)\nCorrosive Gale deals X damage to each creature with flying.
+SetInfo:NPH Uncommon

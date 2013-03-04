@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant artifact or creature
 A:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. & HIDDEN CARDNAME's activated abilities can't be activated. | Description$ Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/encrust.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/49.jpg
 Oracle:Enchant artifact or creature\nEnchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
+SetInfo:M13 Common

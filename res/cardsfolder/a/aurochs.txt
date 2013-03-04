@@ -6,8 +6,7 @@ K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | References$ X
 SVar:X:Count$Valid Aurochs.attacking+Other
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurochs.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/141.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/113.jpg
 Oracle:Trample\nWhenever Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
+SetInfo:ICE Common
+SetInfo:5ED Common

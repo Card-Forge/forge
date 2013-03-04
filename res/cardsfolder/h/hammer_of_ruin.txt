@@ -5,7 +5,6 @@ K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Equipment.DefenderCtrl | TgtPrompt$ Select target equipment defending player controls
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_ruin.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/124.jpg
 Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature deals combat damage to a player, you may destroy target Equipment that player controls.\nEquip {2}
+SetInfo:WWK Uncommon

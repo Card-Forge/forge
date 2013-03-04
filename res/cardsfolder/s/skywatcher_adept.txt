@@ -8,7 +8,6 @@ S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddKe
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 2 | AddKeyword$ Flying | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 4/2 CARDNAME has Flying
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skywatcher_adept.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/88.jpg
 Oracle:Level up {3} ({3}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n2/2\nFlying\nLEVEL 3+\n4/2\nFlying
+SetInfo:ROE Common

@@ -5,7 +5,6 @@ HandLifeModifier:+0/-2
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ SituationalEthics | OptionalDecider$ You | TriggerDescription$ At the beginning of your draw step, you may draw an additional card. If you do, put a card from your hand on the bottom of your library.
 SVar:SituationalEthics:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You | SubAbility$ Switch
 SVar:Switch:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | Mandatory$ True
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/starke.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/starke.jpg
 Oracle:Hand +0, life -2\nAt the beginning of your draw step, you may draw an additional card. If you do, put a card from your hand on the bottom of your library.
+SetInfo:VAN Special

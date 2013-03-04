@@ -4,8 +4,7 @@ Types:Enchantment
 Text:Islands don't untap during their controllers' untap steps.
 K:Permanents don't untap during their controllers' untap steps:Island
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/choke.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/237.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/113.jpg
 Oracle:Islands don't untap during their controllers' untap steps.
+SetInfo:8ED Uncommon
+SetInfo:TMP Uncommon

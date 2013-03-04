@@ -5,9 +5,8 @@ PT:4/4
 A:AB$ DealDamage | Cost$ T Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed creature's power to target creature or player.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshot_cyclops.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/179.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/77.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/176.jpg
 Oracle:{T}, Sacrifice a creature: Bloodshot Cyclops deals damage equal to the sacrificed creature's power to target creature or player.
+SetInfo:8ED Rare
+SetInfo:7ED Rare
+SetInfo:UDS Rare

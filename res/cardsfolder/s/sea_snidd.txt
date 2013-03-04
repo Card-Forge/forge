@@ -5,7 +5,6 @@ PT:3/3
 A:AB$ ChooseType | Cost$ T | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Target land becomes the basic land type of your choice until end of turn.
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_snidd.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/31.jpg
 Oracle:{T}: Target land becomes the basic land type of your choice until end of turn.
+SetInfo:PLS Common

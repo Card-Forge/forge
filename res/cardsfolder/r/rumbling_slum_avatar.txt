@@ -4,7 +4,6 @@ Types:Vanguard
 HandLifeModifier:+1/+1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDmgOpp | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each opponent.
 SVar:TrigDmgOpp:AB$ DealDamage | Cost$ 0 | Defined$ Player.Opponent | NumDmg$ 1
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/rumbling_slum_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/rumbling-slum.jpg
 Oracle:Hand +1, life +1\nAt the beginning of your upkeep, Rumbling Slum Avatar deals 1 damage to each opponent.
+SetInfo:VAN Special

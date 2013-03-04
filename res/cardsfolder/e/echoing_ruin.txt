@@ -5,7 +5,6 @@ A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artif
 SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Remembered.Artifact+Other+sameName | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_ruin.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/59.jpg
 Oracle:Destroy target artifact and all other artifacts with the same name as that artifact.
+SetInfo:DST Common

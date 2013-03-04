@@ -3,7 +3,6 @@ ManaCost:4 W
 Types:Creature Merfolk Cleric
 PT:2/3
 A:AB$ Pump | Cost$ 1 W | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | ValidTgts$ Creature.Merfolk+tapped,Creature.Kithkin+tapped | TgtPrompt$ Select tapped Merfolk or Kithkin creature | SpellDescription$ Prevent all damage that would be dealt to target tapped Merfolk or Kithkin creature this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wellgabber_apothecary.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/47.jpg
 Oracle:{1}{W}: Prevent all damage that would be dealt to target tapped Merfolk or Kithkin creature this turn.
+SetInfo:LRW Common

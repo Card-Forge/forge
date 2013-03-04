@@ -5,7 +5,6 @@ PT:2/2
 K:Forestwalk
 A:AB$ GainControl | Cost$ 2 G T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | LoseControl$ LeavesPlay | UnlessCost$ 2 | UnlessPayer$ Opponent | SpellDescription$ Unless an opponent pays 2, gain control of target artifact for as long as CARDNAME remains on the battlefield.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarwood_bandits.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/48.jpg
 Oracle:Forestwalk\n{2}{G}, {T}: Unless an opponent pays {2}, gain control of target artifact for as long as Scarwood Bandits remains on the battlefield.
+SetInfo:DRK Rare

@@ -6,7 +6,6 @@ A:AB$ Destroy | Cost$ X X R T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ MaxTgt
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Land
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_settlers.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/112.jpg
 Oracle:{X}{X}{R}, {T}, Sacrifice Orcish Settlers: Destroy X target lands.
+SetInfo:WTH Uncommon

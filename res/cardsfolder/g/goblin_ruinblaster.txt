@@ -6,7 +6,6 @@ K:Haste
 K:Kicker R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target nonbasic land.
 SVar:TrigKicker:AB$Destroy | Cost$ 0 | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_ruinblaster.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/127.jpg
 Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nHaste\nWhen Goblin Ruinblaster enters the battlefield, if it was kicked, destroy target nonbasic land.
+SetInfo:ZEN Uncommon

@@ -3,7 +3,6 @@ ManaCost:3 W W
 Types:Instant
 A:SP$ GainControl | Cost$ 3 W W | ValidTgts$ Creature.nonBlack+nonArtifact+attackedThisTurn | TgtPrompt$Select target nonartifact, nonblack creature that attacked you this turn | OpponentTurn$ True | ActivationPhases$Main2->End of Turn | SubAbility$ DBPutCounter | SpellDescription$ Gain control of target nonartifact, nonblack creature that attacked you this turn and put a -1/-0 counter on it.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ M1M0 | CounterNum$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jabaris_influence.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/228.jpg
 Oracle:Cast Jabari's Influence only after combat.\nGain control of target nonartifact, nonblack creature that attacked you this turn and put a -1/-0 counter on it.
+SetInfo:MIR Rare

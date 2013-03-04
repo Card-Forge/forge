@@ -7,8 +7,7 @@ S:Mode$ Continuous | Affected$ Creature | AddPower$ X | Description$ All creatur
 SVar:X:Count$CardCounters.TIME
 A:AB$ RemoveCounter | Cost$ 3 | CounterType$ TIME | CounterNum$ 1 | ActivationPhases$ Upkeep | AnyPlayer$ True | SpellDescription$ Remove a time counter from CARDNAME. Any player may activate this ability but only during any upkeep step.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infinite_hourglass.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/378.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/298.jpg
 Oracle:At the beginning of your upkeep, put a time counter on Infinite Hourglass.\nAll creatures get +1/+0 for each time counter on Infinite Hourglass.\n{3}: Remove a time counter from Infinite Hourglass. Any player may activate this ability but only during any upkeep step.
+SetInfo:ICE Rare
+SetInfo:5ED Rare

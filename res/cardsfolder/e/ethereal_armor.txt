@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddKeyword$ First Strike | Description$ Enchanted creature gets +1/+1 for each enchantment you control and has first strike.
 SVar:X:Count$Valid Enchantment.YouCtrl
 SVar:BuffedBy:Enchantment
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_armor.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/9.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each enchantment you control and has first strike.
+SetInfo:RTR Common

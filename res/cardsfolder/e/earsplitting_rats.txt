@@ -6,7 +6,6 @@ A:AB$ Regenerate | Cost$ Discard<1/Card> | SpellDescription$ Regenerate CARDNAME
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each player discards a card.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Each | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earsplitting_rats.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/65.jpg
 Oracle:When Earsplitting Rats enters the battlefield, each player discards a card.\nDiscard a card: Regenerate Earsplitting Rats.
+SetInfo:JUD Common

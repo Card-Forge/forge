@@ -6,5 +6,5 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may tap target creature.
 SVar:TrigTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niblis_of_the_urn.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/16.jpg
 Oracle:Flying\nWhenever Niblis of the Urn attacks, you may tap target creature.
+SetInfo:DKA Uncommon

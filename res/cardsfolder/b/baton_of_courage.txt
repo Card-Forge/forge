@@ -5,7 +5,6 @@ K:Flash
 K:Sunburst
 A:AB$ Pump | Cost$ SubCounter<1/CHARGE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ 1 | NumAtt$ 1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baton_of_courage.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/105.jpg
 Oracle:Flash\nSunburst (This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)\nRemove a charge counter from Baton of Courage: Target creature gets +1/+1 until end of turn.
+SetInfo:5DN Common

@@ -5,7 +5,6 @@ A:AB$ TapAll | Cost$ 2 T | ValidCards$ Artifact.Other | SubAbility$ DBPumpAll | 
 SVar:DBPumpAll:DB$ PumpAll | Cost$ 0 | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | ValidCards$ Artifact.Other | UntilUntaps$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kill_switch.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/133.jpg
 Oracle:{2}, {T}: Tap all other artifacts. They don't untap during their controllers' untap steps for as long as Kill Switch remains tapped.
+SetInfo:NMS Rare

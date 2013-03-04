@@ -4,8 +4,7 @@ Types:Creature Human Wizard
 PT:0/1
 A:AB$ Mana | Cost$ U T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add 3 to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_wizard.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/20.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/61.jpg
 Oracle:{U}, {T}: Add {3} to your mana pool.
+SetInfo:4ED Common
+SetInfo:DRK Rare

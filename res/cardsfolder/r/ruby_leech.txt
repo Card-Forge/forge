@@ -4,7 +4,6 @@ Types:Creature Leech
 PT:2/2
 K:First Strike
 S:Mode$ RaiseCost | ValidCard$ Card.Red | Activator$ You | Type$ Spell | Color$ R | Amount$ 1 | Description$ Red spells you cast cost R more to cast.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruby_leech.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/161.jpg
 Oracle:First strike\nRed spells you cast cost {R} more to cast.
+SetInfo:INV Rare

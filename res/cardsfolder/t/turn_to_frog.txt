@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Animate | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Blue | OverwriteColors$ True | Types$ Frog | RemoveCreatureTypes$ True | SpellDescription$ Target creature loses all abilities and becomes a 1/1 blue Frog until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_to_frog.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/78.jpg
 Oracle:Target creature loses all abilities and becomes a 1/1 blue Frog until end of turn.
+SetInfo:M12 Uncommon

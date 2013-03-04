@@ -4,7 +4,7 @@ Types:Artifact
 S:Mode$ PreventDamage | Target$ You | Source$ Creature.YouDontCtrl | CombatDamage$ True | Amount$ 1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.
 A:AB$ PumpAll | Cost$ 2 T | ValidCards$ Creature.attacking | NumAtt$ +1 | SpellDescription$ Attacking creatures get +1/+0 until end of turn.
 SVar:X:Count$Valid Card.Self+untapped
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderstaff.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/153.jpg
 Oracle:As long as Thunderstaff is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.\n{2}, {T}: Attacking creatures get +1/+0 until end of turn.
+SetInfo:DST Uncommon
+SetInfo:ARC Uncommon

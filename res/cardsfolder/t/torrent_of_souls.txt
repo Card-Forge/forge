@@ -6,7 +6,7 @@ SVar:RPaid:DB$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player | V
 SVar:ManaNeededToAvoidNegativeEffect:black
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torrent_of_souls.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/199.jpg
 Oracle:Return up to one target creature card from your graveyard to the battlefield if {B} was spent to cast Torrent of Souls. Creatures target player controls get +2/+0 and gain haste until end of turn if {R} was spent to cast Torrent of Souls. (Do both if {B}{R} was spent.)
+SetInfo:ARC Uncommon
+SetInfo:SHM Uncommon

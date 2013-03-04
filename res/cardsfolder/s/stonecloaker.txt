@@ -9,7 +9,6 @@ SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Han
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange2 | TriggerDescription$ When CARDNAME enters the battlefield, exile target card from a graveyard.
 SVar:TrigChange2:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card from any graveyard
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/19.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Stonecloaker enters the battlefield, return a creature you control to its owner's hand.\nWhen Stonecloaker enters the battlefield, exile target card from a graveyard.
+SetInfo:PLC Uncommon

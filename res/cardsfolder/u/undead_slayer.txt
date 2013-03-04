@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Creature Human Cleric
 PT:2/2
 A:AB$ ChangeZone | Cost$ W T | ValidTgts$ Creature.Skeleton,Creature.Vampire,Creature.Zombie | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target Skeleton, Vampire or Zombie creature. | SpellDescription$ Exile target Skeleton, Vampire or Zombie.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_slayer.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/37.jpg
 Oracle:{W}, {T}: Exile target Skeleton, Vampire, or Zombie.
+SetInfo:M10 Uncommon

@@ -4,7 +4,6 @@ Types:Creature Human Cleric Soldier
 PT:2/2
 A:AB$ Pump | Cost$ T | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature.Elf,Creature.Soldier | TgtPrompt$ Select target Elf or Soldier creature | SpellDescription$ Target Elf or Soldier creature gets +2/+2 until end of turn.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grassland_crusader.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/32.jpg
 Oracle:{T}: Target Elf or Soldier creature gets +2/+2 until end of turn.
+SetInfo:ONS Common

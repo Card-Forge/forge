@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Instant
 A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catalog.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/64.jpg
 Oracle:Draw two cards, then discard a card.
+SetInfo:8ED Common
+SetInfo:USG Common

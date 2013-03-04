@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Sacrifice | Cost$ 4 R | ConditionCheckSVar$ X | ConditionSVarCompare$ LE6 | ValidTgts$ Player | SacValid$ Land | SacMessage$ Land | SubAbility$ DBWasteLand | SpellDescription$ Target player sacrifices a Land. Threshold - Each player sacrifices all lands he or she controls instead if seven or more cards are in your graveyard
 SVar:DBWasteLand:DB$ SacrificeAll | Condition$ Threshold | ValidCards$ Land
 SVar:X:Count$InYourYard
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/epicenter.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/192.jpg
 Oracle:Target player sacrifices a land.\nThreshold - Each player sacrifices all lands he or she controls instead if seven or more cards are in your graveyard.
+SetInfo:ODY Rare

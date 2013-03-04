@@ -7,7 +7,6 @@ SVar:X:Remembered$Amount
 SVar:Y:SVar$X/Times.3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rites_of_refusal.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/99.jpg
 Oracle:Discard any number of cards. Counter target spell unless its controller pays {3} for each card discarded this way.
+SetInfo:ODY Common

@@ -6,10 +6,9 @@ SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogi
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ ChosenPlayer | NumDmg$ X | References$ X
 SVar:X:Count$InChosenHand/NMinus.3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_rack.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/113.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/278.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/370.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/37.jpg
 Oracle:As The Rack enters the battlefield, choose an opponent.\nAt the beginning of the chosen player's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
+SetInfo:ATQ Uncommon
+SetInfo:4ED Uncommon
+SetInfo:TSB Special
+SetInfo:3ED Uncommon

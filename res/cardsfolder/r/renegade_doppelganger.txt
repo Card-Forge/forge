@@ -6,5 +6,5 @@ PT:0/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ RDCopy | TriggerDescription$ Whenever another creature enters the battlefield under your control, you may have CARDNAME become a copy of that creature until end of turn. (If it does, it loses this ability for the rest of the turn.)
 SVar:RDCopy:AB$ Clone | Cost$ 0 | Defined$ TriggeredCard | Duration$ UntilEndOfTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_doppelganger.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/84.jpg
 Oracle:Whenever another creature enters the battlefield under your control, you may have Renegade Doppelganger become a copy of that creature until end of turn. (If it does, it loses this ability for the rest of the turn.)
+SetInfo:ROE Rare

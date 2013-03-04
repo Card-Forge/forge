@@ -4,7 +4,6 @@ Types:Creature Demon
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player loses 3 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | LifeAmount$ 3 | Defined$ Each
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulcage_fiend.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/120.jpg
 Oracle:When Soulcage Fiend dies, each player loses 3 life.
+SetInfo:AVR Common

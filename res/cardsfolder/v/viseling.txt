@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals X damage to that player, where X is the number of cards in his or her hand minus 4.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
 SVar:X:TriggeredPlayer$CardsInHand/Minus.4
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viseling.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/140.jpg
 Oracle:At the beginning of each opponent's upkeep, Viseling deals X damage to that player, where X is the number of cards in his or her hand minus 4.
+SetInfo:NMS Uncommon

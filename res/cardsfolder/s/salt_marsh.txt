@@ -4,8 +4,7 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salt_marsh.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/325.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/326.jpg
 Oracle:Salt Marsh enters the battlefield tapped.\n{T}: Add {U} or {B} to your mana pool.
+SetInfo:8ED Uncommon
+SetInfo:INV Uncommon

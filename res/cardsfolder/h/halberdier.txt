@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Creature Human Barbarian
 PT:3/1
 K:First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halberdier.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/196.jpg
 Oracle:First strike
+SetInfo:ODY Common

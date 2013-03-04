@@ -5,7 +5,6 @@ PT:2/2
 K:Haste
 A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_prophet.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/146.jpg
 Oracle:Haste\n{T}, Discard a card: Draw a card.
+SetInfo:AVR Common

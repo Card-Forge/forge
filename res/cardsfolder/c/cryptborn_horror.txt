@@ -6,7 +6,6 @@ K:Trample
 K:etbCounter:P1P1:X:no Condition:Cryptborn Horror enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn.
 SVar:X:Count$LifeOppsLostThisTurn
 SVar:NeedsToPlayVar:X GE3
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptborn_horror.jpg
-SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/212.jpg
 Oracle:Trample\nCryptborn Horror enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn.
+SetInfo:RTR Rare

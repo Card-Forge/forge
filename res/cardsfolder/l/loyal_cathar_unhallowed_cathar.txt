@@ -9,7 +9,6 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | D
 SVar:TrigTransform:DB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_cathar.jpg
 AlternateMode:DoubleFaced
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/13a.jpg
 Oracle:Vigilance\nWhen Loyal Cathar dies, return it to the battlefield transformed under your control at the beginning of the next end step.
 
 ALTERNATE
@@ -21,5 +20,5 @@ Types:Creature Zombie Soldier
 PT:2/1
 K:CARDNAME can't block.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unhallowed_cathar.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/13b.jpg
 Oracle:Unhallowed Cathar can't block.
+SetInfo:DKA Common

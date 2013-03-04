@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$ Animate | Cost$ 2 | ValidTgts$ Creature.nonArtifact | TgtPrompt$ Select target nonartifact creature | Types$ Artifact | SubAbility$ DBPump | SpellDescription$ Until end of turn, target nonartifact creature gets +1/+0 and becomes an artifact in addition to its other types.
 SVar:DBPump:DB$Pump | Defined$ Targeted | NumAtt$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_forge.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/159.jpg
 Oracle:{2}: Until end of turn, target nonartifact creature gets +1/+0 and becomes an artifact in addition to its other types.
+SetInfo:WTH Uncommon

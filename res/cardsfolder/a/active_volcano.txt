@@ -5,8 +5,7 @@ A:SP$ Destroy | Cost$ R | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target b
 A:SP$ ChangeZone | Cost$ R | ValidTgts$ Island | TgtPrompt$ Select target Island | Origin$ Battlefield | Destination$ Hand | SpellDescription$ or return target Island to its owner's hand.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/active_volcano.jpg
 Oracle:Choose one - Destroy target blue permanent; or return target Island to its owner's hand.
-SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/43.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/130.jpg
+SetInfo:CHR Common
+SetInfo:LEG Common

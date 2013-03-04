@@ -4,7 +4,6 @@ Types:Tribal Instant Shapeshifter
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:SP$ Pump | Cost$ 1 R | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SubAbility$ DBAnimate | SpellDescription$ Up to two target creatures each get +2/+0 and gain all creature types until end of turn.
 SVar:DBAnimate:DB$ Animate | Cost$ 0 | Defined$ Targeted | Types$ AllCreatureTypes
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blades_of_velis_vel.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/152.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nUp to two target creatures each get +2/+0 and gain all creature types until end of turn.
+SetInfo:LRW Common

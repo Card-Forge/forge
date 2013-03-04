@@ -5,7 +5,6 @@ PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGainControl | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. If you do, gain control of target creature that player controls. (This effect lasts indefinitely.)
 SVar:TrigGainControl:AB$GainControl | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature that player controls
 K:Morph:U U
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_entrancer.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/108.jpg
 Oracle:Whenever Riptide Entrancer deals combat damage to a player, you may sacrifice it. If you do, gain control of target creature that player controls. (This effect lasts indefinitely.)\nMorph {U}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:ONS Rare

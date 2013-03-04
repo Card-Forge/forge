@@ -3,8 +3,7 @@ ManaCost:W W
 Types:Creature Human Knight
 PT:2/2
 K:Vigilance
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84622.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/30.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/52.jpg
 Oracle:Vigilance (Attacking doesn't cause this creature to tap.)
+SetInfo:S99 Uncommon
+SetInfo:9ED Common

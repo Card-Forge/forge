@@ -10,5 +10,5 @@ K:Equip 3
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red|White
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunforger.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/272.jpg
 Oracle:Equipped creature gets +4/+0.\n{R}{W}, Unattach Sunforger: Search your library for a red or white instant card with converted mana cost 4 or less and cast that card without paying its mana cost. Then shuffle your library.\nEquip {3}
+SetInfo:RAV Rare

@@ -3,11 +3,12 @@ ManaCost:3 R G W
 Types:Legendary Creature Dragon
 PT:6/6
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 G. If you do, choose a color, then put a 1/1 green Saproling creature token onto the battlefield for each permanent of that color. 
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 G. If you do, choose a color, then put a 1/1 green Saproling creature token onto the battlefield for each permanent of that color.
 SVar:TrigChoose:AB$ ChooseColor | Cost$ 2 G | Defined$ You | AILogic$ MostProminentPermanent | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:X:Count$Valid Permanent.ChosenColor
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rith_the_awakener.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/267.jpg
 Oracle:Flying\nWhenever Rith, the Awakener deals combat damage to a player, you may pay {2}{G}. If you do, choose a color, then put a 1/1 green Saproling creature token onto the battlefield for each permanent of that color.
+SetInfo:DRB Rare
+SetInfo:DDE Rare
+SetInfo:INV Rare

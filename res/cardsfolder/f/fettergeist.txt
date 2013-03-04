@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ X | UnlessPayer$ You | References$ X
 SVar:X:Count$Valid Creature.Other+YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fettergeist.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/52.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Fettergeist unless you pay {1} for each other creature you control.
+SetInfo:AVR Uncommon

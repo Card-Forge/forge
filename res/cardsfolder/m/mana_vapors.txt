@@ -4,5 +4,5 @@ Types:Sorcery
 A:SP$ PumpAll | Cost$ 1 U | ValidTgts$ Player | IsCurse$ True | ValidCards$ Land.TargetedPlayerCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SpellDescription$ Lands target player controls don't untap during his or her next untap step.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vapors.jpg
-SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/38.jpg
 Oracle:Lands target player controls don't untap during his or her next untap step.
+SetInfo:PCY Uncommon

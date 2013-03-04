@@ -7,7 +7,7 @@ SVar:TrigDig:AB$ Dig | Cost$ 0  | Defined$ You | DigNum$ 4 | DestinationZone$ Ex
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Play | Cost$ G T | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | References$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | ForgetRemembered$ True | SpellDescription$ You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.
 SVar:X:Count$SumPower_Creature.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mosswort_bridge.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/270.jpg
 Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {G} to your mana pool.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.
+SetInfo:ARC Rare
+SetInfo:LRW Rare

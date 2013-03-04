@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 K:Buyback 2
 K:Storm
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haze_of_rage.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/100.jpg
 Oracle:Buyback {2} (You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCreatures you control get +1/+0 until end of turn.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
+SetInfo:FUT Uncommon

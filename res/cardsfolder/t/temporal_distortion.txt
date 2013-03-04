@@ -9,7 +9,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigRemoveCount
 SVar:TrigRemoveCounterYou:AB$ RemoveCounterAll | Cost$ 0 | CounterType$ HOURGLASS | CounterNum$ 1 | ValidCards$ Permanent.YouCtrl
 SVar:TrigRemoveCounterOpp:AB$ RemoveCounterAll | Cost$ 0 | CounterType$ HOURGLASS | CounterNum$ 1 | ValidCards$ Permanent.YouDontCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_distortion.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/79.jpg
 Oracle:Whenever a creature or land becomes tapped, put an hourglass counter on it.\nPermanents with hourglass counters on them don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, remove all hourglass counters from permanents that player controls.
+SetInfo:INV Rare

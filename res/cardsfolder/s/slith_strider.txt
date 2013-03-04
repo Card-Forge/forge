@@ -6,7 +6,7 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDesc
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_strider.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/50.jpg
 Oracle:Whenever Slith Strider becomes blocked, draw a card.\nWhenever Slith Strider deals combat damage to a player, put a +1/+1 counter on it.
+SetInfo:MRD Uncommon
+SetInfo:DDI Uncommon

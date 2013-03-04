@@ -4,7 +4,6 @@ Types:Tribal Sorcery Merfolk
 A:SP$ Token | Cost$ 3 W | TokenImage$ U 1 1 Merfolk Wizard | TokenAmount$ 2 | TokenName$ Merfolk Wizard | TokenTypes$ Creature,Merfolk,Wizard | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.
 A:AB$ ChangeZone | Cost$tapXType<4/Merfolk> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summon_the_school.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/42.jpg
 Oracle:Put two 1/1 blue Merfolk Wizard creature tokens onto the battlefield.\nTap four untapped Merfolk you control: Return Summon the School from your graveyard to your hand.
+SetInfo:LRW Uncommon

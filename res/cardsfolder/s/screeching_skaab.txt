@@ -4,7 +4,6 @@ Types:Creature Zombie
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, put the top two cards of your library into your graveyard.
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 2 | Defined$ You
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_skaab.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/47.jpg
 Oracle:When Screeching Skaab enters the battlefield, put the top two cards of your library into your graveyard.
+SetInfo:DKA Common

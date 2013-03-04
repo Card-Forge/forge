@@ -6,8 +6,7 @@ A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 S:Mode$ PreventDamage | Target$ Creature.EnchantedBy | Source$ Card.ChosenColor | Description$ Prevent all damage that would be dealt to enchanted creature by sources of the chosen color.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prismatic_ward.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/329.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/271.jpg
 Oracle:Enchant creature\nAs Prismatic Ward enters the battlefield, choose a color.\nPrevent all damage that would be dealt to enchanted creature by sources of the chosen color.
+SetInfo:ICE Common
+SetInfo:5ED Common

@@ -8,7 +8,6 @@ SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execu
 SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
 SVar:TrigDestroyBlocked:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rock_basilisk.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/339.jpg
 Oracle:Whenever Rock Basilisk blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.
+SetInfo:MIR Rare

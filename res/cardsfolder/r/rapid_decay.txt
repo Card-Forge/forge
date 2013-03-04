@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ 1 B | TargetMin$ 0 | TargetMax$ 3 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to three target cards from a single graveyard.
 K:Cycling:2
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rapid_decay.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/67.jpg
 Oracle:Exile up to three target cards from a single graveyard.\nCycling {2} ({2}, Discard this card: Draw a card.)
+SetInfo:UDS Rare

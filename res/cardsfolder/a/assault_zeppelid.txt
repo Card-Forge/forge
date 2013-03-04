@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:3/3
 K:Flying
 K:Trample
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97107.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/103.jpg
 Oracle:Flying, trample
+SetInfo:DIS Common

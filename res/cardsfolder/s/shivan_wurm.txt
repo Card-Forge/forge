@@ -6,7 +6,6 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a red or green creature you control to its owner's hand.
 SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Red+YouCtrl,Creature.Green+YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_wurm.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/124.jpg
 Oracle:Trample\nWhen Shivan Wurm enters the battlefield, return a red or green creature you control to its owner's hand.
+SetInfo:PLS Rare

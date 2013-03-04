@@ -4,7 +4,6 @@ Types:Creature Human Mercenary
 PT:2/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player discards a card.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ DefendingPlayer | NumCards$ 1 | Mode$ TgtChoose
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alley_grifters.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/115.jpg
 Oracle:Whenever Alley Grifters becomes blocked, defending player discards a card.
+SetInfo:MMQ Common

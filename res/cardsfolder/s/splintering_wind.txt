@@ -6,7 +6,6 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Splinter | TokenTypes$ Crea
 SVar:TrigDamage:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigBoom | TriggerDescription$ When this creature leaves the battlefield, it deals 1 damage to you and each creature you control.
 SVar:TrigBoom:AB$ DamageAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | ValidPlayers$ Self | NumDmg$ 1 | SpellDescription$ Deal 1 damage to you and each creature you control.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/splintering_wind.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/83.jpg
 Oracle:{2}{G}: Splintering Wind deals 1 damage to target creature. Put a 1/1 green Splinter creature token onto the battlefield. It has flying and "Cumulative upkeep {G}." When it leaves the battlefield, it deals 1 damage to you and each creature you control. (At the beginning of its controller's upkeep, that player puts an age counter on it, then sacrifices it unless he or she pays its upkeep cost for each age counter on it.)
+SetInfo:ALL Rare

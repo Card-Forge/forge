@@ -8,7 +8,6 @@ T:Mode$ SpellCast | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigF
 SVar:TrigFlipYouCast:AB$ FlipACoin | Cost$ 0 | LoseSubAbility$ DBCounter | Caller$ TriggeredActivator
 SVar:DBCounter:DB$ Counter | Cost$ 0 | Defined$ TriggeredSpellAbility
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_chaos.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/97.jpg
 Oracle:At the beginning of your upkeep, flip a coin. If you lose the flip, sacrifice Planar Chaos.\nWhenever a player casts a spell, that player flips a coin. If he or she loses the flip, counter that spell.
+SetInfo:JUD Uncommon

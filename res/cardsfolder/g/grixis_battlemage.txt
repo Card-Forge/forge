@@ -5,7 +5,6 @@ PT:2/2
 A:AB$ Draw | Cost$ U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_battlemage.jpg
-SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/78.jpg
 Oracle:{U}, {T}: Draw a card, then discard a card.\n{R}, {T}: Target creature can't block this turn.
+SetInfo:ALA Uncommon

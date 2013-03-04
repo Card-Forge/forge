@@ -7,7 +7,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Creature.YouCtrl
 SVar:DmgX:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_ditch_effort.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/83.jpg
 Oracle:Sacrifice any number of creatures. Last-Ditch Effort deals that much damage to target creature or player.
+SetInfo:ULG Uncommon

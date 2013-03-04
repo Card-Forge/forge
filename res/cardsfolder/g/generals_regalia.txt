@@ -12,7 +12,6 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/generals_regalia.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/295.jpg
 Oracle:{3}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead.
+SetInfo:MMQ Rare

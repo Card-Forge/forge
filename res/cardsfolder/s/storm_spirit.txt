@@ -4,7 +4,6 @@ Types:Creature Elemental Spirit
 PT:3/3
 K:Flying
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_spirit.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/381.jpg
 Oracle:Flying\n{T}: Storm Spirit deals 2 damage to target creature.
+SetInfo:ICE Rare

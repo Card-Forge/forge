@@ -4,7 +4,6 @@ Types:Creature Cat Beast
 PT:3/2
 K:Provoke
 K:CARDNAME can't be blocked by more than one creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_vorine.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/131.jpg
 Oracle:Provoke (When this attacks, you may have target creature defending player controls untap and block it if able.)\nKrosan Vorine can't be blocked by more than one creature.
+SetInfo:LGN Common

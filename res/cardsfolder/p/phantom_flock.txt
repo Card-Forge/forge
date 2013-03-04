@@ -5,7 +5,6 @@ PT:0/0
 K:Flying
 K:etbCounter:P1P1:3
 K:If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_flock.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/16.jpg
 Oracle:Flying\nPhantom Flock enters the battlefield with three +1/+1 counters on it.\nIf damage would be dealt to Phantom Flock, prevent that damage. Remove a +1/+1 counter from Phantom Flock.
+SetInfo:JUD Uncommon

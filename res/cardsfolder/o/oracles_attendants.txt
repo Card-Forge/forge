@@ -13,9 +13,8 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oracles_attendants.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/32.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/30.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/16.jpg
 Oracle:{T}: All damage that would be dealt to target creature this turn by a source of your choice is dealt to Oracle's Attendants instead.
+SetInfo:8ED Rare
+SetInfo:NMS Rare
+SetInfo:9ED Rare

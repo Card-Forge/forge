@@ -4,7 +4,6 @@ Types:Creature Bird
 PT:2/1
 K:Flying
 K:Infect
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tine_shrike.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/17.jpg
 Oracle:Flying\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+SetInfo:MBS Common

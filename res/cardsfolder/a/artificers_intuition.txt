@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Enchantment
 A:AB$ ChangeZone | Cost$ U Discard<1/Artifact> | Origin$ Library | Destination$ Hand | ChangeType$ Artifact.cmcLE1 | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artificers_intuition.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/23.jpg
 Oracle:{U}, Discard an artifact card: Search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. Then shuffle your library.
+SetInfo:5DN Rare

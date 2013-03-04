@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cobbled_wings.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/219.jpg
 Oracle:Equipped creature has flying.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:ISD Common

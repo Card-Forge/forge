@@ -5,5 +5,5 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ BolaTap | Descr
 SVar:BolaTap:AB$ Tap | Cost$ T Unattach<OriginalHost/Leonin Bola> | ValidTgts$ Creature | SpellDescription$ Tap target creature.
 K:Equip 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_bola.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/127.jpg
 Oracle:Equipped creature has "{T}, Unattach Leonin Bola: Tap target creature."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+SetInfo:DST Common

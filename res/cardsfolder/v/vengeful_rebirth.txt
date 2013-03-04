@@ -6,8 +6,7 @@ SVar:DBVengefulRebirthDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPr
 SVar:DBVengefulRebirthExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | SubAbility$ DBVengefulRebirthCleanup
 SVar:DBVengefulRebirthCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:VengefulRebirthX:Remembered$CardManaCost
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_rebirth.jpg
 Oracle:Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, Vengeful Rebirth deals damage equal to that card's converted mana cost to target creature or player.\nExile Vengeful Rebirth.
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/62.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/233.jpg
+SetInfo:ARB Uncommon
+SetInfo:COM Uncommon

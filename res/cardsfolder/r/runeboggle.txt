@@ -3,7 +3,6 @@ ManaCost:2 U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SubAbility$ DBDraw | SpellDescription$ Counter target spell unless its controller pays 1. Draw a card
 SVar:DBDraw:DB$Draw | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runeboggle.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/33.jpg
 Oracle:Counter target spell unless its controller pays {1}.\nDraw a card.
+SetInfo:GPT Common

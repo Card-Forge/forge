@@ -4,11 +4,10 @@ Types:Sorcery
 A:SP$ Discard | Cost$ X B | ValidTgts$ Player | NumCards$ X | References$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_twist.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/24.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/24.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/25.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/31.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/24.jpg
 Oracle:Target player discards X cards at random.
+SetInfo:2ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

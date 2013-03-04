@@ -8,7 +8,6 @@ S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | Check
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 5 | SetToughness$ 5 | AddKeyword$ CARDNAME can't be blocked except by black creatures. | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LT3_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zulaport_enforcer.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/133.jpg
 Oracle:Level up {4} ({4}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n3/3\nLEVEL 3+\n5/5\nZulaport Enforcer can't be blocked except by black creatures.
+SetInfo:ROE Common

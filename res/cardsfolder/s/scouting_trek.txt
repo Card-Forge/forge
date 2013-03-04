@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 G | ChangeNum$ X | ChangeType$ Land.Basic | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | References$ X | SpellDescription$ Search your library for any number of basic land cards. Reveal those cards, then shuffle your library and put them on top of it.
 SVar:X:Count$InYourLibrary.Land.Basic
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scouting_trek.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/210.jpg
 Oracle:Search your library for any number of basic land cards. Reveal those cards, then shuffle your library and put them on top of it.
+SetInfo:INV Uncommon

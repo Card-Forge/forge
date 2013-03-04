@@ -5,7 +5,6 @@ PT:2/1
 K:Flying
 A:AB$ TapAll | Cost$ 8 | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | SpellDescription$ Tap all creatures target player controls.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnglare_invoker.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/16.jpg
 Oracle:Flying\n{8}: Tap all creatures target player controls.
+SetInfo:ROE Common

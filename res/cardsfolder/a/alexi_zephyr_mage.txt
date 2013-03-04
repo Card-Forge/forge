@@ -7,7 +7,6 @@ A:AB$ ChangeZone | Cost$ X U T Discard<2/Card> | Origin$ Battlefield | Destinati
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alexi_zephyr_mage.jpg
-SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/28.jpg
 Oracle:{X}{U}, {T}, Discard two cards: Return X target creatures to their owners' hands.
+SetInfo:PCY Rare

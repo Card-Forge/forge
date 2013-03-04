@@ -4,9 +4,8 @@ Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_tablet.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/238.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/240.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/239.jpg
 Oracle:At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:2ED Uncommon

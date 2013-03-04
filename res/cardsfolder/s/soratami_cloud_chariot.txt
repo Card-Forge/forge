@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Flying | SpellDescription$ Target creature you control gains flying until end of turn.
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_cloud_chariot.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/160.jpg
 Oracle:{2}: Target creature you control gains flying until end of turn.\n{2}: Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
+SetInfo:SOK Uncommon

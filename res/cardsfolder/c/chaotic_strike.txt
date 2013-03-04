@@ -5,7 +5,6 @@ Text:Cast CARDNAME only during combat after blockers are declared.
 A:SP$ FlipACoin | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain +1/+1 | WinSubAbility$ ChaoticStrikePump | LoseSubAbility$ ChaoticStrikeDraw | ActivationPhases$ Declare Blockers - Play Instants and Abilities->EndCombat | SpellDescription$ Flip a coin. If you win the flip, target creature gets +1/+1 until end of turn. Draw a card.
 SVar:ChaoticStrikePump:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ 1 | NumDef$ 1 | SubAbility$ ChaoticStrikeDraw
 SVar:ChaoticStrikeDraw:DB$ Draw | NumCards$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaotic_strike.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/140.jpg
 Oracle:Cast Chaotic Strike only during combat after blockers are declared.\nFlip a coin. If you win the flip, target creature gets +1/+1 until end of turn.\nDraw a card.
+SetInfo:INV Uncommon

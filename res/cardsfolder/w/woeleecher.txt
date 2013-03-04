@@ -8,7 +8,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woeleecher.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/27.jpg
 Oracle:{W}, {T}: Remove a -1/-1 counter from target creature. If you do, you gain 2 life.
+SetInfo:SHM Common

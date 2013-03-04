@@ -3,8 +3,7 @@ ManaCost:2 B B R
 Types:Legendary Creature Human Archer
 PT:3/3
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tor_wauki.jpg
 Oracle:{T}: Tor Wauki deals 2 damage to target attacking or blocking creature.
-SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/123.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/305.jpg
+SetInfo:CHR Uncommon
+SetInfo:LEG Uncommon

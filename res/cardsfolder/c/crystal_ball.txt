@@ -3,7 +3,6 @@ ManaCost:3
 Types:Artifact
 A:AB$ Scry | Cost$ 1 T | ScryNum$ 2 |SpellDescription$ Scry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_ball.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/203.jpg
 Oracle:{1}, {T}: Scry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SetInfo:M11 Uncommon

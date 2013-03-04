@@ -5,8 +5,7 @@ A:SP$ SacrificeAll | Cost$ 5 R | ValidCards$ Creature.YouCtrl | RememberSacrific
 SVar:DBToken:DB$Token | TokenAmount$ X | TokenName$ Hellion | TokenTypes$ Creature,Hellion | TokenOwner$ You | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | References$ X
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellion_eruption.jpg
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/45.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/151.jpg
 Oracle:Sacrifice all creatures you control, then put that many 4/4 red Hellion creature tokens onto the battlefield.
+SetInfo:PC2 Rare
+SetInfo:ROE Rare

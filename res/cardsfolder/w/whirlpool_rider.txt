@@ -7,7 +7,6 @@ SVar:TrigChangeAll:DB$ ChangeZoneAll | Defined$ You | Origin$ Hand | Destination
 SVar:DBDraw:DB$Draw | NumCards$ X | Defined$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27670.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/35.jpg
 Oracle:When Whirlpool Rider enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
+SetInfo:APC Common

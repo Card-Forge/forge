@@ -7,7 +7,6 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsImprinted | 
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_despair.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/319.jpg
 Oracle:{1}, Sacrifice a creature: The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
+SetInfo:MIR Rare

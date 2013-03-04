@@ -4,9 +4,8 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add 1 to your mana pool."
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana
 SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awakening_zone.jpg
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/56.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/142.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/176.jpg
 Oracle:At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."
+SetInfo:PC2 Rare
+SetInfo:COM Rare
+SetInfo:ROE Rare

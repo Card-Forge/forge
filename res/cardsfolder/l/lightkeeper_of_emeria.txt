@@ -7,8 +7,7 @@ K:Multikicker W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life for each time it was kicked.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:Count$TimesKicked/Times.2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightkeeper_of_emeria.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/18.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/12.jpg
 Oracle:Multikicker {W} (You may pay an additional {W} any number of times as you cast this spell.)\nFlying\nWhen Lightkeeper of Emeria enters the battlefield, you gain 2 life for each time it was kicked.
+SetInfo:COM Uncommon
+SetInfo:WWK Uncommon

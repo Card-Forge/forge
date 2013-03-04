@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:1/1
 A:AB$ Pump | Cost$ 1 W T | ValidTgts$ Creature.blocked | TgtPrompt$ Select target blocked creature | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ Prevent all combat damage that would be dealt by target blocked creature this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_missionary.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/126.jpg
 Oracle:{1}{W}, {T}: Prevent all combat damage that would be dealt by target blocked creature this turn.
+SetInfo:WTH Common

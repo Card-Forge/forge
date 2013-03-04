@@ -8,7 +8,6 @@ T:Mode$ Sacrificed | ValidCard$ Creature | Execute$ TrigPutCounter | TriggerZone
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ DefendingPlayer | SacValid$ Creature
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:HasAttackEffect:TRUE
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraximundar.jpg
-SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/113.jpg
 Oracle:Haste\nWhenever Thraximundar attacks, defending player sacrifices a creature.\nWhenever a player sacrifices a creature, you may put a +1/+1 counter on Thraximundar.
+SetInfo:ARB Mythic

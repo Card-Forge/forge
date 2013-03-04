@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddTrigger$ TrigPhase | AddSVar$ TrigPendrellFlux | Description$ Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost."
 SVar:TrigPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPendrellFlux | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost.
 SVar:TrigPendrellFlux:DB$ Sacrifice | Defined$ Self | UnlessCost$ CardManaCost | UnlessPayer$ You
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pendrell_flux.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/87.jpg
 Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost."
+SetInfo:USG Common

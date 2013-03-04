@@ -4,13 +4,12 @@ Types:Creature Elemental
 PT:8/8
 K:Trample
 K:At the beginning of your upkeep, CARDNAME deals 8 damage to you unless you pay G G G G
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_of_nature.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/103.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/103.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/156.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/129.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/242.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/103.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/103.jpg
 Oracle:Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)\nAt the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay {G}{G}{G}{G}.
+SetInfo:2ED Rare
+SetInfo:9ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

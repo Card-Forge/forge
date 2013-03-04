@@ -5,7 +5,6 @@ PT:2/1
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gains first strike until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_bladescout.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/185.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Viashino Bladescout enters the battlefield, target creature gains first strike until end of turn.
+SetInfo:TSP Common

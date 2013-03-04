@@ -5,11 +5,12 @@ A:SP$DealDamage | Cost$ X 1 B | XColor$ B | ValidTgts$ Creature,Player | TgtProm
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consume_spirit.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/60.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/89.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/88.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/119.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/131.jpg
 Oracle:Spend only black mana on X.\nConsume Spirit deals X damage to target creature or player and you gain X life.
+SetInfo:M10 Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:DDC Uncommon
+SetInfo:M12 Uncommon
+SetInfo:HOP Uncommon
+SetInfo:MRD Common

@@ -4,6 +4,6 @@ Types:Artifact
 A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent. | SpellDescription$ Untap another target permanent.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unbender_tine.jpg
-SVar:Rarity:Uncommon
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/15.jpg
 Oracle:{T}: Untap another target permanent.
+SetInfo:ARB Uncommon
+SetInfo:ARC Uncommon

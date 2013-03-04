@@ -4,7 +4,6 @@ Types:Sorcery
 K:Replicate 3 U
 A:SP$ Pump | Cost$ 3 U | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Choose target permanent an opponent controls | IsCurse$ True | StackDescription$ None | SubAbility$ DBChangeZone | SpellDescription$ Choose target permanent an opponent controls. Search that player's library for a card with the same name and put it onto the battlefield under your control. Then that player shuffles his or her library.
 SVar:DBChangeZone:DB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | DefinedPlayer$ TargetedController | Chooser$ You | ChangeType$ Targeted.sameName | ChangeNum$ 1 | GainControl$ True | Shuffle$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mimeofacture.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/30.jpg
 Oracle:Replicate {3}{U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nChoose target permanent an opponent controls. Search that player's library for a card with the same name and put it onto the battlefield under your control. Then that player shuffles his or her library.
+SetInfo:GPT Rare

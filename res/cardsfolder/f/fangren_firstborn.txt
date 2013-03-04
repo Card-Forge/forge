@@ -5,7 +5,6 @@ PT:4/2
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigCounters | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on each attacking creature.
 SVar:TrigCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.attacking | CounterType$ P1P1 | CounterNum$ 1
 SVar:HasAttackEffect:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fangren_firstborn.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/75.jpg
 Oracle:Whenever Fangren Firstborn attacks, put a +1/+1 counter on each attacking creature.
+SetInfo:DST Rare

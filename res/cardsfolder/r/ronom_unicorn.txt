@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Creature Unicorn
 PT:2/2
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronom_unicorn.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/16.jpg
 Oracle:Sacrifice Ronom Unicorn: Destroy target enchantment.
+SetInfo:CSP Common

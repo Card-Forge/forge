@@ -3,7 +3,6 @@ ManaCost:R
 Types:Creature Goblin Shaman
 PT:1/1
 A:AB$ ChangeZone | Cost$ 2 R T Sac<1/Creature.Black> Sac<1/Creature.Red> Sac<1/Creature.Green> | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedHellkite Overlord | ChangeNum$ 1 | CostDesc$ 2 R, T, Sacrifice a black creature, a red creature, and a green creature: | SpellDescription$ Search your library for a card named Hellkite Overlord and put it onto the battlefield. Then shuffle your library.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragons_herald.jpg
-SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/98.jpg
 Oracle:{2}{R}, {T}, Sacrifice a black creature, a red creature, and a green creature: Search your library for a card named Hellkite Overlord and put it onto the battlefield. Then shuffle your library.
+SetInfo:ALA Uncommon

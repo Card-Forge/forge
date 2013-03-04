@@ -5,7 +5,6 @@ K:Equip 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigGainCounter | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.
 SVar:TrigGainCounter:DB$ PutCounter | Defined$ Equipped | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$Valid Creature.EquippedBy+Vampire/Plus.1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blade_of_the_bloodchief.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/196.jpg
 Oracle:Whenever a creature dies, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.\nEquip {1}
+SetInfo:ZEN Rare

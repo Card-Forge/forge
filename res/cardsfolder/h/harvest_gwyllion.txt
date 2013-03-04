@@ -3,7 +3,6 @@ ManaCost:2 WB WB
 Types:Creature Hag
 PT:2/4
 K:Wither
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harvest_gwyllion.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/90.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)
+SetInfo:EVE Common

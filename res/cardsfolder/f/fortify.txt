@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Instant
 A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | PrecostDesc$ Choose one - | SpellDescription$ Creatures you control get +2/+0 until end of turn;
 A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumDef$ +2 | SpellDescription$ or creatures you control get +0/+2 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fortify.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/19.jpg
 Oracle:Choose one - Creatures you control get +2/+0 until end of turn; or creatures you control get +0/+2 until end of turn.
+SetInfo:TSP Common

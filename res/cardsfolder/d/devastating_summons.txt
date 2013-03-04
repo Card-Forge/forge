@@ -5,7 +5,6 @@ A:SP$ Token | Cost$ R Sac<X/Land> | TokenAmount$ 2 | TokenName$ Elemental | Toke
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devastating_summons.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/140.jpg
 Oracle:As an additional cost to cast Devastating Summons, sacrifice X lands.\nPut two X/X red Elemental creature tokens onto the battlefield.
+SetInfo:ROE Rare

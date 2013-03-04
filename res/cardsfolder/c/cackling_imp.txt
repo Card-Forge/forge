@@ -4,7 +4,7 @@ Types:Creature Imp
 PT:2/2
 K:Flying
 A:AB$ LoseLife | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73597.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/44.jpg
 Oracle:Flying\n{T}: Target player loses 1 life.
+SetInfo:DDC Common
+SetInfo:5DN Common

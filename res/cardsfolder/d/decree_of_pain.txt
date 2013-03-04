@@ -3,13 +3,12 @@ ManaCost:6 B B
 Types:Sorcery
 K:Cycling:3 B B
 A:SP$ DestroyAll | Cost$ 6 B B | ValidCards$ Creature | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBDraw | SpellDescription$ Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.
-SVar:DBDraw:DB$ Draw | NumCards$ DecreeX | SubAbility$ DBCleanup | References$ DecreeX 
+SVar:DBDraw:DB$ Draw | NumCards$ DecreeX | SubAbility$ DBCleanup | References$ DecreeX
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When you cycle CARDNAME, all creatures get -2/-2 until end of turn.
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | NumAtt$ -2 | NumDef$ -2
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DecreeX:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decree_of_pain.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/64.jpg
 Oracle:Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.\nCycling {3}{B}{B} ({3}{B}{B}, Discard this card: Draw a card.)\nWhen you cycle Decree of Pain, all creatures get -2/-2 until end of turn.
+SetInfo:SCG Rare

@@ -12,5 +12,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reins_of_the_vinesteed.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/134.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nWhen enchanted creature dies, you may return Reins of the Vinesteed from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
+SetInfo:MOR Common

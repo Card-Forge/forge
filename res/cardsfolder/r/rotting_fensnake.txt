@@ -2,7 +2,6 @@ Name:Rotting Fensnake
 ManaCost:3 B
 Types:Creature Zombie Snake
 PT:5/1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_fensnake.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/113.jpg
 Oracle:
+SetInfo:ISD Common

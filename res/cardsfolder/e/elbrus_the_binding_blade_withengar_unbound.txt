@@ -7,7 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | Co
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elbrus_the_binding_blade.jpg
 AlternateMode:DoubleFaced
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/147a.jpg
 Oracle:Equipped creature gets +1/+0.\nWhen equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.\nEquip {1}
 
 ALTERNATE
@@ -23,5 +22,5 @@ K:Intimidate
 T:Mode$ LosesGame | Execute$ TrigCounter | TriggerDescription$ Whenever a player loses the game, put thirteen +1/+1 counters on CARDNAME.
 SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 13
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withengar_unbound.jpg
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/147b.jpg
 Oracle:Flying, intimidate, trample\nWhenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.
+SetInfo:DKA Mythic

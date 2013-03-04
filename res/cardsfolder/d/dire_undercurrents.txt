@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigDraw:AB$Draw | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ select target player to draw a card | NumCards$ 1
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | NumCards$ 1 | TgtPrompt$ select target player to discard a card | Mode$ TgtChoose
 SVar:BuffedBy:Creature.Blue,Creature.Black
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dire_undercurrents.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/159.jpg
 Oracle:Whenever a blue creature enters the battlefield under your control, you may have target player draw a card.\nWhenever a black creature enters the battlefield under your control, you may have target player discard a card.
+SetInfo:SHM Rare

@@ -6,12 +6,11 @@ K:Haste
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Creature.YouOwn+Above | PresentZone$ Graveyard | PresentCompare$ GE3 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard with three or more creature cards above it, you may put CARDNAME onto the battlefield.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:DiscardMe:2
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_shadow.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/25.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/25.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/45.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/33.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/26.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/25.jpg
 Oracle:Haste\nAt the beginning of your upkeep, if Nether Shadow is in your graveyard with three or more creature cards above it, you may put Nether Shadow onto the battlefield.
+SetInfo:2ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

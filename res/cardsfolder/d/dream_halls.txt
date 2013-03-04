@@ -3,7 +3,6 @@ ManaCost:3 U U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Card.YouCtrl | AddHiddenKeyword$ Alternative Cost Discard<1/Card.SharesColorWith/color sharing> | AffectedZone$ Hand,Graveyard,Exile,Library | Description$ Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_halls.jpg
-SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/28.jpg
 Oracle:Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
+SetInfo:STH Rare

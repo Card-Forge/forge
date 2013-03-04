@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Descr
 K:Cycling:1 U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.cmcGE6 | Execute$ TrigReturn | TriggerZones$ Graveyard | OptionalDecider$ You | TriggerDescription$ When a creature with converted mana cost 6 or greater enters the battlefield, you may return CARDNAME from your graveyard to the battlefield attached to that creature.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ TriggeredCard
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_wings.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/34.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Wings from your graveyard to the battlefield attached to that creature.
+SetInfo:SCG Common

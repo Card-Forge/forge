@@ -8,7 +8,6 @@ SVar:TrigDestroyBlocked:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | Rememb
 SVar:TrigDestroyBlocker:AB$ Pump | Cost$ 0 | Defined$ TriggeredBlocker | RememberObjects$ TriggeredBlocker | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Aura.AttachedTo Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treefolk_mystic.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/114.jpg
 Oracle:Whenever Treefolk Mystic blocks or becomes blocked by a creature, destroy all Auras attached to that creature.
+SetInfo:ULG Common

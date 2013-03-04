@@ -5,7 +5,6 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Exec
 SVar:TrigPut:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druids_repository.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/176.jpg
 Oracle:Whenever a creature you control attacks, put a charge counter on Druids' Repository.\nRemove a charge counter from Druids' Repository: Add one mana of any color to your mana pool.
+SetInfo:AVR Rare

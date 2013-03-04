@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Instant
 A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fevered_strength.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/10.jpg|2
 Oracle:Target creature gets +2/+0 until end of turn.\nDraw a card at the beginning of the next turn's upkeep.
+SetInfo:ALL Common x2

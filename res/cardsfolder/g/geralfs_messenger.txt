@@ -7,5 +7,5 @@ K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 2 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Opponent | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geralfs_messenger.jpg
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/63.jpg
 Oracle:Geralf's Messenger enters the battlefield tapped.\nWhen Geralf's Messenger enters the battlefield, target opponent loses 2 life.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+SetInfo:DKA Rare

@@ -6,7 +6,7 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 5 | AddToughness$
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Creature | Execute$ TrigExile | TriggerDescription$ When equipped creature deals damage to a creature, exile that creature.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredTarget | Origin$ Battlefield | Destination$ Exile
 DeckHints:Name$Helm of Kaldra|Shield of Kaldra
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_kaldra.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/251.jpg
 Oracle:Equipped creature gets +5/+5.\nWhenever equipped creature deals damage to a creature, exile that creature.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+SetInfo:MRD Rare
+SetInfo:MBP Rare

@@ -7,8 +7,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABMana
 SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rapacious_one.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/133.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/162.jpg
 Oracle:Trample\nWhenever Rapacious One deals combat damage to a player, put that many 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
+SetInfo:COM Uncommon
+SetInfo:ROE Uncommon

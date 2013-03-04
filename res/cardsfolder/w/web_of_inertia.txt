@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ Player.Opponent | Execute$ TrigCantAttack | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's combat, that player may exile a card from his or her graveyard. If the player doesn't, creatures he or she controls can't attack you this turn.
 SVar:TrigCantAttack:AB$ Effect | Cost$ 0 | Name$ Web of Inertia Effect | StaticAbilities$ STCantAttack | References$ STCantAttack | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ TriggeredPlayer | SpellDescription$ creatures he or she controls can't attack you this turn.
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/web_of_inertia.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/53.jpg
 Oracle:At the beginning of each opponent's combat, that player may exile a card from his or her graveyard. If the player doesn't, creatures he or she controls can't attack you this turn.
+SetInfo:JUD Uncommon

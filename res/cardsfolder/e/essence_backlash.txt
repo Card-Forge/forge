@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Counter | Cost$ 2 U R | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDamage | SpellDescription$ Counter target creature spell. CARDNAME deals damage equal to that spell's power to its controller.
 SVar:DBDamage:DB$ DealDamage | Cost$ 0 | NumDmg$ Backlash | Defined$ TargetedController
 SVar:Backlash:Targeted$CardPower
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_backlash.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/160.jpg
 Oracle:Counter target creature spell. Essence Backlash deals damage equal to that spell's power to its controller.
+SetInfo:RTR Common

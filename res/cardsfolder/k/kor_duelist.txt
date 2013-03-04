@@ -4,7 +4,6 @@ Types:Creature Kor Soldier
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self+equipped | AddKeyword$ Double Strike | Description$ As long as CARDNAME is equipped, it has double strike. (It deals both first-strike and regular combat damage.)
 SVar:EquipMe:Once
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_duelist.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/19.jpg
 Oracle:As long as Kor Duelist is equipped, it has double strike. (It deals both first-strike and regular combat damage.)
+SetInfo:ZEN Uncommon

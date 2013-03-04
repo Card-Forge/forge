@@ -2,8 +2,7 @@ Name:Walking Corpse
 ManaCost:1 B
 Types:Creature Zombie
 PT:2/2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_corpse.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/116.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/126.jpg
 Oracle:
+SetInfo:M13 Common
+SetInfo:ISD Common

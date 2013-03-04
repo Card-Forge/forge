@@ -5,7 +5,6 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking+withShadow | TgtPrompt$ Select target attacking creature with shadow | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SubAbility$ DBUntap | SpellDescription$ Untap target attacking creature with shadow. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 SVar:DBUntap:DB$Untap | Defined$ Targeted
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_shadows.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/317.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Untap target attacking creature with shadow. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
+SetInfo:TMP Uncommon

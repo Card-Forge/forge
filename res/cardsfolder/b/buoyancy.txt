@@ -5,7 +5,6 @@ K:Enchant creature
 K:Flash
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/buoyancy.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/63.jpg
 Oracle:Flash\nEnchant creature\nEnchanted creature has flying.
+SetInfo:MMQ Common

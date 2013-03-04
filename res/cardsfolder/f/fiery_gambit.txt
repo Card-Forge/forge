@@ -20,7 +20,6 @@ SVar:UntapLands:DB$ UntapAll | ValidCards$ Land.YouCtrl | ConditionCheckSVar$ Wi
 SVar:Wins:Number$0
 SVar:Loss:Number$0
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_gambit.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/90.jpg
 Oracle:Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, Fiery Gambit has no effect. If you win one or more flips, Fiery Gambit deals 3 damage to target creature. If you win two or more flips, Fiery Gambit deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control.
+SetInfo:MRD Rare

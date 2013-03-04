@@ -2,7 +2,6 @@ Name:Soulscour
 ManaCost:7 W W W
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 7 W W W | ValidCards$ Permanent.nonArtifact | SpellDescription$ Destroy all nonartifact permanents.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulscour.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/14.jpg
 Oracle:Destroy all nonartifact permanents.
+SetInfo:DST Rare

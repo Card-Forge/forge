@@ -9,7 +9,6 @@ SVar:DBShuffle:DB$ Shuffle | Defined$ Targeted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.NamedCard/Times.3
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_hemorrhage.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/47.jpg
 Oracle:Name a nonland card. Target player reveals his or her hand. Thought Hemorrhage deals 3 damage to that player for each card with that name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
+SetInfo:ARB Rare

@@ -3,19 +3,20 @@ ManaCost:G
 Types:Creature Elf Druid
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83515.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/119.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/119.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/118.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/253.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/175.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/145.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/253.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/274.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/184.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/189.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/239.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/182.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/119.jpg
 Oracle:{T}: Add {G} to your mana pool.
+SetInfo:2ED Common
+SetInfo:7ED Common
+SetInfo:6ED Common
+SetInfo:S00 Common
+SetInfo:M10 Common
+SetInfo:EVG Common
+SetInfo:9ED Common
+SetInfo:10E Common
+SetInfo:M11 Common
+SetInfo:LEB Common
+SetInfo:M12 Common
+SetInfo:LEA Common
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:3ED Common

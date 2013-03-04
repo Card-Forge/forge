@@ -14,8 +14,7 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whirlpool_warrior.jpg
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/29.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/36.jpg
 Oracle:When Whirlpool Warrior enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.\n{R}, Sacrifice Whirlpool Warrior: Each player shuffles the cards from his or her hand into his or her library, then draws that many cards.
+SetInfo:PC2 Rare
+SetInfo:APC Rare

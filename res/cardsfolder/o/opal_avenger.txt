@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Enchantment
 T:Mode$ Always | LifeTotal$ You | LifeAmount$ LE10 | TriggerZones$ Battlefield | Execute$ TrigOpalAvengerAnimate | IsPresent$ Card.Self+Enchantment | TriggerDescription$ When you have 10 or less life, if CARDNAME is an enchantment, CARDNAME becomes a 3/5 Soldier creature.
 SVar:TrigOpalAvengerAnimate:AB$ Animate | Cost$ 0 | Types$ Creature,Soldier | Power$ 3 | Toughness$ 5 | OverwriteTypes$ True | Permanent$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_avenger.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/15.jpg
 Oracle:When you have 10 or less life, if Opal Avenger is an enchantment, Opal Avenger becomes a 3/5 Soldier creature.
+SetInfo:ULG Rare

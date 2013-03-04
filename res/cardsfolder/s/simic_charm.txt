@@ -5,7 +5,6 @@ A:SP$ Charm | Cost$ G U | Choices$ PumpGiant,PumpHexproof,ReturnCard | CharmNum$
 SVar:PumpGiant:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:PumpHexproof:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Hexproof | SpellDescription$ Permanents you control gain hexproof until end of turn.
 SVar:ReturnCard:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature. | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_charm.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/195.jpg
 Oracle:Choose one — Target creature gets +3/+3 until end of turn; or permanents you control gain hexproof until end of turn; or return target creature to its owner's hand.
+SetInfo:GTC Uncommon

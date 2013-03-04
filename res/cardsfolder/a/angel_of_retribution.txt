@@ -4,7 +4,6 @@ Types:Creature Angel
 PT:5/5
 K:Flying
 K:First Strike
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_retribution.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/1.jpg
 Oracle:Flying, first strike
+SetInfo:TOR Rare

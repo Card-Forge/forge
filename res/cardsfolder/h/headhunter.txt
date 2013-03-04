@@ -5,7 +5,6 @@ PT:1/1
 K:Morph:B
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards a card.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/headhunter.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/156.jpg
 Oracle:Whenever Headhunter deals combat damage to a player, that player discards a card.\nMorph {B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:ONS Uncommon

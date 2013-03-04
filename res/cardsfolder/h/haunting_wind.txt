@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ AbilityCast | NonTapCost$ True | ValidCard$ Artifact | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an artifact becomes tapped or a player activates an artifact's ability without T in its activation cost, CARDNAME deals 1 damage to that artifact's controller.
 T:Mode$ Taps | ValidCard$ Artifact | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever an artifact becomes tapped or a player activates an artifact's ability without T in its activation cost, CARDNAME deals 1 damage to that artifact's controller.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_wind.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/47.jpg
 Oracle:Whenever an artifact becomes tapped or a player activates an artifact's ability without {T} in its activation cost, Haunting Wind deals 1 damage to that artifact's controller.
+SetInfo:ATQ Uncommon

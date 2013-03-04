@@ -7,7 +7,6 @@ SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | Mode$ Hand |
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredTarget | SubAbility$ DBCleanup | References$ X | SpellDescription$ Draw that many cards
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shocker.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/204.jpg
 Oracle:Whenever Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
+SetInfo:TMP Rare

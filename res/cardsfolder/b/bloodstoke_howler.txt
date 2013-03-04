@@ -5,7 +5,6 @@ PT:3/4
 K:Morph:6 R
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, Beast creatures you control get +3/+0 until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Beast+YouCtrl | NumAtt$ +3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodstoke_howler.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/89.jpg
 Oracle:Morph {6}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Bloodstoke Howler is turned face up, Beast creatures you control get +3/+0 until end of turn.
+SetInfo:LGN Common

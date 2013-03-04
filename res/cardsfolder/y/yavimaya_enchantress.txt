@@ -5,11 +5,10 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each enchantment on the battlefield.
 SVar:X:Count$Valid Enchantment
 SVar:BuffedBy:Enchantment
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_enchantress.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/290.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/125.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/310.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/284.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/285.jpg
 Oracle:Yavimaya Enchantress gets +1/+1 for each enchantment on the battlefield.
+SetInfo:8ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:UDS Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon

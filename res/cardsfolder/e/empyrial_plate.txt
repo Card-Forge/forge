@@ -4,7 +4,6 @@ Types:Artifact Equipment
 K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each card in your hand.
 SVar:X:Count$InYourHand
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empyrial_plate.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/168.jpg
 Oracle:Equipped creature gets +1/+1 for each card in your hand.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+SetInfo:MRD Rare

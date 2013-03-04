@@ -6,7 +6,6 @@ K:Devour:2
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life for each creature it devoured.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$Devoured Card/Twice
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marrow_chomper.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/93.jpg
 Oracle:Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)\nWhen Marrow Chomper enters the battlefield, you gain 2 life for each creature it devoured.
+SetInfo:ARB Uncommon

@@ -8,7 +8,6 @@ SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ G | Amount$ X | Defined$ TriggeredCa
 SVar:X:Count$Valid Elf
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_guidance.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/255.jpg
 Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool for each Elf on the battlefield (in addition to the mana the land produces).
+SetInfo:ONS Common

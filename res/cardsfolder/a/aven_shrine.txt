@@ -9,4 +9,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_shrine.jpg
 Oracle:Whenever a player casts a spell, that player gains X life, where X is the number of cards in all graveyards with the same name as that spell.
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/9.jpg
+SetInfo:ODY Rare

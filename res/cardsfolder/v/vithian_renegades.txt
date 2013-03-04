@@ -4,7 +4,6 @@ Types:Creature Human Shaman
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_renegades.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/64.jpg
 Oracle:When Vithian Renegades enters the battlefield, destroy target artifact.
+SetInfo:ARB Uncommon

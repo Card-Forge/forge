@@ -3,8 +3,7 @@ ManaCost:2 R R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures can't block.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bedlam.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/175.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/174.jpg
 Oracle:Creatures can't block.
+SetInfo:7ED Rare
+SetInfo:USG Rare

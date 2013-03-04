@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select 
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Remembered.sameName | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46162.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/21.jpg
 Oracle:Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
+SetInfo:DST Common
+SetInfo:DDF Common

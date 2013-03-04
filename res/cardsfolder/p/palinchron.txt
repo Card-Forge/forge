@@ -6,7 +6,6 @@ K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to seven lands.
 SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$ 7
 A:AB$ ChangeZone | Cost$ 2 U U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/palinchron.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/38.jpg
 Oracle:Flying\nWhen Palinchron enters the battlefield, untap up to seven lands.\n{2}{U}{U}: Return Palinchron to its owner's hand.
+SetInfo:ULG Rare

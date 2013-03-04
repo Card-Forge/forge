@@ -4,8 +4,7 @@ Types:Creature Illusion
 PT:1/5
 T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ CARDNAME is unblockable as long as it's attacking alone.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Unblockable
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_prowler.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/29.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/74.jpg
 Oracle:Dream Prowler is unblockable as long as it's attacking alone.
+SetInfo:9ED Uncommon
+SetInfo:STH Common

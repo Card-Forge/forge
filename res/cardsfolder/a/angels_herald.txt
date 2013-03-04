@@ -3,7 +3,6 @@ ManaCost:W
 Types:Creature Human Cleric
 PT:1/1
 A:AB$ ChangeZone | Cost$ 2 W T Sac<1/Creature.Green> Sac<1/Creature.White> Sac<1/Creature.Blue> | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedEmpyrial Archangel | ChangeNum$ 1 | CostDesc$ 2 W, T, Sacrifice a green creature, a white creature, and a blue creature: | SpellDescription$ Search your library for a card named Empyrial Archangel and put it onto the battlefield. Then shuffle your library.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_herald.jpg
-SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/2.jpg
 Oracle:{2}{W}, {T}, Sacrifice a green creature, a white creature, and a blue creature: Search your library for a card named Empyrial Archangel and put it onto the battlefield. Then shuffle your library.
+SetInfo:ALA Uncommon

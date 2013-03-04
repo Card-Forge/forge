@@ -8,8 +8,7 @@ SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execu
 SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
 SVar:TrigDestroyBlocked:AB$ Destroy | Cost$ 0 | Defined$ TriggeredAttacker
 SVar:TrigDestroyBlocker:AB$ Destroy | Cost$ 0 | Defined$ TriggeredBlocker
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abomination.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/1.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/1.jpg
 Oracle:Whenever Abomination blocks or becomes blocked by a green or white creature, destroy that creature at end of combat.
+SetInfo:LEG Uncommon
+SetInfo:4ED Uncommon

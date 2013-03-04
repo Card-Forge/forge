@@ -8,7 +8,6 @@ SVar:TreeRedemption:DB$ Animate | Toughness$ X | References$ X | Permanent$ True
 SVar:SetLife:DB$ SetLife | Defined$ You | LifeAmount$ OldToughness | References$ OldToughness
 SVar:OldToughness:Number$13
 SVar:X:Count$YourLifeTotal
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_redemption.jpg
-SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/207.jpg
 Oracle:Defender\n{T}: Exchange your life total with Tree of Redemption's toughness.
+SetInfo:ISD Mythic

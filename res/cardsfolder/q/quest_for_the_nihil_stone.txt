@@ -8,7 +8,6 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount
 SVar:CardsInHand:Count$ValidHand Card.ActivePlayerCtrl
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quest_for_the_nihil_stone.jpg
-SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/64.jpg
 Oracle:Whenever an opponent discards a card, you may put a quest counter on Quest for the Nihil Stone.\nAt the beginning of each opponent's upkeep, if that player has no cards in hand and Quest for the Nihil Stone has two or more quest counters on it, you may have that player lose 5 life.
+SetInfo:WWK Rare

@@ -6,7 +6,6 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeT
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assembly_hall.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/286.jpg
 Oracle:{4}, {T}: Reveal a creature card in your hand. Search your library for a card with the same name as that card, reveal it, and put it into your hand. Then shuffle your library.
+SetInfo:MMQ Rare

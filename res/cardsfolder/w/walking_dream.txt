@@ -5,7 +5,6 @@ PT:3/3
 K:Unblockable
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME doesn't untap during your untap step. | CheckSVar$ X | SVarCompare$ GE2 | Description$ CARDNAME doesn't untap during your untap step if an opponent controls two or more creatures.
 SVar:X:Count$Valid Creature.OppCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_dream.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/49.jpg
 Oracle:Walking Dream is unblockable.\nWalking Dream doesn't untap during your untap step if an opponent controls two or more creatures.
+SetInfo:STH Uncommon

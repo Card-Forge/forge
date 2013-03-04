@@ -3,7 +3,6 @@ ManaCost:1 W W
 Types:Creature Human
 PT:2/2
 S:Mode$ PreventDamage | Source$ Creature.enchanted | Target$ Card.Self | CombatDamage$ True | Description$ Prevent all combat damage that would be dealt to CARDNAME by enchanted creatures.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enchanted_being.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/181.jpg
 Oracle:Prevent all combat damage that would be dealt to Enchanted Being by enchanted creatures.
+SetInfo:LEG Common

@@ -7,7 +7,6 @@ SVar:TrigReveal:AB$ Reveal | Cost$ 0 | Random$ True | RememberRevealed$ True | V
 SVar:DBLose:DB$LoseLife | LifeAmount$ X | Defined$ Targeted | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/singe_mind_ogre.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/45.jpg
 Oracle:When Singe-Mind Ogre enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
+SetInfo:ARB Common

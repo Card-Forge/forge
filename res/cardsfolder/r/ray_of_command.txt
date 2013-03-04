@@ -2,10 +2,9 @@ Name:Ray of Command
 ManaCost:3 U
 Types:Instant
 A:SP$ GainControl | Cost$ 3 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature opponent controls | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | TapOnLose$ True | SpellDescription$ Untap target creature an opponent controls and gain control of it until end of turn. That creature gains haste until end of turn. When you lose control of the creature, tap it.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_command.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/114.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/86.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/56.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/92.jpg
 Oracle:Untap target creature an opponent controls and gain control of it until end of turn. That creature gains haste until end of turn. When you lose control of the creature, tap it.
+SetInfo:COM Common
+SetInfo:MIR Common
+SetInfo:5ED Common
+SetInfo:ICE Common

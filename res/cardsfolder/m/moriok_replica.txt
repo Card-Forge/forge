@@ -5,7 +5,6 @@ PT:2/2
 A:AB$ Draw | Cost$ 1 B Sac<1/CARDNAME> | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ You draw two cards and lose 2 life.
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moriok_replica.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/178.jpg
 Oracle:{1}{B}, Sacrifice Moriok Replica: You draw two cards and lose 2 life.
+SetInfo:SOM Common

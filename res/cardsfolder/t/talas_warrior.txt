@@ -3,7 +3,6 @@ ManaCost:1 U U
 Types:Creature Human Pirate Warrior
 PT:2/2
 K:Unblockable
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6545.jpg
-SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/53.jpg
 Oracle:Talas Warrior is unblockable.
+SetInfo:PO2 Rare

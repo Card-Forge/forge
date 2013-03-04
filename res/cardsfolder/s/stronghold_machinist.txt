@@ -4,7 +4,6 @@ Types:Creature Human Spellshaper
 PT:1/1
 A:AB$ Counter | Cost$ U U T Discard<1/Card> | TargetType$ Spell | TgtPrompt$ Select target nonCreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_machinist.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/46.jpg
 Oracle:{U}{U}, {T}, Discard a card: Counter target noncreature spell.
+SetInfo:NMS Uncommon

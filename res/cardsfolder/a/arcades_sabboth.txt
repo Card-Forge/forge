@@ -6,8 +6,7 @@ K:Flying
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W U G
 S:Mode$ Continuous | Affected$ Creature.notattacking+untapped+YouCtrl | AddToughness$ 2 | Description$ Each untapped creature you control gets +0/+2 as long as it's not attacking.
 A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcades_sabboth.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Arcades Sabboth unless you pay {G}{W}{U}.\nEach untapped creature you control gets +0/+2 as long as it's not attacking.\n{W}: Arcades Sabboth gets +0/+1 until end of turn.
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/106.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/258.jpg
+SetInfo:CHR Rare
+SetInfo:LEG Rare

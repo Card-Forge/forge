@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ1 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ B 5 5 Demon avr | TokenAmount$ 1 | TokenName$ Demon | TokenTypes$ Creature,Demon | TokenOwner$ You | TokenColors$ Black | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_rising.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/94.jpg
 Oracle:At the beginning of your end step, if you control exactly one creature, put a 5/5 black Demon creature token with flying onto the battlefield.
+SetInfo:AVR Rare

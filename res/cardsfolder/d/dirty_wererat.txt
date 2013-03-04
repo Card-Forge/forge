@@ -4,7 +4,6 @@ Types:Creature Human Rat Minion
 PT:2/3
 A:AB$ Regenerate | Cost$ B Discard<1/Card> | SpellDescription$ Regenerate CARDNAME.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ CARDNAME can't block. | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +2/+2 and can't block.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dirty_wererat.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/130.jpg
 Oracle:{B}, Discard a card: Regenerate Dirty Wererat.\nThreshold - As long as seven or more cards are in your graveyard, Dirty Wererat gets +2/+2 and can't block.
+SetInfo:ODY Common

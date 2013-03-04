@@ -6,8 +6,8 @@ A:SP$ Mill | Cost$ 1 B B | Defined$ Each | NumCards$ 1 | Destination$ Ante | Spe
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_attorney.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/11.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/11.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/11.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/11.jpg
 Oracle:Remove Demonic Attorney from your deck before playing if you're not playing for ante.\nEach player antes the top card of his or her library.
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:3ED Rare
+SetInfo:2ED Rare

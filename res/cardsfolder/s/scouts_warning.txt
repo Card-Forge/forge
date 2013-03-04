@@ -7,7 +7,6 @@ SVar:ScoutFlash:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouC
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ WarningGiven | Static$ True | TriggerDescription$ The next creature card you play this turn can be played as though it had flash.
 SVar:WarningGiven:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Graveyard
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scouts_warning.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/16.jpg
 Oracle:The next creature card you play this turn can be played as though it had flash.\nDraw a card.
+SetInfo:FUT Rare

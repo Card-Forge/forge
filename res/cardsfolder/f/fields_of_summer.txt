@@ -9,7 +9,6 @@ T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ Rolle
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fields_of_summer.jpg
-SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/fields-of-summer.jpg
 Oracle:Whenever a player casts a spell, that player may gain 2 life.\nWhenever you roll {C}, you may gain 10 life.
+SetInfo:HOP Common

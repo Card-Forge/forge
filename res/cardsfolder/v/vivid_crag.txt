@@ -5,8 +5,7 @@ K:etbCounter:CHARGE:2
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_crag.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/293.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/275.jpg
 Oracle:Vivid Crag enters the battlefield tapped with two charge counters on it.\n{T}: Add {R} to your mana pool.\n{T}, Remove a charge counter from Vivid Crag: Add one mana of any color to your mana pool.
+SetInfo:COM Uncommon
+SetInfo:LRW Uncommon

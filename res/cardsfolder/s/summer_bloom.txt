@@ -6,11 +6,10 @@ SVar:BloomingLand:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays
 SVar:NeedsToPlayVar:LandInHand GE1
 SVar:HandInLand:Count$InYourHand.Land
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summer_bloom.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/72.jpg
-SetInfo:S99|Rare|http://magiccards.info/scans/en/st/144.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po/113.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/273.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/255.jpg
 Oracle:You may play up to three additional lands this turn.
+SetInfo:VIS Uncommon
+SetInfo:S99 Rare
+SetInfo:POR Rare
+SetInfo:9ED Uncommon
+SetInfo:6ED Uncommon

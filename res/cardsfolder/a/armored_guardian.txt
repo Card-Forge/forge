@@ -4,7 +4,6 @@ Types:Creature Cat Soldier
 PT:2/5
 A:AB$ Protection | Cost$ 1 W W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn.
 A:AB$ Pump | Cost$ 1 U U | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_guardian.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/230.jpg
 Oracle:{1}{W}{W}: Target creature you control gains protection from the color of your choice until end of turn.\n{1}{U}{U}: Armored Guardian gains shroud until end of turn. (It can't be the target of spells or abilities.)
+SetInfo:INV Rare

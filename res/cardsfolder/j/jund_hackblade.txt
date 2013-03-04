@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKe
 SVar:X:Count$Valid Permanent.YouCtrl+MultiColor+Other
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Permanent.MultiColor
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund_hackblade.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/138.jpg
 Oracle:As long as you control another multicolored permanent, Jund Hackblade gets +1/+1 and has haste.
+SetInfo:ARB Common

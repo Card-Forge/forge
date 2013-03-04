@@ -2,12 +2,12 @@ Name:Angelic Blessing
 ManaCost:2 W
 Types:Sorcery
 A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | KW$ Flying | SpellDescription$ Target creature gets +3/+3 and gains flying until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4370.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/2.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/164.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/2.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/3.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/129.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/3.jpg
 Oracle:Target creature gets +3/+3 and gains flying until end of turn. (It can't be blocked except by creatures with flying or reach.)
+SetInfo:PO2 Common
+SetInfo:S99 Common
+SetInfo:S00 Common
+SetInfo:9ED Common
+SetInfo:10E Common
+SetInfo:EXO Common
+SetInfo:POR Common

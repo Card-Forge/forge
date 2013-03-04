@@ -5,7 +5,6 @@ HandLifeModifier:+1/+9
 A:AB$ Untap | ActivationZone$ Command | Cost$ 0 | ValidTgts$ Creature.attacking+youCtrl | TgtPrompt$ Select target attacking creature you control | SubAbility$ Reconsider | SpellDescription$ Untap target attacking creature you control and remove it from combat.
 SVar:Reconsider:DB$ RemoveFromCombat | Defined$ Targeted
 SVar:RemAIDeck:True
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/oracle.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/oracle.jpg
 Oracle:Hand +1, life +9\n{0}: Untap target attacking creature you control and remove it from combat.
+SetInfo:VAN Special

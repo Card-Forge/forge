@@ -5,5 +5,5 @@ A:SP$EndTurn | Cost$ 4 U U | SpellDescription$ End the turn. (Exile all spells a
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_stop.jpg
 Oracle:End the turn. (Exile all spells and abilities on the stack, including this card. The player whose turn it is discards down to his or her maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/97.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/117.jpg
+SetInfo:CHK Rare
+SetInfo:10E Rare

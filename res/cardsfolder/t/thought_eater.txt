@@ -5,7 +5,6 @@ PT:2/2
 S:Mode$ Continuous | Affected$ You | RaiseMaxHandSize$ -3 | Description$ Your maximum hand size is reduced by three.
 K:Flying
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_eater.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/106.jpg
 Oracle:Flying\nYour maximum hand size is reduced by three.
+SetInfo:ODY Uncommon

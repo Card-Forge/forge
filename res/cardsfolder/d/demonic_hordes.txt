@@ -5,10 +5,9 @@ Text:At the beginning of your upkeep, unless you pay BBB, tap Demonic Hordes and
 PT:5/5
 A:AB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land. | Cost$ T | SpellDescription$ Destroy target land.
 SVar:PlayMain1:FALSE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_hordes.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/12.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/12.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/12.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/12.jpg
 Oracle:{T}: Destroy target land.\nAt the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:3ED Rare
+SetInfo:2ED Rare

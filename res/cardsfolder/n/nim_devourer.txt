@@ -8,7 +8,6 @@ A:AB$ ChangeZone | Cost$ B B | Origin$ Graveyard | Destination$ Battlefield | Ac
 SVar:DBSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 SVar:BuffedBy:Artifact
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_devourer.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/70.jpg
 Oracle:Nim Devourer gets +1/+0 for each artifact you control.\n{B}{B}: Return Nim Devourer from your graveyard to the battlefield, then sacrifice a creature. Activate this ability only during your upkeep.
+SetInfo:MRD Rare

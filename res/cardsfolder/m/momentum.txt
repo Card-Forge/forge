@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a growth counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ GROWTH | CounterNum$ 1
 SVar:X:Count$CardCounters.GROWTH
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/momentum.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/113.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, you may put a growth counter on Momentum.\nEnchanted creature gets +1/+1 for each growth counter on Momentum.
+SetInfo:UDS Uncommon

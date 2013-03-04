@@ -6,7 +6,6 @@ A:SP$ Shuffle | Cost$ 4 U U | SubAbility$ DBExile | SpellDescription$ Shuffle yo
 SVar:DBExile:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played without paying its mana cost | PumpZone$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_desire.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/41.jpg
 Oracle:Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
+SetInfo:SCG Rare

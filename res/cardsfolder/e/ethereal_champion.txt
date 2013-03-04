@@ -4,8 +4,7 @@ Types:Creature Avatar
 PT:3/4
 A:AB$ PreventDamage | Cost$ PayLife<1> | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_champion.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/20.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/219.jpg
 Oracle:Pay 1 life: Prevent the next 1 damage that would be dealt to Ethereal Champion this turn.
+SetInfo:MIR Rare
+SetInfo:6ED Rare

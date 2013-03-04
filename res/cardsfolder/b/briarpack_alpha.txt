@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briarpack_alpha.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/108.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Briarpack Alpha enters the battlefield, target creature gets +2/+2 until end of turn.
+SetInfo:DKA Uncommon

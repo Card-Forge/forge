@@ -7,7 +7,6 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2 | SubAbi
 SVar:DelayReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
 SVar:DiscardMeByOpp:3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mangaras_blessing.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/229.jpg
 Oracle:You gain 5 life.\nWhen a spell or ability an opponent controls causes you to discard Mangara's Blessing, you gain 2 life, and you return Mangara's Blessing from your graveyard to your hand at the beginning of the next end step.
+SetInfo:MIR Uncommon

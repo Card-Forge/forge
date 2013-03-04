@@ -5,7 +5,6 @@ T:Mode$ LifeLost | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ 
 SVar:TrigMill:AB$Mill | Cost$ 0 | Defined$ Opponent | NumCards$ X | References$ X
 SVar:X:TriggerCount$LifeAmount
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindcrank.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/144.jpg
 Oracle:Whenever an opponent loses life, that player puts that many cards from the top of his or her library into his or her graveyard. (Damage dealt by sources without infect causes loss of life.)
+SetInfo:NPH Uncommon

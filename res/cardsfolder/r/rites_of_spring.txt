@@ -6,7 +6,6 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeT
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIdeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rites_of_spring.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/265.jpg
 Oracle:Discard any number of cards. Search your library for that many basic land cards, reveal those cards, and put them into your hand. Then shuffle your library.
+SetInfo:ODY Common

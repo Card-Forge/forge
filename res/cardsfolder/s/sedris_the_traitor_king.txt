@@ -7,7 +7,6 @@ SVar:Unearth:AB$ ChangeZone | Cost$ 2 B | Defined$ Self | Origin$ Graveyard | De
 SVar:Unearthed:DB$ Pump | Defined$ Self | KW$ Haste & HIDDEN If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else. | Permanent$ True | SubAbility$ TrueDeath | StackDescription$ It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield.
 SVar:TrueDeath:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Unavailable | TriggerDescription$ Exile CARDNAME at the beginning of the next end step.
 SVar:Unavailable:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sedris_the_traitor_king.jpg
-SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/193.jpg
 Oracle:Each creature card in your graveyard has unearth {2}{B}. ({2}{B}: Return the card to the battlefield. The creature gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+SetInfo:ALA Mythic

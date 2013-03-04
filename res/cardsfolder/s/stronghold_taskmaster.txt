@@ -4,7 +4,6 @@ Types:Creature Giant Minion
 PT:4/3
 S:Mode$ Continuous | Affected$ Creature.Black+Other | AddPower$ -1 | AddToughness$ -1 | Description$ Other black creatures get -1/-1.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_taskmaster.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/22.jpg
 Oracle:Other black creatures get -1/-1.
+SetInfo:STH Uncommon

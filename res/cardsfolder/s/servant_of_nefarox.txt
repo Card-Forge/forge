@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Creature Human Cleric
 PT:3/1
 K:Exalted
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/servant_of_nefarox.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/108.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
+SetInfo:M13 Common

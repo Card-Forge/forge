@@ -10,8 +10,7 @@ SVar:DBExileIfNotPlayed:DB$ ChangeZone | Origin$ Library | Destination$ Exile | 
 SVar:DBDjinnCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DjinnX:Remembered$Valid Card.IsRemembered
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/djinn_of_wishes.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/50.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/51.jpg
 Oracle:Flying\nDjinn of Wishes enters the battlefield with three wish counters on it.\n{2}{U}{U}, Remove a wish counter from Djinn of Wishes: Reveal the top card of your library. You may play that card without paying its mana cost. If you don't, exile it.
+SetInfo:M10 Rare
+SetInfo:M12 Rare

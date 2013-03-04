@@ -4,7 +4,7 @@ Types:Creature Elf Warrior
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Elf | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever you cast an Elf spell, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ G 1 1 Elf Warrior | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lys_alana_huntmaster.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/229.jpg
 Oracle:Whenever you cast an Elf spell, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
+SetInfo:LRW Common
+SetInfo:EVG Common

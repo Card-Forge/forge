@@ -7,7 +7,6 @@ SVar:DBMask:DB$ ChangeZone | DefinedPlayer$ Targeted | Origin$ Library | Destina
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jesters_mask.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/300.jpg
 Oracle:Jester's Mask enters the battlefield tapped.\n{1}, {T}, Sacrifice Jester's Mask: Target opponent puts the cards from his or her hand on top of his or her library. Search that player's library for that many cards. That player puts those cards into his or her hand, then shuffles his or her library.
+SetInfo:ICE Rare

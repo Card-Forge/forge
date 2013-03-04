@@ -6,5 +6,5 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_geist.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/53.jpg
 Oracle:Flying\nWhen Tower Geist enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+SetInfo:DKA Uncommon

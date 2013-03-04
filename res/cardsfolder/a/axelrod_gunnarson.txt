@@ -6,8 +6,7 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | Execute$ TrigDealDamage | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, you gain 1 life and CARDNAME deals 1 damage to target player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/axelrod_gunnarson.jpg
 Oracle:Trample\nWhenever a creature dealt damage by Axelrod Gunnarson this turn dies, you gain 1 life and Axelrod deals 1 damage to target player.
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/107.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/259.jpg
+SetInfo:CHR Rare
+SetInfo:LEG Rare

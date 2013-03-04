@@ -6,7 +6,6 @@ A:AB$ Destroy | Cost$ X X 1 | ValidTgts$ Artifact,Creature | TgtPrompt$ Select t
 # It may seem wrong to not use X in the target, but since the Target is what defines X, it's redundant (and not supported by the code)
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepfire_elemental.jpg
-SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/127.jpg
 Oracle:{X}{X}{1}: Destroy target artifact or creature with converted mana cost X.
+SetInfo:CSP Uncommon

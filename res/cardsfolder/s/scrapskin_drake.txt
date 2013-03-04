@@ -4,7 +4,6 @@ Types:Creature Zombie Drake
 PT:2/3
 K:Flying
 K:CARDNAME can block only creatures with flying.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapskin_drake.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/73.jpg
 Oracle:Flying\nScrapskin Drake can block only creatures with flying.
+SetInfo:AVR Common

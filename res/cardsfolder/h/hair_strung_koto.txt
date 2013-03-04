@@ -3,7 +3,6 @@ ManaCost:6
 Types:Artifact
 A:AB$ Mill | Cost$ tapXType<1/Creature> | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top card of his or her library into his or her graveyard.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hair_strung_koto.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/252.jpg
 Oracle:Tap an untapped creature you control: Target player puts the top card of his or her library into his or her graveyard.
+SetInfo:CHK Rare

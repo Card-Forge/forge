@@ -5,7 +5,6 @@ A:SP$ Untap | Cost$ G | ValidTgts$ Permanent | TgtPrompt$ Select target permanen
 A:SP$ Destroy | Cost$ G | ValidTgts$ Enchantment.nonAura | TgtPrompt$ Select target non-Aura enchantment | PrecostDesc$ or | SpellDescription$ Destroy target non-Aura enchantment
 A:SP$ Debuff | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | PrecostDesc$ or | SpellDescription$ Target creature loses flying until end of turn
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_charm.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/56.jpg
 Oracle:Choose one - Untap target permanent; or destroy target non-Aura enchantment; or target creature loses flying until end of turn.
+SetInfo:VIS Common

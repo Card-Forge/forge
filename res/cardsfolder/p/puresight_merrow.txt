@@ -4,7 +4,6 @@ Types:Creature Merfolk Wizard
 PT:2/2
 A:AB$ Dig | Cost$ WU Untap | DigNum$ 1 | DestinationZone$ Exile | DestinationZone2$ Library | LibraryPosition2$ 0 | Optional$ True | SpellDescription$ Look at the top card of your library. You may exile that card.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puresight_merrow.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/146.jpg
 Oracle:{W/U}, {Q}: Look at the top card of your library. You may exile that card. ({Q} is the untap symbol.)
+SetInfo:SHM Uncommon

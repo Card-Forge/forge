@@ -4,7 +4,6 @@ Types:Artifact
 K:etbCounter:CHARGE:3
 A:AB$ PutCounter | Cost$ B B T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$ PutCounter | Cost$ 2 T SubCounter<1/CHARGE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | CounterType$ M1M1 | CounterNum$ 1 | SpellDescription$ Put a -1/-1 counter on target creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_corruption.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/213.jpg
 Oracle:Trigon of Corruption enters the battlefield with three charge counters on it.\n{B}{B}, {T}: Put a charge counter on Trigon of Corruption.\n{2}, {T}, Remove a charge counter from Trigon of Corruption: Put a -1/-1 counter on target creature.
+SetInfo:SOM Uncommon

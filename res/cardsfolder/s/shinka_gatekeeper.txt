@@ -5,7 +5,6 @@ PT:3/2
 T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to you.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | NumDmg$ X | Defined$ You | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shinka_gatekeeper.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/117.jpg
 Oracle:Whenever Shinka Gatekeeper is dealt damage, it deals that much damage to you.
+SetInfo:BOK Common

@@ -5,7 +5,6 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ GainControl | Cost$ T | AllValid$ Creature.YouOwn | SubAbility$ DBGainControl | NewController$ You | SpellDescription$ Each player gains control of all creatures he or she owns.
 SVar:DBGainControl:DB$ GainControl | AllValid$ Creature.YouDontOwn | NewController$ Opponent
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homeward_path.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/277.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Each player gains control of all creatures he or she owns.
+SetInfo:COM Rare

@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ AffectedX | AddT
 SVar:AffectedX:Count$Valid Creature.sharesCreatureTypeWith+Other/Times.2
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_status.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 for each other creature on the battlefield that shares a creature type with it.
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/110.jpg
+SetInfo:SCG Uncommon

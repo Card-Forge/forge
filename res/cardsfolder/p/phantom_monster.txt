@@ -3,12 +3,11 @@ ManaCost:3 U
 Types:Creature Phantasm
 PT:3/3
 K:Flying
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3929.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/70.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/70.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/108.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/90.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/71.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/70.jpg
 Oracle:Flying
+SetInfo:2ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

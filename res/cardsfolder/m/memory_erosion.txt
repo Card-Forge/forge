@@ -3,8 +3,7 @@ ManaCost:1 U U
 Types:Enchantment
 T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever an opponent casts a spell, that player puts the top two cards of his or her library into his or her graveyard.
 SVar:TrigMill:AB$Mill | Cost$ 0 | Defined$ Opponent | NumCards$ 2
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_erosion.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/50.jpg
-SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/50.jpg
 Oracle:Whenever an opponent casts a spell, that player puts the top two cards of his or her library into his or her graveyard.
+SetInfo:COM Rare
+SetInfo:ALA Rare

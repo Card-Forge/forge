@@ -7,7 +7,6 @@ SVar:Smash:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact
 SVar:CreatureDamage:DB$ RepeatEach | RepeatCards$ Creature | RepeatSubAbility$ DBDamage | SpellDescription$ Each creature deals 1 damage to its controller.
 SVar:DBDamage:DB$ DealDamage | Defined$ RememberedController | DamageSource$ Remembered | NumDmg$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_charm.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/184.jpg
 Oracle:Choose one - Exile all cards from target player's graveyard; or destroy target artifact; or each creature deals 1 damage to its controller.
+SetInfo:RTR Uncommon

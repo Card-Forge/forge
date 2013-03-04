@@ -6,7 +6,6 @@ A:AB$ ChangeZone | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DBDealDamage:DB$DealDamage | Defined$ Self | NumDmg$ X | References$ X
 SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selfless_exorcist.jpg
-SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/21.jpg
 Oracle:{T}: Exile target creature card from a graveyard. That card deals damage equal to its power to Selfless Exorcist.
+SetInfo:JUD Rare

@@ -3,8 +3,7 @@ ManaCost:W
 Types:Sorcery
 A:SP$ Pump | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | KW$ Skip all combat phases of your next turn. | Permanent$ True | SpellDescription$ Target player skips all combat phases of his or her next turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_peace.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/16.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/176.jpg
 Oracle:Target player skips all combat phases of his or her next turn.
+SetInfo:S99 Uncommon
+SetInfo:POR Common

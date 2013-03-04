@@ -6,7 +6,6 @@ K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
 SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ 3 | Defined$ You | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
 A:AB$ DealDamage | Cost$ Discard<1/Land> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borborygmos_enraged.jpg
-SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/147.jpg
 Oracle:Trample\nWhenever Borborygmos Enraged deals combat damage to a player, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.\nDiscard a land card: Borborygmos Enraged deals 3 damage to target creature or player.
+SetInfo:GTC Mythic

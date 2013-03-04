@@ -4,7 +4,6 @@ Types:Creature Insect
 PT:1/1
 K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firefly.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/172.jpg
 Oracle:Flying\n{R}: Firefly gets +1/+0 until end of turn.
+SetInfo:TMP Uncommon

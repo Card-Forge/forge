@@ -5,7 +5,6 @@ PT:0/1
 K:Exalted
 A:AB$ Draw | Cost$ U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frontline_sage.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/28.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{U}, {T}: Draw a card, then discard a card.
+SetInfo:CFX Common

@@ -4,7 +4,6 @@ Types:Creature Cephalid
 PT:2/1
 A:AB$ Pump | Cost$ Discard<1/Card> | KW$ Shroud & HIDDEN Unblockable | SpellDescription$ CARDNAME gains shroud until end of turn and is unblockable this turn. (A permanent with shroud can't be the target of spells or abilities.)
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_inkshrouder.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/36.jpg
 Oracle:Discard a card: Cephalid Inkshrouder gains shroud until end of turn and is unblockable this turn. (A permanent with shroud can't be the target of spells or abilities.)
+SetInfo:JUD Uncommon

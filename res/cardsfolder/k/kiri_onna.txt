@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Trig
 SVar:TrigReturnOther:DB$ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
 SVar:TrigReturnThis:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiri_onna.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/43.jpg
 Oracle:When Kiri-Onna enters the battlefield, return target creature to its owner's hand.\nWhenever you cast a Spirit or Arcane spell, you may return Kiri-Onna to its owner's hand.
+SetInfo:SOK Uncommon

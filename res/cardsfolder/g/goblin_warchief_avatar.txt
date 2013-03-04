@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/+2
 S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.attacking+YouCtrl | AddPower$ 1 | Description$ Attacking creatures you control get +1/+0.
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/goblin_warchief_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/goblin-warchief.jpg
 Oracle:Hand +1, life +2\nAttacking creatures you control get +1/+0.
+SetInfo:VAN Special x2

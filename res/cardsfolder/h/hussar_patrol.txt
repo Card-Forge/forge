@@ -4,7 +4,6 @@ Types:Creature Human Knight
 PT:2/4
 K:Flash
 K:Vigilance
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hussar_patrol.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/169.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nVigilance
+SetInfo:RTR Common

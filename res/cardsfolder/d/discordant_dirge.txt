@@ -5,7 +5,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
 A:AB$ Discard | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Opponent | Mode$ RevealYouChoose | NumCards$ X | References$ X | SpellDescription$ Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on CARDNAME. That player discards those cards.
 SVar:X:Count$CardCounters.VERSE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/discordant_dirge.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/131.jpg
 Oracle:At the beginning of your upkeep, you may put a verse counter on Discordant Dirge.\n{B}, Sacrifice Discordant Dirge: Look at target opponent's hand and choose up to X cards from it, where X is the number of verse counters on Discordant Dirge. That player discards those cards.
+SetInfo:USG Rare

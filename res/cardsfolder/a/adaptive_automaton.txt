@@ -6,7 +6,6 @@ K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 S:Mode$ Continuous | Affected$ Card.Self | AddType$ ChosenType | Description$ CARDNAME is the chosen type in addition to its other types.
 S:Mode$ Continuous | Affected$ Creature.ChosenType+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control of the chosen type get +1/+1.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adaptive_automaton.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/201.jpg
 Oracle:As Adaptive Automaton enters the battlefield, choose a creature type.\nAdaptive Automaton is the chosen type in addition to its other types.\nOther creatures you control of the chosen type get +1/+1.
+SetInfo:M12 Rare

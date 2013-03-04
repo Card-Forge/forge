@@ -4,5 +4,5 @@ Types:Creature Human Rogue
 PT:2/3
 A:AB$ DigUntil | Cost$ 1 Sac<1/Creature> | ValidTgts$ Player | TgtPrompt$ Choose a player | Amount$ 1 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard | SpellDescription$ Target player reveals the top card of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undercity_informer.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/82.jpg
 Oracle:{1}, Sacrifice a creature: Target player reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
+SetInfo:GTC Uncommon

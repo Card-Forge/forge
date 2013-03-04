@@ -5,7 +5,6 @@ PT:3/3
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigUntapRemove | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME becomes blocked, you may untap it and remove it from combat.
 SVar:TrigUntapRemove:AB$ Untap | Cost$ 0 | SubAbility$ DBRemoveCombat
 SVar:DBRemoveCombat:DB$ RemoveFromCombat
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gustcloak_sentinel.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/37.jpg
 Oracle:Whenever Gustcloak Sentinel becomes blocked, you may untap it and remove it from combat.
+SetInfo:ONS Uncommon

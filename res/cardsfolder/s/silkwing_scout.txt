@@ -4,7 +4,6 @@ Types:Creature Faerie Scout
 PT:2/1
 K:Flying
 A:AB$ ChangeZone | Cost$ G Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silkwing_scout.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/31.jpg
 Oracle:Flying\n{G}, Sacrifice Silkwing Scout: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
+SetInfo:DIS Common

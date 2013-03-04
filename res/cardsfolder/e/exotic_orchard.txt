@@ -3,8 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Land.OppCtrl | ReflectProperty$ Produce | SpellDescription$ Add to your mana pool one mana of any color that a land an opponent controls could produce.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exotic_orchard.jpg
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/117.jpg
-SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/142.jpg
 Oracle:{T}: Add to your mana pool one mana of any color that a land an opponent controls could produce.
+SetInfo:PC2 Rare
+SetInfo:CFX Rare

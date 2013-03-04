@@ -11,9 +11,8 @@ SVar:X:Count$xPaid
 SVar:DigNum:Number$0
 SVar:AIPlayForSub:True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aladdins_lamp.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/231.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/309.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/70.jpg
 Oracle:{X}, {T}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
+SetInfo:4ED Rare
+SetInfo:3ED Rare
+SetInfo:ARN Rare

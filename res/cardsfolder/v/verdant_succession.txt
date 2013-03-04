@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Creature.Green+nonToken | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigSearch | TriggerDescription$ Whenever a green nontoken creature dies, that creature's controller may search his or her library for a card with the same name as that creature and put it onto the battlefield. If that player does, he or she shuffles his or her library.
 SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | DefinedPlayer$ TriggeredCardController | ChangeType$ Triggered.sameName | ChangeNum$ 1 | Origin$ Library | Destination$ Battlefield | Hidden$ True | OptionalDecider$ You
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_succession.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/280.jpg
 Oracle:Whenever a green nontoken creature dies, that creature's controller may search his or her library for a card with the same name as that creature and put it onto the battlefield. If that player does, he or she shuffles his or her library.
+SetInfo:ODY Rare

@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Human Druid
 PT:1/1
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Land.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add to your mana pool one mana of any color that a land you control could produce.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harvester_druid.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/120.jpg
 Oracle:{T}: Add to your mana pool one mana of any color that a land you control could produce.
+SetInfo:JUD Common

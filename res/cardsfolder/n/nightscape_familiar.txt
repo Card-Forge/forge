@@ -4,7 +4,7 @@ Types:Creature Zombie
 PT:1/1
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 S:Mode$ ReduceCost | ValidCard$ Card.Blue,Card.Red | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Blue spells and red spells you cast cost 1 less to cast.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_familiar.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/48.jpg
 Oracle:Blue spells and red spells you cast cost {1} less to cast.\n{1}{B}: Regenerate Nightscape Familiar.
+SetInfo:PLS Common
+SetInfo:DDH Common

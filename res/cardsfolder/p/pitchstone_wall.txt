@@ -6,7 +6,6 @@ K:Defender
 T:Mode$ Discarded | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever you discard a card, you may sacrifice CARDNAME. If you do, return the discarded card from your graveyard to your hand.
 SVar:TrigChange:AB$ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pitchstone_wall.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/110.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever you discard a card, you may sacrifice Pitchstone Wall. If you do, return the discarded card from your graveyard to your hand.
+SetInfo:TOR Uncommon

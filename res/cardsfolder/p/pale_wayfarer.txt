@@ -4,7 +4,6 @@ Types:Creature Spirit Giant
 PT:4/4
 A:AB$ Protection | Cost$ 2 W W Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature gains protection from the color of your choice until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pale_wayfarer.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/17.jpg
 Oracle:{2}{W}{W}, {Q}: Target creature gains protection from the color of its controller's choice until end of turn. ({Q} is the untap symbol.)
+SetInfo:SHM Uncommon

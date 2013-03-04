@@ -7,7 +7,6 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenImage$ B X X Vampire | TokenName$
 SVar:X:Remembered$Amount
 SVar:dX:Targeted$CardPower
 SVar:dY:Targeted$CardToughness
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalitas_bloodchief_of_ghet.jpg
-SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/99.jpg
 Oracle:{B}{B}{B}, {T}: Destroy target creature. If that creature dies this way, put a black Vampire creature token onto the battlefield. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.
+SetInfo:ZEN Mythic

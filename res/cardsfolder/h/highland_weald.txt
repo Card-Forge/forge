@@ -4,7 +4,6 @@ Types:Snow Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/highland_weald.jpg
-SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/147.jpg
 Oracle:Highland Weald enters the battlefield tapped.\n{T}: Add {R} or {G} to your mana pool.
+SetInfo:CSP Uncommon

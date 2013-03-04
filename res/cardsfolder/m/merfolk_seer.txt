@@ -4,7 +4,6 @@ Types:Creature Merfolk Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may pay 1 U. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 1 U | Defined$ You | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_seer.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/76.jpg
 Oracle:When Merfolk Seer dies, you may pay {1}{U}. If you do, draw a card.
+SetInfo:MIR Common

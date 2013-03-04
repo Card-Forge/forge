@@ -4,7 +4,6 @@ Types:Artifact Creature Cat
 PT:4/3
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | References$ X | SVarCompare$ GE1 | Description$ CARDNAME can't attack or block if an enchantment is on the battlefield.
 SVar:X:Count$Valid Enchantment
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirecat.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/317.jpg
 Oracle:Wirecat can't attack or block if an enchantment is on the battlefield.
+SetInfo:USG Uncommon

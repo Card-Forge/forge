@@ -8,5 +8,5 @@ SVar:WinnowCheck:Count$Valid Permanent.sharesNameWith Remembered
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winnow.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/45.jpg
 Oracle:Destroy target nonland permanent if another permanent with the same name is on the battlefield.\nDraw a card.
+SetInfo:INV Rare

@@ -4,7 +4,6 @@ Types:Creature Human Knight
 PT:3/2
 A:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME can't be blocked except by Walls. & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ CARDNAME can't be blocked this turn except by Walls. Sacrifice CARDNAME at the beginning of the next end step.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/varchilds_crusader.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/120.jpg|2
 Oracle:{0}: Varchild's Crusader can't be blocked this turn except by Walls. Sacrifice Varchild's Crusader at the beginning of the next end step.
+SetInfo:ALL Common x2

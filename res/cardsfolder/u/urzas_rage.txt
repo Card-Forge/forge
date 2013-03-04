@@ -7,7 +7,7 @@ A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:Kicked:DB$ DealDamage | Defined$ Targeted | NumDmg$ 10 | References$ 10 | NoPrevention$ True | Condition$ Kicked | ConditionDescription$ If Urza's Rage was kicked,
 SVar:X:Count$Kicked.0.3
 SVar:Y:Count$Kicked.10.0
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_rage.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/178.jpg
 Oracle:Kicker {8}{R} (You may pay an additional {8}{R} as you cast this spell.)\nUrza's Rage can't be countered by spells or abilities.\nUrza's Rage deals 3 damage to target creature or player. If Urza's Rage was kicked, instead it deals 10 damage to that creature or player and the damage can't be prevented.
+SetInfo:DDE Mythic
+SetInfo:INV Rare

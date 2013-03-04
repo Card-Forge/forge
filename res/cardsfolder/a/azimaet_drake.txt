@@ -4,7 +4,6 @@ Types:Creature Drake
 PT:1/3
 K:Flying
 A:AB$ Pump | Cost$ U | NumAtt$ 1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability only once each turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azimaet_drake.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/53.jpg
 Oracle:Flying\n{U}: Azimaet Drake gets +1/+0 until end of turn. Activate this ability only once each turn.
+SetInfo:MIR Common

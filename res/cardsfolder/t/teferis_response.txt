@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell,Ability | ValidTgts$ Card.OppCtrl | DestroyPermanent$ True | TargetValidTargeting$ Land.YouCtrl | SpellDescription$ Counter target spell or ability an opponent controls that targets a land you control. If a permanent's ability is countered this way, destroy that permanent. Draw two cards. | SubAbility$ DB
 SVar:DB:DB$ Draw | NumCards$ 2
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_response.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/78.jpg
 Oracle:Counter target spell or ability an opponent controls that targets a land you control. If a permanent's ability is countered this way, destroy that permanent.\nDraw two cards.
+SetInfo:INV Rare

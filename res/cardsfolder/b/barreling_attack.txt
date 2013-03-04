@@ -4,9 +4,8 @@ Types:Instant
 A:SP$ Pump | Cost$ 2 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ DBAnimate | SpellDescription$ Target creature gains trample until end of turn. When that creature becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ TrigBounce | sVars$ ABBarrelingPump,BarrelingX
 SVar:TrigBounce:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ABBarrelingPump | TriggerDescription$ When CARDNAME becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
-SVar:ABBarrelingPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +BarrelingX | NumDef$ +BarrelingX | References$ BarrelingX 
+SVar:ABBarrelingPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ +BarrelingX | NumDef$ +BarrelingX | References$ BarrelingX
 SVar:BarrelingX:TriggerCount$NumBlockers
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barreling_attack.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/157.jpg
 Oracle:Target creature gains trample until end of turn. When that creature becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
+SetInfo:MIR Rare

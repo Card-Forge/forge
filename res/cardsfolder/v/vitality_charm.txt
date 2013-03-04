@@ -5,7 +5,6 @@ A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creatur
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | TgtPrompt$ Select target creature | PrecostDesc$ or | SpellDescription$ target creature gets +1/+1 and gains trample until end of turn;
 A:SP$ Regenerate | Cost$ G | ValidTgts$ Beast | TgtPrompt$ Select target Beast | PrecostDesc$ or | SpellDescription$ regenerate target Beast.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitality_charm.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/296.jpg
 Oracle:Choose one - Put a 1/1 green Insect creature token onto the battlefield; or target creature gets +1/+1 and gains trample until end of turn; or regenerate target Beast.
+SetInfo:ONS Common

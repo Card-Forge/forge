@@ -5,7 +5,6 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description
 PT:2/2
 K:Play with the top card of your library revealed.
 S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ May be played | Description$ You may play the top card of your library if it's a land card.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_mul_daya.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/172.jpg
 Oracle:You may play an additional land on each of your turns.\nPlay with the top card of your library revealed.\nYou may play the top card of your library if it's a land card.
+SetInfo:ZEN Rare

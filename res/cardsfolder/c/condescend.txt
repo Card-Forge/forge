@@ -5,7 +5,7 @@ A:SP$ Counter | Cost$ X U | TargetType$ Spell | TgtPrompt$ Select target spell |
 SVar:DBScry:DB$Scry | ScryNum$ 2
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/condescend.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/27.jpg
 Oracle:Counter target spell unless its controller pays {X}.\nScry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SetInfo:DD2 Common
+SetInfo:5DN Common

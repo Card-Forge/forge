@@ -9,7 +9,6 @@ T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ Rolle
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_at_tolaria_west.jpg
-SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/academy-at-tolaria-west.jpg
 Oracle:At the beginning of your end step, if you have no cards in hand, draw seven cards.\nWhenever you roll {C}, discard your hand.
+SetInfo:HOP Common

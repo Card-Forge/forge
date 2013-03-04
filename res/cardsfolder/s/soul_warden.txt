@@ -4,10 +4,10 @@ Types:Creature Human Cleric
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84112.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/34.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/44.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/46.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/21.jpg
 Oracle:Whenever another creature enters the battlefield, you gain 1 life.
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:M10 Common
+SetInfo:EXO Common
+SetInfo:HOP Common

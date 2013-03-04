@@ -4,7 +4,6 @@ Types:Creature Hyena
 Text:CARDNAME can't block black creatures.
 PT:3/2
 K:CantBlock Creature.Black
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_hyenas.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/117.jpg
 Oracle:Gibbering Hyenas can't block black creatures.
+SetInfo:MIR Common

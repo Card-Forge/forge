@@ -4,12 +4,11 @@ Types:Creature Spirit
 PT:0/1
 K:Flying
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83411.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/44.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/44.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/55.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/169.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/45.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/44.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{B}: Regenerate Will-o'-the-Wisp. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
+SetInfo:2ED Rare
+SetInfo:9ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDamageAll:AB$DamageAll | Cost$ 0 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | NumDmg$ 1
 SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Creature
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_laugh.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/68.jpg
 Oracle:Whenever a permanent other than Last Laugh is put into a graveyard from the battlefield, Last Laugh deals 1 damage to each creature and each player.\nWhen no creatures are on the battlefield, sacrifice Last Laugh.
+SetInfo:TOR Rare

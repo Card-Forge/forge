@@ -5,8 +5,7 @@ T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ Opponent | Tr
 SVar:TrigDrain:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_edict.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/170.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/171.jpg
 Oracle:Whenever an opponent casts a white spell, that player loses 1 life and you gain 1 life.
+SetInfo:7ED Uncommon
+SetInfo:USG Uncommon

@@ -4,8 +4,7 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ Creatures you control get +1/+1 as long as you control no nonartifact, nonwhite creatures.
 SVar:X:Count$Valid Creature.nonWhite+nonArtifact+YouCtrl
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_voices.jpg
 Oracle:Creatures you control get +1/+1 as long as you control no nonartifact, nonwhite creatures.
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/59.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/173.jpg
+SetInfo:CHR Rare
+SetInfo:LEG Rare

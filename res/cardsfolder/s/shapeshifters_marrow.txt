@@ -5,7 +5,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigDig | Trigg
 SVar:TrigDig:AB$ Dig | Cost$ 0 | Defined$ TriggeredPlayer | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | RememberChanged$ True | DestinationZone$ Graveyard | DestinationZone2$ Library | LibraryPosition2$ 0 | SubAbility$ DBCopy
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shapeshifters_marrow.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/58.jpg
 Oracle:At the beginning of each opponent's upkeep, that player reveals the top card of his or her library. If it's a creature card, the player puts the card into his or her graveyard and Shapeshifter's Marrow becomes a copy of that card. (If it does, it loses this ability.)
+SetInfo:FUT Rare

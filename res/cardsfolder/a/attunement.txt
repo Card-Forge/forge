@@ -3,8 +3,7 @@ ManaCost:2 U
 Types:Enchantment
 A:AB$ Draw | Cost$ Return<1/CARDNAME> | NumCards$ 3 | SpellDescription$ Draw three cards, then discard four cards. | SubAbility$ DB
 SVar:DB:DB$Discard | NumCards$ 4 | Mode$ TgtChoose
-SVar:Rarity:Rare
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/attunement.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/61.jpg
 Oracle:Return Attunement to its owner's hand: Draw three cards, then discard four cards.
+SetInfo:USG Rare

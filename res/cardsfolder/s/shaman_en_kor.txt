@@ -22,7 +22,6 @@ SVar:ShamanNonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ EffectSource | Damag
 SVar:OutOfSight2:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Imprinted | Execute$ ExileEffect | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaman_en_kor.jpg
-SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/115.jpg
 Oracle:{0}: The next 1 damage that would be dealt to Shaman en-Kor this turn is dealt to target creature you control instead.\n{1}{W}: The next time a source of your choice would deal damage to target creature this turn, that damage is dealt to Shaman en-Kor instead.
+SetInfo:STH Rare

@@ -3,7 +3,6 @@ ManaCost:G W
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ G W Sac<1/Creature> | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_bone.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/359.jpg
 Oracle:As an additional cost to cast Altar of Bone, sacrifice a creature.\nSearch your library for a creature card, reveal that card, and put it into your hand. Then shuffle your library.
+SetInfo:ICE Rare

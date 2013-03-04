@@ -3,8 +3,7 @@ ManaCost:2 R
 Types:Creature Beast
 PT:2/2
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_shambler.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/86.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/185.jpg
 Oracle:{R}: Flowstone Shambler gets +1/-1 until end of turn.
+SetInfo:9ED Common
+SetInfo:STH Common

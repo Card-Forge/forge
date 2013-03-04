@@ -5,7 +5,6 @@ A:SP$ Animate | Cost$ B | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgt
 SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_darkness.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/36.jpg
 Oracle:Any number of target creatures become black until end of turn.
+SetInfo:LEG Uncommon

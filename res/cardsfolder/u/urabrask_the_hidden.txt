@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Descriptio
 S:Mode$ ETBTapped | ValidCard$ Creature.OppCtrl | Description$ Creatures your opponents control enter the battlefield tapped.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Creature
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urabrask_the_hidden.jpg
-SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/98.jpg
 Oracle:Creatures you control have haste.\nCreatures your opponents control enter the battlefield tapped.
+SetInfo:NPH Mythic

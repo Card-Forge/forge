@@ -8,7 +8,6 @@ SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
 SVar:TrigDraw:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ DivinerTrigPump | TriggerDescription$ Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn
 SVar:DivinerTrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ Flying
 SVar:DivinerDraw:AB$Draw | Cost$ 4 | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diviners_wand.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/142.jpg
 Oracle:Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "{4}: Draw a card."\nWhenever a Wizard creature enters the battlefield, you may attach Diviner's Wand to it.\nEquip {3}
+SetInfo:MOR Uncommon

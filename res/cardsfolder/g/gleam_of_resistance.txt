@@ -5,7 +5,6 @@ A:SP$ UntapAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | SpellDescription$ Cr
 SVar:DBPumpYourCreatures:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +2
 K:TypeCycling:Basic:1 W
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_resistance.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/8.jpg
 Oracle:Creatures you control get +1/+2 until end of turn. Untap those creatures.\nBasic landcycling {1}{W} ({1}{W}, Discard this card: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.)
+SetInfo:CFX Common

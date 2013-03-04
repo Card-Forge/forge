@@ -9,7 +9,6 @@ A:AB$ CopyPermanent | Cost$ 3 T | Defined$ Imprinted | SubAbility$ DBPump | Spel
 SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Clones | KW$ Haste | Permanent$ True | SubAbility$ DBPump2
 SVar:DBPump2:DB$ Pump | Cost$ 0 | Defined$ Clones | KW$ HIDDEN At the beginning of the end step, exile CARDNAME. | Permanent$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mimic_vat.jpg
-SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/175.jpg
 Oracle:Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.\n{3}, {T}: Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+SetInfo:SOM Rare

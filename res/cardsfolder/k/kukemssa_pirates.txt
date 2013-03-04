@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may gain control of target artifact defending player controls. If you do, CARDNAME assigns no combat damage this turn.
 SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | ValidTgts$ Artifact.DefenderCtrl | TgtPrompt$ Select target artifact defending player controls | SubAbility$ DBNoCombatDamage
 SVar:DBNoCombatDamage:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kukemssa_pirates.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/71.jpg
 Oracle:Whenever Kukemssa Pirates attacks and isn't blocked, you may gain control of target artifact defending player controls. If you do, Kukemssa Pirates assigns no combat damage this turn.
+SetInfo:MIR Rare

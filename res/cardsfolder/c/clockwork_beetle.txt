@@ -7,7 +7,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescri
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, remove a +1/+1 counter from it at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | Execute$ TrigRemoveCounter | TriggerDescription$ Remove a +1/+1 counter from CARDNAME.
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_beetle.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/153.jpg
 Oracle:Clockwork Beetle enters the battlefield with two +1/+1 counters on it.\nWhenever Clockwork Beetle attacks or blocks, remove a +1/+1 counter from it at end of combat.
+SetInfo:MRD Common

@@ -3,8 +3,7 @@ ManaCost:4 B B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target nonblack creature. You gain 3 life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 3
-SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/dark_offering.jpg
-SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/12.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/75.jpg
 Oracle:Destroy target nonblack creature. You gain 3 life.
+SetInfo:PO2 Uncommon
+SetInfo:S99 Uncommon

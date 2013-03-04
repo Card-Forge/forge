@@ -4,8 +4,8 @@ Types:Creature Human Shaman
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target card from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51628.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/86.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/152.jpg
 Oracle:When Eternal Witness enters the battlefield, you may return target card from your graveyard to your hand.
+SetInfo:DDJ Uncommon
+SetInfo:COM Uncommon
+SetInfo:5DN Uncommon

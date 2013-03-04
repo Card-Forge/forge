@@ -3,7 +3,6 @@ ManaCost:3
 Types:Artifact
 K:etbCounter:CHARGE:2
 A:AB$ LoseLife | Cost$ T SubCounter<1/CHARGE> | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_censer.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/184.jpg
 Oracle:Necrogen Censer enters the battlefield with two charge counters on it.\n{T}, Remove a charge counter from Necrogen Censer: Target player loses 2 life.
+SetInfo:SOM Common

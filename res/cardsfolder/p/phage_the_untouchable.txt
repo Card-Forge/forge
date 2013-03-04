@@ -10,6 +10,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigTheyLose:AB$ LosesGame | Cost$ 0 | Defined$ TriggeredTarget
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phage_the_untouchable.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/78.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/166.jpg
 Oracle:When Phage the Untouchable enters the battlefield, if you didn't cast it from your hand, you lose the game.\nWhenever Phage deals combat damage to a creature, destroy that creature. It can't be regenerated.\nWhenever Phage deals combat damage to a player, that player loses the game.
+SetInfo:LGN Rare
+SetInfo:10E Rare

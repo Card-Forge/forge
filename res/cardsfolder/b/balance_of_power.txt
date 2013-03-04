@@ -5,9 +5,8 @@ A:SP$ Draw | Cost$ 3 U U | NumCards$ Y | Defined$ You | ValidTgts$ Opponent | Tg
 SVar:X:Count$InYourHand
 SVar:Y:Count$InOppHand/Minus.X
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balance_of_power.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/62.jpg
-SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/34.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po/42.jpg
 Oracle:If target opponent has more cards in hand than you, draw cards equal to the difference.
+SetInfo:8ED Rare
+SetInfo:PTK Rare
+SetInfo:POR Rare

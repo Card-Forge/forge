@@ -3,7 +3,6 @@ ManaCost:3 B R
 Types:Legendary Creature Zombie Wizard
 PT:2/2
 A:AB$ Token | Cost$ 2 B R T | TokenAmount$ 1 | TokenName$ Minor Demon | TokenOwner$ You | TokenTypes$ Creature,Demon | TokenColors$ Black,Red | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 black and red Demon creature token named Minor Demon onto the battlefield.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boris_devilboon.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/263.jpg
 Oracle:{2}{B}{R}, {T}: Put a 1/1 black and red Demon creature token named Minor Demon onto the battlefield.
+SetInfo:LEG Rare

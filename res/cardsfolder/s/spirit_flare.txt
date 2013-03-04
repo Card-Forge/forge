@@ -7,7 +7,6 @@ SVar:SpiritDmg:DB$ DealDamage | ValidTgts$ Creature.attacking+OppCtrl,Creature.b
 SVar:SpiritStrength:Targeted$CardPower
 SVar:WasTapped:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_flare.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/15.jpg
 Oracle:Tap target untapped creature you control. If you do, it deals damage equal to its power to target attacking or blocking creature an opponent controls.\nFlashback-{1}{W}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:TOR Common

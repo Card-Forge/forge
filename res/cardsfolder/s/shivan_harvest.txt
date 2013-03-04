@@ -2,7 +2,6 @@ Name:Shivan Harvest
 ManaCost:1 R
 Types:Enchantment
 A:AB$ Destroy | Cost$ 1 R Sac<1/Creature> | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_harvest.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/167.jpg
 Oracle:{1}{R}, Sacrifice a creature: Destroy target nonbasic land.
+SetInfo:INV Uncommon

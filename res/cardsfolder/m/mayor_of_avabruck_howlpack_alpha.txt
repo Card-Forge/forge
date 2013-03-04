@@ -7,7 +7,6 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ 
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mayor_of_avabruck.jpg
 AlternateMode:DoubleFaced
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/193a.jpg
 Oracle:Other Human creatures you control get +1/+1.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.
 
 ALTERNATE
@@ -23,5 +22,5 @@ T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howlpack_alpha.jpg
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/193b.jpg
 Oracle:Other Werewolf and Wolf creatures you control get +1/+1.\nAt the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack Alpha.
+SetInfo:ISD Rare

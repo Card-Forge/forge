@@ -9,7 +9,7 @@ SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefiel
 SVar:RestoreSight:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_beam.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/7.jpg
 Oracle:Choose one - Tap two target creatures; or creatures don't untap during target player's next untap step.\nEntwine {1} (Choose both if you pay the entwine cost.)
+SetInfo:MRD Common
+SetInfo:DDF Common

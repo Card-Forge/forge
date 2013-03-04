@@ -5,5 +5,5 @@ A:SP$ CopyPermanent | Cost$ 4 U U | ValidTgts$ Creature,Artifact | TgtPrompt$ Se
 SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
 SVar:IsEncoded:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stolen_identity.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/53.jpg
 Oracle:Put a token onto the battlefield that's a copy of target artifact or creature.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
+SetInfo:GTC Rare

@@ -5,8 +5,7 @@ K:etbCounter:CHARGE:2
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vivid_marsh.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/296.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/278.jpg
 Oracle:Vivid Marsh enters the battlefield tapped with two charge counters on it.\n{T}: Add {B} to your mana pool.\n{T}, Remove a charge counter from Vivid Marsh: Add one mana of any color to your mana pool.
+SetInfo:COM Uncommon
+SetInfo:LRW Uncommon

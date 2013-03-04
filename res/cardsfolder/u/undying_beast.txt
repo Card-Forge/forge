@@ -5,7 +5,6 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put CARDNAME on top of its owner's library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4242.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/36.jpg
 Oracle:When Undying Beast dies, put it on top of its owner's library.
+SetInfo:POR Common

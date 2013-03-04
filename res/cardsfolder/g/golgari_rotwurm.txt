@@ -3,7 +3,7 @@ ManaCost:3 B G
 Types:Creature Zombie Wurm
 PT:5/4
 A:AB$ LoseLife | Cost$ B Sac<1/Creature> | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_rotwurm.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/210.jpg
 Oracle:{B}, Sacrifice a creature: Target player loses 1 life.
+SetInfo:RAV Common
+SetInfo:DDJ Common

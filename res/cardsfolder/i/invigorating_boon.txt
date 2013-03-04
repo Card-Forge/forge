@@ -5,6 +5,5 @@ T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigPutCounter | TriggerZones$ Battl
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invigorating_boon.jpg
-SVar:Rarity:Uncommon
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/267.jpg
 Oracle:Whenever a player cycles a card, you may put a +1/+1 counter on target creature.
+SetInfo:ONS Uncommon

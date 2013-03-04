@@ -6,6 +6,5 @@ A:SP$ DamageAll | Cost$ R B G | NumDmg$ 2 | ValidCards$ Creature | SpellDescript
 A:SP$ PutCounter | Cost$ R B G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ or put two +1/+1 counters on target creature.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund_charm.jpg
-SVar:Rarity:Uncommon
-SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/175.jpg
 Oracle:Choose one - Exile all cards from target player's graveyard; or Jund Charm deals 2 damage to each creature; or put two +1/+1 counters on target creature.
+SetInfo:ALA Uncommon

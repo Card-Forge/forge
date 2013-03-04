@@ -3,12 +3,11 @@ ManaCost:2 G
 Types:Creature Wolf
 PT:2/2
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lone_wolf.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/262.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/140.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/254.jpg
-SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/71.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/130.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/105.jpg
 Oracle:You may have Lone Wolf assign its combat damage as though it weren't blocked.
+SetInfo:PO2 Uncommon
+SetInfo:8ED Common
+SetInfo:ULG Uncommon
+SetInfo:S99 Common
+SetInfo:7ED Common
+SetInfo:PTK Uncommon

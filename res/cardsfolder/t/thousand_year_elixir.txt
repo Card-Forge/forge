@@ -3,7 +3,6 @@ ManaCost:3
 Types:Artifact
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME may activate abilities as though it has haste. | Description$ You may activate abilities of creatures you control as though those creatures had haste.
 A:AB$ Untap | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature.| SpellDescription$ Untap target creature.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thousand_year_elixir.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/263.jpg
 Oracle:You may activate abilities of creatures you control as though those creatures had haste.\n{1}, {T}: Untap target creature.
+SetInfo:LRW Rare

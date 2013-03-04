@@ -4,7 +4,6 @@ Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast an artifact spell, you may put a charge counter on CARDNAME.
 A:AB$ Token | Cost$ SubCounter<3/CHARGE> | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put a 3/3 colorless Golem artifact creature token onto the battlefield.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ CHARGE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golem_foundry.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/160.jpg
 Oracle:Whenever you cast an artifact spell, you may put a charge counter on Golem Foundry.\nRemove three charge counters from Golem Foundry: Put a 3/3 colorless Golem artifact creature token onto the battlefield.
+SetInfo:SOM Common

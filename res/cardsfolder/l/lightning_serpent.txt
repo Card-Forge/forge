@@ -7,7 +7,6 @@ K:Haste
 K:etbCounter:P1P0:X
 SVar:X:Count$xPaid
 K:At the beginning of the end step, sacrifice CARDNAME.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_serpent.jpg
-SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/88.jpg
 Oracle:Trample, haste\nLightning Serpent enters the battlefield with X +1/+0 counters on it.\nAt the beginning of the end step, sacrifice Lightning Serpent.
+SetInfo:CSP Rare

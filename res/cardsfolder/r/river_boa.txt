@@ -4,9 +4,8 @@ Types:Creature Snake
 PT:2/1
 K:Islandwalk
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/river_boa.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/68.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/249.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/180.jpg
 Oracle:Islandwalk\n{G}: Regenerate River Boa.
+SetInfo:VIS Common
+SetInfo:ZEN Uncommon
+SetInfo:6ED Uncommon

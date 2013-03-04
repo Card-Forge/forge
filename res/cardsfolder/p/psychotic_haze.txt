@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ DamageAll | Cost$ 2 B B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
 K:Madness:1 B
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotic_haze.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/76.jpg
 Oracle:Psychotic Haze deals 1 damage to each creature and each player.\nMadness {1}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
+SetInfo:TOR Common

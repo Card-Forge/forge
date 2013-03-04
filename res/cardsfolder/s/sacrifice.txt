@@ -4,10 +4,9 @@ Types:Instant
 A:SP$ Mana | Cost$ B Sac<1/Creature> | Produced$ B | Amount$ X | References$ X | SpellDescription$ Add to your mana pool an amount of black mana equal to the sacrificed creature's converted mana cost.
 SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacrifice.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/33.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/33.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/34.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/33.jpg
 Oracle:As an additional cost to cast Sacrifice, sacrifice a creature.\nAdd to your mana pool an amount of {B} equal to the sacrificed creature's converted mana cost.
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:3ED Uncommon
+SetInfo:2ED Uncommon

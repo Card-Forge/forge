@@ -6,7 +6,6 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment.
 A:AB$ Animate | Cost$ W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ White | OverwriteColors$ True | SpellDescription$ Target permanent becomes white until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudchaser_kestrel.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/10.jpg
 Oracle:Flying\nWhen Cloudchaser Kestrel enters the battlefield, destroy target enchantment.\n{W}: Target permanent becomes white until end of turn.
+SetInfo:TSP Common

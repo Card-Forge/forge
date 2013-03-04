@@ -5,7 +5,6 @@ PT:3/4
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Dig | Description$ If you would draw a card, instead reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:Dig:AB$Dig | Cost$ 0 | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_of_the_anima.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/103.jpg
 Oracle:If you would draw a card, instead reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.
+SetInfo:ARB Rare

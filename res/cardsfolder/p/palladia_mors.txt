@@ -5,8 +5,7 @@ PT:7/7
 K:Flying
 K:Trample
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay R G W
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/palladia_mors.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice Palladia-Mors unless you pay {R}{G}{W}.
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/117.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/287.jpg
+SetInfo:CHR Rare
+SetInfo:LEG Rare

@@ -5,7 +5,6 @@ PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, defending player may pay 4. If he or she doesn't, CARDNAME is unblockable this turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Unblockable | UnlessCost$ 4 | UnlessPayer$ DefendingPlayer | SpellDescription$ Target creature is unblockable this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrouded_serpent.jpg
-SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/47.jpg
 Oracle:Whenever Shrouded Serpent attacks, defending player may pay {4}. If he or she doesn't, Shrouded Serpent is unblockable this turn.
+SetInfo:PCY Rare

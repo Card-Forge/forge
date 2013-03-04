@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigLoseLife | TriggerDescription$ Whenever an artifact is put into a graveyard from the battlefield, you may have target opponent lose 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_the_vault.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/62.jpg
 Oracle:Whenever an artifact is put into a graveyard from the battlefield, you may have target opponent lose 1 life.
+SetInfo:MRD Common

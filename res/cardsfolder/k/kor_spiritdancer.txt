@@ -7,8 +7,7 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
 SVar:X:Count$Valid Aura.Attached/Times.2
 SVar:EnchantMe:Multiple
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_spiritdancer.jpg
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/9.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/31.jpg
 Oracle:Kor Spiritdancer gets +2/+2 for each Aura attached to it.\nWhenever you cast an Aura spell, you may draw a card.
+SetInfo:PC2 Rare
+SetInfo:ROE Rare

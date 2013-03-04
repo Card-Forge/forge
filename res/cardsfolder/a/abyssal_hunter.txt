@@ -5,8 +5,7 @@ PT:1/1
 A:AB$ DealDamage | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBTap | References$ X | SpellDescription$ Tap target creature. CARDNAME deals damage equal to CARDNAME's power to that creature.
 SVar:DBTap:DB$ Tap | Defined$ Targeted
 SVar:X:Count$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_hunter.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/109.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/1.jpg
 Oracle:{B}, {T}: Tap target creature. Abyssal Hunter deals damage equal to Abyssal Hunter's power to that creature.
+SetInfo:MIR Rare
+SetInfo:6ED Rare

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 3 B B B | SubAbility$ DBDestroy | ChangeType$ Creature.Zombie+YouCtrl | Tapped$ True | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.
 SVar:DBDestroy:DB$DestroyAll | ValidCards$ Human
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_apocalypse.jpg
 Oracle:Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/80.jpg
+SetInfo:DKA Rare

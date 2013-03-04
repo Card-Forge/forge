@@ -3,7 +3,6 @@ ManaCost:3 B
 Types:Creature Elf Rogue
 PT:2/3
 K:Deathtouch
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonglove_winnower.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/126.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
+SetInfo:LRW Common

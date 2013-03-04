@@ -9,7 +9,6 @@ SVar:TrigKicker:DB$ GainLife | Defined$ You | LifeAmount$ 3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked 2 B | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its 2 B kicker, destroy target nonblack creature. That creature can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_battlemage.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/35.jpg
 Oracle:Kicker {W} and/or {2}{B} (You may pay an additional {W} and/or {2}{B} as you cast this spell.)\nWhen Stormscape Battlemage enters the battlefield, if it was kicked with its {W} kicker, you gain 3 life.\nWhen Stormscape Battlemage enters the battlefield, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated.
+SetInfo:PLS Uncommon

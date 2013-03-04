@@ -5,7 +5,6 @@ A:SP$ Counter | Cost$ 1 R | TargetType$ Spell | TgtPrompt$ Select target spell |
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | Defined$ You
 SVar:X:Targeted$Valid Card.Blue
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burnout.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/101.jpg
 Oracle:Counter target instant spell if it's blue.\nDraw a card at the beginning of the next turn's upkeep.
+SetInfo:ALL Uncommon

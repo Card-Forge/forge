@@ -7,7 +7,6 @@ A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | KW$ First Strike | Sp
 A:SP$ Effect | Cost$ 4 R | Name$ Incite War Effect | ValidTgts$ Player | TgtPrompt$ Select target player | StaticAbilities$ MustAttack | References$ MustAttack | RememberObjects$ Targeted | PrecostDesc$ Entwine | CostDesc$ 2 | SubAbility$ DBPumpAll | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incite_war.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/96.jpg
 Oracle:Choose one - Creatures target player controls attack this turn if able; or creatures you control gain first strike until end of turn.\nEntwine {2} (Choose both if you pay the entwine cost.)
+SetInfo:MRD Common

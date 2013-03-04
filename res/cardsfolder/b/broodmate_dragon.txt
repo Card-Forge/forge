@@ -5,7 +5,6 @@ PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 4/4 red Dragon creature token with flying onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 4 | TokenToughness$ 4 | TokenKeywords$ Flying
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodmate_dragon.jpg
-SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/160.jpg
 Oracle:Flying\nWhen Broodmate Dragon enters the battlefield, put a 4/4 red Dragon creature token with flying onto the battlefield.
+SetInfo:ALA Rare

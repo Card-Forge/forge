@@ -7,7 +7,6 @@ K:ETBReplacement:Other:DBChooseBasic
 SVar:DBChooseBasic:DB$ ChooseType | Type$ Basic Land | SpellDescription$ As CARDNAME enters the battlefield, choose a basic land type.
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ ChosenType | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is the chosen type.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convincing_mirage.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/46.jpg
 Oracle:Enchant land\nAs Convincing Mirage enters the battlefield, choose a basic land type.\nEnchanted land is the chosen type.
+SetInfo:M10 Common

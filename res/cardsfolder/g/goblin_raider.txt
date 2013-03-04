@@ -3,11 +3,10 @@ ManaCost:1 R
 Types:Creature Goblin Warrior
 PT:2/2
 K:CARDNAME can't block.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6583.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/191.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/103.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/194.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/192.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9eb/8.jpg
 Oracle:Goblin Raider can't block.
+SetInfo:PO2 Common
+SetInfo:8ED Common
+SetInfo:7ED Common
+SetInfo:9ED Common
+SetInfo:USG Common

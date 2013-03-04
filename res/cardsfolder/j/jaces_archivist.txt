@@ -7,11 +7,10 @@ SVar:DBTestHand:DB$ Cleanup | ClearRemembered$ True | ConditionCheckSVar$ HandSi
 SVar:DBOppDiscard1:DB$ Discard | Cost$ 0 | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | Mode$ Hand | SubAbility$ DBOppDiscard2 | References$ X
 SVar:DBOppDiscard2:DB$ Discard | Cost$ 0 | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw | References$ X
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBOppDraw | References$ X
-SVar:DBOppDraw:DB$ Draw | Defined$ Opponent | NumCards$ X | SubAbility$ DBCleanup | References$ X 
+SVar:DBOppDraw:DB$ Draw | Defined$ Opponent | NumCards$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 SVar:HandSizeTest:Count$CardsInOppHand/Minus.X
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_archivist.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/59.jpg
 Oracle:{U}, {T}: Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+SetInfo:M12 Rare

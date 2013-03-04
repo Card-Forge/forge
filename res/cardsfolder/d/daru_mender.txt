@@ -5,7 +5,6 @@ PT:1/1
 K:Morph:W
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigRegenerate | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, regenerate target creature.
 SVar:TrigRegenerate:AB$Regenerate | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_mender.jpg
-SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/8.jpg
 Oracle:Morph {W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Daru Mender is turned face up, regenerate target creature.
+SetInfo:LGN Uncommon

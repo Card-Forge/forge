@@ -3,7 +3,6 @@ ManaCost:B G W
 Types:Enchantment
 A:AB$ GainLife | Cost$ Sac<1/Land> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overgrown_estate.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/113.jpg
 Oracle:Sacrifice a land: You gain 3 life.
+SetInfo:APC Rare

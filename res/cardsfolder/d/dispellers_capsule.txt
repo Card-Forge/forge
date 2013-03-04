@@ -2,7 +2,6 @@ Name:Dispeller's Capsule
 ManaCost:W
 Types:Artifact
 A:AB$ Destroy | Cost$ 2 W T Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispellers_capsule.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/8.jpg
 Oracle:{2}{W}, {T}, Sacrifice Dispeller's Capsule: Destroy target artifact or enchantment.
+SetInfo:ALA Common

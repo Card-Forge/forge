@@ -3,8 +3,7 @@ ManaCost:W W
 Types:Creature Human Cleric
 PT:2/2
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have shroud. (You can't be the target of spells or abilities.)
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/true_believer.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/57.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/53.jpg
 Oracle:You have shroud. (You can't be the target of spells or abilities.)
+SetInfo:ONS Rare
+SetInfo:10E Rare

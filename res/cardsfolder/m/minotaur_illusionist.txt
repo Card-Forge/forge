@@ -5,7 +5,6 @@ PT:3/4
 A:AB$ Pump | Cost$ 1 U | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.
 A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature.
 SVar:X:Count$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_illusionist.jpg
-SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/111.jpg
 Oracle:{1}{U}: Minotaur Illusionist gains shroud until end of turn. (It can't be the target of spells or abilities.)\n{R}, Sacrifice Minotaur Illusionist: Minotaur Illusionist deals damage equal to its power to target creature.
+SetInfo:APC Uncommon

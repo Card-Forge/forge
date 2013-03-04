@@ -9,7 +9,6 @@ SVar:TriggerSacrifice:AB$ Sacrifice | Cost$ 0 | Defined$ Opponent | Amount$ X | 
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SOOT | CounterNum$ 1
 SVar:X:Count$CardCounters.SOOT
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smokestack.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/309.jpg
 Oracle:At the beginning of your upkeep, you may put a soot counter on Smokestack.\nAt the beginning of each player's upkeep, that player sacrifices a permanent for each soot counter on Smokestack.
+SetInfo:USG Rare

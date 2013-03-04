@@ -6,7 +6,6 @@ SVar:GraveReap:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMi
 SVar:NrBlackAtCasting:Count$Valid Permanent.Black+TargetedPlayerCtrl
 SVar:AIPlayForSub:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reap.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/141.jpg
 Oracle:Return up to X target cards from your graveyard to your hand, where X is the number of black permanents target opponent controls as you cast Reap.
+SetInfo:TMP Uncommon

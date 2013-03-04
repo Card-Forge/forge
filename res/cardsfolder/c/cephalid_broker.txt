@@ -4,7 +4,6 @@ Types:Creature Cephalid
 PT:2/2
 A:AB$ Draw | Cost$ T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards, then discards two cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_broker.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/71.jpg
 Oracle:{T}: Target player draws two cards, then discards two cards.
+SetInfo:ODY Uncommon

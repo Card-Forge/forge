@@ -4,7 +4,6 @@ Types:Creature Elemental
 PT:7/7
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of each upkeep, you gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_force.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/10.jpg
 Oracle:At the beginning of each upkeep, you gain 3 life.
+SetInfo:COM Rare

@@ -2,8 +2,7 @@ Name:Erase
 ManaCost:W
 Types:Instant
 A:SP$ ChangeZone | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erase.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/13.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/7.jpg
 Oracle:Exile target enchantment.
+SetInfo:ULG Common
+SetInfo:M13 Common

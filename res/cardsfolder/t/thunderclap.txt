@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
 SVar:AltCost:Cost$ Sac<1/Mountain>
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderclap.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/219.jpg
 Oracle:You may sacrifice a Mountain rather than pay Thunderclap's mana cost.\nThunderclap deals 3 damage to target creature.
+SetInfo:MMQ Common

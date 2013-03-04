@@ -4,7 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ B | SubAbility$ DBPain | SpellDescription$ Add B to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Pump | Cost$ B T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | Activation$ Threshold | PrecostDesc$ Threshold - | SpellDescription$ Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
 SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_pit.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/315.jpg
 Oracle:{T}: Add {B} to your mana pool. Cabal Pit deals 1 damage to you.\nThreshold - {B}, {T}, Sacrifice Cabal Pit: Target creature gets -2/-2 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
+SetInfo:ODY Uncommon

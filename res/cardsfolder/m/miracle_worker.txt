@@ -3,7 +3,6 @@ ManaCost:W
 Types:Creature Human Cleric
 PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Aura.AttachedTo Creature.YouCtrl | TgtPrompt$ Select target Aura attached to a creature you control | SpellDescription$ Destroy target Aura attached to a creature you control.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/miracle_worker.jpg
-SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/86.jpg
 Oracle:{T}: Destroy target Aura attached to a creature you control.
+SetInfo:DRK Common

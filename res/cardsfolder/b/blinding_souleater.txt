@@ -4,7 +4,6 @@ Types:Artifact Creature Cleric
 PT:1/3
 A:AB$ Tap | Cost$ PW T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 DeckNeeds:Color$white
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_souleater.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/131.jpg
 Oracle:{W/P}, {T}: Tap target creature. ({W/P} can be paid with either {W} or 2 life.)
+SetInfo:NPH Common

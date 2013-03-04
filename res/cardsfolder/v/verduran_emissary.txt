@@ -5,7 +5,7 @@ PT:2/3
 K:Kicker 1 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated.
 SVar:TrigKicker:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact | NoRegen$ True | TgtPrompt$ Select target artifact
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verduran_emissary.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/221.jpg
 Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nWhen Verduran Emissary enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated.
+SetInfo:DDE Uncommon
+SetInfo:INV Uncommon

@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Defender | Descript
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Sliver | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ All Slivers have "When this permanent enters the battlefield, draw a card."
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:BuffedBy:Sliver
-SVar:Rarity:uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dormant_sliver.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/156.jpg
 Oracle:All Sliver creatures have defender.\nAll Slivers have "When this permanent enters the battlefield, draw a card."
+SetInfo:PLC Uncommon

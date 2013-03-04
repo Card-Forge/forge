@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:1/2
 K:Flying
 A:AB$ PreventDamage | Cost$ T | ValidTgts$ Player | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to target player this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_vestige.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/29.jpg
 Oracle:Flying\n{T}: Prevent the next 1 damage that would be dealt to target player this turn.
+SetInfo:ZEN Common

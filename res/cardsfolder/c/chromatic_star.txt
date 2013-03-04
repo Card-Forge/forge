@@ -6,8 +6,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:SacMe:1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_star.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/251.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/314.jpg
 Oracle:{1}, {T}, Sacrifice Chromatic Star: Add one mana of any color to your mana pool.\nWhen Chromatic Star is put into a graveyard from the battlefield, draw a card.
+SetInfo:TSP Common
+SetInfo:10E Uncommon

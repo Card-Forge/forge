@@ -6,7 +6,6 @@ K:Defender
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ R | Amount$ 2 | SpellDescription$ Add R R to your mana pool.
 A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature.blockedBySource | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature it's blocking.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinder_wall.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/158.jpg
 Oracle:Defender (This creature can't attack.)\nSacrifice Tinder Wall: Add {R}{R} to your mana pool.\n{R}, Sacrifice Tinder Wall: Tinder Wall deals 2 damage to target creature it's blocking.
+SetInfo:ICE Common

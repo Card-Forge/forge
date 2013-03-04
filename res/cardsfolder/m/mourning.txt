@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | Description$ Enchanted creature gets -2/-0.
 A:AB$ ChangeZone | Cost$ B | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourning.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/111.jpg
 Oracle:Enchant creature\nEnchanted creature gets -2/-0.\n{B}: Return Mourning to its owner's hand.
+SetInfo:INV Common

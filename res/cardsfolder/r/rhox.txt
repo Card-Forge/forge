@@ -4,9 +4,8 @@ Types:Creature Rhino Beast
 PT:5/5
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
 A:AB$ Regenerate | Cost$ 2 G | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/277.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/112.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/291.jpg
 Oracle:You may have Rhox assign its combat damage as though it weren't blocked.\n{2}{G}: Regenerate Rhox. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
+SetInfo:8ED Rare
+SetInfo:NMS Rare
+SetInfo:10E Rare

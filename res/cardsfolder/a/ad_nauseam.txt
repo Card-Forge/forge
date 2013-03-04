@@ -7,7 +7,6 @@ SVar:DBLose:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ad_nauseam.jpg
-SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/63.jpg
 Oracle:Reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost. You may repeat this process any number of times.
+SetInfo:ALA Rare

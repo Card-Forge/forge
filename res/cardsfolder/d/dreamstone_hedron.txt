@@ -4,8 +4,8 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 3 | SpellDescription$ Add 3 to your mana pool.
 A:AB$ Draw | Cost$ 3 T Sac<1/CARDNAME> | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreamstone_hedron.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/247.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/216.jpg
 Oracle:{T}: Add {3} to your mana pool.\n{3}, {T}, Sacrifice Dreamstone Hedron: Draw three cards.
+SetInfo:ARC Uncommon
+SetInfo:COM Uncommon
+SetInfo:ROE Uncommon

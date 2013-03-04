@@ -5,7 +5,6 @@ K:etbCounter:POLYP:4
 A:AB$ PutCounter | Cost$ Sac<1/Island> | CounterType$ POLYP | CounterNum$ 2 | SpellDescription$ Put two polyp counters on CARDNAME.
 A:AB$ PutCounter | Cost$ U tapXType<1/Creature.Blue> SubCounter<1/POLYP> | CounterType$ P0P1 | CounterNum$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CostDesc$ U, Tap an untapped blue creature you control, Remove a polyp counter from CARDNAME: | SpellDescription$ Put a +0/+1 counter on target creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_reef.jpg
-SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/29.jpg
 Oracle:Coral Reef enters the battlefield with four polyp counters on it.\nSacrifice an Island: Put two polyp counters on Coral Reef.\n{U}, Tap an untapped blue creature you control, Remove a polyp counter from Coral Reef: Put a +0/+1 counter on target creature.
+SetInfo:HML Common

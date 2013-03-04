@@ -5,5 +5,5 @@ A:SP$ Pump | Cost$ 2 WU WU | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Choos
 SVar:MirrorweaveClone:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Creature.IsNotRemembered | RepeatSubAbility$ DBCopy | SubAbility$ DBCleanup
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted | Duration$ UntilEndOfTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrorweave.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/143.jpg
 Oracle:Each other creature becomes a copy of target nonlegendary creature until end of turn.
+SetInfo:SHM Rare

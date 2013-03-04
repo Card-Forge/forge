@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | IsPresent$ Card.YouDontCtrl | PresentZone$ Hand | PresentCompare$ LT3 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ X | References$ X
 SVar:X:TriggeredPlayer$CardsInHand/NMinus.3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rackling.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/136.jpg
 Oracle:At the beginning of each opponent's upkeep, Rackling deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
+SetInfo:NMS Uncommon

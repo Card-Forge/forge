@@ -5,13 +5,12 @@ K:Enchant Wall
 A:SP$ Attach | Cost$ W | ValidTgts$ Wall | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ Enchanted Wall can attack as though it didn't have defender.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_wall.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/185.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/186.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/281.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/254.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/1.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/185.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/185.jpg
 Oracle:Enchant Wall\nEnchanted Wall can attack as though it didn't have defender.
+SetInfo:2ED Rare
+SetInfo:6ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

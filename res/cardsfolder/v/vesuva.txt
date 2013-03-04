@@ -4,7 +4,7 @@ Types:Land
 K:ETBReplacement:Copy:ChooseLand:Optional
 SVar:ChooseLand:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Land.Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ AtLeast1 | SpellDescription$ You may have CARDNAME enter the battlefield tapped as a copy of any land on the battlefield.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | IntoPlayTapped$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vesuva.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/281.jpg
 Oracle:You may have Vesuva enter the battlefield tapped as a copy of any land on the battlefield.
+SetInfo:V12 Mythic
+SetInfo:TSP Rare

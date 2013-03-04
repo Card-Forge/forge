@@ -10,7 +10,6 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$Valid Creature.YouCtrl
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
-SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/199.jpg
 Oracle:Creatures you control get +1/+1, have flying, and are indestructible.\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
+SetInfo:ZEN Mythic

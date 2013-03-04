@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 B Sac<2/Creature> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_tribute.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/32.jpg
 Oracle:As an additional cost to cast Phyrexian Tribute, sacrifice two creatures.\nDestroy target artifact.
+SetInfo:MIR Rare

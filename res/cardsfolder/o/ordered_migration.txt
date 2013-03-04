@@ -5,7 +5,6 @@ Text:Domain - Put a 1/1 blue Bird creature token with flying onto the battlefiel
 A:SP$ Token | Cost$ 3 W U | TokenAmount$ X | References$ X | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenOwner$ You | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:X:Count$Domain
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordered_migration.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/258.jpg
 Oracle:Domain - Put a 1/1 blue Bird creature token with flying onto the battlefield for each basic land type among lands you control.
+SetInfo:INV Uncommon

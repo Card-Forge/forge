@@ -6,5 +6,5 @@ K:Flying
 A:AB$ ChangeZone | Cost$ 2 | Origin$ Library | Destination$ Graveyard | ChangeType$ Dragon | ChangeNum$ 1 | Shuffle$ True | SubAbility$ ScionCopy | RememberChanged$ True | SpellDescription$ Search your library for a Dragon permanent card and put that card onto the battlefield. Then shuffle your library. That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.
 SVar:ScionCopy:DB$ Clone | Defined$ Remembered | Duration$ UntilEndOfTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_the_ur_dragon.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/246.jpg
 Oracle:Flying\n{2}: Search your library for a Dragon permanent card and put it into your graveyard. If you do, Scion of the Ur-Dragon becomes a copy of that card until end of turn. Then shuffle your library.
+SetInfo:TSP Rare

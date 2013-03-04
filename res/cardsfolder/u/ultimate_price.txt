@@ -2,7 +2,6 @@ Name:Ultimate Price
 ManaCost:1 B
 Types:Instant
 A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.MonoColor | TgtPrompt$ Select target monocolored creature | SpellDescription$ Destroy target monocolored creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ultimate_price.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/82.jpg
 Oracle:Destroy target monocolored creature.
+SetInfo:RTR Uncommon

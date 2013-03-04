@@ -3,7 +3,6 @@ ManaCost:4 G
 Types:Instant Arcane
 A:SP$ Pump | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | References$ X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of lands you control.
 SVar:X:Count$TypeYouCtrl.Land
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_cedars.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/245.jpg
 Oracle:Target creature gets +X/+X until end of turn, where X is the number of lands you control.
+SetInfo:CHK Uncommon

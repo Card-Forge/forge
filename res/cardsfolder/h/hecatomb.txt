@@ -10,9 +10,8 @@ A:AB$ DealDamage | Cost$ tapXType<1/Swamp> | ValidTgts$ Creature,Player | TgtPro
 SVar:RemAIDeck:True
 SVar:NeedsToPlayVar:Creats GE4
 SVar:Creats:Count$Valid Creature.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hecatomb.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/29.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/136.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/18.jpg
 Oracle:When Hecatomb enters the battlefield, sacrifice Hecatomb unless you sacrifice four creatures.\nTap an untapped Swamp you control: Hecatomb deals 1 damage to target creature or player.
+SetInfo:ICE Rare
+SetInfo:5ED Rare
+SetInfo:6ED Rare

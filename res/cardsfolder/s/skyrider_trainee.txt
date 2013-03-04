@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's enchanted.
 SVar:EnchantMe:Once
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyrider_trainee.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/17.jpg
 Oracle:Skyrider Trainee has flying as long as it's enchanted.
+SetInfo:GPT Common

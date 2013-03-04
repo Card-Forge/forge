@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ 1 T | Produced$ W U | SpellDescription$ Add W U to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skycloud_expanse.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/327.jpg
 Oracle:{1}, {T}: Add {W}{U} to your mana pool.
+SetInfo:ODY Rare

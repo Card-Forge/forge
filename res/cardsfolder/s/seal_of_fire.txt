@@ -2,8 +2,8 @@ Name:Seal of Fire
 ManaCost:R
 Types:Enchantment
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_fire.jpg
-SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/98.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/71.jpg
 Oracle:Sacrifice Seal of Fire: Seal of Fire deals 2 damage to target creature or player.
+SetInfo:DD2 Common
+SetInfo:NMS Common
+SetInfo:DIS Common

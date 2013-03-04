@@ -3,7 +3,6 @@ ManaCost:B
 Types:Instant
 A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 K:Dredge 3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkblast.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/82.jpg
 Oracle:Target creature gets -1/-1 until end of turn.\nDredge 3 (If you would draw a card, instead you may put exactly three cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
+SetInfo:RAV Uncommon

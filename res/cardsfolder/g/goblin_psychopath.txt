@@ -11,7 +11,6 @@ SVar:DamagePsychoYou:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | NumDmg$ Psy
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:PsychoX:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_psychopath.jpg
 Oracle:Whenever Goblin Psychopath attacks or blocks, flip a coin. If you lose the flip, the next time it would deal combat damage this turn, it deals that damage to you instead.
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/95.jpg
+SetInfo:SCG Uncommon

@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:2/1
 K:Flying
 A:AB$ Pump | Cost$ 3 B | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searchlight_geist.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/119.jpg
 Oracle:Flying\n{3}{B}: Searchlight Geist gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
+SetInfo:AVR Common

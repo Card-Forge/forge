@@ -3,7 +3,6 @@ ManaCost:UB UB UB UB
 Types:Instant
 A:SP$ Play | Cost$ UB UB UB UB | TgtZone$ Graveyard | WithoutManaCost$ True | ValidTgts$ Instant.OppOwn,Sorcery.OppOwn | TgtPrompt$ Choose target instant or sorcery card from an opponent's graveyard | Optional$ True | SpellDescription$ You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_plunder.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/169.jpg
 Oracle:You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
+SetInfo:SHM Rare

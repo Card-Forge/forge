@@ -3,7 +3,6 @@ ManaCost:UR UR
 Types:Creature Weird
 PT:1/4
 A:AB$ Pump | Cost$ UR | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frostburn_weird.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/215.jpg
 Oracle:{U/R}: Frostburn Weird gets +1/-1 until end of turn.
+SetInfo:RTR Common

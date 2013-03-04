@@ -4,7 +4,7 @@ Types:Creature Human Shaman
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature is put into a graveyard from the battlefield, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgreeter.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/71.jpg
 Oracle:Whenever another creature dies, you may gain 1 life.
+SetInfo:DDD Common
+SetInfo:ALA Common

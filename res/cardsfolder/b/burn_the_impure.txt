@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 1 R | NumDmg$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 3 damage to target creature. If that creature has infect, CARDNAME deals 3 damage to that creature's controller.
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | References$ X
 SVar:X:Targeted$Valid Creature.withInfect
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burn_the_impure.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/59.jpg
 Oracle:Burn the Impure deals 3 damage to target creature. If that creature has infect, Burn the Impure deals 3 damage to that creature's controller.
+SetInfo:MBS Common

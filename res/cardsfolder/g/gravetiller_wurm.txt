@@ -6,5 +6,5 @@ K:Trample
 K:etbCounter:P1P1:4:CheckSVar$ Morbid:Morbid - CARDNAME enters the battlefield with four +1/+1 counters on it if a creature died this turn.
 SVar:Morbid:Count$Morbid.1.0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravetiller_wurm.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/116.jpg
 Oracle:Trample\nMorbid - Gravetiller Wurm enters the battlefield with four +1/+1 counters on it if a creature died this turn.
+SetInfo:DKA Uncommon

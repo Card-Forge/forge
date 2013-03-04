@@ -6,7 +6,6 @@ K:Defender
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 K:Protection:Card.ChosenColor:CARDNAME has protection from the chosen color.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_stars.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/13.jpg
 Oracle:Defender (This creature can't attack.)\nAs Order of the Stars enters the battlefield, choose a color.\nOrder of the Stars has protection from the chosen color.
+SetInfo:GPT Uncommon

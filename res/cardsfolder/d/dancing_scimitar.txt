@@ -3,12 +3,11 @@ ManaCost:4
 Types:Artifact Creature Spirit
 PT:1/5
 K:Flying
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84114.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/362.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/331.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/292.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/279.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/243.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/75.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)
+SetInfo:6ED Rare
+SetInfo:9ED Uncommon
+SetInfo:ARN Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

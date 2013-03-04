@@ -3,7 +3,6 @@ ManaCost:5 U U
 Types:Legendary Creature Human Soldier
 PT:8/8
 K:CARDNAME can't attack unless defending player controls an Island.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhou_yu_chief_commander.jpg
-SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/65.jpg
 Oracle:Zhou Yu, Chief Commander can't attack unless defending player controls an Island.
+SetInfo:PTK Rare

@@ -6,7 +6,6 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredCardController
 SVar:SacMe:1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darkslick_drake.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/30.jpg
 Oracle:Flying\nWhen Darkslick Drake dies, draw a card.
+SetInfo:SOM Uncommon

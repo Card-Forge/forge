@@ -8,7 +8,6 @@ SVar:UnscytheTrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origi
 SVar:UnscytheDBToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | ConditionCheckSVar$ UnscytheX | ConditionSVarCompare$ GE1 | SubAbility$ UnscytheDBCleanup
 SVar:UnscytheDBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:UnscytheX:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unscythe_killer_of_kings.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/114.jpg
 Oracle:Equipped creature gets +3/+3 and has first strike.\nWhenever a creature dealt damage by equipped creature this turn dies, you may exile that card. If you do, put a 2/2 black Zombie creature token onto the battlefield.\nEquip {2}
+SetInfo:ARB Rare

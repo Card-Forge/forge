@@ -3,8 +3,8 @@ ManaCost:3 W
 Types:Instant
 A:SP$ GainLife | Cost$ 3 W | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | References$ X | SpellDescription$ Target player gains 2 life for each creature on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Creature/Times.2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/congregate.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/8.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/11.jpg
 Oracle:Target player gains 2 life for each creature on the battlefield.
+SetInfo:COM Common
+SetInfo:HOP Common
+SetInfo:USG Common

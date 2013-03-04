@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Creature Lizard
 PT:2/2
 K:Swampwalk
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2581.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/145.jpg
 Oracle:Swampwalk
+SetInfo:ICE Rare

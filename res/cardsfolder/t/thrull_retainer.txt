@@ -5,8 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
 A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_retainer.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/60.jpg
-SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/30.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1.\nSacrifice Thrull Retainer: Regenerate enchanted creature.
+SetInfo:5ED Uncommon
+SetInfo:FEM Uncommon

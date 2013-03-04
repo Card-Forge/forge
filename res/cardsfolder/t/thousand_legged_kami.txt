@@ -3,7 +3,6 @@ ManaCost:6 G G
 Types:Creature Spirit
 PT:6/6
 K:Soulshift 7
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thousand_legged_kami.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/246.jpg
 Oracle:Soulshift 7 (When this creature dies, you may return target Spirit card with converted mana cost 7 or less from your graveyard to your hand.)
+SetInfo:CHK Uncommon

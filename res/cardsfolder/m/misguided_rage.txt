@@ -2,7 +2,6 @@ Name:Misguided Rage
 ManaCost:2 R
 Types:Sorcery
 A:SP$ Sacrifice | Cost$ 2 R | ValidTgts$ Player | SacValid$ Permanent | SacMessage$ Permanent | SpellDescription$ Target player sacrifices a permanent.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misguided_rage.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/99.jpg
 Oracle:Target player sacrifices a permanent.
+SetInfo:SCG Common

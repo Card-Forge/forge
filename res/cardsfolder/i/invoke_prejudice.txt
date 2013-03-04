@@ -5,5 +5,5 @@ T:Mode$ SpellCast | ValidCard$ Creature.OppCtrl+notSharesColorWith Creature.YouC
 SVar:TrigCounter:AB$ Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | UnlessCost$ X | UnlessPayer$ TriggeredActivator | References$ X
 SVar:X:TriggeredCard$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invoke_prejudice.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/62.jpg
 Oracle:Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, counter that spell unless that player pays {X}, where X is its converted mana cost.
+SetInfo:LEG Rare

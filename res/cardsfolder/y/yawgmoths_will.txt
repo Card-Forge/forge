@@ -6,7 +6,6 @@ SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | Af
 SVar:GraveToExile:Event$ Moved | ActiveZones$ Command | Destination$ Graveyard | ValidCard$ Card.nonToken+YouOwn | ReplaceWith$ Exile | Description$ If a card would be put into your graveyard from anywhere, exile it instead.
 SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_will.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/171.jpg
 Oracle:Until end of turn, you may play cards from your graveyard.\nIf a card would be put into your graveyard from anywhere this turn, exile that card instead.
+SetInfo:USG Rare

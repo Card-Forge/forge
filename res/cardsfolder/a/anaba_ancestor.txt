@@ -4,7 +4,6 @@ Types:Creature Minotaur Spirit
 PT:1/1
 A:AB$ Pump | Cost$ T | NumAtt$ 1 | NumDef$ 1 | ValidTgts$ Creature.Minotaur+Other | TgtPrompt$ Select another target Minotaur creature | SpellDescription$ Another target Minotaur creature gets +1/+1 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_ancestor.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/81.jpg
 Oracle:{T}: Another target Minotaur creature gets +1/+1 until end of turn.
+SetInfo:HML Rare

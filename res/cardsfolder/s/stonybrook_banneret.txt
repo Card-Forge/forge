@@ -4,7 +4,6 @@ Types:Creature Merfolk Wizard
 PT:1/1
 K:Islandwalk
 S:Mode$ ReduceCost | ValidCard$ Merfolk,Wizard | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Merfolk spells and Wizard spells you cast cost 1 less to cast.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_banneret.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/51.jpg
 Oracle:Islandwalk\nMerfolk spells and Wizard spells you cast cost {1} less to cast.
+SetInfo:MOR Common

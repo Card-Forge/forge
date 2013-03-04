@@ -4,8 +4,7 @@ Types:Creature Human Monk Cleric
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_realist.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/21.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/20.jpg
 Oracle:When Monk Realist enters the battlefield, destroy target enchantment.
+SetInfo:COM Common
+SetInfo:USG Common

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ GainLife | Cost$ 7 W | LifeAmount$ X | SubAbility$ DBShuffle | References$ X | SpellDescription$ You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library.
 SVar:DBShuffle:DB$ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 SVar:X:Count$InYourYard/Times.2
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archangels_light.jpg
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/1.jpg
 Oracle:You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library.
+SetInfo:DKA Mythic

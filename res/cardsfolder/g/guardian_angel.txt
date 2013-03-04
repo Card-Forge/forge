@@ -8,10 +8,9 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Def
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:RemAIDeck:True
 SVar:X:Count$xPaid
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_angel.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/205.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/207.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/205.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/206.jpg
 Oracle:Prevent the next X damage that would be dealt to target creature or player this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that creature or player this turn.
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:3ED Common
+SetInfo:2ED Common

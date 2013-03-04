@@ -4,7 +4,6 @@ Types:Artifact Creature Gargoyle
 PT:3/3
 K:Flying
 K:Indestructible
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46136.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/111.jpg
 Oracle:Flying\nDarksteel Gargoyle is indestructible. ("Destroy" effects and lethal damage don't destroy it.)
+SetInfo:DST Uncommon

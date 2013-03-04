@@ -4,7 +4,6 @@ Types:Creature Elemental Rogue
 Text:CARDNAME can't be blocked by white creatures.
 PT:3/3
 K:CantBeBlockedBy Creature.White
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sootwalkers.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/196.jpg
 Oracle:Sootwalkers can't be blocked by white creatures.
+SetInfo:SHM Common

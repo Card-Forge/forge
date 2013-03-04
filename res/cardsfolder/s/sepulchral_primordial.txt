@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:ReturnOneEach:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature.OppCtrl | TgtZone$ Graveyard | TgtPrompt$  Choose target creature card in each opponent's graveyard | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sepulchral_primordial.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/75.jpg
 Oracle:Intimidate\nWhen Sepulchral Primordial enters the battlefield, for each opponent, you may put up to one target creature card from that player's graveyard onto the battlefield under your control.
+SetInfo:GTC Rare

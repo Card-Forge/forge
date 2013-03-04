@@ -3,8 +3,8 @@ ManaCost:2 G
 Types:Instant
 A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ Target creature gets +4/+4 until end of turn.
 A:SP$ Pump | Cost$ GainLife<3/Player.Opponent> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | IsPresent$ Forest.YouCtrl | PrecostDesc$ If you control a Forest, rather than pay CARDNAME's mana cost, | CostDesc$ you may have an opponent gain 3 life | SpellDescription$ .
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invigorate.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/162.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/254.jpg
 Oracle:If you control a Forest, rather than pay Invigorate's mana cost, you may have an opponent gain 3 life.\nTarget creature gets +4/+4 until end of turn.
+SetInfo:MMQ Common
+SetInfo:COM Common
+SetInfo:DDD Common

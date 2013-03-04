@@ -5,7 +5,6 @@ A:SP$ Destroy | Cost$ X G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select 
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molder.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/206.jpg
 Oracle:Destroy target artifact or enchantment with converted mana cost X. It can't be regenerated. You gain X life.
+SetInfo:TSP Common

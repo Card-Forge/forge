@@ -3,7 +3,6 @@ ManaCost:4
 Types:Artifact Creature Golem
 PT:2/3
 A:AB$ Pump | Cost$ 1 U | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cobalt_golem.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/157.jpg
 Oracle:{1}{U}: Cobalt Golem gains flying until end of turn.
+SetInfo:MRD Common

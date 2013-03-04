@@ -3,7 +3,6 @@ ManaCost:1 W U
 Types:Enchantment
 K:Exalted
 K:Cascade
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ardent_plea.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/1.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nCascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
+SetInfo:ARB Uncommon

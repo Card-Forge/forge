@@ -4,7 +4,6 @@ Types:Artifact
 K:etbCounter:CHARGE:3
 A:AB$ PutCounter | Cost$ W W T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$ GainLife | Cost$ 2 T SubCounter<1/CHARGE> | LifeAmount$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player to gain 3 life | SpellDescription$ Target player gains 3 life.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_mending.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/215.jpg
 Oracle:Trigon of Mending enters the battlefield with three charge counters on it.\n{W}{W}, {T}: Put a charge counter on Trigon of Mending.\n{2}, {T}, Remove a charge counter from Trigon of Mending: Target player gains 3 life.
+SetInfo:SOM Uncommon

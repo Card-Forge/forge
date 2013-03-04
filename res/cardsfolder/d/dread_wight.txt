@@ -14,7 +14,6 @@ SVar:DBAnimateAttacker:DB$ Animate | Defined$ TriggeredAttacker | staticAbilitie
 SVar:DBAnimateBlocker:DB$ Animate | Defined$ TriggeredBlocker | staticAbilities$ Static | Abilities$ ABRemoveCounter | Permanent$ True
 SVar:ABRemoveCounter:AB$ RemoveCounter | Defined$ Self | Cost$ 4 | CounterType$ PARALYZATION | CounterNum$ 1 | SpellDescription$ Remove a paralyzation counter from this creature.
 SVar:Static:Mode$ Continuous | Affected$ Card.Self+counters_GE1_PARALYZATION | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | AffectedZone$ Battlefield
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_wight.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/10.jpg
 Oracle:At end of combat, put a paralyzation counter on each creature blocking or blocked by Dread Wight and tap those creatures. Each of those creatures doesn't untap during its controller's untap step for as long as it has a paralyzation counter on it. Each of those creatures gains "{4}: Remove a paralyzation counter from this creature."
+SetInfo:ICE Rare

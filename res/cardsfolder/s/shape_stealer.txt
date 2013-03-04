@@ -10,7 +10,6 @@ SVar:W:TriggeredAttacker$CardPower
 SVar:X:TriggeredAttacker$CardToughness
 SVar:Y:TriggeredBlocker$CardPower
 SVar:Z:TriggeredBlocker$CardToughness
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shape_stealer.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/55.jpg
 Oracle:Whenever Shape Stealer blocks or becomes blocked by a creature, change Shape Stealer's power and toughness to that creature's power and toughness until end of turn.
+SetInfo:SOK Uncommon

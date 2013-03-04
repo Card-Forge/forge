@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:5/5
 A:AB$ DealDamage | Cost$ 1 G T | ValidTgts$ Creature.attacking+withFlying,Creature.blocking+withFlying | TgtPrompt$ Select target attacking or blocking creature with flying | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature with flying.
 K:Morph:3 G G
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venomspout_brackus.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/295.jpg
 Oracle:{1}{G}, {T}: Venomspout Brackus deals 5 damage to target attacking or blocking creature with flying.\nMorph {3}{G}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:ONS Uncommon

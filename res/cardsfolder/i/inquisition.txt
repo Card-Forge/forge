@@ -5,7 +5,6 @@ A:SP$ RevealHand | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:Damage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | References$ X
 SVar:X:Remembered$Valid Card.White
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisition.jpg
-SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/9.jpg
 Oracle:Target player reveals his or her hand. Inquisition deals damage to that player equal to the number of white cards in his or her hand.
+SetInfo:DRK Common

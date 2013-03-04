@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Instant Arcane
 A:SP$ Mill | Cost$ 1 U | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top four cards of his or her library into his or her graveyard.
 K:Splice onto Arcane 1 U
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dampen_thought.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/57.jpg
 Oracle:Target player puts the top four cards of his or her library into his or her graveyard.\nSplice onto Arcane {1}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+SetInfo:CHK Uncommon

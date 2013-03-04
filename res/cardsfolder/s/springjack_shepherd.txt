@@ -5,7 +5,6 @@ PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Chroma - When CARDNAME enters the battlefield, put a 0/1 white Goat creature token onto the battlefield for each white mana symbol in the mana costs of permanents you control.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Goat | TokenTypes$ Creature,Goat | TokenOwner$ You | TokenColors$ White | TokenPower$ 0 | TokenToughness$ 1
 SVar:X:Count$Chroma.W
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_shepherd.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/15.jpg
 Oracle:Chroma - When Springjack Shepherd enters the battlefield, put a 0/1 white Goat creature token onto the battlefield for each white mana symbol in the mana costs of permanents you control.
+SetInfo:EVE Uncommon

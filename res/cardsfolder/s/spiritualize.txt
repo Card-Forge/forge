@@ -7,7 +7,6 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X | Defin
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritualize.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/53.jpg
 Oracle:Until end of turn, whenever target creature deals damage, you gain that much life.\nDraw a card.
+SetInfo:ODY Uncommon

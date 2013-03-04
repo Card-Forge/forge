@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Island.untapped/untapped Island> | UnlessPayer$ You
 A:AB$ Mana | Cost$ T | Produced$ 1 U | SpellDescription$ Add 1 U to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_atoll.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/160.jpg
 Oracle:Coral Atoll enters the battlefield tapped.\nWhen Coral Atoll enters the battlefield, sacrifice it unless you return an untapped Island you control to its owner's hand.\n{T}: Add {1}{U} to your mana pool.
+SetInfo:VIS Uncommon

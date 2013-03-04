@@ -6,9 +6,7 @@ A:AB$ SetState | Cost$ B T | Defined$ Self | NewState$ Licid | SubAbility$ DBAtt
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 AlternateMode:Licid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupting_licid.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/4.jpg
 Oracle:{B}, {T}: Corrupting Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {B} to end this effect.\nEnchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 
 ALTERNATE
@@ -23,7 +21,6 @@ A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Fear | Description$ Enchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 A:AB$ SetState | Cost$ B | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupting_licid.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/4.jpg
 Oracle:{B}, {T}: Corrupting Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {B} to end this effect.\nEnchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
+SetInfo:STH Uncommon

@@ -8,5 +8,5 @@ SVar:Animate:DB$ Animate | ValidTgts$ Instant.inZoneStack,Sorcery.inZoneStack | 
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vodalian_mystic.jpg
-SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/33.jpg
 Oracle:{T}: Target instant or sorcery spell becomes the color of your choice.
+SetInfo:APC Uncommon

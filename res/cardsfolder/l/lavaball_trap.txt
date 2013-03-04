@@ -5,7 +5,6 @@ A:SP$Destroy | Cost$ 6 R R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | Tgt
 A:SP$Destroy | Cost$ 3 R R | CheckSVar$ LandsEntered | SVarCompare$ GE2 | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land. | SubAbility$ DBDamageAll | References$ LandsEntered | SpellDescription$ If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay 3 R R rather than pay CARDNAME's mana cost.
 SVar:DBDamageAll:DB$DamageAll | ValidCards$ Creature | NumDmg$ 4 | ValidDescription$ each creature.
 SVar:LandsEntered:Count$ThisTurnEntered_Battlefield_Land.YouDontCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavaball_trap.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/135.jpg
 Oracle:If an opponent had two or more lands enter the battlefield under his or her control this turn, you may pay {3}{R}{R} rather than pay Lavaball Trap's mana cost.\nDestroy two target lands. Lavaball Trap deals 4 damage to each creature.
+SetInfo:ZEN Rare

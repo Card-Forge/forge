@@ -4,7 +4,6 @@ Types:Artifact Creature Myr
 PT:1/1
 A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Artifact | SpellDescription$ Target land becomes an artifact in addition to its other types until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_landshaper.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/131.jpg
 Oracle:{T}: Target land becomes an artifact in addition to its other types until end of turn.
+SetInfo:DST Common

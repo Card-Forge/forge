@@ -4,18 +4,18 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | Description$ Enchanted creature gets +2/+1.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unholy_strength.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/169.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/40.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/40.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/168.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/63.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/50.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/168.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/185.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/119.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/116.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/41.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/40.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+1.
+SetInfo:8ED Common
+SetInfo:2ED Common
+SetInfo:7ED Common
+SetInfo:M10 Common
+SetInfo:9ED Common
+SetInfo:10E Common
+SetInfo:M11 Common
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:DDC Common
+SetInfo:3ED Common

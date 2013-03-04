@@ -4,9 +4,8 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a creature enters the battlefield, CARDNAME deals 2 damage to it.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCard | NumDmg$ 2
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_flash.jpg
 Oracle:Whenever a creature enters the battlefield, AEther Flash deals 2 damage to it.
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/88.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/163.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/172.jpg
+SetInfo:7ED Uncommon
+SetInfo:WTH Uncommon
+SetInfo:6ED Uncommon

@@ -5,7 +5,6 @@ PT:1/2
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Metalcraft$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Metalcraft - Whenever CARDNAME deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of his or her library into his or her graveyard.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 4
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_silcaw.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/42.jpg
 Oracle:Flying\nMetalcraft - Whenever Screeching Silcaw deals combat damage to a player, if you control three or more artifacts, that player puts the top four cards of his or her library into his or her graveyard.
+SetInfo:SOM Common

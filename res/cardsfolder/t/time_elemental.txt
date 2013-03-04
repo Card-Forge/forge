@@ -9,9 +9,8 @@ SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBDamage
 SVar:DBDamage:DB$DealDamage | NumDmg$ 5 | Defined$ You
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_elemental.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/129.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/108.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/81.jpg
 Oracle:When Time Elemental attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.\n{2}{U}{U}, {T}: Return target permanent that isn't enchanted to its owner's hand.
+SetInfo:5ED Rare
+SetInfo:LEG Rare
+SetInfo:4ED Rare

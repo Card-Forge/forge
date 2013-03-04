@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$ ChangeZone | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | UnlessCost$ 1 | UnlessPayer$ TargetedController | SpellDescription$ Return target creature to its owner's hand unless its controller pays 1.
 A:AB$ ChangeZone | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | UnlessCost$ 1 | UnlessPayer$ TargetedController | SpellDescription$ Return target creature to its owner's hand unless its controller pays 1.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_shard.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/159.jpg
 Oracle:{3}, {T} or {U}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
+SetInfo:MRD Uncommon

@@ -2,7 +2,6 @@ Name:Nether Horror
 ManaCost:3 B
 Types:Creature Horror
 PT:4/2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_horror.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/108.jpg
 Oracle:
+SetInfo:M11 Common

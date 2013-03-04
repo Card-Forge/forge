@@ -2,7 +2,6 @@ Name:Unnatural Speed
 ManaCost:R
 Types:Instant
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnatural_speed.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/197.jpg
 Oracle:Target creature gains haste until end of turn.
+SetInfo:CHK Common

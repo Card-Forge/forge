@@ -4,7 +4,6 @@ Types:Creature Elemental
 PT:2/2
 A:AB$ Mana | Cost$ R Return<1/CARDNAME> | Produced$ 2 R | Amount$ 1 | SorcerySpeed$ True | SpellDescription$ Add 2 R to your mana pool. Activate this ability only any time you could cast a sorcery.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grinning_ignus.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/116.jpg
 Oracle:{R}, Return Grinning Ignus to its owner's hand: Add {2}{R} to your mana pool. Activate this ability only any time you could cast a sorcery.
+SetInfo:FUT Common

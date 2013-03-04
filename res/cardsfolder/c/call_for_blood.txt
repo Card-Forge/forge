@@ -4,7 +4,6 @@ Types:Instant Arcane
 A:SP$ Pump | Cost$ 4 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -X | NumDef$ -X | References$ X | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the sacrificed creature's power.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_for_blood.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/63.jpg
 Oracle:As an additional cost to cast Call for Blood, sacrifice a creature.\nTarget creature gets -X/-X until end of turn, where X is the sacrificed creature's power.
+SetInfo:BOK Common

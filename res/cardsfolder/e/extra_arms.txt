@@ -7,7 +7,6 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerZone
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | DamageSource$ TriggeredAttacker | NumDmg$ 2
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/extra_arms.jpg
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/92.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks, it deals 2 damage to target creature or player.
+SetInfo:SCG Uncommon

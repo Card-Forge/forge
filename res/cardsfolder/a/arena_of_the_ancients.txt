@@ -6,8 +6,7 @@ K:Permanents don't untap during their controllers' untap steps:Creature.Legendar
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all legendary creatures.
 SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Creature.Legendary
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arena_of_the_ancients.jpg
 Oracle:Legendary creatures don't untap during their controllers' untap steps.\nWhen Arena of the Ancients enters the battlefield, tap all legendary creatures.
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/71.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/215.jpg
+SetInfo:CHR Rare
+SetInfo:LEG Rare

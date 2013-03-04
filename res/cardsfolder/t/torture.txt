@@ -4,9 +4,8 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 A:AB$ PutCounter | Cost$ 1 B | Defined$ Enchanted | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on enchanted creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torture.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/23.jpg|2
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/61.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/80.jpg
 Oracle:Enchant creature\n{1}{B}: Put a -1/-1 counter on enchanted creature.
+SetInfo:5ED Common
+SetInfo:SHM Common
+SetInfo:HML Common x2

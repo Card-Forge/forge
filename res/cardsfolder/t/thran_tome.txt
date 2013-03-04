@@ -6,7 +6,6 @@ SVar:DBChoose:DB$ ChooseCard | ValidTgts$ Opponent | Choices$ Card.IsRemembered 
 SVar:DBDig:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | Defined$ ChosenCard | Shuffle$ False | StackDescription$ None | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_tome.jpg
 Oracle:{5}, {T}: Reveal the top three cards of your library. Target opponent chooses one of those cards. Put that card into your graveyard, then draw two cards.
-SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/160.jpg
+SetInfo:WTH Rare

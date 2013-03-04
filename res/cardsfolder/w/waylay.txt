@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Instant
 A:SP$ Token | Cost$ 2 W | TokenAmount$ 3 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ At the beginning of the end step, exile CARDNAME. | SpellDescription$ Put three 2/2 white Knight creature tokens onto the battlefield. Exile them at the beginning of the next cleanup step.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waylay.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/56.jpg
 Oracle:Put three 2/2 white Knight creature tokens onto the battlefield. Exile them at the beginning of the next cleanup step.
+SetInfo:USG Uncommon

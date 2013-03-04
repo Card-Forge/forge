@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Protection from white | Description$ Enchanted creature gets +2/+1 and has protection from white.
 K:Madness:B
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strength_of_lunacy.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/86.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 and has protection from white.\nMadness {B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
+SetInfo:TOR Uncommon

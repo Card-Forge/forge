@@ -5,7 +5,6 @@ A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:DB1:DB$DealDamage | NumDmg$ 3 | Defined$ You | SubAbility$ DB2
 SVar:DB2:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_cannonade.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/172.jpg
 Oracle:Orcish Cannonade deals 2 damage to target creature or player and 3 damage to you.\nDraw a card.
+SetInfo:TSP Common

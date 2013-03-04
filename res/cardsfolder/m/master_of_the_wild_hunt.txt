@@ -4,7 +4,6 @@ Types:Creature Human Shaman
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, put a 2/2 green Wolf creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_the_wild_hunt.jpg
-SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/191.jpg
 Oracle:At the beginning of your upkeep, put a 2/2 green Wolf creature token onto the battlefield.\n{T}: Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.
+SetInfo:M10 Mythic

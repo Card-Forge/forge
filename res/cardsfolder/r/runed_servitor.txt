@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each player draws a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ Each | NumCards$ 1 | SpellDescription$ Each player draws a card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_servitor.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/224.jpg
 Oracle:When Runed Servitor dies, each player draws a card.
+SetInfo:ROE Uncommon
+SetInfo:DDF Uncommon

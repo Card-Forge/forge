@@ -5,7 +5,6 @@ K:Cumulative upkeep:1
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a noncreature spell, you may draw a card unless that player pays 4.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | UnlessCost$ 4 | UnlessPayer$ TriggeredPlayer | NumCards$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_remora.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/87.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhenever an opponent casts a noncreature spell, you may draw a card unless that player pays {4}.
+SetInfo:ICE Common

@@ -4,7 +4,6 @@ Types:Creature Wurm
 PT:7/7
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ Whenever CARDNAME attacks, destroy all other creatures.
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.Other
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/novablast_wurm.jpg
-SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/119.jpg
 Oracle:Whenever Novablast Wurm attacks, destroy all other creatures.
+SetInfo:WWK Mythic

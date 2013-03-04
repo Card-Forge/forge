@@ -12,7 +12,6 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 A:SP$ Attach | Cost$ W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ward_of_lights.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/251.jpg
 Oracle:You may cast Ward of Lights as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant creature\nAs Ward of Lights enters the battlefield, choose a color.\nEnchanted creature has protection from the chosen color. This effect doesn't remove Ward of Lights.
+SetInfo:MIR Common

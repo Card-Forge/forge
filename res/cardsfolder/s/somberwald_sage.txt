@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Creature Human Druid
 PT:0/1
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | RestrictValid$ Card.Creature | SpellDescription$ Add three mana of any one color to your mana pool. Spend this mana only to cast creature spells.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somberwald_sage.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/194.jpg
 Oracle:{T}: Add three mana of any one color to your mana pool. Spend this mana only to cast creature spells.
+SetInfo:AVR Rare

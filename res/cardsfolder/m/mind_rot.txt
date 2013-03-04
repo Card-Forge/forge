@@ -2,18 +2,17 @@ Name:Mind Rot
 ManaCost:2 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_rot.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/144.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/147.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/24.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/18.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/145.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/159.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/105.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/105.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/100.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/101.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/70.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/83.jpg
 Oracle:Target player discards two cards.
+SetInfo:PO2 Common
+SetInfo:S99 Common
+SetInfo:7ED Common
+SetInfo:9ED Common
+SetInfo:10E Common
+SetInfo:M11 Common
+SetInfo:M10 Common
+SetInfo:M13 Common
+SetInfo:M12 Common
+SetInfo:RTR Common
+SetInfo:8ED Common
+SetInfo:POR Common

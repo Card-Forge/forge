@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Choose target land. | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petravark.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/109.jpg
 Oracle:When Petravark enters the battlefield, exile target land.\nWhen Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SetInfo:TOR Common

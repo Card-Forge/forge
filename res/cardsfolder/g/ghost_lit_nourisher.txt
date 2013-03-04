@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:2/1
 A:AB$ Pump | Cost$ 2 G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 A:AB$ Pump | Cost$ 3 G Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | PrecostDesc$ Channel - | SpellDescription$ Target creature gets +4/+4 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_lit_nourisher.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/131.jpg
 Oracle:{2}{G}, {T}: Target creature gets +2/+2 until end of turn.\nChannel - {3}{G}, Discard Ghost-Lit Nourisher: Target creature gets +4/+4 until end of turn.
+SetInfo:SOK Uncommon

@@ -6,7 +6,6 @@ K:Vanishing:1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature enters the battlefield under your control, put a time counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ TIME | CounterNum$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soultether_golem.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/164.jpg
 Oracle:Vanishing 1 (This permanent enters the battlefield with a time counter on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
+SetInfo:FUT Uncommon

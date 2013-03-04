@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Sliver.Other | EffectZone$ Battlefield | Affected
 SVar:HarmonicETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Sliver.Self | TriggerZones$ Battlefield | Execute$ HarmonicDestroy | TriggerDescription$ When this permanent enters the battlefield, destroy target artifact or enchantment.
 SVar:HarmonicDestroy:DB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment.
 SVar:BuffedBy:Sliver
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmonic_sliver.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/240.jpg
 Oracle:All Slivers have "When this permanent enters the battlefield, destroy target artifact or enchantment."
+SetInfo:TSP Uncommon

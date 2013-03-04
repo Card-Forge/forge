@@ -5,9 +5,8 @@ PT:1/1
 A:AB$ Animate | Cost$ T | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | Power$ X | Toughness$ X | Types$ Creature,Artifact | UntilYourNextUpkeep$ True | SpellDescription$ Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost.
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xenic_poltergeist.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/68.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/57.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/50.jpg
 Oracle:{T}: Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost.
+SetInfo:ATQ Uncommon
+SetInfo:5ED Rare
+SetInfo:4ED Rare

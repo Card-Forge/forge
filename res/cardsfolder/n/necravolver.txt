@@ -14,7 +14,6 @@ SVar:PseudoLifelink:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ VolverT
 SVar:VolverTrigGain:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ VolverX | References$ VolverX
 SVar:VolverX:TriggerCount$DamageAmount
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necravolver.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/46.jpg
 Oracle:Kicker {1}{G} and/or {W} (You may pay an additional {1}{G} and/or {W} as you cast this spell.)\nIf Necravolver was kicked with its {1}{G} kicker, it enters the battlefield with two +1/+1 counters on it and with trample.\nIf Necravolver was kicked with its {W} kicker, it enters the battlefield with a +1/+1 counter on it and with "Whenever Necravolver deals damage, you gain that much life."
+SetInfo:APC Rare

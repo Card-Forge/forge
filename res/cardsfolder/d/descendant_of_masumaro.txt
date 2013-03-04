@@ -9,7 +9,6 @@ SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | C
 SVar:X:Count$InYourHand
 SVar:Y:TargetedPlayer$CardsInHand
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descendant_of_masumaro.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/126.jpg
 Oracle:At the beginning of your upkeep, put a +1/+1 counter on Descendant of Masumaro for each card in your hand, then remove a +1/+1 counter from Descendant of Masumaro for each card in target opponent's hand.
+SetInfo:SOK Uncommon

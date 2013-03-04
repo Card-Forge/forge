@@ -2,7 +2,6 @@ Name:Riding Red Hare
 ManaCost:2 W
 Types:Sorcery
 A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Horsemanship | SpellDescription$ Target creature gets +3/+3 and gains horsemanship until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riding_red_hare.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/18.jpg
 Oracle:Target creature gets +3/+3 and gains horsemanship until end of turn. (It can't be blocked except by creatures with horsemanship.)
+SetInfo:PTK Common

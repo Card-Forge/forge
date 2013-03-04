@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flight_of_fancy.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/49.jpg
 Oracle:Enchant creature\nWhen Flight of Fancy enters the battlefield, draw two cards.\nEnchanted creature has flying.
+SetInfo:RAV Common

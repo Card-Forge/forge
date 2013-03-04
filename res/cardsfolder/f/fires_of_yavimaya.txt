@@ -3,8 +3,9 @@ ManaCost:1 R G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_yavimaya.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/92.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/246.jpg
 Oracle:Creatures you control have haste.\nSacrifice Fires of Yavimaya: Target creature gets +2/+2 until end of turn.
+SetInfo:PC2 Uncommon
+SetInfo:ARC Uncommon
+SetInfo:HOP Uncommon
+SetInfo:INV Uncommon

@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each other creature you control.
 SVar:X:Count$Valid Creature.NotEnchantedBy+YouCtrl
 SVar:BuffedBy:Creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bravado.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/177.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each other creature you control.
+SetInfo:USG Common

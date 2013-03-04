@@ -6,7 +6,6 @@ A:AB$ ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Exile | TgtPrompt$
 SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenging_ooze.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/170.jpg
 Oracle:{G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on Scavenging Ooze and you gain 1 life.
+SetInfo:COM Rare

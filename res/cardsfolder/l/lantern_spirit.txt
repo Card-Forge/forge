@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:2/1
 K:Flying
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lantern_spirit.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/62.jpg
 Oracle:Flying\n{U}: Return Lantern Spirit to its owner's hand.
+SetInfo:ISD Uncommon

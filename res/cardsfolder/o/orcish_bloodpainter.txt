@@ -4,7 +4,6 @@ Types:Creature Orc Shaman
 PT:2/1
 A:AB$ DealDamage | Cost$ T Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_bloodpainter.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/94.jpg
 Oracle:{T}, Sacrifice a creature: Orcish Bloodpainter deals 1 damage to target creature or player.
+SetInfo:CSP Common

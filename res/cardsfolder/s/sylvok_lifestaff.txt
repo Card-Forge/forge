@@ -5,7 +5,6 @@ K:Equip  1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EquippedBy | Execute$ TrigGainLife | TriggerDescription$ Whenever equipped creature is put into a graveyard, you gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvok_lifestaff.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/209.jpg
 Oracle:Equipped creature gets +1/+0.\nWhenever equipped creature dies, you gain 3 life.\nEquip {1}
+SetInfo:SOM Common

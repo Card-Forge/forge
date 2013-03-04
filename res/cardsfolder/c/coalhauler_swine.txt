@@ -6,7 +6,6 @@ T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ X | Defined$ Each | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coalhauler_swine.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/119.jpg
 Oracle:Whenever Coalhauler Swine is dealt damage, it deals that much damage to each player.
+SetInfo:RAV Common

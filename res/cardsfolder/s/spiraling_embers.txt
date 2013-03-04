@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Sorcery Arcane
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature or player equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiraling_embers.jpg
-SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/116.jpg
 Oracle:Spiraling Embers deals damage to target creature or player equal to the number of cards in your hand.
+SetInfo:SOK Common

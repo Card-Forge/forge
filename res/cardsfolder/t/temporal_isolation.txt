@@ -5,7 +5,6 @@ K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shadow | AddHiddenKeyword$ Prevent all damage that would be dealt by CARDNAME. | Description$ Enchanted creature has shadow. Prevent all damage that would be dealt by enchanted creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_isolation.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/43.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature has shadow. (It can block or be blocked by only creatures with shadow.)\nPrevent all damage that would be dealt by enchanted creature.
+SetInfo:TSP Common

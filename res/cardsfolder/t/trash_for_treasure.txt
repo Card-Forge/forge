@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 R Sac<1/Artifact> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to the battlefield.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trash_for_treasure.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/109.jpg
 Oracle:As an additional cost to cast Trash for Treasure, sacrifice an artifact.\nReturn target artifact card from your graveyard to the battlefield.
+SetInfo:MRD Rare

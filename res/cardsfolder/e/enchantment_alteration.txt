@@ -7,7 +7,7 @@ SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Permanen
 SVar:AlterationAttach:DB$ Attach | Object$ ParentTarget | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enchantment_alteration.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/72.jpg
-SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/19.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/53.jpg
 Oracle:Attach target Aura attached to a creature or land to another permanent of that type.
+SetInfo:CHR Uncommon
+SetInfo:LEG Common
+SetInfo:USG Uncommon

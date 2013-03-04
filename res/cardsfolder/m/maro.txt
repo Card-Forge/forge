@@ -5,11 +5,10 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maro.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/264.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/241.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/126.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/254.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/256.jpg
 Oracle:Maro's power and toughness are each equal to the number of cards in your hand.
+SetInfo:8ED Rare
+SetInfo:7ED Rare
+SetInfo:MIR Rare
+SetInfo:6ED Rare
+SetInfo:9ED Rare

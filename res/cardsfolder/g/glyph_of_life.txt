@@ -7,7 +7,6 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | Defined$ You | Refere
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glyph_of_life.jpg
 Oracle:Until end of turn, whenever an attacking creature deals damage to target Wall creature, you gain that much life.
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/184.jpg
+SetInfo:LEG Common

@@ -5,7 +5,6 @@ PT:3/3
 K:Flying
 K:Protection from black
 K:Suspend:3:1 W
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskrider_peregrine.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/14.jpg
 Oracle:Flying, protection from black\nSuspend 3-{1}{W} (Rather than cast this card from your hand, you may pay {1}{W} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
+SetInfo:TSP Uncommon

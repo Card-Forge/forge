@@ -5,7 +5,6 @@ PT:2/3
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Hand | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME is put into your hand from your graveyard, you gain 2 life.
 K:Dredge 2
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_brownscale.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/166.jpg
 Oracle:When Golgari Brownscale is put into your hand from your graveyard, you gain 2 life.\nDredge 2 (If you would draw a card, instead you may put exactly two cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
+SetInfo:RAV Common

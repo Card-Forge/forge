@@ -4,5 +4,5 @@ Types:Creature Thrull
 PT:1/1
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dutiful_thrull.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/11.jpg
 Oracle:{B}: Regenerate Dutiful Thrull.
+SetInfo:GTC Common

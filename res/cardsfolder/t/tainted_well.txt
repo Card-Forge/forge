@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 2 B | ValidTgts$ Land | AILogic$ ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Swamp | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is a Swamp.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_well.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/126.jpg
 Oracle:Enchant land\nWhen Tainted Well enters the battlefield, draw a card.\nEnchanted land is a Swamp.
+SetInfo:INV Common

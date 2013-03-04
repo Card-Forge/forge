@@ -5,7 +5,6 @@ PT:1/3
 A:AB$ RepeatEach | Cost$ 2 GU Untap | ValidTgts$ Permanent | RepeatCounters$ True | RepeatSubAbility$ DoubleCounters | SpellDescription$ For each counter on target permanent, put another of those counters on that permanent. | StackDescription$ SpellDescription | AILogic$ DoubleCounters | SubAbility$ DBCleanup
 SVar:DoubleCounters:DB$ PutCounter | Defined$ Targeted | CounterType$ RepeatSVarCounter | CounterNum$ RepeatCounterAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilder_bairn.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/152.jpg
 Oracle:{2}{G/U}, {Q}: For each counter on target permanent, put another of those counters on that permanent. ({Q} is the untap symbol.)
+SetInfo:EVE Uncommon

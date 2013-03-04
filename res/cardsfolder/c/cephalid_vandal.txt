@@ -7,7 +7,6 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SHRED
 SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ X | References$ X
 SVar:X:Count$CardCounters.SHRED
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_vandal.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/31.jpg
 Oracle:At the beginning of your upkeep, put a shred counter on Cephalid Vandal. Then put the top card of your library into your graveyard for each shred counter on Cephalid Vandal.
+SetInfo:TOR Rare

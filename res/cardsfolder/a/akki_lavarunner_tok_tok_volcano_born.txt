@@ -7,7 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ T
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_lavarunner.jpg
 AlternateMode:Flip
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/153.jpg
 Oracle:Haste\nWhenever Akki Lavarunner deals damage to an opponent, flip it.
 
 ALTERNATE
@@ -24,5 +23,5 @@ SVar:DmgPlus1:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ 
 SVar:DmgPlus1Combat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tok_tok_volcano_born.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/313.jpg
 Oracle:Protection from red\nIf a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.
+SetInfo:CHK Rare

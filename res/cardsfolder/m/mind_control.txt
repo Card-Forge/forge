@@ -5,9 +5,8 @@ Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ GainControl
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_control.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/67.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/63.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/67.jpg
 Oracle:Enchant creature\nYou control enchanted creature.
+SetInfo:M11 Uncommon
+SetInfo:M10 Uncommon
+SetInfo:M12 Uncommon

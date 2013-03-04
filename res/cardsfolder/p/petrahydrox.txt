@@ -5,7 +5,6 @@ PT:3/3
 T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.
 SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petrahydrox.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/148.jpg
 Oracle:({U/R} can be paid with either {U} or {R}.)\nWhen Petrahydrox becomes the target of a spell or ability, return Petrahydrox to its owner's hand.
+SetInfo:GPT Common

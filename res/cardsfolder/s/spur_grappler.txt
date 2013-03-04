@@ -5,7 +5,6 @@ PT:2/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME gets +2/+1 as long as you control no untapped lands.
 SVar:X:Count$Valid Land.YouCtrl+untapped
 SVar:BuffedBy:Card.nonLand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spur_grappler.jpg
-SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/104.jpg
 Oracle:Spur Grappler gets +2/+1 as long as you control no untapped lands.
+SetInfo:PCY Common

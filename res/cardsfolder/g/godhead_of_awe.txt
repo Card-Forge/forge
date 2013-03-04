@@ -4,7 +4,6 @@ Types:Creature Spirit Avatar
 PT:4/4
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Other | SetPower$ 1 | SetToughness$ 1 | Description$ Other creatures are 1/1.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godhead_of_awe.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/142.jpg
 Oracle:Flying\nOther creatures are 1/1.
+SetInfo:SHM Rare

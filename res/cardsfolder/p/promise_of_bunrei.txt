@@ -6,7 +6,6 @@ SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrif
 SVar:DBToken:DB$ Token | TokenAmount$ 4 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/promise_of_bunrei.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/24.jpg
 Oracle:When a creature you control dies, sacrifice Promise of Bunrei. If you do, put four 1/1 colorless Spirit creature tokens onto the battlefield.
+SetInfo:SOK Rare

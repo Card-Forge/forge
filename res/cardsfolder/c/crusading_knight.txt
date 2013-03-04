@@ -6,7 +6,6 @@ K:Protection from black
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Swamp your opponents control.
 SVar:X:Count$Valid Swamp.OppCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crusading_knight.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/12.jpg
 Oracle:Protection from black\nCrusading Knight gets +1/+1 for each Swamp your opponents control.
+SetInfo:INV Rare

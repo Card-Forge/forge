@@ -3,8 +3,7 @@ ManaCost:4
 Types:Artifact
 A:AB$ PutCounter | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P0P1 | CounterNum$ X | References$ X | SpellDescription$ Put X +0/+1 counters on target creature, where X is that creature's converted mana cost.
 SVar:X:Targeted$CardManaCost
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_armor.jpg
 Oracle:{T}, Sacrifice Living Armor: Put X +0/+1 counters on target creature, where X is that creature's converted mana cost.
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/101.jpg
-SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/83.jpg
+SetInfo:CHR Common
+SetInfo:DRK Uncommon

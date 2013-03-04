@@ -3,7 +3,6 @@ ManaCost:6 R R
 Types:Creature Avatar
 PT:7/7
 K:Damage that would be dealt by CARDNAME can't be prevented.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/excruciator.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/121.jpg
 Oracle:Damage that would be dealt by Excruciator can't be prevented.
+SetInfo:RAV Rare

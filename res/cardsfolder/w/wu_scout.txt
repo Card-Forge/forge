@@ -5,7 +5,6 @@ PT:1/1
 K:Horsemanship
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When CARDNAME enters the battlefield, look at target opponent's hand.
 SVar:TrigPeek:AB$RevealHand | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_scout.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/62.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhen Wu Scout enters the battlefield, look at target opponent's hand.
+SetInfo:PTK Common

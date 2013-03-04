@@ -5,7 +5,6 @@ A:SP$ Effect | Cost$ U | Name$ High Tide Effect | Triggers$ IslandTrigger | SVar
 SVar:IslandTrigger:Mode$ TapsForMana | ValidCard$ Island | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever a player taps an Island for mana, that player adds U to his or her mana pool (in addition to the mana the land produces).
 SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ U | Amount$ 1 | Defined$ TriggeredPlayer
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_tide.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/35.jpg|3
 Oracle:Until end of turn, whenever a player taps an Island for mana, that player adds {U} to his or her mana pool (in addition to the mana the land produces).
+SetInfo:FEM Common x3

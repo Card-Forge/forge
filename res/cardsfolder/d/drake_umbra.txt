@@ -5,7 +5,6 @@ K:Enchant creature
 K:Totem armor
 A:SP$ Attach | Cost$ 4 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Flying | Description$ Enchanted creature gets +3/+3 and has flying.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_umbra.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/63.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3 and has flying.\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
+SetInfo:ROE Uncommon

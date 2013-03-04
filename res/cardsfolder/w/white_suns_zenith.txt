@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Token | Cost$ X W W W | TokenAmount$ X | References$ X | TokenName$ Cat | TokenTypes$ Creature,Cat | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | SubAbility$ DBShuffle | SpellDescription$ Put X 2/2 white Cat creature tokens onto the battlefield. Shuffle CARDNAME into its owner's library.
 SVar:X:Count$xPaid
 SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/white_suns_zenith.jpg
-SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/19.jpg
 Oracle:Put X 2/2 white Cat creature tokens onto the battlefield. Shuffle White Sun's Zenith into its owner's library.
+SetInfo:MBS Rare

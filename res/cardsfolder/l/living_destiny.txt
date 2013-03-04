@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ GainLife | Cost$ 3 G Reveal<1/Creature> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the revealed card's converted mana cost.
 SVar:X:Revealed$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_destiny.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/195.jpg
 Oracle:As an additional cost to cast Living Destiny, reveal a creature card from your hand.\nYou gain life equal to the revealed card's converted mana cost.
+SetInfo:ROE Common

@@ -4,7 +4,6 @@ Types:Creature Bird
 PT:3/1
 K:Flying
 A:AB$ Regenerate | Cost$ 1 B Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wake_of_vultures.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/24.jpg
 Oracle:Flying\n{1}{B}, Sacrifice a creature: Regenerate Wake of Vultures.
+SetInfo:VIS Common

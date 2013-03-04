@@ -2,7 +2,6 @@ Name:Alpha Tyrranax
 ManaCost:4 G G
 Types:Creature Beast
 PT:6/5
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_tyrranax.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/109.jpg
 Oracle:
+SetInfo:SOM Common

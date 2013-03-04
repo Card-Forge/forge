@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Instant
 A:SP$ Tap | Cost$ 2 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SpellDescription$ Tap up to two target creatures. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repel_the_darkness.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/42.jpg
 Oracle:Tap up to two target creatures.\nDraw a card.
+SetInfo:ROE Common

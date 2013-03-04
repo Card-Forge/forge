@@ -6,8 +6,7 @@ SVar:DBToken:DB$Token | TokenAmount$ ForestOpp | References$ ForestOpp | TokenNa
 SVar:ForestYou:Count$Valid Forest.untapped+YouCtrl
 SVar:ForestOpp:Count$Valid Forest.untapped+YouDontCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waiting_in_the_weeds.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/266.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/150.jpg
 Oracle:Each player puts a 1/1 green Cat creature token onto the battlefield for each untapped Forest he or she controls.
+SetInfo:MIR Rare
+SetInfo:6ED Rare

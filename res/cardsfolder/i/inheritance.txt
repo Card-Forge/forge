@@ -3,7 +3,6 @@ ManaCost:W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, you may pay 3. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 3 | Defined$ You | NumCards$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inheritance.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/130.jpg
 Oracle:Whenever a creature dies, you may pay {3}. If you do, draw a card.
+SetInfo:ALL Uncommon

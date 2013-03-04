@@ -5,7 +5,6 @@ PT:2/4
 K:Morph:W W
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, creatures you control get +0/+2 until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | NumDef$ +2
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defender_of_the_order.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/11.jpg
 Oracle:Morph {W}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Defender of the Order is turned face up, creatures you control get +0/+2 until end of turn.
+SetInfo:LGN Rare

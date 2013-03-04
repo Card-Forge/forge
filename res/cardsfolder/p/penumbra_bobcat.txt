@@ -4,7 +4,6 @@ Types:Creature Cat
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put a 2/1 black Cat creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Cat | TokenTypes$ Creature,Cat | TokenOwner$ TriggeredCardController | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26815.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/82.jpg
 Oracle:When Penumbra Bobcat dies, put a 2/1 black Cat creature token onto the battlefield.
+SetInfo:APC Common

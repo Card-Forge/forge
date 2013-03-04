@@ -2,8 +2,7 @@ Name:Rivals' Duel
 ManaCost:3 R
 Types:Sorcery
 A:SP$ Fight | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetsWithoutSameCreatureType$ True | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Choose two target creatures that share no creature types. Those creatures fight each other. (Each deals damage equal to its power to the other.)
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rivals_duel.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/51.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/99.jpg
 Oracle:Choose two target creatures that share no creature types. Those creatures fight each other. (Each deals damage equal to its power to the other.)
+SetInfo:PC2 Uncommon
+SetInfo:MOR Uncommon

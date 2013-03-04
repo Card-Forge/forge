@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/+1
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Exalted | Description$ Creatures you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/dauntless_escort_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/dauntless-escort.jpg
 Oracle:Hand +1, life +1\nCreatures you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)
+SetInfo:VAN Special

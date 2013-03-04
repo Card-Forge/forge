@@ -5,7 +5,6 @@ PT:1/2
 K:Flash
 K:Flying
 S:Mode$ PreventDamage | Target$ Creature,Player | Source$ Spell | Amount$ 1 | Description$ If a spell would deal damage to a creature or player, prevent 1 damage that spell would deal to that creature or player.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_pegasus.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/34.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nIf a spell would deal damage to a creature or player, prevent 1 damage that spell would deal to that creature or player.
+SetInfo:TSP Uncommon

@@ -8,7 +8,6 @@ SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBDiscard | Optiona
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murder_of_crows.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/70.jpg
 Oracle:Flying\nWhenever another creature dies, you may draw a card. If you do, discard a card.
+SetInfo:ISD Uncommon

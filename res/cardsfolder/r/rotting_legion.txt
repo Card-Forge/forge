@@ -3,7 +3,6 @@ ManaCost:4 B
 Types:Creature Zombie
 PT:4/5
 K:CARDNAME enters the battlefield tapped.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_legion.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/115.jpg
 Oracle:Rotting Legion enters the battlefield tapped.
+SetInfo:M11 Common

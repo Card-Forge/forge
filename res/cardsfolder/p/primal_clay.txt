@@ -8,12 +8,11 @@ SVar:GroundMold:DB$ Animate | Defined$ Self | Permanent$ True | Power$ 3 | Tough
 SVar:AirMold:DB$ Animate | Defined$ Self | Permanent$ True | Power$ 2 | Toughness$ 2 | Keywords$ Flying | SpellDescription$ CARDNAME is 2/2 with flying
 SVar:WallMold:DB$ Animate | Defined$ Self | Permanent$ True | Power$ 1 | Toughness$ 6 | Types$ Wall | Keywords$ Defender | SpellDescription$ CARDNAME is 1/6 with defender and is a wall in addition to its other types
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2065.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/395.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/360.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/308.jpg
-SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/210.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/271.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/26.jpg
 Oracle:As Primal Clay enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
+SetInfo:6ED Rare
+SetInfo:ATQ Uncommon
+SetInfo:M13 Uncommon
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

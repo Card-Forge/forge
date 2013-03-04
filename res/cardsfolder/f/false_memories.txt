@@ -5,7 +5,6 @@ A:SP$ Mill | Cost$ 1 U | NumCards$ 7 | SubAbility$ DelTrig | SpellDescription$ P
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigExile | TriggerDescription$ At the beginning of the next end step, exile seven cards from your graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.YouCtrl | ChangeNum$ 7 | Hidden$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_memories.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/37.jpg
 Oracle:Put the top seven cards of your library into your graveyard. At the beginning of the next end step, exile seven cards from your graveyard.
+SetInfo:TOR Rare

@@ -5,7 +5,6 @@ PT:5/5
 K:Protection from white
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 5 life.
 SVar:TrigLoseLife:DB$LoseLife | Cost$ 0 | LifeAmount$ 5
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eviscerator.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/52.jpg
 Oracle:Protection from white\nWhen Eviscerator enters the battlefield, you lose 5 life.
+SetInfo:ULG Rare

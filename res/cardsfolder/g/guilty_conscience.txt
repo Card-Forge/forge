@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ SpecificCard
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, CARDNAME deals that much damage to that creature.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredSource | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guilty_conscience.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/17.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage, Guilty Conscience deals that much damage to that creature.
+SetInfo:SCG Common

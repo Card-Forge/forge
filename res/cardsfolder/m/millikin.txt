@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact Creature Construct
 PT:0/1
 A:AB$ Mana | Cost$ T Mill<1> | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/millikin.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/302.jpg
 Oracle:{T}, Put the top card of your library into your graveyard: Add {1} to your mana pool.
+SetInfo:ODY Uncommon

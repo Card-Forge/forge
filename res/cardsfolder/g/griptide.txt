@@ -2,7 +2,6 @@ Name:Griptide
 ManaCost:3 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griptide.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/38.jpg
 Oracle:Put target creature on top of its owner's library.
+SetInfo:DKA Common

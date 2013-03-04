@@ -4,7 +4,6 @@ Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigAetherDig | TriggerController$ TriggeredPlayer | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player reveals the top card of his or her library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield.
 SVar:TrigAetherDig:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 1 | Reveal$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ 0 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Artifact,Creature,Enchantment,Land
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gate_to_the_aether.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/174.jpg
 Oracle:At the beginning of each player's upkeep, that player reveals the top card of his or her library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield.
+SetInfo:MRD Rare

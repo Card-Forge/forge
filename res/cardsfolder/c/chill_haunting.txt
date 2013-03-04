@@ -5,7 +5,6 @@ A:SP$ Pump | Cost$ 1 B ExileFromGrave<X/Creature> | ValidTgts$ Creature | TgtPro
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chill_haunting.jpg
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/60.jpg
 Oracle:As an additional cost to cast Chill Haunting, exile X creature cards from your graveyard.\nTarget creature gets -X/-X until end of turn.
+SetInfo:SCG Uncommon

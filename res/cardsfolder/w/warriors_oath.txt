@@ -3,7 +3,6 @@ ManaCost:R R
 Types:Sorcery
 A:SP$ AddTurn | Cost$ R R | NumTurns$ 1 | LoseAtEndStep$ True | SpellDescription$ Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warriors_oath.jpg
-SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/124.jpg
 Oracle:Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
+SetInfo:PTK Rare

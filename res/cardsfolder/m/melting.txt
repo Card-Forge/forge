@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Land | RemoveType$ Snow | Description$ All lands are no longer snow.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/melting.jpg
 Oracle:All lands are no longer snow.
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/201.jpg
+SetInfo:ICE Uncommon

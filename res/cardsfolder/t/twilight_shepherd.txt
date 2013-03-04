@@ -7,7 +7,7 @@ K:Vigilance
 K:Persist
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return to your hand all cards in your graveyard that were put there from the battlefield this turn.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ ThisTurnEntered_Graveyard_from_Battlefield_Card.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twilight_shepherd.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/25.jpg
 Oracle:Flying, vigilance\nWhen Twilight Shepherd enters the battlefield, return to your hand all cards in your graveyard that were put there from the battlefield this turn.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+SetInfo:DDC Rare
+SetInfo:SHM Rare

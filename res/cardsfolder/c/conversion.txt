@@ -4,11 +4,10 @@ Types:Enchantment
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W W
 S:Mode$ Continuous | Affected$ Mountain | AddType$ Plains | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ All Mountains are Plains.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conversion.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/199.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/201.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/198.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/269.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/200.jpg
 Oracle:At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.\nAll Mountains are Plains.
+SetInfo:2ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

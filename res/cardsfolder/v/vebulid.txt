@@ -10,5 +10,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | Co
 SVar:DelTrigDestroy:Mode$ Phase | Phase$ EndCombat | Execute$ TrigDestroy | TriggerDescription$ Destroy CARDNAME at end of combat.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vebulid.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/165.jpg
 Oracle:Vebulid enters the battlefield with a +1/+1 counter on it.\nAt the beginning of your upkeep, you may put a +1/+1 counter on Vebulid.\nWhen Vebulid attacks or blocks, destroy it at end of combat.
+SetInfo:USG Rare

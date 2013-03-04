@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each player may search his or her library for a card and put that card into his or her hand. Then each player who searched his or her library this way shuffles it.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | DefinedPlayer$ Each | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Shuffle$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_benefactor.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/44.jpg
 Oracle:When Noble Benefactor dies, each player may search his or her library for a card and put that card into his or her hand. Then each player who searched his or her library this way shuffles it.
+SetInfo:WTH Uncommon

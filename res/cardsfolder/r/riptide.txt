@@ -3,7 +3,6 @@ ManaCost:U
 Types:Instant
 A:SP$ TapAll | Cost$ U | ValidCards$ Creature.Blue | SpellDescription$ Tap all blue creatures.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide.jpg
-SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/34.jpg
 Oracle:Tap all blue creatures.
+SetInfo:DRK Common

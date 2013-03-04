@@ -5,7 +5,6 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, destroy target white creature. It can't be regenerated.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.White | NoRegen$ True | TgtPrompt$ Select target white creature.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_bloodstock.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/50.jpg
 Oracle:When Phyrexian Bloodstock leaves the battlefield, destroy target white creature. It can't be regenerated.
+SetInfo:PLS Common

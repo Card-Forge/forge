@@ -6,7 +6,6 @@ A:AB$ Mana | Cost$ BG T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to
 A:AB$ Mana | Cost$ BG T | Produced$ B G | SpellDescription$ Add B G to your mana pool.
 A:AB$ Mana | Cost$ BG T | Produced$ B | Amount$ 2 | SpellDescription$ Add B B to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twilight_mire.jpg
-SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/180.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{B/G}, {T}: Add {B}{B}, {B}{G}, or {G}{G} to your mana pool.
+SetInfo:EVE Rare

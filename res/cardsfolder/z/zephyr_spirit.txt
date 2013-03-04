@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:0/6
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME blocks, return it to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zephyr_spirit.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/76.jpg
 Oracle:When Zephyr Spirit blocks, return it to its owner's hand.
+SetInfo:RAV Common

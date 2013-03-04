@@ -9,5 +9,5 @@ SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Remembered | Count
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shambling_swarm.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/82.jpg
 Oracle:When Shambling Swarm dies, distribute three -1/-1 counters among one, two, or three target creatures. For each -1/-1 counter you put on a creature this way, remove a -1/-1 counter from that creature at the beginning of the next end step.
+SetInfo:TOR Rare

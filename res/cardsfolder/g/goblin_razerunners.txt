@@ -7,6 +7,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X
 SVar:X:Count$CardCounters.P1P1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_razerunners.jpg
-SVar:Rarity:Rare
-SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/64.jpg
 Oracle:{1}{R}, Sacrifice a land: Put a +1/+1 counter on Goblin Razerunners.\nAt the beginning of your end step, you may have Goblin Razerunners deal damage equal to the number of +1/+1 counters on it to target player.
+SetInfo:CFX Rare

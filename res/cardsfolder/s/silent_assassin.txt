@@ -6,7 +6,6 @@ A:AB$ Effect | Cost$ 3 B | ValidTgts$ Creature.blocking | Name$ Assassin Trackin
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | Execute$ TrigDestroy | TriggerDescription$ Destroy the blocking creature at end of combat.
 SVar:TrigDestroy:DB$ Destroy | Defined$ Remembered | SpellDescription$ Destroy the blocking creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_assassin.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/160.jpg
 Oracle:{3}{B}: Destroy target blocking creature at end of combat.
+SetInfo:MMQ Rare

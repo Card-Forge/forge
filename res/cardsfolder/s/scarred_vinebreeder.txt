@@ -4,7 +4,6 @@ Types:Creature Elf Shaman
 PT:1/1
 A:AB$ Pump | Cost$ 2 B ExileFromGrave<1/Elf> | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarred_vinebreeder.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/138.jpg
 Oracle:{2}{B}, Exile an Elf card from your graveyard: Scarred Vinebreeder gets +3/+3 until end of turn.
+SetInfo:LRW Common

@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddPower$ 1 | AddT
 S:Mode$ Continuous | Affected$ Creature.White+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures you control get +1/+1.
 A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenName$ Voja | TokenTypes$ Legendary,Creature,Wolf | TokenOwner$ You | TokenColors$ Green,White | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put a legendary 2/2 green and white Wolf creature token named Voja onto the battlefield.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolsimir_wolfblood.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/236.jpg
 Oracle:Other green creatures you control get +1/+1.\nOther white creatures you control get +1/+1.\n{T}: Put a legendary 2/2 green and white Wolf creature token named Voja onto the battlefield.
+SetInfo:RAV Rare

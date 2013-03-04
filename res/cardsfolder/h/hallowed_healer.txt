@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:1/1
 A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to target creature or player this turn.
 A:AB$ PreventDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ 4 | Activation$ Threshold | PrecostDesc$ Threshold - | SpellDescription$ Prevent the next 4 damage that would be dealt to target creature or player this turn. Activate this ability only if seven or more cards are in your graveyard.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hallowed_healer.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/25.jpg
 Oracle:{T}: Prevent the next 2 damage that would be dealt to target creature or player this turn.\nThreshold - {T}: Prevent the next 4 damage that would be dealt to target creature or player this turn. Activate this ability only if seven or more cards are in your graveyard.
+SetInfo:ODY Common

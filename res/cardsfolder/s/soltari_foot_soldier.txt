@@ -3,7 +3,6 @@ ManaCost:W
 Types:Creature Soltari Soldier
 PT:1/1
 K:Shadow
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_foot_soldier.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/255.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)
+SetInfo:TMP Common

@@ -9,8 +9,8 @@ SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separat
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
 SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_of_uthuun.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/69.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/76.jpg
 Oracle:Flying\nWhen Sphinx of Uthuun enters the battlefield, reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
+SetInfo:DDI Rare
+SetInfo:M12 Rare
+SetInfo:M13 Rare

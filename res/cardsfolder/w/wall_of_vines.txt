@@ -4,7 +4,6 @@ Types:Creature Plant Wall
 PT:0/3
 K:Defender
 K:Reach
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_vines.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/199.jpg
 Oracle:Defender (This creature can't attack.)\nReach (This creature can block creatures with flying.)
+SetInfo:M11 Common

@@ -4,7 +4,6 @@ Types:Creature Sliver
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Trample | Description$ All Sliver creatures have trample.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_sliver.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/95.jpg
 Oracle:All Sliver creatures have trample.
+SetInfo:PLC Common

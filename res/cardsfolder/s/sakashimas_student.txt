@@ -6,7 +6,6 @@ A:AB$ ChangeZone | Cost$ 1 U Return<1/Creature.attacking+unblocked> | CostDesc$ 
 K:ETBReplacement:Copy:ChooseCreature:Optional
 SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | AddTypes$ Ninja
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sakashimas_student.jpg
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/24.jpg
 Oracle:Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nYou may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
+SetInfo:PC2 Rare

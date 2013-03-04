@@ -10,7 +10,6 @@ SVar:X:Remembered$Amount
 A:AB$DealDamage | Cost$ 4 ExileFromGrave<1/Creature> | NumDmg$ 4 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | SpellDescription$ CARDNAME deals 4 damage to target creature or player.
 A:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_tail_masticore.jpg
-SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/177.jpg
 Oracle:At the beginning of your upkeep, sacrifice Molten-Tail Masticore unless you discard a card.\n{4}, Exile a creature card from your graveyard: Molten-Tail Masticore deals 4 damage to target creature or player.\n{2}: Regenerate Molten-Tail Masticore.
+SetInfo:SOM Mythic

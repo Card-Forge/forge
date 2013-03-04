@@ -3,8 +3,7 @@ ManaCost:1 B B
 Types:Instant
 A:SP$ Destroy | Cost$ 1 B B | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creatures | SubAbility$ DBLoseLife | SpellDescription$ Destroy two target nonblack creatures. You lose 5 life.
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 5
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_spite.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/46.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/121.jpg
 Oracle:Destroy two target nonblack creatures. You lose 5 life.
+SetInfo:TMP Uncommon
+SetInfo:INV Uncommon

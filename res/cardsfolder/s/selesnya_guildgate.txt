@@ -4,7 +4,6 @@ Types:Land Gate
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_guildgate.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/246.jpg
 Oracle:Selesnya Guildgate enters the battlefield tapped.\n{T}: Add {G} or {W} to your mana pool.
+SetInfo:RTR Common

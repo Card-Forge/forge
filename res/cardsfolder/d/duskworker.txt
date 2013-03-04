@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigRegen | TriggerDescription$ Whenever CARDNAME becomes blocked, regenerate it.
 A:AB$ Pump | Cost$ 3 | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:TrigRegen:AB$Regenerate | Cost$ 0 | Defined$ Self
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskworker.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/166.jpg
 Oracle:Whenever Duskworker becomes blocked, regenerate it.\n{3}: Duskworker gets +1/+0 until end of turn.
+SetInfo:MRD Uncommon

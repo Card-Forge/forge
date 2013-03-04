@@ -5,7 +5,6 @@ PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 5/5 Wurm creature token with trample onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wurm | TokenTypes$ Creature,Wurm | TokenOwner$ TriggeredCardController | TokenColors$ Green | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Trample | TokenImage$ g 5 5 wurm rtr
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armada_wurm.jpg
-SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/143.jpg
 Oracle:Trample\nWhen Armada Wurm enters the battlefield, put a 5/5 green Wurm creature token with trample onto the battlefield.
+SetInfo:RTR Mythic

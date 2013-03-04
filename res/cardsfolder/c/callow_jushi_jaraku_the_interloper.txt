@@ -8,7 +8,6 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | 
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/callow_jushi.jpg
 AlternateMode:Flip
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/31.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Callow Jushi.\nAt the beginning of the end step, if there are two or more ki counters on Callow Jushi, you may flip it.
 
 ALTERNATE
@@ -21,6 +20,6 @@ PT:3/4
 A:AB$ Counter | Cost$ SubCounter<1/KI> | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell. | Destination$ Graveyard | UnlessCost$ 2 | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays 2.
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/jaraku_the_interloper.jpg
 # This link may be a temporary solution and could change in the near future.
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/167.jpg
 Oracle:Remove a ki counter from Jaraku the Interloper: Counter target spell unless its controller pays {2}.
 
+SetInfo:BOK Uncommon

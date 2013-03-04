@@ -9,7 +9,7 @@ SVar:DBRevealHand:DB$ RevealHand | Defined$ TriggeredTarget | RememberRevealed$ 
 SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredTarget | NumDmg$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.ChosenColor
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaaz_the_igniter.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/243.jpg
 Oracle:Flying\nWhenever Darigaaz, the Igniter deals combat damage to a player, you may pay {2}{R}. If you do, choose a color, then that player reveals his or her hand and Darigaaz deals damage to the player equal to the number of cards of that color revealed this way.
+SetInfo:DDE Rare
+SetInfo:INV Rare

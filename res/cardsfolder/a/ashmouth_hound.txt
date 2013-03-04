@@ -6,7 +6,6 @@ T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self  | Execu
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self  | Execute$ TrigDamageBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
 SVar:TrigDamageAttacker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 1
 SVar:TrigDamageBlocker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashmouth_hound.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/128.jpg
 Oracle:Whenever Ashmouth Hound blocks or becomes blocked by a creature, Ashmouth Hound deals 1 damage to that creature.
+SetInfo:ISD Common

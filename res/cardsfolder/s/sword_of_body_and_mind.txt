@@ -6,7 +6,7 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wolf | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | SubAbility$ DBMill
 SVar:DBMill:DB$Mill | Defined$ TriggeredTarget | NumCards$ 10
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_body_and_mind.jpg
-SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/208.jpg
 Oracle:Equipped creature gets +2/+2 and has protection from green and from blue.\nWhenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.\nEquip {2}
+SetInfo:V10 Mythic
+SetInfo:SOM Mythic

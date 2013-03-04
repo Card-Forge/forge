@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Dig | Cost$ 2 B | DigNum$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | AnyNumber$ True | DestinationZone$ Exile | LibraryPosition2$ 0 | SpellDescription$ Look at the top three cards of target player's library. Exile any number of those cards, then put the rest back in any order.
 K:Transmute:1 B B
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_machinations.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/84.jpg
 Oracle:Look at the top three cards of target player's library. Exile any number of those cards, then put the rest back in any order.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
+SetInfo:RAV Uncommon

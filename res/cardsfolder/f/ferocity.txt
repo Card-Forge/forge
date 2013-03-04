@@ -7,7 +7,6 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.AttachedBy | Execute$ TrigPutCounter |
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | Execute$ TrigPutCounter2 | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredAttacker | CounterType$ P1P1 | CounterNum$ 1
 SVar:TrigPutCounter2:AB$PutCounter | Cost$ 0 | Defined$ TriggeredBlocker | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ferocity.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/245.jpg
 Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked, you may put a +1/+1 counter on it.
+SetInfo:MMQ Common

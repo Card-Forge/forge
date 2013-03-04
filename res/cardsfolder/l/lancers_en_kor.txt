@@ -15,7 +15,6 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:X:ReplaceCount$DamageAmount/Minus.1
 SVar:Y:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lancers_en_kor.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/108.jpg
 Oracle:Trample\n{0}: The next 1 damage that would be dealt to Lancers en-Kor this turn is dealt to target creature you control instead.
+SetInfo:STH Uncommon

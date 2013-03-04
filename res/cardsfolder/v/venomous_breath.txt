@@ -5,8 +5,7 @@ A:SP$ Effect | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | TriggerZones$ Command | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockedRemembered,Creature.blockedByRemembered
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venomous_breath.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/281.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/161.jpg
 Oracle:Choose target creature. At end of combat, destroy all creatures that blocked or were blocked by it this turn.
+SetInfo:ICE Uncommon
+SetInfo:MMQ Uncommon

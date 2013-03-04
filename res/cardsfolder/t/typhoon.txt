@@ -6,7 +6,6 @@ SVar:TyphoonDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | References$ X
 SVar:X:Count$Valid Island.RememberedPlayerCtrl
 SVar:AIPlayForSub:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/typhoon.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/123.jpg
 Oracle:Typhoon deals damage to each opponent equal to the number of Islands that player controls.
+SetInfo:LEG Rare

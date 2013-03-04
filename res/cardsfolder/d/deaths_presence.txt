@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X | References$ X
 SVar:X:TriggeredCard$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_presence.jpg
-SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/121.jpg
 Oracle:Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.
+SetInfo:RTR Rare

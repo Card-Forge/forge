@@ -2,7 +2,6 @@ Name:Double Negative
 ManaCost:U U R
 Types:Instant
 A:SP$ Counter | Cost$ U U R | TargetType$ Spell | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Counter up to two target spells.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/double_negative.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/87.jpg
 Oracle:Counter up to two target spells.
+SetInfo:ARB Uncommon

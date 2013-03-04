@@ -5,8 +5,7 @@ PT:5/4
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +X | NumDef$ +X | References$ X
 SVar:X:TriggerCount$NumBlockers/Times.2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gang_of_elk.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/102.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/247.jpg
 Oracle:Whenever Gang of Elk becomes blocked, it gets +2/+2 until end of turn for each creature blocking it.
+SetInfo:ULG Uncommon
+SetInfo:7ED Uncommon

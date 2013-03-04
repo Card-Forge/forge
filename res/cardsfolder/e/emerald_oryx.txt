@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Creature Antelope
 PT:2/3
 K:Forestwalk
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emerald_oryx.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/179.jpg
 Oracle:Forestwalk (This creature is unblockable as long as defending player controls a Forest.)
+SetInfo:M10 Common

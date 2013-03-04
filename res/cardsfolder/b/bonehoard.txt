@@ -5,7 +5,6 @@ K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +X/+X, where X is the number of creature cards in all graveyards.
 K:Living Weapon
 SVar:X:Count$TypeInAllYards.Creature
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonehoard.jpg
-SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/100.jpg
 Oracle:Living weapon (When this Equipment enters the battlefield, put a 0/0 black Germ creature token onto the battlefield, then attach this to it.)\nEquipped creature gets +X/+X, where X is the number of creature cards in all graveyards.\nEquip {2}
+SetInfo:MBS Rare

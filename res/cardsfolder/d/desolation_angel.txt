@@ -10,7 +10,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigKicker:DB$DestroyAll | Cost$ 0 | ValidCards$ Land | SpellDescription$ CARDNAME destroys all land.
 SVar:RemRandomDeck:True
 DeckNeeds:Color$white
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation_angel.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/38.jpg
 Oracle:Kicker {W}{W} (You may pay an additional {W}{W} as you cast this spell.)\nFlying\nWhen Desolation Angel enters the battlefield, destroy all lands you control. If it was kicked, destroy all lands instead.
+SetInfo:APC Rare

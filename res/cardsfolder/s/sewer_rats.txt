@@ -3,7 +3,6 @@ ManaCost:B
 Types:Creature Rat
 PT:1/1
 A:AB$ Pump | Cost$ B PayLife<1> | Defined$ Self | NumAtt$ +1 | ActivationLimit$ 3 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability no more than three times each turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewer_rats.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/37.jpg
 Oracle:{B}, Pay 1 life: Sewer Rats gets +1/+0 until end of turn. Activate this ability no more than three times each turn.
+SetInfo:MIR Common

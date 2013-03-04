@@ -5,7 +5,6 @@ PT:3/3
 T:Mode$ AttackerBlocked | ValidCard$ Beast | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Beast becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ +X | NumDef$ +X | References$ X
 SVar:X:TriggerCount$NumBlockers
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/berserk_murlodont.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/117.jpg
 Oracle:Whenever a Beast becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
+SetInfo:LGN Common

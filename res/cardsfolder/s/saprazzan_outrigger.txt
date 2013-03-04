@@ -7,7 +7,6 @@ T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | Secondary$ Tru
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | Execute$ TrigChange | TriggerDescription$ Put CARDNAME on top of its owner’s library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_outrigger.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/101.jpg
 Oracle:When Saprazzan Outrigger attacks or blocks, put it on top of its owner's library at end of combat.
+SetInfo:MMQ Common

@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Creature.cmcGE6 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a creature spell with converted mana cost 6 or more, put three +1/+1 counters on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kurgadon.jpg
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/124.jpg
 Oracle:Whenever you cast a creature spell with converted mana cost 6 or greater, put three +1/+1 counters on Kurgadon.
+SetInfo:SCG Uncommon

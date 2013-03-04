@@ -5,8 +5,7 @@ A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ Combo Any | Amount$ 2 | AILog
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 K:CARDNAME enters the battlefield tapped.
-SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terrarion.jpg
 Oracle:Terrarion enters the battlefield tapped.\n{2}, {T}, Sacrifice Terrarion: Add two mana in any combination of colors to your mana pool.\nWhen Terrarion is put into a graveyard from the battlefield, draw a card.
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/273.jpg
+SetInfo:RAV Common

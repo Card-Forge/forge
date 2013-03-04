@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 3 R Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or player.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artillerize.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/79.jpg
 Oracle:As an additional cost to cast Artillerize, sacrifice an artifact or creature.\nArtillerize deals 5 damage to target creature or player.
+SetInfo:NPH Common

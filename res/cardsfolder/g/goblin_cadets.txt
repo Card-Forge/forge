@@ -8,8 +8,7 @@ SVar:ChangeControl:AB$GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Opponen
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
 SVar:SacMe:1
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_cadets.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/189.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/125.jpg
 Oracle:Whenever Goblin Cadets blocks or becomes blocked, target opponent gains control of it. (This removes Goblin Cadets from combat.)
+SetInfo:COM Uncommon
+SetInfo:USG Uncommon

@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Enchantment
 A:AB$ DamageAll | Cost$ R Sac<1/Land> | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_vein.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/203.jpg
 Oracle:{R}, Sacrifice a land: Magma Vein deals 1 damage to each creature without flying.
+SetInfo:ODY Uncommon

@@ -6,8 +6,8 @@ S:Mode$ Continuous | Affected$ Creature.Zombie+Other+YouCtrl | AddPower$ 1 | Add
 A:AB$ ChangeZone | Cost$ 2 B T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard.  Put a 2/2 black Zombie creature token onto the battlefield.
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cemetery_reaper.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/87.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/86.jpg
 Oracle:Other Zombie creatures you control get +1/+1.\n{2}{B}, {T}: Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.
+SetInfo:M10 Rare
+SetInfo:M12 Rare
+SetInfo:ARC Rare

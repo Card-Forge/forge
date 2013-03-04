@@ -2,9 +2,8 @@ Name:Counsel of the Soratami
 ManaCost:2 U
 Types:Sorcery
 A:SP$Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counsel_of_the_soratami.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/55.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/69.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/76.jpg
 Oracle:Draw two cards.
+SetInfo:CHK Common
+SetInfo:9ED Common
+SetInfo:10E Common

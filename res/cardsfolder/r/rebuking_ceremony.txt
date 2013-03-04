@@ -2,7 +2,6 @@ Name:Rebuking Ceremony
 ManaCost:3 G G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 G G | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Library | SpellDescription$ Put two target artifacts on top of their owners' libraries.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuking_ceremony.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/82.jpg
 Oracle:Put two target artifacts on top of their owners' libraries.
+SetInfo:DST Rare

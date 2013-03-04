@@ -5,7 +5,6 @@ PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other |TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When another creature enters the battlefield, sacrifice Mogg Bombers. If you do, it deals 3 damage to target player.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBDamage | RememberSacrificed$ True
 SVar:DBDamage:DB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card.Self
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_bombers.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/91.jpg
 Oracle:When another creature enters the battlefield, sacrifice Mogg Bombers. If you do, it deals 3 damage to target player.
+SetInfo:STH Common

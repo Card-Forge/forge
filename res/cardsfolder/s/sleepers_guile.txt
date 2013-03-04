@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Fear | Descrip
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:SacMe:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleepers_guile.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/67.jpg
 Oracle:Enchant creature\nEnchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)\nWhen Sleeper's Guile is put into a graveyard from the battlefield, return Sleeper's Guile to its owner's hand.
+SetInfo:ULG Common

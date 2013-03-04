@@ -6,5 +6,5 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell | ValidTarge
 SVar:DmgMinus1:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Minus.1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benevolent_unicorn.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/208.jpg
 Oracle:If a spell would deal damage to a creature or player, it deals that much damage minus 1 to that creature or player instead.
+SetInfo:MIR Common

@@ -5,7 +5,6 @@ PT:1/1
 A:AB$ NameCard | Cost$ T | Defined$ You | ValidCards$ Card.Creature | ValidDesc$ creature | SubAbility$ DBDig | SpellDescription$ Name a creature card. Reveal the top four cards of your library and put all of them with that name into your hand. Put the rest into your graveyard.
 SVar:DBDig:DB$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card.NamedCard | DestinationZone2$ Graveyard
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wood_sage.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/350.jpg
 Oracle:{T}: Name a creature card. Reveal the top four cards of your library and put all of them with that name into your hand. Put the rest into your graveyard.
+SetInfo:TMP Rare

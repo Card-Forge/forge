@@ -4,7 +4,6 @@ Types:Artifact Creature Human Rogue
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact card in your graveyard.
 SVar:X:Count$TypeInYourYard.Artifact
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_slasher.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/52.jpg
 Oracle:Salvage Slasher gets +1/+0 for each artifact card in your graveyard.
+SetInfo:CFX Common

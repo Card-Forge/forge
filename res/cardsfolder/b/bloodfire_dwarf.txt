@@ -3,7 +3,6 @@ ManaCost:R
 Types:Creature Dwarf
 PT:1/1
 A:AB$ DamageAll | Cost$ R Sac<1/CARDNAME> | ValidCards$ Creature.withoutFlying | NumDmg$ 1 | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_dwarf.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/56.jpg
 Oracle:{R}, Sacrifice Bloodfire Dwarf: Bloodfire Dwarf deals 1 damage to each creature without flying.
+SetInfo:APC Common

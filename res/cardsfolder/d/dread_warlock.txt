@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 Text:CARDNAME can't be blocked except by black creatures.
 PT:2/2
 K:CantBeBlockedBy Creature.nonBlack
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_warlock.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/94.jpg
 Oracle:Dread Warlock can't be blocked except by black creatures.
+SetInfo:M10 Common

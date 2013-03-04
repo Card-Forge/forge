@@ -4,13 +4,12 @@ Types:Creature Human Soldier
 PT:2/5
 A:AB$ Effect | Cost$ T | Name$ Kjeldoran Royal Guard Effect | ReplacementEffects$ DamageEvent | SVars$ RoyalGuardIntercept,InterceptedX | RememberObjects$ Self | AILogic$ Fog | SpellDescription$ All combat damage that would be dealt to you by unblocked creatures this turn is dealt to CARDNAME instead.
 SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ RoyalGuardIntercept | IsCombat$ True | Description$ All combat damage that would be dealt to you by unblocked creatures this turn is dealt to Kjeldoran Royal Guard instead.
-SVar:RoyalGuardIntercept:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ InterceptedX | References$ InterceptedX 
+SVar:RoyalGuardIntercept:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ InterceptedX | References$ InterceptedX
 SVar:InterceptedX:ReplaceCount$DamageAmount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_royal_guard.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/320.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/28.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/23.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/262.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/25.jpg
 Oracle:{T}: All combat damage that would be dealt to you by unblocked creatures this turn is dealt to Kjeldoran Royal Guard instead.
+SetInfo:ICE Rare
+SetInfo:5ED Rare
+SetInfo:7ED Rare
+SetInfo:6ED Rare
+SetInfo:10E Rare

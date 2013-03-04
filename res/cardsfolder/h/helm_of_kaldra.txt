@@ -10,7 +10,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HelmX:Count$Valid Equipment.YouCtrl+namedSword of Kaldra,Equipment.YouCtrl+namedShield of Kaldra
 SVar:HelmY:Remembered$Amount
 DeckHints:Name$Sword of Kaldra|Shield of Kaldra
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_kaldra.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/131.jpg
 Oracle:Equipped creature has first strike, trample, and haste.\n{1}: If you control Equipment named Helm of Kaldra, Sword of Kaldra, and Shield of Kaldra, put a legendary 4/4 colorless Avatar creature token named Kaldra onto the battlefield and attach those Equipment to it.\nEquip {2}
+SetInfo:MBP Rare
+SetInfo:5DN Rare

@@ -6,7 +6,6 @@ K:CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +2 | NumDef$ +2
 SVar:BuffedBy:Land
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hagra_crocodile.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/94.jpg
 Oracle:Hagra Crocodile can't block.\nLandfall - Whenever a land enters the battlefield under your control, Hagra Crocodile gets +2/+2 until end of turn.
+SetInfo:ZEN Common

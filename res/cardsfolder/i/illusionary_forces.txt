@@ -4,7 +4,6 @@ Types:Creature Illusion
 PT:4/4
 K:Flying
 K:Cumulative upkeep:U
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_forces.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/75.jpg
 Oracle:Flying\nCumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
+SetInfo:ICE Common

@@ -4,8 +4,7 @@ Types:Creature Pegasus
 PT:2/1
 K:Flying
 K:First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pegasus_charger.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/30.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/34.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nFirst strike (This creature deals combat damage before creatures without first strike.)
+SetInfo:9ED Common
+SetInfo:USG Common

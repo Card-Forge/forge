@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.O
 SVar:TrigMill:AB$Mill | Cost$ 0 | ValidTgts$ Player | NumCards$ X | TgtPrompt$ Select a target player. | References$ X | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of Allies you control.
 SVar:X:Count$Valid Ally.YouCtrl
 SVar:BuffedBy:Ally
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halimar_excavator.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/29.jpg
 Oracle:Whenever Halimar Excavator or another Ally enters the battlefield under your control, target player puts the top X cards of his or her library into his or her graveyard, where X is the number of Allies you control.
+SetInfo:WWK Common

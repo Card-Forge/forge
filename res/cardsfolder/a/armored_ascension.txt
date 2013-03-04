@@ -6,9 +6,8 @@ A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Flying | Description$ Enchanted creature gets +1/+1 for each Plains you control and has flying.
 SVar:X:Count$TypeYouCtrl.Plains
 SVar:BuffedBy:Plains
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_ascension.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/5.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/3.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/2.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each Plains you control and has flying.
+SetInfo:M11 Uncommon
+SetInfo:M10 Uncommon
+SetInfo:SHM Uncommon

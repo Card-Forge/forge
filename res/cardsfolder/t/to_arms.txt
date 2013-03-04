@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Instant
 A:SP$ UntapAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/to_arms.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/20.jpg
 Oracle:Untap all creatures you control.\nDraw a card.
+SetInfo:GPT Uncommon

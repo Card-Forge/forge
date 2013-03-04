@@ -20,5 +20,5 @@ SVar:RemRandomDeck:True
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Permanent.YouCtrl+cmcGE5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hypergenesis.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/201.jpg
 Oracle:Sorcery\nSuspend 3- {1}{G}{G} (Rather than cast this card from your hand, pay {1}{G}{G} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nStarting with you, each player may put an artifact, creature, enchantment, or land card from his or her hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
+SetInfo:TSP Rare

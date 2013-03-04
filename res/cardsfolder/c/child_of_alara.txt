@@ -5,7 +5,6 @@ PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, destroy all nonland permanents. They can't be regenerated.
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Permanent.nonLand | NoRegen$ True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_alara.jpg
-SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/101.jpg
 Oracle:Trample\nWhen Child of Alara dies, destroy all nonland permanents. They can't be regenerated.
+SetInfo:CFX Mythic

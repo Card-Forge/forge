@@ -6,6 +6,5 @@ A:AB$ Regenerate | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Sele
 A:AB$ Counter | Cost$ W W T Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Enchantment | SpellDescription$ Counter target spell that targets an enchantment.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_martyr.jpg
-SVar:Rarity:Uncommon
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/249.jpg
 Oracle:Sacrifice Vigilant Martyr: Regenerate target creature.\n{W}{W}, {T}, Sacrifice Vigilant Martyr: Counter target spell that targets an enchantment.
+SetInfo:MIR Uncommon

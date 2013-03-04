@@ -10,7 +10,6 @@ S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Descript
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have shroud. (You can't be the target of spells or abilities.)
 S:Mode$ PreventDamage | Target$ You | Description$ Prevent all damage that would be dealt to you.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solitary_confinement.jpg
-SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/24.jpg
 Oracle:At the beginning of your upkeep, sacrifice Solitary Confinement unless you discard a card.\nSkip your draw step.\nYou have shroud. (You can't be the target of spells or abilities.)\nPrevent all damage that would be dealt to you.
+SetInfo:JUD Rare

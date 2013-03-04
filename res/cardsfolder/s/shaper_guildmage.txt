@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:1/1
 A:AB$ Pump | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 A:AB$ Pump | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SpellDescription$ Target creature gets +1/+0 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaper_guildmage.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/91.jpg
 Oracle:{W}, {T}: Target creature gains first strike until end of turn.\n{B}, {T}: Target creature gets +1/+0 until end of turn.
+SetInfo:MIR Common

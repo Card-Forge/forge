@@ -4,7 +4,6 @@ Types:Creature Skeleton
 PT:1/1
 A:AB$ Pump | Cost$ 3 B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Swampwalk | SpellDescription$ Target creature gains swampwalk until end of turn.
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restless_bones.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/58.jpg
 Oracle:{3}{B}, {T}: Target creature gains swampwalk until end of turn.\n{1}{B}: Regenerate Restless Bones.
+SetInfo:GPT Common

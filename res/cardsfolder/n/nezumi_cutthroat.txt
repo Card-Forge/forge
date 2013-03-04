@@ -4,7 +4,6 @@ Types:Creature Rat Warrior
 PT:2/1
 K:Fear
 K:CARDNAME can't block.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80521.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/128.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nNezumi Cutthroat can't block.
+SetInfo:CHK Common

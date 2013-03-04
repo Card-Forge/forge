@@ -4,7 +4,6 @@ Types:Instant
 K:Flashback 6 B
 A:SP$ Dig | Cost$ 2 U | DigNum$ 4 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_alchemy.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/55.jpg
 Oracle:Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.\nFlashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:ISD Common

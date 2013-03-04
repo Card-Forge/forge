@@ -2,8 +2,7 @@ Name:Devoted Hero
 ManaCost:W
 Types:Creature Elf Soldier
 PT:1/2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21057.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/13.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/175.jpg
 Oracle:
+SetInfo:S99 Common
+SetInfo:POR Common

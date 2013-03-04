@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Goblin Warrior
 PT:2/2
 A:AB$ Pump | Cost$ Sac<1/Artifact> | Defined$ Self | NumAtt$ 1 | KW$ First Strike | SpellDescription$ CARDNAME gets +1/+0 and gains first strike until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_grunt.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/97.jpg
 Oracle:Sacrifice an artifact: Krark-Clan Grunt gets +1/+0 and gains first strike until end of turn.
+SetInfo:MRD Common

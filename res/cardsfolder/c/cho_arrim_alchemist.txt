@@ -9,7 +9,6 @@ SVar:GainLifeInstead:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ E
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:ReplaceCount$DamageAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cho_arrim_alchemist.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/8.jpg
 Oracle:{1}{W}{W}, {T}, Discard a card: The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.
+SetInfo:MMQ Rare

@@ -6,7 +6,6 @@ SVar:ChooseFreeze:DB$ Animate | ValidTgts$ Permanent.nonSnow | TgtPrompt$ Select
 SVar:ChooseThaw:DB$ Animate | ValidTgts$ Permanent.Snow | TgtPrompt$ Select target snow permanent | RemoveTypes$ Snow | SubAbility$ ThermalDraw | SpellDescription$ Target snow permanent isn't snow until end of turn.
 SVar:ThermalDraw:DB$ Draw | NumCards$ 1 | NextUpkeep$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thermal_flux.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/49.jpg
 Oracle:Choose one - Target nonsnow permanent becomes snow until end of turn; or target snow permanent isn't snow until end of turn.\nDraw a card at the beginning of the next turn's upkeep.
+SetInfo:CSP Common

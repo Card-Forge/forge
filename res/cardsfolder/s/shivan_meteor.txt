@@ -3,7 +3,6 @@ ManaCost:3 R R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 13 | SpellDescription$ CARDNAME deals 13 damage to target creature.
 K:Suspend:2:1 R R
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_meteor.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/106.jpg
 Oracle:Shivan Meteor deals 13 damage to target creature.\nSuspend 2-{1}{R}{R} (Rather than cast this card from your hand, you may pay {1}{R}{R} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
+SetInfo:PLC Uncommon

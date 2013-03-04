@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:5/5
 K:CARDNAME can't be countered.
 S:Mode$ Continuous | Affected$ Creature.powerGE5+YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Creature spells you control with power 5 or greater can't be countered.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbreaker_behemoth.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/60.jpg
 Oracle:Spellbreaker Behemoth can't be countered.\nCreature spells you control with power 5 or greater can't be countered.
+SetInfo:ARB Rare

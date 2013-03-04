@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigMesmericExile:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True
 SVar:TrigMesmericBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBMesmericCleanup
 SVar:DBMesmericCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_fiend.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/69.jpg
 Oracle:When Mesmeric Fiend enters the battlefield, target opponent reveals his or her hand and you choose a nonland card from it. Exile that card.\nWhen Mesmeric Fiend leaves the battlefield, return the exiled card to its owner's hand.
+SetInfo:TOR Common

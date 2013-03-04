@@ -2,7 +2,6 @@ Name:Lay of the Land
 ManaCost:G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_of_the_land.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/81.jpg
 Oracle:Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
+SetInfo:APC Common

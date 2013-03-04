@@ -12,7 +12,6 @@ SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Optional$ True | SacValid$ Card.Isl
 SVar:DBDestroyMe:DB$ Destroy | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_allergy.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/33.jpg
 Oracle:As Psychic Allergy enters the battlefield, choose a color.\nAt the beginning of each opponent's upkeep, Psychic Allergy deals X damage to that player, where X is the number of nontoken permanents of the chosen color he or she controls.\nAt the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.
+SetInfo:DRK Rare

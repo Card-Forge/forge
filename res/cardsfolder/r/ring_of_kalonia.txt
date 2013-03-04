@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:KaloniaCounter:AB$PutCounter | Cost$ 0 | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Green | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Green
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_kalonia.jpg
-SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/212.jpg
 Oracle:Equipped creature has trample. (If it would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)\nAt the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's green.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:M13 Uncommon

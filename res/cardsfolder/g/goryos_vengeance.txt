@@ -5,7 +5,6 @@ A:SP$ ChangeZone | Cost$ 1 B  | Origin$ Graveyard | Destination$ Battlefield | V
 SVar:DBPump:DB$Pump | KW$ Haste & HIDDEN At the beginning of the end step, exile CARDNAME. | Defined$ Targeted
 K:Splice onto Arcane 2 B
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goryos_vengeance.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/67.jpg
 Oracle:Return target legendary creature card from your graveyard to the battlefield. That creature gains haste. Exile it at the beginning of the next end step.\nSplice onto Arcane {2}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+SetInfo:BOK Rare

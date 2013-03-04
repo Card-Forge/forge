@@ -2,7 +2,6 @@ Name:Uncanny Speed
 ManaCost:1 R
 Types:Instant
 A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ Haste | SpellDescription$ Target creature gets +3/+0 and gains haste until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uncanny_speed.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/163.jpg
 Oracle:Target creature gets +3/+0 and gains haste until end of turn.
+SetInfo:AVR Common

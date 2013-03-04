@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 A:AB$ Pump | Cost$ W | TgtPrompt$ Choose target creature | ValidTgts$ Creature |  NumAtt$ +1 | NumDef$ +1 | ActivationZone$ Hand | ActivationLimit$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | PrecostDesc$ Forecast - | CostDesc$ W, Reveal CARDNAME from your hand: | SpellDescription$ Target creature gets +1/+1 until end of turn. (Activate this ability only during your upkeep and only once each turn.)
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steeling_stance.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/18.jpg
 Oracle:Creatures you control get +1/+1 until end of turn.\nForecast - {W}, Reveal Steeling Stance from your hand: Target creature gets +1/+1 until end of turn. (Activate this ability only during your upkeep and only once each turn.)
+SetInfo:DIS Common

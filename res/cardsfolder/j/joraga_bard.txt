@@ -8,7 +8,6 @@ SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Ally.YouCtrl | KW$ Vigilance
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_bard.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/166.jpg
 Oracle:Whenever Joraga Bard or another Ally enters the battlefield under your control, you may have Ally creatures you control gain vigilance until end of turn.
+SetInfo:ZEN Common

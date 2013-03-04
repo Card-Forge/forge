@@ -3,8 +3,7 @@ ManaCost:G
 Types:Creature Elf
 PT:0/1
 K:All creatures able to block CARDNAME do so.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taunting_elf.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/122.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/290.jpg
 Oracle:All creatures able to block Taunting Elf do so.
+SetInfo:ONS Common
+SetInfo:UDS Common

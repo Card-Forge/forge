@@ -6,9 +6,8 @@ A:AB$ Mana | Cost$ T | Produced$ U B | SpellDescription$ Add U B to your mana po
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_aqueduct.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/276.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/116.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/270.jpg
 Oracle:Dimir Aqueduct enters the battlefield tapped.\nWhen Dimir Aqueduct enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {U}{B} to your mana pool.
+SetInfo:RAV Common
+SetInfo:PC2 Common
+SetInfo:COM Common

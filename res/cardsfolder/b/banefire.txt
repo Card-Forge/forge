@@ -6,7 +6,6 @@ SVar:BanefulDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | NoPrevention$ T
 S:Mode$ Continuous | Affected$ Self | AffectedZone$ Stack | EffectZone$ All | CharacteristicDefining$ True | AddHiddenKeyword$ CARDNAME can't be countered. | CheckSVar$ X | SVarCompare$ GE5 | Description$ If X is 5 or more, CARDNAME can't be countered by spells or abilities and the damage can't be prevented.
 SVar:X:Count$xPaid
 Var:PayX:5
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/banefire.jpg
-SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/58.jpg
 Oracle:Banefire deals X damage to target creature or player.\nIf X is 5 or more, Banefire can't be countered by spells or abilities and the damage can't be prevented.
+SetInfo:CFX Rare

@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Vampire you control is put into a graveyard from the battlefield, you may pay B. If you do, target player loses 2 life and you gain 2 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kalastria_highborn.jpg
-SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/59.jpg
 Oracle:Whenever Kalastria Highborn or another Vampire you control dies, you may pay {B}. If you do, target player loses 2 life and you gain 2 life.
+SetInfo:WWK Rare

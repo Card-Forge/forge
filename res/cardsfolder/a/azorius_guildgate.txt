@@ -4,7 +4,6 @@ Types:Land Gate
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_guildgate.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/237.jpg
 Oracle:Azorius Guildgate enters the battlefield tapped.\n{T}: Add {W} or {U} to your mana pool.
+SetInfo:RTR Common

@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME attacks or blocks, other Human creatures you control get +1/+1 until end of turn
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPumpAll | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, other Human creatures you control get +1/+1 until end of turn
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.Other+Human+YouCtrl | NumAtt$ +1 | NumDef$ +1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hamlet_captain.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/187.jpg
 Oracle:Whenever Hamlet Captain attacks or blocks, other Human creatures you control get +1/+1 until end of turn.
+SetInfo:ISD Uncommon

@@ -4,9 +4,8 @@ Types:Artifact
 S:Mode$ RaiseCost | Activator$ You | Type$ Spell | Amount$ 3  | Condition$ NotPlayerTurn | Description$ Each spell costs 3 more to cast except during its controller's turn.
 S:Mode$ RaiseCost | Activator$ Opponent | Type$ Spell | Amount$ 3 | Condition$ PlayerTurn
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defense_grid.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/296.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/293.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/125.jpg
 Oracle:Each spell costs {3} more to cast except during its controller's turn.
+SetInfo:8ED Rare
+SetInfo:ULG Rare
+SetInfo:9ED Rare

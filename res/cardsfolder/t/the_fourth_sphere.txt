@@ -9,7 +9,6 @@ T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ Rolle
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_fourth_sphere.jpg
-SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/the-fourth-sphere.jpg
 Oracle:At the beginning of your upkeep, sacrifice a nonblack creature.\nWhenever you roll {C}, put a 2/2 black Zombie creature token onto the battlefield.
+SetInfo:HOP Common

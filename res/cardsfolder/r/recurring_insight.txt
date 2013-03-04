@@ -7,5 +7,5 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | References$ X
 SVar:X:TargetedPlayer$CardsInHand
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recurring_insight.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/82.jpg
 Oracle:Draw cards equal to the number of cards in target opponent's hand.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
+SetInfo:ROE Rare

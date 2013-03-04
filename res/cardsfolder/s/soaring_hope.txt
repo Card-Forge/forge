@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Descr
 A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put CARDNAME on top of its owner's library.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soaring_hope.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/40.jpg
 Oracle:Enchant creature\nWhen Soaring Hope enters the battlefield, you gain 3 life.\nEnchanted creature has flying.\n{W}: Put Soaring Hope on top of its owner's library.
+SetInfo:LRW Common

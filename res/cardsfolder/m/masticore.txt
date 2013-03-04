@@ -10,7 +10,7 @@ SVar:X:Remembered$Amount
 A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 A:AB$ DealDamage | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masticore.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/134.jpg
 Oracle:At the beginning of your upkeep, sacrifice Masticore unless you discard a card.\n{2}: Masticore deals 1 damage to target creature.\n{2}: Regenerate Masticore.
+SetInfo:V10 Mythic
+SetInfo:UDS Rare

@@ -5,13 +5,13 @@ PT:3/4
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl+powerLTX | References$ X | TgtPrompt$ Select target creature you control with power less than Stone Giant's. | KW$ Flying & HIDDEN At the beginning of the end step, destroy CARDNAME. | SpellDescription$ Target creature you control with toughness less than CARDNAME's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.
 SVar:X:Count$CardPower
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_giant.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/177.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/178.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/269.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/241.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/159.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/178.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/177.jpg
 Oracle:{T}: Target creature you control with toughness less than Stone Giant's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.
+SetInfo:2ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:DDI Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon
+SetInfo:M10 Uncommon

@@ -7,8 +7,8 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME 
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_elves.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/203.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/132.jpg
 Oracle:As Quirion Elves enters the battlefield, choose a color.\n{T}: Add {G} to your mana pool.\n{T}: Add one mana of the chosen color to your mana pool.
+SetInfo:MIR Common
+SetInfo:DDE Common
+SetInfo:INV Common

@@ -4,7 +4,6 @@ Types:Enchantment
 K:Cumulative upkeep:1
 S:Mode$ Continuous | Affected$ Creature.Green | AddKeyword$ Cumulative upkeep:1 | Description$ Green creatures have "Cumulative upkeep 1."
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breath_of_dreams.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/62.jpg
 Oracle:Cumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nGreen creatures have "Cumulative upkeep {1}."
+SetInfo:ICE Uncommon

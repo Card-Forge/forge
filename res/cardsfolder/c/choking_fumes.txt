@@ -2,7 +2,6 @@ Name:Choking Fumes
 ManaCost:2 W
 Types:Instant
 A:SP$ PutCounterAll | Cost$ 2 W | ValidCards$ Creature.attacking | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on each attacking creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/choking_fumes.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/4.jpg
 Oracle:Put a -1/-1 counter on each attacking creature.
+SetInfo:MBS Uncommon

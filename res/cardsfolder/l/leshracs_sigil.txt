@@ -5,7 +5,6 @@ A:AB$ ChangeZone | Cost$ B B | Origin$ Battlefield | Destination$ Hand | SpellDe
 T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a green spell, you may pay B B. If you do, look at that player's hand and choose a card from it. The player discards that card.
 SVar:TrigDiscard:AB$Discard | Cost$ B B | Defined$ Opponent | NumCards$ 1 | Mode$ RevealYouChoose
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leshracs_sigil.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/32.jpg
 Oracle:Whenever an opponent casts a green spell, you may pay {B}{B}. If you do, look at that player's hand and choose a card from it. The player discards that card.\n{B}{B}: Return Leshrac's Sigil to its owner's hand.
+SetInfo:ICE Uncommon

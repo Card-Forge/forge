@@ -8,5 +8,5 @@ S:Mode$ CantBeCast | ValidCard$ Card.setARN
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/city_in_a_bottle.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/74.jpg
 Oracle:Whenever a nontoken permanent from the Arabian Nights expansion other than City in a Bottle is on the battlefield, its controller sacrifices it.\nPlayers can't play cards from the Arabian Nights expansion.
+SetInfo:ARN Rare

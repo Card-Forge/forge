@@ -8,7 +8,6 @@ SVar:LostTheGuarded:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ B
 SVar:EliteDefence:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_elite_guard.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/258.jpg
 Oracle:{T}: Target creature gets +2/+2 until end of turn. When that creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard. Activate this ability only during combat.
+SetInfo:ICE Uncommon

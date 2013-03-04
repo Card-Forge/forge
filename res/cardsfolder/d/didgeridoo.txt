@@ -3,7 +3,6 @@ ManaCost:1
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 3 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.Minotaur | ChangeNum$ 1 | SpellDescription$ You may put a Minotaur permanent card from your hand onto the battlefield.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/didgeridoo.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/130.jpg
 Oracle:{3}: You may put a Minotaur permanent card from your hand onto the battlefield.
+SetInfo:HML Rare

@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ W Sac<1/Creature> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | CostDesc$ As an additional cost to cast CARDNAME, sacrifice a creature. | References$ X | SpellDescription$ Return any number of target creatures you control to their owner's hand.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scapegoat.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/114.jpg
 Oracle:As an additional cost to cast Scapegoat, sacrifice a creature.\nReturn any number of target creatures you control to their owner's hand.
+SetInfo:STH Uncommon

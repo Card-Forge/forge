@@ -3,8 +3,7 @@ ManaCost:2 U U
 Types:Enchantment
 A:AB$ Tap | Cost$ tapXType<1/Creature> | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature or land | SpellDescription$ Tap target artifact, creature or land.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opposition.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/40.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/92.jpg
 Oracle:Tap an untapped creature you control: Tap target artifact, creature, or land.
+SetInfo:7ED Rare
+SetInfo:UDS Rare

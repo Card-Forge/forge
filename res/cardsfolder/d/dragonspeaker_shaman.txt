@@ -3,7 +3,8 @@ ManaCost:1 R R
 Types:Creature Human Barbarian Shaman
 PT:2/2
 S:Mode$ ReduceCost | ValidCard$ Dragon | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Dragon spells you cast cost 2 less to cast.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragonspeaker_shaman.jpg
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/89.jpg
 Oracle:Dragon spells you cast cost {2} less to cast.
+SetInfo:SCG Uncommon
+SetInfo:ARC Uncommon
+SetInfo:DDG Uncommon

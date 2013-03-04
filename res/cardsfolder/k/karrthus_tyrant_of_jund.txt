@@ -7,7 +7,6 @@ K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, gain control of all Dragons, then untap all Dragons.
 SVar:TrigGainControl:DB$ GainControl | AllValid$ Dragon | Untap$ True | NewController$ You
 S:Mode$ Continuous | Affected$ Creature.Dragon+Other+YouCtrl | AddKeyword$ Haste | Description$ Other Dragon creatures you control have haste.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karrthus_tyrant_of_jund.jpg
-SetInfo:ARB|Mythic|http://magiccards.info/scans/en/arb/117.jpg
 Oracle:Flying, haste\nWhen Karrthus, Tyrant of Jund enters the battlefield, gain control of all Dragons, then untap all Dragons.\nOther Dragon creatures you control have haste.
+SetInfo:ARB Mythic

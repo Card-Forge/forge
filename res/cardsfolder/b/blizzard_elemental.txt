@@ -4,7 +4,6 @@ Types:Creature Elemental
 PT:5/5
 K:Flying
 A:AB$ Untap | Cost$ 3 U | SpellDescription$ Untap CARDNAME.
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card26653.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/27.jpg
 Oracle:Flying\n{3}{U}: Untap Blizzard Elemental.
+SetInfo:UDS Rare

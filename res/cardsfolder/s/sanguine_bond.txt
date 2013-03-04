@@ -5,7 +5,6 @@ T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Tri
 SVar:TrigDrain:AB$LoseLife | Cost$ 0 | ValidTgts$ Opponent | TgtPromp$ Select target opponent | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$LifeAmount
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanguine_bond.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/111.jpg
 Oracle:Whenever you gain life, target opponent loses that much life.
+SetInfo:M10 Rare

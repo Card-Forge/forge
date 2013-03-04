@@ -2,7 +2,6 @@ Name:Skeletal Snake
 ManaCost:1 B
 Types:Creature Snake Skeleton
 PT:2/1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4240.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/34.jpg
 Oracle:
+SetInfo:POR Common

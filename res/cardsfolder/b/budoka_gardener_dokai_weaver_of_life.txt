@@ -8,7 +8,6 @@ SVar:X:Count$Valid Land.YouCtrl
 AlternateMode:Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/budoka_gardener.jpg
 
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/202.jpg
 Oracle:{T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
 
 ALTERNATE
@@ -21,5 +20,5 @@ PT:3/3
 A:AB$Token | Cost$ 4 G G T | TokenAmount$ 1 | TokenName$ Elemental | TokenColors$ Green | TokenTypes$ Creature,Elemental | TokenPower$ X | TokenToughness$ X | TokenOwner$ You | SpellDescription$ Put an X/X green Elemental creature token onto the battlefield, where X is the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dokai_weaver_of_life.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/315.jpg
 Oracle:{4}{G}{G}, {T}: Put an X/X green Elemental creature token onto the battlefield, where X is the number of lands you control.
+SetInfo:CHK Rare

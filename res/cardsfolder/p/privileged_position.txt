@@ -2,7 +2,6 @@ Name:Privileged Position
 ManaCost:2 GW GW GW
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddKeyword$ Hexproof | Description$ Other permanents you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/privileged_position.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/251.jpg
 Oracle:({G/W} can be paid with either {G} or {W}.)\nOther permanents you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
+SetInfo:RAV Rare

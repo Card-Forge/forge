@@ -2,11 +2,10 @@ Name:Holy Day
 ManaCost:W
 Types:Instant
 A:SP$ Fog | Cost$ W | SpellDescription$ Prevent all combat damage that would be dealt this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_day.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/23.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/20.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/189.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/18.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/21.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.
+SetInfo:8ED Common
+SetInfo:10E Common
+SetInfo:LEG Common
+SetInfo:9ED Common
+SetInfo:INV Common

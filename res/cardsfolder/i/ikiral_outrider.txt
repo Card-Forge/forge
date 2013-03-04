@@ -8,7 +8,6 @@ S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 6 | AddKe
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 10 | AddKeyword$ Vigilance | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 3/10 CARDNAME has Vigilance
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE3_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE4_LEVEL
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ikiral_outrider.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/27.jpg
 Oracle:Level up {4} ({4}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-3\n2/6\nVigilance\nLEVEL 4+\n3/10\nVigilance
+SetInfo:ROE Common

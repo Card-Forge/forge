@@ -5,7 +5,6 @@ K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Description$ Enchanted creature gets +1/+1 and has trample.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tiger_claws.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/279.jpg
 Oracle:Flash\nEnchant creature\nEnchanted creature gets +1/+1 and has trample.
+SetInfo:MMQ Common

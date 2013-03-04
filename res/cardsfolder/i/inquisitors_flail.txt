@@ -7,5 +7,5 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.EquippedB
 SVar:DmgTimes2:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisitors_flail.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/227.jpg
 Oracle:If equipped creature would deal combat damage, it deals double that damage instead.\nIf another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead.\nEquip {2}
+SetInfo:ISD Uncommon

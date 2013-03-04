@@ -3,7 +3,6 @@ ManaCost:2 U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Enchantment.Other | AddKeyword$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay 2 | Description$ Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay 2."
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_flux.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/27.jpg
 Oracle:Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."
+SetInfo:ULG Common

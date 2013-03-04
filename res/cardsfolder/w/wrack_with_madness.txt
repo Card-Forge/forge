@@ -5,5 +5,5 @@ A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrack_with_madness.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/107.jpg
 Oracle:Target creature deals damage to itself equal to its power.
+SetInfo:DKA Common

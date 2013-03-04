@@ -4,7 +4,6 @@ Types:Artifact Equipment
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Description$ Equipped creature gets +1/+1 and has trample.
 A:AB$ Attach | Cost$ G G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Attach CARDNAME to target creature you control.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_helm.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/132.jpg
 Oracle:Equipped creature gets +1/+1 and has trample.\n{G}{G}: Attach Horned Helm to target creature you control.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:5DN Common

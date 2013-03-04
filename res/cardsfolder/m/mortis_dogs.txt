@@ -7,7 +7,6 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target player loses life equal to its power.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ MortisX | References$ MortisX
 SVar:MortisX:TriggeredCard$CardPower
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortis_dogs.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/66.jpg
 Oracle:Whenever Mortis Dogs attacks, it gets +2/+0 until end of turn.\nWhen Mortis Dogs dies, target player loses life equal to its power.
+SetInfo:NPH Common

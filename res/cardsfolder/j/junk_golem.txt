@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ SubCounter<1/P1P1> | UnlessPayer$ You
 A:AB$ PutCounter | Cost$ 1 Discard<1/Card> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/junk_golem.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/300.jpg
 Oracle:Junk Golem enters the battlefield with three +1/+1 counters on it.\nAt the beginning of your upkeep, sacrifice Junk Golem unless you remove a +1/+1 counter from it.\n{1}, Discard a card: Put a +1/+1 counter on Junk Golem.
+SetInfo:ODY Rare

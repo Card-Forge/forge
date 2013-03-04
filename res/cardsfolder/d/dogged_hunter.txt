@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Creature Human Nomad
 PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.token | TgtPrompt$ Select target creature token | SpellDescription$ Destroy target creature token.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dogged_hunter.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/20.jpg
 Oracle:{T}: Destroy target creature token.
+SetInfo:ODY Rare

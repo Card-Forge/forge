@@ -3,7 +3,6 @@ ManaCost:1 W W
 Types:Creature Fox Wizard
 PT:2/1
 K:Protection:Spirit,Arcane:Protection from Spirits and from Arcane
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_riftwalker.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/29.jpg
 Oracle:Protection from Spirits and from Arcane
+SetInfo:CHK Common

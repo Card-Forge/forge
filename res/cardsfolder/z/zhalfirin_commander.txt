@@ -4,8 +4,8 @@ Types:Creature Human Knight
 PT:2/2
 K:Flanking
 A:AB$ Pump | Cost$ 1 W W | NumAtt$ +1 | NumDef$ +1 | ValidTgts$ Creature.Knight | TgtPrompt$ Select target Knight creature | SpellDescription$ Target Knight creature gets +1/+1 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhalfirin_commander.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/253.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/18.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\n{1}{W}{W}: Target Knight creature gets +1/+1 until end of turn.
+SetInfo:TSB Special
+SetInfo:DDG Uncommon
+SetInfo:MIR Uncommon

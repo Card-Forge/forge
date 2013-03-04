@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Creature Spirit
 PT:3/3
 A:AB$ Animate | Cost$ 2 | Defined$ Card.Self | Colors$ Colorless | SpellDescription$ CARDNAME becomes colorless until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_spirit.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/188.jpg
 Oracle:{2}: Raging Spirit becomes colorless until end of turn.
+SetInfo:MIR Common

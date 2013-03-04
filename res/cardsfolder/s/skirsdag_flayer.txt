@@ -5,5 +5,5 @@ PT:1/1
 A:AB$ Destroy | Cost$ 3 B T Sac<1/Human> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirsdag_flayer.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/74.jpg
 Oracle:{3}{B}, {T}, Sacrifice a Human: Destroy target creature.
+SetInfo:DKA Uncommon

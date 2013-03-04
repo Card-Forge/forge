@@ -3,7 +3,6 @@ ManaCost:2 U U
 Types:World Enchantment
 S:Mode$ Continuous | Affected$ Creature | RemoveKeyword$ Flying & Islandwalk | Description$ All creatures lose flying and islandwalk.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_decree.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/43.jpg
 Oracle:All creatures lose flying and islandwalk.
+SetInfo:HML Rare

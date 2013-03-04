@@ -2,10 +2,9 @@ Name:Greed
 ManaCost:3 B
 Types:Enchantment
 A:AB$ Draw | Cost$ B PayLife<2> | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greed.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/135.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/15.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/24.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/140.jpg
 Oracle:{B}, Pay 2 life: Draw a card.
+SetInfo:7ED Rare
+SetInfo:LEG Rare
+SetInfo:6ED Rare
+SetInfo:4ED Rare

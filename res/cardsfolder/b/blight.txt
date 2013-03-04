@@ -5,10 +5,9 @@ K:Enchant land
 A:SP$ Attach | Cost$ B B | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted land becomes tapped, destroy it.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredCard
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/6.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/113.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/6.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/3.jpg
 Oracle:Enchant land\nWhen enchanted land becomes tapped, destroy it.
+SetInfo:5ED Uncommon
+SetInfo:LEG Uncommon
+SetInfo:6ED Uncommon
+SetInfo:4ED Uncommon

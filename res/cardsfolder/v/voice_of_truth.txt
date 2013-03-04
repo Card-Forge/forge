@@ -4,7 +4,6 @@ Types:Creature Angel
 PT:2/2
 K:Flying
 K:Protection from white
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voice_of_truth.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/25.jpg
 Oracle:Flying, protection from white
+SetInfo:NMS Uncommon

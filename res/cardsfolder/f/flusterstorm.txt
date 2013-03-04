@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Instant,Sorcery  | TgtPrompt$ Select target Instant or Sorcery Spell | UnlessCost$ 1 | SpellDescription$ Counter target instant or sorcery spell unless its controller pays 1.
 K:Storm
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flusterstorm.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/46.jpg
 Oracle:Counter target instant or sorcery spell unless its controller pays {1}.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+SetInfo:COM Rare

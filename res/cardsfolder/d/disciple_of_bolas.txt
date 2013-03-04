@@ -10,7 +10,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_bolas.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/88.jpg
 Oracle:When Disciple of Bolas enters the battlefield, sacrifice another creature. You gain X life and draw X cards, where X is that creature's power.
+SetInfo:M13 Rare

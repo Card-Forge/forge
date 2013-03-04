@@ -7,7 +7,7 @@ A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Sele
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Name$ Elspeth, Knight-Errant emblem | Image$ elspeth_knight_errant_emblem | StaticAbilities$ STIndestructible | Keywords$ Indestructible | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."
 SVar:STIndestructible:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl,Land.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Indestructible
 SVar:Indestructible:Artifacts, creatures, enchantments, and lands you control are indestructible.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_knight_errant.jpg
-SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/9.jpg
 Oracle:[+1] Put a 1/1 white Soldier creature token onto the battlefield.\n[+1] Target creature gets +3/+3 and gains flying until end of turn.\n[-8] You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."
+SetInfo:DDF Mythic
+SetInfo:ALA Mythic

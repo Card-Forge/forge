@@ -4,7 +4,6 @@ Types:Snow Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boreal_shelf.jpg
-SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/144.jpg
 Oracle:Boreal Shelf enters the battlefield tapped.\n{T}: Add {W} or {U} to your mana pool.
+SetInfo:CSP Uncommon

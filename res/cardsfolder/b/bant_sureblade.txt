@@ -5,7 +5,6 @@ PT:2/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control another multicolored permanent, CARDNAME gets +1/+1 and has first strike.
 SVar:X:Count$Valid Permanent.MultiColor+Other+YouCtrl
 SVar:BuffedBy:Permanent.MultiColor
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sureblade.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/143.jpg
 Oracle:As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike.
+SetInfo:ARB Common

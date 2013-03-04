@@ -3,10 +3,9 @@ ManaCost:1 R
 Types:Creature Atog
 PT:1/2
 A:AB$ Pump | Cost$ Sac<1/Artifact> | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/atog.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/86.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/209.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/138.jpg
-SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/88.jpg
 Oracle:Sacrifice an artifact: Atog gets +2/+2 until end of turn.
+SetInfo:ATQ Common
+SetInfo:5ED Uncommon
+SetInfo:3ED Common
+SetInfo:MRD Uncommon

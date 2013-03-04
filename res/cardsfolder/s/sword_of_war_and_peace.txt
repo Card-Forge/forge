@@ -8,7 +8,6 @@ SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredTarget | NumDmg$ X 
 SVar:X:TriggeredTarget$CardsInHand
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ Y | References$ Y
 SVar:Y:Count$CardsInYourHand
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_war_and_peace.jpg
-SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/161.jpg
 Oracle:Equipped creature gets +2/+2 and has protection from red and from white.\nWhenever equipped creature deals combat damage to a player, Sword of War and Peace deals damage to that player equal to the number of cards in his or her hand and you gain 1 life for each card in your hand.\nEquip {2}
+SetInfo:NPH Mythic

@@ -5,7 +5,6 @@ PT:2/2
 K:First Strike
 A:AB$ Animate | Cost$ W U B R G | Defined$ Self | Types$ Angel | Keywords$ Flying & Lifelink | SubAbility$ DBPump | SpellDescription$ Until end of turn, CARDNAME becomes an Angel, gets +3/+3, and gains flying and lifelink.
 SVar:DBPump:DB$Pump | Defined$ Self | NumAtt$ +3 | NumDef$ +3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paragon_of_the_amesha.jpg
-SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/14.jpg
 Oracle:First strike\n{W}{U}{B}{R}{G}: Until end of turn, Paragon of the Amesha becomes an Angel, gets +3/+3, and gains flying and lifelink.
+SetInfo:CFX Uncommon

@@ -4,7 +4,7 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | Condition$ PlayerTurn | Description$ As long as it's your turn, creatures you control get +2/+0.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ 2 | Condition$ NotPlayerTurn | Description$ As long as it's not your turn, creatures you control get +0/+2.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glory_of_warfare.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/98.jpg
 Oracle:As long as it's your turn, creatures you control get +2/+0.\nAs long as it's not your turn, creatures you control get +0/+2.
+SetInfo:ARB Rare
+SetInfo:HOP Rare

@@ -3,7 +3,6 @@ ManaCost:1
 Types:Artifact Equipment
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch & Lifelink | Description$ Equipped creature has deathtouch and lifelink.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basilisk_collar.jpg
-SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/122.jpg
 Oracle:Equipped creature has deathtouch and lifelink.\nEquip {2}
+SetInfo:WWK Rare

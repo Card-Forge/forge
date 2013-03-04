@@ -4,7 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | Cost$ 1 T Sac<1/CARDNAME> | IsPresent$ Land.OppCtrl | PresentCompare$ GE4 | SpellDescription$ Destroy target nonbasic land. Activate this ability only if an opponent controls four or more lands.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_edge.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/145.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}, Sacrifice Tectonic Edge: Destroy target nonbasic land. Activate this ability only if an opponent controls four or more lands.
+SetInfo:WWK Uncommon

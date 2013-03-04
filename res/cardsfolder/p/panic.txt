@@ -5,8 +5,7 @@ Text:Cast Panic only during combat before blockers are declared.
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | ActivationPhases$ BeginCombat->Declare Attackers - Play Instants and Abilities | IsCurse$ True | SpellDescription$ Target creature can't block this turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panic.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/260.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/212.jpg
 Oracle:Cast Panic only during combat before blockers are declared.\nTarget creature can't block this turn.\nDraw a card at the beginning of the next turn's upkeep.
+SetInfo:ICE Common
+SetInfo:5ED Common

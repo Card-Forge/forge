@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Defender | Description$ Enchanted creature has defender.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guard_duty.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/23.jpg
 Oracle:Enchant creature\nEnchanted creature has defender.
+SetInfo:ROE Common

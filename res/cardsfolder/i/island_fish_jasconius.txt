@@ -9,9 +9,8 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay U U U. If you do, untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ U U U | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/island_fish_jasconius.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/61.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/78.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/22.jpg
 Oracle:Island Fish Jasconius doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {U}{U}{U}. If you do, untap Island Fish Jasconius.\nIsland Fish Jasconius can't attack unless defending player controls an Island.\nWhen you control no Islands, sacrifice Island Fish Jasconius.
+SetInfo:4ED Rare
+SetInfo:3ED Rare
+SetInfo:ARN Rare

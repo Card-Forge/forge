@@ -4,7 +4,6 @@ Types:Creature Elf Archer
 PT:2/4
 K:Reach
 K:Protection from artifacts
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_archers.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/131.jpg
 Oracle:Protection from artifacts; reach (This creature can block creatures with flying.)
+SetInfo:MRD Common

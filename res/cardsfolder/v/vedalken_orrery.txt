@@ -2,7 +2,6 @@ Name:Vedalken Orrery
 ManaCost:4
 Types:Artifact
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You may cast nonland cards as though they had flash. | Description$ You may cast nonland cards as though they had flash.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_orrery.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/163.jpg
 Oracle:You may cast nonland cards as though they had flash.
+SetInfo:5DN Rare

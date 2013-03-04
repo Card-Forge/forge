@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wayfaring_giant.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/44.jpg
 Oracle:Domain - Wayfaring Giant gets +1/+1 for each basic land type among lands you control.
+SetInfo:INV Uncommon

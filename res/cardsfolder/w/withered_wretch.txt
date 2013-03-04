@@ -3,8 +3,8 @@ ManaCost:B B
 Types:Creature Zombie Cleric
 PT:2/2
 A:AB$ ChangeZone | Cost$ 1 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withered_wretch.jpg
-SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/86.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/54.jpg
 Oracle:{1}: Exile target card from a graveyard.
+SetInfo:TSB Special
+SetInfo:LGN Uncommon
+SetInfo:HOP Uncommon

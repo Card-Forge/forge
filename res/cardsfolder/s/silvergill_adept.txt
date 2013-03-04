@@ -5,7 +5,6 @@ PT:2/1
 K:AlternateAdditionalCost:Reveal<1/Merfolk>:3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silvergill_adept.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/86.jpg
 Oracle:As an additional cost to cast Silvergill Adept, reveal a Merfolk card from your hand or pay {3}.\nWhen Silvergill Adept enters the battlefield, draw a card.
+SetInfo:LRW Uncommon

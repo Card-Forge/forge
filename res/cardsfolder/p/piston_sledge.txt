@@ -5,7 +5,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigAttach:AB$ Attach | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
 K:Equip Sac<1/Artifact>
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 1 | Description$ Equipped creature gets +3/+1.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piston_sledge.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/124.jpg
 Oracle:When Piston Sledge enters the battlefield, attach it to target creature you control.\nEquipped creature gets +3/+1.\nEquip-Sacrifice an artifact.
+SetInfo:MBS Uncommon

@@ -9,8 +9,7 @@ SVar:TrigDestroy:DB$DestroyAll | Cost$ 0 | ValidCards$ Creature.Other+YouCtrl
 SVar:TrigKicker:DB$DestroyAll | Cost$ 0 | ValidCards$ Creature.Other
 SVar:RemRandomDeck:True
 DeckNeeds:Color$white
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation_giant.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/59.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/57.jpg
 Oracle:Kicker {W}{W} (You may pay an additional {W}{W} as you cast this spell.)\nWhen Desolation Giant enters the battlefield, destroy all other creatures you control. If it was kicked, destroy all other creatures instead.
+SetInfo:APC Rare
+SetInfo:TSB Special

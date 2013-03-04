@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$DealDamage | Cost$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SubAbility$ DBSac | SpellDescription$ CARDNAME deals 1 damage to target creature or player. Sacrifice CARDNAME.
 SVar:DBSac:DB$Sacrifice | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_cannon.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/125.jpg
 Oracle:{2}: Goblin Cannon deals 1 damage to target creature or player. Sacrifice Goblin Cannon.
+SetInfo:5DN Uncommon

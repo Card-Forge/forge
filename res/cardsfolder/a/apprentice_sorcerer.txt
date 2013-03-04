@@ -3,7 +3,6 @@ ManaCost:2 U
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ CARDNAME deals 1 damage to target creature or player. Activate this ability only during your turn, before attackers are declared.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apprentice_sorcerer.jpg
-SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/32.jpg
 Oracle:{T}: Apprentice Sorcerer deals 1 damage to target creature or player. Activate this ability only during your turn, before attackers are declared.
+SetInfo:PO2 Uncommon

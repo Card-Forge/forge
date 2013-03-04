@@ -7,7 +7,6 @@ SVar:DBMassCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMassShuff
 SVar:DBMassShuffle:DB$ Shuffle
 SVar:MassX:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_polymorph.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/64.jpg
 Oracle:Exile all creatures you control, then reveal cards from the top of your library until you reveal that many creature cards. Put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.
+SetInfo:M11 Rare

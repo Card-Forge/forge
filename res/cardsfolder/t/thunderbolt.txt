@@ -3,8 +3,8 @@ ManaCost:1 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SpellDescription$ Choose one - CARDNAME deals 3 damage to target player;
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.withFlying | NumDmg$ 4 | SpellDescription$ or CARDNAME deals 4 damage to target creature with flying.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderbolt.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/115.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/159.jpg
 Oracle:Choose one - Thunderbolt deals 3 damage to target player; or Thunderbolt deals 4 damage to target creature with flying.
+SetInfo:WTH Common
+SetInfo:PD2 Common
+SetInfo:AVR Common

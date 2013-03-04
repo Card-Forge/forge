@@ -4,7 +4,7 @@ Types:Creature Merfolk Spellshaper
 PT:1/1
 A:AB$ GainControl | Cost$ 3 U T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | AddKWs$ Haste | Untap$ True | SpellDescription$ Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overtaker.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/89.jpg
 Oracle:{3}{U}, {T}, Discard a card: Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
+SetInfo:MMQ Rare
+SetInfo:MBP Rare

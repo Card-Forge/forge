@@ -7,7 +7,6 @@ SVar:DeadKeepersDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack+TargetedPlaye
 SVar:X:Count$TypeInYourYard.Creature/Minus.2
 SVar:Y:Count$TypeInOppYard.Creature
 SVar:Z:Remembered$Amount
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_dead.jpg
-SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/65.jpg
 Oracle:{B}, {T}: Choose target opponent who had at least two fewer creature cards in his or her graveyard than you did as you activated this ability. Destroy target nonblack creature he or she controls.
+SetInfo:EXO Uncommon

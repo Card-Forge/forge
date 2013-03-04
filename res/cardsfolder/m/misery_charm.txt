@@ -6,7 +6,6 @@ A:SP$ ChangeZone | Cost$ B | ValidTgts$ Creature.cleric | Origin$ Graveyard | De
 A:SP$ LoseLife | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select a player to lose 2 life | LifeAmount$ 2 | SpellDescription$ or target player loses 2 life.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misery_charm.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/158.jpg
 Oracle:Choose one - Destroy target Cleric; or return target Cleric card from your graveyard to your hand; or target player loses 2 life.
+SetInfo:ONS Common

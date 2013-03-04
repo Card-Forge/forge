@@ -4,7 +4,6 @@ Types:Creature Shapeshifter
 PT:1/1
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_changeling.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/140.jpg
 Oracle:Changeling (This card is every creature type at all times.)\n{1}{B}: Regenerate Skeletal Changeling.
+SetInfo:LRW Common

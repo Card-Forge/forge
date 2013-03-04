@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigLife | TriggerDescription$ At the beginning of your upkeep, your life total becomes equal to the number of permanents you control.
 SVar:TrigLife:AB$SetLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Permanent.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_the_eternal.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/37.jpg
 Oracle:At the beginning of your upkeep, count the number of permanents you control. Your life total becomes that number.
+SetInfo:M13 Rare

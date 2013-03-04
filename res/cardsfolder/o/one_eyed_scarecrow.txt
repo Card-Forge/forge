@@ -4,7 +4,6 @@ Types:Artifact Creature Scarecrow
 PT:2/3
 K:Defender
 S:Mode$ Continuous | Affected$ Creature.withFlying+OppCtrl | AddPower$ -1 | AddToughness$ 0 | Description$ Creatures with flying your opponents control get -1/-0.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/one_eyed_scarecrow.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/230.jpg
 Oracle:Defender\nCreatures with flying your opponents control get -1/-0.
+SetInfo:ISD Common

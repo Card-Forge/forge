@@ -5,7 +5,6 @@ PT:2/2
 K:Flying
 K:Haste
 K:Echo:Discard<1/Card>:Discard a card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepcavern_imp.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/83.jpg
 Oracle:Flying, haste\nEcho-Discard a card. (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
+SetInfo:FUT Common

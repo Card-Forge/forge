@@ -5,7 +5,6 @@ PT:1/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | References$ X | Description$ CARDNAME's toughness is equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:BuffedBy:Forest
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/people_of_the_woods.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/46.jpg
 Oracle:People of the Woods's toughness is equal to the number of Forests you control.
+SetInfo:DRK Uncommon

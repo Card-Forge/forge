@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Instant
 K:Wither
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ Puncture Blast deals 3 damage to target creature or player.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puncture_blast.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/60.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nPuncture Blast deals 3 damage to target creature or player.
+SetInfo:EVE Common

@@ -6,7 +6,6 @@ K:First Strike
 K:Haste
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromGraveyard | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell from a graveyard, CARDNAME deals 3 damage to that player.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 3
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ash_zealot.jpg
-SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/86.jpg
 Oracle:First strike, haste\nWhenever a player casts a spell from a graveyard, Ash Zealot deals 3 damage to that player.
+SetInfo:RTR Rare

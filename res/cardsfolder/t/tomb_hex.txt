@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Instant
 A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | References$ X | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. Landfall - If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead.
 SVar:X:Count$Landfall.4.2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tomb_hex.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/69.jpg
 Oracle:Target creature gets -2/-2 until end of turn.\nLandfall - If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead.
+SetInfo:WWK Common

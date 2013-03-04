@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Creature Spirit Soldier
 PT:1/1
 A:AB$ Regenerate | Cost$ W | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122282.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/29.jpg
 Oracle:{W}: Regenerate Revered Dead.
+SetInfo:PLC Common

@@ -2,7 +2,6 @@ Name:Krovikan Scoundrel
 ManaCost:1 B
 Types:Creature Human Rogue
 PT:2/1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121226.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/64.jpg
 Oracle:
+SetInfo:CSP Common

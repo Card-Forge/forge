@@ -7,7 +7,6 @@ SVar:DBCinderDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Sel
 SVar:X:Remembered$Amount
 SVar:DBCinderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_seer.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/77.jpg
 Oracle:{2}{R}, {T}: Reveal any number of red cards in your hand. Cinder Seer deals X damage to target creature or player, where X is the number of cards revealed this way.
+SetInfo:UDS Uncommon

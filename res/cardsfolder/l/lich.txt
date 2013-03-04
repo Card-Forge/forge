@@ -16,9 +16,8 @@ SVar:Y:Count$Valid Permanent.nontoken+YouCtrl
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose the game.
 SVar:TrigLose:DB$ LosesGame | Defined$ You
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lich.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/22.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/22.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/22.jpg
 Oracle:As Lich enters the battlefield, you lose life equal to your life total.\nYou don't lose the game for having 0 or less life.\nIf you would gain life, draw that many cards instead.\nWhenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.\nWhen Lich is put into a graveyard from the battlefield, you lose the game.
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:2ED Rare

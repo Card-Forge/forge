@@ -6,8 +6,7 @@ K:Permanents don't untap during their controllers' untap steps:Creature.Red
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all red creatures.
 SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Creature.Red
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrath_of_marit_lage.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/115.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/109.jpg
 Oracle:When Wrath of Marit Lage enters the battlefield, tap all red creatures.\nRed creatures don't untap during their controllers' untap steps.
+SetInfo:ICE Rare
+SetInfo:8ED Uncommon

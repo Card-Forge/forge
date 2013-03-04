@@ -5,7 +5,6 @@ PT:4/6
 K:Unblockable
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put five 1/1 red Goblin creature tokens onto the battlefield under target opponent's control.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 5 | TokenName$ Goblin | TokenTypes$ Creature,Goblin | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_phantasm.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/55.jpg
 Oracle:Hunted Phantasm is unblockable.\nWhen Hunted Phantasm enters the battlefield, put five 1/1 red Goblin creature tokens onto the battlefield under target opponent's control.
+SetInfo:RAV Rare

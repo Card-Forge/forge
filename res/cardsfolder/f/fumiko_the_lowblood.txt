@@ -7,7 +7,6 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ 
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ CARDNAME has bushido X, where X is the number of attacking creatures. (When this blocks or becomes blocked, it gets +X/+X until end of turn.)
 SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X | References$ X
 SVar:X:Count$Valid Creature.attacking
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fumiko_the_lowblood.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/104.jpg
 Oracle:Fumiko the Lowblood has bushido X, where X is the number of attacking creatures. (When this blocks or becomes blocked, it gets +X/+X until end of turn.)\nCreatures your opponents control attack each turn if able.
+SetInfo:BOK Rare

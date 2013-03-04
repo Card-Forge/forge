@@ -4,9 +4,8 @@ Types:Creature Human Soldier Archer
 PT:2/2
 K:First Strike
 K:Reach
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/longbow_archer.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/112.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/30.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/26.jpg
 Oracle:First strike; reach (This creature can block creatures with flying.)
+SetInfo:VIS Uncommon
+SetInfo:7ED Uncommon
+SetInfo:6ED Uncommon

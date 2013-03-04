@@ -11,4 +11,4 @@ SVar:DBAttach:DB$ Attach | Object$ ParentTarget | Defined$ ChosenCard | SubAbili
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_guildmage.jpg
 Oracle: ({G/U} can be paid with either {G} or {U}.)\n{1}{G}: Move a +1/+1 counter from target creature onto another target creature with the same controller.\n{1}{U}: Attach target Aura enchanting a permanent to another permanent with the same controller.
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/148.jpg
+SetInfo:DIS Uncommon

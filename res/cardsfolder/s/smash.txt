@@ -3,9 +3,8 @@ ManaCost:2 R
 Types:Instant
 A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smash.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/143.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/69.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/235.jpg
 Oracle:Destroy target artifact.\nDraw a card.
+SetInfo:RAV Common
+SetInfo:APC Common
+SetInfo:10E Common

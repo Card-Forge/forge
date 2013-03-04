@@ -8,7 +8,6 @@ SVar:TrigTransform:AB$SetState | Cost$ 2 B B | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_bat.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Screeching Bat.\n----\nStalking Vampire\n(Black)\nCreature - Vampire\n5/5\nAt the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Stalking Vampire.
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/114a.jpg
 
 ALTERNATE
 
@@ -21,4 +20,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigTransform:AB$SetState | Cost$ 2 B B | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_vampire.jpg
 Oracle:Creature - Vampire\n5/5\nAt the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Stalking Vampire.
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/114b.jpg
+SetInfo:ISD Uncommon

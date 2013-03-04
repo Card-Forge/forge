@@ -8,5 +8,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | LifeAmount$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diregraf_captain.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/135.jpg
 Oracle:Deathtouch\nOther Zombie creatures you control get +1/+1.\nWhenever another Zombie you control dies, target opponent loses 1 life.
+SetInfo:DKA Uncommon

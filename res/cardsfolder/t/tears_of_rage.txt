@@ -5,7 +5,6 @@ Text:Cast CARDNAME only during the declare attackers step.\r\n
 A:SP$ PumpAll | Cost$ 2 R R | ActivationPhases$ Declare Attackers - Play Instants and Abilities | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +X | References$ X | KW$ Trample & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
 SVar:X:Count$Valid Creature.attacking+YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tears_of_rage.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/70.jpg
 Oracle:Cast Tears of Rage only during the declare attackers step.\nAttacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
+SetInfo:DST Uncommon

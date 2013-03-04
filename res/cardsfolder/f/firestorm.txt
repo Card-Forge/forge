@@ -5,7 +5,6 @@ A:SP$ DealDamage | Cost$ R Discard<X/Card> | ValidTgts$ Creature,Player | TgtPro
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature/Plus.2
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firestorm.jpg
-SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/101.jpg
 Oracle:As an additional cost to cast Firestorm, discard X cards.\nFirestorm deals X damage to each of X target creatures and/or players.
+SetInfo:WTH Rare

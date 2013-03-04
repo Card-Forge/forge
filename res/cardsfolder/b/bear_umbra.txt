@@ -7,7 +7,6 @@ A:SP$ Attach | Cost$ 2 G G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ TrigUntap | AddSVar$ BearUmbraUntap | Description$ Enchanted creature gets +2/+2 and has "Whenever this creature attacks, untap all lands you control."
 SVar:TrigUntap:Mode$ Attacks | ValidCard$ Card.Self | Execute$ BearUmbraUntap | TriggerDescription$ Whenever this creature attacks, untap all lands you control.
 SVar:BearUmbraUntap:AB$UntapAll | Cost$ 0 | ValidCards$ Land.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bear_umbra.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/177.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has "Whenever this creature attacks, untap all lands you control."\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
+SetInfo:ROE Rare

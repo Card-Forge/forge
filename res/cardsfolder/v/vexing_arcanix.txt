@@ -6,8 +6,7 @@ SVar:DBDig:DB$ Dig | DigNum$ 1 | Defined$ Targeted | ChangeNum$ All | ChangeVali
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ Targeted | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_arcanix.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/319.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/319.jpg
 Oracle:{3}, {T}: Target player names a card, then reveals the top card of his or her library. If it's the named card, the player puts it into his or her hand. Otherwise, the player puts it into his or her graveyard and Vexing Arcanix deals 2 damage to him or her.
+SetInfo:ICE Rare
+SetInfo:8ED Rare

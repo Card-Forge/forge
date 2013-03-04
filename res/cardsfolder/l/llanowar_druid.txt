@@ -4,7 +4,6 @@ Types:Creature Elf Druid
 PT:1/2
 A:AB$ UntapAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Forest | SpellDescription$ Untap all Forests.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_druid.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/75.jpg
 Oracle:{T}, Sacrifice Llanowar Druid: Untap all Forests.
+SetInfo:WTH Common

@@ -6,7 +6,6 @@ SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:MaxTgts:Count$InYourYard
 SVar:X:Targeted$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nostalgic_dreams.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/135.jpg
 Oracle:As an additional cost to cast Nostalgic Dreams, discard X cards.\nReturn X target cards from your graveyard to your hand. Exile Nostalgic Dreams.
+SetInfo:TOR Rare

@@ -3,8 +3,7 @@ ManaCost:G
 Types:Creature Ape
 PT:1/1
 K:Reach
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84665.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/88.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/275.jpg
 Oracle:Reach (This creature can block creatures with flying.)
+SetInfo:PO2 Common
+SetInfo:9ED Common

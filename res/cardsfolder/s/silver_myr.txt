@@ -3,8 +3,9 @@ ManaCost:2
 Types:Artifact Creature Myr
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silver_myr.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/241.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/202.jpg
 Oracle:{T}: Add {U} to your mana pool.
+SetInfo:MRD Common
+SetInfo:SOM Common
+SetInfo:DDF Common
+SetInfo:HOP Common

@@ -2,8 +2,7 @@ Name:Goblin Cavaliers
 ManaCost:2 R
 Types:Creature Goblin
 PT:3/2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20214.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/95.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/98.jpg
 Oracle:
+SetInfo:PO2 Common
+SetInfo:S99 Common

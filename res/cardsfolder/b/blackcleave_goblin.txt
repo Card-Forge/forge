@@ -4,7 +4,6 @@ Types:Creature Goblin Zombie
 PT:2/1
 K:Haste
 K:Infect
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blackcleave_goblin.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/54.jpg
 Oracle:Haste\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+SetInfo:SOM Common

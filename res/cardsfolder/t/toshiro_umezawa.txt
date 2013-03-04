@@ -6,7 +6,6 @@ K:Bushido 1
 T:Mode$ ChangesZone | ValidCard$ Creature.OppCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature an opponent controls dies, you may cast target instant card from your graveyard. If that card would be put into a graveyard this turn, exile it instead.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | TgtZone$ Graveyard | ValidTgts$ Instant.YouCtrl | TgtPrompt$ Choose target instant from your graveyard | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | PumpZone$ Graveyard | SubAbility$ TrigPlay
 SVar:TrigPlay:DB$ Play | Defined$ Targeted
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/toshiro_umezawa.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/89.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nWhenever a creature an opponent controls dies, you may cast target instant card from your graveyard. If that card would be put into a graveyard this turn, exile it instead.
+SetInfo:BOK Rare

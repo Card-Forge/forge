@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:3/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 A:AB$ Pump | Cost$ 4 B B T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -6 | NumDef$ -6 | IsCurse$ True | SpellDescription$ Target creature gets -6/-6 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_tevesh_szat.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/55.jpg
 Oracle:{T}: Target creature gets -1/-1 until end of turn.\n{4}{B}{B}, {T}, Sacrifice Disciple of Tevesh Szat: Target creature gets -6/-6 until end of turn.
+SetInfo:CSP Common

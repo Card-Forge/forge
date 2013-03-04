@@ -9,7 +9,6 @@ SVar:HeroPump:DB$ Pump | NumAtt$ ArmamentsX | NumDef$ ArmamentsX | References$ A
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Soldier | TriggerZones$ Battlefield | Execute$ HeroAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Soldier creature enters the battlefield, you may attach CARDNAME to it.
 SVar:HeroAttach:DB$ Attach | Defined$ TriggeredCard
 SVar:ArmamentsX:Count$Valid Creature.attacking
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veterans_armaments.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/146.jpg
 Oracle:Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."\nWhenever a Soldier creature enters the battlefield, you may attach Veteran's Armaments to it.\nEquip {2}
+SetInfo:MOR Uncommon

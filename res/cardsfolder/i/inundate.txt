@@ -2,7 +2,6 @@ Name:Inundate
 ManaCost:3 U U U
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 3 U U U | ChangeType$ Creature.nonBlue | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nonblue creatures to their owners' hands.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inundate.jpg
-SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/25.jpg
 Oracle:Return all nonblue creatures to their owners' hands.
+SetInfo:EVE Rare

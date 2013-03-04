@@ -4,7 +4,6 @@ Types:Creature Insect Druid
 PT:1/2
 A:AB$ Mana | Cost$ T | Produced$ 1 G | SpellDescription$ Add 1 G to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_elder.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/254.jpg
 Oracle:{T}: Add {1}{G} to your mana pool.
+SetInfo:ODY Uncommon

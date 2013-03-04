@@ -6,7 +6,6 @@ A:AB$ Mana | Cost$ T | Produced$ 1 B | SpellDescription$ Add 1 B to your mana po
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an untapped Swamp you control to its owner's hand.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Swamp.untapped/untapped Swamp> | UnlessPayer$ You
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/everglades.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/162.jpg
 Oracle:Everglades enters the battlefield tapped.\nWhen Everglades enters the battlefield, sacrifice it unless you return an untapped Swamp you control to its owner's hand.\n{T}: Add {1}{B} to your mana pool.
+SetInfo:VIS Uncommon

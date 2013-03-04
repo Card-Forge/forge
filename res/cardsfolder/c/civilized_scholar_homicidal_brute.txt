@@ -10,7 +10,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/civilized_scholar.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/47a.jpg
 Oracle:{T}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
 
 ALTERNATE
@@ -24,6 +23,6 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigTap:AB$ Tap | Cost$ 0 | Defined$ Self | SubAbility$ DBTransform2
 SVar:DBTransform2:DB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homicidal_brute.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/47b.jpg
 Oracle:At the beginning of your end step, if Homicidal Brute didn't attack this turn, tap Homicidal Brute, then transform it.
 
+SetInfo:ISD Uncommon

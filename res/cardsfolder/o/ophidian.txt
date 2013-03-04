@@ -6,7 +6,7 @@ T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | E
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$Pump | Cost$ 0 | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ophidian.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/45.jpg
 Oracle:Whenever Ophidian attacks and isn't blocked, you may draw a card. If you do, Ophidian assigns no combat damage this turn.
+SetInfo:DD2 Common
+SetInfo:WTH Common

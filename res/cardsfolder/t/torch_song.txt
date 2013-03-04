@@ -5,7 +5,6 @@ A:AB$ DealDamage | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtP
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
 SVar:X:Count$CardCounters.VERSE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torch_song.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/222.jpg
 Oracle:At the beginning of your upkeep, you may put a verse counter on Torch Song.\n{2}{R}, Sacrifice Torch Song: Torch Song deals X damage to target creature or player, where X is the number of verse counters on Torch Song.
+SetInfo:USG Uncommon

@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigSacrifice | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, that player sacrifices a land.
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredTarget | SacValid$ Land | ChangeNum$ 1 | SpellDescription$ Sacrifice a land.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_urge.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/180.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals combat damage to a player, that player sacrifices a land.
+SetInfo:USG Uncommon

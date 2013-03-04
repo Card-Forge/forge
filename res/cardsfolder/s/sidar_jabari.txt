@@ -5,7 +5,6 @@ PT:2/2
 K:Flanking
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, tap target creature defending player controls.
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sidar_jabari.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/243.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nWhenever Sidar Jabari attacks, tap target creature defending player controls.
+SetInfo:MIR Rare

@@ -5,7 +5,7 @@ PT:2/5
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jedits_dragoons.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/25.jpg
 Oracle:Vigilance\nWhen Jedit's Dragoons enters the battlefield, you gain 4 life.
+SetInfo:DDI Common
+SetInfo:TSP Common

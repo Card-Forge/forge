@@ -7,7 +7,6 @@ T:Mode$ Attacks | ValidCard$ Card.EnchantedBy | DelayedTrigger$ DelBounce | Trig
 SVar:DelBounce:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ BounceCritter | TriggerDescription$ Return enchanted creature and CARDNAME to their owners' hands.
 SVar:BounceCritter:DB$ ChangeZone | Defined$ Enchanted | Origin$ Battlefield | Destination$ Hand | SubAbility$ BounceSelf
 SVar:BounceSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contempt.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/27.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks, return it and Contempt to their owners' hands at end of combat.
+SetInfo:STH Common

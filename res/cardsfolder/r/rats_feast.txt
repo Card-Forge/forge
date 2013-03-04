@@ -6,7 +6,6 @@ SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rats_feast.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/71.jpg
 Oracle:Exile X target cards from a single graveyard.
+SetInfo:JUD Common

@@ -5,7 +5,6 @@ PT:5/5
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a creature spell, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skittering_monstrosity.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/129.jpg
 Oracle:When you cast a creature spell, sacrifice Skittering Monstrosity.
+SetInfo:TSP Uncommon

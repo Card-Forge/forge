@@ -4,5 +4,5 @@ Types:Instant
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target flying creature. | PrecostDesc$ Choose one - | SpellDescription$ Destroy target creature with flying,
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$  or destroy target artifact.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crushing_vines.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/110.jpg
 Oracle:Choose one - Destroy target creature with flying; or destroy target artifact.
+SetInfo:DKA Common

@@ -6,7 +6,6 @@ A:SP$ ChangeZone | Cost$ 1 U B | Origin$ Graveyard | Destination$ Hand | TgtProm
 A:SP$ Counter | Cost$ 1 U B | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBChangeZone | SpellDescription$ or counter target creature spell and return target creature card from your graveyard to your hand.
 SVar:DBChangeZone:DB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_manipulation.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/29.jpg
 Oracle:Choose one or both - Counter target creature spell; and/or return target creature card from your graveyard to your hand.
+SetInfo:ARB Common

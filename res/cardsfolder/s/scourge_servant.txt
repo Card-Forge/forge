@@ -3,7 +3,6 @@ ManaCost:4 B
 Types:Creature Zombie
 PT:3/3
 K:Infect
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_servant.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/54.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+SetInfo:MBS Common

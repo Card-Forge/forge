@@ -4,7 +4,6 @@ Types:Creature Goblin
 PT:1/1
 A:AB$ Pump | Cost$ Sac<1/Goblin> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_raider.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/191.jpg
 Oracle:Sacrifice a Goblin: Target creature gets +1/+1 until end of turn.
+SetInfo:TMP Common

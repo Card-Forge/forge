@@ -9,7 +9,6 @@ SVar:Y:Count$Valid Permanent.Red+YouCtrl/LimitMax.1
 SVar:Z:Count$Valid Permanent.Green+YouCtrl/LimitMax.1
 SVar:X:SVar$Y/Plus.Z
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://wizards.com/global/images/magic/general/ceta_sanctuary.jpg
-SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/20.jpg
 Oracle:At the beginning of your upkeep, if you control a red or green permanent, draw a card, then discard a card. If you control a red permanent and a green permanent, instead draw two cards, then discard a card.
+SetInfo:APC Uncommon

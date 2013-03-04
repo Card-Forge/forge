@@ -5,7 +5,6 @@ PT:2/2
 A:AB$ DealDamage | Cost$ X R Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pain_kami.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/183.jpg
 Oracle:{X}{R}, Sacrifice Pain Kami: Pain Kami deals X damage to target creature.
+SetInfo:CHK Uncommon

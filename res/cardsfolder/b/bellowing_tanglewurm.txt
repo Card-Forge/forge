@@ -4,7 +4,6 @@ Types:Creature Wurm
 PT:4/4
 K:Intimidate
 S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddKeyword$ Intimidate | Description$ Other green creatures you control have Intimidate.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bellowing_tanglewurm.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/111.jpg
 Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nOther green creatures you control have intimidate.
+SetInfo:SOM Uncommon

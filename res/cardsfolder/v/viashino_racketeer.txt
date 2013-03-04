@@ -7,7 +7,6 @@ SVar:TrigDiscard:AB$ Discard | Cost$ 0 | NumCards$ 1 | Mode$ TgtChoose | Optiona
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_racketeer.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/112.jpg
 Oracle:When Viashino Racketeer enters the battlefield, you may discard a card. If you do, draw a card.
+SetInfo:RTR Common

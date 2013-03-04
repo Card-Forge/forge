@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | C
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:NoCharge:Count$CardCounters.CHARGE
 SVar:X:Count$xPaid
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_bloom.jpg
-SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/130.jpg
 Oracle:Mana Bloom enters the battlefield with X charge counters on it.\nRemove a charge counter from Mana Bloom: Add one mana of any color to your mana pool. Activate this ability only once each turn.\nAt the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand.
+SetInfo:RTR Rare

@@ -6,5 +6,5 @@ SVar:MaxTgts:Count$Valid Creature.attacking+withoutFlying,Creature.blocking+with
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rock_slide.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/92.jpg
 Oracle:Rock Slide deals X damage divided as you choose among any number of target attacking or blocking creatures without flying.
+SetInfo:VIS Common

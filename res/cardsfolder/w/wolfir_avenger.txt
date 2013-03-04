@@ -4,7 +4,6 @@ Types:Creature Wolf Warrior
 PT:3/3
 K:Flash
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfir_avenger.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/205.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\n{1}{G}: Regenerate Wolfir Avenger.
+SetInfo:AVR Uncommon

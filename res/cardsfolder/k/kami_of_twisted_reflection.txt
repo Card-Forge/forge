@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:2/2
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you control to its owner's hand.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_twisted_reflection.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/71.jpg
 Oracle:Sacrifice Kami of Twisted Reflection: Return target creature you control to its owner's hand.
+SetInfo:CHK Common

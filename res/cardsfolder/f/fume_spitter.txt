@@ -3,8 +3,7 @@ ManaCost:B
 Types:Creature Horror
 PT:1/1
 A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | CounterType$ M1M1 | CounterNum$ 1 | SpellDescription$ Put a -1/-1 counter on target creature.
-SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fume_spitter.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/63.jpg
 Oracle:Sacrifice Fume Spitter: Put a -1/-1 counter on target creature.
+SetInfo:SOM Common

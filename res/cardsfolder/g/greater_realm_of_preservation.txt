@@ -7,8 +7,7 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered |
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_realm_of_preservation.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/307.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/187.jpg
 Oracle:{1}{W}: The next time a black or red source of your choice would deal damage to you this turn, prevent that damage.
+SetInfo:5ED Uncommon
+SetInfo:LEG Uncommon

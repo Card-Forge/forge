@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Cost$ 3 U | Origin$ Library | Destination$ Library | ChangeTy
 SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.IsRemembered | Chooser$ Opponent | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for the graveyard | Shuffle$ False | SubAbility$ DBChangeZone2 | StackDescription$ None
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for the hand | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gifts_ungiven.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/62.jpg
 Oracle:Search your library for four cards with different names and reveal them. Target opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library.
+SetInfo:CHK Rare
+SetInfo:V09 Mythic

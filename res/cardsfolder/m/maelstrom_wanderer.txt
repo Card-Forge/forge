@@ -5,7 +5,6 @@ PT:7/5
 K:Cascade
 K:Cascade
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_wanderer.jpg
-SetInfo:PC2|Mythic|http://magiccards.info/scans/en/pc2/101.jpg
 Oracle:Creatures you control have haste.\nCascade, cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order. Then do it again.)
+SetInfo:PC2 Mythic

@@ -5,7 +5,6 @@ PT:2/1
 K:Swampwalk
 A:AB$ PutCounter | Cost$ 2 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | References$ X | PrecostDesc$ Scavenge | SpellDescription$ Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.
 SVar:X:Count$CardPower
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewer_shambler.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/75.jpg
 Oracle:Swampwalk (This creature is unblockable as long as defending player controls a Swamp.)\nScavenge {2}{B} ({2}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
+SetInfo:RTR Common

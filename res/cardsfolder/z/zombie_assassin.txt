@@ -4,7 +4,6 @@ Types:Creature Zombie Assassin
 PT:3/2
 A:AB$ Destroy | Cost$ T ExileFromGrave<2/Card> Exile<1/CARDNAME> | CostDesc$ T, Exile two cards from your graveyard and Zombie Assassin: | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_assassin.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/168.jpg
 Oracle:{T}, Exile two cards from your graveyard and Zombie Assassin: Destroy target nonblack creature. It can't be regenerated.
+SetInfo:ODY Common

@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, you may tap target creature.
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flanking_troops.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/5.jpg
 Oracle:Whenever Flanking Troops attacks, you may tap target creature.
+SetInfo:PTK Uncommon

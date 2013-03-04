@@ -6,7 +6,6 @@ K:Reach
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ First Strike | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a red permanent, CARDNAME gets +1/+0 and has first strike.
 SVar:X:Count$Valid Permanent.Red+YouCtrl
 SVar:BuffedBy:Permanent.Red
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_weaver.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/81.jpg
 Oracle:Reach (This can block creatures with flying.)\nAs long as you control a red permanent, Ember Weaver gets +1/+0 and has first strike.
+SetInfo:CFX Common

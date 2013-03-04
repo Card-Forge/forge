@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 W B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | AddTrigger$ TriggerTheSleepless | AddSVar$ PilloryLoseLife | Description$ Enchanted creature can't attack or block. Enchanted creature has "At the beginning of your upkeep, you lose 1 life."
 SVar:TriggerTheSleepless:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ PilloryLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you lose 1 life.
 SVar:PilloryLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/125.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.\nEnchanted creature has "At the beginning of your upkeep, you lose 1 life."
+SetInfo:GPT Common

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 B | ValidTgts$ Creature | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBClash | SpellDescription$ Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return CARDNAME to its owner's hand.
 SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revive_the_fallen.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/76.jpg
 Oracle:Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return Revive the Fallen to its owner's hand. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
+SetInfo:MOR Uncommon

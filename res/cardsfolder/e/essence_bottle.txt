@@ -5,7 +5,6 @@ A:AB$ PutCounter | Cost$ 3 T | Defined$ Self | CounterType$ ELIXIR | CounterNum$
 A:AB$ GainLife | Cost$ T SubCounter<All/ELIXIR> | Defined$ You | LifeAmount$ X | References$ X | SpellDescription$ You gain 2 life for each elixir counter removed this way.
 SVar:X:SVar$CostCountersRemoved/Twice
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_bottle.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/276.jpg
 Oracle:{3}, {T}: Put an elixir counter on Essence Bottle.\n{T}, Remove all elixir counters from Essence Bottle: You gain 2 life for each elixir counter removed this way.
+SetInfo:TMP Uncommon

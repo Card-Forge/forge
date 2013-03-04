@@ -4,7 +4,6 @@ Types:Creature Imp
 PT:2/2
 K:Flying
 A:AB$ Pump | Cost$ 1 R | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcano_imp.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/56.jpg
 Oracle:Flying\n{1}{R}: Volcano Imp gains first strike until end of turn.
+SetInfo:PLS Common

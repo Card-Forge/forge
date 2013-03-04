@@ -7,6 +7,5 @@ SVar:DBDealDamage:DB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to you.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electric_eel.jpg
-SVar:Rarity:Uncommon
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/24.jpg
 Oracle:When Electric Eel enters the battlefield, it deals 1 damage to you.\n{R}{R}: Electric Eel gets +2/+0 until end of turn and deals 1 damage to you.
+SetInfo:DRK Uncommon

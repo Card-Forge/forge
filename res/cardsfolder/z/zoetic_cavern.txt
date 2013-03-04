@@ -3,8 +3,7 @@ ManaCost:no cost
 Types:Land
 K:Morph:2
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zoetic_cavern.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/180.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/298.jpg
 Oracle:{T}: Add {1} to your mana pool.\nMorph {2} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:FUT Uncommon
+SetInfo:COM Uncommon

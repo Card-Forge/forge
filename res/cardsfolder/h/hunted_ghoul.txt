@@ -4,7 +4,6 @@ Types:Creature Zombie
 Text:CARDNAME can't block Humans.
 PT:1/2
 K:CantBlock Creature.Human
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_ghoul.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/110.jpg
 Oracle:Hunted Ghoul can't block Humans.
+SetInfo:AVR Common

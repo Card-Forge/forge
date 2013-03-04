@@ -2,8 +2,7 @@ Name:Dross Crocodile
 ManaCost:3 B
 Types:Creature Zombie Crocodile
 PT:5/1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card135216.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/47.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/138.jpg
 Oracle:
+SetInfo:5DN Common
+SetInfo:10E Common

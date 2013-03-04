@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | KW$ HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME. | SubAbility$ DBUntap | IsCurse$ True | SpellDescription$ Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 SVar:DBUntap:DB$Untap | Defined$ Targeted
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maze_of_ith.jpg
-SetInfo:DRK|Uncommon|http://magiccards.info/scans/en/dk/114.jpg
 Oracle:{T}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
+SetInfo:V12 Mythic
+SetInfo:DRK Uncommon

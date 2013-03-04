@@ -4,7 +4,6 @@ Types:Artifact Equipment
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Human,Card.EquippedBy+Angel | AddKeyword$ Vigilance | Description$ As long as equipped creature is a Human or an Angel, it has vigilance.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladed_bracers.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/213.jpg
 Oracle:Equipped creature gets +1/+1.\nAs long as equipped creature is a Human or an Angel, it has vigilance.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:AVR Common

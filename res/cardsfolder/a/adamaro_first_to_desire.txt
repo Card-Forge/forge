@@ -5,7 +5,6 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in the hand of the opponent with the most cards in hand.
 SVar:X:Count$InOppHand
 SVar:AntiBuffedBy:Card
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adamaro_first_to_desire.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/91.jpg
 Oracle:Adamaro, First to Desire's power and toughness are each equal to the number of cards in the hand of the opponent with the most cards in hand.
+SetInfo:SOK Rare

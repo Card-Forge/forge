@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Refer
 SVar:X:Count$Valid Creature.namedTimberpack Wolf+YouCtrl/Minus.1
 SVar:BuffedBy:Creature.namedTimberpack Wolf
 DeckHints:Name$Timberpack Wolf
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timberpack_wolf.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/194.jpg
 Oracle:Timberpack Wolf gets +1/+1 for each other creature you control named Timberpack Wolf.
+SetInfo:M13 Common

@@ -5,7 +5,6 @@ PT:6/6
 K:Echo:4 R R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to each other creature.
 SVar:TrigDamageAll:DB$ DamageAll | Cost$ 0 | ValidCards$ Creature.Other | NumDmg$ 4 | ValidDescription$ each other creature.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crater_hellion.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/179.jpg
 Oracle:Echo {4}{R}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Crater Hellion enters the battlefield, it deals 4 damage to each other creature.
+SetInfo:USG Rare

@@ -5,7 +5,6 @@ PT:8/0
 K:Trample
 A:SP$ PermanentCreature | Cost$ 2 G | AILogic$ ZeroToughness
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_of_savagery.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/126.jpg
 Oracle:Trample
+SetInfo:FUT Rare

@@ -7,5 +7,5 @@ SVar:DoDraw:DB$ Draw | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompa
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$OppLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/survival_cache.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/48.jpg
 Oracle:You gain 2 life. Then if you have more life than an opponent, draw a card.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
+SetInfo:ROE Uncommon

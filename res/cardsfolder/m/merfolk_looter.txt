@@ -4,11 +4,10 @@ Types:Creature Merfolk Rogue
 PT:1/1
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_looter.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/61.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/65.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/39.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/89.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/92.jpg
 Oracle:{T}: Draw a card, then discard a card.
+SetInfo:M10 Common
+SetInfo:7ED Uncommon
+SetInfo:M12 Common
+SetInfo:EXO Common
+SetInfo:10E Common

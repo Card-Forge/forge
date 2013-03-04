@@ -10,7 +10,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_crab.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/56.jpg
 Oracle:Wormfang Crab is unblockable.\nWhen Wormfang Crab enters the battlefield, an opponent chooses a permanent you control other than Wormfang Crab and exiles it.\nWhen Wormfang Crab leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SetInfo:JUD Uncommon

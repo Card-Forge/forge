@@ -3,7 +3,6 @@ ManaCost:4 G
 Types:Creature Lizard Beast
 PT:6/2
 K:Evolve
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adaptive_snapjaw.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/113.jpg
 Oracle:Evolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)
+SetInfo:GTC Common

@@ -5,7 +5,6 @@ K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | Description$ Enchanted creature gets -3/-0.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greels_caress.jpg
-SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/67.jpg
 Oracle:Flash\nEnchant creature\nEnchanted creature gets -3/-0.
+SetInfo:PCY Common

@@ -4,7 +4,7 @@ Types:Creature Incarnation
 PT:3/3
 K:Flying
 A:AB$ ProtectionAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | Gains$ Choice | Choices$ AnyColor | ActivationZone$ Graveyard | SpellDescription$ Choose a color. Creatures you control gain protection from the chosen color until end of turn. Activate this ability only if CARDNAME is in your graveyard.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glory.jpg
-SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/11.jpg
 Oracle:Flying\n{2}{W}: Choose a color. Creatures you control gain protection from the chosen color until end of turn. Activate this ability only if Glory is in your graveyard.
+SetInfo:MBP Rare
+SetInfo:JUD Rare

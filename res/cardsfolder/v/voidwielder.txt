@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:1/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature to its owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidwielder.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/56.jpg
 Oracle:When Voidwielder enters the battlefield, you may return target creature to its owner's hand.
+SetInfo:RTR Common

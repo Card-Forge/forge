@@ -5,7 +5,7 @@ PT:1/1
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, look at the top card of defending player's library. You may put that card on the bottom of that player's library.
 SVar:TrigDig:AB$ Dig | Cost$ 0 | Defined$ DefendingPlayer | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_fighters.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/59.jpg
 Oracle:Whenever Coral Fighters attacks and isn't blocked, look at the top card of defending player's library. You may put that card on the bottom of that player's library.
+SetInfo:DDI Uncommon
+SetInfo:MIR Uncommon

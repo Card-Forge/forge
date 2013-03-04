@@ -9,7 +9,7 @@ SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_diamond.jpg
-SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/132.jpg
 Oracle:If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add one mana of any color to your mana pool.
+SetInfo:V10 Mythic
+SetInfo:STH Rare

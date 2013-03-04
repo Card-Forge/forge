@@ -3,11 +3,10 @@ ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
 A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_guard.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/25.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/23.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/107.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/20.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/21.jpg
 Oracle:{W}: Honor Guard gets +0/+1 until end of turn.
+SetInfo:8ED Common
+SetInfo:7ED Common
+SetInfo:10E Common
+SetInfo:9ED Common
+SetInfo:STH Common

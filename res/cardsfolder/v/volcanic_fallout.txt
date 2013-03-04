@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Instant
 K:CARDNAME can't be countered.
 A:SP$ DamageAll | Cost$ 1 R R | NumDmg$ 2 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 2 damage to each creature and each player.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volcanic_fallout.jpg
-SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/74.jpg
 Oracle:Volcanic Fallout can't be countered.\nVolcanic Fallout deals 2 damage to each creature and each player.
+SetInfo:ARC Uncommon
+SetInfo:CFX Uncommon

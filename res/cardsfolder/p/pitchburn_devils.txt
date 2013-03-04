@@ -4,7 +4,6 @@ Types:Creature Devil
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, it deals 3 damage to target creature or player.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pitchburn_devils.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/156.jpg
 Oracle:When Pitchburn Devils dies, it deals 3 damage to target creature or player.
+SetInfo:ISD Common

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Mill | Cost$ X U B | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | References$ X | SubAbility$ DBYouGainLife | SpellDescription$ Target player puts the top X cards of his or her library into his or her graveyard and you gain X life.
 SVar:DBYouGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$xPaid
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_drain.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/220.jpg
 Oracle:Target player puts the top X cards of his or her library into his or her graveyard and you gain X life.
+SetInfo:RAV Uncommon

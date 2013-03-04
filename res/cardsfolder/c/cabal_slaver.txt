@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:2/1
 T:Mode$ DamageDone | ValidSource$ Goblin | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever a Goblin deals combat damage to a player, that player discards a card.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_slaver.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/131.jpg
 Oracle:Whenever a Goblin deals combat damage to a player, that player discards a card.
+SetInfo:ONS Uncommon

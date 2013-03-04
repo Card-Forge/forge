@@ -5,7 +5,6 @@ PT:2/2
 A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 A:AB$ PreventDamage | Cost$ W Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to target creature or player this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_legionnaire.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/103.jpg
 Oracle:{R}, Sacrifice Goblin Legionnaire: Goblin Legionnaire deals 2 damage to target creature or player.\n{W}, Sacrifice Goblin Legionnaire: Prevent the next 2 damage that would be dealt to target creature or player this turn.
+SetInfo:APC Common

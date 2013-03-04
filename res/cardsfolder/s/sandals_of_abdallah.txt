@@ -8,7 +8,6 @@ SVar:SandalsDestroyed:DB$ Destroy | Defined$ Imprinted | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandals_of_abdallah.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/83.jpg
 Oracle:{2}, {T}: Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy Sandals of Abdallah.
+SetInfo:ARN Uncommon

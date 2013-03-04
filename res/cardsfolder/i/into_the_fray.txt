@@ -4,7 +4,6 @@ Types:Instant Arcane
 A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME attacks each turn if able. | TgtPrompt$ Select target creature | SpellDescription$ Target creature attacks this turn if able.
 K:Splice onto Arcane R
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_the_fray.jpg
-SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/106.jpg
 Oracle:Target creature attacks this turn if able.\nSplice onto Arcane {R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+SetInfo:SOK Common

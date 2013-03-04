@@ -2,10 +2,10 @@ Name:Price of Progress
 ManaCost:1 R
 Types:Instant
 A:SP$ RepeatEach | Cost$ 1 R | RepeatPlayers$ Player | RepeatSubAbility$ DBDamage | SpellDescription$ CARDNAME deals 2 damage to each player for each nonbasic land he or she controls.
-SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | References$ X 
+SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | References$ X
 SVar:X:Count$Valid Land.nonBasic+RememberedPlayerCtrl/Times.2
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/price_of_progress.jpg
-SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/95.jpg
 Oracle:Price of Progress deals damage to each player equal to twice the number of nonbasic lands that player controls.
+SetInfo:EXO Uncommon
+SetInfo:PD2 Uncommon

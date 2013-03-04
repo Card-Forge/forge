@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ X 3 B B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ X | SpellDescription$ Search your library for up to X cards and put those cards into your hand. Then shuffle your library.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_revelation.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/87.jpg
 Oracle:Search your library for up to X cards and put those cards into your hand. Then shuffle your library.
+SetInfo:M13 Rare

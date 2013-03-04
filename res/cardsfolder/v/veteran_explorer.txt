@@ -4,8 +4,7 @@ Types:Creature Human Soldier Scout
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each player may search his or her library for up to two basic land cards and put them onto the battlefield. Then each player who searched his or her library this way shuffles it.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | DefinedPlayer$ Each | ChangeNum$ 2 | Shuffle$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_explorer.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/86.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/177.jpg
 Oracle:When Veteran Explorer dies, each player may search his or her library for up to two basic land cards and put them onto the battlefield. Then each player who searched his or her library this way shuffles it.
+SetInfo:WTH Uncommon
+SetInfo:COM Uncommon

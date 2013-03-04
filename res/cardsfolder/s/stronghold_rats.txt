@@ -6,7 +6,6 @@ K:Shadow
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, each player discards a card.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Each | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_rats.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/79.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Stronghold Rats deals combat damage to a player, each player discards a card.
+SetInfo:FUT Uncommon

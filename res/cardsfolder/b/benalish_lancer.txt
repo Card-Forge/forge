@@ -6,7 +6,7 @@ K:Kicker 2 W
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigPut | Static$ True | TriggerDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with first strike.
 SVar:TrigPut:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ First Strike | Permanent$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_lancer.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/7.jpg
 Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nIf Benalish Lancer was kicked, it enters the battlefield with two +1/+1 counters on it and with first strike.
+SetInfo:DDG Common
+SetInfo:INV Common

@@ -3,7 +3,6 @@ ManaCost:4
 Types:Artifact
 A:AB$ PutCounter | Cost$ 2 | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$ Mana | Cost$ SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_array.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/124.jpg
 Oracle:{2}: Put a charge counter on Gemstone Array.\nRemove a charge counter from Gemstone Array: Add one mana of any color to your mana pool.
+SetInfo:5DN Uncommon

@@ -10,7 +10,6 @@ S:Mode$ Continuous | Affected$ Card.Elf+YouCtrl | AddAbility$ Mana | CheckSVar$ 
 SVar:Mana:AB$Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LT5_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE5_LEVEL
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_treespeaker.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/190.jpg
 Oracle:Level up {1}{G} ({1}{G}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-4\n1/2\n{T}: Add {G}{G} to your mana pool.\nLEVEL 5+\n1/4\nElves you control have "{T}: Add {G}{G} to your mana pool."
+SetInfo:ROE Uncommon

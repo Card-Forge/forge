@@ -5,7 +5,6 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Pump | Cost$ R G T | ValidTgts$ Creature.Beast+YouCtrl | TgtPrompt$ Choose target Beast creature you control | SubAbility$ FightForTheCliffs | StackDescription$ None | SpellDescription$ Choose target Beast creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its power to the other.
 SVar:FightForTheCliffs:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contested_cliffs.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/314.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{R}{G}, {T}: Choose target Beast creature you control and target creature an opponent controls. Those creatures fight each other. (Each deals damage equal to its power to the other.)
+SetInfo:ONS Rare

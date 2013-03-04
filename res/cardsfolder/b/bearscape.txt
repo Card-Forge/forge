@@ -2,7 +2,6 @@ Name:Bearscape
 ManaCost:1 G G
 Types:Enchantment
 A:AB$ Token | Cost$ 1 G ExileFromGrave<2/Card> | TokenAmount$ 1 | TokenName$ Bear | TokenTypes$ Creature,Bear | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 |SpellDescription$ Put a 2/2 green Bear creature token onto the battlefield.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bearscape.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/229.jpg
 Oracle:{1}{G}, Exile two cards from your graveyard: Put a 2/2 green Bear creature token onto the battlefield.
+SetInfo:ODY Rare

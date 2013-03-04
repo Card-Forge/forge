@@ -7,5 +7,5 @@ T:Mode$ DamageDone | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | 
 SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredTargetController | NumDmg$ X | References$ X | DamageSource$ TriggeredTarget
 SVar:X:TriggerCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiteful_shadows.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/75.jpg
 Oracle:Enchant creature\nWhenever enchanted creature is dealt damage, it deals that much damage to its controller.
+SetInfo:DKA Common

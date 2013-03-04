@@ -3,7 +3,6 @@ ManaCost:G
 Types:Instant
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | References$ X | SpellDescription$ Target creature gets +1/+1 until end of turn for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/might_of_the_masses.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/196.jpg
 Oracle:Target creature gets +1/+1 until end of turn for each creature you control.
+SetInfo:ROE Common

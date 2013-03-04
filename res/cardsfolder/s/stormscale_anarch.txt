@@ -5,7 +5,6 @@ PT:2/2
 A:AB$ DealDamage | Cost$ 2 R Discard<1/Random> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | SpellDescription$ CARDNAME deals 2 damage to target creature or player. If the discarded card was multicolored, CARDNAME deals 4 damage to that creature or player instead.
 SVar:X:Discarded$CardMulticolor.4.2
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscale_anarch.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/74.jpg
 Oracle:{2}{R}, Discard a card at random: Stormscale Anarch deals 2 damage to target creature or player. If the discarded card was multicolored, Stormscale Anarch deals 4 damage to that creature or player instead.
+SetInfo:DIS Rare

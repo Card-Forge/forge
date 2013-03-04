@@ -6,7 +6,6 @@ K:Morph:W
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, prevent all combat damage non-Soldier creatures would deal this turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.nonSoldier | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frontline_strategist.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/15.jpg
 Oracle:Morph {W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Frontline Strategist is turned face up, prevent all combat damage non-Soldier creatures would deal this turn.
+SetInfo:SCG Common

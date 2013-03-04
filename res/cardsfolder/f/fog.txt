@@ -2,19 +2,19 @@ Name:Fog
 ManaCost:G
 Types:Instant
 A:SP$ Fog | Cost$ G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fog.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/102.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/102.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/102.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/245.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/155.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/128.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/230.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/173.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/182.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/172.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/173.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/114.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/102.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.
+SetInfo:2ED Common
+SetInfo:7ED Common
+SetInfo:6ED Common
+SetInfo:M10 Common
+SetInfo:MIR Common
+SetInfo:M12 Common
+SetInfo:M11 Common
+SetInfo:LEB Common
+SetInfo:M13 Common
+SetInfo:ARC Common
+SetInfo:LEA Common
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:3ED Common

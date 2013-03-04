@@ -3,7 +3,6 @@ ManaCost:1 B
 Types:Enchantment
 Text:If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chains_of_mephistopheles.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/5.jpg
 Oracle:If a player would draw a card except the first one he or she draws in his or her draw step each turn, that player discards a card instead. If the player discards a card this way, he or she draws a card. If the player doesn't discard a card this way, he or she puts the top card of his or her library into his or her graveyard.
+SetInfo:LEG Rare

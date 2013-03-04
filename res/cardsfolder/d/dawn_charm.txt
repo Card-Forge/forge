@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Fog | Cost$ 1 W | SpellDescription$ Prevent all combat damage that would be dealt this turn; | PrecostDesc$ Choose one -
 A:SP$ Regenerate | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ or regenerate target creature;
 A:SP$ Counter | Cost$ 1 W | TargetType$ Spell | TargetValidTargeting$ You | TgtPrompt$ Select target spell that is targeting you | ValidTgts$ Card | SpellDescription$ or counter target spell that targets you.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawn_charm.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/4.jpg
 Oracle:Choose one - Prevent all combat damage that would be dealt this turn; or regenerate target creature; or counter target spell that targets you.
+SetInfo:PLC Common

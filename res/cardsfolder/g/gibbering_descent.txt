@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | Execute$ TrigLoseLifeDiscard | TriggerZones$ Bat
 SVar:TrigLoseLifeDiscard:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_descent.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/66.jpg
 Oracle:At the beginning of each player's upkeep, that player loses 1 life and discards a card.\nHellbent - Skip your upkeep step if you have no cards in hand.\nMadness {2}{B}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
+SetInfo:FUT Rare

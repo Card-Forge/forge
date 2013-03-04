@@ -10,7 +10,7 @@ SVar:Clear:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:Y:Remembered$Valid Card.ChosenColor
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oona_queen_of_the_fae.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/172.jpg
 Oracle:Flying\n{X}{U/B}: Choose a color. Target opponent exiles the top X cards of his or her library. For each card of the chosen color exiled this way, put a 1/1 blue and black Faerie Rogue creature token with flying onto the battlefield.
+SetInfo:V11 Mythic
+SetInfo:SHM Rare

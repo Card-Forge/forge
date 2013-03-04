@@ -6,7 +6,7 @@ A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1.
 SVar:TrigScry:AB$Scry | Cost$ 0 | ScryNum$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/new_benalia.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/172.jpg
 Oracle:New Benalia enters the battlefield tapped.\nWhen New Benalia enters the battlefield, scry 1. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)\n{T}: Add {W} to your mana pool.
+SetInfo:FUT Uncommon
+SetInfo:DDI Uncommon

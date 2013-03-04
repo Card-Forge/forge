@@ -6,10 +6,9 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 2 | ConditionCheckSVar$ ErgAttacked | ConditionSVarCompare$ EQ1
 SVar:ErgAttacked:Count$Valid Creature.Self+notFirstTurnControlled
 SVar:MustAttack:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erg_raiders.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/20.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/17.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/19.jpg
-SetInfo:ARN|Common|http://magiccards.info/scans/en/an/3.jpg|2
 Oracle:At the beginning of your end step, if Erg Raiders didn't attack this turn, Erg Raiders deals 2 damage to you unless it came under your control this turn.
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:3ED Common
+SetInfo:ARN Common x2

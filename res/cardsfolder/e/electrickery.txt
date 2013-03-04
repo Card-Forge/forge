@@ -3,7 +3,6 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control. | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature you don't control.
 A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.YouDontCtrl | NumDmg$ 1 | PrecostDesc$ Overload | CostDesc$ 1 R | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electrickery.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/93.jpg
 Oracle:Electrickery deals 1 damage to target creature you don't control.\nOverload {1}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
+SetInfo:RTR Common

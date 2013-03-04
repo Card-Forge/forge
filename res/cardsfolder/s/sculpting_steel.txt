@@ -4,8 +4,7 @@ Types:Artifact
 K:ETBReplacement:Copy:ChooseArtifact:Optional
 SVar:ChooseArtifact:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Artifact.Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any artifact on the battlefield.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sculpting_steel.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/238.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/342.jpg
 Oracle:You may have Sculpting Steel enter the battlefield as a copy of any artifact on the battlefield.
+SetInfo:MRD Rare
+SetInfo:10E Rare

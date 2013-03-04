@@ -4,7 +4,6 @@ Types:Creature Horror
 PT:2/2
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ CARDNAME can't block. | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +2/+2 and can't block.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/childhood_horror.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/123.jpg
 Oracle:Flying\nThreshold - As long as seven or more cards are in your graveyard, Childhood Horror gets +2/+2 and can't block.
+SetInfo:ODY Uncommon

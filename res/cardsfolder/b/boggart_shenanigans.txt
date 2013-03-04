@@ -4,7 +4,7 @@ Types:Tribal Enchantment Goblin
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Goblin.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever another Goblin you control is put into a graveyard from the battlefield, you may have CARDNAME deal 1 damage to target player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_shenanigans.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/155.jpg
 Oracle:Whenever another Goblin you control dies, you may have Boggart Shenanigans deal 1 damage to target player.
+SetInfo:LRW Uncommon
+SetInfo:EVG Uncommon

@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:1/1
 K:Morph:W
 K:Protection from Goblins
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foothill_guide.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/29.jpg
 Oracle:Protection from Goblins\nMorph {W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:ONS Common

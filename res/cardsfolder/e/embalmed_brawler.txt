@@ -8,7 +8,6 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True 
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$CardCounters.P1P1
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/embalmed_brawler.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/69.jpg
 Oracle:Amplify 1 (As this creature enters the battlefield, put a +1/+1 counter on it for each Zombie card you reveal in your hand.)\nWhenever Embalmed Brawler attacks or blocks, you lose 1 life for each +1/+1 counter on it.
+SetInfo:LGN Common

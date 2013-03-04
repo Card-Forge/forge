@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -13 | Description$ Enchanted creature gets -13/-0.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chant_of_the_skifsang.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/31.jpg
 Oracle:Enchant creature\nEnchanted creature gets -13/-0.
+SetInfo:DKA Common

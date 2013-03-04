@@ -4,9 +4,8 @@ Types:Creature Spirit
 PT:3/2
 K:Flying
 K:CARDNAME can't be blocked except by two or more creatures.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_spirit.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/136.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/107.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/106.jpg
 Oracle:Flying\nWind Spirit can't be blocked except by two or more creatures.
+SetInfo:ICE Uncommon
+SetInfo:5ED Uncommon
+SetInfo:6ED Uncommon

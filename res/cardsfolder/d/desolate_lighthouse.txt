@@ -6,7 +6,6 @@ A:AB$ Draw | Cost$ 1 U R T | NumCards$ 1 | SpellDescription$ Draw a card, then d
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolate_lighthouse.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/227.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}{U}{R}, {T}: Draw a card, then discard a card.
+SetInfo:AVR Rare

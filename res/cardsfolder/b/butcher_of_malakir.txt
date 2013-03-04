@@ -6,8 +6,7 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME or another creature you control is put into a graveyard from the battlefield, each opponent sacrifices a creature.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature you control is put into a graveyard from the battlefield, each opponent sacrifices a creature.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Player.Opponent | SacValid$ Creature
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/butcher_of_malakir.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/75.jpg
-SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/53.jpg
 Oracle:Flying\nWhenever Butcher of Malakir or another creature you control dies, each opponent sacrifices a creature.
+SetInfo:COM Rare
+SetInfo:WWK Rare

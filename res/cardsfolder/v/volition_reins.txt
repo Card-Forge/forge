@@ -7,7 +7,6 @@ A:SP$ Attach | Cost$ 3 U U U | ValidTgts$ Permanent | AILogic$ GainControl
 T:Mode$ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if enchanted permanent is tapped, untap it.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Enchanted
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volition_reins.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/53.jpg
 Oracle:Enchant permanent\nWhen Volition Reins enters the battlefield, if enchanted permanent is tapped, untap it.\nYou control enchanted permanent.
+SetInfo:SOM Uncommon

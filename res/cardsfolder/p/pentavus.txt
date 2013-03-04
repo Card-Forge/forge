@@ -5,8 +5,9 @@ PT:0/0
 K:etbCounter:P1P1:5
 A:AB$ Token | Cost$ 1 SubCounter<1/P1P1> | TokenAmount$ 1 | TokenName$ Pentavite | TokenTypes$ Artifact,Creature,Pentavite | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put a 1/1 colorless Pentavite artifact creature token with flying onto the battlefield.
 A:AB$ PutCounter | Cost$ 1 Sac<1/Pentavite> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on Pentavus.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentavus.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/226.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/213.jpg
 Oracle:Pentavus enters the battlefield with five +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from Pentavus: Put a 1/1 colorless Pentavite artifact creature token with flying onto the battlefield.\n{1}, Sacrifice a Pentavite: Put a +1/+1 counter on Pentavus.
+SetInfo:MRD Rare
+SetInfo:M12 Rare
+SetInfo:DDF Rare
+SetInfo:HOP Rare

@@ -3,7 +3,6 @@ ManaCost:2 R R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land. | SpellDescription$ Destroy target artifact or land.
 K:Recover:R R
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icefall.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/85.jpg
 Oracle:Destroy target artifact or land.\nRecover {R}{R} (When a creature is put into your graveyard from the battlefield, you may pay {R}{R}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)
+SetInfo:CSP Common

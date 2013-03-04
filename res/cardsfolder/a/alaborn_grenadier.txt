@@ -3,7 +3,6 @@ ManaCost:W W
 Types:Creature Human Soldier
 PT:2/2
 K:Vigilance
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6508.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/122.jpg
 Oracle:Vigilance
+SetInfo:PO2 Common

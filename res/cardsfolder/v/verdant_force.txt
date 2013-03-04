@@ -4,9 +4,10 @@ Types:Creature Elemental
 PT:7/7
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, put a 1/1 green Saproling creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | TokenColors$ Green | TokenImage$ g 1 1 saproling
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_force.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/157.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/278.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/307.jpg
 Oracle:At the beginning of each upkeep, put a 1/1 green Saproling creature token onto the battlefield.
+SetInfo:TMP Rare
+SetInfo:PD3 Rare
+SetInfo:9ED Rare
+SetInfo:HOP Rare
+SetInfo:10E Rare

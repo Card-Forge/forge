@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1 | SpellDescription$ Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.
 SVar:AltCost:Cost$ ExileFromHand<1/Card.Black> | Description$ You may exile one black card from your hand rather than pay CARDNAME's mana cost.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unmask.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/168.jpg
 Oracle:You may exile a black card from your hand rather than pay Unmask's mana cost.\nTarget player reveals his or her hand. You choose a nonland card from it. That player discards that card.
+SetInfo:MMQ Rare

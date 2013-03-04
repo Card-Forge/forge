@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_link.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/92.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage, you gain that much life.
+SetInfo:PLC Common

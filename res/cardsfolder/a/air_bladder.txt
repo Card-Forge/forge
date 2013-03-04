@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | AddHiddenKeyword$ CARDNAME can block only creatures with flying. | Description$ Enchanted creature has flying and can block only creatures with flying.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/air_bladder.jpg
-SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/28.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nEnchanted creature can block only creatures with flying.
+SetInfo:NMS Common

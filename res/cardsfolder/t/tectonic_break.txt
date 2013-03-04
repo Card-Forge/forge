@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Sacrifice | Cost$ X R R | Amount$ X | References$ X | SacValid$ Land | Defined$ Each | SpellDescription$ Each player sacrifices X lands.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tectonic_break.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/216.jpg
 Oracle:Each player sacrifices X lands.
+SetInfo:MMQ Rare

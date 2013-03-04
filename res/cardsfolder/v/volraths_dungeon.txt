@@ -4,7 +4,6 @@ Types:Enchantment
 A:AB$ Destroy | Cost$ PayLife<5> | Defined$ Self | PlayerTurn$ True | AnyPlayer$ True | SpellDescription$ Destroy CARDNAME. Any player may activate this ability but only during his or her turn.
 A:AB$ ChangeZone | Cost$ Discard<1/Card> | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Targeted | LibraryPosition$ 0 | SorcerySpeed$ True | SpellDescription$ Target player puts a card from his or her hand on top of his or her library. Activate this ability only any time you could cast a sorcery.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_dungeon.jpg
-SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/78.jpg
 Oracle:Pay 5 life: Destroy Volrath's Dungeon. Any player may activate this ability but only during his or her turn.\nDiscard a card: Target player puts a card from his or her hand on top of his or her library. Activate this ability only any time you could cast a sorcery.
+SetInfo:EXO Rare

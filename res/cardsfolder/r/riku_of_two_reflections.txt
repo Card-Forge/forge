@@ -6,7 +6,6 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature enters the battlefield under your control, you may pay GU. If you do, put a token that's a copy of that creature onto the battlefield.
 SVar:TrigCopySpell:AB$CopySpellAbility | Cost$ U R | Defined$ TriggeredSpellAbility
 SVar:TrigCopy:AB$CopyPermanent | Cost$ G U | Defined$ TriggeredCard
-SVar:Rarity:Mythic Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riku_of_two_reflections.jpg
-SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/220.jpg
 Oracle:Whenever you cast an instant or sorcery spell, you may pay {U}{R}. If you do, copy that spell. You may choose new targets for the copy.\nWhenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, put a token that's a copy of that creature onto the battlefield.
+SetInfo:COM Mythic

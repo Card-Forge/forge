@@ -8,7 +8,6 @@ A:AB$ Animate | Cost$ 1 | Defined$ Self | Types$ Artifact,Creature,Construct | s
 SVar:Static:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ This creature's power and toughness are each equal to the number of charge counters on it.
 SVar:Y:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_mass.jpg
-SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/141.jpg
 Oracle:Chimeric Mass enters the battlefield with X charge counters on it.\n{1}: Until end of turn, Chimeric Mass becomes a Construct artifact creature with "This creature's power and toughness are each equal to the number of charge counters on it."
+SetInfo:SOM Rare

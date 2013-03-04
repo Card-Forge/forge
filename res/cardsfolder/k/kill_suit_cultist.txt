@@ -10,7 +10,6 @@ SVar:CultistDestroy:AB$ Destroy | Cost$ 0 | Defined$ ReplacedTarget | SubAbility
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kill_suit_cultist.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/65.jpg
 Oracle:Kill-Suit Cultist attacks each turn if able.\n{B}, Sacrifice Kill-Suit Cultist: The next time damage would be dealt to target creature this turn, destroy that creature instead.
+SetInfo:DIS Common

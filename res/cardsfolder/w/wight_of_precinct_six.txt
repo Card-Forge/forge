@@ -4,7 +4,6 @@ Types:Creature Zombie
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each creature card in your opponents' graveyards.
 SVar:X:Count$ValidGraveyard Card.Creature+OppOwn
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wight_of_precinct_six.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/84.jpg
 Oracle:Wight of Precinct Six gets +1/+1 for each creature card in your opponents' graveyards.
+SetInfo:GTC Uncommon

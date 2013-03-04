@@ -5,7 +5,6 @@ PT:0/0
 K:Graft 2
 A:AB$ Untap | Cost$ 1 U | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | SpellDescription$ Untap target creature with a +1/+1 counter on it.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigean_graftmage.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/35.jpg
 Oracle:Graft 2 (This creature enters the battlefield with two +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\n{1}{U}: Untap target creature with a +1/+1 counter on it.
+SetInfo:DIS Uncommon

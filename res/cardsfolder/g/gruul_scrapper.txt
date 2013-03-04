@@ -7,7 +7,6 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ Haste
 SVar:ManaNeededToAvoidNegativeEffect:red
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_scrapper.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/89.jpg
 Oracle:When Gruul Scrapper enters the battlefield, if {R} was spent to cast Gruul Scrapper, it gains haste until end of turn.
+SetInfo:GPT Common

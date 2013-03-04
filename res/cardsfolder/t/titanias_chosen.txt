@@ -5,7 +5,6 @@ PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card.Green | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a player casts a green spell, put a +1/+1 counter on Titania's Chosen.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card.Green
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titanias_chosen.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/277.jpg
 Oracle:Whenever a player casts a green spell, put a +1/+1 counter on Titania's Chosen.
+SetInfo:USG Uncommon

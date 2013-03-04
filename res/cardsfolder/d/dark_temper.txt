@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature| TgtPrompt$ Creature | NumDmg$ 2 | SubAbility$ DBDestroy | ConditionPresent$ Permanent.Black+YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME deals 2 damage to target creature. If you control a black permanent, destroy the creature instead.
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionPresent$ Permanent.Black+YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a black permanent,
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_temper.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/61.jpg
 Oracle:Dark Temper deals 2 damage to target creature. If you control a black permanent, destroy the creature instead.
+SetInfo:CFX Common

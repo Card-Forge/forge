@@ -5,7 +5,6 @@ PT:1/1
 A:AB$ Discard | Cost$ 2 B T | ValidTgts$ Player | PlayerTurn$ True | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card. Activate this ability only during your turn.
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zuran_enchanter.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/110.jpg
 Oracle:{2}{B}, {T}: Target player discards a card. Activate this ability only during your turn.
+SetInfo:ICE Common

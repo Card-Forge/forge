@@ -4,8 +4,7 @@ Types:Creature Human Cleric
 PT:1/2
 K:Protection from black
 K:Cycling:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disciple_of_grace.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/10.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/25.jpg
 Oracle:Protection from black\nCycling {2} ({2}, Discard this card: Draw a card.)
+SetInfo:ONS Common
+SetInfo:USG Common

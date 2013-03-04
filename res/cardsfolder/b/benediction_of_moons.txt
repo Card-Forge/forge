@@ -6,4 +6,4 @@ SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Refere
 SVar:X:PlayerCountPlayers$Amount
 Oracle:You gain 1 life for each player.\nHaunt (When this spell card is put into a graveyard after resolving, exile it haunting target creature.)\nWhen the creature Benediction of Moons haunts dies, you gain 1 life for each player.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benediction_of_moons.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/3.jpg
+SetInfo:GPT Common

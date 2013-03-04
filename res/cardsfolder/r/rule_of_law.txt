@@ -6,8 +6,7 @@ S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | CheckSVar$ Y | Referen
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 SVar:Y:Count$ThisTurnCast_Card.YouDontCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rule_of_law.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/19.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/37.jpg
 Oracle:Each player can't cast more than one spell each turn.
+SetInfo:MRD Rare
+SetInfo:10E Uncommon

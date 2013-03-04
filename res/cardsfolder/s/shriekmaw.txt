@@ -8,8 +8,9 @@ SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.nonBlack+nonArtifact | TgtProm
 K:Evoke:1 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekmaw.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/100.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/139.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen Shriekmaw enters the battlefield, destroy target nonartifact, nonblack creature.\nEvoke {1}{B} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
+SetInfo:ARC Uncommon
+SetInfo:COM Uncommon
+SetInfo:LRW Uncommon
+SetInfo:DDH Uncommon

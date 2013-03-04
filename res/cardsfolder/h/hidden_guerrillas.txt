@@ -3,7 +3,6 @@ ManaCost:G
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.Self+Enchantment | Execute$ TrigAnimate | TriggerDescription$ When an opponent casts an artifact spell, if CARDNAME is an enchantment, CARDNAME becomes a 5/3 Soldier creature with trample.
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 5 | Toughness$ 3 | Keywords$ Trample | Types$ Creature,Soldier | OverwriteTypes$ True | Permanent$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_guerrillas.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/261.jpg
 Oracle:When an opponent casts an artifact spell, if Hidden Guerrillas is an enchantment, Hidden Guerrillas becomes a 5/3 Soldier creature with trample.
+SetInfo:USG Uncommon

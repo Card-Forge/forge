@@ -4,8 +4,7 @@ Types:Creature Rat
 PT:1/1
 A:AB$ DamageAll | Cost$ X | XColor$ B | NumDmg$ X | ValidCards$ Creature | ValidPlayers$ Each | References$ X | ValidDescription$ each creature and each player. | SpellDescription$ Crypt Rats deals X damage to each creature and each player. Spend only black mana this way.
 SVar:X:Count$xPaid
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_rats.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/5.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/125.jpg
 Oracle:{X}: Crypt Rats deals X damage to each creature and each player. Spend only black mana this way.
+SetInfo:VIS Common
+SetInfo:7ED Uncommon

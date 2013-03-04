@@ -6,7 +6,6 @@ A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ 2 T | Produced$ B | Amount$ X | References$ X | SpellDescription$ Add B to your mana pool for each black creature card in your graveyard.
 SVar:X:Count$ValidGraveyard Creature.Black+YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_of_agadeem.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/212.jpg
 Oracle:Crypt of Agadeem enters the battlefield tapped.\n{T}: Add {B} to your mana pool.\n{2}, {T}: Add {B} to your mana pool for each black creature card in your graveyard.
+SetInfo:ZEN Rare

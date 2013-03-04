@@ -3,7 +3,6 @@ ManaCost:0
 Types:Legendary Artifact
 A:AB$ Mana | Cost$ T | Produced$ Any | Activation$ Metalcraft | PrecostDesc$ Metalcraft - | SpellDescription$ Add one mana of any color to your mana pool. Activate this ability only if you control three or more artifacts.
 SVar:RemRandomDeck:True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_opal.jpg
-SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/179.jpg
 Oracle:Metalcraft - {T}: Add one mana of any color to your mana pool. Activate this ability only if you control three or more artifacts.
+SetInfo:SOM Mythic

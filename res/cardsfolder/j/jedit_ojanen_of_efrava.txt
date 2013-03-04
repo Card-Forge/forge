@@ -6,7 +6,6 @@ K:Forestwalk
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a 2/2 green Cat Warrior creature token with forestwalk onto the battlefield.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, put a 2/2 green Cat Warrior creature token with forestwalk onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Cat Warrior | TokenTypes$ Creature,Cat,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Forestwalk
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jedit_ojanen_of_efrava.jpg
-SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/131.jpg
 Oracle:Forestwalk\nWhenever Jedit Ojanen of Efrava attacks or blocks, put a 2/2 green Cat Warrior creature token with forestwalk onto the battlefield.
+SetInfo:PLC Rare

@@ -4,12 +4,11 @@ Types:Artifact
 S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Vigilance | Description$ All creatures have vigilance.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigTapAll | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, tap all untapped creatures that player controls that didn't attack this turn. CARDNAME deals damage to the player equal to the number of creatures tapped this way.
 SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidCards$ Creature.untapped+notAttackedThisTurn+ActivePlayerCtrl | RememberTapped$ True | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ AngelDamage | SubAbility$ DBCleanup | References$ AngelDamage 
+SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ AngelDamage | SubAbility$ DBCleanup | References$ AngelDamage
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AngelDamage:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_trumpet.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/121.jpg
 Oracle:All creatures have vigilance.\nAt the beginning of each player's end step, tap all untapped creatures that player controls that didn't attack this turn. Angel's Trumpet deals damage to the player equal to the number of creatures tapped this way.
+SetInfo:ULG Uncommon

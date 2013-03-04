@@ -8,13 +8,14 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | O
 SVar:TrigMoveCounter:AB$ Repeat | Cost$ 0 | RepeatCheckSVar$ X | RepeatOptional$ True | RepeatSubAbility$ DBChooseNum | SubAbility$ DBCleanup
 SVar:DBChooseNum:DB$ ChooseNumber | Defined$ You | Min$ 0 | Max$ X | References$ X | ListTitle$ Choose how many counters to move | SubAbility$ DBChooseCreature
 SVar:DBChooseCreature:DB$ ChooseCard | Choices$ Creature.Other+IsNotRemembered | Amount$ 1 | RememberChosen$ True | SubAbility$ DBMove
-SVar:DBMove:DB$ MoveCounter | Source$ Self | Defined$ ChosenCard | CounterType$ P1P1 | CounterNum$ Y | 
+SVar:DBMove:DB$ MoveCounter | Source$ Self | Defined$ ChosenCard | CounterType$ P1P1 | CounterNum$ Y |
 References$ Y
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.P1P1
 SVar:Y:Count$ChosenNumber
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forgotten_ancient.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/120.jpg
 Oracle:Whenever a player casts a spell, you may put a +1/+1 counter on Forgotten Ancient.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from Forgotten Ancient onto other creatures.
+SetInfo:SCG Rare
+SetInfo:ARC Rare
+SetInfo:HOP Rare

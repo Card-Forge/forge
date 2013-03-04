@@ -6,8 +6,7 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y | References$ Y
 SVar:X:Count$CardPower
 SVar:Y:Targeted$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_yeti.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/198.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/197.jpg
 Oracle:{T}: Karplusan Yeti deals damage equal to its power to target creature. That creature deals damage equal to its power to Karplusan Yeti.
+SetInfo:ICE Rare
+SetInfo:9ED Rare

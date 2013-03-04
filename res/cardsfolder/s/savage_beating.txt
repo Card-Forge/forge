@@ -8,7 +8,6 @@ A:SP$ PumpAll | Cost$ 4 R R R | ValidCards$ Creature.YouCtrl | KW$ Double Strike
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_beating.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/67.jpg
 Oracle:Cast Savage Beating only during your turn and only during combat.\nChoose one - Creatures you control gain double strike until end of turn; or untap all creatures you control and after this phase, there is an additional combat phase.\nEntwine {1}{R} (Choose both if you pay the entwine cost.)
+SetInfo:DST Rare

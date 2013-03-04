@@ -2,7 +2,6 @@ Name:Blind with Anger
 ManaCost:3 R
 Types:Instant Arcane
 A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Select target nonlegendary creature. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Untap target nonlegendary creature and gain control of it until end of turn. That creature gains haste until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_with_anger.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/158.jpg
 Oracle:Untap target nonlegendary creature and gain control of it until end of turn. That creature gains haste until end of turn.
+SetInfo:CHK Uncommon

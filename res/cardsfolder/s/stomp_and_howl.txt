@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact and target enchantment. | SubAbility$ DestroyEnch
 SVar:DestroyEnch:DB$ Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stomp_and_howl.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/96.jpg
 Oracle:Destroy target artifact and target enchantment.
+SetInfo:DIS Uncommon

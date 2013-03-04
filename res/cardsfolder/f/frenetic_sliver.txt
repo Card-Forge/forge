@@ -9,7 +9,6 @@ SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Mov
 SVar:MoveBack:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Self
 SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_sliver.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/157.jpg
 Oracle:All Slivers have "{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it."
+SetInfo:PLC Uncommon

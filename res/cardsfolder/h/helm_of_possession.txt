@@ -4,7 +4,6 @@ Types:Artifact
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ GainControl | Cost$ 2 T Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ Untap,LeavesPlay,LoseControl | SpellDescription$ Gain control of target creature for as long as you control CARDNAME and CARDNAME remains tapped.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_possession.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/281.jpg
 Oracle:You may choose not to untap Helm of Possession during your untap step.\n{2}, {T}, Sacrifice a creature: Gain control of target creature for as long as you control Helm of Possession and Helm of Possession remains tapped.
+SetInfo:TMP Rare

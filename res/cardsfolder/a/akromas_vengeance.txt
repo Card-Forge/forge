@@ -3,8 +3,8 @@ ManaCost:4 W W
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 4 W W | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures, and enchantments.
 K:Cycling:3
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_vengeance.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/2.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/3.jpg
 Oracle:Destroy all artifacts, creatures, and enchantments.\nCycling {3} ({3}, Discard this card: Draw a card.)
+SetInfo:ONS Rare
+SetInfo:COM Rare
+SetInfo:HOP Rare

@@ -6,7 +6,6 @@ SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ 
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | OptionalDecider$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravestorm.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/141.jpg
 Oracle:At the beginning of your upkeep, target opponent may exile a card from his or her graveyard. If that player doesn't, you may draw a card.
+SetInfo:ODY Rare
