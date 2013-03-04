@@ -8,7 +8,8 @@ SVar:X:Count$Valid Artifact.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Artifact
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_etherium.jpg
-SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/49.jpg
 Oracle:Master of Etherium's power and toughness are each equal to the number of artifacts you control.\nOther artifact creatures you control get +1/+1.
+SetInfo:DDF Rare
+SetInfo:HOP Rare
+SetInfo:ALA Rare

@@ -7,7 +7,6 @@ A:AB$ ChooseSource | Cost$ 2 T | Choices$ Card.SharesColorWith Imprinted | Choic
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PreventFromSource | References$ PreventFromSource | RememberObjects$ Remembered | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:PreventFromSource:Mode$ PreventDamage | EffectZone$ Command | Source$ Card.IsRemembered | Description$ Prevent all damage that would be dealt by a source of your choice that shares a color with the exiled card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mourners_shield.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/209.jpg
 Oracle:Imprint - When Mourner's Shield enters the battlefield, you may exile target card from a graveyard.\n{2}, {T}: Prevent all damage that would be dealt this turn by a source of your choice that shares a color with the exiled card.
+SetInfo:MRD Uncommon

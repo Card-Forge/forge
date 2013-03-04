@@ -3,7 +3,6 @@ ManaCost:5
 Types:Artifact
 T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent draws a card, you may pay 1. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 1 | Defined$ You | NumCards$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_eye.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/205.jpg
 Oracle:Whenever an opponent draws a card, you may pay {1}. If you do, draw a card.
+SetInfo:MRD Rare

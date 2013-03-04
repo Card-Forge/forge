@@ -5,8 +5,8 @@ S:Mode$ Continuous | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetT
 SVar:AffectedX:Count$CardManaCost
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_the_machines.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/42.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/91.jpg
 Oracle:Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost. (Equipment that's a creature can't equip a creature.)
+SetInfo:MRD Rare
+SetInfo:ARC Rare
+SetInfo:10E Rare

@@ -10,7 +10,6 @@ SVar:Sac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Description$ Enchanted creature has shroud. (It can't be the target of spells or abilities.)
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_veil.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/38.jpg
 Oracle:You may cast Mystic Veil as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant creature\nEnchanted creature has shroud. (It can't be the target of spells or abilities.)
+SetInfo:VIS Common

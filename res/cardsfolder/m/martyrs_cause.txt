@@ -7,7 +7,6 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsImprinted | 
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_cause.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/13.jpg
 Oracle:Sacrifice a creature: The next time a source of your choice would deal damage to target creature or player this turn, prevent that damage.
+SetInfo:ULG Uncommon

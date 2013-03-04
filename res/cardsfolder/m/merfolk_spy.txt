@@ -5,7 +5,6 @@ PT:1/1
 K:Islandwalk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReveal | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals a card at random from his or her hand.
 SVar:TrigReveal:AB$ Reveal | Cost$ 0 | Random$ True | Defined$ TriggeredTarget
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_spy.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/66.jpg
 Oracle:Islandwalk (This creature is unblockable as long as defending player controls an Island.)\nWhenever Merfolk Spy deals combat damage to a player, that player reveals a card at random from his or her hand.
+SetInfo:M11 Common

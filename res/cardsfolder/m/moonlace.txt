@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Animate | Cost$ U | Colors$ Colorless | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Permanent$ True | SpellDescription$ Target spell or permanent becomes blue. (Mana symbols on that permanent remain unchanged.)
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlace.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/68.jpg
 Oracle:Target spell or permanent becomes colorless.
+SetInfo:TSP Rare

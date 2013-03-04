@@ -4,7 +4,6 @@ Types:Creature Metathran Soldier
 PT:2/3
 S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddKeyword$ Unblockable | Description$ CARDNAME is unblockable as long as it's enchanted.
 SVar:EnchantMe:Once
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_elite.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/38.jpg
 Oracle:Metathran Elite is unblockable as long as it's enchanted.
+SetInfo:UDS Uncommon

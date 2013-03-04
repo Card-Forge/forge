@@ -6,7 +6,6 @@ SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature.IsImprinted | ValidTa
 SVar:MirrorStrikeDmg:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ MirroredX | References$ MirroredX
 SVar:MirroredX:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_strike.jpg
-SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/17.jpg
 Oracle:All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead.
+SetInfo:PCY Uncommon

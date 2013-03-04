@@ -8,5 +8,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.sharesCreatureTypeWith Remembered+YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_echoes.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/218.jpg
 Oracle:Whenever a creature enters the battlefield, you may add {X} to your mana pool, where X is the number of creatures you control that share a creature type with it.
+SetInfo:ONS Rare

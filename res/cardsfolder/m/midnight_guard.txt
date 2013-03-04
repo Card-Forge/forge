@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another creature enters the battlefield, untap CARDNAME.
 SVar:TrigUntap:DB$Untap | Cost$ 0 | Defined$ Self
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_guard.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/14.jpg
 Oracle:Whenever another creature enters the battlefield, untap Midnight Guard.
+SetInfo:DKA Common

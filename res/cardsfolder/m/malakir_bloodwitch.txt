@@ -11,7 +11,6 @@ SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
 SVar:X:Count$Valid Vampire.YouCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malakir_bloodwitch.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/100.jpg
 Oracle:Flying, protection from white\nWhen Malakir Bloodwitch enters the battlefield, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.
+SetInfo:ZEN Rare

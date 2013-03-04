@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Refer
 SVar:X:Count$Valid Creature.Other/Negative
 SVar:AntiBuffedBy:Creature
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_squad.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/192.jpg
 Oracle:Mogg Squad gets -1/-1 for each other creature on the battlefield.
+SetInfo:TMP Uncommon

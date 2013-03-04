@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | 
 SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 3 | SubAbility$ DBTutor
 SVar:DBTutor:DB$ ChangeZone | DefinedPlayer$ TriggeredPlayer | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maralen_of_the_mornsong.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/65.jpg
 Oracle:Players can't draw cards.\nAt the beginning of each player's draw step, that player loses 3 life, searches his or her library for a card, puts it into his or her hand, then shuffles his or her library.
+SetInfo:MOR Rare

@@ -4,8 +4,7 @@ Types:Sorcery
 A:SP$ Discard | Cost$ X B B | ValidTgts$ Player | NumCards$ X | References$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_shatter.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/66.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/106.jpg
 Oracle:Target player discards X cards at random.
+SetInfo:MOR Rare
+SetInfo:M10 Rare

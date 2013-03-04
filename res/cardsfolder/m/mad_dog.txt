@@ -8,7 +8,6 @@ SVar:Y:Count$ThisTurnEntered_Battlefield_Card.Self
 SVar:Z:Count$Valid Card.Self+attackedThisTurn
 SVar:X:SVar$Y/Plus.Z
 SVar:MustAttack:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mad_dog.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/202.jpg
 Oracle:At the beginning of your end step, if Mad Dog didn't attack or come under your control this turn, sacrifice it.
+SetInfo:ODY Common

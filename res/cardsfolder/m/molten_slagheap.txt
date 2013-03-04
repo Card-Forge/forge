@@ -6,8 +6,7 @@ A:AB$ PutCounter | Cost$ 1 T | CounterType$ STORAGE | CounterNum$ 1 | SpellDescr
 A:AB$ Mana | Cost$ 1 SubCounter<X/STORAGE> | Produced$ Combo B R | Amount$ ChosenX | CostDesc$ 1, Remove any number of storage counters from CARDNAME: | References$ X | SpellDescription$ Add X mana in any combination of B and/or R to your mana pool.
 SVar:X:XChoice
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_slagheap.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/282.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/276.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}: Put a storage counter on Molten Slagheap.\n{1}, Remove X storage counters from Molten Slagheap: Add X mana in any combination of {B} and/or {R} to your mana pool.
+SetInfo:COM Uncommon
+SetInfo:TSP Uncommon

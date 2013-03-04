@@ -10,7 +10,6 @@ SVar:TrigMusicianPay:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZon
 SVar:MusiciansSpite:AB$ Destroy | Cost$ 0 | Defined$ Self | UnlessCost$ MusicX | UnlessPayer$ You | References$ MusicX
 SVar:MusicX:Count$CardCounters.MUSIC
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/musician.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/85.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\n{T}: Put a music counter on target creature. If it doesn't have "At the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it," it gains that ability.
+SetInfo:ICE Rare

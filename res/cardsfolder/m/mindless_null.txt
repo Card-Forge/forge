@@ -4,7 +4,6 @@ Types:Creature Zombie
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME can't block unless you control a Vampire.
 SVar:X:Count$Valid Vampire.YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindless_null.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/103.jpg
 Oracle:Mindless Null can't block unless you control a Vampire.
+SetInfo:ZEN Common

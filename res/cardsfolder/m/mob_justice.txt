@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of creatures you control.
 SVar:X:Count$TypeYouCtrl.Creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mob_justice.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/90.jpg
 Oracle:Mob Justice deals damage to target player equal to the number of creatures you control.
+SetInfo:STH Common

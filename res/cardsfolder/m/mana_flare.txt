@@ -4,12 +4,11 @@ Types:Enchantment
 T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
 SVar:TrigMana:AB$ ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_flare.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/163.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/164.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/249.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/229.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/163.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/163.jpg
 Oracle:Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
+SetInfo:2ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

@@ -5,7 +5,6 @@ PT:5/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME or another creature you control with power 5 or greater is put into a graveyard from the battlefield, you may gain 5 life.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+powerGE5+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | Secondary$ True | TriggerDescription$ When CARDNAME or another creature you control with power 5 or greater is put into a graveyard from the battlefield, you may gain 5 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 5
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoid_shepherd.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/73.jpg
 Oracle:Whenever Mycoid Shepherd or another creature you control with power 5 or greater dies, you may gain 5 life.
+SetInfo:ARB Rare

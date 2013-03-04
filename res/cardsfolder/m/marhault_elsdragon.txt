@@ -3,8 +3,7 @@ ManaCost:3 G R R
 Types:Legendary Creature Elf Warrior
 PT:4/6
 K:Rampage 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marhault_elsdragon.jpg
 Oracle:Rampage 1 (Whenever this creature becomes blocked, it gets +1/+1 until end of turn for each creature blocking it beyond the first.)
-SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/114.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/284.jpg
+SetInfo:CHR Uncommon
+SetInfo:LEG Uncommon

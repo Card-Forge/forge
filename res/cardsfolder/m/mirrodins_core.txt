@@ -4,7 +4,6 @@ Types:Land
 A:AB$Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$PutCounter | Cost$ T | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 A:AB$Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrodins_core.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/165.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Put a charge counter on Mirrodin's Core.\n{T}, Remove a charge counter from Mirrodin's Core: Add one mana of any color to your mana pool.
+SetInfo:DST Uncommon

@@ -4,7 +4,6 @@ Types:Artifact
 K:Indestructible
 S:Mode$ Continuous | Affected$ Creature.Myr | AddPower$ 1 | AddToughness$ 1 | Description$ Myr creatures get +1/+1.
 A:AB$ Token | Cost$ 5 | TokenAmount$ 1 | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 colorless Myr artifact creature token onto the battlefield.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_matrix.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/132.jpg
 Oracle:Myr Matrix is indestructible. ("Destroy" effects and lethal damage don't destroy it.)\nMyr creatures get +1/+1.\n{5}: Put a 1/1 colorless Myr artifact creature token onto the battlefield.
+SetInfo:DST Rare

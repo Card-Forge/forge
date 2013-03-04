@@ -5,7 +5,6 @@ PT:1/1
 K:Double Strike
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markov_blademaster.jpg
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/96.jpg
 Oracle:Double strike\nWhenever Markov Blademaster deals combat damage to a player, put a +1/+1 counter on it.
+SetInfo:DKA Rare

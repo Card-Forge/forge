@@ -4,7 +4,6 @@ Types:Artifact Equipment
 K:Equip 1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 2 | AddAbility$ ABDestroy | Description$ Equipped creature gets +1/+2 and has "Tap: Destroy target Equipment."
 SVar:ABDestroy:AB$Destroy | Cost$ T | ValidTgts$ Equipment | TgtPrompt$ Select target Equipment. | SpellDescription$ Destroy target Equipment.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manriki_gusari.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/156.jpg
 Oracle:Equipped creature gets +1/+2 and has "{T}: Destroy target Equipment."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:SOK Uncommon

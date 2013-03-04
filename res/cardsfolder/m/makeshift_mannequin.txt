@@ -7,7 +7,7 @@ SVar:DBAnimate:DB$ Animate | Triggers$ BecomesTarget | sVars$ TrigSac | Defined$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:BecomesTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self+counters_GE1_MANNEQUIN | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/makeshift_mannequin.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/124.jpg
 Oracle:Return target creature card from your graveyard to the battlefield with a mannequin counter on it. For as long as that creature has a mannequin counter on it, it has "When this creature becomes the target of a spell or ability, sacrifice it."
+SetInfo:ARC Uncommon
+SetInfo:LRW Uncommon

@@ -10,7 +10,7 @@ SVar:OppDiscard: DB$ Discard | Defined$ Opponent | Mode$ Hand | SubAbility$ Retu
 SVar:ReturnAll:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_jar.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/129.jpg
 Oracle:{T}, Sacrifice Memory Jar: Each player exiles all cards from his or her hand face down and draws seven cards. At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each card he or she exiled this way.
+SetInfo:ULG Rare
+SetInfo:V10 Mythic

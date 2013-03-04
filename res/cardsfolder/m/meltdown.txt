@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ DestroyAll | Cost$ X R | ValidCards$ Artifact.cmcLEX | References$ X | SpellDescription$ Destroy each artifact with converted mana cost X or less.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meltdown.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/203.jpg
 Oracle:Destroy each artifact with converted mana cost X or less.
+SetInfo:USG Uncommon

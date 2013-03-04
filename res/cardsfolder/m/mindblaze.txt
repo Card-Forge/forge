@@ -11,7 +11,6 @@ SVar:Y:Remembered$Valid Card.NamedCard
 SVar:Z:Number$ChosenNumber
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindblaze.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/180.jpg
 Oracle:Name a nonland card and choose a number greater than 0. Target player reveals his or her library. If that library contains exactly the chosen number of the named card, Mindblaze deals 8 damage to that player. Then that player shuffles his or her library.
+SetInfo:CHK Rare

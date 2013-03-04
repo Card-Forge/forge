@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ ChooseType | Cost$ 1 | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBAnimate | SpellDescription$ Enchanted creature becomes the creature type of your choice until end of turn.
 SVar:DBAnimate:DB$ Animate | Defined$ Enchanted | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistform_mask.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/94.jpg
 Oracle:Enchant creature\n{1}: Enchanted creature becomes the creature type of your choice until end of turn.
+SetInfo:ONS Common

@@ -10,7 +10,6 @@ SVar:PayX:5
 SVar:NeedsToPlayVar:OwnCreats LEOppCreats
 SVar:OwnCreats:Count$SumPower_Creature.YouCtrl
 SVar:OppCreats:Count$SumPower_Creature.YouDontCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martial_coup.jpg
-SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/11.jpg
 Oracle:Put X 1/1 white Soldier creature tokens onto the battlefield. If X is 5 or more, destroy all other creatures.
+SetInfo:CFX Rare

@@ -4,7 +4,6 @@ Types:Sorcery
 K:Flashback 3 W
 A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance | SpellDescription$ Creatures you control get +1/+1 and gain vigilance until end of turn.
 K:Cycling:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marshaling_cry.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/13.jpg
 Oracle:Creatures you control get +1/+1 and gain vigilance until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)\nFlashback {3}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:FUT Common

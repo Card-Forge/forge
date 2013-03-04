@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Counter | Cost$ 2 G U U | TargetType$ Spell | RememberTargets$ True | ForgetOtherTargets$ True | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Ooze | TokenTypes$ Creature,Ooze | TokenOwner$ You | TokenColors$ Green | TokenPower$ X | TokenToughness$ X | References$ X
 SVar:X:Remembered$CardManaCost
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_genesis.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/180.jpg
 Oracle:Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.
+SetInfo:GTC Rare

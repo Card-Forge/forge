@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target artifact for as long as you control CARDNAME.
 SVar:TrigChange:AB$GainControl | Cost$ 0 | TgtPrompt$ Choose target artifact | ValidTgts$ Artifact | LoseControl$ LeavesPlay, LoseControl | SpellDescription$ Gain control of target artifact for as long as you control CARDNAME.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_thief.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/64.jpg
 Oracle:When Master Thief enters the battlefield, gain control of target artifact for as long as you control Master Thief.
+SetInfo:M12 Uncommon

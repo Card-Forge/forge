@@ -7,7 +7,6 @@ SVar:ETBCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DIVINITY 
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ CARDNAME is indestructible as long as it has a divinity counter on it.
 A:AB$DestroyAll | Cost$ SubCounter<1/DIVINITY> | ValidCards$ Land | SpellDescription$ Destroy all lands.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myojin_of_infinite_rage.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/181.jpg
 Oracle:Myojin of Infinite Rage enters the battlefield with a divinity counter on it if you cast it from your hand.\nMyojin of Infinite Rage is indestructible as long as it has a divinity counter on it.\nRemove a divinity counter from Myojin of Infinite Rage: Destroy all lands.
+SetInfo:CHK Rare

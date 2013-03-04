@@ -6,5 +6,5 @@ A:AB$ Clone | Cost$ 1 U R | ValidTgts$ Artifact | TgtPrompt$ Select target artif
 SVar:MizzCopy:AB$ Clone | Cost$ 1 U R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact to copy. | AddAbilities$ MizzCopy | AddSVars$ MizzCopy | SpellDescription$ CARDNAME becomes a copy of target artifact and gains this ability.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mizzium_transreliquat.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/153.jpg
 Oracle:{3}: Mizzium Transreliquat becomes a copy of target artifact until end of turn.\n{1}{U}{R}: Mizzium Transreliquat becomes a copy of target artifact and gains this ability.
+SetInfo:GPT Rare

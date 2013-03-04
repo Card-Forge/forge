@@ -4,8 +4,7 @@ Types:Creature Human Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
 SVar:TrigDestroy:DB$Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manic_vandal.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/151.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/151.jpg
 Oracle:When Manic Vandal enters the battlefield, destroy target artifact.
+SetInfo:M11 Common
+SetInfo:M12 Common

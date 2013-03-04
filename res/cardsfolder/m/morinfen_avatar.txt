@@ -7,7 +7,6 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ Ouch
 SVar:Ouch:Count$Valid Permanent.YouCtrl
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/morinfen_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/morinfen.jpg
 Oracle:Hand +0, life +30\nAt the beginning of your upkeep, you lose 1 life for each permanent you control.
+SetInfo:VAN Special

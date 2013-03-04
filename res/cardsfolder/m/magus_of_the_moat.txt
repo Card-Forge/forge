@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:0/3
 S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures without flying can't attack.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_moat.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/12.jpg
 Oracle:Creatures without flying can't attack.
+SetInfo:FUT Rare

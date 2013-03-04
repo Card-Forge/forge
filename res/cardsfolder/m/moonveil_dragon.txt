@@ -5,5 +5,5 @@ PT:5/5
 K:Flying
 A:AB$ PumpAll | Cost$ R | NumAtt$ +1 | ValidCards$ Creature.YouCtrl |SpellDescription$ Each creature you control gets +1/+0 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonveil_dragon.jpg
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/99.jpg
 Oracle:Flying\n{R}: Each creature you control gets +1/+0 until end of turn.
+SetInfo:DKA Mythic

@@ -6,7 +6,6 @@ A:AB$ Token | Cost$ G Sac<1/CARDNAME> | TokenImage$ G 3 3 Beast | TokenAmount$ X
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
 SVar:RemAIDeck:True
 SVar:X:Count$CardCounters.VERSE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midsummer_revel.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/268.jpg
 Oracle:At the beginning of your upkeep, you may put a verse counter on Midsummer Revel.\n{G}, Sacrifice Midsummer Revel: Put X 3/3 green Beast creature tokens onto the battlefield, where X is the number of verse counters on Midsummer Revel.
+SetInfo:USG Rare

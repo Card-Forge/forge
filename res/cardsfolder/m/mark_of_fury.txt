@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste | Description$ Enchanted creature has haste.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mark_of_fury.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/93.jpg
 Oracle:Enchant creature\nEnchanted creature has haste.\nAt the beginning of the end step, return Mark of Fury to its owner's hand.
+SetInfo:UDS Common

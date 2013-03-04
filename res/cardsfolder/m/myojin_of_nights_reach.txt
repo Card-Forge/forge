@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battle
 SVar:ETBCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ DIVINITY | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ CARDNAME is indestructible as long as it has a divinity counter on it.
 A:AB$ Discard | Cost$ SubCounter<1/DIVINITY> | Defined$ Player.Opponent | Mode$ Hand | SpellDescription$ Each opponent discards his or her hand.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myojin_of_nights_reach.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/126.jpg
 Oracle:Myojin of Night's Reach enters the battlefield with a divinity counter on it if you cast it from your hand.\nMyojin of Night's Reach is indestructible as long as it has a divinity counter on it.\nRemove a divinity counter from Myojin of Night's Reach: Each opponent discards his or her hand.
+SetInfo:CHK Rare

@@ -4,7 +4,6 @@ Types:Creature Plant Hound
 PT:1/1
 T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | ValidControllingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mossdog.jpg
-SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/106.jpg
 Oracle:Whenever Mossdog becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on Mossdog.
+SetInfo:NMS Common
