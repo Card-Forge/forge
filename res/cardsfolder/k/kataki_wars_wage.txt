@@ -4,7 +4,6 @@ Types:Legendary Creature Spirit
 PT:2/1
 S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 | Description$ All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay 1."
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kataki_wars_wage.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/14.jpg
 Oracle:All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {1}."
+SetInfo:SOK Rare

@@ -10,7 +10,6 @@ SVar:TokenLow:AB$Token | Cost$ T | TokenAmount$ 1 | TokenName$ Elephant | TokenT
 SVar:TokenHigh:AB$Token | Cost$ T | TokenAmount$ 2 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SpellDescription$ Put two 3/3 green Elephant creature tokens onto the battlefield.
 SVar:X:Count$Valid Card.Self+counters_GE2_LEVEL+counters_LE5_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE6_LEVEL
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_tuskcaller.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/191.jpg
 Oracle:Level up {1}{G} ({1}{G}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-5\n1/1\n{T}: Put a 3/3 green Elephant creature token onto the battlefield.\nLEVEL 6+\n1/1\n{T}: Put two 3/3 green Elephant creature tokens onto the battlefield.
+SetInfo:ROE Rare

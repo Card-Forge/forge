@@ -6,7 +6,7 @@ K:Vanishing:2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target player.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, it deals 1 damage to target player.
 SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_marauders.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/102.jpg
 Oracle:Vanishing 2 (This permanent enters the battlefield with two time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Keldon Marauders enters the battlefield or leaves the battlefield, it deals 1 damage to target player.
+SetInfo:PLC Common
+SetInfo:PD2 Common

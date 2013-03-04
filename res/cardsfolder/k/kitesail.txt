@@ -3,8 +3,7 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Flying | Description$ Equipped creature gets +1/+0 and has flying.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitesail.jpg
-SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/208.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/126.jpg
 Oracle:Equipped creature gets +1/+0 and has flying.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:M13 Uncommon
+SetInfo:WWK Common

@@ -5,7 +5,6 @@ PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice an artifact. If you do, CARDNAME deals 4 damage divided as you choose among any number of target creatures and/or players.
 SVar:TrigDealDamage:AB$ DealDamage | Cost$ Sac<1/Artifact> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_flamefiend.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/69.jpg
 Oracle:When Kuldotha Flamefiend enters the battlefield, you may sacrifice an artifact. If you do, Kuldotha Flamefiend deals 4 damage divided as you choose among any number of target creatures and/or players.
+SetInfo:MBS Uncommon

@@ -8,7 +8,6 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | Present
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kukemssa_serpent.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/72.jpg
 Oracle:Kukemssa Serpent can't attack unless defending player controls an Island.\n{U}, Sacrifice an Island: Target land an opponent controls becomes an Island until end of turn.\nWhen you control no Islands, sacrifice Kukemssa Serpent.
+SetInfo:MIR Common

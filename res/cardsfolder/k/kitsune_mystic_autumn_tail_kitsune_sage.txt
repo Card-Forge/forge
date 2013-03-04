@@ -9,7 +9,6 @@ DeckNeeds:Type$Aura
 SVar:EnchantMe:Multiple
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_mystic.jpg
 AlternateMode:Flip
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/28a.jpg
 Oracle:At the beginning of the end step, if Kitsune Mystic is enchanted by two or more Auras, flip it.
 
 ALTERNATE
@@ -24,6 +23,6 @@ SVar:KitsuneAttach:DB$ Attach | Object$ ParentTarget | Defined$ Remembered | Sub
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/autumn_tail_kitsune_sage.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/28b.jpg
 Oracle:{1}: Attach target Aura attached to a creature to another creature.
 
+SetInfo:CHK Rare

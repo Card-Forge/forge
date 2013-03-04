@@ -4,9 +4,8 @@ Types:Creature Insect
 PT:0/1
 K:Flying
 A:AB$ Pump | Cost$ G | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/killer_bees.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/169.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/138.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/106.jpg
 Oracle:Flying\n{G}: Killer Bees gets +1/+1 until end of turn.
+SetInfo:5ED Uncommon
+SetInfo:LEG Rare
+SetInfo:4ED Uncommon

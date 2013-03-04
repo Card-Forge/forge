@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Creature Elf Archer
 PT:2/2
 K:Reach
-SVar:Rarity:Common
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/keen_eyed_archers.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/181.jpg
 Oracle:Reach (This creature can block creatures with flying.)
+SetInfo:POR Common

@@ -3,11 +3,10 @@ ManaCost:4
 Types:Artifact
 S:Mode$ Continuous | Affected$ Swamp | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature | SetColor$ Black | Description$ All Swamps are 1/1 black creatures that are still lands.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kormus_bell.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/256.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/258.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/260.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/350.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/257.jpg
 Oracle:All Swamps are 1/1 black creatures that are still lands.
+SetInfo:2ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

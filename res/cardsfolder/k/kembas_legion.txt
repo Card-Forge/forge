@@ -5,8 +5,7 @@ PT:4/6
 K:Vigilance
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can block an additional creature. | KeywordMultiplier$ X | Description$ CARDNAME can block an additional creature for each Equipment attached to CARDNAME.
 SVar:X:Count$Valid Equipment.Attached
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kembas_legion.jpg
 SVar:EquipMe:Multiple
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/9.jpg
 Oracle:Vigilance\nKemba's Legion can block an additional creature for each Equipment attached to Kemba's Legion.
+SetInfo:MBS Uncommon

@@ -4,7 +4,6 @@ Types:Creature Goblin
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may have CARDNAME deal 1 damage to target player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_sniper.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/199.jpg
 Oracle:At the beginning of your upkeep, you may have Kyren Sniper deal 1 damage to target player.
+SetInfo:MMQ Common

@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Kithkin Soldier
 PT:1/1
 A:AB$ Pump | Cost$ T G | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Target attacking creature gets +2/+2 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_daggerdare.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/223.jpg
 Oracle:{G}, {T}: Target attacking creature gets +2/+2 until end of turn.
+SetInfo:LRW Common

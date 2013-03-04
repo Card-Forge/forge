@@ -8,7 +8,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ 
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_gargoyle.jpg
-SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/10.jpg
 Oracle:Flying, first strike\nWhenever Kjeldoran Gargoyle deals damage, you gain that much life.
+SetInfo:CSP Uncommon

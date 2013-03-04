@@ -7,8 +7,7 @@ A:AB$ Draw | Cost$ T Discard<1/Card.Black> | NumCards$ 2 | CostDesc$ Tap, Discar
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_sorcerer.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/96.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/81.jpg
 Oracle:{T}, Discard a nonblack card: Draw a card.\n{T}, Discard a black card: Draw two cards, then discard one of them.
+SetInfo:ICE Common
+SetInfo:5ED Common

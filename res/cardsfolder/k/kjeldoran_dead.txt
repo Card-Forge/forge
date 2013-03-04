@@ -6,9 +6,8 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_dead.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/32.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/140.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/25.jpg
 Oracle:When Kjeldoran Dead enters the battlefield, sacrifice a creature.\n{B}: Regenerate Kjeldoran Dead.
+SetInfo:ICE Common
+SetInfo:5ED Common
+SetInfo:6ED Common

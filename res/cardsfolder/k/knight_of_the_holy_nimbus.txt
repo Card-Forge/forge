@@ -5,7 +5,6 @@ PT:2/2
 K:Flanking
 K:If CARDNAME would be destroyed, regenerate it.
 A:AB$ Pump | Cost$ 2 | AnyOpponent$ True | Defined$ Self | KW$ HIDDEN CARDNAME can't be regenerated. | IsCurse$ True | SpellDescription$ CARDNAME can't be regenerated this turn. Only any opponent may activate this ability.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_holy_nimbus.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/26.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nIf Knight of the Holy Nimbus would be destroyed, regenerate it.\n{2}: Knight of the Holy Nimbus can't be regenerated this turn. Only any opponent may activate this ability.
+SetInfo:TSP Uncommon

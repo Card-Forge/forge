@@ -4,7 +4,6 @@ Types:Creature Kithkin Soldier
 Text:CARDNAME enters the battlefield with a +1/+1 counter on it for each other Kithkin you control.\r\nWhen CARDNAME is put into a graveyard from the battlefield, put a 1/1 white Kithkin Soldier creature token onto the battlefield for each counter on it.
 PT:1/1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_borderguard.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/14.jpg
 Oracle:Kinsbaile Borderguard enters the battlefield with a +1/+1 counter on it for each other Kithkin you control.\nWhen Kinsbaile Borderguard dies, put a 1/1 white Kithkin Soldier creature token onto the battlefield for each counter on it.
+SetInfo:MOR Rare

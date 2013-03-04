@@ -6,7 +6,6 @@ SVar:DBDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ Z | Conditio
 SVar:X:Targeted$CardManaCost
 SVar:Y:Remembered$Amount
 SVar:Z:Targeted$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaerveks_purge.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/330.jpg
 Oracle:Destroy target creature with converted mana cost X. If that creature dies this way, Kaervek's Purge deals damage equal to the creature's power to the creature's controller.
+SetInfo:MIR Uncommon

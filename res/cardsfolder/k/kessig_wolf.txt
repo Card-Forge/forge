@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Wolf
 PT:3/1
 A:AB$ Pump | Cost$ 1 R | Defined$ Self | KW$ First Strike | SpellDescription$ Kessig Wolf gains first strike until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_wolf.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/151.jpg
 Oracle:{1}{R}: Kessig Wolf gains first strike until end of turn.
+SetInfo:ISD Common

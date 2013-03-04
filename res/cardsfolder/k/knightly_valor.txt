@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 4 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +2/+2 and has vigilance.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Vigilance | TokenImage$ w 2 2 knight rtr
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knightly_valor.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/13.jpg
 Oracle:Enchant creature\nWhen Knightly Valor enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.\nEnchanted creature gets +2/+2 and has vigilance.
+SetInfo:RTR Common

@@ -3,8 +3,7 @@ ManaCost:1 B B
 Types:Creature Human Knight
 PT:2/2
 A:AB$ Destroy | Cost$ B B | ValidTgts$ Creature.blockingSource | TgtPrompt$ Select target creature blocking Knight of Dusk | SpellDescription$ Destroy target creature blocking CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_dusk.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/34.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/152.jpg
 Oracle:{B}{B}: Destroy target creature blocking Knight of Dusk.
+SetInfo:TMP Uncommon
+SetInfo:10E Uncommon

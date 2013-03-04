@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Draw | Cost$ 2 U | NumCards$ X | References$ X | SpellDescription$ Draw a card for each attacking creature.
 SVar:X:Count$Valid Creature.attacking
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keep_watch.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/43.jpg
 Oracle:Draw a card for each attacking creature.
+SetInfo:HOP Common
+SetInfo:JUD Common

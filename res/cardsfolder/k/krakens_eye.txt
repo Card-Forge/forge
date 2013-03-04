@@ -5,12 +5,11 @@ T:Mode$ SpellCast | ValidCard$ Card.Blue | TriggerZones$ Battlefield | OptionalD
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krakens_eye.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/126.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/302.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/329.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/210.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/213.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/211.jpg
 Oracle:Whenever a player casts a blue spell, you may gain 1 life.
+SetInfo:DST Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:M11 Uncommon
+SetInfo:M10 Uncommon
+SetInfo:M12 Uncommon

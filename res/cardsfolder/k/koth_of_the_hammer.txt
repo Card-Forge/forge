@@ -11,7 +11,7 @@ SVar:ABDealDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPro
 SVar:Damage:Mountains you control have '{T}: This land deals 1 damage to target creature or player.
 SVar:X:Count$Valid Mountain.YouCtrl
 SVar:PlayMain1:TRUE
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/koth_of_the_hammer.jpg
-SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/94.jpg
 Oracle:[+1] Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.\n[-2] Add {R} to your mana pool for each Mountain you control.\n[-5] You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
+SetInfo:DDI Mythic
+SetInfo:SOM Mythic

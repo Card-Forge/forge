@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Creature Human Soldier
 PT:2/2
 A:AB$ Pump | Cost$ W | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_outrider.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/12.jpg
 Oracle:{W}: Kjeldoran Outrider gets +0/+1 until end of turn.
+SetInfo:CSP Common

@@ -7,7 +7,6 @@ T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Delaye
 SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigBounce | TriggerDescription$ Return blocked creature to its owner's hand at end of combat.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredAttacker
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaijin_of_the_vanishing_touch.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/39.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Kaijin of the Vanishing Touch blocks a creature, return that creature to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
+SetInfo:BOK Uncommon

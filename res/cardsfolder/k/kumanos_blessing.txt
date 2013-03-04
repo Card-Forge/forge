@@ -7,5 +7,5 @@ A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.wasDealtDamageByEnchantedThisTurn | AddHiddenKeyword$ If CARDNAME would be put into a graveyard, exile it instead. | Description$ If a creature dealt damage by enchanted creature this turn would die, exile it instead.
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kumanos_blessing.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/111.jpg
 Oracle:Flash\nEnchant creature\nIf a creature dealt damage by enchanted creature this turn would die, exile it instead.
+SetInfo:BOK Common

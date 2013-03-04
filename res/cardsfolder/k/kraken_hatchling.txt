@@ -2,8 +2,7 @@ Name:Kraken Hatchling
 ManaCost:U
 Types:Creature Kraken
 PT:0/4
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kraken_hatchling.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/58.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/50.jpg
 Oracle:
+SetInfo:M13 Common
+SetInfo:ZEN Common
