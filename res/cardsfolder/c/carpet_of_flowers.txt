@@ -7,7 +7,8 @@ SVar:ChooseNumber:DB$ ChooseNumber | Min$ 0 | Max$ NumManaMax | References$ NumM
 SVar:DBMana:DB$ Mana | Amount$ X | Produced$ Any | SubAbility$ CheckPlus
 SVar:CheckPlus:DB$ StoreSVar | SVar$ CarpetX | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigReset | Static$ True
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
 SVar:TrigReset:AB$ StoreSVar | Cost$ 0 | SVar$ CarpetX | Type$ Number | Expression$ 0
 SVar:X:Count$ChosenNumber
 SVar:NumManaMax:Count$Valid Island.RememberedPlayerCtrl

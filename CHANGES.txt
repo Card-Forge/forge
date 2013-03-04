@@ -6,7 +6,13 @@ Forge Beta: 03-##-2013 ver 1.3.10
 
 Release Notes:
 
+A new quest world by Serrasmurf based on Ravinca has been added.
 
+An effort is being made to implement the split cards (e.g. Fire/Ice) in Forge.
+
+The "Scale Image Larger" option in the preferences should be fixed. It should no longer continue to scale images larger when it is disabled.
+
+The fat packs should now be available for purchase in the quest mode card shop.
 
 
 New Cards:
@@ -15,6 +21,13 @@ Dimensional Breach
 Lim-Dul's Vault
 Eureka
 Hypergenesis
+Death by Dragons
+Carpet of Flowers
+Goblin Welder
+Delaying Shield
+Fatal Lore
+Library of Lat-Nam
+Misfortune
 
 
 New Phenomenons:

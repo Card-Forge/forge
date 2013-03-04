@@ -19,6 +19,7 @@ package forge.card;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -32,7 +33,8 @@ import forge.card.mana.ManaCost;
  * @version $Id: CardRules.java 9708 2011-08-09 19:34:12Z jendave $
  */
 public final class CardRules implements ICardCharacteristics {
-
+    private final static EditionCollection editions = new EditionCollection(); // create a copy here, Singletons.model... is not initialized yet.
+    
     private final CardSplitType splitType;
     private final ICardFace mainPart;
     private final ICardFace otherPart;
@@ -48,8 +50,14 @@ public final class CardRules implements ICardCharacteristics {
         mainPart = faces[0];
         otherPart = faces[1];
         aiHints = cah;
-        setsPrinted.putAll(sets);
         
+        //System.out.print(faces[0].getName());
+        
+        for (Entry<String, CardInSet> cs : sets.entrySet()) {
+            if( editions.get(cs.getKey()) != null )
+                setsPrinted.put(cs.getKey(), cs.getValue());
+        }
+
         if ( setsPrinted.isEmpty() ) { 
             System.err.println(getName() + " was not assigned any set."); 
             setsPrinted.put(CardEdition.UNKNOWN.getCode(), new CardInSet(CardRarity.Common, 1) );
