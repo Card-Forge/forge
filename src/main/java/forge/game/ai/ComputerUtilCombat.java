@@ -1857,7 +1857,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        restDamage = target.staticDamagePrevention(restDamage, source, isCombat);
+        restDamage = target.staticDamagePrevention(restDamage, source, isCombat, true);
 
         return restDamage;
     }
@@ -1882,7 +1882,7 @@ public class ComputerUtilCombat {
         int restDamage = damage;
 
         restDamage = target.staticReplaceDamage(restDamage, source, isCombat);
-        restDamage = target.staticDamagePrevention(restDamage, source, isCombat);
+        restDamage = target.staticDamagePrevention(restDamage, source, isCombat, true);
 
         return restDamage;
     }

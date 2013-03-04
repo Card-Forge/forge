@@ -44,7 +44,7 @@ public class StaticAbilityPreventDamage {
      * @return the int
      */
     public static int applyPreventDamageAbility(final StaticAbility stAb, final Card source, final GameEntity target,
-            final int damage, final boolean isCombat) {
+            final int damage, final boolean isCombat, final boolean isTest) {
         final HashMap<String, String> params = stAb.getMapParams();
         final Card hostCard = stAb.getHostCard();
         int restDamage = damage;
@@ -71,7 +71,7 @@ public class StaticAbilityPreventDamage {
             return restDamage;
         }
 
-        if (params.containsKey("Optional")) { //Assume if param is present it should be optional
+        if (!isTest && params.containsKey("Optional")) { //Assume if param is present it should be optional
             final String logic = params.containsKey("AILogic") ? params.get("AILogic") : "";
             final String message = "Apply the effect of " + hostCard + "?";
             boolean confirmed = hostCard.getController().getController().confirmStaticApplication(hostCard, target, logic, message);

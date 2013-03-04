@@ -672,7 +672,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return a int.
      */
     @Override
-    public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
+    public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat, final boolean isTest) {
 
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damage;
@@ -709,7 +709,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
+                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat, isTest);
             }
         }
 
@@ -884,7 +884,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
+        restDamage = this.staticDamagePrevention(restDamage, source, isCombat, false);
 
         if (restDamage >= this.getPreventNextDamage()) {
             restDamage = restDamage - this.getPreventNextDamage();

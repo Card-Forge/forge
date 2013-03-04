@@ -8002,7 +8002,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @param damage
      *            a int.
-     * @param possiblePrvenetion
+     * @param possiblePrevention
      *            a int.
      * @param source
      *            a {@link forge.Card} object.
@@ -8010,7 +8010,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a boolean.
      * @return a int.
      */
-    public final int staticDamagePrevention(final int damage, final int possiblePrvenetion, final Card source,
+    public final int staticDamagePrevention(final int damage, final int possiblePrevention, final Card source,
             final boolean isCombat) {
 
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
@@ -8047,9 +8047,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
-        int restDamage = damage - possiblePrvenetion;
+        int restDamage = damage - possiblePrevention;
 
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
+        restDamage = this.staticDamagePrevention(restDamage, source, isCombat, true);
 
         return restDamage;
     }
@@ -8070,7 +8070,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     @Override
-    public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat) {
+    public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat, final boolean isTest) {
 
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damageIn;
@@ -8138,7 +8138,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
+                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat, isTest);
             }
         }
 
@@ -8198,7 +8198,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
+        restDamage = this.staticDamagePrevention(restDamage, source, isCombat, false);
 
         if (restDamage == 0) {
             return 0;
