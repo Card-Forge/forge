@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gruul2006 1
+Title=Gruul 2006
+Icon=Gruul-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+1 Battering Wurm|GPT
+3 Beastmaster's Magemark|GPT
+3 Bloodscale Prowler|GPT
+1 Borborygmos|GPT
+2 Dowsing Shaman|PC2
+2 Dryad Sophisticate|GPT
+3 Fencer's Magemark|GPT
+2 Fists of Ironwood|COM
+12 Forest|RTR
+2 Gatherer of Graces|GPT
+1 Gruul Guildmage|GPT
+1 Gruul Nodorog|GPT
+2 Gruul Scrapper|GPT
+1 Indentured Oaf|RAV
+11 Mountain|RTR
+1 Scab-Clan Mauler|GPT
+1 Scorched Rusalka|GPT
+1 Skarrg, the Rage Pits|PC2
+2 Skarrgan Skybreaker|GPT
+2 Sparkmage Apprentice|M10
+3 Streetbreaker Wurm|GPT
+1 Wild Cantor|GPT
+1 Wildsize|GPT
+1 Wurmweaver Coil|GPT
+[sideboard]
+[planes]
+[schemes]

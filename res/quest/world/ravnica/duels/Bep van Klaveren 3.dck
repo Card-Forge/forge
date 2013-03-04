@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Bep van Klaveren 3
+Title=Bep van Klaveren
+Icon=Bep.jpg
+Difficulty=hard
+Description=The Dutch Windmill
+Deck Type=constructed
+[main]
+2 Darkblast|RAV
+4 Dimir Guildgate|GTC
+4 Glimpse the Unthinkable|RAV
+8 Island|RTR
+4 Grisly Spectacle|GTC
+2 Mind Grind|GTC
+4 Muddle the Mixture|RAV
+2 Psychic Spiral|RTR
+4 Remand|RAV
+4 Dimir Infiltrator|RAV
+8 Swamp|RTR
+4 Watery Grave|GTC
+2 Paranoid Delusions|GTC
+4 Wight of Precinct Six|GTC
+4 Compulsive Research|RAV
+[sideboard]
+[planes]
+[schemes]

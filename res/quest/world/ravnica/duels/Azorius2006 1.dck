@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Azorius2006 1
+Title=Azorius 2006
+Icon=Azorius-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+2 Azorius First-Wing|DIS
+1 Azorius Guildmage|DIS
+3 Beacon Hawk|DIS
+2 Benevolent Ancestor|RAV
+1 Faith's Fetters|RAV
+1 Halcyon Glaze|RAV
+10 Island|RTR
+1 Isperia the Inscrutable|DIS
+2 Minister of Impediments|DIS
+4 Mistral Charger|DIS
+2 Ocular Halo|DIS
+1 Paladin of Prahv|DIS
+1 Palliation Accord|DIS
+13 Plains|RTR
+2 Plumes of Peace|DIS
+1 Prahv, Spires of Order|DIS
+1 Sinstriker's Will|GPT
+2 Sky Hussar|DIS
+4 Stoic Ephemera|DIS
+1 To Arms!|GPT
+4 Wakestone Gargoyle|DIS
+1 Zephyr Spirit|RAV
+[sideboard]
+[planes]
+[schemes]

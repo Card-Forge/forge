@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Lyzolda 2
+Title=Lyzolda 2
+Icon=Lyzolda.jpg
+Difficulty=medium
+Description=Big Fellas
+Deck Type=constructed
+[main]
+2 Bloodfray Giant|RTR
+2 Carnival Hellsteed|RTR
+2 Cobblebrute|RTR
+3 Desecration Demon|RTR
+3 Guild Feud|RTR
+2 Hammerfist Giant|RAV
+1 Hellhole Rats|DIS
+3 Hellraiser Goblin|GTC
+1 Hunted Dragon|RAV
+4 Last Gasp|RAV
+1 Lord of the Void|GTC
+10 Mountain|RTR
+4 Rakdos Guildgate|RTR
+4 Rakdos Keyrune|RTR
+4 Seal of Fire|DIS
+1 Smog Elemental|GTC
+1 Stalking Vengeance|DIS
+2 Street Spasm|RTR
+10 Swamp|RTR
+[sideboard]
+[planes]
+[schemes]

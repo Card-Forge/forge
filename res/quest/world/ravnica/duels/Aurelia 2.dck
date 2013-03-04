@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Aurelia 2
+Title=Aurelia 2
+Icon=Aurelia.jpg
+Difficulty=medium
+Description=Ein, Zwei, Polizei
+Deck Type=constructed
+[main]
+2 Angel of Serenity|RTR
+4 Boros Guildgate|GTC
+4 Concordia Pegasus|RTR
+4 Faith's Fetters|RAV
+3 Firemane Angel|RAV
+4 Foundry Champion|GTC
+4 Lightning Helix|RAV
+4 Mizzium Mortars|RTR
+8 Mountain|RTR
+8 Plains|RTR
+4 Sacred Foundry|GTC
+4 Stoic Ephemera|DIS
+3 Sunhome Guildmage|GTC
+4 Wakestone Gargoyle|DIS
+[sideboard]
+[planes]
+[schemes]

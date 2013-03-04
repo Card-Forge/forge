@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet 3
+Title=Niv-Mizzet 3
+Icon=Niv-Mizzet.jpg
+Difficulty=hard
+Description=Instant karma is gonna get you
+Deck Type=constructed
+[main]
+4 Compulsive Research|RAV
+1 Diluvian Primordial|GTC
+4 Electrolyze|COM
+4 Frostburn Weird|RTR
+4 Spell Snare|DIS
+2 Hypersonic Dragon|RTR
+9 Island|RTR
+4 Izzet Guildgate|RTR
+3 Jace, Architect of Thought|RTR
+4 Mizzium Mortars|RTR
+9 Mountain|RTR
+2 Niv-Mizzet, Dracogenius|RTR
+1 Niv-Mizzet, the Firemind|GPT
+4 Remand|RAV
+4 Steam Vents|RTR
+3 Steamcore Weird|GPT
+[sideboard]
+[planes]
+[schemes]

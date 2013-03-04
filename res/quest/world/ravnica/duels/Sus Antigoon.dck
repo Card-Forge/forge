@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Sus Antigoon 2
+Title=Sus Antigoon
+Icon=Sus Antigoon.jpg
+Difficulty=medium
+Description=Your Ghost
+Deck Type=constructed
+[main]
+1 Clinging Darkness|RAV
+2 Dark Confidant|RAV
+4 Dutiful Thrull|GTC
+4 Ethereal Armor|RTR
+2 Gift of Orzhova|GTC
+4 Godless Shrine|GTC
+4 Grim Roustabout|RTR
+1 Guardian's Magemark|GPT
+1 Necromancer's Magemark|GPT
+4 Orzhov Guildgate|GTC
+4 Pillory of the Sleepless|GPT
+8 Plains|RTR
+2 Precinct Captain|RTR
+4 Shadow Lance|GPT
+2 Sphere of Safety|RTR
+1 Stab Wound|RTR
+8 Swamp|RTR
+4 Underworld Connections|RTR
+[sideboard]
+[planes]
+[schemes]

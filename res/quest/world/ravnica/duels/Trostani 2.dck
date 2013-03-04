@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Trostani 2
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=medium
+Description=Ramp it up
+Deck Type=constructed
+[main]
+1 Angel of Serenity|RTR
+1 Armada Wurm|RTR
+1 Autochthon Wurm|RAV
+4 Birds of Paradise|RAV
+1 Blazing Archon|RAV
+4 Carven Caryatid|RAV
+4 Civic Wayfinder|RAV
+4 Gyre Sage|GTC
+4 Farseek|RAV
+10 Forest|RTR
+1 Luminate Primordial|GTC
+1 Oathsworn Giant|RAV
+1 Palisade Giant|RTR
+8 Plains|RTR
+1 Primordial Sage|RAV
+2 Selesnya Keyrune|RTR
+4 Selesnya Guildgate|RTR
+1 Sylvan Primordial|GTC
+4 Temple Garden|RTR
+2 Trostani, Selesnya's Voice|RTR
+1 Worldspine Wurm|RTR
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Isperia 2
+Title=Isperia 2
+Icon=Isperia.jpg
+Difficulty=medium
+Description=Fly baby
+Deck Type=constructed
+[main]
+4 Azorius Charm|RTR
+2 Azorius Herald|DIS
+2 Civic Saber|RTR
+4 Compulsive Research|RAV
+4 Dramatic Rescue|RTR
+4 Hallowed Fountain|RTR
+4 Azorius Guildgate|RTR
+8 Island|RTR
+4 Lyev Skyknight|RTR
+4 Mistral Charger|DIS
+8 Plains|RTR
+2 Pride of the Clouds|DIS
+2 Snapping Drake|RAV
+2 Skymark Roc|RTR
+4 Spell Snare|DIS
+1 Azorius Guildmage|DIS
+1 New Prahv Guildmage|RTR
+[sideboard]
+[planes]
+[schemes]

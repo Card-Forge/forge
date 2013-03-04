@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Selesnya2012 1
+Title=Selesnya 2012
+Icon=Selesnya-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+1 Axebane Stag|RTR
+1 Brushstrider|RTR
+2 Call of the Conclave|RTR
+4 Centaur Healer|RTR
+3 Centaur's Herald|RTR
+2 Chorus of Might|RTR
+1 Coursers' Accord|RTR
+1 Druid's Deliverance|RTR
+2 Eyes in the Skies|RTR
+12 Forest|RTR
+1 Grove of the Guardian|RTR
+1 Heroes' Reunion|RTR
+2 Phantom General|RTR
+11 Plains|RTR
+1 Risen Sanctuary|RTR
+1 Rootborn Defenses|RTR
+2 Rubbleback Rhino|RTR
+2 Savage Surge|RTR
+1 Selesnya Guildgate|RTR
+2 Selesnya Keyrune|RTR
+3 Seller of Songbirds|RTR
+2 Trostani's Judgment|RTR
+1 Vitu-Ghazi Guildmage|RTR
+1 Wayfaring Temple|RTR
+[sideboard]
+[planes]
+[schemes]
