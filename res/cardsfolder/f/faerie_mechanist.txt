@@ -5,7 +5,7 @@ PT:2/2
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Artifact
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_mechanist.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/27.jpg
 Oracle:Flying\nWhen Faerie Mechanist enters the battlefield, look at the top three cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+SetInfo:DDF Common
+SetInfo:CFX Common

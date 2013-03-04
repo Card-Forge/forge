@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:4/4
 K:Soulshift 4
 K:Soulshift 4
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forked_branch_garami.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/125.jpg
 Oracle:Soulshift 4, soulshift 4 (When this creature dies, you may return up to two target Spirit cards with converted mana cost 4 or less from your graveyard to your hand.)
+SetInfo:BOK Uncommon

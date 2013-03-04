@@ -7,7 +7,6 @@ SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True |
 SVar:GainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_conscription.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/124.jpg
 Oracle:Untap target creature and gain control of it until end of turn.  That creature gains haste until end of turn. If {W} was spent to cast Flash Conscription, the creature gains "Whenever this creature deals combat damage, you gain that much life" until end of turn.
+SetInfo:RAV Uncommon

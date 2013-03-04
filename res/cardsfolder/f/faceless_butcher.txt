@@ -7,8 +7,8 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigExile:DB$ChangeZone | Cost$ 0 | TargetMin$ 1 | IsCurse$ True | ValidTgts$ Creature.Other | TgtPrompt$ Choose target creature other than Faceless Butcher. | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/60.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/43.jpg
 Oracle:When Faceless Butcher enters the battlefield, exile target creature other than Faceless Butcher.\nWhen Faceless Butcher leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SetInfo:TOR Common
+SetInfo:PD3 Common
+SetInfo:TSB Special

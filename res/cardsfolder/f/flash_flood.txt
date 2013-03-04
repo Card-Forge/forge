@@ -5,8 +5,7 @@ A:SP$ Destroy | Cost$ U | ValidTgts$ Permanent.Red | TgtPrompt$ Select target re
 A:SP$ ChangeZone | Cost$ U | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain | Origin$ Battlefield | Destination$ Hand | SpellDescription$ or return target Mountain to its owner's hand.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_flood.jpg
 Oracle:Choose one - Destroy target red permanent; or return target Mountain to its owner's hand.
-SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/21.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/57.jpg
+SetInfo:CHR Common
+SetInfo:LEG Common

@@ -4,7 +4,6 @@ Types:Sorcery Arcane
 A:SP$ Destroy | Cost$ 3 G G | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBSacrifice | SpellDescription$ Destroy target land. If that land was legendary, its controller sacrifices another land.
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ TargetedController | SacValid$ Land | ConditionDefined$ Targeted | ConditionPresent$ Land.Legendary | ConditionCompare$ EQ1 | ConditionDescription$ If that land was legendary,
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_worms.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/207.jpg
 Oracle:Destroy target land. If that land was legendary, its controller sacrifices another land.
+SetInfo:CHK Uncommon

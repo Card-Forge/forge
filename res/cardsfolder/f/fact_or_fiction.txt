@@ -5,8 +5,8 @@ A:SP$ Dig | Cost$ 3 U | DigNum$ 5 | Reveal$ True | RememberRevealed$ True | NoMo
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | ChosenPile$ DBHand | UnchosenPile$ DBGrave
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
 SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fact_or_fiction.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/57.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/45.jpg
 Oracle:Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
+SetInfo:DD2 Uncommon
+SetInfo:COM Uncommon
+SetInfo:INV Uncommon

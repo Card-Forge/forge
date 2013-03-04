@@ -3,9 +3,8 @@ ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 K:CARDNAME enters the battlefield tapped.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_diamond.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/284.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/267.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/296.jpg
 Oracle:Fire Diamond enters the battlefield tapped.\n{T}: Add {R} to your mana pool.
+SetInfo:7ED Uncommon
+SetInfo:MIR Uncommon
+SetInfo:6ED Uncommon

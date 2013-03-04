@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | AddAbility$ Pump | Description$ Enchanted creature gets -1/-1 and has "Tap: Target creature gets -1/-1 until end of turn."
 SVar:Pump:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Target creature gets -1/-1 until end of turn."
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_presence.jpg
-SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/39.jpg
 Oracle:Enchant creature\nEnchanted creature gets -1/-1 and has "{T}: Target creature gets -1/-1 until end of turn."
+SetInfo:APC Uncommon

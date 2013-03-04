@@ -11,8 +11,7 @@ SVar:DBPump:DB$ Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This car
 SVar:TrigCounter:AB$ Counter | Cost$ 0 | Defined$ TriggeredSourceSA | UnlessCost$ 2 | UnlessPayer$ TriggeredSourceSAController
 SVar:HasAttackEffect:TRUE
 SVar:PlayMain1:TRUE
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_titan.jpg
-SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/55.jpg
-SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/55.jpg
 Oracle:Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.\nWhenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
+SetInfo:M11 Mythic
+SetInfo:M12 Mythic

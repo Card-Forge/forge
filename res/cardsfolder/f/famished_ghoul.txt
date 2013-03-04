@@ -4,7 +4,6 @@ Types:Creature Zombie
 PT:3/2
 A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 2 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to two target cards from a single graveyard.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/famished_ghoul.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/135.jpg
 Oracle:{1}{B}, Sacrifice Famished Ghoul: Exile up to two target cards from a single graveyard.
+SetInfo:ODY Uncommon

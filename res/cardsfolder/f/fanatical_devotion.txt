@@ -2,7 +2,6 @@ Name:Fanatical Devotion
 ManaCost:2 W
 Types:Enchantment
 A:AB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ Sac<1/Creature> | SpellDescription$ Regenerate target creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fanatical_devotion.jpg
-SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/8.jpg
 Oracle:Sacrifice a creature: Regenerate target creature.
+SetInfo:NMS Common

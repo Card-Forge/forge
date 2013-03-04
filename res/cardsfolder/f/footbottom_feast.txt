@@ -5,8 +5,7 @@ A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Library | Target
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/footbottom_feast.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/84.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/115.jpg
 Oracle:Put any number of target creature cards from your graveyard on top of your library.\nDraw a card.
+SetInfo:COM Common
+SetInfo:LRW Common

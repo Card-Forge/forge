@@ -6,10 +6,11 @@ A:SP$ Attach | Cost$ 1 G | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool (in addition to the mana the land produces).
 SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ Any | Amount$ 1 | Defined$ TriggeredCardController
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fertile_ground.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/248.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/252.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/188.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/211.jpg
 Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool (in addition to the mana the land produces).
+SetInfo:8ED Common
+SetInfo:LRW Common
+SetInfo:USG Common
+SetInfo:HOP Common
+SetInfo:INV Common
+SetInfo:DDE Common

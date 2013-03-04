@@ -3,7 +3,6 @@ ManaCost:U
 Types:World Enchantment
 K:Players play with the top card of their libraries revealed.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_of_dreams.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/55.jpg
 Oracle:Players play with the top card of their libraries revealed.
+SetInfo:LEG Rare

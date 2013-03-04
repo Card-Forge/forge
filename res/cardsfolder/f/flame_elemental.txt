@@ -4,7 +4,6 @@ Types:Creature Elemental
 PT:3/2
 A:AB$ DealDamage | Cost$ R T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature.
 SVar:X:Count$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_elemental.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/175.jpg
 Oracle:{R}, {T}, Sacrifice Flame Elemental: Flame Elemental deals damage equal to its power to target creature.
+SetInfo:MIR Uncommon

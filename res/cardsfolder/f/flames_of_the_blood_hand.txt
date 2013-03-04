@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4 | NoPrevention$ True | SubAbility$ PreventHealing | SpellDescription$ CARDNAME deals 4 damage to target player. The damage can't be prevented. If that player would gain life this turn, that player gains no life instead.
 SVar:PreventHealing:DB$ Effect | Name$ Blood Hand Effect | ReplacementEffects$ GainLifeEvent | RememberObjects$ Targeted
 SVar:GainLifeEvent:Event$ GainLife | ValidPlayer$ Player.IsRemembered | Prevent$ True | Description$ If the targeted player would gain life this turn, that player gains no life instead.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flames_of_the_blood_hand.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/101.jpg
 Oracle:Flames of the Blood Hand deals 4 damage to target player. The damage can't be prevented. If that player would gain life this turn, that player gains no life instead.
+SetInfo:BOK Uncommon
+SetInfo:PD2 Uncommon

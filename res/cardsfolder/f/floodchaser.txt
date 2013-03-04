@@ -6,7 +6,6 @@ K:etbCounter:P1P1:6
 K:CARDNAME can't attack unless defending player controls an Island.
 A:AB$ Animate | Cost$ U SubCounter<1/P1P1> | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Island | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | SpellDescription$ Target land becomes an Island until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/floodchaser.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/34.jpg
 Oracle:Floodchaser enters the battlefield with six +1/+1 counters on it.\nFloodchaser can't attack unless defending player controls an Island.\n{U}, Remove a +1/+1 counter from Floodchaser: Target land becomes an Island until end of turn.
+SetInfo:MOR Common

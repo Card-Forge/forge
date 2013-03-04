@@ -3,9 +3,8 @@ ManaCost:2 G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can't be blocked by more than one creature. | Description$ Each creature you control can't be blocked by more than one creature.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/familiar_ground.jpg
 Oracle:Each creature you control can't be blocked by more than one creature.
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/69.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/228.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/243.jpg
+SetInfo:7ED Uncommon
+SetInfo:WTH Uncommon
+SetInfo:6ED Uncommon

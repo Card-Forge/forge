@@ -5,7 +5,6 @@ Text:CARDNAME can't be blocked by non-Wall creatures.
 PT:2/2
 K:Cumulative upkeep:1
 K:CantBeBlockedBy Creature.nonWall
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flow_of_maggots.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/13.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nFlow of Maggots can't be blocked by non-Wall creatures.
+SetInfo:ICE Rare

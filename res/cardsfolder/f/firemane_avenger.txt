@@ -8,5 +8,5 @@ SVar:TrigBattalionDmg:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | Tg
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firemane_avenger.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/163.jpg
 Oracle:Flying\nBattalion - Whenever Firemane Avenger and at least two other creatures attack, Firemane Avenger deals 3 damage to target creature or player and you gain 3 life.
+SetInfo:GTC Rare

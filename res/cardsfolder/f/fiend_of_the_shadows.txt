@@ -9,7 +9,6 @@ SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Regenerate | Cost$ Sac<1/Human> | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiend_of_the_shadows.jpg
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/62.jpg
 Oracle:Flying\nWhenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from his or her hand. You may play that card for as long as it remains exiled.\nSacrifice a Human: Regenerate Fiend of the Shadows.
+SetInfo:DKA Rare

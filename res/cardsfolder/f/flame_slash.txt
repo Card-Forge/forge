@@ -2,7 +2,6 @@ Name:Flame Slash
 ManaCost:R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ Flame Slash deals 4 damage to target creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_slash.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/145.jpg
 Oracle:Flame Slash deals 4 damage to target creature.
+SetInfo:ROE Common

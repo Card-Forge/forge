@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature dies, target player loses 1 life and you gain 1 life.
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Choose a player | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falkenrath_noble.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/100.jpg
 Oracle:Flying\nWhenever Falkenrath Noble or another creature dies, target player loses 1 life and you gain 1 life.
+SetInfo:ISD Uncommon

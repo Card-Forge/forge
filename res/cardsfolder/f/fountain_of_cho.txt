@@ -7,7 +7,6 @@ A:AB$ Mana | Cost$ T SubCounter<X/STORAGE> | Produced$ W | Amount$ ChosenX | Cos
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fountain_of_cho.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/317.jpg
 Oracle:Fountain of Cho enters the battlefield tapped.\n{T}: Put a storage counter on Fountain of Cho.\n{T}, Remove any number of storage counters from Fountain of Cho: Add {W} to your mana pool for each storage counter removed this way.
+SetInfo:MMQ Uncommon

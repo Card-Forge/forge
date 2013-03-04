@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may destroy target artifact defending player controls. If you do, CARDNAME assigns no combat damage this turn.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.DefenderCtrl | TgtPrompt$ Select target artifact | SubAbility$ DBPump
 SVar:DBPump:DB$Pump | KW$ HIDDEN CARDNAME assigns no combat damage
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/floral_spuzzem.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/101.jpg
 Oracle:Whenever Floral Spuzzem attacks and isn't blocked, you may destroy target artifact defending player controls. If you do, Floral Spuzzem assigns no combat damage this turn.
+SetInfo:LEG Uncommon

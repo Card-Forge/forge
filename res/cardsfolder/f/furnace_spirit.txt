@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:1/1
 K:Haste
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5160.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/87.jpg
 Oracle:Haste\n{R}: Furnace Spirit gets +1/+0 until end of turn.
+SetInfo:STH Common

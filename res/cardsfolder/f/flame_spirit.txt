@@ -3,9 +3,9 @@ ManaCost:4 R
 Types:Creature Elemental Spirit
 PT:2/3
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_spirit.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/229.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/179.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/184.jpg
 Oracle:{R}: Flame Spirit gets +1/+0 until end of turn.
+SetInfo:ICE Uncommon
+SetInfo:5ED Uncommon
+SetInfo:6ED Common
+SetInfo:S00 Common

@@ -5,7 +5,6 @@ PT:0/5
 K:Flash
 K:Defender
 K:CARDNAME can block an additional creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foriysian_interceptor.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/18.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nDefender\nForiysian Interceptor can block an additional creature.
+SetInfo:TSP Common

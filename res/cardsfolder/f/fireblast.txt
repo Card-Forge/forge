@@ -3,7 +3,8 @@ ManaCost:4 R R
 Types:Instant
 A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or player.
 SVar:AltCost:Cost$ Sac<2/Mountain>
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireblast.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/79.jpg
 Oracle:You may sacrifice two Mountains rather than pay Fireblast's mana cost.\nFireblast deals 4 damage to target creature or player.
+SetInfo:VIS Common
+SetInfo:PD2 Common
+SetInfo:DD2 Common

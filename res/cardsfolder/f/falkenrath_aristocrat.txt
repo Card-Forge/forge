@@ -7,7 +7,6 @@ K:Haste
 A:AB$ Pump | Cost$ Sac<1/Creature> | KW$ HIDDEN Indestructible | SubAbility$ DBPutCounter | SpellDescription$ CARDNAME is indestructible this turn. If the sacrificed creature was a Human, put a +1/+1 counter on CARDNAME.
 SVar:DBPutCounter:DB$PutCounter | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | CounterNum$ 1 | CounterType$ P1P1 | References$ X
 SVar:X:Sacrificed$Valid Human
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/falkenrath_aristocrat.jpg
 Oracle:Flying, haste\nSacrifice a creature: Falkenrath Aristocrat is indestructible this turn. If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Aristocrat.
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/138.jpg
+SetInfo:DKA Mythic

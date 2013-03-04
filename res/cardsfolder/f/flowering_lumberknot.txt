@@ -4,7 +4,6 @@ Types:Creature Treefolk
 PT:5/5
 S:Mode$ Continuous | Affected$ Creature.Self+NotPaired | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ CARDNAME can't attack or block unless it's paired with a creature with soulbond.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowering_lumberknot.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/178.jpg
 Oracle:Flowering Lumberknot can't attack or block unless it's paired with a creature with soulbond.
+SetInfo:AVR Common

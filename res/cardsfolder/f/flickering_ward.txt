@@ -8,7 +8,6 @@ A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
 A:AB$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flickering_ward.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/231.jpg
 Oracle:Enchant creature\nAs Flickering Ward enters the battlefield, choose a color.\nEnchanted creature has protection from the chosen color. This effect doesn't remove Flickering Ward.\n{W}: Return Flickering Ward to its owner's hand.
+SetInfo:TMP Uncommon

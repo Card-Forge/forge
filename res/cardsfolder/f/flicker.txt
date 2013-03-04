@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.nonToken | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target nontoken permanent | SubAbility$ DBReturn | SpellDescription$ Exile target nontoken permanent, then return it to the battlefield under its owner's control.
 SVar:DBReturn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ Battlefield
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flicker.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/9.jpg
 Oracle:Exile target nontoken permanent, then return it to the battlefield under its owner's control.
+SetInfo:UDS Rare

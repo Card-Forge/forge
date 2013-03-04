@@ -6,7 +6,6 @@ A:SP$ Dig | Cost$ 1 U ExileFromGrave<Y/Card.Blue+Other> | Flashback$ True | Cost
 SVar:Y:XChoice
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_of_insight.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/40.jpg
 Oracle:Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.\nFlashback-{1}{U}, Exile X blue cards from your graveyard. (You may cast this card from your graveyard for its flashback cost, then exile it. You can't exile Flash of Insight to pay for its own flashback cost.)
+SetInfo:JUD Uncommon

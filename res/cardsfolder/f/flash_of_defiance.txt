@@ -6,7 +6,6 @@ A:SP$ Effect | Cost$ 1 R | Name$ Flash of Defiance Effect | StaticAbilities$ KWP
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.Green,Creature.White | AddHiddenKeyword$ CARDNAME can't block. | Description$ Green creatures and white creatures can't block this turn.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_of_defiance.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/99.jpg
 Oracle:Green creatures and white creatures can't block this turn.\nFlashback-{1}{R}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:TOR Common
