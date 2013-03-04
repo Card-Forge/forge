@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Green
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_meditant.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/16.jpg
 Oracle:When Rhox Meditant enters the battlefield, if you control a green permanent, draw a card.
+SetInfo:CFX Common

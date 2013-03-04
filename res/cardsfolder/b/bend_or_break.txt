@@ -8,7 +8,6 @@ SVar:PileOpp:DB$ TwoPiles | Defined$ Opponent | Separator$ Opponent | Chooser$ Y
 SVar:BreakOpp:DB$DestroyAll | ValidCards$ Land.IsRemembered
 SVar:BendOpp:DB$ TapAll | ValidCards$ Land.IsRemembered
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bend_or_break.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/137.jpg
 Oracle:Each player separates all nontoken lands he or she controls into two piles. For each player, one of his or her piles is chosen by one of his or her opponents of his or her choice. Destroy all lands in the chosen piles. Tap all lands in the other piles.
+SetInfo:INV Rare

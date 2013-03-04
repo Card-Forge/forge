@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | Trigge
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0
 SVar:RemRandomDeck:True
 SVar:NeedsToPlay:Ogre.YouCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gutwrencher_oni.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/113.jpg
 Oracle:Trample\nAt the beginning of your upkeep, discard a card if you don't control an Ogre.
+SetInfo:CHK Uncommon

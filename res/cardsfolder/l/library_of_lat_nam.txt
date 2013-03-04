@@ -6,6 +6,6 @@ SVar:SlowDraw:DB$ Draw | NumCards$ 3 | Defined$ You | NextUpkeep$ True | SpellDe
 SVar:Tutor:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ You search your library for a card, put that card into your hand, then shuffle your library.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/library_of_lat_nam.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/78.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/47.jpg
 Oracle:An opponent chooses one - You draw three cards at the beginning of the next turn's upkeep; or you search your library for a card, put that card into your hand, then shuffle your library.
+SetInfo:ALL Rare
+SetInfo:6ED Rare

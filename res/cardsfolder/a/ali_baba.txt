@@ -3,8 +3,7 @@ ManaCost:R
 Types:Creature Human Rogue
 PT:1/1
 A:AB$ Tap | Cost$ R | ValidTgts$ Wall | TgtPrompt$ Select target wall | SpellDescription$ Tap target wall.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ali_baba.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/193.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/43.jpg
 Oracle:{R}: Tap target Wall.
+SetInfo:4ED Uncommon
+SetInfo:ARN Uncommon

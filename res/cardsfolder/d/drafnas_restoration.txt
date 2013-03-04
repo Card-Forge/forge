@@ -6,7 +6,6 @@ SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefi
 SVar:X:Count$InAllYards
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drafnas_restoration.jpg
-SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/52.jpg
 Oracle:Return any number of target artifact cards from target player's graveyard to the top of his or her library in any order.
+SetInfo:ATQ Common

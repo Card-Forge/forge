@@ -5,7 +5,6 @@ PT:2/2
 K:Flying
 A:AB$ Pump | Cost$ G | NumAtt$ +1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability only once each turn.
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> Sac<1/Creature.namedSpitting Drake/creature named Spitting Drake> | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedViashivan Dragon | ChangeNum$ 1 | SpellDescription$ Search your library for a card named Viashivan Dragon and put that card onto the battlefield. Then shuffle your library.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyscu_drake.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/61.jpg
 Oracle:Flying\n{G}: Kyscu Drake gets +0/+1 until end of turn. Activate this ability only once each turn.\nSacrifice Kyscu Drake and a creature named Spitting Drake: Search your library for a card named Viashivan Dragon and put that card onto the battlefield. Then shuffle your library.
+SetInfo:VIS Uncommon

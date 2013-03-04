@@ -2,8 +2,7 @@ Name:Worldly Tutor
 ManaCost:G
 Types:Instant
 A:SP$ ChangeZone | Cost$ G | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card and reveal that card. Shuffle your library, then put the card on top of it.
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3424.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/269.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/153.jpg
 Oracle:Search your library for a creature card and reveal that card. Shuffle your library, then put the card on top of it.
+SetInfo:MIR Uncommon
+SetInfo:6ED Uncommon

@@ -2,7 +2,6 @@ Name:Convolute
 ManaCost:2 U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | SpellDescription$ Counter target spell unless its controller pays 4.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convolute.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/41.jpg
 Oracle:Counter target spell unless its controller pays {4}.
+SetInfo:RAV Common

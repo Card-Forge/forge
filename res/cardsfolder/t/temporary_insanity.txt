@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Instant
 A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature.powerLTX | References$ X | TgtPrompt$ Select target creature with power less than or equal to the number of cards in your graveyard | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Untap target creature with power less than the number of cards in your graveyard and gain control of it until end of turn. That creature gains haste until end of turn.
 SVar:X:Count$InYourYard
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporary_insanity.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/116.jpg
 Oracle:Untap target creature with power less than the number of cards in your graveyard and gain control of it until end of turn. That creature gains haste until end of turn.
+SetInfo:TOR Uncommon
+SetInfo:DDG Uncommon

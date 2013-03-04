@@ -3,7 +3,6 @@ ManaCost:4
 Types:Artifact Creature Thopter
 PT:3/1
 A:AB$ Pump | Cost$ tapXType<1/Creature> | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telethopter.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/301.jpg
 Oracle:Tap an untapped creature you control: Telethopter gains flying until end of turn.
+SetInfo:TMP Uncommon

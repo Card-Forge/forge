@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.sharesCreatureTypeWith Enchanted | KW$ Flying | SpellDescription$ Enchanted creature and other creatures that share a creature type with it gain flying until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_ascension.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/78.jpg
 Oracle:Enchant creature\nEnchanted creature has flying.\nSacrifice Crown of Ascension: Enchanted creature and other creatures that share a creature type with it gain flying until end of turn.
+SetInfo:ONS Common

@@ -6,7 +6,6 @@ A:AB$ PutCounter | Cost$ 2 ExileFromHand<1/Card.nonLand/nonland card> | CostDesc
 SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.IsRemembered+withoutSuspend | KW$ Suspend | PumpZone$ Exile | Permanent$ True | SubAbility$ DBCleanup | StackDescription$ If it doesn't have suspend, it gains suspend.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jhoira_of_the_ghitu.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/157.jpg
 Oracle:{2}, Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend. (At the beginning of your upkeep, remove a time counter from that card. When the last is removed, cast it without paying its mana cost. If it's a creature, it has haste.)
+SetInfo:FUT Rare

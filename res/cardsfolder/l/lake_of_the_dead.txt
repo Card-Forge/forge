@@ -10,7 +10,6 @@ SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lake_of_the_dead.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/185.jpg
 Oracle:If Lake of the Dead would enter the battlefield, sacrifice a Swamp instead. If you do, put Lake of the Dead onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {B} to your mana pool.\n{T}, Sacrifice a Swamp: Add {B}{B}{B}{B} to your mana pool.
+SetInfo:ALL Rare

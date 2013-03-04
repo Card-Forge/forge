@@ -4,8 +4,7 @@ Types:Creature Griffin
 PT:2/2
 K:Flying
 A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target Red Instant or Sorcery spell | ValidTgts$ Instant.Red,Sorcery.Red | SpellDescription$ Counter target red instant or sorcery spell.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unyaro_griffin.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/49.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/248.jpg
 Oracle:Flying\nSacrifice Unyaro Griffin: Counter target red instant or sorcery spell.
+SetInfo:MIR Uncommon
+SetInfo:6ED Uncommon

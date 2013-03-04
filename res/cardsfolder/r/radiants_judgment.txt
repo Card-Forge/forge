@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Instant
 A:SP$Destroy | Cost$ 2 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 K:Cycling:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_judgment.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/22.jpg
 Oracle:Destroy target creature with power 4 or greater.\nCycling {2} ({2}, Discard this card: Draw a card.)
+SetInfo:ULG Common

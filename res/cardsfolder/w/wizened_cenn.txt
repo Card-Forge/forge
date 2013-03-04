@@ -4,7 +4,6 @@ Types:Creature Kithkin Cleric
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Kithkin+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Kithkin creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizened_cenn.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/49.jpg
 Oracle:Other Kithkin creatures you control get +1/+1.
+SetInfo:LRW Uncommon

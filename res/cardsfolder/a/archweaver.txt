@@ -4,7 +4,6 @@ Types:Creature Spider
 PT:5/5
 K:Reach
 K:Trample
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archweaver.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/114.jpg
 Oracle:Reach, trample
+SetInfo:RTR Uncommon

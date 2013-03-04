@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Creature | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigTaporUntapAll | TriggerDescription$ Whenever a creature dies, tap all untapped creatures that share a creature type with it or untap all tapped creatures that share a creature type with it.
 SVar:TrigTaporUntapAll:AB$ TaporUntapAll | Cost$ 0 | ValidCards$ TriggeredCard.sharesCreatureTypeWith | ValidMessage$ creatures that share a creature type with the triggered creature
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faces_of_the_past.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/35.jpg
 Oracle:Whenever a creature dies, tap all untapped creatures that share a creature type with it or untap all tapped creatures that share a creature type with it.
+SetInfo:SCG Rare

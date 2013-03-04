@@ -5,8 +5,7 @@ PT:1/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, then put them back in any order.
 SVar:TrigRearrange:AB$RearrangeTopOfLibrary | Cost$ 0 | Defined$ You | NumCards$ 4
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_aven.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/111.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/95.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Sage Aven enters the battlefield, look at the top four cards of your library, then put them back in any order.
+SetInfo:ONS Common
+SetInfo:9ED Common

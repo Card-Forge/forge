@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 W W | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBPutCounter | SpellDescription$ Return target creature card from your graveyard to the battlefield. If it's an Angel, put two +1/+1 counters on it.
 SVar:DBPutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 2 | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
 SVar:X:Targeted$Valid Angel
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defy_death.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/16.jpg
 Oracle:Return target creature card from your graveyard to the battlefield. If it's an Angel, put two +1/+1 counters on it.
+SetInfo:AVR Uncommon

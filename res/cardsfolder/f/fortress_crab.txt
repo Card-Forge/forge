@@ -2,7 +2,6 @@ Name:Fortress Crab
 ManaCost:3 U
 Types:Creature Crab
 PT:1/6
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fortress_crab.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/56.jpg
 Oracle:
+SetInfo:ISD Common

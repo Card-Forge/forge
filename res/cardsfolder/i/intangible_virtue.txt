@@ -4,7 +4,6 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Creature tokens you control get +1/+1 and have vigilance.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intangible_virtue.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/19.jpg
 Oracle:Creature tokens you control get +1/+1 and have vigilance.
+SetInfo:ISD Uncommon

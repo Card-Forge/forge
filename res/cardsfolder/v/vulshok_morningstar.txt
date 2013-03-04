@@ -3,8 +3,8 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_morningstar.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/157.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/315.jpg
 Oracle:Equipped creature gets +2/+2.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:DDI Uncommon
+SetInfo:DST Common
+SetInfo:9ED Uncommon

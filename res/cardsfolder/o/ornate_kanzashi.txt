@@ -5,7 +5,6 @@ A:AB$ Mill | Cost$ 2 T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent | PumpZone$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ornate_kanzashi.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/157.jpg
 Oracle:{2}, {T}: Target opponent exiles the top card of his or her library. You may play that card this turn.
+SetInfo:BOK Rare

@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Permanent.YouCtrl | ReflectProperty$ Is | SpellDescription$ Choose a color of a permanent you control. Add one mana of that color to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meteor_crater.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/140.jpg
 Oracle:{T}: Choose a color of a permanent you control. Add one mana of that color to your mana pool.
+SetInfo:PLS Rare

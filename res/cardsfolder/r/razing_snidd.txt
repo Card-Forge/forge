@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Black+YouCtrl,Creature.Red+YouCtrl
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Each | SacValid$ Land
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razing_snidd.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/121.jpg
 Oracle:When Razing Snidd enters the battlefield, return a black or red creature you control to its owner's hand.\nWhen Razing Snidd enters the battlefield, each player sacrifices a land.
+SetInfo:PLS Uncommon

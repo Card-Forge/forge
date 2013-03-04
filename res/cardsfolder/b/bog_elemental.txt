@@ -6,7 +6,6 @@ K:Protection from white
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacUnless | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you sacrifice a land.
 SVar:TrigSacUnless:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ Sac<1/Land> | UnlessPayer$ You
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_elemental.jpg
-SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/57.jpg
 Oracle:Protection from white\nAt the beginning of your upkeep, sacrifice Bog Elemental unless you sacrifice a land.
+SetInfo:PCY Rare

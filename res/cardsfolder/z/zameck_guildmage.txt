@@ -8,5 +8,5 @@ SVar:AddExtraCounter:AB$ PutCounter | Cost$ 0 | Defined$ ReplacedCard | CounterT
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 A:AB$ Draw |Cost$ G U SubCounter<1/P1P1/Creature.YouCtrl/Creature you Control> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zameck_guildmage.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/209.jpg
 Oracle:{G}{U}: This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.\n{G}{U}, Remove a +1/+1 counter from a creature you control: Draw a card.
+SetInfo:GTC Uncommon

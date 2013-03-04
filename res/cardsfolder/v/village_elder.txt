@@ -3,7 +3,6 @@ ManaCost:G
 Types:Creature Human Druid
 PT:1/1
 A:AB$ Regenerate | Cost$ G T Sac<1/Forest> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/village_elder.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/149.jpg
 Oracle:{G}, {T}, Sacrifice a Forest: Regenerate target creature.
+SetInfo:MIR Common

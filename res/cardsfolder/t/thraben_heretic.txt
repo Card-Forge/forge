@@ -4,5 +4,5 @@ Types:Creature Human Wizard
 PT:2/2
 A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SpellDescription$ Exile target creature card from a graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_heretic.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/26.jpg
 Oracle:{T}: Exile target creature card from a graveyard.
+SetInfo:DKA Uncommon

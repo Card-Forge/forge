@@ -4,9 +4,8 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigChangeZoneYou | TriggerDescription$ At the beginning of each player's upkeep, that player returns a creature he or she controls to its owner's hand.
 SVar:TrigChangeZoneYou:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature | DefinedPlayer$ TriggeredPlayer | ChangeNum$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_hope.jpg
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/26.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/37.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/112.jpg
 Oracle:At the beginning of each player's upkeep, that player returns a creature he or she controls to its owner's hand.
+SetInfo:PC2 Rare
+SetInfo:PLS Rare
+SetInfo:10E Rare

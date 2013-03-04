@@ -4,7 +4,6 @@ Types:Creature Leech
 PT:2/2
 K:Flying
 S:Mode$ RaiseCost | ValidCard$ Card.Blue | Activator$ You | Type$ Spell | Color$ U | Amount$ 1 | Description$ Blue spells you cast cost U more to cast.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sapphire_leech.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/71.jpg
 Oracle:Flying\nBlue spells you cast cost {U} more to cast.
+SetInfo:INV Rare

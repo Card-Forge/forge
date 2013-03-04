@@ -5,7 +5,6 @@ PT:6/6
 K:Flying
 K:etbCounter:M1M1:2
 A:AB$ PutCounterAll | Cost$ B SubCounter<1/M1M1> | ValidCards$ Creature.Other | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on each other creature.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carnifex_demon.jpg
-SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/57.jpg
 Oracle:Flying\nCarnifex Demon enters the battlefield with two -1/-1 counters on it.\n{B}, Remove a -1/-1 counter from Carnifex Demon: Put a -1/-1 counter on each other creature.
+SetInfo:SOM Rare

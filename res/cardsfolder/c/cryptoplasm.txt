@@ -8,5 +8,5 @@ SVar:CryptoplasmCopy:AB$ Clone | Cost$ 0 | ValidTgts$ Creature.Other | TgtPrompt
 SVar:CryptoplasmUpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ CryptoplasmCopy | TriggerDescription$ At the beginning of your upkeep, you may have CARDNAME become a copy of another target creature. If you do, CARDNAME gains this ability.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptoplasm.jpg
-SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/23.jpg
 Oracle:At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
+SetInfo:MBS Rare

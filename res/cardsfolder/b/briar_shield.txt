@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
 A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ Enchanted | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Enchanted creature gets +3/+3 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briar_shield.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/63.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1.\nSacrifice Briar Shield: Enchanted creature gets +3/+3 until end of turn.
+SetInfo:WTH Common

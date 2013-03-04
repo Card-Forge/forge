@@ -5,7 +5,6 @@ Text:Whenever a creature you control attacks alone, you may search your library 
 PT:4/5
 K:Exalted
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sovereigns_of_lost_alara.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/12.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhenever a creature you control attacks alone, you may search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle your library.
+SetInfo:ARB Rare

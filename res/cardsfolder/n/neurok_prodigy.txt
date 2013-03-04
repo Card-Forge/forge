@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:2/1
 K:Flying
 A:AB$ ChangeZone | Cost$ Discard<1/Artifact> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_prodigy.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/26.jpg
 Oracle:Flying\nDiscard an artifact card: Return Neurok Prodigy to its owner's hand.
+SetInfo:DST Common

@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may return CARDNAME to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haru_onna.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/132.jpg
 Oracle:When Haru-Onna enters the battlefield, draw a card.\nWhenever you cast a Spirit or Arcane spell, you may return Haru-Onna to its owner's hand.
+SetInfo:SOK Uncommon

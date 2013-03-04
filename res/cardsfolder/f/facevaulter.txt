@@ -3,7 +3,6 @@ ManaCost:B
 Types:Creature Goblin Warrior
 PT:1/1
 A:AB$ Pump | Cost$ B Sac<1/Goblin> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/facevaulter.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/111.jpg
 Oracle:{B}, Sacrifice a Goblin: Facevaulter gets +2/+2 until end of turn.
+SetInfo:LRW Common

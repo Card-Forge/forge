@@ -4,7 +4,6 @@ Types:Creature Human Samurai
 PT:1/1
 K:Flying
 K:Bushido 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/araba_mothrider.jpg
-SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/2.jpg
 Oracle:Flying\nBushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
+SetInfo:SOK Common

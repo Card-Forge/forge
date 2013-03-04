@@ -4,7 +4,6 @@ Types:Creature Human Rebel Cleric
 PT:1/1
 A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the life you've lost this turn. (Damage causes loss of life.)
 SVar:X:Count$LifeYouLostThisTurn
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/children_of_korlis.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/8.jpg
 Oracle:Sacrifice Children of Korlis: You gain life equal to the life you've lost this turn. (Damage causes loss of life.)
+SetInfo:TSP Common

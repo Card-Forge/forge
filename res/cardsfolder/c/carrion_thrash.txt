@@ -4,7 +4,6 @@ Types:Creature Viashino Warrior
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may pay 2. If you do, return another target creature card from your graveyard to your hand.
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Other+YouCtrl | Cost$ 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_thrash.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/162.jpg
 Oracle:When Carrion Thrash dies, you may pay {2}. If you do, return another target creature card from your graveyard to your hand.
+SetInfo:ALA Common

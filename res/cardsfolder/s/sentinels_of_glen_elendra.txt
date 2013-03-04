@@ -4,7 +4,6 @@ Types:Creature Faerie Soldier
 PT:2/3
 K:Flash
 K:Flying
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139426.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/84.jpg
 Oracle:Flash\nFlying
+SetInfo:LRW Common

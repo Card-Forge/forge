@@ -7,7 +7,6 @@ K:Protection from black
 K:Suspend:3:1 W W
 T:Mode$ CounterRemoved | ValidCard$ Card.Self  | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigToken | IsPresent$ Card.Self+counters_GE1_TIME | PresentZone$ Exile | PresentCompare$ EQ0 | TriggerDescription$ When the last time counter is removed from CARDNAME while it's exiled, put a 2/2 black Knight creature token with flanking, protection from white, and haste onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flanking<>Protection from white<>Haste
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riftmarked_knight.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/14.jpg
 Oracle:Protection from black, flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nSuspend 3-{1}{W}{W} (Rather than cast this card from your hand, you may pay {1}{W}{W} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhen the last time counter is removed from Riftmarked Knight while it's exiled, put a 2/2 black Knight creature token with flanking, protection from white, and haste onto the battlefield.
+SetInfo:PLC Uncommon

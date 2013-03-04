@@ -4,7 +4,6 @@ Types:Creature Sliver
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ All Sliver creatures have "This creature can't be blocked except by two or more creatures."
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/two_headed_sliver.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/183.jpg
 Oracle:All Sliver creatures have "This creature can't be blocked except by two or more creatures."
+SetInfo:TSP Common

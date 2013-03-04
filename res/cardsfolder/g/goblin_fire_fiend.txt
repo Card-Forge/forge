@@ -5,7 +5,6 @@ PT:1/1
 K:Haste
 K:CARDNAME must be blocked if able.
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_fire_fiend.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/127.jpg
 Oracle:Haste\nGoblin Fire Fiend must be blocked if able.\n{R}: Goblin Fire Fiend gets +1/+0 until end of turn.
+SetInfo:RAV Common

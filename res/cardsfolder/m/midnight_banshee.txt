@@ -6,7 +6,6 @@ K:Wither
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ At the beginning of your upkeep, put a -1/-1 counter on each nonblack creature.
 SVar:TrigPutCounterAll:AB$ PutCounterAll | Cost$ 0 | ValidCards$ Creature.nonBlack | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_banshee.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/72.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nAt the beginning of your upkeep, put a -1/-1 counter on each nonblack creature.
+SetInfo:SHM Rare

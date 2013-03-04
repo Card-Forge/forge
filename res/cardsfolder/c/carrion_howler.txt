@@ -4,6 +4,5 @@ Types:Creature Zombie Wolf
 PT:2/2
 A:AB$ Pump | Cost$ PayLife<1> | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ CARDNAME gets +2/-1 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_howler.jpg
-SVar:Rarity:Uncommon
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/79.jpg
 Oracle:Pay 1 life: Carrion Howler gets +2/-1 until end of turn.
+SetInfo:RAV Uncommon

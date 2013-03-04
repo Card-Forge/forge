@@ -8,7 +8,6 @@ SVar:PyrrhicMoveToBattlefield:DB$ ChangeZone | Origin$ Graveyard | Destination$ 
 SVar:RemoveEffect:Mode$ ChangesZone | Origin$ Stack | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted | Execute$ PyrrhicCleanup
 SVar:PyrrhicCleanup:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrrhic_revival.jpg
-SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/93.jpg
 Oracle:Each player returns each creature card from his or her graveyard to the battlefield with an additional -1/-1 counter on it.
+SetInfo:EVE Rare

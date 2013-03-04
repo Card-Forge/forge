@@ -3,9 +3,8 @@ ManaCost:1 R
 Types:Instant
 A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stun.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/207.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/172.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/240.jpg
 Oracle:Target creature can't block this turn.\nDraw a card.
+SetInfo:TMP Common
+SetInfo:10E Common
+SetInfo:INV Common

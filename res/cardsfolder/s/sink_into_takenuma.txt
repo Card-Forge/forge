@@ -6,7 +6,6 @@ SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sink_into_takenuma.jpg
-SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/89.jpg
 Oracle:Sweep - Return any number of Swamps you control to their owner's hand. Target player discards a card for each Swamp returned this way.
+SetInfo:SOK Common

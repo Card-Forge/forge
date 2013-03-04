@@ -2,8 +2,7 @@ Name:Spin Engine
 ManaCost:3
 Types:Artifact Creature Construct
 PT:3/1
-SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spin_engine.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/135.jpg
 Oracle:{R}: Target creature can't block Spin Engine this turn.
+SetInfo:MBS Common

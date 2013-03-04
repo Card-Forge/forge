@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChooseCard | Cost$ 2 R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Amount$ 1 | Choices$ Creature.YouDontCtrl | SubAbility$ DBPumpAll | RememberChosen$ True | AILogic$ BestBlocker | SpellDescription$ Target opponent chooses a creature he or she controls. Other creatures he or she controls can't block this turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.IsNotRemembered | KW$ HIDDEN CARDNAME can't block.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eunuchs_intrigues.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/110.jpg
 Oracle:Target opponent chooses a creature he or she controls. Other creatures he or she controls can't block this turn.
+SetInfo:PTK Uncommon

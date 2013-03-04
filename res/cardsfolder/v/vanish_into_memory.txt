@@ -10,7 +10,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:Y:Remembered$CardToughness
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vanish_into_memory.jpg
-SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/133.jpg
 Oracle:Exile target creature. You draw cards equal to that creature's power. At the beginning of your next upkeep, return that card to the battlefield under its owner's control. If you do, discard cards equal to its toughness.
+SetInfo:DDI Uncommon
+SetInfo:CSP Uncommon

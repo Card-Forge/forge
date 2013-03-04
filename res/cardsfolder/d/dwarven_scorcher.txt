@@ -3,7 +3,6 @@ ManaCost:R
 Types:Creature Dwarf
 PT:1/1
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | UnlessCost$ DamageYou<2> | UnlessPayer$ TargetedController | SpellDescription$ CARDNAME deals 1 damage to target creature unless that creature's controller has CARDNAME deal 2 damage to him or her.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_scorcher.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/86.jpg
 Oracle:Sacrifice Dwarven Scorcher: Dwarven Scorcher deals 1 damage to target creature unless that creature's controller has Dwarven Scorcher deal 2 damage to him or her.
+SetInfo:JUD Common

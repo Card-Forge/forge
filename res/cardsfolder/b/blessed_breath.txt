@@ -5,7 +5,6 @@ A:SP$ Protection | Cost$ W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select tar
 K:Splice onto Arcane W
 #Computer isn't very good at picking a color to get protection from yet
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_breath.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/1.jpg
 Oracle:Target creature you control gains protection from the color of your choice until end of turn.\nSplice onto Arcane {W} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+SetInfo:CHK Common

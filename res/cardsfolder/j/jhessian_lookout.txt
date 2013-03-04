@@ -2,7 +2,6 @@ Name:Jhessian Lookout
 ManaCost:1 U
 Types:Creature Human Scout
 PT:2/1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jhessian_lookout.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/46.jpg
 Oracle:
+SetInfo:ALA Common

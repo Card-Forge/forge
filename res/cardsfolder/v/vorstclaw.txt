@@ -2,7 +2,6 @@ Name:Vorstclaw
 ManaCost:4 G G
 Types:Creature Elemental Horror
 PT:7/7
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vorstclaw.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/201.jpg
 Oracle:
+SetInfo:AVR Uncommon

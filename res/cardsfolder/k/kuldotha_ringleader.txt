@@ -5,7 +5,6 @@ PT:4/4
 K:CARDNAME attacks each turn if able.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigBattleCry | TriggerDescription$ Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
 SVar:TrigBattleCry:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | NumAtt$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuldotha_ringleader.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/70.jpg
 Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nKuldotha Ringleader attacks each turn if able.
+SetInfo:MBS Common

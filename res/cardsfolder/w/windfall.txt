@@ -10,8 +10,7 @@ SVar:WindfallReset:DB$ StoreSVar | SVar$ MaxDiscard | Type$ Number | Expression$
 SVar:NumDiscard:Count$RememberedSize/Minus.1
 SVar:MaxDiscard:Number$0
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windfall.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/111.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/70.jpg
 Oracle:Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+SetInfo:COM Uncommon
+SetInfo:USG Uncommon

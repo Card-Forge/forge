@@ -5,7 +5,6 @@ PT:4/4
 K:Flying
 S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Shroud | Condition$ Metalcraft | Description$ Metalcraft - Artifacts you control have shroud as long as you control three or more artifacts.
 SVar:BuffedBy:Artifact
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indomitable_archangel.jpg
-SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/11.jpg
 Oracle:Flying\nMetalcraft - Artifacts you control have shroud as long as you control three or more artifacts.
+SetInfo:SOM Mythic

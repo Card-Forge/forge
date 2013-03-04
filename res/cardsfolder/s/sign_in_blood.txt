@@ -3,10 +3,11 @@ ManaCost:B B
 Types:Sorcery
 A:SP$ Draw | Cost$ B B | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws two cards and loses 2 life.
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2 | Defined$ Targeted
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sign_in_blood.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/117.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/112.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/110.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/101.jpg
 Oracle:Target player draws two cards and loses 2 life.
+SetInfo:COM Common
+SetInfo:M11 Common
+SetInfo:M10 Common
+SetInfo:M13 Common
+SetInfo:ARC Common
+SetInfo:DDD Common

@@ -8,5 +8,5 @@ SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Remembered | Count
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bounty_of_the_hunt.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/63.jpg
 Oracle:You may exile a green card from your hand rather than pay Bounty of the Hunt's mana cost.\nDistribute three +1/+1 counters among one, two, or three target creatures. For each +1/+1 counter you put on a creature this way, remove a +1/+1 counter from that creature at the beginning of the next cleanup step.
+SetInfo:ALL Uncommon

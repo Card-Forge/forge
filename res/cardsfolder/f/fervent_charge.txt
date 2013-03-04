@@ -3,7 +3,6 @@ ManaCost:1 W B R
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks, it gets +2/+2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ +2 | NumDef$ +2
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_charge.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/98.jpg
 Oracle:Whenever a creature you control attacks, it gets +2/+2 until end of turn.
+SetInfo:APC Rare

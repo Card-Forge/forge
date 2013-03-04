@@ -4,7 +4,8 @@ Types:Creature Goblin
 PT:1/1
 A:AB$ Mana | Cost$ Sac<1/Goblin> | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_prospector.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/230.jpg
 Oracle:Sacrifice a Goblin: Add {R} to your mana pool.
+SetInfo:ONS Common
+SetInfo:DDG Common
+SetInfo:EVG Common

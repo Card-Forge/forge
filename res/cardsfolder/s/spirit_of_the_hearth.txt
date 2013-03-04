@@ -4,7 +4,6 @@ Types:Creature Cat Spirit
 PT:4/5
 K:Flying
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof. (You can't be the target of spells or abilities your opponents control.)
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_of_the_hearth.jpg
-SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/14.jpg
 Oracle:Flying\nYou have hexproof. (You can't be the target of spells or abilities your opponents control.)
+SetInfo:EVE Rare

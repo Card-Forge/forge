@@ -6,5 +6,5 @@ SVar:TrigToken:AB$ Token | Cost$ Sac<1/Creature.nonToken/nontoken creature> | To
 SVar:X:Sacrificed$CardToughness
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feed_the_pack.jpg
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/114.jpg
 Oracle:At the beginning of your end step, you may sacrifice a nontoken creature. If you do, put X 2/2 green Wolf creature tokens onto the battlefield, where X is the sacrificed creature's toughness.
+SetInfo:DKA Rare

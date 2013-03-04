@@ -2,10 +2,9 @@ Name:Kismet
 ManaCost:3 W
 Types:Enchantment
 S:Mode$ ETBTapped | ValidCard$ Artifact.YouDontCtrl,Creature.YouDontCtrl,Land.YouDontCtrl | Description$ Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kismet.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/319.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/27.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/283.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/194.jpg
 Oracle:Artifacts, creatures, and lands played by your opponents enter the battlefield tapped.
+SetInfo:5ED Uncommon
+SetInfo:LEG Uncommon
+SetInfo:6ED Uncommon
+SetInfo:4ED Uncommon

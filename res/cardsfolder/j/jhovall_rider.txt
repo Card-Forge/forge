@@ -3,7 +3,6 @@ ManaCost:4 W
 Types:Creature Human Rebel
 PT:3/3
 K:Trample
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card20172.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/26.jpg
 Oracle:Trample
+SetInfo:MMQ Uncommon

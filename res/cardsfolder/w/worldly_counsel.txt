@@ -4,8 +4,7 @@ Types:Instant
 A:SP$ Dig | Cost$ 1 U | DigNum$ X | References$ X | SpellDescription$ Domain - Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 SVar:X:Count$Domain
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldly_counsel.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/89.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/39.jpg
 Oracle:Domain - Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+SetInfo:CFX Common
+SetInfo:INV Common

@@ -8,7 +8,6 @@ SVar:X:Count$Valid Artifact.YouCtrl
 SVar:NeedsToPlayVar:X GE2
 SVar:RemRandomDeck:True
 SVar:BuffedBy:Artifact
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_shrieker.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/73.jpg
 Oracle:Flying\nNim Shrieker gets +1/+0 for each artifact you control.
+SetInfo:MRD Common

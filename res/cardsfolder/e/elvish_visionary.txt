@@ -4,9 +4,8 @@ Types:Creature Elf Shaman
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_visionary.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/178.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/169.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/130.jpg
 Oracle:When Elvish Visionary enters the battlefield, draw a card.
+SetInfo:M10 Common
+SetInfo:M13 Common
+SetInfo:ALA Common

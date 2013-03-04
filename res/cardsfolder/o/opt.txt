@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Dig | Cost$ U | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ -1 | Optional$ True | LibraryPosition2$ 0 | SubAbility$ DBDraw | SpellDescription$ Look at the top card of your library. You may put that card on the bottom of your library. Draw a card.
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opt.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/64.jpg
 Oracle:Look at the top card of your library. You may put that card on the bottom of your library.\nDraw a card.
+SetInfo:INV Common

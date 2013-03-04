@@ -2,15 +2,14 @@ Name:Fire Elemental
 ManaCost:3 R R
 Types:Creature Elemental
 PT:5/4
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card15813.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/149.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/150.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/183.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/209.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/176.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/130.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/148.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/96.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/149.jpg
 Oracle:
+SetInfo:2ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:6ED Uncommon
+SetInfo:S99 Uncommon
+SetInfo:LEB Uncommon
+SetInfo:M13 Common
+SetInfo:LEA Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

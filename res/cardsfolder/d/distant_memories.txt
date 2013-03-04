@@ -6,7 +6,6 @@ SVar:DBReturn:DB$ChangeZone | Origin$ Exile | Destination$ Hand | ChangeType$ Ca
 SVar:DBDraw:DB$Draw | NumCards$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ LE1 | References$ X
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distant_memories.jpg
-SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/24.jpg
 Oracle:Search your library for a card, exile it, then shuffle your library. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
+SetInfo:MBS Rare

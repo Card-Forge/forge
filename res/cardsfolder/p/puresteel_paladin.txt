@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | ValidCard$ Equipment.YouCtrl | Origin$ Any | Destination$ 
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
 S:Mode$ Continuous | Affected$ Equipment.YouCtrl | AddAbility$ ABAttach | Condition$ Metalcraft | Description$ Metalcraft - Equipment you control have equip 0 as long as you control three or more artifacts.
 SVar:ABAttach:AB$ Attach | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | PrecostDesc$ Equip - | SpellDescription$ Attach CARDNAME to target creature you control.
-SVar:Rarity:Rare
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/New_Phyrexia/puresteel_paladin.jpg
-SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/20.jpg
 Oracle:Whenever an Equipment enters the battlefield under your control, you may draw a card.\nMetalcraft - Equipment you control have equip {0} as long as you control three or more artifacts.
+SetInfo:NPH Rare

@@ -9,7 +9,6 @@ SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Condition
 SVar:DBTap:DB$ Tap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Creature.nonArtifact | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_vampire.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/34.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you may sacrifice a nonartifact creature. If you do, put a +1/+1 counter on Ravenous Vampire. If you don't, tap Ravenous Vampire.
+SetInfo:MIR Uncommon

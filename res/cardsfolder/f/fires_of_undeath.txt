@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 K:Flashback 5 B
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_undeath.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/88.jpg
 Oracle:Fires of Undeath deals 2 damage to target creature or player.\nFlashback {5}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:DKA Common

@@ -3,7 +3,6 @@ ManaCost:1 B R
 Types:Enchantment
 T:Mode$ DamageDone | ValidTarget$ Opponent | DamageAmount$ GE3 | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent is dealt 3 or more damage by a single source, that player discards a card.
 SVar:TrigDestroy:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pain_magnification.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/121.jpg
 Oracle:Whenever an opponent is dealt 3 or more damage by a single source, that player discards a card.
+SetInfo:DIS Uncommon

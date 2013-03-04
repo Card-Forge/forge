@@ -4,7 +4,6 @@ Types:Artifact Creature Myr
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigAddMana | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, add 1 to your mana pool.
 SVar:TrigAddMana:AB$Mana | Cost$ 0 | Produced$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_moonvessel.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/133.jpg
 Oracle:When Myr Moonvessel dies, add {1} to your mana pool.
+SetInfo:DST Common

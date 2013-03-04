@@ -5,7 +5,6 @@ PT:2/2
 K:Fading:4
 A:AB$ Tap | Cost$ SubCounter<1/FADE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jolting_merfolk.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/34.jpg
 Oracle:Fading 4 (This creature enters the battlefield with four fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Jolting Merfolk: Tap target creature.
+SetInfo:NMS Uncommon

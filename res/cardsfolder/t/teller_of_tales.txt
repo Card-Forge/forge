@@ -5,7 +5,6 @@ PT:3/3
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTapOrUntap | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may tap or untap target creature.
 SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teller_of_tales.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/95.jpg
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may tap or untap target creature.
+SetInfo:CHK Common

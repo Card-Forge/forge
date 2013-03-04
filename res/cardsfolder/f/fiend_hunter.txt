@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:DB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiend_hunter.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/15.jpg
 Oracle:When Fiend Hunter enters the battlefield, you may exile another target creature.\nWhen Fiend Hunter leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SetInfo:ISD Uncommon

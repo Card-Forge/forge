@@ -3,7 +3,6 @@ ManaCost:1 U B
 Types:Instant
 A:SP$ Destroy | Cost$ 1 U B | ValidTgts$ Creature | NoRegen$ True | UnlessCost$ PayLife<X> | UnlessPayer$ TargetedController | SpellDescription$ Destroy target creature unless its controller pays life equal to its toughness. A creature destroyed this way can't be regenerated.
 SVar:X:Targeted$CardToughness
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_vortex.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/365.jpg
 Oracle:Destroy target creature unless its controller pays life equal to its toughness. A creature destroyed this way can't be regenerated.
+SetInfo:ICE Uncommon

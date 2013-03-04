@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't atta
 SVar:X:Count$Valid Giant.Other+YouCtrl
 SVar:BuffedBy:Giant
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_spot_giant.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/153.jpg
 Oracle:Blind-Spot Giant can't attack or block unless you control another Giant.
+SetInfo:LRW Common

@@ -5,7 +5,6 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self+enchanted | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | AddAbility$ Pump | Description$ As long as CARDNAME is enchanted, it gets +2/+2, has trample, and has "R: CARDNAME gets +1/+0 until end of turn."
 SVar:Pump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:EnchantMe:Once
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flaring_flame_kin.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/62.jpg
 Oracle:As long as Flaring Flame-Kin is enchanted, it gets +2/+2, has trample, and has "{R}: Flaring Flame-Kin gets +1/+0 until end of turn."
+SetInfo:DIS Uncommon

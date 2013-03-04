@@ -4,7 +4,6 @@ Types:Creature Human Rogue
 PT:3/3
 A:AB$ Discard | Cost$ 2 B Sac<1/Creature> | ValidTgts$ Player | Mode$ RevealYouChoose | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Target player reveals his or her hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_traders.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/90.jpg
 Oracle:{2}{B}, Sacrifice a creature: Target opponent reveals his or her hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+SetInfo:AVR Uncommon

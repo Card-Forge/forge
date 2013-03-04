@@ -2,7 +2,6 @@ Name:Loxodon Wayfarer
 ManaCost:2 W
 Types:Creature Elephant Monk
 PT:1/5
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_wayfarer.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/15.jpg
 Oracle:
+SetInfo:SOM Common

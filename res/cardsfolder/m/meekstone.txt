@@ -4,14 +4,13 @@ Types:Artifact
 Text:Creatures with power 3 or greater don't untap during their controllers' untap steps.
 K:Permanents don't untap during their controllers' untap steps:Creature.powerGE3
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meekstone.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/260.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/262.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/307.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/389.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/353.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/298.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/264.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/261.jpg
 Oracle:Creatures with power 3 or greater don't untap during their controllers' untap steps.
+SetInfo:2ED Rare
+SetInfo:7ED Rare
+SetInfo:6ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

@@ -4,7 +4,6 @@ Types:Creature Goblin Shaman
 PT:1/2
 A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature or player.
 SVar:X:Count$CardPower
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spikeshot_goblin.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/108.jpg
 Oracle:{R}, {T}: Spikeshot Goblin deals damage equal to its power to target creature or player.
+SetInfo:MRD Common

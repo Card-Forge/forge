@@ -5,7 +5,6 @@ K:Flashback 4 G G G
 A:SP$ RepeatEach | Cost$ 3 G G | RepeatSubAbility$ DBClone | RepeatCards$ Creature.token | AILogic$ CloneAllTokens | SpellDescription$ For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.
 SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | Controller$ RememberedController
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallel_evolution.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/136.jpg
 Oracle:For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.\nFlashback {4}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:TOR Rare

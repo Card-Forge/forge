@@ -7,13 +7,12 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | Present
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:NeedsToPlay:Island.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pirate_ship.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/71.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/71.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/91.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/28.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/72.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/109.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/71.jpg
 Oracle:Pirate Ship can't attack unless defending player controls an Island.\n{T}: Pirate Ship deals 1 damage to target creature or player.\nWhen you control no Islands, sacrifice Pirate Ship.
+SetInfo:2ED Rare
+SetInfo:TSB Special
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

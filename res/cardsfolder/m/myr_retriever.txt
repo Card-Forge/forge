@@ -5,7 +5,6 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return another target artifact card from your graveyard to your hand.
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.Other+YouCtrl | Cost$ 0
 SVar:SacMe:1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_retriever.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/215.jpg
 Oracle:When Myr Retriever dies, return another target artifact card from your graveyard to your hand.
+SetInfo:MRD Uncommon

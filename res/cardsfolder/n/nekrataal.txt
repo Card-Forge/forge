@@ -6,10 +6,9 @@ K:First Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.nonArtifact+nonBlack | NoRegen$ True | TgtPrompt$ Select target nonartifact, nonblack creature.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nekrataal.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/149.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/16.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/149.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/163.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhen Nekrataal enters the battlefield, destroy target nonartifact, nonblack creature. That creature can't be regenerated.
+SetInfo:8ED Uncommon
+SetInfo:VIS Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon

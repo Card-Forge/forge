@@ -5,7 +5,6 @@ A:AB$ ChangeZone | Cost$ R | Origin$ Hand | Destination$ Battlefield | ChangeTyp
 SVar:DBPump:DB$ Pump | KW$ Haste & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sneak_attack.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/218.jpg
 Oracle:{R}: You may put a creature card from your hand onto the battlefield. That creature gains haste. Sacrifice the creature at the beginning of the next end step.
+SetInfo:USG Rare

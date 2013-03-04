@@ -7,7 +7,6 @@ SVar:ControlFlip:DB$ FlipACoin | Defined$ Remembered | LoseSubAbility$ ChooseOpp
 SVar:ChooseOpp:DB$ ChoosePlayer | Defined$ Remembered | Choices$ RememberedOpponent | AILogic$ Curse | SubAbility$ LoseControl
 SVar:LoseControl:DB$ GainControl | Defined$ Self | NewController$ ChosenPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_festival.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/83.jpg
 Oracle:{2}: Goblin Festival deals 1 damage to target creature or player. Flip a coin. If you lose the flip, choose one of your opponents. That player gains control of Goblin Festival.
+SetInfo:UDS Rare

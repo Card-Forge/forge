@@ -2,7 +2,6 @@ Name:Lizard Warrior
 ManaCost:3 R
 Types:Creature Lizard Warrior
 PT:4/2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4350.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/144.jpg
 Oracle:
+SetInfo:POR Common

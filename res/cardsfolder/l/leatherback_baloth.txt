@@ -2,7 +2,6 @@ Name:Leatherback Baloth
 ManaCost:G G G
 Types:Creature Beast
 PT:4/5
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leatherback_baloth.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/107.jpg
 Oracle:
+SetInfo:WWK Uncommon

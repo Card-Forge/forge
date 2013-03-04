@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Sorcery
 A:SP$ GainLife | Cost$ 1 G | Defined$ You | LifeAmount$ X | References$ X | SpellDescription$ You gain 1 life for each tapped artifact, creature, and land you control.
 SVar:X:Count$Valid Artifact.YouCtrl+tapped,Creature.YouCtrl+tapped,Land.YouCtrl+tapped
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/toil_to_renown.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/130.jpg
 Oracle:You gain 1 life for each tapped artifact, creature, and land you control.
+SetInfo:SHM Common

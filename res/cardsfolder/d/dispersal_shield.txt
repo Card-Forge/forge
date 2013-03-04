@@ -5,7 +5,6 @@ A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | ConditionCheck
 SVar:X:Targeted$CardManaCost
 SVar:Y:Count$MaxCMCYouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispersal_shield.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/33.jpg
 Oracle:Counter target spell if its converted mana cost is less than or equal to the highest converted mana cost among permanents you control.
+SetInfo:SCG Common

@@ -4,7 +4,6 @@ Types:Creature Goblin Warrior
 Text:CARDNAME can't be blocked by blue creatures.
 PT:3/3
 K:CantBeBlockedBy Creature.Blue
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mudbrawler_raiders.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/213.jpg
 Oracle:Mudbrawler Raiders can't be blocked by blue creatures.
+SetInfo:SHM Common

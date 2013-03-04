@@ -4,7 +4,6 @@ Types:Creature Elf Shaman
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE5+Other+YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature with power 5 or greater enters the battlefield under your control, you may put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godtracker_of_jund.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/55.jpg
 Oracle:Whenever a creature with power 5 or greater enters the battlefield under your control, you may put a +1/+1 counter on Godtracker of Jund.
+SetInfo:ARB Common

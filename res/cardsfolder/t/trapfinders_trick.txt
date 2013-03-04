@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Sorcery
 A:SP$ Discard | Cost$ 1 U | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.Trap | SpellDescription$ Target player reveals his or her hand and discards all Trap cards.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trapfinders_trick.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/73.jpg
 Oracle:Target player reveals his or her hand and discards all Trap cards.
+SetInfo:ZEN Common

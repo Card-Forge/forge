@@ -4,11 +4,10 @@ Types:Artifact Creature Wall
 PT:2/3
 K:Defender
 K:First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_spears.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/320.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/407.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/42.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/374.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/323.jpg
 Oracle:Defender (This creature can't attack.)\nFirst strike
+SetInfo:ATQ Uncommon
+SetInfo:5ED Common
+SetInfo:7ED Uncommon
+SetInfo:4ED Common
+SetInfo:8ED Uncommon

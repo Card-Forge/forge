@@ -8,7 +8,6 @@ SVar:Y:Count$Valid Permanent.Blue+YouCtrl/LimitMax.1
 SVar:Z:Count$Valid Permanent.Black+YouCtrl/LimitMax.1
 SVar:X:SVar$Y/Plus.Z
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ana_sanctuary.jpg
-SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/74.jpg
 Oracle:At the beginning of your upkeep, if you control a blue or black permanent, target creature gets +1/+1 until end of turn. If you control a blue permanent and a black permanent, that creature gets +5/+5 until end of turn instead.
+SetInfo:APC Uncommon

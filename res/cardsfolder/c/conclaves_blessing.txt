@@ -9,7 +9,6 @@ SVar:X:SVar$A/Twice
 SVar:A:Count$Valid Creature.YouCtrl/Minus.1
 SVar:Y:SVar$B/Twice
 SVar:B:Count$Valid Creature.YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conclaves_blessing.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/11.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nEnchant creature\nEnchanted creature gets +0/+2 for each other creature you control.
+SetInfo:RAV Common

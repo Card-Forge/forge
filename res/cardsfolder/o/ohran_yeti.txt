@@ -3,7 +3,6 @@ ManaCost:3 R
 Types:Snow Creature Yeti
 PT:3/3
 A:AB$ Pump | Cost$ 2 S | ValidTgts$ Creature.Snow | TgtPrompt$ Select target snow creature | KW$ First Strike | SpellDescription$ Target snow creature gains first strike until end of turn. (S can be paid with one mana from a snow permanent.)
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ohran_yeti.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/93.jpg
 Oracle:{2}{S}: Target snow creature gains first strike until end of turn. ({S} can be paid with one mana from a snow permanent.)
+SetInfo:CSP Common

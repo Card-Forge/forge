@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, CARDNAME deals 2 damage to target creature or player and you draw a card.
 SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_fire_and_ice.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/148.jpg
 Oracle:Equipped creature gets +2/+2 and has protection from red and from blue.\nWhenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.\nEquip {2}
+SetInfo:DST Rare

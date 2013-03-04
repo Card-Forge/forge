@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all lands target player controls.
 SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gulf_squid.jpg
-SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/35.jpg
 Oracle:When Gulf Squid enters the battlefield, tap all lands target player controls.
+SetInfo:PCY Common

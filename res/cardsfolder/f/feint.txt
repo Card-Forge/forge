@@ -7,5 +7,5 @@ SVar:FeintPumpAll:DB$ Pump | Defined$ Valid Creature.blockingRemembered | KW$ HI
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feint.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/144.jpg
 Oracle:Tap all creatures blocking target attacking creature. Prevent all combat damage that would be dealt this turn by that creature and each creature blocking it.
+SetInfo:LEG Common

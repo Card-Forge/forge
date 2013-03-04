@@ -5,7 +5,6 @@ K:Equip 4
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | References$ X | Description$ Equipped creature gets +1/+1 for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pennon_blade.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/221.jpg
 Oracle:Equipped creature gets +1/+1 for each creature you control.\nEquip {4}
+SetInfo:ROE Uncommon

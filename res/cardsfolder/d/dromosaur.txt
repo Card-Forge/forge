@@ -5,7 +5,6 @@ PT:2/3
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, it gets +2/-2 until end of turn.
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigBlockedPump | Secondary$ True | TriggerDescription$ CARDNAME gets +2/-2 until end of turn.
 SVar:TrigBlockedPump:AB$Pump | Cost$ 0 | NumAtt$ +2 | NumDef$ -2 | Defined$ Self
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromosaur.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/182.jpg
 Oracle:Whenever Dromosaur blocks or becomes blocked, it gets +2/-2 until end of turn.
+SetInfo:USG Common

@@ -3,8 +3,7 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 K:Cycling:2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5817.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/201.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/216.jpg
 Oracle:Destroy target land.\nCycling {2} ({2}, Discard this card: Draw a card.)
+SetInfo:ONS Common
+SetInfo:USG Common

@@ -6,7 +6,6 @@ S:Mode$ CantBeCast | ValidCard$ Card | Condition$ NotPlayerTurn | Caster$ You
 S:Mode$ CantBeActivated | ValidCard$ Card | Condition$ PlayerTurn | Activator$ Opponent
 S:Mode$ CantBeActivated | ValidCard$ Card | Condition$ NotPlayerTurn | Activator$ You
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://wizards.com/global/images/magic/general/city_of_solitude.jpg
-SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/52.jpg
 Oracle:Players can cast spells and activate abilities only during their own turns.
+SetInfo:VIS Rare

@@ -3,7 +3,6 @@ ManaCost:U
 Types:Sorcery
 K:Flashback U
 A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature is unblockable this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artful_dodge.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/27.jpg
 Oracle:Target creature is unblockable this turn.\nFlashback {U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:DKA Common

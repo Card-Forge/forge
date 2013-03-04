@@ -3,7 +3,6 @@ ManaCost:B
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.withFlashback | SpellDescription$ Target player exiles all cards with flashback from his or her graveyard.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tombfire.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/165.jpg
 Oracle:Target player exiles all cards with flashback from his or her graveyard.
+SetInfo:ODY Rare

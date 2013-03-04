@@ -7,7 +7,6 @@ SVar:GainTime:DB$ PutCounter | ValidTgts$ Permanent.counters_GE1_TIME+inZoneBatt
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timecrafting.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/109.jpg
 Oracle:Choose one - Remove X time counters from target permanent or suspended card; or put X time counters on target permanent with a time counter on it or suspended card.
+SetInfo:PLC Uncommon

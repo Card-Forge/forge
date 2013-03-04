@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent.nonToken+YouCtrl | TgtPrompt$ Select target nontoken permanent you control | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SpellDescription$ Shuffle target nontoken permanent you control into its owner's library.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_pawnshop.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/311.jpg
 Oracle:{2}, {T}: Shuffle target nontoken permanent you control into its owner's library.
+SetInfo:MMQ Rare

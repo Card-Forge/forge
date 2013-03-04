@@ -4,7 +4,6 @@ Types:Artifact Creature Zombie
 PT:3/1
 A:AB$ Pump | Cost$ 2 B Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_replica.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/220.jpg
 Oracle:{2}{B}, Sacrifice Nim Replica: Target creature gets -1/-1 until end of turn.
+SetInfo:MRD Common

@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigLoseLife:DB$LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | RememberTargets$ True | ForgetOtherTargets$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, that player gains 3 life.
 SVar:TrigGainLife:DB$GainLife | Defined$ Remembered | LifeAmount$ 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_scourge.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/85.jpg
 Oracle:Flying\nWhen Soul Scourge enters the battlefield, target player loses 3 life.\nWhen Soul Scourge leaves the battlefield, that player gains 3 life.
+SetInfo:TOR Common

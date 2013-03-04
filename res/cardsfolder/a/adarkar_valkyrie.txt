@@ -7,7 +7,6 @@ K:Vigilance
 A:AB$ Effect | Cost$ T | Name$ Adarkar Valkyrie Effect | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature other than Adarkar Valkyrie | Triggers$ TrigChangesZone | SVars$ TrigChangeZone | References$ TrigChangesZone,TrigChangeZone | RememberObjects$ Targeted | SpellDescription$ When target creature other than CARDNAME dies this turn, return that card to the battlefield under your control.
 SVar:TrigChangesZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ TrigChangeZone | TriggerDescription$ If the targeted creature of Adarkar Valkyrie dies this turn, return it to the battlefield and you gain control of it.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121196.jpg
-SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/1.jpg
 Oracle:Flying, vigilance\n{T}: When target creature other than Adarkar Valkyrie dies this turn, return that card to the battlefield under your control.
+SetInfo:CSP Rare

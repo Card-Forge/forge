@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
 A:AB$ Pump | Cost$ B | Defined$ Enchanted | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Enchanted creature gets -1/-1 until end of turn.
 A:AB$ Pump | Cost$ R | Defined$ Enchanted | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Enchanted creature can't block this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manacles_of_decay.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/14.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack.\n{B}: Enchanted creature gets -1/-1 until end of turn.\n{R}: Enchanted creature can't block this turn.
+SetInfo:APC Common

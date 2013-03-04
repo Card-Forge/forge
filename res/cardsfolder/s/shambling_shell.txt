@@ -4,7 +4,7 @@ Types:Creature Plant Zombie
 PT:3/1
 A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 K:Dredge 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shambling_shell.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/230.jpg
 Oracle:Sacrifice Shambling Shell: Put a +1/+1 counter on target creature.\nDredge 3 (If you would draw a card, instead you may put exactly three cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)
+SetInfo:RAV Common
+SetInfo:DDJ Common

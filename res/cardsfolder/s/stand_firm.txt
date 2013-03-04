@@ -3,7 +3,6 @@ ManaCost:W
 Types:Instant
 A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBScry | SpellDescription$ Target creature gets +1/+1 until end of turn. Scry 2 (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:DBScry:DB$Scry | ScryNum$ 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stand_firm.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/17.jpg
 Oracle:Target creature gets +1/+1 until end of turn.\nScry 2. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SetInfo:5DN Common

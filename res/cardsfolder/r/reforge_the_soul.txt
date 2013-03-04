@@ -6,7 +6,6 @@ A:SP$ Discard | Cost$ 3 R R | Mode$ Hand | Defined$ Each | SubAbility$ DBEachDra
 SVar:DBEachDraw:DB$Draw | Defined$ Each | NumCards$ 7
 SVar:NeedsToPlayVar:X LE2
 SVar:X:Count$InYourHand
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reforge_the_soul.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/151.jpg
 Oracle:Each player discards his or her hand and draws seven cards.\nMiracle {1}{R} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
+SetInfo:AVR Rare

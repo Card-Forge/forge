@@ -8,7 +8,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | I
 SVar:TrigNoKeeper:DB$DealDamage | NumDmg$ 3 | Defined$ You | SubAbility$ DBMustAttack
 SVar:DBMustAttack:DB$Pump | KW$ HIDDEN CARDNAME attacks each turn if able. | Defined$ Self | SpellDescription$ CARDNAME attacks this turn if able.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kookus.jpg
-SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/86.jpg
 Oracle:Trample\nAt the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, Kookus deals 3 damage to you and attacks this turn if able.\n{R}: Kookus gets +1/+0 until end of turn.
+SetInfo:VIS Rare

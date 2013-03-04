@@ -9,7 +9,6 @@ SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | Mode$ Hand |
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredTarget | SubAbility$ DBCleanup | SpellDescription$ Draw that many cards | References$ X
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_shocker.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/144.jpg
 Oracle:Trample, haste\nWhenever Barbed Shocker deals damage to a player, that player discards all the cards in his or her hand, then draws that many cards.
+SetInfo:TSP Uncommon

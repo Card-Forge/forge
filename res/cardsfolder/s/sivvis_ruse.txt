@@ -7,7 +7,6 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Creature.YouC
 SVar:X:Count$Valid Mountain.OppCtrl
 SVar:Y:Count$Valid Plains.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sivvis_ruse.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/21.jpg
 Oracle:If an opponent controls a Mountain and you control a Plains, you may cast Sivvi's Ruse without paying its mana cost.\nPrevent all damage that would be dealt this turn to creatures you control.
+SetInfo:NMS Uncommon

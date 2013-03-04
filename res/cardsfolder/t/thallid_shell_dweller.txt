@@ -6,7 +6,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
 A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 K:Defender
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_shell_dweller.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/226.jpg
 Oracle:Defender\nAt the beginning of your upkeep, put a spore counter on Thallid Shell-Dweller.\nRemove three spore counters from Thallid Shell-Dweller: Put a 1/1 green Saproling creature token onto the battlefield.
+SetInfo:TSP Common

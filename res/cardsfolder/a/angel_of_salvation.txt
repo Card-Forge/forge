@@ -8,7 +8,7 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ AngelicSalvation | TriggerDescription$ When CARDNAME enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
 SVar:AngelicSalvation:DB$ PreventDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to prevent damage to | Amount$ 5 | TargetMin$ 1 | TargetMax$ 5 | DividedAsYouChoose$ 5
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_salvation.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/1.jpg
 Oracle:Flash, convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nFlying\nWhen Angel of Salvation enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+SetInfo:FUT Rare
+SetInfo:DDF Rare

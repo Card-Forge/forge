@@ -2,11 +2,10 @@ Name:Assassinate
 ManaCost:2 B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assassinate.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/81.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/84.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/30.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/95.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/128.jpg
 Oracle:Destroy target tapped creature.
+SetInfo:M11 Common
+SetInfo:M10 Common
+SetInfo:PC2 Common
+SetInfo:TSP Common
+SetInfo:10E Common

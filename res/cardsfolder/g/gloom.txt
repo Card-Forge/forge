@@ -4,12 +4,11 @@ Types:Enchantment
 S:Mode$ RaiseCost | ValidCard$ Card.White | Type$ Spell | Amount$ 3 | Description$ White spells cost 3 more to cast.
 S:Mode$ RaiseCost | ValidCard$ Enchantment.White | Type$ Ability | Amount$ 3 | AffectedZone$ Battlefield | Description$ Activated abilities of white enchantments cost 3 more to activate.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloom.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/19.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/19.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/27.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/23.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/21.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/19.jpg
 Oracle:White spells cost {3} more to cast.\nActivated abilities of white enchantments cost {3} more to activate.
+SetInfo:2ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

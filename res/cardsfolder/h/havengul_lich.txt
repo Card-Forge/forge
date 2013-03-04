@@ -15,5 +15,5 @@ SVar:CleanupDT:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination
 SVar:SelectKW:Remembered$Valid Card.YouOwn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havengul_lich.jpg
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/139.jpg
 Oracle:{1}: You may cast target creature card in a graveyard this turn. When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
+SetInfo:DKA Mythic

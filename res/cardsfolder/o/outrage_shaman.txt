@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X
 SVar:X:Count$Chroma.R
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outrage_shaman.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/59.jpg
 Oracle:Chroma - When Outrage Shaman enters the battlefield, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.
+SetInfo:EVE Uncommon

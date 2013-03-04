@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:4/3
 K:CARDNAME can't block.
 K:Morph:4 R
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_slateback.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/194.jpg
 Oracle:Charging Slateback can't block.\nMorph {4}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:ONS Common

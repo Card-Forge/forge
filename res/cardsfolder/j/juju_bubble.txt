@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$
 T:Mode$ LandPlayed | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When you play a card, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juju_bubble.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/147.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen you play a card, sacrifice Juju Bubble.\n{2}: You gain 1 life.
+SetInfo:VIS Uncommon

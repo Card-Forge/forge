@@ -5,8 +5,9 @@ PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to target creature.
 SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ps/en-us/card26262.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/123.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/60.jpg
 Oracle:When Flametongue Kavu enters the battlefield, it deals 4 damage to target creature.
+SetInfo:PLS Uncommon
+SetInfo:COM Uncommon
+SetInfo:HOP Uncommon
+SetInfo:DD2 Uncommon

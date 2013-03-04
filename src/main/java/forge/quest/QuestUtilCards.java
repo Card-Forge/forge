@@ -270,6 +270,7 @@ public final class QuestUtilCards {
     public void buyPack(final OpenablePack booster, final int value) {
         if (this.qa.getCredits() >= value) {
             this.qa.setCredits(this.qa.getCredits() - value);
+            this.qa.getShopList().remove(booster);
             this.addAllCards(booster.getCards());
         }
     }
@@ -350,11 +351,13 @@ public final class QuestUtilCards {
             int nToRemoveFromThisDeck = cntInMain + cntInSb - leftInPool;
             if ( nToRemoveFromThisDeck <= 0 ) continue; // this is not the deck you are looking for
 
-            int nToRemoveFromSb = cntInSb - nToRemoveFromThisDeck;
-            if( nToRemoveFromSb > 0 ) {
+            int nToRemoveFromSb = Math.min(cntInSb, nToRemoveFromThisDeck);
+            if (nToRemoveFromSb > 0) {
                 deck.get(DeckSection.Sideboard).remove(card, nToRemoveFromSb);
-                nToRemoveFromThisDeck -= cntInSb; // actual removed count should be, but I take upper bound here
-                if ( nToRemoveFromThisDeck <= 0 ) continue; // done here
+                nToRemoveFromThisDeck -= nToRemoveFromSb;
+                if (0 >= nToRemoveFromThisDeck) {
+                    continue; // done here
+                }
             }
 
             deck.getMain().remove(card, nToRemoveFromThisDeck);
@@ -508,7 +511,6 @@ public final class QuestUtilCards {
      * Generate cards in shop.
      */
     public void generateCardsInShop() {
-
         Iterable<CardPrinted> cardList = null;
         if (qc.getFormat() == null) {
               cardList = CardDb.instance().getAllCards(); }

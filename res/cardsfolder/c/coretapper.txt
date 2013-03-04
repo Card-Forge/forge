@@ -6,7 +6,6 @@ A:AB$ PutCounter | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target Arti
 A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | CounterType$ CHARGE | CounterNum$ 2 | SpellDescription$ Put two charge counters on target artifact.
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coretapper.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/107.jpg
 Oracle:{T}: Put a charge counter on target artifact.\nSacrifice Coretapper: Put two charge counters on target artifact.
+SetInfo:DST Uncommon

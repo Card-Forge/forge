@@ -10,7 +10,6 @@ SVar:DelTrigBoth:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlay
 SVar:TrigDestroySapper:DB$Destroy | Defined$ Self | SubAbility$ TrigDestroyFriend
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_sappers.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/189.jpg
 Oracle:{R}{R}, {T}: Target creature you control is unblockable this turn. Destroy it and Goblin Sappers at end of combat.\n{R}{R}{R}{R}, {T}: Target creature you control is unblockable this turn. Destroy it at end of combat.
+SetInfo:ICE Common

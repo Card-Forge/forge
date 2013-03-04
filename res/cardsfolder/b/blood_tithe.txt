@@ -5,7 +5,6 @@ A:SP$ LoseLife | Cost$ 3 B | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbili
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ You gain life equal to the life lost this way.
 SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_tithe.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/84.jpg
 Oracle:Each opponent loses 3 life. You gain life equal to the life lost this way.
+SetInfo:M11 Common

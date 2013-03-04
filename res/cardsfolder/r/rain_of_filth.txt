@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ AnimateAll | Cost$ B | ValidCards$ Land.YouCtrl | Abilities$ ABMana | SpellDescription$ Until end of turn, lands you control gain "Sacrifice this land: Add B to your mana pool."
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add B to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_filth.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/151.jpg
 Oracle:Until end of turn, lands you control gain "Sacrifice this land: Add {B} to your mana pool."
+SetInfo:USG Uncommon

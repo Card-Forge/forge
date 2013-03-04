@@ -218,8 +218,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
      * @return a int.
      */
     protected final int getAverageTimePerObject() {
-        int aTime = 0;
-        int nz = 10;
+        int numNonzero = 10;
 
         if (this.tptr > 9) {
             this.tptr = 0;
@@ -232,14 +231,12 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         for (int i = 0; i < 10; i++) {
             tTime += this.times[i];
             if (this.times[i] == 0) {
-                nz--;
+                numNonzero--;
             }
         }
-        aTime = tTime / nz;
-
+        
         this.tptr++;
-
-        return aTime;
+        return tTime / Math.max(1, numNonzero);
     }
 
     /**
@@ -253,21 +250,9 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     private void update(final int card) {
         this.card = card;
 
-        /**
-         * 
-         * TODO: Write javadoc for this type.
-         * 
-         */
         final class Worker implements Runnable {
             private final int card;
 
-            /**
-             * 
-             * TODO: Write javadoc for Constructor.
-             * 
-             * @param card
-             *            int
-             */
             Worker(final int card) {
                 this.card = card;
             }

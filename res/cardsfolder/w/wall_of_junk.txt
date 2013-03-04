@@ -6,7 +6,6 @@ K:Defender
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Execute$ TrigBounce | TriggerDescription$ Return CARDNAME to it's owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_junk.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/315.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Wall of Junk blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
+SetInfo:USG Uncommon

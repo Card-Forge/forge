@@ -4,7 +4,6 @@ Types:Creature Human Advisor
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a creature card with power 2 or less, reveal it, and put it into your hand. Then shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Creature.powerLE2 | ChangeNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_recruiter.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/113.jpg
 Oracle:When Imperial Recruiter enters the battlefield, search your library for a creature card with power 2 or less, reveal it, and put it into your hand. Then shuffle your library.
+SetInfo:PTK Uncommon

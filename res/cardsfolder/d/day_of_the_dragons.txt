@@ -8,7 +8,6 @@ SVar:TrigSacrifice:AB$SacrificeAll | Cost$ 0 | ValidCards$ Dragon.YouCtrl | SubA
 SVar:DBToken:DB$Token | TokenAmount$ X | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ You | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying | References$ X
 SVar:DBReturn:DB$ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered
 SVar:X:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/day_of_the_dragons.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/31.jpg
 Oracle:When Day of the Dragons enters the battlefield, exile all creatures you control. Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield.\nWhen Day of the Dragons leaves the battlefield, sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control.
+SetInfo:SCG Rare

@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.powerLE2+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature you control with power 2 or less attacks, CARDNAME deals 1 damage to defending player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ DefendingPlayer | NumDmg$ 1
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raid_bombardment.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/161.jpg
 Oracle:Whenever a creature you control with power 2 or less attacks, Raid Bombardment deals 1 damage to defending player.
+SetInfo:ROE Common

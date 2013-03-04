@@ -2,7 +2,6 @@ Name:Skillful Lunge
 ManaCost:1 W
 Types:Instant
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ First Strike | SpellDescription$ Target creature gets +2/+0 and gains First Strike until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skillful_lunge.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/22.jpg
 Oracle:Target creature gets +2/+0 and gains first strike until end of turn.
+SetInfo:DKA Common

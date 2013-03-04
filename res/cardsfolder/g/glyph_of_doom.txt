@@ -6,7 +6,6 @@ SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Command | ValidPlaye
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockedByRemembered
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glyph_of_doom.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/14.jpg
 Oracle:At end of combat, destroy all creatures that were blocked by target Wall this turn.
+SetInfo:LEG Common

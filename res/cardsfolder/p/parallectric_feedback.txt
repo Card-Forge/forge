@@ -6,5 +6,5 @@ SVar:DBDmg:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | References
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallectric_feedback.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/71.jpg
 Oracle:Parallectric Feedback deals damage to target spell's controller equal to that spell's converted mana cost.
+SetInfo:GPT Rare

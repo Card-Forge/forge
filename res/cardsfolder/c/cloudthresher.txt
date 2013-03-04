@@ -9,7 +9,6 @@ K:Evoke:2 G G
 SVar:TrigDamageAllFlyersAndPlayers:DB$ DamageAll | Cost$ 0 | ValidCards$ Creature.withFlying | ValidPlayers$ Each | NumDmg$ 2 | ValidDescription$ each creature with flying and each player.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudthresher.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/202.jpg
 Oracle:Flash\nReach (This can block creatures with flying.)\nWhen Cloudthresher enters the battlefield, it deals 2 damage to each creature with flying and each player.\nEvoke {2}{G}{G} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
+SetInfo:LRW Rare

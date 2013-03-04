@@ -8,7 +8,6 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
 A:AB$ Protection | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ ChosenColor | SpellDescription$ Target creature gains protection from the chosen color until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/floating_shield.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/5.jpg
 Oracle:Enchant creature\nAs Floating Shield enters the battlefield, choose a color.\nEnchanted creature has protection from the chosen color. This effect doesn't remove Floating Shield.\nSacrifice Floating Shield: Target creature gains protection from the chosen color until end of turn.
+SetInfo:TOR Common

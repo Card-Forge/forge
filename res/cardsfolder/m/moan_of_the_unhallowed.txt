@@ -3,7 +3,6 @@ ManaCost:2 B B
 Types:Sorcery
 K:Flashback 5 B B
 A:SP$ Token | Cost$ 2 B B | TokenImage$ B 2 2 Zombie | TokenAmount$ 2 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | SpellDescription$ Put two 2/2 black Zombie creature tokens onto the battlefield.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moan_of_the_unhallowed.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/109.jpg
 Oracle:Put two 2/2 black Zombie creature tokens onto the battlefield.\nFlashback {5}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:ISD Uncommon

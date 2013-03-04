@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-1/+12
 A:AB$ Pump | ActivationZone$ Command | Cost$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/sidar_kondo.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/sidar-kondo.jpg
 Oracle:Hand -1, life +12\n{3}: Target creature gets +3/+3 until end of turn.
+SetInfo:VAN Special

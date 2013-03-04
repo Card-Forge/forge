@@ -2,7 +2,6 @@ Name:Rebuke
 ManaCost:2 W
 Types:Instant
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Destroy target attacking creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuke.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/29.jpg
 Oracle:Destroy target attacking creature.
+SetInfo:ISD Common

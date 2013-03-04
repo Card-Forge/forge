@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Human Spellshaper
 PT:1/1
 A:AB$ Pump | Cost$ G T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_drummer.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/239.jpg
 Oracle:{G}, {T}, Discard a card: Target creature gets +2/+2 until end of turn.
+SetInfo:MMQ Common

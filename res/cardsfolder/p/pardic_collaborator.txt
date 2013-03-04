@@ -6,7 +6,6 @@ K:First Strike
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Black
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_collaborator.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/106.jpg
 Oracle:First strike\n{B}: Pardic Collaborator gets +1/+1 until end of turn.
+SetInfo:TOR Uncommon

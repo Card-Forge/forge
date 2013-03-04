@@ -2,7 +2,6 @@ Name:Power Matrix
 ManaCost:4
 Types:Artifact
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Flying & First Strike & Trample | SpellDescription$ Target creature gets +1/+1 and gains flying, first strike, and trample until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_matrix.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/309.jpg
 Oracle:{T}: Target creature gets +1/+1 and gains flying, first strike, and trample until end of turn.
+SetInfo:MMQ Rare

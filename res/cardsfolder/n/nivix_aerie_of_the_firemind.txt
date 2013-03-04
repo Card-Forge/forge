@@ -6,7 +6,7 @@ A:AB$ Dig | Cost$ T 2 U R | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | Des
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played | PumpZone$ Exile | SubAbility$ DBCleanup | UntilYourNextTurn$ True | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | ConditionCompare$ EQ1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nivix_aerie_of_the_firemind.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/160.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{2}{U}{R}, {T}: Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery.
+SetInfo:GPT Uncommon
+SetInfo:DDJ Uncommon

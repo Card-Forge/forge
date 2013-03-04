@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to their owner's graveyard.
 SVar:TrigExile:DB$ChangeZone | Cost$ 0 | TargetMin$ 0 | TargetMax$ 2 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | RememberTargets$ True | ForgetOtherTargets$ True
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravegouger.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/62.jpg
 Oracle:When Gravegouger enters the battlefield, exile up to two target cards from a single graveyard.\nWhen Gravegouger leaves the battlefield, return the exiled cards to their owner's graveyard.
+SetInfo:TOR Common

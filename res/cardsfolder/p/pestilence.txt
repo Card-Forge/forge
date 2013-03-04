@@ -5,14 +5,13 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Crea
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
 SVar:NeedsToPlay:Creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5619.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/147.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/29.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/29.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/48.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/36.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/149.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/30.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/29.jpg
 Oracle:At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.\n{B}: Pestilence deals 1 damage to each creature and each player.
+SetInfo:2ED Common
+SetInfo:6ED Uncommon
+SetInfo:USG Common
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:3ED Common

@@ -7,7 +7,6 @@ SVar:QuickenStA:Mode$ Continuous | EffectZone$ Command | Affected$ Sorcery.YouCt
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Sorcery | ValidActivatingPlayer$ You | Execute$ Quickened | Static$ True | TriggerDescription$ The next sorcery card you cast this turn can be cast as though it had flash.
 SVar:Quickened:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Graveyard
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicken.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/31.jpg
 Oracle:The next sorcery card you cast this turn can be cast as though it had flash.\nDraw a card.
+SetInfo:GPT Rare

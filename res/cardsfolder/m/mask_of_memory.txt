@@ -8,6 +8,6 @@ SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Condi
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_memory.jpg
-SVar:Rarity:Uncommon
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/203.jpg
 Oracle:Whenever equipped creature deals combat damage to a player, you may draw two cards. If you do, discard a card.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+SetInfo:MRD Uncommon
+SetInfo:HOP Uncommon

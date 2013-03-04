@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -2 | Description
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:SacMe:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/despondency.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/129.jpg
 Oracle:Enchant creature\nEnchanted creature gets -2/-0.\nWhen Despondency is put into a graveyard from the battlefield, return Despondency to its owner's hand.
+SetInfo:USG Common

@@ -4,7 +4,6 @@ Types:Creature Merfolk Wizard
 PT:1/2
 K:Evolve
 A:AB$ MoveCounter | Cost$ 1 U T | CounterType$ P1P1 | CounterNum$ 1 | Source$ Self | ValidTgts$ Creature | SpellDescription$ Move a +1/+1 counter from CARDNAME onto target creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_fluxmage.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/49.jpg
 Oracle:Evolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\n{1}{U}, {T}: Move a +1/+1 counter from Simic Fluxmage onto target creature.
+SetInfo:GTC Uncommon

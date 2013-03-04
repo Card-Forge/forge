@@ -5,5 +5,5 @@ HandLifeModifier:+1/-4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can block an additional creature. | Description$ Each creature you control can block an additional creature each combat.
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ Each creature you control can't be blocked except by two or more creatures.
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/two_headed_giant_of_foriys_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/two-headed-giant-of-foriys.jpg
 Oracle:Each creature you control can block an additional creature each combat.\nEach creature you control can't be blocked except by two or more creatures.
+SetInfo:VAN Special

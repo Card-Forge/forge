@@ -6,5 +6,5 @@ SVar:Pump4Tgt:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose target creature
 SVar:ShapeTgt:DB$ Clone | Defined$ Remembered | CloneTarget$ ParentTarget | Duration$ UntilEndOfTurn
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cytoshape.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/108.jpg
 Oracle:Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.
+SetInfo:DIS Rare

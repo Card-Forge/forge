@@ -5,7 +5,7 @@ PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 4
 A:AB$RegenerateAll | Cost$ G W Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_hierarch.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/214.jpg
 Oracle:When Loxodon Hierarch enters the battlefield, you gain 4 life.\n{G}{W}, Sacrifice Loxodon Hierarch: Regenerate each creature you control.
+SetInfo:RAV Rare
+SetInfo:DDH Rare

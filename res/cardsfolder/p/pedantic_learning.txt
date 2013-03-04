@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Land.YouCtrl | Origin$ Library | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a land card is put into your graveyard from your library, you may pay 1. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 1 | NumCards$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pedantic_learning.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/90.jpg
 Oracle:Whenever a land card is put into your graveyard from your library, you may pay {1}. If you do, draw a card.
+SetInfo:ODY Rare

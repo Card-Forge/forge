@@ -4,7 +4,6 @@ Types:Creature Zombie
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of your upkeep, tap CARDNAME unless you pay 1 life.
 SVar:TrigTap:DB$ Tap | UnlessCost$ PayLife<1> | UnlessPayer$ You | Defined$ Self
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carnophage.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/53.jpg
 Oracle:At the beginning of your upkeep, tap Carnophage unless you pay 1 life.
+SetInfo:EXO Common

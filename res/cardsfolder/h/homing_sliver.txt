@@ -6,7 +6,7 @@ K:TypeCycling:Sliver:3
 S:Mode$ Continuous | Affected$ Sliver | EffectZone$ Battlefield | AffectedZone$ Hand | AddAbility$ SliverCycling | Description$ Each Sliver card in each player's hand has slivercycling 3.
 SVar:SliverCycling:AB$ ChangeZone | Cost$ 3 Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Slivercycling | CostDesc$ 3 | Origin$ Library | Destination$ Hand | ChangeType$ Sliver | ChangeNum$ 1 | SpellDescription$ (3, Discard this card: Search your library for a Sliver card, reveal it, and put it into your hand. Then shuffle your library.)
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/homing_sliver.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/118.jpg
 Oracle:Each Sliver card in each player's hand has slivercycling {3}.\nSlivercycling {3} ({3}, Discard this card: Search your library for a Sliver card, reveal it, and put it into your hand. Then shuffle your library.)
+SetInfo:FUT Common
+SetInfo:H09 Common

@@ -10,6 +10,6 @@ SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeweled_bird.jpg
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/82.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/80.jpg
 Oracle:Remove Jeweled Bird from your deck before playing if you're not playing for ante.\n{T}: Put Jeweled Bird into the ante. If you do, put all other cards you own from the ante into your graveyard, then draw a card.
+SetInfo:CHR Rare
+SetInfo:ARN Uncommon

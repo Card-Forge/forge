@@ -6,7 +6,6 @@ SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.G
 SVar:AdditionalPump:DB$ PumpAll | ValidCards$ Creature.IsRemembered | KW$ Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warren_weirding.jpg
 Oracle:Target player sacrifices a creature. If a Goblin is sacrificed this way, that player puts two 1/1 black Goblin Rogue creature tokens onto the battlefield, and those tokens gain haste until end of turn.
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/82.jpg
+SetInfo:MOR Uncommon

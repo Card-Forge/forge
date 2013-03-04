@@ -9,7 +9,6 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigRe
 SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | CounterType$ DEPLETION | CounterNum$ All | References$ All
 SVar:X:ReplaceCount$DamageAmount
 SVar:All:Count$CardCounters.DEPLETION
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_bubble.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/14.jpg
 Oracle:If damage would be dealt to you, put that many depletion counters on Force Bubble instead.\nWhen there are four or more depletion counters on Force Bubble, sacrifice it.\nAt the beginning of each end step, remove all depletion counters from Force Bubble.
+SetInfo:SCG Rare

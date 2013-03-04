@@ -6,8 +6,8 @@ K:Echo:2 G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield or dies, put a +1/+1 counter on target creature.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, put a +1/+1 counter on target creature.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_moa.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/109.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/80.jpg
 Oracle:Echo {2}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Hunting Moa enters the battlefield or dies, put a +1/+1 counter on target creature.
+SetInfo:TSB Special
+SetInfo:ARC Uncommon
+SetInfo:UDS Uncommon

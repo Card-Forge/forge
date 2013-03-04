@@ -2,7 +2,6 @@ Name:Crush
 ManaCost:R
 Types:Instant
 A:SP$ Destroy | Cost$ R | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Destroy target noncreature artifact.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crush.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/61.jpg
 Oracle:Destroy target noncreature artifact.
+SetInfo:MBS Common

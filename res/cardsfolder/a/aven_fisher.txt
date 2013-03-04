@@ -6,10 +6,9 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:SacMe:1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82998.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/61.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/63.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/61.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/68.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Aven Fisher dies, you may draw a card.
+SetInfo:8ED Common
+SetInfo:ODY Common
+SetInfo:9ED Common
+SetInfo:10E Common

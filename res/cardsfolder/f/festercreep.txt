@@ -5,7 +5,6 @@ PT:0/0
 K:etbCounter:P1P1:1
 A:AB$ PumpAll | Cost$ 1 B SubCounter<1/P1P1> | ValidCards$ Creature.Other | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All other creatures get -1/-1 until end of turn.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festercreep.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/62.jpg
 Oracle:Festercreep enters the battlefield with a +1/+1 counter on it.\n{1}{B}, Remove a +1/+1 counter from Festercreep: All other creatures get -1/-1 until end of turn.
+SetInfo:MOR Common

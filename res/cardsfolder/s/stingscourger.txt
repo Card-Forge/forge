@@ -7,7 +7,6 @@ SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Se
 K:Echo:3 R
 SVar:NeedsToPlayVar:Y GE4
 SVar:Y:Count$Valid Land.YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stingscourger.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/107.jpg
 Oracle:Echo {3}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Stingscourger enters the battlefield, return target creature an opponent controls to its owner's hand.
+SetInfo:PLC Common

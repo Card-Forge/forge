@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 1 1 Spirit | TokenAmount$ 2 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:SacMe:1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mausoleum_guard.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/20.jpg
 Oracle:When Mausoleum Guard dies, put two 1/1 white Spirit creature tokens with flying onto the battlefield.
+SetInfo:ISD Uncommon

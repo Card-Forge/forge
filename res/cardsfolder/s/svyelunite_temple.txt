@@ -5,9 +5,8 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ U | Amount$ 2 | SpellDescription$ Add U U to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/svyelunite_temple.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/441.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/329.jpg
-SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/187.jpg
 Oracle:Svyelunite Temple enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\n{T}, Sacrifice Svyelunite Temple: Add {U}{U} to your mana pool.
+SetInfo:5ED Uncommon
+SetInfo:FEM Uncommon
+SetInfo:6ED Uncommon

@@ -3,7 +3,6 @@ ManaCost:B
 Types:Sorcery
 A:SP$ Discard | Cost$ B | Mode$ Hand | SpellDescription$ Discard your hand.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/one_with_nothing.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/84.jpg
 Oracle:Discard your hand.
+SetInfo:SOK Rare

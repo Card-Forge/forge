@@ -8,7 +8,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigExile:DB$ChangeZone | Cost$ 0 | TargetMin$ 1 | IsCurse$ True | ValidTgts$ Creature.withShadow+Other | TgtPrompt$ Choose target creature with shadow other than Faceless Devourer. | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faceless_devourer.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/108.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhen Faceless Devourer enters the battlefield, exile another target creature with shadow.\nWhen Faceless Devourer leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SetInfo:TSP Uncommon

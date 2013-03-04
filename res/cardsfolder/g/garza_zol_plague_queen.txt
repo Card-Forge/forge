@@ -7,7 +7,6 @@ K:Haste
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garza_zol_plague_queen.jpg
-SetInfo:CSP|Rare|http://magiccards.info/scans/en/cs/129.jpg
 Oracle:Flying, haste\nWhenever a creature dealt damage by Garza Zol, Plague Queen this turn dies, put a +1/+1 counter on Garza Zol.\nWhenever Garza Zol deals combat damage to a player, you may draw a card.
+SetInfo:CSP Rare

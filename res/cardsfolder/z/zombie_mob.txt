@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigExileAll:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Exile
 SVar:X:Count$TypeInYourYard.Creature
 SVar:NeedsToPlayVar:X GE2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_mob.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/51.jpg
 Oracle:Zombie Mob enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.\nWhen Zombie Mob enters the battlefield, exile all creature cards from your graveyard.
+SetInfo:MIR Uncommon

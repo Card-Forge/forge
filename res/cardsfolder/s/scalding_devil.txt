@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Creature Devil
 PT:1/1
 A:AB$ DealDamage | Cost$ 2 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_devil.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/155.jpg
 Oracle:{2}{R}: Scalding Devil deals 1 damage to target player.
+SetInfo:AVR Common

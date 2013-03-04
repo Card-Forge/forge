@@ -15,5 +15,5 @@ SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aretopolis.jpg
-SetInfo:PC2|Common|http://magiccards.info/extras/plane/planechase-2012-edition/aretopolis.jpg
 Oracle:When you planeswalk to Aretopolis or at the beginning of your upkeep, put a scroll counter on Aretopolis, then you gain life equal to the number of scroll counters on it.\nWhen Aretopolis has ten or more scroll counters on it, planeswalk.\nWhenever you roll {C}, put a scroll counter on Aretopolis, then draw cards equal to the number of scroll counters on it.
+SetInfo:PC2 Common

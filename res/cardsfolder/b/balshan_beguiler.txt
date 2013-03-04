@@ -5,7 +5,6 @@ PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ BalshanDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals the top two cards of his or her library. You choose one of those cards and put it into his or her graveyard.
 SVar:BalshanDig:AB$ Dig | Cost$ 0 | Defined$ TriggeredTarget | DigNum$ 2 | ChangeNum$ 1 | DestinationZone$ Graveyard | LibraryPosition2$ 0 | Reveal$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balshan_beguiler.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/66.jpg
 Oracle:Whenever Balshan Beguiler deals combat damage to a player, that player reveals the top two cards of his or her library. You choose one of those cards and put it into his or her graveyard.
+SetInfo:ODY Uncommon

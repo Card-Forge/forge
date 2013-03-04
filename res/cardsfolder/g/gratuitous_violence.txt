@@ -8,5 +8,5 @@ SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Repl
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gratuitous_violence.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/212.jpg
 Oracle:If a creature you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+SetInfo:ONS Rare

@@ -7,7 +7,6 @@ SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Change
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$InYourHand
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_tutor.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/46.jpg
 Oracle:Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle your library.\nHellbent - If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle your library.
+SetInfo:DIS Rare

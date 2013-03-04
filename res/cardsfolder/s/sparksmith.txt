@@ -6,7 +6,6 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target crea
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | References$ X
 SVar:X:Count$TypeOnBattlefield.Goblin
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39476.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/235.jpg
 Oracle:{T}: Sparksmith deals X damage to target creature and X damage to you, where X is the number of Goblins on the battlefield.
+SetInfo:ONS Common

@@ -6,7 +6,7 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gains flying until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soaring_seacliff.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/225.jpg
 Oracle:Soaring Seacliff enters the battlefield tapped.\nWhen Soaring Seacliff enters the battlefield, target creature gains flying until end of turn.\n{T}: Add {U} to your mana pool.
+SetInfo:DDI Common
+SetInfo:ZEN Common

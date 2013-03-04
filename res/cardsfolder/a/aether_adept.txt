@@ -4,8 +4,7 @@ Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature to its owner's hand.
 SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_adept.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/41.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/41.jpg
 Oracle:When AEther Adept enters the battlefield, return target creature to its owner's hand.
+SetInfo:M11 Common
+SetInfo:M12 Common

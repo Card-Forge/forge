@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target artifact.
 SVar:TrigDestroy:DB$ Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/batterhorn.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/87.jpg
 Oracle:When Batterhorn enters the battlefield, you may destroy target artifact.
+SetInfo:RTR Common

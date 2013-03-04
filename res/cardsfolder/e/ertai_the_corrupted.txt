@@ -4,7 +4,6 @@ Types:Legendary Creature Wizard
 PT:3/4
 A:AB$ Counter | Cost$ U T Sac<1/Creature;Enchantment/creature or enchantment> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ertai_the_corrupted.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/107.jpg|2
 Oracle:{U}, {T}, Sacrifice a creature or enchantment: Counter target spell.
+SetInfo:PLS Rare x2

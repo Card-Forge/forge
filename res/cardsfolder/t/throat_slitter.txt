@@ -6,8 +6,7 @@ A:AB$ ChangeZone | Cost$ 2 B Return<1/Creature.attacking+unblocked> | CostDesc$ 
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, destroy target nonblack creature that player controls.
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack+DefenderCtrl | TgtPrompt$ Select target nonblack creature defending player controls
 SVar:MustBeBlocked:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/throat_slitter.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/37.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/88.jpg
 Oracle:Ninjutsu {2}{B} ({2}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Throat Slitter deals combat damage to a player, destroy target nonblack creature that player controls.
+SetInfo:PC2 Uncommon
+SetInfo:BOK Uncommon

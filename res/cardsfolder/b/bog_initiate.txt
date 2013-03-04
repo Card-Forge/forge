@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:1/1
 A:AB$ Mana | Cost$ 1 | Produced$ B | SpellDescription$ Add B to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_initiate.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/95.jpg
 Oracle:{1}: Add {B} to your mana pool.
+SetInfo:INV Common

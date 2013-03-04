@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Creature Spider
 PT:1/5
 K:Reach
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sporecap_spider.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/209.jpg
 Oracle:Reach (This creature can block creatures with flying.)
+SetInfo:ROE Common

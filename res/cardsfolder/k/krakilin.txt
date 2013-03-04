@@ -5,7 +5,6 @@ PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krakilin.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/129.jpg
 Oracle:Krakilin enters the battlefield with X +1/+1 counters on it.\n{1}{G}: Regenerate Krakilin.
+SetInfo:TMP Uncommon

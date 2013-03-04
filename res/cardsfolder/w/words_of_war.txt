@@ -6,7 +6,6 @@ SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ WarDamage | Descr
 SVar:WarDamage:AB$ DealDamage | Cost$ 0 | Defined$ Remembered | DamageSource$ Imprinted | NumDmg$ 2 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_war.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/on/en/244.jpg
 Oracle:{1}: The next time you would draw a card this turn, Words of War deals 2 damage to target creature or player instead.
+SetInfo:ONS Rare

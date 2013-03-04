@@ -8,7 +8,6 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Play | Cost$ R T | Defined$ Remembered | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | References$ X | ForgetRemembered$ True | SpellDescription$ You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
 SVar:X:Count$OppDamageThisTurn
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinerock_knoll.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/274.jpg
 Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {R} to your mana pool.\n{R}, {T}: You may play the exiled card without paying its mana cost if an opponent was dealt 7 or more damage this turn.
+SetInfo:LRW Rare

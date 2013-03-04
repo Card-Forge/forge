@@ -6,7 +6,8 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+2 and has flying.
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When enchanted creature dies, put a 2/2 white Griffin creature token with flying onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Griffin | TokenTypes$ Creature,Griffin | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Flying
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_guide.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/21.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying.\nWhen enchanted creature dies, put a 2/2 white Griffin creature token with flying onto the battlefield.
+SetInfo:DDH Uncommon
+SetInfo:DDG Uncommon
+SetInfo:TSP Uncommon

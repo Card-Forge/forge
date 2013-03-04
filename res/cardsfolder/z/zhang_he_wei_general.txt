@@ -5,7 +5,6 @@ PT:4/2
 K:Horsemanship
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, each other creature you control gets +1/+0 until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Other+YouCtrl | NumAtt$ +1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhang_he_wei_general.jpg
-SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/95.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nWhenever Zhang He, Wei General attacks, each other creature you control gets +1/+0 until end of turn.
+SetInfo:PTK Rare

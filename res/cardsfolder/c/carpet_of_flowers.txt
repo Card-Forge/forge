@@ -7,12 +7,14 @@ SVar:ChooseNumber:DB$ ChooseNumber | Min$ 0 | Max$ NumManaMax | References$ NumM
 SVar:DBMana:DB$ Mana | Amount$ X | Produced$ Any | SubAbility$ CheckPlus
 SVar:CheckPlus:DB$ StoreSVar | SVar$ CarpetX | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigReset | Static$ True
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
 SVar:TrigReset:AB$ StoreSVar | Cost$ 0 | SVar$ CarpetX | Type$ Number | Expression$ 0
 SVar:X:Count$ChosenNumber
 SVar:NumManaMax:Count$Valid Island.RememberedPlayerCtrl
 SVar:CarpetX:Number$0
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carpet_of_flowers.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/240.jpg
 Oracle:At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn, you may add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls.
+SetInfo:USG Uncommon

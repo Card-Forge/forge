@@ -5,7 +5,6 @@ PT:2/2
 K:Amplify:1:Beast
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | References$ X | SpellDescription$ Target creature gets +1/+1 until end of turn for each +1/+1 counter on CARDNAME.
 SVar:X:Count$CardCounters.P1P1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/canopy_crawler.jpg
-SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/122.jpg
 Oracle:Amplify 1 (As this creature enters the battlefield, put a +1/+1 counter on it for each Beast card you reveal in your hand.)\n{T}: Target creature gets +1/+1 until end of turn for each +1/+1 counter on Canopy Crawler.
+SetInfo:LGN Uncommon

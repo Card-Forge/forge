@@ -4,7 +4,6 @@ Types:Creature Spirit Spellshaper
 PT:2/5
 A:AB$ PumpAll | Cost$ W T Discard<1/Card> | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_tactician.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/6.jpg
 Oracle:{W}, {T}, Discard a card: Creatures you control get +1/+0 until end of turn.
+SetInfo:PLC Common

@@ -6,8 +6,7 @@ A:AB$ FlipACoin | Cost$ 1 | ValidTgts$ Creature.Orc | TgtPrompt$ Select target O
 SVar:DBPumpPlus:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ 2 | NumDef$ 0
 SVar:DBPumpMinus:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ 0 | NumDef$ -2
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_captain.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/254.jpg
-SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/123.jpg
 Oracle:{1}: Flip a coin. If you win the flip, target Orc creature gets +2/+0 until end of turn. If you lose the flip, it gets -0/-2 until end of turn.
+SetInfo:5ED Uncommon
+SetInfo:FEM Uncommon

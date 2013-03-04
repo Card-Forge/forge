@@ -4,8 +4,8 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 K:Cycling:U
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lonely_sandbar.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/320.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/281.jpg
 Oracle:Lonely Sandbar enters the battlefield tapped.\n{T}: Add {U} to your mana pool.\nCycling {U} ({U}, Discard this card: Draw a card.)
+SetInfo:ONS Common
+SetInfo:COM Common
+SetInfo:DDJ Common

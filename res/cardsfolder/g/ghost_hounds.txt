@@ -6,7 +6,6 @@ K:Vigilance
 T:Mode$ AttackerBlocked | ValidCard$ Creature.White | ValidBlocker$ Card.Self  | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a white creature, CARDNAME gains first strike until end of turn.
 T:Mode$ Blocks | ValidCard$ Creature.White | ValidBlocked$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a white creature, CARDNAME gains first strike until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ First Strike
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_hounds.jpg
-SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/12.jpg
 Oracle:Vigilance\nWhenever Ghost Hounds blocks or becomes blocked by a white creature, Ghost Hounds gains first strike until end of turn.
+SetInfo:HML Uncommon

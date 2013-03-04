@@ -4,7 +4,6 @@ Types:Creature Bird Soldier
 PT:2/2
 K:Flying
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balshan_collaborator.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/25.jpg
 Oracle:Flying\n{B}: Balshan Collaborator gets +1/+1 until end of turn.
+SetInfo:TOR Uncommon

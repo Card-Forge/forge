@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Human Soldier
 PT:2/2
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature that was dealt damage this turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opportunist.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/194.jpg
 Oracle:{T}: Opportunist deals 1 damage to target creature that was dealt damage this turn.
+SetInfo:TMP Uncommon

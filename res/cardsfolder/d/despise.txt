@@ -2,7 +2,6 @@ Name:Despise
 ManaCost:B
 Types:Sorcery
 A:SP$ Discard | Cost$ B | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Creature,Planeswalker | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/despise.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/56.jpg
 Oracle:Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card.
+SetInfo:NPH Uncommon

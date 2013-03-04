@@ -3,8 +3,7 @@ ManaCost:1
 Types:Artifact Equipment
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_scimitar.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/193.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/331.jpg
 Oracle:Equipped creature gets +1/+1.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:MRD Common
+SetInfo:10E Uncommon

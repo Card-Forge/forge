@@ -8,7 +8,7 @@ T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Delaye
 SVar:DelayedTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigBounce | TriggerDescription$ Return blocked creature to its owner's hand at end of combat.
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ TriggeredAttacker
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_membrane.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/93.jpg
 Oracle:Defender; reach (This creature can block creatures with flying.)\nWhenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.
+SetInfo:DDI Uncommon
+SetInfo:PLC Uncommon

@@ -7,8 +7,7 @@ SVar:Y:Number$1/Plus.ChosenX
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_mana_battery.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/316.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/216.jpg
 Oracle:{2}, {T}: Put a charge counter on Black Mana Battery.\n{T}, Remove any number of charge counters from Black Mana Battery: Add {B} to your mana pool, then add an additional {B} to your mana pool for each charge counter removed this way.
+SetInfo:LEG Uncommon
+SetInfo:4ED Rare

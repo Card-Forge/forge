@@ -7,7 +7,6 @@ SVar:DBNightshadePump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:DBNightshadeCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NightshadeX:Remembered$Amount.Negative
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightshade_seer.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/62.jpg
 Oracle:{2}{B}, {T}: Reveal any number of black cards in your hand. Target creature gets -X/-X until end of turn, where X is the number of cards revealed this way.
+SetInfo:UDS Uncommon

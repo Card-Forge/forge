@@ -7,6 +7,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$ChromaSource.G/Twice
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phosphorescent_feast.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/149.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/72.jpg
 Oracle:Chroma - Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs.
+SetInfo:FUT Uncommon
+SetInfo:EVE Uncommon

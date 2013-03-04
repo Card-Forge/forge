@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/2
 K:Horsemanship
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_cavalry.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/19.jpg
 Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)
+SetInfo:PTK Common

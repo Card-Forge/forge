@@ -5,7 +5,6 @@ PT:1/3
 S:Mode$ Continuous | Affected$ Creature.Snake+Other+YouCtrl | AddToughness$ 1 | Description$ Other Snake creatures you control get +0/+1.
 S:Mode$ Continuous | Affected$ Card.Shaman+YouCtrl | AddAbility$ Mana | Description$ Shamans you control have "Tap: Add G G to your mana pool."
 SVar:Mana:AB$Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sachi_daughter_of_seshiro.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/238.jpg
 Oracle:Other Snake creatures you control get +0/+1.\nShamans you control have "{T}: Add {G}{G} to your mana pool."
+SetInfo:CHK Uncommon

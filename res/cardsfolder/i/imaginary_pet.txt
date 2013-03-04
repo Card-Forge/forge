@@ -6,8 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card | PresentZone
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
 SVar:NeedsToPlayVar:Y LE1
 SVar:Y:Count$CardsInYourHand
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imaginary_pet.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/81.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/82.jpg
 Oracle:At the beginning of your upkeep, if you have a card in hand, return Imaginary Pet to its owner's hand.
+SetInfo:9ED Rare
+SetInfo:USG Rare

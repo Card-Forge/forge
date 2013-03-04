@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -4 | AddToughness$ -1 | Description$ Enchanted creature gets -4/-1.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clinging_darkness.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/80.jpg
 Oracle:Enchant creature\nEnchanted creature gets -4/-1.
+SetInfo:RAV Common

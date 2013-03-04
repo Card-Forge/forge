@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Instant
 K:Flashback 5 R
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.toughnessLE3 | TgtPrompt$ Select target creature with toughness 3 or less | SpellDescription$ Destroy target creature with toughness 3 or less.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card109710.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/132.jpg
 Oracle:Destroy target creature with toughness 3 or less.\nFlashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:TSP Common

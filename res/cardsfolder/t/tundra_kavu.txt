@@ -7,7 +7,6 @@ SVar:TypeChoice:DB$ GenericChoice | Choices$ SVar1,SVar2 | StackDescription$ Pla
 SVar:SVar1:DB$ Animate | Defined$ Targeted | Types$ Plains | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True | ChoiceDescription$ Targeted land becomes a Plains until end of turn.
 SVar:SVar2:DB$ Animate | Defined$ Targeted | Types$ Island | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True | ChoiceDescription$ Targeted land becomes an Island until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tundra_kavu.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/71.jpg
 Oracle:{T}: Target land becomes a Plains or an Island until end of turn.
+SetInfo:APC Common

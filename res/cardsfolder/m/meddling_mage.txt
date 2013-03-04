@@ -6,8 +6,7 @@ K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SpellDescription$ As CARDNAME enters the battlefield, name a nonland card.
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ The named card can't be cast.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/8.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/116.jpg
 Oracle:As Meddling Mage enters the battlefield, name a nonland card.\nThe named card can't be cast.
+SetInfo:PLS Rare
+SetInfo:ARB Rare

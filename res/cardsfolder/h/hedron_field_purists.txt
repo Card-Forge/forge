@@ -10,7 +10,6 @@ S:Mode$ PreventDamage | Target$ You,Creature.YouCtrl | Amount$ 1 | CheckSVar$ X 
 S:Mode$ PreventDamage | Target$ You,Creature.YouCtrl | Amount$ 2 | CheckSVar$ Y | SVarCompare$ EQ1
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LT5_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE5_LEVEL
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_field_purists.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/25.jpg
 Oracle:Level up {2}{W} ({2}{W}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-4\n1/4\nIf a source would deal damage to you or a creature you control, prevent 1 of that damage.\nLEVEL 5+\n2/5\nIf a source would deal damage to you or a creature you control, prevent 2 of that damage.
+SetInfo:ROE Rare

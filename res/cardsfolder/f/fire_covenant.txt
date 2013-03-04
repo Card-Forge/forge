@@ -7,5 +7,5 @@ SVar:X:Count$XChoice
 #X Will get overwritten by Announce
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_covenant.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/367.jpg
 Oracle:As an additional cost to cast Fire Covenant, pay X life.\nFire Covenant deals X damage divided as you choose among any number of target creatures.
+SetInfo:ICE Uncommon

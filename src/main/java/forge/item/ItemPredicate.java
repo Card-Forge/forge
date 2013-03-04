@@ -16,7 +16,7 @@ public abstract class ItemPredicate {
 
     public static final Predicate<Object> IsBoosterPack = Predicates.instanceOf(BoosterPack.class);
     public static final Predicate<Object> IsPrebuiltDeck = Predicates.instanceOf(PreconDeck.class);
-    public static final Predicate<Object> IsFatPack = Predicates.instanceOf(TournamentPack.class);
+    public static final Predicate<Object> IsFatPack = Predicates.instanceOf(FatPack.class);
 
     /**
      * Checks that the inventory item is a Tournament Pack.

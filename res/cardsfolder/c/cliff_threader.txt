@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Creature Kor Scout
 PT:2/1
 K:Mountainwalk
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cliff_threader.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/7.jpg
 Oracle:Mountainwalk
+SetInfo:ZEN Common

@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Effect | Cost$ 1 W | Name$ Forfend Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt to creatures this turn.
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Creature | Description$ Prevent all damage that would be dealt to creatures this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forfend.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/10.jpg
 Oracle:Prevent all damage that would be dealt to creatures this turn.
+SetInfo:MOR Common

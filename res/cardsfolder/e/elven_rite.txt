@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Sorcery
 A:SP$ PutCounter | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPutCounter | SpellDescription$ Distribute two +1/+1 counters among one or two target creatures.
 SVar:DBPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_rite.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/56.jpg
 Oracle:Distribute two +1/+1 counters among one or two target creatures.
+SetInfo:STH Uncommon

@@ -6,7 +6,6 @@ A:SP$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | KW$ First Strike | Nu
 SVar:X:Count$Kicked.1.0
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Green
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_offensive.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/162.jpg
 Oracle:Kicker {G} (You may pay an additional {G} as you cast this spell.)\nCreatures you control gain first strike until end of turn. If Savage Offensive was kicked, they get +1/+1 until end of turn.
+SetInfo:INV Common

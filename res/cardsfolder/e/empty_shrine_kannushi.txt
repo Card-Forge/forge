@@ -12,7 +12,6 @@ SVar:BLUE:Count$Valid Permanent.Blue+YouCtrl
 SVar:BLACK:Count$Valid Permanent.Black+YouCtrl
 SVar:RED:Count$Valid Permanent.Red+YouCtrl
 SVar:GREEN:Count$Valid Permanent.Green+YouCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_shrine_kannushi.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/2.jpg
 Oracle:Empty-Shrine Kannushi has protection from the colors of permanents you control.
+SetInfo:BOK Uncommon

@@ -2,7 +2,6 @@ Name:Iron Lance
 ManaCost:2
 Types:Artifact
 A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_lance.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/300.jpg
 Oracle:{3}, {T}: Target creature gains first strike until end of turn.
+SetInfo:MMQ Uncommon

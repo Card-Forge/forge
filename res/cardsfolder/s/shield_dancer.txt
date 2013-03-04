@@ -9,7 +9,6 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_dancer.jpg
-SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/23.jpg
 Oracle:{2}{W}: The next time target attacking creature would deal combat damage to Shield Dancer this turn, that creature deals that damage to itself instead.
+SetInfo:PCY Uncommon

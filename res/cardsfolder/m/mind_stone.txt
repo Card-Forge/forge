@@ -3,8 +3,8 @@ ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_stone.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/153.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/335.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{1}, {T}, Sacrifice Mind Stone: Draw a card.
+SetInfo:DD2 Uncommon
+SetInfo:WTH Common
+SetInfo:10E Uncommon

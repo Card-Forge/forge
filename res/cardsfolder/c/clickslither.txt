@@ -4,7 +4,7 @@ Types:Creature Insect
 PT:3/3
 K:Haste
 A:AB$ Pump | Cost$ Sac<1/Goblin> | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ CARDNAME gets +2/+2 and gains trample until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clickslither.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/90.jpg
 Oracle:Haste\nSacrifice a Goblin: Clickslither gets +2/+2 and gains trample until end of turn.
+SetInfo:LGN Rare
+SetInfo:EVG Rare

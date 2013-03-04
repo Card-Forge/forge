@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_vitality.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/183.jpg
 Oracle:If Leyline of Vitality is in your opening hand, you may begin the game with it on the battlefield.\nCreatures you control get +0/+1.\nWhenever a creature enters the battlefield under your control, you may gain 1 life.
+SetInfo:M11 Rare

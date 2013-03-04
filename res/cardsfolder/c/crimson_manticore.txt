@@ -4,9 +4,8 @@ Types:Creature Manticore
 PT:2/2
 K:Flying
 A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_manticore.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/217.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/201.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/139.jpg
 Oracle:Flying\n{R}, {T}: Crimson Manticore deals 1 damage to target attacking or blocking creature.
+SetInfo:5ED Rare
+SetInfo:LEG Rare
+SetInfo:4ED Rare

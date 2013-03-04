@@ -3,7 +3,6 @@ ManaCost:W W
 Types:Instant
 A:SP$ PumpAll | Cost$ W W | ValidCards$ Creature.blocking | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Blocking creatures get +1/+1 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rally.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/272.jpg
 Oracle:Blocking creatures get +1/+1 until end of turn.
+SetInfo:ICE Common

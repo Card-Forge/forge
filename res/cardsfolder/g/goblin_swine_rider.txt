@@ -4,7 +4,6 @@ Types:Creature Goblin
 PT:1/1
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME becomes blocked, it deals 2 damage to each attacking creature and each blocking creature.
 SVar:TrigDealDamage:AB$DamageAll | Cost$ 0 | ValidCards$ Creature.attacking,Creature.blocking | NumDmg$ 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_swine_rider.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/81.jpg
 Oracle:Whenever Goblin Swine-Rider becomes blocked, it deals 2 damage to each attacking creature and each blocking creature.
+SetInfo:VIS Common

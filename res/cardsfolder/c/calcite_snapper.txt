@@ -6,7 +6,6 @@ K:Shroud
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you may switch CARDNAME power and toughness until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN CARDNAME's power and toughness are switched
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/calcite_snapper.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/25.jpg
 Oracle:Shroud (This creature can't be the target of spells or abilities.)\nLandfall - Whenever a land enters the battlefield under your control, you may switch Calcite Snapper's power and toughness until end of turn.
+SetInfo:WWK Common

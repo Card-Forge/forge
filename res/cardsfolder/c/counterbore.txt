@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | ValidTgts$ Card | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Counter target spell. Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles his or her library.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.sameName | Defined$ TargetedController | Origin$ Graveyard,Hand,Library | Destination$ Exile | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counterbore.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/33.jpg
 Oracle:Counter target spell. Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles his or her library.
+SetInfo:SHM Rare

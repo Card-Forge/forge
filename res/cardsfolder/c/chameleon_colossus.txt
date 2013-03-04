@@ -6,7 +6,7 @@ S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefin
 K:Protection from black
 A:AB$ Pump | Cost$ 2 G G | NumAtt$ +X | NumDef$ +X | References$ X | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is its power.
 SVar:X:Count$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chameleon_colossus.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/116.jpg
 Oracle:Changeling (This card is every creature type at all times.)\nProtection from black\n{2}{G}{G}: Chameleon Colossus gets +X/+X until end of turn, where X is its power.
+SetInfo:MOR Rare
+SetInfo:ARC Rare

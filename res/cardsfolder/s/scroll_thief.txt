@@ -4,8 +4,8 @@ Types:Creature Merfolk Rogue
 PT:1/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_thief.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/72.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/66.jpg
 Oracle:Whenever Scroll Thief deals combat damage to a player, draw a card.
+SetInfo:M11 Common
+SetInfo:DDI Common
+SetInfo:M13 Common

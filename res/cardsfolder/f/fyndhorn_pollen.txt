@@ -5,7 +5,6 @@ K:Cumulative upkeep:1
 S:Mode$ Continuous | Affected$ Creature | AddPower$ -1 | Description$ All creatures get -1/-0.
 A:AB$ PumpAll | Cost$ 1 G | ValidCards$ Creature | NumAtt$ -1 | IsCurse$ True | SpellDescription$ All creatures get -1/-0 until end of turn.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_pollen.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/133.jpg
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAll creatures get -1/-0.\n{1}{G}: All creatures get -1/-0 until end of turn.
+SetInfo:ICE Rare

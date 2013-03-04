@@ -5,7 +5,6 @@ PT:2/2
 K:Flying
 T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player cycles a card, return CARDNAME to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_aven.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/83.jpg
 Oracle:Flying\nWhenever a player cycles a card, return Fleeting Aven to its owner's hand.
+SetInfo:ONS Uncommon

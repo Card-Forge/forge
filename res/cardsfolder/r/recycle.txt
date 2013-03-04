@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$
 T:Mode$ LandPlayed | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever you play a card, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recycle.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/142.jpg
 Oracle:Skip your draw step.\nWhenever you play a card, draw a card.\nYour maximum hand size is two.
+SetInfo:TMP Rare

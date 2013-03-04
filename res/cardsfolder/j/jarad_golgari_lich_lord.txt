@@ -7,7 +7,7 @@ A:AB$ LoseLife | Cost$ 1 B G Sac<1/Creature.Other/creature other than CARDNAME> 
 A:AB$ ChangeZone | Cost$ Sac<1/Swamp> Sac<1/Forest> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:LichLeech:Sacrificed$CardPower
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jarad_golgari_lich_lord.jpg
-SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/174.jpg
 Oracle:Jarad, Golgari Lich Lord gets +1/+1 for each creature card in your graveyard.\n{1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.\nSacrifice a Swamp and a Forest: Return Jarad from your graveyard to your hand.
+SetInfo:DDJ Mythic
+SetInfo:RTR Mythic

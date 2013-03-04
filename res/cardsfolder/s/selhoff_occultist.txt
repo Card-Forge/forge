@@ -5,7 +5,6 @@ PT:2/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME or another creature dies, target player puts the top card of his or her library into his or her graveyard.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature dies, target player puts the top card of his or her library into his or her graveyard.
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selhoff_occultist.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/73.jpg
 Oracle:Whenever Selhoff Occultist or another creature dies, target player puts the top card of his or her library into his or her graveyard.
+SetInfo:ISD Common

@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a creature spell, CARDNAME deals 1 damage to target player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1
 SVar:BuffedBy:Creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furious_assault.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/191.jpg
 Oracle:Whenever you cast a creature spell, Furious Assault deals 1 damage to target player.
+SetInfo:MMQ Common

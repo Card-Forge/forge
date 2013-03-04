@@ -5,7 +5,6 @@ A:AB$ PutCounter | Cost$ T Exile<1/Creature> | CounterType$ STORAGE | CounterNum
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ X | References$ X | SpellDescription$ Add X to your mana pool, where X is the number of storage counters on City of Shadows.
 SVar:X:Count$CardCounters.STORAGE
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_shadows.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/113.jpg
 Oracle:{T}, Exile a creature you control: Put a storage counter on City of Shadows.\n{T}: Add {X} to your mana pool, where X is the number of storage counters on City of Shadows.
+SetInfo:DRK Rare

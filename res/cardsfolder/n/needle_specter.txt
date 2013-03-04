@@ -7,7 +7,6 @@ K:Wither
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards that many cards.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ X | References$ X | Mode$ TgtChoose
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/needle_specter.jpg
-SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/39.jpg
 Oracle:Flying\nWither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever Needle Specter deals combat damage to a player, that player discards that many cards.
+SetInfo:EVE Rare

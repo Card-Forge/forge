@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | TargetMin$ 1 | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | RememberTargets$ True | ForgetOtherTargets$ True
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_newt.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/59.jpg
 Oracle:When Wormfang Newt enters the battlefield, exile a land you control.\nWhen Wormfang Newt leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SetInfo:JUD Common

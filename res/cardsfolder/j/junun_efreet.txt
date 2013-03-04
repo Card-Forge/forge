@@ -4,8 +4,7 @@ Types:Creature Efreet
 PT:3/3
 K:Flying
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B B
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/junun_efreet.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/27.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/8.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Junun Efreet unless you pay {B}{B}.
+SetInfo:4ED Uncommon
+SetInfo:ARN Rare

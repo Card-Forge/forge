@@ -6,7 +6,6 @@ A:AB$ DealDamage | Cost$ R R T | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 A:AB$ Protection | Cost$ W W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature gains protection from the color of your choice until end of turn.
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_master.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/216.jpg
 Oracle:{R}{R}, {T}: Thornscape Master deals 2 damage to target creature.\n{W}{W}, {T}: Target creature gains protection from the color of your choice until end of turn.
+SetInfo:INV Rare

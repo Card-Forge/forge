@@ -5,10 +5,10 @@ S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ You | SetMaxHandSize$ U
 R:Event$ Discard | ActiveZones$ Battlefield | ValidCard$ Card.YouCtrl | ReplaceWith$ DiscardToLibrary | Optional$ True | DiscardFromEffect$ True | Description$ If an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.
 SVar:DiscardToLibrary:DB$ Discard | Defined$ ReplacedPlayer | Mode$ Defined | DefinedCards$ ReplacedCard | DiscardToTopOfLibrary$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/library_of_leng.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/257.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/259.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/387.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/351.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/261.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/258.jpg
 Oracle:You have no maximum hand size.\nIf an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.
+SetInfo:2ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

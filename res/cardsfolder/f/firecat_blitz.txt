@@ -8,7 +8,6 @@ SVar:Y:XChoice
 #Flashback uses Y because SVars can't overlap
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firecat_blitz.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/88.jpg
 Oracle:Put X 1/1 red Elemental Cat creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.\nFlashback-{R}{R}, Sacrifice X Mountains. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:JUD Uncommon

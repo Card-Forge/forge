@@ -6,5 +6,5 @@ SVar:SurestrikeTridentDmg:AB$ DealDamage | Cost$ T Unattach<OriginalHost/Surestr
 SVar:SurestrikeTridentX:Count$CardPower
 K:Equip 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surestrike_trident.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/147.jpg
 Oracle:Equipped creature has first strike and "{T}, Unattach Surestrike Trident: This creature deals damage equal to its power to target player."\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+SetInfo:DST Uncommon

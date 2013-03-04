@@ -2,7 +2,6 @@ Name:Eightfold Maze
 ManaCost:2 W
 Types:Instant
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | OpponentTurn$ True | ActivationPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. Destroy target attacking creature.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eightfold_maze.jpg
-SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/2.jpg
 Oracle:Cast Eightfold Maze only during the declare attackers step and only if you've been attacked this step.\nDestroy target attacking creature.
+SetInfo:PTK Rare

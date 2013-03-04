@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Land | AddHiddenKeyword$ CARDNAME doesn't untap d
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self | Execute$ TrigUntap | TriggerDescription$ At the beginning of each player's upkeep, that player untaps a land he or she controls.
 SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$ 1 | Defined$ TriggeredPlayer
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hokori_dust_drinker.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/7.jpg
 Oracle:Lands don't untap during their controllers' untap steps.\nAt the beginning of each player's upkeep, that player untaps a land he or she controls.
+SetInfo:BOK Rare

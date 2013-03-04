@@ -4,7 +4,7 @@ Types:Creature Carrier
 PT:3/3
 A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_defiler.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/60.jpg
 Oracle:{T}, Sacrifice Phyrexian Defiler: Target creature gets -3/-3 until end of turn.
+SetInfo:ULG Uncommon
+SetInfo:DDE Uncommon

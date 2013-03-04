@@ -11,7 +11,6 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Val
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sivvis_valor.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/22.jpg
 Oracle:If you control a Plains, you may tap an untapped creature you control rather than pay Sivvi's Valor's mana cost.\nAll damage that would be dealt to target creature this turn is dealt to you instead.
+SetInfo:NMS Rare

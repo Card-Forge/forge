@@ -7,7 +7,6 @@ SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlay
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card.Black
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_titan.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/377.jpg
 Oracle:{1}{R}{R}: Until end of turn, whenever you cast a black spell, put a +1/+1 counter on Mountain Titan.
+SetInfo:ICE Rare

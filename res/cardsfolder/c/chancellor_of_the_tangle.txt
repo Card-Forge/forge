@@ -10,7 +10,6 @@ SVar:ManaOnMain:AB$ Effect | Cost$ 0 | Triggers$ TrigMana | SVars$ EffMana,Remov
 SVar:TrigMana:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | Execute$ EffMana | TriggerDescription$ At the beginning of your first main phase, add G to your mana pool.
 SVar:EffMana:AB$ Mana | Cost$ 0 | Produced$ G | SubAbility$ RemoveMe
 SVar:RemoveMe:DB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_tangle.jpg
-SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/106.jpg
 Oracle:You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add {G} to your mana pool.\nVigilance, reach
+SetInfo:NPH Rare

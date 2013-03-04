@@ -5,7 +5,6 @@ PT:3/1
 K:Flying
 A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ -2 | AnyPlayer$ True | SpellDescription$ Oona's Prowler gets -2/-0 until end of turn. Any player may activate this ability.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oonas_prowler.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/133.jpg
 Oracle:Flying\nDiscard a card: Oona's Prowler gets -2/-0 until end of turn. Any player may activate this ability.
+SetInfo:LRW Rare

@@ -2,9 +2,8 @@ Name:Duct Crawler
 ManaCost:R
 Types:Creature Insect
 PT:1/1
-SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duct_crawler.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/79.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/198.jpg
 Oracle:{1}{R}: Target creature can't block Duct Crawler this turn.
+SetInfo:10E Common
+SetInfo:STH Common

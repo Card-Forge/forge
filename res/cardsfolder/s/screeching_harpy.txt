@@ -4,7 +4,6 @@ Types:Creature Harpy Beast
 PT:2/2
 K:Flying
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/screeching_harpy.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/49.jpg
 Oracle:Flying\n{1}{B}: Regenerate Screeching Harpy.
+SetInfo:TMP Uncommon

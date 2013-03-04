@@ -4,7 +4,6 @@ Types:Artifact Creature Horror
 PT:4/1
 A:AB$ Regenerate | Cost$ Sac<1/Artifact> | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rusted_slasher.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/128.jpg
 Oracle:Sacrifice an artifact: Regenerate Rusted Slasher.
+SetInfo:MBS Common

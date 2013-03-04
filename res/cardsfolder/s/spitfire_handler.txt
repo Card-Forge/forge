@@ -6,7 +6,6 @@ PT:1/1
 K:CantBlock Creature.powerGTX
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:X:Count$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitfire_handler.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/236.jpg
 Oracle:Spitfire Handler can't block creatures with power greater than Spitfire Handler's power.\n{R}: Spitfire Handler gets +1/+0 until end of turn.
+SetInfo:ONS Uncommon

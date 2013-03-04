@@ -3,7 +3,6 @@ ManaCost:R
 Types:Creature Lizard
 PT:1/1
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bellows_lizard.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/88.jpg
 Oracle:{1}{R}: Bellows Lizard gets +1/+0 until end of turn.
+SetInfo:RTR Common

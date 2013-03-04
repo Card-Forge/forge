@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature,Enchantment | AffectedZone$ Exile,Graveyard,Hand,Library | AddHiddenKeyword$ Flash | Description$ Any player may cast creature and enchantment cards as though they had flash.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vernal_equinox.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/283.jpg
 Oracle:Any player may cast creature and enchantment cards as though they had flash.
+SetInfo:MMQ Rare

@@ -3,7 +3,6 @@ ManaCost:B
 Types:Sorcery
 A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Swampwalk | SpellDescription$ Target creature gains swampwalk until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nighthaze.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/118.jpg
 Oracle:Target creature gains swampwalk until end of turn.\nDraw a card.
+SetInfo:ROE Common

@@ -4,7 +4,6 @@ Types:Instant Arcane
 A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of cards in target player's hand to that player.
 SVar:X:TargetedPlayer$CardsInHand
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_adamaro.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/98.jpg
 Oracle:Gaze of Adamaro deals damage equal to the number of cards in target player's hand to that player.
+SetInfo:SOK Uncommon

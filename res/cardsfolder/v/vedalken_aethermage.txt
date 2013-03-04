@@ -6,7 +6,6 @@ K:Flash
 K:TypeCycling:Wizard:3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target Sliver to its owner's hand.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Sliver | TgtPrompt$ Select target Sliver | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_aethermage.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/61.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Vedalken AEthermage enters the battlefield, return target Sliver to its owner's hand.\nWizardcycling {3} ({3}, Discard this card: Search your library for a Wizard card, reveal it, and put it into your hand. Then shuffle your library.)
+SetInfo:FUT Common

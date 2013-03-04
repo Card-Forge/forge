@@ -9,7 +9,6 @@ SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ X | Refere
 SVar:X:Count$CardCounters.PAIN
 SVar:Y:SVar$CostCountersRemoved
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torture_chamber.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/303.jpg
 Oracle:At the beginning of your upkeep, put a pain counter on Torture Chamber.\nAt the beginning of your end step, Torture Chamber deals damage to you equal to the number of pain counters on it.\n{1}, {T}, Remove all pain counters from Torture Chamber: Torture Chamber deals damage to target creature equal to the number of pain counters removed this way.
+SetInfo:TMP Rare

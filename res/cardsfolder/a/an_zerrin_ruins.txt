@@ -5,7 +5,6 @@ K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentHumanControls | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 S:Mode$ Continuous | Affected$ Creature.ChosenType | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures of the chosen type don't untap during their controllers' untap steps.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/an_zerrin_ruins.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/87.jpg
 Oracle:As An-Zerrin Ruins enters the battlefield, choose a creature type.\nCreatures of the chosen type don't untap during their controllers' untap steps.
+SetInfo:HML Rare

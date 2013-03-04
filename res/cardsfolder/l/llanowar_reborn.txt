@@ -4,7 +4,7 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 K:Graft 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_reborn.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/171.jpg
 Oracle:Llanowar Reborn enters the battlefield tapped.\n{T}: Add {G} to your mana pool.\nGraft 1 (This land enters the battlefield with a +1/+1 counter on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this land onto it.)
+SetInfo:FUT Uncommon
+SetInfo:ARC Uncommon

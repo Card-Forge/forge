@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Sorcery
 A:SP$ Pump | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target player | KW$ Skip your next draw step. | Permanent$ True | SpellDescription$ Target player skips his or her next draw step.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fatigue.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/32.jpg
 Oracle:Target player skips his or her next draw step.
+SetInfo:UDS Common

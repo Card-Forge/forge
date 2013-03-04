@@ -4,7 +4,6 @@ Types:Creature Rhino
 PT:4/3
 K:Trample
 S:Mode$ Continuous | Affected$ Creature.counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature with a +1/+1 counter on it has trample.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crowned_ceratok.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/117.jpg
 Oracle:Trample\nEach creature you control with a +1/+1 counter on it has trample.
+SetInfo:GTC Uncommon

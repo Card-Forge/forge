@@ -7,7 +7,6 @@ A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ GainControl
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to five lands.
 SVar:TrigUntap:AB$ Untap | Cost$ 0 | UntapUpTo$ True | UntapType$ Land | Amount$ 5
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treachery.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/50.jpg
 Oracle:Enchant creature\nWhen Treachery enters the battlefield, untap up to five lands.\nYou control enchanted creature.
+SetInfo:UDS Rare

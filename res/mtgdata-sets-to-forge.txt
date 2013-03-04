@@ -1,0 +1,117 @@
+===10E # Tenth Edition
+1E LEA # Limited Edition Alpha
+2E LEB # Limited Edition Beta
+2U 2ED # Unlimited Edition
+3E 3ED # Revised Edition
+4E 4ED # Fourth Edition
+===5DN # Fifth Dawn
+5E 5ED # Fifth Edition
+6E 6ED # Classic Sixth Edition
+7E 7ED # Seventh Edition
+===8ED # Eighth Edition
+===9ED # Ninth Edition
+AL ALL # Alliances
+===ALA # Shards of Alara
+AN ARN # Arabian Nights
+AP APC # Apocalypse
+AQ ATQ # Antiquities
+===ARB # Alara Reborn
+===ARC # Archenemy
+---ASTRAL #  Astral
+===AVR # Avacyn Restored
+---BD #  Beatdown Box Set
+===BOK # Betrayers of Kamigawa
+---BR # Battle Royale Box Set
+CG UDS # Urza's Destiny
+CH CHR #  Chronicles
+===CHK # Champions of Kamigawa
+---CM1 # Commander's Arsenal
+CMD COM # Magic: The Gathering-Commander
+CON CFX # Conflux
+===CSP # Coldsnap
+===DD2 # Duel Decks: Jace vs. Chandra
+===DDC # Duel Decks: Divine vs. Demonic
+===DDD # Duel Decks: Garruk vs. Liliana
+===DDE # Duel Decks: Phyrexia vs. the Coalition
+===DDF # Duel Decks: Elspeth vs. Tezzeret
+===DDG # Duel Decks: Knights vs. Dragons
+===DDH # Duel Decks: Ajani vs. Nicol Bolas
+===DDI # Duel Decks: Venser vs. Koth
+===DDJ # Duel Decks: Izzet vs. Golgari
+===DIS # Dissension
+DK DRK # The Dark
+===DKA # Dark Ascension
+===DRB # From the Vault: Dragons
+---DREAM #  Dreamcast
+===DST # Darksteel
+===EVE # Eventide
+===EVG # Duel Decks: Elves vs. Goblins
+EX EXO # Exodus
+FE FEM # Fallen Empires
+===FUT # Future Sight
+===GPT # Guildpact
+===GTC # Gatecrash
+GU ULG # Urza's Legacy
+===H09 # Premium Deck Series: Slivers
+HM HML # Homelands
+===HOP # Planechase
+IA ICE # Ice Age
+IN INV # Invasion
+===ISD # Innistrad
+===JUD # Judgment
+LE LEG # Legends
+===LGN # Legions
+===LRW # Lorwyn
+===M10 # Magic 2010
+===M11 # Magic 2011
+===M12 # Magic 2012
+===M13 # Magic 2013
+===MBS # Mirrodin Besieged
+---ME2 # Masters Edition II
+---ME3 # Masters Edition III
+---ME4 # Masters Edition IV
+---MED # Masters Edition
+MI MIR # Mirage
+MM MMQ # Mercadian Masques
+===MOR # Morningtide
+===MRD # Mirrodin
+NE NMS # Nemesis
+===NPH # New Phyrexia
+OD ODY # Odyssey
+===ONS # Onslaught
+P2 PO2 #  Portal Second Age
+P3 S99 #  Starter 1999
+P4 S00 #  Starter 2000
+===PC2 # Planechase 2012 Edition
+===PD2 # Premium Deck Series: Fire and Lightning
+===PD3 # Premium Deck Series: Graveborn
+PK PTK #  Portal Three Kingdoms
+===PLC # Planar Chaos
+PO POR #  Portal
+PPR MBP #  Promo set for Gatherer
+PR PCY # Prophecy
+PS PLS # Planeshift
+===RAV # Ravnica: City of Guilds
+===ROE # Rise of the Eldrazi
+===RTR # Return to Ravnica
+===SCG # Scourge
+===SHM # Shadowmoor
+===SOK # Saviors of Kamigawa
+===SOM # Scars of Mirrodin
+ST STH # Stronghold
+TE TMP # Tempest
+===TOR # Torment
+===TSB # Time Spiral "Timeshifted"
+===TSP # Time Spiral
+---UG  # Unglued
+---UNH # Unhinged
+UZ USG # Urza's Saga
+===V09 # From the Vault: Exiled
+===V10 # From the Vault: Relics
+===V11 # From the Vault: Legends
+===V12 # From the Vault: Realms
+===VAN #  Vanguard
+VI VIS # Visions
+WL WTH # Weatherlight
+===WWK # Worldwake
+===ZEN # Zendikar

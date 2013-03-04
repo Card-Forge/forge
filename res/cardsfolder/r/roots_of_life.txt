@@ -6,7 +6,6 @@ SVar:ChooseLT:DB$ ChooseType | Defined$ You | Type$ Basic Land | ValidTypes$ Isl
 T:Mode$ Taps | ValidCard$ Land.ChosenType+OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider $ You | TriggerDescription$ Whenever a land of the chosen type an opponent controls becomes tapped, you may gain 1 life.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roots_of_life.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/135.jpg
 Oracle:As Roots of Life enters the battlefield, choose Island or Swamp.\nWhenever a land of the chosen type an opponent controls becomes tapped, you gain 1 life.
+SetInfo:MIR Uncommon

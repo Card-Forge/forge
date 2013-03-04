@@ -7,7 +7,6 @@ SVar:TrigHunt:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HunterSliverTrigSe
 SVar:HunterSliverTrigSelectPrey:AB$ MustBlock | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature to provoke | SubAbility$ HunterSliverTrigUntap
 SVar:HunterSliverTrigUntap:DB$ Untap | Defined$ Targeted
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunter_sliver.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/102.jpg
 Oracle:All Sliver creatures have provoke. (When a Sliver attacks, its controller may have target creature defending player controls untap and block it if able.)
+SetInfo:LGN Common

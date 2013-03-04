@@ -7,7 +7,6 @@ SVar:TrigNekoTeTap:AB$ Tap | Cost$ 0 | Defined$ TriggeredTarget | SubAbility$ DB
 SVar:DBNekoTeAnimate:DB$ Animate | Defined$ TriggeredTarget | HiddenKeywords$ CARDNAME doesn't untap during your untap step. | UntilHostLeavesPlay$ True
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigNekoTeLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals damage to a player, that player loses 1 life.
 SVar:TrigNekoTeLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ 1 | Defined$ TriggeredTarget
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neko_te.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/155.jpg
 Oracle:Whenever equipped creature deals damage to a creature, tap that creature. That creature doesn't untap during its controller's untap step for as long as Neko-Te remains on the battlefield.\nWhenever equipped creature deals damage to a player, that player loses 1 life.\nEquip {2}
+SetInfo:BOK Rare

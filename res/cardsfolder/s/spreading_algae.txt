@@ -8,8 +8,7 @@ SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:SacMe:2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spreading_algae.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/281.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/274.jpg
 Oracle:Enchant Swamp\nWhen enchanted land becomes tapped, destroy it.\nWhen Spreading Algae is put into a graveyard from the battlefield, return Spreading Algae to its owner's hand.
+SetInfo:8ED Uncommon
+SetInfo:USG Uncommon

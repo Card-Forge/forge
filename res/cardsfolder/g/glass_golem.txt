@@ -2,7 +2,6 @@ Name:Glass Golem
 ManaCost:5
 Types:Artifact Creature Golem
 PT:6/2
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83719.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/261.jpg
 Oracle:
+SetInfo:RAV Uncommon

@@ -4,7 +4,6 @@ Types:Creature Demon
 PT:7/6
 K:Flying
 A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilence_demon.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/124.jpg
 Oracle:Flying\n{B}: Pestilence Demon deals 1 damage to each creature and each player.
+SetInfo:ROE Rare

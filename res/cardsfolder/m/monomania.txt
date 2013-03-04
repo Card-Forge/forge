@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChooseCard | Cost$ 3 B B | ValidTgts$ Player | Amount$ 1 | Choices$ Card | SubAbility$ DBDiscard | RememberChosen$ True | AILogic$ AtLeast2 | TargetControls$ True | ChoiceZone$ Hand | SpellDescription$ Target player chooses a card in his or her hand and discards the rest.
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | Mode$ NotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monomania.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/102.jpg
 Oracle:Target player chooses a card in his or her hand and discards the rest.
+SetInfo:M12 Rare

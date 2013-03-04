@@ -5,9 +5,8 @@ A:SP$ ExchangeLife | Cost$ 4 U | ValidTgts$ Player | ConditionCheckSVar$ Y | Con
 SVar:Y:Count$HighestLifeTotal/Minus.Z
 SVar:Z:Count$LowestLifeTotal
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_transfer.jpg
-SetInfo:S99|Rare|http://magiccards.info/scans/en/st/46.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/85.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/90.jpg
 Oracle:If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.
+SetInfo:S99 Rare
+SetInfo:MIR Rare
+SetInfo:6ED Rare

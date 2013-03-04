@@ -3,11 +3,10 @@ ManaCost:1 U U
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ Counter | Cost$ T Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SpellDescription$ Counter target spell.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daring_apprentice.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/73.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/62.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/60.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/72.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/68.jpg
 Oracle:{T}, Sacrifice Daring Apprentice: Counter target spell.
+SetInfo:8ED Rare
+SetInfo:7ED Rare
+SetInfo:MIR Rare
+SetInfo:6ED Rare
+SetInfo:9ED Rare

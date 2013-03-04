@@ -5,7 +5,7 @@ PT:2/2
 K:Flying
 T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, it gets +0/+3 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_protector.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/214.jpg
 Oracle:Flying\nWhenever Angelic Protector becomes the target of a spell or ability, Angelic Protector gets +0/+3 until end of turn.
+SetInfo:DDC Uncommon
+SetInfo:TMP Uncommon

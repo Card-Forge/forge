@@ -5,7 +5,6 @@ PT:1/2
 A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ B | Amount$ X | References$ X | SpellDescription$ Add to your mana pool an amount of black mana equal to the sacrificed artifact's converted mana cost.
 SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_yawgmoth.jpg
-SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/49.jpg
 Oracle:{T}, Sacrifice an artifact: Add to your mana pool an amount of {B} equal to the sacrificed artifact's converted mana cost.
+SetInfo:ATQ Common

@@ -3,7 +3,7 @@ ManaCost:RW RW RW
 Types:Creature Goblin Soldier
 PT:2/2
 K:Double Strike
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hearthfire_hobgoblin.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/141.jpg
 Oracle:Double strike
+SetInfo:EVE Uncommon
+SetInfo:HOP Uncommon

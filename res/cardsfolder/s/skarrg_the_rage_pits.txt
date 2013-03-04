@@ -3,8 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Pump | Cost$ R G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | SpellDescription$ Target creature gets +1/+1 and gains trample until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skarrg_the_rage_pits.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/163.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/127.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{R}{G}, {T}: Target creature gets +1/+1 and gains trample until end of turn.
+SetInfo:GPT Uncommon
+SetInfo:PC2 Uncommon

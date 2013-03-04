@@ -3,7 +3,6 @@ ManaCost:B
 Types:Creature Devil
 PT:1/1
 K:First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_throwing_devils.jpg
-SetInfo:ARN|Common|http://magiccards.info/scans/en/an/14.jpg|2
 Oracle:First strike
+SetInfo:ARN Common x2

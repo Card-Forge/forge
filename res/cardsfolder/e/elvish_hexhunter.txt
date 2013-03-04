@@ -3,7 +3,6 @@ ManaCost:GW
 Types:Creature Elf Shaman
 PT:1/1
 A:AB$Destroy | Cost$ GW T Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_hexhunter.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/226.jpg
 Oracle:{G/W}, {T}, Sacrifice Elvish Hexhunter: Destroy target enchantment.
+SetInfo:SHM Common

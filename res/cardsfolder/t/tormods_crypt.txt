@@ -3,10 +3,9 @@ ManaCost:0
 Types:Artifact
 A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | Shuffle$ True | SpellDescription$ Exile all cards from target player's graveyard.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tormods_crypt.jpg
-SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/219.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/115.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/109.jpg
-SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/89.jpg
 Oracle:{T}, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
+SetInfo:M13 Uncommon
+SetInfo:CHR Common
+SetInfo:TSB Special
+SetInfo:DRK Uncommon

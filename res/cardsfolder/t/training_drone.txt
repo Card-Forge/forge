@@ -7,7 +7,6 @@ SVar:X:Count$Valid Card.Self+unequipped
 SVar:BuffedBy:Artifact.Equipment
 SVar:EquipMe:Once
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/training_drone.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/142.jpg
 Oracle:Training Drone can't attack or block unless it's equipped.
+SetInfo:MBS Common

@@ -7,7 +7,6 @@ A:AB$ ChooseSource | Cost$ Sac<1/CARDNAME> | Choices$ Card.Red | RememberChosen$
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | Prevent$ True | PreventionEffect$ True | Description$ Prevent all damage the chosen source would deal this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burrenton_forge_tender.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/7.jpg
 Oracle:Protection from red\nSacrifice Burrenton Forge-Tender: Prevent all damage a red source of your choice would deal this turn.
+SetInfo:LRW Uncommon

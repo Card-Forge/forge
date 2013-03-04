@@ -5,7 +5,6 @@ PT:4/6
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ Whenever CARDNAME attacks, destroy all Auras attached to target land.
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Card.Aura+AttachedTo Targeted | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/street_sweeper.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/234.jpg
 Oracle:Whenever Street Sweeper attacks, destroy all Auras attached to target land.
+SetInfo:RTR Uncommon

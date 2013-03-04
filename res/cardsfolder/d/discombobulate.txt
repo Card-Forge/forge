@@ -4,8 +4,7 @@ Types:Instant
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SubAbility$ DBRearrange | SpellDescription$ Counter target spell. Look at the top four cards of your library, then put them back in any order.
 SVar:DBRearrange:DB$RearrangeTopOfLibrary | Defined$ You | NumCards$ 4
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/discombobulate.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/79.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/81.jpg
 Oracle:Counter target spell. Look at the top four cards of your library, then put them back in any order.
+SetInfo:ONS Uncommon
+SetInfo:10E Uncommon

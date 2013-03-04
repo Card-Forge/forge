@@ -5,7 +5,6 @@ Text:Prevent all damage that would be dealt to Tresserhorn Skyknight by creature
 PT:5/3
 K:Flying
 K:PreventAllDamageBy Creature.withFirst Strike
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tresserhorn_skyknight.jpg
-SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/73.jpg
 Oracle:Flying\nPrevent all damage that would be dealt to Tresserhorn Skyknight by creatures with first strike.
+SetInfo:CSP Uncommon

@@ -5,7 +5,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSac:AB$Sacrifice | Defined$ Self | Cost$ 0 | SubAbility$ DBDestroyAll
 SVar:DBDestroyAll:DB$DestroyAll | ValidCards$ Land | SpellDescription$ Destroy all lands.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impending_disaster.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/82.jpg
 Oracle:At the beginning of your upkeep, if there are seven or more lands on the battlefield, sacrifice Impending Disaster and destroy all lands.
+SetInfo:ULG Rare

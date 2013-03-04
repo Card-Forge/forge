@@ -5,7 +5,6 @@ A:SP$ Token | Cost$ 7 G | TokenAmount$ 1 | TokenName$ Rhino | TokenTypes$ Creatu
 SVar:DBChoose:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | RememberChosen$ True
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horncallers_chant.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/128.jpg
 Oracle:Put a 4/4 green Rhino creature token with trample onto the battlefield, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+SetInfo:RTR Common

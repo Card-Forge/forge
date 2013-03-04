@@ -4,7 +4,7 @@ Types:Creature Kavu
 PT:2/2
 A:AB$ DamageAll | Cost$ R Sac<1/CARDNAME> | ValidCards$ Creature | NumDmg$ 2 | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 2 damage to each creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_kavu.jpg
-SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/58.jpg
 Oracle:{R}, Sacrifice Bloodfire Kavu: Bloodfire Kavu deals 2 damage to each creature.
+SetInfo:APC Uncommon
+SetInfo:DDI Uncommon

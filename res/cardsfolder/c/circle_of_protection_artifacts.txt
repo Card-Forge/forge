@@ -6,10 +6,9 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | Remember
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_artifacts.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/8.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/292.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/263.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/97.jpg
 Oracle:{2}: The next time an artifact source of your choice would deal damage to you this turn, prevent that damage.
+SetInfo:ATQ Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:5DN Uncommon

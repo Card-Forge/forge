@@ -6,7 +6,6 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +X | SubAbil
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_rites.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/44.jpg
 Oracle:Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.
+SetInfo:ODY Common

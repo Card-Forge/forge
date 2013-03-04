@@ -5,7 +5,6 @@ PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices a creature.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Each | SacValid$ Creature
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slum_reaper.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/77.jpg
 Oracle:When Slum Reaper enters the battlefield, each player sacrifices a creature.
+SetInfo:RTR Uncommon

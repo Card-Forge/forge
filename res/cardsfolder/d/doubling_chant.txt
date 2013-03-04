@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ RepeatEach | Cost$ 5 G | RepeatSubAbility$ DBSearch | RepeatCards$ Creature.YouCtrl | SpellDescription$ For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle your library.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Remembered.Creature+sameName | ChangeNum$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_chant.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/170.jpg
 Oracle:For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle your library.
+SetInfo:M12 Rare

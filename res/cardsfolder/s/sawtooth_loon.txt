@@ -9,7 +9,7 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 2
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sawtooth_loon.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/123.jpg
 Oracle:Flying\nWhen Sawtooth Loon enters the battlefield, return a white or blue creature you control to its owner's hand.\nWhen Sawtooth Loon enters the battlefield, draw two cards, then put two cards from your hand on the bottom of your library.
+SetInfo:PLS Uncommon
+SetInfo:DDI Uncommon

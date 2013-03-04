@@ -4,7 +4,6 @@ Types:Artifact Equipment
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Legendary | AddKeyword$ Hexproof | Description$ As long as equipped creature is legendary, it has hexproof. (It can't be the target of spells or abilities your opponents control.)
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champions_helm.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/244.jpg
 Oracle:Equipped creature gets +2/+2.\nAs long as equipped creature is legendary, it has hexproof. (It can't be the target of spells or abilities your opponents control.)\nEquip {1}
+SetInfo:COM Rare

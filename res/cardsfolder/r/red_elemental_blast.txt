@@ -5,11 +5,10 @@ A:SP$ Destroy | Cost$ R | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target b
 A:SP$ Counter | Cost$ R | TargetType$ Spell | ValidTgts$ Card.Blue | SpellDescription$ or Counter target blue spell.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/red_elemental_blast.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/170.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/171.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/170.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/236.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/170.jpg
 Oracle:Choose one - Counter target blue spell; or destroy target blue permanent.
+SetInfo:2ED Common
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:4ED Common
+SetInfo:3ED Common

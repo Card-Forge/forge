@@ -6,7 +6,6 @@ A:AB$ Mana | Cost$ T | Produced$ 1 G | SpellDescription$ Add 1 G to your mana po
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an untapped Forest you control to its owner's hand.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Forest.untapped/untapped Forest> | UnlessPayer$ You
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_basin.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/164.jpg
 Oracle:Jungle Basin enters the battlefield tapped.\nWhen Jungle Basin enters the battlefield, sacrifice it unless you return an untapped Forest you control to its owner's hand.\n{T}: Add {1}{G} to your mana pool.
+SetInfo:VIS Uncommon

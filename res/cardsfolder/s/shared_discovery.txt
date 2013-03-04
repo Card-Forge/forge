@@ -2,7 +2,6 @@ Name:Shared Discovery
 ManaCost:U
 Types:Sorcery
 A:SP$ Draw | Cost$ U tapXType<4/Creature> | NumCards$ 3 | SpellDescription$ Draw three cards.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shared_discovery.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/87.jpg
 Oracle:As an additional cost to cast Shared Discovery, tap four untapped creatures you control.\nDraw three cards.
+SetInfo:ROE Common

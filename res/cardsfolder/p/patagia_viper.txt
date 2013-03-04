@@ -10,7 +10,6 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:blue
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Blue
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patagia_viper.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/89.jpg
 Oracle:Flying\nWhen Patagia Viper enters the battlefield, put two 1/1 green and blue Snake creature tokens onto the battlefield.\nWhen Patagia Viper enters the battlefield, sacrifice it unless {U} was spent to cast it.
+SetInfo:DIS Uncommon

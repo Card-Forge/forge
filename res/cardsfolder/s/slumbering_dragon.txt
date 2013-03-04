@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't atta
 T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ DragonWake | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on CARDNAME.
 SVar:DragonWake:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:X:Count$NumCounters.P1P1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slumbering_dragon.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/148.jpg
 Oracle:Flying\nSlumbering Dragon can't attack or block unless it has five or more +1/+1 counters on it.\nWhenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Slumbering Dragon.
+SetInfo:M13 Rare

@@ -4,7 +4,6 @@ Types:Legendary Creature Human Soldier Warrior
 PT:4/4
 K:Vigilance
 K:Horsemanship
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhang_fei_fierce_warrior.jpg
-SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/32.jpg
 Oracle:Vigilance; horsemanship (This creature can't be blocked except by creatures with horsemanship.)
+SetInfo:PTK Rare

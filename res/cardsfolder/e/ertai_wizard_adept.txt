@@ -3,7 +3,6 @@ ManaCost:2 U
 Types:Legendary Creature Wizard
 PT:1/1
 A:AB$ Counter | Cost$ 2 U U T | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ertai_wizard_adept.jpg
-SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/33.jpg
 Oracle:{2}{U}{U}, {T}: Counter target spell.
+SetInfo:EXO Rare

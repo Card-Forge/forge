@@ -4,8 +4,7 @@ Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may put an Aura card from your hand onto the battlefield attached to Academy Researchers.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource | AttachedTo$ Self
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_researchers.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/58.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/63.jpg
 Oracle:When Academy Researchers enters the battlefield, you may put an Aura card from your hand onto the battlefield attached to Academy Researchers.
+SetInfo:10E Uncommon
+SetInfo:USG Uncommon

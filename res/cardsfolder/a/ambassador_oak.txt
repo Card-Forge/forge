@@ -4,7 +4,6 @@ Types:Creature Treefolk Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 1/1 green Elf Warrior creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambassador_oak.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/113.jpg
 Oracle:When Ambassador Oak enters the battlefield, put a 1/1 green Elf Warrior creature token onto the battlefield.
+SetInfo:MOR Common

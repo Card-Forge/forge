@@ -7,7 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Instant,Sorcery | ValidTarget$ Card.Self | Exe
 SVar:TrigDealDamage1:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredSource | NumDmg$ X | References$ X
 SVar:TrigDealDamage2:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredSourceController | NumDmg$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tephraderm.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/239.jpg
 Oracle:Whenever a creature deals damage to Tephraderm, Tephraderm deals that much damage to that creature.\nWhenever a spell deals damage to Tephraderm, Tephraderm deals that much damage to that spell's controller.
+SetInfo:ONS Rare

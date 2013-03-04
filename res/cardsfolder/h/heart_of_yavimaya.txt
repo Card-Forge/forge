@@ -11,7 +11,6 @@ SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Forest.YouCtrl
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_yavimaya.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/183.jpg
 Oracle:If Heart of Yavimaya would enter the battlefield, sacrifice a Forest instead. If you do, put Heart of Yavimaya onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {G} to your mana pool.\n{T}: Target creature gets +1/+1 until end of turn.
+SetInfo:ALL Rare

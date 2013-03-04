@@ -7,7 +7,6 @@ SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentHumanCon
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | References$ X | Description$ CARDNAME's power and toughness are each equal to the number of permanents of the chosen color your opponents control.
 SVar:X:Count$Valid Permanent.OppCtrl+ChosenColor
 SVar:NeedsToPlay:Permanent.OppCtrl+nonColorless
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chameleon_spirit.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/65.jpg
 Oracle:As Chameleon Spirit enters the battlefield, choose a color.\nChameleon Spirit's power and toughness are each equal to the number of permanents of the chosen color your opponents control.
+SetInfo:MMQ Uncommon

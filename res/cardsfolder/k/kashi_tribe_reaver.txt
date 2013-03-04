@@ -7,7 +7,6 @@ SVar:TrigTap:AB$Tap | Cost$ 0 | Defined$ TriggeredTarget | SubAbility$ DBPump
 SVar:DBPump:DB$Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_reaver.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/220.jpg
 Oracle:Whenever Kashi-Tribe Reaver deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.\n{1}{G}: Regenerate Kashi-Tribe Reaver.
+SetInfo:CHK Uncommon

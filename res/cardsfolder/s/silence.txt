@@ -3,8 +3,7 @@ ManaCost:W
 Types:Instant
 A:SP$ Effect | Cost$ W | Name$ Silence Effect | StaticAbilities$ STCantBeCast | AILogic$ BeginningOfOppTurn | SpellDescription$ Your opponents can't cast spells this turn. (Spells cast before this resolves are unaffected.)
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Opponent | Description$ Your opponents can't cast spells.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silence.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/30.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/31.jpg
 Oracle:Your opponents can't cast spells this turn. (Spells cast before this resolves are unaffected.)
+SetInfo:M11 Rare
+SetInfo:M10 Rare

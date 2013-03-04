@@ -4,7 +4,6 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, CARDNAME deals 2 damage to that creature's controller.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 2
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dingus_staff.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/149.jpg
 Oracle:Whenever a creature dies, Dingus Staff deals 2 damage to that creature's controller.
+SetInfo:WTH Uncommon

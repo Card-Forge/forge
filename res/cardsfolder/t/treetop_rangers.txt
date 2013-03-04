@@ -4,7 +4,6 @@ Types:Creature Elf
 Text:CARDNAME can't be blocked except by creatures with flying.
 PT:2/2
 K:CantBeBlockedBy Creature.withoutFlying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_rangers.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/279.jpg
 Oracle:Treetop Rangers can't be blocked except by creatures with flying.
+SetInfo:USG Common

@@ -2,7 +2,6 @@ Name:Woodland Druid
 ManaCost:G
 Types:Creature Human Druid
 PT:1/2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29772.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/284.jpg
 Oracle:
+SetInfo:ODY Common

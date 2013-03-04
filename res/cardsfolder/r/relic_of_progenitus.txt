@@ -5,7 +5,7 @@ A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | ValidTgts$
 A:AB$ ChangeZoneAll | Cost$ 1 Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ DBDraw | SpellDescription$ Exile all cards from all graveyards. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_of_progenitus.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/218.jpg
 Oracle:{T}: Target player exiles a card from his or her graveyard.\n{1}, Exile Relic of Progenitus: Exile all cards from all graveyards. Draw a card.
+SetInfo:HOP Common
+SetInfo:ALA Common

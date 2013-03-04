@@ -6,7 +6,6 @@ K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCanNotBlock | TriggerDescription$ When CARDNAME enters the battlefield, target creature can't block this turn.
 SVar:TrigCanNotBlock:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_cathar.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/135.jpg
 Oracle:Haste\nWhen Fervent Cathar enters the battlefield, target creature can't block this turn.
+SetInfo:AVR Common

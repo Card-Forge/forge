@@ -4,7 +4,6 @@ Types:Creature Insect
 PT:1/2
 K:Flying
 K:Shroud
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hawkeater_moth.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/259.jpg
 Oracle:Flying; shroud (This permanent can't be the target of spells or abilities.)
+SetInfo:USG Uncommon

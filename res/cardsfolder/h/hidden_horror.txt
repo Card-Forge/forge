@@ -9,10 +9,10 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourHand.Creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_horror.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/14.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/137.jpg
-SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/15.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/149.jpg
 Oracle:When Hidden Horror enters the battlefield, sacrifice it unless you discard a creature card.
+SetInfo:PO2 Rare
+SetInfo:WTH Uncommon
+SetInfo:PD3 Uncommon
+SetInfo:6ED Uncommon
+SetInfo:10E Uncommon

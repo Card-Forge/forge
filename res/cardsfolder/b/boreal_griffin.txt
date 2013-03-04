@@ -6,7 +6,6 @@ K:Flying
 A:AB$ Pump | Cost$ S | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 # AI can now use snow mana to pay for activated abilities.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boreal_griffin.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/2.jpg
 Oracle:Flying\n{S}: Boreal Griffin gains first strike until end of turn. ({S} can be paid with one mana from a snow permanent.)
+SetInfo:CSP Common

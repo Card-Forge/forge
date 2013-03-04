@@ -5,8 +5,7 @@ PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, each player draws two cards, then discards a card at random.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ Each | NumCards$ 2 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ Each | Mode$ Random | NumCards$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_ransacker.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/102.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/109.jpg
 Oracle:When Noggle Ransacker enters the battlefield, each player draws two cards, then discards a card at random.
+SetInfo:PC2 Uncommon
+SetInfo:EVE Uncommon

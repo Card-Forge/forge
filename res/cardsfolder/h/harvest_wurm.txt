@@ -9,7 +9,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourYard.Basic
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harvest_wurm.jpg
-SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/72.jpg
 Oracle:When Harvest Wurm enters the battlefield, sacrifice it unless you return a basic land card from your graveyard to your hand.
+SetInfo:WTH Common

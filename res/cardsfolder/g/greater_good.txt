@@ -4,9 +4,8 @@ Types:Enchantment
 A:AB$ Draw | Cost$ Sac<1/Creature> | NumCards$ X | SubAbility$ DB | References$ X | SpellDescription$ Draw cards equal to the sacrificed creature's power, then discard three cards.
 SVar:DB:DB$Discard | NumCards$ 3 | Mode$ TgtChoose
 SVar:X:Sacrificed$CardPower
-SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_good.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/257.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/245.jpg
 Oracle:Sacrifice a creature: Draw cards equal to the sacrificed creature's power, then discard three cards.
+SetInfo:9ED Rare
+SetInfo:USG Rare

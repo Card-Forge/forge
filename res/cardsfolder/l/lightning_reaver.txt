@@ -9,7 +9,6 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
 SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Defined$ Player.Opponent | NumDmg$ X | References$ X
 SVar:X:Count$CardCounters.CHARGE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_reaver.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/42.jpg
 Oracle:Haste; fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhenever Lightning Reaver deals combat damage to a player, put a charge counter on it.\nAt the beginning of your end step, Lightning Reaver deals damage equal to the number of charge counters on it to each opponent.
+SetInfo:ARB Rare

@@ -7,7 +7,6 @@ SVar:X:Count$Valid Artifact.YouCtrl
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature. It can't be regenerated.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget | NoRegen$ True
 SVar:BuffedBy:Artifact
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mephitic_ooze.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/47.jpg
 Oracle:Mephitic Ooze gets +1/+0 for each artifact you control.\nWhenever Mephitic Ooze deals combat damage to a creature, destroy that creature. The creature can't be regenerated.
+SetInfo:DST Rare

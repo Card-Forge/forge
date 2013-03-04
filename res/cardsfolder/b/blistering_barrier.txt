@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Wall
 PT:5/2
 K:Defender
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blistering_barrier.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/159.jpg
 Oracle:Defender (This creature can't attack.)
+SetInfo:MIR Common

@@ -4,7 +4,6 @@ Types:Creature Elf Warrior
 PT:3/1
 K:Protection from artifacts
 K:Infect
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_fallen.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/130.jpg
 Oracle:Protection from artifacts\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+SetInfo:SOM Common

@@ -2,9 +2,9 @@ Name:Pillage
 ManaCost:1 R R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 1 R R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | NoRegen$ True | SpellDescription$ Destroy target artifact or land. It can't be regenerated.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillage.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/198.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/113.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/207.jpg
 Oracle:Destroy target artifact or land. It can't be regenerated.
+SetInfo:7ED Uncommon
+SetInfo:PD2 Uncommon
+SetInfo:ALL Uncommon
+SetInfo:6ED Uncommon

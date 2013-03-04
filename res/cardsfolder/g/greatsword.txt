@@ -3,7 +3,6 @@ ManaCost:3
 Types:Artifact Equipment
 K:Equip 3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greatsword.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/209.jpg
 Oracle:Equipped creature gets +3/+0.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:M12 Uncommon

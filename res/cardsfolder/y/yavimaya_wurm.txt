@@ -3,8 +3,7 @@ ManaCost:4 G G
 Types:Creature Wurm
 PT:6/4
 K:Trample
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card26631.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/200.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/120.jpg
 Oracle:Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)
+SetInfo:M11 Common
+SetInfo:ULG Common

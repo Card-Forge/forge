@@ -5,7 +5,6 @@ PT:2/2
 K:Flying
 A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dive_bomber.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/26.jpg
 Oracle:Flying\n{T}, Sacrifice Dive Bomber: Dive Bomber deals 2 damage to target attacking or blocking creature.
+SetInfo:ONS Common

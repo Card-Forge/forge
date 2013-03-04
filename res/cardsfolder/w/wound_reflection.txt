@@ -5,7 +5,6 @@ T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ Repeat
 SVar:RepeatOpps:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player | RepeatSubAbility$ TrigLoseLife
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | References$ X
 SVar:X:PlayerCountRemembered$LifeLostThisTurn
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wound_reflection.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/81.jpg
 Oracle:At the beginning of each end step, each opponent loses life equal to the life he or she lost this turn. (Damage causes loss of life.)
+SetInfo:SHM Rare

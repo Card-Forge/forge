@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Instant
 A:SP$ Draw | Cost$ 4 U | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:AltCost:Cost$ Return<2/Island>
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gush.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/82.jpg
 Oracle:You may return two Islands you control to their owner's hand rather than pay Gush's mana cost.\nDraw two cards.
+SetInfo:MMQ Common
+SetInfo:DD2 Common

@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Sliver.Other | EffectZone$ Battlefield | Affected
 SVar:MesmericETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Sliver.Self | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ MesmFateseal | TriggerDescription$ When this permanent enters the battlefield, you may fateseal 1.
 SVar:MesmFateseal:AB$Dig | Cost$ 0 | Defined$ Opponent | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition$ -1 | LibraryPosition2$ 0
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_sliver.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/53.jpg
 Oracle:All Slivers have "When this permanent enters the battlefield, you may fateseal 1." (To fateseal 1, its controller looks at the top card of an opponent's library, then he or she may put that card on the bottom of that library.)
+SetInfo:FUT Common

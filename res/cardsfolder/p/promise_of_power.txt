@@ -9,7 +9,7 @@ SVar:DBLoseLife2:DB$LoseLife | LifeAmount$ 5 | SubAbility$ DBToken
 SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Demon | TokenTypes$ Creature,Demon | TokenOwner$ You | TokenColors$ Black | TokenKeywords$ Flying | TokenPower$ X | TokenToughness$ X
 SVar:X:Count$NumCardsInYourHand
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/promise_of_power.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/74.jpg
 Oracle:Choose one - You draw five cards and you lose 5 life; or put an X/X black Demon creature token with flying onto the battlefield, where X is the number of cards in your hand as the token enters the battlefield.\nEntwine {4} (Choose both if you pay the entwine cost.)
+SetInfo:MRD Rare
+SetInfo:DDC Rare

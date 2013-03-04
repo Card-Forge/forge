@@ -6,9 +6,8 @@ K:Vigilance
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
 SVar:X:Count$Valid Aura.Attached/Times.2
 SVar:EnchantMe:Multiple
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rabid_wombat.jpg
 Oracle:Vigilance\nRabid Wombat gets +2/+2 for each Aura attached to it.
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/181.jpg
-SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/39.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/112.jpg
+SetInfo:5ED Uncommon
+SetInfo:CHR Uncommon
+SetInfo:LEG Uncommon

@@ -9,7 +9,6 @@ SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execu
 SVar:TrigDestroyBlocked:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 K:Madness:B B
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_recluse.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/111.jpg
 Oracle:Whenever Gorgon Recluse blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.\nMadness {B}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
+SetInfo:TSP Common

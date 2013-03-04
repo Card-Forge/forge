@@ -6,7 +6,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
 A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 A:AB$ Mana | Cost$ Sac<1/Saproling> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/utopia_mycon.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/140.jpg
 Oracle:At the beginning of your upkeep, put a spore counter on Utopia Mycon.\nRemove three spore counters from Utopia Mycon: Put a 1/1 green Saproling creature token onto the battlefield.\nSacrifice a Saproling: Add one mana of any color to your mana pool.
+SetInfo:FUT Uncommon

@@ -4,7 +4,7 @@ Types:Creature Sliver
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddPower$ 1 | AddToughness$ 1 | Description$ All Sliver creatures get +1/+1.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muscle_sliver.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/132.jpg
 Oracle:All Sliver creatures get +1/+1.
+SetInfo:H09 Common
+SetInfo:TMP Common

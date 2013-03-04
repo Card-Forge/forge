@@ -6,7 +6,6 @@ SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$TypeInYourYard.Artifact
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_salvage.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/6.jpg
 Oracle:Put any number of target artifact cards from your graveyard on top of your library.\nDraw a card.
+SetInfo:MBS Common

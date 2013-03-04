@@ -6,8 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ChangeNum$ X | ChangeType$ Goblin | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | References$ X
 SVar:X:Count$InYourLibrary.Goblin
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_recruiter.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/80.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/186.jpg
 Oracle:When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards and reveal those cards. Shuffle your library, then put them on top of it in any order.
+SetInfo:VIS Uncommon
+SetInfo:6ED Uncommon

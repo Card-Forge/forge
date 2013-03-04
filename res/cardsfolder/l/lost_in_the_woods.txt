@@ -7,5 +7,5 @@ SVar:DBRemoveCombat:DB$ RemoveFromCombat | Defined$ TriggeredAttacker | Conditio
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:IsForest:Remembered$Valid Forest
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_in_the_woods.jpg
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/123.jpg
 Oracle:Whenever a creature attacks you or a planeswalker you control, reveal the top card of your library. If it's a Forest card, remove that creature from combat. Then put the revealed card on the bottom of your library.
+SetInfo:DKA Rare

@@ -4,7 +4,6 @@ Types:Creature Insect
 PT:5/5
 A:AB$ PutCounter | Cost$ 4 G G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | References$ X | PrecostDesc$ Scavenge | SpellDescription$ Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.
 SVar:X:Count$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadbridge_goliath.jpg
-SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/120.jpg
 Oracle:Scavenge {4}{G}{G} ({4}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
+SetInfo:RTR Rare

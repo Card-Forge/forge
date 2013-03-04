@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Creature Wall
 PT:4/1
 K:Defender
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_torches.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/159.jpg
 Oracle:Defender (This creature can't attack.)
+SetInfo:M12 Common

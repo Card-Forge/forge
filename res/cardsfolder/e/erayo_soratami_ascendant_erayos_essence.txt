@@ -8,7 +8,6 @@ SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
 SVar:NumCast:Count$ThisTurnCast_Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erayo_soratami_ascendant.jpg
 AlternateMode:Flip
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/35.jpg
 Oracle:Flying\nWhenever the fourth spell of a turn is cast, flip Erayo, Soratami Ascendant.
 
 ALTERNATE
@@ -22,6 +21,6 @@ SVar:TrigCounter:AB$Counter | Cost$ 0 | Defined$ TriggeredSpellAbility | Destina
 SVar:NumOppCast:Count$ThisTurnCast_Card.YouDontCtrl
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/erayos_essence.jpg
 # This link may be a temporary solution and could change in the near future.
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/167.jpg
 Oracle:Whenever an opponent casts a spell for the first time in a turn, counter that spell.
 
+SetInfo:SOK Rare

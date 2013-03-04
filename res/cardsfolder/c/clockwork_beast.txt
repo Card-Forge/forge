@@ -8,12 +8,11 @@ SVar:TrigSubCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ P
 A:AB$ PutCounter | Cost$ X T | Defined$ Self | UpTo$ True | MaxFromEffect$ 7 | CounterType$ P1P0 | CounterNum$ X | ActivationPhases$ Upkeep | PlayerTurn$ True | References$ X | SpellDescription$ Put up to X +1/+0 counters on CARDNAME. This ability can't cause the total number of +1/+0 counters on CARDNAME to be greater than seven. Activate this ability only during your upkeep.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_beast.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/236.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/238.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/356.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/325.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/240.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/237.jpg
 Oracle:Clockwork Beast enters the battlefield with seven +1/+0 counters on it.\nAt end of combat, if Clockwork Beast attacked or blocked this combat, remove a +1/+0 counter from it.\n{X}, {T}: Put up to X +1/+0 counters on Clockwork Beast. This ability can't cause the total number of +1/+0 counters on Clockwork Beast to be greater than seven. Activate this ability only during your upkeep.
+SetInfo:2ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

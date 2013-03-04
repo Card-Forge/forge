@@ -6,7 +6,6 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ FUSE 
 A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Artifact.cmcEQX,Creature.cmcEQX | References$ X | SpellDescription$ Destroy each artifact and creature with converted mana cost equal to the number of fuse counters on CARDNAME.
 SVar:X:Count$CardCounters.FUSE
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/powder_keg.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/136.jpg
 Oracle:At the beginning of your upkeep, you may put a fuse counter on Powder Keg.\n{T}, Sacrifice Powder Keg: Destroy each artifact and creature with converted mana cost equal to the number of fuse counters on Powder Keg.
+SetInfo:UDS Rare

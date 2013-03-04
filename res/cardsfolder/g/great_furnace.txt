@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Artifact Land
 Text:(Great Furnace isn't a spell.)
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_furnace.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/282.jpg
 Oracle:(Great Furnace isn't a spell.)\n{T}: Add {R} to your mana pool.
+SetInfo:MRD Common
+SetInfo:HOP Common

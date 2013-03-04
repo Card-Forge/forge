@@ -4,8 +4,7 @@ Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Black+nonToken+OppOwn | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/compost.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/102.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/235.jpg
 Oracle:Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.
+SetInfo:7ED Uncommon
+SetInfo:UDS Uncommon

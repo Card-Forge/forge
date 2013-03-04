@@ -4,7 +4,7 @@ Types:Land
 Text:As CARDNAME enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ PutCounter | Cost$ 1 W Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | ActivationZone$ Hand | PrecostDesc$ Reinforce 1 - | SpellDescription$ Put a +1/+1 counter on target creature.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustic_clachan.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/150.jpg
 Oracle:As Rustic Clachan enters the battlefield, you may reveal a Kithkin card from your hand. If you don't, Rustic Clachan enters the battlefield tapped.\n{T}: Add {W} to your mana pool.\nReinforce 1-{1}{W} ({1}{W}, Discard this card: Put a +1/+1 counter on target creature.)
+SetInfo:MOR Rare
+SetInfo:DDF Rare

@@ -8,7 +8,6 @@ K:Evoke:3 U
 SVar:TrigBounce:DB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Choose target non-Land permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nevermaker.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/44.jpg
 Oracle:Flying\nWhen Nevermaker leaves the battlefield, put target nonland permanent on top of its owner's library.\nEvoke {3}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
+SetInfo:MOR Uncommon

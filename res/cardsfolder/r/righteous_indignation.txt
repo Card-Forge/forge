@@ -4,7 +4,6 @@ Types:Enchantment
 T:Mode$ AttackerBlocked | ValidCard$ Creature.Black,Creature.Red | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature blocks a black or red creature, the blocking creature gets +1/+1 until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | Defined$ TriggeredBlocker | SpellDescription$ The blocking creature gets +1/+1 until end of turn.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_indignation.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/46.jpg
 Oracle:Whenever a creature blocks a black or red creature, the blocking creature gets +1/+1 until end of turn.
+SetInfo:MMQ Uncommon

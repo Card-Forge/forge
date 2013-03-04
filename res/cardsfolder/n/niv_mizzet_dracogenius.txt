@@ -6,7 +6,6 @@ K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals damage to a player, you may draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 A:AB$ DealDamage | Cost$ U R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niv_mizzet_dracogenius.jpg
-SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/183.jpg
 Oracle:Flying\nWhenever Niv-Mizzet, Dracogenius deals damage to a player, you may draw a card.\n{U}{R}: Niv-Mizzet, Dracogenius deals 1 damage to target creature or player.
+SetInfo:RTR Mythic

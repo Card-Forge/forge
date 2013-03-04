@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:1/1
 A:AB$ Mana | Cost$ B PayLife<1> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_celebrant.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/61.jpg
 Oracle:{B}, Pay 1 life: Add one mana of any color to your mana pool.
+SetInfo:LGN Common

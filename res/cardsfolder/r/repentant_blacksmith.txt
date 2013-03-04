@@ -3,9 +3,8 @@ ManaCost:1 W
 Types:Creature Human
 PT:1/2
 K:Protection from red
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repentant_blacksmith.jpg
 Oracle:Protection from red
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/330.jpg
-SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/67.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/66.jpg
+SetInfo:5ED Common
+SetInfo:CHR Common
+SetInfo:ARN Rare

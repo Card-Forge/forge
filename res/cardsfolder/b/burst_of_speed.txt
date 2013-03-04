@@ -3,7 +3,6 @@ ManaCost:R
 Types:Sorcery
 A:SP$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control gain haste until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_of_speed.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/129.jpg
 Oracle:Creatures you control gain haste until end of turn. (They can attack and {T} even if they just came under your control.)
+SetInfo:M10 Common

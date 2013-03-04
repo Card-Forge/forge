@@ -2,7 +2,6 @@ Name:Sanctuary Cat
 ManaCost:W
 Types:Creature Cat
 PT:1/2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctuary_cat.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/19.jpg
 Oracle:
+SetInfo:DKA Common

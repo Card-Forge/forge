@@ -6,8 +6,7 @@ SVar:DBToken:DB$Token | TokenImage$ B 2 2 Zombie | TokenName$ Zombie | TokenColo
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_ritual.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/146.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/158.jpg
 Oracle:Exile X target creature cards from your graveyard. For each creature card exiled this way, put a 2/2 black Zombie creature token onto the battlefield.
+SetInfo:MMQ Rare
+SetInfo:10E Rare

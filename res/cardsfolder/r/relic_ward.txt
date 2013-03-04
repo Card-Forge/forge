@@ -10,7 +10,6 @@ SVar:Sac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Artifact | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Artifact.EnchantedBy | AddKeyword$ Shroud | Description$ Enchanted artifact has shroud. (It can't be the target of spells or abilities.)
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_ward.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/116.jpg
 Oracle:You may cast Relic Ward as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant artifact\nEnchanted artifact has shroud. (It can't be the target of spells or abilities.)
+SetInfo:VIS Uncommon

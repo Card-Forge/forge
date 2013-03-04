@@ -6,7 +6,6 @@ T:Mode$ DamageDone | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ Tri
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelheart_vial.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/215.jpg
 Oracle:Whenever you're dealt damage, you may put that many charge counters on Angelheart Vial.\n{2}, {T}, Remove four charge counters from Angelheart Vial: You gain 2 life and draw a card.
+SetInfo:ROE Rare

@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destina
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
 SVar:X:TriggeredCard$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murder_investigation.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/21.jpg
 Oracle:Enchant creature you control\nWhen enchanted creature dies, put X 1/1 white Soldier creature tokens onto the battlefield, where X is its power.
+SetInfo:GTC Uncommon

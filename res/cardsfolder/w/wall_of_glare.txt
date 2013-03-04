@@ -4,7 +4,6 @@ Types:Creature Wall
 PT:0/5
 K:Defender
 K:CARDNAME can block any number of creatures.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_glare.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/25.jpg
 Oracle:Defender (This creature can't attack.)\nWall of Glare can block any number of creatures.
+SetInfo:UDS Common

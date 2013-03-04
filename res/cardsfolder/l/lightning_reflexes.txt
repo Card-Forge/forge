@@ -9,7 +9,6 @@ SVar:CleanupTrig:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Exec
 SVar:Sac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ First Strike | Description$ Enchanted creature gets +1/+0 and has first strike.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_reflexes.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/186.jpg
 Oracle:You may cast Lightning Reflexes as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant creature\nEnchanted creature gets +1/+0 and has first strike.
+SetInfo:MIR Common

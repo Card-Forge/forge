@@ -3,7 +3,6 @@ ManaCost:5
 Types:Legendary Artifact
 S:Mode$ Continuous | Affected$ Permanent.counters_GE1_DIVINITY | AddHiddenKeyword$ Indestructible | Description$ Each permanent with a divinity counter on it is indestructible.
 A:AB$ PutCounter | Cost$ 4 T | ValidTgts$ Permanent.Other | TgtPrompt$ Select target permanent other than That Which Was Taken | CounterType$ DIVINITY | CounterNum$ 1 | SpellDescription$ Put a divinity counter on target permanent other than CARDNAME.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/that_which_was_taken.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/162.jpg
 Oracle:{4}, {T}: Put a divinity counter on target permanent other than That Which Was Taken.\nEach permanent with a divinity counter on it is indestructible.
+SetInfo:BOK Rare

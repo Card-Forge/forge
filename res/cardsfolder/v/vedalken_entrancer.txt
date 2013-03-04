@@ -3,8 +3,7 @@ ManaCost:3 U
 Types:Creature Vedalken Wizard
 A:AB$ Mill | Cost$ U T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top two cards of his or her library into his or her graveyard.
 PT:1/4
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_entrancer.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/74.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/76.jpg
 Oracle:{U}, {T}: Target player puts the top two cards of his or her library into his or her graveyard.
+SetInfo:RAV Common
+SetInfo:M13 Common

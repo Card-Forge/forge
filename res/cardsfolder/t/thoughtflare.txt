@@ -3,7 +3,6 @@ ManaCost:3 U R
 Types:Instant
 A:SP$ Draw | Cost$ 3 U R | NumCards$ 4 | SpellDescription$ Draw four cards, then discard two cards.| SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtflare.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/203.jpg
 Oracle:Draw four cards, then discard two cards.
+SetInfo:RTR Uncommon

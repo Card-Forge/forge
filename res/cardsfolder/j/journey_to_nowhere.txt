@@ -6,8 +6,8 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigExile:DB$ChangeZone | Cost$ 0 | TargetMin$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
 SVar:TrigReturn:DB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_to_nowhere.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/14.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/17.jpg
 Oracle:When Journey to Nowhere enters the battlefield, exile target creature.\nWhen Journey to Nowhere leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SetInfo:COM Common
+SetInfo:ZEN Common
+SetInfo:DDF Common

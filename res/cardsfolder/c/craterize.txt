@@ -2,7 +2,6 @@ Name:Craterize
 ManaCost:3 R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/craterize.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/126.jpg
 Oracle:Destroy target land.
+SetInfo:M13 Common

@@ -4,8 +4,8 @@ Types:Creature Dragon
 PT:5/5
 K:Flying
 A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_hellkite.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/214.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/231.jpg
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\n{1}{R}: Shivan Hellkite deals 1 damage to target creature or player.
+SetInfo:10E Rare
+SetInfo:DDG Rare
+SetInfo:USG Rare

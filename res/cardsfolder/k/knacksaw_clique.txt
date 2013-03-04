@@ -7,7 +7,6 @@ A:AB$ Mill | Cost$ 1 U Q | ValidTgts$ Opponent | TgtPrompt$ Select target oppone
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent | PumpZone$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knacksaw_clique.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/42.jpg
 Oracle:Flying\n{1}{U}, {Q}: Target opponent exiles the top card of his or her library. Until end of turn, you may play that card. ({Q} is the untap symbol.)
+SetInfo:SHM Rare

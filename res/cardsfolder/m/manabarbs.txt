@@ -4,16 +4,15 @@ Types:Enchantment
 T:Mode$ TapsForMana | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player taps a land for mana, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manabarbs.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/164.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/165.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/164.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/250.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/230.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/218.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/149.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/194.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/150.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/164.jpg
 Oracle:Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
+SetInfo:2ED Rare
+SetInfo:6ED Rare
+SetInfo:M10 Rare
+SetInfo:10E Rare
+SetInfo:LEB Rare
+SetInfo:M12 Rare
+SetInfo:LEA Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare

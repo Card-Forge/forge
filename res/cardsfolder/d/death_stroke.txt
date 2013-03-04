@@ -2,7 +2,6 @@ Name:Death Stroke
 ManaCost:B B
 Types:Sorcery
 A:SP$ Destroy | Cost$ B B | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_stroke.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/7.jpg
 Oracle:Destroy target tapped creature.
+SetInfo:STH Common

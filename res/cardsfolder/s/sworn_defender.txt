@@ -7,7 +7,6 @@ SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ X | Toughness$ Y
 SVar:X:Targeted$CardToughness/Minus.1
 SVar:Y:Targeted$CardPower/Plus.1
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sworn_defender.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/152.jpg
 Oracle:{1}: Sworn Defender's power becomes the toughness of target creature blocking or being blocked by Sworn Defender minus 1 until end of turn, and Sworn Defender's toughness becomes 1 plus the power of that creature until end of turn.
+SetInfo:ALL Rare

@@ -2,7 +2,6 @@ Name:Oxidize
 ManaCost:G
 Types:Instant
 A:SP$ Destroy | Cost$ G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SpellDescription$ Destroy target artifact. It can't be regenerated.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidize.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/79.jpg
 Oracle:Destroy target artifact. It can't be regenerated.
+SetInfo:DST Uncommon

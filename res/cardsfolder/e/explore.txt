@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Effect | Cost$ 1 G | Name$ Explore Effect | StaticAbilities$ Exploration | AILogic$ Always | SubAbility$ DBDraw | SpellDescription$ You may play an additional land this turn. Draw a card.
 SVar:Exploration:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | EffectZone$ Command | Description$ You may play an additional land this turn.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/explore.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/99.jpg
 Oracle:You may play an additional land this turn.\nDraw a card.
+SetInfo:WWK Common

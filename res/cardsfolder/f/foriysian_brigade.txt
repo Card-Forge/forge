@@ -3,7 +3,6 @@ ManaCost:3 W
 Types:Creature Human Soldier
 PT:2/4
 K:CARDNAME can block an additional creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foriysian_brigade.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/130.jpg
 Oracle:Foriysian Brigade can block an additional creature.
+SetInfo:WTH Uncommon

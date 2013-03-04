@@ -4,7 +4,6 @@ Types:Creature Human
 PT:1/1
 A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | TgtPrompt$ Choose target enchantment card in your graveyard | ValidTgts$ Enchantment | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target enchantment card from your graveyard to your hand.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tragic_poet.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/24.jpg
 Oracle:{T}, Sacrifice Tragic Poet: Return target enchantment card from your graveyard to your hand.
+SetInfo:ULG Common

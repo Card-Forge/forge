@@ -5,7 +5,6 @@ PT:6/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, you may discard a card. If you do, return CARDNAME to your hand.
 SVar:TrigChange:AB$ChangeZone | Cost$ Discard<1/Card> | Origin$ Graveyard | Destination$ Hand | Defined$ Self
 K:Shroud
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gigapede.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/264.jpg
 Oracle:Shroud (This permanent can't be the target of spells or abilities.)\nAt the beginning of your upkeep, if Gigapede is in your graveyard, you may discard a card. If you do, return Gigapede to your hand.
+SetInfo:ONS Rare

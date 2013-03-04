@@ -5,7 +5,6 @@ PT:3/3
 A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ +1 | AnyPlayer$ True | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Any player may activate this ability.
 A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ -1 | AnyPlayer$ True | IsCurse$ True | SpellDescription$ CARDNAME gets -1/-1 until end of turn. Any player may activate this ability.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flailing_ogre.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/188.jpg
 Oracle:{1}: Flailing Ogre gets +1/+1 until end of turn. Any player may activate this ability.\n{1}: Flailing Ogre gets -1/-1 until end of turn. Any player may activate this ability.
+SetInfo:MMQ Uncommon

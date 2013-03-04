@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection from artifacts | Description$ Enchanted creature has protection from artifacts. This effect doesn't remove Artifact Ward.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_ward.jpg
-SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/96.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked by artifact creatures.\nPrevent all damage that would be dealt to enchanted creature by artifact sources.\nEnchanted creature can't be the target of abilities from artifact sources.
+SetInfo:ATQ Common

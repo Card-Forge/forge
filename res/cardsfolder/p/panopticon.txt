@@ -9,7 +9,6 @@ T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ Rolle
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panopticon.jpg
-SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/panopticon.jpg
 Oracle:When you planeswalk to Panopticon, draw a card.\nAt the beginning of your draw step, draw an additional card.\nWhenever you roll {C}, draw a card.
+SetInfo:HOP Common

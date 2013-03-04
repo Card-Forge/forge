@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ SetState | Cost$ 1 U | ValidTgts$ Creature.faceUp+withMorph | TgtPrompt$ Select target creature with morph. | Mode$ TurnFace | SpellDescription$ Turn target creature with morph face down.
 K:Cycling:U
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/backslide.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/70.jpg
 Oracle:Turn target creature with morph face down.\nCycling {U} ({U}, Discard this card: Draw a card.)
+SetInfo:ONS Common

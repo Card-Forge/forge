@@ -5,7 +5,6 @@ A:AB$ Reveal | Cost$ 3 W | Random$ True | RememberRevealed$ True | ValidTgts$ Op
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planeswalkers_mirth.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/12.jpg
 Oracle:{3}{W}: Target opponent reveals a card at random from his or her hand. You gain life equal to that card's converted mana cost.
+SetInfo:PLS Rare

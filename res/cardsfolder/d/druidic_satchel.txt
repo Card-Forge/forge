@@ -7,5 +7,5 @@ SVar:DBMove:DB$ ChangeZone | Cost$ 0 | ConditionDefined$ Remembered | ConditionP
 SVar:DBGainLife:DB$ GainLife | Cost$ 0 | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand+nonCreature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup | StackDescription$  If it's a noncreature, nonland card, you gain 2 life.
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druidic_satchel.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/207.jpg
 Oracle:{2}, {T}: Reveal the top card of your library. If it's a creature card, put a 1/1 green Saproling creature token onto the battlefield. If it's a land card, put that card onto the battlefield under your control. If it's a noncreature, nonland card, you gain 2 life.
+SetInfo:M12 Rare

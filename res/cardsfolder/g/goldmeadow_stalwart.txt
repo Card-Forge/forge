@@ -3,7 +3,6 @@ ManaCost:W
 Types:Creature Kithkin Soldier
 PT:2/2
 K:AlternateAdditionalCost:Reveal<1/Kithkin>:3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldmeadow_stalwart.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/18.jpg
 Oracle:As an additional cost to cast Goldmeadow Stalwart, reveal a Kithkin card from your hand or pay {3}.
+SetInfo:LRW Uncommon

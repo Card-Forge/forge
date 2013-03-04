@@ -6,7 +6,6 @@ SVar:X:Count$xPaid
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ At the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.
 SVar:TrigCopy:AB$ Play | Cost$ 0 | Defined$ Imprinted | WithoutManaCost$ True | Optional$ True | CopyCard$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panoptic_mirror.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/136.jpg
 Oracle:Imprint - {X}, {T}: You may exile an instant or sorcery card with converted mana cost X from your hand.\nAt the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.
+SetInfo:DST Rare

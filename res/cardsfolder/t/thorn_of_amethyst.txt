@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact
 S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost 1 more to cast.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_of_amethyst.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/262.jpg
 Oracle:Noncreature spells cost {1} more to cast.
+SetInfo:LRW Rare

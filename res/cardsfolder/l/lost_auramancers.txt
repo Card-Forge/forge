@@ -7,7 +7,6 @@ SVar:DBReturn:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Chang
 K:Vanishing:3
 SVar:RemRandomDeck:True
 DeckNeeds:Type$Enchantment
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_auramancers.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/11.jpg
 Oracle:Vanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Lost Auramancers dies, if it had no time counters on it, you may search your library for an enchantment card and put it onto the battlefield. If you do, shuffle your library.
+SetInfo:FUT Uncommon

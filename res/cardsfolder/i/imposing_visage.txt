@@ -4,8 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ Enchanted creature can't be blocked except by two or more creatures.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imposing_visage.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/241.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/193.jpg
 Oracle:Enchant creature\nEnchanted creature can't be blocked except by two or more creatures.
+SetInfo:ICE Common
+SetInfo:5ED Common

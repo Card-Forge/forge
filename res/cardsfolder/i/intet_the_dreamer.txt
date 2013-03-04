@@ -8,8 +8,7 @@ SVar:TrigExile:AB$ ChangeZone | Cost$ 2 U | Defined$ TopOfLibrary | Origin$ Libr
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ You may look at this card. | PumpZone$ Exile | SubAbility$ DBPump2 | Permanent$ True
 SVar:DBPump2:DB$ Pump | Defined$ Remembered | KW$ May be played without paying its mana cost | PumpZone$ Exile | UntilHostLeavesPlay$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/intet_the_dreamer.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/204.jpg
-SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/158.jpg
 Oracle:Flying\nWhenever Intet, the Dreamer deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down. You may look at that card for as long as it remains exiled. You may play that card without paying its mana cost for as long as Intet remains on the battlefield.
+SetInfo:COM Rare
+SetInfo:PLC Rare

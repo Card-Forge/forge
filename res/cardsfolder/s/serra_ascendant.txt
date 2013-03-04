@@ -6,7 +6,6 @@ K:Lifelink
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 5 | AddToughness$ 5 | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE30 | Description$ As long as you have 30 or more life, CARDNAME gets +5/+5 and has flying.
 SVar:X:Count$YourLifeTotal
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_ascendant.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/28.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nAs long as you have 30 or more life, Serra Ascendant gets +5/+5 and has flying.
+SetInfo:M11 Rare

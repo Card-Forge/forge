@@ -8,7 +8,6 @@ SVar:TrigDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True
 A:AB$DealDamage | Cost$ tapXType<1/Creature.EnchantedBy/Enchanted Creature> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SubAbility$ DBPutCounter | CostDesc$ Tap enchanted creature: | SpellDescription$ CARDNAME deals 1 damage to target creature or player. Put a -0/-1 counter on enchanted creature. Activate this ability only if enchanted creature is untapped.
 SVar:DBPutCounter:DB$PutCounter | Defined$ Enchanted | CounterType$ M0M1 | CounterNum$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_plague.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/16.jpg
 Oracle:Enchant non-Wall creature you control\nWhen Krovikan Plague enters the battlefield, draw a card at the beginning of the next turn's upkeep.\nTap enchanted creature: Krovikan Plague deals 1 damage to target creature or player. Put a -0/-1 counter on enchanted creature. Activate this ability only if enchanted creature is untapped.
+SetInfo:ALL Uncommon

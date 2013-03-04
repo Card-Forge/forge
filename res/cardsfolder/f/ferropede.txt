@@ -6,5 +6,5 @@ K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may remove a counter from target permanent.
 SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ferropede.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/122.jpg
 Oracle:Ferropede is unblockable.\nWhenever Ferropede deals combat damage to a player, you may remove a counter from target permanent.
+SetInfo:5DN Uncommon

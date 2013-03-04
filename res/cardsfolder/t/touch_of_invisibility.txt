@@ -3,7 +3,6 @@ ManaCost:3 U
 Types:Sorcery
 A:SP$ Pump | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable | SpellDescription$ Target creature is unblockable this turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/touch_of_invisibility.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/109.jpg
 Oracle:Target creature is unblockable this turn.\nDraw a card.
+SetInfo:ODY Common

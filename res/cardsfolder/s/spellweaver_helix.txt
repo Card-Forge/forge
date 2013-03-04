@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card.sharesNameWith Imprinted | Execute$ TrigSpel
 SVar:TrigSpellweaverCopy:AB$ Play | Cost$ 0 | Defined$ Imprinted.doesNotShareNameWith+TriggeredCard+Exiled | WithoutManaCost$ True | Optional$ True | CopyCard$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellweaver_helix.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/247.jpg
 Oracle:Imprint - When Spellweaver Helix enters the battlefield, you may exile two target sorcery cards from a single graveyard.\nWhenever a player casts a card, if it has the same name as one of the cards exiled with Spellweaver Helix, you may copy the other. If you do, you may cast the copy without paying its mana cost.
+SetInfo:MRD Rare

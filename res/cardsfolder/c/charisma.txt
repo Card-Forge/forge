@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ U U U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ CharismaticControl | TriggerDescription$ Whenever enchanted creature deals damage to a creature, gain control of the other creature for as long as CARDNAME remains on the battlefield.
 SVar:CharismaticControl:AB$GainControl | Cost$ 0 | Defined$ TriggeredTarget | LoseControl$ LeavesPlay
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charisma.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/66.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to a creature, gain control of the other creature for as long as Charisma remains on the battlefield.
+SetInfo:MMQ Rare

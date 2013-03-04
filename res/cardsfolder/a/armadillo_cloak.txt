@@ -7,7 +7,8 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armadillo_cloak.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/229.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has trample.\nWhenever enchanted creature deals damage, you gain that much life.
+SetInfo:ARC Common
+SetInfo:DDE Common
+SetInfo:INV Common

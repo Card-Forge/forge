@@ -4,7 +4,6 @@ Types:Creature Shade Spirit
 PT:1/1
 K:Flying
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dungeon_shade.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/8.jpg
 Oracle:Flying\n{B}: Dungeon Shade gets +1/+1 until end of turn.
+SetInfo:STH Common

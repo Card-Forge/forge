@@ -5,12 +5,12 @@ T:Mode$ SpellCast | ValidCard$ Card.Red | TriggerZones$ Battlefield | OptionalDe
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragons_claw.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/117.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/296.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/322.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/205.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/210.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/206.jpg
 Oracle:Whenever a player casts a red spell, you may gain 1 life.
+SetInfo:DST Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:M11 Uncommon
+SetInfo:M10 Uncommon
+SetInfo:M12 Uncommon
+SetInfo:DDG Uncommon

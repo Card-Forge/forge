@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigChange | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/one_with_nature.jpg
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/125.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals combat damage to a player, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library.
+SetInfo:SCG Uncommon

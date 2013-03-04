@@ -6,7 +6,6 @@ A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | ConditionCheck
 SVar:X:Count$Kicked.4.2
 SVar:Y:Targeted$CardManaCost
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prohibit.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/67.jpg
 Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nCounter target spell if its converted mana cost is 2 or less. If Prohibit was kicked, counter that spell if its converted mana cost is 4 or less instead.
+SetInfo:INV Common

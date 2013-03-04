@@ -3,7 +3,6 @@ ManaCost:1
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.tapped+YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent enters the battlefield tapped and under your control, untap it.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ TriggeredCard
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amulet_of_vigor.jpg
-SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/121.jpg
 Oracle:Whenever a permanent enters the battlefield tapped and under your control, untap it.
+SetInfo:WWK Rare

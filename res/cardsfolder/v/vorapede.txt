@@ -5,7 +5,6 @@ PT:5/4
 K:Vigilance
 K:Trample
 K:Undying
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vorapede.jpg
-SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/131.jpg
 Oracle:Vigilance, trample\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+SetInfo:DKA Mythic

@@ -5,7 +5,6 @@ T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GeniusLife | TriggerZones$
 SVar:GeniusLife:AB$ GainLife | Cost$ X | Defined$ You | LifeAmount$ X | SubAbility$ GeniusCards
 SVar:GeniusCards:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$xPaid
-SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/my_genius_knows_no_bounds.jpg
-SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/my-genius-knows-no-bounds.jpg
 Oracle:When you set this scheme in motion, you may pay {X}. If you do, you gain X life and draw X cards.
+SetInfo:ARC Common

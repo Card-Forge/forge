@@ -4,7 +4,6 @@ Types:Creature Rhino Soldier
 PT:1/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target opponent skips his or her next combat phase.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Opponent | KW$ Skip your next combat phase. | Permanent$ True | TgtPrompt$ Select target opponent | IsCurse$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonehorn_dignitary.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/37.jpg
 Oracle:When Stonehorn Dignitary enters the battlefield, target opponent skips his or her next combat phase.
+SetInfo:M12 Common

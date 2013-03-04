@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:2/3
 K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Hexproof | Description$ As long as CARDNAME is paired with another creature, both creatures have hexproof.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elgaud_shieldmate.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/50.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Elgaud Shieldmate is paired with another creature, both creatures have hexproof. (They can't be the targets of spells or abilities your opponents control.)
+SetInfo:AVR Common

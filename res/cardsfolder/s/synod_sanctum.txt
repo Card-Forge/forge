@@ -4,7 +4,7 @@ Types:Artifact
 A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Choose target permanent you control. | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SpellDescription$ Exile target permanent you control.
 A:AB$ ChangeZone | Cost$ 2 Sac<1/CARDNAME> | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SpellDescription$ Return all cards exiled with CARDNAME to the battlefield under your control.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synod_sanctum.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/252.jpg
 Oracle:{2}, {T}: Exile target permanent you control.\n{2}, Sacrifice Synod Sanctum: Return all cards exiled with Synod Sanctum to the battlefield under your control.
+SetInfo:MRD Uncommon
+SetInfo:ARC Uncommon

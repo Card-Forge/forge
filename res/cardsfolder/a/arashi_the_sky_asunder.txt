@@ -5,7 +5,6 @@ PT:5/5
 A:AB$ DealDamage | Cost$ X G T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target flying creature. | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to target creature with flying.
 A:AB$ DamageAll | PrecostDesc$ Channel - | Cost$ X G G Discard<1/CARDNAME> | ActivationZone$ Hand | ValidCards$ Creature.withFlying | NumDmg$ X | ValidDescription$ each creature with flying. | References$ X | SpellDescription$CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87333.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/121.jpg
 Oracle:{X}{G}, {T}: Arashi, the Sky Asunder deals X damage to target creature with flying.\nChannel - {X}{G}{G}, Discard Arashi: Arashi deals X damage to each creature with flying.
+SetInfo:SOK Rare

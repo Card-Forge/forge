@@ -4,8 +4,7 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Permanent | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever a permanent is returned to a player's hand, that player discards a card.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | NumCards$ 1 | Mode$ TgtChoose | Defined$ TriggeredCardOwner
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warped_devotion.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/172.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/57.jpg
 Oracle:Whenever a permanent is returned to a player's hand, that player discards a card.
+SetInfo:8ED Rare
+SetInfo:PLS Uncommon

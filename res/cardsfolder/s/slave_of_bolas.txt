@@ -3,7 +3,7 @@ ManaCost:3 UR B
 Types:Sorcery
 A:SP$ GainControl | Cost$ 3 UR B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | AddKWs$ Haste & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slave_of_bolas.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/136.jpg
 Oracle:Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
+SetInfo:ARB Uncommon
+SetInfo:DDH Uncommon

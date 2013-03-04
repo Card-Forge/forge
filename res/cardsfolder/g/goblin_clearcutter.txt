@@ -4,7 +4,6 @@ Types:Creature Goblin
 PT:3/3
 A:AB$ Mana | Cost$ T Sac<1/Forest> | Produced$ Combo R G | Amount$ 3 | SpellDescription$ Add three mana in any combination of R and/or G to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_clearcutter.jpg
-SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/96.jpg
 Oracle:{T}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G} to your mana pool.
+SetInfo:LGN Uncommon

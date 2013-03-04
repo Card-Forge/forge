@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Creature Human Soldier
 PT:2/1
 K:Vigilance
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_valiant.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/39.jpg
 Oracle:Vigilance
+SetInfo:AVR Common

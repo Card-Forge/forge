@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ -1 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature becomes black, gets +1/-1, and gains "B: Regenerate this creature."
 SVar:DBAnimate:DB$Animate | Colors$ Black | OverwriteColors$ True | Abilities$ ABRegenerate | Defined$ Targeted
 SVar:ABRegenerate:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/defiling_tears.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/99.jpg
 Oracle:Until end of turn, target creature becomes black, gets +1/-1, and gains "{B}: Regenerate this creature."
+SetInfo:INV Uncommon

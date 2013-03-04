@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Green | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rank_and_file.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/65.jpg
 Oracle:When Rank and File enters the battlefield, green creatures get -1/-1 until end of turn.
+SetInfo:ULG Uncommon

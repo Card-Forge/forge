@@ -4,7 +4,7 @@ Types:Creature Troll
 PT:3/3
 K:Echo:1 G
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/albino_troll.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/231.jpg
 Oracle:Echo {1}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\n{1}{G}: Regenerate Albino Troll.
+SetInfo:DDD Uncommon
+SetInfo:USG Uncommon

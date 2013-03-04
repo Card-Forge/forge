@@ -2,7 +2,6 @@ Name:Elven Fortress
 ManaCost:G
 Types:Enchantment
 A:AB$ Pump | Cost$ 1 G | ValidTgts$ Creature.blocking | NumDef$ +1 | SpellDescription$ Target blocking creature gets +0/+1 until end of turn. | TgtPrompt$ Select target blocking creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_fortress.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/67.jpg|4
 Oracle:{1}{G}: Target blocking creature gets +0/+1 until end of turn.
+SetInfo:FEM Common x4

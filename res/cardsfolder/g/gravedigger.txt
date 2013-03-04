@@ -4,19 +4,19 @@ Types:Creature Zombie
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature card from your graveyard to your hand.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83114.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/138.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/140.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/139.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/17.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/136.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/31.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/146.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/98.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/97.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/134.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/99.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/78.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/86.jpg
 Oracle:When Gravedigger enters the battlefield, you may return target creature card from your graveyard to your hand.
+SetInfo:S99 Uncommon
+SetInfo:7ED Common
+SetInfo:COM Common
+SetInfo:6ED Common
+SetInfo:ODY Common
+SetInfo:9ED Common
+SetInfo:10E Common
+SetInfo:M11 Common
+SetInfo:M10 Common
+SetInfo:M12 Common
+SetInfo:HOP Common
+SetInfo:8ED Common
+SetInfo:TMP Common
+SetInfo:POR Uncommon

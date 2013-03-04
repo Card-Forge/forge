@@ -3,7 +3,6 @@ ManaCost:U G
 Types:Creature Elf Merfolk
 PT:2/2
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26757.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/101.jpg
 Oracle:Flying
+SetInfo:APC Common

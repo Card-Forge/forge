@@ -7,7 +7,6 @@ SVar:X:Count$Valid Griffin.YouCtrl
 SVar:BuffedBy:Griffin
 SVar:RemRandomDeck:True
 DeckHints:Type$Griffin
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_rider.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/20.jpg
 Oracle:As long as you control a Griffin creature, Griffin Rider gets +3/+3 and has flying.
+SetInfo:M12 Common

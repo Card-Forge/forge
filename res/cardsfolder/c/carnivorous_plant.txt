@@ -3,8 +3,7 @@ ManaCost:3 G
 Types:Creature Plant Wall
 PT:4/5
 K:Defender
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2202.jpg
-SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/38.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/119.jpg
 Oracle:Defender
+SetInfo:4ED Common
+SetInfo:DRK Common

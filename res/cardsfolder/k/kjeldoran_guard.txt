@@ -7,8 +7,7 @@ SVar:KjeldoranGuardEffect:DB$ Effect | Name$ Kjeldoran Guard Effect | Triggers$ 
 SVar:TrigSacGuard:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ EliteDefence | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard.
 SVar:EliteDefence:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_guard.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/259.jpg
 Oracle:{T}: Target creature gets +1/+1 until end of turn. When that creature leaves the battlefield this turn, sacrifice Kjeldoran Guard. Activate this ability only during combat and only if defending player controls no snow lands.
+SetInfo:ICE Common

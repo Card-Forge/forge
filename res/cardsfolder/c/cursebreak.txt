@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Instant
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target enchantment. You gain 2 life.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursebreak.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/14.jpg
 Oracle:Destroy target enchantment. You gain 2 life.
+SetInfo:AVR Common

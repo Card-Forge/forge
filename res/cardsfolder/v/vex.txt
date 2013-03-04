@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. That spell's controller may draw a card.
 SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ 1 | OptionalDecider$ TargetedController
 #believe it or not, the OptionalDecider thing works.  I wouldn't have believed it if I wouldn't have tested it myself.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vex.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/36.jpg
 Oracle:Counter target spell. That spell's controller may draw a card.
+SetInfo:DST Common

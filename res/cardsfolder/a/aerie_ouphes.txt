@@ -5,7 +5,6 @@ PT:3/3
 K:Persist
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature with flying.
 SVar:X:Count$CardPower
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerie_ouphes.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/65.jpg
 Oracle:Sacrifice Aerie Ouphes: Aerie Ouphes deals damage equal to its power to target creature with flying.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+SetInfo:EVE Common

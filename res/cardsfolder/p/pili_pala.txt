@@ -5,7 +5,6 @@ PT:1/1
 K:Flying
 A:AB$ Mana | Cost$ 2 Q | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pili_pala.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/258.jpg
 Oracle:Flying\n{2}, {Q}: Add one mana of any color to your mana pool. ({Q} is the untap symbol.)
+SetInfo:SHM Common

@@ -6,7 +6,6 @@ SVar:DBScentOfNightshadePump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select 
 SVar:DBScentOfNightshadeCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ScentOfNightshadeX:Remembered$Amount.Negative
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scent_of_nightshade.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/69.jpg
 Oracle:Reveal any number of black cards in your hand. Target creature gets -X/-X until end of turn, where X is the number of cards revealed this way.
+SetInfo:UDS Common

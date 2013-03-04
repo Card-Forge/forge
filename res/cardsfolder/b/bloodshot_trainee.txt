@@ -4,8 +4,7 @@ Types:Creature Goblin Warrior
 PT:2/3
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Card.powerGE4+Self | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature. Activate this ability only if CARDNAME's power is 4 or greater.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshot_trainee.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/110.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/85.jpg
 Oracle:{T}: Bloodshot Trainee deals 4 damage to target creature. Activate this ability only if Bloodshot Trainee's power is 4 or greater.
+SetInfo:FUT Uncommon
+SetInfo:SOM Uncommon

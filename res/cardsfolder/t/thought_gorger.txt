@@ -13,5 +13,5 @@ SVar:BringBackThoughts:AB$ Draw | Cost$ 0 | NumCards$ Disgorge | References$ Dis
 SVar:Disgorge:TriggeredCard$CardCounters.P1P1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_gorger.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/129.jpg
 Oracle:Trample\nWhen Thought Gorger enters the battlefield, put a +1/+1 counter on it for each card in your hand. If you do, discard your hand.\nWhen Thought Gorger leaves the battlefield, draw a card for each +1/+1 counter on it.
+SetInfo:ROE Rare

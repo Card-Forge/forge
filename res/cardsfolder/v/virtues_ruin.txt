@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 2 B | ValidCards$ Creature.White | SpellDescription$ Destroy all white creatures.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/virtues_ruin.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/39.jpg
 Oracle:Destroy all white creatures.
+SetInfo:POR Uncommon

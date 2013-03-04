@@ -4,7 +4,6 @@ Types:Creature Plant
 PT:3/4
 K:Defender
 K:Protection from Zombies
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_bramble.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/184.jpg
 Oracle:Defender, protection from Zombies
+SetInfo:ISD Common

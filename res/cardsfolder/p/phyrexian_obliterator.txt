@@ -7,7 +7,6 @@ T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ B
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Amount$ X | References$ X | SacValid$ Permanent | Defined$ TriggeredSourceController
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_obliterator.jpg
-SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/68.jpg
 Oracle:Trample\nWhenever a source deals damage to Phyrexian Obliterator, that source's controller sacrifices that many permanents.
+SetInfo:NPH Mythic

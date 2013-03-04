@@ -3,7 +3,6 @@ ManaCost:6
 Types:Artifact
 A:AB$ Pump | Cost$ 3 T | NumAtt$ +3 | NumDef$ +3 | KW$ HIDDEN At the beginning of the end step, sacrifice CARDNAME. | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +3/+3 until end of turn. Its controller sacrifices it at the beginning of the next end step.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_sword.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/289.jpg
 Oracle:{3}, {T}: Target creature you control gets +3/+3 until end of turn. Its controller sacrifices it at the beginning of the next end step.
+SetInfo:ICE Rare

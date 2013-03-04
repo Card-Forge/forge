@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Creature Cat
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Threshold | Description$ Threshold - CARDNAME gets +2/+2 as long as seven or more cards are in your graveyard.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springing_tiger.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/272.jpg
 Oracle:Threshold - Springing Tiger gets +2/+2 as long as seven or more cards are in your graveyard.
+SetInfo:ODY Common

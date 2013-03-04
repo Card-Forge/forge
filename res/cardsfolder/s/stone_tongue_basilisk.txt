@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ All creatures able 
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | DelayedTrigger$ DelTrig | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy damaged creature at end of combat.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_tongue_basilisk.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/276.jpg
 Oracle:Whenever Stone-Tongue Basilisk deals combat damage to a creature, destroy that creature at end of combat.\nThreshold - As long as seven or more cards are in your graveyard, all creatures able to block Stone-Tongue Basilisk do so.
+SetInfo:ODY Rare

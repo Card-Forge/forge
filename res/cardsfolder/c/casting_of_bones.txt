@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 3 | RememberDrawn$ True | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/casting_of_bones.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/2.jpg|2
 Oracle:Enchant creature\nWhen enchanted creature dies, draw three cards, then discard one of them.
+SetInfo:ALL Common x2

@@ -10,7 +10,7 @@ SVar:DBClockworkDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ 
 A:AB$ PutCounter | Cost$ T | CounterType$ P1P1 | CounterNum$ 1  | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:DBClockworkCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ClockworkX:Count$RememberedSize
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_hydra.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/253.jpg
 Oracle:Clockwork Hydra enters the battlefield with four +1/+1 counters on it.\nWhenever Clockwork Hydra attacks or blocks, remove a +1/+1 counter from it. If you do, Clockwork Hydra deals 1 damage to target creature or player.\n{T}: Put a +1/+1 counter on Clockwork Hydra.
+SetInfo:DDF Uncommon
+SetInfo:TSP Uncommon

@@ -3,7 +3,6 @@ ManaCost:3 B
 Types:Instant
 A:SP$ PutCounter | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_infection.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/68.jpg
 Oracle:Put a -1/-1 counter on target creature.\nDraw a card.
+SetInfo:SOM Common

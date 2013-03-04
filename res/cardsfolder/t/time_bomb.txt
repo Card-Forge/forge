@@ -5,8 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ TIME | CounterNum$ 1
 A:AB$ DamageAll | Cost$ 1 T Sac<1/CARDNAME> | ValidCards$ Creature | ValidPlayers$ Each | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of time counters on it to each creature and each player.
 SVar:X:Count$CardCounters.TIME
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_bomb.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/404.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/317.jpg
 Oracle:At the beginning of your upkeep, put a time counter on Time Bomb.\n{1}, {T}, Sacrifice Time Bomb: Time Bomb deals damage equal to the number of time counters on it to each creature and each player.
+SetInfo:ICE Rare
+SetInfo:5ED Rare

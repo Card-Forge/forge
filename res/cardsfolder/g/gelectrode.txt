@@ -5,7 +5,7 @@ PT:0/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | OptionalDecider$ You | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gelectrode.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/113.jpg
 Oracle:{T}: Gelectrode deals 1 damage to target creature or player.\nWhenever you cast an instant or sorcery spell, you may untap Gelectrode.
+SetInfo:GPT Uncommon
+SetInfo:DDJ Uncommon

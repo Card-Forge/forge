@@ -3,7 +3,6 @@ ManaCost:2 W W B B
 Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ 2 W W B B | Origin$ Hand | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile all cards from target player's hand and graveyard.
 SVar:DBChangeZoneAll:DB$ChangeZoneAll | Defined$ Targeted | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/identity_crisis.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/81.jpg
 Oracle:Exile all cards from target player's hand and graveyard.
+SetInfo:ARB Rare

@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Tap | Cost$ U | Defined$ Enchanted | SpellDescription$ Tap enchanted creature.
 A:AB$ Untap | Cost$ U | Defined$ Enchanted | SpellDescription$ Untap enchanted creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/freed_from_the_real.jpg
-SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/38.jpg
 Oracle:Enchant creature\n{U}: Tap enchanted creature.\n{U}: Untap enchanted creature.
+SetInfo:SOK Common

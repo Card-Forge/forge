@@ -5,5 +5,5 @@ K:Split second
 A:SP$ AnimateAll | Cost$ 1 B B | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | Power$ 0 | Toughness$ 2 | RemoveAllAbilities$ True | SpellDescription$ Creatures target player controls become 0/2 and lose all abilities until end of turn.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sudden_spoiling.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/135.jpg
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nCreatures target player controls become 0/2 and lose all abilities until end of turn.
+SetInfo:TSP Rare

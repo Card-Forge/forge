@@ -3,7 +3,6 @@ ManaCost:2 W B
 Types:Sorcery
 A:SP$ Discard | Cost$ 2 W B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBGainLife | SpellDescription$ Target opponent discards two cards and you gain two life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | Defined$ You
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purge_the_profane.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/190.jpg
 Oracle:Target opponent discards two cards and you gain 2 life.
+SetInfo:GTC Common

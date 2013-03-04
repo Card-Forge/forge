@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Enchantment
 A:AB$ Draw | Cost$ 1 Sac<1/Land> | NumCards$ 1 | AnyPlayer$ True | SpellDescription$ Draw a card. Any player may activate this ability.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/excavation.jpg
-SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/33.jpg
 Oracle:{1}, Sacrifice a land: Draw a card. Any player may activate this ability.
+SetInfo:PCY Uncommon

@@ -4,7 +4,6 @@ Types:Creature Human Rebel Mercenary
 PT:2/1
 S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.Black | Description$ CARDNAME can't be the target of black spells or abilities from black sources.
 A:AB$ ChangeZone | Cost$ 2 W | ValidTgts$ Mercenary | IsCurse$ True | TgtPrompt$ Select target Mercenary | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target Mercenary on the bottom of its owner's library.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercenary_informer.jpg
-SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/15.jpg
 Oracle:Mercenary Informer can't be the target of black spells or abilities from black sources.\n{2}{W}: Put target nontoken Mercenary on the bottom of its owner's library.
+SetInfo:PCY Rare

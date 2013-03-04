@@ -6,7 +6,6 @@ K:First Strike
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | Condition$ Metalcraft | Description$ Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
 SVar:BuffedBy:Artifact
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jor_kadeen_the_prevailer.jpg
-SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/128.jpg
 Oracle:First strike\nMetalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
+SetInfo:NPH Rare

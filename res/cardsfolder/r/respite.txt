@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Fog | Cost$ 1 G | SubAbility$ DBGainLife | SpellDescription$ Prevent all combat damage that would be dealt this turn. You gain 1 life for each attacking creature.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$Valid Creature.attacking
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/respite.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/143.jpg
 Oracle:Prevent all combat damage that would be dealt this turn. You gain 1 life for each attacking creature.
+SetInfo:TMP Common

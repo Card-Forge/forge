@@ -4,7 +4,6 @@ Types:Land
 Text:As CARDNAME enters the battlefield, you may reveal a Goblin card from your hand. If you don't, CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aunties_hovel.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/267.jpg
 Oracle:As Auntie's Hovel enters the battlefield, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters the battlefield tapped.\n{T}: Add {B} or {R} to your mana pool.
+SetInfo:LRW Rare

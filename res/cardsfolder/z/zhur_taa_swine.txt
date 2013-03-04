@@ -4,5 +4,5 @@ Types:Creature Boar
 PT:5/4
 A:AB$ Pump | Cost$ 1 R G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +5 | NumDef$ +4 | SpellDescription$ Target attacking creature gets +5/+4 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhur-taa_swine.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/210.jpg
 Oracle:Bloodrush - {1}{R}{G}, Discard Zhur-Taa Swine: Target attacking creature gets +5/+4 until end of turn.
+SetInfo:GTC Common

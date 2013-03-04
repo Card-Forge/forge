@@ -5,7 +5,6 @@ PT:2/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigProtect | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
 SVar:TrigProtect:AB$ Protection | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | AILogic$ MostProminentHumanCreatures
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midvast_protector.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/28.jpg
 Oracle:When Midvast Protector enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
+SetInfo:AVR Common

@@ -6,7 +6,6 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/matca_rioters.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/84.jpg
 Oracle:Domain - Matca Rioters's power and toughness are each equal to the number of basic land types among lands you control.
+SetInfo:CFX Common

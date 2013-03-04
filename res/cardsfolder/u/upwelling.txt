@@ -3,8 +3,7 @@ ManaCost:3 G
 Types:Enchantment
 S:Mode$ Continuous | GlobalRule$ Mana pools don't empty as steps and phases end. | Description$ Mana pools don't empty as steps and phases end.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/upwelling.jpg
-SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/131.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/306.jpg
 Oracle:Mana pools don't empty as steps and phases end.
+SetInfo:SCG Rare
+SetInfo:10E Rare

@@ -5,7 +5,6 @@ PT:2/2
 K:Infect
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_corrupter.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/94.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhen Viridian Corrupter enters the battlefield, destroy target artifact.
+SetInfo:MBS Uncommon

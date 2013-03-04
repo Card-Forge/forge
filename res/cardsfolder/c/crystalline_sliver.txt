@@ -4,7 +4,7 @@ Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddKeyword$ Shroud | Description$ All Slivers have shroud.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystalline_sliver.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/139.jpg
 Oracle:All Slivers have shroud. (They can't be the targets of spells or abilities.)
+SetInfo:H09 Uncommon
+SetInfo:STH Uncommon

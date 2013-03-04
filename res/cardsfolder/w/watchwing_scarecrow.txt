@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | CheckSVar$ Y 
 SVar:X:Count$Valid Creature.Blue+YouCtrl
 SVar:Y:Count$Valid Creature.White+YouCtrl
 SVar:BuffedBy:Creature.White,Creature.Blue
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/watchwing_scarecrow.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/268.jpg
 Oracle:Watchwing Scarecrow has vigilance as long as you control a white creature.\nWatchwing Scarecrow has flying as long as you control a blue creature.
+SetInfo:SHM Common

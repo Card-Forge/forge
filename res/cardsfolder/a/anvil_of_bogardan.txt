@@ -6,7 +6,6 @@ T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | 
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredPlayer | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anvil_of_bogardan.jpg
-SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/141.jpg
 Oracle:Players have no maximum hand size.\nAt the beginning of each player's draw step, that player draws an additional card, then discards a card.
+SetInfo:VIS Rare

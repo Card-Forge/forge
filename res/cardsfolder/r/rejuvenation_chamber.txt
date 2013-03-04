@@ -3,7 +3,6 @@ ManaCost:3
 Types:Artifact
 K:Fading:2
 A:AB$ GainLife | Cost$ T | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rejuvenation_chamber.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/137.jpg
 Oracle:Fading 2 (This artifact enters the battlefield with two fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\n{T}: You gain 2 life.
+SetInfo:NMS Uncommon

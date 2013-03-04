@@ -6,5 +6,5 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage & DamageWere
 SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:DamageWerewolf:AB$DealDamage | Cost$ T | ValidTgts$ Creature.Werewolf | TgtPrompt$ Select target Werewolf creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target Werewolf creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfhunters_quiver.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/154.jpg
 Oracle:Equipped creature has "{T}: This creature deals 1 damage to target creature or player" and "{T}: This creature deals 3 damage to target Werewolf creature."\nEquip {5}
+SetInfo:DKA Uncommon

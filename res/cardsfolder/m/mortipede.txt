@@ -4,7 +4,6 @@ Types:Creature Insect
 PT:4/1
 A:AB$ Pump | Cost$ 2 G | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block CARDNAME this turn do so.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortipede.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/96.jpg
 Oracle:{2}{G}: All creatures able to block Mortipede this turn do so.
+SetInfo:RAV Common

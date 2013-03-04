@@ -6,7 +6,6 @@ A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ 1 | Amount$ Y | References
 SVar:Y:Number$1/Plus.ChosenX
 SVar:X:XChoice
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_toy.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/303.jpg
 Oracle:{1}, {T}: Put a charge counter on Kyren Toy.\n{T}, Remove X charge counters from Kyren Toy: Add {X}{1} to your mana pool.
+SetInfo:MMQ Rare

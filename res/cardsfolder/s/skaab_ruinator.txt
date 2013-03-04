@@ -6,7 +6,6 @@ PT:5/6
 K:Flying
 SVar:FullCost:1 U U ExileFromGrave<3/Creature>
 SVar:AltCost:Cost$ 1 U U ExileFromGrave<3/Creature.Other> | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skaab_ruinator.jpg
-SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/77.jpg
 Oracle:As an additional cost to cast Skaab Ruinator, exile three creature cards from your graveyard.\nFlying\nYou may cast Skaab Ruinator from your graveyard.
+SetInfo:ISD Mythic

@@ -5,7 +5,6 @@ PT:4/4
 K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals his or her hand. You choose a card from it. That player exiles that card.
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TriggeredTarget | Chooser$ You | ChangeType$ Card | ChangeNum$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastlord_of_fugue.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/162.jpg
 Oracle:Ghastlord of Fugue is unblockable.\nWhenever Ghastlord of Fugue deals combat damage to a player, that player reveals his or her hand. You choose a card from it. That player exiles that card.
+SetInfo:SHM Rare

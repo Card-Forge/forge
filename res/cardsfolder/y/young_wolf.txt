@@ -3,7 +3,6 @@ ManaCost:G
 Types:Creature Wolf
 PT:1/1
 K:Undying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/young_wolf.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/134.jpg
 Oracle:Undying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+SetInfo:DKA Common

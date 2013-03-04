@@ -9,4 +9,4 @@ SVar:DmgMartyrsofKorlisSelfCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True |
 SVar:MartyrsofKorlisX:ReplaceCount$DamageAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyrs_of_korlis.jpg
 Oracle:As long as Martyrs of Korlis is untapped, all damage that would be dealt to you by artifacts is dealt to Martyrs of Korlis instead.
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/99.jpg
+SetInfo:ATQ Uncommon

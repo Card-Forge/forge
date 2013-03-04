@@ -3,5 +3,5 @@ ManaCost:4 W
 Types:Sorcery
 A:SP$ Token | Cost$ 4 W | TokenAmount$ 2 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ You | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ Vigilance | TokenImage$ w 2 2 knight rtr | SpellDescription$ Put two 2/2 white Knight creature tokens with vigilance onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_watch.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/19.jpg
 Oracle:Put two 2/2 white Knight creature tokens with vigilance onto the battlefield.
+SetInfo:GTC Common

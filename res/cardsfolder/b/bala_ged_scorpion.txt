@@ -4,7 +4,6 @@ Types:Creature Scorpion
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target creature with power 1 or less.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.powerLE1 | TgtPrompt$ Select target creature with power 1 or less.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bala_ged_scorpion.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/95.jpg
 Oracle:When Bala Ged Scorpion enters the battlefield, you may destroy target creature with power 1 or less.
+SetInfo:ROE Common

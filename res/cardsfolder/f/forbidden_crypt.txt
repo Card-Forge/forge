@@ -10,6 +10,6 @@ SVar:CryptExile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destinat
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_crypt.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/132.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/22.jpg
 Oracle:If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game.\nIf a card would be put into your graveyard from anywhere, exile that card instead.
+SetInfo:MIR Rare
+SetInfo:6ED Rare

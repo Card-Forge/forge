@@ -3,11 +3,10 @@ ManaCost:2 G
 Types:Creature Wall
 PT:0/7
 K:Defender
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2250.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/133.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/133.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/132.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/167.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/133.jpg
 Oracle:Defender (This creature can't attack.)
+SetInfo:LEB Uncommon
+SetInfo:4ED Uncommon
+SetInfo:LEA Uncommon
+SetInfo:3ED Uncommon
+SetInfo:2ED Uncommon

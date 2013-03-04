@@ -5,7 +5,6 @@ PT:1/4
 K:Flying
 A:AB$ Mill | Cost$ 2 Return<1/Land> | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top two cards of his or her library into his or her graveyard.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_mindsweeper.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/52.jpg
 Oracle:Flying\n{2}, Return a land you control to its owner's hand: Target player puts the top two cards of his or her library into his or her graveyard.
+SetInfo:BOK Uncommon

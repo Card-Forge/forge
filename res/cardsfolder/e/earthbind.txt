@@ -7,10 +7,9 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Valid Card.EnchantedBy | NumDmg$ 2 | SubAbility$ DBLoseFlying
 SVar:DBLoseFlying:DB$ Animate | Defined$ Self | staticAbilities$ LoseFlyingStatic | Permanent$ True
 SVar:LoseFlyingStatic:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbind.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/146.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/147.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/146.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/146.jpg
 Oracle:Enchant creature\nWhen Earthbind enters the battlefield, if enchanted creature has flying, Earthbind deals 2 damage to that creature and Earthbind gains "Enchanted creature loses flying."
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:3ED Common
+SetInfo:2ED Common

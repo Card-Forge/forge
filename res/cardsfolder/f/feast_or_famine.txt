@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Token | Cost$ 3 B | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2 | PrecostDesc$ Choose one - | SpellDescription$ Put a 2/2 black Zombie creature token onto the battlefield;
 A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonblack, nonartifact creature | NoRegen$ True | SpellDescription$ or destroy target nonartifact, nonblack creature and it can't be regenerated.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_or_famine.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/8.jpg|2
 Oracle:Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.
+SetInfo:ALL Common x2
+SetInfo:DDJ Common

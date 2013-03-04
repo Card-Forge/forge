@@ -6,8 +6,7 @@ A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 3 | Description$ Enchanted creature gets +1/+3.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_favor.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/11.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/14.jpg
 Oracle:Enchant creature\nWhen Divine Favor enters the battlefield, you gain 3 life.\nEnchanted creature gets +1/+3.
+SetInfo:M13 Common
+SetInfo:M12 Common

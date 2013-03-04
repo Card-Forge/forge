@@ -3,7 +3,6 @@ ManaCost:W
 Types:Sorcery
 A:SP$ Pump | Cost$ W | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | KW$ Skip all combat phases of your next turn. | Permanent$ True | SpellDescription$ Target opponent skips all combat phases of his or her next turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_city_ruse.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/3.jpg
 Oracle:Target opponent skips all combat phases of his or her next turn.
+SetInfo:PTK Uncommon

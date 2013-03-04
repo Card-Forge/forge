@@ -2,10 +2,9 @@ Name:Giant Cockroach
 ManaCost:3 B
 Types:Creature Insect
 PT:4/2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83102.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/135.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/54.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/133.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/138.jpg
 Oracle:
+SetInfo:8ED Common
+SetInfo:ULG Common
+SetInfo:7ED Common
+SetInfo:9ED Common

@@ -5,7 +5,6 @@ PT:4/1
 K:Haste
 K:Provoke
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crested_craghorn.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/91.jpg
 Oracle:Haste\nProvoke (When this attacks, you may have target creature defending player controls untap and block it if able.)
+SetInfo:LGN Common

@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:2/2
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks, it gets +2/+2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
-SVar:Rarity:Common
 SVar:Picture:http://magiccards.info/scans/en/st/25.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/25.jpg
 Oracle:Whenever Royal Trooper blocks, it gets +2/+2 until end of turn.
+SetInfo:S99 Uncommon

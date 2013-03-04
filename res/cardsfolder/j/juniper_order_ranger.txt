@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
-SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/130.jpg
 Oracle:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
+SetInfo:DDG Uncommon
+SetInfo:CSP Uncommon

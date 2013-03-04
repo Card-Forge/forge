@@ -4,7 +4,6 @@ Types:Instant Arcane
 A:SP$Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Shroud & HIDDEN Unblockable | SpellDescription$ Target creature gains shroud until end of turn and is unblockable this turn.
 K:Splice onto Arcane Return<1/Creature.Blue/blue creature>
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veil_of_secrecy.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/59.jpg
 Oracle:Target creature gains shroud until end of turn and is unblockable this turn.\nSplice onto Arcane-Return a blue creature you control to its owner's hand. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)
+SetInfo:BOK Common

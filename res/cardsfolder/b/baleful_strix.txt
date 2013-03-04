@@ -6,7 +6,6 @@ K:Flying
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baleful_strix.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/82.jpg
 Oracle:Flying, deathtouch\nWhen Baleful Strix enters the battlefield, draw a card.
+SetInfo:PC2 Uncommon

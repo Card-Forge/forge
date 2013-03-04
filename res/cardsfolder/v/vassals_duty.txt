@@ -13,7 +13,6 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$
 SVar:X:ReplaceCount$DamageAmount/Minus.1
 SVar:Y:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vassals_duty.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/48.jpg
 Oracle:{1}: The next 1 damage that would be dealt to target legendary creature you control this turn is dealt to you instead.
+SetInfo:CHK Rare

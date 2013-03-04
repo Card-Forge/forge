@@ -6,7 +6,6 @@ K:CARDNAME can't be blocked except by two or more creatures.
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of red permanents you control.
 SVar:X:Count$Valid Permanent.Red+YouCtrl
 SVar:BuffedBy:Permanent.Red
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horde_of_boggarts.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/94.jpg
 Oracle:Horde of Boggarts's power and toughness are each equal to the number of red permanents you control.\nHorde of Boggarts can't be blocked except by two or more creatures.
+SetInfo:SHM Uncommon

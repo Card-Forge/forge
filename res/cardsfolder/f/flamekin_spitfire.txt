@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Creature Elemental Shaman
 PT:1/1
 A:AB$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamekin_spitfire.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/168.jpg
 Oracle:{3}{R}: Flamekin Spitfire deals 1 damage to target creature or player.
+SetInfo:LRW Uncommon

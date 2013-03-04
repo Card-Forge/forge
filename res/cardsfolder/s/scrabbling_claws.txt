@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$ ChangeZone | Cost$ T | ValidTgts$ Player | DefinedPlayer$ Targeted | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Mandatory$ True | IsCurse$ True | SpellDescription$ Target player exiles a card from his or her graveyard.
 A:AB$ ChangeZone | Cost$ 1 Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Exile target card from a graveyard. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrabbling_claws.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/237.jpg
 Oracle:{T}: Target player exiles a card from his or her graveyard.\n{1}, Sacrifice Scrabbling Claws: Exile target card from a graveyard. Draw a card.
+SetInfo:MRD Uncommon

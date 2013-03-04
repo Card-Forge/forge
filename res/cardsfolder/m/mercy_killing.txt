@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Destroy | Cost$ 2 GW | ValidTgts$ Creature | TgtPrompt$ Select target creature | Sacrifice$ True | SubAbility$ DBToken | SpellDescription$ Target creature's controller sacrifices it, then puts X 1/1 green and white Elf Warrior creature tokens onto the battlefield, where X is that creature's power.
 SVar:DBToken:DB$ Token | TokenAmount$ X | References$ X | TokenPower$ 1 | TokenToughness$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenColors$ Green,White | TokenOwner$ TargetedController
 SVar:X:Targeted$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercy_killing.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/231.jpg
 Oracle:Target creature's controller sacrifices it, then puts X 1/1 green and white Elf Warrior creature tokens onto the battlefield, where X is that creature's power.
+SetInfo:SHM Uncommon

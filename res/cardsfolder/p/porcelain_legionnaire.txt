@@ -3,7 +3,6 @@ ManaCost:2 PW
 Types:Artifact Creature Soldier
 PT:3/1
 K:First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/porcelain_legionnaire.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/19.jpg
 Oracle:({W/P} can be paid with either {W} or 2 life.)\nFirst strike
+SetInfo:NPH Common

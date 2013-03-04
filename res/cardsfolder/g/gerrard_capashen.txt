@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainLife | Trigg
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You | References$ X
 A:AB$ Tap | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Card.Self+attacking | SpellDescription$ Tap target creature. Activate this ability only if CARDNAME is attacking.
 SVar:X:TargetedPlayer$CardsInHand
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrard_capashen.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/11.jpg
 Oracle:At the beginning of your upkeep, you gain 1 life for each card in target opponent's hand.\n{3}{W}: Tap target creature. Activate this ability only if Gerrard Capashen is attacking.
+SetInfo:APC Rare
+SetInfo:DDE Rare

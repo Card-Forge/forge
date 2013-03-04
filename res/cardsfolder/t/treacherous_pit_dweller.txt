@@ -6,7 +6,6 @@ K:Undying
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield from a graveyard, target opponent gains control of it.
 SVar:TrigGainControl:AB$GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_pit_dweller.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/121.jpg
 Oracle:When Treacherous Pit-Dweller enters the battlefield from a graveyard, target opponent gains control of it.\nUndying (When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
+SetInfo:AVR Rare

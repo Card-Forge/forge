@@ -4,7 +4,6 @@ Types:Creature Horror
 PT:2/3
 K:Deathtouch
 K:CARDNAME can't be blocked except by two or more creatures.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kederekt_creeper.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/176.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nKederekt Creeper can't be blocked except by two or more creatures.
+SetInfo:ALA Common

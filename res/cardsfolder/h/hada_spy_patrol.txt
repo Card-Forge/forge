@@ -8,7 +8,6 @@ S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddKe
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ Shroud & Unblockable | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 3/3 CARDNAME is Unblockable and has Shroud
 SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hada_spy_patrol.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/71.jpg
 Oracle:Level up {2}{U} ({2}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n2/2\nHada Spy Patrol is unblockable.\nLEVEL 3+\n3/3\nShroud\nHada Spy Patrol is unblockable.
+SetInfo:ROE Uncommon

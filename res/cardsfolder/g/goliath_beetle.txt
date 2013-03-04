@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Creature Insect
 PT:3/1
 K:Trample
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15223.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/107.jpg
 Oracle:Trample
+SetInfo:UDS Common

@@ -7,7 +7,6 @@ T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execut
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
 SVar:TrigBlocks:AB$ Debuff | Cost$ 0 | Defined$ TriggeredAttacker | Keywords$ First Strike
 SVar:TrigBlocked:AB$ Debuff | Cost$ 0 | Defined$ TriggeredBlocker | Keywords$ First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talruum_champion.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/97.jpg
 Oracle:First strike\nWhenever Talruum Champion blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
+SetInfo:VIS Common

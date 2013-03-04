@@ -4,7 +4,6 @@ Types:Creature Sliver
 PT:3/3
 S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Vigilance | Description$ All Sliver creatures have vigilance.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synchronous_sliver.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/48.jpg
 Oracle:All Sliver creatures have vigilance.
+SetInfo:PLC Common

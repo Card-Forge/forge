@@ -3,7 +3,6 @@ ManaCost:2 U U
 Types:Creature Thalakos
 PT:3/3
 A:AB$ Pump | Cost$ Discard<1/Card> | KW$ Shadow | SpellDescription$ CARDNAME gains shadow until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_drifters.jpg
-SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/47.jpg
 Oracle:Discard a card: Thalakos Drifters gains shadow until end of turn. (This creature can block or be blocked by only creatures with shadow.)
+SetInfo:EXO Rare

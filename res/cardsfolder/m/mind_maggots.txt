@@ -13,7 +13,6 @@ SVar:ChosenMaggots:Count$ChosenNumber
 SVar:DiscardedMind:Remembered$Amount
 SVar:MindMaggotsCount:SVar$DiscardedMind/Times.2
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_maggots.jpg
-SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/66.jpg
 Oracle:When Mind Maggots enters the battlefield, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on Mind Maggots.
+SetInfo:EXO Uncommon

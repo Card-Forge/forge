@@ -8,7 +8,6 @@ SVar:Y:Remembered$Amount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/credit_voucher.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/289.jpg
 Oracle:{2}, {T}, Sacrifice Credit Voucher: Shuffle any number of cards from your hand into your library, then draw that many cards.
+SetInfo:MMQ Uncommon

@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying & First Strike & Vigilance | Description$ Enchanted creature has flying, first strike, and vigilance.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashas_favor.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/2.jpg
 Oracle:Enchant creature\nEnchanted creature has flying, first strike, and vigilance.
+SetInfo:CFX Common

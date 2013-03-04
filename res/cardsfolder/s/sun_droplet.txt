@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | IsPresent$ Card.Self+count
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ X | References$ X | Defined$ Self
 SVar:TrigGainLife:AB$ GainLife | Cost$ SubCounter<1/CHARGE> | LifeAmount$ 1 | Defined$ You
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sun_droplet.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/249.jpg
 Oracle:Whenever you're dealt damage, put that many charge counters on Sun Droplet.\nAt the beginning of each upkeep, you may remove a charge counter from Sun Droplet. If you do, you gain 1 life.
+SetInfo:MRD Uncommon
+SetInfo:ARC Uncommon

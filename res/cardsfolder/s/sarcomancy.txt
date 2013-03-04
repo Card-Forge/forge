@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | I
 SVar:TrigNoZombies:DB$DealDamage | NumDmg$ 1 | Defined$ You
 SVar:BuffedBy:Zombie
 SVar:SacMe:5
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sarcomancy.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/48.jpg
 Oracle:When Sarcomancy enters the battlefield, put a 2/2 black Zombie creature token onto the battlefield.\nAt the beginning of your upkeep, if there are no Zombies on the battlefield, Sarcomancy deals 1 damage to you.
+SetInfo:TMP Rare

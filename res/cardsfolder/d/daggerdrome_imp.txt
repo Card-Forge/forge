@@ -4,7 +4,6 @@ Types:Creature Imp
 PT:1/1
 K:Flying
 K:Lifelink
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daggerdrome_imp.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/60.jpg
 Oracle:Flying\nLifelink (Damage dealt by this creature also causes you to gain that much life.)
+SetInfo:RTR Common

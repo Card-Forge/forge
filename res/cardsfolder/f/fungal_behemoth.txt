@@ -10,7 +10,6 @@ SVar:TrigPut:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select 
 SVar:X:Count$xPaid
 SVar:Y:Count$TotalCounters_P1P1_Creature.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungal_behemoth.jpg
-SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/128.jpg
 Oracle:Fungal Behemoth's power and toughness are each equal to the number of +1/+1 counters on creatures you control.\nSuspend X-{X}{G}{G}. X can't be 0. (Rather than cast this card from your hand, you may pay {X}{G}{G} and exile it with X time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhenever a time counter is removed from Fungal Behemoth while it's exiled, you may put a +1/+1 counter on target creature.
+SetInfo:PLC Rare

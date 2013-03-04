@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroyCreature | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature and target land.
 SVar:TrigDestroyCreature:AB$Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Mandatory$ True | SubAbility$ DBDestroyLand
 SVar:DBDestroyLand:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | Mandatory$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_grenadiers.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/104.jpg
 Oracle:Whenever Goblin Grenadiers attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature and target land.
+SetInfo:WTH Uncommon

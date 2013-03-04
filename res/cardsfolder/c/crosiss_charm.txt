@@ -5,7 +5,6 @@ A:SP$ ChangeZone | Cost$ U B R | ValidTgts$ Permanent | TgtPrompt$ Select target
 A:SP$ Destroy | Cost$ U B R | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ or destroy target nonblack creature, and it can't be regenerated;
 A:SP$ Destroy | Cost$ U B R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ or destroy target artifact.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crosiss_charm.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/99.jpg
 Oracle:Choose one - Return target permanent to its owner's hand; or destroy target nonblack creature, and it can't be regenerated; or destroy target artifact.
+SetInfo:PLS Uncommon

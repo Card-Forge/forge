@@ -6,8 +6,7 @@ K:Vigilance
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLife | TriggerDescription$ When CARDNAME enters the battlefield, each player's life total becomes the highest life total among all players.
 SVar:TrigLife:AB$SetLife | Cost$ 0 | Defined$ Each | LifeAmount$ X | References$ X
 SVar:X:Count$HighestLifeTotal
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbiter_of_knollridge.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/6.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/2.jpg
 Oracle:Vigilance\nWhen Arbiter of Knollridge enters the battlefield, each player's life total becomes the highest life total among all players.
+SetInfo:COM Rare
+SetInfo:LRW Rare

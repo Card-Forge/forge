@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | ValidT
 SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return exiled card to the battlefield with a +1/+1 counter on it.
 SVar:TrigReturn:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBAddCounter
 SVar:DBAddCounter:DB$ PutCounter | Cost$ 0 | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/otherworldly_journey.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/37.jpg
 Oracle:Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
+SetInfo:DDC Uncommon
+SetInfo:CHK Uncommon

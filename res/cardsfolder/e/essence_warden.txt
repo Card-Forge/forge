@@ -4,7 +4,7 @@ Types:Creature Elf Shaman
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122428.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/145.jpg
 Oracle:Whenever another creature enters the battlefield, you gain 1 life.
+SetInfo:DDH Common
+SetInfo:PLC Common

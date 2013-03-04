@@ -5,11 +5,10 @@ K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2.
 A:AB$ Pump | Cost$ W | Defined$ Enchanted | NumDef$ +1 | SpellDescription$ Enchanted creature gets +0/+1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_armor.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/207.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/209.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/207.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/279.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/208.jpg
 Oracle:Enchant creature\nEnchanted creature gets +0/+2.\n{W}: Enchanted creature gets +0/+1 until end of turn.
+SetInfo:LEB Common
+SetInfo:4ED Common
+SetInfo:LEA Common
+SetInfo:3ED Common
+SetInfo:2ED Common

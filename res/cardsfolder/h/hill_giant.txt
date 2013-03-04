@@ -2,17 +2,16 @@ Name:Hill Giant
 ManaCost:3 R
 Types:Creature Giant
 PT:3/3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hill_giant.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/194.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/158.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/159.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/196.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/219.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/138.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/197.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/212.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/157.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/239.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/158.jpg
 Oracle:
+SetInfo:8ED Common
+SetInfo:2ED Common
+SetInfo:7ED Common
+SetInfo:9ED Common
+SetInfo:10E Common
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:POR Common
+SetInfo:3ED Common

@@ -3,15 +3,15 @@ ManaCost:2 U
 Types:Creature Drake
 PT:2/2
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83334.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/114.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/105.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/114.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/78.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/112.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/81.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/80.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/61.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/106.jpg
 Oracle:Flying
+SetInfo:8ED Common
+SetInfo:S99 Common
+SetInfo:7ED Common
+SetInfo:6ED Common
+SetInfo:S00 Common
+SetInfo:9ED Common
+SetInfo:M10 Common
+SetInfo:M13 Common
+SetInfo:TMP Common
+SetInfo:POR Common

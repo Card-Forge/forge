@@ -8,10 +8,9 @@ K:Morph:B B B B
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature other than CARDNAME. If you can't, Lord of the Pit deals 7 damage to you.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature.Other | SubAbility$ DBDamage | RememberSacrificed$ True
 SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ 7 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup | References$ X
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True 
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_pit.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/113.jpg
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Liege of the Pit. If you can't, Liege of the Pit deals 7 damage to you.\nMorph {B}{B}{B}{B} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:TSP Rare

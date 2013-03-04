@@ -9,7 +9,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:DestroyRemembered:DB$DestroyAll | Cost$ 0 | ValidCards$ Card.IsRemembered | NoRegen$ True | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saproling_burst.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/113.jpg
 Oracle:Fading 7 (This enchantment enters the battlefield with seven fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Saproling Burst: Put a green Saproling creature token onto the battlefield. It has "This creature's power and toughness are each equal to the number of fade counters on Saproling Burst."\nWhen Saproling Burst leaves the battlefield, destroy all tokens put onto the battlefield with Saproling Burst. They can't be regenerated.
+SetInfo:NMS Rare

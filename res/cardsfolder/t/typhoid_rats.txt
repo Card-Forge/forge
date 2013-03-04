@@ -3,7 +3,6 @@ ManaCost:B
 Types:Creature Rat
 PT:1/1
 K:Deathtouch
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/typhoid_rats.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/120.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
+SetInfo:ISD Common

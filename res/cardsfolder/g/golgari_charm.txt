@@ -5,7 +5,6 @@ A:SP$ Charm | Cost$ B G | Choices$ PumpAll,DestroyEnch,RegenAll | CharmNum$ 1 | 
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn.
 SVar:DestroyEnch:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:RegenAll:DB$ RegenerateAll | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_charm.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/164.jpg
 Oracle:Choose one - All creatures get -1/-1 until end of turn; or destroy target enchantment; or regenerate each creature you control.
+SetInfo:RTR Uncommon

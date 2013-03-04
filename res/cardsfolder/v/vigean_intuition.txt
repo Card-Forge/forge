@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ ChooseType | Cost$ 3 G U | Defined$ You | Type$ Card | SubAbility$ DBDig | SpellDescription$ Choose a card type, then reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
 SVar:DBDig:DB$Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card.ChosenType | DestinationZone2$ Graveyard
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigean_intuition.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/136.jpg
 Oracle:Choose a card type, then reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
+SetInfo:DIS Uncommon

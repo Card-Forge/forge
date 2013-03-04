@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Defender & Flying | Description$ Enchanted creature has defender and flying.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zephyr_net.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/98.jpg
 Oracle:Enchant creature\nEnchanted creature has defender and flying.
+SetInfo:LRW Common

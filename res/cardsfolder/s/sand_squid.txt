@@ -10,7 +10,6 @@ S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddHiddenKeyword$ CARDNAM
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
 SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sand_squid.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/96.jpg
 Oracle:Islandwalk\nYou may choose not to untap Sand Squid during your untap step.\n{T}: Tap target creature. That creature doesn't untap during its controller's untap step for as long as Sand Squid remains tapped.
+SetInfo:MMQ Rare

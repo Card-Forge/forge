@@ -2,10 +2,9 @@ Name:Reclaim
 ManaCost:G
 Types:Instant
 A:SP$ ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Put target card from your graveyard on top of your library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclaim.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/120.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/191.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/264.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/263.jpg
 Oracle:Put target card from your graveyard on top of your library.
+SetInfo:7ED Common
+SetInfo:M12 Common
+SetInfo:EXO Common
+SetInfo:9ED Common

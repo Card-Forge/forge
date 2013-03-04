@@ -6,7 +6,6 @@ SVar:Battlecry:DB$Effect | Name$ Battle Cry Effect | Triggers$ TrigBlocking | SV
 SVar:TrigBlocking:Mode$ AttackerBlocked | Execute$ Pump | TriggerDescription$ Whenever a creature blocks this turn, it gets +0/+1 until end of turn.
 SVar:Pump:AB$Pump | Cost$ 0 | Defined$ TriggeredBlocker | NumDef$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_cry.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/229.jpg
 Oracle:Untap all white creatures you control.\nWhenever a creature blocks this turn, it gets +0/+1 until end of turn.
+SetInfo:ICE Uncommon

@@ -3,7 +3,6 @@ ManaCost:3 U U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigProliferate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, proliferate.
 SVar:TrigProliferate:AB$Proliferate | Cost$ 0
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inexorable_tide.jpg
-SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/35.jpg
 Oracle:Whenever you cast a spell, proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
+SetInfo:SOM Rare

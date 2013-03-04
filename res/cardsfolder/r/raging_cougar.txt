@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Cat
 PT:2/2
 K:Haste
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raging_cougar.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/149.jpg
 Oracle:Haste
+SetInfo:POR Common

@@ -5,7 +5,6 @@ PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has deathtouch as long as you control a green permanent. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)
 SVar:X:Count$Valid Permanent.Green+YouCtrl
 SVar:BuffedBy:Permanent.Green
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/toxic_iguanar.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/72.jpg
 Oracle:Toxic Iguanar has deathtouch as long as you control a green permanent. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)
+SetInfo:CFX Common

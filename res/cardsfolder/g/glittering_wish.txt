@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ G W | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.MultiColor | ChangeNum$ 1 | SubAbility$ DBChange | SpellDescription$ You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glittering_wish.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/156.jpg
 Oracle:You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand. Exile Glittering Wish.
+SetInfo:FUT Rare

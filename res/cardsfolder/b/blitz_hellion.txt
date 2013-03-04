@@ -6,7 +6,6 @@ K:Trample
 K:Haste
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of the end step, CARDNAME's owner shuffles it into his or her library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Library | Shuffle$ True | Defined$ Self
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blitz_hellion.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/49.jpg
 Oracle:Trample, haste\nAt the beginning of the end step, Blitz Hellion's owner shuffles it into his or her library.
+SetInfo:ARB Rare

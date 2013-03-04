@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever Surgespanner becomes tapped, you may pay 1U. If you do, return target permanent to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surgespanner.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/92.jpg
 Oracle:Whenever Surgespanner becomes tapped, you may pay {1}{U}. If you do, return target permanent to its owner's hand.
+SetInfo:LRW Rare

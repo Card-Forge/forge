@@ -2,7 +2,7 @@ Name:Arc Lightning
 ManaCost:2 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_lightning.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/174.jpg
 Oracle:Arc Lightning deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
+SetInfo:HOP Common
+SetInfo:USG Common

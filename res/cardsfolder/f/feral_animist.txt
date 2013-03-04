@@ -4,7 +4,6 @@ Types:Creature Goblin Shaman
 PT:2/1
 A:AB$ Pump | Cost$ 3 | NumAtt$ +X | References$ X | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is its power.
 SVar:X:Count$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_animist.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/112.jpg
 Oracle:{3}: Feral Animist gets +X/+0 until end of turn, where X is its power.
+SetInfo:GPT Uncommon

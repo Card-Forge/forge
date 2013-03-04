@@ -4,7 +4,6 @@ Types:Creature Djinn
 PT:5/6
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self+MostProminentColor blue | AddPower$ -2 | AddToughness$ -2 | Description$ CCARDNAME gets -2/-2 as long as blue is the most common color among all permanents or is tied for most common.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zanam_djinn.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/90.jpg
 Oracle:Flying\nZanam Djinn gets -2/-2 as long as blue is the most common color among all permanents or is tied for most common.
+SetInfo:INV Uncommon

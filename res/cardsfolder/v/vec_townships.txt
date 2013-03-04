@@ -5,7 +5,6 @@ A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBPump
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBPump
 SVar:DBPump:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://magiccards.info/scans/en/br/93.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/339.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{T}: Add {G} or {W} to your mana pool. Vec Townships doesn't untap during your next untap step.
+SetInfo:TMP Uncommon

@@ -5,7 +5,6 @@ A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Library | Target
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravepurge.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/65.jpg
 Oracle:Put any number of target creature cards from your graveyard on top of your library.\nDraw a card.
+SetInfo:DKA Common

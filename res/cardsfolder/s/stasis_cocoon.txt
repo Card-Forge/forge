@@ -5,7 +5,6 @@ K:Enchant artifact
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Artifact | AITgts$ Creature,Card.hasActivatedAbility | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Enchanted artifact's activated abilities can't be activated. If enchanted artifact is a creature, it can't attack or block.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis_cocoon.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/18.jpg
 Oracle:Enchant artifact\nEnchanted artifact's activated abilities can't be activated. If enchanted artifact is a creature, it can't attack or block.
+SetInfo:5DN Common

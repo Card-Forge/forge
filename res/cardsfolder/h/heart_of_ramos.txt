@@ -4,7 +4,6 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ R | SpellDescription$ Add R to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_of_ramos.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/296.jpg
 Oracle:{T}: Add {R} to your mana pool.\nSacrifice Heart of Ramos: Add {R} to your mana pool.
+SetInfo:MMQ Rare

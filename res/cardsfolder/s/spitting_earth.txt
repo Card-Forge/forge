@@ -3,13 +3,14 @@ ManaCost:1 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SpellDescription$ Spitting Earth deals damage equal to the number of Mountains you control to target creature.
 SVar:X:Count$TypeYouCtrl.Mountain
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_earth.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/220.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/156.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/238.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/116.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/208.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/117.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/193.jpg
 Oracle:Spitting Earth deals damage to target creature equal to the number of Mountains you control.
+SetInfo:PO2 Common
+SetInfo:S99 Uncommon
+SetInfo:7ED Common
+SetInfo:6ED Common
+SetInfo:MIR Common
+SetInfo:10E Common
+SetInfo:EVG Common
+SetInfo:DDG Common
+SetInfo:POR Common

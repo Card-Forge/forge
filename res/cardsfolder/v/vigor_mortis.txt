@@ -7,7 +7,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ManaNeededToAvoidNegativeEffect:green
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Green
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigor_mortis.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/111.jpg
 Oracle:Return target creature card from your graveyard to the battlefield. If {G} was spent to cast Vigor Mortis, that creature enters the battlefield with an additional +1/+1 counter on it.
+SetInfo:RAV Uncommon
+SetInfo:DDJ Uncommon

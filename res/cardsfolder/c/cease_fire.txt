@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Effect | Cost$ 2 W | ValidTgts$ Player | Name$ Cease-Fire Effect | StaticAbilities$ STCantBeCast | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SubAbility$ DBDraw | SpellDescription$ Target player can't cast creature spells this turn.
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Creature | Caster$ Player.IsRemembered | Description$ Target player can't cast creature spells this turn.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cease_fire.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/14.jpg
 Oracle:Target player can't cast creature spells this turn.\nDraw a card.
+SetInfo:ODY Common

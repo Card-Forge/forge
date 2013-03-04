@@ -8,7 +8,6 @@ SVar:X:Count$Valid Card.Self+equipped
 SVar:EquipMe:Once
 SVar:RemRandomDeck:True
 DeckNeeds:Type$Equipment
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_steelshaper.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/4.jpg
 Oracle:Equip costs you pay cost {1} less.\nAs long as Auriok Steelshaper is equipped, Soldier and/or Knight creatures you control get +1/+1.
+SetInfo:MRD Rare

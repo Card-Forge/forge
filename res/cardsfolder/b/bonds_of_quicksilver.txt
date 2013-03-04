@@ -5,7 +5,6 @@ K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonds_of_quicksilver.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/29.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature doesn't untap during its controller's untap step.
+SetInfo:SOM Common

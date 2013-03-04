@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windstorm.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/205.jpg
 Oracle:Windstorm deals X damage to each creature with flying.
+SetInfo:M10 Uncommon
+SetInfo:DDD Uncommon

@@ -9,7 +9,6 @@ S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 8 | SetToughness$ 8 | AddKe
 SVar:Pump:AB$Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 SVar:X:Count$Valid Card.Self+counters_GE4_LEVEL+counters_LE7_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE8_LEVEL
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kargan_dragonlord.jpg
-SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/152.jpg
 Oracle:Level up {R} ({R}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 4-7\n4/4\nFlying\nLEVEL 8+\n8/8\nFlying, trample\n{R}: Kargan Dragonlord gets +1/+0 until end of turn.
+SetInfo:ROE Mythic

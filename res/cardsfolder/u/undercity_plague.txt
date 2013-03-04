@@ -7,5 +7,5 @@ SVar:DBSacPermanent:DB$ Sacrifice | Defined$ Targeted | SacValid$ Permanent | Am
 SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
 SVar:IsEncoded:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undercity_plague.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/83.jpg
 Oracle:Target player loses 1 life, discards a card, then sacrifices a permanent.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
+SetInfo:GTC Rare

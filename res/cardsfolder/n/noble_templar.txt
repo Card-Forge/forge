@@ -4,7 +4,6 @@ Types:Creature Human Cleric Soldier
 PT:3/6
 K:Vigilance
 K:TypeCycling:Plains:2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_templar.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/19.jpg
 Oracle:Vigilance\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, and put it into your hand. Then shuffle your library.)
+SetInfo:SCG Common

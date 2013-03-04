@@ -4,7 +4,6 @@ Types:Creature Bird Spirit
 Text:If a source would deal damage to Swans of Bryn Argoll, prevent that damage. The source's controller draws cards equal to the damage prevented this way.
 PT:4/3
 K:Flying
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swans_of_bryn_argoll.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/151.jpg
 Oracle:Flying\nIf a source would deal damage to Swans of Bryn Argoll, prevent that damage. The source's controller draws cards equal to the damage prevented this way.
+SetInfo:SHM Rare

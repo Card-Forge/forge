@@ -6,7 +6,6 @@ T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Trig
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/innocence_kami.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/18.jpg
 Oracle:{W}, {T}: Tap target creature.\nWhenever you cast a Spirit or Arcane spell, untap Innocence Kami.
+SetInfo:CHK Uncommon

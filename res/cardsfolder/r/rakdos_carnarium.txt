@@ -6,8 +6,8 @@ A:AB$ Mana | Cost$ T | Produced$ B R | SpellDescription$ Add B R to your mana po
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_carnarium.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/284.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/178.jpg
 Oracle:Rakdos Carnarium enters the battlefield tapped.\nWhen Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {B}{R} to your mana pool.
+SetInfo:ARC Common
+SetInfo:COM Common
+SetInfo:DIS Common

@@ -6,7 +6,6 @@ T:Mode$ Always | LifeTotal$ You | LifeAmount$ GE30 | TriggerZones$ Battlefield |
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_tail_kitsune_ascendant.jpg
 AlternateMode:Flip
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/27.jpg
 Oracle:When you have 30 or more life, flip Rune-Tail, Kitsune Ascendant.
 
 ALTERNATE
@@ -18,6 +17,6 @@ Types:Legendary Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Prevent all damage that would be dealt to CARDNAME. | Description$ Prevent all damage that would be dealt to creatures you control.
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/rune_tails_essence.jpg
 # This link may be a temporary solution and could change in the near future.
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/166.jpg
 Oracle:Prevent all damage that would be dealt to creatures you control.
 
+SetInfo:SOK Rare

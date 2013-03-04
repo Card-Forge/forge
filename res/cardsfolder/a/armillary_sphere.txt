@@ -2,9 +2,10 @@ Name:Armillary Sphere
 ManaCost:2
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2 | SpellDescription$ Search your library for up to two basic land cards, reveal them, and put them into your hand. Then shuffle your library.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armillary_sphere.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/108.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/242.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/134.jpg
 Oracle:{2}, {T}, Sacrifice Armillary Sphere: Search your library for up to two basic land cards, reveal them, and put them into your hand. Then shuffle your library.
+SetInfo:PC2 Common
+SetInfo:DDI Common
+SetInfo:COM Common
+SetInfo:DDG Common
+SetInfo:CFX Common

@@ -23,5 +23,5 @@ SVar:CheckPlaneswalker:Imprinted$Valid Planeswalker
 SVar:CheckTribal:Imprinted$Valid Tribal
 SVar:CheckLand:Imprinted$Valid Land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_golem.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/208.jpg
 Oracle:Imprint - When Mirror Golem enters the battlefield, you may exile target card from a graveyard.\nMirror Golem has protection from each of the exiled card's card types. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
+SetInfo:MRD Uncommon

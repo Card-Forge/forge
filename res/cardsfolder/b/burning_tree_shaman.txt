@@ -5,5 +5,5 @@ PT:3/4
 T:Mode$ AbilityCast | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever a player activates an ability that isn't a mana ability, CARDNAME deals 1 damage to that player.
 SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | NumDmg$ 1 | Defined$ TriggeredActivator
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_tree_shaman.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/105.jpg
 Oracle:Whenever a player activates an ability that isn't a mana ability, Burning-Tree Shaman deals 1 damage to that player.
+SetInfo:GPT Rare

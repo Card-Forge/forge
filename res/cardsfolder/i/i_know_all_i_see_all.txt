@@ -5,7 +5,6 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent.YouCtrl | AddHidd
 T:Mode$ Phase | Phase$ End of Turn | Execute$ Abandon | TriggerZones$ Command | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ At the beginning of each end step, if three or more cards were put into your graveyard this turn from anywhere, abandon this scheme.
 SVar:Abandon:AB$ Abandon | Cost$ 0
 SVar:X:Count$ThisTurnEntered_Graveyard_Card.YouOwn
-SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/i_know_all_i_see_all.jpg
-SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/i-know-all-i-see-all.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nUntap all permanents you control during each opponent's untap step.\nAt the beginning of each end step, if three or more cards were put into your graveyard this turn from anywhere, abandon this scheme.
+SetInfo:ARC Common

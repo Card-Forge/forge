@@ -3,7 +3,6 @@ ManaCost:1 B
 Types:Creature Elemental Warrior
 PT:2/1
 K:Wither
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sickle_ripper.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/77.jpg
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)
+SetInfo:SHM Common

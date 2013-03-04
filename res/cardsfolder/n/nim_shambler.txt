@@ -7,7 +7,6 @@ A:AB$ Regenerate | Cost$ Sac<1/Artifact> | SpellDescription$ Regenerate CARDNAME
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_shambler.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/72.jpg
 Oracle:Nim Shambler gets +1/+0 for each artifact you control.\nSacrifice a creature: Regenerate Nim Shambler.
+SetInfo:MRD Uncommon

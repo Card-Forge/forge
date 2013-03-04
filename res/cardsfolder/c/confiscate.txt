@@ -5,10 +5,9 @@ Text:You control enchanted permanent.
 K:Enchant permanent
 A:SP$ Attach | Cost$ 4 U U | ValidTgts$ Permanent | AILogic$ GainControl
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/confiscate.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/69.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/66.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/68.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/65.jpg
 Oracle:Enchant permanent (Target a permanent as you cast this. This card enters the battlefield attached to that permanent.)\nYou control enchanted permanent.
+SetInfo:8ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:9ED Uncommon
+SetInfo:USG Uncommon

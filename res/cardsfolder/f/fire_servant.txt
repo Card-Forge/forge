@@ -6,5 +6,6 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Instant.YouCtrl,So
 SVar:DmgTwice:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_servant.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/137.jpg
 Oracle:If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.
+SetInfo:M11 Uncommon
+SetInfo:PD2 Uncommon

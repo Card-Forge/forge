@@ -9,7 +9,6 @@ SVar:TrigPrideDamage:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ GainLi
 SVar:GainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stir_the_pride.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/16.jpg
 Oracle:Choose one - Creatures you control get +2/+2 until end of turn; or until end of turn, creatures you control gain "Whenever this creature deals damage, you gain that much life."\nEntwine {1}{W} (Choose both if you pay the entwine cost.)
+SetInfo:DST Uncommon

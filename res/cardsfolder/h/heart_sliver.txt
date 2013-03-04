@@ -6,7 +6,7 @@ S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Haste | Description
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 SVar:AntiBuffedBy:Sliver
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_sliver.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/182.jpg
 Oracle:All Sliver creatures have haste.
+SetInfo:H09 Common
+SetInfo:TMP Common

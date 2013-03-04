@@ -4,7 +4,6 @@ Types:Creature Drone
 PT:3/3
 K:Flying
 K:CARDNAME can block only creatures with flying.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoverguard_observer.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/22.jpg
 Oracle:Flying\nHoverguard Observer can block only creatures with flying.
+SetInfo:DST Uncommon

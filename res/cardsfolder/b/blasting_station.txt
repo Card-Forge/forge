@@ -5,7 +5,6 @@ A:AB$ DealDamage | Cost$ T Sac<1/Creature> | ValidTgts$ Creature,Player | TgtPro
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever a creature enters the battlefield, you may untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blasting_station.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/107.jpg
 Oracle:{T}, Sacrifice a creature: Blasting Station deals 1 damage to target creature or player.\nWhenever a creature enters the battlefield, you may untap Blasting Station.
+SetInfo:5DN Uncommon

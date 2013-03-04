@@ -6,7 +6,6 @@ K:Flying
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:Targeting:Dies
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_dragon.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/71.jpg
 Oracle:Flying\nWhen Phantasmal Dragon becomes the target of a spell or ability, sacrifice it.
+SetInfo:M12 Uncommon

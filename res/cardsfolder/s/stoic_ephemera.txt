@@ -8,7 +8,6 @@ T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrig | TriggerDescrip
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME at end of combat.
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:SacrificeEndCombat:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_ephemera.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/19.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nWhen Stoic Ephemera blocks, sacrifice it at end of combat.
+SetInfo:DIS Uncommon

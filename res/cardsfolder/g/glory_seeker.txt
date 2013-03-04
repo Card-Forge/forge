@@ -2,10 +2,10 @@ Name:Glory Seeker
 ManaCost:1 W
 Types:Creature Human Soldier
 PT:2/2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83107.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/21.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/31.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/17.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/22.jpg
 Oracle:
+SetInfo:8ED Common
+SetInfo:ONS Common
+SetInfo:DDF Common
+SetInfo:9ED Common
+SetInfo:ROE Common

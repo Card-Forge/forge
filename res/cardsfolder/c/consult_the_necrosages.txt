@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Draw | Cost$ 1 U B | ValidTgts$ Player | NumCards$ 2 | SpellDescription$ Choose one - Target player draws two cards;
 A:SP$ Discard | Cost$ 1 U B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ or target player discards two cards.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consult_the_necrosages.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/199.jpg
 Oracle:Choose one - Target player draws two cards; or target player discards two cards.
+SetInfo:RAV Common

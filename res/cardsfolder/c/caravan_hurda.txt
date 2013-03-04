@@ -3,7 +3,6 @@ ManaCost:4 W
 Types:Creature Giant
 PT:1/5
 K:Lifelink
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caravan_hurda.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/5.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)
+SetInfo:ZEN Common

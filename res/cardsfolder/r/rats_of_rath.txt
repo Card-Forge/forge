@@ -3,7 +3,6 @@ ManaCost:1 B
 Types:Creature Rat
 PT:2/1
 A:AB$ Destroy | Cost$ B | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl | TgtPrompt$ Select target artifact, creature or land you control | SpellDescription$ Destroy target artifact, creature, or land you control.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rats_of_rath.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/44.jpg
 Oracle:{B}: Destroy target artifact, creature, or land you control.
+SetInfo:TMP Common

@@ -5,4 +5,4 @@ K:Haunt:TrigDiscard:Target player discards a card.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | Mode$ TgtChoose
 Oracle:Target player discards a card.\nHaunt (When this spell card is put into a graveyard after resolving, exile it haunting target creature.)\nWhen the creature Cry of Contrition haunts dies, target player discards a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cry_of_contrition.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/46.jpg
+SetInfo:GPT Common

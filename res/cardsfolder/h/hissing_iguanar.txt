@@ -4,8 +4,7 @@ Types:Creature Lizard
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Whenever another creature is put into a graveyard from the battlefield, you may have CARDNAME deal 1 damage to target player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hissing_iguanar.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/46.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/104.jpg
 Oracle:Whenever another creature dies, you may have Hissing Iguanar deal 1 damage to target player.
+SetInfo:PC2 Common
+SetInfo:ALA Common

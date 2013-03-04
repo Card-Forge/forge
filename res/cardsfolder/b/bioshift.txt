@@ -10,4 +10,4 @@ SVar:Y:Count$ChosenNumber
 SVar:X:Count$TotalCounters_P1P1_Card.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bioshift.jpg
 Oracle:Move any number of +1/+1 counters from target creature onto another target creature with the same controller.
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/214.jpg
+SetInfo:GTC Common

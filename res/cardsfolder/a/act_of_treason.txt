@@ -2,10 +2,9 @@ Name:Act of Treason
 ManaCost:2 R
 Types:Sorcery
 A:SP$ GainControl | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/act_of_treason.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/121.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/124.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/85.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/121.jpg
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. (It can attack and {T} this turn.)
+SetInfo:M11 Common
+SetInfo:M10 Uncommon
+SetInfo:GTC Common
+SetInfo:M12 Common

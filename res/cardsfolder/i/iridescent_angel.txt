@@ -8,7 +8,6 @@ K:Protection from blue
 K:Protection from black
 K:Protection from red
 K:Protection from green
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iridescent_angel.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/288.jpg
 Oracle:Flying, protection from all colors
+SetInfo:ODY Rare

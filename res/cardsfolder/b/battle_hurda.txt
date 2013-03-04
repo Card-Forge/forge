@@ -3,7 +3,6 @@ ManaCost:4 W
 Types:Creature Giant
 PT:3/3
 K:First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_hurda.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/4.jpg
 Oracle:First strike
+SetInfo:WWK Common

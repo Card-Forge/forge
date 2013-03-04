@@ -4,8 +4,7 @@ Types:Creature Elf Warrior Druid
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, reveal it, and put it into your hand. If you do, shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/civic_wayfinder.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/157.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/255.jpg
 Oracle:When Civic Wayfinder enters the battlefield, you may search your library for a basic land card, reveal it, and put it into your hand. If you do, shuffle your library.
+SetInfo:RAV Common
+SetInfo:10E Common

@@ -5,7 +5,6 @@ A:AB$ LoseLife | Cost$ 2 B Discard<1/Card> | ValidTgts$ Opponent | LifeAmount$ 1
 A:AB$ Draw | Cost$ 1 PayLife<2> | NumCards$ 1 | Activation$ Hellbent | PrecostDesc$ Hellbent - | SpellDescription$ Draw a card. Activate this ability only if you have no cards in hand.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nihilistic_glee.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/50.jpg
 Oracle:{2}{B}, Discard a card: Target opponent loses 1 life and you gain 1 life.\nHellbent - {1}, Pay 2 life: Draw a card. Activate this ability only if you have no cards in hand.
+SetInfo:DIS Rare

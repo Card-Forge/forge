@@ -4,7 +4,6 @@ Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Draw | Description$ All Slivers have "2, Sacrifice this permanent: Draw a card."
 SVar:Draw:AB$Draw | Cost$ 2 Sac<1/CARDNAME> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mnemonic_sliver.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/77.jpg
 Oracle:All Slivers have "{2}, Sacrifice this permanent: Draw a card."
+SetInfo:TMP Uncommon

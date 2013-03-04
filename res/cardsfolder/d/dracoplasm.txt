@@ -11,7 +11,6 @@ SVar:SacX:Count$Valid Creature.YouCtrl
 SVar:DracoPwr:RememberedLKI$CardPower
 SVar:DracoTgn:RememberedLKI$CardToughness
 A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dracoplasm.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/341.jpg
 Oracle:Flying\nAs Dracoplasm enters the battlefield, sacrifice any number of creatures. Dracoplasm's power becomes the total power of those creatures and its toughness becomes their total toughness.\n{R}: Dracoplasm gets +1/+0 until end of turn.
+SetInfo:TMP Rare

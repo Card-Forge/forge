@@ -9,7 +9,6 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | D
 SVar:DBSkipDraw:DB$ Pump | Defined$ You | KW$ Skip your next draw step. | Permanent$ True
 A:AB$ ChangeZone | Cost$ 4 W | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile CARDNAME.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_gargoyle.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/131.jpg
 Oracle:Flying\nWhen Ivory Gargoyle dies, return it to the battlefield under its owner's control at the beginning of the next end step and you skip your next draw step.\n{4}{W}: Exile Ivory Gargoyle.
+SetInfo:ALL Rare

@@ -4,7 +4,6 @@ Types:Legendary Creature Elf Warrior
 PT:2/2
 A:AB$ PumpAll | Cost$ 2 G G G | ValidCards$ Creature.Elf+YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Elf creatures you control get +3/+3 and gain trample until end of turn.
 A:AB$ Regenerate | ValidTgts$ Creature.Elf+Other | TgtPrompt$ Select another target Elf | Cost$ G | SpellDescription$ Regenerate another target Elf.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ezuri_renegade_leader.jpg
-SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/119.jpg
 Oracle:{G}: Regenerate another target Elf.\n{2}{G}{G}{G}: Elf creatures you control get +3/+3 and gain trample until end of turn.
+SetInfo:SOM Rare

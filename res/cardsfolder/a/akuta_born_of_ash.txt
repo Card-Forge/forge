@@ -7,7 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ G
 SVar:TrigReturn:AB$ ChangeZone | Cost$ Sac<1/Swamp> | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:X:Count$InYourHand
 SVar:Y:PlayerCountOpponents$HighestCardsInHand
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akuta_born_of_ash.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/61.jpg
 Oracle:Haste\nAt the beginning of your upkeep, if you have more cards in hand than each opponent, you may sacrifice a Swamp. If you do, return Akuta, Born of Ash from your graveyard to the battlefield.
+SetInfo:SOK Rare

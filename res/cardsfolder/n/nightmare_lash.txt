@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X |
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightmare_lash.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/219.jpg
 Oracle:Equipped creature gets +1/+1 for each Swamp you control.\nEquip-Pay 3 life. (Pay 3 life: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+SetInfo:MRD Rare

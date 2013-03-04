@@ -2,7 +2,6 @@ Name:Second Guess
 ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select second spell cast this turn. | ValidTgts$ Spell.SecondSpellCastThisTurn | SpellDescription$ Counter target spell that's the second spell cast this turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/second_guess.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/74.jpg
 Oracle:Counter target spell that's the second spell cast this turn.
+SetInfo:AVR Uncommon

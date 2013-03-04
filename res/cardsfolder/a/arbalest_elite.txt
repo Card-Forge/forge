@@ -4,7 +4,6 @@ Types:Creature Human Archer
 PT:2/3
 A:AB$ DealDamage | Cost$ 2 W T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 3 | SubAbility$ DBStayTapped | SpellDescription$ CARDNAME deals 3 damage to target attacking or blocking creature. CARDNAME doesn't untap during your next untap step.
 SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbalest_elite.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/5.jpg
 Oracle:{2}{W}, {T}: Arbalest Elite deals 3 damage to target attacking or blocking creature. Arbalest Elite doesn't untap during your next untap step.
+SetInfo:M12 Uncommon

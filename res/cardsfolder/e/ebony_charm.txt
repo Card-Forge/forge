@@ -7,7 +7,6 @@ SVar:EbonyGain:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:EbonyExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to three target cards from a single graveyard;
 SVar:EbonyFear:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Fear | SpellDescription$ Target creature gains fear until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebony_charm.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/18.jpg
 Oracle:Choose one - Target opponent loses 1 life and you gain 1 life; or exile up to three target cards from a single graveyard; or target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
+SetInfo:MIR Common

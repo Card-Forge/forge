@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | Origin$ Hand | Destination$ Library | Shuffle$ True | ChangeType$ Card | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | NextUpkeep$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GT0
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lat_nams_legacy.jpg
 Oracle:Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep.
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/45.jpg|2
+SetInfo:ALL Common x2

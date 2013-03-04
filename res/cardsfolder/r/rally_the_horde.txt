@@ -12,5 +12,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Y:Count$ValidExile Card.IsRemembered+nonLand
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_horde.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/110.jpg
 Oracle:Exile the top card of your library. Exile the top card of your library. Exile the top card of your library. If the last card exiled isn't a land, repeat this process. Put a 1/1 red Warrior creature token onto the battlefield for each nonland card exiled this way.
+SetInfo:SOK Rare

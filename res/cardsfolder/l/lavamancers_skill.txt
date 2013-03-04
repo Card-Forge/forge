@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonWizard | AddAbility$ Dama
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Wizard | AddAbility$ Damage2 | Description$ If enchanted creature is a Wizard, it has "tap: This creature deals 2 damage to target creature."
 SVar:Damage1:AB$DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
 SVar:Damage2:AB$DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavamancers_skill.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/215.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to target creature."\nAs long as enchanted creature is a Wizard, it has "{T}: This creature deals 2 damage to target creature."
+SetInfo:ONS Common

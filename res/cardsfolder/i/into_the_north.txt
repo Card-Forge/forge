@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Snow | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a snow land card and put it onto the battlefield tapped. Then shuffle your library.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/into_the_north.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/111.jpg
 Oracle:Search your library for a snow land card and put it onto the battlefield tapped. Then shuffle your library.
+SetInfo:CSP Common

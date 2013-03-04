@@ -3,10 +3,9 @@ ManaCost:2 G
 Types:Creature Human Archer
 PT:2/2
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking+withFlying | TgtPrompt$ Select target attacking creature with flying | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target attacking creature with flying.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/femeref_archers.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/229.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/113.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/244.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/264.jpg
 Oracle:{T}: Femeref Archers deals 4 damage to target attacking creature with flying.
+SetInfo:7ED Uncommon
+SetInfo:MIR Uncommon
+SetInfo:6ED Uncommon
+SetInfo:10E Uncommon

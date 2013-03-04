@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+2/-5
 S:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land on each of your turns.
-SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/titania.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/titania.jpg
 Oracle:Hand +2, life -5\nYou may play an additional land on each of your turns.
+SetInfo:VAN Special

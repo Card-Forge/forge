@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigGain | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, you gain 1 life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlit_wake.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/29.jpg
 Oracle:Whenever a creature dies, you gain 1 life.
+SetInfo:MMQ Uncommon

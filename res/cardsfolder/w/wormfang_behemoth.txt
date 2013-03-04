@@ -8,7 +8,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_behemoth.jpg
-SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/55.jpg
 Oracle:When Wormfang Behemoth enters the battlefield, exile all cards from your hand.\nWhen Wormfang Behemoth leaves the battlefield, return the exiled cards to their owner's hand.
+SetInfo:JUD Rare

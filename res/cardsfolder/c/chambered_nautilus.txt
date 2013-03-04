@@ -4,7 +4,6 @@ Types:Creature Nautilus Beast
 PT:2/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes blocked, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chambered_nautilus.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/64.jpg
 Oracle:Whenever Chambered Nautilus becomes blocked, you may draw a card.
+SetInfo:MMQ Uncommon

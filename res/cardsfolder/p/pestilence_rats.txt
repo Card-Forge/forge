@@ -6,7 +6,6 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Rat.Other
 SVar:BuffedBy:Rat
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilence_rats.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/45.jpg
 Oracle:Pestilence Rats's power is equal to the number of other Rats on the battlefield. (For example, as long as there are two other Rats on the battlefield, Pestilence Rats's power and toughness are 2/3.)
+SetInfo:ICE Common

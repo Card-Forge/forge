@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Human Shaman
 PT:2/1
 A:AB$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_mage.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/181.jpg
 Oracle:{2}{G}: Put a 1/1 green Saproling creature token onto the battlefield.
+SetInfo:M12 Uncommon
+SetInfo:DDH Uncommon

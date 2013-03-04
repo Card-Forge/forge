@@ -9,7 +9,6 @@ SVar:Y:Count$Valid Creature.Green+YouCtrl
 SVar:BuffedBy:Creature.Red,Creature.Green
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red|Green
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazethorn_scarecrow.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/246.jpg
 Oracle:Blazethorn Scarecrow has haste as long as you control a red creature.\nBlazethorn Scarecrow has wither as long as you control a green creature. (It deals damage to creatures in the form of -1/-1 counters.)
+SetInfo:SHM Common

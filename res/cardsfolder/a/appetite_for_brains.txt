@@ -2,7 +2,6 @@ Name:Appetite for Brains
 ManaCost:B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | ChangeType$ Card.cmcGE4 | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | SpellDescription$ Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/appetite_for_brains.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/84.jpg
 Oracle:Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
+SetInfo:AVR Uncommon

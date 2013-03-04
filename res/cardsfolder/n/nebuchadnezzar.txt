@@ -5,8 +5,7 @@ PT:3/3
 #This is necessary for cost payment, but not used.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nebuchadnezzar.jpg
 Oracle:{X}, {T}: Name a card. Target opponent reveals X cards at random from his or her hand. Then that player discards all cards with that name revealed this way. Activate this ability only during your turn.
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/115.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/285.jpg
+SetInfo:CHR Rare
+SetInfo:LEG Rare

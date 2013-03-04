@@ -7,7 +7,6 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ 
 SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0 | SpellDescription$ Look at the top card of your library, then you may put that card into your graveyard.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Opponent loses 1 life.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etherwrought_page.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/108.jpg
 Oracle:At the beginning of your upkeep, choose one - You gain 2 life; or look at the top card of your library, then you may put that card into your graveyard; or each opponent loses 1 life.
+SetInfo:ARB Uncommon

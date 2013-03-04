@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddType$ Vampire | AddTrigger$
 SVar:TrigPutCounter:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | Execute$ PutCounter | TriggerDescription$ Whenever this creature deals damage to a creature, put a +1/+1 counter on this creature.
 SVar:PutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredSource | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mephidross_vampire.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/53.jpg
 Oracle:Flying\nEach creature you control is a Vampire in addition to its other creature types and has "Whenever this creature deals damage to a creature, put a +1/+1 counter on this creature."
+SetInfo:5DN Rare

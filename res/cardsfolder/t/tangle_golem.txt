@@ -4,7 +4,6 @@ Types:Artifact Creature Golem
 PT:5/4
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Affinity for Forests (This spell costs 1 less to cast for each Forest you control.)
 SVar:X:Count$Valid Forest.YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_golem.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/151.jpg
 Oracle:Affinity for Forests (This spell costs {1} less to cast for each Forest you control.)
+SetInfo:DST Common

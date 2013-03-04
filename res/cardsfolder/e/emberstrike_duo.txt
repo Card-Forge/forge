@@ -7,7 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZo
 SVar:TrigPump11:AB$Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
 SVar:TrigPumpFirstStrike:AB$Pump | Cost$ 0 | KW$ First Strike | Defined$ Self
 SVar:BuffedBy:Card.Black,Card.Red
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emberstrike_duo.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/185.jpg
 Oracle:Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn.\nWhenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
+SetInfo:SHM Common

@@ -5,10 +5,9 @@ PT:4/4
 K:Deathtouch
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LT7 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ Difference | References$ X,Difference 
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ Difference | References$ X,Difference
 SVar:X:Count$InYourHand
 SVar:Difference:Number$7/Minus.X
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/damia_sage_of_stone.jpg
-SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/191.jpg
 Oracle:Deathtouch\nSkip your draw step.\nAt the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
+SetInfo:COM Mythic

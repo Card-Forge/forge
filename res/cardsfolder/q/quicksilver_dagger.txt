@@ -6,7 +6,7 @@ A:SP$ Attach | Cost$ 1 U R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Damage | AddSVar$ QuicksilverDraw | Description$ Enchanted creature has "tap: This creature deals 1 damage to target player. You draw a card."
 SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select a player | NumDmg$ 1 | SubAbility$ QuicksilverDraw | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:QuicksilverDraw:DB$Draw | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_dagger.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/118.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals 1 damage to target player. You draw a card."
+SetInfo:APC Common
+SetInfo:DDJ Common

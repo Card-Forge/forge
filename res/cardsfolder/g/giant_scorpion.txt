@@ -3,8 +3,7 @@ ManaCost:2 B
 Types:Creature Scorpion
 PT:1/3
 K:Deathtouch
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_scorpion.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/94.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/90.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
+SetInfo:M13 Common
+SetInfo:ZEN Common

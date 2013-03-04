@@ -3,7 +3,6 @@ ManaCost:4
 Types:Artifact
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws two additional cards.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 2 | Defined$ TriggeredPlayer
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/font_of_mythos.jpg
-SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/136.jpg
 Oracle:At the beginning of each player's draw step, that player draws two additional cards.
+SetInfo:CFX Rare

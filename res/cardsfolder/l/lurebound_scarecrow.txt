@@ -8,7 +8,6 @@ T:Mode$ Always | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | S
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0
 SVar:X:Count$Valid Permanent.YouCtrl+ChosenColor
 SVar:NeedsToPlay:Permanent.nonColorless+YouCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurebound_scarecrow.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/256.jpg
 Oracle:As Lurebound Scarecrow enters the battlefield, choose a color.\nWhen you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
+SetInfo:SHM Uncommon

@@ -7,8 +7,7 @@ S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AddHiddenKeyword$ CARDNAME
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | OpponentAttackedWithCreatureThisTurn$ True | Description$ Each opponent who attacked with a creature this turn can't cast spells.
 SVar:X:Count$ThisTurnCast_Card.YouDontCtrl
 SVar:RemMultiplayer:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_arbiter.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/4.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/5.jpg
 Oracle:Flying\nEach opponent who cast a spell this turn can't attack with creatures.\nEach opponent who attacked with a creature this turn can't cast spells.
+SetInfo:M11 Rare
+SetInfo:COM Rare

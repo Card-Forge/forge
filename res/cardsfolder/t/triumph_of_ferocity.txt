@@ -5,7 +5,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigFerociousDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | ConditionPresent$ Creature | ConditionCompare$ GE1 | ConditionCheckSVar$ YourFerocity | ConditionSVarCompare$ GEOppsFerocity | References$ YourFerocity,OppsFerocity
 SVar:YourFerocity:Count$GreatestPowerYouControl
 SVar:OppsFerocity:Count$GreatestPowerYouDontControl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triumph_of_ferocity.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/198.jpg
 Oracle:At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power.
+SetInfo:AVR Uncommon

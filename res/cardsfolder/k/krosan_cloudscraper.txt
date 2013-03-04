@@ -4,8 +4,7 @@ Types:Creature Beast Mutant
 PT:13/13
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G G
 K:Morph:7 G G
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_cloudscraper.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/130.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/82.jpg
 Oracle:At the beginning of your upkeep, sacrifice Krosan Cloudscraper unless you pay {G}{G}.\nMorph {7}{G}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:TSB Special
+SetInfo:LGN Rare

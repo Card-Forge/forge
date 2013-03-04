@@ -10,7 +10,6 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE3_P
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBDestroyAll
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_boiler.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/269.jpg
 Oracle:At the beginning of your upkeep, put a plague counter on Plague Boiler.\n{1}{B}{G}: Put a plague counter on Plague Boiler or remove a plague counter from it.\nWhen Plague Boiler has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.
+SetInfo:RAV Rare

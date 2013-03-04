@@ -5,7 +5,6 @@ K:Equip 4
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Double Strike| Description$ Equipped creature has double strike.
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigProvoke | OptionalDecider$ You | TriggerDescription$ Whenever equipped creature attacks, you may have target creature block it this turn if able.
 SVar:TrigProvoke:AB$ MustBlock | Cost$ 0 | ValidTgts$ Creature | DefinedAttacker$ Equipped | TgtPrompt$ Select target creature
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grappling_hook.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/203.jpg
 Oracle:Equipped creature has double strike.\nWhenever equipped creature attacks, you may have target creature block it this turn if able.\nEquip {4}
+SetInfo:ZEN Rare

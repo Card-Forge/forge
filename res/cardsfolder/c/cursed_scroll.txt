@@ -6,7 +6,6 @@ SVar:DBReveal:DB$ Reveal | Random$ True | RememberRevealed$ True | Defined$ You 
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_scroll.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/271.jpg
 Oracle:{3}, {T}: Name a card. Reveal a card at random from your hand. If it's the named card, Cursed Scroll deals 2 damage to target creature or player.
+SetInfo:TMP Rare

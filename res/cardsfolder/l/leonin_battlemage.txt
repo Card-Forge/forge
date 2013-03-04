@@ -6,7 +6,6 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_battlemage.jpg
-SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/5.jpg
 Oracle:{T}: Target creature gets +1/+1 until end of turn.\nWhenever you cast a spell, you may untap Leonin Battlemage.
+SetInfo:DST Uncommon

@@ -3,9 +3,8 @@ ManaCost:6
 Types:Artifact
 S:Mode$ RaiseCost | ValidCard$ Creature | Type$ Spell | Amount$ 2 | Description$ Creature spells cost 2 more to cast.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ferozs_ban.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/132.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/370.jpg
-SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/295.jpg
 Oracle:Creature spells cost {2} more to cast.
+SetInfo:5ED Rare
+SetInfo:7ED Rare
+SetInfo:HML Rare

@@ -5,7 +5,6 @@ A:SP$ DealDamage | Cost$ 1 B Sac<1/Creature> | ValidTgts$ Player | NumDmg$ X | R
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ Y | References$ Y | StackDescription$ You gain life equal to the damage dealt this way.
 SVar:X:Sacrificed$CardPower
 SVar:Y:TargetedPlayer$DamageDoneToPlayerBy
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_consumption.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/76.jpg
 Oracle:As an additional cost to cast Rite of Consumption, sacrifice a creature.\nRite of Consumption deals damage equal to the sacrificed creature's power to target player. You gain life equal to the damage dealt this way.
+SetInfo:SHM Common

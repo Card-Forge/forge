@@ -4,7 +4,6 @@ Types:Instant
 K:Buyback 3
 A:SP$ CopySpellAbility | Cost$ 1 R R | ValidTgts$ Instant,Sorcery | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reiterate.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/175.jpg
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCopy target instant or sorcery spell. You may choose new targets for the copy.
+SetInfo:TSP Rare

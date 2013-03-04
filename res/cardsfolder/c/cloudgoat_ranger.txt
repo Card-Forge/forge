@@ -5,7 +5,6 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Kithkin Soldier | TokenTypes$ Creature,Kithkin,Soldier | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
 A:AB$ Pump | Cost$ tapXType<3/Kithkin> | NumAtt$ +2 | KW$ Flying | SpellDescription$ CARDNAME gets +2/+0 and gains flying until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudgoat_ranger.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/10.jpg
 Oracle:When Cloudgoat Ranger enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.\nTap three untapped Kithkin you control: Cloudgoat Ranger gets +2/+0 and gains flying until end of turn.
+SetInfo:LRW Uncommon

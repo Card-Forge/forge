@@ -2,7 +2,6 @@ Name:Executioner's Capsule
 ManaCost:B
 Types:Artifact
 A:AB$ Destroy | Cost$ 1 B T Sac<1/CARDNAME> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/executioners_capsule.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/75.jpg
 Oracle:{1}{B}, {T}, Sacrifice Executioner's Capsule: Destroy target nonblack creature.
+SetInfo:ALA Common

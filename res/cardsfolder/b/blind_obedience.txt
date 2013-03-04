@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Enchantment
 K:Extort
 S:Mode$ ETBTapped | ValidCard$ Artifact.OppCtrl,Creature.OppCtrl | Description$ Artifacts and creatures your opponents control enter the battlefield tapped.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_obedience.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/6.jpg
 Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nArtifacts and creatures your opponents control enter the battlefield tapped.
+SetInfo:GTC Rare

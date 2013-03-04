@@ -5,8 +5,8 @@ K:etbCounter:ARROWHEAD:3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_ARROWHEAD | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, if there are no arrowhead counters on CARDNAME, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 A:AB$ PutCounter | Cost$ T SubCounter<1/ARROWHEAD> | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target Creature | CounterType$ M1M1 | CounterNum$ 1 | SpellDescription$ Put a -1/-1 counter on target creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serrated_arrows.jpg
-SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/135.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/114.jpg
 Oracle:Serrated Arrows enters the battlefield with three arrowhead counters on it.\nAt the beginning of your upkeep, if there are no arrowhead counters on Serrated Arrows, sacrifice it.\n{T}, Remove an arrowhead counter from Serrated Arrows: Put a -1/-1 counter on target creature.
+SetInfo:DDD Common
+SetInfo:TSB Special
+SetInfo:HML Common

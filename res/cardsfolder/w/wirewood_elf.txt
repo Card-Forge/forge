@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Elf
 PT:1/2
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39828.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/301.jpg
 Oracle:{T}: Add {G} to your mana pool.
+SetInfo:ONS Common

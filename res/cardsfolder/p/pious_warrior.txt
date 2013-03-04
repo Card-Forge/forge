@@ -6,7 +6,6 @@ T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigGain | CombatDamage$ 
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pious_warrior.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/34.jpg
 Oracle:Whenever Pious Warrior is dealt combat damage, you gain that much life.
+SetInfo:MMQ Common

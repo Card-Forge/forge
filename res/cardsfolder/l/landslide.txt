@@ -7,7 +7,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Mountain.YouCtrl
 SVar:DmgX:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/landslide.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/92.jpg
 Oracle:Sacrifice any number of Mountains. Landslide deals that much damage to target player.
+SetInfo:UDS Uncommon

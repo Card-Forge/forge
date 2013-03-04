@@ -4,7 +4,7 @@ Types:Creature Human Cleric Minion
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add B B B to your mana pool.
 SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ B | Amount$ 3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_gix.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/150.jpg
 Oracle:When Priest of Gix enters the battlefield, add {B}{B}{B} to your mana pool.
+SetInfo:DDE Uncommon
+SetInfo:USG Uncommon

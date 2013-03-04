@@ -4,7 +4,6 @@ Types:Creature Fox Samurai
 PT:2/2
 K:First Strike
 K:Bushido 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_blademaster.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/25.jpg
 Oracle:First strike\nBushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
+SetInfo:CHK Common

@@ -8,8 +8,7 @@ SVar:TrigPump:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ Pump | O
 SVar:Pump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ DefendingPlayer | Mode$ Random | NumCards$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_confusion.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/13.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/5.jpg
 Oracle:Enchant creature you control\nWhenever enchanted creature attacks and isn't blocked, you may have it assign no combat damage this turn. If you do, defending player discards a card at random.
+SetInfo:ICE Common
+SetInfo:5ED Common

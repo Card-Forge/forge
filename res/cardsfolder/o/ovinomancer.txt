@@ -10,8 +10,7 @@ SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | Condition
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ovinomancer.jpg
-SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/39.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/27.jpg
 Oracle:When Ovinomancer enters the battlefield, sacrifice it unless you return three basic lands you control to their owner's hand.\n{T}, Return Ovinomancer to its owner's hand: Destroy target creature. It can't be regenerated. That creature's controller puts a 0/1 green Sheep creature token onto the battlefield.
+SetInfo:VIS Uncommon
+SetInfo:TSB Special

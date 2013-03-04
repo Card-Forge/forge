@@ -8,7 +8,6 @@ A:AB$ TwoPiles | Cost$ SubCounter<6/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Se
 SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Permanent.IsRemembered | SubAbility$ Cleanup
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_of_the_veil.jpg
-SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/105.jpg
 Oracle:[+1] Each player discards a card.\n[-2] Target player sacrifices a creature.\n[-6] Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice.
+SetInfo:ISD Mythic

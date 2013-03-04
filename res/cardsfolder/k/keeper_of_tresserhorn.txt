@@ -5,7 +5,6 @@ PT:6/6
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 2 life.
 SVar:TrigPump:DB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ DBLose
 SVar:DBLose:DB$ LoseLife | Defined$ DefendingPlayer | LifeAmount$ 2
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_tresserhorn.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/14.jpg
 Oracle:Whenever Keeper of Tresserhorn attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 2 life.
+SetInfo:ALL Rare

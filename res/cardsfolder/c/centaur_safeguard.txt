@@ -4,7 +4,6 @@ Types:Creature Centaur Warrior
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigGainLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may gain 3 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_safeguard.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/244.jpg
 Oracle:({G/W} can be paid with either {G} or {W}.)\nWhen Centaur Safeguard dies, you may gain 3 life.
+SetInfo:RAV Common

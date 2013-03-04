@@ -8,7 +8,6 @@ SVar:TrigDamageOpp:AB$ DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ Y | Re
 SVar:X:Count$InYourHand/NMinus.4
 SVar:Y:Count$InOppHand/NMinus.4
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_world.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/162.jpg
 Oracle:At the beginning of each player's upkeep, Storm World deals X damage to that player, where X is 4 minus the number of cards in his or her hand.
+SetInfo:LEG Rare

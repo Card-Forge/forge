@@ -10,7 +10,6 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:DBNightshadeCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount.Negative
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightshade_assassin.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/121.jpg
 Oracle:First strike\nWhen Nightshade Assassin enters the battlefield, you may reveal X black cards in your hand. If you do, target creature gets -X/-X until end of turn.\nMadness {1}{B} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
+SetInfo:TSP Uncommon

@@ -2,7 +2,6 @@ Name:Barbary Apes
 ManaCost:1 G
 Types:Creature Ape
 PT:2/2
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1516.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/90.jpg
 Oracle:
+SetInfo:LEG Common

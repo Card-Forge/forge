@@ -5,16 +5,16 @@ PT:0/0
 K:ETBReplacement:Copy:ChooseCreature:Optional
 SVar:ChooseCreature:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ Clone | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield.
 SVar:DBCopy:DB$ Clone | Defined$ Remembered
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clone.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/52.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/52.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/67.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/73.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/49.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/45.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/45.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/51.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/75.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/52.jpg
 Oracle:You may have Clone enter the battlefield as a copy of any creature on the battlefield.
+SetInfo:2ED Uncommon
+SetInfo:M10 Rare
+SetInfo:9ED Rare
+SetInfo:10E Rare
+SetInfo:M11 Rare
+SetInfo:LEB Uncommon
+SetInfo:DDI Rare
+SetInfo:LEA Uncommon
+SetInfo:ONS Rare
+SetInfo:M13 Rare
+SetInfo:3ED Uncommon

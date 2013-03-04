@@ -6,7 +6,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, CARDNAME deals 2 damage to that player.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ EnchantedController | NumDmg$ 2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maddening_wind.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/142.jpg
 Oracle:Enchant creature\nCumulative upkeep {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of the upkeep of enchanted creature's controller, Maddening Wind deals 2 damage to that player.
+SetInfo:ICE Uncommon

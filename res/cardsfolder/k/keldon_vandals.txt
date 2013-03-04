@@ -5,7 +5,6 @@ PT:4/1
 K:Echo:2 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_vandals.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/91.jpg
 Oracle:Echo {2}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Keldon Vandals enters the battlefield, destroy target artifact.
+SetInfo:UDS Common

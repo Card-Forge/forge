@@ -8,7 +8,6 @@ SVar:Life:TriggeredCard$CardToughness
 A:AB$ ChooseCard | Cost$ 1 G W T | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | RememberChosen$ True | AILogic$ AtLeast1 | SpellDescription$ Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trostani_selesnyas_voice.jpg
-SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/206.jpg
 Oracle:Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.\n{1}{G}{W}, {T}: Populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+SetInfo:RTR Mythic

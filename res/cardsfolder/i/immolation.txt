@@ -4,8 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ -2 | Description$ Enchanted creature gets +2/-2.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immolation.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/222.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/151.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/-2.
+SetInfo:LEG Common
+SetInfo:4ED Common

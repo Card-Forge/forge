@@ -7,7 +7,6 @@ SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_masks.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/100.jpg
 Oracle:At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
+SetInfo:GPT Uncommon

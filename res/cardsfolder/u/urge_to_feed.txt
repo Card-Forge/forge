@@ -7,7 +7,6 @@ SVar:VampiricUrge:DB$ Tap | Defined$ Remembered | SubAbility$ VampiricFeed
 SVar:VampiricFeed:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AbleToFeedX:Count$Valid Creature.Vampire+YouCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urge_to_feed.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/70.jpg
 Oracle:Target creature gets -3/-3 until end of turn. You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires.
+SetInfo:WWK Uncommon

@@ -7,7 +7,6 @@ K:Equip SubCounter<1/CHARGE>
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_distinction.jpg
-SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/219.jpg
 Oracle:Sigil of Distinction enters the battlefield with X charge counters on it.\nEquipped creature gets +1/+1 for each charge counter on Sigil of Distinction.\nEquip-Remove a charge counter from Sigil of Distinction.
+SetInfo:ALA Rare

@@ -4,7 +4,6 @@ Types:Creature Vedalken Wizard
 PT:1/2
 A:AB$ PutCounter | Cost$ 2 U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBTapOrUntap | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature. You may tap or untap that creature.
 SVar:DBTapOrUntap:DB$ TapOrUntap | Defined$ Targeted
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_anatomist.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/36.jpg
 Oracle:{2}{U}, {T}: Put a -1/-1 counter on target creature. You may tap or untap that creature.
+SetInfo:MBS Uncommon

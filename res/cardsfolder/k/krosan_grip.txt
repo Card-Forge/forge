@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Instant
 K:Split second
 A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_grip.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/202.jpg
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nDestroy target artifact or enchantment.
+SetInfo:TSP Uncommon

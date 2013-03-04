@@ -6,7 +6,6 @@ K:etbCounter:DEPLETION:2
 A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ U | Deplete$ DEPLETION | Amount$ 2 | SpellDescription$ Add U U to your mana pool. If there are no depletion counters on CARDNAME, sacrifice it.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://wizards.com/global/images/magic/general/saprazzan_skerry.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/328.jpg
 Oracle:Saprazzan Skerry enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Saprazzan Skerry: Add {U}{U} to your mana pool. If there are no depletion counters on Saprazzan Skerry, sacrifice it.
+SetInfo:MMQ Common

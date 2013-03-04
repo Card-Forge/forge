@@ -3,7 +3,6 @@ ManaCost:3 B B
 Types:Instant
 A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/annihilate.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/94.jpg
 Oracle:Destroy target nonblack creature. It can't be regenerated.\nDraw a card.
+SetInfo:INV Uncommon

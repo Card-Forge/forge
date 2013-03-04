@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ R | ValidTgts$ Mountain | AILogic$ Pump
 A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 6 | Toughness$ 1 | Types$ Creature,Spirit | Colors$ Red | SpellDescription$ Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land.
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | OptionalDecider$ You | TriggerDescription$ When enchanted Mountain is put into a graveyard, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigReturnOwner:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/genju_of_the_spires.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/105.jpg
 Oracle:Enchant Mountain\n{2}: Enchanted Mountain becomes a 6/1 red Spirit creature until end of turn. It's still a land.\nWhen enchanted Mountain is put into a graveyard, you may return Genju of the Spires from your graveyard to your hand.
+SetInfo:BOK Uncommon

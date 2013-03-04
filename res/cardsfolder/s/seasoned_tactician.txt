@@ -7,7 +7,6 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | Remember
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seasoned_tactician.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/150.jpg
 Oracle:{3}, Exile the top four cards of your library: The next time a source of your choice would deal damage to you this turn, prevent that damage.
+SetInfo:ALL Uncommon

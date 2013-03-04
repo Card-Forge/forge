@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMove:AB$ ChangeZone | Cost$ 0 | Mandatory$ True | ChangeType$ Card.Creature+YouCtrl | Origin$ Graveyard | Destination$ Hand | RememberChanged$ True  | SubAbility$ DBPump | Hidden$ True
 SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Self | KW$ Haste | SubAbility$ DBCleanUp | ConditionPresent$ Card.Goblin+IsRemembered | ConditionDefined$ Remembered | ConditionCompare$ EQ1
 SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warren_pilferers.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/146.jpg
 Oracle:When Warren Pilferers enters the battlefield, return target creature card from your graveyard to your hand. If that card is a Goblin card, Warren Pilferers gains haste until end of turn.
+SetInfo:LRW Common

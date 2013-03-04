@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Creature Basilisk
 PT:2/2
 K:Deathtouch
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daggerback_basilisk.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/182.jpg
 Oracle:Deathtouch
+SetInfo:ROE Common

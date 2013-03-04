@@ -5,7 +5,6 @@ PT:5/3
 K:Defender
 K:Flying
 A:AB$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME attacks each turn if able. | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_nimbus.jpg
-SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/160.jpg
 Oracle:Defender, flying\n{1}{R}: Target creature attacks this turn if able.
+SetInfo:ROE Rare

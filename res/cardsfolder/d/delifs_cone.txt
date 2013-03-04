@@ -7,7 +7,6 @@ SVar:GainLife:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ DelifX | SubAb
 SVar:DBPump:DB$Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | StackDescription$ CARDNAME assigns no combat damage this turn.
 SVar:DelifX:Count$CardPower
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delifs_cone.jpg
-SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/169.jpg
 Oracle:{T}, Sacrifice Delif's Cone: This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
+SetInfo:FEM Common

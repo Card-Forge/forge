@@ -3,7 +3,6 @@ ManaCost:B G
 Types:Enchantment
 A:AB$ ManaReflected | Cost$ Sac<1/Land> | ColorOrType$ Type | Valid$ Defined.Sacrificed | ReflectProperty$ Produce | SpellDescription$ Add to your mana pool one mana of any type the sacrificed land could produce.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squandered_resources.jpg
-SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/137.jpg
 Oracle:Sacrifice a land: Add to your mana pool one mana of any type the sacrificed land could produce.
+SetInfo:VIS Rare

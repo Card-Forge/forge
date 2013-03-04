@@ -8,7 +8,7 @@ T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute
 SVar:TrigUntap:AB$ UntapAll | Cost$ 5 R R | ValidCards$ Creature.attacking | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellkite_charger.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/131.jpg
 Oracle:Flying, haste\nWhenever Hellkite Charger attacks, you may pay {5}{R}{R}. If you do, untap all attacking creatures and after this phase, there is an additional combat phase.
+SetInfo:ARC Rare
+SetInfo:ZEN Rare

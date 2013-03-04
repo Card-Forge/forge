@@ -11,8 +11,7 @@ T:Mode$ ChangesZone | ValidCard$ Creature.YouOwn | Origin$ Battlefield | Destina
 SVar:TrigEnduringBounce:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enduring_renewal.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/7.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/247.jpg
 Oracle:Play with your hand revealed.\nIf you would draw a card, reveal the top card of your library instead. If it's a creature card, put it into your graveyard. Otherwise, draw a card.\nWhenever a creature is put into your graveyard from the battlefield, return it to your hand.
+SetInfo:ICE Rare
+SetInfo:TSB Special

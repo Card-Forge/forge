@@ -3,7 +3,6 @@ ManaCost:4 R R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Double Strike | Description$ Creatures you control have double strike.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_reflection.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/104.jpg
 Oracle:Creatures you control have double strike.
+SetInfo:SHM Rare

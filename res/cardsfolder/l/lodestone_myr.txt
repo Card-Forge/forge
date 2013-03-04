@@ -4,7 +4,7 @@ Types:Artifact Creature Myr
 PT:2/2
 K:Trample
 A:AB$ Pump | Cost$ tapXType<1/Artifact> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lodestone_myr.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/200.jpg
 Oracle:Trample\nTap an untapped artifact you control: Lodestone Myr gets +1/+1 until end of turn.
+SetInfo:MRD Rare
+SetInfo:HOP Rare

@@ -6,7 +6,6 @@ K:Hexproof
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:BuffedBy:Forest
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dungrove_elder.jpg
-SetInfo:M12|Rare|http://magiccards.info/scans/en/m12/171.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nDungrove Elder's power and toughness are each equal to the number of Forests you control.
+SetInfo:M12 Rare

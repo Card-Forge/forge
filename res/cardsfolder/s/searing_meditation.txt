@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDamage | TriggerDescription$ Whenever you gain life, you may pay 2. If you do, CARDNAME deals 2 damage to target creature or player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 2 | NumDmg$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_meditation.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/226.jpg
 Oracle:Whenever you gain life, you may pay {2}. If you do, Searing Meditation deals 2 damage to target creature or player.
+SetInfo:RAV Rare
+SetInfo:DDH Rare

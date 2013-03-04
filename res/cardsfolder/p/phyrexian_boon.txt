@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Black | AddPower$ 2 | AddToughness$ 1 | Description$ Enchanted creature gets +2/+1 as long as it's black.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonBlack | AddPower$ -1 | AddToughness$ -2 | Description$ Otherwise, it gets -1/-2.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_boon.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/22.jpg|2
 Oracle:Enchant creature\nEnchanted creature gets +2/+1 as long as it's black. Otherwise, it gets -1/-2.
+SetInfo:ALL Common x2

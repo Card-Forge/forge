@@ -5,7 +5,6 @@ S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddHiddenKeyword$ A
 SVar:X:Count$Valid Plains.OppCtrl
 SVar:Y:Count$Valid Swamp.YouCtrl
 A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/massacre.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/58.jpg
 Oracle:If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.\nAll creatures get -2/-2 until end of turn.
+SetInfo:NMS Uncommon

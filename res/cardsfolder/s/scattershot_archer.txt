@@ -4,7 +4,6 @@ Types:Creature Elf Archer
 PT:1/2
 A:AB$ DamageAll | Cost$ T | ValidCards$ Creature.withFlying | NumDmg$ 1 | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scattershot_archer.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/90.jpg
 Oracle:{T}: Scattershot Archer deals 1 damage to each creature with flying.
+SetInfo:CFX Common

@@ -4,7 +4,6 @@ Types:Snow Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_flats.jpg
-SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/143.jpg
 Oracle:Arctic Flats enters the battlefield tapped.\n{T}: Add {G} or {W} to your mana pool.
+SetInfo:CSP Uncommon

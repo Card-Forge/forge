@@ -8,9 +8,8 @@ SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execu
 SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
 SVar:TrigDestroyBlocked:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgazer.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/126.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/130.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/124.jpg
 Oracle:Whenever Deathgazer blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+SetInfo:MMQ Uncommon
+SetInfo:8ED Uncommon
+SetInfo:9ED Uncommon

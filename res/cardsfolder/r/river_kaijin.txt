@@ -2,7 +2,6 @@ Name:River Kaijin
 ManaCost:2 U
 Types:Creature Spirit
 PT:1/4
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78586.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/83.jpg
 Oracle:
+SetInfo:CHK Common

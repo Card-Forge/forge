@@ -8,7 +8,6 @@ SVar:TrigNameCard:AB$ NameCard | Cost$ 0 | Defined$ You | AILogic$ MostProminent
 SVar:DBRevealHand:DB$ RevealHand | Defined$ TriggeredTarget | RememberRevealed$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.withFlying+YouCtrl | ChangeNum$ 1 | Shuffle$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isperia_the_inscrutable.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/114.jpg
 Oracle:Flying\nWhenever Isperia the Inscrutable deals combat damage to a player, name a card. That player reveals his or her hand. If he or she reveals the named card, search your library for a creature card with flying, reveal it, put it into your hand, then shuffle your library.
+SetInfo:DIS Rare

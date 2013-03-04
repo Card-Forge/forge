@@ -7,7 +7,6 @@ SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatin
 SVar:Mastery:AB$ Pump | Cost$ 0 | Defined$ TriggeredCard | KW$ HIDDEN CARDNAME can't be countered. | PumpZone$ Stack | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Graveyard
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overmaster.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/104.jpg
 Oracle:The next instant or sorcery spell you cast this turn can't be countered by spells or abilities.\nDraw a card.
+SetInfo:TOR Rare

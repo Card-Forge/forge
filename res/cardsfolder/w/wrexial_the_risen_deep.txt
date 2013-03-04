@@ -7,8 +7,7 @@ K:Swampwalk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPump | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may cast target instant or sorcery card from that player's graveyard without paying its mana cost. If that card would be put into a graveyard this turn, exile it instead.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | TgtZone$ Graveyard | ValidTgts$ Instant.DefenderCtrl,Sorcery.DefenderCtrl | TgtPrompt$ Choose target instant or sorcery card from an opponent's graveyard | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | PumpZone$ Graveyard | SubAbility$ TrigPlay
 SVar:TrigPlay:DB$ Play | Defined$ Targeted | WithoutManaCost$ True | Optional$ True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrexial_the_risen_deep.jpg
-SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/239.jpg
-SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/120.jpg
 Oracle:Islandwalk, swampwalk\nWhenever Wrexial, the Risen Deep deals combat damage to a player, you may cast target instant or sorcery card from that player's graveyard without paying its mana cost. If that card would be put into a graveyard this turn, exile it instead.
+SetInfo:COM Mythic
+SetInfo:WWK Mythic

@@ -7,7 +7,6 @@ A:AB$ Regenerate | Cost$ Sac<1/Forest> | Defined$ Enchanted | SpellDescription$ 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigBounce | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fortitude.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/253.jpg
 Oracle:Enchant creature\nSacrifice a Forest: Regenerate enchanted creature.\nWhen Fortitude is put into a graveyard from the battlefield, return Fortitude to its owner's hand.
+SetInfo:USG Common

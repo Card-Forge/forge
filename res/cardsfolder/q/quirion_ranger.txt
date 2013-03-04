@@ -4,7 +4,6 @@ Types:Creature Elf
 PT:1/1
 A:AB$ Untap | Cost$ Return<1/Forest> | ValidTgts$ Creature | TgtPrompt$ Select target creature | ActivationLimit$ 1 | SpellDescription$ Untap target creature. Activate this ability only once each turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_ranger.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/67.jpg
 Oracle:Return a Forest you control to its owner's hand: Untap target creature. Activate this ability only once each turn.
+SetInfo:VIS Common

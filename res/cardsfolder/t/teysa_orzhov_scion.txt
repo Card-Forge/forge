@@ -5,7 +5,6 @@ PT:2/3
 A:AB$ ChangeZone | Cost$ Sac<3/Creature.White/white creatures> | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature | SpellDescription$ Exile target creature.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Black+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another black creature you control is put into a graveyard from the battlefield, put a 1/1 white Spirit creature token with flying onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 1 1 Spirit | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teysa_orzhov_scion.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/134.jpg
 Oracle:Sacrifice three white creatures: Exile target creature.\nWhenever another black creature you control dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
+SetInfo:GPT Rare

@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Artifact Land
 Text:(Tree of Tales isn't a spell.)
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tree_of_tales.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/285.jpg
 Oracle:(Tree of Tales isn't a spell.)\n{T}: Add {G} to your mana pool.
+SetInfo:MRD Common
+SetInfo:HOP Common

@@ -2,18 +2,19 @@ Name:Counterspell
 ManaCost:U U
 Types:Instant
 A:SP$ Counter | Cost$ U U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counterspell.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/57.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/55.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/55.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/67.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/65.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/69.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/64.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/61.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/54.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/77.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/34.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/55.jpg
 Oracle:Counter target spell.
+SetInfo:S00 Common
+SetInfo:2ED Uncommon
+SetInfo:7ED Common
+SetInfo:TMP Common
+SetInfo:6ED Common
+SetInfo:5ED Common
+SetInfo:S99 Uncommon
+SetInfo:MMQ Common
+SetInfo:DD2 Common
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:ICE Common
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

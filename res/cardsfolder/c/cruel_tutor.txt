@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SubAbility$ DBLoseLife | SpellDescription$ Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
 SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 2
-SVar:Rarity:Rare
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/cruel_tutor.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po/9.jpg
 Oracle:Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
+SetInfo:POR Rare

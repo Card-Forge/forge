@@ -5,7 +5,6 @@ PT:4/4
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME gets +2/+2 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Arcane,Spirit
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scaled_hulk.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/143.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, Scaled Hulk gets +2/+2 until end of turn.
+SetInfo:BOK Common

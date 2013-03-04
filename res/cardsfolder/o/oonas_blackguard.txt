@@ -9,7 +9,6 @@ SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield |
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+counters_GE1_P1P1 | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigDiscardOpp | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, that player discards a card.
 SVar:TrigDiscardOpp:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oonas_blackguard.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/72.jpg
 Oracle:Flying\nEach other Rogue creature you control enters the battlefield with an additional +1/+1 counter on it.\nWhenever a creature you control with a +1/+1 counter on it deals combat damage to a player, that player discards a card.
+SetInfo:MOR Uncommon

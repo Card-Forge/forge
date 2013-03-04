@@ -4,7 +4,6 @@ Types:Creature Djinn
 PT:4/4
 K:Flying
 K:Phasing
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breezekeeper.jpg
 Oracle:Flying\nPhasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/27.jpg
+SetInfo:VIS Common

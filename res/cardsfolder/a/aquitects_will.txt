@@ -7,7 +7,6 @@ SVar:DBDraw:DB$ Draw | Cost$ 0 | NumCards$ 1 | ConditionPresent$ Merfolk.YouCtrl
 SVar:STFlood:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.counters_GE1_FLOOD | AddType$ Island
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aquitects_will.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/52.jpg
 Oracle:Put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it. If you control a Merfolk, draw a card.
+SetInfo:LRW Common

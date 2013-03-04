@@ -7,7 +7,8 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigChoose:AB$ ChooseCard | Cost$ 0 | Defined$ You | SunderingTitan$ True | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Card.ChosenCard | SpellDescription$ Destroy all chosen cards.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sundering_titan.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/146.jpg
 Oracle:When Sundering Titan enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
+SetInfo:DST Rare
+SetInfo:ARC Rare
+SetInfo:V10 Mythic

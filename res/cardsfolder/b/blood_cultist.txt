@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_cultist.jpg
-SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/157.jpg
 Oracle:{T}: Blood Cultist deals 1 damage to target creature.\nWhenever a creature dealt damage by Blood Cultist this turn dies, put a +1/+1 counter on Blood Cultist.
+SetInfo:ALA Uncommon

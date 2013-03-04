@@ -5,7 +5,6 @@ PT:4/4
 K:Flying
 T:Mode$ BecomesTarget | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature becomes the target of a spell or ability, destroy that creature.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horobi_deaths_wail.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/117.jpg
 Oracle:Flying\nWhenever a creature becomes the target of a spell or ability, destroy that creature.
+SetInfo:CHK Rare

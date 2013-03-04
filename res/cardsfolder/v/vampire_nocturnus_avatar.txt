@@ -4,5 +4,5 @@ Types:Vanguard
 HandLifeModifier:-1/-2
 K:Play with the top card of your library revealed.
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.Black+YouCtrl | AddPower$ 2 | AddToughness$ 1 | TopCardOfLibraryIs$ Card.Black | Description$ As long as the top card of your library is black, black creatures you control get +2/+1.
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/vampire-nocturnus.jpg
 Oracle:Hand -1, life -2\nPlay with the top card of your library revealed.\nAs long as the top card of your library is black, black creatures you control get +2/+1.
+SetInfo:VAN Special

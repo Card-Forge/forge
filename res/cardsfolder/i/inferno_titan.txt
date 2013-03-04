@@ -7,8 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DmgDistro | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
 SVar:DmgDistro:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
 SVar:HasAttackEffect:TRUE
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_titan.jpg
-SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/146.jpg
-SetInfo:M12|Mythic|http://magiccards.info/scans/en/m12/147.jpg
 Oracle:{R}: Inferno Titan gets +1/+0 until end of turn.\nWhenever Inferno Titan enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
+SetInfo:M11 Mythic
+SetInfo:M12 Mythic

@@ -6,7 +6,6 @@ SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddType$ ChosenType | Description$ Each creature you control is the chosen type in addition to its other types.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xenograft.jpg
-SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/51.jpg
 Oracle:As Xenograft enters the battlefield, choose a creature type.\nEach creature you control is the chosen type in addition to its other types.
+SetInfo:NPH Rare

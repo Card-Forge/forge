@@ -4,7 +4,6 @@ Types:Creature Orc
 PT:1/1
 A:AB$ DealDamage | Cost$ T Sac<1/Artifact> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_mechanics.jpg
-SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/92.jpg
 Oracle:{T}, Sacrifice an artifact: Orcish Mechanics deals 2 damage to target creature or player.
+SetInfo:ATQ Common

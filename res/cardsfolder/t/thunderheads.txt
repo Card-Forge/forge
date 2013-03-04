@@ -4,7 +4,7 @@ Types:Instant
 K:Replicate 2 U
 A:SP$ Token | Cost$ 2 U | TokenName$ Weird | TokenOwner$ You | TokenPower$ 3 | TokenToughness$ 3 | TokenKeywords$ Defender<>Flying | TokenHiddenKeywords$ At the beginning of the end step, exile CARDNAME. | TokenAmount$ 1 | TokenColors$ Blue | TokenTypes$ Creature,Weird | SpellDescription$ Put a 3/3 blue Weird creature token with defender and flying onto the battlefield. Exile it at the beginning of the next end step.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderheads.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/37.jpg
 Oracle:Replicate {2}{U} (When you cast this spell, copy it for each time you paid its replicate cost.)\nPut a 3/3 blue Weird creature token with defender and flying onto the battlefield. Exile it at the beginning of the next end step.
+SetInfo:GPT Uncommon
+SetInfo:DDJ Uncommon

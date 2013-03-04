@@ -6,7 +6,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloistered_youth.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/8a.jpg
 Oracle:At the beginning of your upkeep, you may transform Cloistered Youth.\n----\nUnholy Fiend\n(Black)\nCreature - Horror\n3/3\nAt the beginning of your end step, you lose 1 life.
 
 ALTERNATE
@@ -19,6 +18,6 @@ PT:3/3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, you lose 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unholy_fiend.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/8b.jpg
 Oracle:Creature - Horror\n3/3\nAt the beginning of your end step, you lose 1 life.
 
+SetInfo:ISD Uncommon

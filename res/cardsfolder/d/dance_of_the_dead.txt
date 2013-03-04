@@ -13,7 +13,6 @@ SVar:TrigSacrifice:DB$ Destroy | Sacrifice$ True | Defined$ Remembered
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature gets +1/+1 and doesn't untap during its controller's untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | OptionalDecider$ EnchantedController | Execute$ TrigUntap | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may pay 1 B. If he or she does, untap that creature.
 SVar:TrigUntap:AB$Untap | Cost$ 1 B | Defined$ Enchanted
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dance_of_the_dead.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/6.jpg
 Oracle:Enchant creature card in a graveyard\nWhen Dance of the Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with Dance of the Dead." Return enchanted creature card to the battlefield tapped under your control and attach Dance of the Dead to it. When Dance of the Dead leaves the battlefield, that creature's controller sacrifices it.\nEnchanted creature gets +1/+1 and doesn't untap during its controller's untap step.\nAt the beginning of the upkeep of enchanted creature's controller, that player may pay {1}{B}. If he or she does, untap that creature.
+SetInfo:ICE Uncommon

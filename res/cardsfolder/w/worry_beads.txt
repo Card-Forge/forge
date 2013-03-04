@@ -4,7 +4,6 @@ Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard.
 SVar:TrigMill:AB$Mill | Cost$ 0 | Defined$ TriggeredPlayer | NumCards$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worry_beads.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/315.jpg
 Oracle:At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard.
+SetInfo:MMQ Rare

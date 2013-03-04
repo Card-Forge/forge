@@ -3,7 +3,6 @@ ManaCost:R
 Types:Creature Spirit
 PT:1/1
 A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals 1 damage to target creature.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/bok/en-us/card74621.jpg
-SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/103.jpg
 Oracle:Sacrifice Frostling: Frostling deals 1 damage to target creature.
+SetInfo:BOK Common

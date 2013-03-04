@@ -5,7 +5,6 @@ PT:8/8
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME the Tidemaker attacks, you may pay 8. If you do, tap up to eight target permanents. Those permanents don't untap during their controllers' next untap steps.
 SVar:TrigTap:AB$ Tap | Cost$ 8 | ValidTgts$ Permanent | TargetMin$ 0 | TargetMax$ 8 | TgtPrompt$ Select target permanent | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lorthos_the_tidemaker.jpg
-SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/53.jpg
 Oracle:Whenever Lorthos, the Tidemaker attacks, you may pay {8}. If you do, tap up to eight target permanents. Those permanents don't untap during their controllers' next untap steps.
+SetInfo:ZEN Mythic

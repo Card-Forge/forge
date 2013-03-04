@@ -5,7 +5,6 @@ R:Event$ DamageDone | ValidSource$ Instant,Sorcery | ValidTarget$ You | DamageAm
 SVar:Dmg2:AB$DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ 2
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 3
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forethought_amulet.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/221.jpg
 Oracle:At the beginning of your upkeep, sacrifice Forethought Amulet unless you pay {3}.\nIf an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead.
+SetInfo:LEG Rare

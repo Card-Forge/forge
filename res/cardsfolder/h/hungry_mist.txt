@@ -3,8 +3,7 @@ ManaCost:2 G G
 Types:Creature Elemental
 PT:6/2
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay G G
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hungry_mist.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/60.jpg|2
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/164.jpg
 Oracle:At the beginning of your upkeep, sacrifice Hungry Mist unless you pay {G}{G}.
+SetInfo:5ED Common
+SetInfo:HML Common x2

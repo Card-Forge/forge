@@ -8,8 +8,7 @@ SVar:CombatDamageEvent:Event$ DamageDone | ValidSource$ Creature.IsImprinted | V
 SVar:MirrorStrikeDmg:AB$ DealDamage | Cost$ 0 | Defined$ EffectSource | DamageSource$ ReplacedSource | NumDmg$ MirroredX | References$ MirroredX
 SVar:MirrorStrikeCombatDmg:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ EffectSource | DamageSource$ ReplacedSource | NumDmg$ MirroredX | References$ MirroredX
 SVar:MirroredX:ReplaceCount$DamageAmount
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimian_night_stalker.jpg
-SetInfo:CHR|Uncommon|http://magiccards.info/scans/en/ch/8.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/30.jpg
 Oracle:{B}, {T}: All damage that would be dealt to you this turn by target attacking creature is dealt to Shimian Night Stalker instead.
+SetInfo:CHR Uncommon
+SetInfo:LEG Uncommon

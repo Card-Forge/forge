@@ -3,7 +3,6 @@ ManaCost:1 UB
 Types:Sorcery
 A:SP$ Draw | Cost$ 1 UB AddCounter<1/M1M1/Creature.YouCtrl/a creature you control> | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarscale_ritual.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/175.jpg
 Oracle:As an additional cost to cast Scarscale Ritual, put a -1/-1 counter on a creature you control.\nDraw two cards.
+SetInfo:SHM Common

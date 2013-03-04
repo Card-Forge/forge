@@ -7,18 +7,17 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered |
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_red.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/13.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/223.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/198.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/9.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/296.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/267.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/11.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/239.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/11.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/196.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/197.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/196.jpg
 Oracle:{1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.
+SetInfo:8ED Uncommon
+SetInfo:2ED Common
+SetInfo:7ED Common
+SetInfo:TMP Common
+SetInfo:6ED Common
+SetInfo:5ED Common
+SetInfo:9ED Uncommon
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:ICE Common
+SetInfo:4ED Common
+SetInfo:3ED Common

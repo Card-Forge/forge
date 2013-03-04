@@ -3,8 +3,7 @@ ManaCost:1 W W
 Types:Enchantment
 S:Mode$ RaiseCost | ValidCard$ Artifact,Enchantment | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Artifact and enchantment spells your opponents cast cost 2 more to cast.
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment,Artifact | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_of_silence.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/123.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/6.jpg
 Oracle:Artifact and enchantment spells your opponents cast cost {2} more to cast.\nSacrifice Aura of Silence: Destroy target artifact or enchantment.
+SetInfo:WTH Uncommon
+SetInfo:10E Uncommon

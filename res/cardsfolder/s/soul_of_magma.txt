@@ -6,7 +6,6 @@ T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Trig
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1
 SVar:BuffedBy:Arcane,Spirit
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_of_magma.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/189.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, Soul of Magma deals 1 damage to target creature.
+SetInfo:CHK Common

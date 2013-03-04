@@ -4,7 +4,6 @@ Types:Creature Human Knight
 Text:Prevent all damage that would be dealt to CARDNAME by creatures.
 PT:3/3
 K:PreventAllDamageBy Creature
-SVar:Rarity:Rare
 SVar:Picture:http://magiccards.info/scans/en/st/11.jpg
-SetInfo:S99|Rare|http://magiccards.info/scans/en/st/11.jpg
 Oracle:Prevent all damage that would be dealt to Champion Lancer by creatures.
+SetInfo:S99 Rare

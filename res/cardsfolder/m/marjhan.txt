@@ -11,7 +11,6 @@ A:AB$ DealDamage | Cost$ U U | NumDmg$ 1 | ValidTgts$ Creature.attacking+without
 SVar:DBPump:DB$ Pump | NumAtt$ -1| Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marjhan.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/39.jpg
 Oracle:Marjhan doesn't untap during your untap step.\n{U}{U}, Sacrifice a creature: Untap Marjhan. Activate this ability only during your upkeep.\nMarjhan can't attack unless defending player controls an Island.\n{U}{U}: Marjhan gets -1/-0 until end of turn and deals 1 damage to target attacking creature without flying.\nWhen you control no Islands, sacrifice Marjhan.
+SetInfo:HML Rare

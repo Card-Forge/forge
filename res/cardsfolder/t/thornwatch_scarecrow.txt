@@ -9,7 +9,6 @@ SVar:Y:Count$Valid Creature.White+YouCtrl
 SVar:BuffedBy:Creature.White,Creature.Green
 SVar:RemRandomDeck:True
 DeckNeeds:Color$white|green
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornwatch_scarecrow.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/265.jpg
 Oracle:Thornwatch Scarecrow has wither as long as you control a green creature. (It deals damage to creatures in the form of -1/-1 counters.)\nThornwatch Scarecrow has vigilance as long as you control a white creature.
+SetInfo:SHM Common

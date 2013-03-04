@@ -12,5 +12,5 @@ SVar:ArcheryX:Count$TotalCounters_ARROW_Card.IsImprinted+namedArchery Training
 SVar:DBArcheryCleanup:DB$ Pump | ForgetLastImprinted$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archery_training.jpg
-SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/2.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, you may put an arrow counter on Archery Training.\nEnchanted creature has "{T}: This creature deals X damage to target attacking or blocking creature, where X is the number of arrow counters on Archery Training."
+SetInfo:UDS Uncommon

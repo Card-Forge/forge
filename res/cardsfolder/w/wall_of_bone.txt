@@ -4,14 +4,14 @@ Types:Creature Skeleton Wall
 PT:1/4
 K:Defender
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_bone.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/41.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/41.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/169.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/65.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/52.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/119.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/42.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/41.jpg
 Oracle:Defender (This creature can't attack.)\n{B}: Regenerate Wall of Bone. (The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)
+SetInfo:2ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:M10 Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon
+SetInfo:DDD Uncommon

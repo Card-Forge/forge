@@ -8,8 +8,7 @@ K:Evoke:4 R
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select a land.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faultgrinder.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/122.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/163.jpg
 Oracle:Trample\nWhen Faultgrinder enters the battlefield, destroy target land.\nEvoke {4}{R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
+SetInfo:COM Common
+SetInfo:LRW Common

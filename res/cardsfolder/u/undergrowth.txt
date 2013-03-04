@@ -6,7 +6,6 @@ A:SP$ Fog | Cost$ G | SpellDescription$ Prevent all combat damage that would be 
 A:SP$ Effect | Cost$ 2 R G | Name$ Undergrowth Effect | StaticAbilities$ KWPump | SpellDescription$ If its additional cost was paid, CARDNAME doesn't affect combat damage that would be dealt by red creatures.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.nonRed | AddHiddenKeyword$ Prevent all combat damage that would be dealt by CARDNAME. | Description$ Prevent all combat damage this turn except that from red creatures.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undergrowth.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/87.jpg|2
 Oracle:As an additional cost to cast Undergrowth, you may pay {2}{R}.\nPrevent all combat damage that would be dealt this turn. If its additional cost was paid, Undergrowth doesn't affect combat damage that would be dealt by red creatures.
+SetInfo:ALL Common x2

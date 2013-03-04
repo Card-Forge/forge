@@ -4,7 +4,6 @@ Types:Creature Horror Spellshaper
 PT:1/1
 A:AB$ Pump | Cost$ 1 B T Discard<1/Card> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Target creature gets +1/+0 and gains first strike until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ridged_kusite.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/78.jpg
 Oracle:{1}{B}, {T}, Discard a card: Target creature gets +1/+0 and gains first strike until end of turn.
+SetInfo:PLC Common

@@ -6,7 +6,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ 
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice it unless you exile a card from your graveyard.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ You
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_giant.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/158.jpg
 Oracle:Whenever Rotting Giant attacks or blocks, sacrifice it unless you exile a card from your graveyard.
+SetInfo:ODY Uncommon

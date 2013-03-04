@@ -3,7 +3,6 @@ ManaCost:U
 Types:Instant
 A:SP$ Pump | Cost$ U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDef$ +1 | KW$ Hexproof | SpellDescription$ Target creature you control gets +0/+1 and gains hexproof until end of turn.
 A:SP$ PumpAll | Cost$ 1 U | ValidCards$ Creature.YouCtrl | ValidDescription$ each creature you control. | NumDef$ +1 | KW$ Hexproof | PrecostDesc$ Overload | CostDesc$ 1 U | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mizzium_skin.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/45.jpg
 Oracle:Target creature you control gets +0/+1 and gains hexproof until end of turn.\nOverload {1}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.".)
+SetInfo:RTR Common

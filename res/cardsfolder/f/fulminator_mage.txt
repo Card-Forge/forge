@@ -3,7 +3,6 @@ ManaCost:1 BR BR
 Types:Creature Elemental Shaman
 PT:2/2
 A:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fulminator_mage.jpg
-SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/188.jpg
 Oracle:Sacrifice Fulminator Mage: Destroy target nonbasic land.
+SetInfo:SHM Rare

@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spined_fluke.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/160.jpg
 Oracle:When Spined Fluke enters the battlefield, sacrifice a creature.\n{B}: Regenerate Spined Fluke.
+SetInfo:USG Uncommon

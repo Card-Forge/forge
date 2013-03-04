@@ -5,7 +5,6 @@ PT:1/1
 A:AB$ ChangeZone | Cost$ 2 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | UnlessCost$ 2 | UnlessPayer$ TargetedController | ActivationZone$ Graveyard | SubAbility$ ExileME | SpellDescription$ Exile CARDNAME and target creature unless that creature's controller pays 2. Activate this ability only if CARDNAME is in your graveyard.
 SVar:ExileME:DB$ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrionette.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/5.jpg
 Oracle:{2}{B}{B}: Exile Carrionette and target creature unless that creature's controller pays {2}. Activate this ability only if Carrionette is in your graveyard.
+SetInfo:TMP Rare

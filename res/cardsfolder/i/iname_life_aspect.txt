@@ -7,7 +7,6 @@ SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile 
 SVar:DBReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Spirit.YouCtrl | TargetMin$ 0 | TargetMax$ X | References$ X
 SVar:X:Count$TypeInYourYard.Spirit
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iname_life_aspect.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/215.jpg
 Oracle:When Iname, Life Aspect dies, you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand.
+SetInfo:CHK Rare

@@ -6,8 +6,7 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$YourLifeTotal
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self  | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 SVar:TrigShuffle:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ Self
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_avatar.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/45.jpg
-SetInfo:M13|Mythic|http://magiccards.info/scans/en/m13/32.jpg
 Oracle:Serra Avatar's power and toughness are each equal to your life total.\nWhen Serra Avatar is put into a graveyard from anywhere, shuffle it into its owner's library.
+SetInfo:M13 Mythic
+SetInfo:USG Rare

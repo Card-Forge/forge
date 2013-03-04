@@ -8,8 +8,7 @@ SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Mode$ Hand | RememberDiscarded$ True | 
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malfegor.jpg
-SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/208.jpg
-SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/117.jpg
 Oracle:Flying\nWhen Malfegor enters the battlefield, discard your hand. Each opponent sacrifices a creature for each card discarded this way.
+SetInfo:COM Mythic
+SetInfo:CFX Mythic

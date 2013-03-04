@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Token | Cost$ 1 B B Sac<1/Creature> | TokenName$ Insect | TokenColors$ Black | TokenTypes$ Creature,Insect | TokenPower$ 0 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ X | References$ X | SpellDescription$ Put X 0/1 black Insect creature tokens onto the battlefield, where X is the sacrificed creature's power.
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/9.jpg
 Oracle:As an additional cost to cast Carrion, sacrifice a creature.\nPut X 0/1 black Insect creature tokens onto the battlefield, where X is the sacrificed creature's power.
+SetInfo:MIR Rare

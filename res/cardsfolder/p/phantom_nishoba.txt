@@ -9,7 +9,6 @@ SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$
 SVar:X:TriggerCount$DamageAmount
 K:If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_nishoba.jpg
-SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/140.jpg
 Oracle:Trample\nPhantom Nishoba enters the battlefield with seven +1/+1 counters on it.\nWhenever Phantom Nishoba deals damage, you gain that much life.\nIf damage would be dealt to Phantom Nishoba, prevent that damage. Remove a +1/+1 counter from Phantom Nishoba.
+SetInfo:JUD Rare

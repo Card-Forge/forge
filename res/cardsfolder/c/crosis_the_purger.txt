@@ -6,7 +6,7 @@ K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 B. If you do, choose a color, then that player reveals his or her hand and discards all cards of that color.
 SVar:TrigChoose:AB$ ChooseColor | Cost$ 2 B | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBRevealDiscard
 SVar:DBRevealDiscard:DB$ Discard | Mode$ RevealDiscardAll | DiscardValid$ Card.ChosenColor | Defined$ TriggeredTarget
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crosis_the_purger.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/242.jpg
 Oracle:Flying\nWhenever Crosis, the Purger deals combat damage to a player, you may pay {2}{B}. If you do, choose a color, then that player reveals his or her hand and discards all cards of that color.
+SetInfo:PD3 Rare
+SetInfo:INV Rare

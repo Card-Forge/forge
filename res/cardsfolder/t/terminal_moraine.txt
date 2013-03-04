@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terminal_moraine.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/142.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{2}, {T}, Sacrifice Terminal Moraine: Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
+SetInfo:PLS Uncommon

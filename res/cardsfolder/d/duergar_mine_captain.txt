@@ -3,7 +3,6 @@ ManaCost:2 RW
 Types:Creature Dwarf Soldier
 PT:2/1
 A:AB$ PumpAll | Cost$ 1 RW Q | ValidCards$ Creature.attacking | NumAtt$ +1 | SpellDescription$ Attacking creatures get +1/+0 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_mine_captain.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/138.jpg
 Oracle:{1}{R/W}, {Q}: Attacking creatures get +1/+0 until end of turn. ({Q} is the untap symbol.)
+SetInfo:EVE Uncommon

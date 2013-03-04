@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Card.EquippedBy+Legendary | AddPower$ 2 | AddToug
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Red | AddKeyword$ Trample | Description$ As long as it's red, it has trample.
 SVar:RemRandomDeck:True
 DeckNeeds:Color$red
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tenza_godos_maul.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/271.jpg
 Oracle:Equipped creature gets +1/+1. As long as it's legendary, it gets an additional +2/+2. As long as it's red, it has trample.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:CHK Uncommon

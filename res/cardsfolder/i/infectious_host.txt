@@ -4,7 +4,6 @@ Types:Creature Zombie
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, target player loses 2 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_host.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/91.jpg
 Oracle:When Infectious Host dies, target player loses 2 life.
+SetInfo:RAV Common

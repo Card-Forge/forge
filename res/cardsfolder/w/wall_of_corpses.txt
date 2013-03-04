@@ -4,7 +4,6 @@ Types:Creature Wall
 PT:0/2
 K:Defender
 A:AB$ Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.blockedBySource | TgtPrompt$ Select target creature Wall of Corpses is blocking | SpellDescription$ Destroy target creature CARDNAME is blocking.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_corpses.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/49.jpg
 Oracle:Defender (This creature can't attack.)\n{B}, Sacrifice Wall of Corpses: Destroy target creature Wall of Corpses is blocking.
+SetInfo:MIR Common

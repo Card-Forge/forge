@@ -4,7 +4,6 @@ Types:Creature Zombie
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of your upkeep, tap CARDNAME unless you pay 2 life.
 SVar:TrigTap:DB$ Tap | UnlessCost$ PayLife<2> | UnlessPayer$ You | Defined$ Self
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sangrophage.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/127.jpg
 Oracle:At the beginning of your upkeep, tap Sangrophage unless you pay 2 life.
+SetInfo:TSP Common

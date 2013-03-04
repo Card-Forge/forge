@@ -6,7 +6,6 @@ A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Land | TgtPrompt$ Select target land | 
 A:SP$ Destroy | Cost$ 6 R R R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBDestroy | PrecostDesc$ Entwine | CostDesc$ 3 R | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
 SVar:DBDestroy:DB$Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_rust.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/76.jpg
 Oracle:Choose one - Destroy target artifact; or destroy target land.\nEntwine {3}{R} (Choose both if you pay the entwine cost.)
+SetInfo:5DN Common

@@ -5,7 +5,6 @@ A:SP$ PreventDamage | Cost$ 2 W | ValidTgts$ Creature,Player | TgtPrompt$ Select
 K:Cycling:1 W
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPrevent | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may prevent the next 1 damage that would be dealt to target creature or player this turn.
 SVar:TrigPrevent:AB$ PreventDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | Amount$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunfire_balm.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/56.jpg
 Oracle:Prevent the next 4 damage that would be dealt to target creature or player this turn.\nCycling {1}{W} ({1}{W}, Discard this card: Draw a card.)\nWhen you cycle Sunfire Balm, you may prevent the next 1 damage that would be dealt to target creature or player this turn.
+SetInfo:ONS Uncommon

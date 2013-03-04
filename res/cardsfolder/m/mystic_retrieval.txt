@@ -7,5 +7,5 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_retrieval
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_retrieval.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/42.jpg
 Oracle:Return target instant or sorcery card from your graveyard to your hand.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:DKA Uncommon

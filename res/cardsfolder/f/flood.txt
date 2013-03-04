@@ -2,9 +2,8 @@ Name:Flood
 ManaCost:U
 Types:Enchantment
 A:AB$ Tap | Cost$ U U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flood.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/87.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/26.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/73.jpg
 Oracle:{U}{U}: Tap target creature without flying.
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:DRK Uncommon

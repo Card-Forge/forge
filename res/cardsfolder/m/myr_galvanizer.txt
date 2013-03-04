@@ -5,7 +5,6 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Myr+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Myr creatures you control get +1/+1.
 A:AB$ UntapAll | Cost$ 1 T | ValidCards$ Myr.Other+YouCtrl | SpellDescription$ Untap each other Myr you control.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_galvanizer.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/181.jpg
 Oracle:Other Myr creatures you control get +1/+1.\n{1}, {T}: Untap each other Myr you control.
+SetInfo:SOM Uncommon

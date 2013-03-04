@@ -5,7 +5,6 @@ K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SpellDescription$ As CARDNAME enters the battlefield, name a nonland card.
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ The named card can't be cast.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nevermore.jpg
-SetInfo:ISD|Rare|http://magiccards.info/scans/en/isd/25.jpg
 Oracle:As Nevermore enters the battlefield, name a nonland card.\nThe named card can't be cast.
+SetInfo:ISD Rare

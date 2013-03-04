@@ -9,7 +9,6 @@ SVar:DBDiscard:DB$ Discard | DefinedCards$ Imprinted | Defined$ Targeted | Mode$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Imprinted$CardToughness
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talaras_bane.jpg
 Oracle:Target opponent reveals his or her hand. You choose a green or white creature card from it. You gain life equal that creature card's toughness, then that player discards that card.
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/47.jpg
+SetInfo:EVE Common

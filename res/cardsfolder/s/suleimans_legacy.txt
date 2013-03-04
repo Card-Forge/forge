@@ -6,7 +6,6 @@ SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Djinn,Efreet | NoRegen
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Djinn,Efreet | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredCard | NoRegen$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suleimans_legacy.jpg
-SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/138.jpg
 Oracle:When Suleiman's Legacy enters the battlefield, destroy all Djinns and Efreets. They can't be regenerated.\nWhenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated.
+SetInfo:VIS Rare

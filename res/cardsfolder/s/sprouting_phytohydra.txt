@@ -6,7 +6,6 @@ K:Defender
 T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME is dealt damage, you may put a token that's a copy of CARDNAME onto the battlefield.
 SVar:TrigCopy:AB$CopyPermanent | Cost$ 0 | Defined$ Self
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_phytohydra.jpg
-SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/95.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Sprouting Phytohydra is dealt damage, you may put a token that's a copy of Sprouting Phytohydra onto the battlefield.
+SetInfo:DIS Rare

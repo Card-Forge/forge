@@ -3,7 +3,6 @@ ManaCost:6
 Types:Artifact
 A:AB$ ExchangeLife | Cost$ 6 T | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target player | SpellDescription$ Two target players exchange life totals.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_conduit.jpg
-SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/158.jpg
 Oracle:{6}, {T}: Two target players exchange life totals.
+SetInfo:NPH Rare

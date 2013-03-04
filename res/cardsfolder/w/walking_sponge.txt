@@ -8,7 +8,6 @@ SVar:SpongeFly:DB$Animate | Defined$ Targeted | RemoveKeywords$ Flying | ChoiceD
 SVar:SpongeStrike:DB$Animate | Defined$ Targeted | RemoveKeywords$ First Strike | ChoiceDescription$ Targeted creature loses first strike.
 SVar:SpongeTramp:DB$Animate | Defined$ Targeted | RemoveKeywords$ Trample | ChoiceDescription$ Targeted creature loses trample.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/walking_sponge.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/47.jpg
 Oracle:{T}: Target creature loses your choice of flying, first strike, or trample until end of turn.
+SetInfo:ULG Uncommon

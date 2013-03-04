@@ -7,7 +7,6 @@ T:Mode$ DamageDone | Execute$ TrigToken | ValidTarget$ Card.Self | TriggerZones$
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodhatch_nantuko.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/250.jpg
 Oracle:Whenever Broodhatch Nantuko is dealt damage, you may put that many 1/1 green Insect creature tokens onto the battlefield.\nMorph {2}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:ONS Uncommon

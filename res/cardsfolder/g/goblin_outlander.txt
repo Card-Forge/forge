@@ -3,7 +3,6 @@ ManaCost:B R
 Types:Creature Goblin Scout
 PT:2/2
 K:Protection from white
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_outlander.jpg
-SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/109.jpg
 Oracle:Protection from white
+SetInfo:CFX Common

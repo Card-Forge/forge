@@ -5,8 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
 A:AB$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cage_of_hands.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/4.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/3.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block.\n{1}{W}: Return Cage of Hands to its owner's hand.
+SetInfo:PC2 Common
+SetInfo:CHK Common

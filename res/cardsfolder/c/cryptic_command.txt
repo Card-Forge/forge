@@ -8,7 +8,6 @@ SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTg
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.OppCtrl | SpellDescription$ Tap all creatures your opponents control.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_command.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/56.jpg
 Oracle:Choose two - Counter target spell; or return target permanent to its owner's hand; or tap all creatures your opponents control; or draw a card.
+SetInfo:LRW Rare

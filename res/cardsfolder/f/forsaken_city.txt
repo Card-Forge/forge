@@ -6,7 +6,6 @@ A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any col
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may exile a card from your hand. If you do, untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ ExileFromHand<1/Card> | Defined$ Self
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forsaken_city.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/139.jpg
 Oracle:Forsaken City doesn't untap during your untap step.\nAt the beginning of your upkeep, you may exile a card from your hand. If you do, untap Forsaken City.\n{T}: Add one mana of any color to your mana pool.
+SetInfo:PLS Rare

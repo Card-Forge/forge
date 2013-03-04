@@ -3,7 +3,6 @@ ManaCost:3 W
 Types:Creature Griffin
 PT:2/4
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/makindi_griffin.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/36.jpg
 Oracle:Flying
+SetInfo:ROE Common

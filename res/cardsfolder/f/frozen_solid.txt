@@ -5,8 +5,7 @@ Text:When enchanted creature is dealt damage, destroy it.
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. & HIDDEN When CARDNAME is dealt damage, destroy it. | Description$ Enchanted creature doesn't untap during its controller's untap step.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frozen_solid.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/36.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/35.jpg
 Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\nWhen enchanted creature is dealt damage, destroy it.
+SetInfo:SCG Common
+SetInfo:CSP Common

@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Persist | CheckSVar$ Y | 
 SVar:X:Count$Valid Creature.Blue+YouCtrl
 SVar:Y:Count$Valid Creature.Black+YouCtrl
 SVar:BuffedBy:Creature.Black,Creature.Blue
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wingrattle_scarecrow.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/270.jpg
 Oracle:Wingrattle Scarecrow has flying as long as you control a blue creature.\nWingrattle Scarecrow has persist as long as you control a black creature. (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+SetInfo:SHM Common

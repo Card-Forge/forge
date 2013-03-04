@@ -9,4 +9,4 @@ SVar:GainSecondLife:DB$ GainLife | LifeAmount$ 1 | ConditionCheckSVar$ AllCols
 SVar:AllCols:TriggeredCard$Valid Card.AllChosenColors
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tablet_of_the_guilds.jpg
 Oracle:As Tablet of the Guilds enters the battlefield, choose two colors.\nWhenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/235.jpg
+SetInfo:RTR Uncommon

@@ -6,7 +6,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield 
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ HavocX
 SVar:HavocX:TriggeredPlayer$LifeTotal/HalfUp
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/havoc_festival.jpg
-SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/166.jpg
 Oracle:Players can't gain life.\nAt the beginning of each player's upkeep, that player loses half his or her life, rounded up.
+SetInfo:RTR Rare

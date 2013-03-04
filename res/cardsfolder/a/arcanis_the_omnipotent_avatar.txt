@@ -6,5 +6,5 @@ A:AB$ Draw | ActivationZone$ Command | Announce$ X | Cost$ XCantBe0 X Return<1/C
 SVar:X:Count$xPaid
 SVar:Y:Count$Random.0.X
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/arcanis_the_omnipotent_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/arcanis-the-omnipotent.jpg
 Oracle:Hand +1, life -3\n{X}, Return a creature you control with converted mana cost X to its owner's hand: Draw a number of cards chosen at random between 0 and X. X can't be 0.
+SetInfo:VAN Special

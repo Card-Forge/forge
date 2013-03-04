@@ -5,7 +5,6 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ X | References$ X | SpellDescription$ Add 1 to your mana pool for each Locus on the battlefield.
 SVar:X:Count$Valid Locus
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudpost.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/280.jpg
 Oracle:Cloudpost enters the battlefield tapped.\n{T}: Add {1} to your mana pool for each Locus on the battlefield.
+SetInfo:MRD Common

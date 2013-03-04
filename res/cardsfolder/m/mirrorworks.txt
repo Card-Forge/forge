@@ -3,7 +3,6 @@ ManaCost:5
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Artifact.nonToken+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken artifact enters the battlefield under your control, you may pay 2. If you do, put a token that's a copy of that artifact onto the battlefield.
 SVar:TrigCopy:AB$CopyPermanent | Cost$ 2 | Defined$ TriggeredCard
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirrorworks.jpg
-SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/114.jpg
 Oracle:Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}. If you do, put a token that's a copy of that artifact onto the battlefield.
+SetInfo:MBS Rare

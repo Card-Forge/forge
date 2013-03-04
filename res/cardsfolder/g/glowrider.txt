@@ -3,7 +3,6 @@ ManaCost:2 W
 Types:Creature Human Cleric
 PT:2/1
 S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost 1 more to cast.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glowrider.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/15.jpg
 Oracle:Noncreature spells cost {1} more to cast.
+SetInfo:LGN Rare

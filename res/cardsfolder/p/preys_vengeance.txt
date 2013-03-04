@@ -4,5 +4,5 @@ Types:Instant
 K:Rebound
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/preys_vengeance.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/205.jpg
 Oracle:Target creature gets +2/+2 until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
+SetInfo:ROE Uncommon

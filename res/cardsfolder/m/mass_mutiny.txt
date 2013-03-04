@@ -3,7 +3,6 @@ ManaCost:3 R R
 Types:Sorcery
 A:SP$ GainControl | Cost$ 3 R R | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls to gain control of. | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
 SVar:OneEach:PlayerCountOpponents$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_mutiny.jpg
-SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/48.jpg
 Oracle:For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
+SetInfo:PC2 Rare

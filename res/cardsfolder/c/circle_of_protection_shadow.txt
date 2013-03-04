@@ -7,7 +7,6 @@ SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_shadow.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/224.jpg
 Oracle:{1}: The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
+SetInfo:TMP Common

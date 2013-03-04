@@ -11,7 +11,6 @@ SVar:TrigKicker2:DB$ Tap | Cost$ 0 | ValidTgts$ Creature.untapped | TgtPrompt$ S
 SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ TargetedController | DamageSource$ Targeted | NumDmg$ X | References$ X
 SVar:X:Targeted$CardPower
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ana_battlemage.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/124.jpg
 Oracle:Kicker {2}{U} and/or {1}{B} (You may pay an additional {2}{U} and/or {1}{B} as you cast this spell.)\nWhen Ana Battlemage enters the battlefield, if it was kicked with its {2}{U} kicker, target player discards three cards.\nWhen Ana Battlemage enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller.
+SetInfo:PLC Uncommon

@@ -5,10 +5,10 @@ PT:1/1
 K:etbCounter:P1P1:3
 A:AB$ DealDamage | Cost$ SubCounter<1/P1P1> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triskelion.jpg
-SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/218.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/269.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/372.jpg
-SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/38.jpg
 Oracle:Triskelion enters the battlefield with three +1/+1 counters on it.\nRemove a +1/+1 counter from Triskelion: Triskelion deals 1 damage to target creature or player.
+SetInfo:ATQ Rare
+SetInfo:MRD Rare
+SetInfo:4ED Rare
+SetInfo:DDF Rare
+SetInfo:M11 Rare

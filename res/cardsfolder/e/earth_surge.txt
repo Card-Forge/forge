@@ -4,7 +4,6 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Land | AddPower$ 2 | AddToughness$ 2 | Description$ Each land gets +2/+2 as long as it's a creature.
 SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earth_surge.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/84.jpg
 Oracle:Each land gets +2/+2 as long as it's a creature.
+SetInfo:GPT Rare

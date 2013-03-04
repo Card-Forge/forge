@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact
 S:Mode$ RaiseCost | ValidCard$ Card | Type$ Spell | Amount$ 1 | Description$ Spells cost 1 more to cast.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_resistance.jpg
-SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/139.jpg
 Oracle:Spells cost {1} more to cast.
+SetInfo:EXO Rare

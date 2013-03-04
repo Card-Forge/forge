@@ -9,7 +9,6 @@ SVar:CleanupTrig:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Exec
 SVar:Sac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 3 | AddKeyword$ Reach | Description$ Enchanted creature gets +0/+3 and has reach. (It can block creatures with flying.)
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spider_climb.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/70.jpg
 Oracle:You may cast Spider Climb as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step.\nEnchant creature\nEnchanted creature gets +0/+3 and has reach. (It can block creatures with flying.)
+SetInfo:VIS Common

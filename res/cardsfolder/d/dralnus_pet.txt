@@ -8,7 +8,6 @@ SVar:PetLaunch:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ Flying | Permanent$ True
 SVar:PetStrength:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ KickedPet | References$ KickedPet
 SVar:KickedPet:Discarded$CardManaCost
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dralnus_pet.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/23.jpg
 Oracle:Kicker-{2}{B}, Discard a creature card. (You may pay {2}{B} and discard a creature card in addition to any other costs as you cast this spell.)\nIf Dralnu's Pet was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.
+SetInfo:PLS Rare

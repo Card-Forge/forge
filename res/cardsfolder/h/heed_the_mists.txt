@@ -5,7 +5,6 @@ A:SP$ Mill | Cost$ 3 U U | Defined$ You | NumCards$ 1 | RememberMilled$ True | S
 SVar:TrigDraw:DB$Draw | NumCards$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heed_the_mists.jpg
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/36.jpg
 Oracle:Put the top card of your library into your graveyard, then draw cards equal to that card's converted mana cost.
+SetInfo:BOK Uncommon

@@ -5,7 +5,6 @@ PT:2/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClash | TriggerDescription$ Whenever CARDNAME becomes blocked, clash with an opponent. If you win, Fire Juggler deals 4 damage to each creature blocking it.
 SVar:TrigClash:AB$ Clash | Cost$ 0 | WinSubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | DamageSource$ TriggeredAttacker | NumDmg$ 4 | Defined$ TriggeredBlocker
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_juggler.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/90.jpg
 Oracle:Whenever Fire Juggler becomes blocked, clash with an opponent. If you win, Fire Juggler deals 4 damage to each creature blocking it. (Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)
+SetInfo:MOR Common

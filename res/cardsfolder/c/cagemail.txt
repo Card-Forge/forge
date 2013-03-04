@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature gets +2/+2 and can't attack.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cagemail.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/7.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and can't attack.
+SetInfo:JUD Common

@@ -4,7 +4,6 @@ Types:Creature Human Rogue
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2
-SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/charging_bandits.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/6.jpg
 Oracle:Whenever Charging Bandits attacks, it gets +2/+0 until end of turn.
+SetInfo:POR Uncommon

@@ -7,7 +7,6 @@ K:Kicker 2 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target creature.
 SVar:TrigKicker:DB$Destroy | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Heartstabber_Mosquito.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/97.jpg
 Oracle:Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)\nFlying\nWhen Heartstabber Mosquito enters the battlefield, if it was kicked, destroy target creature.
+SetInfo:ZEN Common

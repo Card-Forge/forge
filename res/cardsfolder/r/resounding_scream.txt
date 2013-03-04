@@ -6,7 +6,6 @@ A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target player 
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When you cycle CARDNAME, target player discards two cards at random.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ Random
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resounding_scream.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/83.jpg
 Oracle:Target player discards a card at random.\nCycling {5}{U}{B}{R} ({5}{U}{B}{R}, Discard this card: Draw a card.)\nWhen you cycle Resounding Scream, target player discards two cards at random.
+SetInfo:ALA Common

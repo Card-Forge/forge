@@ -5,6 +5,5 @@ PT:2/1
 K:CARDNAME attacks each turn if able.
 A:AB$ Pump | Cost$ 1 R | KW$ CantBeBlockedBy Creature.withoutDefender | SpellDescription$ Creatures without defender can't block CARDNAME this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sabertooth_alley_cat.jpg
-SVar:Rarity:Common
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/140.jpg
 Oracle:Sabertooth Alley Cat attacks each turn if able.\n{1}{R}: Creatures without defender can't block Sabertooth Alley Cat this turn.
+SetInfo:RAV Common

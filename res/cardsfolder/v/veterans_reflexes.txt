@@ -3,7 +3,6 @@ ManaCost:W
 Types:Instant
 A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBUntap | SpellDescription$ Target creature gets +1/+1 until end of turn. Untap that creature.
 SVar:DBUntap:DB$Untap | Defined$ Targeted
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veterans_reflexes.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/23.jpg
 Oracle:Target creature gets +1/+1 until end of turn. Untap that creature.
+SetInfo:WWK Common

@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigMassacre:AB$ PumpAll | Cost$ 0 | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature.OppCtrl | IsCurse$ True
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ 2 | Defined$ Opponent
 SVar:PlayMain1:TRUE
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/massacre_wurm.jpg
-SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/46.jpg
 Oracle:When Massacre Wurm enters the battlefield, creatures your opponents control get -2/-2 until end of turn.\nWhenever a creature an opponent controls dies, that player loses 2 life.
+SetInfo:MBS Mythic

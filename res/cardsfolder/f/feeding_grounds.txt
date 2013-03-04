@@ -9,5 +9,5 @@ SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 SVar:DBPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feeding_grounds.jpg
-SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/feeding-grounds.jpg
 Oracle:Red spells cost {1} less to cast.\nGreen spells cost {1} less to cast.\nWhenever you roll {C}, put X +1/+1 counters on target creature, where X is that creature's converted mana cost.
+SetInfo:HOP Common

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | NumDmg$ 2 | SubAbility$ DBPumpCurse | SpellDescription$ CARDNAME deals 2 damage to target creature. That creature can't block this turn.
 SVar:DBPumpCurse:DB$ Pump | Defined$ Targeted | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mugging.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/102.jpg
 Oracle:Mugging deals 2 damage to target creature. That creature can't block this turn.
+SetInfo:GTC Common

@@ -3,7 +3,6 @@ ManaCost:3 R R
 Types:Legendary Creature Human Rogue
 PT:3/3
 A:AB$ Destroy | Cost$ R R R T | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | SpellDescription$ Destroy target noncreature artifact.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joven.jpg
-SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/97.jpg
 Oracle:{R}{R}{R}, {T}: Destroy target noncreature artifact.
+SetInfo:HML Common

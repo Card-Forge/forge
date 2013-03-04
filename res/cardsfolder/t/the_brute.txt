@@ -5,9 +5,8 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0.
 A:AB$ Regenerate | Cost$ R R R | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_brute.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/272.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/244.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/164.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+0.\n{R}{R}{R}: Regenerate enchanted creature.
+SetInfo:5ED Common
+SetInfo:LEG Common
+SetInfo:4ED Common

@@ -9,7 +9,6 @@ SVar:PutCounter2:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:PutCounter3:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter4
 SVar:PutCounter4:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (4) | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutCounter5
 SVar:PutCounter5:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (5) | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jugan_the_rising_star.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/217.jpg
 Oracle:Flying\nWhen Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
+SetInfo:CHK Rare

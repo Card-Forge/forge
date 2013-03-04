@@ -9,7 +9,6 @@ SVar:NumAllies:Count$Valid Ally.YouCtrl
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hagra_diabolist.jpg
-SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/95.jpg
 Oracle:Whenever Hagra Diabolist or another Ally enters the battlefield under your control, you may have target player lose life equal to the number of Allies you control.
+SetInfo:ZEN Uncommon

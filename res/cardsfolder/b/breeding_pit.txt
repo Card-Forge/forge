@@ -4,8 +4,8 @@ Types:Enchantment
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B B
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, put a 0/1 black Thrull creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ B 0 1 Thrull | TokenName$ Thrull | TokenColors$ Black | TokenTypes$ Creature,Thrull | TokenPower$ 0 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breeding_pit.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/10.jpg
-SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/9.jpg
 Oracle:At the beginning of your upkeep, sacrifice Breeding Pit unless you pay {B}{B}.\nAt the beginning of your end step, put a 0/1 black Thrull creature token onto the battlefield.
+SetInfo:5ED Uncommon
+SetInfo:DDC Uncommon
+SetInfo:FEM Uncommon

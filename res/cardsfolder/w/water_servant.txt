@@ -4,7 +4,6 @@ Types:Creature Elemental
 PT:3/4
 A:AB$ Pump | Cost$ U | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
 A:AB$ Pump | Cost$ U | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ CARDNAME gets -1/+1 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/water_servant.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/80.jpg
 Oracle:{U}: Water Servant gets +1/-1 until end of turn.\n{U}: Water Servant gets -1/+1 until end of turn.
+SetInfo:M11 Uncommon

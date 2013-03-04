@@ -7,7 +7,7 @@ K:Evoke:R
 SVar:TrigDestroy:DB$Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+evoked | Execute$ TrigSac | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it by it's evoke cost, sacrifice it.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ingot_chewer.jpg
-SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/180.jpg
 Oracle:When Ingot Chewer enters the battlefield, destroy target artifact.\nEvoke {R} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
+SetInfo:DD2 Common
+SetInfo:LRW Common

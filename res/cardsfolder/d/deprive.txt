@@ -3,7 +3,6 @@ ManaCost:U U
 Types:Instant
 A:SP$ Counter | Cost$ U U Return<1/Land> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SpellDescription$ Counter target spell.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deprive.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/59.jpg
 Oracle:As an additional cost to cast Deprive, return a land you control to its owner's hand.\nCounter target spell.
+SetInfo:ROE Common

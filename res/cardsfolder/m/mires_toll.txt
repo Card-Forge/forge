@@ -3,7 +3,6 @@ ManaCost:B
 Types:Sorcery
 A:SP$ Discard | Cost$ B | ValidTgts$ Player | Mode$ RevealYouChoose | RevealNumber$ X | References$ X | NumCards$ 1 | SpellDescription$ Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
 SVar:X:Count$TypeYouCtrl.Swamp
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mires_toll.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/60.jpg
 Oracle:Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
+SetInfo:WWK Common

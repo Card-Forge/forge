@@ -5,7 +5,6 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterOpp | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you don't control.
 SVar:TrigPutCounterOpp:AB$ PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | SpellDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you don't control.
 A:AB$ Destroy | Cost$ 2 B T | ValidTgts$ Creature.HasCounters | TgtPrompt$ Select target creature with a counter on it | SpellDescription$ Destroy target creature with a counter on it.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunter_of_eyeblights.jpg
-SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/119.jpg
 Oracle:When Hunter of Eyeblights enters the battlefield, put a +1/+1 counter on target creature you don't control.\n{2}{B}, {T}: Destroy target creature with a counter on it.
+SetInfo:LRW Uncommon

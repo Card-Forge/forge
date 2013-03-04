@@ -3,7 +3,6 @@ ManaCost:RG
 Types:Creature Human Druid
 PT:1/1
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_cantor.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/149.jpg
 Oracle:({R/G} can be paid with either {R} or {G}.)\nSacrifice Wild Cantor: Add one mana of any color to your mana pool.
+SetInfo:GPT Common

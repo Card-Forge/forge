@@ -4,7 +4,6 @@ Types:Creature Human Rebel Cleric
 PT:1/1
 A:AB$ PreventDamageAll | Cost$ W Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to each creature you control this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_censer_bearer.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/15.jpg
 Oracle:{W}, Sacrifice Samite Censer-Bearer: Prevent the next 1 damage that would be dealt to each creature you control this turn.
+SetInfo:FUT Common

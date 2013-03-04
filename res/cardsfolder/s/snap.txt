@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. Untap up to two lands. | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snap.jpg
-SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/43.jpg
 Oracle:Return target creature to its owner's hand. Untap up to two lands.
+SetInfo:ULG Common

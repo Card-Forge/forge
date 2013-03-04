@@ -7,7 +7,7 @@ T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ You | Execu
 SVar:TrigReturnYou:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | IsCurse$ True | Origin$ Battlefield | Destination$ Hand
 T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Opponent | Execute$ TrigReturnOpp | Secondary$ True | TriggerDescription$ Whenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
 SVar:TrigReturnOpp:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls | IsCurse$ True | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_sleep.jpg
 Oracle:Enchant creature\nWhenever enchanted creature deals damage to a player, return target creature that player controls to its owner's hand.
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/46.jpg
+SetInfo:DDI Common
+SetInfo:UDS Common

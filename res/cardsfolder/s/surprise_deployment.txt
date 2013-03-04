@@ -7,7 +7,6 @@ SVar:TrigBounce:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | E
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surprise_deployment.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/18.jpg
 Oracle:Cast Surprise Deployment only during combat.\nYou may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
+SetInfo:PLS Uncommon

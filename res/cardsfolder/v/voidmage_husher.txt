@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell, you may return CARDNAME to its owner's hand.
 SVar:TrigCounter:DB$Counter | Cost$ 0 | TargetType$ Activated | TgtPrompt$ Select target ability | ValidTgts$ Permanent
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voidmage_husher.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/92.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Voidmage Husher enters the battlefield, counter target activated ability. (Mana abilities can't be targeted.)\nWhenever you cast a spell, you may return Voidmage Husher to its owner's hand.
+SetInfo:TSP Uncommon

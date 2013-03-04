@@ -7,7 +7,6 @@ SVar:X:Count$YourLifeTotal
 SVar:Y:Count$YourStartingLife/Plus.10
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_life.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/146a.jpg
 Oracle:{T}: You gain 1 life. Then if you have at least 10 life more than your starting life total, transform Chalice of Life.
 
 ALTERNATE
@@ -17,5 +16,5 @@ ManaCost:no cost
 Types:Artifact
 A:AB$ LoseLife | Cost$ T | ValidTgts$ Player | TgtPrompt$Target a player to lose 5 life | LifeAmount$ 5 | SpellDescription$ Target player loses 5 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_death.jpg
-SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/146b.jpg
 Oracle:{T}: Target player loses 5 life.
+SetInfo:DKA Uncommon

@@ -6,7 +6,6 @@ K:etbCounter:DEPLETION:2
 A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ R | Deplete$ DEPLETION | Amount$ 2 | SpellDescription$ Add R R to your mana pool. If there are no depletion counters on CARDNAME, sacrifice it.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://wizards.com/global/images/magic/general/sandstone_needle.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/326.jpg
 Oracle:Sandstone Needle enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Sandstone Needle: Add {R}{R} to your mana pool. If there are no depletion counters on Sandstone Needle, sacrifice it.
+SetInfo:MMQ Common

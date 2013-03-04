@@ -5,7 +5,8 @@ K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying. (It can't be blocked except by creatures with flying or reach.)
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimmering_wings.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/107.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nEnchanted creature has flying. (It can't be blocked except by creatures with flying or reach.)\n{U}: Return Shimmering Wings to its owner's hand.
+SetInfo:TMP Common
+SetInfo:10E Common
+SetInfo:INV Common

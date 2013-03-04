@@ -6,7 +6,6 @@ K:First Strike
 A:AB$ Protection | Cost$ W W | Defined$ Self | Gains$ Choice | Choices$ AnyColor | SpellDescription$ CARDNAME gains protection from the color of your choice until end of turn.
 #Computer isn't very good at picking a color to get protection from yet
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_dawn.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/238.jpg
 Oracle:First strike\n{W}{W}: Knight of Dawn gains protection from the color of your choice until end of turn.
+SetInfo:TMP Uncommon

@@ -5,7 +5,6 @@ Text:As an additional cost to cast CARDNAME, exile two creature cards from your 
 PT:6/9
 K:Trample
 SVar:FullCost:5 U ExileFromGrave<2/Creature>
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skaab_goliath.jpg
-SetInfo:ISD|Uncommon|http://magiccards.info/scans/en/isd/76.jpg
 Oracle:As an additional cost to cast Skaab Goliath, exile two creature cards from your graveyard.\nTrample
+SetInfo:ISD Uncommon

@@ -6,7 +6,6 @@ SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 1 | SubAbility$
 SVar:DBPumpAll:DB$ Effect | Name$ Rootborn Defenses Effect | StaticAbilities$ KWPump | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootborn_defenses.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/19.jpg
 Oracle:Populate. Creatures you control are indestructible this turn. (To populate, put a token onto the battlefield that's a copy of a creature token you control. Damage and effects that say "destroy" don't destroy indestructible creatures.)
+SetInfo:RTR Common

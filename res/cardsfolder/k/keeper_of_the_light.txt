@@ -6,7 +6,6 @@ A:AB$ Pump | Cost$ W T | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent
 SVar:LightKeepersLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$OppLifeTotal
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keeper_of_the_light.jpg
-SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/8.jpg
 Oracle:{W}, {T}: Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.
+SetInfo:EXO Uncommon

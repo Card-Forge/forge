@@ -4,8 +4,7 @@ Types:Creature Griffin
 PT:2/3
 K:Flying
 K:Vigilance
-SVar:Rarity:Uncommon
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/armored_griffin.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/1.jpg
-SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/133.jpg
 Oracle:Flying, vigilance
+SetInfo:PO2 Uncommon
+SetInfo:PC2 Uncommon

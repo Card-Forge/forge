@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:2/3
 T:Mode$ TurnFaceUp | ValidCard$ Permanent | Execute$ TrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent is turned face up, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_runecaster.jpg
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/28.jpg
 Oracle:Whenever a permanent is turned face up, you may draw a card.
+SetInfo:SCG Uncommon

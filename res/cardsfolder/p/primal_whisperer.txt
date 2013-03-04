@@ -6,7 +6,6 @@ K:Morph:3 G
 S:Mode$ Continuous | Affected$ Card.Self+faceUp | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +2/+2 for each face-down creature on the battlefield.
 SVar:X:Count$Valid Creature.faceDown/Times.2
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_whisperer.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/135.jpg
 Oracle:Primal Whisperer gets +2/+2 for each face-down creature on the battlefield.\nMorph {3}{G} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:LGN Rare

@@ -8,7 +8,6 @@ S:Mode$ Continuous | Affected$ Creature.Faerie+Other+YouCtrl | AddPower$ 1 | Add
 S:Mode$ Continuous | Affected$ Faerie.Other+YouCtrl | AddKeyword$ Shroud | Description$ Other Faeries you control have shroud.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_oona.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/83.jpg
 Oracle:Flash\nFlying\nOther Faerie creatures you control get +1/+1.\nOther Faeries you control have shroud. (A permanent with shroud can't be the target of spells or abilities.)
+SetInfo:LRW Rare

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ DamageAll | Cost$ 3 R | NumDmg$ X | References$ X | ValidCards$ Creature.withoutFlying | ValidPlayers$ Each | ValidDescription$ each creature without flying and each player. | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Beast
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_of_hooves.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/242.jpg
 Oracle:Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
+SetInfo:ONS Uncommon

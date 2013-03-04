@@ -6,7 +6,6 @@ K:Champion:Goblin
 T:Mode$ DamageDone | ValidSource$ Goblin.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever a Goblin you control deals combat damage to a player, you may put a 1/1 black Goblin Rogue creature token onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Goblin Rogue | TokenTypes$ Creature,Goblin,Rogue | TokenOwner$ You | TokenColors$ Black | TokenPower$ 1 | TokenToughness$ 1
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_mob.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/104.jpg
 Oracle:Champion a Goblin (When this enters the battlefield, sacrifice it unless you exile another Goblin you control. When this leaves the battlefield, that card returns to the battlefield.)\nWhenever a Goblin you control deals combat damage to a player, you may put a 1/1 black Goblin Rogue creature token onto the battlefield.
+SetInfo:LRW Rare

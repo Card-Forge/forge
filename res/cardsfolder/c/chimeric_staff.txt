@@ -4,8 +4,7 @@ Types:Artifact
 A:AB$ Animate | Cost$ X | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Construct | References$ X | SpellDescription$ CARDNAME becomes an X/X Construct artifact creature until end of turn.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_staff.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/288.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/313.jpg
 Oracle:{X}: Chimeric Staff becomes an X/X Construct artifact creature until end of turn.
+SetInfo:10E Rare
+SetInfo:USG Rare

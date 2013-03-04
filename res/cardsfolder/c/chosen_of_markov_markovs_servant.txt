@@ -5,7 +5,6 @@ PT:2/2
 A:AB$SetState | Cost$ T tapXType<1/Vampire> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chosen_of_markov.jpg
 AlternateMode:DoubleFaced
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/55a.jpg
 Oracle:{T}, Tap an untapped Vampire you control: Transform Chosen of Markov.
 
 ALTERNATE
@@ -16,5 +15,5 @@ Colors:black
 Types:Creature Vampire
 PT:4/4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/markovs_servant.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/55b.jpg
 Oracle:
+SetInfo:DKA Common

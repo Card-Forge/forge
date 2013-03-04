@@ -8,7 +8,6 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 4 4 Angel | TokenAmount$ 1 | T
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | Execute$ TrigExile | TriggerDescription$ At end of combat, exile the Angel token.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 SVar:HasAttackEffect:TRUE
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geist_of_saint_traft.jpg
-SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/213.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nWhenever Geist of Saint Traft attacks, put a 4/4 white Angel creature token with flying onto the battlefield tapped and attacking. Exile that token at end of combat.
+SetInfo:ISD Mythic

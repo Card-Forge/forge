@@ -5,7 +5,6 @@ PT:5/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, put a creature you control on top of its owner's library.
 SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Hidden$ True | ChangeType$ Creature.YouCtrl | Mandatory$ True
 SVar:NeedsToPlay:Creature.cmcLE2+YouCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nulltread_gargantuan.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/102.jpg
 Oracle:When Nulltread Gargantuan enters the battlefield, put a creature you control on top of its owner's library.
+SetInfo:ARB Uncommon

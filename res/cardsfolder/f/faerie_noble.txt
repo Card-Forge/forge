@@ -6,7 +6,6 @@ K:Flying
 S:Mode$ Continuous | Affected$ Creature.Faerie+Other+YouCtrl | AddToughness$ 1 | Description$ Other Faerie creatures you control get +0/+1.
 A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.Faerie+Other+YouCtrl | NumAtt$ +1 | SpellDescription$ Other Faerie creatures you control get +1/+0 until end of turn.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_noble.jpg
-SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/57.jpg
 Oracle:Flying\nOther Faerie creatures you control get +0/+1.\n{T}: Other Faerie creatures you control get +1/+0 until end of turn.
+SetInfo:HML Rare

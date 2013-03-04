@@ -7,7 +7,6 @@ A:AB$ Pump | Cost$ X T Sac<1/CARDNAME> | KW$ HIDDEN Unblockable | TargetMin$ 0 |
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature.powerLE2
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_arch.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/309.jpg
 Oracle:Runed Arch enters the battlefield tapped.\n{X}, {T}, Sacrifice Runed Arch: X target creatures with power 2 or less are unblockable this turn.
+SetInfo:ICE Rare

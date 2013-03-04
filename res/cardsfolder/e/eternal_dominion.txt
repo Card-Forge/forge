@@ -3,8 +3,7 @@ ManaCost:7 U U U
 Types:Sorcery
 K:Epic
 A:SP$ ChangeZone | Cost$ 7 U U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact,Creature,Enchantment,Land | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | SpellDescription$ Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles his or her library.
-SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_dominion.jpg
 Oracle:Search target opponent's library for an artifact, creature, enchantment, or land card. Put that card onto the battlefield under your control. Then that player shuffles his or her library.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability. You may choose a new target for the copy.)
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/36.jpg
+SetInfo:SOK Rare

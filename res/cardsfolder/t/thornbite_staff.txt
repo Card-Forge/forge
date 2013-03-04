@@ -8,8 +8,7 @@ SVar:Damage:AB$DealDamage | Cost$ 2 T | ValidTgts$ Creature,Player | TgtPrompt$ 
 SVar:TrigChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ ThornbiteTrigUntap | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, untap equipped creature.
 SVar:ThornbiteTrigUntap:AB$Untap | Cost$ 0
 SVar:TrigAttach:DB$ Attach | Cost$ 0 | Defined$ TriggeredCard
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornbite_staff.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/145.jpg
 Oracle:Equipped creature has “{2}, {T}: This creature deals 1 damage to target creature or player” and “Whenever a creature dies, untap this creature.”\nWhenever a Shaman creature enters the battlefield, you may attach Thornbite Staff to it.
 \nEquip {4}
+SetInfo:MOR Uncommon

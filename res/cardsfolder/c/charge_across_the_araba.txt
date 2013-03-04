@@ -6,7 +6,6 @@ SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +Y | NumDef$ +Y
 SVar:X:Count$Valid Plains.YouCtrl
 SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charge_across_the_araba.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/4.jpg
 Oracle:Sweep - Return any number of Plains you control to their owner's hand. Creatures you control get +1/+1 until end of turn for each Plains returned this way.
+SetInfo:SOK Uncommon

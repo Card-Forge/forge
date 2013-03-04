@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Mana | Cost$ R | Produced$ R | Amount$ X | References$ X | SpellDescription$ Add R R to your mana pool, then add R to your mana pool for each card named CARDNAME in each graveyard.
 SVar:X:Count$NamedInAllYards.Rite of Flame/Plus.2
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_flame.jpg
-SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/96.jpg
 Oracle:Add {R}{R} to your mana pool, then add {R} to your mana pool for each card named Rite of Flame in each graveyard.
+SetInfo:CSP Common

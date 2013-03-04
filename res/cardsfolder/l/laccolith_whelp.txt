@@ -6,7 +6,6 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalD
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBPump | References$ X
 SVar:DBPump:DB$Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:X:Count$CardPower
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laccolith_whelp.jpg
-SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/91.jpg
 Oracle:Whenever Laccolith Whelp becomes blocked, you may have it deal damage equal to its power to target creature. If you do, Laccolith Whelp assigns no combat damage this turn.
+SetInfo:NMS Common

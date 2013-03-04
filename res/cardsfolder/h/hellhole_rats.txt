@@ -8,7 +8,6 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select ta
 SVar:DBDamage:DB$DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellhole_rats.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/113.jpg
 Oracle:Haste\nWhen Hellhole Rats enters the battlefield, target player discards a card. Hellhole Rats deals damage to that player equal to that card's converted mana cost.
+SetInfo:DIS Uncommon

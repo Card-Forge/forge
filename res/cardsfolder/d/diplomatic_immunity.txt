@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Description$ Enchanted creature has shroud.
 K:Shroud
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diplomatic_immunity.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/75.jpg
 Oracle:Enchant creature\nShroud (This permanent can't be the target of spells or abilities.)\nEnchanted creature has shroud.
+SetInfo:MMQ Common

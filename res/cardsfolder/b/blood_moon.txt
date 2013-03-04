@@ -3,10 +3,9 @@ ManaCost:2 R
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Mountain | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Nonbasic lands are Mountains.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_moon.jpg
 Oracle:Nonbasic lands are Mountains.
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/178.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/57.jpg
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/46.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/176.jpg
+SetInfo:8ED Rare
+SetInfo:CHR Rare
+SetInfo:DRK Rare
+SetInfo:9ED Rare

@@ -3,10 +3,9 @@ ManaCost:2 U U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBUntap | SpellDescription$ Counter target spell. Untap up to four lands.
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 4
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rewind.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/96.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/93.jpg
-SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/65.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/94.jpg
 Oracle:Counter target spell. Untap up to four lands.
+SetInfo:8ED Uncommon
+SetInfo:M13 Uncommon
+SetInfo:9ED Uncommon
+SetInfo:USG Common

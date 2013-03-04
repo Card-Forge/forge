@@ -6,7 +6,6 @@ K:Intimidate
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. If you do, destroy target creature that player controls.
 SVar:TrigDestroy:AB$Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NoRegen$ False
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_zealot.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/52.jpg
 Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhenever Blind Zealot deals combat damage to a player, you may sacrifice it. If you do, destroy target creature that player controls.
+SetInfo:NPH Common

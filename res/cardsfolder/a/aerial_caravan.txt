@@ -6,7 +6,6 @@ K:Flying
 A:AB$ Dig | Cost$ 1 U U | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Exile the top card of your library. Until end of turn, you may play that card. (Reveal the card as you exile it.)
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played | PumpZone$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerial_caravan.jpg
-SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/58.jpg
 Oracle:Flying\n{1}{U}{U}: Exile the top card of your library. Until end of turn, you may play that card. (Reveal the card as you exile it.)
+SetInfo:MMQ Rare

@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.O
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | RevealNumber$ X | Mode$ RevealYouChoose | DiscardValid$ Card | References$ X
 SVar:X:Count$TypeYouCtrl.Ally
 SVar:BuffedBy:Ally
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bala_ged_thief.jpg
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/79.jpg
 Oracle:Whenever Bala Ged Thief or another Ally enters the battlefield under your control, target player reveals a number of cards from his or her hand equal to the number of Allies you control. You choose one of them. That player discards that card.
+SetInfo:ZEN Rare

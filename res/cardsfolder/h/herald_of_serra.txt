@@ -5,7 +5,6 @@ PT:3/4
 K:Flying
 K:Vigilance
 K:Echo:2 W W
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herald_of_serra.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/17.jpg
 Oracle:Flying, vigilance\nEcho {2}{W}{W} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
+SetInfo:USG Rare

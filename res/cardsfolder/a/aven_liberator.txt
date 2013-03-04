@@ -7,7 +7,6 @@ K:Morph:3 W
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigProtect | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target creature you control gains protection from the color of your choice until end of turn.
 SVar:TrigProtect:AB$ Protection | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_liberator.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/4.jpg
 Oracle:Flying\nMorph {3}{W} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Aven Liberator is turned face up, target creature you control gains protection from the color of your choice until end of turn.
+SetInfo:SCG Common

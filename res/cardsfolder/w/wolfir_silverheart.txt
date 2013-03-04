@@ -4,7 +4,6 @@ Types:Creature Wolf Warrior
 PT:4/4
 K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddPower$ 4 | AddToughness$ 4 | Description$ As long as CARDNAME is paired with another creature, each of those creatures gets +4/+4.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfir_silverheart.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/206.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Wolfir Silverheart is paired with another creature, each of those creatures gets +4/+4.
+SetInfo:AVR Rare

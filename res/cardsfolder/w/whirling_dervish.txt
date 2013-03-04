@@ -5,10 +5,9 @@ PT:1/1
 K:Protection from black
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | IsPresent$ Card.Self+dealtDamageToOppThisTurn | TriggerDescription$ At the beginning of each end step, if CARDNAME dealt damage to an opponent this turn, put a +1/+1 counter on it.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whirling_dervish.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/203.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/90.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/172.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/125.jpg
 Oracle:Protection from black\nAt the beginning of each end step, if Whirling Dervish dealt damage to an opponent this turn, put a +1/+1 counter on it.
+SetInfo:5ED Uncommon
+SetInfo:LEG Uncommon
+SetInfo:TSB Special
+SetInfo:4ED Uncommon

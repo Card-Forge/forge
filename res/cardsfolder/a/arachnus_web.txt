@@ -5,7 +5,6 @@ A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature.EnchantedBy+powerGE4 | Execute$ TrigDestroy | TriggerDescription$ At the beginning of the end step, if enchanted creature's power is 4 or greater, destroy CARDNAME.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Self
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arachnus_web.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/163.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack or block, and its activated abilities can't be activated.\nAt the beginning of the end step, if enchanted creature's power is 4 or greater, destroy Arachnus Web.
+SetInfo:M12 Common

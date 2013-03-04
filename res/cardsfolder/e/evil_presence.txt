@@ -4,13 +4,12 @@ Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ B | ValidTgts$ Land | AILogic$ ChangeType
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddType$ Swamp | RemoveSubTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted land is a Swamp.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_presence.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/16.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/16.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/60.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/22.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/20.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/18.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/16.jpg
 Oracle:Enchant land\nEnchanted land is a Swamp.
+SetInfo:2ED Uncommon
+SetInfo:NPH Common
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

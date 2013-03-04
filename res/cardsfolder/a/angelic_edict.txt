@@ -2,7 +2,6 @@ Name:Angelic Edict
 ManaCost:4 W
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 4 W | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or enchantment.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_edict.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/2.jpg
 Oracle:Exile target creature or enchantment.
+SetInfo:GTC Common

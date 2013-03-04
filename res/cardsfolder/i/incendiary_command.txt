@@ -10,7 +10,6 @@ SVar:DBIncendiaryDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand
 SVar:DBIncendiaryDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | References$ X | SubAbility$ CleanIncendiary
 SVar:CleanIncendiary:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount/Minus.1
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card141830.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/179.jpg
 Oracle:Choose two - Incendiary Command deals 4 damage to target player; or Incendiary Command deals 2 damage to each creature; or destroy target nonbasic land; or each player discards all the cards in his or her hand, then draws that many cards.
+SetInfo:LRW Rare

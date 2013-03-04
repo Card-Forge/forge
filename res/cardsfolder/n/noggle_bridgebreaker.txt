@@ -4,7 +4,6 @@ Types:Creature Noggle Rogue
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_bridgebreaker.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/107.jpg
 Oracle:When Noggle Bridgebreaker enters the battlefield, return a land you control to its owner's hand.
+SetInfo:EVE Common

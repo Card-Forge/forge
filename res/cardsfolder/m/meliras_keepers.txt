@@ -3,7 +3,6 @@ ManaCost:4 G
 Types:Creature Human Warrior
 PT:4/4
 K:CARDNAME can't have counters placed on it.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meliras_keepers.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/83.jpg
 Oracle:Melira's Keepers can't have counters placed on it.
+SetInfo:MBS Uncommon

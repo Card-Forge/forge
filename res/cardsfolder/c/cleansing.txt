@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ RepeatEach | Cost$ W W W | RepeatSubAbility$ DBSac | RepeatCards$ Land | SpellDescription$ For each land, destroy that land unless any player pays 1 life.
 SVar:DBSac:DB$ Destroy | UnlessCost$ PayLife<1> | UnlessPayer$ Player | Defined$ Remembered
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleansing.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/77.jpg
 Oracle:For each land, destroy that land unless any player pays 1 life.
+SetInfo:DRK Rare

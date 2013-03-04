@@ -3,10 +3,9 @@ ManaCost:2 R
 Types:Creature Dwarf
 PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Wall | TgtPrompt$ Select target Wall | SpellDescription$ Destroy target Wall.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_demolition_team.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/184.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/143.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/144.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/143.jpg
 Oracle:{T}: Destroy target Wall.
+SetInfo:8ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:2ED Uncommon

@@ -5,7 +5,6 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerEQ1+toughnessEQ1+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature enters the battlefield under your control, if that creature is 1/1, put two +1/+1 counters on it.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_captain.jpg
-SVar:Rarity:Uncommon
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/77.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/225.jpg
 Oracle:Whenever a creature enters the battlefield under your control, if that creature is 1/1, put two +1/+1 counters on it.
+SetInfo:ARB Uncommon
+SetInfo:COM Uncommon

@@ -5,7 +5,6 @@ A:SP$ DealDamage | Cost$ 2 R R R tapXType<X/Creature> | CostDesc$ As an addition
 SVar:X:XChoice
 SVar:BurnAtTheStakeDmg:Number$3/Times.ChosenX
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burn_at_the_stake.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/130.jpg
 Oracle:As an additional cost to cast Burn at the Stake, tap any number of untapped creatures you control.\nBurn at the Stake deals damage to target creature or player equal to three times the number of creatures tapped this way.
+SetInfo:AVR Rare

@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:4/3
 A:AB$ Proliferate | Cost$ T Sac<1/Creature> | SpellDescription$ Proliferate.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plaguemaw_beast.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/87.jpg
 Oracle:{T}, Sacrifice a creature: Proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
+SetInfo:MBS Uncommon

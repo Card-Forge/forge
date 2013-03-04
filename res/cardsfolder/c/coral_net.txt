@@ -9,7 +9,6 @@ SVar:TrigCoralDiscard:AB$ Discard | Cost$ 0 | Defined$ You | Mode$ TgtChoose | N
 SVar:DBCoralSacrifice:DB$ Sacrifice | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCoralCleanup
 SVar:DBCoralCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_net.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/35.jpg
 Oracle:Enchant green or white creature\nEnchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you discard a card."
+SetInfo:TOR Common

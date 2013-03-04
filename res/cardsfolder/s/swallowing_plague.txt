@@ -4,7 +4,6 @@ Types:Sorcery Arcane
 A:SP$ DealDamage | Cost$ X B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature and you gain X life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ X | References$ X
 SVar:X:Count$xPaid
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swallowing_plague.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/146.jpg
 Oracle:Swallowing Plague deals X damage to target creature and you gain X life.
+SetInfo:CHK Uncommon

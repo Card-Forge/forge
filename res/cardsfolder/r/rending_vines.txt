@@ -5,7 +5,6 @@ A:SP$ Destroy | Cost$ 1 G G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Selec
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Y:Targeted$CardManaCost
 SVar:X:Count$InYourHand
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rending_vines.jpg
-SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/143.jpg
 Oracle:Destroy target artifact or enchantment if its converted mana cost is less than or equal to the number of cards in your hand.\nDraw a card.
+SetInfo:SOK Common

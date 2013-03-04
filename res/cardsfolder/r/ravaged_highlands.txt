@@ -4,7 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 K:CARDNAME enters the battlefield tapped.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravaged_highlands.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/324.jpg
 Oracle:Ravaged Highlands enters the battlefield tapped.\n{T}: Add {R} to your mana pool.\n{T}, Sacrifice Ravaged Highlands: Add one mana of any color to your mana pool.
+SetInfo:ODY Common

@@ -15,7 +15,7 @@ SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_for_an_eye.jpg
 Oracle:The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and Eye for an Eye deals that much damage to that source's controller.
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/306.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/202.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/275.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/59.jpg
+SetInfo:5ED Rare
+SetInfo:4ED Rare
+SetInfo:3ED Rare
+SetInfo:ARN Uncommon

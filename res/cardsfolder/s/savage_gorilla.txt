@@ -4,7 +4,6 @@ Types:Creature Ape
 PT:3/3
 A:AB$ Pump | Cost$ U B T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | SubAbility$ DBDraw | SpellDescription$ Target creature gets -3/-3 until end of turn. Draw a card.
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_gorilla.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/85.jpg
 Oracle:{U}{B}, {T}, Sacrifice Savage Gorilla: Target creature gets -3/-3 until end of turn. Draw a card.
+SetInfo:APC Common

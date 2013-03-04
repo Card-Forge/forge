@@ -9,13 +9,12 @@ SVar:X:Count$xPaid
 SVar:DrainedLifeCard:SVar$X/LimitMax.Limit
 SVar:Limit:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drain_life.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/14.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/14.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/18.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/16.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/14.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/16.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/14.jpg
 Oracle:Spend only black mana on X.\nDrain Life deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness.
+SetInfo:2ED Common
+SetInfo:MIR Common
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:3ED Common

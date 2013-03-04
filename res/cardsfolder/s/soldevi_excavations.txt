@@ -10,7 +10,6 @@ SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield |
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_excavations.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/188.jpg
 Oracle:If Soldevi Excavations would enter the battlefield, sacrifice an untapped Island instead. If you do, put Soldevi Excavations onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {1}{U} to your mana pool.\n{1}, {T}: Look at the top card of your library. You may put that card on the bottom of your library.
+SetInfo:ALL Rare

@@ -5,7 +5,7 @@ PT:2/2
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | Condition$ Hellbent | Description$ Hellbent - CARDNAME gets +2/+1 as long as you have no cards in hand.
 SVar:BuffedBy:Card
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demons_jester.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/42.jpg
 Oracle:Flying\nHellbent - Demon's Jester gets +2/+1 as long as you have no cards in hand.
+SetInfo:DDC Common
+SetInfo:DIS Common

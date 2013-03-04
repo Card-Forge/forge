@@ -4,7 +4,6 @@ Types:Creature Human Rogue
 Text:CARDNAME can't be blocked by creatures with flying.
 PT:3/1
 K:CantBeBlockedBy Creature.withFlying
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gnat_alley_creeper.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/63.jpg
 Oracle:Gnat Alley Creeper can't be blocked by creatures with flying.
+SetInfo:DIS Uncommon

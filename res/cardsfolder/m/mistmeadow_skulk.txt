@@ -4,8 +4,7 @@ Types:Creature Kithkin Rogue
 PT:1/1
 K:Lifelink
 K:Protection:Card.cmcGE3:protection from converted mana cost 3 or greater
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistmeadow_skulk.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/27.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/14.jpg
 Oracle:Lifelink, protection from converted mana cost 3 or greater
+SetInfo:FUT Uncommon
+SetInfo:SHM Uncommon

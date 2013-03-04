@@ -2,7 +2,6 @@ Name:Inquisition of Kozilek
 ManaCost:B
 Types:Sorcery
 A:SP$ Discard | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+cmcLE3 | NumCards$ 1 | SpellDescription$ Target player reveals his or her hand. You choose a nonland card from it with converted mana cost 3 or less. That player discards that card.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inquisition_of_kozilek.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/115.jpg
 Oracle:Target player reveals his or her hand. You choose a nonland card from it with converted mana cost 3 or less. That player discards that card.
+SetInfo:ROE Uncommon

@@ -6,7 +6,7 @@ S:Mode$ ReduceCost | ValidCard$ Goblin | Type$ Spell | Activator$ You | Amount$ 
 S:Mode$ Continuous | Affected$ Creature.Goblin+YouCtrl | AddKeyword$ Haste | Description$ Goblin creatures you control have haste.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Goblin
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
-SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/97.jpg
 Oracle:Goblin spells you cast cost {1} less to cast.\nGoblin creatures you control have haste.
+SetInfo:SCG Uncommon
+SetInfo:EVG Uncommon

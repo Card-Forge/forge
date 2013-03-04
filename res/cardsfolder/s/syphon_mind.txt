@@ -5,8 +5,8 @@ A:SP$ Discard | Cost$ 3 B | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose | 
 SVar:DBDraw:DB$ Draw | Cost$ 0 | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/syphon_mind.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/175.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/104.jpg
 Oracle:Each other player discards a card. You draw a card for each card discarded this way.
+SetInfo:ONS Common
+SetInfo:COM Common
+SetInfo:HOP Common

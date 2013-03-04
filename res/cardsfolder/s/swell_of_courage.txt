@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ PumpAll | Cost$ 3 W W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 until end of turn.
 A:AB$ PutCounter | Cost$ X W W Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X | References$ X | ActivationZone$ Hand | PrecostDesc$ Reinforce X - | SpellDescription$ Put X +1/+1 counters on target creature.
 SVar:X:Count$xPaid
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swell_of_courage.jpg
-SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/26.jpg
 Oracle:Creatures you control get +2/+2 until end of turn.\nReinforce X-{X}{W}{W} ({X}{W}{W}, Discard this card: Put X +1/+1 counters on target creature.)
+SetInfo:MOR Uncommon
+SetInfo:DDF Uncommon

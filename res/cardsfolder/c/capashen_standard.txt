@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_standard.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/4.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1.\n{2}, Sacrifice Capashen Standard: Draw a card.
+SetInfo:UDS Common

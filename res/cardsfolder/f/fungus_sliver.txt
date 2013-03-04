@@ -7,7 +7,7 @@ SVar:OnDmg:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigPutCounter |
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungus_sliver.jpg
-SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/195.jpg
 Oracle:All Sliver creatures have "Whenever this creature is dealt damage, put a +1/+1 counter on it." (The damage is dealt before the counter is put on.)
+SetInfo:H09 Rare
+SetInfo:TSP Rare

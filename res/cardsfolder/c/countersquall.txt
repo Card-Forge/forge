@@ -3,7 +3,7 @@ ManaCost:U B
 Types:Instant
 A:SP$ Counter | Cost$ U B | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target nonCreature spell | SubAbility$ DBDrain | SpellDescription$ Counter target noncreature spell. Its controller loses 2 life.
 SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/countersquall.jpg
-SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/103.jpg
 Oracle:Counter target noncreature spell. Its controller loses 2 life.
+SetInfo:DDH Uncommon
+SetInfo:CFX Uncommon

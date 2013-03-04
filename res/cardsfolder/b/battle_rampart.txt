@@ -4,8 +4,7 @@ Types:Creature Wall
 PT:1/3
 K:Defender
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_rampart.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/173.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/135.jpg
 Oracle:Defender\n{T}: Target creature gains haste until end of turn.
+SetInfo:MMQ Common
+SetInfo:ROE Common

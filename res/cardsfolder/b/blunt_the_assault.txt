@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ GainLife | Cost$ 3 G | Defined$ You | LifeAmount$ X | SubAbility$ DBFog | References$ X | SpellDescription$ You gain 1 life for each creature on the battlefield.
 SVar:DBFog:DB$Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:X:Count$Valid Creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blunt_the_assault.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/113.jpg
 Oracle:You gain 1 life for each creature on the battlefield. Prevent all combat damage that would be dealt this turn.
+SetInfo:SOM Common

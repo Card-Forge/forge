@@ -3,7 +3,6 @@ ManaCost:4 R R
 Types:Creature Lizard
 PT:6/5
 K:CARDNAME can't be blocked except by two or more creatures.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ripscale_predator.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/103.jpg
 Oracle:Ripscale Predator can't be blocked except by two or more creatures.
+SetInfo:GTC Uncommon

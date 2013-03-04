@@ -11,7 +11,6 @@ SVar:TrigBodySnatcherExileMe:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ 
 SVar:DBBodySnatcherReturnCreature:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourHand.Creature
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_snatcher.jpg
-SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/53.jpg
 Oracle:When Body Snatcher enters the battlefield, exile it unless you discard a creature card.\nWhen Body Snatcher dies, exile Body Snatcher and return target creature card from your graveyard to the battlefield.
+SetInfo:UDS Rare

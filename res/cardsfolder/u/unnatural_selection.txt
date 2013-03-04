@@ -4,7 +4,6 @@ Types:Enchantment
 A:AB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | InvalidTypes$ Wall | SubAbility$ DBAnimate | SpellDescription$ Choose a creature type other than Wall. Target creature becomes that type until end of turn.
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unnatural_selection.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/32.jpg
 Oracle:{1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
+SetInfo:APC Rare

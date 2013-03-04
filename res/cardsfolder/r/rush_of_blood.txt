@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Instant
 A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is its power.
 SVar:X:Targeted$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rush_of_blood.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/154.jpg
 Oracle:Target creature gets +X/+0 until end of turn, where X is its power.
+SetInfo:AVR Uncommon

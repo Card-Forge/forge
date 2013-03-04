@@ -9,7 +9,6 @@ SVar:TrigChangeZoneHuman:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destinat
 SVar:DBChangeZoneOpp:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouDontCtrl+cmcLE3 | DefinedPlayer$ Opponent | ChangeNum$ 1 | Hidden$ True
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:red
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_champion.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/40.jpg
 Oracle:Double strike\nWhen Crypt Champion enters the battlefield, each player puts a creature card with converted mana cost 3 or less from his or her graveyard onto the battlefield.\nWhen Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
+SetInfo:DIS Uncommon

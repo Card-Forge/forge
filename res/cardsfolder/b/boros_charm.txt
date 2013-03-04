@@ -6,7 +6,6 @@ SVar:DealDmg:DB$ DealDamage | ValidTgts$ Player | NumDmg$ 4 | SpellDescription$ 
 SVar:PumpAll:DB$ Effect | Name$ Boros Indestructible Effect | StaticAbilities$ KWPump | SpellDescription$ Permanets you control are indestructible this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Permanent.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Permanents you control are indestructible this turn.
 SVar:PumpDouble:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_charm.jpg
-SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/148.jpg
 Oracle:Choose one — Boros Charm deals 4 damage to target player; or permanents you control are indestructible this turn; or target creature gains double strike until end of turn.
+SetInfo:GTC Uncommon

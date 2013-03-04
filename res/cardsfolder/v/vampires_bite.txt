@@ -4,7 +4,6 @@ Types:Instant
 K:Kicker 2 B
 A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | SubAbility$ Kicked | SpellDescription$ Target creature gets +3/+0 until end of turn. If CARDNAME was kicked, that creature gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)
 SVar:Kicked:DB$ Pump | Defined$ Targeted | KW$ Lifelink | Condition$ Kicked | ConditionDescription$ If Vampire's Bite was kicked,
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampires_bite.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/117.jpg
 Oracle:Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)\nTarget creature gets +3/+0 until end of turn. If Vampire's Bite was kicked, that creature gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)
+SetInfo:ZEN Common

@@ -2,7 +2,7 @@ Name:Journeyer's Kite
 ManaCost:2
 Types:Artifact
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/journeyers_kite.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/257.jpg
 Oracle:{3}, {T}: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
+SetInfo:DDI Rare
+SetInfo:CHK Rare

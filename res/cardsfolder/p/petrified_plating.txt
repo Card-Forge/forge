@@ -5,7 +5,6 @@ K:Enchant creature
 K:Suspend:2:G
 A:SP$ Attach | Cost$ 2 G  | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petrified_plating.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/133.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nSuspend 2-{G} (Rather than cast this card from your hand, you may pay {G} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
+SetInfo:FUT Common

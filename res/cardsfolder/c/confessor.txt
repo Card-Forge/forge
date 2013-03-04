@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:1/1
 T:Mode$ Discarded | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever a player discards a card, you may gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1 | Defined$ You
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/confessor.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/15.jpg
 Oracle:Whenever a player discards a card, you may gain 1 life.
+SetInfo:ODY Common

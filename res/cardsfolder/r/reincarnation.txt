@@ -7,5 +7,5 @@ SVar:Reincarnate:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature.sharesOwnerWith
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reincarnation.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/115.jpg
 Oracle:Choose target creature. When that creature dies this turn, return a creature card from its owner's graveyard to the battlefield under the control of that creature's owner.
+SetInfo:LEG Uncommon

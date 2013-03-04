@@ -5,7 +5,7 @@ PT:2/2
 A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
 A:AB$ Destroy | Cost$ 1 B B T | ValidTgts$ Creature.tapped+nonBlack | TgtPrompt$ Select target tapped nonblack creature | SpellDescription$ Destroy target tapped nonblack creature.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_assassin.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/67.jpg
 Oracle:{1}{B}{B}, {T}: Destroy target tapped nonblack creature.\n{3}, {T}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
+SetInfo:MBP Rare
+SetInfo:NMS Rare

@@ -4,7 +4,6 @@ Types:Instant Trap
 A:SP$ Destroy | Cost$ G | ValidTgts$ Creature.attacking+withFlying | IsPresent$ Creature.attacking+Black+withFlying | OptionalDecider$ You | TgtPrompt$ Select target attacking creature with flying. | SpellDescription$ If a black creature with flying is attacking, you may pay G rather than pay CARDNAME's mana cost.
 A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Creature.attacking+withFlying | TgtPrompt$ Select target attacking creature with flying. | SpellDescription$ Destroy target attacking creature with flying.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Slingbow_Trap.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/111.jpg
 Oracle:If a black creature with flying is attacking, you may pay {G} rather than pay Slingbow Trap's mana cost.\nDestroy target attacking creature with flying.
+SetInfo:WWK Uncommon

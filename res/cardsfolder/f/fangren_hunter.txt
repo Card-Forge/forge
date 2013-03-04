@@ -3,7 +3,6 @@ ManaCost:3 G G
 Types:Creature Beast
 PT:4/4
 K:Trample
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46115.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/119.jpg
 Oracle:Trample
+SetInfo:MRD Common

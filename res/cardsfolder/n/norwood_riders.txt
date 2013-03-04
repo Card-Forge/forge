@@ -3,7 +3,6 @@ ManaCost:3 G
 Types:Creature Elf
 PT:3/3
 K:CARDNAME can't be blocked by more than one creature.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6615.jpg
-SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/79.jpg
 Oracle:Norwood Riders can't be blocked by more than one creature.
+SetInfo:PO2 Common

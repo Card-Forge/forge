@@ -4,7 +4,6 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ -1 | Description$ Creatures you control get +1/-1.
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_surge.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/85.jpg
 Oracle:Creatures you control get +1/-1.
+SetInfo:NMS Uncommon

@@ -5,7 +5,6 @@ PT:4/6
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices an artifact.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Artifact | Defined$ TriggeredPlayer | SpellDescription$ Sacrifice an artifact.
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molder_slug.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/125.jpg
 Oracle:At the beginning of each player's upkeep, that player sacrifices an artifact.
+SetInfo:MRD Rare

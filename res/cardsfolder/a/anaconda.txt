@@ -3,10 +3,9 @@ ManaCost:3 G
 Types:Creature Snake
 PT:3/3
 K:Swampwalk
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83276.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/232.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/81.jpg|2
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/229.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/229.jpg
 Oracle:Swampwalk (This creature is unblockable as long as defending player controls a Swamp.)
+SetInfo:7ED Uncommon
+SetInfo:POR Uncommon x2
+SetInfo:9ED Uncommon
+SetInfo:USG Uncommon

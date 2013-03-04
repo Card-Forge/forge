@@ -9,5 +9,5 @@ T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ T
 SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ Any | Amount$ 1 | Defined$ TriggeredCardController
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_haven.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/138.jpg
 Oracle:Enchant land\nWhen Verdant Haven enters the battlefield, you gain 2 life.\nWhenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool (in addition to the mana the land produces).
+SetInfo:GTC Common

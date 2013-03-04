@@ -3,7 +3,6 @@ ManaCost:3 R R R
 Types:Sorcery
 A:SP$ Token | Cost$ 3 R R R | TokenAmount$ 3 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenHiddenKeywords$ At the beginning of the end step, exile CARDNAME. | SpellDescription$ Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84373.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/97.jpg
 Oracle:Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+SetInfo:SOK Uncommon

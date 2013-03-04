@@ -4,8 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 4 | Description$ Enchanted creature gets +4/+0.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_the_unicorn.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/9.jpg|2
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/130.jpg
 Oracle:Enchant creature\nEnchanted creature gets +4/+0.
+SetInfo:6ED Common
+SetInfo:HML Common x2

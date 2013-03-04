@@ -2,8 +2,7 @@ Name:Avoid Fate
 ManaCost:G
 Types:Instant
 A:SP$ Counter | Cost$ G | TargetType$ Spell | ValidTgts$ Instant,Aura | TargetValidTargeting$ Permanent.YouCtrl | SpellDescription$ Counter target instant or Aura spell that targets a permanent you control.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avoid_fate.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/73.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/89.jpg
 Oracle:Counter target instant or Aura spell that targets a permanent you control.
+SetInfo:LEG Common
+SetInfo:TSB Special

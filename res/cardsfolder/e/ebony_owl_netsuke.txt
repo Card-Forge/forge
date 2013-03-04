@@ -4,7 +4,6 @@ Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ TrigCount | SVarCompare$ GE7 | Execute$ TrigDamageOpp | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, CARDNAME deals 4 damage to him or her.
 SVar:TrigDamageOpp:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ 4
 SVar:TrigCount:Count$ValidHand Card.ActivePlayerCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebony_owl_netsuke.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/154.jpg
 Oracle:At the beginning of each opponent's upkeep, if that player has seven or more cards in hand, Ebony Owl Netsuke deals 4 damage to him or her.
+SetInfo:SOK Uncommon

@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_wave.jpg
-SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/17.jpg
 Oracle:Fading 5 (This enchantment enters the battlefield with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Parallax Wave: Exile target creature.\nWhen Parallax Wave leaves the battlefield, each player returns to the battlefield all cards he or she owns exiled with Parallax Wave.
+SetInfo:NMS Rare

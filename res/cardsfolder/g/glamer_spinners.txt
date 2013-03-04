@@ -12,5 +12,5 @@ SVar:DBMove:DB$ RepeatEach | RepeatCards$ Aura.IsRemembered | RepeatSubAbility$ 
 SVar:DBAuraAttach:DB$ Attach | Object$ Imprinted | Defined$ ChosenCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glamer_spinners.jpg
-SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/141.jpg
 Oracle:Flash\nFlying\nWhen Glamer Spinners enters the battlefield, attach all Auras enchanting target permanent to another permanent with the same controller.
+SetInfo:SHM Uncommon

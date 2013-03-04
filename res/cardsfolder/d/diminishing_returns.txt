@@ -6,8 +6,7 @@ SVar:DBChangeHand:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destinat
 SVar:DBExile:DB$ Mill | Defined$ You | NumCards$ 10 | Destination$ Exile | SubAbility$ DBDraw | SpellDescription$ You exile the top ten cards of your library.
 SVar:DBDraw:DB$ Draw | Defined$ Each | NumCards$ 7 | SpellDescription$ Then each player draws up to seven cards.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diminishing_returns.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/65.jpg
-SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/39.jpg
 Oracle:Each player shuffles his or her hand and graveyard into his or her library. You exile the top ten cards of your library. Then each player draws up to seven cards.
+SetInfo:ALL Rare
+SetInfo:6ED Rare

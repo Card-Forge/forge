@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Imprint$ True | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.sharesNameWith Imprinted+YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, CARDNAME deals 2 damage to that player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 2
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invader_parasite.jpg
-SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/87.jpg
 Oracle:Imprint - When Invader Parasite enters the battlefield, exile target land.\nWhenever a land with the same name as the exiled card enters the battlefield under an opponent's control, Invader Parasite deals 2 damage to that player.
+SetInfo:NPH Rare

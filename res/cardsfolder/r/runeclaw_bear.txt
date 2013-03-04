@@ -2,9 +2,8 @@ Name:Runeclaw Bear
 ManaCost:1 G
 Types:Creature Bear
 PT:2/2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runeclaw_bear.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/195.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/203.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/193.jpg
 Oracle:
+SetInfo:M11 Common
+SetInfo:M10 Common
+SetInfo:M12 Common

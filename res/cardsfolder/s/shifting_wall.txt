@@ -6,7 +6,6 @@ K:Defender
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shifting_wall.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/134.jpg
 Oracle:Defender (This creature can't attack.)\nShifting Wall enters the battlefield with X +1/+1 counters on it.
+SetInfo:STH Uncommon

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBRancidDamage | SpellDescription$ Destroy target land. Threshold - If seven or more cards are in your graveyard, instead destroy that land and CARDNAME deals 1 damage to each creature and each player.
 SVar:DBRancidDamage:DB$ DamageAll | NumDmg$ RancidX | References$ RancidX | ValidCards$ Creature | ValidPlayers$ Each
 SVar:RancidX:Count$Threshold.1.0
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rancid_earth.jpg
-SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/78.jpg
 Oracle:Destroy target land.\nThreshold - If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player.
+SetInfo:TOR Common

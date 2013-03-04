@@ -4,7 +4,6 @@ Types:Creature Hellion Beast
 PT:3/3
 K:Haste
 A:AB$ Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_hellion.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/84.jpg
 Oracle:Haste\n{0}: Flowstone Hellion gets +1/-1 until end of turn.
+SetInfo:STH Uncommon

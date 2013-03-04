@@ -3,7 +3,6 @@ ManaCost:W
 Types:Creature Human Samurai
 PT:1/1
 K:Bushido 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_retainer.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/7.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
+SetInfo:CHK Common

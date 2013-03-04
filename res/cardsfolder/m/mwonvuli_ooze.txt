@@ -6,7 +6,6 @@ K:Cumulative upkeep:2
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | References$ X,Y | Description$ CARDNAME's power and toughness are each equal to 1 plus twice the number of age counters on it.
 SVar:Y:Number$1/Plus.X
 SVar:X:Count$CardCounters.AGE/Times.2
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mwonvuli_ooze.jpg
-SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/77.jpg
 Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay {2} for each age counter on it.)\nMwonvuli Ooze's power and toughness are each equal to 1 plus twice the number of age counters on it.
+SetInfo:WTH Rare

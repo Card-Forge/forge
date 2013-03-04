@@ -4,7 +4,6 @@ Types:Creature Goblin Warrior
 PT:2/2
 K:First Strike
 K:CARDNAME can't be equipped.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_brawler.jpg
-SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/66.jpg
 Oracle:First strike\nGoblin Brawler can't be equipped.
+SetInfo:5DN Common

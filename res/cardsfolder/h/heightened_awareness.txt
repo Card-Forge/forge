@@ -6,7 +6,6 @@ SVar:TrigDiscard:DB$ Discard | Cost$ 0 | Mode$ Hand | SpellDescription$ As CARDN
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heightened_awareness.jpg
-SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/37.jpg
 Oracle:As Heightened Awareness enters the battlefield, discard your hand.\nAt the beginning of your draw step, draw an additional card.
+SetInfo:PCY Rare

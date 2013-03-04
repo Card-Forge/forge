@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Effect | Cost$ 2 R | ValidTgts$ Player | Name$ Solfatara Effect | StaticAbilities$ STCantPlayLand | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SubAbility$ DBDraw | SpellDescription$ Target player can't play land cards this turn.
 SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ Player.IsRemembered | Description$ Target player can't play land cards this turn.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solfatara.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/93.jpg
 Oracle:Target player can't play land cards this turn.\nDraw a card at the beginning of the next turn's upkeep.
+SetInfo:VIS Common

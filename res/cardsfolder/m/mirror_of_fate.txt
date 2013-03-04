@@ -6,7 +6,6 @@ SVar:DBExile:DB$ ChangeZoneAll | Origin$ Library | Destination$ Exile | SubAbili
 SVar:DBReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Library | ChangeType$ Card.IsRemembered
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_of_fate.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/215.jpg
 Oracle:{T}, Sacrifice Mirror of Fate: Choose up to seven face-up exiled cards you own. Exile all the cards from your library, then put the chosen cards on top of your library.
+SetInfo:M10 Rare

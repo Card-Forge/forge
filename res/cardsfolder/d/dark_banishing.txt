@@ -2,12 +2,12 @@ Name:Dark Banishing
 ManaCost:2 B
 Types:Instant
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83046.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/123.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/11.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/127.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/122.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/7.jpg
-SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/13.jpg
 Oracle:Destroy target nonblack creature. It can't be regenerated.
+SetInfo:8ED Common
+SetInfo:7ED Common
+SetInfo:MIR Common
+SetInfo:9ED Common
+SetInfo:DDC Common
+SetInfo:ICE Common
+SetInfo:TMP Common

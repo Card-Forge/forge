@@ -5,7 +5,6 @@ PT:2/2
 K:Flying
 A:AB$ Counter | Cost$ Sac<1/CARDNAME> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays 2.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiketail_drakeling.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/80.jpg
 Oracle:Flying\nSacrifice Spiketail Drakeling: Counter target spell unless its controller pays {2}.
+SetInfo:TSP Common

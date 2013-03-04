@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may look at the top card of your library. If it's an instant or sorcery card, you may cast it without paying its mana cost.
 SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ 1 | NoMove$ True | SubAbility$ TrigPlay
 SVar:TrigPlay:DB$ Play | Defined$ TopOfLibrary | WithoutManaCost$ True | Optional$ True | ConditionDefined$ TopOfLibrary | ConditionPresent$ Instant,Sorcery | ConditionCompare$ EQ1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanoth.jpg
-SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/62.jpg
 Oracle:At the beginning of your upkeep, you may look at the top card of your library. If it's an instant or sorcery card, you may cast it without paying its mana cost.
+SetInfo:DDJ Rare
+SetInfo:MBS Rare

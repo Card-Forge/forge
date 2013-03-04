@@ -7,8 +7,8 @@ S:Mode$ Continuous | Affected$ Creature.Saproling,Creature.Treefolk+Other | AddP
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, put X 1/1 green Saproling creature tokens onto the battlefield.
 SVar:TrigKicker:AB$ Token | Cost$ 0 | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | Secondary$ True | SpellDescription$ Put X 1/1 green Saproling creature tokens onto the battlefield.
 SVar:X:Count$xPaid
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdeloth_the_ancient.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/220.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/88.jpg
 Oracle:Kicker {X} (You may pay an additional {X} as you cast this spell.)\nSaproling creatures and other Treefolk creatures get +1/+1.\nWhen Verdeloth the Ancient enters the battlefield, if it was kicked, put X 1/1 green Saproling creature tokens onto the battlefield.
+SetInfo:ARC Rare
+SetInfo:TSB Special
+SetInfo:INV Rare

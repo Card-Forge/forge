@@ -4,7 +4,6 @@ Types:Creature Spider
 PT:1/3
 K:Reach
 K:Wither
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juvenile_gloomwidow.jpg
-SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/121.jpg
 Oracle:Reach (This can block creatures with flying.)\nWither (This deals damage to creatures in the form of -1/-1 counters.)
+SetInfo:SHM Common

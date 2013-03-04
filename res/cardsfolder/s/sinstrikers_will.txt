@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ TapDmg | AddSVar$ SinstrikerCount | Description$ Enchanted creature has "Tap: This creature deals damage equal to its power to target attacking or blocking creature."
 SVar:TapDmg:AB$DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ SinstrikerCount | SpellDescription$ This creature deals damage equal to its power to target attacking or blocking creature.
 SVar:SinstrikerCount:Count$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinstrikers_will.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/16.jpg
 Oracle:Enchant creature\nEnchanted creature has "{T}: This creature deals damage equal to its power to target attacking or blocking creature."
+SetInfo:GPT Uncommon

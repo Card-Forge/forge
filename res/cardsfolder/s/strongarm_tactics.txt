@@ -9,7 +9,6 @@ SVar:Y:Remembered$Valid Creature.YouDontOwn
 SVar:RemAIDeck:True
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$TypeInYourHand.Creature
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strongarm_tactics.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/173.jpg
 Oracle:Each player discards a card. Then each player who didn't discard a creature card this way loses 4 life.
+SetInfo:ONS Rare

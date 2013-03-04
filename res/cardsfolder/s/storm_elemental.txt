@@ -6,7 +6,6 @@ K:Flying
 A:AB$ Tap | Cost$ U ExileFromTop<1/Card> | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Tap target creature with flying.
 A:AB$ Pump | Cost$ U ExileFromTop<1/Card> | Defined$ Self | NumAtt$ +X | NumDef$ +X | SpellDescription$ If the exiled card is a snow land, CARDNAME gets +1/+1 until end of turn.
 SVar:X:Exiled$Valid Land.Snow
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_elemental.jpg
-SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/56.jpg
 Oracle:Flying\n{U}, Exile the top card of your library: Tap target creature with flying.\n{U}, Exile the top card of your library: If the exiled card is a snow land, Storm Elemental gets +1/+1 until end of turn.
+SetInfo:ALL Uncommon

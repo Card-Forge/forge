@@ -2,8 +2,7 @@ Name:Keepers of the Faith
 ManaCost:1 W W
 Types:Creature Human Cleric
 PT:2/3
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ch/en-us/card2860.jpg
 Oracle:
-SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/65.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/193.jpg
+SetInfo:CHR Common
+SetInfo:LEG Common

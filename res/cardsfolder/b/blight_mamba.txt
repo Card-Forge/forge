@@ -4,7 +4,6 @@ Types:Creature Snake
 PT:1/1
 K:Infect
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight_mamba.jpg
-SetInfo:SOM|Common|http://magiccards.info/scans/en/som/112.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\n{1}{G}: Regenerate Blight Mamba.
+SetInfo:SOM Common

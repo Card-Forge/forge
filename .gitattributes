@@ -13,6 +13,7 @@
 /pom.xml svneol=native#text/xml
 res/AllTokens.txt svneol=native#text/plain
 res/PerSetTracking.py svneol=native#text/x-python
+res/assignSetInfo.py -text
 res/blockdata/blocks.txt svneol=native#text/plain
 res/blockdata/boosters.txt -text
 res/blockdata/fantasyblocks.txt -text
@@ -2493,6 +2494,7 @@ res/cardsfolder/d/deglamer.txt svneol=native#text/plain
 res/cardsfolder/d/dehydration.txt svneol=native#text/plain
 res/cardsfolder/d/deity_of_scars.txt svneol=native#text/plain
 res/cardsfolder/d/deja_vu.txt svneol=native#text/plain
+res/cardsfolder/d/delaying_shield.txt -text
 res/cardsfolder/d/delifs_cone.txt -text
 res/cardsfolder/d/delifs_cube.txt -text
 res/cardsfolder/d/delirium.txt svneol=native#text/plain
@@ -4342,6 +4344,7 @@ res/cardsfolder/g/goblin_warchief.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_warchief_avatar.txt -text
 res/cardsfolder/g/goblin_wardriver.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_warrens.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_welder.txt -text
 res/cardsfolder/g/goblin_wizard.txt svneol=native#text/plain
 res/cardsfolder/g/goblins_of_the_flarg.txt svneol=native#text/plain
 res/cardsfolder/g/godhead_of_awe.txt svneol=native#text/plain
@@ -12422,6 +12425,7 @@ res/licenses/multiline-label-license.txt svneol=native#text/plain
 res/licenses/xpp3-license.txt svneol=native#text/plain
 res/licenses/xstream-license.txt svneol=native#text/plain
 res/mtg-data.txt svneol=native#text/plain
+res/mtgdata-sets-to-forge.txt -text
 res/oracleScript.py -text svneol=unset#text/x-python
 res/pics_link/card-pictures_a.txt svneol=native#text/plain
 res/pics_link/card-pictures_b.txt svneol=native#text/plain
@@ -13717,7 +13721,6 @@ src/main/java/forge/card/CardType.java -text
 src/main/java/forge/card/ColorSet.java -text
 src/main/java/forge/card/DeckHints.java -text
 src/main/java/forge/card/EditionCollection.java svneol=native#text/plain
-src/main/java/forge/card/EditionInfo.java svneol=native#text/plain
 src/main/java/forge/card/FatPackData.java -text
 src/main/java/forge/card/FormatCollection.java -text
 src/main/java/forge/card/ICardCharacteristics.java -text

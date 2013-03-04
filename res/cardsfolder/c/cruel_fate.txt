@@ -3,7 +3,6 @@ ManaCost:4 U
 Types:Sorcery
 A:SP$ Dig | Cost$ 4 U | ValidTgts$ Opponent | DigNum$ 5 | ChangeNum$ 1 | DestinationZone$ Graveyard | LibraryPosition2$ 0 | SpellDescription$ Look at the top five cards of target opponent's library. Put one of those cards into that player's graveyard, and the rest on top of his or her library in any order.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/cruel_fate.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po/51.jpg
 Oracle:Look at the top five cards of target opponent's library. Put one of those cards into that player's graveyard, and the rest on top of his or her library in any order.
+SetInfo:POR Rare

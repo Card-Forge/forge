@@ -6,7 +6,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ 
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zebra_unicorn.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/350.jpg
 Oracle:Whenever Zebra Unicorn deals damage, you gain that much life.
+SetInfo:MIR Uncommon

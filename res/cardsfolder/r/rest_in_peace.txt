@@ -6,7 +6,6 @@ SVar:TrigChangeZoneAll:AB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card | Origin$ 
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card | ReplaceWith$ Exile | Description$ If a card or token would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rest_in_peace.jpg
-SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/18.jpg
 Oracle:When Rest in Peace enters the battlefield, exile all cards from all graveyards.\nIf a card or token would be put into a graveyard from anywhere, exile it instead.
+SetInfo:RTR Rare

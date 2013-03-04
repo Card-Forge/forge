@@ -6,9 +6,7 @@ A:AB$ SetState | Cost$ R T | Defined$ Self | NewState$ Licid | SubAbility$ DBAtt
 SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Curse
 AlternateMode:Licid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convulsing_licid.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/77.jpg
 Oracle:{R}, {T}: Convulsing Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {R} to end this effect.\nEnchanted creature can't attack.
 
 ALTERNATE
@@ -23,7 +21,6 @@ A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature can't block.
 A:AB$ SetState | Cost$ R | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convulsing_licid.jpg
-SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/77.jpg
 Oracle:{R}, {T}: Convulsing Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {R} to end this effect.\nEnchanted creature can't attack.
+SetInfo:STH Uncommon

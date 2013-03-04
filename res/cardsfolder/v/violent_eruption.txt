@@ -3,7 +3,6 @@ ManaCost:1 R R R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of target creatures and/or players.
 K:Madness:1 R R
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_eruption.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/117.jpg
 Oracle:Violent Eruption deals 4 damage divided as you choose among any number of target creatures and/or players.\nMadness {1}{R}{R} (If you discard this card, you may cast it for its madness cost instead of putting it into your graveyard.)
+SetInfo:TOR Uncommon

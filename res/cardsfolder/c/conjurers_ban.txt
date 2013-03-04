@@ -7,5 +7,5 @@ SVar:STCantCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.IsRemem
 SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | ValidCard$ Land.IsRemembered
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conjurers_ban.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/108.jpg
 Oracle:Name a card. Until your next turn, the named card can't be played.\nDraw a card.
+SetInfo:GPT Uncommon

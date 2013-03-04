@@ -4,7 +4,6 @@ Types:Artifact Creature Golem
 PT:10/10
 K:etbCounter:M1M1:5
 A:AB$ Draw | Cost$ W U B R G SubCounter<5/M1M1> | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ 3 | SpellDescription$ Target player draws three cards.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etched_monstrosity.jpg
-SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/135.jpg
 Oracle:Etched Monstrosity enters the battlefield with five -1/-1 counters on it.\n{W}{U}{B}{R}{G}, Remove five -1/-1 counters from Etched Monstrosity: Target player draws three cards.
+SetInfo:NPH Mythic

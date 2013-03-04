@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Animate | Cost$ 4 | Defined$ Self | Power$ 4 | Toughness$ 2 | Types$ Creature,Artifact,Golem | SpellDescription$ CARDNAME becomes a 4/2 Golem artifact creature until end of turn. It's still a land.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_statuary.jpg
-SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/135.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{4}: Dread Statuary becomes a 4/2 Golem artifact creature until end of turn. It's still a land.
+SetInfo:WWK Uncommon

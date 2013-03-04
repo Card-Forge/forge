@@ -4,7 +4,6 @@ Types:Creature Wurm
 PT:9/14
 K:Trample
 K:Convoke
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/autochthon_wurm.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/191.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)\nTrample
+SetInfo:RAV Rare

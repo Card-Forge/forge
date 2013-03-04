@@ -10,7 +10,6 @@ SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destinat
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:SacMe:5
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summoners_egg.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/157.jpg
 Oracle:Imprint - When Summoner's Egg enters the battlefield, you may exile a card from your hand face down.\nWhen Summoner's Egg dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
+SetInfo:5DN Rare

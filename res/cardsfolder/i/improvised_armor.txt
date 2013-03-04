@@ -5,7 +5,6 @@ K:Cycling:3
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 5 | Description$ Enchanted creature gets +2/+5.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/improvised_armor.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/40.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+5.\nCycling {3} ({3}, Discard this card: Draw a card.)
+SetInfo:ONS Uncommon

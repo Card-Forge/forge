@@ -6,7 +6,6 @@ SVar:DBDealDamage:DB$DealDamage | NumDmg$ X | Defined$ You | References$ X
 SVar:X:Remembered$Amount.Plus.3
 # Remember Destroyed still isn't quite right since Hellfire cares about Replacement effects too
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/18.jpg
 Oracle:Destroy all nonblack creatures. Hellfire deals X plus 3 damage to you, where X is the number of creatures that died this way.
+SetInfo:LEG Rare

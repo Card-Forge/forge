@@ -6,7 +6,7 @@ A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | KW$ HIDDEN This 
 A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to target creature or player and you gain 3 life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ 3
 A:AB$ DestroyAll | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land | SpellDescription$ Destroy all lands target player controls.
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_vengeant.jpg
-SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/154.jpg
 Oracle:[+1] Target permanent doesn't untap during its controller's next untap step.\n[-2] Ajani Vengeant deals 3 damage to target creature or player and you gain 3 life.\n[-7] Destroy all lands target player controls.
+SetInfo:DDH Mythic
+SetInfo:ALA Mythic

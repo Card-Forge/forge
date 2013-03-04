@@ -10,7 +10,6 @@ SVar:DBJaddiLifestriderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:JaddiLifestriderX:Count$Valid Creature.YouCtrl
 SVar:JaddiLifestriderY:Remembered$Amount
 SVar:JaddiLifestriderZ:SVar$JaddiLifestriderY/Times.2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaddi_lifestrider.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/189.jpg
 Oracle:When Jaddi Lifestrider enters the battlefield, you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way.
+SetInfo:ROE Uncommon

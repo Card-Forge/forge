@@ -7,7 +7,6 @@ R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ G
 SVar:GainDouble:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:ReplaceCount$LifeGained/Twice
 SVar:PlayMain1:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_faithmender.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/29.jpg
 Oracle:Lifelink (Damage dealt by this creature also causes you to gain that much life.)\nIf you would gain life, you gain twice that much life instead.
+SetInfo:M13 Rare

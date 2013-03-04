@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | References$ X | Descrip
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_grotesque.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/56.jpg
 Oracle:Nim Grotesque gets +1/+0 for each artifact you control.
+SetInfo:5DN Uncommon

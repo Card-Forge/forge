@@ -4,7 +4,6 @@ Types:Creature Goblin Shaman
 PT:2/2
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, you may have target creature get +2/+0 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_rattle_shaman.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/136.jpg
 Oracle:At the beginning of combat on your turn, you may have target creature get +2/+0 until end of turn.
+SetInfo:ROE Common

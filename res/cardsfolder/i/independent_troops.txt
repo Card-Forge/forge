@@ -2,7 +2,6 @@ Name:Independent Troops
 ManaCost:1 R
 Types:Creature Human Soldier
 PT:2/1
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10541.jpg
-SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/114.jpg
 Oracle:
+SetInfo:PTK Common

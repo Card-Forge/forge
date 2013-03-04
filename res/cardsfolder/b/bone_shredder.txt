@@ -6,7 +6,7 @@ K:Flying
 K:Echo:2 B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature.
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Creature.nonArtifact+nonBlack | TgtPrompt$ Select target nonartifact, nonblack creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_shredder.jpg
-SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/49.jpg
 Oracle:Flying\nEcho {2}{B} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Bone Shredder enters the battlefield, destroy target nonartifact, nonblack creature.
+SetInfo:ULG Uncommon
+SetInfo:DDE Uncommon

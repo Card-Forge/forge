@@ -5,7 +5,6 @@ PT:8/4
 A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put four 1/1 blue Faerie creature tokens with flying onto the battlefield under target opponent's control.
 SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Faerie | TokenTypes$ Creature,Faerie | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89079.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/170.jpg
 Oracle:When Hunted Troll enters the battlefield, put four 1/1 blue Faerie creature tokens with flying onto the battlefield under target opponent's control.\n{G}: Regenerate Hunted Troll.
+SetInfo:RAV Rare

@@ -15,5 +15,5 @@ SVar:GoToYard:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Exile | Destination$ Graveya
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duplicity.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/60.jpg
 Oracle:When Duplicity enters the battlefield, exile the top five cards of your library face down.\nAt the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Duplicity into your hand.\nAt the beginning of your end step, discard a card.\nWhen you lose control of Duplicity, put all cards exiled with Duplicity into their owner's graveyard.
+SetInfo:TMP Rare

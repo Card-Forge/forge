@@ -5,10 +5,9 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Zombie+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other Zombie creatures get +1/+1.
 A:AB$ ChangeZone | Cost$ 1 B T | TgtPrompt$ Choose target Zombie card in your graveyard | ValidTgts$ Zombie.YouOwn | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target Zombie card from your graveyard to your hand.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_undead.jpg
-SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/141.jpg
-SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/44.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/143.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/155.jpg
 Oracle:Other Zombie creatures get +1/+1.\n{1}{B}, {T}: Return target Zombie card from your graveyard to your hand.
+SetInfo:8ED Rare
+SetInfo:PLS Rare
+SetInfo:9ED Rare
+SetInfo:10E Rare

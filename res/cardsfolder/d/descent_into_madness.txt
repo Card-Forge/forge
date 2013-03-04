@@ -8,7 +8,6 @@ SVar:DBExileOpponent:DB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Opponent | Change
 SVar:X:Count$CardCounters.DESPAIR
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/descent_into_madness.jpg
-SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/97.jpg
 Oracle:At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents he or she controls and/or cards from his or her hand, where X is the number of despair counters on Descent into Madness.
+SetInfo:AVR Mythic

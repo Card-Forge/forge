@@ -8,8 +8,7 @@ S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddHiddenKeyword$ This ca
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
 SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ice_floe.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/424.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/333.jpg
 Oracle:You may choose not to untap Ice Floe during your untap step.\n{T}: Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as Ice Floe remains tapped.
+SetInfo:ICE Uncommon
+SetInfo:5ED Uncommon

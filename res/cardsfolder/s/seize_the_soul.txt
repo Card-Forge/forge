@@ -6,4 +6,4 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonWhite+nonBlack | 
 SVar:DBSpirit:DB$Token | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 Oracle:Destroy target nonwhite, nonblack creature. Put a 1/1 white Spirit creature token with flying onto the battlefield.\nHaunt (When this spell card is put into a graveyard after resolving, exile it haunting target creature.)\nWhen the creature Seize the Soul haunts dies, destroy target nonwhite, nonblack creature. Put a 1/1 white Spirit creature token with flying onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seize_the_soul.jpg
-SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/61.jpg
+SetInfo:GPT Rare

@@ -5,7 +5,6 @@ PT:2/1
 T:Mode$ SpellCast | ValidCard$ Card.Blue+Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that's both blue and red, CARDNAME becomes 3/3 and is unblockable until end of turn.
 SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 3 | HiddenKeywords$ Unblockable
 SVar:BuffedBy:Card.Blue+Red
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riverfall_mimic.jpg
-SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/111.jpg
 Oracle:Whenever you cast a spell that's both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
+SetInfo:EVE Common

@@ -5,7 +5,6 @@ PT:2/5
 K:Infect
 T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller gets a poison counter.
 SVar:TrigSac:AB$Poison | Cost$ 0 | Num$ 1 | Defined$ TriggeredSourceController
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reaper_of_sheoldred.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/72.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhenever a source deals damage to Reaper of Sheoldred, that source's controller gets a poison counter.
+SetInfo:NPH Uncommon

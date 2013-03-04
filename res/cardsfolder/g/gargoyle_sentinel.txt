@@ -7,7 +7,6 @@ A:AB$ Debuff | Cost$ 3 | Keywords$ Defender | Defined$ Self | SubAbility$ Flight
 SVar:Flight:DB$ Pump | Defined$ Self | KW$ Flying
 #The AI currently won't understand that this ability is actually a good thing to do.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gargoyle_sentinel.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/207.jpg
 Oracle:Defender (This creature can't attack.)\n{3}: Until end of turn, Gargoyle Sentinel loses defender and gains flying.
+SetInfo:M11 Uncommon

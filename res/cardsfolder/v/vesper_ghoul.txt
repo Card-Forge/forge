@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Creature Zombie Druid
 PT:1/1
 A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vesper_ghoul.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/57.jpg
 Oracle:{T}, Pay 1 life: Add one mana of any color to your mana pool.
+SetInfo:DIS Common

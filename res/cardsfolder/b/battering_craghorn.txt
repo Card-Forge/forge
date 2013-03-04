@@ -4,7 +4,7 @@ Types:Creature Goat Beast
 PT:3/1
 K:First Strike
 K:Morph:1 R R
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_craghorn.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/188.jpg
 Oracle:First strike\nMorph {1}{R}{R} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
+SetInfo:ONS Common
+SetInfo:ARC Common

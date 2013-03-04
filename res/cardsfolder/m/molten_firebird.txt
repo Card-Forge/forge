@@ -9,7 +9,6 @@ SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | D
 SVar:DBSkipDraw:DB$ Pump | Defined$ You | KW$ Skip your next draw step. | Permanent$ True
 A:AB$ ChangeZone | Cost$ 4 R | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile CARDNAME.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_firebird.jpg
-SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/117.jpg
 Oracle:Flying\nWhen Molten Firebird dies, return it to the battlefield under its owner's control at the beginning of the next end step and you skip your next draw step.\n{4}{R}: Exile Molten Firebird.
+SetInfo:PLC Rare

@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ G | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Enchanted land has "Untap this land during each other player's untap step."
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urban_burgeoning.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/138.jpg
 Oracle:Enchant land\nEnchanted land has "Untap this land during each other player's untap step."
+SetInfo:RTR Common

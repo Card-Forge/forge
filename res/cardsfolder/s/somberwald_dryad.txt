@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Dryad
 PT:2/2
 K:Forestwalk
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somberwald_dryad.jpg
-SetInfo:DKA|Common|http://magiccards.info/scans/en/dka/126.jpg
 Oracle:Forestwalk (This creature is unblockable as long as defending player controls a Forest.)
+SetInfo:DKA Common

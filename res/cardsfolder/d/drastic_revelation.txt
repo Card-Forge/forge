@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Discard | Cost$ 2 U B R | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Discard your hand. Draw seven cards, then discard three cards at random.
 SVar:DBDraw:DB$Draw | NumCards$ 7 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | NumCards$ 3 | Mode$ Random
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drastic_revelation.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/111.jpg
 Oracle:Discard your hand. Draw seven cards, then discard three cards at random.
+SetInfo:ARB Uncommon

@@ -5,7 +5,6 @@ PT:1/1
 A:AB$ Draw | Cost$ T | NumCards$ 1 | Reveal$ True | RememberDrawn$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card and reveal it. If it isn't a land card, discard it.
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ You | DefinedCards$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faadiyah_seer.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/146.jpg
 Oracle:{T}: Draw a card and reveal it. If it isn't a land card, discard it.
+SetInfo:PLC Common

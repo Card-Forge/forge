@@ -8,8 +8,7 @@ SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBDamage,DBGain | SpellDescription
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:DBGain:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SpellDescription$ Target player gains 1 life.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_bind.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/97.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/71.jpg
 Oracle:Enchant artifact an opponent controls\nWhenever enchanted artifact becomes tapped, choose one - Relic Bind deals 1 damage to target player; or target player gains 1 life.
+SetInfo:LEG Uncommon
+SetInfo:4ED Rare

@@ -7,7 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Zombie | AddPower$ 3 | AddTo
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonZombie | AddPower$ -3 | AddToughness$ -3
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clutch_of_undeath.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/61.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3 as long as it's a Zombie. Otherwise, it gets -3/-3.
+SetInfo:SCG Common

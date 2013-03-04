@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature.nonArtifact | TgtPrompt$ Select target nonartifact creature | SubAbility$ DBMill | SpellDescription$ Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard.
 SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | References$ X
 SVar:X:Targeted$CardPower
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grisly_spectacle.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/66.jpg
 Oracle:Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard.
+SetInfo:GTC Common

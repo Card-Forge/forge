@@ -5,7 +5,6 @@ K:Buyback 2
 A:SP$ GainLife | Cost$ W Sac<1/Creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worthy_cause.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/265.jpg
 Oracle:Buyback {2} (You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)\nAs an additional cost to cast Worthy Cause, sacrifice a creature.\nYou gain life equal to the sacrificed creature's toughness.
+SetInfo:TMP Uncommon

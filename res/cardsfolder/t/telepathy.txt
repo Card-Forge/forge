@@ -3,12 +3,11 @@ ManaCost:U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ Play with your hand revealed. | Description$ Your opponents play with their hands revealed.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telepathy.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/105.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/102.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/102.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/101.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/113.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/74.jpg
 Oracle:Your opponents play with their hands revealed.
+SetInfo:8ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:USG Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:M10 Uncommon
