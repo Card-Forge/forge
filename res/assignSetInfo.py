@@ -84,7 +84,7 @@ if __name__ == '__main__':
 						ee = sets[i].split(' ')
 						editions.append(cis())
 						editions[i].edition = ee[0]
-						editions[i].rarity = ee[1]
+						editions[i].rarity = ee[1].strip()
 						if len(ee) > 2:
 							editions[i].arts = int(ee[2][2:3])
 					#print sets
