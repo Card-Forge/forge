@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -450,7 +452,7 @@ public final class GameActionUtil {
             if (part instanceof CostPayLife) {
                 String amountString = part.getAmount();
 
-                final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                final int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString)
                         : AbilityUtils.calculateAmount(source, amountString, sourceAbility);
                 if (p.canPayLife(amount) && GuiDialog.confirm(source, "Do you want to pay " + amount + " life?" + orString)) {
                     p.payLife(amount, null);
@@ -463,7 +465,7 @@ public final class GameActionUtil {
 
             else if (part instanceof CostDamage) {
                 String amountString = part.getAmount();
-                final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                final int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 if (p.canPayLife(amount) && GuiDialog.confirm(source, "Do you want " + source + " to deal " + amount + " damage to you?")) {
                     p.addDamage(amount, source);
@@ -477,7 +479,7 @@ public final class GameActionUtil {
             else if (part instanceof CostPutCounter) {
                 String amountString = part.getAmount();
                 CounterType counterType = ((CostPutCounter) part).getCounter();
-                int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 String plural = amount > 1 ? "s" : "";
                 if (GuiDialog.confirm(source, "Do you want to put " + amount + " " + counterType.getName()
@@ -500,7 +502,7 @@ public final class GameActionUtil {
             else if (part instanceof CostRemoveCounter) {
                 String amountString = part.getAmount();
                 CounterType counterType = ((CostRemoveCounter) part).getCounter();
-                int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 String plural = amount > 1 ? "s" : "";
                 if (part.canPay(sourceAbility, source, p, cost, game)

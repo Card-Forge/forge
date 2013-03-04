@@ -29,7 +29,6 @@ package forge.card;
 public class CardInSet {
     private final CardRarity rarity;
     private final int numCopies;
-    private final String url;
 
     /**
      * Instantiates a new card in set.
@@ -39,10 +38,9 @@ public class CardInSet {
      * @param cntCopies
      *            the cnt copies
      */
-    public CardInSet(final CardRarity rarity, final int cntCopies, final String picUrl ) {
+    public CardInSet(final CardRarity rarity, final int cntCopies ) {
         this.rarity = rarity;
         this.numCopies = cntCopies;
-        this.url = picUrl;
     }
 
     /**
@@ -63,11 +61,4 @@ public class CardInSet {
         return this.rarity;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public String getUrl() {
-        return url;
-    }
 }
