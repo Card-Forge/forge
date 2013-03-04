@@ -23,6 +23,9 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import forge.Singletons;
+import forge.properties.ForgePreferences.FPref;
+
 /**
  * <p>
  * ScaledImagePanel class.
@@ -110,7 +113,7 @@ public class ScaledImagePanel extends JPanel {
         //resizer.setUnsharpenMask(UnsharpenMask.Soft);
         BufferedImage img = getSrcImage(); //resizer.filter(getSrcImage(), null);
 
-        boolean needsScale = img.getWidth() < sz.width;
+        boolean needsScale = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER) && img.getWidth() < sz.width;
         float scaleFactor = ((float)img.getWidth()) / sz.width;
         if ( needsScale && ( scaleFactor < 0.95 || scaleFactor > 1.05 ) ) { // This should very low-quality scaling to draw during animation
             
