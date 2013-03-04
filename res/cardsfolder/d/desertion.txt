@@ -8,3 +8,4 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/desertion.jpg
 Oracle:Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
 SetInfo:VIS Rare
 SetInfo:6ED Rare
+SetInfo:CM1 Rare

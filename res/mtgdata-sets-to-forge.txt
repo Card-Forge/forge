@@ -25,7 +25,7 @@ AQ ATQ # Antiquities
 CG UDS # Urza's Destiny
 CH CHR #  Chronicles
 ===CHK # Champions of Kamigawa
----CM1 # Commander's Arsenal
+===CM1 # Commander's Arsenal
 CMD COM # Magic: The Gathering-Commander
 CON CFX # Conflux
 ===CSP # Coldsnap

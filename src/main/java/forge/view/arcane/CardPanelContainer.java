@@ -570,8 +570,17 @@ public abstract class CardPanelContainer extends JPanel {
     public final Card getHoveredCard(MouseEvent e) {
         // re-evaluate cursor position so if we hovered over a card, alt-tabbed out of the application, then
         // clicked back on the application somewhere else, the last hovered card won't register the click
+        // this cannot protect against alt tabbing off then re-focusing on the application by clicking on
+        // the already-hovered card, though, since we cannot tell the difference between that and clicking
+        // on the hovered card when the app already has focus.
         CardPanel p = getCardPanel(e.getX(), e.getY());
-        return (p == null && p == hoveredPanel) ? null : p.getGameCard();
+        
+        // if cursor has jumped, for example via the above alt-tabbing example, fix the card hover highlight
+        if (null != hoveredPanel && p != hoveredPanel) {
+            mouseOut(hoveredPanel, e);
+        }
+        
+        return (null == p || p != hoveredPanel) ? null : p.getGameCard();
     }
 
     /**

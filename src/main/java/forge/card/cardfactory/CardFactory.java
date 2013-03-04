@@ -226,7 +226,7 @@ public class CardFactory {
             }
         }
 
-        controller.getController().mayPlaySpellAbilityForFree(copySA);
+        controller.getController().playSpellAbilityForFree(copySA);
 
         //c.addController(originalController);
     }

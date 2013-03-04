@@ -30,7 +30,7 @@ public class BondEffect extends SpellAbilityEffect {
         Card partner = cards.get(0);
         // skip choice if only one card on list
         if (cards.size() > 1) {
-            sa.getActivatingPlayer().getController().chooseSingleCardForEffect(cards, sa, "Select a card to pair with");
+            partner = sa.getActivatingPlayer().getController().chooseSingleCardForEffect(cards, sa, "Select a card to pair with");
         }
 
         // pair choices together

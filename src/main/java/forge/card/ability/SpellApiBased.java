@@ -60,6 +60,6 @@ public class SpellApiBased extends Spell {
             chance = ai.doTriggerNoCostWithSubs((AIPlayer)this.getActivatingPlayer(), this, mandatory);
         }
         chance = ai.doTriggerAI((AIPlayer)this.getActivatingPlayer(), this, mandatory);
-        return chance;
+        return chance && super.canPlayAI();
     }
 }

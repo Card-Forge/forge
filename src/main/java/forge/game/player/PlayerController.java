@@ -76,7 +76,7 @@ public abstract class PlayerController {
      */
     public abstract void playFromSuspend(Card c);
     public abstract boolean playCascade(Card cascadedCard, Card sourceCard);
-    public abstract void mayPlaySpellAbilityForFree(SpellAbility copySA);
+    public abstract void playSpellAbilityForFree(SpellAbility copySA);
     /**
      * @return the player
      */

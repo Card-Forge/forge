@@ -17,3 +17,4 @@ SVar:NeedsToPlayVar:MimeoInYard GE2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_mimeoplasm.jpg
 Oracle:As The Mimeoplasm enters the battlefield, you may exile two creature cards from graveyards. If you do, it enters the battlefield as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card.
 SetInfo:COM Mythic
+SetInfo:CM1 Mythic

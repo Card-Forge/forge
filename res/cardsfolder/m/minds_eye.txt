@@ -6,3 +6,4 @@ SVar:TrigDraw:AB$Draw | Cost$ 1 | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minds_eye.jpg
 Oracle:Whenever an opponent draws a card, you may pay {1}. If you do, draw a card.
 SetInfo:MRD Rare
+SetInfo:CM1 Rare

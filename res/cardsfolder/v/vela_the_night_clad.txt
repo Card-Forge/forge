@@ -10,3 +10,4 @@ SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vela_the_night_clad.jpg
 Oracle:Intimidate\nOther creatures you control have intimidate.\nWhenever Vela the Night-Clad or another creature you control leaves the battlefield, each opponent loses 1 life.
 SetInfo:PC2 Mythic
+SetInfo:CM1 Mythic
