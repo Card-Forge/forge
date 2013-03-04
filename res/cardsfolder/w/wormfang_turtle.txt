@@ -2,10 +2,12 @@ Name:Wormfang Turtle
 ManaCost:2 U
 Types:Creature Nightmare Turtle Beast
 PT:2/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile a land you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseExile | TriggerDescription$ When CARDNAME enters the battlefield, exile a land you control.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | TargetMin$ 1 | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | RememberTargets$ True | ForgetOtherTargets$ True
-SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
+SVar:TrigChooseExile:AB$ ChooseCard | Cost$ 0 | Choices$ Land.YouCtrl | Mandatory$ True | Amount$ 1 | ChoiceTitle$ Choose a land to exile | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ChosenCard | RememberChanged$ True
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormfang_turtle.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/60.jpg

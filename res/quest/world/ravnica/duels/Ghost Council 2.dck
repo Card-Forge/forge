@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Ghost Council 2
+Title=Ghost Council 2
+Icon=Ghost Council.jpg
+Difficulty=medium
+Description=Whether it's heaven or hell, those who believe can live forever
+Deck Type=constructed
+[main]
+3 Blind Hunter|GPT
+1 Blind Obedience|GTC
+4 Castigate|GPT
+4 Cry of Contrition|GPT
+4 Drainpipe Vermin|RTR
+2 Ghost Council of Orzhova|GPT
+4 Godless Shrine|GTC
+4 Orzhov Guildgate|GTC
+4 Orzhov Euthanist|GPT
+1 Orzhova, the Church of Deals|GPT
+4 Plagued Rusalka|GPT
+7 Plains|RTR
+2 Proclamation of Rebirth|DIS
+8 Swamp|RTR
+4 Syndic of Tithes|GTC
+4 Thrull Parasite|GTC
+[sideboard]
+[planes]
+[schemes]

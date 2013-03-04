@@ -50,17 +50,37 @@ public class CharmEffect extends SpellAbilityEffect {
         final List<AbilitySub> choices = makePossibleOptions(sa);
 
         List<AbilitySub> chosen = null;
-
+        Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
-        if (activator.isHuman()) {
+        Player chooser = sa.getActivatingPlayer();
 
+        if (sa.hasParam("Chooser")) {
+            // Three modal cards require you to choose a player to make the modal choice'
+            // Two of these also reference the chosen player during the spell effect
+            String choose = sa.getParam("Chooser");
+            List<Player> opponents = activator.getOpponents();
+            int numOpps = opponents.size();
+            if (numOpps == 1) {
+                chooser = opponents.get(0);
+            } else {
+                if (activator.isComputer()) {
+                    chooser = CharmAi.determineOpponentChooser((AIPlayer)activator, sa, opponents);
+                } else {
+                    chooser = GuiChoose.one("Choose an opponent", opponents);
+                }
+            }
+            source.setChosenPlayer(chooser);
+        }
+
+        if (chooser.isHuman()) {
+            String modeTitle = String.format("%s activated %s - Choose a mode", activator, source);
             chosen = new ArrayList<AbilitySub>();
             for (int i = 0; i < num; i++) {
                 AbilitySub a;
                 if (i < min) {
-                    a = GuiChoose.one("Choose a mode", choices);
+                    a = GuiChoose.one(modeTitle, choices);
                 } else {
-                    a = GuiChoose.oneOrNone("Choose a mode", choices);
+                    a = GuiChoose.oneOrNone(modeTitle, choices);
                 }
                 if (null == a) {
                     break;
@@ -70,7 +90,7 @@ public class CharmEffect extends SpellAbilityEffect {
                 chosen.add(a);
             }
         } else {
-            chosen = CharmAi.chooseOptionsAi((AIPlayer)activator, sa.isTrigger(), choices, num, min);
+            chosen = CharmAi.chooseOptionsAi((AIPlayer)chooser, sa.isTrigger(), choices, num, min, !chooser.equals(activator));
         }
 
         chainAbilities(sa, chosen);

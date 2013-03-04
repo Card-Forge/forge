@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Borborygmos 2
+Title=Borborygmos 2
+Icon=Borborygmos.jpg
+Difficulty=medium
+Description=Temper, Temper
+Deck Type=constructed
+[main]
+4 Gyre Sage|GTC
+4 Birds of Paradise|M12
+2 Borborygmos|GPT
+1 Borborygmos Enraged|GTC
+4 Carven Caryatid|RAV
+8 Forest|RTR
+2 Gruul Ragebeast|GTC
+4 Farseek|RAV
+4 Gruul Guildgate|GTC
+2 Indrik Stomphowler|DIS
+1 Molten Primordial|GTC
+8 Mountain|RTR
+4 Ground Assault|GTC
+2 Sprouting Phytohydra|DIS
+4 Stomping Ground|GTC
+1 Sylvan Primordial|GTC
+4 Wasteland Viper|GTC
+1 Worldspine Wurm|RTR
+[sideboard]
+[planes]
+[schemes]

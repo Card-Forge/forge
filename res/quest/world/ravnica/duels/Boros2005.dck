@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Boros2005 1
+Title=Boros 2005
+Icon=Boros-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+1 Agrus Kos, Wojek Veteran|RAV
+2 Bathe in Light|COM
+1 Boros Guildmage|COM
+3 Boros Recruit|RAV
+2 Boros Swiftblade|RAV
+1 Cyclopean Snare|RAV
+4 Dogpile|RAV
+2 Flame-Kin Zealot|RAV
+2 Greater Forgeling|RAV
+4 Lightning Helix|RAV
+11 Mountain|RTR
+2 Nightguard Patrol|RAV
+2 Ordruun Commando|RAV
+12 Plains|RTR
+3 Skyknight Legionnaire|GTC
+1 Sunhome, Fortress of the Legion|RAV
+3 Thundersong Trumpeter|RAV
+2 Viashino Slasher|RAV
+2 War-Torch Goblin|RAV
+[sideboard]
+[planes]
+[schemes]

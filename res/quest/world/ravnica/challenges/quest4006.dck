@@ -1,0 +1,35 @@
+[quest]
+id=4006
+OpponentName=Lazav
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=2 multicolor rares;Watery Grave|RAV
+Credit Reward=200
+HumanExtras=Dimir Doppelganger
+AIExtras=Szadek, Lord of Secrets
+[metadata]
+Name=quest4006
+Title=Lazav
+Difficulty=hard
+Description=Milldly annoying..
+Icon=Lazav.jpg
+Deck Type=constructed
+[main]
+4 Darkblast|RAV
+4 Last Gasp|RAV
+4 Dimir Guildgate|GTC
+4 Glimpse the Unthinkable|RAV
+8 Island|RTR
+2 Mind Grind|GTC
+4 Muddle the Mixture|RAV
+2 Psychic Spiral|RTR
+4 Remand|RAV
+4 Compulsive Research|RAV
+4 Spell Snare|DIS
+8 Swamp|RTR
+4 Watery Grave|GTC
+4 Wight of Precinct Six|GTC
+[sideboard]
+[planes]
+[schemes]

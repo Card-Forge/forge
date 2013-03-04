@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Selesnya2005 1
+Title=Selesnya 2005
+Icon=Selesnya-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+2 Centaur Safeguard|RAV
+2 Conclave Phalanx|RAV
+1 Conclave's Blessing|RAV
+1 Dowsing Shaman|RAV
+4 Elvish Skysweeper|RAV
+4 Fists of Ironwood|RAV
+12 Forest|M10
+12 Forest|RTR
+3 Gather Courage|RAV
+11 Plains|RTR
+3 Root-Kin Ally|RAV
+2 Scatter the Seeds|RAV
+1 Scion of the Wild|RAV
+2 Selesnya Evangel|RAV
+1 Selesnya Guildmage|RAV
+4 Siege Wurm|RAV
+1 Tolsimir Wolfblood|RAV
+4 Transguild Courier|DIS
+1 Vitu-Ghazi, the City-Tree|RAV
+1 Watchwolf|RAV
+[sideboard]
+[planes]
+[schemes]

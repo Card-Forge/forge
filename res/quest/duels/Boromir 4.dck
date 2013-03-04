@@ -7,7 +7,7 @@ Description=UG Show and Tell deck with huge creatures
 Icon=Boromir.jpg
 Deck Type=constructed
 [main]
-4 Misty Rainforest
+3 Misty Rainforest
 4 Tropical Island
 3 Polluted Delta
 3 Scalding Tarn
@@ -19,6 +19,7 @@ Deck Type=constructed
 1 Mox Pearl
 1 Mox Ruby
 1 Mox Sapphire
+1 Sol Ring
 1 Ancestral Recall
 1 Time Walk
 4 Show and Tell
@@ -26,7 +27,7 @@ Deck Type=constructed
 2 Lure of Prey
 2 Defense of the Heart
 4 Personal Tutor
-1 Autochthon Wurm
+1 Worldspine Wurm
 4 Empyrial Archangel
 3 Woodfall Primus
 4 Progenitus

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Golgari2005 1
+Title=Golgari 2005
+Icon=Golgari-precon.jpg
+Difficulty=easy
+Description=Precon deck
+Deck Type=constructed
+[main]
+3 Darkblast|RAV
+2 Drooling Groodion|RAV
+2 Elves of Deep Shadow|RAV
+1 Elvish Skysweeper|RAV
+12 Forest|RTR
+2 Golgari Brownscale|RAV
+1 Golgari Grave-Troll|RAV
+1 Golgari Guildmage|COM
+2 Golgari Rotwurm|RAV
+3 Greater Mossdog|RAV
+2 Infectious Host|RAV
+2 Last Gasp|RAV
+1 Moldervine Cloak|RAV
+1 Necromantic Thirst|RAV
+2 Putrefy|RAV
+2 Recollect|10E
+1 Rolling Spoil|RAV
+1 Savra, Queen of the Golgari|RAV
+2 Shambling Shell|RAV
+2 Stinkweed Imp|RAV
+12 Swamp|RTR
+1 Vigor Mortis|RAV
+2 Woodwraith Strangler|RAV
+[sideboard]
+[planes]
+[schemes]

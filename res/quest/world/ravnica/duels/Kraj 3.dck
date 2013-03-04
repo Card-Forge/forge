@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Kraj 3
+Title=Experiment Kraj
+Icon=Kraj.jpg
+Difficulty=hard
+Description=Darwin, eat your heart out
+Deck Type=constructed
+[main]
+4 Breeding Pool|GTC
+4 Brushstrider|RTR
+4 Cloudfin Raptor|GTC
+4 Drakewing Krasis|GTC
+4 Elusive Krasis|GTC
+4 Experiment One|GTC
+9 Forest|RTR
+9 Island|RTR
+2 Simic Guildgate|GTC
+2 Remand|RAV
+3 Shambleshark|GTC
+3 Simic Charm|GTC
+4 Spell Snare|DIS
+4 Zameck Guildmage|GTC
+[sideboard]
+[planes]
+[schemes]

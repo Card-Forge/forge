@@ -200,8 +200,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
         if (this.isAllTargetsLegal()) {
-            SpellAbility root = sa.getRootAbility();
-            for (Card c : root.getTarget().getTargetCards()) {
+            for (Card c : sa.getTarget().getTargetCards()) {
                 if (!CardFactoryUtil.isTargetStillValid(sa, c)) {
                     return false;
                 }

@@ -1,0 +1,19 @@
+Name:Carpet of Flowers
+ManaCost:G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Main1,Main2 | ValidPlayer$ You | CheckSVar$ CarpetX | SVarCompare$ EQ0 | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn, you may add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls.
+SVar:TrigMana:AB$ Pump | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent, you may add X mana, where X is the number of Islands target opponent controls | RememberObjects$ Targeted | SubAbility$ ChooseNumber
+SVar:ChooseNumber:DB$ ChooseNumber | Min$ 0 | Max$ NumManaMax | References$ NumManaMax | ListTitle$ Choose the amount of mana | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Amount$ X | Produced$ Any | SubAbility$ CheckPlus
+SVar:CheckPlus:DB$ StoreSVar | SVar$ CarpetX | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigReset | Static$ True
+SVar:TrigReset:AB$ StoreSVar | Cost$ 0 | SVar$ CarpetX | Type$ Number | Expression$ 0
+SVar:X:Count$ChosenNumber
+SVar:NumManaMax:Count$Valid Island.RememberedPlayerCtrl
+SVar:CarpetX:Number$0
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/carpet_of_flowers.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/240.jpg
+Oracle:At the beginning of each of your main phases, if you haven't added mana to your mana pool with this ability this turn, you may add up to X mana of any one color to your mana pool, where X is the number of Islands target opponent controls.
