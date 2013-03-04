@@ -62,10 +62,19 @@ public class InputMulligan extends Input {
         ButtonUtil.setButtonText("No", "Yes");
         ButtonUtil.enableAllFocusOk();
 
-        final String str =
-                (Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().equals(Singletons.getControl().getPlayer())
-                        ? "You're going first. " : "The computer is going first. ");
-        CMatchUI.SINGLETON_INSTANCE.showMessage(str + "Do you want to Mulligan?");
+        GameState game = Singletons.getModel().getGame();
+        Player startingPlayer = game.getPhaseHandler().getPlayerTurn();
+        Player localPlayer = Singletons.getControl().getPlayer();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(startingPlayer.getName()).append(" is going first. ");
+
+        if (!startingPlayer.equals(localPlayer)) {
+            sb.append("You are going ").append(game.getOrdinalPosition(localPlayer, startingPlayer)).append(". ");
+        }
+
+        sb.append("Do you want to Mulligan?");
+        CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
     }
 
     /** {@inheritDoc} */
