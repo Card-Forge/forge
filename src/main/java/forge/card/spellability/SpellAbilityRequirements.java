@@ -20,7 +20,9 @@ package forge.card.spellability;
 import java.util.ArrayList;
 
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.Singletons;
+import forge.card.CardSplitType;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPayment;
 import forge.game.zone.Zone;
@@ -149,6 +151,12 @@ public class SpellAbilityRequirements {
         if (this.select.isCanceled()) {
             // cancel ability during target choosing
             final Card c = this.ability.getSourceCard();
+
+            // split cards transform back to full form if targeting is canceled
+            if (c.getRules().getSplitType() == CardSplitType.Split) {
+                c.setState(CardCharacteristicName.Original);
+            }
+
             if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
                 // add back to where it came from
                 Singletons.getModel().getGame().getAction().moveTo(this.fromZone, c, this.zonePosition);
@@ -203,6 +211,12 @@ public class SpellAbilityRequirements {
             Singletons.getModel().getGame().getAction().checkStateEffects();
         } else if (this.payment.isCanceled()) {
             final Card c = this.ability.getSourceCard();
+
+            // split cards transform back to full form if targeting is canceled
+            if (c.getRules().getSplitType() == CardSplitType.Split) {
+                c.setState(CardCharacteristicName.Original);
+            }
+
             if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
                 // add back to Previous Zone
                 Singletons.getModel().getGame().getAction().moveTo(this.fromZone, c, this.zonePosition);

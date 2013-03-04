@@ -340,6 +340,11 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveTo(final Zone zoneTo, Card c) {
+        // if a split card is moved, convert it back to its full form before moving (unless moving to stack)
+        if ((c.getRules().getSplitType() == CardSplitType.Split) && (zoneTo != game.getStackZone())) {
+            c.setState(CardCharacteristicName.Original);
+        }
+
         return moveTo(zoneTo, c, null);
     }
 
@@ -463,11 +468,6 @@ public class GameAction {
 
         if (c.hasKeyword("If CARDNAME is put into a graveyard this turn, its controller gets a poison counter.")) {
             c.getController().addPoisonCounters(1, c);
-        }
-
-        // if a split card, convert back to its full face form before going to graveyard
-        if (c.getRules().getSplitType() == CardSplitType.Split) {
-            c.setState(CardCharacteristicName.Original);
         }
 
         // must put card in OWNER's graveyard not controller's
@@ -710,11 +710,6 @@ public class GameAction {
             return c;
         }
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
-
-        // if a split card, convert back to its full face form before going to graveyard
-        if (c.getRules().getSplitType() == CardSplitType.Split) {
-            c.setState(CardCharacteristicName.Original);
-        }
 
         return moveTo(removed, c);
     }
