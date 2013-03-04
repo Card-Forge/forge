@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import forge.card.ability.SpellAbilityAi;
-import forge.card.ability.effects.CharmEffect;
+import org.apache.commons.lang.math.RandomUtils;
+import forge.card.ability.SpellAbilityAi;import forge.card.ability.effects.CharmEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.AIPlayer;
+import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class CharmAi extends SpellAbilityAi {
@@ -22,7 +23,7 @@ public class CharmAi extends SpellAbilityAi {
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
 
         List<AbilitySub> chooseFrom = CharmEffect.makePossibleOptions(sa);
-        List<AbilitySub> chosenList = chooseOptionsAi(ai, timingRight, chooseFrom, num, min);
+        List<AbilitySub> chosenList = chooseOptionsAi(ai, timingRight, chooseFrom, num, min, false);
 
         if (chosenList == null || chosenList.isEmpty()) {
             return false;
@@ -32,9 +33,17 @@ public class CharmAi extends SpellAbilityAi {
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
     }
 
-    public static List<AbilitySub> chooseOptionsAi(final AIPlayer ai, boolean playNow, List<AbilitySub> choices, int num, int min) {
+    public static List<AbilitySub> chooseOptionsAi(final AIPlayer ai, boolean playNow, List<AbilitySub> choices, int num, int min, boolean opponentChoser) {
         List<AbilitySub> chosenList = new ArrayList<AbilitySub>();
 
+        if (opponentChoser) {
+            // This branch is for "An Opponent chooses" Charm spells from Alliances
+            // Current just choose the first available spell, which seem generally less disastrous for the AI.
+            //return choices.subList(0, 1);
+            return choices.subList(1, choices.size());
+        }
+        
+        
         for (int i = 0; i < num; i++) {
             AbilitySub thisPick = null;
             for (SpellAbility sub : choices) {
@@ -57,4 +66,9 @@ public class CharmAi extends SpellAbilityAi {
         }
         return chosenList.size() >= min ? chosenList : null;
     }
+    
+    public static Player determineOpponentChooser(AIPlayer ai, SpellAbility sa, List<Player> opponents) {
+        return opponents.get(RandomUtils.nextInt(opponents.size()));
+    }
+    
 }

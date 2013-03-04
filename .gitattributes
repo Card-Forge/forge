@@ -3469,6 +3469,7 @@ res/cardsfolder/f/fastbond.txt svneol=native#text/plain
 res/cardsfolder/f/fatal_attraction.txt svneol=native#text/plain
 res/cardsfolder/f/fatal_blow.txt svneol=native#text/plain
 res/cardsfolder/f/fatal_frenzy.txt svneol=native#text/plain
+res/cardsfolder/f/fatal_lore.txt -text
 res/cardsfolder/f/fatal_mutation.txt svneol=native#text/plain
 res/cardsfolder/f/fatestitcher.txt svneol=native#text/plain
 res/cardsfolder/f/fathom_mage.txt -text
@@ -5975,6 +5976,7 @@ res/cardsfolder/l/liability.txt svneol=native#text/plain
 res/cardsfolder/l/liberate.txt svneol=native#text/plain
 res/cardsfolder/l/liberated_dwarf.txt svneol=native#text/plain
 res/cardsfolder/l/library_of_alexandria.txt svneol=native#text/plain
+res/cardsfolder/l/library_of_lat_nam.txt -text
 res/cardsfolder/l/library_of_leng.txt -text
 res/cardsfolder/l/lich.txt svneol=native#text/plain
 res/cardsfolder/l/lich_lord_of_unx.txt svneol=native#text/plain
@@ -6684,6 +6686,7 @@ res/cardsfolder/m/mischievous_poltergeist.txt svneol=native#text/plain
 res/cardsfolder/m/mischievous_quanar.txt -text
 res/cardsfolder/m/misers_cage.txt svneol=native#text/plain
 res/cardsfolder/m/misery_charm.txt svneol=native#text/plain
+res/cardsfolder/m/misfortune.txt -text
 res/cardsfolder/m/misfortunes_gain.txt svneol=native#text/plain
 res/cardsfolder/m/misguided_rage.txt svneol=native#text/plain
 res/cardsfolder/m/mishra.txt -text
