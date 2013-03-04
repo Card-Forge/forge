@@ -33,6 +33,7 @@ import com.google.common.base.Function;
 
 import forge.Command;
 import forge.Singletons;
+import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
@@ -214,13 +215,18 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private ItemPool<InventoryItem> countDecksForEachCard() {
         final ItemPool<InventoryItem> result = new ItemPool<InventoryItem>(InventoryItem.class);
         for (final Deck deck : this.questData.getMyDecks()) {
-            for (final Entry<CardPrinted, Integer> e : deck.getMain()) {
+            CardPool main = deck.getMain();
+            for (final Entry<CardPrinted, Integer> e : main) {
                 result.add(e.getKey());
             }
-            if ( deck.has(DeckSection.Sideboard))
+            if (deck.has(DeckSection.Sideboard)) {
                 for (final Entry<CardPrinted, Integer> e : deck.get(DeckSection.Sideboard)) {
-                    result.add(e.getKey());
+                    // only add card if we haven't already encountered it in main
+                    if (!main.contains(e.getKey())) {
+                        result.add(e.getKey());
+                    }
                 }
+            }
         }
         return result;
     }
