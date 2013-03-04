@@ -26,7 +26,7 @@ CG UDS # Urza's Destiny
 CH CHR #  Chronicles
 ===CHK # Champions of Kamigawa
 ---CM1 # Commander's Arsenal
-===CMD # Magic: The Gathering-Commander
+CMD COM # Magic: The Gathering-Commander
 CON CFX # Conflux
 ===CSP # Coldsnap
 ===DD2 # Duel Decks: Jace vs. Chandra

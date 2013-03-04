@@ -7,12 +7,11 @@ pathToSetsMatchTable = "mtgdata-sets-to-forge.txt"
 
 class cis:      # CardInSet
 	def __init__(self):
-		self.edition = ""
 		self.rarity = "C"
-		self.arts = 1
+		self.arts = 0
 
 	def __str__(self):
-		return "{} {} {}".format(self.edition, self.rarity, self.arts)
+		return self.rarityFull() if self.arts <= 1 else "{} x{}".format(self.rarityFull(), self.arts)
 
 	def __repr__(self):
 		return self.__str__()
@@ -79,14 +78,15 @@ if __name__ == '__main__':
 					#mtgOracleCards[tmpName] = oracle.replace(prevline, '')
 
 					sets = prevline.split(", ")
-					editions = []
+					editions = {}
 					for i in range(len(sets)):
 						ee = sets[i].split(' ')
-						editions.append(cis())
-						editions[i].edition = ee[0]
-						editions[i].rarity = ee[1].strip()
-						if len(ee) > 2:
-							editions[i].arts = int(ee[2][2:3])
+						setName = ee[0]
+						if not setName in editions:
+							editions[setName] = cis()
+						editions[setName].rarity = ee[1].strip()
+						prints = int(ee[2][2:3]) if len(ee) > 2 else 1
+						editions[setName].arts += prints
 					#print sets
 					mtgDataCards[tmpName] = editions
 					hasFetchedCardName = False
@@ -131,8 +131,8 @@ if __name__ == '__main__':
 			cardfile.close()
 
 			for e in mtgDataCards[cardName]:
-				if not setCodeToForge[e.edition] is None:
-					validLines.append( ("SetInfo:{} {}" if e.arts <= 1 else "SetInfo:{} {} x{}" ).format(setCodeToForge[e.edition], e.rarityFull(), e.arts) )
+				if not setCodeToForge[e] is None:
+					validLines.append( "SetInfo:{} {}".format(setCodeToForge[e], mtgDataCards[cardName][e]) )
 
 			toWrite = "\n".join(validLines)
 
