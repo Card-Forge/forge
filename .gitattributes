@@ -13,6 +13,7 @@
 /pom.xml svneol=native#text/xml
 res/AllTokens.txt svneol=native#text/plain
 res/PerSetTracking.py svneol=native#text/x-python
+res/assignSetInfo.py -text
 res/blockdata/blocks.txt svneol=native#text/plain
 res/blockdata/boosters.txt -text
 res/blockdata/fantasyblocks.txt -text
@@ -12424,6 +12425,7 @@ res/licenses/multiline-label-license.txt svneol=native#text/plain
 res/licenses/xpp3-license.txt svneol=native#text/plain
 res/licenses/xstream-license.txt svneol=native#text/plain
 res/mtg-data.txt svneol=native#text/plain
+res/mtgdata-sets-to-forge.txt -text
 res/oracleScript.py -text svneol=unset#text/x-python
 res/pics_link/card-pictures_a.txt svneol=native#text/plain
 res/pics_link/card-pictures_b.txt svneol=native#text/plain
