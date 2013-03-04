@@ -5,7 +5,6 @@ PT:3/6
 K:Deathtouch
 A:AB$ PutCounter | Cost$ 2 B T | ValidTgts$ Creature| CounterNum$ 1 | CounterType$ PETRIFICATION | IsCurse$ True | SubAbility$ TurnToStone | SpellDescription$ Put a petrification counter on target creature. It gains defender and becomes a colorless artifact in addition to its other types. Its activated abilities can't be activated. (A creature with defender can't attack.)
 SVar:TurnToStone:DB$ Animate | Defined$ Targeted | Keywords$ Defender | Colors$ Colorless | OverwriteColors$ True | Types$ Artifact | HiddenKeywords$ CARDNAME's activated abilities can't be activated. | Permanent$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xathrid_gorgon.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/118.jpg
 Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\n{2}{B}, {T}: Put a petrification counter on target creature. It gains defender and becomes a colorless artifact in addition to its other types. Its activated abilities can't be activated. (A creature with defender can't attack.)
+SetInfo:M13 Rare
