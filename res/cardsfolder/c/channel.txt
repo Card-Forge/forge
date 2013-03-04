@@ -4,11 +4,11 @@ Types:Sorcery
 A:SP$ Effect | Cost$ G G | Name$ Channel Effect | Abilities$ ABMana | SpellDescription$ Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add 1 to your mana pool.
 SVar:ABMana:AB$Mana | Cost$ PayLife<1> | ActivationZone$ Command | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/channel.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/97.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/97.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/95.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/120.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/97.jpg
 Oracle:Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {1} to your mana pool.
+SetInfo:2ED Uncommon
+SetInfo:V09 Mythic
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

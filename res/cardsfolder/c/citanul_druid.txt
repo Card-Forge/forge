@@ -4,7 +4,6 @@ Types:Creature Human Druid
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts an artifact spell, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/citanul_druid.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/61.jpg
 Oracle:Whenever an opponent casts an artifact spell, put a +1/+1 counter on Citanul Druid.
+SetInfo:ATQ Uncommon

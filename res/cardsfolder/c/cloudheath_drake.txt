@@ -4,7 +4,6 @@ Types:Artifact Creature Drake
 PT:3/3
 K:Flying
 A:AB$ Pump | Cost$ 1 W | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudheath_drake.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/35.jpg
 Oracle:Flying\n{1}{W}: Cloudheath Drake gains vigilance until end of turn.
+SetInfo:ALA Common

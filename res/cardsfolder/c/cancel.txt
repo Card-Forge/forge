@@ -2,15 +2,14 @@ Name:Cancel
 ManaCost:1 U U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cancel.jpg
-SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/15.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/44.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/71.jpg
-SetInfo:M11|Common|http://magiccards.info/scans/en/m11/48.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/44.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/47.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/31.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/33.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/51.jpg
 Oracle:Counter target spell.
+SetInfo:PC2 Common
+SetInfo:ZEN Common
+SetInfo:ALA Common
+SetInfo:M11 Common
+SetInfo:M10 Common
+SetInfo:M12 Common
+SetInfo:RTR Common
+SetInfo:10E Common
+SetInfo:TSP Common

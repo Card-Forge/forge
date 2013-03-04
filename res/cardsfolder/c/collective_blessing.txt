@@ -3,7 +3,6 @@ ManaCost:3 G G W
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | AddToughness$ 3 | Description$ Creatures you control get +3/+3.
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_blessing.jpg
-SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/150.jpg
 Oracle:Creatures you control get +3/+3.
+SetInfo:RTR Rare

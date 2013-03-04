@@ -12,7 +12,6 @@ SVar:ChooseLandOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Lan
 SVar:SacAllArtf:DB$SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cataclysm.jpg
-SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/3.jpg
 Oracle:Each player chooses from the permanents he or she controls an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
+SetInfo:EXO Rare

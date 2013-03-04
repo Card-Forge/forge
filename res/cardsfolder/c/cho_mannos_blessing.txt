@@ -7,7 +7,6 @@ K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 A:SP$ Attach | Cost$ W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cho_mannos_blessing.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/12.jpg
 Oracle:Flash\nEnchant creature\nAs Cho-Manno's Blessing enters the battlefield, choose a color.\nEnchanted creature has protection from the chosen color. This effect doesn't remove Cho-Manno's Blessing.
+SetInfo:MMQ Common

@@ -5,7 +5,6 @@ PT:1/1
 A:AB$ Pump | Cost$ R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 A:AB$ Mana | Cost$ G T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ceta_disciple.jpg
-SetInfo:APC|Common|http://magiccards.info/scans/en/ap/19.jpg
 Oracle:{R}, {T}: Target creature gets +2/+0 until end of turn.\n{G}, {T}: Add one mana of any color to your mana pool.
+SetInfo:APC Common

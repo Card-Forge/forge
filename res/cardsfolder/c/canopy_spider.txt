@@ -3,10 +3,9 @@ ManaCost:1 G
 Types:Creature Spider
 PT:1/3
 K:Reach
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card135185.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/236.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/111.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/254.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/234.jpg
 Oracle:Reach (This creature can block creatures with flying.)
+SetInfo:8ED Common
+SetInfo:7ED Common
+SetInfo:TMP Common
+SetInfo:10E Common

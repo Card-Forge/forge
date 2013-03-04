@@ -4,7 +4,6 @@ Types:Creature Djinn
 PT:5/4
 K:Flying
 K:CARDNAME can block only creatures with flying.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_djinn.jpg
-SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/36.jpg
 Oracle:Flying\nCloud Djinn can block only creatures with flying.
+SetInfo:WTH Uncommon

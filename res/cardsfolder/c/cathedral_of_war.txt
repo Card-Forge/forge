@@ -4,7 +4,6 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 K:Exalted
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cathedral_of_war.jpg
-SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/221.jpg
 Oracle:Cathedral of War enters the battlefield tapped.\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{T}: Add {1} to your mana pool.
+SetInfo:M13 Rare

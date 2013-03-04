@@ -6,7 +6,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescriptio
 SVar:TrigChoose:AB$ ChooseCard | Cost$ 0 | Defined$ DefendingPlayer | Amount$ 1 | Choices$ Creature.untapped+DefenderCtrl | SubAbility$ DBMustBlock
 SVar:DBMustBlock:DB$ MustBlock | Defined$ ChosenCard | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crashing_boars.jpg
 Oracle:Whenever Crashing Boars attacks, defending player chooses an untapped creature he or she controls. That creature blocks Crashing Boars this turn if able.
-SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/108.jpg
+SetInfo:EXO Uncommon

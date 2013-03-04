@@ -2,7 +2,6 @@ Name:Catacomb Slug
 ManaCost:4 B
 Types:Creature Slug
 PT:2/6
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catacomb_slug.jpg
-SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/58.jpg
 Oracle:
+SetInfo:RTR Common

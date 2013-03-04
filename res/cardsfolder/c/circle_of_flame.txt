@@ -3,7 +3,6 @@ ManaCost:1 R
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.withoutFlying | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature without flying attacks you or a planeswalker you control, CARDNAME deals 1 damage to that creature.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_flame.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/127.jpg
 Oracle:Whenever a creature without flying attacks you or a planeswalker you control, Circle of Flame deals 1 damage to that creature.
+SetInfo:M12 Uncommon

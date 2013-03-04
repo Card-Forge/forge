@@ -10,7 +10,6 @@ SVar:TrigSubCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ P
 A:AB$ PutCounter | Cost$ X T | Defined$ Self | UpTo$ True | MaxFromEffect$ 4 | CounterType$ P1P0 | CounterNum$ X | ActivationPhases$ Upkeep | PlayerTurn$ True | References$ X | SpellDescription$ Put up to X +1/+0 counters on CARDNAME. This ability can't cause the total number of +1/+0 counters on CARDNAME to be greater than four. Activate this ability only during your upkeep.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clockwork_swarm.jpg
-SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/129.jpg
 Oracle:Clockwork Swarm enters the battlefield with four +1/+0 counters on it.\nClockwork Swarm can't be blocked by Walls.\nAt end of combat, if Clockwork Swarm attacked or blocked this combat, remove a +1/+0 counter from it.\n{X}, {T}: Put up to X +1/+0 counters on Clockwork Swarm. This ability can't cause the total number of +1/+0 counters on Clockwork Swarm to be greater than four. Activate this ability only during your upkeep.
+SetInfo:HML Common

@@ -4,7 +4,6 @@ Types:Creature Elemental
 PT:3/3
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.wasCastFromHand+Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, add R R R to your mana pool.
 SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ R | Amount$ 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coal_stoker.jpg
-SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/150.jpg
 Oracle:When Coal Stoker enters the battlefield, if you cast it from your hand, add {R}{R}{R} to your mana pool.
+SetInfo:TSP Common

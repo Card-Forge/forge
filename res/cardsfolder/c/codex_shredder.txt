@@ -3,7 +3,6 @@ ManaCost:1
 Types:Artifact
 A:AB$ Mill | Cost$ T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top card of his or her library into his or her graveyard.
 A:AB$ ChangeZone | Cost$ 5 T Sac<1/CARDNAME> | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/codex_shredder.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/228.jpg
 Oracle:{T}: Target player puts the top card of his or her library into his or her graveyard.\n{5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
+SetInfo:RTR Uncommon

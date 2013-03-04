@@ -4,8 +4,7 @@ Types:Artifact
 A:AB$ Mana | Cost$ 1 T Sac<1/CARDNAME> | Produced$ Any | SubAbility$ DBDraw | SpellDescription$ Add one mana of any color to your mana pool. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_sphere.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/151.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/299.jpg
 Oracle:{1}, {T}, Sacrifice Chromatic Sphere: Add one mana of any color to your mana pool. Draw a card.
+SetInfo:MRD Common
+SetInfo:INV Uncommon

@@ -10,5 +10,5 @@ SVar:DBChooseRandom:DB$ ChooseCard | Defined$ You | Amount$ 1 | AtRandom$ True |
 SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capricious_efreet.jpg
-SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/131.jpg
 Oracle:At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random.
+SetInfo:M10 Rare

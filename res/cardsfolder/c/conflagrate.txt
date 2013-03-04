@@ -9,5 +9,5 @@ SVar:X:Count$xPaid
 K:Flashback R R Discard<X/Card/card>
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conflagrate.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/151.jpg
 Oracle:Conflagrate deals X damage divided as you choose among any number of target creatures and/or players.\nFlashback- {R}{R}, Discard X cards. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SetInfo:TSP Uncommon

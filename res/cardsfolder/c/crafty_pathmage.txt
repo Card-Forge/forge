@@ -3,9 +3,8 @@ ManaCost:2 U
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.powerLE2 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature with power 2 or less is unblockable this turn. | TgtPrompt$ Select target creature with power 2 or less.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crafty_pathmage.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/77.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/71.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/77.jpg
 Oracle:{T}: Target creature with power 2 or less is unblockable this turn.
+SetInfo:ONS Common
+SetInfo:9ED Common
+SetInfo:10E Common

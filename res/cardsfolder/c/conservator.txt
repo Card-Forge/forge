@@ -2,11 +2,10 @@ Name:Conservator
 ManaCost:4
 Types:Artifact
 A:AB$ PreventDamage | Cost$ 3 T | Defined$ You | Amount$ 2 | SpellDescription$ Prevent the next 2 damage that would be dealt to you this turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conservator.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/237.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/239.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/241.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/327.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/238.jpg
 Oracle:{3}, {T}: Prevent the next 2 damage that would be dealt to you this turn.
+SetInfo:LEB Uncommon
+SetInfo:4ED Uncommon
+SetInfo:LEA Uncommon
+SetInfo:3ED Uncommon
+SetInfo:2ED Uncommon

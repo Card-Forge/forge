@@ -4,7 +4,6 @@ Types:Creature Sphinx
 PT:5/5
 K:Flying
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SpellDescription$ CARDNAME's owner shuffles it into his or her library.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cerulean_sphinx.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/39.jpg
 Oracle:Flying\n{U}: Cerulean Sphinx's owner shuffles it into his or her library.
+SetInfo:RAV Rare

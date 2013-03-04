@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under your control.
 SVar:DBReturn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudshift.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/12.jpg
 Oracle:Exile target creature you control, then return that card to the battlefield under your control.
+SetInfo:AVR Common

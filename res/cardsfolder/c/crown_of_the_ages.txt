@@ -6,8 +6,7 @@ SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature
 SVar:CrownAttach:DB$ Attach | Object$ ParentTarget | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crown_of_the_ages.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/360.jpg
-SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/290.jpg
 Oracle:{4}, {T}: Attach target Aura attached to a creature to another creature.
+SetInfo:ICE Rare
+SetInfo:5ED Rare

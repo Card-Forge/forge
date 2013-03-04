@@ -4,7 +4,6 @@ Types:Creature Centaur Druid
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigChange | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may search your library for a basic land card and put that card onto the battlefield tapped. If you do, shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_rootcaster.jpg
-SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/109.jpg
 Oracle:Whenever Centaur Rootcaster deals combat damage to a player, you may search your library for a basic land card and put that card onto the battlefield tapped. If you do, shuffle your library.
+SetInfo:JUD Common

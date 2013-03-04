@@ -3,5 +3,5 @@ ManaCost:4 U U U
 Types:Enchantment
 S:Mode$ Continuous | AddKeyword$ Rebound | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | Description$ Instant and sorcery spells you control have rebound. (Exile the spell as it resolves if you cast it from your hand. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cast_through_time.jpg
-SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/55.jpg
 Oracle:Instant and sorcery spells you control have rebound. (Exile the spell as it resolves if you cast it from your hand. At the beginning of your next upkeep, you may cast that card from exile without paying its mana cost.)
+SetInfo:ROE Mythic

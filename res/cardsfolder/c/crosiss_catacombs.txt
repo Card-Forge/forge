@@ -7,7 +7,6 @@ A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Land.nonLair/non-Lair land> | UnlessPayer$ You
 SVar:NeedsToPlay:Land.nonLair+YouCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crosiss_catacombs.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/136.jpg
 Oracle:When Crosis's Catacombs enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.\n{T}: Add {U}, {B}, or {R} to your mana pool.
+SetInfo:PLS Uncommon

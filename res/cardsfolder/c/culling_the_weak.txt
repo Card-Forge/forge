@@ -3,7 +3,6 @@ ManaCost:B
 Types:Instant
 A:SP$ Mana | Cost$ B Sac<1/Creature> | Produced$ B | Amount$ 4 | SpellDescription$ Add B B B B to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/culling_the_weak.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/55.jpg
 Oracle:As an additional cost to cast Culling the Weak, sacrifice a creature.\nAdd {B}{B}{B}{B} to your mana pool.
+SetInfo:EXO Common

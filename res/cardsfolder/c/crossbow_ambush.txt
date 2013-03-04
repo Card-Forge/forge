@@ -3,7 +3,6 @@ ManaCost:G
 Types:Instant
 A:SP$ PumpAll | Cost$ G | ValidCards$ Creature.YouCtrl | KW$ Reach | SpellDescription$ Creatures you control gain reach until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crossbow_ambush.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/55.jpg
 Oracle:Creatures you control gain reach until end of turn. (They can block creatures with flying.)
+SetInfo:STH Common

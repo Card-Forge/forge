@@ -8,7 +8,6 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Delay
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield| DelayedTrigger$ DelayedTrig | Secondary$ True | TriggerDescription$ When enchanted creature attacks or blocks, sacrifice CARDNAME at the beginning of the next cleanup step.
 SVar:DelayedTrig:Mode$ Phase | Phase$ Cleanup | ValidPlayer$ Player | Execute$ TrigSac | TriggerDescription$ Sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/28.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nWhen enchanted creature attacks or blocks, sacrifice Cunning at the beginning of the next cleanup step.
+SetInfo:EXO Common

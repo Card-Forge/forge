@@ -3,7 +3,6 @@ ManaCost:4 U U
 Types:Instant
 A:SP$ Counter | Cost$ 4 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBPlay | SpellDescription$ Counter target spell. You may cast a nonland card in your hand that shares a card type with that spell without paying its mana cost.
 SVar:DBPlay:DB$ Play | Valid$ Targeted.sharesTypeWith+nonLand+YouCtrl | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counterlash.jpg
-SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/33.jpg
 Oracle:Counter target spell. You may cast a nonland card in your hand that shares a card type with that spell without paying its mana cost.
+SetInfo:DKA Rare

@@ -5,10 +5,9 @@ K:Enchant land
 A:SP$ Attach | Cost$ W | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddHiddenKeyword$ CARDNAME can't be enchanted. & Indestructible | Description$ Enchanted land is indestructible and can't be enchanted by other Auras.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consecrate_land.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/198.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/200.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/4.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/199.jpg
 Oracle:Enchant land\nEnchanted land is indestructible and can't be enchanted by other Auras.
+SetInfo:LEB Uncommon
+SetInfo:TSB Special
+SetInfo:LEA Uncommon
+SetInfo:2ED Uncommon

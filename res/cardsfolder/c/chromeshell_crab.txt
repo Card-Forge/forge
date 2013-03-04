@@ -6,8 +6,7 @@ K:Morph:4 U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ CrabExchange | TriggerZones$ Battlefield | Optional$ True | TriggerDescription$ When CARDNAME is turned face up, you may exchange control of target creature you control and target creature an opponent controls.
 SVar:CrabExchange:DB$ ExchangeControl | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetsFromDifferentZone$ True | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of target creature you control and target creature an opponent controls.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromeshell_crab.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/32.jpg
-SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/41.jpg
 Oracle:Morph {4}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Chromeshell Crab is turned face up, you may exchange control of target creature you control and target creature an opponent controls.
+SetInfo:COM Rare
+SetInfo:LGN Rare

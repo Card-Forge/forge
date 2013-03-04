@@ -2,14 +2,14 @@ Name:Coercion
 ManaCost:2 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | Mode$ RevealYouChoose | NumCards$ 1 | SpellDescription$ Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83034.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/122.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/7.jpg
-SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/70.jpg
-SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/4.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/118.jpg
-SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/6.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/119.jpg
-SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/69.jpg
 Oracle:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
+SetInfo:PO2 Uncommon
+SetInfo:S99 Uncommon
+SetInfo:6ED Common
+SetInfo:S00 Common
+SetInfo:VIS Common
+SetInfo:9ED Common
+SetInfo:8ED Common
+SetInfo:PTK Uncommon
+SetInfo:TMP Common

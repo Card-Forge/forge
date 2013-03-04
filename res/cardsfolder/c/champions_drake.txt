@@ -5,7 +5,6 @@ PT:1/1
 K:Flying
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +3/+3 as long as you control a creature with three or more level counters on it.
 SVar:X:Count$Valid Creature.counters_GE3_LEVEL+YouCtrl
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champions_drake.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/56.jpg
 Oracle:Flying\nChampion's Drake gets +3/+3 as long as you control a creature with three or more level counters on it.
+SetInfo:ROE Common

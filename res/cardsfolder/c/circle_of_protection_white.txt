@@ -7,17 +7,16 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered |
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_protection_white.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/14.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/225.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/199.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/10.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/297.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/268.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/240.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/12.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/197.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/198.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/197.jpg
 Oracle:{1}: The next time a white source of your choice would deal damage to you this turn, prevent that damage.
+SetInfo:8ED Uncommon
+SetInfo:2ED Common
+SetInfo:7ED Common
+SetInfo:TMP Common
+SetInfo:6ED Common
+SetInfo:5ED Common
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:ICE Common
+SetInfo:4ED Common
+SetInfo:3ED Common

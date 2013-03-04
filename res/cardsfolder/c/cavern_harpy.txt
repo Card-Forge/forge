@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 A:AB$ ChangeZone | Cost$ PayLife<1> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Black+YouCtrl,Creature.Blue+YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavern_harpy.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/97.jpg
 Oracle:Flying\nWhen Cavern Harpy enters the battlefield, return a blue or black creature you control to its owner's hand.\nPay 1 life: Return Cavern Harpy to its owner's hand.
+SetInfo:PLS Common

@@ -7,9 +7,8 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execu
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLifeBlock | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
 SVar:TrigLoseLifeAttack:AB$LoseLife | Cost$ 0 | Defined$ TriggeredAttackerController | LifeAmount$ 3
 SVar:TrigLoseLifeBlock:AB$LoseLife | Cost$ 0 | Defined$ TriggeredBlockerController | LifeAmount$ 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contaminated_bond.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/61.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/120.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/132.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nWhenever enchanted creature attacks or blocks, its controller loses 3 life.
+SetInfo:MRD Common
+SetInfo:9ED Common
+SetInfo:10E Common

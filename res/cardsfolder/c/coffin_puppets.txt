@@ -4,7 +4,6 @@ Types:Creature Zombie
 PT:3/3
 A:AB$ ChangeZone | Cost$ Sac<2/Land> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | PlayerTurn$ True | ActivationPhases$ Upkeep | IsPresent$ Swamp.YouCtrl | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate this ability only during your upkeep and only if you control a Swamp.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_puppets.jpg
-SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/60.jpg
 Oracle:Sacrifice two lands: Return Coffin Puppets from your graveyard to the battlefield. Activate this ability only during your upkeep and only if you control a Swamp.
+SetInfo:PCY Rare

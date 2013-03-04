@@ -8,7 +8,6 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ KI | 
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_bandit.jpg
 AlternateMode:Flip
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/99.jpg
 Oracle:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Cunning Bandit.\nAt the beginning of the end step, if there are two or more ki counters on Cunning Bandit, you may flip it.
 
 ALTERNATE
@@ -21,5 +20,5 @@ PT:5/2
 A:AB$ GainControl | Cost$ SubCounter<1/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | SpellDescription$ Gain control of target creature until end of turn.
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/azamuki_treachery_incarnate.jpg
 # This link may be a temporary solution and could change in the near future.
-SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/169.jpg
 Oracle:Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.
+SetInfo:BOK Uncommon

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ Draw | Cost$ 3 B B | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws three cards, loses 3 life, and gets three poison counters.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | SubAbility$ DBPoison
 SVar:DBPoison:DB$ Poison | Num$ 3 | Defined$ Targeted
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caress_of_phyrexia.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/53.jpg
 Oracle:Target player draws three cards, loses 3 life, and gets three poison counters.
+SetInfo:NPH Uncommon

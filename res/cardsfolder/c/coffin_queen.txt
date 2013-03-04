@@ -12,7 +12,6 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 # Clear tracking effect if the creature put onto the battlefield leaves the battlefield, as per Oracle ruling
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ DBCleanup | Secondary$ True | Static$ True | TriggerDescription$ Clear tracking effect if the creature put onto the battlefield leaves the battlefield, as per Oracle ruling.
 SVar:X:Remembered$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_queen.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/8.jpg
 Oracle:You may choose not to untap Coffin Queen during your untap step.\n{2}{B}, {T}: Put target creature card from a graveyard onto the battlefield under your control. When Coffin Queen becomes untapped or you lose control of Coffin Queen, exile that creature.
+SetInfo:TMP Rare

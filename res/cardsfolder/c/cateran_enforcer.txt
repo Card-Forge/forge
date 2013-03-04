@@ -5,7 +5,6 @@ PT:4/3
 K:Fear
 A:AB$ ChangeZone | Cost$ 4 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE4 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_enforcer.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/121.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\n{4}, {T}: Search your library for a Mercenary permanent card with converted mana cost 4 or less and put it onto the battlefield. Then shuffle your library.
+SetInfo:MMQ Uncommon

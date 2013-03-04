@@ -4,7 +4,6 @@ Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Permanent.YouCtrl+nonArtifact | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | DefinedPlayer$ TriggeredCardController | ChangeType$ Triggered.Other+sharesCardTypeWith | ChangeNum$ 1 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | OptionalDecider$ You
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudstone_curio.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/257.jpg
 Oracle:Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
+SetInfo:RAV Rare

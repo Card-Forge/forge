@@ -3,7 +3,6 @@ ManaCost:0
 Types:Creature Kobold
 PT:0/1
 Colors:red
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_kobolds.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/219.jpg
 Oracle:Crimson Kobolds is red.
+SetInfo:LEG Common

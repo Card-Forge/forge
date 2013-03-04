@@ -8,7 +8,6 @@ SVar:DBAnimate:DB$Animate | Defined$ Targeted | Types$ Nightmare | Colors$ Black
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, exile all Nightmares.
 SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ChangeType$ Nightmare
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainer_dementia_master.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/56.jpg
 Oracle:Nightmare creatures get +1/+1.\n{B}{B}{B}, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.\nWhen Chainer, Dementia Master leaves the battlefield, exile all Nightmares.
+SetInfo:TOR Rare

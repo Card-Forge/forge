@@ -4,7 +4,6 @@ Types:Artifact Equipment
 K:Equip 3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Equipped creature gets +2/+2 and can't block.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_carapace.jpg
-SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/102.jpg
 Oracle:Equipped creature gets +2/+2 and can't block.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
+SetInfo:MBS Common

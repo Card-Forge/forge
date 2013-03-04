@@ -3,7 +3,6 @@ ManaCost:4 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 4 R | NumDmg$ Backlash | TgtPrompt$ Select target player to damage | ValidTgts$ Player | SpellDescription$ CARDNAME deals damage to target player equal to twice the number of white and/or blue permanents he or she controls.
 SVar:Backlash:Count$Valid Permanent.Blue+TargetedPlayerCtrl,Permanent.White+TargetedPlayerCtrl/Times.2
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaotic_backlash.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/49.jpg
 Oracle:Chaotic Backlash deals damage to target player equal to twice the number of white and/or blue permanents he or she controls.
+SetInfo:EVE Uncommon

@@ -3,7 +3,6 @@ ManaCost:2 G W
 Types:Sorcery
 A:SP$ GainLife | Cost$ 2 G W | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 K:Cascade
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captured_sunlight.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/66.jpg
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nYou gain 4 life.
+SetInfo:ARB Common

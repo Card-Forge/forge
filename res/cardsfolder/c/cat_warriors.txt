@@ -3,10 +3,9 @@ ManaCost:1 G G
 Types:Creature Cat Warrior
 PT:2/2
 K:Forestwalk
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16450.jpg
 Oracle:Forestwalk
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/144.jpg
-SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/30.jpg
-SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/219.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/91.jpg
+SetInfo:5ED Common
+SetInfo:CHR Common
+SetInfo:LEG Common
+SetInfo:6ED Common

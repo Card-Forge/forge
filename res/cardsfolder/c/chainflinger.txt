@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:2/2
 A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ Chainflinger deals 1 damage to target creature or player.
 A:AB$ DealDamage | Cost$ 2 R T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | Activation$ Threshold | PrecostDesc$ Threshold - | SpellDescription$ CARDNAME deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainflinger.jpg
-SetInfo:ODY|Common|http://magiccards.info/scans/en/od/181.jpg
 Oracle:{1}{R}, {T}: Chainflinger deals 1 damage to target creature or player.\nThreshold - {2}{R}, {T}: Chainflinger deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
+SetInfo:ODY Common

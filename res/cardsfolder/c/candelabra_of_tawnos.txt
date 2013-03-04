@@ -6,7 +6,6 @@ A:AB$ Untap | Cost$ X T | TargetMin$ 0 | TargetMax$ MaxTgts | ValidTgts$ Land | 
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Land
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/candelabra_of_tawnos.jpg
-SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/8.jpg
 Oracle:{X}, {T}: Untap X target lands.
+SetInfo:ATQ Rare

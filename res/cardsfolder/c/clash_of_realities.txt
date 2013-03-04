@@ -8,7 +8,6 @@ SVar:CoRSpiritDmg:DB$DealDamage | ValidTgts$ Creature.nonSpirit  | TgtPrompt$ Se
 SVar:CoRNonETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | TriggerZones$ Battlefield | Execute$ CoRNonDmg | TriggerDescription$ When this permanent enters the battlefield, you may have it deal 3 damage to target Spirit creature.
 SVar:CoRNonDmg:DB$DealDamage | ValidTgts$ Creature.Spirit | TgtPrompt$ Select target Spirit creature | NumDmg$ 3
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clash_of_realities.jpg
-SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/97.jpg
 Oracle:All Spirits have "When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature."\nNon-Spirit creatures have "When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature."
+SetInfo:BOK Rare

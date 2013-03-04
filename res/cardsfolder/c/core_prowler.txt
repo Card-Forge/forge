@@ -5,7 +5,6 @@ PT:2/2
 K:Infect
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, proliferate.
 SVar:TrigProliferate:AB$Proliferate | Cost$ 0
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/core_prowler.jpg
-SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/103.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nWhen Core Prowler dies, proliferate. (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
+SetInfo:MBS Uncommon

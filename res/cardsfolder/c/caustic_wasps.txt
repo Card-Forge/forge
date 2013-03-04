@@ -5,7 +5,6 @@ PT:1/1
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroy | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may destroy target artifact that player controls.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.DefenderCtrl | TgtPrompt$ Select an artifact your opponent controls.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caustic_wasps.jpg
-SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/234.jpg
 Oracle:Flying\nWhenever Caustic Wasps deals combat damage to a player, you may destroy target artifact that player controls.
+SetInfo:MMQ Uncommon

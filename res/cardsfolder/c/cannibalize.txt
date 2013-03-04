@@ -8,5 +8,5 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | Cou
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cannibalize.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/3.jpg
 Oracle:Choose two target creatures controlled by the same player. Exile one of those creatures and put two +1/+1 counters on the other.
+SetInfo:STH Common

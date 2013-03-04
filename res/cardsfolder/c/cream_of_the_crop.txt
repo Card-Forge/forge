@@ -5,7 +5,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | References$ X
 SVar:X:TriggeredCard$CardPower
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cream_of_the_crop.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/117.jpg
 Oracle:Whenever a creature enters the battlefield under your control, you may look at the top X cards of your library, where X is that creature's power. If you do, put one of those cards on top of your library and the rest on the bottom of your library in any order.
+SetInfo:MOR Rare

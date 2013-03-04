@@ -9,7 +9,6 @@ SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_solace.jpg
-SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/13.jpg
 Oracle:As Circle of Solace enters the battlefield, choose a creature type.\n{1}{W}: The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.
+SetInfo:ONS Rare

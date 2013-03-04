@@ -5,7 +5,6 @@ PT:3/3
 K:Flanking
 S:Mode$ Continuous | Affected$ Creature.Other+withFlanking+YouCtrl | AddKeyword$ Flanking | Description$ Other creatures you control with flanking have flanking. (Each instance of flanking triggers separately.)
 SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavalry_master.jpg
-SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/6.jpg
 Oracle:Flanking (Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)\nOther creatures you control with flanking have flanking. (Each instance of flanking triggers separately.)
+SetInfo:TSP Uncommon

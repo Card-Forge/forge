@@ -5,7 +5,6 @@ A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:DBDamage:DB$ DealDamage | Defined$ RememberedController | NumDmg$ Z | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | References$ Y,Z
 SVar:Y:Remembered$Valid Creature.White
 SVar:Z:Remembered$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_cloud.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/165.jpg
 Oracle:Destroy target creature. If a white creature dies this way, Cinder Cloud deals damage to that creature's controller equal to the creature's power.
+SetInfo:MIR Uncommon

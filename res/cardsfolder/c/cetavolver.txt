@@ -12,7 +12,6 @@ SVar:VolverPumped:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 |
 SVar:VolverStomp:DB$ Pump | Defined$ Self | KW$ Trample | Permanent$ True
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red|Green
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cetavolver.jpg
-SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/21.jpg
 Oracle:Kicker {1}{R} and/or {G} (You may pay an additional {1}{R} and/or {G} as you cast this spell.)\nIf Cetavolver was kicked with its {1}{R} kicker, it enters the battlefield with two +1/+1 counters on it and with first strike.\nIf Cetavolver was kicked with its {G} kicker, it enters the battlefield with a +1/+1 counter on it and with trample.
+SetInfo:APC Rare
