@@ -4,7 +4,6 @@ Types:Creature Soltari Monk Cleric
 PT:2/1
 K:Protection from black
 K:Shadow
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_monk.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/257.jpg
 Oracle:Protection from black\nShadow (This creature can block or be blocked by only creatures with shadow.)
+SetInfo:TMP Uncommon

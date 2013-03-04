@@ -4,7 +4,6 @@ Types:Creature Goblin Shaman
 PT:3/3
 A:AB$ ChooseColor | Cost$ GU GU | Defined$ You | OrColors$ True | SubAbility$ Animate | SpellDescription$ Target creature becomes the color or colors of your choice until end of turn.
 SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swirling_spriggan.jpg
-SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/76.jpg
 Oracle:{G/U}{G/U}: Target creature you control becomes the color or colors of your choice until end of turn.
+SetInfo:EVE Uncommon

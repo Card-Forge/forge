@@ -5,8 +5,7 @@ PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigGain | OptionalDecider$ You | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, you may gain 3 life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | LifeAmount$ 3
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_angel.jpg
-SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/31.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/23.jpg
 Oracle:Flying\nWhenever a land enters the battlefield under an opponent's control, you may gain 3 life.
+SetInfo:COM Uncommon
+SetInfo:NPH Uncommon

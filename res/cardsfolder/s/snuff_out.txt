@@ -2,8 +2,8 @@ Name:Snuff Out
 ManaCost:3 B
 Types:Instant
 A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
-A:SP$ Destroy | Cost$ PayLife<4> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | IsPresent$ Swamp.YouCtrl | CostDesc$ If you control a Swamp, you may pay 4 life rather than pay CARDNAME's mana cost. | SpellDescription$  
-SVar:Rarity:Common
+A:SP$ Destroy | Cost$ PayLife<4> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | IsPresent$ Swamp.YouCtrl | CostDesc$ If you control a Swamp, you may pay 4 life rather than pay CARDNAME's mana cost. | SpellDescription$
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snuff_out.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/162.jpg
 Oracle:If you control a Swamp, you may pay 4 life rather than pay Snuff Out's mana cost.\nDestroy target nonblack creature. It can't be regenerated.
+SetInfo:MMQ Common
+SetInfo:DDD Common

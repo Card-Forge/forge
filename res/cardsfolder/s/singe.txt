@@ -3,7 +3,6 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBColor | SpellDescription$ CARDNAME deals 1 damage to target creature. That creature becomes black until end of turn.
 SVar:DBColor:DB$Animate | Colors$ Black | OverwriteColors$ True | Defined$ Targeted
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/singe.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/71.jpg
 Oracle:Singe deals 1 damage to target creature. That creature becomes black until end of turn.
+SetInfo:PLS Common

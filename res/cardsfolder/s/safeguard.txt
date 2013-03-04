@@ -2,7 +2,6 @@ Name:Safeguard
 ManaCost:3 W W
 Types:Enchantment
 A:AB$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature whose combat damage will be prevented | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | IsCurse$ True | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safeguard.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/251.jpg
 Oracle:{2}{W}: Prevent all combat damage that would be dealt by target creature this turn.
+SetInfo:TMP Rare

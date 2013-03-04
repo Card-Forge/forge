@@ -3,12 +3,11 @@ ManaCost:1 U U
 Types:Instant Arcane
 A:SP$ Draw | Cost$ 1 U U | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card. If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle your library.
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBUnspeakable
-SVar:DBUnspeakable:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedThe Unspeakable | ChangeNum$ 1 | ConditionCheckSVar$ PeerReachTotal | ConditionSVarCompare$ EQ2 | References$ Peer,Reach,PeerReachTotal 
+SVar:DBUnspeakable:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedThe Unspeakable | ChangeNum$ 1 | ConditionCheckSVar$ PeerReachTotal | ConditionSVarCompare$ EQ2 | References$ Peer,Reach,PeerReachTotal
 SVar:PeerReachTotal:SVar$Peer/Plus.Reach
 #Max returns any number lower than or equally to the number following the period.
 SVar:Peer:Count$ThisTurnCast_Card.YouCtrl+namedPeer Through Depths/LimitMax.1
 SVar:Reach:Count$ThisTurnCast_Card.YouCtrl+namedReach Through Mists/LimitMax.1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sift_through_sands.jpg
-SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/84.jpg
 Oracle:Draw two cards, then discard a card.\nIf you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle your library.
+SetInfo:CHK Common

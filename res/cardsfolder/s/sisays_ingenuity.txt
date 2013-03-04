@@ -9,7 +9,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ABChooseColor 
 SVar:ABChooseColor:AB$ ChooseColor | Cost$ 2 U | Defined$ You | SubAbility$ DBAnimate | SpellDescription$ Target creature becomes the color of your choice until end of turn.
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sisays_ingenuity.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/33.jpg
 Oracle:Enchant creature\nWhen Sisay's Ingenuity enters the battlefield, draw a card.\nEnchanted creature has "{2}{U}: Target creature becomes the color of your choice until end of turn."
+SetInfo:PLS Common

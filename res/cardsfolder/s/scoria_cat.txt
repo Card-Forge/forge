@@ -5,7 +5,6 @@ PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME gets +3/+3 as long as you control no untapped lands.
 SVar:X:Count$Valid Land.YouCtrl+untapped
 SVar:BuffedBy:Card.nonLand
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scoria_cat.jpg
-SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/101.jpg
 Oracle:Scoria Cat gets +3/+3 as long as you control no untapped lands.
+SetInfo:PCY Uncommon

@@ -4,12 +4,11 @@ Types:Creature Snake Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 3 life.
 SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 3
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83364.jpg
-SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/161.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/162.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po/32.jpg
-SetInfo:STH|Common|http://magiccards.info/scans/en/sh/19.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/162.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/88.jpg
 Oracle:When Serpent Warrior enters the battlefield, you lose 3 life.
+SetInfo:8ED Common
+SetInfo:S99 Common
+SetInfo:7ED Common
+SetInfo:9ED Common
+SetInfo:STH Common
+SetInfo:POR Common

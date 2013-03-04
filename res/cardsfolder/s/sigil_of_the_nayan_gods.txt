@@ -7,7 +7,6 @@ A:SP$ Attach | Cost$ 1 W G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sigil_of_the_nayan_gods.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/78.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each creature you control.\nCycling {G/W} ({G/W}, Discard this card: Draw a card.)
+SetInfo:ARB Common

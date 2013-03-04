@@ -5,7 +5,6 @@ K:Cycling:2 R
 A:SP$ DamageAll | Cost$ 4 R R | NumDmg$ 4 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 4 damage to each creature.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDamageAll | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may have it deal 1 damage to each creature.
 SVar:TrigDamageAll:AB$ DamageAll | Cost$ 0 | NumDmg$ 1 | ValidCards$ Creature | ValidDescription$ each creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slice_and_dice.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/232.jpg
 Oracle:Slice and Dice deals 4 damage to each creature.\nCycling {2}{R} ({2}{R}, Discard this card: Draw a card.)\nWhen you cycle Slice and Dice, you may have it deal 1 damage to each creature.
+SetInfo:ONS Uncommon

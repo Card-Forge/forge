@@ -6,7 +6,6 @@ A:AB$ PreventDamage | Cost$ W W T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Sel
 SVar:DBTap:DB$Tap | Cost$ 0 | Defined$ Targeted | SubAbility$ DBStayTapped
 SVar:DBStayTapped:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Targeted | Permanent$ True | IsCurse$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samite_alchemist.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/116.jpg|2
 Oracle:{W}{W}, {T}: Prevent the next 4 damage that would be dealt this turn to target creature you control. Tap that creature. It doesn't untap during your next untap step.
+SetInfo:HML Common x2

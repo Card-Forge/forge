@@ -5,8 +5,7 @@ PT:3/5
 K:Reach
 A:AB$ DamageAll | Cost$ Sac<1/Land> | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidDescription$ each creature and with flying. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24666.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/280.jpg
-SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/125.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nSacrifice a land: Spitting Spider deals 1 damage to each creature with flying.
+SetInfo:PCY Uncommon
+SetInfo:8ED Uncommon

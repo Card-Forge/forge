@@ -5,9 +5,8 @@ PT:5/5
 K:Swampwalk
 T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a black spell, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solkanar_the_swamp_king.jpg
 Oracle:Swampwalk\nWhenever a player casts a black spell, you gain 1 life.
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/120.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/100.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/299.jpg
+SetInfo:CHR Rare
+SetInfo:LEG Rare
+SetInfo:TSB Special

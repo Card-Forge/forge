@@ -4,7 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ BG R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ -3 | Description$ Enchanted creature gets +3/-3.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sangrite_backlash.jpg
-SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/139.jpg
 Oracle:Enchant creature\nEnchanted creature gets +3/-3.
+SetInfo:ARB Common

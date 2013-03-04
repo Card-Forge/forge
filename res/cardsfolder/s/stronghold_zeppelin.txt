@@ -4,7 +4,6 @@ Types:Creature Human
 PT:3/3
 K:Flying
 K:CARDNAME can block only creatures with flying.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_zeppelin.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/47.jpg
 Oracle:Flying\nStronghold Zeppelin can block only creatures with flying.
+SetInfo:NMS Uncommon

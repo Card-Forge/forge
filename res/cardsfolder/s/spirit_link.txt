@@ -6,14 +6,13 @@ A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals damage, you gain that much life.
 SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$DamageAmount
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_link.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/47.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/47.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/340.jpg
-SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/206.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/301.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/47.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/45.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/43.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nWhenever enchanted creature deals damage, you gain that much life.
+SetInfo:8ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:LEG Uncommon
+SetInfo:6ED Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon

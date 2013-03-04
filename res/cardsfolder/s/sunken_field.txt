@@ -5,7 +5,6 @@ K:Enchant land
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ Counter | Description$ Enchanted land has "Tap: Counter target spell unless its controller pays 1."
 SVar:Counter:AB$Counter | Cost$ T | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_field.jpg
-SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/51.jpg
 Oracle:Enchant land\nEnchanted land has "{T}: Counter target spell unless its controller pays {1}."
+SetInfo:PCY Uncommon

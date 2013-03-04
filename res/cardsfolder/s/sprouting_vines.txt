@@ -3,7 +3,6 @@ ManaCost:2 G
 Types:Instant
 A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
 K:Storm
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_vines.jpg
-SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/128.jpg
 Oracle:Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
+SetInfo:SCG Common

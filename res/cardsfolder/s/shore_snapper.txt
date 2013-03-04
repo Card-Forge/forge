@@ -3,7 +3,6 @@ ManaCost:2 B
 Types:Creature Beast
 PT:2/2
 A:AB$ Pump | Cost$ U | KW$ Islandwalk | SpellDescription$ CARDNAME gains islandwalk until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shore_snapper.jpg
-SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/87.jpg
 Oracle:{U}: Shore Snapper gains islandwalk until end of turn.
+SetInfo:ALA Common

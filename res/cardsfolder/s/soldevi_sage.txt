@@ -6,8 +6,7 @@ A:AB$ Draw | Cost$ T Sac<2/Land> | NumCards$ 3 | RememberDrawn$ True | SubAbilit
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_sage.jpg
-SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/99.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/51.jpg|2
 Oracle:{T}, Sacrifice two lands: Draw three cards, then discard one of them.
+SetInfo:ALL Common x2
+SetInfo:6ED Uncommon

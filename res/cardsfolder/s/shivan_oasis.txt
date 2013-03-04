@@ -4,8 +4,9 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_oasis.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/326.jpg
-SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/327.jpg
 Oracle:Shivan Oasis enters the battlefield tapped.\n{T}: Add {R} or {G} to your mana pool.
+SetInfo:8ED Uncommon
+SetInfo:DDE Uncommon
+SetInfo:HOP Uncommon
+SetInfo:INV Uncommon

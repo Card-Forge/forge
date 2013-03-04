@@ -7,7 +7,6 @@ SVar:X:Sacrificed$CardToughness
 A:AB$ LoseLife | Cost$ B T Sac<1/Creature.Cleric/Cleric creature> | ValidTgts$ Player | LifeAmount$ Y | References$ Y | TgtPrompt$ Select a player | SpellDescription$ Target player loses life equal to the sacrificed creature's power.
 SVar:Y:Sacrificed$CardPower
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starlit_sanctum.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/325.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{W}, {T}, Sacrifice a Cleric creature: You gain life equal to the sacrificed creature's toughness.\n{B}, {T}, Sacrifice a Cleric creature: Target player loses life equal to the sacrificed creature's power.
+SetInfo:ONS Uncommon

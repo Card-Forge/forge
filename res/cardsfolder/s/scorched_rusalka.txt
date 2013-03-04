@@ -4,7 +4,6 @@ Types:Creature Spirit
 PT:1/1
 A:AB$ DealDamage | Cost$ R Sac<1/Creature> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_rusalka.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/74.jpg
 Oracle:{R}, Sacrifice a creature: Scorched Rusalka deals 1 damage to target player.
+SetInfo:GPT Uncommon

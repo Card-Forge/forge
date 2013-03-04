@@ -4,7 +4,6 @@ Types:Creature Drake
 PT:3/3
 K:Flash
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_monitor.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/46.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying
+SetInfo:NPH Common

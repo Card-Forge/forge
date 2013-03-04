@@ -2,7 +2,6 @@ Name:Storm Front
 ManaCost:G
 Types:Enchantment
 A:AB$ Tap | Cost$ G G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Tap target creature with flying.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_front.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/153.jpg
 Oracle:{G}{G}: Tap target creature with flying.
+SetInfo:TMP Uncommon

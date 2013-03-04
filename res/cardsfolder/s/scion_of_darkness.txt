@@ -6,7 +6,7 @@ K:Trample
 K:Cycling:3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigGainControl | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may put target creature card from that player's graveyard onto the battlefield under your control.
 SVar:TrigGainControl:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature in opponent's graveyard
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_darkness.jpg
-SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/79.jpg
 Oracle:Trample\nWhenever Scion of Darkness deals combat damage to a player, you may put target creature card from that player's graveyard onto the battlefield under your control.\nCycling {3} ({3}, Discard this card: Draw a card.)
+SetInfo:ARC Rare
+SetInfo:LGN Rare

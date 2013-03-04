@@ -12,7 +12,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creatu
 life you lost when it entered the battlefield.
 SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ LifePaidOnETB | References$ LifePaidOnETB
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulgorger_orgg.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/99.jpg
 Oracle:Trample\nWhen Soulgorger Orgg enters the battlefield, you lose all but 1 life.\nWhen Soulgorger Orgg leaves the battlefield, you gain life equal to the life you lost when it entered the battlefield.
+SetInfo:JUD Uncommon

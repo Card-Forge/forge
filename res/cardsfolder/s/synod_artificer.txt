@@ -8,7 +8,6 @@ A:AB$ Untap | Cost$ X T | References$ X,MaxTgts | TargetMin$ 0 | TargetMax$ MaxT
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Artifact.nonCreature
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synod_artificer.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/34.jpg
 Oracle:{X}, {T}: Tap X target noncreature artifacts.\n{X}, {T}: Untap X target noncreature artifacts.
+SetInfo:DST Rare

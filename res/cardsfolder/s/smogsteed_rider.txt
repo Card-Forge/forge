@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, each other attacking creature gains fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
 SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.attacking+Other | KW$ Fear
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smogsteed_rider.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/63.jpg
 Oracle:Whenever Smogsteed Rider attacks, each other attacking creature gains fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)
+SetInfo:GPT Uncommon

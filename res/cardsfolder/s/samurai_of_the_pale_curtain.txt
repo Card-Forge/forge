@@ -5,7 +5,6 @@ PT:2/2
 K:Bushido 1
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent | ReplaceWith$ Exile | Description$ If a permanent would be put into a graveyard, exile it instead.
 SVar:Exile:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/samurai_of_the_pale_curtain.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/43.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\nIf a permanent would be put into a graveyard, exile it instead.
+SetInfo:CHK Uncommon

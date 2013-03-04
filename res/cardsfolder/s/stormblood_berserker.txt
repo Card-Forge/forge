@@ -4,7 +4,6 @@ Types:Creature Human Berserker
 PT:1/1
 K:Bloodthirst 2
 K:CARDNAME can't be blocked except by two or more creatures.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormblood_berserker.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/156.jpg
 Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)\nStormblood Berserker can't be blocked except by two or more creatures.
+SetInfo:M12 Uncommon

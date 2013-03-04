@@ -9,7 +9,6 @@ SVar:TrigExile:DB$ ChangeZone | Cost$ 0 | TargetMin$ 1 | TargetMax$ 1 | IsCurse$
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slithery_stalker.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/84.jpg
 Oracle:Swampwalk\nWhen Slithery Stalker enters the battlefield, exile target green or white creature an opponent controls.\nWhen Slithery Stalker leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SetInfo:TOR Uncommon

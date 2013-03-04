@@ -5,7 +5,6 @@ PT:2/1
 K:Bushido 1
 A:AB$ PutCounter | Cost$ 1 W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ TRAINING | CounterNum$ 1 | SorcerySpeed$ True | SubAbility$ DBAnimate | SpellDescription$ Put a training counter on target creature. That creature gains bushido 1 and becomes a Samurai in addition to its other creature types. Activate this ability only any time you could cast a sorcery.
 SVar:DBAnimate:DB$Animate | Defined$ Targeted | Types$ Samurai | Keywords$ Bushido 1 | Permanent$ True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sensei_golden_tail.jpg
-SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/44.jpg
 Oracle:Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)\n{1}{W}, {T}: Put a training counter on target creature. That creature gains bushido 1 and becomes a Samurai in addition to its other creature types. Activate this ability only any time you could cast a sorcery.
+SetInfo:CHK Rare

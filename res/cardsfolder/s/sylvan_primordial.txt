@@ -10,5 +10,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_primordial.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/136.jpg
 Oracle:Reach\nWhen Sylvan Primordial enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
+SetInfo:GTC Rare

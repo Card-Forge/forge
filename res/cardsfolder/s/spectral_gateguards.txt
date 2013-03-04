@@ -4,7 +4,6 @@ Types:Creature Spirit Soldier
 PT:2/5
 K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddKeyword$ Vigilance | Description$ As long as CARDNAME is paired with another creature, both creatures have vigilance.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_gateguards.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/37.jpg
 Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Spectral Gateguards is paired with another creature, both creatures have vigilance.
+SetInfo:AVR Common

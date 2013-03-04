@@ -6,7 +6,6 @@ SVar:DBScentOfCinderDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtProm
 SVar:ScentOfCinderX:Remembered$Amount
 SVar:DBScentOfCinderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scent_of_cinder.jpg
-SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/96.jpg
 Oracle:Reveal any number of red cards in your hand. Scent of Cinder deals X damage to target creature or player, where X is the number of cards revealed this way.
+SetInfo:UDS Common

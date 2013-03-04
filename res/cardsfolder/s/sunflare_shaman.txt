@@ -6,7 +6,6 @@ A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | References$ X | Defined$ Self
 SVar:X:Count$TypeInYourYard.Elemental
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunflare_shaman.jpg
-SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/108.jpg
 Oracle:{1}{R}, {T}: Sunflare Shaman deals X damage to target creature or player and X damage to itself, where X is the number of Elemental cards in your graveyard.
+SetInfo:MOR Common

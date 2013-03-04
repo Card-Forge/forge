@@ -10,7 +10,6 @@ SVar:X:Count$xPaid
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:black
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squealing_devil.jpg
-SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/72.jpg
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen Squealing Devil enters the battlefield, you may pay {X}. If you do, target creature gets +X/+0 until end of turn.\nWhen Squealing Devil enters the battlefield, sacrifice it unless {B} was spent to cast it.
+SetInfo:DIS Uncommon

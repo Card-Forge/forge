@@ -4,7 +4,6 @@ Types:Creature Human Assassin
 PT:1/1
 A:AB$ Tap | Cost$ 3 U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 A:AB$ Destroy | Cost$ 3 B T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_assassin.jpg
-SetInfo:INV|Rare|http://magiccards.info/scans/en/in/277.jpg
 Oracle:{3}{U}, {T}: Tap target creature.\n{3}{B}, {T}: Destroy target tapped creature.
+SetInfo:INV Rare

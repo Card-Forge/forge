@@ -9,7 +9,6 @@ SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ 
 SVar:DBPump:DB$ Pump | NumAtt$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbound_dragon.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/90.jpg
 Oracle:Flying\nWhenever Spellbound Dragon attacks, draw a card, then discard a card. Spellbound Dragon gets +X/+0 until end of turn, where X is the discarded card's converted mana cost.
+SetInfo:ARB Rare

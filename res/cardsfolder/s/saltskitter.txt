@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDelTrig
 SVar:DBDelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBack | TriggerDescription$ Return CARDNAME to the battlefield under its owner's control at the beginning of the next end step.
 SVar:TrigBack:DB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Exile | Destination$ Battlefield
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/saltskitter.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/14.jpg
 Oracle:Whenever another creature enters the battlefield, exile Saltskitter. Return Saltskitter to the battlefield under its owner's control at the beginning of the next end step.
+SetInfo:FUT Common

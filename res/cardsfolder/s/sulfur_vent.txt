@@ -5,7 +5,6 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ R U | SpellDescription$ Add R U to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfur_vent.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/328.jpg
 Oracle:Sulfur Vent enters the battlefield tapped.\n{T}: Add {B} to your mana pool.\n{T}, Sacrifice Sulfur Vent: Add {U}{R} to your mana pool.
+SetInfo:INV Common

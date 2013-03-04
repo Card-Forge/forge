@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination $ Library | LibraryPosition$ 0 | SubAbility$ DBDig | SpellDescription$ Put target creature on top of its owner's library, then fateseal 2. (To fateseal 2, look at the top two cards of an opponent's library, then put any number of them on the bottom of that player's library and the rest on top in any order.)
 SVar:DBDig:DB$Dig | Defined$ Opponent | DigNum$ 2 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition$ -1 | LibraryPosition2$ 0
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spin_into_myth.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/60.jpg
 Oracle:Put target creature on top of its owner's library, then fateseal 2. (To fateseal 2, look at the top two cards of an opponent's library, then put any number of them on the bottom of that player's library and the rest on top in any order.)
+SetInfo:FUT Uncommon
+SetInfo:ARC Uncommon

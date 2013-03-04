@@ -5,7 +5,7 @@ A:AB$ RearrangeTopOfLibrary | Cost$ 1 | Defined$ You | NumCards$ 3 | SpellDescri
 A:AB$ Draw | Cost$ T | Defined$ You | NumCards$ 1 | SubAbility$ DBChangeZone | SpellDescription$ Draw a card, then put CARDNAME on top of it's owner's library.
 SVar:DBChangeZone:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/senseis_divining_top.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/268.jpg
 Oracle:{1}: Look at the top three cards of your library, then put them back in any order.\n{T}: Draw a card, then put Sensei's Divining Top on top of its owner's library.
+SetInfo:CHK Uncommon
+SetInfo:V09 Mythic

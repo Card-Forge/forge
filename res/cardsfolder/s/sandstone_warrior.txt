@@ -4,8 +4,7 @@ Types:Creature Human Soldier Warrior
 PT:1/3
 K:First Strike
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sandstone_warrior.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/199.jpg
-SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/215.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\n{R}: Sandstone Warrior gets +1/+0 until end of turn.
+SetInfo:TMP Common
+SetInfo:9ED Common

@@ -4,7 +4,6 @@ Types:Creature Elf Archer
 PT:2/5
 K:Reach
 K:CARDNAME can block an additional creature.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_sagittars.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/229.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nSelesnya Sagittars can block an additional creature.
+SetInfo:RAV Uncommon

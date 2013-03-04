@@ -7,7 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ You | Execute$ TrigDe
 SVar:TrigDestroyOwn:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment.YouCtrl | TgtPrompt$ Select an enchantment that you control.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroyOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME deals damage to a player, destroy target enchantment that player controls.
 SVar:TrigDestroyOpp:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment.OppCtrl | TgtPrompt$ Select an enchantment your opponent controls.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soltari_visionary.jpg
-SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/20.jpg
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nWhenever Soltari Visionary deals damage to a player, destroy target enchantment that player controls.
+SetInfo:EXO Common

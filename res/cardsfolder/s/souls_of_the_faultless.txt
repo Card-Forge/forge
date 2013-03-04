@@ -8,7 +8,6 @@ SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | SubAbility$
 SVar:DBDrain:DB$LoseLife | Defined$ Opponent | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_of_the_faultless.jpg
-SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/131.jpg
 Oracle:Defender (This creature can't attack.)\nWhenever Souls of the Faultless is dealt combat damage, you gain that much life and attacking player loses that much life.
+SetInfo:GPT Uncommon

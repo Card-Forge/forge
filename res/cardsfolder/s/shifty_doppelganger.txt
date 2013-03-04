@@ -9,7 +9,6 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | RememberSacrificed$ True | SubAbility$ DB
 SVar:DBBounce:DB$ ChangeZoneAll | Origin$ Exile | Defined$ You | Destination$ Battlefield | ChangeType$ Card.IsRemembered | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shifty_doppelganger.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/101.jpg
 Oracle:{3}{U}, Exile Shifty Doppelganger: You may put a creature card from your hand onto the battlefield. If you do, that creature gains haste until end of turn. At the beginning of the next end step, sacrifice that creature. If you do, return Shifty Doppelganger to the battlefield.
+SetInfo:ODY Rare

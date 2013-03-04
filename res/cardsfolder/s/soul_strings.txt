@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ X B | Origin$ Graveyard | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | UnlessCost$ X | UnlessPayer$ Player | References$ X | SpellDescription$ Return two target creature cards from your graveyard to your hand unless any player pays X.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_strings.jpg
-SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/78.jpg
 Oracle:Return two target creature cards from your graveyard to your hand unless any player pays {X}.
+SetInfo:PCY Common

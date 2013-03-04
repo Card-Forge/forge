@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Regenerate | Cost$ PayLife<2> | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_channeling.jpg
-SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/163.jpg
 Oracle:Enchant creature\nPay 2 life: Regenerate enchanted creature.
+SetInfo:MMQ Common

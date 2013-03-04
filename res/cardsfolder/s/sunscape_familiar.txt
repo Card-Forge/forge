@@ -6,7 +6,6 @@ K:Defender
 S:Mode$ ReduceCost | ValidCard$ Card.Blue,Card.Green | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Green spells and blue spells you cast cost 1 less to cast.
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Green|Blue
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscape_familiar.jpg
-SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/17.jpg
 Oracle:Defender (This creature can't attack.)\nGreen spells and blue spells you cast cost {1} less to cast.
+SetInfo:PLS Common

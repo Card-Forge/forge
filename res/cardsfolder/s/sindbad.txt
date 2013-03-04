@@ -5,9 +5,8 @@ PT:1/1
 A:AB$ Draw | Cost$ T | NumCards$ 1 | Reveal$ True | RememberDrawn$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card and reveal it. If it isn't a land card, discard it.
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ You | DefinedCards$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sindbad.jpg
-SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/31.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/100.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/27.jpg
 Oracle:{T}: Draw a card and reveal it. If it isn't a land card, discard it.
+SetInfo:4ED Uncommon
+SetInfo:TSB Special
+SetInfo:ARN Uncommon

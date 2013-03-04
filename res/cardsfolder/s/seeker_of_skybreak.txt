@@ -4,8 +4,7 @@ Types:Creature Elf
 PT:2/1
 A:AB$ Untap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seeker_of_skybreak.jpg
-SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/148.jpg
-SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/268.jpg
 Oracle:{T}: Untap target creature.
+SetInfo:7ED Common
+SetInfo:TMP Common

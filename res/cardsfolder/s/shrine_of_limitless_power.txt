@@ -7,7 +7,6 @@ SVar:TrigAddCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$
 A:AB$ Discard | Cost$ 4 T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | Mode$ TgtChoose | References$ X | SpellDescription$ Target player discards a card for each charge counter on CARDNAME.
 SVar:X:Sacrificed$CardCounters.CHARGE
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_limitless_power.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/154.jpg
 Oracle:At the beginning of your upkeep or whenever you cast a black spell, put a charge counter on Shrine of Limitless Power.\n{4}, {T}, Sacrifice Shrine of Limitless Power: Target player discards a card for each charge counter on Shrine of Limitless Power.
+SetInfo:NPH Uncommon

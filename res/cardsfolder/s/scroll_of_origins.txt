@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact
 A:AB$ Draw | Cost$ 2 T | NumCards$ 1 | ConditionCardsInHand$ 7 | SpellDescription$ Draw a card if you have seven or more cards in hand.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_origins.jpg
-SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/159.jpg
 Oracle:{2}, {T}: Draw a card if you have seven or more cards in hand.
+SetInfo:SOK Rare

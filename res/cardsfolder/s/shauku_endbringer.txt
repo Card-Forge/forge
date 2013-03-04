@@ -10,7 +10,6 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 3
 SVar:DBCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self
 SVar:X:Count$Valid Creature
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shauku_endbringer.jpg
-SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/40.jpg
 Oracle:Flying\nShauku, Endbringer can't attack if there's another creature on the battlefield.\nAt the beginning of your upkeep, you lose 3 life.\n{T}: Exile target creature and put a +1/+1 counter on Shauku.
+SetInfo:MIR Rare

@@ -7,7 +7,6 @@ K:Trample
 T:Mode$ TapsForMana | ValidCard$ Land.YouCtrl | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you tap a land for mana, remove a +1/+1 counter from CARDNAME.
 SVar:TrigRemoveCounter:AB$RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_firecat.jpg
-SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/218.jpg
 Oracle:Trample\nSavage Firecat enters the battlefield with seven +1/+1 counters on it.\nWhenever you tap a land for mana, remove a +1/+1 counter from Savage Firecat.
+SetInfo:ODY Rare

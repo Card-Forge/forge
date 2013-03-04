@@ -7,8 +7,7 @@ SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Oppo
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 2 damage to you.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeper_agent.jpg
-SetInfo:USG|Rare|http://magiccards.info/scans/en/us/159.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/178.jpg
 Oracle:When Sleeper Agent enters the battlefield, target opponent gains control of it.\nAt the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
+SetInfo:10E Rare
+SetInfo:USG Rare

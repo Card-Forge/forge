@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature | AITgts$ Card.White | TgtPrompt$ Select target creature | ConditionDefined$ Targeted | ConditionPresent$ Creature.White | ConditionCompare$ EQ1 | NoRegen$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target creature if it's white. A creature destroyed this way can't be regenerated.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True | SpellDescription$ Draw a card at the beginning of the next upkeep.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_rend.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/42.jpg
 Oracle:Destroy target creature if it's white. A creature destroyed this way can't be regenerated.\nDraw a card at the beginning of the next turn's upkeep.
+SetInfo:MIR Uncommon

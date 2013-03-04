@@ -8,7 +8,6 @@ SVar:TrigChoice:AB$ GenericChoice | ValidTgts$ Creature | TgtPrompt$ Select targ
 SVar:TrigPump1:DB$Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ +2 | NumDef$ -2 | IsCurse$ True | ChoiceDescription$ +2/-2
 SVar:TrigPump2:DB$Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ -2 | NumDef$ +2 | IsCurse$ True | ChoiceDescription$ -2/+2
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaper_parasite.jpg
-SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/46.jpg
 Oracle:Morph {2}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Shaper Parasite is turned face up, target creature gets +2/-2 or -2/+2 until end of turn.
+SetInfo:PLC Common

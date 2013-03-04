@@ -1,10 +1,9 @@
 Name:Savannah
 ManaCost:no cost
 Types:Land Forest Plains
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savannah.jpg
-SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/288.jpg
-SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/293.jpg
-SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/297.jpg
-SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/293.jpg
 Oracle:
+SetInfo:2ED Rare
+SetInfo:LEB Rare
+SetInfo:LEA Rare
+SetInfo:3ED Rare

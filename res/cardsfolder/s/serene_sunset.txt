@@ -5,7 +5,6 @@ A:SP$ Pump | Cost$ X G | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_sunset.jpg
-SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/131.jpg
 Oracle:Prevent all combat damage X target creatures would deal this turn.
+SetInfo:JUD Uncommon

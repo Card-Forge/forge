@@ -4,7 +4,6 @@ Types:Creature Lizard
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, put three 1/1 green Saproling creature tokens onto the battlefield.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ TriggeredCardController | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_thrinax.jpg
-SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/197.jpg
 Oracle:When Sprouting Thrinax dies, put three 1/1 green Saproling creature tokens onto the battlefield.
+SetInfo:ALA Uncommon

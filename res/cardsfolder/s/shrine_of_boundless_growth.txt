@@ -7,7 +7,6 @@ SVar:TrigAddCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 
 A:AB$Mana | Cost$ T Sac<1/CARDNAME> | Produced$ 1 | Amount$ X | References$ X | SpellDescription$ Add 1 to your mana pool for each charge counter on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_boundless_growth.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/152.jpg
 Oracle:At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on Shrine of Boundless Growth.\n{T}, Sacrifice Shrine of Boundless Growth: Add {1} to your mana pool for each charge counter on Shrine of Boundless Growth.
+SetInfo:NPH Uncommon

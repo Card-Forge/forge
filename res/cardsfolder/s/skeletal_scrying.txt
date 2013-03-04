@@ -5,7 +5,6 @@ A:SP$ Draw | Cost$ X B ExileFromGrave<X/Card> | NumCards$ X | SubAbility$ DBLose
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_scrying.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/161.jpg
 Oracle:As an additional cost to cast Skeletal Scrying, exile X cards from your graveyard.\nYou draw X cards and you lose X life.
+SetInfo:ODY Uncommon

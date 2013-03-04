@@ -6,7 +6,6 @@ K:Flash
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, you gain protection from the color of your choice until end of turn
 SVar:TrigChoose:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminentAttackers | SubAbility$ SehtsProtection
 SVar:SehtsProtection:DB$ ProtectionAll | ValidPlayers$ You | Gains$ ChosenColor
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sehts_tiger.jpg
-SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/31.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Seht's Tiger enters the battlefield, you gain protection from the color of your choice until end of turn. (You can't be targeted, dealt damage, or enchanted by anything of the chosen color.)
+SetInfo:FUT Rare

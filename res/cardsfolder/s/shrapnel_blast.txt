@@ -2,7 +2,6 @@ Name:Shrapnel Blast
 ManaCost:1 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R Sac<1/Artifact> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or player.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrapnel_blast.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/106.jpg
 Oracle:As an additional cost to cast Shrapnel Blast, sacrifice an artifact.\nShrapnel Blast deals 5 damage to target creature or player.
+SetInfo:MRD Uncommon

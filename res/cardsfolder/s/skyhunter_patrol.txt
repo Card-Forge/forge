@@ -4,8 +4,8 @@ Types:Creature Cat Knight
 PT:2/3
 K:Flying
 K:First Strike
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyhunter_patrol.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/22.jpg
-SetInfo:10E|Common|http://magiccards.info/scans/en/10e/41.jpg
 Oracle:Flying, first strike (This creature can't be blocked except by creatures with flying or reach, and it deals combat damage before creatures without first strike.)
+SetInfo:MRD Common
+SetInfo:DDG Common
+SetInfo:10E Common

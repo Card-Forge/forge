@@ -6,7 +6,6 @@ T:Mode$ Always | IsPresent$ Card.Self+withFlying | TriggerZones$ Battlefield | E
 SVar:TrigFlip:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/student_of_elements.jpg
 AlternateMode:Flip
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/93.jpg
 Oracle:When Student of Elements has flying, flip it.
 
 ALTERNATE
@@ -18,6 +17,6 @@ Types:Legendary Creature Human Wizard
 PT:3/3
 S:Mode$Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Flying | Description$ Creatures you control have flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tobita_master_of_winds.jpg
-SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/310.jpg
 Oracle:Creatures you control have flying.
 
+SetInfo:CHK Uncommon

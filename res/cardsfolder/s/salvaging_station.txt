@@ -5,7 +5,6 @@ A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Battlefield | Vali
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature dies, you may untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvaging_station.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/148.jpg
 Oracle:{T}: Return target noncreature artifact card with converted mana cost 1 or less from your graveyard to the battlefield.\nWhenever a creature dies, you may untap Salvaging Station.
+SetInfo:5DN Rare

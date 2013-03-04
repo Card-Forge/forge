@@ -4,8 +4,7 @@ Types:Artifact
 K:CARDNAME enters the battlefield tapped.
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Basic.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add to your mana pool one mana of any color a basic land you control could produce.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/star_compass.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/315.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/134.jpg
 Oracle:Star Compass enters the battlefield tapped.\n{T}: Add to your mana pool one mana of any color that a basic land you control could produce.
+SetInfo:8ED Uncommon
+SetInfo:PLS Uncommon

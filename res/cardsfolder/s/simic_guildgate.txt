@@ -4,7 +4,6 @@ Types:Land Gate
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_guildgate.jpg
-SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/246.jpg
 Oracle:Simic Guildgate enters the battlefield tapped.\n{T}: Add {G} or {U} to your mana pool.
+SetInfo:GTC Common

@@ -4,15 +4,14 @@ Types:Creature Vampire
 PT:4/4
 K:Flying
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35086.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/36.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/36.jpg
-SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/80.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/44.jpg
-SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/161.jpg
-SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/176.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/37.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/107.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/36.jpg
 Oracle:Flying\nWhenever a creature dealt damage by Sengir Vampire this turn dies, put a +1/+1 counter on Sengir Vampire.
+SetInfo:2ED Uncommon
+SetInfo:TOR Rare
+SetInfo:9ED Rare
+SetInfo:10E Rare
+SetInfo:LEB Uncommon
+SetInfo:M12 Uncommon
+SetInfo:LEA Uncommon
+SetInfo:4ED Uncommon
+SetInfo:3ED Uncommon

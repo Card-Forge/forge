@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:1/1
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 A:AB$ LoseLife | Cost$ B T | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SpellDescription$ Target player loses 1 life.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_apprentice.jpg
-SetInfo:INV|Common|http://magiccards.info/scans/en/in/75.jpg
 Oracle:{W}, {T}: Tap target creature.\n{B}, {T}: Target player loses 1 life.
+SetInfo:INV Common

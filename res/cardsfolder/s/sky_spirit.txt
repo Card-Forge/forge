@@ -4,7 +4,7 @@ Types:Creature Spirit
 PT:2/2
 K:Flying
 K:First Strike
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_spirit.jpg
-SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/346.jpg
 Oracle:Flying, first strike
+SetInfo:DDI Uncommon
+SetInfo:TMP Uncommon

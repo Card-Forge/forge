@@ -4,7 +4,6 @@ Types:Creature Human Wizard
 PT:0/1
 K:CARDNAME can't be the target of red spells or abilities from red sources.
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_firewalker.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/94.jpg
 Oracle:Suq'Ata Firewalker can't be the target of red spells or abilities from red sources.\n{T}: Suq'Ata Firewalker deals 1 damage to target creature or player.
+SetInfo:MIR Uncommon

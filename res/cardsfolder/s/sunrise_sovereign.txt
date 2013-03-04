@@ -5,7 +5,6 @@ PT:5/5
 S:Mode$ Continuous | Affected$ Creature.Giant+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Other Giant creatures you control get +2/+2 and have trample.
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunrise_sovereign.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/192.jpg
 Oracle:Other Giant creatures you control get +2/+2 and have trample.
+SetInfo:LRW Rare

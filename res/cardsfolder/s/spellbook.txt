@@ -3,12 +3,11 @@ ManaCost:0
 Types:Artifact
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbook.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/314.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/318.jpg
-SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/138.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/309.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/343.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/220.jpg
 Oracle:You have no maximum hand size.
+SetInfo:8ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:9ED Uncommon
+SetInfo:10E Uncommon
+SetInfo:M10 Uncommon
+SetInfo:EXO Uncommon

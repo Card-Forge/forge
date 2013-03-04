@@ -2,7 +2,6 @@ Name:Shieldmate's Blessing
 ManaCost:W
 Types:Instant
 A:SP$ PreventDamage | Cost$ W | ValidTgts$ Creature,Player | Amount$ 3 | TgtPrompt$ Select target creature or player | SpellDescription$ Prevent the next 3 damage that would be dealt to target creature or player this turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shieldmates_blessing.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/35.jpg
 Oracle:Prevent the next 3 damage that would be dealt to target creature or player this turn.
+SetInfo:ZEN Common

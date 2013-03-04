@@ -3,8 +3,7 @@ ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ 1 T | Produced$ U G | SpellDescription$ Add U G to your mana pool.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_signet.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/259.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/166.jpg
 Oracle:{1}, {T}: Add {G}{U} to your mana pool.
+SetInfo:COM Common
+SetInfo:DIS Common

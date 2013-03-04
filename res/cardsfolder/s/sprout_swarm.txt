@@ -4,7 +4,6 @@ Types:Instant
 K:Convoke
 A:SP$ Token | Cost$ 1 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 K:Buyback 3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprout_swarm.jpg
-SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/138.jpg
 Oracle:Convoke (Each creature you tap while casting this spell reduces its total cost by {1} or by one mana of that creature's color.)\nBuyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nPut a 1/1 green Saproling creature token onto the battlefield.
+SetInfo:FUT Common

@@ -3,7 +3,6 @@ ManaCost:2 PU
 Types:Artifact Creature Thopter
 PT:2/1
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spined_thopter.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/45.jpg
 Oracle:({U/P} can be paid with either {U} or 2 life.)\nFlying
+SetInfo:NPH Common

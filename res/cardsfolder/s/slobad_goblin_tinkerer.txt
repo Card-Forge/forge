@@ -4,7 +4,6 @@ Types:Legendary Creature Goblin Artificer
 PT:1/2
 A:AB$ Pump | Cost$ Sac<1/Artifact> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | KW$ HIDDEN Indestructible | SpellDescription$ Target artifact is indestructible this turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slobad_goblin_tinkerer.jpg
-SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/69.jpg
 Oracle:Sacrifice an artifact: Target artifact is indestructible this turn. ("Destroy" effects and lethal damage don't destroy that artifact.)
+SetInfo:DST Rare

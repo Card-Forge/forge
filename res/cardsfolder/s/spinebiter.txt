@@ -4,7 +4,6 @@ Types:Creature Beast
 PT:3/4
 K:Infect
 K:You may have CARDNAME assign its combat damage as though it weren't blocked.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinebiter.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/121.jpg
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nYou may have Spinebiter assign its combat damage as though it weren't blocked.
+SetInfo:NPH Uncommon

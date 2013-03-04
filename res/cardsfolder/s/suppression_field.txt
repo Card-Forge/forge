@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Enchantment
 S:Mode$ RaiseCost | ValidCard$ Card | Type$ NonManaAbility | Amount$ 2 | Description$ Activated abilities cost 2 more to activate unless they're mana abilities.
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suppression_field.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/31.jpg
 Oracle:Activated abilities cost {2} more to activate unless they're mana abilities.
+SetInfo:RAV Uncommon

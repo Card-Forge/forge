@@ -3,8 +3,7 @@ ManaCost:1 R R
 Types:Creature Human Shaman
 PT:2/2
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dk/en-us/card1800.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/73.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/239.jpg
 Oracle:{T}: Add {R} to your mana pool.
+SetInfo:4ED Common
+SetInfo:DRK Uncommon

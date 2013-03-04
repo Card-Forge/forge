@@ -6,7 +6,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKe
 SVar:X:Count$Valid Beast.YouCtrl
 SVar:RemRandomDeck:True
 SVar:BuffedBy:Beast
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_outrider.jpg
-SetInfo:LGN|Common|http://magiccards.info/scans/en/le/114.jpg
 Oracle:As long as you control a Beast, Skirk Outrider gets +2/+2 and has trample.
+SetInfo:LGN Common

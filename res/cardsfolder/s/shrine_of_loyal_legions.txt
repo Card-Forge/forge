@@ -6,7 +6,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigAddCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
 A:AB$ Token | Cost$ 3 T Sac<1/CARDNAME> | TokenAmount$ X | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | References$ X | SpellDescription$ Put a 1/1 colorless Myr artifact creature token onto the battlefield for each charge counter on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_loyal_legions.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/155.jpg
 Oracle:At the beginning of your upkeep or whenever you cast a white spell, put a charge counter on Shrine of Loyal Legions.\n{3}, {T}, Sacrifice Shrine of Loyal Legions: Put a 1/1 colorless Myr artifact creature token onto the battlefield for each charge counter on Shrine of Loyal Legions.
+SetInfo:NPH Uncommon

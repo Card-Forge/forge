@@ -6,7 +6,6 @@ K:Trample
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Domain - CARDNAME costs 1 less to cast for each basic land type among lands you control.
 SVar:X:Count$Domain
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stratadon.jpg
-SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/135.jpg
 Oracle:Domain - Stratadon costs {1} less to cast for each basic land type among lands you control.\nTrample
+SetInfo:PLS Uncommon

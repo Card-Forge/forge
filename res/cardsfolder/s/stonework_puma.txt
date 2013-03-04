@@ -2,7 +2,6 @@ Name:Stonework Puma
 ManaCost:3
 Types:Artifact Creature Cat Ally
 PT:2/2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonework_puma.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/207.jpg
 Oracle:
+SetInfo:ZEN Common

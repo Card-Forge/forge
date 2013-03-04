@@ -4,11 +4,11 @@ Types:Creature Human Soldier
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, you may tap target creature.
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seasoned_marshal.jpg
-SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/44.jpg
-SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/44.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/188.jpg
-SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/42.jpg
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/40.jpg
 Oracle:Whenever Seasoned Marshal attacks, you may tap target creature.
+SetInfo:8ED Uncommon
+SetInfo:7ED Uncommon
+SetInfo:USG Uncommon
+SetInfo:9ED Uncommon
+SetInfo:DDF Uncommon
+SetInfo:POR Uncommon

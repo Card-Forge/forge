@@ -3,8 +3,7 @@ ManaCost:2 R
 Types:Creature Human Cleric Shaman
 PT:0/4
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/storm_shaman.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/118.jpg|2
-SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/222.jpg
 Oracle:{R}: Storm Shaman gets +1/+0 until end of turn.
+SetInfo:7ED Uncommon
+SetInfo:ALL Common x2

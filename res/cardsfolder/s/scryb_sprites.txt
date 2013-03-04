@@ -3,12 +3,11 @@ ManaCost:G
 Types:Creature Faerie
 PT:1/1
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scryb_sprites.jpg
-SetInfo:LEA|Common|http://magiccards.info/scans/en/al/124.jpg
-SetInfo:LEB|Common|http://magiccards.info/scans/en/be/124.jpg
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/186.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/154.jpg
-SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/122.jpg
-SetInfo:2ED|Common|http://magiccards.info/scans/en/un/124.jpg
 Oracle:Flying
+SetInfo:2ED Common
+SetInfo:LEB Common
+SetInfo:LEA Common
+SetInfo:5ED Common
+SetInfo:4ED Common
+SetInfo:3ED Common

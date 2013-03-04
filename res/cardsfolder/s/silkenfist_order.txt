@@ -4,7 +4,6 @@ Types:Creature Kor Soldier
 PT:3/5
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME becomes blocked, untap it.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silkenfist_order.jpg
-SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/20.jpg
 Oracle:Whenever Silkenfist Order becomes blocked, untap it.
+SetInfo:NMS Uncommon

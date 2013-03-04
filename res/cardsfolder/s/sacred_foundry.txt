@@ -2,8 +2,7 @@ Name:Sacred Foundry
 ManaCost:no cost
 Types:Land Mountain Plains
 Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDNAME enters the battlefield tapped.
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card89066.jpg
-SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/280.jpg
-SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/245.jpg
 Oracle:({T}: Add {R} or {W} to your mana pool.)\nAs Sacred Foundry enters the battlefield, you may pay 2 life. If you don't, Sacred Foundry enters the battlefield tapped.
+SetInfo:RAV Rare
+SetInfo:GTC Rare

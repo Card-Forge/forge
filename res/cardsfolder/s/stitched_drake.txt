@@ -5,7 +5,6 @@ Text:As an additional cost to cast CARDNAME, exile a creature card from your gra
 PT:3/4
 K:Flying
 SVar:FullCost:1 U U ExileFromGrave<1/Creature>
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stitched_drake.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/80.jpg
 Oracle:As an additional cost to cast Stitched Drake, exile a creature card from your graveyard.\nFlying
+SetInfo:ISD Common

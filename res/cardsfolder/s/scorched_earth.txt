@@ -6,7 +6,6 @@ A:SP$ Destroy | Cost$ X R Discard<X/Land> | TargetMin$ 0 | TargetMax$ MaxTgts | 
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Land
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorched_earth.jpg
-SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/200.jpg
 Oracle:As an additional cost to cast Scorched Earth, discard X land cards.\nDestroy X target lands.
+SetInfo:TMP Rare

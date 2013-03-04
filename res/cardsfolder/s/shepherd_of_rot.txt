@@ -5,7 +5,7 @@ PT:1/1
 A:AB$ LoseLife | Cost$ T | Defined$ Each | LifeAmount$ X | References$ X | SpellDescription$ Each player loses 1 life for each Zombie on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Zombie
 SVar:RemRandomDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shepherd_of_rot.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/40.jpg
 Oracle:{T}: Each player loses 1 life for each Zombie on the battlefield.
+SetInfo:ONS Common
+SetInfo:HOP Common

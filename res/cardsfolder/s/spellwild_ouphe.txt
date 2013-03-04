@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Ouphe
 PT:1/3
 S:Mode$ ReduceCost | ValidTarget$ Card.Self | Type$ Spell | Amount$ 2 | Description$ Spells that target CARDNAME cost 2 less to cast.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellwild_ouphe.jpg
-SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/151.jpg
 Oracle:Spells that target Spellwild Ouphe cost {2} less to cast.
+SetInfo:FUT Uncommon

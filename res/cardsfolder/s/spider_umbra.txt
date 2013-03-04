@@ -5,7 +5,7 @@ K:Enchant creature
 K:Totem armor
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Reach | Description$ Enchanted creature gets +1/+1 and has reach. (It can block creatures with flying.)
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spider_umbra.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/208.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has reach. (It can block creatures with flying.)\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
+SetInfo:ARC Common
+SetInfo:ROE Common

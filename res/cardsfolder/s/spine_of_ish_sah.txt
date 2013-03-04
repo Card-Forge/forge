@@ -7,7 +7,6 @@ SVar:TrigDestroy:DB$Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target pe
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:SacMe:4
 SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spine_of_ish_sah.jpg
-SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/136.jpg
 Oracle:When Spine of Ish Sah enters the battlefield, destroy target permanent.\nWhen Spine of Ish Sah is put into a graveyard from the battlefield, return Spine of Ish Sah to its owner's hand.
+SetInfo:MBS Rare

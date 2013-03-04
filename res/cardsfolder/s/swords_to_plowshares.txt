@@ -4,12 +4,12 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature. Its controller gains life equal to its power. | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ TargetedController | LifeAmount$ X
 SVar:X:Targeted$CardPower
-SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/br/en-us/card21172.jpg
-SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/224.jpg
-SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/226.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/302.jpg
-SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/278.jpg
-SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/225.jpg
-SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/225.jpg
 Oracle:Exile target creature. Its controller gains life equal to its power.
+SetInfo:2ED Uncommon
+SetInfo:LEB Uncommon
+SetInfo:LEA Uncommon
+SetInfo:ICE Uncommon
+SetInfo:4ED Uncommon
+SetInfo:DDF Uncommon
+SetInfo:3ED Uncommon

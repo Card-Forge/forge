@@ -8,7 +8,6 @@ SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouC
 SVar:DBAttach:DB$ Attach | Object$ Imprinted | Defined$ Remembered | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Imprinted$Amount
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonehewer_giant.jpg
-SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/24.jpg
 Oracle:Vigilance\n{1}{W}, {T}: Search your library for an Equipment card and put it onto the battlefield. Attach it to a creature you control. Then shuffle your library.
+SetInfo:MOR Rare

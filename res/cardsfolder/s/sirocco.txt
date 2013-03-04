@@ -6,7 +6,6 @@ SVar:DBRepeatDiscard:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsR
 SVar:DBDiscard:DB$ Discard | DefinedCards$ Imprinted | Mode$ Defined | UnlessCost$ PayLife<4> | UnlessPayer$ Targeted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sirocco.jpg
-SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/192.jpg
 Oracle:Target player reveals his or her hand. For each blue instant card revealed this way, that player discards that card unless he or she pays 4 life.
+SetInfo:MIR Uncommon

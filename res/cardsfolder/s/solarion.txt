@@ -6,7 +6,6 @@ K:Sunburst
 A:AB$ PutCounter | Cost$ T | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | References$ X | SpellDescription$ Double the number of +1/+1 counters on CARDNAME.
 SVar:X:Count$CardCounters.P1P1
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solarion.jpg
-SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/153.jpg
 Oracle:Sunburst (This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)\n{T}: Double the number of +1/+1 counters on Solarion.
+SetInfo:5DN Rare

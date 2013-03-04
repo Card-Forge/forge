@@ -12,5 +12,5 @@ SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serendib_djinn.jpg
-SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/25.jpg
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice a land. If you sacrifice an Island this way, Serendib Djinn deals 3 damage to you.\nWhen you control no lands, sacrifice Serendib Djinn.
+SetInfo:ARN Rare

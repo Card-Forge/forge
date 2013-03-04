@@ -6,7 +6,6 @@ A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return a black creature you control to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.Black+YouCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_collector.jpg
-SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/90.jpg
 Oracle:At the beginning of your upkeep, return a black creature you control to its owner's hand.\n{1}{B}: Regenerate Skull Collector.
+SetInfo:SOK Uncommon

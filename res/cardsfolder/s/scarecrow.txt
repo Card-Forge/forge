@@ -5,7 +5,6 @@ PT:2/2
 A:AB$ Effect | Cost$ 6 T | Name$ Scarecrow Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt to you this turn by creatures with flying.
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ You | Source$ Creature.withFlying | Description$ Prevent all damage that would be dealt to you this turn by creatures with flying.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scarecrow.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/105.jpg
 Oracle:{6}, {T}: Prevent all damage that would be dealt to you this turn by creatures with flying.
+SetInfo:DRK Uncommon

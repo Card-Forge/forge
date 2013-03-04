@@ -5,7 +5,6 @@ PT:3/2
 K:Flash
 K:Split second
 S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 1 | AddToughness$ -1 | Description$ White creatures get +1/-1.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfur_elemental.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/108.jpg
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nSplit second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nWhite creatures get +1/-1.
+SetInfo:PLC Uncommon

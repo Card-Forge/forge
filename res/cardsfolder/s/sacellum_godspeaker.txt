@@ -7,7 +7,6 @@ SVar:DBspeakerMana:DB$ Mana | Produced$ G | Amount$ X | References$ X | SubAbili
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacellum_godspeaker.jpg
-SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/145.jpg
 Oracle:{T}: Reveal any number of creature cards with power 5 or greater from your hand. Add {G} to your mana pool for each card revealed this way.
+SetInfo:ALA Rare

@@ -5,8 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Artifact,Enchantment | NoRegen$ True
 SVar:NeedsToPlay:Artifact.YouDontCtrl,Enchantment.YouDontCtrl
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serenity.jpg
-SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/140.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/41.jpg
 Oracle:At the beginning of your upkeep, destroy all artifacts and enchantments. They can't be regenerated.
+SetInfo:WTH Rare
+SetInfo:6ED Rare

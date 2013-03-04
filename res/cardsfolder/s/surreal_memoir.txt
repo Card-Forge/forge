@@ -4,7 +4,6 @@ Types:Sorcery
 K:Rebound
 A:SP$ ChangeZone | Cost$ 3 R | ChangeType$ Instant.YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Hand | SpellDescription$ Return an instant card at random from your graveyard to your hand.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surreal_memoir.jpg
-SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/167.jpg
 Oracle:Return an instant card at random from your graveyard to your hand.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
+SetInfo:ROE Uncommon

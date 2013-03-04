@@ -6,7 +6,6 @@ SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/subversion.jpg
-SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/68.jpg
 Oracle:At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
+SetInfo:ULG Rare

@@ -3,8 +3,8 @@ ManaCost:1 U
 Types:Creature Bird
 PT:1/1
 K:Flying
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sea_eagle.jpg
-SetInfo:S99|Common|http://magiccards.info/scans/en/st/50.jpg
-SetInfo:S00|Common|http://magiccards.info/scans/en/st2k/15.jpg
 Oracle:Flying
+SetInfo:8ED Common
+SetInfo:S99 Common
+SetInfo:S00 Common

@@ -4,7 +4,6 @@ Types:Creature Human Warrior
 PT:1/1
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | TriggerZones$ Battlefield | Execute$ RogueDamage | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
 SVar:RogueDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somberwald_vigilante.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/156.jpg
 Oracle:Whenever Somberwald Vigilante becomes blocked by a creature, Somberwald Vigilante deals 1 damage to that creature.
+SetInfo:AVR Common

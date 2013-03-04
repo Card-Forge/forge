@@ -4,7 +4,6 @@ Types:Enchantment
 A:AB$ GainLife | Cost$ SubCounter<3/QUEST> Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 8 | SpellDescription$ You gain 8 life.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunspring_expedition.jpg
-SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/37.jpg
 Oracle:Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Sunspring Expedition.\nRemove three quest counters from Sunspring Expedition and sacrifice it: You gain 8 life.
+SetInfo:ZEN Common

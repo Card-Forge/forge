@@ -4,7 +4,6 @@ Types:Creature Human Cleric
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield, you may gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_attendant.jpg
-SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/44.jpg
 Oracle:Whenever another creature enters the battlefield, you may gain 1 life.
+SetInfo:ROE Common
