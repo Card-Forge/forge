@@ -6,4 +6,4 @@ K:Haunt:TrigDestroy:Destroy target enchantment.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment
 Oracle:Haunt (When this creature dies, exile it haunting target creature.)\nWhen Absolver Thrull enters the battlefield or the creature it haunts dies, destroy target enchantment.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/absolver_thrull.jpg
-SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/1.jpg
+SetInfo:GPT Common

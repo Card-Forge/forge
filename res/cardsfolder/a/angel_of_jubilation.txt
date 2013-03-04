@@ -5,7 +5,6 @@ PT:3/3
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.nonBlack+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other nonblack creatures you control get +1/+1.
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't pay life to cast spells or activate abilities. & You can't sacrifice creatures to cast spells or activate abilities. | Description$ Players can't pay life or sacrifice creatures to cast spells or activate abilities.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_jubilation.jpg
-SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/2.jpg
 Oracle:Flying\nOther nonblack creatures you control get +1/+1.\nPlayers can't pay life or sacrifice creatures to cast spells or activate abilities.
+SetInfo:AVR Rare

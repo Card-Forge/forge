@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Animate | Cost$ 2 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Types$ Artifact | SubAbility$ DBDraw | SpellDescription$ Target permanent becomes an artifact in addition to its other types until end of turn. Draw a card.
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argent_mutation.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/27.jpg
 Oracle:Target permanent becomes an artifact in addition to its other types until end of turn.\nDraw a card.
+SetInfo:NPH Uncommon

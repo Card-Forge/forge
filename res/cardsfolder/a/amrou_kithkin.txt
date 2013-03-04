@@ -4,8 +4,7 @@ Types:Creature Kithkin
 Text:CARDNAME can't be blocked by creatures with power 3 or greater.
 PT:1/1
 K:CantBeBlockedBy Creature.powerGE3
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_kithkin.jpg
-SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/252.jpg
-SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/172.jpg
 Oracle:Amrou Kithkin can't be blocked by creatures with power 3 or greater.
+SetInfo:LEG Common
+SetInfo:4ED Common

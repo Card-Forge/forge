@@ -5,7 +5,6 @@ K:Cycling:W
 A:SP$ ChooseColor | Cost$ 2 W | Defined$ You | AILogic$ MostProminentAttackers | SubAbility$ DBProtection | SpellDescription$ Choose a color. Creatures you control gain protection from the chosen color until end of turn.
 SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature.YouCtrl | Gains$ ChosenColor
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_blessing.jpg
-SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/1.jpg
 Oracle:Choose a color. Creatures you control gain protection from the chosen color until end of turn.\nCycling {W} ({W}, Discard this card: Draw a card.)
+SetInfo:ONS Uncommon

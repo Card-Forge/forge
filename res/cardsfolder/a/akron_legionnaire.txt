@@ -3,9 +3,8 @@ ManaCost:6 W W
 Types:Creature Giant Soldier
 PT:8/4
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+nonArtifact+notnamedAkron Legionnaire | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Except for creatures named CARDNAME and artifact creatures, creatures you control can't attack.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akron_legionnaire.jpg
 Oracle:Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack.
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/278.jpg
-SetInfo:CHR|Rare|http://magiccards.info/scans/en/ch/58.jpg
-SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/170.jpg
+SetInfo:5ED Rare
+SetInfo:CHR Rare
+SetInfo:LEG Rare

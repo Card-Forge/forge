@@ -5,5 +5,5 @@ HandLifeModifier:+1/-3
 A:AB$ DestroyAll | ActivationZone$ Command | Cost$ 5 | ValidCards$ Permanent.nonLand | PlayerTurn$ True | SubAbility$ DBRemoveAB | SpellDescription$ Destroy all nonland permanents. Activate this ability only once and only during your turn.
 SVar:DBRemoveAB:DB$ Animate | RemoveAllAbilities$ True | Permanent$ True
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/ashling_the_extinguisher_avatar.jpg
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/ashling-the-extinguisher.jpg
 Oracle:Hand +1, life -3\n{5}: Destroy all nonland permanents. Activate this ability only once and only during your turn.
+SetInfo:VAN Special

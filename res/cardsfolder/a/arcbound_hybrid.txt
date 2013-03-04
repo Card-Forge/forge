@@ -4,7 +4,6 @@ Types:Artifact Creature Beast
 PT:0/0
 K:Haste
 K:Modular 2
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_hybrid.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/97.jpg
 Oracle:Haste\nModular 2 (This enters the battlefield with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
+SetInfo:DST Common

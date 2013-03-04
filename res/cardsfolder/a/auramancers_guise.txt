@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Vigilance | AddSVar$ EnchantMe | Description$ Enchanted creature gets +2/+2 for each Aura attached to it and has vigilance.
 SVar:X:Count$Valid Aura.AttachedTo Creature.EnchantedBy/Times.2
 SVar:EnchantMe:Multiple
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auramancers_guise.jpg
-SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/34.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 for each Aura attached to it and has vigilance.
+SetInfo:PLC Uncommon

@@ -5,7 +5,6 @@ PT:4/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target Equipment card from your graveyard to the battlefield. If you do, you may attach it to CARDNAME.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Equipment.YouCtrl | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ Targeted | Defined$ Self | Optional$ True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_survivors.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/3.jpg
 Oracle:When Auriok Survivors enters the battlefield, you may return target Equipment card from your graveyard to the battlefield. If you do, you may attach it to Auriok Survivors.
+SetInfo:NPH Uncommon

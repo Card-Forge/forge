@@ -9,7 +9,6 @@ SVar:X:Count$Valid Creature
 A:AB$ Untap | Cost$ tapXType<5/Creature> | SpellDescription$ Untap CARDNAME.
 SVar:BuffedBy:Creature
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_golem.jpg
-SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/166.jpg
 Oracle:Trample\nAltar Golem's power and toughness are each equal to the number of creatures on the battlefield.\nAltar Golem doesn't untap during your untap step.\nTap five untapped creatures you control: Untap Altar Golem.
+SetInfo:EVE Rare

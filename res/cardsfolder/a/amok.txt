@@ -2,8 +2,7 @@ Name:Amok
 ManaCost:1 R
 Types:Enchantment
 A:AB$ PutCounter | Cost$ 1 Discard<1/Random> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
-SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amok.jpg
-SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/76.jpg
 Oracle:{1}, Discard a card at random: Put a +1/+1 counter on target creature.
+SetInfo:STH Rare

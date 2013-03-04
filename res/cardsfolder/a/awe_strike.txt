@@ -7,7 +7,6 @@ SVar:GainLifeInstead:AB$ GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | Sub
 SVar:X:ReplaceCount$DamageAmount
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awe_strike.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/6.jpg
 Oracle:The next time target creature would deal damage this turn, prevent that damage. You gain life equal to the damage prevented this way.
+SetInfo:MRD Common

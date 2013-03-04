@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl+withFlying | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardPower
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archon_of_redemption.jpg
-SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/3.jpg
 Oracle:Flying\nWhenever Archon of Redemption or another creature with flying enters the battlefield under your control, you may gain life equal to that creature's power.
+SetInfo:WWK Rare

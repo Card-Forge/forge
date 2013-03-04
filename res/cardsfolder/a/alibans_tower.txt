@@ -2,7 +2,6 @@ Name:Aliban's Tower
 ManaCost:1 R
 Types:Instant
 A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature.blocking | TgtPrompt$ Select target blocking creature | NumAtt$ 3 | NumDef$ 1 | SpellDescription$ Target blocking creature gets +3/+1 until end of turn.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alibans_tower.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/76.jpg|2
 Oracle:Target blocking creature gets +3/+1 until end of turn.
+SetInfo:HML Common x2

@@ -8,9 +8,8 @@ SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance
 A:AB$ Token | Cost$ SubCounter<6/LOYALTY> | TokenAmount$ 1 | TokenName$ Avatar | TokenTypes$ Creature,Avatar | TokenOwner$ You | TokenColors$ White | TokenPower$ X | TokenToughness$ X | TokenImage$ W N N Avatar | TokenStaticAbilities$ Static | TokenSVars$ X | Planeswalker$ True | Ultimate$ True | References$ X | SpellDescription$ Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."
 SVar:Static:Mode$ Continuous | SetPower$ X | SetToughness$ X | CharacteristicDefining$ True | Description$ This creature's power and toughness are each equal to your life total.
 SVar:X:Count$YourLifeTotal
-SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_goldmane.jpg
-SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/1.jpg
-SetInfo:M10|Mythic|http://magiccards.info/scans/en/m10/1.jpg
-SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/1.jpg
 Oracle:[+1] You gain 2 life.\n[-1] Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.\n[-6] Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."
+SetInfo:M11 Mythic
+SetInfo:M10 Mythic
+SetInfo:LRW Rare

@@ -2,10 +2,9 @@ Name:Angel's Mercy
 ManaCost:2 W W
 Types:Instant
 A:SP$ GainLife | Cost$ 2 W W | LifeAmount$ 7 | SpellDescription$ You gain 7 life.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_mercy.jpg
-SetInfo:M10|Common|http://magiccards.info/scans/en/m10/2.jpg
-SetInfo:M13|Common|http://magiccards.info/scans/en/m13/3.jpg
-SetInfo:M12|Common|http://magiccards.info/scans/en/m12/4.jpg
-SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/3.jpg
 Oracle:You gain 7 life.
+SetInfo:M10 Common
+SetInfo:M13 Common
+SetInfo:M12 Common
+SetInfo:AVR Common

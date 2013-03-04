@@ -4,9 +4,8 @@ Types:Creature Siren
 PT:1/1
 A:AB$ Pump | Cost$ T | ValidTgts$ Creature.OppCtrl | KW$ HIDDEN CARDNAME attacks each turn if able. | TgtPrompt$ Choose target creature opponent controls. | SpellDescription$ Target creature an opponent controls attacks you this turn if able.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alluring_siren.jpg
-SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/43.jpg
-SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/43.jpg
-SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/42.jpg
 Oracle:{T}: Target creature an opponent controls attacks you this turn if able.
+SetInfo:M11 Uncommon
+SetInfo:M10 Uncommon
+SetInfo:M12 Uncommon

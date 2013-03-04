@@ -4,7 +4,6 @@ Types:Instant
 A:SP$ Protection | Cost$ 1 PW | ValidTgts$ Creature.YouCtrl,Artifact.YouCtrl | TgtPrompt$ Select target artifact or creature you control | Gains$ Choice | Choices$ AnyColor,artifacts | SpellDescription$ Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
 #Computer isn't very good at picking a color to get protection from yet
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apostles_blessing.jpg
-SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/2.jpg
 Oracle:({W/P} can be paid with either {W} or 2 life.)\nTarget artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
+SetInfo:NPH Common

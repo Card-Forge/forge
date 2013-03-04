@@ -3,7 +3,6 @@ ManaCost:1 G
 Types:Creature Insect
 PT:2/4
 K:Echo:1 G
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acridian.jpg
-SetInfo:USG|Common|http://magiccards.info/scans/en/us/230.jpg
 Oracle:Echo {1}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
+SetInfo:USG Common

@@ -7,9 +7,8 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Swamp.OppCtrl/Plus.2
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 2 | SetToughness$ 2 | Condition$ NotPlayerTurn
 SVar:RemRandomDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angry_mob.jpg
-SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/280.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/74.jpg
-SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/253.jpg
 Oracle:Trample\nAs long as it's your turn, Angry Mob's power and toughness are each equal to 2 plus the number of Swamps your opponents control. As long as it's not your turn, Angry Mob's power and toughness are each 2.
+SetInfo:5ED Uncommon
+SetInfo:4ED Uncommon
+SetInfo:DRK Uncommon

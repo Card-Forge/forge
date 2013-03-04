@@ -3,7 +3,6 @@ ManaCost:4 U
 Types:Creature Human Pirate
 PT:5/4
 K:CARDNAME can't attack unless defending player controls an Island.
-SVar:Rarity:Uncommon
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/armored_galleon.jpg
-SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/33.jpg
 Oracle:Armored Galleon can't attack unless defending player controls an Island.
+SetInfo:PO2 Uncommon

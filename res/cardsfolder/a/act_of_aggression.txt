@@ -2,7 +2,6 @@ Name:Act of Aggression
 ManaCost:3 PR PR
 Types:Instant
 A:SP$ GainControl | Cost$ 3 PR PR | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/act_of_aggression.jpg
-SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/78.jpg
 Oracle:({R/P} can be paid with either {R} or 2 life.)\nGain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
+SetInfo:NPH Uncommon

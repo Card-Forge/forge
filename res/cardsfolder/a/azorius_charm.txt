@@ -5,7 +5,6 @@ A:SP$ Charm | Cost$ W U | Choices$ PumpAll,DrawCard,ReturnCard | CharmNum$ 1 | S
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Lifelink | SpellDescription$ Creatures you control gain lifelink until end of turn.
 SVar:DrawCard:DB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:ReturnCard:DB$ ChangeZone | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature. | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target attacking or blocking creature on top of its owner's library.
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_charm.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/145.jpg
 Oracle:Choose one - Creatures you control gain lifelink until end of turn; or draw a card; or put target attacking or blocking creature on top of its owner's library.
+SetInfo:RTR Uncommon

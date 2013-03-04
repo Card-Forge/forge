@@ -7,8 +7,7 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Bat
 SVar:DBChangeZone:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Aura.CanEnchantSource | ConditionPresent$ Card.Self | ConditionCompare$ LE0
 SVar:RemRandomDeck:True
 DeckNeeds:Type$Aura
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auratouched_mage.jpg
-SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/1.jpg
-SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/3.jpg
 Oracle:When Auratouched Mage enters the battlefield, search your library for an Aura card that could enchant it. If Auratouched Mage is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle your library.
+SetInfo:RAV Uncommon
+SetInfo:PC2 Uncommon

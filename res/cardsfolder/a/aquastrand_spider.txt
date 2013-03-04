@@ -5,8 +5,7 @@ PT:0/0
 K:Graft 2
 A:AB$ Pump | Cost$ G | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | KW$ Reach | SpellDescription$ Target creature with a +1/+1 counter on it gains reach until end of turn. (It can block creatures with flying.)
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aquastrand_spider.jpg
-SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/141.jpg
-SetInfo:DIS|Common|http://magiccards.info/scans/en/di/80.jpg
 Oracle:Graft 2 (This creature enters the battlefield with two +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\n{G}: Target creature with a +1/+1 counter on it gains reach until end of turn. (It can block creatures with flying.)
+SetInfo:COM Common
+SetInfo:DIS Common

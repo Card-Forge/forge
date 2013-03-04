@@ -3,7 +3,6 @@ ManaCost:1
 Types:Artifact
 A:AB$ ExchangeControl | Cost$ 5 | Defined$ Self | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Exchange control of CARDNAME and target nonland permanent.
 SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avarice_totem.jpg
-SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/104.jpg
 Oracle:{5}: Exchange control of Avarice Totem and target nonland permanent.
+SetInfo:5DN Uncommon

@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDamage:DB$DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | RememberTargets$ True | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.nonBasic+RememberedPlayerCtrl
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anathemancer.jpg
-SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/33.jpg
 Oracle:When Anathemancer enters the battlefield, it deals damage to target player equal to the number of nonbasic lands that player controls.\nUnearth {5}{B}{R} ({5}{B}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+SetInfo:ARB Uncommon

@@ -6,7 +6,6 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
 A:AB$ Animate | Cost$ W U | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Bird | Colors$ White,Blue | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 2/2 white and blue Bird artifact creature with flying until end of turn.
 SVar:RemRandomDeck:True
 DeckNeeds:Color$White|Blue
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_keyrune.jpg
-SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/225.jpg
 Oracle:{T}: Add {W} or {U} to your mana pool.\n{W}{U}: Azorius Keyrune becomes a 2/2 white and blue Bird artifact creature with flying until end of turn.
+SetInfo:RTR Uncommon

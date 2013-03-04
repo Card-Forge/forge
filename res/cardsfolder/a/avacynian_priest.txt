@@ -3,7 +3,6 @@ ManaCost:1 W
 Types:Creature Human Cleric
 PT:1/2
 A:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature.nonHuman | TgtPrompt$ Select target non-Human creature | SpellDescription$ Tap target non-Human creature.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacynian_priest.jpg
-SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/4.jpg
 Oracle:{1}, {T}: Tap target non-Human creature.
+SetInfo:ISD Common

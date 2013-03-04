@@ -8,7 +8,6 @@ SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ 
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | staticAbilities$ MimeomancerStatic | Permanent$ True
 SVar:MimeomancerStatic:Mode$ Continuous | Affected$ Card.Self+counters_GE1_FEATHER | SetPower$ 3 | SetToughness$ 1 | AddKeyword$ Flying | Description$ CARDNAME is 3/1 and has flying for as long as it has a feather counter on it.
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_mimeomancer.jpg
-SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/2.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you may put a feather counter on target creature. If you do, that creature is 3/1 and has flying for as long as it has a feather counter on it.
+SetInfo:ARB Rare

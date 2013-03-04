@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Artifact Land
 Text:(Ancient Den isn't a spell.)
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_den.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/278.jpg
 Oracle:(Ancient Den isn't a spell.)\n{T}: Add {W} to your mana pool.
+SetInfo:MRD Common
+SetInfo:HOP Common

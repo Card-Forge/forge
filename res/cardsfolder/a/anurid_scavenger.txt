@@ -10,7 +10,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$InYourYard
-SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anurid_scavenger.jpg
-SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/119.jpg
 Oracle:Protection from black\nAt the beginning of your upkeep, sacrifice Anurid Scavenger unless you put a card from your graveyard on the bottom of your library.
+SetInfo:TOR Uncommon

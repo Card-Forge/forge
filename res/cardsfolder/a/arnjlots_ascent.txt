@@ -4,7 +4,6 @@ Types:Enchantment
 K:Cumulative upkeep:U
 A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:RemAIDeck:True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arnjlots_ascent.jpg
-SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/57.jpg
 Oracle:Cumulative upkeep {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\n{1}: Target creature gains flying until end of turn.
+SetInfo:ICE Common

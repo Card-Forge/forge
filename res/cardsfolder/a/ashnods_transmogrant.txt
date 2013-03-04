@@ -3,9 +3,8 @@ ManaCost:1
 Types:Artifact
 A:AB$ PutCounter | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.nonArtifact | TgtPrompt$ Select target nonartifact creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBAnimate | SpellDescription$ Put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.
 SVar:DBAnimate:DB$Animate | Defined$ Targeted | Types$ Artifact | Permanent$ True
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashnods_transmogrant.jpg
 Oracle:{T}, Sacrifice Ashnod's Transmogrant: Put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.
-SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/350.jpg
-SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/73.jpg
-SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/5.jpg
+SetInfo:ATQ Uncommon
+SetInfo:5ED Common
+SetInfo:CHR Common

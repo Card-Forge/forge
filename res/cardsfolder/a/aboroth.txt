@@ -3,7 +3,6 @@ ManaCost:4 G G
 Types:Creature Elemental
 PT:9/9
 K:Cumulative upkeep:AddCounter<1/M1M1>:Put a -1/-1 counter on CARDNAME.
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aboroth.jpg
-SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/59.jpg
 Oracle:Cumulative upkeep-Put a -1/-1 counter on Aboroth. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
+SetInfo:WTH Rare

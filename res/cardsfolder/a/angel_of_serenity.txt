@@ -9,7 +9,6 @@ SVar:TrigExile:DB$ChangeZone | TargetMin$ 0 | TargetMax$ 3 | IsCurse$ True | Val
 SVar:TrigReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angel_of_serenity.jpg
-SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/1.jpg
 Oracle:Flying\nWhen Angel of Serenity enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.\nWhen Angel of Serenity leaves the battlefield, return the exiled cards to their owners' hands.
+SetInfo:RTR Mythic

@@ -9,7 +9,6 @@ SVar:X:Count$YouDrewThisTurn
 SVar:Y:Count$CardCounters.QUEST
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archmage_ascension.jpg
 Oracle:At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.\nAs long as Archmage Ascension has six or more quest counters on it, if you would draw a card, you may instead search your library for a card, put that card into your hand, then shuffle your library.
-SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/42.jpg
+SetInfo:ZEN Rare

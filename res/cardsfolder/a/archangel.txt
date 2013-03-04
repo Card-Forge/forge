@@ -4,12 +4,11 @@ Types:Creature Angel
 PT:5/5
 K:Flying
 K:Vigilance
-SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3708.jpg
-SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/131.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po/165.jpg
-SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/5.jpg
-SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/101.jpg
-SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/2.jpg
-SetInfo:S99|Rare|http://magiccards.info/scans/en/st/4.jpg
 Oracle:Flying, vigilance
+SetInfo:PO2 Rare
+SetInfo:S99 Rare
+SetInfo:6ED Rare
+SetInfo:VIS Rare
+SetInfo:AVR Uncommon
+SetInfo:POR Rare

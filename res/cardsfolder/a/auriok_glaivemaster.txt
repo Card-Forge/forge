@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self+equipped | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | Description$ As long as CARDNAME is equipped, it gets +1/+1 and has first strike.
 SVar:EquipMe:Once
-SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_glaivemaster.jpg
-SetInfo:DST|Common|http://magiccards.info/scans/en/ds/1.jpg
 Oracle:As long as Auriok Glaivemaster is equipped, it gets +1/+1 and has first strike.
+SetInfo:DST Common
