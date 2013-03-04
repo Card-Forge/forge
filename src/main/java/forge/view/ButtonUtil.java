@@ -19,6 +19,7 @@ package forge.view;
 
 import javax.swing.JButton;
 
+import forge.gui.SOverlayUtils;
 import forge.gui.match.VMatchUI;
 
 /**
@@ -50,7 +51,7 @@ public class ButtonUtil {
         getOk().setEnabled(false);
         getCancel().setEnabled(false);
     }
-
+    
     public static void enableAllFocusOk() {
         enableAndFocus(getOk());
         getCancel().setEnabled(true);
@@ -58,7 +59,11 @@ public class ButtonUtil {
 
     private static void enableAndFocus(final JButton button) {
         button.setEnabled(true);
-        button.requestFocusInWindow();
+        
+        // ensure we don't steal focus from an overlay
+        if (!SOverlayUtils.overlayHasFocus()) {
+            button.requestFocusInWindow();
+        }
     }
     
     private static JButton getOk() {
