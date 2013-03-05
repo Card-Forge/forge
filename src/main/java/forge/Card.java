@@ -37,6 +37,7 @@ import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -233,7 +234,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     // Soulbond pairing card
     private Card pairedWith = null;
     
-
+    // Enumeration for CMC request types
+    public enum SplitCMCMode {
+        CurrentSideCMC,
+        CombinedCMC,
+        LeftSplitCMC,
+        RightSplitCMC
+    }
 
     /**
      * Instantiates a new card.
@@ -9110,6 +9117,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public int getCMC() {
+        return getCMC(SplitCMCMode.CurrentSideCMC);
+    }
+
+    public int getCMC(SplitCMCMode mode) {
         if (isToken() && !isCopiedToken()) {
             return 0;
         }
@@ -9120,7 +9131,35 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (Singletons.getModel().getGame().getCardsIn(ZoneType.Stack).contains(this) && getManaCost() != null) {
             xPaid = getXManaCostPaid() * getManaCost().countX();
         }
-        return getManaCost().getCMC() + xPaid;
+        
+        int requestedCMC = 0;
+
+        if (getRules().getSplitType() == CardSplitType.Split) {
+            switch(mode) {
+                case CurrentSideCMC:
+                    // TODO: test if this returns combined CMC for the full face (then get rid of CombinedCMC mode?)
+                    requestedCMC = getManaCost().getCMC() + xPaid; 
+                    break;
+                case LeftSplitCMC:
+                    requestedCMC = getState(CardCharacteristicName.LeftSplit).getManaCost().getCMC() + xPaid;
+                    break;
+                case RightSplitCMC:
+                    requestedCMC = getState(CardCharacteristicName.RightSplit).getManaCost().getCMC() + xPaid;
+                    break;
+                case CombinedCMC:
+                    requestedCMC += getState(CardCharacteristicName.LeftSplit).getManaCost().getCMC(); 
+                    requestedCMC += getState(CardCharacteristicName.RightSplit).getManaCost().getCMC();
+                    requestedCMC += xPaid;
+                    break;
+                default:
+                    System.out.println(String.format("Illegal Split Card CMC mode %s passed to getCMC!", mode.toString()));
+                    break;
+            }
+        } else {
+            requestedCMC = getManaCost().getCMC() + xPaid;
+        }
+
+        return requestedCMC;
     }
 
     public final boolean canBeSacrificedBy(final SpellAbility source)
