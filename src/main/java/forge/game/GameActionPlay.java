@@ -366,26 +366,9 @@ public class GameActionPlay {
         sa.setActivatingPlayer(activator);
 
         final Card source = sa.getSourceCard();
-
+        
         // Split card support
-        if (source.getRules() != null) {
-            if (source.getRules().getSplitType() == CardSplitType.Split) {
-                List<SpellAbility> leftSplitAbilities = source.getState(CardCharacteristicName.LeftSplit).getSpellAbility();
-                List<SpellAbility> rightSplitAbilities = source.getState(CardCharacteristicName.RightSplit).getSpellAbility();
-                for (SpellAbility a : leftSplitAbilities) {
-                    if (sa == a) {
-                        source.setState(CardCharacteristicName.LeftSplit);
-                        break;
-                    }
-                }
-                for (SpellAbility a : rightSplitAbilities) {
-                    if (sa == a) {
-                        source.setState(CardCharacteristicName.RightSplit);
-                        break;
-                    }
-                }
-            }
-        }
+        setSplitCardState(source, sa);
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
@@ -554,5 +537,27 @@ public class GameActionPlay {
         }
     
         return usableColors;
+    }
+
+    private void setSplitCardState(final Card source, SpellAbility sa) {
+        // Split card support
+        if (source.getRules() != null) {
+            if (source.getRules().getSplitType() == CardSplitType.Split) {
+                List<SpellAbility> leftSplitAbilities = source.getState(CardCharacteristicName.LeftSplit).getSpellAbility();
+                List<SpellAbility> rightSplitAbilities = source.getState(CardCharacteristicName.RightSplit).getSpellAbility();
+                for (SpellAbility a : leftSplitAbilities) {
+                    if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                        source.setState(CardCharacteristicName.LeftSplit);
+                        break;
+                    }
+                }
+                for (SpellAbility a : rightSplitAbilities) {
+                    if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                        source.setState(CardCharacteristicName.RightSplit);
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
