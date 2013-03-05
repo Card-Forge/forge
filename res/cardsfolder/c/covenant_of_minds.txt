@@ -1,7 +1,7 @@
 Name:Covenant of Minds
 ManaCost:4 U
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 B | DigNum$ 3 | NoMove$ True | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBChoice | RememberRevealed$ True | SpellDescription$ Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand. If he or she doesn't, put those cards into your graveyard and draw five cards.
+A:SP$ Dig | Cost$ 4 U | DigNum$ 3 | NoMove$ True | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ DBChoice | RememberRevealed$ True | SpellDescription$ Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand. If he or she doesn't, put those cards into your graveyard and draw five cards.
 SVar:DBChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ CovenantDraw,CovenantMillDraw
 SVar:CovenantDraw:DB$ Draw | Defined$ SourceController | NumCards$ X | References$ X | ChoiceDescription$ You may choose to put those cards into that player's hand.
 SVar:CovenantMillDraw:DB$ Mill | Defined$ SourceController | NumCards$ X | References$ X | SubAbility$ DBDraw | ChoiceDescription$ If you don't, put those cards into that player's graveyard and that player draws five cards.
