@@ -37,6 +37,7 @@ import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -233,7 +234,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     // Soulbond pairing card
     private Card pairedWith = null;
     
-
+    // Enumeration for CMC request types
+    public enum SplitCMCMode {
+        CurrentSideCMC,
+        CombinedCMC,
+        LeftSplitCMC,
+        RightSplitCMC
+    }
 
     /**
      * Instantiates a new card.
@@ -7051,15 +7058,29 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("greatestCMC")) {
             final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : list) {
-                if (crd.getCMC() > this.getCMC()) {
-                    return false;
+                if (crd.getRules() != null && crd.getRules().getSplitType() == CardSplitType.Split) {
+                    if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > this.getCMC() || crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > this.getCMC()) {
+                        return false;
+                    }
+                } else {
+                    if (crd.getCMC() > this.getCMC()) {
+                        return false;
+                    }
                 }
             }
         } else if (property.startsWith("lowestCMC")) {
             final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             for (final Card crd : list) {
-                if (!crd.isLand() && !crd.isImmutable() && (crd.getCMC() < this.getCMC())) {
-                    return false;
+                if (!crd.isLand() && !crd.isImmutable()) {
+                    if (crd.getRules() != null && crd.getRules().getSplitType() == CardSplitType.Split) {
+                        if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) < this.getCMC() || crd.getCMC(Card.SplitCMCMode.RightSplitCMC) < this.getCMC()) {
+                            return false;
+                        }
+                    } else {
+                        if (crd.getCMC() < this.getCMC()) {
+                            return false;
+                        }
+                    }
                 }
             }
         } else if (property.startsWith("enchanted")) {
@@ -7110,6 +7131,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 || property.startsWith("cmc") || property.startsWith("totalPT")) {
             int x = 0;
             int y = 0;
+            int y2 = -1; // alternative value for the second split face of a split card
             String rhs = "";
 
             if (property.startsWith("power")) {
@@ -7120,7 +7142,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                 y = this.getNetDefense();
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
-                y = getCMC();
+                if (getRules() != null && getRules().getSplitType() == CardSplitType.Split && getCurState() == CardCharacteristicName.Original) {
+                    y = getState(CardCharacteristicName.LeftSplit).getManaCost().getCMC();
+                    y2 = getState(CardCharacteristicName.RightSplit).getManaCost().getCMC();
+                } else {
+                    y = getCMC();
+                }
             } else if (property.startsWith("totalPT")) {
                 rhs = property.substring(10);
                 y = this.getNetAttack() + this.getNetDefense();
@@ -7131,8 +7158,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 x = CardFactoryUtil.xCount(source, source.getSVar(rhs));
             }
 
-            if (!Expressions.compare(y, property, x)) {
-                return false;
+            if (y2 == -1) {
+                if (!Expressions.compare(y, property, x)) {
+                    return false;
+                }
+            } else {
+                if (!Expressions.compare(y, property, x) || !Expressions.compare(y2, property, x)) {
+                    return false;
+                }
             }
         }
 
@@ -9110,6 +9143,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public int getCMC() {
+        return getCMC(SplitCMCMode.CurrentSideCMC);
+    }
+
+    public int getCMC(SplitCMCMode mode) {
         if (isToken() && !isCopiedToken()) {
             return 0;
         }
@@ -9120,7 +9157,35 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (Singletons.getModel().getGame().getCardsIn(ZoneType.Stack).contains(this) && getManaCost() != null) {
             xPaid = getXManaCostPaid() * getManaCost().countX();
         }
-        return getManaCost().getCMC() + xPaid;
+        
+        int requestedCMC = 0;
+
+        if (getRules().getSplitType() == CardSplitType.Split) {
+            switch(mode) {
+                case CurrentSideCMC:
+                    // TODO: test if this returns combined CMC for the full face (then get rid of CombinedCMC mode?)
+                    requestedCMC = getManaCost().getCMC() + xPaid; 
+                    break;
+                case LeftSplitCMC:
+                    requestedCMC = getState(CardCharacteristicName.LeftSplit).getManaCost().getCMC() + xPaid;
+                    break;
+                case RightSplitCMC:
+                    requestedCMC = getState(CardCharacteristicName.RightSplit).getManaCost().getCMC() + xPaid;
+                    break;
+                case CombinedCMC:
+                    requestedCMC += getState(CardCharacteristicName.LeftSplit).getManaCost().getCMC(); 
+                    requestedCMC += getState(CardCharacteristicName.RightSplit).getManaCost().getCMC();
+                    requestedCMC += xPaid;
+                    break;
+                default:
+                    System.out.println(String.format("Illegal Split Card CMC mode %s passed to getCMC!", mode.toString()));
+                    break;
+            }
+        } else {
+            requestedCMC = getManaCost().getCMC() + xPaid;
+        }
+
+        return requestedCMC;
     }
 
     public final boolean canBeSacrificedBy(final SpellAbility source)

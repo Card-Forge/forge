@@ -1,0 +1,18 @@
+Name:Assault
+ManaCost:R
+AlternateMode: Split
+Types:Sorcery
+A:SP$ DealDamage | Cost$ R | NumDmg$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | SpellDescription$ Assault deals 2 damage to target creature or player.
+SetInfo:INV Uncommon
+SetInfo:TSB Uncommon
+SetInfo:HOP Uncommon
+Oracle:Assault deals 2 damage to target creature or player.
+
+ALTERNATE
+
+Name:Battery
+ManaCost:3 G
+Types:Sorcery
+A:SP$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenName$ Elephant| TokenTypes$ Creature,Elephant| TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 elephant | SpellDescription$ Put a 3/3 green Elephant creature token onto the battlefield.
+Oracle:Put a 3/3 green Elephant creature token onto the battlefield.
+End
