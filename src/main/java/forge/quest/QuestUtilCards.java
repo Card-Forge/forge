@@ -500,7 +500,8 @@ public final class QuestUtilCards {
     public void generatePreconsInShop(final int count) {
         final List<PreconDeck> meetRequirements = new ArrayList<PreconDeck>();
         for (final PreconDeck deck : QuestController.getPrecons()) {
-            if (deck.getRecommendedDeals().meetsRequiremnts(this.qc.getAchievements())) {
+            if (deck.getRecommendedDeals().meetsRequiremnts(this.qc.getAchievements()) &&
+                    (null == qc.getFormat() || qc.getFormat().isSetLegal(deck.getEdition()))) {
                 meetRequirements.add(deck);
             }
         }
@@ -510,7 +511,7 @@ public final class QuestUtilCards {
     /**
      * Generate cards in shop.
      */
-    public void generateCardsInShop() {
+    private void generateCardsInShop() {
         Iterable<CardPrinted> cardList = null;
         if (qc.getFormat() == null) {
               cardList = CardDb.instance().getAllCards(); }
@@ -535,7 +536,6 @@ public final class QuestUtilCards {
         final int winPacks = this.qc.getAchievements().getWin() / winsForPack;
         final int totalPacks = Math.min(levelPacks + winPacks, maxPacks);
 
-        this.qa.getShopList().clear();
         for (int i = 0; i < totalPacks; i++) {
             this.qa.getShopList().addAllFlat(pack.getBoosterPack(common, uncommon, rare, 0, 0, 0, 0, 0, 0));
         }
