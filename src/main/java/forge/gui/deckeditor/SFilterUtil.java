@@ -88,20 +88,15 @@ public class SFilterUtil {
             return Predicates.alwaysTrue();
         }
         
-        String[] splitText = text
-                    .replaceAll(",", "")
-                    .replaceAll("  ", " ")
-                    .toLowerCase().split(" ");
+        String[] splitText = text.replaceAll(",", "").replaceAll("  ", " ").split(" ");
 
         List<Predicate<CardRules>> terms = new ArrayList<Predicate<CardRules>>();
         for (String s : splitText) {
             List<Predicate<CardRules>> subands = new ArrayList<Predicate<CardRules>>();
 
-            if (inName) { subands.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s)); }
+            if (inName) { subands.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s));       }
             if (inType) { subands.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
-            
-            // rules cannot compare in ignore-case way
-            if (inText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS, s)); }
+            if (inText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS_IC, s));      }
 
             terms.add(Predicates.or(subands));
         }
