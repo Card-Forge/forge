@@ -4,6 +4,7 @@ Types:Creature Ogre Rebel
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME attacks, you may tap up to two target creatures.
 SVar:TrigTap:AB$Tap | Cost$ 0 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cho_arrim_bruiser.jpg
 Oracle:Whenever Cho-Arrim Bruiser attacks, you may tap up to two target creatures.
 SetInfo:MMQ Rare

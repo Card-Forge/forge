@@ -4,8 +4,9 @@ Types:Enchantment
 K:ETBReplacement:Other:TrigDiscard
 SVar:TrigDiscard:DB$ Discard | Cost$ 0 | Mode$ Hand | SpellDescription$ As CARDNAME enters the battlefield, discard your hand.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
-SVar:RemAIDeck:True
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+SVar:NeedsToPlayVar:Y LE2
+SVar:Y:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heightened_awareness.jpg
 Oracle:As Heightened Awareness enters the battlefield, discard your hand.\nAt the beginning of your draw step, draw an additional card.
 SetInfo:PCY Rare
