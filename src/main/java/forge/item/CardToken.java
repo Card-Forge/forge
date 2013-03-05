@@ -23,6 +23,8 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
     }
     
     @Override public String getName() { return name; }
+    @Override public String getDescription() { return name; }
+
     @Override public String getEdition() { return edition; }
 
     @Override public int getArtIndex() { return 0; } // This might change however

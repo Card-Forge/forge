@@ -133,6 +133,7 @@ public class PreconDeck implements InventoryItemFromSet {
      *
      * @return the description
      */
+    @Override
     public final String getDescription() {
         return this.description;
     }

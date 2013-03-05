@@ -1,7 +1,5 @@
 package forge.card;
 
-import com.google.common.base.Function;
-
 import forge.util.FileSection;
 import forge.util.storage.StorageReaderFile;
 
@@ -9,53 +7,23 @@ import forge.util.storage.StorageReaderFile;
  * TODO: Write javadoc for this type.
  *
  */
-public class FatPackData {
-    private final String edition;
-    public final String getEdition() {
-        return edition;
-    }
-
-    private final String landsEdition;
-    public final String getLandsEdition() {
-        return landsEdition == null ? edition : landsEdition;
-    }
-
+public class FatPackData extends PackData {
+    private final int cntBoosters;
     public int getCntBoosters() {
         return cntBoosters;
     }
 
-    public int getCntLands() {
-        return cntLands;
-    }
-
-    private final int cntBoosters;
-    private final int cntLands;
-
-    public FatPackData(String edition0, String landsEdition0, int nBoosters, int nBasicLands)
+    public FatPackData(String edition0, String landEdition0, int nBoosters, int nBasicLands)
     {
+        super(edition0, landEdition0, nBasicLands);
         cntBoosters = nBoosters;
-        cntLands = nBasicLands;
-        edition = edition0;
-        landsEdition = landsEdition0;
     }
-
-    public static final Function<FatPackData, String> FN_GET_CODE = new Function<FatPackData, String>() {
-
-        @Override
-        public String apply(FatPackData arg1) {
-            return arg1.edition;
-        }
-    };
 
     public static final class Reader extends StorageReaderFile<FatPackData> {
-
         public Reader(String pathname) {
-            super(pathname, FatPackData.FN_GET_CODE);
+            super(pathname, PackData.FN_GET_CODE);
         }
 
-        /* (non-Javadoc)
-         * @see forge.util.StorageReaderFile#read(java.lang.String)
-         */
         @Override
         protected FatPackData read(String line, int i) {
             final FileSection section = FileSection.parse(line, ":", "|");
@@ -63,5 +31,35 @@ public class FatPackData {
             int nLand = section.getInt("BasicLands", 0);
             return new FatPackData(section.get("Set"), section.get("LandSet"), nBoosters, nLand);
         }
+    }
+    
+    @Override
+    public String toString() {
+        if (0 >= cntBoosters) {
+            return "no cards";
+        }
+        
+        StringBuilder s = new StringBuilder();
+        
+        if (0 < getCntLands()) {
+            s.append(getCntLands()).append(" land");
+            if (1 < getCntLands()) {
+                s.append("s");
+            }
+            
+            if (!getEdition().equalsIgnoreCase(getLandEdition())) {
+                s.append(" from edition: ").append(getLandEdition());
+            }
+            
+            if (0 < cntBoosters) {
+                s.append(" and ");
+            }
+        }
+
+        if (0 < cntBoosters) {
+            s.append(cntBoosters).append(" booster packs, each containing ");
+        }
+        
+        return s.toString();
     }
 }

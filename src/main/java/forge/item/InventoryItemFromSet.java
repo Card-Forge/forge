@@ -22,22 +22,10 @@ package forge.item;
  * CardPrinted, Booster, Pets, Plants... etc
  */
 public interface InventoryItemFromSet extends InventoryItem {
-
     /**
-     * An inventory item has to provide a name.
-     * 
-     * @return the name
+     * The description to display for the item
      */
-    @Override
-    String getName();
-
-    /**
-     * An inventory item has to provide a picture.
-     * 
-     * @return the image filename
-     */
-    @Override
-    String getImageFilename();
+    String getDescription();
 
     /**
      * An item belonging to a set should return its set as well.

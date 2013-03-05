@@ -69,6 +69,11 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
     public String getName() {
         return this.name;
     }
+    
+    @Override
+    public String getDescription() {
+        return name;
+    }
 
     /*
      * (non-Javadoc)

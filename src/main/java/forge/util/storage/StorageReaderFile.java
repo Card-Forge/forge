@@ -40,7 +40,7 @@ import forge.util.IItemReader;
 public abstract class StorageReaderFile<T> implements IItemReader<T> {
 
     private final File file;
-    private final Function<T, String> keySelector;
+    private final Function<? super T, String> keySelector;
 
     /**
      * Instantiates a new storage reader file.
@@ -48,7 +48,7 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
      * @param pathname the pathname
      * @param keySelector0 the key selector0
      */
-    public StorageReaderFile(final String pathname, final Function<T, String> keySelector0) {
+    public StorageReaderFile(final String pathname, final Function<? super T, String> keySelector0) {
         this(new File(pathname), keySelector0);
     }
 
@@ -58,7 +58,7 @@ public abstract class StorageReaderFile<T> implements IItemReader<T> {
      * @param file0 the file0
      * @param keySelector0 the key selector0
      */
-    public StorageReaderFile(final File file0, final Function<T, String> keySelector0) {
+    public StorageReaderFile(final File file0, final Function<? super T, String> keySelector0) {
         this.file = file0;
         this.keySelector = keySelector0;
     }

@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package forge.item;
 
 import java.util.ArrayList;
@@ -27,10 +28,6 @@ import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.FatPackData;
 
-/**
- * TODO Write javadoc for this type.
- * 
- */
 public class FatPack extends OpenablePack {
 
     /** The Constant fnFromSet. */
@@ -44,17 +41,15 @@ public class FatPack extends OpenablePack {
 
     private final FatPackData fpData;
 
-    /**
-     * Instantiates a new booster pack.
-     * 
-     * @param set
-     *            the set
-     */
     public FatPack(final String name0, final FatPackData fpData0) {
         super(name0, Singletons.getModel().getBoosters().get(fpData0.getEdition()));
         fpData = fpData0;
     }
 
+    @Override
+    public String getDescription() {
+        return fpData.toString() + contents.toString();
+    }
 
     @Override
     public final String getImageFilename() {
@@ -73,20 +68,10 @@ public class FatPack extends OpenablePack {
         for (int i = 0; i < fpData.getCntBoosters(); i++) {
             result.addAll(super.generate());
         }
-        result.addAll(getRandomBasicLands(fpData.getLandsEdition(), fpData.getCntLands()));
+        result.addAll(getRandomBasicLands(fpData.getLandEdition(), fpData.getCntLands()));
         return result;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#clone()
-     */
-    /**
-     * Clone.
-     * 
-     * @return Object
-     */
     @Override
     public final Object clone() {
         return new FatPack(name, fpData);
@@ -96,6 +81,4 @@ public class FatPack extends OpenablePack {
     public int getTotalCards() {
         return super.getTotalCards() * fpData.getCntBoosters() + fpData.getCntLands();
     }
-
-
 }

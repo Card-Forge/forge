@@ -213,7 +213,7 @@ public class BoosterGenerator {
      */
     public final List<CardPrinted> getBoosterPack(BoosterData booster) {
         return this.getBoosterPack(booster.getCommon(), booster.getUncommon(), booster.getRare(), 0, 0, booster.getSpecial(),
-                booster.getDoubleFaced(), 0, booster.getLand());
+                booster.getDoubleFaced(), 0, booster.getCntLands());
     }
 
     /**
