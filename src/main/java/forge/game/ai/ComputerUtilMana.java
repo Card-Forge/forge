@@ -138,7 +138,7 @@ public class ComputerUtilMana {
                         } else {
                             m.setExpressChoice("0");
                         }     
-                    } 
+                    }
                     // check if ability produces any color
                     else if (m.isAnyMana()) {
                         String colorChoice = costParts[nPart];
@@ -156,7 +156,7 @@ public class ComputerUtilMana {
                                     break;
                                 }
                             }
-                        } else if (costParts[nPart].contains("/")) {
+                        } else if (costParts[nPart].contains("2/")) {
                             colorChoice = costParts[nPart].replace("2/", "");
                         } else if (costParts[nPart].length() > 1) {
                             colorChoice = costParts[nPart].substring(0, 1);
