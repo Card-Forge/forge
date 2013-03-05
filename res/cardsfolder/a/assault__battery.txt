@@ -2,7 +2,7 @@ Name:Assault
 ManaCost:R
 AlternateMode: Split
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R | NumDmg$ 2 | ValidTgts$ Creature,Player | SpellDescription$ Assault deals 2 damage to target creature or player.
+A:SP$ DealDamage | Cost$ R | NumDmg$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | SpellDescription$ Assault deals 2 damage to target creature or player.
 SetInfo:INV Uncommon
 SetInfo:TSB Uncommon
 SetInfo:HOP Uncommon
