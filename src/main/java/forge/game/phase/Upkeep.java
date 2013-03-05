@@ -148,7 +148,9 @@ public class Upkeep extends Phase {
 
                 }
             };
+            upkeepAbility.setActivatingPlayer(c.getController());
             upkeepAbility.setStackDescription(sb.toString());
+            upkeepAbility.setDescription(sb.toString());
 
             game.getStack().addSimultaneousStackEntry(upkeepAbility);
 
@@ -206,6 +208,7 @@ public class Upkeep extends Phase {
                         }
                     }
                 };
+                sacAbility.setActivatingPlayer(c.getController());
                 sacAbility.setStackDescription(sb.toString());
                 sacAbility.setDescription(sb.toString());
 
@@ -514,7 +517,9 @@ public class Upkeep extends Phase {
 
             final StringBuilder sb = new StringBuilder();
             sb.append(abyss.getName()).append(" - destroy a nonartifact creature of your choice.");
+            sacrificeCreature.setActivatingPlayer(c.getController());
             sacrificeCreature.setStackDescription(sb.toString());
+            sacrificeCreature.setDescription(sb.toString());
             game.getStack().addAndUnfreeze(sacrificeCreature);
         } // end for
     } // The Abyss
@@ -587,7 +592,9 @@ public class Upkeep extends Phase {
 
             final StringBuilder sb = new StringBuilder();
             sb.append(c.getName()).append(" - destroy 1 creature with lowest power.");
+            ability.setActivatingPlayer(c.getController());
             ability.setStackDescription(sb.toString());
+            ability.setDescription(sb.toString());
 
             game.getStack().addSimultaneousStackEntry(ability);
 
@@ -997,6 +1004,7 @@ public class Upkeep extends Phase {
             sb.append(source).append(" - deals ").append(damage).append(" damage to ").append(player);
             ability.setStackDescription(sb.toString());
             ability.setDescription(sb.toString());
+            ability.setActivatingPlayer(surge.getController());
 
             if (damage > 0) {
                 game.getStack().addSimultaneousStackEntry(ability);
@@ -1084,6 +1092,7 @@ public class Upkeep extends Phase {
                     + " taps X artifacts, creatures or lands he or she controls.");
             ability.setDescription(source.getName() + " - " + player
                     + " taps X artifacts, creatures or lands he or she controls.");
+            ability.setActivatingPlayer(source.getController());
 
             game.getStack().addSimultaneousStackEntry(ability);
 
@@ -1119,6 +1128,8 @@ public class Upkeep extends Phase {
             sb.append(blaze.get(i)).append(" - has a blaze counter and deals 1 damage to ");
             sb.append(player).append(".");
             ability.setStackDescription(sb.toString());
+            ability.setDescription(sb.toString());
+            ability.setActivatingPlayer(source.getController());
 
             game.getStack().addSimultaneousStackEntry(ability);
 
