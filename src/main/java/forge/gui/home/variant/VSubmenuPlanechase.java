@@ -130,16 +130,16 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
 
             deckChoosers.add(tempChooser);
 
-            tempPanel.add(tempChooser, "span 1 2, w 44%!, gap 0 0 20px 20px, growy, pushy, wrap");
+            tempPanel.add(tempChooser, "span 1 2, w 55%!, gap 10px 10px 0px 10px, growy, pushy, wrap");
 
-            tempPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), "flowy");
+            tempPanel.add(new FLabel.Builder().text("Select Planar deck:").build(), "gap 0px 0px 10px 10px, flowy");
 
             tempPlanarDeckList = new FList();
 
             tempPlanarDeckList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
             JScrollPane scrPlanes = new FScrollPane(tempPlanarDeckList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            tempPanel.add(scrPlanes, "h 90%!,wrap");
+            tempPanel.add(scrPlanes, "h 90%, gap 0px 10px 0px 10px, growy, pushy, wrap");
             planarDeckLists.add(tempPlanarDeckList);
 
             playerPanels.add(tempPanel);
