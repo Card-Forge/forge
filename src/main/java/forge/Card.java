@@ -7142,7 +7142,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 y = this.getNetDefense();
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
-                if (getRules() != null && getRules().getSplitType() == CardSplitType.Split) {
+                if (getRules() != null && getRules().getSplitType() == CardSplitType.Split && getCurState() == CardCharacteristicName.Original) {
                     y = getState(CardCharacteristicName.LeftSplit).getManaCost().getCMC();
                     y2 = getState(CardCharacteristicName.RightSplit).getManaCost().getCMC();
                 } else {
