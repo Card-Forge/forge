@@ -290,15 +290,14 @@ public final class CardRulesPredicates {
             boolean shouldContain;
             switch (this.field) {
             case NAME:
-                return this.op(card.getName(), this.operand);
+                return op(card.getName(), this.operand);
             case SUBTYPE:
                 shouldContain = (this.getOperator() == StringOp.CONTAINS) || (this.getOperator() == StringOp.EQUALS);
                 return shouldContain == card.getType().subTypeContains(this.operand);
             case ORACLE_TEXT:
-                shouldContain = (this.getOperator() == StringOp.CONTAINS) || (this.getOperator() == StringOp.EQUALS);
-                return shouldContain == card.getOracleText().contains(this.operand);
+                return op(card.getOracleText(), operand);
             case JOINED_TYPE:
-                return this.op(card.getType().toString(), this.operand);
+                return op(card.getType().toString(), operand);
             default:
                 return false;
             }
