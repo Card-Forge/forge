@@ -297,6 +297,7 @@ public class SSubmenuQuestUtil {
 
         if (worlds.size() < 1) {
             JOptionPane.showMessageDialog(null, "There are currently no worlds you can travel to\nin this version of Forge.", "No worlds", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         final String setPrompt = "Where do you wish to travel?";
@@ -307,7 +308,6 @@ public class SSubmenuQuestUtil {
         }
 
         if (qCtrl.getWorld() != newWorld) {
-
             boolean needRemove = false;
             if (nextChallengeInWins() < 1 && qCtrl.getAchievements().getCurrentChallenges().size() > 0) {
                 needRemove = true;
@@ -329,7 +329,7 @@ public class SSubmenuQuestUtil {
                     qCtrl.getAchievements().addChallengesPlayed();
                 }
 
-                Singletons.getModel().getQuest().getAchievements().getCurrentChallenges().clear();
+                qCtrl.getAchievements().getCurrentChallenges().clear();
             }
 
             qCtrl.setWorld(newWorld);
@@ -341,6 +341,7 @@ public class SSubmenuQuestUtil {
             // then re-selecting your current quest data file.)
             qCtrl.getDuelsManager().randomizeOpponents();
             qCtrl.getChallengesManager().randomizeOpponents();
+            qCtrl.getCards().clearShopList();
             qCtrl.save();
         }
     }
