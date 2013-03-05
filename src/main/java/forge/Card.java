@@ -7523,7 +7523,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         for (final String type : this.getType()) {
-            if (type.equals("AllCreatureTypes") && c1.hasACreatureType()) {
+            if (type.equals("AllCreatureTypes") 
+                    && (c1.hasACreatureType() || c1.typeContains("AllCreatureTypes"))) {
                 return true;
             }
             if (forge.card.CardType.isACreatureType(type) && c1.isType(type)) {
