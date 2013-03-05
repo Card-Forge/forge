@@ -59,9 +59,9 @@ public enum VPicture implements IVDoc<CPicture> {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, center"));
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, align center center"));
         parentCell.getBody().add(lblFlipcard, "pos (50% - 40px) (50% - 60px)");
-        parentCell.getBody().add(pnlPicture, "w 100%!, h 100%!");
+        parentCell.getBody().add(pnlPicture, "w 100%-6!, h 100%-6!");
     }
 
     /* (non-Javadoc)
