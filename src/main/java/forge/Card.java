@@ -1632,21 +1632,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return this.getCharacteristics().getManaCost();
     }
     
-    /**
-     * <p>
-     * Display for the field <code>manaCost</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getManaDisplay() {
-        // If this is a split card, display mana as X / Y. Otherwise, Display it as normal
-        if (this.getRules() != null && this.getRules().getSplitType() == CardSplitType.Split) { 
-            return String.format("%s / %s", this.getState(CardCharacteristicName.LeftSplit).getManaCost(), 
-                    this.getState(CardCharacteristicName.RightSplit).getManaCost());
-        }
-        return this.getCharacteristics().getManaCost().toString();
-    }
 
     /**
      * <p>

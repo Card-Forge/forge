@@ -202,10 +202,12 @@ public class CardDetailPanel extends FPanel {
             
         final boolean canShowThis = card.canBeShownTo(Singletons.getControl().getPlayer());
         if (canShowThis) {
-            if (card.getManaCost().toString().equals("") || card.isLand()) {
+            if (card.getManaCost().isNoCost()) {
                 this.nameCostLabel.setText(card.getName());
             } else {
-                this.nameCostLabel.setText(card.getName() + " - " + card.getManaDisplay());
+                // If you want to make a special view of split cards, keep that special code in this class.
+                // Better if you make several labels that that draw mana symbols
+                this.nameCostLabel.setText(card.getName() + " - " + card.getManaCost());
             }
             this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
             
