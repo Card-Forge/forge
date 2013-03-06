@@ -41,7 +41,6 @@ import forge.Constant;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.CardCharacteristics;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -148,7 +147,7 @@ public class CardFactoryUtil {
             public AbilityActivated getCopy() {
                 AbilityActivated res = new AbilityUnearth(getSourceCard(),
                         getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this, res);
+                CardFactory.copySpellAbility(this, res);
                 final SpellAbilityRestriction restrict = new SpellAbilityRestriction();
                 restrict.setZone(ZoneType.Graveyard);
                 restrict.setSorcerySpeed(true);
@@ -361,7 +360,7 @@ public class CardFactoryUtil {
             public AbilityActivated getCopy() {
                 AbilityActivated res = new AbilityTransmute(getSourceCard(),
                         getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this, res);
+                CardFactory.copySpellAbility(this, res);
                 res.getRestrictions().setZone(ZoneType.Hand);
                 return res;
             }
@@ -2490,7 +2489,7 @@ public class CardFactoryUtil {
 
         final int multiplier = controller.getTokenDoublersMagnitude();
         for (int i = 0; i < multiplier; i++) {
-            Card temp = CardFactoryUtil.copyStats(c);
+            Card temp = CardFactory.copyStats(c);
 
             for (final String kw : intrinsicKeywords) {
                 temp.addIntrinsicKeyword(kw);
@@ -2669,112 +2668,6 @@ public class CardFactoryUtil {
         return (c == CounterType.AGE) || (c == CounterType.BLAZE) || (c == CounterType.BRIBERY) || (c == CounterType.DOOM)
                 || (c == CounterType.ICE) || (c == CounterType.M1M1) || (c == CounterType.M0M2) || (c == CounterType.M0M1)
                 || (c == CounterType.TIME);
-    }
-
-    /**
-     * <p>
-     * Copies stats like power, toughness, etc.
-     * </p>
-     * 
-     * @param sim
-     *            a {@link java.lang.Object} object.
-     * @return a {@link forge.Card} object.
-     */
-    public static Card copyStats(final Card sim) {
-        final Card c = new Card();
-
-        c.setFlipCard(sim.isFlipCard());
-        c.setDoubleFaced(sim.isDoubleFaced());
-        c.setCurSetCode(sim.getCurSetCode());
-
-        final CardCharacteristicName origState = sim.getCurState();
-        for (final CardCharacteristicName state : sim.getStates()) {
-            c.addAlternateState(state);
-            c.setState(state);
-            sim.setState(state);
-            CardFactoryUtil.copyCharacteristics(sim, c);
-        }
-
-        sim.setState(origState);
-        c.setState(origState);
-        c.setRules(sim.getRules());
-
-        return c;
-    } // copyStats()
-
-    /**
-     * Copy characteristics.
-     * 
-     * @param from
-     *            the from
-     * @param to
-     *            the to
-     */
-    public static void copyCharacteristics(final Card from, final Card to) {
-        to.setBaseAttack(from.getBaseAttack());
-        to.setBaseDefense(from.getBaseDefense());
-        to.setBaseLoyalty(from.getBaseLoyalty());
-        to.setBaseAttackString(from.getBaseAttackString());
-        to.setBaseDefenseString(from.getBaseDefenseString());
-        to.setIntrinsicKeyword(from.getIntrinsicKeyword());
-        to.setName(from.getName());
-        to.setType(from.getCharacteristics().getType());
-        to.setText(from.getSpellText());
-        to.setManaCost(from.getManaCost());
-        to.setColor(from.getColor());
-        to.setSVars(from.getSVars());
-        to.setIntrinsicAbilities(from.getIntrinsicAbilities());
-
-        to.setImageFilename(from.getImageFilename());
-        to.setTriggers(from.getTriggers());
-        to.setReplacementEffects(from.getReplacementEffects());
-        to.setStaticAbilityStrings(from.getStaticAbilityStrings());
-
-    }
-
-    /**
-     * Copy characteristics.
-     * 
-     * @param from
-     *            the from
-     * @param stateToCopy
-     *            the state to copy
-     * @param to
-     *            the to
-     */
-    public static void copyState(final Card from, final CardCharacteristicName stateToCopy, final Card to) {
-
-        // copy characteristics not associated with a state
-        to.setBaseLoyalty(from.getBaseLoyalty());
-        to.setBaseAttackString(from.getBaseAttackString());
-        to.setBaseDefenseString(from.getBaseDefenseString());
-        to.setText(from.getSpellText());
-
-        // get CardCharacteristics for desired state
-        CardCharacteristics characteristics = from.getState(stateToCopy);
-        to.getCharacteristics().copy(characteristics);
-        // handle triggers and replacement effect through Card class interface
-        to.setTriggers(characteristics.getTriggers());
-        to.setReplacementEffects(characteristics.getReplacementEffects());
-    }
-
-    public static void copySpellAbility(SpellAbility from, SpellAbility to) {
-        to.setDescription(from.getDescription());
-        to.setStackDescription(from.getDescription());
-
-        if (from.getSubAbility() != null) {
-            to.setSubAbility(from.getSubAbility().getCopy());
-        }
-        if (from.getRestrictions() != null) {
-            to.setRestrictions(from.getRestrictions());
-        }
-        if (from.getConditions() != null) {
-            to.setConditions(from.getConditions());
-        }
-
-        for (String sVar : from.getSVars()) {
-            to.setSVar(sVar, from.getSVar(sVar));
-        }
     }
 
     public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card) {

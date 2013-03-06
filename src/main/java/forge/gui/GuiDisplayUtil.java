@@ -507,7 +507,7 @@ public final class GuiDisplayUtil {
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
-            final Card c = Singletons.getModel().getCardFactory().getCard(CardDb.instance().getCard(cardinfo[0]), player);
+            final Card c = CardDb.instance().getCard(cardinfo[0]).toForgeCard(player);
 
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {

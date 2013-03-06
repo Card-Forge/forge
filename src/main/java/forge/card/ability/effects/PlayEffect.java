@@ -150,7 +150,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 source.clearRemembered();
             }
             if (sa.hasParam("CopyCard")) {
-                tgtCard = Singletons.getModel().getCardFactory().getCard(CardDb.getCard(tgtCard), sa.getActivatingPlayer());
+                tgtCard = CardDb.getCard(tgtCard).toForgeCard(sa.getActivatingPlayer());
                 // when copying something stolen:
                 tgtCard.addController(sa.getActivatingPlayer());
 

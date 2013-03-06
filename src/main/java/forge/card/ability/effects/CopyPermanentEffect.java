@@ -12,6 +12,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
+import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
@@ -82,7 +83,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     if (!c.isToken() || c.isCopiedToken()) {
                         // copy creature and put it onto the battlefield
 
-                        copy = Singletons.getModel().getCardFactory().getCard(CardDb.getCard(c), sa.getActivatingPlayer());
+                        copy = CardFactory.getCard(CardDb.getCard(c), sa.getActivatingPlayer());
 
                         // when copying something stolen:
                         copy.addController(controller);
@@ -90,7 +91,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.setToken(true);
                         copy.setCopiedToken(true);
                     } else { // isToken()
-                        copy = CardFactoryUtil.copyStats(c);
+                        copy = CardFactory.copyStats(c);
 
                         copy.setName(c.getName());
                         copy.setImageFilename(c.getImageFilename());

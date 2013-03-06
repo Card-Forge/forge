@@ -36,6 +36,7 @@ import forge.GameEntity;
 import forge.card.CardSplitType;
 import forge.card.CardType;
 import forge.card.ability.effects.AttachEffect;
+import forge.card.cardfactory.CardFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
@@ -157,7 +158,7 @@ public class GameAction {
             if (zoneFrom.is(ZoneType.Battlefield)) {
                 c.setFlipStaus(false);
             }
-            copied = forge.Singletons.getModel().getCardFactory().copyCard(c);
+            copied = CardFactory.copyCard(c);
             copied.setUnearthed(c.isUnearthed());
             copied.setTapped(false);
             for (final Trigger trigger : copied.getTriggers()) {
@@ -669,7 +670,7 @@ public class GameAction {
         if (p != null && p.is(ZoneType.Battlefield)) {
             lastKnownInfo = CardUtil.getLKICopy(c);
             c.clearCounters(); // remove all counters
-            library.add(forge.Singletons.getModel().getCardFactory().copyCard(c), libPosition);
+            library.add(CardFactory.copyCard(c), libPosition);
         } else {
             c.clearCounters(); // remove all counters
             library.add(c, libPosition);

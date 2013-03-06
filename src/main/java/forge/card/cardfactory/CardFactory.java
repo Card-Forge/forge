@@ -17,7 +17,6 @@
  */
 package forge.card.cardfactory;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,10 +27,10 @@ import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardUtil;
 import forge.Color;
+import forge.card.CardCharacteristics;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
-import forge.card.ability.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
@@ -41,13 +40,9 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerHandler;
-import forge.error.BugReporter;
 import forge.game.player.Player;
-import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.IPaperCard;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 /**
  * <p>
@@ -68,33 +63,6 @@ import forge.properties.NewConstants;
  * @version $Id$
  */
 public class CardFactory {
-
-    /**
-     * <p>
-     * Constructor for CardFactory.
-     * </p>
-     * 
-     * @param file
-     *            a {@link java.io.File} object.
-     */
-    private final CardStorageReader reader;
-
-    public CardFactory(final File file) {
-
-        GuiUtils.checkEDT("CardFactory$constructor", false);
-        reader = new CardStorageReader(ForgeProps.getFile(NewConstants.CARDSFOLDER), true);
-        try {
-            // this fills in our map of card names to Card instances.
-            final List<CardRules> listCardRules = reader.loadCards();
-            CardDb.setup(listCardRules.iterator());
-
-        } catch (final Exception ex) {
-            BugReporter.reportException(ex);
-        }
-
-    } // constructor
-
-
     /**
      * <p>
      * copyCard.
@@ -104,15 +72,15 @@ public class CardFactory {
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    public final Card copyCard(final Card in) {
+    public final static Card copyCard(final Card in) {
         final CardCharacteristicName curState = in.getCurState();
         if (in.isInAlternateState()) {
             in.setState(CardCharacteristicName.Original);
         }
-        final Card out = this.getCard(CardDb.getCard(in), in.getOwner());
+        final Card out = getCard(CardDb.getCard(in), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
 
-        CardFactoryUtil.copyCharacteristics(in, out);
+        CardFactory.copyCharacteristics(in, out);
         if (in.hasAlternateState()) {
             for (final CardCharacteristicName state : in.getStates()) {
                 in.setState(state);
@@ -120,7 +88,7 @@ public class CardFactory {
                     out.addAlternateState(state);
                 }
                 out.setState(state);
-                CardFactoryUtil.copyCharacteristics(in, out);
+                CardFactory.copyCharacteristics(in, out);
             }
             in.setState(curState);
             out.setState(curState);
@@ -157,7 +125,7 @@ public class CardFactory {
      * @param bCopyDetails
      *            a boolean.
      */
-    public final void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
+    public final static void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
             final boolean bCopyDetails) {
         //Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
@@ -243,7 +211,7 @@ public class CardFactory {
      * @return a {@link forge.Card} instance, owned by owner; or the special
      *         blankCard
      */
-    public final Card getCard(final IPaperCard cp, final Player owner) {
+    public final static Card getCard(final IPaperCard cp, final Player owner) {
 
         //System.out.println(cardName);
         CardRules cardRules = cp.getRules();
@@ -435,6 +403,112 @@ public class CardFactory {
         if ( face.getIntToughness() >= 0 ) {
             c.setBaseDefense(face.getIntToughness());
             c.setBaseDefenseString(face.getToughness());
+        }
+    }
+
+    /**
+     * <p>
+     * Copies stats like power, toughness, etc.
+     * </p>
+     * 
+     * @param sim
+     *            a {@link java.lang.Object} object.
+     * @return a {@link forge.Card} object.
+     */
+    public static Card copyStats(final Card sim) {
+        final Card c = new Card();
+    
+        c.setFlipCard(sim.isFlipCard());
+        c.setDoubleFaced(sim.isDoubleFaced());
+        c.setCurSetCode(sim.getCurSetCode());
+    
+        final CardCharacteristicName origState = sim.getCurState();
+        for (final CardCharacteristicName state : sim.getStates()) {
+            c.addAlternateState(state);
+            c.setState(state);
+            sim.setState(state);
+            CardFactory.copyCharacteristics(sim, c);
+        }
+    
+        sim.setState(origState);
+        c.setState(origState);
+        c.setRules(sim.getRules());
+    
+        return c;
+    } // copyStats()
+
+    /**
+     * Copy characteristics.
+     * 
+     * @param from
+     *            the from
+     * @param to
+     *            the to
+     */
+    private static void copyCharacteristics(final Card from, final Card to) {
+        to.setBaseAttack(from.getBaseAttack());
+        to.setBaseDefense(from.getBaseDefense());
+        to.setBaseLoyalty(from.getBaseLoyalty());
+        to.setBaseAttackString(from.getBaseAttackString());
+        to.setBaseDefenseString(from.getBaseDefenseString());
+        to.setIntrinsicKeyword(from.getIntrinsicKeyword());
+        to.setName(from.getName());
+        to.setType(from.getCharacteristics().getType());
+        to.setText(from.getSpellText());
+        to.setManaCost(from.getManaCost());
+        to.setColor(from.getColor());
+        to.setSVars(from.getSVars());
+        to.setIntrinsicAbilities(from.getIntrinsicAbilities());
+    
+        to.setImageFilename(from.getImageFilename());
+        to.setTriggers(from.getTriggers());
+        to.setReplacementEffects(from.getReplacementEffects());
+        to.setStaticAbilityStrings(from.getStaticAbilityStrings());
+    
+    }
+
+    /**
+     * Copy characteristics.
+     * 
+     * @param from
+     *            the from
+     * @param stateToCopy
+     *            the state to copy
+     * @param to
+     *            the to
+     */
+    public static void copyState(final Card from, final CardCharacteristicName stateToCopy, final Card to) {
+    
+        // copy characteristics not associated with a state
+        to.setBaseLoyalty(from.getBaseLoyalty());
+        to.setBaseAttackString(from.getBaseAttackString());
+        to.setBaseDefenseString(from.getBaseDefenseString());
+        to.setText(from.getSpellText());
+    
+        // get CardCharacteristics for desired state
+        CardCharacteristics characteristics = from.getState(stateToCopy);
+        to.getCharacteristics().copy(characteristics);
+        // handle triggers and replacement effect through Card class interface
+        to.setTriggers(characteristics.getTriggers());
+        to.setReplacementEffects(characteristics.getReplacementEffects());
+    }
+
+    public static void copySpellAbility(SpellAbility from, SpellAbility to) {
+        to.setDescription(from.getDescription());
+        to.setStackDescription(from.getDescription());
+    
+        if (from.getSubAbility() != null) {
+            to.setSubAbility(from.getSubAbility().getCopy());
+        }
+        if (from.getRestrictions() != null) {
+            to.setRestrictions(from.getRestrictions());
+        }
+        if (from.getConditions() != null) {
+            to.setConditions(from.getConditions());
+        }
+    
+        for (String sVar : from.getSVars()) {
+            to.setSVar(sVar, from.getSVar(sVar));
         }
     }
 

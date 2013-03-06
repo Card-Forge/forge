@@ -24,7 +24,6 @@ import java.util.List;
 import com.google.common.base.Function;
 
 import forge.quest.data.GameFormatQuest;
-import forge.util.FileSection;
 import forge.util.storage.StorageReaderFile;
 
 /** 

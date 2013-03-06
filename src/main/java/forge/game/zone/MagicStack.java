@@ -33,6 +33,7 @@ import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
+import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
@@ -609,7 +610,7 @@ public class MagicStack extends MyObservable {
                     @Override
                     public void execute() {
                         for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
-                            Singletons.getModel().getCardFactory().copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false);
+                            CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false);
                         }
                     }
                 };

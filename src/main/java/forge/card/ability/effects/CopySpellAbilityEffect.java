@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
+import forge.card.cardfactory.CardFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
@@ -99,7 +99,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             for (final SpellAbility chosenSAcopy : chosenSAs) {
                 chosenSAcopy.setActivatingPlayer(controller);
                 for (int i = 0; i < amount; i++) {
-                    Singletons.getModel().getCardFactory().copySpellontoStack(card, chosenSAcopy.getSourceCard(), chosenSAcopy, true);
+                    CardFactory.copySpellontoStack(card, chosenSAcopy.getSourceCard(), chosenSAcopy, true);
                 }
             }
         }
@@ -115,7 +115,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
-                Singletons.getModel().getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
+                CardFactory.copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
             }
         }
     } // end resolve

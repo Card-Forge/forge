@@ -20,7 +20,6 @@ package forge.item;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -81,7 +80,7 @@ public final class CardDb {
      * @param list
      *            the new up
      */
-    public static void setup(final Iterator<CardRules> list) {
+    public static void setup(final Iterable<CardRules> list) {
         if (CardDb.commonCards != null) {
             throw new RuntimeException("CardDb has already been initialized, don't do it twice please");
         }
@@ -426,9 +425,9 @@ public final class CardDb {
                 uniqueSpecialCards.put(cardName, lastAdded);
         }
 
-        CardSorter(final Iterator<CardRules> parser) {
-            while (parser.hasNext()) {
-                this.addNewCard(parser.next());
+        CardSorter(final Iterable<CardRules> parser) {
+            for (CardRules cr : parser) {
+                this.addNewCard(cr);
             }
         }
     }

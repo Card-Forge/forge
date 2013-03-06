@@ -7,7 +7,7 @@ import forge.card.ability.effects.ChangeZoneAllEffect;
 import forge.card.ability.effects.ChangeZoneEffect;
 import forge.card.ability.effects.ManaEffect;
 import forge.card.ability.effects.ManaReflectedEffect;
-import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactory;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
@@ -50,7 +50,7 @@ public class AbilityApiBased extends AbilityActivated {
     public AbilityActivated getCopy() {
         Target tgt = getTarget() == null ? null : new Target(getTarget());
         AbilityActivated res = new AbilityApiBased(api, getSourceCard(), getPayCosts(), tgt, params);
-        CardFactoryUtil.copySpellAbility(this, res);
+        CardFactory.copySpellAbility(this, res);
         return res;
     }
 
