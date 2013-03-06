@@ -15,4 +15,4 @@ A:SP$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenName$ Elephant| TokenTypes$ Crea
 Oracle:Put a 3/3 green Elephant creature token onto the battlefield.
 SetInfo:TSB Special
 SetInfo:HOP Uncommon
-SetInfo:INV Uncommon x2
+SetInfo:INV Uncommon
