@@ -205,7 +205,7 @@ public class CardDetailPanel extends FPanel {
             if (card.getManaCost().toString().equals("") || card.isLand()) {
                 this.nameCostLabel.setText(card.getName());
             } else {
-                this.nameCostLabel.setText(card.getName() + " - " + card.getManaCost());
+                this.nameCostLabel.setText(card.getName() + " - " + card.getManaDisplay());
             }
             this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
             
