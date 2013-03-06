@@ -7154,6 +7154,7 @@ res/cardsfolder/n/niblis_of_the_mist.txt -text
 res/cardsfolder/n/niblis_of_the_urn.txt -text
 res/cardsfolder/n/nicol_bolas.txt svneol=native#text/plain
 res/cardsfolder/n/nicol_bolas_planeswalker.txt svneol=native#text/plain
+res/cardsfolder/n/night_day.txt -text
 res/cardsfolder/n/night_dealings.txt -text svneol=unset#text/plain
 res/cardsfolder/n/night_of_souls_betrayal.txt svneol=native#text/plain
 res/cardsfolder/n/night_revelers.txt -text
