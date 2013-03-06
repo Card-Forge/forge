@@ -73,6 +73,9 @@ public class GameActionPlay {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void playSpellAbilityForFree(final SpellAbility sa) {
+        final Card source = sa.getSourceCard();
+        setSplitCardState(source, sa); // Split card support
+
         if (sa.getPayCosts() != null) {
             if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
                 CharmEffect.makeChoices(sa);
