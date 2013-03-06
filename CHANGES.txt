@@ -8,11 +8,17 @@ Release Notes:
 
 A new quest world by Serrasmurf based on Ravinca has been added.
 
-An effort is being made to implement the split cards (e.g. Fire/Ice) in Forge.
+An effort is being made to implement the split cards (e.g. Fire/Ice) in Forge. The initial effort to add support for split cards may be considered complete and the relevant branch has reen reintegrated to trunk. Expect some rough edges and incompatibilities along the way.
 
 The "Scale Image Larger" option in the preferences should be fixed. It should no longer continue to scale images larger when it is disabled.
 
 The fat packs should now be available for purchase in the quest mode card shop.
+
+Information for non-card items in spell shop are now shown in the card details panel.
+
+Multiple problems with Convoke have been fixed.
+
+Forge should now be the Magic rules enforcing program with the most supported cards! That means we finally beat MtGO! MtGO is missing 828 cards. Even subtracting the Power Nine, which were available in the MtGO cube for some time, that's more than we are missing (805) at the time this was written.
 
 
 New Cards:
@@ -28,6 +34,17 @@ Delaying Shield
 Fatal Lore
 Library of Lat-Nam
 Misfortune
+Assault // Battery
+Fire // Ice
+Night // Day
+Trial // Error
+Wax // Wane
+Dead // Gone
+Illusion // Reality
+Life // Death
+Pure // Simple
+Rough // Tumble
+Supply // Demand
 
 
 New Phenomenons:
