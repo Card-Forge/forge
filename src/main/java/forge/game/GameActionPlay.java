@@ -180,23 +180,20 @@ public class GameActionPlay {
         List<Card> untappedCreats = CardLists.filter(spell.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
         untappedCreats = CardLists.filter(untappedCreats, CardPredicates.Presets.UNTAPPED);
 
-        if (untappedCreats.size() != 0) {
+        if (!untappedCreats.isEmpty()) {
             final List<Card> choices = new ArrayList<Card>();
-            for (final Card c : untappedCreats) {
-                choices.add(c);
-            }
+            choices.addAll(untappedCreats);
             ArrayList<String> usableColors = new ArrayList<String>();
             ManaCostBeingPaid newCost = new ManaCostBeingPaid(originalCost.toString());
             Card tapForConvoke = null;
             if (sa.getActivatingPlayer().isHuman()) {
-                tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(),
-                        choices);
+                tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(), choices);
             } else {
                 // TODO: AI to choose a creature to tap would go here
                 // Probably along with deciding how many creatures to
                 // tap
             }
-            while (tapForConvoke != null && untappedCreats.size() != 0) {
+            while (tapForConvoke != null && !untappedCreats.isEmpty()) {
                 final Card workingCard = (Card) tapForConvoke;
                 usableColors = GameActionPlay.getConvokableColors(workingCard, newCost);
 
@@ -223,7 +220,7 @@ public class GameActionPlay {
                     sa.addTappedForConvoke(workingCard);
                     choices.remove(workingCard);
                     untappedCreats.remove(workingCard);
-                    if ((choices.size() < 2) || (newCost.getConvertedManaCost() == 0)) {
+                    if (choices.isEmpty() || (newCost.getConvertedManaCost() == 0)) {
                         break;
                     }
                 } else {
@@ -239,7 +236,7 @@ public class GameActionPlay {
             }
 
             // will only be null if user cancelled.
-            if (tapForConvoke != null) {
+            if (!sa.getTappedForConvoke().isEmpty()) {
                 // Convoked creats are tapped here with triggers
                 // suppressed,
                 // Then again when payment is done(In
