@@ -11182,6 +11182,7 @@ res/cardsfolder/t/treva_the_renewer.txt svneol=native#text/plain
 res/cardsfolder/t/trevas_attendant.txt svneol=native#text/plain
 res/cardsfolder/t/trevas_charm.txt svneol=native#text/plain
 res/cardsfolder/t/trevas_ruins.txt svneol=native#text/plain
+res/cardsfolder/t/trial_error.txt -text
 res/cardsfolder/t/triangle_of_war.txt svneol=native#text/plain
 res/cardsfolder/t/triassic_egg.txt svneol=native#text/plain
 res/cardsfolder/t/tribal_flames.txt svneol=native#text/plain
@@ -11938,6 +11939,7 @@ res/cardsfolder/w/wave_of_reckoning.txt -text
 res/cardsfolder/w/wave_of_terror.txt svneol=native#text/plain
 res/cardsfolder/w/waves_of_aggression.txt -text
 res/cardsfolder/w/waveskimmer_aven.txt svneol=native#text/plain
+res/cardsfolder/w/wax_wane.txt -text
 res/cardsfolder/w/waxmane_baku.txt -text
 res/cardsfolder/w/way_of_the_thief.txt -text
 res/cardsfolder/w/wayfarers_bauble.txt svneol=native#text/plain
