@@ -2372,6 +2372,7 @@ res/cardsfolder/d/day_of_the_dragons.txt svneol=native#text/plain
 res/cardsfolder/d/daybreak_coronet.txt -text
 res/cardsfolder/d/daybreak_ranger_nightfall_predator.txt -text
 res/cardsfolder/d/daze.txt svneol=native#text/plain
+res/cardsfolder/d/dead_gone.txt -text
 res/cardsfolder/d/dead_iron_sledge.txt svneol=native#text/plain
 res/cardsfolder/d/dead_reckoning.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dead_reveler.txt -text
@@ -5117,6 +5118,7 @@ res/cardsfolder/i/ill_gotten_gains.txt svneol=native#text/plain
 res/cardsfolder/i/illness_in_the_ranks.txt -text
 res/cardsfolder/i/illuminated_wings.txt svneol=native#text/plain
 res/cardsfolder/i/illumination.txt svneol=native#text/plain
+res/cardsfolder/i/illusion_reality.txt -text
 res/cardsfolder/i/illusionary_forces.txt svneol=native#text/plain
 res/cardsfolder/i/illusionary_servant.txt svneol=native#text/plain
 res/cardsfolder/i/illusionary_wall.txt svneol=native#text/plain
@@ -5995,6 +5997,7 @@ res/cardsfolder/l/lieutenant_kirtar.txt svneol=native#text/plain
 res/cardsfolder/l/life_and_limb.txt svneol=native#text/plain
 res/cardsfolder/l/life_burst.txt svneol=native#text/plain
 res/cardsfolder/l/life_chisel.txt svneol=native#text/plain
+res/cardsfolder/l/life_death.txt -text
 res/cardsfolder/l/life_from_the_loam.txt svneol=native#text/plain
 res/cardsfolder/l/life_matrix.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lifeblood.txt svneol=native#text/plain
@@ -8063,6 +8066,7 @@ res/cardsfolder/p/puppeteer_clique.txt svneol=native#text/plain
 res/cardsfolder/p/puppets_verdict.txt -text
 res/cardsfolder/p/pure_intentions.txt -text svneol=unset#text/plain
 res/cardsfolder/p/pure_reflection.txt -text
+res/cardsfolder/p/pure_simple.txt -text
 res/cardsfolder/p/purelace.txt -text
 res/cardsfolder/p/puresight_merrow.txt svneol=native#text/plain
 res/cardsfolder/p/puresteel_paladin.txt -text
@@ -8751,6 +8755,7 @@ res/cardsfolder/r/rotting_fensnake.txt -text
 res/cardsfolder/r/rotting_giant.txt -text
 res/cardsfolder/r/rotting_legion.txt svneol=native#text/plain
 res/cardsfolder/r/rotting_rats.txt svneol=native#text/plain
+res/cardsfolder/r/rough_tumble.txt -text
 res/cardsfolder/r/roughshod_mentor.txt svneol=native#text/plain
 res/cardsfolder/r/rouse.txt svneol=native#text/plain
 res/cardsfolder/r/rowan_treefolk.txt svneol=native#text/plain
@@ -10449,6 +10454,7 @@ res/cardsfolder/s/suntail_hawk.txt svneol=native#text/plain
 res/cardsfolder/s/suntouched_myr.txt svneol=native#text/plain
 res/cardsfolder/s/sunweb.txt svneol=native#text/plain
 res/cardsfolder/s/superior_numbers.txt -text svneol=unset#text/plain
+res/cardsfolder/s/supply_demand.txt -text
 res/cardsfolder/s/suppress.txt -text svneol=unset#text/plain
 res/cardsfolder/s/suppression_field.txt -text
 res/cardsfolder/s/supreme_exemplar.txt svneol=native#text/plain
