@@ -1,6 +1,5 @@
 package forge.card;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.item.CardPrinted;
@@ -8,44 +7,15 @@ import forge.item.IPaperCard;
 import forge.util.FileSection;
 import forge.util.storage.StorageReaderFile;
 
-
-/**
- * The Class BoosterData.
- */
-public class BoosterData {
-    private final String edition;
-    public final String getEdition() {
-        return edition;
-    }
-    private final String landEdition;
-    public final String getLandEdition() {
-        return landEdition;
-    }
-
+public class BoosterData extends PackData {
     private final int nCommon;
     private final int nUncommon;
     private final int nRare;
     private final int nSpecial;
     private final int nDoubleFaced;
-    private final int nLand;
     private final int foilRate;
     private static final int CARDS_PER_BOOSTER = 15;
 
-    // private final String landCode;
-    /**
-     * Instantiates a new booster data.
-     * 
-     * @param nC
-     *            the n c
-     * @param nU
-     *            the n u
-     * @param nR
-     *            the n r
-     * @param nS
-     *            the n s
-     * @param nDF
-     *            the n df
-     */
     public BoosterData(final String edition, final String editionLand, final int nC, final int nU, final int nR, final int nS, final int nDF) {
         // if this booster has more that 10 cards, there must be a land in
         // 15th slot unless it's already taken
@@ -53,132 +23,116 @@ public class BoosterData {
                 - nS - nDF : 0, 68);
     }
 
-    /**
-     * Instantiates a new booster data.
-     * 
-     * @param nC
-     *            the n c
-     * @param nU
-     *            the n u
-     * @param nR
-     *            the n r
-     * @param nS
-     *            the n s
-     * @param nDF
-     *            the n df
-     * @param nL
-     *            the n l
-     * @param oneFoilPer
-     *            the one foil per
-     */
     public BoosterData(final String edition0, final String editionLand, final int nC, final int nU, final int nR, final int nS, final int nDF, final int nL,
             final int oneFoilPer) {
+        super(edition0, editionLand, nL > 0 ? nL : 0);
         this.nCommon = nC;
         this.nUncommon = nU;
         this.nRare = nR;
         this.nSpecial = nS;
         this.nDoubleFaced = nDF;
-        this.nLand = nL > 0 ? nL : 0;
         this.foilRate = oneFoilPer;
-        this.edition = edition0;
-        this.landEdition = editionLand;
     }
 
-    /**
-     * Gets the common.
-     * 
-     * @return the common
-     */
     public final int getCommon() {
         return this.nCommon;
     }
 
     public final Predicate<CardPrinted> getEditionFilter() {
-        return IPaperCard.Predicates.printedInSets(edition);
+        return IPaperCard.Predicates.printedInSets(getEdition());
     }
     public final Predicate<CardPrinted> getLandEditionFilter() {
-        return IPaperCard.Predicates.printedInSets(landEdition);
+        return IPaperCard.Predicates.printedInSets(getLandEdition());
     }
-    /**
-     * Gets the uncommon.
-     * 
-     * @return the uncommon
-     */
+    
     public final int getUncommon() {
         return this.nUncommon;
     }
 
-    /**
-     * Gets the rare.
-     * 
-     * @return the rare
-     */
     public final int getRare() {
         return this.nRare;
     }
 
-    /**
-     * Gets the special.
-     * 
-     * @return the special
-     */
     public final int getSpecial() {
         return this.nSpecial;
     }
 
-    /**
-     * Gets the double faced.
-     * 
-     * @return the double faced
-     */
     public final int getDoubleFaced() {
         return this.nDoubleFaced;
     }
 
-    /**
-     * Gets the land.
-     * 
-     * @return the land
-     */
-    public final int getLand() {
-        return this.nLand;
-    }
-
-    /**
-     * Gets the total.
-     * 
-     * @return the total
-     */
     public final int getTotal() {
-        return this.nCommon + this.nUncommon + this.nRare + this.nSpecial + this.nDoubleFaced + this.nLand;
+        return this.nCommon + this.nUncommon + this.nRare + this.nSpecial + this.nDoubleFaced + getCntLands();
     }
 
-    /**
-     * Gets the foil chance.
-     * 
-     * @return the foil chance
-     */
     public final int getFoilChance() {
         return this.foilRate;
     }
-
-    public static final Function<BoosterData, String> FN_GET_CODE = new Function<BoosterData, String>() {
-
-        @Override
-        public String apply(BoosterData arg1) {
-            return arg1.edition;
+    
+    private void _append(StringBuilder s, int val, String name) {
+        if (0 >= val) {
+            return;
         }
-    };
+        s.append(val).append(' ').append(name);
+        if (1 < val) {
+            s.append('s');
+        }
+        s.append(", ");
+    }
+
+    @Override
+    public String toString() {
+        int total = getTotal();
+        
+        if (0 >= total) {
+            return "no cards";
+        }
+        
+        StringBuilder s = new StringBuilder();
+        
+        _append(s, total, "card");
+        if (0 < total) {
+            // remove comma
+            s.deleteCharAt(s.length() - 2);
+        }
+        
+        s.append("consisting of ");
+        _append(s, nSpecial, "special");
+        _append(s, nDoubleFaced, "double faced card");
+        _append(s, nRare, "rare");
+        _append(s, nUncommon, "uncommon");
+        _append(s, nCommon, "common");
+        if (getEdition().equalsIgnoreCase(getLandEdition())) {
+            _append(s, getCntLands(), "land");
+        } else if (0 < getCntLands()) {
+            s.append(getCntLands()).append("land");
+            if (1 < getCntLands()) {
+                s.append("s");
+            }
+            s.append("from edition: ").append(getLandEdition()).append(", ");
+        }
+        
+        // trim the last comma and space
+        s.replace(s.length() - 2, s.length(), "");
+        
+        // put an 'and' before the previous comma
+        int lastCommaIdx = s.lastIndexOf(","); 
+        if (0 < lastCommaIdx) {
+            s.replace(lastCommaIdx+1, lastCommaIdx+1, " and");
+        }
+        
+        if (0 < foilRate) {
+            s.append(", with a foil rate of 1 in ").append(foilRate);
+        }
+        
+        return s.toString();
+    }
 
     public static final class Reader extends StorageReaderFile<BoosterData> {
-
         public Reader(String pathname) {
             super(pathname, BoosterData.FN_GET_CODE);
         }
 
-        /* (non-Javadoc)
-         * @see forge.util.StorageReaderFile#read(java.lang.String)
-         */
         @Override
         protected BoosterData read(String line, int i) {
             final FileSection section = FileSection.parse(line, ":", "|");
@@ -194,6 +148,7 @@ public class BoosterData {
             if (editionLand == null) {
                 editionLand = edition;
             }
+            
             return new BoosterData(edition, editionLand, nC, nU, nR, nS, nDf, nLand, nFoilRate);
         }
     }

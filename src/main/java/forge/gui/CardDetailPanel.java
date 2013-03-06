@@ -33,6 +33,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.CounterType;
 import forge.GameEntity;
@@ -45,6 +47,7 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
+import forge.item.InventoryItemFromSet;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
@@ -66,18 +69,11 @@ public class CardDetailPanel extends FPanel {
     private final FTextArea cdArea;
     private final FScrollPane scrArea;
 
-    /**
-     * <p>
-     * Constructor for CardDetailPanel.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     */
     public CardDetailPanel(final Card card) {
         super();
         this.setLayout(new GridBagLayout());
         this.setBorder(new EtchedBorder());
+        this.setBorderToggle(false);
 
         GridBagConstraints labelConstrains = new GridBagConstraints();
         labelConstrains.fill = GridBagConstraints.BOTH;
@@ -126,6 +122,9 @@ public class CardDetailPanel extends FPanel {
 
         //4, 12
         this.cdArea = new FTextArea();
+        this.cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
+        this.cdArea.setBorder(new EmptyBorder(4, 4, 4, 4));
+        this.cdArea.setOpaque(false);
         this.scrArea = new FScrollPane(this.cdArea);
 
         GridBagConstraints areaConstraints = new GridBagConstraints();
@@ -135,10 +134,6 @@ public class CardDetailPanel extends FPanel {
         areaConstraints.weightx = 1.0;
         areaConstraints.weighty = 1.0;
         this.add(scrArea, areaConstraints);
-        this.cdArea.setLineWrap(true);
-        this.cdArea.setWrapStyleWord(true);
-        this.cdArea.setEditable(false);
-        this.cdArea.setBorder(new EmptyBorder(4, 4, 4, 4));
 
         this.nameCostLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         this.typeLabel.setFont(new java.awt.Font("Dialog", 0, 14));
@@ -149,15 +144,49 @@ public class CardDetailPanel extends FPanel {
         f = f.deriveFont(java.awt.Font.BOLD);
         this.setInfoLabel.setFont(f);
 
-        this.cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
-
         this.setCard(card);
+    }
+
+    public final void setItem(InventoryItemFromSet item) {
+        nameCostLabel.setText(item.getName());
+        typeLabel.setVisible(false);
+        powerToughnessLabel.setVisible(false);
+        idLabel.setText(null);
+        cdArea.setText(item.getDescription());
+        setBorder(GuiDisplayUtil.getBorder(null));
+
+        String set = item.getEdition();
+        setInfoLabel.setText(set);
+        setInfoLabel.setToolTipText("");
+        if (StringUtils.isEmpty(set)) {
+            setInfoLabel.setOpaque(false);
+            setInfoLabel.setBorder(null);
+        } else {
+            CardEdition edition = Singletons.getModel().getEditions().get(set);
+            if (null != edition) {
+                setInfoLabel.setToolTipText(edition.getName());
+            }
+            
+            this.setInfoLabel.setOpaque(true);
+            this.setInfoLabel.setBackground(Color.BLACK);
+            this.setInfoLabel.setForeground(Color.WHITE);
+            this.setInfoLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        }
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                scrArea.getVerticalScrollBar().setValue(scrArea.getVerticalScrollBar().getMinimum());
+            }
+        });
     }
 
     /** {@inheritDoc} */
     public final void setCard(final Card card) {
         this.nameCostLabel.setText("");
+        this.typeLabel.setVisible(true);
         this.typeLabel.setText("");
+        this.powerToughnessLabel.setVisible(true);
         this.powerToughnessLabel.setText("");
         this.idLabel.setText("");
         this.setInfoLabel.setText("");
@@ -167,8 +196,9 @@ public class CardDetailPanel extends FPanel {
         this.cdArea.setText("");
         this.setBorder(GuiDisplayUtil.getBorder(card));
 
-        if ( null == card )
+        if (null == card) {
             return;
+        }
             
         final boolean canShowThis = card.canBeShownTo(Singletons.getControl().getPlayer());
         if (canShowThis) {

@@ -31,7 +31,9 @@ import forge.Color;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
+import forge.card.ability.AbilityFactory;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -313,6 +315,11 @@ public class CardFactory {
                     card.addStaticAbility(stAbs.get(i));
                 }
             }
+
+            if ( state == CardCharacteristicName.LeftSplit || state == CardCharacteristicName.RightSplit )
+            {
+                card.getState(CardCharacteristicName.Original).getSpellAbility().addAll(card.getCharacteristics().getSpellAbility());
+            }
         }
 
         card.setState(CardCharacteristicName.Original);
@@ -367,9 +374,30 @@ public class CardFactory {
         if (card.isInAlternateState()) {
             card.setState(CardCharacteristicName.Original);
         }
+
         if ( st == CardSplitType.Split ) {
             card.setName(rules.getName());
-            // BUILD COMBINED 'Original' SIDE HERE
+
+            // Combined mana cost
+            ManaCost combinedManaCost = ManaCost.combine(rules.getMainPart().getManaCost(), rules.getOtherPart().getManaCost());
+            card.setManaCost(combinedManaCost);
+
+            // Combined card color
+            CardColor combinedCardColor = new CardColor(card);
+            combinedCardColor.addToCardColor(Color.fromColorSet(rules.getMainPart().getColor()));
+            combinedCardColor.addToCardColor(Color.fromColorSet(rules.getOtherPart().getColor()));
+            ArrayList<CardColor> combinedCardColorArr = new ArrayList<CardColor>();
+            combinedCardColorArr.add(combinedCardColor);
+            card.setColor(combinedCardColorArr);
+
+            // Super and 'middle' types should use enums.
+            List<String> coreTypes = rules.getType().getTypesBeforeDash();
+            coreTypes.addAll(rules.getType().getSubTypes());
+            card.setType(coreTypes);
+
+            // Combined text based on Oracle text - might not be necessary, temporarily disabled.
+            //String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
+            //card.setText(combinedText);
         }
 
         return card;

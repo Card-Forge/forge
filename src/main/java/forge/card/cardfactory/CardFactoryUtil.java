@@ -2796,16 +2796,15 @@ public class CardFactoryUtil {
         // **************************************************
         // AbilityFactory cards
         final ArrayList<String> ia = card.getIntrinsicAbilities();
-        if (ia.size() > 0) {
-            for (int i = 0; i < ia.size(); i++) {
-                // System.out.println(cardName);
-                final SpellAbility sa = AbilityFactory.getAbility(ia.get(i), card);
-                if (sa.hasParam("SetAsKicked")) {
-                    sa.addOptionalAdditionalCosts("Kicker");
-                }
-                card.addSpellAbility(sa);
+        for (int i = 0; i < ia.size(); i++) {
+            // System.out.println(cardName);
+            final SpellAbility sa = AbilityFactory.getAbility(ia.get(i), card);
+            if (sa.hasParam("SetAsKicked")) {
+                sa.addOptionalAdditionalCosts("Kicker");
             }
+            card.addSpellAbility(sa);
         }
+
     }
 
     /**

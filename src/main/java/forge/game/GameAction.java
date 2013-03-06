@@ -33,6 +33,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.CounterType;
 import forge.GameEntity;
+import forge.card.CardSplitType;
 import forge.card.CardType;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cost.Cost;
@@ -339,6 +340,13 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveTo(final Zone zoneTo, Card c) {
+        // if a split card is moved, convert it back to its full form before moving (unless moving to stack)
+        if (c.getRules() != null) {
+            if ((c.getRules().getSplitType() == CardSplitType.Split) && (zoneTo != game.getStackZone())) {
+                c.setState(CardCharacteristicName.Original);
+            }
+        }
+
         return moveTo(zoneTo, c, null);
     }
 
@@ -704,6 +712,7 @@ public class GameAction {
             return c;
         }
         final PlayerZone removed = c.getOwner().getZone(ZoneType.Exile);
+
         return moveTo(removed, c);
     }
 

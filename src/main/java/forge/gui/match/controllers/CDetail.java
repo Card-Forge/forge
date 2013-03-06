@@ -26,6 +26,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VDetail;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.InventoryItemFromSet;
 
 /**
  * 
@@ -38,7 +39,6 @@ public enum CDetail implements ICDoc {
     SINGLETON_INSTANCE;
 
     private VDetail view = VDetail.SINGLETON_INSTANCE;
-    //private InventoryItem item = null;
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
@@ -52,16 +52,15 @@ public enum CDetail implements ICDoc {
     }
 
     public void showCard(InventoryItem item) {
-        if ( item instanceof IPaperCard ) {
+        if (item instanceof IPaperCard) {
             showCard(((IPaperCard)item).getMatchingForgeCard());
-            return;
+        } else if (item instanceof InventoryItemFromSet) {
+            view.getLblFlipcard().setVisible(false);
+            view.getPnlDetail().setItem((InventoryItemFromSet)item);
+            view.getParentCell().repaintSelf();
+        } else {
+            showCard((Card)null);
         }
-        
-        // TODO If we want to display an Items Written Text in the Detail Panel we need to add something into CardDetailPanel
-        //this.item = item;
-        view.getLblFlipcard().setVisible(false);
-        view.getPnlDetail().setCard(null);
-        view.getParentCell().repaintSelf();
     }
 
     /* (non-Javadoc)

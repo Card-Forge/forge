@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.item;
 
+package forge.item;
 
 import com.google.common.base.Function;
 
@@ -25,13 +25,7 @@ import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.CardEdition;
 
-/**
- * TODO Write javadoc for this type.
- * 
- */
 public class BoosterPack extends OpenablePack {
-
-    /** The Constant fnFromSet. */
     public static final Function<CardEdition, BoosterPack> FN_FROM_SET = new Function<CardEdition, BoosterPack>() {
         @Override
         public BoosterPack apply(final CardEdition arg1) {
@@ -40,26 +34,10 @@ public class BoosterPack extends OpenablePack {
         }
     };
 
-    /**
-     * Instantiates a new booster pack.
-     * 
-     * @param set
-     *            the set
-     */
     public BoosterPack(final String name0, final BoosterData boosterData) {
         super(name0, boosterData);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getImageFilename()
-     */
-    /**
-     * Gets the image filename.
-     * 
-     * @return String
-     */
     @Override
     public final String getImageFilename() {
         return ImageCache.SEALED_PRODUCT + "booster/" + this.contents.getEdition() + ".png";
@@ -70,20 +48,8 @@ public class BoosterPack extends OpenablePack {
         return "Booster Pack";
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#clone()
-     */
-    /**
-     * Clone.
-     * 
-     * @return Object
-     */
     @Override
     public final Object clone() {
         return new BoosterPack(name, contents);
     }
-
-
 }
