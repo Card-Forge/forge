@@ -3,7 +3,7 @@ ManaCost:R
 AlternateMode: Split
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | NumDmg$ 2 | SpellDescription$ Dead deals 2 damage to target creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_gone.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deadgone.jpg
 Oracle:Dead deals 2 damage to target creature.
 
 ALTERNATE

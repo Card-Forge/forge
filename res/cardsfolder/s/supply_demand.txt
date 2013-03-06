@@ -4,7 +4,7 @@ AlternateMode: Split
 Types:Sorcery
 A:SP$ Token | Cost$ X W G | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put X 1/1 green Saproling creature tokens onto the battlefield.
 SVar:X:Count$xPaid
-SVar:Picture:http://www.wizards.com/global/images/magic/general/supply_demand.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/supplydemand.jpg
 Oracle:Put X 1/1 green Saproling creature tokens onto the battlefield.
 
 ALTERNATE
