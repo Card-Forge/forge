@@ -67,7 +67,14 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         for (final IPaperCard c : CardDb.instance().getUniqueCards()) {
             //System.out.println(c.getName());
             CardRules cardRules = c.getRules();
-            this.createDLObjects(cardRules.getPictureUrl(), cardRules.getMainPart().getName());
+            String cardName = "";
+            if (cardRules.getSplitType() == CardSplitType.Split) {
+                cardName = String.format("%s%s", cardRules.getMainPart().getName() + cardRules.getOtherPart().getName());
+                System.out.println(cardName);
+            } else {
+                cardName = cardRules.getMainPart().getName(); 
+            }
+            this.createDLObjects(cardRules.getPictureUrl(), cardName);
 
             ICardCharacteristics secondSide = cardRules.getOtherPart();
             if (secondSide != null && cardRules.getSplitType() == CardSplitType.Transform) {
