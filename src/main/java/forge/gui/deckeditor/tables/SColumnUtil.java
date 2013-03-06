@@ -31,6 +31,7 @@ import com.google.common.base.Function;
 
 import forge.Singletons;
 import forge.card.CardAiHints;
+import forge.card.CardRules;
 import forge.card.ColorSet;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
@@ -318,11 +319,14 @@ public final class SColumnUtil {
     private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
 
     private static ManaCost toManaCost(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((IPaperCard) i).getRules().getManaCost() : ManaCost.NO_COST;
+        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getManaCost() : ManaCost.NO_COST;
     }
-
+    private static CardRules toCardRules(final InventoryItem i) {
+        return i instanceof IPaperCard ? ((IPaperCard) i).getRules() : null;
+    }
+    
     private static ColorSet toColor(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((IPaperCard) i).getRules().getColor() : ColorSet.getNullColor();
+        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.getNullColor();
     }
 
     private static int toPower(final InventoryItem i) {
@@ -430,7 +434,7 @@ public final class SColumnUtil {
     private static final Function<Entry<InventoryItem, Integer>, Object> FN_COST_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return SColumnUtil.toManaCost(from.getKey());
+            return SColumnUtil.toCardRules(from.getKey());
         }
     };
 
