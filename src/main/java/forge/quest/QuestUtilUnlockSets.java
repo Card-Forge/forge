@@ -44,6 +44,7 @@ import forge.util.storage.IStorageView;
  *
  */
 public class QuestUtilUnlockSets {
+    private static int UNLOCK_COST = 4000;
 
     /**
      * Consider unlocking a new expansion in limited quest format.
@@ -64,10 +65,10 @@ public class QuestUtilUnlockSets {
         final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<ImmutablePair<CardEdition, Integer>>();
 
         for (CardEdition ed : getUnlockableEditions(qData)) {
-            int price = 7500;
+            int price = UNLOCK_COST;
             if (mapPrices.containsKey(ed.getName() + " Booster Pack")) {
                 price = Math.max(new Double(60 * Math.pow(Math.sqrt(mapPrices.get(ed.getName()
-                        + " Booster Pack")), 1.65)).intValue(), 7500);
+                        + " Booster Pack")), 1.65)).intValue(), UNLOCK_COST);
             }
             setPrices.add(ImmutablePair.of(ed, price));
         }
