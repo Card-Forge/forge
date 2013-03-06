@@ -3,6 +3,8 @@ package forge.card.ability.effects;
 import java.util.List;
 
 import forge.Card;
+import forge.CardLists;
+import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -51,6 +53,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
             for (final Player p : tgts) {
                 List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
                 List<Card> validTargets = AbilityUtils.filterListByType(battlefield, valid, sa);
+                if (!destroy) {
+                    validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa));
+                }
                 
                 if (sa.hasParam("Random")) {
                     choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()));

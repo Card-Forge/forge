@@ -3,6 +3,7 @@ package forge.card.ability.ai;
 import java.util.List;
 import forge.Card;
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
@@ -20,42 +21,8 @@ public class SacrificeAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
-        boolean chance = sacrificeTgtAI(ai, sa);
 
-        // Some additional checks based on what is being sacrificed, and who is
-        // sacrificing
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            final String valid = sa.getParam("SacValid");
-            String num = sa.getParam("Amount");
-            num = (num == null) ? "1" : num;
-            final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), num, sa);
-
-            List<Card> list =
-                    CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-
-            if (list.size() == 0) {
-                return false;
-            }
-
-            final Card source = sa.getSourceCard();
-            if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                final int xPay = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), amount);
-                source.setSVar("PayX", Integer.toString(xPay));
-            }
-
-            final int half = (amount / 2) + (amount % 2); // Half of amount
-                                                          // rounded up
-
-            // If the Human has at least half rounded up of the amount to be
-            // sacrificed, cast the spell
-            if (list.size() < half) {
-                return false;
-            }
-        }
-
-        return chance;
+        return sacrificeTgtAI(ai, sa);
     }
 
     @Override
@@ -82,16 +49,49 @@ public class SacrificeAi extends SpellAbilityAi {
 
     private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa) {
 
-        final Card card = sa.getSourceCard();
+        final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
+        final boolean destroy = sa.hasParam("Destroy");
 
         Player opp = ai.getOpponent();
         if (tgt != null) {
             tgt.resetTargets();
-            if (opp.canBeTargetedBy(sa)) {
-                tgt.addTarget(opp);
-                return true;
+            if (!opp.canBeTargetedBy(sa)) {
+                return false;
+            }
+            tgt.addTarget(opp);
+            final String valid = sa.getParam("SacValid");
+            String num = sa.getParam("Amount");
+            num = (num == null) ? "1" : num;
+            final int amount = AbilityUtils.calculateAmount(sa.getSourceCard(), num, sa);
+
+            List<Card> list =
+                    CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            if (!destroy) {
+                list = CardLists.filter(list, CardPredicates.canBeSacrificedBy(sa));
             } else {
+                if (!CardLists.getKeyword(list, "Indestructible").isEmpty()) {
+                    // human can choose to destroy indestructibles
+                    return false;
+                }
+            }
+
+            if (list.size() == 0) {
+                return false;
+            }
+
+            if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                final int xPay = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), amount);
+                source.setSVar("PayX", Integer.toString(xPay));
+            }
+
+            final int half = (amount / 2) + (amount % 2); // Half of amount
+                                                          // rounded up
+
+            // If the Human has at least half rounded up of the amount to be
+            // sacrificed, cast the spell
+            if (!sa.isTrigger() && list.size() < half) {
                 return false;
             }
         }
@@ -108,9 +108,8 @@ public class SacrificeAi extends SpellAbilityAi {
             // TODO: Cast if the type is favorable: my "worst" valid is
             // worse than his "worst" valid
             final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
-            int amount = AbilityUtils.calculateAmount(card, num, sa);
+            int amount = AbilityUtils.calculateAmount(source, num, sa);
 
-            final Card source = sa.getSourceCard();
             if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 amount = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), amount);
