@@ -672,7 +672,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeCardToHand() {
         final List<Player> players = Singletons.getModel().getGame().getPlayers();
-        final Player p = GuiChoose.oneOrNone("Put card in play for which player?", players);
+        final Player p = GuiChoose.oneOrNone("Put card in hand for which player?", players);
         if (null == p) {
             return;
         }
