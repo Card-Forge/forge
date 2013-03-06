@@ -4,8 +4,6 @@ AlternateMode: Split
 Types:Sorcery
 A:SP$ AnimateAll | Cost$ G | Power$ 1 | Toughness$ 1 | Types$ Creature | ValidCards$ Land.YouCtrl | SpellDescription$ All lands you control become 1/1 creatures until end of turn. They're still lands.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/life_death.jpg
-SetInfo:APC Uncommon
-SetInfo:DDJ Uncommon
 Oracle:All lands you control become 1/1 creatures until end of turn. They're still lands.
 
 ALTERNATE
@@ -17,4 +15,5 @@ A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Battlefield | Va
 SVar:DBLoseLifeYou:DB$ LoseLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Targeted$CardManaCost
 Oracle:Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
-End
+SetInfo:APC Uncommon
+SetInfo:DDJ Uncommon

@@ -4,7 +4,6 @@ AlternateMode: Split
 Types:Sorcery
 A:SP$ Destroy | Cost$ 1 R G | ValidTgts$ Permanent.MultiColor | TgtPrompt$ Select target multicolored permanent | SpellDescription$ Destroy target multicolored permanent.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pure_simple.jpg
-SetInfo:DIS Uncommon
 Oracle:Destroy target multicolored permanent.
 
 ALTERNATE
@@ -14,4 +13,4 @@ ManaCost:1 W G
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 1 W G | ValidCards$ Aura,Equipment | SpellDescription$ Destroy all Auras and Equipment.
 Oracle:Destroy all Auras and Equipment.
-End
+SetInfo:DIS Uncommon

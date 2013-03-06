@@ -4,7 +4,6 @@ AlternateMode: Split
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | NumDmg$ 2 | SpellDescription$ Dead deals 2 damage to target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dead_gone.jpg
-SetInfo:PLC Common
 Oracle:Dead deals 2 damage to target creature.
 
 ALTERNATE
@@ -14,4 +13,4 @@ ManaCost:2 R
 Types:Instant
 A:SP$ ChangeZone | Cost$ 2 R | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you don't control to its owner's hand.
 Oracle:Return target creature you don't control to its owner's hand.
-End
+SetInfo:PLC Common
