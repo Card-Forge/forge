@@ -354,13 +354,14 @@ public class Upkeep extends Phase {
                     final Command paidCommand = Command.BLANK;
 
                     final Ability blankAbility = Upkeep.BlankAbility(c, upkeepCost);
+                    blankAbility.setActivatingPlayer(controller);
 
                     final Ability upkeepAbility = new Ability(c, ManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
                                 GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, blankAbility.getPayCosts(),
-                                        paidCommand, unpaidCommand, null, game);
+                                        paidCommand, unpaidCommand, this, game);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {
                                     ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game);
