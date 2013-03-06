@@ -3,6 +3,7 @@ ManaCost:1 R
 AlternateMode: Split
 Types:Sorcery
 A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.withoutFlying | NumDmg$ 2 | SpellDescription$ Rough deals 2 damage to each creature without flying.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rough_tumble.jpg
 SetInfo:PLC Uncommon
 Oracle:Rough deals 2 damage to each creature without flying.
 
