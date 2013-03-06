@@ -36,10 +36,13 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.CounterType;
 import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
+import forge.card.CardSplitType;
+import forge.card.mana.ManaCost;
 import forge.gui.CardContainer;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;
@@ -351,6 +354,17 @@ public class CardPanel extends JPanel implements CardContainer {
         }
     }
 
+    /**
+     * TODO: Write javadoc for this method.
+     * @param g
+     * @param manaCost 
+     */
+    private void drawManaCost(final Graphics g, ManaCost cost, int deltaY ) {
+        int width = CardFaceSymbols.getWidth(cost);
+        int height = CardFaceSymbols.getHeight();
+        CardFaceSymbols.draw(g, cost, (this.cardXOffset + (this.cardWidth / 2)) - (width / 2), deltaY + this.cardYOffset + (this.cardHeight / 2) - height/2);
+    }
+
     /** {@inheritDoc} */
     @Override
     protected final void paintChildren(final Graphics g) {
@@ -361,10 +375,16 @@ public class CardPanel extends JPanel implements CardContainer {
         }
 
         if (this.showCastingCost) {
-            int width = CardFaceSymbols.getWidth(this.getGameCard().getManaCost());
             if (this.cardWidth < 200) {
-                CardFaceSymbols.draw(g, this.getGameCard().getManaCost(), (this.cardXOffset + (this.cardWidth / 2))
-                        - (width / 2), this.cardYOffset + (this.cardHeight / 2));
+                Card gameCard = this.getGameCard();
+                boolean showSplitMana = gameCard.getRules() != null && gameCard.getRules().getSplitType() == CardSplitType.Split && gameCard.getCurState() == CardCharacteristicName.Original;
+                if ( !showSplitMana ) {
+                    drawManaCost(g, gameCard.getManaCost(), 0);
+                } else {
+                    drawManaCost(g, gameCard.getRules().getMainPart().getManaCost(), +12);
+                    drawManaCost(g, gameCard.getRules().getOtherPart().getManaCost(), -12);
+                }
+                
             }
         }
 
