@@ -1,0 +1,20 @@
+Name:Hide
+ManaCost:W R
+AlternateMode: Split
+Types:Instant
+A:SP$ ChangeZone | Cost$ W R | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target artifact or enchantment on the bottom of its owner's library.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hideseek.jpg
+
+Oracle:Put target artifact or enchantment on the bottom of its owner's library.
+
+ALTERNATE
+
+Name:Seek
+ManaCost:W B
+Types:Instant
+A:SP$ ChangeZone | Cost$ W B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Origin$ Library | DefinedPlayer$ Targeted | Chooser$ You | Destination$ Exile | Changetype$ Card | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBGainLife | SpellDescription$ Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+Oracle:Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.
+SetInfo:DIS Rare

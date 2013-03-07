@@ -4871,6 +4871,7 @@ res/cardsfolder/h/hidden_path.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_predators.txt -text
 res/cardsfolder/h/hidden_spider.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_stag.txt -text svneol=unset#text/plain
+res/cardsfolder/h/hide_seek.txt -text
 res/cardsfolder/h/hideous_end.txt svneol=native#text/plain
 res/cardsfolder/h/hideous_laughter.txt -text
 res/cardsfolder/h/hideous_visage.txt svneol=native#text/plain
@@ -7425,6 +7426,7 @@ res/cardsfolder/o/orcish_spy.txt svneol=native#text/plain
 res/cardsfolder/o/orcish_squatters.txt -text svneol=unset#text/plain
 res/cardsfolder/o/orcish_squatters_avatar.txt -text
 res/cardsfolder/o/orcish_veteran.txt svneol=native#text/plain
+res/cardsfolder/o/order_chaos.txt -text
 res/cardsfolder/o/order_of_leitbur.txt svneol=native#text/plain
 res/cardsfolder/o/order_of_the_ebon_hand.txt svneol=native#text/plain
 res/cardsfolder/o/order_of_the_golden_cricket.txt svneol=native#text/plain
@@ -7519,6 +7521,7 @@ res/cardsfolder/p/pact_of_negation.txt svneol=native#text/plain
 res/cardsfolder/p/pact_of_the_titan.txt svneol=native#text/plain
 res/cardsfolder/p/pain_kami.txt svneol=native#text/plain
 res/cardsfolder/p/pain_magnification.txt svneol=native#text/plain
+res/cardsfolder/p/pain_suffering.txt -text
 res/cardsfolder/p/painbringer.txt -text svneol=unset#text/plain
 res/cardsfolder/p/painful_memories.txt svneol=native#text/plain
 res/cardsfolder/p/painful_quandary.txt -text
@@ -10071,6 +10074,7 @@ res/cardsfolder/s/spiritual_guardian.txt svneol=native#text/plain
 res/cardsfolder/s/spiritual_sanctuary.txt svneol=native#text/plain
 res/cardsfolder/s/spiritual_visit.txt -text
 res/cardsfolder/s/spiritualize.txt -text svneol=unset#text/plain
+res/cardsfolder/s/spite_malice.txt -text
 res/cardsfolder/s/spitebellows.txt svneol=native#text/plain
 res/cardsfolder/s/spiteflame_witch.txt svneol=native#text/plain
 res/cardsfolder/s/spiteful_bully.txt svneol=native#text/plain
@@ -10173,6 +10177,7 @@ res/cardsfolder/s/stampede_driver.txt svneol=native#text/plain
 res/cardsfolder/s/stampeding_rhino.txt svneol=native#text/plain
 res/cardsfolder/s/stampeding_serow.txt svneol=native#text/plain
 res/cardsfolder/s/stampeding_wildebeests.txt svneol=native#text/plain
+res/cardsfolder/s/stand_deliver.txt -text
 res/cardsfolder/s/stand_firm.txt svneol=native#text/plain
 res/cardsfolder/s/stand_together.txt -text
 res/cardsfolder/s/standardize.txt -text svneol=unset#text/plain

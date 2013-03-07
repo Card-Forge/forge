@@ -4,8 +4,6 @@ AlternateMode: Split
 Types:Instant
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wax_wane.jpg
-SetInfo:ARC Uncommon
-SetInfo:INV Uncommon
 Oracle:Target creature gets +2/+2 until end of turn.
 
 ALTERNATE
@@ -15,4 +13,5 @@ ManaCost:W
 Types:Instant
 A:SP$ Destroy | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 Oracle:Destroy target enchantment.
-End
+SetInfo:ARC Uncommon
+SetInfo:INV Uncommon

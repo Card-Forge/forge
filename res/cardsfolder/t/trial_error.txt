@@ -6,7 +6,6 @@ A:SP$ ChangeZoneAll | Cost$ W U | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trialerror.jpg
-SetInfo:DIS Uncommon
 Oracle:Return all creatures blocking or blocked by target creature to their owner's hand.
 
 ALTERNATE
@@ -16,4 +15,4 @@ ManaCost:U B
 Types:Instant
 A:SP$ Counter | Cost$ U B | TargetType$ Spell | TgtPrompt$ Select target multicolored spell | ValidTgts$ Card.MultiColor | SpellDescription$ Counter target multicolored spell.
 Oracle:Counter target multicolored spell.
-End
+SetInfo:DIS Uncommon
