@@ -3242,6 +3242,20 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         game.getStack().add(miracleTrigger);
     }
 
+    public boolean isSkippingDraw() {
+    
+        if (hasKeyword("Skip your next draw step.")) {
+            removeKeyword("Skip your next draw step.");
+            return true;
+        }
+    
+        if (hasKeyword("Skip your draw step.")) {
+            return true;
+        }
+    
+        return false;
+    }
+
     /** 
      * TODO: Write javadoc for this type.
      *

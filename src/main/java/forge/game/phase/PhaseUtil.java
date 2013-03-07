@@ -114,28 +114,7 @@ public class PhaseUtil {
         game.getPhaseHandler().setPlayersPriorityPermission(false);
     }
 
-    /**
-     * <p>
-     * skipDraw.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public static boolean skipDraw(final Player player) {
-
-        if (player.hasKeyword("Skip your next draw step.")) {
-            player.removeKeyword("Skip your next draw step.");
-            return true;
-        }
-
-        if (player.hasKeyword("Skip your draw step.")) {
-            return true;
-        }
-
-        return false;
-    }
+    
 
     // ********* Declare Attackers ***********
 
