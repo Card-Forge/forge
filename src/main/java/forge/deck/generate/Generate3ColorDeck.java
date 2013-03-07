@@ -77,7 +77,7 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
      *            the pt
      * @return a {@link forge.CardList} object.
      */
-    public final ItemPoolView<CardPrinted> get3ColorDeck(final int size, final PlayerType pt) {
+    public final ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
         addCreaturesAndSpells(size, cmcLevels, cmcAmounts, pt);
 
         // Add lands

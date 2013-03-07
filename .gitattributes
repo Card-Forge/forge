@@ -14125,6 +14125,7 @@ src/main/java/forge/deck/generate/Generate3ColorDeck.java svneol=native#text/pla
 src/main/java/forge/deck/generate/Generate5ColorDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/GenerateColoredDeckBase.java -text
 src/main/java/forge/deck/generate/GenerateDeckUtil.java -text
+src/main/java/forge/deck/generate/GenerateMonoColorDeck.java -text
 src/main/java/forge/deck/generate/GenerateThemeDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/package-info.java svneol=native#text/plain
 src/main/java/forge/deck/io/DeckFileHeader.java -text

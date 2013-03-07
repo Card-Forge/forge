@@ -18,6 +18,8 @@ import forge.Singletons;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
+import forge.deck.generate.GenerateColoredDeckBase;
+import forge.deck.generate.GenerateMonoColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.player.PlayerType;
 import forge.item.CardDb;
@@ -66,7 +68,7 @@ public class DeckgenUtil {
      * @return {@link forge.deck.Deck}
      */
     public static Deck buildColorDeck(final String[] selection, PlayerType pt) {
-        ItemPoolView<CardPrinted> cards = null;
+        
         final Deck deck;
 
         // Replace "random" with "AI" for deck generation code
@@ -74,22 +76,20 @@ public class DeckgenUtil {
             selection[i] = COLOR_VALS.get(selection[i]);
         }
 
-        // 2, 3, and 5 colors.
-        if (selection.length == 2) {
-            final Generate2ColorDeck gen = new Generate2ColorDeck(
-                    selection[0], selection[1]);
-            cards = gen.get2ColorDeck(60, pt);
+        GenerateColoredDeckBase gen = null;
+        
+        if (selection.length == 1) {
+            gen = new GenerateMonoColorDeck(selection[0]);
+        } else if (selection.length == 2) {
+            gen = new Generate2ColorDeck(selection[0], selection[1]);
+        } else if (selection.length == 3) {
+            gen = new Generate3ColorDeck(selection[0], selection[1], selection[2]);
+        } else {
+            gen = new Generate5ColorDeck();
         }
-        else if (selection.length == 3) {
-            final Generate3ColorDeck gen = new Generate3ColorDeck(
-                    selection[0], selection[1], selection[2]);
-            cards = gen.get3ColorDeck(60, pt);
-        }
-        else {
-            final Generate5ColorDeck gen = new Generate5ColorDeck();
-            cards = gen.get5ColorDeck(60, pt);
-        }
-
+        
+        ItemPoolView<CardPrinted> cards = gen == null ? null : gen.getDeck(60, pt);
+        
         // After generating card lists, build deck.
         deck = new Deck();
         deck.getMain().addAll(cards);
@@ -131,8 +131,8 @@ public class DeckgenUtil {
 
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomColorDeck(PlayerType pt) {
-        final int[] colorCount = new int[] {2, 3, 5};
-        final int count = colorCount[(int) (Math.round(Math.random() * 2))];
+        final int[] colorCount = new int[] {1, 2, 3, 5};
+        final int count = colorCount[MyRandom.getRandom().nextInt(colorCount.length)];
         final String[] selection = new String[count];
 
         // A simulated selection of "random 1" will trigger the AI selection process.
@@ -287,14 +287,7 @@ public class DeckgenUtil {
     public static boolean colorCheck(final String[] colors0) {
         boolean result = true;
 
-        if (colors0.length == 1) {
-            JOptionPane.showMessageDialog(null,
-                    "Sorry, single color generated decks aren't supported yet."
-                    + "\n\rPlease choose at least one more color for this deck.",
-                    "Generate deck: 1 color", JOptionPane.ERROR_MESSAGE);
-            result = false;
-        }
-        else if (colors0.length == 4) {
+        if (colors0.length == 4) {
             JOptionPane.showMessageDialog(null,
                     "Sorry, four color generated decks aren't supported yet."
                     + "\n\rPlease use 2, 3, or 5 colors for this deck.",
