@@ -146,6 +146,7 @@ http://www.cardforge.org/fpics/questAvatars/Princess%20Selenia.jpg
 http://www.cardforge.org/fpics/questAvatars/Private%20Domain.jpg
 http://www.cardforge.org/fpics/questAvatars/Professor%20X.jpg
 http://www.cardforge.org/fpics/questAvatars/Quest%20for%20Ulas%20Temple.jpg
+http://www.cardforge.org/fpics/questAvatars/Quicksilver.jpg
 http://www.cardforge.org/fpics/questAvatars/R2-D2.jpg
 http://www.cardforge.org/fpics/questAvatars/Radagast.jpg
 http://www.cardforge.org/fpics/questAvatars/Radiant.jpg
