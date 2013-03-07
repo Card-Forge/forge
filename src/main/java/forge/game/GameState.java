@@ -666,4 +666,8 @@ public class GameState {
         // TODO Auto-generated method stub
         return actionPlay;
     }
+
+    public boolean mulliganned = false;
+    public boolean hasMulliganned(){ return mulliganned; }
+    public void setMulliganComplete() { mulliganned = true; }
 }

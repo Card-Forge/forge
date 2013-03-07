@@ -23,16 +23,12 @@ import forge.CardUtil;
 import forge.Singletons;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.control.input.Input;
-import forge.control.input.InputControl;
-import forge.control.input.InputMulligan;
 import forge.deck.Deck;
 import forge.deck.CardPool;
 import forge.deck.DeckSection;
 import forge.error.BugReporter;
 import forge.game.event.FlipCoinEvent;
 import forge.game.phase.PhaseHandler;
-import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
@@ -389,18 +385,7 @@ public class GameNew {
             p.drawCards(p.getMaxHandSize());
         }
 
-        
-        
-        game.getPhaseHandler().setPhaseState(PhaseType.MULLIGAN);
-
-        InputControl control = match.getInput();
-        Input tmp = new InputMulligan();
-        control.setInput(tmp);
-        
-        
         Thread thGame = new GameInputUpdatesThread(match, game);
-        
-        match.getInput().getInput().showMessage();
         thGame.setName("Game input updater");
         thGame.start();
     } // newGame()

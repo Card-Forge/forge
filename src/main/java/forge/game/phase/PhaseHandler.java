@@ -52,7 +52,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=5207222278370963197L</code>. */
     private static final long serialVersionUID = 5207222278370963197L;
 
-    private PhaseType phase = PhaseType.MULLIGAN;
+    private PhaseType phase = PhaseType.UNTAP;
     private int turn = 0;
     // Start turn at 0, so first untap step will turn it to 1
 
