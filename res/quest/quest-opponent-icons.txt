@@ -27,6 +27,7 @@ http://www.cardforge.org/fpics/questAvatars/Buffy.jpg
 http://www.cardforge.org/fpics/questAvatars/Bushwhacked.jpg
 http://www.cardforge.org/fpics/questAvatars/C3PO.jpg
 http://www.cardforge.org/fpics/questAvatars/Cable.jpg
+http://www.cardforge.org/fpics/questAvatars/Carnage.jpg
 http://www.cardforge.org/fpics/questAvatars/Captain%20America.jpg
 http://www.cardforge.org/fpics/questAvatars/Catwoman.jpg
 http://www.cardforge.org/fpics/questAvatars/Chief_Wiggum.jpg
