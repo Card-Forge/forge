@@ -49,7 +49,6 @@ import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
-import forge.game.ai.ComputerUtilBlock;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.player.AIPlayer;
@@ -58,7 +57,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.GuiUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.views.VCombat;
@@ -432,21 +430,8 @@ public class CombatUtil {
             if (blockers.size() <= 1) {
                 continue;
             }
-
-            List<Card> orderedBlockers = null;
-            if (player.isHuman()) {
-                GuiUtils.setPanelSelection(attacker);
-                List<Card> ordered = GuiChoose.order("Choose Blocking Order", "Damaged First", 0, blockers, null, attacker);
-
-                orderedBlockers = new ArrayList<Card>();
-                for (Object o : ordered) {
-                    orderedBlockers.add((Card) o);
-                }
-            }
-            else {
-                orderedBlockers = ComputerUtilBlock.orderBlockers(attacker, blockers);
-            }
-            combat.setBlockerList(attacker,  orderedBlockers);
+            List<Card> orderedBlockers = player.getController().orderBlockers(attacker, blockers);
+            combat.setBlockerList(attacker, orderedBlockers);
         }
         CombatUtil.showCombat();
         // Refresh Combat Panel
@@ -460,19 +445,7 @@ public class CombatUtil {
                 continue;
             }
 
-            List<Card> orderedAttacker = null;
-            if (blocker.getController().isHuman()) {
-                GuiUtils.setPanelSelection(blocker);
-                List<Card> ordered = GuiChoose.order("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
-
-                orderedAttacker = new ArrayList<Card>();
-                for (Object o : ordered) {
-                    orderedAttacker.add((Card) o);
-                }
-            }
-            else {
-                orderedAttacker = ComputerUtilBlock.orderAttackers(blocker, attackers);
-            }
+            List<Card> orderedAttacker = blocker.getController().getController().orderAttackers(blocker, attackers);
             combat.setAttackersBlockedByList(blocker,  orderedAttacker);
         }
         CombatUtil.showCombat();
