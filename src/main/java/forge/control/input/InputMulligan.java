@@ -186,7 +186,7 @@ public class InputMulligan extends Input {
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
         SDisplayUtil.showTab(nextField);
 
-        game.setMulliganComplete();
+        game.setMulliganned(true);
         Singletons.getModel().getMatch().getInput().clearInput();
         Singletons.getModel().getMatch().getInput().resetInput();
     }

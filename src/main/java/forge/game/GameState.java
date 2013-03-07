@@ -669,5 +669,5 @@ public class GameState {
 
     public boolean mulliganned = false;
     public boolean hasMulliganned(){ return mulliganned; }
-    public void setMulliganComplete() { mulliganned = true; }
+    public void setMulliganned(boolean value) { mulliganned = value; }
 }

@@ -191,8 +191,6 @@ public class GameNew {
                 removedAnteCards.put(player, myRemovedAnteCards);
         }
 
-
-
         if (rAICards.size() > 0) {
             String message = buildFourColumnList("AI deck contains the following cards that it can't play or may be buggy:", rAICards);
             if (GameType.Quest == game.getType()) {
@@ -211,7 +209,116 @@ public class GameNew {
             JOptionPane.showMessageDialog(null, ante.toString(), "", JOptionPane.INFORMATION_MESSAGE);
         }
 
-        GameNew.actuateGame(match, game, false);
+        // Deciding which cards go to ante
+        if (preferences.getPrefBoolean(FPref.UI_ANTE)) {
+            final String nl = System.getProperty("line.separator");
+            final StringBuilder msg = new StringBuilder();
+            for (final Player p : game.getPlayers()) {
+
+                final List<Card> lib = p.getCardsIn(ZoneType.Library);
+                Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
+                Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
+                if (ante == null) {
+                    throw new RuntimeException(p + " library is empty.");
+                }
+                game.getGameLog().add("Ante", p + " anted " + ante, 0);
+                VAntes.SINGLETON_INSTANCE.addAnteCard(p, ante);
+                game.getAction().moveTo(ZoneType.Ante, ante);
+                msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
+            }
+            JOptionPane.showMessageDialog(null, msg, "Ante", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        determineFirstTurnPlayer(match.getLastGameOutcome(), game);
+        
+        // Draw <handsize> cards
+        for (final Player p1 : game.getPlayers()) {
+            p1.drawCards(p1.getMaxHandSize());
+        }
+        
+        Thread thGame = new GameInputUpdatesThread(match, game);
+        thGame.setName("Game input updater");
+        thGame.start();
+    }
+
+    // ultimate of Karn the Liberated
+    public static void restartGame(final MatchController match, final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
+    
+        Map<LobbyPlayer, PlayerStartConditions> players = match.getPlayers();
+        Map<Player, PlayerStartConditions> playersConditions = new HashMap<Player, PlayerStartConditions>();
+    
+        for (Player p : game.getPlayers()) {
+            playersConditions.put(p, players.get(p.getLobbyPlayer()));
+        }
+    
+        game.setMulliganned(false);
+        match.getInput().clearInput();
+    
+        //Card.resetUniqueNumber();
+        // need this code here, otherwise observables fail
+        forge.card.trigger.Trigger.resetIDs();
+        TriggerHandler trigHandler = game.getTriggerHandler();
+        trigHandler.clearTriggerSettings();
+        trigHandler.clearDelayedTrigger();
+        trigHandler.cleanUpTemporaryTriggers();
+        trigHandler.suppressMode(TriggerType.ChangesZone);
+    
+        game.getStack().reset();
+        GameAction action = game.getAction();
+    
+    
+        for (Entry<Player, PlayerStartConditions> p : playersConditions.entrySet()) {
+            final Player player = p.getKey();
+            player.setStartingLife(p.getValue().getStartingLife());
+            player.setNumLandsPlayed(0);
+            putCardsOnBattlefield(player, p.getValue().getCardsOnBattlefield(player));
+    
+            PlayerZone library = player.getZone(ZoneType.Library);
+            List<Card> newLibrary = playerLibraries.get(player);
+            for (Card c : newLibrary) {
+                action.moveTo(library, c);
+            }
+    
+            player.shuffle();
+            player.getZone(ZoneType.Battlefield).updateObservers();
+            player.updateObservers();
+            player.getZone(ZoneType.Hand).updateObservers();
+        }
+    
+        trigHandler.clearSuppression(TriggerType.ChangesZone);
+    
+        PhaseHandler phaseHandler = game.getPhaseHandler();
+        phaseHandler.setPlayerTurn(startingTurn);
+    
+        // Draw <handsize> cards
+        for (final Player p : game.getPlayers()) {
+            p.drawCards(p.getMaxHandSize());
+        }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param match
+     * @param game
+     */
+    private static void determineFirstTurnPlayer(final GameOutcome lastGameOutcome, final GameState game) {
+        // Only cut/coin toss if it's the first game of the match
+        Player goesFirst;
+        Player humanPlayer = Singletons.getControl().getPlayer();
+        boolean isFirstGame = lastGameOutcome == null;
+        if (isFirstGame) {
+            goesFirst = GameNew.seeWhoPlaysFirstDice(game);
+        } else {
+            
+            goesFirst = lastGameOutcome.isWinner(humanPlayer.getLobbyPlayer()) ? humanPlayer.getOpponent() : humanPlayer;
+        }
+        String message = goesFirst + ( isFirstGame ? " has won the coin toss." : " lost the last game.");
+        boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
+        if ( goesFirst != humanPlayer ) {
+            JOptionPane.showMessageDialog(null, message + "\nComputer Going First", "You are drawing", JOptionPane.INFORMATION_MESSAGE);
+        }
+        goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
+        game.getPhaseHandler().setPlayerTurn(goesFirst);
     }
 
     private static void initVariantsZones(final Player player, final PlayerStartConditions psc) {
@@ -278,117 +385,6 @@ public class GameNew {
         }
     
     }
-
-    // ultimate of Karn the Liberated
-    public static void restartGame(final MatchController match, final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
-
-        Map<LobbyPlayer, PlayerStartConditions> players = match.getPlayers();
-        Map<Player, PlayerStartConditions> playersConditions = new HashMap<Player, PlayerStartConditions>();
-
-        for (Player p : game.getPlayers()) {
-            playersConditions.put(p, players.get(p.getLobbyPlayer()));
-        }
-
-        match.getInput().clearInput();
-
-        //Card.resetUniqueNumber();
-        // need this code here, otherwise observables fail
-        forge.card.trigger.Trigger.resetIDs();
-        TriggerHandler trigHandler = game.getTriggerHandler();
-        trigHandler.clearTriggerSettings();
-        trigHandler.clearDelayedTrigger();
-        trigHandler.cleanUpTemporaryTriggers();
-        trigHandler.suppressMode(TriggerType.ChangesZone);
-
-        game.getStack().reset();
-        GameAction action = game.getAction();
-
-
-        for (Entry<Player, PlayerStartConditions> p : playersConditions.entrySet()) {
-            final Player player = p.getKey();
-            player.setStartingLife(p.getValue().getStartingLife());
-            player.setNumLandsPlayed(0);
-            putCardsOnBattlefield(player, p.getValue().getCardsOnBattlefield(player));
-
-            PlayerZone library = player.getZone(ZoneType.Library);
-            List<Card> newLibrary = playerLibraries.get(player);
-            for (Card c : newLibrary) {
-                action.moveTo(library, c);
-            }
-
-            player.shuffle();
-            player.getZone(ZoneType.Battlefield).updateObservers();
-            player.updateObservers();
-            player.getZone(ZoneType.Hand).updateObservers();
-        }
-
-        trigHandler.clearSuppression(TriggerType.ChangesZone);
-
-        PhaseHandler phaseHandler = game.getPhaseHandler();
-        phaseHandler.setPlayerTurn(startingTurn);
-
-        GameNew.actuateGame(match, game, true);
-    }
-
-    /**
-     * This must be separated from the newGame method since life totals and
-     * player details could be adjusted before the game is started.
-     * 
-     * That process (also cleanup and observer updates) should be done in
-     * newGame, then when all is ready, call this function.
-     * @param isRestartedGame Whether the actuated game is the first start or a restart
-     */
-    private static void actuateGame(final MatchController match, final GameState game, boolean isRestartedGame) {
-        if (!isRestartedGame) {
-            // Deciding which cards go to ante
-            if (preferences.getPrefBoolean(FPref.UI_ANTE)) {
-                final String nl = System.getProperty("line.separator");
-                final StringBuilder msg = new StringBuilder();
-                for (final Player p : game.getPlayers()) {
-
-                    final List<Card> lib = p.getCardsIn(ZoneType.Library);
-                    Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
-                    Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
-                    if (ante == null) {
-                        throw new RuntimeException(p + " library is empty.");
-                    }
-                    game.getGameLog().add("Ante", p + " anted " + ante, 0);
-                    VAntes.SINGLETON_INSTANCE.addAnteCard(p, ante);
-                    game.getAction().moveTo(ZoneType.Ante, ante);
-                    msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
-                }
-                JOptionPane.showMessageDialog(null, msg, "Ante", JOptionPane.INFORMATION_MESSAGE);
-            }
-
-            GameOutcome lastGameOutcome = match.getLastGameOutcome();
-            // Only cut/coin toss if it's the first game of the match
-            Player goesFirst;
-            Player humanPlayer = Singletons.getControl().getPlayer();
-            boolean isFirstGame = lastGameOutcome == null;
-            if (isFirstGame) {
-                goesFirst = GameNew.seeWhoPlaysFirstDice(game);
-            } else {
-                
-                goesFirst = lastGameOutcome.isWinner(humanPlayer.getLobbyPlayer()) ? humanPlayer.getOpponent() : humanPlayer;
-            }
-            String message = goesFirst + ( isFirstGame ? " has won the coin toss." : " lost the last game.");
-            boolean willPlay = goesFirst.getController().getWillPlayOnFirstTurn(message);
-            if ( goesFirst != humanPlayer ) {
-                JOptionPane.showMessageDialog(null, message + "\nComputer Going First", "You are drawing", JOptionPane.INFORMATION_MESSAGE);
-            }
-            goesFirst = willPlay ? goesFirst : goesFirst.getOpponent();
-            game.getPhaseHandler().setPlayerTurn(goesFirst);
-        }
-
-        // Draw <handsize> cards
-        for (final Player p : game.getPlayers()) {
-            p.drawCards(p.getMaxHandSize());
-        }
-
-        Thread thGame = new GameInputUpdatesThread(match, game);
-        thGame.setName("Game input updater");
-        thGame.start();
-    } // newGame()
 
     private static String buildFourColumnList(String firstLine, Iterable<CardPrinted> cAnteRemoved) {
         StringBuilder sb = new StringBuilder(firstLine);
