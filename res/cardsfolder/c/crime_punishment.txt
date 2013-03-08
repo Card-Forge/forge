@@ -1,0 +1,17 @@
+Name:Crime
+ManaCost:3 W B
+AlternateMode: Split
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 3 W B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature or enchantment in an opponent's graveyard | ValidTgts$ Creature.OppCtrl,Enchantment.OppCtrl | SpellDescription$ Put target creature or enchantment card from an opponent's graveyard onto the battlefield under your control.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crimepunishment.jpg
+Oracle:Put target creature or enchantment card from an opponent's graveyard onto the battlefield under your control.
+
+ALTERNATE
+
+Name:Punishment
+ManaCost:X B G
+Types:Sorcery
+A:SP$ DestroyAll | Cost$ X B G | ValidCards$ Artifact.cmcEQX,Creature.cmcEQX,Enchantment.cmcEQX | References$ X | SpellDescription$ Destroy each artifact, creature, and enchantment with converted mana cost X.
+SVar:X:Count$xPaid
+Oracle:Destroy each artifact, creature, and enchantment with converted mana cost X.
+SetInfo:DIS Rare

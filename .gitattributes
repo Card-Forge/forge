@@ -1181,6 +1181,7 @@ res/cardsfolder/b/bonfire_of_the_damned.txt -text
 res/cardsfolder/b/booby_trap.txt -text
 res/cardsfolder/b/book_burning.txt -text
 res/cardsfolder/b/book_of_rass.txt svneol=native#text/plain
+res/cardsfolder/b/boom_bust.txt -text
 res/cardsfolder/b/boomerang.txt svneol=native#text/plain
 res/cardsfolder/b/boon_reflection.txt svneol=native#text/plain
 res/cardsfolder/b/borborygmos.txt svneol=native#text/plain
@@ -2098,6 +2099,7 @@ res/cardsfolder/c/crescendo_of_war.txt -text
 res/cardsfolder/c/crested_craghorn.txt -text
 res/cardsfolder/c/crevasse.txt svneol=native#text/plain
 res/cardsfolder/c/crib_swap.txt svneol=native#text/plain
+res/cardsfolder/c/crime_punishment.txt -text
 res/cardsfolder/c/crimson_acolyte.txt svneol=native#text/plain
 res/cardsfolder/c/crimson_hellkite.txt -text
 res/cardsfolder/c/crimson_kobolds.txt svneol=native#text/plain
