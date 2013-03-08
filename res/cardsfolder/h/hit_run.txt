@@ -1,0 +1,21 @@
+Name:Hit
+ManaCost:1 B R
+AlternateMode: Split
+Types:Instant
+A:SP$ Sacrifice | Cost$ 1 B R | ValidTgts$ Player | SacValid$ Creature,Artifact | SacMessage$ Creature or Artifact | RememberSacrificed$ True | SubAbility$ DBDmg | SpellDescription$ Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's converted mana cost.
+SVar:DBDmg:DB$ DealDamage | NumDmg$ X | References$ X | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hitrun.jpg
+Oracle:Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's converted mana cost.
+
+ALTERNATE
+
+Name:Run
+ManaCost:3 R G
+Types:Instant
+A:SP$ PumpAll | Cost$ 3 R G | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +Y | References$ Y | SpellDescription$ Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.
+SVar:Y:Count$Valid Creature.attacking/Minus.1
+Oracle:Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.
+
+SetInfo:DIS Uncommon
