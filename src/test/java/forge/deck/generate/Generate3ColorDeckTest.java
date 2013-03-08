@@ -18,7 +18,7 @@ public class Generate3ColorDeckTest {
     @Test(timeOut = 1000, enabled = false)
     public void generate3ColorDeckTest1() {
         final Generate3ColorDeck gen = new Generate3ColorDeck("white", "blue", "black");
-        final ItemPoolView<CardPrinted> cardList = gen.get3ColorDeck(60, null);
+        final ItemPoolView<CardPrinted> cardList = gen.getDeck(60, null);
         Assert.assertNotNull(cardList);
     }
 }

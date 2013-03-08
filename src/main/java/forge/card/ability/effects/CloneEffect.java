@@ -12,6 +12,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
+import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -122,7 +123,7 @@ public class CloneEffect extends SpellAbilityEffect {
             stateToCopy = cardToCopy.getCurState();
         }
 
-        CardFactoryUtil.copyState(cardToCopy, stateToCopy, tgtCard);
+        CardFactory.copyState(cardToCopy, stateToCopy, tgtCard);
         // must call this before addAbilityFactoryAbilities so cloned added abilities are handled correctly
         addExtraCharacteristics(tgtCard, sa, origSVars);
         CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
@@ -140,7 +141,7 @@ public class CloneEffect extends SpellAbilityEffect {
                 tgtCard.addAlternateState(CardCharacteristicName.Flipped);
                 tgtCard.setState(CardCharacteristicName.Flipped);
             }
-            CardFactoryUtil.copyState(cardToCopy, CardCharacteristicName.Flipped, tgtCard);
+            CardFactory.copyState(cardToCopy, CardCharacteristicName.Flipped, tgtCard);
             addExtraCharacteristics(tgtCard, sa, origSVars);
             CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
             for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {

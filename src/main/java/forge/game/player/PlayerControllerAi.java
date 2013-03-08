@@ -15,6 +15,7 @@ import forge.game.ai.AiController;
 import forge.game.ai.AiInputBlock;
 import forge.game.ai.AiInputCommon;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilBlock;
 import forge.game.ai.ComputerUtilCombat;
 import forge.gui.GuiChoose;
 
@@ -206,6 +207,16 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
         return brains.confirmStaticApplication(hostCard, affected, logic, message);
+    }
+
+    @Override
+    public List<Card> orderBlockers(Card attacker, List<Card> blockers) {
+        return ComputerUtilBlock.orderBlockers(attacker, blockers);
+    }
+
+    @Override
+    public List<Card> orderAttackers(Card blocker, List<Card> attackers) {
+        return ComputerUtilBlock.orderAttackers(blocker, attackers);
     }
 
 }

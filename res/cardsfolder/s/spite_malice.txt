@@ -1,0 +1,17 @@
+Name:Spite
+ManaCost:3 U
+AlternateMode: Split
+Types:Instant
+A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | TgtPrompt$ Select target nonCreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spite_malice.jpg
+Oracle:Counter target noncreature spell.
+
+ALTERNATE
+
+Name:Malice
+ManaCost:3 B
+Types:Instant
+A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
+Oracle:Destroy target nonblack creature. It can't be regenerated.
+SetInfo:DDH Uncommon
+SetInfo:INV Uncommon

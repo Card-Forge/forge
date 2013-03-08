@@ -40,6 +40,7 @@ import forge.game.player.PlayerType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
+import forge.item.ItemPoolView;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -88,6 +89,9 @@ public abstract class GenerateColoredDeckBase {
         addCmcAdjusted(spells, spellCnt, cmcLevels, cmcAmounts);
     }
 
+    public ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
+        return null; // all but theme deck do override this method
+    }
 
     protected void addSome(int cnt, List<CardPrinted> source) {
         for (int i = 0; i < cnt; i++) {

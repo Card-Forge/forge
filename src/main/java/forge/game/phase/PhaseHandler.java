@@ -52,9 +52,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=5207222278370963197L</code>. */
     private static final long serialVersionUID = 5207222278370963197L;
 
-    private PhaseType phase = PhaseType.MULLIGAN;
-    private int turn = 0;
-    // Start turn at 0, so first untap step will turn it to 1
+    private PhaseType phase = PhaseType.UNTAP;
+    private int turn = 1;
+    // Start turn at 1, since first untap is where we start
 
     private final transient Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
     private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = new HashMap<PhaseType, Stack<PhaseType>>();
@@ -262,7 +262,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 break;
 
             case DRAW:
-                if (getTurn() == 1 || PhaseUtil.skipDraw(this.getPlayerTurn())) {
+                if (getTurn() == 1 || this.getPlayerTurn().isSkippingDraw()) {
                     this.setPlayersPriorityPermission(false);
                 } else {
                     this.getPlayerTurn().drawCards(1, true);

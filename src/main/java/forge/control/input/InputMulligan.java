@@ -174,7 +174,6 @@ public class InputMulligan extends Input {
         }
 
         ga.checkStateEffects();
-        Singletons.getModel().getMatch().getInput().clearInput();
         
         Player next = game.getPhaseHandler().getPlayerTurn();
         
@@ -187,7 +186,9 @@ public class InputMulligan extends Input {
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
         SDisplayUtil.showTab(nextField);
 
-        game.getPhaseHandler().nextPhase();
+        game.setMulliganned(true);
+        Singletons.getModel().getMatch().getInput().clearInput();
+        Singletons.getModel().getMatch().getInput().resetInput();
     }
 
     @Override

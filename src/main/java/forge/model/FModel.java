@@ -32,8 +32,9 @@ import forge.card.CardBlock;
 import forge.card.EditionCollection;
 import forge.card.FatPackData;
 import forge.card.FormatCollection;
-import forge.card.cardfactory.CardFactory;
+import forge.card.cardfactory.CardStorageReader;
 import forge.deck.CardCollections;
+import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -41,8 +42,11 @@ import forge.game.MatchController;
 import forge.game.limited.GauntletMini;
 import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
+import forge.gui.GuiUtils;
+import forge.item.CardDb;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
@@ -74,7 +78,6 @@ public enum FModel {
     private GauntletData gauntletData;
     private GauntletMini gauntlet;
 
-    private final CardFactory cardFactory;
     private final QuestController quest;
     private final CardCollections decks;
 
@@ -144,7 +147,16 @@ public enum FModel {
         this.loadDynamicGamedata();
 
         // Loads all cards (using progress bar).
-        this.cardFactory = new CardFactory();
+        GuiUtils.checkEDT("CardFactory$constructor", false);
+        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR.defaultLoc, true);
+        try {
+            // this fills in our map of card names to Card instances.
+            CardDb.setup(reader.loadCards());
+            
+        } catch (final Exception ex) {
+            BugReporter.reportException(ex);
+        }
+
         this.decks = new CardCollections();
         this.quest = new QuestController();
     }
@@ -378,14 +390,6 @@ public enum FModel {
     public GameState newGame(Iterable<LobbyPlayer> players, GameType type, final MatchController match0) {
         gameState = new GameState(players,type, match0);
         return gameState;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public CardFactory getCardFactory() {
-        return cardFactory;
     }
 
     public GauntletMini getGauntletMini() {

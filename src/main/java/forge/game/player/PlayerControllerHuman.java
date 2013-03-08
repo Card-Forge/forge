@@ -22,6 +22,7 @@ import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.item.CardPrinted;
 
@@ -259,5 +260,17 @@ public class PlayerControllerHuman extends PlayerController {
                 possibleValues, possibleValues[0]);
 
         return !playDraw.equals(1);
+    }
+
+    @Override
+    public List<Card> orderBlockers(Card attacker, List<Card> blockers) {
+        GuiUtils.setPanelSelection(attacker);
+        return GuiChoose.order("Choose Blocking Order", "Damaged First", 0, blockers, null, attacker);
+    }
+
+    @Override
+    public List<Card> orderAttackers(Card blocker, List<Card> attackers) {
+        GuiUtils.setPanelSelection(blocker);
+        return GuiChoose.order("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
     }
 }

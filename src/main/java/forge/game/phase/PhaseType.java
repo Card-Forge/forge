@@ -9,8 +9,6 @@ import org.apache.commons.lang3.StringUtils;
 
 
 public enum PhaseType {
-    MULLIGAN("Mulligan"),
-    // Note: Mulligan is not part of "All Phases" which are strictly ingame phases
     UNTAP("Untap"),
     UPKEEP("Upkeep"),
     DRAW("Draw"),

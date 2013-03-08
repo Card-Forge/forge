@@ -1,9 +1,9 @@
 package forge.item;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
 
 public class CardToken implements InventoryItemFromSet, IPaperCard {
@@ -40,7 +40,7 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
 
     @Override
     public Card toForgeCard(Player owner) { 
-        final Card c = Singletons.getModel().getCardFactory().getCard(this, owner);
+        final Card c = CardFactory.getCard(this, owner);
         return c;
     }
 

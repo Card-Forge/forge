@@ -431,7 +431,7 @@ public final class GuiDisplayUtil {
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
-            final Card c = Singletons.getModel().getCardFactory().getCard(CardDb.instance().getCard(cardinfo[0]), player);
+            final Card c = CardDb.instance().getCard(cardinfo[0]).toForgeCard(player);
 
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {
@@ -596,7 +596,7 @@ public final class GuiDisplayUtil {
      */
     public static void devModeCardToHand() {
         final List<Player> players = Singletons.getModel().getGame().getPlayers();
-        final Player p = GuiChoose.oneOrNone("Put card in play for which player?", players);
+        final Player p = GuiChoose.oneOrNone("Put card in hand for which player?", players);
         if (null == p) {
             return;
         }

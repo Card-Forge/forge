@@ -1,0 +1,16 @@
+Name:Pure
+ManaCost:1 R G
+AlternateMode: Split
+Types:Sorcery
+A:SP$ Destroy | Cost$ 1 R G | ValidTgts$ Permanent.MultiColor | TgtPrompt$ Select target multicolored permanent | SpellDescription$ Destroy target multicolored permanent.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/puresimple.jpg
+Oracle:Destroy target multicolored permanent.
+
+ALTERNATE
+
+Name:Simple
+ManaCost:1 W G
+Types:Sorcery
+A:SP$ DestroyAll | Cost$ 1 W G | ValidCards$ Aura,Equipment | SpellDescription$ Destroy all Auras and Equipment.
+Oracle:Destroy all Auras and Equipment.
+SetInfo:DIS Uncommon

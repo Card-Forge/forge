@@ -1,0 +1,17 @@
+Name:Illusion
+ManaCost:U
+AlternateMode: Split
+Types:Instant
+A:SP$ ChooseColor | Cost$ U | Defined$ You | SubAbility$ Animate | SpellDescription$ Target spell or permanent becomes the color of your choice until end of turn.
+SVar:Animate:DB$ Animate | ValidTgts$ Card | TgtPrompt$ Select target spell or permanent to change the color of | TgtZone$ Stack,Battlefield | Colors$ ChosenColor | OverwriteColors$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/illusion_reality.jpg
+Oracle:Target spell or permanent becomes the color of your choice until end of turn.
+
+ALTERNATE
+
+Name:Reality
+ManaCost:2 G
+Types:Instant
+A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+Oracle:Destroy target artifact.
+SetInfo:APC Uncommon

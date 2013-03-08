@@ -48,7 +48,7 @@ class CardFactoryArtifacts {
                 public AbilityActivated getCopy() {
                     AbilityActivated res = new AbilityGrindstone(getSourceCard(),
                             getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
-                    CardFactoryUtil.copySpellAbility(this, res);
+                    CardFactory.copySpellAbility(this, res);
                     return res;
                 }
 
@@ -118,7 +118,7 @@ class CardFactoryArtifacts {
                 public AbilityActivated getCopy() {
                     AbilityActivated res = new AbilityScrollRack(getSourceCard(),
                             getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
-                    CardFactoryUtil.copySpellAbility(this, res);
+                    CardFactory.copySpellAbility(this, res);
                     return res;
                 }
 
@@ -261,7 +261,7 @@ class CardFactoryArtifacts {
                 public AbilityActivated getCopy() {
                     AbilityActivated res = new AbilityTemporalAperture(getSourceCard(),
                             getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
-                    CardFactoryUtil.copySpellAbility(this, res);
+                    CardFactory.copySpellAbility(this, res);
                     return res;
                 }
 

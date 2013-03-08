@@ -97,4 +97,7 @@ public abstract class PlayerController {
     public abstract boolean confirmAction(SpellAbility sa, String mode, String message);
     public abstract boolean getWillPlayOnFirstTurn(String message);
     public abstract boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message);
+
+    public abstract List<Card> orderBlockers(Card attacker, List<Card> blockers);
+    public abstract List<Card> orderAttackers(Card blocker, List<Card> attackers);
 }

@@ -148,6 +148,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.control.input.Input} object.
      */
     public final Input getActualInput() {
+        if ( !game.hasMulliganned() )
+            return new InputMulligan();
+
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();
         final Player playerTurn = handler.getPlayerTurn();

@@ -221,6 +221,7 @@ public class CardFaceSymbols {
         g.drawImage(image, x, y, null);
     }
 
+    
     /**
      * <p>
      * getWidth.
@@ -238,5 +239,9 @@ public class CardFaceSymbols {
 
         //System.out.println(String.format("%d for %s", width, manaCost.toString()));
         return width * 14;
+    }
+    
+    public static int getHeight() {
+        return 14;
     }
 }

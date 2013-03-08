@@ -1,7 +1,7 @@
 Name:Murderous Spoils
 ManaCost:5 B
 Types:Instant
-A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ StealEquip | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that was attached to it. (This effect lasts indefinitely.)
+A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target non-black creature | SubAbility$ StealEquip | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that was attached to it. (This effect lasts indefinitely.)
 SVar:StealEquip:DB$ GainControl | AllValid$ Targeted.Equipment+Attached
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_spoils.jpg
 Oracle:Destroy target nonblack creature. It can't be regenerated. You gain control of all Equipment that was attached to it. (This effect lasts indefinitely.)

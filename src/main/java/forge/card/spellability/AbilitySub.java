@@ -28,7 +28,7 @@ import forge.card.ability.effects.ChangeZoneAllEffect;
 import forge.card.ability.effects.ChangeZoneEffect;
 import forge.card.ability.effects.ManaEffect;
 import forge.card.ability.effects.ManaReflectedEffect;
-import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactory;
 import forge.game.player.AIPlayer;
 
 /**
@@ -109,7 +109,7 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
     public AbilitySub getCopy() {
         Target t = getTarget() == null ? null : new Target(getTarget());
         AbilitySub res = new AbilitySub(api, getSourceCard(), t, params);
-        CardFactoryUtil.copySpellAbility(this, res);
+        CardFactory.copySpellAbility(this, res);
         return res;
     }
 

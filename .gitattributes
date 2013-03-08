@@ -553,7 +553,7 @@ res/cardsfolder/a/aspect_of_wolf.txt svneol=native#text/plain
 res/cardsfolder/a/assassinate.txt svneol=native#text/plain
 res/cardsfolder/a/assassins_blade.txt svneol=native#text/plain
 res/cardsfolder/a/assassins_strike.txt -text
-res/cardsfolder/a/assault__battery.txt -text
+res/cardsfolder/a/assault_battery.txt -text
 res/cardsfolder/a/assault_griffin.txt svneol=native#text/plain
 res/cardsfolder/a/assault_strobe.txt svneol=native#text/plain
 res/cardsfolder/a/assault_zeppelid.txt svneol=native#text/plain
@@ -1181,6 +1181,7 @@ res/cardsfolder/b/bonfire_of_the_damned.txt -text
 res/cardsfolder/b/booby_trap.txt -text
 res/cardsfolder/b/book_burning.txt -text
 res/cardsfolder/b/book_of_rass.txt svneol=native#text/plain
+res/cardsfolder/b/boom_bust.txt -text
 res/cardsfolder/b/boomerang.txt svneol=native#text/plain
 res/cardsfolder/b/boon_reflection.txt svneol=native#text/plain
 res/cardsfolder/b/borborygmos.txt svneol=native#text/plain
@@ -2098,6 +2099,7 @@ res/cardsfolder/c/crescendo_of_war.txt -text
 res/cardsfolder/c/crested_craghorn.txt -text
 res/cardsfolder/c/crevasse.txt svneol=native#text/plain
 res/cardsfolder/c/crib_swap.txt svneol=native#text/plain
+res/cardsfolder/c/crime_punishment.txt -text
 res/cardsfolder/c/crimson_acolyte.txt svneol=native#text/plain
 res/cardsfolder/c/crimson_hellkite.txt -text
 res/cardsfolder/c/crimson_kobolds.txt svneol=native#text/plain
@@ -2372,6 +2374,7 @@ res/cardsfolder/d/day_of_the_dragons.txt svneol=native#text/plain
 res/cardsfolder/d/daybreak_coronet.txt -text
 res/cardsfolder/d/daybreak_ranger_nightfall_predator.txt -text
 res/cardsfolder/d/daze.txt svneol=native#text/plain
+res/cardsfolder/d/dead_gone.txt -text
 res/cardsfolder/d/dead_iron_sledge.txt svneol=native#text/plain
 res/cardsfolder/d/dead_reckoning.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dead_reveler.txt -text
@@ -4870,6 +4873,7 @@ res/cardsfolder/h/hidden_path.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_predators.txt -text
 res/cardsfolder/h/hidden_spider.txt svneol=native#text/plain
 res/cardsfolder/h/hidden_stag.txt -text svneol=unset#text/plain
+res/cardsfolder/h/hide_seek.txt -text
 res/cardsfolder/h/hideous_end.txt svneol=native#text/plain
 res/cardsfolder/h/hideous_laughter.txt -text
 res/cardsfolder/h/hideous_visage.txt svneol=native#text/plain
@@ -5117,6 +5121,7 @@ res/cardsfolder/i/ill_gotten_gains.txt svneol=native#text/plain
 res/cardsfolder/i/illness_in_the_ranks.txt -text
 res/cardsfolder/i/illuminated_wings.txt svneol=native#text/plain
 res/cardsfolder/i/illumination.txt svneol=native#text/plain
+res/cardsfolder/i/illusion_reality.txt -text
 res/cardsfolder/i/illusionary_forces.txt svneol=native#text/plain
 res/cardsfolder/i/illusionary_servant.txt svneol=native#text/plain
 res/cardsfolder/i/illusionary_wall.txt svneol=native#text/plain
@@ -5995,6 +6000,7 @@ res/cardsfolder/l/lieutenant_kirtar.txt svneol=native#text/plain
 res/cardsfolder/l/life_and_limb.txt svneol=native#text/plain
 res/cardsfolder/l/life_burst.txt svneol=native#text/plain
 res/cardsfolder/l/life_chisel.txt svneol=native#text/plain
+res/cardsfolder/l/life_death.txt -text
 res/cardsfolder/l/life_from_the_loam.txt svneol=native#text/plain
 res/cardsfolder/l/life_matrix.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lifeblood.txt svneol=native#text/plain
@@ -7151,6 +7157,7 @@ res/cardsfolder/n/niblis_of_the_mist.txt -text
 res/cardsfolder/n/niblis_of_the_urn.txt -text
 res/cardsfolder/n/nicol_bolas.txt svneol=native#text/plain
 res/cardsfolder/n/nicol_bolas_planeswalker.txt svneol=native#text/plain
+res/cardsfolder/n/night_day.txt -text
 res/cardsfolder/n/night_dealings.txt -text svneol=unset#text/plain
 res/cardsfolder/n/night_of_souls_betrayal.txt svneol=native#text/plain
 res/cardsfolder/n/night_revelers.txt -text
@@ -7421,6 +7428,7 @@ res/cardsfolder/o/orcish_spy.txt svneol=native#text/plain
 res/cardsfolder/o/orcish_squatters.txt -text svneol=unset#text/plain
 res/cardsfolder/o/orcish_squatters_avatar.txt -text
 res/cardsfolder/o/orcish_veteran.txt svneol=native#text/plain
+res/cardsfolder/o/order_chaos.txt -text
 res/cardsfolder/o/order_of_leitbur.txt svneol=native#text/plain
 res/cardsfolder/o/order_of_the_ebon_hand.txt svneol=native#text/plain
 res/cardsfolder/o/order_of_the_golden_cricket.txt svneol=native#text/plain
@@ -7515,6 +7523,7 @@ res/cardsfolder/p/pact_of_negation.txt svneol=native#text/plain
 res/cardsfolder/p/pact_of_the_titan.txt svneol=native#text/plain
 res/cardsfolder/p/pain_kami.txt svneol=native#text/plain
 res/cardsfolder/p/pain_magnification.txt svneol=native#text/plain
+res/cardsfolder/p/pain_suffering.txt -text
 res/cardsfolder/p/painbringer.txt -text svneol=unset#text/plain
 res/cardsfolder/p/painful_memories.txt svneol=native#text/plain
 res/cardsfolder/p/painful_quandary.txt -text
@@ -8063,6 +8072,7 @@ res/cardsfolder/p/puppeteer_clique.txt svneol=native#text/plain
 res/cardsfolder/p/puppets_verdict.txt -text
 res/cardsfolder/p/pure_intentions.txt -text svneol=unset#text/plain
 res/cardsfolder/p/pure_reflection.txt -text
+res/cardsfolder/p/pure_simple.txt -text
 res/cardsfolder/p/purelace.txt -text
 res/cardsfolder/p/puresight_merrow.txt svneol=native#text/plain
 res/cardsfolder/p/puresteel_paladin.txt -text
@@ -8751,6 +8761,7 @@ res/cardsfolder/r/rotting_fensnake.txt -text
 res/cardsfolder/r/rotting_giant.txt -text
 res/cardsfolder/r/rotting_legion.txt svneol=native#text/plain
 res/cardsfolder/r/rotting_rats.txt svneol=native#text/plain
+res/cardsfolder/r/rough_tumble.txt -text
 res/cardsfolder/r/roughshod_mentor.txt svneol=native#text/plain
 res/cardsfolder/r/rouse.txt svneol=native#text/plain
 res/cardsfolder/r/rowan_treefolk.txt svneol=native#text/plain
@@ -10065,6 +10076,7 @@ res/cardsfolder/s/spiritual_guardian.txt svneol=native#text/plain
 res/cardsfolder/s/spiritual_sanctuary.txt svneol=native#text/plain
 res/cardsfolder/s/spiritual_visit.txt -text
 res/cardsfolder/s/spiritualize.txt -text svneol=unset#text/plain
+res/cardsfolder/s/spite_malice.txt -text
 res/cardsfolder/s/spitebellows.txt svneol=native#text/plain
 res/cardsfolder/s/spiteflame_witch.txt svneol=native#text/plain
 res/cardsfolder/s/spiteful_bully.txt svneol=native#text/plain
@@ -10167,6 +10179,7 @@ res/cardsfolder/s/stampede_driver.txt svneol=native#text/plain
 res/cardsfolder/s/stampeding_rhino.txt svneol=native#text/plain
 res/cardsfolder/s/stampeding_serow.txt svneol=native#text/plain
 res/cardsfolder/s/stampeding_wildebeests.txt svneol=native#text/plain
+res/cardsfolder/s/stand_deliver.txt -text
 res/cardsfolder/s/stand_firm.txt svneol=native#text/plain
 res/cardsfolder/s/stand_together.txt -text
 res/cardsfolder/s/standardize.txt -text svneol=unset#text/plain
@@ -10449,6 +10462,7 @@ res/cardsfolder/s/suntail_hawk.txt svneol=native#text/plain
 res/cardsfolder/s/suntouched_myr.txt svneol=native#text/plain
 res/cardsfolder/s/sunweb.txt svneol=native#text/plain
 res/cardsfolder/s/superior_numbers.txt -text svneol=unset#text/plain
+res/cardsfolder/s/supply_demand.txt -text
 res/cardsfolder/s/suppress.txt -text svneol=unset#text/plain
 res/cardsfolder/s/suppression_field.txt -text
 res/cardsfolder/s/supreme_exemplar.txt svneol=native#text/plain
@@ -11175,6 +11189,7 @@ res/cardsfolder/t/treva_the_renewer.txt svneol=native#text/plain
 res/cardsfolder/t/trevas_attendant.txt svneol=native#text/plain
 res/cardsfolder/t/trevas_charm.txt svneol=native#text/plain
 res/cardsfolder/t/trevas_ruins.txt svneol=native#text/plain
+res/cardsfolder/t/trial_error.txt -text
 res/cardsfolder/t/triangle_of_war.txt svneol=native#text/plain
 res/cardsfolder/t/triassic_egg.txt svneol=native#text/plain
 res/cardsfolder/t/tribal_flames.txt svneol=native#text/plain
@@ -11931,6 +11946,7 @@ res/cardsfolder/w/wave_of_reckoning.txt -text
 res/cardsfolder/w/wave_of_terror.txt svneol=native#text/plain
 res/cardsfolder/w/waves_of_aggression.txt -text
 res/cardsfolder/w/waveskimmer_aven.txt svneol=native#text/plain
+res/cardsfolder/w/wax_wane.txt -text
 res/cardsfolder/w/waxmane_baku.txt -text
 res/cardsfolder/w/way_of_the_thief.txt -text
 res/cardsfolder/w/wayfarers_bauble.txt svneol=native#text/plain
@@ -13053,6 +13069,7 @@ res/quest/duels/Pointy[!!-~]Haired[!!-~]Boss[!!-~]3.dck -text
 res/quest/duels/Princess[!!-~]Selenia[!!-~]1.dck -text
 res/quest/duels/Professor[!!-~]X[!!-~]2.dck -text
 res/quest/duels/Professor[!!-~]X[!!-~]3.dck -text
+res/quest/duels/Quicksilver[!!-~]3.dck -text
 res/quest/duels/R2-D2[!!-~]3.dck -text
 res/quest/duels/Radagast[!!-~]2.dck -text
 res/quest/duels/Radiant[!!-~]2.dck -text
@@ -14102,6 +14119,7 @@ src/main/java/forge/deck/generate/Generate3ColorDeck.java svneol=native#text/pla
 src/main/java/forge/deck/generate/Generate5ColorDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/GenerateColoredDeckBase.java -text
 src/main/java/forge/deck/generate/GenerateDeckUtil.java -text
+src/main/java/forge/deck/generate/GenerateMonoColorDeck.java -text
 src/main/java/forge/deck/generate/GenerateThemeDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/package-info.java svneol=native#text/plain
 src/main/java/forge/deck/io/DeckFileHeader.java -text

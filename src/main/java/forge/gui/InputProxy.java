@@ -52,7 +52,7 @@ public class InputProxy extends MyObservable implements Observer {
      * @param in
      *            a {@link forge.control.input.Input} object.
      */
-    public void setInput(final Input in) {
+    public final void setInput(final Input in) {
         valid = true;
         this.input = in;
         this.input.showMessage(); // this call may invalidate the input by the time it returns

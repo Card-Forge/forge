@@ -36,10 +36,12 @@ import javax.swing.border.EtchedBorder;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardEdition;
+import forge.card.CardSplitType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.toolbox.FLabel;
@@ -202,10 +204,14 @@ public class CardDetailPanel extends FPanel {
             
         final boolean canShowThis = card.canBeShownTo(Singletons.getControl().getPlayer());
         if (canShowThis) {
-            if (card.getManaCost().toString().equals("") || card.isLand()) {
+            if (card.getManaCost().isNoCost()) {
                 this.nameCostLabel.setText(card.getName());
             } else {
-                this.nameCostLabel.setText(card.getName() + " - " + card.getManaCost());
+                String manaCost = card.getManaCost().toString();
+                if ( card.getRules() != null && card.getRules().getSplitType() == CardSplitType.Split && card.getCurState() == CardCharacteristicName.Original) {
+                    manaCost = card.getRules().getMainPart().getManaCost().toString() + " // " + card.getRules().getOtherPart().getManaCost().toString();
+                }
+                this.nameCostLabel.setText(card.getName() + " - " + manaCost);
             }
             this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
             

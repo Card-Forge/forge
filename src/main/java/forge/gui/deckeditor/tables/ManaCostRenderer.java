@@ -24,6 +24,8 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.toolbox.CardFaceSymbols;
@@ -34,7 +36,13 @@ import forge.gui.toolbox.CardFaceSymbols;
 public class ManaCostRenderer extends DefaultTableCellRenderer {
     private static final long serialVersionUID = 1770527102334163549L;
 
-    private ManaCost value;
+    static final int elemtWidth = 13;
+    static final int elemtGap = 0;
+    static final int padding0 = 1;
+    static final int spaceBetweenSplitCosts = 3;
+    
+    private ManaCost v1;
+    private ManaCost v2;
 
     /*
      * (non-Javadoc)
@@ -46,8 +54,10 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
     @Override
     public final Component getTableCellRendererComponent(final JTable table, final Object value,
             final boolean isSelected, final boolean hasFocus, final int row, final int column) {
-        this.value = (ManaCost) value;
-        this.setToolTipText(this.value.toString());
+        CardRules v = value instanceof CardRules ? (CardRules) value : null;
+        this.v1 = v == null ? ManaCost.NO_COST : v.getMainPart().getManaCost();
+        this.v2 = v == null || v.getSplitType() != CardSplitType.Split ? null : v.getOtherPart().getManaCost();
+        this.setToolTipText(v2 == null ? v1.toString() : v1.toString() + " / " + v2.toString());
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
     }
 
@@ -60,18 +70,38 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
     public final void paint(final Graphics g) {
         super.paint(g);
 
-        final int elemtWidth = 13;
-        final int elemtGap = 0;
-        final int padding = 1;
-
-        float xpos = padding;
-
-        final int genericManaCost = this.value.getGenericCost();
-        final int xManaCosts = this.value.countX();
-        final boolean hasGeneric = (genericManaCost > 0) || this.value.isPureGeneric();
-        final List<ManaCostShard> shards = this.value.getShards();
-
         final int cellWidth = this.getWidth();
+        
+        if ( null == v2 )
+            drawCost(g, v1, padding0, cellWidth);
+        else 
+        {
+            int shards1 = v1.isPureGeneric() || v1.getGenericCost() > 0 ? 1 : 0;
+            int shards2 = v2.isPureGeneric() || v2.getGenericCost() > 0 ? 1 : 0;
+            shards1 += v1.getShards().size();
+            shards2 += v2.getShards().size();
+
+            int perGlyph = (cellWidth - padding0 - spaceBetweenSplitCosts) / (shards1 + shards2);
+            perGlyph = Math.min(perGlyph, elemtWidth + elemtGap);
+            drawCost(g, v1, padding0, padding0 + perGlyph * shards1);
+            drawCost(g, v2, cellWidth - perGlyph * shards2, cellWidth );
+        }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param g
+     * @param padding
+     * @param cellWidth
+     */
+    private void drawCost(final Graphics g, ManaCost value, final int padding, final int cellWidth) {
+        float xpos = padding;
+        final int genericManaCost = value.getGenericCost();
+        final int xManaCosts = value.countX();
+        final boolean hasGeneric = (genericManaCost > 0) || this.v1.isPureGeneric();
+        final List<ManaCostShard> shards = value.getShards();
+
+        
         final int cntGlyphs = hasGeneric ? shards.size() + 1 : shards.size();
         final float offsetIfNoSpace = cntGlyphs > 1 ? (cellWidth - padding - elemtWidth) / (cntGlyphs - 1f)
                 : elemtWidth + elemtGap;

@@ -34,6 +34,7 @@ import forge.Command;
 import forge.Constant;
 import forge.Constant.Preferences;
 import forge.Singletons;
+import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -298,7 +299,7 @@ public class CField implements ICDoc {
                             faceDown.setName("Face Down");
                             choices2.add(faceDown);
                         } else {
-                            final Card faceDown = Singletons.getModel().getCardFactory().copyCard(crd);
+                            final Card faceDown = CardFactory.copyCard(crd);
                             faceDown.setState(CardCharacteristicName.Original);
                             choices2.add(faceDown);
                         }

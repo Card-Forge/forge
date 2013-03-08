@@ -76,7 +76,7 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
     }
 
 
-    public final ItemPoolView<CardPrinted> get2ColorDeck(final int size, final PlayerType pt) {
+    public final ItemPoolView<CardPrinted> getDeck(final int size, final PlayerType pt) {
         addCreaturesAndSpells(size, cmcLevels, cmcAmounts, pt);
 
         // Add lands
