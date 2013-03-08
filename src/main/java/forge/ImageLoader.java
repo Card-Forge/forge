@@ -13,7 +13,8 @@ import forge.properties.NewConstants;
 
 final class ImageLoader extends CacheLoader<String, BufferedImage> {
     // image file extensions for various formats in order of likelihood
-    private static final String[] _FILE_EXTENSIONS = { ".jpg", ".png" };
+    // the last, empty, string is for keys that come in with an extension already in place
+    private static final String[] _FILE_EXTENSIONS = { ".jpg", ".png", "" };
     
     @Override
     public BufferedImage load(String key) {
@@ -41,9 +42,17 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
 
         BufferedImage ret = _findFile(key, path, filename);
         
-        // try without set prefix (if any)
-        if (null == ret && filename.contains("/")) {
-            ret = _findFile(key, path, filename.substring(filename.indexOf('/') + 1));
+        // try without set prefix and/or '.full' suffix
+        if (null == ret && (filename.contains("/") || filename.contains(".full"))) {
+            String bareFilename = filename;
+            if (bareFilename.contains("/")) {
+                bareFilename = filename.substring(filename.indexOf('/') + 1);
+            }
+            if (bareFilename.endsWith(".full")) {
+                bareFilename = bareFilename.substring(0, bareFilename.length() - 5);
+            }
+
+            ret = _findFile(key, path, bareFilename);
         }
         
         if (null == ret) {
@@ -66,8 +75,9 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
     private static BufferedImage _findFile(String key, String path, String filename) {
         for (String ext : _FILE_EXTENSIONS) {
             File file = new File(path, filename + ext);
+            //System.out.println(String.format("Searching for %s at: %s", key, file.getAbsolutePath()));
             if (file.exists()) {
-                System.out.println(String.format("Found %s at: %s", key, file.getAbsolutePath()));
+                //System.out.println(String.format("Found %s at: %s", key, file.getAbsolutePath()));
                 return getImage(file);
             }
         }
