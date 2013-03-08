@@ -67,8 +67,8 @@ public class QuestUtilUnlockSets {
         for (CardEdition ed : getUnlockableEditions(qData)) {
             int price = UNLOCK_COST;
             if (mapPrices.containsKey(ed.getName() + " Booster Pack")) {
-                price = Math.max(new Double(60 * Math.pow(Math.sqrt(mapPrices.get(ed.getName()
-                        + " Booster Pack")), 1.65)).intValue(), UNLOCK_COST);
+                price = Math.max(new Double(30 * Math.pow(Math.sqrt(mapPrices.get(ed.getName()
+                        + " Booster Pack")), 1.70)).intValue(), UNLOCK_COST);
             }
             setPrices.add(ImmutablePair.of(ed, price));
         }
