@@ -14145,6 +14145,7 @@ src/main/java/forge/game/GameActionPlay.java -text
 src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/game/GameEndReason.java -text
 src/main/java/forge/game/GameFormat.java -text
+src/main/java/forge/game/GameInputUpdatesThread.java -text
 src/main/java/forge/game/GameLossReason.java -text
 src/main/java/forge/game/GameNew.java -text
 src/main/java/forge/game/GameOutcome.java -text

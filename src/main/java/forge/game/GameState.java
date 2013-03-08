@@ -287,7 +287,7 @@ public class GameState {
     /**
      * @return the gameOver
      */
-    public boolean isGameOver() {
+    public synchronized boolean isGameOver() {
         return gameOver;
     }
 
@@ -295,7 +295,7 @@ public class GameState {
      * @param reason 
      * @param go the gameOver to set
      */
-    public void setGameOver(GameEndReason reason) {
+    public synchronized void setGameOver(GameEndReason reason) {
         this.gameOver = true;
         for (Player p : roIngamePlayers) {
             p.onGameOver();

@@ -38,10 +38,10 @@ public class InputProxy extends MyObservable implements Observer {
 
     /** The input. */
     private Input input;
-    private volatile boolean valid = false;
+    private boolean valid = false;
 
     @Override
-    public final void update(final Observable observable, final Object obj) {
+    public final synchronized void update(final Observable observable, final Object obj) {
         valid = false;
     }
     /**
@@ -52,7 +52,7 @@ public class InputProxy extends MyObservable implements Observer {
      * @param in
      *            a {@link forge.control.input.Input} object.
      */
-    public final void setInput(final Input in) {
+    public final synchronized void setInput(final Input in) {
         valid = true;
         this.input = in;
         this.input.showMessage(); // this call may invalidate the input by the time it returns
@@ -114,7 +114,7 @@ public class InputProxy extends MyObservable implements Observer {
     }
 
 
-    public boolean isValid() {
+    public synchronized boolean isValid() {
         return valid;
     }
 }

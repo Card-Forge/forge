@@ -26,7 +26,6 @@ import forge.card.trigger.TriggerType;
 import forge.deck.Deck;
 import forge.deck.CardPool;
 import forge.deck.DeckSection;
-import forge.error.BugReporter;
 import forge.game.event.FlipCoinEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.AIPlayer;
@@ -34,7 +33,6 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.match.controllers.CMessage;
 import forge.gui.match.views.VAntes;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
@@ -49,43 +47,6 @@ import forge.util.MyRandom;
  */
 public class GameNew {
     
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class GameInputUpdatesThread extends Thread {
-        private final MatchController match;
-        private final GameState game;
-        private boolean wasChangedRecently;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param match
-         * @param game
-         */
-        public GameInputUpdatesThread(MatchController match, GameState game) {
-            this.match = match;
-            this.game = game;
-        }
-
-        public void run(){
-            while(!game.isGameOver()) {
-                boolean needsNewInput = CMessage.SINGLETON_INSTANCE.getInputControl().isValid() == false;
-                if ( needsNewInput ) {
-                    match.getInput().setNewInput(game);
-                    wasChangedRecently = true;
-                }
-                try {
-                    Thread.sleep(wasChangedRecently ? 2 : 40);
-                    wasChangedRecently = false;
-                } catch (InterruptedException e) {
-                    BugReporter.reportException(e);
-                    break;
-                }
-            }
-        }
-    }
-
     public static final ForgePreferences preferences = Singletons.getModel().getPreferences();
 
     private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool secion, boolean canRandomFoil, Random generator) {
@@ -235,10 +196,6 @@ public class GameNew {
         for (final Player p1 : game.getPlayers()) {
             p1.drawCards(p1.getMaxHandSize());
         }
-        
-        Thread thGame = new GameInputUpdatesThread(match, game);
-        thGame.setName("Game input updater");
-        thGame.start();
     }
 
     // ultimate of Karn the Liberated
