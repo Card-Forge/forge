@@ -13596,7 +13596,6 @@ res/quest/world/shandalar/duels/Winged[!!-~]Stallion[!!-~]3.dck -text
 res/quest/world/shandalar/duels/Witch[!!-~]2.dck -text
 res/quest/world/shandalar/duels/Witch[!!-~]3.dck -text
 res/quest/world/worlds.txt -text
-res/reprintSetInfo.py svneol=native#text/x-python
 res/sealed/ArabianExtended.sealed -text
 res/sealed/GtcGuildBoros.sealed -text
 res/sealed/GtcGuildDimir.sealed -text
@@ -13619,7 +13618,6 @@ res/sealed/RtRPromoIzzet.sealed -text
 res/sealed/RtRPromoRakdos.sealed -text
 res/sealed/RtRPromoSelesnya.sealed -text
 res/sealed/juzamjedi.sealed -text
-res/setInfoScript.py svneol=native#text/x-python
 res/skins/dark_ascension/bg_match.jpg -text
 res/skins/dark_ascension/bg_splash.png -text
 res/skins/dark_ascension/bg_texture.jpg -text
