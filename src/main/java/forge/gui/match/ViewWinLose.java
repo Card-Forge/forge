@@ -24,8 +24,6 @@ import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -95,11 +93,11 @@ public class ViewWinLose {
         lblStats.setHorizontalAlignment(SwingConstants.CENTER);
         lblStats.setFont(FSkin.getFont().deriveFont(Font.PLAIN, 26));
 
-        btnContinue.setText(ForgeProps.getLocalized(WinLoseText.CONTINUE));
+        btnContinue.setText("Continue");
         btnContinue.setFont(FSkin.getFont(22));
-        btnRestart.setText(ForgeProps.getLocalized(WinLoseText.RESTART));
+        btnRestart.setText("Restart");
         btnRestart.setFont(FSkin.getFont(22));
-        btnQuit.setText(ForgeProps.getLocalized(WinLoseText.QUIT));
+        btnQuit.setText("Quit");
         btnQuit.setFont(FSkin.getFont(22));
         btnContinue.setEnabled(!match.isMatchOver());
 

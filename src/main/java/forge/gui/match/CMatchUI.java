@@ -42,7 +42,6 @@ import forge.gui.match.nonsingleton.VHand;
 import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 /**
@@ -60,7 +59,7 @@ public enum CMatchUI {
     private Image getPlayerAvatar(final Player p, final int defaultIndex) {
         String strAvatarIcon = p.getLobbyPlayer().getPicture();
         if (strAvatarIcon != null) {
-            final File f = new File(ForgeProps.getFile(NewConstants.IMAGE_ICON), strAvatarIcon);
+            final File f = new File(NewConstants.CACHE_ICON_PICS_DIR, strAvatarIcon);
             if (f.exists()) {
                 return new ImageIcon(f.getPath()).getImage();
             }

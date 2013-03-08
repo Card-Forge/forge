@@ -42,12 +42,6 @@ public class TournamentPack extends OpenablePack {
         }
     };
 
-    /**
-     * Instantiates a new booster pack.
-     * 
-     * @param set
-     *            the set
-     */
     public TournamentPack(final String name0, final BoosterData boosterData) {
         super(name0, boosterData);
     }
@@ -55,7 +49,7 @@ public class TournamentPack extends OpenablePack {
 
     @Override
     public final String getImageFilename() {
-        return ImageCache.SEALED_PRODUCT + "tournamentpacks/" + this.contents.getEdition();
+        return ImageCache.TOURNAMENTPACK_PREFIX + contents.getEdition();
     }
 
     public final boolean isStarterDeck() {

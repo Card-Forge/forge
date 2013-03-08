@@ -6,10 +6,10 @@ import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
-import forge.game.GameState; 
 
 public class InputPayManaX extends InputPayManaBase {
     private static final long serialVersionUID = -6900234444347364050L;

@@ -24,7 +24,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;

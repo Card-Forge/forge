@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
 

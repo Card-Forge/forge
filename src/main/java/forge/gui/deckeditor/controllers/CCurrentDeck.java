@@ -20,8 +20,6 @@ import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 /** 
  * Controls the "current deck" panel in the deck editor UI.
@@ -35,9 +33,7 @@ public enum CCurrentDeck implements ICDoc {
 
     private static File previousDirectory = null;
 
-    private File openStartDir = ForgeProps.getFile(NewConstants.NEW_DECKS);
-
-    private JFileChooser fileChooser = new JFileChooser("");
+    private JFileChooser fileChooser = new JFileChooser();
     
     //========== Overridden methods
     
@@ -165,8 +161,6 @@ public enum CCurrentDeck implements ICDoc {
     /** */
     private File getImportFilename() {
         fileChooser.setDialogTitle("Import Deck");
-        
-        fileChooser.setCurrentDirectory(openStartDir);
         
         final int returnVal = fileChooser.showOpenDialog(null);
 

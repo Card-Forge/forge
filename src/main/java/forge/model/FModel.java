@@ -43,13 +43,10 @@ import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
-import forge.util.HttpUtil;
 import forge.util.MultiplexOutputStream;
 import forge.util.storage.IStorageView;
 import forge.util.storage.StorageView;
@@ -64,15 +61,11 @@ import forge.util.storage.StorageView;
  * this class must be either private or public static final.
  */
 public enum FModel {
-
-    /** The SINGLETO n_ instance. */
     SINGLETON_INSTANCE;
-    // private static final int NUM_INIT_PHASES = 1;
 
     private final PrintStream oldSystemOut;
     private final PrintStream oldSystemErr;
     private OutputStream logFileStream;
-
 
     private final QuestPreferences questPreferences;
     private final ForgePreferences preferences;
@@ -148,37 +141,16 @@ public enum FModel {
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
-
-        testNetworkConnection();
-
         this.loadDynamicGamedata();
 
         // Loads all cards (using progress bar).
-        this.cardFactory = new CardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER));
-        this.decks = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
+        this.cardFactory = new CardFactory();
+        this.decks = new CardCollections();
         this.quest = new QuestController();
     }
 
     public final QuestController getQuest() {
         return quest;
-    }
-
-    /**
-     * Tests if draft upload is technically possible.
-     * Separate thread, no more hangs when network connection is limited
-     */
-    private void testNetworkConnection() {
-
-        Runnable runNetworkTest = new Runnable() {
-            @Override
-            public void run() {
-                final HttpUtil pinger = new HttpUtil();
-                final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
-                Constant.Runtime.NET_CONN = pinger.getURL(url).equals("pong");
-            }
-        };
-        Thread testNetConnection = new Thread(runNetworkTest, "CheckRemoteDraftAI");
-        testNetConnection.start();
     }
 
     /**
@@ -356,14 +328,10 @@ public enum FModel {
      * Finalizer, generally should be avoided, but here closes the log file
      * stream and resets the system output streams.
      */
-    public final void close() {
+    public final void close() throws IOException {
         System.setOut(this.oldSystemOut);
         System.setErr(this.oldSystemErr);
-        try {
-            this.logFileStream.close();
-        } catch (final IOException e) {
-            // ignored
-        }
+        logFileStream.close();
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */

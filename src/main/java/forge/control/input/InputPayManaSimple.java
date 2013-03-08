@@ -19,7 +19,6 @@ package forge.control.input;
 
 import forge.Card;
 import forge.Singletons;
-//import forge.Singletons;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -27,6 +26,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
+//import forge.Singletons;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid

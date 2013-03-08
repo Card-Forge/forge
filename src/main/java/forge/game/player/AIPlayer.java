@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.Iterables;
-import forge.Card;
 
+import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.card.spellability.SpellAbility;

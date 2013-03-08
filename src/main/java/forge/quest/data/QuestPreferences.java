@@ -26,8 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Quest;
+import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
 /**
@@ -192,7 +191,7 @@ public class QuestPreferences implements Serializable {
     public QuestPreferences() {
         this.preferenceValues = new HashMap<QPref, String>();
 
-        List<String> lines = FileUtil.readFile(ForgeProps.getFile(Quest.PREFS));
+        List<String> lines = FileUtil.readFile(NewConstants.QUEST_PREFERENCES_FILE.defaultLoc);
 
         for (String line : lines) {
             if (line.startsWith("#") || (line.length() == 0)) {
@@ -212,7 +211,7 @@ public class QuestPreferences implements Serializable {
         BufferedWriter writer = null;
 
         try {
-            writer = new BufferedWriter(new FileWriter(ForgeProps.getFile(Quest.PREFS)));
+            writer = new BufferedWriter(new FileWriter(NewConstants.QUEST_PREFERENCES_FILE.defaultLoc));
             for (final QPref key : QPref.values()) {
                 if (key.getDefault().equals("DIFFICULTY_INDEX_REQD")) {
                     writer.newLine();

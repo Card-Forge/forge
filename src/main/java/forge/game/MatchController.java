@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import forge.Singletons;
 import forge.Constant.Preferences;
+import forge.Singletons;
 import forge.control.FControl;
 import forge.control.input.InputControl;
 import forge.deck.Deck;
@@ -32,8 +32,6 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
 import forge.util.Aggregates;
 
 /**
@@ -96,7 +94,7 @@ public class MatchController {
 
         // add result entries to the game log
         LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
-        String title = ForgeProps.getLocalized(result.isWinner(human) ? WinLoseText.WIN : WinLoseText.LOSE);
+        String title = result.isWinner(human) ? "You Win" : "You Lost";
         game.getGameLog().add("Final", title, 0);
         
         List<String> outcomes = new ArrayList<String>();
@@ -109,8 +107,7 @@ public class MatchController {
         
         int humanWins = getGamesWonBy(human);
         int humanLosses = getPlayedGames().size() - humanWins;
-        String statsSummary = ForgeProps.getLocalized(WinLoseText.WON) + humanWins
-                + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses;
+        String statsSummary = "Won: " + humanWins + ", Lost: " + humanLosses;
         game.getGameLog().add("Final", statsSummary, 0);
 
 

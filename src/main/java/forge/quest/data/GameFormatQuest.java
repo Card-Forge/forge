@@ -17,8 +17,8 @@
  */
 package forge.quest.data;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.common.base.Predicate;
 

@@ -28,9 +28,9 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
+import forge.game.GlobalRuleChange;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.game.GlobalRuleChange;
 
 /**
  * <p>

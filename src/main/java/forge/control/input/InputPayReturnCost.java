@@ -20,7 +20,6 @@ package forge.control.input;
 import java.util.List;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.Command;
 import forge.Singletons;

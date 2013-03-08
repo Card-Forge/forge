@@ -19,8 +19,8 @@ package forge.card.ability.effects;
 
 import java.util.Arrays;
 import java.util.List;
-import forge.Card;
 
+import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;

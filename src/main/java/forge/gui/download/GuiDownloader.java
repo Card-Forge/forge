@@ -65,8 +65,6 @@ import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.JXButtonPanel;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 
@@ -100,21 +98,21 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     private final FPanel pnlDialog = new FPanel(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
     private final FProgressBar barProgress = new FProgressBar();
     private final FButton btnStart = new FButton("Start");
-    private final JTextField txfAddr = new JTextField(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.PROXY_ADDRESS));
-    private final JTextField txfPort = new JTextField(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.PROXY_PORT));
+    private final JTextField txfAddr = new JTextField("Proxy Address");
+    private final JTextField txfPort = new JTextField("Proxy Port");
 
     private final FLabel btnClose = new FLabel.Builder().text("X")
             .hoverable(true).fontAlign(SwingConstants.CENTER).cmdClick(cmdClose).build();
 
-    private final JRadioButton radProxyNone = new FRadioButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.NO_PROXY));
-    private final JRadioButton radProxySocks = new FRadioButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.SOCKS_PROXY));
-    private final JRadioButton radProxyHTTP = new FRadioButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.HTTP_PROXY));
+    private final JRadioButton radProxyNone = new FRadioButton("No Proxy");
+    private final JRadioButton radProxySocks = new FRadioButton("SOCKS Proxy");
+    private final JRadioButton radProxyHTTP = new FRadioButton("HTTP Proxy");
 
     // Proxy info
     private int type; /** */
 
     // Progress variables
-    private DownloadObject[] cards; /** */
+    private ArrayList<DownloadObject> cards; /** */
     private int card; /** */
     private boolean cancel; /** */
     private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; /** */
@@ -174,18 +172,18 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     }
 
     private void readyToStart() {
-        if (this.cards.length == 0) {
+        if (this.cards.size() == 0) {
             barProgress.setString("All items have been downloaded.");
             btnStart.setVisible(true);
             btnStart.setText("OK");
             btnStart.addActionListener(actOK);
         }
         else {
-            barProgress.setMaximum(this.cards.length);
+            barProgress.setMaximum(this.cards.size());
             barProgress.setString(
-                    this.cards.length == 1
+                    this.cards.size() == 1
                         ? "1 item found."
-                        : this.cards.length + " items found.");
+                        : this.cards.size() + " items found.");
 
             btnStart.setVisible(true);
             btnStart.addActionListener(actStartDownload);
@@ -268,10 +266,10 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
                 final int a = GuiDownloader.this.getAverageTimePerObject();
 
-                if (this.card != GuiDownloader.this.cards.length) {
-                    sb.append(this.card + "/" + GuiDownloader.this.cards.length + " - ");
+                if (this.card != GuiDownloader.this.cards.size()) {
+                    sb.append(this.card + "/" + GuiDownloader.this.cards.size() + " - ");
 
-                    long t2Go = (GuiDownloader.this.cards.length - this.card) * a;
+                    long t2Go = (GuiDownloader.this.cards.size() - this.card) * a;
 
                     boolean secOnly = true;
                     if (t2Go > 3600000) {
@@ -290,12 +288,12 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                         sb.append(String.format("0:%02d remaining.", t2Go / 1000));
                     }
                 } else {
-                    sb.append(String.format(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.BAR_CLOSE),
-                            this.card, GuiDownloader.this.cards.length));
+                    sb.append(String.format("%d of %d items finished! Please close!",
+                            this.card, GuiDownloader.this.cards.size()));
                 }
 
                 GuiDownloader.this.barProgress.setString(sb.toString());
-                System.out.println(this.card + "/" + GuiDownloader.this.cards.length + " - " + a);
+                System.out.println(this.card + "/" + GuiDownloader.this.cards.size() + " - " + a);
             }
         }
         EventQueue.invokeLater(new Worker(card));
@@ -322,7 +320,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                         Integer.parseInt(this.txfPort.getText())));
             } catch (final Exception ex) {
                 BugReporter.reportException(ex,
-                        ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Errors.PROXY_CONNECT),
+                        "Proxy connection could not be established!\nProxy address: %s\nProxy port: %s",
                         this.txfAddr.getText(), this.txfPort.getText());
                 return;
             }
@@ -331,10 +329,9 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         if (p != null) {
             final byte[] buf = new byte[1024];
             int len;
-            for (this.update(0); (this.card < this.cards.length) && !this.cancel; this.update(this.card + 1)) {
-
-                final String url = this.cards[this.card].getSource();
-                final File fileDest =  this.cards[this.card].getDestination();
+            for (this.update(0); (this.card < this.cards.size()) && !this.cancel; this.update(this.card + 1)) {
+                final String url = this.cards.get(this.card).getSource();
+                final File fileDest =  this.cards.get(this.card).getDestination();
                 final File base = fileDest.getParentFile();
 
                 try {
@@ -406,7 +403,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
      * 
      * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
      */
-    protected abstract DownloadObject[] getNeededImages();
+    protected abstract ArrayList<DownloadObject> getNeededImages();
 
     /**
      * <p>
@@ -419,8 +416,8 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
      *            a {@link java.util.File} object.
      * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
      */
-    protected static List<DownloadObject> readFile(final String urlsFile, final File dir) {
-        List<String> fileLines = FileUtil.readFile(ForgeProps.getFile(urlsFile));
+    protected static List<DownloadObject> readFile(final String urlsFile, String dir) {
+        List<String> fileLines = FileUtil.readFile(urlsFile);
         final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
         final Pattern splitter = Pattern.compile(Pattern.quote("/"));
         final Pattern replacer = Pattern.compile(Pattern.quote("%20"));
@@ -452,8 +449,8 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
      *            a {@link java.util.File} object.
      * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
      */
-    protected static ArrayList<DownloadObject> readFileWithNames(final String urlNamesFile, final File dir) {
-        List<String> fileLines = FileUtil.readFile(ForgeProps.getFile(urlNamesFile));
+    protected static ArrayList<DownloadObject> readFileWithNames(final String urlNamesFile, final String dir) {
+        List<String> fileLines = FileUtil.readFile(urlNamesFile);
         final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
         final Pattern splitter = Pattern.compile(Pattern.quote(" "));
         final Pattern replacer = Pattern.compile(Pattern.quote("%20"));

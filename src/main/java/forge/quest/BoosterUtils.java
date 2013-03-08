@@ -18,7 +18,6 @@
 package forge.quest;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -32,8 +31,8 @@ import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.card.BoosterGenerator;
-import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.card.UnOpenedProduct;
 import forge.item.BoosterPack;
 import forge.item.CardDb;

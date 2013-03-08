@@ -23,7 +23,6 @@ import java.util.Map;
 
 import com.google.common.base.Function;
 
-
 import forge.ImageCache;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -61,7 +60,7 @@ public class PreconDeck implements InventoryItemFromSet {
      */
     @Override
     public String getImageFilename() {
-        return ImageCache.SEALED_PRODUCT + "precons/" + this.imageFilename;
+        return ImageCache.PRECON_PREFIX + imageFilename;
     }
 
     /*

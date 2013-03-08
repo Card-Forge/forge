@@ -3,6 +3,7 @@ package forge.gui.home.sanctioned;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;

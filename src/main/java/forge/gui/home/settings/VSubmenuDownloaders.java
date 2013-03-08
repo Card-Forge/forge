@@ -27,8 +27,8 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang;
+import forge.properties.NewConstants;
+import forge.util.FileUtil;
 
 /** 
  * Assembles Swing components of utilities submenu singleton.
@@ -175,7 +175,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     }
 
     public void showHowToPlay() {
-        FTextArea directions = new FTextArea(ForgeProps.getLocalized(Lang.HowTo.MESSAGE));
+        FTextArea directions = new FTextArea(FileUtil.readFileToString(NewConstants.TEXT_HOWTO_FILE));
         final FScrollPane scr = new FScrollPane(directions, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scr.setBorder(null);

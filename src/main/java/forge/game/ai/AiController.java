@@ -30,11 +30,10 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.GameEntity;
 import forge.CardPredicates.Presets;
 import forge.Constant;
+import forge.GameEntity;
 import forge.Singletons;
-
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;

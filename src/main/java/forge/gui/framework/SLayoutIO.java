@@ -21,6 +21,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import forge.control.FControl;
+import forge.properties.FileLocation;
 import forge.properties.NewConstants;
 import forge.view.FView;
 
@@ -40,8 +41,7 @@ public final class SLayoutIO {
         doc
     }
 
-    private static String fileDefault = null;
-    private static String filePreferred = null;
+    private static FileLocation file = null;
     private static final XMLEventFactory EF = XMLEventFactory.newInstance();
     private static final XMLEvent NEWLINE = EF.createDTD("\n");
     private static final XMLEvent TAB = EF.createDTD("\t");
@@ -51,7 +51,7 @@ public final class SLayoutIO {
      * @return {@link java.lang.String}
      */
     public static String getFilePreferred() {
-        return filePreferred;
+        return null == file ? null : file.userPrefLoc;
     }
 
     /** Publicly-accessible save method, to neatly handle exception handling.
@@ -83,7 +83,10 @@ public final class SLayoutIO {
         SLayoutIO.setFilesForState();
 
         if (f0 == null) {
-            fWriteTo = filePreferred;
+            if (null == file) {
+                return;
+            }
+            fWriteTo = file.userPrefLoc;
         }
         else {
             fWriteTo = f0.getPath();
@@ -144,12 +147,12 @@ public final class SLayoutIO {
         final XMLEventReader reader;
         if (f != null && f.exists()) {
             reader = inputFactory.createXMLEventReader(new FileInputStream(f));
-        }
-        else if (new File(filePreferred).exists()) {
-            reader = inputFactory.createXMLEventReader(new FileInputStream(filePreferred));
-        }
-        else {
-            reader = inputFactory.createXMLEventReader(new FileInputStream(fileDefault));
+        } else if (null == file) {
+            reader = null;
+        } else if (new File(file.userPrefLoc).exists()) {
+            reader = inputFactory.createXMLEventReader(new FileInputStream(file.userPrefLoc));
+        } else {
+            reader = inputFactory.createXMLEventReader(new FileInputStream(file.defaultLoc));
         }
 
         view.removeAllDragCells();
@@ -160,7 +163,7 @@ public final class SLayoutIO {
         DragCell cell = null;
         double x0 = 0, y0 = 0, w0 = 0, h0 = 0;
 
-        while (reader.hasNext()) {
+        while (null != reader && reader.hasNext()) {
             event = reader.nextEvent();
 
             if (event.isStartElement()) {
@@ -217,28 +220,22 @@ public final class SLayoutIO {
      * Always called before a load or a save, to ensure file addresses are correct.
      */
     private static void setFilesForState() {
-        final String dir = NewConstants.LAYOUT_DIR;
-
         switch(FControl.SINGLETON_INSTANCE.getState()) {
             case HOME_SCREEN:
-                fileDefault = dir + "home_default.xml";
-                filePreferred = dir + "home_preferred.xml";
+                file = NewConstants.HOME_LAYOUT_FILE;
                 break;
             case MATCH_SCREEN:
-                fileDefault = dir + "match_default.xml";
-                filePreferred = dir + "match_preferred.xml";
+                file = NewConstants.MATCH_LAYOUT_FILE;
                 break;
             case DECK_EDITOR_CONSTRUCTED:
             case DECK_EDITOR_LIMITED:
             case DECK_EDITOR_QUEST:
             case DRAFTING_PROCESS:
             case QUEST_CARD_SHOP:
-                fileDefault = dir + "editor_default.xml";
-                filePreferred = dir + "editor_preferred.xml";
+                file = NewConstants.EDITOR_LAYOUT_FILE;
                 break;
             case QUEST_BAZAAR:
-                fileDefault = dir + "bazaar_default.xml";
-                filePreferred = dir + "bazaar_preferred.xml";
+                file = null;
                 break;
             default:
                 throw new IllegalStateException("Layout load failed; UI state unknown.");

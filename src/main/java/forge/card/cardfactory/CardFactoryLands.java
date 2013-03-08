@@ -22,7 +22,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.Command;
 import forge.Singletons;

@@ -31,9 +31,9 @@ import com.google.common.base.Function;
 
 import forge.Singletons;
 import forge.card.CardAiHints;
-import forge.card.ColorSet;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
+import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.deck.DeckBase;
 import forge.game.limited.DraftRankCache;

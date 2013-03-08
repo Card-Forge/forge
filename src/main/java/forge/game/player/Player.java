@@ -34,7 +34,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -45,8 +44,8 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.mana.ManaPool;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaPool;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Spell;

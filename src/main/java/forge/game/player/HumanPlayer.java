@@ -20,12 +20,11 @@ package forge.game.player;
 import java.util.List;
 
 import forge.Card;
-
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
-import forge.game.GameType;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;

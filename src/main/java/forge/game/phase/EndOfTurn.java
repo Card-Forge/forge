@@ -18,7 +18,6 @@
 package forge.game.phase;
 
 import forge.Card;
-
 import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;

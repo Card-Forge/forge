@@ -10,7 +10,6 @@ import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
 import forge.item.CardToken;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
@@ -59,7 +58,7 @@ public class QuestPetStats {
 
     public final CardToken getCard() {
         if (null == petCard) {
-            List<String> cardLines = FileUtil.readFile(new File(ForgeProps.getFile(NewConstants.Quest.BAZAAR_DIR), cardFile));
+            List<String> cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_PETS_DIR, cardFile));
             CardRules rules = CardRulesReader.parseSingleCard(cardLines);
             petCard = new CardToken(rules, CardEdition.UNKNOWN.getCode(), picture.replace('_', ' '));
         }

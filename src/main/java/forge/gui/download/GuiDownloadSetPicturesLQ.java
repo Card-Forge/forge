@@ -31,78 +31,51 @@ import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.Base64Coder;
 
-/** */
 @SuppressWarnings("serial")
 public class GuiDownloadSetPicturesLQ extends GuiDownloader {
-    private String picturesPath;
-
-    /**
-     * <p>
-     * Constructor for Gui_DownloadSetPictures_LQ.
-     * </p>
-     */
     public GuiDownloadSetPicturesLQ() {
         super();
     }
 
-    /**
-     * Adds the card to list.
-     * 
-     * @param cList
-     *            the c list
-     * @param c
-     *            the c
-     * @param cardName
-     *            the card name
-     */
-    protected final void addCardToList(final ArrayList<DownloadObject> cList, final CardPrinted c, final String cardName) {
+    private final void addCardToList(ArrayList<DownloadObject> cList, CardPrinted c, String nameToUse) {
+        File file = new File(NewConstants.CACHE_CARD_PICS_DIR, CardUtil.buildFilename(c, nameToUse) + ".jpg");
+        if (!file.exists()) {
+            cList.add(new DownloadObject(getCardPictureUrl(c, nameToUse), file));
+        }
+
         final String setCode3 = c.getEdition();
         final CardEdition thisSet = Singletons.getModel().getEditions().get(setCode3);
-        final String setCode2 = thisSet.getCode2();
-        final int artsCnt = c.getRules().getEditionInfo(setCode3).getCopiesCount();
-        
-        final String imgFN = CardUtil.buildFilename(c, cardName);
-        final boolean foundSetImage = imgFN.contains(setCode3) || imgFN.contains(setCode2);
+        System.out.println(String.format("%s [%s - %s]", nameToUse, setCode3, thisSet.getName()));
+    }
 
-        if (!foundSetImage) {
-            String url = getCardPictureUrl(c, cardName);
-            
-            final String filename = GuiDownloadPicturesLQ.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
-            cList.add(new DownloadObject(url, new File(this.picturesPath + File.separator + setCode3, filename)));
-
-            System.out.println(String.format("%s [%s - %s]", cardName, setCode3, thisSet.getName()));
+    private static String cleanMWS(String in) {
+        final StringBuffer out = new StringBuffer();
+        char c;
+        for (int i = 0; i < in.length(); i++) {
+            c = in.charAt(i);
+            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
+                out.append("");
+            } else {
+                out.append(c);
+            }
         }
+        return out.toString();
     }
     
     public static String getCardPictureUrl(final CardPrinted c, final String cardName) {
-        final String urlBase = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/fpics/";
+        String setCode3 = c.getEdition();
+        String setCode2 = Singletons.getModel().getEditions().get(setCode3).getCode2();
+        int artsCnt = c.getRules().getEditionInfo(setCode3).getCopiesCount();
+        String filename = CardUtil.buildFilename(cleanMWS(cardName), null, c.getArtIndex(), artsCnt, false) + ".jpg";
 
-        final String setCode3 = c.getEdition();
-        final CardEdition thisSet = Singletons.getModel().getEditions().get(setCode3);
-        final String setCode2 = thisSet.getCode2();
-        
-        final int artsCnt = c.getRules().getEditionInfo(setCode3).getCopiesCount();
-        final String filename = GuiDownloadPicturesLQ.buildIdealFilename(cardName, c.getArtIndex(), artsCnt);
-        return urlBase + setCode2 + "/" + Base64Coder.encodeString(filename, true);
+        return NewConstants.URL_PIC_DOWNLOAD + setCode2 + "/" + Base64Coder.encodeString(filename, true);
     }
 
-    /**
-     * <p>
-     * getNeededCards.
-     * </p>
-     * 
-     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
-     */
     @Override
-    protected final DownloadObject[] getNeededImages() {
-        if (this.picturesPath == null) {
-            this.picturesPath = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
-        }
-        // read token names and urls
+    protected final ArrayList<DownloadObject> getNeededImages() {
         final ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
         Iterable<CardPrinted> allPrinted = Iterables.concat(CardDb.instance().getAllCards(), CardDb.variants().getAllCards());
@@ -112,26 +85,23 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
             if (StringUtils.isBlank(setCode3) || "???".equals(setCode3)) {
                 continue; // we don't want cards from unknown sets
             }
+            
             CardRules cr = c.getRules();
             String firstPartName = cr.getSplitType() == CardSplitType.Split ? CardUtil.buildSplitCardFilename(cr) : c.getName();
-            this.addCardToList(cList, c, firstPartName);
+            addCardToList(cList, c, firstPartName);
+
             if (cr.getSplitType() == CardSplitType.Transform) {
-                this.addCardToList(cList, c, cr.getOtherPart().getName());
+                addCardToList(cList, c, cr.getOtherPart().getName());
             }
         }
 
         // add missing tokens to the list of things to download
-        for (final DownloadObject element : GuiDownloader.readFileWithNames(NewConstants.TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN))) {
+        for (final DownloadObject element : GuiDownloader.readFileWithNames(NewConstants.IMAGE_LIST_TOKENS_FILE, NewConstants.CACHE_TOKEN_PICS_DIR)) {
             if (!element.getDestination().exists()) {
                 cList.add(element);
             }
         }
 
-        // return all card names and urls that are needed
-        final DownloadObject[] out = new DownloadObject[cList.size()];
-        cList.toArray(out);
-
-        return out;
-    } // getNeededImages()
-
-} // end class Gui_DownloadSetPictures_LQ
+        return cList;
+    }
+}

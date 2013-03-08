@@ -17,7 +17,6 @@
  */
 package forge.quest.io;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,6 @@ import java.util.Random;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
@@ -60,8 +58,8 @@ public class ReadPriceList {
      * </p>
      */
     private void setup() {
-        this.priceMap = this.readFile(ForgeProps.getFile(NewConstants.Quest.PRICE));
-        this.priceMap.putAll(this.readFile(ForgeProps.getFile(NewConstants.Quest.BOOSTER_PRICE)));
+        this.priceMap = this.readFile(NewConstants.QUEST_CARD_PRICE_FILE.defaultLoc);
+        this.priceMap.putAll(this.readFile(NewConstants.PRICES_BOOSTER_FILE));
 
     } // setup()
 
@@ -74,7 +72,7 @@ public class ReadPriceList {
      *            a {@link java.io.File} object.
      * @return a {@link java.util.HashMap} object.
      */
-    private HashMap<String, Integer> readFile(final File file) {
+    private HashMap<String, Integer> readFile(String file) {
         final HashMap<String, Integer> map = new HashMap<String, Integer>();
         final Random r = MyRandom.getRandom();
 

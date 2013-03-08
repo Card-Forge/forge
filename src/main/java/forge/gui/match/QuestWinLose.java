@@ -17,22 +17,34 @@
 package forge.gui.match;
 
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 import forge.Card;
 import forge.Singletons;
-import forge.control.FControl;
-
 import forge.card.BoosterData;
 import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
+import forge.control.FControl;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameLossReason;
 import forge.game.GameOutcome;
 import forge.game.MatchController;
 import forge.game.player.LobbyPlayer;
+import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
-import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.ListChooser;
@@ -47,27 +59,14 @@ import forge.item.InventoryItem;
 import forge.item.OpenablePack;
 import forge.item.TournamentPack;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestEventChallenge;
+import forge.quest.IQuestRewardCard;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
-import forge.quest.IQuestRewardCard;
+import forge.quest.QuestEventChallenge;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 /**
  * <p>

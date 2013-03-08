@@ -22,7 +22,6 @@ import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
 import forge.Card;
-
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;

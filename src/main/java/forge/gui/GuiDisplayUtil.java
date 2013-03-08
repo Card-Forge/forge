@@ -41,7 +41,6 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -61,29 +60,11 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 
-/**
- * <p>
- * GuiDisplayUtil class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
 public final class GuiDisplayUtil {
-
     private GuiDisplayUtil() {
         throw new AssertionError();
     }
 
-    /**
-     * <p>
-     * getBorder.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link javax.swing.border.Border} object.
-     */
     public static Border getBorder(final Card card) {
         // color info
         if (card == null) {
@@ -137,11 +118,6 @@ public final class GuiDisplayUtil {
         }
     }
 
-    /**
-     * <p>
-     * devModeGenerateMana.
-     * </p>
-     */
     public static void devModeGenerateMana() {
         final Card dummy = new Card();
         final Player human = Singletons.getControl().getPlayer();
@@ -153,15 +129,6 @@ public final class GuiDisplayUtil {
         abMana.produceMana(null);
     }
 
-    /**
-     * <p>
-     * formatCardType.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link java.lang.String} object.
-     */
     public static String formatCardType(final Card card) {
         final ArrayList<String> list = card.getType();
         final StringBuilder sb = new StringBuilder();
@@ -205,58 +172,20 @@ public final class GuiDisplayUtil {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * cleanString.
-     * </p>
-     * 
-     * @param in
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
     public static String cleanString(final String in) {
         final StringBuffer out = new StringBuffer();
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
-            if ((c == ' ') || (c == '-')) {
+            if ((c == ' ') || (c == '-') || (c == '_')) {
                 out.append('_');
-            } else if (Character.isLetterOrDigit(c) || (c == '_')) {
+            } else if (Character.isLetterOrDigit(c)) {
                 out.append(c);
             }
         }
         return out.toString().toLowerCase();
     }
 
-    /**
-     * <p>
-     * cleanStringMWS.
-     * </p>
-     * 
-     * @param in
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String cleanStringMWS(final String in) {
-        final StringBuffer out = new StringBuffer();
-        char c;
-        for (int i = 0; i < in.length(); i++) {
-            c = in.charAt(i);
-            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
-                out.append("");
-            } else {
-                out.append(c);
-            }
-        }
-        return out.toString();
-    }
-
-
-    /**
-     * <p>
-     * updateGUI.
-     * </p>
-     */
     public static void updateGUI() {
         for (Player p : Singletons.getModel().getGame().getRegisteredPlayers()) {
 
@@ -265,11 +194,6 @@ public final class GuiDisplayUtil {
         }
     }
 
-    /**
-     * <p>
-     * devSetupGameState.
-     * </p>
-     */
     public static void devSetupGameState() {
         String tHumanLife = "-1";
         String tComputerLife = "-1";

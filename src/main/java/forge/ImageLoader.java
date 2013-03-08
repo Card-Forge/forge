@@ -3,70 +3,76 @@ package forge;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 import com.google.common.cache.CacheLoader;
 
 import forge.error.BugReporter;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 final class ImageLoader extends CacheLoader<String, BufferedImage> {
+    // image file extensions for various formats in order of likelihood
+    private static final String[] _FILE_EXTENSIONS = { ".jpg", ".png" };
+    
     @Override
     public BufferedImage load(String key) {
-        // original
-        File path;
-        String filename;
-        if (key.startsWith(ImageCache.TOKEN)) {
-            filename = key.substring(ImageCache.TOKEN.length());
-            path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
-        } else if (key.startsWith(ImageCache.SEALED_PRODUCT)) {
-            filename = key.substring(ImageCache.SEALED_PRODUCT.length());
-            path = ForgeProps.getFile(NewConstants.IMAGE_SEALED_PRODUCT);
+        final String path;
+        final String filename;
+        if (key.startsWith(ImageCache.TOKEN_PREFIX)) {
+            filename = key.substring(ImageCache.TOKEN_PREFIX.length());
+            path = NewConstants.CACHE_TOKEN_PICS_DIR;
+        } else if (key.startsWith(ImageCache.BOOSTER_PREFIX)) {
+            filename = key.substring(ImageCache.BOOSTER_PREFIX.length());
+            path = NewConstants.CACHE_BOOSTER_PICS_DIR;
+        } else if (key.startsWith(ImageCache.FATPACK_PREFIX)) {
+            filename = key.substring(ImageCache.FATPACK_PREFIX.length());
+            path = NewConstants.CACHE_FATPACK_PICS_DIR;
+        } else if (key.startsWith(ImageCache.PRECON_PREFIX)) {
+            filename = key.substring(ImageCache.PRECON_PREFIX.length());
+            path = NewConstants.CACHE_PRECON_PICS_DIR;
+        } else if (key.startsWith(ImageCache.TOURNAMENTPACK_PREFIX)) {
+            filename = key.substring(ImageCache.TOURNAMENTPACK_PREFIX.length());
+            path = NewConstants.CACHE_TOURNAMENTPACK_PICS_DIR;
         } else {
             filename = key;
-            path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+            path = NewConstants.CACHE_CARD_PICS_DIR;
         }
 
-        File file = null;
-        boolean isPng = filename.endsWith(".png");
-        final String fName = isPng || filename.endsWith(".jpg") ? filename : filename + ".jpg";
-        file = new File(path, fName);
-        if (!file.exists()) {
-            // DEBUG
-            //System.out.println("File not found, no image created: "
-            //+ file);
-            return null;
+        BufferedImage ret = _findFile(key, path, filename);
+        
+        // try without set prefix (if any)
+        if (null == ret && filename.contains("/")) {
+            ret = _findFile(key, path, filename.substring(filename.indexOf('/') + 1));
         }
-        final BufferedImage image = getImage(file);
-        //ImageCache.IMAGE_CACHE.put(key, image);
-        return image;
+        
+        if (null == ret) {
+            System.out.println("File not found, no image created: " + key);
+        }
+        
+        return ret;
     }
 
-    /**
-     * <p>
-     * getImage.
-     * </p>
-     *
-     * @param file a {@link java.io.File} object.
-     * @return a {@link java.awt.image.BufferedImage} object.
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
     public static BufferedImage getImage(final File file) {
-        //System.out.printf("Loading from disk: %s\n", file.toString());
-        
-        BufferedImage image;
-        //int format = useAlpha ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB;
+        BufferedImage image = null;;
         try {
             image = ImageIO.read(file);
         } catch (IOException ex) {
             BugReporter.reportException(ex, "Could not read image file " + file.getAbsolutePath() + " ");
-            return null;
         }
         return image;
+    }
+    
+    private static BufferedImage _findFile(String key, String path, String filename) {
+        for (String ext : _FILE_EXTENSIONS) {
+            File file = new File(path, filename + ext);
+            if (file.exists()) {
+                System.out.println(String.format("Found %s at: %s", key, file.getAbsolutePath()));
+                return getImage(file);
+            }
+        }
+        
+        return null;
+
     }
 }

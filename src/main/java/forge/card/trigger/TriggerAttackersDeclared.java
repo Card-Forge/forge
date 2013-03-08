@@ -20,9 +20,7 @@ package forge.card.trigger;
 import java.util.List;
 import java.util.Map;
 
-
 import forge.Card;
-
 import forge.card.spellability.SpellAbility;
 
 /**

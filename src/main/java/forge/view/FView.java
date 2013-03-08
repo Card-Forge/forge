@@ -16,7 +16,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
-
 import forge.Singletons;
 import forge.control.FControl;
 import forge.gui.deckeditor.VDeckEditorUI;

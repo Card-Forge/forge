@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.lang.math.RandomUtils;
-import forge.card.ability.SpellAbilityAi;import forge.card.ability.effects.CharmEffect;
+
+import forge.card.ability.SpellAbilityAi;
+import forge.card.ability.effects.CharmEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.AIPlayer;

@@ -5,8 +5,8 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.Singletons;
 import forge.card.CardType;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;

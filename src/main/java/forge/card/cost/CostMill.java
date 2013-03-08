@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.Card;
-
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;

@@ -20,21 +20,21 @@ package forge.util;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import forge.error.BugReporter;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang.GuiDownloadPictures.Errors;
 
 /**
  * <p>
@@ -92,31 +92,27 @@ public final class FileUtil {
      * @param data
      *            a {@link java.util.List} object.
      */
-    public static void writeFile(final File file, final List<String> data) {
+    public static void writeFile(File file, Collection<?> data) {
         try {
-            final BufferedWriter io = new BufferedWriter(new FileWriter(file));
-            for (int i = 0; i < data.size(); i++) {
-                io.write(data.get(i));
-                io.write("\r\n");
+            PrintWriter p = new PrintWriter(file);
+            for (Object o : data) {
+                p.println(o);
             }
-
-            io.flush();
-            io.close();
+            p.close();
         } catch (final Exception ex) {
             BugReporter.reportException(ex);
             throw new RuntimeException("FileUtil : writeFile() error, problem writing file - " + file + " : " + ex);
         }
     } // writeAllDecks()
 
-    /**
-     * <p>
-     * readFile.
-     * </p>
-     * 
-     * @param filename
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
+    public static String readFileToString(String filename) {
+        StringBuilder s = new StringBuilder();
+        for (String line : readFile(filename)) {
+            s.append(line).append('\n');
+        }
+        return s.toString();
+    }
+    
     public static List<String> readFile(final String filename) {
         return FileUtil.readFile(new File(filename));
     }
@@ -181,14 +177,6 @@ public final class FileUtil {
         return list;
     }
 
-    /**
-     * Download url into file.
-     * 
-     * @param url
-     *            the url
-     * @param target
-     *            the target
-     */
     public static void downloadUrlIntoFile(final String url, final File target) {
         try {
             final byte[] buf = new byte[1024];
@@ -201,14 +189,13 @@ public final class FileUtil {
             // while - read and write file
             while ((len = in.read(buf)) != -1) {
                 out.write(buf, 0, len);
-
             } // while - read and write file
             in.close();
             out.flush();
             out.close();
         } catch (final IOException ioex) {
-            BugReporter.reportException(ioex, ForgeProps.getLocalized(Errors.OTHER), "deck_temp.html", url);
+            JOptionPane.showMessageDialog(null, String.format("Error connecting to: %s", url),
+                "Download error", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 }

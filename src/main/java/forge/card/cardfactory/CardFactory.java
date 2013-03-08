@@ -17,7 +17,6 @@
  */
 package forge.card.cardfactory;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +30,6 @@ import forge.Color;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
-import forge.card.ability.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
@@ -46,7 +44,6 @@ import forge.game.player.Player;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.item.IPaperCard;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 /**
@@ -79,10 +76,10 @@ public class CardFactory {
      */
     private final CardStorageReader reader;
 
-    public CardFactory(final File file) {
+    public CardFactory() {
 
         GuiUtils.checkEDT("CardFactory$constructor", false);
-        reader = new CardStorageReader(ForgeProps.getFile(NewConstants.CARDSFOLDER), true);
+        reader = new CardStorageReader(NewConstants.CARD_DATA_DIR.defaultLoc, true);
         try {
             // this fills in our map of card names to Card instances.
             final List<CardRules> listCardRules = reader.loadCards();

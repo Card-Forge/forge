@@ -1,6 +1,7 @@
 package forge.model;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -52,7 +53,7 @@ public class FModelTest {
      *             if something is really wrong
      */
     @Test(enabled = false)
-    public final void test_ctor_close_ctor() throws FileNotFoundException {
+    public final void test_ctor_close_ctor() throws IOException {
         // by
         // Braids
         // on

@@ -22,7 +22,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CounterType;
 import forge.game.ai.ComputerUtilCard;

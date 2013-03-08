@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
@@ -40,9 +39,9 @@ import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
-//import forge.util.TextUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+//import forge.util.TextUtil;
 
 /**
  * <p>

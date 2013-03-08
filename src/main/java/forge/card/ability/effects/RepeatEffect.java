@@ -2,6 +2,7 @@ package forge.card.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;

@@ -19,6 +19,7 @@ package forge;
 
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ExecutionException;
+
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
@@ -27,6 +28,7 @@ import com.mortennobel.imagescaling.ResampleOp;
 import forge.gui.GuiDisplayUtil;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
+import forge.properties.NewConstants;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -43,18 +45,17 @@ import forge.properties.ForgePreferences.FPref;
  * @version $Id$
  */
 public class ImageCache {
-    /** Constant <code>imageCache</code>. */
-    static final LoadingCache<String, BufferedImage> CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
-    /** Constant <code>FULL_SIZE</code>. */
-
-    public static final String SEALED_PRODUCT = "sealed://";
-    public static final String TOKEN = "token://";
+    // short prefixes to save memory
+    public static final String TOKEN_PREFIX          = "t:";
+    public static final String BOOSTER_PREFIX        = "b:";
+    public static final String FATPACK_PREFIX        = "f:";
+    public static final String PRECON_PREFIX         = "p:";
+    public static final String TOURNAMENTPACK_PREFIX = "o:";
+    
+    static private final LoadingCache<String, BufferedImage> CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
 
     public static BufferedImage getImage(final Card card, final int width, final int height) {
-        //SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS"); 
-        //System.out.printf("%s - load '%s' (%d x %d)\n", sdf.format(new Date()), card.getImageFilename(), width, height );
-
-        final String key = card.canBeShownTo(Singletons.getControl().getPlayer()) ? ImageCache.getKey(card) : "Morph";
+        final String key = card.canBeShownTo(Singletons.getControl().getPlayer()) ? ImageCache.getKey(card) : NewConstants.CACHE_MORPH_IMAGE_FILE;
         return scaleImage(key, width, height);
     }
 
@@ -70,12 +71,6 @@ public class ImageCache {
         return scaleImage(key, width, height);
     }
     
-    /**
-     * TODO: Write javadoc for this method.
-     * @param original
-     * @param scale
-     * @return
-     */
     private static BufferedImage scaleImage(String key, final int width, final int height) {
         if (3 > width || 3 > height) {
             // picture too small; return a blank
@@ -118,10 +113,6 @@ public class ImageCache {
 
     /**
      * Returns the Image corresponding to the key.
-     * 
-     * @param key
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.awt.image.BufferedImage} object.
      */
     private static BufferedImage getImage(final String key) {
         try {
@@ -140,14 +131,10 @@ public class ImageCache {
 
     /**
      * Returns the map key for a card, without any suffixes for the image size.
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link java.lang.String} object.
      */
     public static String getKey(final Card card) {
         if ((card.isToken() && !card.isCopiedToken()) || card.isFaceDown()) {
-            return ImageCache.TOKEN + GuiDisplayUtil.cleanString(card.getImageFilename());
+            return ImageCache.TOKEN_PREFIX + GuiDisplayUtil.cleanString(card.getImageFilename());
         }
         return card.getImageFilename(); // key;
     }
@@ -155,5 +142,4 @@ public class ImageCache {
     public static String getKey(final InventoryItem ii) {
         return ii.getImageFilename();
     }
-
 }

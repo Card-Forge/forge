@@ -17,8 +17,8 @@
  */
 package forge.card.mana;
 
-import forge.card.MagicColor;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.util.BinaryUtil;
 
 /**

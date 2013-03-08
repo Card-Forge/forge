@@ -23,6 +23,7 @@ import java.util.Map;
 
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
+
 import forge.Command;
 import forge.Singletons;
 import forge.card.CardRulesPredicates;

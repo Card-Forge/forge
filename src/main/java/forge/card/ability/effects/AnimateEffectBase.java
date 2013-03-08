@@ -18,8 +18,8 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
-import forge.Card;
 
+import forge.Card;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;

@@ -8,30 +8,14 @@ import java.util.List;
  * The Enum Zone.
  */
 public enum ZoneType {
-
-    /** The Hand. */
     Hand(true),
-
-    /** The Library. */
     Library(true),
-
-    /** The Graveyard. */
     Graveyard(false),
-
-    /** The Battlefield. */
     Battlefield(false),
-
-    /** The Exile. */
     Exile(false),
-
-    /** The Command. */
     Command(false),
-
-    /** The Stack. */
     Stack(false),
-
     Sideboard(true),
-    /** Ante. */
     Ante(false);
 
     public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(new ZoneType[]{Battlefield, Graveyard, Exile, Command/*, Hand*/});
@@ -40,7 +24,6 @@ public enum ZoneType {
     private ZoneType(boolean holdsHidden) {
         holdsHiddenInfo = holdsHidden;
     }
-
 
     public static ZoneType smartValueOf(final String value) {
         if (value == null) {
@@ -96,5 +79,4 @@ public enum ZoneType {
     public static boolean isKnown(final String origin) {
         return !isHidden(origin);
     }
-
 }

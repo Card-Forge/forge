@@ -25,7 +25,6 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;

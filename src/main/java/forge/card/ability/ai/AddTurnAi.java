@@ -19,10 +19,10 @@ package forge.card.ability.ai;
 
 import java.util.List;
 
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 

@@ -26,7 +26,6 @@ import java.util.Stack;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -34,9 +33,9 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
-import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;

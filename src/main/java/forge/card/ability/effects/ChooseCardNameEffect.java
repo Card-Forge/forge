@@ -12,8 +12,8 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.Singletons;
 import forge.card.CardRulesPredicates;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;

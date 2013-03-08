@@ -18,15 +18,12 @@
 package forge.properties;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.io.Files;
 
 import forge.Constant;
 import forge.Constant.Preferences;
@@ -162,37 +159,20 @@ public class ForgePreferences {
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         preferenceValues = new HashMap<FPref, String>();
-        try {
-            // Preferences files have been consolidated into res/prefs/.
-            // This code is here temporarily to facilitate this transfer.
-            // After a while, this can be deleted.  Doublestrike 21-5-12
-            final File oldFile = new File("forge.preferences");
+        List<String> lines = FileUtil.readFile(NewConstants.MAIN_PREFERENCES_FILE.userPrefLoc);
+        for (String line : lines) {
 
-            if (oldFile.exists()) {
-                final File newFile = new File(NewConstants.PREFS_GLOBAL_FILE);
-                Files.copy(oldFile, newFile);
-                oldFile.delete();
-            }  // END TEMPORARY CONSOLIDATION FACILITATION
-
-            List<String> lines = FileUtil.readFile(NewConstants.PREFS_GLOBAL_FILE);
-            for (String line : lines) {
-
-                if (line.startsWith("#") || (line.length() == 0)) {
-                    continue;
-                }
-
-                final String[] split = line.split("=");
-
-                if (split.length == 2) {
-                    this.setPref(split[0], split[1]);
-                } else if (split.length == 1 && line.endsWith("=")) {
-                    this.setPref(split[0], "");
-                }
+            if (line.startsWith("#") || (line.length() == 0)) {
+                continue;
             }
-        } catch (FileNotFoundException ex) {
-            //ex.printStackTrace();
-        } catch (IOException ex) {
-            //ex.printStackTrace();
+
+            final String[] split = line.split("=");
+
+            if (split.length == 2) {
+                this.setPref(split[0], split[1]);
+            } else if (split.length == 1 && line.endsWith("=")) {
+                this.setPref(split[0], "");
+            }
         }
     }
 
@@ -287,7 +267,7 @@ public class ForgePreferences {
         BufferedWriter writer = null;
 
         try {
-            writer = new BufferedWriter(new FileWriter(NewConstants.PREFS_GLOBAL_FILE));
+            writer = new BufferedWriter(new FileWriter(NewConstants.MAIN_PREFERENCES_FILE.userPrefLoc));
             for (FPref key : FPref.values()) {
                 writer.write(key + "=" + getPref(key));
                 writer.newLine();

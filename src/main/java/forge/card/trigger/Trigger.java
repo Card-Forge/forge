@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Singletons;

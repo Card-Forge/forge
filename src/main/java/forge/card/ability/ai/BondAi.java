@@ -17,8 +17,8 @@
  */
 package forge.card.ability.ai;
 
-import forge.card.spellability.SpellAbility;
 import forge.card.ability.SpellAbilityAi;
+import forge.card.spellability.SpellAbility;
 import forge.game.player.AIPlayer;
 
 /**

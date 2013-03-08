@@ -1,12 +1,11 @@
 package forge.game.limited;
 
-import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 
@@ -29,7 +28,7 @@ public class ReadDraftRankings {
      */
     public ReadDraftRankings() {
         this.setSizes = new HashMap<String, Integer>();
-        this.draftRankings = this.readFile(ForgeProps.getFile(NewConstants.Draft.RANKINGS));
+        this.draftRankings = this.readFile(FileUtil.readFile(NewConstants.DRAFT_RANKINGS_FILE));
     } // setup()
 
     /**
@@ -41,10 +40,10 @@ public class ReadDraftRankings {
      *            a {@link java.io.File} object.
      * @return a {@link java.util.Map} object.
      */
-    private Map<String, Map<String, Integer>> readFile(final File file) {
+    private Map<String, Map<String, Integer>> readFile(List<String> lines) {
 
         final Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
-        for (String line : FileUtil.readFile(file)) {
+        for (String line : lines) {
             // stop reading if end of file or blank line is read
             if (line == null || line.length() == 0) {
                 break;

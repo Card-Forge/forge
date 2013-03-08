@@ -30,7 +30,6 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
 import forge.gui.GuiDisplayUtil;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 /**
@@ -96,8 +95,7 @@ public class CopyFiles extends SwingWorker<Void, Integer> {
             cName = name.substring(0, name.length() - 8);
             cName = GuiDisplayUtil.cleanString(cName) + ".jpg";
             final File sourceFile = new File(source);
-            final File base = ForgeProps.getFile(NewConstants.IMAGE_BASE);
-            final File reciever = new File(base, cName);
+            final File reciever = new File(NewConstants.CACHE_CARD_PICS_DIR, cName);
             reciever.delete();
 
             try {

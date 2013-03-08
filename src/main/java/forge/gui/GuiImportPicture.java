@@ -41,7 +41,6 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.event.MouseInputAdapter;
 
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.CopyFiles;
 import forge.util.FileFinder;
@@ -129,7 +128,7 @@ public class GuiImportPicture extends JDialog {
             this.jLabelHDDFree = new JLabel();
             this.jLabelHDDFree.setBounds(new Rectangle(15, 119, 177, 16));
 
-            final File file = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+            final File file = new File(NewConstants.CACHE_CARD_PICS_DIR);
 
             final long freeSpace = file.getFreeSpace();
             this.freeSpaceM = freeSpace / 1024 / 1024;
@@ -223,7 +222,7 @@ public class GuiImportPicture extends JDialog {
                                 start = fName.indexOf("full");
                                 fName = fName.substring(0, start - 1) + fName.substring(start + 4, fName.length() - 4);
                                 fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
-                                final File file = new File(ForgeProps.getFile(NewConstants.IMAGE_BASE), fName);
+                                final File file = new File(NewConstants.CACHE_CARD_PICS_DIR, fName);
                                 if (!file.exists()) {
                                     GuiImportPicture.this.filesForCopy = GuiImportPicture.this.filesForCopy + 1;
                                     filesToCopySize = filesToCopySize + GuiImportPicture.this.listFiles.get(i).length();
@@ -324,7 +323,7 @@ public class GuiImportPicture extends JDialog {
                                 start = fName.indexOf("full");
                                 fName = fName.substring(0, start - 1) + fName.substring(start + 4, fName.length() - 4);
                                 fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
-                                final File file = new File(ForgeProps.getFile(NewConstants.IMAGE_BASE), fName);
+                                final File file = new File(NewConstants.CACHE_CARD_PICS_DIR, fName);
                                 if (!file.exists()) {
                                     GuiImportPicture.this.filesForCopy = GuiImportPicture.this.filesForCopy + 1;
                                     filesToCopySize = filesToCopySize + GuiImportPicture.this.listFiles.get(i).length();

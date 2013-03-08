@@ -19,6 +19,7 @@ package forge.card.cardfactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import com.google.common.base.Predicate;
@@ -27,7 +28,6 @@ import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;

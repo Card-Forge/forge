@@ -24,7 +24,6 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;

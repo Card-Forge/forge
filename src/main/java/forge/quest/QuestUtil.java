@@ -17,17 +17,16 @@
  */
 package forge.quest;
 
-import forge.Card;
+import java.util.ArrayList;
+import java.util.List;
 
+import forge.Card;
 import forge.card.CardEdition;
 import forge.card.CardRulesReader;
 import forge.item.CardDb;
 import forge.item.CardToken;
 import forge.item.IPaperCard;
 import forge.quest.bazaar.QuestPetController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -144,7 +143,7 @@ public class QuestUtil {
         script.add("Types:" + properties[5].replace(';', ' '));
         script.add("Oracle:"); // tokens don't have texts yet
         // c.setManaCost(properties[1]);
-        String fileName = properties[1] + " " + properties[2] + " " + properties[3] + " " + properties[4];
+        String fileName = properties[1] + "_" + properties[2] + "_" + properties[3] + "_" + properties[4];
         final CardToken c = new CardToken(CardRulesReader.parseSingleCard(script), CardEdition.UNKNOWN.getCode(), fileName);
         return c;
     }

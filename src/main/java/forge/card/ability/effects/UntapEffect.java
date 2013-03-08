@@ -1,12 +1,13 @@
 package forge.card.ability.effects;
 
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;

@@ -24,9 +24,8 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.Card;
-import forge.Singletons;
-
 import forge.CardLists;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.control.input.Input;
@@ -34,7 +33,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
-
 import forge.view.ButtonUtil;
 
 /**

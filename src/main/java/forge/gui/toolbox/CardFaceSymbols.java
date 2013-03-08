@@ -24,11 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-
 import com.esotericsoftware.minlog.Log;
 
-import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 
 /**
  * <p>

@@ -5,8 +5,8 @@ import java.util.Random;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;

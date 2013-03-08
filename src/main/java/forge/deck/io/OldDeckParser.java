@@ -60,9 +60,9 @@ public class OldDeckParser {
      * @param sealed2 the sealed2
      * @param cube2 the cube2
      */
-    public OldDeckParser(final File file, final IStorage<Deck> constructed2, final IStorage<DeckGroup> draft2,
+    public OldDeckParser(final IStorage<Deck> constructed2, final IStorage<DeckGroup> draft2,
             final IStorage<DeckGroup> sealed2, final IStorage<Deck> cube2) {
-        this.deckDir = file;
+        this.deckDir = new File("res/decks");
         this.sealed = sealed2;
         this.constructed = constructed2;
         this.cube = cube2;

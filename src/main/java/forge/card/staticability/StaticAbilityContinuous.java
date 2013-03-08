@@ -23,10 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
-import forge.Singletons;
-
 import forge.CardLists;
 import forge.CardUtil;
+import forge.Singletons;
 import forge.StaticEffect;
 import forge.StaticEffects;
 import forge.card.CardType;

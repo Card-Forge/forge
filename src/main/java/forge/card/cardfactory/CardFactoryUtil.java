@@ -31,7 +31,6 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -46,9 +45,9 @@ import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
-import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.replacement.ReplacementLayer;
@@ -81,7 +80,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.util.Aggregates;
-
 import forge.view.ButtonUtil;
 
 /**

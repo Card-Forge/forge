@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Predicate;
+
 import forge.Card;
 import forge.card.CardRarity;
 import forge.card.CardRules;

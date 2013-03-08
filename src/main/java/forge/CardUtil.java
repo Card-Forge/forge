@@ -17,7 +17,6 @@
  */
 package forge;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +38,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDisplayUtil;
 import forge.item.IPaperCard;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
@@ -131,7 +129,7 @@ public final class CardUtil {
         final String set = card.getCurSetCode();
         CardInSet neededSet = card.getRules().getEditionInfo(set);
         final int cntPictures = neededSet == null ? 1 : neededSet.getCopiesCount();
-        return CardUtil.buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
+        return CardUtil.buildFilename(GuiDisplayUtil.cleanString(card.getName()), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
     }
 
     /**
@@ -146,7 +144,7 @@ public final class CardUtil {
         final int maxIndex = cr.getEditionInfo(card.getEdition()).getCopiesCount();
         // picture is named AssaultBattery.full.jpg
         String imageName = cr.getSplitType() != CardSplitType.Split ? card.getName() : buildSplitCardFilename(cr);
-        return CardUtil.buildFilename(imageName, card.getEdition(), card.getArtIndex(), maxIndex, false);
+        return CardUtil.buildFilename(GuiDisplayUtil.cleanString(imageName), card.getEdition(), card.getArtIndex(), maxIndex, false);
     }
     
     public static String buildSplitCardFilename(CardRules cr) {
@@ -164,68 +162,18 @@ public final class CardUtil {
      */
     public static String buildFilename(final IPaperCard card, final String nameToUse) {
         final int maxIndex = card.getRules().getEditionInfo(card.getEdition()).getCopiesCount();
-        return CardUtil.buildFilename(nameToUse, card.getEdition(), card.getArtIndex(), maxIndex, false);
+        return CardUtil.buildFilename(GuiDisplayUtil.cleanString(nameToUse), card.getEdition(), card.getArtIndex(), maxIndex, false);
     }
 
-    private static String buildFilename(final String cardName, final String setName, final int artIndex,
+    public static String buildFilename(final String cleanCardName, final String setName, final int artIndex,
             final int artIndexMax, final boolean isToken) {
-        final File path = ForgeProps.getFile(isToken ? NewConstants.IMAGE_TOKEN : NewConstants.IMAGE_BASE);
-        final String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
-        final String cleanCardName = GuiDisplayUtil.cleanString(cardName);
-
-        File f = null;
-        if (StringUtils.isNotBlank(setName)) {
-            final String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
-
-            // First, try 3 letter set code with MWS filename format
-            final String mwsSet3 = String.format("%s/%s%s.full", setName, mwsCardName, nn);
-            f = new File(path, mwsSet3 + ".jpg");
-            if (f.exists()) {
-                return mwsSet3;
-            }
-
-            // Second, try 2 letter set code with MWS filename format
-            final String mwsSet2 = String.format("%s/%s%s.full", Singletons.getModel().getEditions().getCode2ByCode(setName), mwsCardName, nn);
-            f = new File(path, mwsSet2 + ".jpg");
-            if (f.exists()) {
-                return mwsSet2;
-            }
-
-            // Third, try 3 letter set code with Forge filename format
-            final String forgeSet3 = String.format("%s/%s%s", setName, cleanCardName, nn);
-            f = new File(path, forgeSet3 + ".jpg");
-            if (f.exists()) {
-                return forgeSet3;
-            }
-        }
-
-        // Last, give up with set images, go with the old picture type
-        final String forgePlain = String.format("%s%s", cleanCardName, nn);
-
-        f = new File(path, forgePlain + ".jpg");
-        if (f.exists()) {
-            return forgePlain;
-        }
-
-        // give up with art index
-        f = new File(path, cleanCardName + ".jpg");
-        if (f.exists()) {
-            return cleanCardName;
-        }
-
-        // if still no file, download if option enabled?
-        return "none";
+        return String.format("%s%s%s%s.full",
+                        isToken ? ImageCache.TOKEN_PREFIX : "",
+                        StringUtils.isBlank(setName) ? "" : setName + "/",
+                        cleanCardName,
+                        artIndexMax <= 1 ? "" : String.valueOf(artIndex + 1));
     }
 
-    /**
-     * <p>
-     * getShortColorsString.
-     * </p>
-     * 
-     * @param colors
-     *            a {@link java.util.ArrayList} object.
-     * @return a {@link java.lang.String} object.
-     */
     public static String getShortColorsString(final ArrayList<String> colors) {
         String colorDesc = "";
         for (final String col : colors) {
@@ -412,7 +360,7 @@ public final class CardUtil {
         ret.setName("");
         ret.setType(types);
 
-        ret.setImageFilename(NewConstants.MORPH_IMAGE_FILE_NAME);
+        ret.setImageFilename(NewConstants.CACHE_MORPH_IMAGE_FILE);
 
         return ret;
     }

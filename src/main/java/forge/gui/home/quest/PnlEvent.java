@@ -19,7 +19,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestEvent;
 
@@ -55,8 +54,7 @@ class PnlEvent extends JPanel {
         this.event = e0;
 
         // Icon
-        final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-        final File file = new File(base, event.getIconFilename());
+        final File file = new File(NewConstants.CACHE_ICON_PICS_DIR, event.getIconFilename());
 
         if (!file.exists()) {
             img = FSkin.getIcon(FSkin.InterfaceIcons.ICO_UNKNOWN).getImage();

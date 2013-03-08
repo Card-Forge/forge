@@ -7,8 +7,8 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CounterType;
 import forge.CardPredicates.Presets;
+import forge.CounterType;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;

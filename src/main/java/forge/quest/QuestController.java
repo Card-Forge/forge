@@ -24,14 +24,13 @@ import com.google.common.base.Predicates;
 
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.quest.data.GameFormatQuest;
 import forge.game.GameFormat;
 import forge.item.CardPrinted;
 import forge.item.PreconDeck;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.bazaar.QuestBazaarManager;
 import forge.quest.bazaar.QuestPetStorage;
+import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
@@ -169,7 +168,7 @@ public class QuestController {
      */
     public static IStorageView<PreconDeck> getPrecons() {
         if (null == preconManager) {
-            preconManager = new StorageView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
+            preconManager = new StorageView<PreconDeck>(new PreconReader(new File(NewConstants.QUEST_PRECON_DIR.defaultLoc)));
         }
 
         return QuestController.preconManager;
@@ -339,7 +338,7 @@ public class QuestController {
      */
     public final QuestBazaarManager getBazaar() {
         if (null == this.bazaar) {
-            this.bazaar = new QuestBazaarManager(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
+            this.bazaar = new QuestBazaarManager(new File(NewConstants.BAZAAR_FILE));
         }
         return this.bazaar;
     }
@@ -374,12 +373,12 @@ public class QuestController {
      */
     public void resetDuelsManager() {
         if (this.model == null || this.model.getWorldId() == null) {
-            this.duelManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DUELS));
+            this.duelManager = new QuestEventManager(new File(NewConstants.DEFAULT_DUELS_DIR));
         } else {
             QuestWorld world = Singletons.getModel().getWorlds().get(this.model.getWorldId());
 
             if (world == null || world.getDuelsDir() == null) {
-                this.duelManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DUELS));
+                this.duelManager = new QuestEventManager(new File(NewConstants.DEFAULT_DUELS_DIR));
             } else {
                 this.duelManager = new QuestEventManager(new File("res/quest/world/" + world.getDuelsDir()));
             }
@@ -392,13 +391,13 @@ public class QuestController {
      */
     public void resetChallengesManager() {
         if (this.model == null || this.model.getWorldId() == null) {
-            this.challengesManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.CHALLENGES));
+            this.challengesManager = new QuestEventManager(new File(NewConstants.DEFAULT_CHALLENGES_DIR));
         }
         else {
             QuestWorld world = Singletons.getModel().getWorlds().get(this.model.getWorldId());
 
             if (world == null || world.getChallengesDir() == null) {
-                this.challengesManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.CHALLENGES));
+                this.challengesManager = new QuestEventManager(new File(NewConstants.DEFAULT_CHALLENGES_DIR));
             } else {
                 this.challengesManager = new QuestEventManager(new File("res/quest/world/" + world.getChallengesDir()));
             }
@@ -412,7 +411,7 @@ public class QuestController {
      */
     public QuestPetStorage getPetsStorage() {
         if (this.pets == null) {
-            this.pets = new QuestPetStorage(ForgeProps.getFile(NewConstants.Quest.BAZAAR));
+            this.pets = new QuestPetStorage(new File(NewConstants.CARD_DATA_PETS_DIR));
         }
 
         return this.pets;
@@ -435,5 +434,4 @@ public class QuestController {
 
         return unlocksAvaliable > unlocksSpent ? Math.min(unlocksAvaliable - unlocksSpent, cntLocked) : 0;
     }
-
 }

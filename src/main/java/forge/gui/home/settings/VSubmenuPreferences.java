@@ -42,8 +42,6 @@ import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 
 /** 
  * Assembles Swing components of preferences submenu singleton.
@@ -82,7 +80,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbUploadDraft = new OptionsCheckBox("Upload Draft Picks");
     private final JCheckBox cbStackLand = new OptionsCheckBox("Stack AI Land");
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
-    private final JCheckBox cbDevMode = new OptionsCheckBox(ForgeProps.getLocalized(NewGameText.DEV_MODE));
+    private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");

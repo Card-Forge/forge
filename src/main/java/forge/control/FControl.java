@@ -46,7 +46,6 @@ import forge.gui.match.VMatchUI;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.gui.toolbox.FSkin;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
@@ -152,12 +151,11 @@ public enum FControl {
         // Does not use progress bar, due to be deprecated with battlefield refactoring.
         CardFaceSymbols.loadImages();
 
-
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
 
         // Preload quest data if present
-        final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
+        final File dirQuests = new File(NewConstants.QUEST_SAVE_DIR);
         final String questname = Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
         final File data = new File(dirQuests.getPath(), questname);
         if (data.exists()) {

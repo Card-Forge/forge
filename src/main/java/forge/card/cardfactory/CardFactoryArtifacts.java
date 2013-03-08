@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 
 import forge.Card;
 import forge.Command;
-
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;

@@ -14,13 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.Singletons;
 import forge.game.GameFormat;
 import forge.gui.framework.ICDoc;
 import forge.item.CardPrinted;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestMode;
@@ -100,7 +99,7 @@ public enum CSubmenuQuestData implements ICDoc {
     @Override
     public void update() {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
-        final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
+        final File dirQuests = new File(NewConstants.QUEST_SAVE_DIR);
         final QuestController qc = Singletons.getModel().getQuest();
 
         // Temporary transition code between v1.2.2 and v1.2.3.

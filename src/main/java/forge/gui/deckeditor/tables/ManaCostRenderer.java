@@ -24,8 +24,8 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.gui.toolbox.CardFaceSymbols;
 
 /**

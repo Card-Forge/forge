@@ -30,7 +30,6 @@ import javax.swing.JOptionPane;
 
 import com.google.common.base.Function;
 
-
 import forge.Card;
 import forge.Constant.Preferences;
 import forge.Singletons;
@@ -45,7 +44,6 @@ import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 import forge.item.ItemPool;
 import forge.item.ItemPoolView;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
@@ -374,30 +372,18 @@ public final class BoosterDraft implements IBoosterDraft {
     /** This will upload drafting picks to cardforge HQ. */
     @Override
     public void finishedDrafting() {
-        if (Preferences.UPLOAD_DRAFT) {
-            if (this.draftPicks.size() > 1) {
-                final ArrayList<String> outDraftData = new ArrayList<String>();
-
-                for (final Entry<String, Float> key : this.draftPicks.entrySet()) {
-                    outDraftData.add(key.getValue() + "|" + key.getKey());
-                }
-                Collections.sort(outDraftData);
-                FileUtil.writeFile("res/draft/tmpDraftData.txt", outDraftData);
-
-                final HttpUtil poster = new HttpUtil();
-                String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/submitDraftData.php?fmt=";
-                poster.upload(url + this.draftFormat, "res/draft/tmpDraftData.txt");
-            }
+        if (!Preferences.UPLOAD_DRAFT || 1 >= draftPicks.size()) {
+            return;
         }
+        
+        ArrayList<String> outDraftData = new ArrayList<String>();
+        for (Entry<String, Float> key : draftPicks.entrySet()) {
+            outDraftData.add(key.getValue() + "|" + key.getKey());
+        }
+        Collections.sort(outDraftData);
+        HttpUtil.upload(NewConstants.URL_DRAFT_UPLOAD + "?fmt=" + draftFormat, outDraftData);
     }
 
-    /**
-     * <p>
-     * getSetCombos.
-     * </p>
-     * 
-     * @return an ArrayList of the set choices.
-     */
     private ArrayList<String> getSetCombos(final String[] sets) {
         ArrayList<String> setCombos = new ArrayList<String>();
         if (sets.length >= 2) {
