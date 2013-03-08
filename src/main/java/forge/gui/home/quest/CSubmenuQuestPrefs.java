@@ -59,8 +59,8 @@ public enum CSubmenuQuestPrefs implements ICDoc {
                 }
                 break;
             case BOOSTER_COMMONS:
-                temp1 = prefs.getPreferenceInt(QPref.BOOSTER_UNCOMMONS);
-                temp2 = prefs.getPreferenceInt(QPref.BOOSTER_RARES);
+                temp1 = prefs.getPrefInt(QPref.BOOSTER_UNCOMMONS);
+                temp2 = prefs.getPrefInt(QPref.BOOSTER_RARES);
 
                 if (temp1 + temp2 + val > 15) {
                     showError(i0, "Booster packs must have maximum 15 cards.");
@@ -68,8 +68,8 @@ public enum CSubmenuQuestPrefs implements ICDoc {
                 }
                 break;
             case BOOSTER_UNCOMMONS:
-                temp1 = prefs.getPreferenceInt(QPref.BOOSTER_COMMONS);
-                temp2 = prefs.getPreferenceInt(QPref.BOOSTER_RARES);
+                temp1 = prefs.getPrefInt(QPref.BOOSTER_COMMONS);
+                temp2 = prefs.getPrefInt(QPref.BOOSTER_RARES);
 
                 if (temp1 + temp2 + val > 15) {
                     showError(i0, "Booster packs must have maximum 15 cards.");
@@ -77,8 +77,8 @@ public enum CSubmenuQuestPrefs implements ICDoc {
                 }
                 break;
             case BOOSTER_RARES:
-                temp1 = prefs.getPreferenceInt(QPref.BOOSTER_COMMONS);
-                temp2 = prefs.getPreferenceInt(QPref.BOOSTER_UNCOMMONS);
+                temp1 = prefs.getPrefInt(QPref.BOOSTER_COMMONS);
+                temp2 = prefs.getPrefInt(QPref.BOOSTER_UNCOMMONS);
 
                 if (temp1 + temp2 + val > 15) {
                     showError(i0, "Booster packs must have maximum 15 cards.");
@@ -118,7 +118,7 @@ public enum CSubmenuQuestPrefs implements ICDoc {
                 break;
         }
 
-        prefs.setPreference(i0.getQPref(), i0.getText());
+        prefs.setPref(i0.getQPref(), i0.getText());
         prefs.save();
         i0.setPreviousText(i0.getText());
     }

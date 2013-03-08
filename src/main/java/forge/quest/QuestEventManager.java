@@ -34,7 +34,7 @@ import forge.deck.io.DeckSerializer;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestPreferences;
-import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 
@@ -168,23 +168,23 @@ public class QuestEventManager {
         final int index = qCtrl.getAchievements().getDifficulty();
         final List<QuestEventDuel> duelOpponents = new ArrayList<QuestEventDuel>();
 
-        if (cntWins < qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
+        if (cntWins < qpref.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
             _addDuel(duelOpponents, QuestEventDifficulty.EASY, 0);
             _addDuel(duelOpponents, QuestEventDifficulty.EASY, 1);
             _addDuel(duelOpponents, QuestEventDifficulty.EASY, 2);
-        } else if (cntWins == qpref.getPreferenceInt(QPref.WINS_MEDIUMAI, index)) {
+        } else if (cntWins == qpref.getPrefInt(DifficultyPrefs.WINS_MEDIUMAI, index)) {
             _addDuel(duelOpponents, QuestEventDifficulty.EASY, 0);
             _addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 0);
             _addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
-        } else if (cntWins < qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
+        } else if (cntWins < qpref.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
             _addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 0);
             _addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 1);
             _addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 2);
-        } else if (cntWins == qpref.getPreferenceInt(QPref.WINS_HARDAI, index)) {
+        } else if (cntWins == qpref.getPrefInt(DifficultyPrefs.WINS_HARDAI, index)) {
             _addDuel(duelOpponents, QuestEventDifficulty.MEDIUM, 0);
             _addDuel(duelOpponents, QuestEventDifficulty.HARD, 0);
             _addDuel(duelOpponents, QuestEventDifficulty.HARD, 1);
-        } else if (cntWins < qpref.getPreferenceInt(QPref.WINS_EXPERTAI, index)) {
+        } else if (cntWins < qpref.getPrefInt(DifficultyPrefs.WINS_EXPERTAI, index)) {
             _addDuel(duelOpponents, QuestEventDifficulty.HARD, 0);
             _addDuel(duelOpponents, QuestEventDifficulty.HARD, 1);
             _addDuel(duelOpponents, QuestEventDifficulty.HARD, 2);

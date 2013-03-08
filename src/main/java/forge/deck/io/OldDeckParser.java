@@ -33,6 +33,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.player.PlayerType;
+import forge.properties.NewConstants;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.storage.IStorage;
@@ -62,7 +63,7 @@ public class OldDeckParser {
      */
     public OldDeckParser(final IStorage<Deck> constructed2, final IStorage<DeckGroup> draft2,
             final IStorage<DeckGroup> sealed2, final IStorage<Deck> cube2) {
-        this.deckDir = new File("res/decks");
+        this.deckDir = new File(NewConstants.DECK_BASE_DIR);
         this.sealed = sealed2;
         this.constructed = constructed2;
         this.cube = cube2;

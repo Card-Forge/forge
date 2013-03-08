@@ -1,8 +1,0 @@
-xantcha.jpg	http://[server]/VG/Xantcha.full.jpg
-xanthic_statue.jpg	http://[server]/WL/Xanthic%20Statue.full.jpg
-xantid_swarm.jpg	http://[server]/SC/Xantid%20Swarm.full.jpg
-xathrid_demon.jpg	http://[server]/M10/Xathrid%20Demon.full.jpg
-xenic_poltergeist.jpg	http://[server]/5E/Xenic%20Poltergeist.full.jpg
-xiahou_dun_the_one_eyed.jpg	http://[server]/P3/Xiahou%20Dun,%20the%20One-Eyed.full.jpg
-xira_arien.jpg	http://[server]/CH/Xira%20Arien.full.jpg
-xun_yu_wei_advisor.jpg	http://[server]/P3/Xun%20Yu,%20Wei%20Advisor.full.jpg

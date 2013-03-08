@@ -30,20 +30,20 @@ public class ReadDraftRankingsTest {
         
         CardRulesReader cr = new CardRulesReader();
 
-        List<String> cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_DIR.defaultLoc + "/g", "garruk_primal_hunter.txt"));
+        List<String> cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_DIR + "/g", "garruk_primal_hunter.txt"));
         CardRules c = cr.readCard(cardLines);
         Assert.assertEquals(1.0 / 234.0, rdr.getRanking(c.getName(), "M13").doubleValue());
 
-        cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_DIR.defaultLoc + "/c", "clone.txt"));
+        cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_DIR + "/c", "clone.txt"));
         c = cr.readCard(cardLines);
         Assert.assertEquals(38.0 / 234.0, rdr.getRanking(c.getName(), "M13").doubleValue());
 
-        cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_DIR.defaultLoc + "/t", "tamiyo_the_moon_sage.txt"));
+        cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_DIR + "/t", "tamiyo_the_moon_sage.txt"));
         c = cr.readCard(cardLines);
         Assert.assertEquals(1.0 / 234.0, rdr.getRanking(c.getName(), "AVR").doubleValue());
 
         // Mikaeus, the Lunarch has a comma in its name in the rankings file
-        cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_DIR.defaultLoc + "/m", "mikaeus_the_lunarch.txt"));
+        cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_DIR + "/m", "mikaeus_the_lunarch.txt"));
         c = cr.readCard(cardLines);
         Assert.assertEquals(4.0 / 255.0, rdr.getRanking(c.getName(), "ISD").doubleValue());
 

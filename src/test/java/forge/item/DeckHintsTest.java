@@ -130,7 +130,7 @@ public class DeckHintsTest {
      */
     protected CardPrinted readCard(String filename) {
         String firstLetter = filename.substring(0, 1);
-        File dir = new File(NewConstants.CARD_DATA_DIR.defaultLoc, firstLetter);
+        File dir = new File(NewConstants.CARD_DATA_DIR, firstLetter);
         File txtFile = new File(dir, filename);
 
         CardRulesReader crr = new CardRulesReader();

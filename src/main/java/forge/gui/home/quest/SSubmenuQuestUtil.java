@@ -218,7 +218,7 @@ public class SSubmenuQuestUtil {
 
         if (Singletons.getModel().getQuest().getAssets() != null) {
             d = Singletons.getModel().getQuest().getMyDecks().get(
-                Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_DECK));
+                Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_DECK));
         }
 
         return d;

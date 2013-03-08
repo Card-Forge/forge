@@ -48,6 +48,7 @@ import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences;
+import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -143,9 +144,9 @@ public final class QuestUtilCards {
      * @return the array list
      */
     public ArrayList<CardPrinted> addCards(final Predicate<CardPrinted> fSets) {
-        final int nCommon = this.qpref.getPreferenceInt(QPref.BOOSTER_COMMONS);
-        final int nUncommon = this.qpref.getPreferenceInt(QPref.BOOSTER_UNCOMMONS);
-        final int nRare = this.qpref.getPreferenceInt(QPref.BOOSTER_RARES);
+        final int nCommon = this.qpref.getPrefInt(QPref.BOOSTER_COMMONS);
+        final int nUncommon = this.qpref.getPrefInt(QPref.BOOSTER_UNCOMMONS);
+        final int nRare = this.qpref.getPrefInt(QPref.BOOSTER_RARES);
 
         final ArrayList<CardPrinted> newCards = new ArrayList<CardPrinted>();
         Predicate<CardPrinted> predCommons = Predicates.and(fSets, IPaperCard.Predicates.Presets.IS_COMMON);
@@ -235,9 +236,9 @@ public final class QuestUtilCards {
      *            the idx difficulty
      */
     public void setupNewGameCardPool(final Predicate<CardPrinted> filter, final int idxDifficulty) {
-        final int nC = this.qpref.getPreferenceInt(QPref.STARTING_COMMONS, idxDifficulty);
-        final int nU = this.qpref.getPreferenceInt(QPref.STARTING_UNCOMMONS, idxDifficulty);
-        final int nR = this.qpref.getPreferenceInt(QPref.STARTING_RARES, idxDifficulty);
+        final int nC = this.qpref.getPrefInt(DifficultyPrefs.STARTING_COMMONS, idxDifficulty);
+        final int nU = this.qpref.getPrefInt(DifficultyPrefs.STARTING_UNCOMMONS, idxDifficulty);
+        final int nR = this.qpref.getPrefInt(DifficultyPrefs.STARTING_RARES, idxDifficulty);
 
         this.addAllCards(BoosterUtils.getQuestStarterDeck(filter, nC, nU, nR));
     }
@@ -525,12 +526,12 @@ public final class QuestUtilCards {
         int nLevel = this.qc.getAchievements().getLevel();
 
         // Preferences
-        final int startPacks = this.qpref.getPreferenceInt(QPref.SHOP_STARTING_PACKS);
-        final int winsForPack = this.qpref.getPreferenceInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
-        final int maxPacks = this.qpref.getPreferenceInt(QPref.SHOP_MAX_PACKS);
-        final int common = this.qpref.getPreferenceInt(QPref.SHOP_SINGLES_COMMON);
-        final int uncommon = this.qpref.getPreferenceInt(QPref.SHOP_SINGLES_UNCOMMON);
-        final int rare = this.qpref.getPreferenceInt(QPref.SHOP_SINGLES_RARE);
+        final int startPacks = this.qpref.getPrefInt(QPref.SHOP_STARTING_PACKS);
+        final int winsForPack = this.qpref.getPrefInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
+        final int maxPacks = this.qpref.getPrefInt(QPref.SHOP_MAX_PACKS);
+        final int common = this.qpref.getPrefInt(QPref.SHOP_SINGLES_COMMON);
+        final int uncommon = this.qpref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON);
+        final int rare = this.qpref.getPrefInt(QPref.SHOP_SINGLES_RARE);
 
         final int levelPacks = nLevel > 0 ? startPacks / nLevel : startPacks;
         final int winPacks = this.qc.getAchievements().getWin() / winsForPack;

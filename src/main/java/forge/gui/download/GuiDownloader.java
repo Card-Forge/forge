@@ -358,7 +358,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     while ((len = in.read(buf)) != -1) {
                         // user cancelled
                         if (this.cancel) {
-                            conn.disconnect();
                             in.close();
                             out.flush();
                             out.close();
@@ -371,7 +370,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
                         out.write(buf, 0, len);
                     } // while - read and write file
-                    conn.disconnect();
                     in.close();
                     out.flush();
                     out.close();

@@ -58,7 +58,7 @@ public class ReadPriceList {
      * </p>
      */
     private void setup() {
-        this.priceMap = this.readFile(NewConstants.QUEST_CARD_PRICE_FILE.defaultLoc);
+        this.priceMap = this.readFile(NewConstants.QUEST_CARD_PRICE_FILE);
         this.priceMap.putAll(this.readFile(NewConstants.PRICES_BOOSTER_FILE));
 
     } // setup()

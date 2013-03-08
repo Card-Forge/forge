@@ -32,7 +32,7 @@ public class GuiDownloadPrices extends GuiDownloader {
 
     @Override
     protected ArrayList<DownloadObject> getNeededImages() {
-        final File f = new File(NewConstants.QUEST_CARD_PRICE_FILE.userPrefLoc);
+        final File f = new File(NewConstants.QUEST_CARD_PRICE_FILE);
         return Lists.newArrayList(new DownloadObject(NewConstants.URL_PRICE_DOWNLOAD, f));
     }
 }

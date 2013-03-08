@@ -156,7 +156,7 @@ public enum FControl {
 
         // Preload quest data if present
         final File dirQuests = new File(NewConstants.QUEST_SAVE_DIR);
-        final String questname = Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
+        final String questname = Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_QUEST);
         final File data = new File(dirQuests.getPath(), questname);
         if (data.exists()) {
             Singletons.getModel().getQuest().load(QuestDataIO.loadData(data));

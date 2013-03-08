@@ -103,7 +103,7 @@ public enum FModel {
         // Fire up log file and exception handling
         ExceptionHandler.registerErrorHandling();
 
-        final File logFile = new File("forge.log");
+        final File logFile = new File(NewConstants.LOG_FILE);
         final boolean deleteSucceeded = logFile.delete();
 
         if (logFile.exists() && !deleteSucceeded && (logFile.length() != 0)) {
@@ -148,7 +148,7 @@ public enum FModel {
 
         // Loads all cards (using progress bar).
         GuiUtils.checkEDT("CardFactory$constructor", false);
-        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR.defaultLoc, true);
+        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true);
         try {
             // this fills in our map of card names to Card instances.
             CardDb.setup(reader.loadCards());

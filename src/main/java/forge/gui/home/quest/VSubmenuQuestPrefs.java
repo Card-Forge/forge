@@ -399,8 +399,8 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
             this.setCaretColor(clrText);
             this.setBackground(clrHover);
             this.setHorizontalAlignment(SwingConstants.CENTER);
-            this.setText(prefs.getPreference(qpref));
-            this.setPreviousText(prefs.getPreference(qpref));
+            this.setText(prefs.getPref(qpref));
+            this.setPreviousText(prefs.getPref(qpref));
 
             this.addMouseListener(new MouseAdapter() {
                 @Override

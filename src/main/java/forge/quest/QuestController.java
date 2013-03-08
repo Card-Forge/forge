@@ -34,7 +34,7 @@ import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
-import forge.quest.data.QuestPreferences.QPref;
+import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.io.PreconReader;
 import forge.util.storage.IStorage;
 import forge.util.storage.IStorageView;
@@ -168,7 +168,7 @@ public class QuestController {
      */
     public static IStorageView<PreconDeck> getPrecons() {
         if (null == preconManager) {
-            preconManager = new StorageView<PreconDeck>(new PreconReader(new File(NewConstants.QUEST_PRECON_DIR.defaultLoc)));
+            preconManager = new StorageView<PreconDeck>(new PreconReader(new File(NewConstants.QUEST_PRECON_DIR)));
         }
 
         return QuestController.preconManager;
@@ -236,7 +236,7 @@ public class QuestController {
             this.myCards.setupNewGameCardPool(filter, difficulty);
         }
 
-        this.getAssets().setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, difficulty));
+        this.getAssets().setCredits(Singletons.getModel().getQuestPreferences().getPrefInt(DifficultyPrefs.STARTING_CREDITS, difficulty));
 
     }
 
@@ -411,7 +411,7 @@ public class QuestController {
      */
     public QuestPetStorage getPetsStorage() {
         if (this.pets == null) {
-            this.pets = new QuestPetStorage(new File(NewConstants.CARD_DATA_PETS_DIR));
+            this.pets = new QuestPetStorage(new File(NewConstants.BAZAAR_FILE));
         }
 
         return this.pets;

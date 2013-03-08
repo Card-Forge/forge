@@ -131,8 +131,7 @@ public enum CSubmenuQuestData implements ICDoc {
 
         // If there are quests available, force select.
         if (arrQuests.size() > 0) {
-            final String questname = Singletons.getModel().getQuestPreferences()
-                    .getPreference(QPref.CURRENT_QUEST);
+            final String questname = Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_QUEST);
 
             // Attempt to select previous quest.
             if (arrQuests.get(questname) != null) {
@@ -282,7 +281,7 @@ public enum CSubmenuQuestData implements ICDoc {
         Singletons.getModel().getQuest().save();
 
         // Save in preferences.
-        Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST, questName + ".dat");
+        Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
         Singletons.getModel().getQuestPreferences().save();
 
         update();
@@ -294,7 +293,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 .getLstQuests().getSelectedQuest());
 
         // Save in preferences.
-        Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST,
+        Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_QUEST,
                 Singletons.getModel().getQuest().getName() + ".dat");
         Singletons.getModel().getQuestPreferences().save();
 

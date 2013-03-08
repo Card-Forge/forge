@@ -32,7 +32,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         @Override
         public void execute() {
             currentDeck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
-            Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, currentDeck.toString());
+            Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_DECK, currentDeck.toString());
             Singletons.getModel().getQuestPreferences().save();
         }
     };
@@ -72,7 +72,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         currentDeck = null;
 
         if (hasQuest) {
-            final String cd = Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_DECK);
+            final String cd = Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_DECK);
 
             for (Deck d : qData.getMyDecks()) {
                 if (d.getName() != null && d.getName().equals(cd)) {
@@ -90,10 +90,10 @@ public enum CSubmenuQuestDecks implements ICDoc {
         view.getLstDecks().setDeleteCommand(cmdDeckDelete);
 
         if (view.getLstDecks().getSelectedDeck() != null) {
-            Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, view.getLstDecks().getSelectedDeck().getName());
+            Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_DECK, view.getLstDecks().getSelectedDeck().getName());
         }
         else {
-            Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, QPref.CURRENT_DECK.getDefault());
+            Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_DECK, QPref.CURRENT_DECK.getDefault());
         }
         
         SwingUtilities.invokeLater(new Runnable() {
