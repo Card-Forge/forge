@@ -28,19 +28,30 @@ public class RevealEffect extends RevealEffectBase {
                 if (handChoices.size() > 0) {
                     final List<Card> revealed = new ArrayList<Card>();
                     if (sa.hasParam("Random")) {
-                        revealed.add(Aggregates.random(handChoices));
+                        if (sa.hasParam("NumCards")) {
+                            final int num = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
+                            final int revealnum = Math.min(handChoices.size(), num);
+                            final List<Card> hand = new ArrayList<Card>(handChoices);
+                            for (int i = 0; i < revealnum; i++) {
+                                final Card random = Aggregates.random(hand);
+                                revealed.add(random);
+                                hand.remove(random);
+                            }
+                        } else {
+                            revealed.add(Aggregates.random(handChoices));
+                        }
                         GuiChoose.oneOrNone("Revealed card(s)", revealed);
                     } else {
                         List<Card> valid = new ArrayList<Card>(handChoices);
                         int max = 1;
-                        if (sa.hasParam("RevealValid")) {
+                        if (anyNumber) {
                             valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host);
                         }
                         if (sa.hasParam("AnyNumber")) {
                             max = valid.size();
                         }
                         else if (sa.hasParam("NumCards")) {
-                            max = Math.min(valid.size(), AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa));
+                            max = Math.min(valid.size(), AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa));
                         }
                         //revealed.addAll(getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
                         revealed.addAll(getRevealedList(p, valid, max, anyNumber));

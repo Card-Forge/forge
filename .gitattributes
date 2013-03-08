@@ -8638,6 +8638,7 @@ res/cardsfolder/r/riptide_pilferer.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_replicator.txt -text
 res/cardsfolder/r/riptide_shapeshifter.txt -text svneol=unset#text/plain
 res/cardsfolder/r/riptide_survivor.txt svneol=native#text/plain
+res/cardsfolder/r/rise_fall.txt -text
 res/cardsfolder/r/rise_from_the_grave.txt svneol=native#text/plain
 res/cardsfolder/r/rise_of_the_hobgoblins.txt svneol=native#text/plain
 res/cardsfolder/r/risen_sanctuary.txt -text
