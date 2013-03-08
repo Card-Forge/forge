@@ -44,10 +44,10 @@ public class RevealEffect extends RevealEffectBase {
                     } else {
                         List<Card> valid = new ArrayList<Card>(handChoices);
                         int max = 1;
-                        if (anyNumber) {
+                        if (sa.hasParam("RevealValid")) {
                             valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host);
                         }
-                        if (sa.hasParam("AnyNumber")) {
+                        if (anyNumber) {
                             max = valid.size();
                         }
                         else if (sa.hasParam("NumCards")) {
