@@ -10,8 +10,6 @@ A new quest world by Serrasmurf based on Ravinca has been added.
 
 An effort is being made to implement the split cards (e.g. Fire/Ice) in Forge. The initial effort to add support for split cards may be considered complete and the relevant branch has reen reintegrated to trunk. Expect some rough edges and incompatibilities along the way.
 
-The "Scale Image Larger" option in the preferences should be fixed. It should no longer continue to scale images larger when it is disabled.
-
 The fat packs should now be available for purchase in the quest mode card shop.
 
 Information for non-card items in spell shop are now shown in the card details panel.

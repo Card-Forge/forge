@@ -122,17 +122,21 @@ if __name__ == '__main__':
 			cardName = firstLine[5:]
 			altName = None
 
+			previousLines = []
+			previousLines.append(firstLine)
+
 			validLines = []
 			validLines.append(firstLine)
 
 			for line in cardfile.readlines(): 
-				if line[:8] != "SetInfo:" and line[:8] != "SVar:Rar":
+				previousLines.append(line.strip())
+				# Just in case SVar:Rar is used as a legitimate SVar
+				if not line.startswith("SetInfo:") and not line.startswith("SVar:Rarity:"):
 					validLines.append(line.strip())
-				if line[:5] == "Name:":
-					altName = line[5:].strip()	
-			cardfile.close()
 
-			print (cardName, altName, fileName)
+				if line.startswith("Name:"):
+					altName = line[5:].strip()
+			cardfile.close()
 
 			if not cardName in mtgDataCards and not altName is None:
 				cardName = altName
@@ -140,6 +144,11 @@ if __name__ == '__main__':
 			for e in mtgDataCards[cardName]:
 				if not setCodeToForge[e] is None:
 					validLines.append( "SetInfo:{} {}".format(setCodeToForge[e], mtgDataCards[cardName][e]) )
+
+			if previousLines == validLines:
+				continue
+
+			print (cardName, altName, fileName)
 
 			toWrite = "\n".join(validLines)
 

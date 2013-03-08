@@ -1,0 +1,24 @@
+Name:Bound
+ManaCost:3 B G
+AlternateMode: Split
+Types:Instant
+A:SP$ Sacrifice | Cost$ 3 B G | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBReturnChoose | SpellDescription$ Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.
+SVar:DBReturnChoose:DB$ ChooseCard | Defined$ You | Choices$ Card.YouOwn | ChoiceZone$ Graveyard | Amount$ X | References$ X | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard | SubAbility$ ExileSelf
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | Defined$ Self | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardNumColors
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bounddetermined.jpg
+Oracle:Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.
+
+ALTERNATE
+
+Name:Determined
+ManaCost:U G
+Types:Instant
+A:SP$ Effect | Cost$ U G | StaticAbilities$ STCantbeCountered | SubAbility$ DBDraw | SpellDescription$ Other spells you control can't be countered by spells or abilities this turn. Draw a card.
+SVar:STCantbeCountered:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.YouCtrl | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Other spells you control can't be countered by spells or abilities this turn.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Other spells you control can't be countered by spells or abilities this turn.\nDraw a card.
+
+SetInfo:DIS Rare

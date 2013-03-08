@@ -1,0 +1,21 @@
+Name:Rise
+ManaCost:U B
+AlternateMode: Split
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ U B | ValidTgts$ Creature | TgtPrompt$ Select target creature in a graveyard | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChangeZone | SpellDescription$ Return target creature card from a graveyard and target creature on the battlefield to their owners' hands.
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature on the battlefield | Origin$ Battlefield | Destination$ Hand | IsCurse$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/risefall.jpg
+Oracle:Return target creature card from a graveyard and target creature on the battlefield to their owners' hands.
+
+ALTERNATE
+
+Name:Fall
+ManaCost:B R
+Types:Sorcery
+A:SP$ Reveal | Cost$ B R | ValidTgts$ Player | IsCurse$ True | Random$ True | NumCards$ 2 | RememberRevealed$ True | SubAbility$ DBDiscard | SpellDescription$ Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
+SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ Targeted | DefinedCards$ ValidHand Card.nonLand+IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
+
+SetInfo:DDH Uncommon
+SetInfo:DIS Uncommon

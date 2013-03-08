@@ -1215,6 +1215,7 @@ res/cardsfolder/b/bottled_cloister.txt -text
 res/cardsfolder/b/bottomless_pit.txt svneol=native#text/plain
 res/cardsfolder/b/bottomless_vault.txt svneol=native#text/plain
 res/cardsfolder/b/bouncing_beebles.txt svneol=native#text/plain
+res/cardsfolder/b/bound_determined.txt -text
 res/cardsfolder/b/bound_in_silence.txt svneol=native#text/plain
 res/cardsfolder/b/boundless_realms.txt -text
 res/cardsfolder/b/bounteous_kirin.txt svneol=native#text/plain
@@ -4904,6 +4905,7 @@ res/cardsfolder/h/hisokas_defiance.txt svneol=native#text/plain
 res/cardsfolder/h/hisokas_guard.txt svneol=native#text/plain
 res/cardsfolder/h/hissing_iguanar.txt svneol=native#text/plain
 res/cardsfolder/h/hissing_miasma.txt svneol=native#text/plain
+res/cardsfolder/h/hit_run.txt -text
 res/cardsfolder/h/hive_mind.txt -text
 res/cardsfolder/h/hivestone.txt svneol=native#text/plain
 res/cardsfolder/h/hivis_of_the_scale.txt svneol=native#text/plain
@@ -8636,6 +8638,7 @@ res/cardsfolder/r/riptide_pilferer.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_replicator.txt -text
 res/cardsfolder/r/riptide_shapeshifter.txt -text svneol=unset#text/plain
 res/cardsfolder/r/riptide_survivor.txt svneol=native#text/plain
+res/cardsfolder/r/rise_fall.txt -text
 res/cardsfolder/r/rise_from_the_grave.txt svneol=native#text/plain
 res/cardsfolder/r/rise_of_the_hobgoblins.txt svneol=native#text/plain
 res/cardsfolder/r/risen_sanctuary.txt -text
@@ -13244,7 +13247,6 @@ res/quest/world/shandalar/duels/Winged[!!-~]Stallion[!!-~]3.dck -text
 res/quest/world/shandalar/duels/Witch[!!-~]2.dck -text
 res/quest/world/shandalar/duels/Witch[!!-~]3.dck -text
 res/quest/world/worlds.txt -text
-res/reprintSetInfo.py svneol=native#text/x-python
 res/sealed/ArabianExtended.sealed -text
 res/sealed/GtcGuildBoros.sealed -text
 res/sealed/GtcGuildDimir.sealed -text
@@ -13267,7 +13269,6 @@ res/sealed/RtRPromoIzzet.sealed -text
 res/sealed/RtRPromoRakdos.sealed -text
 res/sealed/RtRPromoSelesnya.sealed -text
 res/sealed/juzamjedi.sealed -text
-res/setInfoScript.py svneol=native#text/x-python
 res/skins/dark_ascension/bg_match.jpg -text
 res/skins/dark_ascension/bg_splash.png -text
 res/skins/dark_ascension/bg_texture.jpg -text
