@@ -37,7 +37,11 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             caller.add(player);
         }
 
-        final boolean victory = GuiDialog.flipCoin(caller.get(0), sa.getSourceCard());
+        final boolean noCall = sa.hasParam("NoCall");
+        boolean victory = false;
+        if (!noCall) {
+            victory = GuiDialog.flipCoin(caller.get(0), sa.getSourceCard());
+        }
 
         // Run triggers
         // HashMap<String,Object> runParams = new HashMap<String,Object>();
@@ -46,30 +50,53 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             host.addRemembered(host);
         }
 
-        if (victory) {
-            if (sa.getParam("RememberWinner") != null) {
-                host.addRemembered(host);
-            }
-            if (sa.hasParam("WinSubAbility")) {
-                final SpellAbility win = AbilityFactory.getAbility(host.getSVar(sa.getParam("WinSubAbility")), host);
-                win.setActivatingPlayer(player);
-                ((AbilitySub) win).setParent(sa);
+        if (noCall) {
+            final boolean resultIsHeads = AbilityUtils.flipCoin(sa.getSourceCard());
 
-                AbilityUtils.resolve(win, false);
+            System.out.println("Flipped coin result:" + (resultIsHeads ? " Heads" : " Tails"));
+            if (resultIsHeads) {
+                if (sa.hasParam("HeadsSubAbility")) {
+                    final SpellAbility heads = AbilityFactory.getAbility(host.getSVar(sa.getParam("HeadsSubAbility")), host);
+                    heads.setActivatingPlayer(player);
+                    ((AbilitySub) heads).setParent(sa);
+
+                    AbilityUtils.resolve(heads, false);
+                }
+            } else {
+                if (sa.hasParam("TailsSubAbility")) {
+                    final SpellAbility tails = AbilityFactory.getAbility(host.getSVar(sa.getParam("TailsSubAbility")), host);
+                    tails.setActivatingPlayer(player);
+                    ((AbilitySub) tails).setParent(sa);
+
+                    AbilityUtils.resolve(tails, false);
+                }
             }
-            // runParams.put("Won","True");
         } else {
-            if (sa.getParam("RememberLoser") != null) {
-                host.addRemembered(host);
-            }
-            if (sa.hasParam("LoseSubAbility")) {
-                final SpellAbility lose = AbilityFactory.getAbility(host.getSVar(sa.getParam("LoseSubAbility")), host);
-                lose.setActivatingPlayer(player);
-                ((AbilitySub) lose).setParent(sa);
+            if (victory) {
+                if (sa.getParam("RememberWinner") != null) {
+                    host.addRemembered(host);
+                }
+                if (sa.hasParam("WinSubAbility")) {
+                    final SpellAbility win = AbilityFactory.getAbility(host.getSVar(sa.getParam("WinSubAbility")), host);
+                    win.setActivatingPlayer(player);
+                    ((AbilitySub) win).setParent(sa);
 
-                AbilityUtils.resolve(lose, false);
+                    AbilityUtils.resolve(win, false);
+                }
+                // runParams.put("Won","True");
+            } else {
+                if (sa.getParam("RememberLoser") != null) {
+                    host.addRemembered(host);
+                }
+                if (sa.hasParam("LoseSubAbility")) {
+                    final SpellAbility lose = AbilityFactory.getAbility(host.getSVar(sa.getParam("LoseSubAbility")), host);
+                    lose.setActivatingPlayer(player);
+                    ((AbilitySub) lose).setParent(sa);
+
+                    AbilityUtils.resolve(lose, false);
+                }
+                // runParams.put("Won","False");
             }
-            // runParams.put("Won","False");
         }
 
         // AllZone.getTriggerHandler().runTrigger("FlipsACoin",runParams);
