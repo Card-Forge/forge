@@ -157,6 +157,10 @@ public class MatchController {
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
             GameNew.newGame(this, startConditions, currentGame, canRandomFoil);
 
+            Thread thGame = new GameInputUpdatesThread(this, currentGame);
+            thGame.setName("Game input updater");
+            thGame.start();
+
             // TODO restore this functionality!!!
             //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
             for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {

@@ -1,0 +1,26 @@
+Name:Balancing Act
+ManaCost:2 W W
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 2 W W | RepeatPlayers$ Player | RepeatSubAbility$ FindFewestPermanent | StackDescription$ SpellDescription | SubAbility$ DBChooseRepeat | SpellDescription$ Each player chooses a number of permanents he or she controls equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way.
+SVar:FindFewestPermanent:DB$ StoreSVar | SVar$ MinPermanent | Type$ CountSVar | Expression$ NumPermanent | ConditionCheckSVar$ NumPermanent | ConditionSVarCompare$ LTMinPermanent
+SVar:NumPermanent:Count$Valid Permanent.RememberedPlayerCtrl
+SVar:MinPermanent:Number$9999
+SVar:DBChooseRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | StackDescription$ None | SubAbility$ SacAll
+SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Permanent.RememberedPlayerCtrl | Amount$ MinPermanent | References$ MinPermanent | ChoiceTitle$ Choose permanents you control | RememberChosen$ True
+SVar:SacAll:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup1 | StackDescription$ None
+SVar:DBCleanup1:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBFindFewestHand
+SVar:DBFindFewestHand:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ FindFewestHand | StackDescription$ None | SubAbility$ DBChooseRepeat2
+SVar:FindFewestHand:DB$ StoreSVar | SVar$ MinHand | Type$ CountSVar | Expression$ NumHand | ConditionCheckSVar$ NumHand | ConditionSVarCompare$ LTMinHand
+SVar:MinHand:Number$9999
+SVar:NumHand:Count$ValidHand Card.RememberedPlayerCtrl
+SVar:DBChooseRepeat2:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseHand | StackDescription$ None | SubAbility$ DisCardAll
+SVar:DBChooseHand:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl | ChoiceZone$ Hand | Amount$ MinHand | References$ MinHand | ChoiceTitle$ Choose cards in your hand | RememberChosen$ True
+SVar:DisCardAll:DB$ Discard | Mode$ Defined | DefinedCards$ ValidHand Card.IsNotRemembered | Defined$ Each | SubAbility$ DBCleanup2
+SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBReset1
+SVar:DBReset1:DB$ StoreSVar | SVar$ MinPermanent | Type$ Number | Expression$ 9999 | SubAbility$ DBReset2
+SVar:DBReset2:DB$ StoreSVar | SVar$ MinHand | Type$ Number | Expression$ 9999
+SVar:Picture:http://www.wizards.com/global/images/magic/general/balancing_act.jpg
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SetInfo:ODY Rare
+Oracle:Each player chooses a number of permanents he or she controls equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way.

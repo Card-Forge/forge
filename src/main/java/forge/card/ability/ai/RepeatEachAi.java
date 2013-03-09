@@ -86,6 +86,17 @@ public class RepeatEachAi extends SpellAbilityAi {
             }
 
             tgt.addTarget(list.get(0));
+        } else if ("BalanceLands".equals(logic)) {
+            if (CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() >= 5) {
+                return false;
+            }
+
+            List<Player> opponents = aiPlayer.getOpponents();
+            for(Player opp : opponents) {
+                if (CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
+                    return false;
+                }
+            }
         }
 
         // TODO Add some normal AI variability here

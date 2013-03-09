@@ -705,6 +705,7 @@ res/cardsfolder/b/bala_ged_scorpion.txt svneol=native#text/plain
 res/cardsfolder/b/bala_ged_thief.txt -text
 res/cardsfolder/b/balance.txt svneol=native#text/plain
 res/cardsfolder/b/balance_of_power.txt -text
+res/cardsfolder/b/balancing_act.txt -text
 res/cardsfolder/b/balduvian_barbarians.txt svneol=native#text/plain
 res/cardsfolder/b/balduvian_bears.txt svneol=native#text/plain
 res/cardsfolder/b/balduvian_conjurer.txt svneol=native#text/plain
@@ -7036,6 +7037,7 @@ res/cardsfolder/n/nath_of_the_gilt_leaf.txt svneol=native#text/plain
 res/cardsfolder/n/naths_buffoon.txt svneol=native#text/plain
 res/cardsfolder/n/naths_elite.txt svneol=native#text/plain
 res/cardsfolder/n/natural_affinity.txt svneol=native#text/plain
+res/cardsfolder/n/natural_balance.txt -text
 res/cardsfolder/n/natural_emergence.txt -text svneol=unset#text/plain
 res/cardsfolder/n/natural_end.txt -text
 res/cardsfolder/n/natural_order.txt svneol=native#text/plain
@@ -10639,6 +10641,7 @@ res/cardsfolder/t/tanglebloom.txt svneol=native#text/plain
 res/cardsfolder/t/tangleroot.txt svneol=native#text/plain
 res/cardsfolder/t/tanglesap.txt -text
 res/cardsfolder/t/tanglewalker.txt svneol=native#text/plain
+res/cardsfolder/t/taniwha.txt -text
 res/cardsfolder/t/taoist_hermit.txt svneol=native#text/plain
 res/cardsfolder/t/taoist_mystic.txt svneol=native#text/plain
 res/cardsfolder/t/tar_fiend.txt svneol=native#text/plain
@@ -13793,6 +13796,7 @@ src/main/java/forge/game/GameActionPlay.java -text
 src/main/java/forge/game/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/game/GameEndReason.java -text
 src/main/java/forge/game/GameFormat.java -text
+src/main/java/forge/game/GameInputUpdatesThread.java -text
 src/main/java/forge/game/GameLossReason.java -text
 src/main/java/forge/game/GameNew.java -text
 src/main/java/forge/game/GameOutcome.java -text
