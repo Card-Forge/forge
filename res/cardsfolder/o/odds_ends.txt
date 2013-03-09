@@ -1,0 +1,18 @@
+Name:Odds
+ManaCost:U R
+AlternateMode: Split
+Types:Instant
+A:SP$ FlipACoin | Cost$ U R | NoCall$ True | HeadsSubAbility$ OddCounter | TailsSubAbility$ OddCopy | TgtZone$ Stack | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery spell | SpellDescription$ Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.
+SVar:OddCounter:DB$ Counter | Defined$ Targeted
+SVar:OddCopy:DB$ CopySpellAbility | Defined$ Targeted
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=107445&type=card
+Oracle:Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.
+
+ALTERNATE
+
+Name:Ends
+ManaCost:3 R W
+Types:Instant
+A:SP$ Sacrifice | Cost$ 3 R W | ValidTgts$ Player | TgtPrompt$ Select target player to make sacrifice | Amount$ 2 | SacValid$ Creature.attacking | SpellDescription$ Target player sacrifices two attacking creatures. 
+Oracle:Target player sacrifices two attacking creatures.
+SetInfo:DIS Rare
