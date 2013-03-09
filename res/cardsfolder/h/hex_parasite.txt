@@ -6,7 +6,7 @@ A:AB$ RemoveCounter | Cost$ X PB | ValidTgts$ Permanent | TgtPrompt$ Select targ
 SVar:DBPump:DB$Pump | NumAtt$ +Y | Defined$ Self | SubAbility$ DBCleanup | References$ Y
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-SVar:Y:Remembered$Amount
+SVar:Y:Count$RememberedSize
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hex_parasite.jpg
 Oracle:{X}{B/P}: Remove up to X counters from target permanent. For each counter removed this way, Hex Parasite gets +1/+0 until end of turn. ({B/P} can be paid with either {B} or 2 life.)

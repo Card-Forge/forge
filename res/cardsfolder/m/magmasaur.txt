@@ -9,7 +9,7 @@ SVar:Shrink:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 
 SVar:SelfDestruct:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | SubAbility$ LetEmHaveIt | ChoiceDescription$ Sacrifice CARDNAME and it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player.
 SVar:LetEmHaveIt:DB$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Each | NumDmg$ Y | References$ Y | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+SVar:X:Count$RememberedSize
 SVar:Y:Count$CardCounters.P1P1
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magmasaur.jpg
