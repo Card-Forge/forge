@@ -42,6 +42,11 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
 
         BufferedImage ret = _findFile(key, path, filename);
         
+        // some S00/S2K cards are really part of 6ED/6E
+        if (null == ret && filename.startsWith("S2K") ) {
+            ret = _findFile(key, path, filename.replace("S2K", "6E"));
+        }
+
         // try without set prefix
         if (null == ret && filename.contains("/")) {
             ret = _findFile(key, path, filename.substring(filename.indexOf('/') + 1));
@@ -61,6 +66,7 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
         } catch (IOException ex) {
             BugReporter.reportException(ex, "Could not read image file " + file.getAbsolutePath() + " ");
         }
+
         return image;
     }
     
@@ -75,6 +81,5 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
         }
         
         return null;
-
     }
 }
