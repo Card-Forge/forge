@@ -41,13 +41,8 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         Set<String> filenames = new HashSet<String>();
 
         for (final CardPrinted c : CardDb.instance().getUniqueCards()) {
-            CardRules cardRules = c.getRules();
-            addDLObject(cardRules.getPictureUrl(), c.getImageFilename(), downloads, filenames);
-
-            String backFaceImage = c.getBackFaceImageFilename();
-            if (backFaceImage != null) {
-                addDLObject(cardRules.getPictureOtherSideUrl(), backFaceImage, downloads, filenames);
-            }
+            addDLObject(c, false, downloads, filenames);
+            addDLObject(c, true, downloads, filenames);
         }
 
         // Add missing tokens to the list of things to download.
@@ -60,20 +55,27 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         return downloads;
     }
 
-    private void addDLObject(String url, String filename, ArrayList<DownloadObject> downloads, Set<String> filenames) {
-        if (StringUtils.isEmpty(url) || filenames.contains(filename)) {
+    private void addDLObject(CardPrinted c, boolean backFace, ArrayList<DownloadObject> downloads, Set<String> filenames) {
+        CardRules cardRules = c.getRules();
+        String urls = backFace ? cardRules.getPictureOtherSideUrl() : cardRules.getPictureUrl();
+        if (StringUtils.isEmpty(urls)) {
             return;
         }
-        filenames.add(filename);
-        
-        // remove set path prefix from card filename
-        if (filename.contains("/")) {
-            filename = filename.substring(filename.indexOf('/') + 1);
-        }
-        
-        File destFile = new File(NewConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
-        if (!destFile.exists()) {
-            downloads.add(new DownloadObject(url, destFile));
+
+        int artIdx = -1;
+        for (String url : urls.split("\\\\")) {
+            ++artIdx;
+
+            String filename = c.getImageFilename(backFace, artIdx, false);
+            if (filenames.contains(filename)) {
+                continue;
+            }
+            filenames.add(filename);
+            
+            File destFile = new File(NewConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
+            if (!destFile.exists()) {
+                downloads.add(new DownloadObject(url, destFile));
+            }
         }
     }
 }

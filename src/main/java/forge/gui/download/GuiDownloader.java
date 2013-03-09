@@ -362,7 +362,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     Log.error("LQ Pictures", "Error downloading pictures", ex);
                 }
 
-                // throttle -- why?
+                // throttle to reduce load on the server
                 try {
                     Thread.sleep(r.nextInt(250) + 250);
                 } catch (final InterruptedException e) {
@@ -370,21 +370,10 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 }
             } // for
         }
-    } // run
+    }
 
     protected abstract ArrayList<DownloadObject> getNeededImages();
 
-    /**
-     * <p>
-     * readFile.
-     * </p>
-     * 
-     * @param urlsFile
-     *            a {@link java.lang.String} object.
-     * @param dir
-     *            a {@link java.util.File} object.
-     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
-     */
     protected static List<DownloadObject> readFile(final String urlsFile, String dir) {
         List<String> fileLines = FileUtil.readFile(urlsFile);
         final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
@@ -405,19 +394,8 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             list.add(new DownloadObject(line, new File(dir, replacer.matcher(last).replaceAll(" "))));
         }
         return list;
-    } // readFile()
+    }
 
-    /**
-     * <p>
-     * readFile.
-     * </p>
-     * 
-     * @param urlNamesFile
-     *            a {@link java.lang.String} object.
-     * @param dir
-     *            a {@link java.util.File} object.
-     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
-     */
     protected static ArrayList<DownloadObject> readFileWithNames(final String urlNamesFile, final String dir) {
         List<String> fileLines = FileUtil.readFile(urlNamesFile);
         final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
@@ -443,28 +421,10 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     protected class ProxyHandler implements ChangeListener {
         private final int type;
 
-        /**
-         * Instantiates a new proxy handler.
-         * 
-         * @param type
-         *            the type
-         */
         public ProxyHandler(final int type) {
             this.type = type;
         }
 
-        /*
-         * (non-Javadoc)
-         * 
-         * @see javax.swing.event.ChangeListener#stateChanged(javax.swing.event.
-         * ChangeEvent)
-         */
-        /**
-         * State changed.
-         * 
-         * @param e
-         *            ChangeEvent
-         */
         @Override
         public final void stateChanged(final ChangeEvent e) {
             if (((AbstractButton) e.getSource()).isSelected()) {
@@ -502,5 +462,5 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         public File getDestination() {
             return destination;
         }
-    } // DownloadObject
+    }
 }

@@ -47,7 +47,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
             
             addDLObject(c.getImageUrlPath(false), c.getImageFilename(), downloads);
 
-            String backFaceImage = c.getBackFaceImageFilename();
+            String backFaceImage = c.getImageFilename(true);
             if (backFaceImage != null) {
                 addDLObject(c.getImageUrlPath(true), backFaceImage, downloads);
             }

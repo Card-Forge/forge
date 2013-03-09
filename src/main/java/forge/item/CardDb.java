@@ -38,26 +38,12 @@ import forge.card.CardInSet;
 import forge.card.CardRules;
 import forge.util.Aggregates;
 
-
-/**
- * <p>
- * CardDb class.
- * </p>
- * 
- * @author Forge
- * @version $Id: CardDb.java 9708 2011-08-09 19:34:12Z jendave $
- */
 public final class CardDb {
     private static volatile CardDb commonCards = null; // 'volatile' keyword makes this working
     private static volatile CardDb variantCards = null; // 'volatile' keyword makes this working
     public final static String foilSuffix = " foil";
     private final static int foilSuffixLength = foilSuffix.length(); 
 
-    /**
-     * Instance.
-     * 
-     * @return the card db
-     */
     public static CardDb instance() {
         if (CardDb.commonCards == null) {
             throw new NullPointerException("CardDb has not yet been initialized, run setup() first");
@@ -72,13 +58,6 @@ public final class CardDb {
         return CardDb.variantCards;
     }
 
-    
-    /**
-     * Sets the up.
-     * 
-     * @param list
-     *            the new up
-     */
     public static void setup(final Iterable<CardRules> list) {
         if (CardDb.commonCards != null) {
             throw new RuntimeException("CardDb has already been initialized, don't do it twice please");
@@ -91,10 +70,6 @@ public final class CardDb {
             }
         }
     }
-
-    // Here oracle cards
-    // private final Map<String, CardRules> cards = new Hashtable<String,
-    // CardRules>();
 
     // Here are refs, get them by name
     private final Map<String, CardPrinted> uniqueCards;
@@ -154,10 +129,6 @@ public final class CardDb {
 
     /**
      * Checks if is card supported.
-     * 
-     * @param cardName0
-     *            the card name
-     * @return true, if is card supported
      */
     public CardPrinted tryGetCard(final String cardName0) {
         if (null == cardName0) {
@@ -190,42 +161,15 @@ public final class CardDb {
     }
 
     // Single fetch
-    /**
-     * Gets the card.
-     * 
-     * @param name
-     *            the name
-     * @return the card
-     */
     public CardPrinted getCard(final String name) {
         return this.getCard(name, false);
     }
 
     // Advanced fetch by name+set
-    /**
-     * Gets the card.
-     * 
-     * @param name
-     *            the name
-     * @param set
-     *            the set
-     * @return the card
-     */
     public CardPrinted getCard(final String name, final String set) {
         return this.getCard(name, set, 0);
     }
 
-    /**
-     * Gets the card.
-     * 
-     * @param name
-     *            the name
-     * @param set
-     *            the set
-     * @param artIndex
-     *            the art index
-     * @return the card
-     */
     public CardPrinted getCard(final String name, final String set, final int artIndex) {
         // 1. get set
         final Map<String, CardPrinted[]> cardsFromset = this.allCardsBySet.get(set.toUpperCase());
@@ -252,13 +196,6 @@ public final class CardDb {
 
     // Fetch from Forge's Card instance. Well, there should be no errors, but
     // we'll still check
-    /**
-     * Gets the card.
-     * 
-     * @param forgeCard
-     *            the forge card
-     * @return the card
-     */
     public static CardPrinted getCard(final Card forgeCard) {
         final String name = forgeCard.getName();
         final String set = forgeCard.getCurSetCode();
@@ -273,24 +210,10 @@ public final class CardDb {
     }
 
     // returns a list of all cards from their respective latest editions
-    /**
-     * Gets the all unique cards.
-     * 
-     * @return the all unique cards
-     */
     public Collection<CardPrinted> getUniqueCards() {
         return this.uniqueCards.values();
     }
 
-
-    
-    // public Iterable<CardRules> getAllCardRules() { return cards.values(); }
-    // // still not needed
-    /**
-     * Gets the all cards.
-     * 
-     * @return the all cards
-     */
     public List<CardPrinted> getAllCards() {
         return this.allCardsFlat;
     }
@@ -300,14 +223,6 @@ public final class CardDb {
         return Lists.newArrayList(Iterables.filter(this.allCardsFlat, predicate));
     }
 
-
-    /**
-     * Gets the card.
-     *
-     * @param name0 the name0
-     * @param fromLatestSet the from latest set
-     * @return the card
-     */
     public CardPrinted getCard(final String name0, final boolean fromLatestSet) {
         // Sometimes they read from decks things like "CardName|Set" - but we
         // can handle it
@@ -344,10 +259,6 @@ public final class CardDb {
     }
 
     private static class CardSorter{
-        // Here oracle cards
-        // private final Map<String, CardRules> cards = new Hashtable<String,
-        // CardRules>();
-        
         // need this to obtain cardReference by name+set+artindex
         public final Map<String, Map<String, CardPrinted[]>> allCommonCardsBySet = new TreeMap<String, Map<String, CardPrinted[]>>(String.CASE_INSENSITIVE_ORDER);
         public final Map<String, Map<String, CardPrinted[]>> allSpecialCardsBySet = new TreeMap<String, Map<String, CardPrinted[]>>(String.CASE_INSENSITIVE_ORDER);
@@ -358,17 +269,6 @@ public final class CardDb {
         public final List<CardPrinted> allCommonCardsFlat = new ArrayList<CardPrinted>();
         public final List<CardPrinted> allSpecialCardsFlat = new ArrayList<CardPrinted>();
 
-        /**
-         * Adds the to lists.
-         * 
-         * @param card
-         *            the card
-         * @param cardName
-         *            the card name
-         * @param s
-         *            the s
-         * @return the card printed
-         */
         public CardPrinted addToLists(final CardRules card, final String cardName, final String set, CardInSet cs) {
             CardPrinted lastAdded = null;
         
@@ -396,12 +296,6 @@ public final class CardDb {
             return lastAdded;
         }
 
-        /**
-         * Adds the new card.
-         * 
-         * @param card
-         *            the card
-         */
         private void addNewCard(final CardRules card) {
             if (null == card) {
                 return;

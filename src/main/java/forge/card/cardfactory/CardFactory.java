@@ -236,7 +236,7 @@ public class CardFactory {
             }
             else if (c.isDoubleFaced() && cp instanceof CardPrinted) {
                 c.setState(CardCharacteristicName.Transformed);
-                c.setImageFilename(((CardPrinted)cp).getBackFaceImageFilename());
+                c.setImageFilename(((CardPrinted)cp).getImageFilename(true));
             }
             else if (c.getRules().getSplitType() == CardSplitType.Split) {
                 c.setState(CardCharacteristicName.LeftSplit);

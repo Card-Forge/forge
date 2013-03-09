@@ -29,7 +29,6 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
-import forge.gui.GuiDisplayUtil;
 import forge.properties.NewConstants;
 
 /**

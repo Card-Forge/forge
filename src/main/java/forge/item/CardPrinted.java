@@ -27,7 +27,6 @@ import forge.Singletons;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
-import forge.card.ICardFace;
 import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
 import forge.util.Base64Coder;
@@ -134,45 +133,69 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
         return out.toString();
     }    
 
+    private String getImageName() {
+        return CardSplitType.Split != card.getSplitType() ? name : card.getMainPart().getName() + card.getOtherPart().getName();
+    }
+    
     @Override
     public String getImageFilename() {
-        return getImageFilename(getArtIndex());
+        return getImageLocator(getImageName(), getArtIndex(), true, false);
+    }
+    
+    public String getImageFilename(boolean backFace) {
+        return getImageFilename(backFace, getArtIndex(), true);
+    }
+    
+    public String getImageFilename(boolean backFace, int artIdx, boolean includeSet) {
+        final String nameToUse;
+        if (backFace) {
+            if (null == card.getOtherPart()) {
+                return null;
+            }
+            switch (card.getSplitType()) {
+            case Transform: case Flip: case Licid:
+                break;
+            default:
+                return null;
+            }
+            nameToUse = card.getOtherPart().getName();
+        } else {
+            nameToUse = getImageName();
+        }
+
+        return getImageLocator(nameToUse, artIdx, includeSet, false);
     }
     
     public String getImageUrlPath(boolean backFace) {
-        return getImageLocator(backFace ? card.getOtherPart().getName() : name, getArtIndex(), true);
+        return getImageLocator(backFace ? card.getOtherPart().getName() : getImageName(), getArtIndex(), true, true);
     }
     
-    public String getImageFilename(int artIdx) {
-        return getImageLocator(getArtIndex(), false);
-    }
-    
-    private String getImageLocator(String nameToUse, int artIdx, boolean base64encode) {
+    private String getImageLocator(String nameToUse, int artIdx, boolean includeSet, boolean base64encode) {
+        StringBuilder s = new StringBuilder();
+        
+        s.append(toMWSFilename(nameToUse));
+        
         int cntPictures = card.getEditionInfo(edition).getCopiesCount();
-        nameToUse = toMWSFilename(nameToUse);
         if (cntPictures > 1  && cntPictures > artIdx) {
-            nameToUse += String.valueOf(artIdx + 1);
+            s.append(artIdx + 1);
         }
-        nameToUse += ".full";
-        return String.format("%s/%s",
-                Singletons.getModel().getEditions().getCode2ByCode(edition),
-                base64encode ? Base64Coder.encodeString(nameToUse + ".jpg", true) : nameToUse);
+        s.append(".full");
+        
+        final String fname;
+        if (base64encode) {
+            s.append(".jpg");
+            fname = Base64Coder.encodeString(s.toString(), true);
+        } else {
+            fname = s.toString();
+        }
+        
+        if (includeSet) {
+            return String.format("%s/%s", Singletons.getModel().getEditions().getCode2ByCode(edition), fname);
+        } else {
+            return fname;
+        }
     }
     
-    private String getImageLocator(int artIdx, boolean base64encode) {
-        return getImageLocator(CardSplitType.Split == card.getSplitType() ? card.getMainPart().getName() + card.getOtherPart().getName() : name,
-                artIdx, base64encode);
-    }
-    
-    public String getBackFaceImageFilename() {
-        ICardFace backFace = card.getOtherPart();
-        if (null == backFace) {
-            return null;
-        }
-
-        return getImageLocator(card.getOtherPart().getName(), getArtIndex(), false);
-    }
-
     @Override
     public String getItemType() {
         return "Card";
