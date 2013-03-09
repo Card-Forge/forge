@@ -30,6 +30,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
+import forge.item.CardToken;
 
 public class TokenEffect extends SpellAbilityEffect {
 
@@ -144,7 +145,6 @@ public class TokenEffect extends SpellAbilityEffect {
         final Card host = sa.getSourceCard();
         readParameters(sa);
 
-        String imageName = "";
         String cost = "";
         // Construct colors
         final String[] substitutedColors = Arrays.copyOf(this.tokenColors, this.tokenColors.length);
@@ -170,8 +170,10 @@ public class TokenEffect extends SpellAbilityEffect {
                 colorDesc = "C";
             }
         }
+        
+        final String imageName;
         if (this.tokenImage.equals("")) {
-            imageName += colorDesc.replace(" ", "") + " " + this.tokenPower + " " + this.tokenToughness + " " + this.tokenName;
+            imageName = CardToken.makeTokenFileName(colorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenName);
         } else {
             imageName = this.tokenImage;
         }

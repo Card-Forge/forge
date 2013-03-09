@@ -643,12 +643,12 @@ public class CardPanel extends JPanel implements CardContainer {
                 && this.imagePanel.hasImage()) {
             return;
         }
+        
         this.setGameCard(card);
         if (!this.isShowing()) {
             return;
         }
-        //final Insets i = this.getInsets();
-        //System.out.println("Setting card: " + this.getWidth() + ", " + getCardWidth() + " (" + imagePanel.getWidth() + ")" );
+
         final BufferedImage image = card == null ? null : ImageCache.getImage(card, imagePanel.getWidth(), imagePanel.getHeight());
         if ((this.getGameCard() != null) && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CARD_OVERLAY)) {
             this.setText(this.getGameCard());

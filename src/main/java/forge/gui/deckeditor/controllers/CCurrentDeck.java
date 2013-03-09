@@ -20,6 +20,7 @@ import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
+import forge.properties.NewConstants;
 
 /** 
  * Controls the "current deck" panel in the deck editor UI.
@@ -33,7 +34,7 @@ public enum CCurrentDeck implements ICDoc {
 
     private static File previousDirectory = null;
 
-    private JFileChooser fileChooser = new JFileChooser();
+    private JFileChooser fileChooser = new JFileChooser(NewConstants.DECK_BASE_DIR);
     
     //========== Overridden methods
     

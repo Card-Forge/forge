@@ -57,6 +57,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.item.CardToken;
 import forge.util.Aggregates;
 
 /**
@@ -73,7 +74,8 @@ public class CardFactoryCreatures {
         final Ability ability = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
-                final List<Card> cl = CardFactoryUtil.makeToken("Stangg Twin", "RG 3 4 Stangg Twin",
+                final List<Card> cl = CardFactoryUtil.makeToken("Stangg Twin",
+                        CardToken.makeTokenFileName("RG", 3, 4, "Stangg Twin"),
                         card.getController(), "R G", new String[] { "Legendary", "Creature", "Human", "Warrior" },
                         3, 4, new String[] { "" });
 
@@ -373,8 +375,8 @@ public class CardFactoryCreatures {
             } // resolve()
 
             public void makeToken() {
-                CardFactoryUtil.makeToken("Kithkin Soldier", "W 1 1 Kithkin Soldier", card.getController(), "W",
-                        new String[] { "Creature", "Kithkin", "Soldier" }, 1, 1, new String[] { "" });
+                CardFactoryUtil.makeToken("Kithkin Soldier", CardToken.makeTokenFileName("W", 1, 1, "Kithkin Soldier"),
+                        card.getController(), "W", new String[] { "Creature", "Kithkin", "Soldier" }, 1, 1, new String[] { "" });
             }
         };
 

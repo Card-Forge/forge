@@ -2442,29 +2442,6 @@ public class CardFactoryUtil {
         return true;
     }
 
-    /**
-     * <p>
-     * makeToken.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @param imageName
-     *            a {@link java.lang.String} object.
-     * @param controller
-     *            a {@link forge.game.player.Player} object.
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     * @param types
-     *            an array of {@link java.lang.String} objects.
-     * @param baseAttack
-     *            a int.
-     * @param baseDefense
-     *            a int.
-     * @param intrinsicKeywords
-     *            an array of {@link java.lang.String} objects.
-     * @return a {@link forge.CardList} object.
-     */
     public static List<Card> makeToken(final String name, final String imageName, final Player controller,
             final String manaCost, final String[] types, final int baseAttack, final int baseDefense,
             final String[] intrinsicKeywords) {

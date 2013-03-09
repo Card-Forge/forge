@@ -26,19 +26,10 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
-//import forge.Singletons;
 
 //pays the cost of a card played from the player's hand
 //the card is removed from the players hand if the cost is paid
 //CANNOT be used for ABILITIES
-/**
- * <p>
- * Input_PayManaCost class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
 public class InputPayManaSimple extends InputPayManaBase {
     // anything that uses this should be converted to Ability_Cost
     /** Constant <code>serialVersionUID=3467312982164195091L</code>. */

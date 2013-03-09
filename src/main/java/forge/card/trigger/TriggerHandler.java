@@ -41,16 +41,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-//import forge.util.TextUtil;
-
-/**
- * <p>
- * TriggerHandler class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
 
 public class TriggerHandler {
     private final ArrayList<TriggerType> suppressedModes = new ArrayList<TriggerType>();
@@ -58,9 +48,6 @@ public class TriggerHandler {
     private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
     private final List<TriggerWaiting> waitingTriggers = new ArrayList<TriggerWaiting>();
 
-    /**
-     * Clean up temporary triggers.
-     */
     public final void cleanUpTemporaryTriggers() {
         final List<Card> absolutelyAllCards = Singletons.getModel().getGame().getCardsInGame();
         for (final Card c : absolutelyAllCards) {
@@ -79,34 +66,14 @@ public class TriggerHandler {
 
     }
 
-    /**
-     * <p>
-     * registerDelayedTrigger.
-     * </p>
-     * 
-     * @param trig
-     *            a {@link forge.card.trigger.Trigger} object.
-     */
     public final void registerDelayedTrigger(final Trigger trig) {
         this.delayedTriggers.add(trig);
     }
 
-    /**
-     * <p>
-     * clearDelayedTrigger.
-     * </p>
-     */
     public final void clearDelayedTrigger() {
         this.delayedTriggers.clear();
     }
 
-    /**
-     * <p>
-     * clearDelayedTrigger.
-     * </p>
-     * @param card
-     *            a card object.
-     */
     public final void clearDelayedTrigger(Card card) {
         ArrayList<Trigger> deltrigs = new ArrayList<Trigger>(this.delayedTriggers);
 
@@ -118,45 +85,14 @@ public class TriggerHandler {
     }
 
 
-    /**
-     * <p>
-     * suppressMode.
-     * </p>
-     * 
-     * @param mode
-     *            a {@link java.lang.String} object.
-     */
     public final void suppressMode(final TriggerType mode) {
         this.suppressedModes.add(mode);
     }
 
-    /**
-     * <p>
-     * clearSuppression.
-     * </p>
-     * 
-     * @param mode
-     *            a {@link java.lang.String} object.
-     */
     public final void clearSuppression(final TriggerType mode) {
         this.suppressedModes.remove(mode);
     }
 
-    /**
-     * <p>
-     * parseTrigger.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @param trigParse
-     *            a {@link java.lang.String} object.
-     * @param host
-     *            a {@link forge.Card} object.
-     * @param intrinsic
-     *            a boolean.
-     * @return a {@link forge.card.trigger.Trigger} object.
-     */
     public static Trigger parseTrigger(final String name, final String trigParse, final Card host,
             final boolean intrinsic) {
         final Trigger ret = TriggerHandler.parseTrigger(trigParse, host, intrinsic);
@@ -164,37 +100,11 @@ public class TriggerHandler {
         return ret;
     }
 
-    /**
-     * <p>
-     * parseTrigger.
-     * </p>
-     * 
-     * @param trigParse
-     *            a {@link java.lang.String} object.
-     * @param host
-     *            a {@link forge.Card} object.
-     * @param intrinsic
-     *            a boolean.
-     * @return a {@link forge.card.trigger.Trigger} object.
-     */
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
         final HashMap<String, String> mapParams = TriggerHandler.parseParams(trigParse);
         return TriggerHandler.parseTrigger(mapParams, host, intrinsic);
     }
 
-    /**
-     * <p>
-     * parseTrigger.
-     * </p>
-     * 
-     * @param mapParams
-     *            a {@link java.util.HashMap} object.
-     * @param host
-     *            a {@link forge.Card} object.
-     * @param intrinsic
-     *            a boolean.
-     * @return a {@link forge.card.trigger.Trigger} object.
-     */
     public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
         Trigger ret = null;
 
@@ -214,15 +124,6 @@ public class TriggerHandler {
         return ret;
     }
 
-    /**
-     * <p>
-     * parseParams.
-     * </p>
-     * 
-     * @param trigParse
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.util.HashMap} object.
-     */
     private static HashMap<String, String> parseParams(final String trigParse) {
         final HashMap<String, String> mapParams = new HashMap<String, String>();
 
@@ -255,17 +156,6 @@ public class TriggerHandler {
         return mapParams;
     }
 
-    /**
-     * <p>
-     * runTrigger.
-     * </p>
-     * 
-     * @param mode
-     *            a {@link java.lang.String} object.
-     * @param runParams
-     *            a {@link java.util.Map} object.
-     * @param forceHeldTriggers Force certain triggers to be added the waitingTriggers if stack isnt frozen
-     */
     public final void runTrigger(final TriggerType mode, final Map<String, Object> runParams, boolean holdTrigger) {
         if (this.suppressedModes.contains(mode)) {
             return;
@@ -400,19 +290,6 @@ public class TriggerHandler {
     // Checks if the conditions are right for a single trigger to go off, and
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
-    /**
-     * <p>
-     * runSingleTrigger.
-     * </p>
-     * 
-     * @param regtrig
-     *            a {@link forge.card.trigger.Trigger} object.
-     * @param mode
-     *            a {@link java.lang.String} object.
-     * @param runParams
-     *            a {@link java.util.HashMap} object.
-     * @return false if trigger is not happening.
-     */
     private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         final Map<String, String> triggerParams = regtrig.getMapParams();
         final GameState game = Singletons.getModel().getGame();
@@ -557,12 +434,6 @@ public class TriggerHandler {
     private final ArrayList<Integer> triggersAlwaysAccept = new ArrayList<Integer>();
     private final ArrayList<Integer> triggersAlwaysDecline = new ArrayList<Integer>();
 
-    /**
-     * Sets the always accept trigger.
-     * 
-     * @param trigID
-     *            the new always accept trigger
-     */
     public final void setAlwaysAcceptTrigger(final int trigID) {
         if (this.triggersAlwaysDecline.contains(trigID)) {
             this.triggersAlwaysDecline.remove((Object) trigID);
@@ -573,12 +444,6 @@ public class TriggerHandler {
         }
     }
 
-    /**
-     * Sets the always decline trigger.
-     * 
-     * @param trigID
-     *            the new always decline trigger
-     */
     public final void setAlwaysDeclineTrigger(final int trigID) {
         if (this.triggersAlwaysAccept.contains(trigID)) {
             this.triggersAlwaysAccept.remove((Object) trigID);
@@ -589,42 +454,19 @@ public class TriggerHandler {
         }
     }
 
-    /**
-     * Sets the always ask trigger.
-     * 
-     * @param trigID
-     *            the new always ask trigger
-     */
     public final void setAlwaysAskTrigger(final int trigID) {
         this.triggersAlwaysAccept.remove((Object) trigID);
         this.triggersAlwaysDecline.remove((Object) trigID);
     }
 
-    /**
-     * Checks if is always accepted.
-     * 
-     * @param trigID
-     *            the trig id
-     * @return true, if is always accepted
-     */
     public final boolean isAlwaysAccepted(final int trigID) {
         return this.triggersAlwaysAccept.contains(trigID);
     }
 
-    /**
-     * Checks if is always declined.
-     * 
-     * @param trigID
-     *            the trig id
-     * @return true, if is always declined
-     */
     public final boolean isAlwaysDeclined(final int trigID) {
         return this.triggersAlwaysDecline.contains(trigID);
     }
 
-    /**
-     * Clear trigger settings.
-     */
     public final void clearTriggerSettings() {
         this.triggersAlwaysAccept.clear();
         this.triggersAlwaysDecline.clear();

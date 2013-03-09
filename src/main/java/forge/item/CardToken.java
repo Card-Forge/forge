@@ -1,5 +1,7 @@
 package forge.item;
 
+import java.util.Locale;
+
 import forge.Card;
 import forge.ImageCache;
 import forge.card.CardEdition;
@@ -14,7 +16,33 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
     private String imageFileName;
     private CardRules card;
 
-    // Constructor is private. All non-foiled instances are stored in CardDb
+    private static String toTokenFilename(final String in) {
+        final StringBuffer out = new StringBuffer();
+        
+        out.append(ImageCache.TOKEN_PREFIX);
+        
+        char c;
+        for (int i = 0; i < in.length(); i++) {
+            c = in.charAt(i);
+            if ((c == ' ') || (c == '-') || (c == '_')) {
+                out.append('_');
+            } else if (Character.isLetterOrDigit(c)) {
+                out.append(c);
+            }
+        }
+        return out.toString().toLowerCase(Locale.ENGLISH);
+    }
+
+    public static String makeTokenFileName(String colors, int power, int toughness, String name) {
+        return makeTokenFileName(colors, String.valueOf(power), String.valueOf(toughness), name);
+    }
+    
+    public static String makeTokenFileName(String colors, String power, String toughness, String name) {
+        StringBuilder fileName = new StringBuilder();
+        fileName.append(colors).append('_').append(power).append('_').append(toughness).append('_').append(name);
+        return toTokenFilename(fileName.toString());
+    }
+    
     public CardToken(final CardRules c, CardEdition edition0, final String imageFileName) {
         this.card = c;
         this.name = c.getName();
