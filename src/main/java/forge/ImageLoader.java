@@ -32,19 +32,31 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
             path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
         }
 
-        File file = null;
-        boolean isPng = filename.endsWith(".png");
-        final String fName = isPng || filename.endsWith(".jpg") ? filename : filename + ".jpg";
-        file = new File(path, fName);
-        if (!file.exists()) {
-            // DEBUG
-            //System.out.println("File not found, no image created: "
-            //+ file);
+        File file = makeImageFile(path, filename);
+        boolean fileExists = file.exists();
+        if (!fileExists && filename.startsWith("S00") ) {
+            file = makeImageFile(path, filename.replace("S00", "6ED"));
+            fileExists = file.exists();
+        }
+        if (!fileExists ) {
+            //System.out.println("File not found, no image created: " + file);
             return null;
         }
         final BufferedImage image = getImage(file);
         //ImageCache.IMAGE_CACHE.put(key, image);
         return image;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param path
+     * @param filename
+     * @return
+     */
+    private File makeImageFile(File path, String filename) {
+        boolean isPng = filename.endsWith(".png");
+        final String fName = isPng || filename.endsWith(".jpg") ? filename : filename + ".jpg";
+        return new File(path, fName);
     }
 
     /**
