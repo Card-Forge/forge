@@ -134,10 +134,10 @@ if __name__ == '__main__':
 	for root, dirnames, filenames in os.walk("cardsfolder"):
 		for fileName in fnmatch.filter(filenames, '*.txt'):
 			with open(os.path.join(root, fileName))  as currentForgeCard :
-				tmpname = currentForgeCard.readline()
-				tmpname = tmpname[5:].replace("AE","Ae")
-				tmpname = tmpname.rstrip()
-				forgeCards.append(tmpname)
+				# Check all names for this card
+				for line in currentForgeCard.readlines():
+					if line.startswith("Name:"):
+						forgeCards.append(line[5:].replace("AE","Ae").rstrip())
 
 	#Compare datasets and output results
 	print("Comparing datasets and outputting results.")
