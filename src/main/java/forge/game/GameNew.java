@@ -85,7 +85,6 @@ public class GameNew {
      * their decks and other special starting conditions.
      */
     public static void newGame(final MatchController match, final Map<Player, PlayerStartConditions> playersConditions, final GameState game, final boolean canRandomFoil) {
-        match.getInput().clearInput();
 
         Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
