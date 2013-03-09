@@ -9,7 +9,7 @@ SVar:DBOppDiscard2:DB$ Discard | Cost$ 0 | Defined$ Opponent | ConditionCheckSVa
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBOppDraw | References$ X
 SVar:DBOppDraw:DB$ Draw | Defined$ Opponent | NumCards$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$RememberedSize
+SVar:X:Remembered$Amount
 SVar:HandSizeTest:Count$CardsInOppHand/Minus.X
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_archivist.jpg
 Oracle:{U}, {T}: Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.

@@ -9,7 +9,7 @@ SVar:RemoveCounters:AB$ RemoveCounter | Cost$ 0 | CounterType$ DELAY | CounterNu
 SVar:RepeatOnUpkeep:DB$ Repeat | MaxRepeat$ NumRemoved | References$ NumRemoved | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ You | UnlessCost$ 1 W | UnlessPayer$ You
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:NumRemoved:Count$RememberedSize
+SVar:NumRemoved:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/delaying_shield.jpg
 Oracle:If damage would be dealt to you, put that many delay counters on Delaying Shield instead.\nAt the beginning of your upkeep, remove all delay counters from Delaying Shield. For each delay counter removed this way, you lose 1 life unless you pay {1}{W}.

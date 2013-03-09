@@ -1448,10 +1448,6 @@ public class CardFactoryUtil {
             return crdname.size();
         }
 
-        if (l[0].startsWith("RememberedSize")) {
-            return CardFactoryUtil.doXMath(c.getRemembered().size(), m, c);
-        }
-
         // Count$CountersAdded <CounterType> <ValidSource>
         if (l[0].startsWith("CountersAdded")) {
             final String[] components = l[0].split(" ", 3);

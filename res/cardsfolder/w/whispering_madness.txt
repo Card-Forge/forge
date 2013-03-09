@@ -9,7 +9,7 @@ SVar:MadnessDraw:DB$ Draw | Defined$ Each | NumCards$ MaxDiscard | SubAbility$ M
 SVar:MadnessReset:DB$ StoreSVar | SVar$ MaxDiscard | Type$ Number | Expression$ 0 | SubAbility$ Cipher
 SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
 SVar:IsEncoded:Number$0
-SVar:NumDiscard:Count$RememberedSize/Minus.1
+SVar:NumDiscard:Remembered$Amount/Minus.1
 SVar:MaxDiscard:Number$0
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

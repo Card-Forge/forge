@@ -6,7 +6,7 @@ SVar:DBChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ CovenantDraw,Co
 SVar:CovenantDraw:DB$ Draw | Defined$ SourceController | NumCards$ X | References$ X | ChoiceDescription$ You may choose to put those cards into that player's hand.
 SVar:CovenantMillDraw:DB$ Mill | Defined$ SourceController | NumCards$ X | References$ X | SubAbility$ DBDraw | ChoiceDescription$ If you don't, put those cards into that player's graveyard and that player draws five cards.
 SVar:DBDraw:DB$ Draw | Defined$ SourceController | NumCards$ 5
-SVar:X:Count$RememberedSize
+SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/covenant_of_minds.jpg
 Oracle:Reveal the top three cards of your library. Target opponent may choose to put those cards into your hand. If he or she doesn't, put those cards into your graveyard and draw five cards.
 SetInfo:ALA Rare
