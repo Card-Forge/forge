@@ -67,10 +67,6 @@ public class ImageCache {
         return scaleImage(ii.getImageFilename(), width, height);
     }
 
-    public static BufferedImage getImage(final String key, final int width, final int height) {
-        return scaleImage(key, width, height);
-    }
-    
     private static BufferedImage scaleImage(String key, final int width, final int height) {
         if (3 > width || 3 > height) {
             // picture too small; return a blank

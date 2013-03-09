@@ -19,7 +19,7 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
     @Override
     public BufferedImage load(String key) {
         final String path;
-        String filename;
+        final String filename;
         if (key.startsWith(ImageCache.TOKEN_PREFIX)) {
             filename = key.substring(ImageCache.TOKEN_PREFIX.length());
             path = NewConstants.CACHE_TOKEN_PICS_DIR;
@@ -48,15 +48,16 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
         }
 
         // try without set prefix
+        String setlessFilename = null;
         if (null == ret && filename.contains("/")) {
-            filename = filename.substring(filename.indexOf('/') + 1);
-            ret = _findFile(key, path, filename);
+            setlessFilename = filename.substring(filename.indexOf('/') + 1);
+            ret = _findFile(key, path, setlessFilename);
         }
         
-//        // try lowering the art index to 0 for regular cards
-//        if (null == ret && filename.contains(".full.")) {
-//            ret = _findFile(key, path, filename.substring(filename.indexOf('/') + 1));
-//        }
+        // try lowering the art index to the minimum for regular cards
+        if (null == ret && null != setlessFilename && setlessFilename.contains(".full")) {
+            ret = _findFile(key, path, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
+        }
         
         if (null == ret) {
             System.out.println("File not found, no image created: " + key);
