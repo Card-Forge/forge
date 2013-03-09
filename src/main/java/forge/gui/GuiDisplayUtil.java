@@ -34,8 +34,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 
@@ -170,20 +168,6 @@ public final class GuiDisplayUtil {
         }
 
         return sb.toString();
-    }
-
-    public static String cleanString(final String in) {
-        final StringBuffer out = new StringBuffer();
-        char c;
-        for (int i = 0; i < in.length(); i++) {
-            c = in.charAt(i);
-            if ((c == ' ') || (c == '-') || (c == '_')) {
-                out.append('_');
-            } else if (Character.isLetterOrDigit(c)) {
-                out.append(c);
-            }
-        }
-        return out.toString().toLowerCase();
     }
 
     public static void updateGUI() {
@@ -455,9 +439,6 @@ public final class GuiDisplayUtil {
             if (!hasSetCurSet) {
                 c.setCurSetCode(c.getMostRecentSet());
             }
-
-            if (StringUtils.isBlank(c.getImageFilename()))
-                c.setImageFilename(CardUtil.buildFilename(c));
 
             cl.add(c);
         }

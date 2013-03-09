@@ -25,7 +25,6 @@ import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
-import forge.gui.GuiDisplayUtil;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
@@ -55,16 +54,17 @@ public class ImageCache {
     static private final LoadingCache<String, BufferedImage> CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
 
     public static BufferedImage getImage(final Card card, final int width, final int height) {
-        final String key = card.canBeShownTo(Singletons.getControl().getPlayer()) ? ImageCache.getKey(card) : NewConstants.CACHE_MORPH_IMAGE_FILE;
+        final String key;
+        if (!card.canBeShownTo(Singletons.getControl().getPlayer()) || card.isFaceDown()) {
+            key = TOKEN_PREFIX + NewConstants.CACHE_MORPH_IMAGE_FILE;
+        } else {
+            key = card.getImageFilename();
+        }
         return scaleImage(key, width, height);
     }
 
-
     public static BufferedImage getImage(final InventoryItem ii, final int width, final int height) {
-        // TODO: move all the path-building logics here from the very objects. They don't have to know where their picture is
-        String key = getKey(ii);
-        
-        return scaleImage(key, width, height);
+        return scaleImage(ii.getImageFilename(), width, height);
     }
 
     public static BufferedImage getImage(final String key, final int width, final int height) {
@@ -127,19 +127,5 @@ public class ImageCache {
             // should be when a card legitimately has no image
             return null;
         }
-    }
-
-    /**
-     * Returns the map key for a card, without any suffixes for the image size.
-     */
-    public static String getKey(final Card card) {
-        if ((card.isToken() && !card.isCopiedToken()) || card.isFaceDown()) {
-            return ImageCache.TOKEN_PREFIX + GuiDisplayUtil.cleanString(card.getImageFilename());
-        }
-        return card.getImageFilename(); // key;
-    }
-    
-    public static String getKey(final InventoryItem ii) {
-        return ii.getImageFilename();
     }
 }

@@ -221,7 +221,7 @@ public class GuiImportPicture extends JDialog {
                                 fName = GuiImportPicture.this.listFiles.get(i).getName();
                                 start = fName.indexOf("full");
                                 fName = fName.substring(0, start - 1) + fName.substring(start + 4, fName.length() - 4);
-                                fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
+                                //fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
                                 final File file = new File(NewConstants.CACHE_CARD_PICS_DIR, fName);
                                 if (!file.exists()) {
                                     GuiImportPicture.this.filesForCopy = GuiImportPicture.this.filesForCopy + 1;
@@ -322,7 +322,7 @@ public class GuiImportPicture extends JDialog {
                                 fName = GuiImportPicture.this.listFiles.get(i).getName();
                                 start = fName.indexOf("full");
                                 fName = fName.substring(0, start - 1) + fName.substring(start + 4, fName.length() - 4);
-                                fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
+                                //fName = GuiDisplayUtil.cleanString(fName) + ".jpg";
                                 final File file = new File(NewConstants.CACHE_CARD_PICS_DIR, fName);
                                 if (!file.exists()) {
                                     GuiImportPicture.this.filesForCopy = GuiImportPicture.this.filesForCopy + 1;

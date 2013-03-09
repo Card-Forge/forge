@@ -93,7 +93,7 @@ public class CopyFiles extends SwingWorker<Void, Integer> {
             name = this.fileList.get(i).getName();
             source = this.fileList.get(i).getAbsolutePath();
             cName = name.substring(0, name.length() - 8);
-            cName = GuiDisplayUtil.cleanString(cName) + ".jpg";
+            //cName = GuiDisplayUtil.cleanString(cName) + ".jpg";
             final File sourceFile = new File(source);
             final File reciever = new File(NewConstants.CACHE_CARD_PICS_DIR, cName);
             reciever.delete();

@@ -19,57 +19,34 @@ package forge.gui.download;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.ICardCharacteristics;
-import forge.gui.GuiDisplayUtil;
 import forge.item.CardDb;
-import forge.item.IPaperCard;
+import forge.item.CardPrinted;
 import forge.properties.NewConstants;
 
-/**
- * <p>
- * Gui_DownloadPictures_LQ class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
 @SuppressWarnings("serial")
 public class GuiDownloadPicturesLQ extends GuiDownloader {
-    private ArrayList<DownloadObject> downloads;
-
-    /**
-     * 
-     * TODO: Write javadoc for this method.
-     */
     public GuiDownloadPicturesLQ() {
         super();
     }
 
-    /**
-     * <p>
-     * getNeededCards.
-     * </p>
-     * 
-     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
-     */
     @Override
     protected final ArrayList<DownloadObject> getNeededImages() {
-        downloads = new ArrayList<DownloadObject>();
+        ArrayList<DownloadObject> downloads = new ArrayList<DownloadObject>();
+        Set<String> filenames = new HashSet<String>();
 
-        for (final IPaperCard c : CardDb.instance().getUniqueCards()) {
+        for (final CardPrinted c : CardDb.instance().getUniqueCards()) {
             CardRules cardRules = c.getRules();
-            if (cardRules != null && cardRules.getSplitType() == CardSplitType.Split && cardRules.getOtherPart() != null) {
-                this.createDLObjects(cardRules.getPictureUrl(), String.format("%s%s", cardRules.getMainPart().getName(), cardRules.getOtherPart().getName()));
-            } else {
-                this.createDLObjects(cardRules.getPictureUrl(), cardRules.getMainPart().getName());
-            }
+            addDLObject(cardRules.getPictureUrl(), c.getImageFilename(), downloads, filenames);
 
-            ICardCharacteristics secondSide = cardRules.getOtherPart();
-            if (secondSide != null && cardRules.getSplitType() == CardSplitType.Transform) {
-                this.createDLObjects(cardRules.getPictureOtherSideUrl(), secondSide.getName());
+            String backFaceImage = c.getBackFaceImageFilename();
+            if (backFaceImage != null) {
+                addDLObject(cardRules.getPictureOtherSideUrl(), backFaceImage, downloads, filenames);
             }
         }
 
@@ -81,23 +58,20 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         }
 
         return downloads;
-    } // getNeededImages()
-
-    private void createDLObjects(final String url, final String cardName) {
-
-        if (url != null && !url.isEmpty()) {
-            final String[] urls = url.split("\\\\");
-
-            final String sName = GuiDisplayUtil.cleanString(cardName);
-            addDownloadObject(urls[0], new File(NewConstants.CACHE_CARD_PICS_DIR, sName + ".jpg"));
-
-            for (int j = 1; j < urls.length; j++) {
-                addDownloadObject(urls[j], new File(NewConstants.CACHE_CARD_PICS_DIR, sName + j + ".jpg"));
-            }
-        }
     }
 
-    private void addDownloadObject(String url, File destFile) {
+    private void addDLObject(String url, String filename, ArrayList<DownloadObject> downloads, Set<String> filenames) {
+        if (StringUtils.isEmpty(url) || filenames.contains(filename)) {
+            return;
+        }
+        filenames.add(filename);
+        
+        // remove set path prefix from card filename
+        if (filename.contains("/")) {
+            filename = filename.substring(filename.indexOf('/') + 1);
+        }
+        
+        File destFile = new File(NewConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
         if (!destFile.exists()) {
             downloads.add(new DownloadObject(url, destFile));
         }

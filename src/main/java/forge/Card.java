@@ -187,7 +187,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int semiPermanentAttackBoost = 0;
     private int semiPermanentDefenseBoost = 0;
 
-    private int randomPicture = 0;
     private int xManaCostPaid = 0;
 
     private int multiKickerMagnitude = 0;
@@ -4565,29 +4564,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             return this.getNetDefense();
         }
         return this.getNetAttack();
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>randomPicture</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setRandomPicture(final int n) {
-        this.randomPicture = n;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>randomPicture</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getRandomPicture() {
-        return this.randomPicture;
     }
 
     /**

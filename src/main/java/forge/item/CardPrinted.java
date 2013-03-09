@@ -23,12 +23,14 @@ import java.util.Map;
 import com.google.common.base.Function;
 
 import forge.Card;
-import forge.CardUtil;
 import forge.Singletons;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardSplitType;
+import forge.card.ICardFace;
 import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
+import forge.util.Base64Coder;
 
 
 /**
@@ -53,9 +55,6 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
     // Calculated fields are below:
     private final transient CardRarity rarity; // rarity is given in ctor when
                                                // set is assigned
-
-    // image filename is calculated only after someone request it
-    private transient String imageFilename = null;
 
     // field RO accessors
     /*
@@ -121,30 +120,59 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
         return this.rarity;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getImageFilename()
-     */
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getImageFilename()
-     */
+    private static String toMWSFilename(String in) {
+        final StringBuffer out = new StringBuffer();
+        char c;
+        for (int i = 0; i < in.length(); i++) {
+            c = in.charAt(i);
+            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
+                out.append("");
+            } else {
+                out.append(c);
+            }
+        }
+        return out.toString();
+    }    
+
     @Override
     public String getImageFilename() {
-        if (this.imageFilename == null) {
-            this.imageFilename = CardUtil.buildFilename(this);
+        return getImageFilename(getArtIndex());
+    }
+    
+    public String getImageUrlPath(boolean backFace) {
+        return getImageLocator(backFace ? card.getOtherPart().getName() : name, getArtIndex(), true);
+    }
+    
+    public String getImageFilename(int artIdx) {
+        return getImageLocator(getArtIndex(), false);
+    }
+    
+    private String getImageLocator(String nameToUse, int artIdx, boolean base64encode) {
+        int cntPictures = card.getEditionInfo(edition).getCopiesCount();
+        nameToUse = toMWSFilename(nameToUse);
+        if (cntPictures > 1  && cntPictures > artIdx) {
+            nameToUse += String.valueOf(artIdx + 1);
         }
-        return this.imageFilename;
+        nameToUse += ".full";
+        return String.format("%s/%s",
+                Singletons.getModel().getEditions().getCode2ByCode(edition),
+                base64encode ? Base64Coder.encodeString(nameToUse + ".jpg", true) : nameToUse);
+    }
+    
+    private String getImageLocator(int artIdx, boolean base64encode) {
+        return getImageLocator(CardSplitType.Split == card.getSplitType() ? card.getMainPart().getName() + card.getOtherPart().getName() : name,
+                artIdx, base64encode);
+    }
+    
+    public String getBackFaceImageFilename() {
+        ICardFace backFace = card.getOtherPart();
+        if (null == backFace) {
+            return null;
+        }
+
+        return getImageLocator(card.getOtherPart().getName(), getArtIndex(), false);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItem#getType()
-     */
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getItemType()
-     */
     @Override
     public String getItemType() {
         return "Card";
@@ -152,7 +180,6 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
 
     /**
      * Lambda to get rules for selects from list of printed cards.
-     * 
      */
     public static final Function<CardPrinted, CardRules> FN_GET_RULES = new Function<CardPrinted, CardRules>() {
         @Override

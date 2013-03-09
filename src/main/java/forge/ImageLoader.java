@@ -42,17 +42,9 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
 
         BufferedImage ret = _findFile(key, path, filename);
         
-        // try without set prefix and/or '.full' suffix
-        if (null == ret && (filename.contains("/") || filename.contains(".full"))) {
-            String bareFilename = filename;
-            if (bareFilename.contains("/")) {
-                bareFilename = filename.substring(filename.indexOf('/') + 1);
-            }
-            if (bareFilename.endsWith(".full")) {
-                bareFilename = bareFilename.substring(0, bareFilename.length() - 5);
-            }
-
-            ret = _findFile(key, path, bareFilename);
+        // try without set prefix
+        if (null == ret && filename.contains("/")) {
+            ret = _findFile(key, path, filename.substring(filename.indexOf('/') + 1));
         }
         
         if (null == ret) {

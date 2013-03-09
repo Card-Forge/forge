@@ -19,7 +19,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.CardUtil;
 import forge.Singletons;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
@@ -100,8 +99,7 @@ public class GameNew {
                 if (preferences.getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
                     final int cntVariants = cardPrinted.getRules().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
                     if (cntVariants > 1) {
-                        card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
-                        card.setImageFilename(CardUtil.buildFilename(card));
+                        card.setImageFilename(cardPrinted.getImageFilename(generator.nextInt(cntVariants)));
                     }
                 }
                 

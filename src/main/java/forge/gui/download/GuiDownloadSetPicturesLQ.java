@@ -24,15 +24,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
-import forge.CardUtil;
-import forge.Singletons;
-import forge.card.CardEdition;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.NewConstants;
-import forge.util.Base64Coder;
 
 @SuppressWarnings("serial")
 public class GuiDownloadSetPicturesLQ extends GuiDownloader {
@@ -40,68 +34,39 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         super();
     }
 
-    private final void addCardToList(ArrayList<DownloadObject> cList, CardPrinted c, String nameToUse) {
-        File file = new File(NewConstants.CACHE_CARD_PICS_DIR, CardUtil.buildFilename(c, nameToUse) + ".jpg");
-        if (!file.exists()) {
-            cList.add(new DownloadObject(getCardPictureUrl(c, nameToUse), file));
-        }
-
-        final String setCode3 = c.getEdition();
-        final CardEdition thisSet = Singletons.getModel().getEditions().get(setCode3);
-        System.out.println(String.format("%s [%s - %s]", nameToUse, setCode3, thisSet.getName()));
-    }
-
-    private static String cleanMWS(String in) {
-        final StringBuffer out = new StringBuffer();
-        char c;
-        for (int i = 0; i < in.length(); i++) {
-            c = in.charAt(i);
-            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
-                out.append("");
-            } else {
-                out.append(c);
-            }
-        }
-        return out.toString();
-    }
-    
-    public static String getCardPictureUrl(final CardPrinted c, final String cardName) {
-        String setCode3 = c.getEdition();
-        String setCode2 = Singletons.getModel().getEditions().get(setCode3).getCode2();
-        int artsCnt = c.getRules().getEditionInfo(setCode3).getCopiesCount();
-        String filename = CardUtil.buildFilename(cleanMWS(cardName), null, c.getArtIndex(), artsCnt, false) + ".jpg";
-
-        return NewConstants.URL_PIC_DOWNLOAD + setCode2 + "/" + Base64Coder.encodeString(filename, true);
-    }
-
     @Override
     protected final ArrayList<DownloadObject> getNeededImages() {
-        final ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
+        ArrayList<DownloadObject> downloads = new ArrayList<DownloadObject>();
 
-        Iterable<CardPrinted> allPrinted = Iterables.concat(CardDb.instance().getAllCards(), CardDb.variants().getAllCards());
-
-        for (final CardPrinted c : allPrinted) {
+        for (final CardPrinted c : Iterables.concat(CardDb.instance().getAllCards(), CardDb.variants().getAllCards())) {
             final String setCode3 = c.getEdition();
             if (StringUtils.isBlank(setCode3) || "???".equals(setCode3)) {
-                continue; // we don't want cards from unknown sets
+             // we don't want cards from unknown sets
+                continue;
             }
             
-            CardRules cr = c.getRules();
-            String firstPartName = cr.getSplitType() == CardSplitType.Split ? CardUtil.buildSplitCardFilename(cr) : c.getName();
-            addCardToList(cList, c, firstPartName);
+            addDLObject(c.getImageUrlPath(false), c.getImageFilename(), downloads);
 
-            if (cr.getSplitType() == CardSplitType.Transform) {
-                addCardToList(cList, c, cr.getOtherPart().getName());
+            String backFaceImage = c.getBackFaceImageFilename();
+            if (backFaceImage != null) {
+                addDLObject(c.getImageUrlPath(true), backFaceImage, downloads);
             }
         }
 
-        // add missing tokens to the list of things to download
+        // Add missing tokens to the list of things to download.
         for (final DownloadObject element : GuiDownloader.readFileWithNames(NewConstants.IMAGE_LIST_TOKENS_FILE, NewConstants.CACHE_TOKEN_PICS_DIR)) {
             if (!element.getDestination().exists()) {
-                cList.add(element);
+                downloads.add(element);
             }
         }
 
-        return cList;
+        return downloads;
+    }
+
+    private void addDLObject(String urlPath, String filename, ArrayList<DownloadObject> downloads) {
+        File destFile = new File(NewConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
+        if (!destFile.exists()) {
+            downloads.add(new DownloadObject(NewConstants.URL_PIC_DOWNLOAD + urlPath, destFile));
+        }
     }
 }

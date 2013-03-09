@@ -42,6 +42,7 @@ import forge.card.spellability.Target;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
 import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 
 /**
@@ -223,8 +224,6 @@ public class CardFactory {
         c.setCurSetCode(cp.getEdition());
         c.setRarity(cp.getRarity());
 
-        
-        c.setRandomPicture(cp.getArtIndex() + 1);
         String originalPicture = cp.getImageFilename();
         //System.out.println(c.getName() + " -> " + originalPicture);
         c.setImageFilename(originalPicture);
@@ -235,9 +234,9 @@ public class CardFactory {
                 c.setState(CardCharacteristicName.Flipped);
                 c.setImageFilename(originalPicture); // should assign a 180 degrees rotated picture here?
             }
-            else if (c.isDoubleFaced()) {
+            else if (c.isDoubleFaced() && cp instanceof CardPrinted) {
                 c.setState(CardCharacteristicName.Transformed);
-                c.setImageFilename(CardUtil.buildFilename(cp, cp.getRules().getOtherPart().getName()));
+                c.setImageFilename(((CardPrinted)cp).getBackFaceImageFilename());
             }
             else if (c.getRules().getSplitType() == CardSplitType.Split) {
                 c.setState(CardCharacteristicName.LeftSplit);
@@ -246,17 +245,14 @@ public class CardFactory {
                 c.setRarity(cp.getRarity());
                 c.setState(CardCharacteristicName.RightSplit);
                 c.setImageFilename(originalPicture);
-            } else {
-                c.setImageFilename(CardUtil.buildFilename(c));
             }
-            
 
             c.setCurSetCode(cp.getEdition());
             c.setRarity(cp.getRarity());
             c.setState(CardCharacteristicName.Original);
         }
+        
         return c;
-
     }
 
     private static void buildAbilities(final Card card) {

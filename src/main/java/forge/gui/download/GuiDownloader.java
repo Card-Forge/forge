@@ -68,11 +68,8 @@ import forge.gui.toolbox.JXButtonPanel;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 
-/** */
 @SuppressWarnings("serial")
 public abstract class GuiDownloader extends DefaultBoundedRangeModel implements Runnable {
-
-    /** */
     public static final Proxy.Type[] TYPES = Proxy.Type.values(); /** */
 
     // Actions and commands
@@ -109,17 +106,16 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     private final JRadioButton radProxyHTTP = new FRadioButton("HTTP Proxy");
 
     // Proxy info
-    private int type; /** */
+    private int type;
 
     // Progress variables
-    private ArrayList<DownloadObject> cards; /** */
-    private int card; /** */
-    private boolean cancel; /** */
-    private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; /** */
-    private int tptr = 0; /** */
-    private long lTime = System.currentTimeMillis(); /** */
+    private ArrayList<DownloadObject> cards;
+    private int card;
+    private boolean cancel;
+    private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int tptr = 0;
+    private long lTime = System.currentTimeMillis();
 
-    /** Constructor. */
     protected GuiDownloader() {
         String radConstraints = "w 100%!, h 30px!, gap 2% 0 0 10px";
         JXButtonPanel grpPanel = new JXButtonPanel();
@@ -158,7 +154,11 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         SwingWorker<Void, Void> thrGetImages = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
-                GuiDownloader.this.cards = GuiDownloader.this.getNeededImages();
+                try {
+                    GuiDownloader.this.cards = GuiDownloader.this.getNeededImages();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return null;
             }
 
@@ -181,13 +181,11 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         else {
             barProgress.setMaximum(this.cards.size());
             barProgress.setString(
-                    this.cards.size() == 1
-                        ? "1 item found."
-                        : this.cards.size() + " items found.");
-
+                    this.cards.size() == 1 ? "1 item found." : this.cards.size() + " items found.");
             btnStart.setVisible(true);
             btnStart.addActionListener(actStartDownload);
         }
+        
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -208,13 +206,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         FOverlay.SINGLETON_INSTANCE.getPanel().removeAll();
     }
 
-    /**
-     * <p>
-     * getAverageTimePerObject.
-     * </p>
-     * 
-     * @return a int.
-     */
     protected final int getAverageTimePerObject() {
         int numNonzero = 10;
 
@@ -237,14 +228,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         return tTime / Math.max(1, numNonzero);
     }
 
-    /**
-     * <p>
-     * update.
-     * </p>
-     * 
-     * @param card
-     *            a int.
-     */
     private void update(final int card) {
         this.card = card;
 
@@ -299,12 +282,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         EventQueue.invokeLater(new Worker(card));
     }
 
-    /**
-     * <p>
-     * run.
-     * </p>
-     */
-    @Override
     public final void run() {
         BufferedInputStream in;
         BufferedOutputStream out;
@@ -334,15 +311,16 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 final File fileDest =  this.cards.get(this.card).getDestination();
                 final File base = fileDest.getParentFile();
 
+                //System.out.println(String.format("Downloading %s to %s", url, fileDest.getPath()));
                 try {
                     // test for folder existence
                     if (!base.exists() && !base.mkdir()) { // create folder if not found
                         System.out.println("Can't create folder" + base.getAbsolutePath());
                     }
-                    // Don't allow redirections here!
-
+                    
                     URL imageUrl = new URL(url);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                    // don't allow redirections here -- they indicate 'file not found' on the server
                     conn.setInstanceFollowRedirects(false);
                     conn.connect();
 
@@ -394,13 +372,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         }
     } // run
 
-    /**
-     * <p>
-     * getNeededCards.
-     * </p>
-     * 
-     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
-     */
     protected abstract ArrayList<DownloadObject> getNeededImages();
 
     /**

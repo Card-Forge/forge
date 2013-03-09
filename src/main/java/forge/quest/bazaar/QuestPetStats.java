@@ -60,7 +60,7 @@ public class QuestPetStats {
         if (null == petCard) {
             List<String> cardLines = FileUtil.readFile(new File(NewConstants.CARD_DATA_PETS_DIR, cardFile));
             CardRules rules = CardRulesReader.parseSingleCard(cardLines);
-            petCard = new CardToken(rules, CardEdition.UNKNOWN.getCode(), picture.replace('_', ' '));
+            petCard = new CardToken(rules, CardEdition.UNKNOWN, picture);
         }
         return petCard;
     }

@@ -19,6 +19,7 @@ package forge.quest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import forge.Card;
 import forge.card.CardEdition;
@@ -122,6 +123,20 @@ public class QuestUtil {
         return list;
     }
 
+    private static String toTokenFilename(final String in) {
+        final StringBuffer out = new StringBuffer();
+        char c;
+        for (int i = 0; i < in.length(); i++) {
+            c = in.charAt(i);
+            if ((c == ' ') || (c == '-') || (c == '_')) {
+                out.append('_');
+            } else if (Character.isLetterOrDigit(c)) {
+                out.append(c);
+            }
+        }
+        return out.toString().toLowerCase(Locale.ENGLISH);
+    }
+
     /**
      * <p>
      * createToken.
@@ -143,8 +158,8 @@ public class QuestUtil {
         script.add("Types:" + properties[5].replace(';', ' '));
         script.add("Oracle:"); // tokens don't have texts yet
         // c.setManaCost(properties[1]);
-        String fileName = properties[1] + "_" + properties[2] + "_" + properties[3] + "_" + properties[4];
-        final CardToken c = new CardToken(CardRulesReader.parseSingleCard(script), CardEdition.UNKNOWN.getCode(), fileName);
+        String fileName = properties[1] + "_" + properties[2] + "_" + properties[3] + "_" + toTokenFilename(properties[4]);
+        final CardToken c = new CardToken(CardRulesReader.parseSingleCard(script), CardEdition.UNKNOWN, fileName);
         return c;
     }
 

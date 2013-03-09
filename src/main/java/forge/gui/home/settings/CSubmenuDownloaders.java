@@ -19,7 +19,6 @@ import forge.gui.framework.ICDoc;
  */
 @SuppressWarnings("serial")
 public enum CSubmenuDownloaders implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
     private final Command cmdLicensing = new Command() { @Override

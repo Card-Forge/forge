@@ -1,31 +1,33 @@
 package forge.item;
 
 import forge.Card;
+import forge.ImageCache;
+import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
 
 public class CardToken implements InventoryItemFromSet, IPaperCard {
-
     private String name;
-    private String edition;
+    private CardEdition edition;
     private String imageFileName;
     private CardRules card;
 
-
     // Constructor is private. All non-foiled instances are stored in CardDb
-    public CardToken(final CardRules c, final String edition0, final String imageFileName) {
+    public CardToken(final CardRules c, CardEdition edition0, final String imageFileName) {
         this.card = c;
         this.name = c.getName();
         this.edition = edition0;
-        this.imageFileName = imageFileName;
+        this.imageFileName = String.format("%s%s%s",
+                        null == edition || CardEdition.UNKNOWN == edition ? "" : edition.getCode(),
+                        ImageCache.TOKEN_PREFIX, imageFileName);
     }
     
     @Override public String getName() { return name; }
     @Override public String getDescription() { return name; }
 
-    @Override public String getEdition() { return edition; }
+    @Override public String getEdition() { return edition.getCode(); }
 
     @Override public int getArtIndex() { return 0; } // This might change however
     @Override public boolean isFoil() { return false; }
@@ -44,7 +46,5 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
         return c;
     }
 
-
     @Override public boolean isToken() { return true; }
-
 }
