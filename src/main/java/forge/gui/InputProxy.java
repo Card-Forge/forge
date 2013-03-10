@@ -25,6 +25,7 @@ import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.util.MyObservable;
+import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -42,6 +43,7 @@ public class InputProxy extends MyObservable implements Observer {
 
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
+        ButtonUtil.disableAll();
         valid = false;
     }
     /**
