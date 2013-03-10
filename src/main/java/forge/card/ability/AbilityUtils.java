@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,12 +25,10 @@ import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.event.FlipCoinEvent;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-import forge.util.MyRandom;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -1255,30 +1252,6 @@ public class AbilityUtils {
             }
         }
         return CardFactoryUtil.xCount(c, s);
-    }
-
-    /**
-     * <p>
-     * flipACoin without call.
-     * </p>
-     * 
-     * @param source
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public static boolean flipCoin(final Card source) {
-        final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
-
-        Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
-        final StringBuilder msgTitle = new StringBuilder();
-        msgTitle.append(source);
-        msgTitle.append(" Flip result:");
-        final StringBuilder result = new StringBuilder();
-        result.append("Flip comes up");
-        result.append(resultIsHeads ? " heads." : " tails.");
-        JOptionPane.showMessageDialog(null, result, msgTitle.toString(), JOptionPane.PLAIN_MESSAGE);
-
-        return resultIsHeads;
     }
 
 }

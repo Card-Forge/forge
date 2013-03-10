@@ -2,14 +2,19 @@ package forge.card.ability.effects;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import forge.Card;
+import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.game.event.FlipCoinEvent;
 import forge.game.player.Player;
 import forge.gui.GuiDialog;
+import forge.util.MyRandom;
 
 public class FlipCoinEffect extends SpellAbilityEffect {
 
@@ -51,7 +56,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         }
 
         if (noCall) {
-            final boolean resultIsHeads = AbilityUtils.flipCoin(sa.getSourceCard());
+            final boolean resultIsHeads = FlipCoinEffect.flipCoin(sa.getSourceCard());
 
             System.out.println("Flipped coin result:" + (resultIsHeads ? " Heads" : " Tails"));
             if (resultIsHeads) {
@@ -100,6 +105,30 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         }
 
         // AllZone.getTriggerHandler().runTrigger("FlipsACoin",runParams);
+    }
+
+    /**
+     * <p>
+     * flipACoin without call.
+     * </p>
+     * 
+     * @param source
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    private static boolean flipCoin(final Card source) {
+        final boolean resultIsHeads = MyRandom.getRandom().nextBoolean();
+    
+        Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
+        final StringBuilder msgTitle = new StringBuilder();
+        msgTitle.append(source);
+        msgTitle.append(" Flip result:");
+        final StringBuilder result = new StringBuilder();
+        result.append("Flip comes up");
+        result.append(resultIsHeads ? " heads." : " tails.");
+        JOptionPane.showMessageDialog(null, result, msgTitle.toString(), JOptionPane.PLAIN_MESSAGE);
+    
+        return resultIsHeads;
     }
 
 }
