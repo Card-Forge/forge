@@ -18,7 +18,6 @@
 package forge.gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -56,7 +55,6 @@ public class GuiImportPicture extends JDialog {
     private JCheckBox jCheckBox = null;
     private JButton jButtonStart = null;
 
-    private final GuiImportPicture frame;
     private JLabel jLabelHDDFree = null;
     private JLabel jLabelNeedSpace = null;
 
@@ -69,70 +67,55 @@ public class GuiImportPicture extends JDialog {
     private JProgressBar jProgressBar = null;
 
     public GuiImportPicture(final JFrame owner) {
-        super(owner);
-        this.frame = this;
-        this.initialize();
-    }
-
-    private void initialize() {
-        final Dimension screen = this.getToolkit().getScreenSize();
-        final Rectangle bounds = this.getBounds();
-
-        bounds.width = 400;
-        bounds.height = 295;
-        this.setSize(new Dimension(400, 295));
-        this.setResizable(false);
-        bounds.x = (screen.width - bounds.width) / 2;
-        bounds.y = (screen.height - bounds.height) / 2;
-        this.setBounds(bounds);
-        this.setModal(true);
-        this.setTitle("Import Picture");
-        this.setContentPane(this.getJContentPane());
+        super(owner, "Import Pictures", true);
+        
+        setSize(400, 295);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setContentPane(getJContentPane());
     }
 
     private JPanel getJContentPane() {
-        if (this.jContentPane == null) {
-            this.jLabelTotalFiles = new JLabel();
-            this.jLabelTotalFiles.setBounds(new Rectangle(15, 180, 248, 16));
-            this.jLabelTotalFiles.setText("Total files for copying: Unknown.");
-            this.jLabelNeedSpace = new JLabel();
-            this.jLabelNeedSpace.setBounds(new Rectangle(15, 150, 177, 16));
-            this.jLabelNeedSpace.setText("HDD Need Space: Unknown.");
-            this.jLabelHDDFree = new JLabel();
-            this.jLabelHDDFree.setBounds(new Rectangle(15, 119, 177, 16));
+        this.jLabelTotalFiles = new JLabel();
+        this.jLabelTotalFiles.setBounds(new Rectangle(15, 180, 248, 16));
+        this.jLabelTotalFiles.setText("Total files for copying: Unknown.");
+        this.jLabelNeedSpace = new JLabel();
+        this.jLabelNeedSpace.setBounds(new Rectangle(15, 150, 177, 16));
+        this.jLabelNeedSpace.setText("HDD Need Space: Unknown.");
+        this.jLabelHDDFree = new JLabel();
+        this.jLabelHDDFree.setBounds(new Rectangle(15, 119, 177, 16));
 
-            final File file = new File(NewConstants.CACHE_CARD_PICS_DIR);
+        final File file = new File(NewConstants.CACHE_CARD_PICS_DIR);
 
-            final long freeSpace = file.getFreeSpace();
-            this.freeSpaceM = freeSpace / 1024 / 1024;
+        final long freeSpace = file.getFreeSpace();
+        this.freeSpaceM = freeSpace / 1024 / 1024;
 
-            // MiB here is not a typo; it is the unit for megabytes calculated
-            // by powers of 1024 instead of 1000.
-            this.jLabelHDDFree.setText("HDD Free Space: " + this.freeSpaceM + " MiB");
+        // MiB here is not a typo; it is the unit for megabytes calculated
+        // by powers of 1024 instead of 1000.
+        this.jLabelHDDFree.setText("HDD Free Space: " + this.freeSpaceM + " MiB");
 
-            this.jLabelSource = new JLabel();
-            this.jLabelSource.setBounds(new Rectangle(63, 45, 267, 17));
-            this.jLabelSource.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-            this.jLabelSource.setText("");
-            this.jLabel1 = new JLabel();
-            this.jLabel1.setBounds(new Rectangle(16, 45, 48, 17));
-            this.jLabel1.setText("Source:");
-            this.jLabel = new JLabel();
-            this.jLabel.setBounds(new Rectangle(15, 15, 360, 19));
-            this.jLabel.setText("Please select source directory:");
-            this.jContentPane = new JPanel();
-            this.jContentPane.setLayout(null);
-            this.jContentPane.add(this.jLabel, null);
-            this.jContentPane.add(this.jLabel1, null);
-            this.jContentPane.add(this.jLabelSource, null);
-            this.jContentPane.add(this.getJButtonSource(), null);
-            this.jContentPane.add(this.getJPanel(), null);
-            this.jContentPane.add(this.getJButtonStart(), null);
-            this.jContentPane.add(this.jLabelHDDFree, null);
-            this.jContentPane.add(this.jLabelNeedSpace, null);
-            this.jContentPane.add(this.jLabelTotalFiles, null);
-            this.jContentPane.add(this.getJProgressBar(), null);
-        }
+        this.jLabelSource = new JLabel();
+        this.jLabelSource.setBounds(new Rectangle(63, 45, 267, 17));
+        this.jLabelSource.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        this.jLabelSource.setText("");
+        this.jLabel1 = new JLabel();
+        this.jLabel1.setBounds(new Rectangle(16, 45, 48, 17));
+        this.jLabel1.setText("Source:");
+        this.jLabel = new JLabel();
+        this.jLabel.setBounds(new Rectangle(15, 15, 360, 19));
+        this.jLabel.setText("Please select source directory:");
+        this.jContentPane = new JPanel();
+        this.jContentPane.setLayout(null);
+        this.jContentPane.add(this.jLabel, null);
+        this.jContentPane.add(this.jLabel1, null);
+        this.jContentPane.add(this.jLabelSource, null);
+        this.jContentPane.add(this.getJButtonSource(), null);
+        this.jContentPane.add(this.getJPanel(), null);
+        this.jContentPane.add(this.getJButtonStart(), null);
+        this.jContentPane.add(this.jLabelHDDFree, null);
+        this.jContentPane.add(this.jLabelNeedSpace, null);
+        this.jContentPane.add(this.jLabelTotalFiles, null);
+        this.jContentPane.add(this.getJProgressBar(), null);
         return this.jContentPane;
     }
 
@@ -155,7 +138,7 @@ public class GuiImportPicture extends JDialog {
                     chooser.setAcceptAllFileFilterUsed(false);
                     GuiImportPicture.this.oldText = GuiImportPicture.this.jLabelSource.getText();
                     GuiImportPicture.this.jLabelSource.setText("Please wait...");
-                    if (chooser.showOpenDialog(GuiImportPicture.this.frame) == JFileChooser.APPROVE_OPTION) {
+                    if (chooser.showOpenDialog(GuiImportPicture.this) == JFileChooser.APPROVE_OPTION) {
                         final FileFinder ff = new FileFinder();
                         try {
                             GuiImportPicture.this.listFiles = ff.findFiles(chooser.getSelectedFile().toString(),
