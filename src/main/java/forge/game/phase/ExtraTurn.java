@@ -33,6 +33,7 @@ public class ExtraTurn {
     private Player player = null;
     private boolean loseAtEndStep = false;
     private boolean skipUntap = false;
+    private boolean cantSetSchemesInMotion = false;
     /**
      * TODO: Write javadoc for Constructor.
      * @param player the player
@@ -81,6 +82,20 @@ public class ExtraTurn {
      */
     public void setSkipUntap(boolean skipUntap) {
         this.skipUntap = skipUntap;
+    }
+
+    /**
+     * @return true if Schemes can't be played during the extra turn
+     */
+    public boolean isCantSetSchemesInMotion() {
+        return cantSetSchemesInMotion;
+    }
+
+    /**
+     * @param noSchemes set boolean if schemes can't be played this extra turn
+     */
+    public void setCantSetSchemesInMotion(boolean noSchemes) {
+        this.cantSetSchemesInMotion = noSchemes;
     }
 
 } //end class Untap
