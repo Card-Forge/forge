@@ -705,6 +705,12 @@ public class AbilityUtils {
                     players.add(p);
                 }
             }
+        } else if (defined.equals("TargetedAndYou")) {
+            final SpellAbility saTargeting = sa.getSATargetingPlayer();
+            if (saTargeting != null) {
+                players.addAll(saTargeting.getTarget().getTargetPlayers());
+                players.add(sa.getActivatingPlayer());
+            }
         } else if (defined.equals("Remembered")) {
             for (final Object rem : card.getRemembered()) {
                 if (rem instanceof Player) {
@@ -860,6 +866,14 @@ public class AbilityUtils {
             final Player p = sa.getSourceCard().getController();
             if (!players.contains(p)) {
                 players.add(p);
+            }
+        } else if (defined.startsWith("Flipped")) {
+            for (Player p : Singletons.getModel().getGame().getPlayers()) {
+                if (null != sa.getSourceCard().getFlipResult(p)) {
+                    if (sa.getSourceCard().getFlipResult(p).equals(defined.substring(7))) {
+                        players.add(p);
+                    }
+                }
             }
         } else if (defined.equals("You")) {
             players.add(sa.getActivatingPlayer());

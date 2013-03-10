@@ -125,6 +125,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final ArrayList<Card> encodedCards = new ArrayList<Card>();
     private Card championedCard = null;
     private final List<Card> devouredCards = new ArrayList<Card>();
+    private Map<Player, String> flipResult = new TreeMap<Player, String>();
 
     private Map<Card, Integer> receivedDamageFromThisTurn = new TreeMap<Card, Integer>();
     private Map<Card, Integer> dealtDamageToThisTurn = new TreeMap<Card, Integer>();
@@ -757,6 +758,39 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void clearEncoded() {
         this.encodedCards.clear();
+    }
+
+    /**
+     * <p>
+     * addFlipResult.
+     * </p>
+     * 
+     * @param flipper  The Player who flipped the coin.
+     * @param result   The result of the coin flip as a String.
+     */
+    public final void addFlipResult(final Player flipper, final String result) {
+        this.flipResult.put(flipper, result);
+    }
+
+    /**
+     * <p>
+     * getFlipResult.
+     * </p>
+     * 
+     * @param flipper  The Player who flipped the coin.
+     * @return a String result - Heads or Tails.
+     */
+    public final String getFlipResult(final Player flipper) {
+        return this.flipResult.get(flipper);
+    }
+
+    /**
+     * <p>
+     * clearFlipResult.
+     * </p>
+     */
+    public final void clearFlipResult() {
+        this.flipResult.clear();
     }
 
     /**
