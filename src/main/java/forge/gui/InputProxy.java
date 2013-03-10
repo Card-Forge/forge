@@ -21,10 +21,11 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Card;
+import forge.Singletons;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
-import forge.util.MyObservable;
+import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -34,7 +35,7 @@ import forge.util.MyObservable;
  * @author Forge
  * @version $Id$
  */
-public class InputProxy extends MyObservable implements Observer {
+public class InputProxy implements Observer {
 
     /** The input. */
     private Input input;
@@ -42,7 +43,10 @@ public class InputProxy extends MyObservable implements Observer {
 
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
+        ButtonUtil.disableAll();
         valid = false;
+        
+        Singletons.getModel().getMatch().getInput().setNewInput(Singletons.getModel().getGame());
     }
     /**
      * <p>

@@ -87,15 +87,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                             for (final String s : invalidTypes) {
                                 validChoices.remove(s);
                             }
-                            final Object o = GuiChoose.one("Choose a creature type", validChoices);
-                            if (null == o) {
-                                return;
-                            }
-                            final String choice = (String) o;
-                            if (CardType.isACreatureType(choice) && !invalidTypes.contains(choice)) {
-                                valid = true;
-                                card.setChosenType(choice);
-                            }
+                            chosenType = GuiChoose.one("Choose a creature type", validChoices);
                         } else {
                             Player ai = sa.getActivatingPlayer();
                             Player opp = ai.getOpponent();

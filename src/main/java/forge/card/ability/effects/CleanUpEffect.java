@@ -37,6 +37,9 @@ public class CleanUpEffect extends SpellAbilityEffect {
         if (sa.hasParam("ClearTriggered")) {
             Singletons.getModel().getGame().getTriggerHandler().clearDelayedTrigger(source);
         }
+        if (sa.hasParam("ClearCoinFlips")) {
+            source.clearFlipResult();
+        }
     }
 
 }

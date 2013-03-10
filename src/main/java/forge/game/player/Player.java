@@ -224,6 +224,11 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void setSchemeInMotion() {
+        for (final Player p : game.getPlayers()) {
+            if (p.hasKeyword("Schemes can't be set in motion this turn.")) {
+                return;
+            }
+        }
 
         // Replacement effects
         final HashMap<String, Object> repRunParams = new HashMap<String, Object>();

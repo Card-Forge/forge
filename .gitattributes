@@ -215,6 +215,7 @@ res/cardsfolder/a/ali_baba.txt svneol=native#text/plain
 res/cardsfolder/a/ali_from_cairo.txt svneol=native#text/plain
 res/cardsfolder/a/alibans_tower.txt svneol=native#text/plain
 res/cardsfolder/a/all_hallows_eve.txt svneol=native#text/plain
+res/cardsfolder/a/all_in_good_time.txt -text
 res/cardsfolder/a/all_is_dust.txt svneol=native#text/plain
 res/cardsfolder/a/all_shall_smolder_in_my_wake.txt -text
 res/cardsfolder/a/all_suns_dawn.txt svneol=native#text/plain
@@ -4241,6 +4242,7 @@ res/cardsfolder/g/gobhobbler_rats.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_archaeologist.txt -text
 res/cardsfolder/g/goblin_arsonist.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_artillery.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_assassin.txt -text
 res/cardsfolder/g/goblin_assault.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_balloon_brigade.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_bangchuckers.txt -text
@@ -6323,6 +6325,7 @@ res/cardsfolder/m/man_o_war.txt svneol=native#text/plain
 res/cardsfolder/m/mana_bloom.txt -text
 res/cardsfolder/m/mana_breach.txt svneol=native#text/plain
 res/cardsfolder/m/mana_chains.txt -text
+res/cardsfolder/m/mana_clash.txt -text
 res/cardsfolder/m/mana_crypt.txt svneol=native#text/plain
 res/cardsfolder/m/mana_cylix.txt svneol=native#text/plain
 res/cardsfolder/m/mana_drain.txt svneol=native#text/plain

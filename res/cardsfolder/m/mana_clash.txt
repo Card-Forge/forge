@@ -1,0 +1,21 @@
+Name:Mana Clash
+ManaCost:R
+Types:Sorcery
+Text:no text
+A:SP$ Repeat | Cost$ R | ValidTgts$ Opponent | RepeatCheckSVar$ RepeatCheck | RepeatSVarCompare$ GT0 | RepeatSubAbility$ ResetCheck | StackDescription$ SpellDescription | SpellDescription$ You and target opponent each flip a coin. CARDNAME deals 1 damage to each player whose coin comes up tails. Repeat this process until both players' coins come up heads on the same flip.
+SVar:ResetCheck:DB$ StoreSVar | SVar$ RepeatCheck | Type$ Number | Expression$ 0 | SubAbility$ RepeatClash
+SVar:RepeatClash:DB$ RepeatEach | RepeatPlayers$ TargetedAndYou | RepeatSubAbility$ FlipClash | SubAbility$ ClashDamage
+SVar:FlipClash:DB$ FlipACoin | Flipper$ Remembered | NoCall$ True | TailsSubAbility$ ClashTails | RememberResult$ True
+SVar:ClashTails:DB$ StoreSVar | SVar$ RepeatCheck | Type$ CountSVar | Expression$ RepeatCheck/Plus.1
+SVar:ClashDamage:DB$ DamageAll | ValidPlayers$ FlippedTails | NumDmg$ 1 | SubAbility$ ResetFlips
+SVar:ResetFlips:DB$ Cleanup | ClearCoinFlips$ True
+SVar:RepeatCheck:Number$ 0
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_clash.jpg
+Oracle:You and target opponent each flip a coin. Mana Clash deals 1 damage to each player whose coin comes up tails. Repeat this process until both players' coins come up heads on the same flip.
+SetInfo:8ED Rare
+SetInfo:7ED Rare
+SetInfo:DRK Rare
+SetInfo:9ED Rare
+SetInfo:5ED Rare
+SetInfo:4ED Rare

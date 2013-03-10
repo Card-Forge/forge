@@ -159,10 +159,12 @@ public class MatchController {
             
             getInput().clearInput();
             getInput().resetInput();
+            getInput().setNewInput(currentGame);
             
-            Thread thGame = new GameInputUpdatesThread(this, currentGame);
-            thGame.setName("Game input updater");
-            thGame.start();
+            
+//            Thread thGame = new GameInputUpdatesThread(this, currentGame);
+//            thGame.setName("Game input updater");
+//            thGame.start();
 
             // TODO restore this functionality!!!
             //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);

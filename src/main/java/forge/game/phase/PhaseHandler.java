@@ -62,7 +62,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private int nCombatsThisTurn = 0;
     private boolean bPreventCombatDamageThisTurn  = false;
     private int planarDiceRolledthisTurn = 0;
-    
+
     private Player playerTurn = null;
 
     // priority player
@@ -540,16 +540,16 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             p.removeKeyword("At the beginning of this turn's end step, you lose the game.");
             p.removeKeyword("Skip the untap step of this turn.");
+            p.removeKeyword("Schemes can't be set in motion this turn.");
         }
 
         Player next = getNextActivePlayer();
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
         SDisplayUtil.showTab(nextField);
-        
-        if(game.getType() == GameType.Planechase) {
+
+        if (game.getType() == GameType.Planechase) {
             Card p = game.getActivePlane();
-            if(p != null)
-            {
+            if (p != null) {
                 p.clearControllers();
                 p.addController(next);
                 game.getAction().controllerChangeZoneCorrection(p);
@@ -579,6 +579,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             }
             if (extraTurn.isSkipUntap()) {
                 nextTurn.addKeyword("Skip the untap step of this turn.");
+            }
+            if (extraTurn.isCantSetSchemesInMotion()) {
+                nextTurn.addKeyword("Schemes can't be set in motion this turn.");
             }
             return nextTurn;
         }
