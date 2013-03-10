@@ -161,7 +161,6 @@ public class GuiChoose {
         // An input box for handling the order of choices.
         final JFrame frame = new JFrame();
         DualListBox<T> dual = new DualListBox<T>(remainingObjects, sourceChoices, destChoices);
-        dual.setSideboardMode(sideboardingMode);
         dual.setSecondColumnLabelText(top);
 
         frame.setLayout(new BorderLayout());
@@ -169,6 +168,8 @@ public class GuiChoose {
         frame.add(dual);
         frame.setTitle(title);
         frame.setVisible(false);
+
+        dual.setSideboardMode(sideboardingMode);
 
         final JDialog dialog = new JDialog(frame, true);
         dialog.setTitle(title);
