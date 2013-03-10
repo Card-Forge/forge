@@ -1,0 +1,37 @@
+#
+# forge.profile.properties.example
+#
+# To get started using this file, just copy or rename it to
+# forge.profile.properties and edit one or more of the paths below.
+# 
+# You can set the locations that Forge will use to store your saved data, like
+# your deck files and quest progress, and the files that you download, like
+# card pictures and updated quest card shop prices.
+# 
+# Paths in this file are relative to the forge program directory, but of course
+# absolute paths are ok too.
+
+# This is where Forge will save your user data, such as your saved decks,
+# preferences, and quest progress.  The default value is platform-specific, and
+# may differ a bit from what is listed here if you have a non-English version
+# of your operating system:
+#   Windows: %APPDATA%/Forge
+#             (usually, C:/Users/<your username>/Application Data/Roaming/Forge)
+#   OSX:   $HOME/Library/Application Support/Forge
+#   Linux: $HOME/.forge
+userDir=
+
+# This is where forge will download content from the internet, such as card
+# pictures and updated price lists.  The default values are:
+#   Windows: %LOCALAPPDATA%/Forge/Cache
+#           (usually C:/Users<your username>/Application Data/Local/Forge/Cache)
+#   OSX:   $HOME/Library/Caches/Forge
+#   Linux: $HOME/.cache/forge
+cacheDir=
+
+# This is where forge will download and/or look for card picture data.  The
+# directory structure and filenames is the same as that used by Magic
+# Workstation, and if you have both programs installed, you can share the same
+# picture database between them.  The default value (for all plaforms) is:
+#   <cacheDir>/pics/cards
+cardPicsDir=
