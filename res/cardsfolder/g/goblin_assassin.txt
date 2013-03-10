@@ -1,0 +1,14 @@
+Name:Goblin Assassin
+ManaCost:3 R R
+Types:Creature Goblin Assassin
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatFlips | TriggerDescription$ Whenever CARDNAME or another Goblin enters the battlefield, each player flips a coin. Each player whose coin comes up tails sacrifices a creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Goblin.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ RepeatFlips | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Goblin enters the battlefield, each player flips a coin. Each player whose coin comes up tails sacrifices a creature.
+SVar:RepeatFlips:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ AssassinsFlip | SubAbility$ Assassination
+SVar:AssassinsFlip:DB$ FlipACoin | Flipper$ Remembered | NoCall$ True | RememberResult$ True
+SVar:Assassination:DB$ Sacrifice | Defined$ FlippedTails | SacValid$ Creature | Amount$ 1 | SubAbility$ ResetFlips
+SVar:ResetFlips:DB$ Cleanup | ClearCoinFlips$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_assassin.jpg
+Oracle:Whenever Goblin Assassin or another Goblin enters the battlefield, each player flips a coin. Each player whose coin comes up tails sacrifices a creature.
+SetInfo:LGN Uncommon

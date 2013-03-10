@@ -4244,6 +4244,7 @@ res/cardsfolder/g/gobhobbler_rats.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_archaeologist.txt -text
 res/cardsfolder/g/goblin_arsonist.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_artillery.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_assassin.txt -text
 res/cardsfolder/g/goblin_assault.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_balloon_brigade.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_bangchuckers.txt -text
