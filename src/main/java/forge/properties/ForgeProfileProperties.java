@@ -33,9 +33,11 @@ import org.apache.commons.lang3.tuple.Pair;
 public class ForgeProfileProperties {
     public final String userDir;
     public final String cacheDir;
+    public final String cardPicsDir;
     
-    private final String _USER_DIR_KEY  = "userDir";
-    private final String _CACHE_DIR_KEY = "cacheDir";
+    private final String _USER_DIR_KEY      = "userDir";
+    private final String _CACHE_DIR_KEY     = "cacheDir";
+    private final String _CARD_PICS_DIR_KEY = "cardPicsDir";
 
     public ForgeProfileProperties(String filename) {
         Properties props = new Properties();
@@ -60,8 +62,12 @@ public class ForgeProfileProperties {
         propUserDir  += propUserDir.endsWith("/")  || propUserDir.endsWith(File.pathSeparator)  ? "" : "/";
         propCacheDir += propCacheDir.endsWith("/") || propCacheDir.endsWith(File.pathSeparator) ? "" : "/";
         
-        userDir  = propUserDir;
-        cacheDir = propCacheDir;
+        String propCardPicsDir = props.getProperty(_CARD_PICS_DIR_KEY, propCacheDir + "pics/cards/");
+        propCardPicsDir += propCardPicsDir.endsWith("/") || propCardPicsDir.endsWith(File.pathSeparator) ? "" : "/";
+        
+        userDir     = propUserDir;
+        cacheDir    = propCacheDir;
+        cardPicsDir = propCardPicsDir;
     }
     
     // returns a pair <userDir, cacheDir>

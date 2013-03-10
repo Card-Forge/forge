@@ -49,10 +49,12 @@ public final class NewConstants {
     // data tree roots
     private static final String _USER_DIR;
     private static final String _CACHE_DIR;
+    public static final String  CACHE_CARD_PICS_DIR;
     static {
         ForgeProfileProperties profileProps = new ForgeProfileProperties(PROFILE_FILE);
-        _USER_DIR  = profileProps.userDir;
-        _CACHE_DIR = profileProps.cacheDir;
+        _USER_DIR           = profileProps.userDir;
+        _CACHE_DIR          = profileProps.cacheDir;
+        CACHE_CARD_PICS_DIR = profileProps.cardPicsDir;
     }
 
     // data that is only in the profile dirs
@@ -78,9 +80,8 @@ public final class NewConstants {
     public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, _USER_PREFS_DIR, "editor.xml");
     
     // data that is only in the cached dir
-    private static final String _DB_DIR = _CACHE_DIR + "db/";
+    private static final String _DB_DIR   = _CACHE_DIR + "db/";
     private static final String _PICS_DIR = _CACHE_DIR + "pics/";
-    public static final String CACHE_CARD_PICS_DIR           = _PICS_DIR + "cards/";
     public static final String CACHE_TOKEN_PICS_DIR          = _PICS_DIR + "tokens/";
     public static final String CACHE_ICON_PICS_DIR           = _PICS_DIR + "icons/";
     public static final String CACHE_BOOSTER_PICS_DIR        = _PICS_DIR + "boosters/";
