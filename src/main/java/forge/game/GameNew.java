@@ -151,8 +151,10 @@ public class GameNew {
 
         if (rAICards.size() > 0) {
             String message = buildFourColumnList("AI deck contains the following cards that it can't play or may be buggy:", rAICards);
-            if (GameType.Quest == game.getType()) {
-                // log, but do not visually warn.  quest decks are supposedly already vetted by the quest creator
+            if (GameType.Quest == game.getType() || GameType.Sealed == game.getType() || GameType.Draft == game.getType()) {
+                // log, but do not visually warn.  quest decks are supposedly already vetted by the quest creator,
+                // sealed and draft decks do not get any AI-unplayable picks but may contain several
+                // received/picked but unplayable cards in the sideboard.
                 System.err.println(message);
             } else {
                 JOptionPane.showMessageDialog(null, message, "", JOptionPane.INFORMATION_MESSAGE);

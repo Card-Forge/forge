@@ -63,6 +63,8 @@ import forge.model.BuildInfo;
  * @version V1.0 02.08.2009
  */
 public class BugReporter {
+    private static final int _STACK_OVERFLOW_MAX_MESSAGE_LEN = 16 * 1024;
+
     /**
      * Shows exception information in a format ready to post to the forum as a crash report.  Uses the exception's message
      * as the reason if message is null.
@@ -88,7 +90,17 @@ public class BugReporter {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         ex.printStackTrace(pw);
-        sb.append(sw.toString());
+
+        String swStr = sw.toString();
+        if (ex instanceof StackOverflowError &&
+                _STACK_OVERFLOW_MAX_MESSAGE_LEN <= swStr.length()) {
+            // most likely a cycle.  only take first portion so the message
+            // doesn't grow too large to post
+            sb.append(swStr, 0, _STACK_OVERFLOW_MAX_MESSAGE_LEN);
+            sb.append("\n... (truncated)");
+        } else {
+            sb.append(swStr);
+        }
         
         _buildSpoilerFooter(sb);
 

@@ -149,10 +149,10 @@ public class GuiChoose {
         return order(title, top, remainingObjects, sourceChoices, destChoices, referenceCard, false);
     }
 
-    public static <T extends Comparable<? super T>> List<T> sideboard(List<T> sideboard, List<T> deck) {
+    public static <T extends Comparable<? super T>> List<T> sideboard(List<T> sideboard, List<T> deck, boolean isLimitedMode) {
         Collections.sort(deck);
         Collections.sort(sideboard);
-        return order("Sideboard", "Main Deck", sideboard.size(), sideboard, deck, null, true);
+        return order("Sideboard", "Main Deck", isLimitedMode ? -1 : sideboard.size(), sideboard, deck, null, true);
     }
 
     
@@ -161,7 +161,6 @@ public class GuiChoose {
         // An input box for handling the order of choices.
         final JFrame frame = new JFrame();
         DualListBox<T> dual = new DualListBox<T>(remainingObjects, sourceChoices, destChoices);
-        dual.setSideboardMode(sideboardingMode);
         dual.setSecondColumnLabelText(top);
 
         frame.setLayout(new BorderLayout());
@@ -169,6 +168,8 @@ public class GuiChoose {
         frame.add(dual);
         frame.setTitle(title);
         frame.setVisible(false);
+
+        dual.setSideboardMode(sideboardingMode);
 
         final JDialog dialog = new JDialog(frame, true);
         dialog.setTitle(title);

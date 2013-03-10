@@ -145,7 +145,8 @@ public class PlayerControllerHuman extends PlayerController {
                 JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             }
             
-            newMain = GuiChoose.sideboard(sideboard.toFlatList(), main.toFlatList());
+            boolean isLimited = (gameType == GameType.Draft || gameType == GameType.Sealed);
+            newMain = GuiChoose.sideboard(sideboard.toFlatList(), main.toFlatList(), isLimited);
         }
     
         newSb.clear();
