@@ -24,7 +24,6 @@ import forge.Card;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
-import forge.util.MyObservable;
 import forge.view.ButtonUtil;
 
 /**
@@ -35,7 +34,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputProxy extends MyObservable implements Observer {
+public class InputProxy implements Observer {
 
     /** The input. */
     private Input input;
