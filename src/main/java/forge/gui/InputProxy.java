@@ -21,6 +21,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Card;
+import forge.Singletons;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -44,6 +45,8 @@ public class InputProxy implements Observer {
     public final synchronized void update(final Observable observable, final Object obj) {
         ButtonUtil.disableAll();
         valid = false;
+        
+        Singletons.getModel().getMatch().getInput().setNewInput(Singletons.getModel().getGame());
     }
     /**
      * <p>
