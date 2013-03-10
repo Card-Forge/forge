@@ -103,6 +103,18 @@ public enum FModel {
         // Fire up log file and exception handling
         ExceptionHandler.registerErrorHandling();
 
+        // create profile dirs if they don't already exist
+        for (String dname : NewConstants.PROFILE_DIRS) {
+            File path = new File(dname);
+            if (path.isDirectory()) {
+                // already exists
+                continue;
+            }
+            if (!path.mkdirs()) {
+                throw new RuntimeException("cannot create profile directory: " + dname);
+            }
+        }
+        
         final File logFile = new File(NewConstants.LOG_FILE);
         final boolean deleteSucceeded = logFile.delete();
 

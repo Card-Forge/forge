@@ -2,6 +2,7 @@
 /*.iml
 /*.tmp
 /.metadata
+/forge.profile.properties
 res/PerSetTrackingResults
 res/oracleScript.log
 res/reprintSetInfo.log

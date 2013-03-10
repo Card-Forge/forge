@@ -35,9 +35,9 @@ public class ForgeProfileProperties {
     public final String cacheDir;
     public final String cardPicsDir;
     
-    private final String _USER_DIR_KEY      = "userDir";
-    private final String _CACHE_DIR_KEY     = "cacheDir";
-    private final String _CARD_PICS_DIR_KEY = "cardPicsDir";
+    private static final String _USER_DIR_KEY      = "userDir";
+    private static final String _CACHE_DIR_KEY     = "cacheDir";
+    private static final String _CARD_PICS_DIR_KEY = "cardPicsDir";
 
     public ForgeProfileProperties(String filename) {
         Properties props = new Properties();
@@ -47,31 +47,29 @@ public class ForgeProfileProperties {
                 props.load(new FileInputStream(propFile));
             }
         } catch (IOException e) {
-            // ignore
+            System.err.println("error while reading from profile properties file: " + filename);
         }
 
         Pair<String, String> defaults = _getDefaultDirs();
-        
-        String propUserDir = props.getProperty(_USER_DIR_KEY, defaults.getLeft());
-        String propCacheDir = props.getProperty(_CACHE_DIR_KEY, defaults.getRight());
-        
-        // use defaults if the dirs are "defined" as empty strings in the properties file
-        propUserDir  = StringUtils.isEmpty(propUserDir)  ? defaults.getLeft()  : propUserDir.trim();
-        propCacheDir = StringUtils.isEmpty(propCacheDir) ? defaults.getRight() : propCacheDir.trim();
-        
-        propUserDir  += propUserDir.endsWith("/")  || propUserDir.endsWith(File.pathSeparator)  ? "" : "/";
-        propCacheDir += propCacheDir.endsWith("/") || propCacheDir.endsWith(File.pathSeparator) ? "" : "/";
-        
-        String propCardPicsDir = props.getProperty(_CARD_PICS_DIR_KEY, propCacheDir + "pics/cards/");
-        propCardPicsDir += propCardPicsDir.endsWith("/") || propCardPicsDir.endsWith(File.pathSeparator) ? "" : "/";
-        
-        userDir     = propUserDir;
-        cacheDir    = propCacheDir;
-        cardPicsDir = propCardPicsDir;
+        userDir     = _getDir(props, _USER_DIR_KEY,      defaults.getLeft());
+        cacheDir    = _getDir(props, _CACHE_DIR_KEY,     defaults.getRight());
+        cardPicsDir = _getDir(props, _CARD_PICS_DIR_KEY, cacheDir + "pics/cards/");
+    }
+
+    private static String _getDir(Properties props, String propertyKey, String defaultVal) {
+        String retDir = props.getProperty(propertyKey, defaultVal).trim();
+        if (retDir.isEmpty()) {
+            // use default if dir is "defined" as an empty or whitespace string in the properties file
+            return defaultVal;
+        }
+        if (retDir.endsWith("/") || retDir.endsWith(File.pathSeparator)) {
+            return retDir;
+        }
+        return retDir + "/";
     }
     
     // returns a pair <userDir, cacheDir>
-    private Pair<String, String> _getDefaultDirs() {
+    private static Pair<String, String> _getDefaultDirs() {
         String osName = System.getProperty("os.name");
         String homeDir = System.getProperty("user.home");
 
@@ -83,7 +81,8 @@ public class ForgeProfileProperties {
         
         if (StringUtils.containsIgnoreCase("windows", osName)) {
             // the split between appdata and localappdata on windows is relatively recent.  If
-            // localappdata is not defined, use appdata for both.
+            // localappdata is not defined, use appdata for both.  and if appdata is not defined,
+            // fall back to a linux-style dot dir in the home directory
             String appRoot = System.getenv().get("APPDATA");
             if (StringUtils.isEmpty(appRoot)) {
                 appRoot = fallbackDataDir;
@@ -93,6 +92,8 @@ public class ForgeProfileProperties {
                 cacheRoot = appRoot;
             }
             // just use '/' everywhere instead of file.separator.  it always works
+            // the cache dir is Forge/Cache instead of just Forge since appRoot and cacheRoot might be the
+            // same directory on windows and we need to distinguish them.
             return Pair.of(String.format("%s/Forge", appRoot),
                            String.format("%s/Forge/Cache", cacheRoot));
         } else if (StringUtils.containsIgnoreCase("mac os x", osName)) {

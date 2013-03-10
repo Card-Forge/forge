@@ -17,12 +17,9 @@
  */
 package forge.view;
 
-import java.io.File;
-
 import forge.Singletons;
 import forge.control.FControl;
 import forge.model.FModel;
-import forge.properties.NewConstants;
 
 /**
  * Main class for Forge's swing application view.
@@ -35,18 +32,6 @@ public final class Main {
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 
-        // create profile dirs if they don't already exist
-        for (String dname : NewConstants.PROFILE_DIRS) {
-            File path = new File(dname);
-            if (path.isDirectory()) {
-                // already exists
-                continue;
-            }
-            if (!path.mkdirs()) {
-                throw new RuntimeException("cannot create profile directory: " + dname);
-            }
-        }
-        
         // Start splash screen first, then data models, then controller.
         Singletons.setView(FView.SINGLETON_INSTANCE);
         Singletons.setModel(FModel.SINGLETON_INSTANCE);

@@ -45,17 +45,8 @@ import forge.properties.NewConstants;
 import forge.util.CopyFiles;
 import forge.util.FileFinder;
 
-/**
- * <p>
- * GUI_ImportPicture class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
+@SuppressWarnings("serial")
 public class GuiImportPicture extends JDialog {
-    /** Constant <code>serialVersionUID=-4191539152208389089L</code>. */
-    private static final long serialVersionUID = -4191539152208389089L;
     private JPanel jContentPane = null;
     private JLabel jLabel = null;
     private JLabel jLabel1 = null;
@@ -65,12 +56,10 @@ public class GuiImportPicture extends JDialog {
     private JCheckBox jCheckBox = null;
     private JButton jButtonStart = null;
 
-    /** The frame. */
     private final GuiImportPicture frame;
     private JLabel jLabelHDDFree = null;
     private JLabel jLabelNeedSpace = null;
 
-    /** The j label total files. */
     private JLabel jLabelTotalFiles = null;
     private List<File> listFiles;
     private ArrayList<File> fileCopyList;
@@ -79,23 +68,12 @@ public class GuiImportPicture extends JDialog {
     private String oldText;
     private JProgressBar jProgressBar = null;
 
-    /**
-     * <p>
-     * Constructor for GUI_ImportPicture.
-     * </p>
-     * 
-     * @param owner
-     *            a {@link javax.swing.JFrame} object.
-     */
     public GuiImportPicture(final JFrame owner) {
         super(owner);
         this.frame = this;
         this.initialize();
     }
 
-    /**
-     * This method initializes this.
-     */
     private void initialize() {
         final Dimension screen = this.getToolkit().getScreenSize();
         final Rectangle bounds = this.getBounds();
@@ -112,11 +90,6 @@ public class GuiImportPicture extends JDialog {
         this.setContentPane(this.getJContentPane());
     }
 
-    /**
-     * This method initializes jContentPane.
-     * 
-     * @return javax.swing.JPanel
-     */
     private JPanel getJContentPane() {
         if (this.jContentPane == null) {
             this.jLabelTotalFiles = new JLabel();
@@ -163,11 +136,6 @@ public class GuiImportPicture extends JDialog {
         return this.jContentPane;
     }
 
-    /**
-     * This method initializes jButtonSource.
-     * 
-     * @return javax.swing.JButton
-     */
     private JButton getJButtonSource() {
         if (this.jButtonSource == null) {
             this.jButtonSource = new JButton();
@@ -254,11 +222,6 @@ public class GuiImportPicture extends JDialog {
         return this.jButtonSource;
     }
 
-    /**
-     * This method initializes jPanel.
-     * 
-     * @return javax.swing.JPanel
-     */
     private JPanel getJPanel() {
         if (this.jPanel == null) {
             final GridBagConstraints gridBagConstraints = new GridBagConstraints();
@@ -275,11 +238,6 @@ public class GuiImportPicture extends JDialog {
         return this.jPanel;
     }
 
-    /**
-     * This method initializes jCheckBox.
-     * 
-     * @return javax.swing.JCheckBox
-     */
     private JCheckBox getJCheckBox() {
         if (this.jCheckBox == null) {
             this.jCheckBox = new JCheckBox();
@@ -347,11 +305,6 @@ public class GuiImportPicture extends JDialog {
         return this.jCheckBox;
     }
 
-    /**
-     * This method initializes jButtonStart.
-     * 
-     * @return javax.swing.JButton
-     */
     private JButton getJButtonStart() {
         if (this.jButtonStart == null) {
             this.jButtonStart = new JButton();
@@ -404,11 +357,6 @@ public class GuiImportPicture extends JDialog {
         return this.jButtonStart;
     }
 
-    /**
-     * This method initializes jProgressBar.
-     * 
-     * @return javax.swing.JProgressBar
-     */
     private JProgressBar getJProgressBar() {
         if (this.jProgressBar == null) {
             this.jProgressBar = new JProgressBar();
@@ -418,4 +366,4 @@ public class GuiImportPicture extends JDialog {
         }
         return this.jProgressBar;
     }
-} // @jve:decl-index=0:visual-constraint="10,10"
+}
