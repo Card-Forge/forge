@@ -40,11 +40,16 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         ArrayList<DownloadObject> downloads = new ArrayList<DownloadObject>();
         Set<String> filenames = new HashSet<String>();
 
-        for (final CardPrinted c : CardDb.instance().getUniqueCards()) {
+        for (CardPrinted c : CardDb.instance().getUniqueCards()) {
             addDLObject(c, false, downloads, filenames);
             addDLObject(c, true, downloads, filenames);
         }
 
+        for (CardPrinted c : CardDb.variants().getUniqueCards()) {
+            addDLObject(c, false, downloads, filenames);
+            addDLObject(c, true, downloads, filenames);
+        }
+        
         // Add missing tokens to the list of things to download.
         for (final DownloadObject element : GuiDownloader.readFileWithNames(NewConstants.IMAGE_LIST_TOKENS_FILE, NewConstants.CACHE_TOKEN_PICS_DIR)) {
             if (!element.getDestination().exists()) {

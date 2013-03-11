@@ -1,7 +1,7 @@
 Name:Snow-Covered Island
 ManaCost:no cost
 Types:Basic Snow Land Island
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_island.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_island.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_island.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_island.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_island.jpg
 Oracle:U
 SetInfo:ICE Land
 SetInfo:CSP Common

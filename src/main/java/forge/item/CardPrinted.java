@@ -24,6 +24,7 @@ import com.google.common.base.Function;
 
 import forge.Card;
 import forge.Singletons;
+import forge.card.CardInSet;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
@@ -175,7 +176,20 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
         
         s.append(toMWSFilename(nameToUse));
         
-        int cntPictures = card.getEditionInfo(edition).getCopiesCount();
+        final int cntPictures;
+        if (includeSet) {
+            cntPictures = card.getEditionInfo(edition).getCopiesCount();
+        } else {
+            // raise the art index limit to the maximum of the sets this card was printed in
+            int maxCntPictures = 1;
+            for (String set : card.getSets()) {
+                CardInSet setInfo = card.getEditionInfo(set);
+                if (maxCntPictures < setInfo.getCopiesCount()) {
+                    maxCntPictures = setInfo.getCopiesCount();
+                }
+            }
+            cntPictures = maxCntPictures;
+        }
         if (cntPictures > 1  && cntPictures > artIdx) {
             s.append(artIdx + 1);
         }

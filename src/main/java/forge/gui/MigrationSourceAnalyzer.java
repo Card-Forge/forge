@@ -18,7 +18,16 @@
 package forge.gui;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
+import forge.card.CardRules;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.properties.NewConstants;
 
 public class MigrationSourceAnalyzer {
@@ -54,9 +63,7 @@ public class MigrationSourceAnalyzer {
         _source = new File(source);
         _cb     = cb;
 
-        System.out.println("counting source files");
         _numFilesToAnalyze = _countFiles(_source);
-        System.out.println("done counting source files: " + _numFilesToAnalyze);
     }
     
     public int getNumFilesToAnalyze() { return _numFilesToAnalyze; }
@@ -80,29 +87,90 @@ public class MigrationSourceAnalyzer {
             // ignore other files
             if (file.isFile()) {
                 ++_numFilesAnalyzed;
-            }
-            if (file.isDirectory()) {
+            } else  if (file.isDirectory()) {
                 _numFilesAnalyzed += _countFiles(file);
             }
         }
     }
 
+    private static String _oldCleanString(final String in) {
+        final StringBuffer out = new StringBuffer();
+        char c;
+        for (int i = 0; i < in.length(); i++) {
+            c = in.charAt(i);
+            if ((c == ' ') || (c == '-')) {
+                out.append('_');
+            } else if (Character.isLetterOrDigit(c) || (c == '_')) {
+                out.append(c);
+            }
+        }
+        return out.toString().toLowerCase();
+    }
+    
+    private void _addDefaultPicNames(CardPrinted c, boolean backFace) {
+        CardRules cardRules = c.getRules();
+        String urls = backFace ? cardRules.getPictureOtherSideUrl() : cardRules.getPictureUrl();
+        if (StringUtils.isEmpty(urls)) { return; }
+
+        int numPics = urls.split("\\\\").length;
+        for (int artIdx = 0; numPics > artIdx; ++artIdx) {
+            String filename = c.getImageFilename(backFace, artIdx, false) + ".jpg";
+            _defaultPicNames.add(filename);
+            
+            String oldFilenameBase = _oldCleanString(filename.replace(".full.jpg", ""));
+            if (0 == artIdx) {
+                // remove trailing "1" from first art index
+                String oldFilename = oldFilenameBase.replaceAll("1$", "") + ".jpg";
+                _defaultPicOldNameToCurrentName.put(oldFilename, filename);
+            } else {
+                // offset art indices by one
+                String oldFilename = oldFilenameBase.replaceAll("[0-9]+$", String.valueOf(artIdx)) + ".jpg";
+                _defaultPicOldNameToCurrentName.put(oldFilename, filename);
+            }
+        }
+    }
+    
+    private Set<String>         _defaultPicNames;
+    private Map<String, String> _defaultPicOldNameToCurrentName;
     private void _analyzePicsDir(File picsRoot) {
-        System.out.println("found pics dir: " + picsRoot);
+        if (null == _defaultPicNames) {
+            // build structures
+            _defaultPicNames = new HashSet<String>();
+            _defaultPicOldNameToCurrentName = new HashMap<String, String>();
+
+            for (CardPrinted c : CardDb.instance().getUniqueCards()) {
+                _addDefaultPicNames(c, false);
+                _addDefaultPicNames(c, true);
+            }
+            
+            for (CardPrinted c : CardDb.variants().getUniqueCards()) {
+                _addDefaultPicNames(c, false);
+                _addDefaultPicNames(c, true);
+            }
+        }
+        
         for (File file : picsRoot.listFiles()) {
             if (_cb.checkCancel()) { return; }
             
-            System.out.println("analyzing dir entry: " + file.getAbsolutePath());
             if (file.isFile()) {
                 ++_numFilesAnalyzed;
-                // TODO: correct filename
-                _cb.addOp(OpType.DEFAULT_CARD_PIC, file, new File(NewConstants.CACHE_CARD_PICS_DIR, file.getName()));
-            }
-            if (file.isDirectory()) {
-                // skip set pics for now
-                _numFilesAnalyzed += _countFiles(file);
+                String fileName = file.getName();
+                if (_defaultPicOldNameToCurrentName.containsKey(fileName)) {
+                    fileName = _defaultPicOldNameToCurrentName.get(fileName);
+                } else if (!_defaultPicNames.contains(fileName)) {
+                    System.out.println("skipping umappable pic file: " + file);
+                    continue;
+                }
+                _cb.addOp(OpType.DEFAULT_CARD_PIC, file, new File(NewConstants.CACHE_CARD_PICS_DIR, fileName));
+            } else  if (file.isDirectory()) {
+                _analyzePicsSetDir(file);
             }
         }
+    }
+    
+    private void _analyzePicsSetDir(File setRoot) {
+        // if not a valid set name, skip
+        _numFilesAnalyzed += _countFiles(setRoot);
     }
     
     private int _countFiles(File directory) {
@@ -112,8 +180,7 @@ public class MigrationSourceAnalyzer {
             
             if (file.isFile()) {
                 ++count;
-            }
-            if (file.isDirectory()) {
+            } else if (file.isDirectory()) {
                 count += _countFiles(file);
             }
         }

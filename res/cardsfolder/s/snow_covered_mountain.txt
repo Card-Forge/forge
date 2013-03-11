@@ -1,7 +1,7 @@
 Name:Snow-Covered Mountain
 ManaCost:no cost
 Types:Basic Snow Land Mountain
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 Oracle:R
 SetInfo:ICE Land
 SetInfo:CSP Common

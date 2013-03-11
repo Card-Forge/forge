@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -70,7 +70,7 @@ public class DialogMigrateProfile {
         p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
         // header
-        p.add(new FLabel.Builder().text("Migrate profile data (in progress: not yet functional)").fontSize(15).build(), "center");
+        p.add(new FLabel.Builder().text("Migrate profile data (in progress: not fully functional)").fontSize(15).build(), "center");
         
         if (showMigrationBlurb) {
             FPanel blurbPanel = new FPanel(new MigLayout("insets dialog, gap 10, center, wrap"));
@@ -112,6 +112,7 @@ public class DialogMigrateProfile {
             File srcDirFile = new File(srcDir);
             txfSrc.setText(srcDirFile.getAbsolutePath());
         }
+        // TODO: listen for new directory choice and reset analysis
         importSourcePanel.add(new FLabel.ButtonBuilder().text("Choose directory...").enabled(emptySrcDir).build(), "h pref+8!, w pref+12!");
         p.add(importSourcePanel, "gaptop 20, growx");
         
@@ -186,6 +187,7 @@ public class DialogMigrateProfile {
         private final String       _srcDir;
         private final JComboBox    _unknownDeckCombo;
         private final FCheckBox    _moveCheckbox;
+        private final FCheckBox    _overwriteCheckbox;
         private final JTextArea    _operationLog;
         private final JProgressBar _progressBar;
         
@@ -245,12 +247,18 @@ public class DialogMigrateProfile {
             cbPanel.add(cachePanel, "aligny top");
             _selectionPanel.add(cbPanel, "center");
             
-            // add move/copy checkbox
-            _moveCheckbox = new FCheckBox("move files");
+            // add move/copy and overwrite checkboxes
+            JPanel ioOptionPanel = new JPanel(new MigLayout("insets 0, gap 10"));
+            ioOptionPanel.setOpaque(false);
+            _moveCheckbox = new FCheckBox("Remove source file after copy");
             _moveCheckbox.setSelected(true);
             _moveCheckbox.setEnabled(!forced);
             _moveCheckbox.addChangeListener(_stateChangedListener);
-            _selectionPanel.add(_moveCheckbox);
+            ioOptionPanel.add(_moveCheckbox);
+            _overwriteCheckbox = new FCheckBox("Overwrite existing files");
+            _overwriteCheckbox.addChangeListener(_stateChangedListener);
+            ioOptionPanel.add(_overwriteCheckbox);
+            _selectionPanel.add(ioOptionPanel);
             
             // add operation summary textfield
             _operationLog = new JTextArea();
@@ -283,7 +291,9 @@ public class DialogMigrateProfile {
             cb.setSelected(true);
             cb.setEnabled(!forced);
             cb.addChangeListener(_stateChangedListener);
-            _selections.put(type, Pair.of(cb, new ConcurrentHashMap<File, File>()));
+            
+            // use a skip list map instead of a regular hashmap so that the files are sorted alphabetically
+            _selections.put(type, Pair.of(cb, new ConcurrentSkipListMap<File, File>()));
             parent.add(cb);
         }
         
@@ -292,23 +302,14 @@ public class DialogMigrateProfile {
             // set operation summary
             StringBuilder log = new StringBuilder();
             int totalOps = 0;
-            for (Pair<FCheckBox, ? extends Map<File, File>> selection : _selections.values()) {
-                FCheckBox cb = selection.getLeft();
-                int numOps   = selection.getRight().size();
-                
-                if (cb.isSelected()) {
-                    totalOps += numOps;
-                }
-                
-                // update checkbox text with new totals
-                cb.setText(String.format("%s (%d)", cb.getName(), numOps));
-            }
-            log.append(_moveCheckbox.isSelected() ? "Moving" : "Copying");
-            log.append(" ").append(totalOps).append(" files\n\n");
             for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
                 Pair<FCheckBox, ? extends Map<File, File>> selection = entry.getValue();
-                if (selection.getLeft().isSelected()) {
-                    for (Map.Entry<File, File> op : selection.getRight().entrySet()) {
+                FCheckBox cb = selection.getLeft();
+                Map<File, File> ops = selection.getRight();
+                int numOps = ops.size();
+                if (cb.isSelected()) {
+                    totalOps += numOps;
+                    for (Map.Entry<File, File> op : ops.entrySet()) {
                         File dest = op.getValue();
                         if (OpType.UNKNOWN_DECK == entry.getKey()) {
                             _UnknownDeckChoice choice = (_UnknownDeckChoice)_unknownDeckCombo.getSelectedItem();
@@ -318,7 +319,19 @@ public class DialogMigrateProfile {
                                 op.getKey().getAbsolutePath(), dest.getAbsolutePath()));
                     }
                 }
+                
+                // update checkbox text with new totals
+                cb.setText(String.format("%s (%d)", cb.getName(), numOps));
             }
+            
+            if (0 < totalOps) {
+                log.append("\n");
+            }
+            log.append(_moveCheckbox.isSelected() ? "Moving" : "Copying");
+            log.append(" ").append(totalOps).append(" files\n");
+            log.append(_overwriteCheckbox.isSelected() ? "O" : "Not o");
+            log.append("verwriting existing files");
+
             _operationLog.setText(log.toString());
             _uiUpdateAck = true;
         }
@@ -394,6 +407,7 @@ public class DialogMigrateProfile {
             if (_cancel) { return; }
             
             _progressBar.setValue(_progressBar.getMaximum());
+            _stateChangedListener.stateChanged(null);
             _progressBar.setString("Analysis complete");
             
             _btnStart.addActionListener(new ActionListener() {
@@ -404,7 +418,8 @@ public class DialogMigrateProfile {
                     _disableAll();
                     
                     _Importer importer = new _Importer(
-                            _selections, _unknownDeckCombo, _operationLog, _progressBar, _moveCheckbox.isSelected());
+                            _selections, _unknownDeckCombo, _operationLog, _progressBar,
+                            _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
                     importer.execute();
                 }
             });
@@ -417,12 +432,14 @@ public class DialogMigrateProfile {
         private final JTextArea       _operationLog;
         private final JProgressBar    _progressBar;
         private final boolean         _move;
+        private final boolean         _overwrite;
         
         public _Importer(Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> selections, JComboBox unknownDeckCombo,
-                JTextArea operationLog, JProgressBar progressBar, boolean move) {
+                JTextArea operationLog, JProgressBar progressBar, boolean move, boolean overwrite) {
             _operationLog = operationLog;
             _progressBar  = progressBar;
             _move         = move;
+            _overwrite    = overwrite;
             
             int totalOps = 0;
             for (Pair<FCheckBox, ? extends Map<File, File>> selection : selections.values()) {
@@ -473,7 +490,9 @@ public class DialogMigrateProfile {
                 File destFile = op.getValue();
 
                 try {
-                    _copyFile(srcFile, destFile);
+                    if (_overwrite || !destFile.exists()) {
+                        _copyFile(srcFile, destFile);
+                    }
                     
                     if (_move) {
                         srcFile.delete();

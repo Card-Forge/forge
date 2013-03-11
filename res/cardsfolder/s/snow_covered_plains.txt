@@ -1,7 +1,7 @@
 Name:Snow-Covered Plains
 ManaCost:no cost
 Types:Basic Snow Land Plains
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_plains.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_plains.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_plains.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_plains.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_plains.jpg
 Oracle:W
 SetInfo:ICE Land
 SetInfo:CSP Common
