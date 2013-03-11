@@ -9171,7 +9171,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         
         int requestedCMC = 0;
 
-        if (getRules().getSplitType() == CardSplitType.Split) {
+        if (getRules() != null && getRules().getSplitType() == CardSplitType.Split) {
             switch(mode) {
                 case CurrentSideCMC:
                     // TODO: test if this returns combined CMC for the full face (then get rid of CombinedCMC mode?)

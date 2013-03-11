@@ -1,0 +1,8 @@
+Name:Chain of Vapor
+ManaCost:U
+Types:Instant
+A:SP$ ChangeZone | Cost$ U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCopy | StackDescription$ SpellDescription | SpellDescription$ Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, he or she may copy this spell and may choose a new target for that copy.
+SVar:DBCopy:DB$ Play | Defined$ Self | Controller$ TargetedController | WithoutManaCost$ True | CopyCard$ True | UnlessPayer$ TargetedController | UnlessCost$ Sac<1/Land> | UnlessSwitched$ True | StackDescription$ None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chain_of_vapor.jpg
+Oracle:Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, he or she may copy this spell and may choose a new target for that copy.
+SetInfo:ONS Uncommon
