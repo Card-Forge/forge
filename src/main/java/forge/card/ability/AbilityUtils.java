@@ -1201,7 +1201,9 @@ public class AbilityUtils {
                 && ComputerUtilCost.checkDamageCost(payer, ability.getPayCosts(), source, 4)
                 && ComputerUtilCost.checkDiscardCost(payer, ability.getPayCosts(), source)
                 && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
-                && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)) {
+                && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)
+                && (!source.getName().equals("Chain of Vapor")
+                        || (payer.getOpponent().getCreaturesInPlay().size() > 0 && payer.getLandsInPlay().size() > 3))) {
             // AI was crashing because the blank ability used to pay costs
             // Didn't have any of the data on the original SA to pay dependant costs
             return true;

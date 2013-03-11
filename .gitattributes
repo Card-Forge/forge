@@ -1616,6 +1616,8 @@ res/cardsfolder/c/cessation.txt svneol=native#text/plain
 res/cardsfolder/c/ceta_disciple.txt svneol=native#text/plain
 res/cardsfolder/c/ceta_sanctuary.txt svneol=native#text/plain
 res/cardsfolder/c/cetavolver.txt -text
+res/cardsfolder/c/chain_lightning.txt -text
+res/cardsfolder/c/chain_of_vapor.txt -text
 res/cardsfolder/c/chain_reaction.txt svneol=native#text/plain
 res/cardsfolder/c/chainbreaker.txt svneol=native#text/plain
 res/cardsfolder/c/chained_throatseeker.txt svneol=native#text/plain
@@ -11699,6 +11701,7 @@ res/cardsfolder/v/viscerid_drone.txt -text
 res/cardsfolder/v/viscid_lemures.txt svneol=native#text/plain
 res/cardsfolder/v/viseling.txt svneol=native#text/plain
 res/cardsfolder/v/vish_kal_blood_arbiter.txt -text
+res/cardsfolder/v/vision_charm.txt -text
 res/cardsfolder/v/vision_skeins.txt svneol=native#text/plain
 res/cardsfolder/v/visions.txt svneol=native#text/plain
 res/cardsfolder/v/visions_of_beyond.txt svneol=native#text/plain

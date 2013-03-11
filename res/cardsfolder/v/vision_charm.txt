@@ -1,0 +1,16 @@
+Name:Vision Charm
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$ Charm | Cost$ U | Choices$ MillOpp,ChangeType,PhaseArtifact | CharmNum$ 1 | SpellDescription$ Choose one - Target player puts the top four cards of his or her library into his or her graveyard; or choose a land type and a basic land type, and each land of the first chosen type becomes the second chosen type until end of turn; or target artifact phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during his or her next untap step.)
+SVar:MillOpp:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top four cards of his or her library into his or her graveyard.
+SVar:ChangeType:DB$ ChooseType | Defined$ You | Type$ Land | SubAbility$ RemFirstLand | SpellDescription$ Choose a land type and a basic land type, and each land of the first chosen type becomes the second chosen type until end of turn.
+SVar:RemFirstLand:DB$ PumpAll | ValidCards$ Land.ChosenType | RememberAllPumped$ True | SubAbility$ ChooseType2
+SVar:ChooseType2:DB$ ChooseType | Defined$ You | Type$ Basic Land | AILogic$ MostNeededType | SubAbility$ AnimateFirst
+SVar:AnimateFirst:DB$ AnimateAll | ValidCards$ Land.IsRemembered | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | RemoveAllAbilities$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PhaseArtifact:DB$ Phases | ValidTgts$ Artifact | TgtPrompt$ Choose a artifact | SpellDescription$ Target artifact phases out.
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vision_charm.jpg
+Oracle:Choose one - Target player puts the top four cards of his or her library into his or her graveyard; or choose a land type and a basic land type, and each land of the first chosen type becomes the second chosen type until end of turn; or target artifact phases out. (While it's phased out, it's treated as though it doesn't exist. It phases in before its controller untaps during his or her next untap step.)
+SetInfo:VIS Common
