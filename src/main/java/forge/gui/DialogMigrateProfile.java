@@ -17,6 +17,7 @@
  */
 package forge.gui;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -26,19 +27,20 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.text.DefaultCaret;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -52,7 +54,6 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FTextArea;
 import forge.gui.toolbox.FTextField;
 import forge.properties.NewConstants;
 
@@ -185,7 +186,7 @@ public class DialogMigrateProfile {
         private final String       _srcDir;
         private final JComboBox    _unknownDeckCombo;
         private final FCheckBox    _moveCheckbox;
-        private final FTextArea    _operationLog;
+        private final JTextArea    _operationLog;
         private final JProgressBar _progressBar;
         
         // used to ensure we only have one UI update pending at a time
@@ -223,14 +224,25 @@ public class DialogMigrateProfile {
             knownDeckPanel.add(unknownDeckPanel, "span");
             cbPanel.add(knownDeckPanel, "aligny top");
             
-            // add other data elements (gauntlets, quest data)
+            // add other userDir data elements
             JPanel dataPanel = new JPanel(new MigLayout("insets 0, gap 5, wrap"));
             dataPanel.setOpaque(false);
             dataPanel.add(new FLabel.Builder().text("Other data").build());
-            _addSelectionWidget(dataPanel, forced, OpType.GAUNTLET_DATA, "Gauntlet data");
-            _addSelectionWidget(dataPanel, forced, OpType.QUEST_DATA, "Quest saves");
+            _addSelectionWidget(dataPanel, forced, OpType.GAUNTLET_DATA,   "Gauntlet data");
+            _addSelectionWidget(dataPanel, forced, OpType.QUEST_DATA,      "Quest saves");
             _addSelectionWidget(dataPanel, forced, OpType.PREFERENCE_FILE, "Preference files");
             cbPanel.add(dataPanel, "aligny top");
+            
+            // add cacheDir data elements
+            JPanel cachePanel = new JPanel(new MigLayout("insets 0, gap 5, wrap 2"));
+            cachePanel.setOpaque(false);
+            cachePanel.add(new FLabel.Builder().text("Cached data").build());
+            _addSelectionWidget(cachePanel, forced, OpType.DEFAULT_CARD_PIC, "Default card pics");
+            _addSelectionWidget(cachePanel, forced, OpType.SET_CARD_PIC,     "Set-specific card pics");
+            _addSelectionWidget(cachePanel, forced, OpType.TOKEN_PIC,        "Card token pics");
+            _addSelectionWidget(cachePanel, forced, OpType.QUEST_PIC,        "Quest-related pics");
+            _addSelectionWidget(cachePanel, forced, OpType.DB_FILE,          "Database files");
+            cbPanel.add(cachePanel, "aligny top");
             _selectionPanel.add(cbPanel, "center");
             
             // add move/copy checkbox
@@ -241,8 +253,15 @@ public class DialogMigrateProfile {
             _selectionPanel.add(_moveCheckbox);
             
             // add operation summary textfield
-            _operationLog = new FTextArea();
-            _operationLog.setFocusable(true);
+            _operationLog = new JTextArea();
+            _operationLog.setFont(new Font("Monospaced", Font.PLAIN, 10));
+            _operationLog.setOpaque(false);
+            _operationLog.setWrapStyleWord(true);
+            _operationLog.setLineWrap(true);
+            _operationLog.setEditable(false);
+            // autoscroll to bottom when we append text
+            DefaultCaret caret = (DefaultCaret)_operationLog.getCaret();
+            caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
             JScrollPane scroller = new JScrollPane(_operationLog);
             scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
             _selectionPanel.add(scroller, "w 600:100%:100%, h 60:100%:100%");
@@ -274,15 +293,15 @@ public class DialogMigrateProfile {
             StringBuilder log = new StringBuilder();
             int totalOps = 0;
             for (Pair<FCheckBox, ? extends Map<File, File>> selection : _selections.values()) {
-                FCheckBox cb        = selection.getLeft();
-                Map<File, File> ops = selection.getRight();
+                FCheckBox cb = selection.getLeft();
+                int numOps   = selection.getRight().size();
                 
                 if (cb.isSelected()) {
-                    totalOps += ops.size();
+                    totalOps += numOps;
                 }
                 
                 // update checkbox text with new totals
-                cb.setText(String.format("%s (%d)", cb.getName(), ops.size()));
+                cb.setText(String.format("%s (%d)", cb.getName(), numOps));
             }
             log.append(_moveCheckbox.isSelected() ? "Moving" : "Copying");
             log.append(" ").append(totalOps).append(" files\n\n");
@@ -301,7 +320,6 @@ public class DialogMigrateProfile {
                 }
             }
             _operationLog.setText(log.toString());
-            
             _uiUpdateAck = true;
         }
         
@@ -320,46 +338,64 @@ public class DialogMigrateProfile {
                 selections.put(entry.getKey(), entry.getValue().getRight());
             }
             
-            Callable<Boolean> checkCancel = new Callable<Boolean>() {
-                @Override public Boolean call() { return _cancel; }
+            MigrationSourceAnalyzer.AnalysisCallback cb = new MigrationSourceAnalyzer.AnalysisCallback() {
+                @Override
+                public boolean checkCancel() { return _cancel; }
+                
+                @Override
+                public void addOp(OpType type, File src, File dest) {
+                    _selections.get(type).getRight().put(src, dest);
+                }
             };
             
-            final MigrationSourceAnalyzer msa = new MigrationSourceAnalyzer(_srcDir, selections, checkCancel);
+            final MigrationSourceAnalyzer msa = new MigrationSourceAnalyzer(_srcDir, cb);
             final int numFilesToAnalyze = msa.getNumFilesToAnalyze();
+            
+            final Timer timer = new Timer(500, null);
+            timer.addActionListener(new ActionListener() {
+                @Override public void actionPerformed(ActionEvent arg0) {
+                    if (_cancel) {
+                        timer.stop();
+                        return;
+                    }
+                    
+                    // timers run in the gui event loop, so it's ok to interact with widgets
+                    _progressBar.setValue(msa.getNumFilesAnalyzed());
+                    
+                    // only update if we don't already have an update pending.  we may not be prompt in
+                    // updating sometimes, but that's ok
+                    if (!_uiUpdateAck) { return; }
+                    _uiUpdateAck = false;
+                    _stateChangedListener.stateChanged(null);
+                }
+            });
+
             SwingUtilities.invokeLater(new Runnable() {
                 @Override public void run() {
                     if (_cancel) { return; }
                     _progressBar.setMaximum(numFilesToAnalyze);
+                    _progressBar.setValue(0);
+                    _progressBar.setIndeterminate(false);
                     
                     // start update timer
-                    final Timer timer = new Timer(500, null);
-                    timer.addActionListener(new ActionListener() {
-                        @Override public void actionPerformed(ActionEvent arg0) {
-                            if (_cancel) {
-                                timer.stop();
-                                return;
-                            }
-                            
-                            _progressBar.setValue(msa.getNumFilesAnalyzed());
-                            
-                            // only update if we don't already have an update pending.  we may not be prompt in
-                            // updating sometimes, but that's ok
-                            if (!_uiUpdateAck) { return; }
-                            _uiUpdateAck = false;
-                            _stateChangedListener.stateChanged(null);
-                        }
-                    });
+                    timer.start();
                 }
             });
             
             msa.doAnalysis();
+            timer.stop();
             
             return null;
         }
 
+        // executes in gui event loop thread
         @Override
         protected void done() {
             if (_cancel) { return; }
+            
+            _progressBar.setValue(_progressBar.getMaximum());
+            _progressBar.setString("Analysis complete");
+            
             _btnStart.addActionListener(new ActionListener() {
                 @Override public void actionPerformed(ActionEvent arg0) {
                     _btnStart.removeActionListener(this);
@@ -378,12 +414,12 @@ public class DialogMigrateProfile {
     
     private class _Importer extends SwingWorker<Void, Void> {
         private final Map<File, File> _operations;
-        private final FTextArea              _operationLog;
-        private final JProgressBar           _progressBar;
-        private final boolean                _move;
+        private final JTextArea       _operationLog;
+        private final JProgressBar    _progressBar;
+        private final boolean         _move;
         
         public _Importer(Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> selections, JComboBox unknownDeckCombo,
-                FTextArea operationLog, JProgressBar progressBar, boolean move) {
+                JTextArea operationLog, JProgressBar progressBar, boolean move) {
             _operationLog = operationLog;
             _progressBar  = progressBar;
             _move         = move;
@@ -418,7 +454,6 @@ public class DialogMigrateProfile {
             _progressBar.setString(_move ? "Moving files" : "Copying files");
             _progressBar.setMinimum(0);
             _progressBar.setMaximum(_operations.size());
-            _progressBar.setIndeterminate(false);
         }
         
         @Override

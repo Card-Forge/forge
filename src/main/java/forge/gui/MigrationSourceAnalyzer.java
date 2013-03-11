@@ -18,8 +18,8 @@
 package forge.gui;
 
 import java.io.File;
-import java.util.Map;
-import java.util.concurrent.Callable;
+
+import forge.properties.NewConstants;
 
 public class MigrationSourceAnalyzer {
     public static enum OpType {
@@ -29,22 +29,34 @@ public class MigrationSourceAnalyzer {
         SCHEME_DECK,
         SEALED_DECK,
         UNKNOWN_DECK,
+        DEFAULT_CARD_PIC,
+        SET_CARD_PIC,
+        TOKEN_PIC,
+        QUEST_PIC,
         GAUNTLET_DATA,
         QUEST_DATA,
-        PREFERENCE_FILE
+        PREFERENCE_FILE,
+        DB_FILE
     }
     
-    private final String                       _source;
-    private final Map<OpType, Map<File, File>> _opDb;
-    private final Callable<Boolean>            _checkCancel;
+    public static interface AnalysisCallback {
+        boolean checkCancel();
+        void    addOp(OpType type, File src, File dest);
+    }
     
-    private int _numFilesToAnalyze;
+    private final File             _source;
+    private final AnalysisCallback _cb;
+    private final int              _numFilesToAnalyze;
+    
     private int _numFilesAnalyzed;
     
-    public MigrationSourceAnalyzer(String source, Map<OpType, Map<File, File>> opDb, Callable<Boolean> checkCancel) {
-        _source      = source;
-        _opDb        = opDb;
-        _checkCancel = checkCancel;
+    public MigrationSourceAnalyzer(String source, AnalysisCallback cb) {
+        _source = new File(source);
+        _cb     = cb;
+
+        System.out.println("counting source files");
+        _numFilesToAnalyze = _countFiles(_source);
+        System.out.println("done counting source files: " + _numFilesToAnalyze);
     }
     
     public int getNumFilesToAnalyze() { return _numFilesToAnalyze; }
@@ -53,5 +65,58 @@ public class MigrationSourceAnalyzer {
     public void doAnalysis() {
         // TODO: analyze source path tree and populate operation sets
         // ensure we ignore data that is already in the destination directory
+
+        _analyzeResDir(_source);
+    }
+    
+    private void _analyzeResDir(File resRoot) {
+        for (File file : resRoot.listFiles()) {
+            if (_cb.checkCancel()) { return; }
+
+            if ("pics".equals(file.getName())) {
+                _analyzePicsDir(file);
+            }
+            
+            // ignore other files
+            if (file.isFile()) {
+                ++_numFilesAnalyzed;
+            }
+            if (file.isDirectory()) {
+                _numFilesAnalyzed += _countFiles(file);
+            }
+        }
+    }
+
+    private void _analyzePicsDir(File picsRoot) {
+        System.out.println("found pics dir: " + picsRoot);
+        for (File file : picsRoot.listFiles()) {
+            if (_cb.checkCancel()) { return; }
+            
+            System.out.println("analyzing dir entry: " + file.getAbsolutePath());
+            if (file.isFile()) {
+                ++_numFilesAnalyzed;
+                // TODO: correct filename
+                _cb.addOp(OpType.DEFAULT_CARD_PIC, file, new File(NewConstants.CACHE_CARD_PICS_DIR, file.getName()));
+            }
+            if (file.isDirectory()) {
+                // skip set pics for now
+                _numFilesAnalyzed += _countFiles(file);
+            }
+        }
+    }
+    
+    private int _countFiles(File directory) {
+        int count = 0;
+        for (File file : directory.listFiles()) {
+            if (_cb.checkCancel()) { return 0; }
+            
+            if (file.isFile()) {
+                ++count;
+            }
+            if (file.isDirectory()) {
+                count += _countFiles(file);
+            }
+        }
+        return count;
     }
 }
