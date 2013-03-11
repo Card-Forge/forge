@@ -25,7 +25,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -173,6 +172,19 @@ public class DialogMigrateProfile {
         PREFERENCE_FILE
     }
     
+    private class _UnknownDeckChoice {
+        public final String name;
+        public final String path;
+        
+        public _UnknownDeckChoice(String name0, String path0) {
+            name = name0;
+            path = path0;
+        }
+        
+        @Override
+        public String toString() { return name; }
+    }
+    
     private class _AnalyzerUpdater extends SwingWorker<Void, Void> {
         private final Map<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> _selections =
                 new HashMap<DialogMigrateProfile.OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>>();
@@ -206,9 +218,11 @@ public class DialogMigrateProfile {
             JPanel unknownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5"));
             unknownDeckPanel.setOpaque(false);
             _unknownDeckCombo = new JComboBox();
-            for (String choice : Arrays.asList("Constructed", "Draft", "Planar", "Scheme", "Sealed")) {
-                _unknownDeckCombo.addItem(choice);
-            }
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Constructed", NewConstants.DECK_CONSTRUCTED_DIR));
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Draft",       NewConstants.DECK_DRAFT_DIR));
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Planar",      NewConstants.DECK_PLANE_DIR));
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Scheme",      NewConstants.DECK_SCHEME_DIR));
+            _unknownDeckCombo.addItem(new _UnknownDeckChoice("Sealed",      NewConstants.DECK_SEALED_DIR));
             unknownDeckPanel.add(new FLabel.Builder().text("Treat decks of unknown type as:").build());
             unknownDeckPanel.add(_unknownDeckCombo);
             knownDeckPanel.add(unknownDeckPanel, "span");
@@ -277,11 +291,17 @@ public class DialogMigrateProfile {
             }
             log.append(_moveCheckbox.isSelected() ? "Moving" : "Copying");
             log.append(" ").append(totalOps).append(" files\n\n");
-            for (Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection : _selections.values()) {
+            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> entry : _selections.entrySet()) {
+                Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection = entry.getValue();
                 if (selection.getLeft().isSelected()) {
                     for (Pair<File, File> op : selection.getRight()) {
+                        File dest = op.getRight();
+                        if (OpType.UNKNOWN_DECK == entry.getKey()) {
+                            _UnknownDeckChoice choice = (_UnknownDeckChoice)_unknownDeckCombo.getSelectedItem();
+                            dest = new File(choice.path, dest.getName());
+                        }
                         log.append(String.format("%s -> %s\n",
-                                op.getLeft().getAbsolutePath(), op.getRight().getAbsolutePath()));
+                                op.getLeft().getAbsolutePath(), dest.getAbsolutePath()));
                     }
                 }
             }
@@ -313,7 +333,8 @@ public class DialogMigrateProfile {
                     
                     _disableAll();
                     
-                    _Importer importer = new _Importer(_selections, _operationLog, _progressBar, _moveCheckbox.isSelected());
+                    _Importer importer = new _Importer(
+                            _selections, _unknownDeckCombo, _operationLog, _progressBar, _moveCheckbox.isSelected());
                     importer.execute();
                 }
             });
@@ -327,7 +348,7 @@ public class DialogMigrateProfile {
         private final JProgressBar           _progressBar;
         private final boolean                _move;
         
-        public _Importer(Map<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> selections,
+        public _Importer(Map<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> selections, JComboBox unknownDeckCombo,
                 FTextArea operationLog, JProgressBar progressBar, boolean move) {
             _operationLog = operationLog;
             _progressBar  = progressBar;
@@ -340,6 +361,19 @@ public class DialogMigrateProfile {
                 }
             }
             _operations = new ArrayList<Pair<File, File>>(totalOps);
+            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> entry : selections.entrySet()) {
+                Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection = entry.getValue();
+                if (selection.getLeft().isSelected()) {
+                    if (OpType.UNKNOWN_DECK != entry.getKey()) {
+                        _operations.addAll(selection.getRight());
+                    } else {
+                        for (Pair<File, File> op : selection.getRight()) {
+                            _UnknownDeckChoice choice = (_UnknownDeckChoice)unknownDeckCombo.getSelectedItem();
+                            _operations.add(Pair.of(op.getLeft(), new File(choice.path, op.getRight().getName())));
+                        }
+                    }
+                }
+            }
             for (Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection : selections.values()) {
                 if (selection.getLeft().isSelected()) {
                     _operations.addAll(selection.getRight());
