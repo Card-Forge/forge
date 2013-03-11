@@ -25,11 +25,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -38,6 +40,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -46,6 +49,7 @@ import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import forge.gui.MigrationSourceAnalyzer.OpType;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
@@ -58,8 +62,9 @@ import forge.properties.NewConstants;
 
 public class DialogMigrateProfile {
     private final Runnable _onImportDone;
-    private final FButton _btnStart;
-    private final JPanel _selectionPanel;
+    private final FButton  _btnStart;
+    private final JPanel   _selectionPanel;
+    
     private volatile boolean _cancel;
     
     public DialogMigrateProfile(String srcDir, boolean showMigrationBlurb, final Runnable onImportDone) {
@@ -156,20 +161,8 @@ public class DialogMigrateProfile {
             @Override public void run() { btnCancel.requestFocusInWindow(); }
         });
         
-        _AnalyzerUpdater analyzer = new _AnalyzerUpdater(!emptySrcDir);
+        _AnalyzerUpdater analyzer = new _AnalyzerUpdater(srcDir, !emptySrcDir);
         analyzer.execute();
-    }
-    
-    private enum OpType {
-        CONSTRUCTED_DECK,
-        DRAFT_DECK,
-        PLANAR_DECK,
-        SCHEME_DECK,
-        SEALED_DECK,
-        UNKNOWN_DECK,
-        GAUNTLET_DATA,
-        QUEST_DATA,
-        PREFERENCE_FILE
     }
     
     private class _UnknownDeckChoice {
@@ -187,18 +180,24 @@ public class DialogMigrateProfile {
     
     private class _AnalyzerUpdater extends SwingWorker<Void, Void> {
         private final Map<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> _selections =
-                new HashMap<DialogMigrateProfile.OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>>();
+                new HashMap<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>>();
         
-        ChangeListener _selectionChangeListener = new ChangeListener() {
+        ChangeListener _stateChangedListener = new ChangeListener() {
             @Override public void stateChanged(ChangeEvent arg0) { _updateUI(); }
         };
         
+        private final String       _srcDir;
         private final JComboBox    _unknownDeckCombo;
         private final FCheckBox    _moveCheckbox;
         private final FTextArea    _operationLog;
         private final JProgressBar _progressBar;
+        
+        // used to ensure we only have one UI update pending at a time
+        private volatile boolean _uiUpdateAck;
 
-        public _AnalyzerUpdater(boolean forced) {
+        public _AnalyzerUpdater(String srcDir, boolean forced) {
+            _srcDir = srcDir;
+            
             _selectionPanel.removeAll();
             _selectionPanel.setLayout(new MigLayout("insets 0, gap 5, wrap"));
             
@@ -242,7 +241,7 @@ public class DialogMigrateProfile {
             _moveCheckbox = new FCheckBox("move files");
             _moveCheckbox.setSelected(true);
             _moveCheckbox.setEnabled(!forced);
-            _moveCheckbox.addChangeListener(_selectionChangeListener);
+            _moveCheckbox.addChangeListener(_stateChangedListener);
             _selectionPanel.add(_moveCheckbox);
             
             // add operation summary textfield
@@ -268,8 +267,8 @@ public class DialogMigrateProfile {
             cb.setName(name);
             cb.setSelected(true);
             cb.setEnabled(!forced);
-            cb.addChangeListener(_selectionChangeListener);
-            _selections.put(type, Pair.of(cb, new HashSet<Pair<File, File>>()));
+            cb.addChangeListener(_stateChangedListener);
+            _selections.put(type, Pair.of(cb, Collections.newSetFromMap(new ConcurrentHashMap<Pair<File, File>, Boolean>())));
             parent.add(cb);
         }
         
@@ -306,6 +305,8 @@ public class DialogMigrateProfile {
                 }
             }
             _operationLog.setText(log.toString());
+            
+            _uiUpdateAck = true;
         }
         
         private void _disableAll() {
@@ -318,8 +319,45 @@ public class DialogMigrateProfile {
         
         @Override
         protected Void doInBackground() throws Exception {
-            // TODO: analyze source path tree and populate operation sets
-            // ensure we ignore data that is already in the destination directory
+            Map<OpType, Set<Pair<File, File>>> selections = new HashMap<OpType, Set<Pair<File, File>>>();
+            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> entry : _selections.entrySet()) {
+                selections.put(entry.getKey(), entry.getValue().getRight());
+            }
+            
+            Callable<Boolean> checkCancel = new Callable<Boolean>() {
+                @Override public Boolean call() { return _cancel; }
+            };
+            
+            final MigrationSourceAnalyzer msa = new MigrationSourceAnalyzer(_srcDir, selections, checkCancel);
+            final int numFilesToAnalyze = msa.getNumFilesToAnalyze();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override public void run() {
+                    if (_cancel) { return; }
+                    _progressBar.setMaximum(numFilesToAnalyze);
+                    
+                    // start update timer
+                    final Timer timer = new Timer(500, null);
+                    timer.addActionListener(new ActionListener() {
+                        @Override public void actionPerformed(ActionEvent arg0) {
+                            if (_cancel) {
+                                timer.stop();
+                                return;
+                            }
+                            
+                            _progressBar.setValue(msa.getNumFilesAnalyzed());
+                            
+                            // only update if we don't already have an update pending.  we may not be prompt in
+                            // updating sometimes, but that's ok
+                            if (!_uiUpdateAck) { return; }
+                            _uiUpdateAck = false;
+                            _stateChangedListener.stateChanged(null);
+                        }
+                    });
+                }
+            });
+            
+            msa.doAnalysis();
+            
             return null;
         }
 
