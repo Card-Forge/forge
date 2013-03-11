@@ -19,10 +19,7 @@ package forge.gui;
 
 import java.io.File;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Callable;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 public class MigrationSourceAnalyzer {
     public static enum OpType {
@@ -37,14 +34,14 @@ public class MigrationSourceAnalyzer {
         PREFERENCE_FILE
     }
     
-    private final String                             _source;
-    private final Map<OpType, Set<Pair<File, File>>> _opDb;
-    private final Callable<Boolean>                  _checkCancel;
+    private final String                       _source;
+    private final Map<OpType, Map<File, File>> _opDb;
+    private final Callable<Boolean>            _checkCancel;
     
     private int _numFilesToAnalyze;
     private int _numFilesAnalyzed;
     
-    public MigrationSourceAnalyzer(String source, Map<OpType, Set<Pair<File, File>>> opDb, Callable<Boolean> checkCancel) {
+    public MigrationSourceAnalyzer(String source, Map<OpType, Map<File, File>> opDb, Callable<Boolean> checkCancel) {
         _source      = source;
         _opDb        = opDb;
         _checkCancel = checkCancel;

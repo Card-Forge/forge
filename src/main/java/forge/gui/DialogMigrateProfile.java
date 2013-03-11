@@ -24,12 +24,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -179,8 +175,8 @@ public class DialogMigrateProfile {
     }
     
     private class _AnalyzerUpdater extends SwingWorker<Void, Void> {
-        private final Map<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> _selections =
-                new HashMap<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>>();
+        private final Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> _selections =
+                new HashMap<OpType, Pair<FCheckBox, ? extends Map<File, File>>>();
         
         ChangeListener _stateChangedListener = new ChangeListener() {
             @Override public void stateChanged(ChangeEvent arg0) { _updateUI(); }
@@ -268,7 +264,7 @@ public class DialogMigrateProfile {
             cb.setSelected(true);
             cb.setEnabled(!forced);
             cb.addChangeListener(_stateChangedListener);
-            _selections.put(type, Pair.of(cb, Collections.newSetFromMap(new ConcurrentHashMap<Pair<File, File>, Boolean>())));
+            _selections.put(type, Pair.of(cb, new ConcurrentHashMap<File, File>()));
             parent.add(cb);
         }
         
@@ -277,9 +273,9 @@ public class DialogMigrateProfile {
             // set operation summary
             StringBuilder log = new StringBuilder();
             int totalOps = 0;
-            for (Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection : _selections.values()) {
-                FCheckBox cb              = selection.getLeft();
-                Set<Pair<File, File>> ops = selection.getRight();
+            for (Pair<FCheckBox, ? extends Map<File, File>> selection : _selections.values()) {
+                FCheckBox cb        = selection.getLeft();
+                Map<File, File> ops = selection.getRight();
                 
                 if (cb.isSelected()) {
                     totalOps += ops.size();
@@ -290,17 +286,17 @@ public class DialogMigrateProfile {
             }
             log.append(_moveCheckbox.isSelected() ? "Moving" : "Copying");
             log.append(" ").append(totalOps).append(" files\n\n");
-            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> entry : _selections.entrySet()) {
-                Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection = entry.getValue();
+            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
+                Pair<FCheckBox, ? extends Map<File, File>> selection = entry.getValue();
                 if (selection.getLeft().isSelected()) {
-                    for (Pair<File, File> op : selection.getRight()) {
-                        File dest = op.getRight();
+                    for (Map.Entry<File, File> op : selection.getRight().entrySet()) {
+                        File dest = op.getValue();
                         if (OpType.UNKNOWN_DECK == entry.getKey()) {
                             _UnknownDeckChoice choice = (_UnknownDeckChoice)_unknownDeckCombo.getSelectedItem();
                             dest = new File(choice.path, dest.getName());
                         }
                         log.append(String.format("%s -> %s\n",
-                                op.getLeft().getAbsolutePath(), dest.getAbsolutePath()));
+                                op.getKey().getAbsolutePath(), dest.getAbsolutePath()));
                     }
                 }
             }
@@ -310,7 +306,7 @@ public class DialogMigrateProfile {
         }
         
         private void _disableAll() {
-            for (Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection : _selections.values()) {
+            for (Pair<FCheckBox, ? extends Map<File, File>> selection : _selections.values()) {
                 selection.getLeft().setEnabled(false);
             }
             _unknownDeckCombo.setEnabled(false);
@@ -319,8 +315,8 @@ public class DialogMigrateProfile {
         
         @Override
         protected Void doInBackground() throws Exception {
-            Map<OpType, Set<Pair<File, File>>> selections = new HashMap<OpType, Set<Pair<File, File>>>();
-            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> entry : _selections.entrySet()) {
+            Map<OpType, Map<File, File>> selections = new HashMap<OpType, Map<File, File>>();
+            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
                 selections.put(entry.getKey(), entry.getValue().getRight());
             }
             
@@ -381,40 +377,40 @@ public class DialogMigrateProfile {
     }
     
     private class _Importer extends SwingWorker<Void, Void> {
-        private final List<Pair<File, File>> _operations;
+        private final Map<File, File> _operations;
         private final FTextArea              _operationLog;
         private final JProgressBar           _progressBar;
         private final boolean                _move;
         
-        public _Importer(Map<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> selections, JComboBox unknownDeckCombo,
+        public _Importer(Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> selections, JComboBox unknownDeckCombo,
                 FTextArea operationLog, JProgressBar progressBar, boolean move) {
             _operationLog = operationLog;
             _progressBar  = progressBar;
             _move         = move;
             
             int totalOps = 0;
-            for (Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection : selections.values()) {
+            for (Pair<FCheckBox, ? extends Map<File, File>> selection : selections.values()) {
                 if (selection.getLeft().isSelected()) {
                     totalOps += selection.getRight().size();
                 }
             }
-            _operations = new ArrayList<Pair<File, File>>(totalOps);
-            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> entry : selections.entrySet()) {
-                Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection = entry.getValue();
+            _operations = new HashMap<File, File>(totalOps);
+            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : selections.entrySet()) {
+                Pair<FCheckBox, ? extends Map<File, File>> selection = entry.getValue();
                 if (selection.getLeft().isSelected()) {
                     if (OpType.UNKNOWN_DECK != entry.getKey()) {
-                        _operations.addAll(selection.getRight());
+                        _operations.putAll(selection.getRight());
                     } else {
-                        for (Pair<File, File> op : selection.getRight()) {
+                        for (Map.Entry<File, File> op : selection.getRight().entrySet()) {
                             _UnknownDeckChoice choice = (_UnknownDeckChoice)unknownDeckCombo.getSelectedItem();
-                            _operations.add(Pair.of(op.getLeft(), new File(choice.path, op.getRight().getName())));
+                            _operations.put(op.getKey(), new File(choice.path, op.getValue().getName()));
                         }
                     }
                 }
             }
-            for (Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection : selections.values()) {
+            for (Pair<FCheckBox, ? extends Map<File, File>> selection : selections.values()) {
                 if (selection.getLeft().isSelected()) {
-                    _operations.addAll(selection.getRight());
+                    _operations.putAll(selection.getRight());
                 }
             }
             
@@ -432,14 +428,14 @@ public class DialogMigrateProfile {
             
             // assumes all destination directories have been created
             int numOps = 0;
-            for (Pair<File, File> op : _operations) {
+            for (Map.Entry<File, File> op : _operations.entrySet()) {
                 final int curOpNum = ++numOps;
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override public void run() { _progressBar.setValue(curOpNum); }
                 });
                 
-                File srcFile  = op.getLeft();
-                File destFile = op.getRight();
+                File srcFile  = op.getKey();
+                File destFile = op.getValue();
 
                 try {
                     _copyFile(srcFile, destFile);
