@@ -4,7 +4,7 @@ import javax.swing.SwingUtilities;
 
 import forge.Command;
 import forge.error.BugReporter;
-import forge.gui.GuiImportPicture;
+import forge.gui.DialogMigrateProfile;
 import forge.gui.download.GuiDownloadPicturesLQ;
 import forge.gui.download.GuiDownloadPrices;
 import forge.gui.download.GuiDownloadQuestImages;
@@ -33,19 +33,10 @@ public enum CSubmenuDownloaders implements ICDoc {
         public void execute() { new GuiDownloadPrices(); } };
     private final Command cmdHowToPlay = new Command() { @Override
         public void execute() { VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay(); } };
-
-    private final Command cmdImportPictures = new Command() {
-        @Override
-        public void execute() {
-            final GuiImportPicture ip = new GuiImportPicture(null);
-            ip.setVisible(true);
-        }
-    };
-
+    private final Command cmdImportPictures = new Command() { @Override
+        public void execute() { new DialogMigrateProfile(null, false, null); } };
     private final Command cmdReportBug = new Command() { @Override
-        public void execute() {
-            BugReporter.reportBug(null);
-        }
+        public void execute() { BugReporter.reportBug(null); }
     };
 
     /* (non-Javadoc)

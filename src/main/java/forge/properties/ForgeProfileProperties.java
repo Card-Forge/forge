@@ -59,13 +59,17 @@ public class ForgeProfileProperties {
     private static String _getDir(Properties props, String propertyKey, String defaultVal) {
         String retDir = props.getProperty(propertyKey, defaultVal).trim();
         if (retDir.isEmpty()) {
-            // use default if dir is "defined" as an empty or whitespace string in the properties file
-            return defaultVal;
+            // use default if dir is "defined" as an empty string in the properties file
+            retDir = defaultVal;
         }
-        if (retDir.endsWith("/") || retDir.endsWith(File.pathSeparator)) {
+        
+        // canonicalize
+        retDir = new File(retDir).getAbsolutePath();
+        
+        if (retDir.endsWith(File.pathSeparator)) {
             return retDir;
         }
-        return retDir + "/";
+        return retDir + File.pathSeparator;
     }
     
     // returns a pair <userDir, cacheDir>

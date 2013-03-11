@@ -100,7 +100,7 @@ public enum FModel {
      *             if we could not find or write to the log file.
      */
     private FModel() {
-        // Fire up log file and exception handling
+        // install our error reporter
         ExceptionHandler.registerErrorHandling();
 
         // create profile dirs if they don't already exist
@@ -115,6 +115,7 @@ public enum FModel {
             }
         }
         
+        // initialize log file
         final File logFile = new File(NewConstants.LOG_FILE);
         final boolean deleteSucceeded = logFile.delete();
 

@@ -141,7 +141,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
         p.add(c, "w 500!");
-        p.add(btnClose, "w 200!, h pref+12, center, gaptop 30");
+        p.add(btnClose, "w 200!, h pref+12!, center, gaptop 30");
         overlay.add(p, "gap 0 0 10% 10%");
         SOverlayUtils.showOverlay();
         

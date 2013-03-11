@@ -47,21 +47,21 @@ public final class NewConstants {
     public static final String DEFAULT_CHALLENGES_DIR = _QUEST_DIR + "challenges";
    
     // data tree roots
-    private static final String _USER_DIR;
-    private static final String _CACHE_DIR;
-    public static final String  CACHE_CARD_PICS_DIR;
+    public static final String USER_DIR;
+    public static final String CACHE_DIR;
+    public static final String CACHE_CARD_PICS_DIR;
     static {
         ForgeProfileProperties profileProps = new ForgeProfileProperties(PROFILE_FILE);
-        _USER_DIR           = profileProps.userDir;
-        _CACHE_DIR          = profileProps.cacheDir;
+        USER_DIR           = profileProps.userDir;
+        CACHE_DIR          = profileProps.cacheDir;
         CACHE_CARD_PICS_DIR = profileProps.cardPicsDir;
     }
 
     // data that is only in the profile dirs
-    private static final String _USER_QUEST_DIR     = _USER_DIR + "quest/";
-    private static final String _USER_PREFS_DIR     = _USER_DIR + "preferences/";
-    public static final String LOG_FILE             = _USER_DIR + "forge.log";
-    public static final String DECK_BASE_DIR        = _USER_DIR + "decks/";
+    private static final String _USER_QUEST_DIR     = USER_DIR + "quest/";
+    private static final String _USER_PREFS_DIR     = USER_DIR + "preferences/";
+    public static final String LOG_FILE             = USER_DIR + "forge.log";
+    public static final String DECK_BASE_DIR        = USER_DIR + "decks/";
     public static final String DECK_CONSTRUCTED_DIR = DECK_BASE_DIR + "constructed/";
     public static final String DECK_DRAFT_DIR       = DECK_BASE_DIR + "draft/";
     public static final String DECK_SEALED_DIR      = DECK_BASE_DIR + "sealed/";
@@ -80,8 +80,8 @@ public final class NewConstants {
     public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, _USER_PREFS_DIR, "editor.xml");
     
     // data that is only in the cached dir
-    private static final String _DB_DIR   = _CACHE_DIR + "db/";
-    private static final String _PICS_DIR = _CACHE_DIR + "pics/";
+    private static final String _DB_DIR   = CACHE_DIR + "db/";
+    private static final String _PICS_DIR = CACHE_DIR + "pics/";
     public static final String CACHE_TOKEN_PICS_DIR          = _PICS_DIR + "tokens/";
     public static final String CACHE_ICON_PICS_DIR           = _PICS_DIR + "icons/";
     public static final String CACHE_BOOSTER_PICS_DIR        = _PICS_DIR + "boosters/";
@@ -92,6 +92,9 @@ public final class NewConstants {
     public static final String CACHE_MORPH_IMAGE_FILE        = "morph";
     
     public static final String[] PROFILE_DIRS = {
+            USER_DIR,
+            CACHE_DIR,
+            CACHE_CARD_PICS_DIR,
             _USER_PREFS_DIR,
             _DB_DIR,
             DECK_CONSTRUCTED_DIR,
@@ -100,7 +103,6 @@ public final class NewConstants {
             DECK_SCHEME_DIR,
             DECK_PLANE_DIR,
             QUEST_SAVE_DIR,
-            CACHE_CARD_PICS_DIR,
             CACHE_TOKEN_PICS_DIR,
             CACHE_ICON_PICS_DIR,
             CACHE_BOOSTER_PICS_DIR,

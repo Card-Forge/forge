@@ -13904,7 +13904,6 @@ src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
 src/main/java/forge/gui/GuiChoose.java -text
 src/main/java/forge/gui/GuiDialog.java -text
 src/main/java/forge/gui/GuiDisplayUtil.java svneol=native#text/plain
-src/main/java/forge/gui/GuiImportPicture.java svneol=native#text/plain
 src/main/java/forge/gui/GuiProgressBarWindow.java svneol=native#text/plain
 src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
 src/main/java/forge/gui/InputProxy.java svneol=native#text/plain
@@ -14176,9 +14175,7 @@ src/main/java/forge/util/Aggregates.java -text
 src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 src/main/java/forge/util/BinaryUtil.java -text
 src/main/java/forge/util/ComparableOp.java -text
-src/main/java/forge/util/CopyFiles.java svneol=native#text/plain
 src/main/java/forge/util/Expressions.java -text
-src/main/java/forge/util/FileFinder.java svneol=native#text/plain
 src/main/java/forge/util/FileSection.java -text
 src/main/java/forge/util/FileSectionManual.java -text
 src/main/java/forge/util/FileUtil.java svneol=native#text/plain

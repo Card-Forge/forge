@@ -5,8 +5,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -16,8 +19,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
+
+import com.google.common.collect.Lists;
+
 import forge.Singletons;
 import forge.control.FControl;
+import forge.gui.DialogMigrateProfile;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
@@ -29,6 +36,7 @@ import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.model.BuildInfo;
+import forge.properties.NewConstants;
 
 /** */
 public enum FView {
@@ -108,7 +116,6 @@ public enum FView {
 
         // All is ready to go - fire up home screen and discard splash frame.
         Singletons.getControl().changeState(FControl.Screens.HOME_SCREEN);
-        //CMainMenu.SINGLETON_INSTANCE.selectPrevious();
 
         FView.this.frmSplash.dispose();
         FView.this.frmSplash = null;
@@ -116,6 +123,35 @@ public enum FView {
         // Allow OS to set location. Hopefully this doesn't cause issues
         frmDocument.setLocationByPlatform(true);
         frmDocument.setVisible(true);
+        
+        // remove this once our userbase has been migrated to the profile layout
+        {
+            // get profile directories -- if one of them is actually under the res directory, don't
+            // try to migrate it
+            Set<File> profileDirs = new HashSet<File>();
+            for (String dname : NewConstants.PROFILE_DIRS) {
+                profileDirs.add(new File(dname));
+            }
+            
+            // check quickly whether we have any data to migrate
+            boolean hasData = false;
+            for (String resDir : Lists.newArrayList("decks", "gauntlet", "pics", "pics_product", "preferences", "quest/data")) {
+                File f = new File("res", resDir);
+                if (f.exists() && !profileDirs.contains(f)) {
+                    System.out.println("pre-profile data found: " + f.getAbsolutePath());
+                    hasData = true;
+                    break;
+                }
+            }
+        
+            if (hasData) {
+                new DialogMigrateProfile("res", true, new Runnable() {
+                    @Override public void run() {
+                        // TODO: reload appropriate data structures
+                    }
+                });
+            }
+        }
     }
 
     /** @return {@link forge.view.SplashFrame} */

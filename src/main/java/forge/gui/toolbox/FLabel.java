@@ -73,6 +73,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         private boolean bldIconScaleAuto      = true;
         protected boolean bldReactOnMouseDown = false;
         private boolean bldUseSkinColors      = true;
+        private boolean bldEnabled            = true;
 
         protected String  bldText, bldToolTip;
         private ImageIcon bldIcon;
@@ -143,6 +144,10 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
+        public Builder enabled(final boolean b0) { this.bldEnabled = b0; return this; }
+
+        /**@param b0 &emsp; boolean
+         * @return {@link forge.gui.toolbox.Builder} */
         public Builder iconScaleAuto(final boolean b0) { this.bldIconScaleAuto = b0; return this; }
 
         /**@param d0 &emsp; double between 0 and 1, 0.8 by default
@@ -193,6 +198,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
         this.iconAlignX = b0.bldIconAlignX;
         this.iconInsets = b0.bldIconInsets;
 
+        this.setEnabled(b0.bldEnabled);
         this.setFontStyle(b0.bldFontStyle);
         this.setFontSize(b0.bldFontSize);
         this.setUnhoveredAlpha(b0.bldUnhoveredAlpha);
