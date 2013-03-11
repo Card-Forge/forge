@@ -28,6 +28,7 @@ import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.framework.ICDoc;
+import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.util.storage.IStorage;
@@ -47,7 +48,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     private final VSubmenuGauntletBuild view = VSubmenuGauntletBuild.SINGLETON_INSTANCE;
     private final List<Deck> workingDecks = new ArrayList<Deck>();
     private File previousDirectory = null;
-    private File openStartDir = new File(GauntletIO.DIR_GAUNTLETS);
+    private File openStartDir = new File(NewConstants.GAUNTLET_DIR.defaultLoc);
 
     private final FileFilter filterDAT = new FileFilter() {
         @Override
@@ -317,7 +318,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
             return false;
         }
 
-        final File f = new File(GauntletIO.DIR_GAUNTLETS + name + ".dat");
+        final File f = new File(NewConstants.GAUNTLET_DIR.defaultLoc + name + ".dat");
         // Confirm if overwrite
         if (f.exists()) {
             final int m = JOptionPane.showConfirmDialog(null,

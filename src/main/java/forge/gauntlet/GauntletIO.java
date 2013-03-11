@@ -24,12 +24,11 @@ import forge.deck.CardPool;
 import forge.error.BugReporter;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.properties.NewConstants;
 import forge.util.IgnoringXStream;
 
 /** */
 public class GauntletIO {
-    /** Directory for storing gauntlet data files. */
-    public static final String DIR_GAUNTLETS = "res/gauntlet/";
     /** Prompt in text field for new (unsaved) built gauntlets. */
     public static final String TXF_PROMPT = "[New Gauntlet]";
     /** Prefix for quick gauntlet save files. */
@@ -65,7 +64,7 @@ public class GauntletIO {
             }
         };
 
-        File folder = new File(GauntletIO.DIR_GAUNTLETS);
+        File folder = new File(NewConstants.GAUNTLET_DIR.defaultLoc);
         return folder.listFiles(filter);
     }
 
@@ -79,7 +78,7 @@ public class GauntletIO {
             }
         };
 
-        File folder = new File(GauntletIO.DIR_GAUNTLETS);
+        File folder = new File(NewConstants.GAUNTLET_DIR.defaultLoc);
         return folder.listFiles(filter);
     }
 
@@ -93,7 +92,7 @@ public class GauntletIO {
             }
         };
 
-        File folder = new File(GauntletIO.DIR_GAUNTLETS);
+        File folder = new File(NewConstants.GAUNTLET_DIR.defaultLoc);
         return folder.listFiles(filter);
     }
 

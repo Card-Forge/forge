@@ -27,7 +27,6 @@ public final class GauntletData {
 
     /** Constructor. */
     public GauntletData() {
-        new File(GauntletIO.DIR_GAUNTLETS).mkdir();
     }
 
     //========== Mutator / accessor methods

@@ -32,6 +32,7 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
+import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.util.storage.IStorage;
@@ -224,7 +225,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         int num = 1;
         while (lstNames.contains(GauntletIO.PREFIX_QUICK + num + ".dat")) { num++; }
         FModel.SINGLETON_INSTANCE.getGauntletData().setActiveFile(new File(
-                GauntletIO.DIR_GAUNTLETS + GauntletIO.PREFIX_QUICK + num + ".dat"));
+                NewConstants.GAUNTLET_DIR.defaultLoc + GauntletIO.PREFIX_QUICK + num + ".dat"));
 
         // Pull user deck
         final Deck userDeck;

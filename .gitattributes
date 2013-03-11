@@ -12407,6 +12407,8 @@ res/cardsfolder/z/zuran_orb.txt svneol=native#text/plain
 res/cardsfolder/z/zuran_spellcaster.txt svneol=native#text/plain
 res/defaults/editor.preferences svneol=native#text/xml
 res/defaults/editor.xml svneol=native#text/xml
+res/defaults/gauntlet/LOCKED_DotP[!!-~]Preconstructed.dat -text
+res/defaults/gauntlet/LOCKED_Swimming[!!-~]With[!!-~]Sharks.dat -text
 res/defaults/home.xml svneol=native#text/xml
 res/defaults/match.xml svneol=native#text/xml
 res/draft/cube_juzamjedi.draft -text
@@ -12414,8 +12416,6 @@ res/draft/cube_skiera.draft -text
 res/draft/rankings.txt -text
 res/gamedata/NonStackingKWList.txt svneol=native#text/plain
 res/gamedata/TypeLists.txt svneol=native#text/plain
-res/gauntlet/LOCKED_DotP[!!-~]Preconstructed.dat -text
-res/gauntlet/LOCKED_Swimming[!!-~]With[!!-~]Sharks.dat -text
 res/howto.txt svneol=native#text/plain
 res/licenses/java-yield-license.txt svneol=native#text/plain
 res/licenses/log4j-license.txt svneol=native#text/plain
