@@ -66,10 +66,11 @@ public class ForgeProfileProperties {
         // canonicalize
         retDir = new File(retDir).getAbsolutePath();
         
-        if (retDir.endsWith(File.pathSeparator)) {
+        // ensure path ends in a slash
+        if (File.separatorChar == retDir.charAt(retDir.length() - 1)) {
             return retDir;
         }
-        return retDir + File.pathSeparator;
+        return retDir + File.separatorChar;
     }
     
     // returns a pair <userDir, cacheDir>

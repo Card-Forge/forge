@@ -25,12 +25,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -95,27 +97,27 @@ public class DialogMigrateProfile {
                     " where to find your data.</html>").build());
             blurbPanel.add(new FLabel.Builder().text(
                     "<html><b>Remember, your data won't be available until you complete this step!</b></html>").build(), "growx");
-            p.add(blurbPanel, "gap 10 10 20 20");
+            p.add(blurbPanel, "gap 10 10 20 0");
         }
         
         // import source widgets
-        JPanel importSourcePanel = new JPanel(new MigLayout("insets 0, gap 5"));
+        JPanel importSourcePanel = new JPanel(new MigLayout("insets 0, gap 10"));
         importSourcePanel.setOpaque(false);
         importSourcePanel.add(new FLabel.Builder().text("Import from:").build());
         boolean emptySrcDir = StringUtils.isEmpty(srcDir); 
         FTextField txfSrc = new FTextField.Builder().readonly(!emptySrcDir).build();
-        importSourcePanel.add(txfSrc, "gap 5, pushx");
+        importSourcePanel.add(txfSrc, "pushx, growx");
         if (!emptySrcDir) {
             File srcDirFile = new File(srcDir);
             txfSrc.setText(srcDirFile.getAbsolutePath());
         }
         importSourcePanel.add(new FLabel.ButtonBuilder().text("Choose directory...").enabled(emptySrcDir).build(), "h pref+8!, w pref+12!");
-        p.add(importSourcePanel, "growx");
+        p.add(importSourcePanel, "gaptop 20, growx");
         
         // prepare import selection panel
         _selectionPanel = new JPanel();
         _selectionPanel.setOpaque(false);
-        p.add(_selectionPanel, "growx");
+        p.add(_selectionPanel, "growx, h 100%, gaptop 10");
         
         // action button widgets
         final Runnable cleanup = new Runnable() {
@@ -138,16 +140,16 @@ public class DialogMigrateProfile {
             }
         };
         
-        JPanel southPanel = new JPanel(new MigLayout("gap 20, ax center"));
+        JPanel southPanel = new JPanel(new MigLayout("ax center"));
         southPanel.setOpaque(false);
         southPanel.add(_btnStart, "center, w 40%, h pref+12!");
         southPanel.add(btnCancel, "center, w 40%, h pref+12!");
         
-        p.add(southPanel, "dock south");
+        p.add(southPanel, "growx");
       
         JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
         overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
-        overlay.add(p, "w 700!");
+        overlay.add(p, "w 800::80%, h 800::90%");
         SOverlayUtils.showOverlay();
         
         // focus cancel button
@@ -161,6 +163,10 @@ public class DialogMigrateProfile {
     
     private enum OpType {
         CONSTRUCTED_DECK,
+        DRAFT_DECK,
+        PLANAR_DECK,
+        SCHEME_DECK,
+        SEALED_DECK,
         UNKNOWN_DECK,
         GAUNTLET_DATA,
         QUEST_DATA,
@@ -171,6 +177,11 @@ public class DialogMigrateProfile {
         private final Map<OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>> _selections =
                 new HashMap<DialogMigrateProfile.OpType, Pair<FCheckBox, ? extends Set<Pair<File, File>>>>();
         
+        ChangeListener _selectionChangeListener = new ChangeListener() {
+            @Override public void stateChanged(ChangeEvent arg0) { _updateUI(); }
+        };
+        
+        private final JComboBox    _unknownDeckCombo;
         private final FCheckBox    _moveCheckbox;
         private final FTextArea    _operationLog;
         private final JProgressBar _progressBar;
@@ -179,28 +190,45 @@ public class DialogMigrateProfile {
             _selectionPanel.removeAll();
             _selectionPanel.setLayout(new MigLayout("insets 0, gap 5, wrap"));
             
-            ChangeListener changeListener = new ChangeListener() {
-                @Override public void stateChanged(ChangeEvent arg0) { _updateUI(); }
-            };
+            JPanel cbPanel = new JPanel(new MigLayout("insets 0, gap 5"));
+            cbPanel.setOpaque(false);
             
-            // add known deck checkboxes
-            JPanel knownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5, wrap"));
+            // add deck selections
+            JPanel knownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5, wrap 2"));
             knownDeckPanel.setOpaque(false);
-            knownDeckPanel.add(new FLabel.Builder().text("Decks").build());
-            FCheckBox constructed = new FCheckBox();
-            constructed.setName("Constructed decks");
-            constructed.addChangeListener(changeListener);
-            _selections.put(OpType.CONSTRUCTED_DECK, Pair.of(constructed, new HashSet<Pair<File, File>>()));
-            
-            // add unknown deck combobox
+            knownDeckPanel.add(new FLabel.Builder().text("Decks").build(), "wrap");
+            _addSelectionWidget(knownDeckPanel, forced, OpType.CONSTRUCTED_DECK, "Constructed decks");
+            _addSelectionWidget(knownDeckPanel, forced, OpType.DRAFT_DECK,       "Draft decks");
+            _addSelectionWidget(knownDeckPanel, forced, OpType.PLANAR_DECK,      "Planar decks");
+            _addSelectionWidget(knownDeckPanel, forced, OpType.SCHEME_DECK,      "Scheme decks");
+            _addSelectionWidget(knownDeckPanel, forced, OpType.SEALED_DECK,      "Sealed decks");
+            _addSelectionWidget(knownDeckPanel, forced, OpType.UNKNOWN_DECK,     "Unknown decks");
+            JPanel unknownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5"));
+            unknownDeckPanel.setOpaque(false);
+            _unknownDeckCombo = new JComboBox();
+            for (String choice : Arrays.asList("Constructed", "Draft", "Planar", "Scheme", "Sealed")) {
+                _unknownDeckCombo.addItem(choice);
+            }
+            unknownDeckPanel.add(new FLabel.Builder().text("Treat decks of unknown type as:").build());
+            unknownDeckPanel.add(_unknownDeckCombo);
+            knownDeckPanel.add(unknownDeckPanel, "span");
+            cbPanel.add(knownDeckPanel, "aligny top");
             
             // add other data elements (gauntlets, quest data)
+            JPanel dataPanel = new JPanel(new MigLayout("insets 0, gap 5, wrap"));
+            dataPanel.setOpaque(false);
+            dataPanel.add(new FLabel.Builder().text("Other data").build());
+            _addSelectionWidget(dataPanel, forced, OpType.GAUNTLET_DATA, "Gauntlet data");
+            _addSelectionWidget(dataPanel, forced, OpType.QUEST_DATA, "Quest saves");
+            _addSelectionWidget(dataPanel, forced, OpType.PREFERENCE_FILE, "Preference files");
+            cbPanel.add(dataPanel, "aligny top");
+            _selectionPanel.add(cbPanel, "center");
             
             // add move/copy checkbox
             _moveCheckbox = new FCheckBox("move files");
             _moveCheckbox.setSelected(true);
             _moveCheckbox.setEnabled(!forced);
-            _moveCheckbox.addChangeListener(changeListener);
+            _moveCheckbox.addChangeListener(_selectionChangeListener);
             _selectionPanel.add(_moveCheckbox);
             
             // add operation summary textfield
@@ -208,7 +236,7 @@ public class DialogMigrateProfile {
             _operationLog.setFocusable(true);
             JScrollPane scroller = new JScrollPane(_operationLog);
             scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            _selectionPanel.add(scroller, "w 100%!, h 10%!");
+            _selectionPanel.add(scroller, "w 600:100%:100%, h 60:100%:100%");
             
             // add progress bar
             _progressBar = new JProgressBar();
@@ -216,8 +244,22 @@ public class DialogMigrateProfile {
             _progressBar.setString("Analyzing source directory...");
             _progressBar.setStringPainted(true);
             _selectionPanel.add(_progressBar, "w 100%!");
+            
+            // set checkbox labels
+            _updateUI();
         }
         
+        private void _addSelectionWidget(JPanel parent, boolean forced, OpType type, String name) {
+            FCheckBox cb = new FCheckBox();
+            cb.setName(name);
+            cb.setSelected(true);
+            cb.setEnabled(!forced);
+            cb.addChangeListener(_selectionChangeListener);
+            _selections.put(type, Pair.of(cb, new HashSet<Pair<File, File>>()));
+            parent.add(cb);
+        }
+        
+        // must be called from GUI event loop thread
         private void _updateUI() {
             // set operation summary
             StringBuilder log = new StringBuilder();
@@ -247,12 +289,16 @@ public class DialogMigrateProfile {
         }
         
         private void _disableAll() {
+            for (Pair<FCheckBox, ? extends Set<Pair<File, File>>> selection : _selections.values()) {
+                selection.getLeft().setEnabled(false);
+            }
+            _unknownDeckCombo.setEnabled(false);
             _moveCheckbox.setEnabled(false);
         }
         
         @Override
         protected Void doInBackground() throws Exception {
-            // TODO: analysis
+            // TODO: analyze source path tree and populate operation sets
             // ensure we ignore data that is already in the destination directory
             return null;
         }
@@ -299,22 +345,26 @@ public class DialogMigrateProfile {
                     _operations.addAll(selection.getRight());
                 }
             }
-        }
-        
-        @Override
-        protected Void doInBackground() throws Exception {
-            _operationLog.setText("");
             
-            // determine total number of operations and set progress bar bounds
+            // set progress bar bounds
             _progressBar.setString(_move ? "Moving files" : "Copying files");
             _progressBar.setMinimum(0);
             _progressBar.setMaximum(_operations.size());
             _progressBar.setIndeterminate(false);
+        }
+        
+        @Override
+        protected Void doInBackground() throws Exception {
+            // working with textbox text is thread safe
+            _operationLog.setText("");
             
             // assumes all destination directories have been created
             int numOps = 0;
             for (Pair<File, File> op : _operations) {
-                _progressBar.setValue(++numOps);
+                final int curOpNum = ++numOps;
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override public void run() { _progressBar.setValue(curOpNum); }
+                });
                 
                 File srcFile  = op.getLeft();
                 File destFile = op.getRight();
@@ -326,7 +376,7 @@ public class DialogMigrateProfile {
                         srcFile.delete();
                     }
                     
-                    // this operation is thread safe
+                    // working with textbox text is thread safe
                     _operationLog.append(String.format("%s %s -> %s\n",
                             _move ? "Moved" : "Copied",
                             srcFile.getAbsolutePath(), destFile.getAbsolutePath()));

@@ -138,9 +138,9 @@ public enum FView {
             for (String resDir : Lists.newArrayList("decks", "gauntlet", "pics", "pics_product", "preferences", "quest/data")) {
                 File f = new File("res", resDir);
                 if (f.exists() && !profileDirs.contains(f)) {
-                    System.out.println("pre-profile data found: " + f.getAbsolutePath());
+                    System.out.println("profile data found in obsolete location: " + f.getAbsolutePath());
                     hasData = true;
-                    break;
+                    // cycle through all dirs instead of breaking immediately so each dir is printed to stdout
                 }
             }
         
