@@ -22,5 +22,5 @@ SVar:DBReset2:DB$ StoreSVar | SVar$ MinHand | Type$ Number | Expression$ 9999
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balancing_act.jpg
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
-SetInfo:ODY Rare
 Oracle:Each player chooses a number of permanents he or she controls equal to the number of permanents controlled by the player who controls the fewest, then sacrifices the rest. Each player discards cards the same way.
+SetInfo:ODY Rare
