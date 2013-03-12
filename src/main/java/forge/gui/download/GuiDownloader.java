@@ -412,7 +412,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         DownloadObject(final String srcUrl, final File destFile) {
             source = srcUrl;
             destination = destFile;
-            System.out.println(String.format("downloading %s to %s", srcUrl, destFile));
+            //System.out.println(String.format("downloading %s to %s", srcUrl, destFile));
         }
 
         /** @return {@link java.lang.String} */
