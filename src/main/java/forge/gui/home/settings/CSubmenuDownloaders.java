@@ -34,7 +34,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     private final Command cmdHowToPlay = new Command() { @Override
         public void execute() { VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay(); } };
     private final Command cmdImportPictures = new Command() { @Override
-        public void execute() { new DialogMigrateProfile(null, false, null); } };
+        public void execute() { new DialogMigrateProfile(null, null); } };
     private final Command cmdReportBug = new Command() { @Override
         public void execute() { BugReporter.reportBug(null); }
     };

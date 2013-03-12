@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -40,6 +41,8 @@ import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.DefaultCaret;
 
 import net.miginfocom.swing.MigLayout;
@@ -47,6 +50,7 @@ import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import forge.Command;
 import forge.error.BugReporter;
 import forge.gui.MigrationSourceAnalyzer.OpType;
 import forge.gui.toolbox.FButton;
@@ -61,19 +65,23 @@ import forge.properties.NewConstants;
 public class DialogMigrateProfile {
     private final Runnable _onImportSuccessful;
     private final FButton  _btnStart;
+    private final FLabel   _btnChooseDir;
     private final JPanel   _selectionPanel;
     
     private volatile boolean _cancel;
     
-    public DialogMigrateProfile(String srcDir, boolean showMigrationBlurb, final Runnable onDialogClose) {
+    @SuppressWarnings("serial")
+    public DialogMigrateProfile(String forcedSrcDir, final Runnable onDialogClose) {
         FPanel p = new FPanel(new MigLayout("insets dialog, gap 0, center, wrap"));
         p.setOpaque(false);
         p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
-        // header
-        p.add(new FLabel.Builder().text("Migrate profile data").fontSize(15).build(), "center");
+        boolean isMigration = !StringUtils.isEmpty(forcedSrcDir);
         
-        if (showMigrationBlurb) {
+        // header
+        p.add(new FLabel.Builder().text((isMigration ? "Migrate" : "Import") + " profile data").fontSize(15).build(), "center");
+        
+        if (isMigration) {
             FPanel blurbPanel = new FPanel(new MigLayout("insets dialog, gap 10, center, wrap"));
             blurbPanel.setOpaque(false);
             blurbPanel.add(new FLabel.Builder().text("<html><b>What's this?</b></html>").build(), "growx");
@@ -106,16 +114,77 @@ public class DialogMigrateProfile {
         JPanel importSourcePanel = new JPanel(new MigLayout("insets 0, gap 10"));
         importSourcePanel.setOpaque(false);
         importSourcePanel.add(new FLabel.Builder().text("Import from:").build());
-        boolean emptySrcDir = StringUtils.isEmpty(srcDir); 
-        FTextField txfSrc = new FTextField.Builder().readonly(!emptySrcDir).build();
+        final FTextField txfSrc = new FTextField.Builder().readonly().build();
         importSourcePanel.add(txfSrc, "pushx, growx");
-        if (!emptySrcDir) {
-            File srcDirFile = new File(srcDir);
-            txfSrc.setText(srcDirFile.getAbsolutePath());
-        }
-        // TODO: listen for new directory choice and reset analysis
-        importSourcePanel.add(new FLabel.ButtonBuilder().text("Choose directory...").enabled(emptySrcDir).build(), "h pref+8!, w pref+12!");
-        p.add(importSourcePanel, "gaptop 20, growx");
+        _btnChooseDir = new FLabel.ButtonBuilder().text("Choose directory...").enabled(!isMigration).build();
+        final JFileChooser _fileChooser = new JFileChooser();
+        _fileChooser.setMultiSelectionEnabled(false);
+        _fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        _btnChooseDir.setCommand(new Command() {
+            @Override public void execute() {
+                if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(null)) {
+                    txfSrc.setText(_fileChooser.getSelectedFile().getAbsolutePath());
+                }
+            }
+        });
+        importSourcePanel.add(_btnChooseDir, "h pref+8!, w pref+12!");
+        txfSrc.getDocument().addDocumentListener(new DocumentListener() {
+            boolean _analyzerActive; // access synchronized on _onAnalyzerDone
+            String prevText;
+            
+            private final Runnable _onAnalyzerDone = new Runnable() {
+                public synchronized void run() {
+                    _analyzerActive = false;
+                    notify();
+                }
+            };
+            
+            @Override public void removeUpdate(DocumentEvent e)  { }
+            @Override public void changedUpdate(DocumentEvent e) { }
+            @Override public void insertUpdate(DocumentEvent e)  {
+                final String text = txfSrc.getText();
+                if (text.equals(prevText)) {
+                    return;
+                }
+                prevText = text;
+                
+                // cancel any active analyzer
+                _cancel = true;
+                
+                if (!text.isEmpty()) {
+                    _btnChooseDir.setEnabled(false);
+                    _btnStart.setEnabled(false);
+                    
+                    SwingWorker<Void, Void> analyzerStarter = new SwingWorker<Void, Void>() {
+                        @Override
+                        protected Void doInBackground() throws Exception {
+                            // wait for active analyzer (if any) to quit
+                            synchronized (_onAnalyzerDone) {
+                                while (_analyzerActive) {
+                                    _onAnalyzerDone.wait();
+                                }
+                            }
+                            
+                            return null;
+                        }
+                        
+                        // executes in gui event loop thread
+                        @Override
+                        protected void done() {
+                            _cancel = false;
+                            synchronized (_onAnalyzerDone) {
+                                _AnalyzerUpdater analyzer = new _AnalyzerUpdater(text, _onAnalyzerDone);
+                                analyzer.execute();
+                                _analyzerActive = true;
+                            }
+                            _btnChooseDir.setEnabled(true);
+                        }
+                    };
+                    analyzerStarter.execute();
+                }
+            }
+        });
+        p.add(importSourcePanel, "gaptop 20, pushx, growx");
         
         // prepare import selection panel
         _selectionPanel = new JPanel();
@@ -148,8 +217,8 @@ public class DialogMigrateProfile {
         
         JPanel southPanel = new JPanel(new MigLayout("ax center"));
         southPanel.setOpaque(false);
-        southPanel.add(_btnStart, "center, w 40%, h pref+12!");
-        southPanel.add(btnCancel, "center, w 40%, h pref+12!");
+        southPanel.add(_btnStart, "center, w pref+72!, h pref+12!");
+        southPanel.add(btnCancel, "center, w pref+72!, h pref+12!");
         
         p.add(southPanel, "growx");
       
@@ -163,9 +232,9 @@ public class DialogMigrateProfile {
             @Override public void run() { btnCancel.requestFocusInWindow(); }
         });
         
-        if (!emptySrcDir) {
-            _AnalyzerUpdater analyzer = new _AnalyzerUpdater(srcDir);
-            analyzer.execute();
+        if (isMigration) {
+            File srcDirFile = new File(forcedSrcDir);
+            txfSrc.setText(srcDirFile.getAbsolutePath());
         }
     }
     
@@ -191,14 +260,16 @@ public class DialogMigrateProfile {
         };
         
         private final String       _srcDir;
+        private final Runnable     _onAnalyzerDone;
         private final JComboBox    _unknownDeckCombo;
         private final FCheckBox    _moveCheckbox;
         private final FCheckBox    _overwriteCheckbox;
         private final JTextArea    _operationLog;
         private final JProgressBar _progressBar;
         
-        public _AnalyzerUpdater(String srcDir) {
-            _srcDir = srcDir;
+        public _AnalyzerUpdater(String srcDir, Runnable onAnalyzerDone) {
+            _srcDir         = srcDir;
+            _onAnalyzerDone = onAnalyzerDone;
             
             _selectionPanel.removeAll();
             _selectionPanel.setLayout(new MigLayout("insets 0, gap 5, wrap"));
@@ -357,7 +428,7 @@ public class DialogMigrateProfile {
                 
                 MigrationSourceAnalyzer.AnalysisCallback cb = new MigrationSourceAnalyzer.AnalysisCallback() {
                     @Override
-                    public boolean checkCancel() { return _cancel; }
+                    public boolean checkCancel() { try{Thread.sleep(1);}catch(InterruptedException e) {} return _cancel; }
                     
                     @Override
                     public void addOp(OpType type, File src, File dest) {
@@ -418,26 +489,29 @@ public class DialogMigrateProfile {
         // executes in gui event loop thread
         @Override
         protected void done() {
-            if (_cancel) { return; }
-            
-            _progressBar.setValue(_progressBar.getMaximum());
-            _stateChangedListener.stateChanged(null);
-            _progressBar.setString("Analysis complete");
-            
-            _btnStart.addActionListener(new ActionListener() {
-                @Override public void actionPerformed(ActionEvent arg0) {
-                    _btnStart.removeActionListener(this);
-                    _btnStart.setEnabled(false);
-                    
-                    _disableAll();
-                    
-                    _Importer importer = new _Importer(
-                            _selections, _unknownDeckCombo, _operationLog, _progressBar,
-                            _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
-                    importer.execute();
-                }
-            });
-            _btnStart.setEnabled(true);
+            if (!_cancel) {
+                _progressBar.setValue(_progressBar.getMaximum());
+                _stateChangedListener.stateChanged(null);
+                _progressBar.setString("Analysis complete");
+                
+                _btnStart.addActionListener(new ActionListener() {
+                    @Override public void actionPerformed(ActionEvent arg0) {
+                        _btnStart.removeActionListener(this);
+                        _btnStart.setEnabled(false);
+                        _btnChooseDir.setEnabled(false);
+                        
+                        _disableAll();
+                        
+                        _Importer importer = new _Importer(
+                                _selections, _unknownDeckCombo, _operationLog, _progressBar,
+                                _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
+                        importer.execute();
+                    }
+                });
+                _btnStart.setEnabled(true);
+            }
+        
+            _onAnalyzerDone.run();
         }
     }
     

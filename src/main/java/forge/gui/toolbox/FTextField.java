@@ -31,6 +31,7 @@ public class FTextField extends JTextField {
 
         public Builder maxLength(int i0)    { maxLength = i0; return this; }
         public Builder readonly(boolean b0) { readonly = b0; return this; }
+        public Builder readonly()           { return readonly(true); }
 
         public Builder text(String s0)    { text = s0; return this; }
         public Builder tooltip(String s0) { toolTip = s0; return this; }
