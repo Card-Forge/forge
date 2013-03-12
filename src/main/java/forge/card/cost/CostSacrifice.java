@@ -68,7 +68,7 @@ public class CostSacrifice extends CostPartWithList {
 
         final Integer i = this.convertAmount();
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             sb.append(this.getType());
         } else {
             final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
@@ -91,7 +91,7 @@ public class CostSacrifice extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         // You can always sac all
-        if (!this.isTargetingThis()) {
+        if (!this.payCostFromSource()) {
             // If the sacrificed type is dependant on an annoucement, can't necesarily rule out the CanPlay call
             boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
             
@@ -155,7 +155,7 @@ public class CostSacrifice extends CostPartWithList {
             list = CardLists.getNotType(list, "Creature");
         }
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             final Input inp = CostSacrifice.sacrificeThis(ability, payment, this);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         } else if (amount.equals("All")) {
@@ -196,7 +196,7 @@ public class CostSacrifice extends CostPartWithList {
     public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         final Player activator = ability.getActivatingPlayer();
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             this.getList().add(source);
         } else if (this.getAmount().equals("All")) {
             /*List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));

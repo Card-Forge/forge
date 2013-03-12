@@ -70,7 +70,7 @@ public class CostDiscard extends CostPartWithList {
 
         final Integer i = this.convertAmount();
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             sb.append(this.getType());
         } else if (this.getType().equals("Hand")) {
             sb.append("your hand");
@@ -109,7 +109,7 @@ public class CostDiscard extends CostPartWithList {
         String type = this.getType();
         final Integer amount = this.convertAmount();
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             if (!source.isInZone(ZoneType.Hand)) {
                 return false;
             }
@@ -175,7 +175,7 @@ public class CostDiscard extends CostPartWithList {
         final String amount = this.getAmount();
         this.resetList();
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             if (!handList.contains(source)) {
                 return false;
             }
@@ -273,7 +273,7 @@ public class CostDiscard extends CostPartWithList {
             this.addToList(ai.getLastDrawnCard());
         }
 
-        else if (this.isTargetingThis()) {
+        else if (this.payCostFromSource()) {
             if (!hand.contains(source)) {
                 return false;
             }

@@ -131,7 +131,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
             sb.append(" from ");
 
-            if (this.isTargetingThis()) {
+            if (this.payCostFromSource()) {
                 sb.append(this.getType());
             } else {
                 final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
@@ -166,7 +166,7 @@ public class CostRemoveCounter extends CostPartWithList {
         final CounterType cntrs = this.getCounter();
 
         final Integer amount = this.convertAmount();
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             if ((amount != null) && ((source.getCounters(cntrs) - amount) < 0)) {
                 return false;
             }
@@ -204,7 +204,7 @@ public class CostRemoveCounter extends CostPartWithList {
             }
         }
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             source.subtractCounter(this.counter, c);
         } else {
             for (final Card card : this.getList()) {
@@ -227,7 +227,7 @@ public class CostRemoveCounter extends CostPartWithList {
         Integer c = this.convertAmount();
         int maxCounters = 0;
 
-        if (!this.isTargetingThis()) {
+        if (!this.payCostFromSource()) {
             if (c == null) {
                 final String sVar = ability.getSVar(amount);
                 // Generalize this
@@ -303,7 +303,7 @@ public class CostRemoveCounter extends CostPartWithList {
             }
         }
 
-        if (!this.isTargetingThis()) {
+        if (!this.payCostFromSource()) {
             this.getList().clear();
             final List<Card> typeList =
                     CardLists.getValidCards(ai.getCardsIn(this.getZone()), this.getType().split(";"), ai, source);

@@ -87,7 +87,7 @@ public abstract class CostPart {
      * 
      * @return the this
      */
-    public final boolean isTargetingThis() {
+    public final boolean payCostFromSource() {
         return this.getType().equals("CARDNAME");
     }
 
