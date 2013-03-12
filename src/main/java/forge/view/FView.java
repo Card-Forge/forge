@@ -148,6 +148,10 @@ public enum FView {
                 new DialogMigrateProfile("res", true, new Runnable() {
                     @Override public void run() {
                         // TODO: reload appropriate data structures
+                        
+                        // TODO: attempt to remove old directories.  if they are not empty, show a dialog
+                        // TODO: telling them that there is some data remaining and it should be moved or deleted manually
+                        // TODO: they will continue to be prompted for migration until the directories are gone
                     }
                 });
             }

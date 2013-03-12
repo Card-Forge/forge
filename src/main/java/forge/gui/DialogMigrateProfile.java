@@ -238,7 +238,7 @@ public class DialogMigrateProfile {
             // add cacheDir data elements
             JPanel cachePanel = new JPanel(new MigLayout("insets 0, gap 5, wrap 2"));
             cachePanel.setOpaque(false);
-            cachePanel.add(new FLabel.Builder().text("Cached data").build());
+            cachePanel.add(new FLabel.Builder().text("Cached data").build(), "wrap");
             _addSelectionWidget(cachePanel, forced, OpType.DEFAULT_CARD_PIC, "Default card pics");
             _addSelectionWidget(cachePanel, forced, OpType.SET_CARD_PIC,     "Set-specific card pics");
             _addSelectionWidget(cachePanel, forced, OpType.TOKEN_PIC,        "Card token pics");
@@ -250,9 +250,8 @@ public class DialogMigrateProfile {
             // add move/copy and overwrite checkboxes
             JPanel ioOptionPanel = new JPanel(new MigLayout("insets 0, gap 10"));
             ioOptionPanel.setOpaque(false);
-            _moveCheckbox = new FCheckBox("Remove source file after copy");
+            _moveCheckbox = new FCheckBox("Remove source files after copy");
             _moveCheckbox.setSelected(true);
-            _moveCheckbox.setEnabled(!forced);
             _moveCheckbox.addChangeListener(_stateChangedListener);
             ioOptionPanel.add(_moveCheckbox);
             _overwriteCheckbox = new FCheckBox("Overwrite existing files");

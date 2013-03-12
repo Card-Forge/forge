@@ -25,9 +25,16 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
+import forge.Singletons;
+import forge.card.CardEdition;
 import forge.card.CardRules;
+import forge.card.EditionCollection;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.IPaperCard;
 import forge.properties.NewConstants;
 
 public class MigrationSourceAnalyzer {
@@ -76,12 +83,12 @@ public class MigrationSourceAnalyzer {
         _analyzeResDir(_source);
     }
     
-    private void _analyzeResDir(File resRoot) {
-        for (File file : resRoot.listFiles()) {
+    private void _analyzeResDir(File root) {
+        for (File file : root.listFiles()) {
             if (_cb.checkCancel()) { return; }
 
             if ("pics".equals(file.getName())) {
-                _analyzePicsDir(file);
+                _analyzeCardPicsDir(file);
             }
             
             // ignore other files
@@ -132,7 +139,7 @@ public class MigrationSourceAnalyzer {
     
     private Set<String>         _defaultPicNames;
     private Map<String, String> _defaultPicOldNameToCurrentName;
-    private void _analyzePicsDir(File picsRoot) {
+    private void _analyzeCardPicsDir(File root) {
         if (null == _defaultPicNames) {
             // build structures
             _defaultPicNames = new HashSet<String>();
@@ -149,33 +156,106 @@ public class MigrationSourceAnalyzer {
             }
         }
         
-        for (File file : picsRoot.listFiles()) {
+        System.out.println("analyzing default card pics directory: " + root);
+        for (File file : root.listFiles()) {
             if (_cb.checkCancel()) { return; }
-            
+
             if (file.isFile()) {
                 ++_numFilesAnalyzed;
                 String fileName = file.getName();
                 if (_defaultPicOldNameToCurrentName.containsKey(fileName)) {
                     fileName = _defaultPicOldNameToCurrentName.get(fileName);
                 } else if (!_defaultPicNames.contains(fileName)) {
-                    System.out.println("skipping umappable pic file: " + file);
+                    // TODO: track the unmappables and prompt to delete them at the end
+                    System.out.println("skipping umappable default pic file: " + file);
                     continue;
                 }
-                _cb.addOp(OpType.DEFAULT_CARD_PIC, file, new File(NewConstants.CACHE_CARD_PICS_DIR, fileName));
-            } else  if (file.isDirectory()) {
-                _analyzePicsSetDir(file);
+                
+                File targetFile = new File(NewConstants.CACHE_CARD_PICS_DIR, fileName);
+                if (!file.equals(targetFile)) {
+                    _cb.addOp(OpType.DEFAULT_CARD_PIC, file, targetFile);
+                }
+            } else if (file.isDirectory()) {
+                if ("icons".equals(file.getName())) {
+                    _analyzeIconsPicsDir(file);
+                } else if ("tokens".equals(file.getName())) {
+                    _analyzeTokenPicsDir(file);
+                } else {
+                    _analyzeCardPicsSetDir(file);
+                }
+            }
+        }
+    }
+
+    private static void _addSetCards(Set<String> cardFileNames, Iterable<CardPrinted> library, Predicate<CardPrinted> filter) {
+        for (CardPrinted c : Iterables.filter(library, filter)) {
+            boolean hasBackFace = null != c.getRules().getPictureOtherSideUrl();
+            cardFileNames.add(c.getImageFilename(false, c.getArtIndex(), true) + ".jpg");
+            if (hasBackFace) {
+                cardFileNames.add(c.getImageFilename(true, c.getArtIndex(), true) + ".jpg");
             }
         }
     }
     
-    private void _analyzePicsSetDir(File setRoot) {
-        // if not a valid set name, skip
-        _numFilesAnalyzed += _countFiles(setRoot);
+    Map<String, Set<String>> _cardFileNamesBySet;
+    private void _analyzeCardPicsSetDir(File root) {
+        if (null == _cardFileNamesBySet) {
+            _cardFileNamesBySet = new HashMap<String, Set<String>>();
+            for (CardEdition ce : Singletons.getModel().getEditions()) {
+                Set<String> cardFileNames = new HashSet<String>();
+                Predicate<CardPrinted> filter = IPaperCard.Predicates.printedInSets(ce.getCode());
+                _addSetCards(cardFileNames, CardDb.instance().getAllCards(), filter);
+                _addSetCards(cardFileNames, CardDb.variants().getAllCards(), filter);
+                _cardFileNamesBySet.put(ce.getCode2(), cardFileNames);
+            }
+        }
+
+        System.out.println("analyzing set card pics directory: " + root);
+        EditionCollection editions = Singletons.getModel().getEditions();
+        String editionCode = root.getName();
+        CardEdition edition = editions.get(editionCode);
+        if (null == edition) {
+            // not a valid set name, skip
+            System.out.println("skipping umappable set directory: " + root);
+            _numFilesAnalyzed += _countFiles(root);
+            return;
+        }
+        editionCode = edition.getCode2();
+        
+        Set<String> validFilenames = _cardFileNamesBySet.get(editionCode);
+        for (File file : root.listFiles()) {
+            if ( _cb.checkCancel()) { return; }
+
+            if (file.isFile()) {
+                ++_numFilesAnalyzed;
+                if (validFilenames.contains(editionCode + "/" + file.getName())) {
+                    File targetFile = new File(NewConstants.CACHE_CARD_PICS_DIR, editionCode + "/" + file.getName());
+                    if (!file.equals(targetFile)) {
+                        _cb.addOp(OpType.SET_CARD_PIC, file, targetFile);
+                    }
+                } else {
+                    System.out.println("skipping umappable set pic file: " + file);
+                }
+            } else if (file.isDirectory()) {
+                System.out.println("skipping umappable subdirectory: " + file);
+                _numFilesAnalyzed += _countFiles(file);
+            }
+        }
+    }
+
+    private void _analyzeIconsPicsDir(File root) {
+        // TODO: implement
+        _numFilesAnalyzed += _countFiles(root);
     }
     
-    private int _countFiles(File directory) {
+    private void _analyzeTokenPicsDir(File root) {
+        // TODO: implement
+        _numFilesAnalyzed += _countFiles(root);
+    }
+    
+    private int _countFiles(File root) {
         int count = 0;
-        for (File file : directory.listFiles()) {
+        for (File file : root.listFiles()) {
             if (_cb.checkCancel()) { return 0; }
             
             if (file.isFile()) {
