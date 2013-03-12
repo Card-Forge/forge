@@ -76,7 +76,7 @@ public class DialogMigrateProfile {
         p.setOpaque(false);
         p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
-        boolean isMigration = !StringUtils.isEmpty(forcedSrcDir);
+        final boolean isMigration = !StringUtils.isEmpty(forcedSrcDir);
         
         // header
         p.add(new FLabel.Builder().text((isMigration ? "Migrate" : "Import") + " profile data").fontSize(15).build(), "center");
@@ -177,7 +177,9 @@ public class DialogMigrateProfile {
                                 analyzer.execute();
                                 _analyzerActive = true;
                             }
-                            _btnChooseDir.setEnabled(true);
+                            if (!isMigration) {
+                                _btnChooseDir.setEnabled(true);
+                            }
                         }
                     };
                     analyzerStarter.execute();
@@ -428,7 +430,7 @@ public class DialogMigrateProfile {
                 
                 MigrationSourceAnalyzer.AnalysisCallback cb = new MigrationSourceAnalyzer.AnalysisCallback() {
                     @Override
-                    public boolean checkCancel() { try{Thread.sleep(1);}catch(InterruptedException e) {} return _cancel; }
+                    public boolean checkCancel() { return _cancel; }
                     
                     @Override
                     public void addOp(OpType type, File src, File dest) {
