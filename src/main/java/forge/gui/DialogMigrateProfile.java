@@ -493,7 +493,6 @@ public class DialogMigrateProfile {
                 // working with textbox text is thread safe
                 _operationLog.setText("");
                 
-                // assumes all destination directories have been created
                 int numOps = 0;
                 int numSucceeded = 0;
                 int numFailed = 0;
@@ -560,6 +559,8 @@ public class DialogMigrateProfile {
         }
         
         private void _copyFile(File srcFile, File destFile) throws IOException {
+            destFile.getParentFile().mkdirs();
+            
             if (!destFile.exists()) {
                 destFile.createNewFile();
             }
