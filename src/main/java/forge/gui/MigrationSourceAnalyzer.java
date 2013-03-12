@@ -82,9 +82,7 @@ public class MigrationSourceAnalyzer {
     public int getNumFilesAnalyzed()  { return _numFilesAnalyzed;  }
     
     public void doAnalysis() {
-        // TODO: analyze source path tree and populate operation sets
-        // ensure we ignore data that is already in the destination directory
-
+        // TODO: determine if this is really the res dir
         _analyzeResDir(_source);
     }
     
@@ -93,27 +91,91 @@ public class MigrationSourceAnalyzer {
     //
     
     private void _analyzeResDir(File root) {
-        for (File file : root.listFiles()) {
-            if (_cb.checkCancel()) { return; }
-
-            if ("pics".equals(file.getName())) {
-                _analyzeCardPicsDir(file);
+        _analyzeDir(root, new _Analyzer() {
+            @Override boolean onDir(File dir) {
+                String dirname = dir.getName();
+                if ("decks".equals(dirname)) {
+                    _analyzeDecksDir(dir);
+                } else if ("gauntlet".equals(dirname)) {
+                    _analyzeGauntletDataDir(dir);
+                } else if ("layouts".equals(dirname)) {
+                    _analyzeLayoutsDir(dir);
+                } else if ("pics".equals(dirname)) {
+                    _analyzeCardPicsDir(dir);
+                } else if ("pics_product".equals(dirname)) {
+                    _analyzeProductPicsDir(dir);
+                } else if ("preferences".equals(dirname)) {
+                    _analyzePreferencesDir(dir);
+                } else if ("quest".equals(dirname)) {
+                    _analyzeQuestDir(dir);
+                } else {
+                    return false;
+                }
+                return true;
             }
-            
-            // ignore other files
-            if (file.isFile()) {
-                ++_numFilesAnalyzed;
-            } else  if (file.isDirectory()) {
-                _numFilesAnalyzed += _countFiles(file);
-            }
-        }
+        });
     }
 
+    //////////////////////////////////////////////////////////////////////////
+    // decks
+    //
+    
+    private void _analyzeDecksDir(File root) {
+        System.out.println("analyzing decks directory: " + root);
+        _analyzeDir(root, new _Analyzer() {
+            @Override void onFile(File file) {
+            }
+            @Override boolean onDir(File dir) {
+                return false;
+            }
+        });
+    }
+    
+    //////////////////////////////////////////////////////////////////////////
+    // gauntlet
+    //
+    
+    private void _analyzeGauntletDataDir(File root) {
+        System.out.println("analyzing gauntlet data directory: " + root);
+        _analyzeDir(root, new _Analyzer() {
+            @Override void onFile(File file) {
+                // find *.dat files, but exclude LOCKED_*
+                String filename = file.getName();
+                if (filename.endsWith(".dat") && !filename.startsWith("LOCKED_")) {
+                    File targetFile = new File(NewConstants.GAUNTLET_DIR.userPrefLoc, file.getName());
+                    if (!file.equals(targetFile)) {
+                        _cb.addOp(OpType.GAUNTLET_DATA, file, targetFile);
+                    }
+                }
+            }
+        });
+    }
+    
+    //////////////////////////////////////////////////////////////////////////
+    // gauntlet
+    //
+    
+    private void _analyzeLayoutsDir(File root) {
+        System.out.println("analyzing layouts directory: " + root);
+        _analyzeDir(root, new _Analyzer() {
+            @Override void onFile(File file) {
+                // find *_preferred.xml files
+                String filename = file.getName();
+                if (filename.endsWith("_preferred.xml")) {
+                    File targetFile = new File(NewConstants.USER_PREFS_DIR, file.getName().replace("_preferred", ""));
+                    if (!file.equals(targetFile)) {
+                        _cb.addOp(OpType.PREFERENCE_FILE, file, targetFile);
+                    }
+                }
+            }
+        });
+    }
+    
     //////////////////////////////////////////////////////////////////////////
     // default card pics
     //
     
-    private static String _oldCleanString(final String in) {
+    private static String _oldCleanString(String in) {
         final StringBuffer out = new StringBuffer();
         char c;
         for (int i = 0; i < in.length(); i++) {
@@ -170,34 +232,27 @@ public class MigrationSourceAnalyzer {
         }
         
         System.out.println("analyzing default card pics directory: " + root);
-        for (File file : root.listFiles()) {
-            if (_cb.checkCancel()) { return; }
-
-            if (file.isFile()) {
-                ++_numFilesAnalyzed;
-                String fileName = file.getName();
-                if (_defaultPicOldNameToCurrentName.containsKey(fileName)) {
-                    fileName = _defaultPicOldNameToCurrentName.get(fileName);
-                } else if (!_defaultPicNames.contains(fileName)) {
-                    System.out.println("skipping umappable default pic file: " + file);
-                    _unmappableFiles.add(file);
-                    continue;
+        _analyzeListedDir(root, NewConstants.CACHE_CARD_PICS_DIR, new _ListedAnalyzer() {
+            @Override public String map(String filename) {
+                if (_defaultPicOldNameToCurrentName.containsKey(filename)) {
+                    return _defaultPicOldNameToCurrentName.get(filename);
                 }
-                
-                File targetFile = new File(NewConstants.CACHE_CARD_PICS_DIR, fileName);
-                if (!file.equals(targetFile)) {
-                    _cb.addOp(OpType.DEFAULT_CARD_PIC, file, targetFile);
-                }
-            } else if (file.isDirectory()) {
-                if ("icons".equals(file.getName())) {
-                    _analyzeIconsPicsDir(file);
-                } else if ("tokens".equals(file.getName())) {
-                    _analyzeTokenPicsDir(file);
-                } else {
-                    _analyzeCardPicsSetDir(file);
-                }
+                return _defaultPicNames.contains(filename) ? filename : null;
             }
-        }
+            
+            @Override public OpType getOpType(String filename) { return OpType.DEFAULT_CARD_PIC; }
+            
+            @Override boolean onDir(File dir) {
+                if ("icons".equals(dir.getName())) {
+                    _analyzeIconsPicsDir(dir);
+                } else if ("tokens".equals(dir.getName())) {
+                    _analyzeTokenPicsDir(dir);
+                } else {
+                    _analyzeCardPicsSetDir(dir);
+                }
+                return true;
+            } 
+        });
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -237,28 +292,16 @@ public class MigrationSourceAnalyzer {
             _numFilesAnalyzed += _countFiles(root);
             return;
         }
-        editionCode = edition.getCode2();
         
-        Set<String> validFilenames = _cardFileNamesBySet.get(editionCode);
-        for (File file : root.listFiles()) {
-            if ( _cb.checkCancel()) { return; }
-
-            if (file.isFile()) {
-                ++_numFilesAnalyzed;
-                if (validFilenames.contains(editionCode + "/" + file.getName())) {
-                    File targetFile = new File(NewConstants.CACHE_CARD_PICS_DIR, editionCode + "/" + file.getName());
-                    if (!file.equals(targetFile)) {
-                        _cb.addOp(OpType.SET_CARD_PIC, file, targetFile);
-                    }
-                } else {
-                    System.out.println("skipping umappable set pic file: " + file);
-                    _unmappableFiles.add(file);
-                }
-            } else if (file.isDirectory()) {
-                System.out.println("skipping umappable subdirectory: " + file);
-                _numFilesAnalyzed += _countFiles(file);
+        final String editionCode2 = edition.getCode2();
+        final Set<String> validFilenames = _cardFileNamesBySet.get(editionCode2);
+        _analyzeListedDir(root, NewConstants.CACHE_CARD_PICS_DIR, new _ListedAnalyzer() {
+            @Override public String map(String filename) {
+                filename = editionCode2 + "/" + filename;
+                return validFilenames.contains(filename) ? filename : null;
             }
-        }
+            @Override public OpType getOpType(String filename) { return OpType.SET_CARD_PIC; }
+        });
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -278,26 +321,10 @@ public class MigrationSourceAnalyzer {
         }
         
         System.out.println("analyzing icon pics directory: " + root);
-        for (File file : root.listFiles()) {
-            if (_cb.checkCancel()) { return; }
-
-            if (file.isFile()) {
-                ++_numFilesAnalyzed;
-                if (!_iconFileNames.contains(file.getName())) {
-                    System.out.println("skipping umappable icon pic file: " + file);
-                    _unmappableFiles.add(file);
-                    continue;
-                }
-                
-                File targetFile = new File(NewConstants.CACHE_ICON_PICS_DIR, file.getName());
-                if (!file.equals(targetFile)) {
-                    _cb.addOp(OpType.QUEST_DATA, file, targetFile);
-                }
-            } else if (file.isDirectory()) {
-                System.out.println("skipping umappable subdirectory: " + file);
-                _numFilesAnalyzed += _countFiles(file);
-            }
-        }
+        _analyzeListedDir(root, NewConstants.CACHE_ICON_PICS_DIR, new _ListedAnalyzer() {
+            @Override public String map(String filename) { return _iconFileNames.contains(filename) ? filename : null; }
+            @Override public OpType getOpType(String filename) { return OpType.QUEST_PIC; }
+        });
     }
     
     Set<String> _tokenFileNames;
@@ -315,32 +342,135 @@ public class MigrationSourceAnalyzer {
         }
         
         System.out.println("analyzing token pics directory: " + root);
-        for (File file : root.listFiles()) {
-            if (_cb.checkCancel()) { return; }
-
-            if (file.isFile()) {
-                ++_numFilesAnalyzed;
-                boolean isQuestToken = _questTokenFileNames.contains(file.getName());
-                if (!isQuestToken && !_tokenFileNames.contains(file.getName())) {
-                    System.out.println("skipping umappable token pic file: " + file);
-                    _unmappableFiles.add(file);
-                    continue;
-                }
-                
-                File targetFile = new File(NewConstants.CACHE_TOKEN_PICS_DIR, file.getName());
-                if (!file.equals(targetFile)) {
-                    _cb.addOp(isQuestToken ? OpType.QUEST_PIC : OpType.TOKEN_PIC, file, targetFile);
-                }
-            } else if (file.isDirectory()) {
-                System.out.println("skipping umappable subdirectory: " + file);
-                _numFilesAnalyzed += _countFiles(file);
+        _analyzeListedDir(root, NewConstants.CACHE_TOKEN_PICS_DIR, new _ListedAnalyzer() {
+            @Override public String map(String filename) {
+                return (_questTokenFileNames.contains(filename) || _tokenFileNames.contains(filename)) ? filename : null;
             }
-        }
+            @Override public OpType getOpType(String filename) {
+                return _questTokenFileNames.contains(filename) ? OpType.QUEST_PIC : OpType.TOKEN_PIC;
+            }
+        });
+    }
+    
+    private void _analyzeProductPicsDir(File root) {
+        System.out.println("analyzing product pics directory: " + root);
+        // we don't care about files in the root dir -- the new files are .png, not the current .jpg ones
+        _analyzeDir(root, new _Analyzer() {
+            @Override boolean onDir(File dir) {
+                if ("booster".equals(dir.getName())) {
+                } else if ("fatpacks".equals(dir.getName())) {
+                } else if ("precons".equals(dir.getName())) {
+                } else if ("tournamentpacks".equals(dir.getName())) {
+                } else {
+                    return false;
+                }
+                return true;
+            }
+        });
+    }
+    
+    //////////////////////////////////////////////////////////////////////////
+    // preferences
+    //
+    
+    private void _analyzePreferencesDir(File root) {
+        System.out.println("analyzing preferences directory: " + root);
+        _analyzeDir(root, new _Analyzer() {
+            @Override void onFile(File file) {
+                String filename = file.getName();
+                if ("editor.preferences".equals(filename) || "forge.preferences".equals(filename)) {
+                    File targetFile = new File(NewConstants.USER_PREFS_DIR, file.getName());
+                    if (!file.equals(targetFile)) {
+                        _cb.addOp(OpType.PREFERENCE_FILE, file, targetFile);
+                    }
+                }
+            }
+        });
+    }
+    
+    //////////////////////////////////////////////////////////////////////////
+    // quest data
+    //
+    
+    private void _analyzeQuestDir(File root) {
+        System.out.println("analyzing quest directory: " + root);
+        _analyzeDir(root, new _Analyzer() {
+            @Override boolean onDir(File dir) {
+                if ("data".equals(dir.getName())) {
+                    _analyzeQuestDataDir(dir);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+    
+    private void _analyzeQuestDataDir(File root) {
+        System.out.println("analyzing quest data directory: " + root);
+        _analyzeDir(root, new _Analyzer() {
+            @Override void onFile(File file) {
+                if (file.getName().endsWith(".dat")) {
+                    File targetFile = new File(NewConstants.QUEST_SAVE_DIR, file.getName());
+                    if (!file.equals(targetFile)) {
+                        _cb.addOp(OpType.QUEST_DATA, file, targetFile);
+                    }
+                }
+            }
+        });
     }
     
     //////////////////////////////////////////////////////////////////////////
     // utility functions
     //
+    
+    private class _Analyzer {
+        void onFile(File file) { }
+
+        // returns whether the directory has been handled
+        boolean onDir(File dir) { return false; } 
+    }
+    
+    private void _analyzeDir(File root, _Analyzer analyzer) {
+        for (File file : root.listFiles()) {
+            if (_cb.checkCancel()) { return; }
+
+            if (file.isFile()) {
+                ++_numFilesAnalyzed;
+                analyzer.onFile(file);
+            } else if (file.isDirectory()) {
+                if (!analyzer.onDir(file)) {
+                    _numFilesAnalyzed += _countFiles(file);
+                }
+            }
+        }
+    }
+    
+    private abstract class _ListedAnalyzer {
+        abstract String map(String filename);
+        abstract OpType getOpType(String filename);
+        
+        // returns whether the directory has been handled
+        boolean onDir(File dir) { return false; } 
+    }
+    
+    private void _analyzeListedDir(File root, final String targetDir, final _ListedAnalyzer listedAnalyzer) {
+        _analyzeDir(root, new _Analyzer() {
+            @Override void onFile(File file) {
+                String filename = listedAnalyzer.map(file.getName());
+                if (null == filename) {
+                    System.out.println("skipping umappable pic file: " + file);
+                    _unmappableFiles.add(file);
+                } else {
+                    File targetFile = new File(targetDir, filename);
+                    if (!file.equals(targetFile)) {
+                        _cb.addOp(listedAnalyzer.getOpType(filename), file, targetFile);
+                    }
+                }
+            }
+            
+            @Override boolean onDir(File dir) { return listedAnalyzer.onDir(dir); }
+        });
+    }
     
     private int _countFiles(File root) {
         int count = 0;

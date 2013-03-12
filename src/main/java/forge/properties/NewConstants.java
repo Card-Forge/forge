@@ -58,8 +58,8 @@ public final class NewConstants {
     }
 
     // data that is only in the profile dirs
-    private static final String _USER_QUEST_DIR     = USER_DIR + "quest/";
-    private static final String _USER_PREFS_DIR     = USER_DIR + "preferences/";
+    public static final String USER_QUEST_DIR       = USER_DIR + "quest/";
+    public static final String USER_PREFS_DIR       = USER_DIR + "preferences/";
     public static final String LOG_FILE             = USER_DIR + "forge.log";
     public static final String DECK_BASE_DIR        = USER_DIR + "decks/";
     public static final String DECK_CONSTRUCTED_DIR = DECK_BASE_DIR + "constructed/";
@@ -67,17 +67,17 @@ public final class NewConstants {
     public static final String DECK_SEALED_DIR      = DECK_BASE_DIR + "sealed/";
     public static final String DECK_SCHEME_DIR      = DECK_BASE_DIR + "scheme/";
     public static final String DECK_PLANE_DIR       = DECK_BASE_DIR + "planar/";
-    public static final String QUEST_SAVE_DIR       = _USER_QUEST_DIR + "saves/";
-    public static final String MAIN_PREFS_FILE      = _USER_PREFS_DIR + "forge.preferences";
-    public static final String QUEST_PREFS_FILE     = _USER_PREFS_DIR + "quest.preferences";
+    public static final String QUEST_SAVE_DIR       = USER_QUEST_DIR + "saves/";
+    public static final String MAIN_PREFS_FILE      = USER_PREFS_DIR + "forge.preferences";
+    public static final String QUEST_PREFS_FILE     = USER_PREFS_DIR + "quest.preferences";
     
 
     // data that has defaults in the program dir but overrides/additions in the user dir
     private static final String _DEFAULTS_DIR                = _RES_ROOT + "defaults/";
-    public static final FileLocation EDITOR_PREFERENCES_FILE = new FileLocation(_DEFAULTS_DIR, _USER_PREFS_DIR, "editor.preferences");
-    public static final FileLocation HOME_LAYOUT_FILE        = new FileLocation(_DEFAULTS_DIR, _USER_PREFS_DIR, "home.xml");
-    public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, _USER_PREFS_DIR, "match.xml");
-    public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, _USER_PREFS_DIR, "editor.xml");
+    public static final FileLocation EDITOR_PREFERENCES_FILE = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.preferences");
+    public static final FileLocation HOME_LAYOUT_FILE        = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "home.xml");
+    public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match.xml");
+    public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.xml");
     public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,        "gauntlet/");
     
     // data that is only in the cached dir
@@ -96,7 +96,7 @@ public final class NewConstants {
             USER_DIR,
             CACHE_DIR,
             CACHE_CARD_PICS_DIR,
-            _USER_PREFS_DIR,
+            USER_PREFS_DIR,
             _DB_DIR,
             DECK_CONSTRUCTED_DIR,
             DECK_DRAFT_DIR,

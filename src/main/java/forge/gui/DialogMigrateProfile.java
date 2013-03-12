@@ -160,7 +160,7 @@ public class DialogMigrateProfile {
             @Override public void run() { btnCancel.requestFocusInWindow(); }
         });
         
-        _AnalyzerUpdater analyzer = new _AnalyzerUpdater(srcDir, !emptySrcDir);
+        _AnalyzerUpdater analyzer = new _AnalyzerUpdater(srcDir);
         analyzer.execute();
     }
     
@@ -195,7 +195,7 @@ public class DialogMigrateProfile {
         // used to ensure we only have one UI update pending at a time
         private volatile boolean _uiUpdateAck;
 
-        public _AnalyzerUpdater(String srcDir, boolean forced) {
+        public _AnalyzerUpdater(String srcDir) {
             _srcDir = srcDir;
             
             _selectionPanel.removeAll();
@@ -208,12 +208,12 @@ public class DialogMigrateProfile {
             JPanel knownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5, wrap 2"));
             knownDeckPanel.setOpaque(false);
             knownDeckPanel.add(new FLabel.Builder().text("Decks").build(), "wrap");
-            _addSelectionWidget(knownDeckPanel, forced, OpType.CONSTRUCTED_DECK, "Constructed decks");
-            _addSelectionWidget(knownDeckPanel, forced, OpType.DRAFT_DECK,       "Draft decks");
-            _addSelectionWidget(knownDeckPanel, forced, OpType.PLANAR_DECK,      "Planar decks");
-            _addSelectionWidget(knownDeckPanel, forced, OpType.SCHEME_DECK,      "Scheme decks");
-            _addSelectionWidget(knownDeckPanel, forced, OpType.SEALED_DECK,      "Sealed decks");
-            _addSelectionWidget(knownDeckPanel, forced, OpType.UNKNOWN_DECK,     "Unknown decks");
+            _addSelectionWidget(knownDeckPanel, OpType.CONSTRUCTED_DECK, "Constructed decks");
+            _addSelectionWidget(knownDeckPanel, OpType.DRAFT_DECK,       "Draft decks");
+            _addSelectionWidget(knownDeckPanel, OpType.PLANAR_DECK,      "Planar decks");
+            _addSelectionWidget(knownDeckPanel, OpType.SCHEME_DECK,      "Scheme decks");
+            _addSelectionWidget(knownDeckPanel, OpType.SEALED_DECK,      "Sealed decks");
+            _addSelectionWidget(knownDeckPanel, OpType.UNKNOWN_DECK,     "Unknown decks");
             JPanel unknownDeckPanel = new JPanel(new MigLayout("insets 0, gap 5"));
             unknownDeckPanel.setOpaque(false);
             _unknownDeckCombo = new JComboBox();
@@ -231,20 +231,20 @@ public class DialogMigrateProfile {
             JPanel dataPanel = new JPanel(new MigLayout("insets 0, gap 5, wrap"));
             dataPanel.setOpaque(false);
             dataPanel.add(new FLabel.Builder().text("Other data").build());
-            _addSelectionWidget(dataPanel, forced, OpType.GAUNTLET_DATA,   "Gauntlet data");
-            _addSelectionWidget(dataPanel, forced, OpType.QUEST_DATA,      "Quest saves");
-            _addSelectionWidget(dataPanel, forced, OpType.PREFERENCE_FILE, "Preference files");
+            _addSelectionWidget(dataPanel, OpType.GAUNTLET_DATA,   "Gauntlet data");
+            _addSelectionWidget(dataPanel, OpType.QUEST_DATA,      "Quest saves");
+            _addSelectionWidget(dataPanel, OpType.PREFERENCE_FILE, "Preference files");
             cbPanel.add(dataPanel, "aligny top");
             
             // add cacheDir data elements
             JPanel cachePanel = new JPanel(new MigLayout("insets 0, gap 5, wrap 2"));
             cachePanel.setOpaque(false);
             cachePanel.add(new FLabel.Builder().text("Cached data").build(), "wrap");
-            _addSelectionWidget(cachePanel, forced, OpType.DEFAULT_CARD_PIC, "Default card pics");
-            _addSelectionWidget(cachePanel, forced, OpType.SET_CARD_PIC,     "Set-specific card pics");
-            _addSelectionWidget(cachePanel, forced, OpType.TOKEN_PIC,        "Card token pics");
-            _addSelectionWidget(cachePanel, forced, OpType.QUEST_PIC,        "Quest-related pics");
-            _addSelectionWidget(cachePanel, forced, OpType.DB_FILE,          "Database files");
+            _addSelectionWidget(cachePanel, OpType.DEFAULT_CARD_PIC, "Default card pics");
+            _addSelectionWidget(cachePanel, OpType.SET_CARD_PIC,     "Set-specific card pics");
+            _addSelectionWidget(cachePanel, OpType.TOKEN_PIC,        "Card token pics");
+            _addSelectionWidget(cachePanel, OpType.QUEST_PIC,        "Quest-related pics");
+            _addSelectionWidget(cachePanel, OpType.DB_FILE,          "Database files");
             cbPanel.add(cachePanel, "aligny top");
             _selectionPanel.add(cbPanel, "center");
             
@@ -285,11 +285,10 @@ public class DialogMigrateProfile {
             _updateUI();
         }
         
-        private void _addSelectionWidget(JPanel parent, boolean forced, OpType type, String name) {
+        private void _addSelectionWidget(JPanel parent, OpType type, String name) {
             FCheckBox cb = new FCheckBox();
             cb.setName(name);
             cb.setSelected(true);
-            cb.setEnabled(!forced);
             cb.addChangeListener(_stateChangedListener);
             
             // use a skip list map instead of a regular hashmap so that the files are sorted alphabetically

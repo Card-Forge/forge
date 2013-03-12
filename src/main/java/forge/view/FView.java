@@ -135,7 +135,7 @@ public enum FView {
             
             // check quickly whether we have any data to migrate
             boolean hasData = false;
-            for (String resDir : Lists.newArrayList("decks", "gauntlet", "pics", "pics_product", "preferences", "quest/data")) {
+            for (String resDir : Lists.newArrayList("decks", "gauntlet", "layouts", "pics", "pics_product", "preferences", "quest/data")) {
                 File f = new File("res", resDir);
                 if (f.exists() && !profileDirs.contains(f)) {
                     System.out.println("profile data found in obsolete location: " + f.getAbsolutePath());
