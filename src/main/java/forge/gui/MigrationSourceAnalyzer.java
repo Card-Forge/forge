@@ -121,12 +121,52 @@ public class MigrationSourceAnalyzer {
     //
     
     private void _analyzeDecksDir(File root) {
-        System.out.println("analyzing decks directory: " + root);
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
+                // we don't really expect any files in here, but if we find a .dck file, add it to the unknown list
+                String filename = file.getName();
+                if (filename.endsWith(".dck")) {
+                    File targetFile = new File(filename);
+                    _cb.addOp(OpType.UNKNOWN_DECK, file, targetFile);
+                }
             }
+            
             @Override boolean onDir(File dir) {
-                return false;
+                String dirname = dir.getName();
+                if ("constructed".equals(dirname)) {
+                    _analyzeKnownDeckDir(dir, NewConstants.DECK_CONSTRUCTED_DIR, OpType.CONSTRUCTED_DECK);
+                } else if ("cube".equals(dirname)) {
+                    return false;
+                } else if ("draft".equals(dirname)) {
+                    _analyzeKnownDeckDir(dir, NewConstants.DECK_DRAFT_DIR, OpType.DRAFT_DECK);
+                } else if ("plane".equals(dirname) || "planar".equals(dirname)) {
+                    _analyzeKnownDeckDir(dir, NewConstants.DECK_PLANE_DIR, OpType.PLANAR_DECK);
+                } else if ("scheme".equals(dirname)) {
+                    _analyzeKnownDeckDir(dir, NewConstants.DECK_SCHEME_DIR, OpType.SCHEME_DECK);
+                } else if ("sealed".equals(dirname)) {
+                    _analyzeKnownDeckDir(dir, NewConstants.DECK_SEALED_DIR, OpType.SEALED_DECK);
+                } else {
+                    _analyzeKnownDeckDir(dir, null, OpType.UNKNOWN_DECK);
+                }
+                return true;
+            }
+        });
+    }
+    
+    private void _analyzeKnownDeckDir(File root, final String targetDir, final OpType opType) {
+        _analyzeDir(root, new _Analyzer() {
+            @Override void onFile(File file) {
+                String filename = file.getName();
+                if (filename.endsWith(".dck")) {
+                    File targetFile = new File(targetDir, filename);
+                    _cb.addOp(opType, file, targetFile);
+                }
+            }
+            
+            @Override boolean onDir(File dir) {
+                // if there's a dir beneath a known directory, assume the same kind of decks are in there
+                _analyzeKnownDeckDir(dir, targetDir, opType);
+                return true;
             }
         });
     }
@@ -136,13 +176,12 @@ public class MigrationSourceAnalyzer {
     //
     
     private void _analyzeGauntletDataDir(File root) {
-        System.out.println("analyzing gauntlet data directory: " + root);
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
                 // find *.dat files, but exclude LOCKED_*
                 String filename = file.getName();
                 if (filename.endsWith(".dat") && !filename.startsWith("LOCKED_")) {
-                    File targetFile = new File(NewConstants.GAUNTLET_DIR.userPrefLoc, file.getName());
+                    File targetFile = new File(NewConstants.GAUNTLET_DIR.userPrefLoc, filename);
                     if (!file.equals(targetFile)) {
                         _cb.addOp(OpType.GAUNTLET_DATA, file, targetFile);
                     }
@@ -156,7 +195,6 @@ public class MigrationSourceAnalyzer {
     //
     
     private void _analyzeLayoutsDir(File root) {
-        System.out.println("analyzing layouts directory: " + root);
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
                 // find *_preferred.xml files
@@ -216,7 +254,6 @@ public class MigrationSourceAnalyzer {
     private Map<String, String> _defaultPicOldNameToCurrentName;
     private void _analyzeCardPicsDir(File root) {
         if (null == _defaultPicNames) {
-            // build structures
             _defaultPicNames = new HashSet<String>();
             _defaultPicOldNameToCurrentName = new HashMap<String, String>();
 
@@ -231,7 +268,6 @@ public class MigrationSourceAnalyzer {
             }
         }
         
-        System.out.println("analyzing default card pics directory: " + root);
         _analyzeListedDir(root, NewConstants.CACHE_CARD_PICS_DIR, new _ListedAnalyzer() {
             @Override public String map(String filename) {
                 if (_defaultPicOldNameToCurrentName.containsKey(filename)) {
@@ -282,7 +318,6 @@ public class MigrationSourceAnalyzer {
             }
         }
 
-        System.out.println("analyzing set card pics directory: " + root);
         EditionCollection editions = Singletons.getModel().getEditions();
         String editionCode = root.getName();
         CardEdition edition = editions.get(editionCode);
@@ -319,8 +354,7 @@ public class MigrationSourceAnalyzer {
                 _iconFileNames.add(nameurl.getLeft());
             }
         }
-        
-        System.out.println("analyzing icon pics directory: " + root);
+
         _analyzeListedDir(root, NewConstants.CACHE_ICON_PICS_DIR, new _ListedAnalyzer() {
             @Override public String map(String filename) { return _iconFileNames.contains(filename) ? filename : null; }
             @Override public OpType getOpType(String filename) { return OpType.QUEST_PIC; }
@@ -341,7 +375,6 @@ public class MigrationSourceAnalyzer {
             }
         }
         
-        System.out.println("analyzing token pics directory: " + root);
         _analyzeListedDir(root, NewConstants.CACHE_TOKEN_PICS_DIR, new _ListedAnalyzer() {
             @Override public String map(String filename) {
                 return (_questTokenFileNames.contains(filename) || _tokenFileNames.contains(filename)) ? filename : null;
@@ -353,14 +386,17 @@ public class MigrationSourceAnalyzer {
     }
     
     private void _analyzeProductPicsDir(File root) {
-        System.out.println("analyzing product pics directory: " + root);
-        // we don't care about files in the root dir -- the new files are .png, not the current .jpg ones
+        // we don't care about the files in the root dir -- the new files are .png, not the current .jpg ones
         _analyzeDir(root, new _Analyzer() {
             @Override boolean onDir(File dir) {
                 if ("booster".equals(dir.getName())) {
+                    _analyzeSimpleListedDir(dir, NewConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE, NewConstants.CACHE_BOOSTER_PICS_DIR, OpType.QUEST_PIC);
                 } else if ("fatpacks".equals(dir.getName())) {
+                    _analyzeSimpleListedDir(dir, NewConstants.IMAGE_LIST_QUEST_FATPACKS_FILE, NewConstants.CACHE_FATPACK_PICS_DIR, OpType.QUEST_PIC);
                 } else if ("precons".equals(dir.getName())) {
+                    _analyzeSimpleListedDir(dir, NewConstants.IMAGE_LIST_QUEST_PRECONS_FILE, NewConstants.CACHE_PRECON_PICS_DIR, OpType.QUEST_PIC);
                 } else if ("tournamentpacks".equals(dir.getName())) {
+                    _analyzeSimpleListedDir(dir, NewConstants.IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE, NewConstants.CACHE_TOURNAMENTPACK_PICS_DIR, OpType.QUEST_PIC);
                 } else {
                     return false;
                 }
@@ -374,7 +410,6 @@ public class MigrationSourceAnalyzer {
     //
     
     private void _analyzePreferencesDir(File root) {
-        System.out.println("analyzing preferences directory: " + root);
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
                 String filename = file.getName();
@@ -393,8 +428,16 @@ public class MigrationSourceAnalyzer {
     //
     
     private void _analyzeQuestDir(File root) {
-        System.out.println("analyzing quest directory: " + root);
         _analyzeDir(root, new _Analyzer() {
+            @Override void onFile(File file) {
+                if ("all-prices.txt".equals(file.getName())) {
+                    File targetFile = new File(NewConstants.DB_DIR, file.getName());
+                    if (!file.equals(targetFile)) {
+                        _cb.addOp(OpType.DB_FILE, file, targetFile);
+                    }
+                }
+            }
+            
             @Override boolean onDir(File dir) {
                 if ("data".equals(dir.getName())) {
                     _analyzeQuestDataDir(dir);
@@ -406,7 +449,6 @@ public class MigrationSourceAnalyzer {
     }
     
     private void _analyzeQuestDataDir(File root) {
-        System.out.println("analyzing quest data directory: " + root);
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
                 if (file.getName().endsWith(".dat")) {
@@ -443,6 +485,23 @@ public class MigrationSourceAnalyzer {
                 }
             }
         }
+    }
+    
+    private Map<String, Set<String>> _fileNameDb = new HashMap<String, Set<String>>();
+    private void _analyzeSimpleListedDir(File root, String listFile, String targetDir, final OpType opType) {
+        if (!_fileNameDb.containsKey(listFile)) {
+            Set<String> fileNames = new HashSet<String>();
+            for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(listFile)) {
+                fileNames.add(nameurl.getLeft());
+            }
+            _fileNameDb.put(listFile, fileNames);
+        }
+        
+        final Set<String> dbSet = _fileNameDb.get(listFile);
+        _analyzeListedDir(root, targetDir, new _ListedAnalyzer() {
+            @Override public String map(String filename) { return dbSet.contains(filename) ? filename : null; }
+            @Override public OpType getOpType(String filename) { return opType; }
+        });
     }
     
     private abstract class _ListedAnalyzer {

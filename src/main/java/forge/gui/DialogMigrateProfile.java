@@ -59,19 +59,19 @@ import forge.gui.toolbox.FTextField;
 import forge.properties.NewConstants;
 
 public class DialogMigrateProfile {
-    private final Runnable _onImportDone;
+    private final Runnable _onImportSuccessful;
     private final FButton  _btnStart;
     private final JPanel   _selectionPanel;
     
     private volatile boolean _cancel;
     
-    public DialogMigrateProfile(String srcDir, boolean showMigrationBlurb, final Runnable onImportDone) {
+    public DialogMigrateProfile(String srcDir, boolean showMigrationBlurb, final Runnable onImportSuccessful) {
         FPanel p = new FPanel(new MigLayout("insets dialog, gap 0, center, wrap"));
         p.setOpaque(false);
         p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
         // header
-        p.add(new FLabel.Builder().text("Migrate profile data (in progress: not fully functional)").fontSize(15).build(), "center");
+        p.add(new FLabel.Builder().text("Migrate profile data").fontSize(15).build(), "center");
         
         if (showMigrationBlurb) {
             FPanel blurbPanel = new FPanel(new MigLayout("insets dialog, gap 10, center, wrap"));
@@ -134,12 +134,12 @@ public class DialogMigrateProfile {
             @Override public void actionPerformed(ActionEvent e) { _cancel = true; cleanup.run(); }
         });
 
-        _onImportDone = new Runnable() {
+        _onImportSuccessful = new Runnable() {
             @Override public void run() {
-                cleanup.run();
-                if (null != onImportDone) {
-                    onImportDone.run();
+                if (null != onImportSuccessful) {
+                    onImportSuccessful.run();
                 }
+                btnCancel.setText("Done");
             }
         };
         
@@ -160,8 +160,10 @@ public class DialogMigrateProfile {
             @Override public void run() { btnCancel.requestFocusInWindow(); }
         });
         
-        _AnalyzerUpdater analyzer = new _AnalyzerUpdater(srcDir);
-        analyzer.execute();
+        if (!emptySrcDir) {
+            _AnalyzerUpdater analyzer = new _AnalyzerUpdater(srcDir);
+            analyzer.execute();
+        }
     }
     
     private class _UnknownDeckChoice {
@@ -192,9 +194,6 @@ public class DialogMigrateProfile {
         private final JTextArea    _operationLog;
         private final JProgressBar _progressBar;
         
-        // used to ensure we only have one UI update pending at a time
-        private volatile boolean _uiUpdateAck;
-
         public _AnalyzerUpdater(String srcDir) {
             _srcDir = srcDir;
             
@@ -222,7 +221,7 @@ public class DialogMigrateProfile {
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Planar",      NewConstants.DECK_PLANE_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Scheme",      NewConstants.DECK_SCHEME_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Sealed",      NewConstants.DECK_SEALED_DIR));
-            unknownDeckPanel.add(new FLabel.Builder().text("Treat decks of unknown type as:").build());
+            unknownDeckPanel.add(new FLabel.Builder().text("Treat unknown decks as:").build());
             unknownDeckPanel.add(_unknownDeckCombo);
             knownDeckPanel.add(unknownDeckPanel, "span");
             cbPanel.add(knownDeckPanel, "aligny top");
@@ -276,8 +275,7 @@ public class DialogMigrateProfile {
             
             // add progress bar
             _progressBar = new JProgressBar();
-            _progressBar.setIndeterminate(true);
-            _progressBar.setString("Analyzing source directory...");
+            _progressBar.setString("Preparing to analyze source directory...");
             _progressBar.setStringPainted(true);
             _selectionPanel.add(_progressBar, "w 100%!");
             
@@ -297,6 +295,7 @@ public class DialogMigrateProfile {
         }
         
         // must be called from GUI event loop thread
+        // TODO: move string calculation to a background thread
         private void _updateUI() {
             // set operation summary
             StringBuilder log = new StringBuilder();
@@ -332,7 +331,6 @@ public class DialogMigrateProfile {
             log.append("verwriting existing files");
 
             _operationLog.setText(log.toString());
-            _uiUpdateAck = true;
         }
         
         private void _disableAll() {
@@ -341,6 +339,7 @@ public class DialogMigrateProfile {
             }
             _unknownDeckCombo.setEnabled(false);
             _moveCheckbox.setEnabled(false);
+            _overwriteCheckbox.setEnabled(false);
         }
         
         @Override
@@ -377,11 +376,6 @@ public class DialogMigrateProfile {
                         
                         // timers run in the gui event loop, so it's ok to interact with widgets
                         _progressBar.setValue(msa.getNumFilesAnalyzed());
-                        
-                        // only update if we don't already have an update pending.  we may not be prompt in
-                        // updating sometimes, but that's ok
-                        if (!_uiUpdateAck) { return; }
-                        _uiUpdateAck = false;
                         _stateChangedListener.stateChanged(null);
                     }
                 });
@@ -492,39 +486,55 @@ public class DialogMigrateProfile {
         
         @Override
         protected Void doInBackground() throws Exception {
-            // working with textbox text is thread safe
-            _operationLog.setText("");
-            
-            // assumes all destination directories have been created
-            int numOps = 0;
-            for (Map.Entry<File, File> op : _operations.entrySet()) {
-                final int curOpNum = ++numOps;
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() { _progressBar.setValue(curOpNum); }
-                });
+            try {
+                // working with textbox text is thread safe
+                _operationLog.setText("");
                 
-                File srcFile  = op.getKey();
-                File destFile = op.getValue();
-
-                try {
-                    if (_overwrite || !destFile.exists()) {
-                        _copyFile(srcFile, destFile);
-                    }
+                // assumes all destination directories have been created
+                int numOps = 0;
+                for (Map.Entry<File, File> op : _operations.entrySet()) {
+                    if (_cancel) { break; }
                     
-                    if (_move) {
-                        srcFile.delete();
-                    }
+                    final int curOpNum = ++numOps;
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override public void run() {
+                            if (_cancel) { return; }
+                            _progressBar.setValue(curOpNum);
+                        }
+                    });
                     
-                    // working with textbox text is thread safe
-                    _operationLog.append(String.format("%s %s -> %s\n",
-                            _move ? "Moved" : "Copied",
-                            srcFile.getAbsolutePath(), destFile.getAbsolutePath()));
-                } catch (IOException e) {
-                    _operationLog.append(String.format("Failed to %s %s -> %s (%s)\n",
-                            _move ? "move" : "copy",
-                            srcFile.getAbsolutePath(), destFile.getAbsolutePath(),
-                            e.getMessage()));
+                    File srcFile  = op.getKey();
+                    File destFile = op.getValue();
+    
+                    try {
+                        if (_overwrite || !destFile.exists()) {
+                            _copyFile(srcFile, destFile);
+                        }
+                        
+                        if (_move) {
+                            srcFile.delete();
+                        }
+                        
+                        // working with textbox text is thread safe
+                        _operationLog.append(String.format("%s %s -> %s\n",
+                                _move ? "Moved" : "Copied",
+                                srcFile.getAbsolutePath(), destFile.getAbsolutePath()));
+                    } catch (IOException e) {
+                        _operationLog.append(String.format("Failed to %s %s -> %s (%s)\n",
+                                _move ? "move" : "copy",
+                                srcFile.getAbsolutePath(), destFile.getAbsolutePath(),
+                                e.getMessage()));
+                    }
                 }
+            } catch (final Exception e) {
+                _cancel = true;
+                
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override public void run() {
+                        _progressBar.setString("Error");
+                        BugReporter.reportException(e);
+                    }
+                });
             }
             
             return null;
@@ -532,11 +542,15 @@ public class DialogMigrateProfile {
 
         @Override
         protected void done() {
-            _onImportDone.run();
+            if (_cancel) { return; }
+            
+            _progressBar.setValue(_progressBar.getMaximum());
+            _progressBar.setString("Import complete");
+            _onImportSuccessful.run();
         }
         
         private void _copyFile(File srcFile, File destFile) throws IOException {
-            if(!destFile.exists()) {
+            if (!destFile.exists()) {
                 destFile.createNewFile();
             }
 

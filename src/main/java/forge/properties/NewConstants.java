@@ -81,15 +81,15 @@ public final class NewConstants {
     public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,        "gauntlet/");
     
     // data that is only in the cached dir
-    private static final String _DB_DIR   = CACHE_DIR + "db/";
-    private static final String _PICS_DIR = CACHE_DIR + "pics/";
+    private static final String _PICS_DIR                    = CACHE_DIR + "pics/";
+    public static final String DB_DIR                        = CACHE_DIR + "db/";
     public static final String CACHE_TOKEN_PICS_DIR          = _PICS_DIR + "tokens/";
     public static final String CACHE_ICON_PICS_DIR           = _PICS_DIR + "icons/";
     public static final String CACHE_BOOSTER_PICS_DIR        = _PICS_DIR + "boosters/";
     public static final String CACHE_FATPACK_PICS_DIR        = _PICS_DIR + "fatpacks/";
     public static final String CACHE_PRECON_PICS_DIR         = _PICS_DIR + "precons/";
     public static final String CACHE_TOURNAMENTPACK_PICS_DIR = _PICS_DIR + "tournamentpacks/";
-    public static final String QUEST_CARD_PRICE_FILE         = _DB_DIR + "all-prices.txt";
+    public static final String QUEST_CARD_PRICE_FILE         = DB_DIR + "all-prices.txt";
     public static final String CACHE_MORPH_IMAGE_FILE        = "morph";
     
     public static final String[] PROFILE_DIRS = {
@@ -97,7 +97,7 @@ public final class NewConstants {
             CACHE_DIR,
             CACHE_CARD_PICS_DIR,
             USER_PREFS_DIR,
-            _DB_DIR,
+            DB_DIR,
             DECK_CONSTRUCTED_DIR,
             DECK_DRAFT_DIR,
             DECK_SEALED_DIR,
