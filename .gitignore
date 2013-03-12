@@ -3,6 +3,7 @@
 /*.tmp
 /.metadata
 /forge.profile.properties
+/nbactions.xml
 res/PerSetTrackingResults
 res/oracleScript.log
 res/reprintSetInfo.log
