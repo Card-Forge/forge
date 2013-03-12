@@ -202,16 +202,7 @@ public class SpellAbilityRequirements {
      * </p>
      */
     public final void finishPaying() {
-        if (this.isFree || this.payment.isAllPaid()) {
-            if (this.skipStack) {
-                AbilityUtils.resolve(this.ability, false);
-            } else {
-                this.addAbilityToStack();
-            }
-
-            this.select.resetTargets();
-            Singletons.getModel().getGame().getAction().checkStateEffects();
-        } else if (this.payment.isCanceled()) {
+        if (this.payment.isCanceled()) {
             final Card c = this.ability.getSourceCard();
 
             // split cards transform back to full form if mana cost is not paid
@@ -233,6 +224,16 @@ public class SpellAbilityRequirements {
             this.ability.resetOnceResolved();
             this.payment.cancelPayment();
             Singletons.getModel().getGame().getStack().clearFrozen();
+        }
+        else if (this.isFree || this.payment.isAllPaid()) {
+            if (this.skipStack) {
+                AbilityUtils.resolve(this.ability, false);
+            } else {
+                this.addAbilityToStack();
+            }
+
+            this.select.resetTargets();
+            Singletons.getModel().getGame().getAction().checkStateEffects();
         }
     }
 
