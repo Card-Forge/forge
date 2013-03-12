@@ -97,7 +97,7 @@ public class CostPutCounter extends CostPartWithList {
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), this.counter.getName() + " counter"));
 
             sb.append(" on ");
-            if (this.isTargetingThis()) {
+            if (this.payCostFromSource()) {
                 sb.append(this.getType());
             } else {
                 final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
@@ -128,7 +128,7 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             if (source.hasKeyword("CARDNAME can't have counters placed on it.")) {
                 return false;
             }
@@ -161,7 +161,7 @@ public class CostPutCounter extends CostPartWithList {
             c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             source.addCounter(this.getCounter(), c, false);
         } else {
             // Put counter on chosen card
@@ -185,7 +185,7 @@ public class CostPutCounter extends CostPartWithList {
             c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
         }
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             source.addCounter(this.getCounter(), c, false);
             payment.setPaidManaPart(this);
             this.addToList(source);
@@ -207,7 +207,7 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             this.addToList(source);
             return true;
         } else {

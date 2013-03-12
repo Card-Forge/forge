@@ -492,7 +492,7 @@ public class CostExile extends CostPartWithList {
         final Integer i = this.convertAmount();
         sb.append("Exile ");
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             sb.append(this.getType());
             if (!this.from.equals(ZoneType.Battlefield)) {
                 sb.append(" from your ").append(this.from);
@@ -507,7 +507,7 @@ public class CostExile extends CostPartWithList {
             final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
 
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
-            if (!this.isTargetingThis()) {
+            if (!this.payCostFromSource()) {
                 sb.append(" you control");
             }
             return sb.toString();
@@ -561,7 +561,7 @@ public class CostExile extends CostPartWithList {
                 typeList = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
             }
         }
-        if (!this.isTargetingThis()) {
+        if (!this.payCostFromSource()) {
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
@@ -652,7 +652,7 @@ public class CostExile extends CostPartWithList {
         }
         
         Input target = null;
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             target = new InputExileThis(payment, this, ability);
         } else if (this.from.equals(ZoneType.Battlefield) || this.from.equals(ZoneType.Hand)) {
             target = new InputExileType(this, payment, this.getType(), c, ability);
@@ -691,7 +691,7 @@ public class CostExile extends CostPartWithList {
     @Override
     public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             this.getList().add(source);
         } else if (this.getType().equals("All")) {
             this.setList(new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(this.getFrom())));

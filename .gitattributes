@@ -538,6 +538,7 @@ res/cardsfolder/a/ashes_of_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/a/ashes_to_ashes.txt svneol=native#text/plain
 res/cardsfolder/a/ashling_the_extinguisher.txt -text
 res/cardsfolder/a/ashling_the_extinguisher_avatar.txt -text
+res/cardsfolder/a/ashling_the_pilgrim.txt -text
 res/cardsfolder/a/ashling_the_pilgrim_avatar.txt -text
 res/cardsfolder/a/ashlings_prerogative.txt -text
 res/cardsfolder/a/ashmouth_hound.txt -text
@@ -9549,6 +9550,7 @@ res/cardsfolder/s/simic_guildgate.txt -text
 res/cardsfolder/s/simic_guildmage.txt -text
 res/cardsfolder/s/simic_initiate.txt -text
 res/cardsfolder/s/simic_keyrune.txt -text
+res/cardsfolder/s/simic_manipulator.txt -text
 res/cardsfolder/s/simic_ragworm.txt svneol=native#text/plain
 res/cardsfolder/s/simic_signet.txt svneol=native#text/plain
 res/cardsfolder/s/simic_sky_swallower.txt svneol=native#text/plain

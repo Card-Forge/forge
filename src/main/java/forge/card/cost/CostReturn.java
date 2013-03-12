@@ -69,7 +69,7 @@ public class CostReturn extends CostPartWithList {
         final Integer i = this.convertAmount();
         String pronoun = "its";
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             sb.append(this.getType());
         } else {
             final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
@@ -97,7 +97,7 @@ public class CostReturn extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
-        if (!this.isTargetingThis()) {
+        if (!this.payCostFromSource()) {
             boolean needsAnnoucement = ability.hasParam("Announce") && this.getType().contains(ability.getParam("Announce"));
             
             List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
@@ -149,7 +149,7 @@ public class CostReturn extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             final Input inp = CostReturn.returnThis(ability, payment, this);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         } else {
@@ -169,7 +169,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             this.getList().add(source);
         } else {
             Integer c = this.convertAmount();

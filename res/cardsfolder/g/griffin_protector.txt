@@ -3,8 +3,8 @@ ManaCost:3 W
 Types:Creature Griffin
 PT:2/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
-SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_protector.jpg
 Oracle:Flying\nWhenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.

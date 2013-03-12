@@ -8,5 +8,5 @@ SVar:LandsControlled:Count$Valid Land.RememberedPlayerCtrl
 SVar:SacX:SVar$LandsControlled/Minus.5
 SVar:FetchX:Number$5/Minus.LandsControlled
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_balance.jpg
-SetInfo:MIR Rare
 Oracle:Each player who controls six or more lands chooses five lands he or she controls and sacrifices the rest. Each player who controls four or fewer lands may search his or her library for up to X basic land cards and put them onto the battlefield, where X is five minus the number of lands he or she controls. Then each player who searched his or her library this way shuffles it.
+SetInfo:MIR Rare

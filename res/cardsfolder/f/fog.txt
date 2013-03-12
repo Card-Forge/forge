@@ -6,10 +6,10 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/fog.jpg
 Oracle:Prevent all combat damage that would be dealt this turn.
 SetInfo:2ED Common
 SetInfo:7ED Common
+SetInfo:M12 Common
 SetInfo:6ED Common
 SetInfo:M10 Common
 SetInfo:MIR Common
-SetInfo:M12 Common
 SetInfo:M11 Common
 SetInfo:LEB Common
 SetInfo:M13 Common

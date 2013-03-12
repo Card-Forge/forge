@@ -180,7 +180,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
                         // this is mainly for typecycling
-                        if (!cd.isTargetingThis() || !ComputerUtil.isWorseThanDraw(ai, source)) {
+                        if (!cd.payCostFromSource() || !ComputerUtil.isWorseThanDraw(ai, source)) {
                             return false;
                         }
                     }

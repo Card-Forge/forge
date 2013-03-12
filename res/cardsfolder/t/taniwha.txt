@@ -7,5 +7,5 @@ K:Phasing
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPhaseLands | TriggerDescription$ At the beginning of your upkeep, all lands you control phase out.
 SVar:TrigPhaseLands:DB$ Phases | Defined$ Valid Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taniwha.jpg
-SetInfo:MIR Rare
 Oracle:Trample\nPhasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nAt the beginning of your upkeep, all lands you control phase out. (They phase in before you untap during your next untap step.)
+SetInfo:MIR Rare

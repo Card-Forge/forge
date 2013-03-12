@@ -71,7 +71,7 @@ public class CostReveal extends CostPartWithList {
         final String type = this.getType();
         final Integer amount = this.convertAmount();
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             if (!source.isInZone(ZoneType.Hand)) {
                 return false;
             }
@@ -105,7 +105,7 @@ public class CostReveal extends CostPartWithList {
         List<Card> hand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand));
         this.resetList();
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             if (!hand.contains(source)) {
                 return false;
             }
@@ -155,7 +155,7 @@ public class CostReveal extends CostPartWithList {
         final String amount = this.getAmount();
         this.resetList();
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             this.addToList(source);
             payment.setPaidManaPart(this);
         } else if (this.getType().equals("Hand")) {
@@ -199,7 +199,7 @@ public class CostReveal extends CostPartWithList {
 
         final Integer i = this.convertAmount();
 
-        if (this.isTargetingThis()) {
+        if (this.payCostFromSource()) {
             sb.append(this.getType());
         } else if (this.getType().equals("Hand")) {
             return ("Reveal you hand");
