@@ -195,6 +195,14 @@ public class CostPayment {
     }
 
     /**
+     * Cancel cost (including CostPart for refunding).
+     */
+    public final void cancelCost(final CostPart part) {
+        this.setPaidManaPart(part);
+        this.cancelCost();
+    }
+
+    /**
      * Cancel cost.
      */
     public final void cancelCost() {
