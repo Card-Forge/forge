@@ -183,9 +183,12 @@ public enum FView {
                             }
                             
                             if (seenDirs.contains(cur)) {
-                                boolean succeeded = stack.pop().delete();
-                                System.out.println(String.format("attempting to remove old profile dir: %s (%s)",
-                                        cur, succeeded ? "succeeded" : "failed"));
+                                cur = stack.pop();
+                                if (cur.exists()) {
+                                    boolean succeeded = cur.delete();
+                                    System.out.println(String.format("attempting to remove old profile dir: %s (%s)",
+                                            cur, succeeded ? "succeeded" : "failed"));
+                                }
                                 continue;
                             }
                             
@@ -226,7 +229,7 @@ public enum FView {
                             files.setLineWrap(true);
                             files.setEditable(false);
                             JScrollPane scroller = new JScrollPane(files);
-                            p.add(scroller, "w 400:100%:100%, h 60:100%:100%");
+                            p.add(scroller, "w 600:100%:100%, h 100:100%:100%, gaptop 10");
                         }
                         
                         final FButton btnOk = new FButton(remainingFiles.isEmpty() ? "Restart Forge" : "Close Forge");
@@ -239,11 +242,11 @@ public enum FView {
                                 }
                             }
                         });
-                        p.add(btnOk, "center, w 40%, h pref+12!");
+                        p.add(btnOk, "center, w pref+64!, h pref+12!, gaptop 20");
 
                         JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
                         overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
-                        overlay.add(p, "w 800::80%, h 500::90%");
+                        overlay.add(p, "w 100::80%, h 50::90%");
                         SOverlayUtils.showOverlay();
                         
                         SwingUtilities.invokeLater(new Runnable() {
