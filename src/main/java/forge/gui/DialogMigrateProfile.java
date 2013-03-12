@@ -26,7 +26,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 import javax.swing.JComboBox;
@@ -257,7 +259,7 @@ public class DialogMigrateProfile {
         private final Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> _selections =
                 new HashMap<OpType, Pair<FCheckBox, ? extends Map<File, File>>>();
         
-        ChangeListener _stateChangedListener = new ChangeListener() {
+        private final ChangeListener _stateChangedListener = new ChangeListener() {
             @Override public void stateChanged(ChangeEvent arg0) { _updateUI(); }
         };
         
@@ -268,6 +270,8 @@ public class DialogMigrateProfile {
         private final FCheckBox    _overwriteCheckbox;
         private final JTextArea    _operationLog;
         private final JProgressBar _progressBar;
+        
+        private final _OperationLogAsyncUpdater _operationLogUpdater;
         
         public _AnalyzerUpdater(String srcDir, Runnable onAnalyzerDone) {
             _srcDir         = srcDir;
@@ -355,6 +359,9 @@ public class DialogMigrateProfile {
             _progressBar.setStringPainted(true);
             _selectionPanel.add(_progressBar, "w 100%!");
             
+            _operationLogUpdater = new _OperationLogAsyncUpdater(_selections, _operationLog);
+            _operationLogUpdater.start();
+            
             // set checkbox labels
             _updateUI();
         }
@@ -371,42 +378,22 @@ public class DialogMigrateProfile {
         }
         
         // must be called from GUI event loop thread
-        // TODO: move string calculation to a background thread
         private void _updateUI() {
-            // set operation summary
-            StringBuilder log = new StringBuilder();
-            int totalOps = 0;
+            // update checkbox text lables with current totals
+            Set<OpType> selectedOptions = new HashSet<OpType>();
             for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
                 Pair<FCheckBox, ? extends Map<File, File>> selection = entry.getValue();
                 FCheckBox cb = selection.getLeft();
-                Map<File, File> ops = selection.getRight();
-                int numOps = ops.size();
+                
                 if (cb.isSelected()) {
-                    totalOps += numOps;
-                    for (Map.Entry<File, File> op : ops.entrySet()) {
-                        File dest = op.getValue();
-                        if (OpType.UNKNOWN_DECK == entry.getKey()) {
-                            _UnknownDeckChoice choice = (_UnknownDeckChoice)_unknownDeckCombo.getSelectedItem();
-                            dest = new File(choice.path, dest.getName());
-                        }
-                        log.append(String.format("%s -> %s\n",
-                                op.getKey().getAbsolutePath(), dest.getAbsolutePath()));
-                    }
+                    selectedOptions.add(entry.getKey());
                 }
                 
-                // update checkbox text with new totals
-                cb.setText(String.format("%s (%d)", cb.getName(), numOps));
+                cb.setText(String.format("%s (%d)", cb.getName(), selection.getRight().size()));
             }
             
-            if (0 < totalOps) {
-                log.append("\n");
-            }
-            log.append(_moveCheckbox.isSelected() ? "Moving" : "Copying");
-            log.append(" ").append(totalOps).append(" files\n");
-            log.append(_overwriteCheckbox.isSelected() ? "O" : "Not o");
-            log.append("verwriting existing files");
-
-            _operationLog.setText(log.toString());
+            _operationLogUpdater.requestUpdate(selectedOptions, (_UnknownDeckChoice)_unknownDeckCombo.getSelectedItem(),
+                    _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
         }
         
         private void _disableAll() {
@@ -452,7 +439,7 @@ public class DialogMigrateProfile {
                         
                         // timers run in the gui event loop, so it's ok to interact with widgets
                         _progressBar.setValue(msa.getNumFilesAnalyzed());
-                        _stateChangedListener.stateChanged(null);
+                        _updateUI();
                     }
                 });
     
@@ -493,7 +480,7 @@ public class DialogMigrateProfile {
         protected void done() {
             if (!_cancel) {
                 _progressBar.setValue(_progressBar.getMaximum());
-                _stateChangedListener.stateChanged(null);
+                _updateUI();
                 _progressBar.setString("Analysis complete");
                 
                 _btnStart.addActionListener(new ActionListener() {
@@ -503,6 +490,7 @@ public class DialogMigrateProfile {
                         _btnChooseDir.setEnabled(false);
                         
                         _disableAll();
+                        _operationLogUpdater.requestStop();
                         
                         _Importer importer = new _Importer(
                                 _selections, _unknownDeckCombo, _operationLog, _progressBar,
@@ -517,6 +505,115 @@ public class DialogMigrateProfile {
         }
     }
     
+    private class _OperationLogAsyncUpdater extends Thread {
+        final Map<OpType, Map<File, File>> _selections;
+        final JTextArea                    _operationLog; // safe to set text from another thread
+        
+        // synchronized-access data
+        private int                _updateCallCnt = 0;
+        private Set<OpType>        _selectedOptions;
+        private _UnknownDeckChoice _unknownDeckChoice;
+        private boolean            _isMove;
+        private boolean            _isOverwrite;
+        private boolean            _stop;
+        
+        public _OperationLogAsyncUpdater(Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> selections, JTextArea operationLog) {
+            super("OperationLogUpdater");
+            setDaemon(true);
+            
+            _selections   = new HashMap<OpType, Map<File, File>>();
+            _operationLog = operationLog;
+            
+            // remove references to FCheckBox when adding map -- we can't access it from the other thread anyway
+            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : selections.entrySet()) {
+                _selections.put(entry.getKey(), entry.getValue().getRight());
+            }
+        }
+
+        public synchronized void requestUpdate(
+                Set<OpType> selectedOptions, _UnknownDeckChoice unknownDeckChoice, boolean isMove, boolean isOverwrite) {
+            ++_updateCallCnt;
+            _selectedOptions   = selectedOptions;
+            _unknownDeckChoice = unknownDeckChoice;
+            _isMove            = isMove;
+            _isOverwrite       = isOverwrite;
+            
+            // notify waiter
+            notify();
+        }
+        
+        public synchronized void requestStop() {
+            _stop = true;
+            
+            // notify waiter
+            notify();
+        }
+        
+        private void _run() throws InterruptedException {
+            int lastUpdateCallCnt = _updateCallCnt;
+            Set<OpType>        selectedOptions;
+            _UnknownDeckChoice unknownDeckChoice;
+            boolean isMove;
+            boolean isOverwrite;
+            
+            while (true) {
+                synchronized (this) {
+                    if (_stop) { break; }
+                    while (lastUpdateCallCnt == _updateCallCnt) {
+                        wait();
+                        if (_stop) { break; }
+                    }
+                    
+                    lastUpdateCallCnt = _updateCallCnt;
+                    selectedOptions   = _selectedOptions;
+                    unknownDeckChoice = _unknownDeckChoice;
+                    isMove            = _isMove;
+                    isOverwrite       = _isOverwrite;
+                }
+                
+                // set operation summary
+                StringBuilder log = new StringBuilder();
+                int totalOps = 0;
+                for (OpType opType : selectedOptions) {
+                    Map<File, File> ops = _selections.get(opType);
+                    totalOps += ops.size();
+                    
+                    for (Map.Entry<File, File> op : ops.entrySet()) {
+                        File dest = op.getValue();
+                        if (OpType.UNKNOWN_DECK == opType) {
+                            dest = new File(unknownDeckChoice.path, dest.getName());
+                        }
+                        log.append(String.format("%s -> %s\n",
+                                op.getKey().getAbsolutePath(), dest.getAbsolutePath()));
+                    }
+                }
+                
+                if (0 < totalOps) {
+                    log.append("\n");
+                }
+                log.append(isMove ? "Moving" : "Copying");
+                log.append(" ").append(totalOps).append(" files\n");
+                log.append(isOverwrite ? "O" : "Not o");
+                log.append("verwriting existing files");
+
+                _operationLog.setText(log.toString());
+            }
+        }
+        
+        @Override
+        public void run() {
+            try { _run(); } catch (final InterruptedException e) {
+                // we never interrupt the thread, so this is not expected to happen
+                _cancel = true;
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override public void run() {
+                        BugReporter.reportException(e);
+                    }
+                });
+            }
+        }
+    }
+
     private class _Importer extends SwingWorker<Void, Void> {
         private final Map<File, File> _operations;
         private final JTextArea       _operationLog;
