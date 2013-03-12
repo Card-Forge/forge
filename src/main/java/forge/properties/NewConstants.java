@@ -78,7 +78,7 @@ public final class NewConstants {
     public static final FileLocation HOME_LAYOUT_FILE        = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "home.xml");
     public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match.xml");
     public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.xml");
-    public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,        "gauntlet/");
+    public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "gauntlet/");
     
     // data that is only in the cached dir
     private static final String _PICS_DIR                    = CACHE_DIR + "pics/";
@@ -97,6 +97,7 @@ public final class NewConstants {
             CACHE_DIR,
             CACHE_CARD_PICS_DIR,
             USER_PREFS_DIR,
+            GAUNTLET_DIR.userPrefLoc,
             DB_DIR,
             DECK_CONSTRUCTED_DIR,
             DECK_DRAFT_DIR,

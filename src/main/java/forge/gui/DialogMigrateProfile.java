@@ -65,7 +65,7 @@ public class DialogMigrateProfile {
     
     private volatile boolean _cancel;
     
-    public DialogMigrateProfile(String srcDir, boolean showMigrationBlurb, final Runnable onImportSuccessful) {
+    public DialogMigrateProfile(String srcDir, boolean showMigrationBlurb, final Runnable onDialogClose) {
         FPanel p = new FPanel(new MigLayout("insets dialog, gap 0, center, wrap"));
         p.setOpaque(false);
         p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
@@ -131,14 +131,17 @@ public class DialogMigrateProfile {
 
         final FButton btnCancel = new FButton("Cancel");
         btnCancel.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent e) { _cancel = true; cleanup.run(); }
+            @Override public void actionPerformed(ActionEvent e) {
+                _cancel = true;
+                cleanup.run();
+                if (null != onDialogClose) {
+                    onDialogClose.run();
+                }
+            }
         });
 
         _onImportSuccessful = new Runnable() {
             @Override public void run() {
-                if (null != onImportSuccessful) {
-                    onImportSuccessful.run();
-                }
                 btnCancel.setText("Done");
             }
         };
@@ -492,6 +495,8 @@ public class DialogMigrateProfile {
                 
                 // assumes all destination directories have been created
                 int numOps = 0;
+                int numSucceeded = 0;
+                int numFailed = 0;
                 for (Map.Entry<File, File> op : _operations.entrySet()) {
                     if (_cancel) { break; }
                     
@@ -519,13 +524,18 @@ public class DialogMigrateProfile {
                         _operationLog.append(String.format("%s %s -> %s\n",
                                 _move ? "Moved" : "Copied",
                                 srcFile.getAbsolutePath(), destFile.getAbsolutePath()));
+                        ++numSucceeded;
                     } catch (IOException e) {
                         _operationLog.append(String.format("Failed to %s %s -> %s (%s)\n",
                                 _move ? "move" : "copy",
                                 srcFile.getAbsolutePath(), destFile.getAbsolutePath(),
                                 e.getMessage()));
+                        ++numFailed;
                     }
                 }
+                
+                _operationLog.append(String.format("\nImport complete.  %d files %s, %d errors",
+                        numSucceeded, _move ? "moved" : "copied", numFailed));
             } catch (final Exception e) {
                 _cancel = true;
                 

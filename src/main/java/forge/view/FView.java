@@ -3,28 +3,39 @@ package forge.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.control.FControl;
 import forge.gui.DialogMigrateProfile;
+import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
@@ -32,6 +43,8 @@ import forge.gui.framework.SLayoutConstants;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.TargetingOverlay;
 import forge.gui.match.VMatchUI;
+import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
@@ -128,30 +141,97 @@ public enum FView {
         {
             // get profile directories -- if one of them is actually under the res directory, don't
             // try to migrate it
-            Set<File> profileDirs = new HashSet<File>();
+            final Set<File> profileDirs = new HashSet<File>();
             for (String dname : NewConstants.PROFILE_DIRS) {
                 profileDirs.add(new File(dname));
+            }
+
+            final List<File> resDirs = new ArrayList<File>();
+            for (String resDir : Lists.newArrayList("decks", "gauntlet", "layouts", "pics", "pics_product", "preferences", "quest/data")) {
+                resDirs.add(new File("res", resDir));
             }
             
             // check quickly whether we have any data to migrate
             boolean hasData = false;
-            for (String resDir : Lists.newArrayList("decks", "gauntlet", "layouts", "pics", "pics_product", "preferences", "quest/data")) {
-                File f = new File("res", resDir);
-                if (f.exists() && !profileDirs.contains(f)) {
-                    System.out.println("profile data found in obsolete location: " + f.getAbsolutePath());
+            for (File resDir : resDirs) {
+                if (resDir.exists() && !profileDirs.contains(resDir)) {
+                    // cycle through all dirs instead of breaking after the first found so each dir is printed to stdout
+                    System.out.println("profile data found in obsolete location: " + resDir.getAbsolutePath());
                     hasData = true;
-                    // cycle through all dirs instead of breaking immediately so each dir is printed to stdout
                 }
             }
         
             if (hasData) {
                 new DialogMigrateProfile("res", true, new Runnable() {
                     @Override public void run() {
-                        // TODO: reload appropriate data structures
+                        // attempt to remove old directories and assemble a list of remaining files.
+                        Deque<File> stack = new LinkedList<File>(resDirs);
+                        Set<File> seenDirs = new HashSet<File>();
+                        List<File> remainingFiles = new LinkedList<File>();
+                        while (!stack.isEmpty()) {
+                            File cur = stack.peek();
+                            if (profileDirs.contains(cur)) {
+                                // don't touch active profile dirs
+                                stack.pop();
+                                continue;
+                            }
+                            
+                            if (seenDirs.contains(cur)) {
+                                boolean succeeded = stack.pop().delete();
+                                System.out.println(String.format("attempting to remove old profile dir: %s (%s)",
+                                        cur, succeeded ? "succeeded" : "failed"));
+                                continue;
+                            }
+                            
+                            seenDirs.add(cur);
+                            File[] curListing = cur.listFiles();
+                            if (null == curListing) {
+                                continue;
+                            }
+                            for (File f : curListing) {
+                                if (f.isDirectory()) {
+                                    stack.push(f);
+                                } else {
+                                    remainingFiles.add(f);
+                                }
+                            }
+                        }
                         
-                        // TODO: attempt to remove old directories.  if they are not empty, show a dialog
-                        // TODO: telling them that there is some data remaining and it should be moved or deleted manually
-                        // TODO: they will continue to be prompted for migration until the directories are gone
+                        // if any files remain, show a dialog saying so and that they should be moved or
+                        // deleted manually or the user will continue to be prompted for migration
+                        FPanel p = new FPanel(new MigLayout("insets dialog, gap 10, center, wrap"));
+                        p.setOpaque(false);
+                        p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+
+                        p.add(new FLabel.Builder().text("<html>There seem to be a few files left over in your old data" +
+                        		" directories.  They should be deleted or moved somewhere else to avoid having this data" +
+                        		" migration message pop up again!</html>").build());
+                        
+                        JTextArea files = new JTextArea(StringUtils.join(remainingFiles, '\n'));
+                        files.setFont(new Font("Monospaced", Font.PLAIN, 10));
+                        files.setOpaque(false);
+                        files.setWrapStyleWord(true);
+                        files.setLineWrap(true);
+                        files.setEditable(false);
+                        JScrollPane scroller = new JScrollPane(files);
+                        p.add(scroller, "w 600:100%:100%, h 60:100%:100%");
+                        
+                        final FButton btnOk = new FButton("OK");
+                        btnOk.addActionListener(new ActionListener() {
+                            @Override public void actionPerformed(ActionEvent e) { SOverlayUtils.hideOverlay(); }
+                        });
+                        p.add(btnOk, "center, w 40%, h pref+12!");
+
+                        JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
+                        overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
+                        overlay.add(p, "w 800::80%, h 500::90%");
+                        SOverlayUtils.showOverlay();
+                        
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override public void run() { btnOk.requestFocusInWindow(); }
+                        });
+                        
+                        // TODO: reload appropriate data structures
                     }
                 });
             }
