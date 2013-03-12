@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.UnhandledException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -79,15 +80,60 @@ public class MigrationSourceAnalyzer {
     public int getNumFilesAnalyzed()  { return _numFilesAnalyzed;  }
     
     public void doAnalysis() {
-        // TODO: determine if this is really the res dir
-        _analyzeResDir(_source);
+        _identifyAndAnalyze(_source);
+    }
+    
+    private void _identifyAndAnalyze(File root) {
+        // see if we can figure out the likely identity of the source folder and
+        // dispatch to the best analysis subroutine to handle it
+        String dirname = root.getName();
+        
+        if ("res".equals(dirname))               { _analyzeOldResDir(root);          }
+        else if ("constructed".equals(dirname))  { _analyzeConstructedDeckDir(root); }
+        else if ("draft".equals(dirname))        { _analyzeDraftDeckDir(root);       }
+        else if ("plane".equals(dirname) || "planar".equals(dirname)) { _analyzePlanarDeckDir(root); }
+        else if ("scheme".equals(dirname))       { _analyzeSchemeDeckDir(root);      }
+        else if ("sealed".equals(dirname))       { _analyzeSealedDeckDir(root);      }
+        else if (StringUtils.containsIgnoreCase(dirname, "deck")) { _analyzeDecksDir(root);          }
+        else if ("gauntlet".equals(dirname))     { _analyzeGauntletDataDir(root);    }
+        else if ("layouts".equals(dirname))      { _analyzeLayoutsDir(root);         }
+        else if ("pics".equals(dirname))         { _analyzeCardPicsDir(root);        }
+        else if ("pics_product".equals(dirname)) { _analyzeProductPicsDir(root);     }
+        else if ("preferences".equals(dirname))  { _analyzePreferencesDir(root);     }
+        else if ("quest".equals(dirname))        { _analyzeQuestDir(root);           }
+        else if (null != Singletons.getModel().getEditions().get(dirname)) { _analyzeCardPicsSetDir(root); }
+        else {
+            // look at files in directory and make a semi-educated guess based on file extensions
+            int numUnhandledFiles = 0;
+            for (File file : root.listFiles()) {
+                if (_cb.checkCancel()) { return; }
+
+                if (file.isFile()) {
+                    String filename = file.getName();
+                    if (filename.endsWith(".dck")) {
+                        _analyzeDecksDir(root);
+                        numUnhandledFiles = 0;
+                        break;
+                    } else if (filename.endsWith(".dat")) {
+                        _analyzeQuestDataDir(root);
+                        numUnhandledFiles = 0;
+                        break;
+                    }
+                    
+                    ++numUnhandledFiles;
+                } else if (file.isDirectory()) {
+                    _identifyAndAnalyze(file);
+                }
+            }
+            _numFilesAnalyzed += numUnhandledFiles;
+        }
     }
     
     //////////////////////////////////////////////////////////////////////////
     // pre-profile res dir
     //
     
-    private void _analyzeResDir(File root) {
+    private void _analyzeOldResDir(File root) {
         _analyzeDir(root, new _Analyzer() {
             @Override boolean onDir(File dir) {
                 String dirname = dir.getName();
@@ -131,23 +177,43 @@ public class MigrationSourceAnalyzer {
             @Override boolean onDir(File dir) {
                 String dirname = dir.getName();
                 if ("constructed".equals(dirname)) {
-                    _analyzeKnownDeckDir(dir, NewConstants.DECK_CONSTRUCTED_DIR, OpType.CONSTRUCTED_DECK);
+                    _analyzeConstructedDeckDir(dir);
                 } else if ("cube".equals(dirname)) {
                     return false;
                 } else if ("draft".equals(dirname)) {
-                    _analyzeKnownDeckDir(dir, NewConstants.DECK_DRAFT_DIR, OpType.DRAFT_DECK);
+                    _analyzeDraftDeckDir(dir);
                 } else if ("plane".equals(dirname) || "planar".equals(dirname)) {
-                    _analyzeKnownDeckDir(dir, NewConstants.DECK_PLANE_DIR, OpType.PLANAR_DECK);
+                    _analyzePlanarDeckDir(dir);
                 } else if ("scheme".equals(dirname)) {
-                    _analyzeKnownDeckDir(dir, NewConstants.DECK_SCHEME_DIR, OpType.SCHEME_DECK);
+                    _analyzeSchemeDeckDir(dir);
                 } else if ("sealed".equals(dirname)) {
-                    _analyzeKnownDeckDir(dir, NewConstants.DECK_SEALED_DIR, OpType.SEALED_DECK);
+                    _analyzeSealedDeckDir(dir);
                 } else {
                     _analyzeKnownDeckDir(dir, null, OpType.UNKNOWN_DECK);
                 }
                 return true;
             }
         });
+    }
+    
+    private void _analyzeConstructedDeckDir(File root) {
+        _analyzeKnownDeckDir(root, NewConstants.DECK_CONSTRUCTED_DIR, OpType.CONSTRUCTED_DECK);
+    }
+    
+    private void _analyzeDraftDeckDir(File root) {
+        _analyzeKnownDeckDir(root, NewConstants.DECK_DRAFT_DIR, OpType.DRAFT_DECK);
+    }
+    
+    private void _analyzePlanarDeckDir(File root) {
+        _analyzeKnownDeckDir(root, NewConstants.DECK_PLANE_DIR, OpType.PLANAR_DECK);
+    }
+    
+    private void _analyzeSchemeDeckDir(File root) {
+        _analyzeKnownDeckDir(root, NewConstants.DECK_SCHEME_DIR, OpType.SCHEME_DECK);
+    }
+    
+    private void _analyzeSealedDeckDir(File root) {
+        _analyzeKnownDeckDir(root, NewConstants.DECK_SEALED_DIR, OpType.SEALED_DECK);
     }
     
     private void _analyzeKnownDeckDir(File root, final String targetDir, final OpType opType) {

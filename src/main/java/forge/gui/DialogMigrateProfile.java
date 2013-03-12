@@ -301,6 +301,9 @@ public class DialogMigrateProfile {
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Planar",      NewConstants.DECK_PLANE_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Scheme",      NewConstants.DECK_SCHEME_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Sealed",      NewConstants.DECK_SEALED_DIR));
+            _unknownDeckCombo.addActionListener(new ActionListener() {
+                @Override public void actionPerformed(ActionEvent arg0) { _updateUI(); }
+            });
             unknownDeckPanel.add(new FLabel.Builder().text("Treat unknown decks as:").build());
             unknownDeckPanel.add(_unknownDeckCombo);
             knownDeckPanel.add(unknownDeckPanel, "span");
