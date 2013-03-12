@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -62,8 +61,6 @@ public class MigrationSourceAnalyzer {
         boolean checkCancel();
         void    addOp(OpType type, File src, File dest);
     }
-    
-    private final Set<File> _unmappableFiles = new TreeSet<File>();
     
     private final File             _source;
     private final AnalysisCallback _cb;
@@ -516,10 +513,7 @@ public class MigrationSourceAnalyzer {
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
                 String filename = listedAnalyzer.map(file.getName());
-                if (null == filename) {
-                    System.out.println("skipping umappable pic file: " + file);
-                    _unmappableFiles.add(file);
-                } else {
+                if (null != filename) {
                     File targetFile = new File(targetDir, filename);
                     if (!file.equals(targetFile)) {
                         _cb.addOp(listedAnalyzer.getOpType(filename), file, targetFile);

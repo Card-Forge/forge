@@ -34,6 +34,7 @@ import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.control.FControl;
+import forge.control.RestartUtil;
 import forge.gui.DialogMigrateProfile;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.VDeckEditorUI;
@@ -164,10 +165,15 @@ public enum FView {
             if (hasData) {
                 new DialogMigrateProfile("res", true, new Runnable() {
                     @Override public void run() {
+                        // remove known cruft files, yes this is ugly, but it's also temporary
+                        for (String cruftFile : Lists.newArrayList("decks/SkieraCube-cards_not_supported_yet.txt", "decks/cube/ArabianExtended.dck", "decks/cube/GtcGuildBoros.dck", "decks/cube/GtcGuildDimir.dck", "decks/cube/GtcGuildGruul.dck", "decks/cube/GtcGuildOrzhov.dck", "decks/cube/GtcGuildSimic.dck", "decks/cube/GtcPromoBoros.dck", "decks/cube/GtcPromoDimir.dck", "decks/cube/GtcPromoGruul.dck", "decks/cube/GtcPromoOrzhov.dck", "decks/cube/GtcPromoSimic.dck", "decks/cube/JuzamjediCube.dck", "decks/cube/RtRGuildAzorius.dck", "decks/cube/RtRGuildGolgari.dck", "decks/cube/RtRGuildIzzet.dck", "decks/cube/RtRGuildRakdos.dck", "decks/cube/RtRGuildSelesnya.dck", "decks/cube/RtRPromoAzorius.dck", "decks/cube/RtRPromoGolgari.dck", "decks/cube/RtRPromoIzzet.dck", "decks/cube/RtRPromoRakdos.dck", "decks/cube/RtRPromoSelesnya.dck", "decks/cube/SkieraCube.dck", "gauntlet/LOCKED_DotP Preconstructed.dat", "gauntlet/LOCKED_Swimming With Sharks.dat", "layouts/editor_default.xml", "layouts/home_default.xml", "layouts/match_default.xml", "pics/snow_covered_forest1.jpg", "pics/snow_covered_forest2.jpg", "pics/snow_covered_forest3.jpg", "pics/snow_covered_island1.jpg", "pics/snow_covered_island2.jpg", "pics/snow_covered_island3.jpg", "pics/snow_covered_mountain1.jpg", "pics/snow_covered_mountain2.jpg", "pics/snow_covered_mountain3.jpg", "pics/snow_covered_plains1.jpg", "pics/snow_covered_plains2.jpg", "pics/snow_covered_plains3.jpg", "pics/snow_covered_swamp1.jpg", "pics/snow_covered_swamp2.jpg", "pics/snow_covered_swamp3.jpg", "pics/VAN/Birds of Paradise Avatar.full.jpg", "pics/VAN/Erhnam Djinn Avatar.full.jpg", "pics/VAN/Goblin Warchief Avatar.full.jpg", "pics/VAN/Grinning Demon Avatar.full.jpg", "pics/VAN/Platinum Angel Avatar.full.jpg", "pics/VAN/Prodigal Sorcerer Avatar.full.jpg", "pics/VAN/Rith, the Awakener Avatar.full.jpg", "pics/VAN/Royal Assassin Avatar.full.jpg", "pics/VAN/Serra Angel Avatar.full.jpg", "pics/VAN/Tradewind Rider Avatar.full.jpg", "pics_product/10E.jpg", "pics_product/2ED.jpg", "pics_product/3ED.jpg", "pics_product/4ED.jpg", "pics_product/5DN.jpg", "pics_product/5ED.jpg", "pics_product/6ED.jpg", "pics_product/7ED.jpg", "pics_product/8ED.jpg", "pics_product/9ED.jpg", "pics_product/ALA.jpg", "pics_product/ALL.jpg", "pics_product/APC.jpg", "pics_product/ARB.jpg", "pics_product/ARN.jpg", "pics_product/ATQ.jpg", "pics_product/BOK.jpg", "pics_product/CFX.jpg", "pics_product/CHK.jpg", "pics_product/CHR.jpg", "pics_product/CSP.jpg", "pics_product/DIS.jpg", "pics_product/DKA.jpg", "pics_product/DRK.jpg", "pics_product/DST.jpg", "pics_product/EVE.jpg", "pics_product/EXO.jpg", "pics_product/FEM.jpg", "pics_product/FUT.jpg", "pics_product/GPT.jpg", "pics_product/HML.jpg", "pics_product/ICE.jpg", "pics_product/INV.jpg", "pics_product/ISD.jpg", "pics_product/JUD.jpg", "pics_product/LEA.jpg", "pics_product/LEB.jpg", "pics_product/LEG.jpg", "pics_product/LGN.jpg", "pics_product/LRW.jpg", "pics_product/M10.jpg", "pics_product/M11.jpg", "pics_product/M12.jpg", "pics_product/MBS.jpg", "pics_product/MIR.jpg", "pics_product/MMQ.jpg", "pics_product/MOR.jpg", "pics_product/MRD.jpg", "pics_product/NMS.jpg", "pics_product/NPH.jpg", "pics_product/ODY.jpg", "pics_product/ONS.jpg", "pics_product/PCY.jpg", "pics_product/PLC.jpg", "pics_product/PLS.jpg", "pics_product/PO2.jpg", "pics_product/POR.jpg", "pics_product/PTK.jpg", "pics_product/RAV.jpg", "pics_product/ROE.jpg", "pics_product/S99.jpg", "pics_product/SCG.jpg", "pics_product/SHM.jpg", "pics_product/SOK.jpg", "pics_product/SOM.jpg", "pics_product/STH.jpg", "pics_product/TMP.jpg", "pics_product/TOR.jpg", "pics_product/TSP.jpg", "pics_product/UDS.jpg", "pics_product/ULG.jpg", "pics_product/USG.jpg", "pics_product/VIS.jpg", "pics_product/WTH.jpg", "pics_product/WWK.jpg", "pics_product/ZEN.jpg", "pics_product/fatpacks/PLS.JPG", "preferences/.project", "preferences/editor.default.preferences", "preferences/main.properties")) {
+                            new File("res", cruftFile).delete();
+                        }
+                        
                         // attempt to remove old directories and assemble a list of remaining files.
                         Deque<File> stack = new LinkedList<File>(resDirs);
                         Set<File> seenDirs = new HashSet<File>();
-                        List<File> remainingFiles = new LinkedList<File>();
+                        final List<File> remainingFiles = new LinkedList<File>();
                         while (!stack.isEmpty()) {
                             File cur = stack.peek();
                             if (profileDirs.contains(cur)) {
@@ -197,28 +203,41 @@ public enum FView {
                             }
                         }
                         
-                        // if any files remain, show a dialog saying so and that they should be moved or
+                        // if any files remain, display them and make clear that they should be moved or
                         // deleted manually or the user will continue to be prompted for migration
                         FPanel p = new FPanel(new MigLayout("insets dialog, gap 10, center, wrap"));
                         p.setOpaque(false);
                         p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
-                        p.add(new FLabel.Builder().text("<html>There seem to be a few files left over in your old data" +
-                        		" directories.  They should be deleted or moved somewhere else to avoid having this data" +
-                        		" migration message pop up again!</html>").build());
+                        if (remainingFiles.isEmpty()) {
+                            p.add(new FLabel.Builder().text("<html>You're done!  It looks like everything went smoothly." +
+                            		"  Now just restart Forge to load the data from its new home!</html>").build());
+                        } else {
+                            p.add(new FLabel.Builder().text("<html>There seem to be a few files left over in your old data" +
+                            		" directories.  They should be deleted or moved somewhere else to avoid having this data" +
+                            		" migration message pop up again!  If there are any empty directories left over after that," +
+                            		" just run through this migration procedure one more time and that should get them cleared" +
+                            		" up.</html>").build());
+                            
+                            JTextArea files = new JTextArea(StringUtils.join(remainingFiles, '\n'));
+                            files.setFont(new Font("Monospaced", Font.PLAIN, 10));
+                            files.setOpaque(false);
+                            files.setWrapStyleWord(true);
+                            files.setLineWrap(true);
+                            files.setEditable(false);
+                            JScrollPane scroller = new JScrollPane(files);
+                            p.add(scroller, "w 400:100%:100%, h 60:100%:100%");
+                        }
                         
-                        JTextArea files = new JTextArea(StringUtils.join(remainingFiles, '\n'));
-                        files.setFont(new Font("Monospaced", Font.PLAIN, 10));
-                        files.setOpaque(false);
-                        files.setWrapStyleWord(true);
-                        files.setLineWrap(true);
-                        files.setEditable(false);
-                        JScrollPane scroller = new JScrollPane(files);
-                        p.add(scroller, "w 600:100%:100%, h 60:100%:100%");
-                        
-                        final FButton btnOk = new FButton("OK");
+                        final FButton btnOk = new FButton(remainingFiles.isEmpty() ? "Restart Forge" : "Close Forge");
                         btnOk.addActionListener(new ActionListener() {
-                            @Override public void actionPerformed(ActionEvent e) { SOverlayUtils.hideOverlay(); }
+                            @Override public void actionPerformed(ActionEvent e) {
+                                if (remainingFiles.isEmpty()) {
+                                    RestartUtil.restartApplication(null);
+                                } else {
+                                    System.exit(0);
+                                }
+                            }
                         });
                         p.add(btnOk, "center, w 40%, h pref+12!");
 
@@ -230,8 +249,6 @@ public enum FView {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override public void run() { btnOk.requestFocusInWindow(); }
                         });
-                        
-                        // TODO: reload appropriate data structures
                     }
                 });
             }
