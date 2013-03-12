@@ -75,13 +75,13 @@ public class GuiDownloadQuestImages extends GuiDownloader {
             }
         }
 
-        for (final DownloadObject petIcon : GuiDownloader.readFileWithNames(NewConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE, NewConstants.CACHE_ICON_PICS_DIR)) {
+        for (final DownloadObject petIcon : GuiDownloader.readFile(NewConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE, NewConstants.CACHE_ICON_PICS_DIR)) {
             if (!petIcon.getDestination().exists()) {
                 urls.add(petIcon);
             }
         }
 
-        for (final DownloadObject questPet : GuiDownloader.readFileWithNames(NewConstants.IMAGE_LIST_QUEST_TOKENS_FILE, NewConstants.CACHE_TOKEN_PICS_DIR)) {
+        for (final DownloadObject questPet : GuiDownloader.readFile(NewConstants.IMAGE_LIST_QUEST_TOKENS_FILE, NewConstants.CACHE_TOKEN_PICS_DIR)) {
             if (!questPet.getDestination().exists()) {
                 urls.add(questPet);
             }

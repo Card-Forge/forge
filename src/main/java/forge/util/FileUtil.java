@@ -17,22 +17,19 @@
  */
 package forge.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
-import java.net.Proxy;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
-import javax.swing.JOptionPane;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import forge.error.BugReporter;
 
@@ -177,25 +174,30 @@ public final class FileUtil {
         return list;
     }
 
-    public static void downloadUrlIntoFile(final String url, final File target) {
-        try {
-            final byte[] buf = new byte[1024];
-            int len;
+    // returns a list of <name, url> pairs.  if the name is not in the file, it is synthesized from the url
+    public static List<Pair<String, String>> readNameUrlFile(String nameUrlFile) {
+        Pattern lineSplitter = Pattern.compile(Pattern.quote(" "));
+        Pattern replacer = Pattern.compile(Pattern.quote("%20"));
 
-            final Proxy p = Proxy.NO_PROXY;
-            final BufferedInputStream in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
-            final BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(target));
+        List<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
 
-            // while - read and write file
-            while ((len = in.read(buf)) != -1) {
-                out.write(buf, 0, len);
-            } // while - read and write file
-            in.close();
-            out.flush();
-            out.close();
-        } catch (final IOException ioex) {
-            JOptionPane.showMessageDialog(null, String.format("Error connecting to: %s", url),
-                "Download error", JOptionPane.ERROR_MESSAGE);
+        for (String line : readFile(nameUrlFile)) {
+            if (StringUtils.isBlank(line) || line.startsWith("#")) {
+                continue;
+            }
+            
+            String[] parts = lineSplitter.split(line, 2);
+            if (2 == parts.length) {
+                list.add(Pair.of(replacer.matcher(parts[0]).replaceAll(" "), parts[1]));
+            } else {
+                // figure out the filename from the URL
+                Pattern pathSplitter = Pattern.compile(Pattern.quote("/"));
+                String[] pathParts = pathSplitter.split(parts[0]);
+                String last = pathParts[pathParts.length - 1];
+                list.add(Pair.of(replacer.matcher(last).replaceAll(" "), parts[0]));
+            }
         }
+
+        return list;
     }
 }

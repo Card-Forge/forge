@@ -22,8 +22,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -36,6 +38,7 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
 
 public class MigrationSourceAnalyzer {
     public static enum OpType {
@@ -60,6 +63,8 @@ public class MigrationSourceAnalyzer {
         void    addOp(OpType type, File src, File dest);
     }
     
+    private final Set<File> _unmappableFiles = new TreeSet<File>();
+    
     private final File             _source;
     private final AnalysisCallback _cb;
     private final int              _numFilesToAnalyze;
@@ -83,6 +88,10 @@ public class MigrationSourceAnalyzer {
         _analyzeResDir(_source);
     }
     
+    //////////////////////////////////////////////////////////////////////////
+    // pre-profile res dir
+    //
+    
     private void _analyzeResDir(File root) {
         for (File file : root.listFiles()) {
             if (_cb.checkCancel()) { return; }
@@ -100,6 +109,10 @@ public class MigrationSourceAnalyzer {
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////
+    // default card pics
+    //
+    
     private static String _oldCleanString(final String in) {
         final StringBuffer out = new StringBuffer();
         char c;
@@ -166,8 +179,8 @@ public class MigrationSourceAnalyzer {
                 if (_defaultPicOldNameToCurrentName.containsKey(fileName)) {
                     fileName = _defaultPicOldNameToCurrentName.get(fileName);
                 } else if (!_defaultPicNames.contains(fileName)) {
-                    // TODO: track the unmappables and prompt to delete them at the end
                     System.out.println("skipping umappable default pic file: " + file);
+                    _unmappableFiles.add(file);
                     continue;
                 }
                 
@@ -187,6 +200,10 @@ public class MigrationSourceAnalyzer {
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////
+    // set card pics
+    //
+    
     private static void _addSetCards(Set<String> cardFileNames, Iterable<CardPrinted> library, Predicate<CardPrinted> filter) {
         for (CardPrinted c : Iterables.filter(library, filter)) {
             boolean hasBackFace = null != c.getRules().getPictureOtherSideUrl();
@@ -235,6 +252,7 @@ public class MigrationSourceAnalyzer {
                     }
                 } else {
                     System.out.println("skipping umappable set pic file: " + file);
+                    _unmappableFiles.add(file);
                 }
             } else if (file.isDirectory()) {
                 System.out.println("skipping umappable subdirectory: " + file);
@@ -243,15 +261,86 @@ public class MigrationSourceAnalyzer {
         }
     }
 
+    //////////////////////////////////////////////////////////////////////////
+    // other image dirs
+    //
+
+    Set<String> _iconFileNames;
     private void _analyzeIconsPicsDir(File root) {
-        // TODO: implement
-        _numFilesAnalyzed += _countFiles(root);
+        if (null == _iconFileNames) {
+            _iconFileNames = new HashSet<String>();
+            for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(NewConstants.IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE)) {
+                _iconFileNames.add(nameurl.getLeft());
+            }
+            for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(NewConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE)) {
+                _iconFileNames.add(nameurl.getLeft());
+            }
+        }
+        
+        System.out.println("analyzing icon pics directory: " + root);
+        for (File file : root.listFiles()) {
+            if (_cb.checkCancel()) { return; }
+
+            if (file.isFile()) {
+                ++_numFilesAnalyzed;
+                if (!_iconFileNames.contains(file.getName())) {
+                    System.out.println("skipping umappable icon pic file: " + file);
+                    _unmappableFiles.add(file);
+                    continue;
+                }
+                
+                File targetFile = new File(NewConstants.CACHE_ICON_PICS_DIR, file.getName());
+                if (!file.equals(targetFile)) {
+                    _cb.addOp(OpType.QUEST_DATA, file, targetFile);
+                }
+            } else if (file.isDirectory()) {
+                System.out.println("skipping umappable subdirectory: " + file);
+                _numFilesAnalyzed += _countFiles(file);
+            }
+        }
     }
     
+    Set<String> _tokenFileNames;
+    Set<String> _questTokenFileNames;
     private void _analyzeTokenPicsDir(File root) {
-        // TODO: implement
-        _numFilesAnalyzed += _countFiles(root);
+        if (null == _tokenFileNames) {
+            _tokenFileNames = new HashSet<String>();
+            _questTokenFileNames = new HashSet<String>();
+            for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(NewConstants.IMAGE_LIST_TOKENS_FILE)) {
+                _tokenFileNames.add(nameurl.getLeft());
+            }
+            for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(NewConstants.IMAGE_LIST_QUEST_TOKENS_FILE)) {
+                _questTokenFileNames.add(nameurl.getLeft());
+            }
+        }
+        
+        System.out.println("analyzing token pics directory: " + root);
+        for (File file : root.listFiles()) {
+            if (_cb.checkCancel()) { return; }
+
+            if (file.isFile()) {
+                ++_numFilesAnalyzed;
+                boolean isQuestToken = _questTokenFileNames.contains(file.getName());
+                if (!isQuestToken && !_tokenFileNames.contains(file.getName())) {
+                    System.out.println("skipping umappable token pic file: " + file);
+                    _unmappableFiles.add(file);
+                    continue;
+                }
+                
+                File targetFile = new File(NewConstants.CACHE_TOKEN_PICS_DIR, file.getName());
+                if (!file.equals(targetFile)) {
+                    _cb.addOp(isQuestToken ? OpType.QUEST_PIC : OpType.TOKEN_PIC, file, targetFile);
+                }
+            } else if (file.isDirectory()) {
+                System.out.println("skipping umappable subdirectory: " + file);
+                _numFilesAnalyzed += _countFiles(file);
+            }
+        }
     }
+    
+    //////////////////////////////////////////////////////////////////////////
+    // utility functions
+    //
     
     private int _countFiles(File root) {
         int count = 0;

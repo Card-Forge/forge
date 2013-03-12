@@ -51,7 +51,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         }
         
         // Add missing tokens to the list of things to download.
-        for (final DownloadObject element : GuiDownloader.readFileWithNames(NewConstants.IMAGE_LIST_TOKENS_FILE, NewConstants.CACHE_TOKEN_PICS_DIR)) {
+        for (final DownloadObject element : GuiDownloader.readFile(NewConstants.IMAGE_LIST_TOKENS_FILE, NewConstants.CACHE_TOKEN_PICS_DIR)) {
             if (!element.getDestination().exists()) {
                 downloads.add(element);
             }

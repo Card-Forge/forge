@@ -47,6 +47,7 @@ import net.miginfocom.swing.MigLayout;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import forge.error.BugReporter;
 import forge.gui.MigrationSourceAnalyzer.OpType;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FCheckBox;
@@ -345,57 +346,75 @@ public class DialogMigrateProfile {
         
         @Override
         protected Void doInBackground() throws Exception {
-            Map<OpType, Map<File, File>> selections = new HashMap<OpType, Map<File, File>>();
-            for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
-                selections.put(entry.getKey(), entry.getValue().getRight());
-            }
+            Timer timer = null;
             
-            MigrationSourceAnalyzer.AnalysisCallback cb = new MigrationSourceAnalyzer.AnalysisCallback() {
-                @Override
-                public boolean checkCancel() { return _cancel; }
+            try {
+                Map<OpType, Map<File, File>> selections = new HashMap<OpType, Map<File, File>>();
+                for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
+                    selections.put(entry.getKey(), entry.getValue().getRight());
+                }
                 
-                @Override
-                public void addOp(OpType type, File src, File dest) {
-                    _selections.get(type).getRight().put(src, dest);
-                }
-            };
-            
-            final MigrationSourceAnalyzer msa = new MigrationSourceAnalyzer(_srcDir, cb);
-            final int numFilesToAnalyze = msa.getNumFilesToAnalyze();
-            
-            final Timer timer = new Timer(500, null);
-            timer.addActionListener(new ActionListener() {
-                @Override public void actionPerformed(ActionEvent arg0) {
-                    if (_cancel) {
-                        timer.stop();
-                        return;
+                MigrationSourceAnalyzer.AnalysisCallback cb = new MigrationSourceAnalyzer.AnalysisCallback() {
+                    @Override
+                    public boolean checkCancel() { return _cancel; }
+                    
+                    @Override
+                    public void addOp(OpType type, File src, File dest) {
+                        _selections.get(type).getRight().put(src, dest);
                     }
-                    
-                    // timers run in the gui event loop, so it's ok to interact with widgets
-                    _progressBar.setValue(msa.getNumFilesAnalyzed());
-                    
-                    // only update if we don't already have an update pending.  we may not be prompt in
-                    // updating sometimes, but that's ok
-                    if (!_uiUpdateAck) { return; }
-                    _uiUpdateAck = false;
-                    _stateChangedListener.stateChanged(null);
+                };
+                
+                final MigrationSourceAnalyzer msa = new MigrationSourceAnalyzer(_srcDir, cb);
+                final int numFilesToAnalyze = msa.getNumFilesToAnalyze();
+                
+                timer = new Timer(500, null);
+                final Timer finalTimer = timer;
+                timer.addActionListener(new ActionListener() {
+                    @Override public void actionPerformed(ActionEvent arg0) {
+                        if (_cancel) {
+                            finalTimer.stop();
+                            return;
+                        }
+                        
+                        // timers run in the gui event loop, so it's ok to interact with widgets
+                        _progressBar.setValue(msa.getNumFilesAnalyzed());
+                        
+                        // only update if we don't already have an update pending.  we may not be prompt in
+                        // updating sometimes, but that's ok
+                        if (!_uiUpdateAck) { return; }
+                        _uiUpdateAck = false;
+                        _stateChangedListener.stateChanged(null);
+                    }
+                });
+    
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override public void run() {
+                        if (_cancel) { return; }
+                        _progressBar.setMaximum(numFilesToAnalyze);
+                        _progressBar.setValue(0);
+                        _progressBar.setIndeterminate(false);
+                        
+                        // start update timer
+                        finalTimer.start();
+                    }
+                });
+                
+                msa.doAnalysis();
+            } catch (final Exception e) {
+                _cancel = true;
+                
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override public void run() {
+                        _progressBar.setString("Error");
+                        BugReporter.reportException(e);
+                    }
+                });
+            } finally {
+                if (null != timer)
+                {
+                    timer.stop();
                 }
-            });
-
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override public void run() {
-                    if (_cancel) { return; }
-                    _progressBar.setMaximum(numFilesToAnalyze);
-                    _progressBar.setValue(0);
-                    _progressBar.setIndeterminate(false);
-                    
-                    // start update timer
-                    timer.start();
-                }
-            });
-            
-            msa.doAnalysis();
-            timer.stop();
+            }
             
             return null;
         }

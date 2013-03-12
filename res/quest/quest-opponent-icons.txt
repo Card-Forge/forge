@@ -321,7 +321,7 @@ http://www.cardforge.org/fpics/questAvatars/Savra.jpg
 http://www.cardforge.org/fpics/questAvatars/Selesnya-precon.jpg
 http://www.cardforge.org/fpics/questAvatars/Simic-precon.jpg
 http://www.cardforge.org/fpics/questAvatars/Sisters%20of%20Stone%20Death.jpg
-http://www.cardforge.org/fpics/questAvatars/Sus Antigoon.jpg
+http://www.cardforge.org/fpics/questAvatars/Sus%20Antigoon.jpg
 http://www.cardforge.org/fpics/questAvatars/Szadek.jpg
 http://www.cardforge.org/fpics/questAvatars/Teysa.jpg
 http://www.cardforge.org/fpics/questAvatars/Token.jpg

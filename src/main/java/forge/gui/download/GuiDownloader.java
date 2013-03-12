@@ -32,9 +32,7 @@ import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.regex.Pattern;
 
 import javax.swing.AbstractButton;
 import javax.swing.DefaultBoundedRangeModel;
@@ -50,7 +48,7 @@ import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -374,50 +372,14 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
     protected abstract ArrayList<DownloadObject> getNeededImages();
 
-    protected static List<DownloadObject> readFile(final String urlsFile, String dir) {
-        List<String> fileLines = FileUtil.readFile(urlsFile);
+    protected static ArrayList<DownloadObject> readFile(final String nameUrlFile, final String dir) {
         final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
-        final Pattern splitter = Pattern.compile(Pattern.quote("/"));
-        final Pattern replacer = Pattern.compile(Pattern.quote("%20"));
-
-        for (String line : fileLines) {
-
-            if (line.equals("") || line.startsWith("#")) {
-                continue;
-            }
-
-            String[] parts = splitter.split(line);
-
-            // Maybe there's a better way to do this, but I just want the
-            // filename from a URL
-            String last = parts[parts.length - 1];
-            list.add(new DownloadObject(line, new File(dir, replacer.matcher(last).replaceAll(" "))));
+        for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(nameUrlFile)) {
+            list.add(new DownloadObject(nameUrlPair.getRight(), new File(dir, nameUrlPair.getLeft())));
         }
         return list;
     }
 
-    protected static ArrayList<DownloadObject> readFileWithNames(final String urlNamesFile, final String dir) {
-        List<String> fileLines = FileUtil.readFile(urlNamesFile);
-        final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
-        final Pattern splitter = Pattern.compile(Pattern.quote(" "));
-        final Pattern replacer = Pattern.compile(Pattern.quote("%20"));
-
-        for (String line : fileLines) {
-
-            if (StringUtils.isBlank(line) || line.startsWith("#")) {
-                continue;
-            }
-            String[] parts = splitter.split(line, 2);
-            String url = parts.length > 1 ? parts[1] : null;
-            list.add(new DownloadObject(url, new File(dir, replacer.matcher(parts[0]).replaceAll(" "))));
-        }
-
-        return list;
-    } // readFile()
-
-    /**
-     * The Class ProxyHandler.
-     */
     protected class ProxyHandler implements ChangeListener {
         private final int type;
 
@@ -450,7 +412,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         DownloadObject(final String srcUrl, final File destFile) {
             source = srcUrl;
             destination = destFile;
-            // System.out.println("Created download object: "+name+" "+url+" "+dir);
+            System.out.println(String.format("downloading %s to %s", srcUrl, destFile));
         }
 
         /** @return {@link java.lang.String} */
