@@ -4020,6 +4020,17 @@ Sorcery
 Destroy target tapped creature.
 TSP C, 10E C, M10 C, M11 C, PC2 C
 
+Assault
+{R}
+Sorcery
+Assault deals 2 damage to target creature or player.
+----
+Battery
+{3}{G}
+Sorcery
+Put a 3/3 green Elephant creature token onto the battlefield.
+IN U (x2), TSB S, HOP U
+
 Assault Griffin
 {3}{W}
 Creature - Griffin
@@ -6046,18 +6057,6 @@ Equipped creature gets +4/+4 and has vigilance and lifelink.
 {3}: Return Batterskull to its owner's hand.
 Equip {5}
 NPH M
-
-Battery
-{3}{G}
-Sorcery
-Put a 3/3 green Elephant creature token onto the battlefield.
-IN U (x2), TSB S, HOP U
-
-Battery
-{3}{G}
-Sorcery
-Put a 3/3 green Elephant creature token onto the battlefield.
-IN U (x2), TSB S, HOP U
 
 Battle Cry
 {2}{W}
@@ -8756,6 +8755,17 @@ Artifact
 {2}, Pay 2 life: Draw a card.
 DK U, CH R, ME4 U
 
+Boom
+{1}{R}
+Sorcery
+Destroy target land you control and target land you don't control.
+----
+Bust
+{5}{R}
+Sorcery
+Destroy all lands.
+PLC R
+
 Boomerang
 {U}{U}
 Instant
@@ -10263,18 +10273,6 @@ Legendary Creature - Human Samurai
 3/4
 Double strike, bushido 2 (When this blocks or becomes blocked, it gets +2/+2 until end of turn.)
 CHK U
-
-Bust
-{5}{R}
-Sorcery
-Destroy all lands.
-PLC R
-
-Bust
-{5}{R}
-Sorcery
-Destroy all lands.
-PLC R
 
 Butcher Ghoul
 {1}{B}
@@ -12425,18 +12423,6 @@ Enchantment - Aura
 Enchant creature
 Enchanted creature gets -13/-0.
 DKA C
-
-Chaos
-{2}{R}
-Instant
-Creatures can't block this turn.
-AP U (x2), HOP U
-
-Chaos
-{2}{R}
-Instant
-Creatures can't block this turn.
-AP U (x2), HOP U
 
 Chaos Charm
 {R}
@@ -17823,18 +17809,6 @@ Creature - Elk
 {G}, Sacrifice Dawntreader Elk: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
 DKA C
 
-Day
-{2}{W}
-Instant
-Creatures target player controls get +1/+1 until end of turn.
-AP U (x2)
-
-Day
-{2}{W}
-Instant
-Creatures target player controls get +1/+1 until end of turn.
-AP U (x2)
-
 Day of Destiny
 {3}{W}
 Legendary Enchantment
@@ -17890,6 +17864,17 @@ Cast Dazzling Beauty only during the declare blockers step.
 Target unblocked attacking creature becomes blocked. (This spell works on unblockable creatures.)
 Draw a card at the beginning of the next turn's upkeep.
 MI C
+
+Dead
+{R}
+Instant
+Dead deals 2 damage to target creature.
+----
+Gone
+{2}{R}
+Instant
+Return target creature you don't control to its owner's hand.
+PLC C
 
 Dead Reckoning
 {1}{B}{B}
@@ -18010,18 +17995,6 @@ Creature - Spirit
 Flying
 As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
 ISD R
-
-Death
-{1}{B}
-Sorcery
-Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
-AP U (x2), DDJ U
-
-Death
-{1}{B}
-Sorcery
-Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
-AP U (x2), DDJ U
 
 Death Baron
 {1}{B}{B}
@@ -18872,18 +18845,6 @@ Sorcery
 Each player discards three cards.
 DIS C
 
-Deliver
-{2}{U}
-Instant
-Return target permanent to its owner's hand.
-IN U (x2)
-
-Deliver
-{2}{U}
-Instant
-Return target permanent to its owner's hand.
-IN U (x2)
-
 Delraich
 {6}{B}
 Creature - Horror
@@ -18917,18 +18878,6 @@ Creature - Human Insect
 3/2
 Flying
 ISD C
-
-Demand
-{1}{W}{U}
-Sorcery
-Search your library for a multicolored card, reveal it, and put it into your hand. Then shuffle your library.
-DIS U
-
-Demand
-{1}{W}{U}
-Sorcery
-Search your library for a multicolored card, reveal it, and put it into your hand. Then shuffle your library.
-DIS U
 
 Dematerialize
 {3}{U}
@@ -23971,18 +23920,6 @@ Whenever you cast a creature spell, put X 1/1 black Thrull creature tokens onto 
 When you control seven or more Thrulls, sacrifice Endrek Sahr, Master Breeder.
 TSP R
 
-Ends
-{3}{R}{W}
-Instant
-Target player sacrifices two attacking creatures.
-DIS R
-
-Ends
-{3}{R}{W}
-Instant
-Target player sacrifices two attacking creatures.
-DIS R
-
 Endure
 {3}{W}{W}
 Instant
@@ -24514,18 +24451,6 @@ Erratic Portal
 Artifact
 {1}, {T}: Return target creature to its owner's hand unless its controller pays {1}.
 EX R
-
-Error
-{U}{B}
-Instant
-Counter target multicolored spell.
-DIS U
-
-Error
-{U}{B}
-Instant
-Counter target multicolored spell.
-DIS U
 
 Ersatz Gnomes
 {3}
@@ -25840,18 +25765,6 @@ Creature - Vampire
 Sacrifice a creature: Falkenrath Torturer gains flying until end of turn. If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Torturer.
 DKA C
 
-Fall
-{B}{R}
-Sorcery
-Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
-DIS U, DDH U
-
-Fall
-{B}{R}
-Sorcery
-Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
-DIS U, DDH U
-
 Fall of the Gavel
 {3}{W}{U}
 Instant
@@ -27061,6 +26974,18 @@ Enchantment
 Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
 Whenever a creature you control attacks alone, if it's the first combat phase of the turn, untap that creature. After this phase, there is an additional combat phase.
 ARB R
+
+Fire
+{1}{R}
+Instant
+Fire deals 2 damage divided as you choose among one or two target creatures and/or players.
+----
+Ice
+{1}{U}
+Instant
+Tap target permanent.
+Draw a card.
+AP U (x2), CMD U, DDJ U
 
 Fire Ambush
 {1}{R}
@@ -33021,18 +32946,6 @@ Defender, flying
 {T}: Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
 ZEN U, CMD U
 
-Gone
-{2}{R}
-Instant
-Return target creature you don't control to its owner's hand.
-PLC C
-
-Gone
-{2}{R}
-Instant
-Return target creature you don't control to its owner's hand.
-PLC C
-
 Gore Vassal
 {2}{W}
 Creature - Hound
@@ -36699,6 +36612,17 @@ Whenever an opponent plays a land, if Hidden Stag is an enchantment, Hidden Stag
 Whenever you play a land, if Hidden Stag is a creature, Hidden Stag becomes an enchantment.
 UZ R
 
+Hide
+{R}{W}
+Instant
+Put target artifact or enchantment on the bottom of its owner's library.
+----
+Seek
+{W}{B}
+Instant
+Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.
+DIS R
+
 Hideous End
 {1}{B}{B}
 Instant
@@ -36936,6 +36860,17 @@ Hissing Miasma
 Enchantment
 Whenever a creature attacks you, its controller loses 1 life.
 GPT U
+
+Hit
+{1}{B}{R}
+Instant
+Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's converted mana cost.
+----
+Run
+{3}{R}{G}
+Instant
+Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.
+DIS U
 
 Hive Mind
 {5}{U}
@@ -38269,20 +38204,6 @@ Sorcery
 Put four 1/1 white Citizen creature tokens onto the battlefield.
 FE R, 5E R, 6E R, MED U
 
-Ice
-{1}{U}
-Instant
-Tap target permanent.
-Draw a card.
-AP U (x2), CMD U, DDJ U
-
-Ice
-{1}{U}
-Instant
-Tap target permanent.
-Draw a card.
-AP U (x2), CMD U, DDJ U
-
 Ice Cage
 {1}{U}
 Enchantment - Aura
@@ -38554,6 +38475,17 @@ Illumination
 Instant
 Counter target artifact or enchantment spell. Its controller gains life equal to its converted mana cost.
 MI U
+
+Illusion
+{U}
+Instant
+Target spell or permanent becomes the color of your choice until end of turn.
+----
+Reality
+{2}{G}
+Instant
+Destroy target artifact.
+AP U (x2)
 
 Illusionary Forces
 {3}{U}
@@ -45402,6 +45334,17 @@ Flying
 {1}{W}, Sacrifice Lieutenant Kirtar: Exile target attacking creature.
 OD R
 
+Life
+{G}
+Sorcery
+All lands you control become 1/1 creatures until end of turn. They're still lands.
+----
+Death
+{1}{B}
+Sorcery
+Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
+AP U (x2), DDJ U
+
 Life Burst
 {1}{W}
 Instant
@@ -47772,18 +47715,6 @@ Hand +2, life -2
 Whenever a creature enters the battlefield under your control, if it was unearthed, it gets +3/+0.
 Whenever a creature you control is exiled, if it was unearthed, shuffle that card into its owner's library.
 VAN S
-
-Malice
-{3}{B}
-Instant
-Destroy target nonblack creature. It can't be regenerated.
-IN U (x2), DDH U
-
-Malice
-{3}{B}
-Instant
-Destroy target nonblack creature. It can't be regenerated.
-IN U (x2), DDH U
 
 Malicious Advice
 {X}{U}{B}
@@ -54279,6 +54210,17 @@ Planeswalker - Bolas
 [-9] Nicol Bolas, Planeswalker deals 7 damage to target player. That player discards seven cards, then sacrifices seven permanents.
 CON M, DDH M, M13 M
 
+Night
+{B}
+Instant
+Target creature gets -1/-1 until end of turn.
+----
+Day
+{2}{W}
+Instant
+Creatures target player controls get +1/+1 until end of turn.
+AP U (x2)
+
 Night Dealings
 {2}{B}{B}
 Enchantment
@@ -55560,6 +55502,17 @@ Creature - Homunculus
 When Oculus dies, you may draw a card.
 MBS C
 
+Odds
+{U}{R}
+Instant
+Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.
+----
+Ends
+{3}{R}{W}
+Instant
+Target player sacrifices two attacking creatures.
+DIS R
+
 Odious Trow
 {B/G}
 Creature - Troll
@@ -56391,6 +56344,17 @@ Orcish Veteran can't block white creatures with power 2 or greater.
 {R}: Orcish Veteran gains first strike until end of turn.
 FE C (x4), ME2 C
 
+Order
+{3}{W}
+Instant
+Exile target attacking creature.
+----
+Chaos
+{2}{R}
+Instant
+Creatures can't block this turn.
+AP U (x2), HOP U
+
 Order of Leitbur
 {W}{W}
 Creature - Human Cleric Knight
@@ -57065,6 +57029,17 @@ Instant
 Put a 4/4 red Giant creature token onto the battlefield.
 At the beginning of your next upkeep, pay {4}{R}. If you don't, you lose the game.
 FUT R
+
+Pain
+{B}
+Sorcery
+Target player discards a card.
+----
+Suffering
+{3}{R}
+Sorcery
+Destroy target land.
+IN U (x2), DDH U
 
 Pain Kami
 {2}{R}
@@ -61286,6 +61261,17 @@ When Puppeteer Clique enters the battlefield, put target creature card from an o
 Persist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
 SHM R
 
+Pure
+{1}{R}{G}
+Sorcery
+Destroy target multicolored permanent.
+----
+Simple
+{1}{G}{W}
+Sorcery
+Destroy all Auras and Equipment.
+DIS U
+
 Pure Intentions
 {W}
 Instant - Arcane
@@ -63301,18 +63287,6 @@ Read the Runes
 Instant
 Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.
 ONS R
-
-Reality
-{2}{G}
-Instant
-Destroy target artifact.
-AP U (x2)
-
-Reality
-{2}{G}
-Instant
-Destroy target artifact.
-AP U (x2)
 
 Reality Acid
 {2}{U}
@@ -65470,6 +65444,17 @@ Morph {1}{U}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it 
 When Riptide Survivor is turned face up, discard two cards, then draw three cards.
 SCG U
 
+Rise
+{U}{B}
+Sorcery
+Return target creature card from a graveyard and target creature on the battlefield to their owners' hands.
+----
+Fall
+{B}{R}
+Sorcery
+Target player reveals two cards at random from his or her hand, then discards each nonland card revealed this way.
+DIS U, DDH U
+
 Rise from the Grave
 {4}{B}
 Sorcery
@@ -66380,12 +66365,11 @@ Rough
 {1}{R}
 Sorcery
 Rough deals 2 damage to each creature without flying.
-PLC U
-
-Rough
-{1}{R}
+----
+Tumble
+{5}{R}
 Sorcery
-Rough deals 2 damage to each creature without flying.
+Tumble deals 6 damage to each creature with flying.
 PLC U
 
 Roughshod Mentor
@@ -66619,18 +66603,6 @@ Creature - Human Wizard
 2/2
 {2}{U}: Look at the top card of your library. You may put that card into your graveyard.
 ONS U
-
-Run
-{3}{R}{G}
-Instant
-Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.
-DIS U
-
-Run
-{3}{R}{G}
-Instant
-Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.
-DIS U
 
 Run Wild
 {G}
@@ -69480,18 +69452,6 @@ Cast Seedtime only during your turn.
 Take an extra turn after this one if an opponent cast a blue spell this turn.
 JUD R
 
-Seek
-{W}{B}
-Instant
-Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.
-DIS R
-
-Seek
-{W}{B}
-Instant
-Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.
-DIS R
-
 Seek the Horizon
 {3}{G}
 Sorcery
@@ -72322,18 +72282,6 @@ Simoon
 Instant
 Simoon deals 1 damage to each creature target opponent controls.
 VI U, IN U
-
-Simple
-{1}{G}{W}
-Sorcery
-Destroy all Auras and Equipment.
-DIS U
-
-Simple
-{1}{G}{W}
-Sorcery
-Destroy all Auras and Equipment.
-DIS U
 
 Simplify
 {G}
@@ -76357,6 +76305,17 @@ Until end of turn, whenever target creature deals damage, you gain that much lif
 Draw a card.
 OD U
 
+Spite
+{3}{U}
+Instant
+Counter target noncreature spell.
+----
+Malice
+{3}{B}
+Instant
+Destroy target nonblack creature. It can't be regenerated.
+IN U (x2), DDH U
+
 Spitebellows
 {5}{R}
 Creature - Elemental
@@ -77104,6 +77063,17 @@ Creature - Antelope Beast
 Trample (If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)
 At the beginning of your upkeep, return a green creature you control to its owner's hand.
 VI U, 10E U, DDD U
+
+Stand
+{W}
+Instant
+Prevent the next 2 damage that would be dealt to target creature this turn.
+----
+Deliver
+{2}{U}
+Instant
+Return target permanent to its owner's hand.
+IN U (x2)
 
 Stand Firm
 {W}
@@ -78760,18 +78730,6 @@ Instant
 Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life.
 ROE U
 
-Suffering
-{3}{R}
-Sorcery
-Destroy target land.
-IN U (x2), DDH U
-
-Suffering
-{3}{R}
-Sorcery
-Destroy target land.
-IN U (x2), DDH U
-
 Suffocating Blast
 {1}{U}{U}{R}
 Instant
@@ -79243,6 +79201,17 @@ Superior Numbers
 Sorcery
 Superior Numbers deals damage to target creature equal to the number of creatures you control in excess of the number of creatures target opponent controls.
 MI U
+
+Supply
+{X}{G}{W}
+Sorcery
+Put X 1/1 green Saproling creature tokens onto the battlefield.
+----
+Demand
+{1}{W}{U}
+Sorcery
+Search your library for a multicolored card, reveal it, and put it into your hand. Then shuffle your library.
+DIS U
 
 Suppress
 {2}{B}
@@ -84753,6 +84722,17 @@ Flying
 Whenever Treva, the Renewer deals combat damage to a player, you may pay {2}{W}. If you do, choose a color, then you gain 1 life for each permanent of that color.
 IN R, DDE R
 
+Trial
+{W}{U}
+Instant
+Return all creatures blocking or blocked by target creature to their owner's hand.
+----
+Error
+{U}{B}
+Instant
+Counter target multicolored spell.
+DIS U
+
 Triangle of War
 {1}
 Artifact
@@ -89911,18 +89891,6 @@ Champion a Merfolk (When this enters the battlefield, sacrifice it unless you ex
 Whenever Wanderwine Prophets deals combat damage to a player, you may sacrifice a Merfolk. If you do, take an extra turn after this one.
 LRW R
 
-Wane
-{W}
-Instant
-Destroy target enchantment.
-IN U (x2), ARC U
-
-Wane
-{W}
-Instant
-Destroy target enchantment.
-IN U (x2), ARC U
-
 Waning Wurm
 {3}{B}
 Creature - Zombie Wurm
@@ -90428,6 +90396,17 @@ Creature - Bird Soldier
 Flying
 Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
 ALA C
+
+Wax
+{G}
+Instant
+Target creature gets +2/+2 until end of turn.
+----
+Wane
+{W}
+Instant
+Destroy target enchantment.
+IN U (x2), ARC U
 
 Waxmane Baku
 {2}{W}
