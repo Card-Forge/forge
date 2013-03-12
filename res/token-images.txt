@@ -215,6 +215,7 @@ wu_1_1_bird.jpg                        http://www.cardforge.org/fpics/tokens/wu_
 
 # //Emblems and extras
 chandra_the_firebrand_effect.jpg       http://www.cardforge.org/fpics/effects/chandra_the_firebrand_effect.jpg
+domri_rade_emblem.jpg                  http://www.cardforge.org/fpics/effects/domri_rade_emblem.jpg
 elspeth_knight_errant_emblem.jpg       http://www.cardforge.org/fpics/effects/elspeth_knight_errant_emblem.jpg
 koth_of_the_hammer_emblem.jpg          http://www.cardforge.org/fpics/effects/koth_of_the_hammer_emblem.jpg
 liliana_of_the_dark_realms_emblem.jpg  http://www.cardforge.org/fpics/effects/liliana_of_the_dark_realms_emblem.jpg

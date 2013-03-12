@@ -1,0 +1,16 @@
+Name:Inner-Flame Igniter
+ManaCost:2 R
+Types:Creature Elemental Warrior
+Text:no text
+PT:2/2
+A:AB$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | SubAbility$ StoreNum | StackDescription$ SpellDescription | SpellDescription$ Creatures you control get +1/+0 until end of turn. If this is the third time this ability has resolved this turn, creatures you control gain first strike until end of turn.
+SVar:StoreNum:DB$ StoreSVar | SVar$ InnerFlameStrength | Type$ CountSVar | Expression$ InnerFlameStrength/Plus.1 | SubAbility$ InnerHeatStrike
+SVar:InnerHeatStrike:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike | ConditionCheckSVar$ InnerFlameStrength | ConditionSVarCompare$ EQ3 | StackDescription$ None
+SVar:InnerFlameStrength:Number$0
+SVar:X:Count$RememberedSize
+T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigReset | Static$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True
+SVar:TrigReset:AB$ StoreSVar | Cost$ 0 | SVar$ InnerFlameStrength | Type$ Number | Expression$ 0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_flame_igniter.jpg
+Oracle:{2}{R}: Creatures you control get +1/+0 until end of turn. If this is the third time this ability has resolved this turn, creatures you control gain first strike until end of turn.
+SetInfo:LRW Uncommon
