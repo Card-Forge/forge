@@ -5250,6 +5250,7 @@ res/cardsfolder/i/inner_calm_outer_strength.txt svneol=native#text/plain
 res/cardsfolder/i/inner_chamber_guard.txt svneol=native#text/plain
 res/cardsfolder/i/inner_fire.txt svneol=native#text/plain
 res/cardsfolder/i/inner_flame_acolyte.txt svneol=native#text/plain
+res/cardsfolder/i/inner_flame_igniter.txt -text
 res/cardsfolder/i/inner_sanctum.txt -text
 res/cardsfolder/i/innocence_kami.txt svneol=native#text/plain
 res/cardsfolder/i/innocent_blood.txt svneol=native#text/plain
