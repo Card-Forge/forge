@@ -62,6 +62,10 @@ Goblin Assassin
 Chain Lightning
 Chain of Vapor
 Vision Charm
+Ooze Flux
+Simic Manipulator
+Ashling the Pilgrim
+Inner-Flame Igniter
 
 
 New Phenomenons:

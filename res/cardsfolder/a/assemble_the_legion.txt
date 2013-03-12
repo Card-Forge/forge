@@ -3,7 +3,7 @@ ManaCost:3 R W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a muster counter on CARDNAME. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on CARDNAME.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ MUSTER | CounterNum$ 1 | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenImage$ RW 1 1 Soldier | TokenAmount$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ Red,White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | References$ X
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ Red,White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | References$ X
 SVar:X:Count$CardCounters.MUSTER
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assemble_the_legion.jpg
 Oracle:At the beginning of your upkeep, put a muster counter on Assemble the Legion. Then put a 1/1 red and white Soldier creature token with haste onto the battlefield for each muster counter on Assemble the Legion.

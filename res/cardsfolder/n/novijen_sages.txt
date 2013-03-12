@@ -1,0 +1,9 @@
+Name:Novijen Sages
+ManaCost:4 U U
+Types:Creature Human Advisor Mutant
+PT:0/0
+K:Graft 4
+A:AB$ Draw | Cost$ 1 SubCounter<2/P1P1/Creature/among creatures you control> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/novijen_sages.jpg
+Oracle:Graft 4 (This creature enters the battlefield with four +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\n{1}, Remove two +1/+1 counters from among creatures you control: Draw a card.
+SetInfo:DIS Rare
