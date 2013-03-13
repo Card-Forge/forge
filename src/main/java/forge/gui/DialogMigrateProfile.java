@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 import javax.swing.JComboBox;
@@ -64,12 +65,18 @@ import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
 import forge.properties.NewConstants;
 
+/**
+ * This class implements an overlay-based dialog that imports data from a user-selected directory
+ * into the correct locations in the user and cache directories.  There is a lot of I/O and data
+ * processing done in this class, so most operations are asynchronous.
+ */
 public class DialogMigrateProfile {
     private final Runnable _onImportSuccessful;
     private final FButton  _btnStart;
     private final FLabel   _btnChooseDir;
     private final JPanel   _selectionPanel;
     
+    // volatile since it is checked from multiple threads
     private volatile boolean _cancel;
     
     @SuppressWarnings("serial")
@@ -83,6 +90,7 @@ public class DialogMigrateProfile {
         // header
         p.add(new FLabel.Builder().text((isMigration ? "Migrate" : "Import") + " profile data").fontSize(15).build(), "center");
         
+        // add some help text if this is for the initial data migration
         if (isMigration) {
             FPanel blurbPanel = new FPanel(new MigLayout("insets dialog, gap 10, center, wrap"));
             blurbPanel.setOpaque(false);
@@ -124,12 +132,18 @@ public class DialogMigrateProfile {
         _fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         _btnChooseDir.setCommand(new Command() {
             @Override public void execute() {
+                // bring up a file open dialog and, if the OK button is selected, apply the filename
+                // to the import source text field
                 if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(null)) {
                     txfSrc.setText(_fileChooser.getSelectedFile().getAbsolutePath());
                 }
             }
         });
         importSourcePanel.add(_btnChooseDir, "h pref+8!, w pref+12!");
+        
+        // add change handler to the import source text field that starts up a
+        // new analyzer.  it also interacts with the current active analyzer,
+        // if any, to make sure it cancels out before the new one is initiated
         txfSrc.getDocument().addDocumentListener(new DocumentListener() {
             boolean _analyzerActive; // access synchronized on _onAnalyzerDone
             String prevText;
@@ -144,8 +158,11 @@ public class DialogMigrateProfile {
             @Override public void removeUpdate(DocumentEvent e)  { }
             @Override public void changedUpdate(DocumentEvent e) { }
             @Override public void insertUpdate(DocumentEvent e)  {
+                // text field is read-only, so the only time this will get updated
+                // is when _btnChooseDir does it 
                 final String text = txfSrc.getText();
                 if (text.equals(prevText)) {
+                    // only restart the analyzer if the directory has changed
                     return;
                 }
                 prevText = text;
@@ -154,9 +171,14 @@ public class DialogMigrateProfile {
                 _cancel = true;
                 
                 if (!text.isEmpty()) {
+                    // ensure we don't get two instances of this function running at the same time
                     _btnChooseDir.setEnabled(false);
+                    
+                    // re-disable the start button.  it will be enabled if the previous analyzer has
+                    // already successfully finished
                     _btnStart.setEnabled(false);
                     
+                    // we have to wait in a background thread since we can't block in the GUI thread
                     SwingWorker<Void, Void> analyzerStarter = new SwingWorker<Void, Void>() {
                         @Override
                         protected Void doInBackground() throws Exception {
@@ -166,7 +188,6 @@ public class DialogMigrateProfile {
                                     _onAnalyzerDone.wait();
                                 }
                             }
-                            
                             return null;
                         }
                         
@@ -175,11 +196,14 @@ public class DialogMigrateProfile {
                         protected void done() {
                             _cancel = false;
                             synchronized (_onAnalyzerDone) {
+                                // this will populate the panel with data selection widgets
                                 _AnalyzerUpdater analyzer = new _AnalyzerUpdater(text, _onAnalyzerDone);
                                 analyzer.execute();
                                 _analyzerActive = true;
                             }
                             if (!isMigration) {
+                                // only enable the directory choosing button if this is not a migration dialog
+                                // since in that case we're permanently locked to the starting directory
                                 _btnChooseDir.setEnabled(true);
                             }
                         }
@@ -190,7 +214,7 @@ public class DialogMigrateProfile {
         });
         p.add(importSourcePanel, "gaptop 20, pushx, growx");
         
-        // prepare import selection panel
+        // prepare import selection panel (will be cleared and filled in later by an analyzer)
         _selectionPanel = new JPanel();
         _selectionPanel.setOpaque(false);
         p.add(_selectionPanel, "growx, h 100%, gaptop 10");
@@ -201,7 +225,6 @@ public class DialogMigrateProfile {
         };
         _btnStart = new FButton("Start import");
         _btnStart.setEnabled(false);
-
         final FButton btnCancel = new FButton("Cancel");
         btnCancel.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) {
@@ -223,25 +246,27 @@ public class DialogMigrateProfile {
         southPanel.setOpaque(false);
         southPanel.add(_btnStart, "center, w pref+72!, h pref+12!");
         southPanel.add(btnCancel, "center, w pref+72!, h pref+12!");
-        
         p.add(southPanel, "growx");
       
         JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
         overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
-        overlay.add(p, "w 400::80%, h 100::90%");
+        overlay.add(p, "w 500::80%, h 100::90%");
         SOverlayUtils.showOverlay();
         
-        // focus cancel button
+        // focus cancel button after the dialog is shown
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() { btnCancel.requestFocusInWindow(); }
         });
         
+        // if our source dir is provided, set the text, which will fire off an analyzer
         if (isMigration) {
             File srcDirFile = new File(forcedSrcDir);
             txfSrc.setText(srcDirFile.getAbsolutePath());
         }
     }
     
+    // encapsulates the choices in the combobox for choosing the destination paths for
+    // decks of unknown type
     private class _UnknownDeckChoice {
         public final String name;
         public final String path;
@@ -251,14 +276,18 @@ public class DialogMigrateProfile {
             path = path0;
         }
         
-        @Override
-        public String toString() { return name; }
+        @Override public String toString() { return name; }
     }
     
+    // this class owns the import selection widgets and bridges them with the running
+    // MigrationSourceAnalyzer instance
     private class _AnalyzerUpdater extends SwingWorker<Void, Void> {
+        // associates a file operation type with its enablement checkbox and the set
+        // of file move/copy operations that enabling it would entail
         private final Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> _selections =
                 new HashMap<OpType, Pair<FCheckBox, ? extends Map<File, File>>>();
         
+        // attached to all changeable widgets to keep the UI in sync
         private final ChangeListener _stateChangedListener = new ChangeListener() {
             @Override public void stateChanged(ChangeEvent arg0) { _updateUI(); }
         };
@@ -271,6 +300,7 @@ public class DialogMigrateProfile {
         private final JTextArea    _operationLog;
         private final JProgressBar _progressBar;
         
+        // updates the _operationLog widget asynchronously to keep the UI responsive
         private final _OperationLogAsyncUpdater _operationLogUpdater;
         
         public _AnalyzerUpdater(String srcDir, Runnable onAnalyzerDone) {
@@ -362,10 +392,11 @@ public class DialogMigrateProfile {
             _progressBar.setStringPainted(true);
             _selectionPanel.add(_progressBar, "w 100%!");
             
+            // start the op log updater
             _operationLogUpdater = new _OperationLogAsyncUpdater(_selections, _operationLog);
             _operationLogUpdater.start();
             
-            // set checkbox labels
+            // set initial checkbox labels
             _updateUI();
             
             // resize the panel properly now that the _selectionPanel is filled in
@@ -379,14 +410,16 @@ public class DialogMigrateProfile {
             cb.setSelected(true);
             cb.addChangeListener(_stateChangedListener);
             
-            // use a skip list map instead of a regular hashmap so that the files are sorted alphabetically
+            // use a skip list map instead of a regular hashmap so that the files are sorted
+            // alphabetically in the logs.  note that this is a concurrent data structure
+            // since it will be modified and read simultaneously by different threads
             _selections.put(type, Pair.of(cb, new ConcurrentSkipListMap<File, File>()));
             parent.add(cb);
         }
         
         // must be called from GUI event loop thread
         private void _updateUI() {
-            // update checkbox text lables with current totals
+            // update checkbox text labels with current totals
             Set<OpType> selectedOptions = new HashSet<OpType>();
             for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
                 Pair<FCheckBox, ? extends Map<File, File>> selection = entry.getValue();
@@ -399,17 +432,10 @@ public class DialogMigrateProfile {
                 cb.setText(String.format("%s (%d)", cb.getName(), selection.getRight().size()));
             }
             
+            // asynchronously update the text in the op log, which may be many tens of thousands of lines long
+            // if this were done synchronously the UI would slow to a crawl
             _operationLogUpdater.requestUpdate(selectedOptions, (_UnknownDeckChoice)_unknownDeckCombo.getSelectedItem(),
                     _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
-        }
-        
-        private void _disableAll() {
-            for (Pair<FCheckBox, ? extends Map<File, File>> selection : _selections.values()) {
-                selection.getLeft().setEnabled(false);
-            }
-            _unknownDeckCombo.setEnabled(false);
-            _moveCheckbox.setEnabled(false);
-            _overwriteCheckbox.setEnabled(false);
         }
         
         @Override
@@ -450,6 +476,7 @@ public class DialogMigrateProfile {
                     }
                 });
     
+                // update the progress bar widget from the GUI event loop
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override public void run() {
                         if (_cancel) { return; }
@@ -463,6 +490,7 @@ public class DialogMigrateProfile {
                     }
                 });
                 
+                // does not return until analysis is complete or has been canceled
                 msa.doAnalysis();
             } catch (final Exception e) {
                 _cancel = true;
@@ -474,8 +502,8 @@ public class DialogMigrateProfile {
                     }
                 });
             } finally {
-                if (null != timer)
-                {
+                // ensure the UI update timer is stopped after analysis is complete
+                if (null != timer) {
                     timer.stop();
                 }
             }
@@ -491,28 +519,49 @@ public class DialogMigrateProfile {
                 _updateUI();
                 _progressBar.setString("Analysis complete");
                 
+                // clear any previously-set action listeners on the start button
+                // in case we've previously completed an analysis but changed the directory
+                // instead of starting the import
+                for (ActionListener a : _btnStart.getActionListeners()) {
+                    _btnStart.removeActionListener(a);
+                }
+                
+                // set up the start button to start the prepared import on click
                 _btnStart.addActionListener(new ActionListener() {
                     @Override public void actionPerformed(ActionEvent arg0) {
-                        _btnStart.removeActionListener(this);
+                        // ensure no other actions (except for cancel) can be taken while the import is in progress
                         _btnStart.setEnabled(false);
                         _btnChooseDir.setEnabled(false);
                         
-                        _disableAll();
+                        for (Pair<FCheckBox, ? extends Map<File, File>> selection : _selections.values()) {
+                            selection.getLeft().setEnabled(false);
+                        }
+                        _unknownDeckCombo.setEnabled(false);
+                        _moveCheckbox.setEnabled(false);
+                        _overwriteCheckbox.setEnabled(false);
+                        
+                        // stop updating the operation log -- the importer needs it now
                         _operationLogUpdater.requestStop();
                         
+                        // start importing!
                         _Importer importer = new _Importer(
                                 _selections, _unknownDeckCombo, _operationLog, _progressBar,
                                 _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
                         importer.execute();
                     }
                 });
+                
+                // import ready to proceed: enable the start button
                 _btnStart.setEnabled(true);
             }
         
+            // report to the Choose Directory button that this analysis run has stopped
             _onAnalyzerDone.run();
         }
     }
     
+    // asynchronously iterates through the given concurrent maps and populates the operation log with
+    // the proposed operations
     private class _OperationLogAsyncUpdater extends Thread {
         final Map<OpType, Map<File, File>> _selections;
         final JTextArea                    _operationLog; // safe to set text from another thread
@@ -532,12 +581,14 @@ public class DialogMigrateProfile {
             _selections   = new HashMap<OpType, Map<File, File>>();
             _operationLog = operationLog;
             
-            // remove references to FCheckBox when adding map -- we can't access it from the other thread anyway
+            // remove references to FCheckBox when populating map -- we can't safely access it from a thread
+            // anyway and it's better to keep our data structure clean to prevent mistakes
             for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : selections.entrySet()) {
                 _selections.put(entry.getKey(), entry.getValue().getRight());
             }
         }
 
+        // updates the synchronized data with values for the next iteration in _run
         public synchronized void requestUpdate(
                 Set<OpType> selectedOptions, _UnknownDeckChoice unknownDeckChoice, boolean isMove, boolean isOverwrite) {
             ++_updateCallCnt;
@@ -572,6 +623,7 @@ public class DialogMigrateProfile {
                         if (_stop) { break; }
                     }
                     
+                    // safely copy synchronized data to local values that we will use for this runthrough
                     lastUpdateCallCnt = _updateCallCnt;
                     selectedOptions   = _selectedOptions;
                     unknownDeckChoice = _unknownDeckChoice;
@@ -579,7 +631,7 @@ public class DialogMigrateProfile {
                     isOverwrite       = _isOverwrite;
                 }
                 
-                // set operation summary
+                // build operation log
                 StringBuilder log = new StringBuilder();
                 int totalOps = 0;
                 for (OpType opType : selectedOptions) {
@@ -596,6 +648,7 @@ public class DialogMigrateProfile {
                     }
                 }
                 
+                // append summary
                 if (0 < totalOps) {
                     log.append("\n");
                 }
@@ -604,6 +657,7 @@ public class DialogMigrateProfile {
                 log.append(isOverwrite ? "O" : "Not o");
                 log.append("verwriting existing files");
 
+                // set the JTextArea text directly (no need to use invokeLater: setText is thread-safe)
                 _operationLog.setText(log.toString());
             }
         }
@@ -611,10 +665,10 @@ public class DialogMigrateProfile {
         @Override
         public void run() {
             try { _run(); } catch (final InterruptedException e) {
-                // we never interrupt the thread, so this is not expected to happen
                 _cancel = true;
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override public void run() {
+                        // we never interrupt the thread, so this is not expected to happen
                         BugReporter.reportException(e);
                     }
                 });
@@ -622,6 +676,7 @@ public class DialogMigrateProfile {
         }
     }
 
+    // asynchronously completes the specified I/O operations and updates the progress bar and operation log
     private class _Importer extends SwingWorker<Void, Void> {
         private final Map<File, File> _operations;
         private final JTextArea       _operationLog;
@@ -636,29 +691,21 @@ public class DialogMigrateProfile {
             _move         = move;
             _overwrite    = overwrite;
             
-            int totalOps = 0;
-            for (Pair<FCheckBox, ? extends Map<File, File>> selection : selections.values()) {
-                if (selection.getLeft().isSelected()) {
-                    totalOps += selection.getRight().size();
-                }
-            }
-            _operations = new HashMap<File, File>(totalOps);
+            // build local operations map that only includes data that we can access from the background thread
+            // use a tree map to maintain alphabetical order
+            _operations = new TreeMap<File, File>();
             for (Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : selections.entrySet()) {
                 Pair<FCheckBox, ? extends Map<File, File>> selection = entry.getValue();
                 if (selection.getLeft().isSelected()) {
                     if (OpType.UNKNOWN_DECK != entry.getKey()) {
                         _operations.putAll(selection.getRight());
                     } else {
+                        // map unknown decks to selected directory
                         for (Map.Entry<File, File> op : selection.getRight().entrySet()) {
                             _UnknownDeckChoice choice = (_UnknownDeckChoice)unknownDeckCombo.getSelectedItem();
                             _operations.put(op.getKey(), new File(choice.path, op.getValue().getName()));
                         }
                     }
-                }
-            }
-            for (Pair<FCheckBox, ? extends Map<File, File>> selection : selections.values()) {
-                if (selection.getLeft().isSelected()) {
-                    _operations.putAll(selection.getRight());
                 }
             }
             
@@ -674,9 +721,9 @@ public class DialogMigrateProfile {
                 // working with textbox text is thread safe
                 _operationLog.setText("");
                 
-                int numOps = 0;
+                int numOps       = 0;
                 int numSucceeded = 0;
-                int numFailed = 0;
+                int numFailed    = 0;
                 for (Map.Entry<File, File> op : _operations.entrySet()) {
                     if (_cancel) { break; }
                     
@@ -714,11 +761,14 @@ public class DialogMigrateProfile {
                     }
                 }
                 
+                // append summary footer
                 _operationLog.append(String.format("\nImport complete.  %d files %s, %d errors",
                         numSucceeded, _move ? "moved" : "copied", numFailed));
             } catch (final Exception e) {
                 _cancel = true;
                 
+                // report any exceptions in a standard dialog
+                // note that regular I/O errors don't throw, they'll just be mentioned in the log
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override public void run() {
                         _progressBar.setString("Error");
@@ -739,6 +789,7 @@ public class DialogMigrateProfile {
             _onImportSuccessful.run();
         }
         
+        // actual file copy routine.  uses java.nio classes for ultra-fast copying
         private void _copyFile(File srcFile, File destFile) throws IOException {
             destFile.getParentFile().mkdirs();
             
