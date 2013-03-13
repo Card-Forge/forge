@@ -143,9 +143,9 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                     // - for when it exists
-                } else if (choser.isHuman() && !sa.hasParam("NoLooking")) {
+                } else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
-                    GuiChoose.one("Looking at cards from library", top);
+                    choser.getController().reveal("Looking at cards from library", top, library.getZoneType(), library.getPlayer());
                 }
 
                 if ((sa.hasParam("RememberRevealed")) && !sa.hasParam("RevealValid")) {
@@ -251,7 +251,7 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                             for (j = 0; j < changeNum; j++) {
                                 Card chosen = ComputerUtilCard.getBestAI(valid);
-                                if (sa.getActivatingPlayer().isHuman() && p.isHuman()) {
+                                if (sa.getActivatingPlayer().isOpponentOf(choser) && p.isOpponentOf(choser)) {
                                     chosen = ComputerUtilCard.getWorstAI(valid);
                                 }
                                 if (chosen == null) {

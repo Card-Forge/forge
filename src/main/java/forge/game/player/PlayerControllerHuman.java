@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
@@ -20,6 +22,7 @@ import forge.deck.DeckSection;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
 import forge.gui.GuiUtils;
@@ -273,5 +276,16 @@ public class PlayerControllerHuman extends PlayerController {
     public List<Card> orderAttackers(Card blocker, List<Card> attackers) {
         GuiUtils.setPanelSelection(blocker);
         return GuiChoose.order("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#reveal(java.lang.String, java.util.List, forge.game.zone.ZoneType, forge.game.player.Player)
+     */
+    @Override
+    public void reveal(String string, List<Card> cards, ZoneType zone, Player owner) {
+        String message = string;
+        if ( StringUtils.isBlank(message) ) 
+            message = String.format("Looking at %s's %s", owner, zone);
+        GuiChoose.oneOrNone(message, cards);
     }
 }
