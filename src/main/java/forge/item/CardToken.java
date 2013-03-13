@@ -16,11 +16,9 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
     private String imageFileName;
     private CardRules card;
 
-    private static String toTokenFilename(final String in) {
-        final StringBuffer out = new StringBuffer();
-        
-        out.append(ImageCache.TOKEN_PREFIX);
-        
+    // takes a string of the form "<colors> <power> <toughness> <name>" such as: "B 0 0 Germ"
+    public static String makeTokenFileName(String in) {
+        StringBuffer out = new StringBuffer(ImageCache.TOKEN_PREFIX);
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
@@ -40,7 +38,7 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
     public static String makeTokenFileName(String colors, String power, String toughness, String name) {
         StringBuilder fileName = new StringBuilder();
         fileName.append(colors).append('_').append(power).append('_').append(toughness).append('_').append(name);
-        return toTokenFilename(fileName.toString());
+        return makeTokenFileName(fileName.toString());
     }
     
     public CardToken(final CardRules c, CardEdition edition0, final String imageFileName) {

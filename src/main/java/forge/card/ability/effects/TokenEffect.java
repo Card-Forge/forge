@@ -67,7 +67,7 @@ public class TokenEffect extends SpellAbilityEffect {
         }
 
         if (mapParams.hasParam("TokenImage")) {
-            image = mapParams.getParam("TokenImage");
+            image = CardToken.makeTokenFileName(mapParams.getParam("TokenImage"));
         } else {
             image = "";
         }
