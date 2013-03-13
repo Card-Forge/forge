@@ -6,8 +6,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -37,6 +35,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
+import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FScrollPane;
@@ -227,26 +226,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     /** Consolidates checkbox styling in one place. */
     @SuppressWarnings("serial")
-    private class OptionsCheckBox extends JCheckBox {
+    private class OptionsCheckBox extends FCheckBox {
         public OptionsCheckBox(final String txt0) {
-            super();
-            setText(txt0);
+            super(txt0);
             setFont(FSkin.getBoldFont(12));
-            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
-            setOpaque(false);
-
-            this.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(final MouseEvent evt) {
-                    setOpaque(true);
-                }
-
-                @Override
-                public void mouseExited(final MouseEvent evt) {
-                    setOpaque(false);
-                }
-            });
         }
     }
 
