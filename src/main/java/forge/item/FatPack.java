@@ -52,7 +52,7 @@ public class FatPack extends OpenablePack {
     }
 
     @Override
-    public final String getImageFilename() {
+    public final String getImageKey() {
         return ImageCache.FATPACK_PREFIX + this.contents.getEdition();
     }
 

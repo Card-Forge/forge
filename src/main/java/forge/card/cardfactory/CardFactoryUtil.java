@@ -2448,7 +2448,7 @@ public class CardFactoryUtil {
         final List<Card> list = new ArrayList<Card>();
         final Card c = new Card();
         c.setName(name);
-        c.setImageFilename(imageName);
+        c.setImageKey(imageName);
 
         // TODO - most tokens mana cost is 0, this needs to be fixed
         // c.setManaCost(manaCost);
@@ -2509,7 +2509,7 @@ public class CardFactoryUtil {
         final List<String> kal = thisToken.getIntrinsicKeyword();
         final String[] tokenKeywords = new String[kal.size()];
         kal.toArray(tokenKeywords);
-        final List<Card> tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageFilename(),
+        final List<Card> tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageKey(),
                 thisToken.getController(), thisToken.getManaCost().toString(), tokenTypes, thisToken.getBaseAttack(),
                 thisToken.getBaseDefense(), tokenKeywords);
 

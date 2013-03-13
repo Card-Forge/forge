@@ -419,7 +419,7 @@ public class SSubmenuQuestUtil {
         msh.addPlayer(Singletons.getControl().getLobby().getQuestPlayer(), humanStart);
 
         LobbyPlayer aiPlayer = Singletons.getControl().getLobby().findLocalPlayer(PlayerType.COMPUTER, event.getOpponent() == null ? event.getTitle() : event.getOpponent());
-        aiPlayer.setPicture(event.getIconFilename());
+        aiPlayer.setIconImageKey(event.getIconImageKey());
         msh.addPlayer(aiPlayer, aiStart);
 
         Singletons.getModel().getMatch().initMatch(GameType.Quest, msh.getPlayerMap());

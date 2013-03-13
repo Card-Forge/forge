@@ -50,7 +50,7 @@ public class CardCharacteristics {
     private ArrayList<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
     private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
     private ArrayList<String> staticAbilityStrings = new ArrayList<String>();
-    private String imageFilename = "";
+    private String imageKey = "";
     private Map<String, String> sVars = new TreeMap<String, String>();
 
     private CardRarity rarity = CardRarity.Unknown;
@@ -279,8 +279,8 @@ public class CardCharacteristics {
      * 
      * @return the imageFilename
      */
-    public final String getImageFilename() {
-        return this.imageFilename;
+    public final String getImageKey() {
+        return this.imageKey;
     }
 
     /**
@@ -289,8 +289,8 @@ public class CardCharacteristics {
      * @param imageFilename0
      *            the imageFilename to set
      */
-    public final void setImageFilename(final String imageFilename0) {
-        this.imageFilename = imageFilename0;
+    public final void setImageKey(final String imageFilename0) {
+        this.imageKey = imageFilename0;
     }
 
     /**
@@ -410,7 +410,7 @@ public class CardCharacteristics {
         // ArrayList<String> staticAbilityStrings : list of String objects so use copy constructor
         this.staticAbilityStrings = new ArrayList<String>(source.getStaticAbilityStrings());
         // String imageFilename = copy reference
-        this.imageFilename = source.getImageFilename();
+        this.imageKey = source.getImageKey();
         this.rarity = source.rarity;
         this.curSetCode = source.curSetCode;
         // Map<String, String> sVars

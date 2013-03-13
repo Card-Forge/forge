@@ -94,7 +94,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy = CardFactory.copyStats(c);
 
                         copy.setName(c.getName());
-                        copy.setImageFilename(c.getImageFilename());
+                        copy.setImageKey(c.getImageKey());
 
                         copy.setOwner(controller);
                         copy.addController(controller);
@@ -126,7 +126,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                     if (c.isFlipCard()) { // Cloned Flips CAN flip.
                         copy.setState(CardCharacteristicName.Original);
                         c.setState(CardCharacteristicName.Original);
-                        copy.setImageFilename(c.getImageFilename());
+                        copy.setImageKey(c.getImageKey());
                         if (!c.isInAlternateState()) {
                             copy.setState(CardCharacteristicName.Flipped);
                         }

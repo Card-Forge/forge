@@ -202,7 +202,7 @@ public final class CardUtil {
         ret.setName("");
         ret.setType(types);
 
-        ret.setImageFilename(NewConstants.CACHE_MORPH_IMAGE_FILE);
+        ret.setImageKey(NewConstants.CACHE_MORPH_IMAGE_FILE);
 
         return ret;
     }

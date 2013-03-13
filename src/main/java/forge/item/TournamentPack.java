@@ -43,7 +43,7 @@ public class TournamentPack extends OpenablePack {
     }
 
     @Override
-    public final String getImageFilename() {
+    public final String getImageKey() {
         return ImageCache.TOURNAMENTPACK_PREFIX + contents.getEdition();
     }
 

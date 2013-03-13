@@ -39,7 +39,7 @@ public class BoosterPack extends OpenablePack {
     }
 
     @Override
-    public final String getImageFilename() {
+    public final String getImageKey() {
         return ImageCache.BOOSTER_PREFIX + this.contents.getEdition();
     }
 

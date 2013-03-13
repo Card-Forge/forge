@@ -296,7 +296,7 @@ public class MigrationSourceAnalyzer {
 
         int numPics = urls.split("\\\\").length;
         for (int artIdx = 0; numPics > artIdx; ++artIdx) {
-            String filename = c.getImageFilename(backFace, artIdx, false) + ".jpg";
+            String filename = c.getImageKey(backFace, artIdx, false) + ".jpg";
             _defaultPicNames.add(filename);
             
             String oldFilenameBase = _oldCleanString(filename.replace(".full.jpg", ""));
@@ -360,9 +360,9 @@ public class MigrationSourceAnalyzer {
     private static void _addSetCards(Set<String> cardFileNames, Iterable<CardPrinted> library, Predicate<CardPrinted> filter) {
         for (CardPrinted c : Iterables.filter(library, filter)) {
             boolean hasBackFace = null != c.getRules().getPictureOtherSideUrl();
-            cardFileNames.add(c.getImageFilename(false, c.getArtIndex(), true) + ".jpg");
+            cardFileNames.add(c.getImageKey(false, c.getArtIndex(), true) + ".jpg");
             if (hasBackFace) {
-                cardFileNames.add(c.getImageFilename(true, c.getArtIndex(), true) + ".jpg");
+                cardFileNames.add(c.getImageKey(true, c.getArtIndex(), true) + ".jpg");
             }
         }
     }

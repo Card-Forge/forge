@@ -86,7 +86,7 @@ public class CloneEffect extends SpellAbilityEffect {
             tgtCard = cloneTargets.get(0);
         }
 
-        String imageFileName = host.getImageFilename();
+        String imageFileName = host.getImageKey();
 
         boolean keepName = sa.hasParam("KeepName");
         String originalName = tgtCard.getName();
@@ -152,7 +152,7 @@ public class CloneEffect extends SpellAbilityEffect {
             }
             tgtCard.setFlipCard(true);
             //keep the Clone card image for the cloned card
-            tgtCard.setImageFilename(imageFileName);
+            tgtCard.setImageKey(imageFileName);
 
             if (!tgtCard.isFlipped()) {
               tgtCard.setState(CardCharacteristicName.Original);
@@ -171,7 +171,7 @@ public class CloneEffect extends SpellAbilityEffect {
         tgtCard.clearImprinted();
 
         //keep the Clone card image for the cloned card
-        tgtCard.setImageFilename(imageFileName);
+        tgtCard.setImageKey(imageFileName);
 
         // check if clone is now an Aura that needs to be attached
         if (tgtCard.isAura()) {

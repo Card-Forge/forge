@@ -61,7 +61,7 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
 
     @Override public CardRarity getRarity() { return CardRarity.Common; } // They don't have rarity though!
 
-    @Override public String getImageFilename() { return imageFileName; }
+    @Override public String getImageKey() { return imageFileName; }
 
     @Override public String getItemType() { return "Token"; }
     @Override public Card getMatchingForgeCard() { return toForgeCard(null); } // hope this won't be queried too frequently, so no cache 

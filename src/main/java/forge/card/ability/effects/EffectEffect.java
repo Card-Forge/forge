@@ -104,7 +104,7 @@ public class EffectEffect extends SpellAbilityEffect {
                             // nuked
         eff.addController(controller);
         eff.setOwner(controller);
-        eff.setImageFilename(sa.hasParam("Image") ? sa.getParam("Image") : hostCard.getImageFilename());
+        eff.setImageKey(sa.hasParam("Image") ? sa.getParam("Image") : hostCard.getImageKey());
         eff.setColor(hostCard.getColor());
         eff.setImmutable(true);
         eff.setEffectSource(hostCard);

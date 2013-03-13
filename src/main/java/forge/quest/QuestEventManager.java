@@ -28,6 +28,7 @@ import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.ImageCache;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
@@ -396,7 +397,7 @@ public class QuestEventManager {
             } else if (key.equalsIgnoreCase("Description")) {
                 qe.setDescription(value);
             } else if (key.equalsIgnoreCase("Icon")) {
-                qe.setIconFilename(value);
+                qe.setIconImageKey(ImageCache.ICON_PREFIX + value);
             } else if (key.equalsIgnoreCase("Card Reward")) {
                 qe.setCardReward(value);
             }

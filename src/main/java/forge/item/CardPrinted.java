@@ -139,15 +139,15 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
     }
     
     @Override
-    public String getImageFilename() {
+    public String getImageKey() {
         return getImageLocator(getImageName(), getArtIndex(), true, false);
     }
     
-    public String getImageFilename(boolean backFace) {
-        return getImageFilename(backFace, getArtIndex(), true);
+    public String getImageKey(boolean backFace) {
+        return getImageKey(backFace, getArtIndex(), true);
     }
     
-    public String getImageFilename(boolean backFace, int artIdx, boolean includeSet) {
+    public String getImageKey(boolean backFace, int artIdx, boolean includeSet) {
         final String nameToUse;
         if (backFace) {
             if (null == card.getOtherPart()) {

@@ -59,7 +59,7 @@ public class PreconDeck implements InventoryItemFromSet {
      * @see forge.item.InventoryItemFromSet#getImageFilename()
      */
     @Override
-    public String getImageFilename() {
+    public String getImageKey() {
         return ImageCache.PRECON_PREFIX + imageFilename;
     }
 

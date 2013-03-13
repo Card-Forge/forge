@@ -155,7 +155,7 @@ public interface IPaperCard {
     public abstract boolean isToken();
     public abstract CardRules getRules();
     public abstract CardRarity getRarity();
-    public abstract String getImageFilename();
+    public abstract String getImageKey();
 
     public abstract String getItemType();
 

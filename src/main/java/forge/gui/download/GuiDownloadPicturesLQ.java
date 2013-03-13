@@ -71,7 +71,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         for (String url : urls.split("\\\\")) {
             ++artIdx;
 
-            String filename = c.getImageFilename(backFace, artIdx, false);
+            String filename = c.getImageKey(backFace, artIdx, false);
             if (filenames.contains(filename)) {
                 continue;
             }

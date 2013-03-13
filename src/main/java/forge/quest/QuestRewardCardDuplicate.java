@@ -41,7 +41,7 @@ public class QuestRewardCardDuplicate implements IQuestRewardCard {
      * @return an empty string
      */
     @Override
-    public String getImageFilename() {
+    public String getImageKey() {
         return "";
     }
 

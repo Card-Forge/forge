@@ -7,19 +7,17 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
+import forge.ImageCache;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
-import forge.properties.NewConstants;
 import forge.quest.QuestEvent;
 
 /** 
@@ -52,16 +50,7 @@ class PnlEvent extends JPanel {
     public PnlEvent(final QuestEvent e0) {
         super();
         this.event = e0;
-
-        // Icon
-        final File file = new File(NewConstants.CACHE_ICON_PICS_DIR, event.getIconFilename());
-
-        if (!file.exists()) {
-            img = FSkin.getIcon(FSkin.InterfaceIcons.ICO_UNKNOWN).getImage();
-        }
-        else {
-            img = (new ImageIcon(file.toString())).getImage();
-        }
+        img = ImageCache.getIcon(e0).getImage();
 
         wSrc = img.getWidth(null);
         hSrc = img.getHeight(null);
@@ -103,8 +92,6 @@ class PnlEvent extends JPanel {
 
     @Override
     public void paintComponent(final Graphics g) {
-       // super.paintComponent(g);
-
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setPaint(new GradientPaint(0, 0, clr3, getWidth(), 0, clr2));
         g2d.fillRect(0, 0, getWidth(), getHeight());

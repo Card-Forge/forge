@@ -60,7 +60,7 @@ public class GameNew {
                 if (preferences.getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
                     final int cntVariants = cardPrinted.getRules().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
                     if (cntVariants > 1) {
-                        card.setImageFilename(cardPrinted.getImageFilename(false, generator.nextInt(cntVariants), true));
+                        card.setImageKey(cardPrinted.getImageKey(false, generator.nextInt(cntVariants), true));
                     }
                 }
                 

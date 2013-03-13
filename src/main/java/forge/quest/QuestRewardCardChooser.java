@@ -175,7 +175,7 @@ public class QuestRewardCardChooser implements InventoryItem  {
      * @return an empty string
      */
     @Override
-    public String getImageFilename() {
+    public String getImageKey() {
         return "";
     }
 

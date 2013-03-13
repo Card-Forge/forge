@@ -35,7 +35,7 @@ public interface InventoryItem {
      * 
      * @return the image filename
      */
-    String getImageFilename();
+    String getImageKey();
 
     /**
      * Return type as a string.

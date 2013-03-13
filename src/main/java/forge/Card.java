@@ -251,9 +251,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.characteristicsMap.put(CardCharacteristicName.FaceDown, CardUtil.getFaceDownCharacteristic());
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
     public void refreshUniqueNumber() {
         this.setUniqueNumber(Card.nextUniqueNumber++);
     }
@@ -8514,27 +8511,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         return CardDb.instance().getCard(this.getName()).getEdition();
     }
 
-    /**
-     * <p>
-     * setImageFilename.
-     * </p>
-     * 
-     * @param iFN
-     *            a {@link java.lang.String} object.
-     */
-    public final void setImageFilename(final String iFN) {
-        this.getCharacteristics().setImageFilename(iFN);
+    public final void setImageKey(final String iFN) {
+        this.getCharacteristics().setImageKey(iFN);
     }
 
-    /**
-     * <p>
-     * getImageFilename.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getImageFilename() {
-        return this.getCharacteristics().getImageFilename();
+    public final String getImageKey() {
+        return this.getCharacteristics().getImageKey();
     }
 
     /**

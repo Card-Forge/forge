@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.cache.CacheLoader;
 
 import forge.error.BugReporter;
@@ -18,11 +20,18 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
     
     @Override
     public BufferedImage load(String key) {
+        if (StringUtils.isEmpty(key)) {
+            return null;
+        }
+        
         final String path;
         final String filename;
         if (key.startsWith(ImageCache.TOKEN_PREFIX)) {
             filename = key.substring(ImageCache.TOKEN_PREFIX.length());
             path = NewConstants.CACHE_TOKEN_PICS_DIR;
+        } else if (key.startsWith(ImageCache.ICON_PREFIX)) {
+            filename = key.substring(ImageCache.ICON_PREFIX.length());
+            path = NewConstants.CACHE_ICON_PICS_DIR;
         } else if (key.startsWith(ImageCache.BOOSTER_PREFIX)) {
             filename = key.substring(ImageCache.BOOSTER_PREFIX.length());
             path = NewConstants.CACHE_BOOSTER_PICS_DIR;

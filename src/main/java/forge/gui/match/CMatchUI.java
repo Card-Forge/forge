@@ -17,8 +17,6 @@
  */
 package forge.gui.match;
 
-import java.awt.Image;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,8 +26,10 @@ import javax.swing.ImageIcon;
 
 import forge.Card;
 import forge.GameEntity;
+import forge.ImageCache;
 import forge.Singletons;
 import forge.game.phase.PhaseType;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.gui.framework.EDocID;
 import forge.gui.match.controllers.CDetail;
@@ -42,7 +42,6 @@ import forge.gui.match.nonsingleton.VHand;
 import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.NewConstants;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -53,25 +52,21 @@ import forge.properties.NewConstants;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public enum CMatchUI {
-    /** */
     SINGLETON_INSTANCE;
 
-    private Image getPlayerAvatar(final Player p, final int defaultIndex) {
-        String strAvatarIcon = p.getLobbyPlayer().getPicture();
-        if (strAvatarIcon != null) {
-            final File f = new File(NewConstants.CACHE_ICON_PICS_DIR, strAvatarIcon);
-            if (f.exists()) {
-                return new ImageIcon(f.getPath()).getImage();
-            }
+    private ImageIcon getPlayerAvatar(final Player p, final int defaultIndex) {
+        LobbyPlayer lp = p.getLobbyPlayer();
+        ImageIcon ret = ImageCache.getIcon(lp);
+        if (null == ret) {
+            int iAvatar = lp.getAvatarIndex();
+            return new ImageIcon(FSkin.getAvatars().get(iAvatar >= 0 ? iAvatar : defaultIndex));
         }
-        int iAvatar = p.getLobbyPlayer().getAvatarIndex();
-        return FSkin.getAvatars().get(iAvatar >= 0 ? iAvatar : defaultIndex);
+        return ret;
     }
 
 
-    private void setAvatar(final VField view, final Image img) {
-
-        view.getLblAvatar().setIcon(new ImageIcon(img));
+    private void setAvatar(VField view, ImageIcon img) {
+        view.getLblAvatar().setIcon(img);
         view.getLblAvatar().getResizeTimer().start();
     }
 
@@ -95,7 +90,7 @@ public enum CMatchUI {
         VCommand humanCommand = new VCommand(EDocID.COMMAND_0, localPlayer);
         fields.add(0, humanField);
         commands.add(0, humanCommand);
-        setAvatar(humanField, FSkin.getAvatars().get(Integer.parseInt(indices[0])));
+        setAvatar(humanField, new ImageIcon(FSkin.getAvatars().get(Integer.parseInt(indices[0]))));
         humanField.getLayoutControl().initialize();
         humanCommand.getLayoutControl().initialize();
 
@@ -107,7 +102,7 @@ public enum CMatchUI {
             // A field must be initialized after it's instantiated, to update player info.
             // No player, no init.
             VField f = new VField(EDocID.valueOf("FIELD_" + i), p, localPlayer);
-            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i % 2])));
+            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[1])));
             f.getLayoutControl().initialize();
             fields.add(f);
             VCommand c = new VCommand(EDocID.valueOf("COMMAND_" + i), p);
