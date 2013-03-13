@@ -4029,7 +4029,7 @@ Battery
 {3}{G}
 Sorcery
 Put a 3/3 green Elephant creature token onto the battlefield.
-IN U (x2), TSB S, HOP U
+IN U, TSB S, HOP U
 
 Assault Griffin
 {3}{W}
@@ -57039,7 +57039,7 @@ Suffering
 {3}{R}
 Sorcery
 Destroy target land.
-IN U (x2), DDH U
+IN U, DDH U
 
 Pain Kami
 {2}{R}
@@ -76314,7 +76314,7 @@ Malice
 {3}{B}
 Instant
 Destroy target nonblack creature. It can't be regenerated.
-IN U (x2), DDH U
+IN U, DDH U
 
 Spitebellows
 {5}{R}
@@ -77073,7 +77073,7 @@ Deliver
 {2}{U}
 Instant
 Return target permanent to its owner's hand.
-IN U (x2)
+IN U
 
 Stand Firm
 {W}
@@ -90406,7 +90406,7 @@ Wane
 {W}
 Instant
 Destroy target enchantment.
-IN U (x2), ARC U
+IN U, ARC U
 
 Waxmane Baku
 {2}{W}
