@@ -6358,12 +6358,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("DefenderCtrl")) {
-            Combat combat = Singletons.getModel().getGame().getCombat();
             if (!Singletons.getModel().getGame().getPhaseHandler().inCombat()) {
                 return false;
             }
-            Player defender = combat.getDefendingPlayerRelatedTo(source);
-            if (!this.getController().equals(defender)) {
+            if (!Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(source).contains(this.getController())) {
                 return false;
             }
         } else if (property.startsWith("EnchantedPlayerCtrl")) {

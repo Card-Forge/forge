@@ -546,7 +546,8 @@ public class Combat {
      *            a {@link forge.Card} object.
      * @return a {@link forge.Player} object.
      */
-    public Player getDefendingPlayerRelatedTo(final Card source) {
+    public List<Player> getDefendingPlayerRelatedTo(final Card source) {
+        List<Player> players = new ArrayList<Player>();
         Card attacker = source;
         if (source.isAura()) {
             attacker = source.getEnchantingCard();
@@ -554,13 +555,21 @@ public class Combat {
             attacker = source.getEquippingCard();
         }
 
+        // return the corresponding defender
         Player defender = getDefenderPlayerByAttacker(attacker);
-        if (null == defender) { // too bad, have to choose now
-            // don't have ui, cannot choose - have to getOpponent
-            // that's inaccurate. That opponent may be not even a defender
-            defender = source.getController().getOpponent();
+        if (null != defender) {
+            players.add(defender);
+            return players;
         }
-        return defender;
+        
+        // return all defenders
+        List<GameEntity> defenders = this.getDefenders();
+        for (GameEntity ge : defenders) {
+            if (ge instanceof Player) {
+                players.add((Player) ge);
+            }
+        }
+        return players;
     }
 
     /**
