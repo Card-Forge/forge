@@ -246,7 +246,9 @@ public class AbilityUtils {
                 return cards;
             }
 
-            cards.addAll(list);
+            if (list != null) {
+                cards.addAll(list);
+            }
         }
 
         if (c != null) {
