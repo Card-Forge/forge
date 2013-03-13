@@ -228,7 +228,7 @@ public class DialogMigrateProfile {
       
         JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
         overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
-        overlay.add(p, "w 800::80%, h 800::90%");
+        overlay.add(p, "w 400::80%, h 100::90%");
         SOverlayUtils.showOverlay();
         
         // focus cancel button
@@ -354,7 +354,7 @@ public class DialogMigrateProfile {
             caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
             JScrollPane scroller = new JScrollPane(_operationLog);
             scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            _selectionPanel.add(scroller, "w 600:100%:100%, h 60:100%:100%");
+            _selectionPanel.add(scroller, "w 400:100%:100%, h 60:100%:100%");
             
             // add progress bar
             _progressBar = new JProgressBar();
@@ -367,6 +367,10 @@ public class DialogMigrateProfile {
             
             // set checkbox labels
             _updateUI();
+            
+            // resize the panel properly now that the _selectionPanel is filled in
+            _selectionPanel.getParent().validate();
+            _selectionPanel.getParent().invalidate();
         }
         
         private void _addSelectionWidget(JPanel parent, OpType type, String name) {
@@ -449,6 +453,7 @@ public class DialogMigrateProfile {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override public void run() {
                         if (_cancel) { return; }
+                        _progressBar.setString("Analyzing...");
                         _progressBar.setMaximum(numFilesToAnalyze);
                         _progressBar.setValue(0);
                         _progressBar.setIndeterminate(false);
@@ -658,7 +663,7 @@ public class DialogMigrateProfile {
             }
             
             // set progress bar bounds
-            _progressBar.setString(_move ? "Moving files" : "Copying files");
+            _progressBar.setString(_move ? "Moving files..." : "Copying files...");
             _progressBar.setMinimum(0);
             _progressBar.setMaximum(_operations.size());
         }
