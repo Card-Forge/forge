@@ -380,6 +380,7 @@ public class DialogMigrateProfile {
             _operationLog.setLineWrap(true);
             _operationLog.setEditable(false);
             // autoscroll to bottom when we append text
+            // it would be nice if we only autoscrolled when the caret is at the bottom, though
             DefaultCaret caret = (DefaultCaret)_operationLog.getCaret();
             caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
             JScrollPane scroller = new JScrollPane(_operationLog);
@@ -461,6 +462,7 @@ public class DialogMigrateProfile {
                 final MigrationSourceAnalyzer msa = new MigrationSourceAnalyzer(_srcDir, cb);
                 final int numFilesToAnalyze = msa.getNumFilesToAnalyze();
                 
+                // update only once every half-second so we're not flooding the UI with updates
                 timer = new Timer(500, null);
                 final Timer finalTimer = timer;
                 timer.addActionListener(new ActionListener() {
@@ -721,6 +723,14 @@ public class DialogMigrateProfile {
                 // working with textbox text is thread safe
                 _operationLog.setText("");
                 
+                // only update the text box once very half second
+                final long updateIntervalMs = 500;
+                long lastUpdateTimestampMs = System.currentTimeMillis();
+                StringBuffer opLogBuf = new StringBuffer();
+                
+                // only update the progress bar when we expect the visual value to change
+                final long progressInterval = Math.max(1, _operations.size() / _progressBar.getWidth());
+                
                 int numOps       = 0;
                 int numSucceeded = 0;
                 int numFailed    = 0;
@@ -728,12 +738,23 @@ public class DialogMigrateProfile {
                     if (_cancel) { break; }
                     
                     final int curOpNum = ++numOps;
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override public void run() {
-                            if (_cancel) { return; }
-                            _progressBar.setValue(curOpNum);
-                        }
-                    });
+                    if (0 == curOpNum % progressInterval) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override public void run() {
+                                if (_cancel) { return; }
+                                _progressBar.setValue(curOpNum);
+                            }
+                        });
+                    }
+                    
+                    long curTimeMs = System.currentTimeMillis();
+                    if (updateIntervalMs <= curTimeMs - lastUpdateTimestampMs) {
+                        lastUpdateTimestampMs = curTimeMs;
+                        
+                        // working with textbox text is thread safe
+                        _operationLog.append(opLogBuf.toString());
+                        opLogBuf.setLength(0);
+                    }
                     
                     File srcFile  = op.getKey();
                     File destFile = op.getValue();
@@ -747,13 +768,12 @@ public class DialogMigrateProfile {
                             srcFile.delete();
                         }
                         
-                        // working with textbox text is thread safe
-                        _operationLog.append(String.format("%s %s -> %s\n",
+                        opLogBuf.append(String.format("%s %s -> %s\n",
                                 _move ? "Moved" : "Copied",
                                 srcFile.getAbsolutePath(), destFile.getAbsolutePath()));
                         ++numSucceeded;
                     } catch (IOException e) {
-                        _operationLog.append(String.format("Failed to %s %s -> %s (%s)\n",
+                        opLogBuf.append(String.format("Failed to %s %s -> %s (%s)\n",
                                 _move ? "move" : "copy",
                                 srcFile.getAbsolutePath(), destFile.getAbsolutePath(),
                                 e.getMessage()));
@@ -762,6 +782,7 @@ public class DialogMigrateProfile {
                 }
                 
                 // append summary footer
+                _operationLog.append(opLogBuf.toString());
                 _operationLog.append(String.format("\nImport complete.  %d files %s, %d errors",
                         numSucceeded, _move ? "moved" : "copied", numFailed));
             } catch (final Exception e) {
