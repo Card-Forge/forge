@@ -46,7 +46,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.DefaultCaret;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -63,6 +62,7 @@ import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
+import forge.gui.toolbox.SmartScroller;
 import forge.properties.NewConstants;
 
 /**
@@ -244,8 +244,8 @@ public class DialogMigrateProfile {
         
         JPanel southPanel = new JPanel(new MigLayout("ax center"));
         southPanel.setOpaque(false);
-        southPanel.add(_btnStart, "center, w pref+72!, h pref+12!");
-        southPanel.add(btnCancel, "center, w pref+72!, h pref+12!");
+        southPanel.add(_btnStart, "center, w pref+144!, h pref+12!");
+        southPanel.add(btnCancel, "center, w pref+144!, h pref+12!, gap 72");
         p.add(southPanel, "growx");
       
         JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
@@ -379,11 +379,9 @@ public class DialogMigrateProfile {
             _operationLog.setWrapStyleWord(true);
             _operationLog.setLineWrap(true);
             _operationLog.setEditable(false);
-            // autoscroll to bottom when we append text
-            // it would be nice if we only autoscrolled when the caret is at the bottom, though
-            DefaultCaret caret = (DefaultCaret)_operationLog.getCaret();
-            caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+            // autoscroll when we set/add text unless the user has intentionally scrolled somewhere else
             JScrollPane scroller = new JScrollPane(_operationLog);
+            new SmartScroller(scroller);
             scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
             _selectionPanel.add(scroller, "w 400:100%:100%, h 60:100%:100%");
             
@@ -455,6 +453,7 @@ public class DialogMigrateProfile {
                     
                     @Override
                     public void addOp(OpType type, File src, File dest) {
+                        // add to concurrent map
                         _selections.get(type).getRight().put(src, dest);
                     }
                 };
@@ -654,10 +653,9 @@ public class DialogMigrateProfile {
                 if (0 < totalOps) {
                     log.append("\n");
                 }
-                log.append(isMove ? "Moving" : "Copying");
+                log.append("Prepared to ").append(isMove ? "move" : "copy");
                 log.append(" ").append(totalOps).append(" files\n");
-                log.append(isOverwrite ? "O" : "Not o");
-                log.append("verwriting existing files");
+                log.append(isOverwrite ? "O" : "Not o").append("verwriting existing files");
 
                 // set the JTextArea text directly (no need to use invokeLater: setText is thread-safe)
                 _operationLog.setText(log.toString());
@@ -783,7 +781,7 @@ public class DialogMigrateProfile {
                 
                 // append summary footer
                 _operationLog.append(opLogBuf.toString());
-                _operationLog.append(String.format("\nImport complete.  %d files %s, %d errors",
+                _operationLog.append(String.format("\nImport complete: %d files %s, %d errors",
                         numSucceeded, _move ? "moved" : "copied", numFailed));
             } catch (final Exception e) {
                 _cancel = true;
