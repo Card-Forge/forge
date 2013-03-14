@@ -1334,25 +1334,36 @@ public final class GameActionUtil {
                 }
                 String newSubSAString = c.getCharacteristics().getIntrinsicAbility().get(0);
                 newSubSAString = newSubSAString.replace("SP", "DB");
-                final AbilitySub newSubSA = (AbilitySub) AbilityFactory.getAbility(newSubSAString, source);
+                final AbilitySub newSubSA = (AbilitySub) AbilityFactory.getAbility(newSubSAString, c);
                 ArrayList<SpellAbility> addSAs = new ArrayList<SpellAbility>();
                 // Add the subability to all existing variants
                 for (SpellAbility s : allSAs) {
+                    //create a new spell copy
                     final SpellAbility newSA = s.copy();
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(combineCosts(newSA, keyword.substring(19)));
                     newSA.setManaCost(ManaCost.NO_COST);
                     newSA.setDescription(s.getDescription() + " (Splicing " + c + " onto it)");
                     newSA.addSplicedCards(c);
+
+                    // copy all subAbilities
                     SpellAbility child = newSA;
                     while (child.getSubAbility() != null) {
                         AbilitySub newChild = child.getSubAbility().getCopy();
                         child.setSubAbility(newChild);
-                        newChild.setParent(child);
                         child = newChild;
                     }
+
+                    //add the spliced ability to the end of the chain
                     child.setSubAbility(newSubSA);
-                    newSubSA.setParent(child);
+
+                    //set correct source and activating player to all the spliced abilities
+                    child = newSubSA;
+                    while (child != null) {
+                        child.setSourceCard(source);
+                        child.setActivatingPlayer(s.getActivatingPlayer());
+                        child = child.getSubAbility();
+                    }
                     newSAs.add(0, newSA);
                     addSAs.add(newSA);
                 }

@@ -11213,6 +11213,7 @@ res/cardsfolder/t/tribal_golem.txt svneol=native#text/plain
 res/cardsfolder/t/tribal_unity.txt -text
 res/cardsfolder/t/tribute_to_hunger.txt -text
 res/cardsfolder/t/tribute_to_the_wild.txt svneol=native#text/plain
+res/cardsfolder/t/trickbind.txt -text
 res/cardsfolder/t/trickery_charm.txt -text svneol=unset#text/plain
 res/cardsfolder/t/tricks_of_the_trade.txt -text
 res/cardsfolder/t/trickster_mage.txt svneol=native#text/plain
@@ -12295,6 +12296,7 @@ res/cardsfolder/x/xira_arien.txt svneol=native#text/plain
 res/cardsfolder/x/xun_yu_wei_advisor.txt svneol=native#text/plain
 res/cardsfolder/y/yamabushis_flame.txt svneol=native#text/plain
 res/cardsfolder/y/yamabushis_storm.txt -text
+res/cardsfolder/y/yare.txt -text
 res/cardsfolder/y/yavimaya_ancients.txt svneol=native#text/plain
 res/cardsfolder/y/yavimaya_ants.txt svneol=native#text/plain
 res/cardsfolder/y/yavimaya_barbarian.txt svneol=native#text/plain

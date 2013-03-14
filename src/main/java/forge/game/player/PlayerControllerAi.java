@@ -17,6 +17,7 @@ import forge.game.ai.AiInputCommon;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
 import forge.game.ai.ComputerUtilCombat;
+import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 
@@ -217,6 +218,14 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<Card> orderAttackers(Card blocker, List<Card> attackers) {
         return ComputerUtilBlock.orderAttackers(blocker, attackers);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#reveal(java.lang.String, java.util.List)
+     */
+    @Override
+    public void reveal(String string, List<Card> cards, ZoneType zone, Player owner) {
+        // We don't know how to reveal cards to AI
     }
 
 }

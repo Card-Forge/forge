@@ -12,6 +12,7 @@ import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.zone.ZoneType;
 
 
 /** 
@@ -100,4 +101,7 @@ public abstract class PlayerController {
 
     public abstract List<Card> orderBlockers(Card attacker, List<Card> blockers);
     public abstract List<Card> orderAttackers(Card blocker, List<Card> attackers);
+
+    /** Shows the card to this player*/
+    public abstract void reveal(String string, List<Card> cards, ZoneType zone, Player owner);
 }

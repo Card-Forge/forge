@@ -277,7 +277,10 @@ public class CombatUtil {
         }
 
         String valid = StringUtils.join(walkTypes, ",");
-        final Player defendingPlayer = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(attacker);
+        Player defendingPlayer = attacker.getController().getOpponent();
+        if (attacker.isAttacking()) {
+            defendingPlayer = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(attacker).get(0);
+        }
         List<Card> defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
         for (Card c : defendingLands) {
             if (c.isValid(valid.split(","), defendingPlayer, attacker)) {
@@ -1224,7 +1227,7 @@ public class CombatUtil {
                     @Override
                     public void resolve() {
                         this.api = ApiType.Sacrifice;
-                        final Player opponent = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(c);
+                        final Player opponent = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(c).get(0);
                         //List<Card> list = AbilityUtils.filterListByType(opponent.getCardsIn(ZoneType.Battlefield), "Permanent", this);
                         final List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
                         List<Card> toSac = opponent.getController().choosePermanentsToSacrifice(list, a, this, false, false);

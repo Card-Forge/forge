@@ -1,0 +1,11 @@
+Name:Trickbind
+ManaCost:1 U
+Types:Instant
+K:Split second
+A:SP$ Counter | Cost$ 1 U | TargetType$ Activated,Triggered | TgtPrompt$ Select target Activated or Triggered Ability | RememberTargets$ True | ValidTgts$ Card | SubAbility$ DBEffect | SpellDescription$ Counter target activated or triggered ability. If a permanent's ability is countered this way, activated abilities of that permanent can't be activated this turn. (Mana abilities can't be targeted.)
+SVar:DBEffect:DB$ Effect | Name$ Trickbind Effect | StaticAbilities$ STCantBeActivated | RememberObjects$ Remembered | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1
+SVar:STCantBeActivated:Mode$ CantBeActivated | EffectZone$ Command | ValidCard$ Permanent.IsRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trickbind.jpg
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nCounter target activated or triggered ability. If a permanent's ability is countered this way, activated abilities of that permanent can't be activated this turn. (Mana abilities can't be targeted.)
+SetInfo:TSP Rare

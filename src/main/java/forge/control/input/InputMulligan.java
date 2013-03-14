@@ -23,7 +23,6 @@ import java.util.List;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
-import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
@@ -53,8 +52,6 @@ import forge.view.ButtonUtil;
 public class InputMulligan extends Input {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
-
-    private static final int AI_MULLIGAN_THRESHOLD = 5;
 
     /** {@inheritDoc} */
     @Override
@@ -100,24 +97,13 @@ public class InputMulligan extends Input {
         GameState game = Singletons.getModel().getGame();
 
         // Computer mulligan
-        for (Player ai : game.getPlayers()) {
-            if (ai.isHuman()) {
+        for (Player p : game.getPlayers()) {
+            if (!(p instanceof AIPlayer)) {
                 continue;
             }
-
-            boolean aiTakesMulligan = true;
-
-            // Computer mulligans if there are no cards with converted mana cost of
-            // 0 in its hand
-            while (aiTakesMulligan) {
-
-                final List<Card> handList = ai.getCardsIn(ZoneType.Hand);
-                final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
-                aiTakesMulligan = (handList.size() > InputMulligan.AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
-
-                if (aiTakesMulligan) {
-                    ai.doMulligan();
-                }
+            AIPlayer ai = (AIPlayer) p;
+            while (ComputerUtil.wantMulligan(ai)) {
+                ai.doMulligan();
             }
         }
 
@@ -135,7 +121,7 @@ public class InputMulligan extends Input {
                             final String effName = kw.split(":")[1];
 
                             final SpellAbility effect = AbilityFactory.getAbility(c.getSVar(effName), c);
-                            if (GuiDialog.confirm(c, "Use this card's ability?")) {
+                            if (GuiDialog.confirm(c, "Use " + c +"'s  ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
                                 game.getActionPlay().playSpellAbilityNoStack(p, effect, false);
@@ -143,7 +129,7 @@ public class InputMulligan extends Input {
                         }
                     }
                     if (c.getName().startsWith("Leyline of")) {
-                        if (GuiDialog.confirm(c, "Use this card's ability?")) {
+                        if (GuiDialog.confirm(c, "Use " + c + "'s ability?")) {
                             ga.moveToPlay(c);
                         }
                     }
