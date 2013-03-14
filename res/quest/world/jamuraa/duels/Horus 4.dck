@@ -9,7 +9,6 @@ Deck Type=constructed
 Card Reward=14% chosen card sets:5ED,MIR,VIS rules:white,creature rarity:C,U desc:a White Creature
 [main]
 1 Basalt Monolith|LEB
-1 Boomerang|5ED
 3 Clone|LEB
 3 Counterspell|5ED
 3 Fireball|LEB
@@ -17,7 +16,7 @@ Card Reward=14% chosen card sets:5ED,MIR,VIS rules:white,creature rarity:C,U des
 7 Island|MIR
 3 Kismet|LEG
 3 Lightning Bolt|LEB
-2 Time Elemental|5ED
+3 Man-o'-War|VIS
 6 Mountain|MIR
 7 Plains|MIR
 2 Plateau|LEB

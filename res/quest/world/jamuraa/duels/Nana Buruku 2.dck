@@ -7,7 +7,6 @@ Difficulty=medium
 Description=Jakub Slemr's '4-color Black' deck from the 1997 Worlds tournament.
 Deck Type=constructed
 [main]
-2 Boomerang|5ED
 4 Black Knight|5ED
 4 Choking Sands|MIR
 3 City of Brass|5ED
@@ -18,7 +17,7 @@ Deck Type=constructed
 3 Gemstone Mine|WTH
 4 Incinerate|MIR
 4 Knight of Stromgald|ICE
-2 Time Elemental|5ED
+4 Man-o'-War|VIS
 1 Necratog|WTH
 4 Nekrataal|VIS
 2 Shadow Guildmage|MIR
