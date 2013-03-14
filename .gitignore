@@ -4,6 +4,10 @@
 /.metadata
 /forge.profile.properties
 /nbactions.xml
+/pom.xml.next
+/pom.xml.releaseBackup
+/pom.xml.tag
+/release.properties
 res/PerSetTrackingResults
 res/oracleScript.log
 res/reprintSetInfo.log
