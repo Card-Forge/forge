@@ -68,6 +68,8 @@ Ashling the Pilgrim
 Inner-Flame Igniter
 Novijen Sages
 Trickbind
+Yare
+Mercadian Atlas
 
 
 New Phenomenons:
@@ -92,6 +94,8 @@ New Vanguard Avatars:
 
 
 Known Issues:
+
+A small number of cards including Wall of Corpses, Abu Ja'far and others with a similar ability are not functional. The common issue here is actually that they check the blocker/attacker after being removed from the battlefield. Probably need to use LKI. Regular destroy/destroy all effects work just fine. The problem cards are caring about battlefield specific properties, that no longer apply when the base card is no longer on the battlefield.
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
 
