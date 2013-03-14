@@ -137,11 +137,14 @@ public class ManaEffect extends SpellAbilityEffect {
                         abMana.setExpressChoice(choice);
                     }
                     else {
-                        if (sa.hasParam("AILogic")) {
-                            final String logic = sa.getParam("AILogic");
+                        if (abMana.getExpressChoice().isEmpty()) {
+                            final String logic = sa.hasParam("AILogic") ? sa.getParam("AILogic") : null;
                             String chosen = Constant.Color.BLACK;
-                            if (logic.equals("MostProminentInComputerHand")) {
+                            if (logic == null || logic.equals("MostProminentInComputerHand")) {
                                 chosen = ComputerUtilCard.getMostProminentColor(act.getCardsIn(ZoneType.Hand));
+                            }
+                            if (chosen.equals("")) {
+                                chosen = Constant.Color.GREEN;
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
                             abMana.setExpressChoice(MagicColor.toShortString(chosen));
