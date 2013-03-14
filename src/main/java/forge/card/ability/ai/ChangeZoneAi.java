@@ -745,7 +745,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
                 // Blink permanents with ETB triggers
-                else if (SpellAbilityAi.playReusable(ai, sa)) {
+                else if (!sa.isTrigger() && SpellAbilityAi.playReusable(ai, sa)) {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
@@ -755,7 +755,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                             // counters TODO check good and
                             // bad counters
                             // checks only if there is a dangerous ETB effect
-                            return SpellPermanent.checkETBEffects(c, ai);
+                            return !c.equals(sa.getSourceCard()) && SpellPermanent.checkETBEffects(c, ai);
                         }
                     });
                     if (!aiPermanents.isEmpty()) {

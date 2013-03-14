@@ -4,6 +4,7 @@ Types:Creature Jellyfish
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature to its owner's hand.
 SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
+SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4266.jpg
 Oracle:When Man-o'-War enters the battlefield, return target creature to its owner's hand.
 SetInfo:VIS Common
