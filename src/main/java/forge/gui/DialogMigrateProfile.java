@@ -25,8 +25,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -34,6 +36,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -71,10 +74,10 @@ import forge.properties.NewConstants;
  * processing done in this class, so most operations are asynchronous.
  */
 public class DialogMigrateProfile {
-    private final Runnable _onImportSuccessful;
-    private final FButton  _btnStart;
-    private final FLabel   _btnChooseDir;
-    private final JPanel   _selectionPanel;
+    private final FButton _btnStart;
+    private final FButton _btnCancel;
+    private final FLabel  _btnChooseDir;
+    private final JPanel  _selectionPanel;
     
     // volatile since it is checked from multiple threads
     private volatile boolean _cancel;
@@ -197,7 +200,7 @@ public class DialogMigrateProfile {
                             _cancel = false;
                             synchronized (_onAnalyzerDone) {
                                 // this will populate the panel with data selection widgets
-                                _AnalyzerUpdater analyzer = new _AnalyzerUpdater(text, _onAnalyzerDone);
+                                _AnalyzerUpdater analyzer = new _AnalyzerUpdater(text, _onAnalyzerDone, isMigration);
                                 analyzer.execute();
                                 _analyzerActive = true;
                             }
@@ -225,8 +228,8 @@ public class DialogMigrateProfile {
         };
         _btnStart = new FButton("Start import");
         _btnStart.setEnabled(false);
-        final FButton btnCancel = new FButton("Cancel");
-        btnCancel.addActionListener(new ActionListener() {
+        _btnCancel = new FButton("Cancel");
+        _btnCancel.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) {
                 _cancel = true;
                 cleanup.run();
@@ -236,16 +239,10 @@ public class DialogMigrateProfile {
             }
         });
 
-        _onImportSuccessful = new Runnable() {
-            @Override public void run() {
-                btnCancel.setText("Done");
-            }
-        };
-        
         JPanel southPanel = new JPanel(new MigLayout("ax center"));
         southPanel.setOpaque(false);
         southPanel.add(_btnStart, "center, w pref+144!, h pref+12!");
-        southPanel.add(btnCancel, "center, w pref+144!, h pref+12!, gap 72");
+        southPanel.add(_btnCancel, "center, w pref+144!, h pref+12!, gap 72");
         p.add(southPanel, "growx");
       
         JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
@@ -255,7 +252,7 @@ public class DialogMigrateProfile {
         
         // focus cancel button after the dialog is shown
         SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { btnCancel.requestFocusInWindow(); }
+            @Override public void run() { _btnCancel.requestFocusInWindow(); }
         });
         
         // if our source dir is provided, set the text, which will fire off an analyzer
@@ -294,6 +291,7 @@ public class DialogMigrateProfile {
         
         private final String       _srcDir;
         private final Runnable     _onAnalyzerDone;
+        private final boolean      _isMigration;
         private final JComboBox    _unknownDeckCombo;
         private final FCheckBox    _moveCheckbox;
         private final FCheckBox    _overwriteCheckbox;
@@ -303,9 +301,10 @@ public class DialogMigrateProfile {
         // updates the _operationLog widget asynchronously to keep the UI responsive
         private final _OperationLogAsyncUpdater _operationLogUpdater;
         
-        public _AnalyzerUpdater(String srcDir, Runnable onAnalyzerDone) {
+        public _AnalyzerUpdater(String srcDir, Runnable onAnalyzerDone, boolean isMigration) {
             _srcDir         = srcDir;
             _onAnalyzerDone = onAnalyzerDone;
+            _isMigration    = isMigration;
             
             _selectionPanel.removeAll();
             _selectionPanel.setLayout(new MigLayout("insets 0, gap 5, wrap"));
@@ -364,10 +363,10 @@ public class DialogMigrateProfile {
             JPanel ioOptionPanel = new JPanel(new MigLayout("insets 0, gap 10"));
             ioOptionPanel.setOpaque(false);
             _moveCheckbox = new FCheckBox("Remove source files after copy");
-            _moveCheckbox.setSelected(true);
+            _moveCheckbox.setSelected(isMigration);
             _moveCheckbox.addChangeListener(_stateChangedListener);
             ioOptionPanel.add(_moveCheckbox);
-            _overwriteCheckbox = new FCheckBox("Overwrite existing files");
+            _overwriteCheckbox = new FCheckBox("Overwrite files in destination");
             _overwriteCheckbox.addChangeListener(_stateChangedListener);
             ioOptionPanel.add(_overwriteCheckbox);
             _selectionPanel.add(ioOptionPanel);
@@ -530,6 +529,50 @@ public class DialogMigrateProfile {
                 // set up the start button to start the prepared import on click
                 _btnStart.addActionListener(new ActionListener() {
                     @Override public void actionPerformed(ActionEvent arg0) {
+                        // if this is a migration, warn if active settings will not complete a migration and give the
+                        // user an option to fix
+                        if (_isMigration) {
+                            // assemble a list of selections that need to be selected to complete a full migration
+                            List<String> unselectedButShouldBe = new ArrayList<String>();
+                            for (Pair<FCheckBox, ? extends Map<File, File>> entry : _selections.values()) {
+                                // add name to list if checkbox is unselected, but contains operations
+                                FCheckBox cb = entry.getLeft();
+                                if (!cb.isSelected() && 0 < entry.getRight().size()) {
+                                    unselectedButShouldBe.add(cb.getName());
+                                }
+                            }
+
+                            if (!unselectedButShouldBe.isEmpty() || !_moveCheckbox.isSelected()) {
+                                StringBuilder sb = new StringBuilder("<html>");
+                                if (!unselectedButShouldBe.isEmpty()) {
+                                    sb.append("It looks like the following options are not selected, which will result in an incomplete migration:");
+                                    sb.append("<ul>");
+                                    for (String cbName : unselectedButShouldBe) {
+                                        sb.append("<li><b>").append(cbName).append("</b></li>");
+                                    }
+                                    sb.append("</ul>");
+                                }
+                                
+                                if (!_moveCheckbox.isSelected()) {
+                                    sb.append(unselectedButShouldBe.isEmpty() ? "It " : "It also ").append("looks like the <b>");
+                                    sb.append(_moveCheckbox.getText()).append("</b> option is not selected.<br><br>");
+                                }
+                                
+                                sb.append("You can continue anyway, but the migration will be incomplete, and the data migration prompt<br>");
+                                sb.append("will come up again the next time you start Forge in order to migrate the remaining files<br>");
+                                sb.append("unless you move or delete them manually.</html>");
+                                
+                                Object[] options = { "Whoops, let me fix that!", "Continue with the import, I know what I'm doing." };
+                                int chosen = JOptionPane.showOptionDialog(_operationLog, sb.toString(), "Migration warning",
+                                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                                
+                                if (1 != chosen) {
+                                    // i.e. option 0 was chosen or the dialog was otherwise closed
+                                    return;
+                                }
+                            }
+                        }
+                        
                         // ensure no other actions (except for cancel) can be taken while the import is in progress
                         _btnStart.setEnabled(false);
                         _btnChooseDir.setEnabled(false);
@@ -549,6 +592,8 @@ public class DialogMigrateProfile {
                                 _selections, _unknownDeckCombo, _operationLog, _progressBar,
                                 _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
                         importer.execute();
+                        
+                        _btnCancel.requestFocusInWindow();
                     }
                 });
                 
@@ -801,11 +846,12 @@ public class DialogMigrateProfile {
 
         @Override
         protected void done() {
+            _btnCancel.requestFocusInWindow();
             if (_cancel) { return; }
             
             _progressBar.setValue(_progressBar.getMaximum());
             _progressBar.setString("Import complete");
-            _onImportSuccessful.run();
+            _btnCancel.setText("Done");
         }
         
         // actual file copy routine.  uses java.nio classes for ultra-fast copying

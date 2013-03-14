@@ -217,8 +217,8 @@ public enum FView {
                             		"  Now just restart Forge to load the data from its new home!</html>").build());
                         } else {
                             p.add(new FLabel.Builder().text("<html>There seem to be a few files left over in your old data" +
-                            		" directories.  They should be deleted or moved somewhere else to avoid having this data" +
-                            		" migration message pop up again!  If there are any empty directories left over after that," +
+                            		" directories.  They should be deleted or moved somewhere else to avoid having the data" +
+                            		" migration prompt pop up again!  If there are any empty directories left over after that," +
                             		" just run through this migration procedure one more time and that should get them cleared" +
                             		" up.</html>").build());
                             
