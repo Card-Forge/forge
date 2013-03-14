@@ -802,7 +802,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         });
 
-        if (attachSource.isAura()) {
+        if (attachSource.isAura() && !attachSource.getName().equals("Daybreak Coronet")) {
             // TODO For Auras like Rancor, that aren't as likely to lead to
             // card disadvantage, this check should be skipped
             prefList = CardLists.filter(prefList, Predicates.not(Presets.ENCHANTED));
