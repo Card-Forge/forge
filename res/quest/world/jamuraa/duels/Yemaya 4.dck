@@ -8,6 +8,7 @@ Description=Yemaya plays Sheppard's 'Comerish Turbo-Xerox' deck.
 Deck Type=constructed
 Card Reward=15% duplicate card
 [main]
+2 Boomerang|5ED
 4 Brainstorm|ICE
 4 Counterspell|5ED
 3 Dissipate|MIR
@@ -16,7 +17,7 @@ Card Reward=15% duplicate card
 1 Foresight|ALL
 4 Impulse|VIS
 14 Island|MIR
-3 Man-o'-War|VIS
+2 Time Elemental|5ED
 4 Memory Lapse|MIR
 4 Portent|ICE
 3 Power Sink|5ED
