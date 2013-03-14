@@ -26985,7 +26985,7 @@ Ice
 Instant
 Tap target permanent.
 Draw a card.
-AP U (x2), CMD U, DDJ U
+AP U, CMD U, DDJ U
 
 Fire Ambush
 {1}{R}
@@ -38485,7 +38485,7 @@ Reality
 {2}{G}
 Instant
 Destroy target artifact.
-AP U (x2)
+AP U
 
 Illusionary Forces
 {3}{U}
@@ -45343,7 +45343,7 @@ Death
 {1}{B}
 Sorcery
 Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
-AP U (x2), DDJ U
+AP U, DDJ U
 
 Life Burst
 {1}{W}
@@ -54219,7 +54219,7 @@ Day
 {2}{W}
 Instant
 Creatures target player controls get +1/+1 until end of turn.
-AP U (x2)
+AP U
 
 Night Dealings
 {2}{B}{B}
@@ -56353,7 +56353,7 @@ Chaos
 {2}{R}
 Instant
 Creatures can't block this turn.
-AP U (x2), HOP U
+AP U, HOP U
 
 Order of Leitbur
 {W}{W}
