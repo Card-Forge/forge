@@ -84,7 +84,7 @@ public class ForgeProfileProperties {
         
         String fallbackDataDir = String.format("%s/.forge", homeDir);
         
-        if (StringUtils.containsIgnoreCase("windows", osName)) {
+        if (StringUtils.containsIgnoreCase(osName, "windows")) {
             // the split between appdata and localappdata on windows is relatively recent.  If
             // localappdata is not defined, use appdata for both.  and if appdata is not defined,
             // fall back to a linux-style dot dir in the home directory
@@ -101,7 +101,7 @@ public class ForgeProfileProperties {
             // same directory on windows and we need to distinguish them.
             return Pair.of(String.format("%s/Forge", appRoot),
                            String.format("%s/Forge/Cache", cacheRoot));
-        } else if (StringUtils.containsIgnoreCase("mac os x", osName)) {
+        } else if (StringUtils.containsIgnoreCase(osName, "mac os x")) {
             return Pair.of(String.format("%s/Library/Application Support/Forge", homeDir),
                            String.format("%s/Library/Caches/Forge", homeDir));
         }

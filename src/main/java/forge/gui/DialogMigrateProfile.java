@@ -63,6 +63,7 @@ import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextField;
 import forge.gui.toolbox.SmartScroller;
@@ -84,7 +85,7 @@ public class DialogMigrateProfile {
     
     @SuppressWarnings("serial")
     public DialogMigrateProfile(String forcedSrcDir, final Runnable onDialogClose) {
-        FPanel p = new FPanel(new MigLayout("insets dialog, gap 0, center, wrap"));
+        FPanel p = new FPanel(new MigLayout("insets dialog, gap 0, center, wrap, fill"));
         p.setOpaque(false);
         p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
@@ -95,19 +96,21 @@ public class DialogMigrateProfile {
         
         // add some help text if this is for the initial data migration
         if (isMigration) {
-            FPanel blurbPanel = new FPanel(new MigLayout("insets dialog, gap 10, center, wrap"));
+            FPanel blurbPanel = new FPanel(new MigLayout("insets panel, gap 10, fill"));
             blurbPanel.setOpaque(false);
-            blurbPanel.add(new FLabel.Builder().text("<html><b>What's this?</b></html>").build(), "growx");
-            blurbPanel.add(new FLabel.Builder().text(
+            JPanel blurbPanelInterior = new JPanel(new MigLayout("insets dialog, gap 10, center, wrap, fill"));
+            blurbPanelInterior.setOpaque(false);
+            blurbPanelInterior.add(new FLabel.Builder().text("<html><b>What's this?</b></html>").build(), "growx, w 50:50:");
+            blurbPanelInterior.add(new FLabel.Builder().text(
                     "<html>Over the last several years, people have had to jump through a lot of hoops to" +
                     " update to the most recent version.  We hope to reduce this workload to a point where a new" +
                     " user will find that it is fairly painless to update.  In order to make this happen, Forge" +
                     " has changed where it stores your data so that it is outside of the program installation directory." +
                     "  This way, when you upgrade, you will no longer need to import your data every time to get things" +
                     " working.  There are other benefits to having user data separate from program data, too, and it" +
-                    " lays the groundwork for some cool new features.</html>").build());
-            blurbPanel.add(new FLabel.Builder().text("<html><b>So where's my data going?</b></html>").build(), "growx");
-            blurbPanel.add(new FLabel.Builder().text(
+                    " lays the groundwork for some cool new features.</html>").build(), "growx, w 50:50:");
+            blurbPanelInterior.add(new FLabel.Builder().text("<html><b>So where's my data going?</b></html>").build(), "growx, w 50:50:");
+            blurbPanelInterior.add(new FLabel.Builder().text(
                     "<html>Forge will now store your data in the same place as other applications on your system." +
                     "  Specifically, your personal data, like decks, quest progress, and program preferences will be" +
                     " stored in <b>" + NewConstants.USER_DIR + "</b> and all downloaded content, such as card pictures," +
@@ -117,10 +120,14 @@ public class DialogMigrateProfile {
                     " it to <b>" + NewConstants.PROFILE_FILE + "</b> and edit the paths inside it.  Then restart Forge and use" +
                     " this dialog to move your data to the paths that you set.  Keep in mind that if you install a future" +
                     " version of Forge into a different directory, you'll need to copy this file over so Forge will know" +
-                    " where to find your data.</html>").build());
-            blurbPanel.add(new FLabel.Builder().text(
-                    "<html><b>Remember, your data won't be available until you complete this step!</b></html>").build(), "growx");
-            p.add(blurbPanel, "gap 10 10 20 0");
+                    " where to find your data.</html>").build(), "growx, w 50:50:");
+            blurbPanelInterior.add(new FLabel.Builder().text(
+                    "<html><b>Remember, your data won't be available until you complete this step!</b></html>").build(), "growx, w 50:50:");
+            
+            FScrollPane blurbScroller = new FScrollPane(blurbPanelInterior,
+                    ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            blurbPanel.add(blurbScroller, "hmin 150, growy, growx, center, gap 0 0 5 5");
+            p.add(blurbPanel, "gap 10 10 20 0, growy, growx, w 50:50:");
         }
         
         // import source widgets
@@ -225,7 +232,7 @@ public class DialogMigrateProfile {
         // prepare import selection panel (will be cleared and filled in later by an analyzer)
         _selectionPanel = new JPanel();
         _selectionPanel.setOpaque(false);
-        p.add(_selectionPanel, "growx, h 100%, gaptop 10");
+        p.add(_selectionPanel, "growx, growy, gaptop 10");
         
         // action button widgets
         final Runnable cleanup = new Runnable() {
@@ -252,7 +259,7 @@ public class DialogMigrateProfile {
       
         JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
         overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
-        overlay.add(p, "w 500::80%, h 100::90%");
+        overlay.add(p, "w 500::90%, h 100::90%");
         SOverlayUtils.showOverlay();
         
         // focus cancel button after the dialog is shown
@@ -312,7 +319,7 @@ public class DialogMigrateProfile {
             _isMigration    = isMigration;
             
             _selectionPanel.removeAll();
-            _selectionPanel.setLayout(new MigLayout("insets 0, gap 5, wrap"));
+            _selectionPanel.setLayout(new MigLayout("insets 0, gap 5, wrap, fill"));
             
             JPanel cbPanel = new JPanel(new MigLayout("insets 0, gap 5"));
             cbPanel.setOpaque(false);
@@ -387,7 +394,7 @@ public class DialogMigrateProfile {
             JScrollPane scroller = new JScrollPane(_operationLog);
             new SmartScroller(scroller);
             scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            _selectionPanel.add(scroller, "w 400:100%:100%, h 60:100%:100%");
+            _selectionPanel.add(scroller, "w 400:400:, hmin 60, growy, growx");
             
             // add progress bar
             _progressBar = new JProgressBar();
