@@ -1,4 +1,4 @@
-Forge Beta: 03-##-2013 ver 1.3.10
+Forge Beta: 03-##-2013 ver 1.3.11
 
 
 12### cards in total.
@@ -6,89 +6,10 @@ Forge Beta: 03-##-2013 ver 1.3.10
 
 Release Notes:
 
-A new quest world by Serrasmurf based on Ravinca has been added.
 
-An effort is being made to implement the split cards (e.g. Fire/Ice) in Forge. The initial effort to add support for split cards may be considered complete and the relevant branch has reen reintegrated to trunk. Expect some rough edges and incompatibilities along the way.
-
-The fat packs should now be available for purchase in the quest mode card shop.
-
-Information for non-card items in spell shop are now shown in the card details panel.
-
-Multiple problems with Convoke have been fixed.
-
-Forge should now be the Magic rules enforcing program with the most supported cards! That means we finally beat MtGO! MtGO is missing 828 cards. Even subtracting the Power Nine, which were available in the MtGO cube for some time, that's more than we are missing (805) at the time this was written.
 
 
 New Cards:
-
-Dimensional Breach
-Lim-Dul's Vault
-Eureka
-Hypergenesis
-Death by Dragons
-Carpet of Flowers
-Goblin Welder
-Delaying Shield
-Fatal Lore
-Library of Lat-Nam
-Misfortune
-Assault // Battery
-Fire // Ice
-Night // Day
-Trial // Error
-Wax // Wane
-Dead // Gone
-Illusion // Reality
-Life // Death
-Pure // Simple
-Rough // Tumble
-Supply // Demand
-Hide // Seek
-Order // Chaos
-Pain // Suffering
-Spite // Malice
-Stand // Deliver
-Boom // Bust
-Crime // Punishment
-Rise // Fall
-Bound // Determined
-Hit // Run
-Taniwha
-Natural Balance
-Balancing Act
-Odds // Ends
-Mana Clash
-Goblin Assassin
-Chain Lightning
-Chain of Vapor
-Vision Charm
-Ooze Flux
-Simic Manipulator
-Ashling the Pilgrim
-Inner-Flame Igniter
-Novijen Sages
-Trickbind
-Yare
-Mercadian Atlas
-
-
-New Phenomenons:
-
-
-
-
-New Planes:
-
-Feeding Grounds
-Horizon Boughs
-
-
-New Schemes:
-
-All in Good Time
-
-
-New Vanguard Avatars:
 
 
 

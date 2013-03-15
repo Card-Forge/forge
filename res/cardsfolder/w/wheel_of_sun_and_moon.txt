@@ -3,7 +3,7 @@ ManaCost:GW GW
 Types:Enchantment Aura
 K:Enchant player
 A:SP$ Attach | Cost$ GW GW | ValidTgts$ Player
-R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.OwnedBy Player.EnchantedBy | ReplaceWith$ Reveal | Description$ If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.nonToken+OwnedBy Player.EnchantedBy | ReplaceWith$ Reveal | Description$ If a card would be put into enchanted player's graveyard from anywhere, instead that card is revealed and put on the bottom of that player's library.
 SVar:Reveal:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | LibraryPosition$ -1 | Reveal$ True
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wheel_of_sun_and_moon.jpg

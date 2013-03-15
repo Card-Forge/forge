@@ -386,15 +386,11 @@ public class SpellPermanent extends Spell {
         return super.canPlayAI();
     }
 
-    public static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api) {
-        return checkETBEffects(card, sa, api, null);
-    }
-
     public static boolean checkETBEffects(final Card card, final AIPlayer ai) {
         return checkETBEffects(card, null, null, ai);
     }
 
-    private static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final AIPlayer ai) {
+    public static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final AIPlayer ai) {
         boolean rightapi = false;
 
         if (card.isCreature()
