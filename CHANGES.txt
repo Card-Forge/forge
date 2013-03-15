@@ -1,7 +1,7 @@
-Forge Beta: 03-##-2013 ver 1.3.10
+Forge Beta: 03-15-2013 ver 1.3.10
 
 
-12### cards in total.
+12247 cards in total.
 
 
 Release Notes:
@@ -21,60 +21,55 @@ Forge should now be the Magic rules enforcing program with the most supported ca
 
 New Cards:
 
-Dimensional Breach
-Lim-Dul's Vault
-Eureka
-Hypergenesis
-Death by Dragons
-Carpet of Flowers
-Goblin Welder
-Delaying Shield
-Fatal Lore
-Library of Lat-Nam
-Misfortune
+Ashling the Pilgrim
 Assault // Battery
-Fire // Ice
-Night // Day
-Trial // Error
-Wax // Wane
-Dead // Gone
-Illusion // Reality
-Life // Death
-Pure // Simple
-Rough // Tumble
-Supply // Demand
-Hide // Seek
-Order // Chaos
-Pain // Suffering
-Spite // Malice
-Stand // Deliver
-Boom // Bust
-Crime // Punishment
-Rise // Fall
-Bound // Determined
-Hit // Run
-Taniwha
-Natural Balance
 Balancing Act
-Odds // Ends
-Mana Clash
-Goblin Assassin
+Boom // Bust
+Bound // Determined
+Carpet of Flowers
 Chain Lightning
 Chain of Vapor
-Vision Charm
-Ooze Flux
-Simic Manipulator
-Ashling the Pilgrim
+Crime // Punishment
+Dead // Gone
+Death by Dragons
+Delaying Shield
+Dimensional Breach
+Eureka
+Fatal Lore
+Fire // Ice
+Goblin Assassin
+Goblin Welder
+Hide // Seek
+Hit // Run
+Hypergenesis
+Illusion // Reality
 Inner-Flame Igniter
-Novijen Sages
-Trickbind
-Yare
+Library of Lat-Nam
+Life // Death
+Lim-Dul's Vault
+Mana Clash
 Mercadian Atlas
-
-
-New Phenomenons:
-
-
+Misfortune
+Natural Balance
+Night // Day
+Novijen Sages
+Odds // Ends
+Ooze Flux
+Order // Chaos
+Pain // Suffering
+Pure // Simple
+Rise // Fall
+Rough // Tumble
+Simic Manipulator
+Spite // Malice
+Stand // Deliver
+Supply // Demand
+Taniwha
+Trial // Error
+Trickbind
+Vision Charm
+Wax // Wane
+Yare
 
 
 New Planes:
@@ -86,11 +81,6 @@ Horizon Boughs
 New Schemes:
 
 All in Good Time
-
-
-New Vanguard Avatars:
-
-
 
 
 Known Issues:
@@ -121,7 +111,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Contributors to This Release:
 
-
+Agetian
+AlexV
+Gos
+Marc
+Max
+Myk
+RumbleBBU
+Sloth
+Sol
+Serrasmurf
+Swordshine
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
