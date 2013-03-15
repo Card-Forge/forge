@@ -39,6 +39,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
@@ -308,6 +309,7 @@ public class DialogMigrateProfile {
         private final FCheckBox    _moveCheckbox;
         private final FCheckBox    _overwriteCheckbox;
         private final JTextArea    _operationLog;
+        private final JScrollPane  _operationLogScroller;
         private final JProgressBar _progressBar;
         
         // updates the _operationLog widget asynchronously to keep the UI responsive
@@ -391,10 +393,10 @@ public class DialogMigrateProfile {
             _operationLog.setLineWrap(true);
             _operationLog.setEditable(false);
             // autoscroll when we set/add text unless the user has intentionally scrolled somewhere else
-            JScrollPane scroller = new JScrollPane(_operationLog);
-            new SmartScroller(scroller);
-            scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            _selectionPanel.add(scroller, "w 400:400:, hmin 60, growy, growx");
+            _operationLogScroller = new JScrollPane(_operationLog);
+            _operationLogScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            new SmartScroller(_operationLogScroller);
+            _selectionPanel.add(_operationLogScroller, "w 400:400:, hmin 60, growy, growx");
             
             // add progress bar
             _progressBar = new JProgressBar();
@@ -485,6 +487,10 @@ public class DialogMigrateProfile {
                         // timers run in the gui event loop, so it's ok to interact with widgets
                         _progressBar.setValue(msa.getNumFilesAnalyzed());
                         _updateUI();
+                        
+                        // allow the the panel to resize to accommodate additional text
+                        _selectionPanel.getParent().validate();
+                        _selectionPanel.getParent().invalidate();
                     }
                 });
     
@@ -598,6 +604,11 @@ public class DialogMigrateProfile {
                         
                         // stop updating the operation log -- the importer needs it now
                         _operationLogUpdater.requestStop();
+                        
+                        // jump to the bottom of the log text area so it starts autoscrolling again
+                        // note that since it is controlled by a SmartScroller, just setting the caret position will not work
+                        JScrollBar scrollBar = _operationLogScroller.getVerticalScrollBar();
+                        scrollBar.setValue(scrollBar.getMaximum());
                         
                         // start importing!
                         _Importer importer = new _Importer(

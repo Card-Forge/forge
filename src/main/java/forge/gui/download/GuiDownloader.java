@@ -236,9 +236,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 this.card = card;
             }
 
-            /**
-             * 
-             */
             @Override
             public void run() {
                 GuiDownloader.this.fireStateChanged();
@@ -372,12 +369,13 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
     protected abstract ArrayList<DownloadObject> getNeededImages();
 
-    protected static ArrayList<DownloadObject> readFile(final String nameUrlFile, final String dir) {
-        final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
+    protected static void addMissingItems(ArrayList<DownloadObject> list, String nameUrlFile, String dir) {
         for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(nameUrlFile)) {
-            list.add(new DownloadObject(nameUrlPair.getRight(), new File(dir, nameUrlPair.getLeft())));
+            File f = new File(dir, nameUrlPair.getLeft());
+            if (!f.exists()) {
+                list.add(new DownloadObject(nameUrlPair.getRight(), f));
+            }
         }
-        return list;
     }
 
     protected class ProxyHandler implements ChangeListener {
@@ -397,30 +395,21 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         }
     }
 
-    /**
-     * The Class DownloadObject.
-     */
     protected static class DownloadObject {
 
         private final String source;
         private final File destination;
 
-        /**
-         * @param srcUrl {@link java.lang.String}
-         * @param destFile {@link java.io.File}
-         */
         DownloadObject(final String srcUrl, final File destFile) {
             source = srcUrl;
             destination = destFile;
             //System.out.println(String.format("downloading %s to %s", srcUrl, destFile));
         }
 
-        /** @return {@link java.lang.String} */
         public String getSource() {
             return source;
         }
 
-        /** @return {@link java.io.File} */
         public File getDestination() {
             return destination;
         }

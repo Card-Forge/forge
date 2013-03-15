@@ -45,47 +45,13 @@ public class GuiDownloadQuestImages extends GuiDownloader {
         // read all card names and urls
         final ArrayList<DownloadObject> urls = new ArrayList<DownloadObject>();
 
-        for (final DownloadObject questOpponent : GuiDownloader.readFile(NewConstants.IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE, NewConstants.CACHE_ICON_PICS_DIR)) {
-            if (!questOpponent.getDestination().exists()) {
-                urls.add(questOpponent);
-            }
-        }
-
-        for (final DownloadObject packImage : GuiDownloader.readFile(NewConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE, NewConstants.CACHE_BOOSTER_PICS_DIR)) {
-            if (!packImage.getDestination().exists()) {
-                urls.add(packImage);
-            }
-        }
-
-        for (final DownloadObject packImage : GuiDownloader.readFile(NewConstants.IMAGE_LIST_QUEST_FATPACKS_FILE, NewConstants.CACHE_FATPACK_PICS_DIR)) {
-            if (!packImage.getDestination().exists()) {
-                urls.add(packImage);
-            }
-        }
-
-        for (final DownloadObject packImage : GuiDownloader.readFile(NewConstants.IMAGE_LIST_QUEST_PRECONS_FILE, NewConstants.CACHE_PRECON_PICS_DIR)) {
-            if (!packImage.getDestination().exists()) {
-                urls.add(packImage);
-            }
-        }
-
-        for (final DownloadObject packImage : GuiDownloader.readFile(NewConstants.IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE, NewConstants.CACHE_TOURNAMENTPACK_PICS_DIR)) {
-            if (!packImage.getDestination().exists()) {
-                urls.add(packImage);
-            }
-        }
-
-        for (final DownloadObject petIcon : GuiDownloader.readFile(NewConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE, NewConstants.CACHE_ICON_PICS_DIR)) {
-            if (!petIcon.getDestination().exists()) {
-                urls.add(petIcon);
-            }
-        }
-
-        for (final DownloadObject questPet : GuiDownloader.readFile(NewConstants.IMAGE_LIST_QUEST_TOKENS_FILE, NewConstants.CACHE_TOKEN_PICS_DIR)) {
-            if (!questPet.getDestination().exists()) {
-                urls.add(questPet);
-            }
-        }
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE,  NewConstants.CACHE_ICON_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE,  NewConstants.CACHE_ICON_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE,        NewConstants.CACHE_BOOSTER_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_FATPACKS_FILE,        NewConstants.CACHE_FATPACK_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_PRECONS_FILE,         NewConstants.CACHE_PRECON_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE, NewConstants.CACHE_TOURNAMENTPACK_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_TOKENS_FILE,          NewConstants.CACHE_TOKEN_PICS_DIR);
 
         return urls;
     }

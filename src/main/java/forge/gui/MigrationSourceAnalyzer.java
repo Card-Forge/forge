@@ -19,9 +19,9 @@ package forge.gui;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -87,19 +87,19 @@ public class MigrationSourceAnalyzer {
         // dispatch to the best analysis subroutine to handle it
         String dirname = root.getName();
         
-        if ("res".equals(dirname))               { _analyzeOldResDir(root);          }
-        else if ("constructed".equals(dirname))  { _analyzeConstructedDeckDir(root); }
-        else if ("draft".equals(dirname))        { _analyzeDraftDeckDir(root);       }
-        else if ("plane".equals(dirname) || "planar".equals(dirname)) { _analyzePlanarDeckDir(root); }
-        else if ("scheme".equals(dirname))       { _analyzeSchemeDeckDir(root);      }
-        else if ("sealed".equals(dirname))       { _analyzeSealedDeckDir(root);      }
-        else if (StringUtils.containsIgnoreCase(dirname, "deck")) { _analyzeDecksDir(root);          }
-        else if ("gauntlet".equals(dirname))     { _analyzeGauntletDataDir(root);    }
-        else if ("layouts".equals(dirname))      { _analyzeLayoutsDir(root);         }
-        else if ("pics".equals(dirname))         { _analyzeCardPicsDir(root);        }
-        else if ("pics_product".equals(dirname)) { _analyzeProductPicsDir(root);     }
-        else if ("preferences".equals(dirname))  { _analyzePreferencesDir(root);     }
-        else if ("quest".equals(dirname))        { _analyzeQuestDir(root);           }
+        if ("res".equalsIgnoreCase(dirname))               { _analyzeOldResDir(root);          }
+        else if ("constructed".equalsIgnoreCase(dirname))  { _analyzeConstructedDeckDir(root); }
+        else if ("draft".equalsIgnoreCase(dirname))        { _analyzeDraftDeckDir(root);       }
+        else if ("plane".equalsIgnoreCase(dirname) || "planar".equalsIgnoreCase(dirname)) { _analyzePlanarDeckDir(root); }
+        else if ("scheme".equalsIgnoreCase(dirname))       { _analyzeSchemeDeckDir(root);      }
+        else if ("sealed".equalsIgnoreCase(dirname))       { _analyzeSealedDeckDir(root);      }
+        else if (StringUtils.containsIgnoreCase(dirname, "deck")) { _analyzeDecksDir(root);    }
+        else if ("gauntlet".equalsIgnoreCase(dirname))     { _analyzeGauntletDataDir(root);    }
+        else if ("layouts".equalsIgnoreCase(dirname))      { _analyzeLayoutsDir(root);         }
+        else if ("pics".equalsIgnoreCase(dirname))         { _analyzeCardPicsDir(root);        }
+        else if ("pics_product".equalsIgnoreCase(dirname)) { _analyzeProductPicsDir(root);     }
+        else if ("preferences".equalsIgnoreCase(dirname))  { _analyzePreferencesDir(root);     }
+        else if ("quest".equalsIgnoreCase(dirname))        { _analyzeQuestDir(root);           }
         else if (null != Singletons.getModel().getEditions().get(dirname)) { _analyzeCardPicsSetDir(root); }
         else {
             // look at files in directory and make a semi-educated guess based on file extensions
@@ -109,12 +109,12 @@ public class MigrationSourceAnalyzer {
 
                 if (file.isFile()) {
                     String filename = file.getName();
-                    if (filename.endsWith(".dck")) {
+                    if (StringUtils.endsWithIgnoreCase(filename, ".dck")) {
                         _analyzeDecksDir(root);
                         numUnhandledFiles = 0;
                         break;
-                    } else if (filename.endsWith(".dat")) {
-                        _analyzeQuestDataDir(root);
+                    } else if (StringUtils.endsWithIgnoreCase(filename, ".jpg")) {
+                        _analyzeCardPicsDir(root);
                         numUnhandledFiles = 0;
                         break;
                     }
@@ -136,19 +136,19 @@ public class MigrationSourceAnalyzer {
         _analyzeDir(root, new _Analyzer() {
             @Override boolean onDir(File dir) {
                 String dirname = dir.getName();
-                if ("decks".equals(dirname)) {
+                if ("decks".equalsIgnoreCase(dirname)) {
                     _analyzeDecksDir(dir);
-                } else if ("gauntlet".equals(dirname)) {
+                } else if ("gauntlet".equalsIgnoreCase(dirname)) {
                     _analyzeGauntletDataDir(dir);
-                } else if ("layouts".equals(dirname)) {
+                } else if ("layouts".equalsIgnoreCase(dirname)) {
                     _analyzeLayoutsDir(dir);
-                } else if ("pics".equals(dirname)) {
+                } else if ("pics".equalsIgnoreCase(dirname)) {
                     _analyzeCardPicsDir(dir);
-                } else if ("pics_product".equals(dirname)) {
+                } else if ("pics_product".equalsIgnoreCase(dirname)) {
                     _analyzeProductPicsDir(dir);
-                } else if ("preferences".equals(dirname)) {
+                } else if ("preferences".equalsIgnoreCase(dirname)) {
                     _analyzePreferencesDir(dir);
-                } else if ("quest".equals(dirname)) {
+                } else if ("quest".equalsIgnoreCase(dirname)) {
                     _analyzeQuestDir(dir);
                 } else {
                     return false;
@@ -167,25 +167,25 @@ public class MigrationSourceAnalyzer {
             @Override void onFile(File file) {
                 // we don't really expect any files in here, but if we find a .dck file, add it to the unknown list
                 String filename = file.getName();
-                if (filename.endsWith(".dck")) {
-                    File targetFile = new File(filename);
+                if (StringUtils.endsWithIgnoreCase(filename, ".dck")) {
+                    File targetFile = new File(_lcaseExt(filename));
                     _cb.addOp(OpType.UNKNOWN_DECK, file, targetFile);
                 }
             }
             
             @Override boolean onDir(File dir) {
                 String dirname = dir.getName();
-                if ("constructed".equals(dirname)) {
+                if ("constructed".equalsIgnoreCase(dirname)) {
                     _analyzeConstructedDeckDir(dir);
-                } else if ("cube".equals(dirname)) {
+                } else if ("cube".equalsIgnoreCase(dirname)) {
                     return false;
-                } else if ("draft".equals(dirname)) {
+                } else if ("draft".equalsIgnoreCase(dirname)) {
                     _analyzeDraftDeckDir(dir);
-                } else if ("plane".equals(dirname) || "planar".equals(dirname)) {
+                } else if ("plane".equalsIgnoreCase(dirname) || "planar".equalsIgnoreCase(dirname)) {
                     _analyzePlanarDeckDir(dir);
-                } else if ("scheme".equals(dirname)) {
+                } else if ("scheme".equalsIgnoreCase(dirname)) {
                     _analyzeSchemeDeckDir(dir);
-                } else if ("sealed".equals(dirname)) {
+                } else if ("sealed".equalsIgnoreCase(dirname)) {
                     _analyzeSealedDeckDir(dir);
                 } else {
                     _analyzeKnownDeckDir(dir, null, OpType.UNKNOWN_DECK);
@@ -219,9 +219,11 @@ public class MigrationSourceAnalyzer {
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
                 String filename = file.getName();
-                if (filename.endsWith(".dck")) {
-                    File targetFile = new File(targetDir, filename);
-                    _cb.addOp(opType, file, targetFile);
+                if (StringUtils.endsWithIgnoreCase(filename, ".dck")) {
+                    File targetFile = new File(targetDir, _lcaseExt(filename));
+                    if (!file.equals(targetFile)) {
+                        _cb.addOp(opType, file, targetFile);
+                    }
                 }
             }
             
@@ -242,8 +244,8 @@ public class MigrationSourceAnalyzer {
             @Override void onFile(File file) {
                 // find *.dat files, but exclude LOCKED_*
                 String filename = file.getName();
-                if (filename.endsWith(".dat") && !filename.startsWith("LOCKED_")) {
-                    File targetFile = new File(NewConstants.GAUNTLET_DIR.userPrefLoc, filename);
+                if (StringUtils.endsWithIgnoreCase(filename, ".dat") && !filename.startsWith("LOCKED_")) {
+                    File targetFile = new File(NewConstants.GAUNTLET_DIR.userPrefLoc, _lcaseExt(filename));
                     if (!file.equals(targetFile)) {
                         _cb.addOp(OpType.GAUNTLET_DATA, file, targetFile);
                     }
@@ -253,7 +255,7 @@ public class MigrationSourceAnalyzer {
     }
     
     //////////////////////////////////////////////////////////////////////////
-    // gauntlet
+    // layouts
     //
     
     private void _analyzeLayoutsDir(File root) {
@@ -261,11 +263,10 @@ public class MigrationSourceAnalyzer {
             @Override void onFile(File file) {
                 // find *_preferred.xml files
                 String filename = file.getName();
-                if (filename.endsWith("_preferred.xml")) {
-                    File targetFile = new File(NewConstants.USER_PREFS_DIR, file.getName().replace("_preferred", ""));
-                    if (!file.equals(targetFile)) {
-                        _cb.addOp(OpType.PREFERENCE_FILE, file, targetFile);
-                    }
+                if (StringUtils.endsWithIgnoreCase(filename, "_preferred.xml")) {
+                    File targetFile = new File(NewConstants.USER_PREFS_DIR,
+                            file.getName().toLowerCase(Locale.ENGLISH).replace("_preferred", ""));
+                    _cb.addOp(OpType.PREFERENCE_FILE, file, targetFile);
                 }
             }
         });
@@ -286,6 +287,9 @@ public class MigrationSourceAnalyzer {
                 out.append(c);
             }
         }
+        
+        // usually we would want to pass Locale.ENGLISH to the toLowerCase() method to prevent unintentional
+        // character mangling on some system locales, but we want to replicate the old code here exactly
         return out.toString().toLowerCase();
     }
     
@@ -297,10 +301,10 @@ public class MigrationSourceAnalyzer {
         int numPics = urls.split("\\\\").length;
         for (int artIdx = 0; numPics > artIdx; ++artIdx) {
             String filename = c.getImageKey(backFace, artIdx, false) + ".jpg";
-            _defaultPicNames.add(filename);
+            _defaultPicNames.put(filename, filename);
             
             final String oldFilenameBase;
-            if (cardRules.getType().isPlane()) {
+            if (cardRules.getType().isPlane() || cardRules.getType().isPhenomenon()) {
                 oldFilenameBase = _oldCleanString(filename.replace(".jpg", ""));
             } else {
                 oldFilenameBase = _oldCleanString(filename.replace(".full.jpg", ""));
@@ -318,12 +322,12 @@ public class MigrationSourceAnalyzer {
         }
     }
     
-    private Set<String>         _defaultPicNames;
+    private Map<String, String> _defaultPicNames;
     private Map<String, String> _defaultPicOldNameToCurrentName;
     private void _analyzeCardPicsDir(File root) {
         if (null == _defaultPicNames) {
-            _defaultPicNames = new HashSet<String>();
-            _defaultPicOldNameToCurrentName = new HashMap<String, String>();
+            _defaultPicNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+            _defaultPicOldNameToCurrentName = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
             for (CardPrinted c : CardDb.instance().getUniqueCards()) {
                 _addDefaultPicNames(c, false);
@@ -341,15 +345,15 @@ public class MigrationSourceAnalyzer {
                 if (_defaultPicOldNameToCurrentName.containsKey(filename)) {
                     return _defaultPicOldNameToCurrentName.get(filename);
                 }
-                return _defaultPicNames.contains(filename) ? filename : null;
+                return _defaultPicNames.containsKey(filename) ? _defaultPicNames.get(filename) : null;
             }
             
             @Override public OpType getOpType(String filename) { return OpType.DEFAULT_CARD_PIC; }
             
             @Override boolean onDir(File dir) {
-                if ("icons".equals(dir.getName())) {
+                if ("icons".equalsIgnoreCase(dir.getName())) {
                     _analyzeIconsPicsDir(dir);
-                } else if ("tokens".equals(dir.getName())) {
+                } else if ("tokens".equalsIgnoreCase(dir.getName())) {
                     _analyzeTokenPicsDir(dir);
                 } else {
                     _analyzeCardPicsSetDir(dir);
@@ -363,23 +367,25 @@ public class MigrationSourceAnalyzer {
     // set card pics
     //
     
-    private static void _addSetCards(Set<String> cardFileNames, Iterable<CardPrinted> library, Predicate<CardPrinted> filter) {
+    private static void _addSetCards(Map<String, String> cardFileNames, Iterable<CardPrinted> library, Predicate<CardPrinted> filter) {
         for (CardPrinted c : Iterables.filter(library, filter)) {
             boolean hasBackFace = null != c.getRules().getPictureOtherSideUrl();
-            cardFileNames.add(c.getImageKey(false, c.getArtIndex(), true) + ".jpg");
+            String filename = c.getImageKey(false, c.getArtIndex(), true) + ".jpg";
+            cardFileNames.put(filename, filename);
             if (hasBackFace) {
-                cardFileNames.add(c.getImageKey(true, c.getArtIndex(), true) + ".jpg");
+                filename = c.getImageKey(true, c.getArtIndex(), true) + ".jpg";
+                cardFileNames.put(filename, filename);
             }
         }
     }
     
-    Map<String, Set<String>> _cardFileNamesBySet;
-    Map<String, String>      _nameUpdates;
+    Map<String, Map<String, String>> _cardFileNamesBySet;
+    Map<String, String>              _nameUpdates;
     private void _analyzeCardPicsSetDir(File root) {
         if (null == _cardFileNamesBySet) {
-            _cardFileNamesBySet = new HashMap<String, Set<String>>();
+            _cardFileNamesBySet = new TreeMap<String, Map<String, String>>(String.CASE_INSENSITIVE_ORDER);
             for (CardEdition ce : Singletons.getModel().getEditions()) {
-                Set<String> cardFileNames = new HashSet<String>();
+                Map<String, String> cardFileNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
                 Predicate<CardPrinted> filter = IPaperCard.Predicates.printedInSets(ce.getCode());
                 _addSetCards(cardFileNames, CardDb.instance().getAllCards(), filter);
                 _addSetCards(cardFileNames, CardDb.variants().getAllCards(), filter);
@@ -387,7 +393,7 @@ public class MigrationSourceAnalyzer {
             }
             
             // planar cards now don't have the ".full" part in their filenames
-            _nameUpdates = new HashMap<String, String>();
+            _nameUpdates = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
             Predicate<CardPrinted> predPlanes = new Predicate<CardPrinted>() {
                 @Override
                 public boolean apply(CardPrinted arg0) {
@@ -411,20 +417,19 @@ public class MigrationSourceAnalyzer {
         CardEdition edition = editions.get(editionCode);
         if (null == edition) {
             // not a valid set name, skip
-            System.out.println("skipping umappable set directory: " + root);
             _numFilesAnalyzed += _countFiles(root);
             return;
         }
         
         final String editionCode2 = edition.getCode2();
-        final Set<String> validFilenames = _cardFileNamesBySet.get(editionCode2);
+        final Map<String, String> validFilenames = _cardFileNamesBySet.get(editionCode2);
         _analyzeListedDir(root, NewConstants.CACHE_CARD_PICS_DIR, new _ListedAnalyzer() {
             @Override public String map(String filename) {
                 filename = editionCode2 + "/" + filename;
                 if (_nameUpdates.containsKey(filename)) {
                     filename = _nameUpdates.get(filename);
                 }
-                return validFilenames.contains(filename) ? filename : null;
+                return validFilenames.containsKey(filename) ? validFilenames.get(filename) : null;
             }
             @Override public OpType getOpType(String filename) { return OpType.SET_CARD_PIC; }
         });
@@ -434,44 +439,46 @@ public class MigrationSourceAnalyzer {
     // other image dirs
     //
 
-    Set<String> _iconFileNames;
+    Map<String, String> _iconFileNames;
     private void _analyzeIconsPicsDir(File root) {
         if (null == _iconFileNames) {
-            _iconFileNames = new HashSet<String>();
+            _iconFileNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
             for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(NewConstants.IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE)) {
-                _iconFileNames.add(nameurl.getLeft());
+                _iconFileNames.put(nameurl.getLeft(), nameurl.getLeft());
             }
             for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(NewConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE)) {
-                _iconFileNames.add(nameurl.getLeft());
+                _iconFileNames.put(nameurl.getLeft(), nameurl.getLeft());
             }
         }
 
         _analyzeListedDir(root, NewConstants.CACHE_ICON_PICS_DIR, new _ListedAnalyzer() {
-            @Override public String map(String filename) { return _iconFileNames.contains(filename) ? filename : null; }
+            @Override public String map(String filename) { return _iconFileNames.containsKey(filename) ? _iconFileNames.get(filename) : null; }
             @Override public OpType getOpType(String filename) { return OpType.QUEST_PIC; }
         });
     }
     
-    Set<String> _tokenFileNames;
-    Set<String> _questTokenFileNames;
+    Map<String, String> _tokenFileNames;
+    Map<String, String> _questTokenFileNames;
     private void _analyzeTokenPicsDir(File root) {
         if (null == _tokenFileNames) {
-            _tokenFileNames = new HashSet<String>();
-            _questTokenFileNames = new HashSet<String>();
+            _tokenFileNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+            _questTokenFileNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
             for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(NewConstants.IMAGE_LIST_TOKENS_FILE)) {
-                _tokenFileNames.add(nameurl.getLeft());
+                _tokenFileNames.put(nameurl.getLeft(), nameurl.getLeft());
             }
             for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(NewConstants.IMAGE_LIST_QUEST_TOKENS_FILE)) {
-                _questTokenFileNames.add(nameurl.getLeft());
+                _questTokenFileNames.put(nameurl.getLeft(), nameurl.getLeft());
             }
         }
         
         _analyzeListedDir(root, NewConstants.CACHE_TOKEN_PICS_DIR, new _ListedAnalyzer() {
             @Override public String map(String filename) {
-                return (_questTokenFileNames.contains(filename) || _tokenFileNames.contains(filename)) ? filename : null;
+                if (_questTokenFileNames.containsKey(filename)) { return _questTokenFileNames.get(filename); }
+                if (_tokenFileNames.containsKey(filename))      { return _tokenFileNames.get(filename); }
+                return null;
             }
             @Override public OpType getOpType(String filename) {
-                return _questTokenFileNames.contains(filename) ? OpType.QUEST_PIC : OpType.TOKEN_PIC;
+                return _questTokenFileNames.containsKey(filename) ? OpType.QUEST_PIC : OpType.TOKEN_PIC;
             }
         });
     }
@@ -480,13 +487,14 @@ public class MigrationSourceAnalyzer {
         // we don't care about the files in the root dir -- the new files are .png, not the current .jpg ones
         _analyzeDir(root, new _Analyzer() {
             @Override boolean onDir(File dir) {
-                if ("booster".equals(dir.getName())) {
+                String dirName = dir.getName();
+                if ("booster".equalsIgnoreCase(dirName)) {
                     _analyzeSimpleListedDir(dir, NewConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE, NewConstants.CACHE_BOOSTER_PICS_DIR, OpType.QUEST_PIC);
-                } else if ("fatpacks".equals(dir.getName())) {
+                } else if ("fatpacks".equalsIgnoreCase(dirName)) {
                     _analyzeSimpleListedDir(dir, NewConstants.IMAGE_LIST_QUEST_FATPACKS_FILE, NewConstants.CACHE_FATPACK_PICS_DIR, OpType.QUEST_PIC);
-                } else if ("precons".equals(dir.getName())) {
+                } else if ("precons".equalsIgnoreCase(dirName)) {
                     _analyzeSimpleListedDir(dir, NewConstants.IMAGE_LIST_QUEST_PRECONS_FILE, NewConstants.CACHE_PRECON_PICS_DIR, OpType.QUEST_PIC);
-                } else if ("tournamentpacks".equals(dir.getName())) {
+                } else if ("tournamentpacks".equalsIgnoreCase(dirName)) {
                     _analyzeSimpleListedDir(dir, NewConstants.IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE, NewConstants.CACHE_TOURNAMENTPACK_PICS_DIR, OpType.QUEST_PIC);
                 } else {
                     return false;
@@ -504,8 +512,8 @@ public class MigrationSourceAnalyzer {
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
                 String filename = file.getName();
-                if ("editor.preferences".equals(filename) || "forge.preferences".equals(filename)) {
-                    File targetFile = new File(NewConstants.USER_PREFS_DIR, file.getName());
+                if ("editor.preferences".equalsIgnoreCase(filename) || "forge.preferences".equalsIgnoreCase(filename)) {
+                    File targetFile = new File(NewConstants.USER_PREFS_DIR, filename.toLowerCase(Locale.ENGLISH));
                     if (!file.equals(targetFile)) {
                         _cb.addOp(OpType.PREFERENCE_FILE, file, targetFile);
                     }
@@ -521,16 +529,16 @@ public class MigrationSourceAnalyzer {
     private void _analyzeQuestDir(File root) {
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
-                if ("all-prices.txt".equals(file.getName())) {
-                    File targetFile = new File(NewConstants.DB_DIR, file.getName());
+                String filename = file.getName();
+                if ("all-prices.txt".equalsIgnoreCase(filename)) {
+                    File targetFile = new File(NewConstants.DB_DIR, filename.toLowerCase(Locale.ENGLISH));
                     if (!file.equals(targetFile)) {
                         _cb.addOp(OpType.DB_FILE, file, targetFile);
                     }
                 }
             }
-            
             @Override boolean onDir(File dir) {
-                if ("data".equals(dir.getName())) {
+                if ("data".equalsIgnoreCase(dir.getName())) {
                     _analyzeQuestDataDir(dir);
                     return true;
                 }
@@ -542,8 +550,9 @@ public class MigrationSourceAnalyzer {
     private void _analyzeQuestDataDir(File root) {
         _analyzeDir(root, new _Analyzer() {
             @Override void onFile(File file) {
-                if (file.getName().endsWith(".dat")) {
-                    File targetFile = new File(NewConstants.QUEST_SAVE_DIR, file.getName());
+                String filename = file.getName();
+                if (StringUtils.endsWithIgnoreCase(filename, ".dat")) {
+                    File targetFile = new File(NewConstants.QUEST_SAVE_DIR, _lcaseExt(filename));
                     if (!file.equals(targetFile)) {
                         _cb.addOp(OpType.QUEST_DATA, file, targetFile);
                     }
@@ -578,19 +587,20 @@ public class MigrationSourceAnalyzer {
         }
     }
     
-    private Map<String, Set<String>> _fileNameDb = new HashMap<String, Set<String>>();
+    private Map<String, Map<String, String>> _fileNameDb = new HashMap<String, Map<String, String>>();
     private void _analyzeSimpleListedDir(File root, String listFile, String targetDir, final OpType opType) {
         if (!_fileNameDb.containsKey(listFile)) {
-            Set<String> fileNames = new HashSet<String>();
+            Map<String, String> fileNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
             for (Pair<String, String> nameurl : FileUtil.readNameUrlFile(listFile)) {
-                fileNames.add(nameurl.getLeft());
+                // we use a map instead of a set since we need to match case-insensitively but still map to the correct case 
+                fileNames.put(nameurl.getLeft(), nameurl.getLeft());
             }
             _fileNameDb.put(listFile, fileNames);
         }
         
-        final Set<String> dbSet = _fileNameDb.get(listFile);
+        final Map<String, String> fileDb = _fileNameDb.get(listFile);
         _analyzeListedDir(root, targetDir, new _ListedAnalyzer() {
-            @Override public String map(String filename) { return dbSet.contains(filename) ? filename : null; }
+            @Override public String map(String filename) { return fileDb.containsKey(filename) ? fileDb.get(filename) : null; }
             @Override public OpType getOpType(String filename) { return opType; }
         });
     }
@@ -631,5 +641,18 @@ public class MigrationSourceAnalyzer {
             }
         }
         return count;
+    }
+    
+    private String _lcaseExt(String filename) {
+        int lastDotIdx = filename.lastIndexOf('.');
+        if (0 > lastDotIdx) {
+            return filename;
+        }
+        String basename = filename.substring(0, lastDotIdx);
+        String ext      = filename.substring(lastDotIdx).toLowerCase(Locale.ENGLISH);
+        if (filename.endsWith(ext)) {
+            return filename;
+        }
+        return basename + ext;
     }
 }
