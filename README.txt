@@ -408,7 +408,7 @@ Forge now has sideboards for the human player:
 Sideboards have been implemented for Human players. We currently have:
 
 * Sideboard creation support in relevant deck editor modes.
-* In-game sideboarding with persistence between rounds in a match and sorting of cards in the editor.
+* In-game sideboarding with persistence between rounds in a match and sorting of cards in the in-game sideboard editor.
 * Sideboard supported as a zone, with some relevant cards already in.
 * Correct validation of decks, both before the game starts and between the rounds (Limited min 40, Constructed min 60, free-form sideboard/main in Draft and Sealed, 1:1 sideboarding with 0 or 15 cards allowed in sideboard in Constructed (all variants) and Quest; OK to have less than minimum between rounds in a match in all modes if lost cards on ante).
 * Correct (fingers crossed) interaction of sideboarding with other relevant aspects of Forge rule enforcement (mulligan and ante interactions were corrected, initial hand and library between rounds were both corrected, everything else looks so far so good).
