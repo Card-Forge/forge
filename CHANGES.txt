@@ -1,86 +1,17 @@
-Forge Beta: 03-15-2013 ver 1.3.10
+Forge Beta: 03-##-2013 ver 1.3.11
 
 
-12247 cards in total.
+12### cards in total.
 
 
 Release Notes:
 
-A new quest world by Serrasmurf based on Ravinca has been added.
 
-An effort is being made to implement the split cards (e.g. Fire/Ice) in Forge. The initial effort to add support for split cards may be considered complete and the relevant branch has reen reintegrated to trunk. Expect some rough edges and incompatibilities along the way.
-
-The fat packs should now be available for purchase in the quest mode card shop.
-
-Information for non-card items in spell shop are now shown in the card details panel.
-
-Multiple problems with Convoke have been fixed.
-
-Forge should now be the Magic rules enforcing program with the most supported cards! That means we finally beat MtGO! MtGO is missing 828 cards. Even subtracting the Power Nine, which were available in the MtGO cube for some time, that's more than we are missing (805) at the time this was written.
 
 
 New Cards:
 
-Ashling the Pilgrim
-Assault // Battery
-Balancing Act
-Boom // Bust
-Bound // Determined
-Carpet of Flowers
-Chain Lightning
-Chain of Vapor
-Crime // Punishment
-Dead // Gone
-Death by Dragons
-Delaying Shield
-Dimensional Breach
-Eureka
-Fatal Lore
-Fire // Ice
-Goblin Assassin
-Goblin Welder
-Hide // Seek
-Hit // Run
-Hypergenesis
-Illusion // Reality
-Inner-Flame Igniter
-Library of Lat-Nam
-Life // Death
-Lim-Dul's Vault
-Mana Clash
-Mercadian Atlas
-Misfortune
-Natural Balance
-Night // Day
-Novijen Sages
-Odds // Ends
-Ooze Flux
-Order // Chaos
-Pain // Suffering
-Pure // Simple
-Rise // Fall
-Rough // Tumble
-Simic Manipulator
-Spite // Malice
-Stand // Deliver
-Supply // Demand
-Taniwha
-Trial // Error
-Trickbind
-Vision Charm
-Wax // Wane
-Yare
 
-
-New Planes:
-
-Feeding Grounds
-Horizon Boughs
-
-
-New Schemes:
-
-All in Good Time
 
 
 Known Issues:
@@ -111,18 +42,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Contributors to This Release:
 
-Agetian
-AlexV
-Gos
-Marc
-Max
-Myk
-RumbleBBU
-Sloth
-Sol
-Serrasmurf
-Swordshine
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
