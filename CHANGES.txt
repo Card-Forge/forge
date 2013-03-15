@@ -108,6 +108,8 @@ A recent contribution to the code base should fix some of the bugs that people n
 1. Leave play triggers don't work correct for clones.
 2. Copies of cards that setup Zone Change triggers via addComesIntoPlayCommand and addLeavesPlayCommand will not function correctly.
 
+There is currently a known issue with some of the cards that have effects triggering after the card goes to graveyard (e.g. Wall of Corpses, Abu Ja'Far) not working correctly.
+
 Forge is likely to be compatible with Java 7 at this time. Some people have used forge with Java 7 and have not reported any problems that are related to Java 7. If you would like to upgrade to Java 7 and have held off because of Forge then you may upgrade as we do not think that it will cause an incompatibility type of problem. We will continue to try to maintain compatibility with Java 6 for the foreseeable future.
 
 The Forge archive includes a readme.txt file and we ask that you spend a few minutes reading this file as it contains some information that may prove useful. We do tend to update this file at times and you should quickly read this file and look for new information for each and every new release. Thank you.
