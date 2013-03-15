@@ -8869,6 +8869,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.hasProtectionFrom(sa.getSourceCard())) {
             return false;
         }
+        
+        if (this.isPhasedOut()) {
+            return false;
+        }
 
         if (this.getKeyword() != null) {
             final Card source = sa.getSourceCard();
