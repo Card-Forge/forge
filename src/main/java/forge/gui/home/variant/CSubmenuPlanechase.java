@@ -81,26 +81,17 @@ public enum CSubmenuPlanechase implements ICDoc {
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
      */
+    @SuppressWarnings("serial")
     @Override
     public void initialize() {
-
         VSubmenuPlanechase.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
-            private static final long serialVersionUID = -5279533218897076308L;
-
             @Override
             public void execute() {
                 Predicate<CardPrinted> predPlanes = new Predicate<CardPrinted>() {
-
                     @Override
                     public boolean apply(CardPrinted arg0) {
-                        if(arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon())
-                        {
-                            return true;
-                        }
-                        
-                        return false;
+                        return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
                     }
-                    
                 };
                 
                 FControl.SINGLETON_INSTANCE.changeState(FControl.Screens.DECK_EDITOR_CONSTRUCTED);

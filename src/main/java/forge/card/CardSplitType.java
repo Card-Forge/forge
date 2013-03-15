@@ -2,10 +2,6 @@ package forge.card;
 
 import forge.CardCharacteristicName;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public enum CardSplitType
 {
     None(AggregationMethod.USE_PRIMARY_FACE, null),
@@ -14,19 +10,12 @@ public enum CardSplitType
     Flip(AggregationMethod.USE_PRIMARY_FACE, CardCharacteristicName.Flipped),
     // used by 12 licid creatures to switch type into enchantment aura
     Licid(AggregationMethod.USE_PRIMARY_FACE, CardCharacteristicName.Licid); 
-    
-    
-
-
 
     private CardSplitType(AggregationMethod calcMode, CardCharacteristicName stateName) {
         method = calcMode;
         this.changedStateName = stateName;
     }
 
-    /**
-     * @return the calculationMode
-     */
     public AggregationMethod getAggregationMethod() {
         return method;
     }
@@ -45,4 +34,3 @@ public enum CardSplitType
         return changedStateName;
     }
 }
-

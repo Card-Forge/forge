@@ -54,20 +54,12 @@ public final class CardType implements Comparable<CardType> {
         }
     }
 
-    private CardType() {
-    } // use static ctors!
+    private CardType() { }
 
     // TODO: Debug this code
-    /**
-     * Parses the.
-     * 
-     * @param typeText
-     *            the type text
-     * @return the card type
-     */
     public static CardType parse(final String typeText) {
-        // Most types and subtypes, except "Serra�s Realm" and
-        // "Bolas�s Meditation Realm" consist of only one word
+        // Most types and subtypes, except "Serra's Realm" and
+        // "Bolas's Meditation Realm" consist of only one word
         final char space = ' ';
         final CardType result = new CardType();
 
@@ -130,152 +122,66 @@ public final class CardType implements Comparable<CardType> {
         this.subType.add(type);
     }
 
-    /**
-     * Sub type contains.
-     * 
-     * @param operand
-     *            the operand
-     * @return true, if successful
-     */
     public boolean subTypeContains(final String operand) {
         return this.subType.contains(operand);
     }
 
-    /**
-     * Type contains.
-     * 
-     * @param operand
-     *            the operand
-     * @return true, if successful
-     */
     public boolean typeContains(final CardCoreType operand) {
         return this.coreType.contains(operand);
     }
 
-    /**
-     * Super type contains.
-     * 
-     * @param operand
-     *            the operand
-     * @return true, if successful
-     */
     public boolean superTypeContains(final CardSuperType operand) {
         return this.superType.contains(operand);
     }
 
-    /**
-     * Checks if is creature.
-     * 
-     * @return true, if is creature
-     */
     public boolean isCreature() {
         return this.coreType.contains(CardCoreType.Creature);
     }
 
-    /**
-     * Checks if is planeswalker.
-     * 
-     * @return true, if is planeswalker
-     */
     public boolean isPlaneswalker() {
         return this.coreType.contains(CardCoreType.Planeswalker);
     }
 
-    /**
-     * Checks if is land.
-     * 
-     * @return true, if is land
-     */
     public boolean isLand() {
         return this.coreType.contains(CardCoreType.Land);
     }
 
-    /**
-     * Checks if is artifact.
-     * 
-     * @return true, if is artifact
-     */
     public boolean isArtifact() {
         return this.coreType.contains(CardCoreType.Artifact);
     }
 
-    /**
-     * Checks if is instant.
-     * 
-     * @return true, if is instant
-     */
     public boolean isInstant() {
         return this.coreType.contains(CardCoreType.Instant);
     }
 
-    /**
-     * Checks if is sorcery.
-     * 
-     * @return true, if is sorcery
-     */
     public boolean isSorcery() {
         return this.coreType.contains(CardCoreType.Sorcery);
     }
 
-    /**
-     * Checks if is vanguard.
-     * 
-     * @return true if vanguard
-     */
     public boolean isVanguard() {
         return this.coreType.contains(CardCoreType.Vanguard);
     }
 
-    /**
-     * Checks if is scheme.
-     * 
-     * @return true if scheme
-     */
     public boolean isScheme() {
         return this.coreType.contains(CardCoreType.Scheme);
     }
 
-    /**
-     * Checks if is enchantment.
-     * 
-     * @return true, if is enchantment
-     */
     public boolean isEnchantment() {
         return this.coreType.contains(CardCoreType.Enchantment);
     }
 
-    /**
-     * Checks if is basic.
-     * 
-     * @return true, if is basic
-     */
     public boolean isBasic() {
         return this.superType.contains(CardSuperType.Basic);
     }
 
-    /**
-     * Checks if is legendary.
-     * 
-     * @return true, if is legendary
-     */
     public boolean isLegendary() {
         return this.superType.contains(CardSuperType.Legendary);
     }
 
-    /**
-     * Checks if is basic land.
-     * 
-     * @return true, if is basic land
-     */
     public boolean isBasicLand() {
         return this.isBasic() && this.isLand();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
         if (null == this.calculatedType) {
@@ -292,11 +198,6 @@ public final class CardType implements Comparable<CardType> {
         }
     }
 
-    /**
-     * Gets the types before dash.
-     * 
-     * @return the types before dash
-     */
     public List<String> getTypesBeforeDash() {
         final ArrayList<String> types = new ArrayList<String>();
         for (final CardSuperType st : this.superType) {
@@ -308,31 +209,15 @@ public final class CardType implements Comparable<CardType> {
         return types;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
     @Override
     public int compareTo(final CardType o) {
         return this.toString().compareTo(o.toString());
     }
 
-    /**
-     * Gets the sub types.
-     *
-     * @return the sub types
-     */
     public List<String> getSubTypes() {
         return this.subType;
     }
 
-    /**
-     * Shares sub type with.
-     *
-     * @param ctOther the ct other
-     * @return true, if successful
-     */
     public boolean sharesSubTypeWith(CardType ctOther) {
         for (String t : ctOther.getSubTypes()) {
             if (this.subTypeContains(t)) {
@@ -343,43 +228,19 @@ public final class CardType implements Comparable<CardType> {
         return false;
     }
 
-    /**
-     * Returns wether or not this card is a Plane.
-     * @return a boolean
-     */
     public boolean isPlane() {
         return this.coreType.contains(CardCoreType.Plane);
     }
     
-    /**
-     * Returns wether or not this card is a Phenomenon.
-     * @return a boolean
-     */
     public boolean isPhenomenon() {
         return this.coreType.contains(CardCoreType.Phenomenon);
     }
 
-    ///////// THIS ARRIVED FROM CardUtil
-    /**
-     * <p>
-     * isACardType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
+    ///////// Utility methods
     public static boolean isACardType(final String cardType) {
         return CardType.getAllCardTypes().contains(cardType);
     }
 
-    /**
-     * <p>
-     * getAllCardTypes.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
     public static ArrayList<String> getAllCardTypes() {
         final ArrayList<String> types = new ArrayList<String>();
     
@@ -394,14 +255,6 @@ public final class CardType implements Comparable<CardType> {
         return types;
     }
 
-    /**
-     * <p>
-     * getBasicTypes.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     * @since 1.1.3
-     */
     public static ArrayList<String> getBasicTypes() {
         final ArrayList<String> types = new ArrayList<String>();
     
@@ -410,11 +263,6 @@ public final class CardType implements Comparable<CardType> {
         return types;
     }
 
-    /**
-     * Gets the land types.
-     * 
-     * @return the land types
-     */
     public static ArrayList<String> getLandTypes() {
         final ArrayList<String> types = new ArrayList<String>();
     
@@ -424,14 +272,6 @@ public final class CardType implements Comparable<CardType> {
         return types;
     }
 
-    /**
-     * <p>
-     * getCreatureTypes.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     * @since 1.1.6
-     */
     public static ArrayList<String> getCreatureTypes() {
         final ArrayList<String> types = new ArrayList<String>();
     
@@ -440,79 +280,26 @@ public final class CardType implements Comparable<CardType> {
         return types;
     }
 
-    /**
-     * <p>
-     * isASuperType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    
     public static boolean isASuperType(final String cardType) {
         return (Constant.CardTypes.SUPER_TYPES.contains(cardType));
     }
 
-    /**
-     * <p>
-     * isASubType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
     public static boolean isASubType(final String cardType) {
         return (!CardType.isASuperType(cardType) && !CardType.isACardType(cardType));
     }
 
-    /**
-     * <p>
-     * isACreatureType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
     public static boolean isACreatureType(final String cardType) {
         return (Constant.CardTypes.CREATURE_TYPES.contains(cardType));
     }
 
-    /**
-     * <p>
-     * isALandType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
     public static boolean isALandType(final String cardType) {
         return (Constant.CardTypes.LAND_TYPES.contains(cardType));
     }
 
-    /**
-     * Checks if is a planeswalker type.
-     * 
-     * @param cardType
-     *            the card type
-     * @return true, if is a planeswalker type
-     */
     public static boolean isAPlaneswalkerType(final String cardType) {
         return (Constant.CardTypes.WALKER_TYPES.contains(cardType));
     }
 
-    /**
-     * <p>
-     * isABasicLandType.
-     * </p>
-     * 
-     * @param cardType
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
     public static boolean isABasicLandType(final String cardType) {
         return (Constant.CardTypes.BASIC_TYPES.contains(cardType));
     }

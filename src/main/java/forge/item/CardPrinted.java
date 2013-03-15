@@ -56,15 +56,6 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
     private final transient CardRarity rarity; // rarity is given in ctor when
                                                // set is assigned
 
-    // field RO accessors
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getName()
-     */
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getName()
-     */
     @Override
     public String getName() {
         return this.name;
@@ -75,46 +66,26 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
         return name;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getSet()
-     */
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getEdition()
-     */
     @Override
     public String getEdition() {
         return this.edition;
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getArtIndex()
-     */
     @Override
     public int getArtIndex() {
         return this.artIndex;
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#isFoil()
-     */
     @Override
     public boolean isFoil() {
         return this.foiled;
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getRules()
-     */
     @Override
     public CardRules getRules() {
         return this.card;
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getRarity()
-     */
     @Override
     public CardRarity getRarity() {
         return this.rarity;
@@ -193,7 +164,11 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
         if (cntPictures > 1  && cntPictures > artIdx) {
             s.append(artIdx + 1);
         }
-        s.append(".full");
+        
+        // for whatever reason, MWS-named plane cards don't have the ".full" infix
+        if (!card.getType().isPlane() && !card.getType().isPhenomenon()) {
+            s.append(".full");
+        }
         
         final String fname;
         if (base64encode) {

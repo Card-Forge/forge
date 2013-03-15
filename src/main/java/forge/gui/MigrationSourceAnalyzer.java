@@ -299,7 +299,13 @@ public class MigrationSourceAnalyzer {
             String filename = c.getImageKey(backFace, artIdx, false) + ".jpg";
             _defaultPicNames.add(filename);
             
-            String oldFilenameBase = _oldCleanString(filename.replace(".full.jpg", ""));
+            final String oldFilenameBase;
+            if (cardRules.getType().isPlane()) {
+                oldFilenameBase = _oldCleanString(filename.replace(".jpg", ""));
+            } else {
+                oldFilenameBase = _oldCleanString(filename.replace(".full.jpg", ""));
+            }
+            
             if (0 == artIdx) {
                 // remove trailing "1" from first art index
                 String oldFilename = oldFilenameBase.replaceAll("1$", "") + ".jpg";
@@ -368,6 +374,7 @@ public class MigrationSourceAnalyzer {
     }
     
     Map<String, Set<String>> _cardFileNamesBySet;
+    Map<String, String>      _nameUpdates;
     private void _analyzeCardPicsSetDir(File root) {
         if (null == _cardFileNamesBySet) {
             _cardFileNamesBySet = new HashMap<String, Set<String>>();
@@ -377,6 +384,25 @@ public class MigrationSourceAnalyzer {
                 _addSetCards(cardFileNames, CardDb.instance().getAllCards(), filter);
                 _addSetCards(cardFileNames, CardDb.variants().getAllCards(), filter);
                 _cardFileNamesBySet.put(ce.getCode2(), cardFileNames);
+            }
+            
+            // planar cards now don't have the ".full" part in their filenames
+            _nameUpdates = new HashMap<String, String>();
+            Predicate<CardPrinted> predPlanes = new Predicate<CardPrinted>() {
+                @Override
+                public boolean apply(CardPrinted arg0) {
+                    return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
+                }
+            };
+
+            for (CardPrinted c : Iterables.filter(CardDb.variants().getAllCards(), predPlanes)) {
+                boolean hasBackFace = null != c.getRules().getPictureOtherSideUrl();
+                String baseName = c.getImageKey(false, c.getArtIndex(), true);
+                _nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
+                if (hasBackFace) {
+                    baseName = c.getImageKey(true, c.getArtIndex(), true);
+                    _nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
+                }
             }
         }
 
@@ -395,6 +421,9 @@ public class MigrationSourceAnalyzer {
         _analyzeListedDir(root, NewConstants.CACHE_CARD_PICS_DIR, new _ListedAnalyzer() {
             @Override public String map(String filename) {
                 filename = editionCode2 + "/" + filename;
+                if (_nameUpdates.containsKey(filename)) {
+                    filename = _nameUpdates.get(filename);
+                }
                 return validFilenames.contains(filename) ? filename : null;
             }
             @Override public OpType getOpType(String filename) { return OpType.SET_CARD_PIC; }
