@@ -18,11 +18,6 @@ import forge.util.MyRandom;
 public class TapAi extends TapAiBase {
     @Override
     protected boolean canPlayAI(AIPlayer ai, SpellAbility sa) {
-        final Target tgt = sa.getTarget();
-        final Card source = sa.getSourceCard();
-
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         final PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
@@ -37,6 +32,12 @@ public class TapAi extends TapAiBase {
             // Generally don't want to tap things with an Instant during AI turn outside of combat
             return false;
         }
+        
+        final Target tgt = sa.getTarget();
+        final Card source = sa.getSourceCard();
+
+        final Random r = MyRandom.getRandom();
+        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         if (tgt == null) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
@@ -50,52 +51,6 @@ public class TapAi extends TapAiBase {
                 return false;
             }
         } else {
-            tgt.resetTargets();
-            if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
-                return false;
-            }
-        }
-
-        return randomReturn;
-    }
-
-    @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
-
-        final Target tgt = sa.getTarget();
-        final Card source = sa.getSourceCard();
-
-        if (tgt == null) {
-            if (mandatory) {
-                return true;
-            }
-
-            // TODO: use Defined to determine, if this is an unfavorable result
-
-            return true;
-        } else {
-            if (tapPrefTargeting(ai, source, tgt, sa, mandatory)) {
-                return true;
-            } else if (mandatory) {
-                // not enough preferred targets, but mandatory so keep going:
-                return tapUnpreferredTargeting(ai, sa, mandatory);
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
-        final Target tgt = sa.getTarget();
-        final Card source = sa.getSourceCard();
-
-        boolean randomReturn = true;
-
-        if (tgt == null) {
-            // either self or defined, either way should be fine
-        } else {
-            // target section, maybe pull this out?
             tgt.resetTargets();
             if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
                 return false;
