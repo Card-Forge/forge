@@ -88,7 +88,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         pnlContent.add(_makeLabel("Rules of the Game."), constraintsLBL);
 
         pnlContent.add(btnLicensing, constraintsBTN);
-        pnlContent.add(_makeLabel("Forge legalese."), constraintsLBL);
+        pnlContent.add(_makeLabel("Forge legal."), constraintsLBL);
 
         scrContent.setBorder(null);
     }

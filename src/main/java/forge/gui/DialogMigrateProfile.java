@@ -138,7 +138,12 @@ public class DialogMigrateProfile {
                 // bring up a file open dialog and, if the OK button is selected, apply the filename
                 // to the import source text field
                 if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(null)) {
-                    txfSrc.setText(_fileChooser.getSelectedFile().getAbsolutePath());
+                    File f = _fileChooser.getSelectedFile();
+                    if (!f.canRead()) {
+                        JOptionPane.showMessageDialog(txfSrc, "Cannot access selected directory (Permission denied).");
+                    } else {
+                        txfSrc.setText(f.getAbsolutePath());
+                    }
                 }
             }
         });
@@ -589,7 +594,7 @@ public class DialogMigrateProfile {
                         
                         // start importing!
                         _Importer importer = new _Importer(
-                                _selections, _unknownDeckCombo, _operationLog, _progressBar,
+                                _srcDir, _selections, _unknownDeckCombo, _operationLog, _progressBar,
                                 _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
                         importer.execute();
                         
@@ -689,8 +694,8 @@ public class DialogMigrateProfile {
                         if (OpType.UNKNOWN_DECK == opType) {
                             dest = new File(unknownDeckChoice.path, dest.getName());
                         }
-                        log.append(String.format("%s -> %s\n",
-                                op.getKey().getAbsolutePath(), dest.getAbsolutePath()));
+                        log.append(op.getKey().getAbsolutePath()).append(" -> ");
+                        log.append(dest.getAbsolutePath()).append("\n");
                     }
                 }
                 
@@ -723,14 +728,16 @@ public class DialogMigrateProfile {
 
     // asynchronously completes the specified I/O operations and updates the progress bar and operation log
     private class _Importer extends SwingWorker<Void, Void> {
+        private final String          _srcDir;
         private final Map<File, File> _operations;
         private final JTextArea       _operationLog;
         private final JProgressBar    _progressBar;
         private final boolean         _move;
         private final boolean         _overwrite;
         
-        public _Importer(Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> selections, JComboBox unknownDeckCombo,
+        public _Importer(String srcDir, Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> selections, JComboBox unknownDeckCombo,
                 JTextArea operationLog, JProgressBar progressBar, boolean move, boolean overwrite) {
+            _srcDir       = srcDir;
             _operationLog = operationLog;
             _progressBar  = progressBar;
             _move         = move;
@@ -774,7 +781,18 @@ public class DialogMigrateProfile {
                 // only update the progress bar when we expect the visual value to change
                 final long progressInterval = Math.max(1, _operations.size() / _progressBar.getWidth());
                 
+                // the length of the prefix to remove from source paths
+                final int srcPathPrefixLen;
+                if (_srcDir.endsWith("/") || _srcDir.endsWith(File.separator)) {
+                    srcPathPrefixLen = _srcDir.length();
+                } else
+                {
+                    srcPathPrefixLen = _srcDir.length() + 1;
+                }
+                
+                // stats maintained during import sequence
                 int numOps       = 0;
+                int numExisting  = 0;
                 int numSucceeded = 0;
                 int numFailed    = 0;
                 for (Map.Entry<File, File> op : _operations.entrySet()) {
@@ -803,31 +821,54 @@ public class DialogMigrateProfile {
                     File destFile = op.getValue();
     
                     try {
-                        if (_overwrite || !destFile.exists()) {
+                        // simplify logged source path and log next attempted operation
+                        String srcPath = srcFile.getAbsolutePath();
+                        // I doubt that the srcPath will start with anything other than _srcDir, even with symlinks,
+                        // hardlinks, or Windows junctioned nodes, but it's better to be safe than to have malformed output
+                        if (srcPath.startsWith(_srcDir)) {
+                            srcPath = srcPath.substring(srcPathPrefixLen);
+                        }
+                        opLogBuf.append(_move ? "Moving " : "Copying ").append(srcPath).append(" -> ");
+                        opLogBuf.append(destFile.getAbsolutePath()).append("\n");
+
+                        if (!destFile.exists()) {
                             _copyFile(srcFile, destFile);
+                        } else {
+                            if (_overwrite) {
+                                opLogBuf.append("  Destination file exists; overwriting\n");
+                                _copyFile(srcFile, destFile);
+                            } else {
+                                opLogBuf.append("  Destination file exists; skipping copy\n");
+                            }
+                            ++numExisting;
                         }
                         
+                        
                         if (_move) {
+                            opLogBuf.append("  Removing source file after successful copy\n");
                             srcFile.delete();
                         }
                         
-                        opLogBuf.append(String.format("%s %s -> %s\n",
-                                _move ? "Moved" : "Copied",
-                                srcFile.getAbsolutePath(), destFile.getAbsolutePath()));
                         ++numSucceeded;
                     } catch (IOException e) {
-                        opLogBuf.append(String.format("Failed to %s %s -> %s (%s)\n",
-                                _move ? "move" : "copy",
-                                srcFile.getAbsolutePath(), destFile.getAbsolutePath(),
-                                e.getMessage()));
+                        opLogBuf.append("  Operation failed: ").append(e.getMessage()).append("\n");
                         ++numFailed;
                     }
                 }
                 
                 // append summary footer
+                opLogBuf.append("\nImport complete: ");
+                opLogBuf.append(numSucceeded).append(" operation").append(1 == numSucceeded ? "" : "s").append(" succeeded, ");
+                opLogBuf.append(numFailed).append(" error").append(1 == numFailed ? "" : "s");
+                if (0 < numExisting) {
+                    opLogBuf.append(", ").append(numExisting);
+                    if (_overwrite) {
+                        opLogBuf.append(" existing destination files overwritten");
+                    } else {
+                        opLogBuf.append(" copy operations skipped due to existing destination files");
+                    }
+                }
                 _operationLog.append(opLogBuf.toString());
-                _operationLog.append(String.format("\nImport complete: %d files %s, %d errors",
-                        numSucceeded, _move ? "moved" : "copied", numFailed));
             } catch (final Exception e) {
                 _cancel = true;
                 
@@ -853,25 +894,25 @@ public class DialogMigrateProfile {
             _progressBar.setString("Import complete");
             _btnCancel.setText("Done");
         }
+    }
+    
+    // actual file copy routine.  uses java.nio classes for ultra-fast copying
+    private static void _copyFile(File srcFile, File destFile) throws IOException {
+        destFile.getParentFile().mkdirs();
         
-        // actual file copy routine.  uses java.nio classes for ultra-fast copying
-        private void _copyFile(File srcFile, File destFile) throws IOException {
-            destFile.getParentFile().mkdirs();
-            
-            if (!destFile.exists()) {
-                destFile.createNewFile();
-            }
+        if (!destFile.exists()) {
+            destFile.createNewFile();
+        }
 
-            FileChannel src  = null;
-            FileChannel dest = null;
-            try {
-                src  = new FileInputStream(srcFile).getChannel();
-                dest = new FileOutputStream(destFile).getChannel();
-                dest.transferFrom(src, 0, src.size());
-            } finally {
-                if (src  != null) { src.close();  }
-                if (dest != null) { dest.close(); }
-            }
+        FileChannel src  = null;
+        FileChannel dest = null;
+        try {
+            src  = new FileInputStream(srcFile).getChannel();
+            dest = new FileOutputStream(destFile).getChannel();
+            dest.transferFrom(src, 0, src.size());
+        } finally {
+            if (src  != null) { src.close();  }
+            if (dest != null) { dest.close(); }
         }
     }
 }
