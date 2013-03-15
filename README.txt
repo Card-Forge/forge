@@ -120,9 +120,9 @@ if you're running Windows 7, make sure you're running the program as an admin, o
 
 Java Issues:
 
-Some people that are using an early version of Java 7 under the Windows OS have reported errors that state "Split must have > 2 children". Anyone having this sort of problem should de-install java 7 and install java 6 instead.
+Some people that are using an early version of Java 7 under the Windows OS have reported errors that state "Split must have > 2 children". Anyone having this sort of problem should either upgrade Java 7 to a newer version or de-install Java 7 and install Java 6 instead.
 
-Forge requires java 6 and will not run if you have an earlier version of java. You will need to update to java 6.
+Forge requires Java 6 and will not run if you have an earlier version of Java. You will need to update to Java 6.
 
 
 Card Picture Issues:
@@ -346,41 +346,44 @@ The new sound system:
 Forge now has a sound effect system in place. Several basic sounds are linked to the code now and will be enabled when "Enable Sounds" option is checked in the preferences. It supports WAV and AU file formats.
 
 Currently supported sound effects are:
+(the ones already available in the standard installation of Forge are marked with a [*])
 
-AddCounter - add_counter.wav - triggered when a counter is added to a permanent.
-Artifact - artifact.wav - triggered when an artifact is played.
-ArtifactCreature - artifact_creature.wav - triggered when an artifact creature is played.
-BlackLand - black_land.wav - triggered when a land with the "B" mana ability is played.
-BlueLand[*] - blue_land.wav - triggered when a land with the "U" mana ability is played.
-Creature - creature.wav - triggered when a creature is played.
+AddCounter [*] - add_counter.wav - triggered when a counter is added to a permanent.
+Artifact[*] - artifact.wav - triggered when an artifact is played.
+ArtifactCreature [*] - artifact_creature.wav - triggered when an artifact creature is played.
+BlackLand [*] - black_land.wav - triggered when a land with the "B" mana ability is played.
+Block [*] - block.wav - triggered when a blocker is assigned.
+BlueLand [*] - blue_land.wav - triggered when a land with the "U" mana ability is played.
+Creature [*] - creature.wav - triggered when a creature is played.
 Damage - damage.wav - triggered when a creature is damaged.
-Destroy - destroy.wav - triggered when a permanent is destroyed.
-Discard - discard.wav - triggered when a player discards a card.
-Draw - draw.wav - triggered when a player draws a card.
-Enchantment - enchant.wav - triggered when an enchantment is played.
-EndOfTurn - end_of_turn.wav - triggered at the end of turn.
-Equip - equip.wav - triggered when an equipment is equipped.
-FlipCoin - flip_coin.wav - triggered when a coin is flipped.
-GreenLand - green_land.wav - triggered when a land with the "G" mana ability is played.
-Instant - instant.wav - triggered when an instant is played.
-LifeLoss - life_loss.wav - triggered when a player loses life.
+Destroy [*] - destroy.wav - triggered when a permanent is destroyed.
+Discard [*] - discard.wav - triggered when a player discards a card.
+Draw [*] - draw.wav - triggered when a player draws a card.
+Enchantment [*] - enchant.wav - triggered when an enchantment is played.
+EndOfTurn [*] - end_of_turn.wav - triggered at the end of turn.
+Equip [*] - equip.wav - triggered when an equipment is equipped.
+FlipCoin [*] - flip_coin.wav - triggered when a coin is flipped.
+GreenLand [*] - green_land.wav - triggered when a land with the "G" mana ability is played.
+Instant [*] - instant.wav - triggered when an instant is played.
+LifeLoss [*] - life_loss.wav - triggered when a player loses life.
 LoseDuel[*] - lose_duel.wav - triggered when a player loses a duel.
 ManaBurn - mana_burn.wav - triggered during a mana burn if the appropriate rule is enabled.
 OtherLand - other_land.wav - triggered when a land with non-color mana abilities or any other land is played.
-Planeswalker - planeswalker.wav - triggered when a planeswalker is played.
-Poison - poison.wav - triggered when a player receives a poison counter.
-RedLand - red_land.wav - triggered when a land with the "R" mana ability is played.
+Planeswalker [*] - planeswalker.wav - triggered when a planeswalker is played.
+Poison [*] - poison.wav - triggered when a player receives a poison counter.
+RedLand [*] - red_land.wav - triggered when a land with the "R" mana ability is played.
 Regen - regeneration.wav - triggered when a creature is regenerated.
 RemoveCounter - remove_counter.wav - triggered when a counter is removed from a permanent.
 Sacrifice - sacrifice.wav - triggered when a permanent is sacrificed.
-Sorcery - sorcery.wav - triggered when a sorcery is played.
-Shuffle[*] - shuffle.wav - triggered when a player shuffles his deck.
-Tap[*] - tap.wav - triggered when a permanent is tapped.
-Untap - untap.wav - triggered when a permanent is untapped.
-WhiteLand - white_land.wav - triggered when a land with the "W" mana ability is played.
-WinDuel - win_duel.wav - triggered when a player wins the duel.
+Sorcery [*] - sorcery.wav - triggered when a sorcery is played.
+Shuffle [*] - shuffle.wav - triggered when a player shuffles his deck.
+Tap [*] - tap.wav - triggered when a permanent is tapped.
+Token [*] - token.wav - triggered when a token is created.
+Untap [*] - untap.wav - triggered when a permanent is untapped.
+WhiteLand [*] - white_land.wav - triggered when a land with the "W" mana ability is played.
+WinDuel [*] - win_duel.wav - triggered when a player wins the duel.
 
-All sounds use the event bus model now and are not called directly. Two new sounds to the list of sounds supported by Forge, Blocker Assigned and Token Created.
+All sounds use the event bus model now and are not called directly.
 
 
 The new Vanguard mode:
@@ -393,11 +396,11 @@ The new Archenemy mode:
 Schemes have been added to the Archenemy mode. This is a work in progress and there may be a bug or two for us to find.
 
 
-Quest Worlds information, stage 1:
+Quest Worlds:
 
-This version simply allows you to travel between the regular quest world and the newly-added Shandalar world to get different duel opponents and challenges. You will have to complete your current challenges before travelling or you will lose them. 
+This version allows you to travel between the regular quest world and the other worlds (Shandalar, Ravnica, Jamuraa, more may be added in the future) to get different duel opponents and challenges. You will have to complete your current challenges before travelling or you will lose them. 
 
-World-specific format enforcing and starting world selection will be added in later stages. Also, something has to be done about locked (non-repeatabled) challenges so they do not end up locking other challenges in different worlds.
+World-specific format enforcing and starting world selection are available. Something has to be done about locked (non-repeatabled) challenges so they do not end up locking other challenges in different worlds.
 
 
 Forge now has sideboards for the human player:
@@ -405,14 +408,13 @@ Forge now has sideboards for the human player:
 Sideboards have been implemented for Human players. We currently have:
 
 * Sideboard creation support in relevant deck editor modes.
-* In-game sideboarding with persistence between rounds in a match.
+* In-game sideboarding with persistence between rounds in a match and sorting of cards in the in-game sideboard editor.
 * Sideboard supported as a zone, with some relevant cards already in.
 * Correct validation of decks, both before the game starts and between the rounds (Limited min 40, Constructed min 60, free-form sideboard/main in Draft and Sealed, 1:1 sideboarding with 0 or 15 cards allowed in sideboard in Constructed (all variants) and Quest; OK to have less than minimum between rounds in a match in all modes if lost cards on ante).
 * Correct (fingers crossed) interaction of sideboarding with other relevant aspects of Forge rule enforcement (mulligan and ante interactions were corrected, initial hand and library between rounds were both corrected, everything else looks so far so good).
 
 We don't yet have:
 
-* Sorting in the in-game sideboard editor.
 * AI sideboarding.
 
 
