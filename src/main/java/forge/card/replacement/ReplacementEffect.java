@@ -17,13 +17,11 @@
  */
 package forge.card.replacement;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import forge.Card;
-import forge.CardLists;
-import forge.CardUtil;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityUtils;
@@ -31,7 +29,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
-import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 /**
@@ -175,46 +172,24 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @return a boolean.
      */
     public boolean requirementsCheck() {
+        return this.requirementsCheck(this.getMapParams());
+    }
+    
+    public boolean requirementsCheck(Map<String,String> params) {
 
         if (this.isSuppressed()) {
             return false; // Effect removed by effect
         }
 
-        if (this.getMapParams().containsKey("Metalcraft")) {
-            if (this.getMapParams().get("Metalcraft").equals("True")
-                    && !this.getHostCard().getController().hasMetalcraft()) {
+        if (params.containsKey("PlayerTurn")) {
+            if (params.get("PlayerTurn").equals("True") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
 
-        if (this.getMapParams().containsKey("Threshold")) {
-            if (this.getMapParams().get("Threshold").equals("True")
-                    && !this.getHostCard().getController().hasThreshold()) {
-                return false;
-            }
-        }
-
-        if (this.getMapParams().containsKey("Hellbent")) {
-            if (this.getMapParams().get("Hellbent").equals("True") && !this.getHostCard().getController().hasHellbent()) {
-                return false;
-            }
-        }
-
-        if (this.getMapParams().containsKey("Bloodthirst")) {
-            if (this.getMapParams().get("Bloodthirst").equals("True") && !this.getHostCard().getController().hasBloodthirst()) {
-                return false;
-            }
-        }
-
-        if (this.getMapParams().containsKey("PlayerTurn")) {
-            if (this.getMapParams().get("PlayerTurn").equals("True") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
-                return false;
-            }
-        }
-
-        if (this.getMapParams().containsKey("ActivePhases")) {
+        if (params.containsKey("ActivePhases")) {
             boolean isPhase = false;
-            List<PhaseType> aPhases = PhaseType.parseRange(this.getMapParams().get("ActivePhases"));
+            List<PhaseType> aPhases = PhaseType.parseRange(params.get("ActivePhases"));
             final PhaseType currPhase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
             for (final PhaseType s : aPhases) {
                 if (s == currPhase) {
@@ -226,171 +201,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             return isPhase;
         }
 
-        if (this.getMapParams().containsKey("PlayersPoisoned")) {
-            if (this.getMapParams().get("PlayersPoisoned").equals("You")
-                    && (this.getHostCard().getController().getPoisonCounters() == 0)) {
-                return false;
-            } else if (this.getMapParams().get("PlayersPoisoned").equals("Opponent")
-                    && (this.getHostCard().getController().getOpponent().getPoisonCounters() == 0)) {
-                return false;
-            } else if (this.getMapParams().get("PlayersPoisoned").equals("Each")
-                    && !((this.getHostCard().getController().getPoisonCounters() != 0) && (this.getHostCard()
-                            .getController().getPoisonCounters() != 0))) {
-                return false;
-            }
-        }
-
-        if (this.getMapParams().containsKey("LifeTotal")) {
-            final String player = this.getMapParams().get("LifeTotal");
-            String lifeCompare = "GE1";
-            int life = 1;
-
-            if (player.equals("You")) {
-                life = this.getHostCard().getController().getLife();
-            }
-            if (player.equals("Opponent")) {
-                life = this.getHostCard().getController().getOpponent().getLife();
-            }
-
-            if (this.getMapParams().containsKey("LifeAmount")) {
-                lifeCompare = this.getMapParams().get("LifeAmount");
-            }
-
-            int right = 1;
-            final String rightString = lifeCompare.substring(2);
-            try {
-                right = Integer.parseInt(rightString);
-            } catch (final NumberFormatException nfe) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
-            }
-
-            if (!Expressions.compare(life, lifeCompare, right)) {
-                return false;
-            }
-
-        }
-
-        if (this.getMapParams().containsKey("IsPresent")) {
-            final String sIsPresent = this.getMapParams().get("IsPresent");
-            String presentCompare = "GE1";
-            ZoneType presentZone = ZoneType.Battlefield;
-            String presentPlayer = "Any";
-            if (this.getMapParams().containsKey("PresentCompare")) {
-                presentCompare = this.getMapParams().get("PresentCompare");
-            }
-            if (this.getMapParams().containsKey("PresentZone")) {
-                presentZone = ZoneType.smartValueOf(this.getMapParams().get("PresentZone"));
-            }
-            if (this.getMapParams().containsKey("PresentPlayer")) {
-                presentPlayer = this.getMapParams().get("PresentPlayer");
-            }
-            List<Card> list = new ArrayList<Card>();
-            if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
-            }
-            if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getOpponent().getCardsIn(presentZone));
-            }
-
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
-
-            int right = 1;
-            final String rightString = presentCompare.substring(2);
-            if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar("X"));
-            } else {
-                right = Integer.parseInt(presentCompare.substring(2));
-            }
-            final int left = list.size();
-
-            if (!Expressions.compare(left, presentCompare, right)) {
-                return false;
-            }
-
-        }
-
-        if (this.getMapParams().containsKey("IsPresent2")) {
-            final String sIsPresent = this.getMapParams().get("IsPresent2");
-            String presentCompare = "GE1";
-            ZoneType presentZone = ZoneType.Battlefield;
-            String presentPlayer = "Any";
-            if (this.getMapParams().containsKey("PresentCompare2")) {
-                presentCompare = this.getMapParams().get("PresentCompare2");
-            }
-            if (this.getMapParams().containsKey("PresentZone2")) {
-                presentZone = ZoneType.smartValueOf(this.getMapParams().get("PresentZone2"));
-            }
-            if (this.getMapParams().containsKey("PresentPlayer2")) {
-                presentPlayer = this.getMapParams().get("PresentPlayer2");
-            }
-            List<Card> list = new ArrayList<Card>();
-            if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getCardsIn(presentZone));
-            }
-            if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(this.getHostCard().getController().getOpponent().getCardsIn(presentZone));
-            }
-
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard());
-
-            int right = 1;
-            final String rightString = presentCompare.substring(2);
-            if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar("X"));
-            } else {
-                right = Integer.parseInt(presentCompare.substring(2));
-            }
-            final int left = list.size();
-
-            if (!Expressions.compare(left, presentCompare, right)) {
-                return false;
-            }
-
-        }
-
-        if (this.getMapParams().containsKey("CheckSVar")) {
-            final int sVar = AbilityUtils.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()), this
-                    .getMapParams().get("CheckSVar"), null);
-            String comparator = "GE1";
-            if (this.getMapParams().containsKey("SVarCompare")) {
-                comparator = this.getMapParams().get("SVarCompare");
-            }
-            final String svarOperator = comparator.substring(0, 2);
-            final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()),
-                    svarOperand, null);
-            if (!Expressions.compare(sVar, svarOperator, operandValue)) {
-                return false;
-            }
-        }
-
-        if (this.getMapParams().containsKey("ManaSpent")) {
-            if (!this.getHostCard().getColorsPaid().contains(this.getMapParams().get("ManaSpent"))) {
-                return false;
-            }
-        }
-
-        if (this.getMapParams().containsKey("ManaNotSpent")) {
-            if (this.getHostCard().getColorsPaid().contains(this.getMapParams().get("ManaNotSpent"))) {
-                return false;
-            }
-        }
-
-        if (this.getMapParams().containsKey("WerewolfTransformCondition")) {
-            if (CardUtil.getLastTurnCast("Card", this.getHostCard()).size() > 0) {
-                return false;
-            }
-        }
-
-        if (this.getMapParams().containsKey("WerewolfUntransformCondition")) {
-            final List<Card> you = CardUtil.getLastTurnCast("Card.YouCtrl", this.getHostCard());
-            final List<Card> opp = CardUtil.getLastTurnCast("Card.YouDontCtrl", this.getHostCard());
-            if (!((you.size() > 1) || (opp.size() > 1))) {
-                return false;
-            }
-        }
-
-        return true;
+        return meetsCommonRequirements(params);
     }
 
     /**

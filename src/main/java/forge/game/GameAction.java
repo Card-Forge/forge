@@ -35,11 +35,11 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.card.CardSplitType;
 import forge.card.CardType;
+import forge.card.TriggerReplacementBase;
 import forge.card.ability.effects.AttachEffect;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
-import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -164,7 +164,7 @@ public class GameAction {
             for (final Trigger trigger : copied.getTriggers()) {
                 trigger.setHostCard(copied);
             }
-            for (final ReplacementEffect repl : copied.getReplacementEffects()) {
+            for (final TriggerReplacementBase repl : copied.getReplacementEffects()) {
                 repl.setHostCard(copied);
             }
             if (c.getName().equals("Skullbriar, the Walking Grave")) {

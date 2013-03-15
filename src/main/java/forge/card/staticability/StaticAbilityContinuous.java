@@ -30,6 +30,7 @@ import forge.CardUtil;
 import forge.StaticEffect;
 import forge.StaticEffects;
 import forge.card.CardType;
+import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -436,7 +437,7 @@ public class StaticAbilityContinuous {
                     stA.setTemporarilySuppressed(true);
                 }
                 final ArrayList<ReplacementEffect> replacementEffects = affectedCard.getReplacementEffects();
-                for (final ReplacementEffect rE : replacementEffects) {
+                for (final TriggerReplacementBase rE : replacementEffects) {
                     rE.setTemporarilySuppressed(true);
                 }
             }

@@ -10,6 +10,7 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
+import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.replacement.ReplacementEffect;
@@ -234,7 +235,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
                     }
 
                     // give back suppressed replacement effects
-                    for (final ReplacementEffect re : removedReplacements) {
+                    for (final TriggerReplacementBase re : removedReplacements) {
                         re.setTemporarilySuppressed(false);
                     }
                 }
