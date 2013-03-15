@@ -102,8 +102,8 @@ public class GauntletWinLose extends ControlWinLose {
                     this.getView().getBtnQuit().setText("OK");
 
                     // Remove save file if it's a quickie, or just reset it.
-                    if (gd.getActiveFile().getName().matches(GauntletIO.REGEX_QUICK)) {
-                        gd.getActiveFile().delete();
+                    if (gd.getName().startsWith(GauntletIO.PREFIX_QUICK)) {
+                        GauntletIO.getGauntletFile(gd).delete();
                     }
                     else {
                         gd.reset();
@@ -131,8 +131,8 @@ public class GauntletWinLose extends ControlWinLose {
                 this.getView().getBtnContinue().setVisible(false);
 
                 // Remove save file if it's a quickie, or just reset it.
-                if (gd.getActiveFile().getName().matches(GauntletIO.REGEX_QUICK)) {
-                    gd.getActiveFile().delete();
+                if (gd.getName().startsWith(GauntletIO.PREFIX_QUICK)) {
+                    GauntletIO.getGauntletFile(gd).delete();
                 }
                 else {
                     gd.reset();

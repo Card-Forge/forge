@@ -832,21 +832,21 @@ public class DialogMigrateProfile {
                         opLogBuf.append(destFile.getAbsolutePath()).append("\n");
 
                         if (!destFile.exists()) {
-                            _copyFile(srcFile, destFile);
+                            _copyFile(srcFile, destFile, _move);
                         } else {
                             if (_overwrite) {
                                 opLogBuf.append("  Destination file exists; overwriting\n");
-                                _copyFile(srcFile, destFile);
+                                _copyFile(srcFile, destFile, _move);
                             } else {
                                 opLogBuf.append("  Destination file exists; skipping copy\n");
                             }
                             ++numExisting;
                         }
                         
-                        
                         if (_move) {
-                            opLogBuf.append("  Removing source file after successful copy\n");
+                            // source file may have been deleted already if _copyFile was called
                             srcFile.delete();
+                            opLogBuf.append("  Removed source file after successful copy\n");
                         }
                         
                         ++numSucceeded;
@@ -896,9 +896,16 @@ public class DialogMigrateProfile {
         }
     }
     
-    // actual file copy routine.  uses java.nio classes for ultra-fast copying
-    private static void _copyFile(File srcFile, File destFile) throws IOException {
+    // when copying is required, uses java nio classes for ultra-fast I/O
+    private static void _copyFile(File srcFile, File destFile, boolean deleteSrcAfter) throws IOException {
         destFile.getParentFile().mkdirs();
+        
+        // if this is a move, try a simple rename first
+        if (deleteSrcAfter) {
+            if (srcFile.renameTo(destFile)) {
+                return;
+            }
+        }
         
         if (!destFile.exists()) {
             destFile.createNewFile();
@@ -913,6 +920,10 @@ public class DialogMigrateProfile {
         } finally {
             if (src  != null) { src.close();  }
             if (dest != null) { dest.close(); }
+        }
+
+        if (deleteSrcAfter) {
+            srcFile.delete();
         }
     }
 }

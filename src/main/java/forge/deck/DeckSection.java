@@ -1,11 +1,6 @@
 package forge.deck;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public enum DeckSection {
-    
     Avatar(1),
     Commander(1),
     Main(60),
@@ -24,12 +19,14 @@ public enum DeckSection {
         if (value == null) {
             return null;
         }
+        
         final String valToCompate = value.trim();
         for (final DeckSection v : DeckSection.values()) {
             if (v.name().compareToIgnoreCase(valToCompate) == 0) {
                 return v;
             }
         }
+        
         return null;
     }
 }

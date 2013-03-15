@@ -22,6 +22,8 @@ import java.util.concurrent.ExecutionException;
 
 import javax.swing.ImageIcon;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
@@ -93,8 +95,8 @@ public class ImageCache {
     }
 
     private static BufferedImage scaleImage(String key, final int width, final int height) {
-        if ((3 > width && -1 != width) || (3 > height && -1 != height)) {
-            // picture too small; return a blank
+        if (StringUtils.isEmpty(key) || (3 > width && -1 != width) || (3 > height && -1 != height)) {
+            // picture too small or key not defined; return a blank
             return null;
         }
 

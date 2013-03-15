@@ -31,11 +31,8 @@ import forge.model.FModel;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-
 public enum CSubmenuGauntletLoad implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
-
 
     private final ActionListener actStartGame = new ActionListener() { @Override
         public void actionPerformed(ActionEvent arg0) { startGame(); } };
@@ -47,6 +44,11 @@ public enum CSubmenuGauntletLoad implements ICDoc {
      */
     @Override
     public void update() {
+        updateData();
+        enableStartButton();
+
+        view.getGauntletLister().setSelectedIndex(0);
+        
         SwingUtilities.invokeLater(new Runnable() {
             @Override public void run() {
                 JButton btnStart = view.getBtnStart();
@@ -67,10 +69,6 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     public void initialize() {
         view.getBtnStart().addActionListener(actStartGame);
 
-        updateData();
-        enableStartButton();
-
-        view.getGauntletLister().setSelectedIndex(0);
         view.getGauntletLister().setCmdDelete(new Command() { @Override
             public void execute() { enableStartButton(); } });
         view.getGauntletLister().setCmdSelect(new Command() { @Override
@@ -89,7 +87,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     }
 
     private void enableStartButton() {
-        if (view.getGauntletLister().getSelectedGauntlet() == null) {
+        if (view.getGauntletLister().getSelectedGauntletFile() == null) {
             view.getBtnStart().setEnabled(false);
         }
         else {
@@ -99,8 +97,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
 
     private void startGame() {
         FModel.SINGLETON_INSTANCE.setGauntletData(
-                GauntletIO.loadGauntlet(VSubmenuGauntletQuick.SINGLETON_INSTANCE
-                        .getGauntletLister().getSelectedGauntlet().getActiveFile()));
+                GauntletIO.loadGauntlet(VSubmenuGauntletQuick.SINGLETON_INSTANCE.getGauntletLister().getSelectedGauntletFile()));
 
         // Start game
         SwingUtilities.invokeLater(new Runnable() {

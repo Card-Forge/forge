@@ -17,6 +17,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gauntlet.GauntletData;
+import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 
@@ -52,7 +53,7 @@ public class ContestGauntletLister extends JPanel {
         Collections.sort(sorted, new Comparator<GauntletData>() {
             @Override
             public int compare(final GauntletData x, final GauntletData y) {
-                return x.getActiveFile().getName().compareTo(y.getActiveFile().getName());
+                return x.getName().compareTo(y.getName());
             }
         });
 
@@ -78,8 +79,8 @@ public class ContestGauntletLister extends JPanel {
         String name;
         String progress;
         for (GauntletData gd : sorted) {
-            name = gd.getActiveFile().getName();
-            name = name.substring(7, name.length() - 4);
+            name = gd.getName();
+            name = name.substring(GauntletIO.PREFIX_LOCKED.length());
 
             progress = String.valueOf(Math.round(
                     ((double) gd.getCompleted() / (double) gd.getDecks().size()) * 100)) + " %";

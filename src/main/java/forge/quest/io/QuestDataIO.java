@@ -534,10 +534,9 @@ public class QuestDataIO {
                 }
                 reader.moveUp();
             }
-            return result;
             
+            return result;
         }
-        
     }
 
     private static class ItemPoolToXml implements Converter {

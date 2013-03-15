@@ -7,7 +7,9 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
@@ -32,7 +34,6 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.model.FModel;
-import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.util.storage.IStorage;
@@ -206,7 +207,6 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         view.getLstDecks().setSelectedIndices(new int[]{0, 1});
     }
 
-    /** */
     private void startGame() {
         // Start game overlay
         SwingUtilities.invokeLater(new Runnable() {
@@ -219,13 +219,12 @@ public enum CSubmenuGauntletQuick implements ICDoc {
 
         // Find appropriate filename for new save, create and set new save file.
         final File[] arrFiles = GauntletIO.getGauntletFilesQuick();
-        final List<String> lstNames = new ArrayList<String>();
-        for (File f : arrFiles) { lstNames.add(f.getName()); }
+        final Set<String> setNames = new HashSet<String>();
+        for (File f : arrFiles) { setNames.add(f.getName()); }
 
         int num = 1;
-        while (lstNames.contains(GauntletIO.PREFIX_QUICK + num + ".dat")) { num++; }
-        FModel.SINGLETON_INSTANCE.getGauntletData().setActiveFile(new File(
-                NewConstants.GAUNTLET_DIR.defaultLoc + GauntletIO.PREFIX_QUICK + num + ".dat"));
+        while (setNames.contains(GauntletIO.PREFIX_QUICK + num + GauntletIO.SUFFIX_DATA)) { num++; }
+        FModel.SINGLETON_INSTANCE.getGauntletData().setName(GauntletIO.PREFIX_QUICK + num);
 
         // Pull user deck
         final Deck userDeck;
