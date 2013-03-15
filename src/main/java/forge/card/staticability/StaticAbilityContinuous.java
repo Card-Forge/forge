@@ -145,7 +145,7 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("AddKeyword")) {
             addKeywords = params.get("AddKeyword").split(" & ");
-            final ArrayList<String> chosencolors = hostCard.getChosenColor();
+            final List<String> chosencolors = hostCard.getChosenColor();
             for (final String color : chosencolors) {
                 for (int w = 0; w < addKeywords.length; w++) {
                     addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", color.substring(0, 1).toUpperCase().concat(color.substring(1, color.length())));

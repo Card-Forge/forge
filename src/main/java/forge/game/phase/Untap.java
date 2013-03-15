@@ -150,7 +150,7 @@ public class Untap extends Phase {
                         String prompt = "Untap " + c.getName() + "?";
                         boolean defaultChoice = true;
                         if (c.getGainControlTargets().size() > 0) {
-                            final ArrayList<Card> targets = c.getGainControlTargets();
+                            final List<Card> targets = c.getGainControlTargets();
                             prompt += "\r\n" + c + " is controlling: ";
                             for (final Card target : targets) {
                                 prompt += target;
@@ -167,7 +167,7 @@ public class Untap extends Phase {
                         // leave it tapped
                         // if not, untap it
                         if (c.getGainControlTargets().size() > 0) {
-                            final ArrayList<Card> targets = c.getGainControlTargets();
+                            final List<Card> targets = c.getGainControlTargets();
                             boolean untap = true;
                             for (final Card target : targets) {
                                 if (target.isInPlay()) {

@@ -31,6 +31,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 import forge.CardPredicates.Presets;
@@ -207,28 +208,28 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String miracleCost = null;
     private String chosenType = "";
     // private String chosenColor = "";
-    private ArrayList<String> chosenColor = new ArrayList<String>();
+    private List<String> chosenColor = new ArrayList<String>();
     private String namedCard = "";
     private int chosenNumber;
     private Player chosenPlayer;
-    private ArrayList<Card> chosenCard = new ArrayList<Card>();
+    private List<Card> chosenCard = new ArrayList<Card>();
 
     private Card cloneOrigin = null;
-    private final ArrayList<Card> clones = new ArrayList<Card>();
-    private final ArrayList<Card> gainControlTargets = new ArrayList<Card>();
-    private final ArrayList<Command> gainControlReleaseCommands = new ArrayList<Command>();
+    private final List<Card> clones = new ArrayList<Card>();
+    private final List<Card> gainControlTargets = new ArrayList<Card>();
+    private final List<Command> gainControlReleaseCommands = new ArrayList<Command>();
 
-    private final ArrayList<AbilityTriggered> zcTriggers = new ArrayList<AbilityTriggered>();
-    private final ArrayList<Command> equipCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> unEquipCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> enchantCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> unEnchantCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> untapCommandList = new ArrayList<Command>();
-    private final ArrayList<Command> changeControllerCommandList = new ArrayList<Command>();
+    private final List<AbilityTriggered> zcTriggers = new ArrayList<AbilityTriggered>();
+    private final List<Command> equipCommandList = new ArrayList<Command>();
+    private final List<Command> unEquipCommandList = new ArrayList<Command>();
+    private final List<Command> enchantCommandList = new ArrayList<Command>();
+    private final List<Command> unEnchantCommandList = new ArrayList<Command>();
+    private final List<Command> untapCommandList = new ArrayList<Command>();
+    private final List<Command> changeControllerCommandList = new ArrayList<Command>();
 
-    private static String[] storableSVars = { "ChosenX", "ChosenY" };
+    private final static ImmutableList<String> storableSVars = ImmutableList.of("ChosenX", "ChosenY" );
 
-    private final ArrayList<Card> hauntedBy = new ArrayList<Card>();
+    private final List<Card> hauntedBy = new ArrayList<Card>();
     private Card haunting = null;
     private Card effectSource = null;
 
@@ -565,7 +566,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a String array
      */
-    public static String[] getStorableSVars() {
+    public static List<String> getStorableSVars() {
         return Card.storableSVars;
     }
 
@@ -1162,7 +1163,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Card> getClones() {
+    public final List<Card> getClones() {
         return this.clones;
     }
 
@@ -1174,7 +1175,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param c
      *            a {@link java.util.ArrayList} object.
      */
-    public final void setClones(final ArrayList<Card> c) {
+    public final void setClones(final Collection<Card> c) {
         this.clones.clear();
         this.clones.addAll(c);
     }
@@ -1912,7 +1913,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return an ArrayList<String> object.
      */
-    public final ArrayList<String> getChosenColor() {
+    public final List<String> getChosenColor() {
         return this.chosenColor;
     }
 
@@ -1924,7 +1925,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s
      *            an ArrayList<String> object.
      */
-    public final void setChosenColor(final ArrayList<String> s) {
+    public final void setChosenColor(final List<String> s) {
         this.chosenColor = s;
     }
 
@@ -1935,7 +1936,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return an ArrayList<Card> object.
      */
-    public final ArrayList<Card> getChosenCard() {
+    public final List<Card> getChosenCard() {
         return this.chosenCard;
     }
 
@@ -2005,7 +2006,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a list of cards this card has gained control of
      */
-    public final ArrayList<Card> getGainControlTargets() {
+    public final List<Card> getGainControlTargets() {
         return this.gainControlTargets;
     }
 
@@ -2039,7 +2040,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<Command> getGainControlReleaseCommands() {
+    public final List<Command> getGainControlReleaseCommands() {
         return this.gainControlReleaseCommands;
     }
 
@@ -6003,7 +6004,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     @Override
     public final boolean hasKeyword(final String keyword) {
-        String kw = new String(keyword);
+        String kw = keyword;
         if (kw.startsWith("HIDDEN")) {
             kw = kw.substring(7);
         }
@@ -8646,7 +8647,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return the haunted by
      */
-    public final ArrayList<Card> getHauntedBy() {
+    public final List<Card> getHauntedBy() {
         return this.hauntedBy;
     }
 

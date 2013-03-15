@@ -337,10 +337,10 @@ public class ManaPool {
             totalMana += normalMana[i];
             totalMana += snowMana[i];
             if (normalMana[i] > 0) {
-                alChoice.add(Constant.Color.COLORS[i] + "(" + normalMana[i] + ")");
+                alChoice.add(Constant.Color.COLORS.get(i) + "(" + normalMana[i] + ")");
             }
             if (snowMana[i] > 0) {
-                alChoice.add("{S}" + Constant.Color.COLORS[i] + "(" + snowMana[i] + ")");
+                alChoice.add("{S}" + Constant.Color.COLORS.get(i) + "(" + snowMana[i] + ")");
             }
         }
 

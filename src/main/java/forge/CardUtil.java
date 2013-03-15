@@ -226,7 +226,7 @@ public final class CardUtil {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String getShortColorsString(final ArrayList<String> colors) {
+    public static String getShortColorsString(final Iterable<String> colors) {
         String colorDesc = "";
         for (final String col : colors) {
             if (col.equalsIgnoreCase("White")) {

@@ -22,6 +22,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -85,10 +87,10 @@ public final class Constant {
         public static final String COLORLESS = "colorless";
         // color order "wubrg"
         /** The Colors. */
-        public static final String[] COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN, Color.COLORLESS };
+        public static final ImmutableList<String> COLORS = ImmutableList.of(Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN, Color.COLORLESS);
 
         /** The only colors. */
-        public static final String[] ONLY_COLORS = { Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN };
+        public static final ImmutableList<String> ONLY_COLORS = ImmutableList.of(Color.WHITE, Color.BLUE, Color.BLACK, Color.RED, Color.GREEN);
 
         /** The Snow. */
         public static final String SNOW = "snow";
