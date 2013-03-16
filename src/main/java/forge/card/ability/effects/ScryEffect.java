@@ -71,12 +71,15 @@ public class ScryEffect extends SpellAbilityEffect {
         }
 
         ImmutablePair<List<Card>, List<Card>> lists = p.getController().arrangeForScry(topN);
-
-        for(Card c : lists.getRight()) {
-            p.getGame().getAction().moveToBottomOfLibrary(c);
+        List<Card> toTop = lists.getLeft();
+        List<Card> toBottom = lists.getRight();
+        
+        if ( null != toBottom) {
+            for(Card c : toBottom) {
+                p.getGame().getAction().moveToBottomOfLibrary(c);
+            }
         }
 
-        List<Card> toTop = lists.getLeft();
         if ( null != toTop ) {
             Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
             for(Card c : toTop) {

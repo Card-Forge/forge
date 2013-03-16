@@ -1,6 +1,7 @@
 package forge.game.player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -292,15 +293,30 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN) {
-        List<Card> toBottom = GuiChoose.order("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null, null);
-        topN.removeAll(toBottom);
-        List<Card> toTop = topN.isEmpty() ? null : GuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", 0, topN, null, null);
+        List<Card> toBottom = null;
+        List<Card> toTop = null;
+        
+        if (topN.size() == 1) {
+            if (willPutCardOnTop(topN.get(0)))
+                toTop = topN;
+            else 
+                toBottom = topN;
+        } else { 
+            toBottom = GuiChoose.order("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null, null);
+            topN.removeAll(toBottom);
+            if ( topN.isEmpty() )
+                toTop = null;
+            else if ( topN.size() == 1 )
+                toTop = topN;
+            else
+                toTop = GuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", 0, topN, null, null);
+        }
         return ImmutablePair.of(toTop, toBottom);
     }
 
 
     @Override
     public boolean willPutCardOnTop(Card c) {
-        return GuiDialog.confirm(c, "Where you put " + c.getName() + " in your library", new String[]{"Top", "Bottom"} );
+        return GuiDialog.confirm(c, "Where will you put " + c.getName() + " in your library", new String[]{"Top", "Bottom"} );
     }
 }
