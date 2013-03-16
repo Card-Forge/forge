@@ -11,6 +11,6 @@ T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ Rolle
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:X:Count$RolledThisTurn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ravens_run.jpg
+SVar:Picture:http://www.cardforge.org/fpics/lq_planes_promos/ravens_run.jpg
 Oracle:All creatures have wither. (They deal damage to creatures in the form of -1/-1 counters.)\nWhenever you roll {C}, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
 SetInfo:HOP Common
