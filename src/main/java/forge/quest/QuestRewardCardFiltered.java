@@ -39,15 +39,6 @@ public class QuestRewardCardFiltered extends QuestRewardCard implements IQuestRe
         return description;
     }
 
-    /**
-     * This class is a dynamic list of cards, hence no images.
-     * 
-     * @return an empty string
-     */
-    @Override
-    public String getImageFilename() {
-        return "";
-    }
 
     /**
      * The item type.
@@ -64,6 +55,7 @@ public class QuestRewardCardFiltered extends QuestRewardCard implements IQuestRe
      * 
      * @return a List<CardPrinted> or null if could not create a list.
      */
+    @Override
     public final List<CardPrinted> getChoices() {
         List<CardPrinted> cardChoices = new ArrayList<CardPrinted>();
         for (final CardPrinted card : Iterables.filter(CardDb.instance().getAllCards(), predicates)) {

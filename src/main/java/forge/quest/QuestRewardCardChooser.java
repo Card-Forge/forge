@@ -90,6 +90,7 @@ public class QuestRewardCardChooser extends QuestRewardCard implements Inventory
      * 
      * @return a List<CardPrinted> or null if could not create a list.
      */
+    @Override
     public final List<CardPrinted> getChoices() {
         if (type == poolType.playerCards) {
             final ItemPool<CardPrinted> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();

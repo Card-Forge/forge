@@ -16,7 +16,7 @@ import forge.item.InventoryItem;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class QuestRewardCard implements InventoryItem {
+public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard {
 
     protected String buildDescription(final String [] input) {
         final String defaultDescription = "a card";
@@ -130,5 +130,7 @@ public abstract class QuestRewardCard implements InventoryItem {
     public String getImageFilename() {
         return "";
     }
+    
+    public abstract List<CardPrinted> getChoices();
 
 }
