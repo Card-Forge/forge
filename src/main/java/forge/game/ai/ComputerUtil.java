@@ -24,6 +24,7 @@ import java.util.Random;
 
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
@@ -1222,5 +1223,20 @@ public class ComputerUtil {
         final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
         return (handList.size() > AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
 
+    }
+
+
+    public static boolean scryWillMoveCardToBottomOfLibrary(AIPlayer player, Card c) {
+        boolean bottom = false;
+        if (c.isBasicLand()) {
+            List<Card> bl = player.getCardsIn(ZoneType.Battlefield);
+            int nBasicLands = Iterables.size(Iterables.filter(bl, CardPredicates.Presets.BASIC_LANDS));
+            bottom = nBasicLands > 5; // if control more than 5 Basic land, probably don't need more
+        } else if (c.isCreature()) {
+            List<Card> cl = player.getCardsIn(ZoneType.Battlefield);
+            cl = CardLists.filter(cl, CardPredicates.Presets.CREATURES);
+            bottom = cl.size() > 5; // if control more than 5 Creatures, probably don't need more
+        }
+        return bottom;
     }
 }

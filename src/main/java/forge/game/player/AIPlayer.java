@@ -20,7 +20,6 @@ package forge.game.player;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.collect.Iterables;
 import forge.Card;
 
 import forge.CardLists;
@@ -134,41 +133,6 @@ public class AIPlayer extends Player {
     }
 
     // /////////////////////////
-
-    /** {@inheritDoc} */
-    @Override
-    protected final void doScry(final List<Card> topN, final int n) {
-        int num = n;
-        for (int i = 0; i < num; i++) {
-            boolean bottom = false;
-            if (topN.get(i).isBasicLand()) {
-                List<Card> bl = this.getCardsIn(ZoneType.Battlefield);
-                int nBasicLands = Iterables.size(Iterables.filter(bl, CardPredicates.Presets.BASIC_LANDS));
-
-                bottom = nBasicLands > 5; // if control more than 5 Basic land,
-                                        // probably don't need more
-            } else if (topN.get(i).isCreature()) {
-                List<Card> cl = this.getCardsIn(ZoneType.Battlefield);
-                cl = CardLists.filter(cl, CardPredicates.Presets.CREATURES);
-                bottom = cl.size() > 5; // if control more than 5 Creatures,
-                                        // probably don't need more
-            }
-            if (bottom) {
-                final Card c = topN.get(i);
-                game.getAction().moveToBottomOfLibrary(c);
-                // topN.remove(c);
-            }
-        }
-        num = topN.size();
-        // put the rest on top in random order
-        for (int i = 0; i < num; i++) {
-            final Random rndm = MyRandom.getRandom();
-            final int r = rndm.nextInt(topN.size());
-            final Card c = topN.get(r);
-            game.getAction().moveToLibrary(c);
-            topN.remove(r);
-        }
-    }
 
     /** {@inheritDoc} */
     @Override

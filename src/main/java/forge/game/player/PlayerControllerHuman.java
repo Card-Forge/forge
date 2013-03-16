@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
 import forge.GameEntity;
@@ -287,5 +288,13 @@ public class PlayerControllerHuman extends PlayerController {
         if ( StringUtils.isBlank(message) ) 
             message = String.format("Looking at %s's %s", owner, zone);
         GuiChoose.oneOrNone(message, cards);
+    }
+
+    @Override
+    public ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN) {
+        List<Card> toBottom = GuiChoose.order("Select cards to be put on the bottom of your library", "Cards to put on the bottom", -1, topN, null, null);
+        topN.removeAll(toBottom);
+        List<Card> toTop = topN.isEmpty() ? null : GuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", 0, topN, null, null);
+        return ImmutablePair.of(toTop, toBottom);
     }
 }

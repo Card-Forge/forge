@@ -119,31 +119,6 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    protected final void doScry(final List<Card> topN, final int n) {
-        int num = n;
-        for (int i = 0; i < num; i++) {
-            final Card c = GuiChoose.oneOrNone("Put on bottom of library.", topN);
-            if (c != null) {
-                topN.remove(c);
-                game.getAction().moveToBottomOfLibrary(c);
-            } else {
-                // no card chosen for the bottom
-                break;
-            }
-        }
-        num = topN.size();
-        for (int i = 0; i < num; i++) {
-            final Card c = GuiChoose.one("Put on top of library.", topN);
-            if (c != null) {
-                topN.remove(c);
-                game.getAction().moveToLibrary(c);
-            }
-            // no else - a card must have been chosen
-        }
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public final void sacrificePermanent(final String prompt, final List<Card> choices) {
         final Input in = PlayerUtil.inputSacrificePermanent(choices, prompt);
         Singletons.getModel().getMatch().getInput().setInput(in);

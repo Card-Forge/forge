@@ -192,6 +192,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         this.setName(lobbyPlayer.getName());
     }
 
+    public GameState getGame() { // I'll probably regret about this  
+        return game;
+    }
+    
     public final PlayerStatistics getStats() {
         return stats;
     }
@@ -1844,35 +1848,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
       // //////////////////////////////
 
     // //////////////////////////////
-    /**
-     * <p>
-     * doScry.
-     * </p>
-     * 
-     * @param topN
-     *            a {@link forge.CardList} object.
-     * @param n
-     *            a int.
-     */
-    protected abstract void doScry(List<Card> topN, int n);
 
-    /**
-     * <p>
-     * scry.
-     * </p>
-     * 
-     * @param numScry
-     *            a int.
-     */
-    public final void scry(int numScry) {
-        final List<Card> topN = new ArrayList<Card>();
-        final PlayerZone library = this.getZone(ZoneType.Library);
-        numScry = Math.min(numScry, library.size());
-        for (int i = 0; i < numScry; i++) {
-            topN.add(library.get(i));
-        }
-        this.doScry(topN, topN.size());
-    }
 
     // /////////////////////////////
 

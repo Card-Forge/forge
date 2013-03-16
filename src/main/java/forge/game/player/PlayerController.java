@@ -3,6 +3,8 @@ package forge.game.player;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import forge.Card;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
@@ -104,4 +106,5 @@ public abstract class PlayerController {
 
     /** Shows the card to this player*/
     public abstract void reveal(String string, List<Card> cards, ZoneType zone, Player owner);
+    public abstract ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN);
 }
