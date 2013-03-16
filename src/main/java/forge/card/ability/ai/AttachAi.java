@@ -805,18 +805,25 @@ public class AttachAi extends SpellAbilityAi {
         if (attachSource.isAura() && !attachSource.getName().equals("Daybreak Coronet")) {
             // TODO For Auras like Rancor, that aren't as likely to lead to
             // card disadvantage, this check should be skipped
-            prefList = CardLists.filter(prefList, Predicates.not(Presets.ENCHANTED));
-        }
-
-        if (!grantingAbilities && keywords.isEmpty()) {
-            // Probably prefer to Enchant Creatures that Can Attack
-            // Filter out creatures that can't Attack or have Defender
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return !c.isCreature() || CombatUtil.canAttackNextTurn(c);
+                    return !c.isEnchanted() || c.hasKeyword("Hexproof");
                 }
             });
+        }
+
+        if (!grantingAbilities) {
+            // Probably prefer to Enchant Creatures that Can Attack
+            // Filter out creatures that can't Attack or have Defender
+            if (keywords.isEmpty()) {
+                prefList = CardLists.filter(prefList, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return !c.isCreature() || CombatUtil.canAttackNextTurn(c);
+                    }
+                });
+            }
             c = ComputerUtilCard.getBestAI(prefList);
         } else {
             // If we grant abilities, we may want to put it on something Weak?
