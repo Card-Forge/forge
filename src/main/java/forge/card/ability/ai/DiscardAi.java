@@ -81,6 +81,9 @@ public class DiscardAi extends SpellAbilityAi {
                 // Set PayX here to maximum value.
                 final int cardsToDiscard = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), ai.getOpponent()
                         .getCardsIn(ZoneType.Hand).size());
+                if (cardsToDiscard < 1) {
+                    return false;
+                }
                 source.setSVar("PayX", Integer.toString(cardsToDiscard));
             } else {
                 if (AbilityUtils.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) < 1) {
