@@ -87,8 +87,12 @@ public class AiInputCommon extends Input {
                         final int size = player.getCardsIn(ZoneType.Hand).size();
                         
                         if (!player.isUnlimitedHandSize()) {
-                            final int numDiscards = size - player.getMaxHandSize();
-                            player.discard(numDiscards, null);
+
+                            int max = Math.min(player.getZone(ZoneType.Hand).size(), size - player.getMaxHandSize());
+                            final List<Card> toDiscard = player.getAi().getCardsToDiscard(max, (String[])null, null);
+                            for (int i = 0; i < toDiscard.size(); i++) {
+                                player.discard(toDiscard.get(i), null);
+                            }
                         }
                     }
                     break;

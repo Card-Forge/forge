@@ -1687,18 +1687,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return list;
     }
 
-    /**
-     * <p>
-     * discardRandom.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a List<Card> of cards discarded
-     */
-    public final List<Card> discardRandom(final SpellAbility sa) {
-        return this.discardRandom(1, sa);
-    }
 
     /**
      * <p>
@@ -1910,9 +1898,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Dev Mode
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)
-                && this.isHuman()
-                && Preferences.DEV_MODE) {
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND) && this.getType() == PlayerType.HUMAN && Preferences.DEV_MODE) {
             return true;
         }
 
