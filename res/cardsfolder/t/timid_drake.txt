@@ -6,6 +6,7 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When another creature enters the battlefield, return CARDNAME to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:AntiBuffedBy:Creature
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timid_drake.jpg
 Oracle:Flying\nWhen another creature enters the battlefield, return Timid Drake to its owner's hand.
 SetInfo:MMQ Uncommon
