@@ -12,30 +12,35 @@
 # If you need to, though, you can use this file to set the locations that Forge
 # will use to store your data.  If you specify a relative path in this file, it
 # will be relative to the Forge program directory.
-
+#
+# Paths defined in this file will each have the whitespace trimmed from their
+# start and end.  If you need the path to start or end with a space or tab
+# character, put a slash before or after it, as appropriate.  For example, for
+# the directory "<forge program dir>/ local profile  ", use:
+# xxxDir=./ local profile  /
 
 # This is where Forge will save your personal data, such as your saved decks,
 # preferences, and quest progress.  If you want to back up your data or copy it
 # to another computer, this is the directory to copy.  The default value is
 # platform-specific, and may differ a bit from what is listed here if you have
 # an older version of Windows:
-#   Windows: %APPDATA%/Forge
-#             (usually, C:/Users/<your username>/Application Data/Roaming/Forge)
-#   OSX:   $HOME/Library/Application Support/Forge
-#   Linux: $HOME/.forge
+#   Windows: <your application data directory>/Forge/
+#            (usually, C:/Users/<your username>/Application Data/Roaming/Forge/)
+#   OSX:   <your home directory>/Library/Application Support/Forge/
+#   Linux: <your home directory>/.forge/
 userDir=
 
 # This is where forge will keep downloaded content, such as card pictures and
 # updated price lists.  The default values are:
-#   Windows: %LOCALAPPDATA%/Forge/Cache
-#          (usually C:/Users/<your username>/Application Data/Local/Forge/Cache)
-#   OSX:   $HOME/Library/Caches/Forge
-#   Linux: $HOME/.cache/forge
+#   Windows: <your local application data directory>/Forge/Cache/
+#         (usually C:/Users/<your username>/Application Data/Local/Forge/Cache/)
+#   OSX:   <your home directory>/Library/Caches/Forge/
+#   Linux: <your home directory>/.cache/forge/
 cacheDir=
 
 # This is where forge will download and/or look for card picture data.  The
 # directory structure and filenames are the same as those used by Magic
 # Workstation, and if you have both programs installed, you can share the same
 # picture database between them.  The default value (for all plaforms) is:
-#   <cacheDir>/pics/cards
+#   <the cacheDir defined above>/pics/cards/
 cardPicsDir=
