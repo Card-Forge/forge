@@ -2,6 +2,7 @@ Name:Land Equilibrium
 ManaCost:2 U U
 Types:Enchantment
 Text:If an opponent who controls at least as many lands as you do would put a land onto the battlefield, that player instead puts that land onto the battlefield then sacrifices a land.
+SVar:SacLand:DB$ Sacrifice | SacValid$ Land | Defined$ Opponent | SpellDescription$ Opponent sacrifices a land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/land_equilibrium.jpg
 Oracle:If an opponent who controls at least as many lands as you do would put a land onto the battlefield, that player instead puts that land onto the battlefield then sacrifices a land.
 SetInfo:LEG Rare

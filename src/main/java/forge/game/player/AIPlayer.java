@@ -18,8 +18,6 @@
 package forge.game.player;
 
 import java.util.List;
-import java.util.Random;
-
 import forge.Card;
 
 import forge.CardLists;
@@ -27,10 +25,8 @@ import forge.CardPredicates;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.AiController;
-import forge.game.ai.ComputerUtilCard;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.MyRandom;
 
 /**
  * <p>
@@ -65,43 +61,6 @@ public class AIPlayer extends Player {
 
     // //////////////////////////////
     // /
-    // / replaces Singletons.getModel().getGameAction().draw* methods
-    // /
-    // //////////////////////////////
-
-    /**
-     * <p>
-     * dredge.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    @Override
-    public final boolean dredge() {
-        final List<Card> dredgers = this.getDredge();
-        final Random random = MyRandom.getRandom();
-
-        // use dredge if there are more than one of them in your graveyard
-        if ((dredgers.size() > 1) || ((dredgers.size() == 1) && random.nextBoolean())) {
-            CardLists.shuffle(dredgers);
-            final Card c = dredgers.get(0);
-            // rule 702.49a
-            if (this.getDredgeNumber(c) <= this.getCardsIn(ZoneType.Library).size()) {
-                // dredge library, put card in hand
-                game.getAction().moveToHand(c);
-                // put dredge number in graveyard
-                for (int i = 0; i < this.getDredgeNumber(c); i++) {
-                    final Card c2 = this.getCardsIn(ZoneType.Library).get(0);
-                    game.getAction().moveToGraveyard(c2);
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // //////////////////////////////
-    // /
     // / replaces Singletons.getModel().getGameAction().discard* methods
     // /
     // //////////////////////////////
@@ -132,16 +91,6 @@ public class AIPlayer extends Player {
     }
 
     // /////////////////////////
-
-    /** {@inheritDoc} */
-    @Override
-    public final void sacrificePermanent(final String prompt, final List<Card> choices) {
-        if (choices.size() > 0) {
-            // TODO - this could probably use better AI
-            final Card c = ComputerUtilCard.getWorstPermanentAI(choices, false, false, false, false);
-            game.getAction().sacrificeDestroy(c);
-        }
-    }
 
     /* (non-Javadoc)
      * @see forge.game.player.Player#getType()

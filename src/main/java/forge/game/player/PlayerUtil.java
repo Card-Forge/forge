@@ -156,22 +156,6 @@ public final class PlayerUtil {
 
     /**
      * <p>
-     * input_sacrificePermanent.
-     * </p>
-     * 
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.control.input.Input} object.
-     * @since 1.0.15
-     */
-    public static Input inputSacrificePermanent(final List<Card> choices, final String message) {
-        return PlayerUtil.inputSacrificePermanentsFromList(1, choices, message);
-    } // input_sacrifice()
-
-    /**
-     * <p>
      * input_sacrificePermanents.
      * </p>
      * 

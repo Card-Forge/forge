@@ -48,6 +48,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
+import forge.util.MyRandom;
 
 /**
  * <p>
@@ -705,6 +706,19 @@ public class AiController {
             }
         }
         return true;
+    }
+
+    /**
+     * AI decides if he wants to use dredge ability and which one if many available
+     * @param dredgers - contains at least single element
+     * @return
+     */
+    public Card chooseCardToDredge(List<Card> dredgers) {
+        // use dredge if there are more than one of them in your graveyard
+        if (dredgers.size() > 1 || MyRandom.getRandom().nextBoolean()) {
+            return Aggregates.random(dredgers);
+        }
+        return null;
     }
 }
 

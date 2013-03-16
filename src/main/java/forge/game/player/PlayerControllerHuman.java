@@ -326,4 +326,15 @@ public class PlayerControllerHuman extends PlayerController {
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int minDiscard) {
         return GuiChoose.order("Choose cards to Discard", "Discarded", minDiscard == 0 ? -1 : minDiscard, valid, null, null);
     }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseCardToDredge(java.util.List)
+     */
+    @Override
+    public Card chooseCardToDredge(List<Card> dredgers) {
+        if (GuiDialog.confirm(null, "Do you want to dredge?", false)) {
+            return GuiChoose.oneOrNone("Select card to dredge", dredgers);
+        }
+        return null;
+    }
 }

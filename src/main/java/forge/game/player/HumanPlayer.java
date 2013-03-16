@@ -17,17 +17,10 @@
  */
 package forge.game.player;
 
-import java.util.List;
-
-import forge.Card;
-
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
 
 /**
  * <p>
@@ -40,50 +33,9 @@ import forge.gui.GuiDialog;
 public class HumanPlayer extends Player {
     private PlayerControllerHuman controller;
     
-    /**
-     * <p>
-     * Constructor for HumanPlayer.
-     * </p>
-     * 
-     * @param myName
-     *            a {@link java.lang.String} object.
-     */
     public HumanPlayer(final LobbyPlayer player, GameState game) {
         super(player, game);
-        
         controller = new PlayerControllerHuman(game, this);
-    }
-
-    /**
-     * <p>
-     * dredge.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    @Override
-    public final boolean dredge() {
-        boolean dredged = false;
-        final boolean wantDredge = GuiDialog.confirm(null, "Do you want to dredge?");
-        if (wantDredge) {
-            final Card c = GuiChoose.one("Select card to dredge", this.getDredge());
-            // rule 702.49a
-            if (this.getDredgeNumber(c) <= getZone(ZoneType.Library).size()) {
-
-                // might have to make this more sophisticated
-                // dredge library, put card in hand
-                game.getAction().moveToHand(c);
-
-                for (int i = 0; i < this.getDredgeNumber(c); i++) {
-                    final Card c2 = getZone(ZoneType.Library).get(0);
-                    game.getAction().moveToGraveyard(c2);
-                }
-                dredged = true;
-            } else {
-                dredged = false;
-            }
-        }
-        return dredged;
     }
 
     /** {@inheritDoc} */
@@ -100,26 +52,12 @@ public class HumanPlayer extends Player {
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void sacrificePermanent(final String prompt, final List<Card> choices) {
-        final Input in = PlayerUtil.inputSacrificePermanent(choices, prompt);
-        Singletons.getModel().getMatch().getInput().setInput(in);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.Player#getType()
-     */
     @Override
     public PlayerType getType() {
         return PlayerType.HUMAN;
     }
-
-    /* (non-Javadoc)
-     * @see forge.game.player.Player#getController()
-     */
-    @Override
     public PlayerController getController() {
         return controller;
     }
+
 } // end HumanPlayer class
