@@ -124,14 +124,14 @@ public class ComputerUtilCard {
      */
     public static Card getBestLandAI(final List<Card> list) {
         final List<Card> land = CardLists.filter(list, CardPredicates.Presets.LANDS);
-        if (!(land.size() > 0)) {
+        if (land.isEmpty()) {
             return null;
         }
     
         // prefer to target non basic lands
         final List<Card> nbLand = CardLists.filter(land, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
     
-        if (nbLand.size() > 0) {
+        if (!nbLand.isEmpty()) {
             // TODO - Rank non basics?
             return Aggregates.random(nbLand);
         }
@@ -243,11 +243,11 @@ public class ComputerUtilCard {
     public static Card getBestAI(final List<Card> list) {
         // Get Best will filter by appropriate getBest list if ALL of the list
         // is of that type
-        if (CardLists.getNotType(list, "Creature").size() == 0) {
+        if (CardLists.getNotType(list, "Creature").isEmpty()) {
             return ComputerUtilCard.getBestCreatureAI(list);
         }
     
-        if (CardLists.getNotType(list, "Land").size() == 0) {
+        if (CardLists.getNotType(list, "Land").isEmpty()) {
             return getBestLandAI(list);
         }
     
