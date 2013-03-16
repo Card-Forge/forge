@@ -111,7 +111,7 @@ public class AIPlayer extends Player {
     public final void discard(final int num, final SpellAbility sa) {
         int max = this.getCardsIn(ZoneType.Hand).size();
         max = Math.min(max, num);
-        final List<Card> toDiscard = this.getAi().getCardsToDiscard(max, null, sa);
+        final List<Card> toDiscard = this.getAi().getCardsToDiscard(max, (String[])null, sa);
         for (int i = 0; i < toDiscard.size(); i++) {
             this.doDiscard(toDiscard.get(i), sa);
         }
@@ -125,8 +125,7 @@ public class AIPlayer extends Player {
 
         if (tHand.size() > 0) {
             Card toDiscard = Aggregates.itemWithMin(tHand, CardPredicates.Accessors.fnGetCmc);
-            toDiscard.getController().discard(toDiscard, sa); // this got changed
-                                                              // to doDiscard basically
+            discard(toDiscard, sa); // this got changed to doDiscard basically
             return;
         }
         this.discard(num, sa);

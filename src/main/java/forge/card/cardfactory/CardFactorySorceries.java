@@ -473,11 +473,9 @@ public class CardFactorySorceries {
             int s = h.size();
             min = Math.min(min, s);
         }
-        Iterator<List<Card>> hh = hands.iterator();
-        for (Player p : Singletons.getModel().getGame().getPlayers()) {
 
-            List<Card> h = hh.next();
-            int sac = h.size() - min;
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            int sac = p.getCardsIn(ZoneType.Hand).size() - min;
             if (sac == 0) {
                 continue;
             }

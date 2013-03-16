@@ -525,16 +525,21 @@ public class AiController {
      */
     public List<Card> getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
         List<Card> hand = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
-        Card sourceCard = null;
+
     
         if ((uTypes != null) && (sa != null)) {
             hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
         }
+        return getCardsToDiscard(numDiscard, hand, sa);
+    }
     
-        if (hand.size() < numDiscard) {
+    public List<Card> getCardsToDiscard(final int numDiscard, final List<Card> validCards, final SpellAbility sa) {
+        
+        if (validCards.size() < numDiscard) {
             return null;
         }
-    
+
+        Card sourceCard = null;
         final List<Card> discardList = new ArrayList<Card>();
         int count = 0;
         if (sa != null) {
@@ -545,7 +550,7 @@ public class AiController {
         while (count < numDiscard) {
             Card prefCard = null;
             if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isOpponentOf(player)) {
-                for (Card c : hand) {
+                for (Card c : validCards) {
                     if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
                             + " put it onto the battlefield instead of putting it into your graveyard.")) {
                         prefCard = c;
@@ -554,11 +559,11 @@ public class AiController {
                 }
             }
             if (prefCard == null) {
-                prefCard = ComputerUtil.getCardPreference(player, sourceCard, "DiscardCost", hand);
+                prefCard = ComputerUtil.getCardPreference(player, sourceCard, "DiscardCost", validCards);
             }
             if (prefCard != null) {
                 discardList.add(prefCard);
-                hand.remove(prefCard);
+                validCards.remove(prefCard);
                 count++;
             } else {
                 break;
@@ -569,11 +574,11 @@ public class AiController {
     
         // choose rest
         for (int i = 0; i < discardsLeft; i++) {
-            if (hand.isEmpty()) {
+            if (validCards.isEmpty()) {
                 continue;
             }
             final int numLandsInPlay = Iterables.size(Iterables.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS));
-            final List<Card> landsInHand = CardLists.filter(hand, CardPredicates.Presets.LANDS);
+            final List<Card> landsInHand = CardLists.filter(validCards, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
     
             // Discard a land
@@ -582,21 +587,21 @@ public class AiController {
     
             if (canDiscardLands) {
                 discardList.add(landsInHand.get(0));
-                hand.remove(landsInHand.get(0));
+                validCards.remove(landsInHand.get(0));
             } else { // Discard other stuff
-                CardLists.sortByCmcDesc(hand);
+                CardLists.sortByCmcDesc(validCards);
                 int numLandsAvailable = numLandsInPlay;
                 if (numLandsInHand > 0) {
                     numLandsAvailable++;
                 }
                 //Discard unplayable card
-                if (hand.get(0).getCMC() > numLandsAvailable) {
-                    discardList.add(hand.get(0));
-                    hand.remove(hand.get(0));
+                if (validCards.get(0).getCMC() > numLandsAvailable) {
+                    discardList.add(validCards.get(0));
+                    validCards.remove(validCards.get(0));
                 } else { //Discard worst card
-                    Card worst = ComputerUtilCard.getWorstAI(hand);
+                    Card worst = ComputerUtilCard.getWorstAI(validCards);
                     discardList.add(worst);
-                    hand.remove(worst);
+                    validCards.remove(worst);
                 }
             }
         }

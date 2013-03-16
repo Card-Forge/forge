@@ -255,4 +255,16 @@ public class PlayerControllerAi extends PlayerController {
         return true; // AI does not know what will happen next (another clash or that would become his topdeck)
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#chooseCardsToDiscardFrom(forge.game.player.Player, java.util.List, int)
+     */
+    @Override
+    public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min) {
+        boolean isTargetFriendly = !p.isOpponentOf(getPlayer());
+        
+        return isTargetFriendly
+               ? ComputerUtil.getCardsToDiscardFromFriend(player, p, sa, validCards, min)
+               : ComputerUtil.getCardsToDiscardFromOpponent(player, p, sa, validCards, min);
+    }
+
 }

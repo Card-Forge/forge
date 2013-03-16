@@ -24,6 +24,7 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -89,6 +90,8 @@ public class CardLists {
             return aLen - bLen;
         }
     };
+    
+    public static final List<Card> emptyList = ImmutableList.of();
 
     /**
      * <p>
