@@ -9052,7 +9052,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            the rE
      */
     public void addReplacementEffect(final ReplacementEffect replacementEffect) {
-        final ReplacementEffect replacementEffectCopy = replacementEffect.getCopy();
+        final ReplacementEffect replacementEffectCopy = replacementEffect.getCopy(); // doubtful - every caller provides a newly parsed instance, why copy? 
         replacementEffectCopy.setHostCard(this);
         this.getCharacteristics().getReplacementEffects().add(replacementEffectCopy);
     }

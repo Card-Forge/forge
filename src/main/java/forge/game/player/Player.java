@@ -42,6 +42,8 @@ import forge.Constant.Preferences;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.ability.AbilityFactory;
+import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaPool;
@@ -50,6 +52,7 @@ import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameActionUtil;
@@ -65,6 +68,7 @@ import forge.game.event.MulliganEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
@@ -125,6 +129,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
     /** The num drawn this turn. */
     private int numDrawnThisTurn = 0;
+    private int numDrawnThisDrawStep = 0;
 
     /** The slowtrip list. */
     private List<Card> slowtripList = new ArrayList<Card>();
@@ -1240,70 +1245,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public abstract boolean dredge();
 
     /**
-     * <p>
-     * drawCards.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     * @return a List<Card> of cards actually drawn
-     */
-    public final List<Card> drawCards(final int n) {
-        return this.drawCards(n, false);
-    }
-
-    /**
-     * <p>
-     * drawCards.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     * @param firstFromDraw
-     *            true if this is the card drawn from that player's draw step
-     *            each turn
-     * @return a List<Card> of cards actually drawn
-     */
-    public final List<Card> drawCards(final int n, final boolean firstFromDraw) {
-        final List<Card> drawn = new ArrayList<Card>();
-
-        if (!this.canDraw()) {
-            return drawn;
-        }
-
-        for (int i = 0; i < n; i++) {
-
-            // TODO: multiple replacements need to be selected by the controller
-            if (this.getDredge().size() != 0) {
-                if (this.dredge()) {
-                    continue;
-                }
-            }
-
-            if (!firstFromDraw && game.isCardInPlay("Chains of Mephistopheles")) {
-                if (!this.getZone(ZoneType.Hand).isEmpty()) {
-                    if (this.isHuman()) {
-                        this.discardChainsOfMephistopheles();
-                    } else { // Computer
-                        this.discard(1, null);
-                        // true causes this code not to be run again
-                        drawn.addAll(this.drawCards(1, true));
-                    }
-                } else {
-                    this.mill(1);
-                }
-            } else {
-                drawn.addAll(this.doDraw());
-            }
-        }
-
-        // Play the Draw sound
-        game.getEvents().post(new DrawCardEvent());
-
-        return drawn;
-    }
-
-    /**
      * 
      * TODO Write javadoc for this method.
      * 
@@ -1330,6 +1271,40 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * <p>
+     * drawCards.
+     * </p>
+     * 
+     * @param n
+     *            a int.
+     * @return a List<Card> of cards actually drawn
+     */
+    public final List<Card> drawCards(final int n) {
+        final List<Card> drawn = new ArrayList<Card>();
+    
+        if (!this.canDraw()) {
+            return drawn;
+        }
+    
+        for (int i = 0; i < n; i++) {
+    
+            // TODO: multiple replacements need to be selected by the controller
+            if (!this.getDredge().isEmpty()) {
+                if (this.dredge()) {
+                    continue;
+                }
+            }
+    
+            drawn.addAll(this.doDraw());
+        }
+    
+        // Play the Draw sound
+        game.getEvents().post(new DrawCardEvent());
+    
+        return drawn;
+    }
+
+    /**
+     * <p>
      * doDraw.
      * </p>
      * 
@@ -1348,7 +1323,46 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             return drawn;
         }
 
-        if (library.size() != 0) {
+        // ======== Chains of Mephistopheles hardcode. ========= 
+        // This card requires player to either discard a card, and then he may proceed drawing, or mill 1 - then no draw will happen
+        // It's oracle-worded as a replacement effect ("If a player would draw a card ... discards a card instead") (rule 419.1a)
+        // Yet, gatherer's rulings read: The effect is cumulative. If there are two of these on the battlefield, each of them will modify each draw
+        // That means player isn't supposed to choose one replacement effect out of two (generated by Chains Of Mephistopheles), but both happen.
+        // So it's not a common replacement effect and has to handled by special code.
+
+        // This is why the code is placed after any other replacement effects could affect the draw event.  
+        List<Card> chainsList = null;
+        for(Card c: game.getCardsInGame()) {
+            if ( c.getName().equals("Chains of Mephistopheles") ) {
+                if ( null == chainsList )
+                    chainsList = new ArrayList<Card>();
+                chainsList.add(c);
+            }
+        }
+        if (chainsList != null && (numDrawnThisDrawStep > 0 || !game.getPhaseHandler().is(PhaseType.DRAW))) {
+            for(Card c : chainsList) {
+                // I have to target this player - don't know how to do it.
+                Target target = new Target(c, null, "");
+                target.addTarget(this);
+
+                if (getCardsIn(ZoneType.Hand).isEmpty()) {
+                    SpellAbility saMill = AbilityFactory.getAbility(c.getSVar("MillOne"), c);
+                    saMill.setActivatingPlayer(c.getController());
+                    saMill.setTarget(target);
+                    AbilityUtils.resolve(saMill, false);
+                    
+                    return drawn; // Draw is cancelled
+                } else { 
+                    SpellAbility saDiscard = AbilityFactory.getAbility(c.getSVar("DiscardOne"), c);
+                    saDiscard.setActivatingPlayer(c.getController());
+                    saDiscard.setTarget(target);
+                    AbilityUtils.resolve(saDiscard, false);
+                }
+            }
+        }
+        // End of = Chains of Mephistopheles hardcode. ========= 
+
+        if (!library.isEmpty()) {
 
             Card c = library.get(0);
             c = game.getAction().moveToHand(c);
@@ -1371,6 +1385,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             this.setLastDrawnCard(c);
             c.setDrawnThisTurn(true);
             this.numDrawnThisTurn++;
+            if ( game.getPhaseHandler().is(PhaseType.DRAW))
+                this.numDrawnThisDrawStep++;
 
             // Miracle draws
             if (this.numDrawnThisTurn == 1 && game.getPhaseHandler().getTurn() != 0) {
@@ -1550,6 +1566,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public final void resetNumDrawnThisTurn() {
         this.numDrawnThisTurn = 0;
+        this.numDrawnThisDrawStep = 0;
     }
 
     /**
@@ -1568,11 +1585,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     // / replaces Singletons.getModel().getGameAction().discard* methods
     // /
     // //////////////////////////////
-
-    /**
-     * Discard_ chains_of_ mephistopheles.
-     */
-    protected abstract void discardChainsOfMephistopheles();
 
     /**
      * <p>

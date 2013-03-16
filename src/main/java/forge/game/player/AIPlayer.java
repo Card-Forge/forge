@@ -144,17 +144,6 @@ public class AIPlayer extends Player {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.Player#discard_Chains_of_Mephistopheles()
-     */
-    @Override
-    protected final void discardChainsOfMephistopheles() {
-        this.discard(1, null);
-        this.drawCard();
-    }
-
     /* (non-Javadoc)
      * @see forge.game.player.Player#getType()
      */

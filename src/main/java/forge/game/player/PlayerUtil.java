@@ -156,45 +156,6 @@ public final class PlayerUtil {
 
     /**
      * <p>
-     * input_chainsDiscard.
-     * </p>
-     * 
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputChainsDiscard() {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 2856894846224546303L;
-
-            @Override
-            public void showMessage() {
-                if (Singletons.getControl().getPlayer().getZone(ZoneType.Hand).size() == 0) {
-                    this.stop();
-                }
-
-                CMatchUI.SINGLETON_INSTANCE.showMessage("Chains of Mephistopheles:\n" + "Select a card to discard");
-                ButtonUtil.disableAll();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-                if (zone.is(ZoneType.Hand)) {
-                    card.getController().discard(card, null);
-                    this.done();
-                }
-            }
-
-            private void done() {
-                this.stop();
-                // hack to not trigger Chains of Mephistopheles recursively
-                Singletons.getControl().getPlayer().drawCards(1, true);
-            }
-        };
-        return target;
-    } // input_chainsDiscard()
-
-    /**
-     * <p>
      * input_sacrificePermanent.
      * </p>
      * 

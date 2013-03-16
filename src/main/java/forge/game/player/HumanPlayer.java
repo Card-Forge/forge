@@ -100,19 +100,6 @@ public class HumanPlayer extends Player {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.Player#discard_Chains_of_Mephistopheles()
-     */
-    /**
-     * 
-     */
-    @Override
-    protected final void discardChainsOfMephistopheles() {
-        Singletons.getModel().getMatch().getInput().setInputInterrupt(PlayerUtil.inputChainsDiscard());
-    }
-
     /** {@inheritDoc} */
     @Override
     public final void sacrificePermanent(final String prompt, final List<Card> choices) {
