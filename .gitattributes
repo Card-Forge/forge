@@ -14508,6 +14508,7 @@ src/main/java/forge/quest/QuestEventDifficulty.java -text
 src/main/java/forge/quest/QuestEventDuel.java svneol=native#text/plain
 src/main/java/forge/quest/QuestEventManager.java svneol=native#text/plain
 src/main/java/forge/quest/QuestMode.java -text
+src/main/java/forge/quest/QuestRewardCard.java -text
 src/main/java/forge/quest/QuestRewardCardDuplicate.java -text
 src/main/java/forge/quest/QuestRewardCardFiltered.java -text
 src/main/java/forge/quest/QuestUtil.java svneol=native#text/plain
