@@ -107,4 +107,5 @@ public abstract class PlayerController {
     /** Shows the card to this player*/
     public abstract void reveal(String string, List<Card> cards, ZoneType zone, Player owner);
     public abstract ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN);
+    public abstract boolean willPutCardOnTop(Card c);
 }

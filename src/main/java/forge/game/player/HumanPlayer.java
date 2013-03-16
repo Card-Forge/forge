@@ -29,7 +29,6 @@ import forge.game.GameState;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.match.CMatchUI;
 import forge.quest.QuestController;
 import forge.quest.bazaar.QuestItemType;
 
@@ -122,21 +121,6 @@ public class HumanPlayer extends Player {
     public final void sacrificePermanent(final String prompt, final List<Card> choices) {
         final Input in = PlayerUtil.inputSacrificePermanent(choices, prompt);
         Singletons.getModel().getMatch().getInput().setInput(in);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final void clashMoveToTopOrBottom(final Card c) {
-        String choice = "";
-        final String[] choices = { "top", "bottom" };
-        CMatchUI.SINGLETON_INSTANCE.setCard(c);
-        choice = GuiChoose.one(c.getName() + " - Top or bottom of Library", choices);
-
-        if (choice.equals("bottom")) {
-            game.getAction().moveToBottomOfLibrary(c);
-        } else {
-            game.getAction().moveToLibrary(c);
-        }
     }
 
     /* (non-Javadoc)

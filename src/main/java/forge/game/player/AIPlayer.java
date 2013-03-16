@@ -144,14 +144,6 @@ public class AIPlayer extends Player {
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
-    protected final void clashMoveToTopOrBottom(final Card c) {
-        // computer just puts the card back until such time it can make a
-        // smarter decision
-        game.getAction().moveToLibrary(c);
-    }
-
     /*
      * (non-Javadoc)
      * 

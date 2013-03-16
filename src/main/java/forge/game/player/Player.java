@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -2672,87 +2671,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final void setLifeLostThisTurn(final int n) {
         this.lifeLostThisTurn = n;
     }
-
-    // //////////////////////////////
-    //
-    // Clash
-    //
-    // ///////////////////////////////
-
-    /**
-     * <p>
-     * clashWithOpponent.
-     * </p>
-     * 
-     * @param source
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean clashWithOpponent(final Card source) {
-        /*
-         * Each clashing player reveals the top card of his or her library, then
-         * puts that card on the top or bottom. A player wins if his or her card
-         * had a higher mana cost.
-         * 
-         * Clash you win or win you don't. There is no tie.
-         */
-        final Player player = source.getController();
-        final Player opponent = player.getOpponent();
-        final ZoneType lib = ZoneType.Library;
-
-        final PlayerZone pLib = player.getZone(lib);
-        final PlayerZone oLib = opponent.getZone(lib);
-
-        final StringBuilder reveal = new StringBuilder();
-
-        Card pCard = null;
-        Card oCard = null;
-
-        if (pLib.size() > 0) {
-            pCard = pLib.get(0);
-        }
-        if (oLib.size() > 0) {
-            oCard = oLib.get(0);
-        }
-
-        if ((pLib.size() == 0) && (oLib.size() == 0)) {
-            return false;
-        } else if (pLib.size() == 0) {
-            opponent.clashMoveToTopOrBottom(oCard);
-            return false;
-        } else if (oLib.size() == 0) {
-            player.clashMoveToTopOrBottom(pCard);
-            return true;
-        } else {
-            final int pCMC = pCard.getCMC();
-            final int oCMC = oCard.getCMC();
-            reveal.append(player).append(" reveals: ").append(pCard.getName()).append(".  CMC = ").append(pCMC);
-            reveal.append("\r\n");
-            reveal.append(opponent).append(" reveals: ").append(oCard.getName()).append(".  CMC = ").append(oCMC);
-            reveal.append("\r\n\r\n");
-            if (pCMC > oCMC) {
-                reveal.append(player).append(" wins clash.");
-            } else {
-                reveal.append(player).append(" loses clash.");
-            }
-            JOptionPane.showMessageDialog(null, reveal.toString(), source.getName(), JOptionPane.PLAIN_MESSAGE);
-            player.clashMoveToTopOrBottom(pCard);
-            opponent.clashMoveToTopOrBottom(oCard);
-            // JOptionPane.showMessageDialog(null, reveal.toString(),
-            // source.getName(), JOptionPane.PLAIN_MESSAGE);
-            return pCMC > oCMC;
-        }
-    }
-
-    /**
-     * <p>
-     * clashMoveToTopOrBottom.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    protected abstract void clashMoveToTopOrBottom(Card c);
 
     /**
      * a Player or Planeswalker that this Player must attack if able in an

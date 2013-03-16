@@ -249,4 +249,10 @@ public class PlayerControllerAi extends PlayerController {
         return ImmutablePair.of(toTop, toBottom);
     }
 
+
+    @Override
+    public boolean willPutCardOnTop(Card c) {
+        return true; // AI does not know what will happen next (another clash or that would become his topdeck)
+    }
+
 }

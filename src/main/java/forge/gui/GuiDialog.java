@@ -15,35 +15,18 @@ import forge.util.MyRandom;
  */
 public class GuiDialog {
 
-    /**
-     * <p>
-     * showYesNoDialog.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param question
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
+    private static final String[] defaultConfirmOptions = { "Yes", "No" };
     public static boolean confirm(final Card c, final String question) {
-        return GuiDialog.confirm(c, question, true);
+        return GuiDialog.confirm(c, question, true, null);
     }
-
-    /**
-     * <p>
-     * showYesNoDialog.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param question
-     *            a {@link java.lang.String} object.
-     * @param defaultNo
-     *            true if the default option should be "No", false otherwise
-     * @return a boolean.
-     */
-    public static boolean confirm(final Card c, String question, final boolean defaultChoice) {
+    public static boolean confirm(final Card c, final String question, final boolean defaultChoice) {
+        return GuiDialog.confirm(c, question, defaultChoice, null);
+    }
+    public static boolean confirm(final Card c, final String question, String[] options) {
+        return GuiDialog.confirm(c, question, true, options);
+    }
+    
+    public static boolean confirm(final Card c, String question, final boolean defaultIsYes, final String[] options) {
         CMatchUI.SINGLETON_INSTANCE.setCard(c);
         final StringBuilder title = new StringBuilder();
         if ( c != null)
@@ -54,14 +37,11 @@ public class GuiDialog {
         }
     
         int answer;
-        if (!defaultChoice) {
-            final Object[] options = { "Yes", "No" };
-            answer = JOptionPane.showOptionDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION,
-                    JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
-        } else {
-            answer = JOptionPane.showConfirmDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION);
-        }
-    
+
+        String[] opts = options == null ? defaultConfirmOptions : options;
+        answer = JOptionPane.showOptionDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, opts, opts[defaultIsYes ? 0 : 1]);
+
         return answer == JOptionPane.YES_OPTION;
     }
 

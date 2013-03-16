@@ -297,4 +297,10 @@ public class PlayerControllerHuman extends PlayerController {
         List<Card> toTop = topN.isEmpty() ? null : GuiChoose.order("Arrange cards to be put on top of your library", "Cards arranged", 0, topN, null, null);
         return ImmutablePair.of(toTop, toBottom);
     }
+
+
+    @Override
+    public boolean willPutCardOnTop(Card c) {
+        return GuiDialog.confirm(c, "Where you put " + c.getName() + " in your library", new String[]{"Top", "Bottom"} );
+    }
 }
