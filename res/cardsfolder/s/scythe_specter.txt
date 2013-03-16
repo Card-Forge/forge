@@ -1,0 +1,14 @@
+Name:Scythe Specter
+ManaCost:4 B B
+Types:Creature Specter
+PT:4/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, each opponent discards a card. Each player who discarded a card with the highest converted mana cost among cards discarded this way loses life equal to that converted mana cost.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Mode$ TgtChoose | NumCards$ 1 | Defined$ Player.Opponent | RememberDiscarded$ True | SubAbility$ DBRepeatLoseLife
+SVar:DBRepeatLoseLife:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.greatestRememberedCMC | Zone$ Battlefield,Graveyard,Exile,Library,Hand | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | References$ X | Defined$ ImprintedController
+SVar:X:Imprinted$CardManaCost
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scythe_specter.jpg
+Oracle:Flying\nWhenever Scythe Specter deals combat damage to a player, each opponent discards a card. Each player who discarded a card with the highest converted mana cost among cards discarded this way loses life equal to that converted mana cost.
+SetInfo:COM Rare
