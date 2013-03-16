@@ -462,16 +462,9 @@ public class CardFactorySorceries {
     }
 
     private static final void balanceHands(Spell card) {
-
-        List<List<Card>> hands = new ArrayList<List<Card>>();
-        for (Player p : Singletons.getModel().getGame().getPlayers()) {
-
-            hands.add(p.getCardsIn(ZoneType.Hand));
-        }
         int min = Integer.MAX_VALUE;
-        for (List<Card> h : hands) {
-            int s = h.size();
-            min = Math.min(min, s);
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            min = Math.min(min, p.getZone(ZoneType.Hand).size());
         }
 
         for (Player p : Singletons.getModel().getGame().getPlayers()) {
