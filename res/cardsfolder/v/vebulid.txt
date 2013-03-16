@@ -6,7 +6,7 @@ K:etbCounter:P1P1:1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a +1/+1 counter on CARDNAME.
 T:Mode$ Attacks | ValidCard$ Card.Self | DelayedTrigger$ DelTrigDestroy | TriggerDescription$ When CARDNAME attacks or blocks, destroy it at end of combat.
 T:Mode$ Blocks | ValidCard$ Card.Self | DelayedTrigger$ DelTrigDestroy | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, destroy it at end of combat.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
 SVar:DelTrigDestroy:Mode$ Phase | Phase$ EndCombat | Execute$ TrigDestroy | TriggerDescription$ Destroy CARDNAME at end of combat.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vebulid.jpg
