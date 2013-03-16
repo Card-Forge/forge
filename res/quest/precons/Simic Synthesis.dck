@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Simic Synthesis
+Description=The Simic Combine is always evolving—literally! The evolve mechanic means your creatures are constantly growing into new and unusual forms. A creature with evolve gets a +1/+1 counter if a larger creature (meaning it has a greater power or a greater toughness) enters the battlefield under your control. After enough evolutions, even the smallest creature can sit on top of the food chain.
+Deck Type=constructed
+Set=GTC
+Image=simic_synthesis.jpg
+[main]
+12  Forest|RTR
+13  Island|RTR
+1  Simic Guildgate|GTC
+2  Adaptive Snapjaw|GTC
+1  Chronomaton|M13
+1  Cloudfin Raptor|GTC
+2  Crocanura|GTC
+1  Crowned Ceratok|GTC
+2  Drakewing Krasis|GTC
+1  Elusive Krasis|GTC
+1  Fathom Mage|GTC
+1  Frilled Oculus|GTC
+1  Ivy Lane Denizen|GTC
+2  Kraken Hatchling|M13
+1  Leyline Phantom|GTC
+1  Merfolk of the Depths|GTC
+1  Sapphire Drake|GTC
+2  Shambleshark|GTC
+1  Zameck Guildmage|GTC
+2  Bioshift|GTC
+2  Encrust|M13
+2  Forced Adaptation|GTC
+1  Hindervines|GTC
+2  Simic Keyrune|GTC
+1  Sleep|M13
+1  Tower Defense|GTC
+1  Unexpected Results|GTC
+1  Urban Evolution|GTC
+[sideboard]

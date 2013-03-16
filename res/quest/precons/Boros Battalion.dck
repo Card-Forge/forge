@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Boros Battalion
+Description=Join the Boros Legion and become part of a unified attack force! The "Boros Battalion" deck hammers that point home by way of the battalion mechanic. Whenever you attack with a creature that has battalion and at least two other creatures, an effect that makes your assault even more powerful happens!
+Deck Type=constructed
+Set=GTC
+Image=boros_battalion.jpg
+[main]
+1  Boros Guildgate|GTC
+12  Mountain|RTR
+12  Plains|RTR
+1  Armored Transport|GTC
+1  Bomber Corps|GTC
+1  Boros Elite|GTC
+2  Canyon Minotaur|M13
+1  Court Street Denizen|GTC
+2  Daring Skyjek|GTC
+1  Ember Beast|GTC
+1  Firefist Striker|GTC
+1  Firemane Avenger|GTC
+2  Fortress Cyclops|GTC
+1  Foundry Champion|GTC
+1  Ordruun Veteran|GTC
+2  Skyknight Legionnaire|GTC
+1  Sunhome Guildmage|GTC
+2  Warclamp Mastiff|M13
+2  Warmind Infantry|GTC
+3  Wojek Halberdiers|GTC
+1  Act of Treason|GTC
+1  Aerial Maneuver|GTC
+2  Arrows of Justice|GTC
+2  Boros Keyrune|GTC
+1  Mark for Death|GTC
+1  Mugging|GTC
+1  Righteous Charge|GTC
+1  Shielded Passage|GTC
+[sideboard]

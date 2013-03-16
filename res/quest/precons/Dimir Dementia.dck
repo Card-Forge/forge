@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Dimir Dementia
+Description=House Dimir values secrecy above all, entrusting only its own agents with valuable codes and information. Whenever you cast a card with cipher, you can exile it, encoding it on a creature you control. Then, whenever the creature slides through and damages a player, you'll get to cast that card again!
+Deck Type=constructed
+Set=GTC
+Image=boros_battalion.jpg
+[main]
+1  Dimir Guildgate|GTC
+12  Island|RTR
+13  Swamp|RTR
+2  Balustrade Spy|GTC
+1  Consuming Aberration|GTC
+2  Deathcult Rogue|GTC
+2  Dinrova Horror|GTC
+1  Duskmantle Guildmage|GTC
+3  Gutter Skulk|GTC
+1  Incursion Specialist|GTC
+1  Jace's Phantasm|M13
+1  Mindeye Drake|GTC
+1  Mortus Strider|GTC
+1  Sage's Row Denizen|GTC
+1  Vedalken Entrancer|M13
+1  Welkin Tern|M13
+2  Wight of Precinct Six|GTC
+1  Coerced Confession|GTC
+2  Death's Approach|GTC
+2  Dimir Keyrune|GTC
+2  Grisly Spectacle|GTC
+1  Last Thoughts|GTC
+1  Midnight Recovery|GTC
+1  Paranoid Delusions|GTC
+1  Rise from the Grave|M13
+1  Shadow Slice|GTC
+1  Totally Lost|GTC
+1  Whispering Madness|GTC
+[sideboard]
