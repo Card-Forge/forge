@@ -17,7 +17,7 @@ public class PermanentNoncreatureEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        sa.getSourceCard().addController(sa.getActivatingPlayer());
+        sa.getSourceCard().setController(sa.getActivatingPlayer(), 0);
         final Card c = Singletons.getModel().getGame().getAction().moveTo(sa.getActivatingPlayer().getZone(ZoneType.Battlefield), sa.getSourceCard());
         sa.setSourceCard(c);
     }

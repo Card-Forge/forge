@@ -575,7 +575,7 @@ public class SpellPermanent extends Spell {
     @Override
     public void resolve() {
         Card c = this.getSourceCard();
-        c.addController(this.getActivatingPlayer());
+        c.setController(this.getActivatingPlayer(), 0);
         Singletons.getModel().getGame().getAction().moveTo(ZoneType.Battlefield, c);
     }
 }

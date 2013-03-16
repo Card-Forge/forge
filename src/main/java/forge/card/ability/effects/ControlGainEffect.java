@@ -6,7 +6,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.Command;
-import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
@@ -52,14 +51,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
     }
 
     private void doLoseControl(final Card c, final Card host, final boolean tapOnLose,
-            final List<String> addedKeywords, final GameEntity newController) {
+            final List<String> addedKeywords, final long tStamp) {
         if (null == c) {
             return;
         }
         if (c.isInPlay()) {
-            c.removeController(newController);
-            // Singletons.getModel().getGameAction().changeController(new ArrayList<Card>(c),
-            // c.getController(), originalController);
+            c.removeTempController(tStamp);
 
             if (tapOnLose) {
                 c.tap();
@@ -105,14 +102,10 @@ public class ControlGainEffect extends SpellAbilityEffect {
             controllers = tgt.getTargetPlayers();
         }
 
-        GameEntity newController;
+        Player newController;
 
         if (controllers.size() == 0) {
-            if (sa.isSpell()) {
-                newController = sa.getActivatingPlayer();
-            } else {
-                newController = source;
-            }
+            newController = sa.getActivatingPlayer();
         } else {
             newController = controllers.get(0);
         }
@@ -124,66 +117,62 @@ public class ControlGainEffect extends SpellAbilityEffect {
             return;
         }
 
-        final int size = tgtCards.size();
-        for (int j = 0; j < size; j++) {
-            final Card tgtC = tgtCards.get(j);
-            final Player originalController = tgtC.getController();
+        for (Card tgtC : tgtCards) {
 
             if (!tgtC.equals(sa.getSourceCard()) && !sa.getSourceCard().getGainControlTargets().contains(tgtC)) {
                 sa.getSourceCard().addGainControlTarget(tgtC);
             }
 
-            if (tgtC.isInPlay()) {
+            if (!tgtC.isInPlay()) {
+                return;
+            }
 
-                if (!tgtC.equals(newController)) {
-                    tgtC.addController(newController);
-                }
-                // Singletons.getModel().getGameAction().changeController(new ArrayList<Card>(tgtC),
-                // tgtC.getController(), newController.get(0));
+            long tStamp = Singletons.getModel().getGame().getNextTimestamp();
+            if (lose != null) {
+                tgtC.addTempController(newController, tStamp);
+            } else {
+                tgtC.setController(newController, tStamp);
+            }
 
-                if (bUntap) {
-                    tgtC.untap();
-                }
+            if (bUntap) {
+                tgtC.untap();
+            }
 
-                if (null != kws) {
-                    for (final String kw : kws) {
-                        tgtC.addExtrinsicKeyword(kw);
-                    }
+            if (null != kws) {
+                for (final String kw : kws) {
+                    tgtC.addExtrinsicKeyword(kw);
                 }
             }
 
-            // end copied
-
-            final Card hostCard = sa.getSourceCard();
             if (lose != null) {
                 if (lose.contains("LeavesPlay")) {
-                    sa.getSourceCard().addLeavesPlayCommand(this.getLoseControlCommand(tgtC, originalController, newController, bTapOnLose, hostCard, kws));
+                    sa.getSourceCard().addLeavesPlayCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("Untap")) {
-                    sa.getSourceCard().addUntapCommand(this.getLoseControlCommand(tgtC, originalController, newController, bTapOnLose, hostCard, kws));
+                    sa.getSourceCard().addUntapCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("LoseControl")) {
-                    sa.getSourceCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, originalController, newController, bTapOnLose, hostCard, kws));
+                    sa.getSourceCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
                 if (lose.contains("EOT")) {
-                    Singletons.getModel().getGame().getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, originalController, newController, bTapOnLose, hostCard, kws));
+                    Singletons.getModel().getGame().getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
                 }
             }
 
             if (destroyOn != null) {
                 if (destroyOn.contains("LeavesPlay")) {
-                    sa.getSourceCard().addLeavesPlayCommand(this.getDestroyCommand(tgtC, hostCard, bNoRegen));
+                    sa.getSourceCard().addLeavesPlayCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
                 }
                 if (destroyOn.contains("Untap")) {
-                    sa.getSourceCard().addUntapCommand(this.getDestroyCommand(tgtC, hostCard, bNoRegen));
+                    sa.getSourceCard().addUntapCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
                 }
                 if (destroyOn.contains("LoseControl")) {
-                    sa.getSourceCard().addChangeControllerCommand(this.getDestroyCommand(tgtC, hostCard, bNoRegen));
+                    sa.getSourceCard().addChangeControllerCommand(this.getDestroyCommand(tgtC, source, bNoRegen));
                 }
             }
 
             sa.getSourceCard().clearGainControlReleaseCommands();
-            sa.getSourceCard().addGainControlReleaseCommand(this.getLoseControlCommand(tgtC, originalController, newController, bTapOnLose, hostCard, kws));
+            sa.getSourceCard().addGainControlReleaseCommand(this.getLoseControlCommand(tgtC, tStamp, bTapOnLose, source, kws));
 
         } // end foreach target
     }
@@ -239,13 +228,13 @@ public class ControlGainEffect extends SpellAbilityEffect {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.Command} object.
      */
-    private Command getLoseControlCommand(final Card c, final Player originalController, final GameEntity newController,
+    private Command getLoseControlCommand(final Card c, final long tStamp,
             final boolean bTapOnLose, final Card hostCard, final List<String> kws) {
         final Command loseControl = new Command() {
             private static final long serialVersionUID = 878543373519872418L;
 
             @Override
-            public void execute() { doLoseControl(c, hostCard, bTapOnLose, kws, newController); } // execute()
+            public void execute() { doLoseControl(c, hostCard, bTapOnLose, kws, tStamp); }
         };
 
         return loseControl;

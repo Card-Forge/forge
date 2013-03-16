@@ -330,6 +330,7 @@ public final class CardUtil {
         newCopy.setUniqueNumber(in.getUniqueNumber());
         newCopy.setCurSetCode(in.getCurSetCode());
         newCopy.setOwner(in.getOwner());
+        newCopy.setController(in.getController(), 0);
         newCopy.setFlipCard(in.isFlipCard());
         newCopy.setDoubleFaced(in.isDoubleFaced());
         newCopy.getCharacteristics().copy(in.getState(in.getCurState()));
@@ -342,7 +343,6 @@ public final class CardUtil {
             sa.setSourceCard(in);
         }
 
-        newCopy.setControllerObjects(in.getControllerObjects());
         newCopy.setCounters(in.getCounters());
         newCopy.setExtrinsicKeyword(in.getExtrinsicKeyword());
         newCopy.setColor(in.getColor());

@@ -1,9 +1,9 @@
 Name:Spirit Away
 ManaCost:5 U U
 Types:Enchantment Aura
-Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 5 U U | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | Description$ Enchanted creature gets +2/+2 and has flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_away.jpg
 Oracle:Enchant creature\nYou control enchanted creature.\nEnchanted creature gets +2/+2 and has flying.

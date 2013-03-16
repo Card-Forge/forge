@@ -1850,7 +1850,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public final void playLand(final Card land) {
         if (this.canPlayLand(land)) {
-            land.addController(this);
+            land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
             CardFactoryUtil.playLandEffects(land);
             this.numLandsPlayed++;

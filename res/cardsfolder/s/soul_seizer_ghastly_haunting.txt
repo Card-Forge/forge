@@ -16,9 +16,9 @@ Name:Ghastly Haunting
 ManaCost:no cost
 Colors:blue
 Types:Enchantment Aura
-Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_haunting.jpg
 Oracle:Enchant creature\nYou control enchanted creature.

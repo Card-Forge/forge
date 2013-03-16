@@ -199,7 +199,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     private String colorsPaid = "";
 
     private Player owner = null;
-    private ArrayList<Object> controllerObjects = new ArrayList<Object>();
+    private Player controller = null;
+    private long controllerTimestamp = 0;
+    private TreeMap<Long, Player> tempControllers = new TreeMap<Long, Player>();
 
     // private String rarity = "";
     private String text = "";
@@ -3522,6 +3524,13 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addChangeControllerCommand(final Command c) {
         this.changeControllerCommandList.add(c);
     }
+    
+    
+    public final void runChangeControllerCommands() {
+        for (final Command c : this.changeControllerCommandList) {
+            c.execute();
+        }
+    }
 
     /**
      * <p>
@@ -3578,98 +3587,41 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a {@link forge.game.player.Player} object.
      */
     public final Player getController() {
-        if (this.controllerObjects.size() == 0) {
-            return this.owner;
+        
+        if (!this.tempControllers.isEmpty()) {
+            final long lastTimestamp = this.tempControllers.lastKey();
+            if (lastTimestamp > this.controllerTimestamp) {
+                return this.tempControllers.lastEntry().getValue();
+            }
         }
-        final Object topController = this.controllerObjects.get(this.controllerObjects.size() - 1);
-        if (topController instanceof Player) {
-            return (Player) topController;
+        if (this.controller != null) {
+            return this.controller;
         }
-        return ((Card) topController).getController();
+        return this.owner;
     }
 
-    /**
-     * 
-     * TODO Write javadoc for this method.
-     * 
-     * @param controllerObject
-     *            an Object
-     */
-    public final void addController(final Object controllerObject) {
-        final Object prevController = this.controllerObjects.size() == 0 ? this.owner : this.controllerObjects
-                .get(this.controllerObjects.size() - 1);
-        if (!controllerObject.equals(prevController)) {
-            if (controllerObject instanceof Player) {
-                for (int i = 0; i < this.controllerObjects.size(); i++) {
-                    if (this.controllerObjects.get(i) instanceof Player) {
-                        this.controllerObjects.remove(i);
-                    }
-                }
-            }
-            this.controllerObjects.add(controllerObject);
-            if ((Singletons.getModel().getGame().getAction() != null) && (prevController != null)) {
-                Singletons.getModel().getGame().getAction().controllerChangeZoneCorrection(this);
-            }
-
-            if (prevController != null) {
-                for (final Command c : this.changeControllerCommandList) {
-                    c.execute();
-                }
-            }
-
-            this.updateObservers();
-        }
+    public final void addTempController(final Player player, final long tstamp) {
+        this.tempControllers.put(tstamp, player);
     }
 
-    /**
-     * 
-     * TODO Write javadoc for this method.
-     * 
-     * @param controllerObject
-     *            a Object
-     */
-    public final void removeController(final Object controllerObject) {
-        final Object currentController = this.getController();
-        this.controllerObjects.remove(controllerObject);
-
-        if (!currentController.equals(this.getController())) {
-            Singletons.getModel().getGame().getAction().controllerChangeZoneCorrection(this);
-
-            for (final Command c : this.changeControllerCommandList) {
-                c.execute();
-            }
-
-            this.updateObservers();
-        }
+    public final void removeTempController(final long tstamp) {
+        this.tempControllers.remove(tstamp);
     }
 
-    /**
-     * 
-     * TODO Write javadoc for this method.
-     */
+    public final void clearTempControllers() {
+        this.tempControllers.clear();
+        
+    }
+
     public final void clearControllers() {
-        this.controllerObjects.clear();
+        clearTempControllers();
+        this.controller = null;
     }
 
-    /**
-     * 
-     * TODO Write javadoc for this method.
-     * 
-     * @return an ArrayList<Object>
-     */
-    public final ArrayList<Object> getControllerObjects() {
-        return this.controllerObjects;
-    }
-
-    /**
-     * 
-     * TODO Write javadoc for this method.
-     * 
-     * @param in
-     *            an Object
-     */
-    public final void setControllerObjects(final ArrayList<Object> in) {
-        this.controllerObjects = in;
+    public final void setController(final Player player, final long tstamp) {
+        clearTempControllers();
+        this.controller = player;
+        this.controllerTimestamp = tstamp;
     }
 
     /**
@@ -3682,22 +3634,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void setOwner(final Player player) {
         this.owner = player;
-        //this.updateObservers();
     }
-
-    /**
-     * <p>
-     * Setter for the field <code>controller</code>.
-     * </p>
-     * 
-     * @return the equipped by
-     */
-    /*
-     * public void setController(Player player) { boolean sameController =
-     * controller == null ? false : controller.isPlayer(player); controller =
-     * player; if (null != controller && !sameController) { for (Command var :
-     * changeControllerCommandList) var.execute(); } this.updateObservers(); }
-     */
 
     /**
      * <p>

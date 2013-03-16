@@ -1254,7 +1254,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     c.setTapped(true);
                 }
                 if (sa.hasParam("GainControl")) {
-                    c.addController(sa.getSourceCard());
+                    c.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
                 }
 
                 if (sa.hasParam("AttachedTo")) {

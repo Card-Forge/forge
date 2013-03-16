@@ -1,9 +1,9 @@
 Name:Enslave
 ManaCost:4 B B
 Types:Enchantment Aura
-Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 4 B B | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, enchanted creature deals 1 damage to its owner.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ EnchantedOwner | DamageSource$ Enchanted  | NumDmg$ 1
 SVar:PlayMain1:TRUE

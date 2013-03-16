@@ -86,7 +86,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy = CardFactory.getCard(CardDb.getCard(c), sa.getActivatingPlayer());
 
                         // when copying something stolen:
-                        copy.addController(controller);
+                        copy.setController(controller, 0);
 
                         copy.setToken(true);
                         copy.setCopiedToken(true);
@@ -97,7 +97,7 @@ public class CopyPermanentEffect extends SpellAbilityEffect {
                         copy.setImageFilename(c.getImageFilename());
 
                         copy.setOwner(controller);
-                        copy.addController(controller);
+                        copy.setController(controller, 0);
 
                         copy.setManaCost(c.getManaCost());
                         copy.setColor(c.getColor());

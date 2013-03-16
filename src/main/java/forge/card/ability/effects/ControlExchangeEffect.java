@@ -3,6 +3,7 @@ package forge.card.ability.effects;
 import java.util.ArrayList;
 
 import forge.Card;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.spellability.SpellAbility;
@@ -56,9 +57,10 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
             return;
         }
 
-        Player player2 = object2.getController();
-        object2.addController(object1.getController());
-        object1.addController(player2);
+        final Player player2 = object2.getController();
+        final long tStamp = Singletons.getModel().getGame().getNextTimestamp();
+        object2.setController(object1.getController(), tStamp);
+        object1.setController(player2, tStamp);
     }
 
 }

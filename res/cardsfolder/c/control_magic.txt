@@ -1,9 +1,9 @@
 Name:Control Magic
 ManaCost:2 U U
 Types:Enchantment Aura
-Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/control_magic.jpg
 Oracle:Enchant creature\nYou control enchanted creature.
 SetInfo:2ED Uncommon
