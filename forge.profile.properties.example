@@ -7,17 +7,39 @@
 # Normally, users will not need to do anything here.  Keeping the default paths
 # is an easy way to make sure your Forge settings and data are kept safe when
 # you upgrade Forge, even if you install to a different path or delete the
-# entire Forge program directory.
+# entire Forge program directory before you upgrade.
 #
 # If you need to, though, you can use this file to set the locations that Forge
-# will use to store your data.  If you specify a relative path in this file, it
-# will be relative to the Forge program directory.
+# will use to store your data.  However, remember that whenever you install a
+# new version of Forge into a different directory, it will not see your data
+# unless you copy this file into the new program directory.
 #
-# Paths defined in this file will each have the whitespace trimmed from their
-# start and end.  If you need the path to start or end with a space or tab
-# character, put a slash before or after it, as appropriate.  For example, for
-# the directory "<forge program dir>/ local profile  ", use:
-# xxxDir=./ local profile  /
+# If you specify a relative path in this file, it will be relative to the Forge
+# program directory.  Note that paths defined in this file will each have the
+# whitespace trimmed from their start and end.  If you need the path to start or
+# end with a space or tab character, put a slash before or after it, as
+# appropriate.  For example, for the directory "<forge dir>/ local  ", use:
+#   xxxDir=./ local  /
+#
+# EXAMPLES
+# --------
+#
+# To have Forge use the default directories:
+#   userDir=
+#   cacheDir=
+#   cardPicsDir=
+#
+# To use a specific user data directory but the default cache dir on Windows:
+#   userDir=D:/ForgeData
+#   cacheDir=
+#   cardPicsDir=
+#
+# To put everything under a specific path on a Unix-based system:
+#   userDir=/local/path/forge
+#   cacheDir=/local/path/forge/cache
+#   cardPicsDir=
+
+
 
 # This is where Forge will save your personal data, such as your saved decks,
 # preferences, and quest progress.  If you want to back up your data or copy it
