@@ -8115,7 +8115,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                HashMap<String, String> params = re.getMapParams();
+                Map<String, String> params = re.getMapParams();
                 if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }
@@ -9173,7 +9173,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public boolean hasETBReplacement() {
         for (final ReplacementEffect re : getReplacementEffects()) {
-            final HashMap<String, String> params = re.getMapParams();
+            final Map<String, String> params = re.getMapParams();
             if (!(re instanceof ReplaceMoved)) {
                 continue;
             }

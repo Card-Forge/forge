@@ -1,6 +1,6 @@
     package forge.card.replacement;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 
@@ -16,7 +16,7 @@ public class ReplaceGameLoss extends ReplacementEffect {
      * @param map the map
      * @param host the host
      */
-    public ReplaceGameLoss(HashMap<String, String> map, Card host) {
+    public ReplaceGameLoss(Map<String, String> map, Card host) {
         super(map, host);
     }
 
@@ -24,7 +24,7 @@ public class ReplaceGameLoss extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(HashMap<String, Object> runParams) {
+    public boolean canReplace(Map<String, Object> runParams) {
         if (!runParams.get("Event").equals("GameLoss")) {
             return false;
         }

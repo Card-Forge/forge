@@ -1829,7 +1829,7 @@ public class ComputerUtilCombat {
         // Predict replacement effects
         for (final Card ca : game.getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                HashMap<String, String> params = re.getMapParams();
+                Map<String, String> params = re.getMapParams();
                 if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
@@ -34,6 +35,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.util.FileSection;
 
 /**
  * TODO: Write javadoc for this type.
@@ -174,9 +176,9 @@ public class ReplacementHandler {
      * @param replacementEffect
      *            the replacement effect to run
      */
-    private ReplacementResult executeReplacement(final HashMap<String, Object> runParams,
+    private ReplacementResult executeReplacement(final Map<String, Object> runParams,
         final ReplacementEffect replacementEffect, final Player decider, final GameState game) {
-        final HashMap<String, String> mapParams = replacementEffect.getMapParams();
+        final Map<String, String> mapParams = replacementEffect.getMapParams();
 
         SpellAbility effectSA = null;
 
@@ -257,7 +259,7 @@ public class ReplacementHandler {
      * @return A finished instance
      */
     public static ReplacementEffect parseReplacement(final String repParse, final Card host) {
-        final HashMap<String, String> mapParams = ReplacementHandler.parseParams(repParse);
+        final Map<String, String> mapParams = FileSection.parseToMap(repParse, "$", "|");
         return ReplacementHandler.parseReplacement(mapParams, host);
     }
 
@@ -272,7 +274,7 @@ public class ReplacementHandler {
      *            The card that hosts the replacement effect
      * @return The finished instance
      */
-    public static ReplacementEffect parseReplacement(final HashMap<String, String> mapParams, final Card host) {
+    public static ReplacementEffect parseReplacement(final Map<String, String> mapParams, final Card host) {
         ReplacementEffect ret = null;
 
         final String eventToReplace = mapParams.get("Event");
@@ -300,46 +302,5 @@ public class ReplacementHandler {
         }
 
         return ret;
-    }
-
-    /**
-     * <p>
-     * parseParams.
-     * </p>
-     * 
-     * @param repParse
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.util.HashMap} object.
-     */
-    private static HashMap<String, String> parseParams(final String repParse) {
-        final HashMap<String, String> mapParams = new HashMap<String, String>();
-
-        if (repParse.length() == 0) {
-            throw new RuntimeException("ReplacementFactory : registerTrigger -- trigParse too short");
-        }
-
-        final String[] params = repParse.split("\\|");
-
-        for (int i = 0; i < params.length; i++) {
-            params[i] = params[i].trim();
-        }
-
-        for (final String param : params) {
-            final String[] splitParam = param.split("\\$");
-            for (int i = 0; i < splitParam.length; i++) {
-                splitParam[i] = splitParam[i].trim();
-            }
-
-            if (splitParam.length != 2) {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("ReplacementFactory Parsing Error in registerTrigger() : Split length of ");
-                sb.append(param).append(" is not 2.");
-                throw new RuntimeException(sb.toString());
-            }
-
-            mapParams.put(splitParam[0], splitParam[1]);
-        }
-
-        return mapParams;
     }
 }

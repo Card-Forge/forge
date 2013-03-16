@@ -118,7 +118,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     }
 
     /** The map params, denoting what to replace. */
-    private HashMap<String, String> mapParams = new HashMap<String, String>();
+    private Map<String, String> mapParams = new HashMap<String, String>();
 
     /**
      * <p>
@@ -127,7 +127,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * 
      * @return a {@link java.util.HashMap} object.
      */
-    public final HashMap<String, String> getMapParams() {
+    public final Map<String, String> getMapParams() {
         return this.mapParams;
     }
 
@@ -137,7 +137,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @param mapParams
      *            the mapParams to set
      */
-    public final void setMapParams(final HashMap<String, String> mapParams) {
+    public final void setMapParams(final Map<String, String> mapParams) {
         this.mapParams = mapParams;
     }
 
@@ -148,7 +148,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      *            the run params
      * @return true, if successful
      */
-    public abstract boolean canReplace(final HashMap<String, Object> runParams);
+    public abstract boolean canReplace(final Map<String, Object> runParams);
 
     /**
      * To string.
@@ -219,7 +219,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @param spellAbility
      *            the SpellAbility
      */
-    public void setReplacingObjects(final HashMap<String, Object> runParams, final SpellAbility spellAbility) {
+    public void setReplacingObjects(final Map<String, Object> runParams, final SpellAbility spellAbility) {
         // Should be overridden by replacers that need it.
     }
 
@@ -231,7 +231,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
      * @param host
      *            the host
      */
-    public ReplacementEffect(final HashMap<String, String> map, final Card host) {
+    public ReplacementEffect(final Map<String, String> map, final Card host) {
         this.setMapParams(map);
         this.setHostCard(host);
     }

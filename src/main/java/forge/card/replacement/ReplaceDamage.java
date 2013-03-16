@@ -17,7 +17,7 @@
  */
 package forge.card.replacement;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -36,7 +36,7 @@ public class ReplaceDamage extends ReplacementEffect {
      * @param map the map
      * @param host the host
      */
-    public ReplaceDamage(HashMap<String, String> map, Card host) {
+    public ReplaceDamage(Map<String, String> map, Card host) {
         super(map, host);
     }
 
@@ -44,7 +44,7 @@ public class ReplaceDamage extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(HashMap<String, Object> runParams) {
+    public boolean canReplace(Map<String, Object> runParams) {
         if (!runParams.get("Event").equals("DamageDone")) {
             return false;
         }
@@ -110,7 +110,7 @@ public class ReplaceDamage extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(HashMap<String, Object> runParams, SpellAbility sa) {
+    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject("DamageAmount", runParams.get("DamageAmount"));
         sa.setReplacingObject("Target", runParams.get("Affected"));
         sa.setReplacingObject("Source", runParams.get("DamageSource"));

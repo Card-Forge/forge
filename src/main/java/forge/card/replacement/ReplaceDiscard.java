@@ -17,7 +17,7 @@
  */
 package forge.card.replacement;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
@@ -34,7 +34,7 @@ public class ReplaceDiscard extends ReplacementEffect {
      * @param params the params
      * @param host the host
      */
-    public ReplaceDiscard(final HashMap<String, String> params, final Card host) {
+    public ReplaceDiscard(final Map<String, String> params, final Card host) {
         super(params, host);
     }
 
@@ -42,7 +42,7 @@ public class ReplaceDiscard extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(HashMap<String, Object> runParams) {
+    public boolean canReplace(Map<String, Object> runParams) {
         if (!runParams.get("Event").equals("Discard")) {
             return false;
         }
@@ -86,7 +86,7 @@ public class ReplaceDiscard extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(HashMap<String, Object> runParams, SpellAbility sa) {
+    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject("Card", runParams.get("Card"));
         sa.setReplacingObject("Player", runParams.get("Affected"));
     }
