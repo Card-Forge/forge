@@ -1,6 +1,6 @@
 package forge.card.replacement;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
@@ -17,7 +17,7 @@ public class ReplaceTurnFaceUp extends ReplacementEffect {
      * @param mapParams &emsp; HashMap<String, String>
      * @param host &emsp; Card
      */
-    public ReplaceTurnFaceUp(final HashMap<String, String> mapParams, final Card host) {
+    public ReplaceTurnFaceUp(final Map<String, String> mapParams, final Card host) {
         super(mapParams, host);
     }
 
@@ -25,7 +25,7 @@ public class ReplaceTurnFaceUp extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(HashMap<String, Object> runParams) {
+    public boolean canReplace(Map<String, Object> runParams) {
         if (!runParams.get("Event").equals("TurnFaceUp")) {
             return false;
         }
@@ -53,7 +53,7 @@ public class ReplaceTurnFaceUp extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void setReplacingObjects(HashMap<String, Object> runParams, SpellAbility sa) {
+    public void setReplacingObjects(Map<String, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject("Card", runParams.get("Affected"));
     }
 

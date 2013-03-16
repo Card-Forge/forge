@@ -24,13 +24,9 @@ import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
-import forge.game.GameType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.gui.match.CMatchUI;
-import forge.quest.QuestController;
-import forge.quest.bazaar.QuestItemType;
 
 /**
  * <p>
@@ -103,64 +99,11 @@ public class HumanPlayer extends Player {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.Player#discard_Chains_of_Mephistopheles()
-     */
-    /**
-     * 
-     */
-    @Override
-    protected final void discardChainsOfMephistopheles() {
-        Singletons.getModel().getMatch().getInput().setInputInterrupt(PlayerUtil.inputChainsDiscard());
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final void doScry(final List<Card> topN, final int n) {
-        int num = n;
-        for (int i = 0; i < num; i++) {
-            final Card c = GuiChoose.oneOrNone("Put on bottom of library.", topN);
-            if (c != null) {
-                topN.remove(c);
-                game.getAction().moveToBottomOfLibrary(c);
-            } else {
-                // no card chosen for the bottom
-                break;
-            }
-        }
-        num = topN.size();
-        for (int i = 0; i < num; i++) {
-            final Card c = GuiChoose.one("Put on top of library.", topN);
-            if (c != null) {
-                topN.remove(c);
-                game.getAction().moveToLibrary(c);
-            }
-            // no else - a card must have been chosen
-        }
-    }
-
     /** {@inheritDoc} */
     @Override
     public final void sacrificePermanent(final String prompt, final List<Card> choices) {
         final Input in = PlayerUtil.inputSacrificePermanent(choices, prompt);
         Singletons.getModel().getMatch().getInput().setInput(in);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    protected final void clashMoveToTopOrBottom(final Card c) {
-        String choice = "";
-        final String[] choices = { "top", "bottom" };
-        CMatchUI.SINGLETON_INSTANCE.setCard(c);
-        choice = GuiChoose.one(c.getName() + " - Top or bottom of Library", choices);
-
-        if (choice.equals("bottom")) {
-            game.getAction().moveToBottomOfLibrary(c);
-        } else {
-            game.getAction().moveToLibrary(c);
-        }
     }
 
     /* (non-Javadoc)
@@ -169,19 +112,6 @@ public class HumanPlayer extends Player {
     @Override
     public PlayerType getType() {
         return PlayerType.HUMAN;
-    }
-
-    @Override
-    public final int doMulligan() {
-        int newHand = super.doMulligan();
-        final QuestController quest = Singletons.getModel().getQuest();
-        final boolean isQuest = Singletons.getModel().getMatch().getGameType().equals(GameType.Quest);
-        if (isQuest && quest.getAssets().hasItem(QuestItemType.SLEIGHT) && (getStats().getMulliganCount() == 1)) {
-            drawCard();
-            newHand++;
-            getStats().notifyOpeningHandSize(newHand);
-        }
-        return newHand;
     }
 
     /* (non-Javadoc)

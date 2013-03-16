@@ -3146,7 +3146,6 @@ public class CardFactoryUtil {
                     eff.addType("Effect"); // Or Emblem
                     eff.setToken(true); // Set token to true, so when leaving
                                         // play it gets nuked
-                    eff.addController(card.getController());
                     eff.setOwner(card.getController());
                     eff.setColor(card.getColor());
                     eff.setImmutable(true);

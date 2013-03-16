@@ -1,5 +1,6 @@
 package forge.card.ability.effects;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,8 +40,12 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         List<Card> repeatCards = null;
 
         if (sa.hasParam("RepeatCards")) {
-            ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
-
+            List<ZoneType> zone = new ArrayList<ZoneType>();
+            if (sa.hasParam("Zone")) {
+                zone = ZoneType.listValueOf(sa.getParam("Zone"));
+            } else {
+                zone.add(ZoneType.Battlefield);
+            }
             repeatCards = CardLists.getValidCards(game.getCardsIn(zone),
                     sa.getParam("RepeatCards"), source.getController(), source);
             loopOverCards = true;

@@ -151,8 +151,6 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             if (sa.hasParam("CopyCard")) {
                 tgtCard = CardDb.getCard(tgtCard).toForgeCard(sa.getActivatingPlayer());
-                // when copying something stolen:
-                tgtCard.addController(sa.getActivatingPlayer());
 
                 tgtCard.setToken(true);
                 tgtCard.setCopiedSpell(true);

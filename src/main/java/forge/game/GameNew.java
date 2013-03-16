@@ -332,7 +332,6 @@ public class GameNew {
             for (final IPaperCard cp : cards) {
                 Card c = cp.toForgeCard(player);
                 c.setOwner(player);
-                c.addController(player);
                 bf.add(c, false);
                 c.setSickness(true);
                 c.setStartsGameInPlay(true);

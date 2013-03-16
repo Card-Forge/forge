@@ -5,7 +5,9 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent | AddHiddenKeywor
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ DBFetch | TriggerDescription$ Whenever you roll Chaos, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.
 T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
 SVar:DBFetch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/horizon_boughs.jpg
+SVar:X:Count$RolledThisTurn
+SVar:Picture:http://www.cardforge.org/fpics/lq_planes_promos/horizon_boughs.jpg
 Oracle:All permanents untap during each player's untap step.\nWhenever you roll {C}, you may search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle your library.
 SetInfo:HOP Common

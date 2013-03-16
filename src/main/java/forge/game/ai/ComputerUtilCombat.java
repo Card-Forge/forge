@@ -1695,14 +1695,18 @@ public class ComputerUtilCombat {
             Card lastBlocker = null;
             for (final Card b : block) {
                 lastBlocker = b;
-                final int enoughDamageToKill = ComputerUtilCombat.getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
-                if (enoughDamageToKill <= dmgCanDeal) {
-                    damageMap.put(b, enoughDamageToKill);
-                    dmgCanDeal -= enoughDamageToKill;
+                final int dmgToKill = ComputerUtilCombat.getEnoughDamageToKill(b, dmgCanDeal, attacker, true);
+                if (dmgToKill <= dmgCanDeal) {
+                    damageMap.put(b, dmgToKill);
+                    dmgCanDeal -= dmgToKill;
                 } else {
-                    damageMap.put(b, dmgCanDeal);
-                    dmgCanDeal = 0;
-                    break;
+                    // if it can't be killed choose the minimum damage
+                    int dmg = Math.min(b.getLethalDamage(), dmgCanDeal);
+                    damageMap.put(b, dmg);
+                    dmgCanDeal -= dmg;
+                    if (dmgCanDeal <= 0) {
+                        break;
+                    }
                 }
             } // for
     
@@ -1829,7 +1833,7 @@ public class ComputerUtilCombat {
         // Predict replacement effects
         for (final Card ca : game.getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                HashMap<String, String> params = re.getMapParams();
+                Map<String, String> params = re.getMapParams();
                 if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }

@@ -1,0 +1,12 @@
+Name:Noggin Whack
+ManaCost:2 B B
+Types:Tribal Sorcery Rogue
+A:SP$ Reveal | Cost$ 2 B B | ValidTgts$ Player | IsCurse$ True | NumCards$ 3 | RememberRevealed$ True | SubAbility$ DBChoose | SpellDescription$ Target player reveals three cards from his or her hand. You choose two of them. That player discards those cards.
+A:SP$ Reveal | Cost$ 1 B | Activation$ Prowl | PrecostDesc$ Prowl | ValidTgts$ Player | IsCurse$ True | NumCards$ 3 | RememberRevealed$ True | SubAbility$ DBChoose | SpellDescription$ (You may cast this for its prowl cost if you dealt combat damage to a player this turn withRogue.)
+SVar:DBChoose:DB$ ChooseCard | Amount$ 2 | Choices$ Card.IsRemembered | ChoiceZone$ Hand | Defined$ You | Mandatory$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ Defined | DefinedCards$ ChosenCard | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noggin_whack.jpg
+Oracle:Prowl {1}{B} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)\nTarget player reveals three cards from his or her hand. You choose two of them. That player discards those cards.
+SetInfo:MOR Uncommon

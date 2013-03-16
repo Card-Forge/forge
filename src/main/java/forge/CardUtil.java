@@ -28,6 +28,7 @@ import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.spellability.AbilityManaPart;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -269,7 +270,7 @@ public final class CardUtil {
                 }
             }
         } else if (reflectProperty.equals("Produced")) {
-            final String producedColors = (String) abMana.getTriggeringObject("Produced");
+            final String producedColors = abMana instanceof AbilitySub ? (String) abMana.getRootAbility().getTriggeringObject("Produced") : (String) abMana.getTriggeringObject("Produced");
             for (final String col : Constant.Color.ONLY_COLORS) {
                 final String s = MagicColor.toShortString(col);
                 if (producedColors.contains(s)) {

@@ -406,19 +406,24 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                     }
                 }
             } else {
-                ArrayList<Object> tgts = null;
-                // make sure the targets won't change
-                if (sa.getTarget() != null && sa.getTarget().getTargetChoices() != null) {
-                    tgts = new ArrayList<Object>(sa.getTarget().getTargetChoices().getTargets());
-                }
-                // This isn't quite right, but better than canPlayAI
-                if (!sa.doTrigger(this.isMandatory(), (AIPlayer)decider)) {
-                    return;
-                }
-                if (sa.getTarget() != null && sa.getTarget().getTargetChoices() != null) {
-                    for (Object tgt : tgts) {
-                        sa.getTarget().getTargetChoices().clear();
-                        sa.getTarget().getTargetChoices().addTarget(tgt);
+                if (triggerParams.containsKey("DelayedTrigger")) {
+                    //TODO: The only card with an optional delayed trigger is Shirei, Shizo's Caretaker, 
+                    //      needs to be expanded when a more difficult cards comes up
+                } else {
+                    ArrayList<Object> tgts = null;
+                    // make sure the targets won't change
+                    if (sa.getTarget() != null && sa.getTarget().getTargetChoices() != null) {
+                        tgts = new ArrayList<Object>(sa.getTarget().getTargetChoices().getTargets());
+                    }
+                    // This isn't quite right, but better than canPlayAI
+                    if (!sa.doTrigger(this.isMandatory(), (AIPlayer) decider)) {
+                        return;
+                    }
+                    if (sa.getTarget() != null && sa.getTarget().getTargetChoices() != null) {
+                        for (Object tgt : tgts) {
+                            sa.getTarget().getTargetChoices().clear();
+                            sa.getTarget().getTargetChoices().addTarget(tgt);
+                        }
                     }
                 }
             }

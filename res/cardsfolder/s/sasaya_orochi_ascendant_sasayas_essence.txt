@@ -1,0 +1,25 @@
+Name:Sasaya, Orochi Ascendant
+ManaCost:1 G G
+Types:Legendary Creature Snake Monk
+PT:2/3
+A:AB$ SetState | Cost$ Reveal<1/Hand> | Defined$ Self | Mode$ Flip | ConditionCheckSVar$ CheckHandLand | ConditionSVarCompare$ GE7 | SpellDescription$ If you have seven or more land cards in your hand, flip CARDNAME.
+SVar:CheckHandLand:Count$ValidHand Land.YouCtrl
+AlternateMode:Flip
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sasaya_orochi_ascendant.jpg
+Oracle:Reveal your hand: If you have seven or more land cards in your hand, flip CARDNAME.
+
+ALTERNATE
+
+Name:Sasaya's Essence
+ManaCost:1 G G
+Colors:green
+Types:Legendary Enchantment
+T:Mode$ TapsForMana | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana to your mana pool of any type that land produced.
+SVar:TrigMana:AB$ Pump | Cost$ 0 | RememberObjects$ TriggeredCard | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Land.YouCtrl+IsNotRemembered+sharesNameWith Remembered | RepeatSubAbility$ DBManaReflect | SubAbility$ DBCleanup
+SVar:DBManaReflect:DB$ ManaReflected | ColorOrType$ Type | Valid$ Defined.Imprinted | ReflectProperty$ Produced | Defined$ You
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sasayas_essence.jpg
+Oracle:Whenever a land you control is tapped for mana, for each other land you control with the same name, add one mana to your mana pool of any type that land produced.
+SetInfo:SOK Rare

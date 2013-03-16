@@ -11,7 +11,9 @@ Release Notes:
 
 New Cards:
 
-
+Noggin Whack
+Scythe Specter
+Sasaya, Orochi Ascendant
 
 
 Known Issues:

@@ -100,9 +100,7 @@ public class EffectEffect extends SpellAbilityEffect {
         final Card eff = new Card();
         eff.setName(name);
         eff.addType("Effect"); // Or Emblem
-        eff.setToken(true); // Set token to true, so when leaving play it gets
-                            // nuked
-        eff.addController(controller);
+        eff.setToken(true); // Set token to true, so when leaving play it gets nuked
         eff.setOwner(controller);
         eff.setImageKey(sa.hasParam("Image") ? sa.getParam("Image") : hostCard.getImageKey());
         eff.setColor(hostCard.getColor());

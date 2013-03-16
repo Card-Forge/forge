@@ -7075,6 +7075,27 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
+        } else if (property.startsWith("greatestRememberedCMC")) {
+            final List<Card> list = new ArrayList<Card>();
+            for (final Object o : source.getRemembered()) {
+                if (o instanceof Card) {
+                    list.add(Singletons.getModel().getGame().getCardState((Card) o));
+                }
+            }
+            if (!list.contains(this)) {
+                return false;
+            }
+            for (final Card crd : list) {
+                if (crd.getRules() != null && crd.getRules().getSplitType() == CardSplitType.Split) {
+                    if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > this.getCMC() || crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > this.getCMC()) {
+                        return false;
+                    }
+                } else {
+                    if (crd.getCMC() > this.getCMC()) {
+                        return false;
+                    }
+                }
+            }
         } else if (property.startsWith("lowestCMC")) {
             final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             for (final Card crd : list) {
@@ -8067,7 +8088,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                HashMap<String, String> params = re.getMapParams();
+                Map<String, String> params = re.getMapParams();
                 if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }
@@ -8989,7 +9010,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            the rE
      */
     public void addReplacementEffect(final ReplacementEffect replacementEffect) {
-        final ReplacementEffect replacementEffectCopy = replacementEffect.getCopy();
+        final ReplacementEffect replacementEffectCopy = replacementEffect.getCopy(); // doubtful - every caller provides a newly parsed instance, why copy? 
         replacementEffectCopy.setHostCard(this);
         this.getCharacteristics().getReplacementEffects().add(replacementEffectCopy);
     }
@@ -9110,7 +9131,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public boolean hasETBReplacement() {
         for (final ReplacementEffect re : getReplacementEffects()) {
-            final HashMap<String, String> params = re.getMapParams();
+            final Map<String, String> params = re.getMapParams();
             if (!(re instanceof ReplaceMoved)) {
                 continue;
             }

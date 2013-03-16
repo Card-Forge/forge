@@ -7242,6 +7242,7 @@ res/cardsfolder/n/noble_templar.txt svneol=native#text/plain
 res/cardsfolder/n/noble_vestige.txt svneol=native#text/plain
 res/cardsfolder/n/nocturnal_raid.txt svneol=native#text/plain
 res/cardsfolder/n/noetic_scales.txt svneol=native#text/plain
+res/cardsfolder/n/noggin_whack.txt -text
 res/cardsfolder/n/noggle_bandit.txt svneol=native#text/plain
 res/cardsfolder/n/noggle_bridgebreaker.txt svneol=native#text/plain
 res/cardsfolder/n/noggle_hedge_mage.txt svneol=native#text/plain
@@ -8976,6 +8977,7 @@ res/cardsfolder/s/sarcomite_myr.txt svneol=native#text/plain
 res/cardsfolder/s/sarkhan_the_mad.txt svneol=native#text/plain
 res/cardsfolder/s/sarkhan_vol.txt svneol=native#text/plain
 res/cardsfolder/s/sarpadian_empires_vol_vii.txt svneol=native#text/plain
+res/cardsfolder/s/sasaya_orochi_ascendant_sasayas_essence.txt -text
 res/cardsfolder/s/savaen_elves.txt -text
 res/cardsfolder/s/savage_beating.txt -text
 res/cardsfolder/s/savage_conception.txt svneol=native#text/plain
@@ -9119,6 +9121,7 @@ res/cardsfolder/s/scuttling_death.txt svneol=native#text/plain
 res/cardsfolder/s/scuzzback_marauders.txt svneol=native#text/plain
 res/cardsfolder/s/scuzzback_scrapper.txt svneol=native#text/plain
 res/cardsfolder/s/scythe_of_the_wretched.txt -text
+res/cardsfolder/s/scythe_specter.txt -text
 res/cardsfolder/s/scythe_tiger.txt -text
 res/cardsfolder/s/sea_drake.txt svneol=native#text/plain
 res/cardsfolder/s/sea_eagle.txt svneol=native#text/plain
@@ -12859,6 +12862,7 @@ res/quest/precons/Battle[!!-~]Surge.dck -text
 res/quest/precons/Blood[!!-~]And[!!-~]Fire.dck -text
 res/quest/precons/Boggart[!!-~]Feast.dck -text
 res/quest/precons/Bomber.dck -text
+res/quest/precons/Boros[!!-~]Battalion.dck -text
 res/quest/precons/Bound[!!-~]by[!!-~]Strength.dck -text
 res/quest/precons/Breath[!!-~]of[!!-~]Fire.dck -text
 res/quest/precons/Carnival[!!-~]of[!!-~]Blood.dck -text
@@ -12878,6 +12882,7 @@ res/quest/precons/Decay.dck -text
 res/quest/precons/Deep[!!-~]Freeze.dck -text
 res/quest/precons/Depths[!!-~]of[!!-~]Power.dck -text
 res/quest/precons/Devouring[!!-~]Skies.dck -text
+res/quest/precons/Dimir[!!-~]Dementia.dck -text
 res/quest/precons/Disrupter.dck -text
 res/quest/precons/Domain.dck -text
 res/quest/precons/Doom[!!-~]Inevitable.dck -text
@@ -12905,6 +12910,7 @@ res/quest/precons/Grave[!!-~]Power.dck -text
 res/quest/precons/Grixis[!!-~]Shambling[!!-~]Army.dck -text
 res/quest/precons/Grixis[!!-~]Undead.dck -text
 res/quest/precons/Groundbreaker.dck -text
+res/quest/precons/Gruul[!!-~]Goliaths.dck -text
 res/quest/precons/Heavy[!!-~]Hitters.dck -text
 res/quest/precons/Hold[!!-~]the[!!-~]Line.dck -text
 res/quest/precons/Infect[!!-~]and[!!-~]Defile.dck -text
@@ -12937,6 +12943,7 @@ res/quest/precons/Mysterious[!!-~]Realms.dck -text
 res/quest/precons/Mystical[!!-~]Might.dck -text
 res/quest/precons/Naya[!!-~]Behemoths.dck -text
 res/quest/precons/Naya[!!-~]Domain.dck -text
+res/quest/precons/Orzhov[!!-~]Oppression.dck -text
 res/quest/precons/Path[!!-~]of[!!-~]Blight.dck -text
 res/quest/precons/Phyrexian[!!-~]Assault.dck -text
 res/quest/precons/Phyrexian[!!-~]Poison.dck -text
@@ -12963,6 +12970,7 @@ res/quest/precons/Sacrificial[!!-~]Bam.dck -text
 res/quest/precons/Selesnya[!!-~]Surge.dck -text
 res/quest/precons/Selesnya[!!-~]United.dck -text
 res/quest/precons/Shamanism.dck -text
+res/quest/precons/Simic[!!-~]Synthesis.dck -text
 res/quest/precons/Sky[!!-~]Slam.dck -text
 res/quest/precons/Slaughterhouse.dck -text
 res/quest/precons/Sleeper.dck -text
@@ -13850,6 +13858,7 @@ src/main/java/forge/game/event/FlipCoinEvent.java -text
 src/main/java/forge/game/event/LandPlayedEvent.java -text
 src/main/java/forge/game/event/LifeLossEvent.java -text
 src/main/java/forge/game/event/ManaBurnEvent.java -text
+src/main/java/forge/game/event/MulliganEvent.java -text
 src/main/java/forge/game/event/PoisonCounterEvent.java -text
 src/main/java/forge/game/event/SetTappedEvent.java -text
 src/main/java/forge/game/event/ShuffleEvent.java -text

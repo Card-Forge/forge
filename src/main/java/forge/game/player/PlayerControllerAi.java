@@ -1,7 +1,11 @@
 package forge.game.player;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
 import forge.GameEntity;
@@ -226,6 +230,29 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void reveal(String string, List<Card> cards, ZoneType zone, Player owner) {
         // We don't know how to reveal cards to AI
+    }
+
+    @Override
+    public ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN) {
+        List<Card> toBottom = new ArrayList<Card>();
+        List<Card> toTop = new ArrayList<Card>();
+
+        for (Card c: topN) {
+            if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(player, c))
+                toBottom.add(c);
+            else 
+                toTop.add(c); 
+        }
+
+        // put the rest on top in random order
+        Collections.shuffle(toTop);
+        return ImmutablePair.of(toTop, toBottom);
+    }
+
+
+    @Override
+    public boolean willPutCardOnTop(Card c) {
+        return true; // AI does not know what will happen next (another clash or that would become his topdeck)
     }
 
 }

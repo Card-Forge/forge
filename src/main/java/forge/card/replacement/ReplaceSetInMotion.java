@@ -17,7 +17,7 @@
  */
 package forge.card.replacement;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 
@@ -33,7 +33,7 @@ public class ReplaceSetInMotion extends ReplacementEffect {
      * @param params the params
      * @param host the host
      */
-    public ReplaceSetInMotion(final HashMap<String, String> params, final Card host) {
+    public ReplaceSetInMotion(final Map<String, String> params, final Card host) {
         super(params, host);
     }
 
@@ -41,7 +41,7 @@ public class ReplaceSetInMotion extends ReplacementEffect {
      * @see forge.card.replacement.ReplacementEffect#canReplace(java.util.HashMap)
      */
     @Override
-    public boolean canReplace(HashMap<String, Object> runParams) {
+    public boolean canReplace(Map<String, Object> runParams) {
         if (!runParams.get("Event").equals("SetInMotion")) {
             return false;
         }

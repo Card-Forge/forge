@@ -3,7 +3,7 @@
 Name=Albert Einstein 3
 Title=Albert Einstein
 Difficulty=hard
-Description=WG deck with Garruk Wildspeaker, Needle Storm and Retribution of the Meek
+Description=WG Retribution of the Meek deck
 Icon=Albert Einstein.jpg
 Deck Type=constructed
 [main]
@@ -14,24 +14,27 @@ Deck Type=constructed
 5 Forest|M12
 1 Mox Pearl
 1 Mox Emerald
-2 Savannah Lions
+1 Savannah Lions
 1 Elite Vanguard
+3 Dryad Militant
 1 Isamaru, Hound of Konda
 1 Weathered Wayfarer
 1 Gaddock Teeg
 1 Kataki, War's Wage
 2 Accorder Paladin
 4 Watchwolf
+1 Call of the Conclave
 4 Kitchen Finks
 4 Wilt-Leaf Cavaliers
 1 Mirri, Cat Warrior
-2 Garruk Wildspeaker
+1 Garruk Wildspeaker
 1 Master of the Wild Hunt
-3 Mirran Crusader
+2 Mirran Crusader
 1 Ancient Spider
 1 Hero of Bladehold
 1 Aura Shards
 4 Retribution of the Meek
-4 Swords to Plowshares
-2 Needle Storm
+2 Swords to Plowshares
+2 Path to Exile
+1 Needle Storm
 [sideboard]
