@@ -21,16 +21,21 @@ import java.io.File;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.eventbus.Subscribe;
 
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.quest.data.GameFormatQuest;
 import forge.game.GameFormat;
+import forge.game.event.Event;
+import forge.game.event.MulliganEvent;
+import forge.game.player.PlayerType;
 import forge.item.CardPrinted;
 import forge.item.PreconDeck;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.bazaar.QuestBazaarManager;
+import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetStorage;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
@@ -434,6 +439,17 @@ public class QuestController {
         int unlocksSpent = this.questFormat.getUnlocksUsed();
 
         return unlocksAvaliable > unlocksSpent ? Math.min(unlocksAvaliable - unlocksSpent, cntLocked) : 0;
+    }
+    
+    @Subscribe
+    public void receiveGameEvent(Event ev) { // Receives events only during quest games
+        if ( ev instanceof MulliganEvent ) {
+            MulliganEvent mev = (MulliganEvent)ev;
+            // First mulligan is free
+            if (mev.player.getType() == PlayerType.HUMAN && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() == 0) {
+                mev.player.drawCard();
+            }
+        }
     }
 
 }

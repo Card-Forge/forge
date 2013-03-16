@@ -84,9 +84,9 @@ public class InputMulligan extends Input {
     @Override
     public final void selectButtonCancel() {
         final Player humanPlayer = Singletons.getControl().getPlayer();
-        final int newHand = humanPlayer.doMulligan();
+        humanPlayer.doMulligan();
 
-        if (newHand == 0) {
+        if (humanPlayer.getCardsIn(ZoneType.Hand).isEmpty()) {
             this.end();
         } else {
             ButtonUtil.enableAllFocusOk();

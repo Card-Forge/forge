@@ -118,8 +118,12 @@ public class GameState {
         endOfTurn = new EndOfTurn(this);
         endOfCombat = new EndOfCombat(this);
 
+        if ( match0.getGameType() == GameType.Quest)
+            events.register(Singletons.getModel().getQuest()); // this one listens to player's mulligans ATM
+
         events.register(Singletons.getControl().getSoundSystem());
         events.register(gameLog);
+
     }
 
     /**

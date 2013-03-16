@@ -24,13 +24,10 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
-import forge.game.GameType;
 import forge.game.GameState;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
-import forge.quest.QuestController;
-import forge.quest.bazaar.QuestItemType;
 
 /**
  * <p>
@@ -129,19 +126,6 @@ public class HumanPlayer extends Player {
     @Override
     public PlayerType getType() {
         return PlayerType.HUMAN;
-    }
-
-    @Override
-    public final int doMulligan() {
-        int newHand = super.doMulligan();
-        final QuestController quest = Singletons.getModel().getQuest();
-        final boolean isQuest = Singletons.getModel().getMatch().getGameType().equals(GameType.Quest);
-        if (isQuest && quest.getAssets().hasItem(QuestItemType.SLEIGHT) && (getStats().getMulliganCount() == 1)) {
-            drawCard();
-            newHand++;
-            getStats().notifyOpeningHandSize(newHand);
-        }
-        return newHand;
     }
 
     /* (non-Javadoc)

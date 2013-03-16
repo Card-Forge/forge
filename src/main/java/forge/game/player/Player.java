@@ -61,6 +61,7 @@ import forge.game.event.CardDiscardedEvent;
 import forge.game.event.DrawCardEvent;
 import forge.game.event.LandPlayedEvent;
 import forge.game.event.LifeLossEvent;
+import forge.game.event.MulliganEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.phase.PhaseHandler;
@@ -1322,20 +1323,21 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a GamePlayerRating object
      * @return an int
      */
-    public  int doMulligan() {
+    public void doMulligan() {
         final List<Card> hand = new ArrayList<Card>(getCardsIn(ZoneType.Hand));
         for (final Card c : hand) {
             game.getAction().moveToLibrary(c);
         }
         shuffle();
-        final int newHand = hand.size() - 1;
-        for (int i = 0; i < newHand; i++) {
+        for (int i = 1; i < hand.size(); i++) { // draws one card less
             drawCard();
         }
+        
+        game.getEvents().post(new MulliganEvent(this)); // quest listener may interfere here
+        final int newHand = getCardsIn(ZoneType.Hand).size();
         game.getGameLog().add("Mulligan", this + " has mulliganed down to " + newHand + " cards.", 0);
         stats.notifyHasMulliganed();
         stats.notifyOpeningHandSize(newHand);
-        return newHand;
     }
 
     /**
