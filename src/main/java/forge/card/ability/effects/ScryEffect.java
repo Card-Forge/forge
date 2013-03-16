@@ -66,6 +66,10 @@ public class ScryEffect extends SpellAbilityEffect {
         final List<Card> topN = new ArrayList<Card>();
         final PlayerZone library = p.getZone(ZoneType.Library);
         numScry = Math.min(numScry, library.size());
+
+        if ( numScry == 0 )
+            return;
+
         for (int i = 0; i < numScry; i++) {
             topN.add(library.get(i));
         }
