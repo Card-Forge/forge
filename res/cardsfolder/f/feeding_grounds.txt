@@ -7,8 +7,9 @@ T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ DBPutCount
 T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
-SVar:DBPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X
-SVar:X:Targeted$CardManaCost
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ Y
+SVar:Y:Targeted$CardManaCost
+SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feeding_grounds.jpg
 Oracle:Red spells cost {1} less to cast.\nGreen spells cost {1} less to cast.\nWhenever you roll {C}, put X +1/+1 counters on target creature, where X is that creature's converted mana cost.
 SetInfo:HOP Common
