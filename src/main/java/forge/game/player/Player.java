@@ -1229,16 +1229,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return this.drawCards(1);
     }
 
-    /**
-     * <p>
-     * drawCards.
-     * </p>
-     * 
-     * @return a List<Card> of cards actually drawn
-     */
-    public final List<Card> drawCards() {
-        return this.drawCards(1);
-    }
 
     /**
      * <p>
@@ -1308,7 +1298,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Play the Draw sound
-        Singletons.getModel().getGame().getEvents().post(new DrawCardEvent());
+        game.getEvents().post(new DrawCardEvent());
 
         return drawn;
     }
@@ -1329,9 +1319,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             game.getAction().moveToLibrary(c);
         }
         shuffle();
-        for (int i = 1; i < hand.size(); i++) { // draws one card less
-            drawCard();
-        }
+        drawCards(hand.size() - 1);
         
         game.getEvents().post(new MulliganEvent(this)); // quest listener may interfere here
         final int newHand = getCardsIn(ZoneType.Hand).size();
