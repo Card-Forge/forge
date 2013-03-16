@@ -980,7 +980,7 @@ public final class GameActionUtil {
             for (final Card oldman : list) {
                 if (!oldman.getGainControlTargets().isEmpty()) {
                     if (oldman.getNetAttack() < oldman.getGainControlTargets().get(0).getNetAttack()) {
-                        final ArrayList<Command> coms = oldman.getGainControlReleaseCommands();
+                        final List<Command> coms = oldman.getGainControlReleaseCommands();
                         for (int i = 0; i < coms.size(); i++) {
                             coms.get(i).execute();
                         }

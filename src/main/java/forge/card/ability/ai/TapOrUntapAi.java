@@ -47,49 +47,6 @@ public class TapOrUntapAi extends TapAiBase {
         return randomReturn;
     }
 
-    @Override
-    protected boolean doTriggerAINoCost(AIPlayer ai, SpellAbility sa, boolean mandatory) {
-        final Target tgt = sa.getTarget();
-        final Card source = sa.getSourceCard();
 
-        if (tgt == null) {
-            if (mandatory) {
-                return true;
-            }
-
-            // TODO: use Defined to determine if this is an unfavorable result
-
-            return true;
-        } else {
-            if (tapPrefTargeting(ai, source, tgt, sa, mandatory)) {
-                return true;
-            } else if (mandatory) {
-                // not enough preferred targets, but mandatory so keep going:
-                return tapUnpreferredTargeting(ai, sa, mandatory);
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, AIPlayer ai) {
-        final Target tgt = sa.getTarget();
-        final Card source = sa.getSourceCard();
-
-        boolean randomReturn = true;
-
-        if (tgt == null) {
-            // either self or defined, either way should be fine
-        } else {
-            // target section, maybe pull this out?
-            tgt.resetTargets();
-            if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
-                return false;
-            }
-        }
-
-        return randomReturn;
-    }
 
 }

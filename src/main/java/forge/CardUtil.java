@@ -69,7 +69,7 @@ public final class CardUtil {
         return !kw.startsWith("Protection") && !Constant.Keywords.NON_STACKING_LIST.contains(kw);
     }
 
-    public static String getShortColorsString(final ArrayList<String> colors) {
+    public static String getShortColorsString(final Iterable<String> colors) {
         StringBuilder colorDesc = new StringBuilder();
         for (final String col : colors) {
             colorDesc.append(getShortColor(col));

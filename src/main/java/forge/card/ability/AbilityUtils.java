@@ -980,7 +980,7 @@ public class AbilityUtils {
 
             // Replace AnyColor with the 5 colors
             if (choices.contains("AnyColor")) {
-                gains.addAll(Arrays.asList(Constant.Color.ONLY_COLORS));
+                gains.addAll(Constant.Color.ONLY_COLORS);
                 choices = choices.replaceAll("AnyColor,?", "");
             }
             // Add any remaining choices

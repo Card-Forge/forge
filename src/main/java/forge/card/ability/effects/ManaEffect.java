@@ -1,5 +1,6 @@
 package forge.card.ability.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -47,12 +48,12 @@ public class ManaEffect extends SpellAbilityEffect {
                         //String colorsNeeded = abMana.getExpressChoice();
                         String[] colorsProduced = abMana.getComboColors().split(" ");
                         final StringBuilder choiceString = new StringBuilder();
-                        String[] colorMenu = null;
+                        List<String> colorMenu = null;
                         if (!abMana.isAnyMana()) {
-                            colorMenu = new String[colorsProduced.length];
+                            colorMenu = new ArrayList<String>();
                             //loop through colors to make menu
                             for (int nColor = 0; nColor < colorsProduced.length; nColor++) {
-                                colorMenu[nColor] = forge.card.MagicColor.toLongString(colorsProduced[nColor]);
+                                colorMenu.add(forge.card.MagicColor.toLongString(colorsProduced[nColor]));
                             }
                         }
                         else {
@@ -113,12 +114,12 @@ public class ManaEffect extends SpellAbilityEffect {
                             choice = colorsNeeded;
                         }
                         else {
-                            String[] colorMenu = null;
+                            List<String> colorMenu = null;
                             if (colorsNeeded.length() > 1 && colorsNeeded.length() < 5) {
-                                colorMenu = new String[colorsNeeded.length()];
+                                colorMenu = new ArrayList<String>();
                                 //loop through colors to make menu
                                 for (int nChar = 0; nChar < colorsNeeded.length(); nChar++) {
-                                    colorMenu[nChar] = forge.card.MagicColor.toLongString(colorsNeeded.substring(nChar, nChar + 1));
+                                    colorMenu.add(forge.card.MagicColor.toLongString(colorsNeeded.substring(nChar, nChar + 1)));
                                 }
                             }
                             else {

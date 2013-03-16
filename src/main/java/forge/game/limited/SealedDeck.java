@@ -60,7 +60,6 @@ public class SealedDeck extends LimitedDeck {
         int green = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_GREEN));
 
         final int[] colorCounts = { white, blue, black, red, green };
-        final String[] colors = Constant.Color.ONLY_COLORS;
         int[] countsCopy = Arrays.copyOf(colorCounts, 5);
         Arrays.sort(countsCopy);
 
@@ -68,9 +67,9 @@ public class SealedDeck extends LimitedDeck {
         List<String> secondColors = new ArrayList<String>();
         for (int i = 0; i < 5; i++) {
             if (countsCopy[4] == colorCounts[i]) {
-                maxColors.add(colors[i]);
+                maxColors.add(Constant.Color.ONLY_COLORS.get(i));
             } else if (countsCopy[3] == colorCounts[i]) {
-                secondColors.add(colors[i]);
+                secondColors.add(Constant.Color.ONLY_COLORS.get(i));
             }
         }
 

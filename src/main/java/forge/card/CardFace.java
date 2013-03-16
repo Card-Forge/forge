@@ -48,25 +48,25 @@ final class CardFace implements ICardFace {
 
 
     // these implement ICardCharacteristics 
-    @Override public final String getOracleText()         { return oracleText; }
-    @Override public final int getIntPower()              { return iPower; }
-    @Override public final int getIntToughness()          { return iToughness; }
-    @Override public final String getPower()              { return power; }
-    @Override public final String getToughness()          { return toughness; }
+    @Override public String getOracleText()         { return oracleText; }
+    @Override public int getIntPower()              { return iPower; }
+    @Override public int getIntToughness()          { return iToughness; }
+    @Override public String getPower()              { return power; }
+    @Override public String getToughness()          { return toughness; }
     @Override public int getInitialLoyalty()              { return initialLoyalty; }
-    @Override public final String getName()               { return this.name; }
-    @Override public final CardType getType()             { return this.type; }
-    @Override public final ManaCost getManaCost()         { return this.manaCost; }
-    @Override public final ColorSet getColor()            { return this.color; }
+    @Override public String getName()               { return this.name; }
+    @Override public CardType getType()             { return this.type; }
+    @Override public ManaCost getManaCost()         { return this.manaCost; }
+    @Override public ColorSet getColor()            { return this.color; }
     
     // these are raw and unparsed used for Card creation
-    @Override public final Iterable<String> getKeywords()   { return keywords; }
-    @Override public final Iterable<String> getAbilities()  { return abilities; }
-    @Override public final Iterable<String> getStaticAbilities() { return staticAbilities; }
-    @Override public final Iterable<String> getTriggers()   { return triggers; }
-    @Override public final Iterable<String> getReplacements() { return replacements; }
-    @Override public final String getNonAbilityText()       { return nonAbilityText; }
-    @Override public final Iterable<Entry<String, String>> getVariables() { return variables.entrySet(); }
+    @Override public Iterable<String> getKeywords()   { return keywords; }
+    @Override public Iterable<String> getAbilities()  { return abilities; }
+    @Override public Iterable<String> getStaticAbilities() { return staticAbilities; }
+    @Override public Iterable<String> getTriggers()   { return triggers; }
+    @Override public Iterable<String> getReplacements() { return replacements; }
+    @Override public String getNonAbilityText()       { return nonAbilityText; }
+    @Override public Iterable<Entry<String, String>> getVariables() { return variables.entrySet(); }
 
     public CardFace(String name0) { 
         this.name = name0; 
@@ -74,11 +74,11 @@ final class CardFace implements ICardFace {
             throw new RuntimeException("Card name is empty");
     }
     // Here come setters to allow parser supply values
-    public final void setType(CardType type0)             { this.type = type0; }
-    public final void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
-    public final void setColor(ColorSet color0)           { this.color = color0; }
-    public final void setOracleText(String text)          { this.oracleText = text; }
-    public final void setInitialLoyalty(int value)        { this.initialLoyalty = value; }
+    public void setType(CardType type0)             { this.type = type0; }
+    public void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
+    public void setColor(ColorSet color0)           { this.color = color0; }
+    public void setOracleText(String text)          { this.oracleText = text; }
+    public void setInitialLoyalty(int value)        { this.initialLoyalty = value; }
 
     public void setPtText(String value) {
         final int slashPos = value.indexOf('/');
@@ -92,13 +92,13 @@ final class CardFace implements ICardFace {
     }
 
     // Raw fields used for Card creation
-    public final void setNonAbilityText(String value)     { this.nonAbilityText = value; }
-    public final void addKeyword(String value)            { if (null == this.keywords) { this.keywords = new ArrayList<String>(); } this.keywords.add(value); }
-    public final void addAbility(String value)            { if (null == this.abilities) { this.abilities = new ArrayList<String>(); } this.abilities.add(value);}
-    public final void addTrigger(String value)            { if (null == this.triggers) { this.triggers = new ArrayList<String>(); } this.triggers.add(value);}
-    public final void addStaticAbility(String value)      { if (null == this.staticAbilities) { this.staticAbilities = new ArrayList<String>(); } this.staticAbilities.add(value);}
-    public final void addReplacementEffect(String value)  { if (null == this.replacements) { this.replacements = new ArrayList<String>(); } this.replacements.add(value);}
-    public final void addSVar(String key, String value)   { if (null == this.variables) { this.variables = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER); } this.variables.put(key, value); }
+    public void setNonAbilityText(String value)     { this.nonAbilityText = value; }
+    public void addKeyword(String value)            { if (null == this.keywords) { this.keywords = new ArrayList<String>(); } this.keywords.add(value); }
+    public void addAbility(String value)            { if (null == this.abilities) { this.abilities = new ArrayList<String>(); } this.abilities.add(value);}
+    public void addTrigger(String value)            { if (null == this.triggers) { this.triggers = new ArrayList<String>(); } this.triggers.add(value);}
+    public void addStaticAbility(String value)      { if (null == this.staticAbilities) { this.staticAbilities = new ArrayList<String>(); } this.staticAbilities.add(value);}
+    public void addReplacementEffect(String value)  { if (null == this.replacements) { this.replacements = new ArrayList<String>(); } this.replacements.add(value);}
+    public void addSVar(String key, String value)   { if (null == this.variables) { this.variables = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER); } this.variables.put(key, value); }
 
     
     public void assignMissingFields() { // Most scripts do not specify color explicitly

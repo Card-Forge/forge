@@ -29,6 +29,7 @@ import forge.Singletons;
 import forge.StaticEffect;
 import forge.StaticEffects;
 import forge.card.CardType;
+import forge.card.TriggerReplacementBase;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -143,7 +144,7 @@ public class StaticAbilityContinuous {
 
         if (params.containsKey("AddKeyword")) {
             addKeywords = params.get("AddKeyword").split(" & ");
-            final ArrayList<String> chosencolors = hostCard.getChosenColor();
+            final List<String> chosencolors = hostCard.getChosenColor();
             for (final String color : chosencolors) {
                 for (int w = 0; w < addKeywords.length; w++) {
                     addKeywords[w] = addKeywords[w].replaceAll("ChosenColor", color.substring(0, 1).toUpperCase().concat(color.substring(1, color.length())));
@@ -435,7 +436,7 @@ public class StaticAbilityContinuous {
                     stA.setTemporarilySuppressed(true);
                 }
                 final ArrayList<ReplacementEffect> replacementEffects = affectedCard.getReplacementEffects();
-                for (final ReplacementEffect rE : replacementEffects) {
+                for (final TriggerReplacementBase rE : replacementEffects) {
                     rE.setTemporarilySuppressed(true);
                 }
             }

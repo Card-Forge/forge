@@ -3,6 +3,8 @@ package forge.card.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
@@ -46,8 +48,8 @@ public class ChooseColorEffect extends SpellAbilityEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     if (sa.hasParam("OrColors")) {
-                        String[] choices = Constant.Color.ONLY_COLORS;
-                        final List<String> o = GuiChoose.getChoices("Choose a color or colors", 1, choices.length, choices);
+                        ImmutableList<String> choices = Constant.Color.ONLY_COLORS;
+                        final List<String> o = GuiChoose.getChoices("Choose a color or colors", 1, choices.size(), choices);
                         card.setChosenColor(new ArrayList<String>(o));
                     } else if (sa.hasParam("TwoColors")) {
                         final List<String> o = GuiChoose.getChoices("Choose two colors", 2, 2, Constant.Color.ONLY_COLORS);

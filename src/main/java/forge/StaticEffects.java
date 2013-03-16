@@ -25,6 +25,7 @@ import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.TriggerReplacementBase;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -236,7 +237,7 @@ public class StaticEffects {
                     stA.setTemporarilySuppressed(false);
                 }
                 final ArrayList<ReplacementEffect> replacementEffects = affectedCard.getReplacementEffects();
-                for (final ReplacementEffect rE : replacementEffects) {
+                for (final TriggerReplacementBase rE : replacementEffects) {
                     rE.setTemporarilySuppressed(false);
                 }
             }
