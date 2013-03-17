@@ -1,6 +1,5 @@
 package forge.card.ability.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -35,7 +34,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
         final Target tgt = sa.getTarget();
 
         final List<Player> choices = sa.hasParam("Choices") ? AbilityUtils.getDefinedPlayers(
-                sa.getSourceCard(), sa.getParam("Choices"), sa) : new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
+                sa.getSourceCard(), sa.getParam("Choices"), sa) : Singletons.getModel().getGame().getPlayers();
 
         final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a player";
 
@@ -53,20 +52,16 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                     card.setChosenPlayer(chosen);
 
                 } else {
-                    if (sa.hasParam("AILogic")) {
-                        if (sa.getParam("AILogic").equals("Curse")) {
-                            for (int curseChoice = 0; curseChoice < choices.size(); curseChoice++) {
-                                if (choices.get(curseChoice).isOpponentOf(p)) {
-                                    card.setChosenPlayer(choices.get(curseChoice));
-                                    break;
-                                }
+                    if ("Curse".equals(sa.getParam("AILogic"))) {
+                        for (Player pc : choices) {
+                            if (pc.isOpponentOf(p)) {
+                                card.setChosenPlayer(pc);
+                                break;
                             }
-                            if (card.getChosenPlayer() == null) {
-                                System.out.println("No good curse choices. Picking first available: " + choices.get(0));
-                                card.setChosenPlayer(choices.get(0));
-                            }
-                        } else {
-                            card.setChosenPlayer(p);
+                        }
+                        if (card.getChosenPlayer() == null) {
+                            System.out.println("No good curse choices. Picking first available: " + choices.get(0));
+                            card.setChosenPlayer(choices.get(0));
                         }
                     } else {
                         card.setChosenPlayer(p);
