@@ -270,7 +270,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 }
 
                 GuiDownloader.this.barProgress.setString(sb.toString());
-                System.out.println(this.card + "/" + GuiDownloader.this.cards.size() + " - " + dest);
+                System.out.println((this.card + 1) + "/" + GuiDownloader.this.cards.size() + " - " + dest);
             }
         }
         EventQueue.invokeLater(new Worker(card));
