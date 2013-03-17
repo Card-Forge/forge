@@ -50,8 +50,7 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
     private final boolean foiled;
 
     // Calculated fields are below:
-    private final transient CardRarity rarity; // rarity is given in ctor when
-                                               // set is assigned
+    private final transient CardRarity rarity; // rarity is given in ctor when set is assigned
 
     @Override
     public String getName() {

@@ -227,6 +227,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     System.err.println(String.format("Ignoring unknown type in set definitions: name: %s; type: %s", name, type));
                 }
             }
+            
+            // if( !code2.equals(code) ) System.out.printf("%s->%s|", code, code);
 
             return new CardEdition(index, code2, code, enumType, name, alias, borderWhite);
         }

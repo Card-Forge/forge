@@ -226,10 +226,17 @@ public class ImageCache {
         }
         
         if (includeSet) {
-            return String.format("%s/%s", Singletons.getModel().getEditions().getCode2ByCode(cp.getEdition()), fname);
+            String editionAliased = isDownloadUrl ? Singletons.getModel().getEditions().getCode2ByCode(edition) : getSetFolder(edition);
+            return String.format("%s/%s", editionAliased, fname);
         } else {
             return fname;
         }
+    }
+    
+    public static String getSetFolder(String edition) {
+        return  !NewConstants.CACHE_CARD_PICS_SUBDIR.containsKey(edition)
+                ? Singletons.getModel().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
+                : NewConstants.CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
 
     public static String getImageName(CardPrinted cp) {

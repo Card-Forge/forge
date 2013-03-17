@@ -20,10 +20,13 @@ package forge.properties;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+
+import forge.util.FileSection;
 
 /**
  * Determines the user data and cache dirs, first looking at the specified file for overrides
@@ -34,10 +37,12 @@ public class ForgeProfileProperties {
     public final String userDir;
     public final String cacheDir;
     public final String cardPicsDir;
+    public final Map<String, String> cardPicsSubDir;
     
     private static final String _USER_DIR_KEY      = "userDir";
     private static final String _CACHE_DIR_KEY     = "cacheDir";
     private static final String _CARD_PICS_DIR_KEY = "cardPicsDir";
+    private static final String _CARD_PICS_SUB_DIRS_KEY = "cardPicsSubDirs";
 
     public ForgeProfileProperties(String filename) {
         Properties props = new Properties();
@@ -54,6 +59,13 @@ public class ForgeProfileProperties {
         userDir     = _getDir(props, _USER_DIR_KEY,      defaults.getLeft());
         cacheDir    = _getDir(props, _CACHE_DIR_KEY,     defaults.getRight());
         cardPicsDir = _getDir(props, _CARD_PICS_DIR_KEY, cacheDir + "pics/cards/");
+        cardPicsSubDir = _getMap(props, _CARD_PICS_SUB_DIRS_KEY);
+    }
+
+
+    private Map<String,String> _getMap(Properties props, String propertyKey) {
+        String strMap = props.getProperty(propertyKey, "").trim();
+        return FileSection.parseToMap(strMap, "->", "|");
     }
 
     private static String _getDir(Properties props, String propertyKey, String defaultVal) {

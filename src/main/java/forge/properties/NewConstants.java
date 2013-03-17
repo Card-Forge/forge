@@ -17,6 +17,9 @@
  */
 package forge.properties;
 
+import java.util.Collections;
+import java.util.Map;
+
 public final class NewConstants {
     public static final String PROFILE_FILE          = "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
@@ -50,11 +53,13 @@ public final class NewConstants {
     public static final String USER_DIR;
     public static final String CACHE_DIR;
     public static final String CACHE_CARD_PICS_DIR;
+    public static final Map<String, String> CACHE_CARD_PICS_SUBDIR;
     static {
         ForgeProfileProperties profileProps = new ForgeProfileProperties(PROFILE_FILE);
         USER_DIR           = profileProps.userDir;
         CACHE_DIR          = profileProps.cacheDir;
         CACHE_CARD_PICS_DIR = profileProps.cardPicsDir;
+        CACHE_CARD_PICS_SUBDIR = Collections.unmodifiableMap(profileProps.cardPicsSubDir);
     }
 
     // data that is only in the profile dirs
