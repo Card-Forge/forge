@@ -219,16 +219,29 @@ public enum FView {
     // will populate remainingFiles with remaining files if not null, returns whether any files have
     // been added to remainingFiles (or would have been added if remainingFiles is null)
     // directories listed in profileDirs will not be searched
+    // removes empty directories to reduce tree conflicts
     private static boolean _addRemainingFiles(List<File> remainingFiles, List<File> dirRoots, Set<File> profileDirs) {
         Deque<File> stack = new LinkedList<File>(dirRoots);
+	Set<File> seenDirs = new HashSet<File>();
         boolean ret = false;
         while (!stack.isEmpty()) {
-            File cur = stack.pop();
+            File cur = stack.peek();
             if (profileDirs.contains(cur)) {
-                // don't search active profile dirs
+                // don't touch active profile dirs
+                stack.pop();
                 continue;
             }
             
+            if (seenDirs.contains(cur)) {
+                cur = stack.pop();
+                if (cur.exists()) {
+                    // remove empty dir (will fail if not empty)
+                    cur.delete();
+                }
+                continue;
+            }
+            
+            seenDirs.add(cur);
             File[] curListing = cur.listFiles();
             if (null == curListing) {
                 continue;
