@@ -3,7 +3,6 @@ package forge.item;
 import java.util.Locale;
 
 import forge.Card;
-import forge.ImageCache;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -18,7 +17,7 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
 
     // takes a string of the form "<colors> <power> <toughness> <name>" such as: "B 0 0 Germ"
     public static String makeTokenFileName(String in) {
-        StringBuffer out = new StringBuffer(ImageCache.TOKEN_PREFIX);
+        StringBuffer out = new StringBuffer();
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
