@@ -9,7 +9,7 @@ Deck Type=constructed
 [main]
 2 Island|M10
 3 Plains|M10
-2 Forest|M10
+2 Flooded Strand
 4 Tropical Island
 4 Savannah
 4 Tundra
@@ -36,9 +36,8 @@ Deck Type=constructed
 1 Kismet
 1 Frozen AEther
 3 Mystic Restraints
-1 Thirst
 4 Paralyzing Grasp
-3 Entangling Vines
-1 Dehydration
-4 Glimmerdust Nap
+1 Glimmerdust Nap
+4 Shackles
+4 Plumes of Peace
 [sideboard]
