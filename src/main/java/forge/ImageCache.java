@@ -203,7 +203,7 @@ public class ImageCache {
         } else {
             // without set number of pictures equals number of urls provided in Svar:Picture
             String urls = backFace ? card.getPictureOtherSideUrl() : card.getPictureUrl();
-            cntPictures = StringUtils.countMatches(urls, "\\\\") + 1;
+            cntPictures = StringUtils.countMatches(urls, "\\") + 1;
 
             // raise the art index limit to the maximum of the sets this card was printed in
             int maxCntPictures = 1;
