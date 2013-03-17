@@ -88,7 +88,7 @@ public class ImageCache {
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(InventoryItem ii, int width, int height) {
-        return scaleImage(getImageKey(ii), width, height);
+        return scaleImage(getImageKey(ii, false), width, height);
     }
     
     /**
@@ -164,14 +164,11 @@ public class ImageCache {
         }
     }
     
-    public static String getImageKey(InventoryItem ii) {
-        return getImageKey(ii, false);
-    }
-    
     // Inventory items don't have to know how a certain client should draw them. 
     // That's why this method is not encapsulated and overloaded in the InventoryItem descendants
     public static String getImageKey(InventoryItem ii, boolean altState) {
         if ( ii instanceof CardPrinted ) {
+            // have to determine which pictures are present in our filesystem and use either set-pictures or non-set ones.
             return getImageKey((CardPrinted)ii, altState, true);
         }
         if ( ii instanceof TournamentPack )

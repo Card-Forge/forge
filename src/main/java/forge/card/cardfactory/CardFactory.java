@@ -226,7 +226,7 @@ public class CardFactory {
         c.setRarity(cp.getRarity());
 
         // Would like to move this away from in-game entities
-        String originalPicture = ImageCache.getImageKey(cp);
+        String originalPicture = ImageCache.getImageKey(cp, false);
         //System.out.println(c.getName() + " -> " + originalPicture);
         c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
