@@ -72,6 +72,7 @@ Code2:EVE|Code3:EVE|Type:Expansion|Name:Eventide|Alias:EVT
 Code2:ALA|Code3:ALA|Type:Expansion|Name:Shards of Alara
 Code2:CFX|Code3:CFX|Type:Expansion|Name:Conflux|Alias:CON
 Code2:ARB|Code3:ARB|Type:Expansion|Name:Alara Reborn
+Code2:HOP|Code3:HOP|Type:Other|Name:Planechase|Alias:PCH
 Code2:M10|Code3:M10|Type:Core|Name:Magic 2010
 Code2:ZEN|Code3:ZEN|Type:Expansion|Name:Zendikar
 
@@ -94,4 +95,4 @@ Code2:GTC|Code3:GTC|Type:Expansion|Name:Gatecrash
 
 Code2:VAN|Code3:VAN|Type:Other|Name:Vanguard
 Code2:ARC|Code3:ARC|Type:Other|Name:Archenemy
-Code2:HOP|Code3:HOP|Type:Other|Name:Planechase
+
