@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Black Flame 3
+Title=Black Flame
+Difficulty=hard
+Description=Mono B Sacrifice deck with Shirei, Shizo's Caretaker, Harvester of Souls and Grave Pact
+Icon=Black Flame.jpg
+Deck Type=constructed
+[main]
+1 Black Market
+4 Blood Artist
+1 Butcher of Malakir
+4 Death Cultist
+3 Deathgreeter
+3 Falkenrath Noble
+1 Fume Spitter
+1 Grave Betrayal
+4 Grave Pact
+3 Harvester of Souls
+1 Massacre Wurm
+1 Mox Jet
+1 Ogre Slumlord
+2 Royal Assassin
+1 Sangromancer
+4 Shirei, Shizo's Caretaker
+2 Skirsdag High Priest
+23 Swamp
+[sideboard]
