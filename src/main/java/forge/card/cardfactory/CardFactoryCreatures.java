@@ -52,6 +52,7 @@ import forge.control.input.Input;
 import forge.control.input.InputSelectManyCards;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
+import forge.game.event.TokenCreatedEvent;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
@@ -74,11 +75,15 @@ public class CardFactoryCreatures {
         final Ability ability = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
-                final List<Card> cl = CardFactoryUtil.makeToken("Stangg Twin",
+                final List<Card> cl = CardFactory.makeToken("Stangg Twin",
                         CardToken.makeTokenFileName("RG", 3, 4, "Stangg Twin"),
                         card.getController(), "R G", new String[] { "Legendary", "Creature", "Human", "Warrior" },
                         3, 4, new String[] { "" });
-
+                for(Card tok : cl) {
+                    Singletons.getModel().getGame().getAction().moveToPlay(tok);
+                }
+                Singletons.getModel().getGame().getEvents().post(new TokenCreatedEvent());
+                
                 cl.get(0).addLeavesPlayCommand(new Command() {
                     private static final long serialVersionUID = 3367390368512271319L;
 
@@ -369,13 +374,18 @@ public class CardFactoryCreatures {
         final SpellAbility ability2 = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
+                int n = card.sumAllCounters();
                 for (int i = 0; i < card.sumAllCounters(); i++) {
-                    this.makeToken();
+                    for(Card tok : this.makeToken()) {
+                        Singletons.getModel().getGame().getAction().moveToPlay(tok);
+                    }
                 }
+                if (n > 0)
+                    Singletons.getModel().getGame().getEvents().post(new TokenCreatedEvent());
             } // resolve()
 
-            public void makeToken() {
-                CardFactoryUtil.makeToken("Kithkin Soldier", CardToken.makeTokenFileName("W", 1, 1, "Kithkin Soldier"),
+            public List<Card> makeToken() {
+                return CardFactory.makeToken("Kithkin Soldier", CardToken.makeTokenFileName("W", 1, 1, "Kithkin Soldier"),
                         card.getController(), "W", new String[] { "Creature", "Kithkin", "Soldier" }, 1, 1, new String[] { "" });
             }
         };

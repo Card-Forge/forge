@@ -25,10 +25,11 @@ import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.cardfactory.CardFactory;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.event.TokenCreatedEvent;
 import forge.game.player.Player;
 import forge.item.CardToken;
 
@@ -200,9 +201,13 @@ public class TokenEffect extends SpellAbilityEffect {
         final String remember = sa.getParam("RememberTokens");
         for (final Player controller : AbilityUtils.getDefinedPlayers(host, this.tokenOwner, sa)) {
             for (int i = 0; i < finalAmount; i++) {
-                final List<Card> tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost,
+                final List<Card> tokens = CardFactory.makeToken(substitutedName, imageName, controller, cost,
                         substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
-
+                for(Card tok : tokens) {
+                    Singletons.getModel().getGame().getAction().moveToPlay(tok);
+                }
+                Singletons.getModel().getGame().getEvents().post(new TokenCreatedEvent());
+                
                 // Grant rule changes
                 if (this.tokenHiddenKeywords != null) {
                     for (final String s : this.tokenHiddenKeywords) {

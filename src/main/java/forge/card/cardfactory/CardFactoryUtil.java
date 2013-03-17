@@ -68,7 +68,6 @@ import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.event.TokenCreatedEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
@@ -2434,83 +2433,6 @@ public class CardFactoryUtil {
         }
 
         return true;
-    }
-
-    public static List<Card> makeToken(final String name, final String imageName, final Player controller,
-            final String manaCost, final String[] types, final int baseAttack, final int baseDefense,
-            final String[] intrinsicKeywords) {
-        final List<Card> list = new ArrayList<Card>();
-        final Card c = new Card();
-        c.setName(name);
-        c.setImageKey(imageName);
-
-        // TODO - most tokens mana cost is 0, this needs to be fixed
-        // c.setManaCost(manaCost);
-        c.addColor(manaCost);
-        c.setToken(true);
-
-        for (final String t : types) {
-            c.addType(t);
-        }
-
-        c.setBaseAttack(baseAttack);
-        c.setBaseDefense(baseDefense);
-
-        final int multiplier = controller.getTokenDoublersMagnitude();
-        for (int i = 0; i < multiplier; i++) {
-            Card temp = CardFactory.copyStats(c);
-
-            for (final String kw : intrinsicKeywords) {
-                temp.addIntrinsicKeyword(kw);
-            }
-            temp.setOwner(controller);
-            temp.setToken(true);
-            CardFactoryUtil.parseKeywords(temp, temp.getName());
-            CardFactoryUtil.setupKeywordedAbilities(temp);
-            Singletons.getModel().getGame().getAction().moveToPlay(temp);
-            list.add(temp);
-        }
-
-        Singletons.getModel().getGame().getEvents().post(new TokenCreatedEvent());
-
-        return list;
-    }
-
-    /**
-     * <p>
-     * copyTokens.
-     * </p>
-     * 
-     * @param tokenList
-     *            a {@link forge.CardList} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> copyTokens(final List<Card> tokenList) {
-        final List<Card> list = new ArrayList<Card>();
-
-        for (Card thisToken : tokenList) {
-            list.addAll(copySingleToken(thisToken));
-        }
-
-        return list;
-    }
-
-    public static List<Card> copySingleToken(Card thisToken) {
-        final ArrayList<String> tal = thisToken.getType();
-        final String[] tokenTypes = new String[tal.size()];
-        tal.toArray(tokenTypes);
-
-        final List<String> kal = thisToken.getIntrinsicKeyword();
-        final String[] tokenKeywords = new String[kal.size()];
-        kal.toArray(tokenKeywords);
-        final List<Card> tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageKey(),
-                thisToken.getController(), thisToken.getManaCost().toString(), tokenTypes, thisToken.getBaseAttack(),
-                thisToken.getBaseDefense(), tokenKeywords);
-
-        for (final Card token : tokens) {
-            token.setColor(thisToken.getColor());
-        }
-        return tokens;
     }
 
     /**

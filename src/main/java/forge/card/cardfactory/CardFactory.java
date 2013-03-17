@@ -28,6 +28,7 @@ import forge.CardColor;
 import forge.CardUtil;
 import forge.Color;
 import forge.ImageCache;
+import forge.Singletons;
 import forge.card.CardCharacteristics;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
@@ -41,6 +42,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerHandler;
+import forge.game.event.TokenCreatedEvent;
 import forge.game.player.Player;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -508,6 +510,42 @@ public class CardFactory {
         for (String sVar : from.getSVars()) {
             to.setSVar(sVar, from.getSVar(sVar));
         }
+    }
+
+    public static List<Card> makeToken(final String name, final String imageName, final Player controller,
+            final String manaCost, final String[] types, final int baseAttack, final int baseDefense,
+            final String[] intrinsicKeywords) {
+        final List<Card> list = new ArrayList<Card>();
+        final Card c = new Card();
+        c.setName(name);
+        c.setImageKey(ImageCache.TOKEN_PREFIX + imageName);
+    
+        // TODO - most tokens mana cost is 0, this needs to be fixed
+        // c.setManaCost(manaCost);
+        c.addColor(manaCost);
+        c.setToken(true);
+    
+        for (final String t : types) {
+            c.addType(t);
+        }
+    
+        c.setBaseAttack(baseAttack);
+        c.setBaseDefense(baseDefense);
+    
+        final int multiplier = controller.getTokenDoublersMagnitude();
+        for (int i = 0; i < multiplier; i++) {
+            Card temp = copyStats(c);
+    
+            for (final String kw : intrinsicKeywords) {
+                temp.addIntrinsicKeyword(kw);
+            }
+            temp.setOwner(controller);
+            temp.setToken(true);
+            CardFactoryUtil.parseKeywords(temp, temp.getName());
+            CardFactoryUtil.setupKeywordedAbilities(temp);
+            list.add(temp);
+        }
+        return list;
     }
 
 } // end class AbstractCardFactory
