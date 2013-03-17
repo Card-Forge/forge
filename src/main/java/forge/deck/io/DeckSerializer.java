@@ -140,7 +140,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
                 // System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
                 for (int i = card.getValue().intValue(); i > 0; --i ) {
                     CardPrinted r = card.getKey();
-                    String url = NewConstants.URL_PIC_DOWNLOAD + ImageCache.getImageLocator(r, ImageCache.getImageName(r), true, true);
+                    String url = NewConstants.URL_PIC_DOWNLOAD + ImageCache.getDownloadUrl(r, false, true);
                     list.add(url);
                 }
             }

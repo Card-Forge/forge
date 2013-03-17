@@ -171,8 +171,9 @@ public class ImageCache {
     // Inventory items don't have to know how a certain client should draw them. 
     // That's why this method is not encapsulated and overloaded in the InventoryItem descendants
     public static String getImageKey(InventoryItem ii, boolean altState) {
-        if ( ii instanceof CardPrinted )
+        if ( ii instanceof CardPrinted ) {
             return getImageKey((CardPrinted)ii, altState, true);
+        }
         if ( ii instanceof TournamentPack )
             return ImageCache.TOURNAMENTPACK_PREFIX + ((TournamentPack)ii).getEdition();
         if ( ii instanceof BoosterPack )
@@ -186,7 +187,11 @@ public class ImageCache {
         return null;
     }
 
-    public static String getImageLocator(CardPrinted cp, String nameToUse, boolean includeSet, boolean isDownloadUrl) {
+    private static String getImageLocator(CardPrinted cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
+        final String nameToUse = getNameToUse(cp, backFace);
+        if ( null == nameToUse )
+            return null;
+        
         StringBuilder s = new StringBuilder();
         
         CardRules card = cp.getRules();
@@ -197,18 +202,22 @@ public class ImageCache {
         if (includeSet) {
             cntPictures = card.getEditionInfo(edition).getCopiesCount();
         } else {
-            // raise the art index limit to the maximum of the sets this card was printed in
-            int maxCntPictures = 1;
-            for (String set : card.getSets()) {
-                maxCntPictures = Math.max(maxCntPictures, card.getEditionInfo(set).getCopiesCount());
-            }
-            cntPictures = maxCntPictures;
+            // without set number of pictures equals number of urls provided in Svar:Picture
+            String urls = backFace ? card.getPictureOtherSideUrl() : card.getPictureUrl();
+            cntPictures = StringUtils.countMatches(urls, "\\\\") + 1;
+
+//            // raise the art index limit to the maximum of the sets this card was printed in
+//            int maxCntPictures = 1;
+//            for (String set : card.getSets()) {
+//                maxCntPictures = Math.max(maxCntPictures, card.getEditionInfo(set).getCopiesCount());
+//            }
+//            cntPictures = maxCntPictures;
         }
         
         int artIdx = cp.getArtIndex();
         if (cntPictures > 1 ) {
             if ( cntPictures <= artIdx )
-                artIdx = Math.min(artIdx, cntPictures - 1);
+                artIdx = cntPictures == 1 ? 0 : artIdx % cntPictures;
             s.append(artIdx + 1);
         }
         
@@ -239,25 +248,28 @@ public class ImageCache {
                 : NewConstants.CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
 
-    public static String getImageName(CardPrinted cp) {
-        return CardSplitType.Split != cp.getRules().getSplitType() ? cp.getName() : cp.getRules().getMainPart().getName() + cp.getRules().getOtherPart().getName();
-    }
-
-    public static String getImageKey(CardPrinted cp, boolean backFace, boolean includeSet) {
+    private static String getNameToUse(CardPrinted cp, boolean backFace) {
         final CardRules card = cp.getRules();
-        final String nameToUse;
         if (backFace) {
             if ( card.getSplitType() == CardSplitType.Transform ) 
-                nameToUse = card.getOtherPart().getName();
+                return card.getOtherPart().getName();
             else 
                 return null;
+        } else if(CardSplitType.Split == cp.getRules().getSplitType()) {
+            return card.getMainPart().getName() + card.getOtherPart().getName();
         } else {
-            nameToUse = getImageName(cp);
+            return cp.getName();
         }
+    }
     
-        return getImageLocator(cp, nameToUse, includeSet, false);
+    public static String getImageKey(CardPrinted cp, boolean backFace, boolean includeSet) {
+        return getImageLocator(cp, backFace, includeSet, false);
     }
 
+    public static String getDownloadUrl(CardPrinted cp, boolean backFace, boolean includeSet) {
+        return getImageLocator(cp, backFace, includeSet, true);
+    }    
+    
     public static String toMWSFilename(String in) {
         final StringBuffer out = new StringBuffer();
         char c;
