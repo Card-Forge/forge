@@ -64,11 +64,11 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
         if (null == ret && filename.contains("/")) {
             setlessFilename = filename.substring(filename.indexOf('/') + 1);
             ret = _findFile(key, path, setlessFilename);
-        }
         
-        // try lowering the art index to the minimum for regular cards
-        if (null == ret && null != setlessFilename && setlessFilename.contains(".full")) {
-            ret = _findFile(key, path, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
+            // try lowering the art index to the minimum for regular cards
+            if (null == ret && setlessFilename.contains(".full")) {
+                ret = _findFile(key, path, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
+            }
         }
         
         if (null == ret) {

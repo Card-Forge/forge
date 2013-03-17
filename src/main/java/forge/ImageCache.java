@@ -196,24 +196,26 @@ public class ImageCache {
         s.append(ImageCache.toMWSFilename(nameToUse));
         
         final int cntPictures;
+        final boolean hasManyPictures;
         if (includeSet) {
             cntPictures = card.getEditionInfo(edition).getCopiesCount();
+            hasManyPictures = cntPictures > 1;
         } else {
             // without set number of pictures equals number of urls provided in Svar:Picture
             String urls = backFace ? card.getPictureOtherSideUrl() : card.getPictureUrl();
             cntPictures = StringUtils.countMatches(urls, "\\\\") + 1;
 
-//            // raise the art index limit to the maximum of the sets this card was printed in
-//            int maxCntPictures = 1;
-//            for (String set : card.getSets()) {
-//                maxCntPictures = Math.max(maxCntPictures, card.getEditionInfo(set).getCopiesCount());
-//            }
-//            cntPictures = maxCntPictures;
+            // raise the art index limit to the maximum of the sets this card was printed in
+            int maxCntPictures = 1;
+            for (String set : card.getSets()) {
+                maxCntPictures = Math.max(maxCntPictures, card.getEditionInfo(set).getCopiesCount());
+            }
+            hasManyPictures = maxCntPictures > 1;
         }
         
         int artIdx = cp.getArtIndex();
-        if (cntPictures > 1 ) {
-            if ( cntPictures <= artIdx )
+        if (hasManyPictures) {
+            if ( cntPictures <= artIdx ) // prevent overflow
                 artIdx = cntPictures == 1 ? 0 : artIdx % cntPictures;
             s.append(artIdx + 1);
         }
