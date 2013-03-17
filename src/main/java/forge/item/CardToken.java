@@ -45,9 +45,7 @@ public class CardToken implements InventoryItemFromSet, IPaperCard {
         this.card = c;
         this.name = c.getName();
         this.edition = edition0;
-        this.imageFileName = String.format("%s%s%s",
-                        null == edition || CardEdition.UNKNOWN == edition ? "" : edition.getCode(),
-                        ImageCache.TOKEN_PREFIX, imageFileName);
+        this.imageFileName = String.format("%s%s", null == edition || CardEdition.UNKNOWN == edition ? "" : edition.getCode(), imageFileName);
     }
     
     @Override public String getName() { return name; }
