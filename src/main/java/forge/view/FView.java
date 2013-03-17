@@ -148,7 +148,7 @@ public enum FView {
             }
 
             final List<File> resDirs = new ArrayList<File>();
-            for (String resDir : Lists.newArrayList("decks", "gauntlet", "layouts", "pics", "pics_product", "preferences", "quest/data")) {
+            for (String resDir : Lists.newArrayList("decks", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
                 resDirs.add(new File("res", resDir));
             }
             
