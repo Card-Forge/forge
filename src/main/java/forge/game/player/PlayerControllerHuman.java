@@ -324,7 +324,8 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int minDiscard) {
-        return GuiChoose.order("Choose cards to Discard", "Discarded", minDiscard == 0 ? -1 : minDiscard, valid, null, null);
+        int cntToKeepInHand =  minDiscard == 0 ? -1 : valid.size() - minDiscard;
+        return GuiChoose.order("Choose cards to Discard", "Discarded", cntToKeepInHand, valid, null, null);
     }
 
     /* (non-Javadoc)
