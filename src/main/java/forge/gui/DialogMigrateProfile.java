@@ -476,6 +476,7 @@ public class DialogMigrateProfile {
                 
                 // update only once every half-second so we're not flooding the UI with updates
                 timer = new Timer(500, null);
+                timer.setInitialDelay(100);
                 final Timer finalTimer = timer;
                 timer.addActionListener(new ActionListener() {
                     @Override public void actionPerformed(ActionEvent arg0) {
@@ -791,9 +792,10 @@ public class DialogMigrateProfile {
                 // working with textbox text is thread safe
                 _operationLog.setText("");
                 
-                // only update the text box once very half second
+                // only update the text box once very half second, but make the first
+                // update after only 100ms
                 final long updateIntervalMs = 500;
-                long lastUpdateTimestampMs = System.currentTimeMillis();
+                long lastUpdateTimestampMs = System.currentTimeMillis() - 400;
                 StringBuffer opLogBuf = new StringBuffer();
                 
                 // only update the progress bar when we expect the visual value to change
