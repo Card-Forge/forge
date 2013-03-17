@@ -43,6 +43,11 @@
 #   cacheDir=/local/path/forge/cache
 #   cardPicsDir=
 
+# You may also specify custom folder names for each set, just in case you are 
+# using any uncommon picture storage folder structure. Specify 3-letter codes
+# from res/blockdata/setsdata.txt, an arrow (->) and the sub-folder name that
+# holds card images from that edition. Separate records by a vertical bar (|).
+#   cardPicsSubDirs=LEA->Alpha|ROE->Rise of Eldrazi
 
 
 # This is where Forge will save your personal data, such as your saved decks,
