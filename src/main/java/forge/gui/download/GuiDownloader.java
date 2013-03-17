@@ -306,7 +306,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 final File fileDest =  this.cards.get(this.card).getDestination();
                 final File base = fileDest.getParentFile();
 
-                //System.out.println(String.format("Downloading %s to %s", url, fileDest.getPath()));
                 try {
                     // test for folder existence
                     if (!base.exists() && !base.mkdir()) { // create folder if not found
@@ -404,6 +403,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             source = srcUrl;
             destination = destFile;
             //System.out.println(String.format("downloading %s to %s", srcUrl, destFile));
+            System.out.println(String.format("downloading %s", destFile));
         }
 
         public String getSource() {
