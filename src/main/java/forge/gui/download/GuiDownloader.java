@@ -225,7 +225,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         return tTime / Math.max(1, numNonzero);
     }
 
-    private void update(final int card) {
+    private void update(final int card, final File dest) {
 
         final class Worker implements Runnable {
             private final int card;
@@ -270,7 +270,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 }
 
                 GuiDownloader.this.barProgress.setString(sb.toString());
-                System.out.println(this.card + "/" + GuiDownloader.this.cards.size() + " - " + a);
+                System.out.println(this.card + "/" + GuiDownloader.this.cards.size() + " - " + dest);
             }
         }
         EventQueue.invokeLater(new Worker(card));
@@ -298,11 +298,12 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         for(Entry<String, String> kv : cards.entrySet()) {
             if( cancel )
                 break;
-            update(iCard++);
             
             String url = kv.getValue();
             final File fileDest = new File(kv.getKey());
             final File base = fileDest.getParentFile();
+
+            update(iCard++, fileDest);
 
             try {
                 // test for folder existence
@@ -347,9 +348,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 Log.error("GuiDownloader", "Sleep Error", e);
             }
         } // for
-        if ( !cancel )
-            update(cards.size());
-    
     }
 
     protected abstract Map<String, String> getNeededImages();
