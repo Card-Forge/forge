@@ -15,6 +15,7 @@ import forge.game.GameOutcome;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
@@ -119,9 +120,10 @@ public class ControlWinLose {
         }
 
         for (Player p : Singletons.getModel().getGame().getRegisteredPlayers()) {
-            if (!p.getName().equals(lastGame.getWinner().getName())) {
-                continue; // not a loser
+            if (!p.getLobbyPlayer().equals(lastGame.getWinner())) {
+                continue;
             }
+            // p is winner by this point
 
             // remove all the lost cards from owners' decks
             List<CardPrinted> losses = new ArrayList<CardPrinted>();
@@ -142,8 +144,8 @@ public class ControlWinLose {
                 }
             }
 
-            // offer to winner, if he is human
-            if (p.isHuman()) {
+            // offer to winner, if he is local human
+            if (p.getLobbyPlayer().getType() == PlayerType.HUMAN) {
                 List<CardPrinted> chosen = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
                 if (null != chosen) {
                     Deck d = match.getPlayersDeck(p.getLobbyPlayer());

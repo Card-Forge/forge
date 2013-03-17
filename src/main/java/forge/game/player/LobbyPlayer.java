@@ -65,10 +65,7 @@ public class LobbyPlayer implements IHasIcon {
         } else if (!name.equals(other.name)) {
             return false;
         }
-        if (type != other.type) {
-            return false;
-        }
-        return true;
+        return type == other.type;
     }
 
     public int getAvatarIndex() {
