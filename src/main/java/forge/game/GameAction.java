@@ -956,17 +956,6 @@ public class GameAction {
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
 
-        GameEndReason endGame = this.checkEndGameState(game); 
-        if ( endGame != null ) {
-            // Clear Simultaneous triggers at the end of the game
-            game.setGameOver(endGame);
-            game.getStack().clearSimultaneousStack();
-            if (!refreeze) {
-                game.getStack().unfreezeStack();
-            }
-            return;
-        }
-
         // do this twice, sometimes creatures/permanents will survive when they
         // shouldn't
         for (int q = 0; q < 9; q++) {
@@ -1098,22 +1087,36 @@ public class GameAction {
                     }
                     checkAgain = true;
                 }
-
             }
 
             if (game.getTriggerHandler().runWaitingTriggers(true)) {
                 checkAgain = true;
                 // Place triggers on stack
             }
+            
+            if (this.handleLegendRule()) {
+                checkAgain = true;
+            }
+
+            if (this.handlePlaneswalkerRule()) {
+                checkAgain = true;
+            }
 
             if (!checkAgain) {
                 break; // do not continue the loop
             }
-
         } // for q=0;q<2
 
-        this.handleLegendRule();
-        this.handlePlaneswalkerRule();
+        GameEndReason endGame = this.checkEndGameState(game); 
+        if ( endGame != null ) {
+            // Clear Simultaneous triggers at the end of the game
+            game.setGameOver(endGame);
+            game.getStack().clearSimultaneousStack();
+            if (!refreeze) {
+                game.getStack().unfreezeStack();
+            }
+            return;
+        }
 
         if (!refreeze) {
             game.getStack().unfreezeStack();
@@ -1125,10 +1128,11 @@ public class GameAction {
      * destroyPlaneswalkers.
      * </p>
      */
-    private void handlePlaneswalkerRule() {
+    private boolean handlePlaneswalkerRule() {
         // get all Planeswalkers
         final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
 
+        boolean recheck = false;
         Card c;
         for (int i = 0; i < list.size(); i++) {
             c = list.get(i);
@@ -1137,6 +1141,7 @@ public class GameAction {
                 moveToGraveyard(c);
                 // Play the Destroy sound
                 game.getEvents().post(new CardDestroyedEvent());
+                recheck = true;
             }
 
             final ArrayList<String> types = c.getType();
@@ -1151,9 +1156,11 @@ public class GameAction {
                     for (final Card crd : cl) {
                         moveToGraveyard(crd);
                     }
+                    recheck = true;
                 }
             }
         }
+        return recheck;
     }
 
     /**
@@ -1161,11 +1168,12 @@ public class GameAction {
      * destroyLegendaryCreatures.
      * </p>
      */
-    private void handleLegendRule() {
+    private boolean handleLegendRule() {
         final List<Card> a = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "Legendary");
         if (a.isEmpty() || game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-            return;
+            return false;
         }
+        boolean recheck = false;
 
         while (!a.isEmpty()) {
             List<Card> b = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(a.get(0).getName()));
@@ -1181,11 +1189,13 @@ public class GameAction {
                 for (int i = 0; i < b.size(); i++) {
                     sacrificeDestroy(b.get(i));
                 }
-
+                recheck = true;
                 // Play the Destroy sound
                 game.getEvents().post(new CardDestroyedEvent());
             }
         }
+        
+        return recheck;
     } // destroyLegendaryCreatures()
 
 
