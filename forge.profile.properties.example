@@ -21,6 +21,10 @@
 # appropriate.  For example, for the directory "<forge dir>/ local  ", use:
 #   xxxDir=./ local  /
 #
+# Also note that all backslashes in this file need to be escaped themselves with
+# a backslash.  For example: d:\\mtg-pics.  Forwards slashes work on all
+# platforms, including Windows, and do not need to be escaped: d:/mtg-pics.
+#
 # EXAMPLES
 # --------
 #
