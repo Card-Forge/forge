@@ -121,16 +121,6 @@ public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard
         return filters;
     }
 
-    /**
-     * A QuestRewardCardChooser ought to always be resolved to an actual card, hence no images.
-     * 
-     * @return an empty string
-     */
-    @Override
-    public String getImageKey() {
-        return "";
-    }
-    
     public abstract List<CardPrinted> getChoices();
 
 }

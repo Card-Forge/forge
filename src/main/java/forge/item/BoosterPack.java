@@ -20,7 +20,6 @@ package forge.item;
 
 import com.google.common.base.Function;
 
-import forge.ImageCache;
 import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.CardEdition;
@@ -36,11 +35,6 @@ public class BoosterPack extends OpenablePack {
 
     public BoosterPack(final String name0, final BoosterData boosterData) {
         super(name0, boosterData);
-    }
-
-    @Override
-    public final String getImageKey() {
-        return ImageCache.BOOSTER_PREFIX + this.contents.getEdition();
     }
 
     @Override

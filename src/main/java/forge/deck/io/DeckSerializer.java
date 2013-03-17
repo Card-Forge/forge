@@ -33,6 +33,7 @@ import javax.swing.filechooser.FileFilter;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.ImageCache;
 import forge.deck.Deck;
 import forge.item.CardPrinted;
 import forge.properties.NewConstants;
@@ -138,7 +139,8 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             for (final Entry<CardPrinted, Integer> card : d.getMain()) {
                 // System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
                 for (int i = card.getValue().intValue(); i > 0; --i ) {
-                    String url = NewConstants.URL_PIC_DOWNLOAD + card.getKey().getImageUrlPath(false);
+                    CardPrinted r = card.getKey();
+                    String url = NewConstants.URL_PIC_DOWNLOAD + ImageCache.getImageLocator(r, ImageCache.getImageName(r), true, true);
                     list.add(url);
                 }
             }

@@ -29,6 +29,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -278,9 +279,8 @@ public class MigrationSourceAnalyzer {
     
     private static String _oldCleanString(String in) {
         final StringBuffer out = new StringBuffer();
-        char c;
         for (int i = 0; i < in.length(); i++) {
-            c = in.charAt(i);
+            char c = in.charAt(i);
             if ((c == ' ') || (c == '-')) {
                 out.append('_');
             } else if (Character.isLetterOrDigit(c) || (c == '_')) {
@@ -299,27 +299,30 @@ public class MigrationSourceAnalyzer {
         if (StringUtils.isEmpty(urls)) { return; }
 
         int numPics = urls.split("\\\\").length;
-        for (int artIdx = 0; numPics > artIdx; ++artIdx) {
-            String filename = c.getImageKey(backFace, artIdx, false) + ".jpg";
-            _defaultPicNames.put(filename, filename);
-            
-            final String oldFilenameBase;
-            if (cardRules.getType().isPlane() || cardRules.getType().isPhenomenon()) {
-                oldFilenameBase = _oldCleanString(filename.replace(".jpg", ""));
-            } else {
-                oldFilenameBase = _oldCleanString(filename.replace(".full.jpg", ""));
-            }
-            
-            if (0 == artIdx) {
-                // remove trailing "1" from first art index
-                String oldFilename = oldFilenameBase.replaceAll("1$", "") + ".jpg";
-                _defaultPicOldNameToCurrentName.put(oldFilename, filename);
-            } else {
-                // offset art indices by one
-                String oldFilename = oldFilenameBase.replaceAll("[0-9]+$", String.valueOf(artIdx)) + ".jpg";
-                _defaultPicOldNameToCurrentName.put(oldFilename, filename);
-            }
+        if ( c.getArtIndex() >= numPics )
+            return;
+
+        String filename = ImageCache.getImageKey(c, backFace, false) + ".jpg";
+        _defaultPicNames.put(filename, filename);
+        
+        final String oldFilenameBase;
+        if (cardRules.getType().isPlane() || cardRules.getType().isPhenomenon()) {
+            oldFilenameBase = _oldCleanString(filename.replace(".jpg", ""));
+        } else {
+            oldFilenameBase = _oldCleanString(filename.replace(".full.jpg", ""));
         }
+        
+        int maxArtIdx = c.getRules().getEditionInfo(c.getEdition()).getCopiesCount();
+        if (1 == maxArtIdx) {
+            // remove trailing "1" from first art index
+            String oldFilename = oldFilenameBase.replaceAll("1$", "") + ".jpg";
+            _defaultPicOldNameToCurrentName.put(oldFilename, filename);
+        } else {
+            // offset art indices by one
+            String oldFilename = oldFilenameBase.replaceAll("[0-9]+$", String.valueOf(c.getArtIndex())) + ".jpg";
+            _defaultPicOldNameToCurrentName.put(oldFilename, filename);
+        }
+
     }
     
     private Map<String, String> _defaultPicNames;
@@ -329,12 +332,12 @@ public class MigrationSourceAnalyzer {
             _defaultPicNames = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
             _defaultPicOldNameToCurrentName = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
-            for (CardPrinted c : CardDb.instance().getUniqueCards()) {
+            for (CardPrinted c : CardDb.instance().getAllCards()) {
                 _addDefaultPicNames(c, false);
                 _addDefaultPicNames(c, true);
             }
             
-            for (CardPrinted c : CardDb.variants().getUniqueCards()) {
+            for (CardPrinted c : CardDb.variants().getAllCards()) {
                 _addDefaultPicNames(c, false);
                 _addDefaultPicNames(c, true);
             }
@@ -369,11 +372,11 @@ public class MigrationSourceAnalyzer {
     
     private static void _addSetCards(Map<String, String> cardFileNames, Iterable<CardPrinted> library, Predicate<CardPrinted> filter) {
         for (CardPrinted c : Iterables.filter(library, filter)) {
-            boolean hasBackFace = null != c.getRules().getPictureOtherSideUrl();
-            String filename = c.getImageKey(false, c.getArtIndex(), true) + ".jpg";
+            boolean hasBackFacePicture = null != c.getRules().getPictureOtherSideUrl();
+            String filename = ImageCache.getImageKey(c, false, true) + ".jpg";
             cardFileNames.put(filename, filename);
-            if (hasBackFace) {
-                filename = c.getImageKey(true, c.getArtIndex(), true) + ".jpg";
+            if (hasBackFacePicture) {
+                filename = ImageCache.getImageKey(c, true, true) + ".jpg";
                 cardFileNames.put(filename, filename);
             }
         }
@@ -402,11 +405,11 @@ public class MigrationSourceAnalyzer {
             };
 
             for (CardPrinted c : Iterables.filter(CardDb.variants().getAllCards(), predPlanes)) {
-                boolean hasBackFace = null != c.getRules().getPictureOtherSideUrl();
-                String baseName = c.getImageKey(false, c.getArtIndex(), true);
+                boolean hasBackFacePciture = null != c.getRules().getPictureOtherSideUrl();
+                String baseName = ImageCache.getImageKey(c,false, true);
                 _nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
-                if (hasBackFace) {
-                    baseName = c.getImageKey(true, c.getArtIndex(), true);
+                if (hasBackFacePciture) {
+                    baseName = ImageCache.getImageKey(c, true, true);
                     _nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
                 }
             }

@@ -27,6 +27,7 @@ import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardUtil;
 import forge.Color;
+import forge.ImageCache;
 import forge.card.CardCharacteristics;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
@@ -224,7 +225,8 @@ public class CardFactory {
         c.setCurSetCode(cp.getEdition());
         c.setRarity(cp.getRarity());
 
-        String originalPicture = cp.getImageKey();
+        // Would like to move this away from in-game entities
+        String originalPicture = ImageCache.getImageKey(cp);
         //System.out.println(c.getName() + " -> " + originalPicture);
         c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
@@ -236,7 +238,7 @@ public class CardFactory {
             }
             else if (c.isDoubleFaced() && cp instanceof CardPrinted) {
                 c.setState(CardCharacteristicName.Transformed);
-                c.setImageKey(((CardPrinted)cp).getImageKey(true));
+                c.setImageKey(ImageCache.getImageKey(cp, true));
             }
             else if (c.getRules().getSplitType() == CardSplitType.Split) {
                 c.setState(CardCharacteristicName.LeftSplit);

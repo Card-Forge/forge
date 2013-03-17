@@ -15,7 +15,7 @@ import forge.card.CardRules;
 import forge.game.player.Player;
 import forge.util.PredicateString;
 
-public interface IPaperCard {
+public interface IPaperCard extends InventoryItem {
 
     /**
      * Number of filters based on CardPrinted values.
@@ -155,7 +155,6 @@ public interface IPaperCard {
     public abstract boolean isToken();
     public abstract CardRules getRules();
     public abstract CardRarity getRarity();
-    public abstract String getImageKey();
 
     public abstract String getItemType();
 

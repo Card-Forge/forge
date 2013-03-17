@@ -29,11 +29,20 @@ import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.game.player.IHasIcon;
 import forge.gui.toolbox.FSkin;
+import forge.item.BoosterPack;
+import forge.item.CardPrinted;
+import forge.item.CardToken;
+import forge.item.FatPack;
 import forge.item.InventoryItem;
+import forge.item.PreconDeck;
+import forge.item.TournamentPack;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.NewConstants;
+import forge.util.Base64Coder;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -79,7 +88,7 @@ public class ImageCache {
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(InventoryItem ii, int width, int height) {
-        return scaleImage(ii.getImageKey(), width, height);
+        return scaleImage(getImageKey(ii), width, height);
     }
     
     /**
@@ -153,5 +162,106 @@ public class ImageCache {
             // should be when a card legitimately has no image
             return null;
         }
+    }
+    
+    public static String getImageKey(InventoryItem ii) {
+        return getImageKey(ii, false);
+    }
+    
+    // Inventory items don't have to know how a certain client should draw them. 
+    // That's why this method is not encapsulated and overloaded in the InventoryItem descendants
+    public static String getImageKey(InventoryItem ii, boolean altState) {
+        if ( ii instanceof CardPrinted )
+            return getImageKey((CardPrinted)ii, altState, true);
+        if ( ii instanceof TournamentPack )
+            return ImageCache.TOURNAMENTPACK_PREFIX + ((TournamentPack)ii).getEdition();
+        if ( ii instanceof BoosterPack )
+            return ImageCache.BOOSTER_PREFIX + ((BoosterPack)ii).getEdition();
+        if ( ii instanceof FatPack )
+            return ImageCache.FATPACK_PREFIX + ((FatPack)ii).getEdition();
+        if ( ii instanceof PreconDeck )
+            return ImageCache.PRECON_PREFIX + ((PreconDeck)ii).getImageFilename();
+        if ( ii instanceof CardToken ) 
+            return ImageCache.TOKEN_PREFIX + ((CardToken)ii).getImageFilename();
+        return null;
+    }
+
+    public static String getImageLocator(CardPrinted cp, String nameToUse, boolean includeSet, boolean isDownloadUrl) {
+        StringBuilder s = new StringBuilder();
+        
+        CardRules card = cp.getRules();
+        String edition = cp.getEdition();
+        s.append(ImageCache.toMWSFilename(nameToUse));
+        
+        final int cntPictures;
+        if (includeSet) {
+            cntPictures = card.getEditionInfo(edition).getCopiesCount();
+        } else {
+            // raise the art index limit to the maximum of the sets this card was printed in
+            int maxCntPictures = 1;
+            for (String set : card.getSets()) {
+                maxCntPictures = Math.max(maxCntPictures, card.getEditionInfo(set).getCopiesCount());
+            }
+            cntPictures = maxCntPictures;
+        }
+        
+        int artIdx = cp.getArtIndex();
+        if (cntPictures > 1 ) {
+            if ( cntPictures <= artIdx )
+                artIdx = Math.min(artIdx, cntPictures - 1);
+            s.append(artIdx + 1);
+        }
+        
+        // for whatever reason, MWS-named plane cards don't have the ".full" infix
+        if (!card.getType().isPlane() && !card.getType().isPhenomenon()) {
+            s.append(".full");
+        }
+        
+        final String fname;
+        if (isDownloadUrl) {
+            s.append(".jpg");
+            fname = Base64Coder.encodeString(s.toString(), true);
+        } else {
+            fname = s.toString();
+        }
+        
+        if (includeSet) {
+            return String.format("%s/%s", Singletons.getModel().getEditions().getCode2ByCode(cp.getEdition()), fname);
+        } else {
+            return fname;
+        }
+    }
+
+    public static String getImageName(CardPrinted cp) {
+        return CardSplitType.Split != cp.getRules().getSplitType() ? cp.getName() : cp.getRules().getMainPart().getName() + cp.getRules().getOtherPart().getName();
+    }
+
+    public static String getImageKey(CardPrinted cp, boolean backFace, boolean includeSet) {
+        final CardRules card = cp.getRules();
+        final String nameToUse;
+        if (backFace) {
+            if ( card.getSplitType() == CardSplitType.Transform ) 
+                nameToUse = card.getOtherPart().getName();
+            else 
+                return null;
+        } else {
+            nameToUse = getImageName(cp);
+        }
+    
+        return getImageLocator(cp, nameToUse, includeSet, false);
+    }
+
+    public static String toMWSFilename(String in) {
+        final StringBuffer out = new StringBuffer();
+        char c;
+        for (int i = 0; i < in.length(); i++) {
+            c = in.charAt(i);
+            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
+                out.append("");
+            } else {
+                out.append(c);
+            }
+        }
+        return out.toString();
     }
 }

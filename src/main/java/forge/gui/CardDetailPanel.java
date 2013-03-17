@@ -50,6 +50,8 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
 import forge.item.InventoryItemFromSet;
+import forge.item.OpenablePack;
+import forge.item.PreconDeck;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
@@ -148,13 +150,21 @@ public class CardDetailPanel extends FPanel {
 
         this.setCard(card);
     }
+    
+    public String getItemDescription(InventoryItemFromSet i) {
+        if( i instanceof OpenablePack )
+            return ((OpenablePack)i).getDescription();
+        if( i instanceof PreconDeck)
+            return ((PreconDeck) i).getDescription();
+        return i.getName(); 
+    }
 
     public final void setItem(InventoryItemFromSet item) {
         nameCostLabel.setText(item.getName());
         typeLabel.setVisible(false);
         powerToughnessLabel.setVisible(false);
         idLabel.setText(null);
-        cdArea.setText(item.getDescription());
+        cdArea.setText(getItemDescription(item));
         setBorder(GuiDisplayUtil.getBorder(null));
 
         String set = item.getEdition();

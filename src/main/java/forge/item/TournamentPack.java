@@ -21,7 +21,6 @@ import java.util.List;
 
 import com.google.common.base.Function;
 
-import forge.ImageCache;
 import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
@@ -40,11 +39,6 @@ public class TournamentPack extends OpenablePack {
 
     public TournamentPack(final String name0, final BoosterData boosterData) {
         super(name0, boosterData);
-    }
-
-    @Override
-    public final String getImageKey() {
-        return ImageCache.TOURNAMENTPACK_PREFIX + contents.getEdition();
     }
 
     public final boolean isStarterDeck() {

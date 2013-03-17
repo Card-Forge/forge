@@ -24,6 +24,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
 
+import forge.ImageCache;
+import forge.card.CardEdition;
+import forge.card.CardSplitType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.NewConstants;
@@ -40,16 +43,16 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
 
         for (final CardPrinted c : Iterables.concat(CardDb.instance().getAllCards(), CardDb.variants().getAllCards())) {
             final String setCode3 = c.getEdition();
-            if (StringUtils.isBlank(setCode3) || "???".equals(setCode3)) {
+            if (StringUtils.isBlank(setCode3) || CardEdition.UNKNOWN.getCode().equals(setCode3)) {
              // we don't want cards from unknown sets
                 continue;
             }
-            
-            addDLObject(c.getImageUrlPath(false), c.getImageKey(), downloads);
+            String url = ImageCache.getImageLocator(c, ImageCache.getImageName(c), true, true);
+            addDLObject(url, ImageCache.getImageKey(c), downloads);
 
-            String backFaceImage = c.getImageKey(true);
-            if (backFaceImage != null) {
-                addDLObject(c.getImageUrlPath(true), backFaceImage, downloads);
+            if ( c.getRules().getSplitType() == CardSplitType.Transform ) {
+                String url2 = ImageCache.getImageLocator(c, c.getRules().getOtherPart().getName(), true, true);
+                addDLObject(url2, ImageCache.getImageKey(c, true), downloads);
             }
         }
 

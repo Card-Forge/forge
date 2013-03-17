@@ -23,11 +23,6 @@ package forge.item;
  */
 public interface InventoryItemFromSet extends InventoryItem {
     /**
-     * The description to display for the item
-     */
-    String getDescription();
-
-    /**
      * An item belonging to a set should return its set as well.
      * 
      * @return the sets the

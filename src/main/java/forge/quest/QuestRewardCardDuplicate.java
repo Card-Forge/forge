@@ -36,16 +36,6 @@ public class QuestRewardCardDuplicate implements IQuestRewardCard {
     }
 
     /**
-     * This class is a dynamic list of cards, hence no images.
-     * 
-     * @return an empty string
-     */
-    @Override
-    public String getImageKey() {
-        return "";
-    }
-
-    /**
      * The item type.
      * 
      * @return item type

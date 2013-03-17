@@ -31,13 +31,6 @@ public interface InventoryItem {
     String getName();
 
     /**
-     * An inventory item has to provide a picture.
-     * 
-     * @return the image filename
-     */
-    String getImageKey();
-
-    /**
      * Return type as a string.
      * 
      * @return the type

@@ -24,6 +24,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import forge.ImageCache;
 import forge.card.CardRules;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -40,12 +41,12 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         ArrayList<DownloadObject> downloads = new ArrayList<DownloadObject>();
         Set<String> filenames = new HashSet<String>();
 
-        for (CardPrinted c : CardDb.instance().getUniqueCards()) {
+        for (CardPrinted c : CardDb.instance().getAllCards()) {
             addDLObject(c, false, downloads, filenames);
             addDLObject(c, true, downloads, filenames);
         }
 
-        for (CardPrinted c : CardDb.variants().getUniqueCards()) {
+        for (CardPrinted c : CardDb.variants().getAllCards()) {
             addDLObject(c, false, downloads, filenames);
             addDLObject(c, true, downloads, filenames);
         }
@@ -63,11 +64,10 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
             return;
         }
 
-        int artIdx = -1;
-        for (String url : urls.split("\\\\")) {
-            ++artIdx;
 
-            String filename = c.getImageKey(backFace, artIdx, false);
+        for (String url : urls.split("\\\\")) {
+
+            String filename = ImageCache.getImageKey(c, backFace, false);
             if (filenames.contains(filename)) {
                 continue;
             }

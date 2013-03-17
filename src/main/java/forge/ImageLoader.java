@@ -52,8 +52,8 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
         BufferedImage ret = _findFile(key, path, filename);
         
         // some S00/S2K cards are really part of 6ED/6E
-        if (null == ret && filename.startsWith("S2K") ) {
-            ret = _findFile(key, path, filename.replace("S2K", "6E"));
+        if (null == ret && filename.startsWith("S00") ) {
+            ret = _findFile(key, path, filename.replace("S00", "6ED"));
         }
 
         // try without set prefix

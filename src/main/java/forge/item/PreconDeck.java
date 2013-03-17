@@ -23,7 +23,6 @@ import java.util.Map;
 
 import com.google.common.base.Function;
 
-import forge.ImageCache;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.quest.SellRules;
@@ -38,6 +37,10 @@ public class PreconDeck implements InventoryItemFromSet {
 
     private final Deck deck;
     private final String imageFilename;
+    public final String getImageFilename() {
+        return imageFilename;
+    }
+
     private final String set;
     private final String description;
 
@@ -51,16 +54,6 @@ public class PreconDeck implements InventoryItemFromSet {
     @Override
     public String getName() {
         return this.deck.getName();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getImageFilename()
-     */
-    @Override
-    public String getImageKey() {
-        return ImageCache.PRECON_PREFIX + imageFilename;
     }
 
     /*
@@ -132,7 +125,6 @@ public class PreconDeck implements InventoryItemFromSet {
      *
      * @return the description
      */
-    @Override
     public final String getDescription() {
         return this.description;
     }

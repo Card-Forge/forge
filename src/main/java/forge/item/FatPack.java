@@ -23,7 +23,6 @@ import java.util.List;
 
 import com.google.common.base.Function;
 
-import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.FatPackData;
@@ -50,12 +49,6 @@ public class FatPack extends OpenablePack {
     public String getDescription() {
         return fpData.toString() + contents.toString();
     }
-
-    @Override
-    public final String getImageKey() {
-        return ImageCache.FATPACK_PREFIX + this.contents.getEdition();
-    }
-
 
     @Override
     public final String getItemType() {

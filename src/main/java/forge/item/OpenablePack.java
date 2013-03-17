@@ -47,7 +47,6 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         return this.name + " " + this.getItemType();
     }
 
-    @Override
     public String getDescription() {
         return contents.toString();
     }

@@ -24,13 +24,10 @@ import com.google.common.base.Function;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.CardInSet;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.card.CardSplitType;
 import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
-import forge.util.Base64Coder;
 
 
 /**
@@ -62,11 +59,6 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
     }
     
     @Override
-    public String getDescription() {
-        return name;
-    }
-
-    @Override
     public String getEdition() {
         return this.edition;
     }
@@ -82,6 +74,11 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
     }
 
     @Override
+    public boolean isToken() {
+        return false;
+    }
+
+    @Override
     public CardRules getRules() {
         return this.card;
     }
@@ -91,99 +88,14 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
         return this.rarity;
     }
 
-    private static String toMWSFilename(String in) {
-        final StringBuffer out = new StringBuffer();
-        char c;
-        for (int i = 0; i < in.length(); i++) {
-            c = in.charAt(i);
-            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
-                out.append("");
-            } else {
-                out.append(c);
-            }
-        }
-        return out.toString();
-    }    
 
-    private String getImageName() {
-        return CardSplitType.Split != card.getSplitType() ? name : card.getMainPart().getName() + card.getOtherPart().getName();
-    }
     
-    @Override
-    public String getImageKey() {
-        return getImageLocator(getImageName(), getArtIndex(), true, false);
-    }
     
-    public String getImageKey(boolean backFace) {
-        return getImageKey(backFace, getArtIndex(), true);
-    }
+//    @Override
+//    public String getImageKey() {
+//        return getImageLocator(getImageName(), getArtIndex(), true, false);
+//    }
     
-    public String getImageKey(boolean backFace, int artIdx, boolean includeSet) {
-        final String nameToUse;
-        if (backFace) {
-            if (null == card.getOtherPart()) {
-                return null;
-            }
-            switch (card.getSplitType()) {
-            case Transform: case Flip: case Licid:
-                break;
-            default:
-                return null;
-            }
-            nameToUse = card.getOtherPart().getName();
-        } else {
-            nameToUse = getImageName();
-        }
-
-        return getImageLocator(nameToUse, artIdx, includeSet, false);
-    }
-    
-    public String getImageUrlPath(boolean backFace) {
-        return getImageLocator(backFace ? card.getOtherPart().getName() : getImageName(), getArtIndex(), true, true);
-    }
-    
-    private String getImageLocator(String nameToUse, int artIdx, boolean includeSet, boolean base64encode) {
-        StringBuilder s = new StringBuilder();
-        
-        s.append(toMWSFilename(nameToUse));
-        
-        final int cntPictures;
-        if (includeSet) {
-            cntPictures = card.getEditionInfo(edition).getCopiesCount();
-        } else {
-            // raise the art index limit to the maximum of the sets this card was printed in
-            int maxCntPictures = 1;
-            for (String set : card.getSets()) {
-                CardInSet setInfo = card.getEditionInfo(set);
-                if (maxCntPictures < setInfo.getCopiesCount()) {
-                    maxCntPictures = setInfo.getCopiesCount();
-                }
-            }
-            cntPictures = maxCntPictures;
-        }
-        if (cntPictures > 1  && cntPictures > artIdx) {
-            s.append(artIdx + 1);
-        }
-        
-        // for whatever reason, MWS-named plane cards don't have the ".full" infix
-        if (!card.getType().isPlane() && !card.getType().isPhenomenon()) {
-            s.append(".full");
-        }
-        
-        final String fname;
-        if (base64encode) {
-            s.append(".jpg");
-            fname = Base64Coder.encodeString(s.toString(), true);
-        } else {
-            fname = s.toString();
-        }
-        
-        if (includeSet) {
-            return String.format("%s/%s", Singletons.getModel().getEditions().getCode2ByCode(edition), fname);
-        } else {
-            return fname;
-        }
-    }
     
     @Override
     public String getItemType() {
@@ -352,10 +264,5 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
         }
         // TODO compare sets properly
         return this.edition.compareTo(o.getEdition());
-    }
-
-    @Override
-    public boolean isToken() {
-        return false;
     }
 }

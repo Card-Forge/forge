@@ -33,6 +33,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.views.VAntes;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 import forge.properties.ForgePreferences;
@@ -51,21 +52,24 @@ public class GameNew {
     private static void preparePlayerLibrary(Player player, final ZoneType zoneType, CardPool secion, boolean canRandomFoil, Random generator) {
         PlayerZone library = player.getZone(zoneType);
         for (final Entry<CardPrinted, Integer> stackOfCards : secion) {
-            final CardPrinted cardPrinted = stackOfCards.getKey();
+            final CardPrinted cp = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
 
-                final Card card = cardPrinted.toForgeCard(player);
-
+                CardPrinted cpi = cp;
                 // apply random pictures for cards
                 if (preferences.getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
-                    final int cntVariants = cardPrinted.getRules().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
+                    final int cntVariants = cp.getRules().getEditionInfo(cp.getEdition()).getCopiesCount();
                     if (cntVariants > 1) {
-                        card.setImageKey(cardPrinted.getImageKey(false, generator.nextInt(cntVariants), true));
+                        cpi = CardDb.instance().getCard(cp.getName(), cp.getEdition(), generator.nextInt(cntVariants));
+                        if ( cp.isFoil() )
+                            cpi = CardPrinted.makeFoiled(cpi);
                     }
                 }
+
+                final Card card = cpi.toForgeCard(player);
                 
                 // Assign random foiling on approximately 1:20 cards
-                if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
+                if (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
                     final int iFoil = generator.nextInt(9) + 1;
                     card.setFoil(iFoil);
                 }
