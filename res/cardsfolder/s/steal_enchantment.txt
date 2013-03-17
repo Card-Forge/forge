@@ -1,9 +1,9 @@
 Name:Steal Enchantment
 ManaCost:U U
 Types:Enchantment Aura
-Text:You control enchanted enchantment.
 K:Enchant enchantment
 A:SP$ Attach | Cost$ U U | ValidTgts$ Enchantment | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Enchantment.EnchantedBy | GainControl$ You | Description$ You control enchanted enchantment.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steal_enchantment.jpg
 Oracle:Enchant enchantment\nYou control enchanted enchantment.

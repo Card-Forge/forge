@@ -1,9 +1,9 @@
 Name:Take Possession
 ManaCost:5 U U
 Types:Enchantment Aura
-Text:You control enchanted permanent.
 K:Split second
 K:Enchant permanent
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
 A:SP$ Attach | Cost$ 5 U U | ValidTgts$ Permanent | AILogic$ GainControl
 SVar:PlayMain1:TRUE
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136199.jpg

@@ -137,6 +137,10 @@ public class StaticAbility {
             return 0;
         }
 
+        if (this.params.containsKey("GainControl")) {
+            return 2;
+        }
+
         if (this.params.containsKey("AddType") || this.params.containsKey("RemoveType")
                 || this.params.containsKey("RemoveCardType") || this.params.containsKey("RemoveSubType")
                 || this.params.containsKey("RemoveSuperType")) {

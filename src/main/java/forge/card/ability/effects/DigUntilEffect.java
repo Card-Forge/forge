@@ -131,7 +131,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     while (itr.hasNext()) {
                         final Card c = itr.next();
                         if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
-                            c.addController(sa.getSourceCard());
+                            c.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
                             Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(foundDest), c);
                         } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
                             //Don't do anything

@@ -28,7 +28,6 @@ import forge.deck.Deck;
 import forge.game.GameFormat;
 import forge.game.event.Event;
 import forge.game.event.MulliganEvent;
-import forge.game.player.PlayerType;
 import forge.item.CardPrinted;
 import forge.item.PreconDeck;
 import forge.properties.NewConstants;
@@ -445,7 +444,8 @@ public class QuestController {
         if ( ev instanceof MulliganEvent ) {
             MulliganEvent mev = (MulliganEvent)ev;
             // First mulligan is free
-            if (mev.player.getType() == PlayerType.HUMAN && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() == 0) {
+            if (mev.player.getLobbyPlayer() == Singletons.getControl().getLobby().getQuestPlayer() 
+                    && getAssets().hasItem(QuestItemType.SLEIGHT) && mev.player.getStats().getMulliganCount() == 0) {
                 mev.player.drawCard();
             }
         }

@@ -29,6 +29,7 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
+import forge.card.ability.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
@@ -142,30 +143,17 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
                 }
 
-                final List<Card> les = c.getOwner().getOpponent().getCardsIn(ZoneType.Battlefield, "Land Equilibrium");
-                final Card lesLand = c;
-                if (les.size() > 0) {
-                    final Card source = les.get(0);
-                    final SpellAbility ability = new Ability(source, ManaCost.NO_COST) {
-                        @Override
-                        public void resolve() {
-                            final List<Card> lands = lesLand.getOwner().getLandsInPlay();
-                            lesLand.getOwner().sacrificePermanent(source.getName() + " - Select a land to sacrifice",
-                                    lands);
+
+                for( Player opp : c.getOwner().getOpponents())
+                    for( Card le : opp.getCardsIn(ZoneType.Battlefield, "Land Equilibrium") ) {
+                        final List<Card> pLands = c.getOwner().getLandsInPlay();
+                        final List<Card> oLands = opp.getLandsInPlay();
+                        
+                        if (oLands.size() <= (pLands.size() - 1)) {
+                            SpellAbility abSac = AbilityFactory.getAbility(le.getSVar("SacLand"), le);
+                            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(abSac);
                         }
-                    };
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(source).append(" - ");
-                    sb.append(tisLand.getController()).append(" sacrifices a land.");
-                    ability.setStackDescription(sb.toString());
-                    final List<Card> pLands = lesLand.getOwner().getLandsInPlay();
-                    final List<Card> oLands = lesLand.getOwner().getOpponent().getLandsInPlay();
-                    // (pLands - 1) because this land is in play, and the
-                    // ability is before it is in play
-                    if (oLands.size() <= (pLands.size() - 1)) {
-                        Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
                     }
-                }
             } // isLand()
         }
 

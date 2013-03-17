@@ -13,7 +13,6 @@ import com.google.common.base.Predicates;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;

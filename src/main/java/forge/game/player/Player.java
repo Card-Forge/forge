@@ -1233,16 +1233,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return this.drawCards(1);
     }
 
-
-    /**
-     * <p>
-     * dredge.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public abstract boolean dredge();
-
     /**
      * 
      * TODO Write javadoc for this method.
@@ -1287,8 +1277,17 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         for (int i = 0; i < n; i++) {
     
             // TODO: multiple replacements need to be selected by the controller
-            if (!this.getDredge().isEmpty()) {
-                if (this.dredge()) {
+            List<Card> dredgers = this.getDredge();
+            if (!dredgers.isEmpty()) {
+                Card toDredge = getController().chooseCardToDredge(dredgers);
+                int dredgeNumber = toDredge == null ? Integer.MAX_VALUE : getDredgeNumber(toDredge);
+                if ( dredgeNumber <= getZone(ZoneType.Library).size()) {
+                    game.getAction().moveToHand(toDredge);
+
+                    for (int iD = 0; iD < dredgeNumber; iD++) {
+                        final Card c2 = getZone(ZoneType.Library).get(0);
+                        game.getAction().moveToGraveyard(c2);
+                    }
                     continue;
                 }
             }
@@ -1687,18 +1686,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return list;
     }
 
-    /**
-     * <p>
-     * discardRandom.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a List<Card> of cards discarded
-     */
-    public final List<Card> discardRandom(final SpellAbility sa) {
-        return this.discardRandom(1, sa);
-    }
 
     /**
      * <p>
@@ -1862,7 +1849,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public final void playLand(final Card land) {
         if (this.canPlayLand(land)) {
-            land.addController(this);
+            land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);
             CardFactoryUtil.playLandEffects(land);
             this.numLandsPlayed++;
@@ -1910,9 +1897,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Dev Mode
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)
-                && this.isHuman()
-                && Preferences.DEV_MODE) {
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND) && this.getType() == PlayerType.HUMAN && Preferences.DEV_MODE) {
             return true;
         }
 
@@ -2139,19 +2124,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final void resetAttackersDeclaredThisTurn() {
         this.attackersDeclaredThisTurn = 0;
     }
-
-    // //////////////////////////////
-    /**
-     * <p>
-     * sacrificePermanent.
-     * </p>
-     * 
-     * @param prompt
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a {@link forge.CardList} object.
-     */
-    public abstract void sacrificePermanent(String prompt, List<Card> choices);
 
     // Game win/loss
 

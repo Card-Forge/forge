@@ -149,11 +149,11 @@ public class CounterEffect extends SpellAbilityEffect {
             if (tgtSA instanceof SpellPermanent) {
                 Card c = tgtSA.getSourceCard();
                 System.out.println(c + " is SpellPermanent");
-                c.addController(srcSA.getActivatingPlayer());
+                c.setController(srcSA.getActivatingPlayer(), 0);
                 Singletons.getModel().getGame().getAction().moveToPlay(c, srcSA.getActivatingPlayer());
             } else {
                 Card c = Singletons.getModel().getGame().getAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
-                c.addController(srcSA.getActivatingPlayer());
+                c.setController(srcSA.getActivatingPlayer(), 0);
             }
         } else if (destination.equals("BottomOfLibrary")) {
             Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());

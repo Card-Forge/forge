@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Enchantment Aura
 K:Enchant artifact creature
 A:SP$ Attach | Cost$ 1 U U | ValidTgts$ Creature.Artifact | AILogic$ GainControl | SpellDescription$ You control enchanted artifact creature.
-SVar:PlayMain1:TRUE
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/domineer.jpg
 Oracle:Enchant artifact creature\nYou control enchanted artifact creature.
 SetInfo:MRD Uncommon

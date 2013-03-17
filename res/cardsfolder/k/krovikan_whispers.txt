@@ -1,10 +1,10 @@
 Name:Krovikan Whispers
 ManaCost:3 U
 Types:Enchantment Aura
-Text:You control enchanted creature.
 K:Enchant creature
 K:Cumulative upkeep:UB
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLoseLife | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardCounters.AGE/Times.2

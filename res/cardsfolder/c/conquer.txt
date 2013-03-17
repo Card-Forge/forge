@@ -1,9 +1,9 @@
 Name:Conquer
 ManaCost:3 R R
 Types:Enchantment Aura
-Text:You control enchanted land.
 K:Enchant land
 A:SP$ Attach | Cost$ 3 R R | ValidTgts$ Land | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Land.EnchantedBy | GainControl$ You | Description$ You control enchanted land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conquer.jpg
 Oracle:Enchant land\nYou control enchanted land.
 SetInfo:ICE Uncommon

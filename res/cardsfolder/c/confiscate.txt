@@ -1,10 +1,9 @@
 Name:Confiscate
 ManaCost:4 U U
 Types:Enchantment Aura
-Text:You control enchanted permanent.
 K:Enchant permanent
 A:SP$ Attach | Cost$ 4 U U | ValidTgts$ Permanent | AILogic$ GainControl
-SVar:PlayMain1:TRUE
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/confiscate.jpg
 Oracle:Enchant permanent (Target a permanent as you cast this. This card enters the battlefield attached to that permanent.)\nYou control enchanted permanent.
 SetInfo:8ED Uncommon

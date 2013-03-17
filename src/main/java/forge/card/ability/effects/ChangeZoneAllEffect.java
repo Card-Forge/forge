@@ -81,7 +81,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("GainControl")) {
-                c.addController(sa.getSourceCard());
+                c.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
                 Singletons.getModel().getGame().getAction().moveToPlay(c, sa.getActivatingPlayer());
             } else {
                 final Card movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c, libraryPos);

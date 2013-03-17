@@ -1,10 +1,9 @@
 Name:Persuasion
 ManaCost:3 U U
 Types:Enchantment Aura
-Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ GainControl
-SVar:PlayMain1:TRUE
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/persuasion.jpg
 Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nYou control enchanted creature.
 SetInfo:ODY Rare

@@ -255,4 +255,18 @@ public class PlayerControllerAi extends PlayerController {
         return true; // AI does not know what will happen next (another clash or that would become his topdeck)
     }
 
+    @Override
+    public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min) {
+        boolean isTargetFriendly = !p.isOpponentOf(getPlayer());
+        
+        return isTargetFriendly
+               ? ComputerUtil.getCardsToDiscardFromFriend(player, p, sa, validCards, min)
+               : ComputerUtil.getCardsToDiscardFromOpponent(player, p, sa, validCards, min);
+    }
+
+    @Override
+    public Card chooseCardToDredge(List<Card> dredgers) {
+        return brains.chooseCardToDredge(dredgers);
+    }
+
 }

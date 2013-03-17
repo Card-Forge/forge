@@ -1,9 +1,9 @@
 Name:Mark of the Oni
 ManaCost:2 B
 Types:Enchantment Aura
-Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Demon.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no Demons, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:PlayMain1:TRUE

@@ -977,9 +977,18 @@ public class GameAction {
 
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
+            
+            for (Player p : game.getPlayers()) {
+                for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
+                    if (!c.getController().equals(p)) {
+                        controllerChangeZoneCorrection(c);
+                        c.runChangeControllerCommands();
+                        checkAgain = true;
+                    }
+                }
+            }
 
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-
                 if (c.isEquipped()) {
                     final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
                     for (final Card equipment : equipments) {
@@ -989,7 +998,6 @@ public class GameAction {
                         }
                     }
                 } // if isEquipped()
-
 
                 if (c.isEquipping()) {
                     final Card equippedCreature = c.getEquipping().get(0);
@@ -1091,7 +1099,7 @@ public class GameAction {
                     checkAgain = true;
                 }
 
-            } // while it.hasNext()
+            }
 
             if (game.getTriggerHandler().runWaitingTriggers(true)) {
                 checkAgain = true;

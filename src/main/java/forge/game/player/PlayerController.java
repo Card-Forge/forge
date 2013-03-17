@@ -108,4 +108,8 @@ public abstract class PlayerController {
     public abstract void reveal(String string, List<Card> cards, ZoneType zone, Player owner);
     public abstract ImmutablePair<List<Card>, List<Card>> arrangeForScry(List<Card> topN);
     public abstract boolean willPutCardOnTop(Card c);
+    
+    /** p = target player, validCards - possible discards, min cards to discard */
+    public abstract List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min);
+    public abstract Card chooseCardToDredge(List<Card> dredgers);
 }

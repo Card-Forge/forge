@@ -184,6 +184,11 @@ public class StaticEffects {
         // modify the affected card
         for (int i = 0; i < affectedCards.size(); i++) {
             final Card affectedCard = affectedCards.get(i);
+            
+            // Gain control
+            if (params.containsKey("GainControl")) {
+                affectedCard.removeTempController(se.getTimestamp());
+            }
 
             // remove set P/T
             if (!params.containsKey("CharacteristicDefining") && setPT) {

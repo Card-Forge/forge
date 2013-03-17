@@ -317,6 +317,11 @@ public class StaticAbilityContinuous {
         // start modifying the cards
         for (int i = 0; i < affectedCards.size(); i++) {
             final Card affectedCard = affectedCards.get(i);
+            
+            // Gain control
+            if (params.containsKey("GainControl")) {
+                affectedCard.addTempController(hostCard.getController(), hostCard.getTimestamp());
+            }
 
             // set P/T
             if (params.containsKey("CharacteristicDefining")) {

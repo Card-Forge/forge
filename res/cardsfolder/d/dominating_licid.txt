@@ -16,9 +16,9 @@ Name:Dominating Licid
 ManaCost:1 U U
 Colors:blue
 Types:Enchantment Aura
-Text:You control enchanted creature.
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 A:AB$ SetState | Cost$ U | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominating_licid.jpg

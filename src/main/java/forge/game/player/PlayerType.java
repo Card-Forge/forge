@@ -23,10 +23,7 @@ package forge.game.player;
  * @author jendave
  */
 public enum PlayerType {
-
-    /** The HUMAN. */
     HUMAN,
-
-    /** The COMPUTER. */
-    COMPUTER
+    COMPUTER, 
+    REMOTE
 }
