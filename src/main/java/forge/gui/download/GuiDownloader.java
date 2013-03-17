@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
@@ -226,14 +227,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     }
 
     private void update(final int card, final File dest) {
-
-        final class Worker implements Runnable {
-            private final int card;
-
-            Worker(final int card) {
-                this.card = card;
-            }
-
+        EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 GuiDownloader.this.fireStateChanged();
@@ -242,10 +236,10 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
                 final int a = GuiDownloader.this.getAverageTimePerObject();
 
-                if (this.card != GuiDownloader.this.cards.size()) {
-                    sb.append(this.card + "/" + GuiDownloader.this.cards.size() + " - ");
+                if (card != GuiDownloader.this.cards.size()) {
+                    sb.append(card + "/" + GuiDownloader.this.cards.size() + " - ");
 
-                    long t2Go = (GuiDownloader.this.cards.size() - this.card) * a;
+                    long t2Go = (GuiDownloader.this.cards.size() - card) * a;
 
                     if (t2Go > 3600000) {
                         sb.append(String.format("%02d:", t2Go / 3600000));
@@ -259,10 +253,9 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     }
                     
                     sb.append(String.format("%02d remaining.", t2Go / 1000));
-                    
                 } else {
                     sb.append(String.format("%d of %d items finished! Please close!",
-                            this.card, GuiDownloader.this.cards.size()));
+                            card, GuiDownloader.this.cards.size()));
                     btnStart.setText("OK");
                     btnStart.addActionListener(actOK);
                     btnStart.setEnabled(true);
@@ -270,12 +263,12 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 }
 
                 GuiDownloader.this.barProgress.setString(sb.toString());
-                System.out.println((this.card + 1) + "/" + GuiDownloader.this.cards.size() + " - " + dest);
+                System.out.println(card + "/" + GuiDownloader.this.cards.size() + " - " + dest);
             }
-        }
-        EventQueue.invokeLater(new Worker(card));
+        });
     }
 
+    @Override
     public final void run() {
         final Random r = MyRandom.getRandom();
         
@@ -298,13 +291,13 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         for(Entry<String, String> kv : cards.entrySet()) {
             if( cancel )
                 break;
-            
+
             String url = kv.getValue();
             final File fileDest = new File(kv.getKey());
             final File base = fileDest.getParentFile();
 
-            update(iCard++, fileDest);
-
+            ReadableByteChannel rbc = null;
+            FileOutputStream    fos = null;
             try {
                 // test for folder existence
                 if (!base.exists() && !base.mkdir()) { // create folder if not found
@@ -323,13 +316,9 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     continue;
                 }
 
-                ReadableByteChannel rbc = Channels.newChannel(conn.getInputStream());
-                FileOutputStream fos = new FileOutputStream(fileDest);
+                rbc = Channels.newChannel(conn.getInputStream());
+                fos = new FileOutputStream(fileDest);
                 fos.getChannel().transferFrom(rbc, 0, 1 << 24);
-
-                fos.flush();
-                fos.close();
-                rbc.close();
             } catch (final ConnectException ce) {
                 System.out.println("Connection refused for url: " + url);
             } catch (final MalformedURLException mURLe) {
@@ -339,8 +328,17 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 System.out.println(String.format(formatStr, fileDest.getName(), url, fnfe.getMessage()));
             } catch (final Exception ex) {
                 Log.error("LQ Pictures", "Error downloading pictures", ex);
+            } finally {
+                if (null != rbc) {
+                    try { rbc.close(); } catch (IOException e) { System.out.println("error closing input stream"); }
+                }
+                if (null != fos) {
+                    try { fos.close(); } catch (IOException e) { System.out.println("error closing output stream"); }
+                }
             }
 
+            update(++iCard, fileDest);
+            
             // throttle to reduce load on the server
             try {
                 Thread.sleep(r.nextInt(50) + 50);
