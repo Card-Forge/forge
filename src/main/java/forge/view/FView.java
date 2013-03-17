@@ -151,9 +151,14 @@ public enum FView {
             for (String resDir : Lists.newArrayList("decks", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
                 resDirs.add(new File("res", resDir));
             }
+
+	    final Set<File> doNotDeleteDirs = new HashSet<File>();
+            for (String dir : Lists.newArrayList("decks", "decks/constructed", "decks/draft", "decks/plane", "decks/scheme", "decks/sealed", "gauntlet", "layouts", "pics", "preferences")) {
+                doNotDeleteDirs.add(new File("res", dir));
+            }
             
             // if we have any data to migrate, pop up the migration dialog
-            if (_addRemainingFiles(null, resDirs, profileDirs)) {
+            if (_addRemainingFiles(null, resDirs, profileDirs, doNotDeleteDirs)) {
                 new DialogMigrateProfile("res", new Runnable() {
                     @Override public void run() {
                         // remove known cruft files, yes this is ugly, but it's also temporary
@@ -163,7 +168,7 @@ public enum FView {
                         
                         // assemble a list of remaining files.
                         final List<File> remainingFiles = new LinkedList<File>();
-                        _addRemainingFiles(remainingFiles, resDirs, profileDirs);
+                        _addRemainingFiles(remainingFiles, resDirs, profileDirs, doNotDeleteDirs);
 
                         // if any files remain, display them and make clear that they should be moved or
                         // deleted manually or the user will continue to be prompted for migration
@@ -220,7 +225,7 @@ public enum FView {
     // been added to remainingFiles (or would have been added if remainingFiles is null)
     // directories listed in profileDirs will not be searched
     // removes empty directories to reduce tree conflicts
-    private static boolean _addRemainingFiles(List<File> remainingFiles, List<File> dirRoots, Set<File> profileDirs) {
+    private static boolean _addRemainingFiles(List<File> remainingFiles, List<File> dirRoots, Set<File> profileDirs, Set<File> doNotDeleteDirs) {
         Deque<File> stack = new LinkedList<File>(dirRoots);
 	Set<File> seenDirs = new HashSet<File>();
         boolean ret = false;
@@ -234,7 +239,7 @@ public enum FView {
             
             if (seenDirs.contains(cur)) {
                 cur = stack.pop();
-                if (cur.exists()) {
+                if (cur.exists() && !doNotDeleteDirs.contains(cur)) {
                     // remove empty dir (will fail if not empty)
                     cur.delete();
                 }
