@@ -6,7 +6,37 @@ Forge Beta: 03-##-2013 ver 1.3.11
 
 Release Notes:
 
+User data migration
+-------------------
+User data, like decks, saved gauntlets, and card pictures, is now stored in separate directories from the program data.  When this version of Forge is first run, it will scan the program directory for all user data and automatically migrate all the files to their new homes.  There are three defined user data directores: userDir, cacheDir, and cardPicsDir, and their locations depend on the standard paths for your operating system:
 
+    Windows:
+        userDir=%APPDATA%/Forge/
+        cacheDir=%LOCALAPPDATA%/Forge/Cache/ (or %APPDATA%/Forge/Cache/ for windows versions before the local/roaming directory split)
+    OSX:
+        userDir=$HOME/Library/Application Support/Forge/
+        cacheDir=$HOME/Library/Caches/Forge/
+    Linux:
+        userDir=$HOME/.forge/
+        cacheDir=$HOME/.cache/forge/
+
+cardPicsDir is defined as <cacheDir>/pics/cards/ by default.  If you wish to use a non-default directory, please see the forge.profile.preferences.example file located in the Forge installation directory root.  You can use this file to, for example, share the card pics directory with another program, such as Magic Workstation.
+
+For reference, here is the full list of moved directories:
+
+Old location      New location
+----------------  ----------------------
+res/decks/        <userDir>/decks/
+res/gauntlet/     <userDir>/gauntlet/
+res/layouts/      <userDir>/preferences/
+res/preferences/  <userDir>/preferences/
+res/quest/data/   <userDir>/quest/saves/
+res/pics/         <cacheDir>/pics/
+
+
+New Import Data dialog
+------------------------
+The Import Pictures dialog, accessed via the Content Downloaders submenu, has received an overhaul and has been reincarnated as the Import Data dialog.  You may recognize it from the automatic data migration procedure if you had any data to migrate when this version was first started.  Instead of just importing pictures from a previous version of Forge, it can now import any kind of Forge data whatsoever.  If you have a directory full of deck files, you can use the Import Data dialog to copy or move them to the appropriate directory.  If you have just downloaded a torrent of high-quality pics for a particular set, use the Import Data dialog to get them to the proper place.  The dialog give you a full listing of all file copy/move operations, so you can see what will happen before you click 'Start Import'.
 
 
 New Cards:

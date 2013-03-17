@@ -172,9 +172,9 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     private void readyToStart() {
         if (this.cards.size() == 0) {
             barProgress.setString("All items have been downloaded.");
-            btnStart.setVisible(true);
             btnStart.setText("OK");
             btnStart.addActionListener(actOK);
+            btnStart.setVisible(true);
         }
         else {
             barProgress.setMaximum(this.cards.size());
@@ -201,7 +201,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
         // Kill overlay
         SOverlayUtils.hideOverlay();
-        FOverlay.SINGLETON_INSTANCE.getPanel().removeAll();
     }
 
     protected final int getAverageTimePerObject() {
@@ -268,6 +267,10 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 } else {
                     sb.append(String.format("%d of %d items finished! Please close!",
                             this.card, GuiDownloader.this.cards.size()));
+                    btnStart.setText("OK");
+                    btnStart.addActionListener(actOK);
+                    btnStart.setEnabled(true);
+                    btnStart.requestFocusInWindow();
                 }
 
                 GuiDownloader.this.barProgress.setString(sb.toString());
@@ -403,7 +406,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             source = srcUrl;
             destination = destFile;
             //System.out.println(String.format("downloading %s to %s", srcUrl, destFile));
-            System.out.println(String.format("downloading %s", destFile));
+            System.out.println(String.format("Preparing to download %s", destFile));
         }
 
         public String getSource() {
