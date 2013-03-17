@@ -82,10 +82,12 @@ public class CardStorageReader {
      *            if true, attempts to load cards from a zip file, if one
      *            exists.
      */
-    public CardStorageReader(final File theCardsFolder, final boolean useZip) {
+    public CardStorageReader(String cardDataDir, final boolean useZip) {
 
         // These read data for lightweight classes.
         this.rulesReader = new CardRulesReader();
+        
+        File theCardsFolder = new File(cardDataDir);
 
         if (!theCardsFolder.exists()) {
             throw new RuntimeException("CardReader : constructor error -- file not found -- filename is "

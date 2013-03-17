@@ -43,8 +43,8 @@ import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
@@ -59,8 +59,8 @@ import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GameActionUtil;
 import forge.game.GlobalRuleChange;
-import forge.game.event.CounterAddedEvent;
 import forge.game.event.CardEquippedEvent;
+import forge.game.event.CounterAddedEvent;
 import forge.game.event.CounterRemovedEvent;
 import forge.game.event.SetTappedEvent;
 import forge.game.phase.Combat;
@@ -189,7 +189,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int semiPermanentAttackBoost = 0;
     private int semiPermanentDefenseBoost = 0;
 
-    private int randomPicture = 0;
     private int xManaCostPaid = 0;
 
     private int multiKickerMagnitude = 0;
@@ -255,9 +254,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.characteristicsMap.put(CardCharacteristicName.FaceDown, CardUtil.getFaceDownCharacteristic());
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
     public void refreshUniqueNumber() {
         this.setUniqueNumber(Card.nextUniqueNumber++);
     }
@@ -4541,29 +4537,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * Setter for the field <code>randomPicture</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setRandomPicture(final int n) {
-        this.randomPicture = n;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>randomPicture</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getRandomPicture() {
-        return this.randomPicture;
-    }
-
-    /**
-     * <p>
      * addMultiKickerMagnitude.
      * </p>
      * 
@@ -8495,27 +8468,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         return CardDb.instance().getCard(this.getName()).getEdition();
     }
 
-    /**
-     * <p>
-     * setImageFilename.
-     * </p>
-     * 
-     * @param iFN
-     *            a {@link java.lang.String} object.
-     */
-    public final void setImageFilename(final String iFN) {
-        this.getCharacteristics().setImageFilename(iFN);
+    public final void setImageKey(final String iFN) {
+        this.getCharacteristics().setImageKey(iFN);
     }
 
-    /**
-     * <p>
-     * getImageFilename.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getImageFilename() {
-        return this.getCharacteristics().getImageFilename();
+    public final String getImageKey() {
+        return this.getCharacteristics().getImageKey();
     }
 
     /**

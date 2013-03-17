@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 import forge.deck.Deck;
+import forge.game.player.IHasIcon;
 import forge.item.InventoryItem;
 
 /**
@@ -32,177 +33,74 @@ import forge.item.InventoryItem;
  * MODEL - A basic event instance in Quest mode. Can be extended for use in
  * unique event types: battles, quests, and others.
  */
-public abstract class QuestEvent {
+public abstract class QuestEvent implements IHasIcon {
     // Default vals if none provided in the event file.
-    /** The event deck. */
     private Deck eventDeck = null;
-
-    /** The title. */
     private String title = "Mystery Event";
-
-    /** The description. */
     private String description = "";
-
-    /** The difficulty. */
     private String difficulty = "Medium";
-
-    /** Filename of the icon for this event. */
-    private String iconFilename = "unknown";
-
-    /** The name. */
+    private String imageKey = "";
     private String name = "Noname";
-
-    /** The card reward. */
     private String cardReward = null;
-
-    /** The card reward list. */
     private List<InventoryItem> cardRewardList = null;
 
-    /**
-     * <p>
-     * getTitle.
-     * </p>
-     * 
-     * @return a {@link java.lang.String}.
-     */
     public final String getTitle() {
         return this.title;
     }
 
     /**
-     * <p>
-     * getOpponent.
      * Returns null for standard quest events, may return something different for challenges.
-     * </p>
-     * 
-     * @return a {@link java.lang.String}.
      */
     public String getOpponent() {
         return null;
     }
 
-    /**
-     * <p>
-     * getDifficulty.
-     * </p>
-     * 
-     * @return a {@link java.lang.String}.
-     */
     public final String getDifficulty() {
         return this.difficulty;
     }
 
-    /**
-     * <p>
-     * getDescription.
-     * </p>
-     * 
-     * @return a {@link java.lang.String}.
-     */
     public final String getDescription() {
         return this.description;
     }
 
-    /**
-     * <p>
-     * getEventDeck.
-     * </p>
-     * 
-     * @return {@link forge.deck.Deck}
-     */
     public final Deck getEventDeck() {
         return this.eventDeck;
     }
 
-    /**
-     * <p>
-     * getIconFilename.
-     * </p>
-     * 
-     * @return a {@link java.lang.String}.
-     */
-    public final String getIconFilename() {
-        return this.iconFilename;
+    @Override
+    public final String getIconImageKey() {
+        return this.imageKey;
     }
 
-    /**
-     * <p>
-     * getName.
-     * </p>
-     * 
-     * @return a {@link java.lang.String}.
-     */
     public final String getName() {
         return this.name;
     }
 
-    /**
-     * Sets the name.
-     * 
-     * @param name0
-     *            the name to set
-     */
     public void setName(final String name0) {
         this.name = name0;
     }
 
-    /**
-     * Sets the title.
-     * 
-     * @param title0
-     *            the title to set
-     */
     public void setTitle(final String title0) {
         this.title = title0;
     }
 
-    /**
-     * Sets the difficulty.
-     * 
-     * @param difficulty0
-     *            the difficulty to set
-     */
     public void setDifficulty(final String difficulty0) {
         this.difficulty = difficulty0;
     }
 
-    /**
-     * Sets the description.
-     * 
-     * @param description0
-     *            the description to set
-     */
     public void setDescription(final String description0) {
         this.description = description0;
     }
 
-    /**
-     * Sets the event deck.
-     * 
-     * @param eventDeck0
-     *            the eventDeck to set
-     */
     public void setEventDeck(final Deck eventDeck0) {
         this.eventDeck = eventDeck0;
     }
 
-    /**
-     * Sets the icon filename.
-     * 
-     * @param s0
-     *            filename of the icon to set
-     */
-    public void setIconFilename(final String s0) {
-        this.iconFilename = s0;
+    @Override
+    public void setIconImageKey(final String s0) {
+        this.imageKey = s0;
     }
 
-    /**
-     * <p>
-     * getCardRewardList.
-     * </p>
-     * 
-     * @return the card reward list
-     */
     public final List<InventoryItem> getCardRewardList() {
         if (cardReward == null) {
             return null;
@@ -213,12 +111,6 @@ public abstract class QuestEvent {
         return this.cardRewardList;
     }
 
-    /**
-     * Sets the card reward.
-     * 
-     * @param cardReward0
-     *            the cardReward to set
-     */
     public void setCardReward(final String cardReward0) {
         this.cardReward = cardReward0;
     }

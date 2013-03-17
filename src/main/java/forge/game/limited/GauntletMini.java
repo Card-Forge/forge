@@ -17,11 +17,11 @@
  */
 package forge.game.limited;
 
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import forge.Singletons;
 import forge.control.Lobby;

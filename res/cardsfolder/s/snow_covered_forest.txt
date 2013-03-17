@@ -1,7 +1,7 @@
 Name:Snow-Covered Forest
 ManaCost:no cost
 Types:Basic Snow Land Forest
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_forest.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_forest.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg
 Oracle:G
 SetInfo:ICE Land
 SetInfo:CSP Common

@@ -4,8 +4,8 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
-import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.AIPlayer;
 
 public class StoreSVarAi extends SpellAbilityAi {

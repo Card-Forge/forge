@@ -30,7 +30,6 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -54,19 +53,11 @@ import forge.util.FileUtil;
  * The set of MTG legal cards that become player's library when the game starts.
  * Any other data is not part of a deck and should be stored elsewhere. Current
  * fields allowed for deck metadata are Name, Title, Description and Deck Type.
- * 
- * @author Forge
- * @version $Id$
  */
+@SuppressWarnings("serial")
 public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPool>> {
-    /**
-     *
-     */
-    private static final long serialVersionUID = -7478025567887481994L;
-
     private final Map<DeckSection, CardPool> parts = new EnumMap<DeckSection, CardPool>(DeckSection.class);
-    
-    private final Set<String> tags = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    private final Set<String>                tags  = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**

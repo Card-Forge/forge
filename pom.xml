@@ -115,13 +115,6 @@
             </roles>
         </developer>
         <developer>
-            <id>moonmarc</id>
-            <name>moonmarc</name>
-            <roles>
-                <role>developer</role>
-            </roles>
-        </developer>
-        <developer>
             <id>SoulStorm</id>
             <name>soulstorm</name>
             <roles>
@@ -131,6 +124,13 @@
         <developer>
             <id>maxmtg</id>
             <name>Max mtg</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>myk</id>
+            <name>Myk Taylor</name>
             <roles>
                 <role>developer</role>
             </roles>
@@ -605,37 +605,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>l10n-maven-plugin</artifactId>
-                <version>1.0-alpha-2</version>
-                <configuration>
-                    <locales>
-                        <locale>cs</locale>
-                        <locale>de</locale>
-                        <locale>es</locale>
-                        <locale>fr</locale>
-                        <locale>gl</locale>
-                        <locale>hu</locale>
-                        <locale>it</locale>
-                        <locale>ja</locale>
-                        <locale>ko</locale>
-                        <locale>lt</locale>
-                        <locale>nl</locale>
-                        <locale>no</locale>
-                        <locale>pl</locale>
-                        <locale>pt</locale>
-                        <locale>pt_BR</locale>
-                        <locale>ru</locale>
-                        <locale>sk</locale>
-                        <locale>sv</locale>
-                        <locale>tr</locale>
-                        <locale>zh_CN</locale>
-                        <locale>zh_TW</locale>
-                    </locales>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>2.7.1</version>
@@ -879,15 +848,13 @@
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}" />
                                         <copy todir="${project.build.directory}/${project.build.finalName}">
                                             <fileset dir="${project.build.directory}" includes="forge.sh" />
-                                            <fileset dir="${basedir}" includes="forge.properties" />
+                                            <fileset dir="${basedir}" includes="forge.profile.properties.example" />
                                             <fileset dir="${basedir}" includes="LICENSE.txt" />
                                             <fileset dir="${basedir}" includes="README.txt" />
                                             <fileset dir="${basedir}" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}">
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
-                                                <exclude name="res/lib/**" />
-                                                <exclude name="res/pics/**" />
                                             </fileset>
                                             <fileset dir="${project.build.directory}" includes="forge.exe" />
                                             <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
@@ -997,11 +964,9 @@
                                         <taskdef name="jarbundler" classpathref="maven.runtime.classpath" classname="net.sourceforge.jarbundler.JarBundler" />
                                         <jarbundler dir="${project.build.directory}/${project.build.finalName}-osx" name="${project.name}" version="${project.version}" mainclass="forge.view.Main" icon="${basedir}/${configSourceDirectory}/Forge.icns" jvmversion="1.6+" vmoptions="-Xmx1024m" shortname="${project.name}" workingdirectory="$APP_PACKAGE/Contents/Resources/Java" jar="${project.build.directory}/${project.build.finalName}-jar-with-dependencies.jar">
                                             <javafileset dir="${basedir}">
-                                                <include name="*.properties" />
+                                                <include name="forge.profile.properties.example" />
                                                 <include name="res/**" />
                                                 <exclude name="res/cardsfolder/**" />
-                                                <exclude name="res/lib/**" />
-                                                <exclude name="res/pics/**" />
                                             </javafileset>
                                             <javafileset dir="${project.build.directory}">
                                                 <include name="res/cardsfolder/cardsfolder.zip" />

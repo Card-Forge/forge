@@ -26,6 +26,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JScrollPane;
+
 import forge.Card;
 import forge.view.arcane.util.Animation;
 import forge.view.arcane.util.CardPanelMouseListener;

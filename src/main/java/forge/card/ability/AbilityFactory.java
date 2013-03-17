@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 import forge.Card;
-
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;

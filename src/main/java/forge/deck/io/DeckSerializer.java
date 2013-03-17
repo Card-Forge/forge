@@ -34,8 +34,8 @@ import javax.swing.filechooser.FileFilter;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.Deck;
-import forge.gui.download.GuiDownloadSetPicturesLQ;
 import forge.item.CardPrinted;
+import forge.properties.NewConstants;
 import forge.util.FileSection;
 import forge.util.FileSectionManual;
 import forge.util.FileUtil;
@@ -48,27 +48,15 @@ import freemarker.template.TemplateException;
 
 /**
  * This class knows how to make a file out of a deck object and vice versa.
- * 
  */
 public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSerializer<Deck> {
-
-    /**
-     * Instantiates a new deck serializer.
-     *
-     * @param deckDir0 the deck dir0
-     */
     private final boolean moveWronglyNamedDecks;
     private static final String FILE_EXTENSION = ".dck";
 
-    /** @param deckDir0 {@link java.io.File} */
     public DeckSerializer(final File deckDir0) {
         this(deckDir0, false);
     }
 
-    /**
-     * @param deckDir0 {@link java.io.File}
-     * @param moveWrongDecks boolean
-     */
     public DeckSerializer(final File deckDir0, boolean moveWrongDecks) {
         super(deckDir0, Deck.FN_NAME_SELECTOR);
         moveWronglyNamedDecks = moveWrongDecks;
@@ -149,17 +137,11 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             final List<String> list = new ArrayList<String>();
             for (final Entry<CardPrinted, Integer> card : d.getMain()) {
                 // System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
-                for( int i = card.getValue().intValue(); i > 0; --i ) {
-                    String url = GuiDownloadSetPicturesLQ.getCardPictureUrl(card.getKey(), card.getKey().getName());
+                for (int i = card.getValue().intValue(); i > 0; --i ) {
+                    String url = NewConstants.URL_PIC_DOWNLOAD + card.getKey().getImageUrlPath(false);
                     list.add(url);
                 }
             }
-            /*
-             * List<String> nameList = new ArrayList<String>(); for (Card card :
-             * d.getMain().toForgeCardList().toArray()) {
-             * //System.out.println(card.getSets().get(card.getSets().size() -
-             * 1).URL); nameList.add(card.getName()); }
-             */
 
             final TreeMap<String, Integer> map = new TreeMap<String, Integer>();
             for (final Entry<CardPrinted, Integer> entry : d.getMain().getOrderedList()) {
@@ -173,11 +155,9 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             root.put("height", height);
             root.put("width", width);
             root.put("cardlistWidth", width - 11);
-            // root.put("nameList", nameList);
             root.put("cardList", map);
 
             /* Merge data-model with template */
-            // StringWriter sw = new StringWriter();
             temp.process(root, out);
             out.flush();
         } catch (final IOException e) {
@@ -187,30 +167,10 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
         }
     }
 
-    /**
-     * <p>
-     * writeDeck.
-     * </p>
-     * 
-     * @param d
-     *            a {@link forge.deck.Deck} object.
-     * @param f
-     *            a {@link java.io.File} object.
-     */
     public static void writeDeck(final Deck d, final File f) {
         FileUtil.writeFile(f, d.save());
     }
 
-    /**
-     * <p>
-     * Write deck to HTML.
-     * </p>
-     * 
-     * @param d
-     *            a {@link forge.deck.Deck} object.
-     * @param f
-     *            a {@link java.io.File} object.
-     */
     public static void writeDeckHtml(final Deck d, final File f) {
         try {
             final BufferedWriter writer = new BufferedWriter(new FileWriter(f));
@@ -221,43 +181,20 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.deck.IDeckSerializer#save(forge.item.CardCollectionBase,
-     * java.io.File)
-     */
     @Override
     public void save(final Deck unit) {
         FileUtil.writeFile(this.makeFileFor(unit), unit.save());
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.deck.IDeckSerializer#erase(forge.item.CardCollectionBase,
-     * java.io.File)
-     */
     @Override
     public void erase(final Deck unit) {
         this.makeFileFor(unit).delete();
     }
 
-    /**
-     * Make file name.
-     *
-     * @param deck the deck
-     * @return a File
-     */
     public File makeFileFor(final Deck deck) {
         return new File(this.getDirectory(), deck.getBestFileName() + FILE_EXTENSION);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.deck.io.DeckSerializerBase#read(java.io.File)
-     */
     @Override
     protected Deck read(final File file) {
         final Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(file));
@@ -269,11 +206,6 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
         return result;
     }
 
-    /**
-     * 
-     * @param file {@link java.io.File}
-     * @param result {@link forge.deck.Deck}
-     */
     private void adjustFileLocation(final File file, final Deck result) {
         if (result == null) {
             file.delete();
@@ -285,23 +217,11 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.deck.io.DeckSerializerBase#getFileFilter()
-     */
     @Override
     protected FilenameFilter getFileFilter() {
         return DeckSerializer.DCK_FILE_FILTER;
     }
 
-    /**
-     * Read deck metadata.
-     *
-     * @param map the map
-     * @param canThrow the can throw
-     * @return the deck file header
-     */
     public static DeckFileHeader readDeckMetadata(final Map<String, List<String>> map, final boolean canThrow) {
         if (map == null) {
             return null;
@@ -323,5 +243,4 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
 
         return null;
     }
-
 }

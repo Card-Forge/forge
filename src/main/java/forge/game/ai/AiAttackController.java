@@ -24,7 +24,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CounterType;
 import forge.GameEntity;

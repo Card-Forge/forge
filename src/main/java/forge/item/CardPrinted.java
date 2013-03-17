@@ -23,12 +23,14 @@ import java.util.Map;
 import com.google.common.base.Function;
 
 import forge.Card;
-import forge.CardUtil;
 import forge.Singletons;
+import forge.card.CardInSet;
 import forge.card.CardRarity;
 import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.card.cardfactory.CardFactory;
 import forge.game.player.Player;
+import forge.util.Base64Coder;
 
 
 /**
@@ -54,18 +56,6 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
     private final transient CardRarity rarity; // rarity is given in ctor when
                                                // set is assigned
 
-    // image filename is calculated only after someone request it
-    private transient String imageFilename = null;
-
-    // field RO accessors
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getName()
-     */
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getName()
-     */
     @Override
     public String getName() {
         return this.name;
@@ -76,75 +66,125 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
         return name;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getSet()
-     */
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getEdition()
-     */
     @Override
     public String getEdition() {
         return this.edition;
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getArtIndex()
-     */
     @Override
     public int getArtIndex() {
         return this.artIndex;
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#isFoil()
-     */
     @Override
     public boolean isFoil() {
         return this.foiled;
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getRules()
-     */
     @Override
     public CardRules getRules() {
         return this.card;
     }
 
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getRarity()
-     */
     @Override
     public CardRarity getRarity() {
         return this.rarity;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItemFromSet#getImageFilename()
-     */
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getImageFilename()
-     */
-    @Override
-    public String getImageFilename() {
-        if (this.imageFilename == null) {
-            this.imageFilename = CardUtil.buildFilename(this);
+    private static String toMWSFilename(String in) {
+        final StringBuffer out = new StringBuffer();
+        char c;
+        for (int i = 0; i < in.length(); i++) {
+            c = in.charAt(i);
+            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
+                out.append("");
+            } else {
+                out.append(c);
+            }
         }
-        return this.imageFilename;
-    }
+        return out.toString();
+    }    
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.item.InventoryItem#getType()
-     */
-    /* (non-Javadoc)
-     * @see forge.item.ICardPrinted#getItemType()
-     */
+    private String getImageName() {
+        return CardSplitType.Split != card.getSplitType() ? name : card.getMainPart().getName() + card.getOtherPart().getName();
+    }
+    
+    @Override
+    public String getImageKey() {
+        return getImageLocator(getImageName(), getArtIndex(), true, false);
+    }
+    
+    public String getImageKey(boolean backFace) {
+        return getImageKey(backFace, getArtIndex(), true);
+    }
+    
+    public String getImageKey(boolean backFace, int artIdx, boolean includeSet) {
+        final String nameToUse;
+        if (backFace) {
+            if (null == card.getOtherPart()) {
+                return null;
+            }
+            switch (card.getSplitType()) {
+            case Transform: case Flip: case Licid:
+                break;
+            default:
+                return null;
+            }
+            nameToUse = card.getOtherPart().getName();
+        } else {
+            nameToUse = getImageName();
+        }
+
+        return getImageLocator(nameToUse, artIdx, includeSet, false);
+    }
+    
+    public String getImageUrlPath(boolean backFace) {
+        return getImageLocator(backFace ? card.getOtherPart().getName() : getImageName(), getArtIndex(), true, true);
+    }
+    
+    private String getImageLocator(String nameToUse, int artIdx, boolean includeSet, boolean base64encode) {
+        StringBuilder s = new StringBuilder();
+        
+        s.append(toMWSFilename(nameToUse));
+        
+        final int cntPictures;
+        if (includeSet) {
+            cntPictures = card.getEditionInfo(edition).getCopiesCount();
+        } else {
+            // raise the art index limit to the maximum of the sets this card was printed in
+            int maxCntPictures = 1;
+            for (String set : card.getSets()) {
+                CardInSet setInfo = card.getEditionInfo(set);
+                if (maxCntPictures < setInfo.getCopiesCount()) {
+                    maxCntPictures = setInfo.getCopiesCount();
+                }
+            }
+            cntPictures = maxCntPictures;
+        }
+        if (cntPictures > 1  && cntPictures > artIdx) {
+            s.append(artIdx + 1);
+        }
+        
+        // for whatever reason, MWS-named plane cards don't have the ".full" infix
+        if (!card.getType().isPlane() && !card.getType().isPhenomenon()) {
+            s.append(".full");
+        }
+        
+        final String fname;
+        if (base64encode) {
+            s.append(".jpg");
+            fname = Base64Coder.encodeString(s.toString(), true);
+        } else {
+            fname = s.toString();
+        }
+        
+        if (includeSet) {
+            return String.format("%s/%s", Singletons.getModel().getEditions().getCode2ByCode(edition), fname);
+        } else {
+            return fname;
+        }
+    }
+    
     @Override
     public String getItemType() {
         return "Card";
@@ -152,7 +192,6 @@ public final class CardPrinted implements Comparable<IPaperCard>, InventoryItemF
 
     /**
      * Lambda to get rules for selects from list of printed cards.
-     * 
      */
     public static final Function<CardPrinted, CardRules> FN_GET_RULES = new Function<CardPrinted, CardRules>() {
         @Override

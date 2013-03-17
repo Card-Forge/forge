@@ -18,8 +18,8 @@
 package forge.game.player;
 
 import java.util.List;
-import forge.Card;
 
+import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.card.spellability.SpellAbility;

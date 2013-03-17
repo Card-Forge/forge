@@ -5,17 +5,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
+
 import forge.Card;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.game.player.Player;
 import forge.util.PredicateString;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public interface IPaperCard {
 
     /**
@@ -23,28 +22,10 @@ public interface IPaperCard {
      */
     public abstract static class Predicates {
     
-        /**
-         * Rarity.
-         * 
-         * @param isEqual
-         *            the is equal
-         * @param value
-         *            the value
-         * @return the predicate
-         */
         public static Predicate<CardPrinted> rarity(final boolean isEqual, final CardRarity value) {
             return new PredicateRarity(value, isEqual);
         }
     
-        /**
-         * Printed in sets.
-         * 
-         * @param value
-         *            the value
-         * @param shouldContain
-         *            the should contain
-         * @return the predicate
-         */
         public static Predicate<CardPrinted> printedInSets(final List<String> value, final boolean shouldContain) {
             if ((value == null) || value.isEmpty()) {
                 return com.google.common.base.Predicates.alwaysTrue();
@@ -52,51 +33,21 @@ public interface IPaperCard {
             return new PredicateSets(value, shouldContain);
         }
     
-        /**
-         * Printed in sets.
-         * 
-         * @param value
-         *            the value
-         * @return the predicate
-         */
         public static Predicate<CardPrinted> printedInSets(final String value) {
-            if ((value == null) || value.isEmpty()) {
+            if (StringUtils.isEmpty(value)) {
                 return com.google.common.base.Predicates.alwaysTrue();
             }
             return new PredicateSets(Arrays.asList(new String[] { value }), true);
         }
     
-        /**
-         * Name.
-         * 
-         * @param what
-         *            the what
-         * @return the predicate
-         */
         public static Predicate<CardPrinted> name(final String what) {
             return new PredicateName(PredicateString.StringOp.EQUALS_IC, what);
         }
     
-        /**
-         * Name.
-         * 
-         * @param op
-         *            the op
-         * @param what
-         *            the what
-         * @return the predicate
-         */
         public static Predicate<CardPrinted> name(final PredicateString.StringOp op, final String what) {
             return new PredicateName(op, what);
         }
     
-        /**
-         * Names except.
-         * 
-         * @param what
-         *            the what
-         * @return the predicate
-         */
         public static Predicate<CardPrinted> namesExcept(final List<String> what) {
             return new PredicateNamesExcept(what);
         }
@@ -204,7 +155,7 @@ public interface IPaperCard {
     public abstract boolean isToken();
     public abstract CardRules getRules();
     public abstract CardRarity getRarity();
-    public abstract String getImageFilename();
+    public abstract String getImageKey();
 
     public abstract String getItemType();
 

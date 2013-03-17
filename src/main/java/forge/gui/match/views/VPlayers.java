@@ -27,7 +27,6 @@ import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Card;
-
 import forge.Singletons;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

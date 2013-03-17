@@ -1,7 +1,7 @@
 Name:Snow-Covered Swamp
 ManaCost:no cost
 Types:Basic Snow Land Swamp
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_swamp.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_swamp.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_swamp.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_swamp.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_swamp.jpg
 Oracle:B
 SetInfo:ICE Land
 SetInfo:CSP Common

@@ -26,7 +26,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Card;
-
 import forge.Command;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

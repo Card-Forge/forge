@@ -28,6 +28,7 @@ import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.framework.ICDoc;
+import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.util.storage.IStorage;
@@ -41,13 +42,11 @@ import forge.util.storage.IStorage;
 
 @SuppressWarnings("serial")
 public enum CSubmenuGauntletBuild implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
     private final VSubmenuGauntletBuild view = VSubmenuGauntletBuild.SINGLETON_INSTANCE;
     private final List<Deck> workingDecks = new ArrayList<Deck>();
-    private File previousDirectory = null;
-    private File openStartDir = new File(GauntletIO.DIR_GAUNTLETS);
+    private File openStartDir = new File(NewConstants.GAUNTLET_DIR.userPrefLoc);
 
     private final FileFilter filterDAT = new FileFilter() {
         @Override
@@ -56,12 +55,8 @@ public enum CSubmenuGauntletBuild implements ICDoc {
                 return true;
             }
 
-            if (!f.getName().matches(GauntletIO.REGEX_LOCKED)
-                    && !f.getName().matches(GauntletIO.REGEX_QUICK)) {
-                return true;
-            }
-
-            return false;
+            String filename = f.getName();
+            return (!filename.startsWith(GauntletIO.PREFIX_QUICK) && filename.endsWith(GauntletIO.SUFFIX_DATA));
         }
 
         @Override
@@ -317,7 +312,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
             return false;
         }
 
-        final File f = new File(GauntletIO.DIR_GAUNTLETS + name + ".dat");
+        final File f = new File(NewConstants.GAUNTLET_DIR.userPrefLoc + name + ".dat");
         // Confirm if overwrite
         if (f.exists()) {
             final int m = JOptionPane.showConfirmDialog(null,
@@ -349,7 +344,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
 
         gd.setEventNames(names);
         gd.setDecks(workingDecks);
-        gd.setActiveFile(f);
+        gd.setName(name);
         gd.reset();
 
         view.getLblSave().setVisible(false);
@@ -358,17 +353,14 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     }
 
     private boolean openGauntlet() {
-        /** */
         final File file;
-        final JFileChooser open = new JFileChooser(previousDirectory);
+        final JFileChooser open = new JFileChooser(openStartDir);
         open.setDialogTitle("Import Deck");
         open.addChoosableFileFilter(this.filterDAT);
-        open.setCurrentDirectory(openStartDir);
         final int returnVal = open.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             file = open.getSelectedFile();
-            previousDirectory = file.getParentFile();
         }
         else {
             return false;

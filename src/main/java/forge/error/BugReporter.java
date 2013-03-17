@@ -54,8 +54,6 @@ import forge.gui.WrapLayout;
 import forge.gui.toolbox.FHyperlink;
 import forge.gui.toolbox.FLabel;
 import forge.model.BuildInfo;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 /**
  * The class ErrorViewer. Enables showing and saving error messages that
@@ -312,7 +310,7 @@ public class BugReporter {
                 bw.close();
             } catch (final IOException ex) {
                 JOptionPane.showMessageDialog(area.getTopLevelAncestor(),
-                        ForgeProps.getLocalized(NewConstants.Lang.ErrorViewer.ERRORS.SAVE_MESSAGE),
+                        "There was an error during saving.  Sorry!\n" + ex,
                         "Error saving file", JOptionPane.ERROR_MESSAGE);
             }
         }

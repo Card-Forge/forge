@@ -27,7 +27,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameEntity;

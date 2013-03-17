@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;

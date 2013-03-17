@@ -24,29 +24,19 @@ import forge.deck.CardPool;
 import forge.error.BugReporter;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.properties.NewConstants;
 import forge.util.IgnoringXStream;
 
-/** */
 public class GauntletIO {
-    /** Directory for storing gauntlet data files. */
-    public static final String DIR_GAUNTLETS = "res/gauntlet/";
     /** Prompt in text field for new (unsaved) built gauntlets. */
     public static final String TXF_PROMPT = "[New Gauntlet]";
+    /** suffix for all gauntlet data files */
+    public static final String SUFFIX_DATA = ".dat"; 
     /** Prefix for quick gauntlet save files. */
     public static final String PREFIX_QUICK = "Quick_";
-    /** Regex for quick gauntlet save files. */
-    public static final String REGEX_QUICK = "^" + GauntletIO.PREFIX_QUICK + "[0-9]+\\.dat$";
     /** Regex for locked gauntlet save files. */
-    public static final String REGEX_LOCKED = "^LOCKED_.+\\.dat$";
-    /** Regex for Subversion files. */
-    public static final String SVN_IGNORE = "^\\.svn$";
+    public static final String PREFIX_LOCKED = "LOCKED_";
 
-    /**
-     * Gets the serializer.
-     *
-     * @param isIgnoring the is ignoring
-     * @return the serializer
-     */
     protected static XStream getSerializer(final boolean isIgnoring) {
         final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
         xStream.registerConverter(new DeckSectionToXml());
@@ -54,93 +44,73 @@ public class GauntletIO {
         return xStream;
     }
 
+    public static File getGauntletFile(String name) {
+        return new File(NewConstants.GAUNTLET_DIR.userPrefLoc, name + SUFFIX_DATA);
+    }
 
-    /** @return File[] */
+    public static File getGauntletFile(GauntletData gd) {
+        return getGauntletFile(gd.getName());
+    }
+    
     public static File[] getGauntletFilesUnlocked() {
         final FilenameFilter filter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return (!name.matches(GauntletIO.REGEX_LOCKED)
-                        && !name.matches(GauntletIO.SVN_IGNORE));
+                return (name.endsWith(SUFFIX_DATA));
             }
         };
 
-        File folder = new File(GauntletIO.DIR_GAUNTLETS);
+        File folder = new File(NewConstants.GAUNTLET_DIR.userPrefLoc);
         return folder.listFiles(filter);
     }
 
-    /** @return File[] */
     public static File[] getGauntletFilesQuick() {
         final FilenameFilter filter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return (name.matches(GauntletIO.REGEX_QUICK)
-                        && !name.matches(GauntletIO.SVN_IGNORE));
+                return (name.startsWith(PREFIX_QUICK) && name.endsWith(SUFFIX_DATA));
             }
         };
 
-        File folder = new File(GauntletIO.DIR_GAUNTLETS);
+        File folder = new File(NewConstants.GAUNTLET_DIR.userPrefLoc);
         return folder.listFiles(filter);
     }
 
-    /** @return File[] */
     public static File[] getGauntletFilesLocked() {
         final FilenameFilter filter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return (name.matches(GauntletIO.REGEX_LOCKED)
-                        && !name.matches(GauntletIO.SVN_IGNORE));
+                return (name.startsWith(PREFIX_LOCKED) && name.endsWith(SUFFIX_DATA));
             }
         };
 
-        File folder = new File(GauntletIO.DIR_GAUNTLETS);
+        File folder = new File(NewConstants.GAUNTLET_DIR.defaultLoc);
         return folder.listFiles(filter);
     }
 
-    /**
-     * <p>
-     * loadData.
-     * </p>
-     * 
-     * @param xmlSaveFile
-     *            &emsp; {@link java.io.File}
-     * @return {@link forge.gauntlet.GauntletData}
-     */
     public static GauntletData loadGauntlet(final File xmlSaveFile) {
+        GZIPInputStream zin = null;
         try {
-            GauntletData data = null;
+            zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+            InputStreamReader reader = new InputStreamReader(zin);
 
-            final GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+            GauntletData data = (GauntletData)GauntletIO.getSerializer(true).fromXML(reader);
 
-            final StringBuilder xml = new StringBuilder();
-            final char[] buf = new char[1024];
-            final InputStreamReader reader = new InputStreamReader(zin);
-            while (reader.ready()) {
-                final int len = reader.read(buf);
-                if (len == -1) {
-                    break;
-                } // when end of stream was reached
-                xml.append(buf, 0, len);
-            }
-
-            zin.close();
-            data = (GauntletData) GauntletIO.getSerializer(true).fromXML(xml.toString());
-
+            String filename = xmlSaveFile.getName();
+            data.setName(filename.substring(0, filename.length() - SUFFIX_DATA.length()));
+            
             return data;
         } catch (final Exception ex) {
             BugReporter.reportException(ex, "Error loading Gauntlet Data");
             throw new RuntimeException(ex);
+        } finally {
+            if (null != zin) {
+                try { zin.close(); }
+                catch (IOException e) { System.out.println("error closing gauntlet data reader: " + e); }
+            }
         }
     }
 
-    /**
-     * <p>
-     * saveData.
-     * </p>
-     * 
-     * @param gd0
-     *            a {@link forge.gauntlet.GauntletData} object.
-     */
     public static void saveGauntlet(final GauntletData gd0) {
         try {
             final XStream xStream = GauntletIO.getSerializer(false);
@@ -152,7 +122,7 @@ public class GauntletIO {
     }
 
     private static void savePacked(final XStream xStream0, final GauntletData gd0) throws IOException {
-        final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(gd0.getActiveFile()));
+        final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(getGauntletFile(gd0)));
         final GZIPOutputStream zout = new GZIPOutputStream(bout);
         xStream0.toXML(gd0, zout);
         zout.flush();
@@ -160,7 +130,6 @@ public class GauntletIO {
     }
 
     private static class DeckSectionToXml implements Converter {
-
         @SuppressWarnings("rawtypes")
         @Override
         public boolean canConvert(final Class clasz) {
@@ -172,7 +141,6 @@ public class GauntletIO {
             for (final Entry<CardPrinted, Integer> e : (CardPool) source) {
                 this.writeCardPrinted(e.getKey(), e.getValue(), writer);
             }
-
         }
 
         @Override
@@ -191,10 +159,10 @@ public class GauntletIO {
                 }
                 reader.moveUp();
             }
+            
             return result;
         }
 
-        /** */
         private void writeCardPrinted(final CardPrinted cref, final Integer count, final HierarchicalStreamWriter writer) {
             writer.startNode("card");
             writer.addAttribute("c", cref.getName());

@@ -38,12 +38,9 @@ public final class CardRules implements ICardCharacteristics {
     private final CardSplitType splitType;
     private final ICardFace mainPart;
     private final ICardFace otherPart;
-    
-    private CardAiHints aiHints;
     private final Map<String, CardInSet> setsPrinted = new TreeMap<String, CardInSet>(String.CASE_INSENSITIVE_ORDER);
 
-
-
+    private CardAiHints aiHints;
 
     public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah, Map<String, CardInSet> sets) {
         splitType = altMode;
@@ -68,24 +65,17 @@ public final class CardRules implements ICardCharacteristics {
         return !(getType().isVanguard() || getType().isScheme() || getType().isPlane() || getType().isPhenomenon());
     }
 
-
-    /**
-     * @return the splitType
-     */
     public CardSplitType getSplitType() {
         return splitType;
     }
 
     public ICardFace getMainPart() {
-        // TODO Auto-generated method stub
         return mainPart;
     }
-
 
     public ICardFace getOtherPart() {
         return otherPart;
     }
-
 
     public String getName() {
         switch(splitType.getAggregationMethod()) {
@@ -121,7 +111,6 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
-
     @Override
     public ColorSet getColor() {
         switch(splitType.getAggregationMethod()) {
@@ -132,13 +121,11 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
-
-    @Override     public int getIntPower() { return mainPart.getIntPower(); }
-    @Override     public int getIntToughness() { return mainPart.getIntToughness(); }
-    @Override     public String getPower() { return mainPart.getPower(); }
-    @Override     public String getToughness() { return mainPart.getToughness(); }
-    @Override     public int getInitialLoyalty() { return mainPart.getInitialLoyalty(); }
-
+    @Override public int getIntPower() { return mainPart.getIntPower(); }
+    @Override public int getIntToughness() { return mainPart.getIntToughness(); }
+    @Override public String getPower() { return mainPart.getPower(); }
+    @Override public String getToughness() { return mainPart.getToughness(); }
+    @Override public int getInitialLoyalty() { return mainPart.getInitialLoyalty(); }
 
     @Override
     public String getOracleText() {
@@ -150,13 +137,11 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
-
     public Set<String> getSets() { return this.setsPrinted.keySet(); }
     public CardInSet getEditionInfo(final String setCode) {
         final CardInSet result = this.setsPrinted.get(setCode);
         return result; // if returns null, String.format("Card '%s' was never printed in set '%s'", this.getName(), setCode);
     }
-
 
     // vanguard card fields, they don't use sides.
     private int deltaHand;
@@ -180,38 +165,19 @@ public final class CardRules implements ICardCharacteristics {
     public String getPictureOtherSideUrl() { return dlUrlOtherSide; }
     public void setDlUrls(String[] dlUrls) { this.dlUrl = dlUrls[0]; this.dlUrlOtherSide = dlUrls[1]; }
 
-
-    /* (non-Javadoc)
-     * @see forge.card.ICardCharacteristics#getReplacements()
-     */
     public final List<String> getReplacements() {
         return null;
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.card.ICardCharacteristics#getTriggers()
-     */
     public final List<String> getTriggers() {
         return null;
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.card.ICardCharacteristics#getStaticAbilities()
-     */
     public final List<String> getStaticAbilities() {
         return null;
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.card.ICardCharacteristics#getAbilities()
-     */
     public final List<String> getAbilities() {
         return null;
     }
-
-
-
 }

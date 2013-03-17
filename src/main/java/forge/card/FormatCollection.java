@@ -20,6 +20,7 @@ package forge.card;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import forge.game.GameFormat;
 import forge.util.FileSection;
 import forge.util.storage.StorageReaderFile;

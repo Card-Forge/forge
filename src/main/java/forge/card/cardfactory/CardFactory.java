@@ -42,6 +42,7 @@ import forge.card.spellability.Target;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
 import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.item.IPaperCard;
 
 /**
@@ -223,40 +224,35 @@ public class CardFactory {
         c.setCurSetCode(cp.getEdition());
         c.setRarity(cp.getRarity());
 
-        
-        c.setRandomPicture(cp.getArtIndex() + 1);
-        String originalPicture = cp.getImageFilename();
+        String originalPicture = cp.getImageKey();
         //System.out.println(c.getName() + " -> " + originalPicture);
-        c.setImageFilename(originalPicture);
+        c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
 
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
                 c.setState(CardCharacteristicName.Flipped);
-                c.setImageFilename(originalPicture); // should assign a 180 degrees rotated picture here?
+                c.setImageKey(originalPicture); // should assign a 180 degrees rotated picture here?
             }
-            else if (c.isDoubleFaced()) {
+            else if (c.isDoubleFaced() && cp instanceof CardPrinted) {
                 c.setState(CardCharacteristicName.Transformed);
-                c.setImageFilename(CardUtil.buildFilename(cp, cp.getRules().getOtherPart().getName()));
+                c.setImageKey(((CardPrinted)cp).getImageKey(true));
             }
             else if (c.getRules().getSplitType() == CardSplitType.Split) {
                 c.setState(CardCharacteristicName.LeftSplit);
-                c.setImageFilename(originalPicture);
+                c.setImageKey(originalPicture);
                 c.setCurSetCode(cp.getEdition());
                 c.setRarity(cp.getRarity());
                 c.setState(CardCharacteristicName.RightSplit);
-                c.setImageFilename(originalPicture);
-            } else {
-                c.setImageFilename(CardUtil.buildFilename(c));
+                c.setImageKey(originalPicture);
             }
-            
 
             c.setCurSetCode(cp.getEdition());
             c.setRarity(cp.getRarity());
             c.setState(CardCharacteristicName.Original);
         }
+        
         return c;
-
     }
 
     private static void buildAbilities(final Card card) {
@@ -460,7 +456,7 @@ public class CardFactory {
         to.setSVars(from.getSVars());
         to.setIntrinsicAbilities(from.getIntrinsicAbilities());
     
-        to.setImageFilename(from.getImageFilename());
+        to.setImageKey(from.getImageKey());
         to.setTriggers(from.getTriggers());
         to.setReplacementEffects(from.getReplacementEffects());
         to.setStaticAbilityStrings(from.getStaticAbilityStrings());

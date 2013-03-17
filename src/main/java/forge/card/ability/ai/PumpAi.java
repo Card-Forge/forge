@@ -3,12 +3,13 @@ package forge.card.ability.ai;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
 import forge.CardPredicates.Presets;
+import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;

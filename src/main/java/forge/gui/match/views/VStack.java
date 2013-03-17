@@ -36,6 +36,7 @@ import forge.Singletons;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.game.zone.MagicStack;
 import forge.gui.ForgeAction;
+import forge.gui.ForgeAction.MatchConstants;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -43,7 +44,6 @@ import forge.gui.framework.IVDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CStack;
 import forge.gui.toolbox.FSkin;
-import forge.properties.NewConstants;
 
 /** 
  * Assembles Swing components of stack report.
@@ -230,34 +230,28 @@ public enum VStack implements IVDoc<CStack> {
 
     //========= Custom class handling
 
+    @SuppressWarnings("serial")
     private class TriggerReactionMenu extends JPopupMenu {
-        private static final long serialVersionUID = 6665085414634139984L;
         private int workTrigID;
 
         public TriggerReactionMenu() {
             super();
 
-            final ForgeAction actAccept = new ForgeAction(NewConstants.Lang.GuiDisplay.Trigger.ALWAYSACCEPT) {
-                private static final long serialVersionUID = -3734674058185367612L;
-
+            final ForgeAction actAccept = new ForgeAction(MatchConstants.ALWAYSACCEPT) {
                 @Override
                 public final void actionPerformed(final ActionEvent e) {
                     Singletons.getModel().getGame().getTriggerHandler().setAlwaysAcceptTrigger(TriggerReactionMenu.this.workTrigID);
                 }
             };
 
-            final ForgeAction actDecline = new ForgeAction(NewConstants.Lang.GuiDisplay.Trigger.ALWAYSDECLINE) {
-                private static final long serialVersionUID = -1983295769159971502L;
-
+            final ForgeAction actDecline = new ForgeAction(MatchConstants.ALWAYSDECLINE) {
                 @Override
                 public final void actionPerformed(final ActionEvent e) {
                     Singletons.getModel().getGame().getTriggerHandler().setAlwaysDeclineTrigger(TriggerReactionMenu.this.workTrigID);
                 }
             };
 
-            final ForgeAction actAsk = new ForgeAction(NewConstants.Lang.GuiDisplay.Trigger.ALWAYSASK) {
-                private static final long serialVersionUID = 5045255351332940821L;
-
+            final ForgeAction actAsk = new ForgeAction(MatchConstants.ALWAYSASK) {
                 @Override
                 public final void actionPerformed(final ActionEvent e) {
                     Singletons.getModel().getGame().getTriggerHandler().setAlwaysAskTrigger(TriggerReactionMenu.this.workTrigID);

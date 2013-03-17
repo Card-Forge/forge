@@ -315,8 +315,8 @@ public class CardPanel extends JPanel implements CardContainer {
         // + White borders for Core sets Unlimited - 9th +
         final int cornerSize = Math.max(4, Math.round(this.cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
 
-        if (this.getGameCard() != null && this.getGameCard().getImageFilename() != null
-                && !this.getGameCard().getImageFilename().equals("none") && !this.getGameCard().getName().equals("Morph")) {
+        if (this.getGameCard() != null && this.getGameCard().getImageKey() != null
+                && !this.getGameCard().getImageKey().equals("none") && !this.getGameCard().getName().equals("Morph")) {
             CardEdition ed = Singletons.getModel().getEditions().get(this.getGameCard().getCurSetCode());
 
             if (ed != null && ed.isWhiteBorder()) {
@@ -643,12 +643,12 @@ public class CardPanel extends JPanel implements CardContainer {
                 && this.imagePanel.hasImage()) {
             return;
         }
+        
         this.setGameCard(card);
         if (!this.isShowing()) {
             return;
         }
-        //final Insets i = this.getInsets();
-        //System.out.println("Setting card: " + this.getWidth() + ", " + getCardWidth() + " (" + imagePanel.getWidth() + ")" );
+
         final BufferedImage image = card == null ? null : ImageCache.getImage(card, imagePanel.getWidth(), imagePanel.getHeight());
         if ((this.getGameCard() != null) && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CARD_OVERLAY)) {
             this.setText(this.getGameCard());

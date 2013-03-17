@@ -22,11 +22,11 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import forge.Card;
 
+import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates.Presets;
 import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
@@ -38,7 +38,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
-
 import forge.view.ButtonUtil;
 
 /**

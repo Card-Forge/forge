@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
-
 import forge.Singletons;
 import forge.control.FControl;
 import forge.game.GameState;

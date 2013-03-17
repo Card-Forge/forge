@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -37,8 +36,8 @@ import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPart;
+import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPayment;
 import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;

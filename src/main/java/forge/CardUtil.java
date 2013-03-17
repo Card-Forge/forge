@@ -17,19 +17,13 @@
  */
 package forge;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.CardCharacteristics;
-import forge.card.CardInSet;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -38,76 +32,35 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiDisplayUtil;
-import forge.item.IPaperCard;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-
-/**
- * <p>
- * CardUtil class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
 public final class CardUtil {
-    /**
-     * Do not instantiate.
-     */
-    private CardUtil() {
-        // This space intentionally left blank.
+    // disable instantiation
+    private CardUtil() { }
+
+    static final Map<String, String> colorMap;
+    static {
+        colorMap = new HashMap<String, String>();
+        colorMap.put(Constant.Color.BLACK.toString(), "B");
+        colorMap.put(Constant.Color.BLUE.toString(), "U");
+        colorMap.put(Constant.Color.GREEN.toString(), "G");
+        colorMap.put(Constant.Color.RED.toString(), "R");
+        colorMap.put(Constant.Color.WHITE.toString(), "W");
+        colorMap.put(Constant.Color.COLORLESS.toString(), "C");
     }
-
+    
     // returns "G", longColor is Constant.Color.Green and the like
-    /**
-     * <p>
-     * getShortColor.
-     * </p>
-     * 
-     * @param longColor
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
     public static String getShortColor(final String longColor) {
-        final Map<String, String> map = new HashMap<String, String>();
-        map.put(Constant.Color.BLACK.toString(), "B");
-        map.put(Constant.Color.BLUE.toString(), "U");
-        map.put(Constant.Color.GREEN.toString(), "G");
-        map.put(Constant.Color.RED.toString(), "R");
-        map.put(Constant.Color.WHITE.toString(), "W");
-
-        final Object o = map.get(longColor);
-        if (o == null) {
+        if (!colorMap.containsKey(longColor)) {
             throw new RuntimeException("CardUtil : getShortColor() invalid argument - " + longColor);
         }
-
-        return (String) o;
+        return colorMap.get(longColor);
     }
 
-    /**
-     * <p>
-     * getColors.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
     public static List<String> getColors(final Card c) {
         return c.determineColor().toStringList();
     }
 
-    /**
-     * <p>
-     * isStackingKeyword.
-     * </p>
-     * 
-     * @param keyword
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
     public static boolean isStackingKeyword(final String keyword) {
         String kw = new String(keyword);
         if (kw.startsWith("HIDDEN")) {
@@ -117,147 +70,21 @@ public final class CardUtil {
         return !kw.startsWith("Protection") && !Constant.Keywords.NON_STACKING_LIST.contains(kw);
     }
 
-    /**
-     * <p>
-     * buildFilename.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public static String buildFilename(final Card card) {
-        final boolean token = card.isToken() && !card.isCopiedToken();
-
-        final String set = card.getCurSetCode();
-        CardInSet neededSet = card.getRules().getEditionInfo(set);
-        final int cntPictures = neededSet == null ? 1 : neededSet.getCopiesCount();
-        return CardUtil.buildFilename(card.getName(), card.getCurSetCode(), card.getRandomPicture(), cntPictures, token);
-    }
-
-    /**
-     * buildFilename for lightweight card. Searches for a matching file on disk,
-     * 
-     * @param card
-     *            the card
-     * @return the string
-     */
-    public static String buildFilename(final IPaperCard card) {
-        CardRules cr = card.getRules();
-        final int maxIndex = cr.getEditionInfo(card.getEdition()).getCopiesCount();
-        // picture is named AssaultBattery.full.jpg
-        String imageName = cr.getSplitType() != CardSplitType.Split ? card.getName() : buildSplitCardFilename(cr);
-        return CardUtil.buildFilename(imageName, card.getEdition(), card.getArtIndex(), maxIndex, false);
-    }
-    
-    public static String buildSplitCardFilename(CardRules cr) {
-        return cr.getMainPart().getName() + cr.getOtherPart().getName();
-    }
-
-    /**
-     * Builds the filename.
-     * 
-     * @param card
-     *            the card
-     * @param nameToUse
-     *            the name to use
-     * @return the string
-     */
-    public static String buildFilename(final IPaperCard card, final String nameToUse) {
-        final int maxIndex = card.getRules().getEditionInfo(card.getEdition()).getCopiesCount();
-        return CardUtil.buildFilename(nameToUse, card.getEdition(), card.getArtIndex(), maxIndex, false);
-    }
-
-    private static String buildFilename(final String cardName, final String setName, final int artIndex,
-            final int artIndexMax, final boolean isToken) {
-        final File path = ForgeProps.getFile(isToken ? NewConstants.IMAGE_TOKEN : NewConstants.IMAGE_BASE);
-        final String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
-        final String cleanCardName = GuiDisplayUtil.cleanString(cardName);
-
-        File f = null;
-        if (StringUtils.isNotBlank(setName)) {
-            final String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
-
-            // First, try 3 letter set code with MWS filename format
-            final String mwsSet3 = String.format("%s/%s%s.full", setName, mwsCardName, nn);
-            f = new File(path, mwsSet3 + ".jpg");
-            if (f.exists()) {
-                return mwsSet3;
-            }
-
-            // Second, try 2 letter set code with MWS filename format
-            final String mwsSet2 = String.format("%s/%s%s.full", Singletons.getModel().getEditions().getCode2ByCode(setName), mwsCardName, nn);
-            f = new File(path, mwsSet2 + ".jpg");
-            if (f.exists()) {
-                return mwsSet2;
-            }
-
-            // Third, try 3 letter set code with Forge filename format
-            final String forgeSet3 = String.format("%s/%s%s", setName, cleanCardName, nn);
-            f = new File(path, forgeSet3 + ".jpg");
-            if (f.exists()) {
-                return forgeSet3;
-            }
-        }
-
-        // Last, give up with set images, go with the old picture type
-        final String forgePlain = String.format("%s%s", cleanCardName, nn);
-
-        f = new File(path, forgePlain + ".jpg");
-        if (f.exists()) {
-            return forgePlain;
-        }
-
-        // give up with art index
-        f = new File(path, cleanCardName + ".jpg");
-        if (f.exists()) {
-            return cleanCardName;
-        }
-
-        // if still no file, download if option enabled?
-        return "none";
-    }
-
-    /**
-     * <p>
-     * getShortColorsString.
-     * </p>
-     * 
-     * @param colors
-     *            a {@link java.util.ArrayList} object.
-     * @return a {@link java.lang.String} object.
-     */
     public static String getShortColorsString(final Iterable<String> colors) {
-        String colorDesc = "";
+        StringBuilder colorDesc = new StringBuilder();
         for (final String col : colors) {
-            if (col.equalsIgnoreCase("White")) {
-                colorDesc += "W";
-            } else if (col.equalsIgnoreCase("Blue")) {
-                colorDesc += "U";
-            } else if (col.equalsIgnoreCase("Black")) {
-                colorDesc += "B";
-            } else if (col.equalsIgnoreCase("Red")) {
-                colorDesc += "R";
-            } else if (col.equalsIgnoreCase("Green")) {
-                colorDesc += "G";
-            } else if (col.equalsIgnoreCase("Colorless")) {
-                colorDesc = "C";
-            }
+            colorDesc.append(getShortColor(col));
         }
-        return colorDesc;
+        return colorDesc.toString();
     }
 
     /**
      * getThisTurnEntered.
      * 
-     * @param to
-     *            zone going to
-     * @param from
-     *            zone coming from
-     * @param valid
-     *            a isValid expression
-     * @param src
-     *            a Card object
+     * @param to    zone going to
+     * @param from  zone coming from
+     * @param valid a isValid expression
+     * @param src   a Card object
      * @return a List<Card> that matches the given criteria
      */
     public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid,
@@ -276,15 +103,6 @@ public final class CardUtil {
         return res;
     }
 
-    /**
-     * getThisTurnCast.
-     * 
-     * @param valid
-     *            a String object
-     * @param src
-     *            a Card object
-     * @return a List<Card> that matches the given criteria
-     */
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
 
@@ -295,15 +113,6 @@ public final class CardUtil {
         return res;
     }
 
-    /**
-     * getLastTurnCast.
-     * 
-     * @param valid
-     *            a String object
-     * @param src
-     *            a Card object
-     * @return a List<Card> that matches the given criteria
-     */
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
 
@@ -315,10 +124,7 @@ public final class CardUtil {
     }
 
     /**
-     * getLKICopy.
-     * 
-     * @param in
-     *            a Card to copy.
+     * @param in  a Card to copy.
      * @return a copy of C with LastKnownInfo stuff retained.
      */
     public static Card getLKICopy(final Card in) {
@@ -367,17 +173,6 @@ public final class CardUtil {
         return newCopy;
     }
 
-    /**
-     * Gets the radiance.
-     * 
-     * @param source
-     *            the source
-     * @param origin
-     *            the origin
-     * @param valid
-     *            the valid
-     * @return the radiance
-     */
     public static List<Card> getRadiance(final Card source, final Card origin, final String[] valid) {
         final List<Card> res = new ArrayList<Card>();
 
@@ -397,11 +192,6 @@ public final class CardUtil {
         return res;
     }
 
-    /**
-     * Gets the face down characteristic.
-     * 
-     * @return the face down characteristic
-     */
     public static CardCharacteristics getFaceDownCharacteristic() {
         final ArrayList<String> types = new ArrayList<String>();
         types.add("Creature");
@@ -413,27 +203,11 @@ public final class CardUtil {
         ret.setName("");
         ret.setType(types);
 
-        ret.setImageFilename(NewConstants.MORPH_IMAGE_FILE_NAME);
+        ret.setImageKey(NewConstants.CACHE_MORPH_IMAGE_FILE);
 
         return ret;
     }
 
-    // add Colors and
-    /**
-     * <p>
-     * reflectableMana.
-     * </p>
-     * 
-     * @param abMana
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param af
-     *            a {@link forge.card.ability.AbilityFactory} object.
-     * @param colors
-     *            a {@link java.util.ArrayList} object.
-     * @param parents
-     *            a {@link java.util.ArrayList} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
     public static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
             Set<String> colors, final List<Card> parents) {
         // Here's the problem with reflectable Mana. If more than one is out,
@@ -561,8 +335,4 @@ public final class CardUtil {
 
         return colors;
     }
-
-
-
-
-} // end class CardUtil
+}

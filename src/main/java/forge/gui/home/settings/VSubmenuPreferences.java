@@ -6,8 +6,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -37,13 +35,12 @@ import forge.gui.framework.EDocID;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
+import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
 
 /** 
  * Assembles Swing components of preferences submenu singleton.
@@ -82,7 +79,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbUploadDraft = new OptionsCheckBox("Upload Draft Picks");
     private final JCheckBox cbStackLand = new OptionsCheckBox("Stack AI Land");
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
-    private final JCheckBox cbDevMode = new OptionsCheckBox(ForgeProps.getLocalized(NewGameText.DEV_MODE));
+    private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
@@ -229,26 +226,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     /** Consolidates checkbox styling in one place. */
     @SuppressWarnings("serial")
-    private class OptionsCheckBox extends JCheckBox {
+    private class OptionsCheckBox extends FCheckBox {
         public OptionsCheckBox(final String txt0) {
-            super();
-            setText(txt0);
+            super(txt0);
             setFont(FSkin.getBoldFont(12));
-            setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-            setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
-            setOpaque(false);
-
-            this.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseEntered(final MouseEvent evt) {
-                    setOpaque(true);
-                }
-
-                @Override
-                public void mouseExited(final MouseEvent evt) {
-                    setOpaque(false);
-                }
-            });
         }
     }
 

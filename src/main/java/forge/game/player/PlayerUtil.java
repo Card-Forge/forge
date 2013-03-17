@@ -27,7 +27,6 @@ import forge.control.input.Input;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
-
 import forge.view.ButtonUtil;
 
 /**

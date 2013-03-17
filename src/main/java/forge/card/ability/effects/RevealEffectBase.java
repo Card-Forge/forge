@@ -20,9 +20,7 @@ package forge.card.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import forge.Card;
-
 import forge.card.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;

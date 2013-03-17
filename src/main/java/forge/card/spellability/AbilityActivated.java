@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 import forge.Card;
 import forge.Singletons;
-
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;

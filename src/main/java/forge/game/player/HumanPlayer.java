@@ -22,14 +22,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.zone.ZoneType;
 
-/**
- * <p>
- * HumanPlayer class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
 public class HumanPlayer extends Player {
     private PlayerControllerHuman controller;
     

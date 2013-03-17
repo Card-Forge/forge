@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -186,12 +187,17 @@ public class VAssignDamage {
             this.damage.put(null, dt);
             this.defenders.add(dt);
             Card fakeCard; 
-            if( defender instanceof Card ) 
+            if (defender instanceof Card) 
                 fakeCard = (Card)defender;
-            else { 
+            else if (defender instanceof Player) { 
                 fakeCard = new Card();
                 fakeCard.setName(this.defender.getName());
-            }            
+                Player p = (Player)defender;
+                fakeCard.setImageKey(p.getLobbyPlayer().getIconImageKey());
+            } else {
+                fakeCard = new Card();
+                fakeCard.setName(this.defender.getName());
+            }
             addPanelForDefender(pnlDefenders, fakeCard);
         }        
 

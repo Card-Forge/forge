@@ -22,6 +22,7 @@ import java.io.File;
 import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.OldDeckParser;
+import forge.properties.NewConstants;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
 
@@ -42,18 +43,18 @@ public class CardCollections {
      *
      * @param file the file
      */
-    public CardCollections(final File file) {
-        this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "constructed"), true));
-        this.draft = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(file, "draft")));
-        this.sealed = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(file, "sealed")));
-        this.cube = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "cube")));
-        this.scheme = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "scheme")));
-        this.plane = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "plane")));
+    public CardCollections() {
+        this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CONSTRUCTED_DIR), true));
+        this.draft = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(NewConstants.DECK_DRAFT_DIR)));
+        this.sealed = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(NewConstants.DECK_SEALED_DIR)));
+        this.cube = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CUBE_DIR)));
+        this.scheme = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_SCHEME_DIR)));
+        this.plane = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_PLANE_DIR)));
 
         System.out.printf("Read decks: %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar.%n", constructed.getCount(), sealed.getCount(), draft.getCount(), cube.getCount(), scheme.getCount(), plane.getCount());
 
         // remove this after most people have been switched to new layout
-        final OldDeckParser oldParser = new OldDeckParser(file, this.constructed, this.draft, this.sealed, this.cube);
+        final OldDeckParser oldParser = new OldDeckParser(this.constructed, this.draft, this.sealed, this.cube);
         oldParser.tryParse();
     }
 

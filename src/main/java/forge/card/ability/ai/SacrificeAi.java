@@ -1,6 +1,7 @@
 package forge.card.ability.ai;
 
 import java.util.List;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;

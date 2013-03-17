@@ -127,7 +127,7 @@ public abstract class QuestRewardCard implements InventoryItem, IQuestRewardCard
      * @return an empty string
      */
     @Override
-    public String getImageFilename() {
+    public String getImageKey() {
         return "";
     }
     

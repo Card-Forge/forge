@@ -26,8 +26,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import forge.card.CardRules;
 import forge.card.CardSplitType;
-import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.gui.toolbox.CardFaceSymbols;
 
 /**

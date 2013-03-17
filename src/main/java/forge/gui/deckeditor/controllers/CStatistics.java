@@ -6,10 +6,11 @@ import javax.swing.JLabel;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
 import forge.Command;
-import forge.card.MagicColor;
-import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.card.MagicColor;
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorUtil;

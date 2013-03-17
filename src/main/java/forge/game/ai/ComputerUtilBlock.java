@@ -24,7 +24,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CounterType;

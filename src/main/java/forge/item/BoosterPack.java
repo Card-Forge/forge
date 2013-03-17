@@ -39,8 +39,8 @@ public class BoosterPack extends OpenablePack {
     }
 
     @Override
-    public final String getImageFilename() {
-        return ImageCache.SEALED_PRODUCT + "booster/" + this.contents.getEdition() + ".png";
+    public final String getImageKey() {
+        return ImageCache.BOOSTER_PREFIX + this.contents.getEdition();
     }
 
     @Override

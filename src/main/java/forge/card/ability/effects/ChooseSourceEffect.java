@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import com.google.common.base.Predicate;
+
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
@@ -19,8 +21,6 @@ import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-
-import com.google.common.base.Predicate;
 
 public class ChooseSourceEffect extends SpellAbilityEffect {
     @Override

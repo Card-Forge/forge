@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import forge.Card;
 import forge.card.spellability.SpellAbility;
-import forge.game.event.CounterAddedEvent;
 import forge.game.event.BlockerAssignedEvent;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.CardDestroyedEvent;
@@ -15,6 +13,8 @@ import forge.game.event.CardDiscardedEvent;
 import forge.game.event.CardEquippedEvent;
 import forge.game.event.CardRegeneratedEvent;
 import forge.game.event.CardSacrificedEvent;
+import forge.game.event.CounterAddedEvent;
+import forge.game.event.CounterRemovedEvent;
 import forge.game.event.DrawCardEvent;
 import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.EndOfTurnEvent;
@@ -23,7 +23,6 @@ import forge.game.event.FlipCoinEvent;
 import forge.game.event.LandPlayedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.event.PoisonCounterEvent;
-import forge.game.event.CounterRemovedEvent;
 import forge.game.event.SetTappedEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;

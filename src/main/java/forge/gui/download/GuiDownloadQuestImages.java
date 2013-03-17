@@ -18,9 +18,7 @@
 package forge.gui.download;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 /** */
@@ -43,39 +41,18 @@ public class GuiDownloadQuestImages extends GuiDownloader {
      * @return an array of {@link forge.gui.download.GuiDownloadSetPicturesLQ} objects.
      */
     @Override
-    protected final DownloadObject[] getNeededImages() {
+    protected final ArrayList<DownloadObject> getNeededImages() {
         // read all card names and urls
-        final List<DownloadObject> urls = new ArrayList<DownloadObject>();
+        final ArrayList<DownloadObject> urls = new ArrayList<DownloadObject>();
 
-        for (final DownloadObject questOpponent : GuiDownloader.readFile(NewConstants.Quest.OPPONENT_ICONS, ForgeProps.getFile(NewConstants.Quest.OPPONENT_DIR))) {
-            if (!questOpponent.getDestination().exists()) {
-                urls.add(questOpponent);
-            }
-        }
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE,  NewConstants.CACHE_ICON_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE,  NewConstants.CACHE_ICON_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE,        NewConstants.CACHE_BOOSTER_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_FATPACKS_FILE,        NewConstants.CACHE_FATPACK_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_PRECONS_FILE,         NewConstants.CACHE_PRECON_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE, NewConstants.CACHE_TOURNAMENTPACK_PICS_DIR);
+        addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_TOKENS_FILE,          NewConstants.CACHE_TOKEN_PICS_DIR);
 
-        for (final DownloadObject boosterImage : GuiDownloader.readFile(NewConstants.PICS_BOOSTER_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_SEALED_PRODUCT))) {
-            if (!boosterImage.getDestination().exists()) {
-                urls.add(boosterImage);
-            }
-        }
-
-        for (final DownloadObject petIcon : GuiDownloader.readFileWithNames(NewConstants.Quest.PET_SHOP_ICONS, ForgeProps.getFile(NewConstants.IMAGE_ICON))) {
-            if (!petIcon.getDestination().exists()) {
-                urls.add(petIcon);
-            }
-        }
-
-        for (final DownloadObject questPet : GuiDownloader.readFileWithNames(NewConstants.Quest.PET_TOKEN_IMAGES, ForgeProps.getFile(NewConstants.IMAGE_TOKEN))) {
-            if (!questPet.getDestination().exists()) {
-                urls.add(questPet);
-            }
-        }
-
-        // return all card names and urls that are needed
-        final DownloadObject[] out = new DownloadObject[urls.size()];
-        urls.toArray(out);
-
-        return out;
-    } // getNeededCards()
-
-} // end class GuiDownloadQuestImages
+        return urls;
+    }
+}

@@ -25,7 +25,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Card;
-
 import forge.Singletons;
 import forge.game.player.Player;
 import forge.util.MyObservable;

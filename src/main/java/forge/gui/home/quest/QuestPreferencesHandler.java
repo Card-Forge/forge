@@ -266,8 +266,8 @@ public class QuestPreferencesHandler extends JPanel {
             this.setCaretColor(clrText);
             this.setBackground(clrHover);
             this.setHorizontalAlignment(SwingConstants.CENTER);
-            this.setText(prefs.getPreference(qpref));
-            this.setPreviousText(prefs.getPreference(qpref));
+            this.setText(prefs.getPref(qpref));
+            this.setPreviousText(prefs.getPref(qpref));
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
@@ -341,7 +341,7 @@ public class QuestPreferencesHandler extends JPanel {
             return;
         }
 
-        prefs.setPreference(i0.getQPref(), i0.getText());
+        prefs.setPref(i0.getQPref(), i0.getText());
         prefs.save();
         i0.setPreviousText(i0.getText());
     }
@@ -358,24 +358,24 @@ public class QuestPreferencesHandler extends JPanel {
                 }
                 break;
             case BOOSTER_COMMONS:
-                temp1 = current.getPreferenceInt(QPref.BOOSTER_UNCOMMONS);
-                temp2 = current.getPreferenceInt(QPref.BOOSTER_RARES);
+                temp1 = current.getPrefInt(QPref.BOOSTER_UNCOMMONS);
+                temp2 = current.getPrefInt(QPref.BOOSTER_RARES);
 
                 if (temp1 + temp2 + val > 15) {
                     return "Booster packs must have maximum 15 cards.";
                 }
                 break;
             case BOOSTER_UNCOMMONS:
-                temp1 = current.getPreferenceInt(QPref.BOOSTER_COMMONS);
-                temp2 = current.getPreferenceInt(QPref.BOOSTER_RARES);
+                temp1 = current.getPrefInt(QPref.BOOSTER_COMMONS);
+                temp2 = current.getPrefInt(QPref.BOOSTER_RARES);
 
                 if (temp1 + temp2 + val > 15) {
                     return "Booster packs must have maximum 15 cards.";
                 }
                 break;
             case BOOSTER_RARES:
-                temp1 = current.getPreferenceInt(QPref.BOOSTER_COMMONS);
-                temp2 = current.getPreferenceInt(QPref.BOOSTER_UNCOMMONS);
+                temp1 = current.getPrefInt(QPref.BOOSTER_COMMONS);
+                temp2 = current.getPrefInt(QPref.BOOSTER_UNCOMMONS);
 
                 if (temp1 + temp2 + val > 15) {
                     return "Booster packs must have maximum 15 cards.";

@@ -19,8 +19,8 @@ package forge.card.ability.effects;
 
 import java.util.Arrays;
 import java.util.List;
-import forge.Card;
 
+import forge.Card;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -30,6 +30,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
+import forge.item.CardToken;
 
 public class TokenEffect extends SpellAbilityEffect {
 
@@ -66,7 +67,7 @@ public class TokenEffect extends SpellAbilityEffect {
         }
 
         if (mapParams.hasParam("TokenImage")) {
-            image = mapParams.getParam("TokenImage");
+            image = CardToken.makeTokenFileName(mapParams.getParam("TokenImage"));
         } else {
             image = "";
         }
@@ -144,7 +145,6 @@ public class TokenEffect extends SpellAbilityEffect {
         final Card host = sa.getSourceCard();
         readParameters(sa);
 
-        String imageName = "";
         String cost = "";
         // Construct colors
         final String[] substitutedColors = Arrays.copyOf(this.tokenColors, this.tokenColors.length);
@@ -170,8 +170,10 @@ public class TokenEffect extends SpellAbilityEffect {
                 colorDesc = "C";
             }
         }
+        
+        final String imageName;
         if (this.tokenImage.equals("")) {
-            imageName += colorDesc.replace(" ", "") + " " + this.tokenPower + " " + this.tokenToughness + " " + this.tokenName;
+            imageName = CardToken.makeTokenFileName(colorDesc.replace(" ", ""), tokenPower, tokenToughness, tokenName);
         } else {
             imageName = this.tokenImage;
         }

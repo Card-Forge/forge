@@ -52,8 +52,8 @@ public class FatPack extends OpenablePack {
     }
 
     @Override
-    public final String getImageFilename() {
-        return ImageCache.SEALED_PRODUCT + "fatpacks/" + this.contents.getEdition();
+    public final String getImageKey() {
+        return ImageCache.FATPACK_PREFIX + this.contents.getEdition();
     }
 
 

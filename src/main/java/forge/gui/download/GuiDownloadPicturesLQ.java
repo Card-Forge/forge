@@ -19,114 +19,64 @@ package forge.gui.download;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.ICardCharacteristics;
-import forge.gui.GuiDisplayUtil;
 import forge.item.CardDb;
-import forge.item.IPaperCard;
-import forge.properties.ForgeProps;
+import forge.item.CardPrinted;
 import forge.properties.NewConstants;
 
-/**
- * <p>
- * Gui_DownloadPictures_LQ class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- */
+@SuppressWarnings("serial")
 public class GuiDownloadPicturesLQ extends GuiDownloader {
-
-    private static final long serialVersionUID = -2839597792999139007L;
-    private String baseFolder;
-    private ArrayList<DownloadObject> downloads;
-
-    /**
-     * 
-     * TODO: Write javadoc for this method.
-     */
     public GuiDownloadPicturesLQ() {
         super();
     }
 
-    /**
-     * <p>
-     * getNeededCards.
-     * </p>
-     * 
-     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
-     */
     @Override
-    protected final DownloadObject[] getNeededImages() {
-        // This is called as a virtual method from constructor.
-        baseFolder = ForgeProps.getFile(NewConstants.IMAGE_BASE).getPath();
-        downloads = new ArrayList<DownloadObject>();
+    protected final ArrayList<DownloadObject> getNeededImages() {
+        ArrayList<DownloadObject> downloads = new ArrayList<DownloadObject>();
+        Set<String> filenames = new HashSet<String>();
 
-        for (final IPaperCard c : CardDb.instance().getUniqueCards()) {
-            //System.out.println(c.getName());
-            CardRules cardRules = c.getRules();
-            if (cardRules != null && cardRules.getSplitType() == CardSplitType.Split && cardRules.getOtherPart() != null) {
-                this.createDLObjects(cardRules.getPictureUrl(), String.format("%s%s", cardRules.getMainPart().getName(), cardRules.getOtherPart().getName()));
-            } else {
-                this.createDLObjects(cardRules.getPictureUrl(), cardRules.getMainPart().getName());
-            }
-
-            ICardCharacteristics secondSide = cardRules.getOtherPart();
-            if (secondSide != null && cardRules.getSplitType() == CardSplitType.Transform) {
-                this.createDLObjects(cardRules.getPictureOtherSideUrl(), secondSide.getName());
-            }
+        for (CardPrinted c : CardDb.instance().getUniqueCards()) {
+            addDLObject(c, false, downloads, filenames);
+            addDLObject(c, true, downloads, filenames);
         }
 
+        for (CardPrinted c : CardDb.variants().getUniqueCards()) {
+            addDLObject(c, false, downloads, filenames);
+            addDLObject(c, true, downloads, filenames);
+        }
+        
         // Add missing tokens to the list of things to download.
-        for (final DownloadObject element : GuiDownloader.readFileWithNames(NewConstants.TOKEN_IMAGES,
-                ForgeProps.getFile(NewConstants.IMAGE_TOKEN))) {
-            if (!element.getDestination().exists()) {
-                downloads.add(element);
+        addMissingItems(downloads, NewConstants.IMAGE_LIST_TOKENS_FILE, NewConstants.CACHE_TOKEN_PICS_DIR);
+
+        return downloads;
+    }
+
+    private void addDLObject(CardPrinted c, boolean backFace, ArrayList<DownloadObject> downloads, Set<String> filenames) {
+        CardRules cardRules = c.getRules();
+        String urls = backFace ? cardRules.getPictureOtherSideUrl() : cardRules.getPictureUrl();
+        if (StringUtils.isEmpty(urls)) {
+            return;
+        }
+
+        int artIdx = -1;
+        for (String url : urls.split("\\\\")) {
+            ++artIdx;
+
+            String filename = c.getImageKey(backFace, artIdx, false);
+            if (filenames.contains(filename)) {
+                continue;
+            }
+            filenames.add(filename);
+            
+            File destFile = new File(NewConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
+            if (!destFile.exists()) {
+                downloads.add(new DownloadObject(url, destFile));
             }
         }
-
-        // Return all card names and URLs that are needed.
-        return downloads.toArray(new DownloadObject[downloads.size()]);
-    } // getNeededImages()
-
-    private void createDLObjects(final String url, final String cardName) {
-
-        if (url != null && !url.isEmpty()) {
-            final String[] urls = url.split("\\\\");
-
-            final String sName = GuiDisplayUtil.cleanString(cardName);
-            addDownloadObject(urls[0], new File(baseFolder, sName + ".jpg"));
-
-            for (int j = 1; j < urls.length; j++) {
-                addDownloadObject(urls[j], new File(baseFolder, sName + j + ".jpg"));
-            }
-        }
     }
-
-    private void addDownloadObject(String url, File destFile) {
-        if (!destFile.exists()) {
-            downloads.add(new DownloadObject(url, destFile));
-        }
-    }
-
-    /**
-     * Builds the ideal filename.
-     * 
-     * @param cardName
-     *            the card name
-     * @param artIndex
-     *            the art index
-     * @param artIndexMax
-     *            the art index max
-     * @return the string
-     */
-    public static String buildIdealFilename(final String cardName, final int artIndex, final int artIndexMax) {
-        final String nn = artIndexMax > 1 ? Integer.toString(artIndex + 1) : "";
-        final String mwsCardName = GuiDisplayUtil.cleanStringMWS(cardName);
-        // 3 letter set code with MWS filename format
-        return String.format("%s%s.full.jpg", mwsCardName, nn);
-    }
-
 }

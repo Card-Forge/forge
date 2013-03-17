@@ -18,7 +18,6 @@
 package forge.game.zone;
 
 import forge.Card;
-
 import forge.Singletons;
 import forge.game.player.Player;
 

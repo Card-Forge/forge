@@ -14,9 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import net.miginfocom.swing.MigLayout;
+
 import com.google.common.collect.Lists;
 
-import net.miginfocom.swing.MigLayout;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
 import forge.view.FView;

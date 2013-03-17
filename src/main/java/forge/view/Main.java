@@ -25,19 +25,8 @@ import forge.model.FModel;
  * Main class for Forge's swing application view.
  */
 public final class Main {
-
     /**
-     * Do not instantiate.
-     */
-    private Main() {
-        // Intentionally blank.
-    }
-
-    /**
-     * Main method for Forge.
-     * 
-     * @param args
-     *            an array of {@link java.lang.String} objects.
+     * Main entrypoint for Forge
      */
     public static void main(final String[] args) {
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash
@@ -52,14 +41,15 @@ public final class Main {
         Singletons.getControl().initialize();
     }
 
-    /** @throws Throwable  */
     @Override
     protected void finalize() throws Throwable {
-        try { } catch (Exception e) { }
-        finally {
-            super.finalize();
-            //more code can be written here as per need of application
+        try {
             Singletons.getModel().close();
+        } finally {
+            super.finalize();
         }
     }
+
+    // disallow instantiation
+    private Main() { }
 }

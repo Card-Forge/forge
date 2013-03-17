@@ -20,7 +20,6 @@ package forge.card.cost;
 import java.util.List;
 
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Singletons;

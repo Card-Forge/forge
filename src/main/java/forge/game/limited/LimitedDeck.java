@@ -19,13 +19,13 @@ import com.google.common.collect.Lists;
 
 import forge.Constant.Preferences;
 import forge.card.CardAiHints;
-import forge.card.MagicColor;
-import forge.card.ColorSet;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.card.ColorSet;
 import forge.card.DeckHints;
-import forge.card.mana.ManaCostShard;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;

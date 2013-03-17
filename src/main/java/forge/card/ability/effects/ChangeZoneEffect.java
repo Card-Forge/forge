@@ -2,6 +2,7 @@ package forge.card.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.google.common.base.Predicates;
 
 import forge.Card;

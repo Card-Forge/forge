@@ -25,9 +25,9 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
 
-import forge.card.MagicColor;
-import forge.card.ColorSet;
 import forge.card.CardRules;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 
 /**

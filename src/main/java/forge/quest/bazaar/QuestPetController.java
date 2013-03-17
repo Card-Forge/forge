@@ -17,7 +17,6 @@
  */
 package forge.quest.bazaar;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import forge.item.CardToken;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestAssets;
 
@@ -122,7 +120,7 @@ public class QuestPetController implements IQuestBazaarItem {
      */
     @Override
     public final ImageIcon getIcon(final QuestAssets qA) {
-        final String path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN).getAbsolutePath() + File.separator;
+        final String path = NewConstants.CACHE_TOKEN_PICS_DIR;
         final int level = this.getPetLevel(qA);
         return new ImageIcon(path + this.levels.get(level < this.maxLevel ? level + 1 : level).getPicture() + ".jpg");
     }

@@ -76,7 +76,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     private final JLabel btnPrintProxies = new FLabel.Builder()
             .fontSize(14)
-            .tooltip("Print Proxies")
+            .tooltip("Print to HTML file")
             .iconInBackground(true)
             .iconAlignX(SwingConstants.CENTER)
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PRINT))

@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.spellability.Ability;

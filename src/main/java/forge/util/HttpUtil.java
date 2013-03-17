@@ -26,33 +26,34 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 
 import forge.Constant.Preferences;
 
-/**
- * <p>
- * HttpUtil class.
- * </p>
- * 
- * @author Forge
- * @version $Id$
- * @since 1.0.15
- */
 public class HttpUtil {
 
     private static final String BOUNDARY = "--7d021a37605f0";
 
-    /**
-     * <p>
-     * upload.
-     * </p>
-     * 
-     * @param sURL
-     *            a {@link java.lang.String} object.
-     * @param file
-     *            a {@link java.lang.String} object.
-     */
-    public final void upload(final String sURL, final String file) {
+    public static void upload(String sURL, String file) {
+        upload(sURL, new File(file));
+    }
+    
+    public static void upload(String url, Collection<?> data) {
+        File tempFile = null;
+        try {
+            tempFile = File.createTempFile("forge.upload", null);
+            FileUtil.writeFile(tempFile, data);
+            HttpUtil.upload(url, tempFile);
+        } catch (IOException e) {
+            System.err.println("unable to write to temp file for upload");
+        } finally {
+            if (null != tempFile) {
+                tempFile.delete();
+            }
+        }
+    }
+    
+    public static void upload(String sURL, File f) {
         URL url = null;
         try {
             url = new URL(sURL);
@@ -80,7 +81,6 @@ public class HttpUtil {
             return;
         }
 
-        final File f = new File(file);
         final String str = "--" + HttpUtil.BOUNDARY + "\r\n"
                 + "Content-Disposition: form-data;name=\"data\"; filename=\"" + f.getName() + "\"\r\n"
                 + "Content-Type: text/plain\r\n\r\n";
@@ -155,16 +155,7 @@ public class HttpUtil {
         }
     }
 
-    /**
-     * <p>
-     * getURL.
-     * </p>
-     * 
-     * @param sURL
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getURL(final String sURL) {
+    public static  String getURL(final String sURL) {
         URL url = null;
         try {
             url = new URL(sURL);
@@ -189,4 +180,7 @@ public class HttpUtil {
 
         return buffer.toString();
     }
+    
+    // disable instantiation
+    private HttpUtil () { }
 }

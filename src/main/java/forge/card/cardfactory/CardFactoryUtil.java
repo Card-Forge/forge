@@ -31,7 +31,6 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
@@ -45,9 +44,9 @@ import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
-import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.replacement.ReplacementLayer;
@@ -80,7 +79,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 import forge.util.Aggregates;
-
 import forge.view.ButtonUtil;
 
 /**
@@ -2438,36 +2436,13 @@ public class CardFactoryUtil {
         return true;
     }
 
-    /**
-     * <p>
-     * makeToken.
-     * </p>
-     * 
-     * @param name
-     *            a {@link java.lang.String} object.
-     * @param imageName
-     *            a {@link java.lang.String} object.
-     * @param controller
-     *            a {@link forge.game.player.Player} object.
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     * @param types
-     *            an array of {@link java.lang.String} objects.
-     * @param baseAttack
-     *            a int.
-     * @param baseDefense
-     *            a int.
-     * @param intrinsicKeywords
-     *            an array of {@link java.lang.String} objects.
-     * @return a {@link forge.CardList} object.
-     */
     public static List<Card> makeToken(final String name, final String imageName, final Player controller,
             final String manaCost, final String[] types, final int baseAttack, final int baseDefense,
             final String[] intrinsicKeywords) {
         final List<Card> list = new ArrayList<Card>();
         final Card c = new Card();
         c.setName(name);
-        c.setImageFilename(imageName);
+        c.setImageKey(imageName);
 
         // TODO - most tokens mana cost is 0, this needs to be fixed
         // c.setManaCost(manaCost);
@@ -2528,7 +2503,7 @@ public class CardFactoryUtil {
         final List<String> kal = thisToken.getIntrinsicKeyword();
         final String[] tokenKeywords = new String[kal.size()];
         kal.toArray(tokenKeywords);
-        final List<Card> tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageFilename(),
+        final List<Card> tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageKey(),
                 thisToken.getController(), thisToken.getManaCost().toString(), tokenTypes, thisToken.getBaseAttack(),
                 thisToken.getBaseDefense(), tokenKeywords);
 

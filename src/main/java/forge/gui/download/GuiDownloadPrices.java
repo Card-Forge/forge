@@ -18,30 +18,21 @@
 package forge.gui.download;
 
 import java.io.File;
+import java.util.ArrayList;
 
-import forge.properties.ForgeProps;
+import com.google.common.collect.Lists;
+
 import forge.properties.NewConstants;
 
-/** */
 @SuppressWarnings("serial")
 public class GuiDownloadPrices extends GuiDownloader {
-
-    /**
-     * Constructor.
-     */
     public GuiDownloadPrices() {
         super();
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.download.GuiDownloader#getNeededImages()
-     */
     @Override
-    protected DownloadObject[] getNeededImages() {
-        final File f = ForgeProps.getFile(NewConstants.Quest.PRICE);
-        final String url = "http://www.cardforge.org/MagicInfo/pricegen.php";
-        final DownloadObject[] objects = {new DownloadObject(url, f)};
-        return objects;
+    protected ArrayList<DownloadObject> getNeededImages() {
+        final File f = new File(NewConstants.QUEST_CARD_PRICE_FILE);
+        return Lists.newArrayList(new DownloadObject(NewConstants.URL_PRICE_DOWNLOAD, f));
     }
-
-} // @jve:decl-index=0:visual-constraint="10,10"
+}

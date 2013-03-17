@@ -17,22 +17,34 @@
 package forge.gui.match;
 
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 import forge.Card;
 import forge.Singletons;
-import forge.control.FControl;
-
 import forge.card.BoosterData;
 import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
+import forge.control.FControl;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameLossReason;
 import forge.game.GameOutcome;
 import forge.game.MatchController;
 import forge.game.player.LobbyPlayer;
+import forge.game.player.Player;
 import forge.game.player.PlayerOutcome;
 import forge.game.player.PlayerStatistics;
-import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.ListChooser;
@@ -47,27 +59,15 @@ import forge.item.InventoryItem;
 import forge.item.OpenablePack;
 import forge.item.TournamentPack;
 import forge.properties.ForgePreferences.FPref;
-import forge.quest.QuestEventChallenge;
+import forge.quest.IQuestRewardCard;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
-import forge.quest.IQuestRewardCard;
+import forge.quest.QuestEventChallenge;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
+import forge.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.util.MyRandom;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 /**
  * <p>
@@ -210,7 +210,7 @@ public class QuestWinLose extends ControlWinLose {
         // Grant booster on a win, or on a loss in easy mode
         if (this.wonMatch || difficulty == 0) {
             final int outcome = this.wonMatch ? wins : qData.getAchievements().getLost();
-            if ((outcome % Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.WINS_BOOSTER, qData.getAchievements().getDifficulty())) == 0) {
+            if ((outcome % Singletons.getModel().getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty())) == 0) {
                 this.awardBooster();
             }
         }
@@ -262,7 +262,7 @@ public class QuestWinLose extends ControlWinLose {
      */
     @Override
     public final void actionOnQuit() {
-        final int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
+        final int x = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.PENALTY_LOSS);
 
         // Record win/loss in quest data
         if (this.wonMatch) {
@@ -328,7 +328,7 @@ public class QuestWinLose extends ControlWinLose {
         int credEstates = 0;
 
         // Basic win bonus
-        final int base = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_BASE);
+        final int base = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.REWARDS_BASE);
         double multiplier = 1;
 
         String diff = qEvent.getDifficulty();
@@ -345,7 +345,7 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         credBase += (int) ((base * multiplier) + (Double.parseDouble(Singletons.getModel().getQuestPreferences()
-                .getPreference(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
+                .getPref(QPref.REWARDS_WINS_MULTIPLIER)) * qData.getAchievements().getWin()));
 
         sb.append(diff + " opponent: " + credBase + " credits.<br>");
         // Gameplay bonuses (for each game win)
@@ -400,7 +400,7 @@ public class QuestWinLose extends ControlWinLose {
             // Mulligan to zero
             final int cntCardsHumanStartedWith = humanRating.getOpeningHandSize();
             final int mulliganReward = Singletons.getModel().getQuestPreferences()
-                    .getPreferenceInt(QPref.REWARDS_MULLIGAN0);
+                    .getPrefInt(QPref.REWARDS_MULLIGAN0);
 
             if (0 == cntCardsHumanStartedWith) {
                 credGameplay += mulliganReward;
@@ -433,8 +433,8 @@ public class QuestWinLose extends ControlWinLose {
 
         // Undefeated bonus
         if (hasNeverLost) {
-            credUndefeated += Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
-            final int reward = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            credUndefeated += Singletons.getModel().getQuestPreferences().getPrefInt(QPref.REWARDS_UNDEFEATED);
+            final int reward = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.REWARDS_UNDEFEATED);
             sb.append(String.format("You have not lost once! " + "Bonus: %d credits.<br>", reward));
         }
 
@@ -549,7 +549,7 @@ public class QuestWinLose extends ControlWinLose {
 
         if (qData.getFormat() == null) {
             final List<GameFormat> formats = new ArrayList<GameFormat>();
-            String preferredFormat = Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT);
+            String preferredFormat = Singletons.getModel().getQuestPreferences().getPref(QPref.BOOSTER_FORMAT);
 
             GameFormat pref = null;
             for (GameFormat f : Singletons.getModel().getFormats()) {
@@ -564,7 +564,7 @@ public class QuestWinLose extends ControlWinLose {
             ch.show(pref);
 
             final GameFormat selected = ch.getSelectedValue();
-            Singletons.getModel().getQuestPreferences().setPreference(QPref.BOOSTER_FORMAT, selected.toString());
+            Singletons.getModel().getQuestPreferences().setPref(QPref.BOOSTER_FORMAT, selected.toString());
 
             cardsWon = qData.getCards().addCards(selected.getFilterPrinted());
 
@@ -734,7 +734,7 @@ public class QuestWinLose extends ControlWinLose {
     }
 
     private void penalizeLoss() {
-        final int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
+        final int x = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.PENALTY_LOSS);
         this.icoTemp = QuestWinLose.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
@@ -778,17 +778,17 @@ public class QuestWinLose extends ControlWinLose {
         QuestPreferences qp = Singletons.getModel().getQuestPreferences();
         if (null == whyAiLost) {
             // Felidar, Helix Pinnacle, etc.
-            return qp.getPreferenceInt(QPref.REWARDS_ALTERNATIVE);
+            return qp.getPrefInt(QPref.REWARDS_ALTERNATIVE);
         }
         switch (whyAiLost) {
         case LifeReachedZero:
             return 0; // nothing special here, ordinary kill
         case Milled:
-            return qp.getPreferenceInt(QPref.REWARDS_MILLED);
+            return qp.getPrefInt(QPref.REWARDS_MILLED);
         case Poisoned:
-            return qp.getPreferenceInt(QPref.REWARDS_POISON);
+            return qp.getPrefInt(QPref.REWARDS_POISON);
         case SpellEffect: // Door to Nothingness, etc.
-            return qp.getPreferenceInt(QPref.REWARDS_ALTERNATIVE);
+            return qp.getPrefInt(QPref.REWARDS_ALTERNATIVE);
         default:
             return 0;
         }
@@ -807,13 +807,13 @@ public class QuestWinLose extends ControlWinLose {
         int credits;
 
         if (iTurn == 1) {
-            credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN1);
+            credits = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.REWARDS_TURN1);
         } else if (iTurn <= 5) {
-            credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN5);
+            credits = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.REWARDS_TURN5);
         } else if (iTurn <= 10) {
-            credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN10);
+            credits = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.REWARDS_TURN10);
         } else if (iTurn <= 15) {
-            credits = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_TURN15);
+            credits = Singletons.getModel().getQuestPreferences().getPrefInt(QPref.REWARDS_TURN15);
         } else {
             credits = 0;
         }

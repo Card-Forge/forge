@@ -27,8 +27,8 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang;
+import forge.properties.NewConstants;
+import forge.util.FileUtil;
 
 /** 
  * Assembles Swing components of utilities submenu singleton.
@@ -52,7 +52,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final FLabel btnDownloadPics        = _makeButton("Download LQ Card Pictures");
     private final FLabel btnDownloadQuestImages = _makeButton("Download Quest Images");
     private final FLabel btnReportBug           = _makeButton("Report a Bug");
-    private final FLabel btnImportPictures      = _makeButton("Import Pictures");
+    private final FLabel btnImportPictures      = _makeButton("Import Data");
     private final FLabel btnHowToPlay           = _makeButton("How To Play");
     private final FLabel btnDownloadPrices      = _makeButton("Download Card Prices");
     private final FLabel btnLicensing           = _makeButton("License Details");
@@ -79,7 +79,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         pnlContent.add(_makeLabel("Download up-to-date price list for in-game card shops."), constraintsLBL);
 
         pnlContent.add(btnImportPictures, constraintsBTN);
-        pnlContent.add(_makeLabel("Import card pictures from a local version of Forge."), constraintsLBL);
+        pnlContent.add(_makeLabel("Import data from a local directory."), constraintsLBL);
 
         pnlContent.add(btnReportBug, constraintsBTN);
         pnlContent.add(_makeLabel("Something broken?"), constraintsLBL);
@@ -88,7 +88,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         pnlContent.add(_makeLabel("Rules of the Game."), constraintsLBL);
 
         pnlContent.add(btnLicensing, constraintsBTN);
-        pnlContent.add(_makeLabel("About Forge"), constraintsLBL);
+        pnlContent.add(_makeLabel("Forge legal."), constraintsLBL);
 
         scrContent.setBorder(null);
     }
@@ -141,7 +141,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
         p.add(c, "w 500!");
-        p.add(btnClose, "w 200!, h pref+12, center, gaptop 30");
+        p.add(btnClose, "w 200!, h pref+12!, center, gaptop 30");
         overlay.add(p, "gap 0 0 10% 10%");
         SOverlayUtils.showOverlay();
         
@@ -175,7 +175,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     }
 
     public void showHowToPlay() {
-        FTextArea directions = new FTextArea(ForgeProps.getLocalized(Lang.HowTo.MESSAGE));
+        FTextArea directions = new FTextArea(FileUtil.readFileToString(NewConstants.TEXT_HOWTO_FILE));
         final FScrollPane scr = new FScrollPane(directions, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scr.setBorder(null);

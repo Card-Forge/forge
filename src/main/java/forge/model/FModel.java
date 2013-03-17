@@ -46,13 +46,11 @@ import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
 import forge.util.FileUtil;
-import forge.util.HttpUtil;
 import forge.util.MultiplexOutputStream;
 import forge.util.storage.IStorageView;
 import forge.util.storage.StorageView;
@@ -67,15 +65,11 @@ import forge.util.storage.StorageView;
  * this class must be either private or public static final.
  */
 public enum FModel {
-
-    /** The SINGLETO n_ instance. */
     SINGLETON_INSTANCE;
-    // private static final int NUM_INIT_PHASES = 1;
 
     private final PrintStream oldSystemOut;
     private final PrintStream oldSystemErr;
     private OutputStream logFileStream;
-
 
     private final QuestPreferences questPreferences;
     private final ForgePreferences preferences;
@@ -106,10 +100,23 @@ public enum FModel {
      *             if we could not find or write to the log file.
      */
     private FModel() {
-        // Fire up log file and exception handling
+        // install our error reporter
         ExceptionHandler.registerErrorHandling();
 
-        final File logFile = new File("forge.log");
+        // create profile dirs if they don't already exist
+        for (String dname : NewConstants.PROFILE_DIRS) {
+            File path = new File(dname);
+            if (path.isDirectory()) {
+                // already exists
+                continue;
+            }
+            if (!path.mkdirs()) {
+                throw new RuntimeException("cannot create profile directory: " + dname);
+            }
+        }
+        
+        // initialize log file
+        final File logFile = new File(NewConstants.LOG_FILE);
         final boolean deleteSucceeded = logFile.delete();
 
         if (logFile.exists() && !deleteSucceeded && (logFile.length() != 0)) {
@@ -150,14 +157,11 @@ public enum FModel {
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
-
-        testNetworkConnection();
-
         this.loadDynamicGamedata();
 
         // Loads all cards (using progress bar).
         GuiUtils.checkEDT("CardFactory$constructor", false);
-        final CardStorageReader reader = new CardStorageReader(ForgeProps.getFile(NewConstants.CARDSFOLDER), true);
+        final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true);
         try {
             // this fills in our map of card names to Card instances.
             CardDb.setup(reader.loadCards());
@@ -166,30 +170,12 @@ public enum FModel {
             BugReporter.reportException(ex);
         }
 
-        this.decks = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
+        this.decks = new CardCollections();
         this.quest = new QuestController();
     }
 
     public final QuestController getQuest() {
         return quest;
-    }
-
-    /**
-     * Tests if draft upload is technically possible.
-     * Separate thread, no more hangs when network connection is limited
-     */
-    private void testNetworkConnection() {
-
-        Runnable runNetworkTest = new Runnable() {
-            @Override
-            public void run() {
-                final HttpUtil pinger = new HttpUtil();
-                final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
-                Constant.Runtime.NET_CONN = pinger.getURL(url).equals("pong");
-            }
-        };
-        Thread testNetConnection = new Thread(runNetworkTest, "CheckRemoteDraftAI");
-        testNetConnection.start();
     }
 
     /**
@@ -367,14 +353,10 @@ public enum FModel {
      * Finalizer, generally should be avoided, but here closes the log file
      * stream and resets the system output streams.
      */
-    public final void close() {
+    public final void close() throws IOException {
         System.setOut(this.oldSystemOut);
         System.setErr(this.oldSystemErr);
-        try {
-            this.logFileStream.close();
-        } catch (final IOException e) {
-            // ignored
-        }
+        logFileStream.close();
     }
 
     /** @return {@link forge.util.storage.IStorageView}<{@link forge.card.CardBlock}> */

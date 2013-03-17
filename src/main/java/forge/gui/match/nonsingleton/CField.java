@@ -50,15 +50,12 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.ForgeAction;
+import forge.gui.ForgeAction.MatchConstants;
 import forge.gui.GuiChoose;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.toolbox.FLabel;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
-import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 
 /**
  * Controls Swing components of a player's field instance.
@@ -274,9 +271,9 @@ public class CField implements ICDoc {
          * @param property
          *            &emsp; String obj
          */
-        public ZoneAction(final PlayerZone zone, final String property) {
+        public ZoneAction(final PlayerZone zone, MatchConstants property) {
             super(property);
-            this.title = ForgeProps.getLocalized(property + "/title");
+            this.title = property.title;
             this.zone = zone;
         }
 
@@ -328,17 +325,15 @@ public class CField implements ICDoc {
     /** */
     private void handAction() {
         if ( CField.this.player == playerViewer || Preferences.DEV_MODE || CField.this.player.hasKeyword("Play with your hand revealed.")) {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Hand), HumanHand.BASE)
+            new ZoneAction(CField.this.player.getZone(ZoneType.Hand), MatchConstants.HUMANHAND)
             .actionPerformed(null);
         }
     }
 
     /** */
+    @SuppressWarnings("serial")
     private void flashbackAction() {
-        new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
-
-            private static final long serialVersionUID = 8120331222693706164L;
-
+        new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), MatchConstants.HUMANFLASHBACK) {
             @Override
             protected List<Card> getCardsAsIterable() {
                 return CardFactoryUtil.getExternalZoneActivationCards(player);
@@ -357,23 +352,22 @@ public class CField implements ICDoc {
                 }
             }
         }.actionPerformed(null);
-
     }
 
     /** */
     private void libraryAction() {
         if (!Preferences.DEV_MODE) { return; }
         
-        new ZoneAction(CField.this.player.getZone(ZoneType.Library), HumanLibrary.BASE).actionPerformed(null);
+        new ZoneAction(CField.this.player.getZone(ZoneType.Library), MatchConstants.HUMANLIBRARY).actionPerformed(null);
     }
 
     /** */
     private void exiledAction() {
-        new ZoneAction(CField.this.player.getZone(ZoneType.Exile), NewConstants.Lang.GuiDisplay.HUMAN_EXILED).actionPerformed(null);
+        new ZoneAction(CField.this.player.getZone(ZoneType.Exile), MatchConstants.HUMANEXILED).actionPerformed(null);
     }
 
     private void graveyardAction() {
-        new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), NewConstants.Lang.GuiDisplay.HUMAN_GRAVEYARD).actionPerformed(null);
+        new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), MatchConstants.HUMANGRAVEYARD).actionPerformed(null);
     }
 
     private void avatarAction() {

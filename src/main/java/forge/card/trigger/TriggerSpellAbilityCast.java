@@ -17,9 +17,8 @@
  */
 package forge.card.trigger;
 
-import forge.Singletons;
-
 import forge.Card;
+import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;

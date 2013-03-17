@@ -23,9 +23,9 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.mana.ManaCostShard;
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 
 
 /**
@@ -87,10 +87,10 @@ public class CardRulesReader {
     public final CardRules getCard() {
         CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, hints, needs );
         faces[0].assignMissingFields();
-        if ( null != faces[1] ) faces[1].assignMissingFields();
+        if (null != faces[1]) faces[1].assignMissingFields();
         final CardRules result = new CardRules(faces, altMode, cah, sets);
         result.setDlUrls(pictureUrl);
-        if ( StringUtils.isNotBlank(handLife))
+        if (StringUtils.isNotBlank(handLife))
             result.setVanguardProperties(handLife);
         return result;
     }
@@ -114,12 +114,9 @@ public class CardRulesReader {
      *            the line
      */
     public final void parseLine(final String line) {
-
-
         int colonPos = line.indexOf(':');
         String key = colonPos > 0 ? line.substring(0, colonPos) : line;
         String value = colonPos > 0 ? line.substring(1+colonPos).trim() : null;
-
 
         switch(key.charAt(0)) {
             case 'A':

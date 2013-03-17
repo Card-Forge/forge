@@ -32,16 +32,16 @@ public final class EditionCollection extends StorageView<CardEdition> {
         super(new CardEdition.Reader("res/blockdata/setdata.txt"));
 
         for (CardEdition ee : this) {
-
             String alias = ee.getAlias();
             if (null != alias) {
                 aliasToEdition.put(alias, ee);
             }
+            aliasToEdition.put(ee.getCode2(), ee);
         }
     }
 
     /**
-     * Gets the sets the by code.
+     * Gets a sets by code.  It will search first by three letter codes, then by aliases and two-letter codes.
      * 
      * @param code
      *            the code

@@ -2,6 +2,7 @@ package forge.card.ability.ai;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.Card;

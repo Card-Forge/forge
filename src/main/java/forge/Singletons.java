@@ -25,50 +25,22 @@ import forge.view.FView;
  * Provides global/static access to singleton instances.
  */
 public final class Singletons {
-
-    private static FModel model = null;
-
-    private static FView view = null;
-
+    private static FModel   model   = null;
+    private static FView    view    = null;
     private static FControl control = null;
-
-    /**
-     * Do not instantiate.
-     */
-    private Singletons() {
-        // This line intentionally left blank.
-    }
-
-    /** @return {@link forge.model.FModel} */
-    public static FModel getModel() {
-        return Singletons.model;
-    }
-
-    /** @param model0 &emsp; {@link forge.model.FModel} */
-    public static void setModel(final FModel model0) {
-        Singletons.model = model0;
-    }
 
     /**
      * IMPORTANT - does not return view frame!  Must call
      * getFrame() from FView for that.
-     * @return {@link forge.model.JFrame} */
-    public static FView getView() {
-        return Singletons.view;
-    }
+     */
+    public static FView    getView()    { return view;    }
+    public static FControl getControl() { return control; }
+    public static FModel   getModel()   { return model;   }
 
-    /** @param view0 &emsp; {@link forge.model.FView} */
-    public static void setView(final FView view0) {
-        Singletons.view = view0;
-    }
+    public static void setModel  (FModel   model0)   { model   = model0;   }
+    public static void setView   (FView    view0)    { view    = view0;    }
+    public static void setControl(FControl control0) { control = control0; }
 
-    /** @return {@link forge.control.FControl} */
-    public static FControl getControl() {
-        return Singletons.control;
-    }
-
-    /** @param control0 &emsp; {@link forge.control.FControl} */
-    public static void setControl(final FControl control0) {
-        Singletons.control = control0;
-    }
+    // disallow instantiation
+    private Singletons() { }
 }

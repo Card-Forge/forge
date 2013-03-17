@@ -53,7 +53,7 @@ public enum CSubmenuQuestPrefs implements ICDoc {
             return;
         }
 
-        prefs.setPreference(i0.getQPref(), i0.getText());
+        prefs.setPref(i0.getQPref(), i0.getText());
         prefs.save();
         i0.setPreviousText(i0.getText());
     }

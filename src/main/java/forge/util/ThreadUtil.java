@@ -21,6 +21,7 @@
 package forge.util;
 
 import java.lang.reflect.InvocationTargetException;
+
 import javax.swing.SwingUtilities;
 
 /**

@@ -2,22 +2,17 @@ package forge.card;
 
 import forge.card.mana.ManaCost;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
 public interface ICardCharacteristics {
+    String   getName();
+    CardType getType();
+    ManaCost getManaCost();
+    ColorSet getColor();
 
-    public abstract String getName();
-    public abstract CardType getType();
-    public abstract ManaCost getManaCost();
-    public abstract ColorSet getColor();
+    int    getIntPower();
+    int    getIntToughness();
+    String getPower();
+    String getToughness();
+    int    getInitialLoyalty();
 
-    public abstract int getIntPower();
-    public abstract int getIntToughness();
-    public abstract String getPower();
-    public abstract String getToughness();
-    public abstract int getInitialLoyalty();
-
-    public abstract String getOracleText();
+    String getOracleText();
 }

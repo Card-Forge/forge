@@ -22,9 +22,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;

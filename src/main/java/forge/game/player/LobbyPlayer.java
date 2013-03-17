@@ -6,18 +6,15 @@ package forge.game.player;
  * May store player's assets here.
  *
  */
-public class LobbyPlayer {
+public class LobbyPlayer implements IHasIcon {
 
     protected final PlayerType type;
     public final PlayerType getType() {
         return type;
     }
 
-
-
     protected final String name;
-    // string with picture is more important than avatar index
-    protected String picture;
+    protected String imageKey;
     private int avatarIndex = -1;
 
     public LobbyPlayer(PlayerType type, String name) {
@@ -26,18 +23,16 @@ public class LobbyPlayer {
         this.name = name;
     }
 
-    public final String getPicture() {
-        return picture;
+    @Override
+    public final String getIconImageKey() {
+        return imageKey;
     }
 
-    public final void setPicture(String picture) {
-        this.picture = picture;
+    @Override
+    public final void setIconImageKey(String imageKey) {
+        this.imageKey = imageKey;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public String getName() {
         return name;
     }

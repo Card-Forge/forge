@@ -28,12 +28,13 @@ import java.util.TreeMap;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.Constant;
 import forge.Singletons;
-import forge.card.MagicColor;
-import forge.card.ColorSet;
-import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.game.player.PlayerType;
 import forge.item.CardDb;
@@ -67,19 +68,6 @@ public abstract class GenerateColoredDeckBase {
 
     StringBuilder tmpDeck = new StringBuilder();
 
-//    protected final float landsPercentage = 0.42f;
-//    protected float creatPercentage = 0.34f;
-//    protected float spellPercentage = 0.24f;
-    /**
-     * <p>
-     * Constructor for Generate2ColorDeck.
-     * </p>
-     * 
-     * @param clr1
-     *            a {@link java.lang.String} object.
-     * @param clr2
-     *            a {@link java.lang.String} object.
-     */
     public GenerateColoredDeckBase() {
         this.maxDuplicates = Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS) ? 1 : 4;
         tDeck = new ItemPool<CardPrinted>(CardPrinted.class);

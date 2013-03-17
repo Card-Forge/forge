@@ -5,6 +5,7 @@ package forge.gui.home.gauntlet;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,6 +21,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
 import forge.gauntlet.GauntletData;
+import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 
@@ -60,7 +62,7 @@ public class QuickGauntletLister extends JPanel {
         Collections.sort(sorted, new Comparator<GauntletData>() {
             @Override
             public int compare(final GauntletData x, final GauntletData y) {
-                return x.getActiveFile().getName().compareTo(y.getActiveFile().getName());
+                return x.getName().compareTo(y.getName());
             }
         });
 
@@ -85,8 +87,7 @@ public class QuickGauntletLister extends JPanel {
         RowPanel row;
         String name;
         for (GauntletData gd : sorted) {
-            name = gd.getActiveFile().getName();
-            name = name.substring(0, name.length() - 4);
+            name = gd.getName();
 
             row = new RowPanel(gd);
             row.setToolTipText(name);
@@ -113,12 +114,12 @@ public class QuickGauntletLister extends JPanel {
     }
 
     /** @return {@link forge.deck.Deck} */
-    public GauntletData getSelectedGauntlet() {
+    public File getSelectedGauntletFile() {
         if (previousSelect == null) {
             return null;
         }
         else {
-            return previousSelect.getGauntletData();
+            return GauntletIO.getGauntletFile(previousSelect.getGauntletData());
         }
     }
 
@@ -221,7 +222,7 @@ public class QuickGauntletLister extends JPanel {
      */
     public boolean setSelectedIndex(int i0) {
         if (i0 >= rows.length) { return false; }
-        selectHandler(rows[i0]);
+        selectHandler(rows[Math.max(0, i0)]);
         return true;
     }
 
@@ -263,7 +264,7 @@ public class QuickGauntletLister extends JPanel {
         final GauntletData gd = r0.getGauntletData();
 
         final int n = JOptionPane.showConfirmDialog(null,
-                "Are you sure you want to delete \"" + gd.getActiveFile().getName()
+                "Are you sure you want to delete \"" + gd.getName()
                 + "\" ?", "Delete Gauntlet", JOptionPane.YES_NO_OPTION);
 
         if (n == JOptionPane.NO_OPTION) {
@@ -271,7 +272,7 @@ public class QuickGauntletLister extends JPanel {
         }
 
 
-        gd.getActiveFile().delete();
+        GauntletIO.getGauntletFile(gd).delete();
         if (cmdRowDelete != null) { cmdRowDelete.execute(); }
 
         this.setSelectedIndex(0);

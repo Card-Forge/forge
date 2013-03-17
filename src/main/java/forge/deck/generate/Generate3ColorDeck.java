@@ -20,14 +20,12 @@ package forge.deck.generate;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.card.MagicColor;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
-import forge.error.BugReporter;
 import forge.game.player.PlayerType;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
-import forge.properties.ForgeProps;
 
 /**
  * <p>
@@ -99,9 +97,6 @@ public class Generate3ColorDeck extends GenerateColoredDeckBase {
 
         adjustDeckSize(size);
         tmpDeck.append("DeckSize:").append(tDeck.countAll()).append("\n");
-        if (ForgeProps.getProperty("showdeck/3color", "false").equals("true")) {
-            BugReporter.reportBug(tmpDeck.toString());
-        }
 
         return tDeck;
     }

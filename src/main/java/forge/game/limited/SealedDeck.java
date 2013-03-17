@@ -11,9 +11,9 @@ import com.google.common.collect.Iterables;
 
 import forge.Constant;
 import forge.Constant.Color;
-import forge.card.ColorSet;
-import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
+import forge.card.ColorSet;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
 

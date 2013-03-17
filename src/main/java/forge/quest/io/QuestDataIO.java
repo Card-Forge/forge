@@ -59,7 +59,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.error.BugReporter;
-import forge.quest.data.GameFormatQuest;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -68,11 +67,11 @@ import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.item.PreconDeck;
 import forge.item.TournamentPack;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestMode;
 import forge.quest.bazaar.QuestItemType;
+import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestAchievements;
 import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestData;
@@ -356,7 +355,7 @@ public class QuestDataIO {
         try {
             final XStream xStream = QuestDataIO.getSerializer(false);
 
-            final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR), qd.getName());
+            final File f = new File(NewConstants.QUEST_SAVE_DIR, qd.getName());
             QuestDataIO.savePacked(f + ".dat", xStream, qd);
             // QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
 
@@ -535,10 +534,9 @@ public class QuestDataIO {
                 }
                 reader.moveUp();
             }
-            return result;
             
+            return result;
         }
-        
     }
 
     private static class ItemPoolToXml implements Converter {

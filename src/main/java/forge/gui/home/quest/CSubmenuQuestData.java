@@ -14,13 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.Singletons;
 import forge.game.GameFormat;
 import forge.gui.framework.ICDoc;
 import forge.item.CardPrinted;
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestMode;
@@ -100,21 +99,10 @@ public enum CSubmenuQuestData implements ICDoc {
     @Override
     public void update() {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
-        final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
+        final File dirQuests = new File(NewConstants.QUEST_SAVE_DIR);
         final QuestController qc = Singletons.getModel().getQuest();
 
-        // Temporary transition code between v1.2.2 and v1.2.3.
-        // Can be safely deleted after release of 1.2.3.
-        if (!dirQuests.exists()) {
-            dirQuests.mkdirs();
-        }
-        File olddata = new File("res/quest/questData.dat");
-        File newpath = new File(dirQuests.getPath() + "/questData.dat");
-
-        if (olddata.exists()) { olddata.renameTo(newpath); }
-        // end block which can be deleted
-
-        // Iterate over files and load quest datas for each.
+        // Iterate over files and load quest data for each.
         FilenameFilter takeDatFiles = new FilenameFilter() {
             @Override
             public boolean accept(final File dir, final String name) {
@@ -127,13 +115,12 @@ public enum CSubmenuQuestData implements ICDoc {
             arrQuests.put(f.getName(), QuestDataIO.loadData(f));
         }
 
-        // Populate list with available quest datas.
+        // Populate list with available quest data.
         view.getLstQuests().setQuests(new ArrayList<QuestData>(arrQuests.values()));
 
         // If there are quests available, force select.
         if (arrQuests.size() > 0) {
-            final String questname = Singletons.getModel().getQuestPreferences()
-                    .getPreference(QPref.CURRENT_QUEST);
+            final String questname = Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_QUEST);
 
             // Attempt to select previous quest.
             if (arrQuests.get(questname) != null) {
@@ -283,7 +270,7 @@ public enum CSubmenuQuestData implements ICDoc {
         Singletons.getModel().getQuest().save();
 
         // Save in preferences.
-        Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST, questName + ".dat");
+        Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
         Singletons.getModel().getQuestPreferences().save();
 
         update();
@@ -295,7 +282,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 .getLstQuests().getSelectedQuest());
 
         // Save in preferences.
-        Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST,
+        Singletons.getModel().getQuestPreferences().setPref(QPref.CURRENT_QUEST,
                 Singletons.getModel().getQuest().getName() + ".dat");
         Singletons.getModel().getQuestPreferences().save();
 

@@ -22,7 +22,6 @@ import java.util.List;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
-
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;

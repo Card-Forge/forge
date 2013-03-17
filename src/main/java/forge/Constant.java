@@ -24,9 +24,6 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
-
 /**
  * <p>
  * Constant interface.
@@ -36,9 +33,6 @@ import forge.properties.NewConstants;
  * @version $Id$
  */
 public final class Constant {
-    /** Constant <code>ProgramName="Forge - http://cardforge.org"</code>. */
-    public static final String PROGRAM_NAME = "Forge - " + ForgeProps.getProperty(NewConstants.CARDFORGE_URL);
-
     // used to pass information between the GUI screens
     /**
      * The Class Runtime.

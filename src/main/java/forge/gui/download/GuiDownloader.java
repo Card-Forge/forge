@@ -32,9 +32,7 @@ import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.regex.Pattern;
 
 import javax.swing.AbstractButton;
 import javax.swing.DefaultBoundedRangeModel;
@@ -50,7 +48,7 @@ import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -65,16 +63,11 @@ import forge.gui.toolbox.FProgressBar;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.JXButtonPanel;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 
-/** */
 @SuppressWarnings("serial")
 public abstract class GuiDownloader extends DefaultBoundedRangeModel implements Runnable {
-
-    /** */
     public static final Proxy.Type[] TYPES = Proxy.Type.values(); /** */
 
     // Actions and commands
@@ -100,28 +93,27 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     private final FPanel pnlDialog = new FPanel(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
     private final FProgressBar barProgress = new FProgressBar();
     private final FButton btnStart = new FButton("Start");
-    private final JTextField txfAddr = new JTextField(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.PROXY_ADDRESS));
-    private final JTextField txfPort = new JTextField(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.PROXY_PORT));
+    private final JTextField txfAddr = new JTextField("Proxy Address");
+    private final JTextField txfPort = new JTextField("Proxy Port");
 
     private final FLabel btnClose = new FLabel.Builder().text("X")
             .hoverable(true).fontAlign(SwingConstants.CENTER).cmdClick(cmdClose).build();
 
-    private final JRadioButton radProxyNone = new FRadioButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.NO_PROXY));
-    private final JRadioButton radProxySocks = new FRadioButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.SOCKS_PROXY));
-    private final JRadioButton radProxyHTTP = new FRadioButton(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.HTTP_PROXY));
+    private final JRadioButton radProxyNone = new FRadioButton("No Proxy");
+    private final JRadioButton radProxySocks = new FRadioButton("SOCKS Proxy");
+    private final JRadioButton radProxyHTTP = new FRadioButton("HTTP Proxy");
 
     // Proxy info
-    private int type; /** */
+    private int type;
 
     // Progress variables
-    private DownloadObject[] cards; /** */
-    private int card; /** */
-    private boolean cancel; /** */
-    private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; /** */
-    private int tptr = 0; /** */
-    private long lTime = System.currentTimeMillis(); /** */
+    private ArrayList<DownloadObject> cards;
+    private int card;
+    private boolean cancel;
+    private final long[] times = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int tptr = 0;
+    private long lTime = System.currentTimeMillis();
 
-    /** Constructor. */
     protected GuiDownloader() {
         String radConstraints = "w 100%!, h 30px!, gap 2% 0 0 10px";
         JXButtonPanel grpPanel = new JXButtonPanel();
@@ -160,7 +152,11 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         SwingWorker<Void, Void> thrGetImages = new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
-                GuiDownloader.this.cards = GuiDownloader.this.getNeededImages();
+                try {
+                    GuiDownloader.this.cards = GuiDownloader.this.getNeededImages();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 return null;
             }
 
@@ -174,22 +170,20 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     }
 
     private void readyToStart() {
-        if (this.cards.length == 0) {
+        if (this.cards.size() == 0) {
             barProgress.setString("All items have been downloaded.");
             btnStart.setVisible(true);
             btnStart.setText("OK");
             btnStart.addActionListener(actOK);
         }
         else {
-            barProgress.setMaximum(this.cards.length);
+            barProgress.setMaximum(this.cards.size());
             barProgress.setString(
-                    this.cards.length == 1
-                        ? "1 item found."
-                        : this.cards.length + " items found.");
-
+                    this.cards.size() == 1 ? "1 item found." : this.cards.size() + " items found.");
             btnStart.setVisible(true);
             btnStart.addActionListener(actStartDownload);
         }
+        
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -210,13 +204,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         FOverlay.SINGLETON_INSTANCE.getPanel().removeAll();
     }
 
-    /**
-     * <p>
-     * getAverageTimePerObject.
-     * </p>
-     * 
-     * @return a int.
-     */
     protected final int getAverageTimePerObject() {
         int numNonzero = 10;
 
@@ -239,14 +226,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         return tTime / Math.max(1, numNonzero);
     }
 
-    /**
-     * <p>
-     * update.
-     * </p>
-     * 
-     * @param card
-     *            a int.
-     */
     private void update(final int card) {
         this.card = card;
 
@@ -257,9 +236,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 this.card = card;
             }
 
-            /**
-             * 
-             */
             @Override
             public void run() {
                 GuiDownloader.this.fireStateChanged();
@@ -268,10 +244,10 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
                 final int a = GuiDownloader.this.getAverageTimePerObject();
 
-                if (this.card != GuiDownloader.this.cards.length) {
-                    sb.append(this.card + "/" + GuiDownloader.this.cards.length + " - ");
+                if (this.card != GuiDownloader.this.cards.size()) {
+                    sb.append(this.card + "/" + GuiDownloader.this.cards.size() + " - ");
 
-                    long t2Go = (GuiDownloader.this.cards.length - this.card) * a;
+                    long t2Go = (GuiDownloader.this.cards.size() - this.card) * a;
 
                     boolean secOnly = true;
                     if (t2Go > 3600000) {
@@ -290,23 +266,17 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                         sb.append(String.format("0:%02d remaining.", t2Go / 1000));
                     }
                 } else {
-                    sb.append(String.format(ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.BAR_CLOSE),
-                            this.card, GuiDownloader.this.cards.length));
+                    sb.append(String.format("%d of %d items finished! Please close!",
+                            this.card, GuiDownloader.this.cards.size()));
                 }
 
                 GuiDownloader.this.barProgress.setString(sb.toString());
-                System.out.println(this.card + "/" + GuiDownloader.this.cards.length + " - " + a);
+                System.out.println(this.card + "/" + GuiDownloader.this.cards.size() + " - " + a);
             }
         }
         EventQueue.invokeLater(new Worker(card));
     }
 
-    /**
-     * <p>
-     * run.
-     * </p>
-     */
-    @Override
     public final void run() {
         BufferedInputStream in;
         BufferedOutputStream out;
@@ -322,7 +292,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                         Integer.parseInt(this.txfPort.getText())));
             } catch (final Exception ex) {
                 BugReporter.reportException(ex,
-                        ForgeProps.getLocalized(NewConstants.Lang.GuiDownloadPictures.Errors.PROXY_CONNECT),
+                        "Proxy connection could not be established!\nProxy address: %s\nProxy port: %s",
                         this.txfAddr.getText(), this.txfPort.getText());
                 return;
             }
@@ -331,21 +301,21 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         if (p != null) {
             final byte[] buf = new byte[1024];
             int len;
-            for (this.update(0); (this.card < this.cards.length) && !this.cancel; this.update(this.card + 1)) {
-
-                final String url = this.cards[this.card].getSource();
-                final File fileDest =  this.cards[this.card].getDestination();
+            for (this.update(0); (this.card < this.cards.size()) && !this.cancel; this.update(this.card + 1)) {
+                final String url = this.cards.get(this.card).getSource();
+                final File fileDest =  this.cards.get(this.card).getDestination();
                 final File base = fileDest.getParentFile();
 
+                //System.out.println(String.format("Downloading %s to %s", url, fileDest.getPath()));
                 try {
                     // test for folder existence
                     if (!base.exists() && !base.mkdir()) { // create folder if not found
                         System.out.println("Can't create folder" + base.getAbsolutePath());
                     }
-                    // Don't allow redirections here!
-
+                    
                     URL imageUrl = new URL(url);
                     HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                    // don't allow redirections here -- they indicate 'file not found' on the server
                     conn.setInstanceFollowRedirects(false);
                     conn.connect();
 
@@ -361,7 +331,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     while ((len = in.read(buf)) != -1) {
                         // user cancelled
                         if (this.cancel) {
-                            conn.disconnect();
                             in.close();
                             out.flush();
                             out.close();
@@ -374,7 +343,6 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
 
                         out.write(buf, 0, len);
                     } // while - read and write file
-                    conn.disconnect();
                     in.close();
                     out.flush();
                     out.close();
@@ -389,7 +357,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                     Log.error("LQ Pictures", "Error downloading pictures", ex);
                 }
 
-                // throttle -- why?
+                // throttle to reduce load on the server
                 try {
                     Thread.sleep(r.nextInt(250) + 250);
                 } catch (final InterruptedException e) {
@@ -397,108 +365,26 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 }
             } // for
         }
-    } // run
+    }
 
-    /**
-     * <p>
-     * getNeededCards.
-     * </p>
-     * 
-     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
-     */
-    protected abstract DownloadObject[] getNeededImages();
+    protected abstract ArrayList<DownloadObject> getNeededImages();
 
-    /**
-     * <p>
-     * readFile.
-     * </p>
-     * 
-     * @param urlsFile
-     *            a {@link java.lang.String} object.
-     * @param dir
-     *            a {@link java.util.File} object.
-     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
-     */
-    protected static List<DownloadObject> readFile(final String urlsFile, final File dir) {
-        List<String> fileLines = FileUtil.readFile(ForgeProps.getFile(urlsFile));
-        final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
-        final Pattern splitter = Pattern.compile(Pattern.quote("/"));
-        final Pattern replacer = Pattern.compile(Pattern.quote("%20"));
-
-        for (String line : fileLines) {
-
-            if (line.equals("") || line.startsWith("#")) {
-                continue;
+    protected static void addMissingItems(ArrayList<DownloadObject> list, String nameUrlFile, String dir) {
+        for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(nameUrlFile)) {
+            File f = new File(dir, nameUrlPair.getLeft());
+            if (!f.exists()) {
+                list.add(new DownloadObject(nameUrlPair.getRight(), f));
             }
-
-            String[] parts = splitter.split(line);
-
-            // Maybe there's a better way to do this, but I just want the
-            // filename from a URL
-            String last = parts[parts.length - 1];
-            list.add(new DownloadObject(line, new File(dir, replacer.matcher(last).replaceAll(" "))));
         }
-        return list;
-    } // readFile()
+    }
 
-    /**
-     * <p>
-     * readFile.
-     * </p>
-     * 
-     * @param urlNamesFile
-     *            a {@link java.lang.String} object.
-     * @param dir
-     *            a {@link java.util.File} object.
-     * @return an array of {@link forge.gui.download.GuiDownloader.DownloadObject} objects.
-     */
-    protected static ArrayList<DownloadObject> readFileWithNames(final String urlNamesFile, final File dir) {
-        List<String> fileLines = FileUtil.readFile(ForgeProps.getFile(urlNamesFile));
-        final ArrayList<DownloadObject> list = new ArrayList<DownloadObject>();
-        final Pattern splitter = Pattern.compile(Pattern.quote(" "));
-        final Pattern replacer = Pattern.compile(Pattern.quote("%20"));
-
-        for (String line : fileLines) {
-
-            if (StringUtils.isBlank(line) || line.startsWith("#")) {
-                continue;
-            }
-            String[] parts = splitter.split(line, 2);
-            String url = parts.length > 1 ? parts[1] : null;
-            list.add(new DownloadObject(url, new File(dir, replacer.matcher(parts[0]).replaceAll(" "))));
-        }
-
-        return list;
-    } // readFile()
-
-    /**
-     * The Class ProxyHandler.
-     */
     protected class ProxyHandler implements ChangeListener {
         private final int type;
 
-        /**
-         * Instantiates a new proxy handler.
-         * 
-         * @param type
-         *            the type
-         */
         public ProxyHandler(final int type) {
             this.type = type;
         }
 
-        /*
-         * (non-Javadoc)
-         * 
-         * @see javax.swing.event.ChangeListener#stateChanged(javax.swing.event.
-         * ChangeEvent)
-         */
-        /**
-         * State changed.
-         * 
-         * @param e
-         *            ChangeEvent
-         */
         @Override
         public final void stateChanged(final ChangeEvent e) {
             if (((AbstractButton) e.getSource()).isSelected()) {
@@ -509,32 +395,23 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
         }
     }
 
-    /**
-     * The Class DownloadObject.
-     */
     protected static class DownloadObject {
 
         private final String source;
         private final File destination;
 
-        /**
-         * @param srcUrl {@link java.lang.String}
-         * @param destFile {@link java.io.File}
-         */
         DownloadObject(final String srcUrl, final File destFile) {
             source = srcUrl;
             destination = destFile;
-            // System.out.println("Created download object: "+name+" "+url+" "+dir);
+            //System.out.println(String.format("downloading %s to %s", srcUrl, destFile));
         }
 
-        /** @return {@link java.lang.String} */
         public String getSource() {
             return source;
         }
 
-        /** @return {@link java.io.File} */
         public File getDestination() {
             return destination;
         }
-    } // DownloadObject
+    }
 }
