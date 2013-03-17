@@ -17,10 +17,8 @@
  */
 package forge.gui.download;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import com.google.common.collect.Lists;
+import java.util.HashMap;
+import java.util.Map;
 
 import forge.properties.NewConstants;
 
@@ -31,8 +29,9 @@ public class GuiDownloadPrices extends GuiDownloader {
     }
 
     @Override
-    protected ArrayList<DownloadObject> getNeededImages() {
-        final File f = new File(NewConstants.QUEST_CARD_PRICE_FILE);
-        return Lists.newArrayList(new DownloadObject(NewConstants.URL_PRICE_DOWNLOAD, f));
+    protected Map<String, String> getNeededImages() {
+        Map<String, String> result = new HashMap<String, String>();
+        result.put(NewConstants.QUEST_CARD_PRICE_FILE, NewConstants.URL_PRICE_DOWNLOAD);
+        return result;
     }
 }

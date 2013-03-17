@@ -18,7 +18,8 @@
 package forge.gui.download;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,8 +39,8 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
     }
 
     @Override
-    protected final ArrayList<DownloadObject> getNeededImages() {
-        ArrayList<DownloadObject> downloads = new ArrayList<DownloadObject>();
+    protected final Map<String, String> getNeededImages() {
+        Map<String, String> downloads = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
         for (final CardPrinted c : Iterables.concat(CardDb.instance().getAllCards(), CardDb.variants().getAllCards())) {
             final String setCode3 = c.getEdition();
@@ -62,10 +63,11 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         return downloads;
     }
 
-    private void addDLObject(String urlPath, String filename, ArrayList<DownloadObject> downloads) {
+    private void addDLObject(String urlPath, String filename, Map<String, String> downloads) {
         File destFile = new File(NewConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
+        // System.out.println(filename);
         if (!destFile.exists()) {
-            downloads.add(new DownloadObject(NewConstants.URL_PIC_DOWNLOAD + urlPath, destFile));
+            downloads.put(destFile.getAbsolutePath(), NewConstants.URL_PIC_DOWNLOAD + urlPath);
         }
     }
 }

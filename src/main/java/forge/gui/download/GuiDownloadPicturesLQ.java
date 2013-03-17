@@ -18,14 +18,14 @@
 package forge.gui.download;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
 import forge.ImageCache;
 import forge.card.CardRules;
+import forge.card.CardSplitType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.NewConstants;
@@ -37,18 +37,17 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
     }
 
     @Override
-    protected final ArrayList<DownloadObject> getNeededImages() {
-        ArrayList<DownloadObject> downloads = new ArrayList<DownloadObject>();
-        Set<String> filenames = new HashSet<String>();
+    protected final Map<String, String> getNeededImages() {
+        Map<String, String> downloads = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
         for (CardPrinted c : CardDb.instance().getAllCards()) {
-            addDLObject(c, false, downloads, filenames);
-            addDLObject(c, true, downloads, filenames);
+            addDLObject(c, downloads, false);
+            if ( c.getRules().getSplitType() == CardSplitType.Transform)
+                addDLObject(c, downloads, true);
         }
 
         for (CardPrinted c : CardDb.variants().getAllCards()) {
-            addDLObject(c, false, downloads, filenames);
-            addDLObject(c, true, downloads, filenames);
+            addDLObject(c, downloads, false);
         }
         
         // Add missing tokens to the list of things to download.
@@ -57,26 +56,37 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
         return downloads;
     }
 
-    private void addDLObject(CardPrinted c, boolean backFace, ArrayList<DownloadObject> downloads, Set<String> filenames) {
+    private void addDLObject(CardPrinted c, Map<String, String> downloads, boolean backFace) {
         CardRules cardRules = c.getRules();
         String urls = backFace ? cardRules.getPictureOtherSideUrl() : cardRules.getPictureUrl();
         if (StringUtils.isEmpty(urls)) {
             return;
         }
 
-
-        for (String url : urls.split("\\\\")) {
-
-            String filename = ImageCache.getImageKey(c, backFace, false);
-            if (filenames.contains(filename)) {
-                continue;
-            }
-            filenames.add(filename);
-            
-            File destFile = new File(NewConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
-            if (!destFile.exists()) {
-                downloads.add(new DownloadObject(url, destFile));
-            }
+        String filename = ImageCache.getImageKey(c, backFace, false);
+        File destFile = new File(NewConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
+        if (destFile.exists())
+            return;
+        
+        filename = destFile.getAbsolutePath();
+        
+        if (downloads.containsKey(filename)) {
+            return;
         }
+
+        final String urlToDownload;
+        int urlIndex = 0;
+        int allUrlsLen = 1;
+        if (urls.indexOf("\\\\") < 0)
+            urlToDownload = urls;
+        else {
+            String[] allUrls = urls.split("\\\\");
+            allUrlsLen = allUrls.length;
+            urlIndex = c.getArtIndex() % allUrlsLen;
+            urlToDownload = allUrls[urlIndex];
+        }
+
+        //System.out.println(c.getName() + "|" + c.getEdition() + " - " + c.getArtIndex() + " -> " + urlIndex + "/" + allUrlsLen + " === " + filename + " <<< " + urlToDownload);
+        downloads.put(destFile.getAbsolutePath(), urlToDownload);
     }
 }

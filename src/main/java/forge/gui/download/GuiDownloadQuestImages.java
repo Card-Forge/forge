@@ -17,7 +17,8 @@
  */
 package forge.gui.download;
 
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import forge.properties.NewConstants;
 
@@ -41,9 +42,9 @@ public class GuiDownloadQuestImages extends GuiDownloader {
      * @return an array of {@link forge.gui.download.GuiDownloadSetPicturesLQ} objects.
      */
     @Override
-    protected final ArrayList<DownloadObject> getNeededImages() {
+    protected final Map<String, String> getNeededImages() {
         // read all card names and urls
-        final ArrayList<DownloadObject> urls = new ArrayList<DownloadObject>();
+        final Map<String, String> urls = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
 
         addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE,  NewConstants.CACHE_ICON_PICS_DIR);
         addMissingItems(urls, NewConstants.IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE,  NewConstants.CACHE_ICON_PICS_DIR);
