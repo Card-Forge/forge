@@ -167,10 +167,8 @@ public class ImageCache {
     // Inventory items don't have to know how a certain client should draw them. 
     // That's why this method is not encapsulated and overloaded in the InventoryItem descendants
     public static String getImageKey(InventoryItem ii, boolean altState) {
-        if ( ii instanceof CardPrinted ) {
-            // have to determine which pictures are present in our filesystem and use either set-pictures or non-set ones.
+        if ( ii instanceof CardPrinted )
             return getImageKey((CardPrinted)ii, altState, true);
-        }
         if ( ii instanceof TournamentPack )
             return ImageCache.TOURNAMENTPACK_PREFIX + ((TournamentPack)ii).getEdition();
         if ( ii instanceof BoosterPack )
