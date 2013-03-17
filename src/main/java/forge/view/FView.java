@@ -153,7 +153,7 @@ public enum FView {
             }
 
 	    final Set<File> doNotDeleteDirs = new HashSet<File>();
-            for (String dir : Lists.newArrayList("decks", "decks/constructed", "decks/draft", "decks/plane", "decks/scheme", "decks/sealed", "gauntlet", "layouts", "pics", "preferences")) {
+            for (String dir : Lists.newArrayList("decks", "decks/constructed", "decks/draft", "decks/plane", "decks/scheme", "decks/sealed", "gauntlet", "layouts", "pics", "preferences", "quest/data")) {
                 doNotDeleteDirs.add(new File("res", dir));
             }
             
