@@ -2521,6 +2521,23 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                     return false;
                 }
             }
+        } else if (property.startsWith("withLowest")) {
+            if (property.substring(10).equals("Life")) {
+                int lowestLife = 1000;
+                List<Player> lowestlifep = new ArrayList<Player>();
+                for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+                    if (p.getLife() == lowestLife) {
+                        lowestlifep.add(p);
+                    } else if (p.getLife() < lowestLife) {
+                        lowestLife = p.getLife();
+                        lowestlifep.clear();
+                        lowestlifep.add(p);
+                    }
+                }
+                if (!lowestlifep.contains(this)) {
+                    return false;
+                }
+            }
         }
 
         return true;

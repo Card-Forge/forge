@@ -63,6 +63,8 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                             System.out.println("No good curse choices. Picking first available: " + choices.get(0));
                             card.setChosenPlayer(choices.get(0));
                         }
+                    } else if ("Pump".equals(sa.getParam("AILogic"))) {
+                        card.setChosenPlayer(choices.contains(p) ? p : choices.get(0));
                     } else {
                         card.setChosenPlayer(p);
                     }

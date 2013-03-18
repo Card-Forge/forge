@@ -6181,6 +6181,7 @@ res/cardsfolder/l/loxodon_hierarch_avatar.txt -text
 res/cardsfolder/l/loxodon_mender.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_mystic.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_partisan.txt svneol=native#text/plain
+res/cardsfolder/l/loxodon_peacekeeper.txt -text
 res/cardsfolder/l/loxodon_punisher.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_smiter.txt -text
 res/cardsfolder/l/loxodon_stalwart.txt svneol=native#text/plain
