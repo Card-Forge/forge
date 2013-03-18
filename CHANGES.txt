@@ -44,6 +44,24 @@ New Cards:
 Noggin Whack
 Scythe Specter
 Sasaya, Orochi Ascendant
+Loxodon Peacekeeper
+Phyrexian Grimoire
+Purging Scythe
+Noxious Vapors
+Perplex
+Null Chamber
+Overabundance
+Reign of Terror
+Vexing Sphinx
+Wand of Denial
+Yavimaya Dryad
+Thieve's Auction
+
+
+New Planes:
+
+Bant
+Turri Island
 
 
 Known Issues:
