@@ -218,7 +218,7 @@ public class CardDetailPanel extends FPanel {
                 this.nameCostLabel.setText(card.getName());
             } else {
                 String manaCost = card.getManaCost().toString();
-                if ( card.getRules() != null && card.getRules().getSplitType() == CardSplitType.Split && card.getCurState() == CardCharacteristicName.Original) {
+                if ( card.isSplitCard() && card.getCurState() == CardCharacteristicName.Original) {
                     manaCost = card.getRules().getMainPart().getManaCost().toString() + " // " + card.getRules().getOtherPart().getManaCost().toString();
                 }
                 this.nameCostLabel.setText(card.getName() + " - " + manaCost);

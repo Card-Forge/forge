@@ -271,7 +271,7 @@ public class CardLists {
         final List<Card> tiedForHighest = new ArrayList<Card>();
         int highest = 0;
         for (final Card crd : cardList) {
-            if (crd.getRules() != null && crd.getRules().getSplitType() == CardSplitType.Split) {
+            if (crd.isSplitCard()) {
                 if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > highest) {
                     highest = crd.getCMC(Card.SplitCMCMode.LeftSplitCMC);
                     tiedForHighest.clear();

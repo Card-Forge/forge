@@ -377,7 +377,7 @@ public class CardPanel extends JPanel implements CardContainer {
         if (this.showCastingCost) {
             if (this.cardWidth < 200) {
                 Card gameCard = this.getGameCard();
-                boolean showSplitMana = gameCard.getRules() != null && gameCard.getRules().getSplitType() == CardSplitType.Split && gameCard.getCurState() == CardCharacteristicName.Original;
+                boolean showSplitMana = gameCard.isSplitCard() && gameCard.getCurState() == CardCharacteristicName.Original;
                 if ( !showSplitMana ) {
                     drawManaCost(g, gameCard.getManaCost(), 0);
                 } else {

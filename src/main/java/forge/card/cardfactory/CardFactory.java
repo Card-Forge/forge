@@ -240,7 +240,7 @@ public class CardFactory {
                 c.setState(CardCharacteristicName.Transformed);
                 c.setImageKey(ImageCache.getImageKey(cp, true));
             }
-            else if (c.getRules().getSplitType() == CardSplitType.Split) {
+            else if (c.isSplitCard()) {
                 c.setState(CardCharacteristicName.LeftSplit);
                 c.setImageKey(originalPicture);
                 c.setCurSetCode(cp.getEdition());

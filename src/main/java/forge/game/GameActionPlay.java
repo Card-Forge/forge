@@ -541,21 +541,19 @@ public class GameActionPlay {
 
     private void setSplitCardState(final Card source, SpellAbility sa) {
         // Split card support
-        if (source.getRules() != null) {
-            if (source.getRules().getSplitType() == CardSplitType.Split) {
-                List<SpellAbility> leftSplitAbilities = source.getState(CardCharacteristicName.LeftSplit).getSpellAbility();
-                List<SpellAbility> rightSplitAbilities = source.getState(CardCharacteristicName.RightSplit).getSpellAbility();
-                for (SpellAbility a : leftSplitAbilities) {
-                    if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                        source.setState(CardCharacteristicName.LeftSplit);
-                        break;
-                    }
+        if (source.isSplitCard()) {
+            List<SpellAbility> leftSplitAbilities = source.getState(CardCharacteristicName.LeftSplit).getSpellAbility();
+            List<SpellAbility> rightSplitAbilities = source.getState(CardCharacteristicName.RightSplit).getSpellAbility();
+            for (SpellAbility a : leftSplitAbilities) {
+                if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                    source.setState(CardCharacteristicName.LeftSplit);
+                    break;
                 }
-                for (SpellAbility a : rightSplitAbilities) {
-                    if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
-                        source.setState(CardCharacteristicName.RightSplit);
-                        break;
-                    }
+            }
+            for (SpellAbility a : rightSplitAbilities) {
+                if (sa == a || sa.getDescription().equals(String.format("%s (without paying its mana cost)", a.getDescription()))) {
+                    source.setState(CardCharacteristicName.RightSplit);
+                    break;
                 }
             }
         }

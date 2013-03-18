@@ -153,10 +153,8 @@ public class SpellAbilityRequirements {
             final Card c = this.ability.getSourceCard();
 
             // split cards transform back to full form if targeting is canceled
-            if (c.getRules() != null) {
-                if (c.getRules().getSplitType() == CardSplitType.Split) {
-                    c.setState(CardCharacteristicName.Original);
-                }
+            if (c.isSplitCard()) {
+                c.setState(CardCharacteristicName.Original);
             }
 
             if (this.bCasting && !c.isCopiedSpell()) { // and not a copy
@@ -206,10 +204,8 @@ public class SpellAbilityRequirements {
             final Card c = this.ability.getSourceCard();
 
             // split cards transform back to full form if mana cost is not paid
-            if (c.getRules() != null) {
-                if (c.getRules().getSplitType() == CardSplitType.Split) {
-                    c.setState(CardCharacteristicName.Original);
-                }
+            if (c.isSplitCard()) {
+                c.setState(CardCharacteristicName.Original);
             }
 
             if (this.bCasting && !c.isCopiedSpell()) { // and not a copy

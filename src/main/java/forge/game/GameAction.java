@@ -344,10 +344,8 @@ public class GameAction {
      */
     public final Card moveTo(final Zone zoneTo, Card c) {
         // if a split card is moved, convert it back to its full form before moving (unless moving to stack)
-        if (c.getRules() != null) {
-            if ((c.getRules().getSplitType() == CardSplitType.Split) && (zoneTo != game.getStackZone())) {
-                c.setState(CardCharacteristicName.Original);
-            }
+        if (c.isSplitCard() && zoneTo != game.getStackZone()) {
+            c.setState(CardCharacteristicName.Original);
         }
 
         return moveTo(zoneTo, c, null);
