@@ -3,8 +3,9 @@ ManaCost:no cost
 Types:Plane Alara
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Exalted | Description$ All creatures have exalted.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, put a divinity counter on target green, white, or blue creature. That creature is indestructible as long as it has a divinity counter on it.
-SVar:RolledChaos:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.Green,Creature.White,Creature.Blue | CounterType$ DIVINITY | CounterNum$ 1
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.counters_GE1_DIVINITY | AddHiddenKeyword$ Indestructible
+SVar:RolledChaos:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.Green,Creature.White,Creature.Blue | CounterType$ DIVINITY | CounterNum$ 1 | SubAbility$ DivineCharacter
+SVar:DivineCharacter:DB$ Animate | Defined$ Targeted | staticAbilities$ IndestructibleAspect | Permanent$ True
+SVar:IndestructibleAspect:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self+counters_GE1_DIVINITY | AddHiddenKeyword$ Indestructible
 T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
