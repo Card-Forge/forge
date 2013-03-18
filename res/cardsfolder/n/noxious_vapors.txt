@@ -11,6 +11,7 @@ SVar:DBChooseU:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.Rem
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ Player.IsRemembered | DefinedCards$ ValidHand Card.IsNotRemembered+nonLand+RememberedPlayerCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_vapors.jpg
 Oracle:Each player reveals his or her hand and chooses one card of each color from it, then discards all other nonland cards.
 SetInfo:PLS Uncommon

@@ -11,6 +11,7 @@ S:Mode$ CantBeCast | ValidCard$ Card.IsRemembered | Description$ The named card 
 S:Mode$ CantPlayLand | ValidCard$ Land.IsRemembered
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/null_chamber.jpg
 Oracle:As Null Chamber enters the battlefield, you and an opponent each name a card other than a basic land card.\nThe named cards can't be played.
 SetInfo:MIR Rare

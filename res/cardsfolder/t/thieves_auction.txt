@@ -6,6 +6,7 @@ SVar:DBRepeatChoose:DB$ Repeat | RepeatSubAbility$ DBRepeat | RepeatDefined$ Rem
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose
 SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.IsRemembered | ForgetChosen$ True | ChoiceZone$ Exile | SubAbility$ DBGainControl
 SVar:DBGainControl:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ ChosenCard | GainControl$ True | Tapped$ True | NewController$ Player.IsRemembered
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thieves_auction.jpg
 Oracle:Exile all nontoken permanents. Starting with you, each player chooses one of the exiled cards and puts it onto the battlefield tapped under his or her control. Repeat this process until all cards exiled this way have been chosen.
 SetInfo:MMQ Rare
