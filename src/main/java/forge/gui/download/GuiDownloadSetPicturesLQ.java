@@ -48,11 +48,11 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
              // we don't want cards from unknown sets
                 continue;
             }
-            String url = ImageCache.getDownloadUrl(c, false, true);
+            String url = ImageCache.getDownloadUrl(c, false);
             addDLObject(url, ImageCache.getImageKey(c, false, true), downloads);
 
             if ( c.getRules().getSplitType() == CardSplitType.Transform ) {
-                String url2 = ImageCache.getDownloadUrl(c, true, true);
+                String url2 = ImageCache.getDownloadUrl(c, true);
                 addDLObject(url2, ImageCache.getImageKey(c, true, true), downloads);
             }
         }

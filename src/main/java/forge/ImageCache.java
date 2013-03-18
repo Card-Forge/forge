@@ -263,8 +263,8 @@ public class ImageCache {
         return getImageLocator(cp, backFace, includeSet, false);
     }
 
-    public static String getDownloadUrl(CardPrinted cp, boolean backFace, boolean includeSet) {
-        return getImageLocator(cp, backFace, includeSet, true);
+    public static String getDownloadUrl(CardPrinted cp, boolean backFace) {
+        return getImageLocator(cp, backFace, true, true);
     }    
     
     public static String toMWSFilename(String in) {
