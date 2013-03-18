@@ -171,19 +171,17 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
     }
 
     private void readyToStart() {
-        if (this.cards.size() == 0) {
+        if (this.cards.isEmpty()) {
             barProgress.setString("All items have been downloaded.");
             btnStart.setText("OK");
             btnStart.addActionListener(actOK);
-            btnStart.setVisible(true);
-        }
-        else {
+        } else {
             barProgress.setMaximum(this.cards.size());
-            barProgress.setString(
-                    this.cards.size() == 1 ? "1 item found." : this.cards.size() + " items found.");
-            btnStart.setVisible(true);
+            barProgress.setString(this.cards.size() == 1 ? "1 item found." : this.cards.size() + " items found.");
+            //for(Entry<String, String> kv : cards.entrySet()) System.out.printf("Will get %s from %s%n", kv.getKey(), kv.getValue());
             btnStart.addActionListener(actStartDownload);
         }
+        btnStart.setVisible(true);
         
         SwingUtilities.invokeLater(new Runnable() {
             @Override
