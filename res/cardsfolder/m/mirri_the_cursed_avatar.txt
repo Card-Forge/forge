@@ -4,7 +4,7 @@ Types:Vanguard
 HandLifeModifier:-2/-3
 S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddAbility$ MirriPump | AddSVar$ MirriPutCounter | Description$ Creatures you control have "Tap: Another target creature gets -1/-1 until end of turn. Put a +1/+1 counter on this creature."
 SVar:MirriPump:AB$ Pump | Cost$ T | ValidTgts$ Creature.Other | NumAtt$ -1 | NumDef$ -1 | SubAbility$ MirriPutCounter | SpellDescription$ Another target creature gets -1/-1 until end of turn. Put a +1/+1 counter on this creature.
-SVar:MirriPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1
+SVar:MirriPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/mirri_the_cursed_avatar.jpg
 Oracle:Hand -2, life -3\nCreatures you control have "{T}: Another target creature gets -1/-1 until end of turn. Put a +1/+1 counter on this creature."
 SetInfo:VAN Special
