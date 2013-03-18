@@ -7032,7 +7032,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("greatestRememberedCMC")) {
-            final List<Card> list = new ArrayList<Card>();
+            List<Card> list = new ArrayList<Card>();
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Card) {
                     list.add(Singletons.getModel().getGame().getCardState((Card) o));
@@ -7041,16 +7041,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!list.contains(this)) {
                 return false;
             }
-            for (final Card crd : list) {
-                if (crd.getRules() != null && crd.getRules().getSplitType() == CardSplitType.Split) {
-                    if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > this.getCMC() || crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > this.getCMC()) {
-                        return false;
-                    }
-                } else {
-                    if (crd.getCMC() > this.getCMC()) {
-                        return false;
-                    }
-                }
+            list = CardLists.getCardsWithHighestCMC(list);
+            if (!list.contains(this)) {
+                return false;
             }
         } else if (property.startsWith("lowestCMC")) {
             final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);

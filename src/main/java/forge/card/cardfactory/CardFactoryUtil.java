@@ -40,6 +40,7 @@ import forge.Constant;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.CardSplitType;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -1420,8 +1421,17 @@ public class CardFactoryUtil {
                 }
             }
             for (final Card crd : list) {
-                if (crd.getCMC() > highest) {
-                    highest = crd.getCMC();
+                if (crd.getRules() != null && crd.getRules().getSplitType() == CardSplitType.Split) {
+                    if (crd.getCMC(Card.SplitCMCMode.LeftSplitCMC) > highest) {
+                        highest = crd.getCMC(Card.SplitCMCMode.LeftSplitCMC);
+                    }
+                    if (crd.getCMC(Card.SplitCMCMode.RightSplitCMC) > highest) {
+                        highest = crd.getCMC(Card.SplitCMCMode.RightSplitCMC);
+                    }
+                } else {
+                    if (crd.getCMC() > highest) {
+                        highest = crd.getCMC();
+                    }
                 }
             }
             return highest;
