@@ -6574,8 +6574,20 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("TopGraveyard")) {
             final List<Card> list = new ArrayList<Card>(this.getOwner().getCardsIn(ZoneType.Graveyard));
             Collections.reverse(list);
-            if (list.isEmpty() || !this.equals(list.get(0))) {
-                return false;
+            if (property.substring(12).matches("[0-9][0-9]?")) {
+                int n = Integer.parseInt(property.substring(12));
+                int num = Math.min(n, list.size());
+                final List<Card> newlist = new ArrayList<Card>();
+                for (int i = 0; i < num; i++) {
+                    newlist.add(list.get(i));
+                }
+                if (list.isEmpty() || !newlist.contains(this)) {
+                    return false;
+                }
+            } else {
+                if (list.isEmpty() || !this.equals(list.get(0))) {
+                    return false;
+                }
             }
         } else if (property.startsWith("BottomGraveyard")) {
             final List<Card> list = this.getOwner().getCardsIn(ZoneType.Graveyard);
@@ -6996,6 +7008,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             for (final Card crd : list) {
                 if (crd.getNetAttack() < this.getNetAttack()) {
+                    return false;
+                }
+            }
+        } else if (property.startsWith("leastToughness")) {
+            final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            for (final Card crd : list) {
+                if (crd.getNetDefense() < this.getNetDefense()) {
                     return false;
                 }
             }

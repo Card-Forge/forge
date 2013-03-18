@@ -1,0 +1,16 @@
+Name:Noxious Vapors
+ManaCost:1 B B
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 1 B B | RepeatPlayers$ Player | RepeatSubAbility$ DBReveal | StackDescription$ SpellDescription | SpellDescription$ Each player reveals his or her hand and chooses one card of each color from it, then discards all other nonland cards.
+SVar:DBReveal:DB$ RevealHand | Defined$ Player.IsRemembered | SubAbility$ DBChooseW
+SVar:DBChooseW:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+White | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseG
+SVar:DBChooseG:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Green | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseR
+SVar:DBChooseR:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Red | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseB
+SVar:DBChooseB:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Black | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBChooseU
+SVar:DBChooseU:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl+Blue | ChoiceZone$ Hand | RememberChosen$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ Player.IsRemembered | DefinedCards$ ValidHand Card.IsNotRemembered+nonLand+RememberedPlayerCtrl | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noxious_vapors.jpg
+Oracle:Each player reveals his or her hand and chooses one card of each color from it, then discards all other nonland cards.
+SetInfo:PLS Uncommon

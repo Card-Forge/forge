@@ -1,0 +1,12 @@
+Name:Phyrexian Grimoire
+ManaCost:3
+Types:Artifact
+A:AB$ PumpAll | Cost$ 4 T | ValidCards$ Card.TopGraveyard2+YouCtrl | PumpZone$ Graveyard | RememberAllPumped$ True | SubAbility$ DBChoose | StackDescription$ None | SpellDescription$ Target opponent chooses one of the top two cards of your graveyard. Exile that card and put the other one into your hand.
+SVar:DBChoose:DB$ ChooseCard | ValidTgts$ Opponent | Choices$ Card.IsRemembered | ChoiceZone$ Graveyard | Mandatory$ True | ForgetChosen$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_grimoire.jpg
+Oracle:{4}, {T}: Target opponent chooses one of the top two cards of your graveyard. Exile that card and put the other one into your hand.
+SetInfo:TMP Rare

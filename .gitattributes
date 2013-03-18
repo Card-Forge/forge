@@ -7282,6 +7282,7 @@ res/cardsfolder/n/noxious_ghoul.txt svneol=native#text/plain
 res/cardsfolder/n/noxious_hatchling.txt svneol=native#text/plain
 res/cardsfolder/n/noxious_revival.txt svneol=native#text/plain
 res/cardsfolder/n/noxious_toad.txt svneol=native#text/plain
+res/cardsfolder/n/noxious_vapors.txt -text
 res/cardsfolder/n/nucklavee.txt svneol=native#text/plain
 res/cardsfolder/n/nuisance_engine.txt svneol=native#text/plain
 res/cardsfolder/n/null_brooch.txt svneol=native#text/plain
@@ -7747,6 +7748,7 @@ res/cardsfolder/p/phyrexian_furnace.txt -text
 res/cardsfolder/p/phyrexian_gargantua.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_ghoul.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_gremlins.txt svneol=native#text/plain
+res/cardsfolder/p/phyrexian_grimoire.txt -text
 res/cardsfolder/p/phyrexian_hulk.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_hydra.txt svneol=native#text/plain
 res/cardsfolder/p/phyrexian_infiltrator.txt -text
@@ -8097,6 +8099,7 @@ res/cardsfolder/p/puresteel_paladin.txt -text
 res/cardsfolder/p/purgatory.txt -text
 res/cardsfolder/p/purge.txt svneol=native#text/plain
 res/cardsfolder/p/purge_the_profane.txt -text
+res/cardsfolder/p/purging_scythe.txt -text
 res/cardsfolder/p/purify.txt svneol=native#text/plain
 res/cardsfolder/p/purify_the_grave.txt -text
 res/cardsfolder/p/purity.txt svneol=native#text/plain
