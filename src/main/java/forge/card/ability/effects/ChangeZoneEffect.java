@@ -386,7 +386,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             tgtC.setTapped(true);
                         }
                         if (sa.hasParam("GainControl")) {
-                            tgtC.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
+                            if (sa.hasParam("NewController")) {
+                                final Player p = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa).get(0);
+                                tgtC.setController(p, Singletons.getModel().getGame().getNextTimestamp());
+                            } else {
+                                tgtC.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
+                            }
                         }
                         if (sa.hasParam("AttachedTo")) {
                             List<Card> list = AbilityUtils.getDefinedCards(hostCard,
@@ -670,7 +675,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c.setTapped(true);
                     }
                     if (sa.hasParam("GainControl")) {
-                        c.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
+                        if (sa.hasParam("NewController")) {
+                            final Player p = AbilityUtils.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa).get(0);
+                            c.setController(p, Singletons.getModel().getGame().getNextTimestamp());
+                        } else {
+                            c.setController(sa.getActivatingPlayer(), Singletons.getModel().getGame().getNextTimestamp());
+                        }
                     }
 
                     if (sa.hasParam("AttachedTo")) {

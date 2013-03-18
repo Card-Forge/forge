@@ -10851,6 +10851,7 @@ res/cardsfolder/t/thespians_stage.txt -text
 res/cardsfolder/t/thicket_basilisk.txt svneol=native#text/plain
 res/cardsfolder/t/thicket_elemental.txt -text
 res/cardsfolder/t/thief_of_hope.txt svneol=native#text/plain
+res/cardsfolder/t/thieves_auction.txt -text
 res/cardsfolder/t/thieves_fortune.txt -text
 res/cardsfolder/t/thieving_magpie.txt svneol=native#text/plain
 res/cardsfolder/t/thieving_sprite.txt -text
@@ -12317,6 +12318,7 @@ res/cardsfolder/y/yavimaya_ancients.txt svneol=native#text/plain
 res/cardsfolder/y/yavimaya_ants.txt svneol=native#text/plain
 res/cardsfolder/y/yavimaya_barbarian.txt svneol=native#text/plain
 res/cardsfolder/y/yavimaya_coast.txt svneol=native#text/plain
+res/cardsfolder/y/yavimaya_dryad.txt -text
 res/cardsfolder/y/yavimaya_elder.txt svneol=native#text/plain
 res/cardsfolder/y/yavimaya_enchantress.txt svneol=native#text/plain
 res/cardsfolder/y/yavimaya_gnats.txt svneol=native#text/plain

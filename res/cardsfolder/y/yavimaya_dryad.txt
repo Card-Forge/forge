@@ -1,0 +1,13 @@
+Name:Yavimaya Dryad
+ManaCost:1 G G
+Types:Creature Dryad
+Text:no text
+PT:2/1
+K:Forestwalk
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRamp | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Forest card and put it onto the battlefield tapped under target player's control. If you do, shuffle your library.
+SVar:TrigRamp:AB$ Pump | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player to gain control of forest | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 1 | GainControl$ True | NewController$ Targeted | Tapped$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_dryad.jpg
+Oracle:Forestwalk\nWhen Yavimaya Dryad enters the battlefield, you may search your library for a Forest card and put it onto the battlefield tapped under target player's control. If you do, shuffle your library.
+SetInfo:ARC Uncommon
+SetInfo:TSP Uncommon
