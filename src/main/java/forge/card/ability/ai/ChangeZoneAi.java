@@ -12,10 +12,10 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.CardPredicates.Presets;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.ability.SpellAbilityAi;
@@ -28,10 +28,10 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.game.GlobalRuleChange;
-import forge.game.ai.ComputerUtilCard;
-import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
+import forge.game.ai.ComputerUtilCard;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.Combat;
@@ -424,8 +424,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-    private static Card basicManaFixing(final Player ai, final List<Card> list) { // Search for a
-                                                               // Basic Land
+    private static Card basicManaFixing(final Player ai, final List<Card> list) { // Search for a Basic Land
 
         final List<Card> combined = new ArrayList<Card>(ai.getCardsIn(ZoneType.Battlefield));
         combined.addAll(ai.getCardsIn(ZoneType.Hand));
@@ -456,6 +455,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         List<Card> result = list;
         if (minType != null) {
             result = CardLists.getType(list, minType);
+        }
+        
+        // pick dual lands if available
+        if (Iterables.any(result, Predicates.not(CardPredicates.Presets.BASIC_LANDS))) {
+            result = CardLists.filter(result, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
         }
 
         return result.get(0);
@@ -1173,7 +1177,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 } else if (origin.contains(ZoneType.Library)
                         && (type.contains("Basic") || areAllBasics(type))) {
                     c = basicManaFixing(ai, fetchList);
-                } else if (ZoneType.Hand.equals(destination) && CardLists.getNotType(fetchList, "Creature").size() == 0) {
+                } else if (ZoneType.Hand.equals(destination) && CardLists.getNotType(fetchList, "Creature").isEmpty()) {
                     c = chooseCreature(ai, fetchList);
                 } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
                     if (!activator.equals(ai) && sa.hasParam("GainControl")) {
@@ -1190,7 +1194,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                     // Does AI need a land?
                     List<Card> hand = ai.getCardsIn(ZoneType.Hand);
-                    if (CardLists.filter(hand, Presets.LANDS).size() == 0 && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
+                    if (CardLists.filter(hand, Presets.LANDS).isEmpty() && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
                         boolean canCastSomething = false;
                         for (Card cardInHand : hand) {
                             canCastSomething |= ComputerUtilMana.payManaCost(cardInHand.getFirstSpellAbility(), ai, true, 0, false);
