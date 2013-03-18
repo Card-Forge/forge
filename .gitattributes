@@ -7284,6 +7284,7 @@ res/cardsfolder/n/noxious_toad.txt svneol=native#text/plain
 res/cardsfolder/n/nucklavee.txt svneol=native#text/plain
 res/cardsfolder/n/nuisance_engine.txt svneol=native#text/plain
 res/cardsfolder/n/null_brooch.txt svneol=native#text/plain
+res/cardsfolder/n/null_chamber.txt -text
 res/cardsfolder/n/null_champion.txt svneol=native#text/plain
 res/cardsfolder/n/null_profusion.txt svneol=native#text/plain
 res/cardsfolder/n/null_rod.txt svneol=native#text/plain
@@ -7500,6 +7501,7 @@ res/cardsfolder/o/outrage_shaman.txt svneol=native#text/plain
 res/cardsfolder/o/outrider_en_kor.txt -text
 res/cardsfolder/o/outrider_of_jhess.txt svneol=native#text/plain
 res/cardsfolder/o/outwit.txt -text
+res/cardsfolder/o/overabundance.txt -text
 res/cardsfolder/o/overbeing_of_myth.txt svneol=native#text/plain
 res/cardsfolder/o/overblaze.txt -text
 res/cardsfolder/o/overburden.txt svneol=native#text/plain
@@ -8436,6 +8438,7 @@ res/cardsfolder/r/regeneration.txt svneol=native#text/plain
 res/cardsfolder/r/regress.txt svneol=native#text/plain
 res/cardsfolder/r/regrowth.txt svneol=native#text/plain
 res/cardsfolder/r/reign_of_chaos.txt svneol=native#text/plain
+res/cardsfolder/r/reign_of_terror.txt -text
 res/cardsfolder/r/reincarnation.txt -text
 res/cardsfolder/r/reinforced_bulwark.txt svneol=native#text/plain
 res/cardsfolder/r/reinforcements.txt svneol=native#text/plain
@@ -11614,6 +11617,7 @@ res/cardsfolder/v/vex.txt svneol=native#text/plain
 res/cardsfolder/v/vexing_arcanix.txt -text
 res/cardsfolder/v/vexing_beetle.txt svneol=native#text/plain
 res/cardsfolder/v/vexing_devil.txt -text
+res/cardsfolder/v/vexing_sphinx.txt -text
 res/cardsfolder/v/vhati_il_dal.txt -text
 res/cardsfolder/v/viashino_bladescout.txt svneol=native#text/plain
 res/cardsfolder/v/viashino_cutthroat.txt svneol=native#text/plain
@@ -11887,6 +11891,7 @@ res/cardsfolder/w/wall_of_water.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_wonder.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_wood.txt svneol=native#text/plain
 res/cardsfolder/w/wallop.txt svneol=native#text/plain
+res/cardsfolder/w/wand_of_denial.txt -text
 res/cardsfolder/w/wand_of_ith.txt -text
 res/cardsfolder/w/wand_of_the_elements.txt svneol=native#text/plain
 res/cardsfolder/w/wanderbrine_rootcutters.txt svneol=native#text/plain

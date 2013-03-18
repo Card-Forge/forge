@@ -1,0 +1,11 @@
+Name:Wand of Denial
+ManaCost:2
+Types:Artifact
+A:AB$ Dig | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 1 | NoMove$ True | RememberRevealed$ True | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.
+SVar:DBChangeZone:DB$ Mill | Defined$ Targeted | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ GE1 | UnlessPayer$ You | UnlessCost$ PayLife<2> | UnlessSwitched$ True | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wand_of_denial.jpg
+Oracle:{T}: Look at the top card of target player's library. If it's a nonland card, you may pay 2 life. If you do, put it into that player's graveyard.
+SetInfo:VIS Rare
+SetInfo:6ED Rare

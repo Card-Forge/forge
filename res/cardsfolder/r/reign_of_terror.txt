@@ -1,0 +1,14 @@
+Name:Reign of Terror
+ManaCost:3 B B
+Types:Sorcery
+A:SP$ GenericChoice | Cost$ 3 B B | Choices$ DestroyWhite,DestroyGreen | Defined$ You | StackDescription$ SpellDescription | SpellDescription$ Destroy all white or green creatures. They can't be regenerated. You lose 2 life for each creature that died this way.
+SVar:DestroyWhite:DB$ DestroyAll | ValidCards$ Creature.White | NoRegen$ True | RememberDestroyed$ True | SubAbility$ DBLoseLife | ChoiceDescription$ Destroy all white creatures
+SVar:DestroyGreen:DB$ DestroyAll | ValidCards$ Creature.Green | NoRegen$ True | RememberDestroyed$ True | SubAbility$ DBLoseLife | ChoiceDescription$ Destroy all green creatures
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ You | SubAbility$ DBCleanup | References$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize/Twice
+SVar:RemAIdeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reign_of_terror.jpg
+Oracle:Destroy all green creatures or all white creatures. They can't be regenerated. You lose 2 life for each creature that died this way.
+SetInfo:MIR Uncommon

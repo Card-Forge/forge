@@ -1,0 +1,12 @@
+Name:Vexing Sphinx
+ManaCost:1 U U
+Types:Creature Sphinx
+PT:4/4
+K:Flying
+K:Cumulative upkeep:Discard<1/Card>
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, draw a card for each age counter on it.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ XLKI | References$ XLKI
+SVar:XLKI:TriggeredCard$CardCounters.AGE
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vexing_sphinx.jpg
+Oracle:Flying\nCumulative upkeep-Discard a card. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Vexing Sphinx dies, draw a card for each age counter on it.
+SetInfo:CSP Rare

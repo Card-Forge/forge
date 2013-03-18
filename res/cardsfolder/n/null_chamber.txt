@@ -1,0 +1,14 @@
+Name:Null Chamber
+ManaCost:3 W
+Types:World Enchantment
+K:ETBReplacement:Other:DBNameCard
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonBasic | ValidDesc$ card other than a basic land | SubAbility$ RememberYou | SpellDescription$ As CARDNAME enters the battlefield, you and an opponent each name a card other than a basic land card.
+SVar:RememberYou:DB$ Pump | RememberObjects$ ValidAll Card.NamedCard | SubAbility$ ChooseP
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | SubAbility$ NameOpp
+SVar:NameOpp:DB$ NameCard | Defined$ ChosenPlayer | ValidCards$ Card.nonBasic | ValidDesc$ card other than a basic land | SubAbility$ RememberOpp
+SVar:RememberOpp:DB$ Pump | RememberObjects$ ValidAll Card.NamedCard
+S:Mode$ CantBeCast | ValidCard$ Card.IsRemembered | Description$ The named card can't be played.
+S:Mode$ CantPlayLand | ValidCard$ Land.IsRemembered
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/null_chamber.jpg

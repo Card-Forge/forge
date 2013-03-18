@@ -1,0 +1,10 @@
+Name:Overabundance
+ManaCost:1 R G
+Types:Enchantment
+T:Mode$ TapsForMana | ValidCard$ Land | Execute$ TrigDmg | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced, and CARDNAME deals 1 damage to him or her.
+SVar:TrigDmg:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredCardController | NumDmg$ 1 | SubAbility$ DBMana
+SVar:DBMana:DB$ ManaReflected | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredCardController
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/overabundance.jpg
+Oracle:Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced, and Overabundance deals 1 damage to him or her.
+SetInfo:INV Rare
