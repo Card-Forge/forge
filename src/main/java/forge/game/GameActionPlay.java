@@ -10,7 +10,6 @@ import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.card.CardSplitType;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;

@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.ImageCache;
 import forge.card.CardRules;
-import forge.card.CardSplitType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.NewConstants;
@@ -42,7 +41,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
 
         for (CardPrinted c : CardDb.instance().getAllCards()) {
             addDLObject(c, downloads, false);
-            if ( c.getRules().getSplitType() == CardSplitType.Transform)
+            if (ImageCache.hasBackFacePicture(c))
                 addDLObject(c, downloads, true);
         }
 
@@ -58,7 +57,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloader {
 
     private void addDLObject(CardPrinted c, Map<String, String> downloads, boolean backFace) {
         CardRules cardRules = c.getRules();
-        String urls = backFace ? cardRules.getPictureOtherSideUrl() : cardRules.getPictureUrl();
+        String urls = cardRules.getPictureUrl(backFace);
         if (StringUtils.isEmpty(urls)) {
             return;
         }

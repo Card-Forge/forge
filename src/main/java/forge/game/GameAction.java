@@ -35,7 +35,6 @@ import forge.CardUtil;
 import forge.Command;
 import forge.CounterType;
 import forge.GameEntity;
-import forge.card.CardSplitType;
 import forge.card.CardType;
 import forge.card.TriggerReplacementBase;
 import forge.card.ability.effects.AttachEffect;

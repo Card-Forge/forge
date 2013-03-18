@@ -41,7 +41,6 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardEdition;
-import forge.card.CardSplitType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.toolbox.FLabel;

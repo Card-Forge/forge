@@ -200,7 +200,7 @@ public class ImageCache {
             hasManyPictures = cntPictures > 1;
         } else {
             // without set number of pictures equals number of urls provided in Svar:Picture
-            String urls = backFace ? card.getPictureOtherSideUrl() : card.getPictureUrl();
+            String urls = card.getPictureUrl(backFace);
             cntPictures = StringUtils.countMatches(urls, "\\") + 1;
 
             // raise the art index limit to the maximum of the sets this card was printed in
@@ -239,6 +239,10 @@ public class ImageCache {
         }
     }
     
+    public static boolean hasBackFacePicture(CardPrinted cp) {
+        return cp.getRules().getSplitType() == CardSplitType.Transform; // do we take other image for flipped cards? 
+    }
+    
     public static String getSetFolder(String edition) {
         return  !NewConstants.CACHE_CARD_PICS_SUBDIR.containsKey(edition)
                 ? Singletons.getModel().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
@@ -247,8 +251,8 @@ public class ImageCache {
 
     private static String getNameToUse(CardPrinted cp, boolean backFace) {
         final CardRules card = cp.getRules();
-        if (backFace) {
-            if ( card.getSplitType() == CardSplitType.Transform ) 
+        if (backFace ) {
+            if ( hasBackFacePicture(cp) ) 
                 return card.getOtherPart().getName();
             else 
                 return null;

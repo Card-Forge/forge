@@ -27,7 +27,6 @@ import com.google.common.collect.Iterables;
 
 import forge.ImageCache;
 import forge.card.CardEdition;
-import forge.card.CardSplitType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.NewConstants;
@@ -51,7 +50,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
             String url = ImageCache.getDownloadUrl(c, false);
             addDLObject(url, ImageCache.getImageKey(c, false, true), downloads);
 
-            if ( c.getRules().getSplitType() == CardSplitType.Transform ) {
+            if (ImageCache.hasBackFacePicture(c)) {
                 String url2 = ImageCache.getDownloadUrl(c, true);
                 addDLObject(url2, ImageCache.getImageKey(c, true, true), downloads);
             }

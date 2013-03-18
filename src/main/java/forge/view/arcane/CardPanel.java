@@ -41,7 +41,6 @@ import forge.CounterType;
 import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
-import forge.card.CardSplitType;
 import forge.card.mana.ManaCost;
 import forge.gui.CardContainer;
 import forge.gui.toolbox.CardFaceSymbols;

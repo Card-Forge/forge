@@ -28,7 +28,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.card.CardSplitType;
 import forge.card.spellability.SpellAbility;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;

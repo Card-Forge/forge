@@ -32,7 +32,6 @@ import forge.ImageCache;
 import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.CardRules;
-import forge.card.CardSplitType;
 import forge.card.EditionCollection;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -295,7 +294,7 @@ public class MigrationSourceAnalyzer {
     
     private void _addDefaultPicNames(CardPrinted c, boolean backFace) {
         CardRules card = c.getRules();
-        String urls = backFace ? card.getPictureOtherSideUrl() : card.getPictureUrl();
+        String urls = card.getPictureUrl(backFace);
         if (StringUtils.isEmpty(urls)) { return; }
 
         int numPics = 1 + StringUtils.countMatches(urls, "\\");
@@ -325,7 +324,7 @@ public class MigrationSourceAnalyzer {
 
             for (CardPrinted c : CardDb.instance().getAllCards()) {
                 _addDefaultPicNames(c, false);
-                if ( c.getRules().getSplitType() == CardSplitType.Transform)
+                if (ImageCache.hasBackFacePicture(c))
                     _addDefaultPicNames(c, true);
             }
             
@@ -364,10 +363,9 @@ public class MigrationSourceAnalyzer {
     
     private static void _addSetCards(Map<String, String> cardFileNames, Iterable<CardPrinted> library, Predicate<CardPrinted> filter) {
         for (CardPrinted c : Iterables.filter(library, filter)) {
-            boolean hasBackFacePicture = null != c.getRules().getPictureOtherSideUrl();
             String filename = ImageCache.getImageKey(c, false, true) + ".jpg";
             cardFileNames.put(filename, filename);
-            if (hasBackFacePicture) {
+            if (ImageCache.hasBackFacePicture(c)) {
                 filename = ImageCache.getImageKey(c, true, true) + ".jpg";
                 cardFileNames.put(filename, filename);
             }
@@ -397,10 +395,9 @@ public class MigrationSourceAnalyzer {
             };
 
             for (CardPrinted c : Iterables.filter(CardDb.variants().getAllCards(), predPlanes)) {
-                boolean hasBackFacePciture = null != c.getRules().getPictureOtherSideUrl();
                 String baseName = ImageCache.getImageKey(c,false, true);
                 _nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
-                if (hasBackFacePciture) {
+                if (ImageCache.hasBackFacePicture(c)) {
                     baseName = ImageCache.getImageKey(c, true, true);
                     _nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
                 }

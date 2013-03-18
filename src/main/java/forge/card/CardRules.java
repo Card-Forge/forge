@@ -161,8 +161,7 @@ public final class CardRules implements ICardCharacteristics {
     // Downloadable image
     private String dlUrl;
     private String dlUrlOtherSide;
-    public String getPictureUrl() { return dlUrl; }
-    public String getPictureOtherSideUrl() { return dlUrlOtherSide; }
+    public String getPictureUrl(boolean backface ) { return backface ? dlUrlOtherSide : dlUrl; }
     public void setDlUrls(String[] dlUrls) { this.dlUrl = dlUrls[0]; this.dlUrlOtherSide = dlUrls[1]; }
 
     public final List<String> getReplacements() {

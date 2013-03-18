@@ -40,7 +40,6 @@ import forge.Constant;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.card.CardSplitType;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
