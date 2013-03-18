@@ -1,0 +1,8 @@
+Name:Perplex
+ManaCost:1 U B
+Types:Instant
+K:Transmute:1 U B
+A:SP$ Counter | Cost$ 1 U B | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Discard<0/Hand> | SpellDescription$ Counter target spell unless its controller discards his or her hand.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/perplex.jpg
+Oracle:Counter target spell unless its controller discards his or her hand.\nTransmute {1}{U}{B} ({1}{U}{B}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
+SetInfo:RAV Common
