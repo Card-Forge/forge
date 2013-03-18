@@ -137,6 +137,7 @@ r_1_1_goblin_rtr.jpg                   http://www.cardforge.org/fpics/tokens/RTR
 r_1_1_goblin_scout.jpg                 http://www.cardforge.org/fpics/tokens/r_1_1_goblin_scout.jpg
 r_1_1_human_avr.jpg                    http://www.cardforge.org/fpics/tokens/r_1_1_human_avr.jpg 
 r_1_1_survivor.jpg                     http://www.cardforge.org/fpics/tokens/r_1_1_survivor.jpg
+r_1_1_warrior.jpg                      http://www.cardforge.org/fpics/tokens/r_1_1_warrior.jpg
 r_2_1_goblin.jpg                       http://www.cardforge.org/fpics/tokens/r_2_1_goblin.jpg
 r_3_1_carnivore.jpg                    http://www.cardforge.org/fpics/tokens/r_3_1_carnivore.jpg
 r_3_1_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_3_1_elemental.jpg
@@ -233,7 +234,6 @@ morph.jpg                              http://www.cardforge.org/fpics/effects/mo
 
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
-# //r_1_1_warrior.jpg                      http://www.cardforge.org/fpics/tokens/r_1_1_warrior.jpg                      [SOK] Rally the Horde
 # //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother
 # //u_1_1_merfolk.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_merfolk.jpg                      [ZEN] Lullmage Mentor
 # //w_1_1_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_1_1_knight.jpg                       [ALL] Errand of Duty
