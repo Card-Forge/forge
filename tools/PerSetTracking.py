@@ -7,7 +7,7 @@ import os,sys,fnmatch,re
 
 def getSetByFormat(requestedFormat):
 	# Parse out Standard sets from the Format file
-	formatLocation = os.path.join(sys.path[0], 'blockdata', 'formats.txt')
+	formatLocation = os.path.join(sys.path[0], '..', 'res', 'blockdata', 'formats.txt')
 	with open(formatLocation) as formatFile:
 		formats = formatFile.readlines()
 
@@ -46,7 +46,6 @@ def printCardSet(implementedSet, missingSet, fileName, setCoverage=None, printIm
 			outfile.write("\nImplemented (%d):" % impCount)
 			for s in implemented:
 				outfile.write("\n%s" % s)
-			outfile.write("\n")
 
 		# By default Missing will print, but you can disable it
 		if printMissing:
@@ -55,6 +54,8 @@ def printCardSet(implementedSet, missingSet, fileName, setCoverage=None, printIm
 			outfile.write("\nMissing (%d):" % misCount)
 			for s in missing:
 				outfile.write("\n%s" % s)
+
+		outfile.write("\n")
 
 def printDistinctOracle(missingSet, fileName):
 	filePath = os.path.join(sys.path[0], "PerSetTrackingResults", fileName)
@@ -65,6 +66,7 @@ def printDistinctOracle(missingSet, fileName):
 			if s:
 				oracle = mtgOracleCards.get(s, "")
 				outfile.write("%s\n%s" % (s, oracle))
+		outfile.write("\n")
 
 
 if __name__ == '__main__':
@@ -131,7 +133,8 @@ if __name__ == '__main__':
 
 	#Parse Forge
 	print("Parsing Forge")
-	for root, dirnames, filenames in os.walk("cardsfolder"):
+	cardsfolderLocation = os.path.join(sys.path[0], '..', 'res', 'cardsfolder')
+	for root, dirnames, filenames in os.walk(cardsfolderLocation):
 		for fileName in fnmatch.filter(filenames, '*.txt'):
 			with open(os.path.join(root, fileName))  as currentForgeCard :
 				# Check all names for this card
@@ -214,6 +217,7 @@ if __name__ == '__main__':
 		totalPercentage = totalImplemented / fullTotal
 		statsfile.write("\n")
 		statsfile.write("Total over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal))
+		statsfile.write("\n")
 
 	printCardSet(allImplemented, allMissing, "DistinctStats.txt")
 	printCardSet(standardImplemented, standardMissing, "FormatStandard.txt", setCoverage=standardSets)

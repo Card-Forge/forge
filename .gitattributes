@@ -10,9 +10,6 @@
 /LICENSE.txt svneol=native#text/plain
 /README.txt svneol=native#text/plain
 /pom.xml svneol=native#text/xml
-res/AllTokens.txt svneol=native#text/plain
-res/PerSetTracking.py svneol=native#text/x-python
-res/assignSetInfo.py -text
 res/blockdata/blocks.txt svneol=native#text/plain
 res/blockdata/boosters.txt -text
 res/blockdata/fantasyblocks.txt -text
@@ -20,7 +17,6 @@ res/blockdata/fatpacks.txt -text
 res/blockdata/formats.txt -text
 res/blockdata/setdata.txt svneol=native#text/plain
 res/blockdata/starters.txt -text
-res/cardTemplateScript.py -text svneol=unset#text/x-python
 res/cardsfolder/a/a_display_of_my_dark_power.txt -text
 res/cardsfolder/a/abandon_hope.txt -text
 res/cardsfolder/a/abandoned_outpost.txt svneol=native#text/plain
@@ -12439,17 +12435,22 @@ res/defaults/match.xml svneol=native#text/xml
 res/draft/cube_juzamjedi.draft -text
 res/draft/cube_skiera.draft -text
 res/draft/rankings.txt -text
-res/gamedata/NonStackingKWList.txt svneol=native#text/plain
-res/gamedata/TypeLists.txt svneol=native#text/plain
 res/howto.txt svneol=native#text/plain
 res/licenses/java-yield-license.txt svneol=native#text/plain
 res/licenses/log4j-license.txt svneol=native#text/plain
 res/licenses/multiline-label-license.txt svneol=native#text/plain
 res/licenses/xpp3-license.txt svneol=native#text/plain
 res/licenses/xstream-license.txt svneol=native#text/plain
-res/mtg-data.txt svneol=native#text/plain
-res/mtgdata-sets-to-forge.txt -text
-res/oracleScript.py -text svneol=unset#text/x-python
+res/lists/NonStackingKWList.txt svneol=native#text/plain
+res/lists/TypeLists.txt svneol=native#text/plain
+res/lists/booster-images.txt svneol=native#text/plain
+res/lists/fatpack-images.txt svneol=native#text/plain
+res/lists/precon-images.txt svneol=native#text/plain
+res/lists/quest-opponent-icons.txt svneol=native#text/plain
+res/lists/quest-pet-shop-icons.txt svneol=native#text/plain
+res/lists/quest-pet-token-images.txt svneol=native#text/plain
+res/lists/token-images.txt svneol=native#text/plain
+res/lists/tournamentpack-images.txt svneol=native#text/plain
 res/pics_product/booster/10E.png -text
 res/pics_product/booster/5DN.png -text
 res/pics_product/booster/7E.png -text
@@ -12762,7 +12763,6 @@ res/quest/bazaar/wolf_pet_l1.txt -text
 res/quest/bazaar/wolf_pet_l2.txt -text
 res/quest/bazaar/wolf_pet_l3.txt -text
 res/quest/bazaar/wolf_pet_l4.txt -text
-res/quest/booster-images.txt -text
 res/quest/booster-prices.txt -text
 res/quest/challenges/quest1.dck -text
 res/quest/challenges/quest10.dck -text
@@ -13308,9 +13308,6 @@ res/quest/precons/Wicked[!!-~]Big.dck -text
 res/quest/precons/Wild[!!-~]Rush.dck -text
 res/quest/precons/World[!!-~]Aflame.dck -text
 res/quest/precons/Zombies[!!-~]Unleashed.dck -text
-res/quest/quest-opponent-icons.txt -text
-res/quest/quest-pet-shop-icons.txt -text
-res/quest/quest-pet-token-images.txt -text
 res/quest/themes/-1[!!-~]-1[!!-~]Counters[!!-~]BG.thm -text
 res/quest/themes/Anti[!!-~]Black[!!-~]WB.thm -text
 res/quest/themes/Anti[!!-~]Black[!!-~]WG.thm -text
@@ -13665,7 +13662,6 @@ res/sound/token.wav -text
 res/sound/untap.wav -text
 res/sound/white_land.wav -text
 res/sound/win_duel.wav -text
-res/token-images.txt -text
 src/main/config/Forge.icns -text
 src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
 src/main/config/create-dmg -text
@@ -14560,3 +14556,9 @@ src/test/java/forge/gui/ListChooserTest.java svneol=native#text/plain
 src/test/java/forge/gui/game/CardDetailPanelTest.java svneol=native#text/plain
 src/test/java/forge/item/DeckHintsTest.java -text
 src/test/java/forge/model/FModelTest.java -text
+tools/PerSetTracking.py svneol=native#text/x-python
+tools/assignSetInfo.py svneol=native#text/x-python
+tools/cardTemplateScript.py svneol=native#text/x-python
+tools/mtg-data.txt svneol=native#text/plain
+tools/mtgdata-sets-to-forge.txt svneol=native#text/plain
+tools/oracleScript.py svneol=native#text/x-python

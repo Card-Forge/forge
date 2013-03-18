@@ -25,17 +25,20 @@ public final class NewConstants {
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
     // data that is only in the program dir
-    private static final String _RES_ROOT       = "res/";
-    private static final String _QUEST_DIR      = _RES_ROOT + "quest/";
-    public static final String IMAGE_LIST_TOKENS_FILE                = _RES_ROOT + "token-images.txt";
-    public static final String IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE  = _QUEST_DIR + "quest-opponent-icons.txt";
-    public static final String IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE  = _QUEST_DIR + "quest-pet-shop-icons.txt";
-    public static final String IMAGE_LIST_QUEST_TOKENS_FILE          = _QUEST_DIR + "quest-pet-token-images.txt";
-    public static final String IMAGE_LIST_QUEST_BOOSTERS_FILE        = _QUEST_DIR + "booster-images.txt";
-    public static final String IMAGE_LIST_QUEST_FATPACKS_FILE        = _QUEST_DIR + "fatpack-images.txt";
-    public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = _QUEST_DIR + "precon-images.txt";
-    public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = _QUEST_DIR + "tournamentpack-images.txt";
+    private static final String _RES_ROOT = "res/";
+    private static final String _LIST_DIR = _RES_ROOT + "lists/";
+    public static final String KEYWORD_LIST_FILE                     = _LIST_DIR + "NonStackingKWList.txt";
+    public static final String TYPE_LIST_FILE                        = _LIST_DIR + "TypeLists.txt";
+    public static final String IMAGE_LIST_TOKENS_FILE                = _LIST_DIR + "token-images.txt";
+    public static final String IMAGE_LIST_QUEST_OPPONENT_ICONS_FILE  = _LIST_DIR + "quest-opponent-icons.txt";
+    public static final String IMAGE_LIST_QUEST_PET_SHOP_ICONS_FILE  = _LIST_DIR + "quest-pet-shop-icons.txt";
+    public static final String IMAGE_LIST_QUEST_TOKENS_FILE          = _LIST_DIR + "quest-pet-token-images.txt";
+    public static final String IMAGE_LIST_QUEST_BOOSTERS_FILE        = _LIST_DIR + "booster-images.txt";
+    public static final String IMAGE_LIST_QUEST_FATPACKS_FILE        = _LIST_DIR + "fatpack-images.txt";
+    public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = _LIST_DIR + "precon-images.txt";
+    public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = _LIST_DIR + "tournamentpack-images.txt";
     
+    private static final String _QUEST_DIR      = _RES_ROOT + "quest/";
     public static final String TEXT_HOWTO_FILE     = _RES_ROOT + "howto.txt";
     public static final String DRAFT_RANKINGS_FILE = _RES_ROOT + "draft/rankings.txt";
     public static final String PRICES_BOOSTER_FILE = _QUEST_DIR + "booster-prices.txt";

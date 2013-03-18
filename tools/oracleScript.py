@@ -42,7 +42,7 @@ mtgData = parseFrom.read()
 parseFrom.close()
 print "Size of parse data: %s" % len(mtgData)
 
-folder = "cardsfolder"
+folder = os.path.join(sys.path[0], '..', 'res', 'cardsfolder')
 err = open('oracleScript.log', 'w')
 
 setStr = 'SetInfo:'
