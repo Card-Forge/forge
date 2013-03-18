@@ -69,7 +69,7 @@ public class Untap extends Phase {
         final Player turn = game.getPhaseHandler().getPlayerTurn();
         Untap.doPhasing(turn);
 
-        Untap.doUntap();
+        doUntap();
     }
 
     /**
@@ -111,7 +111,7 @@ public class Untap extends Phase {
      * doUntap.
      * </p>
      */
-    private static void doUntap() {
+    private void doUntap() {
         final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, Presets.CANUNTAP);
 
@@ -131,11 +131,13 @@ public class Untap extends Phase {
                 if (Untap.canOnlyUntapOneLand() && c.isLand()) {
                     return false;
                 }
-                if ((Singletons.getModel().getGame().isCardInPlay("Damping Field") || Singletons.getModel().getGame().isCardInPlay("Imi Statue"))
-                        && c.isArtifact()) {
+                if (c.isArtifact() 
+                        && (Singletons.getModel().getGame().isCardInPlay("Damping Field") || Singletons.getModel().getGame().isCardInPlay("Imi Statue"))) {
                     return false;
                 }
-                if ((Singletons.getModel().getGame().isCardInPlay("Smoke") || Singletons.getModel().getGame().isCardInPlay("Stoic Angel") || Singletons.getModel().getGame().isCardInPlay("Intruder Alarm")) && c.isCreature()) {
+                if (c.isCreature() 
+                        && (Singletons.getModel().getGame().isCardInPlay("Smoke") || Singletons.getModel().getGame().isCardInPlay("Stoic Angel") 
+                                || Singletons.getModel().getGame().isCardInPlay("Intruder Alarm"))) {
                     return false;
                 }
                 return true;
@@ -329,6 +331,7 @@ public class Untap extends Phase {
                 c.addHiddenExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
             }
         }
+        game.getStack().chooseOrderOfSimultaneousStackEntryAll();
     } // end doUntap
 
     private static boolean canOnlyUntapOneLand() {
