@@ -750,6 +750,7 @@ res/cardsfolder/b/banishment_decree.txt svneol=native#text/plain
 res/cardsfolder/b/banners_raised.txt -text
 res/cardsfolder/b/banshee.txt svneol=native#text/plain
 res/cardsfolder/b/banshees_blade.txt svneol=native#text/plain
+res/cardsfolder/b/bant.txt -text
 res/cardsfolder/b/bant_battlemage.txt svneol=native#text/plain
 res/cardsfolder/b/bant_charm.txt svneol=native#text/plain
 res/cardsfolder/b/bant_panorama.txt svneol=native#text/plain
@@ -11288,6 +11289,7 @@ res/cardsfolder/t/turnabout.txt svneol=native#text/plain
 res/cardsfolder/t/turntimber_basilisk.txt -text
 res/cardsfolder/t/turntimber_grove.txt svneol=native#text/plain
 res/cardsfolder/t/turntimber_ranger.txt svneol=native#text/plain
+res/cardsfolder/t/turri_island.txt -text
 res/cardsfolder/t/turtleshell_changeling.txt svneol=native#text/plain
 res/cardsfolder/t/twiddle.txt svneol=native#text/plain
 res/cardsfolder/t/twigwalker.txt svneol=native#text/plain

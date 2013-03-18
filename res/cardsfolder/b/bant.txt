@@ -1,0 +1,14 @@
+Name:Bant
+ManaCost:no cost
+Types:Plane Alara
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Exalted | Description$ All creatures have exalted.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, put a divinity counter on target green, white, or blue creature. That creature is indestructible as long as it has a divinity counter on it.
+SVar:RolledChaos:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature.Green,Creature.White,Creature.Blue | CounterType$ DIVINITY | CounterNum$ 1
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.counters_GE1_DIVINITY | AddHiddenKeyword$ Indestructible
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bant.jpg
+Oracle:All creatures have exalted. (Whenever a creature attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents its controller controls.)\nWhenever you roll {C}, put a divinity counter on target green, white, or blue creature. That creature is indestructible as long as it has a divinity counter on it.
+SetInfo:HOP Common
