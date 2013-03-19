@@ -13,10 +13,12 @@ import forge.Command;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.control.RestartUtil;
+import forge.game.ai.AiProfileUtil;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import java.util.ArrayList;
 
 /** 
  * Controls the preferences submenu in the home UI.
@@ -41,6 +43,13 @@ public enum CSubmenuPreferences implements ICDoc {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 updateSkin();
+            }
+        });
+
+        view.getLstChooseAIProfile().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(final MouseEvent e) {
+                updateAIProfile();
             }
         });
 
@@ -187,6 +196,7 @@ public enum CSubmenuPreferences implements ICDoc {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
         updateSkinNames();
+        updateAIProfiles();
 
         view.getCbRemoveSmall().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_NOSMALL));
         view.getCbSingletons().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_SINGLETONS));
@@ -226,6 +236,21 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getLstChooseSkin().ensureIndexIsVisible(view.getLstChooseSkin().getSelectedIndex());
     }
 
+    private void updateAIProfiles() {
+        final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
+        final ArrayList<String> profileNames = AiProfileUtil.getProfilesDisplayList();
+        final String currentName = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
+        int currentIndex = 0;
+
+        for (int i = 0; i < profileNames.size(); i++) {
+            if (currentName.equalsIgnoreCase(profileNames.get(i))) { currentIndex = i; }
+        }
+
+        view.getLstChooseAIProfile().setListData(profileNames.toArray());
+        view.getLstChooseAIProfile().setSelectedIndex(currentIndex);
+        view.getLstChooseAIProfile().ensureIndexIsVisible(view.getLstChooseAIProfile().getSelectedIndex());
+    }
+
     @SuppressWarnings("serial")
     private void updateSkin() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
@@ -243,6 +268,16 @@ public enum CSubmenuPreferences implements ICDoc {
         prefs.save();
     }
 
+    @SuppressWarnings("serial")
+    private void updateAIProfile() {
+        final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
+        final String name = view.getLstChooseAIProfile().getSelectedValue().toString();
+        final ForgePreferences prefs = Singletons.getModel().getPreferences();
+        if (name.equals(prefs.getPref(FPref.UI_CURRENT_AI_PROFILE))) { return; }
+
+        prefs.setPref(FPref.UI_CURRENT_AI_PROFILE, name);
+        prefs.save();
+    }
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
      */

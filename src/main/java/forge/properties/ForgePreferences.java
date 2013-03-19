@@ -21,6 +21,7 @@ import java.util.List;
 
 import forge.Constant;
 import forge.Constant.Preferences;
+import forge.game.ai.AiProfileUtil;
 import forge.gui.home.EMenuItem;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.nonsingleton.VField;
@@ -50,6 +51,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_TARGETING_OVERLAY ("false"),
         UI_ENABLE_SOUNDS ("true"),
         UI_RANDOM_CARD_ART ("false"),
+        UI_CURRENT_AI_PROFILE (AiProfileUtil.AI_PROFILE_RANDOM_MATCH), /** */
 
         SUBMENU_CURRENTMENU (EMenuItem.CONSTRUCTED.toString()),
         SUBMENU_SANCTIONED ("false"),

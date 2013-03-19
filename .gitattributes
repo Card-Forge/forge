@@ -10,6 +10,7 @@
 /LICENSE.txt svneol=native#text/plain
 /README.txt svneol=native#text/plain
 /pom.xml svneol=native#text/xml
+res/ai/Default.ai -text
 res/blockdata/blocks.txt svneol=native#text/plain
 res/blockdata/boosters.txt -text
 res/blockdata/fantasyblocks.txt -text
@@ -14132,6 +14133,8 @@ src/main/java/forge/game/ai/AiAttackController.java svneol=native#text/plain
 src/main/java/forge/game/ai/AiController.java svneol=native#text/plain
 src/main/java/forge/game/ai/AiInputBlock.java -text
 src/main/java/forge/game/ai/AiInputCommon.java svneol=native#text/plain
+src/main/java/forge/game/ai/AiProfileUtil.java -text
+src/main/java/forge/game/ai/AiProps.java -text
 src/main/java/forge/game/ai/ComputerUtil.java svneol=native#text/plain
 src/main/java/forge/game/ai/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/game/ai/ComputerUtilCard.java -text

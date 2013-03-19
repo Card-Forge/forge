@@ -1202,11 +1202,9 @@ public class ComputerUtil {
     // Computer mulligans if there are no cards with converted mana cost of
     // 0 in its hand
     public static boolean wantMulligan(AIPlayer ai) {
-        final int AI_MULLIGAN_THRESHOLD = 5;
-        
         final List<Card> handList = ai.getCardsIn(ZoneType.Hand);
         final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
-        return (handList.size() > AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
+        return (handList.size() > ai.getAi().getIntProperty(AiProps.AI_MULLIGAN_THRESHOLD)) && hasLittleCmc0Cards;
 
     }
 

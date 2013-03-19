@@ -34,6 +34,7 @@ import javax.swing.WindowConstants;
 
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
+import forge.game.ai.AiProfileUtil;
 import forge.game.player.Player;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
@@ -161,6 +162,9 @@ public enum FControl {
         if (data.exists()) {
             Singletons.getModel().getQuest().load(QuestDataIO.loadData(data));
         }
+
+        // Preload AI profiles
+        AiProfileUtil.loadAllProfiles();
 
         // Handles resizing in null layouts of layers in JLayeredPane.
         Singletons.getView().getFrame().addComponentListener(new ComponentAdapter() {

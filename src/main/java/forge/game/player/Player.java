@@ -164,7 +164,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard));
 
-
     protected final LobbyPlayer lobbyPlayer;
     protected final GameState game;
 

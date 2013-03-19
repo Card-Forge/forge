@@ -64,13 +64,22 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             .hoverable(true).text("Reset to defaults").build();
 
     private final FLabel lblTitleSkin = new FLabel.Builder()
-        .text("Choose Skin").fontStyle(Font.BOLD).fontSize(14).build();
+            .text("Choose Skin").fontStyle(Font.BOLD).fontSize(14).build();
 
     private final JList lstChooseSkin = new FList();
     private final FLabel lblChooseSkin = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC)
             .text("Various user-created themes for Forge backgrounds, fonts, and colors.")
             .fontAlign(SwingConstants.LEFT).build();
     private final JScrollPane scrChooseSkin = new FScrollPane(lstChooseSkin);
+
+    private final FLabel lblTitleAIProfile = new FLabel.Builder()
+            .text("Choose AI Personality").fontStyle(Font.BOLD).fontSize(14).build();
+    
+    private final JList lstChooseAIProfile = new FList();
+    private final FLabel lblChooseAIProfile = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC)
+            .text("AI Opponent Personality.")
+            .fontAlign(SwingConstants.LEFT).build();
+    private final JScrollPane scrChooseAIProfile = new FScrollPane(lstChooseAIProfile);
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox("Remove Small Creatures");
     private final JCheckBox cbSingletons = new OptionsCheckBox("Singleton Mode");
@@ -133,6 +142,13 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEnforceDeckLegality, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)"), regularConstraints);
+
+        // AI Personality Profile Options
+        pnlPrefs.add(new SectionLabel("AI Options"), sectionConstraints);
+
+        pnlPrefs.add(lblTitleAIProfile, regularConstraints);
+        pnlPrefs.add(lblChooseAIProfile, regularConstraints);
+        pnlPrefs.add(scrChooseAIProfile, "h 200px!, w 200px!, gap 10% 0 0 2%, wrap");
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints);
@@ -353,6 +369,21 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JScrollPane} */
     public final JScrollPane getScrChooseSkin() {
         return scrChooseSkin;
+    }
+
+    /** @return {@link javax.swing.JList} */
+    public final JList getLstChooseAIProfile() {
+        return lstChooseAIProfile;
+    }
+
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public final FLabel getLblChooseAIProfile() {
+        return lblChooseAIProfile;
+    }
+
+    /** @return {@link javax.swing.JScrollPane} */
+    public final JScrollPane getScrChooseAIProfile() {
+        return scrChooseAIProfile;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
