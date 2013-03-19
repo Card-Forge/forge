@@ -1,6 +1,7 @@
 package forge.card.ability.ai;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -27,6 +28,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
+import forge.card.trigger.TriggerType;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
@@ -1110,6 +1112,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final List<Card> fetched = new ArrayList<Card>();
         final String remember = sa.getParam("RememberChanged");
         final String forget = sa.getParam("ForgetChanged");
+        final boolean champion = sa.hasParam("Champion");
         final String imprint = sa.getParam("Imprint");
         final String totalcmc = sa.getParam("WithTotalCMC");
         int totcmc = AbilityUtils.calculateAmount(card, totalcmc, sa);
@@ -1309,6 +1312,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c);
             }
 
+            if (champion) {
+                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                runParams.put("Card", card);
+                runParams.put("Championed", c);
+                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
+            }
+            
             if (remember != null) {
                 card.addRemembered(movedCard);
             }

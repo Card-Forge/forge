@@ -124,7 +124,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
     private final ArrayList<Card> imprintedCards = new ArrayList<Card>();
     private final ArrayList<Card> encodedCards = new ArrayList<Card>();
-    private Card championedCard = null;
     private final List<Card> devouredCards = new ArrayList<Card>();
     private Map<Player, String> flipResult = new TreeMap<Player, String>();
 
@@ -794,31 +793,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void clearFlipResult() {
         this.flipResult.clear();
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>championedCard</code>.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @since 1.0.15
-     */
-    public final void setChampionedCard(final Card c) {
-        this.championedCard = c;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>championedCard</code>.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     * @since 1.0.15
-     */
-    public final Card getChampionedCard() {
-        return this.championedCard;
     }
 
     /**
@@ -2321,27 +2295,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else if (keyword.startsWith("Kicker")) {
                 final Cost cost = new Cost(this, keywords.get(i).substring(7), false);
                 sbLong.append("Kicker " + cost.toSimpleString() + "\r\n");
-            } else if (keyword.startsWith("Champion")) {
-                final String k = this.getKeyword().get(i);
-                final String[] kk = k.split(":");
-                String types = kk[1];
-                if (kk.length > 2) {
-                    types = kk[2];
-                }
-                if (kk[1].equals("Creature")) {
-                    kk[1] = kk[1].toLowerCase();
-                }
-                sbLong.append("Champion a");
-                if (kk[1].toLowerCase().startsWith("a") || kk[1].toLowerCase().startsWith("e")
-                        || kk[1].toLowerCase().startsWith("i") || kk[1].toLowerCase().startsWith("o")
-                        || kk[1].toLowerCase().startsWith("u")) {
-                    sbLong.append("n");
-                }
-                sbLong.append(" ").append(types);
-                sbLong.append(" (When this enters the battlefield, sacrifice it unless you exile another ");
-                sbLong.append(types);
-                sbLong.append(" you control. When this leaves the battlefield, ");
-                sbLong.append("that card returns to the battlefield.)\r\n");
             } else if (keyword.endsWith(".") && !keywords.get(i).startsWith("Haunt")) {
                 sbLong.append(keywords.get(i).toString()).append("\r\n");
             } else if (keyword.contains("At the beginning of your upkeep, ")

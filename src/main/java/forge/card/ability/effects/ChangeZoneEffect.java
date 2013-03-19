@@ -1,6 +1,7 @@
 package forge.card.ability.effects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.base.Predicates;
@@ -18,6 +19,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
+import forge.card.trigger.TriggerType;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -622,6 +624,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         final String remember = sa.getParam("RememberChanged");
+        final boolean champion = sa.hasParam("Champion");
         final String forget = sa.getParam("ForgetChanged");
         final String imprint = sa.getParam("Imprint");
         final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : "Select a card";
@@ -770,6 +773,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 movedCards.add(movedCard);
 
+                if (champion) {
+                    final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                    runParams.put("Card", card);
+                    runParams.put("Championed", c);
+                    Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
+                }
+                
                 if (remember != null) {
                     card.addRemembered(movedCard);
                 }

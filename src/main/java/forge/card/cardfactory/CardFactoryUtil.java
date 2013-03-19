@@ -538,67 +538,6 @@ public class CardFactoryUtil {
         return entersBattleFieldWithCounters(sourceCard, CounterType.TIME, power);
     } // vanishing
 
-    // List<Card> choices are the only cards the user can successful select
-    /**
-     * <p>
-     * inputTargetChampionSac.
-     * </p>
-     * 
-     * @param crd
-     *            a {@link forge.Card} object.
-     * @param spell
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param targeted
-     *            a boolean.
-     * @param free
-     *            a boolean.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputTargetChampionSac(final Card crd, final SpellAbility spell, final List<Card> choices,
-            final String message, final boolean targeted, final boolean free) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = -3320425330743678663L;
-
-            @Override
-            public void showMessage() {
-                CMatchUI.SINGLETON_INSTANCE.showMessage(message);
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                Singletons.getModel().getGame().getAction().sacrifice(crd, null);
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (choices.contains(card)) {
-                    if (card == spell.getSourceCard()) {
-                        Singletons.getModel().getGame().getAction().sacrifice(spell.getSourceCard(), null);
-                        this.stop();
-                    } else {
-                        spell.getSourceCard().setChampionedCard(card);
-                        Singletons.getModel().getGame().getAction().exile(card);
-
-                        this.stop();
-
-                        // Run triggers
-                        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-                        runParams.put("Card", spell.getSourceCard());
-                        runParams.put("Championed", card);
-                        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
-                    }
-                }
-            } // selectCard()
-        };
-        return target;
-    } // inputTargetSpecific()
-
     /**
      * <p>
      * masterOfTheWildHuntInputTargetCreature.
@@ -2708,6 +2647,50 @@ public class CardFactoryUtil {
             shiftPos = CardFactoryUtil.hasKeyword(card, "Soulshift", n + 1);
         } // Soulshift
 
+        final int championPos = CardFactoryUtil.hasKeyword(card, "Champion");
+        if (championPos != -1) {
+            String parse = card.getKeyword().get(championPos);
+            card.removeIntrinsicKeyword(parse);
+            
+            final String[] k = parse.split(":");
+            final String[] valid = k[1].split(",");
+            String desc = k.length > 2 ? k[2] : k[1];
+            
+            StringBuilder changeType = new StringBuilder();
+            for(String v : valid) {
+                if (changeType.length() != 0) {
+                    changeType.append(",");
+                }
+                changeType.append(v).append(".YouCtrl+Other");
+            }
+            
+            StringBuilder trig = new StringBuilder();
+            trig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ");
+            trig.append("Execute$ ChampionAbility | TriggerDescription$ Champion a(n) ");
+            trig.append(desc).append(" (When this enters the battlefield, sacrifice it unless you exile another ");
+            trig.append(desc).append(" you control. When this leaves the battlefield, that card returns to the battlefield.)");
+            
+            StringBuilder trigReturn = new StringBuilder();
+            trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | ");
+            trigReturn.append("Execute$ ChampionReturn | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
+            
+            StringBuilder ab = new StringBuilder();
+            ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Champion$ True | ");
+            ab.append("Hidden$ True | Optional$ True | SubAbility$ DBSacrifice | ChangeType$ ").append(changeType);
+            
+            StringBuilder subAb = new StringBuilder();
+            subAb.append("DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
+                    
+            String returnChampion = "DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield";
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig.toString(), card, true);
+            final Trigger parsedTrigReturn = TriggerHandler.parseTrigger(trigReturn.toString(), card, true);
+            card.addTrigger(parsedTrigger);
+            card.addTrigger(parsedTrigReturn);
+            card.setSVar("ChampionAbility", ab.toString());
+            card.setSVar("ChampionReturn", returnChampion);
+            card.setSVar("DBSacrifice", subAb.toString());
+        }
+        
         final int echoPos = CardFactoryUtil.hasKeyword(card, "Echo");
         if (echoPos != -1) {
             // card.removeIntrinsicKeyword(parse);
