@@ -86,7 +86,12 @@ public class CloneEffect extends SpellAbilityEffect {
             tgtCard = cloneTargets.get(0);
         }
 
+        // determine the image to be used for the clone
         String imageFileName = host.getImageKey();
+        List<Card> cloneImgSources = AbilityUtils.getDefinedCards(host, sa.getParam("ImageSource"), sa);
+        if (!cloneImgSources.isEmpty()) {
+            imageFileName = cloneImgSources.get(0).getImageKey();
+        }
 
         boolean keepName = sa.hasParam("KeepName");
         String originalName = tgtCard.getName();

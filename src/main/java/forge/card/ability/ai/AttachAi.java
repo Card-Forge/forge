@@ -352,7 +352,7 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     /**
-     * Attach ai control preference.
+     * Attach ai reanimate preference.
      * 
      * @param sa
      *            the sa
@@ -380,7 +380,7 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     /**
-     * Attach ai control preference.
+     * Attach ai specific card preference.
      * 
      * @param sa
      *            the sa
@@ -461,6 +461,16 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         return acceptableChoice(c, mandatory);
+    }
+
+    /**
+     * Attach ai highest evaluated preference.
+     * 
+     * @param list          the initial valid list
+     * @return the card
+     */
+    private static Card attachAIHighestEvaluationPreference(final List<Card> list) {
+        return ComputerUtilCard.getBestAI(list);
     }
 
     /**
@@ -947,6 +957,8 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAIReanimatePreference(sa, prefList, mandatory, attachSource);
         } else if ("SpecificCard".equals(logic)) {
             c = attachAISpecificCardPreference(sa, prefList, mandatory, attachSource);
+        } else if ("HighestEvaluation".equals(logic)) {
+            c = attachAIHighestEvaluationPreference(prefList);
         }
 
         return c;

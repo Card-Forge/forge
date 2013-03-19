@@ -659,13 +659,13 @@ public class CardFactoryUtil {
      */
     public static int getNumberOfManaSymbolsByColor(final String colorAbb, final List<Card> cards) {
         int count = 0;
-        for(Card c : cards) {
+        for (Card c : cards) {
             // Certain tokens can have mana cost, so don't skip them
             count += CardFactoryUtil.getNumberOfManaSymbolsByColor(colorAbb, c);
         }
         return count;
     }
-    
+
     /**
      * <p>
      * getNumberOfManaSymbolsByColor.
@@ -1174,7 +1174,7 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(players.get(0).getLifeLostThisTurn(), m, source);
             }
         }
-        
+
         if (sq[0].contains("PoisonCounters")) {
             if (players.size() > 0) {
                 return CardFactoryUtil.doXMath(players.get(0).getPoisonCounters(), m, source);
@@ -2134,19 +2134,19 @@ public class CardFactoryUtil {
         if (sq[0].equals("Random")) {
             int min = 0;
             int max = 0;
-            
+
             if (StringUtils.isNumeric(sq[1])) {
                 min = Integer.parseInt(sq[1]);
             } else {
                 min = CardFactoryUtil.xCount(c, c.getSVar(sq[1]));
             }
-            
+
             if (StringUtils.isNumeric(sq[2])) {
                 max = Integer.parseInt(sq[2]);
             } else {
                 max = CardFactoryUtil.xCount(c, c.getSVar(sq[2]));
             }
-            
+
             return forge.util.MyRandom.getRandom().nextInt(max) + min;
         }
 
@@ -2568,7 +2568,7 @@ public class CardFactoryUtil {
 
                 final SpellAbility sa = card.getSpellAbility()[0];
                 sa.setIsMultiKicker(true);
-                sa.setMultiKickerManaCost(new ManaCost( new ManaCostParser(k[1])));
+                sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(k[1])));
             }
         }
 
@@ -2651,36 +2651,36 @@ public class CardFactoryUtil {
         if (championPos != -1) {
             String parse = card.getKeyword().get(championPos);
             card.removeIntrinsicKeyword(parse);
-            
+
             final String[] k = parse.split(":");
             final String[] valid = k[1].split(",");
             String desc = k.length > 2 ? k[2] : k[1];
-            
+
             StringBuilder changeType = new StringBuilder();
-            for(String v : valid) {
+            for (String v : valid) {
                 if (changeType.length() != 0) {
                     changeType.append(",");
                 }
                 changeType.append(v).append(".YouCtrl+Other");
             }
-            
+
             StringBuilder trig = new StringBuilder();
             trig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ");
             trig.append("Execute$ ChampionAbility | TriggerDescription$ Champion a(n) ");
             trig.append(desc).append(" (When this enters the battlefield, sacrifice it unless you exile another ");
             trig.append(desc).append(" you control. When this leaves the battlefield, that card returns to the battlefield.)");
-            
+
             StringBuilder trigReturn = new StringBuilder();
             trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | ");
             trigReturn.append("Execute$ ChampionReturn | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
-            
+
             StringBuilder ab = new StringBuilder();
             ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Champion$ True | ");
             ab.append("Hidden$ True | Optional$ True | SubAbility$ DBSacrifice | ChangeType$ ").append(changeType);
-            
+
             StringBuilder subAb = new StringBuilder();
             subAb.append("DB$ Sacrifice | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
-                    
+
             String returnChampion = "DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield";
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig.toString(), card, true);
             final Trigger parsedTrigReturn = TriggerHandler.parseTrigger(trigReturn.toString(), card, true);
@@ -2690,7 +2690,7 @@ public class CardFactoryUtil {
             card.setSVar("ChampionReturn", returnChampion);
             card.setSVar("DBSacrifice", subAb.toString());
         }
-        
+
         final int echoPos = CardFactoryUtil.hasKeyword(card, "Echo");
         if (echoPos != -1) {
             // card.removeIntrinsicKeyword(parse);
@@ -2966,14 +2966,23 @@ public class CardFactoryUtil {
                 String desc = repAb.getDescription();
                 setupETBReplacementAbility(repAb);
 
-                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Description$ " + desc;
-                if (splitkw.length == 4) {
+                final String valid = splitkw.length >= 6 ? splitkw[5] : "Card.Self";
+
+                StringBuilder repEffsb = new StringBuilder();
+                repEffsb.append("Event$ Moved | ValidCard$ ").append(valid);
+                repEffsb.append(" | Destination$ Battlefield | Description$ ").append(desc);
+                if (splitkw.length >= 4) {
                     if (splitkw[3].contains("Optional")) {
-                        repeffstr += " | Optional$ True";
+                        repEffsb.append(" | Optional$ True");
+                    }
+                }
+                if (splitkw.length >= 5) {
+                    if (!splitkw[4].isEmpty()) {
+                        repEffsb.append(" | ActiveZones$ " + splitkw[4]);
                     }
                 }
 
-                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
+                ReplacementEffect re = ReplacementHandler.parseReplacement(repEffsb.toString(), card);
                 re.setLayer(layer);
                 re.setOverridingAbility(repAb);
 
@@ -3085,7 +3094,7 @@ public class CardFactoryUtil {
                 if (card.getController().isHuman()) {
                     game.getActionPlay().playSpellAbilityNoStack(card.getController(), origSA, false);
                 } else {
-                    ComputerUtil.playNoStack((AIPlayer)card.getController(), origSA, game);
+                    ComputerUtil.playNoStack((AIPlayer) card.getController(), origSA, game);
                 }
             }
         };
@@ -3142,7 +3151,7 @@ public class CardFactoryUtil {
         };
         haunterDiesWork.setDescription(hauntDescription);
 
-        final InputSelectManyCards target = new InputSelectManyCards(1,1) {
+        final InputSelectManyCards target = new InputSelectManyCards(1, 1) {
             private static final long serialVersionUID = 1981791992623774490L;
 
             @Override
@@ -3160,7 +3169,7 @@ public class CardFactoryUtil {
                 }
                 return c.canBeTargetedBy(haunterDiesWork);
             }
-        }; 
+        };
         target.setMessage("Choose target creature to haunt.");
 
         final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {

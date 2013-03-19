@@ -2,6 +2,8 @@ Name:Essence of the Wild
 ManaCost:3 G G G
 Types:Creature Avatar
 PT:6/6
+K:ETBReplacement:Copy:EssenceClone:Mandatory:Battlefield:Creature.YouCtrl
+SVar:EssenceClone:DB$ Clone | Defined$ Self | CloneTarget$ ReplacedCard | SpellDescription$ Creatures you control enter the battlefield as a copy of CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_of_the_wild.jpg
 Oracle:Creatures you control enter the battlefield as a copy of Essence of the Wild.
 SetInfo:ISD Mythic
