@@ -15,6 +15,7 @@ import forge.deck.Deck;
 import forge.error.BugReporter;
 import forge.game.ai.AiProfileUtil;
 import forge.game.event.DuelOutcomeEvent;
+import forge.game.player.AIPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerStatistics;
@@ -140,23 +141,21 @@ public class MatchController {
 
         // Set the current AI profile.
         for (Player p : currentGame.getPlayers()) {
-            if (p.getType() == PlayerType.COMPUTER) {
-                if (Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE).equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL)) {
-                    String randomProfile = AiProfileUtil.getRandomProfile();
-                    p.getLobbyPlayer().setAiProfile(randomProfile);
-                } else if (Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE).equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
-                    if (this.getPlayedGames().isEmpty()) {
-                        String randomProfile = AiProfileUtil.getRandomProfile();
-                        p.getLobbyPlayer().setAiProfile(randomProfile);
-                    }
-                } else {
-                    // TODO: implement specific AI profiles for quest mode.
-                    String profile = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
-                    p.getLobbyPlayer().setAiProfile(profile);
-                }
-                System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", p.getLobbyPlayer().getAiProfile(), p.getLobbyPlayer().getName()));
-            }
+            if ( !(p instanceof AIPlayer))
+                continue;
+            
+            String currentAiProfile = Singletons.getModel().getPreferences().getPref(FPref.UI_CURRENT_AI_PROFILE);
+            
+            // TODO: implement specific AI profiles for quest mode.
+            boolean wantRandomProfile = currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_DUEL) 
+                    || (this.getPlayedGames().isEmpty() && currentAiProfile.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)); 
+            
+            String profileToSet = wantRandomProfile ? AiProfileUtil.getRandomProfile() : currentAiProfile;
+            
+            p.getLobbyPlayer().setAiProfile(profileToSet);
+            System.out.println(String.format("AI profile %s was chosen for the lobby player %s.", p.getLobbyPlayer().getAiProfile(), p.getLobbyPlayer().getName()));
         }
+        
         
         try {
             Player localHuman = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
