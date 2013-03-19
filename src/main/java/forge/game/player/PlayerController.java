@@ -112,4 +112,6 @@ public abstract class PlayerController {
     /** p = target player, validCards - possible discards, min cards to discard */
     public abstract List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> validCards, int min);
     public abstract Card chooseCardToDredge(List<Card> dredgers);
+
+    public abstract void playMiracle(SpellAbility miracle, Card card);
 }

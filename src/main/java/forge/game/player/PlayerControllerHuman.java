@@ -338,4 +338,14 @@ public class PlayerControllerHuman extends PlayerController {
         }
         return null;
     }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#playMiracle(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void playMiracle(SpellAbility miracle, Card card) {
+        if (GuiDialog.confirm(card, card + " - Drawn. Play for Miracle Cost?")) {
+            game.getActionPlay().playSpellAbility(miracle, getPlayer());
+        }
+    }
 }

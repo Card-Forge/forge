@@ -3122,7 +3122,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         playForMiracleCost.setStackDescription(card.getName() + " - Cast via Miracle");
 
         // TODO Convert this to a Trigger
-        final Ability miracleTrigger = new MiracleTrigger(card, ManaCost.ZERO, card, playForMiracleCost);
+        final Ability miracleTrigger = new MiracleTrigger(card, ManaCost.ZERO, playForMiracleCost);
         miracleTrigger.setStackDescription(card.getName() + " - Miracle.");
         miracleTrigger.setActivatingPlayer(card.getOwner());
         miracleTrigger.setTrigger(true);
@@ -3149,36 +3149,24 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *
      */
     private final class MiracleTrigger extends Ability {
-        private final Card card;
         private final SpellAbility miracle;
     
         /**
          * TODO: Write javadoc for Constructor.
          * @param sourceCard
          * @param manaCost
-         * @param card
          * @param miracle
          */
-        private MiracleTrigger(Card sourceCard, ManaCost manaCost, Card card, SpellAbility miracle) {
+        private MiracleTrigger(Card sourceCard, ManaCost manaCost, SpellAbility miracle) {
             super(sourceCard, manaCost);
-            this.card = card;
             this.miracle = miracle;
         }
     
         @Override
         public void resolve() {
-            miracle.setActivatingPlayer(card.getOwner());
+            miracle.setActivatingPlayer(getSourceCard().getOwner());
             // pay miracle cost here.
-            if (card.getOwner().isHuman()) {
-                if (GuiDialog.confirm(card, card + " - Drawn. Pay Miracle Cost?")) {
-                    game.getActionPlay().playSpellAbility(miracle, miracle.getActivatingPlayer());
-                }
-            } else {
-                Spell spell = (Spell) miracle;
-                if (spell.canPlayFromEffectAI(false, false)) {
-                    ComputerUtil.playStack(miracle, (AIPlayer) card.getOwner(), game);
-                }
-            }
+            getSourceCard().getOwner().getController().playMiracle(miracle, getSourceCard());
         }
     }
 

@@ -19,6 +19,7 @@ package forge.game.ai;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -38,6 +39,7 @@ import forge.card.ability.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.game.GameActionUtil;
@@ -730,6 +732,35 @@ public class AiController {
 
     public boolean getBooleanProperty(AiProps propName) {
         return Boolean.parseBoolean(AiProfileUtil.getAIProp(getPlayer().getLobbyPlayer(), propName));
+    }
+
+    /** Returns the spell ability which has already been played - use it for reference only */ 
+    public SpellAbility chooseAndPlaySa(boolean mandatory, boolean withoutPayingManaCost, final SpellAbility... list) {
+        return chooseAndPlaySa(Arrays.asList(list), mandatory, withoutPayingManaCost);
+    }
+    /** Returns the spell ability which has already been played - use it for reference only */
+    public SpellAbility chooseAndPlaySa(final List<SpellAbility> choices, boolean mandatory, boolean withoutPayingManaCost) {
+        for (final SpellAbility sa : choices) {
+            //Spells
+            if (sa instanceof Spell) {
+                if (!((Spell) sa).canPlayFromEffectAI(mandatory, withoutPayingManaCost)) {
+                    continue;
+                }
+            } else {
+                if (sa.canPlayAI()) {
+                    continue;
+                }
+            }
+            
+            if ( withoutPayingManaCost )
+                ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, sa, game);
+            else if (!ComputerUtilCost.canPayCost(sa, player)) 
+                continue;
+            else
+                ComputerUtil.playStack(sa, player, game);
+            return sa;
+        }
+        return null;
     }
 }
 

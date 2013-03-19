@@ -88,22 +88,7 @@ public class PlayerControllerAi extends PlayerController {
     public void playFromSuspend(Card c) {
         final List<SpellAbility> choices = c.getBasicSpells();
         c.setSuspendCast(true);
-        for (final SpellAbility sa : choices) {
-            //Spells
-            if (sa instanceof Spell) {
-                Spell spell = (Spell) sa;
-                if (!spell.canPlayFromEffectAI(true, true)) {
-                    continue;
-                }
-            } else {
-                if (sa.canPlayAI()) {
-                    continue;
-                }
-            }
-            
-            ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, sa, game);
-            break;
-        }
+        getAi().chooseAndPlaySa(choices, true, true);
     }
 
     /* (non-Javadoc)
@@ -112,24 +97,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean playCascade(Card cascadedCard, Card source) {
         final List<SpellAbility> choices = cascadedCard.getBasicSpells();
-
-        for (final SpellAbility sa : choices) {
-            sa.setActivatingPlayer(getPlayer());
-            //Spells
-            if (sa instanceof Spell) {
-                Spell spell = (Spell) sa;
-                if (!spell.canPlayFromEffectAI(false, true)) {
-                    continue;
-                }
-            } else {
-                if (!sa.canPlayAI()) {
-                    continue;
-                }
-            }
-            ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, sa, game);
-            return true;
-        }
-        return false;
+        return null != getAi().chooseAndPlaySa(choices, false, true);
     }
 
     /**
@@ -267,6 +235,11 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Card chooseCardToDredge(List<Card> dredgers) {
         return brains.chooseCardToDredge(dredgers);
+    }
+
+    @Override
+    public void playMiracle(SpellAbility miracle, Card card) {
+        getAi().chooseAndPlaySa(false, false, miracle);
     }
 
 }

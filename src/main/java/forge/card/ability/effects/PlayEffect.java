@@ -114,9 +114,8 @@ public class PlayEffect extends SpellAbilityEffect {
                             for (SpellAbility s : c.getBasicSpells()) {
                                 Spell spell = (Spell) s;
                                 s.setActivatingPlayer(controller);
-                                SpellAbilityRestriction res = s.getRestrictions();
                                 // timing restrictions still apply
-                                if (res.checkTimingRestrictions(c, s) && spell.canPlayFromEffectAI(false, true)) {
+                                if (s.getRestrictions().checkTimingRestrictions(c, s) && spell.canPlayFromEffectAI(false, true)) {
                                     sas.add(s);
                                 }
                             }
@@ -206,6 +205,8 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("WithoutManaCost")) {
                 if (controller.isHuman()) {
+                    // controller.getGame().getActionPlay().playSpellAbilityForFree(tgtSA);
+                    
                     final SpellAbility newSA = tgtSA.copy();
                     final Cost cost = new Cost(tgtCard, "", false);
                     if (newSA.getPayCosts() != null) {

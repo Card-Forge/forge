@@ -207,20 +207,21 @@ public class ComputerUtil {
      */
     public static final void playStack(final SpellAbility sa, final AIPlayer ai, final GameState game) {
         sa.setActivatingPlayer(ai);
-        if (ComputerUtilCost.canPayCost(sa, ai)) {
-            final Card source = sa.getSourceCard();
-            if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setSourceCard(game.getAction().moveToStack(source));
-            }
-            final Cost cost = sa.getPayCosts();
-            if (cost == null) {
-                ComputerUtilMana.payManaCost(ai, sa);
+        if (!ComputerUtilCost.canPayCost(sa, ai)) 
+            return;
+            
+        final Card source = sa.getSourceCard();
+        if (sa.isSpell() && !source.isCopiedSpell()) {
+            sa.setSourceCard(game.getAction().moveToStack(source));
+        }
+        final Cost cost = sa.getPayCosts();
+        if (cost == null) {
+            ComputerUtilMana.payManaCost(ai, sa);
+            game.getStack().add(sa);
+        } else {
+            final CostPayment pay = new CostPayment(cost, sa, game);
+            if (pay.payComputerCosts(ai, game)) {
                 game.getStack().add(sa);
-            } else {
-                final CostPayment pay = new CostPayment(cost, sa, game);
-                if (pay.payComputerCosts(ai, game)) {
-                    game.getStack().add(sa);
-                }
             }
         }
     }
