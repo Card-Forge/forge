@@ -119,7 +119,7 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public void playSpellAbilityForFree(SpellAbility copySA) {
-        game.getActionPlay().playSpellAbilityForFree(copySA);
+        game.getActionPlay().playSpellAbilityWithoutPayingManaCost(copySA);
     }
 
     /**

@@ -239,10 +239,10 @@ public class ComputerUtil {
 
         final Card source = sa.getSourceCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(source));
+            sa.setSourceCard(ai.getGame().getAction().moveToStack(source));
         }
 
-        Singletons.getModel().getGame().getStack().add(sa);
+        ai.getGame().getStack().add(sa);
     }
 
     /**
@@ -254,20 +254,7 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public static final void playSpellAbilityWithoutPayingManaCost(final AIPlayer ai, final SpellAbility sa, final GameState game) {
-        final SpellAbility newSA = sa.copy();
-        final Cost cost = new Cost(sa.getSourceCard(), "", false);
-        if (newSA.getPayCosts() != null) {
-            for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                if (!(part instanceof CostPartMana)) {
-                    cost.getCostParts().add(part);
-                }
-            }
-        }
-        newSA.setPayCosts(cost);
-        newSA.setManaCost(ManaCost.ZERO);
-        final StringBuilder sb = new StringBuilder();
-        sb.append(sa.getDescription()).append(" (without paying its mana cost)");
-        newSA.setDescription(sb.toString());
+        final SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
         if (!ComputerUtilCost.canPayAdditionalCosts(newSA, ai, game)) {
@@ -279,7 +266,7 @@ public class ComputerUtil {
             newSA.setSourceCard(game.getAction().moveToStack(source));
         }
 
-        final CostPayment pay = new CostPayment(cost, newSA, game);
+        final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA, game);
         pay.payComputerCosts(ai, game);
 
         game.getStack().add(newSA);

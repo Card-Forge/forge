@@ -60,7 +60,7 @@ public class GameActionPlay {
         }
 
         sa.setActivatingPlayer(player);
-        this.playSpellAbilityForFree(sa);
+        this.playSpellAbilityWithoutPayingManaCost(sa);
     }
 
     /**
@@ -71,7 +71,7 @@ public class GameActionPlay {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final void playSpellAbilityForFree(final SpellAbility sa) {
+    public final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
         final Card source = sa.getSourceCard();
         setSplitCardState(source, sa); // Split card support
 

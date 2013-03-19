@@ -13,10 +13,6 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityEffect;
-import forge.card.cost.Cost;
-import forge.card.cost.CostPart;
-import forge.card.cost.CostPartMana;
-import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -203,52 +199,27 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.getTarget().setMandatory(true);
             }
 
-            if (sa.hasParam("WithoutManaCost")) {
-                if (controller.isHuman()) {
-                    // controller.getGame().getActionPlay().playSpellAbilityForFree(tgtSA);
-                    
-                    final SpellAbility newSA = tgtSA.copy();
-                    final Cost cost = new Cost(tgtCard, "", false);
-                    if (newSA.getPayCosts() != null) {
-                        for (final CostPart part : newSA.getPayCosts().getCostParts()) {
-                            if (!(part instanceof CostPartMana)) {
-                                cost.getCostParts().add(part);
-                            }
-                        }
-                    }
-                    newSA.setPayCosts(cost);
-                    newSA.setManaCost(ManaCost.NO_COST);
-                    newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
-                    game.getActionPlay().playSpellAbility(newSA, activator);
-                    if (remember) {
-                        source.addRemembered(tgtSA.getSourceCard());
-                    }
-                } else {
-                    if (tgtSA instanceof Spell) {
-                        Spell spell = (Spell) tgtSA;
-                        if (spell.canPlayFromEffectAI(!optional, true) || !optional) {
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost((AIPlayer)controller, tgtSA, game);
-                            if (remember) {
-                                source.addRemembered(tgtSA.getSourceCard());
-                            }
-                        }
-                    }
-                }
+            boolean noManaCost = sa.hasParam("WithoutManaCost"); 
+            if (controller.isHuman()) {
+                SpellAbility newSA = noManaCost ? tgtSA.copyWithNoManaCost() : tgtSA;
+                game.getActionPlay().playSpellAbility(newSA, activator);
             } else {
-                if (controller.isHuman()) {
-                    game.getActionPlay().playSpellAbility(tgtSA, activator);
-                } else {
-                    if (tgtSA instanceof Spell) {
-                        Spell spell = (Spell) tgtSA;
-                        if (spell.canPlayFromEffectAI(!optional, false) || !optional) {
+                if (tgtSA instanceof Spell) { // Isn't it ALWAYS a spell?
+                    Spell spell = (Spell) tgtSA;
+                    if (spell.canPlayFromEffectAI(!optional, noManaCost) || !optional) {
+                        if (noManaCost) {
+                            ComputerUtil.playSpellAbilityWithoutPayingManaCost((AIPlayer)controller, tgtSA, game);
+                        } else {
                             ComputerUtil.playStack(tgtSA, (AIPlayer)controller, game);
                         }
-                    }
-                }
-                if (remember) {
-                    source.addRemembered(tgtSA.getSourceCard());
+                    } else 
+                        remember = false; // didn't play spell
                 }
             }
+            if (remember) {
+                source.addRemembered(tgtSA.getSourceCard());
+            }
+       
         }
     } // end resolve
 

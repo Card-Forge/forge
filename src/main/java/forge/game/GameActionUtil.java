@@ -55,14 +55,12 @@ import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.control.input.Input;
 import forge.control.input.InputPayDiscardCost;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayReturnCost;
-import forge.game.ai.ComputerUtil;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.player.AIPlayer;
@@ -279,24 +277,10 @@ public final class GameActionUtil {
                             revealed.remove(rippledCards[i]);
                         }
                     } else {
-                        final List<SpellAbility> choices = rippledCards[i].getBasicSpells();
-    
-                        for (final SpellAbility sa : choices) {
-                          //Spells
-                            if (sa instanceof Spell) {
-                                Spell spell = (Spell) sa;
-                                if (!spell.canPlayFromEffectAI(false, true)) {
-                                    continue;
-                                }
-                            } else {
-                                if (!sa.canPlayAI() && !sa.getSourceCard().isType("Legendary")) {
-                                    continue;
-                                }
-                            }
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost((AIPlayer)p, sa, game);
+                        AIPlayer ai = (AIPlayer) p;
+                        SpellAbility saPlayed = ai.getAi().chooseAndPlaySa(rippledCards[i].getBasicSpells(), false, true);
+                        if ( saPlayed != null )
                             revealed.remove(rippledCards[i]);
-                            break;
-                        }
                     }
                 }
             }
@@ -335,10 +319,8 @@ public final class GameActionUtil {
                 c.addExtrinsicKeyword("Ripple:4");
             }
 
-            final List<String> a = c.getKeyword();
-            for (int x = 0; x < a.size(); x++) {
-                if (a.get(x).toString().startsWith("Ripple")) {
-                    final String parse = c.getKeyword().get(x).toString();
+            for (String parse : c.getKeyword()) {
+                if (parse.startsWith("Ripple")) {
                     final String[] k = parse.split(":");
                     this.doRipple(c, Integer.valueOf(k[1]), controller);
                 }

@@ -31,6 +31,8 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
 import forge.card.cost.Cost;
+import forge.card.cost.CostPart;
+import forge.card.cost.CostPartMana;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaCost;
 import forge.control.input.Input;
@@ -1202,6 +1204,22 @@ public abstract class SpellAbility implements ISpellAbility {
             System.err.println(e);
         }
         return clone;
+    }
+    
+    public SpellAbility copyWithNoManaCost() {
+        final SpellAbility newSA = this;
+        final Cost cost = new Cost(this.getSourceCard(), "", false);
+        if (newSA.getPayCosts() != null) {
+            for (final CostPart part : newSA.getPayCosts().getCostParts()) {
+                if (!(part instanceof CostPartMana)) {
+                    cost.getCostParts().add(part);
+                }
+            }
+        }
+        newSA.setPayCosts(cost);
+        newSA.setManaCost(ManaCost.NO_COST);
+        newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
+        return newSA;
     }
 
     /**
