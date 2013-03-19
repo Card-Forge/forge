@@ -17,6 +17,7 @@ http://www.cardforge.org/fpics/questAvatars/Beast.jpg
 http://www.cardforge.org/fpics/questAvatars/Beast2.jpg
 http://www.cardforge.org/fpics/questAvatars/Bela%20Lugosi.jpg
 http://www.cardforge.org/fpics/questAvatars/Betty%20Rubble.jpg
+http://www.cardforge.org/fpics/questAvatars/Black%20Flame.jpg
 http://www.cardforge.org/fpics/questAvatars/Blackbeard.jpg
 http://www.cardforge.org/fpics/questAvatars/Blood%20Oath.jpg
 http://www.cardforge.org/fpics/questAvatars/Boba%20Fett.jpg
@@ -204,6 +205,7 @@ http://www.cardforge.org/fpics/questAvatars/Totoro.jpg
 http://www.cardforge.org/fpics/questAvatars/Treebeard.jpg
 http://www.cardforge.org/fpics/questAvatars/Uncle%20Owen.jpg
 http://www.cardforge.org/fpics/questAvatars/Walle.jpg
+http://www.cardforge.org/fpics/questAvatars/Vic%20Stone.jpg
 http://www.cardforge.org/fpics/questAvatars/Wally.jpg
 http://www.cardforge.org/fpics/questAvatars/White%20Knight.jpg
 http://www.cardforge.org/fpics/questAvatars/Wilma%20Flintstone.jpg
