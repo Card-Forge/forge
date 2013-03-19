@@ -121,6 +121,7 @@ public class ImageCache {
         boolean mayEnlarge = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
         BufferedImage original = getImage(key);
         if (null == original) {
+            CACHE.put(key, null); // This instructs cache to give up finding a picture if it was not found once
             return null;
         }
         
