@@ -22,24 +22,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.ApiType;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.control.input.Input;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
@@ -48,7 +44,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
