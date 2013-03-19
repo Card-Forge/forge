@@ -68,7 +68,7 @@ public class ImageCache {
     public static final String TOURNAMENTPACK_PREFIX = "o:";
     
     static private final LoadingCache<String, BufferedImage> CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
-
+    private static final BufferedImage defaultImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
     /**
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
@@ -120,8 +120,13 @@ public class ImageCache {
         
         boolean mayEnlarge = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
         BufferedImage original = getImage(key);
+        
+        if (original == defaultImage) { // the found image is a placeholder for missing picture? 
+            return null;
+        }
+        
         if (null == original) {
-            // CACHE.put(key, null); // This instructs cache to give up finding a picture if it was not found once
+            CACHE.put(key, defaultImage); // This instructs cache to give up finding a picture if it was not found once
             return null;
         }
         
