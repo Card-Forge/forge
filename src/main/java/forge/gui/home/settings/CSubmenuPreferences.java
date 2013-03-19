@@ -268,7 +268,6 @@ public enum CSubmenuPreferences implements ICDoc {
         prefs.save();
     }
 
-    @SuppressWarnings("serial")
     private void updateAIProfile() {
         final VSubmenuPreferences view = VSubmenuPreferences.SINGLETON_INSTANCE;
         final String name = view.getLstChooseAIProfile().getSelectedValue().toString();

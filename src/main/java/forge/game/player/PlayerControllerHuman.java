@@ -319,18 +319,12 @@ public class PlayerControllerHuman extends PlayerController {
         return GuiDialog.confirm(c, "Where will you put " + c.getName() + " in your library", new String[]{"Top", "Bottom"} );
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#chooseCardsToDiscardFrom(forge.game.player.Player, java.util.List, int)
-     */
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int minDiscard) {
         int cntToKeepInHand =  minDiscard == 0 ? -1 : valid.size() - minDiscard;
         return GuiChoose.order("Choose cards to Discard", "Discarded", cntToKeepInHand, valid, null, null);
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#chooseCardToDredge(java.util.List)
-     */
     @Override
     public Card chooseCardToDredge(List<Card> dredgers) {
         if (GuiDialog.confirm(null, "Do you want to dredge?", false)) {
@@ -339,13 +333,17 @@ public class PlayerControllerHuman extends PlayerController {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#playMiracle(forge.card.spellability.SpellAbility, forge.Card)
-     */
     @Override
     public void playMiracle(SpellAbility miracle, Card card) {
         if (GuiDialog.confirm(card, card + " - Drawn. Play for Miracle Cost?")) {
             game.getActionPlay().playSpellAbility(miracle, getPlayer());
+        }
+    }
+
+    @Override
+    public void playMadness(SpellAbility madness) {
+        if (GuiDialog.confirm(madness.getSourceCard(), madness.getSourceCard() + " - Discarded. Pay Madness Cost?")) {
+            game.getActionPlay().playSpellAbility(madness, getPlayer());
         }
     }
 }

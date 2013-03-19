@@ -114,4 +114,5 @@ public abstract class PlayerController {
     public abstract Card chooseCardToDredge(List<Card> dredgers);
 
     public abstract void playMiracle(SpellAbility miracle, Card card);
+    public abstract void playMadness(SpellAbility madness);
 }

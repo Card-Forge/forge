@@ -129,35 +129,23 @@ public class PlayerControllerAi extends PlayerController {
         return player;
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#sideboard(forge.deck.Deck)
-     */
     @Override
     public Deck sideboard(Deck deck, GameType gameType) {
         // AI does not know how to sideboard
         return deck;
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#assignCombatDamage(forge.Card, java.util.List, int, forge.GameEntity)
-     */
     @Override
     public Map<Card, Integer> assignCombatDamage(Card attacker, List<Card> blockers, int damageDealt, GameEntity defender) {
         return ComputerUtilCombat.distributeAIDamage(attacker, blockers, damageDealt, defender);
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#announceRequirements()
-     */
     @Override
     public String announceRequirements(SpellAbility ability, String announce) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see forge.game.player.PlayerController#choosePermanentsToSacrifice(java.util.List, int, forge.card.spellability.SpellAbility, boolean, boolean)
-     */
     @Override
     public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
         return ComputerUtil.choosePermanentsToSacrifice(player, validTargets, amount, sa, destroy, isOptional);
@@ -165,12 +153,12 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Card chooseSingleCardForEffect(List<Card> options, SpellAbility sa, String title, boolean isOptional) {
-        return brains.chooseSingleCardForEffect(options, sa, title, isOptional);
+        return getAi().chooseSingleCardForEffect(options, sa, title, isOptional);
     }
 
     @Override
     public boolean confirmAction(SpellAbility sa, String mode, String message) {
-        return brains.confirmAction(sa, mode, message);
+        return getAi().confirmAction(sa, mode, message);
     }
 
     @Override
@@ -179,7 +167,7 @@ public class PlayerControllerAi extends PlayerController {
     }
     @Override
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
-        return brains.confirmStaticApplication(hostCard, affected, logic, message);
+        return getAi().confirmStaticApplication(hostCard, affected, logic, message);
     }
 
     @Override
@@ -234,12 +222,18 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Card chooseCardToDredge(List<Card> dredgers) {
-        return brains.chooseCardToDredge(dredgers);
+        return getAi().chooseCardToDredge(dredgers);
     }
 
     @Override
     public void playMiracle(SpellAbility miracle, Card card) {
         getAi().chooseAndPlaySa(false, false, miracle);
+    }
+
+
+    @Override
+    public void playMadness(SpellAbility madness) {
+        getAi().chooseAndPlaySa(false, false, madness);
     }
 
 }

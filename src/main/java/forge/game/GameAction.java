@@ -45,7 +45,6 @@ import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
@@ -64,8 +63,6 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.GuiDialog;
-
 
 /**
  * Methods for common actions performed during a game.
@@ -81,6 +78,7 @@ public class GameAction {
      */
 
     private final GameState game;
+
     public GameAction(GameState game0) {
         game = game0;
     }
@@ -120,8 +118,7 @@ public class GameAction {
         if (zoneFrom == null && !c.isToken()) {
             if (position == null) {
                 zoneTo.add(c);
-            }
-            else {
+            } else {
                 zoneTo.add(c, position);
             }
 
@@ -201,8 +198,7 @@ public class GameAction {
         // but how to query for input here and continue later while the callers assume synchronous result?
         if (position == null) {
             zoneTo.add(copied);
-        }
-        else {
+        } else {
             zoneTo.add(copied, position);
         }
 
@@ -246,7 +242,7 @@ public class GameAction {
                 (!zoneTo.is(ZoneType.Battlefield) && !c.getName().equals("Skullbriar, the Walking Grave"))) {
             copied.clearCounters();
         }
-        
+
         if (!zoneTo.is(ZoneType.Battlefield)) {
             copied.getCharacteristics().resetCardColor();
         }
@@ -487,8 +483,7 @@ public class GameAction {
     }
 
     private void handleRecoverAbility(final Card recoverable) {
-        final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))
-                .split(":")[1];
+        final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover")).split(":")[1];
         final Cost cost = new Cost(recoverable, recoverCost, true);
 
         final Command paidCommand = new Command() {
@@ -793,16 +788,7 @@ public class GameAction {
             @Override
             public void resolve() {
                 // pay madness cost here.
-                if (card.getOwner().isHuman()) {
-                    if (GuiDialog.confirm(card, card + " - Discarded. Pay Madness Cost?")) {
-                        game.getActionPlay().playSpellAbility(madness, player);
-                    }
-                } else {
-                    Spell spell = (Spell) madness;
-                    if (spell.canPlayFromEffectAI(false, false)) {
-                        ComputerUtil.playStack(madness, (AIPlayer) card.getOwner(), game);
-                    }
-                }
+                card.getOwner().getController().playMadness(madness);
             }
         };
 
@@ -942,12 +928,12 @@ public class GameAction {
             return;
         }
 
-//        final JFrame frame = Singletons.getView().getFrame();
-//        if (!frame.isDisplayable()) {
-//            return;
-//        }
-        
-        if ( game.isGameOver() )
+        // final JFrame frame = Singletons.getView().getFrame();
+        // if (!frame.isDisplayable()) {
+        // return;
+        // }
+
+        if (game.isGameOver())
             return;
 
         final boolean refreeze = game.getStack().isFrozen();
@@ -963,7 +949,7 @@ public class GameAction {
 
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
-            
+
             for (Player p : game.getPlayers()) {
                 for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
                     if (!c.getController().equals(p)) {
@@ -1090,7 +1076,7 @@ public class GameAction {
                 checkAgain = true;
                 // Place triggers on stack
             }
-            
+
             if (this.handleLegendRule()) {
                 checkAgain = true;
             }
@@ -1104,8 +1090,8 @@ public class GameAction {
             }
         } // for q=0;q<2
 
-        GameEndReason endGame = this.checkEndGameState(game); 
-        if ( endGame != null ) {
+        GameEndReason endGame = this.checkEndGameState(game);
+        if (endGame != null) {
             // Clear Simultaneous triggers at the end of the game
             game.setGameOver(endGame);
             game.getStack().clearSimultaneousStack();
@@ -1191,15 +1177,15 @@ public class GameAction {
                 game.getEvents().post(new CardDestroyedEvent());
             }
         }
-        
+
         return recheck;
     } // destroyLegendaryCreatures()
 
 
     public final boolean sacrifice(final Card c, final SpellAbility source) {
-        if(!c.canBeSacrificedBy(source))
+        if (!c.canBeSacrificedBy(source))
             return false;
-        
+
         this.sacrificeDestroy(c);
 
         // Play the Sacrifice sound
@@ -1253,7 +1239,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean destroyNoRegeneration(final Card c) {
-        if ( !c.canBeDestroyed() )
+        if (!c.canBeDestroyed())
             return false;
 
         if (c.isEnchanted()) {
@@ -1366,7 +1352,7 @@ public class GameAction {
 
         final boolean persist = (c.hasKeyword("Persist") && (c.getCounters(CounterType.M1M1) == 0)) && !c.isToken();
         final boolean undying = (c.hasKeyword("Undying") && (c.getCounters(CounterType.P1P1) == 0)) && !c.isToken();
-        
+
         game.getCombat().removeFromCombat(c);
 
         final Card newCard = this.moveToGraveyard(c);
@@ -1433,5 +1419,5 @@ public class GameAction {
      * @param c
      *            a {@link forge.Card} object.
      */
-    
+
 }
