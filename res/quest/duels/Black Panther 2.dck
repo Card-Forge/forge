@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Black Panther 2
+Title=Black Panther
+Difficulty=medium
+Description=Mono B Shade deck
+Icon=Black Panther.jpg
+Deck Type=constructed
+[main]
+4 Crypt Ghast
+1 Deepwood Legate
+3 Drifting Shade
+3 Dross Golem
+2 Evernight Shade
+4 Lashwrithe
+1 Liliana of the Dark Realms
+4 Liliana's Shade
+2 Nakaya Shade
+4 Nantuko Shade
+4 Nirkana Revenant
+3 Slithering Shade
+24 Swamp
+1 Undercity Shade
+[sideboard]
