@@ -51,10 +51,11 @@ public final class CardUtil {
     
     // returns "G", longColor is Constant.Color.Green and the like
     public static String getShortColor(final String longColor) {
-        if (!colorMap.containsKey(longColor)) {
+        String color = longColor.toLowerCase();
+        if (!colorMap.containsKey(color)) {
             throw new RuntimeException("CardUtil : getShortColor() invalid argument - " + longColor);
         }
-        return colorMap.get(longColor);
+        return colorMap.get(color);
     }
 
     public static List<String> getColors(final Card c) {
