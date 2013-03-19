@@ -64,6 +64,8 @@ import forge.model.BuildInfo;
  */
 public class BugReporter {
     private static final int _STACK_OVERFLOW_MAX_MESSAGE_LEN = 16 * 1024;
+    
+    private static boolean dialogShown = false;
 
     /**
      * Shows exception information in a format ready to post to the forum as a crash report.  Uses the exception's message
@@ -190,6 +192,9 @@ public class BugReporter {
     }
     
     private static void _showDialog(String title, String text, boolean showExitAppBtn) {
+        if ( dialogShown )
+            return;
+        
         JTextArea area = new JTextArea(text);
         area.setFont(new Font("Monospaced", Font.PLAIN, 10));
         area.setEditable(false);
@@ -239,8 +244,10 @@ public class BugReporter {
         dlg.setSize(showExitAppBtn ? 780 : 600, 400);
         dlg.setResizable(true);
         dlg.setLocationRelativeTo(null);
+        dialogShown = true;
         dlg.setVisible(true);
         dlg.dispose();
+        dialogShown = false;
     }
 
     @SuppressWarnings("serial")
