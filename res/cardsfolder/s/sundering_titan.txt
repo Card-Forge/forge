@@ -4,7 +4,7 @@ Types:Artifact Creature Golem
 PT:7/10
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
-SVar:TrigChoose:AB$ ChooseCard | Cost$ 0 | Defined$ You | SunderingTitan$ True | SubAbility$ DBDestroy
+SVar:TrigChoose:AB$ ChooseCard | Cost$ 0 | Defined$ You | EachBasicType$ Land | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Card.ChosenCard | SpellDescription$ Destroy all chosen cards.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sundering_titan.jpg

@@ -54,25 +54,28 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final int validAmount = !numericAmount.matches("[0-9][0-9]?")
                 ? CardFactoryUtil.xCount(host, host.getSVar(sa.getParam("Amount"))) : Integer.parseInt(numericAmount);
 
-        if (sa.hasParam("SunderingTitan")) {
-            final List<Card> land = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.LANDS);
-            for (final String type : CardType.getBasicTypes()) {
-                final List<Card> cl = CardLists.getType(land, type);
-                if (cl.size() > 0) {
-                    final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
-                    final Object o = GuiChoose.one(prompt, cl);
-                    if (null != o) {
-                        final Card c = (Card) o;
-                        chosen.add(c);
+        for (final Player p : tgtPlayers) {
+            if (sa.hasParam("EachBasicType")) {
+                // Get all lands, 
+                List<Card> land = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+                String eachBasic = sa.getParam("EachBasicType");
+                if (eachBasic.equals("Controlled")) {
+                    land = CardLists.filterControlledBy(land, p);
+                }
+                
+                // Choose one of each BasicLand given special place
+                for (final String type : CardType.getBasicTypes()) {
+                    final List<Card> cl = CardLists.getType(land, type);
+                    if (!cl.isEmpty()) {
+                        final String prompt = "Choose a" + (type.equals("Island") ? "n " : " ") + type;
+                        Card c = p.getController().chooseSingleCardForEffect(cl, sa, prompt, true);
+                        
+                        if (null != c) {
+                            chosen.add(c);
+                        }
                     }
                 }
-            }
-            host.setChosenCard(chosen);
-            return;
-        }
-
-        for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+            } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
                     
                     Card c;
@@ -89,17 +92,17 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         break;
                     }
                 }
-                host.setChosenCard(chosen);
-                if (sa.hasParam("RememberChosen")) {
-                    for (final Card rem : chosen) {
-                        host.addRemembered(rem);
-                    }
-                }
-                if (sa.hasParam("ForgetChosen")) {
-                    for (final Card rem : chosen) {
-                        host.removeRemembered(rem);
-                    }
-                }
+            }
+        }
+        host.setChosenCard(chosen);
+        if (sa.hasParam("RememberChosen")) {
+            for (final Card rem : chosen) {
+                host.addRemembered(rem);
+            }
+        }
+        if (sa.hasParam("ForgetChosen")) {
+            for (final Card rem : chosen) {
+                host.removeRemembered(rem);
             }
         }
     }

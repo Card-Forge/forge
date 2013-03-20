@@ -6145,6 +6145,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.getChosenCard().contains(this)) {
                 return false;
             }
+        } else if (property.equals("nonChosenCard")) {
+            if (source.getChosenCard().contains(this)) {
+                return false;
+            }
         }
         // ... Card colors
         else if (property.contains("White") || property.contains("Blue") || property.contains("Black")
