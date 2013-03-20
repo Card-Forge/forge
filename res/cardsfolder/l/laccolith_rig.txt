@@ -9,3 +9,4 @@ SVar:NoCombatDamage:DB$ Pump | Defined$ TriggeredAttacker | KW$ HIDDEN CARDNAME 
 SVar:RigX:TriggeredAttacker$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laccolith_rig.jpg
 SetInfo:NMS Common
+Oracle:Enchant creature\nWhenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature. If you do, the first creature assigns no combat damage this turn.
