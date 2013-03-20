@@ -1,0 +1,13 @@
+Name:Paroxysm
+ManaCost:1 R
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | Execute$ TriggeredParoxysm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of his or her library. If that card is a land card, destroy that creature. Otherwise, it gets +3/+3 until end of turn.
+SVar:TriggeredParoxysm:AB$ Dig | Cost$ 0 | Defined$ TriggeredPlayer | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DestructiveParoxysm
+SVar:DestructiveParoxysm:DB$ Destroy | Defined$ Enchanted | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ BeserkParoxysm
+SVar:BeserkParoxysm:DB$ Pump | Defined$ Enchanted | NumAtt$ 3 | NumDef$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ0 | SubAbility$DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/paroxysm.jpg
+SetInfo:EXO Uncommon
