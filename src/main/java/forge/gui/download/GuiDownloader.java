@@ -314,6 +314,7 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                 if (conn.getResponseCode() != 200) {
                     conn.disconnect();
                     System.out.println("Skipped Download for: " + fileDest.getPath());
+                    update(++iCard, fileDest);
                     continue;
                 }
 
