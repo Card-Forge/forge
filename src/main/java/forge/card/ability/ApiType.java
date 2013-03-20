@@ -155,7 +155,7 @@ public enum ApiType {
     GenericChoice (ChooseGenericEffect.class, CannotPlayAi.class),
     LoseLife (LifeLoseEffect.class, LifeLoseAi.class),
     LosesGame (GameLossEffect.class, GameLossAi.class),
-    Mana (ManaEffect.class, CannotPlayAi.class),
+    Mana (ManaEffect.class, CanPlayAsDrawbackAi.class),
     ManaReflected (ManaReflectedEffect.class, CannotPlayAi.class),
     Mill (MillEffect.class, MillAi.class),
     MoveCounter (CountersMoveEffect.class, CountersMoveAi.class),

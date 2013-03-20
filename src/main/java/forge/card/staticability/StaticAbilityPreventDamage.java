@@ -71,13 +71,19 @@ public class StaticAbilityPreventDamage {
             return restDamage;
         }
 
-        if (!isTest && params.containsKey("Optional")) { //Assume if param is present it should be optional
-            final String logic = params.containsKey("AILogic") ? params.get("AILogic") : "";
-            final String message = "Apply the effect of " + hostCard + "? (Affected: " + target + ")";
-            boolean confirmed = hostCard.getController().getController().confirmStaticApplication(hostCard, target, logic, message);
-
-            if (!confirmed) {
-                return restDamage;
+        if (params.containsKey("Optional")) { //Assume if param is present it should be optional
+            if (!isTest) {
+                final String logic = params.containsKey("AILogic") ? params.get("AILogic") : "";
+                final String message = "Apply the effect of " + hostCard + "? (Affected: " + target + ")";
+                boolean confirmed = hostCard.getController().getController().confirmStaticApplication(hostCard, target, logic, message);
+    
+                if (!confirmed) {
+                    return restDamage;
+                }
+            } else { //test
+                if (!hostCard.getController().equals(target)) {
+                    return restDamage;
+                }
             }
         }
 
