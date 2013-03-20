@@ -2,7 +2,7 @@ Name:Ancient Tomb
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | Amount$ 2 | SubAbility$ DBPain | SpellDescription$ Add 2 to your mana pool. CARDNAME deals 2 damage to you.
-SVar:DBPain:DB$DealDamage | NumDmg$ 2 | Defined$ You
+SVar:DBPain:DB$ DealDamage | NumDmg$ 2 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_tomb.jpg
 Oracle:{T}: Add {2} to your mana pool. Ancient Tomb deals 2 damage to you.

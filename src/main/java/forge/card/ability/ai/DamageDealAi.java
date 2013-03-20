@@ -12,6 +12,7 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.cost.Cost;
+import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
@@ -382,7 +383,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
         }
-        if (!positive) {
+        if (!positive && !(saMe instanceof AbilitySub)) {
             return false;
         }
         if (!urgent && !SpellAbilityAi.playReusable(ai, saMe)) {
