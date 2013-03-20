@@ -83,6 +83,11 @@ public class ImageCache {
             e.printStackTrace();
         }
     }
+    
+    public static void clear() {
+        CACHE.invalidateAll();
+    }
+    
     /**
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.

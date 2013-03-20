@@ -55,6 +55,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Command;
+import forge.ImageCache;
 import forge.error.BugReporter;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FButton;
@@ -70,12 +71,14 @@ import forge.util.MyRandom;
 
 @SuppressWarnings("serial")
 public abstract class GuiDownloader extends DefaultBoundedRangeModel implements Runnable {
-    public static final Proxy.Type[] TYPES = Proxy.Type.values(); /** */
+    public static final Proxy.Type[] TYPES = Proxy.Type.values();
 
     // Actions and commands
     private final ActionListener actStartDownload = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent e) {
+            // invalidate image cache so newly downloaded images will be loaded
+            ImageCache.clear();
             new Thread(GuiDownloader.this).start();
             btnStart.setEnabled(false);
         }
@@ -374,5 +377,4 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
             }
         }
     }
-
 }
