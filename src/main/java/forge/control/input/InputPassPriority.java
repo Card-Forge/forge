@@ -85,7 +85,6 @@ public class InputPassPriority extends Input {
         SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(card, player));
         if ( null != ab) {
             player.playSpellAbility(card, ab);
-            Singletons.getModel().getGame().getPhaseHandler().setPriority(player);
         }
         else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);

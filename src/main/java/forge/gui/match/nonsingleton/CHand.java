@@ -108,8 +108,7 @@ public class CHand implements ICDoc {
             public void mousePressed(final MouseEvent e) {
                 if (e.getButton() != MouseEvent.BUTTON1) { return; }
 
-                CMessage.SINGLETON_INSTANCE.getInputControl()
-                        .selectCard(cardobj, Singletons.getControl().getPlayer().getZone(ZoneType.Hand));
+                CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(cardobj);
             }
         });
     }
@@ -184,7 +183,7 @@ public class CHand implements ICDoc {
         }
         final Card c = view.getHandArea().getHoveredCard(e);
         if (c != null) {
-            CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c, Singletons.getControl().getPlayer().getZone(ZoneType.Hand));
+            CMessage.SINGLETON_INSTANCE.getInputControl().selectCard(c);
         }
     }
 

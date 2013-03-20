@@ -2994,10 +2994,12 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @param ab
      */
     public void playSpellAbility(Card c, SpellAbility ab) {
-        if (ab == Ability.PLAY_LAND_SURROGATE) {
+        if (ab == Ability.PLAY_LAND_SURROGATE)
             this.playLand(c);
-        } else
+        else {
             game.getActionPlay().playSpellAbility(ab, this);
+        }
+        game.getPhaseHandler().setPriority(this);
     }
 
     /**

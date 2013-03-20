@@ -348,7 +348,6 @@ public class CField implements ICDoc {
                 SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
                 if ( null != ab) {
                     player.playSpellAbility(c, ab);
-                    game.getPhaseHandler().setPriority(player);
                 }
             }
         }.actionPerformed(null);

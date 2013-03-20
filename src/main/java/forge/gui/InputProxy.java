@@ -24,7 +24,6 @@ import forge.Card;
 import forge.Singletons;
 import forge.control.input.Input;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.view.ButtonUtil;
 
 /**
@@ -102,7 +101,7 @@ public class InputProxy implements Observer {
      * @param zone
      *            a {@link forge.game.zone.PlayerZone} object.
      */
-    public final void selectCard(final Card card, final PlayerZone zone) {
+    public final void selectCard(final Card card) {
         this.getInput().selectCard(card);
     }
 
