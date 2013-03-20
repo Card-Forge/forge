@@ -21,6 +21,8 @@ public class FProgressBar extends JProgressBar {
     private String message;
     private boolean showETA = true;
     private boolean showCount = true;
+    
+    private boolean percentMode = false;
 
     /** */
     public FProgressBar() {
@@ -40,6 +42,14 @@ public class FProgressBar extends JProgressBar {
         this.setString(s0);
     }
 
+    private final Runnable barIncrementor = new Runnable() {
+        @Override
+        public void run() {
+            FProgressBar.this.setValue(tempVal);
+            FProgressBar.this.setString(message);
+        }
+    };
+    
     /** Increments bar, thread safe. Calculations executed on separate thread. */
     public void increment() {
         //GuiUtils.checkEDT("FProgressBar$increment", false);
@@ -48,7 +58,11 @@ public class FProgressBar extends JProgressBar {
         // String.format leads to StringBuilder anyway. Direct calls will be faster
         StringBuilder sb = new StringBuilder(desc);
         if (showCount) {
-            sb.append(" ").append(tempVal).append(" of ").append(getMaximum());
+            sb.append(" ");
+            if (percentMode)
+                sb.append(100 * tempVal / getMaximum()).append("%");
+            else
+                sb.append(tempVal).append(" of ").append(getMaximum());
         }
 
         if (showETA) {
@@ -58,13 +72,7 @@ public class FProgressBar extends JProgressBar {
         message = sb.toString();
 
         // When calculations finished; EDT can be used.
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                FProgressBar.this.setValue(tempVal);
-                FProgressBar.this.setString(message);
-            }
-        });
+        SwingUtilities.invokeLater(barIncrementor);
     }
 
     /** Resets the various values required for this class. Must be called from EDT. */
@@ -94,6 +102,14 @@ public class FProgressBar extends JProgressBar {
         float tempMillis = new Date().getTime();
         float timePerUnit = (tempMillis - startMillis) / v0;
         etaSecs = (int) ((this.getMaximum() - v0) * timePerUnit) / 1000;
+    }
+
+    public boolean isPercentMode() {
+        return percentMode;
+    }
+
+    public void setPercentMode(boolean value) {
+        this.percentMode = value;
     }
 
 }

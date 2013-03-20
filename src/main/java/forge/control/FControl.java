@@ -25,6 +25,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
@@ -83,6 +85,8 @@ public enum FControl {
         DRAFTING_PROCESS
     }
 
+    private final ExecutorService threadPool = Executors.newCachedThreadPool(); 
+
     private final SoundSystem soundSystem = new SoundSystem();
 
     /**
@@ -103,6 +107,8 @@ public enum FControl {
                 System.exit(0);
             }
         };
+        
+        
 
         // "Close" button override during match
         this.waConcede = new WindowAdapter() {
@@ -306,5 +312,14 @@ public enum FControl {
      */
     public SoundSystem getSoundSystem() {
         return soundSystem;
+    }
+
+    public ExecutorService getThreadPool() {
+        return threadPool;
+    }
+
+    // This pool is designed to parallel CPU or IO intensive tasks like parse cards or download images, assuming a load factor of 0.5
+    public final static ExecutorService getComputingPool(float loadFactor) {
+        return Executors.newFixedThreadPool((int)(Runtime.getRuntime().availableProcessors() / (1-loadFactor)));
     }
 }

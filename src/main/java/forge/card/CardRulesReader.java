@@ -38,7 +38,8 @@ import forge.card.mana.ManaCostShard;
  * @version $Id$
  */
 public class CardRulesReader {
-
+    public final static EditionCollection editions = new EditionCollection(); // create a copy here, Singletons.model... is not initialized yet.
+    
     // fields to build 
     private CardFace[] faces = new CardFace[] { null, null };
     private String[] pictureUrl = new String[] { null, null };
