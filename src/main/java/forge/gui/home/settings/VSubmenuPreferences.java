@@ -74,7 +74,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     private final FLabel lblTitleAIProfile = new FLabel.Builder()
             .text("Choose AI Personality").fontStyle(Font.BOLD).fontSize(14).build();
-    
+
     private final JList lstChooseAIProfile = new FList();
     private final FLabel lblChooseAIProfile = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC)
             .text("AI Opponent Personality.")
@@ -90,6 +90,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
     private final JCheckBox cbDevMode = new OptionsCheckBox("Developer Mode");
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
+    private final JCheckBox cbCloneImgSource = new OptionsCheckBox("Clones use original card art");
     private final JCheckBox cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
@@ -97,8 +98,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<FPref, KeyboardShortcutField>();
-    
-    
+
     /**
      * Constructor.
      */
@@ -142,6 +142,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEnforceDeckLegality, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)"), regularConstraints);
+
+        pnlPrefs.add(cbCloneImgSource, regularConstraints);
+        pnlPrefs.add(new NoteLabel("When enabled clones will use their original art instead of the cloned card's art"), regularConstraints);
 
         // AI Personality Profile Options
         pnlPrefs.add(new SectionLabel("AI Options"), sectionConstraints);
@@ -201,7 +204,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             e.getValue().reload(e.getKey());
         }
     }
-    
+
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()
      */
@@ -320,7 +323,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         public void reload(FPref prefKey) {
             this.setCodeString(Singletons.getModel().getPreferences().getPref(prefKey));
         }
-        
+
         /**
          * Gets the code string.
          * 
@@ -449,6 +452,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnforceDeckLegality() {
         return cbEnforceDeckLegality;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbCloneImgSource() {
+        return cbCloneImgSource;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

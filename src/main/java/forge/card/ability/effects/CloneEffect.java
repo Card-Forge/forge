@@ -19,6 +19,7 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.gui.GuiDialog;
+import forge.properties.ForgePreferences.FPref;
 
 public class CloneEffect extends SpellAbilityEffect {
     // TODO update this method
@@ -87,10 +88,13 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         // determine the image to be used for the clone
-        String imageFileName = host.getImageKey();
-        List<Card> cloneImgSources = AbilityUtils.getDefinedCards(host, sa.getParam("ImageSource"), sa);
-        if (!cloneImgSources.isEmpty()) {
-            imageFileName = cloneImgSources.get(0).getImageKey();
+        String imageFileName = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE)
+                ? tgtCard.getImageKey() : cardToCopy.getImageKey();
+        if (sa.hasParam("ImageSource")) { // Allow the image to be stipulated by using a defined card source
+            List<Card> cloneImgSources = AbilityUtils.getDefinedCards(host, sa.getParam("ImageSource"), sa);
+            if (!cloneImgSources.isEmpty()) {
+                imageFileName = cloneImgSources.get(0).getImageKey();
+            }
         }
 
         boolean keepName = sa.hasParam("KeepName");

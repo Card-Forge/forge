@@ -7,10 +7,10 @@ T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+AttachedTo
 SVar:RememberInitialAttach:DB$ Pump | RememberObjects$ Valid Card.AttachedBy
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+AttachedTo Card | Execute$ FirstReflections | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield attached to a creature, each other nontoken creature you control becomes a copy of that creature.
 SVar:FirstReflections:DB$ RepeatEach | RepeatCards$ Creature.nonToken+YouCtrl | UseImprinted$ True | Zone$ Battlefield | RepeatSubAbility$ Reflect | SubAbility$ DBCleanup
-SVar:Reflect:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted | ImageSource$ Remembered
+SVar:Reflect:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:ETBReplacement:Copy:Reflections:Mandatory:Battlefield:Creature.nonToken+YouCtrl
-SVar:Reflections:DB$ Clone | Defined$ Enchanted | CloneTarget$ ReplacedCard | ImageSource$ Enchanted | SpellDescription$ Nontoken creatures you control enter the battlefield as a copy of enchanted creature.
+SVar:Reflections:DB$ Clone | Defined$ Enchanted | CloneTarget$ ReplacedCard | SpellDescription$ Nontoken creatures you control enter the battlefield as a copy of enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infinite_reflection.jpg
 Oracle:Enchant creature\nWhen Infinite Reflection enters the battlefield attached to a creature, each other nontoken creature you control becomes a copy of that creature.\nNontoken creatures you control enter the battlefield as a copy of enchanted creature.
 SetInfo:AVR Rare
