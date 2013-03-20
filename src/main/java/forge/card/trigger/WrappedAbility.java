@@ -16,7 +16,6 @@ import forge.card.spellability.ISpellAbility;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
-import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
@@ -155,11 +154,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public Input getBeforePayMana() {
-        return sa.getBeforePayMana();
-    }
-
-    @Override
     public String getDescription() {
         return sa.getDescription();
     }
@@ -278,11 +272,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public void setActivatingPlayer(final Player player) {
         sa.setActivatingPlayer(player);
-    }
-
-    @Override
-    public void setBeforePayMana(final Input in) {
-        sa.setBeforePayMana(in);
     }
 
     @Override

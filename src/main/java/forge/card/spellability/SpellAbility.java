@@ -35,7 +35,6 @@ import forge.card.cost.CostPart;
 import forge.card.cost.CostPartMana;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaCost;
-import forge.control.input.Input;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
@@ -82,8 +81,6 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean xCost = false;
     private boolean cycling = false;
     private boolean delve = false;
-
-    private Input beforePayMana;
 
     /** The pay costs. */
     private Cost payCosts = null;
@@ -557,29 +554,6 @@ public abstract class SpellAbility implements ISpellAbility {
     }
 
     // begin - Input methods
-    /**
-     * <p>
-     * Getter for the field <code>beforePayMana</code>.
-     * </p>
-     * 
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public Input getBeforePayMana() {
-        return this.beforePayMana;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>beforePayMana</code>.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.Input} object.
-     */
-    public void setBeforePayMana(final Input in) {
-        this.beforePayMana = in;
-    }
-
     /**
      * <p>
      * Getter for the field <code>payCosts</code>.

@@ -16,7 +16,6 @@ import forge.card.ability.ApiType;
 import forge.card.ability.effects.CharmEffect;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
-import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.SpellAbility;
@@ -85,7 +84,7 @@ public class GameActionPlay {
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
             req.setFree(true);
             req.fillRequirements();
-        } else if (sa.getBeforePayMana() == null) {
+        } else {
             if (sa.isSpell()) {
                 final Card c = sa.getSourceCard();
                 if (!c.isCopiedSpell()) {
@@ -95,9 +94,6 @@ public class GameActionPlay {
             boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
 
             game.getStack().add(sa, x);
-        } else {
-            sa.setManaCost(ManaCost.ZERO); // Beached As
-            matchInput.setInput(sa.getBeforePayMana());
         }
     }
 
@@ -407,17 +403,14 @@ public class GameActionPlay {
             } else {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
-            if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
+            if (manaCost.isPaid()) {
                 if (sa.isSpell() && !source.isCopiedSpell()) {
                     sa.setSourceCard(game.getAction().moveToStack(source));
                 }
 
                 game.getStack().add(sa);
-                return;
-            } else if (sa.getBeforePayMana() == null) {
-                matchInput.setInput(new InputPayManaSimple(game, sa, manaCost));
             } else {
-                matchInput.setInput(sa.getBeforePayMana());
+                matchInput.setInput(new InputPayManaSimple(game, sa, manaCost));
             }
         }
     }
@@ -453,13 +446,11 @@ public class GameActionPlay {
             } else {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
-            if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
+            if (manaCost.isPaid()) {
                 AbilityUtils.resolve(sa, false);
                 return;
-            } else if (sa.getBeforePayMana() == null) {
-                matchInput.setInput(new InputPayManaSimple(game, sa, true));
             } else {
-                matchInput.setInput(sa.getBeforePayMana());
+                matchInput.setInput(new InputPayManaSimple(game, sa, true));
             }
         }
     }
