@@ -5850,6 +5850,7 @@ res/cardsfolder/l/lab_rats.txt svneol=native#text/plain
 res/cardsfolder/l/laboratory_maniac.txt -text
 res/cardsfolder/l/labyrinth_minotaur.txt svneol=native#text/plain
 res/cardsfolder/l/laccolith_grunt.txt svneol=native#text/plain
+res/cardsfolder/l/laccolith_rig.txt -text
 res/cardsfolder/l/laccolith_titan.txt svneol=native#text/plain
 res/cardsfolder/l/laccolith_warrior.txt svneol=native#text/plain
 res/cardsfolder/l/laccolith_whelp.txt svneol=native#text/plain
