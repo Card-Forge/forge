@@ -2,7 +2,7 @@ Name:Maelstrom Pulse
 ManaCost:1 B G
 Types:Sorcery
 A:SP$ Destroy | Cost$ 1 B G | ValidTgts$ Permanent.nonland | TgtPrompt$ Select target nonland permanent | RememberTargets$ True | SubAbility$ DestroyAll | SpellDescription$ Destroy target nonland permanent and all other permanents with the same name as that permanent.
-SVar:DestroyAll:DB$ DestroyAll | ValidCards$ Remembered.sameName | SubAbility$ DBCleanup
+SVar:DestroyAll:DB$ DestroyAll | ValidCards$ Remembered.sameName+Other | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_pulse.jpg
 Oracle:Destroy target nonland permanent and all other permanents with the same name as that permanent.
