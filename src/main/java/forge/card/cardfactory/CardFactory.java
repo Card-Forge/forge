@@ -234,7 +234,7 @@ public class CardFactory {
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
                 c.setState(CardCharacteristicName.Flipped);
-                c.setImageKey(originalPicture); // should assign a 180 degrees rotated picture here?
+                c.setImageKey(ImageCache.getImageKey(cp, true));
             }
             else if (c.isDoubleFaced() && cp instanceof CardPrinted) {
                 c.setState(CardCharacteristicName.Transformed);

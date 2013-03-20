@@ -33,11 +33,11 @@ import forge.item.InventoryItem;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public enum CPicture implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
     private Card currentCard = null;
     private boolean flipped = false;
+    private boolean canFlip = false;
 
     /**
      * Shows card details and/or picture in sidebar cardview tabber.
@@ -46,15 +46,16 @@ public enum CPicture implements ICDoc {
      *            &emsp; Card object
      */
     public void showCard(final Card c) {
-        boolean canFlip = c != null && c.isDoubleFaced();
+        canFlip = c != null && (c.isDoubleFaced() || c.isFlipCard());
         this.currentCard = c;
-        flipped = canFlip && c.getCurState() == CardCharacteristicName.Transformed; 
+        flipped = canFlip && (c.getCurState() == CardCharacteristicName.Transformed ||
+                              c.getCurState() == CardCharacteristicName.Flipped); 
         VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(canFlip);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(c);
     }
 
     public void showCard(final InventoryItem item) {
-        if ( item instanceof IPaperCard ) {
+        if (item instanceof IPaperCard) {
             showCard(((IPaperCard)item).getMatchingForgeCard());
             return;
         }
@@ -64,26 +65,15 @@ public enum CPicture implements ICDoc {
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(item);
     }
 
-    /**
-     * Gets the current card.
-     * 
-     * @return Card
-     */
     public Card getCurrentCard() {
         return this.currentCard;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
     @Override
     public Command getCommandOnSelect() {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#initialize()
-     */
     @Override
     public void initialize() {
         VPicture.SINGLETON_INSTANCE.getPnlPicture().addMouseListener(new MouseAdapter() {
@@ -94,26 +84,36 @@ public enum CPicture implements ICDoc {
         });
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#update()
-     */
     @Override
     public void update() {
     }
 
-    /** */
     public void flipCard() {
-        flipped = !flipped;
-        if ( null == currentCard ) return;
+        if (!canFlip || null == currentCard) { return; }
         
-        CardCharacteristicName newState = flipped && currentCard.isDoubleFaced() ? CardCharacteristicName.Transformed : CardCharacteristicName.Original; 
+        flipped = !flipped;
+        
+        final CardCharacteristicName newState;
+        if (flipped) {
+            if (currentCard.isDoubleFaced()) {
+                newState = CardCharacteristicName.Transformed;
+            } else if (currentCard.isFlipCard()) {
+                newState = CardCharacteristicName.Flipped;
+            } else {
+                throw new RuntimeException("unhandled flippable card");
+            }
+        } else {
+            newState = CardCharacteristicName.Original;
+        }
+
         CardCharacteristicName oldState = currentCard.getCurState();
-        if ( oldState != newState ) { 
+        if (oldState != newState) { 
             currentCard.setState(newState);
         }
+        
         CDetail.SINGLETON_INSTANCE.showCard(this.currentCard);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setImage();
-        if ( oldState != newState ) {
+        if (oldState != newState) {
             currentCard.setState(oldState);
         }
     }

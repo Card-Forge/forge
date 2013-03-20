@@ -29,13 +29,11 @@ import forge.item.InventoryItem;
 import forge.item.InventoryItemFromSet;
 
 /**
- * 
  * Controls the card detail area in the match UI.
  * 
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public enum CDetail implements ICDoc {
-    /** */
     SINGLETON_INSTANCE;
 
     private VDetail view = VDetail.SINGLETON_INSTANCE;
@@ -46,7 +44,7 @@ public enum CDetail implements ICDoc {
      * @param c &emsp; Card object
      */
     public void showCard(final Card c) {
-        view.getLblFlipcard().setVisible(c != null && c.isDoubleFaced());
+        view.getLblFlipcard().setVisible(c != null && (c.isDoubleFaced() || c.isFlipCard()));
         view.getPnlDetail().setCard(c);
         view.getParentCell().repaintSelf();
     }
@@ -63,17 +61,11 @@ public enum CDetail implements ICDoc {
         }
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#getCommandOnSelect()
-     */
     @Override
     public Command getCommandOnSelect() {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#initialize()
-     */
     @Override
     public void initialize() {
         view.getPnlDetail().addMouseListener(new MouseAdapter() {
@@ -84,9 +76,6 @@ public enum CDetail implements ICDoc {
         });
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#update()
-     */
     @Override
     public void update() {
     }
