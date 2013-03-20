@@ -170,7 +170,6 @@ while inputName != 'quit' :
                 print '\nName:'+cardData.name
                 print 'ManaCost:'+cardData.cost
                 print 'Types:'+cardData.types
-                print 'Text:no text'
                 if cardData.types.find('Creature') != -1 :
                         print 'PT:'+cardData.pt
                 elif cardData.types.find('Planeswalker') != -1 :

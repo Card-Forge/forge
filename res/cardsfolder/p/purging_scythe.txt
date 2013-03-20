@@ -1,7 +1,6 @@
 Name:Purging Scythe
 ManaCost:5
 Types:Artifact
-Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChooseDmg | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 2 damage to the creature with the least toughness. If two or more creatures are tied for least toughness, you choose one of them.
 SVar:TrigChooseDmg:AB$ ChooseCard | Cost$ 0 | Defined$ You | Choices$ Creature.leastToughness | Mandatory$ True | SubAbility$ DBDmg
 SVar:DBDmg:DB$ DealDamage | NumDmg$ 2 | Defined$ ChosenCard

@@ -1,7 +1,6 @@
 Name:Inner-Flame Igniter
 ManaCost:2 R
 Types:Creature Elemental Warrior
-Text:no text
 PT:2/2
 A:AB$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | SubAbility$ StoreNum | StackDescription$ SpellDescription | SpellDescription$ Creatures you control get +1/+0 until end of turn. If this is the third time this ability has resolved this turn, creatures you control gain first strike until end of turn.
 SVar:StoreNum:DB$ StoreSVar | SVar$ InnerFlameStrength | Type$ CountSVar | Expression$ InnerFlameStrength/Plus.1 | SubAbility$ InnerHeatStrike

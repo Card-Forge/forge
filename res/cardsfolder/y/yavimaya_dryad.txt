@@ -1,7 +1,6 @@
 Name:Yavimaya Dryad
 ManaCost:1 G G
 Types:Creature Dryad
-Text:no text
 PT:2/1
 K:Forestwalk
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRamp | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Forest card and put it onto the battlefield tapped under target player's control. If you do, shuffle your library.

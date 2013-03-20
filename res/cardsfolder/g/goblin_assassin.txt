@@ -1,7 +1,6 @@
 Name:Goblin Assassin
 ManaCost:3 R R
 Types:Creature Goblin Assassin
-Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatFlips | TriggerDescription$ Whenever CARDNAME or another Goblin enters the battlefield, each player flips a coin. Each player whose coin comes up tails sacrifices a creature.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Goblin.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ RepeatFlips | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Goblin enters the battlefield, each player flips a coin. Each player whose coin comes up tails sacrifices a creature.
