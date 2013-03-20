@@ -14544,6 +14544,7 @@ src/main/java/forge/view/arcane/util/CardPanelMouseListener.java svneol=native#t
 src/main/java/forge/view/arcane/util/GlowText.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
+src/main/resources/no_card.jpg -text
 src/main/resources/proxy-template.ftl -text
 src/site/apt/index.apt -text
 src/test/java/forge/BoosterDraft1Test.java svneol=native#text/plain

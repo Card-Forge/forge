@@ -18,8 +18,11 @@
 package forge;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.ExecutionException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import org.apache.commons.lang3.StringUtils;
@@ -68,7 +71,18 @@ public class ImageCache {
     public static final String TOURNAMENTPACK_PREFIX = "o:";
     
     static private final LoadingCache<String, BufferedImage> CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
-    private static final BufferedImage defaultImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    private static final BufferedImage emptyImage = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB); 
+    private static BufferedImage defaultImage = emptyImage;
+    static { 
+        try {
+            ClassLoader cl = Thread.currentThread().getContextClassLoader();
+            InputStream isNoCardJpg = cl.getResourceAsStream("no_card.jpg");
+            defaultImage = ImageIO.read(isNoCardJpg);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+            e.printStackTrace();
+        }
+    }
     /**
      * retrieve an image from the cache.  returns null if the image is not found in the cache
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
@@ -120,16 +134,16 @@ public class ImageCache {
         
         boolean mayEnlarge = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
         BufferedImage original = getImage(key);
-        
-        if (original == defaultImage) { // the found image is a placeholder for missing picture? 
-            return null;
-        }
-        
+
         if (null == original) {
+            original = defaultImage;
             CACHE.put(key, defaultImage); // This instructs cache to give up finding a picture if it was not found once
+        }
+
+        if (original == emptyImage) { // the found image is a placeholder for missing picture? 
             return null;
         }
-        
+
         double scale = Math.min(
                 -1 == width ? 1 : (double)width / original.getWidth(),
                 -1 == height? 1 : (double)height / original.getHeight());
