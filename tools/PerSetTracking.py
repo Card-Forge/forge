@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-pathToMtgData = "mtg-data.txt"
-
 ############IMPLEMENTATION FOLLOWS############
 import os,sys,fnmatch,re
+
+pathToMtgData = os.path.join(sys.path[0], "mtg-data.txt")
 
 def getSetByFormat(requestedFormat):
 	# Parse out Standard sets from the Format file
@@ -207,7 +207,7 @@ if __name__ == '__main__':
 	totalMissing = 0
 	totalImplemented = 0
 	fullTotal = 0
-	with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "CompleteStats.txt", "w") as statsfile:
+	with open(os.path.join(sys.path[0], "PerSetTrackingResults", "CompleteStats.txt"), "w") as statsfile:
 		statsfile.write("Set: Implemented (Missing) / Total = Percentage Implemented\n")
 		for k,dataKey in totalDataList :
 			totalImplemented += dataKey[0]

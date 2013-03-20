@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-pathToMtgData = "mtg-data.txt"
-
 ############IMPLEMENTATION FOLLOWS############
 import os,sys,fnmatch
 import re
+
+pathToMtgData = os.path.join(sys.path[0], "mtg-data.txt")
 
 class Card:
 	def __init__(self, name):

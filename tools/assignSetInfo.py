@@ -2,8 +2,8 @@
 
 import os,sys,fnmatch,re
 
-pathToMtgData = "mtg-data.txt"
-pathToSetsMatchTable = "mtgdata-sets-to-forge.txt"
+pathToMtgData = os.path.join(sys.path[0], "mtg-data.txt")
+pathToSetsMatchTable = os.path.join(sys.path[0], "mtgdata-sets-to-forge.txt")
 
 class cis:      # CardInSet
 	def __init__(self):

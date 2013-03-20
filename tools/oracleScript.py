@@ -12,6 +12,8 @@
 import os, fnmatch, re, sys
 from urllib import urlopen
 
+pathToMtgData = os.path.join(sys.path[0], "mtg-data.txt")
+
 onlineOptions = [ 'false', 'f', 'no', 'n' ]
 offlineSource = True
 setAbbr = None
@@ -33,7 +35,7 @@ elif not offlineSource:
 
 mtgData = None
 if offlineSource:
-    parseFrom = open('mtg-data.txt', 'r')
+    parseFrom = open(pathToMtgData, 'r')
 else:
     # Load Spoiler view of the set
     parseFrom = urlopen("http://magiccards.info/query?q=e:%s&v=spoiler&s=cname" % (setAbbr))
@@ -43,7 +45,7 @@ parseFrom.close()
 print "Size of parse data: %s" % len(mtgData)
 
 folder = os.path.join(sys.path[0], '..', 'res', 'cardsfolder')
-err = open('oracleScript.log', 'w')
+err = open(os.path.join(sys.path[0], 'oracleScript.log'), 'w')
 
 setStr = 'SetInfo:'
 oracleStr = 'Oracle:'
