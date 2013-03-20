@@ -18,6 +18,7 @@ http://www.cardforge.org/fpics/questAvatars/Beast2.jpg
 http://www.cardforge.org/fpics/questAvatars/Bela%20Lugosi.jpg
 http://www.cardforge.org/fpics/questAvatars/Betty%20Rubble.jpg
 http://www.cardforge.org/fpics/questAvatars/Black%20Flame.jpg
+http://www.cardforge.org/fpics/questAvatars/Black%20Panther.jpg
 http://www.cardforge.org/fpics/questAvatars/Blackbeard.jpg
 http://www.cardforge.org/fpics/questAvatars/Blood%20Oath.jpg
 http://www.cardforge.org/fpics/questAvatars/Boba%20Fett.jpg
@@ -74,6 +75,7 @@ http://www.cardforge.org/fpics/questAvatars/Eomer.jpg
 http://www.cardforge.org/fpics/questAvatars/Ezio.jpg
 http://www.cardforge.org/fpics/questAvatars/Fat%20Albert.jpg
 http://www.cardforge.org/fpics/questAvatars/Fin%20Fang%20Foom.jpg
+http://www.cardforge.org/fpics/questAvatars/Firestorm.jpg
 http://www.cardforge.org/fpics/questAvatars/Frankenstein.jpg
 http://www.cardforge.org/fpics/questAvatars/Fred%20Flintstone.jpg
 http://www.cardforge.org/fpics/questAvatars/Frodo.jpg
@@ -143,6 +145,7 @@ http://www.cardforge.org/fpics/questAvatars/Owlman.jpg
 http://www.cardforge.org/fpics/questAvatars/Pebbles%20Flintstone.jpg
 http://www.cardforge.org/fpics/questAvatars/Picard.jpg
 http://www.cardforge.org/fpics/questAvatars/Pinky%20and%20the%20Brain.jpg
+http://www.cardforge.org/fpics/questAvatars/Piper.jpg
 http://www.cardforge.org/fpics/questAvatars/Pointy%20Haired%20Boss.jpg
 http://www.cardforge.org/fpics/questAvatars/Princess%20Selenia.jpg
 http://www.cardforge.org/fpics/questAvatars/Private%20Domain.jpg
