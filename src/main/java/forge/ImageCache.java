@@ -265,7 +265,8 @@ public class ImageCache {
     }
     
     public static boolean hasBackFacePicture(CardPrinted cp) {
-        return cp.getRules().getSplitType() == CardSplitType.Transform; // do we take other image for flipped cards? 
+        CardSplitType cst = cp.getRules().getSplitType();
+        return cst == CardSplitType.Transform || cst == CardSplitType.Flip; 
     }
     
     public static String getSetFolder(String edition) {
