@@ -79,6 +79,7 @@ public class DialogMigrateProfile {
     private final FButton _btnStart;
     private final FButton _btnCancel;
     private final FLabel  _btnChooseDir;
+    private final FPanel  _topPanel;
     private final JPanel  _selectionPanel;
     
     // volatile since it is checked from multiple threads
@@ -86,14 +87,14 @@ public class DialogMigrateProfile {
     
     @SuppressWarnings("serial")
     public DialogMigrateProfile(String forcedSrcDir, final Runnable onDialogClose) {
-        FPanel p = new FPanel(new MigLayout("insets dialog, gap 0, center, wrap, fill"));
-        p.setOpaque(false);
-        p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
+        _topPanel = new FPanel(new MigLayout("insets dialog, gap 0, center, wrap, fill"));
+        _topPanel.setOpaque(false);
+        _topPanel.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
         final boolean isMigration = !StringUtils.isEmpty(forcedSrcDir);
         
         // header
-        p.add(new FLabel.Builder().text((isMigration ? "Migrate" : "Import") + " profile data").fontSize(15).build(), "center");
+        _topPanel.add(new FLabel.Builder().text((isMigration ? "Migrate" : "Import") + " profile data").fontSize(15).build(), "center");
         
         // add some help text if this is for the initial data migration
         if (isMigration) {
@@ -128,7 +129,7 @@ public class DialogMigrateProfile {
             FScrollPane blurbScroller = new FScrollPane(blurbPanelInterior,
                     ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             blurbPanel.add(blurbScroller, "hmin 150, growy, growx, center, gap 0 0 5 5");
-            p.add(blurbPanel, "gap 10 10 20 0, growy, growx, w 50:50:");
+            _topPanel.add(blurbPanel, "gap 10 10 20 0, growy, growx, w 50:50:");
         }
         
         // import source widgets
@@ -228,12 +229,12 @@ public class DialogMigrateProfile {
                 }
             }
         });
-        p.add(importSourcePanel, "gaptop 20, pushx, growx");
+        _topPanel.add(importSourcePanel, "gaptop 20, pushx, growx");
         
         // prepare import selection panel (will be cleared and filled in later by an analyzer)
         _selectionPanel = new JPanel();
         _selectionPanel.setOpaque(false);
-        p.add(_selectionPanel, "growx, growy, gaptop 10");
+        _topPanel.add(_selectionPanel, "growx, growy, gaptop 10");
         
         // action button widgets
         final Runnable cleanup = new Runnable() {
@@ -256,11 +257,11 @@ public class DialogMigrateProfile {
         southPanel.setOpaque(false);
         southPanel.add(_btnStart, "center, w pref+144!, h pref+12!");
         southPanel.add(_btnCancel, "center, w pref+144!, h pref+12!, gap 72");
-        p.add(southPanel, "growx");
+        _topPanel.add(southPanel, "growx");
       
         JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
         overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
-        overlay.add(p, "w 500::90%, h 100::90%");
+        overlay.add(_topPanel, "w 500::90%, h 100::90%");
         SOverlayUtils.showOverlay();
         
         // focus cancel button after the dialog is shown
@@ -702,7 +703,7 @@ public class DialogMigrateProfile {
                 }
                 
                 // build operation log
-                StringBuilder log = new StringBuilder();
+                final StringBuilder log = new StringBuilder();
                 int totalOps = 0;
                 for (OpType opType : selectedOptions) {
                     Map<File, File> ops = _selections.get(opType);
@@ -726,8 +727,19 @@ public class DialogMigrateProfile {
                 log.append(" ").append(totalOps).append(" files\n");
                 log.append(isOverwrite ? "O" : "Not o").append("verwriting existing files");
 
-                // set the JTextArea text directly (no need to use invokeLater: setText is thread-safe)
-                _operationLog.setText(log.toString());
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // setText is thread-safe, but the resizing is not, so might as well do this in the swing event loop thread
+                        _operationLog.setText(log.toString());
+                        
+                        // resize the panel properly for the new log contents
+                        _selectionPanel.getParent().validate();
+                        _selectionPanel.getParent().invalidate();
+                        _topPanel.getParent().validate();
+                        _topPanel.getParent().invalidate();
+                    }
+                });
             }
         }
         

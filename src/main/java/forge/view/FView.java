@@ -172,7 +172,7 @@ public enum FView {
 
                         // if any files remain, display them and make clear that they should be moved or
                         // deleted manually or the user will continue to be prompted for migration
-                        FPanel p = new FPanel(new MigLayout("insets dialog, gap 10, center, wrap"));
+                        final FPanel p = new FPanel(new MigLayout("insets dialog, gap 10, center, wrap"));
                         p.setOpaque(false);
                         p.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
 
@@ -193,6 +193,15 @@ public enum FView {
                             files.setEditable(false);
                             JScrollPane scroller = new JScrollPane(files);
                             p.add(scroller, "w 600:100%:100%, h 100:100%:100%, gaptop 10");
+                            
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // resize the panel properly for the new log contents
+                                    p.getParent().validate();
+                                    p.getParent().invalidate();
+                                }
+                            });
                         }
                         
                         final FButton btnOk = new FButton(remainingFiles.isEmpty() ? "Restart Forge" : "Close Forge");
