@@ -645,6 +645,9 @@ public class DialogMigrateProfile {
         private boolean            _isOverwrite;
         private boolean            _stop;
         
+        // only accessed from the event loop thread
+        int _maxLogLength = 0;
+        
         public _OperationLogAsyncUpdater(Map<OpType, Pair<FCheckBox, ? extends Map<File, File>>> selections, JTextArea operationLog) {
             super("OperationLogUpdater");
             setDaemon(true);
@@ -730,14 +733,20 @@ public class DialogMigrateProfile {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+                        String logText = log.toString();
+                        
                         // setText is thread-safe, but the resizing is not, so might as well do this in the swing event loop thread
                         _operationLog.setText(log.toString());
-                        
-                        // resize the panel properly for the new log contents
-                        _selectionPanel.getParent().validate();
-                        _selectionPanel.getParent().invalidate();
-                        _topPanel.getParent().validate();
-                        _topPanel.getParent().invalidate();
+
+                        if (_maxLogLength < logText.length()) {
+                            _maxLogLength = logText.length();
+                            
+                            // resize the panel properly for the new log contents
+                            _selectionPanel.getParent().validate();
+                            _selectionPanel.getParent().invalidate();
+                            _topPanel.getParent().validate();
+                            _topPanel.getParent().invalidate();
+                        }
                     }
                 });
             }
