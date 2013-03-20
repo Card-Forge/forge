@@ -234,7 +234,7 @@ public class CardStorageReader {
         long fs = sw.getSplitTime();
         sw.stop();
         
-        System.out.println("Processed " + estimatedFilesRemaining + " file objects in " + sw.getTime() + " ms, (folder scan took " + fs + " ms.)");
+        System.out.println("Processed " + estimatedFilesRemaining + " file objects in " + (sw.getTime() - fs) + " ms, apart from that folder scan took " + fs + " ms.");
         return result;
     }
 
