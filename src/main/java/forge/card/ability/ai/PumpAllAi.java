@@ -113,7 +113,7 @@ public class PumpAllAi extends PumpAiBase {
         } // end Curse
 
         // don't use non curse PumpAll after Combat_Begin until AI is improved
-        if (phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+        if (phase.isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || phase.isBefore(PhaseType.MAIN1)) {
             return false;
         }
 
@@ -134,7 +134,10 @@ public class PumpAllAi extends PumpAiBase {
             }
         });
 
-        if ((comp.size() <= human.size()) || (comp.size() <= 1)) {
+        if (comp.size() <= human.size()) {
+            return false;
+        }
+        if (comp.size() <= 1 && (phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) || sa.isSpell())) {
             return false;
         }
 
