@@ -916,10 +916,6 @@ public class CardFactoryUtil {
             cl = Iterables.filter(cl, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    if (zone.is(ZoneType.Graveyard) && c.hasUnearth()) {
-                        return true;
-                    }
-
                     if (c.hasKeyword("You may look at this card.")) {
                         return true;
                     }
@@ -3575,7 +3571,6 @@ public class CardFactoryUtil {
                 final String manacost = k[1];
 
                 card.addSpellAbility(CardFactoryUtil.abilityUnearth(card, manacost));
-                card.setUnearth(true);
             }
         } // unearth
 

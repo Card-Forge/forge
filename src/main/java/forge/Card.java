@@ -114,7 +114,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     // if this card is an Aura, what Entity is it enchanting?
     private GameEntity enchanting = null;
-    private ArrayList<String> choicesMade = null;
     private ArrayList<String> optionalAdditionalCostsPaid = null;
 
     // changes by AF animate and continuous static effects
@@ -152,7 +151,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private boolean levelUp = false;
 
-    private boolean unearth = false;
     private boolean unearthed;
 
     private boolean suspendCast = false;
@@ -3031,42 +3029,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * setSpellChoice.
-     * </p>
-     * 
-     * @param strings
-     *            a ArrayList<String> object.
-     */
-    public final void setSpellChoice(final ArrayList<String> strings) {
-        this.choicesMade = strings;
-    }
-
-    /**
-     * <p>
-     * getChoices.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<String> getChoices() {
-        return this.choicesMade;
-    }
-
-    /**
-     * <p>
-     * getChoice.
-     * </p>
-     * 
-     * @param i
-     *            a int.
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getChoice(final int i) {
-        return this.choicesMade.get(i);
-    }
-
-    /**
-     * <p>
      * setSpellWithChoices.
      * </p>
      * 
@@ -5544,29 +5506,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final String toString() {
         return this.getName() + " (" + this.getUniqueNumber() + ")";
-    }
-
-    /**
-     * <p>
-     * hasUnearth.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasUnearth() {
-        return this.unearth;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>unearth</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setUnearth(final boolean b) {
-        this.unearth = b;
     }
 
     /**
