@@ -1,0 +1,11 @@
+Name:Essence Leak
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant permanent
+A:SP$ Attach | Cost$ U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AITgts$ Card.cmcGE1 | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Permanent.AttachedBy+Red,Permanent.AttachedBy+Green | AddTrigger$ TrigEssencePhase | AddSVar$ TrigEssenceLeak | Description$ As long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."
+SVar:TrigEssencePhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigEssenceLeak | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost.
+SVar:TrigEssenceLeak:DB$ Sacrifice | Defined$ Self | UnlessCost$ CardManaCost | UnlessPayer$ You
+SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_leak.jpg
+Oracle:Enchant permanent\nAs long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."
+SetInfo:INV Uncommon
