@@ -47,7 +47,7 @@ public enum CPicture implements ICDoc {
      */
     public void showCard(final Card c) {
         canFlip = c != null && (c.isDoubleFaced() || c.isFlipCard());
-        this.currentCard = c;
+        currentCard = c;
         flipped = canFlip && (c.getCurState() == CardCharacteristicName.Transformed ||
                               c.getCurState() == CardCharacteristicName.Flipped); 
         VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(canFlip);
@@ -59,14 +59,16 @@ public enum CPicture implements ICDoc {
             showCard(((IPaperCard)item).getMatchingForgeCard());
             return;
         }
-
-        this.currentCard = null;
+        
+        canFlip = false;
+        flipped = false;
+        currentCard = null;
         VPicture.SINGLETON_INSTANCE.getLblFlipcard().setVisible(false);
         VPicture.SINGLETON_INSTANCE.getPnlPicture().setCard(item);
     }
 
     public Card getCurrentCard() {
-        return this.currentCard;
+        return currentCard;
     }
 
     @Override
@@ -100,7 +102,8 @@ public enum CPicture implements ICDoc {
             } else if (currentCard.isFlipCard()) {
                 newState = CardCharacteristicName.Flipped;
             } else {
-                // if this is hit, then there is a misalignment between this method and the showCard method above
+                // if this is hit, then then showCard has been modified to handle additional types, but
+                // this function is missing an else if statement above
                 throw new RuntimeException("unhandled flippable card");
             }
         } else {
