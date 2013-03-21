@@ -1,6 +1,13 @@
 Name:Temporal Aperture
 ManaCost:2
 Types:Artifact
+A:AB$ Shuffle | Cost$ 5 T | SubAbility$ DBReveal | SpellDescription$ Shuffle your library, then reveal the top card. Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)
+SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | RememberChanged$ True | SubAbility$ DBAperture
+SVar:DBAperture:DB$ Effect | Name$ Temporal Aperture Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Triggers$ StillTopCheck | SVars$ ExileEffect |  SpellDescription$ Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost. | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+TopLibrary | AddKeyword$ May be played without paying its mana cost | AffectedZone$ Library
+SVar:StillTopCheck:Mode$ Always | TriggerZones$ Command | IsPresent$ Card.TopLibrary+YouCtrl+IsNotRemembered | PresentZone$ Library | Execute$ ExileEffect | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_aperture.jpg
 Oracle:{5}, {T}: Shuffle your library, then reveal the top card. Until end of turn, for as long as that card remains on top of your library, play with the top card of your library revealed and you may play that card without paying its mana cost. (If it has X in its mana cost, X is 0.)
