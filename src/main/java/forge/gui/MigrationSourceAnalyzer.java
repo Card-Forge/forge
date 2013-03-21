@@ -476,7 +476,7 @@ public class MigrationSourceAnalyzer {
     }
     
     private void _analyzeProductPicsDir(File root) {
-        // we don't care about the files in the root dir -- the new files are .png, not the current .jpg ones
+        // we don't care about the files in the root dir -- the new booster files are .png, not the current .jpg ones
         _analyzeDir(root, new _Analyzer() {
             @Override boolean onDir(File dir) {
                 String dirName = dir.getName();
