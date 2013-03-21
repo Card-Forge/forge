@@ -62,7 +62,7 @@ public class CardStorageReader {
     /** Default charset when loading from files. */
     public static final String DEFAULT_CHARSET_NAME = "US-ASCII";
 
-    final private boolean useThreadTool = FControl.isMultiCoreSystem();
+    final private boolean useThreadPool = FControl.isMultiCoreSystem();
     final private int NUMBER_OF_PARTS = 25;
     
     final private CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
@@ -126,13 +126,13 @@ public class CardStorageReader {
         List<CardRules> result = new ArrayList<CardRules>();
         for(int i = from; i < to; i++) {
             File cardTxtFile = files.get(i);
-            result.add(this.loadCard(rulesReader, cardTxtFile));
+                result.add(this.loadCard(rulesReader, cardTxtFile));
         }
         return result;
     }
     
     private final List<CardRules> loadCardsInRangeFromZip(final List<ZipEntry> files, int from, int to) {
-        
+    
         CardRulesReader rulesReader = new CardRulesReader();
         
         List<CardRules> result = new ArrayList<CardRules>();
@@ -154,16 +154,13 @@ public class CardStorageReader {
      * @return the Card or null if it was not found.
      */
     public final List<CardRules> loadCards() {
-
-        
-
         if (barProgress != null) {
             barProgress.setMaximum(NUMBER_OF_PARTS);
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     barProgress.setPercentMode(true);
-                    barProgress.setDescription("Loading card data: 0%");
+                    barProgress.setDescription("Loading card data: ");
                 }
             });
         }
@@ -190,20 +187,28 @@ public class CardStorageReader {
                 if (entry.isDirectory() || !entry.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION))
                     continue;
                 entries.add(entry);
-            }
+                }
 
             tasks = makeTaskListForZip(entries);
         } // endif
 
-        return executeLoadTask(tasks, estimatedFilesRemaining);
-    } // loadCardsUntilYouFind(String)
-
-    private List<CardRules> executeLoadTask(final List<Callable<List<CardRules>>> tasks, long totalRecords) {
-        List<CardRules> result = new ArrayList<CardRules>();
         StopWatch sw = new StopWatch();
         sw.start();
+        
+        List<CardRules> res = executeLoadTask(tasks);
+        
+        sw.stop();
+        final long timeOnParse = sw.getTime();
+        System.out.printf("Read cards: %s %s in %d ms (%d parts) %s%n", estimatedFilesRemaining, zip == null? "files" : "archived files", timeOnParse, NUMBER_OF_PARTS, useThreadPool ? "using thread pool" : "in same thread");
+        barProgress.setPercentMode(false);
+        return res;
+    } // loadCardsUntilYouFind(String)
+
+    private List<CardRules> executeLoadTask(final List<Callable<List<CardRules>>> tasks) {
+        List<CardRules> result = new ArrayList<CardRules>();
+
         try {
-            if ( useThreadTool ) {
+            if ( useThreadPool ) {
                 final ExecutorService executor = FControl.getComputingPool(0.5f);
                 final List<Future<List<CardRules>>> parts = executor.invokeAll(tasks);
                 executor.shutdown();
@@ -224,13 +229,9 @@ public class CardStorageReader {
             throw new RuntimeException(e);
         }
         
-        sw.stop();
-        final long timeOnParse = sw.getTime();
-        System.out.printf("Read %s %s in %d ms (%d parts) %s%n", totalRecords, zip == null? "files" : "archived files", timeOnParse, NUMBER_OF_PARTS, useThreadTool ? "using thread pool" : "in same thread");
-        barProgress.setPercentMode(false);
         return result;
     }
-
+        
     private List<Callable<List<CardRules>>> makeTaskListForZip(final List<ZipEntry> entries) {
         int totalFiles = entries.size();
         int filesPerPart = totalFiles / NUMBER_OF_PARTS; 
@@ -269,8 +270,8 @@ public class CardStorageReader {
             });
         }
         return tasks;
-    }
-
+            }
+        
     /**
      * TODO: Write javadoc for this method.
      * @param allFiles
@@ -278,20 +279,20 @@ public class CardStorageReader {
      */
     private void fillFilesArray(List<File> allFiles, File startDir) {
         String[] list = startDir.list();
-        for (String filename : list) {
-            File entry = new File(startDir, filename);
+            for (String filename : list) {
+                File entry = new File(startDir, filename);
 
-            if (!entry.isDirectory()) {
+                if (!entry.isDirectory()) {
                 if (entry.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION))
                     allFiles.add(entry);
-                continue;
-            }
-            if (filename.startsWith(".")) {
-                continue;
-            }
+                    continue;
+                }
+                if (filename.startsWith(".")) {
+                    continue;
+                }
 
-            fillFilesArray(allFiles, entry);
-        }
+                fillFilesArray(allFiles, entry);
+            }
     }
 
 
