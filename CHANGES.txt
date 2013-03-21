@@ -62,6 +62,7 @@ Yavimaya Dryad
 Thieves' Auction
 Infinite Reflection
 Laccolith Rig
+Paroxysm
 
 
 New Planes:
