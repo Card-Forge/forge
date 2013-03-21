@@ -93,20 +93,16 @@ public enum CPicture implements ICDoc {
         
         flipped = !flipped;
         
-        final CardCharacteristicName newState;
+        CardCharacteristicName newState = CardCharacteristicName.Original;
         if (flipped) {
             if (currentCard.isDoubleFaced()) {
                 newState = CardCharacteristicName.Transformed;
             } else if (currentCard.isFlipCard()) {
                 newState = CardCharacteristicName.Flipped;
-            } else {
-                throw new RuntimeException("unhandled flippable card");
             }
-        } else {
-            newState = CardCharacteristicName.Original;
         }
 
-        CardCharacteristicName oldState = currentCard.getCurState();
+        final CardCharacteristicName oldState = currentCard.getCurState();
         if (oldState != newState) { 
             currentCard.setState(newState);
         }
