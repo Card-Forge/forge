@@ -807,13 +807,17 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canAttack(final Card c, final GameEntity defender) {
+        return canAttack(c) && canAttackNextTurn(c, defender);
+    }
+    
+    public static boolean canAttack(final Card c) {
         if (c.isTapped() || c.isPhasedOut()
                 || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))
                 || Singletons.getModel().getGame().getPhaseHandler().getPhase()
                     .isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return false;
         }
-        return CombatUtil.canAttackNextTurn(c, defender);
+        return true;
     }
 
     // can a creature attack if untapped and without summoning sickness?

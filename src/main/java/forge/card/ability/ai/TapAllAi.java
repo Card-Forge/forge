@@ -13,6 +13,7 @@ import forge.Singletons;
 import forge.card.ability.SpellAbilityAi;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -56,29 +57,43 @@ public class TapAllAi extends SpellAbilityAi {
         validTappables = CardLists.filter(validTappables, Presets.UNTAPPED);
 
         final Random r = MyRandom.getRandom();
-        boolean rr = false;
-        if (r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn())) {
-            rr = true;
+        if (r.nextFloat() > Math.pow(.6667, sa.getActivationsThisTurn())) {
+            return false;
         }
 
-        if (validTappables.size() > 0) {
-            final List<Card> human = CardLists.filter(validTappables, new Predicate<Card>() {
+        if (validTappables.isEmpty()) {
+            return false;
+        }
+
+        final List<Card> human = CardLists.filter(validTappables, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getController().equals(opp);
+            }
+        });
+        final List<Card> compy = CardLists.filter(validTappables, new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.getController().equals(ai);
+            }
+        });
+        if (human.size() <= compy.size()) {
+            return false;
+        }
+        // in AI's turn, check if there are possible attackers, before tapping blockers
+        if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)) {
+            validTappables = ai.getCardsIn(ZoneType.Battlefield);
+            final boolean any = Iterables.any(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getController().equals(opp);
+                    return CombatUtil.canAttack(c) && CombatUtil.canAttackNextTurn(c);
                 }
             });
-            final List<Card> compy = CardLists.filter(validTappables, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getController().equals(ai);
-                }
-            });
-            if (human.size() > compy.size()) {
-                return rr;
+            if(!any) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
