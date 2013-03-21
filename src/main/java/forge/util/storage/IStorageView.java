@@ -56,6 +56,6 @@ public interface IStorageView<T> extends Iterable<T> {
      *
      * @return the count
      */
-    int getCount();
+    int size();
 
 }

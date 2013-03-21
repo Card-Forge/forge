@@ -51,7 +51,7 @@ public class CardCollections {
         this.scheme = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_SCHEME_DIR)));
         this.plane = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_PLANE_DIR)));
 
-        System.out.printf("Read decks: %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar.%n", constructed.getCount(), sealed.getCount(), draft.getCount(), cube.getCount(), scheme.getCount(), plane.getCount());
+        System.out.printf("Read decks: %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar.%n", constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size());
 
         // remove this after most people have been switched to new layout
         final OldDeckParser oldParser = new OldDeckParser(this.constructed, this.draft, this.sealed, this.cube);

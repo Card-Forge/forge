@@ -121,7 +121,7 @@ public class QuestDeckMap implements IStorage<Deck> {
      * @see forge.util.IStorageView#getCount()
      */
     @Override
-    public int getCount() {
+    public int size() {
         return map.size();
     }
 

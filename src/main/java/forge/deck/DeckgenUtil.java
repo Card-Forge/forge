@@ -153,7 +153,7 @@ public class DeckgenUtil {
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomCustomDeck() {
         final IStorage<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
-        final int rand = (int) (Math.floor(Math.random() * allDecks.getCount()));
+        final int rand = (int) (Math.floor(Math.random() * allDecks.size()));
         final String name = allDecks.getNames().toArray(new String[0])[rand];
         return allDecks.get(name);
     }

@@ -77,16 +77,6 @@ public class StorageView<T> implements IStorageView<T> {
         return this.map;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Iterable#iterator()
-     */
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.deck.IFolderMapView#iterator()
-     */
     @Override
     public Iterator<T> iterator() {
         return this.map.values().iterator();
@@ -101,7 +91,7 @@ public class StorageView<T> implements IStorageView<T> {
     }
 
     @Override
-    public int getCount() {
+    public int size() {
         return this.map.size();
     }
 }
