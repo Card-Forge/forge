@@ -197,7 +197,7 @@ public class AbilityUtils {
                 validFilter = workingCopy[2];
             }
             for (final Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard)) {
-                cards.add(cl);
+                cards.add(Singletons.getModel().getGame().getCardState(cl));
             }
         } else if (defined.equals("ChosenCard")) {
             for (final Card chosen : hostCard.getChosenCard()) {
