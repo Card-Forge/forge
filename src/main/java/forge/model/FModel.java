@@ -29,6 +29,7 @@ import forge.Constant;
 import forge.Constant.Preferences;
 import forge.card.BoosterData;
 import forge.card.CardBlock;
+import forge.card.CardRulesReader;
 import forge.card.EditionCollection;
 import forge.card.FatPackData;
 import forge.card.FormatCollection;
@@ -144,7 +145,7 @@ public enum FModel {
         this.questPreferences = new QuestPreferences();
         this.gauntletData = new GauntletData();
 
-        this.editions = new EditionCollection();
+        this.editions = CardRulesReader.editions; // CardRules ctor cannot refer to FModel, since it is not yet build by that moment
         this.formats = new FormatCollection("res/blockdata/formats.txt");
         this.boosters = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/boosters.txt"));
         this.tournaments = new StorageView<BoosterData>(new BoosterData.Reader("res/blockdata/starters.txt"));

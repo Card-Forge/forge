@@ -89,6 +89,10 @@ public enum FControl {
 
     private final SoundSystem soundSystem = new SoundSystem();
 
+    
+    static { 
+        System.out.printf("(FControl static ctor): Running on a machine with %d cpu core(s)%n", Runtime.getRuntime().availableProcessors() );
+    }
     /**
      * <p>
      * FControl.
@@ -321,5 +325,13 @@ public enum FControl {
     // This pool is designed to parallel CPU or IO intensive tasks like parse cards or download images, assuming a load factor of 0.5
     public final static ExecutorService getComputingPool(float loadFactor) {
         return Executors.newFixedThreadPool((int)(Runtime.getRuntime().availableProcessors() / (1-loadFactor)));
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public static boolean isMultiCoreSystem() {
+        return Runtime.getRuntime().availableProcessors() > 1;
     }
 }

@@ -62,11 +62,16 @@ public class CardStorageReader {
     /** Default charset when loading from files. */
     public static final String DEFAULT_CHARSET_NAME = "US-ASCII";
 
+    final private boolean useThreadTool = FControl.isMultiCoreSystem();
+    final private int NUMBER_OF_PARTS = 25;
+    
+    final private CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
+    final private FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
+    
     private transient File cardsfolder;
 
     private transient ZipFile zip;
     private transient Charset charset;
-    private transient CardRulesReader rulesReader;
 
 
     // 8/18/11 10:56 PM
@@ -86,8 +91,6 @@ public class CardStorageReader {
     public CardStorageReader(String cardDataDir, final boolean useZip) {
 
         // These read data for lightweight classes.
-        this.rulesReader = new CardRulesReader();
-        
         File theCardsFolder = new File(cardDataDir);
 
         if (!theCardsFolder.exists()) {
@@ -104,7 +107,6 @@ public class CardStorageReader {
 
         final File zipFile = new File(theCardsFolder, "cardsfolder.zip");
 
-        // Prepare resources to read cards lazily.
         if (useZip && zipFile.exists()) {
             try {
                 this.zip = new ZipFile(zipFile);
@@ -124,11 +126,23 @@ public class CardStorageReader {
         List<CardRules> result = new ArrayList<CardRules>();
         for(int i = from; i < to; i++) {
             File cardTxtFile = files.get(i);
-            if (cardTxtFile.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION))
-                result.add(this.loadCard(rulesReader, cardTxtFile));
+            result.add(this.loadCard(rulesReader, cardTxtFile));
         }
         return result;
     }
+    
+    private final List<CardRules> loadCardsInRangeFromZip(final List<ZipEntry> files, int from, int to) {
+        
+        CardRulesReader rulesReader = new CardRulesReader();
+        
+        List<CardRules> result = new ArrayList<CardRules>();
+        for(int i = from; i < to; i++) {
+            ZipEntry ze = files.get(i);
+            // if (ze.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION))  // already filtered!
+            result.add(this.loadCard(rulesReader, ze));
+        }
+        return result;
+    }    
     
     
     /**
@@ -141,65 +155,103 @@ public class CardStorageReader {
      */
     public final List<CardRules> loadCards() {
 
-        List<CardRules> result = new ArrayList<CardRules>();
-        final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
-
-        // Iterate through txt files or zip archive.
-        // Report relevant numbers to progress monitor model.
-        if (this.zip == null) {
-            result = loadAllCardsFromFolder(barProgress);
-        } else {
-            
-            Enumeration<? extends ZipEntry> zipEnum = this.zip.entries();
-            int estimatedFilesRemaining = this.zip.size();
-            
-            barProgress.setMaximum(estimatedFilesRemaining);
-            ZipEntry entry;
-
-            // zipEnum was initialized in the constructor.
-            while (zipEnum.hasMoreElements()) {
-                entry = zipEnum.nextElement();
-
-                if (entry.isDirectory() || !entry.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION)) {
-                    barProgress.increment();
-                    continue;
-                }
-
-                result.add(this.loadCard(entry));
-                barProgress.increment();
-            }
-        } // endif
-
-        barProgress.setPercentMode(false);
-
-        return result;
-    } // loadCardsUntilYouFind(String)
-
-    private List<CardRules> loadAllCardsFromFolder(final FProgressBar barProgress) {
-        List<CardRules> result = new ArrayList<CardRules>();
-        
-        StopWatch sw = new StopWatch();
-        sw.start();
-        final List<File> allFiles = new ArrayList<File>();
-        
-        fillFilesArray(allFiles, this.cardsfolder);
-        long estimatedFilesRemaining = allFiles.size();
         
 
-        final int NUMBER_OF_PARTS = 20;
-        sw.split();
         if (barProgress != null) {
             barProgress.setMaximum(NUMBER_OF_PARTS);
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
                     barProgress.setPercentMode(true);
-                    barProgress.setDescription("Loading card data: ");
+                    barProgress.setDescription("Loading card data: 0%");
                 }
             });
         }
+        
+        final List<Callable<List<CardRules>>> tasks;
+        long estimatedFilesRemaining;
+        
+        // Iterate through txt files or zip archive.
+        // Report relevant numbers to progress monitor model.
+        if (this.zip == null) {
+            final List<File> allFiles = new ArrayList<File>();
+            fillFilesArray(allFiles, this.cardsfolder);
+            estimatedFilesRemaining = allFiles.size();
+            tasks = makeTaskListForFiles(allFiles);
+        } else {
+            
+            estimatedFilesRemaining = this.zip.size();
+            ZipEntry entry;
+            List<ZipEntry> entries = new ArrayList<ZipEntry>();
+            // zipEnum was initialized in the constructor.
+            Enumeration<? extends ZipEntry> zipEnum = this.zip.entries();
+            while (zipEnum.hasMoreElements()) {
+                entry = zipEnum.nextElement();
+                if (entry.isDirectory() || !entry.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION))
+                    continue;
+                entries.add(entry);
+            }
 
-        final CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
+            tasks = makeTaskListForZip(entries);
+        } // endif
+
+        return executeLoadTask(tasks, estimatedFilesRemaining);
+    } // loadCardsUntilYouFind(String)
+
+    private List<CardRules> executeLoadTask(final List<Callable<List<CardRules>>> tasks, long totalRecords) {
+        List<CardRules> result = new ArrayList<CardRules>();
+        StopWatch sw = new StopWatch();
+        sw.start();
+        try {
+            if ( useThreadTool ) {
+                final ExecutorService executor = FControl.getComputingPool(0.5f);
+                final List<Future<List<CardRules>>> parts = executor.invokeAll(tasks);
+                executor.shutdown();
+                cdl.await();
+                for(Future<List<CardRules>> pp : parts) {
+                    result.addAll(pp.get());
+                }
+            } else {
+                for(Callable<List<CardRules>> c : tasks) {
+                    result.addAll(c.call());
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (Exception e) { // this clause comes from non-threaded branch
+            throw new RuntimeException(e);
+        }
+        
+        sw.stop();
+        final long timeOnParse = sw.getTime();
+        System.out.printf("Read %s %s in %d ms (%d parts) %s%n", totalRecords, zip == null? "files" : "archived files", timeOnParse, NUMBER_OF_PARTS, useThreadTool ? "using thread pool" : "in same thread");
+        barProgress.setPercentMode(false);
+        return result;
+    }
+
+    private List<Callable<List<CardRules>>> makeTaskListForZip(final List<ZipEntry> entries) {
+        int totalFiles = entries.size();
+        int filesPerPart = totalFiles / NUMBER_OF_PARTS; 
+        final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
+        for (int iPart = 0; iPart < NUMBER_OF_PARTS; iPart++) {
+            final int from = iPart * filesPerPart;
+            final int till = iPart == NUMBER_OF_PARTS - 1 ? totalFiles : from + filesPerPart;
+            tasks.add(new Callable<List<CardRules>>() {
+                @Override
+                public List<CardRules> call() throws Exception{
+                    List<CardRules> res = loadCardsInRangeFromZip(entries, from, till);
+                    barProgress.increment();
+                    cdl.countDown();
+                    return res;
+                }
+            });
+        }
+        return tasks;
+    }
+
+    private List<Callable<List<CardRules>>> makeTaskListForFiles(final List<File> allFiles) {
         int totalFiles = allFiles.size();
         int filesPerPart = totalFiles / NUMBER_OF_PARTS; 
         final List<Callable<List<CardRules>>> tasks = new ArrayList<Callable<List<CardRules>>>();
@@ -216,26 +268,7 @@ public class CardStorageReader {
                 }
             });
         }
-            
-        try {
-            final ExecutorService executor = FControl.getComputingPool(0.5f);
-            final List<Future<List<CardRules>>> parts = executor.invokeAll(tasks);
-            executor.shutdown();
-            cdl.await();
-            for(Future<List<CardRules>> pp : parts) {
-                result.addAll(pp.get());
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        
-        long fs = sw.getSplitTime();
-        sw.stop();
-        
-        System.out.println("Processed " + estimatedFilesRemaining + " file objects in " + (sw.getTime() - fs) + " ms, apart from that folder scan took " + fs + " ms.");
-        return result;
+        return tasks;
     }
 
     /**
@@ -245,19 +278,20 @@ public class CardStorageReader {
      */
     private void fillFilesArray(List<File> allFiles, File startDir) {
         String[] list = startDir.list();
-            for (String filename : list) {
-                File entry = new File(startDir, filename);
+        for (String filename : list) {
+            File entry = new File(startDir, filename);
 
-                if (!entry.isDirectory()) {
+            if (!entry.isDirectory()) {
+                if (entry.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION))
                     allFiles.add(entry);
-                    continue;
-                }
-                if (filename.startsWith(".")) {
-                    continue;
-                }
-
-                fillFilesArray(allFiles, entry);
+                continue;
             }
+            if (filename.startsWith(".")) {
+                continue;
+            }
+
+            fillFilesArray(allFiles, entry);
+        }
     }
 
 
@@ -315,7 +349,7 @@ public class CardStorageReader {
      * 
      * @return a new Card instance
      */
-    protected final CardRules loadCard(final ZipEntry entry) {
+    protected final CardRules loadCard(final CardRulesReader rulesReader, final ZipEntry entry) {
         InputStream zipInputStream = null;
         try {
             zipInputStream = this.zip.getInputStream(entry);
