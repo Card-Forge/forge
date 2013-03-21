@@ -23,7 +23,7 @@ User data, like decks, saved gauntlets, and card pictures, is now stored in sepa
 
 cardPicsDir is defined as <cacheDir>/pics/cards/ by default.  If you wish to use a non-default directory, please see the forge.profile.preferences.example file located in the Forge installation directory root.  You can use this file to, for example, share the card pics directory with another program, such as Magic Workstation.
 
-For reference, here is the full list of moved directories:
+For reference, here is the full list of moved directories and files:
 
 Old location      New location
 ----------------  ----------------------
@@ -33,6 +33,7 @@ res/layouts/      <userDir>/preferences/
 res/preferences/  <userDir>/preferences/
 res/quest/data/   <userDir>/quest/saves/
 res/pics/         <cacheDir>/pics/
+forge.log         <userDir>/forge.log
 
 
 - New Import Data dialog -
