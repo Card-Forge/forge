@@ -670,8 +670,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean isPreferredTarget(final AIPlayer ai, final SpellAbility sa,
-            final boolean mandatory) {
+    private static boolean isPreferredTarget(final AIPlayer ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
@@ -750,8 +749,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                     }
                 }
-                // Blink permanents with ETB triggers
-                else if (!sa.isTrigger() && SpellAbilityAi.playReusable(ai, sa)) {
+                // TODO: Blink permanents with ETB triggers
+                /*else if (!sa.isTrigger() && SpellAbilityAi.playReusable(ai, sa)) {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
@@ -769,7 +768,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         tgt.addTarget(ComputerUtilCard.getBestAI(aiPermanents));
                         return true;
                     }
-                }
+                }*/
             }
 
         } else if (origin.equals(ZoneType.Graveyard)) {
@@ -833,7 +832,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!mandatory && (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
+        if (!mandatory && list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
             return false;
         }
 
@@ -843,8 +842,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             Card choice = null;
 
             if (!list.isEmpty()) {
-                final Card mostExpensive = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
                 if (destination.equals(ZoneType.Battlefield) || origin.equals(ZoneType.Battlefield)) {
+                    final Card mostExpensive = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, false);
                     if (mostExpensive.isCreature()) {
                         // if a creature is most expensive take the best one
                         if (destination.equals(ZoneType.Exile)) {
@@ -887,13 +886,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
             if (choice == null) { // can't find anything left
-                if ((tgt.getNumTargeted() == 0) || (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa))) {
+                if (tgt.getNumTargeted() == 0 || tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) {
                     if (!mandatory) {
                         tgt.resetTargets();
                     }
                     return false;
                 } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
+                    if (!sa.isTrigger() && !ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         return false;
                     }
                     break;
