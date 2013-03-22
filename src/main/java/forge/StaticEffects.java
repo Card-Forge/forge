@@ -153,13 +153,21 @@ public class StaticEffects {
         }
 
         if (params.containsKey("AddColor")) {
-            addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("AddColor").split(
-                    " & "))));
+            final String colors = params.get("AddColor");
+            if (colors.equals("ChosenColor")) {
+                addColors = CardUtil.getShortColorsString(se.getSource().getChosenColor());
+            } else {
+                addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
+            }
         }
 
         if (params.containsKey("SetColor")) {
-            addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(params.get("SetColor").split(
-                    " & "))));
+            final String colors = params.get("SetColor");
+            if (colors.equals("ChosenColor")) {
+                addColors = CardUtil.getShortColorsString(se.getSource().getChosenColor());
+            } else {
+                addColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(" & "))));
+            }
         }
 
         // modify players
