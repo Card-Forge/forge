@@ -5,18 +5,11 @@ import java.util.List;
 
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.Target;
-import forge.control.input.Input;
-import forge.control.input.InputSelectManyCards;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.match.CMatchUI;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -101,97 +94,6 @@ class CardFactoryArtifacts {
             ab1.setDescription(sb.toString());
             ab1.setStackDescription(sb.toString());
             card.addSpellAbility(ab1);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Scroll Rack")) {
-            class AbilityScrollRack extends AbilityActivated {
-                public AbilityScrollRack(final Card ca, final Cost co, final Target t) {
-                    super(ca, co, t);
-                }
-
-                @Override
-                public AbilityActivated getCopy() {
-                    AbilityActivated res = new AbilityScrollRack(getSourceCard(),
-                            getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
-                    CardFactory.copySpellAbility(this, res);
-                    return res;
-                }
-
-                private static final long serialVersionUID = -5588587187720068547L;
-
-                @Override
-                public void resolve() {
-                    // not implemented for compy
-                    if (card.getController().isHuman()) {
-
-                        InputSelectManyCards inp = new InputSelectManyCards(0, Integer.MAX_VALUE) {
-                            private static final long serialVersionUID = 806464726820739922L;
-
-                            @Override
-                            protected boolean isValidChoice(Card c) {
-                                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                                return zone.is(ZoneType.Hand) && c.getController() == card.getController();
-                            }
-
-                            /* (non-Javadoc)
-                             * @see forge.control.input.InputSelectManyCards#onDone()
-                             */
-                            @Override
-                            protected Input onDone() {
-                                for (final Card c : selected) {
-                                    Singletons.getModel().getGame().getAction().exile(c);
-                                }
-
-                                // Put that many cards from the top of your
-                                // library into your hand.
-                                // Ruling: This is not a draw...
-                                final PlayerZone lib = card.getController().getZone(ZoneType.Library);
-                                int numCards = 0;
-                                while ((lib.size() > 0) && (numCards < selected.size())) {
-                                    Singletons.getModel().getGame().getAction().moveToHand(lib.get(0));
-                                    numCards++;
-                                }
-
-                                final StringBuilder sb = new StringBuilder();
-                                sb.append(card.getName()).append(" - Returning cards to top of library.");
-                                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-
-                                // Then look at the exiled cards and put them on
-                                // top of your library in any order.
-                                while (selected.size() > 0) {
-                                    final Card c1 = GuiChoose.one("Put a card on top of your library.", selected);
-                                    Singletons.getModel().getGame().getAction().moveToLibrary(c1);
-                                    selected.remove(c1);
-                                }
-                                return null;                            }
-                        };
-                        inp.setMessage(card.getName() + " - Exile cards from hand.  Currently, %d selected.  (Press OK when done.)");
-
-                        Singletons.getModel().getMatch().getInput().setInput(inp);
-
-                    }
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            }
-            final Cost abCost = new Cost(card, "1 T", true);
-            final AbilityActivated ability = new AbilityScrollRack(card, abCost, null);
-
-            final StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append(abCost);
-            sbDesc.append("Exile any number of cards from your hand face down. Put that many cards ");
-            sbDesc.append("from the top of your library into your hand. Then look at the exiled cards ");
-            sbDesc.append("and put them on top of your library in any order.");
-            ability.setDescription(sbDesc.toString());
-
-            final StringBuilder sbStack = new StringBuilder();
-            sbStack.append(cardName).append(" - exile any number of cards from your hand.");
-            ability.setStackDescription(sbStack.toString());
-            card.addSpellAbility(ability);
         } // *************** END ************ END **************************
     }
 }
