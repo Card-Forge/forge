@@ -13699,6 +13699,7 @@ src/main/java/forge/Command.java svneol=native#text/plain
 src/main/java/forge/CommandList.java svneol=native#text/plain
 src/main/java/forge/Constant.java svneol=native#text/plain
 src/main/java/forge/CounterType.java svneol=native#text/plain
+src/main/java/forge/FThreads.java -text
 src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameLog.java -text
 src/main/java/forge/ImageCache.java svneol=native#text/plain
@@ -14083,6 +14084,7 @@ src/main/java/forge/control/input/InputAttack.java svneol=native#text/plain
 src/main/java/forge/control/input/InputBlock.java svneol=native#text/plain
 src/main/java/forge/control/input/InputCleanup.java svneol=native#text/plain
 src/main/java/forge/control/input/InputControl.java svneol=native#text/plain
+src/main/java/forge/control/input/InputLockUI.java -text
 src/main/java/forge/control/input/InputMulligan.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPassPriority.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayDiscardCost.java -text

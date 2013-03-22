@@ -31,7 +31,6 @@ import java.util.List;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 
 import forge.Card;
 import forge.gui.match.VMatchUI;
@@ -87,26 +86,6 @@ public final class GuiUtils {
             System.err.println("GuiUtils > newFont: can't find \"" + filename + "\"");
         }
         return ttf;
-    }
-
-    /** Checks if calling method uses event dispatch thread.
-     * Exception thrown if method is on "wrong" thread.
-     * A boolean is passed to indicate if the method must be EDT or not.
-     * 
-     * @param methodName &emsp; String, part of the custom exception message.
-     * @param mustBeEDT &emsp; boolean: true = exception if not EDT, false = exception if EDT
-     */
-    public static void checkEDT(final String methodName, final boolean mustBeEDT) {
-        boolean isEDT = SwingUtilities.isEventDispatchThread();
-
-        if (!isEDT && mustBeEDT) {
-            throw new IllegalStateException(
-                    methodName + " must be accessed from the event dispatch thread.");
-        }
-        else if (isEDT && !mustBeEDT) {
-            throw new IllegalStateException(
-                    methodName + " may not be accessed from the event dispatch thread.");
-        }
     }
 
     /**

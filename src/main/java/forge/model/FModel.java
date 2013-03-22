@@ -27,6 +27,7 @@ import java.util.List;
 
 import forge.Constant;
 import forge.Constant.Preferences;
+import forge.FThreads;
 import forge.card.BoosterData;
 import forge.card.CardBlock;
 import forge.card.CardRulesReader;
@@ -43,7 +44,6 @@ import forge.game.MatchController;
 import forge.game.limited.GauntletMini;
 import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
-import forge.gui.GuiUtils;
 import forge.item.CardDb;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -161,7 +161,7 @@ public enum FModel {
         this.loadDynamicGamedata();
 
         // Loads all cards (using progress bar).
-        GuiUtils.checkEDT("CardFactory$constructor", false);
+        FThreads.checkEDT("CardFactory$constructor", false);
         final CardStorageReader reader = new CardStorageReader(NewConstants.CARD_DATA_DIR, true);
         try {
             // this fills in our map of card names to Card instances.

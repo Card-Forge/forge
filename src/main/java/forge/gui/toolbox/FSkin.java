@@ -37,6 +37,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
+import forge.FThreads;
 import forge.gui.GuiUtils;
 import forge.view.FView;
 
@@ -419,7 +420,7 @@ public enum FSkin {
      */
     public static void loadLight(final String skinName) {
         // No need for this method to be loaded while on the EDT.
-        GuiUtils.checkEDT("FSkin$constructor", false);
+        FThreads.checkEDT("FSkin$constructor", false);
 
         // Non-default (preferred) skin name and dir.
         FSkin.preferredName = skinName.toLowerCase().replace(' ', '_');
@@ -479,7 +480,7 @@ public enum FSkin {
      */
     public static void loadFull() {
         // No need for this method to be loaded while on the EDT.
-        GuiUtils.checkEDT("FSkin$load", false);
+        FThreads.checkEDT("FSkin$load", false);
 
         // Preferred skin name must be called via loadLight() method,
         // which does some cleanup and init work.
