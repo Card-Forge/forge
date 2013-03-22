@@ -1333,6 +1333,7 @@ public final class GameActionUtil {
                     while (child.getSubAbility() != null) {
                         AbilitySub newChild = child.getSubAbility().getCopy();
                         child.setSubAbility(newChild);
+                        child.setActivatingPlayer(s.getActivatingPlayer());
                         child = newChild;
                     }
 
