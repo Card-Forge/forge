@@ -327,6 +327,7 @@ public class SpellPermanent extends Spell {
             else {
                 throw new InvalidParameterException("Either ai or sa must be not null!");
             }
+            exSA.setTrigger(true);
 
             // Run non-mandatory trigger.
             // These checks only work if the Executing SpellAbility is an
