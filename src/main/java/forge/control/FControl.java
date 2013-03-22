@@ -84,10 +84,6 @@ public enum FControl {
 
     private final SoundSystem soundSystem = new SoundSystem();
 
-    
-    static { 
-        System.out.printf("(FControl static ctor): Running on a machine with %d cpu core(s)%n", Runtime.getRuntime().availableProcessors() );
-    }
     /**
      * <p>
      * FControl.

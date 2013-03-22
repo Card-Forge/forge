@@ -14,6 +14,10 @@ import forge.control.input.InputLockUI;
  */
 public class FThreads {
 
+    static { 
+        System.out.printf("(FThreads static ctor): Running on a machine with %d cpu core(s)%n", Runtime.getRuntime().availableProcessors() );
+    }
+    
     private final static ExecutorService threadPool = Executors.newCachedThreadPool();
     public static ExecutorService getCachedPool() {
         return threadPool;
@@ -84,11 +88,22 @@ public class FThreads {
     }
     
     private final static InputLockUI inpuptLock = new InputLockUI();
-    public static void invokeInNewThread(Runnable proc, boolean lockUI) {
-        getCachedPool().execute(proc);
+    public static void invokeInNewThread(final Runnable proc, boolean lockUI) {
+        Runnable toRun = proc;
         if( lockUI ) {
+            // checkEDT("FThreads.invokeInNewthread", true)
             Singletons.getModel().getMatch().getInput().setInput(inpuptLock);
+            toRun = new Runnable() {
+                @Override
+                public void run() {
+                    proc.run();
+                    // may try special unlock method here
+                    Singletons.getModel().getMatch().getInput().resetInput();
+                }
+            };
         }
+        
+        getCachedPool().execute(toRun);
     }
 
 }

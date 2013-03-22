@@ -40,10 +40,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=3955194449319994301L</code>. */
     private static final long serialVersionUID = 3955194449319994301L;
 
-    private Input input;
-
     private final Stack<Input> inputStack = new Stack<Input>();
-    private final Stack<Input> urgentInputStack = new Stack<Input>();
 
     private final transient GameState game;
     /**
@@ -65,13 +62,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            a {@link forge.control.input.Input} object.
      */
     public final void setInput(final Input in) {
-        boolean isInputEmpty = this.input == null || this.input instanceof InputPassPriority;
         //System.out.println(in.getClass().getName());
-        if (!this.game.getStack().isResolving() && isInputEmpty) {
-            this.input = in;
-        } else {
-            this.inputStack.add(in);
-        }
+        this.inputStack.push(in);
+        // System.out.print("Current: " + input + "; Stack = " + inputStack);
         this.updateObservers();
     }
 
@@ -87,21 +80,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final void setInputInterrupt(final Input in) {
         // Make this
-        final Input old = this.input;
-        this.urgentInputStack.add(old);
-        this.changeInput(in);
-    }
-
-    /**
-     * <p>
-     * changeInput.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.Input} object.
-     */
-    private void changeInput(final Input in) {
-        this.input = in;
+        this.inputStack.push(in);
         this.updateObservers();
     }
 
@@ -113,7 +92,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.control.input.Input} object.
      */
     public final Input getInput() {
-        return this.input;
+        return this.inputStack.peek();
     }
 
     /**
@@ -122,7 +101,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void clearInput() {
-        this.input = null;
         this.inputStack.clear();
     }
 
@@ -136,7 +114,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            a boolean.
      */
     public final void resetInput() { 
-        this.input = null;
+        this.inputStack.pop();
         this.updateObservers();
     }
 
@@ -157,30 +135,11 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         final Player priority = handler.getPriorityPlayer();
         final MagicStack stack = game.getStack();
 
+        
         // TODO this resolving portion needs more work, but fixes Death Cloud
         // issues
-        if (this.urgentInputStack.size() > 0) {
-            if (this.input != null) {
-                return this.input;
-            }
-
-            // if an SA is resolving, only change input for something that is
-            // part of the resolving SA
-            this.changeInput(this.urgentInputStack.pop());
-            return this.input;
-        }
-
-        if (stack.isResolving()) {
-            return null;
-        }
-
-        if (this.input != null) {
-            return this.input;
-        }
-
         if (!this.inputStack.isEmpty()) { // incoming input to Control
-            this.changeInput(this.inputStack.pop());
-            return this.input;
+            return this.inputStack.peek();
         }
 
         if (handler.hasPhaseEffects()) {
@@ -249,8 +208,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         PhaseHandler ph = game.getPhaseHandler();
 
         final Input tmp = getActualInput();
-        //String message = String.format("%s's %s, priority of %s [%sP] input is %s", ph.getPlayerTurn(), ph.getPhase(), ph.getPriorityPlayer(), ph.isPlayerPriorityAllowed() ? "+" : "-", tmp == null ? "null" : tmp.getClass().getSimpleName());
-        //System.out.println(message);
+        String message = String.format("%s's %s, priority of %s [%sP] input is %s", ph.getPlayerTurn(), ph.getPhase(), ph.getPriorityPlayer(), ph.isPlayerPriorityAllowed() ? "+" : "-", tmp == null ? "null" : tmp.getClass().getSimpleName());
+        System.out.println(message);
         if (tmp != null) {
             //System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer() + " @ input is " + tmp.getClass().getName() );
             CMessage.SINGLETON_INSTANCE.getInputControl().setInput(tmp);
