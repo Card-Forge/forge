@@ -70,9 +70,12 @@ Thieves' Auction
 Infinite Reflection
 Laccolith Rig
 Paroxysm
+Essence Leak
 
 
-New Planes:
+----------
+New Planes
+----------
 
 Bant
 Turri Island
