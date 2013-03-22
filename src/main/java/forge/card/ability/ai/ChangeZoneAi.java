@@ -749,8 +749,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                     }
                 }
-                // Blink permanents with ETB triggers
-                else if (!sa.isTrigger() && SpellAbilityAi.playReusable(ai, sa)) {
+                // TODO: Blink permanents with ETB triggers
+                /*else if (!sa.isTrigger() && SpellAbilityAi.playReusable(ai, sa)) {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
@@ -768,7 +768,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         tgt.addTarget(ComputerUtilCard.getBestAI(aiPermanents));
                         return true;
                     }
-                }
+                }*/
             }
 
         } else if (origin.equals(ZoneType.Graveyard)) {
