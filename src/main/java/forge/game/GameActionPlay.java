@@ -10,6 +10,7 @@ import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -358,6 +359,7 @@ public class GameActionPlay {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void playSpellAbility(SpellAbility sa, Player activator) {
+        FThreads.checkEDT("Player.playSpellAbility", false);
         sa.setActivatingPlayer(activator);
 
         final Card source = sa.getSourceCard();

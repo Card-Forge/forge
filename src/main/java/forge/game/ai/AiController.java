@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -44,6 +45,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
+import forge.game.phase.PhaseType;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -762,5 +764,97 @@ public class AiController {
         }
         return null;
     }
+    
+    public void onPriorityRecieved() {
+        final PhaseType phase = game.getPhaseHandler().getPhase();
+        
+        if (game.getStack().size() > 0) {
+            playSpellAbilities(game);
+        } else {
+            switch(phase) {
+                case CLEANUP:
+                    if ( game.getPhaseHandler().getPlayerTurn() == player ) {
+                        final int size = player.getCardsIn(ZoneType.Hand).size();
+                        
+                        if (!player.isUnlimitedHandSize()) {
+                            int max = Math.min(player.getZone(ZoneType.Hand).size(), size - player.getMaxHandSize());
+                            final List<Card> toDiscard = player.getAi().getCardsToDiscard(max, (String[])null, null);
+                            for (int i = 0; i < toDiscard.size(); i++) {
+                                player.discard(toDiscard.get(i), null);
+                            }
+                            game.getStack().chooseOrderOfSimultaneousStackEntryAll();
+                        }
+                    }
+                    break;
+
+                case COMBAT_DECLARE_ATTACKERS:
+                    declareAttackers();
+                    break;
+
+                case MAIN1:
+                case MAIN2:
+                    Log.debug("Computer " + phase.toString());
+                    playLands();
+                    // fall through is intended
+                default:
+                    playSpellAbilities(game);
+                    break;
+            }
+        }
+        player.getController().passPriority();
+    }
+    
+
+    private void declareAttackers() {
+        // 12/2/10(sol) the decision making here has moved to getAttackers()
+        game.setCombat(new AiAttackController(player, player.getOpponent()).getAttackers());
+
+        final List<Card> att = game.getCombat().getAttackers();
+        if (!att.isEmpty()) {
+            game.getPhaseHandler().setCombat(true);
+        }
+
+        for (final Card element : att) {
+            // tapping of attackers happens after Propaganda is paid for
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
+            Log.debug(sb.toString());
+        }
+
+        player.getZone(ZoneType.Battlefield).updateObservers();
+
+        game.getPhaseHandler().setPlayersPriorityPermission(false);
+
+        // ai is about to attack, cancel all phase skipping
+        for (Player p : game.getPlayers()) {
+            p.getController().autoPassCancel();
+        }
+    }
+
+    private void playLands() {
+        final Player player = getPlayer();
+        List<Card> landsWannaPlay = getLandsToPlay();
+        
+        while(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
+            Card land = chooseBestLandToPlay(landsWannaPlay);
+            landsWannaPlay.remove(land);
+            player.playLand(land);
+            game.getPhaseHandler().setPriority(player);
+        }
+    }
+
+    private void playSpellAbilities(final GameState game)
+    {
+        SpellAbility sa;
+        do { 
+            sa = getSpellAbilityToPlay();
+            if ( sa == null ) break;
+            //System.out.println("Playing sa: " + sa);
+            if (!ComputerUtil.handlePlayingSpellAbility(player, sa, game)) {
+                break;
+            }
+        } while ( sa != null );
+    }
+
 }
 

@@ -39,9 +39,9 @@ import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang.time.StopWatch;
 
+import forge.FThreads;
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
-import forge.control.FControl;
 import forge.error.BugReporter;
 import forge.gui.toolbox.FProgressBar;
 import forge.util.FileUtil;
@@ -62,7 +62,7 @@ public class CardStorageReader {
     /** Default charset when loading from files. */
     public static final String DEFAULT_CHARSET_NAME = "US-ASCII";
 
-    final private boolean useThreadPool = FControl.isMultiCoreSystem();
+    final private boolean useThreadPool = FThreads.isMultiCoreSystem();
     final private int NUMBER_OF_PARTS = 25;
     
     final private CountDownLatch cdl = new CountDownLatch(NUMBER_OF_PARTS);
@@ -209,7 +209,7 @@ public class CardStorageReader {
 
         try {
             if ( useThreadPool ) {
-                final ExecutorService executor = FControl.getComputingPool(0.5f);
+                final ExecutorService executor = FThreads.getComputingPool(0.5f);
                 final List<Future<List<CardRules>>> parts = executor.invokeAll(tasks);
                 executor.shutdown();
                 cdl.await();

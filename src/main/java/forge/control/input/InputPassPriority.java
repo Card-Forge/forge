@@ -18,10 +18,10 @@
 package forge.control.input;
 
 import forge.Card;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.FControl;
-import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.GuiDisplayUtil;
@@ -80,11 +80,17 @@ public class InputPassPriority extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card) {
-        Player player = Singletons.getControl().getPlayer();
-        GameState game = Singletons.getModel().getGame();
-        SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(card, player));
+        final Player player = Singletons.getControl().getPlayer();
+        final SpellAbility ab = player.getController().getAbilityToPlay(player.getGame().getAbilitesOfCard(card, player));
         if ( null != ab) {
-            player.playSpellAbility(card, ab);
+            Runnable execAbility = new Runnable() {
+                @Override
+                public void run() {
+                    player.playSpellAbility(card, ab);
+                }
+            };
+            
+            FThreads.invokeInNewThread(execAbility, true);
         }
         else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);

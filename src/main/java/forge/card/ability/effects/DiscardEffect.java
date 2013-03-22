@@ -165,7 +165,7 @@ public class DiscardEffect extends RevealEffectBase {
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose") || mode.equals("TgtChoose")) {
                     // Is Reveal you choose right? I think the wrong player is
                     // being used?
-                    List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
+                    List<Card> dPHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
                     if (dPHand.isEmpty())
                         continue; // for loop over players
 

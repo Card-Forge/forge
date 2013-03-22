@@ -21,6 +21,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Card;
+import forge.FThreads;
 import forge.Singletons;
 import forge.control.input.Input;
 import forge.game.player.Player;
@@ -58,7 +59,17 @@ public class InputProxy implements Observer {
     public final synchronized void setInput(final Input in) {
         valid = true;
         this.input = in;
-        this.input.showMessage(); // this call may invalidate the input by the time it returns
+        
+        if ( null == input ) {
+            throw new NullPointerException("input is null");
+        }
+        
+        FThreads.invokeInEDT(new Runnable() {
+            @Override
+            public void run() {
+                InputProxy.this.input.showMessage(); // this call may invalidate the input by the time it returns
+            }
+        });
     }
 
     /**

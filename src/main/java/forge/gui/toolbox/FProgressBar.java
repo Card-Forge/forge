@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 
-import forge.gui.GuiUtils;
+import forge.FThreads;
 
 /** 
  * A simple progress bar component using the Forge skin.
@@ -37,7 +37,7 @@ public class FProgressBar extends JProgressBar {
      * @param s0 &emsp; A description to prepend before statistics.
      */
     public void setDescription(final String s0) {
-        GuiUtils.checkEDT("FProgressBar$setDescription", true);
+        FThreads.checkEDT("FProgressBar$setDescription", true);
         this.desc = s0;
         this.setString(s0);
     }
@@ -77,7 +77,7 @@ public class FProgressBar extends JProgressBar {
 
     /** Resets the various values required for this class. Must be called from EDT. */
     public void reset() {
-        GuiUtils.checkEDT("FProgressBar$reset", true);
+        FThreads.checkEDT("FProgressBar$reset", true);
         this.setIndeterminate(true);
         this.setValue(0);
         this.tempVal = 0;

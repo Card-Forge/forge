@@ -927,7 +927,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         final Card source = sa.getSourceCard();
-        final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final Target tgt = sa.getTarget();
 
