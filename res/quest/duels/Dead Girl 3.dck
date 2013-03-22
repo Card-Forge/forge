@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Dead Girl 3
+Title=Dead Girl
+Difficulty=hard
+Description=Mono B Zombie Infestation deck
+Icon=Dead Girl.jpg
+Deck Type=constructed
+[main]
+2 Ashen Ghoul
+3 Ghastly Remains
+2 Grave Defiler
+3 Gravecrawler
+2 Haakon, Stromgald Scourge
+4 Lord of the Undead
+1 Noxious Ghoul
+4 Skirk Ridge Exhumer
+4 Squee, Goblin Nabob
+24 Swamp
+4 Veilborn Ghoul
+3 Vengeful Pharaoh
+4 Zombie Infestation
+[sideboard]
