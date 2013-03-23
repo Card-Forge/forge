@@ -18,14 +18,13 @@
 package forge.card.cost;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
@@ -38,6 +37,72 @@ import forge.view.ButtonUtil;
  * The Class CostPutCounter.
  */
 public class CostPutCounter extends CostPartWithList {
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class InputPayCostPutCounter extends InputPayCostBase {
+        private final String type;
+        private final CostPutCounter costPutCounter;
+        private final int nNeeded;
+        private final SpellAbility sa;
+        private static final long serialVersionUID = 2685832214519141903L;
+        private List<Card> typeList;
+        private int nPut = 0;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param type
+         * @param costPutCounter
+         * @param nNeeded
+         * @param payment
+         * @param sa
+         */
+        public InputPayCostPutCounter(CountDownLatch cdl, String type, CostPutCounter costPutCounter, int nNeeded, CostPayment payment, SpellAbility sa) {
+            super(cdl, payment);
+            this.type = type;
+            this.costPutCounter = costPutCounter;
+            this.nNeeded = nNeeded;
+            this.sa = sa;
+        }
+
+        @Override
+        public void showMessage() {
+            if ((nNeeded == 0) || (nNeeded == this.nPut)) {
+                this.done();
+            }
+
+            final StringBuilder msg = new StringBuilder("Put ");
+            final int nLeft = nNeeded - this.nPut;
+            msg.append(nLeft).append(" ");
+            msg.append(costPutCounter.getCounter()).append(" on ");
+
+            msg.append(costPutCounter.getDescriptiveType());
+            if (nLeft > 1) {
+                msg.append("s");
+            }
+
+            this.typeList = CardLists.getValidCards(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
+            CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+            ButtonUtil.enableOnlyCancel();
+        }
+
+        @Override
+        public void selectCard(final Card card) {
+            if (this.typeList.contains(card)) {
+                this.nPut++;
+                costPutCounter.addToList(card);
+                card.addCounter(costPutCounter.getCounter(), 1, false);
+
+                if (nNeeded == this.nPut) {
+                    this.done();
+                } else {
+                    this.showMessage();
+                }
+            }
+        }
+    }
+
     // Put Counter doesn't really have a "Valid" portion of the cost
     private final CounterType counter;
     private int lastPaidAmount = 0;
@@ -179,7 +244,7 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
@@ -187,14 +252,13 @@ public class CostPutCounter extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             source.addCounter(this.getCounter(), c, false);
-            payment.setPaidManaPart(this);
             this.addToList(source);
-            return true;
         } else {
-            final Input inp = CostPutCounter.putCounterType(ability, this.getType(), payment, this, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-            return false;
+            CountDownLatch cdl = new CountDownLatch(1);
+            setInputAndWait(new InputPayCostPutCounter(cdl, this.getType(), this, c, payment, ability), cdl);
         }
+        if ( !payment.isCanceled())
+            addListToHash(ability, "CounterPut");
     }
 
     /*
@@ -228,85 +292,5 @@ public class CostPutCounter extends CostPartWithList {
             this.addToList(card);
         }
         return true;
-    }
-
-    /**
-     * <p>
-     * returnType.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param costPutCounter
-     *            TODO
-     * @param nNeeded
-     *            the n needed
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input putCounterType(final SpellAbility sa, final String type, final CostPayment payment,
-            final CostPutCounter costPutCounter, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-            private List<Card> typeList;
-            private int nPut = 0;
-
-            @Override
-            public void showMessage() {
-                if ((nNeeded == 0) || (nNeeded == this.nPut)) {
-                    this.done();
-                }
-
-                final StringBuilder msg = new StringBuilder("Put ");
-                final int nLeft = nNeeded - this.nPut;
-                msg.append(nLeft).append(" ");
-                msg.append(costPutCounter.getCounter()).append(" on ");
-
-                msg.append(costPutCounter.getDescriptiveType());
-                if (nLeft > 1) {
-                    msg.append("s");
-                }
-
-                this.typeList = CardLists.getValidCards(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
-                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (this.typeList.contains(card)) {
-                    this.nPut++;
-                    costPutCounter.addToList(card);
-                    card.addCounter(costPutCounter.getCounter(), 1, false);
-
-                    if (nNeeded == this.nPut) {
-                        this.done();
-                    } else {
-                        this.showMessage();
-                    }
-                }
-            }
-
-            public void done() {
-                this.stop();
-                payment.paidCost(costPutCounter);
-            }
-
-            public void cancel() {
-                this.stop();
-                costPutCounter.addListToHash(sa, "CounterPut");
-                payment.cancelCost();
-            }
-        };
-
-        return target;
     }
 }

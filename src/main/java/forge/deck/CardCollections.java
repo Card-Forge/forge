@@ -19,9 +19,12 @@ package forge.deck;
 
 import java.io.File;
 
+import org.apache.commons.lang.time.StopWatch;
+
 import forge.deck.io.DeckGroupSerializer;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.OldDeckParser;
+import forge.gui.toolbox.FSkin;
 import forge.properties.NewConstants;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
@@ -44,6 +47,9 @@ public class CardCollections {
      * @param file the file
      */
     public CardCollections() {
+        FSkin.setProgessBarMessage("Loading decks");
+        StopWatch sw = new StopWatch();
+        sw.start();
         this.constructed = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_CONSTRUCTED_DIR), true));
         this.draft = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(NewConstants.DECK_DRAFT_DIR)));
         this.sealed = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(NewConstants.DECK_SEALED_DIR)));
@@ -51,8 +57,10 @@ public class CardCollections {
         this.scheme = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_SCHEME_DIR)));
         this.plane = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(NewConstants.DECK_PLANE_DIR)));
 
-        System.out.printf("Read decks: %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar.%n", constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size());
-
+        sw.stop();
+        System.out.printf("Read decks (%d ms): %d constructed, %d sealed, %d draft, %d cubes, %d scheme, %d planar.%n", sw.getTime(), constructed.size(), sealed.size(), draft.size(), cube.size(), scheme.size(), plane.size());
+//        int sum = constructed.size() + sealed.size() + draft.size() + cube.size() + scheme.size() + plane.size();
+//        FSkin.setProgessBarMessage(String.format("Loaded %d decks in %f sec", sum, sw.getTime() / 1000f ));
         // remove this after most people have been switched to new layout
         final OldDeckParser oldParser = new OldDeckParser(this.constructed, this.draft, this.sealed, this.cube);
         oldParser.tryParse();

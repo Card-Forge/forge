@@ -17,10 +17,11 @@
  */
 package forge.card.cost;
 
+import java.util.concurrent.CountDownLatch;
+
 import com.google.common.base.Strings;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -206,7 +207,7 @@ public class CostPartMana extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         int manaToAdd = 0;
         if (!this.hasNoXManaCost()) {
             // if X cost is a defined value, other than xPaid
@@ -215,19 +216,19 @@ public class CostPartMana extends CostPart {
                 manaToAdd = AbilityUtils.calculateAmount(source, "X", ability) * this.getXMana();
             }
         }
-        if (!this.getManaToPay().equals("0") || (manaToAdd > 0)) {
-            final Input inp = new InputPayManaOfCostPayment(game, this, ability, payment, manaToAdd);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+        
+        CountDownLatch cdl = new CountDownLatch(1);
+        final Input inp;
+        if (!"0".equals(this.getManaToPay()) || manaToAdd > 0) {
+            inp = new InputPayManaOfCostPayment(game, this, ability, payment, manaToAdd, cdl);
+            
         } else if (this.getXMana() > 0) {
-            final Input inp = new InputPayManaX(game, ability, payment, this);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-        } else {
-            payment.paidCost(this);
+            inp = new InputPayManaX(game, ability, payment, this, cdl);
         }
-
-        // We return false here because the Inputs set above should recall
-        // payment.payCosts()
-        return false;
+        else inp = null;
+        if ( null != inp) {
+            setInputAndWait(inp, cdl);
+        }
     }
 
     /*

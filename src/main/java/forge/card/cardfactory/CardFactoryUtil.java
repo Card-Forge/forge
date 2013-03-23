@@ -1537,6 +1537,10 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(c.getTotalDamageDoneBy(), m, c);
         }
 
+        if (sq[0].equals("TotalDamageReceivedThisTurn")) {
+            return CardFactoryUtil.doXMath(c.getTotalDamageRecievedThisTurn(), m, c);
+        }
+
         // Count$YourPoisonCounters
         if (sq[0].contains("YourPoisonCounters")) {
             return CardFactoryUtil.doXMath(cardController.getPoisonCounters(), m, c);

@@ -179,7 +179,7 @@ public class MatchController {
             
             getInput().clearInput();
             getInput().resetInput();
-            getInput().setNewInput(currentGame);
+            //getInput().setNewInput(currentGame);
             
             
 //            Thread thGame = new GameInputUpdatesThread(this, currentGame);

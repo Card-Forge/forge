@@ -2,7 +2,7 @@ package forge.game;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.CountDownLatch;
 import com.google.common.collect.Lists;
 
 import forge.Card;
@@ -25,7 +25,9 @@ import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
 import forge.control.input.InputControl;
+import forge.control.input.InputPayManaBase;
 import forge.control.input.InputPayManaSimple;
+import forge.error.BugReporter;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -387,6 +389,7 @@ public class GameActionPlay {
             ability = ability.getSubAbility();
         }
 
+        System.out.println("Playing:" + sa.getDescription() + " of " + sa.getSourceCard() +  " new = " + newAbility);
         if (newAbility) {
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
             CostPayment payment = null;
@@ -405,15 +408,25 @@ public class GameActionPlay {
             } else {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
+
+            if  (!manaCost.isPaid()) {
+                CountDownLatch cdlWaitForPayment = new CountDownLatch(1);
+                matchInput.setInput(new InputPayManaSimple(game, sa, manaCost, cdlWaitForPayment));
+                try {
+                    cdlWaitForPayment.await();
+                } catch (Exception e) {
+                    BugReporter.reportException(e);
+                } 
+            }
+
+            
             if (manaCost.isPaid()) {
                 if (sa.isSpell() && !source.isCopiedSpell()) {
                     sa.setSourceCard(game.getAction().moveToStack(source));
                 }
 
                 game.getStack().add(sa);
-            } else {
-                matchInput.setInput(new InputPayManaSimple(game, sa, manaCost));
-            }
+            } 
         }
     }
 
@@ -448,12 +461,22 @@ public class GameActionPlay {
             } else {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
+            
+            final CountDownLatch cdlWaitForPayment = new CountDownLatch(1);
+            
+            if( !manaCost.isPaid() ) {
+                matchInput.setInput(new InputPayManaSimple(game, sa, getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost())), cdlWaitForPayment));
+                try {
+                    cdlWaitForPayment.await();
+                } catch (Exception e) {
+                    BugReporter.reportException(e);
+                }
+            }
+            
             if (manaCost.isPaid()) {
                 AbilityUtils.resolve(sa, false);
-                return;
-            } else {
-                matchInput.setInput(new InputPayManaSimple(game, sa, true));
             }
+
         }
     }
 
@@ -549,5 +572,24 @@ public class GameActionPlay {
                 }
             }
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param chosen
+     * @param p
+     * @param inputPayManaBase
+     * @param manaCost
+     * @param saPaidFor
+     */
+    public void playManaAbilityAsPayment(final SpellAbility chosen, final Player p, final InputPayManaBase inputPayManaBase) {
+        Runnable proc = new Runnable() {
+            @Override
+            public void run() {
+                p.getGame().getActionPlay().playSpellAbility(chosen, p);
+                inputPayManaBase.onManaAbilityPlayed(p, chosen);
+            }
+        }; 
+        FThreads.invokeInNewThread(proc, true);
     }
 }

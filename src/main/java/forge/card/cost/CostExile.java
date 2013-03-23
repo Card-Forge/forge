@@ -20,6 +20,7 @@ package forge.card.cost;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import forge.Card;
 import forge.CardLists;
@@ -49,18 +50,14 @@ public class CostExile extends CostPartWithList {
     // ExileFromTop<Num/Type{/TypeDescription}> (of library)
     // ExileSameGrave<Num/Type{/TypeDescription}>
 
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    private static final class InputExileFrom extends Input {
+    private static final class InputExileFrom extends InputPayCostBase {
         private final SpellAbility sa;
         private final String type;
         private final int nNeeded;
-        private final CostPayment payment;
         private final CostExile part;
         private static final long serialVersionUID = 734256837615635021L;
         private List<Card> typeList;
+        
 
         /**
          * TODO: Write javadoc for Constructor.
@@ -70,11 +67,11 @@ public class CostExile extends CostPartWithList {
          * @param payment
          * @param part
          */
-        private InputExileFrom(SpellAbility sa, String type, int nNeeded, CostPayment payment, CostExile part) {
+        private InputExileFrom(CountDownLatch cdl, SpellAbility sa, String type, int nNeeded, CostPayment payment, CostExile part) {
+            super(cdl, payment);
             this.sa = sa;
             this.type = type;
             this.nNeeded = nNeeded;
-            this.payment = payment;
             this.part = part;
         }
 
@@ -107,33 +104,15 @@ public class CostExile extends CostPartWithList {
                 }
             }
         }
-
-        @Override
-        public void selectButtonCancel() {
-            this.cancel();
-        }
-
-        public void done() {
-            this.stop();
-            part.addListToHash(sa, "Exiled");
-            payment.paidCost(part);
-        }
-
-        public void cancel() {
-            this.stop();
-            payment.cancelCost();
-        }
     }
 
     /** 
      * TODO: Write javadoc for this type.
      *
      */
-    private static final class InputExileFromSame extends Input {
+    private static final class InputExileFromSame extends InputPayCostBase {
         private final List<Card> list;
         private final CostExile part;
-        private final CostPayment payment;
-        private final SpellAbility sa;
         private final int nNeeded;
         private final List<Player> payableZone;
         private static final long serialVersionUID = 734256837615635021L;
@@ -148,12 +127,10 @@ public class CostExile extends CostPartWithList {
          * @param nNeeded
          * @param payableZone
          */
-        private InputExileFromSame(List<Card> list, CostExile part, CostPayment payment, SpellAbility sa, int nNeeded,
-                List<Player> payableZone) {
+        private InputExileFromSame(CountDownLatch cdl, List<Card> list, CostExile part, CostPayment payment, int nNeeded, List<Player> payableZone) {
+            super(cdl, payment);
             this.list = list;
             this.part = part;
-            this.payment = payment;
-            this.sa = sa;
             this.nNeeded = nNeeded;
             this.payableZone = payableZone;
         }
@@ -196,30 +173,14 @@ public class CostExile extends CostPartWithList {
                 }
             }
         }
-
-        @Override
-        public void selectButtonCancel() {
-            this.cancel();
-        }
-
-        public void done() {
-            this.stop();
-            part.addListToHash(sa, "Exiled");
-            payment.paidCost(part);
-        }
-
-        public void cancel() {
-            this.stop();
-            payment.cancelCost();
-        }
     }
 
     /** 
      * TODO: Write javadoc for this type.
      *
      */
-    private static final class InputExileFromStack extends Input {
-        private final CostPayment payment;
+    private static final class InputExileFromStack extends InputPayCostBase {
+
         private final SpellAbility sa;
         private final String type;
         private final int nNeeded;
@@ -236,8 +197,8 @@ public class CostExile extends CostPartWithList {
          * @param nNeeded
          * @param part
          */
-        private InputExileFromStack(CostPayment payment, SpellAbility sa, String type, int nNeeded, CostExile part) {
-            this.payment = payment;
+        private InputExileFromStack(CountDownLatch cdl, CostPayment payment, SpellAbility sa, String type, int nNeeded, CostExile part) {
+            super(cdl, payment);
             this.sa = sa;
             this.type = type;
             this.nNeeded = nNeeded;
@@ -293,31 +254,14 @@ public class CostExile extends CostPartWithList {
                 }
             }
         }
-
-        @Override
-        public void selectButtonCancel() {
-            this.cancel();
-        }
-
-        public void done() {
-            this.stop();
-            part.addListToHash(sa, "Exiled");
-            payment.paidCost(part);
-        }
-
-        public void cancel() {
-            this.stop();
-            payment.cancelCost();
-        }
     }
 
     /** 
      * TODO: Write javadoc for this type.
      *
      */
-    private static final class InputExileType extends Input {
+    private static final class InputExileType extends InputPayCostBase {
         private final CostExile part;
-        private final CostPayment payment;
         private final String type;
         private final int nNeeded;
         private final SpellAbility sa;
@@ -333,9 +277,9 @@ public class CostExile extends CostPartWithList {
          * @param nNeeded
          * @param sa
          */
-        private InputExileType(CostExile part, CostPayment payment, String type, int nNeeded, SpellAbility sa) {
+        private InputExileType(CountDownLatch cdl, CostExile part, CostPayment payment, String type, int nNeeded, SpellAbility sa) {
+            super(cdl, payment);
             this.part = part;
-            this.payment = payment;
             this.type = type;
             this.nNeeded = nNeeded;
             this.sa = sa;
@@ -367,11 +311,6 @@ public class CostExile extends CostPartWithList {
         }
 
         @Override
-        public void selectButtonCancel() {
-            this.cancel();
-        }
-
-        @Override
         public void selectCard(final Card card) {
             if (this.typeList.contains(card)) {
                 this.nExiles++;
@@ -389,25 +328,13 @@ public class CostExile extends CostPartWithList {
                 }
             }
         }
-
-        public void done() {
-            this.stop();
-            part.addListToHash(sa, "Exiled");
-            payment.paidCost(part);
-        }
-
-        public void cancel() {
-            this.stop();
-            payment.cancelCost();
-        }
     }
 
     /** 
      * TODO: Write javadoc for this type.
      *
      */
-    private static final class InputExileThis extends Input {
-        private final CostPayment payment;
+    private static final class InputExileThis extends InputPayCostBase {
         private final CostExile part;
         private final SpellAbility sa;
         private static final long serialVersionUID = 678668673002725001L;
@@ -418,30 +345,27 @@ public class CostExile extends CostPartWithList {
          * @param part
          * @param sa
          */
-        private InputExileThis(CostPayment payment, CostExile part, SpellAbility sa) {
-            this.payment = payment;
+        private InputExileThis(CountDownLatch cdl, CostPayment payment, CostExile part, SpellAbility sa) {
+            super(cdl, payment);
             this.part = part;
             this.sa = sa;
         }
-
         @Override
         public void showMessage() {
             final Card card = sa.getSourceCard();
             if ( sa.getActivatingPlayer().getZone(part.getFrom()).contains(card)) {
-
                 boolean choice = GuiDialog.confirm(card, card.getName() + " - Exile?");
                 if (choice) {
-                    payment.getAbility().addCostToHashList(card, "Exiled");
                     Singletons.getModel().getGame().getAction().exile(card);
                     part.addToList(card);
                     this.stop();
                     part.addListToHash(sa, "Exiled");
-                    payment.paidCost(part);
+                    done();
                 } else {
-                    this.stop();
-                    payment.cancelCost();
+                    cancel();
                 }
             }
+            else cancel();
         }
     }
 
@@ -619,7 +543,7 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
@@ -636,7 +560,7 @@ public class CostExile extends CostPartWithList {
             for (final Card card : list) {
                 Singletons.getModel().getGame().getAction().exile(card);
             }
-            payment.paidCost(this);
+            payment.setPaidPart(this);
         }
         list = CardLists.getValidCards(list, this.getType().split(";"), activator, source);
         if (c == null) {
@@ -651,13 +575,15 @@ public class CostExile extends CostPartWithList {
             }
         }
         
+        final CountDownLatch cdl = new CountDownLatch(1);
+        
         Input target = null;
         if (this.payCostFromSource()) {
-            target = new InputExileThis(payment, this, ability);
+            target = new InputExileThis(cdl, payment, this, ability);
         } else if (this.from.equals(ZoneType.Battlefield) || this.from.equals(ZoneType.Hand)) {
-            target = new InputExileType(this, payment, this.getType(), c, ability);
+            target = new InputExileType(cdl, this, payment, this.getType(), c, ability);
         } else if (this.from.equals(ZoneType.Stack)) {
-            target = new InputExileFromStack(payment, ability, this.getType(), c, this);
+            target = new InputExileFromStack(cdl,payment, ability, this.getType(), c, this);
         } else if (this.from.equals(ZoneType.Library)) {
             // this does not create input
             CostExile.exileFromTop(ability, this, payment, c);
@@ -672,13 +598,13 @@ public class CostExile extends CostPartWithList {
                     payableZone.add(p);
                 }
             }
-            target = new InputExileFromSame(list, this, payment, ability, c, payableZone);
+            target = new InputExileFromSame(cdl, list, this, payment, c, payableZone);
         } else {
-            target = new InputExileFrom(ability, this.getType(), c, payment, this);
+            target = new InputExileFrom(cdl,ability, this.getType(), c, payment, this);
         }
-        if ( null != target )
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(target);
-        return false;
+        setInputAndWait(target, cdl);
+        if(!payment.isCanceled())
+            addListToHash(ability, "Exiled");
     }
 
     /*
@@ -762,7 +688,7 @@ public class CostExile extends CostPartWithList {
                 Singletons.getModel().getGame().getAction().exile(c);
             }
             part.addListToHash(sa, "Exiled");
-            payment.paidCost(part);
+            payment.setPaidPart(part);
         } else {
             payment.cancelCost();
         }

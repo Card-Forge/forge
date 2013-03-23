@@ -176,29 +176,11 @@ public class SpellAbilityRequirements {
      */
     public final void needPayment() {
         if (!this.isFree) {
-            this.startPaying();
-        } else {
-            this.finishPaying();
-        }
-    }
+            this.payment.setRequirements(this);
+            this.payment.changeCost();
+            this.payment.payCost();
+        } 
 
-    /**
-     * <p>
-     * startPaying.
-     * </p>
-     */
-    public final void startPaying() {
-        this.payment.setRequirements(this);
-        this.payment.changeCost();
-        this.payment.payCost();
-    }
-
-    /**
-     * <p>
-     * finishPaying.
-     * </p>
-     */
-    public final void finishPaying() {
         if (this.payment.isCanceled()) {
             final Card c = this.ability.getSourceCard();
 

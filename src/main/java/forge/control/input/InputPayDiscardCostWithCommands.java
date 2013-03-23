@@ -42,7 +42,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id: InputPayManaCostAbility.java 15673 2012-05-23 14:01:35Z ArsenalNut $
  */
-public class InputPayDiscardCost extends Input {
+public class InputPayDiscardCostWithCommands extends Input {
     /**
      * Constant <code>serialVersionUID=2685832214529141991L</code>.
      */
@@ -70,7 +70,7 @@ public class InputPayDiscardCost extends Input {
      * @param unpaidCommand
      *            a {@link forge.Command} object.
      */
-    public InputPayDiscardCost(final CostDiscard cost, final SpellAbility sa, final Command paidCommand,
+    public InputPayDiscardCostWithCommands(final CostDiscard cost, final SpellAbility sa, final Command paidCommand,
             final Command unpaidCommand) {
         final Card source = sa.getSourceCard();
         final Player human = Singletons.getControl().getPlayer();

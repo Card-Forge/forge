@@ -14,5 +14,10 @@ public class InputLockUI extends Input {
         ButtonUtil.disableAll();
         CMatchUI.SINGLETON_INSTANCE.showMessage("Waiting for actions...");
     }
+    
+    @Override
+    public String toString() {
+        return "lockUI"; 
+    }
 
 }

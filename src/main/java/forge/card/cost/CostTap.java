@@ -93,14 +93,12 @@ public class CostTap extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         // if (!canPay(ability, source, ability.getActivatingPlayer(),
         // payment.getCost()))
         // return false;
 
         source.tap();
-        payment.setPaidManaPart(this);
-        return true;
     }
 
     /*

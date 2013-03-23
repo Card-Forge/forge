@@ -1,5 +1,7 @@
 package forge.control.input;
 
+import java.util.concurrent.CountDownLatch;
+
 import forge.Card;
 import forge.Singletons;
 import forge.card.cost.CostPartMana;
@@ -8,7 +10,6 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
@@ -18,21 +19,20 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
     
     // I would kill the one who made 2 classes like above
     private final String originalManaCost;
-    private final SpellAbility sa;
     private final int manaToAdd;
     private final CostPayment payment;
+    private final CountDownLatch cdlFinished;
 
-    public InputPayManaOfCostPayment(final GameState game, CostPartMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd) {
-        super(game);
+    public InputPayManaOfCostPayment(final GameState game, CostPartMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd, CountDownLatch cdl) {
+        super(game, spellAbility);
         manaCost = new ManaCostBeingPaid(costMana.getManaToPay());
         manaCost.increaseColorlessMana(toAdd);
 
         this.costMana = costMana;
         originalManaCost = costMana.getMana();
-        sa = spellAbility;
         manaToAdd = toAdd;
         this.payment = payment;
-
+        cdlFinished = cdl;
     }
 
     private static final long serialVersionUID = 3467312982164195091L;
@@ -47,19 +47,6 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
     }
 
     @Override
-    public void selectCard(final Card card) {
-        // prevent cards from tapping themselves if ability is a
-        // tapability, although it should already be tapped
-        this.manaCost = activateManaAbility(sa, card, this.manaCost);
-
-        if (this.manaCost.isPaid()) {
-            this.done();
-        } else if (Singletons.getModel().getMatch().getInput().getInput() == this) {
-            this.showMessage();
-        }
-    }
-
-    @Override
     public void selectPlayer(final Player player) {
         if (player == whoPays) {
             if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
@@ -70,8 +57,9 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         }
     }
 
-    private void done() {
-        final Card source = sa.getSourceCard();
+    @Override
+    protected void done() {
+        final Card source = saPaidFor.getSourceCard();
         if (this.phyLifeToLose > 0) {
             Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, source);
         }
@@ -81,47 +69,39 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         this.stop();
 
         if (costMana.hasNoXManaCost() || (manaToAdd > 0)) {
-            payment.paidCost(costMana);
+            payment.setPaidPart(costMana);
         } else {
             source.setXManaCostPaid(0);
-            final Input inp = new InputPayManaX(game, sa, payment, costMana);
+            final Input inp = new InputPayManaX(game, saPaidFor, payment, costMana, cdlFinished);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         }
 
-        // If this is a spell with convoke, re-tap all creatures used
-        // for it.
-        // This is done to make sure Taps triggers go off at the right
-        // time
-        // (i.e. AFTER cost payment, they are tapped previously as well
-        // so that
-        // any mana tapabilities can't be used in payment as well as
-        // being tapped for convoke)
+        // If this is a spell with convoke, re-tap all creatures used  for it.
+        // This is done to make sure Taps triggers go off at the right time
+        // (i.e. AFTER cost payment, they are tapped previously as well so that
+        // any mana tapabilities can't be used in payment as well as being tapped for convoke)
 
-        if (sa.getTappedForConvoke() != null) {
-            for (final Card c : sa.getTappedForConvoke()) {
+        handleConvokedCards(false);
+    }
+    
+    protected void handleConvokedCards(boolean isCancelled) {
+        if (saPaidFor.getTappedForConvoke() != null) {
+            for (final Card c : saPaidFor.getTappedForConvoke()) {
                 c.setTapped(false);
-                c.tap();
+                if (!isCancelled)
+                    c.tap();
             }
-            sa.clearTappedForConvoke();
-        }
-
+            saPaidFor.clearTappedForConvoke();
+        }        
     }
 
     @Override
     public void selectButtonCancel() {
-        // If we're paying for a spell with convoke, untap all creatures
-        // used for it.
-        if (sa.getTappedForConvoke() != null) {
-            for (final Card c : sa.getTappedForConvoke()) {
-                c.setTapped(false);
-            }
-            sa.clearTappedForConvoke();
-        }
+        handleConvokedCards(true);
 
         this.stop();
         this.resetManaCost();
         payment.cancelCost();
-        Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield).updateObservers();
     }
 
     @Override
@@ -144,17 +124,6 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
         if (manaCost.isPaid()) {
             this.done();
-        }
-    }
-
-    @Override
-    public void selectManaPool(String color) {
-        manaCost = InputPayManaBase.activateManaAbility(color, sa, this.manaCost);
-
-        if (this.manaCost.isPaid()) {
-            this.done();
-        } else if (Singletons.getModel().getMatch().getInput().getInput() == this) {
-            this.showMessage();
         }
     }
 

@@ -58,7 +58,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.control.input.Input;
-import forge.control.input.InputPayDiscardCost;
+import forge.control.input.InputPayDiscardCostWithCommands;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayReturnCost;
 import forge.game.event.CardDamagedEvent;
@@ -602,7 +602,7 @@ public final class GameActionUtil {
             toSet = new InputPayReturnCost((CostReturn) costPart, ability, paid, unpaid);
         }
         else if (costPart instanceof CostDiscard) {
-            toSet = new InputPayDiscardCost((CostDiscard) costPart, ability, paid, unpaid);
+            toSet = new InputPayDiscardCostWithCommands((CostDiscard) costPart, ability, paid, unpaid);
         }
         else if (costPart instanceof CostPartMana) {
             toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString(), paid, unpaid);

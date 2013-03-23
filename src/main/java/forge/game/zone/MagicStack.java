@@ -1290,25 +1290,17 @@ public class MagicStack extends MyObservable {
                 ComputerUtil.playStack(sa, (AIPlayer) activePlayer, game);
             }
         } else {
-            // If only one, just add as necessary
-            if (activePlayerSAs.size() == 1) {
-                SpellAbility next = activePlayerSAs.get(0);
+            List<SpellAbility> orderedSAs = activePlayerSAs;
+            if (activePlayerSAs.size() > 1) { // give a dual list form to create instead of needing to do it one at a time
+                orderedSAs = GuiChoose.order("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs, null, null);
+            }
+            int size = orderedSAs.size();
+            for (int i = size - 1; i >= 0; i--) {
+                SpellAbility next = orderedSAs.get(i);
                 if (next.isTrigger()) {
                     game.getActionPlay().playSpellAbility(next, activePlayer);
                 } else {
                     this.add(next);
-                }
-            } else {
-                // Otherwise, gave a dual list form to create instead of needing to do it one at a time
-                List<SpellAbility> orderedSAs = GuiChoose.order("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs, null, null);
-                int size = orderedSAs.size();
-                for (int i = size - 1; i >= 0; i--) {
-                    SpellAbility next = orderedSAs.get(i);
-                    if (next.isTrigger()) {
-                        game.getActionPlay().playSpellAbility(next, activePlayer);
-                    } else {
-                        this.add(next);
-                    }
                 }
             }
         }

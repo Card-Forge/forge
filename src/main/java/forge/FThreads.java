@@ -6,8 +6,6 @@ import java.util.concurrent.Executors;
 
 import javax.swing.SwingUtilities;
 
-import forge.control.input.InputLockUI;
-
 /** 
  * TODO: Write javadoc for this type.
  *
@@ -87,18 +85,17 @@ public class FThreads {
         invokeInNewThread(proc, false);
     }
     
-    private final static InputLockUI inpuptLock = new InputLockUI();
     public static void invokeInNewThread(final Runnable proc, boolean lockUI) {
         Runnable toRun = proc;
         if( lockUI ) {
             // checkEDT("FThreads.invokeInNewthread", true)
-            Singletons.getModel().getMatch().getInput().setInput(inpuptLock);
+            Singletons.getModel().getMatch().getInput().lock();
             toRun = new Runnable() {
                 @Override
                 public void run() {
                     proc.run();
                     // may try special unlock method here
-                    Singletons.getModel().getMatch().getInput().resetInput();
+                    Singletons.getModel().getMatch().getInput().unlock();
                 }
             };
         }

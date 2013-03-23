@@ -114,7 +114,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            a boolean.
      */
     public final void resetInput() { 
-        this.inputStack.pop();
+        if ( !this.inputStack.isEmpty() )
+            this.inputStack.pop();
         this.updateObservers();
     }
 
@@ -208,8 +209,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         PhaseHandler ph = game.getPhaseHandler();
 
         final Input tmp = getActualInput();
-        String message = String.format("%s's %s, priority of %s [%sP] input is %s", ph.getPlayerTurn(), ph.getPhase(), ph.getPriorityPlayer(), ph.isPlayerPriorityAllowed() ? "+" : "-", tmp == null ? "null" : tmp.getClass().getSimpleName());
+        String message = String.format("%s's %s, priority of %s [%sP] input is %s \t stack:%s", ph.getPlayerTurn(), ph.getPhase(), ph.getPriorityPlayer(), ph.isPlayerPriorityAllowed() ? "+" : "-", tmp == null ? "null" : tmp.getClass().getSimpleName(), inputStack);
         System.out.println(message);
+
         if (tmp != null) {
             //System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer() + " @ input is " + tmp.getClass().getName() );
             CMessage.SINGLETON_INSTANCE.getInputControl().setInput(tmp);
@@ -217,6 +219,20 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             // System.out.println("cannot have priority, forced to pass");
             ph.getPriorityPlayer().getController().passPriority();
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    private final static InputLockUI inpuptLock = new InputLockUI();
+    public void lock() {
+        setInput(inpuptLock);
+    }
+    
+    public void unlock() { 
+        if ( inputStack.isEmpty() || inputStack.peek() != inpuptLock )
+            throw new RuntimeException("Trying to unlock input which is not locked! Do check when your threads terminate!");
+        resetInput();
     }
 
 } // InputControl

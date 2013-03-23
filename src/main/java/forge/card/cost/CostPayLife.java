@@ -123,7 +123,7 @@ public class CostPayLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final String amount = this.getAmount();
         final Player activator = ability.getActivatingPlayer();
         final int life = activator.getLife();
@@ -147,16 +147,12 @@ public class CostPayLife extends CostPart {
         final StringBuilder sb = new StringBuilder();
         sb.append(source.getName()).append(" - Pay ").append(c).append(" Life?");
 
-        if (GuiDialog.confirm(source, sb.toString()) && activator.canPayLife(c)) {
+        if (activator.canPayLife(c) && GuiDialog.confirm(source, sb.toString())) {
             activator.payLife(c, null);
             this.setLastPaidAmount(c);
-            payment.setPaidManaPart(this);
         } else {
             payment.setCancel(true);
-            payment.getRequirements().finishPaying();
-            return false;
         }
-        return true;
     }
 
     /*

@@ -7675,6 +7675,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.receivedDamageFromThisTurn.clear();
     }
 
+    public final int getTotalDamageRecievedThisTurn() {
+        int total = 0;
+        for (int damage : this.receivedDamageFromThisTurn.values()) {
+            total += damage;
+        }
+        return total;
+    }
+
     /**
      * <p>
      * addDealtDamageToThisTurn.

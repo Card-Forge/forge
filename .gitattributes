@@ -13695,6 +13695,7 @@ src/main/java/forge/card/cost/CostUnattach.java -text
 src/main/java/forge/card/cost/CostUntap.java -text
 src/main/java/forge/card/cost/CostUntapType.java -text
 src/main/java/forge/card/cost/CostUtil.java -text
+src/main/java/forge/card/cost/InputPayCostBase.java -text
 src/main/java/forge/card/cost/package-info.java svneol=native#text/plain
 src/main/java/forge/card/mana/IParserManaCost.java -text
 src/main/java/forge/card/mana/Mana.java svneol=native#text/plain
@@ -13803,7 +13804,7 @@ src/main/java/forge/control/input/InputControl.java svneol=native#text/plain
 src/main/java/forge/control/input/InputLockUI.java -text
 src/main/java/forge/control/input/InputMulligan.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPassPriority.java svneol=native#text/plain
-src/main/java/forge/control/input/InputPayDiscardCost.java -text
+src/main/java/forge/control/input/InputPayDiscardCostWithCommands.java -text
 src/main/java/forge/control/input/InputPayManaBase.java -text
 src/main/java/forge/control/input/InputPayManaExecuteCommands.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaOfCostPayment.java -text

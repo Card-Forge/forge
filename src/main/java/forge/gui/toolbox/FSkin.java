@@ -458,6 +458,26 @@ public enum FSkin {
             }
         }
     }
+    
+    public static void setProgessBarMessage(final String message) { 
+        setProgessBarMessage(message, 0);
+    }
+    public static void setProgessBarMessage(final String message, final int cnt) {
+        final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if ( cnt > 0 ) {
+                    barProgress.reset();
+                    barProgress.setMaximum(4);
+                }
+                barProgress.setShowETA(false);
+                barProgress.setShowCount(cnt > 0);
+                barProgress.setDescription(message);
+                
+            }
+        });
+    }
 
     /**
      * Loads two sprites: the default (which should be a complete
@@ -487,19 +507,12 @@ public enum FSkin {
         if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default"); }
 
         // Everything OK?
+        
         final FProgressBar barProgress = FView.SINGLETON_INSTANCE.getSplash().getProgressBar();
+        setProgessBarMessage("Processing image sprites: ", 4);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                barProgress.reset();
-                barProgress.setShowETA(false);
-                barProgress.setDescription("Processing image sprites: ");
-            }
-        });
 
         // Grab and test various sprite files.
-        barProgress.setMaximum(4);
         final File f1 = new File(DEFAULT_DIR + FILE_ICON_SPRITE);
         final File f2 = new File(preferredDir + FILE_ICON_SPRITE);
         final File f3 = new File(DEFAULT_DIR + FILE_FOIL_SPRITE);
@@ -567,14 +580,7 @@ public enum FSkin {
         UIManager.put("Table.alternateRowColor", new Color(240, 240, 240));
 
         // Images loaded; can start UI init.
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                barProgress.setShowETA(false);
-                barProgress.setShowCount(false);
-                barProgress.setDescription("Creating display components.");
-            }
-        });
+        setProgessBarMessage("Creating display components.");
 
         // Clear references to buffered images
         FSkin.bimDefaultSprite.flush();

@@ -19,6 +19,7 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import com.google.common.base.Predicate;
 
@@ -42,6 +43,99 @@ import forge.view.ButtonUtil;
  */
 public class CostDiscard extends CostPartWithList {
     // Discard<Num/Type{/TypeDescription}>
+
+    // Inputs
+    
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class InputPayCostDiscard extends InputPayCostBase {
+        private final List<Card> handList;
+        private final CostDiscard part;
+        private final int nNeeded;
+        private final String discType;
+        private static final long serialVersionUID = -329993322080934435L;
+        private int nDiscard = 0;
+        private boolean sameName;
+
+        private final SpellAbility sa;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param sa
+         * @param handList
+         * @param part
+         * @param payment
+         * @param nNeeded
+         * @param sp
+         * @param discType
+         */
+        public InputPayCostDiscard(CountDownLatch cdl, SpellAbility sa, List<Card> handList, CostDiscard part, CostPayment payment, int nNeeded, String discType) {
+            super(cdl, payment);
+            this.sa = sa;
+            this.handList = handList;
+            this.part = part;
+            this.nNeeded = nNeeded;
+            this.discType = discType;
+            sameName = discType.contains("WithSameName");
+        }
+
+        @Override
+        public void showMessage() {
+            if (nNeeded == 0) {
+                this.done();
+            }
+
+            if (sa.getActivatingPlayer().getZone(ZoneType.Hand).isEmpty()) {
+                this.stop();
+            }
+            final StringBuilder type = new StringBuilder("");
+            if (!discType.equals("Card")) {
+                type.append(" ").append(discType);
+            }
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Select a ");
+            sb.append(part.getDescriptiveType());
+            sb.append(" to discard.");
+            if (nNeeded > 1) {
+                sb.append(" You have ");
+                sb.append(nNeeded - this.nDiscard);
+                sb.append(" remaining.");
+            }
+            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+            if (nNeeded > 0) {
+                ButtonUtil.enableOnlyCancel();
+            }
+        }
+
+        @Override
+        public void selectCard(final Card card) {
+            Zone zone = Singletons.getModel().getGame().getZoneOf(card);
+            if (zone.is(ZoneType.Hand) && handList.contains(card)) {
+                if (!sameName || part.getList().isEmpty()
+                        || part.getList().get(0).getName().equals(card.getName())) {
+                    // send in List<Card> for Typing
+                    card.getController().discard(card, sa);
+                    part.addToList(card);
+                    handList.remove(card);
+                    this.nDiscard++;
+
+                    // in case no more cards in hand
+                    if (this.nDiscard == nNeeded) {
+                        this.done();
+                    } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).size() == 0) {
+                        // really
+                        // shouldn't
+                        // happen
+                        this.cancel();
+                    } else {
+                        this.showMessage();
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Instantiates a new cost discard.
@@ -167,36 +261,36 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final Player activator = ability.getActivatingPlayer();
         List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
-        String discType = this.getType();
+        String discardType = this.getType();
         final String amount = this.getAmount();
         this.resetList();
 
         if (this.payCostFromSource()) {
             if (!handList.contains(source)) {
-                return false;
+                payment.setCancel(true);
             }
             activator.discard(source, ability);
-            payment.setPaidManaPart(this);
+            payment.setPaidPart(this);
             //this.addToList(source);
-        } else if (discType.equals("Hand")) {
+        } else if (discardType.equals("Hand")) {
             this.setList(handList);
             activator.discardHand(ability);
-            payment.setPaidManaPart(this);
-        } else if (discType.equals("LastDrawn")) {
+            payment.setPaidPart(this);
+        } else if (discardType.equals("LastDrawn")) {
             final Card lastDrawn = activator.getLastDrawnCard();
             this.addToList(lastDrawn);
             if (!handList.contains(lastDrawn)) {
-                return false;
+                payment.setCancel(true);
             }
             activator.discard(lastDrawn, ability);
-            payment.setPaidManaPart(this);
+            payment.setPaidPart(this);
         } else {
             Integer c = this.convertAmount();
 
-            if (discType.equals("Random")) {
+            if (discardType.equals("Random")) {
                 if (c == null) {
                     final String sVar = ability.getSVar(amount);
                     // Generalize this
@@ -208,9 +302,9 @@ public class CostDiscard extends CostPartWithList {
                 }
 
                 this.setList(activator.discardRandom(c, ability));
-                payment.setPaidManaPart(this);
+                payment.setPaidPart(this);
             } else {
-                String type = new String(discType);
+                String type = new String(discardType);
                 boolean sameName = false;
                 if (type.contains("+WithSameName")) {
                     sameName = true;
@@ -243,13 +337,13 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                final Input inp = CostDiscard.inputDiscardCost(discType, handList, ability, payment, this, c);
-                Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-                return false;
+                CountDownLatch cdl = new CountDownLatch(1);
+                final Input inp = new InputPayCostDiscard(cdl, ability, handList, this, payment, c, discardType);
+                setInputAndWait(inp, cdl);
             }
         }
-        this.addListToHash(ability, "Discarded");
-        return true;
+        if ( !payment.isCanceled())
+            this.addListToHash(ability, "Discarded");
     }
 
     /*
@@ -308,107 +402,4 @@ public class CostDiscard extends CostPartWithList {
 
     // Inputs
 
-    /**
-     * <p>
-     * input_discardCost.
-     * </p>
-     * 
-     * @param discType
-     *            a {@link java.lang.String} object.
-     * @param handList
-     *            a {@link forge.CardList} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param part
-     *            TODO
-     * @param nNeeded
-     *            a int.
-     * 
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputDiscardCost(final String discType, final List<Card> handList, final SpellAbility sa,
-            final CostPayment payment, final CostDiscard part, final int nNeeded) {
-        final SpellAbility sp = sa;
-        final Input target = new Input() {
-            private static final long serialVersionUID = -329993322080934435L;
-
-            private int nDiscard = 0;
-            private boolean sameName = discType.contains("WithSameName");
-
-            @Override
-            public void showMessage() {
-                if (nNeeded == 0) {
-                    this.done();
-                }
-
-                if (sa.getActivatingPlayer().getZone(ZoneType.Hand).isEmpty()) {
-                    this.stop();
-                }
-                final StringBuilder type = new StringBuilder("");
-                if (!discType.equals("Card")) {
-                    type.append(" ").append(discType);
-                }
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Select a ");
-                sb.append(part.getDescriptiveType());
-                sb.append(" to discard.");
-                if (nNeeded > 1) {
-                    sb.append(" You have ");
-                    sb.append(nNeeded - this.nDiscard);
-                    sb.append(" remaining.");
-                }
-                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                if (nNeeded > 0) {
-                    ButtonUtil.enableOnlyCancel();
-                }
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-                if (zone.is(ZoneType.Hand) && handList.contains(card)) {
-                    if (!sameName || part.getList().isEmpty()
-                            || part.getList().get(0).getName().equals(card.getName())) {
-                        // send in List<Card> for Typing
-                        card.getController().discard(card, sp);
-                        part.addToList(card);
-                        handList.remove(card);
-                        this.nDiscard++;
-
-                        // in case no more cards in hand
-                        if (this.nDiscard == nNeeded) {
-                            this.done();
-                        } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).size() == 0) {
-                            // really
-                            // shouldn't
-                            // happen
-                            this.cancel();
-                        } else {
-                            this.showMessage();
-                        }
-                    }
-                }
-            }
-
-            public void cancel() {
-                this.stop();
-                payment.cancelCost();
-            }
-
-            public void done() {
-                this.stop();
-                part.addListToHash(sp, "Discarded");
-                payment.paidCost(part);
-            }
-        };
-
-        return target;
-    } // input_discard()
 }

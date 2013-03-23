@@ -114,7 +114,7 @@ public class CostUnattach extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         this.resetList();
         Player activator = ability.getActivatingPlayer();
         Card cardToUnattach = findCardToUnattach(source, activator, ability);
@@ -123,14 +123,9 @@ public class CostUnattach extends CostPartWithList {
             cardToUnattach.unEquipCard(equippingCard);
             this.addToList(cardToUnattach);
             this.addListToHash(ability, "Unattached");
-            payment.setPaidManaPart(this);
         } else {
             payment.setCancel(true);
-            payment.getRequirements().finishPaying();
-            return false;
         }
-
-        return true;
     }
 
     private Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {

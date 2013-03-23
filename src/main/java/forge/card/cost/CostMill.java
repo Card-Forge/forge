@@ -126,7 +126,7 @@ public class CostMill extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
@@ -145,7 +145,7 @@ public class CostMill extends CostPartWithList {
         if ((list == null) || (list.size() > c)) {
             // I don't believe this is possible
             payment.cancelCost();
-            return false;
+            return;
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -161,11 +161,8 @@ public class CostMill extends CostPartWithList {
                 Singletons.getModel().getGame().getAction().moveToGraveyard(card);
             }
             this.addListToHash(ability, "Milled");
-            payment.paidCost(this);
-            return false;
         } else {
             payment.cancelCost();
-            return false;
         }
     }
 

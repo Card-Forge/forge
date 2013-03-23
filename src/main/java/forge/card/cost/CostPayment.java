@@ -179,26 +179,15 @@ public class CostPayment {
      * @param bPaid
      *            the b paid
      */
-    public final void setPaidManaPart(final CostPart part) {
+    public final void setPaidPart(final CostPart part) {
         this.paidCostParts.add(part);
-    }
-
-    /**
-     * Paid cost.
-     * 
-     * @param part
-     *            the part
-     */
-    public final void paidCost(final CostPart part) {
-        this.setPaidManaPart(part);
-        this.payCost();
     }
 
     /**
      * Cancel cost (including CostPart for refunding).
      */
     public final void cancelCost(final CostPart part) {
-        this.setPaidManaPart(part);
+        this.setPaidPart(part);
         this.cancelCost();
     }
 
@@ -207,7 +196,6 @@ public class CostPayment {
      */
     public final void cancelCost() {
         this.setCancel(true);
-        this.req.finishPaying();
     }
 
     /**
@@ -220,7 +208,6 @@ public class CostPayment {
     public final boolean payCost() {
         // Nothing actually ever checks this return value, is it needed?
         if (this.bCancel) {
-            this.req.finishPaying();
             return false;
         }
 
@@ -230,13 +217,13 @@ public class CostPayment {
                 continue;
             }
 
-            if (!part.payHuman(this.ability, this.card, this, game)) {
-                return false;
-            }
+            part.payHuman(this.ability, this.card, this, game);
+            if ( isCanceled() ) break;
+            
+            setPaidPart(part);
         }
-
-        this.resetUndoList();
-        this.req.finishPaying();
+        
+        this.resetUndoList(); // ??
         return true;
     }
 
