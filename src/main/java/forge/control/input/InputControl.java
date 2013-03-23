@@ -94,6 +94,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         this.updateObservers();
     }
 
+    public final boolean isEmpty() {
+        return inputStack.isEmpty();
+    }
+    
     /**
      * <p>
      * updateInput.
@@ -116,12 +120,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         // issues
         if (!this.inputStack.isEmpty()) { // incoming input to Control
             return this.inputStack.peek();
-        }
-
-        if (handler.hasPhaseEffects()) {
-            // Handle begin phase stuff, then start back from the top
-            handler.handleBeginPhase();
-            return this.getActualInput(game);
         }
 
         // If the Phase we're in doesn't allow for Priority, return null to move

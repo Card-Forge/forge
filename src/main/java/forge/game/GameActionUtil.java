@@ -61,7 +61,6 @@ import forge.control.input.InputPayDiscardCostWithCommands;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayReturnCost;
 import forge.control.input.InputPayment;
-import forge.control.input.InputSynchronized;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.player.AIPlayer;
@@ -575,7 +574,7 @@ public final class GameActionUtil {
         //the following costs need inputs and can't be combined at the moment
         
         
-        InputSynchronized toSet = null;
+        InputPayment toSet = null;
         if (costPart instanceof CostReturn) {
             toSet = new InputPayReturnCost((CostReturn) costPart, ability);
         }
@@ -589,7 +588,7 @@ public final class GameActionUtil {
         if (toSet != null) {
             
             FThreads.setInputAndWait(toSet);
-            if (((InputPayment)toSet).isPaid() ) {
+            if (toSet.isPaid() ) {
                 paid.execute();
             } else {
                 unpaid.execute();

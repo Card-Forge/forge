@@ -107,5 +107,13 @@ public class FThreads {
         Singletons.getModel().getMatch().getInput().setInput(input);
         input.awaitLatchRelease();
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public static boolean isEDT() {
+        return SwingUtilities.isEventDispatchThread();
+    }
    
 }

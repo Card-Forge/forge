@@ -1,5 +1,5 @@
 package forge.control.input;
 
-public interface InputPayment {
+public interface InputPayment extends InputSynchronized {
     boolean isPaid();
 }

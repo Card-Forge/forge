@@ -50,12 +50,23 @@ public class InputProxy implements Observer {
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
         ButtonUtil.disableAll();
-        GameState game = match.getCurrentGame();
-        PhaseHandler ph = game.getPhaseHandler();
+        final GameState game = match.getCurrentGame();
+        final PhaseHandler ph = game.getPhaseHandler();
+        
+        //System.out.print((FThreads.isEDT() ? "EDT > " : "TRD > ") + ph.debugPrintState());
+        if ( match.getInput().isEmpty() && ph.hasPhaseEffects()) {
+            //System.out.println(" handle begin phase");
+            FThreads.invokeInNewThread(new Runnable() { 
+                @Override public void run() { 
+                    ph.handleBeginPhase();
+                    update(observable, obj); 
+                } 
+            }, true);
+            return;
+        }
         
         final Input nextInput = match.getInput().getActualInput(game);
-        System.out.print(ph.debugPrintState());
-        System.out.printf(" input is %s \t stack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), match.getInput().printInputStack());
+        //System.out.printf(" input is %s \t stack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), match.getInput().printInputStack());
         
         if (nextInput != null) {
             this.input = nextInput;
