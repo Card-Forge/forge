@@ -41,7 +41,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id: InputPayManaCostAbility.java 15673 2012-05-23 14:01:35Z ArsenalNut $
  */
-public class InputPayReturnCost extends Input implements InputPayment {
+public class InputPayReturnCost extends InputBase implements InputPayment {
     /**
      * Constant <code>serialVersionUID=2685832214529141991L</code>.
      */

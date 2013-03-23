@@ -28,7 +28,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
@@ -47,7 +47,7 @@ public class CostTapType extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputPayCostTapType extends Input {
+    public static final class InputPayCostTapType extends InputBase {
         private final CostTapType tapType;
         private final int nCards;
         private final List<Card> cardList;

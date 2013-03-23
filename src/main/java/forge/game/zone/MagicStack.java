@@ -49,7 +49,7 @@ import forge.card.spellability.TargetChoices;
 import forge.card.spellability.TargetSelection;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
@@ -859,7 +859,7 @@ public class MagicStack extends MyObservable {
             if (creats.size() != 0) {
                 haunterDiesWork.setDescription("");
 
-                final Input target = new Input() {
+                final InputBase target = new InputBase() {
                     private static final long serialVersionUID = 1981791992623774490L;
 
                     @Override

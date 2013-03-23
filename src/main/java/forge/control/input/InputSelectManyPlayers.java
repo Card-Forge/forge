@@ -10,10 +10,10 @@ import forge.game.player.Player;
 public class InputSelectManyPlayers extends InputSelectMany<Player> {
     private static final long serialVersionUID = -8209690791522735L;
 
-    protected final Function<List<Player>, Input> onComplete;
+    protected final Function<List<Player>, InputBase> onComplete;
     private final Predicate<Player> allowedFilter;
 
-    public InputSelectManyPlayers(final Predicate<Player> allowedRule, int min, int max, final Function<List<Player>, Input> onDone) {
+    public InputSelectManyPlayers(final Predicate<Player> allowedRule, int min, int max, final Function<List<Player>, InputBase> onDone) {
 
         super(min, max);
         allowedFilter = allowedRule;
@@ -34,7 +34,7 @@ public class InputSelectManyPlayers extends InputSelectMany<Player> {
     }
 
     @Override
-    protected Input onDone() {
+    protected InputBase onDone() {
         return onComplete.apply(selected);
     }
 }

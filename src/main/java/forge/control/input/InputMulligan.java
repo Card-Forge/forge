@@ -49,7 +49,7 @@ import forge.view.ButtonUtil;
   * @author Forge
   * @version $Id$
   */
-public class InputMulligan extends Input {
+public class InputMulligan extends InputBase {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
 

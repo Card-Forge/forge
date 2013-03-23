@@ -37,7 +37,7 @@ import forge.Singletons;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
 import forge.control.input.InputPayManaBase;
@@ -388,7 +388,7 @@ public class CField implements ICDoc {
         // Roujin's bug fix version dated 2-12-2012
         final Card c = CField.this.view.getTabletop().getHoveredCard(e);
 
-        final Input input = CMessage.SINGLETON_INSTANCE.getInputControl().getInput();
+        final InputBase input = CMessage.SINGLETON_INSTANCE.getInputControl().getInput();
 
         if (c != null && c.isInZone(ZoneType.Battlefield)) {
             if (c.isTapped() && (input instanceof InputPayManaSimple || input instanceof InputPayManaExecuteCommands)) {
@@ -443,7 +443,7 @@ public class CField implements ICDoc {
     /** */
     private void manaAction(String constantColor) {
         if (CField.this.player == CField.this.playerViewer) {
-            final Input in = Singletons.getModel().getMatch().getInput().getInput();
+            final InputBase in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputPayManaBase) {
                 // Do something
                 ((InputPayManaBase) in).selectManaPool(constantColor);

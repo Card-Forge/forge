@@ -2,13 +2,13 @@ package forge.card.cost;
 
 import java.util.concurrent.CountDownLatch;
 
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-abstract class InputPayCostBase extends Input { 
+abstract class InputPayCostBase extends InputBase { 
     private static final long serialVersionUID = -2967434867139585579L;
     
     private final CountDownLatch cdlDone;

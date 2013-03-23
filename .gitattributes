@@ -13796,8 +13796,8 @@ src/main/java/forge/control/Lobby.java -text
 src/main/java/forge/control/RestartUtil.java -text
 src/main/java/forge/control/bazaar/ControlStall.java -text
 src/main/java/forge/control/bazaar/package-info.java svneol=native#text/plain
-src/main/java/forge/control/input/Input.java svneol=native#text/plain
 src/main/java/forge/control/input/InputAttack.java svneol=native#text/plain
+src/main/java/forge/control/input/InputBase.java svneol=native#text/plain
 src/main/java/forge/control/input/InputBlock.java svneol=native#text/plain
 src/main/java/forge/control/input/InputCleanup.java svneol=native#text/plain
 src/main/java/forge/control/input/InputControl.java svneol=native#text/plain

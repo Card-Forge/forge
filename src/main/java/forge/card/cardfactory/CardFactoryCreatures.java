@@ -44,7 +44,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.control.input.InputSelectManyCards;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.ai.ComputerUtilCombat;
@@ -477,7 +477,7 @@ public class CardFactoryCreatures {
     private static void getCard_PhyrexianDreadnought(final Card card, final String cardName) {
         final Player player = card.getController();
 
-        final Input target = new InputSelectManyCards(0, Integer.MAX_VALUE) {
+        final InputBase target = new InputSelectManyCards(0, Integer.MAX_VALUE) {
             private static final long serialVersionUID = 2698036349873486664L;
 
             @Override
@@ -495,7 +495,7 @@ public class CardFactoryCreatures {
             }
 
             @Override
-            protected Input onCancel() {
+            protected InputBase onCancel() {
                 Singletons.getModel().getGame().getAction().sacrifice(card, null);
                 return null;
             }
@@ -507,7 +507,7 @@ public class CardFactoryCreatures {
             } // selectCard()
 
             @Override
-            protected Input onDone() {
+            protected InputBase onDone() {
                 for (final Card sac : selected) {
                     Singletons.getModel().getGame().getAction().sacrifice(sac, null);
                 }

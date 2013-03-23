@@ -59,7 +59,7 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.control.input.InputPayDiscardCostWithCommands;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayReturnCost;
@@ -577,7 +577,7 @@ public final class GameActionUtil {
         //the following costs need inputs and can't be combined at the moment
         
         
-        Input toSet = null;
+        InputBase toSet = null;
         CountDownLatch cdl = new CountDownLatch(1);
         if (costPart instanceof CostReturn) {
             toSet = new InputPayReturnCost((CostReturn) costPart, ability, cdl);

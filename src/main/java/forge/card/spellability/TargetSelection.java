@@ -30,7 +30,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -50,7 +50,7 @@ public class TargetSelection {
      * TODO: Write javadoc for this type.
      *
      */
-    public final class InputSelectTargets extends Input {
+    public final class InputSelectTargets extends InputBase {
         private final TargetSelection select;
         private final List<Card> choices;
         private final ArrayList<Object> alreadyTargeted;
@@ -525,7 +525,7 @@ public class TargetSelection {
         
         if (zone.contains(ZoneType.Battlefield) && zone.size() == 1) {
             CountDownLatch cdl = new CountDownLatch(1);
-            Input inp = new InputSelectTargets(cdl, this, choices, objects, true, this.target, this.ability, mandatory);
+            InputBase inp = new InputSelectTargets(cdl, this, choices, objects, true, this.target, this.ability, mandatory);
             FThreads.setInputAndWait(inp, cdl);
             bTargetingDone = !bCancel;
         } else {

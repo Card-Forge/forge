@@ -13,7 +13,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import forge.Card;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
 import forge.control.input.InputPassPriority;
@@ -38,12 +38,12 @@ import forge.item.CardPrinted;
  */
 public class PlayerControllerHuman extends PlayerController {
 
-    private final Input defaultInput;
-    private final Input blockInput;
-    private final Input cleanupInput;
+    private final InputBase defaultInput;
+    private final InputBase blockInput;
+    private final InputBase cleanupInput;
     private final HumanPlayer player;
     
-    public final Input getDefaultInput() {
+    public final InputBase getDefaultInput() {
         return defaultInput;
     }
 
@@ -75,14 +75,14 @@ public class PlayerControllerHuman extends PlayerController {
     }
 
     /** Input to use when player has to declare blockers */
-    public Input getBlockInput() {
+    public InputBase getBlockInput() {
         return blockInput;
     }
 
     /**
      * @return the cleanupInput
      */
-    public Input getCleanupInput() {
+    public InputBase getCleanupInput() {
         return cleanupInput;
     }
 

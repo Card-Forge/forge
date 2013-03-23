@@ -41,7 +41,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputSelectManyCards;
 import forge.game.GameActionUtil;
@@ -464,7 +464,7 @@ public class Upkeep extends Phase {
                 @Override
                 public void resolve() {
                     final List<Card> targets = CardLists.getTargetableCards(abyssGetTargets, this);
-                    final Input chooseArt = new InputSelectManyCards(1, 1) {
+                    final InputBase chooseArt = new InputSelectManyCards(1, 1) {
                         private static final long serialVersionUID = 4820011040853968644L;
 
                         @Override
@@ -478,7 +478,7 @@ public class Upkeep extends Phase {
                         };
 
                         @Override
-                        protected Input onDone() {
+                        protected InputBase onDone() {
                             game.getAction().destroyNoRegeneration(selected.get(0));
                             return null;
                         }
@@ -1034,7 +1034,7 @@ public class Upkeep extends Phase {
                                 list.remove(toTap);
                             }
                         } else {
-                            Singletons.getModel().getMatch().getInput().setInput(new Input() {
+                            Singletons.getModel().getMatch().getInput().setInput(new InputBase() {
                                 private static final long serialVersionUID = 5313424586016061612L;
 
                                 @Override

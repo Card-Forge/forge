@@ -40,7 +40,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=3955194449319994301L</code>. */
     private static final long serialVersionUID = 3955194449319994301L;
 
-    private final Stack<Input> inputStack = new Stack<Input>();
+    private final Stack<InputBase> inputStack = new Stack<InputBase>();
 
     /**
      * <p>
@@ -48,9 +48,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param in
-     *            a {@link forge.control.input.Input} object.
+     *            a {@link forge.control.input.InputBase} object.
      */
-    public final void setInput(final Input in) {
+    public final void setInput(final InputBase in) {
         //System.out.println(in.getClass().getName());
         this.inputStack.push(in);
         // System.out.print("Current: " + input + "; Stack = " + inputStack);
@@ -63,11 +63,11 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * </p>
      * 
      * @param in
-     *            a {@link forge.control.input.Input} object.
+     *            a {@link forge.control.input.InputBase} object.
      * @param bAddToResolving
      *            a boolean.
      */
-    public final void setInputInterrupt(final Input in) {
+    public final void setInputInterrupt(final InputBase in) {
         // Make this
         this.inputStack.push(in);
         this.updateObservers();
@@ -78,9 +78,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * Getter for the field <code>input</code>.
      * </p>
      * 
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
-    public final Input getInput() {
+    public final InputBase getInput() {
         return this.inputStack.peek();
     }
 
@@ -113,9 +113,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * updateInput.
      * </p>
      * 
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
-    public final Input getActualInput(GameState game) {
+    public final InputBase getActualInput(GameState game) {
         if ( !game.hasMulliganned() )
             return new InputMulligan();
 
@@ -197,7 +197,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     public final void setNewInput(GameState game) {
         PhaseHandler ph = game.getPhaseHandler();
 
-        final Input tmp = getActualInput(game);
+        final InputBase tmp = getActualInput(game);
         String message = String.format("%s's %s, priority of %s [%sP] input is %s \t stack:%s", ph.getPlayerTurn(), ph.getPhase(), ph.getPriorityPlayer(), ph.isPlayerPriorityAllowed() ? "+" : "-", tmp == null ? "null" : tmp.getClass().getSimpleName(), inputStack);
         System.out.println(message);
 

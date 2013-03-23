@@ -34,7 +34,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputCleanup extends Input {
+public class InputCleanup extends InputBase {
     /** Constant <code>serialVersionUID=-4164275418971547948L</code>. */
     private static final long serialVersionUID = -4164275418971547948L;
     private final GameState game;

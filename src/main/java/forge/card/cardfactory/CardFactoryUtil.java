@@ -62,7 +62,7 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.control.input.InputSelectManyCards;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -98,10 +98,10 @@ public class CardFactoryUtil {
      *            a {@link forge.CardList} object.
      * @param message
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
-    public static Input inputDestroyNoRegeneration(final List<Card> choices, final String message) {
-        final Input target = new Input() {
+    public static InputBase inputDestroyNoRegeneration(final List<Card> choices, final String message) {
+        final InputBase target = new InputBase() {
             private static final long serialVersionUID = -6637588517573573232L;
 
             @Override
@@ -549,11 +549,11 @@ public class CardFactoryUtil {
      *            a {@link forge.CardList} object.
      * @param paid
      *            a {@link forge.Command} object.
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
-    public static Input masterOfTheWildHuntInputTargetCreature(final SpellAbility spell, final List<Card> choices,
+    public static InputBase masterOfTheWildHuntInputTargetCreature(final SpellAbility spell, final List<Card> choices,
             final Command paid) {
-        final Input target = new Input() {
+        final InputBase target = new InputBase() {
             private static final long serialVersionUID = -1779224307654698954L;
 
             @Override
@@ -593,10 +593,10 @@ public class CardFactoryUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param card
      *            a {@link forge.Card} object.
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
-    public static Input modularInput(final SpellAbility ability, final Card card) {
-        final Input modularInput = new Input() {
+    public static InputBase modularInput(final SpellAbility ability, final Card card) {
+        final InputBase modularInput = new InputBase() {
 
             private static final long serialVersionUID = 2322926875771867901L;
 
@@ -2302,10 +2302,10 @@ public class CardFactoryUtil {
      *            a int.
      * @param type
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
-    public static Input inputUntapUpToNType(final int n, final String type) {
-        final Input untap = new Input() {
+    public static InputBase inputUntapUpToNType(final int n, final String type) {
+        final InputBase untap = new InputBase() {
             private static final long serialVersionUID = -2167059918040912025L;
 
             private final int stop = n;
@@ -3155,7 +3155,7 @@ public class CardFactoryUtil {
             private static final long serialVersionUID = 1981791992623774490L;
 
             @Override
-            protected Input onDone() {
+            protected InputBase onDone() {
                 haunterDiesWork.setTargetCard(selected.get(0));
                 Singletons.getModel().getGame().getStack().add(haunterDiesWork);
                 return null;

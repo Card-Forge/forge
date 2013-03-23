@@ -27,7 +27,7 @@ import forge.CounterType;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -380,7 +380,7 @@ public class CostRemoveCounter extends CostPartWithList {
                 }
             }
 
-            final Input inp;
+            final InputBase inp;
             CountDownLatch cdl = new CountDownLatch(1);
             if (this.getZone().equals(ZoneType.Battlefield)) {
                 inp = new InputPayCostRemoveCounterType(cdl, payment, c, ability, this.getType(), this);

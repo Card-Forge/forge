@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 
 import javax.swing.SwingUtilities;
 
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.error.BugReporter;
 
 /** 
@@ -105,7 +105,7 @@ public class FThreads {
         invokeInNewThread(toRun);
     }
 
-    public static final void setInputAndWait(Input inp, CountDownLatch cdl) {
+    public static final void setInputAndWait(InputBase inp, CountDownLatch cdl) {
         checkEDT("FThreads.setInputAndWait", false);
         Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         try {

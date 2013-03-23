@@ -18,7 +18,7 @@
 package forge.game.ai;
 
 import forge.FThreads;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 
 /**
  * <p>
@@ -28,7 +28,7 @@ import forge.control.input.Input;
  * @author Forge
  * @version $Id$
  */
-public class AiInputCommon extends Input {
+public class AiInputCommon extends InputBase {
     /** Constant <code>serialVersionUID=-3091338639571662216L</code>. */
     private static final long serialVersionUID = -3091338639571662216L;
 

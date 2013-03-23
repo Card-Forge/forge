@@ -25,7 +25,7 @@ import forge.Card;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.control.input.InputPayManaOfCostPayment;
 import forge.control.input.InputPayManaX;
 import forge.game.GameState;
@@ -219,7 +219,7 @@ public class CostPartMana extends CostPart {
         }
         
         CountDownLatch cdl = new CountDownLatch(1);
-        final Input inp;
+        final InputBase inp;
         if (!"0".equals(this.getManaToPay()) || manaToAdd > 0) {
             inp = new InputPayManaOfCostPayment(game, this, ability, payment, manaToAdd, cdl);
             

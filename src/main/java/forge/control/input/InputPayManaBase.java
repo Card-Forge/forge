@@ -28,7 +28,7 @@ import forge.gui.match.views.VMessage;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class InputPayManaBase extends Input {
+public abstract class InputPayManaBase extends InputBase {
 
     private static final long serialVersionUID = -9133423708688480255L;
 

@@ -30,7 +30,7 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
@@ -578,7 +578,7 @@ public class CostExile extends CostPartWithList {
         
         final CountDownLatch cdl = new CountDownLatch(1);
         
-        Input target = null;
+        InputBase target = null;
         if (this.payCostFromSource()) {
             target = new InputExileThis(cdl, payment, this, ability);
         } else if (this.from.equals(ZoneType.Battlefield) || this.from.equals(ZoneType.Hand)) {

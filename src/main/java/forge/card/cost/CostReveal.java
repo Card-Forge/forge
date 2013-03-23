@@ -27,7 +27,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -47,7 +47,7 @@ public class CostReveal extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputPayReveal extends Input {
+    public static final class InputPayReveal extends InputBase {
         private final CostReveal part;
         private final String discType;
         private final List<Card> handList;
@@ -279,7 +279,7 @@ public class CostReveal extends CostPartWithList {
             }
             if (num > 0) {
                 final CountDownLatch cdl = new CountDownLatch(1);
-                final Input inp = new InputPayReveal(cdl, this, this.getType(), handList, ability, payment, num);;
+                final InputBase inp = new InputPayReveal(cdl, this, this.getType(), handList, ability, payment, num);;
                 FThreads.setInputAndWait(inp, cdl);
             } 
         }

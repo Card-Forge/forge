@@ -30,7 +30,7 @@ import forge.gui.match.CMatchUI;
  * @author Forge
  * @version $Id$
  */
-public abstract class Input implements java.io.Serializable {
+public abstract class InputBase implements java.io.Serializable {
     /** Constant <code>serialVersionUID=-6539552513871194081L</code>. */
     private static final long serialVersionUID = -6539552513871194081L;
 
@@ -41,9 +41,13 @@ public abstract class Input implements java.io.Serializable {
      * </p>
      */
     public void showMessage() {
-        CMatchUI.SINGLETON_INSTANCE.showMessage("Blank Input");
+        showMessage("Blank Input");
     }
 
+    protected void showMessage(String message) { 
+        CMatchUI.SINGLETON_INSTANCE.showMessage(message);
+    }
+    
     /**
      * <p>
      * selectCard.
@@ -104,9 +108,9 @@ public abstract class Input implements java.io.Serializable {
      * </p>
      * 
      * @param in
-     *            a {@link forge.control.input.Input} object.
+     *            a {@link forge.control.input.InputBase} object.
      */
-    public final void stopSetNext(final Input in) {
+    public final void stopSetNext(final InputBase in) {
         this.stop();
         Singletons.getModel().getMatch().getInput().setInput(in);
     }

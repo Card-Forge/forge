@@ -30,7 +30,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -339,7 +339,7 @@ public class CostDiscard extends CostPartWithList {
                 }
 
                 CountDownLatch cdl = new CountDownLatch(1);
-                final Input inp = new InputPayCostDiscard(cdl, ability, handList, this, payment, c, discardType);
+                final InputBase inp = new InputPayCostDiscard(cdl, ability, handList, this, payment, c, discardType);
                 FThreads.setInputAndWait(inp, cdl);
             }
         }

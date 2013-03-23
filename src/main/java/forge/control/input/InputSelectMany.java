@@ -11,7 +11,7 @@ import forge.view.ButtonUtil;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class InputSelectMany<T extends GameEntity> extends Input {
+public abstract class InputSelectMany<T extends GameEntity> extends InputBase {
 
     private static final long serialVersionUID = -2305549394512889450L;
 
@@ -66,7 +66,7 @@ public abstract class InputSelectMany<T extends GameEntity> extends Input {
     @Override
     public final void selectButtonCancel() {
         // this.stop();
-        Input next = onCancel(); // might add ability to stack from here
+        InputBase next = onCancel(); // might add ability to stack from here
         // if ( next != null ) {
         //   Singletons.getModel().getMatch().getInput().setInput(next);
         // }
@@ -88,7 +88,7 @@ public abstract class InputSelectMany<T extends GameEntity> extends Input {
         // if it does, uncomment the 5 lines below, use them as method body
 
         // this.stop();
-        Input next = onDone(); // might add ability to stack from here
+        InputBase next = onDone(); // might add ability to stack from here
         // if ( next != null ) {
         //   Singletons.getModel().getMatch().getInput().setInput(next);
         // }
@@ -112,11 +112,11 @@ public abstract class InputSelectMany<T extends GameEntity> extends Input {
     }
 
     // must define these
-    protected abstract Input onDone();
+    protected abstract InputBase onDone();
     protected abstract boolean isValidChoice(T choice);
 
     // might re-define later
-    protected Input onCancel() { return null; }
+    protected InputBase onCancel() { return null; }
     protected boolean canCancelWithSomethingSelected() { return false; }
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
     protected boolean hasAllTargets() { return selected.size() >= max; }

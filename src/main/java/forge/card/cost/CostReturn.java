@@ -27,7 +27,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
@@ -47,7 +47,7 @@ public class CostReturn extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputPayReturnType extends Input {
+    public static final class InputPayReturnType extends InputBase {
         private final SpellAbility sa;
         private final CostReturn part;
         private final int nNeeded;
@@ -253,8 +253,8 @@ public class CostReturn extends CostPartWithList {
             }
         } else {
             CountDownLatch cdl = new CountDownLatch(1);
-            final Input target = new InputPayReturnType(cdl, ability, this, c, this.getType(), payment);
-            final Input inp = target;
+            final InputBase target = new InputPayReturnType(cdl, ability, this, c, this.getType(), payment);
+            final InputBase inp = target;
             FThreads.setInputAndWait(inp, cdl);
         }
 

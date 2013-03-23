@@ -72,7 +72,7 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
             payment.setPaidPart(costMana);
         } else {
             source.setXManaCostPaid(0);
-            final Input inp = new InputPayManaX(game, saPaidFor, payment, costMana, cdlFinished);
+            final InputBase inp = new InputPayManaX(game, saPaidFor, payment, costMana, cdlFinished);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         }
 
