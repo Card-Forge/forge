@@ -2,7 +2,6 @@ package forge.game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 import com.google.common.collect.Lists;
 
 import forge.Card;
@@ -24,10 +23,8 @@ import forge.card.spellability.SpellAbilityRequirements;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
-import forge.control.input.InputControl;
 import forge.control.input.InputPayManaBase;
 import forge.control.input.InputPayManaSimple;
-import forge.error.BugReporter;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -40,12 +37,10 @@ import forge.gui.GuiChoose;
 public class GameActionPlay {
     
     private final GameState game;
-    private final InputControl matchInput;
     
 
-    public GameActionPlay(final GameState game0, InputControl input) {
+    public GameActionPlay(final GameState game0) {
         game = game0;
-        this.matchInput = input;
     }
     
     public final void playCardWithoutManaCost(final Card c, Player player) {
@@ -407,13 +402,7 @@ public class GameActionPlay {
             }
 
             if  (!manaCost.isPaid()) {
-                CountDownLatch cdlWaitForPayment = new CountDownLatch(1);
-                matchInput.setInput(new InputPayManaSimple(game, sa, manaCost, cdlWaitForPayment));
-                try {
-                    cdlWaitForPayment.await();
-                } catch (Exception e) {
-                    BugReporter.reportException(e);
-                } 
+                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, manaCost));
             }
 
             
@@ -458,16 +447,9 @@ public class GameActionPlay {
             } else {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
-            
-            final CountDownLatch cdlWaitForPayment = new CountDownLatch(1);
-            
+
             if( !manaCost.isPaid() ) {
-                matchInput.setInput(new InputPayManaSimple(game, sa, getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost())), cdlWaitForPayment));
-                try {
-                    cdlWaitForPayment.await();
-                } catch (Exception e) {
-                    BugReporter.reportException(e);
-                }
+                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()))));
             }
             
             if (manaCost.isPaid()) {

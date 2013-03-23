@@ -52,10 +52,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
     
-    // called by input to cleanup.
+    // Removes this input from the stack and releases any latches (in synchronous imports)
     protected final void stop() {
         // clears a "temp" Input like Input_PayManaCost if there is one
-        Singletons.getModel().getMatch().getInput().resetInput();
+        Singletons.getModel().getMatch().getInput().removeInput(this);
         afterStop(); // sync inputs will release their latch there
     }
     

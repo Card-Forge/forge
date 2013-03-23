@@ -1,7 +1,5 @@
 package forge.control.input;
 
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.card.cost.CostPartMana;
 import forge.card.cost.CostPayment;
@@ -19,10 +17,9 @@ public class InputPayManaX extends InputPayManaBase {
     private String colorsPaid;
     private final CostPartMana costMana;
     private final CostPayment payment;
-    private final CountDownLatch cdlFinished;
 
 
-    public InputPayManaX(final GameState game, final SpellAbility sa0, final CostPayment payment0, final CostPartMana costMana0, final CountDownLatch cdl)
+    public InputPayManaX(final GameState game, final SpellAbility sa0, final CostPayment payment0, final CostPartMana costMana0)
     {
         super(game, sa0);
 
@@ -33,7 +30,6 @@ public class InputPayManaX extends InputPayManaBase {
         costMana = costMana0;
         strX = Integer.toString(costMana.getXMana());
         manaCost = new ManaCostBeingPaid(strX);
-        cdlFinished = cdl;
     }
 
     @Override
@@ -76,14 +72,12 @@ public class InputPayManaX extends InputPayManaBase {
 
     @Override
     public void selectButtonCancel() {
-        this.stop();
         payment.cancelCost();
-        cdlFinished.countDown();
+        this.stop();
     }
 
     @Override
     public void selectButtonOK() {
-        this.stop();
         done();
     }
 
@@ -99,6 +93,6 @@ public class InputPayManaX extends InputPayManaBase {
         payment.setPaidPart(costMana);
         payment.getCard().setColorsPaid(this.colorsPaid);
         payment.getCard().setSunburstValue(this.colorsPaid.length());
-        cdlFinished.countDown();
+        this.stop();
     }
 }

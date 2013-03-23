@@ -19,15 +19,12 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -47,16 +44,15 @@ public class CostReveal extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputPayReveal extends InputBase {
+    public static final class InputPayReveal extends InputPayCostBase {
         private final CostReveal part;
         private final String discType;
         private final List<Card> handList;
         private final SpellAbility sa;
-        private final CostPayment payment;
         private final int nNeeded;
         private static final long serialVersionUID = -329993322080934435L;
         private int nReveal = 0;
-        private final CountDownLatch cdlDone;
+
 
         /**
          * TODO: Write javadoc for Constructor.
@@ -67,14 +63,13 @@ public class CostReveal extends CostPartWithList {
          * @param payment
          * @param nNeeded
          */
-        public InputPayReveal(CountDownLatch cdl, CostReveal part, String discType, List<Card> handList, SpellAbility sa,
+        public InputPayReveal(CostReveal part, String discType, List<Card> handList, SpellAbility sa,
                 CostPayment payment, int nNeeded) {
-            this.cdlDone = cdl;
+            super(payment);
             this.part = part;
             this.discType = discType;
             this.handList = handList;
             this.sa = sa;
-            this.payment = payment;
             this.nNeeded = nNeeded;
         }
 
@@ -105,11 +100,6 @@ public class CostReveal extends CostPartWithList {
         }
 
         @Override
-        public void selectButtonCancel() {
-            this.cancel();
-        }
-
-        @Override
         public void selectCard(final Card card) {
             Zone zone = Singletons.getModel().getGame().getZoneOf(card);
             if (zone.is(ZoneType.Hand) && handList.contains(card)) {
@@ -130,18 +120,6 @@ public class CostReveal extends CostPartWithList {
                     this.showMessage();
                 }
             }
-        }
-
-        public void cancel() {
-            this.stop();
-            payment.cancelCost();
-            cdlDone.countDown();
-        }
-
-        public void done() {
-            this.stop();
-            // "Inform" AI of the revealed cards
-            cdlDone.countDown();
         }
     }
 
@@ -278,9 +256,7 @@ public class CostReveal extends CostPartWithList {
                 }
             }
             if (num > 0) {
-                final CountDownLatch cdl = new CountDownLatch(1);
-                final InputBase inp = new InputPayReveal(cdl, this, this.getType(), handList, ability, payment, num);;
-                FThreads.setInputAndWait(inp, cdl);
+                FThreads.setInputAndWait(new InputPayReveal(this, this.getType(), handList, ability, payment, num));
             } 
         }
         if ( !payment.isCanceled())

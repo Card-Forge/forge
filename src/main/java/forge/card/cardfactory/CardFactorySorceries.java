@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.concurrent.CountDownLatch;
-
 import javax.swing.JOptionPane;
 
 import com.google.common.collect.Iterables;
@@ -463,9 +461,8 @@ public class CardFactorySorceries {
                     game.getAction().moveToPlay(newArtifact[0]);
                 } else {
                     final String diffCost = String.valueOf(newCMC - baseCMC);
-                    final CountDownLatch cdl = new CountDownLatch(1);
-                    InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, "Pay difference in artifacts CMC",  diffCost, cdl);
-                    FThreads.setInputAndWait(inp, cdl);
+                    InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, "Pay difference in artifacts CMC",  diffCost);
+                    FThreads.setInputAndWait(inp);
                     if ( inp.isPaid() )
                         Singletons.getModel().getGame().getAction().moveToPlay(newArtifact[0]);
                     else

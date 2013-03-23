@@ -18,8 +18,6 @@
 package forge.control.input;
 
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
@@ -42,7 +40,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id: InputPayManaCostAbility.java 15673 2012-05-23 14:01:35Z ArsenalNut $
  */
-public class InputPayDiscardCostWithCommands extends InputBase implements InputPayment {
+public class InputPayDiscardCostWithCommands extends InputSyncronizedBase implements InputPayment {
     /**
      * Constant <code>serialVersionUID=2685832214529141991L</code>.
      */
@@ -54,8 +52,6 @@ public class InputPayDiscardCostWithCommands extends InputBase implements InputP
     private CostDiscard discardCost;
     private SpellAbility ability;
     private boolean bPaid;
-
-    private final CountDownLatch cdlDone;
     public final boolean isPaid() { return bPaid; }
 
     /**
@@ -72,10 +68,9 @@ public class InputPayDiscardCostWithCommands extends InputBase implements InputP
      * @param unpaidCommand
      *            a {@link forge.Command} object.
      */
-    public InputPayDiscardCostWithCommands(final CostDiscard cost, final SpellAbility sa, final CountDownLatch cdl) {
+    public InputPayDiscardCostWithCommands(final CostDiscard cost, final SpellAbility sa) {
         final Card source = sa.getSourceCard();
         final Player human = Singletons.getControl().getPlayer();
-        this.cdlDone = cdl;
         this.ability = sa;
         this.discardCost = cost;
         this.choiceList = CardLists.getValidCards(human.getCardsIn(ZoneType.Hand), cost.getType().split(";"), human, source);
@@ -161,16 +156,13 @@ public class InputPayDiscardCostWithCommands extends InputBase implements InputP
      * 
      */
     public void done() {
-        this.stop();
         for (Card selected : this.discardCost.getList()) {
             selected.setUsedToPay(false);
             Singletons.getControl().getPlayer().discard(selected, this.ability);
         }
         this.discardCost.addListToHash(ability, "Discarded");
         bPaid = true;
-        cdlDone.countDown();
-        
-
+        this.stop();
     }
 
     /**
@@ -180,11 +172,10 @@ public class InputPayDiscardCostWithCommands extends InputBase implements InputP
      * 
      */
     public void cancel() {
-        this.stop();
         for (Card selected : this.discardCost.getList()) {
             selected.setUsedToPay(false);
         }
         bPaid = false;
-        cdlDone.countDown();
+        this.stop();
     }
 }

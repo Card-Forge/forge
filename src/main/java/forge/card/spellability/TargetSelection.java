@@ -20,8 +20,6 @@ package forge.card.spellability;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import com.google.common.base.Predicate;
 
 import forge.Card;
@@ -30,7 +28,8 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
-import forge.control.input.InputBase;
+import forge.control.input.InputSynchronized;
+import forge.control.input.InputSyncronizedBase;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -50,7 +49,7 @@ public class TargetSelection {
      * TODO: Write javadoc for this type.
      *
      */
-    public final class InputSelectTargets extends InputBase {
+    public final class InputSelectTargets extends InputSyncronizedBase {
         private final TargetSelection select;
         private final List<Card> choices;
         private final ArrayList<Object> alreadyTargeted;
@@ -58,7 +57,6 @@ public class TargetSelection {
         private final Target tgt;
         private final SpellAbility sa;
         private final boolean mandatory;
-        private final CountDownLatch cdlDone;
         private static final long serialVersionUID = -1091595663541356356L;
 
         /**
@@ -72,8 +70,7 @@ public class TargetSelection {
          * @param sa
          * @param mandatory
          */
-        public InputSelectTargets(CountDownLatch cdl, TargetSelection select, List<Card> choices, ArrayList<Object> alreadyTargeted, boolean targeted, Target tgt, SpellAbility sa, boolean mandatory) {
-            cdlDone = cdl;
+        public InputSelectTargets(TargetSelection select, List<Card> choices, ArrayList<Object> alreadyTargeted, boolean targeted, Target tgt, SpellAbility sa, boolean mandatory) {
             this.select = select;
             this.choices = choices;
             this.alreadyTargeted = alreadyTargeted;
@@ -213,7 +210,6 @@ public class TargetSelection {
 
         void done() {
             this.stop();
-            cdlDone.countDown();
         }
     }
 
@@ -524,9 +520,8 @@ public class TargetSelection {
         }
         
         if (zone.contains(ZoneType.Battlefield) && zone.size() == 1) {
-            CountDownLatch cdl = new CountDownLatch(1);
-            InputBase inp = new InputSelectTargets(cdl, this, choices, objects, true, this.target, this.ability, mandatory);
-            FThreads.setInputAndWait(inp, cdl);
+            InputSynchronized inp = new InputSelectTargets(this, choices, objects, true, this.target, this.ability, mandatory);
+            FThreads.setInputAndWait(inp);
             bTargetingDone = !bCancel;
         } else {
             this.chooseCardFromList(choices, true, mandatory);

@@ -1,14 +1,12 @@
 package forge;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.swing.SwingUtilities;
 
-import forge.control.input.InputBase;
-import forge.error.BugReporter;
+import forge.control.input.InputSynchronized;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -104,15 +102,10 @@ public class FThreads {
         }
         invokeInNewThread(toRun);
     }
-
-    public static final void setInputAndWait(InputBase inp, CountDownLatch cdl) {
-        checkEDT("FThreads.setInputAndWait", false);
-        Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-        try {
-            cdl.await();
-        } catch (InterruptedException e) {
-            BugReporter.reportException(e);
-        }
+    
+    public static void setInputAndWait(InputSynchronized input) {
+        Singletons.getModel().getMatch().getInput().setInput(input);
+        input.awaitLatchRelease();
     }
-
+   
 }

@@ -18,8 +18,6 @@
 package forge.card.cost;
 
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
@@ -61,8 +59,8 @@ public class CostUntapType extends CostPartWithList {
          * @param sa
          * @param payment
          */
-        public InputPayCostUntapY(CountDownLatch cdl, int nCards, List<Card> cardList, CostUntapType untapType, CostPayment payment) {
-            super(cdl, payment);
+        public InputPayCostUntapY(int nCards, List<Card> cardList, CostUntapType untapType, CostPayment payment) {
+            super(payment);
             this.nCards = nCards;
             this.cardList = cardList;
             this.untapType = untapType;
@@ -249,8 +247,7 @@ public class CostUntapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        CountDownLatch cdl = new CountDownLatch(1);
-        FThreads.setInputAndWait(new InputPayCostUntapY(cdl, c, typeList, this, payment), cdl);
+        FThreads.setInputAndWait(new InputPayCostUntapY(c, typeList, this, payment));
         
         if ( !payment.isCanceled() )
             addListToHash(ability, "Untapped");

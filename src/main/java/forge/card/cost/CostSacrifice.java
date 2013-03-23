@@ -19,8 +19,6 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
@@ -61,9 +59,9 @@ public class CostSacrifice extends CostPartWithList {
          * @param payment
          * @param typeList
          */
-        public InputPayCostSacrificeFromList(CountDownLatch cdl, CostSacrifice part, SpellAbility sa, int nNeeded, CostPayment payment,
+        public InputPayCostSacrificeFromList(CostSacrifice part, SpellAbility sa, int nNeeded, CostPayment payment,
                 List<Card> typeList) {
-            super(cdl, payment);
+            super(payment);
             this.part = part;
             this.sa = sa;
             this.nNeeded = nNeeded;
@@ -252,8 +250,7 @@ public class CostSacrifice extends CostPartWithList {
             if (0 == c.intValue()) {
                 return;
             }
-            final CountDownLatch cdl = new CountDownLatch(1);
-            FThreads.setInputAndWait(new InputPayCostSacrificeFromList(cdl, this, ability, c, payment, list), cdl);
+            FThreads.setInputAndWait(new InputPayCostSacrificeFromList(this, ability, c, payment, list));
         }
         if( !payment.isCanceled())
             addListToHash(ability, "Sacrificed");

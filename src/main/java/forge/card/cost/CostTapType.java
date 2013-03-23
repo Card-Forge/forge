@@ -19,8 +19,6 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
@@ -28,7 +26,6 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
@@ -47,14 +44,12 @@ public class CostTapType extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputPayCostTapType extends InputBase {
+    public static final class InputPayCostTapType extends InputPayCostBase {
         private final CostTapType tapType;
         private final int nCards;
         private final List<Card> cardList;
-        private final CostPayment payment;
         private static final long serialVersionUID = 6438988130447851042L;
         private int nTapped = 0;
-        private final CountDownLatch cdlDone;
 
         /**
          * TODO: Write javadoc for Constructor.
@@ -64,13 +59,11 @@ public class CostTapType extends CostPartWithList {
          * @param cardList
          * @param payment
          */
-        public InputPayCostTapType(CountDownLatch cdl, CostTapType tapType, int nCards, List<Card> cardList,
-                CostPayment payment) {
-            cdlDone = cdl;
+        public InputPayCostTapType(CostTapType tapType, int nCards, List<Card> cardList, CostPayment payment) {
+            super(payment);
             this.tapType = tapType;
             this.nCards = nCards;
             this.cardList = cardList;
-            this.payment = payment;
         }
 
         @Override
@@ -85,10 +78,7 @@ public class CostTapType extends CostPartWithList {
             }
         }
 
-        @Override
-        public void selectButtonCancel() {
-            this.cancel();
-        }
+
 
         @Override
         public void selectCard(final Card card) {
@@ -110,18 +100,6 @@ public class CostTapType extends CostPartWithList {
                     this.showMessage();
                 }
             }
-        }
-
-        public void cancel() {
-            this.stop();
-            payment.cancelCost();
-            cdlDone.countDown();
-        }
-
-        public void done() {
-            this.stop();
-            cdlDone.countDown();
-            
         }
     }
 
@@ -248,8 +226,7 @@ public class CostTapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        CountDownLatch cdl = new CountDownLatch(1);
-        FThreads.setInputAndWait(new InputPayCostTapType(cdl, this, c, typeList, payment), cdl);
+        FThreads.setInputAndWait(new InputPayCostTapType(this, c, typeList, payment));
         if( !payment.isCanceled())
             addListToHash(ability, "Tapped");
     }

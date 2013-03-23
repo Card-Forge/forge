@@ -1,7 +1,5 @@
 package forge.control.input;
 
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.Singletons;
 import forge.card.cost.CostPartMana;
@@ -21,9 +19,8 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
     private final String originalManaCost;
     private final int manaToAdd;
     private final CostPayment payment;
-    private final CountDownLatch cdlFinished;
 
-    public InputPayManaOfCostPayment(final GameState game, CostPartMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd, CountDownLatch cdl) {
+    public InputPayManaOfCostPayment(final GameState game, CostPartMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd) {
         super(game, spellAbility);
         manaCost = new ManaCostBeingPaid(costMana.getManaToPay());
         manaCost.increaseColorlessMana(toAdd);
@@ -32,7 +29,6 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         originalManaCost = costMana.getMana();
         manaToAdd = toAdd;
         this.payment = payment;
-        cdlFinished = cdl;
     }
 
     private static final long serialVersionUID = 3467312982164195091L;
@@ -66,14 +62,9 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         source.setColorsPaid(this.manaCost.getColorsPaid());
         source.setSunburstValue(this.manaCost.getSunburst());
         this.resetManaCost();
-        this.stop();
 
         if (costMana.hasNoXManaCost() || (manaToAdd > 0)) {
             payment.setPaidPart(costMana);
-        } else {
-            source.setXManaCostPaid(0);
-            final InputBase inp = new InputPayManaX(game, saPaidFor, payment, costMana, cdlFinished);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         }
 
         // If this is a spell with convoke, re-tap all creatures used  for it.
@@ -82,17 +73,16 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         // any mana tapabilities can't be used in payment as well as being tapped for convoke)
 
         handleConvokedCards(false);
-        cdlFinished.countDown();
+        stop();
     }
     
     @Override
     public void selectButtonCancel() {
         handleConvokedCards(true);
 
-        this.stop();
         this.resetManaCost();
         payment.cancelCost();
-        cdlFinished.countDown();
+        stop();
     }
 
     @Override

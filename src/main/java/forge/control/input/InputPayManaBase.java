@@ -28,7 +28,7 @@ import forge.gui.match.views.VMessage;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class InputPayManaBase extends InputBase {
+public abstract class InputPayManaBase extends InputSyncronizedBase {
 
     private static final long serialVersionUID = -9133423708688480255L;
 
@@ -297,7 +297,7 @@ public abstract class InputPayManaBase extends InputBase {
         // save off color needed for use by any mana and reflected mana
         subchosen.getManaPart().setExpressChoice(colorsNeeded);
         
-        System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
+        // System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
         Player p = chosen.getActivatingPlayer();
         p.getGame().getActionPlay().playManaAbilityAsPayment(chosen, p, this);
     }

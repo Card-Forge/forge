@@ -17,8 +17,6 @@
  */
 package forge.control.input;
 
-import java.util.concurrent.CountDownLatch;
-
 import forge.Singletons;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
@@ -43,8 +41,6 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
      */
     private static final long serialVersionUID = 3836655722696348713L;
 
-    final private CountDownLatch cdlDone;
-    
     private String originalManaCost;
     private String message = "";
 
@@ -69,8 +65,8 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
      * @param unpaidCommand2
      *            a {@link forge.Command} object.
      */
-    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2, final CountDownLatch cdl) {
-        this(game, prompt, manaCost2, cdl, false);
+    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2) {
+        this(game, prompt, manaCost2, false);
     }
 
     /**
@@ -89,7 +85,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
      * @param showOKButton
      *            a boolean.
      */
-    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2, final CountDownLatch cdl, final boolean showOKButton) {
+    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2, final boolean showOKButton) {
         super(game, new SpellAbility(null) {
             @Override
             public void resolve() {}
@@ -100,7 +96,6 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
         this.originalManaCost = manaCost2;
         this.phyLifeToLose = 0;
         this.message = prompt;
-        this.cdlDone = cdl;
 
         this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
         this.showOnlyOKButton = showOKButton;
@@ -139,7 +134,6 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
         Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.saPaidFor, false);
         bPaid = true;
         this.stop();
-        cdlDone.countDown();
     }
 
     /** {@inheritDoc} */
@@ -150,17 +144,14 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
         Singletons.getControl().getPlayer().getManaPool().refundManaPaid(this.saPaidFor, true);
         bPaid = false;
         this.stop();
-        cdlDone.countDown();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
         if (this.showOnlyOKButton) {
-            this.stop();
             bPaid = false;
-            cdlDone.countDown();
-            
+            this.stop();
         }
     }
 

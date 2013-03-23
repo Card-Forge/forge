@@ -22,8 +22,10 @@ import java.util.Observer;
 
 import forge.Card;
 import forge.FThreads;
-import forge.Singletons;
 import forge.control.input.Input;
+import forge.game.GameState;
+import forge.game.MatchController;
+import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.view.ButtonUtil;
 
@@ -39,39 +41,29 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private Input input;
-    private boolean valid = false;
+    private MatchController match = null;
 
+    public void setMatch(MatchController matchController) {
+        match = matchController;
+    }
+    
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
         ButtonUtil.disableAll();
-        valid = false;
+        GameState game = match.getCurrentGame();
+        PhaseHandler ph = game.getPhaseHandler();
         
-        Singletons.getModel().getMatch().getInput().setNewInput(Singletons.getModel().getGame());
-    }
-    /**
-     * <p>
-     * Setter for the field <code>input</code>.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.InputBase} object.
-     */
-    public final synchronized void setInput(final Input in) {
-        valid = true;
-        this.input = in;
+        final Input nextInput = match.getInput().getActualInput(game);
+        System.out.print(ph.debugPrintState());
+        System.out.printf(" input is %s \t stack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), match.getInput().printInputStack());
         
-        if ( null == input ) {
-            throw new NullPointerException("input is null");
+        if (nextInput != null) {
+            this.input = nextInput;
+            FThreads.invokeInEDT(new Runnable() { @Override public void run() { nextInput.showMessage(); } });
+        } else if (!ph.isPlayerPriorityAllowed()) {
+            ph.getPriorityPlayer().getController().passPriority();
         }
-        
-        FThreads.invokeInEDT(new Runnable() {
-            @Override
-            public void run() {
-                InputProxy.this.input.showMessage(); // this call may invalidate the input by the time it returns
-            }
-        });
     }
-
     /**
      * <p>
      * selectButtonOK.
@@ -125,10 +117,5 @@ public class InputProxy implements Observer {
     /** @return {@link forge.gui.InputProxy.InputBase} */
     public Input getInput() {
         return this.input;
-    }
-
-
-    public synchronized boolean isValid() {
-        return valid;
     }
 }

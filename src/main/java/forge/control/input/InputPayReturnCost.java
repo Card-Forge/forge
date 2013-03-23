@@ -18,8 +18,6 @@
 package forge.control.input;
 
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
@@ -41,7 +39,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id: InputPayManaCostAbility.java 15673 2012-05-23 14:01:35Z ArsenalNut $
  */
-public class InputPayReturnCost extends InputBase implements InputPayment {
+public class InputPayReturnCost extends InputSyncronizedBase implements InputPayment {
     /**
      * Constant <code>serialVersionUID=2685832214529141991L</code>.
      */
@@ -55,8 +53,6 @@ public class InputPayReturnCost extends InputBase implements InputPayment {
 
     private boolean bPaid;
     public boolean isPaid() { return bPaid; }
-
-    private final CountDownLatch cdlDone;
 
     /**
      * <p>
@@ -72,10 +68,10 @@ public class InputPayReturnCost extends InputBase implements InputPayment {
      * @param unpaidCommand
      *            a {@link forge.Command} object.
      */
-    public InputPayReturnCost(final CostReturn cost, final SpellAbility sa, final CountDownLatch cdl) {
+    public InputPayReturnCost(final CostReturn cost, final SpellAbility sa) {
         final Card source = sa.getSourceCard();
 
-        this.cdlDone = cdl;
+
         this.ability = sa;
         this.returnCost = cost;
         this.choiceList = CardLists.getValidCards(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), Singletons.getControl().getPlayer(), source);
@@ -162,7 +158,7 @@ public class InputPayReturnCost extends InputBase implements InputPayment {
      * 
      */
     public void done() {
-        this.stop();
+        
         // actually sacrifice the cards
         for (Card selected : this.returnCost.getList()) {
             selected.setUsedToPay(false);
@@ -170,7 +166,7 @@ public class InputPayReturnCost extends InputBase implements InputPayment {
         }
         this.returnCost.addListToHash(ability, "Returned");
         bPaid = true;
-        cdlDone.countDown();
+        this.stop();
     }
 
     /**
@@ -180,11 +176,10 @@ public class InputPayReturnCost extends InputBase implements InputPayment {
      * 
      */
     public void cancel() {
-        this.stop();
         for (Card selected : this.returnCost.getList()) {
             selected.setUsedToPay(false);
         }
         bPaid = false;
-        cdlDone.countDown();
+        this.stop();
     }
 }

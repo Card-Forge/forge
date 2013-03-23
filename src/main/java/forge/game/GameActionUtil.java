@@ -20,8 +20,6 @@ package forge.game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -59,11 +57,11 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.control.input.InputBase;
 import forge.control.input.InputPayDiscardCostWithCommands;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayReturnCost;
 import forge.control.input.InputPayment;
+import forge.control.input.InputSynchronized;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.player.AIPlayer;
@@ -577,21 +575,20 @@ public final class GameActionUtil {
         //the following costs need inputs and can't be combined at the moment
         
         
-        InputBase toSet = null;
-        CountDownLatch cdl = new CountDownLatch(1);
+        InputSynchronized toSet = null;
         if (costPart instanceof CostReturn) {
-            toSet = new InputPayReturnCost((CostReturn) costPart, ability, cdl);
+            toSet = new InputPayReturnCost((CostReturn) costPart, ability);
         }
         else if (costPart instanceof CostDiscard) {
-            toSet = new InputPayDiscardCostWithCommands((CostDiscard) costPart, ability, cdl);
+            toSet = new InputPayDiscardCostWithCommands((CostDiscard) costPart, ability);
         }
         else if (costPart instanceof CostPartMana) {
-            toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString(), cdl);
+            toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString());
         }
         
         if (toSet != null) {
             
-            FThreads.setInputAndWait(toSet, cdl);
+            FThreads.setInputAndWait(toSet);
             if (((InputPayment)toSet).isPaid() ) {
                 paid.execute();
             } else {

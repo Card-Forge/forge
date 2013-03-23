@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-
 import com.google.common.base.Predicate;
 
 import forge.Card;
@@ -288,9 +286,8 @@ public class Upkeep extends Phase {
                         public void resolve() {
                             final boolean isUpkeepPaid;
                             if (controller.isHuman()) {
-                                CountDownLatch cdl = new CountDownLatch(1);
-                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, sb, upkeepCost.toString(), cdl);
-                                FThreads.setInputAndWait(inp, cdl);
+                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, sb, upkeepCost.toString());
+                                FThreads.setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computer
                                 Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
@@ -386,9 +383,8 @@ public class Upkeep extends Phase {
                         public void resolve() {
                             boolean isUpkeepPaid = false;
                             if (controller.isHuman()) {
-                                CountDownLatch cdl = new CountDownLatch(1);
-                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, sb, upkeepCost.toString(), cdl);
-                                FThreads.setInputAndWait(inp, cdl);
+                                InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, sb, upkeepCost.toString());
+                                FThreads.setInputAndWait(inp);
                                 isUpkeepPaid = inp.isPaid();
                             } else { // computers
                                 final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
@@ -635,9 +631,8 @@ public class Upkeep extends Phase {
                     @Override
                     public void resolve() {
                         if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
-                            CountDownLatch cdl = new CountDownLatch(1);
-                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, "Pay Demonic Hordes upkeep cost", cost.getManaCost().toString(), cdl/*, true */);
-                            FThreads.setInputAndWait(inp, cdl);
+                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, "Pay Demonic Hordes upkeep cost", cost.getManaCost().toString() /*, true */);
+                            FThreads.setInputAndWait(inp);
                             if ( !inp.isPaid() ) 
                                 unpaidHordesAb.resolve();
                         }

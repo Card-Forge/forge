@@ -174,7 +174,6 @@ public class InputMulligan extends InputBase {
 
         game.setMulliganned(true);
         Singletons.getModel().getMatch().getInput().clearInput();
-        Singletons.getModel().getMatch().getInput().resetInput();
     }
 
     @Override

@@ -816,5 +816,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public void incPlanarDiceRolledthisTurn() {
         this.planarDiceRolledthisTurn++;
     }
+    
+    public String debugPrintState() {
+        return String.format("%s's %s, priority of %s [%sP]", getPlayerTurn(), getPhase(), getPriorityPlayer(), isPlayerPriorityAllowed() ? "+" : "-");
+    }
+
 
 }

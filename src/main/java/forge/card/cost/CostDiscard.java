@@ -19,8 +19,6 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import com.google.common.base.Predicate;
 
 import forge.Card;
@@ -30,7 +28,6 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -72,8 +69,8 @@ public class CostDiscard extends CostPartWithList {
          * @param sp
          * @param discType
          */
-        public InputPayCostDiscard(CountDownLatch cdl, SpellAbility sa, List<Card> handList, CostDiscard part, CostPayment payment, int nNeeded, String discType) {
-            super(cdl, payment);
+        public InputPayCostDiscard(SpellAbility sa, List<Card> handList, CostDiscard part, CostPayment payment, int nNeeded, String discType) {
+            super(payment);
             this.sa = sa;
             this.handList = handList;
             this.part = part;
@@ -338,9 +335,7 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                CountDownLatch cdl = new CountDownLatch(1);
-                final InputBase inp = new InputPayCostDiscard(cdl, ability, handList, this, payment, c, discardType);
-                FThreads.setInputAndWait(inp, cdl);
+                FThreads.setInputAndWait(new InputPayCostDiscard(ability, handList, this, payment, c, discardType));
             }
         }
         if ( !payment.isCanceled())

@@ -1,25 +1,21 @@
 package forge.card.cost;
 
-import java.util.concurrent.CountDownLatch;
-
-import forge.control.input.InputBase;
+import forge.control.input.InputSyncronizedBase;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-abstract class InputPayCostBase extends InputBase { 
+abstract class InputPayCostBase extends InputSyncronizedBase { 
     private static final long serialVersionUID = -2967434867139585579L;
     
-    private final CountDownLatch cdlDone;
     private final CostPayment payment;
     /**
      * TODO: Write javadoc for Constructor.
      * @param cdl
      * @param payment
      */
-    public InputPayCostBase(CountDownLatch cdl, CostPayment payment0) {
-        cdlDone = cdl;
+    public InputPayCostBase(CostPayment payment0) {
         payment = payment0;
     }
 
@@ -30,12 +26,10 @@ abstract class InputPayCostBase extends InputBase {
 
     final protected void done() {
         this.stop();
-        cdlDone.countDown();
     }
 
     final public void cancel() {
-        this.stop();
         payment.cancelCost();
-        cdlDone.countDown();
+        this.stop();
     }
 }

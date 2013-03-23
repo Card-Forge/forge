@@ -25,7 +25,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
-import forge.gui.match.controllers.CMessage;
 import forge.util.MyObservable;
 
 /**
@@ -59,22 +58,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
 
     /**
      * <p>
-     * Setter for the field <code>input</code>.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.InputBase} object.
-     * @param bAddToResolving
-     *            a boolean.
-     */
-    public final void setInputInterrupt(final Input in) {
-        // Make this
-        this.inputStack.push(in);
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>input</code>.
      * </p>
      * 
@@ -91,6 +74,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final void clearInput() {
         this.inputStack.clear();
+        this.updateObservers();
     }
 
 
@@ -102,9 +86,11 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @param update
      *            a boolean.
      */
-    public final void resetInput() { 
-        if ( !this.inputStack.isEmpty() )
-            this.inputStack.pop();
+    public final void removeInput(Input inp) {
+        Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
+        if( topMostInput != inp )
+            throw new RuntimeException("Inputs adding/removal into stack is imbalanced! Check your code again!");
+        
         this.updateObservers();
     }
 
@@ -154,7 +140,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 stack.freezeStack();
                 if (playerTurn.isHuman() && !playerTurn.getController().mayAutoPass(phase)) {
                     game.getCombat().initiatePossibleDefenders(playerTurn.getOpponents());
-                    return new InputAttack();
+                    return new InputAttack(game);
                 }
                 break;
 
@@ -194,34 +180,23 @@ public class InputControl extends MyObservable implements java.io.Serializable {
          return pc.getDefaultInput();
     } // getInput()
 
-    public final void setNewInput(GameState game) {
-        PhaseHandler ph = game.getPhaseHandler();
-
-        final Input tmp = getActualInput(game);
-        String message = String.format("%s's %s, priority of %s [%sP] input is %s \t stack:%s", ph.getPlayerTurn(), ph.getPhase(), ph.getPriorityPlayer(), ph.isPlayerPriorityAllowed() ? "+" : "-", tmp == null ? "null" : tmp.getClass().getSimpleName(), inputStack);
-        System.out.println(message);
-
-        if (tmp != null) {
-            //System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer() + " @ input is " + tmp.getClass().getName() );
-            CMessage.SINGLETON_INSTANCE.getInputControl().setInput(tmp);
-        } else if (!ph.isPlayerPriorityAllowed()) {
-            // System.out.println("cannot have priority, forced to pass");
-            ph.getPriorityPlayer().getController().passPriority();
-        }
-    }
-
     /**
      * TODO: Write javadoc for this method.
      */
-    private final static InputLockUI inpuptLock = new InputLockUI();
+    private final static InputLockUI inputLock = new InputLockUI();
     public void lock() {
-        setInput(inpuptLock);
+        setInput(inputLock);
     }
     
     public void unlock() { 
-        if ( inputStack.isEmpty() || inputStack.peek() != inpuptLock )
+        if ( inputStack.isEmpty() || inputStack.peek() != inputLock )
             throw new RuntimeException("Trying to unlock input which is not locked! Do check when your threads terminate!");
-        resetInput();
+        removeInput(inputLock);
+    }
+
+    // only for debug purposes
+    public String printInputStack() {
+        return inputStack.toString();
     }
 
 } // InputControl

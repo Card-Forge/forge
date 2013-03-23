@@ -19,15 +19,13 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
+import forge.control.input.InputSynchronized;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -68,9 +66,8 @@ public class CostRemoveCounter extends CostPartWithList {
          * @param type
          * @param costRemoveCounter
          */
-        public InputPayCostRemoveCounterType(CountDownLatch cdl, CostPayment payment, int nNeeded, SpellAbility sa, String type,
-                CostRemoveCounter costRemoveCounter) {
-            super(cdl, payment);
+        public InputPayCostRemoveCounterType(CostPayment payment, int nNeeded, SpellAbility sa, String type, CostRemoveCounter costRemoveCounter) {
+            super(payment);
             this.nNeeded = nNeeded;
             this.sa = sa;
             this.type = type;
@@ -136,9 +133,9 @@ public class CostRemoveCounter extends CostPartWithList {
          * @param nNeeded
          * @param payment
          */
-        public InputPayCostRemoveCounterFrom(CountDownLatch cdl, CostRemoveCounter costRemoveCounter, String type, SpellAbility sa,
+        public InputPayCostRemoveCounterFrom(CostRemoveCounter costRemoveCounter, String type, SpellAbility sa,
                 int nNeeded, CostPayment payment) {
-            super(cdl, payment);
+            super(payment);
             this.costRemoveCounter = costRemoveCounter;
             this.type = type;
             this.sa = sa;
@@ -380,15 +377,13 @@ public class CostRemoveCounter extends CostPartWithList {
                 }
             }
 
-            final InputBase inp;
-            CountDownLatch cdl = new CountDownLatch(1);
+            final InputSynchronized inp;
             if (this.getZone().equals(ZoneType.Battlefield)) {
-                inp = new InputPayCostRemoveCounterType(cdl, payment, c, ability, this.getType(), this);
+                inp = new InputPayCostRemoveCounterType(payment, c, ability, this.getType(), this);
             } else {
-                inp = new InputPayCostRemoveCounterFrom(cdl, this, this.getType(), ability, c, payment);
+                inp = new InputPayCostRemoveCounterFrom(this, this.getType(), ability, c, payment);
             }
-            FThreads.setInputAndWait(inp, cdl);
-            
+            FThreads.setInputAndWait(inp);
             if ( !payment.isCanceled() )
                 addListToHash(ability, "CounterRemove");
             return;

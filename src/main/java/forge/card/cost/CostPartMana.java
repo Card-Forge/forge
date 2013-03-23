@@ -17,15 +17,12 @@
  */
 package forge.card.cost;
 
-import java.util.concurrent.CountDownLatch;
-
 import com.google.common.base.Strings;
 
 import forge.Card;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
 import forge.control.input.InputPayManaOfCostPayment;
 import forge.control.input.InputPayManaX;
 import forge.game.GameState;
@@ -218,18 +215,15 @@ public class CostPartMana extends CostPart {
             }
         }
         
-        CountDownLatch cdl = new CountDownLatch(1);
-        final InputBase inp;
+
         if (!"0".equals(this.getManaToPay()) || manaToAdd > 0) {
-            inp = new InputPayManaOfCostPayment(game, this, ability, payment, manaToAdd, cdl);
-            
-        } else if (this.getXMana() > 0) {
-            inp = new InputPayManaX(game, ability, payment, this, cdl);
+            FThreads.setInputAndWait(new InputPayManaOfCostPayment(game, this, ability, payment, manaToAdd));
+        } 
+        if (this.getXMana() > 0) {
+            source.setXManaCostPaid(0);
+            FThreads.setInputAndWait(new InputPayManaX(game, ability, payment, this));
         }
-        else inp = null;
-        if ( null != inp) {
-            FThreads.setInputAndWait(inp, cdl);
-        }
+
     }
 
     /*

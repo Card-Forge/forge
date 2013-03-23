@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
-import java.util.concurrent.CountDownLatch;
-
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
@@ -489,9 +487,8 @@ public class MagicStack extends MyObservable {
                             final Card crd = sa.getSourceCard();
                             
                             String message = "Pay X cost for " + crd.getName() + " (X=" + crd.getXManaCostPaid() + ")\r\n";
-                            CountDownLatch cdl = new CountDownLatch(1);
-                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, message, String.valueOf(xCost), cdl, true); 
-                            FThreads.setInputAndWait(inp, cdl);
+                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, message, String.valueOf(xCost), true); 
+                            FThreads.setInputAndWait(inp);
                             if ( inp.isPaid() ) {
                                 crd.addXManaCostPaid(1);
                                 this.run();
@@ -565,9 +562,8 @@ public class MagicStack extends MyObservable {
                                     prompt = String.format("Multikicker for %s\r\nMana in Reserve: %s %s\r\nTimes Kicked: %d", sa.getSourceCard(), 
                                             (mkCostPaid != 0) ? Integer.toString(mkCostPaid) : "", mkCostPaidColored, mkMagnitude);
                                 }
-                                CountDownLatch cdl = new CountDownLatch(1);
-                                InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString(), cdl);
-                                FThreads.setInputAndWait(toSet, cdl);
+                                InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString());
+                                FThreads.setInputAndWait(toSet);
                                 if ( toSet.isPaid() ) { 
                                     this.execute();
                                 } else 
@@ -613,9 +609,8 @@ public class MagicStack extends MyObservable {
                                 this.run();
                             } else {
                                 String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sa.getSourceCard(), sa.getSourceCard().getReplicateMagnitude());
-                                CountDownLatch cdl = new CountDownLatch(1);
-                                InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString(), cdl);
-                                FThreads.setInputAndWait(toSet, cdl);
+                                InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString());
+                                FThreads.setInputAndWait(toSet);
                                 if ( toSet.isPaid() ) { 
                                     this.run();
                                 } else {

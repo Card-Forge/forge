@@ -18,14 +18,12 @@
 package forge.card.cost;
 
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
-import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputSynchronized;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
@@ -59,8 +57,8 @@ public class CostPutCounter extends CostPartWithList {
          * @param payment
          * @param sa
          */
-        public InputPayCostPutCounter(CountDownLatch cdl, String type, CostPutCounter costPutCounter, int nNeeded, CostPayment payment, SpellAbility sa) {
-            super(cdl, payment);
+        public InputPayCostPutCounter(String type, CostPutCounter costPutCounter, int nNeeded, CostPayment payment, SpellAbility sa) {
+            super(payment);
             this.type = type;
             this.costPutCounter = costPutCounter;
             this.nNeeded = nNeeded;
@@ -255,8 +253,8 @@ public class CostPutCounter extends CostPartWithList {
             source.addCounter(this.getCounter(), c, false);
             this.addToList(source);
         } else {
-            CountDownLatch cdl = new CountDownLatch(1);
-            FThreads.setInputAndWait(new InputPayCostPutCounter(cdl, this.getType(), this, c, payment, ability), cdl);
+            InputSynchronized inp = new InputPayCostPutCounter(this.getType(), this, c, payment, ability);
+            inp.awaitLatchRelease();
         }
         if ( !payment.isCanceled())
             addListToHash(ability, "CounterPut");

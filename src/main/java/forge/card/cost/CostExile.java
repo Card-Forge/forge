@@ -20,17 +20,14 @@ package forge.card.cost;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.control.input.InputBase;
+import forge.control.input.InputSynchronized;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
@@ -68,8 +65,8 @@ public class CostExile extends CostPartWithList {
          * @param payment
          * @param part
          */
-        private InputExileFrom(CountDownLatch cdl, SpellAbility sa, String type, int nNeeded, CostPayment payment, CostExile part) {
-            super(cdl, payment);
+        private InputExileFrom(SpellAbility sa, String type, int nNeeded, CostPayment payment, CostExile part) {
+            super(payment);
             this.sa = sa;
             this.type = type;
             this.nNeeded = nNeeded;
@@ -128,8 +125,8 @@ public class CostExile extends CostPartWithList {
          * @param nNeeded
          * @param payableZone
          */
-        private InputExileFromSame(CountDownLatch cdl, List<Card> list, CostExile part, CostPayment payment, int nNeeded, List<Player> payableZone) {
-            super(cdl, payment);
+        private InputExileFromSame(List<Card> list, CostExile part, CostPayment payment, int nNeeded, List<Player> payableZone) {
+            super(payment);
             this.list = list;
             this.part = part;
             this.nNeeded = nNeeded;
@@ -198,8 +195,8 @@ public class CostExile extends CostPartWithList {
          * @param nNeeded
          * @param part
          */
-        private InputExileFromStack(CountDownLatch cdl, CostPayment payment, SpellAbility sa, String type, int nNeeded, CostExile part) {
-            super(cdl, payment);
+        private InputExileFromStack(CostPayment payment, SpellAbility sa, String type, int nNeeded, CostExile part) {
+            super(payment);
             this.sa = sa;
             this.type = type;
             this.nNeeded = nNeeded;
@@ -278,8 +275,8 @@ public class CostExile extends CostPartWithList {
          * @param nNeeded
          * @param sa
          */
-        private InputExileType(CountDownLatch cdl, CostExile part, CostPayment payment, String type, int nNeeded, SpellAbility sa) {
-            super(cdl, payment);
+        private InputExileType(CostExile part, CostPayment payment, String type, int nNeeded, SpellAbility sa) {
+            super(payment);
             this.part = part;
             this.type = type;
             this.nNeeded = nNeeded;
@@ -346,8 +343,8 @@ public class CostExile extends CostPartWithList {
          * @param part
          * @param sa
          */
-        private InputExileThis(CountDownLatch cdl, CostPayment payment, CostExile part, SpellAbility sa) {
-            super(cdl, payment);
+        private InputExileThis(CostPayment payment, CostExile part, SpellAbility sa) {
+            super(payment);
             this.part = part;
             this.sa = sa;
         }
@@ -359,14 +356,12 @@ public class CostExile extends CostPartWithList {
                 if (choice) {
                     Singletons.getModel().getGame().getAction().exile(card);
                     part.addToList(card);
-                    this.stop();
                     part.addListToHash(sa, "Exiled");
                     done();
-                } else {
-                    cancel();
+                    return;
                 }
             }
-            else cancel();
+            cancel();
         }
     }
 
@@ -576,15 +571,13 @@ public class CostExile extends CostPartWithList {
             }
         }
         
-        final CountDownLatch cdl = new CountDownLatch(1);
-        
-        InputBase target = null;
+        InputSynchronized target = null;
         if (this.payCostFromSource()) {
-            target = new InputExileThis(cdl, payment, this, ability);
+            target = new InputExileThis(payment, this, ability);
         } else if (this.from.equals(ZoneType.Battlefield) || this.from.equals(ZoneType.Hand)) {
-            target = new InputExileType(cdl, this, payment, this.getType(), c, ability);
+            target = new InputExileType(this, payment, this.getType(), c, ability);
         } else if (this.from.equals(ZoneType.Stack)) {
-            target = new InputExileFromStack(cdl,payment, ability, this.getType(), c, this);
+            target = new InputExileFromStack(payment, ability, this.getType(), c, this);
         } else if (this.from.equals(ZoneType.Library)) {
             // this does not create input
             CostExile.exileFromTop(ability, this, payment, c);
@@ -599,11 +592,11 @@ public class CostExile extends CostPartWithList {
                     payableZone.add(p);
                 }
             }
-            target = new InputExileFromSame(cdl, list, this, payment, c, payableZone);
+            target = new InputExileFromSame(list, this, payment, c, payableZone);
         } else {
-            target = new InputExileFrom(cdl,ability, this.getType(), c, payment, this);
+            target = new InputExileFrom(ability, this.getType(), c, payment, this);
         }
-        FThreads.setInputAndWait(target, cdl);
+        target.awaitLatchRelease();
         if(!payment.isCanceled())
             addListToHash(ability, "Exiled");
     }

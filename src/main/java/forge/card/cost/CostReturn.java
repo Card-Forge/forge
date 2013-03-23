@@ -19,15 +19,12 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
@@ -47,16 +44,14 @@ public class CostReturn extends CostPartWithList {
      * TODO: Write javadoc for this type.
      *
      */
-    public static final class InputPayReturnType extends InputBase {
+    public static final class InputPayReturnType extends InputPayCostBase {
         private final SpellAbility sa;
         private final CostReturn part;
         private final int nNeeded;
         private final String type;
-        private final CostPayment payment;
         private static final long serialVersionUID = 2685832214519141903L;
         private List<Card> typeList;
         private int nReturns = 0;
-        private final CountDownLatch cdlDone;
 
         /**
          * TODO: Write javadoc for Constructor.
@@ -67,14 +62,12 @@ public class CostReturn extends CostPartWithList {
          * @param type
          * @param payment
          */
-        public InputPayReturnType(CountDownLatch cdl, SpellAbility sa, CostReturn part, int nNeeded, String type,
-                CostPayment payment) {
+        public InputPayReturnType( SpellAbility sa, CostReturn part, int nNeeded, String type, CostPayment payment) {
+            super(payment);
             this.sa = sa;
             this.part = part;
             this.nNeeded = nNeeded;
             this.type = type;
-            this.payment = payment;
-            cdlDone = cdl;
         }
 
         @Override
@@ -98,11 +91,6 @@ public class CostReturn extends CostPartWithList {
         }
 
         @Override
-        public void selectButtonCancel() {
-            this.cancel();
-        }
-
-        @Override
         public void selectCard(final Card card) {
             if (this.typeList.contains(card)) {
                 this.nReturns++;
@@ -119,17 +107,6 @@ public class CostReturn extends CostPartWithList {
                     this.showMessage();
                 }
             }
-        }
-
-        public void done() {
-            this.stop();
-            cdlDone.countDown();
-        }
-
-        public void cancel() {
-            this.stop();
-            payment.cancelCost();
-            cdlDone.countDown();
         }
     }
 
@@ -252,10 +229,7 @@ public class CostReturn extends CostPartWithList {
                 }
             }
         } else {
-            CountDownLatch cdl = new CountDownLatch(1);
-            final InputBase target = new InputPayReturnType(cdl, ability, this, c, this.getType(), payment);
-            final InputBase inp = target;
-            FThreads.setInputAndWait(inp, cdl);
+            FThreads.setInputAndWait(new InputPayReturnType(ability, this, c, this.getType(), payment));
         }
 
         if (!payment.isCanceled())

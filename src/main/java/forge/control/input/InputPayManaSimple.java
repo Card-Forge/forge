@@ -17,9 +17,7 @@
  */
 package forge.control.input;
 
-import java.util.concurrent.CountDownLatch;
 import forge.Card;
-import forge.Singletons;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -38,9 +36,8 @@ public class InputPayManaSimple extends InputPayManaBase {
 
     private final Card originalCard;
     private final String originalManaCost;
-    private final CountDownLatch cdlNotify;
 
-    public InputPayManaSimple(final GameState game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay, final CountDownLatch callOnDone) {
+    public InputPayManaSimple(final GameState game, final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
         super(game, sa);
         this.originalManaCost = manaCostToPay.toString(); // Change
         this.originalCard = sa.getSourceCard();
@@ -52,7 +49,6 @@ public class InputPayManaSimple extends InputPayManaBase {
             this.manaCost = manaCostToPay;
         }
         
-        cdlNotify = callOnDone;
     }
 
     /**
@@ -106,8 +102,7 @@ public class InputPayManaSimple extends InputPayManaBase {
             handleConvokedCards(false);
         }
 
-        Singletons.getModel().getMatch().getInput().resetInput();
-        cdlNotify.countDown();
+        stop();
     }
 
     /** {@inheritDoc} */
