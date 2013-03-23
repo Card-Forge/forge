@@ -129,10 +129,8 @@ public class MatchController {
     public void startRound() {
 
         // Deal with circular dependencies here
-        currentGame = Singletons.getModel().newGame(players.keySet(),gameType, this);
-        input = new InputControl(currentGame);
-        currentGame.getActionPlay().setMatchInput(input);
-
+        input = new InputControl();
+        currentGame = Singletons.getModel().newGame(players.keySet(),gameType, this, input);
 
         Map<Player, PlayerStartConditions> startConditions = new HashMap<Player, PlayerStartConditions>();
         for (Player p : currentGame.getPlayers()) {

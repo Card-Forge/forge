@@ -40,15 +40,12 @@ import forge.gui.GuiChoose;
 public class GameActionPlay {
     
     private final GameState game;
-    private InputControl matchInput;
+    private final InputControl matchInput;
     
 
-    public GameActionPlay(final GameState game0) {
+    public GameActionPlay(final GameState game0, InputControl input) {
         game = game0;
-    }
-    
-    void setMatchInput(InputControl input) {
-        this.matchInput = input; // TODO: Add 0 to parameter's name.
+        this.matchInput = input;
     }
     
     public final void playCardWithoutManaCost(final Card c, Player player) {

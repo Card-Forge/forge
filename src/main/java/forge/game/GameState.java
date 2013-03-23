@@ -37,6 +37,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.control.input.InputControl;
 import forge.game.phase.Cleanup;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfCombat;
@@ -95,8 +96,9 @@ public class GameState {
      * Constructor.
      * @param players2
      * @param match0 
+     * @param input 
      */
-    public GameState(Iterable<LobbyPlayer> players2, GameType t, MatchController match0) { /* no more zones to map here */
+    public GameState(Iterable<LobbyPlayer> players2, GameType t, MatchController match0, InputControl input) { /* no more zones to map here */
         type = t;
         List<Player> players = new ArrayList<Player>();
         for (LobbyPlayer p : players2) {
@@ -108,7 +110,7 @@ public class GameState {
         allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
         action = new GameAction(this);
-        actionPlay = new GameActionPlay(this);
+        actionPlay = new GameActionPlay(this, input);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
         

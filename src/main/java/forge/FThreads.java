@@ -106,6 +106,7 @@ public class FThreads {
     }
 
     public static final void setInputAndWait(Input inp, CountDownLatch cdl) {
+        checkEDT("FThreads.setInputAndWait", false);
         Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         try {
             cdl.await();

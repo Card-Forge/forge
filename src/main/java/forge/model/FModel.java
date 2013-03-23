@@ -35,6 +35,7 @@ import forge.card.EditionCollection;
 import forge.card.FatPackData;
 import forge.card.FormatCollection;
 import forge.card.cardfactory.CardStorageReader;
+import forge.control.input.InputControl;
 import forge.deck.CardCollections;
 import forge.error.BugReporter;
 import forge.error.ExceptionHandler;
@@ -401,9 +402,10 @@ public enum FModel {
     /**
      * TODO: Write javadoc for this method.
      * @param players
+     * @param input 
      */
-    public GameState newGame(Iterable<LobbyPlayer> players, GameType type, final MatchController match0) {
-        gameState = new GameState(players,type, match0);
+    public GameState newGame(Iterable<LobbyPlayer> players, GameType type, final MatchController match0, InputControl input) {
+        gameState = new GameState(players,type, match0, input);
         return gameState;
     }
 

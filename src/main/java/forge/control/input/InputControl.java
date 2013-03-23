@@ -42,17 +42,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
 
     private final Stack<Input> inputStack = new Stack<Input>();
 
-    private final transient GameState game;
-    /**
-     * TODO Write javadoc for Constructor.
-     * 
-     * @param fModel
-     *            the f model
-     */
-    public InputControl(final GameState game0) {
-        this.game = game0;
-    }
-
     /**
      * <p>
      * Setter for the field <code>input</code>.
@@ -126,7 +115,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * 
      * @return a {@link forge.control.input.Input} object.
      */
-    public final Input getActualInput() {
+    public final Input getActualInput(GameState game) {
         if ( !game.hasMulliganned() )
             return new InputMulligan();
 
@@ -146,7 +135,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if (handler.hasPhaseEffects()) {
             // Handle begin phase stuff, then start back from the top
             handler.handleBeginPhase();
-            return this.getActualInput();
+            return this.getActualInput(game);
         }
 
         // If the Phase we're in doesn't allow for Priority, return null to move
@@ -196,7 +185,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         // priority
 
         boolean prioritySkip = pc.mayAutoPass(phase) || pc.isUiSetToSkipPhase(playerTurn, phase);
-        if (this.game.getStack().isEmpty() && prioritySkip) {
+        if (game.getStack().isEmpty() && prioritySkip) {
             pc.passPriority();
             return null;
         } else
@@ -208,7 +197,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     public final void setNewInput(GameState game) {
         PhaseHandler ph = game.getPhaseHandler();
 
-        final Input tmp = getActualInput();
+        final Input tmp = getActualInput(game);
         String message = String.format("%s's %s, priority of %s [%sP] input is %s \t stack:%s", ph.getPlayerTurn(), ph.getPhase(), ph.getPriorityPlayer(), ph.isPlayerPriorityAllowed() ? "+" : "-", tmp == null ? "null" : tmp.getClass().getSimpleName(), inputStack);
         System.out.println(message);
 
