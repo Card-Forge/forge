@@ -18,10 +18,10 @@
 package forge.control.input;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
@@ -42,7 +42,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id: InputPayManaCostAbility.java 15673 2012-05-23 14:01:35Z ArsenalNut $
  */
-public class InputPayDiscardCostWithCommands extends Input {
+public class InputPayDiscardCostWithCommands extends Input implements InputPayment {
     /**
      * Constant <code>serialVersionUID=2685832214529141991L</code>.
      */
@@ -53,8 +53,10 @@ public class InputPayDiscardCostWithCommands extends Input {
     private List<Card> choiceList;
     private CostDiscard discardCost;
     private SpellAbility ability;
-    private Command paid;
-    private Command unpaid;
+    private boolean bPaid;
+
+    private final CountDownLatch cdlDone;
+    public final boolean isPaid() { return bPaid; }
 
     /**
      * <p>
@@ -70,19 +72,16 @@ public class InputPayDiscardCostWithCommands extends Input {
      * @param unpaidCommand
      *            a {@link forge.Command} object.
      */
-    public InputPayDiscardCostWithCommands(final CostDiscard cost, final SpellAbility sa, final Command paidCommand,
-            final Command unpaidCommand) {
+    public InputPayDiscardCostWithCommands(final CostDiscard cost, final SpellAbility sa, final CountDownLatch cdl) {
         final Card source = sa.getSourceCard();
         final Player human = Singletons.getControl().getPlayer();
-
+        this.cdlDone = cdl;
         this.ability = sa;
         this.discardCost = cost;
         this.choiceList = CardLists.getValidCards(human.getCardsIn(ZoneType.Hand), cost.getType().split(";"), human, source);
         String amountString = cost.getAmount();
         this.numRequired = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                 : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-        this.paid = paidCommand;
-        this.unpaid = unpaidCommand;
     }
 
     /** {@inheritDoc} */
@@ -168,7 +167,10 @@ public class InputPayDiscardCostWithCommands extends Input {
             Singletons.getControl().getPlayer().discard(selected, this.ability);
         }
         this.discardCost.addListToHash(ability, "Discarded");
-        this.paid.execute();
+        bPaid = true;
+        cdlDone.countDown();
+        
+
     }
 
     /**
@@ -182,7 +184,8 @@ public class InputPayDiscardCostWithCommands extends Input {
         for (Card selected : this.discardCost.getList()) {
             selected.setUsedToPay(false);
         }
-        this.unpaid.execute();
+        bPaid = false;
+        cdlDone.countDown();
     }
 
     @Override public void isClassUpdated() {

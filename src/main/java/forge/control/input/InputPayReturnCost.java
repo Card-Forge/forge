@@ -18,10 +18,10 @@
 package forge.control.input;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostReturn;
@@ -41,7 +41,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id: InputPayManaCostAbility.java 15673 2012-05-23 14:01:35Z ArsenalNut $
  */
-public class InputPayReturnCost extends Input {
+public class InputPayReturnCost extends Input implements InputPayment {
     /**
      * Constant <code>serialVersionUID=2685832214529141991L</code>.
      */
@@ -52,8 +52,11 @@ public class InputPayReturnCost extends Input {
     private List<Card> choiceList;
     private CostReturn returnCost;
     private SpellAbility ability;
-    private Command paid;
-    private Command unpaid;
+
+    private boolean bPaid;
+    public boolean isPaid() { return bPaid; }
+
+    private final CountDownLatch cdlDone;
 
     /**
      * <p>
@@ -69,18 +72,16 @@ public class InputPayReturnCost extends Input {
      * @param unpaidCommand
      *            a {@link forge.Command} object.
      */
-    public InputPayReturnCost(final CostReturn cost, final SpellAbility sa, final Command paidCommand,
-            final Command unpaidCommand) {
+    public InputPayReturnCost(final CostReturn cost, final SpellAbility sa, final CountDownLatch cdl) {
         final Card source = sa.getSourceCard();
 
+        this.cdlDone = cdl;
         this.ability = sa;
         this.returnCost = cost;
         this.choiceList = CardLists.getValidCards(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), Singletons.getControl().getPlayer(), source);
         String amountString = cost.getAmount();
         this.numRequired = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                 : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-        this.paid = paidCommand;
-        this.unpaid = unpaidCommand;
     }
 
     /** {@inheritDoc} */
@@ -168,7 +169,8 @@ public class InputPayReturnCost extends Input {
             Singletons.getModel().getGame().getAction().moveTo(ZoneType.Hand, selected);
         }
         this.returnCost.addListToHash(ability, "Returned");
-        this.paid.execute();
+        bPaid = true;
+        cdlDone.countDown();
     }
 
     /**
@@ -182,7 +184,8 @@ public class InputPayReturnCost extends Input {
         for (Card selected : this.returnCost.getList()) {
             selected.setUsedToPay(false);
         }
-        this.unpaid.execute();
+        bPaid = false;
+        cdlDone.countDown();
     }
 
     @Override public void isClassUpdated() {

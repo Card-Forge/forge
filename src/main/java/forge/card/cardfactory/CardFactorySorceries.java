@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.concurrent.CountDownLatch;
+
 import javax.swing.JOptionPane;
 
 import com.google.common.collect.Iterables;
@@ -30,8 +32,8 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.CardPredicates.Presets;
-import forge.Command;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.CardType;
@@ -461,21 +463,13 @@ public class CardFactorySorceries {
                     game.getAction().moveToPlay(newArtifact[0]);
                 } else {
                     final String diffCost = String.valueOf(newCMC - baseCMC);
-                    Singletons.getModel().getMatch().getInput().setInput(new InputPayManaExecuteCommands(game, "Pay difference in artifacts CMC",  diffCost, new Command() {
-                        private static final long serialVersionUID = -8729850321341068049L;
-
-                        @Override
-                        public void execute() {
-                            Singletons.getModel().getGame().getAction().moveToPlay(newArtifact[0]);
-                        }
-                    }, new Command() {
-                        private static final long serialVersionUID = -246036834856971935L;
-
-                        @Override
-                        public void execute() {
-                            Singletons.getModel().getGame().getAction().moveToGraveyard(newArtifact[0]);
-                        }
-                    }));
+                    final CountDownLatch cdl = new CountDownLatch(1);
+                    InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, "Pay difference in artifacts CMC",  diffCost, cdl);
+                    FThreads.setInputAndWait(inp, cdl);
+                    if ( inp.isPaid() )
+                        Singletons.getModel().getGame().getAction().moveToPlay(newArtifact[0]);
+                    else
+                        Singletons.getModel().getGame().getAction().moveToGraveyard(newArtifact[0]);
                 }
 
                 // finally, shuffle library

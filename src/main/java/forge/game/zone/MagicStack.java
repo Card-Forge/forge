@@ -22,12 +22,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.CountDownLatch;
 
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
@@ -36,7 +38,6 @@ import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
-import forge.card.mana.ManaCostParser;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;
@@ -478,49 +479,38 @@ public class MagicStack extends MyObservable {
             } else if (sp.isXCost()) {
                 // TODO: convert any X costs to use abCost so it happens earlier
                 final SpellAbility sa = sp;
-                final ManaCost mc = new ManaCost( new ManaCostParser(Integer.toString(sa.getXManaCost())));
-                final Ability ability = new Ability(sp.getSourceCard(), mc) {
-                    @Override
-                    public void resolve() {
-                        final Card crd = this.getSourceCard();
-                        crd.addXManaCostPaid(1);
-                    }
-                };
-
-                final Command unpaidCommand = new Command() {
-                    private static final long serialVersionUID = -3342222770086269767L;
-
-                    @Override
-                    public void execute() {
-                        MagicStack.this.push(sa);
-                    }
-                };
-
-                final Command paidCommand = new Command() {
-                    private static final long serialVersionUID = -2224875229611007788L;
-
-                    @Override
-                    public void execute() {
-                        ability.resolve();
-                        final Card crd = sa.getSourceCard();
-                        Singletons.getModel().getMatch().getInput().setInput(
-                                new InputPayManaExecuteCommands(game, "Pay X cost for " + crd.getName() + " (X="
-                                        + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost().toString(), this, unpaidCommand,
-                                        true));
-                    }
-                };
-
-                final Card crd = sa.getSourceCard();
+                final int xCost = sa.getXManaCost();
                 Player player = sp.getSourceCard().getController();
                 if (player.isHuman()) {
-                    Singletons.getModel().getMatch().getInput().setInput(
-                            new InputPayManaExecuteCommands(game, "Pay X cost for " + sp.getSourceCard().getName() + " (X="
-                                    + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost().toString(), paidCommand,
-                                    unpaidCommand, true));
+                    final Runnable payNextX = new Runnable() {
+                        @Override
+                        public void run() {
+                            
+                            final Card crd = sa.getSourceCard();
+                            
+                            String message = "Pay X cost for " + crd.getName() + " (X=" + crd.getXManaCostPaid() + ")\r\n";
+                            CountDownLatch cdl = new CountDownLatch(1);
+                            InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, message, String.valueOf(xCost), cdl, true); 
+                            FThreads.setInputAndWait(inp, cdl);
+                            if ( inp.isPaid() ) {
+                                crd.addXManaCostPaid(1);
+                                this.run();
+                            } else
+                                MagicStack.this.push(sa);
+                        }
+                    };
+                    payNextX.run();
                 } else {
                     // computer
                     final int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
-
+                    final Ability ability = new Ability(sp.getSourceCard(), ManaCost.get(xCost)) {
+                        @Override
+                        public void resolve() {
+                            final Card crd = this.getSourceCard();
+                            crd.addXManaCostPaid(1);
+                        }
+                    };
+                    
                     while (ComputerUtilCost.canPayCost(ability, player) && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
                         ComputerUtil.playNoStack((AIPlayer)player, ability, game);
                     }
@@ -548,37 +538,44 @@ public class MagicStack extends MyObservable {
                     }
                 };
 
-                final Command paidCommand = new Command() {
-                    private static final long serialVersionUID = -6037161763374971106L;
 
-                    @Override
-                    public void execute() {
-                        ability.resolve();
-                        
-                        final ManaCostBeingPaid manaCost = MagicStack.this.getMultiKickerSpellCostChange(ability);
-                        
-                        if (manaCost.isPaid()) {
-                            this.execute();
-                        } else {
-                            String prompt;
-                            int mkCostPaid = game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaid(); 
-                            String mkCostPaidColored = game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaidColored();
-                            int mkMagnitude = sa.getSourceCard().getMultiKickerMagnitude();
-                            if ((mkCostPaid == 0) && mkCostPaidColored.equals("")) {
-                                prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sa.getSourceCard(), mkMagnitude );
-                            } else {
-                                prompt = String.format("Multikicker for %s\r\nMana in Reserve: %s %s\r\nTimes Kicked: %d", sa.getSourceCard(), 
-                                        (mkCostPaid != 0) ? Integer.toString(mkCostPaid) : "", mkCostPaidColored, mkMagnitude);
-                            }
-                            Input toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString(), this, unpaidCommand);
-                            Singletons.getModel().getMatch().getInput().setInput(toSet);
-                        }
-                    }
-                };
                 Player activating = sp.getActivatingPlayer();
 
                 if (activating.isHuman()) {
                     sa.getSourceCard().addMultiKickerMagnitude(-1);
+                    final Command paidCommand = new Command() {
+                        private static final long serialVersionUID = -6037161763374971106L;
+
+                        @Override
+                        public void execute() {
+                            ability.resolve();
+                            
+                            final ManaCostBeingPaid manaCost = MagicStack.this.getMultiKickerSpellCostChange(ability);
+                            
+                            if (manaCost.isPaid()) {
+                                this.execute();
+                            } else {
+                                String prompt;
+                                int mkCostPaid = game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaid(); 
+                                String mkCostPaidColored = game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaidColored();
+                                int mkMagnitude = sa.getSourceCard().getMultiKickerMagnitude();
+                                if ((mkCostPaid == 0) && mkCostPaidColored.equals("")) {
+                                    prompt = String.format("Multikicker for %s\r\nTimes Kicked: %d\r\n", sa.getSourceCard(), mkMagnitude );
+                                } else {
+                                    prompt = String.format("Multikicker for %s\r\nMana in Reserve: %s %s\r\nTimes Kicked: %d", sa.getSourceCard(), 
+                                            (mkCostPaid != 0) ? Integer.toString(mkCostPaid) : "", mkCostPaidColored, mkMagnitude);
+                                }
+                                CountDownLatch cdl = new CountDownLatch(1);
+                                InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString(), cdl);
+                                FThreads.setInputAndWait(toSet, cdl);
+                                if ( toSet.isPaid() ) { 
+                                    this.execute();
+                                } else 
+                                    unpaidCommand.execute();
+                                Singletons.getModel().getMatch().getInput().setInput(toSet);
+                            }
+                        }
+                    };                    
                     paidCommand.execute();
                 } else {
                     // computer
@@ -603,38 +600,33 @@ public class MagicStack extends MyObservable {
                     }
                 };
 
-                final Command unpaidCommand = new Command() {
-                    private static final long serialVersionUID = -3180458633098297855L;
-
-                    @Override
-                    public void execute() {
-                        for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
-                            CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false);
-                        }
-                    }
-                };
-
-                final Command paidCommand = new Command() {
-                    private static final long serialVersionUID = 132624005072267304L;
-
-                    @Override
-                    public void execute() {
-                        ability.resolve();
-                        final ManaCostBeingPaid manaCost = MagicStack.this.getReplicateSpellCostChange(ability);
-                        if (manaCost.isPaid()) {
-                            this.execute();
-                        } else {
-                            String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sa.getSourceCard(), sa.getSourceCard().getReplicateMagnitude());
-                            Input toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString(), this, unpaidCommand);
-                            Singletons.getModel().getMatch().getInput().setInput(toSet);
-                        }
-                    }
-                };
-
+ 
                 Player controller = sp.getSourceCard().getController();
                 if (controller.isHuman()) {
                     sa.getSourceCard().addReplicateMagnitude(-1);
-                    paidCommand.execute();
+                    final Runnable addMagnitude = new Runnable() {
+                         @Override
+                        public void run() {
+                            ability.resolve();
+                            final ManaCostBeingPaid manaCost = MagicStack.this.getReplicateSpellCostChange(ability);
+                            if (manaCost.isPaid()) {
+                                this.run();
+                            } else {
+                                String prompt = String.format("Replicate for %s\r\nTimes Replicated: %d\r\n", sa.getSourceCard(), sa.getSourceCard().getReplicateMagnitude());
+                                CountDownLatch cdl = new CountDownLatch(1);
+                                InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString(), cdl);
+                                FThreads.setInputAndWait(toSet, cdl);
+                                if ( toSet.isPaid() ) { 
+                                    this.run();
+                                } else {
+                                    for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
+                                        CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false);
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    addMagnitude.run();
                 } else {
                     // computer
                     while (ComputerUtilCost.canPayCost(ability, controller)) {

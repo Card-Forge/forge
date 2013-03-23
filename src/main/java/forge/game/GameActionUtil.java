@@ -20,6 +20,7 @@ package forge.game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -34,6 +35,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.CounterType;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
 import forge.card.ability.AbilityUtils;
@@ -61,6 +63,7 @@ import forge.control.input.Input;
 import forge.control.input.InputPayDiscardCostWithCommands;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayReturnCost;
+import forge.control.input.InputPayment;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.player.AIPlayer;
@@ -369,31 +372,6 @@ public final class GameActionUtil {
 
     /**
      * <p>
-     * payManaDuringAbilityResolve.
-     * </p>
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param spellManaCost
-     *            a {@link java.lang.String} object.
-     * @param paid
-     *            a {@link forge.Command} object.
-     * @param unpaid
-     *            a {@link forge.Command} object.
-     */
-    public static void payManaDuringAbilityResolve(final String message, final ManaCost spellManaCost, final Command paid,
-            final Command unpaid) {
-        // temporarily disable the Resolve flag, so the user can payMana for the
-        // resolving Ability
-        GameState game = Singletons.getModel().getGame(); 
-        final boolean bResolving = game.getStack().isResolving();
-        game.getStack().setResolving(false);
-        Singletons.getModel().getMatch().getInput().setInput(new InputPayManaExecuteCommands(game, message, spellManaCost.toString(), paid, unpaid));
-        game.getStack().setResolving(bResolving);
-    }
-
-    /**
-     * <p>
      * payCostDuringAbilityResolve.
      * </p>
      * 
@@ -597,25 +575,28 @@ public final class GameActionUtil {
         //      interface for sacrifice costs (instead of the menu-based one above).
 
         //the following costs need inputs and can't be combined at the moment
+        
+        
         Input toSet = null;
+        CountDownLatch cdl = new CountDownLatch(1);
         if (costPart instanceof CostReturn) {
-            toSet = new InputPayReturnCost((CostReturn) costPart, ability, paid, unpaid);
+            toSet = new InputPayReturnCost((CostReturn) costPart, ability, cdl);
         }
         else if (costPart instanceof CostDiscard) {
-            toSet = new InputPayDiscardCostWithCommands((CostDiscard) costPart, ability, paid, unpaid);
+            toSet = new InputPayDiscardCostWithCommands((CostDiscard) costPart, ability, cdl);
         }
         else if (costPart instanceof CostPartMana) {
-            toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString(), paid, unpaid);
+            toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString(), cdl);
         }
         
-        
         if (toSet != null) {
-            // temporarily disable the Resolve flag, so the user can payMana for the
-            // resolving Ability
-            final boolean bResolving = Singletons.getModel().getGame().getStack().isResolving();
-            Singletons.getModel().getGame().getStack().setResolving(false);
-            Singletons.getModel().getMatch().getInput().setInput(toSet);
-            Singletons.getModel().getGame().getStack().setResolving(bResolving);
+            
+            FThreads.setInputAndWait(toSet, cdl);
+            if (((InputPayment)toSet).isPaid() ) {
+                paid.execute();
+            } else {
+                unpaid.execute();
+            }
         }
     }
 
