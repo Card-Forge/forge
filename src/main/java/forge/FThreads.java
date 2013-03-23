@@ -1,10 +1,14 @@
 package forge;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.swing.SwingUtilities;
+
+import forge.control.input.Input;
+import forge.error.BugReporter;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -81,8 +85,8 @@ public class FThreads {
     }
     
     
-    public static void invokeInNewThread(Runnable proc) {
-        invokeInNewThread(proc, false);
+    public static void invokeInNewThread(Runnable toRun) {
+        getCachedPool().execute(toRun);
     }
     
     public static void invokeInNewThread(final Runnable proc, boolean lockUI) {
@@ -94,13 +98,20 @@ public class FThreads {
                 @Override
                 public void run() {
                     proc.run();
-                    // may try special unlock method here
                     Singletons.getModel().getMatch().getInput().unlock();
                 }
             };
         }
-        
-        getCachedPool().execute(toRun);
+        invokeInNewThread(toRun);
+    }
+
+    public static final void setInputAndWait(Input inp, CountDownLatch cdl) {
+        Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+        try {
+            cdl.await();
+        } catch (InterruptedException e) {
+            BugReporter.reportException(e);
+        }
     }
 
 }

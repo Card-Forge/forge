@@ -23,6 +23,7 @@ import java.util.concurrent.CountDownLatch;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -249,7 +250,7 @@ public class CostUntapType extends CostPartWithList {
             }
         }
         CountDownLatch cdl = new CountDownLatch(1);
-        setInputAndWait(new InputPayCostUntapY(cdl, c, typeList, this, payment), cdl);
+        FThreads.setInputAndWait(new InputPayCostUntapY(cdl, c, typeList, this, payment), cdl);
         
         if ( !payment.isCanceled() )
             addListToHash(ability, "Untapped");

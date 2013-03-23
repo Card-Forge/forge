@@ -23,6 +23,7 @@ import java.util.concurrent.CountDownLatch;
 
 import forge.Card;
 import forge.CardLists;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -279,7 +280,7 @@ public class CostReveal extends CostPartWithList {
             if (num > 0) {
                 final CountDownLatch cdl = new CountDownLatch(1);
                 final Input inp = new InputPayReveal(cdl, this, this.getType(), handList, ability, payment, num);;
-                setInputAndWait(inp, cdl);
+                FThreads.setInputAndWait(inp, cdl);
             } 
         }
         if ( !payment.isCanceled())

@@ -23,6 +23,7 @@ import java.util.concurrent.CountDownLatch;
 
 import forge.Card;
 import forge.CardLists;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -254,7 +255,7 @@ public class CostReturn extends CostPartWithList {
             CountDownLatch cdl = new CountDownLatch(1);
             final Input target = new InputPayReturnType(cdl, ability, this, c, this.getType(), payment);
             final Input inp = target;
-            setInputAndWait(inp, cdl);
+            FThreads.setInputAndWait(inp, cdl);
         }
 
         if (!payment.isCanceled())

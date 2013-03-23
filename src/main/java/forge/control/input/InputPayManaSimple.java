@@ -103,21 +103,7 @@ public class InputPayManaSimple extends InputPayManaBase {
                 this.saPaidFor.setSourceCard(game.getAction().moveToStack(this.originalCard));
             }
 
-            // If this is a spell with convoke, re-tap all creatures used for
-            // it.
-            // This is done to make sure Taps triggers go off at the right time
-            // (i.e. AFTER cost payment, they are tapped previously as well so
-            // that
-            // any mana tapabilities can't be used in payment as well as being
-            // tapped for convoke)
-
-            if (this.saPaidFor.getTappedForConvoke() != null) {
-                for (final Card c : this.saPaidFor.getTappedForConvoke()) {
-                    c.setTapped(false);
-                    c.tap();
-                }
-                this.saPaidFor.clearTappedForConvoke();
-            }
+            handleConvokedCards(false);
         }
 
         Singletons.getModel().getMatch().getInput().resetInput();
@@ -127,14 +113,7 @@ public class InputPayManaSimple extends InputPayManaBase {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-        // If this is a spell with convoke, untap all creatures used for it.
-        if (this.saPaidFor.getTappedForConvoke() != null) {
-            for (final Card c : this.saPaidFor.getTappedForConvoke()) {
-                c.setTapped(false);
-            }
-            this.saPaidFor.clearTappedForConvoke();
-        }
-
+        handleConvokedCards(true);
         this.resetManaCost();
 
         whoPays.getManaPool().refundManaPaid(this.saPaidFor, true);

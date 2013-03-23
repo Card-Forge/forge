@@ -205,12 +205,7 @@ public class CostPayment {
      * 
      * @return a boolean.
      */
-    public final boolean payCost() {
-        // Nothing actually ever checks this return value, is it needed?
-        if (this.bCancel) {
-            return false;
-        }
-
+    public void payCost() {
         for (final CostPart part : this.cost.getCostParts()) {
             // This portion of the cost is already paid for, keep moving
             if (this.paidCostParts.contains(part)) {
@@ -218,13 +213,11 @@ public class CostPayment {
             }
 
             part.payHuman(this.ability, this.card, this, game);
-            if ( isCanceled() ) break;
+            if ( isCanceled() ) return;
             
             setPaidPart(part);
         }
-        
-        this.resetUndoList(); // ??
-        return true;
+        this.resetUndoList();
     }
 
     /**

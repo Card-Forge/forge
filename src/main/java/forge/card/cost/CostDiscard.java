@@ -26,6 +26,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -339,7 +340,7 @@ public class CostDiscard extends CostPartWithList {
 
                 CountDownLatch cdl = new CountDownLatch(1);
                 final Input inp = new InputPayCostDiscard(cdl, ability, handList, this, payment, c, discardType);
-                setInputAndWait(inp, cdl);
+                FThreads.setInputAndWait(inp, cdl);
             }
         }
         if ( !payment.isCanceled())

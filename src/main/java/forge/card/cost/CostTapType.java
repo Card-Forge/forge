@@ -24,6 +24,7 @@ import java.util.concurrent.CountDownLatch;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -248,7 +249,7 @@ public class CostTapType extends CostPartWithList {
             }
         }
         CountDownLatch cdl = new CountDownLatch(1);
-        setInputAndWait(new InputPayCostTapType(cdl, this, c, typeList, payment), cdl);
+        FThreads.setInputAndWait(new InputPayCostTapType(cdl, this, c, typeList, payment), cdl);
         if( !payment.isCanceled())
             addListToHash(ability, "Tapped");
     }

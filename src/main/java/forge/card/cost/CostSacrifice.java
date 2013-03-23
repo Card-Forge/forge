@@ -23,6 +23,7 @@ import java.util.concurrent.CountDownLatch;
 
 import forge.Card;
 import forge.CardLists;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -252,7 +253,7 @@ public class CostSacrifice extends CostPartWithList {
                 return;
             }
             final CountDownLatch cdl = new CountDownLatch(1);
-            setInputAndWait(new InputPayCostSacrificeFromList(cdl, this, ability, c, payment, list), cdl);
+            FThreads.setInputAndWait(new InputPayCostSacrificeFromList(cdl, this, ability, c, payment, list), cdl);
         }
         if( !payment.isCanceled())
             addListToHash(ability, "Sacrificed");

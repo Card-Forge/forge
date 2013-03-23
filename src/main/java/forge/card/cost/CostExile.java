@@ -25,6 +25,7 @@ import java.util.concurrent.CountDownLatch;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
@@ -602,7 +603,7 @@ public class CostExile extends CostPartWithList {
         } else {
             target = new InputExileFrom(cdl,ability, this.getType(), c, payment, this);
         }
-        setInputAndWait(target, cdl);
+        FThreads.setInputAndWait(target, cdl);
         if(!payment.isCanceled())
             addListToHash(ability, "Exiled");
     }

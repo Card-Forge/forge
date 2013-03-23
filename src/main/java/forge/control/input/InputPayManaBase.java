@@ -327,5 +327,16 @@ public abstract class InputPayManaBase extends Input {
     public String toString() {
         return "PayManaBase (" + manaCost.toString() + ")";
     }
+
+    protected void handleConvokedCards(boolean isCancelled) {
+        if (saPaidFor.getTappedForConvoke() != null) {
+            for (final Card c : saPaidFor.getTappedForConvoke()) {
+                c.setTapped(false);
+                if (!isCancelled)
+                    c.tap();
+            }
+            saPaidFor.clearTappedForConvoke();
+        }        
+    }
     
 }

@@ -17,13 +17,9 @@
  */
 package forge.card.cost;
 
-import java.util.concurrent.CountDownLatch;
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
-import forge.error.BugReporter;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -146,15 +142,6 @@ public abstract class CostPart {
         return i;
     }
 
-    public final void setInputAndWait(Input inp, CountDownLatch cdl) {
-        Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-        try {
-            cdl.await();
-        } catch (InterruptedException e) {
-            BugReporter.reportException(e);
-        }
-    }
-    
     /**
      * Can pay.
      * 

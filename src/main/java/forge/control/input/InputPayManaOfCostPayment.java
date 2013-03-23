@@ -82,19 +82,9 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         // any mana tapabilities can't be used in payment as well as being tapped for convoke)
 
         handleConvokedCards(false);
+        cdlFinished.countDown();
     }
     
-    protected void handleConvokedCards(boolean isCancelled) {
-        if (saPaidFor.getTappedForConvoke() != null) {
-            for (final Card c : saPaidFor.getTappedForConvoke()) {
-                c.setTapped(false);
-                if (!isCancelled)
-                    c.tap();
-            }
-            saPaidFor.clearTappedForConvoke();
-        }        
-    }
-
     @Override
     public void selectButtonCancel() {
         handleConvokedCards(true);
@@ -102,6 +92,7 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         this.stop();
         this.resetManaCost();
         payment.cancelCost();
+        cdlFinished.countDown();
     }
 
     @Override

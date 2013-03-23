@@ -20,11 +20,13 @@ package forge.card.spellability;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -44,6 +46,177 @@ import forge.view.ButtonUtil;
  * @version $Id$
  */
 public class TargetSelection {
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public final class InputSelectTargets extends Input {
+        private final TargetSelection select;
+        private final List<Card> choices;
+        private final ArrayList<Object> alreadyTargeted;
+        private final boolean targeted;
+        private final Target tgt;
+        private final SpellAbility sa;
+        private final boolean mandatory;
+        private final CountDownLatch cdlDone;
+        private static final long serialVersionUID = -1091595663541356356L;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param select
+         * @param choices
+         * @param req
+         * @param alreadyTargeted
+         * @param targeted
+         * @param tgt
+         * @param sa
+         * @param mandatory
+         */
+        public InputSelectTargets(CountDownLatch cdl, TargetSelection select, List<Card> choices, ArrayList<Object> alreadyTargeted, boolean targeted, Target tgt, SpellAbility sa, boolean mandatory) {
+            cdlDone = cdl;
+            this.select = select;
+            this.choices = choices;
+            this.alreadyTargeted = alreadyTargeted;
+            this.targeted = targeted;
+            this.tgt = tgt;
+            this.sa = sa;
+            this.mandatory = mandatory;
+        }
+
+        @Override
+        public void showMessage() {
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Targeted: ");
+            for (final Object o : alreadyTargeted) {
+                sb.append(o).append(" ");
+            }
+            sb.append(tgt.getTargetedString());
+            sb.append("\n");
+            sb.append(tgt.getVTSelection());
+
+            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+
+            // If reached Minimum targets, enable OK button
+            if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa) || tgt.isDividedAsYouChoose()) {
+                if (mandatory && tgt.hasCandidates(sa, true)) {
+                    // Player has to click on a target
+                    ButtonUtil.disableAll();
+                } else {
+                    ButtonUtil.enableOnlyCancel();
+                }
+            } else {
+                if (mandatory && tgt.hasCandidates(sa, true)) {
+                    // Player has to click on a target or ok
+                    ButtonUtil.enableOnlyOk();
+                } else {
+                    ButtonUtil.enableAllFocusOk();
+                }
+            }
+        }
+
+        @Override
+        public void selectButtonCancel() {
+            select.setCancel(true);
+            this.done();
+        }
+
+        @Override
+        public void selectButtonOK() {
+            this.done();
+        }
+
+        @Override
+        public void selectCard(final Card card) {
+            // leave this in temporarily, there some seriously wrong things
+            // going on here
+            if (targeted && !card.canBeTargetedBy(sa)) {
+                CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
+            } else if (choices.contains(card)) {
+                if (tgt.isDividedAsYouChoose()) {
+                    final int stillToDivide = tgt.getStillToDivide();
+                    int allocatedPortion = 0;
+                    // allow allocation only if the max targets isn't reached and there are more candidates
+                    if ((tgt.getNumTargeted() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa))
+                            && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
+                        final Integer[] choices = new Integer[stillToDivide];
+                        for (int i = 1; i <= stillToDivide; i++) {
+                            choices[i - 1] = i;
+                        }
+                        String apiBasedMessage = "Distribute how much to ";
+                        if (sa.getApi() == ApiType.DealDamage) {
+                            apiBasedMessage = "Select how much damage to deal to ";
+                        } else if (sa.getApi() == ApiType.PreventDamage) {
+                            apiBasedMessage = "Select how much damage to prevent to ";
+                        } else if (sa.getApi() == ApiType.PutCounter) {
+                            apiBasedMessage = "Select how many counters to distribute to ";
+                        }
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append(apiBasedMessage);
+                        sb.append(card.toString());
+                        Integer chosen = GuiChoose.oneOrNone(sb.toString(), choices);
+                        if (null == chosen) {
+                            return;
+                        }
+                        allocatedPortion = chosen;
+                    } else { // otherwise assign the rest of the damage/protection
+                        allocatedPortion = stillToDivide;
+                    }
+                    tgt.setStillToDivide(stillToDivide - allocatedPortion);
+                    tgt.addDividedAllocation(card, allocatedPortion);
+                }
+                tgt.addTarget(card);
+                this.done();
+            }
+        } // selectCard()
+
+        @Override
+        public void selectPlayer(final Player player) {
+            if (alreadyTargeted.contains(player)) {
+                return;
+            }
+
+            if (sa.canTarget(player)) {
+                if (tgt.isDividedAsYouChoose()) {
+                    final int stillToDivide = tgt.getStillToDivide();
+                    int allocatedPortion = 0;
+                    // allow allocation only if the max targets isn't reached and there are more candidates
+                    if ((alreadyTargeted.size() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa))
+                            && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
+                        final Integer[] choices = new Integer[stillToDivide];
+                        for (int i = 1; i <= stillToDivide; i++) {
+                            choices[i - 1] = i;
+                        }
+                        String apiBasedMessage = "Distribute how much to ";
+                        if (sa.getApi() == ApiType.DealDamage) {
+                            apiBasedMessage = "Select how much damage to deal to ";
+                        } else if (sa.getApi() == ApiType.PreventDamage) {
+                            apiBasedMessage = "Select how much damage to prevent to ";
+                        }
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append(apiBasedMessage);
+                        sb.append(player.getName());
+                        Integer chosen = GuiChoose.oneOrNone(sb.toString(), choices);
+                        if (null == chosen) {
+                            return;
+                        }
+                        allocatedPortion = chosen;
+                    } else { // otherwise assign the rest of the damage/protection
+                        allocatedPortion = stillToDivide;
+                    }
+                    tgt.setStillToDivide(stillToDivide - allocatedPortion);
+                    tgt.addDividedAllocation(player, allocatedPortion);
+                }
+                tgt.addTarget(player);
+                this.done();
+            }
+        }
+
+        void done() {
+            this.stop();
+            cdlDone.countDown();
+        }
+    }
+
     private Target target = null;
     private SpellAbility ability = null;
     private Card card = null;
@@ -98,6 +271,7 @@ public class TargetSelection {
     }
 
     private boolean bCancel = false;
+    private boolean bTargetingDone = false;
 
     /**
      * <p>
@@ -128,20 +302,6 @@ public class TargetSelection {
         }
 
         return this.subSelection.isCanceled();
-    }
-
-    private boolean bDoneTarget = false;
-
-    /**
-     * <p>
-     * setDoneTarget.
-     * </p>
-     * 
-     * @param done
-     *            a boolean.
-     */
-    public final void setDoneTarget(final boolean done) {
-        this.bDoneTarget = done;
     }
 
     /**
@@ -179,7 +339,7 @@ public class TargetSelection {
      * resetTargets.
      * </p>
      */
-    public final void resetTargets() {
+    public final void clearTargets() {
         if (this.target != null) {
             this.target.resetTargets();
             this.target.calculateStillToDivide(this.ability.getParam("DividedAsYouChoose"), this.getCard(), this.ability);
@@ -195,24 +355,25 @@ public class TargetSelection {
      */
     public final boolean chooseTargets() {
         // if not enough targets chosen, reset and cancel Ability
-        if (this.bCancel || (this.bDoneTarget && !this.target.isMinTargetsChosen(this.card, this.ability))) {
+        if (this.bCancel || (this.bTargetingDone && !this.target.isMinTargetsChosen(this.card, this.ability))) {
             this.bCancel = true;
-            this.req.finishedTargeting();
             return false;
-        } else if (!this.doesTarget() || (this.bDoneTarget && this.target.isMinTargetsChosen(this.card, this.ability))
+        } 
+
+        if (!this.doesTarget() 
+                || this.bTargetingDone && this.target.isMinTargetsChosen(this.card, this.ability)
                 || this.target.isMaxTargetsChosen(this.card, this.ability)
-                || (this.target.isDividedAsYouChoose() && this.target.getStillToDivide() == 0)) {
+                || this.target.isDividedAsYouChoose() && this.target.getStillToDivide() == 0) {
             final AbilitySub abSub = this.ability.getSubAbility();
 
             if (abSub == null) {
                 // if no more SubAbilities finish targeting
-                this.req.finishedTargeting();
                 return true;
             } else {
                 // Has Sub Ability
                 this.subSelection = new TargetSelection(abSub.getTarget(), abSub);
                 this.subSelection.setRequirements(this.req);
-                this.subSelection.resetTargets();
+                this.subSelection.clearTargets();
                 return this.subSelection.chooseTargets();
             }
         }
@@ -220,11 +381,12 @@ public class TargetSelection {
         if (!this.target.hasCandidates(this.ability, true) && !this.target.isMinTargetsChosen(this.card, this.ability)) {
             // Cancel ability if there aren't any valid Candidates
             this.bCancel = true;
-            this.req.finishedTargeting();
             return false;
         }
 
         this.chooseValidInput();
+        if ( !bCancel )
+            return chooseTargets();
 
         return false;
     }
@@ -362,177 +524,14 @@ public class TargetSelection {
         }
         
         if (zone.contains(ZoneType.Battlefield) && zone.size() == 1) {
-            Singletons.getModel().getMatch().getInput().setInput(this.inputTargetSpecific(choices, true, mandatory, objects));
+            CountDownLatch cdl = new CountDownLatch(1);
+            Input inp = new InputSelectTargets(cdl, this, choices, objects, true, this.target, this.ability, mandatory);
+            FThreads.setInputAndWait(inp, cdl);
+            bTargetingDone = !bCancel;
         } else {
             this.chooseCardFromList(choices, true, mandatory);
         }
     } // input_targetValid
-
-    // List<Card> choices are the only cards the user can successful select
-    /**
-     * <p>
-     * input_targetSpecific.
-     * </p>
-     * 
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param targeted
-     *            a boolean.
-     * @param mandatory
-     *            a boolean.
-     * @param alreadyTargeted
-     *            the already targeted
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public final Input inputTargetSpecific(final List<Card> choices, final boolean targeted, final boolean mandatory,
-            final ArrayList<Object> alreadyTargeted) {
-        final SpellAbility sa = this.ability;
-        final TargetSelection select = this;
-        final Target tgt = this.target;
-        final SpellAbilityRequirements req = this.req;
-
-        final Input target = new Input() {
-            private static final long serialVersionUID = -1091595663541356356L;
-
-            @Override
-            public void showMessage() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Targeted: ");
-                for (final Object o : alreadyTargeted) {
-                    sb.append(o).append(" ");
-                }
-                sb.append(tgt.getTargetedString());
-                sb.append("\n");
-                sb.append(tgt.getVTSelection());
-
-                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-
-                // If reached Minimum targets, enable OK button
-                if (!tgt.isMinTargetsChosen(sa.getSourceCard(), sa) || tgt.isDividedAsYouChoose()) {
-                    if (mandatory && tgt.hasCandidates(sa, true)) {
-                        // Player has to click on a target
-                        ButtonUtil.disableAll();
-                    } else {
-                        ButtonUtil.enableOnlyCancel();
-                    }
-                } else {
-                    if (mandatory && tgt.hasCandidates(sa, true)) {
-                        // Player has to click on a target or ok
-                        ButtonUtil.enableOnlyOk();
-                    } else {
-                        ButtonUtil.enableAllFocusOk();
-                    }
-                }
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                select.setCancel(true);
-                this.stop();
-                req.finishedTargeting();
-            }
-
-            @Override
-            public void selectButtonOK() {
-                select.setDoneTarget(true);
-                this.done();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                // leave this in temporarily, there some seriously wrong things
-                // going on here
-                if (targeted && !card.canBeTargetedBy(sa)) {
-                    CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection? Restrictions?).");
-                } else if (choices.contains(card)) {
-                    if (tgt.isDividedAsYouChoose()) {
-                        final int stillToDivide = tgt.getStillToDivide();
-                        int allocatedPortion = 0;
-                        // allow allocation only if the max targets isn't reached and there are more candidates
-                        if ((tgt.getNumTargeted() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa))
-                                && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
-                            final Integer[] choices = new Integer[stillToDivide];
-                            for (int i = 1; i <= stillToDivide; i++) {
-                                choices[i - 1] = i;
-                            }
-                            String apiBasedMessage = "Distribute how much to ";
-                            if (sa.getApi() == ApiType.DealDamage) {
-                                apiBasedMessage = "Select how much damage to deal to ";
-                            } else if (sa.getApi() == ApiType.PreventDamage) {
-                                apiBasedMessage = "Select how much damage to prevent to ";
-                            } else if (sa.getApi() == ApiType.PutCounter) {
-                                apiBasedMessage = "Select how many counters to distribute to ";
-                            }
-                            final StringBuilder sb = new StringBuilder();
-                            sb.append(apiBasedMessage);
-                            sb.append(card.toString());
-                            Integer chosen = GuiChoose.oneOrNone(sb.toString(), choices);
-                            if (null == chosen) {
-                                return;
-                            }
-                            allocatedPortion = chosen;
-                        } else { // otherwise assign the rest of the damage/protection
-                            allocatedPortion = stillToDivide;
-                        }
-                        tgt.setStillToDivide(stillToDivide - allocatedPortion);
-                        tgt.addDividedAllocation(card, allocatedPortion);
-                    }
-                    tgt.addTarget(card);
-                    this.done();
-                }
-            } // selectCard()
-
-            @Override
-            public void selectPlayer(final Player player) {
-                if (alreadyTargeted.contains(player)) {
-                    return;
-                }
-
-                if (sa.canTarget(player)) {
-                    if (tgt.isDividedAsYouChoose()) {
-                        final int stillToDivide = tgt.getStillToDivide();
-                        int allocatedPortion = 0;
-                        // allow allocation only if the max targets isn't reached and there are more candidates
-                        if ((alreadyTargeted.size() + 1 < tgt.getMaxTargets(sa.getSourceCard(), sa))
-                                && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
-                            final Integer[] choices = new Integer[stillToDivide];
-                            for (int i = 1; i <= stillToDivide; i++) {
-                                choices[i - 1] = i;
-                            }
-                            String apiBasedMessage = "Distribute how much to ";
-                            if (sa.getApi() == ApiType.DealDamage) {
-                                apiBasedMessage = "Select how much damage to deal to ";
-                            } else if (sa.getApi() == ApiType.PreventDamage) {
-                                apiBasedMessage = "Select how much damage to prevent to ";
-                            }
-                            final StringBuilder sb = new StringBuilder();
-                            sb.append(apiBasedMessage);
-                            sb.append(player.getName());
-                            Integer chosen = GuiChoose.oneOrNone(sb.toString(), choices);
-                            if (null == chosen) {
-                                return;
-                            }
-                            allocatedPortion = chosen;
-                        } else { // otherwise assign the rest of the damage/protection
-                            allocatedPortion = stillToDivide;
-                        }
-                        tgt.setStillToDivide(stillToDivide - allocatedPortion);
-                        tgt.addDividedAllocation(player, allocatedPortion);
-                    }
-                    tgt.addTarget(player);
-                    this.done();
-                }
-            }
-
-            void done() {
-                this.stop();
-
-                select.chooseTargets();
-            }
-        };
-
-        return target;
-    } // input_targetSpecific()
 
     /**
      * <p>
@@ -624,7 +623,7 @@ public class TargetSelection {
             if (!c.equals(divBattlefield) && !c.equals(divExile) && !c.equals(divGrave)
                     && !c.equals(divLibrary) && !c.equals(divStack)) {
                 if (c.equals(dummy)) {
-                    this.setDoneTarget(true);
+                    bTargetingDone = true;
                 } else {
                     tgt.addTarget(c);
                 }
@@ -632,8 +631,6 @@ public class TargetSelection {
         } else {
             this.setCancel(true);
         }
-
-        this.chooseTargets();
     }
 
     /**
@@ -675,7 +672,7 @@ public class TargetSelection {
 
             if (madeChoice != null) {
                 if (madeChoice.equals(doneDummy)) {
-                    this.setDoneTarget(true);
+                    bTargetingDone = true;
                 } else {
                     tgt.addTarget(map.get(madeChoice));
                 }
@@ -683,8 +680,6 @@ public class TargetSelection {
                 select.setCancel(true);
             }
         }
-
-        select.chooseTargets();
     }
 
     // TODO The following three functions are Utility functions for

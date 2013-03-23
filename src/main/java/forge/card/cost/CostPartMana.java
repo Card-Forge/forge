@@ -22,6 +22,7 @@ import java.util.concurrent.CountDownLatch;
 import com.google.common.base.Strings;
 
 import forge.Card;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -112,8 +113,8 @@ public class CostPartMana extends CostPart {
     /**
      * @return the xCantBe0
      */
-    public boolean isxCantBe0() {
-        return xCantBe0;
+    public boolean canXbe0() {
+        return !xCantBe0;
     }
 
     /**
@@ -227,7 +228,7 @@ public class CostPartMana extends CostPart {
         }
         else inp = null;
         if ( null != inp) {
-            setInputAndWait(inp, cdl);
+            FThreads.setInputAndWait(inp, cdl);
         }
     }
 

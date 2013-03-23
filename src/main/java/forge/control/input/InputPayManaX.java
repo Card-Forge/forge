@@ -38,8 +38,7 @@ public class InputPayManaX extends InputPayManaBase {
 
     @Override
     public void showMessage() {
-        if ((xPaid == 0 && costMana.isxCantBe0()) || (this.colorX.equals("")
-                && !this.manaCost.toString().equals(strX))) {
+        if (xPaid == 0 && !costMana.canXbe0() || this.colorX.equals("") && !this.manaCost.toString().equals(strX)) {
             ButtonUtil.enableOnlyCancel();
             // only cancel if partially paid an X value
             // or X is 0, and x can't be 0
@@ -50,7 +49,7 @@ public class InputPayManaX extends InputPayManaBase {
         StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");
         msg.append(saPaidFor.getSourceCard().getName()).append("\n").append(this.xPaid);
         msg.append(" Paid so far.");
-        if (costMana.isxCantBe0()) {
+        if (!costMana.canXbe0()) {
             msg.append(" X Can't be 0.");
         }
 

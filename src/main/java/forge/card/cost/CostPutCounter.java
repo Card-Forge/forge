@@ -23,6 +23,7 @@ import java.util.concurrent.CountDownLatch;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -255,7 +256,7 @@ public class CostPutCounter extends CostPartWithList {
             this.addToList(source);
         } else {
             CountDownLatch cdl = new CountDownLatch(1);
-            setInputAndWait(new InputPayCostPutCounter(cdl, this.getType(), this, c, payment, ability), cdl);
+            FThreads.setInputAndWait(new InputPayCostPutCounter(cdl, this.getType(), this, c, payment, ability), cdl);
         }
         if ( !payment.isCanceled())
             addListToHash(ability, "CounterPut");

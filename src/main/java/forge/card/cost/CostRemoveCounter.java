@@ -24,6 +24,7 @@ import java.util.concurrent.CountDownLatch;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -386,7 +387,7 @@ public class CostRemoveCounter extends CostPartWithList {
             } else {
                 inp = new InputPayCostRemoveCounterFrom(cdl, this, this.getType(), ability, c, payment);
             }
-            setInputAndWait(inp, cdl);
+            FThreads.setInputAndWait(inp, cdl);
             
             if ( !payment.isCanceled() )
                 addListToHash(ability, "CounterRemove");
