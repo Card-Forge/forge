@@ -1,44 +1,27 @@
-Installation and Updating to a newer version Instructions:
+Installation Instructions:
+--------------------------
 
-We have changed the archival format used for the Forge distributions from ".zip" to ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to decompress these ".tar.bz2" archives. We recommend that you decompress the Forge archive into a new and unused folder.
+The archive format used for the Forge distribution is ".tar.bz2". There are utilities for Windows, Mac OS and the various *nix's that can be used to extract/decompress these ".tar.bz2" archives. We recommend that you extract/decompress the Forge archive into a new and unused folder.
 
-Once the Forge archive has been decompressed you should then be able to launch Forge by using the included launcher. Launching Forge by double clicking on the forge jar file will cause a java heap space error. Forge's memory requirements have increased over time and the launchers increase the java heap space available to Forge.
+Some people use the Windows application 7zip. This utility can be found at http://www.7-zip.org/download.html. Mac users can double click on the archive and the application Archive Utility will launch and extract the archive. Mac users do not need to download a separate utility.
 
-After downloading and installing a newer version of Forge you may want to move certain files from the older version over to the newer version of Forge. You should maintain your older version of Forge as a back up in case you make a mistake while installing the newer version.
+Once the Forge archive has been decompressed you should then be able to launch Forge by using the included launcher. Launching Forge by double clicking on the forge jar file in the past caused a java heap space error. Forge's memory requirements have increased over time and the launchers increase the java heap space available to Forge. Currently you can launch Forge by double clicking on the forge jar file without a java heap space error but this is likely to change as we add in more sounds, icons, etc.
 
-1) The /res/pics/ folder contains the card pictures, icons and token pictures (mtg card tokens and quest pet/plant tokens). Please note that the /res/images/icons/ folder was moved back to the /res/pics/ folder. The forge /res/images/ folder no longer is used as of version 1.2.8.
 
-The /res/pics/icons/ folder contains the quest opponent icons, small quest pet/plant icons (non-tokens) and some icons that are used by forge's quest mode. While several of these pictures ship with the forge archive most of them have to be downloaded using the Home screen -> Utilities -> Download Quest Images command.
+Updating to a newer version Instructions:
+-----------------------------------------
 
-2) The /res/pics_product/ folder contains four folders which in turn contain pictures for the booster, fatpacks, precons and tournamentpacks products.
-
-3) The /res/decks/ folder contains your deck files. You should copy over the files with the extension ".dck". In version 1.2.4 and later the /decks/ folder contains 4 subdirectories named constructed, cube, draft and sealed.
-
-You can place your deck files from an earlier version of Forge into the /res/decks/ folder. When you next launch Forge these decks will be converted to a newer format and will be moved into the proper subdirectory.
-
-4) The /res/draft/ and the /res/sealed/ folders contains files for the sealed and draft mode. You should copy over your files inside of these folders that end in the extension ".draft" or ".zsealed".
-
-5) The /res/quest/data folder contains your questData files. These files include all of the information for your current quests. You will not be able to continue your quests in a newer version of Forge unless you copy over the your quest data files. These files have a ".dat" extension. You can now have multiple ongoing quests at the same time.
-
-6) The Forge /res/preferences/ folder contains the preference files named "forge.preferences" and "editor.preferences". You should also move a copy of these files over to the newer version. The /res/preferences/ folder was added to version 1.2.8. The main.properties file was also moved to the /res/preferences/ folder.
-
-7) The /res/layouts/ folder contains a file named "match_preferred.xml". This file contains information that forge uses when setting the layout for the battlefield display. The match_default.xml file contains the default layout for the battlefield.
-
-The editor_preferred.xml file contains information that forge uses when setting the layout for the deck editor display. The editor_default.xml file contains the default layout for the deck editor display.
+The instructions that were found in this section are now out of date. Current instructions can be found in the CHANGES.txt and forge.profile.properties.example files.
 
 
 Advanced Updating to a newer version Instructions:
+--------------------------------------------------
 
-Another option for you to consider is to move some of the files/folders listed above to a different location on your hard drive. Then edit the "main.properties" file in the /res/ folder with any basic text editor. At the "image/base--file=pics" and "image/token--file=pics/tokens". Just change these to absolute paths of your choice eg:
-
-image/base--file=F:/Personal/CardForge/Low Resolution Images
-
-image/token--file=F:/Personal/CardForge/Low Resolution Images/tokens
-
-and do the same for "decks-dir--file=decks", "quest--properties=quest/quest.properties" and whatever else you might usually copy from version to version. Try to avoid folders that are usually updated in the releases. Just remember to use forward slashes for the pathnames. Then just copy the "main.properties" file from version to version. Occasionally compare it to the release version to make sure nothing else has changed, and if it has just replace the adjusted lines instead.
+The instructions that were found in this section are now out of date. Current instructions can be found in the CHANGES.txt and forge.profile.properties.example files.
 
 
 The Mac OS application version:
+-------------------------------
 
 We have packaged the Forge BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
 
@@ -58,19 +41,13 @@ Please note that the issue is most likely caused by Mountain Lion's Gatekeeper f
 
 
 Picture location info:
+----------------------
 
-The quest opponent icons jpg picture files go into your /res/images/icons folder. Please note that the /res/pics/icons/ folder was moved out of this folder and placed in the /res/images/ folder.
-
-The quest booster package jpg picture files go into your /res/pics/booster folder. The card token jpg picture files go into your /res/pics/tokens folder.
-
-The quest pets archive contains two subdirectories named "icons" and "tokens". Place the files located inside of the /icons/ folder into the /res/images/icons/ folder. Place the files located inside of the /tokens/ folder into the /res/pics/tokens/ folder.
-
-Your forge game may not come with one or more of these three folders as part of the forge archive. In this case you should use your computer's OS file system to create the proper folders with the correct names and they must be located inside of the /res/pics/ folder.
-
-The in-game downloaders will grab an image for face-down (Morph) cards on the battlefield.  To use a custom image, place a "morph.jpg" file in your res/pics/tokens directory.
+The instructions that were found in this section are now out of date. Current instructions can be found in the CHANGES.txt and forge.profile.properties.example files.
 
 
 Launching Forge and Memory Issues:
+----------------------------------
 
 In the past, some people noticed java heap space errors and lengthy pauses. The memory requirements for Forge have increased over time. The default setting on your computer for the java heap space may not be enough to prevent the above problems.
 
@@ -82,10 +59,11 @@ The script file must be located in the same folder as the Forge jar file and the
 
 If you have a low end machine you may find that the scripts above will prevent java heap space errors but will find that Forge still runs very slowly at times.
 
-In this case you can try the following. Remove the background jpg picture from /res/images/ui/ folder. You can try using low quality pictures rather than the high quality pictures. Or you can try removing all of the jpg pictures from the pics folder.
+In this case you can try the following. You can try using low quality pictures rather than the high quality pictures. Or you can try removing all of the jpg pictures from the pics folder.
 
 
 Forge failed to launch:
+-----------------------
 
 If you're trying to run Forge for the first time, but it doesn't open up, you can try the following to get some output and help yourself/us solve the problem.
 
@@ -114,47 +92,59 @@ Now you will probably see some sort of Error in the console. the first few lines
 
 
 The Card Pictures disappear when you restart Forge:
+---------------------------------------------------
 
 if you're running Windows 7, make sure you're running the program as an admin, otherwise no changes will be made to your system (nothing is saved). In Windows 7, Forge may be happier when run from somewhere in the My Documents structure, (they call them Libraries now???) or from another partition other than C:. The user has little permission to do much on the system drive.
 
 
 Java Issues:
+------------
 
-Some people that are using an early version of Java 7 under the Windows OS have reported errors that state "Split must have > 2 children". Anyone having this sort of problem should either upgrade Java 7 to a newer version or de-install Java 7 and install Java 6 instead.
+Forge is likely to be compatible with Java 7 at this time. Some people have used forge with Java 7 and have not reported any problems that are related to Java 7. If you would like to upgrade to Java 7 and have held off because of Forge then you may upgrade as we do not think that it will cause an incompatibility type of problem. We will continue to try to maintain compatibility with Java 6 for the foreseeable future.
 
 Forge requires Java 6 and will not run if you have an earlier version of Java. You will need to update to Java 6.
 
 
 Card Picture Issues:
+--------------------
 
 The server which contained the high quality card pictures is now off line and these high quality card pictures are no longer available as a download from within the forge application. We apologize, but the current dev team do not maintain this server and this matter is out of our control.
 
 Some people are choosing to re-download all of the low quality card and card set pictures when they install the next version of forge. This consumes large amounts of bandwidth needlessly. Please be careful!
 
-When you install the new version of Forge, find the forge/res/pics/ folder. Either move it or copy and paste the pics folder over to the recently installed new version of forge. This way you will only have to download the pictures for the new cards.
+
+The instructions that were found in this section are now out of date. Current instructions can be found in the CHANGES.txt and forge.profile.properties.example files.
+
+
+When you install a new version of Forge, please follow the instructions that can be found in the CHANGES.txt and forge.profile.properties.example files. This will allow you to reuse your previous picture files and other user data files. This way you will only have to download the pictures for the new cards.
 
 This should save enough bandwidth that everyone will be able to download the new set pictures from the cardforge server. We do appreciate your efforts to save bandwidth. Thank you.
 
 
 Reporting Bugs:
+---------------
 
 To report a bug with an official beta release, please follow the instructions at http://www.slightlymagic.net/wiki/Forge#I_think_I_found_a_bug_in_Forge._What_do_I_do.3F .
 
-To report a bug (1) with an alpha test, (2) with a nightly build, (3) with something compiled from the official Forge software repository, or (4) with the leading edge (formerly "SVN Bug Reports"), please do not submit your bugs to the forum. Instead, please follow the instructions at http://www.slightlymagic.net/wiki/How_to_File_a_Bug_Report_with_Mantis .
+To report a bug (1) with an alpha test, (2) with a nightly build, (3) with something compiled from the official Forge software repository, or (4) with the leading edge (formerly "SVN Bug Reports"), please do not submit your bugs to the forum. Instead, please follow the instructions at http://www.slightlymagic.net/wiki/How_to_File_a_Bug_Report_with_Mantis.
 
+Forge will now allow you to upload a crash report to the Forge forum at CCGH.
 
 
 A new very hard tier category in Quest mode:
+--------------------------------------------
 
 You will notice a new very hard tier category for the opponent. As you change from the previous tier to the next tier (easy to medium, etc.) you will now notice that there is not an abrupt change over. There is now a mixture of decks from the previous tier and the next tier for you to chose from. When you win a match you will complete the advancement to the next tier.
 
 
 The Forge Booster Draft mode:
+-----------------------------
 
 A significant re-write of the Booster Draft functionality has taken place. Draft from the Full card pool, sets/blocks or custom drafts (like cube). The AI will pick cards more intelligently, and builds decks from picked cards. Old method would pick cards for deck and then stop picking new cards.
 
 
 The developer mode:
+-------------------
 
 The developer mode gives us a few new features. These new features will primarily interest the devs as it will now help to test out specific cards while testing combat code changes. You can turn on or off this mode at the Home View -> Game Settings -> Preferences -> Gameplay Options section.
 
@@ -162,41 +152,49 @@ When turned on the battlefield will have a tab named "Dev Mode". There are a num
 
 
 New foil card image available:
+------------------------------
 
 Rob and Marc have worked together to add in a new feature which will overlay a card's image with a foil like film. A few random cards will have a foil like image in constructed mode games and possibly quest mode games. There is a check box on the Home View -> Game Settings -> Preferences view that you can use to turn this feature on or off.
 
 
 Informational icons overlays for cards on the battlefield:
+----------------------------------------------------------
 
 The Battlefield will now display three symbolic icons that will overlay creature cards. These icons are used to denote summoning sickness and whether a creature is attacking or blocking.  Added additional icons that will be drawn over the cards in the battlefield for phasing and counters at a later date. The attack/block/phasing icons and counters will now also be shown on large cards, only casting cost will be omitted. Lands and tokens with different amounts/types of counters will no longer stack. Tokens with different summoning sickness will no longer stack. Lands that become creatures will now always be moved to the front row.
 
 
 Optional choice for abilities that are on the stack:
+----------------------------------------------------
 
 When a spell or an ability appears on the stack and it says "(OPTIONAL)" you can right-click it to decide if you want to always accept or to decline it.
 
 
 Multiple quest files:
+---------------------
  
 Multiple quest files are now supported. This allows you to start a new quest and give it a unique name, and it will not overwrite your previous quest game file.
 
 
 The new UI now uses tabbed panes:
+---------------------------------
 
 We now have a tab system for sub-menus in the home screen. Quest mode refactored to fit this tab system. It's now considerably easier to use - less cramped, less clicks, more functionality.
 
 
 The quest mode card shop:
+-------------------------
 
 You can now buy PreCon decks, Starter packs, Tournament packs and Fat packs from the quest mode card shop.
 
 
 Player Avatar pictures:
+-----------------------
 
 The UI has a few new features including the option to pick an avatar from a collection of pictures. This can be accessed from the Settings -> Avatars tab.
 
 
 The organizational structure of the /res/decks/ folder:
+-------------------------------------------------------
 
 The organizational structure of the /res/decks/ folder has been improved and we now have these six subdirectories:
 
@@ -209,8 +207,11 @@ The organizational structure of the /res/decks/ folder has been improved and we 
 
 You can place your deck files from an earlier version of Forge into the /res/decks/ folder. When you next launch Forge these decks will be converted to a newer format and will be moved into the proper subdirectory.
 
+Please not that your /decks/ directory no longer resides in you /res/ directory and has been moved to <userDir>/decks/.
+
 
 User-created themes for Forge's background, fonts, colors and icons:
+--------------------------------------------------------------------
 
 When you select a new skin in the Preferences view Forge should save the change to the preference file, quit and then automatically re-launch with the new skin displayed. During testing some people have noticed that Forge is not restarting on their computer and they have to re-launch Forge themselves.
 
@@ -220,6 +221,7 @@ http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8449
 
 
 The Battlefield UI:
+-------------------
 
 The Battlefield UI has a new feature implemented which allows us to move and resize the panels to new places on the battlefield. This allows us to personalize the battlefield display to our own liking. You should try moving panels by clicking and dragging their tabs.
 
@@ -227,21 +229,19 @@ If you do not like your efforts to personalize the battlefield display you can r
 
 
 The pets in quest mode:
+-----------------------
 
 Some adjustments to the pets in quest mode were made. The quest mode plant wall's Deathtouch ability was deemed to be too strong against the AI's attack code and this ability was changed to Wither in this version. This includes a new pet.
 
 
 The dock tab has a new button labeled "Open Layout":
+----------------------------------------------------
 
 The dock now has a new button labeled "Open Layout" along with old button with original function "Revert Layout". Modifying the battlefield layout will result in your changes being saved to a file named  "match_preferred.xml". You can copy and rename that file to share your layouts with other people.
 
 
-The res/images/icons/ folder:
-
-The res/images/icons/ folder has been moved to res/pics/icons/. This folder holds the quest opponent icons, bazaar pets, and bazaar plants. If you have downloaded this content, it will still work, but the folder must be moved on your computer.
-
-
 The new Deck Editors:
+---------------------
 
 The work on the new UI is now finished and this version adds the new UI to the deck editors. We all would like to thank Doublestrike for his contributions to the new UI.
 
@@ -256,6 +256,7 @@ The new deck editors include:
 
 
 Performance issues on low end machines:
+---------------------------------------
 
 Several people have noticed forge slowing down after playing a number of matches without quitting forge in between the matches that are played. The new UI may be involved somehow. We also hope to have this figured out and fixed in the near future. Please be patient in the meanwhile. A recent fix was implemented that should improve the slowdown problem somewhat.
 
@@ -265,11 +266,13 @@ Some performance changes were made to Forge and it should now operate more quick
 
 
 A note about winning booster packs in quest mode:
+-------------------------------------------------
 
 If you win a quest mode match, you get a booster pack for every 1 or 2 (default) Wins, depending on the difficulty level. If you lose and you are playing on easy mode, you get a booster pack every 1 (default) Loss.
 
 
 The new UI:
+-----------
 
 The first step was to update the battlefield window. The second step was to update the New Game window (now named Home view). We got constructed mode and then quest modes working first. We got the draft and sealed modes working again afterwards.
 
@@ -277,11 +280,13 @@ The work on the new UI is now for the most part finished. We should not expect m
 
 
 The new Alpha Strike button:
+----------------------------
 
 A new Alpha Strike button was added to the dock. The Dock is one of the tabs availble in the battlefield view.
 
 
 Using Forge with the new Mac OS Mountain Lion:
+----------------------------------------------
 
 If you update your OS to Apple OSX 10.8 Mountain Lion and try to launch a new version of forge that you will likely get a dialog which states "File is damaged and cannot be opened. Please move to trash." 
 
@@ -293,6 +298,7 @@ Please note that the issue is most likely caused by Mountain Lion's Gatekeeper f
 
 
 The Forge sealed deck mode:
+---------------------------
 
 Sealed Deck mode has had a complete rewrite. Full cardpool, block and custom modes are supported. Custom sealed files in the res/sealed folder are exactly the same as custom draft files, except the file extension ".sealed".
 
@@ -304,11 +310,13 @@ Perhaps the most notable changes to the sealed deck mode are related to "fantasy
 
 
 The new Gauntlet mode:
+----------------------
 
 A new Gauntlet mode has been added. This mode gives you four options: Quick Gauntlet, Build A Gauntlet, Load Gauntlet and Gauntlet Contests. You can create a group of computer decks to play against by choosing either Custom user decks, Quest Decks, Fully random color decks or Semi-random theme decks.
 
 
 The new Variant mode (was named Multiplayer):
+---------------------------------------------
 
 A new multiplayer mode has also been added. You should be able to play against multiple AI opponents at this time. You should note that the current Archenemy mode does not use Schemes at this time.
 
@@ -320,21 +328,25 @@ The older match layout files are incompatible with the new multiplayer mode. The
 
 
 The new damage dialog:
+----------------------
 
 The new damage dialog now uses the new UI.
 
 
 When choosing cards, sources, etc. using a list box:
+----------------------------------------------------
 
-When choosing cards, sources, etc. using a list box, the currently selected card will now be visually highlighted on the playfield (to better distinguish between e.g. three different cards with the same name on the playfield). Now the visual highlighting of a card will also work when declaring the order of blockers.
+When choosing cards, sources, etc. using a list box, the currently selected card will now be visually highlighted on the play field (to better distinguish between e.g. three different cards with the same name on the play field). Now the visual highlighting of a card will also work when declaring the order of blockers.
 
 
 Return to Ravnica Guild Sealed Deck mode:
+-----------------------------------------
 
 Added Return to Ravnica Guild Sealed Deck mode. Start a new sealed deck game, choose "Block / Set" and then scroll down until you find "Return to Ravnica Guild Sealed (block)". Select that. From the "Choose Set Combination" menu, select the first option. You will be prompted twice to pick your guild (once for the promo cards, once for the actual booster - you should choose the same guild both times). After that you're ready to go.
 
 
 Targeting arrows are now available in the battlefield display:
+--------------------------------------------------------------
 
 The Targeting Overlay has been fixed and re-enabled. It now correctly shows the targeting arcs in cases when it previously showed them in the wrong direction. The match UI is properly refreshed when the targeting arcs are switched on/off. The defunct "mouseover-only" mode is currently disabled (it crashes Forge, difficult to fix).
 
@@ -342,6 +354,7 @@ The visuals for targeting arrows has been improved and looks better, with an ada
 
 
 The new sound system:
+---------------------
 
 Forge now has a sound effect system in place. Several basic sounds are linked to the code now and will be enabled when "Enable Sounds" option is checked in the preferences. It supports WAV and AU file formats.
 
@@ -387,23 +400,27 @@ All sounds use the event bus model now and are not called directly.
 
 
 The new Vanguard mode:
+----------------------
 
 We now have a Vanguard mode implemented. This is a work in progress. The older match layout files are incompatible with the new Vanguard mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files need to be deleted and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
 
 
 The new Archenemy mode:
+-----------------------
 
 Schemes have been added to the Archenemy mode. This is a work in progress and there may be a bug or two for us to find.
 
 
 Quest Worlds:
+-------------
 
-This version allows you to travel between the regular quest world and the other worlds (Shandalar, Ravnica, Jamuraa, more may be added in the future) to get different duel opponents and challenges. You will have to complete your current challenges before travelling or you will lose them. 
+This version allows you to travel between the regular quest world and the other worlds (Shandalar, Ravnica, Jamuraa, more may be added in the future) to get different duel opponents and challenges. You will have to complete your current challenges before traveling or you will lose them. 
 
-World-specific format enforcing and starting world selection are available. Something has to be done about locked (non-repeatabled) challenges so they do not end up locking other challenges in different worlds.
+World-specific format enforcing and starting world selection are available. Something has to be done about locked (non-repeatable) challenges so they do not end up locking other challenges in different worlds.
 
 
 Forge now has sideboards for the human player:
+----------------------------------------------
 
 Sideboards have been implemented for Human players. We currently have:
 
@@ -418,17 +435,20 @@ We don't yet have:
 * AI sideboarding.
 
 
-The deck conformance/legality limitaion:
+The deck conformance/legality limitation:
+-----------------------------------------
 
-The deck conformance/legality is now a user-togglable preference and is enabled by default. You no longer need to turn on dev mode to play an illegal deck.
+The deck conformance/legality is now a user-toggable preference and is enabled by default. You no longer need to turn on dev mode to play an illegal deck.
 
 
 Using Forge on displays that are only 600 pixels tall or slightly larger:
+-------------------------------------------------------------------------
 
 The "Sanctioned Format: Constructed" view should now be compatible with displays that are only 600 pixels tall. The deck list at 600 pixels tall should now display three lines of text rather than less than a single line of text.
 
 
 We are looking for help in finding additional sound files for the new sound feature:
+------------------------------------------------------------------------------------
 
 This version of forge includes a few sound files for the new sound effect system. While we have several sounds assigned to a few of the available events there are a number of events that do not yet have a assigned sound file. This should be considered a work in progress and we could use some help in finding interesting sounds that we can add to forge.
 
@@ -444,6 +464,7 @@ http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8570
 
 
 Notes about the second Quest World, Jamuraa:
+--------------------------------------------
 
 A second Quest World, Jamuraa, has been added to Forge. When playing Quest mode, it is now possible to 'Travel' between the regular Quest environment and the two Worlds, Shandalar and Jamuraa, both of which include special formats, opponents and challenges. Or you can start a new Quest in any of them.
 
@@ -464,6 +485,7 @@ http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9258
 
 
 New Deck Editor features with improved Filters:
+-----------------------------------------------
 
 Some work is being done on the various deck editors -- including the quest spell shop -- and we hope to add in additional features while improving the UI. Here is a quick tutorial on the new features:
 
@@ -504,16 +526,19 @@ The Deck Editor has also gained some hotkey and context menu abilities. R-click 
 
 
 The Game Log:
+-------------
 
 Added a 'copy to clipboard' button on WinLose screen so players can easily copy the game log.
 
 
-The UI more keyboard-friendly:
+The UI is more keyboard-friendly:
+---------------------------------
 
 Work was also done on making the UI more keyboard-friendly. For example, the OK button should now stay focused during matches, so you can advance through the stages by hitting Enter without having to go over and click the button all the time. If you find the button is losing focus, please report it as a bug.
 
 
 Gatecrash Guild Sealed game mode:
+---------------------------------
 
 Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed Mode Game, select "Block / Set" and "Gatecrash Guild Sealed". Select the first (default) configuration in the "Choose Set Combination" dialog, and when asked to pick your boosters, choose the guild you want twice (once for the guild-specific booster, and then for the extra promo cards). 
 
@@ -521,5 +546,6 @@ The following cards are not included in the guild boosters of this game mode bec
 
 
 Our Lawyers Made Us Do This:
+----------------------------
 
 This product includes software developed by the Indiana University Extreme! Lab (http://www.extreme.indiana.edu/).
