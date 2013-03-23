@@ -73,12 +73,4 @@ public class AiInputCommon extends InputBase {
             computer.onPriorityRecieved();
         }
     };
-
-
-    
-
-    /* (non-Javadoc)
-     * @see forge.control.input.Input#isClassUpdated()
-     */
-    @Override public void isClassUpdated() { }
 }

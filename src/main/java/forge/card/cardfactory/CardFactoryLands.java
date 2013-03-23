@@ -25,7 +25,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.Command;
 import forge.Singletons;
-import forge.control.input.InputBase;
 import forge.control.input.InputSelectManyCards;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -76,20 +75,18 @@ class CardFactoryLands {
         }
 
         @Override
-        protected InputBase onDone() {
+        protected void onDone() {
             if (selected.isEmpty()) {
-                return onCancel();
+                onCancel();
             }
             
             String cardName = selected.get(0).getName();
             JOptionPane.showMessageDialog(null, "Revealed card: " + cardName, cardName, JOptionPane.PLAIN_MESSAGE);
-            return null;
         }
 
         @Override
-        public InputBase onCancel() {
+        public void onCancel() {
             card.setTapped(true);
-            return null;
         }
     }
 

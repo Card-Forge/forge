@@ -117,7 +117,4 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
             this.done();
         }
     }
-
-    @Override public void isClassUpdated() {
-    }
 }

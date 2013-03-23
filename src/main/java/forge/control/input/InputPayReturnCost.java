@@ -187,8 +187,4 @@ public class InputPayReturnCost extends InputBase implements InputPayment {
         bPaid = false;
         cdlDone.countDown();
     }
-
-    @Override public void isClassUpdated() {
-    }
-
 }

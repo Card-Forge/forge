@@ -145,7 +145,4 @@ public class InputPayManaSimple extends InputPayManaBase {
         }
 
     }
-
-    @Override public void isClassUpdated() {
-    }
 }

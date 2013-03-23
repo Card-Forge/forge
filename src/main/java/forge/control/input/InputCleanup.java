@@ -82,18 +82,4 @@ public class InputCleanup extends InputBase {
             }
         }
     } // selectCard()
-
-    /**
-     * <p>
-     * AI_CleanupDiscard.
-     * </p>
-     */
-
-
-    /* (non-Javadoc)
-     * @see forge.control.input.Input#isClassUpdated()
-     */
-    @Override
-    public void isClassUpdated() {
-    }
 }

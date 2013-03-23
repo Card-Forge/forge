@@ -184,8 +184,4 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
 
         CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
     }
-
-    @Override public void isClassUpdated() {
-    }
-
 }

@@ -478,9 +478,8 @@ public class Upkeep extends Phase {
                         };
 
                         @Override
-                        protected InputBase onDone() {
+                        protected void onDone() {
                             game.getAction().destroyNoRegeneration(selected.get(0));
-                            return null;
                         }
                     };
                     if (player.isHuman() && targets.size() > 0) {

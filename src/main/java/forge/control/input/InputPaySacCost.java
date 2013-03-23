@@ -185,7 +185,4 @@ public class InputPaySacCost extends InputBase {
         }
         this.unpaid.execute();
     }
-
-    @Override public void isClassUpdated() {
-    }
 }

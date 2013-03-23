@@ -96,7 +96,4 @@ public class InputPassPriority extends InputBase {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
     } // selectCard()
-
-    @Override public void isClassUpdated() {
-    }
 }

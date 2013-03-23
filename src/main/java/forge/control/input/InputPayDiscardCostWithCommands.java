@@ -187,7 +187,4 @@ public class InputPayDiscardCostWithCommands extends InputBase implements InputP
         bPaid = false;
         cdlDone.countDown();
     }
-
-    @Override public void isClassUpdated() {
-    }
 }

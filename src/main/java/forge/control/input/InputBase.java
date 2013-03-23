@@ -40,93 +40,28 @@ public abstract class InputBase implements java.io.Serializable {
      * showMessage.
      * </p>
      */
-    public void showMessage() {
-        showMessage("Blank Input");
-    }
+    public abstract void showMessage();
 
+    public void selectCard(final Card c) {   }
+    public void selectPlayer(final Player player) {    }
+    public void selectButtonOK() {    }
+    public void selectButtonCancel() {    }
+
+    // to remove need for CMatchUI dependence
     protected void showMessage(String message) { 
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
     
     /**
      * <p>
-     * selectCard.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public void selectCard(final Card c) {
-    }
-
-    /**
-     * <p>
-     * selectPlayer.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     */
-    public void selectPlayer(final Player player) {
-    }
-
-    /**
-     * <p>
-     * selectButtonOK.
-     * </p>
-     */
-    public void selectButtonOK() {
-    }
-
-    /**
-     * <p>
-     * selectButtonCancel.
-     * </p>
-     */
-    public void selectButtonCancel() {
-    }
-
-    // helper methods, since they are used alot
-    // to be used by anything in CardFactory like SetTargetInput
-    // NOT TO BE USED by Input_Main or any of the "regular" Inputs objects that
-    // are not set using AllZone.getInputControl().setInput(Input)
-    /**
-     * <p>
      * stop.
      * </p>
      */
-    public final void stop() {
+    protected final void stop() {
         // clears a "temp" Input like Input_PayManaCost if there is one
         Singletons.getModel().getMatch().getInput().resetInput();
-
+        afterStop(); // sync inputs will release their latch there
     }
-
-    // exits the "current" Input and sets the next Input
-    /**
-     * <p>
-     * stopSetNext.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.InputBase} object.
-     */
-    public final void stopSetNext(final InputBase in) {
-        this.stop();
-        Singletons.getModel().getMatch().getInput().setInput(in);
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public String toString() {
-        return "blank";
-    } // returns the Input name like "EmptyStack"
-
-
-    /**
-     * This method is used to mark old descendants of Input
-     * TODO: Write javadoc for this method.
-     */
-    public /*abstract */void isClassUpdated() {
-    } //;
-
+    
+    protected void afterStop() { }
 }

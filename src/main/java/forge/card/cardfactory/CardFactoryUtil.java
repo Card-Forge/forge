@@ -3155,10 +3155,9 @@ public class CardFactoryUtil {
             private static final long serialVersionUID = 1981791992623774490L;
 
             @Override
-            protected InputBase onDone() {
+            protected void onDone() {
                 haunterDiesWork.setTargetCard(selected.get(0));
                 Singletons.getModel().getGame().getStack().add(haunterDiesWork);
-                return null;
             }
 
             @Override

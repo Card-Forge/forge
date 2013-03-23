@@ -92,13 +92,6 @@ public class InputPayManaX extends InputPayManaBase {
         useManaFromPool(color, this.colorX.isEmpty() ? this.manaCost : new ManaCostBeingPaid(this.colorX));
     }
 
-    /* (non-Javadoc)
-     * @see forge.control.input.Input#isClassUpdated()
-     */
-    @Override
-    public void isClassUpdated() {
-    }
-
 
     @Override
     protected void done() {

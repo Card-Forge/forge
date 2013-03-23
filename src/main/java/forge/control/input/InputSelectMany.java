@@ -65,18 +65,7 @@ public abstract class InputSelectMany<T extends GameEntity> extends InputBase {
 
     @Override
     public final void selectButtonCancel() {
-        // this.stop();
-        InputBase next = onCancel(); // might add ability to stack from here
-        // if ( next != null ) {
-        //   Singletons.getModel().getMatch().getInput().setInput(next);
-        // }
-
-        if (null == next) {
-            this.stop();
-        } else {
-            this.stopSetNext(next);
-        }
-
+        this.stop();
         // for a next use
         selected.clear();
     }
@@ -87,24 +76,9 @@ public abstract class InputSelectMany<T extends GameEntity> extends InputBase {
         // if an ability is put on stack before this input is stopped;
         // if it does, uncomment the 5 lines below, use them as method body
 
-        // this.stop();
-        InputBase next = onDone(); // might add ability to stack from here
-        // if ( next != null ) {
-        //   Singletons.getModel().getMatch().getInput().setInput(next);
-        // }
-
-        if (null == next) {
-            this.stop();
-        } else {
-            this.stopSetNext(next);
-        }
-
+        this.stop();
         // for a next use
         selected.clear();
-    }
-
-    @Override
-    public void isClassUpdated() {
     }
 
     public void setMessage(String message0) {
@@ -112,11 +86,11 @@ public abstract class InputSelectMany<T extends GameEntity> extends InputBase {
     }
 
     // must define these
-    protected abstract InputBase onDone();
+    protected abstract void onDone();
     protected abstract boolean isValidChoice(T choice);
 
     // might re-define later
-    protected InputBase onCancel() { return null; }
+    protected void onCancel() {}
     protected boolean canCancelWithSomethingSelected() { return false; }
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
     protected boolean hasAllTargets() { return selected.size() >= max; }

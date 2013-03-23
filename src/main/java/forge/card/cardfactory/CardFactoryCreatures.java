@@ -495,9 +495,8 @@ public class CardFactoryCreatures {
             }
 
             @Override
-            protected InputBase onCancel() {
+            protected void onCancel() {
                 Singletons.getModel().getGame().getAction().sacrifice(card, null);
-                return null;
             }
 
             @Override
@@ -507,11 +506,10 @@ public class CardFactoryCreatures {
             } // selectCard()
 
             @Override
-            protected InputBase onDone() {
+            protected void onDone() {
                 for (final Card sac : selected) {
                     Singletons.getModel().getGame().getAction().sacrifice(sac, null);
                 }
-                return null;
             }
 
             @Override

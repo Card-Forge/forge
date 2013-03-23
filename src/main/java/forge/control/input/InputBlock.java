@@ -144,11 +144,4 @@ public class InputBlock extends InputBase {
 
         this.showMessage();
     } // selectCard()
-
-    /* (non-Javadoc)
-     * @see forge.control.input.Input#isClassUpdated()
-     */
-    @Override
-    public void isClassUpdated() {
-    }
 }
