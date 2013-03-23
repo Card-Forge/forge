@@ -23,6 +23,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
 import forge.control.input.InputBase;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -57,9 +58,9 @@ public final class PlayerUtil {
      * @return a {@link forge.control.input.InputBase} object.
      * @since 1.0.15
      */
-    public static InputBase inputDiscardNumUnless(final int nCards, final String uType, final SpellAbility sa) {
+    public static Input inputDiscardNumUnless(final int nCards, final String uType, final SpellAbility sa) {
         final SpellAbility sp = sa;
-        final InputBase target = new InputBase() {
+        final Input target = new InputBase() {
             private static final long serialVersionUID = 8822292413831640944L;
 
             private int n = 0;
@@ -114,9 +115,9 @@ public final class PlayerUtil {
      * @return a {@link forge.control.input.InputBase} object.
      * @since 1.0.15
      */
-    public static InputBase inputDiscard(final int nCards, final SpellAbility sa) {
+    public static Input inputDiscard(final int nCards, final SpellAbility sa) {
         final SpellAbility sp = sa;
-        final InputBase target = new InputBase() {
+        final Input target = new InputBase() {
             private static final long serialVersionUID = -329993322080934435L;
 
             private int n = 0;
@@ -165,7 +166,7 @@ public final class PlayerUtil {
      * @return a {@link forge.control.input.InputBase} object.
      * @since 1.0.15
      */
-    public static InputBase inputSacrificePermanents(final int nCards, final String type) {
+    public static Input inputSacrificePermanents(final int nCards, final String type) {
         final List<Card> list = CardLists.getType(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield), type);
 
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
@@ -185,8 +186,8 @@ public final class PlayerUtil {
      * @return a {@link forge.control.input.InputBase} object.
      * @since 1.0.15
      */
-    public static InputBase inputSacrificePermanentsFromList(final int nCards, final List<Card> list, final String message) {
-        final InputBase target = new InputBase() {
+    public static Input inputSacrificePermanentsFromList(final int nCards, final List<Card> list, final String message) {
+        final Input target = new InputBase() {
             private static final long serialVersionUID = 1981791992623774490L;
             private int n = 0;
 

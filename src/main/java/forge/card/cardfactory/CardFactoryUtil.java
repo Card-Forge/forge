@@ -62,6 +62,7 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.control.input.Input;
 import forge.control.input.InputBase;
 import forge.control.input.InputSelectManyCards;
 import forge.game.GameState;
@@ -2304,8 +2305,8 @@ public class CardFactoryUtil {
      *            a {@link java.lang.String} object.
      * @return a {@link forge.control.input.InputBase} object.
      */
-    public static InputBase inputUntapUpToNType(final int n, final String type) {
-        final InputBase untap = new InputBase() {
+    public static Input inputUntapUpToNType(final int n, final String type) {
+        final Input untap = new InputBase() {
             private static final long serialVersionUID = -2167059918040912025L;
 
             private final int stop = n;

@@ -23,7 +23,7 @@ import java.util.Observer;
 import forge.Card;
 import forge.FThreads;
 import forge.Singletons;
-import forge.control.input.InputBase;
+import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.view.ButtonUtil;
 
@@ -38,7 +38,7 @@ import forge.view.ButtonUtil;
 public class InputProxy implements Observer {
 
     /** The input. */
-    private InputBase input;
+    private Input input;
     private boolean valid = false;
 
     @Override
@@ -56,7 +56,7 @@ public class InputProxy implements Observer {
      * @param in
      *            a {@link forge.control.input.InputBase} object.
      */
-    public final synchronized void setInput(final InputBase in) {
+    public final synchronized void setInput(final Input in) {
         valid = true;
         this.input = in;
         
@@ -123,7 +123,7 @@ public class InputProxy implements Observer {
     }
 
     /** @return {@link forge.gui.InputProxy.InputBase} */
-    public InputBase getInput() {
+    public Input getInput() {
         return this.input;
     }
 

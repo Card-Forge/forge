@@ -30,21 +30,21 @@ import forge.gui.match.CMatchUI;
  * @author Forge
  * @version $Id$
  */
-public abstract class InputBase implements java.io.Serializable {
+public abstract class InputBase implements java.io.Serializable, Input {
     /** Constant <code>serialVersionUID=-6539552513871194081L</code>. */
     private static final long serialVersionUID = -6539552513871194081L;
 
     // showMessage() is always the first method called
-    /**
-     * <p>
-     * showMessage.
-     * </p>
-     */
+    @Override
     public abstract void showMessage();
 
+    @Override
     public void selectCard(final Card c) {   }
+    @Override
     public void selectPlayer(final Player player) {    }
+    @Override
     public void selectButtonOK() {    }
+    @Override
     public void selectButtonCancel() {    }
 
     // to remove need for CMatchUI dependence
@@ -52,11 +52,7 @@ public abstract class InputBase implements java.io.Serializable {
         CMatchUI.SINGLETON_INSTANCE.showMessage(message);
     }
     
-    /**
-     * <p>
-     * stop.
-     * </p>
-     */
+    // called by input to cleanup.
     protected final void stop() {
         // clears a "temp" Input like Input_PayManaCost if there is one
         Singletons.getModel().getMatch().getInput().resetInput();

@@ -40,7 +40,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=3955194449319994301L</code>. */
     private static final long serialVersionUID = 3955194449319994301L;
 
-    private final Stack<InputBase> inputStack = new Stack<InputBase>();
+    private final Stack<Input> inputStack = new Stack<Input>();
 
     /**
      * <p>
@@ -50,7 +50,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @param in
      *            a {@link forge.control.input.InputBase} object.
      */
-    public final void setInput(final InputBase in) {
+    public final void setInput(final Input in) {
         //System.out.println(in.getClass().getName());
         this.inputStack.push(in);
         // System.out.print("Current: " + input + "; Stack = " + inputStack);
@@ -67,7 +67,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @param bAddToResolving
      *            a boolean.
      */
-    public final void setInputInterrupt(final InputBase in) {
+    public final void setInputInterrupt(final Input in) {
         // Make this
         this.inputStack.push(in);
         this.updateObservers();
@@ -80,7 +80,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * 
      * @return a {@link forge.control.input.InputBase} object.
      */
-    public final InputBase getInput() {
+    public final Input getInput() {
         return this.inputStack.peek();
     }
 
@@ -115,7 +115,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * 
      * @return a {@link forge.control.input.InputBase} object.
      */
-    public final InputBase getActualInput(GameState game) {
+    public final Input getActualInput(GameState game) {
         if ( !game.hasMulliganned() )
             return new InputMulligan();
 
@@ -197,7 +197,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     public final void setNewInput(GameState game) {
         PhaseHandler ph = game.getPhaseHandler();
 
-        final InputBase tmp = getActualInput(game);
+        final Input tmp = getActualInput(game);
         String message = String.format("%s's %s, priority of %s [%sP] input is %s \t stack:%s", ph.getPlayerTurn(), ph.getPhase(), ph.getPriorityPlayer(), ph.isPlayerPriorityAllowed() ? "+" : "-", tmp == null ? "null" : tmp.getClass().getSimpleName(), inputStack);
         System.out.println(message);
 

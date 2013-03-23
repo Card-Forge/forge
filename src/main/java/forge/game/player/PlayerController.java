@@ -8,7 +8,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import forge.Card;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
+import forge.control.input.Input;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -32,9 +32,9 @@ public abstract class PlayerController {
     public PlayerController(GameState game0) {
         game = game0;
     }
-    public abstract InputBase getDefaultInput();
-    public abstract InputBase getBlockInput();
-    public abstract InputBase getCleanupInput();
+    public abstract Input getDefaultInput();
+    public abstract Input getBlockInput();
+    public abstract Input getCleanupInput();
 
 
     /**

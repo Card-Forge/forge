@@ -11,7 +11,7 @@ import forge.Card;
 import forge.GameEntity;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputBase;
+import forge.control.input.Input;
 import forge.deck.Deck;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -32,15 +32,15 @@ import forge.gui.GuiChoose;
  */
 public class PlayerControllerAi extends PlayerController {
 
-    private InputBase defaultInput;
-    private InputBase blockInput;
-    private InputBase cleanupInput;
+    private Input defaultInput;
+    private Input blockInput;
+    private Input cleanupInput;
     
     private final AiController brains;
     private final AIPlayer player;
     
 
-    public final InputBase getDefaultInput() {
+    public final Input getDefaultInput() {
         return defaultInput;
     }
 
@@ -70,14 +70,14 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     /** Input to use when player has to declare blockers */
-    public InputBase getBlockInput() {
+    public Input getBlockInput() {
         return blockInput;
     }
 
     /**
      * @return the cleanupInput
      */
-    public InputBase getCleanupInput() {
+    public Input getCleanupInput() {
         return cleanupInput;
     }
 
