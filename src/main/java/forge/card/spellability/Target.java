@@ -457,7 +457,6 @@ public class Target {
      *            a {@link forge.card.spellability.Target} object.
      */
     public Target(final Target target) {
-
         this.tgtValid = true;
         this.srcCard = target.getSourceCard();
         this.vtSelection = target.getVTSelection();
@@ -466,6 +465,7 @@ public class Target {
         this.maxTargets = target.getMaxTargets();
         this.tgtZone = target.getZone();
         this.targetSpellAbilityType = target.getTargetSpellAbilityType();
+        this.dividedAsYouChoose = target.isDividedAsYouChoose();
     }
 
     /**
