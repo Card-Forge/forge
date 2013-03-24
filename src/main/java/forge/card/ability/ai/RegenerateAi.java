@@ -148,6 +148,9 @@ public class RegenerateAi extends SpellAbilityAi {
                     }
                 }
             }
+            if (tgt.getTargets().isEmpty()) {
+                return false;
+            }
         }
 
         return chance;
