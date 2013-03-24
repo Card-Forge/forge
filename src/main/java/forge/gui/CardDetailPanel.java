@@ -273,9 +273,27 @@ public class CardDetailPanel extends FPanel {
             this.typeLabel.setText("Creature");
         }
         
+        StringBuilder ptText = new StringBuilder();
         if (card.isCreature()) {
-            this.powerToughnessLabel.setText(card.getNetAttack() + " / " + card.getNetDefense());
+            ptText.append(card.getNetAttack()).append(" / ").append(card.getNetDefense());
         }
+
+        if (card.isPlaneswalker()) {
+            if (ptText.length() > 0) {
+                ptText.insert(0, "P/T: ");
+                ptText.append(" - ").append("Loy: ");
+            } else {
+                ptText.append("Loyalty: ");
+            }
+
+            int loyalty = card.getCounters(CounterType.LOYALTY);
+            if (loyalty == 0) {
+                loyalty = card.getBaseLoyalty();
+            }
+            ptText.append(loyalty);
+        }
+
+        this.powerToughnessLabel.setText(ptText.toString());
 
         this.idLabel.setText("Card ID  " + card.getUniqueNumber());
 
