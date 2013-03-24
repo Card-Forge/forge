@@ -8941,6 +8941,7 @@ res/cardsfolder/s/sanctimony.txt svneol=native#text/plain
 res/cardsfolder/s/sanctuary_cat.txt -text
 res/cardsfolder/s/sanctum_custodian.txt svneol=native#text/plain
 res/cardsfolder/s/sanctum_gargoyle.txt svneol=native#text/plain
+res/cardsfolder/s/sanctum_guardian.txt -text
 res/cardsfolder/s/sanctum_plowbeast.txt svneol=native#text/plain
 res/cardsfolder/s/sand_silos.txt svneol=native#text/plain
 res/cardsfolder/s/sand_squid.txt svneol=native#text/plain
@@ -12045,6 +12046,7 @@ res/cardsfolder/w/whip_spine_drake.txt svneol=native#text/plain
 res/cardsfolder/w/whip_vine.txt svneol=native#text/plain
 res/cardsfolder/w/whipcorder.txt svneol=native#text/plain
 res/cardsfolder/w/whipflare.txt svneol=native#text/plain
+res/cardsfolder/w/whipkeeper.txt -text
 res/cardsfolder/w/whiplash_trap.txt svneol=native#text/plain
 res/cardsfolder/w/whipstitched_zombie.txt svneol=native#text/plain
 res/cardsfolder/w/whiptail_moloch.txt svneol=native#text/plain

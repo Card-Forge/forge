@@ -16,5 +16,6 @@ res/pics*
 res/pics_product
 res/quest/data
 /target
+/test-output
 tools/PerSetTrackingResults
 tools/oracleScript.log
