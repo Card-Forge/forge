@@ -18,8 +18,10 @@
 package forge;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.io.File;
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import javax.imageio.ImageIO;
@@ -70,22 +72,30 @@ public class ImageCache {
     public static final String PRECON_PREFIX         = "p:";
     public static final String TOURNAMENTPACK_PREFIX = "o:";
     
-    static private final LoadingCache<String, BufferedImage> CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
-    private static final BufferedImage emptyImage = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB); 
-    private static BufferedImage defaultImage = emptyImage;
-    static { 
+    private static final Set<String> _missingIconKeys = new HashSet<String>();
+    private static final LoadingCache<String, BufferedImage> _CACHE = CacheBuilder.newBuilder().softValues().build(new ImageLoader());
+    private static final BufferedImage _defaultImage;
+    static {
+        BufferedImage defImage = null;
         try {
             ClassLoader cl = Thread.currentThread().getContextClassLoader();
             InputStream isNoCardJpg = cl.getResourceAsStream("no_card.jpg");
-            defaultImage = ImageIO.read(isNoCardJpg);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-            e.printStackTrace();
+            defImage = ImageIO.read(isNoCardJpg);
+        } catch (Exception e) {
+            // resource not found; perhaps we're running straight from source
+            try {
+                defImage = ImageIO.read(new File("src/main/resources/no_card.jpg"));
+            } catch (Exception ex) {
+                System.err.println("could not load default card image");
+            }
+        } finally {
+            _defaultImage = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
         }
     }
     
     public static void clear() {
-        CACHE.invalidateAll();
+        _CACHE.invalidateAll();
+        _missingIconKeys.clear();
     }
     
     /**
@@ -99,7 +109,7 @@ public class ImageCache {
         } else {
             key = card.getImageKey();
         }
-        return scaleImage(key, width, height);
+        return scaleImage(key, width, height, true);
     }
 
     /**
@@ -107,7 +117,7 @@ public class ImageCache {
      * and cannot be loaded from disk.  pass -1 for width and/or height to avoid resizing in that dimension.
      */
     public static BufferedImage getImage(InventoryItem ii, int width, int height) {
-        return scaleImage(getImageKey(ii, false), width, height);
+        return scaleImage(getImageKey(ii, false), width, height, true);
     }
     
     /**
@@ -115,40 +125,42 @@ public class ImageCache {
      * in the cache and cannot be loaded from disk.
      */
     public static ImageIcon getIcon(IHasIcon ihi) {
-        BufferedImage i = scaleImage(ihi.getIconImageKey(), -1, -1);
-        if (null == i) {
+        String imageKey = ihi.getIconImageKey();
+        final BufferedImage i;
+        if (_missingIconKeys.contains(imageKey) ||
+                null == (i = scaleImage(ihi.getIconImageKey(), -1, -1, false))) {
+            _missingIconKeys.add(imageKey);
             return FSkin.getIcon(FSkin.InterfaceIcons.ICO_UNKNOWN);
         }
         return new ImageIcon(i);
     }
 
-    private static BufferedImage scaleImage(String key, final int width, final int height) {
+    private static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage) {
         if (StringUtils.isEmpty(key) || (3 > width && -1 != width) || (3 > height && -1 != height)) {
             // picture too small or key not defined; return a blank
             return null;
         }
 
-        StringBuilder rsKey = new StringBuilder(key);
-        rsKey.append("#").append(width).append('x').append(height);
-        String resizedKey = rsKey.toString();
+        String resizedKey = String.format("%s#%dx%d", key, width, height);
 
-        final BufferedImage cached = CACHE.getIfPresent(resizedKey);
+        final BufferedImage cached = _CACHE.getIfPresent(resizedKey);
         if (null != cached) {
+            //System.out.println("found cached image: " + resizedKey);
             return cached;
         }
         
-        boolean mayEnlarge = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
         BufferedImage original = getImage(key);
-
         if (null == original) {
-            original = defaultImage;
-            CACHE.put(key, defaultImage); // This instructs cache to give up finding a picture if it was not found once
+            if (!useDefaultImage) {
+                return null;
+            }
+            
+            // henceforth use a default picture for this key if image not found
+            original = _defaultImage;
+            _CACHE.put(key, _defaultImage);
         }
 
-        if (original == emptyImage) { // the found image is a placeholder for missing picture? 
-            return null;
-        }
-
+        boolean mayEnlarge = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
         double scale = Math.min(
                 -1 == width ? 1 : (double)width / original.getWidth(),
                 -1 == height? 1 : (double)height / original.getHeight());
@@ -162,12 +174,22 @@ public class ImageCache {
         } else {
             int destWidth  = (int)(original.getWidth()  * scale);
             int destHeight = (int)(original.getHeight() * scale);
-            ResampleOp resampler = new ResampleOp(destWidth, destHeight);
             
-            result = resampler.filter(original, null);
-            CACHE.put(resizedKey, result);
+            // if this scale has been used before, get the cached version instead of rescaling
+            String effectiveResizedKey = String.format("%s#%dx%d", key, destWidth, destHeight);
+            result = _CACHE.getIfPresent(effectiveResizedKey);
+            if (null == result) {
+                ResampleOp resampler = new ResampleOp(destWidth, destHeight);
+                result = resampler.filter(original, null);
+                //System.out.println("caching resized image: " + effectiveResizedKey);
+                _CACHE.put(effectiveResizedKey, result);
+            //} else {
+            //    System.out.println("retrieved resized image: " + effectiveResizedKey);
+            }
         }
         
+        //System.out.println("caching image: " + resizedKey);
+        _CACHE.put(resizedKey, result);
         return result;
     }
 
@@ -176,7 +198,7 @@ public class ImageCache {
      */
     private static BufferedImage getImage(final String key) {
         try {
-            return ImageCache.CACHE.get(key);
+            return ImageCache._CACHE.get(key);
         } catch (final ExecutionException ex) {
             if (ex.getCause() instanceof NullPointerException) {
                 return null;
