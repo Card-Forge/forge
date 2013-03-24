@@ -519,22 +519,12 @@ public class MagicStack extends MyObservable {
                 // both X and multi is not supported yet
 
                 final SpellAbility sa = sp;
-                final Ability ability = new Ability(sp.getSourceCard(), sp.getMultiKickerManaCost()) {
+                final Ability abilityIncreaseMultikicker = new Ability(sp.getSourceCard(), sp.getMultiKickerManaCost()) {
                     @Override
                     public void resolve() {
                         this.getSourceCard().addMultiKickerMagnitude(1);
                     }
                 };
-
-                final Command unpaidCommand = new Command() {
-                    private static final long serialVersionUID = -3342222770086269767L;
-
-                    @Override
-                    public void execute() {
-                        MagicStack.this.push(sa);
-                    }
-                };
-
 
                 Player activating = sp.getActivatingPlayer();
 
@@ -545,9 +535,9 @@ public class MagicStack extends MyObservable {
 
                         @Override
                         public void execute() {
-                            ability.resolve();
+                            abilityIncreaseMultikicker.resolve();
                             
-                            final ManaCostBeingPaid manaCost = MagicStack.this.getMultiKickerSpellCostChange(ability);
+                            final ManaCostBeingPaid manaCost = MagicStack.this.getMultiKickerSpellCostChange(abilityIncreaseMultikicker);
                             
                             if (manaCost.isPaid()) {
                                 this.execute();
@@ -567,8 +557,7 @@ public class MagicStack extends MyObservable {
                                 if ( toSet.isPaid() ) { 
                                     this.execute();
                                 } else 
-                                    unpaidCommand.execute();
-                                Singletons.getModel().getMatch().getInput().setInput(toSet);
+                                    MagicStack.this.push(sa);
                             }
                         }
                     };                    
@@ -576,8 +565,8 @@ public class MagicStack extends MyObservable {
                 } else {
                     // computer
 
-                    while (ComputerUtilCost.canPayCost(ability, activating)) {
-                        ComputerUtil.playNoStack((AIPlayer)activating, ability, game);
+                    while (ComputerUtilCost.canPayCost(abilityIncreaseMultikicker, activating)) {
+                        ComputerUtil.playNoStack((AIPlayer)activating, abilityIncreaseMultikicker, game);
                     }
 
                     this.push(sa);
