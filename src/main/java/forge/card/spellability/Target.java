@@ -40,9 +40,22 @@ import forge.game.zone.ZoneType;
 public class Target {
     // Target has two things happening:
     // Targeting restrictions (Creature, Min/Maxm etc) which are true for this
-    // whole Target
+
     // Target Choices (which is specific for the StackInstance)
     private Card srcCard;
+    // What this Object is restricted to targeting
+    private boolean tgtValid = false;
+    private String[] validTgts;
+    private String vtSelection = "";
+    private List<ZoneType> tgtZone = Arrays.asList(ZoneType.Battlefield);
+
+    //SpellAbility Restrictions
+    // Comma-separated <Spell,Activated,Triggered>
+    private String targetSpellAbilityType = null;
+    // The target SA of this SA must be targeting a Valid X
+    private String saValidTargeting = null;
+    
+    // Additional restrictions that may not fit into Valid
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
     private boolean differentZone = false;
@@ -50,11 +63,108 @@ public class Target {
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
     private String definedController = null;
+
+    // How many can be targeted?
+    private String minTargets;
+    private String maxTargets;
+
+    // What Choices are actually made for targeting
     private TargetChoices choice = null;
+
+    // For "Divided" cards. Is this better in TargetChoices?
     private boolean dividedAsYouChoose = false;
     private HashMap<Object, Integer> dividedMap = new HashMap<Object, Integer>();
     private int stillToDivide = 0;
+    
+    // Not sure what's up with Mandatory? Why wouldn't targeting be mandatory?
+    private boolean bMandatory = false;
 
+    /**
+     * <p>
+     * Copy Constructor for Target.
+     * </p>
+     * 
+     * @param target
+     *            a {@link forge.card.spellability.Target} object.
+     */
+    public Target(final Target target) {
+        this.tgtValid = true;
+        this.srcCard = target.getSourceCard();
+        this.vtSelection = target.getVTSelection();
+        this.validTgts = target.getValidTgts();
+        this.minTargets = target.getMinTargets();
+        this.maxTargets = target.getMaxTargets();
+        this.tgtZone = target.getZone();
+        this.targetSpellAbilityType = target.getTargetSpellAbilityType();
+        this.saValidTargeting = target.getSAValidTargeting();
+        this.dividedAsYouChoose = target.isDividedAsYouChoose();
+        this.uniqueTargets = target.isUniqueTargets();
+        this.singleZone = target.isSingleZone();
+        this.differentControllers = target.isDifferentControllers();
+        this.differentZone = target.isDifferentZone();
+        this.sameController = target.isSameController();
+        this.withoutSameCreatureType = target.isWithoutSameCreatureType();
+        this.definedController = target.getDefinedController();
+    }
+
+    /**
+     * <p>
+     * Constructor for Target.
+     * </p>
+     * 
+     * @param src
+     *            a {@link forge.Card} object.
+     * @param select
+     *            a {@link java.lang.String} object.
+     * @param valid
+     *            an array of {@link java.lang.String} objects.
+     */
+    public Target(final Card src, final String select, final String[] valid) {
+        this(src, select, valid, "1", "1");
+    }
+
+    /**
+     * <p>
+     * Constructor for Target.
+     * </p>
+     * 
+     * @param src
+     *            a {@link forge.Card} object.
+     * @param select
+     *            a {@link java.lang.String} object.
+     * @param valid
+     *            a {@link java.lang.String} object.
+     */
+    public Target(final Card src, final String select, final String valid) {
+        this(src, select, valid.split(","), "1", "1");
+    }
+
+    /**
+     * <p>
+     * Constructor for Target.
+     * </p>
+     * 
+     * @param src
+     *            a {@link forge.Card} object.
+     * @param select
+     *            a {@link java.lang.String} object.
+     * @param valid
+     *            an array of {@link java.lang.String} objects.
+     * @param min
+     *            a {@link java.lang.String} object.
+     * @param max
+     *            a {@link java.lang.String} object.
+     */
+    public Target(final Card src, final String select, final String[] valid, final String min, final String max) {
+        this.srcCard = src;
+        this.tgtValid = true;
+        this.vtSelection = select;
+        this.validTgts = valid;
+
+        this.minTargets = min;
+        this.maxTargets = max;
+    }
+    
     /**
      * <p>
      * getSourceCard.
@@ -101,8 +211,6 @@ public class Target {
         this.choice = tc;
     }
 
-    private boolean bMandatory = false;
-
     /**
      * <p>
      * getMandatory.
@@ -125,10 +233,6 @@ public class Target {
     public final void setMandatory(final boolean m) {
         this.bMandatory = m;
     }
-
-    private boolean tgtValid = false;
-    private String[] validTgts;
-    private String vtSelection = "";
 
     /**
      * <p>
@@ -162,9 +266,6 @@ public class Target {
     public final String getVTSelection() {
         return this.vtSelection;
     }
-
-    private String minTargets;
-    private String maxTargets;
 
     /**
      * Gets the min targets.
@@ -247,8 +348,6 @@ public class Target {
         return (this.choice != null) && (this.getMinTargets(c, sa) <= this.choice.getNumTargeted());
     }
 
-    private List<ZoneType> tgtZone = Arrays.asList(ZoneType.Battlefield);
-
     /**
      * <p>
      * setZone.
@@ -282,10 +381,6 @@ public class Target {
         return this.tgtZone;
     }
 
-    // Used for Counters. Currently, Spell,Activated,Triggered can be
-    // Comma-separated
-    private String targetSpellAbilityType = null;
-
     /**
      * <p>
      * Setter for the field <code>targetSpellAbilityType</code>.
@@ -308,9 +403,6 @@ public class Target {
     public final String getTargetSpellAbilityType() {
         return this.targetSpellAbilityType;
     }
-
-    // Used for Counters. The target SA of this SA must be targeting a Valid X
-    private String saValidTargeting = null;
 
     /**
      * <p>
@@ -446,141 +538,6 @@ public class Target {
      */
     public final void resetTargets() {
         this.choice = null;
-    }
-
-    /**
-     * <p>
-     * Constructor for Target.
-     * </p>
-     * 
-     * @param target
-     *            a {@link forge.card.spellability.Target} object.
-     */
-    public Target(final Target target) {
-        this.tgtValid = true;
-        this.srcCard = target.getSourceCard();
-        this.vtSelection = target.getVTSelection();
-        this.validTgts = target.getValidTgts();
-        this.minTargets = target.getMinTargets();
-        this.maxTargets = target.getMaxTargets();
-        this.tgtZone = target.getZone();
-        this.targetSpellAbilityType = target.getTargetSpellAbilityType();
-        this.dividedAsYouChoose = target.isDividedAsYouChoose();
-    }
-
-    /**
-     * <p>
-     * Constructor for Target.
-     * </p>
-     *  DEPRECATED!!! This will be removed after 1.3.5 is released
-     * 
-     * @param src
-     *            a {@link forge.Card} object.
-     * @param parse
-     *            a {@link java.lang.String} object.
-     * @param min
-     *            a {@link java.lang.String} object.
-     * @param max
-     *            a {@link java.lang.String} object.
-     */
-//    @Deprecated
-//    public Target(final Card src, String parse, final String min, final String max) {
-//        // parse=Tgt{C}{P} - Primarily used for Pump or Damage
-//        // C = Creature P=Player/Planeswalker
-//        // CP = All three
-//
-//        this.tgtValid = true;
-//        this.srcCard = src;
-//
-//        if (parse.contains("Tgt")) {
-//            parse = parse.replace("Tgt", "");
-//        }
-//
-//        String valid;
-//        String prompt;
-//        final StringBuilder sb = new StringBuilder();
-//
-//        if (parse.equals("CP")) {
-//            valid = "Creature,Player";
-//            prompt = "Select target creature or player";
-//        } else if (parse.equals("C")) {
-//            valid = "Creature";
-//            prompt = "Select target creature";
-//        } else if (parse.equals("P")) {
-//            valid = "Player";
-//            prompt = "Select player";
-//        } else {
-//            System.out.println("Bad Parsing in Target(parse, min, max): " + parse);
-//            return;
-//        }
-//
-//        if (src != null) {
-//            sb.append(src + " - ");
-//        }
-//        sb.append(prompt);
-//        this.vtSelection = sb.toString();
-//        this.validTgts = valid.split(",");
-//
-//        this.minTargets = min;
-//        this.maxTargets = max;
-//    }
-
-    /**
-     * <p>
-     * Constructor for Target.
-     * </p>
-     * 
-     * @param src
-     *            a {@link forge.Card} object.
-     * @param select
-     *            a {@link java.lang.String} object.
-     * @param valid
-     *            an array of {@link java.lang.String} objects.
-     */
-    public Target(final Card src, final String select, final String[] valid) {
-        this(src, select, valid, "1", "1");
-    }
-
-    /**
-     * <p>
-     * Constructor for Target.
-     * </p>
-     * 
-     * @param src
-     *            a {@link forge.Card} object.
-     * @param select
-     *            a {@link java.lang.String} object.
-     * @param valid
-     *            a {@link java.lang.String} object.
-     */
-    public Target(final Card src, final String select, final String valid) {
-        this(src, select, valid.split(","), "1", "1");
-    }
-
-    /**
-     * <p>
-     * Constructor for Target.
-     * </p>
-     * 
-     * @param src
-     *            a {@link forge.Card} object.
-     * @param select
-     *            a {@link java.lang.String} object.
-     * @param valid
-     *            an array of {@link java.lang.String} objects.
-     * @param min
-     *            a {@link java.lang.String} object.
-     * @param max
-     *            a {@link java.lang.String} object.
-     */
-    public Target(final Card src, final String select, final String[] valid, final String min, final String max) {
-        this.srcCard = src;
-        this.tgtValid = true;
-        this.vtSelection = select;
-        this.validTgts = valid;
-
-        this.minTargets = min;
-        this.maxTargets = max;
     }
 
     /**
