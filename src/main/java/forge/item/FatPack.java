@@ -28,8 +28,6 @@ import forge.card.CardEdition;
 import forge.card.FatPackData;
 
 public class FatPack extends OpenablePack {
-
-    /** The Constant fnFromSet. */
     public static final Function<CardEdition, FatPack> FN_FROM_SET = new Function<CardEdition, FatPack>() {
         @Override
         public FatPack apply(final CardEdition arg1) {

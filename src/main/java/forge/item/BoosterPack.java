@@ -46,4 +46,8 @@ public class BoosterPack extends OpenablePack {
     public final Object clone() {
         return new BoosterPack(name, contents);
     }
+    
+    public BoosterData getBoosterData() {
+        return contents;
+    }
 }

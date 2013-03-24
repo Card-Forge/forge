@@ -20,6 +20,8 @@ package forge.item;
 
 import java.util.List;
 
+import org.apache.commons.lang.NullArgumentException;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -28,23 +30,28 @@ import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 
 public abstract class OpenablePack implements InventoryItemFromSet {
     protected final BoosterData contents;
-
     protected final String name;
+    private final int artIndex;
+    private final int hash;
     private List<CardPrinted> cards = null;
-
     private BoosterGenerator generator = null;
 
-    public OpenablePack(final String name0, final BoosterData boosterData) {
-        this.contents = boosterData;
-        this.name = name0;
+    public OpenablePack(String name0, BoosterData boosterData) {
+        if (null == name0)       { throw new NullArgumentException("name0");       }
+        if (null == boosterData) { throw new NullArgumentException("boosterData"); }
+        contents = boosterData;
+        name = name0;
+        artIndex = MyRandom.getRandom().nextInt(boosterData.getArtIndices()) + 1;
+        hash = name.hashCode() ^ getClass().hashCode() ^ contents.hashCode() ^ artIndex;
     }
 
     @Override
     public final String getName() {
-        return this.name + " " + this.getItemType();
+        return name + " " + getItemType();
     }
 
     public String getDescription() {
@@ -53,23 +60,27 @@ public abstract class OpenablePack implements InventoryItemFromSet {
     
     @Override
     public final String getEdition() {
-        return this.contents.getEdition();
+        return contents.getEdition();
+    }
+    
+    public final int getArtIndex() {
+        return artIndex;
     }
 
     public final List<CardPrinted> getCards() {
-        if (null == this.cards) {
-            this.cards = this.generate();
+        if (null == cards) {
+            cards = generate();
         }
         
-        return this.cards;
+        return cards;
     }
     
     public int getTotalCards() {
-        return this.contents.getTotal();
+        return contents.getTotal();
     }
 
     @Override
-    public final boolean equals(final Object obj) {
+    public final boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -79,34 +90,25 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         if (this.getClass() != obj.getClass()) {
             return false;
         }
-        final OpenablePack other = (OpenablePack) obj;
-        if (this.contents == null) {
-            if (other.contents != null) {
-                return false;
-            }
-        } else if (!this.contents.equals(other.contents)) {
-            return false;
-        }
-        return true;
+        OpenablePack other = (OpenablePack)obj;
+        return name.equals(other.name) && contents.equals(other.contents) && artIndex == other.artIndex;
     }
 
     @Override
     public final int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + ((this.contents == null) ? 0 : this.contents.hashCode());
-        return result;
+        System.out.println(String.format("returning hash: %d for edition=%s; idx=%d", hash, getEdition(), getArtIndex()));
+        return hash;
     }
 
     protected List<CardPrinted> generate() {
-        if (null == this.generator) {
-            this.generator = new BoosterGenerator(this.contents.getEditionFilter());
+        if (null == generator) {
+            generator = new BoosterGenerator(contents.getEditionFilter());
         }
-        final List<CardPrinted> myCards = this.generator.getBoosterPack(this.contents);
+        final List<CardPrinted> myCards = generator.getBoosterPack(contents);
 
-        final int cntLands = this.contents.getCntLands();
+        final int cntLands = contents.getCntLands();
         if (cntLands > 0) {
-            myCards.add(this.getRandomBasicLand(this.contents.getLandEdition()));
+            myCards.add(getRandomBasicLand(contents.getLandEdition()));
         }
         return myCards;
     }

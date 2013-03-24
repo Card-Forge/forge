@@ -12,7 +12,6 @@
 /pom.xml svneol=native#text/xml
 res/ai/Default.ai -text
 res/blockdata/blocks.txt svneol=native#text/plain
-res/blockdata/boosters.txt -text
 res/blockdata/fantasyblocks.txt -text
 res/blockdata/fatpacks.txt -text
 res/blockdata/formats.txt -text
