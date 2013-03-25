@@ -59,8 +59,9 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.control.input.InputPayDiscardCostWithCommands;
 import forge.control.input.InputPayManaExecuteCommands;
-import forge.control.input.InputPayReturnCost;
 import forge.control.input.InputPayment;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.player.AIPlayer;
@@ -529,20 +530,34 @@ public final class GameActionUtil {
                     hasPaid = false;
                     break;
                 }
-
-                for (int i = 0; i < amount; i++) {
-                    if (list.isEmpty()) {
-                        hasPaid = false;
-                        break;
-                    }
-                    Object o = GuiChoose.one("Select a card to sacrifice", list);
-                    if (o != null) {
-                        final Card c = (Card) o;
-
-                        Singletons.getModel().getGame().getAction().sacrifice(c, ability);
-
-                        list.remove(c);
-                    }
+                
+                List<Card> toSac = p.getController().choosePermanentsToSacrifice(list, amount, ability, false, false);
+                if ( toSac.size() != amount ) {
+                    hasPaid = false;
+                    break;
+                }
+                for(Card c : toSac) {
+                    Singletons.getModel().getGame().getAction().sacrifice(c, ability);
+                }
+                remainingParts.remove(part);
+            }
+            
+            else if (part instanceof CostReturn) {
+                List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
+                String amountString = part.getAmount();
+                int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                
+                InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
+                inp.setMessage("Select cards to return to hand");
+                inp.setCancelWithSelectedAllowed(true);
+                
+                FThreads.setInputAndWait(inp);
+                if( inp.hasCancelled() || inp.getSelected().size() != amount) {
+                    hasPaid = false;
+                    break;
+                }
+                for(Card c : inp.getSelected()) {
+                    p.getGame().getAction().moveTo(ZoneType.Hand, c);
                 }
                 remainingParts.remove(part);
             }
@@ -574,19 +589,14 @@ public final class GameActionUtil {
         //the following costs need inputs and can't be combined at the moment
         
         
-        InputPayment toSet = null;
-        if (costPart instanceof CostReturn) {
-            toSet = new InputPayReturnCost((CostReturn) costPart, ability);
-        }
-        else if (costPart instanceof CostDiscard) {
+        InputPayment toSet = null;;
+        if (costPart instanceof CostDiscard) {
             toSet = new InputPayDiscardCostWithCommands((CostDiscard) costPart, ability);
         }
         else if (costPart instanceof CostPartMana) {
             toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString());
         }
-        
-        if (toSet != null) {
-            
+        if (null != toSet) {
             FThreads.setInputAndWait(toSet);
             if (toSet.isPaid() ) {
                 paid.execute();
@@ -594,6 +604,7 @@ public final class GameActionUtil {
                 unpaid.execute();
             }
         }
+
     }
 
     // not restricted to combat damage, not restricted to dealing damage to
