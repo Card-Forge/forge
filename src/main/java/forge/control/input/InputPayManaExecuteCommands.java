@@ -18,6 +18,7 @@
 package forge.control.input;
 
 import forge.Singletons;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -41,7 +42,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
      */
     private static final long serialVersionUID = 3836655722696348713L;
 
-    private String originalManaCost;
+    private ManaCost originalManaCost;
     private String message = "";
 
     private boolean bPaid = false;
@@ -65,7 +66,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
      * @param unpaidCommand2
      *            a {@link forge.Command} object.
      */
-    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2) {
+    public InputPayManaExecuteCommands(final GameState game, final String prompt, final ManaCost manaCost2) {
         this(game, prompt, manaCost2, false);
     }
 
@@ -85,7 +86,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
      * @param showOKButton
      *            a boolean.
      */
-    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2, final boolean showOKButton) {
+    public InputPayManaExecuteCommands(final GameState game, final String prompt, final ManaCost manaCost2, final boolean showOKButton) {
         super(game, new SpellAbility(null) {
             @Override
             public void resolve() {}

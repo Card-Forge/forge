@@ -607,7 +607,7 @@ public final class GameActionUtil {
         //      at some point in time, it's possible to restore the InputPaySacCost-based input
         //      interface for sacrifice costs (instead of the menu-based one above).
 
-        InputPayment toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString());
+        InputPayment toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost());
         FThreads.setInputAndWait(toSet);
         if (toSet.isPaid() ) {
             paid.execute();

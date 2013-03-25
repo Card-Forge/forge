@@ -49,15 +49,14 @@ public final class ManaCost implements Comparable<ManaCost> {
     public static final ManaCost FOUR = new ManaCost(4);
 
     public static ManaCost get(int cntColorless) {
-        if(cntColorless >= 5 || cntColorless < 0) throw new IllegalArgumentException("Supports only 0-4");
         switch (cntColorless) { 
             case 0: return ZERO;
             case 1: return ONE;
             case 2: return TWO;
             case 3: return THREE;
             case 4: return FOUR;
-            default: return NO_COST;
         }
+        return cntColorless > 0 ? new ManaCost(cntColorless) : NO_COST;
     }
     
     // pass mana cost parser here

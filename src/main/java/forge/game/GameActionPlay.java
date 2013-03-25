@@ -461,50 +461,6 @@ public class GameActionPlay {
     }
 
 
-    /** The Cost cutting_ get multi kicker mana cost paid. */
-    private int costCuttingGetMultiKickerManaCostPaid = 0;
-    /** The Cost cutting_ get multi kicker mana cost paid_ colored. */
-    private String costCuttingGetMultiKickerManaCostPaidColored = "";
-
-    /**
-     * Gets the cost cutting get multi kicker mana cost paid.
-     * 
-     * @return the costCuttingGetMultiKickerManaCostPaid
-     */
-    public int getCostCuttingGetMultiKickerManaCostPaid() {
-        return this.costCuttingGetMultiKickerManaCostPaid;
-    }
-
-    /**
-     * Sets the cost cutting get multi kicker mana cost paid.
-     * 
-     * @param costCuttingGetMultiKickerManaCostPaid0
-     *            the costCuttingGetMultiKickerManaCostPaid to set
-     */
-    public void setCostCuttingGetMultiKickerManaCostPaid(final int costCuttingGetMultiKickerManaCostPaid0) {
-        this.costCuttingGetMultiKickerManaCostPaid = costCuttingGetMultiKickerManaCostPaid0;
-    }
-
-    /**
-     * Gets the cost cutting get multi kicker mana cost paid colored.
-     * 
-     * @return the costCuttingGetMultiKickerManaCostPaidColored
-     */
-    public String getCostCuttingGetMultiKickerManaCostPaidColored() {
-        return this.costCuttingGetMultiKickerManaCostPaidColored;
-    }
-
-    /**
-     * Sets the cost cutting get multi kicker mana cost paid colored.
-     * 
-     * @param costCuttingGetMultiKickerManaCostPaidColored0
-     *            the costCuttingGetMultiKickerManaCostPaidColored to set
-     */
-    public void setCostCuttingGetMultiKickerManaCostPaidColored(
-            final String costCuttingGetMultiKickerManaCostPaidColored0) {
-        this.costCuttingGetMultiKickerManaCostPaidColored = costCuttingGetMultiKickerManaCostPaidColored0;
-    }
-
     /**
      * Gets the convokable colors.
      * 

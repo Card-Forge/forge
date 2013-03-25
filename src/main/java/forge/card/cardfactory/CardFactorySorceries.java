@@ -36,6 +36,7 @@ import forge.Constant;
 import forge.Singletons;
 import forge.card.CardType;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaExecuteCommands;
@@ -460,13 +461,13 @@ public class CardFactorySorceries {
                 if (newCMC <= baseCMC) {
                     game.getAction().moveToPlay(newArtifact[0]);
                 } else {
-                    final String diffCost = String.valueOf(newCMC - baseCMC);
-                    InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, "Pay difference in artifacts CMC",  diffCost);
+                    final int diffCost = newCMC - baseCMC;
+                    InputPayManaExecuteCommands inp = new InputPayManaExecuteCommands(game, "Pay difference in artifacts CMC", ManaCost.get(diffCost));
                     FThreads.setInputAndWait(inp);
                     if ( inp.isPaid() )
-                        Singletons.getModel().getGame().getAction().moveToPlay(newArtifact[0]);
+                        game.getAction().moveToPlay(newArtifact[0]);
                     else
-                        Singletons.getModel().getGame().getAction().moveToGraveyard(newArtifact[0]);
+                        game.getAction().moveToGraveyard(newArtifact[0]);
                 }
 
                 // finally, shuffle library
