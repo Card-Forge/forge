@@ -27,6 +27,8 @@ import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardUtil;
 import forge.Color;
+import forge.Command;
+import forge.CounterType;
 import forge.ImageCache;
 import forge.card.CardCharacteristics;
 import forge.card.CardRules;
@@ -298,7 +300,7 @@ public class CardFactory {
         if (card.isCreature()) {
             CardFactoryCreatures.buildCard(card, cardName);
         } else if (card.isPlaneswalker()) {
-            CardFactoryPlaneswalkers.buildCard(card);
+            buildPlaneswalkerAbilities(card);
         } else if (card.isLand()) {
             CardFactoryLands.buildCard(card, cardName);
         } else if (card.isSorcery()) {
@@ -330,6 +332,22 @@ public class CardFactory {
         card.setSVar("X", "Count$RolledThisTurn");
         SpellAbility planarRoll = AbilityFactory.getAbility(saSB.toString(), card);
         card.addSpellAbility(planarRoll);
+    }
+
+    private static void buildPlaneswalkerAbilities(Card card) {
+        if (card.getBaseLoyalty() > 0) {
+            Command cmd = CardFactoryUtil.entersBattleFieldWithCounters(card, CounterType.LOYALTY, card.getBaseLoyalty());
+            card.addComesIntoPlayCommand(cmd);
+        }
+
+        //Planeswalker damage redirection
+        card.addReplacementEffect(ReplacementHandler.parseReplacement("Event$ DamageDone | ActiveZones$ Battlefield | IsCombat$ False | ValidSource$ Card.YouDontCtrl"
+                + " | ValidTarget$ You | Optional$ True | OptionalDecider$ Opponent | ReplaceWith$ DamagePW | Secondary$ True"
+                + " | AICheckSVar$ DamagePWAI | AISVarCompare$ GT4 | Description$ Redirect damage to " + card.toString(), card));
+        card.setSVar("DamagePW", "AB$DealDamage | Cost$ 0 | Defined$ Self | NumDmg$ DamagePWX | DamageSource$ ReplacedSource | References$ DamagePWX,DamagePWAI");
+        card.setSVar("DamagePWX", "ReplaceCount$DamageAmount");
+        card.setSVar("DamagePWAI", "ReplaceCount$DamageAmount/NMinus.DamagePWY");
+        card.setSVar("DamagePWY", "Count$YourLifeTotal");
     }
 
     private static Card readCard(final CardRules rules) {
