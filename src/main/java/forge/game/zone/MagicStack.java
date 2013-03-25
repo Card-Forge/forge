@@ -694,17 +694,18 @@ public class MagicStack extends MyObservable {
         final Card source = sa.getSourceCard();
         curResolvingCard = source;
 
-        if (this.hasFizzled(sa, source, false)) { // Fizzle
+        
+        boolean thisHasFizzled = this.hasFizzled(sa, source, false);
+        String messageForLog = thisHasFizzled ? source.getName() + " ability fizzles." : sa.getStackDescription();
+        game.getGameLog().add("ResolveStack", messageForLog, 2);
+        if (thisHasFizzled) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
             Log.debug(source.getName() + " ability fizzles.");
-            game.getGameLog().add("ResolveStack", source.getName() + " ability fizzles.", 2);
             this.finishResolving(sa, true);
         } else if (sa.getApi() != null) {
-            game.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             AbilityUtils.handleRemembering(sa);
             AbilityUtils.resolve(sa, true);
         } else {
-            game.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             sa.resolve();
             this.finishResolving(sa, false);
             // do creatures ETB from here?
