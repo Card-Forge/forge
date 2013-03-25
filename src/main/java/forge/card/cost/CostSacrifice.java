@@ -236,7 +236,6 @@ public class CostSacrifice extends CostPartWithList {
                 payment.getAbility().addCostToHashList(card, "Sacrificed");
                 Singletons.getModel().getGame().getAction().sacrifice(card, ability);
             }
-            payment.setPaidPart(this);
         } else {
             Integer c = this.convertAmount();
             if (c == null) {
@@ -252,6 +251,7 @@ public class CostSacrifice extends CostPartWithList {
             }
             FThreads.setInputAndWait(new InputPayCostSacrificeFromList(this, ability, c, payment, list));
         }
+        
         if( !payment.isCanceled())
             addListToHash(ability, "Sacrificed");
     }

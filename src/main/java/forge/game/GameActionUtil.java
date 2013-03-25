@@ -367,6 +367,23 @@ public final class GameActionUtil {
         ripple.execute();
     }
 
+    private static int getAmountFromPart(CostPart part, Card source, SpellAbility sourceAbility) {
+        String amountString = part.getAmount();
+        return StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : AbilityUtils.calculateAmount(source, amountString, sourceAbility);
+    }
+    
+    /**
+     * TODO: Write javadoc for this method.
+     * @param part
+     * @param source
+     * @param sourceAbility
+     * @return
+     */
+    private static int getAmountFromPartX(CostPart part, Card source, SpellAbility sourceAbility) {
+        String amountString = part.getAmount();
+        return StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+    }
+
     /**
      * <p>
      * payCostDuringAbilityResolve.
@@ -390,10 +407,8 @@ public final class GameActionUtil {
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
         }
-        String orString = "";
-        if (sourceAbility != null) {
-            orString = " (or: " + sourceAbility.getStackDescription() + ")";
-        }
+        final String orString = sourceAbility == null ? "" : " (or: " + sourceAbility.getStackDescription() + ")";
+        
         if (parts.isEmpty() || costPart.getAmount().equals("0")) {
             return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
         }
@@ -401,38 +416,31 @@ public final class GameActionUtil {
         boolean hasPaid = true;
         //the following costs do not need inputs
         for (CostPart part : parts) {
+            boolean dontRemove = false;
+            
             if (part instanceof CostPayLife) {
-                String amountString = part.getAmount();
-
-                final int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString)
-                        : AbilityUtils.calculateAmount(source, amountString, sourceAbility);
+                final int amount = getAmountFromPart(part, source, sourceAbility);
                 if (p.canPayLife(amount) && GuiDialog.confirm(source, "Do you want to pay " + amount + " life?" + orString)) {
                     p.payLife(amount, null);
                 } else {
                     hasPaid = false;
                     break;
                 }
-                remainingParts.remove(part);
             }
 
             else if (part instanceof CostDamage) {
-                String amountString = part.getAmount();
-                final int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString)
-                        : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                int amount = getAmountFromPartX(part, source, sourceAbility);
                 if (p.canPayLife(amount) && GuiDialog.confirm(source, "Do you want " + source + " to deal " + amount + " damage to you?")) {
                     p.addDamage(amount, source);
                 } else {
                     hasPaid = false;
                     break;
                 }
-                remainingParts.remove(part);
             }
 
             else if (part instanceof CostPutCounter) {
-                String amountString = part.getAmount();
                 CounterType counterType = ((CostPutCounter) part).getCounter();
-                int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString)
-                        : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                int amount = getAmountFromPartX(part, source, sourceAbility);
                 String plural = amount > 1 ? "s" : "";
                 if (GuiDialog.confirm(source, "Do you want to put " + amount + " " + counterType.getName()
                         + " counter" + plural + " on " + source + "?")) {
@@ -440,7 +448,7 @@ public final class GameActionUtil {
                         source.addCounter(counterType, amount, false);
                     } else {
                         hasPaid = false;
-                        Singletons.getModel().getGame().getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
+                        p.getGame().getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
                         + counterType.getName() + " counters put on it.", 2);
                         break;
                     }
@@ -448,14 +456,11 @@ public final class GameActionUtil {
                     hasPaid = false;
                     break;
                 }
-                remainingParts.remove(part);
             }
 
             else if (part instanceof CostRemoveCounter) {
-                String amountString = part.getAmount();
                 CounterType counterType = ((CostRemoveCounter) part).getCounter();
-                int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString)
-                        : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                int amount = getAmountFromPartX(part, source, sourceAbility);
                 String plural = amount > 1 ? "s" : "";
                 if (part.canPay(sourceAbility, source, p, cost, game)
                         && GuiDialog.confirm(source, "Do you want to remove " + amount + " " + counterType.getName()
@@ -465,7 +470,6 @@ public final class GameActionUtil {
                     hasPaid = false;
                     break;
                 }
-                remainingParts.remove(part);
             }
 
             else if (part instanceof CostExile) {
@@ -473,34 +477,31 @@ public final class GameActionUtil {
                     if (GuiDialog.confirm(source, "Do you want to exile all cards in your graveyard?")) {
                         List<Card> cards = new ArrayList<Card>(p.getCardsIn(ZoneType.Graveyard));
                         for (final Card card : cards) {
-                            Singletons.getModel().getGame().getAction().exile(card);
+                            p.getGame().getAction().exile(card);
                         }
                     } else {
                         hasPaid = false;
                         break;
                     }
-                    remainingParts.remove(part);
                 } else {
                     CostExile costExile = (CostExile) part;
                     ZoneType from = costExile.getFrom();
                     List<Card> list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source);
                     final int nNeeded = AbilityUtils.calculateAmount(source, part.getAmount(), ability);
-                    if (list.size() >= nNeeded) {
-                        for (int i = 0; i < nNeeded; i++) {
-
-                            final Card c = GuiChoose.oneOrNone("Exile from " + from, list);
-
-                            if (c != null) {
-                                list.remove(c);
-                                Singletons.getModel().getGame().getAction().exile(c);
-                            } else {
-                                hasPaid = false;
-                                break;
-                            }
-                        }
-                    } else {
+                    if (list.size() < nNeeded) {
                         hasPaid = false;
                         break;
+                    }
+                    
+                    for (int i = 0; i < nNeeded; i++) {
+                        final Card c = GuiChoose.oneOrNone("Exile from " + from, list);
+                        if (c != null) {
+                            list.remove(c);
+                            p.getGame().getAction().exile(c);
+                        } else {
+                            hasPaid = false;
+                            break;
+                        }
                     }
                 }
             }
@@ -520,26 +521,19 @@ public final class GameActionUtil {
                 GuiUtils.clearPanelSelections();
                 GuiUtils.setPanelSelection(source);
 
-                if (!GuiDialog.confirm(source, "Do you want to pay the sacrifice cost?")) {
-                    hasPaid = false;
-                    break;
-                }
-                
-                List<Card> toSac = p.getController().choosePermanentsToSacrifice(list, amount, ability, false, false);
+                List<Card> toSac = p.getController().choosePermanentsToSacrifice(list, amount, ability, false, true);
                 if ( toSac.size() != amount ) {
                     hasPaid = false;
                     break;
                 }
                 for(Card c : toSac) {
-                    Singletons.getModel().getGame().getAction().sacrifice(c, ability);
+                    p.getGame().getAction().sacrifice(c, ability);
                 }
-                remainingParts.remove(part);
             }
             
             else if (part instanceof CostReturn) {
                 List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
-                String amountString = part.getAmount();
-                int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                int amount = getAmountFromPartX(part, source, sourceAbility);
                 
                 InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
                 inp.setMessage("Select %d card(s) to return to hand");
@@ -554,14 +548,12 @@ public final class GameActionUtil {
                 for(Card c : inp.getSelected()) {
                     p.getGame().getAction().moveTo(ZoneType.Hand, c);
                 }
-                remainingParts.remove(part);
             }
 
             else if (part instanceof CostDiscard) {
                 List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType().split(";"), p, source);
-                String amountString = part.getAmount();
-                int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-                
+                int amount = getAmountFromPartX(part, source, sourceAbility);
+
                 InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
                 inp.setMessage("Select %d card(s) to discard");
                 inp.setCancelWithSelectedAllowed(true);
@@ -575,30 +567,34 @@ public final class GameActionUtil {
                 for(Card c : inp.getSelected()) {
                     p.discard(c, ability);
                 }
-                remainingParts.remove(part);
-            }            
-            
-            else if (part instanceof CostPartMana && ((CostPartMana) part).getManaToPay().equals("0")) {
-                remainingParts.remove(part);
             }
+            
+            else if (part instanceof CostPartMana ) {
+                if (!((CostPartMana) part).getManaToPay().equals("0")) // non-zero costs require input
+                    dontRemove = true; 
+            } else
+                throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhadled type of cost has ocurred: " + part.getClass());
+                
+            
+            if ( !hasPaid )
+                return false;
+            
+            if( !dontRemove  )
+                remainingParts.remove(part);
         }
 
         GuiUtils.clearPanelSelections();
 
-        if (!hasPaid) {
-            return false;
-        }
         if (remainingParts.isEmpty()) {
             return true;
         }
         if (remainingParts.size() > 1) {
-            throw new RuntimeException("GameActionUtil::payCostDuringAbilityResolve - Too many payment types - " + source);
+            throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - Too many payment types - " + source);
         }
         costPart = remainingParts.get(0);
-
-        //TODO: if a full-featured algorithm to chain together input-based costs is implemented
-        //      at some point in time, it's possible to restore the InputPaySacCost-based input
-        //      interface for sacrifice costs (instead of the menu-based one above).
+        // check this is a mana cost
+        if (!(costPart instanceof CostPartMana ))
+            throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - The remaining payment type is not Mana.");
 
         InputPayment toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost());
         FThreads.setInputAndWait(toSet);

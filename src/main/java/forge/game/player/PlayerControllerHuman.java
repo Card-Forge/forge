@@ -221,7 +221,7 @@ public class PlayerControllerHuman extends PlayerController {
 
         InputSelectCards inp = new InputSelectCardsFromList(isOptional ? 0 : amount, max, validTargets);
         // TODO: Either compose a message here, or pass it as parameter from caller. 
-        inp.setMessage("Select cards to sacrifice");
+        inp.setMessage("Select %d card(s) to sacrifice");
         
         FThreads.setInputAndWait(inp);
         if( inp.hasCancelled() )
