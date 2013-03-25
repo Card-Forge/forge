@@ -382,8 +382,7 @@ public final class GameActionUtil {
      *            a {@link forge.Command} object.
      * @param sourceAbility TODO
      */
-    public static void payCostDuringAbilityResolve(final Player p, final SpellAbility ability, final Cost cost, final Command paid,
-            final Command unpaid, SpellAbility sourceAbility, final GameState game) {
+    public static boolean payCostDuringAbilityResolve(final Player p, final SpellAbility ability, final Cost cost, SpellAbility sourceAbility, final GameState game) {
         final Card source = ability.getSourceCard();
         final List<CostPart> parts =  cost.getCostParts();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
@@ -396,13 +395,9 @@ public final class GameActionUtil {
             orString = " (or: " + sourceAbility.getStackDescription() + ")";
         }
         if (parts.isEmpty() || costPart.getAmount().equals("0")) {
-            if (GuiDialog.confirm(source, "Do you want to pay 0?" + orString)) {
-                paid.execute();
-            } else {
-                unpaid.execute();
-            }
-            return;
+            return GuiDialog.confirm(source, "Do you want to pay 0?" + orString);
         }
+        
         boolean hasPaid = true;
         //the following costs do not need inputs
         for (CostPart part : parts) {
@@ -591,12 +586,10 @@ public final class GameActionUtil {
         GuiUtils.clearPanelSelections();
 
         if (!hasPaid) {
-            unpaid.execute();
-            return;
+            return false;
         }
         if (remainingParts.isEmpty()) {
-            paid.execute();
-            return;
+            return true;
         }
         if (remainingParts.size() > 1) {
             throw new RuntimeException("GameActionUtil::payCostDuringAbilityResolve - Too many payment types - " + source);
@@ -609,11 +602,7 @@ public final class GameActionUtil {
 
         InputPayment toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost());
         FThreads.setInputAndWait(toSet);
-        if (toSet.isPaid() ) {
-            paid.execute();
-        } else {
-            unpaid.execute();
-        }
+        return toSet.isPaid();
     }
 
     // not restricted to combat damage, not restricted to dealing damage to

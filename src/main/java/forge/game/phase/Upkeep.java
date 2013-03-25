@@ -175,18 +175,6 @@ public class Upkeep extends Phase {
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
             if (c.hasStartOfKeyword("(Echo unpaid)")) {
-
-                final Command paidCommand = Command.BLANK;
-
-                final Command unpaidCommand = new Command() {
-                    private static final long serialVersionUID = -7354791599039157375L;
-
-                    @Override
-                    public void execute() {
-                        game.getAction().sacrifice(c, null);
-                    }
-                };
-
                 final Ability blankAbility = Upkeep.BlankAbility(c, c.getEchoCost());
 
                 final StringBuilder sb = new StringBuilder();
@@ -199,7 +187,9 @@ public class Upkeep extends Phase {
                         Player controller = c.getController();
                         if (controller.isHuman()) {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
-                            GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, cost, paidCommand, unpaidCommand, null, game);
+                            if ( !GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, cost, null, game) )
+                                game.getAction().sacrifice(c, null);;
+
                         } else { // computer
                             if (ComputerUtilCost.canPayCost(blankAbility, controller)) {
                                 ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game);
@@ -332,18 +322,6 @@ public class Upkeep extends Phase {
                     }
 
                     final String upkeepCost = cost;
-
-                    final Command unpaidCommand = new Command() {
-                        private static final long serialVersionUID = 5612348769167529102L;
-
-                        @Override
-                        public void execute() {
-                            game.getAction().sacrifice(c, null);
-                        }
-                    };
-
-                    final Command paidCommand = Command.BLANK;
-
                     final Ability blankAbility = Upkeep.BlankAbility(c, upkeepCost);
                     blankAbility.setActivatingPlayer(controller);
 
@@ -351,11 +329,11 @@ public class Upkeep extends Phase {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, blankAbility.getPayCosts(),
-                                        paidCommand, unpaidCommand, this, game);
+                                if ( !GameActionUtil.payCostDuringAbilityResolve(controller, blankAbility, blankAbility.getPayCosts(), this, game))
+                                    game.getAction().sacrifice(c, null);
                             } else { // computer
                                 if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {
-                                    ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game);
+                                    ComputerUtil.playNoStack((AIPlayer)controller, blankAbility, game); // this makes AI pay
                                 } else {
                                     game.getAction().sacrifice(c, null);
                                 }

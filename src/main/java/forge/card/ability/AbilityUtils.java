@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
-import forge.Command;
 import forge.Constant;
 import forge.CounterType;
 import forge.Singletons;
@@ -1036,6 +1035,19 @@ public class AbilityUtils {
         AbilityUtils.resolveApiAbility(abSub, usedStack, game);
     }
 
+    private static void resolveApiAbility(final SpellAbility sa, boolean usedStack, final GameState game) {
+        // check conditions
+        if (sa.getConditions().areMet(sa)) {
+            if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {
+                sa.resolve();
+            } else {
+                handleUnlessCost(sa, usedStack, game);
+                return;
+            }
+        }
+        resolveSubAbilities(sa, usedStack, game);
+    }
+
     private static void handleUnlessCost(final SpellAbility sa, final boolean usedStack, final GameState game) {
         final Card source = sa.getSourceCard();
         String unlessCost = sa.getParam("UnlessCost");
@@ -1047,7 +1059,8 @@ public class AbilityUtils {
         final String  resolveSubs = sa.getParam("UnlessResolveSubs"); // no value means 'Always'
         final boolean execSubsWhenPaid = "WhenPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
         final boolean execSubsWhenNotPaid = "WhenNotPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
-
+        final boolean isSwitched = sa.hasParam("UnlessSwitched");
+        
         // The cost
         if (unlessCost.equals("CardManaCost")) {
             unlessCost = source.getManaCost().toString();
@@ -1070,43 +1083,6 @@ public class AbilityUtils {
               //instead of just X for cards like Draco.
         }
 
-        final boolean isSwitched = sa.hasParam("UnlessSwitched");
-
-        Command paidCommand = new Command() {
-            private static final long serialVersionUID = 8094833091127334678L;
-
-            @Override
-            public void execute() {
-                if (isSwitched && execSubsWhenNotPaid || execSubsWhenPaid) {
-                    resolveSubAbilities(sa, usedStack, game);
-                } else if (usedStack) {
-                    SpellAbility root = sa.getRootAbility();
-                    game.getStack().finishResolving(root, false);
-                }
-            }
-        };
-
-        Command unpaidCommand = new Command() {
-            private static final long serialVersionUID = 8094833091127334678L;
-
-            @Override
-            public void execute() {
-                sa.resolve();
-                if (isSwitched && execSubsWhenPaid || execSubsWhenNotPaid) {
-                    resolveSubAbilities(sa, usedStack, game);
-                } else if (usedStack) {
-                    SpellAbility root = sa.getRootAbility();
-                    game.getStack().finishResolving(root, false);
-                }
-            }
-        };
-
-        if (isSwitched) {
-            final Command dummy = paidCommand;
-            paidCommand = unpaidCommand;
-            unpaidCommand = dummy;
-        }
-
         final Cost cost = new Cost(source, unlessCost, true);
         final Ability ability = new AbilityStatic(source, cost, null) {
             @Override
@@ -1117,34 +1093,35 @@ public class AbilityUtils {
 
         boolean paid = false;
         for (Player payer : payers) {
+            ability.setActivatingPlayer(payer);
+            ability.setTarget(sa.getTarget());
             if (payer.isComputer()) {
-                ability.setActivatingPlayer(payer);
                 if (AbilityUtils.willAIPayForAbility(sa, payer, ability, paid, payers)) {
-                    ability.setTarget(sa.getTarget());
                     ComputerUtil.playNoStack((AIPlayer) payer, ability, game); // Unless cost was payed - no resolve
                     paid = true;
                 }
-            }
-        }
-        boolean waitForInput = false;
-        for (Player payer : payers) {
-            if (payer.isHuman()) {
+            } else {
                 // if it's paid by the AI already the human can pay, but it won't change anything
-                if (paid) {
-                    unpaidCommand = paidCommand;
-                }
-                ability.setActivatingPlayer(payer);
-                ability.setTarget(sa.getTarget());
-                GameActionUtil.payCostDuringAbilityResolve(payer, ability, cost, paidCommand, unpaidCommand, sa, game);
-                waitForInput = true; // wait for the human input
-                break; // multiple human players are not supported
+                paid = GameActionUtil.payCostDuringAbilityResolve(payer, ability, cost, sa, game);
             }
-        }
-        if (!waitForInput) {
-            Command toExecute = paid ? paidCommand : unpaidCommand;
-            toExecute.execute();
         }
 
+        if ( paid ^ isSwitched ) {
+            if (isSwitched && execSubsWhenNotPaid || execSubsWhenPaid) {
+                resolveSubAbilities(sa, usedStack, game);
+            } else if (usedStack) {
+                SpellAbility root = sa.getRootAbility();
+                game.getStack().finishResolving(root, false);
+            }
+        } else {
+            sa.resolve();
+            if (isSwitched && execSubsWhenPaid || execSubsWhenNotPaid) {
+                resolveSubAbilities(sa, usedStack, game);
+            } else if (usedStack) {
+                SpellAbility root = sa.getRootAbility();
+                game.getStack().finishResolving(root, false);
+            }
+        }
     }
 
     /**
@@ -1219,19 +1196,6 @@ public class AbilityUtils {
             return true;
         }
         return false;
-    }
-
-    private static void resolveApiAbility(final SpellAbility sa, boolean usedStack, final GameState game) {
-        // check conditions
-        if (sa.getConditions().areMet(sa)) {
-            if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {
-                sa.resolve();
-            } else {
-                handleUnlessCost(sa, usedStack, game);
-                return;
-            }
-        }
-        resolveSubAbilities(sa, usedStack, game);
     }
 
     /**
