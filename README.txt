@@ -25,12 +25,6 @@ The Mac OS application version:
 
 We have packaged the Forge BETA version as a Mac OS application. You can double click the Forge.app icon to launch the forge application on your Apple computer running Mac OS. This application will automatically increase the java heap space memory for you as it launches. This version does not require the forge.command file and it does not need to start the Terminal application as part of the start up process.
 
-You can move a copy of your pictures and decks over to the "Forge.app" application. Right click or control click on the Forge.app icon. Select "Show Package Contents" from the contextual menu. A Finder window will open and will display a folder named Contents. Navigate to the folder:
-
-/Contents/Resources/Java/res/
-
-Your decks can be placed in the decks folder, your pics can be placed in the pics folder, etc.
-
 If you update your OS to Apple OSX 10.8 Mountain Lion and try to launch a new version of forge that you will likely get a dialog which states "File is damaged and cannot be opened. Please move to trash." 
 
 Mountain Lion comes with a new Gatekeeper feature and this is probably blocking your ability to launch this newer version of forge. Visit the link below and follow the instructions. They are fairly long and detailed.
