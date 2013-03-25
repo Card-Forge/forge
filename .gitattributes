@@ -13806,7 +13806,6 @@ src/main/java/forge/control/input/InputControl.java svneol=native#text/plain
 src/main/java/forge/control/input/InputLockUI.java -text
 src/main/java/forge/control/input/InputMulligan.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPassPriority.java svneol=native#text/plain
-src/main/java/forge/control/input/InputPayDiscardCostWithCommands.java -text
 src/main/java/forge/control/input/InputPayManaBase.java -text
 src/main/java/forge/control/input/InputPayManaExecuteCommands.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaOfCostPayment.java -text

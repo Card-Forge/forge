@@ -57,7 +57,6 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.control.input.InputPayDiscardCostWithCommands;
 import forge.control.input.InputPayManaExecuteCommands;
 import forge.control.input.InputPayment;
 import forge.control.input.InputSelectCards;
@@ -545,10 +544,10 @@ public final class GameActionUtil {
             else if (part instanceof CostReturn) {
                 List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source);
                 String amountString = part.getAmount();
-                int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 
                 InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
-                inp.setMessage("Select cards to return to hand");
+                inp.setMessage("Select %d card(s) to return to hand");
                 inp.setCancelWithSelectedAllowed(true);
                 
                 FThreads.setInputAndWait(inp);
@@ -556,12 +555,34 @@ public final class GameActionUtil {
                     hasPaid = false;
                     break;
                 }
+                ((CostReturn)part).addListToHash(ability, "Returned");
                 for(Card c : inp.getSelected()) {
                     p.getGame().getAction().moveTo(ZoneType.Hand, c);
                 }
                 remainingParts.remove(part);
             }
 
+            else if (part instanceof CostDiscard) {
+                List<Card> choiceList = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType().split(";"), p, source);
+                String amountString = part.getAmount();
+                int amount = StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                
+                InputSelectCards inp = new InputSelectCardsFromList(amount, amount, choiceList);
+                inp.setMessage("Select %d card(s) to discard");
+                inp.setCancelWithSelectedAllowed(true);
+                
+                FThreads.setInputAndWait(inp);
+                if( inp.hasCancelled() || inp.getSelected().size() != amount) {
+                    hasPaid = false;
+                    break;
+                }
+                ((CostDiscard)part).addListToHash(ability, "Discarded");
+                for(Card c : inp.getSelected()) {
+                    p.discard(c, ability);
+                }
+                remainingParts.remove(part);
+            }            
+            
             else if (part instanceof CostPartMana && ((CostPartMana) part).getManaToPay().equals("0")) {
                 remainingParts.remove(part);
             }
@@ -586,25 +607,13 @@ public final class GameActionUtil {
         //      at some point in time, it's possible to restore the InputPaySacCost-based input
         //      interface for sacrifice costs (instead of the menu-based one above).
 
-        //the following costs need inputs and can't be combined at the moment
-        
-        
-        InputPayment toSet = null;;
-        if (costPart instanceof CostDiscard) {
-            toSet = new InputPayDiscardCostWithCommands((CostDiscard) costPart, ability);
+        InputPayment toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString());
+        FThreads.setInputAndWait(toSet);
+        if (toSet.isPaid() ) {
+            paid.execute();
+        } else {
+            unpaid.execute();
         }
-        else if (costPart instanceof CostPartMana) {
-            toSet = new InputPayManaExecuteCommands(game, source + "\r\n", ability.getManaCost().toString());
-        }
-        if (null != toSet) {
-            FThreads.setInputAndWait(toSet);
-            if (toSet.isPaid() ) {
-                paid.execute();
-            } else {
-                unpaid.execute();
-            }
-        }
-
     }
 
     // not restricted to combat damage, not restricted to dealing damage to

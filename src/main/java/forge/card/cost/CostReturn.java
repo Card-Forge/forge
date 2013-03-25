@@ -25,90 +25,20 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDialog;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 
 /**
  * The Class CostReturn.
  */
 public class CostReturn extends CostPartWithList {
     // Return<Num/Type{/TypeDescription}>
-
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class InputPayReturnType extends InputPayCostBase {
-        private final SpellAbility sa;
-        private final CostReturn part;
-        private final int nNeeded;
-        private final String type;
-        private static final long serialVersionUID = 2685832214519141903L;
-        private List<Card> typeList;
-        private int nReturns = 0;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param sa
-         * @param part
-         * @param nNeeded
-         * @param cdl
-         * @param type
-         * @param payment
-         */
-        public InputPayReturnType( SpellAbility sa, CostReturn part, int nNeeded, String type, CostPayment payment) {
-            super(payment);
-            this.sa = sa;
-            this.part = part;
-            this.nNeeded = nNeeded;
-            this.type = type;
-        }
-
-        @Override
-        public void showMessage() {
-            if (nNeeded == 0) {
-                this.done();
-            }
-
-            final StringBuilder msg = new StringBuilder("Return ");
-            final int nLeft = nNeeded - this.nReturns;
-            msg.append(nLeft).append(" ");
-            msg.append(type);
-            if (nLeft > 1) {
-                msg.append("s");
-            }
-
-            this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
-            this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
-            CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-            ButtonUtil.enableOnlyCancel();
-        }
-
-        @Override
-        public void selectCard(final Card card) {
-            if (this.typeList.contains(card)) {
-                this.nReturns++;
-                part.addToList(card);
-                Singletons.getModel().getGame().getAction().moveToHand(card);
-                this.typeList.remove(card);
-                // in case nothing else to return
-                if (this.nReturns == nNeeded) {
-                    this.done();
-                } else if (this.typeList.size() == 0) {
-                    // happen
-                    this.cancel();
-                } else {
-                    this.showMessage();
-                }
-            }
-        }
-    }
 
     /**
      * Instantiates a new cost return.
@@ -223,13 +153,22 @@ public class CostReturn extends CostPartWithList {
                 boolean confirm = GuiDialog.confirm(card, card.getName() + " - Return to Hand?");
                 if (confirm) {
                     addToList(card);
-                    Singletons.getModel().getGame().getAction().moveToHand(card);
+                    game.getAction().moveToHand(card);
                 } else {
                     payment.cancelCost();
                 }
             }
         } else {
-            FThreads.setInputAndWait(new InputPayReturnType(ability, this, c, this.getType(), payment));
+            List<Card> validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+
+            InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
+            inp.setMessage("Return %d " + this.getType() + " card(s) to hand");
+            FThreads.setInputAndWait(inp);
+            if (inp.hasCancelled())
+                payment.setCancel(true);
+            else 
+                for(Card crd : inp.getSelected()) 
+                    game.getAction().moveToHand(crd);
         }
 
         if (!payment.isCanceled())
