@@ -66,6 +66,7 @@ public class GameActionPlay {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
+        FThreads.checkEDT("GameActionPlay.playSpellAbilityWithoutPayingManaCost", false);
         final Card source = sa.getSourceCard();
         setSplitCardState(source, sa); // Split card support
 

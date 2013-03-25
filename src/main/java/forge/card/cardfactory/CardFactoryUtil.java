@@ -38,6 +38,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.CounterType;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
@@ -64,7 +65,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputBase;
-import forge.control.input.InputSelectManyCards;
+import forge.control.input.InputSelectCards;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -3152,26 +3153,6 @@ public class CardFactoryUtil {
         };
         haunterDiesWork.setDescription(hauntDescription);
 
-        final InputSelectManyCards target = new InputSelectManyCards(1, 1) {
-            private static final long serialVersionUID = 1981791992623774490L;
-
-            @Override
-            protected void onDone() {
-                haunterDiesWork.setTargetCard(selected.get(0));
-                Singletons.getModel().getGame().getStack().add(haunterDiesWork);
-            }
-
-            @Override
-            protected boolean isValidChoice(Card c) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
-                    return false;
-                }
-                return c.canBeTargetedBy(haunterDiesWork);
-            }
-        };
-        target.setMessage("Choose target creature to haunt.");
-
         final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
@@ -3189,7 +3170,25 @@ public class CardFactoryUtil {
                 // need to do it this way because I don't know quite how to
                 // make TriggerHandler respect BeforePayMana.
                 if (card.getController().isHuman()) {
-                    Singletons.getModel().getMatch().getInput().setInput(target);
+                    
+                    final InputSelectCards target = new InputSelectCards(1, 1) {
+                        private static final long serialVersionUID = 1981791992623774490L;
+                        @Override
+                        protected boolean isValidChoice(Card c) {
+                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                            if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
+                                return false;
+                            }
+                            return c.canBeTargetedBy(haunterDiesWork);
+                        }
+                    };
+                    target.setMessage("Choose target creature to haunt.");
+                    
+                    FThreads.setInputAndWait(target);
+                    if (!target.hasCancelled()) {
+                        haunterDiesWork.setTargetCard(target.getSelected().get(0));
+                        Singletons.getModel().getGame().getStack().add(haunterDiesWork);
+                    }
                 } else {
                     // AI choosing what to haunt
                     final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());

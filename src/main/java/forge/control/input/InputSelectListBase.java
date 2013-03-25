@@ -7,22 +7,23 @@ import forge.GameEntity;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public abstract class InputSelectMany<T extends GameEntity> extends InputBase {
+public abstract class InputSelectListBase<T extends GameEntity> extends InputSyncronizedBase implements InputSelectList<T> {
 
     private static final long serialVersionUID = -2305549394512889450L;
 
-    protected final List<T> selected = new ArrayList<T>();
+    protected final List<T> selected;
+    protected boolean bCancelled = false;
     protected final int min;
     protected final int max;
-
+    public boolean allowUnselect = false;
+    private boolean allowCancelWithNotEmptyList = false;
+    
     private String message = "Source-Card-Name - Select %d more card(s)";
 
-    protected InputSelectMany(int min, int max) {
 
+
+    protected InputSelectListBase(int min, int max) {
+        selected = new ArrayList<T>();
         if (min > max) {
             throw new IllegalArgumentException("Min must not be greater than Max");
         }
@@ -35,7 +36,7 @@ public abstract class InputSelectMany<T extends GameEntity> extends InputBase {
         String msgToShow = getMessage();
         CMatchUI.SINGLETON_INSTANCE.showMessage(msgToShow);
 
-        boolean canCancel = (min == 0 && selected.isEmpty()) || canCancelWithSomethingSelected();
+        boolean canCancel = (min == 0 && selected.isEmpty()) || isCancelWithSelectedAllowed();
         boolean canOk = hasEnoughTargets();
 
         if (canOk && canCancel) {
@@ -65,9 +66,18 @@ public abstract class InputSelectMany<T extends GameEntity> extends InputBase {
 
     @Override
     public final void selectButtonCancel() {
+        bCancelled = true;
         this.stop();
-        // for a next use
-        selected.clear();
+    }
+
+    @Override
+    public final boolean hasCancelled() {
+        return bCancelled;
+    }
+
+    @Override
+    public final List<T> getSelected() {
+        return selected;
     }
 
     @Override
@@ -77,8 +87,6 @@ public abstract class InputSelectMany<T extends GameEntity> extends InputBase {
         // if it does, uncomment the 5 lines below, use them as method body
 
         this.stop();
-        // for a next use
-        selected.clear();
     }
 
     public void setMessage(String message0) {
@@ -86,27 +94,41 @@ public abstract class InputSelectMany<T extends GameEntity> extends InputBase {
     }
 
     // must define these
-    protected abstract void onDone();
     protected abstract boolean isValidChoice(T choice);
 
     // might re-define later
-    protected void onCancel() {}
-    protected boolean canCancelWithSomethingSelected() { return false; }
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
     protected boolean hasAllTargets() { return selected.size() >= max; }
+    protected void onSelectStateChanged(T c, boolean newState) {} // Select card inputs may highlight selected cards with this method
 
     protected void selectEntity(T c) {
-
-        if (selected.contains(c) || !isValidChoice(c)) {
+        if (!isValidChoice(c)) {
             return;
         }
-
-        this.selected.add(c);
-        this.showMessage();
+        
+        if ( selected.contains(c)  ) {
+            if ( allowUnselect ) { 
+                this.selected.remove(c);
+                onSelectStateChanged(c, false);
+            }
+        } else {
+            this.selected.add(c);
+            onSelectStateChanged(c, true);
+        }
 
         if (hasAllTargets()) {
             selectButtonOK();
+        } else {
+            this.showMessage();
         }
     }
 
+
+
+
+    public final boolean isUnselectAllowed() { return allowUnselect; }
+    public final void setUnselectAllowed(boolean allow) { this.allowUnselect = allow; }
+
+    public final boolean isCancelWithSelectedAllowed() { return allowCancelWithNotEmptyList; }
+    public final void setCancelWithSelectedAllowed(boolean allow) { this.allowCancelWithNotEmptyList = allow ; }
 }

@@ -41,7 +41,7 @@ import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputBase;
 import forge.control.input.InputPayManaExecuteCommands;
-import forge.control.input.InputSelectManyCards;
+import forge.control.input.InputSelectCards;
 import forge.game.GameActionUtil;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
@@ -460,26 +460,20 @@ public class Upkeep extends Phase {
                 @Override
                 public void resolve() {
                     final List<Card> targets = CardLists.getTargetableCards(abyssGetTargets, this);
-                    final InputBase chooseArt = new InputSelectManyCards(1, 1) {
-                        private static final long serialVersionUID = 4820011040853968644L;
-
-                        @Override
-                        public String getMessage() {
-                            return abyss.getName() + " - Select one nonartifact creature to destroy";
-                        }
-
-                        @Override
-                        protected boolean isValidChoice(Card choice) {
-                            return choice.isCreature() && !choice.isArtifact() && canTarget(choice) && choice.getController() == player;
-                        };
-
-                        @Override
-                        protected void onDone() {
-                            game.getAction().destroyNoRegeneration(selected.get(0));
-                        }
-                    };
                     if (player.isHuman() && targets.size() > 0) {
-                        Singletons.getModel().getMatch().getInput().setInput(chooseArt); // Input
+                        final InputSelectCards chooseArt = new InputSelectCards(1, 1) {
+                            private static final long serialVersionUID = 4820011040853968644L;
+                            @Override
+                            protected boolean isValidChoice(Card choice) {
+                                return choice.isCreature() && !choice.isArtifact() && canTarget(choice) && choice.getController() == player;
+                            };
+                        };
+                        chooseArt.setMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
+                        FThreads.setInputAndWait(chooseArt); // Input
+                        if (!chooseArt.hasCancelled()) {
+                            game.getAction().destroyNoRegeneration(chooseArt.getSelected().get(0));
+                        }
+                        
                     } else { // computer
 
                         final List<Card> indestruct = CardLists.getKeyword(targets, "Indestructible");

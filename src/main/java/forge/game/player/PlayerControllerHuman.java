@@ -11,12 +11,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import forge.Card;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
 import forge.control.input.InputPassPriority;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -212,26 +215,18 @@ public class PlayerControllerHuman extends PlayerController {
      */
     @Override
     public List<Card> choosePermanentsToSacrifice(List<Card> validTargets, int amount, SpellAbility sa, boolean destroy, boolean isOptional) {
-        List<Card> result = new ArrayList<Card>();
+        int max = Math.min(amount, validTargets.size());
+        if (max == 0)
+            return new ArrayList<Card>();
 
-        for (int i = 0; i < amount; i++) {
-            if (validTargets.isEmpty()) {
-                break;
-            }
-            Card c;
-            if (isOptional) {
-                c = GuiChoose.oneOrNone("Select a card to sacrifice", validTargets);
-            } else {
-                c = GuiChoose.one("Select a card to sacrifice", validTargets);
-            }
-            if (c != null) {
-                result.add(c);
-                validTargets.remove(c);
-            } else {
-                return result;
-            }
-        }
-        return result;
+        InputSelectCards inp = new InputSelectCardsFromList(isOptional ? 0 : amount, max, validTargets);
+        // TODO: Either compose a message here, or pass it as parameter from caller. 
+        inp.setMessage("Select cards to sacrifice");
+        
+        FThreads.setInputAndWait(inp);
+        if( inp.hasCancelled() )
+            return new ArrayList<Card>();
+        else return inp.getSelected(); 
     }
 
     @Override

@@ -29,7 +29,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.FThreads;
 import forge.CardPredicates.Presets;
-import forge.Command;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cardfactory.CardFactory;
@@ -393,6 +392,7 @@ public class MagicStack extends MyObservable {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void add(final SpellAbility sp) {
+        FThreads.checkEDT("MagicStack.add", false);
         final ArrayList<TargetChoices> chosenTargets = sp.getAllTargetChoices();
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
@@ -530,17 +530,15 @@ public class MagicStack extends MyObservable {
 
                 if (activating.isHuman()) {
                     sa.getSourceCard().addMultiKickerMagnitude(-1);
-                    final Command paidCommand = new Command() {
-                        private static final long serialVersionUID = -6037161763374971106L;
-
+                    final Runnable paidCommand = new Runnable() {
                         @Override
-                        public void execute() {
+                        public void run() {
                             abilityIncreaseMultikicker.resolve();
                             
                             final ManaCostBeingPaid manaCost = MagicStack.this.getMultiKickerSpellCostChange(abilityIncreaseMultikicker);
                             
                             if (manaCost.isPaid()) {
-                                this.execute();
+                                this.run();
                             } else {
                                 String prompt;
                                 int mkCostPaid = game.getActionPlay().getCostCuttingGetMultiKickerManaCostPaid(); 
@@ -555,13 +553,13 @@ public class MagicStack extends MyObservable {
                                 InputPayManaExecuteCommands toSet = new InputPayManaExecuteCommands(game, prompt, manaCost.toString());
                                 FThreads.setInputAndWait(toSet);
                                 if ( toSet.isPaid() ) { 
-                                    this.execute();
+                                    this.run();
                                 } else 
                                     MagicStack.this.push(sa);
                             }
                         }
                     };                    
-                    paidCommand.execute();
+                    paidCommand.run();
                 } else {
                     // computer
 

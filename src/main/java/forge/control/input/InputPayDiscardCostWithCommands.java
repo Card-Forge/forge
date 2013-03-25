@@ -25,7 +25,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
@@ -108,74 +107,40 @@ public class InputPayDiscardCostWithCommands extends InputSyncronizedBase implem
     /** {@inheritDoc} */
     @Override
     public void selectButtonCancel() {
-        this.cancel();
+        for (Card selected : this.discardCost.getList()) {
+            selected.setUsedToPay(false);
+        }
+        this.bPaid = false;
+        this.stop();
     }
 
     /** {@inheritDoc} */
     @Override
     public void selectButtonOK() {
-        this.done();
+        for (Card selected : this.discardCost.getList()) {
+            selected.setUsedToPay(false);
+            Singletons.getControl().getPlayer().discard(selected, this.ability);
+        }
+        this.discardCost.addListToHash(this.ability, "Discarded");
+        this.bPaid = true;
+        this.stop();
     }
 
     /** {@inheritDoc} */
     @Override
     public void selectCard(final Card card) {
-        if (this.choiceList.contains(card) && this.numChosen < numRequired) {
-            this.numChosen++;
-            this.discardCost.addToList(card);
-            card.setUsedToPay(true);
-            this.choiceList.remove(card);
-            this.showMessage();
-        }
-    }
-
-    /**
-     * <p>
-     * unselectCard.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @param zone
-     *            a {@link forge.game.zone.PlayerZone} object.
-     */
-    public void unselectCard(final Card card, final PlayerZone zone) {
         if (this.discardCost.getList().contains(card)) {
             this.numChosen--;
             card.setUsedToPay(false);
             this.discardCost.getList().remove(card);
             this.choiceList.add(card);
-            this.showMessage();
+        } 
+        else if (this.choiceList.contains(card) && this.numChosen < numRequired) {
+            this.numChosen++;
+            this.discardCost.addToList(card);
+            card.setUsedToPay(true);
+            this.choiceList.remove(card);
         }
-    }
-
-    /**
-     * <p>
-     * executes paid commmand.
-     * </p>
-     * 
-     */
-    public void done() {
-        for (Card selected : this.discardCost.getList()) {
-            selected.setUsedToPay(false);
-            Singletons.getControl().getPlayer().discard(selected, this.ability);
-        }
-        this.discardCost.addListToHash(ability, "Discarded");
-        bPaid = true;
-        this.stop();
-    }
-
-    /**
-     * <p>
-     * executes unpaid commmand.
-     * </p>
-     * 
-     */
-    public void cancel() {
-        for (Card selected : this.discardCost.getList()) {
-            selected.setUsedToPay(false);
-        }
-        bPaid = false;
-        this.stop();
+        this.showMessage();
     }
 }

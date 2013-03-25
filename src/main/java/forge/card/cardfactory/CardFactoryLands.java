@@ -24,8 +24,9 @@ import javax.swing.JOptionPane;
 import forge.Card;
 import forge.CardLists;
 import forge.Command;
+import forge.FThreads;
 import forge.Singletons;
-import forge.control.input.InputSelectManyCards;
+import forge.control.input.InputSelectCards;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -45,7 +46,7 @@ class CardFactoryLands {
      * TODO: Write javadoc for this type.
      *
      */
-    private static final class InputRevealCardType extends InputSelectManyCards {
+    private static final class InputRevealCardType extends InputSelectCards {
         private final String type;
         private final Card card;
         private static final long serialVersionUID = -2774066137824255680L;
@@ -72,21 +73,6 @@ class CardFactoryLands {
         protected boolean isValidChoice(Card c) {
             Zone zone = Singletons.getModel().getGame().getZoneOf(c);
             return zone.is(ZoneType.Hand) && c.isType(type) && c.getController() == card.getController();
-        }
-
-        @Override
-        protected void onDone() {
-            if (selected.isEmpty()) {
-                onCancel();
-            }
-            
-            String cardName = selected.get(0).getName();
-            JOptionPane.showMessageDialog(null, "Revealed card: " + cardName, cardName, JOptionPane.PLAIN_MESSAGE);
-        }
-
-        @Override
-        public void onCancel() {
-            card.setTapped(true);
         }
     }
 
@@ -226,7 +212,16 @@ class CardFactoryLands {
                 }
 
                 public void humanExecute() {
-                    Singletons.getModel().getMatch().getInput().setInput(new InputRevealCardType(0, 1, type, card));
+                    InputSelectCards inp = new InputRevealCardType(0, 1, type, card);
+                    FThreads.setInputAndWait(inp);
+                    
+                    if ( inp.hasCancelled() || inp.getSelected().isEmpty() ) {
+                        card.setTapped(true);
+                    } else {
+                        String cardName = inp.getSelected().get(0).getName();
+                        JOptionPane.showMessageDialog(null, "Revealed card: " + cardName, cardName, JOptionPane.PLAIN_MESSAGE);
+                    }
+
                 } // execute()
 
                 private void revealCard(final Card c) {

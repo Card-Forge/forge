@@ -41,9 +41,6 @@ import forge.control.input.Input;
 import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
 import forge.control.input.InputPayManaBase;
-import forge.control.input.InputPayManaExecuteCommands;
-import forge.control.input.InputPayManaSimple;
-import forge.control.input.InputPaySacCost;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -56,6 +53,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.toolbox.FLabel;
+import forge.view.arcane.CardPanel;
 
 /**
  * Controls Swing components of a player's field instance.
@@ -390,54 +388,53 @@ public class CField implements ICDoc {
 
         final Input input = CMessage.SINGLETON_INSTANCE.getInputControl().getInput();
 
-        if (c != null && c.isInZone(ZoneType.Battlefield)) {
-            if (c.isTapped() && (input instanceof InputPayManaSimple || input instanceof InputPayManaExecuteCommands)) {
-                final forge.view.arcane.CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(c.getUniqueNumber());
-                for (final forge.view.arcane.CardPanel cp : cardPanel.getAttachedPanels()) {
-                    if (cp.getCard().isUntapped()) {
-                        break;
-                    }
+        if (c == null || !c.isInZone(ZoneType.Battlefield)) {
+            return;
+        }
+            
+        // Why does CField filter cards here? That's Input's responsibility to detect incorrect choices! 
+        if (c.isTapped() && input instanceof InputPayManaBase) {
+            final CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(c.getUniqueNumber());
+            for (final CardPanel cp : cardPanel.getAttachedPanels()) {
+                if (cp.getCard().isUntapped()) {
+                    break;
                 }
-            }
-
-            final List<Card> att = Singletons.getModel().getGame().getCombat().getAttackerList();
-            if ((c.isTapped() || c.hasSickness() || (c.hasKeyword("Vigilance") && att.contains(c))) && (input instanceof InputAttack)) {
-                final forge.view.arcane.CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(
-                        c.getUniqueNumber());
-                for (final forge.view.arcane.CardPanel cp : cardPanel.getAttachedPanels()) {
-                    if (cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
-                        break;
-                    }
-                }
-            }
-
-            if (e.isMetaDown()) {
-                if (att.contains(c) && (input instanceof InputAttack)
-                        && !c.hasKeyword("CARDNAME attacks each turn if able.")) {
-                    c.untap();
-                    Singletons.getModel().getGame().getCombat().removeFromCombat(c);
-                    CombatUtil.showCombat();
-                } else if (input instanceof InputBlock) {
-                    if (c.getController() == Singletons.getControl().getPlayer() ) {
-                        Singletons.getModel().getGame().getCombat().removeFromCombat(c);
-                    }
-                    ((InputBlock) input).removeFromAllBlocking(c);
-                    CombatUtil.showCombat();
-                }
-                else if (input instanceof InputPaySacCost) {
-                    ((InputPaySacCost) input).unselectCard(c, Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield));
-                }
-            } else {
-                //Yosei, the Morning Star required cards to be chosen on computer side
-                //earlier it was enforced that cards must be in player zone
-                //this can potentially break some other functionality
-                //(tapping lands works ok but some custom cards may not...)
-
-
-                //in weird case card has no controller revert to default behaviour
-                input.selectCard(c);
             }
         }
+
+        final List<Card> att = Singletons.getModel().getGame().getCombat().getAttackerList();
+        if ((c.isTapped() || c.hasSickness() || (c.hasKeyword("Vigilance") && att.contains(c))) && (input instanceof InputAttack)) {
+            final CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(c.getUniqueNumber());
+            for (final CardPanel cp : cardPanel.getAttachedPanels()) {
+                if (cp.getCard().isUntapped() && !cp.getCard().hasSickness()) {
+                    break;
+                }
+            }
+        }
+
+        if (e.isMetaDown()) {
+            if (att.contains(c) && input instanceof InputAttack && !c.hasKeyword("CARDNAME attacks each turn if able.")) {
+                c.untap();
+                Singletons.getModel().getGame().getCombat().removeFromCombat(c);
+                CombatUtil.showCombat();
+            } else if (input instanceof InputBlock) {
+                if (c.getController() == Singletons.getControl().getPlayer() ) {
+                    Singletons.getModel().getGame().getCombat().removeFromCombat(c);
+                }
+                ((InputBlock) input).removeFromAllBlocking(c);
+                CombatUtil.showCombat();
+            }
+        } else {
+            //Yosei, the Morning Star required cards to be chosen on computer side
+            //earlier it was enforced that cards must be in player zone
+            //this can potentially break some other functionality
+            //(tapping lands works ok but some custom cards may not...)
+
+
+            //in weird case card has no controller revert to default behaviour
+            input.selectCard(c);
+        }
+
     }
 
     /** */
