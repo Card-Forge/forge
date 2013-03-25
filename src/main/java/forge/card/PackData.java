@@ -26,7 +26,6 @@ public class PackData {
     private final String edition;
     private final String landEdition;
     private final int    cntLands;
-    private final int    artIndices;
     
     public final String getEdition() {
         return edition;
@@ -40,17 +39,12 @@ public class PackData {
         return cntLands;
     }
     
-    public int getArtIndices() {
-        return artIndices;
-    }
-
-    public PackData(String edition0, String landEdition0, int nBasicLands, int artIndices0)
+    public PackData(String edition0, String landEdition0, int nBasicLands)
     {
         if (null == edition0) { throw new NullArgumentException("edition0"); }
         edition = edition0;
         landEdition = landEdition0;
         cntLands = nBasicLands;
-        artIndices = artIndices0;
     }
 
     public static final Function<? super PackData, String> FN_GET_CODE = new Function<PackData, String>() {
@@ -61,7 +55,7 @@ public class PackData {
     };
     
     @Override
-    public final boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -76,7 +70,7 @@ public class PackData {
     }
 
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         return edition.hashCode();
     }
 }

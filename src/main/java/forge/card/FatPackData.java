@@ -15,7 +15,7 @@ public class FatPackData extends PackData {
 
     public FatPackData(String edition0, String landEdition0, int nBoosters, int nBasicLands)
     {
-        super(edition0, landEdition0, nBasicLands, 1);
+        super(edition0, landEdition0, nBasicLands);
         cntBoosters = nBoosters;
     }
 

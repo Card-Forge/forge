@@ -30,12 +30,10 @@ import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
 import forge.util.Aggregates;
-import forge.util.MyRandom;
 
 public abstract class OpenablePack implements InventoryItemFromSet {
     protected final BoosterData contents;
     protected final String name;
-    private final int artIndex;
     private final int hash;
     private List<CardPrinted> cards = null;
     private BoosterGenerator generator = null;
@@ -45,8 +43,7 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         if (null == boosterData) { throw new NullArgumentException("boosterData"); }
         contents = boosterData;
         name = name0;
-        artIndex = MyRandom.getRandom().nextInt(boosterData.getArtIndices()) + 1;
-        hash = name.hashCode() ^ getClass().hashCode() ^ contents.hashCode() ^ artIndex;
+        hash = name.hashCode() ^ getClass().hashCode() ^ contents.hashCode();
     }
 
     @Override
@@ -63,10 +60,6 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         return contents.getEdition();
     }
     
-    public final int getArtIndex() {
-        return artIndex;
-    }
-
     public final List<CardPrinted> getCards() {
         if (null == cards) {
             cards = generate();
@@ -80,7 +73,7 @@ public abstract class OpenablePack implements InventoryItemFromSet {
     }
 
     @Override
-    public final boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -91,12 +84,11 @@ public abstract class OpenablePack implements InventoryItemFromSet {
             return false;
         }
         OpenablePack other = (OpenablePack)obj;
-        return name.equals(other.name) && contents.equals(other.contents) && artIndex == other.artIndex;
+        return name.equals(other.name) && contents.equals(other.contents);
     }
 
     @Override
-    public final int hashCode() {
-        System.out.println(String.format("returning hash: %d for edition=%s; idx=%d", hash, getEdition(), getArtIndex()));
+    public int hashCode() {
         return hash;
     }
 

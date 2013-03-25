@@ -23,8 +23,12 @@ import com.google.common.base.Function;
 import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.CardEdition;
+import forge.util.MyRandom;
 
 public class BoosterPack extends OpenablePack {
+    private final int artIndex;
+    private final int hash;
+
     public static final Function<CardEdition, BoosterPack> FN_FROM_SET = new Function<CardEdition, BoosterPack>() {
         @Override
         public BoosterPack apply(final CardEdition arg1) {
@@ -35,6 +39,12 @@ public class BoosterPack extends OpenablePack {
 
     public BoosterPack(final String name0, final BoosterData boosterData) {
         super(name0, boosterData);
+        artIndex = MyRandom.getRandom().nextInt(boosterData.getArtIndices()) + 1;
+        hash = super.hashCode() ^  artIndex;
+    }
+
+    public final int getArtIndex() {
+        return artIndex;
     }
 
     @Override
@@ -49,5 +59,22 @@ public class BoosterPack extends OpenablePack {
     
     public BoosterData getBoosterData() {
         return contents;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        BoosterPack other = (BoosterPack)obj;
+        return artIndex == other.artIndex;
+    }
+
+    @Override
+    public final int hashCode() {
+        return hash;
     }
 }

@@ -14,6 +14,7 @@ public class BoosterData extends PackData {
     private final int nSpecial;
     private final int nDoubleFaced;
     private final int foilRate;
+    private final int artIndices;
     private static final int CARDS_PER_BOOSTER = 15;
 
     public BoosterData(String edition, String editionLand, int nC, int nU, int nR, int nS, int nDF, int artIndices) {
@@ -23,18 +24,15 @@ public class BoosterData extends PackData {
                 (nC + nR + nU + nS + nDF) > 10 ? BoosterData.CARDS_PER_BOOSTER - nC - nR - nU - nS - nDF : 0, 68);
     }
 
-    public BoosterData(String edition, String editionLand, int nC, int nU, int nR, int nS, int nDF, int artIndices, int nL, int oneFoilPer) {
-        super(edition, editionLand, nL > 0 ? nL : 0, artIndices);
+    public BoosterData(String edition, String editionLand, int nC, int nU, int nR, int nS, int nDF, int artIndices0, int nL, int oneFoilPer) {
+        super(edition, editionLand, nL > 0 ? nL : 0);
         this.nCommon = nC;
         this.nUncommon = nU;
         this.nRare = nR;
         this.nSpecial = nS;
         this.nDoubleFaced = nDF;
         this.foilRate = oneFoilPer;
-    }
-
-    public final int getCommon() {
-        return this.nCommon;
+        artIndices = artIndices0;
     }
 
     public final Predicate<CardPrinted> getEditionFilter() {
@@ -45,6 +43,10 @@ public class BoosterData extends PackData {
         return IPaperCard.Predicates.printedInSets(getLandEdition());
     }
     
+    public final int getCommon() {
+        return this.nCommon;
+    }
+
     public final int getUncommon() {
         return this.nUncommon;
     }
@@ -69,6 +71,10 @@ public class BoosterData extends PackData {
         return this.foilRate;
     }
     
+    public int getArtIndices() {
+        return artIndices;
+    }
+
     private void _append(StringBuilder s, int val, String name) {
         if (0 >= val) {
             return;
