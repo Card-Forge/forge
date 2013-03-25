@@ -32,6 +32,7 @@ import forge.card.CardCharacteristics;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
+import forge.card.ability.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementHandler;
@@ -40,6 +41,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
+import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
 import forge.item.CardDb;
@@ -303,13 +305,33 @@ public class CardFactory {
             CardFactorySorceries.buildCard(card, cardName);
         } else if (card.isArtifact()) {
             CardFactoryArtifacts.buildCard(card, cardName);
+        } else if (card.isType("Plane")) {
+            buildPlaneAbilities(card);
         }
 
         CardFactoryUtil.setupKeywordedAbilities(card);
     } // getCard2
 
+    private static void buildPlaneAbilities(Card card) {
+        StringBuilder triggerSB = new StringBuilder();
+        triggerSB.append("Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | ");
+        triggerSB.append("Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the ");
+        triggerSB.append("bottom of its owner's planar deck face down, then move the top card of your planar deck off ");
+        triggerSB.append("that planar deck and turn it face up");
 
-    
+        StringBuilder saSB = new StringBuilder();
+        saSB.append("AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | AnyPlayer$ True | ActivationZone$ Command | ");
+        saSB.append("SpellDescription$ Roll the planar dice. X is equal to the amount of times the planar die has been rolled this turn.");        
+
+        card.setSVar("RolledWalk", "DB$ Planeswalk | Cost$ 0");
+        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(triggerSB.toString(), card, true);
+        card.addTrigger(planesWalkTrigger);
+
+        card.setSVar("X", "Count$RolledThisTurn");
+        SpellAbility planarRoll = AbilityFactory.getAbility(saSB.toString(), card);
+        card.addSpellAbility(planarRoll);
+    }
+
     private static Card readCard(final CardRules rules) {
 
         final Card card = new Card();
