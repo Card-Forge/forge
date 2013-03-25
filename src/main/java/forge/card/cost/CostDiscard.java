@@ -28,6 +28,7 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -56,6 +57,7 @@ public class CostDiscard extends CostPartWithList {
         private static final long serialVersionUID = -329993322080934435L;
         private int nDiscard = 0;
         private boolean sameName;
+        private String firstName = null;
 
         private final SpellAbility sa;
 
@@ -69,8 +71,7 @@ public class CostDiscard extends CostPartWithList {
          * @param sp
          * @param discType
          */
-        public InputPayCostDiscard(SpellAbility sa, List<Card> handList, CostDiscard part, CostPayment payment, int nNeeded, String discType) {
-            super(payment);
+        public InputPayCostDiscard(SpellAbility sa, List<Card> handList, CostDiscard part, int nNeeded, String discType) {
             this.sa = sa;
             this.handList = handList;
             this.part = part;
@@ -111,18 +112,18 @@ public class CostDiscard extends CostPartWithList {
         public void selectCard(final Card card) {
             Zone zone = Singletons.getModel().getGame().getZoneOf(card);
             if (zone.is(ZoneType.Hand) && handList.contains(card)) {
-                if (!sameName || part.getList().isEmpty()
-                        || part.getList().get(0).getName().equals(card.getName())) {
+                if (!sameName || part.getList().isEmpty()|| firstName.equals(card.getName()) ) {
+                    if( part.getList().isEmpty() )
+                        firstName = card.getName();
                     // send in List<Card> for Typing
-                    card.getController().discard(card, sa);
-                    part.addToList(card);
+                    part.executePayment(sa, card);
                     handList.remove(card);
                     this.nDiscard++;
 
                     // in case no more cards in hand
                     if (this.nDiscard == nNeeded) {
                         this.done();
-                    } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).size() == 0) {
+                    } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).isEmpty()) {
                         // really
                         // shouldn't
                         // happen
@@ -247,7 +248,7 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
-            ai.discard(c, ability);
+            executePayment(ability, c);
         }
     }
 
@@ -259,8 +260,9 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
         List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         String discardType = this.getType();
         final String amount = this.getAmount();
@@ -268,23 +270,22 @@ public class CostDiscard extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             if (!handList.contains(source)) {
-                payment.setCancel(true);
+                return false;
             }
-            activator.discard(source, ability);
-            payment.setPaidPart(this);
+            executePayment(ability, source);
+            return true;
             //this.addToList(source);
         } else if (discardType.equals("Hand")) {
             this.setList(handList);
             activator.discardHand(ability);
-            payment.setPaidPart(this);
+            return true;
         } else if (discardType.equals("LastDrawn")) {
             final Card lastDrawn = activator.getLastDrawnCard();
-            this.addToList(lastDrawn);
             if (!handList.contains(lastDrawn)) {
-                payment.setCancel(true);
+                return false;
             }
-            activator.discard(lastDrawn, ability);
-            payment.setPaidPart(this);
+            executePayment(ability, lastDrawn);
+            return true;
         } else {
             Integer c = this.convertAmount();
 
@@ -300,7 +301,7 @@ public class CostDiscard extends CostPartWithList {
                 }
 
                 this.setList(activator.discardRandom(c, ability));
-                payment.setPaidPart(this);
+                return true;
             } else {
                 String type = new String(discardType);
                 boolean sameName = false;
@@ -335,11 +336,11 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                FThreads.setInputAndWait(new InputPayCostDiscard(ability, handList, this, payment, c, discardType));
+                InputPayment inp = new InputPayCostDiscard(ability, handList, this, c, discardType);
+                FThreads.setInputAndWait(inp);
+                return inp.isPaid();
             }
         }
-        if ( !payment.isCanceled())
-            this.addListToHash(ability, "Discarded");
     }
 
     /*
@@ -394,6 +395,23 @@ public class CostDiscard extends CostPartWithList {
             }
         }
         return this.getList() != null;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        this.addToList(targetCard);
+        targetCard.getController().discard(targetCard, ability);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Discarded";
     }
 
     // Inputs

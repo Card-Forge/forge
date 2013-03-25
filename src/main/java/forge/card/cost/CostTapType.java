@@ -26,13 +26,13 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -59,8 +59,7 @@ public class CostTapType extends CostPartWithList {
          * @param cardList
          * @param payment
          */
-        public InputPayCostTapType(CostTapType tapType, int nCards, List<Card> cardList, CostPayment payment) {
-            super(payment);
+        public InputPayCostTapType(CostTapType tapType, int nCards, List<Card> cardList) {
             this.tapType = tapType;
             this.nCards = nCards;
             this.cardList = cardList;
@@ -70,8 +69,7 @@ public class CostTapType extends CostPartWithList {
         public void showMessage() {
 
             final int left = nCards - this.nTapped;
-            CMatchUI.SINGLETON_INSTANCE
-                    .showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
+            showMessage("Select a " + tapType.getDescription() + " to tap (" + left + " left)");
             ButtonUtil.enableOnlyCancel();
             if (nCards == 0) {
                 this.done();
@@ -85,8 +83,7 @@ public class CostTapType extends CostPartWithList {
             Zone zone = Singletons.getModel().getGame().getZoneOf(card);
             if (zone.is(ZoneType.Battlefield) && cardList.contains(card) && card.isUntapped()) {
                 // send in List<Card> for Typing
-                card.tap();
-                tapType.addToList(card);
+                tapType.executePayment(null, card);
                 cardList.remove(card);
 
                 this.nTapped++;
@@ -211,11 +208,12 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         List<Card> typeList = new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
         final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         if (c == null) {
             final String sVar = ability.getSVar(amount);
@@ -226,9 +224,9 @@ public class CostTapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        FThreads.setInputAndWait(new InputPayCostTapType(this, c, typeList, payment));
-        if( !payment.isCanceled())
-            addListToHash(ability, "Tapped");
+        InputPayment inp = new InputPayCostTapType(this, c, typeList);
+        FThreads.setInputAndWait(inp);
+        return inp.isPaid();
     }
 
     /*
@@ -264,6 +262,23 @@ public class CostTapType extends CostPartWithList {
         }
 
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        addToList(targetCard);
+        targetCard.tap();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Tapped";
     }
 
     // Inputs

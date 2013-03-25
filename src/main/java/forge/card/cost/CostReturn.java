@@ -22,7 +22,6 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputSelectCards;
@@ -121,7 +120,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
-            Singletons.getModel().getGame().getAction().moveToHand(c);
+            executePayment(ability, c);
         }
     }
 
@@ -133,8 +132,9 @@ public class CostReturn extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
         final List<Card> list = activator.getCardsIn(ZoneType.Battlefield);
@@ -152,27 +152,24 @@ public class CostReturn extends CostPartWithList {
             if (card.getController() == ability.getActivatingPlayer() && card.isInPlay()) {
                 boolean confirm = GuiDialog.confirm(card, card.getName() + " - Return to Hand?");
                 if (confirm) {
-                    addToList(card);
-                    game.getAction().moveToHand(card);
-                } else {
-                    payment.cancelCost();
+                    executePayment(ability, card);
                 }
+                return confirm;
             }
         } else {
             List<Card> validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
 
             InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
-            inp.setMessage("Return %d " + this.getType() + " card(s) to hand");
+            inp.setMessage("Return %d " + this.getType() + " " + this.getType() + " card(s) to hand");
             FThreads.setInputAndWait(inp);
             if (inp.hasCancelled())
-                payment.setCancel(true);
-            else 
-                for(Card crd : inp.getSelected()) 
-                    game.getAction().moveToHand(crd);
+                return false;
+            
+            for(Card crd : inp.getSelected()) 
+                executePayment(ability, crd);
+            return true;
         }
-
-        if (!payment.isCanceled())
-            addListToHash(ability, "Returned");
+       return false;
     }
 
     /*
@@ -194,11 +191,28 @@ public class CostReturn extends CostPartWithList {
             }
 
             this.setList(ComputerUtil.chooseReturnType(ai, this.getType(), source, ability.getTargetCard(), c));
-            if (this.getList() == null) {
+            if (this.getList().isEmpty()) {
                 return false;
             }
         }
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        addToList(targetCard);
+        ability.getActivatingPlayer().getGame().getAction().moveToHand(targetCard);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Returned";
     }
 
     // Inputs

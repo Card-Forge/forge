@@ -21,9 +21,10 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputSynchronized;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.AIPlayer;
@@ -57,8 +58,7 @@ public class CostPutCounter extends CostPartWithList {
          * @param payment
          * @param sa
          */
-        public InputPayCostPutCounter(String type, CostPutCounter costPutCounter, int nNeeded, CostPayment payment, SpellAbility sa) {
-            super(payment);
+        public InputPayCostPutCounter(String type, CostPutCounter costPutCounter, int nNeeded, SpellAbility sa) {
             this.type = type;
             this.costPutCounter = costPutCounter;
             this.nNeeded = nNeeded;
@@ -90,9 +90,7 @@ public class CostPutCounter extends CostPartWithList {
         public void selectCard(final Card card) {
             if (this.typeList.contains(card)) {
                 this.nPut++;
-                costPutCounter.addToList(card);
-                card.addCounter(costPutCounter.getCounter(), 1, false);
-
+                costPutCounter.executePayment(sa, card);
                 if (nNeeded == this.nPut) {
                     this.done();
                 } else {
@@ -220,17 +218,14 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        Integer c = this.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
+        Integer c = getNumberOfCounters(ability);
 
         if (this.payCostFromSource()) {
-            source.addCounter(this.getCounter(), c, false);
+            executePayment(ability, source, c);
         } else {
             // Put counter on chosen card
             for (final Card card : this.getList()) {
-                card.addCounter(this.getCounter(), 1, false);
+                executePayment(ability, card);
             }
         }
     }
@@ -243,21 +238,26 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        Integer c = this.convertAmount();
-        if (c == null) {
-            c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-        }
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final Card source = ability.getSourceCard();
+        Integer c = getNumberOfCounters(ability);
 
         if (this.payCostFromSource()) {
-            source.addCounter(this.getCounter(), c, false);
-            this.addToList(source);
+            executePayment(ability, source, c);
+            return true;
         } else {
-            InputSynchronized inp = new InputPayCostPutCounter(this.getType(), this, c, payment, ability);
-            inp.awaitLatchRelease();
+            InputPayment inp = new InputPayCostPutCounter(this.getType(), this, c, ability);
+            FThreads.setInputAndWait(inp);
+            return inp.isPaid();
         }
-        if ( !payment.isCanceled())
-            addListToHash(ability, "CounterPut");
+    }
+
+    private Integer getNumberOfCounters(final SpellAbility ability) {
+        Integer c = this.convertAmount();
+        if (c == null) {
+            c = AbilityUtils.calculateAmount(ability.getSourceCard(), this.getAmount(), ability);
+        }
+        return c;
     }
 
     /*
@@ -274,13 +274,7 @@ public class CostPutCounter extends CostPartWithList {
             this.addToList(source);
             return true;
         } else {
-            Integer c = this.convertAmount();
-            if (c == null) {
-                c = AbilityUtils.calculateAmount(source, this.getAmount(), ability);
-            }
-
-            final List<Card> typeList =
-                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
+            final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
 
             Card card = null;
             if (this.getType().equals("Creature.YouCtrl")) {
@@ -291,5 +285,24 @@ public class CostPutCounter extends CostPartWithList {
             this.addToList(card);
         }
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard){
+        executePayment(ability, targetCard, 1);
+    }
+    
+    public void executePayment(SpellAbility ability, Card targetCard, int c) {
+        targetCard.addCounter(this.getCounter(), c, false);
+        this.addToList(targetCard);
+    }
+
+
+    @Override
+    public String getHashForList() {
+        return "CounterPut";
     }
 }

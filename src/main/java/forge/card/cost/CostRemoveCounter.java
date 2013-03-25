@@ -25,7 +25,7 @@ import forge.CounterType;
 import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputSynchronized;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -66,8 +66,7 @@ public class CostRemoveCounter extends CostPartWithList {
          * @param type
          * @param costRemoveCounter
          */
-        public InputPayCostRemoveCounterType(CostPayment payment, int nNeeded, SpellAbility sa, String type, CostRemoveCounter costRemoveCounter) {
-            super(payment);
+        public InputPayCostRemoveCounterType(int nNeeded, SpellAbility sa, String type, CostRemoveCounter costRemoveCounter) {
             this.nNeeded = nNeeded;
             this.sa = sa;
             this.type = type;
@@ -99,8 +98,7 @@ public class CostRemoveCounter extends CostPartWithList {
             if (this.typeList.contains(card)) {
                 if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
                     this.nRemove++;
-                    costRemoveCounter.addToList(card);
-                    card.subtractCounter(costRemoveCounter.getCounter(), 1);
+                    costRemoveCounter.executePayment(sa, card);
 
                     if (nNeeded == this.nRemove) {
                         this.done();
@@ -133,9 +131,8 @@ public class CostRemoveCounter extends CostPartWithList {
          * @param nNeeded
          * @param payment
          */
-        public InputPayCostRemoveCounterFrom(CostRemoveCounter costRemoveCounter, String type, SpellAbility sa,
-                int nNeeded, CostPayment payment) {
-            super(payment);
+        public InputPayCostRemoveCounterFrom(CostRemoveCounter costRemoveCounter, String type, SpellAbility sa, int nNeeded) {
+
             this.costRemoveCounter = costRemoveCounter;
             this.type = type;
             this.sa = sa;
@@ -153,20 +150,18 @@ public class CostRemoveCounter extends CostPartWithList {
             this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
 
             for (int i = 0; i < nNeeded; i++) {
-                if (this.typeList.size() == 0) {
+                if (this.typeList.isEmpty()) {
                     this.cancel();
                 }
 
-                final Card o = GuiChoose
-                        .oneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
+                final Card o = GuiChoose.oneOrNone("Remove counter(s) from a card in " + costRemoveCounter.getZone(), this.typeList);
 
                 if (o != null) {
                     final Card card = o;
 
                     if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
                         this.nRemove++;
-                        costRemoveCounter.addToList(card);
-                        card.subtractCounter(costRemoveCounter.getCounter(), 1);
+                        costRemoveCounter.executePayment(sa, card);
 
                         if (card.getCounters(costRemoveCounter.getCounter()) == 0) {
                             this.typeList.remove(card);
@@ -361,8 +356,9 @@ public class CostRemoveCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         int maxCounters = 0;
 
@@ -377,16 +373,14 @@ public class CostRemoveCounter extends CostPartWithList {
                 }
             }
 
-            final InputSynchronized inp;
+            final InputPayment inp;
             if (this.getZone().equals(ZoneType.Battlefield)) {
-                inp = new InputPayCostRemoveCounterType(payment, c, ability, this.getType(), this);
+                inp = new InputPayCostRemoveCounterType(c, ability, this.getType(), this);
             } else {
-                inp = new InputPayCostRemoveCounterFrom(this, this.getType(), ability, c, payment);
+                inp = new InputPayCostRemoveCounterFrom(this, this.getType(), ability, c);
             }
             FThreads.setInputAndWait(inp);
-            if ( !payment.isCanceled() )
-                addListToHash(ability, "CounterRemove");
-            return;
+            return inp.isPaid();
         }
 
         maxCounters = source.getCounters(this.counter);
@@ -404,14 +398,13 @@ public class CostRemoveCounter extends CostPartWithList {
             }
         }
 
-        if (maxCounters >= c) {
-            this.addToList(source);
-            source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
-            source.subtractCounter(this.counter, c);
-            this.setLastPaidAmount(c);
-        } else {
-            payment.setCancel(true);
-        }
+        if (maxCounters < c) return false;
+            
+        
+        this.addToList(source);
+        source.setSVar("CostCountersRemoved", "Number$" + Integer.toString(c));
+        executePayment(ability, source, c);
+        return true;
     }
 
     /*
@@ -456,5 +449,25 @@ public class CostRemoveCounter extends CostPartWithList {
             return false;
         }
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        executePayment(ability, targetCard, 1);
+    }
+
+    public void executePayment(SpellAbility ability, Card targetCard, int n) {
+        addToList(targetCard);
+        targetCard.subtractCounter(getCounter(), n);
+    }
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "CounterRemove";
     }
 }

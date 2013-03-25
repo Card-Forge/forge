@@ -25,13 +25,13 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -63,9 +63,7 @@ public class CostReveal extends CostPartWithList {
          * @param payment
          * @param nNeeded
          */
-        public InputPayReveal(CostReveal part, String discType, List<Card> handList, SpellAbility sa,
-                CostPayment payment, int nNeeded) {
-            super(payment);
+        public InputPayReveal(CostReveal part, String discType, List<Card> handList, SpellAbility sa, int nNeeded) {
             this.part = part;
             this.discType = discType;
             this.handList = handList;
@@ -95,7 +93,7 @@ public class CostReveal extends CostPartWithList {
                 sb.append(nNeeded - this.nReveal);
                 sb.append(" remaining.");
             }
-            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
+            showMessage(sb.toString());
             ButtonUtil.enableOnlyCancel();
         }
 
@@ -105,7 +103,7 @@ public class CostReveal extends CostPartWithList {
             if (zone.is(ZoneType.Hand) && handList.contains(card)) {
                 // send in List<Card> for Typing
                 handList.remove(card);
-                part.addToList(card);
+                part.executePayment(sa, card);
                 this.nReveal++;
 
                 // in case no more cards in hand
@@ -222,6 +220,8 @@ public class CostReveal extends CostPartWithList {
     @Override
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         GuiChoose.oneOrNone("Revealed cards:", this.getList());
+        for(Card c: getList()) // should not throw concurrent modification here - no items should be added.
+            executePayment(ability, c);
     }
 
     /*
@@ -232,15 +232,19 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
         this.resetList();
 
         if (this.payCostFromSource()) {
-            this.addToList(source);
+            executePayment(ability, source);
+            return true;
         } else if (this.getType().equals("Hand")) {
-            this.setList(new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand)));
+            for(Card c : activator.getCardsIn(ZoneType.Hand))
+                executePayment(ability, c);
+            return true;
         } else {
             Integer num = this.convertAmount();
 
@@ -255,12 +259,12 @@ public class CostReveal extends CostPartWithList {
                     num = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
-            if (num > 0) {
-                FThreads.setInputAndWait(new InputPayReveal(this, this.getType(), handList, ability, payment, num));
-            } 
+            if ( num == 0 ) return true;
+
+            InputPayment inp = new InputPayReveal(this, this.getType(), handList, ability, num);
+            FThreads.setInputAndWait(inp);
+            return inp.isPaid();
         }
-        if ( !payment.isCanceled())
-            this.addListToHash(ability, "Revealed");
     }
 
     /*
@@ -294,6 +298,23 @@ public class CostReveal extends CostPartWithList {
         sb.append(" from your hand");
 
         return sb.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        addToList(targetCard);
+        // write code to actually reveal card
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Revealed";
     }
 
     // Inputs

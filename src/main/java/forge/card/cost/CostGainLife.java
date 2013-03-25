@@ -137,7 +137,8 @@ public class CostGainLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
         final Player activator = ability.getActivatingPlayer();
         final int life = activator.getLife();
@@ -172,13 +173,13 @@ public class CostGainLife extends CostPart {
         for(int playersLeft = cntPlayers; playersLeft > 0; playersLeft--) {
             final Player chosenToGain = GuiChoose.oneOrNone(sb.toString(), oppsThatCanGainLife);
             if (null == chosenToGain) {
-                payment.setCancel(true);
-                return;
+                return false;
             } else {
                 final Player chosen = chosenToGain;
                 chosen.gainLife(c, null);
             }
         }
+        return true;
     }
 
     /*

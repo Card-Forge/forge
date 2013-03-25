@@ -1,35 +1,29 @@
 package forge.card.cost;
 
+import forge.control.input.InputPayment;
 import forge.control.input.InputSyncronizedBase;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-abstract class InputPayCostBase extends InputSyncronizedBase { 
+abstract class InputPayCostBase extends InputSyncronizedBase implements InputPayment { 
     private static final long serialVersionUID = -2967434867139585579L;
+    boolean bPaid = false;
     
-    private final CostPayment payment;
-    /**
-     * TODO: Write javadoc for Constructor.
-     * @param cdl
-     * @param payment
-     */
-    public InputPayCostBase(CostPayment payment0) {
-        payment = payment0;
-    }
-
     @Override
     final public void selectButtonCancel() {
         this.cancel();
     }
 
     final protected void done() {
+        bPaid = true;
         this.stop();
     }
 
     final public void cancel() {
-        payment.cancelCost();
         this.stop();
     }
+    
+    final public boolean isPaid() { return bPaid; }
 }

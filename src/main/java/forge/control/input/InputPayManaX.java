@@ -2,7 +2,6 @@ package forge.control.input;
 
 import forge.Card;
 import forge.card.cost.CostPartMana;
-import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -16,14 +15,12 @@ public class InputPayManaX extends InputPayManaBase {
     private final String strX;
     private String colorsPaid;
     private final CostPartMana costMana;
-    private final CostPayment payment;
 
 
-    public InputPayManaX(final GameState game, final SpellAbility sa0, final CostPayment payment0, final CostPartMana costMana0)
+    public InputPayManaX(final GameState game, final SpellAbility sa0, final CostPartMana costMana0)
     {
         super(game, sa0);
 
-        payment = payment0;
         xPaid = 0;
         colorX =  saPaidFor.hasParam("XColor") ? saPaidFor.getParam("XColor") : "";
         colorsPaid = saPaidFor.getSourceCard().getColorsPaid();
@@ -32,12 +29,25 @@ public class InputPayManaX extends InputPayManaBase {
         manaCost = new ManaCostBeingPaid(strX);
     }
 
+    /* (non-Javadoc)
+     * @see forge.control.input.InputPayManaBase#isPaid()
+     */
+    @Override
+    public boolean isPaid() {
+        // only cancel if partially paid an X value
+        // or X is 0, and x can't be 0
+
+        
+        //return !( xPaid == 0 && !costMana.canXbe0() || this.colorX.equals("") && !this.manaCost.toString().equals(strX) );
+        // return !( xPaid == 0 && !costMana.canXbe0()) && !(this.colorX.equals("") && !this.manaCost.toString().equals(strX));
+        
+        return ( xPaid > 0 || costMana.canXbe0()) && (!this.colorX.equals("") || this.manaCost.toString().equals(strX));
+    }
+    
     @Override
     public void showMessage() {
-        if (xPaid == 0 && !costMana.canXbe0() || this.colorX.equals("") && !this.manaCost.toString().equals(strX)) {
+        if (!isPaid()) {
             ButtonUtil.enableOnlyCancel();
-            // only cancel if partially paid an X value
-            // or X is 0, and x can't be 0
         } else {
             ButtonUtil.enableAllFocusOk();
         }
@@ -55,6 +65,7 @@ public class InputPayManaX extends InputPayManaBase {
     // selectCard
     @Override
     public void selectCard(final Card card) {
+        // don't allow here the cards that produce only wrong colors
         activateManaAbility(card, this.colorX.isEmpty() ? this.manaCost : new ManaCostBeingPaid(this.colorX));
     }
     
@@ -72,7 +83,6 @@ public class InputPayManaX extends InputPayManaBase {
 
     @Override
     public void selectButtonCancel() {
-        payment.cancelCost();
         this.stop();
     }
 
@@ -89,10 +99,10 @@ public class InputPayManaX extends InputPayManaBase {
 
     @Override
     protected void done() {
-        payment.getCard().setXManaCostPaid(this.xPaid);
-        payment.setPaidPart(costMana);
-        payment.getCard().setColorsPaid(this.colorsPaid);
-        payment.getCard().setSunburstValue(this.colorsPaid.length());
+        final Card card = saPaidFor.getSourceCard();
+        card.setXManaCostPaid(this.xPaid);
+        card.setColorsPaid(this.colorsPaid);
+        card.setSunburstValue(this.colorsPaid.length());
         this.stop();
     }
 }

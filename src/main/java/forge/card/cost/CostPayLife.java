@@ -123,7 +123,8 @@ public class CostPayLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
         final Player activator = ability.getActivatingPlayer();
         final int life = activator.getLife();
@@ -149,10 +150,10 @@ public class CostPayLife extends CostPart {
 
         if (activator.canPayLife(c) && GuiDialog.confirm(source, sb.toString())) {
             activator.payLife(c, null);
-            this.setLastPaidAmount(c);
         } else {
-            payment.setCancel(true);
+            return false;
         }
+        return true;
     }
 
     /*

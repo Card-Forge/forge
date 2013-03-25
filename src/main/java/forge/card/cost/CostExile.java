@@ -23,15 +23,17 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
-import forge.control.input.InputSynchronized;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
+import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
@@ -65,8 +67,7 @@ public class CostExile extends CostPartWithList {
          * @param payment
          * @param part
          */
-        private InputExileFrom(SpellAbility sa, String type, int nNeeded, CostPayment payment, CostExile part) {
-            super(payment);
+        private InputExileFrom(SpellAbility sa, String type, int nNeeded, CostExile part) {
             this.sa = sa;
             this.type = type;
             this.nNeeded = nNeeded;
@@ -91,8 +92,7 @@ public class CostExile extends CostPartWithList {
 
                 if (c != null) {
                     this.typeList.remove(c);
-                    part.addToList(c);
-                    Singletons.getModel().getGame().getAction().exile(c);
+                    part.executePayment(sa, c);
                     if (i == (nNeeded - 1)) {
                         this.done();
                     }
@@ -125,8 +125,7 @@ public class CostExile extends CostPartWithList {
          * @param nNeeded
          * @param payableZone
          */
-        private InputExileFromSame(List<Card> list, CostExile part, CostPayment payment, int nNeeded, List<Player> payableZone) {
-            super(payment);
+        private InputExileFromSame(List<Card> list, CostExile part, int nNeeded, List<Player> payableZone) {
             this.list = list;
             this.part = part;
             this.nNeeded = nNeeded;
@@ -160,8 +159,7 @@ public class CostExile extends CostPartWithList {
 
                 if (c != null) {
                     this.typeList.remove(c);
-                    part.addToList(c);
-                    Singletons.getModel().getGame().getAction().exile(c);
+                    part.executePayment(null, c);
                     if (i == (nNeeded - 1)) {
                         this.done();
                     }
@@ -195,8 +193,7 @@ public class CostExile extends CostPartWithList {
          * @param nNeeded
          * @param part
          */
-        private InputExileFromStack(CostPayment payment, SpellAbility sa, String type, int nNeeded, CostExile part) {
-            super(payment);
+        private InputExileFromStack(SpellAbility sa, String type, int nNeeded, CostExile part) {
             this.sa = sa;
             this.type = type;
             this.nNeeded = nNeeded;
@@ -211,10 +208,11 @@ public class CostExile extends CostPartWithList {
 
             saList = new ArrayList<SpellAbility>();
             descList = new ArrayList<String>();
+            final MagicStack stack = sa.getActivatingPlayer().getGame().getStack();
 
-            for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
-                final Card stC = Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard();
-                final SpellAbility stSA = Singletons.getModel().getGame().getStack().peekAbility(i).getRootAbility();
+            for (int i = 0; i < stack.size(); i++) {
+                final Card stC = stack.peekAbility(i).getSourceCard();
+                final SpellAbility stSA = stack.peekAbility(i).getRootAbility();
                 if (stC.isValid(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard()) && stSA.isSpell()) {
                     this.saList.add(stSA);
                     if (stC.isCopiedSpell()) {
@@ -236,16 +234,19 @@ public class CostExile extends CostPartWithList {
                 if (o != null) {
                     final SpellAbility toExile = this.saList.get(descList.indexOf(o));
                     final Card c = toExile.getSourceCard();
+                    
+
                     this.saList.remove(toExile);
-                    part.addToList(c);
                     if (!c.isCopiedSpell()) {
-                        Singletons.getModel().getGame().getAction().exile(c);
-                    }
+                        part.executePayment(sa, c);
+                    } else
+                        part.addToList(c);
+
                     if (i == (nNeeded - 1)) {
                         this.done();
                     }
-                    final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(toExile);
-                    Singletons.getModel().getGame().getStack().remove(si);
+                    final SpellAbilityStackInstance si = stack.getInstanceFromSpellAbility(toExile);
+                    stack.remove(si);
                 } else {
                     this.cancel();
                     break;
@@ -275,8 +276,7 @@ public class CostExile extends CostPartWithList {
          * @param nNeeded
          * @param sa
          */
-        private InputExileType(CostExile part, CostPayment payment, String type, int nNeeded, SpellAbility sa) {
-            super(payment);
+        private InputExileType(CostExile part, String type, int nNeeded, SpellAbility sa) {
             this.part = part;
             this.type = type;
             this.nNeeded = nNeeded;
@@ -312,8 +312,7 @@ public class CostExile extends CostPartWithList {
         public void selectCard(final Card card) {
             if (this.typeList.contains(card)) {
                 this.nExiles++;
-                part.addToList(card);
-                Singletons.getModel().getGame().getAction().exile(card);
+                part.executePayment(sa, card);
                 this.typeList.remove(card);
                 // in case nothing else to exile
                 if (this.nExiles == nNeeded) {
@@ -343,8 +342,7 @@ public class CostExile extends CostPartWithList {
          * @param part
          * @param sa
          */
-        private InputExileThis(CostPayment payment, CostExile part, SpellAbility sa) {
-            super(payment);
+        private InputExileThis(CostExile part, SpellAbility sa) {
             this.part = part;
             this.sa = sa;
         }
@@ -354,9 +352,7 @@ public class CostExile extends CostPartWithList {
             if ( sa.getActivatingPlayer().getZone(part.getFrom()).contains(card)) {
                 boolean choice = GuiDialog.confirm(card, card.getName() + " - Exile?");
                 if (choice) {
-                    Singletons.getModel().getGame().getAction().exile(card);
-                    part.addToList(card);
-                    part.addListToHash(sa, "Exiled");
+                    part.executePayment(sa, card);
                     done();
                     return;
                 }
@@ -539,8 +535,9 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
         List<Card> list;
@@ -552,11 +549,10 @@ public class CostExile extends CostPartWithList {
         }
 
         if (this.getType().equals("All")) {
-            this.setList(list);
             for (final Card card : list) {
-                Singletons.getModel().getGame().getAction().exile(card);
+                executePayment(ability, card);
             }
-            payment.setPaidPart(this);
+            return true;
         }
         list = CardLists.getValidCards(list, this.getType().split(";"), activator, source);
         if (c == null) {
@@ -571,16 +567,16 @@ public class CostExile extends CostPartWithList {
             }
         }
         
-        InputSynchronized target = null;
+        InputPayment target = null;
         if (this.payCostFromSource()) {
-            target = new InputExileThis(payment, this, ability);
+            target = new InputExileThis(this, ability);
         } else if (this.from.equals(ZoneType.Battlefield) || this.from.equals(ZoneType.Hand)) {
-            target = new InputExileType(this, payment, this.getType(), c, ability);
+            target = new InputExileType(this, this.getType(), c, ability);
         } else if (this.from.equals(ZoneType.Stack)) {
-            target = new InputExileFromStack(payment, ability, this.getType(), c, this);
+            target = new InputExileFromStack(ability, this.getType(), c, this);
         } else if (this.from.equals(ZoneType.Library)) {
             // this does not create input
-            CostExile.exileFromTop(ability, this, payment, c);
+            return exileFromTop(ability, c);
         } else if (this.sameZone) {
             List<Player> players = game.getPlayers();
             List<Player> payableZone = new ArrayList<Player>();
@@ -592,13 +588,13 @@ public class CostExile extends CostPartWithList {
                     payableZone.add(p);
                 }
             }
-            target = new InputExileFromSame(list, this, payment, c, payableZone);
+            target = new InputExileFromSame(list, this, c, payableZone);
         } else {
-            target = new InputExileFrom(ability, this.getType(), c, payment, this);
+            target = new InputExileFrom(ability, this.getType(), c, this);
         }
-        target.awaitLatchRelease();
-        if(!payment.isCanceled())
-            addListToHash(ability, "Exiled");
+        FThreads.setInputAndWait(target);
+        return target.isPaid();
+
     }
 
     /*
@@ -661,30 +657,43 @@ public class CostExile extends CostPartWithList {
      * @param nNeeded
      *            the n needed
      */
-    public static void exileFromTop(final SpellAbility sa, final CostExile part, final CostPayment payment,
-            final int nNeeded) {
+    public boolean exileFromTop(final SpellAbility sa, final int nNeeded) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ").append(nNeeded).append(" cards from the top of your library?");
         final List<Card> list = sa.getActivatingPlayer().getCardsIn(ZoneType.Library, nNeeded);
 
         if (list.size() > nNeeded) {
             // I don't believe this is possible
-            payment.cancelCost();
-            return;
+            return false;
         }
 
         final boolean doExile = GuiDialog.confirm(sa.getSourceCard(), sb.toString());
         if (doExile) {
             final Iterator<Card> itr = list.iterator();
             while (itr.hasNext()) {
-                final Card c = itr.next();
-                part.addToList(c);
-                Singletons.getModel().getGame().getAction().exile(c);
+                executePayment(sa, itr.next());
             }
-            part.addListToHash(sa, "Exiled");
-            payment.setPaidPart(part);
+            return true;
         } else {
-            payment.cancelCost();
+            return false;
         }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        addToList(targetCard);
+        ability.getActivatingPlayer().getGame().getAction().exile(targetCard);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        // TODO Auto-generated method stub
+        return "Exiled";
     }
 }

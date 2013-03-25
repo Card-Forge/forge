@@ -25,13 +25,13 @@ import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -59,8 +59,7 @@ public class CostUntapType extends CostPartWithList {
          * @param sa
          * @param payment
          */
-        public InputPayCostUntapY(int nCards, List<Card> cardList, CostUntapType untapType, CostPayment payment) {
-            super(payment);
+        public InputPayCostUntapY(int nCards, List<Card> cardList, CostUntapType untapType) {
             this.nCards = nCards;
             this.cardList = cardList;
             this.untapType = untapType;
@@ -77,8 +76,7 @@ public class CostUntapType extends CostPartWithList {
             }
 
             final int left = nCards - this.nUntapped;
-            CMatchUI.SINGLETON_INSTANCE
-                    .showMessage("Select a " + untapType.getDescription() + " to untap (" + left + " left)");
+            showMessage("Select a " + untapType.getDescription() + " to untap (" + left + " left)");
             ButtonUtil.enableOnlyCancel();
         }
 
@@ -228,12 +226,13 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        final boolean untap = payment.getCost().hasUntapCost();
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final boolean canUntapSource = false; // payment.getCost().hasUntapCost(); - only Crackleburr uses this
         List<Card> typeList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.TAPPED);
-        if (untap) {
+        final Card source = ability.getSourceCard();
+        if (canUntapSource) {
             typeList.remove(source);
         }
         final String amount = this.getAmount();
@@ -247,10 +246,9 @@ public class CostUntapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-        FThreads.setInputAndWait(new InputPayCostUntapY(c, typeList, this, payment));
-        
-        if ( !payment.isCanceled() )
-            addListToHash(ability, "Untapped");
+        InputPayment inp = new InputPayCostUntapY(c, typeList, this);
+        FThreads.setInputAndWait(inp);
+        return inp.isPaid();
     }
 
     /*
@@ -289,6 +287,23 @@ public class CostUntapType extends CostPartWithList {
         }
 
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        addToList(targetCard);
+        targetCard.untap();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Untapped";
     }
 
     // Inputs

@@ -28,7 +28,7 @@ import forge.gui.match.views.VMessage;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class InputPayManaBase extends InputSyncronizedBase {
+public abstract class InputPayManaBase extends InputSyncronizedBase implements InputPayment {
 
     private static final long serialVersionUID = -9133423708688480255L;
 
@@ -39,9 +39,11 @@ public abstract class InputPayManaBase extends InputSyncronizedBase {
     protected ManaCostBeingPaid manaCost;
     protected final SpellAbility saPaidFor;
     
+    boolean bPaid = false;
+    
     protected InputPayManaBase(final GameState game, SpellAbility saToPayFor) {
         this.game = game;
-        this.whoPays = Singletons.getControl().getPlayer();
+        this.whoPays = saToPayFor.getActivatingPlayer();
         this.saPaidFor = saToPayFor;
     }
     
@@ -312,6 +314,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase {
             @Override
             public void run() {
                 if (manaCost.isPaid()) {
+                    bPaid = true;
                     done();
                 } else if (Singletons.getModel().getMatch().getInput().getInput() == InputPayManaBase.this) {
                     showMessage();
@@ -333,10 +336,11 @@ public abstract class InputPayManaBase extends InputSyncronizedBase {
             for (final Card c : saPaidFor.getTappedForConvoke()) {
                 c.setTapped(false);
                 if (!isCancelled)
-                    c.tap();
+                    c.tap(); // that will tap cards with all the triggers, it's no good to call this from EDT
             }
             saPaidFor.clearTappedForConvoke();
-        }        
+        }
     }
     
+    public boolean isPaid() { return bPaid; }
 }

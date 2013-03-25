@@ -38,7 +38,6 @@ import forge.game.player.Player;
 public class CostPayment {
     private Cost cost = null;
     private SpellAbility ability = null;
-    private Card card = null;
     private SpellAbilityRequirements req = null;
     private boolean bCancel = false;
     private final ArrayList<CostPart> paidCostParts = new ArrayList<CostPart>();
@@ -74,7 +73,7 @@ public class CostPayment {
      * @return a {@link forge.Card} object.
      */
     public final Card getCard() {
-        return this.card;
+        return this.ability.getSourceCard();
     }
 
     /**
@@ -135,7 +134,6 @@ public class CostPayment {
     public CostPayment(final Cost cost, final SpellAbility abil, final GameState game) {
         this.cost = cost;
         this.ability = abil;
-        this.card = abil.getSourceCard();
         this.game = game;
     }
 
@@ -212,9 +210,12 @@ public class CostPayment {
                 continue;
             }
 
-            part.payHuman(this.ability, this.card, this, game);
-            if ( isCanceled() ) return;
-            
+            if ( false == part.payHuman(getAbility(), game) ) {
+                this.setCancel(true);
+                return;
+            }
+            if( part instanceof CostPartWithList )
+                ((CostPartWithList) part).addListToHash(ability, ((CostPartWithList) part).getHashForList());
             setPaidPart(part);
         }
         this.resetUndoList();
@@ -258,7 +259,7 @@ public class CostPayment {
     public final void cancelPayment() {
         for (final CostPart part : this.paidCostParts) {
             if (part.isUndoable()) {
-                part.refund(this.card);
+                part.refund(this.getCard());
             }
         }
 

@@ -22,9 +22,9 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
@@ -59,9 +59,7 @@ public class CostSacrifice extends CostPartWithList {
          * @param payment
          * @param typeList
          */
-        public InputPayCostSacrificeFromList(CostSacrifice part, SpellAbility sa, int nNeeded, CostPayment payment,
-                List<Card> typeList) {
-            super(payment);
+        public InputPayCostSacrificeFromList(CostSacrifice part, SpellAbility sa, int nNeeded, List<Card> typeList) {
             this.part = part;
             this.sa = sa;
             this.nNeeded = nNeeded;
@@ -90,13 +88,12 @@ public class CostSacrifice extends CostPartWithList {
         public void selectCard(final Card card) {
             if (typeList.contains(card)) {
                 this.nSacrifices++;
-                part.addToList(card);
-                Singletons.getModel().getGame().getAction().sacrifice(card, sa);
+                part.executePayment(sa, card);
                 typeList.remove(card);
                 // in case nothing else to sacrifice
                 if (this.nSacrifices == nNeeded) {
                     this.done();
-                } else if (typeList.size() == 0) {
+                } else if (typeList.isEmpty()) {
                     // happen
                     this.cancel();
                 } else {
@@ -197,7 +194,7 @@ public class CostSacrifice extends CostPartWithList {
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         this.addListToHash(ability, "Sacrificed");
         for (final Card c : this.getList()) {
-            Singletons.getModel().getGame().getAction().sacrifice(c, ability);
+            executePayment(ability, c);
         }
     }
 
@@ -209,8 +206,9 @@ public class CostSacrifice extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
         List<Card> list = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
@@ -220,22 +218,19 @@ public class CostSacrifice extends CostPartWithList {
         }
 
         if (this.payCostFromSource()) {
-            final Card card = ability.getSourceCard();
-            if (card.getController() == ability.getActivatingPlayer() && card.isInPlay()) {
-                if (GuiDialog.confirm(card, card.getName() + " - Sacrifice?")) {
-                    this.addToList(card);
-                    Singletons.getModel().getGame().getAction().sacrifice(card, ability);
-                } else {
-                    payment.cancelCost();
-                }
+            if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
+                if (!GuiDialog.confirm(source, source.getName() + " - Sacrifice?")) 
+                    return false;
+                executePayment(ability, source);
+                return true;
             }
         } else if (amount.equals("All")) {
             this.setList(list);
             // TODO Ask First
             for (final Card card : list) {
-                payment.getAbility().addCostToHashList(card, "Sacrificed");
-                Singletons.getModel().getGame().getAction().sacrifice(card, ability);
+                executePayment(ability, card);
             }
+            return true;
         } else {
             Integer c = this.convertAmount();
             if (c == null) {
@@ -247,13 +242,13 @@ public class CostSacrifice extends CostPartWithList {
                 }
             }
             if (0 == c.intValue()) {
-                return;
+                return true;
             }
-            FThreads.setInputAndWait(new InputPayCostSacrificeFromList(this, ability, c, payment, list));
+            InputPayment inp = new InputPayCostSacrificeFromList(this, ability, c, list);
+            FThreads.setInputAndWait(inp);
+            return inp.isPaid();
         }
-        
-        if( !payment.isCanceled())
-            addListToHash(ability, "Sacrificed");
+        return false;
     }
 
     /*
@@ -292,6 +287,23 @@ public class CostSacrifice extends CostPartWithList {
             }
         }
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        this.addToList(targetCard);
+        ability.getActivatingPlayer().getGame().getAction().sacrifice(targetCard, ability);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Sacrificed";
     }
 
     // Inputs

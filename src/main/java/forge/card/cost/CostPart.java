@@ -200,8 +200,8 @@ public abstract class CostPart {
      * @param game
      * @return true, if successful
      */
-    public abstract void payHuman(SpellAbility ability, Card source, CostPayment payment, GameState game);
-
+    public abstract boolean payHuman(SpellAbility ability, GameState game);
+    
     /*
      * (non-Javadoc)
      * 
