@@ -5,10 +5,6 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | 
 SVar:AcademicDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 7
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, discard your hand.
 SVar:RolledChaos:AB$ Discard | Cost$ 0 | Mode$ Hand | Defined$ You
-T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
-SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
-A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
-SVar:X:Count$RolledThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/academy_at_tolaria_west.jpg
 Oracle:At the beginning of your end step, if you have no cards in hand, draw seven cards.\nWhenever you roll {C}, discard your hand.
 SetInfo:HOP Common

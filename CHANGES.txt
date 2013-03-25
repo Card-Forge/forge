@@ -48,6 +48,10 @@ The display of clones and copied cards is now a matter of user preference. A use
 Flippable cards -- cards that have an alternate card printed upside-down at the bottom -- will now flip their appearance on the battlefield when in a flipped state.  They are now also flippable in the card viewer by clicking on the card image, just like double-sided "transform" cards have been.  When flipped this way, the details of the flipped side can be examined in the Card Details oracle text.
 
 
+- High Quality Booster Pictures -
+Forge will now download high quality booster pictures. If you are interested in these high quality booster pictures, then you should delete the pictures that are found in your <cacheDir>/pics/boosters/ directory. Then download the new pictures by using the Home View -> Game Settings -> Content Downloaders -> Download Quest Images button.
+
+
 ---------
 New Cards
 ---------
@@ -70,9 +74,15 @@ Thieves' Auction
 Infinite Reflection
 Laccolith Rig
 Paroxysm
+Essence Leak
+Mistform Warchief
+Whipkeeper
+Sanctum Guardian
 
 
-New Planes:
+----------
+New Planes
+----------
 
 Bant
 Turri Island
