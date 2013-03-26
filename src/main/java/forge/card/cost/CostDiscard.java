@@ -29,6 +29,8 @@ import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayment;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
@@ -45,97 +47,6 @@ public class CostDiscard extends CostPartWithList {
 
     // Inputs
     
-    /** 
-     * TODO: Write javadoc for this type.
-     *
-     */
-    public static final class InputPayCostDiscard extends InputPayCostBase {
-        private final List<Card> handList;
-        private final CostDiscard part;
-        private final int nNeeded;
-        private final String discType;
-        private static final long serialVersionUID = -329993322080934435L;
-        private int nDiscard = 0;
-        private boolean sameName;
-        private String firstName = null;
-
-        private final SpellAbility sa;
-
-        /**
-         * TODO: Write javadoc for Constructor.
-         * @param sa
-         * @param handList
-         * @param part
-         * @param payment
-         * @param nNeeded
-         * @param sp
-         * @param discType
-         */
-        public InputPayCostDiscard(SpellAbility sa, List<Card> handList, CostDiscard part, int nNeeded, String discType) {
-            this.sa = sa;
-            this.handList = handList;
-            this.part = part;
-            this.nNeeded = nNeeded;
-            this.discType = discType;
-            sameName = discType.contains("WithSameName");
-        }
-
-        @Override
-        public void showMessage() {
-            if (nNeeded == 0) {
-                this.done();
-            }
-
-            if (sa.getActivatingPlayer().getZone(ZoneType.Hand).isEmpty()) {
-                this.stop();
-            }
-            final StringBuilder type = new StringBuilder("");
-            if (!discType.equals("Card")) {
-                type.append(" ").append(discType);
-            }
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Select a ");
-            sb.append(part.getDescriptiveType());
-            sb.append(" to discard.");
-            if (nNeeded > 1) {
-                sb.append(" You have ");
-                sb.append(nNeeded - this.nDiscard);
-                sb.append(" remaining.");
-            }
-            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-            if (nNeeded > 0) {
-                ButtonUtil.enableOnlyCancel();
-            }
-        }
-
-        @Override
-        public void selectCard(final Card card) {
-            Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-            if (zone.is(ZoneType.Hand) && handList.contains(card)) {
-                if (!sameName || part.getList().isEmpty()|| firstName.equals(card.getName()) ) {
-                    if( part.getList().isEmpty() )
-                        firstName = card.getName();
-                    // send in List<Card> for Typing
-                    part.executePayment(sa, card);
-                    handList.remove(card);
-                    this.nDiscard++;
-
-                    // in case no more cards in hand
-                    if (this.nDiscard == nNeeded) {
-                        this.done();
-                    } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).isEmpty()) {
-                        // really
-                        // shouldn't
-                        // happen
-                        this.cancel();
-                    } else {
-                        this.showMessage();
-                    }
-                }
-            }
-        }
-    }
-
     /**
      * Instantiates a new cost discard.
      * 
@@ -336,9 +247,15 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                InputPayment inp = new InputPayCostDiscard(ability, handList, this, c, discardType);
+                InputSelectCards inp = new InputSelectCardsFromList(c, c, handList);
+                inp.setMessage("Select %d more " + getDescriptiveType() + " to discard.");
+                //InputPayment inp = new InputPayCostDiscard(ability, handList, this, c, discardType);
                 FThreads.setInputAndWait(inp);
-                return inp.isPaid();
+                if( inp.hasCancelled() || inp.getSelected().size() != c)
+                    return false;
+                for(Card crd : inp.getSelected())
+                    executePayment(ability, crd);
+                return true;
             }
         }
     }
