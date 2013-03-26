@@ -141,6 +141,7 @@ public class ControlWinLose {
                     cDeck.getMain().remove(toRemove);
                     if ( cDeck != oDeck )
                         oDeck.getMain().remove(toRemove);
+                    losses.add(toRemove);
                 }
             }
 
