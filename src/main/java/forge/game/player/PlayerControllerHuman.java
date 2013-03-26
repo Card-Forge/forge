@@ -316,8 +316,17 @@ public class PlayerControllerHuman extends PlayerController {
 
     @Override
     public List<Card> chooseCardsToDiscardFrom(Player p, SpellAbility sa, List<Card> valid, int minDiscard) {
-        int cntToKeepInHand =  minDiscard == 0 ? -1 : valid.size() - minDiscard;
-        return GuiChoose.order("Choose cards to Discard", "Discarded", cntToKeepInHand, valid, null, null);
+        if ( p != getPlayer() ) {
+            int cntToKeepInHand =  minDiscard == 0 ? -1 : valid.size() - minDiscard;
+            return GuiChoose.order("Choose cards to Discard", "Discarded", cntToKeepInHand, valid, null, null);
+        }
+
+        int max = minDiscard == 0 ? Integer.MAX_VALUE : minDiscard;
+        InputSelectCards inp = new InputSelectCardsFromList(minDiscard, max, valid);
+        inp.setCancelWithSelectedAllowed(false);
+        inp.setMessage("Discard %d cards");
+        FThreads.setInputAndWait(inp);
+        return inp.getSelected();
     }
 
     @Override

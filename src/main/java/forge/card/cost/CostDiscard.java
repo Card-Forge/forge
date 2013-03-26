@@ -25,19 +25,14 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.FThreads;
-import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.InputPayment;
 import forge.control.input.InputSelectCards;
 import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 
 /**
  * The Class CostDiscard.

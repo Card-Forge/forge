@@ -32,6 +32,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.Command;
 import forge.Constant;
+import forge.FThreads;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactory;
@@ -343,9 +344,11 @@ public class CField implements ICDoc {
                     return;
                 
                 final GameState game = Singletons.getModel().getGame();
-                SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
+                final SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
                 if ( null != ab) {
-                    player.playSpellAbility(c, ab);
+                    FThreads.invokeInNewThread(new Runnable(){ @Override public void run(){
+                        player.playSpellAbility(c, ab);
+                    }});
                 }
             }
         }.actionPerformed(null);
