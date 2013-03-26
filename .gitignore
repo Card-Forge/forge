@@ -8,12 +8,6 @@
 /pom.xml.releaseBackup
 /pom.xml.tag
 /release.properties
-res/pics_product/*
-res/pics_product/booster/*
-res/pics_product/fatpacks/*
-res/pics_product/precons/*
-res/pics_product/tournamentpacks/*
-res/quest/data
 /target
 tools/PerSetTrackingResults
 tools/oracleScript.log
