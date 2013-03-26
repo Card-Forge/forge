@@ -9,7 +9,6 @@ import java.util.Map;
 import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
-import forge.FThreads;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.ApiType;
@@ -129,7 +128,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         
         this.manaCost = mp.payManaFromPool(saPaidFor, manaCost, manaStr); 
     
-        onManaAbilityPlayed(saPaidFor.getActivatingPlayer(), null);
+        onManaAbilityPlayed(null);
     }
 
     /**
@@ -299,28 +298,30 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         // save off color needed for use by any mana and reflected mana
         subchosen.getManaPart().setExpressChoice(colorsNeeded);
         
+        final SpellAbility finallyChosen = chosen;
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
         Player p = chosen.getActivatingPlayer();
-        p.getGame().getActionPlay().playManaAbilityAsPayment(chosen, p, this);
+        p.getGame().getActionPlay().playManaAbilityAsPayment(finallyChosen, p, new Runnable( ) { 
+            @Override public void run() { 
+                onManaAbilityPlayed(finallyChosen); 
+            } 
+        });
+        // EDT that removes lockUI from stack will call our showMessage() method
+    }
+
+    
+    public void onManaAbilityPlayed(final SpellAbility saPaymentSrc) { 
+        if ( saPaymentSrc != null) // null comes when they've paid from pool
+            this.manaCost = whoPays.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
+
+        onManaAbilityPaid(); 
     }
     
-    public void onManaAbilityPlayed(final Player p, final SpellAbility saPaymentSrc) { 
-        if ( saPaymentSrc != null) // null comes when they've paid from pool
-            this.manaCost = p.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
-
-        onManaAbilityPaid();
-
-        FThreads.invokeInEDT(new Runnable( ) {
-            @Override
-            public void run() {
-                if (manaCost.isPaid()) {
-                    bPaid = true;
-                    done();
-                } else if (Singletons.getModel().getMatch().getInput().getInput() == InputPayManaBase.this) {
-                    showMessage();
-                }
-            }
-        });
+    protected final void checkIfAlredyPaid() {
+        if (manaCost.isPaid()) {
+            bPaid = true;
+            done();
+        }
     }
     
     protected void onManaAbilityPaid() {} // some inputs overload it
@@ -328,7 +329,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
 
     @Override
     public String toString() {
-        return "PayManaBase (" + manaCost.toString() + ")";
+        return String.format("PayManaBase %s (out of %s)", manaCost.toString(), manaCost.getStartingCost() );
     }
 
     protected void handleConvokedCards(boolean isCancelled) {

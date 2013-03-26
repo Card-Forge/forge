@@ -23,7 +23,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 //pays the cost of a card played from the player's hand
@@ -133,7 +132,8 @@ public class InputPayManaSimple extends InputPayManaBase {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
-        CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+        // has its own variant of checkIfPaid
+        showMessage(msg.toString());
         if (this.manaCost.isPaid() && !new ManaCostBeingPaid(this.originalManaCost).isPaid()) {
             this.originalCard.setSunburstValue(this.manaCost.getSunburst());
             this.done();

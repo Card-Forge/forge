@@ -72,9 +72,6 @@ public class InputPayManaOfCostPayment extends InputPayManaBase {
         }
 
         showMessage(msg.toString());
-        if (manaCost.isPaid()) {
-            bPaid = true;
-            this.done();
-        }
+        checkIfAlredyPaid();
     }
 }

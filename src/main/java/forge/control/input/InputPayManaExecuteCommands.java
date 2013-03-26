@@ -23,7 +23,6 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 //if cost is paid, Command.execute() is called
@@ -174,6 +173,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase implements Inp
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
-        CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+        showMessage(msg.toString());
+        checkIfAlredyPaid();
     }
 }

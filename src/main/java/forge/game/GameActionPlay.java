@@ -23,7 +23,6 @@ import forge.card.spellability.SpellAbilityRequirements;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
-import forge.control.input.InputPayManaBase;
 import forge.control.input.InputPayManaSimple;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
@@ -518,14 +517,14 @@ public class GameActionPlay {
      * @param manaCost
      * @param saPaidFor
      */
-    public void playManaAbilityAsPayment(final SpellAbility chosen, final Player p, final InputPayManaBase inputPayManaBase) {
+    public void playManaAbilityAsPayment(final SpellAbility chosen, final Player p, final Runnable beforeUnlock) {;
         Runnable proc = new Runnable() {
             @Override
             public void run() {
-                p.getGame().getActionPlay().playSpellAbility(chosen, p);
-                inputPayManaBase.onManaAbilityPlayed(p, chosen);
+                playSpellAbility(chosen, p);
+                beforeUnlock.run();
             }
-        }; 
+        };
         FThreads.invokeInNewThread(proc, true);
     }
 }

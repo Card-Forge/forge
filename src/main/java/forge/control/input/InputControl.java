@@ -88,6 +88,14 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final void removeInput(Input inp) {
         Input topMostInput = inputStack.isEmpty() ? null : inputStack.pop();
+        
+//        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+//        System.out.printf("%s > Remove input %s -- called from %s%n", FThreads.isEDT() ? "EDT" : "TRD", topMostInput,  trace[2].toString());
+//        if( trace[2].toString().contains("InputBase.stop"))
+//            for(StackTraceElement se : trace) {
+//                System.out.println(se.toString());
+//            }
+        
         if( topMostInput != inp )
             throw new RuntimeException("Inputs adding/removal into stack is imbalanced! Check your code again!");
         

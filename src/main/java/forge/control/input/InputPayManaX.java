@@ -5,7 +5,6 @@ import forge.card.cost.CostPartMana;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 public class InputPayManaX extends InputPayManaBase {
@@ -34,18 +33,15 @@ public class InputPayManaX extends InputPayManaBase {
      */
     @Override
     public boolean isPaid() {
-        // only cancel if partially paid an X value
-        // or X is 0, and x can't be 0
-
-        
         //return !( xPaid == 0 && !costMana.canXbe0() || this.colorX.equals("") && !this.manaCost.toString().equals(strX) );
         // return !( xPaid == 0 && !costMana.canXbe0()) && !(this.colorX.equals("") && !this.manaCost.toString().equals(strX));
-        
         return ( xPaid > 0 || costMana.canXbe0()) && (!this.colorX.equals("") || this.manaCost.toString().equals(strX));
     }
     
     @Override
     public void showMessage() {
+        // only cancel if partially paid an X value
+        // or X is 0, and x can't be 0
         if (!isPaid()) {
             ButtonUtil.enableOnlyCancel();
         } else {
@@ -59,7 +55,7 @@ public class InputPayManaX extends InputPayManaBase {
             msg.append(" X Can't be 0.");
         }
 
-        CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+        showMessage(msg.toString());
     }
 
     // selectCard

@@ -573,7 +573,7 @@ public final class GameActionUtil {
                 if (!((CostPartMana) part).getManaToPay().equals("0")) // non-zero costs require input
                     dontRemove = true; 
             } else
-                throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhadled type of cost has ocurred: " + part.getClass());
+                throw new RuntimeException("GameActionUtil.payCostDuringAbilityResolve - An unhandled type of cost has ocurred: " + part.getClass());
                 
             
             if ( !hasPaid )
