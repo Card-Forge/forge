@@ -89,41 +89,20 @@ public class GuiChoose {
     }
 
     // returned Object will never be null
-    /**
-     * <p>
-     * getChoices.
-     * </p>
-     * 
-     * @param <T>
-     *            a T object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param min
-     *            a int.
-     * @param max
-     *            a int.
-     * @param choices
-     *            a T object.
-     * @return a {@link java.util.List} object.
-     */
     public static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
-        final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-        return getChoices(c);
+        return getChoices(message, min, max, Arrays.asList(choices));
     }
 
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
-        final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
-        return getChoices(c);
-    }
-
-    // Nothing to choose here. Code uses this to just show a card.
-    public static Card show(final String message, final Card singleChoice) {
-        List<Card> choices = new ArrayList<Card>();
-        choices.add(singleChoice);
-        return one(message, choices);
-    }
-
-    private static <T> List<T> getChoices(final ListChooser<T> c) {
+        if (null == choices || 0 == choices.size()) {
+            if (0 == min) {
+                return new ArrayList<T>();
+            } else {
+                throw new RuntimeException("choice required from empty list");
+            }
+        }
+        
+        ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
         final JList list = c.getJList();
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -142,7 +121,14 @@ public class GuiChoose {
         c.show();
         GuiUtils.clearPanelSelections();
         return c.getSelectedValues();
-    } // getChoice()
+    }
+
+    // Nothing to choose here. Code uses this to just show a card.
+    public static Card show(final String message, final Card singleChoice) {
+        List<Card> choices = new ArrayList<Card>();
+        choices.add(singleChoice);
+        return one(message, choices);
+    }
 
     public static <T> List<T> order(final String title, final String top, int remainingObjects,
             final List<T> sourceChoices, List<T> destChoices, Card referenceCard) {
