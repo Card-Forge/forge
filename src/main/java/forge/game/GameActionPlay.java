@@ -508,23 +508,4 @@ public class GameActionPlay {
             }
         }
     }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param chosen
-     * @param p
-     * @param inputPayManaBase
-     * @param manaCost
-     * @param saPaidFor
-     */
-    public void playManaAbilityAsPayment(final SpellAbility chosen, final Player p, final Runnable beforeUnlock) {;
-        Runnable proc = new Runnable() {
-            @Override
-            public void run() {
-                playSpellAbility(chosen, p);
-                beforeUnlock.run();
-            }
-        };
-        FThreads.invokeInNewThread(proc, true);
-    }
 }

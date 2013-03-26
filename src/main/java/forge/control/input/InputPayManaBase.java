@@ -1,14 +1,12 @@
 package forge.control.input;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.MagicColor;
 import forge.card.ability.ApiType;
@@ -129,6 +127,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         this.manaCost = mp.payManaFromPool(saPaidFor, manaCost, manaStr); 
     
         onManaAbilityPlayed(null);
+        showMessage();
     }
 
     /**
@@ -280,15 +279,7 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
             }
         }
     
-        SpellAbility chosen = abilities.get(0);
-        if ((1 < abilities.size()) && choice) {
-            final Map<String, SpellAbility> ability = new HashMap<String, SpellAbility>();
-            for (final SpellAbility am : abilities) {
-                ability.put(am.toString(), am);
-            }
-            chosen = GuiChoose.one("Choose mana ability", abilities);
-        }
-        
+        final SpellAbility chosen = abilities.size() > 1 && choice ? GuiChoose.one("Choose mana ability", abilities) : abilities.get(0);
         SpellAbility subchosen = chosen;
         while(subchosen.getManaPart() == null)
         {
@@ -298,17 +289,18 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         // save off color needed for use by any mana and reflected mana
         subchosen.getManaPart().setExpressChoice(colorsNeeded);
         
-        final SpellAbility finallyChosen = chosen;
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getSourceCard() + " to pay mana");
-        Player p = chosen.getActivatingPlayer();
-        p.getGame().getActionPlay().playManaAbilityAsPayment(finallyChosen, p, new Runnable( ) { 
-            @Override public void run() { 
-                onManaAbilityPlayed(finallyChosen); 
-            } 
-        });
-        // EDT that removes lockUI from stack will call our showMessage() method
+        Runnable proc = new Runnable() {
+            @Override
+            public void run() {
+                final Player p = chosen.getActivatingPlayer();
+                p.getGame().getActionPlay().playSpellAbility(chosen, p);
+                onManaAbilityPlayed(chosen); 
+            }
+        };
+        FThreads.invokeInNewThread(proc, true);
+        // EDT that removes lockUI from input stack will call our showMessage() method
     }
-
     
     public void onManaAbilityPlayed(final SpellAbility saPaymentSrc) { 
         if ( saPaymentSrc != null) // null comes when they've paid from pool
