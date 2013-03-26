@@ -1,6 +1,5 @@
 package forge.control.input;
 
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /** 

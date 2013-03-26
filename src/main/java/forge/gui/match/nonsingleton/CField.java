@@ -42,7 +42,6 @@ import forge.control.input.Input;
 import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
 import forge.control.input.InputPayManaBase;
-import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -143,6 +142,7 @@ public class CField implements ICDoc {
     private final Observer observerPlay = new Observer() {
         @Override
         public void update(final Observable a, final Object b) {
+            //FThreads.checkEDT("observerPlay.update", true);
             CField.this.view.getTabletop().setupPlayZone();
         }
     };
@@ -343,8 +343,7 @@ public class CField implements ICDoc {
                 if ( CField.this.player != CField.this.playerViewer )
                     return;
                 
-                final GameState game = Singletons.getModel().getGame();
-                final SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
+                final SpellAbility ab = player.getController().getAbilityToPlay(player.getGame().getAbilitesOfCard(c, player));
                 if ( null != ab) {
                     FThreads.invokeInNewThread(new Runnable(){ @Override public void run(){
                         player.playSpellAbility(c, ab);

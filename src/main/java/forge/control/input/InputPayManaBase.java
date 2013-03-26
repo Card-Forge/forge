@@ -306,7 +306,9 @@ public abstract class InputPayManaBase extends InputSyncronizedBase implements I
         if ( saPaymentSrc != null) // null comes when they've paid from pool
             this.manaCost = whoPays.getManaPool().payManaFromAbility(saPaidFor, manaCost, saPaymentSrc);
 
-        onManaAbilityPaid(); 
+        onManaAbilityPaid();
+        if ( saPaymentSrc != null )
+            whoPays.getZone(ZoneType.Battlefield).updateObservers();
     }
     
     protected final void checkIfAlredyPaid() {
