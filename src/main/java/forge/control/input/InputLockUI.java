@@ -12,7 +12,7 @@ public class InputLockUI extends InputBase {
     
     public void showMessage() {
         ButtonUtil.disableAll();
-        CMatchUI.SINGLETON_INSTANCE.showMessage("Waiting for actions...");
+        //showMessage("Waiting for actions...");
     }
     
     @Override
