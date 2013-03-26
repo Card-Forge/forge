@@ -10,11 +10,11 @@
 /release.properties
 res/*.log
 res/PerSetTrackingResults
+res/cardsfolder/*.bat
 res/decks
 res/layouts
 res/pics*
 res/pics_product
-res/quest/data
 /target
 /test-output
 tools/PerSetTrackingResults
