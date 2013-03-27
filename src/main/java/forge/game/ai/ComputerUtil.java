@@ -81,7 +81,7 @@ public class ComputerUtil {
             if (cost == null && ComputerUtilMana.payManaCost(ai, sa)) {
                 sa.resolve();
             } else {
-                final CostPayment pay = new CostPayment(cost, sa, game);
+                final CostPayment pay = new CostPayment(cost, sa);
                 if (pay.payComputerCosts(ai, game)) {
                     sa.resolve();
                 }
@@ -108,7 +108,7 @@ public class ComputerUtil {
             game.getStack().addAndUnfreeze(sa);
             return true;
         } else {
-            final CostPayment pay = new CostPayment(cost, sa, game);
+            final CostPayment pay = new CostPayment(cost, sa);
             if (pay.payComputerCosts(ai, game)) {
                 game.getStack().addAndUnfreeze(sa);
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
@@ -216,7 +216,7 @@ public class ComputerUtil {
             ComputerUtilMana.payManaCost(ai, sa);
             game.getStack().add(sa);
         } else {
-            final CostPayment pay = new CostPayment(cost, sa, game);
+            final CostPayment pay = new CostPayment(cost, sa);
             if (pay.payComputerCosts(ai, game)) {
                 game.getStack().add(sa);
             }
@@ -263,7 +263,7 @@ public class ComputerUtil {
             newSA.setSourceCard(game.getAction().moveToStack(source));
         }
 
-        final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA, game);
+        final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
         pay.payComputerCosts(ai, game);
 
         game.getStack().add(newSA);
@@ -291,7 +291,7 @@ public class ComputerUtil {
             if (cost == null) {
                 ComputerUtilMana.payManaCost(ai, sa);
             } else {
-                final CostPayment pay = new CostPayment(cost, sa, game);
+                final CostPayment pay = new CostPayment(cost, sa);
                 pay.payComputerCosts((AIPlayer)ai, game);
             }
 

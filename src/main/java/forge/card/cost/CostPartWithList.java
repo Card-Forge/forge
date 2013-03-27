@@ -80,11 +80,10 @@ public abstract class CostPartWithList extends CostPart {
      * @param hash
      *            the hash
      */
-    public final void addListToHash(final SpellAbility sa) {
-        final String hash = getHashForList();
-        for (final Card card : this.getList()) {
-            Card copy = CardUtil.getLKICopy(card);
-            sa.addCostToHashList(copy, hash);
+    public final void reportPaidCardsTo(final SpellAbility sa) {
+        final String paymentMethod = getHashForList();
+        for (final Card card : this.list) {
+            sa.addCostToHashList(CardUtil.getLKICopy(card), paymentMethod);
         }
     }
 

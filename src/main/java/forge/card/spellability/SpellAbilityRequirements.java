@@ -26,6 +26,7 @@ import forge.CardCharacteristicName;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.cost.CostPayment;
+import forge.game.GameState;
 import forge.game.zone.Zone;
 
 /**
@@ -67,20 +68,22 @@ public class SpellAbilityRequirements {
     }
 
     public final void fillRequirements(final boolean skipTargeting) {
+        final GameState game = Singletons.getModel().getGame();
+        
         if ((this.ability instanceof Spell) && !this.bCasting) {
             // remove from hand
             this.bCasting = true;
             if (!this.ability.getSourceCard().isCopiedSpell()) {
                 final Card c = this.ability.getSourceCard();
 
-                this.fromZone = Singletons.getModel().getGame().getZoneOf(c);
+                this.fromZone = game.getZoneOf(c);
                 this.zonePosition = this.fromZone.getPosition(c);
-                this.ability.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(c));
+                this.ability.setSourceCard(game.getAction().moveToStack(c));
             }
         }
 
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
-        Singletons.getModel().getGame().getStack().freezeStack();
+        game.getStack().freezeStack();
 
         // Announce things like how many times you want to Multikick or the value of X
         if (!this.announceRequirements()) {
@@ -103,30 +106,31 @@ public class SpellAbilityRequirements {
         }
         
         // Payment
-        if (!this.isFree) {
-            this.payment.setRequirements(this);
+        boolean paymentMade = this.isFree;
+        
+        if (!paymentMade) {
             this.payment.changeCost();
-            this.payment.payCost();
+            paymentMade = this.payment.payCost(game);
         } 
     
-        if (this.payment.isCanceled()) {
+        if (!paymentMade) {
             rollbackAbility();
             return;
         }
         
-        else if (this.isFree || this.payment.isAllPaid()) {
+        else if (this.isFree || this.payment.isFullyPaid()) {
             if (this.skipStack) {
                 AbilityUtils.resolve(this.ability, false);
             } else {
 
                 this.enusureAbilityHasDescription(this.ability);
                 this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
-                Singletons.getModel().getGame().getStack().addAndUnfreeze(this.ability);
+                game.getStack().addAndUnfreeze(this.ability);
             }
     
             // Warning about this - resolution may come in another thread, and it would still need its targets
             this.select.clearTargets();
-            Singletons.getModel().getGame().getAction().checkStateEffects();
+            game.getAction().checkStateEffects();
         }
     }
 
@@ -149,7 +153,7 @@ public class SpellAbilityRequirements {
         }
 
         this.ability.resetOnceResolved();
-        this.payment.cancelPayment();
+        this.payment.refundPayment();
         Singletons.getModel().getGame().getStack().clearFrozen();
         // Singletons.getModel().getGame().getStack().removeFromFrozenStack(this.ability);
     }

@@ -522,7 +522,7 @@ public final class GameActionUtil {
                 for(Card c : toSac) {
                     cpl.executePayment(sourceAbility, c);
                 }
-                cpl.addListToHash(sourceAbility);
+                cpl.reportPaidCardsTo(sourceAbility);
             }
             
             else if (part instanceof CostReturn) {
@@ -541,7 +541,7 @@ public final class GameActionUtil {
                 for(Card c : inp.getSelected()) {
                     cpl.executePayment(sourceAbility, c);
                 }
-                cpl.addListToHash(sourceAbility);
+                cpl.reportPaidCardsTo(sourceAbility);
             }
 
             else if (part instanceof CostDiscard) {
@@ -560,7 +560,7 @@ public final class GameActionUtil {
                 for(Card c : inp.getSelected()) {
                     cpl.executePayment(sourceAbility, c);
                 }
-                cpl.addListToHash(sourceAbility);
+                cpl.reportPaidCardsTo(sourceAbility);
             }
             
             else if (part instanceof CostPartMana ) {

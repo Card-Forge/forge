@@ -74,7 +74,7 @@ public class GameActionPlay {
                 CharmEffect.makeChoices(sa);
             }
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa, game);
+            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
             req.setFree(true);
@@ -386,9 +386,9 @@ public class GameActionPlay {
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
             CostPayment payment = null;
             if (sa.getPayCosts() == null) {
-                payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa, game);
+                payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa);
             } else {
-                payment = new CostPayment(sa.getPayCosts(), sa, game);
+                payment = new CostPayment(sa.getPayCosts(), sa);
             }
 
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
@@ -431,7 +431,7 @@ public class GameActionPlay {
 
         if (sa.getPayCosts() != null) {
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa, game);
+            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
 
             if (!sa.isTrigger()) {
                 payment.changeCost();
