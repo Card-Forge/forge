@@ -18,27 +18,91 @@
 package forge.card.cost;
 
 import java.util.List;
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
  * The Class CostUntapType.
  */
 public class CostUntapType extends CostPartWithList {
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class InputPayCostUntapY extends InputPayCostBase {
+        private final int nCards;
+        private final List<Card> cardList;
+        private final CostUntapType untapType;
+        private static final long serialVersionUID = -7151144318287088542L;
+        private int nUntapped = 0;
+
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param nCards
+         * @param cardList
+         * @param untapType
+         * @param sa
+         * @param payment
+         */
+        public InputPayCostUntapY(int nCards, List<Card> cardList, CostUntapType untapType) {
+            this.nCards = nCards;
+            this.cardList = cardList;
+            this.untapType = untapType;
+        }
+
+        @Override
+        public void showMessage() {
+            if (nCards == 0) {
+                this.done();
+            }
+
+            if (cardList.size() == 0) {
+                this.stop();
+            }
+
+            final int left = nCards - this.nUntapped;
+            showMessage("Select a " + untapType.getDescription() + " to untap (" + left + " left)");
+            ButtonUtil.enableOnlyCancel();
+        }
+
+
+
+        @Override
+        public void selectCard(final Card card) {
+            Zone zone = Singletons.getModel().getGame().getZoneOf(card);
+            if (zone.is(ZoneType.Battlefield) && cardList.contains(card) && card.isTapped()) {
+                // send in List<Card> for Typing
+                card.untap();
+                untapType.addToList(card);
+                cardList.remove(card);
+
+                this.nUntapped++;
+
+                if (this.nUntapped == nCards) {
+                    this.done();
+                } else if (cardList.size() == 0) {
+                    this.cancel();
+                } else {
+                    this.showMessage();
+                }
+            }
+        }
+    }
 
     /**
      * Instantiates a new cost untap type.
@@ -162,12 +226,13 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        final boolean untap = payment.getCost().hasUntapCost();
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final boolean canUntapSource = false; // payment.getCost().hasUntapCost(); - only Crackleburr uses this
         List<Card> typeList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.TAPPED);
-        if (untap) {
+        final Card source = ability.getSourceCard();
+        if (canUntapSource) {
             typeList.remove(source);
         }
         final String amount = this.getAmount();
@@ -181,10 +246,9 @@ public class CostUntapType extends CostPartWithList {
                 c = AbilityUtils.calculateAmount(source, amount, ability);
             }
         }
-
-        final Input inp = CostUntapType.inputUntapYCost(this, typeList, ability, payment, c);
-        Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-        return false;
+        InputPayment inp = new InputPayCostUntapY(c, typeList, this);
+        FThreads.setInputAndWait(inp);
+        return inp.isPaid();
     }
 
     /*
@@ -225,86 +289,23 @@ public class CostUntapType extends CostPartWithList {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        addToList(targetCard);
+        targetCard.untap();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Untapped";
+    }
+
     // Inputs
 
-    /**
-     * <p>
-     * input_untapYCost.
-     * </p>
-     * 
-     * @param untapType
-     *            the untap type
-     * @param cardList
-     *            a {@link forge.CardList} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param nCards
-     *            a int.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputUntapYCost(final CostUntapType untapType, final List<Card> cardList, final SpellAbility sa,
-            final CostPayment payment, final int nCards) {
-        final Input target = new Input() {
-
-            private static final long serialVersionUID = -7151144318287088542L;
-            private int nUntapped = 0;
-
-            @Override
-            public void showMessage() {
-                if (nCards == 0) {
-                    this.done();
-                }
-
-                if (cardList.size() == 0) {
-                    this.stop();
-                }
-
-                final int left = nCards - this.nUntapped;
-                CMatchUI.SINGLETON_INSTANCE
-                        .showMessage("Select a " + untapType.getDescription() + " to untap (" + left + " left)");
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-                if (zone.is(ZoneType.Battlefield) && cardList.contains(card) && card.isTapped()) {
-                    // send in List<Card> for Typing
-                    card.untap();
-                    untapType.addToList(card);
-                    cardList.remove(card);
-
-                    this.nUntapped++;
-
-                    if (this.nUntapped == nCards) {
-                        this.done();
-                    } else if (cardList.size() == 0) {
-                        this.cancel();
-                    } else {
-                        this.showMessage();
-                    }
-                }
-            }
-
-            public void cancel() {
-                this.stop();
-                payment.cancelCost();
-            }
-
-            public void done() {
-                this.stop();
-                untapType.addListToHash(sa, "Untapped");
-                payment.paidCost(untapType);
-            }
-        };
-
-        return target;
-    } // input_untapYCost()
 }

@@ -39,6 +39,7 @@ import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Constant.Preferences;
 import forge.CounterType;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
@@ -1624,6 +1625,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     protected final void doDiscard(final Card c, final SpellAbility sa) {
+        FThreads.checkEDT("Player.doDiscard", false);
         // TODO: This line should be moved inside CostPayment somehow
         /*if (sa != null) {
             sa.addCostToHashList(c, "Discarded");
@@ -1846,6 +1848,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.Card} object.
      */
     public final void playLand(final Card land) {
+        FThreads.checkEDT("Player.playSpellAbility", false);
         if (this.canPlayLand(land)) {
             land.setController(this, 0);
             game.getAction().moveTo(this.getZone(ZoneType.Battlefield), land);

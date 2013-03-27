@@ -19,22 +19,19 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JOptionPane;
-
 import forge.Card;
 import forge.CardLists;
-import forge.Singletons;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputSelectCards;
+import forge.control.input.InputSelectCardsFromList;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
+import forge.gui.GuiDialog;
 
 /**
  * The Class CostReturn.
@@ -123,7 +120,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
-            Singletons.getModel().getGame().getAction().moveToHand(c);
+            executePayment(ability, c);
         }
     }
 
@@ -135,8 +132,9 @@ public class CostReturn extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final String amount = this.getAmount();
+        final Card source = ability.getSourceCard();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
         final List<Card> list = activator.getCardsIn(ZoneType.Battlefield);
@@ -150,13 +148,28 @@ public class CostReturn extends CostPartWithList {
             }
         }
         if (this.payCostFromSource()) {
-            final Input inp = CostReturn.returnThis(ability, payment, this);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            final Card card = ability.getSourceCard();
+            if (card.getController() == ability.getActivatingPlayer() && card.isInPlay()) {
+                boolean confirm = GuiDialog.confirm(card, card.getName() + " - Return to Hand?");
+                if (confirm) {
+                    executePayment(ability, card);
+                }
+                return confirm;
+            }
         } else {
-            final Input inp = CostReturn.returnType(ability, this.getType(), payment, this, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            List<Card> validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+
+            InputSelectCards inp = new InputSelectCardsFromList(c, c, validCards);
+            inp.setMessage("Return %d " + this.getType() + " " + this.getType() + " card(s) to hand");
+            FThreads.setInputAndWait(inp);
+            if (inp.hasCancelled())
+                return false;
+            
+            for(Card crd : inp.getSelected()) 
+                executePayment(ability, crd);
+            return true;
         }
-        return false;
+       return false;
     }
 
     /*
@@ -178,140 +191,31 @@ public class CostReturn extends CostPartWithList {
             }
 
             this.setList(ComputerUtil.chooseReturnType(ai, this.getType(), source, ability.getTargetCard(), c));
-            if (this.getList() == null) {
+            if (this.getList().isEmpty()) {
                 return false;
             }
         }
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        addToList(targetCard);
+        ability.getActivatingPlayer().getGame().getAction().moveToHand(targetCard);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Returned";
+    }
+
     // Inputs
 
-    /**
-     * <p>
-     * returnType.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param part
-     *            TODO
-     * @param nNeeded
-     *            the n needed
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input returnType(final SpellAbility sa, final String type, final CostPayment payment,
-            final CostReturn part, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-            private List<Card> typeList;
-            private int nReturns = 0;
 
-            @Override
-            public void showMessage() {
-                if (nNeeded == 0) {
-                    this.done();
-                }
-
-                final StringBuilder msg = new StringBuilder("Return ");
-                final int nLeft = nNeeded - this.nReturns;
-                msg.append(nLeft).append(" ");
-                msg.append(type);
-                if (nLeft > 1) {
-                    msg.append("s");
-                }
-
-                this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
-                this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
-                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (this.typeList.contains(card)) {
-                    this.nReturns++;
-                    part.addToList(card);
-                    Singletons.getModel().getGame().getAction().moveToHand(card);
-                    this.typeList.remove(card);
-                    // in case nothing else to return
-                    if (this.nReturns == nNeeded) {
-                        this.done();
-                    } else if (this.typeList.size() == 0) {
-                        // happen
-                        this.cancel();
-                    } else {
-                        this.showMessage();
-                    }
-                }
-            }
-
-            public void done() {
-                this.stop();
-                part.addListToHash(sa, "Returned");
-                payment.paidCost(part);
-            }
-
-            public void cancel() {
-                this.stop();
-                payment.cancelCost();
-            }
-        };
-
-        return target;
-    } // returnType()
-
-    /**
-     * <p>
-     * returnThis.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param part
-     *            TODO
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input returnThis(final SpellAbility sa, final CostPayment payment, final CostReturn part) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = 2685832214519141903L;
-
-            @Override
-            public void showMessage() {
-                final Card card = sa.getSourceCard();
-                if (card.getController().isHuman() && card.isInPlay()) {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName());
-                    sb.append(" - Return to Hand?");
-                    final Object[] possibleValues = { "Yes", "No" };
-                    final Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",
-                            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, possibleValues,
-                            possibleValues[0]);
-                    if (choice.equals(0)) {
-                        part.addToList(card);
-                        Singletons.getModel().getGame().getAction().moveToHand(card);
-                        this.stop();
-                        part.addListToHash(sa, "Returned");
-                        payment.paidCost(part);
-                    } else {
-                        this.stop();
-                        payment.cancelCost();
-                    }
-                }
-            }
-        };
-
-        return target;
-    } // input_sacrifice()
 }

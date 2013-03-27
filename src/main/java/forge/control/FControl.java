@@ -155,7 +155,8 @@ public enum FControl {
 
         this.shortcuts = KeyboardShortcuts.attachKeyboardShortcuts();
         this.display = FView.SINGLETON_INSTANCE.getLpnDocument();
-
+        
+        FSkin.setProgessBarMessage("About to load current quest.");
         // Preload quest data if present
         final File dirQuests = new File(NewConstants.QUEST_SAVE_DIR);
         final String questname = Singletons.getModel().getQuestPreferences().getPref(QPref.CURRENT_QUEST);
@@ -164,6 +165,7 @@ public enum FControl {
             Singletons.getModel().getQuest().load(QuestDataIO.loadData(data));
         }
 
+        FSkin.setProgessBarMessage("Will load AI profiles now.");
         // Preload AI profiles
         AiProfileUtil.loadAllProfiles();
 
@@ -178,6 +180,7 @@ public enum FControl {
         FView.SINGLETON_INSTANCE.getLpnDocument().addMouseListener(SOverflowUtil.getHideOverflowListener());
         FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
 
+        FSkin.setProgessBarMessage("Opening main window...");
         SwingUtilities.invokeLater(new Runnable() { @Override
             public void run() { Singletons.getView().initialize(); } });
     }

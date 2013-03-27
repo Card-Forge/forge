@@ -17,17 +17,12 @@
  */
 package forge.control.input;
 
-import forge.Card;
-import forge.Command;
 import forge.Singletons;
+import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.CMatchUI;
-import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
 
 //if cost is paid, Command.execute() is called
@@ -40,19 +35,17 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputPayManaExecuteCommands extends InputPayManaBase {
+public class InputPayManaExecuteCommands extends InputPayManaBase implements InputPayment {
     /**
      * Constant <code>serialVersionUID=3836655722696348713L</code>.
      */
     private static final long serialVersionUID = 3836655722696348713L;
 
-    private String originalManaCost;
+    private ManaCost originalManaCost;
     private String message = "";
-    private SpellAbility fakeAbility;
 
-
-    private Command paidCommand;
-    private Command unpaidCommand;
+    private boolean bPaid = false;
+    public boolean isPaid() { return bPaid; }
 
     // only used for X costs:
     private boolean showOnlyOKButton = false;
@@ -72,8 +65,8 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
      * @param unpaidCommand2
      *            a {@link forge.Command} object.
      */
-    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2, final Command paidCommand2, final Command unpaidCommand2) {
-        this(game, prompt, manaCost2, paidCommand2, unpaidCommand2, false);
+    public InputPayManaExecuteCommands(final GameState game, final String prompt, final ManaCost manaCost2) {
+        this(game, prompt, manaCost2, false);
     }
 
     /**
@@ -92,25 +85,19 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
      * @param showOKButton
      *            a boolean.
      */
-    public InputPayManaExecuteCommands(final GameState game, final String prompt, final String manaCost2, final Command paid, final Command unpaid, final boolean showOKButton) {
-        super(game);
-        this.fakeAbility = new SpellAbility(null) {
+    public InputPayManaExecuteCommands(final GameState game, final String prompt, final ManaCost manaCost2, final boolean showOKButton) {
+        super(game, new SpellAbility(null) {
             @Override
-            public void resolve() {
-            }
+            public void resolve() {}
 
             @Override
-            public boolean canPlay() {
-                return false;
-            }
-        };
+            public boolean canPlay() { return false; }
+        });
         this.originalManaCost = manaCost2;
         this.phyLifeToLose = 0;
         this.message = prompt;
 
         this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
-        this.paidCommand = paid;
-        this.unpaidCommand = unpaid;
         this.showOnlyOKButton = showOKButton;
     }
 
@@ -138,39 +125,24 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card) {
-        // only tap card if the mana is needed
-        this.manaCost = activateManaAbility(this.fakeAbility, card, this.manaCost);
-
-        if (card.getManaAbility().isEmpty() || card.isInZone(ZoneType.Hand)) {
-            SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
-        }
-
-        if (this.manaCost.isPaid()) {
-            this.done();
-        } else {
-            this.showMessage();
-        }
-    }
-
-    private void done() {
+    protected void done() {
         if (this.phyLifeToLose > 0) {
             Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, null);
         }
-        this.paidCommand.execute();
         this.resetManaCost();
-        Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.fakeAbility, false);
+        Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.saPaidFor, false);
+        bPaid = true;
         this.stop();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-        this.unpaidCommand.execute();
+
         this.resetManaCost();
-        Singletons.getControl().getPlayer().getManaPool().refundManaPaid(this.fakeAbility, true);
+        Singletons.getControl().getPlayer().getManaPool().refundManaPaid(this.saPaidFor, true);
+        bPaid = false;
         this.stop();
     }
 
@@ -178,8 +150,8 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
     @Override
     public final void selectButtonOK() {
         if (this.showOnlyOKButton) {
+            bPaid = false;
             this.stop();
-            this.unpaidCommand.execute();
         }
     }
 
@@ -201,24 +173,7 @@ public class InputPayManaExecuteCommands extends InputPayManaBase {
             msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
         }
 
-        CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
+        showMessage(msg.toString());
+        checkIfAlredyPaid();
     }
-
-    /* (non-Javadoc)
-     * @see forge.control.input.InputMana#selectManaPool()
-     */
-    @Override
-    public void selectManaPool(String color) {
-        this.manaCost = activateManaAbility(color, this.fakeAbility, this.manaCost);
-
-        if (this.manaCost.isPaid()) {
-            this.done();
-        } else {
-            this.showMessage();
-        }
-    }
-
-    @Override public void isClassUpdated() {
-    }
-
 }

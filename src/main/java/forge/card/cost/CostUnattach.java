@@ -114,23 +114,16 @@ public class CostUnattach extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        this.resetList();
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final Card source = ability.getSourceCard(); 
         Player activator = ability.getActivatingPlayer();
         Card cardToUnattach = findCardToUnattach(source, activator, ability);
         if (cardToUnattach != null && GuiDialog.confirm(source, String.format("Unattach %s?", cardToUnattach.toString()))) {
-            Card equippingCard = cardToUnattach.getEquipping().get(0);
-            cardToUnattach.unEquipCard(equippingCard);
-            this.addToList(cardToUnattach);
-            this.addListToHash(ability, "Unattached");
-            payment.setPaidManaPart(this);
+            executePayment(ability, cardToUnattach);
+            return true;
         } else {
-            payment.setCancel(true);
-            payment.getRequirements().finishPaying();
             return false;
         }
-
-        return true;
     }
 
     private Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {
@@ -164,5 +157,19 @@ public class CostUnattach extends CostPartWithList {
     public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         return true;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        targetCard.unEquipCard(targetCard.getEquipping().get(0));
+        this.addToList(targetCard);
+    }
+
+    @Override
+    public String getHashForList() {
+        return "Unattached";
     }
 }

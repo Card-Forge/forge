@@ -2,7 +2,6 @@ package forge.game;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.google.common.collect.Lists;
 
 import forge.Card;
@@ -10,6 +9,7 @@ import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.FThreads;
 import forge.card.MagicColor;
 import forge.card.ability.AbilityUtils;
 import forge.card.ability.ApiType;
@@ -23,7 +23,6 @@ import forge.card.spellability.SpellAbilityRequirements;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
-import forge.control.input.InputControl;
 import forge.control.input.InputPayManaSimple;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
@@ -37,15 +36,10 @@ import forge.gui.GuiChoose;
 public class GameActionPlay {
     
     private final GameState game;
-    private InputControl matchInput;
     
 
     public GameActionPlay(final GameState game0) {
         game = game0;
-    }
-    
-    void setMatchInput(InputControl input) {
-        this.matchInput = input; // TODO: Add 0 to parameter's name.
     }
     
     public final void playCardWithoutManaCost(final Card c, Player player) {
@@ -71,6 +65,7 @@ public class GameActionPlay {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
+        FThreads.checkEDT("GameActionPlay.playSpellAbilityWithoutPayingManaCost", false);
         final Card source = sa.getSourceCard();
         setSplitCardState(source, sa); // Split card support
 
@@ -358,6 +353,7 @@ public class GameActionPlay {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void playSpellAbility(SpellAbility sa, Player activator) {
+        FThreads.checkEDT("Player.playSpellAbility", false);
         sa.setActivatingPlayer(activator);
 
         final Card source = sa.getSourceCard();
@@ -385,6 +381,7 @@ public class GameActionPlay {
             ability = ability.getSubAbility();
         }
 
+        // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getSourceCard() +  " new = " + newAbility);
         if (newAbility) {
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
             CostPayment payment = null;
@@ -403,15 +400,19 @@ public class GameActionPlay {
             } else {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
+
+            if  (!manaCost.isPaid()) {
+                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, manaCost));
+            }
+
+            
             if (manaCost.isPaid()) {
                 if (sa.isSpell() && !source.isCopiedSpell()) {
                     sa.setSourceCard(game.getAction().moveToStack(source));
                 }
 
                 game.getStack().add(sa);
-            } else {
-                matchInput.setInput(new InputPayManaSimple(game, sa, manaCost));
-            }
+            } 
         }
     }
 
@@ -446,59 +447,18 @@ public class GameActionPlay {
             } else {
                 manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
+
+            if( !manaCost.isPaid() ) {
+                FThreads.setInputAndWait(new InputPayManaSimple(game, sa, getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()))));
+            }
+            
             if (manaCost.isPaid()) {
                 AbilityUtils.resolve(sa, false);
-                return;
-            } else {
-                matchInput.setInput(new InputPayManaSimple(game, sa, true));
             }
+
         }
     }
 
-
-    /** The Cost cutting_ get multi kicker mana cost paid. */
-    private int costCuttingGetMultiKickerManaCostPaid = 0;
-    /** The Cost cutting_ get multi kicker mana cost paid_ colored. */
-    private String costCuttingGetMultiKickerManaCostPaidColored = "";
-
-    /**
-     * Gets the cost cutting get multi kicker mana cost paid.
-     * 
-     * @return the costCuttingGetMultiKickerManaCostPaid
-     */
-    public int getCostCuttingGetMultiKickerManaCostPaid() {
-        return this.costCuttingGetMultiKickerManaCostPaid;
-    }
-
-    /**
-     * Sets the cost cutting get multi kicker mana cost paid.
-     * 
-     * @param costCuttingGetMultiKickerManaCostPaid0
-     *            the costCuttingGetMultiKickerManaCostPaid to set
-     */
-    public void setCostCuttingGetMultiKickerManaCostPaid(final int costCuttingGetMultiKickerManaCostPaid0) {
-        this.costCuttingGetMultiKickerManaCostPaid = costCuttingGetMultiKickerManaCostPaid0;
-    }
-
-    /**
-     * Gets the cost cutting get multi kicker mana cost paid colored.
-     * 
-     * @return the costCuttingGetMultiKickerManaCostPaidColored
-     */
-    public String getCostCuttingGetMultiKickerManaCostPaidColored() {
-        return this.costCuttingGetMultiKickerManaCostPaidColored;
-    }
-
-    /**
-     * Sets the cost cutting get multi kicker mana cost paid colored.
-     * 
-     * @param costCuttingGetMultiKickerManaCostPaidColored0
-     *            the costCuttingGetMultiKickerManaCostPaidColored to set
-     */
-    public void setCostCuttingGetMultiKickerManaCostPaidColored(
-            final String costCuttingGetMultiKickerManaCostPaidColored0) {
-        this.costCuttingGetMultiKickerManaCostPaidColored = costCuttingGetMultiKickerManaCostPaidColored0;
-    }
 
     /**
      * Gets the convokable colors.

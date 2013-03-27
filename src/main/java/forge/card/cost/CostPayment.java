@@ -38,7 +38,6 @@ import forge.game.player.Player;
 public class CostPayment {
     private Cost cost = null;
     private SpellAbility ability = null;
-    private Card card = null;
     private SpellAbilityRequirements req = null;
     private boolean bCancel = false;
     private final ArrayList<CostPart> paidCostParts = new ArrayList<CostPart>();
@@ -74,7 +73,7 @@ public class CostPayment {
      * @return a {@link forge.Card} object.
      */
     public final Card getCard() {
-        return this.card;
+        return this.ability.getSourceCard();
     }
 
     /**
@@ -135,7 +134,6 @@ public class CostPayment {
     public CostPayment(final Cost cost, final SpellAbility abil, final GameState game) {
         this.cost = cost;
         this.ability = abil;
-        this.card = abil.getSourceCard();
         this.game = game;
     }
 
@@ -179,26 +177,15 @@ public class CostPayment {
      * @param bPaid
      *            the b paid
      */
-    public final void setPaidManaPart(final CostPart part) {
+    public final void setPaidPart(final CostPart part) {
         this.paidCostParts.add(part);
-    }
-
-    /**
-     * Paid cost.
-     * 
-     * @param part
-     *            the part
-     */
-    public final void paidCost(final CostPart part) {
-        this.setPaidManaPart(part);
-        this.payCost();
     }
 
     /**
      * Cancel cost (including CostPart for refunding).
      */
     public final void cancelCost(final CostPart part) {
-        this.setPaidManaPart(part);
+        this.setPaidPart(part);
         this.cancelCost();
     }
 
@@ -207,7 +194,6 @@ public class CostPayment {
      */
     public final void cancelCost() {
         this.setCancel(true);
-        this.req.finishPaying();
     }
 
     /**
@@ -217,27 +203,22 @@ public class CostPayment {
      * 
      * @return a boolean.
      */
-    public final boolean payCost() {
-        // Nothing actually ever checks this return value, is it needed?
-        if (this.bCancel) {
-            this.req.finishPaying();
-            return false;
-        }
-
+    public void payCost() {
         for (final CostPart part : this.cost.getCostParts()) {
             // This portion of the cost is already paid for, keep moving
             if (this.paidCostParts.contains(part)) {
                 continue;
             }
 
-            if (!part.payHuman(this.ability, this.card, this, game)) {
-                return false;
+            if ( false == part.payHuman(getAbility(), game) ) {
+                this.setCancel(true);
+                return;
             }
+            if( part instanceof CostPartWithList )
+                ((CostPartWithList) part).addListToHash(ability, ((CostPartWithList) part).getHashForList());
+            setPaidPart(part);
         }
-
         this.resetUndoList();
-        this.req.finishPaying();
-        return true;
     }
 
     /**
@@ -278,7 +259,7 @@ public class CostPayment {
     public final void cancelPayment() {
         for (final CostPart part : this.paidCostParts) {
             if (part.isUndoable()) {
-                part.refund(this.card);
+                part.refund(this.getCard());
             }
         }
 

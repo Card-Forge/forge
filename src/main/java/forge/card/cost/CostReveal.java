@@ -19,20 +19,19 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import forge.Card;
 import forge.CardLists;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 /**
@@ -40,6 +39,87 @@ import forge.view.ButtonUtil;
  */
 public class CostReveal extends CostPartWithList {
     // Reveal<Num/Type/TypeDescription>
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    public static final class InputPayReveal extends InputPayCostBase {
+        private final CostReveal part;
+        private final String discType;
+        private final List<Card> handList;
+        private final SpellAbility sa;
+        private final int nNeeded;
+        private static final long serialVersionUID = -329993322080934435L;
+        private int nReveal = 0;
+
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param part
+         * @param discType
+         * @param handList
+         * @param sa
+         * @param payment
+         * @param nNeeded
+         */
+        public InputPayReveal(CostReveal part, String discType, List<Card> handList, SpellAbility sa, int nNeeded) {
+            this.part = part;
+            this.discType = discType;
+            this.handList = handList;
+            this.sa = sa;
+            this.nNeeded = nNeeded;
+        }
+
+        @Override
+        public void showMessage() {
+            if (nNeeded == 0) {
+                this.done();
+            }
+
+            /*if (handList.size() + this.nReveal < nNeeded) {
+                this.stop();
+            }*/
+            final StringBuilder type = new StringBuilder("");
+            if (!discType.equals("Card")) {
+                type.append(" ").append(discType);
+            }
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Select a ");
+            sb.append(part.getDescriptiveType());
+            sb.append(" to reveal.");
+            if (nNeeded > 1) {
+                sb.append(" You have ");
+                sb.append(nNeeded - this.nReveal);
+                sb.append(" remaining.");
+            }
+            showMessage(sb.toString());
+            ButtonUtil.enableOnlyCancel();
+        }
+
+        @Override
+        public void selectCard(final Card card) {
+            Zone zone = Singletons.getModel().getGame().getZoneOf(card);
+            if (zone.is(ZoneType.Hand) && handList.contains(card)) {
+                // send in List<Card> for Typing
+                handList.remove(card);
+                part.executePayment(sa, card);
+                this.nReveal++;
+
+                // in case no more cards in hand
+                if (this.nReveal == nNeeded) {
+                    this.done();
+                } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).size() == 0) {
+                    // really
+                    // shouldn't
+                    // happen
+                    this.cancel();
+                } else {
+                    this.showMessage();
+                }
+            }
+        }
+    }
 
     /**
      * Instantiates a new cost reveal.
@@ -140,6 +220,8 @@ public class CostReveal extends CostPartWithList {
     @Override
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         GuiChoose.oneOrNone("Revealed cards:", this.getList());
+        for(Card c: getList()) // should not throw concurrent modification here - no items should be added.
+            executePayment(ability, c);
     }
 
     /*
@@ -150,17 +232,19 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final Player activator = ability.getActivatingPlayer();
+        final Card source = ability.getSourceCard();
         final String amount = this.getAmount();
         this.resetList();
 
         if (this.payCostFromSource()) {
-            this.addToList(source);
-            payment.setPaidManaPart(this);
+            executePayment(ability, source);
+            return true;
         } else if (this.getType().equals("Hand")) {
-            this.setList(new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand)));
-            payment.setPaidManaPart(this);
+            for(Card c : activator.getCardsIn(ZoneType.Hand))
+                executePayment(ability, c);
+            return true;
         } else {
             Integer num = this.convertAmount();
 
@@ -175,16 +259,12 @@ public class CostReveal extends CostPartWithList {
                     num = AbilityUtils.calculateAmount(source, amount, ability);
                 }
             }
-            if (num > 0) {
-                final Input inp = CostReveal.inputRevealCost(this.getType(), handList, payment, this, ability, num);
-                Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-                return false;
-            } else {
-                payment.setPaidManaPart(this);
-            }
+            if ( num == 0 ) return true;
+
+            InputPayment inp = new InputPayReveal(this, this.getType(), handList, ability, num);
+            FThreads.setInputAndWait(inp);
+            return inp.isPaid();
         }
-        this.addListToHash(ability, "Revealed");
-        return true;
     }
 
     /*
@@ -220,102 +300,24 @@ public class CostReveal extends CostPartWithList {
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        addToList(targetCard);
+        // write code to actually reveal card
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Revealed";
+    }
+
     // Inputs
 
-    /**
-     * <p>
-     * input_discardCost.
-     * </p>
-     * 
-     * @param discType
-     *            a {@link java.lang.String} object.
-     * @param handList
-     *            a {@link forge.CardList} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param part
-     *            TODO
-     * @param sa
-     *            TODO
-     * @param nNeeded
-     *            a int.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputRevealCost(final String discType, final List<Card> handList, final CostPayment payment,
-            final CostReveal part, final SpellAbility sa, final int nNeeded) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = -329993322080934435L;
-
-            private int nReveal = 0;
-
-            @Override
-            public void showMessage() {
-                if (nNeeded == 0) {
-                    this.done();
-                }
-
-                /*if (handList.size() + this.nReveal < nNeeded) {
-                    this.stop();
-                }*/
-                final StringBuilder type = new StringBuilder("");
-                if (!discType.equals("Card")) {
-                    type.append(" ").append(discType);
-                }
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Select a ");
-                sb.append(part.getDescriptiveType());
-                sb.append(" to reveal.");
-                if (nNeeded > 1) {
-                    sb.append(" You have ");
-                    sb.append(nNeeded - this.nReveal);
-                    sb.append(" remaining.");
-                }
-                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.cancel();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-                if (zone.is(ZoneType.Hand) && handList.contains(card)) {
-                    // send in List<Card> for Typing
-                    handList.remove(card);
-                    part.addToList(card);
-                    this.nReveal++;
-
-                    // in case no more cards in hand
-                    if (this.nReveal == nNeeded) {
-                        this.done();
-                    } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).size() == 0) {
-                        // really
-                        // shouldn't
-                        // happen
-                        this.cancel();
-                    } else {
-                        this.showMessage();
-                    }
-                }
-            }
-
-            public void cancel() {
-                this.stop();
-                payment.cancelCost();
-            }
-
-            public void done() {
-                this.stop();
-                // "Inform" AI of the revealed cards
-                part.addListToHash(sa, "Revealed");
-                payment.paidCost(part);
-            }
-        };
-
-        return target;
-    } // input_discard()
 
 }

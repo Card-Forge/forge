@@ -44,6 +44,7 @@ import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Constant;
 import forge.CounterType;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.CardType;
 import forge.card.spellability.AbilityManaPart;
@@ -611,7 +612,7 @@ public final class GuiDisplayUtil {
             return;
         }
 
-        Card forgeCard = c.toForgeCard(p);
+        final Card forgeCard = c.toForgeCard(p);
 
         final GameState game = Singletons.getModel().getGame();
         if (forgeCard.getType().contains("Land")) {
@@ -628,9 +629,14 @@ public final class GuiDisplayUtil {
                 return; // happens if cancelled
             }
 
-            sa.setActivatingPlayer(p);
-            game.getAction().moveToHand(forgeCard); // this is really needed
-            game.getActionPlay().playSpellAbilityWithoutPayingManaCost(sa);
+            FThreads.invokeInNewThread(new Runnable() {
+                @Override
+                public void run() {
+                    sa.setActivatingPlayer(p);
+                    game.getAction().moveToHand(forgeCard); // this is really needed
+                    game.getActionPlay().playSpellAbilityWithoutPayingManaCost(sa);
+                }
+            });
         }
 
 

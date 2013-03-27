@@ -24,6 +24,7 @@ import java.util.Stack;
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
+import forge.FThreads;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
@@ -399,7 +400,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         // This line fixes Combat Damage triggers not going off when they should
         game.getStack().unfreezeStack();
-
+        
         // UNTAP
         if (this.getPhase() != PhaseType.UNTAP) {
             // during untap
@@ -734,15 +735,25 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 nextPhase();
                 return;
             } else if (!game.getStack().hasSimultaneousStackEntries()) {
-                game.getStack().resolveStack();
+                Runnable proc = new Runnable(){ 
+                    @Override public void run() {
+                        game.getStack().resolveStack();
+                        game.getStack().chooseOrderOfSimultaneousStackEntryAll();
+                    }
+                };
+                
+                if ( FThreads.isEDT() )
+                    FThreads.invokeInNewThread(proc, true);
+                else
+                    proc.run();
             }
         } else {
             // pass the priority to other player
             this.pPlayerPriority = nextPlayer;
-            Singletons.getModel().getMatch().getInput().resetInput();
+            Singletons.getModel().getMatch().getInput().updateObservers();
 
         }
-        game.getStack().chooseOrderOfSimultaneousStackEntryAll();
+        
     }
 
     /**
@@ -816,5 +827,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public void incPlanarDiceRolledthisTurn() {
         this.planarDiceRolledthisTurn++;
     }
+    
+    public String debugPrintState() {
+        return String.format("%s's %s, priority of %s [%sP]", getPlayerTurn(), getPhase(), getPriorityPlayer(), isPlayerPriorityAllowed() ? "+" : "-");
+    }
+
 
 }

@@ -129,10 +129,8 @@ public class MatchController {
     public void startRound() {
 
         // Deal with circular dependencies here
+        input = new InputControl();
         currentGame = Singletons.getModel().newGame(players.keySet(),gameType, this);
-        input = new InputControl(currentGame);
-        currentGame.getActionPlay().setMatchInput(input);
-
 
         Map<Player, PlayerStartConditions> startConditions = new HashMap<Player, PlayerStartConditions>();
         for (Player p : currentGame.getPlayers()) {
@@ -167,9 +165,11 @@ public class MatchController {
             SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
             InputProxy inputControl = CMessage.SINGLETON_INSTANCE.getInputControl();
+            inputControl.setMatch(this);
             input.addObserver(inputControl);
             currentGame.getStack().addObserver(inputControl);
             currentGame.getPhaseHandler().addObserver(inputControl);
+            
             currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
             currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
             // some observers are set in CMatchUI.initMatch
@@ -178,8 +178,7 @@ public class MatchController {
             GameNew.newGame(this, startConditions, currentGame, canRandomFoil);
             
             getInput().clearInput();
-            getInput().resetInput();
-            getInput().setNewInput(currentGame);
+            //getInput().setNewInput(currentGame);
             
             
 //            Thread thGame = new GameInputUpdatesThread(this, currentGame);

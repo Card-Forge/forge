@@ -117,11 +117,12 @@ public enum FModel {
         }
         
         // initialize log file
-        final File logFile = new File(NewConstants.LOG_FILE);
-        final boolean deleteSucceeded = logFile.delete();
+        File logFile = new File(NewConstants.LOG_FILE);
 
-        if (logFile.exists() && !deleteSucceeded && (logFile.length() != 0)) {
-            throw new IllegalStateException("Could not delete existing logFile:" + logFile.getAbsolutePath());
+        int i = 0;
+        while (logFile.exists() && !logFile.delete()) {
+            String pathname = logFile.getPath().replaceAll("[0-9]{0,2}.log$", String.valueOf(i++) + ".log");
+            logFile = new File(pathname);
         }
 
         try {
@@ -400,6 +401,7 @@ public enum FModel {
     /**
      * TODO: Write javadoc for this method.
      * @param players
+     * @param input 
      */
     public GameState newGame(Iterable<LobbyPlayer> players, GameType type, final MatchController match0) {
         gameState = new GameState(players,type, match0);

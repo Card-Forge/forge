@@ -20,12 +20,12 @@ package forge.card.cost;
 import com.google.common.base.Strings;
 
 import forge.Card;
-import forge.Singletons;
+import forge.FThreads;
 import forge.card.ability.AbilityUtils;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
 import forge.control.input.InputPayManaOfCostPayment;
 import forge.control.input.InputPayManaX;
+import forge.control.input.InputPayment;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.player.AIPlayer;
@@ -111,8 +111,8 @@ public class CostPartMana extends CostPart {
     /**
      * @return the xCantBe0
      */
-    public boolean isxCantBe0() {
-        return xCantBe0;
+    public boolean canXbe0() {
+        return !xCantBe0;
     }
 
     /**
@@ -206,7 +206,8 @@ public class CostPartMana extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
+        final Card source = ability.getSourceCard();
         int manaToAdd = 0;
         if (!this.hasNoXManaCost()) {
             // if X cost is a defined value, other than xPaid
@@ -215,19 +216,23 @@ public class CostPartMana extends CostPart {
                 manaToAdd = AbilityUtils.calculateAmount(source, "X", ability) * this.getXMana();
             }
         }
-        if (!this.getManaToPay().equals("0") || (manaToAdd > 0)) {
-            final Input inp = new InputPayManaOfCostPayment(game, this, ability, payment, manaToAdd);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-        } else if (this.getXMana() > 0) {
-            final Input inp = new InputPayManaX(game, ability, payment, this);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-        } else {
-            payment.paidCost(this);
-        }
+        
 
-        // We return false here because the Inputs set above should recall
-        // payment.payCosts()
-        return false;
+        if (!"0".equals(this.getManaToPay()) || manaToAdd > 0) {
+            InputPayment inpPayment = new InputPayManaOfCostPayment(game, this, ability, manaToAdd);
+            FThreads.setInputAndWait(inpPayment);
+            if(!inpPayment.isPaid())
+                return false;
+        } 
+        if (this.getXMana() > 0) {
+            source.setXManaCostPaid(0);
+            InputPayment inpPayment = new InputPayManaX(game, ability, this);
+            FThreads.setInputAndWait(inpPayment);
+            if(!inpPayment.isPaid())
+                return false;
+        }
+        return true;
+
     }
 
     /*

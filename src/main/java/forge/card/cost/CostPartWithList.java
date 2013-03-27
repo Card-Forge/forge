@@ -17,8 +17,9 @@
  */
 package forge.card.cost;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import forge.Card;
 import forge.CardUtil;
@@ -30,14 +31,16 @@ import forge.card.spellability.SpellAbility;
 public abstract class CostPartWithList extends CostPart {
 
     /** The list. */
-    private List<Card> list = null;
+    private Set<Card> list = new HashSet<Card>(); 
+    // set is here because executePayment() adds card to list, while ai's decide payment does the same thing.
+    // set allows to avoid duplication
 
     /**
      * Gets the list.
      * 
      * @return the list
      */
-    public final List<Card> getList() {
+    public final Set<Card> getList() {
         return this.list;
     }
 
@@ -48,14 +51,15 @@ public abstract class CostPartWithList extends CostPart {
      *            the new list
      */
     public final void setList(final List<Card> setList) {
-        this.list = setList;
+        this.list.clear();
+        list.addAll(setList);
     }
 
     /**
      * Reset list.
      */
     public final void resetList() {
-        this.setList(new ArrayList<Card>());
+        this.list.clear();
     }
 
     /**
@@ -65,10 +69,7 @@ public abstract class CostPartWithList extends CostPart {
      *            the c
      */
     public final void addToList(final Card c) {
-        if (this.getList() == null) {
-            this.resetList();
-        }
-        this.getList().add(c);
+        this.list.add(c);
     }
 
     /**
@@ -91,7 +92,7 @@ public abstract class CostPartWithList extends CostPart {
      */
     public CostPartWithList() {
     }
-
+    
     /**
      * Instantiates a new cost part with list.
      * 
@@ -106,4 +107,12 @@ public abstract class CostPartWithList extends CostPart {
         super(amount, type, description);
         this.resetList();
     }
+    
+    public abstract void executePayment(SpellAbility ability, Card targetCard);
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public abstract String getHashForList();
 }

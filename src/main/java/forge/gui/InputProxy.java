@@ -21,10 +21,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Card;
-import forge.Singletons;
+import forge.FThreads;
 import forge.control.input.Input;
+import forge.game.GameState;
+import forge.game.MatchController;
+import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -38,36 +40,48 @@ public class InputProxy implements Observer {
 
     /** The input. */
     private Input input;
-    private boolean valid = false;
+    private MatchController match = null;
 
+    public void setMatch(MatchController matchController) {
+        match = matchController;
+    }
+    
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
-        ButtonUtil.disableAll();
-        valid = false;
+        this.input = null;
+        final GameState game = match.getCurrentGame();
+        final PhaseHandler ph = game.getPhaseHandler();
         
-        Singletons.getModel().getMatch().getInput().setNewInput(Singletons.getModel().getGame());
+        //System.out.print((FThreads.isEDT() ? "EDT > " : "TRD > ") + ph.debugPrintState());
+        if ( match.getInput().isEmpty() && ph.hasPhaseEffects()) {
+            //System.out.println(" handle begin phase");
+            FThreads.invokeInNewThread(new Runnable() { 
+                @Override public void run() { 
+                    ph.handleBeginPhase();
+                    update(observable, obj); 
+                } 
+            }, true);
+            return;
+        }
+        
+        final Input nextInput = match.getInput().getActualInput(game);
+        //System.out.printf(" input is %s \t stack = %s%n", nextInput == null ? "null" : nextInput.getClass().getSimpleName(), match.getInput().printInputStack());
+        
+        if (nextInput != null) {
+            this.input = nextInput;
+            FThreads.invokeInEDT(new Runnable() { @Override public void run() { nextInput.showMessage(); } });
+        } else if (!ph.isPlayerPriorityAllowed()) {
+            ph.getPriorityPlayer().getController().passPriority();
+        }
     }
-    /**
-     * <p>
-     * Setter for the field <code>input</code>.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.Input} object.
-     */
-    public final synchronized void setInput(final Input in) {
-        valid = true;
-        this.input = in;
-        this.input.showMessage(); // this call may invalidate the input by the time it returns
-    }
-
     /**
      * <p>
      * selectButtonOK.
      * </p>
      */
     public final void selectButtonOK() {
-        this.getInput().selectButtonOK();
+        if ( null == input ) return;
+        input.selectButtonOK();
     }
 
     /**
@@ -76,7 +90,8 @@ public class InputProxy implements Observer {
      * </p>
      */
     public final void selectButtonCancel() {
-        this.getInput().selectButtonCancel();
+        if ( null == input ) return;
+        input.selectButtonCancel();
     }
 
     /**
@@ -88,7 +103,8 @@ public class InputProxy implements Observer {
      *            a {@link forge.game.player.Player} object.
      */
     public final void selectPlayer(final Player player) {
-        this.getInput().selectPlayer(player);
+        if ( null == input ) return;
+        input.selectPlayer(player);
     }
 
     /**
@@ -102,22 +118,19 @@ public class InputProxy implements Observer {
      *            a {@link forge.game.zone.PlayerZone} object.
      */
     public final void selectCard(final Card card) {
-        this.getInput().selectCard(card);
+        if ( null == input ) return;
+        input.selectCard(card);
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return this.getInput().toString();
+        if ( null == input ) return "(null)"; 
+        return this.input.toString();
     }
 
-    /** @return {@link forge.gui.InputProxy.Input} */
+    /** @return {@link forge.gui.InputProxy.InputBase} */
     public Input getInput() {
         return this.input;
-    }
-
-
-    public synchronized boolean isValid() {
-        return valid;
     }
 }

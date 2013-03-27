@@ -95,6 +95,7 @@ public class GameState {
      * Constructor.
      * @param players2
      * @param match0 
+     * @param input 
      */
     public GameState(Iterable<LobbyPlayer> players2, GameType t, MatchController match0) { /* no more zones to map here */
         type = t;

@@ -30,7 +30,7 @@ import forge.CardPredicates.Presets;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtilCard;
 import forge.game.player.Player;
@@ -210,7 +210,7 @@ public class Untap extends Phase {
                     landList.get(0).untap();
                 }
             } else {
-                final Input target = new Input() {
+                final InputBase target = new InputBase() {
                     private static final long serialVersionUID = 6653677835629939465L;
 
                     @Override
@@ -250,7 +250,7 @@ public class Untap extends Phase {
                     ComputerUtilCard.getBestArtifactAI(artList).untap();
                 }
             } else {
-                final Input target = new Input() {
+                final InputBase target = new InputBase() {
                     private static final long serialVersionUID = 5555427219659889707L;
 
                     @Override
@@ -290,7 +290,7 @@ public class Untap extends Phase {
                     creatures.get(0).untap();
                 }
             } else {
-                final Input target = new Input() {
+                final InputBase target = new InputBase() {
                     private static final long serialVersionUID = 5555427219659889707L;
 
                     @Override

@@ -38,6 +38,7 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.CounterType;
+import forge.FThreads;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.ability.AbilityFactory;
@@ -63,7 +64,8 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
-import forge.control.input.InputSelectManyCards;
+import forge.control.input.InputBase;
+import forge.control.input.InputSelectCards;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCard;
@@ -98,10 +100,10 @@ public class CardFactoryUtil {
      *            a {@link forge.CardList} object.
      * @param message
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
-    public static Input inputDestroyNoRegeneration(final List<Card> choices, final String message) {
-        final Input target = new Input() {
+    public static InputBase inputDestroyNoRegeneration(final List<Card> choices, final String message) {
+        final InputBase target = new InputBase() {
             private static final long serialVersionUID = -6637588517573573232L;
 
             @Override
@@ -549,11 +551,11 @@ public class CardFactoryUtil {
      *            a {@link forge.CardList} object.
      * @param paid
      *            a {@link forge.Command} object.
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
-    public static Input masterOfTheWildHuntInputTargetCreature(final SpellAbility spell, final List<Card> choices,
+    public static InputBase masterOfTheWildHuntInputTargetCreature(final SpellAbility spell, final List<Card> choices,
             final Command paid) {
-        final Input target = new Input() {
+        final InputBase target = new InputBase() {
             private static final long serialVersionUID = -1779224307654698954L;
 
             @Override
@@ -593,10 +595,10 @@ public class CardFactoryUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param card
      *            a {@link forge.Card} object.
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
-    public static Input modularInput(final SpellAbility ability, final Card card) {
-        final Input modularInput = new Input() {
+    public static InputBase modularInput(final SpellAbility ability, final Card card) {
+        final InputBase modularInput = new InputBase() {
 
             private static final long serialVersionUID = 2322926875771867901L;
 
@@ -2302,10 +2304,10 @@ public class CardFactoryUtil {
      *            a int.
      * @param type
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.control.input.Input} object.
+     * @return a {@link forge.control.input.InputBase} object.
      */
     public static Input inputUntapUpToNType(final int n, final String type) {
-        final Input untap = new Input() {
+        final Input untap = new InputBase() {
             private static final long serialVersionUID = -2167059918040912025L;
 
             private final int stop = n;
@@ -3151,27 +3153,6 @@ public class CardFactoryUtil {
         };
         haunterDiesWork.setDescription(hauntDescription);
 
-        final InputSelectManyCards target = new InputSelectManyCards(1, 1) {
-            private static final long serialVersionUID = 1981791992623774490L;
-
-            @Override
-            protected Input onDone() {
-                haunterDiesWork.setTargetCard(selected.get(0));
-                Singletons.getModel().getGame().getStack().add(haunterDiesWork);
-                return null;
-            }
-
-            @Override
-            protected boolean isValidChoice(Card c) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
-                    return false;
-                }
-                return c.canBeTargetedBy(haunterDiesWork);
-            }
-        };
-        target.setMessage("Choose target creature to haunt.");
-
         final Ability haunterDiesSetup = new Ability(card, ManaCost.ZERO) {
             @Override
             public void resolve() {
@@ -3189,7 +3170,25 @@ public class CardFactoryUtil {
                 // need to do it this way because I don't know quite how to
                 // make TriggerHandler respect BeforePayMana.
                 if (card.getController().isHuman()) {
-                    Singletons.getModel().getMatch().getInput().setInput(target);
+                    
+                    final InputSelectCards target = new InputSelectCards(1, 1) {
+                        private static final long serialVersionUID = 1981791992623774490L;
+                        @Override
+                        protected boolean isValidChoice(Card c) {
+                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                            if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
+                                return false;
+                            }
+                            return c.canBeTargetedBy(haunterDiesWork);
+                        }
+                    };
+                    target.setMessage("Choose target creature to haunt.");
+                    
+                    FThreads.setInputAndWait(target);
+                    if (!target.hasCancelled()) {
+                        haunterDiesWork.setTargetCard(target.getSelected().get(0));
+                        Singletons.getModel().getGame().getStack().add(haunterDiesWork);
+                    }
                 } else {
                     // AI choosing what to haunt
                     final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());

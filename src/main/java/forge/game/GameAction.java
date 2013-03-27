@@ -486,24 +486,6 @@ public class GameAction {
         final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover")).split(":")[1];
         final Cost cost = new Cost(recoverable, recoverCost, true);
 
-        final Command paidCommand = new Command() {
-            private static final long serialVersionUID = -6357156873861051845L;
-
-            @Override
-            public void execute() {
-                moveToHand(recoverable);
-            }
-        };
-
-        final Command unpaidCommand = new Command() {
-            private static final long serialVersionUID = -7354791599039157375L;
-
-            @Override
-            public void execute() {
-                exile(recoverable);
-            }
-        };
-
         final SpellAbility abRecover = new AbilityActivated(recoverable, cost, null) {
             private static final long serialVersionUID = 8858061639236920054L;
 
@@ -535,8 +517,10 @@ public class GameAction {
                 Player p = recoverable.getController();
 
                 if (p.isHuman()) {
-                    GameActionUtil.payCostDuringAbilityResolve(p, abRecover, abRecover.getPayCosts(),
-                            paidCommand, unpaidCommand, null, game);
+                    if ( GameActionUtil.payCostDuringAbilityResolve(p, abRecover, abRecover.getPayCosts(), null, game) )
+                        moveToHand(recoverable);
+                    else
+                        exile(recoverable);
                 } else { // computer
                     if (ComputerUtilCost.canPayCost(abRecover, p)) {
                         ComputerUtil.playNoStack((AIPlayer)p, abRecover, game);

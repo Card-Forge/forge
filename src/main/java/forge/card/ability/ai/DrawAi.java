@@ -19,7 +19,6 @@
 package forge.card.ability.ai;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import forge.Card;
@@ -72,8 +71,7 @@ public class DrawAi extends SpellAbilityAi {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
                         cd.decideAIPayment((AIPlayer) ai, sa, sa.getSourceCard(), null);
-                        List<Card> discards = cd.getList();
-                        for (Card discard : discards) {
+                        for (Card discard : cd.getList()) {
                             if (!ComputerUtil.isWorseThanDraw(ai, discard)) {
                                 return false;
                             }

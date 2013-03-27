@@ -1150,39 +1150,13 @@ public class CombatUtil {
                 }
             };
 
-            final Command unpaidCommand = new Command() {
-
-                private static final long serialVersionUID = -6483405139208343935L;
-
-                @Override
-                public void execute() {
-                    game.getCombat().removeFromCombat(crd);
-
-                    if (bLast) {
-                        PhaseUtil.handleAttackingTriggers();
-                    }
-                }
-            };
-
-            final Command paidCommand = new Command() {
-                private static final long serialVersionUID = -8303368287601871955L;
-
-                @Override
-                public void execute() {
-                    // if Propaganda is paid, tap this card
-                    if (!crd.hasKeyword("Vigilance")) {
-                        crd.tap();
-                    }
-
-                    if (bLast) {
-                        PhaseUtil.handleAttackingTriggers();
-                    }
-                }
-            };
-
             ability.setActivatingPlayer(c.getController());
             if (c.getController().isHuman()) {
-                GameActionUtil.payCostDuringAbilityResolve(c.getController(), ability, attackCost, paidCommand, unpaidCommand, null, game);
+                if ( GameActionUtil.payCostDuringAbilityResolve(c.getController(), ability, attackCost, null, game) ) {
+                    if (!crd.hasKeyword("Vigilance")) { crd.tap(); }
+                } else {
+                    game.getCombat().removeFromCombat(crd);
+                }
             } else { // computer
                 if (ComputerUtilCost.canPayCost(ability, c.getController())) {
                     ComputerUtil.playNoStack((AIPlayer)c.getController(), ability, game);
@@ -1194,10 +1168,9 @@ public class CombatUtil {
                     // during Declare_Attackers
                     game.getCombat().removeFromCombat(crd);
                 }
-                if (bLast) {
-                    PhaseUtil.handleAttackingTriggers();
-                }
             }
+            if (bLast) 
+                PhaseUtil.handleAttackingTriggers();
         }
     }
 

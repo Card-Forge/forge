@@ -17,6 +17,7 @@
  */
 package forge.card.cost;
 
+
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
@@ -199,8 +200,8 @@ public abstract class CostPart {
      * @param game
      * @return true, if successful
      */
-    public abstract boolean payHuman(SpellAbility ability, Card source, CostPayment payment, GameState game);
-
+    public abstract boolean payHuman(SpellAbility ability, GameState game);
+    
     /*
      * (non-Javadoc)
      * 

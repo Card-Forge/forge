@@ -26,7 +26,6 @@ import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.trigger.TriggerType;
 import forge.game.GlobalRuleChange;

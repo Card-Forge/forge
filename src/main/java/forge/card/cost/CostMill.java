@@ -126,9 +126,10 @@ public class CostMill extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final boolean payHuman(final SpellAbility ability, final GameState game) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
+        final Card source = ability.getSourceCard();
         final Player activator = ability.getActivatingPlayer();
 
         if (c == null) {
@@ -144,29 +145,22 @@ public class CostMill extends CostPartWithList {
 
         if ((list == null) || (list.size() > c)) {
             // I don't believe this is possible
-            payment.cancelCost();
             return false;
         }
 
         final StringBuilder sb = new StringBuilder();
         sb.append("Mill ").append(c).append(" cards from your library?");
 
-        final boolean doMill = GuiDialog.confirm(source, sb.toString());
-        if (doMill) {
-            this.resetList();
-            final Iterator<Card> itr = list.iterator();
-            while (itr.hasNext()) {
-                final Card card = itr.next();
-                this.addToList(card);
-                Singletons.getModel().getGame().getAction().moveToGraveyard(card);
-            }
-            this.addListToHash(ability, "Milled");
-            payment.paidCost(this);
+        if ( false == GuiDialog.confirm(source, sb.toString()) )
             return false;
-        } else {
-            payment.cancelCost();
-            return false;
+        
+        this.resetList();
+        final Iterator<Card> itr = list.iterator();
+        while (itr.hasNext()) {
+            final Card card = itr.next();
+            executePayment(ability, card);
         }
+        return true;
     }
 
     /*
@@ -193,6 +187,23 @@ public class CostMill extends CostPartWithList {
         sb.append(" from the top of your library into your graveyard");
 
         return sb.toString();
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
+     */
+    @Override
+    public void executePayment(SpellAbility ability, Card targetCard) {
+        this.addToList(targetCard);
+        ability.getActivatingPlayer().getGame().getAction().moveToGraveyard(targetCard);
+    }
+
+    /* (non-Javadoc)
+     * @see forge.card.cost.CostPartWithList#getHashForList()
+     */
+    @Override
+    public String getHashForList() {
+        return "Milled";
     }
 
 }

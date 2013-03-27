@@ -8,6 +8,14 @@
 /pom.xml.releaseBackup
 /pom.xml.tag
 /release.properties
+res/*.log
+res/PerSetTrackingResults
+res/cardsfolder/*.bat
+res/decks
+res/layouts
+res/pics*
+res/pics_product
 /target
+/test-output
 tools/PerSetTrackingResults
 tools/oracleScript.log

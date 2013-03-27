@@ -94,7 +94,7 @@ public class GuiChoose {
     }
 
     public static <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices) {
-        if (null == choices || 0 == choices.size()) {
+        if (null == choices || choices.isEmpty()) {
             if (0 == min) {
                 return new ArrayList<T>();
             } else {

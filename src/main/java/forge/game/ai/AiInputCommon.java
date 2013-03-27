@@ -17,18 +17,8 @@
  */
 package forge.game.ai;
 
-import java.util.List;
-
-import com.esotericsoftware.minlog.Log;
-
-import forge.Card;
-import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
-import forge.game.GameState;
-import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
-import forge.game.player.Player;
-import forge.game.zone.ZoneType;
+import forge.FThreads;
+import forge.control.input.InputBase;
 
 /**
  * <p>
@@ -38,13 +28,11 @@ import forge.game.zone.ZoneType;
  * @author Forge
  * @version $Id$
  */
-public class AiInputCommon extends Input {
+public class AiInputCommon extends InputBase {
     /** Constant <code>serialVersionUID=-3091338639571662216L</code>. */
     private static final long serialVersionUID = -3091338639571662216L;
 
     private final AiController computer;
-    private final AIPlayer player; 
-    private final GameState game;
 
     /**
      * <p>
@@ -56,15 +44,13 @@ public class AiInputCommon extends Input {
      */
     public AiInputCommon(final AiController iComputer) {
         this.computer = iComputer;
-        player = computer.getPlayer();
-        this.game = computer.getGame();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         // should not think when the game is over
-        if (game.isGameOver()) {
+        if (computer.getGame().isGameOver()) {
             return;
         }
 
@@ -76,104 +62,15 @@ public class AiInputCommon extends Input {
          * \"Detailed Error Trace\" to the Forge forum.");
          */
         
-        final PhaseType phase = game.getPhaseHandler().getPhase();
+        FThreads.invokeInNewThread(aiActions, true);
         
-        if (game.getStack().size() > 0) {
-            playSpellAbilities(game);
-        } else {
-            switch(phase) {
-                case CLEANUP:
-                    if ( game.getPhaseHandler().getPlayerTurn() == player ) {
-                        final int size = player.getCardsIn(ZoneType.Hand).size();
-                        
-                        if (!player.isUnlimitedHandSize()) {
-                            int max = Math.min(player.getZone(ZoneType.Hand).size(), size - player.getMaxHandSize());
-                            final List<Card> toDiscard = player.getAi().getCardsToDiscard(max, (String[])null, null);
-                            for (int i = 0; i < toDiscard.size(); i++) {
-                                player.discard(toDiscard.get(i), null);
-                            }
-                            game.getStack().chooseOrderOfSimultaneousStackEntryAll();
-                        }
-                    }
-                    break;
-
-                case COMBAT_DECLARE_ATTACKERS:
-                    declareAttackers();
-                    break;
-
-                case MAIN1:
-                case MAIN2:
-                    Log.debug("Computer " + phase.toString());
-                    playLands();
-                    // fall through is intended
-                default:
-                    playSpellAbilities(game);
-                    break;
-            }
-        }
-        player.getController().passPriority();
     } // getMessage();
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    private void declareAttackers() {
-        // 12/2/10(sol) the decision making here has moved to getAttackers()
-        game.setCombat(new AiAttackController(player, player.getOpponent()).getAttackers());
-
-        final List<Card> att = game.getCombat().getAttackers();
-        if (!att.isEmpty()) {
-            game.getPhaseHandler().setCombat(true);
-        }
-
-        for (final Card element : att) {
-            // tapping of attackers happens after Propaganda is paid for
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
-            Log.debug(sb.toString());
-        }
-
-        player.getZone(ZoneType.Battlefield).updateObservers();
-
-        game.getPhaseHandler().setPlayersPriorityPermission(false);
-
-        // ai is about to attack, cancel all phase skipping
-        for (Player p : game.getPlayers()) {
-            p.getController().autoPassCancel();
-        }
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    private void playLands() {
-        final Player player = computer.getPlayer();
-        List<Card> landsWannaPlay = computer.getLandsToPlay();
+    final Runnable aiActions = new Runnable() {
         
-        while(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand(null)) {
-            Card land = computer.chooseBestLandToPlay(landsWannaPlay);
-            landsWannaPlay.remove(land);
-            player.playLand(land);
-            game.getPhaseHandler().setPriority(player);
+        @Override
+        public void run() {
+            computer.onPriorityRecieved();
         }
-    }
-
-    protected void playSpellAbilities(final GameState game)
-    {
-        SpellAbility sa;
-        do { 
-            sa = computer.getSpellAbilityToPlay();
-            if ( sa == null ) break;
-            //System.out.println("Playing sa: " + sa);
-            if (!ComputerUtil.handlePlayingSpellAbility(player, sa, game)) {
-                break;
-            }
-        } while ( sa != null );
-    }
-    
-
-    /* (non-Javadoc)
-     * @see forge.control.input.Input#isClassUpdated()
-     */
-    @Override public void isClassUpdated() { }
+    };
 }

@@ -14,7 +14,7 @@ import forge.Singletons;
 import forge.card.ability.SpellAbilityEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
+import forge.control.input.InputBase;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -45,7 +45,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
     private static void resolveHuman(final SpellAbility sa) {
         final List<Card> unchosen = Lists.newArrayList(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
         final List<Player> players = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
-        Singletons.getModel().getMatch().getInput().setInput(new Input() {
+        Singletons.getModel().getMatch().getInput().setInput(new InputBase() {
             private static final long serialVersionUID = -1779224307654698954L;
 
             @Override
