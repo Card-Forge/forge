@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
-import javax.swing.SwingWorker;
-
 import forge.Card;
 import forge.FThreads;
 import forge.GameEntity;
