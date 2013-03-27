@@ -1,7 +1,7 @@
-Forge Beta: 03-##-2013 ver 1.3.11
+Forge Beta: 03-27-2013 ver 1.3.11
 
 
-12### cards in total.
+12427 cards in total.
 
 
 -------------
@@ -56,28 +56,29 @@ Forge will now download high quality booster pictures. If you are interested in 
 New Cards
 ---------
 
-Noggin Whack
-Scythe Specter
-Sasaya, Orochi Ascendant
-Loxodon Peacekeeper
-Phyrexian Grimoire
-Purging Scythe
-Noxious Vapors
-Perplex
-Null Chamber
-Overabundance
-Reign of Terror
-Vexing Sphinx
-Wand of Denial
-Yavimaya Dryad
-Thieves' Auction
+Essence Leak
 Infinite Reflection
 Laccolith Rig
-Paroxysm
-Essence Leak
+Loxodon Peacekeeper
 Mistform Warchief
-Whipkeeper
+Noggin Whack
+Noxious Vapors
+Null Chamber
+Oath of Lieges
+Overabundance
+Paroxysm
+Perplex
+Phyrexian Grimoire
+Purging Scythe
+Reign of Terror
 Sanctum Guardian
+Sasaya, Orochi Ascendant
+Scythe Specter
+Thieves' Auction
+Vexing Sphinx
+Wand of Denial
+Whipkeeper
+Yavimaya Dryad
 
 
 ----------
@@ -85,7 +86,6 @@ New Planes
 ----------
 
 Bant
-Turri Island
 Onakke Catacomb
 Orochi Colony
 Otaria
@@ -94,6 +94,10 @@ Skybreen
 Sokenzan
 Stronghold Furnace
 Tazeem
+Tember City
+The Dark Barony
+The Eon Fog
+Turri Island
 
 
 ------------
@@ -128,7 +132,18 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-
+Agetian
+Gos
+Marc
+Max
+Myk
+Nordos
+Rodan
+Sloth
+Sol
+Swordshine
+Xitax
+Chris H
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
