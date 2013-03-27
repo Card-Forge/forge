@@ -58,6 +58,10 @@ public abstract class InputBase implements java.io.Serializable, Input {
         Singletons.getModel().getMatch().getInput().removeInput(this);
         afterStop(); // sync inputs will release their latch there
     }
+
+    protected final boolean isActive() {
+        return Singletons.getModel().getMatch().getInput().getInput() == this;
+    }
     
     protected void afterStop() { }
 }

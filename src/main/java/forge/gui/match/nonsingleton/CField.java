@@ -426,7 +426,7 @@ public class CField implements ICDoc {
                 ((InputBlock) input).removeFromAllBlocking(c);
                 CombatUtil.showCombat();
             }
-        } else {
+        } else if ( input != null ){
             //Yosei, the Morning Star required cards to be chosen on computer side
             //earlier it was enforced that cards must be in player zone
             //this can potentially break some other functionality

@@ -3,6 +3,8 @@ package forge;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.SwingUtilities;
 
@@ -13,15 +15,16 @@ import forge.control.input.InputSynchronized;
  *
  */
 public class FThreads {
-
     static { 
         System.out.printf("(FThreads static ctor): Running on a machine with %d cpu core(s)%n", Runtime.getRuntime().availableProcessors() );
     }
     
+    private FThreads() { } // no instances supposed
+    
     private final static ExecutorService threadPool = Executors.newCachedThreadPool();
-    public static ExecutorService getCachedPool() {
-        return threadPool;
-    }
+    private static ExecutorService getCachedPool() { return threadPool; }
+    private final static ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(1);
+    private static ScheduledExecutorService getScheduledPool() { return scheduledPool; }
     
     // This pool is designed to parallel CPU or IO intensive tasks like parse cards or download images, assuming a load factor of 0.5
     public final static ExecutorService getComputingPool(float loadFactor) {
@@ -114,6 +117,11 @@ public class FThreads {
      */
     public static boolean isEDT() {
         return SwingUtilities.isEventDispatchThread();
+    }
+
+
+    public static void delay(int milliseconds, Runnable inputUpdater) {
+        getScheduledPool().schedule(inputUpdater, milliseconds, TimeUnit.MILLISECONDS);
     }
    
 }

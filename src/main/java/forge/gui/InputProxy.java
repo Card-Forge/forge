@@ -27,7 +27,6 @@ import forge.game.GameState;
 import forge.game.MatchController;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -49,7 +48,7 @@ public class InputProxy implements Observer {
     
     @Override
     public final synchronized void update(final Observable observable, final Object obj) {
-        ButtonUtil.disableAll();
+        this.input = null;
         final GameState game = match.getCurrentGame();
         final PhaseHandler ph = game.getPhaseHandler();
         
@@ -81,7 +80,8 @@ public class InputProxy implements Observer {
      * </p>
      */
     public final void selectButtonOK() {
-        this.getInput().selectButtonOK();
+        if ( null == input ) return;
+        input.selectButtonOK();
     }
 
     /**
@@ -90,7 +90,8 @@ public class InputProxy implements Observer {
      * </p>
      */
     public final void selectButtonCancel() {
-        this.getInput().selectButtonCancel();
+        if ( null == input ) return;
+        input.selectButtonCancel();
     }
 
     /**
@@ -102,7 +103,8 @@ public class InputProxy implements Observer {
      *            a {@link forge.game.player.Player} object.
      */
     public final void selectPlayer(final Player player) {
-        this.getInput().selectPlayer(player);
+        if ( null == input ) return;
+        input.selectPlayer(player);
     }
 
     /**
@@ -116,13 +118,15 @@ public class InputProxy implements Observer {
      *            a {@link forge.game.zone.PlayerZone} object.
      */
     public final void selectCard(final Card card) {
-        this.getInput().selectCard(card);
+        if ( null == input ) return;
+        input.selectCard(card);
     }
 
     /** {@inheritDoc} */
     @Override
     public final String toString() {
-        return this.getInput().toString();
+        if ( null == input ) return "(null)"; 
+        return this.input.toString();
     }
 
     /** @return {@link forge.gui.InputProxy.InputBase} */

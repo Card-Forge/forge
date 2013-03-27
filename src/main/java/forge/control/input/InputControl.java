@@ -64,7 +64,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @return a {@link forge.control.input.InputBase} object.
      */
     public final Input getInput() {
-        return this.inputStack.peek();
+        return inputStack.isEmpty() ? null : this.inputStack.peek();
     }
 
     /**
