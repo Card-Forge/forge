@@ -45,6 +45,7 @@ import forge.card.cost.CostDiscard;
 import forge.card.cost.CostExile;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPartMana;
+import forge.card.cost.CostPartWithList;
 import forge.card.cost.CostPayLife;
 import forge.card.cost.CostPutCounter;
 import forge.card.cost.CostRemoveCounter;
@@ -526,9 +527,11 @@ public final class GameActionUtil {
                     hasPaid = false;
                     break;
                 }
+                CostPartWithList cpl = (CostPartWithList)part;
                 for(Card c : toSac) {
-                    p.getGame().getAction().sacrifice(c, ability);
+                    cpl.executePayment(ability, c);
                 }
+                cpl.addListToHash(ability);
             }
             
             else if (part instanceof CostReturn) {
@@ -544,10 +547,11 @@ public final class GameActionUtil {
                     hasPaid = false;
                     break;
                 }
-                ((CostReturn)part).addListToHash(ability, "Returned");
+                CostPartWithList cpl = (CostPartWithList)part;
                 for(Card c : inp.getSelected()) {
-                    p.getGame().getAction().moveTo(ZoneType.Hand, c);
+                    cpl.executePayment(ability, c);
                 }
+                cpl.addListToHash(ability);
             }
 
             else if (part instanceof CostDiscard) {
@@ -563,10 +567,11 @@ public final class GameActionUtil {
                     hasPaid = false;
                     break;
                 }
-                ((CostDiscard)part).addListToHash(ability, "Discarded");
+                CostPartWithList cpl = (CostPartWithList)part;
                 for(Card c : inp.getSelected()) {
-                    p.discard(c, ability);
+                    cpl.executePayment(ability, c);
                 }
+                cpl.addListToHash(ability);
             }
             
             else if (part instanceof CostPartMana ) {

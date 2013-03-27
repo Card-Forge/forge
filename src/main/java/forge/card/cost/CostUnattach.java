@@ -103,7 +103,7 @@ public class CostUnattach extends CostPartWithList {
         Card equippingCard = cardToUnattach.getEquipping().get(0);
         cardToUnattach.unEquipCard(equippingCard);
         this.addToList(cardToUnattach);
-        this.addListToHash(ability, "Unattached");
+        this.addListToHash(ability);
     }
 
     /*

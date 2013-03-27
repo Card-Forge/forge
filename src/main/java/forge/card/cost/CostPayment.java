@@ -215,7 +215,7 @@ public class CostPayment {
                 return;
             }
             if( part instanceof CostPartWithList )
-                ((CostPartWithList) part).addListToHash(ability, ((CostPartWithList) part).getHashForList());
+                ((CostPartWithList) part).addListToHash(ability);
             setPaidPart(part);
         }
         this.resetUndoList();

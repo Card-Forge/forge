@@ -192,7 +192,7 @@ public class CostSacrifice extends CostPartWithList {
      */
     @Override
     public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        this.addListToHash(ability, "Sacrificed");
+        this.addListToHash(ability);
         for (final Card c : this.getList()) {
             executePayment(ability, c);
         }
