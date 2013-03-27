@@ -1392,6 +1392,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", c);
             runParams.put("Number", this.numDrawnThisTurn);
+            runParams.put("Player", this);
             game.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, false);
         }
         // lose:

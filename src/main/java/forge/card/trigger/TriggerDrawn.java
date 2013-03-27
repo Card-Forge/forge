@@ -83,5 +83,6 @@ public class TriggerDrawn extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa) {
         sa.setTriggeringObject("Card", this.getRunParams().get("Card"));
+        sa.setTriggeringObject("Player", this.getRunParams().get("Player"));
     }
 }
