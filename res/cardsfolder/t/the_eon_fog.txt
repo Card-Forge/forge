@@ -1,0 +1,9 @@
+Name:The Eon Fog
+ManaCost:no cost
+Types:Plane Equilor
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Player | AddKeyword$ Skip your untap step. | Description$ Players skip their untap steps.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, untap all permanents you control.
+SVar:RolledChaos:AB$ UntapAll | Cost$ 0 | ValidCards$ Permanent.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/the_eon_fog.jpg
+Oracle:Players skip their untap steps.\nWhenever you roll {C}, untap all permanents you control.
+SetInfo:HOP Common
