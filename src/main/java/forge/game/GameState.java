@@ -485,7 +485,7 @@ public class GameState {
     
     public String getOrdinalPosition(Player player, Player startingPlayer) {
         int startPosition = roIngamePlayers.indexOf(startingPlayer);
-        int position = roIngamePlayers.indexOf(player) + startPosition + 1;
+        int position = (roIngamePlayers.indexOf(player) + startPosition) % roIngamePlayers.size() + 1;
         String[] sufixes = new String[] { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
         switch (position % 100) {
         case 11:
