@@ -1071,7 +1071,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         if (tgt != null) {
             if (!tgt.getTargetPlayers().isEmpty()) {
-                player = tgt.getTargetPlayers().get(0);
+                player = player != null ? player : tgt.getTargetPlayers().get(0);
                 if (!player.canBeTargetedBy(sa)) {
                     return;
                 }

@@ -1,0 +1,13 @@
+Name:Stronghold Furnace
+ManaCost:no cost
+Types:Plane Rath
+R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwice | IsCombat$ False | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwiceCombat | IsCombat$ True | Secondary$ True | Description$ If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
+SVar:DmgTwice:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ Y | References$ Y
+SVar:DmgTwiceCombat:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ Y | References$ Y
+SVar:Y:ReplaceCount$DamageAmount/Twice
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, CARDNAME deals 1 damage to target creature or player.
+SVar:RolledChaos:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stronghold_furnace.jpg
+Oracle:If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.\nWhenever you roll {C}, Stronghold Furnace deals 1 damage to target creature or player.
+SetInfo:HOP Common

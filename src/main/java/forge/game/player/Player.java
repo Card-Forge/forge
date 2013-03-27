@@ -1393,6 +1393,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", c);
             runParams.put("Number", this.numDrawnThisTurn);
+            runParams.put("Player", this);
             game.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, false);
         }
         // lose:
@@ -2490,7 +2491,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         } else if (property.startsWith("withMore")) {
             final String cardType = property.split("sThan")[0].substring(8);
             final List<Card> oppList = CardLists.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            final List<Card> yourList = CardLists.filter(source.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final List<Card> yourList = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             if (oppList.size() <= yourList.size()) {
                 return false;
             }

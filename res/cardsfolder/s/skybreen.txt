@@ -1,0 +1,11 @@
+Name:Skybreen
+ManaCost:no cost
+Types:Plane Kaldheim
+K:Players play with the top card of their libraries revealed.
+S:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.sharesCardTypeWith EachTopLibrary | Description$ Spells that share a card type with the top card of a library can't be cast.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, target player loses life equal to the number of cards in his or her hand.
+SVar:RolledChaos:AB$ LoseLife | Cost$ 0 | ValidTgts$ Player | LifeAmount$ Y | References$ Y
+SVar:Y:TargetedPlayer$CardsInHand
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skybreen.jpg
+Oracle:Players play with the top card of their libraries revealed.\nSpells that share a card type with the top card of a library can't be cast.\nWhenever you roll {C}, target player loses life equal to the number of cards in his or her hand.
+SetInfo:HOP Common

@@ -1,0 +1,10 @@
+Name:Tazeem
+ManaCost:no cost
+Types:Plane Zendikar
+S:Mode$ Continuous | Affected$ Creature | EffectZone$ Command | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures can't block.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, draw a card for each land you control.
+SVar:RolledChaos:AB$ Draw | Cost$ 0 | NumCards$ Y | Defined$ You
+SVar:Y:Count$Valid Land.YouCtrl
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tazeem.jpg
+Oracle:Creatures can't block.\nWhenever you roll {C}, draw a card for each land you control.
+SetInfo:HOP Special

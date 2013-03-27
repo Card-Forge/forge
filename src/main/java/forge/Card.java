@@ -6646,6 +6646,18 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                     return false;
+                } else if (restriction.equals("EachTopLibrary")) {
+                    final List<Card> list = new ArrayList<Card>();
+                    for (Player p : Singletons.getModel().getGame().getPlayers()) {
+                        final Card top = p.getCardsIn(ZoneType.Library).get(0);
+                        list.add(top);
+                    }
+                    for (Card c : list) {
+                        if (this.sharesCardTypeWith(c)) {
+                            return true;
+                        }
+                    }
+                    return false;
                 }
             }
         } else if (property.startsWith("sharesNameWith")) {
