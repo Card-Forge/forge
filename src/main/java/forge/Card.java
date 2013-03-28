@@ -6445,6 +6445,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (property.startsWith("CanBeEquippedBy")) {
+            if (!this.canBeEquippedBy(source)) {
+                return false;
+            }
         } else if (property.startsWith("Equipped")) {
             if (!this.equipping.contains(source)) {
                 return false;
@@ -6542,9 +6546,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                         }
                     }
                 } else if (restriction.equals("Equipped")) {
-                    if (!source.isEquipment() || !source.isEquipping()) {
-                        return false;
-                    } else if (!this.sharesColorWith(source.getEquippingCard())) {
+                    if (!source.isEquipment() || !source.isEquipping()
+                            || !this.sharesColorWith(source.getEquippingCard())) {
                         return false;
                     }
                 } else if (restriction.equals("MostProminentColor")) {
