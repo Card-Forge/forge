@@ -539,6 +539,23 @@ Gatecrash Guild Sealed game mode has been added. To use it, start a new Sealed M
 The following cards are not included in the guild boosters of this game mode because they are not currently implemented in Forge: Bane Alley Broker, Bioshift, Killing Glare, Simic Manipulator.
 
 
+New User Preferences:
+---------------------
+The display of clones and copied cards is now a matter of user preference. A user to now choose whether a clone/copied card should use its native artwork or the artwork of the card being cloned. So if Infinite Reflection is played and the "Clones use original card art" preference is checked, the cards that become copies of the enchanted card will still use their own art whereas by default they would all use the card art from the enchanted card.
+
+
+Flippable Cards:
+----------------
+
+Flippable cards -- cards that have an alternate card printed upside-down at the bottom -- will now flip their appearance on the battlefield when in a flipped state.  They are now also flippable in the card viewer by clicking on the card image, just like double-sided "transform" cards have been.  When flipped this way, the details of the flipped side can be examined in the Card Details oracle text.
+
+
+High Quality Booster Pictures:
+------------------------------
+
+Forge will now download high quality booster pictures. If you are interested in these high quality booster pictures, then you should delete the pictures that are found in your <cacheDir>/pics/boosters/ directory. Then download the new pictures by using the Home View -> Game Settings -> Content Downloaders -> Download Quest Images button.
+
+
 Our Lawyers Made Us Do This:
 ----------------------------
 

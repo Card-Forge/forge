@@ -1,7 +1,7 @@
-Forge Beta: 03-27-2013 ver 1.3.11
+Forge Beta: 04-##-2013 ver 1.3.12
 
 
-12427 cards in total.
+12### cards in total.
 
 
 -------------
@@ -45,64 +45,11 @@ forge.log         <userDir>/forge.log
 The Import Pictures dialog, accessed via the Content Downloaders submenu, has received an overhaul and has been reincarnated as the Import Data dialog.  You may recognize it from the automatic data migration procedure if you had any data to migrate when this version was first started.  Instead of just importing pictures from a previous version of Forge, it can now import any kind of Forge data whatsoever.  If you have a directory full of deck files, you can use the Import Data dialog to copy or move them to the appropriate directory.  If you have just downloaded a torrent of high-quality pics for a particular set, use the Import Data dialog to get them to the proper place.  The dialog give you a full listing of all file copy/move operations, so you can see what will happen before you click 'Start Import'.
 
 
-- New User Preferences -
-The display of clones and copied cards is now a matter of user preference. A user to now choose whether a clone/copied card should use its native artwork or the artwork of the card being cloned. So if Infinite Reflection is played and the "Clones use original card art" preference is checked, the cards that become copies of the enchanted card will still use their own art whereas by default they would all use the card art from the enchanted card.
-
-
-- Flippable Cards -
-Flippable cards -- cards that have an alternate card printed upside-down at the bottom -- will now flip their appearance on the battlefield when in a flipped state.  They are now also flippable in the card viewer by clicking on the card image, just like double-sided "transform" cards have been.  When flipped this way, the details of the flipped side can be examined in the Card Details oracle text.
-
-
-- High Quality Booster Pictures -
-Forge will now download high quality booster pictures. If you are interested in these high quality booster pictures, then you should delete the pictures that are found in your <cacheDir>/pics/boosters/ directory. Then download the new pictures by using the Home View -> Game Settings -> Content Downloaders -> Download Quest Images button.
-
-
 ---------
 New Cards
 ---------
 
-Essence Leak
-Infinite Reflection
-Laccolith Rig
-Loxodon Peacekeeper
-Mistform Warchief
-Noggin Whack
-Noxious Vapors
-Null Chamber
-Oath of Lieges
-Overabundance
-Paroxysm
-Perplex
-Phyrexian Grimoire
-Purging Scythe
-Reign of Terror
-Sanctum Guardian
-Sasaya, Orochi Ascendant
-Scythe Specter
-Thieves' Auction
-Vexing Sphinx
-Wand of Denial
-Whipkeeper
-Yavimaya Dryad
 
-
-----------
-New Planes
-----------
-
-Bant
-Onakke Catacomb
-Orochi Colony
-Otaria
-Shiv
-Skybreen
-Sokenzan
-Stronghold Furnace
-Tazeem
-Tember City
-The Dark Barony
-The Eon Fog
-Turri Island
 
 
 ------------
@@ -137,18 +84,7 @@ Some people use the Windows application 7zip. This utility can be found at http:
 Contributors to This Release
 ----------------------------
 
-Agetian
-Gos
-Marc
-Max
-Myk
-Nordos
-Rodan
-Sloth
-Sol
-Swordshine
-Xitax
-Chris H
+
 
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
