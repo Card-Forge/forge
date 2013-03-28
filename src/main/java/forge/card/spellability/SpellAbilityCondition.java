@@ -214,7 +214,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
-        if (this.isOpponentTurn() && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(activator)) {
+        if (this.isOpponentTurn() && !Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isOpponentOf(activator)) {
             return false;
         }
 

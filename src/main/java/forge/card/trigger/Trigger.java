@@ -237,7 +237,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         if (this.getMapParams().containsKey("OpponentTurn")) {
-            if (phaseHandler.isPlayerTurn(this.getHostCard().getController())) {
+            if (!phaseHandler.getPlayerTurn().isOpponentOf(this.getHostCard().getController())) {
                 return false;
             }
         }
