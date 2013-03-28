@@ -25,18 +25,14 @@ import forge.properties.ForgePreferences.FPref;
 
 /** 
  * Assembles Swing components of avatars submenu singleton.
- *
- * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
-    /** */
     SINGLETON_INSTANCE;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Avatars");
 
-    /** */
     private final JPanel pnlAvatars = new JPanel();
     private final FScrollPane scrContent = new FScrollPane(pnlAvatars,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -47,9 +43,6 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
     private final FLabel lblAvatarAI = new FLabel.Builder().hoverable(true).selectable(true)
             .iconScaleFactor(0.99f).iconInBackground(true).build();
 
-    /**
-     * Constructor.
-     */
     private VSubmenuAvatars() {
         populateAvatars();
         scrContent.setBorder(null);
@@ -59,9 +52,6 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         lblAvatarHuman.requestFocusInWindow();
     }
     
-    /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#populate()
-     */
     @Override
     public void populate() {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
@@ -73,25 +63,16 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
-    /* (non-Javadoc)
-     * @see forge.view.home.IViewSubmenu#getGroup()
-     */
     @Override
     public EMenuGroup getGroupEnum() {
         return EMenuGroup.SETTINGS;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getMenuTitle()
-     */
     @Override
     public String getMenuTitle() {
         return "Avatars";
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.home.IVSubmenu#getMenuName()
-     */
     @Override
     public EDocID getItemEnum() {
         return EDocID.HOME_AVATARS;
@@ -127,10 +108,10 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
                 "w 90%!, pushy, growy, gap 5% 0 0 0");
 
         final Command cmdHuman = new Command() { @Override
-            public void execute() { lblAvatarAI.setSelected(false); } };
+            public void execute() { lblAvatarAI.setSelected(false); lblAvatarHuman.requestFocusInWindow(); } };
 
         final Command cmdAI = new Command() { @Override
-            public void execute() { lblAvatarHuman.setSelected(false); } };
+            public void execute() { lblAvatarHuman.setSelected(false); lblAvatarAI.requestFocusInWindow(); } };
 
         lblAvatarHuman.setCommand(cmdHuman);
         lblAvatarAI.setCommand(cmdAI);
@@ -138,8 +119,8 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         lblAvatarHuman.setSelected(true);
 
         final String[] indexes = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        int aiIndex = Integer.parseInt(indexes[0]);
-        int humanIndex = Integer.parseInt(indexes[1]);
+        int humanIndex = Integer.parseInt(indexes[0]);
+        int aiIndex = Integer.parseInt(indexes[1]);
 
         if (humanIndex >= FSkin.getAvatars().size()) { humanIndex = 0; }
         if (aiIndex >= FSkin.getAvatars().size()) { aiIndex = 0; }
@@ -147,7 +128,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         lblAvatarAI.setIcon(new ImageIcon(FSkin.getAvatars().get(aiIndex)));
         lblAvatarHuman.setIcon(new ImageIcon(FSkin.getAvatars().get(humanIndex)));
 
-        Singletons.getModel().getPreferences().setPref(FPref.UI_AVATARS, aiIndex + "," + humanIndex);
+        Singletons.getModel().getPreferences().setPref(FPref.UI_AVATARS, humanIndex + "," + aiIndex);
         Singletons.getModel().getPreferences().save();
     }
 

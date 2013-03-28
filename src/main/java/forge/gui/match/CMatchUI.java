@@ -56,12 +56,12 @@ public enum CMatchUI {
 
     private ImageIcon getPlayerAvatar(final Player p, final int defaultIndex) {
         LobbyPlayer lp = p.getLobbyPlayer();
-        ImageIcon ret = ImageCache.getIcon(lp);
-        if (null == ret) {
-            int iAvatar = lp.getAvatarIndex();
-            return new ImageIcon(FSkin.getAvatars().get(iAvatar >= 0 ? iAvatar : defaultIndex));
+        if (null != lp.getIconImageKey()) {
+            return ImageCache.getIcon(lp);
         }
-        return ret;
+        
+        int avatarIdx = lp.getAvatarIndex();
+        return new ImageIcon(FSkin.getAvatars().get(0 <= avatarIdx ? avatarIdx : defaultIndex));
     }
 
 
