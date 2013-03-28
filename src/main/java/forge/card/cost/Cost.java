@@ -203,7 +203,7 @@ public class Cost {
         if(parse.startsWith("untapYType<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            return new CostUntapType(splitStr[0], splitStr[1], description);
+            return new CostUntapType(splitStr[0], splitStr[1], description, untapCost);
         }
     
         if(parse.startsWith("SubCounter<")) {
