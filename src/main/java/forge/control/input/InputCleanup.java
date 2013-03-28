@@ -18,6 +18,7 @@
 package forge.control.input;
 
 import forge.Card;
+import forge.FThreads;
 import forge.Singletons;
 import forge.game.GameState;
 import forge.game.player.Player;
@@ -74,12 +75,15 @@ public class InputCleanup extends InputBase {
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card) {
-        Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-        if (zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) {
-            card.getController().discard(card, null);
-            if (Singletons.getModel().getGame().getStack().size() == 0) {
-                this.showMessage();
+        Zone zone = game.getZoneOf(card);
+        if (!zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) 
+            return;
+            
+        FThreads.invokeInNewThread(new Runnable() {
+            @Override
+            public void run() {
+                card.getController().discard(card, null);
             }
-        }
-    } // selectCard()
+        }, true);
+    }
 }
